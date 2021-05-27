@@ -6,9 +6,9 @@ type: "docs"
 
 # Experimental features
 
-In Knative Eventing we want to keep the innovation alive, experimenting and delivering new features without affecting the stability of the project.
+In Knative we want to keep the innovation alive, experimenting and delivering new features without affecting the stability of the project.
 
-In order to achieve that goal, we have a process to include new features.
+In order to achieve that goal in Knative Eventing, we have a process to include new features.
 This allows users like you to try out new features and provide feedback back to the project.
 
 This document explains how to enable experimental features and which ones are available today.
