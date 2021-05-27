@@ -88,7 +88,7 @@ Follow the procedure for the channel of your choice:
 === "In-Memory (standalone)"
 
     The following command installs an implementation of channel that runs in-memory.
-    This implementation is nice because it is simple and standalone, but it is
+    This implementation is nice because it is simple and standalone, but it is unsuitable for production use cases.
 
     ```bash
     kubectl apply -f {{ artifact(repo="eventing",file="in-memory-channel.yaml")}}
