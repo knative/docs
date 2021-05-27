@@ -15,7 +15,7 @@ default channel configuration in Knative Eventing.
 - Ensure that you meet the
   [prerequisites listed in the Apache Kafka overview](../).
 - A Kubernetes cluster with
-  [Knative Kafka Channel installed](../../../../install/).
+  [Knative Kafka Channel installed](../../../../admin/install/).
 
 ## Creating a `KafkaChannel` channel CRD
 
@@ -37,7 +37,7 @@ EOF
 ## Specifying the default channel configuration
 
 To configure the usage of the `KafkaChannel` CRD as the
-[default channel configuration](../../../channels/default-channels.md), edit the
+[default channel configuration](../../../channels/channel-types-defaults.md), edit the
 `default-ch-webhook` ConfigMap as follows:
 
 ```
@@ -80,21 +80,24 @@ Check Kafka for a `testchannel` topic. With Strimzi this can be done by using
 the command:
 
 ```
-kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --zookeeper localhost:2181 --list
+kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
 ```
 
 The result is:
 
 ```
 ...
+__consumer_offsets
+knative-messaging-kafka.default.my-kafka-channel
 knative-messaging-kafka.default.testchannel-one
 ...
 ```
 
-The Apache Kafka topic that is created by the channel implementation is prefixed
-with `knative-messaging-kafka`. This indicates it is an Apache Kafka channel
-from Knative. It contains the name of the namespace, `default` in this example,
-followed by the actual name of the channel.
+The Apache Kafka topic that is created by the channel implementation contains
+the name of the namespace, `default` in this example, followed by the actual
+name of the channel.  In the consolidated channel implementation, it is also
+prefixed with `knative-messaging-kafka` to indicate that it is an Apache Kafka
+channel from Knative.
 
 **NOTE:** The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
 
@@ -167,7 +170,7 @@ kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c us
 
 ## Authentication against an Apache Kafka
 
-In production environments it is common that the Apache Kafka cluster is secured using [TLS](http://kafka.apache.org/documentation/#security_ssl) or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section shows how to confiugure the `KafkaChannel` to work against a protected Apache Kafka cluster, with the two supported TLS and SASL authentication methods.
+In production environments it is common that the Apache Kafka cluster is secured using [TLS](http://kafka.apache.org/documentation/#security_ssl) or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section shows how to configure the `KafkaChannel` to work against a protected Apache Kafka cluster, with the two supported TLS and SASL authentication methods.
 
 ### TLS authentication
 
@@ -178,8 +181,8 @@ To use TLS authentication you must create:
 
 **NOTE:** Kafka channels require these files to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
 
-
-1. Create the certificate files as secrets in your chosen namespace:
+For the consolidated channel type, create the certificate files as secret
+fields in your chosen namespace:
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
@@ -189,18 +192,28 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
 
 *NOTE:* It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
-Reference your secret and the namespace of the secret in the `config-kafka` ConfigMap:
+For the distributed channel type, place the certificate into your
+`config-kafka` ConfigMap and set the TLS.Enable field to `true`, for example:
+
 ```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-kafka
-  namespace: knative-eventing
+...
 data:
-  bootstrapServers: <bootstrap-servers>
-  authSecretName: <kafka-auth-secret>
-  authSecretNamespace: <namespace>
- ```
+  sarama: |
+    config: |
+      Net:
+        TLS:
+          Enable: true
+          Config:
+            RootPEMs: # Array of Root Certificate PEM Files (Use '|-' Syntax To Preserve Linefeeds & Avoiding Terminating \n)
+            - |-
+              -----BEGIN CERTIFICATE-----
+              MIIGDzCCA/egAwIBAgIUWq6j7u/25wPQiNMPZqL6Vy0rkvQwDQYJKoZIhvcNAQEL
+              ...
+              771uezZAFqd1GLLL8ZYRmCsAMg==
+              -----END CERTIFICATE-----
+...
+```
+
 
 ### SASL authentication
 
@@ -211,7 +224,13 @@ To use SASL authentication, you will need the following information:
 
 **NOTE:** It is recommended to also enable TLS. If you enable this, you will also need the `ca.crt` certificate as described in the previous section.
 
-1. Create the certificate files as secrets in your chosen namespace:
+#### SASL secret
+
+The SASL secret is different depending on whether you are using the
+consolidated or distributed channel implementation. For the
+consolidated channel, create a secret with a `ca.crt` field if using
+a custom CA certificate, for example:
+
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
@@ -220,29 +239,87 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-literal=user="my-sasl-user"
 ```
 
-*NOTE:* It is important to use the same keys; `user`, `password` and `saslType`.
-
-### SASL authentication using public CA certificates
-
-If you want to use SASL with public CA certificates, you must use the `tls.enabled=true` flag, rather than the `ca.crt` argument, when creating the secret. For example:
+or, if you want to use public CA certificates, you must use the
+`tls.enabled=true` flag, rather than the `ca.crt` argument, for example:
 
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
-    --from-literal=tls.enabled=true \
+  --from-literal=tls.enabled=true \
   --from-literal=password="SecretPassword" \
   --from-literal=saslType="SCRAM-SHA-512" \
   --from-literal=user="my-sasl-user"
 ```
 
-Reference your secret and the namespace of the secret in the `config-kafka` ConfigMap:
+*NOTE:* It is important to use the same keys; `user`, `password` and `saslType`.
+
+For the distributed channel type, do not place the certificate into the secret;
+instead place the root certificate data (if using a custom CA cert) directly
+into your `config-kafka` ConfigMap and set SASL.Enable to `true`. For example:
+
 ```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-kafka
-  namespace: knative-eventing
+$ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
+    --from-literal=password="SecretPassword" \
+    --from-literal=saslType="PLAIN" \
+    --from-literal=username="my-sasl-user"
+```
+
+Example of adding a certificate to the `config-kafka` ConfigMap and enabling
+TLS and SASL:
+
+```
+...
 data:
-  bootstrapServers: <bootstrap-servers>
-  authSecretName: <kafka-auth-Secret>
-  authSecretNamespace: <namespace>
+  sarama: |
+    config: |
+      Net:
+        TLS:
+          Enable: true
+          Config:
+            RootPEMs: # Array of Root Certificate PEM Files (Use '|-' Syntax To Preserve Linefeeds & Avoiding Terminating \n)
+            - |-
+              -----BEGIN CERTIFICATE-----
+              MIIGDzCCA/egAwIBAgIUWq6j7u/25wPQiNMPZqL6Vy0rkvQwDQYJKoZIhvcNAQEL
+              ...
+              771uezZAFqd1GLLL8ZYRmCsAMg==
+              -----END CERTIFICATE-----
+        SASL:
+          Enable: true
+...
 ```
+
+### All authentication methods
+
+After creating the secret for your desired authentication type using the above
+steps, reference that secret and the namespace of the secret in the
+`config-kafka` ConfigMap:
+```
+...
+data:
+  eventing-kafka: |
+    kafka:
+      authSecretName: <kafka-auth-secret>
+      authSecretNamespace: <namespace>
+...
+ ```
+
+*NOTE:* The default secret name and namespace are `kafka-cluster` and
+`knative-eventing` respectively. If you reference a secret in a different
+namespace, be sure your roles and bindings are configured so that the
+knative-eventing pods can access it.
+
+## Channel Configuration
+
+The `config-kafka` ConfigMap allows for a variety of channel options such as:
+- CPU and Memory requests and limits for the dispatcher (and receiver for
+   the distributed channel type) deployments created by the controller
+- Kafka topic default values (number of partitions, replication factor, and
+  retention time)
+- Maximum idle connections/connections per host for Knative cloudevents
+- The brokers string for your Kafka connection
+- The name and namespace of your TLS/SASL authentication secret
+- The Kafka admin type (distributed channel only)
+- Nearly all the settings exposed in a [Sarama Config Struct](https://github.com/Shopify/sarama/blob/master/config.go)
+- Sarama debugging assistance (via sarama.enableLogging)
+
+For detailed information (particularly for the distributed channel), see the
+[Distributed Channel README](https://github.com/knative-sandbox/eventing-kafka/blob/main/config/channel/distributed/README.md)
