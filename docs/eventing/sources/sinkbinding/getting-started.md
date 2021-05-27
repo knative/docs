@@ -34,18 +34,16 @@ explicitly include it using the label `bindings.knative.dev/include: true`.
 
 To set the SinkBinding object to inclusion mode:
 
-1. Retrieve the `webhook.yml` file for your Eventing deployment by running:
+1. Change the value of `SINK_BINDING_SELECTION_MODE` from `exclusion` to `inclusion` by running:
 
     ```bash
-    kubectl -n knative-eventing edit deployments eventing-webhook
+    kubectl -n knative-eventing set env deployments eventing-webhook --containers="eventing-webhook" SINK_BINDING_SELECTION_MODE=inclusion
     ```
 
-2. Change the value of `SINK_BINDING_SELECTION_MODE` from `exclusion` to `inclusion`.
-For example:
+2. To verify that the value is set as desired, run:
 
-    ```yaml
-    - name: SINK_BINDING_SELECTION_MODE
-          value: "inclusion"
+    ```bash
+    kubectl -n knative-eventing set env deployments eventing-webhook --containers="eventing-webhook" --list | grep SINK_BINDING
     ```
 
 
