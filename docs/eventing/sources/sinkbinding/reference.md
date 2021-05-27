@@ -1,9 +1,4 @@
----
-title: "SinkBinding Reference"
-linkTitle: "Reference"
-weight: 03
-type: "docs"
----
+# SinkBinding Reference
 
 This topic provides reference information about the configurable fields for the
 SinkBinding object.

@@ -1,27 +1,21 @@
----
-title: "Create a SinkBinding object"
-weight: 02
-type: "docs"
----
+# Create a SinkBinding object
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
-This topic describes how to create a SinkBinding object and connect it to a
-subject in your cluster.
+This topic describes how to create a SinkBinding object.
+The SinkBinding resolves a sink as a URI, sets the URI in the environment
+variable `K_SINK`, and adds the URI to a subject using `K_SINK`.
+If the URI changes, the SinkBinding updates the value of `K_SINK`.
 
-If you follow the examples in this topic, you will have a SinkBinding object
-that resolves a Knative Service (the sink) into a URI, and sets that URI in the
-environment variable `K_SINK` in new jobs from a cron job (the subject).
-The SinkBinding updates `K_SINK` if the URI changes.
-
+In the examples below, the sink is a Knative Service and the subject is a CronJob.
 If you have an existing subject and sink, you can replace the examples with your
 own values.
 
 ## Before you begin
 
-Before you can create a SinkBinding object, you must:
+Before you can create a SinkBinding object:
 
-- Have Knative Serving installed on your cluster.
+- You must have Knative Eventing installed on your cluster.
 - Optional: If you want to use `kn` commands with SinkBinding, install the `kn` CLI.
 
 
@@ -35,14 +29,24 @@ To disallow a namespace from being evaluated for mutation you must exclude it
 using the label `bindings.knative.dev/exclude: true`.
 
 In inclusion mode, SinkBinding behavior is not enabled for the namespace.
-Before a namespace can be evaluated for mutation you must
+Before a namespace can be evaluated for mutation, you must
 explicitly include it using the label `bindings.knative.dev/include: true`.
 
-### Set to inclusion mode
+To set the SinkBinding object to inclusion mode:
 
-To set to inclusion mode, edit the `eventing-webhook` deployment to set
-`SINK_BINDING_SELECTION_MODE` to `inclusion`.
-The mode determines the default scope of the webhook.
+1. Retrieve the `webhook.yml` file for your Eventing deployment by running:
+
+    ```bash
+    kubectl -n knative-eventing edit deployments eventing-webhook
+    ```
+
+2. Change the value of `SINK_BINDING_SELECTION_MODE` from `exclusion` to `inclusion`.
+For example:
+
+    ```yaml
+    - name: SINK_BINDING_SELECTION_MODE
+          value: "inclusion"
+    ```
 
 
 ## Create a namespace
@@ -55,8 +59,10 @@ kubectl create namespace <namespace>
 Where `<namespace>` is the namespace that you want your SinkBinding to use.
 For example, `sinkbinding-example`.
 
-**Note:** if you have selected inclusion mode, you must add the
-`bindings.knative.dev/include: true` label to the namespace to enable SinkBinding behavior.
+!!! note
+    If you have selected inclusion mode, you must add the
+    `bindings.knative.dev/include: true` label to the namespace to enable
+    SinkBinding behavior.
 
 
 ## Create a sink
@@ -65,6 +71,9 @@ The sink can be any addressable Kubernetes object that can receive events.
 
 If you do not have an existing sink that you want to connect to the SinkBinding,
 create a Knative service.
+
+!!! note
+    To create a Knative service you must have Knative Serving installed on your cluster.
 
 === "kn"
 
@@ -84,8 +93,10 @@ create a Knative service.
     ```
 
 === "YAML"
-    1. Copy the following YAML into a `service.yaml` file:
+    1. Create a Knative service by running:
+
         ```yaml
+        kubectl apply -f - <<EOF
         apiVersion: serving.knative.dev/v1
         kind: Service
         metadata:
@@ -95,18 +106,12 @@ create a Knative service.
             spec:
               containers:
                 - image: <image-url>
+        EOF
         ```
         Where:
         - `<app-name>` is the name of the application. For example, `event-display`.
         - `<image-url>` is the URL of the image container.
         For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`
-   </br></br>
-    2. Apply the YAML file by running:
-        ```bash
-        kubectl apply --filename service.yaml
-      ```
-
-
 
 
 ## Create a subject
@@ -121,13 +126,14 @@ You can use any PodSpecable resource in your cluster, for example:
 - `Service.serving.knative.dev`
 
 If you do not have an existing PodSpecable subject that you want to use, you can
-use the following sample to create a `CronJob` object as the subject.
-The following cron job makes a single cloud event that targets `K_SINK` and adds
+use the following sample to create a CronJob object as the subject.
+The following CronJob makes a single cloud event that targets `K_SINK` and adds
 any extra overrides given by `CE_OVERRIDES`.
 
-1. Copy the sample YAML below into a `cronjob.yaml` file:
+1. Create the CronJob by running:
 
     ```yaml
+    kubectl apply -f - <<EOF
     apiVersion: batch/v1beta1
     kind: CronJob
     metadata:
@@ -159,12 +165,7 @@ any extra overrides given by `CE_OVERRIDES`.
                       valueFrom:
                         fieldRef:
                           fieldPath: metadata.namespace
-    ```
-
-2. Apply the YAML file by running:
-
-    ```bash
-    kubectl apply --filename cronjob.yaml
+    EOF
     ```
 
 
@@ -208,44 +209,39 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 <!-- TODO provide link to information about the flags for the kn command -->
 
 === "YAML"
-    1. Copy the following to a your subject's YAML file:
+    Create a `SinkBinding` object by running:
 
-        ```yaml
-        apiVersion: sources.knative.dev/v1alpha1
-        kind: SinkBinding
-        metadata:
-          name: <name>
-        spec:
-          subject:
-            apiVersion: <api-version>
-            kind: <kind>
-            selector:
-              matchLabels:
-                <label-key>: <label-value>
-            sink:
-              ref:
-                apiVersion: serving.knative.dev/v1
-                kind: Service
-                name: <sink>
-        ```
-        Where:
-        - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
-        - `<api-version>` is the API version of the subject. For example `batch/v1`.
-        - `<kind>` is the Kind of your subject. For example `Job`.
-        - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
-        that have a matching label. For example, `app: heartbeat-cron` selects any subject
-        with the label `app=heartbeat-cron`.
-        - `<sink>` is the sink to connect. For example `event-display`.
+    ```yaml
+    kubectl apply -f - <<EOF
+    apiVersion: sources.knative.dev/v1alpha1
+    kind: SinkBinding
+    metadata:
+      name: <name>
+    spec:
+      subject:
+        apiVersion: <api-version>
+        kind: <kind>
+        selector:
+          matchLabels:
+            <label-key>: <label-value>
+        sink:
+          ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: <sink>
+    EOF
+    ```
+    Where:
+    - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
+    - `<api-version>` is the API version of the subject. For example `batch/v1`.
+    - `<kind>` is the Kind of your subject. For example `Job`.
+    - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
+    that have a matching label. For example, `app: heartbeat-cron` selects any subject
+    with the label `app=heartbeat-cron`.
+    - `<sink>` is the sink to connect. For example `event-display`.
 
-        For more information about the fields you can configure for the SinkBinding
-        object, see [Sink Binding Reference](reference.md).
-    2. Apply the YAML file by running:
-        ```bash
-        kubectl apply --filename <filename>.yaml
-        ```
-        Where `filename` is the name of the YAML file for your subject.
-        For example, `cronjob.yaml`.
-
+    For more information about the fields you can configure for the SinkBinding
+    object, see [Sink Binding Reference](reference.md).
 
 
 ## Verify the SinkBinding

@@ -135,7 +135,10 @@ nav:
           - Getting started: eventing/sources/apiserversource/getting-started/README.md
         - ContainerSource: eventing/sources/containersource.md
         - PingSource: eventing/sources/ping-source/index.md
-        - Sink binding: eventing/sources/sinkbinding.md
+        - SinkBinding:
+          - Overview: eventing/sources/sinkbinding/README.md
+          - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
+          - SinkBinding Reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
@@ -271,6 +274,8 @@ plugins:
       strict: false
   - redirects:
       redirect_maps:
+        'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
+        'eventing/sources/sinkbinding': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
