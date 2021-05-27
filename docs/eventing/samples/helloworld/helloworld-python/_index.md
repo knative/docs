@@ -95,7 +95,15 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
       labels:
            eventing.knative.dev/injection: enabled
     ---
-    # Helloworld-python app deploment
+    # A default broker
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+      namespace: knative-samples
+    spec: {}
+    ---
+    # Helloworld-python app deployment
     apiVersion: apps/v1
     kind: Deployment
     metadata:

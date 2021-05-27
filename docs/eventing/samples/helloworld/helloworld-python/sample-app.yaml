@@ -6,7 +6,15 @@ metadata:
   labels:
        eventing.knative.dev/injection: enabled
 ---
-# Helloworld-go app deploment
+# A default broker
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+  namespace: knative-samples
+spec: {}
+---
+# helloworld-python app deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +34,7 @@ spec:
           image: docker.io/axsauze/helloworld-python
           imagePullPolicy: IfNotPresent
 ---
-# Service that exposes helloworld-go app.
+# Service that exposes helloworld-python app.
 # This will be the subscriber for the Trigger
   kind: Service
   apiVersion: v1
@@ -41,7 +49,7 @@ spec:
       port: 80
       targetPort: 8080
 ---
-# Knative Eventing Trigger to trigger the helloworld-go service
+# Knative Eventing Trigger to trigger the helloworld-python service
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
@@ -58,4 +66,3 @@ spec:
       apiVersion: v1
       kind: Service
       name: helloworld-python
-
