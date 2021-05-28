@@ -208,9 +208,10 @@ Follow the procedure for the broker of your choice:
 
 === "RabbitMQ Broker"
 
-    You can install RabbitMQ broker by following instructions [here](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/broker).
+    You can install the RabbitMQ broker by following the instructions in the
+    [RabbitMQ Knative Eventing Broker README](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/broker).
 
-    For more information, see the [RabbitMQ broker](https://github.com/knative-sandbox/eventing-rabbitmq).
+    For more information, see the [RabbitMQ broker](https://github.com/knative-sandbox/eventing-rabbitmq) in GitHub.
 
 ## Next steps
 
