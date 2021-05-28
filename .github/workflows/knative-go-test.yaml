@@ -23,7 +23,7 @@ on:
     branches: [ 'main', 'master' ]
 
   pull_request:
-    branches: [ 'main', 'master', 'release-*', 'mkdocs' ]
+    branches: [ 'main', 'master', 'release-*' ]
 
 jobs:
 
