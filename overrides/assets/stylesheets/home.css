@@ -49,7 +49,8 @@
   z-index: -1;
   padding: 20px;
 }
-.animated-gradient img{
+.animated-gradient img {
+
   display: block !important;
 }
 
