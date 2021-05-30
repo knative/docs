@@ -49,6 +49,9 @@
   z-index: -1;
   padding : 20px;
 }
+.animated-gradient img{
+display: block !important;
+}
 
 .md-typeset img,
 .md-typeset svg {
@@ -158,7 +161,7 @@ body {
   }
 
   .intro-container img {
-    display: block;
+    display: flex;
     margin:0 auto;
     float: none;
   }
