@@ -47,7 +47,11 @@
   background-size: 300% 100%;
   opacity: 0.4;
   z-index: -1;
-  
+  padding: 20px;
+}
+
+.animated-gradient img {
+  display: block !important;
 }
 
 .md-typeset img,
