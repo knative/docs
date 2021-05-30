@@ -161,7 +161,7 @@ body {
   }
 
   .intro-container img {
-    display: flex;
+    display: block;
     margin:0 auto;
     float: none;
   }
