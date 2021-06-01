@@ -23,5 +23,8 @@
   "homepage": "https://knative.dev",
   "engines": {
     "node": ">12.0"
+  },
+  "dependencies": {
+    "postcss": "^8.3.0"
   }
 }
