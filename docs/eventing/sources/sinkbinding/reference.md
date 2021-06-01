@@ -1,4 +1,4 @@
-# SinkBinding Reference
+# SinkBinding reference
 
 This topic provides reference information about the configurable fields for the
 SinkBinding object.
@@ -34,8 +34,9 @@ A `sink` definition supports the following fields:
 | [`ref.name`][kubernetes-names] | Name of the referent. | Required if using `ref` |
 | `uri` | This can be an absolute URL with a non-empty scheme and non-empty host that points to the target or a relative URI. Relative URIs are resolved using the base URI retrieved from Ref. | Required if _not_ using `ref` |
 
-**Note:** At least one of `ref` or `uri` is required. If both are specified, `uri` is
-resolved into the URL from the Addressable `ref` result.
+!!! note
+    At least one of `ref` or `uri` is required. If both are specified, `uri` is
+    resolved into the URL from the Addressable `ref` result.
 
 #### Example: Sink parameter
 
@@ -55,8 +56,9 @@ sink:
   uri: /extra/path
 ```
 
-**Contract:** This results in the `K_SINK` environment variable being set on the
-`subject` as `"http://mysink.default.svc.cluster.local/extra/path"`.
+!!! contract
+    This results in the `K_SINK` environment variable being set on the `subject`
+    as `"http://mysink.default.svc.cluster.local/extra/path"`.
 
 
 ### Subject parameter
@@ -76,7 +78,7 @@ A `subject` definition supports the following fields:
 | `selector.matchExpressions` | A list of label selector requirements. The requirements are ANDed. | Use one of `matchExpressions` or `matchLabels` |
 | `selector.matchExpressions.key` | The label key that the selector applies to. | Required if using `matchExpressions` |
 | `selector.matchExpressions.operator` | Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`. | Required if using `matchExpressions` |
-| selector.matchExpressions.values` | An array of string values. If `operator` is `In` or `NotIn`, the values array must be non-empty. If `operator` is `Exists` or `DoesNotExist`, the values array must be empty. This array is replaced during a strategic merge patch. | Required if using `matchExpressions` |
+| `selector.matchExpressions.values` | An array of string values. If `operator` is `In` or `NotIn`, the values array must be non-empty. If `operator` is `Exists` or `DoesNotExist`, the values array must be empty. This array is replaced during a strategic merge patch. | Required if using `matchExpressions` |
 | `selector.matchLabels` | A map of key-value pairs. Each key-value pair in the `matchLabels` map is equivalent to an element of `matchExpressions`, where the key field is `matchLabels.<key>`, the `operator` is `In`, and the `values` array contains only "matchLabels.<value>". The requirements are ANDed. | Use one of `matchExpressions` or `matchLabels` |
 
 #### Example: Subject parameter using name
@@ -138,10 +140,11 @@ A `ceOverrides` definition supports the following fields:
 |-------|-------------|----------------------|
 | `extensions` | Specifies which attributes are added or overridden on the outbound event. Each `extensions` key-value pair is set independently on the event as an attribute extension. | Optional  |
 
-**Note:** Only valid [CloudEvent attribute names][cloudevents-attribute-naming]
-are allowed as extensions. You cannot set the spec defined attributes from
-the extensions override configuration. For example, you can not modify the `type`
-attribute.
+!!! note
+    Only valid [CloudEvent attribute names][cloudevents-attribute-naming] are
+    allowed as extensions. You cannot set the spec defined attributes from
+    the extensions override configuration. For example, you can not modify the
+    `type` attribute.
 
 #### Example: CloudEvent Overrides
 
@@ -152,8 +155,9 @@ ceOverrides:
     additional: 42
 ```
 
-**Contract:** This results in the `K_CE_OVERRIDES` environment variable being set on the
-`subject` as follows:
+!!! contract
+    This results in the `K_CE_OVERRIDES` environment variable being set on the
+    `subject` as follows:
 
 ```json
 { "extensions": { "extra": "this is an extra attribute", "additional": "42" } }

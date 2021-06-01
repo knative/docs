@@ -142,7 +142,7 @@ nav:
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
           - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
-          - SinkBinding Reference: eventing/sources/sinkbinding/reference.md
+          - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
