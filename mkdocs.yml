@@ -278,6 +278,7 @@ plugins:
       strict: false
   - redirects:
       redirect_maps:
+        'eventing/sources/sinkbinding': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
