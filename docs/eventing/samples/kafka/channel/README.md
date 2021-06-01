@@ -198,8 +198,8 @@ To use SASL authentication, you will need the following information:
 * The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
 
 !!! note
-It is recommended to also enable TLS. If you enable this, you will also
-need the `ca.crt` certificate as described in the previous section.
+    It is recommended to also enable TLS. If you enable this, you will also
+    need the `ca.crt` certificate as described in the previous section.
 
 1. Create a secret with a `ca.crt` field if using a custom CA certificate,
    for example:
@@ -220,8 +220,8 @@ need the `ca.crt` certificate as described in the previous section.
      --from-literal=user="my-sasl-user"
    ```
 
-   !!! note
-   It is important to use the same keys; `user`, `password` and `saslType`.
+!!! note
+    It is important to use the same keys; `user`, `password` and `saslType`.
 
 ### Distributed channel authentication
 
@@ -298,7 +298,7 @@ To use SASL authentication, you will need the following information:
 
 ### All channel types and authentication methods
 
-1. After you have created the secret for your desired authentication method by
+1. If you have created a secret for your desired authentication method by
    using the previous steps, reference the secret and the namespace of the
    secret in the `config-kafka` ConfigMap:
    ```
