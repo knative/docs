@@ -20,7 +20,7 @@ default channel configuration in Knative Eventing.
 ## Creating a `KafkaChannel` channel CRD
 
 1. Create a new object by configuring the YAML file as follows:
-   ```
+   ```shell
    kubectl apply -f - <<EOF
    ---
    apiVersion: messaging.knative.dev/v1beta1
@@ -38,7 +38,7 @@ default channel configuration in Knative Eventing.
 1. To configure the usage of the `KafkaChannel` CRD as the
    [default channel configuration](../../../channels/channel-types-defaults), 
    edit the `default-ch-webhook` ConfigMap as follows:
-   ```
+   ```shell
    kubectl apply -f - <<EOF
    ---
    apiVersion: v1
@@ -63,7 +63,7 @@ default channel configuration in Knative Eventing.
 1. Now that `KafkaChannel` is set as the default channel configuration,
    use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
    channel, using the generic `Channel`:
-   ```
+   ```shell
    kubectl apply -f - <<EOF
    ---
    apiVersion: messaging.knative.dev/v1
@@ -74,7 +74,7 @@ default channel configuration in Knative Eventing.
    ```
 2. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
    using the command:
-   ```
+   ```shell
    kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
    ```
    The result is:
@@ -131,15 +131,15 @@ the`ApiServerSource` to publish events to the broker as well as the `Trigger`
 API, which then routes events to a Knative `Service`.
 
 1. Install `ksvc`, using the command:
-   ```
+   ```shell
    kubectl apply -f 000-ksvc.yaml
    ```
 2. Install a source that publishes to the default broker
-   ```
+   ```shell
    kubectl apply -f 020-k8s-events.yaml
    ```
 3. Create a trigger that routes the events to the `ksvc`:
-   ```
+   ```shell
    kubectl apply -f 030-trigger.yaml
    ```
 
@@ -151,7 +151,7 @@ your configuration with the following options.
 ### Receive events via Knative
 
 1. Observe the events in the log of the `ksvc` using the command:
-   ```
+   ```shell
    kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
    ```
 
@@ -176,8 +176,8 @@ To use TLS authentication you must create:
 
 1. For the consolidated channel type, create the certificate files as secret
    fields in your chosen namespace:
-   ```
-   $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
+   ```shell
+   kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
      --from-file=ca.crt=caroot.pem \
      --from-file=user.crt=certificate.pem \
      --from-file=user.key=key.pem
@@ -226,7 +226,7 @@ consolidated or distributed channel implementation.
 
 1. For the consolidated channel, create a secret with a `ca.crt` field if
    using a custom CA certificate, for example:
-   ```
+   ```shell
    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
      --from-file=ca.crt=caroot.pem \
      --from-literal=password="SecretPassword" \
@@ -235,7 +235,7 @@ consolidated or distributed channel implementation.
    ```
 2. Optional. If you want to use public CA certificates, you must use the
    `tls.enabled=true` flag, rather than the `ca.crt` argument, for example:
-   ```
+   ```shell
    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
      --from-literal=tls.enabled=true \
      --from-literal=password="SecretPassword" \
@@ -250,7 +250,7 @@ consolidated or distributed channel implementation.
    secret; instead place the root certificate data (if using a custom CA cert)
    directly into your `config-kafka` ConfigMap and set the SASL.Enable field
    to `true`. For example:
-   ```
+   ```shell
    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
        --from-literal=password="SecretPassword" \
        --from-literal=saslType="PLAIN" \
