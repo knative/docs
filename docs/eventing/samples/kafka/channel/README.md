@@ -72,7 +72,7 @@ default channel configuration in Knative Eventing.
      name: testchannel-one
    EOF
    ```
-2. Check Kafka for a `testchannel` topic. With Strimzi this can be done by
+2. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
    using the command:
    ```
    kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
@@ -99,7 +99,6 @@ channel from Knative.
 
 1. To setup a broker that will use the new default Kafka channels, you must
    create a new _default_ broker, using the command:
-
    ```shell
    kubectl create -f - <<EOF
    apiVersion: eventing.knative.dev/v1
@@ -108,18 +107,19 @@ channel from Knative.
     name: default
    EOF
    ```
-   This will give you two pods, such as:
-   ```
-   default-broker-filter-64658fc79f-nf596                            1/1     Running     0          15m
-   default-broker-ingress-ff79755b6-vj9jt                            1/1     Running     0          15
-   ```
-   Inside the Apache Kafka cluster you should see two new topics, such as:
-   ```
-   ...
-   knative-messaging-kafka.default.default-kn2-ingress
-   knative-messaging-kafka.default.default-kn2-trigger
-   ...
-   ```
+
+This will give you two pods, such as:
+```
+default-broker-filter-64658fc79f-nf596                            1/1     Running     0          15m
+default-broker-ingress-ff79755b6-vj9jt                            1/1     Running     0          15
+```
+Inside the Apache Kafka cluster you should see two new topics, such as:
+```
+...
+knative-messaging-kafka.default.default-kn2-ingress
+knative-messaging-kafka.default.default-kn2-trigger
+...
+```
 
 !!! note
     The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
@@ -151,7 +151,6 @@ your configuration with the following options.
 ### Receive events via Knative
 
 1. Observe the events in the log of the `ksvc` using the command:
-
    ```
    kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
    ```
