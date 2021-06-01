@@ -37,7 +37,7 @@ EOF
 ## Specifying the default channel configuration
 
 To configure the usage of the `KafkaChannel` CRD as the
-[default channel configuration](../../../channels/channel-types-defaults.md), edit the
+[default channel configuration](../../../channels/channel-types-defaults), edit the
 `default-ch-webhook` ConfigMap as follows:
 
 ```
@@ -179,9 +179,10 @@ To use TLS authentication you must create:
 * A CA certificate
 * A client certificate and key
 
-**NOTE:** Kafka channels require these files to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
+!!! note
+    Kafka channels require these files to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
 
-For the consolidated channel type, create the certificate files as secret
+1. For the consolidated channel type, create the certificate files as secret
 fields in your chosen namespace:
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
@@ -222,7 +223,8 @@ To use SASL authentication, you will need the following information:
 * A username and password.
 * The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
 
-**NOTE:** It is recommended to also enable TLS. If you enable this, you will also need the `ca.crt` certificate as described in the previous section.
+!!! note
+    It is recommended to also enable TLS. If you enable this, you will also need the `ca.crt` certificate as described in the previous section.
 
 #### SASL secret
 
@@ -250,7 +252,8 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-literal=user="my-sasl-user"
 ```
 
-*NOTE:* It is important to use the same keys; `user`, `password` and `saslType`.
+!!! note
+    It is important to use the same keys; `user`, `password` and `saslType`.
 
 For the distributed channel type, do not place the certificate into the secret;
 instead place the root certificate data (if using a custom CA cert) directly
@@ -289,9 +292,9 @@ data:
 
 ### All authentication methods
 
-After creating the secret for your desired authentication type using the above
-steps, reference that secret and the namespace of the secret in the
-`config-kafka` ConfigMap:
+After you have created the secret for your desired authentication type by using the previous
+steps, reference the secret and the namespace of the secret in the `config-kafka` ConfigMap:
+
 ```
 ...
 data:
@@ -302,10 +305,11 @@ data:
 ...
  ```
 
-*NOTE:* The default secret name and namespace are `kafka-cluster` and
-`knative-eventing` respectively. If you reference a secret in a different
-namespace, be sure your roles and bindings are configured so that the
-knative-eventing pods can access it.
+!!! note
+    The default secret name and namespace are `kafka-cluster` and
+    `knative-eventing` respectively. If you reference a secret in a different
+    namespace, be sure your roles and bindings are configured so that the
+    knative-eventing pods can access it.
 
 ## Channel configuration
 
