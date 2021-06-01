@@ -164,8 +164,8 @@ shows how to configure the `KafkaChannel` to work against a protected Apache
 Kafka cluster, with the two supported TLS and SASL authentication methods.
 
 !!! note
-Kafka channels require certificates to be in `.pem` format. If your files
-are in a different format, you must convert them to `.pem`.
+    Kafka channels require certificates to be in `.pem` format. If your files
+    are in a different format, you must convert them to `.pem`.
 
 Follow the section corresponding to the channel type that you used
 (consolidated or distributed) when installing eventing-kafka:
@@ -188,7 +188,7 @@ To use TLS authentication you must create:
    ```
 
    !!! note
-   It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
+       It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
 #### SASL authentication
 
