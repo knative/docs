@@ -191,7 +191,7 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
   --from-file=user.crt=certificate.pem \
   --from-file=user.key=key.pem
- ```
+```
 
 !!! note
     It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
