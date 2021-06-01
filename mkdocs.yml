@@ -280,6 +280,7 @@ plugins:
       strict: false
   - redirects:
       redirect_maps:
+        'help' : docs/help
         'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
