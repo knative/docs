@@ -163,19 +163,23 @@ or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section
 shows how to configure the `KafkaChannel` to work against a protected Apache
 Kafka cluster, with the two supported TLS and SASL authentication methods.
 
-### TLS authentication
+!!! note
+Kafka channels require certificates to be in `.pem` format. If your files
+are in a different format, you must convert them to `.pem`.
+
+Follow the section corresponding to the channel type that you used
+(consolidated or distributed) when installing eventing-kafka:
+
+### Consolidated channel authentication
+
+#### TLS authentication
 
 To use TLS authentication you must create:
 
 * A CA certificate
 * A client certificate and key
 
-!!! note
-    Kafka channels require these files to be in `.pem` format. If your files
-    are in a different format, you must convert them to `.pem`.
-
-1. For the consolidated channel type, create the certificate files as secret
-   fields in your chosen namespace:
+1. Create the certificate files as secret fields in your chosen namespace:
    ```shell
    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
      --from-file=ca.crt=caroot.pem \
@@ -183,32 +187,10 @@ To use TLS authentication you must create:
      --from-file=user.key=key.pem
    ```
 
-!!! note
-    It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
+   !!! note
+   It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
-1. For the distributed channel type, place the certificate into your
-   `config-kafka` ConfigMap and set the TLS.Enable field to `true`,
-   for example:
-   ```
-   ...
-   data:
-     sarama: |
-       config: |
-         Net:
-           TLS:
-             Enable: true
-             Config:
-               RootPEMs: # Array of Root Certificate PEM Files (Use '|-' Syntax To Preserve Linefeeds & Avoiding Terminating \n)
-               - |-
-                 -----BEGIN CERTIFICATE-----
-                 MIIGDzCCA/egAwIBAgIUWq6j7u/25wPQiNMPZqL6Vy0rkvQwDQYJKoZIhvcNAQEL
-                 ...
-                 771uezZAFqd1GLLL8ZYRmCsAMg==
-                 -----END CERTIFICATE-----
-   ...
-   ```
-
-### SASL authentication
+#### SASL authentication
 
 To use SASL authentication, you will need the following information:
 
@@ -216,16 +198,11 @@ To use SASL authentication, you will need the following information:
 * The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
 
 !!! note
-    It is recommended to also enable TLS. If you enable this, you will also
-    need the `ca.crt` certificate as described in the previous section.
+It is recommended to also enable TLS. If you enable this, you will also
+need the `ca.crt` certificate as described in the previous section.
 
-#### SASL secret
-
-The SASL secret is different depending on whether you are using the
-consolidated or distributed channel implementation.
-
-1. For the consolidated channel, create a secret with a `ca.crt` field if
-   using a custom CA certificate, for example:
+1. Create a secret with a `ca.crt` field if using a custom CA certificate,
+   for example:
    ```shell
    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
      --from-file=ca.crt=caroot.pem \
@@ -243,21 +220,18 @@ consolidated or distributed channel implementation.
      --from-literal=user="my-sasl-user"
    ```
 
-!!! note
-    It is important to use the same keys; `user`, `password` and `saslType`.
+   !!! note
+   It is important to use the same keys; `user`, `password` and `saslType`.
 
-1. For the distributed channel type, do not place the certificate into the
-   secret; instead place the root certificate data (if using a custom CA cert)
-   directly into your `config-kafka` ConfigMap and set the SASL.Enable field
-   to `true`. For example:
+### Distributed channel authentication
+
+#### TLS authentication
+
+1. Edit your config-kafka ConfigMap:
    ```shell
-   kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
-       --from-literal=password="SecretPassword" \
-       --from-literal=saslType="PLAIN" \
-       --from-literal=username="my-sasl-user"
+   kubectl -n knative-eventing edit configmap config-kafka
    ```
-   Example of adding a certificate to the `config-kafka` ConfigMap and enabling
-   TLS and SASL:
+2. Set the TLS.Enable field to `true`, for example
    ```
    ...
    data:
@@ -266,6 +240,18 @@ consolidated or distributed channel implementation.
          Net:
            TLS:
              Enable: true
+   ...
+   ```
+3. Optional. If using a custom CA certificate, place your certificate data
+   into the ConfigMap in the data.sarama.config.Net.TLS.Config.RootPEMs field,
+   for example:
+   ```
+   ...
+   data:
+     sarama: |
+       config: |
+         Net:
+           TLS:
              Config:
                RootPEMs: # Array of Root Certificate PEM Files (Use '|-' Syntax To Preserve Linefeeds & Avoiding Terminating \n)
                - |-
@@ -274,14 +260,45 @@ consolidated or distributed channel implementation.
                  ...
                  771uezZAFqd1GLLL8ZYRmCsAMg==
                  -----END CERTIFICATE-----
+   ...
+   ```
+
+#### SASL authentication
+
+To use SASL authentication, you will need the following information:
+
+* A username and password.
+* The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
+
+!!! note
+    It is recommended to also enable TLS as described in the previous section.
+
+1. Edit your config-kafka ConfigMap:
+   ```shell
+   kubectl -n knative-eventing edit configmap config-kafka
+   ```
+2. Set the SASL.Enable field to `true`, for example:
+   ```
+   ...
+   data:
+     sarama: |
+       config: |
+         Net:
            SASL:
              Enable: true
    ...
    ```
+3. Create a secret with the username, password, and SASL mechanism, for example:
+   ```shell
+   kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
+       --from-literal=password="SecretPassword" \
+       --from-literal=saslType="PLAIN" \
+       --from-literal=username="my-sasl-user"
+   ```
 
-### All authentication methods
+### All channel types and authentication methods
 
-1. After you have created the secret for your desired authentication type by
+1. After you have created the secret for your desired authentication method by
    using the previous steps, reference the secret and the namespace of the
    secret in the `config-kafka` ConfigMap:
    ```
