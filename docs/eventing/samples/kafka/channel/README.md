@@ -36,7 +36,7 @@ EOF
 
 ## Specifying the default channel configuration
 
-To configure the usage of the `KafkaChannel` CRD as the
+1. To configure the usage of the `KafkaChannel` CRD as the
 [default channel configuration](../../../channels/channel-types-defaults), edit the
 `default-ch-webhook` ConfigMap as follows:
 
@@ -62,10 +62,9 @@ EOF
 
 ## Creating an Apache Kafka channel using the default channel configuration
 
-1. Now that `KafkaChannel` is set as the default channel configuration, you can
+1. Now that `KafkaChannel` is set as the default channel configuration,
 use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
 channel, using the generic `Channel`:
-
 ```
 cat <<-EOF | kubectl apply -f -
 ---
@@ -75,10 +74,8 @@ metadata:
   name: testchannel-one
 EOF
 ```
-
 2. Check Kafka for a `testchannel` topic. With Strimzi this can be done by
 using the command:
-
 ```
 kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
 ```
@@ -168,7 +165,7 @@ your configuration with the following options.
 kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
 ```
 
-## Authentication against an Apache Kafka
+## Authentication against an Apache Kafka cluster
 
 In production environments it is common that the Apache Kafka cluster is
 secured using [TLS](http://kafka.apache.org/documentation/#security_ssl)
@@ -309,7 +306,7 @@ data:
       authSecretName: <kafka-auth-secret>
       authSecretNamespace: <namespace>
 ...
- ```
+```
 
 !!! note
     The default secret name and namespace are `kafka-cluster` and
@@ -320,15 +317,23 @@ data:
 ## Channel configuration
 
 The `config-kafka` ConfigMap allows for a variety of channel options such as:
+
 - CPU and Memory requests and limits for the dispatcher (and receiver for
   the distributed channel type) deployments created by the controller
+
 - Kafka topic default values (number of partitions, replication factor, and
   retention time)
+
 - Maximum idle connections/connections per host for Knative cloudevents
+
 - The brokers string for your Kafka connection
+
 - The name and namespace of your TLS/SASL authentication secret
+
 - The Kafka admin type (distributed channel only)
+
 - Nearly all the settings exposed in a [Sarama Config Struct](https://github.com/Shopify/sarama/blob/master/config.go)
+
 - Sarama debugging assistance (via sarama.enableLogging)
 
 For detailed information (particularly for the distributed channel), see the
