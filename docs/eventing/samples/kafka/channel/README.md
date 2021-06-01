@@ -62,9 +62,9 @@ EOF
 
 ## Creating an Apache Kafka channel using the default channel configuration
 
-Now that `KafkaChannel` is set as the default channel configuration, you can use
-the `channels.messaging.knative.dev` CRD to create a new Apache Kafka channel,
-using the generic `Channel`:
+1. Now that `KafkaChannel` is set as the default channel configuration, you can
+use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
+channel, using the generic `Channel`:
 
 ```
 cat <<-EOF | kubectl apply -f -
@@ -76,8 +76,8 @@ metadata:
 EOF
 ```
 
-Check Kafka for a `testchannel` topic. With Strimzi this can be done by using
-the command:
+2. Check Kafka for a `testchannel` topic. With Strimzi this can be done by
+using the command:
 
 ```
 kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
@@ -104,8 +104,8 @@ channel from Knative.
 
 ## Configuring the Knative broker for Apache Kafka channels
 
-To setup a broker that will use the new default Kafka channels, you must create
-a new _default_ broker, using the command:
+1. To setup a broker that will use the new default Kafka channels, you must
+create a new _default_ broker, using the command:
 
 ```shell
 kubectl create -f - <<EOF
@@ -147,11 +147,9 @@ API, which then routes events to a Knative `Service`.
    kubectl apply -f 000-ksvc.yaml
    ```
 2. Install a source that publishes to the default broker
-
    ```
    kubectl apply -f 020-k8s-events.yaml
    ```
-
 3. Create a trigger that routes the events to the `ksvc`:
    ```
    kubectl apply -f 030-trigger.yaml
@@ -164,7 +162,7 @@ your configuration with the following options.
 
 ### Receive events via Knative
 
-Now you can see the events in the log of the `ksvc` using the command:
+1. Observe the events in the log of the `ksvc` using the command:
 
 ```
 kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
@@ -172,7 +170,11 @@ kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c us
 
 ## Authentication against an Apache Kafka
 
-In production environments it is common that the Apache Kafka cluster is secured using [TLS](http://kafka.apache.org/documentation/#security_ssl) or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section shows how to configure the `KafkaChannel` to work against a protected Apache Kafka cluster, with the two supported TLS and SASL authentication methods.
+In production environments it is common that the Apache Kafka cluster is
+secured using [TLS](http://kafka.apache.org/documentation/#security_ssl)
+or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section
+shows how to configure the `KafkaChannel` to work against a protected Apache
+Kafka cluster, with the two supported TLS and SASL authentication methods.
 
 ### TLS authentication
 
@@ -182,7 +184,8 @@ To use TLS authentication you must create:
 * A client certificate and key
 
 !!! note
-    Kafka channels require these files to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
+    Kafka channels require these files to be in `.pem` format. If your files
+    are in a different format, you must convert them to `.pem`.
 
 1. For the consolidated channel type, create the certificate files as secret
 fields in your chosen namespace:
@@ -196,7 +199,7 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
 !!! note
     It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
-For the distributed channel type, place the certificate into your
+1. For the distributed channel type, place the certificate into your
 `config-kafka` ConfigMap and set the TLS.Enable field to `true`, for example:
 
 ```
@@ -227,15 +230,16 @@ To use SASL authentication, you will need the following information:
 * The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
 
 !!! note
-    It is recommended to also enable TLS. If you enable this, you will also need the `ca.crt` certificate as described in the previous section.
+    It is recommended to also enable TLS. If you enable this, you will also
+    need the `ca.crt` certificate as described in the previous section.
 
 #### SASL secret
 
 The SASL secret is different depending on whether you are using the
-consolidated or distributed channel implementation. For the
-consolidated channel, create a secret with a `ca.crt` field if using
-a custom CA certificate, for example:
+consolidated or distributed channel implementation.
 
+1. For the consolidated channel, create a secret with a `ca.crt` field if
+using a custom CA certificate, for example:
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=ca.crt=caroot.pem \
@@ -243,10 +247,8 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-literal=saslType="SCRAM-SHA-512" \
   --from-literal=user="my-sasl-user"
 ```
-
-or, if you want to use public CA certificates, you must use the
+2. Optional. If you want to use public CA certificates, you must use the
 `tls.enabled=true` flag, rather than the `ca.crt` argument, for example:
-
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-literal=tls.enabled=true \
@@ -258,10 +260,10 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
 !!! note
     It is important to use the same keys; `user`, `password` and `saslType`.
 
-For the distributed channel type, do not place the certificate into the secret;
-instead place the root certificate data (if using a custom CA cert) directly
-into your `config-kafka` ConfigMap and set SASL.Enable to `true`. For example:
-
+1. For the distributed channel type, do not place the certificate into the
+secret; instead place the root certificate data (if using a custom CA cert)
+directly into your `config-kafka` ConfigMap and set the SASL.Enable field
+to `true`. For example:
 ```
 $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
     --from-literal=password="SecretPassword" \
@@ -295,8 +297,9 @@ data:
 
 ### All authentication methods
 
-After you have created the secret for your desired authentication type by using the previous
-steps, reference the secret and the namespace of the secret in the `config-kafka` ConfigMap:
+1. After you have created the secret for your desired authentication type by
+using the previous steps, reference the secret and the namespace of the secret
+in the `config-kafka` ConfigMap:
 
 ```
 ...
