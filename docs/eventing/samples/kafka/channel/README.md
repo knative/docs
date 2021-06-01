@@ -174,10 +174,8 @@ Follow the section corresponding to the channel type that you used
 
 #### TLS authentication
 
-To use TLS authentication you must create:
-
-* A CA certificate
-* A client certificate and key
+To use TLS authentication you must have a CA root certificate as well as
+a client certificate and key.
 
 1. Create the certificate files as secret fields in your chosen namespace:
    ```shell
@@ -194,8 +192,8 @@ To use TLS authentication you must create:
 
 To use SASL authentication, you will need the following information:
 
-* A username and password.
-* The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
+- A username and password.
+- The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
 
 !!! note
     It is recommended to also enable TLS. If you enable this, you will also
