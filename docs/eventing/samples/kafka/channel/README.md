@@ -21,7 +21,7 @@ default channel configuration in Knative Eventing.
 
 1. Create a new object by configuring the YAML file as follows:
    ```
-   cat <<-EOF | kubectl apply -f -
+   kubectl apply -f - <<EOF
    ---
    apiVersion: messaging.knative.dev/v1beta1
    kind: KafkaChannel
@@ -39,7 +39,7 @@ default channel configuration in Knative Eventing.
    [default channel configuration](../../../channels/channel-types-defaults), 
    edit the `default-ch-webhook` ConfigMap as follows:
    ```
-   cat <<-EOF | kubectl apply -f -
+   kubectl apply -f - <<EOF
    ---
    apiVersion: v1
    kind: ConfigMap
@@ -64,7 +64,7 @@ default channel configuration in Knative Eventing.
    use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
    channel, using the generic `Channel`:
    ```
-   cat <<-EOF | kubectl apply -f -
+   kubectl apply -f - <<EOF
    ---
    apiVersion: messaging.knative.dev/v1
    kind: Channel
