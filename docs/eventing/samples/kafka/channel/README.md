@@ -99,7 +99,8 @@ name of the channel.  In the consolidated channel implementation, it is also
 prefixed with `knative-messaging-kafka` to indicate that it is an Apache Kafka
 channel from Knative.
 
-**NOTE:** The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
+!!! note
+    The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
 
 ## Configuring the Knative broker for Apache Kafka channels
 
@@ -132,7 +133,8 @@ knative-messaging-kafka.default.default-kn2-trigger
 ...
 ```
 
-**NOTE:** The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
+!!! note
+    The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
 
 ## Creating a service and trigger to use the Apache Kafka broker
 
@@ -191,7 +193,8 @@ $ kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
   --from-file=user.key=key.pem
  ```
 
-*NOTE:* It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
+!!! note
+    It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
 For the distributed channel type, place the certificate into your
 `config-kafka` ConfigMap and set the TLS.Enable field to `true`, for example:
