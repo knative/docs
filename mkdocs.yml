@@ -224,8 +224,6 @@ nav:
       - kn plugins: client/kn-plugins.md
     - "Join the Community ➠": ../community/
     - "Read the Blog ➠": ../blog/
-    - Contributing:
-      - MkDocs Contributor's Guide: help/contributor/README.md
 
 theme:
   name: material
