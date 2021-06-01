@@ -2,4 +2,4 @@
 
 ## Table of Contents
 
-- [Knative's MkDocs Conributor Guide](./help/contributor/mkdocs-contributor-guide.md)
+- [Knative's MkDocs Conributor Guide](./mkdocs-contributor-guide.md)
