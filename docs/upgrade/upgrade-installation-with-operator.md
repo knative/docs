@@ -27,6 +27,7 @@ metadata:
 spec:
   version: "0.22"
 EOF
+```
 
 ## Verifying the upgrade
 
@@ -107,6 +108,7 @@ metadata:
 spec:
   version: "0.21"
 EOF
+```
 
 For Knative Eventing:
 
@@ -120,3 +122,4 @@ metadata:
 spec:
   version: "0.21"
 EOF
+```
