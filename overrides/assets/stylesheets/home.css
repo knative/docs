@@ -50,6 +50,10 @@
   padding: 20px;
 }
 
+.animated-gradient img {
+  display: block !important;
+}
+
 .md-typeset img,
 .md-typeset svg {
   max-width: initial;
