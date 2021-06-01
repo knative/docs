@@ -187,8 +187,8 @@ To use TLS authentication you must create:
      --from-file=user.key=key.pem
    ```
 
-   !!! note
-       It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
+!!! note
+    It is important to use the same keys (`ca.crt`, `user.crt` and `user.key`).
 
 #### SASL authentication
 
