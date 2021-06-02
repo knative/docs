@@ -1,4 +1,52 @@
-# Code Block Guidance
+# Documenting Code
+
+??? tip "Looking for a template?"
+    //todo 
+## Documenting Commands
+
+The standard line is “X the Y by running:”
+
+It meets these criteria:
+
+* Explicitly mentions running the command (this isn’t always obvious)
+* **Uses “run”** (and not “type”, “execute”, etc -- we want consistency)
+* Starts with the key information that describes the command, e.g. “To do X...enter Y command:”, “Do X by entering Y command:”
+* As short as possible
+
+If you must deviate from the standard line, ensure you still meet the above criteria.
+
+=== ":white_check_mark: Correct"
+    Create the service by running:
+    ```bash
+    kn create service <service-name>
+    ```
+    Where `<service-name>` is the name of your Knative Service.
+
+=== ":no_entry: Incorrect"
+    **Example 1:**
+
+    Create the service:
+    ```bash
+    kn create service <service-name>
+    ```
+    Where `<service-name>` is the name of your Knative Service.
+
+    **Example 2:**
+
+    Run:
+    ```bash
+    kn create service <service-name>
+    ```
+    Where `<service-name>` is the name of your Knative Service.
+
+    **Example 3:**
+
+    Run the command below to create a service:
+
+    ```bash
+    kn create service <service-name>
+    ```
+    Where `<service-name>` is the name of your Knative Service.
 
 ## Words requiring code formatting
 Use code formatting to indicate special purpose text. Apply code formatting to the following content:
@@ -12,7 +60,6 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 * Environment variable text
 
 
-
 ## Referencing Variables in Code Blocks
 
 Format variables in code blocks like so: <service-name>
@@ -20,7 +67,7 @@ Format variables in code blocks like so: <service-name>
 - All lower case
 - Hyphens between words
 - Explanation for each variable below code block
-- Explanation format is “Where... `<service-name>` is…
+- Explanation format is “Where... `<service-name>` is…"
 - If there are multiple variables, see below.
 
 ### Single Variable
@@ -58,7 +105,7 @@ Format variables in code blocks like so: <service-name>
 
 ## CLI Input and Output
 ### CLI Input
-> Be sure to specify the language your code is in, if relevant. In the below example, the :white_check_mark: Correct example uses "go" the :no_entry: Incorrect example uses "bash"
+> Be sure to specify the language your code is in, bash for any CLI commands.
 
 === ":white_check_mark: Correct"
     ```go
@@ -108,7 +155,7 @@ Format variables in code blocks like so: <service-name>
     ````
 
 ### CLI Output
-> CLI Output should include the custom css "{ .bash .no-copy }" in place of "bash" which removes the "Copy to Clipboard button"
+> CLI Output should include the custom css "{ .bash .no-copy }" in place of "bash" which removes the "Copy to clipboard button" on the right side of the code block
 === ":white_check_mark: Correct"
     ```{ .bash .no-copy }
     <some-code>
