@@ -8,7 +8,7 @@ Style Guides we adhere to, in priority order: (if one doesn't have the answer yo
 1. The Knative Styleguide + [Knative Words and Phrase List](https://docs.google.com/spreadsheets/d/1p1_kBUd6ZvonxHkMcEJPayf6QIpExuFf5cFq0ptar7I/edit#gid=0) (must be in the [Knative Developers Group](https://groups.google.com/forum/#!forum/knative-dev) to view)
 2. [The Kubernetes Style Guide](https://kubernetes.io/docs/contribute/style/style-guide/)
 !!! tip
-    When adhering to any style that isn't Knative's Style Guide, [it would be very kind of you to move that style into this document](https://github.com/knative/docs/edit/main/docs/help/contributor/style-guide/README.md)
+    If you use any style that isn't included in Knative Style Guide, [please add that information to this document](https://github.com/knative/docs/edit/main/docs/help/contributor/style-guide/README.md)
 
 ## Table of Contents
 
