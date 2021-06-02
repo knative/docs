@@ -1,7 +1,8 @@
 # Documenting Code
 
 ??? tip "Looking for a template?"
-    //todo 
+    //todo
+
 ## Documenting Commands
 
 The standard line is “X the Y by running:”
