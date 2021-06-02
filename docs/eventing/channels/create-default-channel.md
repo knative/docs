@@ -59,7 +59,7 @@ InMemoryChannel object. The generic object acts as a proxy for the InMemoryChann
 by copying its subscriptions to, and setting its status to, that of the InMemoryChannel
 object.
 
-!!! note  
+!!! note
     Defaults only apply when objects are created.
     Defaults are applied by the webhook only when a channel or sequence is created.
     If the default settings change, the new defaults only apply to newly created channels,
