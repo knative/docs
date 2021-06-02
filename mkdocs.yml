@@ -22,6 +22,7 @@ nav:
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
+    # Administration guide
     - Administration guide:
         - Overview: admin/README.md
         - Installing Knative:
@@ -47,23 +48,26 @@ nav:
         - Logging: admin/collecting-logs/README.md
         - Metrics: admin/collecting-metrics/README.md
         - Uninstalling Knative: admin/install/uninstall.md
+    # Developer guide
     - Developer guide:
         - Overview: developer/README.md
         - Knative Serving:
           - Services:
             - About Knative Services: developer/serving/services/README.md
             - Creating a Service: developer/serving/services/creating-services.md
-            - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
             - Configuring private Services: developer/serving/services/private-services.md
-    - Serving Component:
+            - Configuring custom domains: developer/serving/services/custom-domains.md
+            - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
+          - Troubleshooting:
+            - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+    # Serving
+    - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
         - Deploying from private registries: serving/deploying-from-private-registry/README.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
-        - Debugging issues with your application: serving/debugging-application-issues.md
-        - Setting up a custom domain per Service: serving/creating-domain-mappings.md
         - Load balancing:
           - Overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
@@ -129,7 +133,8 @@ nav:
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/index.md
         - Traffic splitting: serving/samples/traffic-splitting/index.md
         - ... | *.md
-    - Eventing Component:
+    # Eventing
+    - Knative Eventing:
       - Overview: eventing/README.md
       - Getting started: eventing/getting-started.md
       - Event sources:
@@ -214,9 +219,11 @@ nav:
         - GitLab source: eventing/sources/gitlab-source/README.md
         - IoT core: eventing/samples/iot-core/index.md
         - ... | *
+    # Reference docs
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
+    # Client
     - Client:
       - Overview: client/README.md
       - Installing kn: client/install-kn.md
@@ -276,8 +283,11 @@ plugins:
       filename: ".index"
       collapse_single_pages: true
       strict: false
+# Redirects
   - redirects:
       redirect_maps:
+        'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
+        'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
         'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
