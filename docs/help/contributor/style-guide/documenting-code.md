@@ -5,16 +5,16 @@
 
 ## Documenting Commands
 
-The standard line is “X the Y by running:”
+>**The standard line is “X the Y by running:”**
 
-It meets these criteria:
+>It meets these criteria:
 
-* Explicitly mentions running the command (this isn’t always obvious)
+>* Explicitly mentions running the command (this isn’t always obvious)
 * **Uses “run”** (and not “type”, “execute”, etc -- we want consistency)
 * Starts with the key information that describes the command, e.g. “To do X...enter Y command:”, “Do X by entering Y command:”
 * As short as possible
 
-If you must deviate from the standard line, ensure you still meet the above criteria.
+> If you must deviate from the standard line, ensure you still meet the above criteria.
 
 === ":white_check_mark: Correct"
     Create the service by running:
@@ -49,6 +49,33 @@ If you must deviate from the standard line, ensure you still meet the above crit
     ```
     Where `<service-name>` is the name of your Knative Service.
 
+
+## Documenting YAML
+>Use **kubectl apply** for files/objects that the user creates — it works for both “create” and “update”, and the source of truth is their local files.
+Use **kubectl edit** for files which are shipped as part of the Knative software, like the serving/eventing ConfigMaps.
+
+=== ":white_check_mark: Correct"
+
+    Creating a new file:
+    ```
+    kubectl apply -f - <<EOF
+    # code
+    EOF
+    ```
+
+    Editing a file:
+    ```
+    kubectl -n <namespace> edit cm <filename>
+    ```
+
+=== ":no_entry: Incorrect"
+    ```
+    cat <<EOF | kubectl create -f -
+    # code
+    EOF
+    ```
+
+
 ## Words requiring code formatting
 Use code formatting to indicate special purpose text. Apply code formatting to the following content:
 
@@ -63,9 +90,9 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 
 ## Referencing Variables in Code Blocks
 
-Format variables in code blocks like so: <service-name>
+>Format variables in code blocks like so: <service-name>
 
-- All lower case
+> - All lower case
 - Hyphens between words
 - Explanation for each variable below code block
 - Explanation format is “Where... `<service-name>` is…"
@@ -179,7 +206,6 @@ Format variables in code blocks like so: <service-name>
     <some-code>
     ```
     ````
-
 
 
 
