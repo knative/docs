@@ -1,9 +1,7 @@
 # Knative Style Guide
 
 !!! note "A note to first-time Contributors"
-    If you are a first-time contributor, don't feel like you need to understand this Style Guide front-to-back in order to make a contribution.
-
-    ** Though we would obviously love for you to read our Style Guide, we understand if you just want make your contribution and move on.**
+    If you are a first-time contributor, don't feel like you need to understand this entire Style Guide front-to-back in order to make a contribution. Check out the Table of Contents for any content that may be relevant to your contribution.
 
 Style Guides we adhere to, in priority order: (if one doesn't have the answer you're looking for, check the next)
 
