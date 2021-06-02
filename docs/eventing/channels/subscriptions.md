@@ -1,10 +1,3 @@
----
-title: "Subscriptions"
-weight: 100
-type: "docs"
-showlandingtoc: "false"
----
-
 # Subscriptions
 
 After you have created a channel and a sink, you can create a subscription to enable event delivery.
@@ -20,7 +13,6 @@ For more information about Subscription objects, see
 
 
 === "kn"
-
     Create a subscription between a channel and a sink:
 
     ```
@@ -31,44 +23,43 @@ For more information about Subscription objects, see
       --sink-dead-letter <sink_prefix>:<sink_name>
     ```
 
-- `--channel` specifies the source for cloud events that should be processed.
-You must provide the channel name. If you are not using the default channel that is backed by the
-Channel resource, you must prefix the channel name with the `<Group:Version:Kind>` for the specified
-channel type.
-For example, this is `messaging.knative.dev:v1beta1:KafkaChannel` for a Kafka-backed channel.
+    - `--channel` specifies the source for cloud events that should be processed.
+    You must provide the channel name. If you are not using the default channel that is backed by the
+    Channel resource, you must prefix the channel name with the `<Group:Version:Kind>` for the specified
+    channel type.
+    For example, this is `messaging.knative.dev:v1beta1:KafkaChannel` for a Kafka-backed channel.
 
-- `--sink` specifies the target destination to which the event should be delivered.
-By default, the `<sink_name>` is interpreted as a Knative service of this name, in the same
-namespace as the subscription.
-You can specify the type of the sink by using one of the following prefixes:
-
-    - `ksvc`: A Knative service.
-    - `svc`: A Kubernetes Service.
-    - `channel`: A channel that should be used as the destination. You can only reference default
-    channel types here.
-    - `broker`: An Eventing broker.
-    - `--sink-reply` is an optional argument you can use to specify where the sink reply is sent.
-    It uses the same naming conventions for specifying the sink as the `--sink` flag.
-    - `--sink-dead-letter` is an optional argument you can use to specify where to send the cloud
-    event in case of a failure. It uses the same naming conventions for specifying the sink as the
-    `--sink` flag.
+    - `--sink` specifies the target destination to which the event should be delivered.
+    By default, the `<sink_name>` is interpreted as a Knative service of this name, in the same
+    namespace as the subscription.
+    You can specify the type of the sink by using one of the following prefixes:
 
         - `ksvc`: A Knative service.
         - `svc`: A Kubernetes Service.
-        - `channel`: A channel that should be used as destination. Only default channel types can be referenced here.
+        - `channel`: A channel that should be used as the destination. You can only reference default
+        channel types here.
         - `broker`: An Eventing broker.
-    \
-    &nbsp;
-    - `--sink-reply` and `--sink-dead-letter` are optional arguments. They can be used to specify where the sink reply will be sent to, and where to send the cloud event in case of a failure, respectively. Both use the same naming conventions for specifying the sink as the `--sink` flag.
+        - `--sink-reply` is an optional argument you can use to specify where the sink reply is sent.
+        It uses the same naming conventions for specifying the sink as the `--sink` flag.
+        - `--sink-dead-letter` is an optional argument you can use to specify where to send the cloud
+        event in case of a failure. It uses the same naming conventions for specifying the sink as the
+        `--sink` flag.
 
-This example command creates a channel named `mysubscription` that routes events from a channel
-named `mychannel` to a Knative service named `myservice`.
+            - `ksvc`: A Knative service.
+            - `svc`: A Kubernetes Service.
+            - `channel`: A channel that should be used as destination. Only default channel types can be referenced here.
+            - `broker`: An Eventing broker.
+        - `--sink-reply` and `--sink-dead-letter` are optional arguments. They can be used to specify where the sink reply will be sent to, and where to send the cloud event in case of a failure, respectively. Both use the same naming conventions for specifying the sink as the `--sink` flag.
 
-**NOTE:** The sink prefix is optional. You can also specify the service for `--sink` as just
-`--sink <service_name>` and omit the `ksvc` prefix.
+    This example command creates a channel named `mysubscription` that routes events from a channel
+    named `mychannel` to a Knative service named `myservice`.
+
+    !!! note
+        The sink prefix is optional. You can also specify the service for `--sink` as just
+        `--sink <service_name>` and omit the `ksvc` prefix.
+
 
 === "YAML"
-
     1. Create a Subscription object in a YAML file:
 
         ```yaml
@@ -116,6 +107,7 @@ You can list all existing subscriptions by using the `kn` CLI tool.
     ```
     kn subscription list
     ```
+
 - List subscriptions in YAML format:
 
     ```
@@ -147,4 +139,6 @@ You can delete a subscription by using the `kn` or `kubectl` CLI tools.
     kubectl subscription delete <subscription_name>
     ```
 
-<!-- Insert ## Next steps with a link to a new topic on creating channel implementations. -->
+## Next steps
+
+- [Creating a channel using cluster or namespace defaults](./create-default-channel)

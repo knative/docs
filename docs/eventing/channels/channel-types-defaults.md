@@ -1,10 +1,3 @@
----
-title: "Channel types and defaults"
-weight: 60
-type: "docs"
-showlandingtoc: "true"
----
-
 # Channel types and defaults
 Knative uses two types of channels:
 
@@ -23,8 +16,8 @@ implementation type, such as Apache Kafka or NATSS channels.
 Through the generic Channel object you can create a channel without specifying which channel
 implementation CRD is used.
 This is useful if you do not care about the properties a particular channel provides, such as
-ordering and persistence, and you want to use the implementation selected by the operator.
-The operator controls the default settings through the `default-ch-webhook` ConfigMap in the
+ordering and persistence, and you want to use the implementation selected by the cluster administrator.
+The cluster administrator controls the default settings through the `default-ch-webhook` ConfigMap in the
 `knative-eventing` namespace.
 
 For more information about modifying ConfigMaps, see
@@ -32,8 +25,8 @@ For more information about modifying ConfigMaps, see
 
 Default channels can be configured for the cluster, a namespace on the cluster, or both.
 
-**NOTE:** If a default channel implementation is configured for a namespace, this will overwrite the
-configuration for the cluster.
+!!! note
+    If a default channel implementation is configured for a namespace, this will overwrite the  configuration for the cluster.
 
 In the following example, the cluster default channel implementation is `InMemoryChannel`, while the
 namespace default channel implementation for the `example-namespace` is `KafkaChannel`.
@@ -58,7 +51,8 @@ data:
           replicationFactor: 1
 ```
 
-**NOTE:** `InMemoryChannel` channels should not be used in production environments.
+!!! note
+    `InMemoryChannel` channels are not suited for production environments.
 
 ## Next steps
 
