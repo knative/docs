@@ -1,16 +1,8 @@
----
-title: "Debugging issues with your application"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 25
-type: "docs"
----
+# Debugging application issues
 
-# Debugging issues with your application
+If you have deployed an application but are having issues, you can use the following steps to troubleshoot the application.
 
-You deployed your app to Knative Serving, but it isn't working as expected. Go
-through this step-by-step guide to understand what failed.
-
-## Check command-line output
+## Check terminal output
 
 Check your deploy command output to see whether it succeeded or not. If your
 deployment process was terminated, you should see an error message in the output
