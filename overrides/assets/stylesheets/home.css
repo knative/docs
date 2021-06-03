@@ -102,7 +102,7 @@ body {
 
 .home-container .md-button--primary {
   background-color: var(--md-primary-bg-color);
-  color: var(--md-accent-fg-color);
+  color: hsla(280deg, 37%, 48%, 1);
   border-color: var(--md-primary-bg-color);
 }
 
