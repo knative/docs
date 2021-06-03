@@ -1,10 +1,3 @@
----
-title: "Hello World - Python"
-linkTitle: "Python"
-weight: 20
-type: "docs"
----
-
 # Hello World - Python
 
 A simple web app written in Python that you can use to test knative eventing. It shows how to consume a [CloudEvent](https://cloudevents.io/) in Knative eventing, and optionally how to respond back with another CloudEvent in the http response, by adding the Cloud Eventing headers outlined in the Cloud Events standard definition.
@@ -16,7 +9,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 # Clone the relevant branch version such as "release-0.13"
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
@@ -24,7 +17,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 
 ## Before you begin
 
-- A Kubernetes cluster with [Knative Eventing](../../../admin/install) installed.
+- A Kubernetes cluster with [Knative Eventing](../../../../admin/install) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -56,11 +49,12 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
         app.run(debug=True, host='0.0.0.0', port=8080)
     ```
 
-1. Add a requirements.txt file containing the following contents:
+1. Add a `requirements.txt` file containing the following contents:
 
     ```bash
     Flask==1.1.1
     ```
+
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
@@ -82,9 +76,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 
     ```
 
-1. Create a new file, `sample-app.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
+1. Create a new file, `sample-app.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
 
     ```yaml
     # Namespace for sample application with eventing enabled
@@ -154,64 +146,73 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 Once you have recreated the sample code files (or used the files in the sample
 folder) you're ready to build and deploy the sample app.
 
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your Docker Hub
-   username:
+1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
-   ```shell
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-python .
-
-   # Push the container to docker registry
-   docker push {username}/helloworld-python
-   ```
+    ```bash
+    # Build the container on your local machine
+    docker build -t {username}/helloworld-python .
+    # Push the container to docker registry
+    docker push {username}/helloworld-python
+    ```
 
 1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the sample application into your cluster. Ensure that the container image value
-   in `sample-app.yaml` matches the container you built in the previous step. Apply
-   the configuration using `kubectl`:
+   can deploy the sample application into your cluster. Ensure that the container image value in `sample-app.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
 
-   ```shell
-   kubectl apply --filename sample-app.yaml
-   ```
-    1.  Above command created a namespace `knative-samples` and labelled it with `knative-eventing-injection=enabled`, to enable eventing in the namespace. Verify using the following command:
-        ```shell
-        kubectl get ns knative-samples --show-labels
-        ```
-    1. It deployed the helloworld-python app as a K8s Deployment and created a K8s service names helloworld-python. Verify using the following command.
-        ```shell
-        kubectl --namespace knative-samples get deployments helloworld-python
-        kubectl --namespace knative-samples get svc helloworld-python
-        ```
-    1. It created a Knative Eventing Trigger to route certain events to the helloworld-python application. Make sure that Ready=true
-        ```shell
-        kubectl --namespace knative-samples get trigger helloworld-python
-        ```
+    ```bash
+    kubectl apply -f sample-app.yaml
+    ```
+
+1. The previous command creates a namespace `knative-samples` and labels it with `knative-eventing-injection=enabled`, to enable eventing in the namespace. Verify using the following command:
+
+    ```bash
+    kubectl get ns knative-samples --show-labels
+    ```
+
+1. It deployed the `helloworld-python` app as a K8s Deployment and created a K8s service names helloworld-python. Verify using the following command:
+
+    ```bash
+    kubectl --namespace knative-samples get deployments helloworld-python
+    kubectl --namespace knative-samples get svc helloworld-python
+    ```
+
+1. It created a Knative Eventing Trigger to route certain events to the helloworld-python application. Make sure that `Ready=true`:
+
+    ```bash
+    kubectl -n knative-samples get trigger helloworld-python
+    ```
+
 ## Send and verify CloudEvents
+
 After you have deployed the application, and have verified that the namespace, sample application and trigger are ready, you can send a CloudEvent.
 
 ### Send CloudEvent to the Broker
+
 You can send an HTTP request directly to the Knative [broker](../../../broker) if the correct CloudEvent headers are set.
 
-   1. Deploy a curl pod and SSH into it
-      ```shell
-      kubectl --namespace knative-samples run curl --image=radial/busyboxplus:curl -it
-      ```
-  1. Run the following in the SSH terminal
-      ```shell
-      curl -v "default-broker.knative-samples.svc.cluster.local" \
-      -X POST \
-      -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-      -H "Ce-specversion: 0.3" \
-      -H "Ce-Type: dev.knative.samples.helloworld" \
-      -H "Ce-Source: dev.knative.samples/helloworldsource" \
-      -H "Content-Type: application/json" \
-      -d '{"msg":"Hello World from the curl pod."}'
+1. Deploy a curl pod and SSH into it:
 
-      exit
-      ```
+    ```bash
+    kubectl --namespace knative-samples run curl --image=radial/busyboxplus:curl -it
+    ```
+
+1. Run the following command in the SSH terminal:
+
+    ```bash
+    curl -v "default-broker.knative-samples.svc.cluster.local" \
+    -X POST \
+    -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+    -H "Ce-specversion: 0.3" \
+    -H "Ce-Type: dev.knative.samples.helloworld" \
+    -H "Ce-Source: dev.knative.samples/helloworldsource" \
+    -H "Content-Type: application/json" \
+    -d '{"msg":"Hello World from the curl pod."}'
+    exit
+    ```
+
 ### Verify that event is received by helloworld-python app
+
 Helloworld-python app logs the context and the msg of the above event, and replies back with another event.
+
   1. Display helloworld-python app logs
       ```shell
       kubectl --namespace knative-samples logs -l app=helloworld-python --tail=50
@@ -241,14 +242,15 @@ Helloworld-python app logs the context and the msg of the above event, and repli
         {"msg":"Hi from Knative!"}
 
       ```
-  Try the CloudEvent attributes in the curl command and the trigger specification to understand how [triggers](../../../triggers) work.
+  Try the CloudEvent attributes in the curl command and the trigger specification to understand how [triggers](../../../broker/triggers) work.
 
 ## Verify reply from helloworld-python app
 The `helloworld-python` app replies with an event type `type= dev.knative.samples.hifromknative`, and source `source=knative/eventing/samples/hello-world`. The event enters the eventing mesh through the broker, and can be delivered to event sinks using a trigger
 
-  1. Deploy a pod that receives any CloudEvent and logs the event to its output.
-      ```shell
-      kubectl --namespace knative-samples apply --filename - << END
+  1. Deploy a pod that receives any CloudEvent and logs the event to its output:
+
+      ```yaml
+      kubectl -n knative-samples apply -f - <<EOF
       # event-display app deploment
       apiVersion: apps/v1
       kind: Deployment
@@ -282,11 +284,13 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
           - protocol: TCP
             port: 80
             targetPort: 8080
-      END
+      EOF
       ```
-  1. Create a trigger to deliver the event to the above service
-      ```shell
-      kubectl --namespace knative-samples apply --filename - << END
+
+  1. Create a trigger to deliver the event to the previously created service:
+
+      ```yaml
+      kubectl -n knative-samples apply -f - <<EOF
       apiVersion: eventing.knative.dev/v1
       kind: Trigger
       metadata:
@@ -303,17 +307,20 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
             apiVersion: v1
             kind: Service
             name: event-display
-      END
+      EOF
       ```
 
-  1. [Send a CloudEvent to the Broker](###Send-CloudEvent-to-the-Broker)
+  1. [Send a CloudEvent to the Broker](#send-cloudevent-to-the-broker)
 
-  1. Check the logs of event-display service
-      ```shell
-      kubectl --namespace knative-samples logs -l app=event-display --tail=50
-      ```
-      You should see something similar to:
-      ```shell
+  1. Check the logs of `event-display` Service:
+
+    ```bash
+    kubectl -n knative-samples logs -l app=event-display --tail=50
+    ```
+
+    Example output:
+
+    ```bash
         cloudevents.Event
         Validation: valid
         Context Attributes,
@@ -331,15 +338,12 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
           {
             "msg": "Hi from helloworld- app!"
           }
-      ```
-
-  **Note: You could use the above approach to test your applications too.**
-
+    ```
 
 ## Removing the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
-kubectl delete --filename sample-app.yaml
+```bash
+kubectl delete -f sample-app.yaml
 ```
