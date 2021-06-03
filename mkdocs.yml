@@ -258,7 +258,7 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.details
   - pymdownx.snippets:
-      base_path: snippets
+      base_path: docs/snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
