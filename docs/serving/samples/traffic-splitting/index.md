@@ -111,7 +111,7 @@ kubectl get ksvc stock-service-example --output yaml
 3. The readiness of the Service can be verified through the Service Conditions.
    When the Service conditions report it is ready again, you can access the new
    Revision using the same method as found in the
-   [previous sample](../rest-api-go/README.md#access-the-service) using the
+   [previous sample](../rest-api-go/) using the
    Service hostname found above.
 
 ```shell

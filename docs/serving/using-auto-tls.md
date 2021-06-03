@@ -40,14 +40,14 @@ Knative supports the following Auto TLS modes:
 You must meet the following prerequisites to enable Auto TLS:
 
 - The following must be installed on your Knative cluster:
-  - [Knative Serving](../install/).
+  - [Knative Serving](../../../admin/install/).
   - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher.
-  See [Install a networking layer](../install/install-serving-with-yaml.md#install-a-networking-layer) or
-  [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).<br>
+  See [Install a networking layer](../../../admin/install/install-serving-with-yaml#install-a-networking-layer) or
+  [Istio with SDS, version 1.3 or higher](../../../admin/install/installing-istio#installing-istio-with-SDS-to-secure-the-ingress-gateway).<br>
     **Note:** Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
-- [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
+- [cert-manager version `1.0.0` and higher](./installing-cert-manager).
 - Your Knative cluster must be configured to use a
-  [custom domain](./using-a-custom-domain.md).
+  [custom domain](./using-a-custom-domain).
 - Your DNS provider must be setup and configured to your domain.
 - If you want to use HTTP-01 challenge, you need to configure your custom
 domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
@@ -78,7 +78,7 @@ and which DNS provider validates those requests.
       the Let's Encrypt account info, required `DNS-01` challenge type, and
       Cloud DNS provider info defined. For the complete Google Cloud DNS
       example, see
-      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md).
+      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp).
 
       ```shell
       apiVersion: cert-manager.io/v1

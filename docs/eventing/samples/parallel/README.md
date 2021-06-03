@@ -1,10 +1,3 @@
----
-title: "Parallel Example"
-linkTitle: "Parallel"
-weight: 10
-type: "docs"
----
-
 # Parallel Example
 
 The following examples will help you understand how to use Parallel to describe
@@ -19,12 +12,12 @@ All examples require:
   - Knative Serving
 
 All examples are using the
-[default channel template](../../channels/create-default-channel.md).
+[default channel template](../../channels/create-default-channel).
 
 ## Examples
 
 For each of these examples below, we'll use
-[`PingSource`](../ping-source/README.md) as the source of events.
+[`PingSource`](../ping-source/) as the source of events.
 
 We also use simple
 [functions](https://github.com/lionelvillard/knative-functions) to perform

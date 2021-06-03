@@ -14,7 +14,7 @@ If you have configured additional security features, such as Istio's authorizati
 You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
 - Istio must be used for your Knative Ingress.
-See [Install a networking layer](../install/install-serving-with-yaml.md#install-a-networking-layer).
+See [Install a networking layer](../../../admin/install/install-serving-with-yaml#install-a-networking-layer).
 - Istio sidecar injection must be enabled.
 See the [Istio Documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
 
@@ -56,13 +56,13 @@ $ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knati
 
 - In STRICT mode, requests will simply be rejected.
 
-To understand when requests are forwarded through the activator, see [documentation](https://knative.dev/docs/serving/autoscaling/target-burst-capacity/) on the `TargetBurstCapacity` setting.
+To understand when requests are forwarded through the activator, see [documentation](./autoscaling/target-burst-capacity/) on the `TargetBurstCapacity` setting.
 
 This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.
 
 For example, the following policy allows requests from within pods in the `serving-tests` namespace to other pods in the `serving-tests` namespace.
 
-```
+```yaml
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
@@ -80,7 +80,7 @@ Requests here will fail when forwarded by the activator, because the Istio proxy
 
 Currently, the easiest way around this is to explicitly allow requests from the `knative-serving` namespace, for example by adding it to the list in the above policy:
 
-```
+```yaml
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
@@ -112,8 +112,8 @@ The `/healthz` path allows system pods to probe the service.
 
 You can add the `/metrics` and `/healthz` paths to the AuthorizationPolicy as shown in the example:
 
-```
-$ cat <<EOF | kubectl apply -f -
+```yaml
+kubectl apply -f - <<EOF
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:

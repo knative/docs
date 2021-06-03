@@ -32,7 +32,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 ## Before you begin
 
 - A Kubernetes cluster with
-  [Knative Eventing](../../../getting-started.md#installing-knative-eventing)
+  [Knative Eventing](../../../getting-started#installing-knative-eventing)
   installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -258,7 +258,7 @@ folder) you're ready to build and deploy the sample app.
       **Note:** you can also use injection based on labels with the
       Eventing sugar controller.
       For how to install the Eventing sugar controller, see
-      [Install optional Eventing extensions](../../../../install/install-extensions.md#install-optional-eventing-extensions).
+      [Install optional Eventing extensions](../../../../admin/install/install-extensions#install-optional-eventing-extensions).
 
    1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.

@@ -24,7 +24,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 
 ## Before you begin
 
-- A Kubernetes cluster with [Knative Eventing](../../../getting-started.md#installing-knative-eventing) installed.
+- A Kubernetes cluster with [Knative Eventing](../../../admin/install) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -54,8 +54,6 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 
     if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0', port=8080)
-
-
     ```
 
 1. Add a requirements.txt file containing the following contents:
@@ -193,7 +191,7 @@ folder) you're ready to build and deploy the sample app.
 After you have deployed the application, and have verified that the namespace, sample application and trigger are ready, you can send a CloudEvent.
 
 ### Send CloudEvent to the Broker
-You can send an HTTP request directly to the Knative [broker](../../../broker-trigger.md) if the correct CloudEvent headers are set.
+You can send an HTTP request directly to the Knative [broker](../../../broker) if the correct CloudEvent headers are set.
 
    1. Deploy a curl pod and SSH into it
       ```shell
@@ -243,7 +241,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
         {"msg":"Hi from Knative!"}
 
       ```
-  Try the CloudEvent attributes in the curl command and the trigger specification to understand how [triggers](../../../broker-trigger.md#trigger) work.
+  Try the CloudEvent attributes in the curl command and the trigger specification to understand how [triggers](../../../triggers) work.
 
 ## Verify reply from helloworld-python app
 The `helloworld-python` app replies with an event type `type= dev.knative.samples.hifromknative`, and source `source=knative/eventing/samples/hello-world`. The event enters the eventing mesh through the broker, and can be delivered to event sinks using a trigger
