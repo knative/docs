@@ -195,6 +195,7 @@ nav:
       - Debugging: eventing/debugging/index.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Metrics API: eventing/metrics.md
+      - Experimental Features: eventing/experimental-features.md
       - Code samples:
         - Overview: eventing/samples/README.md
         - Container source: eventing/sources/container-source/README.md
