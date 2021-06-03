@@ -51,4 +51,28 @@ data:
 
 ## Features list
 
-<!-- TODO there are no experimental features at the moment -->
+### `KReference.Group` field
+
+**Flag name**: `kreference-group`
+
+**State**: Alpha, disabled by default
+
+When using the `KReference` type to refer to another Knative resource, you can just specify the API `Group` of the resource, instead of the full `APIVersion`.
+
+For example, in order to refer to an `InMemoryChannel`, more than using:
+
+```yaml
+apiVersion: messaging.knative.dev/v1
+kind: InMemoryChannel
+name: my-channel
+```
+
+You can use instead:
+
+```yaml
+group: messaging.knative.dev
+kind: InMemoryChannel
+name: my-channel
+```
+
+Note: At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref`, in future other usages of `KReference` will support it.
