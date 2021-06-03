@@ -43,8 +43,9 @@ Service. For example in the example yaml below, the "example.org" Domain
 Mapping maps only "example.org" and not "www.example.org". You can create
 multiple Domain Mappings to map multiple domains and subdomains.
 
-**Note:** If you create a Domain Mapping to map to a [private Knative Service](https://github.com/knative/docs/blob/mkdocs/docs/developer/serving/services/private-services.md), the private Knative Service will be accessible from public internet with the
-custom domain of the Domain Mapping.
+!!!note
+   If you create a Domain Mapping to map to a [private Knative Service](../developer/serving/services/private-services.md),
+   the private Knative Service will be accessible from public internet with the custom domain of the Domain Mapping.
 
 ### Procedure
 
