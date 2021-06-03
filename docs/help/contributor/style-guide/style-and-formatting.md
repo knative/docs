@@ -1,5 +1,14 @@
 # Formatting standard and conventions
 
+## Documenting Knative API Objects
+> Any Knative API Objects ought to use Title case.
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Channels | `Channels`
+|Broker      | broker
+
+
 ## Using parentheses
 >Don’t use parentheses, unless it’s the first instance in a page to explain an acronym that isn’t immediately obvious.
 
@@ -8,7 +17,7 @@
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
 |Install the Custom Resource Definition (CRD) | Check your CLI (you should see it there)
-|Knative Serving will create a `Revision`      | Knative will create a `Revision` (a stateless, snapshot in time of your code and configuration)
+|Knative Serving will create a Revision      | Knative will create a Revision (a stateless, snapshot in time of your code and configuration)
 
 
 ## Use sentence case for titles and headings
