@@ -10,7 +10,7 @@ aliases:
 
 This guide provides details about how you can install the Knative `kn` CLI.
 
---8<-- "docs/snippets/install-kn.md"
+--8<-- "install-kn.md"
 
 ### Install kn using the nightly-built binary
 !!! warning
