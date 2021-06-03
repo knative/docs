@@ -6,9 +6,21 @@
     ```
 
 === "YAML"
-
-    //TODO
-
+    ```bash
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: cloudevents-player
+      annotations:
+        knative-eventing-injection: enabled
+    spec:
+      broker: example-broker
+      subscriber:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: cloudevents-player
+    ```
 ==**Expected Output**==
 ```{ .bash .no-copy }
 Trigger 'cloudevents-player' successfully created in namespace 'default'.
