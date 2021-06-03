@@ -503,16 +503,16 @@ dependencies = [
 
 [[package]]
 name = "cloudevents-sdk"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "def892ec210149befc5c0665267042c7a4c8a560c04b17a0652e6f1506e25328"
+checksum = "a7c9f6054fbd2d641a2d275e44f922a3816a6cf51751fb0f72fcf26e27209dfd"
 dependencies = [
  "base64 0.12.1",
+ "bitflags",
  "chrono",
  "delegate-attr",
  "hostname",
  "serde",
- "serde-value",
  "serde_json",
  "snafu",
  "url",
@@ -522,11 +522,10 @@ dependencies = [
 
 [[package]]
 name = "cloudevents-sdk-actix-web"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1484783cb71407780c5718096cbde4d860099d971a4564f674cadc780749c1df"
+checksum = "4cbeee2dc837554a8e57b20025ba175241bae2cfe27b078bedf27c9da668d35a"
 dependencies = [
- "actix-rt",
  "actix-web",
  "async-trait",
  "bytes",
@@ -537,9 +536,9 @@ dependencies = [
 
 [[package]]
 name = "cloudevents-sdk-reqwest"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da53165fffcc2054d0b320046d561555d9597dd42fd1a6ec37d0eed84b828665"
+checksum = "b3402a811b777f123279f268eb146272f3bab907a265634ef3f4d3ad98c3556b"
 dependencies = [
  "async-trait",
  "bytes",
@@ -1275,15 +1274,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77af24da69f9d9341038eba93a073b1fdaaa1b788221b00a69bce9e762cb32de"
 
 [[package]]
-name = "ordered-float"
-version = "1.0.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "18869315e81473c951eb56ad5558bbc56978562d3ecfb87abb7a1e944cea4518"
-dependencies = [
- "num-traits",
-]
-
-[[package]]
 name = "parking_lot"
 version = "0.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1630,16 +1620,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "99e7b308464d16b56eba9964e4972a3eee817760ab60d88c3f86e1fecb08204c"
 dependencies = [
  "serde_derive",
-]
-
-[[package]]
-name = "serde-value"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a65a7291a8a568adcae4c10a677ebcedbc6c9cec91c054dee2ce40b0e3290eb"
-dependencies = [
- "ordered-float",
- "serde",
 ]
 
 [[package]]

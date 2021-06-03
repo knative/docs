@@ -81,7 +81,7 @@ and which DNS provider validates those requests.
       [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md).
 
       ```shell
-      apiVersion: cert-manager.io/v1alpha2
+      apiVersion: cert-manager.io/v1
       kind: ClusterIssuer
       metadata:
         name: letsencrypt-dns-issuer
@@ -112,7 +112,7 @@ and which DNS provider validates those requests.
 
     ```shell
     kubectl apply -f - <<EOF
-    apiVersion: cert-manager.io/v1alpha2
+    apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
     metadata:
       name: letsencrypt-http01-issuer

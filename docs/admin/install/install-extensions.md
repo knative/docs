@@ -47,7 +47,7 @@ The tabs below expand to show instructions for installing each Serving extension
     via cert-manager.
 
     1. First, install
-      [cert-manager version `0.12.0` or higher](../serving/installing-cert-manager.md)
+      [cert-manager version `v1.0.0` or higher](../serving/installing-cert-manager.md)
 
     2. Next, install the component that integrates Knative with cert-manager:
 
