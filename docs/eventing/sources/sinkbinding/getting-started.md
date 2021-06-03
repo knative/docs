@@ -3,9 +3,9 @@
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
 This topic describes how to create a SinkBinding object.
-The SinkBinding resolves a sink as a URI, sets the URI in the environment
+SinkBinding resolves a sink as a URI, sets the URI in the environment
 variable `K_SINK`, and adds the URI to a subject using `K_SINK`.
-If the URI changes, the SinkBinding updates the value of `K_SINK`.
+If the URI changes, SinkBinding updates the value of `K_SINK`.
 
 In the examples below, the sink is a Knative Service and the subject is a CronJob.
 If you have an existing subject and sink, you can replace the examples with your
@@ -49,7 +49,7 @@ To set the SinkBinding object to inclusion mode:
 
 ## Create a namespace
 
-If you do not have an existing namespace, create a namespace for the SinkBinding:
+If you do not have an existing namespace, create a namespace for the SinkBinding object:
 
 ```bash
 kubectl create namespace <namespace>
@@ -67,7 +67,7 @@ For example, `sinkbinding-example`.
 
 The sink can be any addressable Kubernetes object that can receive events.
 
-If you do not have an existing sink that you want to connect to the SinkBinding,
+If you do not have an existing sink that you want to connect to the SinkBinding object,
 create a Knative service.
 
 !!! note
@@ -81,6 +81,7 @@ create a Knative service.
     kn service create <app-name> --image <image-url>
     ```
     Where:
+
     - `<app-name>` is the name of the application.
     - `<image-url>` is the URL of the image container.
 
@@ -91,25 +92,26 @@ create a Knative service.
     ```
 
 === "YAML"
-    1. Create a Knative service by running:
+    Create a Knative service by running:
 
-        ```yaml
-        kubectl apply -f - <<EOF
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        metadata:
-          name: <app-name>
+    ```yaml
+    kubectl apply -f - <<EOF
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: <app-name>
+    spec:
+      template:
         spec:
-          template:
-            spec:
-              containers:
-                - image: <image-url>
-        EOF
-        ```
-        Where:
-        - `<app-name>` is the name of the application. For example, `event-display`.
-        - `<image-url>` is the URL of the image container.
-        For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`
+          containers:
+            - image: <image-url>
+    EOF
+    ```
+    Where:
+
+    - `<app-name>` is the name of the application. For example, `event-display`.
+    - `<image-url>` is the URL of the image container.
+    For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`.
 
 
 ## Create a subject
@@ -183,17 +185,19 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
       --ce-override "<cloudevent-overrides>"
     ```
     Where:
+
     - `<name>` is the name of the SinkBinding object you want to create.
     - `<namespace>` is the namespace you created for your SinkBinding to use.
     - `<subject>` is the subject to connect. Examples:
-      - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
-      - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
-      - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
+        - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
+        - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
+        - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
     - `<sink>` is the sink to connect. For example `http://event-display.svc.cluster.local`.
     - Optional: `<cloudevent-overrides>` in the form `key=value`.
     Cloud Event overrides control the output format and modifications of the event
     sent to the sink and are applied before sending the event.
     You can provide this flag multiple times.
+    <!-- TODO provide link to information about the flags for the kn command -->
 
     For example:
     ```bash
@@ -203,8 +207,6 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
       --sink http://event-display.svc.cluster.local \
       --ce-override "sink=bound"
     ```
-
-<!-- TODO provide link to information about the flags for the kn command -->
 
 === "YAML"
     Create a `SinkBinding` object by running:
@@ -230,6 +232,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     EOF
     ```
     Where:
+
     - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
     - `<api-version>` is the API version of the subject. For example `batch/v1`.
     - `<kind>` is the Kind of your subject. For example `Job`.
@@ -242,7 +245,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     object, see [Sink Binding Reference](reference.md).
 
 
-## Verify the SinkBinding
+## Verify the SinkBinding object
 
 1. Verify that a message was sent to the Knative eventing system by looking at the
 service logs for your sink:
@@ -251,6 +254,7 @@ service logs for your sink:
     kubectl logs -l <sink> -c <container> --since=10m
     ```
     Where:
+
     - `<sink>` is the name of your sink.
     - `<container>` is the name of the container your sink is running in.
 
@@ -258,6 +262,7 @@ service logs for your sink:
     ```bash
     $ kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
     ```
+
 2. From the output, observe the lines showing the request headers and body of the event message,
 sent by the source to the display function. For example:
 
@@ -282,10 +287,9 @@ sent by the source to the display function. For example:
         }
     ```
 
-
 ## Cleanup
 
-To delete the SinkBinding and all of the related resources in the namespace,
+To delete the SinkBinding object and all of the related resources in the namespace,
 delete the namespace by running:
 
 ```shell

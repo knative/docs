@@ -49,6 +49,10 @@ The GCP broker is optimized for running in GCP. For more details, refer to the [
 
 For information about the Apache Kafka broker, see [link](./kafka-broker).
 
+#### RabbitMQ broker
+
+The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlying implementation. For more information, see the [RabbitMQ broker](https://github.com/knative-sandbox/eventing-rabbitmq) in GitHub.
+
 ## Next steps
 
 - Create a [MT channel-based broker](./create-mtbroker).
