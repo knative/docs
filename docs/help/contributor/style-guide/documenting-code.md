@@ -3,7 +3,16 @@
 ??? tip "Looking for a template?"
     //todo
 
-## Documenting Commands
+## Words requiring code formatting
+Use code formatting to indicate special purpose text. Apply code formatting to the following content:
+
+* Filenames and path names
+* Any text that goes into a CLI
+
+## Specify programming language
+
+
+## Documenting commands
 
 >**The standard line is “X the Y by running the command:”**
 
@@ -49,41 +58,37 @@
     ```
     Where `<service-name>` is the name of your Knative Service.
 
-
 ## Documenting YAML
 >Use **kubectl apply** for files/objects that the user creates — it works for both “create” and “update”, and the source of truth is their local files.
-Use **kubectl edit** for files which are shipped as part of the Knative software, like the serving/eventing ConfigMaps.
+
+>Use **kubectl edit** for files which are shipped as part of the Knative software, like the serving/eventing ConfigMaps.
+
+> be sure to use ```yaml at the beginning of your code block if you are typing yaml code as part of a CLI command
 
 === ":white_check_mark: Correct"
 
     Creating a new file:
-    ```
+    ```yaml
     kubectl apply -f - <<EOF
     # code
     EOF
     ```
 
     Editing a file:
-    ```
+    ```bash
     kubectl -n <namespace> edit cm <filename>
     ```
 
 === ":no_entry: Incorrect"
-    ```
+    ```yaml
     cat <<EOF | kubectl create -f -
     # code
     EOF
     ```
 
 
-## Words requiring code formatting
-Use code formatting to indicate special purpose text. Apply code formatting to the following content:
 
-* Filenames and path names
-* Any text that goes into a CLI
-
-
-## Referencing Variables in Code Blocks
+## Referencing variables in code blocks
 
 >Format variables in code blocks like so: <service-name>
 
@@ -93,7 +98,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 - Explanation format is “Where... `<service-name>` is…"
 - If there are multiple variables, see below.
 
-### Single Variable
+### Single variable
 === ":white_check_mark: Correct"
     ```bash
     kn create service <service-name>
@@ -107,7 +112,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     {SERVICE_NAME} = The name of your service
 
 
-### Multiple Variables
+### Multiple variables
 
 === ":white_check_mark: Correct"
     ```bash
@@ -126,9 +131,11 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     Where `<revision-name>` is the desired name of your revision
 
 
-## CLI Input and Output
-### CLI Input
-> Be sure to specify the language your code is in, bash for any CLI commands.
+## CLI input and output
+### CLI input
+> Be sure to specify the language your code is in.
+
+> Specify bash for any CLI commands.
 
 === ":white_check_mark: Correct"
     ```go
