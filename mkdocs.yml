@@ -48,6 +48,9 @@ nav:
         - Logging: admin/collecting-logs/README.md
         - Metrics: admin/collecting-metrics/README.md
         - Uninstalling Knative: admin/install/uninstall.md
+        # Serving config
+        - Knative Serving configuration:
+          - Configure Deployment resources: admin/serving/deployment.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
@@ -82,9 +85,8 @@ nav:
         - Configuring scale bounds: serving/autoscaling/scale-bounds.md
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
         - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/index.md
-    # Administrator topics
+    # Admin topics - serving
       - Administrator Topics:
-        - Deployment Configuration: serving/services/deployment.md
         - Kubernetes services: serving/knative-kubernetes-services.md
         - Accessing request traces: serving/accessing-traces.md
         - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
@@ -290,6 +292,7 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'serving/services/deployment.md': 'admin/serving/deployment.md'
         'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
         'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
         'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
