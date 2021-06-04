@@ -257,7 +257,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: docs/snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
@@ -277,6 +278,7 @@ plugins:
       glob:
         # Exclude files that contain hugo specific shortcodes
         # (either the include shortcode or not-converted-yet tabs).
+        - snippets/*
         - smoketest.md
         - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
