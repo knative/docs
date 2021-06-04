@@ -5,8 +5,8 @@ This section covers conceptual information about which Autoscaler types are supp
 
 Knative Serving supports the implementation of Knative Pod Autoscaler (KPA) and Kubernetes' Horizontal Pod Autoscaler (HPA). The features and limitations of each of these Autoscalers are listed below.
 
-**IMPORTANT:** If you want to use Kubernetes Horizontal Pod Autoscaler (HPA),
-you must install it after you install Knative Serving.
+!!! important
+    If you want to use Kubernetes Horizontal Pod Autoscaler (HPA), you must install it after you install Knative Serving.
 For how to install HPA, see [Install optional Serving extensions](../../admin/install/install-extensions.md#install-optional-serving-extensions).
 ### Knative Pod Autoscaler (KPA)
 
