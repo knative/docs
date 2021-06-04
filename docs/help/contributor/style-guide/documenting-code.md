@@ -184,7 +184,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     ```
     ````
 
-### CLI Output
+### CLI output
 > CLI Output should include the custom css "{ .bash .no-copy }" in place of "bash" which removes the "Copy to clipboard button" on the right side of the code block
 === ":white_check_mark: Correct"
     ```{ .bash .no-copy }
