@@ -63,7 +63,7 @@ Use **kubectl edit** for files which are shipped as part of the Knative software
     EOF
     ```
 
-    Editing a file:
+    Editing a ConfigMap:
     ```
     kubectl -n <namespace> edit configmap <resource-name>
     ```
