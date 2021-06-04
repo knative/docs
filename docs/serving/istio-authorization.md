@@ -1,9 +1,3 @@
----
-title: "Enabling requests to Knative services when additional authorization policies are enabled"
-weight: 25
-type: "docs"
----
-
 # Enabling requests to Knative services when additional authorization policies are enabled
 
 Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services.
@@ -56,7 +50,7 @@ $ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knati
 
 - In STRICT mode, requests will simply be rejected.
 
-To understand when requests are forwarded through the activator, see [documentation](./autoscaling/target-burst-capacity/) on the `TargetBurstCapacity` setting.
+To understand when requests are forwarded through the activator, see [documentation](../load-balancing/target-burst-capacity/) on the `TargetBurstCapacity` setting.
 
 This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.
 
@@ -96,11 +90,9 @@ spec:
 
 ## Health checking and metrics collection
 
-In addition to allowing your application path, you'll need to configure Istio AuthorizationPolicy
-to allow health checking and metrics collection to your applications from system pods.
-You can allow access from system pods [by paths](#allow-access-from-system-pods-by-paths).
+In addition to allowing your application path, you'll need to configure Istio AuthorizationPolicy to allow health checking and metrics collection to your applications from system pods. You can allow access from system pods by paths.
 
-## Allowing access from system pods by paths
+### Allowing access from system pods by paths
 
 Knative system pods access your application using the following paths:
 
