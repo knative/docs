@@ -2,9 +2,24 @@
 
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
-Services.
-To learn more about using secure connections in Knative, see
-[Configuring HTTPS with TLS certificates](./using-a-tls-cert.md).
+Services. To learn more about using secure connections in Knative, see
+[Configuring HTTPS with TLS certificates](../using-a-tls-cert).
+
+## Before you begin
+
+The following must be installed on your Knative cluster:
+
+- [Knative Serving](../../../admin/install/).
+- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher. See [Install a networking layer](../../../admin/install/install-serving-with-yaml#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../../../admin/install/installing-istio#installing-istio-with-SDS-to-secure-the-ingress-gateway).
+
+    !!! note
+        Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
+
+- [`cert-manager` version `1.0.0` or higher](../installing-cert-manager).
+- Your Knative cluster must be configured to use a [custom domain](../using-a-custom-domain).
+- Your DNS provider must be setup and configured to your domain.
+- If you want to use HTTP-01 challenge, you need to configure your custom
+domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
 
 ## Automatic TLS provision mode
 
@@ -28,34 +43,12 @@ Knative supports the following Auto TLS modes:
     - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
     - **HTTP-01 does not support provisioning a certificate per namespace.**
 
-## Before you begin
-
-You must meet the following prerequisites to enable Auto TLS:
-
-- The following must be installed on your Knative cluster:
-  - [Knative Serving](../install/).
-  - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher.
-  See [Install a networking layer](../../admin/install/install-serving-with-yaml/#install-a-networking-layer).<br>
-!!! note
-    Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
-- [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
-- Your Knative cluster must be configured to use a
-  [custom domain](./using-a-custom-domain.md).
-- Your DNS provider must be setup and configured to your domain.
-- If you want to use HTTP-01 challenge, you need to configure your custom
-domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
-
 ## Enabling Auto TLS
 
-To enable support for Auto TLS in Knative:
-
-### Create cert-manager ClusterIssuer
-
-1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster
-to define who issues the TLS certificates, how requests are validated,
+1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster to define who issues the TLS certificates, how requests are validated,
 and which DNS provider validates those requests.
 
-    #### ClusterIssuer for DNS-01 challenge
+    ### ClusterIssuer for DNS-01 challenge
 
     Use the cert-manager reference to determine how to configure your
     `ClusterIssuer` file:
@@ -71,7 +64,7 @@ and which DNS provider validates those requests.
       the Let's Encrypt account info, required `DNS-01` challenge type, and
       Cloud DNS provider info defined. For the complete Google Cloud DNS
       example, see
-      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md).
+      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp).
 
       ```shell
       apiVersion: cert-manager.io/v1
@@ -99,11 +92,11 @@ and which DNS provider validates those requests.
                   key: key.json
       ```
 
-    ####  ClusterIssuer for HTTP-01 challenge
+    ###  ClusterIssuer for HTTP-01 challenge
 
     Run the following command to apply the ClusterIssuer for HTT01 challenge:
 
-    ```shell
+    ```yaml
     kubectl apply -f - <<EOF
     apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
@@ -123,8 +116,8 @@ and which DNS provider validates those requests.
 
 1.  Ensure that the ClusterIssuer is created successfully:
 
-    ```shell
-    kubectl get clusterissuer <cluster-issuer-name> --output yaml
+    ```bash
+    kubectl get clusterissuer <cluster-issuer-name> -o yaml
     ```
 
     Result: The `Status.Conditions` should include `Ready=True`.

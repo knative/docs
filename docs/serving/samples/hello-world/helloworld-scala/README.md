@@ -67,7 +67,7 @@ You can learn more about the build configuration syntax
 
 ## Configuring the Service descriptor
 
-Importantly, in [service.yaml](./service.yaml) **change the
+Importantly, in the `service.yaml` file, **change the
 image reference to match up with the repository**, name, and version specified
 in the [build.sbt](./build.sbt) in the previous section.
 
@@ -113,16 +113,15 @@ local Docker Repository.
 
     Apply the [Service yaml definition](./service.yaml):
 
-    ```shell
-    kubectl apply --filename service.yaml
+    ```bash
+    kubectl apply -f service.yaml
     ```
-
 
 === "kn"
 
      With `kn` you can deploy the service with
 
-       ```shell
+       ```bash
        kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala --env TARGET="Scala Sample v1"
        ```
 
@@ -145,16 +144,11 @@ local Docker Repository.
       http://helloworld-scala.default.1.2.3.4.sslip.io
       ```
 
-
-
-
-
-
 === "kubectl"
 
     Then find the service host:
 
-    ```shell
+    ```bash
     kubectl get ksvc helloworld-scala \
         --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
@@ -165,7 +159,7 @@ local Docker Repository.
 
     Finally, to try your service, use the obtained URL:
 
-    ```shell
+    ```bash
     curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
     ```
 
@@ -188,26 +182,16 @@ local Docker Repository.
     curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
     ```
 
-
-
-
-
 ## Cleanup
-
 
 === "kubectl"
 
-    ```shell
-    kubectl delete --filename service.yaml
+    ```bash
+    kubectl delete -f service.yaml
     ```
-
-    ```
-    kubetl delete --filename service.yaml
-    ```
-
 
 === "kn"
 
-    ```shell
+    ```bash
     kn service delete helloworld-scala
     ```

@@ -31,9 +31,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 
 ## Before you begin
 
-- A Kubernetes cluster with
-  [Knative Eventing](../../../getting-started.md#installing-knative-eventing)
-  installed.
+- A Kubernetes cluster with [Knative Eventing](../../../../admin/install) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -42,105 +40,105 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 1. Create a new file named `helloworld.go` and paste the following code. This
    code creates a basic web server which listens on port 8080:
 
-   ```go
-    import (
-        "context"
-        "log"
+       ```go
+        import (
+            "context"
+            "log"
 
-        cloudevents "github.com/cloudevents/sdk-go/v2"
-        "github.com/google/uuid"
-    )
+            cloudevents "github.com/cloudevents/sdk-go/v2"
+            "github.com/google/uuid"
+        )
 
-    func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
-        // Here is where your code to process the event will go.
-        // In this example we will log the event msg
-        log.Printf("Event received. \n%s\n", event)
-        data := &HelloWorld{}
-        if err := event.DataAs(data); err != nil {
-            log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
-            return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
+        func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
+            // Here is where your code to process the event will go.
+            // In this example we will log the event msg
+            log.Printf("Event received. \n%s\n", event)
+            data := &HelloWorld{}
+            if err := event.DataAs(data); err != nil {
+                log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
+                return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
+            }
+            log.Printf("Hello World Message from received event %q", data.Msg)
+
+            // Respond with another event (optional)
+            // This is optional and is intended to show how to respond back with another event after processing.
+            // The response will go back into the knative eventing system just like any other event
+            newEvent := cloudevents.NewEvent()
+            newEvent.SetID(uuid.New().String())
+            newEvent.SetSource("knative/eventing/samples/hello-world")
+            newEvent.SetType("dev.knative.samples.hifromknative")
+            if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
+                return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+            }
+            log.Printf("Responding with event\n%s\n", newEvent)
+            return &newEvent, nil
         }
-        log.Printf("Hello World Message from received event %q", data.Msg)
 
-        // Respond with another event (optional)
-        // This is optional and is intended to show how to respond back with another event after processing.
-        // The response will go back into the knative eventing system just like any other event
-        newEvent := cloudevents.NewEvent()
-        newEvent.SetID(uuid.New().String())
-        newEvent.SetSource("knative/eventing/samples/hello-world")
-        newEvent.SetType("dev.knative.samples.hifromknative")
-        if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
-            return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+        func main() {
+            log.Print("Hello world sample started.")
+            c, err := cloudevents.NewDefaultClient()
+            if err != nil {
+                log.Fatalf("failed to create client, %v", err)
+            }
+            log.Fatal(c.StartReceiver(context.Background(), receive))
         }
-        log.Printf("Responding with event\n%s\n", newEvent)
-        return &newEvent, nil
-    }
-
-    func main() {
-        log.Print("Hello world sample started.")
-        c, err := cloudevents.NewDefaultClient()
-        if err != nil {
-            log.Fatalf("failed to create client, %v", err)
-        }
-        log.Fatal(c.StartReceiver(context.Background(), receive))
-    }
-   ```
+       ```
 
 1. Create a new file named `eventschemas.go` and paste the following code. This
    defines the data schema of the CloudEvents.
 
-   ```go
-    package main
+       ```go
+        package main
 
-    // HelloWorld defines the Data of CloudEvent with type=dev.knative.samples.helloworld
-    type HelloWorld struct {
-      // Msg holds the message from the event
-      Msg string `json:"msg,omitempty,string"`
-    }
+        // HelloWorld defines the Data of CloudEvent with type=dev.knative.samples.helloworld
+        type HelloWorld struct {
+          // Msg holds the message from the event
+          Msg string `json:"msg,omitempty,string"`
+        }
 
-    // HiFromKnative defines the Data of CloudEvent with type=dev.knative.samples.hifromknative
-    type HiFromKnative struct {
-      // Msg holds the message from the event
-      Msg string `json:"msg,omitempty,string"`
-    }
-   ```
+        // HiFromKnative defines the Data of CloudEvent with type=dev.knative.samples.hifromknative
+        type HiFromKnative struct {
+          // Msg holds the message from the event
+          Msg string `json:"msg,omitempty,string"`
+        }
+       ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the code
    block below into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
-   ```docker
-    # Use the official Golang image to create a build artifact.
-    # This is based on Debian and sets the GOPATH to /go.
-    # https://hub.docker.com/_/golang
-    FROM golang:1.14 as builder
+       ```docker
+        # Use the official Golang image to create a build artifact.
+        # This is based on Debian and sets the GOPATH to /go.
+        # https://hub.docker.com/_/golang
+        FROM golang:1.14 as builder
 
-    # Copy local code to the container image.
-    WORKDIR /app
+        # Copy local code to the container image.
+        WORKDIR /app
 
-    # Retrieve application dependencies using go modules.
-    # Allows container builds to reuse downloaded dependencies.
-    COPY go.* ./
-    RUN go mod download
+        # Retrieve application dependencies using go modules.
+        # Allows container builds to reuse downloaded dependencies.
+        COPY go.* ./
+        RUN go mod download
 
-    # Copy local code to the container image.
-    COPY . ./
+        # Copy local code to the container image.
+        COPY . ./
 
-    # Build the binary.
-    # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-    RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly  -v -o helloworld
+        # Build the binary.
+        # -mod=readonly ensures immutable go.mod and go.sum in container builds.
+        RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly  -v -o helloworld
 
-    # Use a Docker multi-stage build to create a lean production image.
-    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-    FROM alpine:3
-    RUN apk add --no-cache ca-certificates
+        # Use a Docker multi-stage build to create a lean production image.
+        # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+        FROM alpine:3
+        RUN apk add --no-cache ca-certificates
 
-    # Copy the binary to the production image from the builder stage.
-    COPY --from=builder /app/helloworld /helloworld
+        # Copy the binary to the production image from the builder stage.
+        COPY --from=builder /app/helloworld /helloworld
 
-    # Run the web service on container startup.
-    CMD ["/helloworld"]
-   ```
+        # Run the web service on container startup.
+        CMD ["/helloworld"]
+       ```
 
 1. Create a new file, `sample-app.yaml` and copy the following service
    definition into the file. Make sure to replace `{username}` with your Docker
@@ -218,9 +216,9 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 1. Use the go tool to create a
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
-   ```shell
-   go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
-   ```
+       ```shell
+       go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
+       ```
 
 ## Building and deploying the sample
 
@@ -231,25 +229,24 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-go .
+       ```shell
+       # Build the container on your local machine
+       docker build -t {username}/helloworld-go .
 
-   # Push the container to docker registry
-   docker push {username}/helloworld-go
-   ```
+       # Push the container to docker registry
+       docker push {username}/helloworld-go
+       ```
 
 1. After the build has completed and the container is pushed to docker hub, you
    can deploy the sample application into your cluster. Ensure that the
    container image value in `sample-app.yaml` matches the container you built in
    the previous step. Apply the configuration using `kubectl`:
 
-   ```shell
-   kubectl apply --filename sample-app.yaml
-   ```
+       ```shell
+       kubectl apply --filename sample-app.yaml
+       ```
 
-   1. Above command created a namespace `knative-samples` and create a default
-      Broker it. Verify using the following command:
+1. Above command created a namespace `knative-samples` and create a default Broker it. Verify using the following command:
 
       ```shell
       kubectl get broker --namespace knative-samples
@@ -258,9 +255,9 @@ folder) you're ready to build and deploy the sample app.
       **Note:** you can also use injection based on labels with the
       Eventing sugar controller.
       For how to install the Eventing sugar controller, see
-      [Install optional Eventing extensions](../../../../install/install-extensions.md#install-optional-eventing-extensions).
+      [Install optional Eventing extensions](../../../../admin/install/install-extensions#install-optional-eventing-extensions).
 
-   1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
+1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.
 
       ```shell
@@ -269,8 +266,9 @@ folder) you're ready to build and deploy the sample app.
       kubectl --namespace knative-samples get svc helloworld-go
       ```
 
-   1. It created a Knative Eventing Trigger to route certain events to the
+1. It created a Knative Eventing Trigger to route certain events to the
       helloworld-go application. Make sure that Ready=true
+
       ```shell
       kubectl --namespace knative-samples get trigger helloworld-go
       ```
@@ -286,28 +284,31 @@ We can send an http request directly to the [Broker](../../../broker/)
 with correct CloudEvent headers set.
 
 1. Deploy a curl pod and SSH into it
-   ```shell
-   kubectl --namespace knative-samples run curl --image=radial/busyboxplus:curl -it
-   ```
+
+       ```bash
+       kubectl -n knative-samples run curl --image=radial/busyboxplus:curl -it
+       ```
+
 1. Get the Broker URL
-   ```shell
-   kubectl --namespace knative-samples get broker default
-   ```
+
+       ```bash
+       kubectl -n knative-samples get broker default
+       ```
+
 1. Run the following in the SSH terminal. Please replace the URL with the URL of
    the default broker.
 
-   ```shell
-   curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default" \
-       -X POST \
-       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: dev.knative.samples.helloworld" \
-       -H "Ce-Source: dev.knative.samples/helloworldsource" \
-       -H "Content-Type: application/json" \
-       -d '{"msg":"Hello World from the curl pod."}'
-
-   exit
-   ```
+    ```bash
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default" \
+    -X POST \
+    -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+    -H "Ce-Specversion: 1.0" \
+    -H "Ce-Type: dev.knative.samples.helloworld" \
+    -H "Ce-Source: dev.knative.samples/helloworldsource" \
+    -H "Content-Type: application/json" \
+    -d '{"msg":"Hello World from the curl pod."}'
+    exit
+    ```
 
 ### Verify that event is received by helloworld-go app
 
@@ -316,13 +317,13 @@ back with another event.
 
 1.  Display helloworld-go app logs
 
-    ```shell
+    ```bash
     kubectl --namespace knative-samples logs -l app=helloworld-go --tail=50
     ```
 
     You should see something similar to:
 
-    ```shell
+    ```bash
     Event received.
     Validation: valid
     Context Attributes,
@@ -353,9 +354,7 @@ back with another event.
 
     ```
 
-    Play around with the CloudEvent attributes in the curl command and the
-    trigger specification to understand how
-    [Triggers work](../../../broker/README.md#trigger).
+Play around with the CloudEvent attributes in the curl command and the trigger specification to [understand how triggers work](../../../broker/triggers).
 
 ## Verify reply from helloworld-go app
 
@@ -366,8 +365,8 @@ mesh via the Broker and can be delivered to other services using a Trigger
 
 1. Deploy a pod that receives any CloudEvent and logs the event to its output.
 
-      ```shell
-      kubectl --namespace knative-samples apply --filename - << END
+      ```yaml
+      kubectl -n knative-samples apply -f - <<EOF
       # event-display app deploment
       apiVersion: apps/v1
       kind: Deployment
@@ -402,65 +401,66 @@ mesh via the Broker and can be delivered to other services using a Trigger
           - protocol: TCP
             port: 80
             targetPort: 8080
-      END
+      EOF
       ```
 
 1. Create a trigger to deliver the event to the above service
 
-   ```shell
-   kubectl --namespace knative-samples apply --filename - << END
-   apiVersion: eventing.knative.dev/v1
-   kind: Trigger
-   metadata:
-     name: event-display
-     namespace: knative-samples
-   spec:
-     broker: default
-     filter:
-       attributes:
-         type: dev.knative.samples.hifromknative
-         source: knative/eventing/samples/hello-world
-     subscriber:
-       ref:
-         apiVersion: v1
-         kind: Service
+       ```yaml
+       kubectl -n knative-samples apply -f - <<EOF
+       apiVersion: eventing.knative.dev/v1
+       kind: Trigger
+       metadata:
          name: event-display
-   END
-   ```
+         namespace: knative-samples
+       spec:
+         broker: default
+         filter:
+           attributes:
+             type: dev.knative.samples.hifromknative
+             source: knative/eventing/samples/hello-world
+         subscriber:
+           ref:
+             apiVersion: v1
+             kind: Service
+             name: event-display
+       EOF
+       ```
 
-1. [Send a CloudEvent to the Broker](###Send-CloudEvent-to-the-Broker)
+1. [Send a CloudEvent to the Broker](#send-cloudevent-to-the-broker)
 
-1. Check the logs of event-display service
-   ```shell
-   kubectl --namespace knative-samples logs -l app=event-display --tail=50
-   ```
-   You should see something similar to:
-   ```shell
-     cloudevents.Event
-     Validation: valid
-     Context Attributes,
-       specversion: 1.0
-       type: dev.knative.samples.hifromknative
-       source: knative/eventing/samples/hello-world
-       id: 8a7384b9-8bbe-4634-bf0f-ead07e450b2a
-       time: 2019-10-04T22:53:39.844943931Z
-       datacontenttype: application/json
-     Extensions,
-       knativearrivaltime: 2019-10-04T22:53:39Z
-       knativehistory: default-kn2-ingress-kn-channel.knative-samples.svc.cluster.local
-       traceparent: 00-4b01db030b9ea04bb150b77c8fa86509-2740816590a7604f-00
-     Data,
-       {
-         "msg": "Hi from helloworld-go app!"
-       }
-   ```
+1. Check the logs of `event-display` service:
 
-**Note: You could use the above approach to test your applications too.**
+    ```bash
+    kubectl -n knative-samples logs -l app=event-display --tail=50
+    ```
+
+    You should see something similar to:
+
+    ```bash
+      cloudevents.Event
+      Validation: valid
+      Context Attributes,
+        specversion: 1.0
+        type: dev.knative.samples.hifromknative
+        source: knative/eventing/samples/hello-world
+        id: 8a7384b9-8bbe-4634-bf0f-ead07e450b2a
+        time: 2019-10-04T22:53:39.844943931Z
+        datacontenttype: application/json
+      Extensions,
+        knativearrivaltime: 2019-10-04T22:53:39Z
+        knativehistory: default-kn2-ingress-kn-channel.knative- samples.svc.cluster.local
+        traceparent: 00-4b01db030b9ea04bb150b77c8fa86509-2740816590a7604f-00
+      Data,
+        {
+          "msg": "Hi from helloworld-go app!"
+        }
+    ```
 
 ## Removing the sample app deployment
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
-kubectl delete --filename sample-app.yaml
+```bash
+kubectl delete -f sample-app.yaml
 ```
