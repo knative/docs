@@ -39,7 +39,6 @@ nav:
             - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
           - Installing Istio for Knative: admin/install/installing-istio.md
           - Using a Knative-based Offering: admin/install/knative-offerings.md
-          - ... | install/*
         - Checking your Knative version: check-install-version.md
         - Upgrading your installation:
           - Overview: admin/upgrade/README.md
@@ -132,7 +131,6 @@ nav:
         - Secrets - Go: serving/samples/secrets-go/index.md
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/index.md
         - Traffic splitting: serving/samples/traffic-splitting/index.md
-        - ... | *.md
     # Eventing
     - Knative Eventing:
       - Overview: eventing/README.md

@@ -42,8 +42,7 @@ You must meet the following prerequisites to enable Auto TLS:
 - The following must be installed on your Knative cluster:
   - [Knative Serving](../install/).
   - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher.
-  See [Install a networking layer](../install/install-serving-with-yaml.md#install-a-networking-layer) or
-  [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).<br>
+  See [Install a networking layer](../../admin/install/install-serving-with-yaml/#install-a-networking-layer).<br>
     **Note:** Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
 - [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
