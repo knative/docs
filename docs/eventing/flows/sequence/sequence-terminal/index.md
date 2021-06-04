@@ -10,7 +10,7 @@ aliases:
 # Sequence terminal
 
 We are going to create the following logical configuration. We create a
-PingSource, feeding events to a [`Sequence`](../../../flows/sequence.md).
+PingSource, feeding events to a [`Sequence`](../).
 Sequence can then do either external work, or out of band create additional
 events.
 
