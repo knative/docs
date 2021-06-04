@@ -1,19 +1,8 @@
----
-title: "Installing Knative Serving using YAML files"
-linkTitle: "Install Serving using YAML"
-weight: 02
-type: "docs"
-showlandingtoc: "false"
----
-
 # Installing Knative Serving using YAML files
 
 This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.
 
-## Prerequisites
-
-Before installation, you must meet the prerequisites.
-See [Knative Prerequisites](./prerequisites.md).
+--8<-- "prerequisites.md"
 
 ## Install the Serving component
 
@@ -32,9 +21,7 @@ To install the serving component:
     ```
 
     !!! info
-        For information about the YAML files in the Knative Serving and Eventing releases, see
-        [Description Tables for YAML Files](./installation-files.md).
-
+        For information about the YAML files in Knative Serving, see [Description Tables for YAML Files](./serving-installation-files.md).
 
 ## Install a networking layer
 
@@ -197,7 +184,7 @@ Follow the procedure for the networking layer of your choice:
 
     The following commands install Istio and enable its Knative integration.
 
-    1. Install a properly configured Istio ([Advanced installation](./installing-istio.md))
+    1. Install a properly configured Istio ([Advanced installation](../installing-istio.md))
 
         ```bash
         kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
@@ -217,7 +204,6 @@ Follow the procedure for the networking layer of your choice:
 
         !!! tip
             Save this to use in the `Configure DNS` section.
-
 
 === "Kong"
 
@@ -247,8 +233,6 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the `Configure DNS` section.
 
-
-
 ## Verify the installation
 
 !!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"
@@ -256,7 +240,6 @@ Follow the procedure for the networking layer of your choice:
     ```{ .bash .no-copy }
     kubectl get pods --namespace knative-serving
     ```
-
 
 ## Configure DNS
 
@@ -290,19 +273,21 @@ Follow the procedure for the DNS of your choice:
 
     1. If the networking layer produced an External IP address, then configure a
       wildcard `A` record for the domain:
-      ```bash
-      # Here knative.example.com is the domain suffix for your cluster
-      *.knative.example.com == A 35.233.41.212
-      ```
 
-    1. If the networking layer produced a CNAME, then configure a CNAME record for
-      the domain:
+        ```bash
+        # Here knative.example.com is the domain suffix for your cluster
+        *.knative.example.com == A 35.233.41.212
+        ```
+
+    1. If the networking layer produced a CNAME, then configure a CNAME record for the domain:
+
         ```bash
         # Here knative.example.com is the domain suffix for your cluster
         *.knative.example.com == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
         ```
 
     1. Once your DNS provider has been configured, direct Knative to use that domain:
+
         ```bash
         # Replace knative.example.com with your domain suffix
         kubectl patch configmap/config-domain \
@@ -324,6 +309,7 @@ Follow the procedure for the DNS of your choice:
     To access your application using `curl` using this method:
 
     1. After starting your application, get the URL of your application:
+
         ```bash
         kubectl get ksvc
         ```
@@ -338,9 +324,8 @@ Follow the procedure for the DNS of your choice:
     1. Instruct `curl` to connect to the External IP or CNAME defined by the
       networking layer in section 3 above, and use the `-H "Host:"` command-line
       option to specify the Knative application's host name. For example, if the
-      networking layer defines your External IP and port to be
-      `http://192.168.39.228:32198` and you wish to access the above
-      `helloworld-go` application, use:
+      networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the above `helloworld-go` application, use:
+
         ```bash
         curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
         ```
@@ -355,12 +340,90 @@ Follow the procedure for the DNS of your choice:
 
     Refer to the "Real DNS" method for a permanent solution.
 
-## Next steps
+## Install optional Serving extensions
 
-After installing Knative Serving:
+The tabs below expand to show instructions for installing each Serving extension.
 
-- [Installing Knative Eventing using YAML files](./install-eventing-with-yaml.md)
+=== "HPA autoscaling"
 
-- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md).
+    Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
+    for driving autoscaling decisions. The following command will install the
+    components needed to support HPA-class autoscaling:
 
-- To easily interact with Knative Services, [install the `kn` CLI](/docs/client/install-kn.md)
+    ```bash
+    kubectl apply -f {{ artifact(repo="serving",file="serving-hpa.yaml")}}
+    ```
+
+    <!-- TODO(https://github.com/knative/docs/issues/2152): Link to a more in-depth guide on HPA-class autoscaling -->
+
+=== "TLS with cert-manager"
+
+    Knative supports automatically provisioning TLS certificates via
+    [cert-manager](https://cert-manager.io/docs/). The following commands will
+    install the components needed to support the provisioning of TLS certificates
+    via cert-manager.
+
+    1. First, install [cert-manager version `v1.0.0` or higher](../../../../serving/installing-cert-manager)
+
+    1. Next, install the component that integrates Knative with `cert-manager`:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="net-certmanager",file="release.yaml")}}
+        ```
+
+    1. Now configure Knative to
+      [automatically configure TLS certificates](../../../../serving/using-auto-tls).
+
+=== "TLS via HTTP01"
+
+    Knative supports automatically provisioning TLS certificates using Encrypt HTTP01 challenges. The following commands will install the components needed to support TLS.
+
+    1. Install the `net-http01` controller:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="net-http01",file="release.yaml")}}
+        ```
+
+    2. Configure the `certificate.class` to use this certificate type:
+
+        ```bash
+        kubectl patch configmap/config-network \
+          --namespace knative-serving \
+          --type merge \
+          --patch '{"data":{"certificate.class":"net-http01.certificate.networking.knative.dev"}}'
+        ```
+
+    3. Enable auto-TLS.
+
+        ```bash
+        kubectl patch configmap/config-network \
+          --namespace knative-serving \
+          --type merge \
+          --patch '{"data":{"autoTLS":"Enabled"}}'
+        ```
+
+
+=== "TLS wildcard support"
+
+    If you are using a Certificate implementation that supports provisioning
+    wildcard certificates (e.g. cert-manager with a DNS01 issuer), then the most
+    efficient way to provision certificates is with the namespace wildcard
+    certificate controller. The following command will install the components needed
+    to provision wildcard certificates in each namespace:
+
+    ```bash
+    kubectl apply -f {{ artifact(repo="serving",file="serving-nscert.yaml")}}
+    ```
+
+    !!! warning
+        Note this will not work with HTTP01 either via cert-manager or the net-http01
+        options.
+
+=== "DomainMapping CRD"
+
+    The `DomainMapping` CRD allows a user to map a Domain Name that they own to a specific Knative Service.
+
+    ```bash
+    kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping-crds.yaml")}}
+    kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping.yaml")}}
+    ```
