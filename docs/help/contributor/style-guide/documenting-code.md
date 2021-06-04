@@ -5,19 +5,19 @@
 
 ## Documenting Commands
 
->**The standard line is “X the Y by running:”**
+>**The standard line is “X the Y by running the command:”**
 
 >It meets these criteria:
 
 >* Explicitly mentions running the command (this isn’t always obvious)
 * **Uses “run”** (and not “type”, “execute”, etc -- we want consistency)
-* Starts with the key information that describes the command, e.g. “To do X...enter Y command:”, “Do X by entering Y command:”
+* Starts with the key information that describes the command, e.g. “To do X...run Y command:”, “Do X by running Y command:”
 * As short as possible
 
 > If you must deviate from the standard line, ensure you still meet the above criteria.
 
 === ":white_check_mark: Correct"
-    Create the service by running:
+    Create the service by running the command:
     ```bash
     kn create service <service-name>
     ```
