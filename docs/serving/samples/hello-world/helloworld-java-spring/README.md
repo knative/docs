@@ -1,29 +1,34 @@
-A simple web app written in Java using Spring Boot 2.0 that you can use for
-testing. It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If
-TARGET is not specified, it will use "World" as the TARGET.
+---
+title: "Hello World - Spring Boot Java"
+linkTitle: "Java (Spring)"
+weight: 1
+type: "docs"
+---
 
-Follow the steps below to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+# Hello World - Spring Boot Java
+
+This guide describes the steps required to create the `helloworld-java-spring` sample app and deploy it to your cluster.
+
+The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default value.
+
+You can also download a working copy of the sample, by running the following commands:
 
 ```shell
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
 
-## Before you begin
+## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/) if you need to
-  create one.
+  [installation instructions](../../../../install/).
 - [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed
-  [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+  and a Docker Hub account configured.
+- (optional) The Knative CLI client [kn](https://github.com/knative/client/releases) can be used to simplify the deployment. Alternatively, you can use `kubectl`, and apply resource files directly.
 
-## Recreating the sample code
+## Building the sample app
 
-1. From the console, create a new empty web project using the curl and unzip
+1. From the console, create a new, empty web project by using the curl and unzip
    commands:
 
    ```shell
@@ -35,7 +40,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    unzip helloworld.zip
    ```
 
-   If you don't have curl installed, you can accomplish the same by visiting the
+   If you don't have `curl` installed, you can accomplish the same by visiting the
    [Spring Initializr](https://start.spring.io/) page. Specify Artifact as
    `helloworld` and add the `Web` dependency. Then click `Generate Project`,
    download and unzip the sample archive.
@@ -43,7 +48,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 1. Update the `SpringBootApplication` class in
    `src/main/java/com/example/helloworld/HelloworldApplication.java` by adding a
    `@RestController` to handle the "/" mapping and also add a `@Value` field to
-   provide the TARGET environment variable:
+   provide the `TARGET` environment variable:
 
    ```java
    package com.example.helloworld;
@@ -82,12 +87,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Spring Boot
-   app, see
-   [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
-   For additional information on multi-stage docker builds for Java see
-   [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+1. In your project directory, create a file named `Dockerfile` and copy the code block below into it:
 
    ```docker
    # Use the official maven/Java 8 image to create a build artifact.
@@ -102,10 +102,11 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    # Build a release artifact.
    RUN mvn package -DskipTests
 
-   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-   # https://hub.docker.com/_/openjdk
+   # Use AdoptOpenJDK for base image.
+   # It's important to use OpenJDK 8u191 or above that has container support enabled.
+   # https://hub.docker.com/r/adoptopenjdk/openjdk8
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM openjdk:8-jre-alpine
+   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
 
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
@@ -113,35 +114,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    # Run the web service on container startup.
    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
    ```
+For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
 
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
+For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-java-spring
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-java-spring
-             env:
-               - name: TARGET
-                 value: "Spring Boot Sample v1"
-   ```
+**NOTE:** Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
 
-## Building and deploying the sample
-
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
-
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands replacing `{username}` with your Docker Hub
-   username:
+1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
    ```shell
    # Build the container on your local machine
@@ -150,45 +129,122 @@ folder) you're ready to build and deploy the sample app.
    # Push the container to docker registry
    docker push {username}/helloworld-java-spring
    ```
+## Deploying the app
 
-1. After the build has completed and the container is pushed to docker hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in the previous step. Apply
-   the configuration using `kubectl`:
+After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
-   ```shell
-   kubectl apply --filename service.yaml
-   ```
 
-1. Now that your service is created, Knative will perform the following steps:
+=== "yaml"
+
+       1. Create a new file, `service.yaml` and copy the following service definition
+          into the file. Make sure to replace `{username}` with your Docker Hub
+          username.
+
+          ```yaml
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          metadata:
+            name: helloworld-java-spring
+            namespace: default
+          spec:
+            template:
+              spec:
+                containers:
+                  - image: docker.io/{username}/helloworld-java-spring
+                    env:
+                      - name: TARGET
+                        value: "Java Spring Sample v1"
+          ```
+
+       Ensure that the container image value
+       in `service.yaml` matches the container you built in the previous step. Apply
+       the configuration using `kubectl`:
+
+       ```shell
+       kubectl apply --filename service.yaml
+       ```
+
+
+=== "kn"
+
+       With `kn` you can deploy the service with
+
+       ```shell
+       kn service create helloworld-java-spring --image=docker.io/{username}/helloworld-java-spring --env TARGET="Java Spring Sample v1"
+       ```
+
+       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+
+
+
+
+
+   During the creation of your service, Knative performs the following steps:
 
    - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balancer
+   - Network programming to create a route, ingress, service, and load balance
      for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+   - Automatically scale your pods up and down, including scaling down to zero active pods.
 
-1. To find the URL of your service, use:
+## Verification
 
-   ```shell
-   kubectl get ksvc helloworld-java-spring \
-      --output=custom-columns=NAME:.metadata.name,URL:.status.url
+1. Find the domain URL for your service:
 
-   NAME                       URL
-   helloworld-java-spring     http://helloworld-java-spring.default.1.2.3.4.sslip.io
-   ```
 
-1. Now you can make a request to your app and see the result. Replace
+=== "kubectl"
+       ```shell
+       kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+       ```
+
+       Example:
+
+       ```shell
+       NAME                      URL
+       helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
+       ```
+
+
+=== "kn"
+
+       ```shell
+       kn service describe helloworld-java-spring -o url
+       ```
+
+       Example:
+
+       ```shell
+       http://helloworld-java-spring.default.1.2.3.4.xip.io
+       ```
+
+
+
+
+1. Make a request to your app and observe the result. Replace
    the URL below with the URL returned in the previous command.
+
+   Example:
 
    ```shell
    curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
-   Hello Spring Boot Sample v1!
+   Hello Java Spring Sample v1!
+
+   # Even easier with kn:
+   curl $(kn service describe helloworld-java-spring -o url)
    ```
 
-## Removing the sample app deployment
+   > Note: Add `-v` option to get more detail if the `curl` command failed.
 
-1. To remove the sample app from your cluster, use:
+## Deleting the app
 
-```shell
-kubectl delete --filename service.yaml
-```
+To remove the sample app from your cluster, delete the service.
+
+
+=== "kubectl"
+    ```shell
+    kubectl delete --filename service.yaml
+    ```
+
+=== "kn"
+    ```shell
+    kn service delete helloworld-java-spring
+    ```

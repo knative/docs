@@ -1,10 +1,3 @@
----
-title: "Modifying the Deployment Config Map"
-linkTitle: "Deployment Configuration"
-weight: 10
-type: "docs"
----
-
 # Modifying the Deployment Config Map
 
 The `config-deployment` ConfigMap is located in the `knative-serving` namespace.
