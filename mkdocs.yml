@@ -48,6 +48,9 @@ nav:
         - Logging: admin/collecting-logs/README.md
         - Metrics: admin/collecting-metrics/README.md
         - Uninstalling Knative: admin/install/uninstall.md
+        # Serving config
+        - Knative Serving configuration:
+          - Configure Deployment resources: admin/serving/deployment.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
@@ -82,8 +85,8 @@ nav:
         - Configuring scale bounds: serving/autoscaling/scale-bounds.md
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
         - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/index.md
+    # Admin topics - serving
       - Administrator Topics:
-        - Deployment Configuration: serving/services/deployment.md
         - Kubernetes services: serving/knative-kubernetes-services.md
         - Accessing request traces: serving/accessing-traces.md
         - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
@@ -149,6 +152,7 @@ nav:
           - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
           - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
+        - Kafka source: eventing/sources/kafka-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
         - Writing an event source using Javascript: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
@@ -207,7 +211,6 @@ nav:
           - Overview: eventing/samples/kafka/README.md
           - Binding Example: eventing/samples/kafka/binding/index.md
           - Channel Example: eventing/samples/kafka/channel/README.md
-          - Source Example: eventing/sources/kafka-source/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
@@ -289,6 +292,7 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'serving/services/deployment.md': 'admin/serving/deployment.md'
         'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
         'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
         'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
