@@ -224,7 +224,8 @@ After the build has completed and the container is pushed to Docker Hub, you can
    curl $(kn service describe helloworld-java-spring -o url)
    ```
 
-   > Note: Add `-v` option to get more detail if the `curl` command failed.
+!!! tip
+    Add `-v` option to get more detail if the `curl` command failed.
 
 ## Deleting the app
 
