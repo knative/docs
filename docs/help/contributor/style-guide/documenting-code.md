@@ -67,16 +67,16 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 
 === ":white_check_mark: Correct"
 
-    Creating a new file:
+    Creating or updating a resource:
     ```yaml
     kubectl apply -f - <<EOF
     # code
     EOF
     ```
 
-    Editing a file:
+    Editing a ConfigMap:
     ```bash
-    kubectl -n <namespace> edit cm <filename>
+    kubectl -n <namespace> edit configmap <resource-name>
     ```
 
 === ":no_entry: Incorrect"
