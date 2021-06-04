@@ -146,7 +146,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
                   - image: docker.io/{username}/helloworld-java-spring
                     env:
                       - name: TARGET
-                        value: "Java Spring Sample v1"
+                        value: "Spring Boot Sample v1"
           ```
 
        Ensure that the container image value
