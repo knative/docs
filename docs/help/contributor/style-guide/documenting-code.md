@@ -65,7 +65,7 @@ Use **kubectl edit** for files which are shipped as part of the Knative software
 
     Editing a file:
     ```
-    kubectl -n <namespace> edit cm <filename>
+    kubectl -n <namespace> edit configmap <resource-name>
     ```
 
 === ":no_entry: Incorrect"
