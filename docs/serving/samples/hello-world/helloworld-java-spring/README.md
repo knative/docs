@@ -34,7 +34,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
    If you don't have `curl` installed, you can accomplish the same by visiting the
    [Spring Initializr](https://start.spring.io/) page. Specify Artifact as
-   `helloworld` and add the `Web` dependency. Then click `Generate Project`,
+   `helloworld` and add the `Web` dependency. Then click **Generate Project**,
    download and unzip the sample archive.
 
 1. Update the `SpringBootApplication` class in
@@ -133,6 +133,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
           username.
 
           ```yaml
+          kubectl apply -f - <<EOF
           apiVersion: serving.knative.dev/v1
           kind: Service
           metadata:
@@ -146,6 +147,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
                     env:
                       - name: TARGET
                         value: "Spring Boot Sample v1"
+          EOF
           ```
 
        Ensure that the container image value
