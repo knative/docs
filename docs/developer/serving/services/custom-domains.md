@@ -7,9 +7,9 @@ You can create a `DomainMapping` object to map a single, non-wildcard domain to 
 For example, if you own the domain name `example.org`, and you configure the domain DNS to reference your Knative cluster, you can use domain mapping to
 serve a Knative Service at this domain.
 
-!!!note
-   If you create a domain mapping to map to a [private Knative Service](../developer/serving/services/private-services.md),
-   the private Knative Service will be accessible from public internet with the custom domain of the domain mapping.
+!!! note
+    If you create a domain mapping to map to a [private Knative Service](../developer/serving/services/private-services.md),
+    the private Knative Service will be accessible from public internet with the custom domain of the domain mapping.
 
 ## Prerequisites
 
