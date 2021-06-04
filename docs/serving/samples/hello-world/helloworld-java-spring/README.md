@@ -163,7 +163,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
        With `kn` you can deploy the service with
 
        ```bash
-       kn service create helloworld-java-spring --image=docker.io/{username}/helloworld-java-spring --env TARGET="Java Spring Sample v1"
+       kn service create helloworld-java-spring --image=docker.io/{username}/helloworld-java-spring --env TARGET="Spring Boot Sample v1"
        ```
 
        This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
@@ -219,7 +219,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
    ```bash
    curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
-   Hello Java Spring Sample v1!
+   Hello Spring Boot Sample v1!
 
    # Even easier with kn:
    curl $(kn service describe helloworld-java-spring -o url)
