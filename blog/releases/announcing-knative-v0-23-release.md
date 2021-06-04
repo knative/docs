@@ -29,7 +29,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 ### Highlights
 
-- Serving improves support for Istio when using Mesh to access the pod directly
+- Serving improves support for Istio when using Mesh to access the user container directly
 - Eventing removes old API version only leaving `v1` as the one available
 - The `kn` CLI and Operator keeps crushing bugs in this release.
 
