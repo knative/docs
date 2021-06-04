@@ -275,6 +275,34 @@ spec:
         ...
 ```
 
+## Kubernetes Security Context Capabilities
+
+* **Type**: extension
+* **ConfigMap key**: `kubernetes.containerspec-addcapabilities`
+
+This flag controls whether users can add capabilities on the `securityContext` of the container.
+
+When set to `enabled` or `allowed` it allows [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) to be added to the container.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-go
+spec:
+ template:
+  spec:
+   containers:
+     - image: gcr.io/knative-samples/helloworld-go
+       env:
+         - name: TARGET
+           value: "Go Sample v1"
+       securityContext:
+         capabilities:
+           add:
+             - NET_BIND_SERVICE
+```
+
 ## Tag Header Based Routing
 * **Type**: extension
 * **ConfigMap key:** `tag-header-based-routing`
