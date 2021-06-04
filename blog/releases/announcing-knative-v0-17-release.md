@@ -1,5 +1,5 @@
 ---
-title: "Version v0.17 release"
+title: "Version 0.17 release"
 linkTitle: "Version 0.17 release"
 Author: Carlos Santana
 Author handle: https://twitter.com/csantanapr

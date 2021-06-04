@@ -1,6 +1,6 @@
 ---
-title: "Version v0.19 release"
-linkTitle: "Version v0.19 release"
+title: "Version 0.19 release"
+linkTitle: "Version 0.19 release"
 Author: "[Carlos Santana](https://twitter.com/csantanapr)"
 Author handle: https://github.com/csantanapr
 date: 2020-11-13
