@@ -20,7 +20,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
 ## Building the sample app
 
-1. From the console, create a new, empty web project by using the curl and unzip
+1. From the console, create a new, empty web project by using the `curl` and `unzip`
    commands:
 
    ```bash
