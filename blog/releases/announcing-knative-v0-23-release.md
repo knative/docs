@@ -111,6 +111,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### RabbitMQ Eventing v0.23
 
+<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/v0.23.0 -->
+
 #### 🚨 Breaking or Notable Changes
 
 - requires [messaging-topology-operator](https://github.com/rabbitmq/messaging-topology-operator) version `v0.8.0` to be installed as well as [cluster-operator](https://github.com/rabbitmq/cluster-operator) version `v1.6.0`
