@@ -13,14 +13,14 @@ For more information about Subscription objects, see
 
 
 === "kn"
-    Create a subscription between a channel and a sink:
+    Create a subscription between a channel and a sink by running:
 
     ```
-    kn subscription create <subscription_name> \
-      --channel <Group:Version:Kind>:<channel_name> \
-      --sink <sink_prefix>:<sink_name> \
-      --sink-reply <sink_prefix>:<sink_name> \
-      --sink-dead-letter <sink_prefix>:<sink_name>
+    kn subscription create <subscription-name> \
+      --channel <Group:Version:Kind>:<channel-name> \
+      --sink <sink-prefix>:<sink-name> \
+      --sink-reply <sink-prefix>:<sink-name> \
+      --sink-dead-letter <sink-prefix>:<sink-name>
     ```
 
     - `--channel` specifies the source for cloud events that should be processed.
@@ -30,7 +30,7 @@ For more information about Subscription objects, see
     For example, this is `messaging.knative.dev:v1beta1:KafkaChannel` for a Kafka-backed channel.
 
     - `--sink` specifies the target destination to which the event should be delivered.
-    By default, the `<sink_name>` is interpreted as a Knative service of this name, in the same
+    By default, the `<sink-name>` is interpreted as a Knative service of this name, in the same
     namespace as the subscription.
     You can specify the type of the sink by using one of the following prefixes:
 
@@ -56,7 +56,7 @@ For more information about Subscription objects, see
 
     !!! note
         The sink prefix is optional. You can also specify the service for `--sink` as just
-        `--sink <service_name>` and omit the `ksvc` prefix.
+        `--sink <service-name>` and omit the `ksvc` prefix.
 
 
 === "YAML"
@@ -66,19 +66,19 @@ For more information about Subscription objects, see
         apiVersion: messaging.knative.dev/v1beta1
         kind: Subscription
         metadata:
-          name: <subscription_name> # Name of the subscription.
+          name: <subscription-name> # Name of the subscription.
           namespace: default
         spec:
           channel:
             apiVersion: messaging.knative.dev/v1
             kind: Channel
-            name: <channel_name> # Configuration settings for the channel that the subscription connects to.
+            name: <channel-name> # Configuration settings for the channel that the subscription connects to.
           delivery:
             deadLetterSink:
               ref:
                 apiVersion: serving.knative.dev/v1
                 kind: Service
-                name: <service_name>
+                name: <service-name>
                 # Configuration settings for event delivery.
                 # This tells the subscription what happens to events that cannot be delivered to the subscriber.
                 # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
@@ -88,7 +88,7 @@ For more information about Subscription objects, see
             ref:
               apiVersion: serving.knative.dev/v1
               kind: Service
-              name: <service_name> # Configuration settings for the subscriber. This is the event sink that events are delivered to from the channel.
+              name: <service-name> # Configuration settings for the subscriber. This is the event sink that events are delivered to from the channel.
         ```
 
     1. Apply the YAML file:
@@ -119,7 +119,7 @@ You can list all existing subscriptions by using the `kn` CLI tool.
 You can print details about a subscription by using the `kn` CLI tool:
 
 ```
-kn subscription describe <subscription_name>
+kn subscription describe <subscription-name>
 ```
 <!--TODO: Add an example command and output-->
 <!--TODO: Add details for kn subscription update - existing generated docs weren't clear enough, need better explained examples-->
@@ -130,15 +130,15 @@ You can delete a subscription by using the `kn` or `kubectl` CLI tools.
 
 === "kn"
     ```
-    kn subscription delete <subscription_name>
+    kn subscription delete <subscription-name>
     ```
 
 
 === "kubectl"
     ```
-    kubectl subscription delete <subscription_name>
+    kubectl subscription delete <subscription-name>
     ```
 
 ## Next steps
 
-- [Creating a channel using cluster or namespace defaults](./create-default-channel)
+- [Creating a channel using cluster or namespace defaults](/eventing/channels/create-default-channel)

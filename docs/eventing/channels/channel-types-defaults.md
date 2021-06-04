@@ -21,7 +21,7 @@ The cluster administrator controls the default settings through the `default-ch-
 `knative-eventing` namespace.
 
 For more information about modifying ConfigMaps, see
-[Configuring the Eventing Operator custom resource](./docs/install/configuring-eventing-cr/).
+[Configuring the Eventing Operator custom resource](/admin/install/operator/configuring-eventing-cr).
 
 Default channels can be configured for the cluster, a namespace on the cluster, or both.
 
@@ -56,4 +56,4 @@ data:
 
 ## Next steps
 
-- [Creating a channel using cluster or namespace defaults](./create-default-channel)
+- [Creating a channel using cluster or namespace defaults](/eventing/channels/create-default-channel)

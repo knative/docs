@@ -22,7 +22,7 @@ To create a channel:
     * `<namespace>` is the name of your target namespace.
 
 If you create this object in the `default` namespace, according to the default ConfigMap
-example in [Channel types and defaults](./channel-types-defaults), it is an InMemoryChannel
+example in [Channel types and defaults](/eventing/channels/channel-types-defaults), it is an InMemoryChannel
 channel implementation.
 
 <!-- TODO: Add tabs for kn etc-->
@@ -30,6 +30,7 @@ channel implementation.
 After the Channel object is created, a mutating admission webhook sets the `spec.channelTemplate` based on the default channel implementation:
 
 ```yaml
+kubectl apply -f <<EOF
 apiVersion: messaging.knative.dev/v1
 kind: Channel
 metadata:
@@ -39,13 +40,14 @@ spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1
     kind: <channel-template-kind>
+EOF
 ```
 Where:
 
 * `<example-channel>` is the name of the channel you want to create.
 * `<namespace>` is the name of your target namespace.
 * `<channel-template-kind>` is the kind of channel, such as InMemoryChannel or KafkaChannel,
-based on the default ConfigMap. See an example in [Channel types and defaults](./channel-types-defaults).
+based on the default ConfigMap. See an example in [Channel types and defaults](/eventing/channels/channel-types-defaults).
 
 !!! note
     The `spec.channelTemplate` property cannot be changed after creation, because it is
