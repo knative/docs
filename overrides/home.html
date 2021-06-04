@@ -4,7 +4,7 @@
 <div class="md-container">
   <section class="home-container">
     <div class="animated-gradient">
-      <img src="images/logo/rgb/knative-logo-rgb.png" />
+      <img src="images/logo/rgb/knative-logo-rgb.png" style="display: none;"/>
     </div>
     <div class="md-grid md-typeset">
       <div class="mdx-hero">
@@ -68,13 +68,11 @@
         src="images/rocket.svg"
         class="rocket"
         alt=""
-        width="140"
         draggable="false"
-        style="position: absolute; right: 200px"
       />
       <div>
         <h2>Make your developers more productive</h2>
-        <p style="max-width: 700px">
+        <p>
           Knative components build on top of Kubernetes,
           <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
           codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
@@ -89,7 +87,7 @@
       <div style="display: flex; justify-content: center">
         <h3 style="margin-bottom: 0">Trusted by:</h3>
       </div>
-      <div style="display: inline-flex; justify-content: center; flex-gap: 2em; flex-wrap: wrap">
+      <div style="display: inline-flex; justify-content: center; flex-gap: 2em; flex-wrap: wrap" id="usedby">
         <div class="logo">
           <img src="images/Google.png" alt="" width="220" draggable="false" />
         </div>
@@ -161,6 +159,22 @@
     </div>
   </section>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const logos = document.getElementById("usedby").getElementsByTagName("div");
+        for (let i = 0; i < logos.length - 1; i++) {
+            // Technically there's a chance two elements end up with the same
+            // random order in which case the result won't be truly random (it'll be based
+            // on the original document order). This really doesn't matter.
+            logos[i].style.order = Math.floor(Math.random() * 99);
+        }
+        logos[logos.length - 1].style.order = 100;
+    })
+  </script>
 {% endblock %}
 
 <!-- Application footer -->

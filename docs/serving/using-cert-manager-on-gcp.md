@@ -38,7 +38,7 @@ and Cloud DNS:
     [Knative installation guides](../install/).
   - Your Knative cluster must be configured to use a
     [custom domain](./using-a-custom-domain.md).
-  - [cert-manager v0.6.1 or higher installed](./installing-cert-manager.md)
+  - [cert-manager v1.0.0 or higher installed](./installing-cert-manager.md)
 - Your DNS provider must be setup and configured to your domain.
 
 ## Creating a service account and using a Kubernetes secret
@@ -108,7 +108,7 @@ TLS certificates and how the requests are validated with Cloud DNS.
 
    ```shell
    kubectl apply --filename - <<EOF
-   apiVersion: cert-manager.io/v1alpha2
+   apiVersion: cert-manager.io/v1
    kind: ClusterIssuer
    metadata:
      name: letsencrypt-issuer
@@ -171,7 +171,7 @@ exists.
    export DOMAIN=<your-domain.com>
 
    kubectl apply --filename - <<EOF
-   apiVersion: cert-manager.io/v1alpha2
+   apiVersion: cert-manager.io/v1
    kind: Certificate
    metadata:
      name: my-certificate

@@ -1,6 +1,6 @@
 # Deploying your first Knative Service
 !!! tip
-    Hit ++"n"++ / ++"."++ on your keyboard to move forward in the tutorial. Use ++"p"++ / ++","++ to go back at any time.
+    Hit ++"."++ on your keyboard to move forward in the tutorial. Use ++","++ to go back at any time.
 
 ==**In this tutorial, you will deploy a "Hello world" service.**==
 This service will accept an environment variable, `TARGET`, and print "`Hello ${TARGET}!`."

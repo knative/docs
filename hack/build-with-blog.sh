@@ -130,7 +130,7 @@ cat << EOF > site/index.html
     <meta http-equiv="refresh" content="1; url=development/" />
   </noscript>
   <script>
-   window.location.replace(window.location.href+"development/");
+   window.location.replace("development/");
   </script>
 </head>
 <body>

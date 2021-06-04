@@ -74,18 +74,20 @@ aliases:
   knative-admin:
   - RichieEscarez
   - bsnchan
+  - dprotaso
   - duglin
   - evankanderson
+  - julz
   - knative-prow-releaser-robot
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
   - markusthoemmes
+  - matzew
   - mbehrendt
   - pmorie
   - rhuss
   - ronavn
-  - tcnghia
   - thisisnotapril
   - vaikas
   knative-milestone-maintainers:
@@ -96,6 +98,7 @@ aliases:
   - chaodaiG
   - chizhg
   - csantanapr
+  - dprotaso
   - evankanderson
   - igsong
   - julz
@@ -114,8 +117,8 @@ aliases:
   - vaikas
   knative-release-leads:
   - RichieEscarez
-  - tcnghia
-  - vaikas
+  - dprotaso
+  - matzew
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -135,12 +138,10 @@ aliases:
   networking-wg-leads:
   - ZhiminXiang
   - nak3
-  - tcnghia
   networking-writers:
   - JRBANCEL
   - ZhiminXiang
   - nak3
-  - tcnghia
   - vagababov
   operations-reviewers:
   - Cynocracy
@@ -182,12 +183,12 @@ aliases:
   - tcnghia
   - vagababov
   productivity-reviewers:
-  - coryrc
+  - albertomilan
   - efiturri
   - evankanderson
-  - peterfeifanchen
+  - gerardo-lc
+  - joshua-bone
   - steuhs
-  - yt3liu
   productivity-wg-leads:
   - chizhg
   - n3wscott
@@ -226,7 +227,9 @@ aliases:
   - thisisnotapril
   - vaikas
   technical-oversight-committee:
+  - dprotaso
   - evankanderson
+  - julz
   - markusthoemmes
   - rhuss
   trademark-committee:

@@ -11,7 +11,7 @@ nav:
     - Home: index.md
     - Getting Started:
         - Before you begin: getting-started/README.md
-        - Install Knative: getting-started/install-serving-eventing.md
+        - Knative Quickstart: getting-started/install-knative-quickstart.md
         - Serverless:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
@@ -22,6 +22,7 @@ nav:
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
+    # Administration guide
     - Administration guide:
         - Overview: admin/README.md
         - Installing Knative:
@@ -47,19 +48,26 @@ nav:
         - Logging: admin/collecting-logs/README.md
         - Metrics: admin/collecting-metrics/README.md
         - Uninstalling Knative: admin/install/uninstall.md
-    - Serving Component:
+    # Developer guide
+    - Developer guide:
+        - Overview: developer/README.md
+        - Knative Serving:
+          - Services:
+            - About Knative Services: developer/serving/services/README.md
+            - Creating a Service: developer/serving/services/creating-services.md
+            - Configuring private Services: developer/serving/services/private-services.md
+            - Configuring custom domains: developer/serving/services/custom-domains.md
+            - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
+          - Troubleshooting:
+            - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+    # Serving
+    - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Knative services:
-          - Overview: serving/services/README.md
-          - Creating a service: serving/services/creating-services.md
-          - Configuring private services: serving/services/private-services.md
         - Deploying from private registries: serving/deploying-from-private-registry/README.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
-        - Debugging issues with your application: serving/debugging-application-issues.md
-        - Setting up a custom domain per Service: serving/creating-domain-mappings.md
         - Load balancing:
           - Overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
@@ -125,7 +133,8 @@ nav:
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/index.md
         - Traffic splitting: serving/samples/traffic-splitting/index.md
         - ... | *.md
-    - Eventing Component:
+    # Eventing
+    - Knative Eventing:
       - Overview: eventing/README.md
       - Getting started: eventing/getting-started.md
       - Event sources:
@@ -135,7 +144,10 @@ nav:
           - Getting started: eventing/sources/apiserversource/getting-started/README.md
         - ContainerSource: eventing/sources/containersource.md
         - PingSource: eventing/sources/ping-source/index.md
-        - Sink binding: eventing/sources/sinkbinding.md
+        - SinkBinding:
+          - Overview: eventing/sources/sinkbinding/README.md
+          - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
+          - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
@@ -183,6 +195,7 @@ nav:
       - Debugging: eventing/debugging/index.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Metrics API: eventing/metrics.md
+      - Experimental Features: eventing/experimental-features.md
       - Code samples:
         - Overview: eventing/samples/README.md
         - Container source: eventing/sources/container-source/README.md
@@ -207,9 +220,11 @@ nav:
         - GitLab source: eventing/sources/gitlab-source/README.md
         - IoT core: eventing/samples/iot-core/index.md
         - ... | *
+    # Reference docs
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
+    # Client
     - Client:
       - Overview: client/README.md
       - Installing kn: client/install-kn.md
@@ -242,7 +257,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: docs/snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
@@ -262,6 +278,7 @@ plugins:
       glob:
         # Exclude files that contain hugo specific shortcodes
         # (either the include shortcode or not-converted-yet tabs).
+        - snippets/*
         - smoketest.md
         - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
@@ -269,8 +286,12 @@ plugins:
       filename: ".index"
       collapse_single_pages: true
       strict: false
+# Redirects
   - redirects:
       redirect_maps:
+        'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
+        'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
+        'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
@@ -289,6 +310,9 @@ plugins:
         'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'
         'upgrade/upgrade-installation.md': 'admin/upgrade/upgrade-installation.md'
         'install/check-install-version.md': 'check-install-version.md'
+        'serving/services/private-services.md': 'developer/serving/services/private-services.md'
+        'serving/services/creating-services.md': 'developer/serving/services/creating-services.md'
+        'serving/services/README.md': 'developer/serving/services/README.md'
 
 copyright: "Copyright © 2021 The Knative Authors"
 
