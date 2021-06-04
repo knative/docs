@@ -1,10 +1,3 @@
----
-title: "Enabling automatic TLS certificate provisioning"
-linkTitle: "Enabling auto TLS certs"
-weight: 64
-type: "docs"
----
-
 # Enabling automatic TLS certificate provisioning
 
 If you install and configure cert-manager, you can configure Knative to
@@ -43,7 +36,8 @@ You must meet the following prerequisites to enable Auto TLS:
   - [Knative Serving](../install/).
   - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher.
   See [Install a networking layer](../../admin/install/install-serving-with-yaml/#install-a-networking-layer).<br>
-    **Note:** Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
+!!! note
+    Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
 - [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
 - Your Knative cluster must be configured to use a
   [custom domain](./using-a-custom-domain.md).
