@@ -15,8 +15,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
   [installation instructions](../../../../install/).
-- [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured.
+- [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured.
 - (optional) The Knative CLI client [kn](https://github.com/knative/client/releases) can be used to simplify the deployment. Alternatively, you can use `kubectl`, and apply resource files directly.
 
 ## Building the sample app
@@ -83,8 +82,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 1. In your project directory, create a file named `Dockerfile` and copy the code block below into it:
 
    ```docker
-   # Use the official maven/Java 8 image to create a build artifact.
-   # https://hub.docker.com/_/maven
+   # Use the official maven/Java 8 image to create a build artifact: https://hub.docker.com/_/maven
    FROM maven:3.5-jdk-8-alpine as builder
 
    # Copy local code to the container image.
@@ -95,17 +93,17 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
    # Build a release artifact.
    RUN mvn package -DskipTests
 
-   # Use AdoptOpenJDK for base image.
-   # It's important to use OpenJDK 8u191 or above that has container support enabled.
-   # https://hub.docker.com/r/adoptopenjdk/openjdk8
+   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
+   # https://hub.docker.com/_/openjdk
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
+   FROM openjdk:8-jre-alpine
 
    # Copy the jar to the production image from the builder stage.
    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
 
    # Run the web service on container startup.
    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
+
    ```
 For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
 
