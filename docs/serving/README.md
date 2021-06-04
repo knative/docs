@@ -72,9 +72,8 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## Configuration and Networking
 
-- [Configuring cluster local routes](./cluster-local-route)
+- [Configuring cluster local routes](./deploying-from-private-registry.md)
 - [Using a custom domain](./using-a-custom-domain)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](./gke-assigning-static-ip-address)
 - [Using subroutes](./using-subroutes)
 
 ## Observability
