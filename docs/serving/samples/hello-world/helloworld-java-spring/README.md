@@ -6,7 +6,7 @@ The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET
 
 You can also download a working copy of the sample, by running the following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 ```
@@ -24,7 +24,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 1. From the console, create a new, empty web project by using the curl and unzip
    commands:
 
-   ```shell
+   ```bash
    curl https://start.spring.io/starter.zip \
        -d dependencies=web \
        -d name=helloworld \
@@ -74,7 +74,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
 1. Run the application locally:
 
-   ```shell
+   ```bash
    ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
    ```
 
@@ -115,7 +115,7 @@ For additional information on multi-stage docker builds for Java see [Creating S
 
 1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-java-spring .
 
@@ -153,7 +153,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
        in `service.yaml` matches the container you built in the previous step. Apply
        the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename service.yaml
        ```
 
@@ -162,7 +162,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
        With `kn` you can deploy the service with
 
-       ```shell
+       ```bash
        kn service create helloworld-java-spring --image=docker.io/{username}/helloworld-java-spring --env TARGET="Java Spring Sample v1"
        ```
 
@@ -185,13 +185,13 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 
 === "kubectl"
-       ```shell
+       ```bash
        kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        NAME                      URL
        helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
        ```
@@ -199,13 +199,13 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-java-spring -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-java-spring.default.1.2.3.4.xip.io
        ```
 
@@ -217,7 +217,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
    Example:
 
-   ```shell
+   ```bash
    curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
    Hello Java Spring Sample v1!
 
@@ -233,11 +233,11 @@ To remove the sample app from your cluster, delete the service.
 
 
 === "kubectl"
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
 === "kn"
-    ```shell
+    ```bash
     kn service delete helloworld-java-spring
     ```

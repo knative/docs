@@ -1,4 +1,3 @@
-# Use the official maven/Java 8 image to create a build artifact.
 # https://hub.docker.com/_/maven
 FROM maven:3.5-jdk-8-alpine as builder
 
