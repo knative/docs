@@ -8,7 +8,7 @@ For example, if you own the domain name `example.org`, and you configure the dom
 serve a Knative Service at this domain.
 
 !!! note
-    If you create a domain mapping to map to a [private Knative Service](../developer/serving/services/private-services.md),
+    If you create a domain mapping to map to a [private Knative Service](../private-services.md),
     the private Knative Service will be accessible from public internet with the custom domain of the domain mapping.
 
 ## Prerequisites
