@@ -75,4 +75,6 @@ kind: InMemoryChannel
 name: my-channel
 ```
 
+Thanks to this feature you can let Knative resolve the full `APIVersion` and further upgrades/deprecations/removals of the referred CRD won't affect your resources.
+
 Note: At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref`, in future other usages of `KReference` will support it.
