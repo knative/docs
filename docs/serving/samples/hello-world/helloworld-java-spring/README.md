@@ -234,7 +234,7 @@ To remove the sample app from your cluster, delete the service.
 
 === "kubectl"
     ```bash
-    kubectl delete --filename service.yaml
+    kubectl delete -f service.yaml
     ```
 
 === "kn"
