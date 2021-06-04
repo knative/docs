@@ -9,8 +9,58 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 * Filenames and path names
 * Any text that goes into a CLI
 
-## Specify programming language
+## Specify the programming language
 
+> Be sure to specify the language your code is in as part of the code block
+
+> Specify bash for any CLI commands.
+
+=== ":white_check_mark: Correct"
+    ```go
+    package main
+
+    import "fmt"
+
+    func main() {
+        fmt.Println("hello world")
+    }
+    ```
+
+=== ":no_entry: Incorrect"
+    ```bash
+    package main
+
+    import "fmt"
+
+    func main() {
+        fmt.Println("hello world")
+    }
+    ```
+
+=== ":white_check_mark: Correct Formatting"
+    ````
+    ```go
+    package main
+
+    import "fmt"
+
+    func main() {
+        fmt.Println("hello world")
+    }
+    ```
+    ````
+=== ":no_entry: Incorrect Formatting"
+    ````
+    ```bash
+    package main
+
+    import "fmt"
+
+    func main() {
+        fmt.Println("hello world")
+    }
+    ```
+    ````
 
 ## Documenting commands
 
@@ -59,6 +109,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     Where `<service-name>` is the name of your Knative Service.
 
 ## Documenting YAML
+//TODO CONTENT TABS (ex. kn + YAML)
 >Use **kubectl apply** for files/objects that the user creates — it works for both “create” and “update”, and the source of truth is their local files.
 
 >Use **kubectl edit** for files which are shipped as part of the Knative software, like the serving/eventing ConfigMaps.
@@ -131,60 +182,8 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     Where `<revision-name>` is the desired name of your revision
 
 
-## CLI input and output
-### CLI input
-> Be sure to specify the language your code is in.
 
-> Specify bash for any CLI commands.
-
-=== ":white_check_mark: Correct"
-    ```go
-    package main
-
-    import "fmt"
-
-    func main() {
-        fmt.Println("hello world")
-    }
-    ```
-
-=== ":no_entry: Incorrect"
-    ```bash
-    package main
-
-    import "fmt"
-
-    func main() {
-        fmt.Println("hello world")
-    }
-    ```
-
-=== ":white_check_mark: Correct Formatting"
-    ````
-    ```go
-    package main
-
-    import "fmt"
-
-    func main() {
-        fmt.Println("hello world")
-    }
-    ```
-    ````
-=== ":no_entry: Incorrect Formatting"
-    ````
-    ```bash
-    package main
-
-    import "fmt"
-
-    func main() {
-        fmt.Println("hello world")
-    }
-    ```
-    ````
-
-### CLI output
+## CLI output
 > CLI Output should include the custom css "{ .bash .no-copy }" in place of "bash" which removes the "Copy to clipboard button" on the right side of the code block
 === ":white_check_mark: Correct"
     ```{ .bash .no-copy }
@@ -208,7 +207,3 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     <some-code>
     ```
     ````
-
-
-
-//TODO CONTENT TABS (ex. kn + YAML)
