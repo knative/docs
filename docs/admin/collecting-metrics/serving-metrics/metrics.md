@@ -1,38 +1,22 @@
----
-title: "Metrics API"
-weight: 99
-type: "docs"
----
-
-# Metrics API
-
-<br>
-
-**NOTE:** The metrics API may change in the future, this serves as a snapshot of the current metrics.
-<br>
-
-## Admin
+# Knative Serving metrics
 
 Administrators can monitor Serving control plane based on the metrics exposed by each Serving component.
 Metrics are listed next.
 
-### Activator
+## Activator
 
-The following metrics allow the user to understand how application responds when traffic goes through the activator eg. scaling from zero. For example high request latency means that requests are taken too much time be fulfilled.
-<br>
+The following metrics allow the user to understand how application responds when traffic goes through the activator, for example, when scaling from zero. For example high request latency means that requests are taken too much time be fulfilled.
+
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
 | request_concurrency | Concurrent requests that are routed to Activator<br>These are requests reported by the concurrency reporter which may not be done yet.<br> This is the average concurrency over a reporting period | Gauge | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>revision_name<br>service_name | Dimensionless | Stable |
 | request_count | The number of requests that are routed to Activator.<br>These are requests that have been fulfilled from the activator handler. | Counter | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>response_code<br>response_code_class<br>revision_name<br>service_name | Dimensionless | Stable |
 | request_latencies | The response time in millisecond for the fulfilled routed requests | Histogram | configuration_name<br>container_name<br>namespace_name<br>pod_name<br>response_code<br>response_code_class<br>revision_name<br>service_name | Milliseconds | Stable |
 
-### Autoscaler
+## Autoscaler
 
-Autoscaler component exposes a number of metrics related to its decisions per revision.
-For example at any given time user can monitor the desired pods the Autoscaler wants to allocate for
-a service, the average number of requests per second during the stable window, whether autoscaler is in panic mode (KPA) etc.
-To read more about how autoscaler works check [here](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md).
-<br>
+Autoscaler component exposes a number of metrics related to its decisions per revision. For example, at any given time, you can monitor the desired pods the Autoscaler wants to allocate for a Service, the average number of requests per second during the stable window, or whether autoscaler is in panic mode (KPA).
+
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
 | desired_pods | Number of pods autoscaler wants to allocate | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name | Dimensionless | Stable |
@@ -50,7 +34,7 @@ To read more about how autoscaler works check [here](https://github.com/knative/
 | pending_pods | Number of pods that are pending currently | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name | Dimensionless | Stable |
 | terminating_pods | Number of pods that are terminating currently | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name<br> | Dimensionless | Stable |
 
-### Controller
+## Controller
 
 The following metrics are emitted by any component that implements a controller logic.
 The metrics show details about the reconciliation operations and the workqueue behavior on which
@@ -69,21 +53,20 @@ reconciliation requests are enqueued.
 | workqueue_unfinished_work_seconds | How long in seconds the outstanding workqueue items have been in flight (total). | Histogram | name | Seconds | Stable |
 | workqueue_longest_running_processor_seconds | How long in seconds the longest outstanding workqueue item has been in flight | Histogram | name | Seconds | Stable |
 
-### Webhook
+## Webhook
 
-Webhook metrics report useful info about operations eg. CREATE on Serving resources and if admission was allowed.
-For example if a big number of operations fail this could be an issue with the submitted user resource.
-<br>
+Webhook metrics report useful info about operations. For example, if a large number of operations fail, this could indicate an issue with a user-created resource.
+
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
 | request_count | The number of requests that are routed to webhook | Counter |  admission_allowed<br>kind_group<br>kind_kind<br>kind_version<br>request_operation<br>resource_group<br>resource_namespace<br>resource_resource<br>resource_version | Dimensionless | Stable |
 | request_latencies | The response time in milliseconds | Histogram |  admission_allowed<br>kind_group<br>kind_kind<br>kind_version<br>request_operation<br>resource_group<br>resource_namespace<br>resource_resource<br>resource_version | Milliseconds | Stable |
 
-### Go Runtime - memstats
+## Go Runtime - memstats
 
 Each Knative Serving control plane process emits a number of Go runtime [memory statistics](https://golang.org/pkg/runtime/#MemStats) (shown next).
 As a baseline for monitoring purproses, user could start with a subset of the metrics: current allocations (go_alloc), total allocations (go_total_alloc), system memory (go_sys), mallocs (go_mallocs), frees (go_frees) and garbage collection total pause time (total_gc_pause_ns), next gc target heap size (go_next_gc) and number of garbage collection cycles (num_gc).
-<br>
+
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
 | go_alloc | The number of bytes of allocated heap objects (same as heap_alloc) | Gauge | name | Dimensionless | Stable |
@@ -114,7 +97,8 @@ As a baseline for monitoring purproses, user could start with a subset of the me
 | go_num_forced_gc | The number of GC cycles that were forced by the application calling the GC function. | Gauge | name | Dimensionless | Stable |
 | go_gc_cpu_fraction | The fraction of this program's available CPU time used by the GC since the program started | Gauge | name | Dimensionless | Stable |
 
-**NOTE:** name tag is empty.
+!!! note
+    The name tag is empty.
 
 ## Developer - User Services
 
@@ -124,7 +108,7 @@ developers, devops and others, could measure if requests are queued at the proxy
 
 ### Queue proxy
 
-Requests endpoint
+Requests endpoint.
 
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
