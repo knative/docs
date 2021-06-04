@@ -56,7 +56,7 @@ Use **kubectl edit** for files which are shipped as part of the Knative software
 
 === ":white_check_mark: Correct"
 
-    Creating a new file:
+    Creating or updating a resource:
     ```
     kubectl apply -f - <<EOF
     # code
