@@ -190,12 +190,8 @@ local Docker Repository.
     kubectl delete -f service.yaml
     ```
 
-    ```
-    kubetl delete -f service.yaml
-    ```
-
 === "kn"
 
-    ```shell
+    ```bash
     kn service delete helloworld-scala
     ```

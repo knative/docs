@@ -1,10 +1,3 @@
----
-title: "Simple Traffic Splitting Between Revisions"
-linkTitle: "Traffic splitting"
-weight: 1
-type: "docs"
----
-
 # Simple Traffic Splitting Between Revisions
 
 This samples builds off of the [Creating a RESTful Service](../rest-api-go)
@@ -13,13 +6,13 @@ splitting traffic between the two created Revisions.
 
 ## Prerequisites
 
-1. Complete the Service creation steps in
-   [Creating a RESTful Service](../rest-api-go).
+1. Complete the Service creation steps in [Creating a RESTful Service](../rest-api-go).
+
 1. Move into the docs directory:
 
-```shell
-cd $GOPATH/src/github.com/knative/docs
-```
+    ```bash
+    cd $GOPATH/src/github.com/knative/docs
+    ```
 
 ## Using the `traffic:` block
 
@@ -39,42 +32,42 @@ us in the previous sample:
    under `status:` we see a specific `revisionName:` here, which is what it has
    resolved to (in this case the name we asked for).
 
-```shell
-$ kubectl get ksvc -oyaml stock-service-example
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: stock-service-example
-  ...
-spec:
-  template: ... # A defaulted version of what we provided.
+    ```yaml
+    kubectl get ksvc -oyaml stock-service-example
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: stock-service-example
+      ...
+    spec:
+      template: ... # A defaulted version of what we provided.
 
-  traffic:
-  - latestRevision: true
-    percent: 100
+      traffic:
+      - latestRevision: true
+        percent: 100
 
-status:
-  ...
-  traffic:
-  - percent: 100
-    revisionName: stock-service-example-first
-```
+    status:
+      ...
+      traffic:
+      - percent: 100
+        revisionName: stock-service-example-first
+    ```
 
 1. The `release_sample.yaml` in this directory overwrites the defaulted traffic
    block with a block that fixes traffic to the revision
    `stock-service-example-first`, while keeping the latest ready revision
    available via the sub-route "latest".
 
-```shell
-kubectl apply --filename docs/serving/samples/traffic-splitting/release_sample.yaml
-```
+    ```bash
+    kubectl apply -f docs/serving/samples/traffic-splitting/release_sample.yaml
+    ```
 
 1. The `spec` of the Service should now show our `traffic` block with the
    Revision name we specified above.
 
-```shell
-kubectl get ksvc stock-service-example --output yaml
-```
+    ```bash
+    kubectl get ksvc stock-service-example --output yaml
+    ```
 
 ## Updating the Service
 
@@ -88,45 +81,44 @@ will result in a new Revision.
 For comparison, you can diff the `release_sample.yaml` with the
 `updated_sample.yaml`.
 
-```shell
-diff serving/samples/traffic-splitting/release_sample.yaml \
-serving/samples/traffic-splitting/updated_sample.yaml
-```
+    ```bash
+    diff serving/samples/traffic-splitting/release_sample.yaml \
+    serving/samples/traffic-splitting/updated_sample.yaml
+    ```
 
 1.  Execute the command below to update Service, resulting in a new Revision.
 
-```shell
-kubectl apply --filename docs/serving/samples/traffic-splitting/updated_sample.yaml
-```
+    ```bash
+    kubectl apply --filename docs/serving/samples/traffic-splitting/updated_sample.yaml
+    ```
 
-2. With our `traffic` block, traffic will _not_ shift to the new Revision
+1. With our `traffic` block, traffic will _not_ shift to the new Revision
    automatically. However, it will be available via the URL associated with our
    `latest` sub-route. This can be verified through the Service status, by
    finding the entry of `status.traffic` for `latest`:
 
-```shell
-kubectl get ksvc stock-service-example --output yaml
-```
+    ```bash
+    kubectl get ksvc stock-service-example --output yaml
+    ```
 
-3. The readiness of the Service can be verified through the Service Conditions.
+1. The readiness of the Service can be verified through the Service Conditions.
    When the Service conditions report it is ready again, you can access the new
-   Revision using the same method as found in the
-   [previous sample](../rest-api-go/) using the
+   Revision using the same method as found in the previous sample using the
    Service hostname found above.
 
-```shell
-# Replace "latest" with whichever tag for which we want the hostname.
-export LATEST_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.traffic[?(@.tag=='latest')].url}" | cut -d'/' -f 3`
-curl --header "Host: ${LATEST_HOSTNAME}" http://${INGRESS_IP}
-```
+    ```bash
+    # Replace "latest" with whichever tag for which we want the hostname.
+    export LATEST_HOSTNAME=`kubectl get ksvc stock-service-example --output jsonpath="{.status.traffic[?(@.tag=='latest')].url}" | cut -d'/' -f 3`
+    curl --header "Host: ${LATEST_HOSTNAME}" http://${INGRESS_IP}
+    ```
 
-- Visiting the Service's domain will still hit the original Revision, since we
-  configured it to receive 100% of our main traffic (you can also use the
-  `current` sub-route).
+    - Visiting the Service's domain will still hit the original Revision, since we
+      configured it to receive 100% of our main traffic (you can also use the
+      `current` sub-route).
 
-```shell
-curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
-```
+    ```bash
+    curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
+    ```
 
 ## Traffic Splitting
 
@@ -136,28 +128,28 @@ extending our `traffic` list, and splitting the `percent` across them.
 1.  Execute the command below to update Service, resulting in a 50/50 traffic
     split.
 
-```shell
-kubectl apply --filename docs/serving/samples/traffic-splitting/split_sample.yaml
-```
+    ```bash
+    kubectl apply -f docs/serving/samples/traffic-splitting/split_sample.yaml
+    ```
 
-2. Verify the deployment by checking the service status:
+1. Verify the deployment by checking the service status:
 
-```shell
-kubectl get ksvc --output yaml
-```
+    ```bash
+    kubectl get ksvc --output yaml
+    ```
 
-3. Once updated, `curl` requests to the base domain should result in responses
+1. Once updated, `curl` requests to the base domain should result in responses
    split evenly between `Welcome to the share app!` and
    `Welcome to the stock app!`.
 
-```shell
-curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
-```
+    ```shell
+    curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
+    ```
 
 ## Clean Up
 
-To clean up the sample service:
+To clean up the sample service, run the command:
 
-```shell
-kubectl delete --filename docs/serving/samples/traffic-splitting/split_sample.yaml
+```bash
+kubectl delete -f docs/serving/samples/traffic-splitting/split_sample.yaml
 ```
