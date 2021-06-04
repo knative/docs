@@ -176,8 +176,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
    During the creation of a Service, Knative performs the following steps:
 
    - Create a new immutable revision for this version of the app.
-   - Network programming to create a Route, ingress, Service, and load balancer.
-     for your app.
+   - Network programming to create a Route, ingress, Service, and load balancer for your app.
    - Automatically scale your pods up and down, including scaling down to zero active pods.
 
 ## Verification
