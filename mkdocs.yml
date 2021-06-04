@@ -64,7 +64,7 @@ nav:
     - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Deploying from private registries: serving/deploying-from-private-registry/README.md
+        - Deploying from private registries: serving/deploying-from-private-registry.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
