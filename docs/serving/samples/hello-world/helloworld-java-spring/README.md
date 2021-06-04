@@ -109,7 +109,8 @@ For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot wit
 
 For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
-**NOTE:** Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
+!!! note
+    Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
 
 1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
