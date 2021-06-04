@@ -79,13 +79,8 @@ Use **kubectl edit** for files which are shipped as part of the Knative software
 ## Words requiring code formatting
 Use code formatting to indicate special purpose text. Apply code formatting to the following content:
 
-* Text that the user enters into a field
 * Filenames and path names
-* Configuration file content
-* Sections of code
-* Programming examples
-* Command line text
-* Environment variable text
+* Any text that goes into a CLI
 
 
 ## Referencing Variables in Code Blocks
