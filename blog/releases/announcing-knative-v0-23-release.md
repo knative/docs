@@ -45,8 +45,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### 💫 New Features & Changes
 
-- The stats scraping in the autoscaler is now sensitive to the EnableMeshPodAddressability setting. A restart of the autoscaler is required for the setting to take effect if changed. [#11161](https://github.com/knative/serving/pull/11161)
-- The state keeping in the activator is now sensitive to the EnableMeshPodAddressability setting. A restart of the activator is required for the setting to take effect if changed. [#11172](https://github.com/knative/serving/pull/11172)
+- The stats scraping in the autoscaler is now sensitive to the `EnableMeshPodAddressability` setting. A restart of the autoscaler is required for the setting to take effect if changed. [#11161](https://github.com/knative/serving/pull/11161)
+- The state keeping in the activator is now sensitive to the `EnableMeshPodAddressability` setting. A restart of the activator is required for the setting to take effect if changed. [#11172](https://github.com/knative/serving/pull/11172)
 - Tightens the heuristic for mesh being enabled in the service scraper. We now expect all errors to be related to mesh (i.e. 503 status code). This prevents accidentally falling in to service scrape mode when errors are encountered for other reasons. [#11174](https://github.com/knative/serving/pull/11174)
 
 #### 🐞 Bug Fixes
@@ -54,8 +54,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Added schemas to all CRDs. [#11244](https://github.com/knative/serving/pull/11244)
 - Changed the rollout behavior of application deployment changes (due to Knative upgrade for example) to never have less ready posd than required. [#11140](https://github.com/knative/serving/pull/11140)
 - Rate limits digest resolution (10 QPS, retry back-off 1s to 1000s) to prevent exceeding quota at remote registries [#11279](https://github.com/knative/serving/pull/11279)
-- Revision replicas shut down 15s quicker. [#11249](https://github.com/knative/serving/pull/11249)
-- The activator's proxy is now sensitive to the EnableMeshPodAddressability setting. [#11162](https://github.com/knative/serving/pull/11162)
+- Revision replicas now shut down 15 seconds faster. [#11249](https://github.com/knative/serving/pull/11249)
+- The activator proxy now recognizes the `EnableMeshPodAddressability` setting. [#11162](https://github.com/knative/serving/pull/11162)
 - Update the User-Agent used during tag resolution [#10590](https://github.com/knative/serving/pull/10590)
 
 
@@ -73,21 +73,21 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### 💫 New Features & Changes
 
-- `InMemoryChannel` can be used independent of Eventing Core. Install by using `in-memory-channel.yaml` no need to install anything else to be able to use the feature. [#5355](https://github.com/knative/eventing/pull/5355)
-- `MTChannelBasedBrokers` will see improved filter performance for triggers with few or no trigger filters [#5288](https://github.com/knative/eventing/pull/5355)
+- InMemoryChannel can now be used independently of Knative Eventing, and can be installed by applying the `in-memory-channel.yaml`. [#5355](https://github.com/knative/eventing/pull/5355)
+- Multi-tenant, channel-based brokers now have improved filter performance for Triggers with few or no filters. [#5288](https://github.com/knative/eventing/pull/5355)
 
 #### 🐞 Bug Fixes
 
 - `duckv1.SourceSpec`, `TimeZone`, `Schedule` will be populated when called by `v1beta1/v1alpha2` clients [#5153](https://github.com/knative/eventing/pull/5153)
-- Propagate `trigger.spec.delivery` to subscriptions for `MTChannelBasedBroker`. [#5267](https://github.com/knative/eventing/pull/5267)
+- The Trigger `delivery` spec is now automatically propagated to Subscriptions that are connected to multi-tenant, channel-based Brokers. [#5267](https://github.com/knative/eventing/pull/5267)
 
 
 
 #### 🧹 Clean up
 
-- Tools from https://github.com/knative/eventing-contrib/tree/main/cmd were moved to eventing repo. [#5295](https://github.com/knative/eventing/pull/5295)
-- Sequence now displays conditions as Unknown rather than False for non-terminal condition states. [#5369](https://github.com/knative/eventing/pull/5369)
-- Running validation for event ingress on mt broker [#5275](https://github.com/knative/eventing/pull/5275)
+- Tools from the [`eventing-contrib` repository](https://github.com/knative/eventing-contrib/tree/main/cmd) have now been moved to the `eventing` repository. [#5295](https://github.com/knative/eventing/pull/5295)
+- Sequence now displays conditions as `Unknown` rather than `False` for non-terminal condition states. [#5369](https://github.com/knative/eventing/pull/5369)
+- Running validation for event ingress on multi-tenant broker [#5275](https://github.com/knative/eventing/pull/5275)
 
 
 ### Eventing Extensions
@@ -156,9 +156,9 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### 🧹 Clean up
 
-- Simplify istio installation for e2e test. [#564](https://github.com/knative/operator/pull/564)
-- Use deployment namespace to determine gateway namespace for Kourier. [#577](https://github.com/knative/operator/pull/577)
-- Update the script of the upgrade tests for serving. [#574](https://github.com/knative/operator/pull/574)
+- Simplify Istio installation for end-to-end test. [#564](https://github.com/knative/operator/pull/564)
+- Use he Kourier deployment namespace to determine Kourier's gateway namespace. [#577](https://github.com/knative/operator/pull/577)
+- Updated the Knative Serving upgrade tests script. [#574](https://github.com/knative/operator/pull/574)
 
 
 ### Thank you contributors
