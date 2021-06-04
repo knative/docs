@@ -10,20 +10,20 @@ This page shows how to install and configure Apache Kafka Sink.
 
 ## Prerequisites
 
-[Installing Eventing using YAML files](./../../install/install-eventing-with-yaml.md).
+You must have a Kubernetes cluster with [Knative Eventing installed](../../../admin/install/).
 
 ## Installation
 
 1. Install the Kafka controller:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
 1. Install the Kafka Sink data plane:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
     ```
 
 1. Verify that `kafka-controller` and `kafka-sink-receiver` are running:
