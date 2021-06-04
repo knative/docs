@@ -67,7 +67,7 @@ You can learn more about the build configuration syntax
 
 ## Configuring the Service descriptor
 
-Importantly, in [helloworld-scala.yaml](./helloworld-scala.yaml) **change the
+Importantly, in [service.yaml](./service.yaml) **change the
 image reference to match up with the repository**, name, and version specified
 in the [build.sbt](./build.sbt) in the previous section.
 
@@ -111,10 +111,10 @@ local Docker Repository.
 
 === "yaml"
 
-    Apply the [Service yaml definition](./helloworld-scala.yaml):
+    Apply the [Service yaml definition](./service.yaml):
 
     ```shell
-    kubectl apply --filename helloworld-scala.yaml
+    kubectl apply --filename service.yaml
     ```
 
 
@@ -198,11 +198,11 @@ local Docker Repository.
 === "kubectl"
 
     ```shell
-    kubectl delete --filename helloworld-scala.yaml
+    kubectl delete --filename service.yaml
     ```
 
     ```
-    kubetl delete --filename helloworld-scala.yaml
+    kubetl delete --filename service.yaml
     ```
 
 

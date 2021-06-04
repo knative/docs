@@ -15,7 +15,7 @@ Knative Serving supports the implementation of Knative Pod Autoscaler (KPA) and 
 
 **IMPORTANT:** If you want to use Kubernetes Horizontal Pod Autoscaler (HPA),
 you must install it after you install Knative Serving.
-For how to install HPA, see [Install optional Eventing extensions](../../install/install-extensions.md#install-optional-serving-extensions).
+For how to install HPA, see [Install optional Serving extensions](../../admin/install/install-extensions.md#install-optional-serving-extensions).
 
 ### Knative Pod Autoscaler (KPA)
 
