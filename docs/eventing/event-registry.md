@@ -20,7 +20,7 @@ type information in the cluster data store.
    particularly the
    [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
    section.
-1. Be familiar with [event sources](./sources).
+1. Be familiar with [event sources](../sources).
 
 ## Discovering events with the registry
 
@@ -268,7 +268,7 @@ the next topic: How do we actually populate the registry in the first place?
 
   If you are interested in more information regarding configuration options of a
   KafkaSource, please refer to the
-  [KafKaSource sample](./samples/kafka/).
+  [KafKaSource sample](../samples/kafka/).
 
   For this discussion, the relevant information from the yaml above are the
   `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We
@@ -283,7 +283,7 @@ the next topic: How do we actually populate the registry in the first place?
 
 ## Next steps
 
-1. [Installing Knative](../install/).
-1. [Knative code samples](./samples/) is a useful resource to better understand
+1. [Installing Knative](../../getting-started/install-knative-quickstart/).
+1. [Knative code samples](../samples/) is a useful resource to better understand
    some of the Event Sources (remember to point them to a Broker if you want
    automatic registration of EventTypes in the registry).
