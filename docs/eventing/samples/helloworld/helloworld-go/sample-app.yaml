@@ -46,9 +46,9 @@ spec:
   selector:
     app: helloworld-go
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
 ---
 # Knative Eventing Trigger to trigger the helloworld-go service
 apiVersion: eventing.knative.dev/v1

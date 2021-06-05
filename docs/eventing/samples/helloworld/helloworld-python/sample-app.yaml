@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: knative-samples
   labels:
-       eventing.knative.dev/injection: enabled
+    eventing.knative.dev/injection: enabled
 ---
 # A default broker
 apiVersion: eventing.knative.dev/v1
@@ -49,9 +49,9 @@ spec:
   selector:
     app: helloworld-python
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
 ---
 # Knative Eventing Trigger to trigger the helloworld-python service
 apiVersion: eventing.knative.dev/v1
