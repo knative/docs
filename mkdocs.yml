@@ -27,17 +27,22 @@ nav:
         - Overview: admin/README.md
         - Installing Knative:
           - Overview: admin/install/README.md
-          - Prerequisites: admin/install/prerequisites.md
-          - Installing using YAML:
-            - Install Serving with YAML: admin/install/install-serving-with-yaml.md
-            - Install Eventing with YAML: admin/install/install-eventing-with-yaml.md
-            - Install optional extensions: admin/install/install-extensions.md
-            - Description Tables for YAML Files: admin/install/installation-files.md
+          # Serving Installation
+          - Install Knative Serving:
+            - Install Serving with YAML: admin/install/serving/install-serving-with-yaml.md
+            - Knative Serving installation files: admin/install/serving/serving-installation-files.md
+          # Eventing Installation
+          - Install Knative Eventing:
+            - Install Eventing with YAML: admin/install/eventing/install-eventing-with-yaml.md
+            - Knative Eventing installation files: admin/install/eventing/eventing-installation-files.md
+          # Operator Installation
           - Knative Operator:
             - Installing with the Operator: admin/install/knative-with-operators.md
             - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
             - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
+          # Istio Installation
           - Installing Istio for Knative: admin/install/installing-istio.md
+          # Vendor docs
           - Using a Knative-based Offering: admin/install/knative-offerings.md
           - ... | install/*
         - Checking your Knative version: check-install-version.md
@@ -290,22 +295,24 @@ plugins:
       redirect_maps:
         'help/README.md' : 'docs/help/README.md'
         'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
+        'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
+        'admin/install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
         'serving/services/deployment.md': 'admin/serving/deployment.md'
         'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
         'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
-        'install/install-eventing-with-yaml.md': 'admin/install/install-eventing-with-yaml.md'
+        'install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
         'install/install-extensions.md': 'admin/install/install-extensions.md'
-        'install/install-serving-with-yaml.md': 'admin/install/install-serving-with-yaml.md'
-        'install/installation-files.md': 'admin/install/installation-files.md'
+        'install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
+        'install/installation-files.md': 'admin/install/README.md'
         'install/installing-istio.md': 'admin/install/installing-istio.md'
         'install/knative-offerings.md': 'admin/install/knative-offerings.md'
         'install/knative-with-operators.md': 'admin/install/knative-with-operators.md'
         'install/operator/configuring-eventing-cr.md': 'admin/install/operator/configuring-eventing-cr.md'
         'install/operator/configuring-serving-cr.md': 'admin/install/operator/configuring-serving-cr.md'
-        'install/prerequisites.md': 'admin/install/prerequisites.md'
+        'install/prerequisites.md': 'admin/install/README.md'
         'uninstall.md': 'admin/install/uninstall.md'
         'upgrade/index.md': 'admin/upgrade/README.md'
         'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'

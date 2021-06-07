@@ -11,7 +11,7 @@ For more details about the process, the feature phases, quality requirements and
 
 ## Before you begin
 
-You must have a Knative cluster running with the Eventing component installed. [Learn more](../install/)
+You must have a Knative cluster running with the Eventing component installed. [Learn more](../../admin/install/)
 
 ## Experimental features configuration
 

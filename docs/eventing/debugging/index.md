@@ -157,7 +157,7 @@ kubectl --namespace knative-debug get channel.messaging.knative.dev chan --outpu
 ```
 
 If `status` is completely missing, it implies that something is wrong with the
-`in-memory-channel` controller. See [Channel Controller](#channel-controller).
+`in-memory-channel` controller. See [Channel Controller](./#channel-controller).
 
 Next verify that `chan` is addressable:
 
@@ -187,7 +187,7 @@ something went wrong during `chan` reconciliation. See
 
 ##### `src`
 
-`src` is a [`ApiServerSource`](../sources/apiserversource.md).
+`src` is a [`ApiServerSource`](../sources/apiserversource).
 
 First we will verify that `src` is writing to `chan`.
 
