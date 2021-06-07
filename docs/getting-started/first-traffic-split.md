@@ -109,17 +109,27 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
 === "YAML"
     Add the following to the bottom of your existing YAML file:
     ``` bash
-    ---
     apiVersion: serving.knative.dev/v1
-    kind: Route
+    kind: Service
     metadata:
       name: hello
     spec:
+      template:
+        metadata:
+          name: hello-knative
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+              ports:
+                - containerPort: 8080
+              env:
+                - name: TARGET
+                  value: "Knative"
       traffic:
-        - revisionName: latest
-          percent: 50
-        - revisionName: hello-world
-          percent: 50
+      - latestRevision: true
+        percent: 50
+      - revisionName: hello-world
+        percent: 50
     ```
     Once you've edited your existing YAML file:
     ``` bash

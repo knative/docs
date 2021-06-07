@@ -12,7 +12,7 @@ Knative provides the InMemoryChannel channel implementation by default. This def
 **NOTE:** InMemoryChannel channels should not be used in production environments.
 
 The default channel implementation is specified in the `default-ch-webhook` ConfigMap in the `knative-eventing` namespace.
-For more information about modifying ConfigMaps, see [Configuring the Eventing Operator custom resource](../../../docs/install/operator/configuring-eventing-cr).
+For more information about modifying ConfigMaps, see [Configuring the Eventing Operator custom resource](../../../install/operator/configuring-eventing-cr).
 
 In the following example, the cluster default channel implementation is InMemoryChannel, while the namespace default channel implementation for the `example-namespace` is KafkaChannel.
 

@@ -1,19 +1,8 @@
----
-title: "Installing Knative Eventing using YAML files"
-linkTitle: "Install Eventing using YAML"
-weight: 03
-type: "docs"
-showlandingtoc: "false"
----
-
 # Installing Knative Eventing using YAML files
 
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
 
-## Prerequisites
-
-Before installation, you must meet the prerequisites.
-See [Knative Prerequisites](./prerequisites.md).
+--8<-- "prerequisites.md"
 
 ## Install the Eventing component
 
@@ -32,12 +21,9 @@ To install the Eventing component:
     ```
 
     !!! info
-        For information about the YAML files in the Knative Serving and Eventing releases, see
-        [Installation files](./installation-files.md).
-
+        For information about the YAML files in Knative Eventing, see [Description Tables for YAML Files](./eventing-installation-files.md).
 
 ## Verify the installation
-
 
 !!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"
 
@@ -56,9 +42,9 @@ Follow the procedure for the channel of your choice:
 === "Apache Kafka Channel"
 
     1. First,
-      [Install Apache Kafka for Kubernetes](../eventing/samples/kafka/README.md)
+      [Install Apache Kafka for Kubernetes](../../../../eventing/samples/kafka)
 
-    1. Then install the Apache Kafka channel:
+    1. Then install the Apache Kafka Channel:
 
         ```bash
         curl -L "{{ artifact(org="knative-sandbox",repo="eventing-kafka",file="channel-consolidated.yaml")}}" \
@@ -68,8 +54,7 @@ Follow the procedure for the channel of your choice:
 
         !!! tip
             To learn more about the Apache Kafka channel, try
-            [our sample](../eventing/samples/kafka/channel/README.md)
-
+            [our sample](../../../../eventing/samples/kafka/channel/)
 
 === "Google Cloud Pub/Sub Channel"
 
@@ -107,8 +92,6 @@ Follow the procedure for the channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
-
-
 ## Optional: Install a broker layer:
 
 The tabs below expand to show instructions for installing the broker layer.
@@ -132,20 +115,18 @@ Follow the procedure for the broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
-    For more information, see the [Kafka broker](./../eventing/broker/kafka-broker/) documentation.
+    For more information, see the [Kafka broker](../../../../eventing/broker/kafka-broker/) documentation.
 
 === "MT-Channel-based"
 
     The following command installs an implementation of broker that utilizes
-    channels and runs event routing components in a System Namespace, providing a
-    smaller and simpler installation.
+    channels and runs event routing components in a System Namespace, providing a smaller and simpler installation.
 
     ```bash
     kubectl apply -f {{ artifact(repo="eventing",file="mt-channel-broker.yaml")}}
     ```
 
-    To customize which broker channel implementation is used, update the following
-    ConfigMap to specify which configurations are used for which namespaces:
+    To customize which broker channel implementation is used, update the following ConfigMap to specify which configurations are used for which namespaces:
 
     ```yaml
     apiVersion: v1
@@ -175,8 +156,7 @@ Follow the procedure for the broker of your choice:
             namespace: knative-eventing
     ```
 
-    The referenced `imc-channel` and `kafka-channel` example ConfigMaps would look
-    like:
+    The referenced `imc-channel` and `kafka-channel` example ConfigMaps would look like:
 
     ```yaml
     apiVersion: v1
@@ -213,12 +193,138 @@ Follow the procedure for the broker of your choice:
 
     For more information, see the [RabbitMQ broker](https://github.com/knative-sandbox/eventing-rabbitmq) in GitHub.
 
-## Next steps
+## Install optional Eventing extensions
 
-After installing Knative Eventing:
+The tabs below expand to show instructions for installing each Eventing extension.
+<!-- This indentation is important for things to render properly. -->
 
-- To easily interact with Knative Eventing components, [install the `kn` CLI](/docs/client/install-kn.md)
+=== "Apache Kafka Sink"
 
-- To add optional enhancements to your installation, see [Installing optional extensions](./install-extensions.md)
+    1. Install the Kafka controller:
 
-- [Installing Knative Serving using YAML files](./install-serving-with-yaml.md)
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
+        ```
+
+    1. Install the Kafka Sink data plane:
+
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
+        ```
+
+    For more information, see the [Kafka Sink](../../../eventing/sink/kafka-sink.md) documentation.
+
+=== "Sugar Controller"
+
+    <!-- Unclear when this feature came in -->
+
+    The following command installs the Eventing Sugar Controller:
+
+    ```bash
+    kubectl apply -f {{ artifact(repo="eventing",file="eventing-sugar-controller.yaml")}}
+    ```
+
+    The Knative Eventing Sugar Controller will react to special labels and
+    annotations and produce Eventing resources. For example:
+
+    - When a Namespace is labeled with `eventing.knative.dev/injection=enabled`, the
+      controller will create a default broker in that namespace.
+    - When a Trigger is annotated with `eventing.knative.dev/injection=enabled`, the
+      controller will create a Broker named by that Trigger in the Trigger's
+      Namespace.
+
+    The following command enables the default Broker on a namespace (here
+    `default`):
+
+    ```bash
+    kubectl label namespace default eventing.knative.dev/injection=enabled
+    ```
+
+=== "Github Source"
+
+    The following command installs the single-tenant Github source:
+
+    ```bash
+    kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="github.yaml")}}
+    ```
+
+    The single-tenant GitHub source creates one Knative service per GitHub source.
+
+    The following command installs the multi-tenant GitHub source:
+
+    ```bash
+    kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="mt-github.yaml")}}
+    ```
+
+    The multi-tenant GitHub source creates only one Knative service handling all
+    GitHub sources in the cluster. This source does not support logging or tracing
+    configuration yet.
+
+    To learn more about the Github source, try
+    [our sample](../../../../eventing/sources/github-source/)
+
+=== "Apache Camel-K Source"
+
+    The following command installs the Apache Camel-K Source:
+
+    ```bash
+    kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-camel",file="camel.yaml")}}
+    ```
+
+    To learn more about the Apache Camel-K source, try
+    [our sample](../../../../eventing/sources/apache-camel-source/)
+
+=== "Apache Kafka Source"
+
+    The following command installs the Apache Kafka Source:
+
+    ```bash
+    kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka",file="source.yaml")}}
+    ```
+
+    To learn more about the Apache Kafka source, try
+    [our sample](../../../../eventing/sources/kafka-source)
+
+
+=== "GCP Sources"
+
+    The following command installs the GCP Sources:
+
+    ```bash
+    # This installs both the Sources and the Channel.
+    kubectl apply -f {{ artifact(org="google",repo="knative-gcp",file="cloud-run-events.yaml")}}
+    ```
+
+    To learn more about the Cloud Pub/Sub source, try
+    [our sample](../../../../eventing/sources/cloud-pubsub-source).
+
+    To learn more about the Cloud Storage source, try
+    [our sample](../../../../eventing/sources/cloud-storage-source).
+
+    To learn more about the Cloud Scheduler source, try
+    [our sample](../../../../eventing/sources/cloud-scheduler-source).
+
+    To learn more about the Cloud Audit Logs source, try
+    [our sample](../../../../eventing/sources/cloud-audit-logs-source).
+
+
+=== "Apache CouchDB Source"
+
+    The following command installs the Apache CouchDB Source:
+
+    ```bash
+    kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-couchdb",file="couchdb.yaml")}}
+    ```
+
+    To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
+
+=== "VMware Sources and Bindings"
+
+    The following command installs the VMware Sources and Bindings:
+
+    ```bash
+    kubectl apply -f {{ artifact(org="vmware-tanzu",repo="sources-for-knative",file="release.yaml")}}
+    ```
+
+    To learn more about the VMware sources and bindings, try
+    [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
