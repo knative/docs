@@ -57,9 +57,9 @@ data:
 
 **State**: Alpha, disabled by default
 
-When using the `KReference` type to refer to another Knative resource, you can just specify the API `Group` of the resource, instead of the full `APIVersion`.
+When using the `KReference` type to refer to another Knative resource, you can just specify the API `group` of the resource, instead of the full `APIVersion`.
 
-For example, in order to refer to an `InMemoryChannel`, more than using:
+For example, in order to refer to an `InMemoryChannel`, instead of the following spec:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
@@ -67,7 +67,7 @@ kind: InMemoryChannel
 name: my-channel
 ```
 
-You can use instead:
+You can use the following:
 
 ```yaml
 group: messaging.knative.dev
@@ -75,6 +75,7 @@ kind: InMemoryChannel
 name: my-channel
 ```
 
-Thanks to this feature you can let Knative resolve the full `APIVersion` and further upgrades/deprecations/removals of the referred CRD won't affect your resources.
+With this feature you can allow Knative to resolve the full `APIVersion` and further upgrades, deprecations and removals of the referred CRD without affecting existing resources.
 
-Note: At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref`, in future other usages of `KReference` will support it.
+!!! note
+    At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref`.
