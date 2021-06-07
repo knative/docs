@@ -53,7 +53,7 @@ After you have created a channel and a sink, you can create a subscription to en
     1. Create a Subscription object in a YAML file:
 
         ```yaml
-        apiVersion: messaging.knative.dev/v1beta1
+        apiVersion: messaging.knative.dev/v1
         kind: Subscription
         metadata:
           name: <subscription_name> # Name of the subscription.
