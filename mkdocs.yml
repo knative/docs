@@ -117,7 +117,7 @@ nav:
           - .NET: serving/samples/hello-world/helloworld-csharp/README.md
           - Go: serving/samples/hello-world/helloworld-go/README.md
           - Java (Spark): serving/samples/hello-world/helloworld-java-spark/README.md
-          - Java (Spring): serving/samples/hello-world/helloworld-java-spring/README.md
+          - Hello World - Spring Boot Java: serving/samples/hello-world/helloworld-java-spring/README.md
           - Kotlin: serving/samples/hello-world/helloworld-kotlin/README.md
           - Node.js: serving/samples/hello-world/helloworld-nodejs/README.md
           - PHP: serving/samples/hello-world/helloworld-php/README.md
