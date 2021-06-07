@@ -44,7 +44,6 @@ nav:
           - Installing Istio for Knative: admin/install/installing-istio.md
           # Vendor docs
           - Using a Knative-based Offering: admin/install/knative-offerings.md
-          - ... | install/*
         - Checking your Knative version: check-install-version.md
         - Upgrading your installation:
           - Overview: admin/upgrade/README.md
@@ -72,7 +71,7 @@ nav:
     - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Deploying from private registries: serving/deploying-from-private-registry/README.md
+        - Deploying from private registries: serving/deploying-from-private-registry.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
@@ -99,7 +98,7 @@ nav:
         - Configuring high-availability components: serving/config-ha.md
         - Installing cert-manager: serving/installing-cert-manager.md
         - Configuring HTTPS connections: serving/using-a-tls-cert.md
-        - Enabling auto TLS certs: serving/using-auto-tls.md
+        - Enabling auto-TLS certs: serving/using-auto-tls.md
         - Metrics API: serving/metrics.md
         - Feature/Extension Flags: serving/feature-flags.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
@@ -109,34 +108,33 @@ nav:
         - Routing and managing traffic: serving/samples/blue-green-deployment.md
         - Cloud Events apps:
           - Overview: serving/samples/cloudevents/README.md
-          - .NET: serving/samples/cloudevents/cloudevents-dotnet/index.md
-          - Go: serving/samples/cloudevents/cloudevents-go/index.md
-          - Node.js: serving/samples/cloudevents/cloudevents-nodejs/index.md
-          - Rust: serving/samples/cloudevents/cloudevents-rust/index.md
-          - Java and Spring: serving/samples/cloudevents/cloudevents-spring/index.md
-          - Java and Vert.x: serving/samples/cloudevents/cloudevents-vertx/index.md
-        - GitHub Webhook - Go: serving/samples/gitwebhook-go/index.md
-        - gRPC Server - Go: serving/samples/grpc-ping-go/index.md
+          - .NET: serving/samples/cloudevents/cloudevents-dotnet/README.md
+          - Go: serving/samples/cloudevents/cloudevents-go/README.md
+          - Node.js: serving/samples/cloudevents/cloudevents-nodejs/README.md
+          - Rust: serving/samples/cloudevents/cloudevents-rust/README.md
+          - Java and Spring: serving/samples/cloudevents/cloudevents-spring/README.md
+          - Java and Vert.x: serving/samples/cloudevents/cloudevents-vertx/README.md
+        - GitHub Webhook - Go: serving/samples/gitwebhook-go/README.md
+        - gRPC Server - Go: serving/samples/grpc-ping-go/README.md
         - Hello world apps:
           - Overview: serving/samples/hello-world/README.md
-          - .NET: serving/samples/hello-world/helloworld-csharp/index.md
-          - Go: serving/samples/hello-world/helloworld-go/index.md
-          - Java (Spark): serving/samples/hello-world/helloworld-java-spark/index.md
-          - Java (Spring): serving/samples/hello-world/helloworld-java-spring/index.md
-          - Kotlin: serving/samples/hello-world/helloworld-kotlin/index.md
-          - Node.js: serving/samples/hello-world/helloworld-nodejs/index.md
-          - PHP: serving/samples/hello-world/helloworld-php/index.md
-          - Python: serving/samples/hello-world/helloworld-python/index.md
-          - Ruby: serving/samples/hello-world/helloworld-ruby/index.md
-          - Scala: serving/samples/hello-world/helloworld-scala/index.md
-          - Shell: serving/samples/hello-world/helloworld-shell/index.md
-        - Routing services - Go: serving/samples/knative-routing-go/index.md
-        - multi-container samples: serving/samples/multi-container/index.md
-        - RESTful service - Go: serving/samples/rest-api-go/index.md
-        - Secrets - Go: serving/samples/secrets-go/index.md
-        - Tag Header Based Routing: serving/samples/tag-header-based-routing/index.md
-        - Traffic splitting: serving/samples/traffic-splitting/index.md
-        - ... | *.md
+          - .NET: serving/samples/hello-world/helloworld-csharp/README.md
+          - Go: serving/samples/hello-world/helloworld-go/README.md
+          - Java (Spark): serving/samples/hello-world/helloworld-java-spark/README.md
+          - Hello World - Spring Boot Java: serving/samples/hello-world/helloworld-java-spring/README.md
+          - Kotlin: serving/samples/hello-world/helloworld-kotlin/README.md
+          - Node.js: serving/samples/hello-world/helloworld-nodejs/README.md
+          - PHP: serving/samples/hello-world/helloworld-php/README.md
+          - Python: serving/samples/hello-world/helloworld-python/README.md
+          - Ruby: serving/samples/hello-world/helloworld-ruby/README.md
+          - Scala: serving/samples/hello-world/helloworld-scala/README.md
+          - Shell: serving/samples/hello-world/helloworld-shell/README.md
+        - Routing services - Go: serving/samples/knative-routing-go/README.md
+        - multi-container samples: serving/samples/multi-container/README.md
+        - RESTful service - Go: serving/samples/rest-api-go/README.md
+        - Secrets - Go: serving/samples/secrets-go/README.md
+        - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
+        - Traffic splitting: serving/samples/traffic-splitting/README.md
     # Eventing
     - Knative Eventing:
       - Overview: eventing/README.md

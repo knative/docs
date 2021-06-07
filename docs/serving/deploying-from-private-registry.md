@@ -1,10 +1,3 @@
----
-title: "Deploying images from a private container registry"
-linkTitle: "Deploying from private registries"
-weight: 10
-type: "docs"
----
-
 # Deploying images from a private container registry
 
 Learn how to configure your Knative cluster to deploy images from a private
