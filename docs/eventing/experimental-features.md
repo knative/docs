@@ -57,6 +57,8 @@ data:
 
 **State**: Alpha, disabled by default
 
+**Tracking issue**: https://github.com/knative/eventing/issues/5086
+
 When using the `KReference` type to refer to another Knative resource, you can just specify the API `group` of the resource, instead of the full `APIVersion`.
 
 For example, in order to refer to an `InMemoryChannel`, instead of the following spec:
