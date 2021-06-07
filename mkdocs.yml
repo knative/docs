@@ -290,7 +290,7 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
-        'help/README.md' : 'docs/help/contributor/README.md'
+        'help/README.md': 'docs/help/contributor/README.md'
         'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
         'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
         'admin/install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
@@ -301,6 +301,7 @@ plugins:
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
         'install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
+        # This doesn't exist anymore, we should probably replace it
         'install/install-extensions.md': 'admin/install/install-extensions.md'
         'install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
         'install/installation-files.md': 'admin/install/README.md'
