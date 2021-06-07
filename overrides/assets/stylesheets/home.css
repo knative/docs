@@ -176,5 +176,5 @@ body {
 
 /*fixing issue in safari css */
 .md-typeset .task-list-item {
-  margin-left: 25px !important;
+  margin-left: 25px;
 }
