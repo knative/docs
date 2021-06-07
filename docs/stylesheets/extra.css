@@ -23,11 +23,6 @@
   float: right;
 }
 
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item--nested a.md-nav__link {
-  color: black;
-}
-
 .md-nav__title .md-nav__button.md-logo img,
 .md-nav__title .md-nav__button.md-logo svg {
   width: auto;

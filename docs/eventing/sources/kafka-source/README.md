@@ -7,7 +7,7 @@ type: "docs"
 
 # Apache Kafka Source Example
 
-Tutorial on how to build and deploy a `KafkaSource` [Eventing source](../../../sources/README.md) using a Knative Serving `Service`.
+Tutorial on how to build and deploy a `KafkaSource` event source.
 
 ## Background
 
@@ -17,8 +17,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ## Prerequisites
 
-- Ensure that you meet the [prerequisites listed in the Apache Kafka overview](../).
-- A Kubernetes cluster with [Knative Kafka Source installed](../../../../install/).
+- A Kubernetes cluster with [Knative Kafka Source installed](../../../admin/install/).
 
 ## Apache Kafka Topic (Optional)
 
@@ -73,6 +72,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 2. Build the Event Display Service (`event-display.yaml`)
 
    ```yaml
+   kubectl apply -f - <<EOF
    apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
@@ -85,23 +85,20 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
            - # This corresponds to
              # https://github.com/knative/eventing/tree/main/cmd/event_display/main.go
              image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+    EOF
    ```
-
-1. Deploy the Event Display Service
-
+   Example output:
    ```
-   $ kubectl apply --filename event-display.yaml
-   ...
    service.serving.knative.dev/event-display created
    ```
 
 1. Ensure that the Service pod is running. The pod name will be prefixed with
    `event-display`.
-   ```
+
+   ```bash
    $ kubectl get pods
    NAME                                            READY     STATUS    RESTARTS   AGE
    event-display-00001-deployment-5d5df6c7-gv2j4   2/2       Running   0          72s
-   ...
    ```
 
 ### Apache Kafka Event Source

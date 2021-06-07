@@ -1,10 +1,3 @@
----
-title: "Autoscaling concepts"
-linkTitle: "Autoscaling concepts"
-weight: 01
-type: "docs"
----
-
 # Autoscaling concepts
 
 This section covers conceptual information about which Autoscaler types are supported, as well as fundamental information about how autoscaling is configured.
@@ -15,7 +8,7 @@ Knative Serving supports the implementation of Knative Pod Autoscaler (KPA) and 
 
 **IMPORTANT:** If you want to use Kubernetes Horizontal Pod Autoscaler (HPA),
 you must install it after you install Knative Serving.
-For how to install HPA, see [Install optional Eventing extensions](../../install/install-extensions.md#install-optional-serving-extensions).
+For how to install HPA, see [Install optional Eventing extensions](../../../admin/install/install-extensions).
 
 ### Knative Pod Autoscaler (KPA)
 
@@ -79,9 +72,6 @@ The type of Autoscaler implementation (KPA or HPA) can be configured by using th
         autoscaler:
           pod-autoscaler-class: "kpa.autoscaling.knative.dev"
     ```
-
-
-
 
 ## Global versus per-revision settings
 

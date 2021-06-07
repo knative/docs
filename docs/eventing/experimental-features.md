@@ -16,7 +16,7 @@ You must have a Knative cluster running with the Eventing component installed. [
 ## Experimental features configuration
 
 When installing Eventing, the `config-features` ConfigMap is added to your cluster in the `knative-eventing` namespace.
-In order to enable a feature, you just need to add it to the config map and set its value to `"enabled"`.
+In order to enable a feature, you just need to add it to the config map and set its value to `enabled`.
 For example, to enable `new-cool-feature`:
 
 ```yaml
@@ -30,10 +30,10 @@ metadata:
     knative.dev/config-propagation: original
     knative.dev/config-category: eventing
 data:
-  new-cool-feature: "enabled"
+  new-cool-feature: enabled
 ```
 
-In order to disable it, you can either remove the flag or set it to `"disabled"`:
+In order to disable it, you can either remove the flag or set it to `disabled`:
 
 ```yaml
 apiVersion: v1
@@ -46,7 +46,7 @@ metadata:
     knative.dev/config-propagation: original
     knative.dev/config-category: eventing
 data:
-  new-cool-feature: "disabled"
+  new-cool-feature: disabled
 ```
 
 ## Features list
