@@ -1,27 +1,12 @@
----
-title: "Knative Operator installation"
-weight: 05
-type: "docs"
-showlandingtoc: "false"
----
-
 # Knative Operator installation
 
 Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 You can install the Serving component, Eventing component, or both on your cluster.
 
-**NOTE:** The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used
-for development or test purposes only.
+!!! warning
+    The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used for development or test purposes only.
 
-## Prerequisites
-
-- You have a cluster that uses Kubernetes v1.18 or newer.
-- You have installed the `kubectl` CLI.
-- If you have only one node in your cluster, you will need at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
-- If you have multiple nodes in your cluster, for each node you will need at least 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
-- Your Kubernetes cluster must have access to the internet, since Kubernetes needs to be able to fetch images, such as `gcr.io/knative-releases/knative.dev/operator/cmd/operator:<version>`.
-<!--TODO: Verify these requirements-->
-- You have installed [Istio](./installing-istio.md).
+--8<-- "prerequisites.md"
 
 ## Installing the latest release
 
