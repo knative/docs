@@ -13,7 +13,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 
 > Be sure to specify the language your code is in as part of the code block
 
-> Specify bash for any CLI commands.
+> Specify non-language specific code, like CLI commands, specify ```bash (see below for formatting).
 
 === ":white_check_mark: Correct"
     ```go
