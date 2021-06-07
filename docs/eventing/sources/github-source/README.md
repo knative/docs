@@ -1,10 +1,3 @@
----
-title: "GitHub source"
-linkTitle: "GitHub source"
-weight: 30
-type: "docs"
----
-
 # GitHub source
 
 GitHub Source example shows how to wire GitHub events for consumption
@@ -16,7 +9,6 @@ by a Knative Service.
 1. Ensure Knative Serving is [configured with a domain
    name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
-1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.md).
 1. Set up [Knative Eventing](../../../eventing) with the GitHub source.
 
 ### Create a Knative Service
