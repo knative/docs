@@ -14,7 +14,7 @@ procedure:
 1. Update the information in [`channels.yaml`](channels.yaml).
 
 2. Run the generator tool:
-    ```shell
+    ```bash
     go run eventing/channels/generator/main.go
     ```
 -->

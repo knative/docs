@@ -18,7 +18,7 @@ You can update the configuration file for tracing in [config-tracing.yaml](https
 Follow the instructions in the file to set your configuration options. This file includes options such as sample rate (to determine what percentage of requests to trace), debug mode, and backend selection (zipkin or stackdriver).
 
 You can quickly explore and update the ConfigMap object with the following command:
-```shell
+```bash
 kubectl -n knative-serving edit configmap config-tracing
 ```
 
@@ -28,7 +28,7 @@ In order to access request traces, you use the Zipkin visualization tool.
 
 1.  To open the Zipkin UI, enter the following command:
 
-    ```shell
+    ```bash
     kubectl proxy
     ```
 
@@ -50,7 +50,7 @@ In order to access request traces, you use the Jaeger visualization tool.
 
 1.  To open the Jaeger UI, enter the following command:
 
-    ```shell
+    ```bash
     kubectl proxy
     ```
 

@@ -19,7 +19,7 @@ To configure a Knative Service so that it is only available on the cluster-local
 
 - To label a Knative Service:
 
-    ```shell
+    ```bash
     kubectl label kservice ${KSVC_NAME} networking.knative.dev/visibility=cluster-local
     ```
 
@@ -28,13 +28,13 @@ To configure a Knative Service so that it is only available on the cluster-local
 
 - To label a Route when the Route is used directly without a Knative Service:
 
-    ```shell
+    ```bash
     kubectl label route ${ROUTE_NAME} networking.knative.dev/visibility=cluster-local
     ```
 
 - To label a Kubernetes Service:
 
-    ```shell
+    ```bash
     kubectl label service ${SERVICE_NAME} networking.knative.dev/visibility=cluster-local
     ```
 
@@ -42,14 +42,14 @@ To configure a Knative Service so that it is only available on the cluster-local
 
 You can deploy the [Hello World sample](../../../../serving/samples/hello-world/helloworld-go/) and then convert it to be an cluster-local Service by labelling the Service:
 
-```shell
+```bash
 kubectl label kservice helloworld-go networking.knative.dev/visibility=cluster-local
 ```
 
 You can then verify that the change has been made by verifying the URL for the
 `helloworld-go` Service:
 
-```shell
+```bash
 kubectl get kservice helloworld-go
 
 NAME            URL                                              LATESTCREATED         LATESTREADY           READY   REASON

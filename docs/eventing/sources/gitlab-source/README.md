@@ -22,13 +22,13 @@ You will need:
 GitLab Event source lives in the [knative-sandbox/eventing-gitlab](https://github.com/knative-sandbox/eventing-gitlab). Head to the releases page, find the latest release with `gitlab.yaml`
 artifact and replace the `<RELEASE>` with version tag:
 
-```shell
+```bash
 kubectl apply -f https://github.com/knative-sandbox/eventing-gitlab/releases/download/<RELEASE>/gitlab.yaml
 ```
 
 Check that the manager is running:
 
-```shell
+```bash
 kubectl -n knative-sources get pods --selector control-plane=gitlab-controller-manager
 ```
 
@@ -69,7 +69,7 @@ spec:
 
 Create the service:
 
-```shell
+```bash
 kubectl -n default apply -f event-display.yaml
 ```
 
@@ -89,7 +89,7 @@ kubectl -n default apply -f event-display.yaml
 
    Hint: you can generate a random _secretToken_ with:
 
-   ```shell
+   ```bash
    head -c 8 /dev/urandom | base64
    ```
 
@@ -108,7 +108,7 @@ kubectl -n default apply -f event-display.yaml
 
 1. Create the secret using `kubectl`.
 
-   ```shell
+   ```bash
    kubectl -n default apply -f secret.yaml
    ```
 
@@ -148,7 +148,7 @@ kubectl -n default apply -f event-display.yaml
 
 1. Apply the yaml file using `kubectl`:
 
-   ```shell
+   ```bash
    kubectl -n default apply -f gitlabsource.yaml
    ```
 
@@ -181,13 +181,13 @@ Data,
 
 You can remove the GitLab webhook by deleting the GitLab source:
 
-```shell
+```bash
 kubectl --namespace default delete --filename gitlabsource.yaml
 ```
 
 Similarly, you can remove the Service and Secret via:
 
-```shell
+```bash
 kubectl --namespace default delete --filename event-display.yaml
 kubectl --namespace default delete --filename secret.yaml
 

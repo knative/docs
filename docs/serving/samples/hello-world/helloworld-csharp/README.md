@@ -15,7 +15,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 ```
@@ -34,14 +34,14 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 1. First, make sure you have
    [.NET Core SDK 3.1](https://www.microsoft.com/net/core) installed:
 
-   ```shell
+   ```bash
    dotnet --version
    3.1.100
    ```
 
 1. From the console, create a new empty web project using the dotnet command:
 
-   ```shell
+   ```bash
    dotnet new web -o helloworld-csharp
    ```
 
@@ -146,7 +146,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-csharp .
 
@@ -159,7 +159,7 @@ folder) you're ready to build and deploy the sample app.
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
 
-   ```shell
+   ```bash
    kubectl apply --filename service.yaml
    ```
 
@@ -181,7 +181,7 @@ folder) you're ready to build and deploy the sample app.
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-csharp.default.1.2.3.4.sslip.io
    Hello C# Sample v1!
    ```
@@ -190,6 +190,6 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

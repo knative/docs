@@ -24,7 +24,7 @@ cluster.
 You can download a working copy of the sample, by entering the
 following command:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 ```
 
@@ -185,13 +185,13 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest:
    
    servingcontainer
-   ```shell
+   ```bash
    cd -
    cd knative-docs/docs/serving/samples/multi-container/servingcontainer
    go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer 
    ```
    sidecarcontainer
-   ```shell
+   ```bash
    cd -
    cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
    go mod init github.com/knative/docs/docs/serving/samples/multi-container/sidecarcontainer
@@ -205,7 +205,7 @@ After you have modified the sample code files you can build and deploy the sampl
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    cd -
    cd knative-docs/docs/serving/samples/multi-container/servingcontainer
@@ -223,7 +223,7 @@ After you have modified the sample code files you can build and deploy the sampl
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
 
-   ```shell
+   ```bash
    cd -
    cd knative-docs/docs/serving/samples/multi-container
    kubectl apply --filename service.yaml
@@ -238,13 +238,13 @@ After you have modified the sample code files you can build and deploy the sampl
 
 1. Run the following command to find the domain URL for your service:
 
-   ```shell
+   ```bash
    kubectl get ksvc multi-container  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
-   ```shell
+   ```bash
     NAME                URL
     multi-container       http://multi-container.default.1.2.3.4.sslip.io
    ```
@@ -252,7 +252,7 @@ After you have modified the sample code files you can build and deploy the sampl
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://multi-container.default.1.2.3.4.sslip.io
    Yay!! multi-container works
    ```
@@ -263,6 +263,6 @@ After you have modified the sample code files you can build and deploy the sampl
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

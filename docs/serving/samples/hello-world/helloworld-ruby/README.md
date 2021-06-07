@@ -15,7 +15,7 @@ If `TARGET` is not specified, `World` is used as the default value.
 You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 ```
@@ -32,7 +32,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
 1. Create a new directory and cd into it:
 
-   ```shell
+   ```bash
    mkdir app
    cd app
    ```
@@ -84,7 +84,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 1. Run bundle. If you don't have bundler installed, copy the
    [Gemfile.lock](./Gemfile.lock) to your working directory.
 
-   ```shell
+   ```bash
    bundle install
    ```
 
@@ -140,7 +140,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
        in `service.yaml` matches the container you built in the previous step. Apply
        the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename service.yaml
        ```
 
@@ -149,7 +149,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
        With `kn` you can deploy the service with
 
-       ```shell
+       ```bash
        kn service create helloworld-ruby --image=docker.io/{username}/helloworld-ruby --env TARGET="Ruby Sample v1"
        ```
 
@@ -189,13 +189,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
 
 === "kubectl"
-       ```shell
+       ```bash
        kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,URL:.status.url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        NAME                URL
        helloworld-ruby    http://helloworld-ruby.default.1.2.3.4.sslip.io
        ```
@@ -203,13 +203,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-ruby -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-ruby.default.1.2.3.4.sslip.io
        ```
 
@@ -221,7 +221,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
    Example:
 
-   ```shell
+   ```bash
    curl http://helloworld-ruby.default.1.2.3.4.sslip.io
    Hello Ruby Sample v1!
 
@@ -238,12 +238,12 @@ To remove the sample app from your cluster, delete the service record.
 
 === "kubectl"
 
-      ```shell
+      ```bash
       kubectl delete --filename service.yaml
       ```
 
 === "kn"
 
-      ```shell
+      ```bash
       kn service delete helloworld-ruby
       ```

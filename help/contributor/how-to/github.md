@@ -26,7 +26,7 @@ To check out your fork of the `knative/docs` repository:
 1. Clone your fork to your machine and set the `upstream` remote to the
    `knative/docs` repository:
 
-    ```shell
+    ```bash
     mkdir -p ${GOPATH}/src/knative.dev
     cd ${GOPATH}/src/knative.dev
     git clone git@github.com:${YOUR_GITHUB_USERNAME}/docs.git

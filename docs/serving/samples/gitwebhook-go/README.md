@@ -33,7 +33,7 @@ You must meet the following requirements to run this sample:
 
 1. Download a copy of the code:
 
-   ```shell
+   ```bash
    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/serving/samples/gitwebhook-go
    ```
@@ -42,7 +42,7 @@ You must meet the following requirements to run this sample:
    `{DOCKER_HUB_USERNAME}` with your Docker Hub username in the following
    commands.
 
-   ```shell
+   ```bash
    export DOCKER_HUB_USERNAME=username
 
    # Build the container, run from the project folder
@@ -66,7 +66,7 @@ You must meet the following requirements to run this sample:
 
    1. Base64 encode the access token:
 
-      ```shell
+      ```bash
       $ echo -n "45d382d4a9a93c453fb7c8adc109121e7c29fa3ca" | base64
       NDVkMzgyZDRhOWE5M2M0NTNmYjdjOGFkYzEwOTEyMWU3YzI5ZmEzY2E=
       ```
@@ -77,14 +77,14 @@ You must meet the following requirements to run this sample:
    1. Create a webhook secret value unique to this sample, base64 encode it, and
       copy it into `github-secret.yaml` next to `webhookSecret:`:
 
-      ```shell
+      ```bash
       $ echo -n "mygithubwebhooksecret" | base64
       bXlnaXRodWJ3ZWJob29rc2VjcmV0
       ```
 
    1. Apply the secret to your cluster:
 
-      ```shell
+      ```bash
       kubectl apply --filename github-secret.yaml
       ```
 
@@ -118,13 +118,13 @@ You must meet the following requirements to run this sample:
 
 1. Use `kubectl` to apply the `service.yaml` file.
 
-   ```shell
+   ```bash
    $ kubectl apply --filename service.yaml
    ```
 
    Response:
 
-   ```shell
+   ```bash
    service "gitwebhook" created
    ```
 
@@ -133,14 +133,14 @@ You must meet the following requirements to run this sample:
 
    1. Retrieve the hostname for this service, using the following command:
 
-      ```shell
+      ```bash
       $ kubectl get ksvc gitwebhook \
          --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
       ```
 
       Example response:
 
-      ```shell
+      ```bash
       NAME                DOMAIN
       gitwebhook          gitwebhook.default.MYCUSTOMDOMAIN.com
       ```
@@ -173,7 +173,7 @@ You must meet the following requirements to run this sample:
 
 Once deployed, you can inspect the created resources with `kubectl` commands:
 
-```shell
+```bash
 # This will show the Knative service that we created:
 kubectl get ksvc --output yaml
 
@@ -198,6 +198,6 @@ right, you'll see the title of the PR will be modified, with the text
 
 To clean up the sample service:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

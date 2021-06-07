@@ -36,7 +36,7 @@ The functions used in these examples live in
 
 To create the cluster default Broker type:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Broker
@@ -96,7 +96,7 @@ spec:
 Change the `default` namespace below to create the services in the namespace where you have
 configured your broker.
 
-```shell
+```bash
 kubectl -n default create -f ./steps.yaml
 ```
 
@@ -140,7 +140,7 @@ spec:
 Change the `default` namespace below to create the sequence in the namespace where you have
 configured your broker.
 
-```shell
+```bash
 kubectl -n default create -f ./sequence.yaml
 ```
 
@@ -168,7 +168,7 @@ spec:
 Change the `default` namespace below to create the PingSource in the namespace where you have
 configured your broker and sequence.
 
-```shell
+```bash
 kubectl -n default create -f ./ping-source.yaml
 ```
 
@@ -194,7 +194,7 @@ spec:
 Change the `default` namespace below to create the trigger in the namespace where you have
 configured your broker and sequence.
 
-```shell
+```bash
 kubectl -n default create -f ./trigger.yaml
 
 ```
@@ -233,7 +233,7 @@ spec:
 Change `default` namespace below to create the service and trigger in the namespace
 where you have configured your broker.
 
-```shell
+```bash
 kubectl -n default create -f ./display-trigger.yaml
 ```
 
@@ -242,13 +242,13 @@ kubectl -n default create -f ./display-trigger.yaml
 You can now see the final output by inspecting the logs of the sequence-display
 pods.
 
-```shell
+```bash
 kubectl -n default get pods
 ```
 
 View the logs for the `sequence-display` pod:
 
-```shell
+```bash
 kubectl -n default logs -l serving.knative.dev/service=sequence-display -c user-container --tail=-1
 ☁️  cloudevents.Event
 Validation: valid

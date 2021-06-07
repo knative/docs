@@ -23,7 +23,7 @@ with Knative version 0.16 and above.
 
 1. Move into the docs directory:
 
-```shell
+```bash
 cd $GOPATH/src/github.com/knative/docs
 ```
 

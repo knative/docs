@@ -52,7 +52,7 @@ spec:
 Update gateway instance `knative-ingress-gateway` under `knative-serving`
 namespace:
 
-```shell
+```bash
 kubectl edit gateway knative-ingress-gateway -n knative-serving
 ```
 
@@ -76,7 +76,7 @@ If there is a change in service ports (compared with that of
 Update gateway configmap `config-istio` under `knative-serving`
 namespace:
 
-```shell
+```bash
 kubectl edit configmap config-istio -n knative-serving
 ```
 

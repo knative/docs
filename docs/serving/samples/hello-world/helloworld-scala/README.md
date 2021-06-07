@@ -17,7 +17,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 ```
@@ -41,7 +41,7 @@ If you want to use your Docker Hub repository, set the repository to
 
 If you use Minikube, you first need to run:
 
-```shell
+```bash
 eval $(minikube docker-env)
 ```
 
@@ -49,7 +49,7 @@ If want to use the Docker Repository inside Minikube, either set this to
 "dev.local" or if you want to use another repository name, then you need to run
 the following command after `docker:publishLocal`:
 
-```shell
+```bash
 docker tag yourreponame/helloworld-scala:<version> dev.local/helloworld-scala:<version>
 ```
 
@@ -93,13 +93,13 @@ spec:
 
 In order to build the project and create and push the Docker image, run either:
 
-```shell
+```bash
 sbt docker:publishLocal
 ```
 
 or
 
-```shell
+```bash
 sbt docker:publish
 ```
 
@@ -166,19 +166,19 @@ local Docker Repository.
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-scala -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-scala.default.1.2.3.4.sslip.io
        ```
 
     Finally, to try your service, use the obtained URL:
 
-    ```shell
+    ```bash
     curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
     ```
 
