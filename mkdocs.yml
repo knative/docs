@@ -65,7 +65,6 @@ nav:
             - Configuring private Services: developer/serving/services/private-services.md
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
-            - Modifying the Deployment Config Map: developer/serving/services/deployment.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
     # Serving
