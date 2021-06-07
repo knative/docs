@@ -9,6 +9,7 @@ by a Knative Service.
 1. Ensure Knative Serving is [configured with a domain
    name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
+1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
 1. Set up [Knative Eventing](../../../eventing) with the GitHub source.
 
 ### Create a Knative Service

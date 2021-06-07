@@ -88,7 +88,7 @@ nav:
         - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
         - Configuring scale bounds: serving/autoscaling/scale-bounds.md
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
-        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/index.md
+        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
     # Admin topics - serving
       - Administrator Topics:
         - Kubernetes services: serving/knative-kubernetes-services.md
@@ -145,7 +145,7 @@ nav:
           - Overview: eventing/sources/apiserversource/README.md
           - Getting started: eventing/sources/apiserversource/getting-started/README.md
         - ContainerSource: eventing/sources/containersource.md
-        - PingSource: eventing/sources/ping-source/index.md
+        - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
           - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
@@ -170,10 +170,10 @@ nav:
         - Parallel: eventing/flows/parallel.md
         - Sequence:
           - Overview: eventing/flows/sequence/README.md
-          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/index.md
-          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/index.md
-          - Create additional events: eventing/flows/sequence/sequence-terminal/index.md
-          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/index.md
+          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+          - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
+          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
       - Channels:
         - Overview: eventing/channels/README.md
         - Channel types and defaults: eventing/channels/channel-types-defaults.md
@@ -195,7 +195,7 @@ nav:
       - Sink:
         - Overview: eventing/sink/README.md
         - Apache Kafka Sink: eventing/sink/kafka-sink.md
-      - Debugging: eventing/debugging/index.md
+      - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Metrics API: eventing/metrics.md
       - Experimental Features: eventing/experimental-features.md
@@ -208,7 +208,7 @@ nav:
           - Python: eventing/samples/helloworld/helloworld-python/README.md
         - Apache Kafka:
           - Overview: eventing/samples/kafka/README.md
-          - Binding Example: eventing/samples/kafka/binding/index.md
+          - Binding Example: eventing/samples/kafka/binding/README.md
           - Channel Example: eventing/samples/kafka/channel/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
@@ -220,8 +220,7 @@ nav:
         - CloudStorageSource: eventing/sources/cloud-storage-source/README.md
         - GitHub source: eventing/sources/github-source/README.md
         - GitLab source: eventing/sources/gitlab-source/README.md
-        - IoT core: eventing/samples/iot-core/index.md
-        - ... | *
+        - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:
       - Serving: reference/api/serving.md

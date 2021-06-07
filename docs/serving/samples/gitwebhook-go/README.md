@@ -21,10 +21,7 @@ You must meet the following requirements to run this sample:
     cluster, see the [installation guides](../../../install/).
   - Your Knative cluster must be
     [configured to use your custom domain](../../using-a-custom-domain.md).
-  - You must ensure that your Knative cluster uses a static IP address:
-    - For Google Kubernetes Engine, see
-      [assigning a static IP address](../../gke-assigning-static-ip-address.md).
-    - For other cloud providers, refer to your provider's documentation.
+  - You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
 - An installed version of [Docker](https://www.docker.com).
 - A [Docker Hub account](https://hub.docker.com/) to which you are able to
   upload your sample's container image.
