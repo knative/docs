@@ -293,12 +293,13 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'help/README.md' : 'docs/help/README.md'
+        'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
         'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
         'admin/install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
         'serving/services/deployment.md': 'admin/serving/deployment.md'
         'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
         'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
-        'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
