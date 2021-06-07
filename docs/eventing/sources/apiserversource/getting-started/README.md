@@ -224,5 +224,4 @@ Deleting the namespace removes the API server source and all of the related reso
 ```bash
 kubectl delete namespace <namespace>
 ```
-where;
-- `<namespace>` is the name of the namespace that you created in step 1 above.
+Where `<namespace>` is the name of the namespace that you created in step 1 above.
