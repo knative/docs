@@ -45,3 +45,16 @@
   margin: 0;
   padding: 0;
 }
+
+/* text sizing of tables, Alert, Warnings, Notes*/
+.md-typeset table {
+  font-size: 100% !important;
+}
+
+.md-typeset code {
+  font-size: 100% !important;
+}
+
+.md-typeset .admonition {
+  font-size: 100% !important;
+}
