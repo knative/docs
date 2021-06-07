@@ -14,21 +14,21 @@ The Source object defines the arguments and parameters needed to instantiate a C
 
 All Sources are part of the `sources` category.
 
+=== "kn"
+    You can list existing event sources on your cluster by entering the kn command:
+
+    ```bash
+    kn source list
+    ```
+
 === "kubectl"
     You can list existing event sources on your cluster by entering the command:
 
-    ```shell
+    ```bash
     kubectl get sources
     ```
 
 
-
-=== "kn"
-    You can list existing event sources on your cluster by entering the kn command:
-
-    ```shell
-    kn source list
-    ```
 
 
 

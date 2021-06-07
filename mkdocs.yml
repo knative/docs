@@ -291,7 +291,7 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
-        'help/README.md' : 'docs/help/README.md'
+        'help/README.md' : 'docs/help/contributor/README.md'
         'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
         'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
         'admin/install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
