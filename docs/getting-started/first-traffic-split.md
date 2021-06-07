@@ -23,8 +23,8 @@ Instead of `TARGET`="World," let's update the environment variable `TARGET` on o
     ```
 
 === "YAML"
-
     ``` bash
+    ---
     apiVersion: serving.knative.dev/v1
     kind: Service
     metadata:
@@ -32,7 +32,7 @@ Instead of `TARGET`="World," let's update the environment variable `TARGET` on o
     spec:
       template:
         metadata:
-          name: knative
+          name: hello-knative
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -107,16 +107,27 @@ By default, when Knative creates a brand new `Revision` it directs 100% of traff
     ```
 
 === "YAML"
-
+    Add the following to the bottom of your existing YAML file:
     ``` bash
     apiVersion: serving.knative.dev/v1
-    kind: Route
+    kind: Service
     metadata:
-      name: route-hello
+      name: hello
     spec:
+      template:
+        metadata:
+          name: hello-knative
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+              ports:
+                - containerPort: 8080
+              env:
+                - name: TARGET
+                  value: "Knative"
       traffic:
-      - revisionName: @latest
-      - percent: 50
+      - latestRevision: true
+        percent: 50
       - revisionName: hello-world
         percent: 50
     ```
@@ -142,7 +153,7 @@ Verify traffic split configure correctly by listing the revisions again.
 ```{ .bash .no-copy }
 NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
 hello-knative   hello     50%              2            10m   3 OK / 4     True
-hello-world     hello     50%              1            36m   3 OK / 4     True 
+hello-world     hello     50%              1            36m   3 OK / 4     True
 ```
 
 Access the Knative service on the browser again [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, and refresh multiple times to see the different output being served by each revision.

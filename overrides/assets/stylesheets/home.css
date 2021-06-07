@@ -25,20 +25,17 @@
 }
 
 @keyframes continuousgradient {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
 .animated-gradient {
   animation-name: continuousgradient;
-  background: linear-gradient(-45deg, #6593c8, #0366ad, #000, #6593c8, #0366ad, #000);
-  animation-duration: 6s;
+  background: linear-gradient(-45deg, #1d6ba6, #000);
+  animation-duration: 12s;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in-out;
   position: absolute;
   top: 0;
   width: 100%;
@@ -50,6 +47,11 @@
   background-size: 300% 100%;
   opacity: 0.4;
   z-index: -1;
+  padding: 20px;
+}
+
+.animated-gradient img {
+  display: block !important;
 }
 
 .md-typeset img,
@@ -92,31 +94,6 @@ body {
   padding-bottom: 5em;
 }
 
-@media only screen and (max-width: 1240px) {
-  .components-container,
-  .calltoaction-container,
-  .usedby-container,
-  .home-container,
-  .features-container,
-  .intro-container {
-    padding: 40px;
-  }
-
-  .rocket {
-    left: -190px;
-  }
-
-  .intro-container {
-    padding-left: 180px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .component-flex {
-    flex-wrap: wrap;
-  }
-}
-
 .home-container .md-button {
   margin-top: 0.5rem;
   margin-right: 0.5rem;
@@ -149,6 +126,12 @@ body {
   display: block;
 }
 
+.intro-container img {
+  height: 10em;
+  float: right;
+  margin: 0 0 0 2em;
+}
+
 .usedby-container {
   background: #fff;
   color: #000;
@@ -166,4 +149,32 @@ body {
   justify-content: center;
   align-items: center;
   margin: 1.2em;
+}
+
+@media only screen and (max-width: 1240px) {
+  .components-container,
+  .calltoaction-container,
+  .usedby-container,
+  .home-container,
+  .features-container,
+  .intro-container {
+    padding: 40px;
+  }
+
+  .intro-container img {
+    display: block;
+    margin:0 auto;
+    float: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .component-flex {
+    flex-wrap: wrap;
+  }
+}
+
+/*fixing issue in safari css */
+.md-typeset .task-list-item {
+  margin-left: 25px !important;
 }

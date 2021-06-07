@@ -63,7 +63,7 @@ For more information about Subscription objects, see
     1. Create a Subscription object in a YAML file:
 
         ```yaml
-        apiVersion: messaging.knative.dev/v1beta1
+        apiVersion: messaging.knative.dev/v1
         kind: Subscription
         metadata:
           name: <subscription-name> # Name of the subscription.

@@ -39,7 +39,7 @@ Where
 
 ## Broker event delivery
 
-See the [broker](./broker/broker-event-delivery) documentation.
+See the [broker](../broker/broker-event-delivery) documentation.
 
 ## Channel event delivery
 

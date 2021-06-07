@@ -1,6 +1,5 @@
 # Before you begin
-
-Before you can get started with Knative you must set up a development environment.
+Before you can get started with a Knative Quickstart deployment you must set up a development environment.
 
 ## Set up a development cluster
 

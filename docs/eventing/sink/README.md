@@ -75,7 +75,7 @@ rules:
       - get
       - list
       - watch
- ```
+```
 
 ## Knative Sinks
 

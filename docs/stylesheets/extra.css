@@ -23,11 +23,6 @@
   float: right;
 }
 
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item--nested a.md-nav__link {
-  color: black;
-}
-
 .md-nav__title .md-nav__button.md-logo img,
 .md-nav__title .md-nav__button.md-logo svg {
   width: auto;
@@ -39,6 +34,7 @@
 }
 .md-typeset > h1:first-of-type {
   margin: 0 0 0.75em;
+}
 
 .md-version__list li:nth-last-child(1) a {
   color: gray;
@@ -48,4 +44,17 @@
 .md-announce .md-announce__inner {
   margin: 0;
   padding: 0;
+}
+
+/* text sizing of tables, Alert, Warnings, Notes*/
+.md-typeset table {
+  font-size: 100% !important;
+}
+
+.md-typeset code {
+  font-size: 100% !important;
+}
+
+.md-typeset .admonition {
+  font-size: 100% !important;
 }

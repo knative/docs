@@ -10,6 +10,10 @@ kind: Broker
 metadata:
   name: default
   namespace: knative-samples
+  annotations:
+    # Note: you can set the eventing.knative.dev/broker.class annotation to change the class of the broker.
+    # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
 spec: {}
 ---
 # Helloworld-go app deployment
@@ -33,15 +37,15 @@ spec:
 ---
 # Service that exposes helloworld-go app.
 # This will be the subscriber for the Trigger
-  kind: Service
-  apiVersion: v1
-  metadata:
-    name: helloworld-go
-    namespace: knative-samples
-  spec:
-    selector:
-      app: helloworld-go
-    ports:
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-go
+  namespace: knative-samples
+spec:
+  selector:
+    app: helloworld-go
+  ports:
     - protocol: TCP
       port: 80
       targetPort: 8080

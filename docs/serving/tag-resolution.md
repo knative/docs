@@ -1,10 +1,3 @@
----
-title: "Enabling tag to digest resolution"
-linkTitle: "Tag resolution"
-weight: 75
-type: "docs"
----
-
 # Enabling tag to digest resolution
 
 Knative serving resolves image tags to a digest when you create a revision. This
@@ -15,6 +8,10 @@ see
 
 Unfortunately, this means that the knative serving controller needs to be
 configured to access your container registry.
+
+!!! tip
+
+    If you are a cluster administrator, you can [modify the `config-deployment` ConfigMap settings](../../admin/serving/deployment) so that tag resolution is skipped for Deployments in the cluster.
 
 ## Custom Certificates
 
@@ -71,27 +68,4 @@ spec:
               value: http://proxy.example.com
             - name: HTTPS_PROXY
               value: https://proxy.example.com
-```
-
-## Skipping tag resolution
-
-If this all seems like too much trouble, you can configure serving to skip tag
-resolution via the `registriesSkippingTagResolving` configmap field:
-
-```
-kubectl -n knative-serving edit configmap config-deployment
-```
-
-E.g., to disable tag resolution for `registry.example.com` (note: This is not a complete configmap, it is a snippet showing registriesSkippingTagResolving):
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-deployment
-  namespace: knative-serving
-
-data:
-  # List of repositories for which tag to digest resolving should be skipped
-  registriesSkippingTagResolving: registry.example.com
 ```

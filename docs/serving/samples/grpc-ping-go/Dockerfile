@@ -15,7 +15,7 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang:1.12 as builder
+FROM golang:1.13 as builder
 
 # Retrieve the dependencies.
 RUN go get google.golang.org/grpc
