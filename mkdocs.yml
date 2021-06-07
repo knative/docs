@@ -50,7 +50,11 @@ nav:
           - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
         - Logging: admin/collecting-logs/README.md
-        - Metrics: admin/collecting-metrics/README.md
+        # Administrator metrics
+        - Metrics:
+          - About metrics: admin/collecting-metrics/README.md
+          - Knative Eventing metrics: admin/collecting-metrics/eventing-metrics/metrics.md
+          - Knative Serving metrics: admin/collecting-metrics/serving-metrics/metrics.md
         - Uninstalling Knative: admin/install/uninstall.md
         # Serving config
         - Knative Serving configuration:
@@ -99,7 +103,6 @@ nav:
         - Installing cert-manager: serving/installing-cert-manager.md
         - Configuring HTTPS connections: serving/using-a-tls-cert.md
         - Enabling auto-TLS certs: serving/using-auto-tls.md
-        - Metrics API: serving/metrics.md
         - Feature/Extension Flags: serving/feature-flags.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
         - Setting up a custom domain: serving/using-a-custom-domain.md
@@ -197,7 +200,6 @@ nav:
         - Apache Kafka Sink: eventing/sink/kafka-sink.md
       - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
-      - Metrics API: eventing/metrics.md
       - Experimental Features: eventing/experimental-features.md
       - Code samples:
         - Overview: eventing/samples/README.md
@@ -290,6 +292,9 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'help/README.md': 'docs/help/contributor/README.md'
+        'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
+        'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
         'help/README.md': 'docs/help/contributor/README.md'
         'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
         'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
