@@ -30,7 +30,7 @@ that are active when running Knative Serving.
      $ kubectl get deployments -n knative-serving
      ```
 
-     This should return the following output:
+      This returns an output similar to the following:
 
      ```{ .bash .no-copy }
      NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
