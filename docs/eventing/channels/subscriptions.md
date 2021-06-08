@@ -2,9 +2,7 @@
 
 After you have created a channel and a sink, you can create a subscription to enable event delivery.
 
-The subscription consists of a Subscription object, which specifies the channel and the sink (also
-known as the subscriber) to deliver events to. You can also specify some sink-specific options, such
-as how to handle failures.
+The Subscription object specifies the Channel and the sink, also known as the subscriber, that events are delivered to. You can also specify some sink-specific options, such as how to handle delivery failures.
 
 For more information about Subscription objects, see the [Subscription spec](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Subscription).
 
