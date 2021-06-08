@@ -9,7 +9,13 @@
     "postcss-cli": "^8.3.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "predev":     "./hack/docker/clean.sh knative-docs-dev",
+    "dev":        "./hack/docker/run.sh knative-docs-dev 8000",
+    "postdev":    "./hack/docker/logs.sh knative-docs-dev",
+    "dev:stop":   "./hack/docker/clean.sh knative-docs-dev",
+    "dev:build":  "./hack/docker/build.sh knative-docs-dev",
+    "serve":      "./hack/mkdocs.sh",
+    "test":       "./hack/docker/test.sh && exit 1"
   },
   "repository": {
     "type": "git",
