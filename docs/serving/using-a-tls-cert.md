@@ -162,7 +162,7 @@ continue below for instructions about manually adding a certificate.
        private key, `key.pem`, by entering the following command:
 
            ```bash
-           kubectl create --namespace contour-external secret tls default-cert \
+           kubectl create -n contour-external secret tls default-cert \
              --key key.pem \
              --cert cert.pem
            ```
