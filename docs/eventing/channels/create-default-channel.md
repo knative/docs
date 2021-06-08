@@ -62,7 +62,4 @@ by copying its subscriptions to, and setting its status to, that of the InMemory
 object.
 
 !!! note
-    Defaults only apply when objects are created.
-    Defaults are applied by the webhook only when a channel or sequence is created.
-    If the default settings change, the new defaults only apply to newly created channels,
-    brokers, or sequences. Existing ones do not change.
+    Defaults are only applied by the webhook when a Channel or Sequence is initially created. If the default settings are changed, the new defaults will only be applied to newly created Channels, Brokers, or Sequences. Existing resources are not updated automatically to use the new configuration.
