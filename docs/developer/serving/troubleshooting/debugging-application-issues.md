@@ -26,7 +26,7 @@ ERROR: Non-zero return code '1' from command: Process exited with status 1
 Run the following command to get the `status` of the `Route` object with which
 you deployed your application:
 
-```shell
+```bash
 kubectl get route <route-name> --output yaml
 ```
 
@@ -38,7 +38,7 @@ details, see Knative
 
 To list all Ingress resources and their corresponding labels, run the following command:
 
-```shell
+```bash
 kubectl get ingresses.networking.internal.knative.dev -o=custom-columns='NAME:.metadata.name,LABELS:.metadata.labels'
 NAME            LABELS
 helloworld-go   map[serving.knative.dev/route:helloworld-go serving.knative.dev/routeNamespace:default serving.knative.dev/service:helloworld-go]
@@ -64,7 +64,7 @@ Otherwise, there will be error messages.
 Now, if Ingress shows status `Ready`, there must be a corresponding
 VirtualService. Run the following command:
 
-```shell
+```bash
 kubectl get virtualservice -l networking.internal.knative.dev/ingress=<INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
 ```
 
@@ -83,13 +83,13 @@ Knative uses a LoadBalancer service called `istio-ingressgateway` Service.
 
 To check the IP address of your Ingress, use
 
-```shell
+```bash
 kubectl get svc -n istio-system istio-ingressgateway
 ```
 
 If there is no external IP address, use
 
-```shell
+```bash
 kubectl describe svc istio-ingressgateway -n istio-system
 ```
 
@@ -102,7 +102,7 @@ If you configure your `Route` with `Configuration`, run the following command to
 get the name of the `Revision` created for you deployment (look up the
 configuration name in the `Route` .yaml file):
 
-```shell
+```bash
 kubectl get configuration <configuration-name> --output jsonpath="{.status.latestCreatedRevisionName}"
 ```
 
@@ -111,7 +111,7 @@ name in the `Route` yaml file.
 
 Then run the following command:
 
-```shell
+```bash
 kubectl get revision <revision-name> --output yaml
 ```
 
@@ -138,7 +138,7 @@ Note: some of them are not implemented yet. An alternative is to
 
 To get the `Pod`s for all your deployments:
 
-```shell
+```bash
 kubectl get pods
 ```
 
@@ -153,7 +153,7 @@ configuration-example-00002-deployment-5f475b7849-gxcht   1/2       CrashLoopBac
 Choose one and use the following command to see detailed information for its
 `status`. Some useful fields are `conditions` and `containerStatuses`:
 
-```shell
+```bash
 kubectl get pod <pod-name> --output yaml
 
 ```

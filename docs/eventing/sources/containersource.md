@@ -48,7 +48,7 @@ ko publish ko://knative.dev/eventing/cmd/heartbeats
 Create a new namespace called `containersource-example` by entering the following
 command:
 
-```shell
+```bash
 kubectl create namespace containersource-example
 ```
 
@@ -57,7 +57,7 @@ kubectl create namespace containersource-example
 In order to verify `ContainerSource` is working, we will create a Event Display
 Service that dumps incoming messages to its log.
 
-```shell
+```bash
 kubectl -n containersource-example apply -f - << EOF
 apiVersion: apps/v1
 kind: Deployment
@@ -102,7 +102,7 @@ image you published in the previous step.
 Note that arguments and environment variables are set and will be passed
 to the container.
 
-```shell
+```bash
 kubectl -n containersource-example apply -f - << EOF
 apiVersion: sources.knative.dev/v1
 kind: ContainerSource
@@ -136,7 +136,7 @@ EOF
 View the logs for the `event-display` event consumer by
 entering the following command:
 
-```shell
+```bash
 kubectl -n containersource-example logs -l app=event-display --tail=200
 ```
 
@@ -168,7 +168,7 @@ Data,
 Delete the `containersource-example` namespace and all of its resources from your
 cluster by entering the following command:
 
-```shell
+```bash
 kubectl delete namespace containersource-example
 ```
 

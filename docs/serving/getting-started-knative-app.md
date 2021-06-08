@@ -52,7 +52,7 @@ The only mandatory flag for creating a Service is `--image` with the container i
 
 To create a Service directly at the cluster, use:
 
-```shell
+```bash
 # Create a Knative service with the Knative CLI kn
 kn service create helloworld-go --image gcr.io/knative-samples/helloworld-go --env TARGET="Go Sample v1"
 ```
@@ -123,7 +123,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-go
        ```
 
@@ -149,13 +149,13 @@ To see if your app has been deployed successfully, you need the URL created by K
 
 === "kubectl"
 
-       ```shell
+       ```bash
        kubectl get ksvc helloworld-go
        ```
 
        The command will return the following:
 
-       ```shell
+       ```bash
        NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
        helloworld-go   http://helloworld-go.default.34.83.80.117.sslip.io   helloworld-go-96dtk   helloworld-go-96dtk   True
        ```
@@ -173,7 +173,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 1. Now you can make a request to your app and see the results. Replace
    the URL with the one returned by the command in the previous step.
 
-   ```shell
+   ```bash
    # curl http://helloworld-go.default.34.83.80.117.sslip.io
    Hello World: Go Sample v1!
    ```
@@ -192,13 +192,13 @@ You've successfully deployed your first application using Knative!
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kn service delete helloworld-go
 ```
 
 Alternatively, you can also delete the service with `kubectl` via the definition file or by name.
 
-```shell
+```bash
 # Delete with the KService given in the yaml file:
 kubectl delete --filename service.yaml
 

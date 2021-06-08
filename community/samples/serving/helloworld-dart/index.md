@@ -42,7 +42,7 @@ be created using the following instructions.
 2. If you want to run locally, install dependencies. If you only want to run in
    Docker or Knative, you can skip this step.
 
-   ```shell
+   ```bash
    > pub get
    ```
 
@@ -111,7 +111,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-dart .
 
@@ -124,7 +124,7 @@ folder) you're ready to build and deploy the sample app.
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
 
-   ```shell
+   ```bash
    kubectl apply --filename service.yaml
    ```
 
@@ -146,7 +146,7 @@ folder) you're ready to build and deploy the sample app.
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-dart.default.1.2.3.4.sslip.io
    Hello Dart Sample v1
    ```
@@ -155,6 +155,6 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

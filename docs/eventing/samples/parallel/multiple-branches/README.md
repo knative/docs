@@ -83,7 +83,7 @@ spec:
 .
 ```
 
-```shell
+```bash
 kubectl create -f ./filters.yaml -f ./transformers.yaml
 ```
 
@@ -104,7 +104,7 @@ spec:
 Change `default` below to create the `Sequence` in the Namespace where you want
 your resources to be created.
 
-```shell
+```bash
 kubectl -n default create -f ./event-display.yaml
 ```
 
@@ -149,7 +149,7 @@ spec:
       name: event-display
 ```
 
-```shell
+```bash
 kubectl create -f ./parallel.yaml
 ```
 
@@ -174,7 +174,7 @@ spec:
       name: odd-even-parallel
 ```
 
-```shell
+```bash
 kubectl create -f ./ping-source.yaml
 ```
 
@@ -186,7 +186,7 @@ take some time for the events to show up in the logs.
 
 Let's look at the `event-display` log:
 
-```shell
+```bash
 kubectl logs -l serving.knative.dev/service=event-display --tail=30 -c user-container
 
 ☁️  cloudevents.Event

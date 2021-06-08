@@ -101,7 +101,7 @@ manually obtain a TLS certificate from Let's Encrypt.
 1. Run the following command to use Certbot to request a certificate using DNS
    challenge during authorization:
 
-   ```shell
+   ```bash
    ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
    ```
 
@@ -164,7 +164,7 @@ continue below for instructions about manually adding a certificate.
     1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
        private key, `key.pem`, by entering the following command:
 
-       ```shell
+       ```bash
        kubectl create --namespace contour-external secret tls default-cert \
          --key key.pem \
          --cert cert.pem
@@ -192,7 +192,7 @@ continue below for instructions about manually adding a certificate.
     1. Update the Knative Contour plugin to start using the certificate as a fallback
        when auto-TLS is disabled. This can be done with the following patch:
 
-       ```shell
+       ```bash
        kubectl patch cm config-contour -n knative-serving \
          -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
        ```
@@ -206,7 +206,7 @@ continue below for instructions about manually adding a certificate.
     1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
        private key, `key.pem`, by entering the following command:
 
-       ```shell
+       ```bash
        kubectl create --namespace istio-system secret tls tls-cert \
          --key key.pem \
          --cert cert.pem
@@ -219,7 +219,7 @@ continue below for instructions about manually adding a certificate.
        1. Run the following command to open the Knative shared `gateway` in edit
           mode:
 
-          ```shell
+          ```bash
           kubectl edit gateway knative-ingress-gateway --namespace knative-serving
           ```
 

@@ -53,7 +53,7 @@ Build the application container and publish it to a container registry:
 
 1. Move into the sample directory:
 
-```shell
+```bash
 cd $GOPATH/src/github.com/knative/docs
 ```
 
@@ -63,14 +63,14 @@ If you use Google Container Registry (GCR), you will need to enable the
 [GCR API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com)
 in your GCP project.
 
-```shell
+```bash
 export REPO="gcr.io/<YOUR_PROJECT_ID>"
 ```
 
 If you use Docker Hub as your docker image registry, replace <username> with
 your dockerhub username and run the following command:
 
-```shell
+```bash
 export REPO="docker.io/<username>"
 ```
 
@@ -145,7 +145,7 @@ You should see 2 Knative services: `search-service` and `login-service`.
 
 1. Find the shared Gateway IP and export as an environment variable:
 
-```shell
+```bash
 INGRESSGATEWAY=istio-ingressgateway
 
 export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
@@ -154,7 +154,7 @@ export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
 
 2. Find the `Search` service URL with:
 
-```shell
+```bash
 # kubectl get route search-service  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 NAME              URL
 search-service    http://search-service.default.example.com
@@ -162,7 +162,7 @@ search-service    http://search-service.default.example.com
 
 3. Make a curl request to the service:
 
-```shell
+```bash
 curl http://${GATEWAY_IP} --header "Host:search-service.default.example.com"
 ```
 
@@ -170,7 +170,7 @@ You should see: `Search Service is called !`
 
 4. Similarly, you can also directly access "Login" service with:
 
-```shell
+```bash
 curl http://${GATEWAY_IP} --header "Host:login-service.default.example.com"
 ```
 
@@ -218,7 +218,7 @@ kubectl get VirtualService entry-route --output yaml
     corresponding URIs. You should get the same results as directly accessing
     these services. Get the ingress IP:
 
-    ```shell
+    ```bash
     INGRESSGATEWAY=istio-ingressgateway
 
     export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system \
@@ -227,13 +227,13 @@ kubectl get VirtualService entry-route --output yaml
 
 * Send a request to the Search service:
 
-    ```shell
+    ```bash
     curl http://${GATEWAY_IP}/search --header "Host: example.com"
     ```
 
     or
 
-    ```shell
+    ```bash
     curl http://${GATEWAY_IP}/search --header "Host: <YOUR_DOMAIN_NAME>"
     ```
 
@@ -241,13 +241,13 @@ kubectl get VirtualService entry-route --output yaml
 
 * Send a request to the Login service:
 
-    ```shell
+    ```bash
     curl http://${GATEWAY_IP}/login --header "Host: example.com"
     ```
 
     or
 
-    ```shell
+    ```bash
     curl http://${GATEWAY_IP}/login --header "Host: <YOUR_DOMAIN_NAME>"
     ```
 
@@ -305,7 +305,7 @@ VirtualService requests from HTTP to HTTPS, failing the request.
 
 To clean up the sample resources:
 
-```shell
+```bash
 kubectl delete --filename docs/serving/samples/knative-routing-go/sample.yaml
 kubectl delete --filename docs/serving/samples/knative-routing-go/routing.yaml
 ```

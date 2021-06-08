@@ -1,7 +1,7 @@
 # Settings in the [build] context are global and are applied to all contexts
 # unless otherwise overridden by more specific contexts.
 [build]
-  command = "./hack/build-with-blog.sh"
+  command = "./hack/build.sh"
   publish = "site"
 
 [build.environment]

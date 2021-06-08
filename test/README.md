@@ -23,7 +23,7 @@ TODO(#66): Write real unit tests.
 You might need to install `kubetest` in order to run the end-to-end tests
 locally:
 
-```shell
+```bash
 go get -u k8s.io/test-infra/kubetest
 ```
 

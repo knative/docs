@@ -60,7 +60,7 @@ You will need:
    You can also download a working copy of the sample, by running the
    following commands:
 
-   ```shell
+   ```bash
    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/serving/samples/hello-world/helloworld-go
    ```
@@ -104,7 +104,7 @@ You will need:
 1. Use the Go tool to create a
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
-   ```shell
+   ```bash
    go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
    ```
 
@@ -112,7 +112,7 @@ You will need:
 
 1. To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-go .
 
@@ -151,7 +151,7 @@ You will need:
 
        1. Apply the configuration using `kubectl`:
 
-          ```shell
+          ```bash
           kubectl apply --filename service.yaml
           ```
 
@@ -164,13 +164,13 @@ You will need:
 
        1. Run the following command to find the domain URL for your service:
 
-          ```shell
+          ```bash
           kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
           ```
 
           Example:
 
-          ```shell
+          ```bash
            NAME                URL
            helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
           ```
@@ -180,12 +180,12 @@ You will need:
 
        Use `kn` to deploy the service:
 
-       ```shell
+       ```bash
        kn service create helloworld-go --image=docker.io/{username}/helloworld-go --env TARGET="Go Sample v1"
        ```
 
        You should see output like this:
-       ```shell
+       ```bash
        Creating service 'helloworld-go' in namespace 'default':
 
          0.031s The Configuration is still working to reflect the latest desired specification.
@@ -213,7 +213,7 @@ You will need:
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-go.default.1.2.3.4.sslip.io
    Hello Go Sample v1!
    ```
@@ -226,11 +226,11 @@ To remove the sample app from your cluster, delete the service record:
 
 
 === "kubectl"
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
 === "kn"
-    ```shell
+    ```bash
     kn service delete helloworld-go
     ```

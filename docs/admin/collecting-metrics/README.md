@@ -33,7 +33,7 @@ In the following example, you can configure a single collector instance using a 
 
 1. Create a namespace for the collector to run in, by entering the following command:
 
-       ```shell
+       ```bash
        kubectl create namespace <namespace>
        ```
     Where
@@ -42,14 +42,14 @@ In the following example, you can configure a single collector instance using a 
 
 1. Create a Deployment, Service, and ConfigMap for the collector by entering the following command:
 
-       ```shell
+       ```bash
        kubectl apply -f https://raw.githubusercontent.com/knative/docs/master/docs/install/collecting-metrics/collector.yaml
        ```
 
 1. Update the `config-observability` ConfigMaps in the Knative Serving and
    Eventing namespaces, by entering the follow command:
 
-       ```shell
+       ```bash
        kubectl patch --namespace knative-serving configmap/config-observability \
          --type merge \
          --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
@@ -62,7 +62,7 @@ In the following example, you can configure a single collector instance using a 
 
 1. You can check that metrics are being forwarded by loading the Prometheus export port on the collector, by entering the following command:
 
-    ```shell
+    ```bash
     kubectl port-forward --namespace metrics deployment/otel-collector 8889
     ```
 
@@ -77,7 +77,7 @@ aggregating timeseries metrics. It can be used to scrape the OpenTelemetry colle
 
 1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) by entering the following command:
 
-       ```shell
+       ```bash
        kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
        ```
 
@@ -88,7 +88,7 @@ aggregating timeseries metrics. It can be used to scrape the OpenTelemetry colle
 1. Create a `ServiceAccount` object with the ability to read Kubernetes services and pods, so that Prometheus can track the resource endpoints.
 1. Apply the `prometheus.yaml` file to create a Prometheus instance, by entering the following command:
 
-       ```shell
+       ```bash
        kubectl apply -f prometheus.yaml
        ```
 <!--TODO: Add links / commands for the two steps above?-->
@@ -101,7 +101,7 @@ To access the console in your web browser:
 
 1. Enter the command:
 
-        ```shell
+        ```bash
         kubectl port-forward --namespace metrics service/prometheus-operated 9090
         ```
 

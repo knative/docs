@@ -26,14 +26,14 @@ If `TARGET` is not specified, `World` is used as the default value.
 You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 ```
 
 1. Run the application locally:
 
-   ```shell
+   ```bash
    ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar
    ```
 
@@ -68,7 +68,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
 1. To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-java .
    # Push the container to docker registry
@@ -85,7 +85,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
        Use `kn` to deploy the service, make sure to replace `{username}` with your Docker Hub username:
 
-       ```shell
+       ```bash
        kn service create helloworld-java --image=docker.io/{username}/helloworld-java --env TARGET="SparkJava Sample v1"
        ```
 
@@ -116,7 +116,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
        1. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename service.yaml
        ```
 
@@ -138,24 +138,24 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-java -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-java.default.1.2.3.4.xip.io
        ```
 
 === "kubectl"
-       ```shell
+       ```bash
        kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,URL:.status.url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        NAME                      URL
        helloworld-java    http://helloworld-java.default.1.2.3.4.xip.io
        ```
@@ -169,7 +169,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
    Example:
 
-   ```shell
+   ```bash
    curl http://helloworld-java.default.1.2.3.4.sslip.io
    Hello SparkJava Sample v1!
    # Even easier with kn:
@@ -184,11 +184,11 @@ To remove the sample app from your cluster, delete the service record.
 
 
 === "kn"
-    ```shell
+    ```bash
     kn service delete helloworld-java
     ```
 
 === "kubectl"
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```

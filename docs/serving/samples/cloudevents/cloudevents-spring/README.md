@@ -28,7 +28,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-spring
 ```
@@ -45,14 +45,14 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-spring
 
 To build the image, run:
 
-```shell
+```bash
 mvn compile jib:build -Dimage=<image_name>
 ```
 
 To deploy the Knative Service, edit the `service.yaml` file and replace `<image>`
 with the deployed image name. Then run:
 
-```shell
+```bash
 kubectl apply -f service.yaml
 ```
 
@@ -60,7 +60,7 @@ kubectl apply -f service.yaml
 
 Get the URL for your Service with:
 
-```shell
+```bash
 $ kubectl get ksvc
 NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
 cloudevents-spring   http://cloudevents-java.sslip.io                 cloudevents-spring-86h28   cloudevents-spring-86h28   True
@@ -68,7 +68,7 @@ cloudevents-spring   http://cloudevents-java.sslip.io                 cloudevent
 
 Then send a CloudEvent to it with:
 
-```shell
+```bash
 $ curl \
     -X POST -v \
     -H "content-type: application/json"  \
@@ -83,7 +83,7 @@ $ curl \
 You can also send CloudEvents spawning a temporary curl pod in your cluster
 with:
 
-```shell
+```bash
 $ kubectl run curl \
     --image=curlimages/curl --rm=true --restart=Never -ti -- \
     -X POST -v \
@@ -98,7 +98,7 @@ $ kubectl run curl \
 
 You'll see on the console:
 
-```shell
+```bash
 > POST / HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/7.69.1
@@ -125,7 +125,7 @@ You'll see on the console:
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```
 
@@ -138,7 +138,7 @@ To remove the sample app from your cluster, delete the service:
 
     Run:
 
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
@@ -147,7 +147,7 @@ To remove the sample app from your cluster, delete the service:
 
     Run:
 
-    ```shell
+    ```bash
     kn service delete cloudevents-spring
     ```
 

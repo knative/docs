@@ -1,10 +1,3 @@
----
-title: "GitHub source"
-linkTitle: "GitHub source"
-weight: 30
-type: "docs"
----
-
 # GitHub source
 
 GitHub Source example shows how to wire GitHub events for consumption
@@ -16,7 +9,7 @@ by a Knative Service.
 1. Ensure Knative Serving is [configured with a domain
    name](../../../serving/using-a-custom-domain.md)
    that allows GitHub to call into the cluster.
-1. If you're using GKE, you'll also want to [assign a static IP address](../../../serving/gke-assigning-static-ip-address.md).
+1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
 1. Set up [Knative Eventing](../../../eventing) with the GitHub source.
 
 ### Create a Knative Service
@@ -39,7 +32,7 @@ spec:
 
 Enter the following command to create the service from `service.yaml`:
 
-```shell
+```bash
 kubectl --namespace default apply --filename service.yaml
 ```
 
@@ -78,13 +71,13 @@ stringData:
 
 Hint: you can makeup a random _secretToken_ with:
 
-```shell
+```bash
 head -c 8 /dev/urandom | base64
 ```
 
 Then, apply the githubsecret using `kubectl`:
 
-```shell
+```bash
 kubectl --namespace default apply --filename githubsecret.yaml
 ```
 
@@ -125,7 +118,7 @@ spec:
 
 Then, apply that yaml using `kubectl`:
 
-```shell
+```bash
 kubectl --namespace default apply --filename github-source.yaml
 ```
 
@@ -144,7 +137,7 @@ Create a pull request in your GitHub repository. We will verify
 that the GitHub events were sent into the Knative eventing system
 by looking at our message dumper function logs.
 
-```shell
+```bash
 kubectl --namespace default get pods
 kubectl --namespace default logs github-event-display-XXXX user-container
 ```
@@ -180,13 +173,13 @@ X-Request-Id: 8a2201af-5075-9447-b593-ec3a243aff52
 
 You can remove the Github webhook by deleting the Github source:
 
-```shell
+```bash
 kubectl --namespace default delete --filename github-source.yaml
 ```
 
 Similarly, you can remove the Service and Secret via:
 
-```shell
+```bash
 kubectl --namespace default delete --filename service.yaml
 kubectl --namespace default delete --filename githubsecret.yaml
 

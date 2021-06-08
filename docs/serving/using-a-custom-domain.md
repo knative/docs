@@ -18,7 +18,7 @@ To change the {default-domain} value there are a few steps involved:
 1. Edit the domain configuration config-map to replace `example.com` with your
    own domain, for example `mydomain.com`:
 
-   ```shell
+   ```bash
    kubectl edit cm config-domain --namespace knative-serving
    ```
 
@@ -79,7 +79,7 @@ You can also apply an updated domain configuration:
 
 1. Apply updated domain configuration to your cluster:
 
-   ```shell
+   ```bash
    kubectl apply --filename config-domain.yaml
    ```
 
@@ -94,7 +94,7 @@ Deploy an app (for example,
 cluster as normal. You can retrieve the URL in Knative Route "helloworld-go"
 with the following command:
 
-```shell
+```bash
 kubectl get route helloworld-go --output jsonpath="{.status.url}"
 ```
 
@@ -102,7 +102,7 @@ You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 
 And you can check the IP address of your Knative gateway by running:
 
-```shell
+```bash
 export INGRESSGATEWAY=istio-ingressgateway
 
 if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
@@ -117,7 +117,7 @@ kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.st
 You can map the domain to the IP address of your Knative gateway in your local
 machine with:
 
-```shell
+```bash
 INGRESSGATEWAY=istio-ingressgateway
 
 export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`

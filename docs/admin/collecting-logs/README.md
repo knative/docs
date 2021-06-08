@@ -36,7 +36,7 @@ The `fluent-bit-collector.yaml` file defines a StatefulSet, as well as a Kuberne
 
 1. Apply the configuration by entering the command:
 
-    ```shell
+    ```bash
     kubectl apply -f https://github.com/knative/docs/raw/main/docs/admin/install/collecting-logs/fluent-bit-collector.yaml
     ```
     The default configuration will classify logs into:
@@ -52,7 +52,7 @@ The `fluent-bit-collector.yaml` file defines a StatefulSet, as well as a Kuberne
 
 1. To access the logs through your web browser, enter the command:
 
-    ```shell
+    ```bash
     kubectl port-forward --namespace logging service/log-collector 8080:80
     ```
 
@@ -60,7 +60,7 @@ The `fluent-bit-collector.yaml` file defines a StatefulSet, as well as a Kuberne
 
 4. Optional: You can open a shell in the `nginx` pod and search the logs using Unix tools, by entering the command:
 
-    ```shell
+    ```bash
     kubectl exec --namespace logging --stdin --tty --container nginx log-collector-0
     ```
 
@@ -169,7 +169,7 @@ Minikube requires an explicit command to [mount a directory](https://minikube.si
 
 The following command mounts the `logs` directory inside the current directory onto `/mnt/logs` in the VM:
 
-```shell
+```bash
 minikube mount ./logs:/mnt/logs
 ```
 

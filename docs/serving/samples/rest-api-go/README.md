@@ -23,7 +23,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
    [Homebrew](https://brew.sh/) on OS X.
 1. Download a copy of the code:
 
-   ```shell
+   ```bash
    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
@@ -43,7 +43,7 @@ To build and push to a container registry using Docker:
    This sample uses
    [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
    
-    ```shell
+    ```bash
     export REPO="gcr.io/<YOUR_PROJECT_ID>"
     ```
 
@@ -64,7 +64,7 @@ To build and push to a container registry using Docker:
 
 1. Use Docker to build your application container:
 
-   ```shell
+   ```bash
    docker build \
      --tag "${REPO}/rest-api-go" \
      --file docs/serving/samples/rest-api-go/Dockerfile .
@@ -72,7 +72,7 @@ To build and push to a container registry using Docker:
 
 1. Push your container to a container registry:
 
-   ```shell
+   ```bash
    docker push "${REPO}/rest-api-go"
    ```
 
@@ -80,7 +80,7 @@ To build and push to a container registry using Docker:
    path. The command below substitutes using the \${REPO} variable into a new
    file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
-   ```shell
+   ```bash
    envsubst < docs/serving/samples/rest-api-go/sample-template.yaml > \
    docs/serving/samples/rest-api-go/sample.yaml
    ```
@@ -90,7 +90,7 @@ To build and push to a container registry using Docker:
 Now that our image is available from the container registry, we can deploy the
 Knative Serving sample:
 
-```shell
+```bash
 kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
 
@@ -111,41 +111,41 @@ You can inspect the created resources with the following `kubectl` commands:
 
 - View the created Service resource:
 
-  ```shell
+  ```bash
   kubectl get ksvc stock-service-example --output yaml
   ```
 
 - View the created Route resource:
 
-  ```shell
+  ```bash
   kubectl get route -l \
   "serving.knative.dev/service=stock-service-example" --output yaml
   ```
 
 - View the Kubernetes Service created by the Route
 
-  ```shell
+  ```bash
   kubectl get service -l \
   "serving.knative.dev/service=stock-service-example" --output yaml
   ```
 
 - View the created Configuration resource:
 
-  ```shell
+  ```bash
   kubectl get configuration -l \
   "serving.knative.dev/service=stock-service-example" --output yaml
   ```
 
 - View the Revision that was created by our Configuration:
 
-  ```shell
+  ```bash
   kubectl get revision -l \
   "serving.knative.dev/service=stock-service-example" --output yaml
   ```
 
 - View the Deployment created by our Revision
 
-  ```shell
+  ```bash
   kubectl get deployment -l \
   "serving.knative.dev/service=stock-service-example" --output yaml
   ```
@@ -157,7 +157,7 @@ and then you run `curl` commands to send request with your stock symbol.
 
 1. Get the URL of the service:
 
-   ```shell
+   ```bash
    kubectl get ksvc stock-service-example  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                    URL
    stock-service-example   http://stock-service-example.default.1.2.3.4.sslip.io
@@ -167,7 +167,7 @@ and then you run `curl` commands to send request with your stock symbol.
 
    1. Send a request to the index endpoint:
 
-      ```shell
+      ```bash
       curl http://stock-service-example.default.1.2.3.4.sslip.io
       ```
 
@@ -175,7 +175,7 @@ and then you run `curl` commands to send request with your stock symbol.
 
    2. Send a request to the `/stock` endpoint:
 
-      ```shell
+      ```bash
       curl http://stock-service-example.default.1.2.3.4.sslip.io/stock
       ```
 
@@ -184,7 +184,7 @@ and then you run `curl` commands to send request with your stock symbol.
    3. Send a request to the `/stock` endpoint with your
       "[stock symbol](https://www.marketwatch.com/tools/quotes/lookup.asp)":
 
-      ```shell
+      ```bash
       curl http://stock-service-example.default.1.2.3.4.sslip.io/stock/<SYMBOL>
       ```
 
@@ -196,7 +196,7 @@ and then you run `curl` commands to send request with your stock symbol.
 
       Request:
 
-      ```shell
+      ```bash
       curl http://stock-service-example.default.1.2.3.4.sslip.io/stock/FAKE
       ```
 
@@ -212,6 +212,6 @@ splitting between those Revisions.
 
 To clean up the sample Service:
 
-```shell
+```bash
 kubectl delete --filename docs/serving/samples/rest-api-go/sample.yaml
 ```

@@ -27,7 +27,7 @@ kubectl apply --filename {{ artifact( repo="eventing", file="eventing-sugar-cont
 One way to create a Broker is to manually apply a resource to a cluster using
 the default settings:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Broker
@@ -55,7 +55,7 @@ Sugar Controller will automatically recreate a default Broker.
 
 Creating a "default" Broker when creating a Namespace:
 
-```shell
+```bash
 kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Namespace
@@ -68,7 +68,7 @@ EOF
 
 To automatically create a Broker after a namespace exists, label the Namespace:
 
-```shell
+```bash
 kubectl label namespace default eventing.knative.dev/injection=enabled
 ```
 
@@ -79,7 +79,7 @@ Controller will do nothing.
 
 Create a Broker named by a Trigger (`spec.broker`) in the Trigger's Namespace:
 
-```shell
+```bash
 kubectl apply -f - << EOF
 apiVersion: eventing.knative.dev/v1
 kind: Trigger

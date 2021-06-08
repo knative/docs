@@ -18,7 +18,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
 1. Clone this repository, and move into the sample directory:
 
-   ```shell
+   ```bash
    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs
    ```
@@ -43,7 +43,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. Make a request to the autoscale app to see it consume some resources.
 
-   ```shell
+   ```bash
    curl "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5"
    ```
 
@@ -55,13 +55,13 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. Send 30 seconds of traffic maintaining 50 in-flight requests.
 
-   ```shell
+   ```bash
    hey -z 30s -c 50 \
      "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5" \
      && kubectl get pods
    ```
 
-   ```shell
+   ```bash
    Summary:
      Total:        30.3379 secs
      Slowest:      0.7433 secs
@@ -105,7 +105,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
      [200] 5424 responses
    ```
 
-   ```shell
+   ```bash
    NAME                                             READY   STATUS    RESTARTS   AGE
    autoscale-go-00001-deployment-78cdc67bf4-2w4sk   3/3     Running   0          26s
    autoscale-go-00001-deployment-78cdc67bf4-dd2zb   3/3     Running   0          24s
@@ -220,21 +220,21 @@ customization (32 minutes).
 
 1. Send 60 seconds of traffic maintaining 100 concurrent requests.
 
-   ```shell
+   ```bash
    hey -z 60s -c 100 \
      "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
 
-   ```shell
+   ```bash
    hey -z 60s -q 100 \
      "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=10"
    ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
 
-   ```shell
+   ```bash
    hey -z 60s -q 100 \
      "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=1000"
    ```
@@ -242,7 +242,7 @@ customization (32 minutes).
 1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total
    100 cpus).
 
-   ```shell
+   ```bash
    hey -z 60s -q 100 \
      "http://autoscale-go.default.1.2.3.4.sslip.io?prime=40000000"
    ```
@@ -250,7 +250,7 @@ customization (32 minutes).
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
    gb).
 
-   ```shell
+   ```bash
    hey -z 60s -c 5 \
      "http://autoscale-go.default.1.2.3.4.sslip.io?bloat=1000"
    ```

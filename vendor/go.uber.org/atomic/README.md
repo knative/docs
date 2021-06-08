@@ -4,7 +4,7 @@ Simple wrappers for primitive types to enforce atomic access.
 
 ## Installation
 
-```shell
+```bash
 $ go get -u go.uber.org/atomic@v1
 ```
 
@@ -25,7 +25,7 @@ replace github.com/uber-go/atomic => github.com/uber-go/atomic v1.4.0
 
 You can do so automatically by running the following command.
 
-```shell
+```bash
 $ go mod edit -replace github.com/uber-go/atomic=github.com/uber-go/atomic@v1.4.0
 ```
 
