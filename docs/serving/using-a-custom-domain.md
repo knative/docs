@@ -74,7 +74,7 @@ You can also apply an updated domain configuration:
 
 ## Deploy an application
 
-> If you have an existing deployment, Knative will reconcile the change made to the configuration map and automatically update the host name for all of the deployed services and routes.
+> If you have an existing deployment, Knative reconciles the change made to the ConfigMap, and automatically updates the host name for all of the deployed Services and Routes.
 
 Deploy an app (for example,
 [`helloworld-go`](./samples/hello-world/helloworld-go/)), to your
