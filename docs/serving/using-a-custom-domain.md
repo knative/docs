@@ -46,9 +46,10 @@ To change the {default-domain} value there are a few steps involved:
 
 You can also apply an updated domain configuration:
 
-1. Create a new file, `config-domain.yaml` and paste the following text, replacing the `example.org` and `example.com` values with the new domain you want to use:
+1. Replace the `example.org` and `example.com` values with the new domain you want to use and run the command:
 
      ```yaml
+     kubectl apply -f - <<EOF
      apiVersion: v1
      kind: ConfigMap
      metadata:
@@ -64,12 +65,7 @@ You can also apply an updated domain configuration:
        # Although it will match all routes, it is the least-specific rule so it
        # will only be used if no other domain matches.
        example.com: ""
-     ```
-
-1. Apply updated domain configuration to your cluster:
-
-     ```bash
-     kubectl apply --filename config-domain.yaml
+       EOF
      ```
 
 ## Deploy an application

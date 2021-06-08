@@ -170,10 +170,10 @@ continue below for instructions about manually adding a certificate.
         !!! warning
             Take note of the namespace and secret name. You will need these in future steps.
 
-    1. Contour requires you to create a delegation to use this certificate and private
-       key in different namespaces. This can be done by creating the following resource:
+    1. Contour requires you to create a delegation to use this certificate and private key in different namespaces. You can create this resource by running the command:
 
          ```yaml
+         kubectl apply -f - <<EOF
          apiVersion: projectcontour.io/v1
          kind: TLSCertificateDelegation
          metadata:
@@ -184,6 +184,7 @@ continue below for instructions about manually adding a certificate.
              - secretName: default-cert
                targetNamespaces:
                - "*"
+         EOF
          ```
 
     1. Update the Knative Contour plugin to start using the certificate as a fallback
