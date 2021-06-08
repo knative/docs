@@ -97,4 +97,4 @@ resources:
 
 ## Observability
 
-- [Eventing Metrics API](./metrics.md)
+- [Eventing Metrics API](../admin/collecting-metrics/eventing-metrics/metrics.md)

@@ -20,7 +20,7 @@ Because Knative requests are frequently routed through activator, some considera
 
 Generally, mutual TLS can be configured normally as [in Istio's documentation](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/). However, since the activator can be in the request path of Knative services, it must have sidecars injected. The simplest way to do this is to label the `knative-serving` namespace:
 
-```
+```bash
 kubectl label namespace knative-serving istio-injection=enabled
 ```
 
@@ -28,25 +28,25 @@ If the activator isn't injected:
 
 - In PERMISSIVE mode, you'll see requests appear without the expected `X-Forwarded-Client-Cert` header when forwarded by the activator.
 
-```
-$ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knative.svc.cluster.local/headers
-{
-  "headers": {
-    "Accept": "*/*",
-    "Accept-Encoding": "gzip",
-    "Forwarded": "for=10.72.0.30;proto=http",
-    "Host": "httpbin.knative.svc.cluster.local",
-    "K-Proxy-Request": "activator",
-    "User-Agent": "curl/7.58.0",
-    "X-B3-Parentspanid": "b240bdb1c29ae638",
-    "X-B3-Sampled": "0",
-    "X-B3-Spanid": "416960c27be6d484",
-    "X-B3-Traceid": "750362ce9d878281b240bdb1c29ae638",
-    "X-Envoy-Attempt-Count": "1",
-    "X-Envoy-Internal": "true"
-  }
-}
-```
+    ```bash
+    $ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knative.svc.cluster.local/headers
+    {
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip",
+        "Forwarded": "for=10.72.0.30;proto=http",
+        "Host": "httpbin.knative.svc.cluster.local",
+        "K-Proxy-Request": "activator",
+        "User-Agent": "curl/7.58.0",
+        "X-B3-Parentspanid": "b240bdb1c29ae638",
+        "X-B3-Sampled": "0",
+        "X-B3-Spanid": "416960c27be6d484",
+        "X-B3-Traceid": "750362ce9d878281b240bdb1c29ae638",
+        "X-Envoy-Attempt-Count": "1",
+        "X-Envoy-Internal": "true"
+      }
+    }
+    ```
 
 - In STRICT mode, requests will simply be rejected.
 

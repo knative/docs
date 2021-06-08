@@ -1,9 +1,3 @@
----
-title: "Configuring high-availability components"
-weight: 50
-type: "docs"
----
-
 # Configuring high-availability components
 
 Active/passive high availability (HA) is a standard feature of Kubernetes APIs that helps to ensure that APIs stay operational if a disruption occurs. In an HA deployment, if an active controller crashes or is deleted, another controller is available to take over processing of the APIs that were being serviced by the controller that is now unavailable.
@@ -21,7 +15,7 @@ For components leveraging leader election to achieve HA, this capability can be 
 
 With the exception of the `activator` component you can scale up any deployment running in `knative-serving` (or `kourier-system`) with a command like:
 
-```
+```bash
 $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 ```
 
@@ -29,26 +23,27 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - You can use a higher value if you have a use case that requires more replicas of a deployment. For example, if you require a minimum of 3 `controller` deployments, set `--replicas=3`.
 - Setting `--replicas=1` disables HA.
 
-**NOTE:** If you scale down the `autoscaler` component, you may observe inaccurate autoscaling results for some revisions for a period of time up to the `stable-window` value. This is because when an `autoscaler` pod is terminating, ownership of the revisions belonging to that pod is passed to other `autoscaler` pods that are on stand by. The `autoscaler` pods that take over ownership of those revisions use the `stable-window` time to build the scaling metrics state for those revisions.
+!!! note
+    If you scale down the `autoscaler` component, you may observe inaccurate autoscaling results for some revisions for a period of time up to the `stable-window` value. This is because when an `autoscaler` pod is terminating, ownership of the revisions belonging to that pod is passed to other `autoscaler` pods that are on stand by. The `autoscaler` pods that take over ownership of those revisions use the `stable-window` time to build the scaling metrics state for those revisions.
 
 ## Scaling the data plane
 
 The scale of the `activator` component is governed by the Kubernetes HPA component. You can see the current HPA scale limits and the current scale by running:
 
-```
+```bash
 $ kubectl get hpa activator -n knative-serving
 ```
 
-The possible output will be something like:
+The output will be something like:
 
-```
+```{ .bash .no-copy }
 NAME        REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 activator   Deployment/activator   2%/100%   5         15        11         346d
 ```
 
 By default `minReplicas` and `maxReplicas` are set to `1` and `20`, correspondingly. If those values are not desirable for some reason, then, for example, you can change those values to `minScale=9` and `maxScale=19` using the following command:
 
-```
+```bash
 $ kubectl patch hpa activator -n knative-serving -p '{"spec":{"minReplicas":9,"maxReplicas":19}}'
 ```
 
