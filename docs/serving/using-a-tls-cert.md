@@ -190,7 +190,7 @@ continue below for instructions about manually adding a certificate.
        when auto-TLS is disabled. This can be done with the following patch:
 
          ```bash
-         kubectl patch cm config-contour -n knative-serving \
+         kubectl patch configmap config-contour -n knative-serving \
            -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
          ```
 
