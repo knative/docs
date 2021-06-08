@@ -47,14 +47,15 @@
 }
 
 /* text sizing of tables, Alert, Warnings, Notes*/
-.md-typeset table {
-  font-size: 100% !important;
+.md-typeset table, .md-typeset table:not([class]) {
+  font-size: 100%;
+
 }
 
 .md-typeset code {
-  font-size: 100% !important;
+  font-size: 100%;
 }
 
 .md-typeset .admonition {
-  font-size: 100% !important;
+  font-size: 100%;
 }
