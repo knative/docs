@@ -6,8 +6,7 @@ The subscription consists of a Subscription object, which specifies the channel 
 known as the subscriber) to deliver events to. You can also specify some sink-specific options, such
 as how to handle failures.
 
-For more information about Subscription objects, see
-[Subscription](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Subscription).
+For more information about Subscription objects, see the [Subscription spec](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Subscription).
 
 ## Creating a subscription
 
