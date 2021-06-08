@@ -13,7 +13,7 @@ For more information about Subscription objects, see
 
 
 === "kn"
-    Create a subscription between a channel and a sink by running:
+    Create a subscription between a channel and a sink by running the command:
 
     ```
     kn subscription create <subscription-name> \
