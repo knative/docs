@@ -126,16 +126,6 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 
 
 
-=== "Gloo"
-
-    Uninstall Gloo and the Knative integration by running:
-
-       ```bash
-       glooctl uninstall knative
-       ```
-
-
-
 === "Istio"
 
     The following commands uninstall Istio and enable its Knative integration.
