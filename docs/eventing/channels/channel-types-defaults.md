@@ -23,7 +23,7 @@ For more information about modifying ConfigMaps, see
 Default channels can be configured for the cluster, a namespace on the cluster, or both.
 
 !!! note
-    If a default channel implementation is configured for a namespace, this will overwrite the  configuration for the cluster.
+    If a default channel implementation is configured for a namespace, this will overwrite the configuration for the cluster.
 
 In the following example, the cluster default channel implementation is `InMemoryChannel`, while the
 namespace default channel implementation for the `example-namespace` is `KafkaChannel`.
