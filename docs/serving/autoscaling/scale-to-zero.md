@@ -15,7 +15,7 @@ type: "docs"
 The scale to zero value controls whether Knative allows replicas to scale down to zero (if set to `true`), or stop at 1 replica if set to `false`.
 
 !!! note
-    For more information about scale bounds configuration per revision, see the documentation on [Configuring scale bounds](./scale-bounds.md).
+    For more information about scale bounds configuration per Revision, see the documentation on [Configuring scale bounds](./scale-bounds.md).
 
 * **Global key:** `enable-scale-to-zero`
 * **Per-revision annotation key:** No per-revision setting.
