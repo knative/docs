@@ -6,8 +6,8 @@ Knative uses two types of channels:
 * Channel implementations that each have their own custom resource definitions (CRDs), such as
 `InMemoryChannel` and `KafkaChannel`.
 
-The custom Channel implementations each have their own event delivery mechanisms, such as in-memory
-or broker-based. Example brokers include Kafka and GCP Pub/Sub.
+Custom Channel implementations each have their own event delivery mechanisms, such as in-memory
+or broker-based. Examples of Brokers include KafkaBroker and the GCP Pub/Sub Broker.
 
 Knative provides the `InMemoryChannel` channel implementation by default.
 This default implementation is useful for developers who do not want to configure a specific
