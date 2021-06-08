@@ -53,4 +53,4 @@ data:
 
 ## Next steps
 
-- [Creating a channel using cluster or namespace defaults](/eventing/channels/create-default-channel)
+- [Create a Channel using cluster or namespace defaults](/eventing/channels/create-default-channel)
