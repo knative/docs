@@ -1,22 +1,4 @@
----
-title: "Creating an event source by using the sample event source"
-linkTitle: "Using the sample event source"
-weight: 60
-type: "docs"
-showlandingtoc: "false"
-aliases:
-  - /docs/eventing/samples/writing-event-source
----
-
 # Creating an event source by using the sample event source
-
-This guide explains how to create your own event source for Knative
-Eventing by using a [sample repository](https://github.com/knative-sandbox/sample-source), and explains the key concepts behind each required component. Documentation for the default [Knative event sources](../../../sources) can be used as an additional reference.
-
-After completing the provided tutorial, you will have created a basic event source controller and a receive adapter. Events can be viewed by using the `event_display` Knative service.
-<!--TODO: Provide links to docs about what the event source controller and receiver adapter are-->
-
-<!-- Is Go required? Is this for all Knative development or just event source creation?-->
 
 ## Prerequisites
 

@@ -1,16 +1,8 @@
----
-title: "Event sources"
-weight: 20
-type: "docs"
----
-
 # Event sources
 
-An event source is a Kubernetes custom resource (CR), created by a developer or cluster administrator, that acts as a link between an event producer and an event _sink_.
-A sink can be a k8s service, including Knative Services, a Channel, or a Broker that receives events from an event source.
+A Knative Source is Kubernetes custom resource that generates or imports an event and pushes that event to another endpoint on the cluster by using the CloudEvents specification. [The specification](https://github.com/knative/eventing/blob/main/docs/spec/sources.md) for Knative Eventing Sources contains a number of requirements that together define a well-behaved Knative event source.
 
-Event sources are created by instantiating a CR from a Source object.
-The Source object defines the arguments and parameters needed to instantiate a CR.
+Event sources are created by instantiating a Source custom resource.
 
 All Sources are part of the `sources` category.
 
@@ -27,11 +19,6 @@ All Sources are part of the `sources` category.
     ```bash
     kubectl get sources
     ```
-
-
-
-
-
 
 ## Knative Sources
 

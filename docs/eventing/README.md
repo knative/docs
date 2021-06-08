@@ -1,12 +1,3 @@
----
-title: "Knative Eventing"
-weight: 06
-type: "docs"
-showlandingtoc: "false"
-aliases:
-    - /eventing/README
----
-
 # Knative Eventing
 
 Knative Eventing is a system that is designed to address a common need for cloud
@@ -94,7 +85,3 @@ resources:
 
 1. **[Sequence](./flows/sequence)** provides a way to define an in-order list of functions.
 1. **[Parallel](./flows/parallel)** provides a way to define a list of branches for events.
-
-## Observability
-
-- [Eventing Metrics API](../admin/collecting-metrics/eventing-metrics/metrics.md)

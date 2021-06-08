@@ -62,6 +62,7 @@ nav:
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
+        # Developer guide - Serving
         - Knative Serving:
           - Services:
             - About Knative Services: developer/serving/services/README.md
@@ -71,6 +72,12 @@ nav:
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+        # Developer guide - Eventing
+        - Knative Eventing:
+          - Event sources:
+            - Creating event sources:
+              - Overview: developer/eventing/sources/creating-event-sources/README.md
+              - Using the Knative sandbox sample source: developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -227,6 +234,7 @@ nav:
     - Reference:
       - Serving: reference/api/serving.md
       - Eventing: reference/api/eventing/eventing.md
+      - Concepts: concepts/README.md
     # Client
     - Client:
       - Overview: client/README.md
@@ -292,6 +300,8 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/sources/creating-event-sources/writing-event-source/03-controller.md': 'developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md'
+        'eventing/sources/creating-event-sources/README.md': 'developer/eventing/sources/creating-event-sources/README.md'
         'help/README.md': 'docs/help/contributor/README.md'
         'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
         'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
