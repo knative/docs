@@ -62,7 +62,7 @@ and which DNS provider validates those requests.
       The following `letsencrypt-issuer` named `ClusterIssuer` file is
       configured for the Let's Encrypt CA and Google Cloud DNS. Under `spec`,
       the Let's Encrypt account info, required `DNS-01` challenge type, and
-      Cloud DNS provider info defined. 
+      Cloud DNS provider info defined.
 
       ```bash
       apiVersion: cert-manager.io/v1
