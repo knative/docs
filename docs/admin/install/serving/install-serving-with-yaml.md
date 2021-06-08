@@ -205,34 +205,6 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the `Configure DNS` section.
 
-=== "Kong"
-
-    The following commands install Kong and enable its Knative integration.
-
-    1. Install Kong Ingress Controller:
-
-        ```bash
-        kubectl apply -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
-        ```
-
-    1. To configure Knative Serving to use Kong by default:
-
-        ```bash
-        kubectl patch configmap/config-network \
-          --namespace knative-serving \
-          --type merge \
-          --patch '{"data":{"ingress.class":"kong"}}'
-        ```
-
-    1. Fetch the External IP or CNAME:
-
-        ```bash
-        kubectl --namespace kong get service kong-proxy
-        ```
-
-        !!! tip
-            Save this to use in the `Configure DNS` section.
-
 ## Verify the installation
 
 !!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"

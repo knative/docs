@@ -333,37 +333,6 @@ kubectl logs -f deploy/knative-operator
 
           Save this for configuring DNS below.
 
-    === "Kong"
-
-        The following commands install Kong and enable its Knative integration.
-
-        1. Install Kong Ingress Controller:
-          ```bash
-          kubectl apply --filename https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
-          ```
-
-        1. To configure Knative Serving to use Kong, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          spec:
-            config:
-              network:
-                ingress.class: "kong"
-          EOF
-          ```
-
-        1. Fetch the External IP or CNAME:
-          ```bash
-          kubectl --namespace kong get service kong-proxy
-          ```
-
-          Save this for configuring DNS below.
-
     === "Kourier"
 
         The following commands install Kourier and enable its Knative integration.
