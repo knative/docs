@@ -327,7 +327,7 @@ back with another event.
 
     You should see something similar to:
 
-    ```bash
+    ```{ .bash .no-copy }
     Event received.
     Validation: valid
     Context Attributes,
@@ -441,7 +441,7 @@ mesh via the Broker and can be delivered to other services using a Trigger
 
     You should see something similar to:
 
-    ```bash
+    ```{ .bash .no-copy }
       cloudevents.Event
       Validation: valid
       Context Attributes,

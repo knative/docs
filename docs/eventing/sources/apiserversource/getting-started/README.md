@@ -166,7 +166,7 @@ Before you can create an API server source, you must install Knative Eventing an
 
     Example log output:
 
-    ```bash
+    ```{ .bash .no-copy }
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
