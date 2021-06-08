@@ -12,7 +12,7 @@ To change the {default-domain} value there are a few steps involved:
    own domain, for example `mydomain.com`:
 
      ```bash
-     kubectl edit configmap config-domain --namespace knative-serving
+     kubectl edit configmap config-domain -n knative-serving
      ```
 
      This command opens your default text editor and allows you to edit the [config
