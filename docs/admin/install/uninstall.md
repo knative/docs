@@ -154,14 +154,6 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 
 
 
-=== "Kong"
-
-    Uninstall Kong Ingress Controller by running:
-
-       ```bash
-       kubectl delete -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
-       ```
-
 
 
 === "Kourier"
