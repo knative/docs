@@ -1,17 +1,25 @@
----
-title: "Enabling automatic TLS certificate provisioning"
-linkTitle: "Enabling auto TLS certs"
-weight: 64
-type: "docs"
----
-
 # Enabling automatic TLS certificate provisioning
 
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
-Services.
-To learn more about using secure connections in Knative, see
-[Configuring HTTPS with TLS certificates](./using-a-tls-cert.md).
+Services. To learn more about using secure connections in Knative, see
+[Configuring HTTPS with TLS certificates](../using-a-tls-cert).
+
+## Before you begin
+
+The following must be installed on your Knative cluster:
+
+- [Knative Serving](../../../admin/install/).
+- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher. See [Install a networking layer](../../../admin/install/install-serving-with-yaml#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../../../admin/install/installing-istio#installing-istio-with-SDS-to-secure-the-ingress-gateway).
+
+    !!! note
+        Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
+
+- [`cert-manager` version `1.0.0` or higher](../installing-cert-manager).
+- Your Knative cluster must be configured to use a [custom domain](../using-a-custom-domain).
+- Your DNS provider must be setup and configured to your domain.
+- If you want to use HTTP-01 challenge, you need to configure your custom
+domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
 
 ## Automatic TLS provision mode
 
@@ -35,34 +43,12 @@ Knative supports the following Auto TLS modes:
     - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
     - **HTTP-01 does not support provisioning a certificate per namespace.**
 
-## Before you begin
-
-You must meet the following prerequisites to enable Auto TLS:
-
-- The following must be installed on your Knative cluster:
-  - [Knative Serving](../install/).
-  - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher.
-  See [Install a networking layer](../install/install-serving-with-yaml.md#install-a-networking-layer) or
-  [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).<br>
-    **Note:** Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
-- [cert-manager version `1.0.0` and higher](./installing-cert-manager.md).
-- Your Knative cluster must be configured to use a
-  [custom domain](./using-a-custom-domain.md).
-- Your DNS provider must be setup and configured to your domain.
-- If you want to use HTTP-01 challenge, you need to configure your custom
-domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
-
 ## Enabling Auto TLS
 
-To enable support for Auto TLS in Knative:
-
-### Create cert-manager ClusterIssuer
-
-1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster
-to define who issues the TLS certificates, how requests are validated,
+1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster to define who issues the TLS certificates, how requests are validated,
 and which DNS provider validates those requests.
 
-    #### ClusterIssuer for DNS-01 challenge
+    ### ClusterIssuer for DNS-01 challenge
 
     Use the cert-manager reference to determine how to configure your
     `ClusterIssuer` file:
@@ -76,11 +62,9 @@ and which DNS provider validates those requests.
       The following `letsencrypt-issuer` named `ClusterIssuer` file is
       configured for the Let's Encrypt CA and Google Cloud DNS. Under `spec`,
       the Let's Encrypt account info, required `DNS-01` challenge type, and
-      Cloud DNS provider info defined. For the complete Google Cloud DNS
-      example, see
-      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md).
+      Cloud DNS provider info defined.
 
-      ```shell
+      ```bash
       apiVersion: cert-manager.io/v1
       kind: ClusterIssuer
       metadata:
@@ -106,11 +90,11 @@ and which DNS provider validates those requests.
                   key: key.json
       ```
 
-    ####  ClusterIssuer for HTTP-01 challenge
+    ###  ClusterIssuer for HTTP-01 challenge
 
     Run the following command to apply the ClusterIssuer for HTT01 challenge:
 
-    ```shell
+    ```yaml
     kubectl apply -f - <<EOF
     apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
@@ -130,8 +114,8 @@ and which DNS provider validates those requests.
 
 1.  Ensure that the ClusterIssuer is created successfully:
 
-    ```shell
-    kubectl get clusterissuer <cluster-issuer-name> --output yaml
+    ```bash
+    kubectl get clusterissuer <cluster-issuer-name> -o yaml
     ```
 
     Result: The `Status.Conditions` should include `Ready=True`.
@@ -156,13 +140,13 @@ See how the Google Cloud DNS is defined as the provider:
 1.  Determine if `networking-certmanager` is already installed by running the
     following command:
 
-    ```shell
+    ```bash
     kubectl get deployment networking-certmanager -n knative-serving
     ```
 
 1.  If `networking-certmanager` is not found, run the following command:
 
-    ```shell
+    ```bash
     kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
@@ -176,13 +160,13 @@ If you choose to use the mode of provisioning certificate per namespace, you nee
 1. Determine if `networking-ns-cert` deployment is already installed by
 running the following command:
 
-    ```shell
+    ```bash
     kubectl get deployment networking-ns-cert -n knative-serving
     ```
 
 1. If `networking-ns-cert` deployment is not found, run the following command:
 
-    ```shell
+    ```bash
     kubectl apply --filename {{ artifact( repo="serving", file="serving-nscert.yaml") }}
     ```
 
@@ -193,13 +177,13 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Run the following command to edit your `config-certmanager` ConfigMap:
 
-    ```shell
+    ```bash
     kubectl edit configmap config-certmanager --namespace knative-serving
     ```
 
 1.  Add the `issuerRef` within the `data` section:
 
-    ```shell
+    ```bash
     data:
       issuerRef: |
         kind: ClusterIssuer
@@ -208,7 +192,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
     Example:
 
-    ```shell
+    ```bash
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -227,7 +211,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Ensure that the file was updated successfully:
 
-    ```shell
+    ```bash
     kubectl get configmap config-certmanager --namespace knative-serving --output yaml
     ```
 
@@ -240,20 +224,20 @@ requests are handled:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
-    ```shell
+    ```bash
     kubectl edit configmap config-network --namespace knative-serving
     ```
 
 1.  Add the `autoTLS: Enabled` attribute under the `data` section:
 
-    ```shell
+    ```bash
     data:
       autoTLS: Enabled
     ```
 
     Example:
 
-    ```shell
+    ```bash
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -281,14 +265,14 @@ requests are handled:
     - `Redirected`: Responds to HTTP request with a `302` redirect to ask the
       clients to use HTTPS.
 
-     ```shell
+     ```bash
      data:
        httpProtocol: Redirected
      ```
 
      Example:
 
-     ```shell
+     ```bash
      apiVersion: v1
      kind: ConfigMap
      metadata:
@@ -306,7 +290,7 @@ requests are handled:
 
 1.  Ensure that the file was updated successfully:
 
-    ```shell
+    ```bash
     kubectl get configmap config-network --namespace knative-serving --output yaml
     ```
 
@@ -317,7 +301,7 @@ be able to handle HTTPS traffic.
 ### Verify Auto TLS
 
 1.  Run the following comand to create a Knative Service:
-    ```shell
+    ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 

@@ -187,7 +187,7 @@ your sample app to your cluster:
    Docker Hub registry. You must replace the `{username}` variables in the
    following commands with your Docker Hub username.
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-vertx .
 
@@ -198,7 +198,7 @@ your sample app to your cluster:
 1. Now that your container image is in the registry, you can deploy it to your
    Knative cluster by running the `kubectl apply` command:
 
-   ```shell
+   ```bash
    kubectl apply --filename service.yaml
    ```
 
@@ -221,13 +221,13 @@ To verify that your sample app has been successfully deployed:
 1. Retrieve the URL for your service, by running the following `kubectl get`
    command:
 
-   ```shell
+   ```bash
    kubectl get ksvc helloworld-vertx  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example result:
 
-   ```shell
+   ```bash
    NAME                URL
    helloworld-vertx    http://helloworld-vertx.default.1.2.3.4.sslip.io
    ```
@@ -235,13 +235,13 @@ To verify that your sample app has been successfully deployed:
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-vertx.default.1.2.3.4.sslip.io
    ```
 
    Example result:
 
-   ```shell
+   ```bash
     Hello World: Eclipse Vert.x Sample v1
    ```
 
@@ -252,6 +252,6 @@ Congratulations on deploying your sample Java app to Knative!
 To remove the sample app from your cluster, run the following `kubectl delete`
 command:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

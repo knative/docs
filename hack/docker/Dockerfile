@@ -1,2 +1,12 @@
 FROM squidfunk/mkdocs-material
-RUN pip install --no-cache-dir mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin
+
+RUN apk add --no-cache --update nodejs npm bash hugo
+
+WORKDIR /site
+COPY ./package*.json /site/
+COPY ./requirements.txt /site/
+
+# Python Dependencies
+RUN pip --no-cache-dir install -r requirements.txt
+# NodeJS Dependencies
+RUN npm ci

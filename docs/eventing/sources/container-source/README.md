@@ -61,13 +61,13 @@ spec:
 
 Use following command to create the service from `service.yaml`:
 
-```shell
+```bash
 kubectl apply --filename service.yaml
 ```
 
 The status of the created service can be seen using:
 
-```shell
+```bash
 kubectl get ksvc
 
 NAME            URL                                           LATESTCREATED         LATESTREADY           READY   REASON
@@ -111,7 +111,7 @@ spec:
 Use the following command to create the event source from
 `heartbeats-source.yaml`:
 
-```shell
+```bash
 kubectl apply --filename heartbeats-source.yaml
 ```
 
@@ -120,7 +120,7 @@ kubectl apply --filename heartbeats-source.yaml
 We will verify that the message was sent to the Knative eventing system by
 looking at event-display service logs.
 
-```shell
+```bash
 kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
 ```
 

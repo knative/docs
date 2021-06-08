@@ -173,3 +173,8 @@ body {
     flex-wrap: wrap;
   }
 }
+
+/*fixing issue in safari css */
+.md-typeset .task-list-item {
+  margin-left: 25px;
+}

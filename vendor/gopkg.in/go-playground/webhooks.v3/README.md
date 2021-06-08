@@ -23,7 +23,7 @@ Installation
 
 Use go get.
 
-```shell
+```bash
 go get -u gopkg.in/go-playground/webhooks.v3
 ```
 

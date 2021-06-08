@@ -39,7 +39,7 @@ Channels; `numPartitions` and `replicationFactor`.
 
 To create a Broker that uses the KafkaChannel, specify the `kafka-channel` ConfigMap:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Broker

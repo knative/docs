@@ -77,7 +77,7 @@ data:
 
 Now every broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap.
 
-For more information about creating a `kafka-channel` ConfigMap to use with your broker, see the [Kafka Channel ConfigMap](../broker/kafka-broker/kafka-configmap/) documentation.
+For more information about creating a `kafka-channel` ConfigMap to use with your broker, see the [Kafka Channel ConfigMap](../kafka-broker/kafka-configmap/) documentation.
 
 ### Changing the default channel implementation for a namespace
 
@@ -121,7 +121,7 @@ When a broker is created without a specified `BrokerClass` annotation, the defau
 
 The following example creates a broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Broker

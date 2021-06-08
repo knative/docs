@@ -27,27 +27,38 @@ nav:
         - Overview: admin/README.md
         - Installing Knative:
           - Overview: admin/install/README.md
-          - Prerequisites: admin/install/prerequisites.md
-          - Installing using YAML:
-            - Install Serving with YAML: admin/install/install-serving-with-yaml.md
-            - Install Eventing with YAML: admin/install/install-eventing-with-yaml.md
-            - Install optional extensions: admin/install/install-extensions.md
-            - Description Tables for YAML Files: admin/install/installation-files.md
+          # Serving Installation
+          - Install Knative Serving:
+            - Install Serving with YAML: admin/install/serving/install-serving-with-yaml.md
+            - Knative Serving installation files: admin/install/serving/serving-installation-files.md
+          # Eventing Installation
+          - Install Knative Eventing:
+            - Install Eventing with YAML: admin/install/eventing/install-eventing-with-yaml.md
+            - Knative Eventing installation files: admin/install/eventing/eventing-installation-files.md
+          # Operator Installation
           - Knative Operator:
             - Installing with the Operator: admin/install/knative-with-operators.md
             - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
             - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
+          # Istio Installation
           - Installing Istio for Knative: admin/install/installing-istio.md
+          # Vendor docs
           - Using a Knative-based Offering: admin/install/knative-offerings.md
-          - ... | install/*
         - Checking your Knative version: check-install-version.md
         - Upgrading your installation:
           - Overview: admin/upgrade/README.md
           - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
         - Logging: admin/collecting-logs/README.md
-        - Metrics: admin/collecting-metrics/README.md
+        # Administrator metrics
+        - Metrics:
+          - About metrics: admin/collecting-metrics/README.md
+          - Knative Eventing metrics: admin/collecting-metrics/eventing-metrics/metrics.md
+          - Knative Serving metrics: admin/collecting-metrics/serving-metrics/metrics.md
         - Uninstalling Knative: admin/install/uninstall.md
+        # Serving config
+        - Knative Serving configuration:
+          - Configure Deployment resources: admin/serving/deployment.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
@@ -64,7 +75,7 @@ nav:
     - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Deploying from private registries: serving/deploying-from-private-registry/README.md
+        - Deploying from private registries: serving/deploying-from-private-registry.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
@@ -81,9 +92,9 @@ nav:
         - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
         - Configuring scale bounds: serving/autoscaling/scale-bounds.md
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
-        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/index.md
+        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
+    # Admin topics - serving
       - Administrator Topics:
-        - Deployment Configuration: serving/services/deployment.md
         - Kubernetes services: serving/knative-kubernetes-services.md
         - Accessing request traces: serving/accessing-traces.md
         - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
@@ -91,48 +102,42 @@ nav:
         - Configuring high-availability components: serving/config-ha.md
         - Installing cert-manager: serving/installing-cert-manager.md
         - Configuring HTTPS connections: serving/using-a-tls-cert.md
-        - Enabling auto TLS certs: serving/using-auto-tls.md
-        - Metrics API: serving/metrics.md
+        - Enabling auto-TLS certs: serving/using-auto-tls.md
         - Feature/Extension Flags: serving/feature-flags.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
         - Setting up a custom domain: serving/using-a-custom-domain.md
-      - GKE Topics:
-        - Assigning static IPs - GKE: serving/gke-assigning-static-ip-address.md
-        - Using ExternalDNS on Google Cloud Platform to automate DNS setup: serving/using-external-dns-on-gcp.md
-        - Configuring HTTPS with Cloud DNS: serving/using-cert-manager-on-gcp.md
       - Code samples:
         - Overview: serving/samples/README.md
         - Routing and managing traffic: serving/samples/blue-green-deployment.md
         - Cloud Events apps:
           - Overview: serving/samples/cloudevents/README.md
-          - .NET: serving/samples/cloudevents/cloudevents-dotnet/index.md
-          - Go: serving/samples/cloudevents/cloudevents-go/index.md
-          - Node.js: serving/samples/cloudevents/cloudevents-nodejs/index.md
-          - Rust: serving/samples/cloudevents/cloudevents-rust/index.md
-          - Java and Spring: serving/samples/cloudevents/cloudevents-spring/index.md
-          - Java and Vert.x: serving/samples/cloudevents/cloudevents-vertx/index.md
-        - GitHub Webhook - Go: serving/samples/gitwebhook-go/index.md
-        - gRPC Server - Go: serving/samples/grpc-ping-go/index.md
+          - .NET: serving/samples/cloudevents/cloudevents-dotnet/README.md
+          - Go: serving/samples/cloudevents/cloudevents-go/README.md
+          - Node.js: serving/samples/cloudevents/cloudevents-nodejs/README.md
+          - Rust: serving/samples/cloudevents/cloudevents-rust/README.md
+          - Java and Spring: serving/samples/cloudevents/cloudevents-spring/README.md
+          - Java and Vert.x: serving/samples/cloudevents/cloudevents-vertx/README.md
+        - GitHub Webhook - Go: serving/samples/gitwebhook-go/README.md
+        - gRPC Server - Go: serving/samples/grpc-ping-go/README.md
         - Hello world apps:
           - Overview: serving/samples/hello-world/README.md
-          - .NET: serving/samples/hello-world/helloworld-csharp/index.md
-          - Go: serving/samples/hello-world/helloworld-go/index.md
-          - Java (Spark): serving/samples/hello-world/helloworld-java-spark/index.md
-          - Java (Spring): serving/samples/hello-world/helloworld-java-spring/index.md
-          - Kotlin: serving/samples/hello-world/helloworld-kotlin/index.md
-          - Node.js: serving/samples/hello-world/helloworld-nodejs/index.md
-          - PHP: serving/samples/hello-world/helloworld-php/index.md
-          - Python: serving/samples/hello-world/helloworld-python/index.md
-          - Ruby: serving/samples/hello-world/helloworld-ruby/index.md
-          - Scala: serving/samples/hello-world/helloworld-scala/index.md
-          - Shell: serving/samples/hello-world/helloworld-shell/index.md
-        - Routing services - Go: serving/samples/knative-routing-go/index.md
-        - multi-container samples: serving/samples/multi-container/index.md
-        - RESTful service - Go: serving/samples/rest-api-go/index.md
-        - Secrets - Go: serving/samples/secrets-go/index.md
-        - Tag Header Based Routing: serving/samples/tag-header-based-routing/index.md
-        - Traffic splitting: serving/samples/traffic-splitting/index.md
-        - ... | *.md
+          - .NET: serving/samples/hello-world/helloworld-csharp/README.md
+          - Go: serving/samples/hello-world/helloworld-go/README.md
+          - Java (Spark): serving/samples/hello-world/helloworld-java-spark/README.md
+          - Hello World - Spring Boot Java: serving/samples/hello-world/helloworld-java-spring/README.md
+          - Kotlin: serving/samples/hello-world/helloworld-kotlin/README.md
+          - Node.js: serving/samples/hello-world/helloworld-nodejs/README.md
+          - PHP: serving/samples/hello-world/helloworld-php/README.md
+          - Python: serving/samples/hello-world/helloworld-python/README.md
+          - Ruby: serving/samples/hello-world/helloworld-ruby/README.md
+          - Scala: serving/samples/hello-world/helloworld-scala/README.md
+          - Shell: serving/samples/hello-world/helloworld-shell/README.md
+        - Routing services - Go: serving/samples/knative-routing-go/README.md
+        - multi-container samples: serving/samples/multi-container/README.md
+        - RESTful service - Go: serving/samples/rest-api-go/README.md
+        - Secrets - Go: serving/samples/secrets-go/README.md
+        - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
+        - Traffic splitting: serving/samples/traffic-splitting/README.md
     # Eventing
     - Knative Eventing:
       - Overview: eventing/README.md
@@ -143,12 +148,13 @@ nav:
           - Overview: eventing/sources/apiserversource/README.md
           - Getting started: eventing/sources/apiserversource/getting-started/README.md
         - ContainerSource: eventing/sources/containersource.md
-        - PingSource: eventing/sources/ping-source/index.md
+        - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
           - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
           - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
+        - Kafka source: eventing/sources/kafka-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
         - Writing an event source using Javascript: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
@@ -167,10 +173,10 @@ nav:
         - Parallel: eventing/flows/parallel.md
         - Sequence:
           - Overview: eventing/flows/sequence/README.md
-          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/index.md
-          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/index.md
-          - Create additional events: eventing/flows/sequence/sequence-terminal/index.md
-          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/index.md
+          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+          - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
+          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
       - Channels:
         - Overview: eventing/channels/README.md
         - Channel types and defaults: eventing/channels/channel-types-defaults.md
@@ -192,9 +198,8 @@ nav:
       - Sink:
         - Overview: eventing/sink/README.md
         - Apache Kafka Sink: eventing/sink/kafka-sink.md
-      - Debugging: eventing/debugging/index.md
+      - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
-      - Metrics API: eventing/metrics.md
       - Experimental Features: eventing/experimental-features.md
       - Code samples:
         - Overview: eventing/samples/README.md
@@ -205,9 +210,8 @@ nav:
           - Python: eventing/samples/helloworld/helloworld-python/README.md
         - Apache Kafka:
           - Overview: eventing/samples/kafka/README.md
-          - Binding Example: eventing/samples/kafka/binding/index.md
+          - Binding Example: eventing/samples/kafka/binding/README.md
           - Channel Example: eventing/samples/kafka/channel/README.md
-          - Source Example: eventing/sources/kafka-source/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
@@ -218,8 +222,7 @@ nav:
         - CloudStorageSource: eventing/sources/cloud-storage-source/README.md
         - GitHub source: eventing/sources/github-source/README.md
         - GitLab source: eventing/sources/gitlab-source/README.md
-        - IoT core: eventing/samples/iot-core/index.md
-        - ... | *
+        - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:
       - Serving: reference/api/serving.md
@@ -257,7 +260,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.details
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: docs/snippets
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
@@ -277,6 +281,7 @@ plugins:
       glob:
         # Exclude files that contain hugo specific shortcodes
         # (either the include shortcode or not-converted-yet tabs).
+        - snippets/*
         - smoketest.md
         - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
@@ -287,22 +292,30 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'help/README.md': 'docs/help/contributor/README.md'
+        'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
+        'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
+        'help/README.md': 'docs/help/contributor/README.md'
+        'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
+        'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
+        'admin/install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
+        'serving/services/deployment.md': 'admin/serving/deployment.md'
         'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
         'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
-        'eventing/samples/sinkbinding/': 'eventing/sources/sinkbinding/README.md'
         'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
         'install/README.md': 'admin/install/README.md'
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
-        'install/install-eventing-with-yaml.md': 'admin/install/install-eventing-with-yaml.md'
+        'install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
+        # This doesn't exist anymore, we should probably replace it
         'install/install-extensions.md': 'admin/install/install-extensions.md'
-        'install/install-serving-with-yaml.md': 'admin/install/install-serving-with-yaml.md'
-        'install/installation-files.md': 'admin/install/installation-files.md'
+        'install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
+        'install/installation-files.md': 'admin/install/README.md'
         'install/installing-istio.md': 'admin/install/installing-istio.md'
         'install/knative-offerings.md': 'admin/install/knative-offerings.md'
         'install/knative-with-operators.md': 'admin/install/knative-with-operators.md'
         'install/operator/configuring-eventing-cr.md': 'admin/install/operator/configuring-eventing-cr.md'
         'install/operator/configuring-serving-cr.md': 'admin/install/operator/configuring-serving-cr.md'
-        'install/prerequisites.md': 'admin/install/prerequisites.md'
+        'install/prerequisites.md': 'admin/install/README.md'
         'uninstall.md': 'admin/install/uninstall.md'
         'upgrade/index.md': 'admin/upgrade/README.md'
         'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'

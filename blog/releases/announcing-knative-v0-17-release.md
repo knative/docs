@@ -1,6 +1,6 @@
 ---
-title: "Version v0.17 release"
-linkTitle: "Version 0.17 release"
+title: "v0.17 release"
+linkTitle: "v0.17 release"
 Author: Carlos Santana
 Author handle: https://twitter.com/csantanapr
 date: 2020-08-24

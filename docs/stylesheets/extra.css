@@ -23,11 +23,6 @@
   float: right;
 }
 
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item--nested a.md-nav__link {
-  color: black;
-}
-
 .md-nav__title .md-nav__button.md-logo img,
 .md-nav__title .md-nav__button.md-logo svg {
   width: auto;
@@ -49,4 +44,14 @@
 .md-announce .md-announce__inner {
   margin: 0;
   padding: 0;
+}
+
+/* text sizing of tables, Alert, Warnings, Notes*/
+.md-typeset table, .md-typeset table:not([class]) {
+  font-size: 100%;
+
+}
+
+.md-typeset .admonition {
+  font-size: 100%;
 }
