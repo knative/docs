@@ -14,7 +14,7 @@ that are active when running Knative Serving.
      $ kubectl get services -n knative-serving
      ```
 
-     This should return the following output:
+     This returns an output similar to the following:
 
      ```sh
      NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
