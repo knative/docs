@@ -55,7 +55,7 @@ The scale to zero value controls whether Knative allows replicas to scale down t
 This setting specifies an upper bound time limit that the system will wait internally for scale-from-zero machinery to be in place before the last replica is removed.
 
 !!! warning
-    This is a value that controls how long internal network programming is allowed to take, and should only be adjusted if you have experienced issues with requests being dropped while a revision was scaling to zero replicas.
+    This is a value that controls how long internal network programming is allowed to take, and should only be adjusted if you experience issues with requests being dropped while a Revision is scaling to zero Replicas.
 
 This setting does not adjust how long the last replica will be kept after traffic ends, and it does not guarantee that the replica will actually be kept for this entire duration.
 
