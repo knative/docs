@@ -120,7 +120,7 @@ spec:
 
 ```
 
-```shell
+```bash
 kubectl -n default create -f ./steps.yaml
 ```
 
@@ -162,7 +162,7 @@ spec:
 Change `default` below to create the `Sequence` in the Namespace where you want
 your resources created.
 
-```shell
+```bash
 kubectl -n default create -f ./sequence1.yaml
 ```
 
@@ -201,7 +201,7 @@ spec:
       name: event-display
 ```
 
-```shell
+```bash
 kubectl -n default create -f ./sequence2.yaml
 ```
 
@@ -222,7 +222,7 @@ spec:
 Change `default` below to create the `Sequence` in the Namespace where you want
 your resources created.
 
-```shell
+```bash
 kubectl -n default create -f ./event-display.yaml
 ```
 
@@ -247,7 +247,7 @@ spec:
       name: first-sequence
 ```
 
-```shell
+```bash
 kubectl -n default create -f ./ping-source.yaml
 ```
 
@@ -256,13 +256,13 @@ kubectl -n default create -f ./ping-source.yaml
 You can now see the final output by inspecting the logs of the event-display
 pods.
 
-```shell
+```bash
 kubectl -n default get pods
 ```
 
 Then look at the logs for the event-display pod:
 
-```shell
+```bash
 kubectl -n default logs -l serving.knative.dev/service=event-display -c user-container --tail=-1
 ☁️  cloudevents.Event
 Validation: valid

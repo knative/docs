@@ -28,7 +28,7 @@ for production containers.
 
 1. Download a copy of the code:
 
-  ```shell
+  ```bash
   git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
   cd knative-docs/docs/serving/samples/grpc-ping-go
   ```
@@ -37,7 +37,7 @@ for production containers.
 
   Replace `{username}` with your Docker Hub username then run the commands:
 
-  ```shell
+  ```bash
   # Build the container on your local machine.
   docker build --tag "{username}/grpc-ping-go" .
 
@@ -68,13 +68,13 @@ for production containers.
 
 4. Use `kubectl` to deploy the service.
 
-  ```shell
+  ```bash
   kubectl apply --filename service.yaml
   ```
 
   Response:
 
-  ```shell
+  ```bash
   service "grpc-ping" created
   ```
 
@@ -82,7 +82,7 @@ for production containers.
 
 Once deployed, you can inspect the created resources with `kubectl` commands:
 
-```shell
+```bash
 # This will show the Knative service that we created:
 kubectl get ksvc --output yaml
 
@@ -107,7 +107,7 @@ entrypoint command to use the client binary instead of the server binary.
 
 Replace `{username}` with your Docker Hub user name and run the command:
 
-```shell
+```bash
 docker run --rm {username}/grpc-ping-go \
   /client \
   -server_addr="grpc-ping.default.1.2.3.4.sslip.io:80" \

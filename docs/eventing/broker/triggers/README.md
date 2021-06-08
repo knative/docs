@@ -16,7 +16,7 @@ The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pk
 Simple example which will receive all the events from the given (`default`) broker and
 deliver them to Knative Serving service `my-service`:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
@@ -35,7 +35,7 @@ EOF
 Simple example which will receive all the events from the given (`default`) broker and
 deliver them to the custom path `/my-custom-path` for the Kubernetes service `my-service`:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
@@ -65,7 +65,7 @@ This example filters events from the `default` broker that are of type
 `dev.knative.foo.bar` and have the extension `myextension` with the value
 `my-extension-value`.
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Trigger

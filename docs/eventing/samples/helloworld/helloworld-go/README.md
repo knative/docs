@@ -24,7 +24,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 ```
@@ -220,7 +220,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 1. Use the go tool to create a
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
-       ```shell
+       ```bash
        go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
        ```
 
@@ -233,7 +233,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-       ```shell
+       ```bash
        # Build the container on your local machine
        docker build -t {username}/helloworld-go .
 
@@ -246,13 +246,13 @@ folder) you're ready to build and deploy the sample app.
    container image value in `sample-app.yaml` matches the container you built in
    the previous step. Apply the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename sample-app.yaml
        ```
 
 1. Above command created a namespace `knative-samples` and create a default Broker it. Verify using the following command:
 
-      ```shell
+      ```bash
       kubectl get broker --namespace knative-samples
       ```
 
@@ -264,7 +264,7 @@ folder) you're ready to build and deploy the sample app.
 1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.
 
-      ```shell
+      ```bash
       kubectl --namespace knative-samples get deployments helloworld-go
 
       kubectl --namespace knative-samples get svc helloworld-go
@@ -273,7 +273,7 @@ folder) you're ready to build and deploy the sample app.
 1. It created a Knative Eventing Trigger to route certain events to the
       helloworld-go application. Make sure that Ready=true
 
-      ```shell
+      ```bash
       kubectl --namespace knative-samples get trigger helloworld-go
       ```
 

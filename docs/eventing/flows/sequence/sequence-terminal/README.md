@@ -79,7 +79,7 @@ spec:
 
 ```
 
-```shell
+```bash
 kubectl -n default create -f ./steps.yaml
 ```
 
@@ -119,7 +119,7 @@ the resources to be created.
 Here, if you are using different type of Channel, you need to change the
 spec.channelTemplate to point to your desired Channel.
 
-```shell
+```bash
 kubectl -n default create -f ./sequence.yaml
 ```
 
@@ -144,7 +144,7 @@ spec:
       name: sequence
 ```
 
-```shell
+```bash
 kubectl -n default create -f ./ping-source.yaml
 ```
 
@@ -154,13 +154,13 @@ You can now see the final output by inspecting the logs of the event-display
 pods. Note that since we set the `PingSource` to emit every 2 minutes, it might
 take some time for the events to show up in the logs.
 
-```shell
+```bash
 kubectl -n default get pods
 ```
 
 Let's look at the logs for the first `Step` in the `Sequence`:
 
-```shell
+```bash
 kubectl -n default logs -l serving.knative.dev/service=first -c user-container --tail=-1
 
 2020/03/02 21:28:00 listening on 8080, appending " - Handled by 0" to events
@@ -175,7 +175,7 @@ Exciting :)
 
 Then we can look at the output of the second Step in the `Sequence`:
 
-```shell
+```bash
 kubectl -n default logs -l serving.knative.dev/service=second -c user-container --tail=-1
 
 2020/03/02 21:28:02 listening on 8080, appending " - Handled by 1" to events
@@ -189,7 +189,7 @@ reflected by the Message being now: "Hello world! - Handled by 0 - Handled by 1"
 
 Then we can look at the output of the last Step in the `Sequence`:
 
-```shell
+```bash
 kubectl -n default logs -l serving.knative.dev/service=third -c user-container --tail=-1
 
 2020/03/02 21:28:03 listening on 8080, appending " - Handled by 2" to events

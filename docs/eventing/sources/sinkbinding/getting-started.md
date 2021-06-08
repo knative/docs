@@ -292,7 +292,7 @@ sent by the source to the display function. For example:
 To delete the SinkBinding object and all of the related resources in the namespace,
 delete the namespace by running:
 
-```shell
+```bash
 kubectl delete namespace <namespace>
 ```
 Where `<namespace>` is the name of the namespace that contains the SinkBinding object.

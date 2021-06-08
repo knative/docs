@@ -26,13 +26,13 @@ here and use them later.
 
 #### Variables you must Change
 
-```shell
+```bash
 export IOTCORE_PROJECT="s9-demo"
 ```
 
 #### Variables you may Change
 
-```shell
+```bash
 export IOTCORE_REGISTRY="iot-demo"
 export IOTCORE_DEVICE="iot-demo-client"
 export IOTCORE_REGION="us-central1"
@@ -56,13 +56,13 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 1.  Enable the `Cloud Pub/Sub API` on that project.
 
-    ```shell
+    ```bash
     gcloud services enable pubsub.googleapis.com
     ```
 
 1.  Create the two GCP PubSub `topic`s.
 
-    ```shell
+    ```bash
     gcloud pubsub topics create $IOTCORE_TOPIC_DATA
     gcloud pubsub topics create $IOTCORE_TOPIC_DEVICE
     ```
@@ -80,7 +80,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     1.  Create two secrets with the downloaded key (one for the Source, one for
         the Receive Adapter):
 
-        ```shell
+        ```bash
         kubectl --namespace knative-sources create secret generic gcppubsub-source-key --from-file=key.json=PATH_TO_KEY_FILE.json
         kubectl --namespace default create secret generic google-cloud-key --from-file=key.json=PATH_TO_KEY_FILE.json
         ```
@@ -88,7 +88,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 1.  Deploy the `GcpPubSubSource` controller as part of eventing-source's
     controller.
 
-    ```shell
+    ```bash
     kubectl apply --filename https://github.com/knative/eventing-contrib/releases/download/v0.8.2/gcppubsub.yaml
     ```
 
@@ -98,7 +98,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 1. Install the default `Broker`.
 
-   ```shell
+   ```bash
    kubectl create -f - <<EOF
    apiVersion: eventing.knative.dev/v1
    kind: Broker
@@ -111,7 +111,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 1.  Deploy `gcp-pubsub-source.yaml`.
 
-    ```shell
+    ```bash
     sed -e "s/PROJECT_ID/$IOTCORE_PROJECT/" \
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
         docs/eventing/samples/iot-core/gcp-pubsub-source.yaml |
@@ -125,7 +125,7 @@ for all events coming out of it.
 
 1.  Deploy `trigger.yaml`.
 
-    ```shell
+    ```bash
     kubectl apply --filename docs/eventing/samples/iot-core/trigger.yaml
     ```
 
@@ -139,7 +139,7 @@ Core.
 
 1.  Create a device registry:
 
-    ```shell
+    ```bash
     gcloud iot registries create $IOTCORE_REGISTRY \
         --project=$IOTCORE_PROJECT \
         --region=$IOTCORE_REGION \
@@ -149,7 +149,7 @@ Core.
 
 1.  Create the certificates.
 
-    ```shell
+    ```bash
     openssl req -x509 -nodes -newkey rsa:2048 \
         -keyout device.key.pem \
         -out device.crt.pem \
@@ -160,7 +160,7 @@ Core.
 
 1.  Register a device using the generated certificates.
 
-    ```shell
+    ```bash
     gcloud iot devices create $IOTCORE_DEVICE \
       --project=$IOTCORE_PROJECT \
       --region=$IOTCORE_REGION \
@@ -175,7 +175,7 @@ see them in the subscriber.
 
 1.  Run the following program to generate events:
 
-    ```shell
+    ```bash
     go run github.com/knative/docs/docs/eventing/samples/iot-core/generator \
         -project $IOTCORE_PROJECT \
         -region $IOTCORE_REGION \
@@ -189,13 +189,13 @@ see them in the subscriber.
 
 1.  Inspect the logs of the subscriber:
 
-    ```shell
+    ```bash
     kubectl logs --selector serving.knative.dev/service=event-display -c user-container
     ```
 
     You should see something along the similar to:
 
-    ```shell
+    ```bash
     {"ID":"481014114648052","Data":"eyJzb3VyY2VfaWQiOiJpb3QtY29yZSBkZW1vIiwiZXZlbnRfaWQiOiJlaWQtMzI3MjJiMzItZWU5Mi00YzZlLWEzOTgtNDlmYjRkYWYyNGE1IiwiZXZlbnRfdHMiOjE1NTM3MTczOTYsIm1ldHJpYyI6MC4xMzY1MjI5OH0=","Attributes":{"deviceId":"iot-demo-client","deviceNumId":"2754785852315736","deviceRegistryId":"iot-demo","deviceRegistryLocation":"us-central1","projectId":"s9-demo","subFolder":""},"PublishTime":"2019-03-27T20:09:56.685Z"}
     ```
 
@@ -205,7 +205,7 @@ To cleanup the knative resources:
 
 1.  Remove the `GcpPubSubSource`:
 
-    ```shell
+    ```bash
     sed -e "s/PROJECT_ID/$IOTCORE_PROJECT/" \
         -e "s/TOPIC_NAME/$IOTCORE_TOPIC_DATA/" \
         docs/eventing/samples/iot-core/gcp-pubsub-source.yaml |
@@ -214,12 +214,12 @@ To cleanup the knative resources:
 
 1.  Remove the Trigger:
 
-    ```shell
+    ```bash
     kubectl delete --filename docs/eventing/samples/iot-core/trigger.yaml
     ```
 
 1.  Remove the `GcpPubSubSource` controller:
 
-    ```shell
+    ```bash
     kubectl delete --filename https://github.com/knative/eventing-contrib/releases/download/v0.8.2/gcppubsub.yaml
     ```

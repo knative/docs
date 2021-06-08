@@ -56,7 +56,7 @@ mesh by [manually injecting the Istio sidecars][1].
 
 Enter the following command to install Istio:
 
-```shell
+```bash
 cat << EOF > ./istio-minimal-operator.yaml
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
@@ -139,7 +139,7 @@ need to update gateway configmap `config-istio` under the `knative-serving` name
 
 1. Edit the `config-istio` configmap:
 
-```shell
+```bash
 kubectl edit configmap config-istio -n knative-serving
 ```
 
@@ -153,7 +153,7 @@ custom-local-gateway.istio-system.svc.cluster.local
 As an example, if both the custom service and deployment are labeled with `custom: custom-local-gateway`, not the default
 `istio: knative-local-gateway`, you must update gateway instance `knative-local-gateway` in the `knative-serving` namespace:
 
-```shell
+```bash
 kubectl edit gateway knative-local-gateway -n knative-serving
 ```
 

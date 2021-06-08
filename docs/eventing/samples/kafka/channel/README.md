@@ -20,7 +20,7 @@ default channel configuration in Knative Eventing.
 ## Creating a `KafkaChannel` channel CRD
 
 1. Create a new object by configuring the YAML file as follows:
-   ```shell
+   ```bash
    kubectl apply -f - <<EOF
    ---
    apiVersion: messaging.knative.dev/v1beta1
@@ -36,9 +36,9 @@ default channel configuration in Knative Eventing.
 ## Specifying the default channel configuration
 
 1. To configure the usage of the `KafkaChannel` CRD as the
-   [default channel configuration](../../../channels/channel-types-defaults), 
+   [default channel configuration](../../../channels/channel-types-defaults),
    edit the `default-ch-webhook` ConfigMap as follows:
-   ```shell
+   ```bash
    kubectl apply -f - <<EOF
    ---
    apiVersion: v1
@@ -63,7 +63,7 @@ default channel configuration in Knative Eventing.
 1. Now that `KafkaChannel` is set as the default channel configuration,
    use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
    channel, using the generic `Channel`:
-   ```shell
+   ```bash
    kubectl apply -f - <<EOF
    ---
    apiVersion: messaging.knative.dev/v1
@@ -74,7 +74,7 @@ default channel configuration in Knative Eventing.
    ```
 2. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
    using the command:
-   ```shell
+   ```bash
    kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
    ```
    The result is:
@@ -99,7 +99,7 @@ channel from Knative.
 
 1. To setup a broker that will use the new default Kafka channels, you must
    create a new _default_ broker, using the command:
-   ```shell
+   ```bash
    kubectl create -f - <<EOF
    apiVersion: eventing.knative.dev/v1
    kind: Broker
@@ -131,15 +131,15 @@ the`ApiServerSource` to publish events to the broker as well as the `Trigger`
 API, which then routes events to a Knative `Service`.
 
 1. Install `ksvc`, using the command:
-   ```shell
+   ```bash
    kubectl apply -f 000-ksvc.yaml
    ```
 2. Install a source that publishes to the default broker
-   ```shell
+   ```bash
    kubectl apply -f 020-k8s-events.yaml
    ```
 3. Create a trigger that routes the events to the `ksvc`:
-   ```shell
+   ```bash
    kubectl apply -f 030-trigger.yaml
    ```
 
@@ -151,7 +151,7 @@ your configuration with the following options.
 ### Receive events via Knative
 
 1. Observe the events in the log of the `ksvc` using the command:
-   ```shell
+   ```bash
    kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
    ```
 
@@ -170,7 +170,7 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
 ### TLS authentication
 
 1. Edit your config-kafka ConfigMap:
-   ```shell
+   ```bash
    kubectl -n knative-eventing edit configmap config-kafka
    ```
 2. Set the TLS.Enable field to `true`, for example
@@ -216,7 +216,7 @@ To use SASL authentication, you will need the following information:
     It is recommended to also enable TLS as described in the previous section.
 
 1. Edit your config-kafka ConfigMap:
-   ```shell
+   ```bash
    kubectl -n knative-eventing edit configmap config-kafka
    ```
 2. Set the SASL.Enable field to `true`, for example:
@@ -231,7 +231,7 @@ To use SASL authentication, you will need the following information:
    ...
    ```
 3. Create a secret with the username, password, and SASL mechanism, for example:
-   ```shell
+   ```bash
    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
        --from-literal=password="SecretPassword" \
        --from-literal=saslType="PLAIN" \

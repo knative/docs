@@ -26,7 +26,7 @@ The following example shows how you can configure a PingSource as an event sourc
 
 1. Optional: Create a new namespace called `pingsource-example` by entering the following command:
 
-    ```shell
+    ```bash
     kubectl create namespace pingsource-example
     ```
 
@@ -37,7 +37,7 @@ The following example shows how you can configure a PingSource as an event sourc
     
 === "kubectl"
 
-    ```shell
+    ```bash
     kubectl -n pingsource-example apply -f - << EOF
     apiVersion: apps/v1
     kind: Deployment
@@ -81,7 +81,7 @@ The following example shows how you can configure a PingSource as an event sourc
     
 === "YAML"
 
-    ```shell
+    ```bash
     kubectl create -n pingsource-example -f - <<EOF
     apiVersion: sources.knative.dev/v1
     kind: PingSource
@@ -102,7 +102,7 @@ The following example shows how you can configure a PingSource as an event sourc
 
 === "kn"
 
-    ```shell
+    ```bash
     kn source ping create test-ping-source \
       --namespace pingsource-example \
       --schedule "*/1 * * * *" \
@@ -121,7 +121,7 @@ The following example shows how you can configure a PingSource as an event sourc
 
     To create a PingSource that uses base64 encoded data, enter the command:
 
-    ```shell
+    ```bash
     kubectl -n pingsource-example apply -f - <<EOF
     apiVersion: sources.knative.dev/v1
     kind: PingSource
@@ -145,14 +145,14 @@ entering the following command:
     
 === "kubectl"
 
-    ```shell
+    ```bash
     kubectl -n pingsource-example logs -l app=event-display --tail=100
     ```
 
 
 === "kail"
 
-    ```shell
+    ```bash
     kail -l serving.knative.dev/service=event-display -c user-container --since=10m
     ```
 
@@ -163,7 +163,7 @@ entering the following command:
 
     This returns the `Attributes` and `Data` of the events that the PingSource sent to the `event-display` service:
 
-    ```shell
+    ```bash
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -181,7 +181,7 @@ entering the following command:
 
     If you created a PingSource that sends binary data, you will also see output similar to the following:
 
-    ```shell
+    ```bash
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -198,7 +198,7 @@ entering the following command:
 1. Optional: You can delete the `pingsource-example` namespace and all related resources from your cluster by entering the following command:
 
 
-    ```shell
+    ```bash
     kubectl delete namespace pingsource-example
     ```
 
@@ -207,28 +207,28 @@ entering the following command:
     
 === "kubectl"
 
-    ```shell
+    ```bash
     kubectl delete pingsources.sources.knative.dev test-ping-source
     ```
 
 
 === "kn"
 
-    ```shell
+    ```bash
     kn source ping delete test-ping-source
     ```
 
 
 === "kubectl: binary data PingSource"
 
-    ```shell
+    ```bash
     kubectl delete pingsources.sources.knative.dev test-ping-source-binary
     ```
 
 
 === "kn: binary data PingSource"
 
-    ```shell
+    ```bash
     kn source ping delete test-ping-source-binary
     ```
 
@@ -243,14 +243,14 @@ entering the following command:
     
 === "kubectl"
 
-    ```shell
+    ```bash
     kubectl delete service.serving.knative.dev event-display
     ```
 
 
 === "kn"
 
-    ```shell
+    ```bash
     kn service delete event-display
     ```
 

@@ -33,7 +33,7 @@ All Camel Sources use [Apache Camel K](https://github.com/apache/camel-k) as the
 1. Install the Camel Source from the `camel.yaml` in the
    [Knative Eventing Camel release page](https://github.com/knative-sandbox/eventing-camel/releases):
 
-   ```shell
+   ```bash
    kubectl apply --filename camel.yaml
    ```
 
@@ -50,7 +50,7 @@ The following resources need to be created:
 
 Deploy the [`display_resources.yaml`](./display_resources.yaml):
 
-```shell
+```bash
 kubectl apply --filename display_resources.yaml
 ```
 
@@ -72,14 +72,14 @@ All Camel components are documented in the
 
 Install the [timer CamelSource](source_timer.yaml) from source:
 
-```shell
+```bash
 kubectl apply -f source_timer.yaml
 ```
 
 Verify that the published events were sent into the Knative eventing system by
 looking at what is downstream of the `CamelSource`.
 
-```shell
+```bash
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```
 
@@ -108,13 +108,13 @@ By default it creates *2* replicas for demonstration purposes.
 To reduce noise in the event display, you can remove all previously created
 CamelSources from the namespace:
 
-```shell
+```bash
 kubectl delete camelsource --all
 ```
 
 Install the [mqtt CamelSource](source_mqtt.yaml):
 
-```shell
+```bash
 kubectl apply -f source_mqtt.yaml
 ```
 
@@ -124,7 +124,7 @@ Each message you send to the MQTT broker will be printed by the event display as
 
 You can verify that your messages reach the event display by checking its logs:
 
-```shell
+```bash
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```
 
@@ -149,13 +149,13 @@ authorization token, replacing the `<put-your-token-here>` placeholder.
 To reduce noise in the event display, you can remove all previously created
 CamelSources from the namespace:
 
-```shell
+```bash
 kubectl delete camelsource --all
 ```
 
 Install the [telegram CamelSource](source_telegram.yaml):
 
-```shell
+```bash
 kubectl apply -f source_telegram.yaml
 ```
 
@@ -164,7 +164,7 @@ the bot will be printed by the event display as a Cloudevent.
 
 You can verify that your messages reach the event display by checking its logs:
 
-```shell
+```bash
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```
 
@@ -183,19 +183,19 @@ The example will retrieve a static JSON file from a remote URL, but you can edit
 If you have previously deployed other CamelSources, to reduce noise in the event
 display, you can remove them all from the namespace:
 
-```shell
+```bash
 kubectl delete camelsource --all
 ```
 
 Install the [HTTP poller CamelSource](source_http_poller.yaml):
 
-```shell
+```bash
 kubectl apply -f source_http_poller.yaml
 ```
 
 The event display will show some JSON data periodically pulled from the external
 REST API. To check the logs:
 
-```shell
+```bash
 kubectl logs --selector serving.knative.dev/service=camel-event-display -c user-container
 ```

@@ -17,7 +17,7 @@ value.
 You can also download a working copy of the sample, by running the following
 commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 ```
@@ -37,7 +37,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
 1. Create a new directory and cd into it:
 
-   ```shell
+   ```bash
    mkdir app
    cd app
    ```
@@ -107,7 +107,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 1. Use Docker to build the sample code into a container, then push the container
    to the Docker registry:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-python .
 
@@ -145,7 +145,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
        Ensure that the container image value in `service.yaml` matches the container
        you built in the previous step. Apply the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename service.yaml
        ```
 
@@ -153,7 +153,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
        With `kn` you can deploy the service with
 
-       ```shell
+       ```bash
        kn service create helloworld-python --image=docker.io/{username}/helloworld-python --env TARGET="Python Sample v1"
        ```
 
@@ -179,26 +179,26 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
    === "kubectl"
 
-       ```shell
+       ```bash
        kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        NAME                      URL
        helloworld-python    http://helloworld-python.default.1.2.3.4.sslip.io
        ```
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-python -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-python.default.1.2.3.4.sslip.io
        ```
 
@@ -210,7 +210,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
    Example:
 
-   ```shell
+   ```bash
    curl http://helloworld-python.default.1.2.3.4.sslip.io
    Hello Python Sample v1!
 
@@ -226,12 +226,12 @@ To remove the sample app from your cluster, delete the service record.
 
 === "kubectl"
 
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
 === "kn"
 
-    ```shell
+    ```bash
     kn service delete helloworld-python
     ```

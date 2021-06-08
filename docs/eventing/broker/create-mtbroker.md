@@ -16,7 +16,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
     1. You can create a broker in current namespace by entering the following command:
 
-        ```shell
+        ```bash
         kn broker create <broker-name> -n <namespace>
         ```
 
@@ -24,13 +24,13 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
     1. Optional: Verify that the broker was created by listing existing brokers. Enter the following command:
 
-        ```shell
+        ```bash
         kn broker list
         ```
 
     1. Optional: You can also verify the broker exists by describing the broker you have created. Enter the following command:
 
-        ```shell
+        ```bash
         kn broker describe <broker-name>
         ```
 
@@ -52,13 +52,13 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
     1. Optional: Verify that the broker is working correctly, by entering the following command:
 
-        ```shell
+        ```bash
         kubectl -n <namespace> get broker <broker-name>
         ```
 
         This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
-        ```shell
+        ```bash
         NAME      READY   REASON   URL                                                                                 AGE
         default   True             http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default      1m
         ```

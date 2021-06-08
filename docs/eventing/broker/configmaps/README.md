@@ -121,7 +121,7 @@ When a broker is created without a specified `BrokerClass` annotation, the defau
 
 The following example creates a broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
 
-```shell
+```bash
 kubectl create -f - <<EOF
 apiVersion: eventing.knative.dev/v1
 kind: Broker

@@ -26,7 +26,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 ```
@@ -65,7 +65,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
        dependencies and building a small Go container based on Alpine. You can build
        and push this to your registry of choice via:
 
-       ```shell
+       ```bash
        docker build -t <image> .
        docker push <image>
        ```
@@ -75,7 +75,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
        You can use [`ko`](https://github.com/google/ko) to build and push just the image with:
 
-       ```shell
+       ```bash
        ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go
        ```
 
@@ -93,7 +93,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
        If you look in `service.yaml`, take the `<image>` name above and insert it
        into the `image:` field, then run:
 
-       ```shell
+       ```bash
        kubectl apply -f service.yaml
        ```
 
@@ -102,7 +102,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
        If using `ko` to build and push:
 
-       ```shell
+       ```bash
        ko apply -f service.yaml
        ```
 
@@ -111,7 +111,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
        If using `kn` to deploy:
 
-       ```shell
+       ```bash
        kn service create cloudevents-go --image=<IMAGE>
        ```
 
@@ -120,7 +120,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
        You can compose `kn` and `ko` to build and deploy with a single step using:
 
-       ```shell
+       ```bash
        kn service create cloudevents-go --image=$(ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go)
        ```
 
@@ -133,7 +133,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
 Get the URL for your Service with:
 
-```shell
+```bash
 $ kubectl get ksvc
 NAME             URL                                            LATESTCREATED          LATESTREADY            READY   REASON
 cloudevents-go   http://cloudevents-go.default.1.2.3.4.sslip.io   cloudevents-go-ss5pj   cloudevents-go-ss5pj   True
@@ -141,7 +141,7 @@ cloudevents-go   http://cloudevents-go.default.1.2.3.4.sslip.io   cloudevents-go
 
 Then send a cloud event to it with:
 
-```shell
+```bash
 $ curl -X POST \
     -H "content-type: application/json"  \
     -H "ce-specversion: 1.0"  \
@@ -154,7 +154,7 @@ $ curl -X POST \
 
 You will get back:
 
-```shell
+```bash
 {"message":"Hello, Dave"}
 ```
 
@@ -162,6 +162,6 @@ You will get back:
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

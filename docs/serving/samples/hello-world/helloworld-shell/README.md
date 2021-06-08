@@ -16,7 +16,7 @@ If `TARGET` is not specified, `World` is used as the default value.
 You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 ```
@@ -33,7 +33,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 
 1. Create a new file named `script.sh` and paste the script below. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
 
-  ```shell
+  ```bash
   #!/bin/sh
 
   # Print out CGI header
@@ -77,7 +77,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-shell .
 
@@ -117,7 +117,7 @@ folder) you're ready to build and deploy the sample app.
        in `service.yaml` matches the container you built in the previous step. Apply
        the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename service.yaml
        ```
 
@@ -126,7 +126,7 @@ folder) you're ready to build and deploy the sample app.
 
        With `kn` you can deploy the service with
 
-       ```shell
+       ```bash
        kn service create helloworld-shell --image=docker.io/{username}/helloworld-shell --env TARGET="Shell Sample v1"
        ```
 
@@ -166,13 +166,13 @@ folder) you're ready to build and deploy the sample app.
 
 
 === "kubectl"
-       ```shell
+       ```bash
        kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        NAME                URL
        helloworld-shell    http://helloworld-shell.default.1.2.3.4.sslip.io
        ```
@@ -180,13 +180,13 @@ folder) you're ready to build and deploy the sample app.
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-shell -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-shell.default.1.2.3.4.sslip.io
        ```
 
@@ -198,7 +198,7 @@ folder) you're ready to build and deploy the sample app.
 
    Example:
 
-   ```shell
+   ```bash
    curl http://helloworld-shell.default.1.2.3.4.sslip.io
    Hello Shell Sample v1!
 
@@ -214,11 +214,11 @@ To remove the sample app from your cluster, delete the service record.
 
 
 === "kubectl"
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
 === "kn"
-    ```shell
+    ```bash
     kn service delete helloworld-shell
     ```

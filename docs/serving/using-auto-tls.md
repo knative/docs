@@ -62,11 +62,9 @@ and which DNS provider validates those requests.
       The following `letsencrypt-issuer` named `ClusterIssuer` file is
       configured for the Let's Encrypt CA and Google Cloud DNS. Under `spec`,
       the Let's Encrypt account info, required `DNS-01` challenge type, and
-      Cloud DNS provider info defined. For the complete Google Cloud DNS
-      example, see
-      [Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp).
+      Cloud DNS provider info defined.
 
-      ```shell
+      ```bash
       apiVersion: cert-manager.io/v1
       kind: ClusterIssuer
       metadata:
@@ -142,13 +140,13 @@ See how the Google Cloud DNS is defined as the provider:
 1.  Determine if `networking-certmanager` is already installed by running the
     following command:
 
-    ```shell
+    ```bash
     kubectl get deployment networking-certmanager -n knative-serving
     ```
 
 1.  If `networking-certmanager` is not found, run the following command:
 
-    ```shell
+    ```bash
     kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
@@ -162,13 +160,13 @@ If you choose to use the mode of provisioning certificate per namespace, you nee
 1. Determine if `networking-ns-cert` deployment is already installed by
 running the following command:
 
-    ```shell
+    ```bash
     kubectl get deployment networking-ns-cert -n knative-serving
     ```
 
 1. If `networking-ns-cert` deployment is not found, run the following command:
 
-    ```shell
+    ```bash
     kubectl apply --filename {{ artifact( repo="serving", file="serving-nscert.yaml") }}
     ```
 
@@ -179,13 +177,13 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Run the following command to edit your `config-certmanager` ConfigMap:
 
-    ```shell
+    ```bash
     kubectl edit configmap config-certmanager --namespace knative-serving
     ```
 
 1.  Add the `issuerRef` within the `data` section:
 
-    ```shell
+    ```bash
     data:
       issuerRef: |
         kind: ClusterIssuer
@@ -194,7 +192,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
     Example:
 
-    ```shell
+    ```bash
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -213,7 +211,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Ensure that the file was updated successfully:
 
-    ```shell
+    ```bash
     kubectl get configmap config-certmanager --namespace knative-serving --output yaml
     ```
 
@@ -226,20 +224,20 @@ requests are handled:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
-    ```shell
+    ```bash
     kubectl edit configmap config-network --namespace knative-serving
     ```
 
 1.  Add the `autoTLS: Enabled` attribute under the `data` section:
 
-    ```shell
+    ```bash
     data:
       autoTLS: Enabled
     ```
 
     Example:
 
-    ```shell
+    ```bash
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -267,14 +265,14 @@ requests are handled:
     - `Redirected`: Responds to HTTP request with a `302` redirect to ask the
       clients to use HTTPS.
 
-     ```shell
+     ```bash
      data:
        httpProtocol: Redirected
      ```
 
      Example:
 
-     ```shell
+     ```bash
      apiVersion: v1
      kind: ConfigMap
      metadata:
@@ -292,7 +290,7 @@ requests are handled:
 
 1.  Ensure that the file was updated successfully:
 
-    ```shell
+    ```bash
     kubectl get configmap config-network --namespace knative-serving --output yaml
     ```
 
@@ -303,7 +301,7 @@ be able to handle HTTPS traffic.
 ### Verify Auto TLS
 
 1.  Run the following comand to create a Knative Service:
-    ```shell
+    ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 

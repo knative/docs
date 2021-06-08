@@ -72,9 +72,9 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## Configuration and Networking
 
-- [Configuring cluster local routes](docs/developer/serving/services/private-services.md)
-- [Using a custom domain](./using-a-custom-domain)
-- [Using subroutes](./using-subroutes)
+- [Configuring cluster local routes](../developer/serving/services/private-services.md)
+- [Using a custom domain](../developer/serving/services/using-a-custom-domain)
+- [Using subroutes](../developer/serving/services/using-subroutes)
 
 ## Observability
 

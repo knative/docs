@@ -15,7 +15,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 ```
@@ -32,7 +32,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 
 1. Create a new directory and cd into it:
 
-   ```shell
+   ```bash
    mkdir app
    cd app
    ```
@@ -106,7 +106,7 @@ folder) you're ready to build and deploy the sample app.
        Docker Hub, run these commands replacing `{username}` with your Docker Hub
        username:
 
-       ```shell
+       ```bash
        # Build the container on your local machine
        docker build -t {username}/helloworld-php .
 
@@ -119,7 +119,7 @@ folder) you're ready to build and deploy the sample app.
        in `service.yaml` matches the container you built in the previous step. Apply
        the configuration using `kubectl`:
 
-       ```shell
+       ```bash
        kubectl apply --filename service.yaml
        ```
 
@@ -128,7 +128,7 @@ folder) you're ready to build and deploy the sample app.
 
        With `kn` you can deploy the service with
 
-       ```shell
+       ```bash
        kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="Ruby Sample v1"
        ```
 
@@ -176,13 +176,13 @@ folder) you're ready to build and deploy the sample app.
 
 === "kn"
 
-       ```shell
+       ```bash
        kn service describe helloworld-php -o url
        ```
 
        Example:
 
-       ```shell
+       ```bash
        http://helloworld-php.default.1.2.3.4.xip.io
        ```
 
@@ -192,7 +192,7 @@ folder) you're ready to build and deploy the sample app.
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-php.default.1.2.3.4.sslip.io
    Hello PHP Sample v1!
    ```
@@ -203,12 +203,12 @@ To remove the sample app from your cluster, delete the service record.
 
 
 === "kubectl"
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
 === "kn"
 
-    ```shell
+    ```bash
     kn service delete helloworld-php
     ```

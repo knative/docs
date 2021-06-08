@@ -26,7 +26,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
 ```
@@ -61,7 +61,7 @@ of operation:
 In the `Dockerfile`, you can see how the dependencies are installed using npm.
   You can build and push this to your registry of choice via:
 
-   ```shell
+   ```bash
    docker build -t <image> .
    docker push <image>
    ```
@@ -71,7 +71,7 @@ In the `Dockerfile`, you can see how the dependencies are installed using npm.
     To deploy the Knative service, edit the `service.yaml` file and replace
     `<registry/repository/image:tag>` with the image you have just created.
 
-       ```shell
+       ```bash
        kubectl apply -f service.yaml
        ```
 
@@ -79,7 +79,7 @@ In the `Dockerfile`, you can see how the dependencies are installed using npm.
 
     To deploy using the `kn` CLI:
 
-       ```shell
+       ```bash
        kn service create cloudevents-nodejs --image=<image>
        ```
 
@@ -90,7 +90,7 @@ In the `Dockerfile`, you can see how the dependencies are installed using npm.
 
 Get the URL for your Service with:
 
-```shell
+```bash
 $ kubectl get ksvc
 NAME                 URL                                                LATESTCREATED              LATESTREADY                READY   REASON
 cloudevents-nodejs   http://cloudevents-nodejs.default.1.2.3.4.sslip.io   cloudevents-nodejs-ss5pj   cloudevents-nodejs-ss5pj   True
@@ -98,7 +98,7 @@ cloudevents-nodejs   http://cloudevents-nodejs.default.1.2.3.4.sslip.io   cloude
 
 Then send a cloud event to it with:
 
-```shell
+```bash
 $ curl -X POST \
     -H "content-type: application/json"  \
     -H "ce-specversion: 1.0"  \
@@ -111,7 +111,7 @@ $ curl -X POST \
 
 You will get back:
 
-```shell
+```bash
 {"message":"Hello, Dave"}
 ```
 
@@ -123,7 +123,7 @@ To remove the sample app from your cluster, delete the service.
 
     Run:
 
-    ```shell
+    ```bash
     kubectl delete --filename service.yaml
     ```
 
@@ -131,7 +131,7 @@ To remove the sample app from your cluster, delete the service.
 
     Run:
 
-    ```shell
+    ```bash
     kn service delete cloudevents-nodejs
     ```
 
