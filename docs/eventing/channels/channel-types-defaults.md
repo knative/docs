@@ -49,7 +49,7 @@ data:
 ```
 
 !!! note
-    `InMemoryChannel` channels are not suited for production environments.
+    InMemoryChannel Channels must not be used in production environments.
 
 ## Next steps
 
