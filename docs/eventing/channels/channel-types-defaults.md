@@ -13,12 +13,9 @@ Knative provides the InMemoryChannel Channel implementation by default.
 This default implementation is useful for developers who do not want to configure a specific
 implementation type, such as Apache Kafka or NATSS channels.
 
-Through the generic Channel object you can create a channel without specifying which channel
-implementation CRD is used.
-This is useful if you do not care about the properties a particular channel provides, such as
-ordering and persistence, and you want to use the implementation selected by the cluster administrator.
-The cluster administrator controls the default settings through the `default-ch-webhook` ConfigMap in the
-`knative-eventing` namespace.
+You can use the generic Channel object if you want to create a channel without specifying which channel implementation CRD is used. This is useful if you do not care about the properties a particular Channel implementation provides, such as ordering and persistence, and you want to use the implementation selected by the cluster administrator.
+
+Cluster administrators can modify the default Channel implementation settings by editing the `default-ch-webhook` ConfigMap in the `knative-eventing` namespace.
 
 For more information about modifying ConfigMaps, see
 [Configuring the Eventing Operator custom resource](/admin/install/operator/configuring-eventing-cr).
