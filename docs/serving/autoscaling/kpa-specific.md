@@ -21,7 +21,7 @@ The KPA's implementation has two modes: **stable** and **panic**.
 Stable mode is used for general operation, while panic mode by default has a much shorter window, and will be used to quickly scale a revision up if a burst of traffic arrives.
 
 !!! note
-    When using panic mode, the revision will not scale down to avoid churn. The Autoscaler will leave panic mode if there has been no reason to react quickly during the stable window's timeframe.
+    When using panic mode, the Revision will not scale down to avoid churn. The Autoscaler will leave panic mode if there has been no reason to react quickly during the stable window timeframe.
 
 ### Stable window
 
