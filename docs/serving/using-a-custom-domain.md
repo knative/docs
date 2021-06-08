@@ -32,7 +32,7 @@ To change the {default-domain} value there are a few steps involved:
      kind: ConfigMap
      ```
 
-1. Edit the file to replace `example.com` with the domain you'd like to use, remove the `_example` key and save your changes. In this example, we configure `mydomain.com` for all routes:
+1. Edit the file to replace `example.com` with the domain you want to use, then remove the `_example` key and save your changes. In this example, `mydomain.com` is configured as the domain for all routes:
 
      ```yaml
      apiVersion: v1
