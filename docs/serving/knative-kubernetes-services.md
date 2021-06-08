@@ -6,7 +6,7 @@ that are active when running Knative Serving.
 
 ## Before You Begin
 
-1. This guide assumes that you have [installed Knative Serving](https://knative.dev/docs/install/).
+1. This guide assumes that you have [installed Knative Serving](/admin/install/serving/install-serving-with-yaml).
 2. Verify that you have the proper components in your cluster. To view the
    services installed in your cluster, use the command:
 
