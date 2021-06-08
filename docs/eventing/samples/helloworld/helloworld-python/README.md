@@ -87,7 +87,19 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
       labels:
            eventing.knative.dev/injection: enabled
     ---
-    # Helloworld-python app deploment
+    # A default broker
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+      namespace: knative-samples
+      annotations:
+        # Note: you can set the eventing.knative.dev/broker.class annotation to change the class of the broker.
+        # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
+        eventing.knative.dev/broker.class: MTChannelBasedBroker
+    spec: {}
+    ---
+    # Helloworld-python app deployment
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -109,18 +121,18 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     ---
     # Service that exposes helloworld-python app.
     # This will be the subscriber for the Trigger
-      kind: Service
-      apiVersion: v1
-      metadata:
-        name: helloworld-python
-        namespace: knative-samples
-      spec:
-        selector:
-          app: helloworld-python
-        ports:
-        - protocol: TCP
-          port: 80
-          targetPort: 8080
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: helloworld-python
+      namespace: knative-samples
+    spec:
+      selector:
+        app: helloworld-python
+      ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8080
     ---
     # Knative Eventing Trigger to trigger the helloworld-python service
     apiVersion: eventing.knative.dev/v1
@@ -198,7 +210,7 @@ You can send an HTTP request directly to the Knative [broker](../../../broker) i
 1. Run the following command in the SSH terminal:
 
     ```bash
-    curl -v "default-broker.knative-samples.svc.cluster.local" \
+    curl -v "broker-ingress.knative-eventing.svc.cluster.local/knative-samples/default" \
     -X POST \
     -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
     -H "Ce-specversion: 0.3" \
@@ -310,7 +322,7 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
       EOF
       ```
 
-  1. [Send a CloudEvent to the Broker](#send-cloudevent-to-the-broker)
+  1. [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
 
   1. Check the logs of `event-display` Service:
 

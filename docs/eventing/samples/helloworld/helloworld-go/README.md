@@ -157,9 +157,13 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
       metadata:
         name: default
         namespace: knative-samples
+        annotations:
+          # Note: you can set the eventing.knative.dev/broker.class annotation to change the class of the broker.
+          # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
+          eventing.knative.dev/broker.class: MTChannelBasedBroker
       spec: {}
       ---
-      # Helloworld-go app deploment
+      # Helloworld-go app deployment
       apiVersion: apps/v1
       kind: Deployment
       metadata:
@@ -303,7 +307,7 @@ with correct CloudEvent headers set.
     -X POST \
     -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
     -H "Ce-Specversion: 1.0" \
-    -H "Ce-Type: dev.knative.samples.helloworld" \
+    -H "Ce-Type: dev.knative.samples.hifromknative" \
     -H "Ce-Source: dev.knative.samples/helloworldsource" \
     -H "Content-Type: application/json" \
     -d '{"msg":"Hello World from the curl pod."}'
@@ -427,7 +431,7 @@ mesh via the Broker and can be delivered to other services using a Trigger
        EOF
        ```
 
-1. [Send a CloudEvent to the Broker](#send-cloudevent-to-the-broker)
+1. [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
 
 1. Check the logs of `event-display` service:
 
