@@ -24,7 +24,7 @@ $ kubectl -n knative-serving scale deployment <deployment-name> --replicas=2
 - Setting `--replicas=1` disables HA.
 
 !!! note
-    If you scale down the `autoscaler` component, you may observe inaccurate autoscaling results for some revisions for a period of time up to the `stable-window` value. This is because when an `autoscaler` pod is terminating, ownership of the revisions belonging to that pod is passed to other `autoscaler` pods that are on stand by. The `autoscaler` pods that take over ownership of those revisions use the `stable-window` time to build the scaling metrics state for those revisions.
+    If you scale down the Autoscaler, you may observe inaccurate autoscaling results for some Revisions for a period of time up to the `stable-window` value. This is because when an `autoscaler` pod is terminating, ownership of the revisions belonging to that pod is passed to other `autoscaler` pods that are on stand by. The `autoscaler` pods that take over ownership of those revisions use the `stable-window` time to build the scaling metrics state for those Revisions.
 
 ## Scaling the data plane
 
