@@ -208,7 +208,7 @@ autoscaler classes built into Knative:
    ```
 
 !!! note
-    For an `hpa.autoscaling.knative.dev` class service, the `autoscaling.knative.dev/target` specifies the CPU percentage target (default `"80"`).
+    For an `hpa.autoscaling.knative.dev` class Service, the `autoscaling.knative.dev/target` specifies the CPU percentage target (default `"80"`).
 
 #### Demo
 
