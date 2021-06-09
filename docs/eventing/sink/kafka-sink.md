@@ -34,7 +34,7 @@ You must have a Kubernetes cluster with [Knative Eventing installed](../../../ad
 
     Example output:
 
-    ```bash
+    ```{ .bash .no-copy }
     NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
     eventing-controller            1/1     1            1           10s
     eventing-webhook               1/1     1            1           9s

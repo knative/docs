@@ -163,7 +163,7 @@ entering the following command:
 
     This returns the `Attributes` and `Data` of the events that the PingSource sent to the `event-display` service:
 
-    ```bash
+    ```{ .bash .no-copy }
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -181,7 +181,7 @@ entering the following command:
 
     If you created a PingSource that sends binary data, you will also see output similar to the following:
 
-    ```bash
+    ```{ .bash .no-copy }
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,

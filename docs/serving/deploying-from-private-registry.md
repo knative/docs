@@ -72,8 +72,8 @@ You need:
     [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
     of your Knative cluster are use by your revisions unless    [`serviceAccountName`](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision-2) is specified.
 
-   Run the following command to modify your `default` service account, assuming
-   you named your secrets `container-registry`:
+    Run the following command to modify your `default` service account, assuming
+    you named your secrets `container-registry`:
 
     ```bash
     kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"

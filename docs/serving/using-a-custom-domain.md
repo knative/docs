@@ -1,10 +1,3 @@
----
-title: "Setting up a custom domain"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 55
-type: "docs"
----
-
 # Setting up a custom domain
 
 By default, Knative Serving routes use `example.com` as the default domain. The
@@ -18,76 +11,66 @@ To change the {default-domain} value there are a few steps involved:
 1. Edit the domain configuration config-map to replace `example.com` with your
    own domain, for example `mydomain.com`:
 
-   ```bash
-   kubectl edit cm config-domain --namespace knative-serving
-   ```
+     ```bash
+     kubectl edit configmap config-domain -n knative-serving
+     ```
 
-   This command opens your default text editor and allows you to edit the [config
-   map](https://github.com/knative/serving/blob/main/config/core/configmaps/domain.yaml).
+     This command opens your default text editor and allows you to edit the [config
+     map](https://github.com/knative/serving/blob/main/config/core/configmaps/domain.yaml).
 
-   ```yaml
-   apiVersion: v1
-   data:
-     _example: |
-       ################################
-       #                              #
-       #    EXAMPLE CONFIGURATION     #
-       #                              #
-       ################################
-       # ...
-       example.com: |
-   kind: ConfigMap
-   ```
+     ```yaml
+     apiVersion: v1
+     data:
+       _example: |
+         ################################
+         #                              #
+         #    EXAMPLE CONFIGURATION     #
+         #                              #
+         ################################
+         # ...
+         example.com: |
+     kind: ConfigMap
+     ```
 
-1. Edit the file to replace `example.com` with the domain you'd like to use,
-   remove the `_example` key and save your changes.
-   In this example, we configure `mydomain.com` for all routes:
+1. Edit the file to replace `example.com` with the domain you want to use, then remove the `_example` key and save your changes. In this example, `mydomain.com` is configured as the domain for all routes:
 
-   ```yaml
-   apiVersion: v1
-   data:
-     mydomain.com: ""
-   kind: ConfigMap
-   [...]
-   ```
+     ```yaml
+     apiVersion: v1
+     data:
+       mydomain.com: ""
+     kind: ConfigMap
+     [...]
+     ```
 
 ## Apply from a file
 
 You can also apply an updated domain configuration:
 
-1. Create a new file, `config-domain.yaml` and paste the following text,
-   replacing the `example.org` and `example.com` values with the new domain you
-   want to use:
+1. Replace the `example.org` and `example.com` values with the new domain you want to use and run the command:
 
-   ```yaml
-   apiVersion: v1
-   kind: ConfigMap
-   metadata:
-     name: config-domain
-     namespace: knative-serving
-   data:
-     # These are example settings of domain.
-     # example.org will be used for routes having app=prod.
-     example.org: |
-       selector:
-         app: prod
-     # Default value for domain, for routes that does not have app=prod labels.
-     # Although it will match all routes, it is the least-specific rule so it
-     # will only be used if no other domain matches.
-     example.com: ""
-   ```
-
-1. Apply updated domain configuration to your cluster:
-
-   ```bash
-   kubectl apply --filename config-domain.yaml
-   ```
+     ```yaml
+     kubectl apply -f - <<EOF
+     apiVersion: v1
+     kind: ConfigMap
+     metadata:
+       name: config-domain
+       namespace: knative-serving
+     data:
+       # These are example settings of domain.
+       # example.org will be used for routes having app=prod.
+       example.org: |
+         selector:
+           app: prod
+       # Default value for domain, for routes that does not have app=prod labels.
+       # Although it will match all routes, it is the least-specific rule so it
+       # will only be used if no other domain matches.
+       example.com: ""
+       EOF
+     ```
 
 ## Deploy an application
 
-> If you have an existing deployment, Knative will reconcile the change made to
-> the configuration map and automatically update the host name for all of the
-> deployed services and routes.
+> If you have an existing deployment, Knative reconciles the change made to the ConfigMap, and automatically updates the host name for all of the deployed Services and Routes.
 
 Deploy an app (for example,
 [`helloworld-go`](./samples/hello-world/helloworld-go/)), to your

@@ -230,7 +230,7 @@ Helloworld-python app logs the context and the msg of the above event, and repli
       kubectl --namespace knative-samples logs -l app=helloworld-python --tail=50
       ```
       You should see something similar to:
-      ```bash
+      ```{ .bash .no-copy }
       Event received. Context: Context Attributes,
         specversion: 0.3
         type: dev.knative.samples.helloworld
@@ -332,7 +332,7 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
 
     Example output:
 
-    ```bash
+    ```{ .bash .no-copy }
         cloudevents.Event
         Validation: valid
         Context Attributes,
