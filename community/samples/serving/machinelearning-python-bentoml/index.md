@@ -28,7 +28,7 @@ Knative deployment guide with BentoML is also available in the
 - Python 3.6 or above installed and running on your local machine.
   - Install `scikit-learn` and `bentoml` packages:
 
-    ```shell
+    ```bash
     pip install scikit-learn
     pip install bentoml
     ```
@@ -54,19 +54,19 @@ as API endpoint with KNative Serving.
 
     Run the `main.py` file to train and save the model:
 
-    ```shell
+    ```bash
     python main.py
     ```
 
 3. Use BentoML CLI to check saved model's information.
 
-    ```shell
+    ```bash
     bentoml get IrisClassifier:latest
     ```
 
     Example:
 
-    ```shell
+    ```bash
     > bentoml get IrisClassifier:latest
     {
       "name": "IrisClassifier",
@@ -110,14 +110,14 @@ as API endpoint with KNative Serving.
 4. Test run API server. BentoML can start an API server from the saved model. Use
   BentoML CLI command to start an API server locally and test it with the `curl` command.
 
-    ```shell
+    ```bash
     bentoml serve IrisClassifier:latest
     ```
 
     In another terminal window, make `curl` request with sample data to the API server
     and get prediction result:
 
-    ```shell
+    ```bash
     curl -v -i \
     --header "Content-Type: application/json" \
     --request POST \
@@ -133,7 +133,7 @@ a Dockerfile is automatically generated when saving the model.
 1. To build an API model server docker image, replace `{username}` with your Docker Hub
   username and run the following commands.
 
-    ```shell
+    ```bash
     # jq might not be installed on your local system, please follow jq install
     # instruction at https://stedolan.github.io/jq/download/
     saved_path=$(bentoml get IrisClassifier:latest -q | jq -r ".uri.uri")
@@ -150,7 +150,7 @@ a Dockerfile is automatically generated when saving the model.
 
     {{% readfile file="service.yaml" %}}
 
-    ```shell
+    ```bash
     kubectl apply --filename service.yaml
     ```
 
@@ -164,7 +164,7 @@ a Dockerfile is automatically generated when saving the model.
 
 4. Run the following command to find the domain URL for your service:
 
-    ```shell
+    ```bash
     kubectl get ksvc iris-classifier --output=custom-columns=NAME:.metadata.name,URL:.status.url
 
     NAME              URL
@@ -174,7 +174,7 @@ a Dockerfile is automatically generated when saving the model.
 5. Replace the request URL with the URL return in the previous command, and execute the
   command to get prediction result from the deployed model API endpoint.
 
-    ```shell
+    ```bash
     curl -v -i \
       --header "Content-Type: application/json" \
       --request POST \
@@ -188,6 +188,6 @@ a Dockerfile is automatically generated when saving the model.
 
 To remove the application from your cluster, delete the service record:
 
-  ```shell
+  ```bash
   kubectl delete --filename service.yaml
   ```
