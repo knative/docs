@@ -1,10 +1,3 @@
----
-title: "Available Channels"
-#linkTitle: "Channels"
-weight: 100
-type: "docs"
----
-
 # Available Channels
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
