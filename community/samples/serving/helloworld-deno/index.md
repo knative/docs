@@ -11,7 +11,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/hello-world/helloworld-deno
 ```
@@ -87,7 +87,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-deno .
 
@@ -100,7 +100,7 @@ folder) you're ready to build and deploy the sample app.
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
 
-   ```shell
+   ```bash
    kubectl apply --filename service.yaml
    ```
 
@@ -113,13 +113,13 @@ folder) you're ready to build and deploy the sample app.
 
 1. Run the following command to find the domain URL for your service:
 
-   ```shell
+   ```bash
    kubectl get ksvc helloworld-deno  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
-   ```shell
+   ```bash
    NAME                URL
    helloworld-deno        http://helloworld-deno.default.1.2.3.4.sslip.io
    ```
@@ -127,13 +127,13 @@ folder) you're ready to build and deploy the sample app.
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-deno.default.1.2.3.4.sslip.io
    ```
 
    Example:
 
-   ```shell
+   ```bash
    curl http://helloworld-deno.default.1.2.3.4.sslip.io
    [1] "Hello R Sample v1!"
    ```
@@ -144,6 +144,6 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

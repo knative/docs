@@ -30,7 +30,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 1. Generate a new project.
 
-```shell
+```bash
 mix phoenix.new helloelixir
 ```
 
@@ -127,7 +127,7 @@ above.
     shell of an example on `config/prod.secret.exs.sample` and you can use the
     following command to generate a new prod secrets file.
 
-    ```shell
+    ```bash
     SECRET_KEY_BASE=$(elixir -e ":crypto.strong_rand_bytes(48) |> Base.encode64 |> IO.puts")
     sed "s|SECRET+KEY+BASE|$SECRET_KEY_BASE|" config/prod.secret.exs.sample >config/prod.secret.exs
     ```
@@ -136,7 +136,7 @@ above.
     Docker Hub, run these commands replacing `{username}` with your Docker Hub
     username:
 
-    ```shell
+    ```bash
      # Build the container on your local machine
      docker build -t {username}/helloworld-elixir .
 
@@ -149,7 +149,7 @@ above.
     in `service.yaml` matches the container you built in the previous step.
     Apply the configuration using `kubectl`:
 
-    ```shell
+    ```bash
     kubectl apply --filename service.yaml
     ```
 
@@ -172,7 +172,7 @@ above.
 1.  Now you can make a request to your app to see the results. Replace
     `{IP_ADDRESS}` with the address you see returned in the previous step.
 
-        ```shell
+        ```bash
         curl http://helloworld-elixir.default.1.2.3.4.sslip.io
 
         ...
@@ -294,6 +294,6 @@ above.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```
