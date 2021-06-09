@@ -233,8 +233,8 @@ nav:
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
-    - "Join the Community ➠": ../community/
-    - "Read the Blog ➠": ../blog/
+    - "Join the Community ➠": /community/
+    - "Read the Blog ➠": /blog/
 
 theme:
   name: material
