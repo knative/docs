@@ -17,6 +17,21 @@ You can get started with a local deployment of Knative by using _Knative on Kind
     ```
     curl -sL install.konk.dev | bash
     ```
+ 
+## Install Knative on Minikube
+
+As an alternative to Kind, you can also install Knative on Minikube:
+
+[`knative-on-minikube.sh`](https://raw.githubusercontent.com/psschwei/knative-on-minikube/main/knative-on-minikube.sh) is a shell script that completes the following fuctions:
+
+1. Creates a cluster called `minikube`.
+1. Installs Knative Serving with Kourier as the default networking layer, and sslip.io as the DNS.
+1. Installs Knative Eventing and creates a default broker and channel implementation.
+
+Prerequisites:
+
+* [Minikube](https://minikube.sigs.k8s.io/docs/start/) is installed on your machine
+* The appropriate [driver](https://minikube.sigs.k8s.io/docs/drivers/) is configured for your machine. The script defaults to using `kvm2`, an alternative driver can be used by setting `VM_DRIVER` variable, i.e. `VM_DRIVER=docker ./knative-on-minikube.sh`
 
 ## Install the Knative CLI
 
