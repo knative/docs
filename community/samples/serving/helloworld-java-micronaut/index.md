@@ -219,7 +219,7 @@ your sample app to your cluster:
    Docker Hub registry. You must replace the `{username}` variables in the
    following commands with your Docker Hub username.
 
-   ```bash
+   ```shell
    # Build the container on your local machine
    docker build -t {username}/helloworld-java-micronaut .
 
@@ -230,7 +230,7 @@ your sample app to your cluster:
 1. Now that your container image is in the registry, you can deploy it to your
    Knative cluster by running the `kubectl apply` command:
 
-   ```bash
+   ```shell
    kubectl apply --filename service.yaml
    ```
 
@@ -253,13 +253,13 @@ To verify that your sample app has been successfully deployed:
 1. Retrieve the URL for your service, by running the following `kubectl get`
    command:
 
-   ```bash
+   ```shell
    kubectl get ksvc helloworld-java-micronaut  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example result:
 
-   ```bash
+   ```shell
    NAME                          URL
    helloworld-java-micronaut     http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
    ```
@@ -267,13 +267,13 @@ To verify that your sample app has been successfully deployed:
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```bash
+   ```shell
    curl http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
    ```
 
    Example result:
 
-   ```bash
+   ```shell
     Hello World: Micronaut Sample v1
    ```
 
@@ -284,6 +284,6 @@ Congratulations on deploying your sample Java app to Knative!
 To remove the sample app from your cluster, run the following `kubectl delete`
 command:
 
-```bash
+```shell
 kubectl delete --filename service.yaml
 ```
