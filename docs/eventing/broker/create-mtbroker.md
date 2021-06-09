@@ -58,7 +58,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
         This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
-        ```bash
+        ```{ .bash .no-copy }
         NAME      READY   REASON   URL                                                                                 AGE
         default   True             http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default      1m
         ```
