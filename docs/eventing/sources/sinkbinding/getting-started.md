@@ -213,7 +213,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 
     ```yaml
     kubectl apply -f - <<EOF
-    apiVersion: sources.knative.dev/v1alpha1
+    apiVersion: sources.knative.dev/v1
     kind: SinkBinding
     metadata:
       name: <name>
