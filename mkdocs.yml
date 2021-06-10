@@ -59,6 +59,10 @@ nav:
         # Serving config
         - Knative Serving configuration:
           - Configure Deployment resources: admin/serving/deployment.md
+        # Eventing config
+        - Knative Eventing configuration:
+          - Configure Broker defaults: admin/eventing/broker-configuration.md
+          - Configure Kafka channels: admin/eventing/kafka-channel-configuration.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
@@ -191,10 +195,8 @@ nav:
         - Triggers: eventing/broker/triggers/README.md
         - Event delivery: eventing/broker/broker-event-delivery.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
-        - ConfigMaps: eventing/broker/configmaps/README.md
         - Apache Kafka Broker:
           - Overview: eventing/broker/kafka-broker/README.md
-          - Kafka Channel ConfigMap: eventing/broker/kafka-broker/kafka-configmap.md
       - Sink:
         - Overview: eventing/sink/README.md
         - Apache Kafka Sink: eventing/sink/kafka-sink.md
@@ -292,6 +294,8 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/broker/kafka-broker/kafka-configmap.md': 'admin/eventing/kafka-channel-configuration.md'
+        'eventing/broker/configmaps/README.md': 'admin/eventing/broker-configuration.md'
         'help/README.md': 'docs/help/contributor/README.md'
         'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
         'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
@@ -307,7 +311,7 @@ plugins:
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
         'install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
         # This doesn't exist anymore, we should probably replace it
-        'install/install-extensions.md': 'admin/install/install-extensions.md'
+        'install/install-extensions.md': 'admin/install/README.md'
         'install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
         'install/installation-files.md': 'admin/install/README.md'
         'install/installing-istio.md': 'admin/install/installing-istio.md'

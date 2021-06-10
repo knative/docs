@@ -1,16 +1,7 @@
----
-title: "ConfigMaps"
-weight: 05
-type: "docs"
-showlandingtoc: "false"
-aliases:
-  - /docs/eventing/broker/config-br-defaults
----
-
-# ConfigMaps
+# Configure Broker defaults
 
 Knative Eventing provides a `config-br-defaults` ConfigMap that contains the configuration settings that govern default broker creation.
-<!--TODO: Create a version of this doc for the channels doc section-->
+
 The default `config-br-defaults` ConfigMap is as follows:
 
 ```yaml
@@ -77,7 +68,7 @@ data:
 
 Now every broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap.
 
-For more information about creating a `kafka-channel` ConfigMap to use with your broker, see the [Kafka Channel ConfigMap](../kafka-broker/kafka-configmap/) documentation.
+For more information about creating a `kafka-channel` ConfigMap to use with your broker, see the [Kafka Channel ConfigMap](../kafka-channel-configuration/#create-a-kafka-channel-configmap) documentation.
 
 ### Changing the default channel implementation for a namespace
 
