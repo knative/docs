@@ -62,7 +62,7 @@ nav:
         # Eventing config
         - Knative Eventing configuration:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
-          - Configure Kafka channels: admin/eventing/kafka-channel-configuration.md
+          - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md

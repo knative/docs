@@ -1,6 +1,6 @@
 # Configure Broker defaults
 
-Knative Eventing provides a `config-br-defaults` ConfigMap that contains the configuration settings that govern default broker creation.
+Knative Eventing provides a `config-br-defaults` ConfigMap that contains the configuration settings that govern default Broker creation.
 
 The default `config-br-defaults` ConfigMap is as follows:
 
@@ -13,7 +13,7 @@ metadata:
   labels:
     eventing.knative.dev/release: devel
 data:
-  # Configuration for defaulting channels that do not specify CRD implementations.
+  # Configuration for defaulting Channels that do not specify CRD implementations.
   default-br-config: |
     clusterDefault:
       brokerClass: MTChannelBasedBroker
@@ -45,7 +45,7 @@ spec:
 
 A Broker object that does not have a `spec.config` specified uses the `config-br-default-channel` ConfigMap dy default because this is specified in the `config-br-defaults` ConfigMap.
 
-However, if you have installed a different channel implementation, for example, Kafka, and would like this to be used as the default channel implementation for any broker that is created, you can change the `config-br-defaults` ConfigMap to look like this:
+However, if you have installed a different Channel implementation, for example, Kafka, and would like this to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
 
 ```yaml
 apiVersion: v1
@@ -56,7 +56,7 @@ metadata:
   labels:
     eventing.knative.dev/release: devel
 data:
-  # Configuration for defaulting channels that do not specify CRD implementations.
+  # Configuration for defaulting Channels that do not specify CRD implementations.
   default-br-config: |
     clusterDefault:
       brokerClass: MTChannelBasedBroker
@@ -66,15 +66,15 @@ data:
       namespace: knative-eventing
 ```
 
-Now every broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap.
+Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap.
 
-For more information about creating a `kafka-channel` ConfigMap to use with your broker, see the [Kafka Channel ConfigMap](../kafka-channel-configuration/#create-a-kafka-channel-configmap) documentation.
+For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](../kafka-channel-configuration/#create-a-kafka-channel-configmap) documentation.
 
-### Changing the default channel implementation for a namespace
+### Changing the default Channel implementation for a namespace
 
-You can modify the default broker creation behavior for one or more namespaces.
+You can modify the default Broker creation behavior for one or more namespaces.
 
-For example, if you wanted to use the `kafka-channel` ConfigMap for all other brokers created, but wanted to use `config-br-default-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
+For example, if you wanted to use the `kafka-channel` ConfigMap for all other Brokers created, but wanted to use `config-br-default-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
 
 ```yaml
 apiVersion: v1
@@ -85,7 +85,7 @@ metadata:
   labels:
     eventing.knative.dev/release: devel
 data:
-  # Configuration for defaulting channels that do not specify CRD implementations.
+  # Configuration for defaulting Channels that do not specify CRD implementations.
   default-br-config: |
     clusterDefault:
       brokerClass: MTChannelBasedBroker
@@ -108,9 +108,9 @@ data:
 
 ## Broker class options
 
-When a broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` broker class is used, as specified in the `config-br-defaults` ConfigMap.
+When a Broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.
 
-The following example creates a broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
+The following example creates a Broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
 
 ```bash
 kubectl create -f - <<EOF
@@ -122,11 +122,11 @@ metadata:
 EOF
 ```
 
-### Configuring the broker class
+### Configuring the Broker class
 
-To configure a broker class, you can modify the
+To configure a Broker class, you can modify the
 `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker
-object. `MTChannelBasedBroker` is the broker class default.
+object. `MTChannelBasedBroker` is the Broker class default.
 
 1. Modify the `eventing.knative.dev/broker.class` annotation. Replace
 `MTChannelBasedBroker` with the class type you want to use:
@@ -142,7 +142,7 @@ object. `MTChannelBasedBroker` is the broker class default.
     ```
 
 1. Configure the `spec.config` with the details of the ConfigMap that defines
-the backing channel for the broker class:
+the backing Channel for the Broker class:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
@@ -162,7 +162,7 @@ the backing channel for the broker class:
 
 ### Configuring the default BrokerClass for the cluster
 ​
-You can configure the `clusterDefault` broker class so that any broker created in the cluster that does not have a `BrokerClass` annotation uses this default class.
+You can configure the `clusterDefault` Broker class so that any Broker created in the cluster that does not have a `BrokerClass` annotation uses this default class.
 
 #### Example
 
@@ -175,7 +175,7 @@ metadata:
   labels:
     eventing.knative.dev/release: devel
 data:
-  # Configuration for defaulting channels that do not specify CRD implementations.
+  # Configuration for defaulting Channels that do not specify CRD implementations.
   default-br-config: |
     clusterDefault:
       brokerClass: MTChannelBasedBroker
@@ -183,9 +183,9 @@ data:
 ​
 ### Configuring the default BrokerClass for namespaces
 ​
-You can modify the default broker class for one or more namespaces.
+You can modify the default Broker class for one or more namespaces.
 
-For example, if you want to use a `KafkaBroker` class for all other brokers created on the cluster, but you want to use the `MTChannelBasedBroker` class for brokers created in `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
+For example, if you want to use a `KafkaBroker` class for all other Brokers created on the cluster, but you want to use the `MTChannelBasedBroker` class for Brokers created in `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
 ​
 ```yaml
 apiVersion: v1
@@ -196,7 +196,7 @@ metadata:
   labels:
     eventing.knative.dev/release: devel
 data:
-  # Configuration for defaulting channels that do not specify CRD implementations.
+  # Configuration for defaulting Channels that do not specify CRD implementations.
   default-br-config: |
     clusterDefault:
       brokerClass: KafkaBroker
