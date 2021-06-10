@@ -15,3 +15,4 @@ Style Guides we adhere to, in priority order: (if one doesn't have the answer yo
 1. [Page formatting standards](./style-and-formatting.md)
 1. [Voice and language](./voice-and-language.md)
 1. [Documenting Code](./documenting-code.md)
+1. [Word and Phrase List](./word-and-phrase-list.md)
