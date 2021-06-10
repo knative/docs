@@ -1,16 +1,9 @@
----
-title: "Reconciler Implementation and Design"
-linkTitle: "Reconciler Implementation"
-weight: 40
-type: "docs"
-aliases:
-  - /docs/eventing/samples/writing-event-source/04-reconciler
----
-
 # Reconciler Implementation and Design
 
 ## Reconciler Functionality
+
 General steps the reconciliation process needs to cover:
+
 1. Update the `ObservedGeneration` and initialize the `Status` conditions (as defined in `samplesource_lifecycle.go` and `samplesource_types.go`)
 ```go
 src.Status.InitializeConditions()
@@ -32,12 +25,14 @@ return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SampleSourceReconciled", 
 ```
 
 ## Reconcile/Create The Receive Adapter
+
 As part of the source reconciliation, we have to create and deploy
 (and update if necessary) the underlying receive adapter.
 
 Verify the specified kubernetes resources are valid, and update the `Status` accordingly
 
 Assemble the ReceiveAdapterArgs
+
 ```go
 raArgs := resources.ReceiveAdapterArgs{
 		EventSource:    src.Namespace + "/" + src.Name,

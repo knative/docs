@@ -300,6 +300,10 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md': 'developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md'
+        'eventing/sources/creating-event-sources/writing-event-source/README.md': 'developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md'
+        'eventing/sources/creating-event-sources/writing-event-source/06-yaml.md': 'developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md'
+        'eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md': 'developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md'
         'eventing/sources/creating-event-sources/writing-event-source/03-controller.md': 'developer/eventing/sources/creating-event-sources/using-the-sandbox-sample-source.md'
         'eventing/sources/creating-event-sources/README.md': 'developer/eventing/sources/creating-event-sources/README.md'
         'help/README.md': 'docs/help/contributor/README.md'
