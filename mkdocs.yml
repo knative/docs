@@ -71,6 +71,8 @@ nav:
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+        - Knative Eventing:
+          - Using Apache Kafka with Knative: developer/eventing/kafka/README.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -292,6 +294,7 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/samples/kafka/README.md': 'developer/eventing/kafka/README.md'
         'help/README.md': 'docs/help/contributor/README.md'
         'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
         'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
