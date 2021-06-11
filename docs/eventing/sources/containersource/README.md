@@ -65,7 +65,7 @@ Service, which dumps incoming messages into its log, by running the command:
     === "YAML"
 
         ```yaml
-        kubectl -n containersource-example apply -f - << EOF
+        kubectl -n containersource-example apply -f - <<EOF
         apiVersion: apps/v1
         kind: Deployment
         metadata:
