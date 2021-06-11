@@ -120,7 +120,7 @@ settings by running the command:
     === "YAML"
 
         ```yaml
-        kubectl -n <namespace> apply -f - << EOF
+        kubectl -n <namespace> apply -f - <<EOF
         apiVersion: sources.knative.dev/v1
         kind: ContainerSource
         metadata:
