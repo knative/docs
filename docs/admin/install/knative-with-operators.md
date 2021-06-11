@@ -286,53 +286,6 @@ kubectl logs -f deploy/knative-operator
 
           Save this for configuring DNS below.
 
-    === "Gloo"
-
-        _For a detailed guide on Gloo integration, see
-        [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/)
-        in the Gloo documentation._
-
-        The following commands install Gloo and enable its Knative integration.
-
-        1. Make sure `glooctl` is installed (version 1.3.x and higher recommended):
-          ```bash
-          glooctl version
-          ```
-
-          If it is not installed, you can install the latest version using:
-          ```bash
-          curl -sL https://run.solo.io/gloo/install | sh
-          export PATH=$HOME/.gloo/bin:$PATH
-          ```
-
-          Or following the
-          [Gloo CLI install instructions](https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli).
-
-        1. Install Gloo and the Knative integration:
-          ```bash
-          glooctl install knative --install-knative=false
-          ```
-
-        1. To configure Knative Serving to use Gloo, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          EOF
-          ```
-
-          There is no need to configure the ingress class to use the gloo.
-
-        1. Fetch the External IP or CNAME:
-          ```bash
-          glooctl proxy url --name knative-external-proxy
-          ```
-
-          Save this for configuring DNS below.
-
     === "Kourier"
 
         The following commands install Kourier and enable its Knative integration.
