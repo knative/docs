@@ -187,7 +187,7 @@ Follow the procedure for the networking layer of your choice:
     The following commands install Istio and enable its Knative integration.
 
     1. Install a properly configured Istio by following the
-    [Advanced installation](../installing-istio.md) instructions or by running the command:
+    [Advanced Istio installation](../installing-istio.md) instructions or by running the command:
 
         ```bash
         kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
