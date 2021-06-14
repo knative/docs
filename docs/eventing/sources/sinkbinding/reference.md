@@ -173,19 +173,24 @@ A `ceOverrides` definition supports the following fields:
 #### Example: CloudEvent Overrides
 
 ```yaml
-ceOverrides:
-  extensions:
-    extra: this is an extra attribute
-    additional: 42
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
+  ...
+  ceOverrides:
+    extensions:
+      extra: this is an extra attribute
+      additional: 42
 ```
 
 !!! contract
     This results in the `K_CE_OVERRIDES` environment variable being set on the
     `subject` as follows:
-
-```json
-{ "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
-```
+    ```{ .json .no-copy }
+    { "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
+    ```
 
 [kubernetes-overview]:
   https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields

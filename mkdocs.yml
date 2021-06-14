@@ -155,7 +155,7 @@ nav:
         - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
-          - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
+          - Creating a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
           - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
         - Kafka source: eventing/sources/kafka-source/README.md

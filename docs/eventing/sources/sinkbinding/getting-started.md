@@ -1,4 +1,4 @@
-# Create a SinkBinding object
+# Creating a SinkBinding object
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
@@ -88,7 +88,7 @@ create a Knative service.
     For example:
 
     ```bash
-    $ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    $ kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
 
 === "YAML"
@@ -224,11 +224,11 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
         selector:
           matchLabels:
             <label-key>: <label-value>
-        sink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: <sink>
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: <sink>
     EOF
     ```
     Where:
