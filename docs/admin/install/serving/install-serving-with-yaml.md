@@ -324,7 +324,9 @@ The tabs below expand to show instructions for installing each Serving extension
 === "HPA autoscaling"
 
     Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
-    for driving autoscaling decisions. Install the components needed to support HPA-class
+    for driving autoscaling decisions. 
+    
+    Install the components needed to support HPA-class
     autoscaling by running the command:
 
     ```bash
