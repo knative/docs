@@ -351,7 +351,7 @@ The tabs below expand to show instructions for installing each Serving extension
     1. Configure Knative to automatically configure TLS certificates by following the steps in
     [Enabling automatic TLS certificate provisioning](../../../../serving/using-auto-tls).
 
-=== "TLS using HTTP01"
+=== "TLS with HTTP01"
 
     Knative supports automatically provisioning TLS certificates using Encrypt HTTP01 challenges. The following commands install the components needed to support TLS.
 
