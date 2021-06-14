@@ -80,6 +80,7 @@ nav:
             - ContainerSource:
               - Creating a ContainerSource object: eventing/sources/containersource/README.md
               - ContainerSource Reference: eventing/sources/containersource/reference.md
+          - Event delivery: developer/eventing/event-delivery.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
