@@ -427,11 +427,7 @@ spec:
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
-Currently the following configurations are supported.
-- `replicas`
-- `labels`
-- `annotations`
-- `nodeSelector`
+Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 
 ### Override replicas, labels and annotations
 
