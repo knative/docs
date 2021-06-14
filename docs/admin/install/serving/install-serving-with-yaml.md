@@ -340,7 +340,7 @@ The tabs below expand to show instructions for installing each Serving extension
     install the components needed to support the provisioning of TLS certificates
     through cert-manager.
 
-    1. Install [cert-manager version v1.0.0 or later](../../../../serving/installing-cert-manager)
+    1. Install [cert-manager version v1.0.0 or later](../../../../serving/installing-cert-manager).
 
     1. Install the component that integrates Knative with `cert-manager` by running the command:
 
