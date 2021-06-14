@@ -47,13 +47,19 @@ resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
 <!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
 
 ```yaml
-sink:
-  ref:
-    apiVersion: v1
-    kind: Service
-    namespace: default
-    name: mysink
-  uri: /extra/path
+apiVersion: sources.knative.dev/v1
+kind: ContainerSource
+metadata:
+  name: test-heartbeats
+spec:
+  ...
+  sink:
+    ref:
+      apiVersion: v1
+      kind: Service
+      namespace: default
+      name: mysink
+    uri: /extra/path
 ```
 
 !!! contract
@@ -70,7 +76,12 @@ For more information, see the [Kubernetes Documentation](https://kubernetes.io/d
 
 #### Example: template parameter
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: ContainerSource
+metadata:
+  name: test-heartbeats
+spec:
   template:
     spec:
       containers:
@@ -83,7 +94,8 @@ For more information, see the [Kubernetes Documentation](https://kubernetes.io/d
               value: "mypod"
             - name: POD_NAMESPACE
               value: "event-test"
-  ```
+  ...
+```
 
 
 ### CloudEvent Overrides
@@ -106,10 +118,16 @@ A `ceOverrides` definition supports the following fields:
 #### Example: CloudEvent Overrides
 
 ```yaml
-ceOverrides:
-  extensions:
-    extra: this is an extra attribute
-    additional: 42
+apiVersion: sources.knative.dev/v1
+kind: ContainerSource
+metadata:
+  name: test-heartbeats
+spec:
+  ...
+  ceOverrides:
+    extensions:
+      extra: this is an extra attribute
+      additional: 42
 ```
 
 !!! contract
