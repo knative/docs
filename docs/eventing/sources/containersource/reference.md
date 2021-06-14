@@ -133,7 +133,7 @@ spec:
 !!! contract
     This results in the `K_CE_OVERRIDES` environment variable being set on the
     `subject` as follows: <!-- unsure about this -->
-    ```json
+    ```{ .json .no-copy }
     { "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
     ```
 
