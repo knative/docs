@@ -47,13 +47,19 @@ resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
 <!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
 
 ```yaml
-sink:
-  ref:
-    apiVersion: v1
-    kind: Service
-    namespace: default
-    name: mysink
-  uri: /extra/path
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
+  ...
+  sink:
+    ref:
+      apiVersion: v1
+      kind: Service
+      namespace: default
+      name: mysink
+    uri: /extra/path
 ```
 
 !!! contract
@@ -86,20 +92,31 @@ A `subject` definition supports the following fields:
 Given the following YAML, the `Deployment` named `mysubject` in the `default`
 namespace is selected:
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
   subject:
     apiVersion: apps/v1
     kind: Deployment
     namespace: default
     name: mysubject
-  ```
+  ...
+```
 
 #### Example: Subject parameter using matchLabels
 
 Given the following YAML, any `Job` with the label `working=example` in the
 `default` namespace is selected:
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
   subject:
     apiVersion: batch/v1beta1
     kind: Job
@@ -107,14 +124,20 @@ Given the following YAML, any `Job` with the label `working=example` in the
     selector:
       matchLabels:
         working: example
-  ```
+  ...
+```
 
 #### Example: Subject parameter using matchExpression
 
 Given the following YAML, any `Pod` with the label `working=example` OR
 `working=sample` in the ` default` namespace is selected:
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
   subject:
     apiVersion: v1
     kind: Pod
@@ -126,7 +149,8 @@ Given the following YAML, any `Pod` with the label `working=example` OR
         values:
           - example
           - sample
-  ```
+  ...
+```
 
 
 ### CloudEvent Overrides
