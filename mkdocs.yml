@@ -192,12 +192,10 @@ nav:
         - Available Channels: eventing/channels/channels-crds.md
         - Subscriptions: eventing/channels/subscriptions.md
       - Sugar Controller: eventing/sugar/README.md
-      - Event delivery: eventing/event-delivery.md
       - Brokers:
         - Overview: eventing/broker/README.md
         - Creating a broker: eventing/broker/create-mtbroker.md
         - Triggers: eventing/broker/triggers/README.md
-        - Event delivery: eventing/broker/broker-event-delivery.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
         - Apache Kafka Broker:
           - Overview: eventing/broker/kafka-broker/README.md
@@ -298,6 +296,8 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/broker/broker-event-delivery.md': 'developer/eventing/event-delivery.md'
+        'eventing/event-delivery.md': 'developer/eventing/event-delivery.md'
         'eventing/broker/kafka-broker/kafka-configmap.md': 'admin/eventing/kafka-channel-configuration.md'
         'eventing/broker/configmaps/README.md': 'admin/eventing/broker-configuration.md'
         'help/README.md': 'docs/help/contributor/README.md'
