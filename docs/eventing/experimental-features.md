@@ -85,3 +85,36 @@ With this feature you can allow Knative to resolve the full `APIVersion` and fur
 
 !!! note
     At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref`.
+
+### `DeliverySpec.Timeout` field
+
+**Flag name**: `delivery-timeout`
+
+**State**: Alpha, disabled by default
+
+**Tracking issue**: https://github.com/knative/eventing/issues/5148
+
+When using the `DeliverySpec` to configure event delivery parameters, you can use `timeout` field to specify the timeout for each sent HTTP request. The duration of the `timeout` parameter is specified using the ISO 8601 format
+
+For example, you can define a `Subscription' that retries 3 times, and on each retry the request timeout is going to be 5 seconds: 
+
+```yaml
+apiVersion: messaging.knative.dev/v1
+kind: Subscription
+metadata:
+  name: example-subscription
+  namespace: example-namespace
+spec:
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: example-sink
+  delivery:
+    backoffDelay: PT2S
+    backoffPolicy: linear
+    retry: 3
+    timeout: PT5S
+```
+
+You can use this feature in `Channel`, `Subscription`, `Broker`, `Trigger` and every other Resource spec that uses that accepts the `delivery` object field.
