@@ -385,7 +385,9 @@ The tabs below expand to show instructions for installing each Serving extension
     If you are using a Certificate implementation that supports provisioning
     wildcard certificates (for example, cert-manager with a DNS01 issuer), then the most
     efficient way to provision certificates is with the namespace wildcard
-    certificate controller. Install the components needed to provision wildcard certificates in each
+    certificate controller. 
+    
+    Install the components needed to provision wildcard certificates in each
     namespace by running the command:
 
     ```bash
