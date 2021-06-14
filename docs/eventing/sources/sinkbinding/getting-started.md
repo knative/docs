@@ -1,7 +1,5 @@
 # Creating a SinkBinding object
 
-![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
-
 This topic describes how to create a SinkBinding object.
 SinkBinding resolves a sink as a URI, sets the URI in the environment
 variable `K_SINK`, and adds the URI to a subject using `K_SINK`.
