@@ -71,10 +71,10 @@ The following table summarizes which delivery parameters are supported for each 
 | RabbitMQBroker | `deadLetterSink`, `retry`, `backoffPolicy`, `backoffDelay` |
 
 !!!note
-    `deadLetterSink` must be a GCP Pub/Sub topic URI.
+   `deadLetterSink` must be a GCP Pub/Sub topic URI.
 
 !!!note
-    `googlecloud` broker only supports the `exponential` back off policy.
+   `googlecloud` broker only supports the `exponential` back off policy.
 
 ## Channel event delivery
 
