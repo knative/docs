@@ -221,16 +221,6 @@ Uninstall any Eventing extensions you have installed by following the relevant p
 
 
 
-=== "Apache Camel-K Source"
-
-    Uninstall the Apache Camel-K Source by running:
-
-    ```bash
-    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-camel", file="camel.yaml") }}
-    ```
-
-
-
 === "Apache Kafka Source"
 
     Uninstall the Apache Kafka source by running:
