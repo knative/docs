@@ -75,6 +75,11 @@ nav:
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+        - Knative Eventing:
+          - Event sources:
+            - ContainerSource:
+              - Creating a ContainerSource object: eventing/sources/containersource/README.md
+              - ContainerSource Reference: eventing/sources/containersource/reference.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -151,7 +156,6 @@ nav:
         - API server source:
           - Overview: eventing/sources/apiserversource/README.md
           - Getting started: eventing/sources/apiserversource/getting-started/README.md
-        - ContainerSource: eventing/sources/containersource.md
         - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
