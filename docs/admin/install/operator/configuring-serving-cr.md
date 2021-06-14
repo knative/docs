@@ -427,9 +427,15 @@ spec:
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
-Currently `replicas`, `labels` and `annotations` are supported.
+Currently the following configurations are supported.
+- `replicas`
+- `labels`
+- `annotations`
+- `nodeSelector`
 
-For example, the following KnativeServing resource overrides the `webhook` to have `3` replicass, `mylabel: foo` labels and `myannotataions: bar` annotations,
+### Override replicas, labels and annotations
+
+The following KnativeServing resource overrides the `webhook` deployment to have `3` replicass, `mylabel: foo` labels and `myannotataions: bar` annotations,
 while other system deployments have `2` replicas by `spec.high-availability`.
 
 ```
@@ -451,3 +457,20 @@ spec:
 ```
 
 **NOTE:** The labels and annotations settings override webhook's labels and annotations in deployment and pod both.
+
+### Override nodeSelector
+
+The following KnativeServing resource overrides the `webhook` deployment to have `disktype: hdd` nodeSelector.
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: ks
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: webhook
+    nodeSelector:
+      disktype: hdd
+```
