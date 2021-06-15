@@ -116,7 +116,7 @@ EOF
 
 ### Step 2: Update the gateway ConfigMap
 
-Update gateway configmap `config-istio` under `knative-serving`
+Update the gateway ConfigMap `config-istio` under the `knative-serving`
 namespace:
 
 ```bash
