@@ -13,7 +13,7 @@ the `knative-serving` namespace. By default, we use Istio gateway service
 `istio-ingressgateway` under `istio-system` namespace as its underlying service.
 You can replace the service and the gateway with that of your own as follows.
 
-## Replace the default `istio-ingressgateway` service with `custom-ingressgateway`
+## Replace the default `istio-ingressgateway` service
 
 #### Step 1: Create Gateway Service and Deployment Instance
 
@@ -80,7 +80,7 @@ For the service above, it should be updated to:
 gateway.knative-serving.knative-ingress-gateway: custom-ingressgateway.custom-ns.svc.cluster.local
 ```
 
-## Replace knative-ingress-gateway gateway with own knative-custom-gateway
+## Replace the knative-ingress-gateway gateway
 
 We customized the gateway service so far, but we may also want to use our own gateway.
 We can replace the default gateway with our own gateway with following steps.
@@ -136,6 +136,6 @@ For the gateway above, it should be updated to:
 gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
 ```
 
-The configuration format should be `gateway.{{gateway_namespace}}.{{gateway_name}}`.
-The `{{gateway_namespace}}` is optional. when it is omitted, the system will search for
+The configuration format should be `gateway.GATEWAY_NAMESPACE.GATEWAY_NAME`.
+The `GATEWAY_NAMESPACE` is optional. when it is omitted, the system will search for
 the gateway in the serving system namespace `knative-serving`.
