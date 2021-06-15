@@ -55,7 +55,7 @@ data:
 
 **Flag name**: `kreference-group`
 
-**State**: Alpha, disabled by default
+**Stage**: Alpha, disabled by default
 
 **Tracking issue**: https://github.com/knative/eventing/issues/5086
 
