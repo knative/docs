@@ -90,7 +90,7 @@ With this feature you can allow Knative to resolve the full `APIVersion` and fur
 
 **Flag name**: `delivery-timeout`
 
-**State**: Alpha, disabled by default
+**Stage**: Alpha, disabled by default
 
 **Tracking issue**: https://github.com/knative/eventing/issues/5148
 
