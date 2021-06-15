@@ -117,7 +117,7 @@ EOF
 ### Step 2: Update the gateway ConfigMap
 
 Update the gateway ConfigMap `config-istio` under the `knative-serving`
-namespace:
+namespace by running the command:
 
 ```bash
 kubectl edit configmap config-istio -n knative-serving
