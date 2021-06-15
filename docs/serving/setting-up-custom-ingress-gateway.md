@@ -60,25 +60,39 @@ If there is a change in service ports (compared with that of
 
 ### Step 3: Update the gateway ConfigMap
 
-Update gateway configmap `config-istio` under `knative-serving`
+1. Update gateway configmap `config-istio` under `knative-serving`
 namespace:
 
-```bash
-kubectl edit configmap config-istio -n knative-serving
-```
+     ```bash
+     kubectl edit configmap config-istio -n knative-serving
+     ```
 
-Replace the `istio-ingressgateway.istio-system.svc.cluster.local` field with
+     This command opens your default text editor and allows you to edit the config-istio ConfigMap.
+
+     ```yaml
+     apiVersion: v1
+     data:
+       _example: |
+         ################################
+         #                              #
+         #    EXAMPLE CONFIGURATION     #
+         #                              #
+         ################################
+         # ...
+         gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+     ```
+
+1. Edit the file to replace the `istio-ingressgateway.istio-system.svc.cluster.local` field with
 the fully qualified url of your service.
-
-```
-gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
-```
-
 For the service above, it should be updated to:
 
-```
-gateway.knative-serving.knative-ingress-gateway: custom-ingressgateway.custom-ns.svc.cluster.local
-```
+     ```yaml
+     apiVersion: v1
+     data:
+       gateway.knative-serving.knative-ingress-gateway: custom-ingressgateway.custom-ns.svc.cluster.local
+     kind: ConfigMap
+     [...]
+     ```
 
 ## Replace the `knative-ingress-gateway` gateway
 
@@ -116,25 +130,39 @@ EOF
 
 ### Step 2: Update the gateway ConfigMap
 
-Update the gateway ConfigMap `config-istio` under the `knative-serving`
-namespace by running the command:
+1. Update gateway configmap `config-istio` under `knative-serving`
+namespace:
 
-```bash
-kubectl edit configmap config-istio -n knative-serving
-```
+     ```bash
+     kubectl edit configmap config-istio -n knative-serving
+     ```
 
-Replace the `gateway.knative-serving.knative-ingress-gateway` field with
+     This command opens your default text editor and allows you to edit the config-istio ConfigMap.
+
+     ```yaml
+     apiVersion: v1
+     data:
+       _example: |
+         ################################
+         #                              #
+         #    EXAMPLE CONFIGURATION     #
+         #                              #
+         ################################
+         # ...
+         gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+     ```
+
+1. Edit the file to replace the `gateway.knative-serving.knative-ingress-gateway` field with
 the customized gateway.
-
-```
-gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
-```
-
 For the gateway above, it should be updated to:
 
-```
-gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
-```
+     ```yaml
+     apiVersion: v1
+     data:
+       gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+     kind: ConfigMap
+     [...]
+     ```
 
 The configuration format should be `gateway.<gateway-namespace>.<gateway-name>`.
 `<gateway-namespace>` is optional. When it is omitted, the system searches for
