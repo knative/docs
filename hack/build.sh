@@ -116,6 +116,11 @@ if [ -z "$SKIP_BLOG" ]; then
   for d in blog community css scss webfonts images js; do
     mv temp/website/public/$d site/
   done
+
+  # Copy go mod files so knative.dev/blahblah vanity URLs work
+  mkdir site/golang
+  cp golang/*.html site/golang/
+  cat golang/_redirects >> site/_redirects
 fi
 
 # Home page is served from docs, so add a redirect.
