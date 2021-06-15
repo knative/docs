@@ -80,7 +80,7 @@ For the service above, it should be updated to:
 gateway.knative-serving.knative-ingress-gateway: custom-ingressgateway.custom-ns.svc.cluster.local
 ```
 
-## Replace the knative-ingress-gateway gateway
+## Replace the `knative-ingress-gateway` gateway
 
 We customized the gateway service so far, but we may also want to use our own gateway.
 We can replace the default gateway with our own gateway with following steps.
