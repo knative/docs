@@ -28,7 +28,7 @@ word of the heading, except for proper nouns or acronyms.
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
 |Configuring feature | Configuring Feature
-|Using feature.      | Using Feature
+|Using feature      | Using Feature
 |Using HTTPS         | Using https
 
 ## Create descriptive links
@@ -36,3 +36,16 @@ word of the heading, except for proper nouns or acronyms.
 |:white_check_mark: Correct                                     |:no_entry: Incorrect
 |---------------------------------------|------
 |Check out [this excellent article](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021) explaining <br> what makes a good hyperlink    | Check out the article [here](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021)
+
+## Spaces in units of measurement
+
+> For most units of measurement, when you specify a number with the unit, use a nonbreaking space
+between the number and the unit.
+
+> Don't use spacing when the unit of measurement is percent.
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|----------------------|-----
+|3`&nbsp`GB            | 3 GB
+|4`&nbsp`CPUs          | 4 CPUs
+|14%                   | 14`&nbsp`%
