@@ -85,7 +85,7 @@ gateway.knative-serving.knative-ingress-gateway: custom-ingressgateway.custom-ns
 We customized the gateway service so far, but we may also want to use our own gateway.
 We can replace the default gateway with our own gateway with following steps.
 
-#### Step 1: Create Gateway
+### Step 1: Create the gateway
 
 Let's say you replace the default `knative-ingress-gateway` gateway with
 `knative-custom-gateway` in `custom-ns`.
