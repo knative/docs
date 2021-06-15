@@ -1,6 +1,6 @@
 # Event sinks
 
-When you create an event source, you can specify a _sink_ where events are sent to from the source. A sink is an Addressable resource that can receive incoming events from other Knative Eventing resources. Knative Services, Channels, and Brokers are all examples of sinks.
+When you create an event source, you can specify a _sink_ where events are sent to from the source. A sink is an Addressable resource that can receive incoming events from other resources. Knative Services, Channels, and Brokers are all examples of sinks.
 
 You can also connect a Trigger to a sink, so that events are filtered before they are sent to the sink. A sink that is connected to a Trigger is configured as a `subscriber` in the Trigger resource spec.
 
