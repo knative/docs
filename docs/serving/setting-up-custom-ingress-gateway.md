@@ -34,7 +34,7 @@ spec:
           istio: custom-gateway
 ```
 
-### Step 2: Update Knative Gateway
+### Step 2: Update the Knative gateway
 
 Update gateway instance `knative-ingress-gateway` under `knative-serving`
 namespace:
