@@ -37,7 +37,7 @@ word of the heading, except for proper nouns or acronyms.
 |---------------------------------------|------
 |Check out [this excellent article](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021) explaining <br> what makes a good hyperlink    | Check out the article [here](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021)
 
-## Spaces in units of measurement
+## Use spaces in units of measurement
 
 > For most units of measurement, when you specify a number with the unit, use a nonbreaking space
 between the number and the unit.
