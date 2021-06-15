@@ -136,6 +136,6 @@ For the gateway above, it should be updated to:
 gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
 ```
 
-The configuration format should be `gateway.GATEWAY_NAMESPACE.GATEWAY_NAME`.
-The `GATEWAY_NAMESPACE` is optional. when it is omitted, the system will search for
+The configuration format should be `gateway.<gateway-namespace>.<gateway-name>`.
+`<gateway-namespace>` is optional. When it is omitted, the system searches for
 the gateway in the serving system namespace `knative-serving`.
