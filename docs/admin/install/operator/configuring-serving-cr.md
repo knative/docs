@@ -452,7 +452,8 @@ spec:
       myannotataions: bar
 ```
 
-**NOTE:** The labels and annotations settings override webhook's labels and annotations in deployment and pod both.
+!!! note
+    The KnativeServing resource `label` and `annotation` settings override the webhook's labels and annotations for both Deployments and Pods.
 
 ### Override nodeSelector
 
