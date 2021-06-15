@@ -81,6 +81,9 @@ nav:
               - Creating a ContainerSource object: eventing/sources/containersource/README.md
               - ContainerSource Reference: eventing/sources/containersource/reference.md
           - Event delivery: developer/eventing/event-delivery.md
+          - Event sinks:
+            - About sinks: developer/eventing/sinks/README.md
+            - KafkaSink: developer/eventing/sinks/kafka-sink.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -200,9 +203,6 @@ nav:
         - Broker configuration example: eventing/broker/example-mtbroker.md
         - Apache Kafka Broker:
           - Overview: eventing/broker/kafka-broker/README.md
-      - Sink:
-        - Overview: eventing/sink/README.md
-        - Apache Kafka Sink: eventing/sink/kafka-sink.md
       - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Experimental Features: eventing/experimental-features.md
@@ -297,6 +297,8 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/sink/kafka-sink.md': 'developer/eventing/sinks/kafka-sink.md'
+        'eventing/sink/README.md': 'developer/eventing/sinks/README.md'
         'eventing/broker/broker-event-delivery.md': 'developer/eventing/event-delivery.md'
         'eventing/event-delivery.md': 'developer/eventing/event-delivery.md'
         'eventing/broker/kafka-broker/kafka-configmap.md': 'admin/eventing/kafka-channel-configuration.md'

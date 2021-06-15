@@ -1,16 +1,10 @@
----
-title: "Apache Kafka Sink"
-weight: 30
-type: "docs"
----
-
 # Apache Kafka Sink
 
-This page shows how to install and configure Apache Kafka Sink.
+This page shows how to install and configure an Apache KafkaSink.
 
 ## Prerequisites
 
-You must have a Kubernetes cluster with [Knative Eventing installed](../../../admin/install/).
+You must have access to a Kubernetes cluster with [Knative Eventing installed](../../../admin/install/).
 
 ## Installation
 
@@ -20,13 +14,13 @@ You must have a Kubernetes cluster with [Knative Eventing installed](../../../ad
     kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
-1. Install the Kafka Sink data plane:
+1. Install the KafkaSink data plane:
 
     ```bash
     kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
     ```
 
-1. Verify that `kafka-controller` and `kafka-sink-receiver` are running:
+1. Verify that `kafka-controller` and `kafka-sink-receiver` Deployments are running:
 
     ```bash
     kubectl get deployments.apps -n knative-eventing
@@ -42,9 +36,9 @@ You must have a Kubernetes cluster with [Knative Eventing installed](../../../ad
     kafka-sink-receiver            1/1     1            1           5s
     ```
 
-## Kafka Sink
+## KafkaSink example
 
-A `KafkaSink` object looks like this:
+A KafkaSink object looks similar to the following:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1alpha1
@@ -60,14 +54,16 @@ spec:
 
 ## Security
 
-Apache Kafka supports different security features, Knative supports the followings:
+Knative supports the following Apache Kafka security features:
 
 - [Authentication using `SASL` without encryption](#authentication-using-sasl)
 - [Authentication using `SASL` and encryption using `SSL`](#authentication-using-sasl-and-encryption-using-ssl)
 - [Authentication and encryption using `SSL`](#authentication-and-encryption-using-ssl)
 - [Encryption using `SSL` without client authentication](#encryption-using-ssl-without-client-authentication)
 
-To enable security features, in the `KafkaSink` spec, we can reference a `Secret`:
+## Enabling security features
+
+To enable security features, in the KafkaSink spec, you can reference a secret:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1alpha1
@@ -85,9 +81,8 @@ spec:
          name: my_secret
 ```
 
-The `Secret` `my_secret` must exist in the same namespace of the `KafkaSink`, in this case: `default`.
-
-_Note: Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)._
+!!! note
+    The secret `my_secret` must exist in the same namespace of the KafkaSink. Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)._
 
 ### Authentication using SASL
 
@@ -139,27 +134,27 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
   --from-file=user.key=<my_key.pem_file_path>
 ```
 
-_NOTE: `ca.crt` can be omitted to fallback to use system's root CA set._
+!!! note
+    The `ca.crt` can be omitted to enable fallback and use the system's root CA set.
 
 ## Kafka Producer configurations
 
-A Kafka Producer is the component responsible for sending events to the Apache Kafka cluster.
-Knative exposes all available Kafka Producer configurations that can be modified to suit your workloads.
+A Kafka Producer is the component responsible for sending events to the Apache Kafka cluster. You can change the configuration for Kafka Producers in your cluster by modifying the `config-kafka-sink-data-plane` ConfigMap in the `knative-eventing` namespace.
 
-You can change these configurations by modifying the `config-kafka-sink-data-plane` config map in
-the `knative-eventing` namespace.
-
-Documentation for the settings available in this config map is available on the
+Documentation for the settings available in this ConfigMap is available on the
 [Apache Kafka website](https://kafka.apache.org/documentation/),
 in particular, [Producer configurations](https://kafka.apache.org/documentation/#producerconfigs).
 
+<!--TODO: move the configmap info to admin guide?-->
+
 ## Enable debug logging for data plane components
 
-To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` config map.
+To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
 
-1. Apply the following `kafka-config-logging` config map:
+1. Apply the `kafka-config-logging` ConfigMap by running the command:
 
     ```yaml
+    kubectl apply -f - <<EOF
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -175,6 +170,7 @@ To enable debug logging for data plane components change the logging level to `D
             <appender-ref ref="jsonConsoleAppender"/>
           </root>
         </configuration>
+    EOF
     ```
 
 2. Restart the `kafka-sink-receiver`:
@@ -182,7 +178,3 @@ To enable debug logging for data plane components change the logging level to `D
     ```bash
     kubectl rollout restart deployment -n knative-eventing kafka-sink-receiver
     ```
-
-### Additional information
-
-- To report bugs or add feature requests, open an issue in the [eventing-kafka-broker repository](https://github.com/knative-sandbox/eventing-kafka-broker).
