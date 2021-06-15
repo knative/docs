@@ -114,7 +114,7 @@ EOF
 !!! note
     Replace the label selector `istio: ingressgateway` with the label of your service.
 
-### Step 2: Update Gateway Configmap
+### Step 2: Update the gateway ConfigMap
 
 Update gateway configmap `config-istio` under `knative-serving`
 namespace:
