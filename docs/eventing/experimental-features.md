@@ -9,7 +9,7 @@ This document explains how to enable experimental features and which ones are av
 
 For more details about the process, the feature phases, quality requirements and guarantees, check out the [Experimental features process documentation](https://github.com/knative/eventing/blob/main/docs/experimental-features.md).
 
-!!! note
+!!! warning
     Depending on the feature stage, an experimental feature might be unstable and break your Knative setup or even your cluster setup, use them with caution.
     For more details about quality guarantees, check out the [Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition).
 
