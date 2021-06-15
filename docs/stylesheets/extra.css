@@ -4,7 +4,7 @@
   --nav-item-color: #4d4d4d;
 }
 
-.md-clipboard, .md-nav__item a {
+.md-clipboard {
   color: var(--md-primary-fg-color);
 }
 
@@ -17,7 +17,7 @@
   height: 2.4rem;
 }
 
-.md-nav__item--nested>.md-nav__link {
+.md-nav__item--nested>.md-nav__link, .md-nav__item a {
   color: var(--nav-item-color);
 }
 

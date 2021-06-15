@@ -257,7 +257,7 @@ customization (32 minutes).
 ## Cleanup
 
 ```bash
-kubectl delete --filename docs/serving/autoscaling/autoscale-go/service.yaml
+kubectl delete -f docs/serving/autoscaling/autoscale-go/service.yaml
 ```
 
 ## Further reading
