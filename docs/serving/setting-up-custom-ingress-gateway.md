@@ -82,7 +82,7 @@ namespace:
          gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
      ```
 
-1. Edit the file to replace the `istio-ingressgateway.istio-system.svc.cluster.local` field with
+1. Edit the file to add the `gateway.knative-serving.knative-ingress-gateway: <ingress_name>.<ingress_namespace>.svc.cluster.local` field with
 the fully qualified url of your service.
 For the service above, it should be updated to:
 
@@ -152,7 +152,7 @@ namespace:
          gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
      ```
 
-1. Edit the file to replace the `gateway.knative-serving.knative-ingress-gateway` field with
+1. Edit the file to add the `gateway.<gateway-namespace>.<gateway-name>: istio-ingressgateway.istio-system.svc.cluster.local` field with
 the customized gateway.
 For the gateway above, it should be updated to:
 
