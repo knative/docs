@@ -432,7 +432,7 @@ Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 ### Override replicas, labels and annotations
 
 The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotataions: bar`,
-while other system deployments have `2` replicas by `spec.high-availability`.
+while other system deployments have `2` Replicas by using `spec.high-availability`.
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
