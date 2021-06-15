@@ -58,7 +58,7 @@ istio: custom-gateway
 If there is a change in service ports (compared with that of
 `istio-ingressgateway`), update the port info in the gateway accordingly.
 
-### Step 3: Update Gateway Configmap
+### Step 3: Update the gateway ConfigMap
 
 Update gateway configmap `config-istio` under `knative-serving`
 namespace:
