@@ -15,7 +15,7 @@ You can replace the service and the gateway with that of your own as follows.
 
 ## Replace the default `istio-ingressgateway` service
 
-#### Step 1: Create Gateway Service and Deployment Instance
+### Step 1: Create the gateway service and deployment instance
 
 You'll need to create the gateway service and deployment instance to handle
 traffic first. Let's say you customized the default `istio-ingressgateway` to
