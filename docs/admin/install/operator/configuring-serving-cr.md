@@ -457,7 +457,7 @@ spec:
 
 ### Override nodeSelector
 
-The following KnativeServing resource overrides the `webhook` deployment to have `disktype: hdd` nodeSelector.
+The following KnativeServing resource overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
