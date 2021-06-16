@@ -1,5 +1,7 @@
 # SinkBinding reference
 
+![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
+
 This topic provides reference information about the configurable fields for the
 SinkBinding object.
 
