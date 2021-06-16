@@ -35,7 +35,7 @@ Write a sentence or two to describe the content in this section.
 
 ## Conceptual Content Samples
 
-The following are common content types that may appear in conceptual topics.
+This section provides common content types that appear in conceptual topics.
 Copy and paste the markdown to use it in your topic.
 
 ### Table

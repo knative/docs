@@ -102,7 +102,7 @@ Write a few sentences to describe the task and provide additional context on the
 
 ## Procedure Content Samples
 
-The following are common content types that may appear in procedural topics.
+This section provides common content types that appear in procedural topics.
 Copy and paste the markdown to use it in your topic.
 
 
@@ -209,41 +209,37 @@ If the note regards an issue that could lead to data loss, the note should be a 
 
 The following is an embedded image reference in markdown.
 
-![Annotated procedure topic](../image/example-reference-topic.png)
+![Annotated procedure topic](../images/annotated-procedure-topic.png)
 
 
 #### Tabs
 
-Place multiple versions of the same procedure (such as different versions for different products)
+Place multiple versions of the same procedure (such as a kn CLI procedure vs a YAML procedure)
 within tabs. Indent the opening tabs tags 3 spaces to make the tabs display properly.
 
-   {{< tabs name="name" default="name" >}}
-   {{% tab name="name" %}}
+== "tab1 name"
 
-This is a stem:
+    This is a stem:
 
-1. This is a step.
+    1. This is a step.
 
-  ```
-  This is some code.
-  ```
+      ```
+      This is some code.
+      ```
 
-1. This is another step.
-{{< /tab >}}
+    1. This is another step.
 
-{{% tab name="name" %}}
+== "tab2 name"
 
-This is a stem:
+    This is a stem:
 
-1. This is a step.
+    1. This is a step.
 
-  ```
-  This is some code.
-  ```
+      ```
+      This is some code.
+      ```
 
-1. This is another step.
-
-{{< /tab >}} {{< /tabs >}}
+    1. This is another step.
 
 
 ### Documenting Code and Code Snippets
