@@ -1,23 +1,7 @@
----
-title: "Apache Kafka examples"
-linkTitle: "Apache Kafka"
-weight: 10
-type: "docs"
----
+# Using Kafka with Knative
 
-# Apache Kafka examples
-
-The following examples will help you understand how to use the different Apache
-Kafka components for Knative.
-
-## Prerequisites
-
-All examples require:
-
-- A Kubernetes cluster with
-  - Knative Eventing v0.9+
-  - Knative Serving v0.9+
-- An Apache Kafka cluster
+1. Install Knative Eventing.
+1. Install Strimzi or use an existing Kafka cluster.
 
 ### Setting up Apache Kafka
 
@@ -82,8 +66,6 @@ my-cluster-zookeeper-2                        2/2     Running   0          2m59s
 strimzi-cluster-operator-77555d4b69-sbrt4     1/1     Running   0          3m14s
 ```
 
-> NOTE: For production ready installs check [Strimzi](https://strimzi.io).
-
 ### Installation script
 
 If you want to install the latest version of Strimzi, in just one step, we have
@@ -93,12 +75,3 @@ steps that are listed above:
 ```bash
 $ ./kafka_setup.sh
 ```
-
-## Examples of Apache Kafka and Knative
-
-A number of different examples, showing the `KafkaSource`, `KafkaChannel` and
-`KafkaBinding` can be found here:
-
-- [`KafkaSource` to `Service`](../../sources/kafka-source)
-- [`KafkaChannel` and Broker](./channel/)
-- [`KafkaBinding`](./binding/)

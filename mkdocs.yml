@@ -84,6 +84,14 @@ nav:
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
             - KafkaSink: developer/eventing/sinks/kafka-sink.md
+          - Kafka integration:
+            - Using Kafka with Knative: developer/eventing/kafka/README.md
+            - Kafka components:
+              - KafkaSource: developer/eventing/kafka/kafka-source/README.md
+              - KafkaBroker: developer/eventing/broker/kafka-broker/README.md
+              #- Kafka sink: Move sink to here?
+              - KafkaBinding: eventing/samples/kafka/binding/README.md
+              - KafkaChannel: eventing/samples/kafka/channel/README.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -166,7 +174,6 @@ nav:
           - Creating a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
           - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
-        - Kafka source: eventing/sources/kafka-source/README.md
       - Creating an event source:
         - Overview: eventing/sources/creating-event-sources/README.md
         - Writing an event source using Javascript: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
@@ -201,8 +208,6 @@ nav:
         - Creating a broker: eventing/broker/create-mtbroker.md
         - Triggers: eventing/broker/triggers/README.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
-        - Apache Kafka Broker:
-          - Overview: eventing/broker/kafka-broker/README.md
       - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Experimental Features: eventing/experimental-features.md
@@ -213,10 +218,6 @@ nav:
           - Overview: eventing/samples/helloworld/README.md
           - GO: eventing/samples/helloworld/helloworld-go/README.md
           - Python: eventing/samples/helloworld/helloworld-python/README.md
-        - Apache Kafka:
-          - Overview: eventing/samples/kafka/README.md
-          - Binding Example: eventing/samples/kafka/binding/README.md
-          - Channel Example: eventing/samples/kafka/channel/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
@@ -297,6 +298,15 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        # moved whole kafka sections, edit and cleanup to follow
+        #
+        'eventing/samples/kafka/channel/README.md': 'developer/eventing/kafka/channel/README.md'
+        'eventing/samples/kafka/binding/README.md': 'developer/eventing/kafka/binding/README.md'
+        'eventing/samples/kafka/README.md': 'developer/eventing/kafka/README.md'
+        'eventing/broker/kafka-broker/README.md': 'developer/eventing/broker/kafka-broker/README.md'
+        'eventing/sources/kafka-source/README.md': 'developer/eventing/kafka/kafka-source/README.md'
+        #
+        # moved whole kafka folder including YAML files temporarily
         'eventing/sink/kafka-sink.md': 'developer/eventing/sinks/kafka-sink.md'
         'eventing/sink/README.md': 'developer/eventing/sinks/README.md'
         'eventing/broker/broker-event-delivery.md': 'developer/eventing/event-delivery.md'
