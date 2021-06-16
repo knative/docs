@@ -1,5 +1,7 @@
 # SinkBinding reference
 
+![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
+
 This topic provides reference information about the configurable fields for the
 SinkBinding object.
 
@@ -47,13 +49,19 @@ resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
 <!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
 
 ```yaml
-sink:
-  ref:
-    apiVersion: v1
-    kind: Service
-    namespace: default
-    name: mysink
-  uri: /extra/path
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
+  ...
+  sink:
+    ref:
+      apiVersion: v1
+      kind: Service
+      namespace: default
+      name: mysink
+    uri: /extra/path
 ```
 
 !!! contract
@@ -86,20 +94,31 @@ A `subject` definition supports the following fields:
 Given the following YAML, the `Deployment` named `mysubject` in the `default`
 namespace is selected:
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
   subject:
     apiVersion: apps/v1
     kind: Deployment
     namespace: default
     name: mysubject
-  ```
+  ...
+```
 
 #### Example: Subject parameter using matchLabels
 
 Given the following YAML, any `Job` with the label `working=example` in the
 `default` namespace is selected:
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
   subject:
     apiVersion: batch/v1beta1
     kind: Job
@@ -107,14 +126,20 @@ Given the following YAML, any `Job` with the label `working=example` in the
     selector:
       matchLabels:
         working: example
-  ```
+  ...
+```
 
 #### Example: Subject parameter using matchExpression
 
 Given the following YAML, any `Pod` with the label `working=example` OR
 `working=sample` in the ` default` namespace is selected:
 
-  ```yaml
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
   subject:
     apiVersion: v1
     kind: Pod
@@ -126,7 +151,8 @@ Given the following YAML, any `Pod` with the label `working=example` OR
         values:
           - example
           - sample
-  ```
+  ...
+```
 
 
 ### CloudEvent Overrides
@@ -149,19 +175,24 @@ A `ceOverrides` definition supports the following fields:
 #### Example: CloudEvent Overrides
 
 ```yaml
-ceOverrides:
-  extensions:
-    extra: this is an extra attribute
-    additional: 42
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-heartbeat
+spec:
+  ...
+  ceOverrides:
+    extensions:
+      extra: this is an extra attribute
+      additional: 42
 ```
 
 !!! contract
     This results in the `K_CE_OVERRIDES` environment variable being set on the
     `subject` as follows:
-
-```json
-{ "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
-```
+    ```{ .json .no-copy }
+    { "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
+    ```
 
 [kubernetes-overview]:
   https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
