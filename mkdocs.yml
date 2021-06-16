@@ -80,9 +80,10 @@ nav:
             - ContainerSource:
               - Creating a ContainerSource object: eventing/sources/containersource/README.md
               - ContainerSource Reference: eventing/sources/containersource/reference.md
-            - API server source:
+            - ApiServerSource:
               - Overview: eventing/sources/apiserversource/README.md
-              - Getting started: eventing/sources/apiserversource/getting-started/README.md
+              - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started/README.md
+              - ApiServerSource reference: eventing/sources/apiserversource/reference.md
           - Event delivery: developer/eventing/event-delivery.md
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
