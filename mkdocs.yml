@@ -80,6 +80,9 @@ nav:
             - ContainerSource:
               - Creating a ContainerSource object: eventing/sources/containersource/README.md
               - ContainerSource Reference: eventing/sources/containersource/reference.md
+            - API server source:
+              - Overview: eventing/sources/apiserversource/README.md
+              - Getting started: eventing/sources/apiserversource/getting-started/README.md
           - Event delivery: developer/eventing/event-delivery.md
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
@@ -157,9 +160,6 @@ nav:
       - Getting started: eventing/getting-started.md
       - Event sources:
         - Overview: eventing/sources/README.md
-        - API server source:
-          - Overview: eventing/sources/apiserversource/README.md
-          - Getting started: eventing/sources/apiserversource/getting-started/README.md
         - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
