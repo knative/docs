@@ -2,7 +2,7 @@
 === "kn"
 
     ```bash
-    kn trigger create cloudevents-player --sink cloudevents-player
+    kn trigger create cloudevents-player --sink cloudevents-player  --broker example-broker
     ```
 
 === "YAML"
@@ -45,7 +45,7 @@ Now, when we go back to the CloudEvents Player and send an Event, we see that Cl
     ```
     Now let's add a Trigger that listens for a certain CloudEvent Type
     ```bash
-      kn trigger create cloudevents-player --sink cloudevents-player --filter type=some-type
+      kn trigger create cloudevents-player-filter --sink cloudevents-player  --broker example-broker --filter type=some-type
     ```
 
     If you send a CloudEvent with type "some-type," it will be reflected in the CloudEvents Player UI. Any other types will be ignored by the `Trigger`.

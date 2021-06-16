@@ -59,6 +59,10 @@ nav:
         # Serving config
         - Knative Serving configuration:
           - Configure Deployment resources: admin/serving/deployment.md
+        # Eventing config
+        - Knative Eventing configuration:
+          - Configure Broker defaults: admin/eventing/broker-configuration.md
+          - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
@@ -71,6 +75,15 @@ nav:
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+        - Knative Eventing:
+          - Event sources:
+            - ContainerSource:
+              - Creating a ContainerSource object: eventing/sources/containersource/README.md
+              - ContainerSource Reference: eventing/sources/containersource/reference.md
+          - Event delivery: developer/eventing/event-delivery.md
+          - Event sinks:
+            - About sinks: developer/eventing/sinks/README.md
+            - KafkaSink: developer/eventing/sinks/kafka-sink.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -147,7 +160,6 @@ nav:
         - API server source:
           - Overview: eventing/sources/apiserversource/README.md
           - Getting started: eventing/sources/apiserversource/getting-started/README.md
-        - ContainerSource: eventing/sources/containersource.md
         - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
@@ -184,20 +196,13 @@ nav:
         - Available Channels: eventing/channels/channels-crds.md
         - Subscriptions: eventing/channels/subscriptions.md
       - Sugar Controller: eventing/sugar/README.md
-      - Event delivery: eventing/event-delivery.md
       - Brokers:
         - Overview: eventing/broker/README.md
         - Creating a broker: eventing/broker/create-mtbroker.md
         - Triggers: eventing/broker/triggers/README.md
-        - Event delivery: eventing/broker/broker-event-delivery.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
-        - ConfigMaps: eventing/broker/configmaps/README.md
         - Apache Kafka Broker:
           - Overview: eventing/broker/kafka-broker/README.md
-          - Kafka Channel ConfigMap: eventing/broker/kafka-broker/kafka-configmap.md
-      - Sink:
-        - Overview: eventing/sink/README.md
-        - Apache Kafka Sink: eventing/sink/kafka-sink.md
       - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Experimental Features: eventing/experimental-features.md
@@ -233,8 +238,8 @@ nav:
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
-    - "Join the Community ➠": ../community/
-    - "Read the Blog ➠": ../blog/
+    - "Join the Community ➠": /community/
+    - "Read the Blog ➠": /blog/
 
 theme:
   name: material
@@ -292,6 +297,12 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'eventing/sink/kafka-sink.md': 'developer/eventing/sinks/kafka-sink.md'
+        'eventing/sink/README.md': 'developer/eventing/sinks/README.md'
+        'eventing/broker/broker-event-delivery.md': 'developer/eventing/event-delivery.md'
+        'eventing/event-delivery.md': 'developer/eventing/event-delivery.md'
+        'eventing/broker/kafka-broker/kafka-configmap.md': 'admin/eventing/kafka-channel-configuration.md'
+        'eventing/broker/configmaps/README.md': 'admin/eventing/broker-configuration.md'
         'help/README.md': 'docs/help/contributor/README.md'
         'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
         'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
@@ -307,7 +318,7 @@ plugins:
         'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
         'install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
         # This doesn't exist anymore, we should probably replace it
-        'install/install-extensions.md': 'admin/install/install-extensions.md'
+        'install/install-extensions.md': 'admin/install/README.md'
         'install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
         'install/installation-files.md': 'admin/install/README.md'
         'install/installing-istio.md': 'admin/install/installing-istio.md'

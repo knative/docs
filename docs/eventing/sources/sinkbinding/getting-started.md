@@ -213,7 +213,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 
     ```yaml
     kubectl apply -f - <<EOF
-    apiVersion: sources.knative.dev/v1alpha1
+    apiVersion: sources.knative.dev/v1
     kind: SinkBinding
     metadata:
       name: <name>
@@ -266,7 +266,7 @@ service logs for your sink:
 2. From the output, observe the lines showing the request headers and body of the event message,
 sent by the source to the display function. For example:
 
-    ```bash
+    ```{ .bash .no-copy }
       ☁️  cloudevents.Event
       Validation: valid
       Context Attributes,

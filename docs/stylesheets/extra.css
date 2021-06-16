@@ -1,10 +1,13 @@
 :root {
   --md-primary-fg-color: #1a7dc9;
   --home-color: #0071c7;
+  --nav-item-color: #4d4d4d;
 }
+
 .md-clipboard {
   color: var(--md-primary-fg-color);
 }
+
 .highlight.no-copy .md-clipboard {
   display: none;
 }
@@ -14,9 +17,18 @@
   height: 2.4rem;
 }
 
+.md-nav__item--nested>.md-nav__link, .md-nav__item a {
+  color: var(--nav-item-color);
+}
+
+.md-nav__item--nested>.md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+}
+
 .md-tabs {
   border-bottom: 1px solid var(--home-color);
 }
+
 .md-tabs__list li:nth-last-child(1),
 .md-tabs__list li:nth-last-child(2) {
   background: var(--home-color);
@@ -32,6 +44,7 @@
 .md-typeset h1 {
   margin: 1em 0 0.75em;
 }
+
 .md-typeset > h1:first-of-type {
   margin: 0 0 0.75em;
 }

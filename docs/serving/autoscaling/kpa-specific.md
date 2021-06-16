@@ -20,7 +20,8 @@ The KPA's implementation has two modes: **stable** and **panic**.
 
 Stable mode is used for general operation, while panic mode by default has a much shorter window, and will be used to quickly scale a revision up if a burst of traffic arrives.
 
-**NOTE:** When using panic mode, the revision will not scale down to avoid churn. The Autoscaler will leave panic mode if there has been no reason to react quickly during the stable window's timeframe.
+!!! note
+    When using panic mode, the Revision will not scale down to avoid churn. The Autoscaler will leave panic mode if there has been no reason to react quickly during the stable window timeframe.
 
 ### Stable window
 
@@ -29,7 +30,8 @@ Stable mode is used for general operation, while panic mode by default has a muc
 * **Possible values:** Duration, `6s` <= value <= `1h`
 * **Default:** `60s`
 
-**NOTE:** During scale down, the last replica will only be removed after there has not been any traffic to the revision for the entire duration of the stable window.
+!!! note
+    During scale down, the last Replica will only be removed after there has not been any traffic to the Revision for the entire duration of the stable window.
 
 **Example:**
 
@@ -138,7 +140,8 @@ This threshold defines when the Autoscaler will move from stable mode into panic
 
 This value is a percentage of the traffic that the current amount of replicas can handle.
 
-**NOTE:** A value of `100.0` (100 percent) means that the Autoscaler is always in panic mode, therefore the  minimum value should be higher than `100.0`.
+!!! note
+    A value of `100.0` (100 percent) means that the Autoscaler is always in panic mode, therefore the  minimum value should be higher than `100.0`.
 
 The default setting of `200.0` means that panic mode will be start if traffic is twice as high as the current replica population can handle.
 
@@ -268,6 +271,3 @@ This setting determines the maximum ratio of existing to desired pods. For examp
         autoscaler:
           max-scale-down-rate: "4.0"
     ```
-
-
-

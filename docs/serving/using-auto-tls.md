@@ -129,11 +129,6 @@ Instructions about configuring cert-manager, for all the supported DNS
 providers, are provided in
 [DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
 
-Example:
-
-See how the Google Cloud DNS is defined as the provider:
-[Configuring HTTPS with cert-manager and Google Cloud DNS](./using-cert-manager-on-gcp.md#creating-a-service-account-and-using-a-kubernetes-secret)
-
 
 ### Install networking-certmanager deployment
 
