@@ -1,4 +1,4 @@
-# Event sinks
+# About sinks
 
 When you create an event source, you can specify a _sink_ where events are sent to from the source. A sink is an Addressable resource that can receive incoming events from other resources. Knative Services, Channels, and Brokers are all examples of sinks.
 
