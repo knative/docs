@@ -8,11 +8,11 @@ This topic describes how to create an ApiServerSource object.
 
 Before you can create an ApiServerSource object:
 
-- You must have [Knative Eventing](../../../admin/install/install-eventing-with-yaml)
+- You must have [Knative Eventing](../../../../../admin/install/eventing/install-eventing-with-yaml)
 installed on your cluster.
 - You must install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 tool.
-- Optional: If you want to use the `kn` commands, install the [`kn`](../../../client/install-kn) tool.
+- Optional: If you want to use the `kn` commands, install the [`kn`](../../../../../client/install-kn/) tool.
 
 ## Create an ApiServerSource object
 
@@ -143,7 +143,7 @@ command:
 
 ## Verify the ApiServerSource object
 
-1. Create events by launching a test pod in your namespace by running the command:
+1. Make the Kubernetes API server create events by launching a test pod in your namespace by running the command:
 
     ```bash
     kubectl run busybox --image=busybox --namespace=<namespace> --restart=Never -- ls
@@ -157,7 +157,7 @@ command:
     ```
     Where `<namespace>` is the name of the namespace that you created in step 1 above.
 
-1. View the logs to verify that Kubernetes events were sent to the sink by  Knative Eventing system by running the command:
+1. View the logs to verify that Kubernetes events were sent to the sink by the Knative Eventing system by running the command:
 
     ```bash
     kubectl logs --namespace=<namespace> -l app=<sink> --tail=100
