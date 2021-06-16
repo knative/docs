@@ -157,8 +157,7 @@ command:
     ```
     Where `<namespace>` is the name of the namespace that you created in step 1 above.
 
-1. View the logs to verify that Kubernetes events were sent to the Knative
-Eventing system by running the command:
+1. View the logs to verify that Kubernetes events were sent to the sink by  Knative Eventing system by running the command:
 
     ```bash
     kubectl logs --namespace=<namespace> -l app=<sink> --tail=100

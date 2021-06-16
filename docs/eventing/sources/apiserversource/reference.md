@@ -16,7 +16,7 @@ An ApiServerSource definition supports the following fields:
 | [`kind`][kubernetes-overview] | Identifies this resource object as an ApiServerSource object. | Required |
 | [`metadata`][kubernetes-overview] | Specifies metadata that uniquely identifies the ApiServerSource object. For example, a `name`. | Required |
 | [`spec`][kubernetes-overview] | Specifies the configuration information for this ApiServerSource object. | Required |
-| `spec.mode` | EventMode controls the format of the event. Set to `Reference` to send a `dataref` event type for the resource being watched. Set to `Resource` to send the full resource lifecycle event. Defaults to `Reference`. | Optional |
+| `spec.mode` | EventMode controls the format of the event. Set to `Reference` to send a `dataref` event type for the resource being watched. In this case, only a reference to the resource will be included in the event payload. Set to `Resource` to have the full resource lifecycle event in the payload. Defaults to `Reference`. | Optional |
 | [`spec.owner`](#owner-parameter) | ResourceOwner is an additional filter to only track resources that are owned by a specific resource type. If ResourceOwner matches Resources[n] then Resources[n] is allowed to pass the ResourceOwner filter. | Optional |
 | [`spec.resources`](#resources-parameter) | The resources that the source tracks so it can send related lifecycle events from the Kubernetes ApiServer. Includes an optional label selector to help filter. | Required |
 | `spec.serviceAccountName` | The name of the ServiceAccount to use to run this source. Defaults to `default` if not set. | Optional |
