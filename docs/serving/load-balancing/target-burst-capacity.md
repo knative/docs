@@ -78,3 +78,36 @@ Target burst capacity can be configured using a combination of the following par
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `-1`, the Activator is always in the request path, regardless of the revision size.
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to another integer, the Activator may be in the path, depending on the revision scale and load.
+
+## Setting the Activator capacity
+
+If there's more than one Activator in the system, Knative will put as many of them on the request path as it thinks is necessary. If available, it'll pick at least two for high availability reasons. The actual number of Activators is calculated via a given _Activator capacity_ like such: `(replicas * target + targetBurstCapacity)/activatorCapacity`. That means, there are enough Activators in the routing path to handle the theoretic capacity of the existing application, including any additional target burst capacity.
+
+- **Global key:** `activator-capacity`
+- **Possible values:** int (at least 1)
+- **Default:** `100`
+
+**Example:**
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
+      activator-capacity: "200"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          activator-capacity: "200"
+    ```
