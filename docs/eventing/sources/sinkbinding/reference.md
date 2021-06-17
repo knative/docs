@@ -2,13 +2,11 @@
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
-This topic provides reference information about the configurable fields for the
-SinkBinding object.
+This topic provides reference information about the configurable parameters for SinkBinding objects.
 
+## Supported parameters
 
-## SinkBinding
-
-A `SinkBinding` definition supports the following fields:
+A `SinkBinding` resource supports the following parameters:
 
 | Field | Description | Required or optional |
 |-------|-------------|----------------------|
@@ -16,58 +14,9 @@ A `SinkBinding` definition supports the following fields:
 | [`kind`][kubernetes-overview] | Identifies this resource object as a `SinkBinding` object. | Required |
 | [`metadata`][kubernetes-overview] | Specifies metadata that uniquely identifies the `SinkBinding` object. For example, a `name`. | Required |
 | [`spec`][kubernetes-overview] | Specifies the configuration information for this `SinkBinding` object. | Required |
-| [`spec.sink`](#sink-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
+| [`spec.sink`](../../../../developer/eventing/sinks) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | [`spec.subject`](#subject-parameter) | A reference to the resources for which the "runtime contract" is augmented by Binding implementations. | Required |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
-
-
-### Sink parameter
-
-Sink is a reference to an object that resolves to a URI to use as the sink.
-
-A `sink` definition supports the following fields:
-
-| Field | Description | Required or optional |
-|-------|-------------|----------------------|
-| `ref` | This points to an Addressable. | Required if _not_ using `uri`  |
-| `ref.apiVersion` | API version of the referent. | Required if using `ref` |
-| [`ref.kind`][kubernetes-kinds] | Kind of the referent. | Required if using `ref` |
-| [`ref.namespace`][kubernetes-namespaces] | Namespace of the referent. If omitted this defaults to the object holding it. | Optional |
-| [`ref.name`][kubernetes-names] | Name of the referent. | Required if using `ref` |
-| `uri` | This can be an absolute URL with a non-empty scheme and non-empty host that points to the target or a relative URI. Relative URIs are resolved using the base URI retrieved from Ref. | Required if _not_ using `ref` |
-
-!!! note
-    At least one of `ref` or `uri` is required. If both are specified, `uri` is
-    resolved into the URL from the Addressable `ref` result.
-
-#### Example: Sink parameter
-
-Given the following YAML, if `ref` resolves into
-`"http://mysink.default.svc.cluster.local"`, then `uri` is added to this
-resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
-
-<!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
-
-```yaml
-apiVersion: sources.knative.dev/v1
-kind: SinkBinding
-metadata:
-  name: bind-heartbeat
-spec:
-  ...
-  sink:
-    ref:
-      apiVersion: v1
-      kind: Service
-      namespace: default
-      name: mysink
-    uri: /extra/path
-```
-
-!!! contract
-    This results in the `K_SINK` environment variable being set on the `subject`
-    as `"http://mysink.default.svc.cluster.local/extra/path"`.
-
 
 ### Subject parameter
 
@@ -89,7 +38,7 @@ A `subject` definition supports the following fields:
 | `selector.matchExpressions.values` | An array of string values. If `operator` is `In` or `NotIn`, the values array must be non-empty. If `operator` is `Exists` or `DoesNotExist`, the values array must be empty. This array is replaced during a strategic merge patch. | Required if using `matchExpressions` |
 | `selector.matchLabels` | A map of key-value pairs. Each key-value pair in the `matchLabels` map is equivalent to an element of `matchExpressions`, where the key field is `matchLabels.<key>`, the `operator` is `In`, and the `values` array contains only "matchLabels.<value>". The requirements are ANDed. | Use one of `matchExpressions` or `matchLabels` |
 
-#### Example: Subject parameter using name
+#### Subject parameter examples
 
 Given the following YAML, the `Deployment` named `mysubject` in the `default`
 namespace is selected:
@@ -107,8 +56,6 @@ spec:
     name: mysubject
   ...
 ```
-
-#### Example: Subject parameter using matchLabels
 
 Given the following YAML, any `Job` with the label `working=example` in the
 `default` namespace is selected:
@@ -128,8 +75,6 @@ spec:
         working: example
   ...
 ```
-
-#### Example: Subject parameter using matchExpression
 
 Given the following YAML, any `Pod` with the label `working=example` OR
 `working=sample` in the ` default` namespace is selected:
@@ -154,7 +99,6 @@ spec:
   ...
 ```
 
-
 ### CloudEvent Overrides
 
 CloudEvent Overrides defines overrides to control the output format and
@@ -172,7 +116,7 @@ A `ceOverrides` definition supports the following fields:
     the extensions override configuration. For example, you can not modify the
     `type` attribute.
 
-#### Example: CloudEvent Overrides
+#### CloudEvent Overrides example
 
 ```yaml
 apiVersion: sources.knative.dev/v1
