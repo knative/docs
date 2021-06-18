@@ -328,9 +328,14 @@ kubectl logs -f deploy/knative-operator
     kubectl apply --filename {{artifact(repo="serving",file="serving-default-domain.yaml")}}
     ```
 
-    **Caveat**: This will only work if the cluster LoadBalancer service exposes an
-    IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
-    like Minikube. For these, see "Real DNS" or "Temporary DNS".
+    !!! info "Caveat"
+        This will only work if the cluster `LoadBalancer` service exposes an
+        IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
+        like Minikube unless [`minikube tunnel`](https://minikube.sigs.k8s.io/docs/commands/tunnel/)
+        is running.
+
+        For these, see the "Real DNS" or "Temporary DNS" tabs.
+
 
 === "Real DNS"
     To configure DNS for Knative, take the External IP
