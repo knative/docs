@@ -37,12 +37,12 @@ This sample uses Docker for both building and pushing.
 
 To build and push to a container registry using Docker:
 
-1. From the `knative-docs` directory, run the following command to set your 
+1. From the `knative-docs` directory, run the following command to set your
    container registry endpoint as an environment variable.
-   
+
    This sample uses
    [Google Container Registry (GCR)](https://cloud.google.com/container-registry/):
-   
+
     ```bash
     export REPO="gcr.io/<YOUR_PROJECT_ID>"
     ```
@@ -201,12 +201,6 @@ and then you run `curl` commands to send request with your stock symbol.
       ```
 
       Response: `stock price for ticker FAKE is 0.00`
-
-## Next Steps
-
-The [traffic splitting example](../traffic-splitting/) continues from
-here to walk you through how to create new Revisions and then use traffic
-splitting between those Revisions.
 
 ## Clean Up
 

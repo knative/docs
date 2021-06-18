@@ -59,6 +59,7 @@ plugins:
       # (either the include shortcode or not-converted-yet tabs).
       - snippets/*
       - smoketest.md
+      - "*/serving-api.md" # shortcode to serving.md
       - "*/_index.md" # pretty much all shortcodes
   awesome-pages:
     filename: ".index"
