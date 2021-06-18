@@ -178,6 +178,7 @@ For example, to given the following images:
 | `webhook` | `docker.io/knative-images-repo4/webhook:v0.13.0` |
 | `autoscaler-hpa` | `docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0` |
 | `networking-istio` | `docker.io/knative-images-repo6/prefix-networking-istio:v0.13.0` |
+| `(net-istio) webhook` | `docker.io/knative-images-repo6/networking-istio-webhook:v0.13.0` |
 | `queue-proxy` | `docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0` |
 
 The operator CR should be modified to include the full list:
@@ -197,8 +198,13 @@ spec:
       webhook: docker.io/knative-images-repo4/webhook:v0.13.0
       autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0
       networking-istio: docker.io/knative-images-repo6/prefix-networking-istio:v0.13.0
+      net-istio/webhook: docker.io/knative-images-repo6/networking-istio-webhook:v0.13.0
       queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0
 ```
+
+!!! note
+    If the container name is not unique across all of the deployments, daemonsets and jobs, 
+    you can prefix the container name with the "parent's" name and a slash, e.g. `net-istio/webhook`.
 
 ### Download images with secrets:
 
