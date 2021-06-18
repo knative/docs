@@ -194,10 +194,13 @@ Follow the procedure for the DNS of your choice:
     kubectl apply -f {{ artifact(repo="serving",file="serving-default-domain.yaml")}}
     ```
 
-    !!! info "CAVEAT"
-        This will only work if the cluster LoadBalancer service exposes an
+    !!! info "Caveat"
+        This will only work if the cluster `LoadBalancer` service exposes an
         IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
-        like Minikube. For these, see "Real DNS" or "Temporary DNS".
+        like Minikube unless [`minikube tunnel`](https://minikube.sigs.k8s.io/docs/commands/tunnel/)
+        is running.
+
+        For these, see the "Real DNS" or "Temporary DNS" tabs.
 
 === "Real DNS"
 
