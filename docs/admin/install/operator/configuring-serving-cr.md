@@ -203,8 +203,8 @@ spec:
 ```
 
 !!! note
-    If the container name is not unique across all of the deployments, daemonsets and jobs,
-    you can prefix the container name with the "parent's" name and a slash, e.g. `net-istio/webhook`.
+    If the container name is not unique across all Deployments, DaemonSets and Jobs,
+    you can prefix the container name with the parent container name and a slash. For example, `net-istio/webhook`.
 
 ### Download images with secrets:
 
