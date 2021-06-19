@@ -198,13 +198,13 @@ spec:
       webhook: docker.io/knative-images-repo4/webhook:v0.13.0
       autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0
       networking-istio: docker.io/knative-images-repo6/prefix-networking-istio:v0.13.0
-      net-istio/webhook: docker.io/knative-images-repo6/networking-istio-webhook:v0.13.0
+      istio-webhook/webhook: docker.io/knative-images-repo6/networking-istio-webhook:v0.13.0
       queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0
 ```
 
 !!! note
     If the container name is not unique across all Deployments, DaemonSets and Jobs,
-    you can prefix the container name with the parent container name and a slash. For example, `net-istio/webhook`.
+    you can prefix the container name with the parent container name and a slash. For example, `istio-webhook/webhook`.
 
 ### Download images with secrets:
 
