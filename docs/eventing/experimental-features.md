@@ -96,7 +96,7 @@ With this feature you can allow Knative to resolve the full `APIVersion` and fur
 
 When using the `DeliverySpec` to configure event delivery parameters, you can use `timeout` field to specify the timeout for each sent HTTP request. The duration of the `timeout` parameter is specified using the ISO 8601 format
 
-For example, you can define a `Subscription' that retries 3 times, and on each retry the request timeout is going to be 5 seconds: 
+For example, you can define a `Subscription' that retries 3 times, and on each retry the request timeout is going to be 5 seconds:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
