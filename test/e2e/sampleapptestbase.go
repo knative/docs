@@ -22,6 +22,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -162,13 +163,26 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 	outputString := ""
 	timeout = servingTimeout
 	for outputString != expectedOutput && timeout >= 0 {
-		output, err := exec.Command("curl", "--header", "Host:"+serviceHost, "http://"+ingressAddr).Output()
+		req, err := http.NewRequest("GET", "http://"+ingressAddr, nil)
+		if err != nil {
+			t.Fatalf("new request: %v", err)
+		}
+
+		req.Header.Set("Host", serviceHost)
+
 		errorString := "none"
+		resp, err := http.DefaultClient.Do(req)
 		if err != nil {
 			errorString = err.Error()
 		}
+
+		output, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			t.Fatalf("readall: %v", err)
+		}
+
 		outputString = strings.TrimSpace(string(output))
-		t.Logf("App replied with '%s' (error: %s)", outputString, errorString)
+		t.Logf("App replied with '%s' (error: %s, status: %d)", outputString, errorString, resp.StatusCode)
 		timeout -= checkInterval
 		time.Sleep(checkInterval)
 	}
