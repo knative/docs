@@ -90,7 +90,7 @@ Write a few sentences to describe the task and provide additional context on the
 1. Step 2
 
 
-## (Optional) Task 2
+## Optional: Task 2
 
 Write a few sentences to describe the task and provide additional context on the task.
 
