@@ -10,6 +10,7 @@ The template below includes the standard sections that should appear in procedur
 a topic sentence, an overview section, and sections for each task within the procedure.
 Copy and paste the markdown from the template to use it in your topic.
 
+```
 This topic describes...
 Write a sentence or two that describes the topic itself, not the subject of the topic.
 The goal of the topic sentence is to help readers understand if this topic is for them.
@@ -29,7 +30,7 @@ headings for each task.
 To [task]:
 
 1. [Name of Task 1 (for example, Apply default configuration)](#task-1)
-1. [(Optional) Name of Task 2](#task-2)
+1. [Optional: Name of Task 2](#task-2)
 
 !!! note
     Unless the number of tasks in the procedure is particularly high, do not use numbered lead-ins in the task headings.
@@ -92,13 +93,14 @@ Write a few sentences to describe the task and provide additional context on the
 
 ## Optional: Task 2
 
+If the task is optional, put "Optional:" in the heading.
 Write a few sentences to describe the task and provide additional context on the task.
 
 [Task]:
 
 1. Step 1
 2. Step 2
-
+```
 
 ## Procedure Content Samples
 

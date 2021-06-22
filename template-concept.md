@@ -9,6 +9,7 @@ They provide helpful context to readers. They do not include procedures.
 The template below includes the standard sections that should appear in conceptual topics, including a topic introduction sentence, an overview, and placeholders for additional sections and subsections.
 Copy and paste the markdown from the template to use it in your topic.
 
+```
 This topic describes...
 Write a sentence or two that describes the topic itself, not the subject of the topic.
 The goal of the topic sentence is to help readers understand if this topic is for them.
@@ -31,7 +32,7 @@ Write a sentence or two to describe the content in this section.
 ### Subsection Title
 
 Write a sentence or two to describe the content in this section.
-
+```
 
 ## Conceptual Content Samples
 
