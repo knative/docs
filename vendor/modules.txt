@@ -62,6 +62,11 @@ github.com/googleapis/gax-go/v2
 # github.com/hashicorp/golang-lru v0.5.4
 ## explicit
 github.com/hashicorp/golang-lru/simplelru
+# github.com/henvic/httpretty v0.0.6
+## explicit
+github.com/henvic/httpretty
+github.com/henvic/httpretty/internal/color
+github.com/henvic/httpretty/internal/header
 # github.com/jstemmer/go-junit-report v0.9.1
 github.com/jstemmer/go-junit-report
 github.com/jstemmer/go-junit-report/formatter

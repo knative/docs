@@ -14,6 +14,7 @@ require (
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/google/uuid v1.2.0
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
+	github.com/henvic/httpretty v0.0.6
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/onsi/gomega v1.10.1 // indirect
 	go.opencensus.io v0.23.0 // indirect

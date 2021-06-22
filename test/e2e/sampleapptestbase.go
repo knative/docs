@@ -31,15 +31,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/knative/docs/test/sampleapp"
-
+	"github.com/henvic/httpretty"
 	"github.com/knative/docs/test"
+	"github.com/knative/docs/test/sampleapp"
 )
 
 const (
 	servingNamespace = "default"
 	ingressTimeout   = 5 * time.Minute
-	servingTimeout   = 2 * time.Minute
+	servingTimeout   = 5 * time.Minute
 	checkInterval    = 2 * time.Second
 )
 
@@ -159,6 +159,19 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 	}
 	t.Logf("Curling %s/%s", ingressAddr, serviceHost)
 
+	logger := &httpretty.Logger{
+		Time:           true,
+		TLS:            true,
+		RequestHeader:  true,
+		RequestBody:    true,
+		ResponseHeader: true,
+		ResponseBody:   true,
+		Formatters:     []httpretty.Formatter{&httpretty.JSONFormatter{}},
+	}
+	client := &http.Client{
+		Transport: logger.RoundTripper(http.DefaultTransport),
+	}
+
 	serviceHost = strings.Replace(serviceHost, "http://", "", 1)
 	outputString := ""
 	timeout = servingTimeout
@@ -168,13 +181,17 @@ func checkDeployment(t *testing.T, appName, expectedOutput string) {
 			t.Fatalf("new request: %v", err)
 		}
 
-		req.Header.Set("Host", serviceHost)
+		req.Host = serviceHost
 
 		errorString := "none"
-		resp, err := http.DefaultClient.Do(req)
+		resp, err := client.Do(req)
 		if err != nil {
 			errorString = err.Error()
 		}
+
+		describe := exec.Command("kubectl", "describe", "revision", appName, "-n", servingNamespace)
+		out, _ := describe.CombinedOutput()
+		t.Log("describe revision: ", string(out))
 
 		output, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
