@@ -281,6 +281,7 @@ plugins:
   - search
   - macros:
       module_name: hack/macros
+      include_dir: docs/snippets
   - exclude:
       glob:
         # Exclude files that contain hugo specific shortcodes
