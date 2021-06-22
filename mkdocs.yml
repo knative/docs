@@ -230,8 +230,8 @@ nav:
         - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:
-      - Serving: reference/api/serving.md
-      - Eventing: reference/api/eventing/eventing.md
+      - Serving: reference/api/serving-api.md
+      - Eventing: reference/api/eventing-api.md
     # Client
     - Client:
       - Overview: client/README.md
@@ -288,7 +288,6 @@ plugins:
         # (either the include shortcode or not-converted-yet tabs).
         - snippets/*
         - smoketest.md
-        - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
   - awesome-pages:
       filename: ".index"
