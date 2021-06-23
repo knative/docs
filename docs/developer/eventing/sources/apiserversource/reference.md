@@ -66,7 +66,7 @@ A `resources` definition supports the following fields:
 |-------|-------------|----------------------|
 | `apiVersion` | API version of the resource to watch. | Required |
 | [`kind`][kubernetes-kinds] | Kind of the resource to watch. | Required |
-| [`selector`][label-selectors] | LabelSelector filters this source to objects to those resources pass the label selector. <!-- unsure of rewording --> | Optional |
+| [`selector`][label-selectors] | LabelSelector filters this source to objects to those resources pass the label selector. <!-- unsure what this means --> | Optional |
 | `selector.matchExpressions` | A list of label selector requirements. The requirements are ANDed. | Use one of `matchExpressions` or `matchLabels` |
 | `selector.matchExpressions.key` | The label key that the selector applies to. | Required if using `matchExpressions` |
 | `selector.matchExpressions.operator` | Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`. | Required if using `matchExpressions` |

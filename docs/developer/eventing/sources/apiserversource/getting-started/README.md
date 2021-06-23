@@ -110,6 +110,7 @@ command:
         - `<namespace>` is the name of the namespace that you created in step 1 above.
         - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
         - `<sink>` is the name of the PodSpecable object that you want to use as a sink.
+        A PodSpecable is an object that describes a PodSpec.
 
     === "YAML"
 
@@ -122,15 +123,15 @@ command:
          namespace: <namespace>
         spec:
          serviceAccountName: <service-account>
-         mode: Resource <!-- should this be a placeholder? -->
+         mode: <event-mode>
          resources:
            - apiVersion: v1
              kind: Event
          sink:
            ref:
              apiVersion: v1
-             kind: Service
-             name: <sink>
+             kind: <sink-kind>
+             name: <sink-name>
         EOF
         ```
         Where:
@@ -138,7 +139,9 @@ command:
         - `<apiserversource>` is the name of the source that you want to create.
         - `<namespace>` is the name of the namespace that you created in step 1 above.
         - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
-        - `<sink>` is the name of the Knative Service that you want to use as a sink. A Service is used here as an example, however you can use any supported PodSpecable object by updating the `kind` from `Service` to another object type.
+        - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
+        - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+        - `<sink-name>` is the name of your sink.
 
 
 ## Verify the ApiServerSource object
