@@ -397,8 +397,7 @@ The tabs below expand to show instructions for installing each Serving extension
     ```
 
     !!! warning
-        Note this doesn't work with HTTP01 either through cert-manager or the net-http01
-        options.
+        TLS wildcard support does not work with HTTP01.
 
 === "DomainMapping CRD"
 
