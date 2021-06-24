@@ -46,8 +46,8 @@ You can confirm that your Knative components have upgraded successfully, by view
     autoscaler-6bbc885cfd-vkrgg                              1/1     Running     0          57s
     autoscaler-hpa-5cdd7c6b69-hxzv4                          1/1     Running     0          55s
     controller-64dd4bd56-wzb2k                               1/1     Running     0          57s
-    istio-webhook-75cc84fbd4-dkcgt                           1/1     Running     0          50s
-    networking-istio-6dcbd4b5f4-mxm8q                        1/1     Running     0          51s
+    net-istio-webhook-75cc84fbd4-dkcgt                       1/1     Running     0          50s
+    net-istio-controller-6dcbd4b5f4-mxm8q                    1/1     Running     0          51s
     storage-version-migration-serving-serving-0.20.0-82hjt   0/1     Completed   0          50s
     webhook-75f5d4845d-zkrdt                                 1/1     Running     0          56s
     ```
