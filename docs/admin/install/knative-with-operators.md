@@ -171,14 +171,14 @@ kubectl get deployment -n knative-serving
 If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
 is a sample output:
 ```
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-activator          1/1     1            1           18s
-autoscaler         1/1     1            1           18s
-autoscaler-hpa     1/1     1            1           14s
-controller         1/1     1            1           18s
-istio-webhook      1/1     1            1           12s
-networking-istio   1/1     1            1           12s
-webhook            1/1     1            1           17s
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+activator              1/1     1            1           18s
+autoscaler             1/1     1            1           18s
+autoscaler-hpa         1/1     1            1           14s
+controller             1/1     1            1           18s
+net-istio-webhook      1/1     1            1           12s
+net-istio-contorller   1/1     1            1           12s
+webhook                1/1     1            1           17s
 ```
 
 1. Check the status of Knative Serving Custom Resource:
