@@ -330,3 +330,17 @@ Using the previous `autoscale-go` example:
 NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
 autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
 ```
+
+### Disable Auto TLS per namespace
+
+If you have Auto TLS enabled to provision a certificate per namespace, you can choose to disable it for an individual namespace by adding the annotation `networking.knative.dev/disableWildcardCert: true`
+1. Edit your namespace `kubectl edit namespace default` and add the annotation:
+```yaml
+ apiVersion: v1
+ kind: Namespace
+ metadata:
+   annotations:
+    ...
+     networking.knative.dev/disableWildcardCert: "true"
+    ...
+```
