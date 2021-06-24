@@ -13,11 +13,18 @@ title = "Knative"
 		<h1>Welcome, Knative!</h1>
 		<p class="lead mt-2">Kubernetes-based platform to deploy and manage modern serverless workloads.</p>
 		<div class="mx-auto mt-5">
-			<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
+		<div class="mx-auto mt-5">
+			<a class="btn btl-lg btn-primary mr-3 mb-4" href="{{<relref "/overview/developer" >}}>
+				For Developers <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+			</a>
+			<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/overview/operator" >}}">
+				For Operators <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+			</a>
+			<a class="btn btn-lg btn-secondary mr-3 mb-4" href="{{< relref "/docs" >}}">
 				Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
 			</a>
 			<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/knative">
-				View Repository <i class="fab fa-github ml-2 "></i>
+				Code Repositories <i class="fab fa-github ml-2 "></i>
 			</a>
 		</div>
 	</div>
@@ -28,7 +35,7 @@ title = "Knative"
 			<div class="row">
 				<div class="col-md-1 hidden-xs hidden-sm"></div>
 				<div class="col-10">
-					<h2>Make your developers more productive</h2>
+					<h2>Make developers more productive</h2>
 					<p>Knative components build on top of Kubernetes, abstracting away
 						the complex details and enabling developers to focus on what matters.
 						Built by codifying the best practices shared by successful real-world
@@ -47,7 +54,7 @@ title = "Knative"
 						<li><span class="fa-li"><i class="fas fa-check"></i></span>Pluggable components let you bring your own logging and monitoring, networking, and service mesh.</li>
 						<li><span class="fa-li"><i class="fas fa-check"></i></span>Knative is portable: run it anywhere Kubernetes runs, never worry about vendor lock-in.</li>
 						<li><span class="fa-li"><i class="fas fa-check"></i></span>Idiomatic developer experience, supporting common patterns such as
-							GitOps, DockerOps, ManualOps.
+							GitOps, DockerOps, and ManualOps.
 						</li>
 						<li><span class="fa-li"><i class="fas fa-check"></i></span>Knative can be used with common tools and
 							frameworks such as Django, Ruby on Rails, Spring, and many more.
@@ -70,7 +77,7 @@ title = "Knative"
 			<div class="row justify-content-center">
 				<div class="col-sm-12 col-md-6 col-lg-4">
 						<div class="d-flex justify-content-center"><h4>Serving</h4></div>
-						<p>Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.</p>
+						<p>Run serverless containers on Kubernetes with ease. Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.</p>
 				</div>
 				<div class="col-sm-12 col-md-6 col-lg-4">
 						<div class="d-flex justify-content-center"><h4>Eventing</h4></div>
