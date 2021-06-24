@@ -4,9 +4,9 @@ This topic describes how to install Knative Serving by applying YAML files using
 
 --8<-- "prerequisites.md"
 
-## Install the Serving component
+## Install the Knative Serving component
 
-To install the serving component:
+To install the Knative Serving component:
 
 1. Install the required custom resources by running the command:
 
@@ -214,7 +214,7 @@ Follow the procedure for the networking layer of your choice:
     Monitor the Knative components until all of the components display `Running` or
     `Completed` beneath `STATUS`:
 
-    ```{ .bash .no-copy }
+    ```bash
     kubectl get pods --namespace knative-serving
     ```
 
@@ -229,18 +229,17 @@ Follow the procedure for the DNS of your choice:
 
 === "Magic DNS (xip.io)"
 
-    !!! information
-        If the cluster LoadBalancer service doesn't expose an IPv4 address or hostname, such as with
-        IPv6 clusters or local setups such as minikube, Magic DNS will not work.
-        Follow the Real DNS or Temporary DNS steps instead.
+    If the cluster LoadBalancer service doesn't expose an IPv4 address or hostname, such as with
+    IPv6 clusters or local setups such as minikube, Magic DNS won't work.
+    Follow the Real DNS or Temporary DNS steps instead.
 
-    If the cluster LoadBalancer service exposes an IPv4 address or hostname, use a simple
-    Kubernetes Job called `serving-default-domain` that configures Knative Serving to use [xip.io](http://xip.io) as the default DNS suffix by running the command:
+    * If the cluster LoadBalancer service exposes an IPv4 address or hostname, use a simple
+    Kubernetes Job called `serving-default-domain` that configures Knative Serving to use
+    [xip.io](http://xip.io) as the default DNS suffix by running the command:
 
-    ```bash
-    kubectl apply -f {{ artifact(repo="serving",file="serving-default-domain.yaml")}}
-    ```
-
+        ```bash
+        kubectl apply -f {{ artifact(repo="serving",file="serving-default-domain.yaml")}}
+        ```
 
 
 === "Real DNS"
@@ -253,36 +252,37 @@ Follow the procedure for the DNS of your choice:
       wildcard `A` record for the domain by running the command:
 
         ```bash
-        # Here knative.example.com is the domain suffix for your cluster
-        *.knative.example.com == A 35.233.41.212
+        *.<DOMAIN-SUFFIX> == A 35.233.41.212
         ```
+        Where `<DOMAIN-SUFFIX>` is the domain suffix for your cluster
 
     1. If the networking layer produced a CNAME, then configure a CNAME record for the domain by running the command:
 
         ```bash
-        # Here knative.example.com is the domain suffix for your cluster
-        *.knative.example.com == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
+        *.<DOMAIN-SUFFIX> == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
         ```
+        Where `<DOMAIN-SUFFIX>` is the domain suffix for your cluster
 
     1. After your DNS provider is configured, direct Knative to use that domain by running the command:
 
         ```bash
-        # Replace knative.example.com with your domain suffix
         kubectl patch configmap/config-domain \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"knative.example.com":""}}'
+          --patch '{"data":{"<DOMAIN-SUFFIX>":""}}'
         ```
+        Where `<DOMAIN-SUFFIX>` is the domain suffix for your cluster
 
 === "Temporary DNS"
 
-    !!! info
-        If you are using `curl` to access the sample
-        applications or your own Knative app, and are unable to use the Magic DNS
-        (xip.io) or Real DNS methods, you can use a temporary approach. This is useful
-        for evaluating Knative without altering the DNS configuration,
-        as in the Real DNS method, or cannot use the Magic DNS method due to using,
-        for example, minikube locally or IPv6 clusters.
+    If you are using `curl` to access the sample applications or your own Knative app, and are
+    unable to use the Magic DNS (xip.io) or Real DNS methods, you can use a temporary approach.
+
+    See the Real DNS method for a permanent solution.
+
+    Temporary DNS is useful for evaluating Knative without altering the DNS configuration, as in the
+    Real DNS method, or cannot use the Magic DNS method due to using, for example, minikube locally
+    or IPv6 clusters.
 
     To access your application using `curl` using this method:
 
@@ -301,8 +301,11 @@ Follow the procedure for the DNS of your choice:
 
     1. Instruct `curl` to connect to the External IP address or CNAME defined by the
       networking layer in section 3 above, and use the `-H "Host:"` command-line
-      option to specify the Knative application's hostname. For example, if the
-      networking layer defines your External IP address and port to be `http://192.168.39.228:32198` and you wish to access the above `helloworld-go` application, run the command:
+      option to specify the Knative application's hostname.
+
+      For example, if the networking layer defines your External IP address and port to be
+      `http://192.168.39.228:32198` and you wish to access the above `helloworld-go` application,
+      run the command:
 
         ```bash
         curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
@@ -315,8 +318,6 @@ Follow the procedure for the DNS of your choice:
             Hello Go Sample v1!
             ```
 
-    See the Real DNS method for a permanent solution.
-
 ## Install optional Serving extensions
 
 The tabs below expand to show instructions for installing each Serving extension.
@@ -324,14 +325,13 @@ The tabs below expand to show instructions for installing each Serving extension
 === "HPA autoscaling"
 
     Knative also supports the use of the Kubernetes Horizontal Pod Autoscaler (HPA)
-    for driving autoscaling decisions. 
-    
-    Install the components needed to support HPA-class
-    autoscaling by running the command:
+    for driving autoscaling decisions.
 
-    ```bash
-    kubectl apply -f {{ artifact(repo="serving",file="serving-hpa.yaml")}}
-    ```
+    * Install the components needed to support HPA-class autoscaling by running the command:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="serving",file="serving-hpa.yaml")}}
+        ```
 
     <!-- TODO(https://github.com/knative/docs/issues/2152): Link to a more in-depth guide on HPA-class autoscaling -->
 
@@ -384,26 +384,28 @@ The tabs below expand to show instructions for installing each Serving extension
 
 === "TLS wildcard support"
 
-    If you are using a Certificate implementation that supports provisioning
-    wildcard certificates (for example, cert-manager with a DNS01 issuer), then the most
-    efficient way to provision certificates is with the namespace wildcard
-    certificate controller. 
-    
-    Install the components needed to provision wildcard certificates in each
-    namespace by running the command:
-
-    ```bash
-    kubectl apply -f {{ artifact(repo="serving",file="serving-nscert.yaml")}}
-    ```
-
     !!! warning
         TLS wildcard support does not work with HTTP01.
 
+    If you are using a certificate implementation that supports provisioning
+    wildcard certificates (for example, cert-manager with a DNS01 issuer) then the most
+    efficient way to provision certificates is with the namespace wildcard
+    certificate controller.
+
+    * Install the components needed to provision wildcard certificates in each namespace by running the command:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="serving",file="serving-nscert.yaml")}}
+        ```
+
+
 === "DomainMapping CRD"
 
-    The `DomainMapping` CRD allows a user to map a Domain Name that they own to a specific Knative Service.
+    The `DomainMapping` CRD allows a user to map a domain name that they own to a specific Knative Service.
 
-    ```bash
-    kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping-crds.yaml")}}
-    kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping.yaml")}}
-    ```
+    * Apply the `DomainMapping` CRD by running the commands:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping-crds.yaml")}}
+        kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping.yaml")}}
+        ```
