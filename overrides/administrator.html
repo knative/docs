@@ -1,0 +1,117 @@
+{% extends "main.html" %} {% block content %}
+<link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}" />
+
+<div class="md-container">
+  <section class="home-container">
+    <div class="animated-gradient">
+      <img src="{{ 'images/logo/rgb/knative-logo-rgb.png' | url }}" style="display: none;"/>
+    </div>
+    <div class="md-grid md-typeset">
+      <div class="mdx-hero">
+	<div>
+	  <h1>Knative for Platform Administrators</h1>
+	  <h2>Knative extends Kubernetes, seamlessly.</h2>
+	</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-container">
+    <div class="md-grid md-typeset">
+      <h2>Knative integrates with your existing Kubernetes tools:</h2>
+      <p>
+      </p>
+      <ul class="task-list-control" style="columns: 1">
+	<li class="task-list-item">
+	  <input type="checkbox" checked disabled />
+	  <span class="task-list-indicator"></span>
+	  <b>Serving supports pluggable HTTP ingress, including service mesh. Works with your existing infrastructure investments.</b>
+	</li>
+	<li class="task-list-item">
+	  <input type="checkbox" checked disabled />
+	  <span class="task-list-indicator"></span>
+	  <b>Eventing support pluggable event transport, providing configuration-driven routing for your existing infrastructure.</b>
+	</li>
+	<li class="task-list-item">
+	  <input type="checkbox" checked disabled />
+	  <span class="task-list-indicator"></span>
+	  <b>Standard resource model works with Kubernetes-native policy tools like quotas and OPA Gatekeeper.</b>
+	</li>
+	<li class="task-list-item">
+	  <input type="checkbox" checked disabled />
+	  <span class="task-list-indicator"></span>
+	  <b>Integration with <a href="https://cert-manager.io/" target="_blank">Cert Manager</a> for automatic SSL provisioning.</b>
+	</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="intro-container">
+    <div class="md-grid md-typeset">
+      <div>
+	<h2>Knative is Kubernetes done right:</h2>
+	<ul class="task-list-control" style="columns: 1">
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Tested High Availability with sharding and leader election. We test our active-active controller configuration by terminating elected leaders every 30s while under load.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Configuration, simplified. Sensible, configurable defaults make it easy to write configuration without cutting off the power that you need.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Improve efficiency. Multi-tenant and autoscaling components as well as scale-to-zero in Serving use cluster resources more efficiently.</b>
+	  </li>
+	</ul>
+	<p style="display: block">
+	  <a href="{{ 'admin/install/' | url }}" class="md-button md-button--primary">
+	    Administrator documentation
+	  </a>
+	</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="calltoaction-container">
+    <div class="md-grid md-typeset">
+      <h2>What's Next?</h2>
+      <div style="display: flex; gap: 2em;" class="component-flex">
+	<div>
+          <h4>Talk to us on Slack</h4>
+          <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
+          <p>Interested in learning more, speaking to other contributors, or finding answers?</p>
+	</div>
+	<div>
+          <h4>Contributions Welcome</h4>
+          <a href="{{ 'help/contributor/' | url }}" title="Contributing Link" class="md-button">Contribute</a>
+          <p>Want to join the fun on Github? New users are always welcome!</p>
+	</div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const logos = document.getElementById("usedby").getElementsByTagName("div");
+        for (let i = 0; i < logos.length - 1; i++) {
+            // Technically there's a chance two elements end up with the same
+            // random order in which case the result won't be truly random (it'll be based
+            // on the original document order). This really doesn't matter.
+            logos[i].style.order = Math.floor(Math.random() * 99);
+        }
+        logos[logos.length - 1].style.order = 100;
+    })
+  </script>
+{% endblock %}
+
+<!-- Application footer -->
+{% block footer %}{% endblock %}

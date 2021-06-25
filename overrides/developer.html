@@ -1,0 +1,167 @@
+{% extends "main.html" %} {% block content %}
+<link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}" />
+
+<div class="md-container">
+  <section class="home-container">
+    <div class="animated-gradient">
+      <img src="{{ 'images/logo/rgb/knative-logo-rgb.png' | url }}" style="display: none;"/>
+    </div>
+    <div class="md-grid md-typeset">
+      <div class="mdx-hero">
+	<div>
+	  <h1>Knative for Developers</h1>
+	  <h2>Knative gets Kubernetes out of your way.</h2>
+	</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-container">
+    <div class="md-grid md-typeset">
+      <h2>A simple on-ramp to Kubernetes:</h2>
+      <p>
+	
+      </p>
+      <ul class="task-list-control" style="columns: 1">
+	<li class="task-list-item">
+	  <input type="checkbox" checked disabled />
+	  <span class="task-list-indicator"></span>
+	  <b>Knative simplifies Kubernetes without hiding it. You can dive deeper when you're ready.</b>
+	</li>
+	<li class="task-list-item">
+	  <input type="checkbox" checked disabled />
+	  <span class="task-list-indicator"></span>
+	  <b>Portable. Available from many vendors, and installable on any Kubernetes platform.</b>
+	</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="intro-container">
+    <div class="md-grid md-typeset">
+      <div>
+	<h2>Knative Serving is Kubernetes for 12-factor apps:</h2>
+	<ul class="task-list-control" style="columns: 2">
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Easily convert a Kubernetes Deployment to Knative; it's mostly <strong>deleting YAML<strong>!</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>By focusing on 12-factor apps, we can reduce configuration and add features:</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Automatically scale instances based on incoming requests, including scale to zero.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Automatic provisioning of DNS and TLS. No need to file a ticket to set up a new service.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Manage request concurrency explicitly. Scale single-threaded or multi-threaded code seamlessly.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Support for advanced deployment strategies: canarying, incremental rollout, and fast rollback.</b>
+	  </li>
+	</ul>
+	<p style="display: block">
+	  <a href="{{ 'getting-started/' | url }}" class="md-button md-button--primary">
+	    Serving documentation
+	  </a>
+	</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-container">
+    <div class="md-grid md-typeset">
+      <div>
+	<h2>Knative Eventing is an event-handling toolbox for Kubernetes:</h2>
+	<ul class="task-list-control" style="columns: 2">
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Declarative event routing and management. Manage event routing as configuration, not in your application's code.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>CloudEvents standard. Knative Eventing builds on the <a href="https://cloudevents.io/">CloudEvents standard</a> to manage events consistently.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Decouple producers and consumers. Knative handles asynchronous event routing, so your code can focus on business logic.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b><a href="{{ 'eventing/sources/' | url }}">Dozens of off-the-shelf event sources and integrations</a>. Integrate with AWS, GCP, Azure and more without writing code.</b>
+	  </li>
+	  <li class="task-list-item">
+	    <input type="checkbox" checked disabled />
+	    <span class="task-list-indicator"></span>
+	    <b>Easy to add new integrations. Sending events to Knative is as simple as POSTing a CloudEvent.</b>
+	  </li>
+	</ul>
+	<p style="display: block">
+	  <a href="{{ 'development/getting-started/getting-started-eventing/' | url }}" class="md-button md-button--primary">
+	    Eventing documentation
+	  </a>
+	</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="calltoaction-container">
+    <div class="md-grid md-typeset">
+      <h2>What's Next?</h2>
+      <div style="display: flex; gap: 2em;" class="component-flex">
+        <div>
+          <h4>Talk to us on Slack</h4>
+          <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
+          <p>Interested in learning more, speaking to other contributors, or finding answers?</p>
+        </div>
+        <div>
+          <h4>Contributions Welcome</h4>
+          <a href="{{ 'help/contributor/' | url }}" title="Contributing Link" class="md-button">Contribute</a>
+          <p>Want to join the fun on Github? New users are always welcome!</p>
+        </div>
+        <div>
+          <h4>Follow us on Twitter</h4>
+          <a href="https://twitter.com/KnativeProject" title="Twitter Link" class="md-button">Follow</a>
+          <p>For features announcements, interesting Knative news, and other great things.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const logos = document.getElementById("usedby").getElementsByTagName("div");
+        for (let i = 0; i < logos.length - 1; i++) {
+            // Technically there's a chance two elements end up with the same
+            // random order in which case the result won't be truly random (it'll be based
+            // on the original document order). This really doesn't matter.
+            logos[i].style.order = Math.floor(Math.random() * 99);
+        }
+        logos[logos.length - 1].style.order = 100;
+    })
+  </script>
+{% endblock %}
+
+<!-- Application footer -->
+{% block footer %}{% endblock %}
