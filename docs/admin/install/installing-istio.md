@@ -18,13 +18,12 @@ installation.
 You need:
 
 - A Kubernetes cluster created.
-- [`istioctl`](https://istio.io/docs/setup/install/istioctl/) (v1.7 or later) installed.
+- [`istioctl`](https://istio.io/docs/setup/install/istioctl/) installed.
 
 ## Supported Istio versions
 
-The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.8.2**.
-Versions in the 1.7 line are generally fine too.
-1.8.0 and 1.8.1 have bugs that don't work with Knative.
+The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.9.5**.
+Versions in the 1.9 line are generally fine too.
 
 ## Installing Istio
 

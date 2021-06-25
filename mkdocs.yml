@@ -163,7 +163,7 @@ nav:
         - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
-          - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
+          - Creating a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
           - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
         - Kafka source: eventing/sources/kafka-source/README.md
@@ -230,8 +230,8 @@ nav:
         - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:
-      - Serving: reference/api/serving.md
-      - Eventing: reference/api/eventing/eventing.md
+      - Serving: reference/api/serving-api.md
+      - Eventing: reference/api/eventing-api.md
     # Client
     - Client:
       - Overview: client/README.md
@@ -248,7 +248,6 @@ theme:
   custom_dir: overrides
   features:
     - navigation.tabs
-    - navigation.instant
     - navigation.tracking
     - navigation.tabs.sticky
     - navigation.indexes
@@ -282,13 +281,13 @@ plugins:
   - search
   - macros:
       module_name: hack/macros
+      include_dir: docs/snippets
   - exclude:
       glob:
         # Exclude files that contain hugo specific shortcodes
         # (either the include shortcode or not-converted-yet tabs).
         - snippets/*
         - smoketest.md
-        - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
   - awesome-pages:
       filename: ".index"
