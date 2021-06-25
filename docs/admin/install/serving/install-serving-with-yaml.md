@@ -252,16 +252,16 @@ Follow the procedure for the DNS of your choice:
       wildcard `A` record for the domain by running the command:
 
         ```bash
-        *.<DOMAIN-SUFFIX> == A 35.233.41.212
+        *.<domain-suffix> == A 35.233.41.212
         ```
-        Where `<DOMAIN-SUFFIX>` is the domain suffix for your cluster
+        Where `<domain-suffix>` is the domain suffix for your cluster
 
     1. If the networking layer produced a CNAME, then configure a CNAME record for the domain by running the command:
 
         ```bash
-        *.<DOMAIN-SUFFIX> == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
+        *.<domain-suffix> == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
         ```
-        Where `<DOMAIN-SUFFIX>` is the domain suffix for your cluster
+        Where `<domain-suffix>` is the domain suffix for your cluster
 
     1. After your DNS provider is configured, direct Knative to use that domain by running the command:
 
@@ -269,9 +269,9 @@ Follow the procedure for the DNS of your choice:
         kubectl patch configmap/config-domain \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"<DOMAIN-SUFFIX>":""}}'
+          --patch '{"data":{"<domain-suffix>":""}}'
         ```
-        Where `<DOMAIN-SUFFIX>` is the domain suffix for your cluster
+        Where `<domain-suffix>` is the domain suffix for your cluster
 
 === "Temporary DNS"
 
