@@ -151,7 +151,7 @@ body {
   margin: 1.2em;
 }
 
-@media only screen and (max-width: 1240px) {
+@media only screen and (max-width: 1440px) {
   .components-container,
   .calltoaction-container,
   .usedby-container,
@@ -160,17 +160,17 @@ body {
   .intro-container {
     padding: 40px;
   }
-
-  .intro-container img {
-    display: block;
-    margin:0 auto;
-    float: none;
-  }
 }
 
 @media only screen and (max-width: 800px) {
   .component-flex {
     flex-wrap: wrap;
+  }
+
+  .intro-container img {
+    display: block;
+    margin:0 auto;
+    float: none;
   }
 }
 
