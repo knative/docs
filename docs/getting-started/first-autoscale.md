@@ -41,7 +41,7 @@ hello-world                              2/2     Running
 ```
 Exit the watch command with `Ctrl+c`.
 
-Some people call this **Serverless** :tada: :taco: :fire: Up next, traffic splitting! 
+Some people call this **Serverless** :tada: :taco: :fire: Up next, traffic splitting!
 
 ??? question "Want to go deeper on Autoscaling?"
     Interested in getting in the weeds with Knative Autoscaling? Check out the <a href= "../../serving/autoscaling/" target="_blank"> autoscaling page</a> for concepts, samples, and more!
