@@ -82,6 +82,55 @@
 
 /*Make definition list definitions stand out*/
 .md-typeset dt {
-    font-weight: bold;
-    font-style: italic;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Cookie Banner */
+#cookieModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+}
+
+#cookieModal .modal-dialog .opt-out {
+  display: none;
+}
+
+.modal-dialog {
+  position: fixed;
+  margin: 0;
+  top: 35px;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  left: 5%;
+  padding-left: 15%;
+  padding-right: 15%;
+  color: black;
+}
+
+.modal-body {
+  position: relative;
+  flex: auto;
+  padding: 1rem;
+}
+
+.modal-content {
+  box-shadow: 1px 1px 4px #000000;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  outline: 0;
 }
