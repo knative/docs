@@ -23,7 +23,8 @@
     ```
 
 Delete the Cluster
-!!! info Delete your `konk` Cluster"
+
+!!! todo "Delete your `konk` Cluster"
     ```bash
     kind delete clusters knative
     ```
