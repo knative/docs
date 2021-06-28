@@ -68,3 +68,15 @@
 .md-typeset .admonition {
   font-size: 100%;
 }
+
+/* fix wrapping behavior of code in tables */
+.md-typeset table code {
+  word-break: normal;
+}
+
+/* Widen the main column a bit to help with wide tables.
+   Note that extra-wide columns can make it hard to read prose,
+   so there is a tradeoff here. */
+.md-grid {
+  max-width: 68rem;
+}

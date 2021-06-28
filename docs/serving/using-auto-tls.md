@@ -130,36 +130,36 @@ providers, are provided in
 [DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
 
 
-### Install networking-certmanager deployment
+### Install net-certmanager-controller deployment
 
-1.  Determine if `networking-certmanager` is already installed by running the
+1.  Determine if `net-certmanager-controller` is already installed by running the
     following command:
 
     ```bash
-    kubectl get deployment networking-certmanager -n knative-serving
+    kubectl get deployment net-certmanager-controller -n knative-serving
     ```
 
-1.  If `networking-certmanager` is not found, run the following command:
+1.  If `net-certmanager-controller` is not found, run the following command:
 
     ```bash
     kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
-### Install networking-ns-cert component
+### Install net-nscert-controller component
 
-If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
+If you choose to use the mode of provisioning certificate per namespace, you need to install `net-nscert-controller` components.
 
 **IMPORTANT:** Provisioning a certificate per namespace only works with DNS-01
  challenge. This component cannot be used with HTTP-01 challenge.
 
-1. Determine if `networking-ns-cert` deployment is already installed by
+1. Determine if `net-nscert-controller` deployment is already installed by
 running the following command:
 
     ```bash
-    kubectl get deployment networking-ns-cert -n knative-serving
+    kubectl get deployment net-nscert-controller -n knative-serving
     ```
 
-1. If `networking-ns-cert` deployment is not found, run the following command:
+1. If `net-nscert-controller` deployment is not found, run the following command:
 
     ```bash
     kubectl apply --filename {{ artifact( repo="serving", file="serving-nscert.yaml") }}
@@ -329,4 +329,18 @@ Using the previous `autoscale-go` example:
 ```
 NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
 autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+```
+
+### Disable Auto TLS per namespace
+
+If you have Auto TLS enabled to provision a certificate per namespace, you can choose to disable it for an individual namespace by adding the annotation `networking.knative.dev/disableWildcardCert: true`
+1. Edit your namespace `kubectl edit namespace default` and add the annotation:
+```yaml
+ apiVersion: v1
+ kind: Namespace
+ metadata:
+   annotations:
+    ...
+     networking.knative.dev/disableWildcardCert: "true"
+    ...
 ```
