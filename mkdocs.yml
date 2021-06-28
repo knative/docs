@@ -12,15 +12,16 @@ nav:
     - Getting Started:
         - Before you begin: getting-started/README.md
         - Knative Quickstart: getting-started/install-knative-quickstart.md
-        - Serverless:
+        - Create your first Knative Service:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
           - Traffic Splitting: getting-started/first-traffic-split.md
-        - Event-Driven Applications:
+        - Using Knative Eventing:
           - Introducing Knative Eventing: getting-started/getting-started-eventing.md
           - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
+          - Clean Up: getting-started/clean-up.md
         - What's Next?: getting-started/next-steps.md
     # Administration guide
     - Administration guide:
