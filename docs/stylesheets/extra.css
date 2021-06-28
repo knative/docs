@@ -116,6 +116,63 @@
   color: black;
 }
 
+.cookienotice {
+  overflow: hidden;
+  outline: 0;
+  position: fixed;
+  display: none;
+  padding-top: 15px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #c3c3c3;
+  z-index: 1000;
+  text-align: center;
+  color: black;
+}
+
+.cookienotice .text {
+  float: left;
+  margin-left: 15px;
+  margin-right: 100px;
+  font-size: .875rem;
+}
+
+.cookienotice .text p {
+  margin-top: 0;
+}
+
+.cookienotice .buttons {
+  position: fixed;
+  right: 0;
+  float: right;
+  padding-right: 15px;
+}
+
+.cookienotice .buttons .close {
+  margin-right: 15px;
+  top: 0;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  cursor: pointer;
+}
+
+.cookienotice .buttons .ok {
+  background: #6695ca;
+  color: #fff;
+  margin-right: 15px;
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: 0;
+  cursor: pointer;
+}
+
 .modal-body {
   position: relative;
   flex: auto;
