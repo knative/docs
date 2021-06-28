@@ -149,6 +149,7 @@ Follow the procedure for the networking layer of your choice:
     1. Install a properly configured Istio ([Advanced installation](../installing-istio.md))
 
         ```bash
+        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",file="istio.yaml")}}
         kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
         ```
 
