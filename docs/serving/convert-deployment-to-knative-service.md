@@ -1,20 +1,20 @@
-# Covert Kubernetes Deployment to Knative Service
+# Converting a Kubernetes Deployment to a Knative Service
 
-Learn how to covert Kubernetes Deployment to Knative Service.
+This topic shows how to convert a Kubernetes Deployment to a Knative Service.
 
-## Determining if your workload is a good fit for Knative
+## Determine if your workload is a good fit for Knative
 
-In general, if your Kubernetes workload is a good fit for Knative, you should be able to remove a lot of your manifest to create a Knative Service.
+In general, if your Kubernetes workload is a good fit for Knative, you can remove a lot of your manifest to create a Knative Service.
 
 There are three aspects you need to consider:
 
-- All work done is triggered by HTTP
-- The container is stateless (all state is stored elsewhere or can be re-created)
-- Uses only Secret and ConfigMap volumes
+- All work done is triggered by HTTP.
+- The container is stateless. All state is stored elsewhere or can be re-created.
+- Your workload uses only Secret and ConfigMap volumes.
 
 ## Example conversion
 
-The following will use an Kubernetes Nginx Deployment and Service, and covert it to Knative Service.
+The following example shows a Kubernetes Nginx Deployment and Service, and shows how it converts to a Knative Service.
 
 ### Kubernetes Nginx Deployment and Service
 
