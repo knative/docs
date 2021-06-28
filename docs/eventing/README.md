@@ -28,11 +28,11 @@ Knative Eventing is designed around the following goals:
 
 1. Knative Eventing resources are loosely coupled, and can be developed and deployed independently of each other.
 1. Event producers and event consumers are independent. Any producer can generate events before there are active event consumers that are listening. Any event consumer can express interest in an event or class of events, before there are producers that are creating those events.
+1. Knative Eventing is consistent with the [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless), which ensures cross-service interoperability.
 1. Other services can be connected to the Knative Eventing system. These services can perform the following functions:
-   - Create new applications without modifying the event producer or event   consumer.
-   - Select and target specific subsets of the events from their producers.
-1. Ensure cross-service interoperability. Knative Eventing is consistent with
-   the [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless).
+    - Create new applications without modifying the event producer or event   consumer.
+    - Select and target specific subsets of the events from their producers.
+
 
 ### Event registry
 
