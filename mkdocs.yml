@@ -78,8 +78,8 @@ nav:
         - Knative Eventing:
           - Event sources:
             - ContainerSource:
-              - Creating a ContainerSource object: eventing/sources/containersource/README.md
-              - ContainerSource Reference: eventing/sources/containersource/reference.md
+              - Creating a ContainerSource object: developer/eventing/sources/containersource/README.md
+              - ContainerSource Reference: developer/eventing/sources/containersource/reference.md
           - Event delivery: developer/eventing/event-delivery.md
     # Serving
     - Knative Serving:
