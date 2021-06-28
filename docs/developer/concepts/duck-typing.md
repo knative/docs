@@ -1,17 +1,10 @@
----
-title: "Knative concepts"
-linkTitle: "Concepts"
-weight: 100
-type: "docs"
----
+# Duck typing
 
-# Duck Typing
+Knative enables [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) of its components by using [duck typing](https://en.wikipedia.org/wiki/Duck_typing).
 
-Knative enables [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) of its components by using [duck typing](https://en.wikipedia.org/wiki/Duck_typing). Duck typing means that the compatibility of a resource for use in a Knative system is determined by certain properties being present that can be used to identify the resource control plane shape and behaviors. These properties are based on a set of common definitions for different types of resources, called duck types. If a resource has the same fields in the same schema
-locations as the common definition specifies, and the same control or data plane behaviors as the
-common definition specifies, Knative can use that resource as if it is the generic duck
-type, without specific knowledge about the resource type. Some resources may
-choose to opt-in to multiple duck types.
+Duck typing means that the compatibility of a resource for use in a Knative system is determined by certain properties being present that can be used to identify the resource control plane shape and behaviors. These properties are based on a set of common definitions for different types of resources, called duck types.
+
+If a resource has the same fields in the same schema locations as the common definition specifies, and the same control or data plane behaviors as the common definition specifies, Knative can use that resource as if it is the generic duck type, without specific knowledge about the resource type. Some resources may choose to opt-in to multiple duck types.
 
 <!-- TODO: point to Discovery ClusterDuckType documentation. -->
 
@@ -19,8 +12,7 @@ A fundamental use of duck typing in Knative is the use of object references in
 resource _specs_ to point to another resource. The definition of the object
 containing the reference prescribes the expected duck type of the resource being referenced.
 
-In the following example, a Knative `Example` resource named `pointer` references a
-`Dog` resource named `pointee` in its spec:
+In the following example, a Knative `Example` resource named `pointer` references a `Dog` resource named `pointee` in its spec:
 
 ```yaml
 apiVersion: sample.knative.dev/v1

@@ -62,7 +62,6 @@
 /* text sizing of tables, Alert, Warnings, Notes*/
 .md-typeset table, .md-typeset table:not([class]) {
   font-size: 100%;
-
 }
 
 .md-typeset .admonition {
@@ -79,4 +78,10 @@
    so there is a tradeoff here. */
 .md-grid {
   max-width: 68rem;
+}
+
+/*Make definition list definitions stand out*/
+.md-typeset dt {
+    font-weight: bold;
+    font-style: italic;
 }
