@@ -117,12 +117,15 @@ if [ -z "$SKIP_BLOG" ]; then
   find . -type f -path '*/content/*.md' \
       -exec sed -i '/](/ { /http/ !{s#\.md##g} }' {} +
 
+  # Move about cookie page in.
+  cp -rfv content-override/en/about-analytics-cookies.md content/en/
+
   # Run the hugo build as normal!
   hugo
   popd
 
   # Hugo builds to public/, just copy over to site/ to match up with mkdocs
-  for d in blog community css scss webfonts images js; do
+  for d in blog community css scss webfonts images js "about-analytics-cookies"; do
     mv temp/website/public/$d site/
   done
 
