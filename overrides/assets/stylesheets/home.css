@@ -62,7 +62,7 @@
 /* Fixes logo aspect ratio in Safari */
 section.home-container img {
   object-fit: contain;
-  object-position: right
+  object-position: right;
 }
 
 section.home-container {
