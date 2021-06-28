@@ -84,6 +84,9 @@ nav:
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
             - KafkaSink: developer/eventing/sinks/kafka-sink.md
+    # Developer concepts
+        - Concepts:
+          - Duck typing: developer/concepts/duck-typing.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -97,7 +100,7 @@ nav:
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
       - Autoscaling:
         - Overview: serving/autoscaling/README.md
-        - Autoscaling concepts: serving/autoscaling/autoscaling-concepts.md
+        - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
         - Metrics: serving/autoscaling/autoscaling-metrics.md
         - Targets: serving/autoscaling/autoscaling-targets.md
         - Configuring scale to zero: serving/autoscaling/scale-to-zero.md
@@ -276,6 +279,7 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+  - def_list
 
 plugins:
   - search
@@ -296,6 +300,7 @@ plugins:
 # Redirects
   - redirects:
       redirect_maps:
+        'serving/autoscaling/autoscaling-concepts.md': 'serving/autoscaling/autoscaler-types.md'
         'eventing/sink/kafka-sink.md': 'developer/eventing/sinks/kafka-sink.md'
         'eventing/sink/README.md': 'developer/eventing/sinks/README.md'
         'eventing/broker/broker-event-delivery.md': 'developer/eventing/event-delivery.md'

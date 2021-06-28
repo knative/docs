@@ -1,7 +1,4 @@
-# Autoscaling concepts
-This section covers conceptual information about which Autoscaler types are supported, as well as fundamental information about how autoscaling is configured.
-
-## Supported Autoscaler types
+# Supported Autoscaler types
 
 Knative Serving supports the implementation of Knative Pod Autoscaler (KPA) and Kubernetes' Horizontal Pod Autoscaler (HPA). The features and limitations of each of these Autoscalers are listed below.
 
@@ -9,19 +6,19 @@ Knative Serving supports the implementation of Knative Pod Autoscaler (KPA) and 
     If you want to use Kubernetes Horizontal Pod Autoscaler (HPA), you must install it after you install Knative Serving.
 For how to install HPA, see [Install optional Serving extensions](../../admin/install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).
 
-### Knative Pod Autoscaler (KPA)
+## Knative Pod Autoscaler (KPA)
 
 * Part of the Knative Serving core and enabled by default once Knative Serving is installed.
 * Supports scale to zero functionality.
 * Does not support CPU-based autoscaling.
 
-### Horizontal Pod Autoscaler (HPA)
+## Horizontal Pod Autoscaler (HPA)
 
 * Not part of the Knative Serving core, and you must install Knative Serving first.
 * Does not support scale to zero functionality.
 * Supports CPU-based autoscaling.
 
-### Configuring the Autoscaler implementation
+## Configuring the Autoscaler implementation
 
 The type of Autoscaler implementation (KPA or HPA) can be configured by using the `class` annotation.
 
@@ -72,18 +69,18 @@ The type of Autoscaler implementation (KPA or HPA) can be configured by using th
           pod-autoscaler-class: "kpa.autoscaling.knative.dev"
     ```
 
-## Global versus per-revision settings
+### Global versus per-revision settings
 
 Configuring for autoscaling in Knative can be set using either global or per-revision settings.
 
 1. If no per-revision autoscaling settings are specified, the global settings will be used.
 1. If per-revision settings are specified, these will override the global settings when both types of settings exist.
 
-### Global settings
+#### Global settings
 
 Global settings for autoscaling are configured using the `config-autoscaler` ConfigMap. If you installed Knative Serving using the Operator, you can set global configuration settings in the `spec.config.autoscaler` ConfigMap, located in the `KnativeServing` custom resource (CR).
 
-#### Example of the default autoscaling ConfigMap
+##### Example of the default autoscaling ConfigMap
 
 ```yaml
 apiVersion: v1
@@ -106,11 +103,11 @@ data:
  requests-per-second-target-default: "200"
 ```
 
-### Per-revision settings
+#### Per-revision settings
 
 Per-revision settings for autoscaling are configured by adding _annotations_ to a revision.
 
-### Example
+**Example:**
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -125,5 +122,5 @@ spec:
         autoscaling.knative.dev/target: "70"
 ```
 
-**IMPORTANT:** If you are creating revisions by using a service or configuration, you must set the annotations in the _revision template_ so that any modifications will be applied to each revision as they are created.
-Setting annotations in the top level metadata of a single revision will not propagate the changes to other revisions and will not apply changes to the autoscaling configuration for your application.
+!!! important
+    If you are creating revisions by using a service or configuration, you must set the annotations in the _revision template_ so that any modifications will be applied to each revision as they are created. Setting annotations in the top level metadata of a single revision will not propagate the changes to other revisions and will not apply changes to the autoscaling configuration for your application.
