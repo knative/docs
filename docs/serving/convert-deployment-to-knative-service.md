@@ -14,7 +14,7 @@ There are three aspects you need to consider:
 
 ## Example conversion
 
-The following example shows a Kubernetes Nginx Deployment and Service, and shows how it converts to a Knative Service.
+The following example shows a [Kubernetes Nginx Deployment and Service](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/), and shows how it converts to a Knative Service.
 
 ### Kubernetes Nginx Deployment and Service
 
