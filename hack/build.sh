@@ -22,7 +22,7 @@ set -x
 VERSIONS=("0.23" "0.22" "0.21")
 # 3) For now, set branches too. (This will go away when all branches are release-NN).
 DOCS_BRANCHES=("mkrelease-0.23" "mkrelease-0.22" "mkrelease-0.22")
-RELEASE_BRANCHES=("v0.23.0" "v0.22.0" "v0.21.0")
+RELEASE_BRANCHES=("release-0.23" "release-0.22" "release-0.21")
 REPOS=("julz" "julz" "julz")
 # 4) PR the result to main.
 # 5) Party.
@@ -52,7 +52,7 @@ else
   # TODO: Uncomment this when 0.24 is cut.
   # curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
   # curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
-  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=$latest mkdocs build -d $SITE/docs; popd
+  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=$latest SAMPLES_BRANCH="${RELEASE_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
   versionjson=""
@@ -64,7 +64,7 @@ else
     # git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "$TEMP/docs-$version"
     # curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
     # curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
-    # pushd "$TEMP/docs-$version"; KNATIVE_VERSION=$version VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
+    # pushd "$TEMP/docs-$version"; KNATIVE_VERSION=$version SAMPLES_BRANCH="${RELEASE_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
   done
 
   # Set up the version file to point to the built docs.
