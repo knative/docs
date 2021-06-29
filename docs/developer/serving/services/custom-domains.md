@@ -22,8 +22,8 @@ serve a Knative Service at this domain.
 
 ## Procedure
 
-1. By default, in order to create a DomainMapping you (or a cluster
-   administrator) must first delegate the domain name to the namespace you wish
+1. By default, in order to create a DomainMapping you, or a cluster
+   administrator, must first delegate the domain name to the namespace you wish
    to create the DomainMapping in by creating a ClusterDomainClaim.
    ClusterDomainClaims delegate a domain name to a namespace, so that
    DomainMappings in that namespace can use the domain name.
