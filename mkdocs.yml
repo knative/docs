@@ -77,6 +77,10 @@ nav:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
         - Knative Eventing:
           - Event sources:
+            - ApiServerSource:
+              - Overview: developer/eventing/sources/apiserversource/README.md
+              - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
+              - ApiServerSource reference: developer/eventing/sources/apiserversource/reference.md
             - ContainerSource:
               - Creating a ContainerSource object: developer/eventing/sources/containersource/README.md
               - ContainerSource Reference: developer/eventing/sources/containersource/reference.md
@@ -161,9 +165,6 @@ nav:
       - Getting started: eventing/getting-started.md
       - Event sources:
         - Overview: eventing/sources/README.md
-        - API server source:
-          - Overview: eventing/sources/apiserversource/README.md
-          - Getting started: eventing/sources/apiserversource/getting-started/README.md
         - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
