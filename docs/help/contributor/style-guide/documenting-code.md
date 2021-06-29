@@ -132,6 +132,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
             ```bash
             kubectl apply --filename <filename>.yaml
             ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
     - Editing a ConfigMap:
 
