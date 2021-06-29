@@ -127,7 +127,7 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
             ```yaml
             # YAML FILE CONTENTS
             ```
-        2. Apply the YAML file by running:
+        2. Apply the YAML file by running the command:
 
             ```bash
             kubectl apply --filename <filename>.yaml
