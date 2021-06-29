@@ -81,7 +81,7 @@ nav:
               - Overview: developer/eventing/sources/apiserversource/README.md
               - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
               - ApiServerSource reference: developer/eventing/sources/apiserversource/reference.md
-            - ContainerSource:  
+            - ContainerSource:
               - Creating a ContainerSource object: developer/eventing/sources/containersource/README.md
               - ContainerSource Reference: developer/eventing/sources/containersource/reference.md
           - Event delivery: developer/eventing/event-delivery.md
