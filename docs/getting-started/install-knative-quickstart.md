@@ -8,7 +8,7 @@ You can get started with a local deployment of Knative by using _Knative on Kind
 
 ## Install the Knative CLI
 
-The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources such as Knative services and event sources, without the need to create or modify YAML files directly.
+The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources, such as Knative Services and Event Sources, without the need to create or modify YAML files directly.
 
 `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 

@@ -32,7 +32,8 @@ Knative Eventing uses <a href="https://github.com/cloudevents/spec/blob/master/p
 
 
 ## Examining the Broker
-As part of the `KonK` install, you should have an in-memory Broker already installed.
+As part of the `KonK` install, an In-Memory Broker should have already be installed in your Cluster. Check to see that it is installed by running the command:
+
 ```bash
 kn broker list
 ```

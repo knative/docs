@@ -1,4 +1,4 @@
-In this tutorial, you will be using the [CloudEvents Player](https://github.com/ruromero/cloudevents-player){target=blank} to showcase the core concepts of Knative Eventing. By the end of this tutorial, you should have something that looks like this:
+In this tutorial, you use the [CloudEvents Player](https://github.com/ruromero/cloudevents-player){target=blank} to showcase the core concepts of Knative Eventing. By the end of this tutorial, you should have an architecture that looks like this:
 
 <figure>
   <img src="../images/event_diagram.png" draggable="false">
@@ -8,7 +8,7 @@ Here, the CloudEvents Player is acting as both a <code>Source</code> and a <code
 </figure>
 
 ## Creating your first Source
-The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of our Broker as an environment variable (`BROKER_URL`) and sending CloudEvents via the UI.
+The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of the Broker as an environment variable, `BROKER_URL`. You will send CloudEvents to the Broker through the CloudEvents Player application.
 
 Create the CloudEvents Player Service:
 === "kn"
@@ -24,8 +24,8 @@ Create the CloudEvents Player Service:
     http://cloudevents-player.default.127.0.0.1.nip.io
     ```
 
-    ??? question "Wait, my Revision is named something different!"
-        Since we didn't assign a `revision-name`, Knative Serving automatically created one for us, it's ok if your Revision is named something different.
+    ??? question "Why is my Revision named something different!"
+        Because we didn't assign a `revision-name`, Knative Serving automatically created one for us. It's okay if your Revision is named something different.
 
 === "YAML"
 
@@ -47,7 +47,7 @@ Create the CloudEvents Player Service:
                   value: http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker
     ```
 
-    Once you've created your YAML file (named something like "cloudevents-player.yaml"):
+    Once you've created your YAML file, named something like `cloudevents-player.yaml`, apply it by running the command:
     ``` bash
     kubectl apply -f cloudevents-player.yaml
     ```
@@ -58,7 +58,7 @@ Create the CloudEvents Player Service:
     ```
 
 ## Examining the CloudEvents Player
-**We can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.nip.io){target=_blank} in your browser, you should be greeted by a form titled "Create event."
+**You can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.nip.io){target=_blank} in your browser, the **Create Event** form appears.
 
 <figure>
   <img src="../images/event_form.png" draggable="false">
@@ -76,15 +76,16 @@ Create the CloudEvents Player Service:
 
     For more information on the CloudEvents Specification, check out the [CloudEvents Spec](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md){target=_blank}.
 
-Fill out the form with whatever you data you would like to **(make sure your Event Source does not contain any spaces)** and hit the "SEND EVENT" button.
-
+  1. Fill in the form with whatever you data you want.
+  1. Ensure your Event Source does not contain any spaces.
+  1. Click **SEND EVENT**.
 
 ![CloudEvents Player Send](../images/event_sent.png)
 
 
-??? tip "Clicking the :fontawesome-solid-envelope: will show you the CloudEvent as the Broker sees it."
+??? tip "Clicking the :fontawesome-solid-envelope: shows you the CloudEvent as the Broker sees it."
     ![Event_Details](../images/event_details.png)
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our Broker... but where has the event gone? **Well, right now, nowhere!**
 
-A Broker is simply a receptacle for events. In order for your events to be sent somewhere, you must create a Trigger which listens for your events and places them somewhere. And, you're in luck, you'll create your first Trigger on the next page!
+A Broker is simply a receptacle for events. In order for your events to be sent anywhere, you must create a Trigger which listens for your events and places them somewhere. And, you're in luck: you'll create your first Trigger on the next page!

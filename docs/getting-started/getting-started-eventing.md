@@ -18,4 +18,4 @@ With Knative Serving, we have a powerful tool which can take our containerized c
 --8<-- "YouTube_icon.svg"
 [Facilitating AI workloads at the edge in large-scale, drone-powered sustainable agriculture projects](https://www.youtube.com/watch?v=lVfJ5WEQ5_s){target=blank}
 
-As you can see by the examples above, Knative Eventing implementations can range from the dead-simple to extremely complex. **For now, you'll start with dead-simple** and learn about the most basic components of Knative Eventing: Sources, Brokers, Triggers and Sinks.
+As you can see by the examples above, Knative Eventing implementations can range from simplistic to extremely complex. For now, you'll start with simplistic and learn about the most basic components of Knative Eventing: Sources, Brokers, Triggers and Sinks.

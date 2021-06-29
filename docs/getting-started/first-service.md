@@ -6,7 +6,7 @@
 
 This service will accept an environment variable, `TARGET`, and print "`Hello ${TARGET}!`."
 
-Since our "Hello world" Service is being deployed as a Knative Service (not a Kubernetes Service), it gets some **super powers out of the box** :rocket:.
+Since our "Hello world" Service is being deployed as a Knative Service, not a Kubernetes Service, it gets some **super powers out of the box** :rocket:.
 
 ## Knative Service: "Hello world!"
 === "kn"
@@ -66,9 +66,8 @@ Since our "Hello world" Service is being deployed as a Knative Service (not a Ku
     kn service list
     ```
 ## Ping your Knative Service
-You can ping your Knative Service by opening [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank} in your browser of choice.
+Ping your Knative Service by opening [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank} in your browser of choice or by running the command:
 
-You can also `curl` your service from the terminal:
 ```
 curl http://hello.default.127.0.0.1.nip.io
 ```

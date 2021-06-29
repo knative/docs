@@ -25,7 +25,7 @@
           name: cloudevents-player
     ```
 
-    Once you've created your YAML file (named something like "ce-trigger.yaml"):
+    After you've created your YAML file, named something like `ce-trigger.yaml`, apply it by running the command:
     ``` bash
     kubectl apply -f ce-trigger.yaml
     ```
@@ -38,7 +38,7 @@
 
 trigger.eventing.knative.dev/cloudevents-player created
 ??? question "What CloudEvents is my Trigger listening for?"
-    Since we didn't specify a `--filter` in our `kn` command, our Trigger is listening for any CloudEvents coming into the Broker.
+    Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
 
     An example on how to use Filters is provided below.
 
@@ -61,7 +61,7 @@ Now, when we go back to the CloudEvents Player and send an Event, we see that Cl
       kn trigger create cloudevents-player-filter --sink cloudevents-player  --broker example-broker --filter type=some-type
     ```
 
-    If you send a CloudEvent with type "some-type," it will be reflected in the CloudEvents Player UI. Any other types will be ignored by the Trigger.
+    If you send a CloudEvent with type "some-type," it is reflected in the CloudEvents Player UI.  The Trigger ignores any other types.
 
     You can filter on any aspect of the CloudEvent you would like to.
 
