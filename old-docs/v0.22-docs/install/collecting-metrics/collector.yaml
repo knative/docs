@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+  namespace: metrics
+data:
+  collector.yaml: |
+    receivers:
+      opencensus:
+        endpoint: "0.0.0.0:55678"
+
+    exporters:
+      logging:
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+
+    service:
+      extensions:
+        health_check:
+        pprof:
+        zpages:
+      pipelines:
+        metrics:
+          receivers: [opencensus]
+          processors: []
+          exporters: [prometheus]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: metrics
+  labels:
+    app: otel-collector
+spec:
+  selector:
+    matchLabels:
+      app: otel-collector
+  replicas: 1  # This can be increased for a larger system.
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      containers:
+      - name: collector
+        args:
+        - --config=/conf/collector.yaml
+        image: otel/opentelemetry-collector:latest
+        resources:
+          requests:  # Note: these are suitable for a small instance, but may need to be increased for a large instance.
+            memory: 100Mi
+            cpu: 50m
+        ports:
+        - name: otel
+          containerPort: 55678
+        - name: prom-export
+          containerPort: 8889
+        - name: zpages  # A /debug page
+          containerPort: 55679
+        volumeMounts:
+          - mountPath: /conf
+            name: config
+      volumes:
+      - name: config
+        configMap:
+          name: otel-collector-config
+          items:
+            - key: collector.yaml
+              path: collector.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector
+  namespace: metrics
+spec:
+  selector:
+    app: "otel-collector"
+  ports:
+  - port: 55678
+    name: otel
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-export
+  namespace: metrics
+  labels:
+    app: otel-export
+spec:
+  selector:
+    app: otel-collector
+  ports:
+  - port: 8889
+    name: prom-export

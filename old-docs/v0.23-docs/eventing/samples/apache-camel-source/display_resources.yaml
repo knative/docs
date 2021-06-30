@@ -1,0 +1,39 @@
+# Channel for testing events.
+
+apiVersion: messaging.knative.dev/v1
+kind: InMemoryChannel
+metadata:
+  name: camel-test
+
+---
+
+# Subscription from the CamelSource's output Channel to the Knative Service below.
+
+apiVersion: messaging.knative.dev/v1
+kind: Subscription
+metadata:
+  name: camel-source-display
+spec:
+  channel:
+    apiVersion: messaging.knative.dev/v1
+    kind: InMemoryChannel
+    name: camel-test
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: camel-event-display
+
+---
+
+# This is a very simple Knative Service that prints the input event to its log.
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: camel-event-display
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display

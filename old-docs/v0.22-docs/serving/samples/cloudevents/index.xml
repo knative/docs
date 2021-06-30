@@ -1,0 +1,1011 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative Serving &#39;Cloud Events&#39; samples</title>
+    <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/</link>
+    <description>Recent content in Knative Serving &#39;Cloud Events&#39; samples on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.22-docs/serving/samples/cloudevents/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.22-Docs: Cloud Events - .NET Core</title>
+      <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-dotnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-dotnet/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A simple web app written in ASP.NET and C# that can receive and send Cloud Events that you
+can use for testing. It supports running in two modes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The default mode has the app reply to your input events with the output
+event, which is simplest for demonstrating things working in isolation, but
+is also the model for working for the Knative Eventing &lt;code&gt;Broker&lt;/code&gt; concept.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;K_SINK&lt;/code&gt; mode has the app send events to the destination encoded in
+&lt;code&gt;$K_SINK&lt;/code&gt;, which is useful to demonstrate how folks can synthesize events to
+send to a Service or Broker when not initiated by a Broker invocation (e.g.
+implementing an event source)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The application will use &lt;code&gt;$K_SINK&lt;/code&gt;-mode whenever the environment variable is
+specified.&lt;/p&gt;
+&lt;p&gt;Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;{{&amp;lt; branch &amp;gt;}}&amp;#34;&lt;/span&gt; https://github.com/knative/docs knative-docs
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with Knative installed and DNS configured. Follow the
+&lt;a href=&#34;../../../../install/index.html&#34;&gt;installation instructions&lt;/a&gt; if you need to
+create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;Docker&lt;/a&gt; installed and running on your local machine,
+and a Docker Hub account configured (we&amp;rsquo;ll use it for a container registry).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-sample-code&#34;&gt;The sample code&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you look in &lt;code&gt;controllers\CloudEventsController.cs&lt;/code&gt;, you will see two key functions for the
+different modes of operation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Task&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;IActionResult&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ReceiveAndSend&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;CloudEvent&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;receivedEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This is called whenever an event is received if $K_SINK is set, and sends a new event
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// to the url in $K_SINK.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;IActionResult&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ReceiveAndReply&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;CloudEvent&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;receivedEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This is called whenever an event is received if $K_SINK is NOT set, and it replies with
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// the new event instead.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you look in &lt;code&gt;Dockerfile&lt;/code&gt;, you will see a method for pulling in the
+dependencies and building an ASP.NET container based on Alpine. You can build
+and push this to your registry of choice via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker build -t &amp;lt;image&amp;gt; .
+docker push &amp;lt;image&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you look in &lt;code&gt;service.yaml&lt;/code&gt;, take the &lt;code&gt;&amp;lt;image&amp;gt;&lt;/code&gt; name above and insert it
+into the &lt;code&gt;image:&lt;/code&gt; field.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;testing-the-sample&#34;&gt;Testing the sample&lt;/h2&gt;
+&lt;p&gt;Get the URL for your Service with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl get ksvc
+NAME                 URL                            LATESTCREATED              LATESTREADY                READY   REASON
+cloudevents-dotnet   http://cloudevents-dotnet...   cloudevents-dotnet-ss5pj   cloudevents-dotnet-ss5pj   True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then send a cloud event to it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ curl -X POST &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    &amp;lt;URL from kubectl &lt;span style=&#34;color:#204a87&#34;&gt;command&lt;/span&gt; above&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will get back:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;specversion&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dev.knative.docs.sample&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;source&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-dotnet&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;d662b6f6-35ff-4b98-bffd-5ae9eee23dab&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2020-05-19T01:26:23.3500138Z&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;datacontenttype&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;application/json&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Hello, Dave&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service record:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Cloud Events - Go</title>
+      <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-go/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A simple web app written in Go that can receive and send Cloud Events that you
+can use for testing. It supports running in two modes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The default mode has the app reply to your input events with the output
+event, which is simplest for demonstrating things working in isolation, but
+is also the model for working for the Knative Eventing &lt;code&gt;Broker&lt;/code&gt; concept.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;K_SINK&lt;/code&gt; mode has the app send events to the destination encoded in
+&lt;code&gt;$K_SINK&lt;/code&gt;, which is useful to demonstrate how folks can synthesize events to
+send to a Service or Broker when not initiated by a Broker invocation (e.g.
+implementing an event source)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The application will use &lt;code&gt;$K_SINK&lt;/code&gt;-mode whenever the environment variable is
+specified.&lt;/p&gt;
+&lt;p&gt;Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;release-0.22&amp;#34;&lt;/span&gt; https://github.com/knative/docs knative-docs
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; knative-docs/docs/serving/samples/cloudevents/cloudevents-go
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with Knative installed and DNS configured. Follow the
+&lt;a href=&#34;../../../../install/index.html&#34;&gt;installation instructions&lt;/a&gt; if you need to
+create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;Docker&lt;/a&gt; installed and running on your local machine,
+and a Docker Hub account configured (we&amp;rsquo;ll use it for a container registry).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-sample-code&#34;&gt;The sample code.&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you look in &lt;code&gt;cloudevents.go&lt;/code&gt;, you will see two key functions for the
+different modes of operation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;recv&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Receiver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ReceiveAndSend&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;event&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cloudevents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cloudevents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This is called whenever an event is received if $K_SINK is set, and sends a new event
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// to the url in $K_SINK.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;recv&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Receiver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ReceiveAndReply&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ctx&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;event&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cloudevents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudevents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cloudevents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This is called whenever an event is received if $K_SINK is NOT set, and it replies with
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// the new event instead.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Choose how you would like to build the application:&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_go_build&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_go_build-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_go_build-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_go_build-0&#34; aria-selected=&#34;true&#34;&gt;Dockerfile&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_go_build-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_go_build-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_go_build-1&#34; aria-selected=&#34;true&#34;&gt;ko&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_go_build-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_go_build-0-tab&#34;&gt;
+    
+      &lt;p&gt;If you look in &lt;code&gt;Dockerfile&lt;/code&gt;, you will see a method for pulling in the
+dependencies and building a small Go container based on Alpine. You can build
+and push this to your registry of choice via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker build -t &amp;lt;image&amp;gt; .
+docker push &amp;lt;image&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_go_build-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_go_build-1-tab&#34;&gt;
+    
+      &lt;p&gt;You can use &lt;a href=&#34;https://github.com/google/ko&#34;&gt;&lt;code&gt;ko&lt;/code&gt;&lt;/a&gt; to build and push just the image with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;However, if you use &lt;code&gt;ko&lt;/code&gt; for the next step, this is not necessary.&lt;/p&gt;
+
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Choose how you would like to deploy the application:&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_go_deploy&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_go_deploy-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_go_deploy-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_go_deploy-0&#34; aria-selected=&#34;true&#34;&gt;yaml (with Dockerfile)&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_go_deploy-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_go_deploy-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_go_deploy-1&#34; aria-selected=&#34;true&#34;&gt;yaml (with ko)&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_go_deploy-2-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_go_deploy-2&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_go_deploy-2&#34; aria-selected=&#34;true&#34;&gt;kn (with Dockerfile)&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_go_deploy-3-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_go_deploy-3&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_go_deploy-3&#34; aria-selected=&#34;true&#34;&gt;kn (with ko)&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_go_deploy-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_go_deploy-0-tab&#34;&gt;
+    
+      &lt;p&gt;If you look in &lt;code&gt;service.yaml&lt;/code&gt;, take the &lt;code&gt;&amp;lt;image&amp;gt;&lt;/code&gt; name above and insert it
+into the &lt;code&gt;image:&lt;/code&gt; field, then run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_go_deploy-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_go_deploy-1-tab&#34;&gt;
+    
+      &lt;p&gt;If using &lt;code&gt;ko&lt;/code&gt; to build and push:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ko apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_go_deploy-2&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_go_deploy-2-tab&#34;&gt;
+    
+      &lt;p&gt;If using &lt;code&gt;kn&lt;/code&gt; to deploy:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service create cloudevents-go --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;IMAGE&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_go_deploy-3&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_go_deploy-3-tab&#34;&gt;
+    
+      &lt;p&gt;You can compose &lt;code&gt;kn&lt;/code&gt; and &lt;code&gt;ko&lt;/code&gt; to build and deploy with a single step using:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service create cloudevents-go --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;ko publish github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;testing-the-sample&#34;&gt;Testing the sample&lt;/h2&gt;
+&lt;p&gt;Get the URL for your Service with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl get ksvc
+NAME             URL                                            LATESTCREATED          LATESTREADY            READY   REASON
+cloudevents-go   http://cloudevents-go.default.1.2.3.4.xip.io   cloudevents-go-ss5pj   cloudevents-go-ss5pj   True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then send a cloud event to it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ curl -X POST &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-go.default.1.2.3.4.xip.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will get back:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Hello, Dave&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service record:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Cloud Events - Java and Spring</title>
+      <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-spring/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-spring/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A simple web app written in Java using Spring Cloud Function that can receive CloudEvents. It
+supports running in two modes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The default mode has the app reply to your input events with the output
+event, which is simplest for demonstrating things working in isolation, but
+is also the model for working with the Knative Eventing &lt;code&gt;Broker&lt;/code&gt; concept. The
+input event is modified assigning a new source and type attribute.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;K_SINK&lt;/code&gt; mode has the app send events to the destination encoded in
+&lt;code&gt;$K_SINK&lt;/code&gt;, which is useful to demonstrate how folks can synthesize events to
+send to a Service or Broker when not initiated by a Broker invocation (e.g.
+implementing an event source). The input event is modified assigning a new
+source and type attribute.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The application will use &lt;code&gt;$K_SINK&lt;/code&gt;-mode whenever the environment variable is
+specified.&lt;/p&gt;
+&lt;p&gt;Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;release-0.22&amp;#34;&lt;/span&gt; https://github.com/knative/docs knative-docs
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; knative-docs/docs/serving/samples/cloudevents/cloudevents-spring
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with Knative installed and DNS configured. Follow the
+&lt;a href=&#34;../../../../install/index.html&#34;&gt;installation instructions&lt;/a&gt; if you need to
+create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;Docker&lt;/a&gt; installed and running on your local machine,
+and a Docker Hub account configured (we&amp;rsquo;ll use it for a container registry).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;build-and-deploy-the-sample&#34;&gt;Build and deploy the sample&lt;/h2&gt;
+&lt;p&gt;To build the image, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mvn compile jib:build -Dimage&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;image_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To deploy the Knative Service, edit the &lt;code&gt;service.yaml&lt;/code&gt; file and replace &lt;code&gt;&amp;lt;image&amp;gt;&lt;/code&gt;
+with the deployed image name. Then run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;testing-the-sample&#34;&gt;Testing the sample&lt;/h2&gt;
+&lt;p&gt;Get the URL for your Service with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl get ksvc
+NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
+cloudevents-spring   http://cloudevents-java.xip.io                 cloudevents-spring-86h28   cloudevents-spring-86h28   True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then send a CloudEvent to it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ curl &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -X POST -v &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: http://curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-java.xip.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also send CloudEvents spawning a temporary curl pod in your cluster
+with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl run curl &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;curlimages/curl --rm&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; --restart&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;Never -ti -- &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -X POST -v &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: http://curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-java.default.svc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You&amp;rsquo;ll see on the console:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&amp;gt; POST / HTTP/1.1
+&amp;gt; Host: localhost:8080
+&amp;gt; User-Agent: curl/7.69.1
+&amp;gt; Accept: */*
+&amp;gt; content-type: application/json
+&amp;gt; ce-specversion: 1.0
+&amp;gt; ce-source: http://curl-command
+&amp;gt; ce-type: curl.demo
+&amp;gt; ce-id: 123-abc
+&amp;gt; Content-Length: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;
+&amp;gt;
+&amp;lt; HTTP/1.1 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;202&lt;/span&gt; Accepted
+&amp;lt; ce-specversion: 1.0
+&amp;lt; ce-id: 123-abc
+&amp;lt; ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-spring
+&amp;lt; ce-type: curl.demo
+&amp;lt; content-type: application/json
+&amp;lt; content-length: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;
+&amp;lt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Dave&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service record:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment-1&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service:&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_spring_delete&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_spring_delete-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_spring_delete-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_spring_delete-0&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_spring_delete-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_spring_delete-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_spring_delete-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_spring_delete-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_spring_delete-0-tab&#34;&gt;
+    
+      &lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_spring_delete-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_spring_delete-1-tab&#34;&gt;
+    
+      &lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service delete cloudevents-spring
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Cloud Events - Java and Vert.x</title>
+      <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-vertx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-vertx/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A simple web app written in Java using Vert.x that can receive CloudEvents. It
+supports running in two modes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The default mode has the app reply to your input events with the output
+event, which is simplest for demonstrating things working in isolation, but
+is also the model for working for the Knative Eventing &lt;code&gt;Broker&lt;/code&gt; concept. The
+input event is modified assigning a new source and type attribute.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;K_SINK&lt;/code&gt; mode has the app send events to the destination encoded in
+&lt;code&gt;$K_SINK&lt;/code&gt;, which is useful to demonstrate how folks can synthesize events to
+send to a Service or Broker when not initiated by a Broker invocation (e.g.
+implementing an event source). The input event is modified assigning a new
+source and type attribute.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The application will use &lt;code&gt;$K_SINK&lt;/code&gt;-mode whenever the environment variable is
+specified.&lt;/p&gt;
+&lt;p&gt;Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;release-0.22&amp;#34;&lt;/span&gt; https://github.com/knative/docs knative-docs
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; knative-docs/docs/serving/samples/cloudevents/cloudevents-vertx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with Knative installed and DNS configured. Follow the
+&lt;a href=&#34;../../../../install/index.html&#34;&gt;installation instructions&lt;/a&gt; if you need to
+create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;Docker&lt;/a&gt; installed and running on your local machine,
+and a Docker Hub account configured (we&amp;rsquo;ll use it for a container registry).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;build-and-deploy-the-sample&#34;&gt;Build and deploy the sample&lt;/h2&gt;
+&lt;p&gt;To build the image, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mvn compile jib:build -Dimage&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;image_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_vertx_deploy&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_vertx_deploy-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_vertx_deploy-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_vertx_deploy-0&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_vertx_deploy-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_vertx_deploy-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_vertx_deploy-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_vertx_deploy-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_vertx_deploy-0-tab&#34;&gt;
+    
+      &lt;p&gt;To deploy the Knative Service, look in the &lt;code&gt;service.yaml&lt;/code&gt; and replace &lt;code&gt;&amp;lt;image&amp;gt;&lt;/code&gt; with the deployed image name. Then run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_vertx_deploy-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_vertx_deploy-1-tab&#34;&gt;
+    
+      &lt;p&gt;If using &lt;code&gt;kn&lt;/code&gt; to deploy:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service create cloudevents-vertx --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;image&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;testing-the-sample&#34;&gt;Testing the sample&lt;/h2&gt;
+&lt;p&gt;Get the URL for your Service with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl get ksvc
+NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
+cloudevents-vertx   http://cloudevents-java.xip.io                 cloudevents-vertx-86h28   cloudevents-vertx-86h28   True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then send a CloudEvent to it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ curl &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -X POST -v &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: http://curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-java.xip.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also send CloudEvents spawning a temporary curl pod in your cluster
+with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl run curl &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;curlimages/curl --rm&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; --restart&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;Never -ti -- &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -X POST -v &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: http://curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-java.default.svc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You&amp;rsquo;ll see on the console:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&amp;gt; POST / HTTP/1.1
+&amp;gt; Host: localhost:8080
+&amp;gt; User-Agent: curl/7.69.1
+&amp;gt; Accept: */*
+&amp;gt; content-type: application/json
+&amp;gt; ce-specversion: 1.0
+&amp;gt; ce-source: http://curl-command
+&amp;gt; ce-type: curl.demo
+&amp;gt; ce-id: 123-abc
+&amp;gt; Content-Length: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;
+&amp;gt;
+&amp;lt; HTTP/1.1 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;202&lt;/span&gt; Accepted
+&amp;lt; ce-specversion: 1.0
+&amp;lt; ce-id: 123-abc
+&amp;lt; ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-vertx
+&amp;lt; ce-type: curl.demo
+&amp;lt; content-type: application/json
+&amp;lt; content-length: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;
+&amp;lt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Dave&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service:&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_vertx_delete&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_vertx_delete-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_vertx_delete-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_vertx_delete-0&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_vertx_delete-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_vertx_delete-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_vertx_delete-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_vertx_delete-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_vertx_delete-0-tab&#34;&gt;
+    
+      &lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_vertx_delete-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_vertx_delete-1-tab&#34;&gt;
+    
+      &lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service delete cloudevents-vertx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Cloud Events - Node.js</title>
+      <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-nodejs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-nodejs/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A simple web app written in Node.js that can receive and send Cloud Events that you
+can use for testing. It supports running in two modes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The default mode has the app reply to your input events with the output
+event, which is simplest for demonstrating things working in isolation, but
+is also the model for working for the Knative Eventing &lt;code&gt;Broker&lt;/code&gt; concept.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;K_SINK&lt;/code&gt; mode has the app send events to the destination encoded in
+&lt;code&gt;$K_SINK&lt;/code&gt;, which is useful to demonstrate how folks can synthesize events to
+send to a Service or Broker when not initiated by a Broker invocation (e.g.
+implementing an event source)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The application will use &lt;code&gt;$K_SINK&lt;/code&gt;-mode whenever the environment variable is
+specified.&lt;/p&gt;
+&lt;p&gt;Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample, by running the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;{{&amp;lt; branch &amp;gt;}}&amp;#34;&lt;/span&gt; https://github.com/knative/docs knative-docs
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with Knative installed and DNS configured. Follow the
+&lt;a href=&#34;../../../../install/index.html&#34;&gt;installation instructions&lt;/a&gt; if you need to
+create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;Docker&lt;/a&gt; installed and running on your local machine,
+and a Docker Hub account configured (we&amp;rsquo;ll use it for a container registry).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-sample-code&#34;&gt;The Sample Code&lt;/h2&gt;
+&lt;p&gt;In the &lt;code&gt;index.js&lt;/code&gt; file, you will see two key functions for the different modes
+of operation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;receiveAndSend&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;res&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This is called whenever an event is received if $K_SINK is set, and sends a new event
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// to the url in $K_SINK.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;receiveAndReply&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudEvent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;res&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This is called whenever an event is received if $K_SINK is NOT set, and it replies with
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// the new event instead.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;build-and-deploy-the-application&#34;&gt;Build and Deploy the Application&lt;/h2&gt;
+&lt;p&gt;In the &lt;code&gt;Dockerfile&lt;/code&gt;, you can see how the dependencies are installed using npm.
+You can build and push this to your registry of choice via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker build -t &amp;lt;image&amp;gt; .
+docker push &amp;lt;image&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;{{&amp;lt; tabs name=&amp;ldquo;cloudevents_nodejs_deploy&amp;rdquo; default=&amp;ldquo;kn&amp;rdquo; &amp;gt;}} {{% tab name=&amp;ldquo;yaml&amp;rdquo; %}}&lt;/p&gt;
+&lt;p&gt;To deploy the Knative service, edit the &lt;code&gt;service.yaml&lt;/code&gt; file and replace
+&lt;code&gt;&amp;lt;registry/repository/image:tag&amp;gt;&lt;/code&gt; with the image you have just created.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;{{&amp;lt; /tab &amp;gt;}} {{% tab name=&amp;ldquo;kn&amp;rdquo; %}}&lt;/p&gt;
+&lt;p&gt;To deploy using the &lt;code&gt;kn&lt;/code&gt; CLI:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service create cloudevents-nodejs --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;image&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;{{ /tab }}{{ /tabs }}&lt;/p&gt;
+&lt;h2 id=&#34;testing-the-sample&#34;&gt;Testing the sample&lt;/h2&gt;
+&lt;p&gt;Get the URL for your Service with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl get ksvc
+NAME                 URL                                                LATESTCREATED              LATESTREADY                READY   REASON
+cloudevents-nodejs   http://cloudevents-nodejs.default.1.2.3.4.xip.io   cloudevents-nodejs-ss5pj   cloudevents-nodejs-ss5pj   True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then send a cloud event to it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ curl -X POST &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-nodejs.default.1.2.3.4.xip.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will get back:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Hello, Dave&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service.&lt;/p&gt;
+&lt;p&gt;{{&amp;lt; tabs name=&amp;ldquo;cloudevents_nodejs_delete&amp;rdquo; default=&amp;ldquo;kn&amp;rdquo; &amp;gt;}} {{% tab name=&amp;ldquo;yaml&amp;rdquo; %}}&lt;/p&gt;
+&lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;{{&amp;lt; /tab &amp;gt;}} {{% tab name=&amp;ldquo;kn&amp;rdquo; %}}&lt;/p&gt;
+&lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service delete cloudevents-nodejs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;{{ /tab }}{{ /tabs }}&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Cloud Events - Rust</title>
+      <link>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-rust/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/samples/cloudevents/cloudevents-rust/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A simple web app written in Rust using &lt;a href=&#34;https://github.com/actix/actix-web&#34;&gt;Actix web&lt;/a&gt;
+that can receive CloudEvents. It supports running in two modes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The default mode has the app reply to your input events with the output
+event, which is simplest for demonstrating things working in isolation, but
+is also the model for working for the Knative Eventing &lt;code&gt;Broker&lt;/code&gt; concept.
+The input event is modified assigning a new source and type attribute.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;K_SINK&lt;/code&gt; mode has the app send events to the destination encoded in
+&lt;code&gt;$K_SINK&lt;/code&gt;, which is useful to demonstrate how folks can synthesize events to
+send to a Service or Broker when not initiated by a Broker invocation (e.g.
+implementing an event source).
+The input event is modified assigning a new source and type attribute.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The application will use &lt;code&gt;$K_SINK&lt;/code&gt;-mode whenever the environment variable is
+specified.&lt;/p&gt;
+&lt;p&gt;Follow the steps below to create the sample code and then deploy the app to your
+cluster. You can also download a working copy of the sample by running the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;release-0.22&amp;#34;&lt;/span&gt; https://github.com/knative/docs knative-docs
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; knative-docs/docs/serving/samples/cloudevents/cloudevents-rust
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with Knative installed and DNS configured. Follow the
+&lt;a href=&#34;../../../../install/index.html&#34;&gt;installation instructions&lt;/a&gt; if you need to
+create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;Docker&lt;/a&gt; installed and running on your local machine,
+and a Docker Hub account configured (we&amp;rsquo;ll use it for a container registry).&lt;/li&gt;
+&lt;li&gt;This guide uses Rust &lt;code&gt;musl&lt;/code&gt; toolchain to build the image in order to create
+really small docker images. To install the Rust toolchain: &lt;a href=&#34;https://rustup.rs/&#34;&gt;&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;.
+To install musl support: &lt;a href=&#34;https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html&#34;&gt;MUSL support for fully static binaries&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;build-and-deploy-the-sample&#34;&gt;Build and deploy the sample&lt;/h2&gt;
+&lt;p&gt;To build the binary, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cargo build --target x86_64-unknown-linux-musl --release
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will build a statically linked binary, in order to create an image from scratch. Now build the docker image:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker build -t &amp;lt;image&amp;gt; .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_rust_deploy&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_rust_deploy-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_rust_deploy-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_rust_deploy-0&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_rust_deploy-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_rust_deploy-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_rust_deploy-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_rust_deploy-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_rust_deploy-0-tab&#34;&gt;
+    
+      &lt;p&gt;To deploy the Knative Service, look in the &lt;code&gt;service.yaml&lt;/code&gt; and replace &lt;code&gt;&amp;lt;image&amp;gt;&lt;/code&gt; with the deployed image name. Then run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_rust_deploy-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_rust_deploy-1-tab&#34;&gt;
+    
+      &lt;p&gt;If using &lt;code&gt;kn&lt;/code&gt; to deploy:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service create cloudevents-rust --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;image&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;testing-the-sample&#34;&gt;Testing the sample&lt;/h2&gt;
+&lt;p&gt;Get the URL for your Service with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl get ksvc
+NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
+cloudevents-rust    http://cloudevents-rust.xip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then send a CloudEvent to it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ curl &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -X POST -v &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: http://curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-rust.xip.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also send CloudEvents spawning a temporary curl pod in your cluster with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ kubectl run curl &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;curlimages/curl --rm&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; --restart&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;Never -ti -- &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -X POST -v &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;content-type: application/json&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-specversion: 1.0&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-source: http://curl-command&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-type: curl.demo&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ce-id: 123-abc&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;name&amp;#34;:&amp;#34;Dave&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    http://cloudevents-rust.default.svc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You&amp;rsquo;ll get as result:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&amp;gt; POST / HTTP/1.1
+&amp;gt; Host: localhost:8080
+&amp;gt; User-Agent: curl/7.69.1
+&amp;gt; Accept: */*
+&amp;gt; content-type: application/json
+&amp;gt; ce-specversion: 1.0
+&amp;gt; ce-source: http://curl-command
+&amp;gt; ce-type: curl.demo
+&amp;gt; ce-id: 123-abc
+&amp;gt; Content-Length: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;
+&amp;gt;
+&amp;lt; HTTP/1.1 &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;200&lt;/span&gt; OK
+&amp;lt; content-length: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;
+&amp;lt; content-type: application/json
+&amp;lt; ce-specversion: 1.0
+&amp;lt; ce-id: 123-abc
+&amp;lt; ce-type: dev.knative.docs.sample
+&amp;lt; ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust
+&amp;lt; date: Sat, &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;23&lt;/span&gt; May &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2020&lt;/span&gt; 09:00:01 GMT
+&amp;lt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Dave&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-the-sample-app-deployment&#34;&gt;Removing the sample app deployment&lt;/h2&gt;
+&lt;p&gt;To remove the sample app from your cluster, delete the service.&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;cloudevents_rust_delete&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;cloudevents_rust_delete-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_rust_delete-0&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_rust_delete-0&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;cloudevents_rust_delete-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#cloudevents_rust_delete-1&#34; role=&#34;tab&#34; aria-controls=&#34;cloudevents_rust_delete-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;cloudevents_rust_delete-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_rust_delete-0-tab&#34;&gt;
+    
+      &lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;cloudevents_rust_delete-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;cloudevents_rust_delete-1-tab&#34;&gt;
+    
+      &lt;p&gt;Run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn service delete cloudevents-rust
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

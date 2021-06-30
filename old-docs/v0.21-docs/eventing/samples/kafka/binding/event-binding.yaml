@@ -1,0 +1,63 @@
+# Copyright 2020 The Knative Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Replace the following before applying this file:
+#   KAFKA_CONSUMER_GROUP_NAME: Name of Kafka consumer group
+#   KAFKA_BOOTSTRAP_SERVERS: Array of bootstrap servers
+#   KAFKA_SASL_ENABLE: Truthy value to enable/disable SASL, disabled by default (optional)
+#   KAFKA_SASL_USER_SECRET_NAME: Name of secret containing SASL user (optional)
+#   KAFKA_SASL_USER_SECRET_KEY: Key within secret containing SASL user (optional)
+#   KAFKA_SASL_PASSWORD_SECRET_NAME: Name of secret containing SASL password (optional)
+#   KAFKA_SASL_PASSWORD_SECRET_KEY: Key within secret containing SASL password (optional)
+#   KAFKA_TLS_ENABLE: Truthy to enable TLS, disabled by default (optional)
+#   KAFKA_TLS_CERT_SECRET_NAME: Name of secret containing client cert to use when connecting with TLS (optional)
+#   KAFKA_TLS_CERT_SECRET_KEY: Key within secret containing client cert to use when connecting with TLS (optional)
+#   KAFKA_TLS_KEY_SECRET_NAME: Name of secret containing client key to use when connecting with TLS (optional)
+#   KAFKA_TLS_KEY_SECRET_KEY: Key within secret containing client key to use when connecting with TLS (optional)
+#   KAFKA_TLS_CA_CERT_SECRET_NAME: Name of secret containing server CA cert to use when connecting with TLS (optional)
+#   KAFKA_TLS_CA_CERT_SECRET_KEY: Key within secret containing server CA cert to use when connecting with TLS (optional)
+
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaBinding
+metadata:
+  name: kafka-binding
+spec:
+  consumerGroup: KAFKA_CONSUMER_GROUP_NAME
+  bootstrapServers:
+    - KAFKA_BOOTSTRAP_SERVERS
+  net:
+    sasl:
+      enable: KAFKA_SASL_ENABLE
+      user:
+        secretKeyRef:
+          name: KAFKA_SASL_USER_SECRET_NAME
+          key: KAFKA_SASL_USER_SECRET_KEY
+      password:
+        secretKeyRef:
+          name: KAFKA_SASL_PASSWORD_SECRET_NAME
+          key: KAFKA_SASL_PASSWORD_SECRET_KEY
+    tls:
+      enable: KAFKA_TLS_ENABLE
+      cert:
+        secretKeyRef:
+          name: KAFKA_TLS_CERT_SECRET_NAME
+          key: KAFKA_TLS_CERT_SECRET_KEY
+      key:
+        secretKeyRef:
+          name: KAFKA_TLS_KEY_SECRET_NAME
+          key: KAFKA_TLS_KEY_SECRET_KEY
+      caCert:
+        secretKeyRef:
+          name: KAFKA_TLS_CA_CERT_SECRET_NAME
+          key: KAFKA_TLS_CA_CERT_SECRET_KEY
