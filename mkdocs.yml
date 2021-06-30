@@ -249,7 +249,7 @@ nav:
 theme:
   name: material
   logo: images/logo/rgb/knative-logo-rgb.png
-  favicon: images/knative-sm.png
+  favicon: images/favicon.ico
   custom_dir: overrides
   features:
     - navigation.tabs
