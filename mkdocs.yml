@@ -63,9 +63,15 @@ nav:
         - Knative Eventing configuration:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
           - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
+    #
+    #
+    #
+    #
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
+        #
+        # Serving - dev guide
         - Knative Serving:
           - Services:
             - About Knative Services: developer/serving/services/README.md
@@ -75,6 +81,8 @@ nav:
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+        #
+        # Eventing - dev guide
         - Knative Eventing:
           - Event sources:
             - ApiServerSource:
@@ -84,13 +92,21 @@ nav:
             - ContainerSource:
               - Creating a ContainerSource object: developer/eventing/sources/containersource/README.md
               - ContainerSource Reference: developer/eventing/sources/containersource/reference.md
+            - Create your own event source:
+              - Overview: developer/eventing/sources/creating-event-sources/README.md
+              - Using a ContainerSource: developer/eventing/sources/creating-event-sources/container-source.md
           - Event delivery: developer/eventing/event-delivery.md
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
             - KafkaSink: developer/eventing/sinks/kafka-sink.md
-    # Developer concepts
+        #
+        # Concepts - dev guide
         - Concepts:
           - Duck typing: developer/concepts/duck-typing.md
+    #
+    #
+    #
+    #
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -302,6 +318,7 @@ plugins:
   # Redirects
   - redirects:
       redirect_maps:
+        eventing/sources/creating-event-sources/README.md: developer/eventing/sources/creating-event-sources/README.md
         admin/install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
         admin/install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
         client/connecting-kn-to-your-cluster/index.md: client/README.md
