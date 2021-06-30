@@ -31,9 +31,9 @@
 |In the preceding output, you can see...| In the preceding output, we can see ...
 |This page teaches you how to use pods.    | In this page, we are going to learn about pods.
 
-## Avoid jargon and idioms
+## Avoid jargon, idioms, and Latin
 
-> Some readers speak English as a second language. Avoid jargon and idioms to help
+> Some readers speak English as a second language. Avoid jargon, idioms, and Latin to help
 make their understanding easier.
 
 |:white_check_mark: Correct                    |:no_entry: Incorrect
@@ -41,6 +41,8 @@ make their understanding easier.
 |Internally, ...       | Under the hood, ...
 |Create a new cluster. | Turn up a new cluster.
 |Initially, ...        | Out of the box, ...
+|For example, ...      | e.g., ...
+|Enter through the gateway ...      | Enter via the gateway ...
 
 ## Avoid statements about the future
 

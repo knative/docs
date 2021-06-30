@@ -1,0 +1,32 @@
+# List of available Channel implementation for persistence of the events associated with a given channel
+channels:
+  - name: InMemoryChannel
+    url: https://github.com/knative/eventing/tree/{{< branch >}}/config/channels/in-memory-channel/README.md
+    status: Proof of Concept
+    support: None
+    description: >
+      In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
+  - name: KafkaChannel
+    url: https://github.com/knative-sandbox/eventing-kafka/tree/{{< branch >}}/pkg/channel/consolidated/README.md
+    status: Proof of Concept
+    support: None
+    description: >
+      Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
+  - name: NatssChannel
+    url: https://github.com/knative-sandbox/eventing-natss/tree/{{< branch >}}/config/README.md
+    status: Proof of Concept
+    support: None
+    description: >
+      Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
+  - name: GCP PubSub
+    url: https://github.com/google/knative-gcp
+    status: Proof of Concept
+    support: None
+    description: >
+      Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
+  - name: Knative sandbox channel that uses Confluent Go Client, and the librdkafka C library
+    url: https://github.com/knative-sandbox/eventing-kafka
+    status: Proof of Concept
+    support: None
+    description: >
+      Kafka Channel implementation, contributed by SAP's Kyma project, is a Knative Eventing implementation of a Kafka backed channel which provides advanced functionality and production grade qualities.

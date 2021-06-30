@@ -34,7 +34,7 @@ The scale of the `activator` component is governed by the Kubernetes HPA compone
 $ kubectl get hpa activator -n knative-serving
 ```
 
-The output will be something like:
+The output looks similar to the following:
 
 ```{ .bash .no-copy }
 NAME        REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE

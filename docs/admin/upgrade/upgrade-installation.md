@@ -90,7 +90,7 @@ activator-79f674fb7b-dgvss          2/2     Running       0          43s
 autoscaler-96dc49858-b24bm          2/2     Running       1          43s
 autoscaler-hpa-d887d4895-njtrb      1/1     Running       0          43s
 controller-6bcdd87fd6-zz9fx         1/1     Running       0          41s
-networking-istio-7fcd97cbf7-z2xmr   1/1     Running       0          40s
+net-istio-controller-7fcdf7-z2xmr   1/1     Running       0          40s
 webhook-747b799559-4sj6q            1/1     Running       0          41s
 ```
 

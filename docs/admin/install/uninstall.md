@@ -126,16 +126,6 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 
 
 
-=== "Gloo"
-
-    Uninstall Gloo and the Knative integration by running:
-
-       ```bash
-       glooctl uninstall knative
-       ```
-
-
-
 === "Istio"
 
     The following commands uninstall Istio and enable its Knative integration.
@@ -227,16 +217,6 @@ Uninstall any Eventing extensions you have installed by following the relevant p
 
     ```bash
     kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-github", file="mt-github.yaml") }}
-    ```
-
-
-
-=== "Apache Camel-K Source"
-
-    Uninstall the Apache Camel-K Source by running:
-
-    ```bash
-    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-camel", file="camel.yaml") }}
     ```
 
 

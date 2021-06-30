@@ -1,0 +1,34 @@
+apiVersion: flows.knative.dev/v1
+kind: Parallel
+metadata:
+  name: odd-even-parallel
+spec:
+  channelTemplate:
+    apiVersion: messaging.knative.dev/v1
+    kind: InMemoryChannel
+  branches:
+  - filter:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: even-filter
+    subscriber:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: even-transformer
+  - filter:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: odd-filter
+    subscriber:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: odd-transformer
+  reply:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display

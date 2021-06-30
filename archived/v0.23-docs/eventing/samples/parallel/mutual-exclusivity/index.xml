@@ -1,0 +1,17 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Mutual Exclusive Cases</title>
+    <link>https://knative.dev/docs/eventing/samples/parallel/mutual-exclusivity/</link>
+    <description>Recent content in Mutual Exclusive Cases on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/docs/eventing/samples/parallel/mutual-exclusivity/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

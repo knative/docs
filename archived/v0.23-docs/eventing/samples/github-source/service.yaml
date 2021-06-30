@@ -1,0 +1,10 @@
+# This is a very simple Knative Service that writes the input request to its log.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: github-message-dumper
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
