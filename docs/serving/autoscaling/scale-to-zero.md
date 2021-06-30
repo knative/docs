@@ -7,13 +7,15 @@ type: "docs"
 
 # Configuring scale to zero
 
-**IMPORTANT:** Scale to zero can only be enabled if you are using the Knative Pod Autoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Autoscaling concepts](./autoscaling-concepts.md).
+!!! warning
+    Scale to zero can only be enabled if you are using the KnativePodAutoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Autoscaling concepts](./autoscaling-concepts.md).
 
 ## Enable scale to zero
 
 The scale to zero value controls whether Knative allows replicas to scale down to zero (if set to `true`), or stop at 1 replica if set to `false`.
 
-**NOTE:** For more information about scale bounds configuration per revision, see the documentation on [Configuring scale bounds](./scale-bounds.md).
+!!! note
+    For more information about scale bounds configuration per Revision, see the documentation on [Configuring scale bounds](./scale-bounds.md).
 
 * **Global key:** `enable-scale-to-zero`
 * **Per-revision annotation key:** No per-revision setting.
@@ -52,7 +54,8 @@ The scale to zero value controls whether Knative allows replicas to scale down t
 
 This setting specifies an upper bound time limit that the system will wait internally for scale-from-zero machinery to be in place before the last replica is removed.
 
-**IMPORTANT:** This is a value that controls how long internal network programming is allowed to take, and should only be adjusted if you have experienced issues with requests being dropped while a revision was scaling to zero replicas.
+!!! warning
+    This is a value that controls how long internal network programming is allowed to take, and should only be adjusted if you experience issues with requests being dropped while a Revision is scaling to zero Replicas.
 
 This setting does not adjust how long the last replica will be kept after traffic ends, and it does not guarantee that the replica will actually be kept for this entire duration.
 
@@ -142,6 +145,3 @@ This contrasts with the `scale-to-zero-grace-period` flag, which determines the 
         autoscaler:
           scale-to-zero-pod-retention-period: "42s"
     ```
-
-
-

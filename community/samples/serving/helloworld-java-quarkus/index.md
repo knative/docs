@@ -53,7 +53,7 @@ which you update and create the necessary build and configuration files:
 1. From the console, create a new empty web project using the Maven archetype
    commands:
 
-   ```shell
+   ```bash
    mvn io.quarkus:quarkus-maven-plugin:0.13.3:create \
     -DprojectGroupId=com.redhat.developer.demos \
     -DprojectArtifactId=helloworld-java-quarkus \
@@ -129,13 +129,13 @@ which you update and create the necessary build and configuration files:
 1. Remove `src/main/resources/META-INF/resources/index.html` file since it's
    unncessary for this example.
 
-   ```shell
+   ```bash
    rm src/main/resources/META-INF/resources/index.html
    ```
 
 1. Remove `.dockerignore` file since it's unncessary for this example.
 
-   ```shell
+   ```bash
    rm .dockerignore
    ```
 
@@ -206,7 +206,7 @@ which you update and create the necessary build and configuration files:
 
 1. Run the application locally:
 
-   ```shell
+   ```bash
    ./mvnw compile quarkus:dev
    ```
 
@@ -221,7 +221,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/helloworld-java-quarkus .
 
@@ -238,7 +238,7 @@ folder) you're ready to build and deploy the sample app.
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
 
-   ```shell
+   ```bash
    kubectl apply --filename service.yaml
    ```
 
@@ -251,7 +251,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
 
-   ```shell
+   ```bash
    kubectl get ksvc helloworld-java-quarkus
 
    NAME                     URL
@@ -261,7 +261,7 @@ folder) you're ready to build and deploy the sample app.
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://helloworld-java-quarkus.default.1.2.3.4.sslip.io
 
    Namaste Knative World!
@@ -271,6 +271,6 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

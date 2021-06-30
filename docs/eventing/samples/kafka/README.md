@@ -25,11 +25,11 @@ If you want to run the Apache Kafka cluster on Kubernetes, the simplest option
 is to install it by using [Strimzi](https://strimzi.io).
 
 1. Create a namespace for your Apache Kafka installation, like `kafka`:
-   ```shell
+   ```bash
    kubectl create namespace kafka
    ```
 1. Install the Strimzi operator, like:
-   ```shell
+   ```bash
    curl -L "https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.16.2/strimzi-cluster-operator-0.16.2.yaml" \
      | sed 's/namespace: .*/namespace: kafka/' \
      | kubectl -n kafka apply -f -
@@ -71,7 +71,7 @@ This will install a small, non-production, cluster of Apache Kafka. To verify
 your installation, check if the pods for Strimzi are all up, in the `kafka`
 namespace:
 
-```shell
+```bash
 $ kubectl get pods -n kafka
 NAME                                          READY   STATUS    RESTARTS   AGE
 my-cluster-entity-operator-65995cf856-ld2zp   3/3     Running   0          102s
@@ -90,7 +90,7 @@ If you want to install the latest version of Strimzi, in just one step, we have
 a [script](./kafka_setup.sh) for your convenience, which does exactly the same
 steps that are listed above:
 
-```shell
+```bash
 $ ./kafka_setup.sh
 ```
 

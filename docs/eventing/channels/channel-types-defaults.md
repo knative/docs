@@ -57,4 +57,5 @@ data:
 
 ## Next steps
 
-- [Create a Channel using cluster or namespace defaults](/eventing/channels/create-default-channel)
+
+- Create an [InMemoryChannel](../create-default-channel)

@@ -263,17 +263,6 @@ The tabs below expand to show instructions for installing each Eventing extensio
     To learn more about the Github source, try
     [our sample](../../../../eventing/sources/github-source/)
 
-=== "Apache Camel-K Source"
-
-    The following command installs the Apache Camel-K Source:
-
-    ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-camel",file="camel.yaml")}}
-    ```
-
-    To learn more about the Apache Camel-K source, try
-    [our sample](../../../../eventing/sources/apache-camel-source/)
-
 === "Apache Kafka Source"
 
     The following command installs the Apache Kafka Source:

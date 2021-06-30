@@ -142,7 +142,7 @@ extending our `traffic` list, and splitting the `percent` across them.
    split evenly between `Welcome to the share app!` and
    `Welcome to the stock app!`.
 
-    ```shell
+    ```bash
     curl --header "Host:${SERVICE_HOSTNAME}" http://${INGRESS_IP}
     ```
 

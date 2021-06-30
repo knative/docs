@@ -14,21 +14,21 @@ The Source object defines the arguments and parameters needed to instantiate a C
 
 All Sources are part of the `sources` category.
 
+=== "kn"
+    You can list existing event sources on your cluster by entering the kn command:
+
+    ```bash
+    kn source list
+    ```
+
 === "kubectl"
     You can list existing event sources on your cluster by entering the command:
 
-    ```shell
+    ```bash
     kubectl get sources
     ```
 
 
-
-=== "kn"
-    You can list existing event sources on your cluster by entering the kn command:
-
-    ```shell
-    kn source list
-    ```
 
 
 
@@ -39,7 +39,7 @@ All Sources are part of the `sources` category.
 | -- | -- | -- | -- |
 | [APIServerSource](./apiserversource) | v1 | Knative  | Brings Kubernetes API server events into Knative. The APIServerSource fires a new event each time a Kubernetes resource is created, updated or deleted. |
 | [AWS SQS](https://github.com/knative-sandbox/eventing-awssqs/tree/main/samples)  | v1alpha1 | Knative | Brings [AWS Simple Queue Service](https://aws.amazon.com/sqs/) messages into Knative. The AwsSqsSource fires a new event each time an event is published on an [AWS SQS topic](https://aws.amazon.com/sqs/).  |
-| [Apache Camel](./apache-camel-source) | v1alpha1   | Knative    | Enables use of [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative. A CamelSource is an event source that can represent any existing [Apache Camel component](https://github.com/apache/camel/tree/master/components), that provides a consumer side, and enables publishing events to an addressable endpoint. Each Camel endpoint has the form of a URI where the scheme is the ID of the component to use. CamelSource requires [Camel-K](https://github.com/apache/camel-k#installation) to be installed into the current namespace. See the [CamelSource](https://github.com/knative-sandbox/eventing-camel/tree/main/samples) example. |
+| [Apache Camel](./apache-camel-source) | N/A   | Apache Software Foundation    | Enables use of [Apache Camel](https://github.com/apache/camel) components for pushing events into Knative. Camel sources are now provided via [Kamelets](https://camel.apache.org/camel-kamelets/latest/) as part of the [Apache Camel K](https://camel.apache.org/camel-k/latest/installation/installation.html) project. |
 | [Apache CouchDB](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source)                                                   | v1alpha1 | Knative    | Brings [Apache CouchDB](https://couchdb.apache.org/) messages into Knative.  |
 | [Apache Kafka](../samples/kafka)       | v1beta1  | Knative    | Brings [Apache Kafka](https://kafka.apache.org/) messages into Knative. The KafkaSource reads events from an Apache Kafka Cluster, and passes these events to a sink so that they can be consumed. See the [Kafka Source](https://github.com/knative-sandbox/eventing-kafka/blob/main/pkg/source) example for more details.  |
 | [Container Source](./containersource.md)                    | v1 | Knative    | The ContainerSource will instantiate container image(s) that can generate events until the ContainerSource is deleted. This may be used, for example, to poll an FTP server for new files or generate events at a set time interval. Given a `spec.template` with at least a container image specified, ContainerSource will keep a `Pod` running with the specified image(s). `K_SINK` (destination address) and `KE_CE_OVERRIDES` (JSON CloudEvents attributes) environment variables are injected into the running image(s). It is used by multiple other Sources as underlying infrastructure. Refer to the [Container Source](./container-source) example for more details.  |
@@ -78,7 +78,7 @@ All Sources are part of the `sources` category.
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
 [RedisSource](https://github.com/knative-sandbox/eventing-redis/tree/main/source) | v1alpha1 | None | Brings Redis Stream into Knative.
 [Slack](https://github.com/triggermesh/knative-sources) | v1alpha1 | TriggerMesh | Subscribes to events from Slack.
-[VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/main/README.md) | Active Development | None | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
+[VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/main/README.md) | Active Development | VMware | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
 [Zendesk](https://github.com/triggermesh/knative-sources) | v1alpha1 | TriggerMesh | Subscribes to events from Zendesk.
 
 ## Additional resources

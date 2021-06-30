@@ -1,10 +1,3 @@
----
-title: "Configuring concurrency"
-linkTitle: "Configuring concurrency"
-weight: 40
-type: "docs"
----
-
 # Configuring concurrency
 
 Concurrency determines the number of simultaneous requests that can be processed by each replica of an application at any given time.
@@ -17,14 +10,16 @@ For global concurrency, you can set the `container-concurrency-target-default` v
 
 It is possible to set either a _soft_ or _hard_ concurrency limit.
 
-**NOTE:** If both a soft and a hard limit are specified, the smaller of the two values will be used. This prevents the Autoscaler from having a target value that is not permitted by the hard limit value.
+!!! note
+    If both a soft and a hard limit are specified, the smaller of the two values will be used. This prevents the Autoscaler from having a target value that is not permitted by the hard limit value.
 
 The soft limit is a targeted limit rather than a strictly enforced bound. In some situations, particularly if there is a sudden _burst_ of requests, this value can be exceeded.
 
 The hard limit is an enforced upper bound.
 If concurrency reaches the hard limit, surplus requests will be buffered and must wait until enough capacity is free to execute the requests.
 
-**IMPORTANT:** Using a hard limit configuration is only recommended if there is a clear use case for it with your application. Having a low hard limit specified may have a negative impact on the throughput and latency of an application, and may cause additional cold starts.
+!!! warning
+    Using a hard limit configuration is only recommended if there is a clear use case for it with your application. Having a low hard limit specified may have a negative impact on the throughput and latency of an application, and may cause additional cold starts.
 
 ### Soft limit
 
@@ -186,6 +181,3 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
         autoscaler:
           container-concurrency-target-percentage: "80"
     ```
-
-
-

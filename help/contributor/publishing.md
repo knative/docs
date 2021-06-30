@@ -45,14 +45,14 @@ details about installing the required software.
 
 1. Clone this repo (or your fork) using `--recurse-submodules`, like so:
 
-   ```shell
+   ```bash
    git clone --recurse-submodules https://github.com/knative/website.git
    ```
 
    If you accidentally cloned this repo without `--recurse-submodules`, you'll
    need to do the following inside the repo:
 
-   ```shell
+   ```bash
    git submodule init
    git submodule update
    cd themes/docsy
@@ -65,13 +65,13 @@ details about installing the required software.
 1. Clone the docs repo next to (_not inside_) the website repo. This allows you
    to test docs changes alongside the website:
 
-   ```shell
+   ```bash
    git clone https://github.com/knative/docs.git
    ```
 
    You may also want to clone the community repo:
 
-   ```shell
+   ```bash
    git clone https://github.com/knative/community.git
    ```
 
@@ -161,7 +161,7 @@ If you want to develop on a Mac, you'll find two obstacles:
 The scripts assume GNU `sed`. You can install this with
 [Homebrew](https://brew.sh/):
 
-```shell
+```bash
 brew install gnu-sed
 # You need to put it in your PATH before the built-in Mac sed
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
@@ -178,7 +178,7 @@ ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many ope
 
 You can fix this with the following (may be needed for each new shell):
 
-```shell
+```bash
 sudo launchctl limit maxfiles 65535 200000
 # Probably only need around 4k FDs, but 64k is defensive...
 ulimit -n 65535

@@ -47,14 +47,14 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 2. Deploy the `KafkaTopic`
 
-   ```shell
+   ```bash
    $ kubectl apply -f strimzi-topic.yaml
    kafkatopic.kafka.strimzi.io/knative-demo-topic created
    ```
 
 3. Ensure the `KafkaTopic` is running.
 
-   ```shell
+   ```bash
    $ kubectl -n kafka get kafkatopics.kafka.strimzi.io
    NAME                 AGE
    knative-demo-topic   16s
@@ -64,7 +64,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 1. Download a copy of the code:
 
-   ```shell
+   ```bash
    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/eventing/samples/kafka/source
    ```
@@ -246,7 +246,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
    ```
 4. (Optional) Remove the Apache Kafka Topic
 
-   ```shell
+   ```bash
    $ kubectl delete -f kafka-topic.yaml
    kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
    ```

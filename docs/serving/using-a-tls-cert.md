@@ -40,10 +40,8 @@ use any certificate from a CA that supports the ACME protocol. However, you must
 use and configure your certificate issuer to use the
 [`DNS-01` challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
-> **Important:** Certificates issued by Let's Encrypt are valid for only [90
-> days][le-faqs]. Therefore, if you choose to manually obtain and configure your
-> certificates, you must ensure that you renew each certificate before it
-> expires.
+!!! warning
+    Certificates issued by Let's Encrypt are valid for only [90days][le-faqs]. Therefore, if you choose to manually obtain and configure your certificates, you must ensure that you renew each certificate before it expires.
 
 [cm]: https://github.com/jetstack/cert-manager
 [cm-docs]: https://cert-manager.readthedocs.io/en/latest/getting-started/
@@ -65,10 +63,9 @@ You must meet the following requirements to enable secure HTTPS connections:
 - You must configure your Knative cluster to use a
   [custom domain](./using-a-custom-domain.md).
 
-**Important:** Istio only supports a single certificate per Kubernetes cluster.
-To serve multiple domains using your Knative cluster, you must ensure that your
-new or existing certificate is signed for each of the domains that you want to
-serve.
+!!! warning
+    Istio only supports a single certificate per Kubernetes cluster.
+    To serve multiple domains using your Knative cluster, you must ensure that your new or existing certificate is signed for each of the domains that you want to serve.
 
 ## Obtaining a TLS certificate
 
@@ -101,9 +98,9 @@ manually obtain a TLS certificate from Let's Encrypt.
 1. Run the following command to use Certbot to request a certificate using DNS
    challenge during authorization:
 
-   ```shell
-   ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
-   ```
+     ```bash
+     ./certbot-auto certonly --manual --preferred-challenges dns -d '*.default.yourdomain.com'
+     ```
 
    where `-d` specifies your domain. If you want to validate multiple domain's,
    you can include multiple flags:
@@ -164,38 +161,39 @@ continue below for instructions about manually adding a certificate.
     1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
        private key, `key.pem`, by entering the following command:
 
-       ```shell
-       kubectl create --namespace contour-external secret tls default-cert \
-         --key key.pem \
-         --cert cert.pem
-       ```
+           ```bash
+           kubectl create -n contour-external secret tls default-cert \
+             --key key.pem \
+             --cert cert.pem
+           ```
 
-       **IMPORTANT** Take note of the namespace and secret name. You will need these
-       in future steps.
+        !!! warning
+            Take note of the namespace and secret name. You will need these in future steps.
 
-    1. Contour requires you to create a delegation to use this certificate and private
-       key in different namespaces. This can be done by creating the following resource:
+    1. Contour requires you to create a delegation to use this certificate and private key in different namespaces. You can create this resource by running the command:
 
-       ```yaml
-       apiVersion: projectcontour.io/v1
-       kind: TLSCertificateDelegation
-       metadata:
-         name: default-delegation
-         namespace: contour-external
-       spec:
-         delegations:
-           - secretName: default-cert
-             targetNamespaces:
-             - "*"
-       ```
+         ```yaml
+         kubectl apply -f - <<EOF
+         apiVersion: projectcontour.io/v1
+         kind: TLSCertificateDelegation
+         metadata:
+           name: default-delegation
+           namespace: contour-external
+         spec:
+           delegations:
+             - secretName: default-cert
+               targetNamespaces:
+               - "*"
+         EOF
+         ```
 
     1. Update the Knative Contour plugin to start using the certificate as a fallback
        when auto-TLS is disabled. This can be done with the following patch:
 
-       ```shell
-       kubectl patch cm config-contour -n knative-serving \
-         -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
-       ```
+         ```bash
+         kubectl patch configmap config-contour -n knative-serving \
+           -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
+         ```
 
 
 
@@ -206,7 +204,7 @@ continue below for instructions about manually adding a certificate.
     1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
        private key, `key.pem`, by entering the following command:
 
-       ```shell
+       ```bash
        kubectl create --namespace istio-system secret tls tls-cert \
          --key key.pem \
          --cert cert.pem
@@ -219,7 +217,7 @@ continue below for instructions about manually adding a certificate.
        1. Run the following command to open the Knative shared `gateway` in edit
           mode:
 
-          ```shell
+          ```bash
           kubectl edit gateway knative-ingress-gateway --namespace knative-serving
           ```
 
@@ -273,5 +271,3 @@ continue below for instructions about manually adding a certificate.
 
 After your changes are running on your Knative cluster, you can begin using the
 HTTPS protocol for secure access your deployed Knative services.
-
-

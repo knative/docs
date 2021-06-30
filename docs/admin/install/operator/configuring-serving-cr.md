@@ -116,7 +116,7 @@ You can use the `spec.registry` section of the operator CR to change the image r
 - `default`: this field defines a image reference template for all Knative images. The format
 is `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. If you use the same tag for all your images, the only difference is the image name. `${NAME}` is
 a pre-defined variable in the operator corresponding to the container name. If you name the images in your private repo to align with the container names (
-`activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`, `networking-istio`, and `queue-proxy`), the `default` argument should be sufficient.
+`activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`, `net-istio-controller`, and `queue-proxy`), the `default` argument should be sufficient.
 
 - `override`: a map from container name to the full registry
 location. This section is only needed when the registry images do not match the common naming format. For containers whose name matches a key, the value is used in preference to the image name calculated by `default`. If a container's name does not match a key in `override`, the template in `default` is used.
@@ -146,7 +146,7 @@ First, you need to make sure your images pushed to the following image tags:
 | `controller` | `docker.io/knative-images/controller:v0.13.0` |
 | `webhook` | `docker.io/knative-images/webhook:v0.13.0` |
 | `autoscaler-hpa` | `docker.io/knative-images/autoscaler-hpa:v0.13.0` |
-| `networking-istio` | `docker.io/knative-images/networking-istio:v0.13.0` |
+| `net-istio-controller` | `docker.io/knative-images/net-istio-controller:v0.13.0` |
 | `queue-proxy` | `docker.io/knative-images/queue-proxy:v0.13.0` |
 
 Then, you need to define your operator CR with following content:
@@ -177,7 +177,8 @@ For example, to given the following images:
 | `controller` | `docker.io/knative-images-repo3/controller:v0.13.0` |
 | `webhook` | `docker.io/knative-images-repo4/webhook:v0.13.0` |
 | `autoscaler-hpa` | `docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0` |
-| `networking-istio` | `docker.io/knative-images-repo6/prefix-networking-istio:v0.13.0` |
+| `net-istio-controller` | `docker.io/knative-images-repo6/prefix-net-istio-controller:v0.13.0` |
+| `net-istio-webhook` | `docker.io/knative-images-repo6/net-istio-webhooko:v0.13.0` |
 | `queue-proxy` | `docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0` |
 
 The operator CR should be modified to include the full list:
@@ -196,9 +197,14 @@ spec:
       controller: docker.io/knative-images-repo3/controller:v0.13.0
       webhook: docker.io/knative-images-repo4/webhook:v0.13.0
       autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0
-      networking-istio: docker.io/knative-images-repo6/prefix-networking-istio:v0.13.0
+      net-istio-controller: docker.io/knative-images-repo6/prefix-net-istio-controller:v0.13.0
+      net-istio-webhook/webhook: docker.io/knative-images-repo6/net-istio-webhook:v0.13.0
       queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0
 ```
+
+!!! note
+    If the container name is not unique across all Deployments, DaemonSets and Jobs,
+    you can prefix the container name with the parent container name and a slash. For example, `istio-webhook/webhook`.
 
 ### Download images with secrets:
 
@@ -353,7 +359,7 @@ spec:
 
 ## High availability
 
-By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following leader-elected controllers: `controller`, `autoscaler-hpa`, `networking-istio`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
+By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following leader-elected controllers: `controller`, `autoscaler-hpa`, `net-istio-controller`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
 
 The following configuration specifies a replica count of 3 for the controllers and a minimum of 3 activators (which may scale higher if needed):
 
@@ -372,7 +378,7 @@ spec:
 
 The operator custom resource allows you to configure system resources for the Knative system containers.
 Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
-`networking-istio` and `queue-proxy`.
+`net-istio-controller` and `queue-proxy`.
 
 To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
 
@@ -427,10 +433,12 @@ spec:
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
-Currently `replicas`, `labels` and `annotations` are supported.
+Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 
-For example, the following KnativeServing resource overrides the `webhook` to have `3` replicass, `mylabel: foo` labels and `myannotataions: bar` annotations,
-while other system deployments have `2` replicas by `spec.high-availability`.
+### Override replicas, labels and annotations
+
+The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotataions: bar`,
+while other system deployments have `2` Replicas by using `spec.high-availability`.
 
 ```
 apiVersion: operator.knative.dev/v1alpha1
@@ -450,4 +458,22 @@ spec:
       myannotataions: bar
 ```
 
-**NOTE:** The labels and annotations settings override webhook's labels and annotations in deployment and pod both.
+!!! note
+    The KnativeServing resource `label` and `annotation` settings override the webhook's labels and annotations for both Deployments and Pods.
+
+### Override nodeSelector
+
+The following KnativeServing resource overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
+
+```
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: ks
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: webhook
+    nodeSelector:
+      disktype: hdd
+```

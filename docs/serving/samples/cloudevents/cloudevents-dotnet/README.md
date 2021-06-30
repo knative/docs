@@ -26,7 +26,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
 ```
@@ -60,7 +60,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
    dependencies and building an ASP.NET container based on Alpine. You can build
    and push this to your registry of choice via:
 
-   ```shell
+   ```bash
    docker build -t <image> .
    docker push <image>
    ```
@@ -68,7 +68,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
 1. If you look in `service.yaml`, take the `<image>` name above and insert it
    into the `image:` field.
 
-   ```shell
+   ```bash
    kubectl apply -f service.yaml
    ```
 
@@ -76,7 +76,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-dotnet
 
 Get the URL for your Service with:
 
-```shell
+```bash
 $ kubectl get ksvc
 NAME                 URL                            LATESTCREATED              LATESTREADY                READY   REASON
 cloudevents-dotnet   http://cloudevents-dotnet...   cloudevents-dotnet-ss5pj   cloudevents-dotnet-ss5pj   True
@@ -84,7 +84,7 @@ cloudevents-dotnet   http://cloudevents-dotnet...   cloudevents-dotnet-ss5pj   c
 
 Then send a cloud event to it with:
 
-```shell
+```bash
 $ curl -X POST \
     -H "content-type: application/json"  \
     -H "ce-specversion: 1.0"  \
@@ -115,6 +115,6 @@ You will get back:
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 ```

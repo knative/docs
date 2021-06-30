@@ -16,7 +16,7 @@ Follow the steps below to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
-```shell
+```bash
 git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
 cd knative-docs/docs/serving/samples/secrets-go
 ```
@@ -132,20 +132,20 @@ cd knative-docs/docs/serving/samples/secrets-go
    This Service Account doesn't need any privileges, the GCS bucket has been
    configured so that any authenticated identity may read it.
 
-   ```shell
+   ```bash
    gcloud iam service-accounts create knative-secrets
    ```
 
 1. Create a new JSON key for this account
 
-   ```shell
+   ```bash
    gcloud iam service-accounts keys create robot.json \
     --iam-account=knative-secrets@$PROJECT_ID.iam.gserviceaccount.com
    ```
 
 1. Create a new Kubernetes secret from this JSON key:
 
-   ```shell
+   ```bash
    kubectl create secret generic google-robot-secret --from-file=./robot.json
    ```
 
@@ -205,7 +205,7 @@ folder) you're ready to build and deploy the sample app.
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
    username:
 
-   ```shell
+   ```bash
    # Build the container on your local machine
    docker build -t {username}/secrets-go .
 
@@ -218,7 +218,7 @@ folder) you're ready to build and deploy the sample app.
    in `service.yaml` matches the container you built in the previous step. Apply
    the configuration using `kubectl`:
 
-   ```shell
+   ```bash
    kubectl apply --filename service.yaml
    ```
 
@@ -231,13 +231,13 @@ folder) you're ready to build and deploy the sample app.
 
 1. Run the following command to find the domain URL for your service:
 
-   ```shell
+   ```bash
    kubectl get ksvc secrets-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
-   ```shell
+   ```bash
    NAME             URL
    secrets-go       http://secrets-go.default.1.2.3.4.sslip.io
    ```
@@ -245,7 +245,7 @@ folder) you're ready to build and deploy the sample app.
 1. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
-   ```shell
+   ```bash
    curl http://secrets-go.default.1.2.3.4.sslip.io
    bucket knative-secrets-sample, created at 2019-02-01 14:44:05.804 +0000 UTC, is located in US with storage class MULTI_REGIONAL
    ```
@@ -256,7 +256,7 @@ folder) you're ready to build and deploy the sample app.
 
 To remove the sample app from your cluster, delete the service record:
 
-```shell
+```bash
 kubectl delete --filename service.yaml
 kubectl delete secret google-robot-secret
 ```

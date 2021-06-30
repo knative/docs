@@ -21,7 +21,7 @@ You need:
 
 1. Create a `imagePullSecrets` that contains your credentials as a list of secrets:
 
-    ```shell
+    ```bash
     kubectl create secret docker-registry [REGISTRY-CRED-SECRETS] \
       --docker-server=[PRIVATE_REGISTRY_SERVER_URL] \
       --docker-email=[PRIVATE_REGISTRY_EMAIL] \
@@ -51,7 +51,7 @@ You need:
 
      Example:
 
-    ```shell
+    ```bash
     kubectl create secret `container-registry` \
       --docker-server=https://gcr.io/ \
       --docker-email=my-account-email@address.com \
@@ -61,7 +61,7 @@ You need:
 
     Tip: After creating the `imagePullSecrets`, you can view those secret's by running:
 
-    ```shell
+    ```bash
     kubectl get secret [REGISTRY-CRED-SECRETS] --output=yaml
     ```
 
@@ -72,10 +72,10 @@ You need:
     [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
     of your Knative cluster are use by your revisions unless    [`serviceAccountName`](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision-2) is specified.
 
-   Run the following command to modify your `default` service account, assuming
-   you named your secrets `container-registry`:
+    Run the following command to modify your `default` service account, assuming
+    you named your secrets `container-registry`:
 
-    ```shell
+    ```bash
     kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"
     ```
 

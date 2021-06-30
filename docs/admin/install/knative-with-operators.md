@@ -164,36 +164,32 @@ kubectl logs -f deploy/knative-operator
 
 ### Verify the Knative Serving deployment:
 
-    ```
-    kubectl get deployment -n knative-serving
-    ```
+1. Monitor the Knative deployments:
+```
+kubectl get deployment -n knative-serving
+```
+If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
+is a sample output:
+```
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+activator              1/1     1            1           18s
+autoscaler             1/1     1            1           18s
+autoscaler-hpa         1/1     1            1           14s
+controller             1/1     1            1           18s
+net-istio-webhook      1/1     1            1           12s
+net-istio-controller   1/1     1            1           12s
+webhook                1/1     1            1           17s
+```
 
-    If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
-    is a sample output:
-
-    ```
-    NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-    activator          1/1     1            1           18s
-    autoscaler         1/1     1            1           18s
-    autoscaler-hpa     1/1     1            1           14s
-    controller         1/1     1            1           18s
-    istio-webhook      1/1     1            1           12s
-    networking-istio   1/1     1            1           12s
-    webhook            1/1     1            1           17s
-    ```
-
-    3. Check the status of Knative Serving Custom Resource:
-
-    ```
-    kubectl get KnativeServing knative-serving -n knative-serving
-    ```
-
-    If Knative Serving is successfully installed, you should see:
-
-    ```
-    NAME              VERSION             READY   REASON
-    knative-serving   <version number>    True
-    ```
+1. Check the status of Knative Serving Custom Resource:
+```
+kubectl get KnativeServing knative-serving -n knative-serving
+```
+If Knative Serving is successfully installed, you should see:
+```
+NAME              VERSION             READY   REASON
+knative-serving   <version number>    True
+```
 
 ### Installing with Different Networking Layers
 
@@ -286,84 +282,6 @@ kubectl logs -f deploy/knative-operator
 
           Save this for configuring DNS below.
 
-    === "Gloo"
-
-        _For a detailed guide on Gloo integration, see
-        [Installing Gloo for Knative](https://docs.solo.io/gloo/latest/installation/knative/)
-        in the Gloo documentation._
-
-        The following commands install Gloo and enable its Knative integration.
-
-        1. Make sure `glooctl` is installed (version 1.3.x and higher recommended):
-          ```bash
-          glooctl version
-          ```
-
-          If it is not installed, you can install the latest version using:
-          ```bash
-          curl -sL https://run.solo.io/gloo/install | sh
-          export PATH=$HOME/.gloo/bin:$PATH
-          ```
-
-          Or following the
-          [Gloo CLI install instructions](https://docs.solo.io/gloo/latest/installation/knative/#install-command-line-tool-cli).
-
-        1. Install Gloo and the Knative integration:
-          ```bash
-          glooctl install knative --install-knative=false
-          ```
-
-        1. To configure Knative Serving to use Gloo, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          EOF
-          ```
-
-          There is no need to configure the ingress class to use the gloo.
-
-        1. Fetch the External IP or CNAME:
-          ```bash
-          glooctl proxy url --name knative-external-proxy
-          ```
-
-          Save this for configuring DNS below.
-
-    === "Kong"
-
-        The following commands install Kong and enable its Knative integration.
-
-        1. Install Kong Ingress Controller:
-          ```bash
-          kubectl apply --filename https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/0.9.x/deploy/single/all-in-one-dbless.yaml
-          ```
-
-        1. To configure Knative Serving to use Kong, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          spec:
-            config:
-              network:
-                ingress.class: "kong"
-          EOF
-          ```
-
-        1. Fetch the External IP or CNAME:
-          ```bash
-          kubectl --namespace kong get service kong-proxy
-          ```
-
-          Save this for configuring DNS below.
-
     === "Kourier"
 
         The following commands install Kourier and enable its Knative integration.
@@ -393,111 +311,7 @@ kubectl logs -f deploy/knative-operator
 
           Save this for configuring DNS below.
 
-
-### Configure DNS
-
-=== "Magic DNS (xip.io)"
-
-      We ship a simple Kubernetes Job called "default domain" that will (see caveats)
-      configure Knative Serving to use <a href="http://xip.io">xip.io</a> as the
-      default DNS suffix.
-
-    ```bash
-    kubectl apply --filename {{artifact(repo="serving",file="serving-default-domain.yaml")}}
-    ```
-
-    **Caveat**: This will only work if the cluster LoadBalancer service exposes an
-    IPv4 address or hostname, so it will not work with IPv6 clusters or local setups
-    like Minikube. For these, see "Real DNS" or "Temporary DNS".
-
-=== "Real DNS"
-    To configure DNS for Knative, take the External IP
-    or CNAME from setting up networking, and configure it with your DNS provider as
-    follows:
-
-    - If the networking layer produced an External IP address, then configure a
-      wildcard `A` record for the domain:
-
-      ```
-      # Here knative.example.com is the domain suffix for your cluster
-      *.knative.example.com == A 35.233.41.212
-      ```
-
-    - If the networking layer produced a CNAME, then configure a CNAME record for
-      the domain:
-
-      ```
-      # Here knative.example.com is the domain suffix for your cluster
-      *.knative.example.com == CNAME a317a278525d111e89f272a164fd35fb-1510370581.eu-central-1.elb.amazonaws.com
-      ```
-
-    Once your DNS provider has been configured, add the following section into your existing Serving CR, and apply it:
-
-    ```bash
-    # Replace knative.example.com with your domain suffix
-    apiVersion: operator.knative.dev/v1alpha1
-    kind: KnativeServing
-    metadata:
-      name: knative-serving
-      namespace: knative-serving
-    spec:
-      config:
-        domain:
-          "knative.example.com": ""
-      ...
-    ```
-
-=== "Temporary DNS"
-
-    If you are using `curl` to access the sample
-    applications, or your own Knative app, and are unable to use the "Magic DNS
-    (xip.io)" or "Real DNS" methods, there is a temporary approach. This is useful
-    for those who wish to evaluate Knative without altering their DNS configuration,
-    as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using,
-    for example, minikube locally or IPv6 clusters.
-
-    To access your application using `curl` using this method:
-
-    1. After starting your application, get the URL of your application:
-
-      ```bash
-      kubectl get ksvc
-      ```
-
-      The output should be similar to:
-
-      ```bash
-      NAME            URL                                        LATESTCREATED         LATESTREADY           READY   REASON
-      helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True
-      ```
-
-    1. Instruct `curl` to connect to the External IP or CNAME defined by the
-      networking layer in section 3 above, and use the `-H "Host:"` command-line
-      option to specify the Knative application's host name. For example, if the
-      networking layer defines your External IP and port to be
-      `http://192.168.39.228:32198` and you wish to access the above
-      `helloworld-go` application, use:
-
-      ```bash
-      curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
-      ```
-
-      In the case of the provided `helloworld-go` sample application, using the default
-      configuration, the output should be:
-
-      ```
-      Hello Go Sample v1!
-      ```
-
-    Refer to the "Real DNS" method for a permanent solution.
-
-
-1. Monitor the Knative components until all of the components show a `STATUS` of
-   `Running` or `Completed`:
-
-   ```bash
-   kubectl get pods --namespace knative-serving
-   ```
+{% include "dns.md" %}
 
 ## Installing the Knative Eventing component
 

@@ -59,6 +59,10 @@ nav:
         # Serving config
         - Knative Serving configuration:
           - Configure Deployment resources: admin/serving/deployment.md
+        # Eventing config
+        - Knative Eventing configuration:
+          - Configure Broker defaults: admin/eventing/broker-configuration.md
+          - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
     # Developer guide
     - Developer guide:
         - Overview: developer/README.md
@@ -71,6 +75,22 @@ nav:
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
+        - Knative Eventing:
+          - Event sources:
+            - ApiServerSource:
+              - Overview: developer/eventing/sources/apiserversource/README.md
+              - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
+              - ApiServerSource reference: developer/eventing/sources/apiserversource/reference.md
+            - ContainerSource:
+              - Creating a ContainerSource object: developer/eventing/sources/containersource/README.md
+              - ContainerSource Reference: developer/eventing/sources/containersource/reference.md
+          - Event delivery: developer/eventing/event-delivery.md
+          - Event sinks:
+            - About sinks: developer/eventing/sinks/README.md
+            - KafkaSink: developer/eventing/sinks/kafka-sink.md
+    # Developer concepts
+        - Concepts:
+          - Duck typing: developer/concepts/duck-typing.md
     # Serving
     - Knative Serving:
       - Overview: serving/README.md
@@ -84,7 +104,7 @@ nav:
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
       - Autoscaling:
         - Overview: serving/autoscaling/README.md
-        - Autoscaling concepts: serving/autoscaling/autoscaling-concepts.md
+        - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
         - Metrics: serving/autoscaling/autoscaling-metrics.md
         - Targets: serving/autoscaling/autoscaling-targets.md
         - Configuring scale to zero: serving/autoscaling/scale-to-zero.md
@@ -92,7 +112,7 @@ nav:
         - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
         - Configuring scale bounds: serving/autoscaling/scale-bounds.md
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
-        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/index.md
+        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
     # Admin topics - serving
       - Administrator Topics:
         - Kubernetes services: serving/knative-kubernetes-services.md
@@ -106,6 +126,7 @@ nav:
         - Feature/Extension Flags: serving/feature-flags.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
         - Setting up a custom domain: serving/using-a-custom-domain.md
+        - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
       - Code samples:
         - Overview: serving/samples/README.md
         - Routing and managing traffic: serving/samples/blue-green-deployment.md
@@ -144,14 +165,10 @@ nav:
       - Getting started: eventing/getting-started.md
       - Event sources:
         - Overview: eventing/sources/README.md
-        - API server source:
-          - Overview: eventing/sources/apiserversource/README.md
-          - Getting started: eventing/sources/apiserversource/getting-started/README.md
-        - ContainerSource: eventing/sources/containersource.md
-        - PingSource: eventing/sources/ping-source/index.md
+        - PingSource: eventing/sources/ping-source/README.md
         - SinkBinding:
           - Overview: eventing/sources/sinkbinding/README.md
-          - Create a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
+          - Creating a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
           - SinkBinding reference: eventing/sources/sinkbinding/reference.md
         - Camel source: eventing/sources/apache-camel-source/README.md
         - Kafka source: eventing/sources/kafka-source/README.md
@@ -173,10 +190,10 @@ nav:
         - Parallel: eventing/flows/parallel.md
         - Sequence:
           - Overview: eventing/flows/sequence/README.md
-          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/index.md
-          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/index.md
-          - Create additional events: eventing/flows/sequence/sequence-terminal/index.md
-          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/index.md
+          - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+          - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+          - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
+          - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
       - Channels:
         - Overview: eventing/channels/README.md
         - Channel types and defaults: eventing/channels/channel-types-defaults.md
@@ -184,21 +201,14 @@ nav:
         - Available Channels: eventing/channels/channels-crds.md
         - Subscriptions: eventing/channels/subscriptions.md
       - Sugar Controller: eventing/sugar/README.md
-      - Event delivery: eventing/event-delivery.md
       - Brokers:
         - Overview: eventing/broker/README.md
         - Creating a broker: eventing/broker/create-mtbroker.md
         - Triggers: eventing/broker/triggers/README.md
-        - Event delivery: eventing/broker/broker-event-delivery.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
-        - ConfigMaps: eventing/broker/configmaps/README.md
         - Apache Kafka Broker:
           - Overview: eventing/broker/kafka-broker/README.md
-          - Kafka Channel ConfigMap: eventing/broker/kafka-broker/kafka-configmap.md
-      - Sink:
-        - Overview: eventing/sink/README.md
-        - Apache Kafka Sink: eventing/sink/kafka-sink.md
-      - Debugging: eventing/debugging/index.md
+      - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Experimental Features: eventing/experimental-features.md
       - Code samples:
@@ -210,7 +220,7 @@ nav:
           - Python: eventing/samples/helloworld/helloworld-python/README.md
         - Apache Kafka:
           - Overview: eventing/samples/kafka/README.md
-          - Binding Example: eventing/samples/kafka/binding/index.md
+          - Binding Example: eventing/samples/kafka/binding/README.md
           - Channel Example: eventing/samples/kafka/channel/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
@@ -222,20 +232,19 @@ nav:
         - CloudStorageSource: eventing/sources/cloud-storage-source/README.md
         - GitHub source: eventing/sources/github-source/README.md
         - GitLab source: eventing/sources/gitlab-source/README.md
-        - IoT core: eventing/samples/iot-core/index.md
-        - ... | *
+        - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:
-      - Serving: reference/api/serving.md
-      - Eventing: reference/api/eventing/eventing.md
+      - Serving: reference/api/serving-api.md
+      - Eventing: reference/api/eventing-api.md
     # Client
     - Client:
       - Overview: client/README.md
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
-    - "Join the Community ➠": ../community/
-    - "Read the Blog ➠": ../blog/
+    - "Join the Community ➠": /community/
+    - "Read the Blog ➠": /blog/
 
 theme:
   name: material
@@ -244,7 +253,6 @@ theme:
   custom_dir: overrides
   features:
     - navigation.tabs
-    - navigation.instant
     - navigation.tracking
     - navigation.tabs.sticky
     - navigation.indexes
@@ -273,61 +281,106 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+  - def_list
 
 plugins:
   - search
   - macros:
       module_name: hack/macros
+      include_dir: docs/snippets
   - exclude:
       glob:
         # Exclude files that contain hugo specific shortcodes
         # (either the include shortcode or not-converted-yet tabs).
         - snippets/*
         - smoketest.md
-        - "*/serving-api.md" # shortcode to serving.md
         - "*/_index.md" # pretty much all shortcodes
   - awesome-pages:
       filename: ".index"
       collapse_single_pages: true
       strict: false
-# Redirects
+  # Redirects
   - redirects:
       redirect_maps:
-        'serving/metrics.md': 'admin/collecting-metrics/serving-metrics/metrics.md'
-        'eventing/metrics.md': 'admin/collecting-metrics/eventing-metrics/metrics.md'
-        'help/README.md' : 'docs/help/README.md'
-        'eventing/samples/sinkbinding/README.md': 'eventing/sources/sinkbinding/README.md'
-        'admin/install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
-        'admin/install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
-        'serving/services/deployment.md': 'admin/serving/deployment.md'
-        'serving/debugging-application-issues.md': 'developer/serving/troubleshooting/debugging-application-issues.md'
-        'serving/creating-domain-mappings.md': 'developer/serving/services/custom-domains.md'
-        'install/collecting-logs/index.md': 'admin/collecting-logs/README.md'
-        'install/README.md': 'admin/install/README.md'
-        'install/collecting-metrics/index.md': 'admin/collecting-metrics/README.md'
-        'install/install-eventing-with-yaml.md': 'admin/install/eventing/install-eventing-with-yaml.md'
-        'install/install-extensions.md': 'admin/install/install-extensions.md'
-        'install/install-serving-with-yaml.md': 'admin/install/serving/install-serving-with-yaml.md'
-        'install/installation-files.md': 'admin/install/README.md'
-        'install/installing-istio.md': 'admin/install/installing-istio.md'
-        'install/knative-offerings.md': 'admin/install/knative-offerings.md'
-        'install/knative-with-operators.md': 'admin/install/knative-with-operators.md'
-        'install/operator/configuring-eventing-cr.md': 'admin/install/operator/configuring-eventing-cr.md'
-        'install/operator/configuring-serving-cr.md': 'admin/install/operator/configuring-serving-cr.md'
-        'install/prerequisites.md': 'admin/install/README.md'
-        'uninstall.md': 'admin/install/uninstall.md'
-        'upgrade/index.md': 'admin/upgrade/README.md'
-        'upgrade/upgrade-installation-with-operator.md': 'admin/upgrade/upgrade-installation-with-operator.md'
-        'upgrade/upgrade-installation.md': 'admin/upgrade/upgrade-installation.md'
-        'install/check-install-version.md': 'check-install-version.md'
-        'serving/services/private-services.md': 'developer/serving/services/private-services.md'
-        'serving/services/creating-services.md': 'developer/serving/services/creating-services.md'
-        'serving/services/README.md': 'developer/serving/services/README.md'
+        admin/install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
+        admin/install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
+        client/connecting-kn-to-your-cluster/index.md: client/README.md
+        concepts/overview.md: _index.md
+        eventing/broker/alternate/index.md: eventing/broker/README.md
+        eventing/broker/broker-event-delivery.md: developer/eventing/event-delivery.md
+        eventing/broker/configmaps/README.md: admin/eventing/broker-configuration.md
+        eventing/broker/kafka-broker/index.md: eventing/broker/kafka-broker/README.md
+        eventing/broker/kafka-broker/kafka-configmap.md: admin/eventing/kafka-channel-configuration.md
+        eventing/channels/default-channels/index.md: eventing/channels/README.md
+        eventing/event-delivery.md: developer/eventing/event-delivery.md
+        eventing/metrics.md: admin/collecting-metrics/eventing-metrics/metrics.md
+        eventing/parallel.md: eventing/flows/parallel.md
+        eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
+        eventing/samples/gcp-pubsub-source/README.md: eventing/sources/cloud-pubsub-source/README.md
+        eventing/samples/kubernetes-event-source/index.md: eventing/sources/apiserversource/getting-started/README.md
+        eventing/samples/ping-source/index.md: eventing/sources/ping-source/README.md
+        eventing/samples/sequence/index.md: eventing/flows/sequence/README.md
+        eventing/samples/sequence/sequence-replay-to-event-display/index.md: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+        eventing/samples/sequence/sequence-reply-to-sequence/index.md: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+        eventing/samples/sequence/sequence-terminal/index.md: eventing/flows/sequence/sequence-terminal/README.md
+        eventing/samples/sequence/sequence-with-broker-trigger/index.md: eventing/flows/sequence/sequence-with-broker-trigger/README.md
+        eventing/samples/sinkbinding/README.md: eventing/sources/sinkbinding/README.md
+        eventing/samples/writing-event-source-easy-way/index.md: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
+        eventing/samples/writing-event-source/01-theory/index.md: eventing/sources/creating-event-sources/writing-event-source/01-theory.md
+        eventing/samples/writing-event-source/02-lifecycle-and-types/index.md: eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
+        eventing/samples/writing-event-source/03-controller/index.md: eventing/sources/creating-event-sources/writing-event-source/03-controller.md
+        eventing/samples/writing-event-source/04-reconciler/index.md: eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
+        eventing/samples/writing-event-source/05-receive-adapter/index.md: eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
+        eventing/samples/writing-event-source/06-yaml/index.md: eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
+        eventing/samples/writing-event-source/07-knative-sandbox/index.md: eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
+        eventing/samples/writing-event-source/index.md: eventing/sources/creating-event-sources/writing-event-source/README.md
+        eventing/sequence.md: eventing/flows/sequence/README.md
+        eventing/sink/README.md: developer/eventing/sinks/README.md
+        eventing/sink/kafka-sink.md: developer/eventing/sinks/kafka-sink.md
+        eventing/sources/apiserversource/index.md: eventing/sources/apiserversource/README.md
+        eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
+        eventing/triggers/index.md: eventing/broker/triggers/README.md
+        help/README.md: docs/help/contributor/README.md
+        install/README.md: admin/install/README.md
+        install/check-install-version.md: check-install-version.md
+        install/collecting-logs/index.md: admin/collecting-logs/README.md
+        install/collecting-metrics/index.md: admin/collecting-metrics/README.md
+        install/getting-started-knative-app/index.md: serving/getting-started-knative-app.md
+        install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
+        # This doesn't exist anymore, we should probably replace it
+        install/install-extensions.md: admin/install/README.md
+        install/install-kn/index.md: client/install-kn.md
+        install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
+        install/installation-files.md: admin/install/README.md
+        install/installing-istio.md: admin/install/installing-istio.md
+        install/knative-offerings.md: admin/install/knative-offerings.md
+        install/knative-with-operators.md: admin/install/knative-with-operators.md
+        install/operator/configuring-eventing-cr.md: admin/install/operator/configuring-eventing-cr.md
+        install/operator/configuring-serving-cr.md: admin/install/operator/configuring-serving-cr.md
+        install/prerequisites.md: admin/install/README.md
+        operator/configuring-eventing-cr/index.md: admin/install/operator/configuring-eventing-cr.md
+        operator/configuring-serving-cr/index.md: admin/install/operator/configuring-serving-cr.md
+        reference/resources/index.md: client/README.md
+        serving/autoscaling/autoscaling-concepts.md: serving/autoscaling/autoscaler-types.md
+        serving/autoscaling/target-burst-capacity/index.md: serving/load-balancing/target-burst-capacity.md
+        serving/configuring-autoscaling/index.md: serving/autoscaling/README.md
+        serving/creating-domain-mappings.md: developer/serving/services/custom-domains.md
+        serving/debugging-application-issues.md: developer/serving/troubleshooting/debugging-application-issues.md
+        serving/metrics.md: admin/collecting-metrics/serving-metrics/metrics.md
+        serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
+        serving/services/README.md: developer/serving/services/README.md
+        serving/services/creating-services.md: developer/serving/services/creating-services.md
+        serving/services/deployment.md: admin/serving/deployment.md
+        serving/services/private-services.md: developer/serving/services/private-services.md
+        serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
+        uninstall.md: admin/install/uninstall.md
+        upgrade/index.md: admin/upgrade/README.md
+        upgrade/upgrade-installation-with-operator.md: admin/upgrade/upgrade-installation-with-operator.md
+        upgrade/upgrade-installation.md: admin/upgrade/upgrade-installation.md
 
 copyright: "Copyright © 2021 The Knative Authors"
 
 extra:
-  branch: v0.23.0 # Branch to use for examples
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/KnativeProject
@@ -340,5 +393,6 @@ extra:
   # TODO: Replace with https://github.com/mkdocs/mkdocs/pull/2267 once mkdocs 1.2 is out.
   version_warning: !!python/object/apply:os.getenv ["VERSION_WARNING"]
   knative_version: !!python/object/apply:os.getenv ["KNATIVE_VERSION"]
+  branch: !!python/object/apply:os.getenv ["SAMPLES_BRANCH", "mkdocs"]
   version:
     provider: mike

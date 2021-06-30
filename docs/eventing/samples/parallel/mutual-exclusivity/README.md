@@ -74,7 +74,7 @@ spec:
 .
 ```
 
-```shell
+```bash
 kubectl create -f ./switcher.yaml -f ./transformers.yaml
 ```
 
@@ -92,7 +92,7 @@ spec:
         - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
-```shell
+```bash
 kubectl -n default create -f ./event-display.yaml
 ```
 
@@ -132,7 +132,7 @@ spec:
       name: me-event-display
 ```
 
-```shell
+```bash
 kubectl create -f ./parallel.yaml
 ```
 
@@ -157,7 +157,7 @@ spec:
       name: me-odd-even-parallel
 ```
 
-```shell
+```bash
 kubectl create -f ./ping-source.yaml
 ```
 
@@ -169,7 +169,7 @@ minute, it might take some time for the events to show up in the logs.
 
 Let's look at the `me-event-display` log:
 
-```shell
+```bash
 kubectl logs -l serving.knative.dev/service=me-event-display --tail=50 -c user-container
 
 ☁️  cloudevents.Event

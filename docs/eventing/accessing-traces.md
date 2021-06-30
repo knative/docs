@@ -72,7 +72,7 @@ You can configure your `config-tracing` with following options:
 ### Viewing your `config-tracing` ConfigMap
 To view your current configuration:
 
-```shell
+```bash
 kubectl -n knative-eventing get configmap config-tracing -oyaml
 ```
 
@@ -80,7 +80,7 @@ kubectl -n knative-eventing get configmap config-tracing -oyaml
 
 To edit and then immediately deploy changes to your ConfigMap, run the following command:
 
-```shell
+```bash
 kubectl -n knative-eventing edit configmap config-tracing
 ```
 

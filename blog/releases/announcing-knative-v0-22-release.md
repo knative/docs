@@ -1,6 +1,6 @@
 ---
-title: "Version 0.22 release"
-linkTitle: "Version 0.22 release"
+title: "v0.22 release"
+linkTitle: "v0.22 release"
 Author: "[Carlos Santana](https://twitter.com/csantanapr)"
 Author handle: https://github.com/csantanapr
 date: 2021-04-06
@@ -64,7 +64,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 - `v1alpha1` channel duck types are no longer supported. [#5005](https://github.com/knative/eventing/pull/5005)
 
-<!-- We don't know what this means in the release notes. Leaving here commented out to hide it. 
+<!-- We don't know what this means in the release notes. Leaving here commented out to hide it.
 - Allow Trigger users to set another namespace's Subscriber, And when Subscriber's namespace not been set, it will be set to Trigger's namespace [#4995](https://github.com/knative/eventing/pull/4995)
 -->
 

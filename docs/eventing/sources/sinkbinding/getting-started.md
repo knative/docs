@@ -1,4 +1,4 @@
-# Create a SinkBinding object
+# Creating a SinkBinding object
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
 
@@ -88,7 +88,7 @@ create a Knative service.
     For example:
 
     ```bash
-    $ kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    $ kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
 
 === "YAML"
@@ -213,7 +213,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 
     ```yaml
     kubectl apply -f - <<EOF
-    apiVersion: sources.knative.dev/v1alpha1
+    apiVersion: sources.knative.dev/v1
     kind: SinkBinding
     metadata:
       name: <name>
@@ -224,11 +224,11 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
         selector:
           matchLabels:
             <label-key>: <label-value>
-        sink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: <sink>
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: <sink>
     EOF
     ```
     Where:
@@ -266,7 +266,7 @@ service logs for your sink:
 2. From the output, observe the lines showing the request headers and body of the event message,
 sent by the source to the display function. For example:
 
-    ```bash
+    ```{ .bash .no-copy }
       ☁️  cloudevents.Event
       Validation: valid
       Context Attributes,
@@ -292,7 +292,7 @@ sent by the source to the display function. For example:
 To delete the SinkBinding object and all of the related resources in the namespace,
 delete the namespace by running:
 
-```shell
+```bash
 kubectl delete namespace <namespace>
 ```
 Where `<namespace>` is the name of the namespace that contains the SinkBinding object.

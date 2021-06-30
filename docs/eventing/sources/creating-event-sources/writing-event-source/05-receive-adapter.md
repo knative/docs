@@ -10,7 +10,7 @@ aliases:
 # Receive Adapter Implementation and Design
 
 ## Receive Adapter cmd
-Similar to the controller, we'll need an injection based `main.go` similar to the controller under `cmd/receiver_adapter/main.go`
+Similar to the controller, we'll need an injection based `main.go` under `cmd/receiver_adapter/main.go`
 ```go
 // This Adapter generates events at a regular interval.
 package main

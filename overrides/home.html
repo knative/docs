@@ -147,7 +147,7 @@
         </div>
         <div>
           <h4>Contributions Welcome</h4>
-          <a href="./contributing/" title="Contributing Link" class="md-button">Contribute</a>
+          <a href="./help/contributor/" title="Contributing Link" class="md-button">Contribute</a>
           <p>Want to join the fun on Github? New users are always welcome!</p>
         </div>
         <div>
@@ -178,4 +178,35 @@
 {% endblock %}
 
 <!-- Application footer -->
-{% block footer %}{% endblock %}
+{% block footer %}
+  <!-- Cookie Bannier -->
+  <div id="cookieModal" class="md-typeset modal custom fade" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>We use cookies. <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank">Google Analytics</a> is used to improve your experience and help us understand site traffic and page usage.</p>
+          <div class="consent-buttons">
+            <button type="button" class="md-button" onclick="learnaboutcookies()">Learn more</button>
+            <button type="button" class="md-button md-button--primary" onclick="acceptcookie()">Accept</button>
+            <div class="opt-out">
+              <hr>
+              <p><a href="/about-analytics-cookies/">Learn about analytics cookies and how you can take steps to opt-out from sharing your usage data.</a></p>
+              <button type="button" class="md-button" onclick="optout()">I understand how to opt-out, hide this notice.</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cookienotice md-typeset">
+    <div class="text">
+      <p>We use analytics and cookies to understand site traffic. Information about your use of
+        our site is shared with Google for that purpose. <a href="/about-analytics-cookies/">Learn more.</a>
+      </p>
+    </div>
+    <div class="buttons">
+      <a class="close" onclick="closenotice()">&times;</a>
+      <a class="ok" onclick="acceptcookie()">OK</a>
+    </div>
+  </div>
+{% endblock %}
