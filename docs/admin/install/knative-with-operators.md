@@ -463,6 +463,166 @@ NAME               VERSION             READY   REASON
 knative-eventing   <version number>    True
 ```
 
+### Installing with Different Eventing Sources
+
+??? "Installing the Knative Eventing component with different eventing sources"
+
+    Knative Operator can configure Knative Eventing component with different eveting sources. Click on each tab below to
+    see how you can configure Knative Eventing with different eventing sources:
+
+    === "Ceph"
+
+        To configure Knative Eventing to install Ceph as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              ceph:
+                enabled: true
+          EOF
+          ```
+
+    === "Apache CouchDB"
+
+        To configure Knative Eventing to install Apache CouchDB as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              couchdb:
+                enabled: true
+          EOF
+          ```
+
+    === "GitHub"
+
+        To configure Knative Eventing to install GitHub as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              github:
+                enabled: true
+          EOF
+          ```
+
+    === "GitLab"
+
+        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              gitlab:
+                enabled: true
+          EOF
+          ```
+
+    === "Apache Kafka"
+
+        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              kafka:
+                enabled: true
+          EOF
+          ```
+
+    === "NATS Streaming"
+
+        To configure Knative Eventing to install NATS Streaming as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              natss:
+                enabled: true
+          EOF
+          ```
+
+    === "Prometheus"
+
+        To configure Knative Eventing to install Prometheus as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              prometheus:
+                enabled: true
+          EOF
+          ```
+
+    === "RabbitMQ"
+
+        To configure Knative Eventing to install RabbitMQ as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              rabbitmq:
+                enabled: true
+          EOF
+          ```
+
+    === "Redis"
+
+        To configure Knative Eventing to install Redis as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              redis:
+                enabled: true
+          EOF
+          ```
+
 ## Uninstall Knative
 
 ### Removing the Knative Serving component
