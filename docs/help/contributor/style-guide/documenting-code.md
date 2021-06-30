@@ -110,34 +110,53 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 
 ## Documenting YAML
 //TODO CONTENT TABS (ex. kn + YAML)
+>When documenting YAML, use two steps. Use step 1 to create the YAML file, and step 2 to apply the YAML file.
+
 >Use **kubectl apply** for files/objects that the user creates — it works for both “create” and “update”, and the source of truth is their local files.
 
 >Use **kubectl edit** for files which are shipped as part of the Knative software, like the serving/eventing ConfigMaps.
 
-> be sure to use ```yaml at the beginning of your code block if you are typing yaml code as part of a CLI command
+> be sure to use ```yaml at the beginning of your code block if you are typing YAML code as part of a CLI command
 
 === ":white_check_mark: Correct"
 
-    Creating or updating a resource:
-    ```yaml
-    kubectl apply -f - <<EOF
-    # code
-    EOF
-    ```
+    - Creating or updating a resource:
 
-    Editing a ConfigMap:
-    ```bash
-    kubectl -n <namespace> edit configmap <resource-name>
-    ```
+        1. Create a YAML file using the template below:
+
+            ```yaml
+            # YAML FILE CONTENTS
+            ```
+        2. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply --filename <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
+
+    - Editing a ConfigMap:
+
+        ```bash
+        kubectl -n <namespace> edit configmap <resource-name>
+        ```
 
 === ":no_entry: Incorrect"
+
+    **Example 1:**
+
     ```yaml
     cat <<EOF | kubectl create -f -
     # code
     EOF
     ```
 
+    **Example 2:**
 
+    ```yaml
+    kubectl apply -f - <<EOF
+    # code
+    EOF
+    ```
 
 ## Referencing variables in code blocks
 
