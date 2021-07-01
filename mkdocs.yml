@@ -284,7 +284,9 @@ markdown_extensions:
   - def_list
 
 plugins:
-  - search
+  - search:
+      # Spaces, dashes, periods and forward-slash (so serving.knative.dev/blibble can be searched as blibble).
+      separator: '[\/\s\-\.]+'
   - macros:
       module_name: hack/macros
       include_dir: docs/snippets
