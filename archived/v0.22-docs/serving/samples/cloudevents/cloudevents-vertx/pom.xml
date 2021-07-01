@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.knative.examples</groupId>
+    <artifactId>cloudevents-example-vertx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <vertx.verticle>org.knative.examples.cloudevents.vertx.CloudEventSampleVerticle</vertx.verticle>
+        <cloudevents.version>2.0.0-milestone2</cloudevents.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.cloudevents</groupId>
+            <artifactId>cloudevents-core</artifactId>
+            <version>${cloudevents.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cloudevents</groupId>
+            <artifactId>cloudevents-http-vertx</artifactId>
+            <version>${cloudevents.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Dorg.slf4j.simpleLogger.defaultLogLevel=warn</jvmFlag>
+                        </jvmFlags>
+                        <mainClass>org.knative.examples.cloudevents.vertx.CloudEventSampleVerticle</mainClass>
+                    </container>
+                </configuration>
+            </plugin>
+            <!-- With this plugin you can locally test the application using `mvn vertx:run` -->
+            <plugin>
+                <groupId>io.reactiverse</groupId>
+                <artifactId>vertx-maven-plugin</artifactId>
+                <version>1.0.22</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
