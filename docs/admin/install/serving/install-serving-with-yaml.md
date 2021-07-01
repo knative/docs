@@ -1,12 +1,10 @@
 # Installing Knative Serving using YAML files
 
-This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.
-
 --8<-- "prerequisites.md"
 
-## Install the Knative Serving component
+## Procedure
 
-To install the Knative Serving component:
+To install Knative Serving:
 
 1. Install the required custom resources by running the command:
 
@@ -23,7 +21,7 @@ To install the Knative Serving component:
     !!! info
         For information about the YAML files in Knative Serving, see [Knative Serving installation files](./serving-installation-files.md).
 
-## Install a networking layer
+### Install a networking layer
 
 The tabs below expand to show instructions for installing a networking layer.
 Follow the procedure for the networking layer of your choice:
@@ -175,8 +173,9 @@ Follow the procedure for the networking layer of your choice:
     `Completed` beneath `STATUS`:
 
     ```bash
-    kubectl get pods --namespace knative-serving
+    kubectl get pods -n knative-serving
     ```
+    <!--TODO: shoe sample output-->
 
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
@@ -262,4 +261,3 @@ The tabs below expand to show instructions for installing each Serving extension
         ```bash
         kubectl apply -f {{ artifact(repo="serving",file="serving-nscert.yaml")}}
         ```
-

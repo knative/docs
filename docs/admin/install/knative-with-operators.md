@@ -1,38 +1,3 @@
-# Knative Operator installation
-
-Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
-You can install the Serving component, Eventing component, or both on your cluster.
-
-!!! warning
-    The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used for development or test purposes only.
-
---8<-- "prerequisites.md"
-
-## Installing the latest release
-
-You can find information about the different released versions of the Knative Operator on the [Releases page](https://github.com/knative/operator/releases).
-
-Install the latest stable Operator release:
-
-```
-kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )}}
-```
-
-## Verify your installation
-
-Verify your installation:
-
-```
-kubectl get deployment knative-operator
-```
-
-If the operator is installed correctly, the deployment shows a `Ready` status:
-
-```
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-knative-operator   1/1     1            1           19h
-```
-
 ## Track the log
 
 Track the log of the operator:

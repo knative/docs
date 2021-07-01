@@ -1,6 +1,6 @@
 ## Prerequisites
 
-Before installing Knative, you must meet the following prerequisites:
+A Knative development environment has the following requirements:
 
 - **For prototyping purposes**, Knative works on most local deployments of Kubernetes. For example, you can use a local, one-node cluster that has 2&nbsp;CPUs and 4&nbsp;GB of memory.
 
