@@ -20,7 +20,7 @@ At a high-level, you must setup and know the following to get started:
 To check out your fork of the `knative/docs` repository:
 
 1. Create your own
-   [fork of the `knative/docs` repo](https://help.github.com/articles/fork-a-repo/)
+   [fork](https://help.github.com/articles/fork-a-repo/) of the [`knative/docs` repo](https://github.com/knative/docs).
 1. Configure
    [GitHub access through SSH](https://help.github.com/articles/connecting-to-github-with-ssh/).
 1. Clone your fork to your machine and set the `upstream` remote to the
