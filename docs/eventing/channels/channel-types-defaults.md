@@ -42,4 +42,4 @@ Default channels can be configured for the cluster, a namespace on the cluster, 
 
 ## Next steps
 
-- Create an [InMemoryChannel](/create-default-channel)
+- Create an [InMemoryChannel](../create-default-channel)

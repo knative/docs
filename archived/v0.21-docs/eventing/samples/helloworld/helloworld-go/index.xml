@@ -1,0 +1,17 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Hello World - Golang</title>
+    <link>https://knative.dev/v0.21-docs/eventing/samples/helloworld/helloworld-go/</link>
+    <description>Recent content in Hello World - Golang on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.21-docs/eventing/samples/helloworld/helloworld-go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

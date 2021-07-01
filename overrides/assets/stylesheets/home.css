@@ -59,6 +59,12 @@
   max-width: initial;
 }
 
+/* Fixes logo aspect ratio in Safari */
+section.home-container img {
+  object-fit: contain;
+  object-position: right;
+}
+
 section.home-container {
   min-height: 435px;
   justify-content: center;

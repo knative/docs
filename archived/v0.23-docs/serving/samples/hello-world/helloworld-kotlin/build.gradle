@@ -1,0 +1,21 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.4.10"
+}
+apply plugin: 'application'
+
+mainClassName = 'com.example.hello.MainKt'
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "io.ktor:ktor-server-netty:1.3.1"
+}

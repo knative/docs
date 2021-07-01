@@ -1,0 +1,12 @@
+apiVersion: sources.knative.dev/v1beta1
+kind: PingSource
+metadata:
+  name: ping-source
+spec:
+  schedule: "*/2 * * * *"
+  jsonData: '{"message": "Hello world!"}'
+  sink:
+    ref:
+      apiVersion: flows.knative.dev/v1
+      kind: Sequence
+      name: sequence

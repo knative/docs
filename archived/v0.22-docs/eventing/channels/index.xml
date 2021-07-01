@@ -1,0 +1,372 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Channels</title>
+    <link>https://knative.dev/v0.22-docs/eventing/channels/</link>
+    <description>Recent content in Channels on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.22-docs/eventing/channels/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.22-Docs: Channel types and defaults</title>
+      <link>https://knative.dev/v0.22-docs/eventing/channels/channel-types-defaults/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/eventing/channels/channel-types-defaults/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Knative provides the InMemoryChannel channel implementation by default. This default implementation is useful for developers who do not want to configure a specific implementation type, such as Apache Kafka or NATSS channels.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; InMemoryChannel channels should not be used in production environments.&lt;/p&gt;
+&lt;p&gt;The default channel implementation is specified in the &lt;code&gt;default-ch-webhook&lt;/code&gt; ConfigMap in the &lt;code&gt;knative-eventing&lt;/code&gt; namespace.
+For more information about modifying ConfigMaps, see &lt;a href=&#34;../docs/install/configuring-eventing-cr/&#34;&gt;Configuring the Eventing Operator custom resource&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the following example, the cluster default channel implementation is InMemoryChannel, while the namespace default channel implementation for the &lt;code&gt;example-namespace&lt;/code&gt; is KafkaChannel.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ConfigMap&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default-ch-webhook&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;knative-eventing&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;default-ch-config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    clusterDefault:
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;      apiVersion: messaging.knative.dev/v1
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;      kind: InMemoryChannel
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    namespaceDefaults:
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;      example-namespace:
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        apiVersion: messaging.knative.dev/v1beta1
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        kind: KafkaChannel
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;        spec:
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;          numPartitions: 2
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;          replicationFactor: 1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Default channels can be configured for the cluster, a namespace on the cluster, or both.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If a default channel implementation is configured for a namespace, this will overwrite the configuration for the cluster.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Creating a channel using cluster or namespace defaults</title>
+      <link>https://knative.dev/v0.22-docs/eventing/channels/create-default-channel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/eventing/channels/create-default-channel/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Developers can create channels of any supported implementation type by creating an instance of a Channel object.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a Channel object:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;messaging.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Channel&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-channel&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Since this object is created in the &lt;code&gt;default&lt;/code&gt; namespace, according to the default ConfigMap example in the previous section, it will be an InMemoryChannel channel implementation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--TODO: Add tabs for kn etc--&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;After the Channel object is created, a mutating admission webhook sets the
+&lt;code&gt;spec.channelTemplate&lt;/code&gt; based on the default channel implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;messaging.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Channel&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-channel&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;channelTemplate&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;messaging.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;InMemoryChannel&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;   The &lt;code&gt;spec.channelTemplate&lt;/code&gt; property cannot be changed after creation, since it is set by the default channel mechanism, not the user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The channel controller creates a backing channel instance
+based on the &lt;code&gt;spec.channelTemplate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When this mechanism is used, two objects are created, a generic Channel object, and an InMemoryChannel object. The generic object acts as a proxy for the InMemoryChannel object, by copying its subscriptions to and setting its status to that of the InMemoryChannel object.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Defaults only apply on object creation. Defaults are applied by the webhook only on Channel or Sequence creation. If the default settings change, the new defaults will only apply to newly-created channels, brokers, or sequences. Existing ones will not change.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Available Channels</title>
+      <link>https://knative.dev/v0.22-docs/eventing/channels/channels-crds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/eventing/channels/channels-crds/</guid>
+      <description>
+        
+        
+        &lt;!--
+This is a generated file and should not be changed manually. All changes should follow the
+procedure:
+
+1. Update the information in [`channels.yaml`](channels.yaml).
+
+2. Run the generator tool:
+    ```shell
+    go run eventing/channels/generator/main.go
+    ```
+--&gt;
+&lt;p&gt;This is a non-exhaustive list of the available Channels for Knative Eventing.&lt;/p&gt;
+&lt;p&gt;Notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inclusion in this list is not an endorsement, nor does it imply any level of
+support.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Status&lt;/th&gt;
+&lt;th&gt;Support&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/google/knative-gcp&#34;&gt;GCP PubSub&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Proof of Concept&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;td&gt;Channels are backed by &lt;a href=&#34;https://cloud.google.com/pubsub/&#34;&gt;GCP PubSub&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/knative/eventing/tree/release-0.22/config/channels/in-memory-channel/README.md&#34;&gt;InMemoryChannel&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Proof of Concept&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;td&gt;In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/knative-sandbox/eventing-kafka/tree/release-0.22/pkg/channel/consolidated/README.md&#34;&gt;KafkaChannel - Consolidated&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Proof of Concept&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;td&gt;Channels are backed by &lt;a href=&#34;http://kafka.apache.org/&#34;&gt;Apache Kafka&lt;/a&gt; topics. The original Knative KafkaChannel implementation which utilizes a single combined Kafka Producer / Consumer deployment.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/knative-sandbox/eventing-kafka/tree/release-0.22/pkg/channel/distributed/README.md&#34;&gt;KafkaChannel - Distributed&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Proof of Concept&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;td&gt;Channels are backed by &lt;a href=&#34;http://kafka.apache.org/&#34;&gt;Apache Kafka&lt;/a&gt; topics. An alternate KafkaChannel implementation, contributed by SAP&amp;rsquo;s &lt;a href=&#34;https://kyma-project.io/&#34;&gt;Kyma&lt;/a&gt; project, which provides a more granular deployment of Producers / Consumers.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/knative-sandbox/eventing-natss/tree/release-0.22/config/README.md&#34;&gt;NatssChannel&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Proof of Concept&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;td&gt;Channels are backed by &lt;a href=&#34;https://github.com/nats-io/nats-streaming-server#configuring&#34;&gt;NATS Streaming&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Subscriptions</title>
+      <link>https://knative.dev/v0.22-docs/eventing/channels/subscriptions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/eventing/channels/subscriptions/</guid>
+      <description>
+        
+        
+        &lt;p&gt;After you have created a channel and a sink, you can create a subscription to enable event delivery.&lt;/p&gt;
+&lt;h2 id=&#34;creating-a-subscription&#34;&gt;Creating a subscription&lt;/h2&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;creating-a-subscription&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;creating-a-subscription-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#creating-a-subscription-0&#34; role=&#34;tab&#34; aria-controls=&#34;creating-a-subscription-0&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;creating-a-subscription-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#creating-a-subscription-1&#34; role=&#34;tab&#34; aria-controls=&#34;creating-a-subscription-1&#34; aria-selected=&#34;true&#34;&gt;YAML&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;creating-a-subscription-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;creating-a-subscription-0-tab&#34;&gt;
+    
+      &lt;p&gt;Create a subscription between a channel and a sink:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kn subscription create &amp;lt;subscription_name&amp;gt; \
+  --channel &amp;lt;Group:Version:Kind&amp;gt;:&amp;lt;channel_name&amp;gt; \
+  --sink &amp;lt;sink_prefix&amp;gt;:&amp;lt;sink_name&amp;gt; \
+  --sink-reply &amp;lt;sink_prefix&amp;gt;:&amp;lt;sink_name&amp;gt; \
+  --sink-dead-letter &amp;lt;sink_prefix&amp;gt;:&amp;lt;sink_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--channel&lt;/code&gt; specifies the source for cloud events that should be processed. You must provide the channel name. If you are not using the default channel that is backed by the Channel resource, you must prefix the channel name with the &lt;code&gt;&amp;lt;Group:Version:Kind&amp;gt;&lt;/code&gt; for the specified channel type. For example, this will be &lt;code&gt;messaging.knative.dev:v1beta1:KafkaChannel&lt;/code&gt; for a Kafka backed channel.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--sink&lt;/code&gt; specifies the target destination to which the event should be delivered. By default, the &lt;code&gt;&amp;lt;sink_name&amp;gt;&lt;/code&gt; is interpreted as a Knative service of this name, in the same namespace as the subscription. You can specify the type of the sink by using one of the following prefixes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ksvc&lt;/code&gt;: A Knative service.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;svc&lt;/code&gt;: A Kubernetes Service.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;channel&lt;/code&gt;: A channel that should be used as destination. Only default channel types can be referenced here.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;broker&lt;/code&gt;: An Eventing broker.
+&lt;br&gt;
+ &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--sink-reply&lt;/code&gt; and &lt;code&gt;--sink-dead-letter&lt;/code&gt; are optional arguments. They can be used to specify where the sink reply will be sent to, and where to send the cloud event in case of a failure, respectively. Both use the same naming conventions for specifying the sink as the &lt;code&gt;--sink&lt;/code&gt; flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kn subscription create mysubscription --channel mychannel --sink ksvc:myservice
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This example command creates a channel named &lt;code&gt;mysubscription&lt;/code&gt;, that routes events from a channel named &lt;code&gt;mychannel&lt;/code&gt; to a Knative service named &lt;code&gt;myservice&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The sink prefix is optional. It is also possible to specify the service for &lt;code&gt;--sink&lt;/code&gt; as just &lt;code&gt;--sink &amp;lt;service_name&amp;gt;&lt;/code&gt; and omit the &lt;code&gt;ksvc&lt;/code&gt; prefix.&lt;/p&gt;
+
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;creating-a-subscription-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;creating-a-subscription-1-tab&#34;&gt;
+    
+      &lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a Subscription object in a YAML file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;messaging.knative.dev/v1beta1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Subscription&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;subscription_name&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Name of the subscription.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;channel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;messaging.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Channel&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;channel_name&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Configuration settings for the channel that the subscription connects to.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;delivery&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;deadLetterSink&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ref&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;service_name&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Configuration settings for event delivery.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This tells the subscription what happens to events that cannot be delivered to the subscriber.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# When this is configured, events that failed to be consumed are sent to the deadLetterSink.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The deadLetterSink value must be a Destination.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;subscriber&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ref&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;service_name&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Configuration settings for the subscriber. This is the event sink that events are delivered to from the channel.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apply the YAML file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl apply -f &amp;lt;filename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;listing-subscriptions&#34;&gt;Listing subscriptions&lt;/h2&gt;
+&lt;p&gt;You can list all existing subscriptions by using the &lt;code&gt;kn&lt;/code&gt; CLI tool.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;List all subscriptions:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kn subscription list
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;List subscriptions in YAML format:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kn subscription list -o yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;describing-a-subscription&#34;&gt;Describing a subscription&lt;/h2&gt;
+&lt;p&gt;You can print details about a subscription by using the &lt;code&gt;kn&lt;/code&gt; CLI tool:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kn subscription describe &amp;lt;subscription_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;!--TODO: Add an example command and output--&gt;
+&lt;!--TODO: Add details for kn subscription update - existing generated docs weren&#39;t clear enough, need better explained examples--&gt;
+&lt;h2 id=&#34;deleting-subscriptions&#34;&gt;Deleting subscriptions&lt;/h2&gt;
+&lt;p&gt;You can delete a subscription by using the &lt;code&gt;kn&lt;/code&gt; or &lt;code&gt;kubectl&lt;/code&gt; CLI tools.&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;deleting-a-subscription&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;deleting-a-subscription-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#deleting-a-subscription-0&#34; role=&#34;tab&#34; aria-controls=&#34;deleting-a-subscription-0&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;deleting-a-subscription-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#deleting-a-subscription-1&#34; role=&#34;tab&#34; aria-controls=&#34;deleting-a-subscription-1&#34; aria-selected=&#34;true&#34;&gt;kubectl&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;deleting-a-subscription-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;deleting-a-subscription-0-tab&#34;&gt;
+    
+      &lt;pre&gt;&lt;code&gt;kn subscription delete &amp;lt;subscription_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;deleting-a-subscription-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;deleting-a-subscription-1-tab&#34;&gt;
+    
+      &lt;pre&gt;&lt;code&gt;kubectl subscription delete &amp;lt;subscription_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
