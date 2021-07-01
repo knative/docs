@@ -317,7 +317,7 @@ plugins:
         eventing/parallel.md: eventing/flows/parallel.md
         eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
         eventing/samples/gcp-pubsub-source/README.md: eventing/sources/cloud-pubsub-source/README.md
-        eventing/samples/kubernetes-event-source/index.md: eventing/sources/apiserversource/getting-started/README.md
+        eventing/samples/kubernetes-event-source/index.md: developer/eventing/sources/apiserversource/getting-started/README.md
         eventing/samples/ping-source/index.md: eventing/sources/ping-source/README.md
         eventing/samples/sequence/index.md: eventing/flows/sequence/README.md
         eventing/samples/sequence/sequence-replay-to-event-display/index.md: eventing/flows/sequence/sequence-reply-to-event-display/README.md
@@ -337,10 +337,10 @@ plugins:
         eventing/sequence.md: eventing/flows/sequence/README.md
         eventing/sink/README.md: developer/eventing/sinks/README.md
         eventing/sink/kafka-sink.md: developer/eventing/sinks/kafka-sink.md
-        eventing/sources/apiserversource/index.md: eventing/sources/apiserversource/README.md
+        eventing/sources/apiserversource/index.md: developer/eventing/sources/apiserversource/README.md
         eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
         eventing/triggers/index.md: eventing/broker/triggers/README.md
-        help/README.md: docs/help/contributor/README.md
+        help/README.md: help/contributor/README.md
         install/README.md: admin/install/README.md
         install/check-install-version.md: check-install-version.md
         install/collecting-logs/index.md: admin/collecting-logs/README.md
