@@ -4,16 +4,17 @@
     //todo
 
 ## Words requiring code formatting
-Use code formatting to indicate special purpose text. Apply code formatting to the following content:
+Apply code formatting only to special-purpose text:
 
-* Filenames and path names
+* Filenames
+* Path names
 * Any text that goes into a CLI
 
 ## Specify the programming language
 
-> Be sure to specify the language your code is in as part of the code block
+> Specify the language your code is in as part of the code block
 
-> Specify non-language specific code, like CLI commands, specify ```bash (see below for formatting).
+> Specify non-language specific code, like CLI commands, with ```bash (see below for formatting).
 
 === ":white_check_mark: Correct"
     ```go

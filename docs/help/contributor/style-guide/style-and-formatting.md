@@ -1,11 +1,11 @@
 # Formatting standard and conventions
 
 ## Documenting Knative API Objects
-> Any Knative API Objects ought to use Title case.
+>  Use title case for Knative API objects.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
-|Channels | `Channels`
+|Channels | channels
 |Broker      | broker
 
 
