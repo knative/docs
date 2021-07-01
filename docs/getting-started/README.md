@@ -1,7 +1,10 @@
 # Before you begin
-Before you can get started with a Knative Quickstart deployment you must set up a development environment.
+!!! warning
+    Knative Quickstart Environments are for experimentation use only. For production installation, see our [Administrator's Guide](../admin)
 
-## Set up a development cluster
+Before you can get started with a Knative Quickstart deployment you must install kind and the Kubernetes CLI.
+
+## Install Kind (Kubernetes in Docker)
 
 You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker) to run a local Kubernetes cluster with Docker container nodes.
 
