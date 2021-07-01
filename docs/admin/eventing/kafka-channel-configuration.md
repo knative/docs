@@ -10,10 +10,9 @@ To use Kafka Channels, you must:
 
 ## Create a `kafka-channel` ConfigMap
 
-1. Create a `kafka-channel` ConfigMap by running the command:
+1. Create a YAML file for the `kafka-channel` ConfigMap using the template below:
 
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -26,16 +25,22 @@ To use Kafka Channels, you must:
         spec:
           numPartitions: 3
           replicationFactor: 1
-    EOF
     ```
 
     !!! note
         This example specifies two extra parameters that are specific to Kafka Channels; `numPartitions` and `replicationFactor`.
 
-1. Optional. To create a Broker that uses Kafka Channels, specify the `kafka-channel` ConfigMap in the Broker spec. You can do this by running the command:
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
+
+1. Optional. To create a Broker that uses Kafka Channels, specify the `kafka-channel` ConfigMap in the Broker spec. You can do this by creating a YAML file using the template below:
 
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: eventing.knative.dev/v1
     kind: Broker
     metadata:
@@ -49,5 +54,11 @@ To use Kafka Channels, you must:
         kind: ConfigMap
         name: kafka-channel
         namespace: knative-eventing
-    EOF
     ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.

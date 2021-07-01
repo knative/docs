@@ -45,72 +45,75 @@ Knative supports the following Auto TLS modes:
 
 ## Enabling Auto TLS
 
-1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster to define who issues the TLS certificates, how requests are validated,
+1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster
+to define who issues the TLS certificates, how requests are validated,
 and which DNS provider validates those requests.
 
-    ### ClusterIssuer for DNS-01 challenge
+    - **ClusterIssuer for DNS-01 challenge:** use the cert-manager reference to determine how to configure your `ClusterIssuer` file.
 
-    Use the cert-manager reference to determine how to configure your
-    `ClusterIssuer` file:
-    - See the generic
-      [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
-    - Also see the
-      [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
+        - See the generic [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
+        - Also see the
+        [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
 
-      **Example**: Cloud DNS `ClusterIssuer` configuration file:
+        For example, the following `ClusterIssuer` file named `letsencrypt-issuer` is
+        configured for the Let's Encrypt CA and Google Cloud DNS.
+        The Let's Encrypt account info, required `DNS-01` challenge type, and
+        Cloud DNS provider info is defined under `spec`.
 
-      The following `letsencrypt-issuer` named `ClusterIssuer` file is
-      configured for the Let's Encrypt CA and Google Cloud DNS. Under `spec`,
-      the Let's Encrypt account info, required `DNS-01` challenge type, and
-      Cloud DNS provider info defined.
+        ```bash
+        apiVersion: cert-manager.io/v1
+        kind: ClusterIssuer
+        metadata:
+          name: letsencrypt-dns-issuer
+        spec:
+          acme:
+            server: https://acme-v02.api.letsencrypt.org/directory
+            # This will register an issuer with LetsEncrypt.  Replace
+            # with your admin email address.
+            email: myemail@gmail.com
+            privateKeySecretRef:
+              # Set privateKeySecretRef to any unused secret name.
+              name: letsencrypt-dns-issuer
+            solvers:
+            - dns01:
+                clouddns:
+                  # Set this to your GCP project-id
+                  project: $PROJECT_ID
+                  # Set this to the secret that we publish our service account key
+                  # in the previous step.
+                  serviceAccountSecretRef:
+                    name: cloud-dns-key
+                    key: key.json
+        ```
 
-      ```bash
-      apiVersion: cert-manager.io/v1
-      kind: ClusterIssuer
-      metadata:
-        name: letsencrypt-dns-issuer
-      spec:
-        acme:
-          server: https://acme-v02.api.letsencrypt.org/directory
-          # This will register an issuer with LetsEncrypt.  Replace
-          # with your admin email address.
-          email: myemail@gmail.com
-          privateKeySecretRef:
-            # Set privateKeySecretRef to any unused secret name.
-            name: letsencrypt-dns-issuer
-          solvers:
-          - dns01:
-              clouddns:
-                # Set this to your GCP project-id
-                project: $PROJECT_ID
-                # Set this to the secret that we publish our service account key
-                # in the previous step.
-                serviceAccountSecretRef:
-                  name: cloud-dns-key
-                  key: key.json
-      ```
+    - **ClusterIssuer for HTTP-01 challenge**
 
-    ###  ClusterIssuer for HTTP-01 challenge
+        To apply the ClusterIssuer for HTTP01 challenge:
 
-    Run the following command to apply the ClusterIssuer for HTT01 challenge:
+        1. Create a YAML file using the template below:
 
-    ```yaml
-    kubectl apply -f - <<EOF
-    apiVersion: cert-manager.io/v1
-    kind: ClusterIssuer
-    metadata:
-      name: letsencrypt-http01-issuer
-    spec:
-      acme:
-        privateKeySecretRef:
-          name: letsencrypt
-        server: https://acme-v02.api.letsencrypt.org/directory
-        solvers:
-        - http01:
-           ingress:
-             class: istio
-    EOF
-    ```
+            ```yaml
+            apiVersion: cert-manager.io/v1
+            kind: ClusterIssuer
+            metadata:
+              name: letsencrypt-http01-issuer
+            spec:
+              acme:
+                privateKeySecretRef:
+                  name: letsencrypt
+                server: https://acme-v02.api.letsencrypt.org/directory
+                solvers:
+                - http01:
+                   ingress:
+                     class: istio
+            ```
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply --filename <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
 1.  Ensure that the ClusterIssuer is created successfully:
 

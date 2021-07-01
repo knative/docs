@@ -102,22 +102,29 @@ Knative system pods access your application using the following paths:
 The `/metrics` path allows the autoscaler pod to collect metrics.
 The `/healthz` path allows system pods to probe the service.
 
-You can add the `/metrics` and `/healthz` paths to the AuthorizationPolicy as shown in the example:
+To add the `/metrics` and `/healthz` paths to the AuthorizationPolicy:
 
-```yaml
-kubectl apply -f - <<EOF
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: allowlist-by-paths
-  namespace: serving-tests
-spec:
-  action: ALLOW
-  rules:
-  - to:
-    - operation:
-        paths:
-        - /metrics   # The path to collect metrics by system pod.
-        - /healthz   # The path to probe by system pod.
-EOF
-```
+1. Create a YAML file for your AuthorizationPolicy using the example below:
+
+    ```yaml
+    apiVersion: security.istio.io/v1beta1
+    kind: AuthorizationPolicy
+    metadata:
+      name: allowlist-by-paths
+      namespace: serving-tests
+    spec:
+      action: ALLOW
+      rules:
+      - to:
+        - operation:
+            paths:
+            - /metrics   # The path to collect metrics by system pod.
+            - /healthz   # The path to probe by system pod.
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
