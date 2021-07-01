@@ -68,6 +68,12 @@
   font-size: 100%;
 }
 
+/* Giving h4 tag distinctive style because it is non-differntial with bold text */
+.md-typeset h4 {
+  font-size: .9rem;
+  font-weight: normal;
+}
+
 /* fix wrapping behavior of code in tables */
 .md-typeset table code {
   word-break: normal;
