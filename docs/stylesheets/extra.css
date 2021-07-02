@@ -207,4 +207,12 @@
 .md-footer-meta {
     background-color: var(--md-footer-bg-color);
 }
-/* ------------------------------------------------- */
+
+.footer-links {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+.footer-links a {
+  margin: 0.4em;
+}
