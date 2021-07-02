@@ -1,0 +1,2936 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Welcome to Knative</title>
+    <link>https://knative.dev/v0.21-docs/</link>
+    <description>Recent content in Welcome to Knative on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.21-docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.21-Docs: </title>
+      <link>https://knative.dev/v0.21-docs/serving/spec/knative-api-specification-1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/serving/spec/knative-api-specification-1.0/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;knative-serving-api-specification&#34;&gt;Knative Serving API Specification&lt;/h1&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+&lt;strong&gt;Status&lt;/strong&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+APPROVED&lt;/p&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+&lt;strong&gt;Created&lt;/strong&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+2019-06-24&lt;/p&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+&lt;strong&gt;Last Updated&lt;/strong&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+2020-12-16&lt;/p&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;p style=&#34;text-align: right&#34;&gt;
+&lt;strong&gt;Version&lt;/strong&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt; 1.0.2  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;The Knative serving platform provides common abstractions for managing
+request-driven, short-lived, stateless compute resources in the style of common
+FaaS and PaaS offerings. This document describes the structure, lifecycle and
+management of Knative resources in the context of the
+&lt;a href=&#34;https://github.com/kubernetes/community/blob/master/contributors/design-proposals/architecture/resource-management.md&#34;&gt;Kubernetes Resource Model&lt;/a&gt;.
+An understanding of the Kubernetes API interface and the capabilities of
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/&#34;&gt;Kubernetes Custom Resources&lt;/a&gt;
+is assumed. The Knative Serving API surface aims to support the following
+additional constraints beyond the general Kubernetes model:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Client-side orchestration should not be required for common operations such as
+deployment, rollback, or simple imperative updates (&amp;ldquo;change environment
+variable X&amp;rdquo;).&lt;/li&gt;
+&lt;li&gt;Both declarative (aka GitOps) and imperative (command-driven) management of
+resources should be usable, though not on the same resources at the same time.
+(I.e. one application may use a checked-in configuration which is
+automatically pushed, while a different application may be pushed and updated
+by hand with the authoritative state living on the server.)&lt;/li&gt;
+&lt;li&gt;Developers can effectively use the Knative Serving stack without needing to
+engage beyond the core Knative resource model. Conversely, platform operators
+may restrict developers (e.g. via RBAC) to only be able to operate on the core
+Knative Serving resources, and may provide additional abstractions to manage
+platform-specific settings.&lt;/li&gt;
+&lt;li&gt;The Knative Serving API may be deployed in a single-tenant or multi-tenant
+environment; it is assumed that developers may not have access to multiple
+namespaces or any cluster-level resources.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This document does not define the
+&lt;a href=&#34;https://github.com/knative/serving/blob/master/docs/runtime-contract.md&#34;&gt;runtime contract (see this document)&lt;/a&gt;
+nor prescribe specific implementations of supporting services such as access
+control, observability, or resource management.&lt;/p&gt;
+&lt;p&gt;This document makes reference in a few places to different profiles for Knative
+Serving installations. A profile in this context is a set of operations,
+resources, and fields that are accessible to a developer interacting with a
+Knative installation. Currently, only a single (minimal) profile for Knative
+Serving is defined, but additional profiles may be defined in the future to
+standardize advanced functionality. A minimal profile is one that implements all
+of the &amp;ldquo;MUST&amp;rdquo;, &amp;ldquo;MUST NOT&amp;rdquo;, and &amp;ldquo;REQUIRED&amp;rdquo; conditions of this document.&lt;/p&gt;
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;The key words &amp;ldquo;MUST&amp;rdquo;, &amp;ldquo;MUST NOT&amp;rdquo;, &amp;ldquo;REQUIRED&amp;rdquo;, &amp;ldquo;SHALL&amp;rdquo;, &amp;ldquo;SHALL NOT&amp;rdquo;, &amp;ldquo;SHOULD&amp;rdquo;,
+&amp;ldquo;SHOULD NOT&amp;rdquo;, &amp;ldquo;RECOMMENDED&amp;rdquo;, &amp;ldquo;NOT RECOMMENDED&amp;rdquo;, &amp;ldquo;MAY&amp;rdquo;, and &amp;ldquo;OPTIONAL&amp;rdquo; are to be
+interpreted as described in &lt;a href=&#34;https://tools.ietf.org/html/rfc2119&#34;&gt;RFC 2119&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There is no formal specification of the Kubernetes API and Resource Model. This
+document assumes Kubernetes 1.13 behavior; this behavior will typically be
+supported by many future Kubernetes versions. Additionally, this document may
+reference specific core Kubernetes resources; these references may be
+illustrative (i.e. &lt;em&gt;an implementation on Kubernetes&lt;/em&gt;) or descriptive (i.e. &lt;em&gt;this
+Kubernetes resource MUST be exposed&lt;/em&gt;). References to these core Kubernetes
+resources will be annotated as either illustrative or descriptive.&lt;/p&gt;
+&lt;p&gt;This document considers two users of a given Knative Serving environment, and is
+particularly concerned with the expectations of developers (and language and
+tooling developers, by extension) deploying applications to the environment.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Developers&lt;/strong&gt; write code which is packaged into a container which is run on
+the Knative Serving cluster.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Language and tooling developers&lt;/strong&gt; typically write tools used by developers
+to package code into containers. As such, they are concerned that tooling
+which wraps developer code to produce resources which match the Knative API
+contract.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Operators&lt;/strong&gt; (also known as &lt;strong&gt;platform providers&lt;/strong&gt;) provision the compute
+resources and manage the software configuration of Knative Serving and the
+underlying abstractions (for example: Linux, Kubernetes, Istio, etc).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;rbac-profile&#34;&gt;RBAC Profile&lt;/h1&gt;
+&lt;p&gt;In order to validate the controls described in
+&lt;a href=&#34;#resource-overview&#34;&gt;Resource Overview&lt;/a&gt;, the following Kubernetes RBAC profile
+may be applied in a Kubernetes cluster. This Kubernetes RBAC is an illustrative
+example of the minimal profile rather than a requirement. This Role should be
+sufficient to develop, deploy, and manage a set of serving applications within a
+single namespace. Knative Conformance tests against &amp;ldquo;MUST&amp;rdquo;, &amp;ldquo;MUST NOT&amp;rdquo;, and
+&amp;ldquo;REQUIRED&amp;rdquo; conditions are expected to pass when using this profile:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;rbac.authorization.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Role&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;knative-developer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rules&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiGroups&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;serving.knative.dev&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;services&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;verbs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;get&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;list&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;create&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;update&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;delete&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiGroups&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;serving.knative.dev&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;configurations&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;routes&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;revisions&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;verbs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;get&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;list&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;resource-overview&#34;&gt;Resource Overview&lt;/h1&gt;
+&lt;p&gt;The Knative Serving API provides a set of
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/&#34;&gt;Kubernetes Custom Resources&lt;/a&gt;
+to manage stateless request-triggered (i.e. on-demand) autoscaled containers.
+Knative Serving assumes the use of HTTP (including HTTP/2 and layered protocols
+such as &lt;a href=&#34;https://grpc.io/&#34;&gt;gRPC&lt;/a&gt;) as a request transport. In addition to
+low-level scaling and routing objects, Knative Serving provides a high-level
+Service object to reduce the cognitive overhead for application developers – the
+Service object should provide sufficient controls to cover most of application
+deployment scenarios (by frequency).&lt;/p&gt;
+&lt;h2 id=&#34;extensions&#34;&gt;Extensions&lt;/h2&gt;
+&lt;p&gt;Extending the Knative resource model allows for custom semantics to be
+offered by implementions of the specification. Unless otherwise noted,
+implementations of this specification MAY define extensions but those
+extensions MUST NOT contradict the semantics defined within this specification.&lt;/p&gt;
+&lt;p&gt;There are several ways in which implementations can extend the model:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Annotations and Labels&lt;br&gt;
+&lt;em&gt;Note&lt;/em&gt;: Because this mechanism allows new controllers to be added to the
+system without requiring code changes to the core Knative components, it is
+the preferred mechanism for extending the Knative interface.&lt;/p&gt;
+&lt;p&gt;Allowing end users to include annotations or labels on the Knative resources
+allows for them to indicate that they would like some additional semantics
+applied to those resources. When defining annotations, or labels, it
+is STRONGLY RECOMMENDED that they have some vendor-specific prefix to
+avoid any potential naming conflict with other extensions or future
+annotations defined by the specification. For more information on
+annotations and labels, see
+&lt;a href=&#34;https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#label-selector-and-annotation-conventions&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Additional Properties&lt;br&gt;
+There might be times when annotations and labels can not be used to
+properly (or easily) allow end users to convey their desired semantics,
+in which case additional well-defined properties might need to be
+defined by implementations.&lt;/p&gt;
+&lt;p&gt;In these cases vendor-specific properties MAY be defined and it is
+STRONGLY RECOMMENDED that they be named, or prefixed, in such a way
+to clearly indicate their scope and purpose. Choosing a name that
+is too generic might lead to conflicts with other vendor extensions
+or future changes to the specification.&lt;/p&gt;
+&lt;p&gt;For example, adding authentication on a per-tag basis via annotations
+might look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;annotations:
+  knative.vendor.com/per-tag-auth: &amp;quot;{&#39;cannary&#39;: true, &#39;latest&#39;: true}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;but, that is not as user-friendly as extending the &lt;code&gt;traffic&lt;/code&gt; section itself:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;spec:
+  traffic:
+  - revisionName: a
+    tag: cannary
+    knative.vendor.com/auth: true
+  - revisonName: b
+    percent: 100
+    tag: stable
+  - configurationName: this
+    tag: latest
+    knative.vendor.com/auth: true
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;service&#34;&gt;Service&lt;/h2&gt;
+&lt;p&gt;The Knative Service represents an instantiation of a single serverless container
+environment (e.g. a microservice) over time. As such, a Service includes both a
+network address by which the Service may be reached as well as the application
+code and configuration needed to run the Service. The following table details
+which operations must be made available to a developer accessing a Knative
+Service using a minimal profile:&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;API Operation&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Developer Access Requirements&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Create (POST)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Patch (&lt;a href=&#34;https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/devel/api-conventions.md#patch-operations&#34;&gt;PATCH&lt;/a&gt;)^
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Replace (PUT)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Delete (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Read (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;List (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Watch (GET)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;DeleteCollection (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;^ Kubernetes only allows JSON merge patch for CRD types. It is recommended that
+if allowed, at least JSON Merge patch be made available.
+&lt;a href=&#34;https://tools.ietf.org/html/rfc7386&#34;&gt;JSON Merge Patch Spec (RFC 7386)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;revision&#34;&gt;Revision&lt;/h2&gt;
+&lt;p&gt;The Knative Revision represents a stateless, autoscaling snapshot-in-time of
+application code and configuration. Revisions enable progressive rollout and
+rollback of application changes by changing the HTTP routing between Service
+names and Revision instances. As such, Revisions are generally immutable, except
+where they may reference mutable core Kubernetes resources such as ConfigMaps
+and Secrets. Revisions can also be mutated by changes in Revision defaults.
+Changes to defaults that mutate Revisions are generally syntactic and not
+semantic.&lt;/p&gt;
+&lt;p&gt;Developers MUST NOT be able to create Revisions or update Revision &lt;code&gt;spec&lt;/code&gt;
+directly; Revisions MUST be created in response to updates to a Configuration
+&lt;code&gt;spec&lt;/code&gt;. It is RECOMMENDED that developers are able to force the deletion of
+Revisions to both handle the possibility of leaked resources as well as for
+removal of known-bad Revisions to avoid future errors in managing the service.&lt;/p&gt;
+&lt;p&gt;The following table details which operations must be made available to a
+developer accessing a Knative Revision using a minimal profile:&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;API Operation&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Developer Access Requirements&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Create (POST)
+   &lt;/td&gt;
+   &lt;td&gt;FORBIDDEN
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Patch (&lt;a href=&#34;https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/devel/api-conventions.md#patch-operations&#34;&gt;PATCH&lt;/a&gt;)^
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL (&lt;code&gt;spec&lt;/code&gt; disallowed)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Replace (PUT)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL (&lt;code&gt;spec&lt;/code&gt; changes disallowed)
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Delete (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Read (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;List (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Watch (GET)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;DeleteCollection (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;^ Kubernetes only allows JSON merge patch for CRD types. It is recommended that
+if allowed, at least JSON Merge patch be made available.
+&lt;a href=&#34;https://tools.ietf.org/html/rfc7386&#34;&gt;JSON Merge Patch Spec (RFC 7386)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;route&#34;&gt;Route&lt;/h2&gt;
+&lt;p&gt;The Knative Route represents the current HTTP request routing state against a
+set of Revisions. To enable progressive rollout of serverless applications, a
+Route supports percentage-based request distribution across multiple application
+code and configuration states (Revisions).&lt;/p&gt;
+&lt;p&gt;Routes which are owned (controlled) by a Service SHOULD NOT be updated by
+developers; any changes will be reset by the Service controller.&lt;/p&gt;
+&lt;p&gt;The table below details which operations must be made available to a developer
+accessing a Knative Route using a minimal profile. For any non-minimal profile,
+the POST, PUT, or DELETE operations MUST be enabled as a group. This ensures
+that the developer has the ability to control the complete lifecycle of the
+object from create through deletion.&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;API Operation&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Developer Access Requirements&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Create (POST)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Patch (&lt;a href=&#34;https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/devel/api-conventions.md#patch-operations&#34;&gt;PATCH&lt;/a&gt;)^
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Replace (PUT)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Delete (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Read (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;List (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Watch (GET)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;DeleteCollection (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;^ Kubernetes only allows JSON merge patch for CRD types. It is recommended that
+if allowed, at least JSON Merge patch be made available.
+&lt;a href=&#34;https://tools.ietf.org/html/rfc7386&#34;&gt;JSON Merge Patch Spec (RFC 7386)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;The Knative Configuration represents the desired future state (after deployments
+complete) of a single autoscaled container application and configuration. The
+Configuration provides a template for creating Revisions as the desired state of
+the application changes.&lt;/p&gt;
+&lt;p&gt;Configurations which are owned (controlled) by a Service SHOULD NOT be updated
+by developers; any changes will be reset by the Service controller. These
+changes MAY still generate side effects such as the creation of additional
+Revisions.&lt;/p&gt;
+&lt;p&gt;The table below details which operations must be made available to a developer
+accessing a Knative Configuration using a minimal profile. For any advanced
+profile, the POST, PUT, or DELETE operations MUST be enabled as a group. This
+ensures that the developer has the ability to control the complete lifecycle of
+the object from create through deletion.&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;API Operation&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Developer Access Requirements&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Create (POST)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Patch (&lt;a href=&#34;https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/devel/api-conventions.md#patch-operations&#34;&gt;PATCH&lt;/a&gt;)^
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Replace (PUT)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Delete (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Read (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;List (GET)
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Watch (GET)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;DeleteCollection (DELETE)
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;^ Kubernetes only allows JSON merge patch for CRD types. It is recommended that
+if allowed, at least JSON Merge patch be made available.
+&lt;a href=&#34;https://tools.ietf.org/html/rfc7386&#34;&gt;JSON Merge Patch Spec (RFC 7386)&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;error-signalling&#34;&gt;Error Signalling&lt;/h1&gt;
+&lt;p&gt;The Knative API uses the
+&lt;a href=&#34;https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#typical-status-properties&#34;&gt;Kubernetes Conditions convention&lt;/a&gt;
+to communicate errors and problems to the user. Each user-visible resource
+described in Resource Overview MUST have a &lt;code&gt;conditions&lt;/code&gt; field in &lt;code&gt;status&lt;/code&gt;, which
+must be a list of &lt;code&gt;Condition&lt;/code&gt; objects of the following form (note that the
+actual API object types may be named &lt;code&gt;FooCondition&lt;/code&gt; to allow better code
+generation and disambiguation between similar fields in the same &lt;code&gt;apiGroup&lt;/code&gt;):&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;Field&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Default Value&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;type&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;code&gt;string&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;The category of the condition, as a short, CamelCase word or phrase.
+&lt;p&gt;
+This is the primary key of the Conditions list when viewed as a map.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED – No default
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;status&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Enum:&lt;ul&gt;
+&lt;li&gt;&#34;True&#34;
+&lt;li&gt;&#34;False&#34;
+&lt;li&gt;&#34;Unknown&#34;&lt;/li&gt;&lt;/ul&gt;
+   &lt;/td&gt;
+   &lt;td&gt;The last measured status of this condition.
+   &lt;/td&gt;
+   &lt;td&gt;&#34;Unknown&#34;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;reason&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;One-word CamelCase reason for the condition&#39;s last transition.
+   &lt;/td&gt;
+   &lt;td&gt;&#34;&#34;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;message&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;Human-readable sentence describing the last transition.
+   &lt;/td&gt;
+   &lt;td&gt;&#34;&#34;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;severity&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Enum:&lt;ul&gt;
+&lt;li&gt;&#34;&#34;
+&lt;li&gt;&#34;Warning&#34;
+&lt;li&gt;&#34;Info&#34;&lt;/li&gt;&lt;/ul&gt;
+   &lt;/td&gt;
+   &lt;td&gt;If present, represents the severity of the condition. An empty severity represents a severity level of &#34;Error&#34;. 
+   &lt;/td&gt;
+   &lt;td&gt;&#34;&#34;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;lastTransitionTime&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Timestamp
+   &lt;/td&gt;
+   &lt;td&gt;Last update time for this condition.
+   &lt;/td&gt;
+   &lt;td&gt;&#34;&#34; – may be unset
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Additionally, the resource&amp;rsquo;s &lt;code&gt;status.conditions&lt;/code&gt; field MUST be managed as
+follows to enable clients (particularly user interfaces) to present useful
+diagnostic and error message to the user. In the following section, conditions
+are referred to by their &lt;code&gt;type&lt;/code&gt; (aka the string value of the &lt;code&gt;type&lt;/code&gt; field on the
+Condition).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Each resource MUST have either a &lt;code&gt;Ready&lt;/code&gt; condition (for ongoing systems) or
+&lt;code&gt;Succeeded&lt;/code&gt; condition (for resources that run to completion) with
+&lt;code&gt;severity=&amp;quot;&amp;quot;&lt;/code&gt;, which MUST use the &lt;code&gt;True&lt;/code&gt;, &lt;code&gt;False&lt;/code&gt;, and &lt;code&gt;Unknown&lt;/code&gt; status
+values as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;False&lt;/code&gt; MUST indicate a failure condition.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Unknown&lt;/code&gt; SHOULD indicate that reconciliation is not yet complete and
+success or failure is not yet determined.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;True&lt;/code&gt; SHOULD indicate that the application is fully reconciled and
+operating correctly.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;Unknown&lt;/code&gt; and &lt;code&gt;True&lt;/code&gt; are specified as SHOULD rather than MUST requirements
+because there may be errors which prevent serving which cannot be determined
+by the API stack (e.g. DNS record configuration in certain environments).
+Implementations are expected to treat these as &amp;ldquo;MUST&amp;rdquo; for factors within the
+control of the implementation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For non-&lt;code&gt;Ready&lt;/code&gt; conditions, any conditions with &lt;code&gt;severity=&amp;quot;&amp;quot;&lt;/code&gt; (aka &amp;ldquo;Error
+conditions&amp;rdquo;) must be aggregated into the &amp;ldquo;Ready&amp;rdquo; condition as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If the condition is &lt;code&gt;False&lt;/code&gt;, &lt;code&gt;Ready&lt;/code&gt; MUST be &lt;code&gt;False&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If the condition is &lt;code&gt;Unknown&lt;/code&gt;, &lt;code&gt;Ready&lt;/code&gt; MUST be &lt;code&gt;False&lt;/code&gt; or &lt;code&gt;Unknown&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If the condition is &lt;code&gt;True&lt;/code&gt;, &lt;code&gt;Ready&lt;/code&gt; may be any of &lt;code&gt;True&lt;/code&gt;, &lt;code&gt;False&lt;/code&gt;, or
+&lt;code&gt;Unknown&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Implementations MAY choose to report that &lt;code&gt;Ready&lt;/code&gt; is &lt;code&gt;False&lt;/code&gt; or &lt;code&gt;Unknown&lt;/code&gt;
+even if all Error conditions report a status of &lt;code&gt;True&lt;/code&gt; (i.e. there may be
+additional hidden implementation conditions which feed into the &lt;code&gt;Ready&lt;/code&gt;
+condition which are not reported.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Non-&lt;code&gt;Ready&lt;/code&gt; conditions with non-error severity MAY be surfaced by the
+implementation. Examples of &lt;code&gt;Warning&lt;/code&gt; or &lt;code&gt;Info&lt;/code&gt; conditions could include:
+missing health check definitions, scale-to-zero status, or non-fatal
+capacity limits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Conditions type names should be chosen to describe positive conditions where
+&lt;code&gt;True&lt;/code&gt; means that the condition has been satisfied. Some conditions may be
+transient (for example, &lt;code&gt;ResourcesAllocated&lt;/code&gt; might change between &lt;code&gt;True&lt;/code&gt; and
+&lt;code&gt;False&lt;/code&gt; as an application scales to and from zero). It is RECOMMENDED that
+transient conditions be indicated with a &lt;code&gt;severity=&amp;quot;Info&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;resource-lifecycle&#34;&gt;Resource Lifecycle&lt;/h1&gt;
+&lt;p&gt;Revisions are created by updates to the &lt;code&gt;spec&lt;/code&gt; of Configuration resources, which
+own the Revision lifecycle. Similarly, Service resources create and own
+(control) Routes and Configurations. In some profiles, Route and Configuration
+may be directly created without creating an owning Service; this is considered
+an advanced environment, as it exposes more concepts and higher-cardinality
+relationships to the developer.&lt;/p&gt;
+&lt;p&gt;This section describes the rules by which the different resources interact. The
+general Kubernetes model is that of
+&lt;a href=&#34;https://github.com/kubernetes/community/blob/master/contributors/design-proposals/architecture/principles.md#control-logic&#34;&gt;continuous reconciliation across eventually-consistent resources&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;ownership&#34;&gt;Ownership&lt;/h3&gt;
+&lt;p&gt;In several of the following sections, resources are said to &amp;ldquo;own&amp;rdquo; another
+resource. Ownership indicates that the owned resource is being managed by the
+owning resource and MUST be recorded using an
+&lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#ownerreference-v1-meta&#34;&gt;OwnerReference&lt;/a&gt;
+in &lt;code&gt;metadata.ownerReferences&lt;/code&gt; on the owned resource with &lt;code&gt;controller&lt;/code&gt; set to
+&lt;code&gt;True&lt;/code&gt; and &lt;code&gt;uid&lt;/code&gt; set to the UID of the owning resource.&lt;/p&gt;
+&lt;p&gt;If the owning resource determines an ownership conflict and does not hold an
+OwnerReference, the owning resource SHOULD NOT modify the resource, and SHOULD
+signal the conflict with an error Condition.&lt;/p&gt;
+&lt;p&gt;Deleting an owning resource MUST trigger deletion of all owned resources; this
+deletion MAY be immediate or eventually consistent. This process can be
+implemented using
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/#controlling-how-the-garbage-collector-deletes-dependents&#34;&gt;Kubernetes cascading deletion&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;service-1&#34;&gt;Service&lt;/h2&gt;
+&lt;p&gt;When a Service is created, it MUST create and own a Configuration and Route with
+the same name as the Service. Updates to &lt;code&gt;spec&lt;/code&gt;, &lt;code&gt;metadata.labels&lt;/code&gt;, and
+&lt;code&gt;metadata.annotations&lt;/code&gt; of the Service MUST be copied to the appropriate
+Configuration or Route, as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;metadata&lt;/code&gt; changes MUST be copied to both Configuration and Route.&lt;/li&gt;
+&lt;li&gt;In addition, the &lt;code&gt;serving.knative.dev/service&lt;/code&gt; label on the Route and
+Configuration MUST be set to the name of the Service.&lt;/li&gt;
+&lt;li&gt;Additional &lt;code&gt;labels&lt;/code&gt; and &lt;code&gt;annotations&lt;/code&gt; on the Configuration and Route not
+specified above MUST be removed.&lt;/li&gt;
+&lt;li&gt;See the documentation of &lt;code&gt;spec&lt;/code&gt; in the
+&lt;a href=&#34;#detailed-resources--v1&#34;&gt;detailed resource fields section&lt;/a&gt; for the
+mapping of specific &lt;code&gt;spec&lt;/code&gt; fields to the corresponding fields in Configuration
+and Route.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Similarly, the Service MUST update its &lt;code&gt;status&lt;/code&gt; fields based on the
+corresponding &lt;code&gt;status&lt;/code&gt; of its owned Route and Configuration. The Service MUST
+include conditions of &lt;code&gt;ConfigurationsReady&lt;/code&gt; and &lt;code&gt;RoutesReady&lt;/code&gt; in addition to the
+generic &lt;code&gt;Ready&lt;/code&gt; condition; other conditions MAY also be present.&lt;/p&gt;
+&lt;h2 id=&#34;configuration-1&#34;&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;When a Configuration is created or its &lt;code&gt;spec&lt;/code&gt; updated, the following steps MUST
+be taken to create a new Revision (on creation, the previous state for all
+fields is an empty value):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If the &lt;code&gt;spec.template&lt;/code&gt; field has changed from the previous state, a new owned
+Revision MUST be created. If the Revision name is not provided by the user
+through the &lt;code&gt;spec.template.metadata.name&lt;/code&gt; field, it MUST be system generated.
+The system generated name should be treated opaquely as no semantics are
+defined. The values of &lt;code&gt;spec.template.metadata&lt;/code&gt; and &lt;code&gt;spec.template.spec&lt;/code&gt; MUST
+be copied to the newly created Revision. If the Revision cannot be created,
+the Configuration MUST signal that the Configuration is not &lt;code&gt;Ready&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;metadata.labels&lt;/code&gt; and &lt;code&gt;metadata.annotations&lt;/code&gt; from the Configuration MUST NOT
+be copied to the newly-created Revision.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Configuration MUST track the status of owned Revisions in order of creation, and
+report the name of the most recently created Revision in
+&lt;code&gt;status.latestCreatedRevisionName&lt;/code&gt; and the name of the most recently created
+Revision where the &lt;code&gt;Ready&lt;/code&gt; Condition is &lt;code&gt;True&lt;/code&gt; in
+&lt;code&gt;status.latestReadyRevisionName&lt;/code&gt;. These fields MAY be used by client software
+and Route objects to determine the status of the Configuration and the best
+target Revision for requests.&lt;/p&gt;
+&lt;h2 id=&#34;revision-1&#34;&gt;Revision&lt;/h2&gt;
+&lt;p&gt;A Revision is automatically scaled by the underlying infrastructure; a Revision
+with no referencing Routes MAY be automatically scaled to zero instances and
+backing resources collected. Additionally, Revisions which are older than the
+oldest live Revision (referenced by at least one Route or latest for the
+Configuration) MAY be automatically deleted by the system.&lt;/p&gt;
+&lt;h2 id=&#34;route-1&#34;&gt;Route&lt;/h2&gt;
+&lt;p&gt;Route does not directly own any Knative resources, but may refer to multiple
+Revisions which will receive incoming requests either directly or through a
+reference to a Configuration&amp;rsquo;s &lt;code&gt;status.latestReadyRevisionName&lt;/code&gt; field. In these
+cases, the Route MAY use a &lt;code&gt;serving.knative.dev/route&lt;/code&gt; label to indicate that a
+Configuration or Revision is currently referenced by the Route. This label or
+other mechanisms MAY be used to prevent user deletion of Revisions referenced by
+a Route.&lt;/p&gt;
+&lt;h1 id=&#34;request-routing&#34;&gt;Request Routing&lt;/h1&gt;
+&lt;p&gt;Knative uses fractional host-based HTTP routing to deliver requests to
+autoscaled instances. Knative Routes specify request routing from HTTP virtual
+hosts (&lt;a href=&#34;https://tools.ietf.org/html/rfc7230#section-5.4&#34;&gt;Host-header&lt;/a&gt; based
+routing) to fractional assignments to Revisions. The following semantics apply
+to Knative request routing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Each &lt;a href=&#34;https://tools.ietf.org/html/rfc7230#section-6.3&#34;&gt;HTTP/1.1 request&lt;/a&gt; MUST
+be treated as a separate &amp;ldquo;request&amp;rdquo; using the following semantics.&lt;/li&gt;
+&lt;li&gt;If supported by the Knative installation, each
+&lt;a href=&#34;https://tools.ietf.org/html/rfc7540#section-5&#34;&gt;HTTP/2 stream&lt;/a&gt; MUST be treated
+as a separate &amp;ldquo;request&amp;rdquo; using the following semantics. Note that this maps
+naturally for
+&lt;a href=&#34;https://tools.ietf.org/html/rfc7540#section-8.1&#34;&gt;HTTP requests over HTTP/2&lt;/a&gt;,
+but is also well-defined for other applications like &lt;a href=&#34;https://grpc.io/&#34;&gt;gRPC&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;DNS Hostnames allocated to Routes MUST be unique.&lt;/li&gt;
+&lt;li&gt;DNS Hostnames allocated to Routes SHOULD resolve.
+&lt;a href=&#34;https://tools.ietf.org/html/rfc4592&#34;&gt;Wildcard DNS records&lt;/a&gt; associated with a
+domain assigned to the namespace are the RECOMMENDED implementation.&lt;/li&gt;
+&lt;li&gt;Requests to a specific Host MUST be dispatched to Revision instances in
+accordance with the weights specified in the Route, even if the number of
+container instances per Revision does not match the weights specified in the
+Route.&lt;/li&gt;
+&lt;li&gt;When a selected Revision does not have available instances, the routing
+infrastructure MUST hold (delay) requests until an available instance is
+ready, scheduling a new container instance if needed. This is sometimes
+referred to as a &amp;ldquo;cold start&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Requests which cause a new container instance to be created (&amp;ldquo;cold start&amp;rdquo;)
+SHOULD be sent to the initially selected Revision, rather than to a different
+Revision.&lt;/li&gt;
+&lt;li&gt;Multiple simultaneous or subsequent requests from a single client (even over
+the same TCP connection) MAY be dispatched to different instances or different
+Revisions (traffic routing MUST NOT be &amp;ldquo;sticky&amp;rdquo; in a way which violates the
+weight distributions). Developers SHOULD NOT assume that subsequent requests
+from the same client will reach the same application instance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;detailed-resources--v1&#34;&gt;Detailed Resources – v1&lt;/h1&gt;
+&lt;p&gt;The following schema defines a set of REQUIRED or RECOMMENDED resource fields on
+the Knative resource types. Whether a field is REQUIRED or RECOMMENDED is
+denoted in the &amp;ldquo;Schema Requirement&amp;rdquo; column. Additional &lt;code&gt;spec&lt;/code&gt; and &lt;code&gt;status&lt;/code&gt;
+fields MAY be provided by particular implementations, however it is expected
+that most extension will be accomplished via the &lt;code&gt;metadata.labels&lt;/code&gt; and
+&lt;code&gt;metadata.annotations&lt;/code&gt; fields, as Knative implementations MAY validate supplied
+resources against these fields and refuse resources which specify unknown
+fields. Knative implementations MUST NOT require &lt;code&gt;spec&lt;/code&gt; fields outside this
+implementation; to do so would break interoperability between such
+implementations and implementations which implement validation of field names.&lt;/p&gt;
+&lt;h2 id=&#34;service-2&#34;&gt;Service&lt;/h2&gt;
+&lt;h3 id=&#34;metadata&#34;&gt;Metadata:&lt;/h3&gt;
+&lt;p&gt;Standard Kubernetes
+&lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta&#34;&gt;meta.v1/ObjectMeta&lt;/a&gt;
+resource.&lt;/p&gt;
+&lt;p&gt;Service &lt;code&gt;labels&lt;/code&gt; and &lt;code&gt;annotations&lt;/code&gt; MUST be copied to the &lt;code&gt;labels&lt;/code&gt; and
+&lt;code&gt;annotations&lt;/code&gt; on the owned Configuration and Route. Additionally, the owned
+Configuration and Route MUST have the &lt;code&gt;serving.knative.dev/service&lt;/code&gt; label set to
+the name of the Service.&lt;/p&gt;
+&lt;h3 id=&#34;spec&#34;&gt;Spec:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;Field Name&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;template&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;a href=&#34;#revisiontemplatespec&#34;&gt;RevisionTemplateSpec&lt;/a&gt;
+&lt;br&gt;
+(Required)
+   &lt;/td&gt;
+   &lt;td&gt;A template for the current desired application state. Changes to &lt;code&gt;template&lt;/code&gt; will cause a new Revision to be created
+&lt;a href=&#34;#resource-lifecycle&#34;&gt;as defined in the lifecycle section&lt;/a&gt;. The contents of the Service&#39;s RevisionTemplateSpec is used to create a corresponding Configuration.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;traffic&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#traffictarget&#34;&gt;TrafficTarget&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;Traffic specifies how to distribute traffic over a collection of Revisions belonging to the Service. If traffic is empty or not provided, defaults to 100% traffic to the latest &lt;code&gt;Ready&lt;/code&gt; Revision. The contents of the Service&#39;s TrafficTarget is used to create a corresponding Route.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;status&#34;&gt;Status:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;conditions&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;a href=&#34;#error-signalling&#34;&gt;See Error Signalling&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Used for signalling errors, see link. Conditions of type Ready MUST be present. Conditions of type ConfigurationsReady and RoutesReady MAY be present.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;observedGeneration&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;The latest &lt;code&gt;metadata.generation&lt;/code&gt; that the reconciler has observed. If &lt;code&gt;observedGeneration&lt;/code&gt; is updated, &lt;code&gt;conditions&lt;/code&gt; MUST be updated with current status in the same transaction.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;url&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string (url)
+   &lt;/td&gt;
+   &lt;td&gt;A URL which may be used to reach the application, copied from the owned Route. The URL MUST contain the scheme (i.e. &#34;http://&#34;, etc.).
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;address&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;An implementation of the
+&lt;p&gt;&lt;a href=&#34;#addressable-interface&#34;&gt;Addressable&lt;/a&gt; contract (an object with a
+&lt;code&gt;url&lt;/code&gt; string).&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;A duck-typed interface for loading the delivery address of the destination, copied from the owned Route. The URL provided in address MAY only be internally-routable.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;traffic&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#traffictarget&#34;&gt;TrafficTarget&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Detailed current traffic split routing information.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;latestReadyRevisionName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;The most recently created Revision with where the &lt;code&gt;Ready&lt;/code&gt; Condition is &lt;code&gt;True&lt;/code&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;latestCreatedRevisionName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;The most recently created Revision.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;configuration-2&#34;&gt;Configuration&lt;/h2&gt;
+&lt;h3 id=&#34;metadata-1&#34;&gt;Metadata:&lt;/h3&gt;
+&lt;p&gt;Standard Kubernetes
+&lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta&#34;&gt;meta.v1/ObjectMeta&lt;/a&gt;
+resource.&lt;/p&gt;
+&lt;p&gt;Configuration &lt;code&gt;labels&lt;/code&gt; and &lt;code&gt;annotations&lt;/code&gt; MUST NOT be copied to the &lt;code&gt;labels&lt;/code&gt; and
+&lt;code&gt;annotations&lt;/code&gt; on newly-created Revisions. Configuration metadata MUST NOT be
+continuously copied to existing Revisions, which should remain immutable after
+creation. Additionally, the newly-created Revision MUST have the
+&lt;code&gt;serving.knative.dev/configuration&lt;/code&gt; label set to the name of the Configuration.
+The Revision MUST also have the &lt;code&gt;serving.knative.dev/configurationGeneration&lt;/code&gt;
+label set to the Configuration&amp;rsquo;s &lt;code&gt;metadata.generation&lt;/code&gt; from which this Revision
+was created.&lt;/p&gt;
+&lt;h3 id=&#34;spec-1&#34;&gt;Spec:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;template&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#revisiontemplatespec&#34;&gt;RevisionTemplateSpec&lt;/a&gt; &lt;br&gt; (Required)&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;A template for the current desired application state. Changes to &lt;code&gt;template&lt;/code&gt; will cause a new Revision to be created
+&lt;p&gt;&lt;a href=&#34;#resource-lifecycle&#34;&gt;as defined in the lifecycle section&lt;/a&gt;.&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;status-1&#34;&gt;Status:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;conditions&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#error-signalling&#34;&gt;See Error Signalling&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Used for signalling errors, see link. Condition of type Ready MUST be present.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;observedGeneration&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;The latest metadata.generation that the reconciler has attempted. If &lt;code&gt;observedGeneration&lt;/code&gt; is updated, &lt;code&gt;conditions&lt;/code&gt; MUST be updated with current status in the same transaction.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;latestReadyRevisionName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;The most recently created Revision with where the &lt;code&gt;Ready&lt;/code&gt; Condition is &lt;code&gt;True&lt;/code&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;latestCreatedRevisionName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;The most recently created Revision.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;route-2&#34;&gt;Route&lt;/h2&gt;
+&lt;h3 id=&#34;metadata-2&#34;&gt;Metadata:&lt;/h3&gt;
+&lt;p&gt;Standard Kubernetes
+&lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta&#34;&gt;meta.v1/ObjectMeta&lt;/a&gt;
+resource.&lt;/p&gt;
+&lt;h3 id=&#34;spec-2&#34;&gt;Spec:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;traffic&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#traffictarget&#34;&gt;TrafficTarget&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;Traffic specifies how to distribute traffic over a collection of Revisions belonging to the Service. If traffic is empty or not provided, defaults to 100% traffic to the latest Ready Revision.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;status-2&#34;&gt;Status:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;conditions&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#error-signalling&#34;&gt;See Error Signalling&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Used for signalling errors, see link. Conditions of types Ready MUST be present. `AllTrafficAssigned`, `IngressReady`, and `CertificateProvisioned` MAY be present. 
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;observedGeneration&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;The latest `metadata.generation` that the reconciler has observed. If &lt;code&gt;observedGeneration&lt;/code&gt; is updated, &lt;code&gt;conditions&lt;/code&gt; MUST be updated with current status in the same transaction.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;url&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string (url)
+   &lt;/td&gt;
+   &lt;td&gt;A URL which may be used to reach the application. The URL MUST contain the scheme (i.e. &#34;http://&#34;, etc.).
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;address&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;An implementation of the &lt;a href=&#34;#addressable-interface&#34;&gt;Addressable&lt;/a&gt; contract (an object with a &lt;code&gt;url&lt;/code&gt; string).
+   &lt;/td&gt;
+   &lt;td&gt;A duck-typed interface for loading the delivery address of the destination. The URL provided in address MAY only be internally-routable.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;traffic&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#traffictarget&#34;&gt;TrafficTarget&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Detailed current traffic split routing information.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;revision-2&#34;&gt;Revision&lt;/h2&gt;
+&lt;h3 id=&#34;metadata-3&#34;&gt;Metadata:&lt;/h3&gt;
+&lt;p&gt;Standard Kubernetes
+&lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta&#34;&gt;meta.v1/ObjectMeta&lt;/a&gt;
+resource.&lt;/p&gt;
+&lt;h3 id=&#34;spec-3&#34;&gt;Spec:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;containers&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#container&#34;&gt;Container&lt;/a&gt;
+&lt;br&gt;
+(Required)
+&lt;br&gt;
+Min: 1
+&lt;br&gt;
+Max: 1
+   &lt;/td&gt;
+   &lt;td&gt;Specifies the parameters used to execute each container instance corresponding to this Revision.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;volumes&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#volume&#34;&gt;Volume&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;A list of Volumes to make available to &lt;code&gt;containers[0]&lt;/code&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;timeoutSeconds&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;The maximum duration in seconds that the request routing layer will wait for a request delivered to a container to progress (send network traffic). If unspecified, a system default will be provided.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;containerConcurrency&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+&lt;br&gt;
+(Optional)
+&lt;br&gt;
+Default: 0
+   &lt;/td&gt;
+   &lt;td&gt;The maximum number of concurrent requests being handled by a single instance of &lt;code&gt;containers[0]&lt;/code&gt;. The default value is 0, which means that the system decides.
+&lt;p&gt;
+See
+&lt;p&gt;&lt;a href=&#34;#request-routing&#34;&gt;Request Routing&lt;/a&gt; for more details on what
+constitutes a request.&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;serviceAccountName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;The name of a Service Account which &lt;code&gt;containers[0]&lt;/code&gt; should be run as. The Service Account should be used to provide access and authorization to the container.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+    &lt;tr&gt;
+     &lt;td&gt;&lt;code&gt;imagePullSecrets&lt;/code&gt;
+     &lt;/td&gt;
+     &lt;td&gt;[]&lt;a href=&#34;#localobjectreference&#34;&gt;LocalObjectReference&lt;/a&gt;
+  &lt;br&gt;
+  (Optional)
+     &lt;/td&gt;
+     &lt;td&gt;The list of secrets for pulling images from private repositories.
+     &lt;/td&gt;
+     &lt;td&gt;RECOMMENDED
+     &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;status-3&#34;&gt;Status:&lt;/h3&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;conditions&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#error-signalling&#34;&gt;See Error Signalling&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;Used for signalling errors, see link. Conditions of type Ready MUST be present. Conditions of type Active, ContainerHealthy, ResourcesAvailable  MAY be present. 
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;logUrl&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string (url)
+   &lt;/td&gt;
+   &lt;td&gt;A URL which may be used to retrieve logs specific to this Revision. The destination MAY require authentication and/or use a format (such as a web UI) which requires additional configuration. There is no further standardization of this URL or the targeted endpoint.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;containerStatuses&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#containerStatuses&#34;&gt;ContainerStatuses&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;The ContainerStatuses holds the resolved image digest for both serving and non serving containers.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;imageDigest&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;The resolved image digest for the requested Container. This MAY be omitted by the implementation.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;detailed-resource-types---v1&#34;&gt;Detailed Resource Types - v1&lt;/h1&gt;
+&lt;p&gt;Although &lt;code&gt;container,&lt;/code&gt; &lt;code&gt;volumes,&lt;/code&gt; and types that they reference are based upon
+core Kubernetes objects, there are additional limitations applied to ensure that
+created containers can statelessly autoscale. The set of fields that have been
+determined to be compatible with statelessly scaling are detailed below.
+Restrictions to the values of the field are noted in the Description column.&lt;/p&gt;
+&lt;h2 id=&#34;containerstatuses&#34;&gt;ContainerStatuses&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;Name represents the container name and name must be a DNS_LABEL.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;imageDigest&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;ImageDigest is the digest value for the container&#39;s image.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;traffictarget&#34;&gt;TrafficTarget&lt;/h2&gt;
+&lt;p&gt;This resource specifies how the network traffic for a particular
+Revision or Configuration is to be configured.&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;revisionName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;A specific revision to which to send this portion of traffic. This is mutually exclusive with configurationName.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;configurationName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;ConfigurationName of a configuration to whose latest Revision we will send this portion of traffic. Tracks latestReadyRevisionName for the Configuration. This field is never set in &lt;code&gt;status&lt;/code&gt;, only in &lt;code&gt;spec&lt;/code&gt;. This is mutually exclusive with revisionName. This field is disallowed when used in
+&lt;p&gt;&lt;a href=&#34;#spec&#34;&gt;ServiceSpec&lt;/a&gt;.&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;latestRevision&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;bool
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;latestRevision may be optionally provided to indicate that the latest ready Revision of the Configuration should be used for this traffic target. When provided latestRevision MUST be true if revisionName is empty, and it MUST be false when revisionName is non-empty.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;tag&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;Tag is optionally used to expose a dedicated URL for referencing this target exclusively. The dedicated URL MUST include in it the string provided by tag.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;percent&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+&lt;br&gt;
+(Optional)
+&lt;br&gt;
+Min: 0
+&lt;br&gt;
+Max: 100
+   &lt;/td&gt;
+   &lt;td&gt;The &lt;code&gt;percent&lt;/code&gt; is optionally used to specify the percentage of requests which should be allocated from the main Route domain name to the specified &lt;code&gt;revisionName&lt;/code&gt; or &lt;code&gt;configurationName&lt;/code&gt;.
+&lt;p&gt;
+To indicate that percentage based routing is to be used, at least one &lt;code&gt;traffic&lt;/code&gt; section MUST have a non-zero &lt;code&gt;percent&lt;/code&gt; value, and all values MUST sum to 100. Note, a missing &lt;code&gt;precent&lt;/code&gt; value implies zero.
+   &lt;/td&gt;
+   &lt;td&gt;OPTIONAL
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;url&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;The URL at which the tag endpoint is reachable. It MUST not be taken as input, and is only provided on Status. 
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;revisiontemplatespec&#34;&gt;RevisionTemplateSpec&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;metadata&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#metadata-3&#34;&gt;RevisionMetadata&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;The requested metadata for the Revision.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;spec&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#spec-3&#34;&gt;RevisionSpec&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;The requested spec for the Revision.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;container&#34;&gt;Container&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;args&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;command&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;env&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#envvar&#34;&gt;EnvVar&lt;/a&gt;
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;envFrom&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#envfromsource&#34;&gt;EnvFromSource&lt;/a&gt;
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;image&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Required)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;imagePullPolicy&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;. However, Knative resolves the image to a digest. The pull policy will be applied against the digest of the resolved image and not the image tag.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;livenessProbe&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;a href=&#34;#probe&#34;&gt;Probe&lt;/a&gt;
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;p&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;ports&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#containerport&#34;&gt;ContainerPort&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+&lt;br&gt;
+Min: 0
+&lt;br&gt;
+Max: 1
+   &lt;/td&gt;
+   &lt;td&gt;Only a single &lt;code&gt;port&lt;/code&gt; may be specified. The port must be named &lt;a href=&#34;https://github.com/knative/serving/blob/master/docs/runtime-contract.md#protocols-and-ports&#34;&gt;as described in the runtime contract&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;readinessProbe&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+   &lt;a href=&#34;#probe&#34;&gt;Probe&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;resources&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+   &lt;a href=&#34;#resourcerequirements&#34;&gt;ResourceRequirements&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;. 
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;securityContext&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+   &lt;a href=&#34;#securitycontext&#34;&gt;SecurityContext&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;In &lt;code&gt;securityContext&lt;/code&gt;, only &lt;code&gt;runAsUser&lt;/code&gt; MAY be set.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;terminationMessagePath&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;. 
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;terminationMessagePolicy&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;. 
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;volumeMounts&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#volumemount&#34;&gt;VolumeMount&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;&lt;code&gt;volumeMounts&lt;/code&gt; MUST correspond to a volume and specify an absolute mount path which does not shadow &lt;a href=&#34;https://github.com/knative/serving/blob/master/docs/runtime-contract.md#default-filesystems&#34;&gt;the runtime contract directories&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;workingDir&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core&#34;&gt;core/v1.Container&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;envvar&#34;&gt;EnvVar&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Required)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core&#34;&gt;core/v1.EnvVar&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;value&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core&#34;&gt;core/v1.EnvVar&lt;/a&gt;. Must have one of value or valueFrom.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;valueFrom&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;a href=&#34;#envvarsource&#34;&gt;EnvVarSource&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core&#34;&gt;core/v1.EnvVar&lt;/a&gt;. Must have one of value or valueFrom.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;envvarsource&#34;&gt;EnvVarSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;configMapKeyRef&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;a href=&#34;#configmapkeyselector&#34;&gt;ConfigMapKeySelector&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvarsource-v1-core&#34;&gt;core/v1.EnvVarSource&lt;/a&gt;. Must have one of configMapKeyRef or secretKeyRef.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if valueFrom is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;secretKeyRef&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;a href=&#34;#secretkeyselector&#34;&gt;SecretKeySelector&lt;/a&gt;
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvarsource-v1-core&#34;&gt;core/v1.EnvVarSource&lt;/a&gt;. Must have one of configMapKeyRef or secretKeyRef.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;configmapkeyselector&#34;&gt;ConfigMapKeySelector&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;key&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapkeyselector-v1-core&#34;&gt;core/v1.ConfigMapKeySelector&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if configMapKeyRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapkeyselector-v1-core&#34;&gt;core/v1.ConfigMapKeySelector&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if configMapKeyRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;boolean
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapkeyselector-v1-core&#34;&gt;core/v1.ConfigMapKeySelector&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if configMapKeyRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;secretkeyselector&#34;&gt;SecretKeySelector&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;key&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretkeyselector-v1-core&#34;&gt;core/v1.SecretKeySelector&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secretKeyRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretkeyselector-v1-core&#34;&gt;core/v1.SecretKeySelector&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secretKeyRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;boolean
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretkeyselector-v1-core&#34;&gt;core/v1.SecretKeySelector&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secretKeyRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;probe&#34;&gt;Probe&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;exec&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#execaction&#34;&gt;ExecAction&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;failureThreshold&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;httpGet&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#httpgetaction&#34;&gt;HTTPGetAction&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;initialDelaySeconds&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;successThreshold&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;tcpSocket&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#tcpsocketaction&#34;&gt;TCPSocketAction&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;timeoutSeconds&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#probe-v1-core&#34;&gt;core/v1.Probe&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;envfromsource&#34;&gt;EnvFromSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;configMapRef&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#configmapenvsource&#34;&gt;ConfigMapEnvSource&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envfromsource-v1-core&#34;&gt;core/v1.EnvFromSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if envFrom is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;prefix&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envfromsource-v1-core&#34;&gt;core/v1.EnvFromSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if envFrom is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;secretRef&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#secretenvsource&#34;&gt;SecretEnvSource&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envfromsource-v1-core&#34;&gt;core/v1.EnvFromSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;execaction&#34;&gt;ExecAction&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;command&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]string
+&lt;br&gt;
+(Required)
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#execaction-v1-core&#34;&gt;core/v1.ExecAction&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if exec is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;httpgetaction&#34;&gt;HTTPGetAction&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;host&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core&#34;&gt;core/v1.HTTPGetAction&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;httpHeaders&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#httpheader&#34;&gt;HTTPHeader&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core&#34;&gt;core/v1.HTTPGetAction&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;path&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core&#34;&gt;core/v1.HTTPGetAction&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;scheme&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core&#34;&gt;core/v1.HTTPGetAction&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;tcpsocketaction&#34;&gt;TCPSocketAction&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;host&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#tcpsocketaction-v1-core&#34;&gt;core/v1.TCPSocketAction&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;httpheader&#34;&gt;HTTPHeader&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpheader-v1-core&#34;&gt;core/v1.HTTPHeader&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;value&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpheader-v1-core&#34;&gt;core/v1.HTTPHeader&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if livenessProbe or readinessProbe is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;containerport&#34;&gt;ContainerPort&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;Must be one of &#34;http1&#34; or &#34;h2c&#34; (if supported). Defaults to &#34;http1&#34;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;containerPort&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;The selected port for which Knative will direct traffic to the user container.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;protocol&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+&lt;br&gt;
+(Optional)
+   &lt;/td&gt;
+   &lt;td&gt;If specified must be TCP. Defaults to TCP.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;configmapenvsource&#34;&gt;ConfigMapEnvSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapenvsource-v1-core&#34;&gt;core/v1.ConfigMapEnvSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if envFrom is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;boolean
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapenvsource-v1-core&#34;&gt;core/v1.ConfigMapEnvSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if envFrom is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;secretenvsource&#34;&gt;SecretEnvSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretenvsource-v1-core&#34;&gt;core/v1.SecretEnvSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secretRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;boolean
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretenvsource-v1-core&#34;&gt;core/v1.SecretEnvSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secretRef is supported
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;resourcerequirements&#34;&gt;ResourceRequirements&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;limits&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;object
+   &lt;/td&gt;
+   &lt;td&gt;Must support at least cpu and memory. See &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/&#34;&gt;Kubernetes&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;requests&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;object
+   &lt;/td&gt;
+   &lt;td&gt;Must support at least cpu and memory. See &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/&#34;&gt;Kubernetes&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;securitycontext&#34;&gt;SecurityContext&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;runAsUser&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#securitycontext-v1-core&#34;&gt;core/v1.SecurityContext&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if securityContext is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;volumemount&#34;&gt;VolumeMount&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;mountPath&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core&#34;&gt;core/v1.VolumeMount&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core&#34;&gt;core/v1.VolumeMount&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;subPath&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumemount-v1-core&#34;&gt;core/v1.VolumeMount&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;readOnly&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;bool
+   &lt;/td&gt;
+   &lt;td&gt;Must be true. Defaults to true.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;volume&#34;&gt;Volume&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;configMap&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#configmapvolumesource&#34;&gt;ConfigMapVolumeSource&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core&#34;&gt;core/v1.Volume&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;secret&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#secretvolumesource&#34;&gt;SecretVolumeSource&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core&#34;&gt;core/v1.Volume&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;projected&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#projectedvolumesource&#34;&gt;ProjectedVolumeSource&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volume-v1-core&#34;&gt;core/v1.Volume&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;RECOMMENDED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;configmapvolumesource&#34;&gt;ConfigMapVolumeSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;defaultMode&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core&#34;&gt;core/v1.ConfigMapVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;items&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#keytopath&#34;&gt;KeyToPath&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core&#34;&gt;core/v1.ConfigMapVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core&#34;&gt;core/v1.ConfigMapVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;bool
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapvolumesource-v1-core&#34;&gt;core/v1.ConfigMapVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;secretvolumesource&#34;&gt;SecretVolumeSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;defaultMode&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core&#34;&gt;core/v1.SecretVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secret is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;items&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#keytopath&#34;&gt;KeyToPath&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core&#34;&gt;core/v1.SecretVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secret is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;secretName&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core&#34;&gt;core/v1.SecretVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secret is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;bool
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretvolumesource-v1-core&#34;&gt;core/v1.SecretVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if secret is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;projectedvolumesource&#34;&gt;ProjectedVolumeSource&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;defaultMode&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#projectedvolumesource-v1-core&#34;&gt;core/v1.ProjectedVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;sources&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#volumeprojection&#34;&gt;VolumeProjection&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#projectedvolumesource-v1-core&#34;&gt;core/v1.ProjectedVolumeSource&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;keytopath&#34;&gt;KeyToPath&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;key&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#keytopath-v1-core&#34;&gt;core/v1.KeyToPath&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;mode&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;int
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#keytopath-v1-core&#34;&gt;core/v1.KeyToPath&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;path&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#keytopath-v1-core&#34;&gt;core/v1.KeyToPath&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if volumes is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;volumeprojection&#34;&gt;VolumeProjection&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;configMap&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#configmapprojection&#34;&gt;ConfigMapProjection&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumeprojection-v1-core&#34;&gt;core/v1.VolumeProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;secret&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;
+&lt;p&gt;&lt;a href=&#34;#secretprojection&#34;&gt;SecretProjection&lt;/a&gt;&lt;/p&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#volumeprojection-v1-core&#34;&gt;core/v1.VolumeProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;configmapprojection&#34;&gt;ConfigMapProjection&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;items&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#keytopath&#34;&gt;KeyToPath&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapprojection-v1-core&#34;&gt;core/v1.ConfigMapProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;secret&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapprojection-v1-core&#34;&gt;core/v1.ConfigMapProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;boolean
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#configmapprojection-v1-core&#34;&gt;core/v1.ConfigMapProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;secretprojection&#34;&gt;SecretProjection&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;items&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;[]&lt;a href=&#34;#keytopath&#34;&gt;KeyToPath&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretprojection-v1-core&#34;&gt;core/v1.SecretProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretprojection-v1-core&#34;&gt;core/v1.SecretProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;optional&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;boolean
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#secretprojection-v1-core&#34;&gt;core/v1.SecretProjection.&lt;/a&gt;
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if projected is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;addressablehttpsgithubcomknativepkgblobmasterapisduckv1addressable_typesgo-interface&#34;&gt;&lt;a href=&#34;https://github.com/knative/pkg/blob/master/apis/duck/v1/addressable_types.go&#34;&gt;Addressable&lt;/a&gt; (Interface)&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;url&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string (&lt;a href=&#34;https://github.com/knative/pkg/blob/master/apis/url.go&#34;&gt;apis.URL&lt;/a&gt;)
+   &lt;/td&gt;
+   &lt;td&gt;A generic mechanism for a custom resource definition to indicate a destination for message delivery.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;localobjectreference&#34;&gt;LocalObjectReference&lt;/h2&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;strong&gt;FieldName&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Field Type&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Description&lt;/strong&gt;
+   &lt;/td&gt;
+   &lt;td&gt;&lt;strong&gt;Schema Requirement&lt;/strong&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;&lt;code&gt;name&lt;/code&gt;
+   &lt;/td&gt;
+   &lt;td&gt;string
+   &lt;/td&gt;
+   &lt;td&gt;As specified in Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#localobjectreference-v1-core&#34;&gt;core/v1.LocalObjectReference&lt;/a&gt;.
+   &lt;/td&gt;
+   &lt;td&gt;REQUIRED, if imagePullSecrets is supported.
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;authors&#34;&gt;Authors&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;mailto:dangerd@google.com&#34;&gt;Dan Gerdesmeier&lt;/a&gt;
+&lt;a href=&#34;dug@us.ibm.com&#34;&gt;Doug Davis&lt;/a&gt;
+&lt;a href=&#34;mailto:evana@vmware.com&#34;&gt;Evan Anderson&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.21-Docs: </title>
+      <link>https://knative.dev/v0.21-docs/smoketest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/smoketest/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;spacer-title&#34;&gt;Spacer Title&lt;/h1&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;hidden-smoketest-page&#34;&gt;Hidden smoketest page&lt;/h1&gt;
+&lt;p&gt;Use this page to test your changes and ensure that there are not any issues,
+unwanted behaviors, or regression that are caused by your changes.&lt;/p&gt;
+&lt;p&gt;Below are a set of site elements that have causes issues in the past.&lt;/p&gt;
+&lt;h2 id=&#34;lists&#34;&gt;Lists&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Top level:
+&lt;ol&gt;
+&lt;li&gt;A nested list item.
+&lt;ol&gt;
+&lt;li&gt;another level lower&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Nested code sample: &lt;br&gt;Syntax: &lt;code&gt;{&lt;code&gt;{&amp;lt; readfile
+file=&amp;quot;../community/samples/serving/helloworld-java-quarkus/service.yaml&amp;quot;
+code=&amp;ldquo;true&amp;rdquo; lang=&amp;ldquo;yaml&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt; &lt;br&gt;Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;helloworld-java-quarkus&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/saturnism/helloworld-java-quarkus&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TARGET&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Quarkus Sample v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+&lt;/li&gt;
+&lt;li&gt;This should be the third bullet (3.).
+&lt;ol&gt;
+&lt;li&gt;More nested code: &lt;br&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; readfile
+file=&amp;quot;/serving/samples/hello-world/helloworld-go/Dockerfile&amp;quot; code=&amp;ldquo;true&amp;rdquo;
+lang=&amp;ldquo;go&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt; &lt;br&gt;Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Use&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;official&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Golang&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;build&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;artifact&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;This&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;based&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Debian&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;sets&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GOPATH&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;golang&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1.13&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builder&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Create&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;change&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;directory&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;WORKDIR&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Retrieve&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;application&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;dependencies&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;modules&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Allows&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builds&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reuse&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;downloaded&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;dependencies&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;COPY&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;RUN&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;download&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Copy&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;code&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;COPY&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Build&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;binary&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;readonly&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ensures&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;immutable&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;RUN&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;CGO_ENABLED&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GOOS&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;linux&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;build&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;readonly&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;o&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;server&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Use&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;official&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Alpine&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;lean&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;production&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;https&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//hub.docker.com/_/alpine
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;https&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;alpine&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;RUN&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;apk&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;no&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cache&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ca&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;certificates&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Copy&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;binary&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;production&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builder&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;stage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;COPY&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;builder&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Run&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;web&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;service&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;startup&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;CMD&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+&lt;/li&gt;
+&lt;li&gt;Another nested ordered list item (2.)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;code-samples&#34;&gt;Code samples&lt;/h2&gt;
+&lt;p&gt;The following use the
+&lt;a href=&#34;https://github.com/knative/website/blob/master/layouts/shortcodes/readfile.md&#34;&gt;&lt;code&gt;readfile&lt;/code&gt; shortcode&lt;/a&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hideMemberFields&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;TypeMeta&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hideTypePatterns&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ParseError$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;List$&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;externalPackages&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^k8s\\.io/apimachinery/pkg/apis/meta/v1\\.Duration$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^k8s\\.io/(api|apimachinery/pkg/apis)/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#{{lower .TypeIdentifier}}-{{arrIndex .PackageSegments -1}}-{{arrIndex .PackageSegments -2}}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^knative\\.dev/pkg/apis/duck&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://pkg.go.dev/knative.dev/pkg/apis/duck/{{arrIndex .PackageSegments -1}}#{{.TypeIdentifier}}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^knative\\.dev/pkg/apis\\.URL$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://pkg.go.dev/knative.dev/pkg/apis#URL&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^knative\\.dev/networking/pkg/apis/networking&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://pkg.go.dev/knative.dev/networking/pkg/apis/networking#{{.TypeIdentifier}}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^time\\.Duration$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://golang.org/pkg/time/#Duration&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeDisplayNamePrefixOverrides&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;k8s.io/api/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Kubernetes &amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/apis/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Kubernetes &amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;markdownDisabled&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;p style=&#34;color: #D74848&#34;&gt;&lt;b&gt;&lt;i&gt;Something&#39;s not right. The &lt;code&gt;../Gopkg.toml&lt;/code&gt; file was not found.&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;
+
+
+
+&lt;h2 id=&#34;install-version-numbers-and-clone-branch-commands&#34;&gt;Install version numbers and Clone branch commands&lt;/h2&gt;
+&lt;p&gt;Examples of how the manual and dynamic version number or branch name can be
+added in-line with the
+&lt;a href=&#34;https://github.com/knative/website/blob/master/layouts/shortcodes/version.md&#34;&gt;&lt;code&gt;version&lt;/code&gt; shortcode&lt;/a&gt;
+(uses the define values from
+&lt;a href=&#34;https://github.com/knative/website/blob/master/config/_default/params.toml&#34;&gt;config/_default/params.toml&lt;/a&gt;)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{% version %}&lt;/code&gt;}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;kubectl apply version/v0.21.0/is-the-latest/docs-version.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{% version override=&amp;ldquo;v0.2.2&amp;rdquo; %}&lt;/code&gt;}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;kubectl apply the-version-override/v0.2.2/is-manually-specified.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{% version patch=&amp;quot;.20&amp;quot; %}&lt;/code&gt;}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;kubectl apply this-is-a-point-release/v0.21.20/filename.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{% branch %}&lt;/code&gt;}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;git clone -b &amp;quot;release-0.21&amp;quot; https://github.com/knative/docs knative-docs&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{% branch override=&amp;ldquo;release-0.NEXT&amp;rdquo; %}&lt;/code&gt;}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;git clone -b &amp;quot;release-0.NEXT&amp;quot; https://github.com/knative/docs knative-docs&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

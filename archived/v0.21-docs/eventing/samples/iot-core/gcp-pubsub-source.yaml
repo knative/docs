@@ -1,0 +1,18 @@
+# Replace the following before applying this file:
+#   TOPIC_NAME: Replace with the GCP PubSub Topic name.
+#   MY_GCP_PROJECT: Replace with the GCP Project's ID.
+
+apiVersion: sources.knative.dev/v1alpha1
+kind: GcpPubSubSource
+metadata:
+  name: TOPIC_NAME-source
+spec:
+  gcpCredsSecret:
+    name: google-cloud-key
+    key: key.json
+  googleCloudProject: PROJECT_ID
+  topic: TOPIC_NAME
+  sink:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default

@@ -1,0 +1,134 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative Services</title>
+    <link>https://knative.dev/v0.22-docs/serving/services/</link>
+    <description>Recent content in Knative Services on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.22-docs/serving/services/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.22-Docs: Modifying the Deployment Config Map</title>
+      <link>https://knative.dev/v0.22-docs/serving/services/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/services/deployment/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;config-deployment&lt;/code&gt; ConfigMap is located in the &lt;code&gt;knative-serving&lt;/code&gt; namespace.
+This ConfigMap, known as the Deployment ConfigMap, contains settings that determine how Kubernetes &lt;code&gt;Deployment&lt;/code&gt; resources, that back Knative services, are configured.&lt;/p&gt;
+&lt;h2 id=&#34;accessing-the-deployment-configmap&#34;&gt;Accessing the Deployment ConfigMap&lt;/h2&gt;
+&lt;p&gt;To view the current Deployment ConfigMap:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl get configmap -n knative-serving config-deployment -oyaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;configuring-progress-deadlines&#34;&gt;Configuring progress deadlines&lt;/h2&gt;
+&lt;p&gt;Configuring progress deadline settings allows you to specify the maximum time, either in seconds or minutes, that you will wait for your Deployment to progress before the system reports back that the Deployment has failed progressing for the Knative Revision.
+By default, this value is set to 120 seconds.
+The value is expressed as a Go &lt;code&gt;time.Duration&lt;/code&gt; string representation, but must be rounded to a second precision.&lt;/p&gt;
+&lt;p&gt;The Knative Autoscaler component scales the revision to 0, and the Knative service enters a terminal &lt;code&gt;Failed&lt;/code&gt; state, if the initial scale cannot be achieved within the time limit defined by this setting.&lt;/p&gt;
+&lt;p&gt;You may want to configure this setting as a higher value if any of the following issues occur in your Knative deployment:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It takes a long time to pull the Service image, due to the size of the image.&lt;/li&gt;
+&lt;li&gt;It takes a long time for the Service to become &lt;code&gt;READY&lt;/code&gt;, due to priming of the initial cache state.&lt;/li&gt;
+&lt;li&gt;The cluster is relies on cluster autoscaling to allocate resources for new pods.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#progress-deadline-seconds&#34;&gt;Kubernetes documentation&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;The following example shows a snippet of an example Deployment Config Map that sets this value to 10 minutes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ConfigMap&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config-deployment&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;knative-serving&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;progressDeadline&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;10m&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Creating Knative services</title>
+      <link>https://knative.dev/v0.22-docs/serving/services/creating-services/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/serving/services/creating-services/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Knative Services are used to deploy an application. Each Knative Service is defined by a Route and a Configuration, which have the same name as the Service, contained in a YAML file. Every time the Configuration is updated, a new Revision is created.&lt;/p&gt;
+&lt;p&gt;Knative Service Revisions are each backed by a deployment with 2 Kubernetes Services.&lt;br&gt;
+For more information about Kubernetes Services, see the &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/&#34;&gt;Kubernetes documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;p&gt;To create a Knative Service, you will need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A Kubernetes cluster with &lt;a href=&#34;https://knative.dev/docs/install/index.html&#34;&gt;Knative installed&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://knative.dev/docs/serving/using-a-custom-domain/&#34;&gt;Custom domains&lt;/a&gt; set up for Knative Services.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;creating-a-knative-service&#34;&gt;Creating a Knative Service&lt;/h2&gt;
+&lt;p&gt;To create an application, you need to create a YAML file that defines a Knative Service.
+This YAML file specifies metadata about the application, points to the hosted image of the app and allows the Service to be configured.&lt;/p&gt;
+&lt;p&gt;This guide uses the &lt;a href=&#34;https://knative.dev/docs/serving/samples/hello-world/helloworld-go&#34;&gt;Hello World sample app in Go&lt;/a&gt; to demonstrate the structure of a Service YAML file and the basic workflow for deploying an app. These steps can be adapted for your own application if you have an image of it available on Docker Hub, Google Container Registry, or another container image registry.&lt;/p&gt;
+&lt;p&gt;The Hello World sample app does the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reads an environment variable &lt;code&gt;TARGET&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Prints &lt;code&gt;Hello ${TARGET}!&lt;/code&gt;. If &lt;code&gt;TARGET&lt;/code&gt; is not defined, it will use &lt;code&gt;World&lt;/code&gt; as the &lt;code&gt;TARGET&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;procedure&#34;&gt;Procedure&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a new file named &lt;code&gt;service.yaml&lt;/code&gt; containing the following information.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;helloworld-go&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;gcr.io/knative-samples/helloworld-go&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TARGET&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Go Sample v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;apiVersion&lt;/code&gt;: The current Knative version.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt;(metadata): The name of the application.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;namespace&lt;/code&gt;: The namespace that the application will use.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;image&lt;/code&gt;: The URL to the image of the application.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt;(env): The environment variable printed out by the sample application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: If you’re deploying an image of your own app, update the name of the app and the URL of the image accordingly.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;From the directory where the new &lt;code&gt;service.yaml&lt;/code&gt; file was created, deploy the application by applying the &lt;code&gt;service.yaml&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;kubectl apply --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now that your app has been deployed, Knative will perform the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new immutable revision for this version of the app.&lt;/li&gt;
+&lt;li&gt;Perform network programming to create a route, ingress, service, and load balancer for your app.&lt;/li&gt;
+&lt;li&gt;Automatically scale your pods up and down based on traffic, including to zero active pods.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;modifying-knative-services&#34;&gt;Modifying Knative Services&lt;/h2&gt;
+&lt;p&gt;Any changes to specifications, metadata labels, or metadata annotations for a Service must be copied to the Route and Configuration owned by that Service. The &lt;code&gt;serving.knative.dev/service&lt;/code&gt; label on the Route and Configuration must also be set to the name of the Service. Any additional labels or annotations on the Route and Configuration not specified above must be removed.&lt;/p&gt;
+&lt;p&gt;The Service updates its &lt;code&gt;status&lt;/code&gt; fields based on the corresponding &lt;code&gt;status&lt;/code&gt; value for the owned Route and Configuration.
+The Service must include conditions of&lt;code&gt;RoutesReady&lt;/code&gt; and &lt;code&gt;ConfigurationsReady&lt;/code&gt; in addition to the generic &lt;code&gt;Ready&lt;/code&gt; condition. Other conditions can also be present.&lt;/p&gt;
+&lt;h2 id=&#34;whats-next&#34;&gt;What&amp;rsquo;s next?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;For more information about the Knative Service object, see the &lt;a href=&#34;https://github.com/knative/serving/blob/main/docs/spec/overview.md#service&#34;&gt;Resource Types&lt;/a&gt; documentation.&lt;/li&gt;
+&lt;li&gt;For more information about getting started with deploying a Knative application, see the &lt;a href=&#34;https://knative.dev/docs/serving/getting-started-knative-app/&#34;&gt;Getting Started with App Deployment&lt;/a&gt; documentation.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

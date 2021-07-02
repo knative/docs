@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-java
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: docker.io/{username}/helloworld-java
+        env:  
+         - name: TARGET 
+           value: "SparkJava Sample v1"
