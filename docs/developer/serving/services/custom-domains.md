@@ -1,5 +1,7 @@
 # Configuring custom domains
 
+{{ feature(beta="0.24") }}
+
 Each Knative Service is automatically assigned a default domain name when it is created. However, you can map any custom domain name that you own to a Knative Service, by using _domain mapping_.
 
 You can create a `DomainMapping` object to map a single, non-wildcard domain to a specific Knative Service.

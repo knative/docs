@@ -216,3 +216,18 @@
 .footer-links a {
   margin: 0.4em;
 }
+
+/* Feature State Labels */
+.feature-alpha, .feature-beta, .feature-stable {
+  font-variant: small-caps;
+  padding: 0.2em;
+}
+.feature-alpha {
+  background: rgb(255, 218, 218);
+}
+.feature-beta {
+  background: rgb(251, 244, 182);
+}
+.feature-stable {
+  background: rgb(228, 255, 218);
+}
