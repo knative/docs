@@ -1,13 +1,13 @@
 ---
-title: "Configuring target burst capacity"
-linkTitle: "Configuring target burst capacity"
+title: "Configuring target burst capacity behavior"
+linkTitle: "Configuring target burst capacity behavior"
 weight: 50
 type: "docs"
 aliases:
     - /docs/serving/autoscaling/target-burst-capacity
 ---
 
-# Configuring target burst capacity
+# Configuring target burst capacity behavior
 
 _Target burst capacity_ is a [global and per-revision](../../serving/autoscaling/autoscaling-concepts.md) integer setting that determines the size of traffic burst a Knative application can handle without buffering.
 If a traffic burst is too large for the application to handle, the _Activator_ service will be placed in the request path to protect the revision and optimize request load balancing.
