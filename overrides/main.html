@@ -9,6 +9,12 @@
   </p>
 </div>
 {% endif %}
+<a target="_blank" class="versionwarning" style="display: flex; justify-content: center;" href="https://github.com/knative/docs/issues/new/choose">
+  <p style="color: #FFF">Welcome to the new Knative.dev! ⚠️ Pardon our progress, if you find any issues with this site, please submit them here!</p>
+  <span id="close-btn" onclick="event.preventDefault(); event.stopPropagation(); this.parentElement.style.display = 'none'" title="Close" style="width: 24px; min-width: 24px; fill: white; padding: 4px">
+    {% include ".icons/material/close.svg" %}
+  </span>
+</a>
 {% endblock %}
 
 {% block scripts %}
