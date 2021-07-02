@@ -191,7 +191,7 @@ NAME              VERSION             READY   REASON
 knative-serving   <version number>    True
 ```
 
-### Installing with Different Networking Layers
+### Installing with different networking layers
 
 ??? "Installing the Knative Serving component with different network layers"
 
