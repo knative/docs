@@ -48,3 +48,15 @@
 
         !!! note
             Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
+
+??? bug "Having issues upgrading `kn`?"
+
+    If you are having issues upgrading using Homebrew, it may be due to a change to a `CLI` repository, where `master` branch was renamed to `main`. If so, run
+
+    ```
+    brew tap --repair
+    brew update
+    brew upgrade kn
+    ```
+
+    to resolve the issue.
