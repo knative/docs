@@ -190,6 +190,7 @@ Follow the procedure for the networking layer of your choice:
     [Advanced Istio installation](../installing-istio.md) instructions or by running the command:
 
         ```bash
+        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",file="istio.yaml")}}
         kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
         ```
 
@@ -217,6 +218,7 @@ Follow the procedure for the networking layer of your choice:
     ```bash
     kubectl get pods --namespace knative-serving
     ```
+
 
 ## Configure DNS
 
@@ -317,6 +319,7 @@ Follow the procedure for the DNS of your choice:
             ```
             Hello Go Sample v1!
             ```
+            
 
 ## Install optional Serving extensions
 

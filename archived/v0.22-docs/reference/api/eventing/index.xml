@@ -1,0 +1,17 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative Eventing Component</title>
+    <link>https://knative.dev/v0.22-docs/reference/api/eventing/</link>
+    <description>Recent content in Knative Eventing Component on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.22-docs/reference/api/eventing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

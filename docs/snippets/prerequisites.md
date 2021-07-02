@@ -8,6 +8,7 @@ Before installing Knative, you must meet the following prerequisites:
         You can install a local distribution of Knative for development use by following the [Getting started guide](../../../../getting-started/){_blank}.
 
 - **For production purposes**, it is recommended that:
+
     - If you have only one node in your cluster, you need at least 6&nbsp;CPUs, 6&nbsp;GB of memory, and 30&nbsp;GB of disk storage.
     - If you have multiple nodes in your cluster, for each node you need at least 2&nbsp;CPUs, 4&nbsp;GB of memory, and 20&nbsp;GB of disk storage.
 - You have a cluster that uses Kubernetes v1.18 or newer.

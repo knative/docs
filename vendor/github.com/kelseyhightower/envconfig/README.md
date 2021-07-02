@@ -136,7 +136,7 @@ If envconfig can't find an environment variable in the form `PREFIX_MYVAR`, and 
 is a struct tag defined, it will try to populate your variable with an environment
 variable that directly matches the envconfig tag in your struct definition:
 
-```bash
+```shell
 export SERVICE_HOST=127.0.0.1
 export MYAPP_DEBUG=true
 ```

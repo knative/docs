@@ -13,16 +13,3 @@
 # inherit these settings.
 [context.deploy-preview]
   publish = "site"
-
-# Redirect to point to old versions
-[[redirects]]
-  from = "/v0.23-docs/*"
-  to = "https://knative.dev/v0.23-docs/"
-
-[[redirects]]
-  from = "/v0.22-docs/*"
-  to = "https://knative.dev/v0.22-docs/"
-
-[[redirects]]
-  from = "/v0.21-docs/*"
-  to = "https://knative.dev/v0.21-docs/"

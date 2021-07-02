@@ -89,19 +89,19 @@
       </div>
       <div style="display: inline-flex; justify-content: center; flex-gap: 2em; flex-wrap: wrap" id="usedby">
         <div class="logo">
-          <img src="images/Google.png" alt="" width="220" draggable="false" />
+          <img src="images/corporate-logos/Google.svg" alt="" width="170" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/Tanzu.png" alt="" width="220" draggable="false" />
+          <img src="images/corporate-logos/vmware.svg" alt="" width="150" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/IBM.png" alt="" width="150" draggable="false" />
+          <img src="images/corporate-logos/IBM.png" alt="" width="150" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/Redhat.png" alt="" width="150" draggable="false" />
+          <img src="images/corporate-logos/Redhat.svg" alt="" width="130" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/Triggermesh.png" alt="" width="100" draggable="false" />
+          <img src="images/corporate-logos/Triggermesh.svg" alt="" width="130" draggable="false" />
         </div>
         <div class="logo" style="font-style: italic; font-size: smaller; color: #999">..and more!</div>
       </div>
@@ -178,4 +178,35 @@
 {% endblock %}
 
 <!-- Application footer -->
-{% block footer %}{% endblock %}
+{% block footer %}
+  <!-- Cookie Bannier -->
+  <div id="cookieModal" class="md-typeset modal custom fade" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>We use cookies. <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank">Google Analytics</a> is used to improve your experience and help us understand site traffic and page usage.</p>
+          <div class="consent-buttons">
+            <button type="button" class="md-button" onclick="learnaboutcookies()">Learn more</button>
+            <button type="button" class="md-button md-button--primary" onclick="acceptcookie()">Accept</button>
+            <div class="opt-out">
+              <hr>
+              <p><a href="/about-analytics-cookies/">Learn about analytics cookies and how you can take steps to opt-out from sharing your usage data.</a></p>
+              <button type="button" class="md-button" onclick="optout()">I understand how to opt-out, hide this notice.</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cookienotice md-typeset">
+    <div class="text">
+      <p>We use analytics and cookies to understand site traffic. Information about your use of
+        our site is shared with Google for that purpose. <a href="/about-analytics-cookies/">Learn more.</a>
+      </p>
+    </div>
+    <div class="buttons">
+      <a class="close" onclick="closenotice()">&times;</a>
+      <a class="ok" onclick="acceptcookie()">OK</a>
+    </div>
+  </div>
+{% endblock %}

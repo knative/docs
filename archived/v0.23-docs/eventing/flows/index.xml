@@ -1,0 +1,140 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Eventing Flows</title>
+    <link>https://knative.dev/docs/eventing/flows/</link>
+    <description>Recent content in Eventing Flows on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/docs/eventing/flows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Parallel</title>
+      <link>https://knative.dev/docs/eventing/flows/parallel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/docs/eventing/flows/parallel/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Parallel CRD provides a way to easily define a list of branches, each receiving
+the same CloudEvent sent to the Parallel ingress channel. Typically, each branch
+consists of a filter function guarding the execution of the branch.&lt;/p&gt;
+&lt;p&gt;Parallel creates &lt;code&gt;Channel&lt;/code&gt;s and &lt;code&gt;Subscription&lt;/code&gt;s under the hood.&lt;/p&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;h3 id=&#34;parallel-spec&#34;&gt;Parallel Spec&lt;/h3&gt;
+&lt;p&gt;Parallel has three parts for the Spec:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;branches&lt;/code&gt; defines the list of &lt;code&gt;filter&lt;/code&gt; and &lt;code&gt;subscriber&lt;/code&gt; pairs, one per branch,
+and optionally a &lt;code&gt;reply&lt;/code&gt; object. For each branch:
+&lt;ol&gt;
+&lt;li&gt;(optional) the &lt;code&gt;filter&lt;/code&gt; is evaluated and when it returns an event the &lt;code&gt;subscriber&lt;/code&gt; is
+executed. Both &lt;code&gt;filter&lt;/code&gt; and &lt;code&gt;subscriber&lt;/code&gt; must be &lt;code&gt;Addressable&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;the event returned by the &lt;code&gt;subscriber&lt;/code&gt; is sent to the branch &lt;code&gt;reply&lt;/code&gt;
+object. When the &lt;code&gt;reply&lt;/code&gt; is empty, the event is sent to the &lt;code&gt;spec.reply&lt;/code&gt;
+object (see below).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;(optional) &lt;code&gt;channelTemplate&lt;/code&gt; defines the Template which will be used to
+create &lt;code&gt;Channel&lt;/code&gt;s.&lt;/li&gt;
+&lt;li&gt;(optional) &lt;code&gt;reply&lt;/code&gt; defines where the result of each branch is sent to when
+the branch does not have its own &lt;code&gt;reply&lt;/code&gt; object.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;parallel-status&#34;&gt;Parallel Status&lt;/h3&gt;
+&lt;p&gt;Parallel has three parts for the Status:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;conditions&lt;/code&gt; which details the overall status of the Parallel object&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ingressChannelStatus&lt;/code&gt; and &lt;code&gt;branchesStatuses&lt;/code&gt; which convey the status of
+underlying &lt;code&gt;Channel&lt;/code&gt; and &lt;code&gt;Subscription&lt;/code&gt; resource that are created as part of
+this Parallel.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;address&lt;/code&gt; which is exposed so that Parallel can be used where Addressable can
+be used. Sending to this address will target the &lt;code&gt;Channel&lt;/code&gt; which is fronting
+this Parallel (same as &lt;code&gt;ingressChannelStatus&lt;/code&gt;).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;Learn how to use Parallel by following the &lt;a href=&#34;../../samples/parallel/&#34;&gt;examples&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Sequence</title>
+      <link>https://knative.dev/docs/eventing/flows/sequence/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/docs/eventing/flows/sequence/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Sequence CRD provides a way to define an in-order list of functions that will be
+invoked. Each step can modify, filter or create a new kind of an event. Sequence
+creates &lt;code&gt;Channel&lt;/code&gt;s and &lt;code&gt;Subscription&lt;/code&gt;s under the hood.&lt;/p&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;h3 id=&#34;sequence-spec&#34;&gt;Sequence Spec&lt;/h3&gt;
+&lt;p&gt;Sequence has three parts for the Spec:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Steps&lt;/code&gt; which defines the in-order list of &lt;code&gt;Subscriber&lt;/code&gt;s, aka, which
+functions are executed in the listed order. These are specified using the
+&lt;code&gt;messaging.v1.SubscriberSpec&lt;/code&gt; just like you would when creating
+&lt;code&gt;Subscription&lt;/code&gt;. Each step should be &lt;code&gt;Addressable&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ChannelTemplate&lt;/code&gt; defines the Template which will be used to create
+&lt;code&gt;Channel&lt;/code&gt;s between the steps.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Reply&lt;/code&gt; (Optional) Reference to where the results of the final step in the
+sequence are sent to.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;sequence-status&#34;&gt;Sequence Status&lt;/h3&gt;
+&lt;p&gt;Sequence has four parts for the Status:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Conditions which detail the overall Status of the Sequence object&lt;/li&gt;
+&lt;li&gt;ChannelStatuses which convey the Status of underlying &lt;code&gt;Channel&lt;/code&gt; resources
+that are created as part of this Sequence. It is an array and each Status
+corresponds to the Step number, so the first entry in the array is the Status
+of the &lt;code&gt;Channel&lt;/code&gt; before the first Step.&lt;/li&gt;
+&lt;li&gt;SubscriptionStatuses which convey the Status of underlying &lt;code&gt;Subscription&lt;/code&gt;
+resources that are created as part of this Sequence. It is an array and each
+Status corresponds to the Step number, so the first entry in the array is the
+&lt;code&gt;Subscription&lt;/code&gt; which is created to wire the first channel to the first step
+in the &lt;code&gt;Steps&lt;/code&gt; array.&lt;/li&gt;
+&lt;li&gt;AddressStatus which is exposed so that Sequence can be used where Addressable
+can be used. Sending to this address will target the &lt;code&gt;Channel&lt;/code&gt; which is
+fronting the first Step in the Sequence.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;For each of these examples below, You will use a &lt;a href=&#34;../../samples/ping-source/&#34;&gt;&lt;code&gt;PingSource&lt;/code&gt;&lt;/a&gt; as the source of events.&lt;/p&gt;
+&lt;p&gt;We also use a very simple &lt;a href=&#34;https://github.com/vaikas-google/transformer&#34;&gt;transformer&lt;/a&gt; which performs very trivial transformation of the incoming events to demonstrate they have passed through each stage.&lt;/p&gt;
+&lt;h3 id=&#34;sequence-with-no-reply-terminal-last-stepsequencesequence-terminal&#34;&gt;&lt;a href=&#34;../sequence/sequence-terminal/&#34;&gt;Sequence with no reply (terminal last Step)&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For the first example, we&amp;rsquo;ll use a 3 Step &lt;code&gt;Sequence&lt;/code&gt; that is wired directly into
+the &lt;code&gt;PingSource&lt;/code&gt;. Each of the steps simply tacks on &amp;ldquo;- Handled by
+&lt;STEP NUMBER&gt;&amp;rdquo;, for example the first Step in the &lt;code&gt;Sequence&lt;/code&gt; will take the
+incoming message and append &amp;ldquo;- Handled by 0&amp;rdquo; to the incoming message.&lt;/p&gt;
+&lt;h3 id=&#34;sequence-with-reply-last-step-produces-outputsequencesequence-reply-to-event-display&#34;&gt;&lt;a href=&#34;../sequence/sequence-reply-to-event-display/&#34;&gt;Sequence with reply (last Step produces output)&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For the next example, we&amp;rsquo;ll use the same 3 Step &lt;code&gt;Sequence&lt;/code&gt; that is wired
+directly into the &lt;code&gt;PingSource&lt;/code&gt;. Each of the steps simply tacks on &amp;ldquo;- Handled
+by &lt;STEP NUMBER&gt;&amp;rdquo;, for example the first Step in the &lt;code&gt;Sequence&lt;/code&gt; will take the
+incoming message and append &amp;ldquo;- Handled by 0&amp;rdquo; to the incoming message.&lt;/p&gt;
+&lt;p&gt;The only difference is that we&amp;rsquo;ll use the &lt;code&gt;Subscriber.Spec.Reply&lt;/code&gt; field to wire
+the output of the last Step to an event display pod.&lt;/p&gt;
+&lt;h3 id=&#34;chaining-sequences-togethersequencesequence-reply-to-sequence&#34;&gt;&lt;a href=&#34;../sequence/sequence-reply-to-sequence/&#34;&gt;Chaining Sequences together&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For the next example, we&amp;rsquo;ll use the same 3 Step &lt;code&gt;Sequence&lt;/code&gt; that is wired
+directly into the &lt;code&gt;PingSource&lt;/code&gt;. Each of the steps simply tacks on &amp;ldquo;- Handled
+by &lt;STEP NUMBER&gt;&amp;rdquo;, for example the first Step in the &lt;code&gt;Sequence&lt;/code&gt; will take the
+incoming message and append &amp;ldquo;- Handled by 0&amp;rdquo; to the incoming message.&lt;/p&gt;
+&lt;p&gt;The only difference is that we&amp;rsquo;ll use the &lt;code&gt;Subscriber.Spec.Reply&lt;/code&gt; field to wire
+the output of the last Step to another &lt;code&gt;Sequence&lt;/code&gt; that does the same message
+modifications as the first pipeline (with different steps however).&lt;/p&gt;
+&lt;h3 id=&#34;using-sequence-with-brokertrigger-modelsequencesequence-with-broker-trigger&#34;&gt;&lt;a href=&#34;../sequence/sequence-with-broker-trigger/&#34;&gt;Using Sequence with Broker/Trigger model&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;You can also create a Trigger which targets &lt;code&gt;Sequence&lt;/code&gt;. This time we&amp;rsquo;ll wire
+&lt;code&gt;PingSource&lt;/code&gt; to send events to a &lt;code&gt;Broker&lt;/code&gt; and then we&amp;rsquo;ll have the &lt;code&gt;Sequence&lt;/code&gt;
+emit the resulting Events back into the Broker so that the results of the
+&lt;code&gt;Sequence&lt;/code&gt; can be observed by other &lt;code&gt;Trigger&lt;/code&gt;s.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
