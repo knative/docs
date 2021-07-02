@@ -1,3 +1,5 @@
+@import url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 .md-main__inner {
   margin: 0;
   max-width: 100%;
@@ -88,7 +90,7 @@ body {
   background: var(--home-color);
 }
 
-.calltoaction-container,
+.whats-next-container,
 .usedby-container,
 .home-container,
 .features-container,
@@ -123,13 +125,32 @@ body {
   margin: 0;
 }
 
-.calltoaction-container {
+.whats-next-container {
   color: #fff;
   background: #1b2f52;
 }
 
-.calltoaction-container .md-button {
-  display: block;
+.whats-next-container .component-flex {
+  display: flex;
+  gap: 2em;
+}
+
+.whats-next-container .pane h4 {
+  margin-top: 0;
+  font-size: 1.3em;
+}
+
+.whats-next-container .logo {
+  font-size: 3em;
+}
+
+.whats-next-container .pane {
+  text-align: center;
+}
+
+.whats-next-container .md-button {
+  display: inline-block;
+  margin: 0.5em auto;
 }
 
 .intro-container img {
@@ -185,7 +206,7 @@ body {
 
 @media only screen and (max-width: 1440px) {
   .components-container,
-  .calltoaction-container,
+  .whats-next-container,
   .usedby-container,
   .home-container,
   .features-container,
