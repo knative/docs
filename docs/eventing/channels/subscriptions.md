@@ -44,7 +44,8 @@ After you have created a channel and a sink, you can create a subscription to en
 
     This example command creates a channel named `mysubscription`, that routes events from a channel named `mychannel` to a Knative service named `myservice`.
 
-    **NOTE:** The sink prefix is optional. It is also possible to specify the service for `--sink` as just `--sink <service_name>` and omit the `ksvc` prefix.
+    !!! info
+        The sink prefix is optional. It is also possible to specify the service for `--sink` as just `--sink <service_name>` and omit the `ksvc` prefix.
 
 
 
