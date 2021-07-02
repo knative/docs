@@ -145,16 +145,42 @@ body {
   justify-content: center;
 }
 
-.features-container {
-  color: #000;
-  background: #fff;
+.usedby-container #usedby-title {
+  display: flex;
+  justify-content: center;
+}
+.usedby-container #usedby-title h3 {
+  margin-bottom: 0;
 }
 
-.logo {
+.usedby-container #usedby {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.usedby-container #usedby-more {
+  font-style: italic;
+  font-size: smaller;
+  color: #aaa;
+  text-align: center;
+}
+
+.usedby-container .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.2em;
+  margin: 1em 2em;
+  width: 170px;
+}
+
+.usedby-container .logo img {
+  max-width: 170px;
+}
+
+.features-container {
+  color: #000;
+  background: #fff;
 }
 
 @media only screen and (max-width: 1440px) {
