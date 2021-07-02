@@ -31,7 +31,6 @@ After the Channel object is created, a mutating admission webhook sets the `spec
 based on the default Channel implementation:
 
 ```yaml
-kubectl apply -f <<EOF
 apiVersion: messaging.knative.dev/v1
 kind: Channel
 metadata:
@@ -41,7 +40,6 @@ spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1
     kind: <channel-template-kind>
-EOF
 ```
 Where:
 
