@@ -1,0 +1,45 @@
+name: Daily link check
+
+on:
+  schedule:
+    - cron: '0 1 * * 1-5' # 6am Pacific, weekdays.
+  workflow_dispatch:
+    inputs:
+      slackChannel:
+        description: 'Slack Channel'
+
+jobs:
+  markdown-link-check:
+    env:
+      SLACK_CHANNEL: 'docs'
+    name: Markdown link check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Defaults
+      run: |
+        # If manual trigger sent slackChannel, then override
+        if [[ "${{ github.event.inputs.slackChannel }}" != "" ]]; then
+          echo "SLACK_CHANNEL=${{ github.event.inputs.slackChannel }}" >> $GITHUB_ENV
+        fi
+        if [[ "${{ secrets.SLACK_WEBHOOK }}" != "" ]]; then
+          echo "SLACK_WEBHOOK=exists" >> $GITHUB_ENV
+        fi
+    - uses: actions/checkout@master
+      name: Checkout code
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      name: Check links
+      with:
+        use-quiet-mode: true
+        base-branch: mkdocs
+    - name: Post status to Slack
+      # Note: using env.SLACK_WEBHOOK here because secrets are not allowed in the if block.
+      if:  failure() && env.SLACK_WEBHOOK != ''
+      uses: rtCamp/action-slack-notify@v2.1.0
+      env:
+        SLACK_ICON: http://github.com/knative.png?size=48
+        SLACK_USERNAME: github-actions
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        MSG_MINIMAL: 'true'
+        SLACK_MESSAGE: |
+          Found broken links in our docs!
+          For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
