@@ -15,7 +15,7 @@ You can turn on Knative load balancing, by placing the _Activator service_ in th
 Activator pods are scaled horizontally, so there may be multiple Activators in a deployment. In general, the system will perform best if the number of revision pods is larger than the number of Activator pods, and those numbers divide equally.
 <!--TODO(#2472): Add better documentation about what the activator is; explain the components of load balancing; maybe add a diagram-->
 
-Knative assigns a subset of Activators for each revision, depending on the revision size and the configured capacity per Activator. More revision pods will mean a greater number of Activators for that revision.
+Knative assigns a subset of Activators for each revision, depending on the revision size. More revision pods will mean a greater number of Activators for that revision.
 
 The Activator load balancing algorithm works as follows:
 
@@ -28,7 +28,7 @@ For more information, see the documentation on [concurrency](../../serving/autos
 
 Target burst capacity is mainly responsible for determining whether the Activator is in the request path outside of scale-from-zero scenarios.
 
-Target burst capacity and it's effect of the system can be configured using a combination of the following parameters:
+Target burst capacity and its effect of the system can be configured using a combination of the following parameters:
 
 - Setting the targeted concurrency limits for the revision. See [concurrency](../../serving/autoscaling/concurrency).
 - Setting the target utilization parameters. See [target utilization](../../serving/autoscaling/concurrency#target-utilization).
