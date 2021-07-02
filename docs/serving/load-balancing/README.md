@@ -24,13 +24,13 @@ The Activator load balancing algorithm works as follows:
 
 For more information, see the documentation on [concurrency](../../serving/autoscaling/concurrency).
 
-## Configuring target burst capacity behavior
+## Configuring target burst capacity
 
 Target burst capacity is mainly responsible for determining whether the Activator is in the request path outside of scale-from-zero scenarios.
 
-Target burst capacity and its effect of the system can be configured using a combination of the following parameters:
+Target burst capacity can be configured using a combination of the following parameters:
 
 - Setting the targeted concurrency limits for the revision. See [concurrency](../../serving/autoscaling/concurrency).
 - Setting the target utilization parameters. See [target utilization](../../serving/autoscaling/concurrency#target-utilization).
 - Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](./target-burst-capacity#setting-the-target-burst-capacity).
-- Setting the Activator capacity via the `config-autoscaler` ConfigMap. See [Setting the Activator capacity](./activator-capacity#setting-the-activator-capacity)
+- Setting the Activator capacity by using the `config-autoscaler` ConfigMap. See [Setting the Activator capacity](./activator-capacity#setting-the-activator-capacity)
