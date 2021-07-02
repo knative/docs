@@ -1,10 +1,3 @@
----
-title: "Configuring Activator capacity"
-linkTitle: "Configuring Activator capacity"
-weight: 50
-type: "docs"
----
-
 # Configuring Activator capacity
 
 If there is more than one Activator in the system, Knative puts as many Activators on the request path as required to handle the current request load plus the target burst capacity. If the target burst capacity is 0, Knative only puts the Activator into the request path if the Revision is scaled to zero.
