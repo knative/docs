@@ -81,5 +81,8 @@ extra:
   version_warning: !!python/object/apply:os.getenv ["VERSION_WARNING"]
   knative_version: !!python/object/apply:os.getenv ["KNATIVE_VERSION"]
   branch: !!python/object/apply:os.getenv ["SAMPLES_BRANCH", "mkdocs"]
+  analytics:
+    provider: google
+    property: G-YRMNFYE32R
   version:
     provider: mike
