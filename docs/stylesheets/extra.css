@@ -204,10 +204,6 @@
     background-color: var(--md-default-bg-color);
 }
 
-.md-footer__link {
-    width: unset;
-}
-
 .md-footer-meta {
     background-color: var(--md-footer-bg-color);
 }
