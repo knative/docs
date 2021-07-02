@@ -212,7 +212,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
         ```
 
-    For more information, see the [Kafka Sink](../../../eventing/sink/kafka-sink.md) documentation.
+    For more information, see the [Kafka Sink](../../../developer/eventing/sinks/kafka-sink.md) documentation.
 
 === "Sugar Controller"
 
