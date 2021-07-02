@@ -341,6 +341,7 @@ plugins:
         eventing/sink/README.md: developer/eventing/sinks/README.md
         eventing/sink/kafka-sink.md: developer/eventing/sinks/kafka-sink.md
         eventing/sources/apiserversource/index.md: developer/eventing/sources/apiserversource/README.md
+        eventing/sources/containersource.md: developer/eventing/sources/containersource/README.md
         eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
         eventing/triggers/index.md: eventing/broker/triggers/README.md
         help/README.md: help/contributor/README.md
