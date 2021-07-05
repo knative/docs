@@ -261,7 +261,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     configuration yet.
 
     To learn more about the Github source, try
-    [our sample](../../../../eventing/sources/github-source/)
+    [our sample](../../../../developer/eventing/sources/github-source/)
 
 === "Apache Kafka Source"
 
@@ -272,7 +272,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Apache Kafka source, try
-    [our sample](../../../../eventing/sources/kafka-source)
+    [our sample](../../../../developer/eventing/sources/kafka-source)
 
 
 === "GCP Sources"
@@ -285,16 +285,16 @@ The tabs below expand to show instructions for installing each Eventing extensio
     ```
 
     To learn more about the Cloud Pub/Sub source, try
-    [our sample](../../../../eventing/sources/cloud-pubsub-source).
+    [our sample](../../../../developer/eventing/sources/cloud-pubsub-source).
 
     To learn more about the Cloud Storage source, try
-    [our sample](../../../../eventing/sources/cloud-storage-source).
+    [our sample](../../../../developer/eventing/sources/cloud-storage-source).
 
     To learn more about the Cloud Scheduler source, try
-    [our sample](../../../../eventing/sources/cloud-scheduler-source).
+    [our sample](../../../../developer/eventing/sources/cloud-scheduler-source).
 
     To learn more about the Cloud Audit Logs source, try
-    [our sample](../../../../eventing/sources/cloud-audit-logs-source).
+    [our sample](../../../../developer/eventing/sources/cloud-audit-logs-source).
 
 
 === "Apache CouchDB Source"
