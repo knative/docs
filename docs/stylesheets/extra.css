@@ -68,6 +68,12 @@
   font-size: 100%;
 }
 
+/* Giving h4 tag distinctive style because it is non-differntial with bold text */
+.md-typeset h4 {
+  font-size: .9rem;
+  font-weight: normal;
+}
+
 /* fix wrapping behavior of code in tables */
 .md-typeset table code {
   word-break: normal;
@@ -190,4 +196,23 @@
   background-clip: padding-box;
   border: 1px solid rgba(0,0,0,.2);
   outline: 0;
+}
+
+/* Tame the footer and make the prev/next stand out */
+.md-footer {
+    color: var(--md-typeset-a-color);
+    background-color: var(--md-default-bg-color);
+}
+
+.md-footer-meta {
+    background-color: var(--md-footer-bg-color);
+}
+
+.footer-links {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+.footer-links a {
+  margin: 0.4em;
 }

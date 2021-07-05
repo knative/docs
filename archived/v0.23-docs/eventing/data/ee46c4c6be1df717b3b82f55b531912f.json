@@ -1,0 +1,610 @@
+[
+  {
+    "duration": 19629,
+    "id": "d48b4d96bb46c90f",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.2.177",
+      "port": 80,
+      "serviceName": "br-broker-filter.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/",
+    "parentId": "cfb0c6b6b6104c7b",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "200",
+      "http.url": "http://transformer.includes-incoming-trace-id-2qszn.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371922002,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 1700,
+    "id": "eb4e31d92bc59aa4",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.12.23",
+      "port": 80,
+      "serviceName": "br-broker.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/",
+    "parentId": "c6b6bb23406d262b",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://br-kne-trigger-kn-channel.includes-incoming-trace-id-2qszn.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371972214,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371971464,
+        "value": "Received 89 bytes"
+      }
+    ],
+    "duration": 2667,
+    "id": "c6b6bb23406d262b",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.12.23",
+      "port": 80,
+      "serviceName": "br-broker.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/",
+    "parentId": "b4c0ea8c8dcca58c",
+    "tags": {
+      "http.host": "br-broker.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371971443,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371920838,
+        "value": "Received 79 bytes"
+      },
+      {
+        "timestamp": 1571264371941945,
+        "value": "Sent 89 bytes"
+      }
+    ],
+    "duration": 21519,
+    "id": "cfb0c6b6b6104c7b",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.2.177",
+      "port": 80,
+      "serviceName": "br-broker-filter.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+    "parentId": "5b25cd8f149589c0",
+    "tags": {
+      "http.host": "br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371920446,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371974164,
+        "value": "Received 89 bytes"
+      }
+    ],
+    "duration": 23878,
+    "id": "d966d475c07c46a4",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.2.177",
+      "port": 80,
+      "serviceName": "br-broker-filter.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+    "parentId": "cf78241d2df4b9b0",
+    "tags": {
+      "http.host": "br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371974140,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 42942,
+    "id": "5b25cd8f149589c0",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+    "parentId": "1d42e9223b858118",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "http://br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371900088,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371957188,
+        "value": "Received 89 bytes"
+      }
+    ],
+    "duration": 398,
+    "id": "76dd0620b4bc9de4",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/",
+    "parentId": "d7eb9469c7b49910",
+    "tags": {
+      "http.host": "br-kne-ingress-kn-channel.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371957174,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 14477,
+    "id": "d7eb9469c7b49910",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "parentId": "1d42e9223b858118",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "202",
+      "http.url": "http://br-kne-ingress-kn-channel.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371943313,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 14773,
+    "id": "b4c0ea8c8dcca58c",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/",
+    "parentId": "76dd0620b4bc9de4",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://br-broker.includes-incoming-trace-id-2qszn.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371959548,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371860719,
+        "value": "GetConn"
+      },
+      {
+        "timestamp": 1571264371860796,
+        "value": "DNSStart"
+      },
+      {
+        "timestamp": 1571264371879299,
+        "value": "DNSDone"
+      },
+      {
+        "timestamp": 1571264371879313,
+        "value": "ConnectStart"
+      },
+      {
+        "timestamp": 1571264371881319,
+        "value": "ConnectDone"
+      },
+      {
+        "timestamp": 1571264371881372,
+        "value": "GotConn"
+      },
+      {
+        "timestamp": 1571264371881488,
+        "value": "WroteHeaders"
+      },
+      {
+        "timestamp": 1571264371881495,
+        "value": "WroteRequest"
+      },
+      {
+        "timestamp": 1571264371900479,
+        "value": "GotFirstResponseByte"
+      },
+      {
+        "timestamp": 1571264371900571,
+        "value": "PutIdleConn"
+      }
+    ],
+    "duration": 40002,
+    "id": "1616272c1fcedd5b",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.28.6.176",
+      "port": 80,
+      "serviceName": "sender"
+    },
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "202",
+      "http.url": "http://br-broker.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371860637,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 17206,
+    "id": "a11e466e5415b2b1",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.12.23",
+      "port": 80,
+      "serviceName": "br-broker.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/",
+    "parentId": "7c86d0b868bd3d38",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://br-kne-trigger-kn-channel.includes-incoming-trace-id-2qszn.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371882715,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371899323,
+        "value": "Received 79 bytes"
+      }
+    ],
+    "duration": 319,
+    "id": "1d42e9223b858118",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/",
+    "parentId": "a11e466e5415b2b1",
+    "tags": {
+      "http.host": "br-kne-trigger-kn-channel.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371899306,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 21505,
+    "id": "9908b1fceda49168",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+    "parentId": "1d42e9223b858118",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "http://br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371900749,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371972653,
+        "value": "Received 89 bytes"
+      }
+    ],
+    "duration": 425,
+    "id": "53b25c437ad4a960",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/",
+    "parentId": "eb4e31d92bc59aa4",
+    "tags": {
+      "http.host": "br-kne-trigger-kn-channel.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371972631,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 27202,
+    "id": "cf78241d2df4b9b0",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+    "parentId": "53b25c437ad4a960",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "http://br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371973561,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371992370,
+        "value": "Received 89 bytes"
+      }
+    ],
+    "duration": 4860,
+    "id": "9fd1516ec8487f29",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.28.5.249",
+      "port": 80,
+      "serviceName": "logger"
+    },
+    "name": "/",
+    "parentId": "e31ce234cae840cd",
+    "tags": {
+      "http.host": "logger.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371992328,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371881923,
+        "value": "Received 79 bytes"
+      }
+    ],
+    "duration": 18198,
+    "id": "7c86d0b868bd3d38",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.12.23",
+      "port": 80,
+      "serviceName": "br-broker.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/",
+    "parentId": "1616272c1fcedd5b",
+    "tags": {
+      "http.host": "br-broker.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371881868,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371940689,
+        "value": "Received 79 bytes"
+      },
+      {
+        "timestamp": 1571264371941061,
+        "value": "Sent 89 bytes"
+      }
+    ],
+    "duration": 487,
+    "id": "ec377f2b219848d6",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.28.0.226",
+      "port": 80,
+      "serviceName": "transformer"
+    },
+    "name": "/",
+    "parentId": "d48b4d96bb46c90f",
+    "tags": {
+      "http.host": "transformer.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "200",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371940634,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 2608,
+    "id": "3087b26640ecb5dc",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.1.43",
+      "port": 80,
+      "serviceName": "imc-dispatcher"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+    "parentId": "53b25c437ad4a960",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "http://br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371973526,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371920415,
+        "value": "Received 79 bytes"
+      }
+    ],
+    "duration": 1335,
+    "id": "cad53fd7b1dacee6",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.2.177",
+      "port": 80,
+      "serviceName": "br-broker-filter.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+    "parentId": "9908b1fceda49168",
+    "tags": {
+      "http.host": "br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "/triggers/includes-incoming-trace-id-2qszn/logger/f8804e2a-f062-11e9-8de0-42010a800086",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371920397,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "annotations": [
+      {
+        "timestamp": 1571264371974165,
+        "value": "Received 89 bytes"
+      }
+    ],
+    "duration": 1476,
+    "id": "de415b55c5b2c338",
+    "kind": "SERVER",
+    "localEndpoint": {
+      "ipv4": "10.32.2.177",
+      "port": 80,
+      "serviceName": "br-broker-filter.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+    "parentId": "3087b26640ecb5dc",
+    "tags": {
+      "http.host": "br-broker-filter.includes-incoming-trace-id-2qszn.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "http.status_code": "202",
+      "http.url": "/triggers/includes-incoming-trace-id-2qszn/transformer/f89da9fb-f062-11e9-8de0-42010a800086",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371974140,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  },
+  {
+    "duration": 23207,
+    "id": "e31ce234cae840cd",
+    "kind": "CLIENT",
+    "localEndpoint": {
+      "ipv4": "10.32.2.177",
+      "port": 80,
+      "serviceName": "br-broker-filter.includes-incoming-trace-id-2qszn"
+    },
+    "name": "/",
+    "parentId": "d966d475c07c46a4",
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "http://logger.includes-incoming-trace-id-2qszn.svc.cluster.local/",
+      "opencensus.status_description": "OK"
+    },
+    "timestamp": 1571264371974586,
+    "traceId": "ee46c4c6be1df717b3b82f55b531912f"
+  }
+]

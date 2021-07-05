@@ -1,0 +1,13 @@
+apiVersion: sources.knative.dev/v1beta2
+kind: PingSource
+metadata:
+  name: test-ping-source-binary
+spec:
+  schedule: "*/2 * * * *"
+  contentType: "text/plain"
+  dataBase64: "ZGF0YQ=="
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display

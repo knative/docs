@@ -4,5 +4,5 @@
 
 - [Knative MkDocs Contributor Guide](./mkdocs-contributor-guide.md)
 - [Knative Style Guide](./style-guide/README.md)
-- [Content Re-Use](../snippets/README.md)
-- [Using Shortcodes (Coming Soon!)]()
+- [Content Re-Use](https://github.com/knative/docs/tree/mkdocs/docs/snippets)
+- [Using Shortcodes (TBD)]()

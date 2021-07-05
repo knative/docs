@@ -1,0 +1,28 @@
+# Apache Camel Timer Source
+#
+# Timer Component documentation: https://camel.apache.org/components/latest/timer-component.html
+#
+# List of available Apache Camel components: https://camel.apache.org/components/latest/
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-timer-source
+spec:
+  source:
+    flow:
+      from:
+        uri: timer:tick
+        parameters:
+          period: 3s
+        steps:
+          - set-header:
+              name: Content-Type
+              constant: text/plain
+          - set-body:
+              constant: Hello world!
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1
+      kind: InMemoryChannel
+      name: camel-test

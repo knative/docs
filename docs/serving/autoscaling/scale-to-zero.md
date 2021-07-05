@@ -8,7 +8,7 @@ type: "docs"
 # Configuring scale to zero
 
 !!! warning
-    Scale to zero can only be enabled if you are using the KnativePodAutoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Autoscaling concepts](./autoscaling-concepts.md).
+    Scale to zero can only be enabled if you are using the KnativePodAutoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Supported Autoscaler types](./autoscaler-types.md).
 
 ## Enable scale to zero
 

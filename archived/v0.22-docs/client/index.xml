@@ -1,0 +1,134 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – CLI tools</title>
+    <link>https://knative.dev/v0.22-docs/client/</link>
+    <description>Recent content in CLI tools on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.22-docs/client/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.22-Docs: Installing kn</title>
+      <link>https://knative.dev/v0.22-docs/client/install-kn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/client/install-kn/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This guide provides details about how you can install the Knative &lt;code&gt;kn&lt;/code&gt; CLI.&lt;/p&gt;
+&lt;h2 id=&#34;install-kn-using-brew&#34;&gt;Install kn using brew&lt;/h2&gt;
+&lt;p&gt;For macOS, you can install &lt;code&gt;kn&lt;/code&gt; by using &lt;a href=&#34;https://github.com/knative/homebrew-client&#34; target=&#34;_blank&#34;&gt;Homebrew&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;brew install knative/client/kn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;install-kn-using-a-binary&#34;&gt;Install kn using a binary&lt;/h2&gt;
+&lt;p&gt;You can install &lt;code&gt;kn&lt;/code&gt; by downloading the executable binary for your system and placing it in the system path.&lt;/p&gt;
+&lt;p&gt;A link to the latest stable binary release is available on the &lt;a href=&#34;https://github.com/knative/client/releases&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;kn&lt;/code&gt; release page&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;install-kn-using-the-nightly-built-binary&#34;&gt;Install kn using the nightly-built binary&lt;/h3&gt;
+&lt;p&gt;Nightly-built executable binaries are available for users who want to install the latest pre-release build of &lt;code&gt;kn&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;WARNING:&lt;/strong&gt; Nightly-built executable binaries include features which may not be included in the latest Knative release and are not considered to be stable.&lt;/p&gt;
+&lt;p&gt;Links to the latest nightly-built executable binaries are available here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://storage.googleapis.com/knative-nightly/client/latest/kn-darwin-amd64&#34; target=&#34;_blank&#34;&gt;macOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64&#34; target=&#34;_blank&#34;&gt;Linux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://storage.googleapis.com/knative-nightly/client/latest/kn-windows-amd64.exe&#34; target=&#34;_blank&#34;&gt;Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;install-kn-using-go&#34;&gt;Install kn using Go&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Check out the &lt;code&gt;kn&lt;/code&gt; client repository:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/knative/client.git
+cd client/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build an executable binary:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hack/build.sh -f
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Move &lt;code&gt;kn&lt;/code&gt; into your system path, and verify that &lt;code&gt;kn&lt;/code&gt; commands are working properly. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kn version
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;running-kn-using-container-images&#34;&gt;Running kn using container images&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;WARNING:&lt;/strong&gt; Nightly container images include features which may not be included in the latest Knative release and are not considered to be stable.&lt;/p&gt;
+&lt;p&gt;Links to images are available here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gcr.io/knative-releases/knative.dev/client/cmd/kn&#34; target=&#34;_blank&#34;&gt;Latest release&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gcr.io/knative-nightly/knative.dev/client/cmd/kn&#34; target=&#34;_blank&#34;&gt;Nightly container image&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can run &lt;code&gt;kn&lt;/code&gt; from a container image. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run --rm -v &amp;quot;$HOME/.kube/config:/root/.kube/config&amp;quot; gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Running &lt;code&gt;kn&lt;/code&gt; from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use &lt;code&gt;kn&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;using-kn-with-tekton&#34;&gt;Using kn with Tekton&lt;/h2&gt;
+&lt;p&gt;See the &lt;a href=&#34;http://hub.tekton.dev/tekton/task/kn&#34; target=&#34;_blank&#34;&gt;Tekton documentation&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: Customizing kn</title>
+      <link>https://knative.dev/v0.22-docs/client/configure-kn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/client/configure-kn/</guid>
+      <description>
+        
+        
+        &lt;p&gt;You can customize your &lt;code&gt;kn&lt;/code&gt; CLI setup by creating a &lt;code&gt;config.yaml&lt;/code&gt; configuration file. You can provide this configuration by using the &lt;code&gt;--config&lt;/code&gt; flag, otherwise the configuration is picked up from a default location. The default configuration location conforms to the &lt;a href=&#34;https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html&#34;&gt;XDG Base Directory Specification&lt;/a&gt;, and is different for Unix systems and Windows systems.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If the &lt;code&gt;XDG_CONFIG_HOME&lt;/code&gt; environment variable is set, the default configuration location that &lt;code&gt;kn&lt;/code&gt; looks for is &lt;code&gt;$XDG_CONFIG_HOME/kn&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If the &lt;code&gt;XDG_CONFIG_HOME&lt;/code&gt; environment variable is not set, &lt;code&gt;kn&lt;/code&gt; looks for the configuration in the home directory of the user at &lt;code&gt;$HOME/.config/kn/config.yaml&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;For Windows systems, the default &lt;code&gt;kn&lt;/code&gt; configuration location is &lt;code&gt;%APPDATA%\kn&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;example-configuration-file&#34;&gt;Example configuration file&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;plugins&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path-lookup&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;directory&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;~/.config/kn/plugins&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;eventing&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sink-mappings&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;svc&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;core&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resource&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;services&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Where&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;path-lookup&lt;/code&gt; specifies whether &lt;code&gt;kn&lt;/code&gt; should look for &lt;a href=&#34;../kn-plugins&#34;&gt;plugins&lt;/a&gt; in the &lt;code&gt;PATH&lt;/code&gt; environment variable. This is a boolean configuration option. The default value is &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;directory&lt;/code&gt; specifies the directory where &lt;code&gt;kn&lt;/code&gt; will look for plugins. The default path depends on the operating system, as described above. This can be any directory that is visible to the user.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sink-mappings&lt;/code&gt; defines the Kubernetes Addressable resource that is used when you use the &lt;code&gt;--sink&lt;/code&gt; flag with a &lt;code&gt;kn&lt;/code&gt; CLI command.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;prefix&lt;/code&gt;: The prefix you want to use to describe your sink. Service, &lt;code&gt;svc&lt;/code&gt;, &lt;code&gt;channel&lt;/code&gt;, and &lt;code&gt;broker&lt;/code&gt; are predefined prefixes in &lt;code&gt;kn&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;!--can be a prefix be anything? Otherwise let&#39;s provide a full list of what&#39;s allowed, limitations, etc.--&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;group&lt;/code&gt;: The API group of the Kubernetes resource.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;version&lt;/code&gt;: The version of the Kubernetes resource.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;resource&lt;/code&gt;: The plural name of the Kubernetes resource type. For example, &lt;code&gt;services&lt;/code&gt; or &lt;code&gt;brokers&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.22-Docs: kn plugins</title>
+      <link>https://knative.dev/v0.22-docs/client/kn-plugins/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.22-docs/client/kn-plugins/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;kn&lt;/code&gt; CLI supports the use of plugins. Plugins enable you to extend the functionality of your &lt;code&gt;kn&lt;/code&gt; installation by adding custom commands and other shared commands that are not part of the core distribution of &lt;code&gt;kn&lt;/code&gt;.&lt;/p&gt;
+&lt;!--TODO: Add details about installing and using different available plugins, list of available plugins--&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

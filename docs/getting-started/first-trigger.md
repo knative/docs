@@ -1,16 +1,19 @@
-## Creating your first `Trigger`
+## Creating your first Trigger
 === "kn"
 
     ```bash
-    kn trigger create cloudevents-player --sink cloudevents-player  --broker example-broker
+    kn trigger create cloudevents-trigger --sink cloudevents-player  --broker example-broker
     ```
 
+    ```{ .bash .no-copy }
+    Trigger 'cloudevents-trigger' successfully created in namespace 'default'.
+    ```
 === "YAML"
     ```bash
     apiVersion: eventing.knative.dev/v1
     kind: Trigger
     metadata:
-      name: cloudevents-player
+      name: cloudevents-trigger
       annotations:
         knative-eventing-injection: enabled
     spec:
@@ -21,18 +24,28 @@
           kind: Service
           name: cloudevents-player
     ```
-==**Expected Output**==
-```{ .bash .no-copy }
-Trigger 'cloudevents-player' successfully created in namespace 'default'.
-```
 
-??? question "What CloudEvents is my `Trigger` listening for?"
-    Since we didn't specify a `--filter` in our `kn` command, our Trigger is listening for any CloudEvents coming into the `Broker`.
+    After you've created your YAML file, named something like `ce-trigger.yaml`, apply it by running the command:
+    ``` bash
+    kubectl apply -f ce-trigger.yaml
+    ```
+
+    ==**Expected Output**==
+    ```{ .bash .no-copy }
+    trigger.eventing.knative.dev/cloudevents-trigger created
+    ```
+
+
+trigger.eventing.knative.dev/cloudevents-player created
+??? question "What CloudEvents is my Trigger listening for?"
+    Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
+
+    An example on how to use Filters is provided below.
 
 Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16281246/116411017-4f13d480-a803-11eb-9982-cd9012781fe6.png" draggable="false">
+  <img src="../images/event_received.png" draggable="false">
   <figcaption>You may need to refresh the page to see your changes</figcaption>
 </figure>
 
@@ -48,7 +61,7 @@ Now, when we go back to the CloudEvents Player and send an Event, we see that Cl
       kn trigger create cloudevents-player-filter --sink cloudevents-player  --broker example-broker --filter type=some-type
     ```
 
-    If you send a CloudEvent with type "some-type," it will be reflected in the CloudEvents Player UI. Any other types will be ignored by the `Trigger`.
+    If you send a CloudEvent with type "some-type," it is reflected in the CloudEvents Player UI.  The Trigger ignores any other types.
 
     You can filter on any aspect of the CloudEvent you would like to.
 

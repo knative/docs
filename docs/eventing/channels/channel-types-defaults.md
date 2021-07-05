@@ -19,7 +19,9 @@ This is useful if you do not care about the properties a particular Channel impl
 such as ordering and persistence, and you want to use the implementation selected by the cluster
 administrator.
 
+
 Cluster administrators can modify the default Channel implementation settings by editing the `default-ch-webhook` ConfigMap in the `knative-eventing` namespace.
+
 
 For more information about modifying ConfigMaps, see
 [Configuring the Eventing Operator custom resource](/admin/install/operator/configuring-eventing-cr/#setting-a-default-channel).
@@ -52,8 +54,10 @@ data:
           replicationFactor: 1
 ```
 
+
 !!! note
     InMemoryChannel Channels must not be used in production environments.
+
 
 ## Next steps
 

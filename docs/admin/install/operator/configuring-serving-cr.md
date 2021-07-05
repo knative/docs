@@ -53,7 +53,7 @@ The KnativeServing custom resource (CR) allows you to set values for these Confi
 Knative Serving has multiple ConfigMaps that are named with the prefix `config-`.
 The `spec.config` in the KnativeServing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
-In the [setup a custom domain example](./../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
+In the [setup a custom domain example](../../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
 
 ```
@@ -123,7 +123,7 @@ location. This section is only needed when the registry images do not match the 
 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See [deploying images
-from a private container registry](./../../serving/deploying-from-private-registry/README.md) for configuration details.
+from a private container registry](../../../serving/deploying-from-private-registry.md) for configuration details.
 
 
 ### Download images in a predefined format without secrets:
@@ -251,7 +251,7 @@ spec:
 
 ## SSL certificate for controller
 
-To [enable tag to digest resolution](./../../serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
+To [enable tag to digest resolution](../../../serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
 To allow the controller to trust a self-signed registry cert, you can use the Operator to specify the certificate using a ConfigMap or Secret.
 
 Specify the following fields in `spec.controller-custom-certs` to select a custom registry certificate:
@@ -277,7 +277,7 @@ spec:
 
 ## Configuration of Knative ingress gateway
 
-To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](./../../serving/setting-up-custom-ingress-gateway.md).
+To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md).
 
 ### Step 2: Update the Knative gateway
 

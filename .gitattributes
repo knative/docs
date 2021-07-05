@@ -3,6 +3,7 @@
 # https://github.com/github/linguist.
 
 /vendor/** linguist-vendored
+/archived/** linguist-generated
 *.ai binary
 *.pdf binary
 *.png binary
