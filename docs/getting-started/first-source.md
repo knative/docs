@@ -80,11 +80,11 @@ Create the CloudEvents Player Service:
   1. Ensure your Event Source does not contain any spaces.
   1. Click **SEND EVENT**.
 
-![CloudEvents Player Send](../images/event_sent.png)
+![CloudEvents Player Send](images/event_sent.png)
 
 
 ??? tip "Clicking the :fontawesome-solid-envelope: shows you the CloudEvent as the Broker sees it."
-    ![Event_Details](../images/event_details.png)
+    ![Event_Details](images/event_details.png)
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our Broker... but where has the event gone? **Well, right now, nowhere!**
 
