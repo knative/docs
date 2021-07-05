@@ -10,7 +10,7 @@ With Knative Serving, we have a powerful tool which can take our containerized c
 
 ==**Knative Eventing acts as the "glue" between the disparate parts of your architecture**== and allows you to easily communicate between those parts in a fault-tolerant way. Some examples include:
 
-:material-file-document: [Creating and responding to Kubernetes API events](../../eventing/sources/apiserversource/){target=blank}
+:material-file-document: [Creating and responding to Kubernetes API events](../../developer/eventing/sources/apiserversource/){target=blank}
 
 --8<-- "YouTube_icon.svg"
 [Creating an image processing pipeline](https://www.youtube.com/watch?v=DrmOpjAunlQ){target=blank}
