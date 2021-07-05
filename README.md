@@ -62,8 +62,8 @@ We're excited that you're interested in contributing to the Knative documentatio
 
 ## Getting started
 
-- [How to contribute](./CONTRIBUTING.md) -- Contains information about how
-  to contribute and outlines the roles for Docs contributors.
+- [Knative contributor's guide](./help/contributing) -- Contains information about how
+  to contribute.
 
 - New content templates:
   - [Documentation](./template-docs-page.md) -- Instructions and a template that

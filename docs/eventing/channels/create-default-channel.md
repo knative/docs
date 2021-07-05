@@ -37,11 +37,13 @@ Developers can create channels of any supported implementation type by creating 
           apiVersion: messaging.knative.dev/v1
           kind: InMemoryChannel
       ```  
-      **NOTE:**   The `spec.channelTemplate` property cannot be changed after creation, since it is set by the default channel mechanism, not the user.
+      !!! info
+          The `spec.channelTemplate` property cannot be changed after creation, since it is set by the default channel mechanism, not the user.
 
 3. The channel controller creates a backing channel instance
 based on the `spec.channelTemplate`.
 
       When this mechanism is used, two objects are created, a generic Channel object, and an InMemoryChannel object. The generic object acts as a proxy for the InMemoryChannel object, by copying its subscriptions to and setting its status to that of the InMemoryChannel object.
 
-**NOTE:** Defaults only apply on object creation. Defaults are applied by the webhook only on Channel or Sequence creation. If the default settings change, the new defaults will only apply to newly-created channels, brokers, or sequences. Existing ones will not change.
+!!! info
+    Defaults only apply on object creation. Defaults are applied by the webhook only on Channel or Sequence creation. If the default settings change, the new defaults will only apply to newly-created channels, brokers, or sequences. Existing ones will not change.

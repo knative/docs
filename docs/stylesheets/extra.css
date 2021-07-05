@@ -197,3 +197,22 @@
   border: 1px solid rgba(0,0,0,.2);
   outline: 0;
 }
+
+/* Tame the footer and make the prev/next stand out */
+.md-footer {
+    color: var(--md-typeset-a-color);
+    background-color: var(--md-default-bg-color);
+}
+
+.md-footer-meta {
+    background-color: var(--md-footer-bg-color);
+}
+
+.footer-links {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+.footer-links a {
+  margin: 0.4em;
+}

@@ -88,7 +88,7 @@ body {
   background: var(--home-color);
 }
 
-.calltoaction-container,
+.whats-next-container,
 .usedby-container,
 .home-container,
 .features-container,
@@ -123,13 +123,38 @@ body {
   margin: 0;
 }
 
-.calltoaction-container {
+.whats-next-container {
   color: #fff;
   background: #1b2f52;
 }
 
-.calltoaction-container .md-button {
-  display: block;
+.whats-next-container .component-flex {
+  display: flex;
+  gap: 2em;
+  padding-top: 1em;
+}
+
+.whats-next-container .pane h4 {
+  font-size: 1.3em;
+}
+
+.whats-next-container .twemoji {
+  color: #fff;
+  justify-content: center;
+}
+
+.whats-next-container .twemoji, .whats-next-container .twemoji svg {
+  height: 3.5em;
+  width: 3.5em;
+}
+
+.whats-next-container .pane {
+  text-align: center;
+}
+
+.whats-next-container .md-button {
+  display: inline-block;
+  margin: 0.5em auto;
 }
 
 .intro-container img {
@@ -145,21 +170,47 @@ body {
   justify-content: center;
 }
 
+.usedby-container #usedby-title {
+  display: flex;
+  justify-content: center;
+}
+.usedby-container #usedby-title h3 {
+  margin-bottom: 0;
+}
+
+.usedby-container #usedby {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.usedby-container #usedby-more {
+  font-style: italic;
+  font-size: smaller;
+  color: #aaa;
+  text-align: center;
+}
+
+.usedby-container .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 2em;
+  width: 170px;
+}
+
+.usedby-container .logo img {
+  max-width: 170px;
+}
+
 .features-container {
   color: #000;
   background: #fff;
 }
 
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1.2em;
-}
-
 @media only screen and (max-width: 1440px) {
   .components-container,
-  .calltoaction-container,
+  .whats-next-container,
   .usedby-container,
   .home-container,
   .features-container,
