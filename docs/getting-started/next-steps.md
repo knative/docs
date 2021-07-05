@@ -5,7 +5,7 @@ hide_next: true
 
 This topic provides a list of resources to help you continue your Knative journey.
 
-[![Knative Slack Link](../images/slack-button.svg)](https://slack.knative.dev/){target=_blank}
+[![Knative Slack Link](./images/slack-button.svg)](https://slack.knative.dev/){target=_blank}
 
 ## :test_tube: Knative samples
 
