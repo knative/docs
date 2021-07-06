@@ -1,21 +1,38 @@
----
-title: "Channel types and defaults"
-weight: 60
-type: "docs"
-showlandingtoc: "true"
----
-
 # Channel types and defaults
+Knative uses two types of Channels:
 
-Knative provides the InMemoryChannel channel implementation by default. This default implementation is useful for developers who do not want to configure a specific implementation type, such as Apache Kafka or NATSS channels.
 
-!!! info
-    InMemoryChannel channels should not be used in production environments.
+* A generic Channel object.
+* Channel implementations that each have their own custom resource definitions (CRDs), such as
+InMemoryChannel and KafkaChannel.
 
-The default channel implementation is specified in the `default-ch-webhook` ConfigMap in the `knative-eventing` namespace.
-For more information about modifying ConfigMaps, see [Configuring the Eventing Operator custom resource](../../../install/operator/configuring-eventing-cr).
+Custom Channel implementations each have their own event delivery mechanisms, such as in-memory
+or Broker-based. Examples of Brokers include KafkaBroker and the GCP Pub/Sub Broker.
 
-In the following example, the cluster default channel implementation is InMemoryChannel, while the namespace default channel implementation for the `example-namespace` is KafkaChannel.
+Knative provides the InMemoryChannel Channel implementation by default.
+This default implementation is useful for developers who do not want to configure a specific
+implementation type, such as Apache Kafka or NATSS Channels.
+
+You can use the generic Channel object if you want to create a Channel without specifying which
+Channel implementation CRD is used.
+This is useful if you do not care about the properties a particular Channel implementation provides,
+such as ordering and persistence, and you want to use the implementation selected by the cluster
+administrator.
+
+
+Cluster administrators can modify the default Channel implementation settings by editing the `default-ch-webhook` ConfigMap in the `knative-eventing` namespace.
+
+
+For more information about modifying ConfigMaps, see
+[Configuring the Eventing Operator custom resource](/admin/install/operator/configuring-eventing-cr/#setting-a-default-channel).
+
+Default Channels can be configured for the cluster, a namespace on the cluster, or both.
+
+!!! note
+    If a default Channel implementation is configured for a namespace, this will overwrite the configuration for the cluster.
+
+In the following example, the cluster default Channel implementation is InMemoryChannel, while the
+namespace default Channel implementation for the `example-namespace` is KafkaChannel.
 
 ```yaml
 apiVersion: v1
@@ -37,11 +54,12 @@ data:
           replicationFactor: 1
 ```
 
-Default channels can be configured for the cluster, a namespace on the cluster, or both.
 
-!!! info
-    If a default channel implementation is configured for a namespace, this will overwrite the configuration for the cluster.
+!!! note
+    InMemoryChannel Channels must not be used in production environments.
+
 
 ## Next steps
+
 
 - Create an [InMemoryChannel](../create-default-channel)
