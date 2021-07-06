@@ -319,7 +319,6 @@ Follow the procedure for the DNS of your choice:
             ```
             Hello Go Sample v1!
             ```
-            
 
 ## Install optional Serving extensions
 
