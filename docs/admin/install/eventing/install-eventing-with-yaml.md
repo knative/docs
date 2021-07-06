@@ -42,7 +42,7 @@ Follow the procedure for the channel of your choice:
 === "Apache Kafka Channel"
 
     1. First,
-      [Install Apache Kafka for Kubernetes](../../../../eventing/samples/kafka)
+      [Install Apache Kafka for Kubernetes](../../../eventing/samples/kafka/README.md)
 
     1. Then install the Apache Kafka Channel:
 
@@ -53,8 +53,7 @@ Follow the procedure for the channel of your choice:
         ```
 
         !!! tip
-            To learn more about the Apache Kafka channel, try
-            [our sample](../../../../eventing/samples/kafka/channel/)
+            To learn more, try the [Apache Kafka channel sample](../../../eventing/samples/kafka/channel/README.md).
 
 === "Google Cloud Pub/Sub Channel"
 
@@ -66,8 +65,7 @@ Follow the procedure for the channel of your choice:
         ```
 
         !!! tip
-            To learn more about the Google Cloud Pub/Sub channel, try
-            [our sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md)
+            To learn more, try the [Google Cloud Pub/Sub channel sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md).
 
 
 === "In-Memory (standalone)"
@@ -115,7 +113,7 @@ Follow the procedure for the broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
-    For more information, see the [Kafka broker](../../../../eventing/broker/kafka-broker/) documentation.
+    For more information, see the [Kafka broker](../../../eventing/broker/kafka-broker/README.md) documentation.
 
 === "MT-Channel-based"
 
@@ -260,8 +258,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     GitHub sources in the cluster. This source does not support logging or tracing
     configuration yet.
 
-    To learn more about the Github source, try
-    [our sample](../../../../developer/eventing/sources/github-source/)
+    To learn more, try the [Github source sample](../../../eventing/samples/github-source/README.md)
 
 === "Apache Kafka Source"
 
@@ -271,8 +268,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka",file="source.yaml")}}
     ```
 
-    To learn more about the Apache Kafka source, try
-    [our sample](../../../../developer/eventing/sources/kafka-source)
+    To learn more, try the [Apache Kafka source sample](../../../developer/eventing/sources/kafka-source/README.md).
 
 
 === "GCP Sources"
@@ -284,17 +280,12 @@ The tabs below expand to show instructions for installing each Eventing extensio
     kubectl apply -f {{ artifact(org="google",repo="knative-gcp",file="cloud-run-events.yaml")}}
     ```
 
-    To learn more about the Cloud Pub/Sub source, try
-    [our sample](../../../../developer/eventing/sources/cloud-pubsub-source).
+    To learn more, try the following:
 
-    To learn more about the Cloud Storage source, try
-    [our sample](../../../../developer/eventing/sources/cloud-storage-source).
-
-    To learn more about the Cloud Scheduler source, try
-    [our sample](../../../../developer/eventing/sources/cloud-scheduler-source).
-
-    To learn more about the Cloud Audit Logs source, try
-    [our sample](../../../../developer/eventing/sources/cloud-audit-logs-source).
+    - [Cloud Pub/Sub source sample](../../../eventing/samples/cloud-pubsub-source/README.md)
+    - [Cloud Storage source sample](../../../eventing/samples/cloud-storage-source/README.md)
+    - [Cloud Scheduler source sample](../../../eventing/samples/cloud-scheduler-source/README.md)
+    - [Cloud Audit Logs source sample](../../../eventing/samples/cloud-audit-logs-source/README.md)
 
 
 === "Apache CouchDB Source"
@@ -305,7 +296,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
     kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-couchdb",file="couchdb.yaml")}}
     ```
 
-    To learn more about the Apache CouchDB source, read the [documentation](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md).
+    To learn more, read the [Apache CouchDB source](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md) documentation.
 
 === "VMware Sources and Bindings"
 
@@ -315,5 +306,4 @@ The tabs below expand to show instructions for installing each Eventing extensio
     kubectl apply -f {{ artifact(org="vmware-tanzu",repo="sources-for-knative",file="release.yaml")}}
     ```
 
-    To learn more about the VMware sources and bindings, try
-    [our samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
+    To learn more, try the [VMware sources and bindings samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
