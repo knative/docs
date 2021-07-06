@@ -27,8 +27,10 @@ Explore the guides below for documentation specific to your role:
 Books to help you understand Knative concepts and get additional examples:
 
 - [Knative in Action](https://www.manning.com/books/knative-in-action)
-??? question "Want a free digital copy of Knative in Action?"
-    VMWare has generously donated access to a free copy of the Knative in Action eBook, [get your copy here!](https://tanzu.vmware.com/content/ebooks/knative-in-action){target=_blank}
+
+    ??? question "Want a free digital copy of Knative in Action?"
+        VMWare has generously donated access to a free copy of the Knative in Action eBook, [get your copy here!](https://tanzu.vmware.com/content/ebooks/knative-in-action){target=_blank}
+        
 - [Knative Cookbook](https://www.oreilly.com/library/view/knative-cookbook/9781492061182/)
 
 ## :globe_with_meridians: Other Knative links
