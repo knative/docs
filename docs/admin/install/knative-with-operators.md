@@ -463,11 +463,11 @@ NAME               VERSION             READY   REASON
 knative-eventing   <version number>    True
 ```
 
-### Installing with Different Eventing Sources
+### Installing with different eventing sources
 
 ??? "Installing the Knative Eventing component with different eventing sources"
 
-    Knative Operator can configure Knative Eventing component with different eveting sources. Click on each tab below to
+    Knative Operator can configure Knative Eventing component with different eventing sources. Click on each tab below to
     see how you can configure Knative Eventing with different eventing sources:
 
     === "Ceph"
