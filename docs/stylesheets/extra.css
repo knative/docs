@@ -220,7 +220,10 @@
 /* Feature State Labels */
 .feature-alpha, .feature-beta, .feature-stable {
   font-variant: small-caps;
-  padding: 0.2em;
+  padding: 0.1em;
+  border-bottom: 1px dotted #999;
+  display: inline-block;
+  font-weight: bold;
 }
 .feature-alpha {
   background: rgb(255, 218, 218);

@@ -5,13 +5,17 @@ def define_env(env):
     @env.macro
     def feature(alpha="", beta="", stable=""):
         versions = []
+        descriptions = []
         if alpha != "":
-            versions.append('<abbr class="feature-alpha" title="Alpha features are experimental, and may change or be removed without notice">alpha</abbr> since Knative v{version}'.format(version=alpha))
+            versions.append('<span class="feature-alpha">alpha</span> since Knative v{version}'.format(version=alpha))
+            descriptions.append('    - <span class="feature-alpha">alpha</span> features are experimental, and may change or be removed without notice.')
         if beta != "":
-            versions.append('<abbr class="feature-beta" title="Beta features are well-tested and enabling them is considered safe. Support for the overall feature will not be dropped, though details may change in incompatible ways">beta</abbr> since Knative v{version}'.format(version=beta))
+            versions.append('<span class="feature-beta">beta</span> since Knative v{version}'.format(version=beta))
+            descriptions.append('    - <span class="feature-beta">beta</span> features are well-tested and enabling them is considered safe. Support for the overall feature will not be dropped, though details may change in incompatible ways.')
         if stable != "":
-            versions.append('<abbr class="feature-stable" title="Stable features will be maintained for many future versions">stable</abbr> since Knative v{version}'.format(version=stable))
-        return '!!! info "Feature Availability: ' + ', '.join(versions) + '"'
+            versions.append('<span class="feature-stable">stable</span> since Knative v{version}'.format(version=stable))
+            descriptions.append('    - <span class="feature-stable">stable</span> features will be maintained for many future versions.')
+        return '??? info "Feature Availability: ' + ', '.join(versions) + '"\n' + '\n'.join(descriptions)
 
     @env.macro
     def artifact(repo, file, org="knative"):
