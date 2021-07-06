@@ -277,7 +277,7 @@ Follow the procedure for the DNS of your choice:
 
 === "Temporary DNS"
 
-    If you are using `curl` to access the sample applications or your own Knative app, and are
+    If you are using curl to access the sample applications or your own Knative app, and are
     unable to use the Magic DNS (xip.io) or Real DNS methods, you can use a temporary approach.
 
     See the Real DNS method for a permanent solution.
@@ -286,7 +286,7 @@ Follow the procedure for the DNS of your choice:
     Real DNS method, or cannot use the Magic DNS method due to using, for example, minikube locally
     or IPv6 clusters.
 
-    To access your application using `curl` using this method:
+    To access your application using curl using this method:
 
     1. After starting your application, get the URL of your application by running the command:
 
@@ -301,7 +301,7 @@ Follow the procedure for the DNS of your choice:
             helloworld-go   http://helloworld-go.default.example.com   helloworld-go-vqjlf   helloworld-go-vqjlf   True
             ```
 
-    1. Instruct `curl` to connect to the External IP address or CNAME defined by the
+    1. Instruct curl to connect to the External IP address or CNAME defined by the
       networking layer in section 3 above, and use the `-H "Host:"` command-line
       option to specify the Knative application's hostname.
 
@@ -359,7 +359,7 @@ The tabs below expand to show instructions for installing each Serving extension
 
     Knative supports automatically provisioning TLS certificates using Encrypt HTTP01 challenges. The following commands install the components needed to support TLS.
 
-    1. Install the `net-http01` controller by running the command:
+    1. Install the net-http01 controller by running the command:
 
         ```bash
         kubectl apply -f {{ artifact(repo="net-http01",file="release.yaml")}}
@@ -403,9 +403,9 @@ The tabs below expand to show instructions for installing each Serving extension
 
 === "DomainMapping CRD"
 
-    The `DomainMapping` CRD allows a user to map a domain name that they own to a specific Knative Service.
+    The DomainMapping CRD allows a user to map a domain name that they own to a specific Knative Service.
 
-    * Apply the `DomainMapping` CRD by running the commands:
+    * Apply the DomainMapping CRD by running the commands:
 
         ```bash
         kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping-crds.yaml")}}
