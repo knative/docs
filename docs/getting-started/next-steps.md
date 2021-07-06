@@ -11,9 +11,9 @@ This topic provides a list of resources to help you continue your Knative journe
 
 Try out some of the Knative samples below:
 
-- [Converting a Kubernetes Service to a Knative Service](../serving/convert-deployment-to-knative-service/)
-- [Knative Serving code samples](../serving/samples/)
-- [Knative Eventing and Event source code samples](../eventing/samples/)
+- [Converting a Kubernetes Service to a Knative Service](../../serving/convert-deployment-to-knative-service/)
+- [Knative Serving code samples](../../serving/samples/)
+- [Knative Eventing and Event source code samples](../../eventing/samples/)
 
 ## :page_with_curl: Explore the Knative docs
 
@@ -30,7 +30,7 @@ Books to help you understand Knative concepts and get additional examples:
 
     ??? question "Want a free digital copy of Knative in Action?"
         VMWare has generously donated access to a free copy of the Knative in Action eBook, [get your copy here!](https://tanzu.vmware.com/content/ebooks/knative-in-action){target=_blank}
-        
+
 - [Knative Cookbook](https://www.oreilly.com/library/view/knative-cookbook/9781492061182/)
 
 ## :globe_with_meridians: Other Knative links
