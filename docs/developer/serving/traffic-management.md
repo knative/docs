@@ -67,6 +67,26 @@ spec:
     percent: 0
 ```
 
+## Routing and managing traffic by using the Knative CLI
+
+You can use the following `kn` CLI command to split traffic between revisions:
+
+```bash
+kn service update <service-name> --traffic <revision-name>=<percent>
+```
+
+Where:
+
+- `<service-name>` is the name of the Knative Service that you are configuring traffic routing for.
+- `<revision-name>` is the name of the revision that you want to configure to receive a percentage of traffic.
+- `<percent>` is the percentage of traffic that you want to send to the revision specified by `<revision-name>`.
+
+For example, to split traffic for a Service named `example`, by sending 80% of traffic to the Revision `green` and 20% of traffic to the Revision `blue`, you could run the following command:
+
+```bash
+kn service update example --traffic green=80 --traffic blue=20
+```
+
 ## Routing and managing traffic with blue/green deployment
 
 You can safely reroute traffic from a live version of an application to a new version by using a [blue/green deployment strategy](https://en.wikipedia.org/wiki/Blue-green_deployment).
