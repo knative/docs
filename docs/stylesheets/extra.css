@@ -16,12 +16,12 @@
   width: 3rem;
   height: 2.4rem;
 }
-.md-header__button {
+.md-header__button.md-logo {
   transition-duration: 0.2s;
   transition-property: transform;
 }
 
-.md-header__button:hover {
+.md-header__button.md-logo:hover {
   opacity: 1;
   transform: rotate(5deg);
   -webkit-transform: rotate(5deg);
