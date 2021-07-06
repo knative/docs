@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+<meta name="theme-color" content="#1a7dc9" />
+{% endblock %}
+
 {% block announce %}
 {% if config.extra.version_warning %}
 <div class="versionwarning" style="margin: .6rem auto; padding: 0 .8rem">
@@ -10,7 +14,7 @@
 </div>
 {% endif %}
 <div class="versionwarning" style="display: flex; justify-content: center;">
-  <p style="color: #FFF">Welcome to the new Knative.dev! Pardon our progress, if you find any issues with this site, please submit them <a target="_blank" href="https://github.com/knative/docs/issues/new/choose">here</a>!</p>
+  <p>👋 Welcome to the new Knative.dev! Pardon our progress, if you find any issues with this site, please submit them <a target="_blank" href="https://github.com/knative/docs/issues/new/choose">here</a>!</p>
 </div>
 {% endblock %}
 
