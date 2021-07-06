@@ -16,6 +16,16 @@
   width: 3rem;
   height: 2.4rem;
 }
+.md-header__button {
+  transition-duration: 0.2s;
+  transition-property: transform;
+}
+
+.md-header__button:hover {
+  opacity: 1;
+  transform: rotate(5deg);
+  -webkit-transform: rotate(5deg);
+}
 
 .md-nav__item--nested>.md-nav__link, .md-nav__item a {
   color: var(--nav-item-color);
