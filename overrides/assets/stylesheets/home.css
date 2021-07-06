@@ -235,3 +235,11 @@ body {
 .md-typeset .task-list-item {
   margin-left: 25px;
 }
+
+/* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
+footer nav.md-footer__inner {
+  padding: 0;
+}
+footer .md-footer-meta .md-footer-meta__inner {
+  padding: 1em 0;
+}
