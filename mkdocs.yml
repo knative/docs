@@ -60,7 +60,6 @@ plugins:
       - snippets/*
       - smoketest.md
       - "*/_index.md" # pretty much all shortcodes
-      - "*/serving-api.md" # shortcode to serving.md
   awesome-pages:
     filename: ".index"
     collapse_single_pages: true
