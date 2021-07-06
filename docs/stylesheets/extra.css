@@ -59,7 +59,14 @@
   padding: 0;
 }
 .md-announce {
-  background: #6E73F3;
+  background: #fff5b5;
+}
+.md-announce .versionwarning p {
+  color: black;
+}
+.md-announce a {
+  color: blue;
+  text-decoration: underline;
 }
 
 /* text sizing of tables, Alert, Warnings, Notes*/
