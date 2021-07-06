@@ -1,3 +1,5 @@
+For the correct spellings of words, see [Merriam-Webster](https://www.merriam-webster.com/).
+
 | Correct Term                          | Incorrect Term(s)                                          | Notes                                                                                                                                      |
 |---------------------------------------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | autoTLS                               | auto TLS<br>Auto TLS<br>AutoTLS                            |                                                                                                                                            |

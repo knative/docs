@@ -1,13 +1,13 @@
 # Formatting standard and conventions
 
 ## Documenting Knative API Objects
-> Any Knative API Objects ought to use Title case.
+>  Use upper camel case for Knative API objects.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
-|Channels | `Channels`
+|Channels | channels
 |Broker      | broker
-
+|ContainerSource | Container Source
 
 ## Using parentheses
 >Don’t use parentheses, unless it’s the first instance in a page to explain an acronym that isn’t immediately obvious.
