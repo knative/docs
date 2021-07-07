@@ -68,7 +68,7 @@ are provided on the command line.
         $ kubectl delete service challenger -n knative-serving
         ```
 
-    Upgrade of [net-certmanager to v0.24.0](https://github.com/knative-sandbox/net-certmanager/releases/tag/v0.24.0)
+    * Upgrade of [net-certmanager to v0.24.0](https://github.com/knative-sandbox/net-certmanager/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
