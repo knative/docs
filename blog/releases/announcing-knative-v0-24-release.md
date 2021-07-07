@@ -50,7 +50,7 @@ are provided on the command line.
 
 #### 🚨 Breaking or Notable Changes
 
-* **Renaming of some net-* components**
+* **Renaming of some `net-*` components**
     Related issue: [knative/networking#448](https://github.com/knative/networking/issues/448)
 
     As part of our efforts to GA/1.0 we've standardized on the naming of our networking plugins that
