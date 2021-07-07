@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Creating an event source by using the sample event source</title>
-    <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/</link>
     <description>Recent content in Creating an event source by using the sample event source on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Design and Theory Behind an Event Source</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/01-theory/</link>
+      <title>V0.23-Docs: Design and Theory Behind an Event Source</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/01-theory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/01-theory/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/01-theory/</guid>
       <description>
         
         
@@ -127,11 +127,11 @@ to have the required things above generated and injected:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Sample Source Lifecycle and Types</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types/</link>
+      <title>V0.23-Docs: Sample Source Lifecycle and Types</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types/</guid>
       <description>
         
         
@@ -229,11 +229,11 @@ clientset and API&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Controller Implementation and Design</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/03-controller/</link>
+      <title>V0.23-Docs: Controller Implementation and Design</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/03-controller/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/03-controller/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/03-controller/</guid>
       <description>
         
         
@@ -290,11 +290,11 @@ clientset and API&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Reconciler Implementation and Design</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/04-reconciler/</link>
+      <title>V0.23-Docs: Reconciler Implementation and Design</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/04-reconciler/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/04-reconciler/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/04-reconciler/</guid>
       <description>
         
         
@@ -393,11 +393,11 @@ Example: &lt;a href=&#34;https://github.com/knative-sandbox/sample-source/blob/m
     </item>
     
     <item>
-      <title>Docs: Receive Adapter Implementation and Design</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter/</link>
+      <title>V0.23-Docs: Receive Adapter Implementation and Design</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter/</guid>
       <description>
         
         
@@ -460,11 +460,11 @@ every X interval, as specified by the loaded &lt;code&gt;EnvConfigAccessor&lt;/c
     </item>
     
     <item>
-      <title>Docs: Publishing to your Kubernetes cluster</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/06-yaml/</link>
+      <title>V0.23-Docs: Publishing to your Kubernetes cluster</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/06-yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/06-yaml/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/06-yaml/</guid>
       <description>
         
         
@@ -539,11 +539,11 @@ Data,
     </item>
     
     <item>
-      <title>Docs: Moving the event source to knative-sandbox</title>
-      <link>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox/</link>
+      <title>V0.23-Docs: Moving the event source to knative-sandbox</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox/</guid>
       <description>
         
         

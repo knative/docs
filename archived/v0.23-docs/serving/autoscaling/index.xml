@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Autoscaling</title>
-    <link>https://knative.dev/docs/serving/autoscaling/</link>
+    <link>https://knative.dev/v0.23-docs/serving/autoscaling/</link>
     <description>Recent content in Autoscaling on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/serving/autoscaling/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/serving/autoscaling/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Autoscaling concepts</title>
-      <link>https://knative.dev/docs/serving/autoscaling/autoscaling-concepts/</link>
+      <title>V0.23-Docs: Autoscaling concepts</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/autoscaling-concepts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/autoscaling-concepts/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/autoscaling-concepts/</guid>
       <description>
         
         
@@ -189,11 +189,11 @@ Setting annotations in the top level metadata of a single revision will not prop
     </item>
     
     <item>
-      <title>Docs: Metrics</title>
-      <link>https://knative.dev/docs/serving/autoscaling/autoscaling-metrics/</link>
+      <title>V0.23-Docs: Metrics</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/autoscaling-metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/autoscaling-metrics/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/autoscaling-metrics/</guid>
       <description>
         
         
@@ -317,11 +317,11 @@ The possible metric types that can be configured per revision depend on the type
     </item>
     
     <item>
-      <title>Docs: Targets</title>
-      <link>https://knative.dev/docs/serving/autoscaling/autoscaling-targets/</link>
+      <title>V0.23-Docs: Targets</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/autoscaling-targets/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/autoscaling-targets/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/autoscaling-targets/</guid>
       <description>
         
         
@@ -430,11 +430,11 @@ See the &lt;a href=&#34;../autoscaling-metrics&#34;&gt;metrics&lt;/a&gt; documen
     </item>
     
     <item>
-      <title>Docs: Configuring scale to zero</title>
-      <link>https://knative.dev/docs/serving/autoscaling/scale-to-zero/</link>
+      <title>V0.23-Docs: Configuring scale to zero</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/scale-to-zero/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/scale-to-zero/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/scale-to-zero/</guid>
       <description>
         
         
@@ -696,11 +696,11 @@ See the &lt;a href=&#34;../autoscaling-metrics&#34;&gt;metrics&lt;/a&gt; documen
     </item>
     
     <item>
-      <title>Docs: Configuring concurrency</title>
-      <link>https://knative.dev/docs/serving/autoscaling/concurrency/</link>
+      <title>V0.23-Docs: Configuring concurrency</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/concurrency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/concurrency/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/concurrency/</guid>
       <description>
         
         
@@ -1037,11 +1037,11 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
     </item>
     
     <item>
-      <title>Docs: Configuring scale bounds</title>
-      <link>https://knative.dev/docs/serving/autoscaling/scale-bounds/</link>
+      <title>V0.23-Docs: Configuring scale bounds</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/scale-bounds/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/scale-bounds/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/scale-bounds/</guid>
       <description>
         
         
@@ -1431,11 +1431,11 @@ delay period.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Configuring the requests per second (RPS) target</title>
-      <link>https://knative.dev/docs/serving/autoscaling/rps-target/</link>
+      <title>V0.23-Docs: Configuring the requests per second (RPS) target</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/rps-target/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/rps-target/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/rps-target/</guid>
       <description>
         
         
@@ -1546,11 +1546,11 @@ delay period.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Additional autoscaling configuration for Knative Pod Autoscaler</title>
-      <link>https://knative.dev/docs/serving/autoscaling/kpa-specific/</link>
+      <title>V0.23-Docs: Additional autoscaling configuration for Knative Pod Autoscaler</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/kpa-specific/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/kpa-specific/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/kpa-specific/</guid>
       <description>
         
         
@@ -2026,11 +2026,11 @@ The shorter these windows are, the more quickly the Autoscaler will react.&lt;/p
     </item>
     
     <item>
-      <title>Docs: Autoscale Sample App - Go</title>
-      <link>https://knative.dev/docs/serving/autoscaling/autoscale-go/</link>
+      <title>V0.23-Docs: Autoscale Sample App - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/autoscale-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/autoscale-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/autoscale-go/</guid>
       <description>
         
         

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Eventing - Hello World app</title>
-    <link>https://knative.dev/docs/eventing/samples/helloworld/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/samples/helloworld/</link>
     <description>Recent content in Knative Eventing - Hello World app on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/samples/helloworld/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/samples/helloworld/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Hello World - Golang</title>
-      <link>https://knative.dev/docs/eventing/samples/helloworld/helloworld-go/</link>
+      <title>V0.23-Docs: Hello World - Golang</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/helloworld/helloworld-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/helloworld/helloworld-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/helloworld/helloworld-go/</guid>
       <description>
         
         
@@ -439,11 +439,11 @@ mesh via the Broker and can be delivered to other services using a Trigger&lt;/p
     </item>
     
     <item>
-      <title>Docs: Hello World - Python</title>
-      <link>https://knative.dev/docs/eventing/samples/helloworld/helloworld-python/</link>
+      <title>V0.23-Docs: Hello World - Python</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/helloworld/helloworld-python/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/helloworld/helloworld-python/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/helloworld/helloworld-python/</guid>
       <description>
         
         

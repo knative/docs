@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Sequence</title>
-    <link>https://knative.dev/docs/eventing/flows/sequence/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/flows/sequence/</link>
     <description>Recent content in Sequence on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/flows/sequence/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/flows/sequence/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Sequence terminal</title>
-      <link>https://knative.dev/docs/eventing/flows/sequence/sequence-terminal/</link>
+      <title>V0.23-Docs: Sequence terminal</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-terminal/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/sequence/sequence-terminal/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-terminal/</guid>
       <description>
         
         
@@ -167,11 +167,11 @@ reflected by the Message being now: &amp;ldquo;Hello world! - Handled by 0 - Han
     </item>
     
     <item>
-      <title>Docs: Sequence wired to event-display</title>
-      <link>https://knative.dev/docs/eventing/flows/sequence/sequence-reply-to-event-display/</link>
+      <title>V0.23-Docs: Sequence wired to event-display</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-reply-to-event-display/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/sequence/sequence-reply-to-event-display/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-reply-to-event-display/</guid>
       <description>
         
         
@@ -327,11 +327,11 @@ appended to it by each of the steps in the Sequence.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Sequence wired to another Sequence</title>
-      <link>https://knative.dev/docs/eventing/flows/sequence/sequence-reply-to-sequence/</link>
+      <title>V0.23-Docs: Sequence wired to another Sequence</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-reply-to-sequence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/sequence/sequence-reply-to-sequence/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-reply-to-sequence/</guid>
       <description>
         
         
@@ -559,11 +559,11 @@ appended to it by each of the steps in the Sequence.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Using Sequence with Broker and Trigger</title>
-      <link>https://knative.dev/docs/eventing/flows/sequence/sequence-with-broker-trigger/</link>
+      <title>V0.23-Docs: Using Sequence with Broker and Trigger</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-with-broker-trigger/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/sequence/sequence-with-broker-trigger/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/sequence/sequence-with-broker-trigger/</guid>
       <description>
         
         

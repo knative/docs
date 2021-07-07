@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Hello World - Python</title>
-    <link>https://knative.dev/docs/eventing/samples/helloworld/helloworld-python/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/samples/helloworld/helloworld-python/</link>
     <description>Recent content in Hello World - Python on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/samples/helloworld/helloworld-python/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/samples/helloworld/helloworld-python/index.xml" rel="self" type="application/rss+xml" />
     
     
       

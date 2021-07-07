@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – CLI tools</title>
-    <link>https://knative.dev/docs/client/</link>
+    <link>https://knative.dev/v0.23-docs/client/</link>
     <description>Recent content in CLI tools on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/client/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/client/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Installing kn</title>
-      <link>https://knative.dev/docs/client/install-kn/</link>
+      <title>V0.23-Docs: Installing kn</title>
+      <link>https://knative.dev/v0.23-docs/client/install-kn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/client/install-kn/</guid>
+      <guid>https://knative.dev/v0.23-docs/client/install-kn/</guid>
       <description>
         
         
@@ -71,11 +71,11 @@ cd client/
     </item>
     
     <item>
-      <title>Docs: Customizing kn</title>
-      <link>https://knative.dev/docs/client/configure-kn/</link>
+      <title>V0.23-Docs: Customizing kn</title>
+      <link>https://knative.dev/v0.23-docs/client/configure-kn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/client/configure-kn/</guid>
+      <guid>https://knative.dev/v0.23-docs/client/configure-kn/</guid>
       <description>
         
         
@@ -116,11 +116,11 @@ cd client/
     </item>
     
     <item>
-      <title>Docs: kn plugins</title>
-      <link>https://knative.dev/docs/client/kn-plugins/</link>
+      <title>V0.23-Docs: kn plugins</title>
+      <link>https://knative.dev/v0.23-docs/client/kn-plugins/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/client/kn-plugins/</guid>
+      <guid>https://knative.dev/v0.23-docs/client/kn-plugins/</guid>
       <description>
         
         

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Eventing Flows</title>
-    <link>https://knative.dev/docs/eventing/flows/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/flows/</link>
     <description>Recent content in Eventing Flows on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/flows/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/flows/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Parallel</title>
-      <link>https://knative.dev/docs/eventing/flows/parallel/</link>
+      <title>V0.23-Docs: Parallel</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/parallel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/parallel/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/parallel/</guid>
       <description>
         
         
@@ -63,11 +63,11 @@ this Parallel (same as &lt;code&gt;ingressChannelStatus&lt;/code&gt;).&lt;/li&gt
     </item>
     
     <item>
-      <title>Docs: Sequence</title>
-      <link>https://knative.dev/docs/eventing/flows/sequence/</link>
+      <title>V0.23-Docs: Sequence</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/sequence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/sequence/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/sequence/</guid>
       <description>
         
         

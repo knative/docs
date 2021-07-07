@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Eventing code samples</title>
-    <link>https://knative.dev/docs/eventing/samples/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/samples/</link>
     <description>Recent content in Knative Eventing code samples on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/samples/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/samples/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Apache Kafka examples</title>
-      <link>https://knative.dev/docs/eventing/samples/kafka/</link>
+      <title>V0.23-Docs: Apache Kafka examples</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/kafka/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/kafka/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/kafka/</guid>
       <description>
         
         
@@ -110,11 +110,11 @@ steps that are listed above:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Container Source Example</title>
-      <link>https://knative.dev/docs/eventing/samples/container-source/</link>
+      <title>V0.23-Docs: Container Source Example</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/container-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/container-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/container-source/</guid>
       <description>
         
         
@@ -247,11 +247,11 @@ specification&lt;/a&gt;.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Knative Eventing - Hello World app</title>
-      <link>https://knative.dev/docs/eventing/samples/helloworld/</link>
+      <title>V0.23-Docs: Knative Eventing - Hello World app</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/helloworld/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/helloworld/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/helloworld/</guid>
       <description>
         
         
@@ -280,11 +280,11 @@ and a Docker Hub account configured (we&amp;rsquo;ll use it for a container regi
     </item>
     
     <item>
-      <title>Docs: Parallel Example</title>
-      <link>https://knative.dev/docs/eventing/samples/parallel/</link>
+      <title>V0.23-Docs: Parallel Example</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/parallel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/parallel/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/parallel/</guid>
       <description>
         
         
@@ -318,11 +318,11 @@ trivial filtering, transformation and routing of the incoming events.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: CloudAuditLogsSource</title>
-      <link>https://knative.dev/docs/eventing/samples/cloud-audit-logs-source/</link>
+      <title>V0.23-Docs: CloudAuditLogsSource</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/cloud-audit-logs-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/cloud-audit-logs-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/cloud-audit-logs-source/</guid>
       <description>
         
         
@@ -332,11 +332,11 @@ trivial filtering, transformation and routing of the incoming events.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: CloudPubSubSource</title>
-      <link>https://knative.dev/docs/eventing/samples/cloud-pubsub-source/</link>
+      <title>V0.23-Docs: CloudPubSubSource</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/cloud-pubsub-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/cloud-pubsub-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/cloud-pubsub-source/</guid>
       <description>
         
         
@@ -346,11 +346,11 @@ trivial filtering, transformation and routing of the incoming events.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: CloudSchedulerSource</title>
-      <link>https://knative.dev/docs/eventing/samples/cloud-scheduler-source/</link>
+      <title>V0.23-Docs: CloudSchedulerSource</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/cloud-scheduler-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/cloud-scheduler-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/cloud-scheduler-source/</guid>
       <description>
         
         
@@ -360,11 +360,11 @@ trivial filtering, transformation and routing of the incoming events.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: CloudStorageSource</title>
-      <link>https://knative.dev/docs/eventing/samples/cloud-storage-source/</link>
+      <title>V0.23-Docs: CloudStorageSource</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/cloud-storage-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/cloud-storage-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/cloud-storage-source/</guid>
       <description>
         
         
@@ -374,11 +374,11 @@ trivial filtering, transformation and routing of the incoming events.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: GitHub source</title>
-      <link>https://knative.dev/docs/eventing/samples/github-source/</link>
+      <title>V0.23-Docs: GitHub source</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/github-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/github-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/github-source/</guid>
       <description>
         
         
@@ -514,11 +514,11 @@ kubectl --namespace default delete --filename githubsecret.yaml
     </item>
     
     <item>
-      <title>Docs: GitLab source</title>
-      <link>https://knative.dev/docs/eventing/samples/gitlab-source/</link>
+      <title>V0.23-Docs: GitLab source</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/gitlab-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/gitlab-source/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/gitlab-source/</guid>
       <description>
         
         
@@ -671,11 +671,11 @@ kubectl --namespace default delete --filename secret.yaml
     </item>
     
     <item>
-      <title>Docs: Binding running services to an IoT core</title>
-      <link>https://knative.dev/docs/eventing/samples/iot-core/</link>
+      <title>V0.23-Docs: Binding running services to an IoT core</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/iot-core/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/iot-core/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/iot-core/</guid>
       <description>
         
         

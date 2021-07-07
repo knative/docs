@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative API Reference Documentation</title>
-    <link>https://knative.dev/docs/reference/api/</link>
+    <link>https://knative.dev/v0.23-docs/reference/api/</link>
     <description>Recent content in Knative API Reference Documentation on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/reference/api/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/reference/api/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Knative Serving Component</title>
-      <link>https://knative.dev/docs/reference/api/serving-api/</link>
+      <title>V0.23-Docs: Knative Serving Component</title>
+      <link>https://knative.dev/v0.23-docs/reference/api/serving-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/reference/api/serving-api/</guid>
+      <guid>https://knative.dev/v0.23-docs/reference/api/serving-api/</guid>
       <description>
         
         
@@ -2324,11 +2324,11 @@ on git commit &lt;code&gt;35efb3108&lt;/code&gt;.
     </item>
     
     <item>
-      <title>Docs: Knative Eventing Component</title>
-      <link>https://knative.dev/docs/reference/api/eventing/</link>
+      <title>V0.23-Docs: Knative Eventing Component</title>
+      <link>https://knative.dev/v0.23-docs/reference/api/eventing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/reference/api/eventing/</guid>
+      <guid>https://knative.dev/v0.23-docs/reference/api/eventing/</guid>
       <description>
         
         

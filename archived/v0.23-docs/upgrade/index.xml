@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Upgrading Knative</title>
-    <link>https://knative.dev/docs/upgrade/</link>
+    <link>https://knative.dev/v0.23-docs/upgrade/</link>
     <description>Recent content in Upgrading Knative on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/upgrade/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/upgrade/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Upgrading Knative</title>
-      <link>https://knative.dev/docs/upgrade/upgrade-installation/</link>
+      <title>V0.23-Docs: Upgrading Knative</title>
+      <link>https://knative.dev/v0.23-docs/upgrade/upgrade-installation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/upgrade/upgrade-installation/</guid>
+      <guid>https://knative.dev/v0.23-docs/upgrade/upgrade-installation/</guid>
       <description>
         
         
@@ -93,11 +93,11 @@ You might notice a status of &lt;code&gt;Terminating&lt;/code&gt; for the old po
     </item>
     
     <item>
-      <title>Docs: Upgrading using the Knative Operator</title>
-      <link>https://knative.dev/docs/upgrade/upgrade-installation-with-operator/</link>
+      <title>V0.23-Docs: Upgrading using the Knative Operator</title>
+      <link>https://knative.dev/v0.23-docs/upgrade/upgrade-installation-with-operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/upgrade/upgrade-installation-with-operator/</guid>
+      <guid>https://knative.dev/v0.23-docs/upgrade/upgrade-installation-with-operator/</guid>
       <description>
         
         
