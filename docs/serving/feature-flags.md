@@ -255,7 +255,7 @@ PodSecurityContext properties:
 
 When set to "enabled" or "allowed" it allows the following
 Container SecurityContext properties:
-- RunAsNonRoot
+- RunAsNonRoot (also allowed without this flag only when set to true)
 - RunAsGroup
 - RunAsUser (already allowed without this flag)
 
