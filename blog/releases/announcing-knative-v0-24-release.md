@@ -57,7 +57,7 @@ are provided on the command line.
     are installed alongside Serving. If you're managing your Knative deployment manually with
     `kubectl` **this will require a two-phase upgrade process**. See the below sections:
 
-    Upgrade of [net-http01 to v0.24.0](https://github.com/knative-sandbox/net-http01/releases/tag/v0.24.0)
+    * Upgrade of [net-http01 to v0.24.0](https://github.com/knative-sandbox/net-http01/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
