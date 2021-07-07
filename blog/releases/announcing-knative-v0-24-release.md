@@ -92,7 +92,7 @@ are provided on the command line.
           --prune -l networking.knative.dev/ingress-provider=istio
         ```
 
-    Upgrade of [net-contour to v0.24.0](https://github.com/knative-sandbox/net-contour/releases/tag/v0.24.0)
+    * Upgrade of [net-contour to v0.24.0](https://github.com/knative-sandbox/net-contour/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
