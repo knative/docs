@@ -2,6 +2,13 @@
 
 This topic shows how to convert a Kubernetes Deployment to a Knative Service.
 
+## Benefits
+
+Converting to a Knative Service has the following benefits:
+
+- Reduces the footprint of the service instance because the instance scales to 0 when it becomes idle.
+- Improves performance due to built-in autoscaling for the Knative Service.
+
 ## Determine if your workload is a good fit for Knative
 
 In general, if your Kubernetes workload is a good fit for Knative, you can remove a lot of your manifest to create a Knative Service.
