@@ -187,7 +187,7 @@ You can read more about how to enable these features and their usage in the
 
 * `KReference.Group` now can be used in `Subscription.Spec.Channel` as well ([#5520](https://github.com/knative/eventing/pull/5520))
 * Added `DeliverySpec.Timeout` ([#5149](https://github.com/knative/eventing/pull/5149))
-* Added the experimental feature kreference-group.
+* Added the experimental feature `kreference-group`.
 By enabling it, you can use Subscriber.Ref.Group instead of Subscriber.Ref.APIVersion to refer to another Resource, without being explicit about the resource version (for example, v1beta1, v1, ...) ([#5440](https://github.com/knative/eventing/pull/5440))
 * Remaining HA Control Plane Pods (through the operator) are now labeled with podAntiAffinity to ensure there isn't a single point of failure. ([#5409](https://github.com/knative/eventing/pull/5409))
 
