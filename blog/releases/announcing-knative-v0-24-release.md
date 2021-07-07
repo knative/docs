@@ -80,7 +80,7 @@ are provided on the command line.
           --prune -l networking.knative.dev/certificate-provider=cert-manager
         ```
 
-    Upgrade [net-istio to v0.24.0](https://github.com/knative-sandbox/net-istio/releases/tag/v0.24.0)
+    * Upgrade [net-istio to v0.24.0](https://github.com/knative-sandbox/net-istio/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
