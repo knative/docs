@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Serving code samples</title>
-    <link>https://knative.dev/docs/serving/samples/</link>
+    <link>https://knative.dev/v0.23-docs/serving/samples/</link>
     <description>Recent content in Knative Serving code samples on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/serving/samples/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/serving/samples/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Knative Serving &#39;Cloud Events&#39; samples</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/</link>
+      <title>V0.23-Docs: Knative Serving &#39;Cloud Events&#39; samples</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/</guid>
       <description>
         
         
@@ -27,11 +27,11 @@
     </item>
     
     <item>
-      <title>Docs: GitHub webhook sample - Go</title>
-      <link>https://knative.dev/docs/serving/samples/gitwebhook-go/</link>
+      <title>V0.23-Docs: GitHub webhook sample - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/gitwebhook-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/gitwebhook-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/gitwebhook-go/</guid>
       <description>
         
         
@@ -220,11 +220,11 @@ right, you&amp;rsquo;ll see the title of the PR will be modified, with the text
     </item>
     
     <item>
-      <title>Docs: gRPC Server - Go</title>
-      <link>https://knative.dev/docs/serving/samples/grpc-ping-go/</link>
+      <title>V0.23-Docs: gRPC Server - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/grpc-ping-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/grpc-ping-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/grpc-ping-go/</guid>
       <description>
         
         
@@ -317,11 +317,11 @@ instead of the entrypoint command defined in the Dockerfile &lt;code&gt;CMD&lt;/
     </item>
     
     <item>
-      <title>Docs: Knative &#39;Hello World&#39; samples</title>
-      <link>https://knative.dev/docs/serving/samples/hello-world/</link>
+      <title>V0.23-Docs: Knative &#39;Hello World&#39; samples</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/hello-world/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/hello-world/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/hello-world/</guid>
       <description>
         
         
@@ -330,11 +330,11 @@ instead of the entrypoint command defined in the Dockerfile &lt;code&gt;CMD&lt;/
     </item>
     
     <item>
-      <title>Docs: Knative multi-container samples</title>
-      <link>https://knative.dev/docs/serving/samples/multi-container/</link>
+      <title>V0.23-Docs: Knative multi-container samples</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/multi-container/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/multi-container/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/multi-container/</guid>
       <description>
         
         
@@ -575,11 +575,11 @@ Yay!! multi-container works
     </item>
     
     <item>
-      <title>Docs: Creating a RESTful Service - Go</title>
-      <link>https://knative.dev/docs/serving/samples/rest-api-go/</link>
+      <title>V0.23-Docs: Creating a RESTful Service - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/rest-api-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/rest-api-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/rest-api-go/</guid>
       <description>
         
         
@@ -750,11 +750,11 @@ splitting between those Revisions.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Routing across multiple Knative services - Go</title>
-      <link>https://knative.dev/docs/serving/samples/knative-routing-go/</link>
+      <title>V0.23-Docs: Routing across multiple Knative services - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/knative-routing-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/knative-routing-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/knative-routing-go/</guid>
       <description>
         
         
@@ -972,11 +972,11 @@ kubectl delete --filename docs/serving/samples/knative-routing-go/routing.yaml
     </item>
     
     <item>
-      <title>Docs: Knative Secrets - Go</title>
-      <link>https://knative.dev/docs/serving/samples/secrets-go/</link>
+      <title>V0.23-Docs: Knative Secrets - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/secrets-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/secrets-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/secrets-go/</guid>
       <description>
         
         
@@ -1208,11 +1208,11 @@ kubectl delete secret google-robot-secret
     </item>
     
     <item>
-      <title>Docs: Tag Header Based Routing</title>
-      <link>https://knative.dev/docs/serving/samples/tag-header-based-routing/</link>
+      <title>V0.23-Docs: Tag Header Based Routing</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/tag-header-based-routing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/tag-header-based-routing/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/tag-header-based-routing/</guid>
       <description>
         
         
@@ -1288,11 +1288,11 @@ for the Revisions to become ready.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Simple Traffic Splitting Between Revisions</title>
-      <link>https://knative.dev/docs/serving/samples/traffic-splitting/</link>
+      <title>V0.23-Docs: Simple Traffic Splitting Between Revisions</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/traffic-splitting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/traffic-splitting/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/traffic-splitting/</guid>
       <description>
         
         
@@ -1415,11 +1415,11 @@ split evenly between &lt;code&gt;Welcome to the share app!&lt;/code&gt; and
     </item>
     
     <item>
-      <title>Docs: Routing and managing traffic with blue/green deployment</title>
-      <link>https://knative.dev/docs/serving/samples/blue-green-deployment/</link>
+      <title>V0.23-Docs: Routing and managing traffic with blue/green deployment</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/blue-green-deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/blue-green-deployment/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/blue-green-deployment/</guid>
       <description>
         
         

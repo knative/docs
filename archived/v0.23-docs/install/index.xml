@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Installing Knative</title>
-    <link>https://knative.dev/docs/install/</link>
+    <link>https://knative.dev/v0.23-docs/install/</link>
     <description>Recent content in Installing Knative on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/install/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/install/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Prerequisites</title>
-      <link>https://knative.dev/docs/install/prerequisites/</link>
+      <title>V0.23-Docs: Prerequisites</title>
+      <link>https://knative.dev/v0.23-docs/install/prerequisites/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/prerequisites/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/prerequisites/</guid>
       <description>
         
         
@@ -52,11 +52,11 @@ The requirements for your installation may vary, depending on whether you use op
     </item>
     
     <item>
-      <title>Docs: Installing Knative Serving using YAML files</title>
-      <link>https://knative.dev/docs/install/install-serving-with-yaml/</link>
+      <title>V0.23-Docs: Installing Knative Serving using YAML files</title>
+      <link>https://knative.dev/v0.23-docs/install/install-serving-with-yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/install-serving-with-yaml/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/install-serving-with-yaml/</guid>
       <description>
         
         
@@ -492,11 +492,11 @@ should, using the default configuration, be:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Installing Knative Eventing using YAML files</title>
-      <link>https://knative.dev/docs/install/install-eventing-with-yaml/</link>
+      <title>V0.23-Docs: Installing Knative Eventing using YAML files</title>
+      <link>https://knative.dev/v0.23-docs/install/install-eventing-with-yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/install-eventing-with-yaml/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/install-eventing-with-yaml/</guid>
       <description>
         
         
@@ -783,11 +783,11 @@ like:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Installing optional extensions</title>
-      <link>https://knative.dev/docs/install/install-extensions/</link>
+      <title>V0.23-Docs: Installing optional extensions</title>
+      <link>https://knative.dev/v0.23-docs/install/install-extensions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/install-extensions/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/install-extensions/</guid>
       <description>
         
         
@@ -1170,11 +1170,11 @@ kubectl apply -f https://github.com/google/knative-gcp/releases/download/v0.23.0
     </item>
     
     <item>
-      <title>Docs: Knative Operator installation</title>
-      <link>https://knative.dev/docs/install/knative-with-operators/</link>
+      <title>V0.23-Docs: Knative Operator installation</title>
+      <link>https://knative.dev/v0.23-docs/install/knative-with-operators/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/knative-with-operators/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/knative-with-operators/</guid>
       <description>
         
         
@@ -1978,11 +1978,11 @@ knative-eventing   &amp;lt;version number&amp;gt;    True
     </item>
     
     <item>
-      <title>Docs: Installing Istio for Knative</title>
-      <link>https://knative.dev/docs/install/installing-istio/</link>
+      <title>V0.23-Docs: Installing Istio for Knative</title>
+      <link>https://knative.dev/v0.23-docs/install/installing-istio/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/installing-istio/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/installing-istio/</guid>
       <description>
         
         
@@ -2142,11 +2142,11 @@ the
     </item>
     
     <item>
-      <title>Docs: Checking the version of your Knative components</title>
-      <link>https://knative.dev/docs/install/check-install-version/</link>
+      <title>V0.23-Docs: Checking the version of your Knative components</title>
+      <link>https://knative.dev/v0.23-docs/install/check-install-version/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/check-install-version/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/check-install-version/</guid>
       <description>
         
         
@@ -2167,11 +2167,11 @@ the
     </item>
     
     <item>
-      <title>Docs: Configuring the Serving Operator Custom Resource</title>
-      <link>https://knative.dev/docs/install/operator/configuring-serving-cr/</link>
+      <title>V0.23-Docs: Configuring the Serving Operator Custom Resource</title>
+      <link>https://knative.dev/v0.23-docs/install/operator/configuring-serving-cr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/operator/configuring-serving-cr/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/operator/configuring-serving-cr/</guid>
       <description>
         
         
@@ -2578,11 +2578,11 @@ spec:
     </item>
     
     <item>
-      <title>Docs: Installation files</title>
-      <link>https://knative.dev/docs/install/installation-files/</link>
+      <title>V0.23-Docs: Installation files</title>
+      <link>https://knative.dev/v0.23-docs/install/installation-files/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/installation-files/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/installation-files/</guid>
       <description>
         
         
@@ -2706,11 +2706,11 @@ and &lt;a href=&#34;../install-eventing-with-yaml&#34;&gt;Installing Eventing us
     </item>
     
     <item>
-      <title>Docs: Collecting Logs with Fluentbit</title>
-      <link>https://knative.dev/docs/install/collecting-logs/</link>
+      <title>V0.23-Docs: Collecting Logs with Fluentbit</title>
+      <link>https://knative.dev/v0.23-docs/install/collecting-logs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/collecting-logs/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/collecting-logs/</guid>
       <description>
         
         
@@ -2870,11 +2870,11 @@ PersistentVolume.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Collecting Metrics with OpenTelemetry</title>
-      <link>https://knative.dev/docs/install/collecting-metrics/</link>
+      <title>V0.23-Docs: Collecting Metrics with OpenTelemetry</title>
+      <link>https://knative.dev/v0.23-docs/install/collecting-metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/collecting-metrics/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/collecting-metrics/</guid>
       <description>
         
         
@@ -2962,11 +2962,11 @@ named &lt;code&gt;prometheus-operated&lt;/code&gt;; to access the console in you
     </item>
     
     <item>
-      <title>Docs: Configuring the Eventing Operator custom resource</title>
-      <link>https://knative.dev/docs/install/operator/configuring-eventing-cr/</link>
+      <title>V0.23-Docs: Configuring the Eventing Operator custom resource</title>
+      <link>https://knative.dev/v0.23-docs/install/operator/configuring-eventing-cr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/install/operator/configuring-eventing-cr/</guid>
+      <guid>https://knative.dev/v0.23-docs/install/operator/configuring-eventing-cr/</guid>
       <description>
         
         

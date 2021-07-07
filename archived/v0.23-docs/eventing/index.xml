@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Eventing</title>
-    <link>https://knative.dev/docs/eventing/</link>
+    <link>https://knative.dev/v0.23-docs/eventing/</link>
     <description>Recent content in Knative Eventing on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/eventing/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/eventing/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Getting Started with Knative Eventing</title>
-      <link>https://knative.dev/docs/eventing/getting-started/</link>
+      <title>V0.23-Docs: Getting Started with Knative Eventing</title>
+      <link>https://knative.dev/v0.23-docs/eventing/getting-started/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/getting-started/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/getting-started/</guid>
       <description>
         
         
@@ -394,11 +394,11 @@ Data,
     </item>
     
     <item>
-      <title>Docs: Event sources</title>
-      <link>https://knative.dev/docs/eventing/sources/</link>
+      <title>V0.23-Docs: Event sources</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sources/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sources/</guid>
       <description>
         
         
@@ -725,11 +725,11 @@ The Source object defines the arguments and parameters needed to instantiate a C
     </item>
     
     <item>
-      <title>Docs: Event registry</title>
-      <link>https://knative.dev/docs/eventing/event-registry/</link>
+      <title>V0.23-Docs: Event registry</title>
+      <link>https://knative.dev/v0.23-docs/eventing/event-registry/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/event-registry/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/event-registry/</guid>
       <description>
         
         
@@ -983,11 +983,11 @@ automatic registration of EventTypes in the registry).&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Eventing Flows</title>
-      <link>https://knative.dev/docs/eventing/flows/</link>
+      <title>V0.23-Docs: Eventing Flows</title>
+      <link>https://knative.dev/v0.23-docs/eventing/flows/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/flows/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/flows/</guid>
       <description>
         
         
@@ -1001,11 +1001,11 @@ automatic registration of EventTypes in the registry).&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Channels</title>
-      <link>https://knative.dev/docs/eventing/channels/</link>
+      <title>V0.23-Docs: Channels</title>
+      <link>https://knative.dev/v0.23-docs/eventing/channels/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/channels/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/channels/</guid>
       <description>
         
         
@@ -1035,11 +1035,11 @@ you might need retry and replay capabilities.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Knative Eventing Sugar Controller</title>
-      <link>https://knative.dev/docs/eventing/sugar/</link>
+      <title>V0.23-Docs: Knative Eventing Sugar Controller</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sugar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sugar/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sugar/</guid>
       <description>
         
         
@@ -1119,11 +1119,11 @@ Controller will do nothing.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Event delivery</title>
-      <link>https://knative.dev/docs/eventing/event-delivery/</link>
+      <title>V0.23-Docs: Event delivery</title>
+      <link>https://knative.dev/v0.23-docs/eventing/event-delivery/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/event-delivery/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/event-delivery/</guid>
       <description>
         
         
@@ -1226,11 +1226,11 @@ and might be truncated if the length is excessive.&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Brokers</title>
-      <link>https://knative.dev/docs/eventing/broker/</link>
+      <title>V0.23-Docs: Brokers</title>
+      <link>https://knative.dev/v0.23-docs/eventing/broker/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/broker/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/broker/</guid>
       <description>
         
         
@@ -1267,11 +1267,11 @@ control rules.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Sink</title>
-      <link>https://knative.dev/docs/eventing/sink/</link>
+      <title>V0.23-Docs: Sink</title>
+      <link>https://knative.dev/v0.23-docs/eventing/sink/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/sink/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/sink/</guid>
       <description>
         
         
@@ -1358,11 +1358,11 @@ between the Eventing mesh and an entity or system.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Debugging Knative Eventing</title>
-      <link>https://knative.dev/docs/eventing/debugging/</link>
+      <title>V0.23-Docs: Debugging Knative Eventing</title>
+      <link>https://knative.dev/v0.23-docs/eventing/debugging/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/debugging/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/debugging/</guid>
       <description>
         
         
@@ -1585,11 +1585,11 @@ events about failures.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Accessing CloudEvent traces</title>
-      <link>https://knative.dev/docs/eventing/accessing-traces/</link>
+      <title>V0.23-Docs: Accessing CloudEvent traces</title>
+      <link>https://knative.dev/v0.23-docs/eventing/accessing-traces/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/accessing-traces/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/accessing-traces/</guid>
       <description>
         
         
@@ -1721,11 +1721,11 @@ the Kubernetes Service &lt;code&gt;logger&lt;/code&gt;.&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Metrics API</title>
-      <link>https://knative.dev/docs/eventing/metrics/</link>
+      <title>V0.23-Docs: Metrics API</title>
+      <link>https://knative.dev/v0.23-docs/eventing/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/metrics/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/metrics/</guid>
       <description>
         
         
@@ -1882,11 +1882,11 @@ to verify that events have been delivered from the source side, thus verifying t
     </item>
     
     <item>
-      <title>Docs: Knative Eventing code samples</title>
-      <link>https://knative.dev/docs/eventing/samples/</link>
+      <title>V0.23-Docs: Knative Eventing code samples</title>
+      <link>https://knative.dev/v0.23-docs/eventing/samples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/eventing/samples/</guid>
+      <guid>https://knative.dev/v0.23-docs/eventing/samples/</guid>
       <description>
         
         
