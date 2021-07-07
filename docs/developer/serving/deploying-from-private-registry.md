@@ -11,51 +11,51 @@ To configure using a private container registry, you must:
 
 ## Prerequisites
 
-- You must have a Kubernetes cluster with [Knative Serving installed](../../install/).
+- You must have a Kubernetes cluster with Knative Serving installed.
 - You must have access to credentials for the private container registry where your container images are stored.
 
 ## Procedure
 
-1. Create a `imagePullSecrets` that contains your credentials as a list of secrets:
+1. Create a `imagePullSecrets` object that contains your credentials as a list of secrets:
 
     ```bash
-    kubectl create secret docker-registry [REGISTRY-CRED-SECRETS] \
-      --docker-server=[PRIVATE_REGISTRY_SERVER_URL] \
-      --docker-email=[PRIVATE_REGISTRY_EMAIL] \
-      --docker-username=[PRIVATE_REGISTRY_USER] \
-      --docker-password=[PRIVATE_REGISTRY_PASSWORD]
+    kubectl create secret docker-registry <registry-credential-secrets> \
+      --docker-server=<private-registry-url>] \
+      --docker-email=<private-registry-email> \
+      --docker-username=<private-registry-user> \
+      --docker-password=<private-registry-password>
     ```
 
     Where:
 
-    - `[REGISTRY-CRED-SECRETS]` is the name that you want to use for your secrets (the `imagePullSecrets` object). For example, `container-registry`.
+    - `<registry-credential-secrets>` is the name that you want to use for your secrets (the `imagePullSecrets` object). For example, `container-registry`.
 
-    - `[PRIVATE_REGISTRY_SERVER_URL]` is the URL of the private registry where your container images are stored. Examples include [Google Container Registry](https://gcr.io/) or [DockerHub](https://docker.io/).
+    - `<private-registry-url>` is the URL of the private registry where your container images are stored. Examples include [Google Container Registry](https://gcr.io/) or [DockerHub](https://docker.io/).
 
-    * `[PRIVATE_REGISTRY_EMAIL]` is the email address that is associated with
+    * `<private-registry-email>` is the email address that is associated with
       the private registry.
 
-    * `[PRIVATE_REGISTRY_USER]` is the username that you use to access the
+    * `<private-registry-user>` is the username that you use to access the
       private container registry.
 
-    * `[PRIVATE_REGISTRY_PASSWORD]` is the password that you use to access
+    * `<private-registry-password>` is the password that you use to access
       the private container registry.
 
-      Example:
+    Example:
 
-        ```bash
-        kubectl create secret `container-registry` \
-          --docker-server=https://gcr.io/ \
-          --docker-email=my-account-email@address.com \
-          --docker-username=my-grc-username \
-          --docker-password=my-gcr-password
-        ```
+    ```bash
+    kubectl create secret `container-registry` \
+      --docker-server=https://gcr.io/ \
+      --docker-email=my-account-email@address.com \
+      --docker-username=my-grc-username \
+      --docker-password=my-gcr-password
+    ```
 
     !!! tip
         After you have created the `imagePullSecrets` object, you can view the secrets by running:
 
         ```bash
-        kubectl get secret [REGISTRY-CRED-SECRETS] --output=yaml
+        kubectl get secret <registry-credential-secrets> -o=yaml
         ```
 
 1. Add the `imagePullSecrets` to the `default` service account in the `default` namespace.
