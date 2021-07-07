@@ -72,13 +72,33 @@ nav:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
         - Knative Eventing:
           - Event sources:
+            - Overview: developer/eventing/sources/README.md
+            - Creating an event source:
+              - Overview: developer/eventing/sources/creating-event-sources/README.md
+              - Writing an event source using Javascript: developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
+              - Using the sample event source:
+                - Overview: developer/eventing/sources/creating-event-sources/writing-event-source/README.md
+                - Design of an Event Source: developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md
+                - Lifecycle and Types: developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
+                - Controller Implemetation: developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md
+                - Reconciler Implementation: developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
+                - Receive Adapter Implementation: developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
+                - Publishing to your cluster: developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
+                - Moving to knative-sandbox: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
             - ApiServerSource:
               - Overview: developer/eventing/sources/apiserversource/README.md
               - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
               - ApiServerSource reference: developer/eventing/sources/apiserversource/reference.md
+            - Camel source: developer/eventing/sources/apache-camel-source/README.md
             - ContainerSource:
               - Creating a ContainerSource object: developer/eventing/sources/containersource/README.md
               - ContainerSource Reference: developer/eventing/sources/containersource/reference.md
+            - Kafka source: developer/eventing/sources/kafka-source/README.md
+            - PingSource: developer/eventing/sources/ping-source/README.md
+            - SinkBinding:
+              - Overview: developer/eventing/sources/sinkbinding/README.md
+              - Creating a SinkBinding object: developer/eventing/sources/sinkbinding/getting-started.md
+              - SinkBinding reference: developer/eventing/sources/sinkbinding/reference.md
           - Event delivery: developer/eventing/event-delivery.md
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
@@ -156,27 +176,6 @@ nav:
     - Knative Eventing:
       - Overview: eventing/README.md
       - Getting started: eventing/getting-started.md
-      - Event sources:
-        - Overview: eventing/sources/README.md
-        - PingSource: eventing/sources/ping-source/README.md
-        - SinkBinding:
-          - Overview: eventing/sources/sinkbinding/README.md
-          - Creating a SinkBinding object: eventing/sources/sinkbinding/getting-started.md
-          - SinkBinding reference: eventing/sources/sinkbinding/reference.md
-        - Camel source: eventing/sources/apache-camel-source/README.md
-        - Kafka source: eventing/sources/kafka-source/README.md
-      - Creating an event source:
-        - Overview: eventing/sources/creating-event-sources/README.md
-        - Writing an event source using Javascript: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
-        - Using the sample event source:
-          - Overview: eventing/sources/creating-event-sources/writing-event-source/README.md
-          - Design of an Event Source: eventing/sources/creating-event-sources/writing-event-source/01-theory.md
-          - Lifecycle and Types: eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
-          - Controller Implemetation: eventing/sources/creating-event-sources/writing-event-source/03-controller.md
-          - Reconciler Implementation: eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
-          - Receive Adapter Implementation: eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
-          - Publishing to your cluster: eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
-          - Moving to knative-sandbox: eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
       - Event registry: eventing/event-registry.md
       - Flows:
         - Overview: eventing/flows/README.md
@@ -206,7 +205,7 @@ nav:
       - Experimental Features: eventing/experimental-features.md
       - Code samples:
         - Overview: eventing/samples/README.md
-        - Container source: eventing/sources/container-source/README.md
+        - Container source: eventing/samples/container-source/README.md
         - Hello World:
           - Overview: eventing/samples/helloworld/README.md
           - GO: eventing/samples/helloworld/helloworld-go/README.md
@@ -219,12 +218,12 @@ nav:
           - Overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
           - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
-        - CloudAuditLogsSource: eventing/sources/cloud-audit-logs-source/README.md
-        - CloudPubSubSource: eventing/sources/cloud-pubsub-source/README.md
-        - CloudSchedulerSource: eventing/sources/cloud-scheduler-source/README.md
-        - CloudStorageSource: eventing/sources/cloud-storage-source/README.md
-        - GitHub source: eventing/sources/github-source/README.md
-        - GitLab source: eventing/sources/gitlab-source/README.md
+        - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/README.md
+        - CloudPubSubSource: eventing/samples/cloud-pubsub-source/README.md
+        - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/README.md
+        - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
+        - GitHub source: eventing/samples/github-source/README.md
+        - GitLab source: eventing/samples/gitlab-source/README.md
         - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:

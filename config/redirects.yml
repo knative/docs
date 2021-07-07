@@ -10,36 +10,35 @@ plugins:
       eventing/broker/alternate/index.md: eventing/broker/README.md
       eventing/broker/broker-event-delivery.md: developer/eventing/event-delivery.md
       eventing/broker/configmaps/README.md: admin/eventing/broker-configuration.md
-      eventing/broker/kafka-broker/index.md: eventing/broker/kafka-broker/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: admin/eventing/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
       eventing/event-delivery.md: developer/eventing/event-delivery.md
       eventing/metrics.md: admin/collecting-metrics/eventing-metrics/metrics.md
       eventing/parallel.md: eventing/flows/parallel.md
-      eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
-      eventing/samples/gcp-pubsub-source/README.md: eventing/sources/cloud-pubsub-source/README.md
-      eventing/samples/kubernetes-event-source/index.md: developer/eventing/sources/apiserversource/getting-started/README.md
-      eventing/samples/ping-source/index.md: eventing/sources/ping-source/README.md
+      eventing/samples/apache-camel-source/index.md: developer/eventing/sources/apache-camel-source/README.md
+      eventing/samples/gcp-pubsub-source/README.md: eventing/samples/cloud-pubsub-source/README.md
+      eventing/samples/kubernetes-event-source/index.md: developer/eventing/sources/apiserversource/README.md
+      eventing/samples/ping-source/index.md: developer/eventing/sources/ping-source/README.md
       eventing/samples/sequence/index.md: eventing/flows/sequence/README.md
       eventing/samples/sequence/sequence-replay-to-event-display/index.md: eventing/flows/sequence/sequence-reply-to-event-display/README.md
       eventing/samples/sequence/sequence-reply-to-sequence/index.md: eventing/flows/sequence/sequence-reply-to-sequence/README.md
       eventing/samples/sequence/sequence-terminal/index.md: eventing/flows/sequence/sequence-terminal/README.md
       eventing/samples/sequence/sequence-with-broker-trigger/index.md: eventing/flows/sequence/sequence-with-broker-trigger/README.md
-      eventing/samples/sinkbinding/README.md: eventing/sources/sinkbinding/README.md
-      eventing/samples/writing-event-source-easy-way/index.md: eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
-      eventing/samples/writing-event-source/01-theory/index.md: eventing/sources/creating-event-sources/writing-event-source/01-theory.md
-      eventing/samples/writing-event-source/02-lifecycle-and-types/index.md: eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
-      eventing/samples/writing-event-source/03-controller/index.md: eventing/sources/creating-event-sources/writing-event-source/03-controller.md
-      eventing/samples/writing-event-source/04-reconciler/index.md: eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
-      eventing/samples/writing-event-source/05-receive-adapter/index.md: eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
-      eventing/samples/writing-event-source/06-yaml/index.md: eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
-      eventing/samples/writing-event-source/07-knative-sandbox/index.md: eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
-      eventing/samples/writing-event-source/index.md: eventing/sources/creating-event-sources/writing-event-source/README.md
+      eventing/samples/sinkbinding/README.md: developer/eventing/sources/sinkbinding/README.md
+      eventing/samples/writing-event-source-easy-way/index.md: developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
+      eventing/samples/writing-event-source/01-theory/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md
+      eventing/samples/writing-event-source/02-lifecycle-and-types/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
+      eventing/samples/writing-event-source/03-controller/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md
+      eventing/samples/writing-event-source/04-reconciler/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
+      eventing/samples/writing-event-source/05-receive-adapter/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
+      eventing/samples/writing-event-source/06-yaml/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
+      eventing/samples/writing-event-source/07-knative-sandbox/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
+      eventing/samples/writing-event-source/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/README.md
       eventing/sequence.md: eventing/flows/sequence/README.md
       eventing/sink/README.md: developer/eventing/sinks/README.md
       eventing/sink/kafka-sink.md: developer/eventing/sinks/kafka-sink.md
       eventing/sources/apiserversource/index.md: developer/eventing/sources/apiserversource/README.md
-      eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
+      eventing/sources/pingsource/index.md: developer/eventing/sources/ping-source/README.md
       eventing/sources/containersource.md: developer/eventing/sources/containersource/README.md
       eventing/triggers/index.md: eventing/broker/triggers/README.md
       help/README.md: help/contributor/README.md
