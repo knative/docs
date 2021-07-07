@@ -68,6 +68,7 @@ nav:
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Traffic management: developer/serving/traffic-management.md
+          - Deploying from private registries: developer/serving/deploying-from-private-registry.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
         - Knative Eventing:
@@ -110,7 +111,6 @@ nav:
     - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Deploying from private registries: serving/deploying-from-private-registry.md
         - Tag resolution: serving/tag-resolution.md
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
