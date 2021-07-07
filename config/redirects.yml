@@ -8,7 +8,6 @@ plugins:
       eventing/broker/alternate/index.md: eventing/broker/README.md
       eventing/broker/broker-event-delivery.md: developer/eventing/event-delivery.md
       eventing/broker/configmaps/README.md: admin/eventing/broker-configuration.md
-      eventing/broker/kafka-broker/index.md: eventing/broker/kafka-broker/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: admin/eventing/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
       eventing/event-delivery.md: developer/eventing/event-delivery.md
