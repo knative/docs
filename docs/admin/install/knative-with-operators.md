@@ -311,7 +311,10 @@ knative-serving   <version number>    True
 
           Save this for configuring DNS below.
 
+<!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
+{% include "real-dns-operator.md" %}
+{% include "temporary-dns.md" %}
 
 ## Installing the Knative Eventing component
 
