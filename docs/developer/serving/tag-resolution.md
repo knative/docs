@@ -1,4 +1,4 @@
-# Enabling tag to digest resolution
+# Tag resolution
 
 Knative Serving resolves image tags to a digest when you create a Revision. This
 helps to provide consistency for Deployments. For more information, see the documentation on [Why we resolve tags in Knative](https://docs.google.com/presentation/d/e/2PACX-1vTgyp2lGDsLr_bohx3Ym_2mrTcMoFfzzd6jocUXdmWQFdXydltnraDMoLxvEe6WY9pNPpUUvM-geJ-g/pub).
