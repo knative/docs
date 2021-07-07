@@ -201,7 +201,7 @@ By enabling it, you can use `Subscriber.Ref.Group` instead of `Subscriber.Ref.AP
 
 #### 🧹 Clean up
 
-* Subscription.Spec.Channel now uses KReference and the spec.channel CRD schema is less permissive and matches the supported usage of KReference fields.
+* `Subscription.Spec.Channel` now uses KReference and the `spec.channel` CRD schema is less permissive and matches the supported usage of KReference fields.
 Subscription's users creating their resources with YAMLs are not affected. ([#5412](https://github.com/knative/eventing/pull/5412))
 * The PingSource adapter now generates a normal event instead of a warning when the source is not ready. Rename the event to PingSourceSkipped.
     * The PingSource adapter now generates the normal event PingSourceSynchronized when it has been synchronized. ([#5549](https://github.com/knative/eventing/pull/5549))
