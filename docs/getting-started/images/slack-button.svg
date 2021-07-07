@@ -1,0 +1,47 @@
+
+<svg width="444px" height="96px" viewBox="0 0 222 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <rect id="path-1" x="0" y="0" width="214" height="40" rx="5"></rect>
+        <filter x="-3.3%" y="-12.5%" width="106.5%" height="135.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CTA-Prototyping" transform="translate(-41.000000, -34.000000)">
+            <g id="Group-2" transform="translate(45.000000, 36.000000)">
+                <g id="Rectangle">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <rect stroke="#A8A4A4" stroke-width="0.5" stroke-linejoin="square" fill="#1A7DC9" fill-rule="evenodd" x="0.25" y="0.25" width="213.5" height="39.5" rx="5"></rect>
+                </g>
+                <text id="Join-thousands-of-ot" font-family="Helvetica" font-size="6" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="47" y="23">Join thousands of other Knative Users and Developers on </tspan>
+                    <tspan x="47" y="30">the Knative Slack. We'd love to hear from you!</tspan>
+                </text>
+                <text id="Join-our-Slack-Commu" font-family="Helvetica-Bold, Helvetica" font-size="8" font-weight="bold" fill="#FFFFFF">
+                    <tspan x="47" y="15">Join our Slack Community!</tspan>
+                </text>
+                <g id="Slack_Mark" transform="translate(5.000000, 4.500000)" fill-rule="nonzero">
+                    <g id="Group" transform="translate(0.000000, 15.689655)" fill="#E01E5A">
+                        <path d="M6.37241379,3.1862069 C6.37241379,4.9 4.97241379,6.3 3.25862069,6.3 C1.54482759,6.3 0.144827586,4.9 0.144827586,3.1862069 C0.144827586,1.47241379 1.54482759,0.0724137931 3.25862069,0.0724137931 L6.37241379,0.0724137931 L6.37241379,3.1862069 Z" id="Path"></path>
+                        <path d="M7.94137931,3.1862069 C7.94137931,1.47241379 9.34137931,0.0724137931 11.0551724,0.0724137931 C12.7689655,0.0724137931 14.1689655,1.47241379 14.1689655,3.1862069 L14.1689655,10.9827586 C14.1689655,12.6965517 12.7689655,14.0965517 11.0551724,14.0965517 C9.34137931,14.0965517 7.94137931,12.6965517 7.94137931,10.9827586 L7.94137931,3.1862069 Z" id="Path"></path>
+                    </g>
+                    <g id="Group" fill="#36C5F0">
+                        <path d="M11.0551724,6.37241379 C9.34137931,6.37241379 7.94137931,4.97241379 7.94137931,3.25862069 C7.94137931,1.54482759 9.34137931,0.144827586 11.0551724,0.144827586 C12.7689655,0.144827586 14.1689655,1.54482759 14.1689655,3.25862069 L14.1689655,6.37241379 L11.0551724,6.37241379 Z" id="Path"></path>
+                        <path d="M11.0551724,7.94137931 C12.7689655,7.94137931 14.1689655,9.34137931 14.1689655,11.0551724 C14.1689655,12.7689655 12.7689655,14.1689655 11.0551724,14.1689655 L3.25862069,14.1689655 C1.54482759,14.1689655 0.144827586,12.7689655 0.144827586,11.0551724 C0.144827586,9.34137931 1.54482759,7.94137931 3.25862069,7.94137931 L11.0551724,7.94137931 Z" id="Path"></path>
+                    </g>
+                    <g id="Group" transform="translate(15.689655, 0.000000)" fill="#2EB67D">
+                        <path d="M7.86896552,11.0551724 C7.86896552,9.34137931 9.26896552,7.94137931 10.9827586,7.94137931 C12.6965517,7.94137931 14.0965517,9.34137931 14.0965517,11.0551724 C14.0965517,12.7689655 12.6965517,14.1689655 10.9827586,14.1689655 L7.86896552,14.1689655 L7.86896552,11.0551724 Z" id="Path"></path>
+                        <path d="M6.3,11.0551724 C6.3,12.7689655 4.9,14.1689655 3.1862069,14.1689655 C1.47241379,14.1689655 0.0724137931,12.7689655 0.0724137931,11.0551724 L0.0724137931,3.25862069 C0.0724137931,1.54482759 1.47241379,0.144827586 3.1862069,0.144827586 C4.9,0.144827586 6.3,1.54482759 6.3,3.25862069 L6.3,11.0551724 Z" id="Path"></path>
+                    </g>
+                    <g id="Group" transform="translate(15.689655, 15.689655)" fill="#ECB22E">
+                        <path d="M3.1862069,7.86896552 C4.9,7.86896552 6.3,9.26896552 6.3,10.9827586 C6.3,12.6965517 4.9,14.0965517 3.1862069,14.0965517 C1.47241379,14.0965517 0.0724137931,12.6965517 0.0724137931,10.9827586 L0.0724137931,7.86896552 L3.1862069,7.86896552 Z" id="Path"></path>
+                        <path d="M3.1862069,6.3 C1.47241379,6.3 0.0724137931,4.9 0.0724137931,3.1862069 C0.0724137931,1.47241379 1.47241379,0.0724137931 3.1862069,0.0724137931 L10.9827586,0.0724137931 C12.6965517,0.0724137931 14.0965517,1.47241379 14.0965517,3.1862069 C14.0965517,4.9 12.6965517,6.3 10.9827586,6.3 L3.1862069,6.3 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
