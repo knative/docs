@@ -127,9 +127,9 @@ are provided on the command line.
 
     See the relevant issues and PRs below:
 
-        * Original issue: [knative/pkg#2044](https://github.com/knative/pkg/issues/2044)
-        * Workaround: [knative/pkg#2098](https://github.com/knative/pkg/pull/2098)
-        * `knative-serving-core` cluster role has requires permission for namespaces/finalizers: [#11517](https://github.com/knative/serving/pull/11517)
+    * Original issue: [knative/pkg#2044](https://github.com/knative/pkg/issues/2044)
+    * Workaround: [knative/pkg#2098](https://github.com/knative/pkg/pull/2098)
+    * `knative-serving-core` cluster role has requires permission for namespaces/finalizers: [#11517](https://github.com/knative/serving/pull/11517)
 
 * **DomainMapping feature is now BETA**
 
