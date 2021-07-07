@@ -150,7 +150,7 @@ are provided on the command line.
 * Provides a feature gate that, when enabled, allows adding capabilities from a container's security context ([#11410](https://github.com/knative/serving/pull/11410))
 * `defaultExternalScheme` can now be used to default routes to surface a URL scheme of your choice rather than the default "http". ([#11480](https://github.com/knative/serving/pull/11480))
 * Optimized generated routes to minimize Envoy configuration size ([net-istio#632](https://github.com/knative-sandbox/net-istio/pull/632))
-* Rename Contonr's ClusterRole and ClusterRoleBinding to differ from existing contour installation ([net-contour#500](https://github.com/knative-sandbox/net-contour/pull/500))
+* Rename Contour's ClusterRole and ClusterRoleBinding to differ from existing contour installation ([net-contour#500](https://github.com/knative-sandbox/net-contour/pull/500))
 * Add a new ConfigMap `config-kourier`, with the initial `enable-service-access-logging` setting ([net-kourier#523](https://github.com/knative-sandbox/net-kourier/pull/523))
 
 #### 🐞 Bug Fixes
