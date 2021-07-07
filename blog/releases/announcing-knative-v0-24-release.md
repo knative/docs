@@ -42,7 +42,6 @@ Follow the instructions in the documentation
 `kn service update` to allow referencing values from secrets and config maps.
 The order of environment variables is now kept according to the order that `--env` related options
 are provided on the command line.
--
 
 
 ### Serving v0.24
