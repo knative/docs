@@ -242,7 +242,7 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 - Update Kubernetes dependencies to v0.20.7 [#1344](https://github.com/knative/client/pull/1344)
 - Increase code coverage for Sources [#1343](https://github.com/knative/client/pull/1343)
 - Make e2e test run over other networks [#1339](https://github.com/knative/client/pull/1339)
-- Add env-value-from flag and keep order of env vars as provided [#1328](https://github.com/knative/client/pull/1328)
+- Add `env-value-from` flag and keep order of env vars as provided [#1328](https://github.com/knative/client/pull/1328)
 
 #### 🐞 Bug Fixes
 
