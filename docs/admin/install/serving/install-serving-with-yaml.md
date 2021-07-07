@@ -178,7 +178,10 @@ Follow the procedure for the networking layer of your choice:
     kubectl get pods --namespace knative-serving
     ```
 
+<!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
+{% include "real-dns-yaml.md" %}
+{% include "temporary-dns.md" %}
 
 ## Install optional Serving extensions
 
