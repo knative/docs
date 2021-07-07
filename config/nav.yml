@@ -17,7 +17,7 @@ nav:
           - Clean Up: getting-started/clean-up.md
         - What's Next?: getting-started/next-steps.md
     # Administration guide
-    - Administration Guide:
+    - Administration guide:
         - Overview: admin/README.md
         - Installing Knative:
           - Overview: admin/install/README.md
@@ -58,7 +58,7 @@ nav:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
           - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
     # Developer guide
-    - Developer Guide:
+    - Developer guide:
         - Overview: developer/README.md
         - Knative Serving:
           - Services:
