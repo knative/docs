@@ -1,52 +1,42 @@
----
-title: "Configuring the Serving Operator Custom Resource"
-weight: 20
-type: "docs"
-aliases:
-- /docs/operator/configuring-serving-cr/
----
+# Configuring the Knative Serving Operator custom resource
 
-# Configuring the Serving Operator Custom Resource
+The Knative Serving Operator can be configured with the following options:
 
-The Knative Serving operator can be configured with these options:
-
-- [Version Configuration](#version-configuration)
-- [Serving Configuration by ConfigMap](#serving-configuration-by-configmap)
+- [Version configuration](#version-configuration)
+- [Knative Serving configuration by ConfigMap](#knative-serving-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
-- [System Resource Settings](#system-resource-settings)
+- [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
 
-## Version Configuration
+## Version configuration
 
-Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field. For example,
-if you want to install Knative Serving 0.16.0, you can apply the following `KnativeServing` custom resource:
+Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field.
 
-```
+For example, if you want to install Knative Serving 0.23.0, you can apply the following `KnativeServing` custom resource:
+
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: 0.16.0
+  version: 0.23.0
 ```
 
-If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Serving.
-If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
-includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is 0.16.x, the
-earliest version of Knative Serving available through the Operator is 0.14.0.
+If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving. If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is v0.24.0, the earliest version of Knative Serving available through the Operator is v0.22.0.
 
 If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource
 enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
 
-Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
-if the current Knative Serving deployment is version 0.14.x, you must upgrade to 0.15.x before upgrading to 0.16.x.
+!!! important
+    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v0.22.0, you must upgrade to v0.23.0 before upgrading to v0.24.0.
 
-## Serving Configuration by ConfigMap
+## Knative Serving configuration by ConfigMap
 
 The Operator manages the Knative Serving installation. It overwrites any updates to ConfigMaps which are used to configure Knative Serving.
 The KnativeServing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
@@ -56,7 +46,7 @@ The `spec.config` in the KnativeServing CR has one `<name>` entry for each Confi
 In the [setup a custom domain example](../../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
 
-```
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -71,7 +61,7 @@ data:
 
 Using the operator, specify the ConfigMap `config-domain` using the operator CR:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -88,7 +78,7 @@ spec:
 
 You can apply values to multiple ConfigMaps. This example sets `stable-window` to 60s in `config-autoscaler` as well as specifying `config-domain`:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -109,7 +99,6 @@ All the ConfigMaps are created in the same namespace as the operator CR. You can
 unique entry point to edit all of them.
 
 ## Private repository and private secrets
-
 
 You can use the `spec.registry` section of the operator CR to change the image references to point to a private registry or [specify imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod):
 
@@ -151,7 +140,7 @@ First, you need to make sure your images pushed to the following image tags:
 
 Then, you need to define your operator CR with following content:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -162,8 +151,7 @@ spec:
     default: docker.io/knative-images/${NAME}:v0.13.0
 ```
 
-
-### Download images individually without secrets:
+### Download images individually without secrets
 
 If your custom image links are not defined in a uniform format by default, you will need to individually include each
 link in the CR.
@@ -181,9 +169,9 @@ For example, to given the following images:
 | `net-istio-webhook` | `docker.io/knative-images-repo6/net-istio-webhooko:v0.13.0` |
 | `queue-proxy` | `docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0` |
 
-The operator CR should be modified to include the full list:
+The Operator CR should be modified to include the full list:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -203,10 +191,9 @@ spec:
 ```
 
 !!! note
-    If the container name is not unique across all Deployments, DaemonSets and Jobs,
-    you can prefix the container name with the parent container name and a slash. For example, `istio-webhook/webhook`.
+    If the container name is not unique across all Deployments, DaemonSets and Jobs, you can prefix the container name with the parent container name and a slash. For example, `istio-webhook/webhook`.
 
-### Download images with secrets:
+### Download images with secrets
 
 If your image repository requires private secrets for
 access, include the `imagePullSecrets` attribute.
@@ -217,9 +204,9 @@ This example uses a secret named `regcred`. You must create your own private sec
 - [From command line for docker credentials](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line)
 - [Create your own secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-your-own-secrets)
 
-After you create this secret, edit your operator CR by appending the content below:
+After you create this secret, edit the Operator CR by appending the content below:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -234,7 +221,7 @@ spec:
 
 The field `imagePullSecrets` expects a list of secrets. You can add multiple secrets to access the images as below:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -251,7 +238,7 @@ spec:
 
 ## SSL certificate for controller
 
-To [enable tag to digest resolution](../../../serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
+To [enable tag to digest resolution](../../../developer/serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
 To allow the controller to trust a self-signed registry cert, you can use the Operator to specify the certificate using a ConfigMap or Secret.
 
 Specify the following fields in `spec.controller-custom-certs` to select a custom registry certificate:
@@ -259,10 +246,9 @@ Specify the following fields in `spec.controller-custom-certs` to select a custo
 - `name`: the name of the ConfigMap or Secret.
 - `type`: either the string "ConfigMap" or "Secret".
 
-
 If you create a ConfigMap named `testCert` containing the certificate, change your CR:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -274,7 +260,6 @@ spec:
     type: ConfigMap
 ```
 
-
 ## Configuration of Knative ingress gateway
 
 To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md).
@@ -283,7 +268,7 @@ To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and D
 
 Update `spec.ingress.istio.knative-ingress-gateway` to select the labels of the new ingress gateway:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -302,7 +287,7 @@ spec:
 
 Additionally, you will need to update the Istio ConfigMap:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -339,7 +324,7 @@ If you create custom local gateway with a name other than `knative-local-gateway
 This example shows a service and deployment `knative-local-gateway` in the namespace `istio-system`, with the
 label `custom: custom-local-gw`:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -363,7 +348,7 @@ By default, Knative Serving runs a single instance of each controller. The `spec
 
 The following configuration specifies a replica count of 3 for the controllers and a minimum of 3 activators (which may scale higher if needed):
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -384,7 +369,7 @@ To override resource settings for a specific container, create an entry in the `
 
 For example, the following KnativeServing resource configures the `activator` to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -404,7 +389,7 @@ spec:
 
 If you would like to add another container `autoscaler` with the same configuration, you need to change your CR as below:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -440,7 +425,7 @@ Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotataions: bar`,
 while other system deployments have `2` Replicas by using `spec.high-availability`.
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
@@ -465,7 +450,7 @@ spec:
 
 The following KnativeServing resource overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
 
-```
+```yaml
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
