@@ -175,7 +175,7 @@ ConfigMap is not accidentally modified. ([#11391](https://github.com/knative/ser
 We're glad to announce that we have introduced a new process to test and develop new features,
 called the [experimental features process](https://github.com/knative/eventing/blob/a574b7ba95b9c8d4743ba3ee12184c39e0415d87/docs/experimental-features.md).
 
-Thanks to this process, you are able to try out the new amazing features and provide feedback back to the project!
+Thanks to this process, you are able to try out the new amazing features and provide feedback to the project!
 
 We're introducing two experimental features to begin with:
 
