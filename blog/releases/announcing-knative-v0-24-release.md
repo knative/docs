@@ -17,6 +17,7 @@ Follow the instructions in the documentation
 [Installing Knative](https://knative.dev/docs/admin/install/) for the respective component.
 
 #### Table of Contents
+
 - [Serving v0.24](#serving-v024)
 - [Eventing v0.24](#eventing-v024)
 - Eventing Extensions
@@ -30,8 +31,17 @@ Follow the instructions in the documentation
 
 ### Highlights
 
--
--
+- Kubernetes v1.19 is now a hard minimum requirement.
+- As part of our efforts to GA/1.0 we've standardized the naming of our networking plugins that are installed alongside Serving.
+- For Serving, DomainMapping feature is now beta.
+- For Serving, the recommended way to delete a Knative installation is to run
+`kubectl delete -f serving-core.yaml` and other release YAMLs you might have applied.
+- For Eventing, you must run the storage migration tool after the upgrade to migrate from v1beta2 to v1 `pingsources.sources.knative.dev` resources.
+- For Eventing, there are new experimental features and a new process for trying them out.
+- For Client, a new option `--env-value-from` was added to `kn service create` and
+`kn service update` to allow referencing values from secrets and config maps.
+The order of environment variables is now kept according to the order that `--env` related options
+are provided on the command line.
 -
 
 
@@ -45,8 +55,8 @@ Follow the instructions in the documentation
     Related issue: [knative/networking#448](https://github.com/knative/networking/issues/448)
 
     As part of our efforts to GA/1.0 we've standardized on the naming of our networking plugins that
-    are installed along side Serving. If you're managing your Knative deployment manually with
-    `kubectl` **this will require a two-phase upgrade process**. Please see the below sections:
+    are installed alongside Serving. If you're managing your Knative deployment manually with
+    `kubectl` **this will require a two-phase upgrade process**. See the below sections:
 
     Upgrade of [net-http01 to v0.24.0](https://github.com/knative-sandbox/net-http01/releases/tag/v0.24.0)
 
@@ -98,7 +108,7 @@ Follow the instructions in the documentation
     Upgrade of [net-kourier to v0.24.0](https://github.com/knative-sandbox/net-kourier/releases/tag/v0.24.0)
     At this point we've deferred the renaming to net-kourier until the next release.
     We're looking to ensure there is no traffic disruption as part of the upgrade.
-    Thus upgrading to v0.24.0 requires no special instructions.
+    Therefore upgrading to v0.24.0 requires no special instructions.
 
 * **Kubernetes 1.19 is now required**
 
@@ -109,14 +119,14 @@ Follow the instructions in the documentation
 * **Webhook/Controller RBAC changes**
 
     The recommended way to delete a Knative installation is to run
-    `kubectl delete -f serving-core.yaml` and other release YAMLs you may have applied.
-    There's been a misconception that deleting the `knative-serving` namespace will perform a
-    similar cleanup but this does not remove cluster scoped resources.
+    `kubectl delete -f serving-core.yaml` and other release YAMLs you might have applied.
+    There's been a misconception that deleting the `knative-serving` namespace performs a
+    similar cleanup but this does not remove cluster-scoped resources.
     In prior releases the cluster state would have _prevented_ the reinstall of Knative Serving.
-    We've addressed this problem but it will require some RBAC permissions on namespaces and
+    We've addressed this problem, but it requires some RBAC permissions on namespaces and
     finalizers.
 
-    Please see the relevant issues & PRs:
+    See the relevant issues and PRs below:
 
         * Original issue: [knative/pkg#2044](https://github.com/knative/pkg/issues/2044)
         * Workaround: [knative/pkg#2098](https://github.com/knative/pkg/pull/2098)
@@ -124,12 +134,12 @@ Follow the instructions in the documentation
 
 * **DomainMapping feature is now BETA**
 
-    This means it is built in to the main `serving-core` yaml by default.
+    This means it is built in to the main `serving-core` YAML by default.
     It is still possible to opt out of the feature by setting replica count of the
     domainmapping-controller to zero.
 
     As part of this transition the default value for autocreateClusterDomainClaims in the
-    `config-network` config map has been changed to false, meaning cluster-wide permissions are
+    `config-network` config map was changed to false, meaning cluster-wide permissions are
     required to delegate the ability to create particular DomainMappings to namespaces.
     Single tenant clusters may wish to allow arbitrary users to create Domain Mappings by changing
     this value back to `true`. ([#11573](https://github.com/knative/serving/pull/11573))
@@ -146,11 +156,11 @@ Follow the instructions in the documentation
 
 #### 🐞 Bug Fixes
 
-* Fixed a bug where traffic would briefly be routed 'wrong', leading to errors due to exceeded
-queues in deployments with a large activator count and a low service pod count. ([#11375](https://github.com/knative/serving/pull/11375))
+* Fixed a bug where traffic was briefly routed 'wrong', leading to errors due to exceeded
+queues in deployments with a large activator count and a low service Pod count. ([#11375](https://github.com/knative/serving/pull/11375))
 * Traffic status in Route is updated whenever traffic configuration was wrong. ([#11477](https://github.com/knative/serving/pull/11477))
 * Validates, consistently with other configmaps, that the `_example` section of the features
-configmap is not accidentally modified. ([#11391](https://github.com/knative/serving/pull/11391))
+ConfigMap is not accidentally modified. ([#11391](https://github.com/knative/serving/pull/11391))
 
 
 ### Eventing v0.24
@@ -159,14 +169,14 @@ configmap is not accidentally modified. ([#11391](https://github.com/knative/ser
 
 #### 🚨 Breaking or Notable Changes
 
-* You need to run the storage migration tool after the upgrade to migrate from v1beta2 to v1 `pingsources.sources.knative.dev` resources. ([#5381](https://github.com/knative/eventing/pull/5381))
+* You must run the storage migration tool after the upgrade to migrate from v1beta2 to v1 `pingsources.sources.knative.dev` resources. ([#5381](https://github.com/knative/eventing/pull/5381))
 
 #### 💫 New Features & Changes
 
 We're glad to announce that we have introduced a new process to test and develop new features,
 called the [experimental features process](https://github.com/knative/eventing/blob/a574b7ba95b9c8d4743ba3ee12184c39e0415d87/docs/experimental-features.md).
 
-Thanks to this process, you will be able to try out the new amazing features and provide feedback back to the project!
+Thanks to this process, you are able to try out the new amazing features and provide feedback back to the project!
 
 We're introducing two experimental features to begin with:
 
@@ -176,11 +186,11 @@ We're introducing two experimental features to begin with:
 You can read more about how to enable these features and their usage in the
 [experimental feature documentation](https://dev-knative.netlify.app/development/eventing/experimental-features/).
 
-* `KReference.Group` now can be used in `Subscription.Spec.Channel` as well ([#5520](https://github.com/knative/eventing/pull/5520)
+* `KReference.Group` now can be used in `Subscription.Spec.Channel` as well ([#5520](https://github.com/knative/eventing/pull/5520))
 * Added `DeliverySpec.Timeout` ([#5149](https://github.com/knative/eventing/pull/5149))
 * Added the experimental feature kreference-group.
-By enabling it, you can use Subscriber.Ref.Group instead of Subscriber.Ref.APIVersion to refer to another Resource, without being explicit about the resource version (e.g. v1beta1, v1, ...) ([#5440](https://github.com/knative/eventing/pull/5440))
-* Remaining HA Control Plane pods (via the operator) are now labelled with podAntiAffinity to ensure there isn't a single point of failure. ([#5409](https://github.com/knative/eventing/pull/5409))
+By enabling it, you can use Subscriber.Ref.Group instead of Subscriber.Ref.APIVersion to refer to another Resource, without being explicit about the resource version (for example, v1beta1, v1, ...) ([#5440](https://github.com/knative/eventing/pull/5440))
+* Remaining HA Control Plane Pods (through the operator) are now labeled with podAntiAffinity to ensure there isn't a single point of failure. ([#5409](https://github.com/knative/eventing/pull/5409))
 
 
 #### 🐞 Bug Fixes
@@ -201,14 +211,15 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 ### Eventing Extensions
 
 #### Apache Kafka Broker v0.24
+
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.24.0 -->
 
 #### 💫 New Features & Changes
 
-- Add some details in the existing subscriber resolved condition about the delivery order. [#912](https://github.com/knative-sandbox/eventing-kafka-broker/pull/912)
+- Add some details in the existing Subscriber resolved condition about the delivery order. [#912](https://github.com/knative-sandbox/eventing-kafka-broker/pull/912)
 - Receiver deployment uses all available CPUs. [#985](https://github.com/knative-sandbox/eventing-kafka-broker/pull/985)
 - Now you can specify both in Broker and Trigger delivery specs the new timeout field, as part of the experimental feature delivery-timeout. For more information, see [Experimental features](https://knative.dev/docs/eventing/experimental-features/). [#1034](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1034)
-- Bump Go to v1.16 [#886](https://github.com/knative-sandbox/eventing-kafka-broker/pull/886)
+- Update Go to v1.16 [#886](https://github.com/knative-sandbox/eventing-kafka-broker/pull/886)
 - Bump protobuf to v3.17.x [#946](https://github.com/knative-sandbox/eventing-kafka-broker/pull/946)
 - Bumped vert.x to v4.1 [#900](https://github.com/knative-sandbox/eventing-kafka-broker/pull/900)
 
@@ -232,7 +243,7 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 - Update Kubernetes dependencies to v0.20.7 [#1344](https://github.com/knative/client/pull/1344)
 - Increase code coverage for Sources [#1343](https://github.com/knative/client/pull/1343)
 - Make e2e test run over other networks [#1339](https://github.com/knative/client/pull/1339)
-- Add env-value-from flag & keep order of env vars as provided [#1328](https://github.com/knative/client/pull/1328)
+- Add env-value-from flag and keep order of env vars as provided [#1328](https://github.com/knative/client/pull/1328)
 
 #### 🐞 Bug Fixes
 
@@ -245,8 +256,8 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 
 #### 💫 New Features & Changes
 
-- Add the manifests of the eventing sources [#641](https://github.com/knative/operator/pull/641)
-- Change the APIs for eventing sources [#613](https://github.com/knative/operator/pull/613)
+- Add the manifests of the Eventing sources [#641](https://github.com/knative/operator/pull/641)
+- Change the APIs for Eventing sources [#613](https://github.com/knative/operator/pull/613)
 - Add the logic to install sources [#645](https://github.com/knative/operator/pull/645)
 - Drop use of pkg/test.KubeClient [#655](https://github.com/knative/operator/pull/655)
 - Install the webhooks after installing the deployments and services [#674](https://github.com/knative/operator/pull/674)
@@ -254,10 +265,10 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 #### 🐞 Bug Fixes
 
 - Improve fetcher by supporting version parameter [#613](https://github.com/knative/operator/pull/613)
-- Add a 20-second timeout before running the post upgrade tests [#623](https://github.com/knative/operator/pull/623)
+- Add a 20-second timeout before running the post-upgrade tests [#623](https://github.com/knative/operator/pull/623)
 - Add $KO_FLAGS to e2e test [#649](https://github.com/knative/operator/pull/649)
 - Make e2e test run over other networks [#650](https://github.com/knative/operator/pull/650)
-- Allow to set NodeSelector via spec.deployments.nodeSelector [#658](https://github.com/knative/operator/pull/658)
+- Allow to set NodeSelector through spec.deployments.nodeSelector [#658](https://github.com/knative/operator/pull/658)
 - Gracefully handle net-* deployment rename [#669](https://github.com/knative/operator/pull/669)
 
 ### Thank you, contributors
@@ -272,7 +283,7 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 - [@itsmurugappan](https://github.com/itsmurugappan)
 - [@izabelacg](https://github.com/izabelacg)
 - [@julz](https://github.com/julz)
-- [@lberk](https://github.com/lberk))
+- [@lberk](https://github.com/lberk)
 - [@lionelvillard](https://github.com/lionelvillard)
 - [@markusthoemmes](https://github.com/markusthoemmes)
 - [@matzew](https://github.com/matzew)
@@ -293,6 +304,7 @@ Knative is an open source project that anyone in the [community](https://knative
 - [Getting started documentation](https://knative.dev/docs/getting-started)
 - [Samples](https://knative.dev/docs/samples)
 - [Knative working groups](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
+- [Documentation issues](https://github.com/knative/docs/issues)
 - [Knative User Mailing List](https://groups.google.com/forum/#!forum/knative-users)
 - [Knative Development Mailing List](https://groups.google.com/forum/#!forum/knative-dev)
 - Knative on Twitter [@KnativeProject](https://twitter.com/KnativeProject)
