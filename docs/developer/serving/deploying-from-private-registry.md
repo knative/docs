@@ -44,7 +44,7 @@ To configure using a private container registry, you must:
     Example:
 
     ```bash
-    kubectl create secret `container-registry` \
+    kubectl create secret container-registry \
       --docker-server=https://gcr.io/ \
       --docker-email=my-account-email@address.com \
       --docker-username=my-grc-username \
