@@ -19,11 +19,11 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version.
 #    Order matters :-), Most recent first.
-VERSIONS=("0.23" "0.22" "0.21")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-RELEASE_BRANCHES=("v0.23.0" "v0.22.0" "v0.21.0") # Release version for serving/eventing yaml files and api references.
+VERSIONS=("0.24" "0.23" "0.22" "0.21")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+RELEASE_BRANCHES=("v0.24.0")                     # Release version for serving/eventing yaml files and api references.
 # 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
-DOCS_BRANCHES=("mkrelease-0.23" "mkrelease-0.22" "mkrelease-0.22")
-REPOS=("julz" "julz" "julz")
+DOCS_BRANCHES=("release-0.24")
+REPOS=("knative" "knative" "knative")
 # 4) PR the result to main.
 # 5) Party.
 
@@ -48,10 +48,8 @@ else
 
   # Latest release branch to /docs
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/docs "$TEMP/docs-$latest"
-  # This won't work until release 0.24 is cut in serving and eventing.
-  # TODO: Uncomment this when 0.24 is cut.
-  # curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
-  # curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
+  curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
+  curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
   pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
@@ -151,14 +149,14 @@ cat << EOF > site/index.html
   <meta charset="utf-8">
   <title>Redirecting</title>
   <noscript>
-    <meta http-equiv="refresh" content="1; url=development/" />
+    <meta http-equiv="refresh" content="1; url=docs/" />
   </noscript>
   <script>
-   window.location.replace("development/");
+   window.location.replace("docs/");
   </script>
 </head>
 <body>
-  Redirecting to <a href="development/">development/</a>...
+  Redirecting to <a href="docs/">docs/</a>...
 </body>
 </html>
 EOF
