@@ -70,20 +70,20 @@ nav:
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
         - Knative Eventing:
-          - Creating an event source:
-            - Overview: developer/eventing/sources/creating-event-sources/README.md
-            - Writing an event source using Javascript: developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
-            - Using the sample event source:
-              - Overview: developer/eventing/sources/creating-event-sources/writing-event-source/README.md
-              - Design of an Event Source: developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md
-              - Lifecycle and Types: developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
-              - Controller Implemetation: developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md
-              - Reconciler Implementation: developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
-              - Receive Adapter Implementation: developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
-              - Publishing to your cluster: developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
-              - Moving to knative-sandbox: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
           - Event sources:
             - Overview: developer/eventing/sources/README.md
+            - Creating an event source:
+              - Overview: developer/eventing/sources/creating-event-sources/README.md
+              - Writing an event source using Javascript: developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
+              - Using the sample event source:
+                - Overview: developer/eventing/sources/creating-event-sources/writing-event-source/README.md
+                - Design of an Event Source: developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md
+                - Lifecycle and Types: developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
+                - Controller Implemetation: developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md
+                - Reconciler Implementation: developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
+                - Receive Adapter Implementation: developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
+                - Publishing to your cluster: developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
+                - Moving to knative-sandbox: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
             - ApiServerSource:
               - Overview: developer/eventing/sources/apiserversource/README.md
               - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
