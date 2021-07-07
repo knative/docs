@@ -63,7 +63,7 @@ To configure using a private container registry, you must:
     !!! note
         By default, the `default` service account in each of the [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of your Knative cluster are used by your Revisions, unless the [`serviceAccountName`](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision-2) is specified.
 
-    For example, if have you named your secrets `container-registry`, you can run the following command to modify the `default` service account, :
+    For example, if have you named your secrets `container-registry`, you can run the following command to modify the `default` service account:
 
     ```bash
     kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"
