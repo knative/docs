@@ -227,6 +227,8 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/v0.24.0 -->
 
+TBD
+
 #### 🚨 Breaking or Notable Changes
 
 #### 🐞 Bug Fixes
