@@ -60,7 +60,7 @@ and which DNS provider validates those requests.
         The Let's Encrypt account info, required `DNS-01` challenge type, and
         Cloud DNS provider info is defined under `spec`.
 
-        ```bash
+        ```yaml
         apiVersion: cert-manager.io/v1
         kind: ClusterIssuer
         metadata:
