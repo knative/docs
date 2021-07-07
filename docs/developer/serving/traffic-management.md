@@ -84,7 +84,19 @@ Where:
 For example, to split traffic for a Service named `example`, by sending 80% of traffic to the Revision `green` and 20% of traffic to the Revision `blue`, you could run the following command:
 
 ```bash
-kn service update example --traffic green=80 --traffic blue=20
+kn service update example-service --traffic green=80 --traffic blue=20
+```
+
+It is also possible to add tags to Revisions and then split traffic according to the tags you have set:
+
+```bash
+kn service update example --tag green=revision-0001 --tag blue=@latest
+```
+
+The `@latest` tag means that `blue` resolves to the latest Revision of the Service. The following example sends 80% of traffic to the latest Revision and 20% to a Revision named `v1`.
+
+```bash
+kn service update example-service --traffic @latest=80 --traffic v1=20
 ```
 
 ## Routing and managing traffic with blue/green deployment
