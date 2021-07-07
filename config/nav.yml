@@ -67,6 +67,7 @@ nav:
             - Configuring private Services: developer/serving/services/private-services.md
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
+          - Traffic management: developer/serving/traffic-management.md
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
         - Knative Eventing:
@@ -123,7 +124,6 @@ nav:
         - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
       - Code samples:
         - Overview: serving/samples/README.md
-        - Routing and managing traffic: serving/samples/blue-green-deployment.md
         - Cloud Events apps:
           - Overview: serving/samples/cloudevents/README.md
           - .NET: serving/samples/cloudevents/cloudevents-dotnet/README.md
@@ -152,7 +152,6 @@ nav:
         - RESTful service - Go: serving/samples/rest-api-go/README.md
         - Secrets - Go: serving/samples/secrets-go/README.md
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
-        - Traffic splitting: serving/samples/traffic-splitting/README.md
     # Eventing
     - Knative Eventing:
       - Overview: eventing/README.md
@@ -239,4 +238,3 @@ nav:
       - kn plugins: client/kn-plugins.md
     - "Join the Community ➠": /community/
     - "Read the Blog ➠": /blog/
-
