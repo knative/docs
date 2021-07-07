@@ -104,7 +104,7 @@ are provided on the command line.
           --prune -l networking.knative.dev/ingress-provider=contour
         ```
 
-    Upgrade of [net-kourier to v0.24.0](https://github.com/knative-sandbox/net-kourier/releases/tag/v0.24.0)
+    * Upgrade of [net-kourier to v0.24.0](https://github.com/knative-sandbox/net-kourier/releases/tag/v0.24.0).
     At this point we've deferred the renaming to net-kourier until the next release.
     We're looking to ensure there is no traffic disruption as part of the upgrade.
     Therefore upgrading to v0.24.0 requires no special instructions.
@@ -133,7 +133,7 @@ are provided on the command line.
 
 * **DomainMapping feature is now BETA**
 
-    This means it is built in to the main `serving-core` YAML by default.
+    This means it is built into the main `serving-core` YAML by default.
     It is still possible to opt out of the feature by setting replica count of the
     domainmapping-controller to zero.
 
@@ -146,9 +146,9 @@ are provided on the command line.
 #### 💫 New Features & Changes
 
 * Allow dropping capabilities from a container's security context ([#11344](https://github.com/knative/serving/pull/11344))
-* DomainMapping can now specify a TLS secret to be used as the HTTPS certificate ([#11250](https://github.com/knative/serving/pull/11250)
+* DomainMapping can now specify a TLS secret to be used as the HTTPS certificate ([#11250](https://github.com/knative/serving/pull/11250))
 * Provides a feature gate that, when enabled, allows adding capabilities from a container's security context ([#11410](https://github.com/knative/serving/pull/11410))
-* `defaultExternalScheme` can now be used to default routes to surface a URL scheme of your choice rather than the default "http". ([#11480](https://github.com/knative/serving/pull/11480))
+* `defaultExternalScheme` can now be used for default routes to surface a URL scheme of your choice rather than the default "http". ([#11480](https://github.com/knative/serving/pull/11480))
 * Optimized generated routes to minimize Envoy configuration size ([net-istio#632](https://github.com/knative-sandbox/net-istio/pull/632))
 * Rename Contour's ClusterRole and ClusterRoleBinding to differ from existing contour installation ([net-contour#500](https://github.com/knative-sandbox/net-contour/pull/500))
 * Add a new ConfigMap `config-kourier`, with the initial `enable-service-access-logging` setting ([net-kourier#523](https://github.com/knative-sandbox/net-kourier/pull/523))
