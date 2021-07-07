@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Release Notes</title>
-    <link>https://knative.dev/docs/reference/relnotes/</link>
+    <link>https://knative.dev/v0.23-docs/reference/relnotes/</link>
     <description>Recent content in Knative Release Notes on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/reference/relnotes/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/reference/relnotes/index.xml" rel="self" type="application/rss+xml" />
     
     
       

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Serving</title>
-    <link>https://knative.dev/docs/serving/</link>
+    <link>https://knative.dev/v0.23-docs/serving/</link>
     <description>Recent content in Knative Serving on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/serving/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/serving/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Getting Started with App Deployment</title>
-      <link>https://knative.dev/docs/serving/getting-started-knative-app/</link>
+      <title>V0.23-Docs: Getting Started with App Deployment</title>
+      <link>https://knative.dev/v0.23-docs/serving/getting-started-knative-app/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/getting-started-knative-app/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/getting-started-knative-app/</guid>
       <description>
         
         
@@ -206,11 +206,11 @@ kubectl delete kservice helloworld-go
     </item>
     
     <item>
-      <title>Docs: Knative services</title>
-      <link>https://knative.dev/docs/serving/services/</link>
+      <title>V0.23-Docs: Knative services</title>
+      <link>https://knative.dev/v0.23-docs/serving/services/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/services/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/services/</guid>
       <description>
         
         
@@ -220,11 +220,11 @@ kubectl delete kservice helloworld-go
     </item>
     
     <item>
-      <title>Docs: Kubernetes services</title>
-      <link>https://knative.dev/docs/serving/knative-kubernetes-services/</link>
+      <title>V0.23-Docs: Kubernetes services</title>
+      <link>https://knative.dev/v0.23-docs/serving/knative-kubernetes-services/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/knative-kubernetes-services/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/knative-kubernetes-services/</guid>
       <description>
         
         
@@ -300,11 +300,11 @@ hands-on tutorials.&lt;/li&gt;
     </item>
     
     <item>
-      <title>Docs: Deploying images from a private container registry</title>
-      <link>https://knative.dev/docs/serving/deploying/private-registry/</link>
+      <title>V0.23-Docs: Deploying images from a private container registry</title>
+      <link>https://knative.dev/v0.23-docs/serving/deploying/private-registry/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/deploying/private-registry/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/deploying/private-registry/</guid>
       <description>
         
         
@@ -390,11 +390,11 @@ your credentials and have access to your container images in the private registr
     </item>
     
     <item>
-      <title>Docs: Accessing request traces</title>
-      <link>https://knative.dev/docs/serving/accessing-traces/</link>
+      <title>V0.23-Docs: Accessing request traces</title>
+      <link>https://knative.dev/v0.23-docs/serving/accessing-traces/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/accessing-traces/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/accessing-traces/</guid>
       <description>
         
         
@@ -450,11 +450,11 @@ traces. Click on a trace to see a detailed view of a specific call.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Autoscaling</title>
-      <link>https://knative.dev/docs/serving/autoscaling/</link>
+      <title>V0.23-Docs: Autoscaling</title>
+      <link>https://knative.dev/v0.23-docs/serving/autoscaling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/autoscaling/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/autoscaling/</guid>
       <description>
         
         
@@ -480,11 +480,11 @@ For how to install HPA, see &lt;a href=&#34;../../install/install-extensions#ins
     </item>
     
     <item>
-      <title>Docs: Creating and using Subroutes</title>
-      <link>https://knative.dev/docs/serving/using-subroutes/</link>
+      <title>V0.23-Docs: Creating and using Subroutes</title>
+      <link>https://knative.dev/v0.23-docs/serving/using-subroutes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/using-subroutes/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/using-subroutes/</guid>
       <description>
         
         
@@ -514,11 +514,11 @@ For how to install HPA, see &lt;a href=&#34;../../install/install-extensions#ins
     </item>
     
     <item>
-      <title>Docs: Gradually rolling out latest Revisions</title>
-      <link>https://knative.dev/docs/serving/rolling-out-latest-revision/</link>
+      <title>V0.23-Docs: Gradually rolling out latest Revisions</title>
+      <link>https://knative.dev/v0.23-docs/serving/rolling-out-latest-revision/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/rolling-out-latest-revision/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/rolling-out-latest-revision/</guid>
       <description>
         
         
@@ -665,11 +665,11 @@ This is governed by a single parameter which denotes &lt;code&gt;rollout-duratio
     </item>
     
     <item>
-      <title>Docs: Debugging issues with your application</title>
-      <link>https://knative.dev/docs/serving/debugging-application-issues/</link>
+      <title>V0.23-Docs: Debugging issues with your application</title>
+      <link>https://knative.dev/v0.23-docs/serving/debugging-application-issues/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/debugging-application-issues/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/debugging-application-issues/</guid>
       <description>
         
         
@@ -768,11 +768,11 @@ configuration-example-00002-deployment-5f475b7849-gxcht   1/2       CrashLoopBac
     </item>
     
     <item>
-      <title>Docs: Enabling requests to Knative services when additional authorization policies are enabled</title>
-      <link>https://knative.dev/docs/serving/istio-authorization/</link>
+      <title>V0.23-Docs: Enabling requests to Knative services when additional authorization policies are enabled</title>
+      <link>https://knative.dev/v0.23-docs/serving/istio-authorization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/istio-authorization/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/istio-authorization/</guid>
       <description>
         
         
@@ -875,11 +875,11 @@ EOF
     </item>
     
     <item>
-      <title>Docs: Load balancing</title>
-      <link>https://knative.dev/docs/serving/load-balancing/</link>
+      <title>V0.23-Docs: Load balancing</title>
+      <link>https://knative.dev/v0.23-docs/serving/load-balancing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/load-balancing/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/load-balancing/</guid>
       <description>
         
         
@@ -908,11 +908,11 @@ EOF
     </item>
     
     <item>
-      <title>Docs: Assigning a static IP address for Knative on Kubernetes Engine</title>
-      <link>https://knative.dev/docs/serving/gke-assigning-static-ip-address/</link>
+      <title>V0.23-Docs: Assigning a static IP address for Knative on Kubernetes Engine</title>
+      <link>https://knative.dev/v0.23-docs/serving/gke-assigning-static-ip-address/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/gke-assigning-static-ip-address/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/gke-assigning-static-ip-address/</guid>
       <description>
         
         
@@ -996,11 +996,11 @@ xxxxxxx-ingressgateway   LoadBalancer   12.34.567.890   98.765.43.210   80:32380
     </item>
     
     <item>
-      <title>Docs: Configuring high-availability components</title>
-      <link>https://knative.dev/docs/serving/config-ha/</link>
+      <title>V0.23-Docs: Configuring high-availability components</title>
+      <link>https://knative.dev/v0.23-docs/serving/config-ha/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/config-ha/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/config-ha/</guid>
       <description>
         
         
@@ -1034,11 +1034,11 @@ activator   Deployment/activator   2%/100%   5         15        11         346d
     </item>
     
     <item>
-      <title>Docs: Feature/Extension Flags</title>
-      <link>https://knative.dev/docs/serving/feature-flags/</link>
+      <title>V0.23-Docs: Feature/Extension Flags</title>
+      <link>https://knative.dev/v0.23-docs/serving/feature-flags/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/feature-flags/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/feature-flags/</guid>
       <description>
         
         
@@ -1298,11 +1298,11 @@ from Knative or your service mesh&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Setting up custom ingress gateway</title>
-      <link>https://knative.dev/docs/serving/setting-up-custom-ingress-gateway/</link>
+      <title>V0.23-Docs: Setting up custom ingress gateway</title>
+      <link>https://knative.dev/v0.23-docs/serving/setting-up-custom-ingress-gateway/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/setting-up-custom-ingress-gateway/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/setting-up-custom-ingress-gateway/</guid>
       <description>
         
         
@@ -1364,11 +1364,11 @@ the fully qualified url of your service.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Setting up a custom domain</title>
-      <link>https://knative.dev/docs/serving/using-a-custom-domain/</link>
+      <title>V0.23-Docs: Setting up a custom domain</title>
+      <link>https://knative.dev/v0.23-docs/serving/using-a-custom-domain/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/using-a-custom-domain/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/using-a-custom-domain/</guid>
       <description>
         
         
@@ -1505,11 +1505,11 @@ qualified domain name of the deployed route, for example
     </item>
     
     <item>
-      <title>Docs: Configuring HTTPS with TLS certificates</title>
-      <link>https://knative.dev/docs/serving/using-a-tls-cert/</link>
+      <title>V0.23-Docs: Configuring HTTPS with TLS certificates</title>
+      <link>https://knative.dev/v0.23-docs/serving/using-a-tls-cert/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/using-a-tls-cert/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/using-a-tls-cert/</guid>
       <description>
         
         
@@ -1790,11 +1790,11 @@ HTTPS protocol for secure access your deployed Knative services.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Installing cert-manager for TLS certificates</title>
-      <link>https://knative.dev/docs/serving/installing-cert-manager/</link>
+      <title>V0.23-Docs: Installing cert-manager for TLS certificates</title>
+      <link>https://knative.dev/v0.23-docs/serving/installing-cert-manager/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/installing-cert-manager/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/installing-cert-manager/</guid>
       <description>
         
         
@@ -1842,11 +1842,11 @@ provisioning, continue to the following topic to enable that feature:
     </item>
     
     <item>
-      <title>Docs: Configuring HTTPS with cert-manager and Google Cloud DNS</title>
-      <link>https://knative.dev/docs/serving/using-cert-manager-on-gcp/</link>
+      <title>V0.23-Docs: Configuring HTTPS with cert-manager and Google Cloud DNS</title>
+      <link>https://knative.dev/v0.23-docs/serving/using-cert-manager-on-gcp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/using-cert-manager-on-gcp/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/using-cert-manager-on-gcp/</guid>
       <description>
         
         
@@ -2080,11 +2080,11 @@ certificates before they expire. To learn more about automatic certificates, see
     </item>
     
     <item>
-      <title>Docs: Enabling automatic TLS certificate provisioning</title>
-      <link>https://knative.dev/docs/serving/using-auto-tls/</link>
+      <title>V0.23-Docs: Enabling automatic TLS certificate provisioning</title>
+      <link>https://knative.dev/v0.23-docs/serving/using-auto-tls/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/using-auto-tls/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/using-auto-tls/</guid>
       <description>
         
         
@@ -2391,11 +2391,11 @@ autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t  
     </item>
     
     <item>
-      <title>Docs: Setting up a custom domain per Service</title>
-      <link>https://knative.dev/docs/serving/creating-domain-mappings/</link>
+      <title>V0.23-Docs: Setting up a custom domain per Service</title>
+      <link>https://knative.dev/v0.23-docs/serving/creating-domain-mappings/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/creating-domain-mappings/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/creating-domain-mappings/</guid>
       <description>
         
         
@@ -2464,11 +2464,11 @@ your domain registrar.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Exclude namespaces from the Knative webhook</title>
-      <link>https://knative.dev/docs/serving/webhook-customizations/</link>
+      <title>V0.23-Docs: Exclude namespaces from the Knative webhook</title>
+      <link>https://knative.dev/v0.23-docs/serving/webhook-customizations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/webhook-customizations/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/webhook-customizations/</guid>
       <description>
         
         
@@ -2485,11 +2485,11 @@ your domain registrar.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Using ExternalDNS on Google Cloud Platform to automate DNS setup</title>
-      <link>https://knative.dev/docs/serving/using-external-dns-on-gcp/</link>
+      <title>V0.23-Docs: Using ExternalDNS on Google Cloud Platform to automate DNS setup</title>
+      <link>https://knative.dev/v0.23-docs/serving/using-external-dns-on-gcp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/using-external-dns-on-gcp/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/using-external-dns-on-gcp/</guid>
       <description>
         
         
@@ -2813,11 +2813,11 @@ minutes.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Enabling tag to digest resolution</title>
-      <link>https://knative.dev/docs/serving/tag-resolution/</link>
+      <title>V0.23-Docs: Enabling tag to digest resolution</title>
+      <link>https://knative.dev/v0.23-docs/serving/tag-resolution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/tag-resolution/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/tag-resolution/</guid>
       <description>
         
         
@@ -2894,11 +2894,11 @@ resolution via the &lt;code&gt;registriesSkippingTagResolving&lt;/code&gt; confi
     </item>
     
     <item>
-      <title>Docs: Metrics API</title>
-      <link>https://knative.dev/docs/serving/metrics/</link>
+      <title>V0.23-Docs: Metrics API</title>
+      <link>https://knative.dev/v0.23-docs/serving/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/metrics/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/metrics/</guid>
       <description>
         
         
@@ -3513,11 +3513,11 @@ developers, devops and others, could measure if requests are queued at the proxy
     </item>
     
     <item>
-      <title>Docs: Knative Serving code samples</title>
-      <link>https://knative.dev/docs/serving/samples/</link>
+      <title>V0.23-Docs: Knative Serving code samples</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/</guid>
       <description>
         
         

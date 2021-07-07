@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knative – Knative Serving &#39;Cloud Events&#39; samples</title>
-    <link>https://knative.dev/docs/serving/samples/cloudevents/</link>
+    <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/</link>
     <description>Recent content in Knative Serving &#39;Cloud Events&#39; samples on Knative</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://knative.dev/docs/serving/samples/cloudevents/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://knative.dev/v0.23-docs/serving/samples/cloudevents/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,11 +14,11 @@
     
     
     <item>
-      <title>Docs: Cloud Events - .NET Core</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-dotnet/</link>
+      <title>V0.23-Docs: Cloud Events - .NET Core</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-dotnet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-dotnet/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-dotnet/</guid>
       <description>
         
         
@@ -114,11 +114,11 @@ cloudevents-dotnet   http://cloudevents-dotnet...   cloudevents-dotnet-ss5pj   c
     </item>
     
     <item>
-      <title>Docs: Cloud Events - Go</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-go/</link>
+      <title>V0.23-Docs: Cloud Events - Go</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-go/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-go/</guid>
       <description>
         
         
@@ -345,11 +345,11 @@ cloudevents-go   http://cloudevents-go.default.1.2.3.4.sslip.io   cloudevents-go
     </item>
     
     <item>
-      <title>Docs: Cloud Events - Java and Spring</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-spring/</link>
+      <title>V0.23-Docs: Cloud Events - Java and Spring</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-spring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-spring/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-spring/</guid>
       <description>
         
         
@@ -502,11 +502,11 @@ with:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Cloud Events - Java and Vert.x</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-vertx/</link>
+      <title>V0.23-Docs: Cloud Events - Java and Vert.x</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-vertx/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-vertx/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-vertx/</guid>
       <description>
         
         
@@ -706,11 +706,11 @@ with:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Docs: Cloud Events - Node.js</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-nodejs/</link>
+      <title>V0.23-Docs: Cloud Events - Node.js</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-nodejs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-nodejs/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-nodejs/</guid>
       <description>
         
         
@@ -868,11 +868,11 @@ cloudevents-nodejs   http://cloudevents-nodejs.default.1.2.3.4.sslip.io   cloude
     </item>
     
     <item>
-      <title>Docs: Cloud Events - Rust</title>
-      <link>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-rust/</link>
+      <title>V0.23-Docs: Cloud Events - Rust</title>
+      <link>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-rust/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://knative.dev/docs/serving/samples/cloudevents/cloudevents-rust/</guid>
+      <guid>https://knative.dev/v0.23-docs/serving/samples/cloudevents/cloudevents-rust/</guid>
       <description>
         
         
