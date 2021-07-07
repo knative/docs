@@ -37,7 +37,7 @@ Follow the instructions in the documentation
 - For Serving, the recommended way to delete a Knative installation is to run
 `kubectl delete -f serving-core.yaml` and other release YAMLs you might have applied.
 - For Eventing, you must run the storage migration tool after the upgrade to migrate from v1beta2 to v1 `pingsources.sources.knative.dev` resources.
-- For Eventing, there are new experimental features and a new process for trying them out.
+- For Eventing, there are new experimental features and a new process for trying them out. For more information, see [Experimental features](https://knative.dev/docs/eventing/experimental-features/).
 - For Client, a new option `--env-value-from` was added to `kn service create` and
 `kn service update` to allow referencing values from secrets and config maps.
 The order of environment variables is now kept according to the order that `--env` related options
