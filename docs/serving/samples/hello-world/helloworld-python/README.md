@@ -126,7 +126,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
           definition into the file. Make sure to replace `{username}` with your
           Docker Hub username or with the URL provided by your container registry
 
-          ```yaml
+        ```yaml
           apiVersion: serving.knative.dev/v1
           kind: Service
           metadata:
@@ -140,7 +140,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
                     env:
                       - name: TARGET
                         value: "Python Sample v1"
-          ```
+        ```
 
        Ensure that the container image value in `service.yaml` matches the container
        you built in the previous step. Apply the configuration using `kubectl`:
