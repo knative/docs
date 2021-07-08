@@ -120,7 +120,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
-   === "yaml"
+=== "yaml"
 
        1. Create a new file, `service.yaml` and copy the following service
           definition into the file. Make sure to replace `{username}` with your
