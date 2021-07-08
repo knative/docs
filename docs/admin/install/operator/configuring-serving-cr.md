@@ -16,7 +16,7 @@ The Knative Serving Operator can be configured with the following options:
 
 Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field.
 
-For example, if you want to install Knative Serving 0.23.0, you can apply the following `KnativeServing` custom resource:
+For example, if you want to install Knative Serving v0.23.0, you can apply the following `KnativeServing` custom resource:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
