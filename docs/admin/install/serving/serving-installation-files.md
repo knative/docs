@@ -14,8 +14,6 @@ The table below describes the installation files included in Knative Serving:
 | serving-core.yaml | Required: Knative Serving core components. | serving-crds.yaml |
 | serving-crds.yaml | Required: Knative Serving core CRDs. | none |
 | serving-default-domain.yaml | Configures Knative Serving to use [http://sslip.io](http://sslip.io) as the default DNS suffix. | serving-core.yaml |
-| serving-domainmapping-crds.yaml | CRDs used by the Domain Mapping feature. | none |
-| serving-domainmapping.yaml | Components used by the Domain Mapping feature. | serving-domainmapping-crds.yaml |
 | serving-hpa.yaml | Components to autoscale Knative revisions through the Kubernetes Horizontal Pod Autoscaler. | serving-core.yaml |
   serving-nscert.yaml | Components to provision TLS wildcard certificates. | serving-core.yaml |
 | serving-post-install-jobs.yaml | Additional jobs after installing `serving-core.yaml`. Currently it is the same as `serving-storage-version-migration.yaml`. | serving-core.yaml |
