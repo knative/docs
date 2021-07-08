@@ -177,7 +177,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    > Note: If your URL includes `example.com` then consult the setup instructions for
    > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
-   === "kubectl"
+=== "kubectl"
 
        ```bash
        kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
