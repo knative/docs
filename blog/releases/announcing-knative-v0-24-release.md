@@ -1,4 +1,3 @@
-# 0.24 Release Notes
 ---
 title: "v0.24 release"
 linkTitle: "v0.24 release"
