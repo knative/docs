@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      serving/rolling-out-latest-revision.md: admin/serving/rolling-out-latest-revision.md
       serving/tag-resolution.md: developer/serving/tag-resolution.md
       serving/deploying-from-private-registry.md: developer/serving/deploying-from-private-registry.md
       serving/samples/blue-green-deployment.md: developer/serving/traffic-management.md

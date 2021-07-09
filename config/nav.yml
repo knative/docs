@@ -53,6 +53,7 @@ nav:
         # Serving config
         - Knative Serving configuration:
           - Configure Deployment resources: admin/serving/deployment.md
+          - Configuring gradual roll-out of traffic to Revisions: admin/serving/rolling-out-latest-revision.md
         # Eventing config
         - Knative Eventing configuration:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
@@ -112,7 +113,6 @@ nav:
     - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
         - Creating and using Subroutes: serving/using-subroutes.md
         - Load balancing:
           - Overview: serving/load-balancing/README.md
