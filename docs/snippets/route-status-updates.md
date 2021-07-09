@@ -18,7 +18,7 @@ spec:
     revisionName: config-00005 # Pinned to a specific Revision.
 ```
 
-Intially 1% of the traffic is rolled out to the Revisions:
+Initially 1% of the traffic is rolled out to the Revisions:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
