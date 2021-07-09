@@ -53,7 +53,7 @@ nav:
         # Serving config
         - Knative Serving configuration:
           - Configure Deployment resources: admin/serving/deployment.md
-          - Configuring gradual roll-out of traffic to Revisions: admin/serving/rolling-out-latest-revision.md
+          - Configuring gradual roll-out of traffic to Revisions: rolling-out-latest-revision-configmap.md
         # Eventing config
         - Knative Eventing configuration:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
@@ -69,6 +69,7 @@ nav:
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Traffic management: developer/serving/traffic-management.md
+          - Configuring gradual roll-out of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
           - Deploying from private registries: developer/serving/deploying-from-private-registry.md
           - Tag resolution: developer/serving/tag-resolution.md
           - Troubleshooting:
