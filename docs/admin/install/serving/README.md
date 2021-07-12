@@ -4,4 +4,4 @@ You can install Knative Serving by applying the `KnativeServing` custom resource
 
 {% include "prerequisites.md" %}
 
-{% include "admin/install/serving/install-serving-with-knatiive-operator.md" %}
+{% include "admin/install/serving/install-serving-with-knative-operator.md" %}
