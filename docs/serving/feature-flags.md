@@ -9,12 +9,14 @@ type: "docs"
 Knative is deliberate about the concepts it incorporates into its core API. The API aims to be portable and abstracts away the specificities of each users' implementation. That being said, the Knative API should empower users to surface extra features and extensions possible within their platform of choice.
 
 This document introduces two concepts:
+
 * Feature: a way to stage the introduction of features to the Knative API.
 * Extension: a way to extend Knative beyond the portable concepts of the Knative API.
 
 ## Control
 Features and extensions are controlled by flags defined in the `config-features` ConfigMap in the `knative-serving` namespace.
 Flags can have the following values:
+
 * Enabled: the feature is enabled.
 * Allowed: the feature may be enabled (e.g. using an annotation or looser validation).
 * Disabled: the feature cannot be enabled.
@@ -30,18 +32,21 @@ Let's consider two types of features: `multi-container` and `kubernetes.podspec-
 Features and extensions go through 3 similar phases (Alpha, Beta, GA) but with important differences.
 
 Alpha means:
+
 * Might be buggy. Enabling the feature may expose bugs.
 * Support for feature may be dropped at any time without notice.
 * The API may change in incompatible ways in a later software release without notice.
 * Recommended for use only in short-lived testing clusters, due to increased risk of bugs and lack of long-term support.
 
 Beta means:
+
 * The feature is well tested. Enabling the feature is considered safe.
 * Support for the overall feature will not be dropped, though details may change.
 * The schema and/or semantics of objects may change in incompatible ways in a subsequent beta or stable release. When this happens, we will provide instructions for migrating to the next version. This may require deleting, editing, or re-creating API objects. The editing process may require some thought. This may require downtime for applications that rely on the feature.
 * Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases. If you have multiple clusters that can be upgraded independently, you may be able to relax this restriction.
 
 General Availability (GA) means:
+
 * Stable versions of features/extensions will appear in released software for many subsequent versions.
 
 # Feature
