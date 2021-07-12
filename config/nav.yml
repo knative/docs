@@ -69,7 +69,7 @@ nav:
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Traffic management: developer/serving/traffic-management.md
-          - Configuring gradual roll-out of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
+          - Configuring gradual rollout of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
           - Deploying from private registries: developer/serving/deploying-from-private-registry.md
           - Tag resolution: developer/serving/tag-resolution.md
           - Troubleshooting:
