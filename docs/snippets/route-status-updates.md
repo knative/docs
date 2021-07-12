@@ -54,7 +54,7 @@ spec:
     revisionName: config-00005 # Pinned to a specific Revision.
 ```
 
-The roll-out continues until the target traffic configuration has been reached:
+The rollout continues until the target traffic configuration is reached:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
