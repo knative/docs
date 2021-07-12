@@ -1,5 +1,5 @@
 ---
 template: home.html
-title: Knative
+title: Home
 hide_next: true
 ---
