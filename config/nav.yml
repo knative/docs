@@ -20,9 +20,12 @@ nav:
     - Administration guide:
         - Overview: admin/README.md
         - Installing Knative:
-          - Overview: admin/install/README.md
+          # - Overview: admin/install/README.md <-- remove this and move required info into new file, do redirect
+          - Overview: admin/install/base-install/README.md
           # Serving Installation
           - Install Knative Serving:
+            - Overview: admin/install/serving/README.md
+            - Installing Knative Serving with the Knative Operator: admin/install/serving/install-serving-with-knatiive-operator.md
             - Install Serving with YAML: admin/install/serving/install-serving-with-yaml.md
             - Knative Serving installation files: admin/install/serving/serving-installation-files.md
           # Eventing Installation
