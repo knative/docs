@@ -1,6 +1,6 @@
 ## Route status updates
 
-During a roll-out, the system updates the Route and Knative Service status. Both the `traffic` and `conditions` status parameters are affected.
+During a rollout, the system updates the Route and Knative Service status conditions. Both the `traffic` and `conditions` status parameters are affected.
 
 For example, for the following traffic configuration:
 
