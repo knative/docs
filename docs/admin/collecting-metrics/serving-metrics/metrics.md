@@ -103,7 +103,7 @@ As a baseline for monitoring purproses, user could start with a subset of the me
 ## Developer - User Services
 
 Every Knative service has a proxy container that proxies the connections to the application container.
-A number of metrics are reported for the queue peroxy performance. Using the following metrics application
+A number of metrics are reported for the queue proxy performance. Using the following metrics application
 developers, devops and others, could measure if requests are queued at the proxy side (need for backpressure) and what is the actual delay in serving requests at the application side.
 
 ### Queue proxy
