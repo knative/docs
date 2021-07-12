@@ -70,7 +70,7 @@ spec:
     revisionName: config-00005 # Pinned to a specific Revision.
 ```
 
-During the roll-out, the Route and Knative Service status conditions are as follows:
+During the rollout, the Route and Knative Service status conditions are as follows:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
