@@ -114,7 +114,6 @@ nav:
     - Knative Serving:
       - Overview: serving/README.md
       - Developer Topics:
-        - Creating and using Subroutes: serving/using-subroutes.md
         - Load balancing:
           - Overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
