@@ -18,4 +18,3 @@ related information.
 
 These are just guidelines, not rules. Use your best judgment, and
 feel free to open PRs and propose changes to these documents.
-
