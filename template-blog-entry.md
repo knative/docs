@@ -5,29 +5,6 @@ entry to post on the Knative blog.
 
 [**Copy a version of this template without the instructions**](#copy-the-template)
 
-## Frontmatter
-
-[Hugo](https://gohugo.io/) uses a set of metadata at the beginning of each page
-called [frontmatter](https://gohugo.io/content-management/front-matter/)
-to define website build required info as well as other blog page details.
-
-Frontmatter is strict YAML syntax and must be added to the top of every
-page. Example formatting template:
-
-```yaml
----
-# This section is called the "frontmatter" for your page
-title: "Title for your page" # Use sentence case for titles and headings
-linkTitle: "A shorten title" # Optional: Use/render a shorter title in the navigation menu.
-author: "" # Your name
-authorHandle: "" # Your GitHub ID
-date: "" # Publishing date
-description: "" # A short one-liner describing this blog entry
-folderWithMediaFiles: "./images/<new-feature-name>" # The relative file path (ie. new folder) to any images, etc.
-keywords: "Releases, Steering committee, Demo, Events" # Meta keywords for the content
----
-```
-
 Include a commented-out table with tracking info about reviews and approvals:
 ```
 <!--
@@ -101,17 +78,6 @@ Add a short bio of yourself here
 # Copy the template
 
 ```
----
-title: ""
-linkTitle: ""
-author: ""
-authorHandle: ""
-date: ""
-description: ""
-folderWithMediaFiles: ""
-keywords: ""
----
-
 <!--
 | Reviewer           | Date       | Approval      |
 | ------------------ | ---------- | ------------- |
@@ -119,7 +85,7 @@ keywords: ""
 | <!-- GitHub ID --> | YYYY-MM-DD | :+1:, :monocle_face:, :-1: |
 -->
 
-<!-- The page title you set in the frontmatter renders here (don't add a duplicate title) -->
+# <!-- Insert blog title here -->
 
 ## Blog content body
 <!-- Introduce the feature you are going to explain:
