@@ -116,7 +116,6 @@ nav:
       - Overview: serving/README.md
       - Developer Topics:
         - Gradually rolling out latest Revisions: serving/rolling-out-latest-revision.md
-        - Creating and using Subroutes: serving/using-subroutes.md
         - Load balancing:
           - Overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
