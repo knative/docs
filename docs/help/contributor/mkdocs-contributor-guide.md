@@ -230,8 +230,22 @@ Material for MkDocs supports using Material Icons and Emojis using easy shortcod
 
 To search a database of Icons and Emojis (all of which can be used on Knative.dev), as well as usage information, see: [https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search](https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search)
 
+### Redirects
+
+The Knative site uses [mkdocs-redirects](https://github.com/datarobot/mkdocs-redirects) to "redirect" users from a page that may no longer exist (or has been moved) to their desired location.
+
+Adding re-directs to the Knative site is done in one centralized place, `docs/config/redirects.yml`. The format is shown below:
+
+```
+plugins:
+  redirects:
+    redirect_maps:
+        ...
+        path_to_old_or_moved_URL : path_to_new_URL
+```
+
+
 # TODO (Add Requests Here)
-URL Re-directs
 Navigation using lukasgeiter/mkdocs-awesome-pages-plugin: An MkDocs plugin that simplifies configuring page titles and their order
 Index.md vs. README.md
 awesome-pages
