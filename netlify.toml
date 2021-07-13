@@ -16,8 +16,7 @@
 
 
 [[redirects]]
-  from = "/contributing"
+  from = "/contributing/"
   to = "/community/contributing"
   status = 301
-  force = false
-  query = {path = ":path"}
+  force = true
