@@ -71,7 +71,7 @@ Follow the procedure for the Channel of your choice:
 === "In-Memory (standalone)"
 
     !!! warning
-        This simple standalone implementation runs in-memory and is unsuitable for production-use cases.
+        This simple standalone implementation runs in-memory and is not suitable for production use cases.
 
     * Install an in-memory implementation of Channel by running the command:
 
