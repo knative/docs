@@ -13,3 +13,8 @@
 # inherit these settings.
 [context.deploy-preview]
   publish = "site"
+
+[[redirects]]
+  from = "/contributing/"
+  to = "/community/contributing/"
+  status = 301
