@@ -31,8 +31,9 @@ Offsets.
 
 ## Prerequisites
 
-- A Kubernetes cluster with
-  [Knative Kafka Channel installed](../../../../admin/install/).
+- A Kubernetes cluster with a Knative
+  [Kafka Channel](https://knative.dev/docs/eventing/channels/channels-crds/)
+  installed.
 - A valid KafkaChannel and Subscription exist.
 
 ## Examples
