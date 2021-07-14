@@ -229,7 +229,7 @@ The tabs below expand to show instructions for installing each Eventing extensio
         The Knative Eventing Sugar Controller reacts to special labels and
         annotations and produce Eventing resources. For example:
 
-        - When a Namespace is labeled with `eventing.knative.dev/injection=enabled`, the
+        - When a namespace is labeled with `eventing.knative.dev/injection=enabled`, the
           controller creates a default Broker in that namespace.
         - When a Trigger is annotated with `eventing.knative.dev/injection=enabled`, the
           controller creates a Broker named by that Trigger in the Trigger's namespace.
