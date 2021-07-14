@@ -1,7 +1,8 @@
 ---
 title: "Apache Kafka ResetOffset Example"
 linkTitle: "ResetOffset Example"
-weight: 20 type: "docs"
+weight: 20
+type: "docs"
 ---
 
 Kafka backed Channels are potentially different from other implementations in
