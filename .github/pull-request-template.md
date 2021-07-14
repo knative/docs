@@ -8,14 +8,18 @@ original PR. Best practice is to open a PR for the cherry-pick yourself after
 your original PR has been merged into the main branch. Once the cherry-pick PR
 has merged, remove the cherry-pick label from the original PR.
 
-- [Knative contributor's guide](./help/contributing) -- lists all resources for contributing to
-Knative documentation.
-
 Use one of the new content templates:
-  - [Documentation](./template-docs-page.md) -- Instructions and a template that
-    you can use to help you add new documentation.
-  - [Blog](./template-blog-entry.md) -- Instructions and a template that
-    you can use to help you post to the Knative blog.
+- [Concept](./template-concept.md) -- Conceptual topics explain how things work or what things mean.
+They provide helpful context to readers. They do not include procedures.
+- [Procedure](./template-procedure.md) -- Procedural (how-to) topics include detailed steps to
+perform a task as well as some context about the task.
+- [Troubleshooting](./template-troubleshooting.md) -- Troubleshooting topics list common errors and
+solutions.
+- [Blog](./template-blog-entry.md) -- Instructions and a template that you can use to help you post
+to the Knative blog.
+
+Consult [Knative contributor's guide](./help/contributing) for all resources for contributing to
+Knative documentation.
 
 Learn more about contributing to the Knative Docs:
 https://github.com/knative/docs
