@@ -56,7 +56,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -77,7 +77,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -120,7 +120,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -146,7 +146,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -329,7 +329,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -350,7 +350,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -390,7 +390,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -416,7 +416,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing

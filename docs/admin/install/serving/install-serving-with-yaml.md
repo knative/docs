@@ -263,14 +263,3 @@ The tabs below expand to show instructions for installing each Serving extension
         kubectl apply -f {{ artifact(repo="serving",file="serving-nscert.yaml")}}
         ```
 
-
-=== "DomainMapping CRD"
-
-    The DomainMapping CRD allows a user to map a domain name that they own to a specific Knative Service.
-
-    * Apply the DomainMapping CRD by running the commands:
-
-        ```bash
-        kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping-crds.yaml")}}
-        kubectl apply -f {{ artifact(repo="serving",file="serving-domainmapping.yaml")}}
-        ```

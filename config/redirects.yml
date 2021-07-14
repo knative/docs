@@ -1,6 +1,9 @@
 plugins:
   redirects:
     redirect_maps:
+      serving/using-subroutes.md: developer/serving/traffic-management.md
+      serving/rolling-out-latest-revision.md: developer/serving/rolling-out-latest-revision.md
+      serving/tag-resolution.md: developer/serving/tag-resolution.md
       serving/deploying-from-private-registry.md: developer/serving/deploying-from-private-registry.md
       serving/samples/blue-green-deployment.md: developer/serving/traffic-management.md
       serving/samples/traffic-splitting/README.md: developer/serving/traffic-management.md
