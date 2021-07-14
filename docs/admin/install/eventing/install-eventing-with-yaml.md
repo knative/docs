@@ -186,7 +186,7 @@ Follow the procedure for the Broker of your choice:
         ```
 
     !!! warning
-        In order to use the KafkaChannel ensure it is installed on the cluster as discussed above.
+        In order to use the KafkaChannel, ensure that it is installed on your cluster, as mentioned previously in this topic.
 
 === "RabbitMQ Broker"
 
