@@ -245,8 +245,8 @@ The tabs below expand to show instructions for installing each Eventing extensio
 
     A single-tenant GitHub source creates one Knative service per GitHub source.
 
-    A multi-tenant GitHub source creates only one Knative service handling all GitHub sources in the
-    cluster. This source does not support logging or tracing configuration yet.
+    A multi-tenant GitHub source only creates one Knative Service, which handles all GitHub sources in the
+    cluster. This source does not support logging or tracing configuration.
 
     * To install a single-tenant GitHub source run the command:
 
