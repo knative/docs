@@ -16,6 +16,5 @@
 
 [[redirects]]
   from = "/contributing/"
-  to = "/community/contributing"
+  to = "/community/contributing/"
   status = 301
-  force = true
