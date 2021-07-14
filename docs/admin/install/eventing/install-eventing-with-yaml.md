@@ -4,7 +4,7 @@ This topic describes how to install Knative Eventing by applying YAML files usin
 
 --8<-- "prerequisites.md"
 
-## Install the Knative Eventing component
+## Install Knative Eventing
 
 To install the Knative Eventing component:
 
