@@ -118,7 +118,7 @@ Follow the procedure for the Broker of your choice:
 
 === "MT-Channel-based"
 
-    This implementation of Broker utilizes Channels and runs event routing components in a system
+    This implementation of Broker uses Channels and runs event routing components in a system
     namespace, providing a smaller and simpler installation.
 
     * Install this implementation of Broker by running the command:
