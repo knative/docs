@@ -6,7 +6,7 @@ This topic describes how to install Knative Eventing by applying YAML files usin
 
 ## Install Knative Eventing
 
-To install the Knative Eventing component:
+To install Knative Eventing:
 
 1. Install the required custom resource definitions (CRDs) by running the command:
 
