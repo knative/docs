@@ -100,7 +100,7 @@ Follow the procedure for the Broker of your choice:
 === "Apache Kafka Broker"
 
     The following commands install the Apache Kafka Broker and run event routing in a system
-    namespace. The namespace `knative-eventing` is used by default.
+    namespace. The `knative-eventing` namespace is used by default.
 
     1. Install the Kafka controller by running the following command:
 
