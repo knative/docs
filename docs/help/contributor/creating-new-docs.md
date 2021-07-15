@@ -5,12 +5,12 @@ To contribute new documentation, follow these steps:
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
 1. You can use a template to get started:
-    - [Concept](../../../../template-concept.md) -- Conceptual topics explain how things work or what things mean. They provide helpful context to readers. They do not include procedures.
-    - [Procedure](../../../../template-procedure.md) -- Procedural (how-to) topics include detailed steps to
+    - [Concept](./template-concept.md) -- Conceptual topics explain how things work or what things mean. They provide helpful context to readers. They do not include procedures.
+    - [Procedure](./template-procedure.md) -- Procedural (how-to) topics include detailed steps to
     perform a task as well as some context about the task.
-    - [Troubleshooting](../../../../template-troubleshooting.md) -- Troubleshooting topics list common errors
+    - [Troubleshooting](./template-troubleshooting.md) -- Troubleshooting topics list common errors
     and solutions.
-    - [Blog](../../../../template-blog-entry.md) -- Instructions and a template that you can use to help you
+    - [Blog](./template-blog-entry.md) -- Instructions and a template that you can use to help you
     post to the Knative blog.
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
 1. Write your new content. See the [style guide](./style-guide/readme.md)
