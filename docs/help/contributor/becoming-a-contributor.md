@@ -1,11 +1,4 @@
----
-title: "Joining the project and getting started"
-linkTitle: "Join"
-weight: 10
-type: "docs"
----
-
-
+# Becoming a contributor
 
 ## Join to become a contributor
 

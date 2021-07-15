@@ -1,9 +1,4 @@
----
-title: "GitHub workflow for Knative documentation"
-linkTitle: "Using GitHub"
-weight: 10
-type: "docs"
----
+# GitHub workflow for Knative documentation
 
 Learn how to use GitHub and contribute to the `knative/docs` repo.
 
@@ -202,3 +197,18 @@ the known commands:
 
 - See the [Branches](./structure/#branches) section for details about how
   to use the `/cherrypick` command.
+
+### Common GitHub PRs FAQs
+
+* The CLA check fails even though you have signed the CLA. This may occur if you accept and commit
+suggestions in a pull request from another person's account, because the email address of that
+account doesn't match the address on record for the CLA.
+The commit will show up as co-authored, which can cause issues if your public email address has not
+signed the CLA.
+
+* One or more tests are failing. If you do not see a specific error related to a change you made,
+and instead the errors are related to timeouts, try re-running the test at a later time.
+There are running tasks that could result in timeouts or rate limiting if your test runs at the same
+time.
+
+* Other Issues/Unsure -- reach out in the #docs Slack channel and someone will be happy to help out.

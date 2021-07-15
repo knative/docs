@@ -1,9 +1,4 @@
----
-title: "Code samples"
-linkTitle: ""
-weight: 100
-type: "docs"
----
+# Code samples
 
 There are currently two general types of content that focus on code samples,
 either internal contributor content, or external-facing user content.

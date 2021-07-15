@@ -1,9 +1,4 @@
----
-title: "Content structure"
-linkTitle: ""
-weight: 20
-type: "docs"
----
+# Content structure
 
 **TODO: link to intended documentation layout.** A general warning about
 [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law): documents will

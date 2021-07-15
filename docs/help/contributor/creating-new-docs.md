@@ -1,20 +1,13 @@
----
-title: "Adding new documentation"
-linkTitle: "New docs"
-weight: 20
-type: "docs"
-showlandingtoc: "false"
----
+# Creating new documentation
 
 To contribute new documentation, follow these steps:
 
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
 1. You can use a template to get started:
-   * [New docs file](./docs-page.md)
-   * [New `_index.md` file](./index-page.md)
+   [insert links to new templates]
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
-1. Write your new content. See the [How-to guides](/help/contributor/how-to/)
+1. Write your new content. See [insert link to style guide]
    to help you with this process. Feel free to reach out to the
    [Docs Working Group](/help/contributor/gettingstarted.md#get-help-from-the-community)
    with any questions.
@@ -31,7 +24,7 @@ structure, or the necessary supporting information. The following examples show
 this principle in action:
 
 - The reader needs to perform a specific task: Tell them how to recognize when
-  the task is necessary and provide the task itself as a list of numbered steps,
+  the task is necessary and provide the task itself as a list of numbered steps;
   don’t simply describe the task in general terms.
 
 - The reader must understand a concept before they can perform a task: Before
@@ -58,8 +51,8 @@ giving readers all the information you have, because you are unsure about
 what information they need.
 
 If you need help identifying the audience for you content, we are happy to help
-and answer all your questions during the [Docs Working Group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
-biweekly meetings.
+and answer all your questions during the [DUX](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
+weekly meetings.
 
 ## Content types
 
@@ -77,7 +70,7 @@ their intended audiences, and the goals each type strives to achieve:
         </tr>
     </thead>
     <tr>
-      <td>Concepts</td>
+      <td>Concept</td>
       <td>Explain some significant aspect of Knative. For example, a concept page
       describes the configuration model of a feature and explains its functionality.
       Concept pages don't include sequences of steps. Instead, provide links to
@@ -86,7 +79,7 @@ their intended audiences, and the goals each type strives to achieve:
       knowledge of the project.</td>
     </tr>
     <tr>
-      <td>Reference pages</td>
+      <td>Reference</td>
       <td>Provide exhaustive and detailed technical information. Common examples
       include API parameters, command-line options, configuration settings, and
       advanced procedures. Reference content is generated from the Knative code
@@ -96,7 +89,7 @@ their intended audiences, and the goals each type strives to achieve:
       needs specific bits of information to complete advanced tasks.</td>
     </tr>
     <tr>
-      <td>Examples</td>
+      <td>Example</td>
       <td>Describe a working and stand-alone example that highlights a set of
       features, an integration of Knative with other projects, or an end-to-end
       solution for a use case. Examples must use an existing Knative setup as a
@@ -107,23 +100,23 @@ their intended audiences, and the goals each type strives to achieve:
       to produce their own solutions.</td>
     </tr>
     <tr>
-      <td>Tasks</td>
-      <td>Shows how to achieve a single goal using Knative features. Tasks contain procedures written
-      as a sequence of steps. Tasks provide minimal
+      <td>Procedure</td>
+      <td>Shows how to achieve a single goal using Knative features. Procedures are written
+      as a sequence of steps. Procedures provide minimal
       explanation of the features, but include links to the concepts that
-      provide the related background and knowledge. Tasks must include automated
+      provide the related background and knowledge. Procedures must include automated
       tests since they are tested and maintained for technical accuracy.</td>
       <td>Readers that want to use Knative features.</td>
     </tr>
     <tr>
-      <td>Setup pages</td>
+      <td>Setup</td>
       <td>Focus on the installation steps needed to complete an Knative
       deployment. Setup pages must include automated tests since they are tested and maintained for technical accuracy.
       </td>
       <td>New and existing Knative users that want to complete a deployment.</td>
     </tr>
     <tr>
-      <td>Blog posts</td>
+      <td>Blog</td>
       <td>
         Focus on Knative or products and technologies related to it. Blog posts fall in one of the following three categories:
         <ul>
@@ -136,7 +129,7 @@ their intended audiences, and the goals each type strives to achieve:
       about it in an anecdotal, experiential, and more informal way.</td>
     </tr>
     <tr>
-      <td>News entries</td>
+      <td>News</td>
       <td>
         Focus on timely information about Knative and related events. News entries typically announce new releases or upcoming events.
       </td>
@@ -144,7 +137,7 @@ their intended audiences, and the goals each type strives to achieve:
       the Knative community.</td>
     </tr>
     <tr>
-      <td>FAQ entries</td>
+      <td>FAQ</td>
       <td>
         Provide quick answers to common questions. Answers don't introduce any
         concepts. Instead, they provide practical advice or insights. Answers
@@ -154,7 +147,7 @@ their intended audiences, and the goals each type strives to achieve:
       resources to learn more.</td>
     </tr>
     <tr>
-      <td>Operation guides</td>
+      <td>Operation guide</td>
       <td>
         Focus on practical solutions that address specific problems encountered while running Knative in a real-world setting.
       </td>
@@ -171,7 +164,7 @@ search engines to find and use sentence style capitalization.
 
 #### New files
 
-The filename of your new content should reflect that the title.
+The filename of your new content should reflect the title.
 
 #### New files and folders
 
@@ -183,9 +176,7 @@ a new folder if you are adding multiple topics/files, or if you are grouping
 related content. The names for each file do not need to repeat the folder name
 since that context is already established.
 
-For more guidance, see the
-[Headings and titles](https://developers.google.com/style/headings) section in
-the style guide.
+For more guidance, see [insert link to relevant section in Style Guide].
 
 
 ## Submit your contribution to GitHub
