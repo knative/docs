@@ -6,7 +6,7 @@ To contribute new documentation, follow these steps:
 1. Choose the [type of content](#content-types) you wish to contribute.
 <!-- Add "Choose a template" step with links to all the templates. -->
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
-1. Write your new content. See the [style guide](./style-guide/readme.md)
+1. Write your new content. See the [style guide](../style-guide/readme.md)
    to help you with this process. Feel free to reach out to the
    [Docs Working Group](/becoming-a-contributor.md#get-help-from-the-community)
    with any questions.
