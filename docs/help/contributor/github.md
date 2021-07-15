@@ -2,15 +2,8 @@
 
 Learn how to use GitHub and contribute to the `knative/docs` repo.
 
-At a high-level, you must setup and know the following to get started:
 
-- [Set up your local machine](#clone)
-- [Open Issues](#issues)
-- [Create Pull Requests](#prs)
-- [Manage PRs and Issues with Prow](#prow)
-
-
-## Set up your local machine{#clone}
+## Set up your local machine
 
 To check out your fork of the `knative/docs` repository:
 
@@ -37,7 +30,7 @@ You are now able to open PRs, start reviews, and contribute fixes the
 [syncing your fork](https://help.github.com/articles/syncing-a-fork/).
 
 
-## Reporting documentation issues{#issues}
+## Report documentation issues
 
 <!-- This could use a pass to reduce the overhead for filing new issues,
 and to consolidate items more easily during issue triage. -->
@@ -72,7 +65,7 @@ the issue in the
 [`knative/website` repo](https://github.com/knative/website/issues).
 
 
-## Fixing documentation issues (Opening PRs){#prs}
+## Open PRs to fix documentation issues
 
 The Knative documentation follows the standard
 [GitHub collaboration flow](https://guides.github.com/introduction/flow/)
@@ -166,7 +159,7 @@ If you want to notify and include other stakeholders in your PR review, use the
 [See the Knative community guidelines about reviewing PRs](https://github.com/knative/community/blob/main/reviewing.md)
 
 
-## Using Prow to manage PRs and Issues{#prow}
+## Using Prow to manage PRs and Issues
 
 Knative uses several sets of tools to manage pull requests (PR)s and issues in a
 more fine-grained way than GitHub permissions allow. In particular, you'll
