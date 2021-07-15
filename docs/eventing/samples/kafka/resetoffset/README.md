@@ -1,91 +1,83 @@
----
-title: "Apache Kafka ResetOffset Example"
-linkTitle: "ResetOffset Example"
-weight: 20
-type: "docs"
----
+# ResetOffset Example
 
-Kafka backed Channels are potentially different from other implementations in
-that they provide temporal persistence of events. This capability allows for
-certain advanced use cases to be supported, including the ability to "replay"
-prior events via repositioning the current location in the event-stream.  This
-capability can be extremely useful when attempting to recover from unexpected
-Subscriber downtime.
+Kafka-backed Channels differ from other Channel implementations because they provide temporal persistence of events.
 
-The
-[ResetOffset CRD](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset)
-exposes the ability to manipulate the location of the ConsumerGroup Offsets in
-the event stream of a given Knative Subscription. Without the ResetOffset CRD
-you would be responsible for manually stopping ConsumerGroups and manipulating
-Offsets.
+Event persistence enables certain advanced use cases to be supported, such as the ability to replay prior events by repositioning their current location in the event stream. This feature is useful when attempting to recover from unexpected Subscriber downtime.
 
-!!! note
-    Repositioning the ConsumerGroup Offsets will impact the event ordering and
-    is intended for failure recovery scenarios. This capability needs to be used
-    with caution only after reviewing the CRD documentation linked above.
+The [ResetOffset custom resource definition (CRD)](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset) exposes the ability to manipulate the location of the ConsumerGroup Offsets in the event stream of a given Knative Subscription. Without the ResetOffset CRD, you must manually stop ConsumerGroups and manipulating Offsets.
 
 !!! note
     ResetOffsets are currently only supported by the Distributed KafkaChannel
-    implementation. It is expected that the Consolidated KafkaChannel
-    implementation will support them in the near future.
+    implementation.
+
+!!! warning
+    Repositioning the ConsumerGroup Offsets will impact the event ordering and
+    is intended for failure recovery scenarios. This capability needs to be used
+    with caution only after reviewing the [CRD documentation](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset).
 
 ## Prerequisites
 
-- A Kubernetes cluster with a Knative
-  [Kafka Channel](https://knative.dev/docs/eventing/channels/channels-crds/)
-  installed.
-- A valid KafkaChannel and Subscription exist.
+- A Kubernetes cluster with the [Kafka Channel implementation](https://knative.dev/docs/eventing/channels/channels-crds/) installed.
+- A valid KafkaChannel resource and Subscription exist.
 
-## Examples
+!!! note
+    The ResetOffset CRD is a single-use operation, and should be
+    deleted from the cluster once it has been executed.
+    <!--TODO: Explain why?-->
 
-The following examples assume a Kubernetes Namespace called `my-namespace`
-containing a KafkaChannel Subscription named `my-subscription` and should be
-updated according to your use case.
+## Repositioning offsets to the oldest available event
 
-### Repositioning the Offsets to the oldest available event
-
-The following ResetOffset instance will move the offsets back to the oldest
-available event in the Kafka Topic retention window.
+The following ResetOffset instance moves the offsets back to the oldest
+available event in the Kafka Topic retention window:
 
 ```yaml
 apiVersion: kafka.eventing.knative.dev/v1alpha1
 kind: ResetOffset
 metadata:
-  name: my-resetoffset
-  namespace: my-namespace
+  name: <resetoffset-name>
+  namespace: <namespace>
 spec:
   offset:
     time: earliest
   ref:
     apiVersion: messaging.knative.dev/v1
     kind: Subscription
-    namespace: my-namespace
-    name: my-subscription
+    namespace: <subcription-namespace>
+    name: <subscription-name>
 ```
 
-### Repositioning the Offsets to a specific point in the event stream
+Where:
 
-The following ResetOffset instance will move the offsets back to the specified
-point in the Kafka Topic retention window. You will need to set an appropriate
-[RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp relative to
-your use case.
+- `<resetoffset-name>` is the name of the ResetOffset CRD.
+- `<namespace>` is the namespace where you want to create the ResetOffset CRD.
+- `<subcription-namespace>` is the namespace where your Subscription exists.
+- `<subscription-name>` is the name of the Subscription.
+
+## Repositioning offsets to a specific point in the event stream
+
+The following ResetOffset instance moves the offsets back to the specified
+point in the Kafka Topic retention window.
 
 ```yaml
 apiVersion: kafka.eventing.knative.dev/v1alpha1
 kind: ResetOffset
 metadata:
-  name: my-resetoffset
-  namespace: my-namespace
+  name: <resetoffset-name>
+  namespace: <namespace>
 spec:
   offset:
-    time: "2021-06-17T17:30:00Z"
+    time: <offset-time>
   ref:
     apiVersion: messaging.knative.dev/v1
     kind: Subscription
-    namespace: my-namespace
-    name: my-subscription
+    namespace: <subcription-namespace>
+    name: <subscription-name>
 ```
 
-!!! note
-    The ResetOffset CRD is a single use operation or "command", and should be
-    deleted from the cluster once it has completed execution.
+Where:
+
+- `<resetoffset-name>` is the name of the ResetOffset CRD.
+- `<offset-time>` is the specified offset time. You will need to set an [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp relative to your use case, for example `"2021-06-17T17:30:00Z"`.
+- `<namespace>` is the namespace where you want to create the ResetOffset CRD.
+- `<subcription-namespace>` is the namespace where your Subscription exists.
+- `<subscription-name>` is the name of the Subscription.
