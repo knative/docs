@@ -1,14 +1,6 @@
----
-title: "Creating blog posts"
-linkTitle: "New blog post"
-weight: 30
-type: "docs"
-showlandingtoc: "false"
----
-
 # Creating blog posts
 
-The Knative blog is owned by the [Documentation working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation) and run by the [Editorial Team](#leadership).
+The Knative blog is owned by the [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience).
 
 This section covers documentation, processes, and roles for the [Knative blog](https://knative.dev/blog/).
 

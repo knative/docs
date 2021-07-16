@@ -8,7 +8,7 @@ To contribute new documentation, follow these steps:
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
 1. Write your new content. See the style guide to help you with this process.
    Feel free to reach out to the
-   [Docs Working Group](/becoming-a-contributor.md#get-help-from-the-community) with any questions.
+   [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience) with any questions.
 1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
    to kick off the review process. For details, see our
    [Using GitHub help](/github.md#prs).
@@ -22,7 +22,8 @@ structure, or the necessary supporting information. The following examples show
 this principle in action:
 
 - The reader needs to perform a specific task. Tell them how to recognize when
-  the task is necessary, and provide the task itself as a list of numbered steps. Don’t simply describe the task in general terms.
+  the task is necessary, and provide the task itself as a list of numbered steps.
+  Don’t simply describe the task in general terms.
 
 - The reader must understand a concept before they can perform a task: Before
   the task, tell them about the prerequisite information and provide a link to
@@ -48,7 +49,7 @@ giving readers all the information you have, because you are unsure about
 what information they need.
 
 If you need help identifying the audience for you content, we are happy to help
-and answer all your questions during the [DUX](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
+and answer all your questions during the [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience)
 weekly meetings.
 
 ## Content types
