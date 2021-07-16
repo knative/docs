@@ -23,7 +23,6 @@ The [ResetOffset custom resource definition (CRD)](https://github.com/knative-sa
 !!! note
     The ResetOffset CRD is a single-use operation, and should be
     deleted from the cluster once it has been executed.
-    <!--TODO: Explain why?-->
 
 ## Repositioning offsets to the oldest available event
 
