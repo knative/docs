@@ -22,8 +22,7 @@ structure, or the necessary supporting information. The following examples show
 this principle in action:
 
 - The reader needs to perform a specific task. Tell them how to recognize when
-  the task is necessary and provide the task itself as a list of numbered steps;
-  don’t simply describe the task in general terms.
+  the task is necessary, and provide the task itself as a list of numbered steps. Don’t simply describe the task in general terms.
 
 - The reader must understand a concept before they can perform a task: Before
   the task, tell them about the prerequisite information and provide a link to
