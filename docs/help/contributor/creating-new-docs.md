@@ -21,7 +21,7 @@ determine the appropriate scope and depth of information to provide, its ideal
 structure, or the necessary supporting information. The following examples show
 this principle in action:
 
-- The reader needs to perform a specific task: Tell them how to recognize when
+- The reader needs to perform a specific task. Tell them how to recognize when
   the task is necessary and provide the task itself as a list of numbered steps;
   don’t simply describe the task in general terms.
 
