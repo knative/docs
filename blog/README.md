@@ -1,21 +1,4 @@
-=======
----
-_build:
-  render: never
-  list: never
----
+# README
 
 All information about contributing to the Knative documentation has been moved
-into a single location:
-
-#### [Go to the How-to guides for Knative docs contributors](https://knative.dev/help/)
-
-**Quick links**:
-   * [Docs help](https://knative.dev/help/contributor/)
-      * New content templates:
-         * [Concept](./docs/contributor/templates/template-concept.md)
-         * [Procedure](./docs/contributor/templates/template-procedure.md)
-         * [Troubleshooting](./docs/contributor/templates/template-troubleshooting.md)
-         * [Blog](./docs/contributor/templates/template-blog-entry.md)
-   * [Website help](https://knative.dev/help/contributor/publishing)
-   * [Maintainer help](https://knative.dev/help/maintainer/)
+into a single location: [Knative contributor's guide](../docs/help/contributor/readme.md)
