@@ -4,17 +4,9 @@ To contribute new documentation, follow these steps:
 
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
-1. Use one of the new content templates:
-    - [Concept](../../../template-concept.md) -- Conceptual topics explain how things work or what things mean.
-    They provide helpful context to readers. They do not include procedures.
-    - [Procedure](../../../template-procedure.md) -- Procedural (how-to) topics include detailed steps to
-    perform a task as well as some context about the task.
-    - [Troubleshooting](../../../template-troubleshooting.md) -- Troubleshooting topics list common errors and
-    solutions.
-    - [Blog](../../../template-blog-entry.md) -- Instructions and a template that you can use to help you post
-    to the Knative blog.
+<!-- Add "Choose a template" step with links to all the templates. -->
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
-1. Write your new content. See the [style guide](./style-guide/readme.md) to help you with this process.
+1. Write your new content. See the style guide to help you with this process.
    Feel free to reach out to the
    [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience) with any questions.
 1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
@@ -128,7 +120,7 @@ their intended audiences, and the goals each type strives to achieve:
         <ul>
         <li>Posts detailing the author’s experience using and configuring Knative, especially those that articulate a novel experience or perspective.</li>
         <li>Posts highlighting Knative features.</li>
-        <li>Posts detailing how to accomplish a task or fulfill a specific use case using Knative. Unlike Procedures and Examples, the technical accuracy of blog posts is not maintained and tested after publication.</li>
+        <li>Posts detailing how to accomplish a task or fulfill a specific use case using Knative. Unlike Tasks and Examples, the technical accuracy of blog posts is not maintained and tested after publication.</li>
         </ul>
       </td>
       <td>Readers with a basic understanding of the project who want to learn
