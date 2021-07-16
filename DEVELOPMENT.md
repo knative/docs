@@ -14,9 +14,9 @@ into a single location:
 **Quick links**:
    * [Docs help](https://knative.dev/help/contributor/)
       * New content templates:
-        * [Concept](template-concept.md)
-        * [Procedure](template-procedure.md)
-        * [Troubleshooting](template-troubleshooting.md)
-        * [Blog](template-blog-entry.md)
+         * [Concept](./docs/contributor/templates/template-concept.md)
+         * [Procedure](./docs/contributor/templates/template-procedure.md)
+         * [Troubleshooting](./docs/contributor/templates/template-troubleshooting.md)
+         * [Blog](./docs/contributor/templates/template-blog-entry.md)
    * [Website help](https://knative.dev/help/contributor/publishing)
    * [Maintainer help](https://knative.dev/help/maintainer/)

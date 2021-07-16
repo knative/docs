@@ -4,14 +4,22 @@ To contribute new documentation, follow these steps:
 
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
-<!-- Add "Choose a template" step with links to all the templates. -->
+1. Use one of the new content templates:
+    - [Concept](./docs/contributor/templates/template-concept.md) -- Conceptual topics explain how
+    things work or what things mean. They provide helpful context to readers. They do not include
+    procedures.
+    - [Procedure](./docs/contributor/templates/template-procedure.md) -- Procedural (how-to) topics
+    include detailed steps to perform a task as well as some context about the task.
+    - [Troubleshooting](./docs/contributor/templates/template-troubleshooting.md) -- Troubleshooting
+    topics list common errors and solutions.
+    - [Blog](./docs/contributor/templates/template-blog-entry.md) -- Instructions and a template
+    that you can use to help you post to the Knative blog.
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
-1. Write your new content. See the style guide to help you with this process.
-   Feel free to reach out to the
+1. Write your new content. See the [style guide](./style-guide/README.md) to help you with this
+   process. Feel free to reach out to the
    [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience) with any questions.
 1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
-   to kick off the review process. For details, see our
-   [Using GitHub help](/github.md#prs).
+   to kick off the review process. For details, see our [Using GitHub help](/github.md#prs).
 
 ## Identify the audience and intended use
 
