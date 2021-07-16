@@ -17,7 +17,7 @@ nav:
         - What's Next?: getting-started/next-steps.md
     # Administration guide
     - Administration guide:
-        - Administration guide: admin/README.md
+        - Overview: admin/README.md
         - Installing Knative:
           - Overview: admin/install/README.md
           # Serving Installation
