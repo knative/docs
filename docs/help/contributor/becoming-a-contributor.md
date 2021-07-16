@@ -1,11 +1,4 @@
----
-title: "Joining the project and getting started"
-linkTitle: "Join"
-weight: 10
-type: "docs"
----
-
-
+# Becoming a contributor
 
 ## Join to become a contributor
 
@@ -57,9 +50,6 @@ Knative documentation:
 
 - Try out Knative and
   [send us feedback](https://github.com/knative/docs/issues/new?template=docs-feature-request.md).
-  For example, run through the [install guides](../../docs/install/) and then try
-  [Getting Started with Knative Serving](../../docs/serving/getting-started-knative-app.md)
-  or [Getting Started With Eventing](../../docs/eventing/getting-started.md).
 
   Keep a
   [friction log](https://devrel.net/developer-experience/an-introduction-to-friction-logging)
@@ -108,10 +98,3 @@ also ask a few clarifying questions, or add details such as diagrams or notes if
 needed. It's not necessarily expected that tech writers will actually execute
 the steps of a tutorial — it's expected that the SME is responsible for a
 working tutorial or how-to.
-
-## What's next
-
-- [Learn how to use GitHub and clone the `knative/docs` repo](./how-to/github.md)
-- [Read the "How to" guides](./how-to/)
-- [Learn how to post to the blog](./new-blog/)
-- [Learn how the website works](./publishing.md)

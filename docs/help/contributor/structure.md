@@ -1,9 +1,4 @@
----
-title: "Content structure"
-linkTitle: ""
-weight: 20
-type: "docs"
----
+# Content structure
 
 **TODO: link to intended documentation layout.** A general warning about
 [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law): documents will
@@ -17,7 +12,7 @@ blog post, documentation within a code repo, or a vendor site may be the right
 place. Be generous with offering to link to such locations; documents in the
 main documentation come with an ongoing cost of keeping up to date.
 
-[Learn about documenting code samples](./codesamples.md)
+[Learn about documenting code samples](/code-samples.md)
 
 
 ## Branches
