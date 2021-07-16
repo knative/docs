@@ -1,4 +1,4 @@
-# Code samples
+# Creating code samples
 
 There are currently two general types of content that focus on code samples,
 either internal contributor content, or external-facing user content.

@@ -15,7 +15,7 @@ To contribute new documentation, follow these steps:
     - [Blog](templates/template-blog-entry.md) -- Instructions and a template
     that you can use to help you post to the Knative blog.
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
-1. Write your new content. See the [style guide](style-guide/README.md) to help you with this
+1. Write your new content. See the [style guide](/README.md#style) to help you with this
    process. Feel free to reach out to the
    [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience) with any questions.
 1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
