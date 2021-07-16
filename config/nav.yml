@@ -2,9 +2,8 @@ INHERIT: redirects.yml
 
 nav:
     - Home: index.md
-    - Getting Started:
-        - Before you begin: getting-started/README.md
-        - Knative Quickstart: getting-started/install-knative-quickstart.md
+    - Getting started:
+        - Knative Quickstart: getting-started/README.md
         - Using Knative Serving:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
