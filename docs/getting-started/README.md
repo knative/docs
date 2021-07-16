@@ -14,7 +14,7 @@ You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_bla
 The [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank}, allows you to run commands against Kubernetes clusters. You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
 
 
-## Install the Knative "quickstart" environment
+## Install the Knative "Quickstart" environment
 
 You can get started with a local deployment of Knative by using _Knative on Kind_ (`konk`):
 
