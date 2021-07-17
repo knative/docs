@@ -1,16 +1,16 @@
 # Apache Kafka Channel Example
 
-You can install and configure the Apache Kafka CRD (`KafkaChannel`) as the
-default channel configuration in Knative Eventing.
+You can install and configure the Apache Kafka Channel as the
+default Channel configuration for Knative Eventing.
 
 ## Prerequisites
 
 - A Kubernetes cluster with
   [Knative Kafka Channel installed](../../../../admin/install/).
 
-## Creating a `KafkaChannel` channel CRD
+## Creating a Kafka Channel
 
-1. Create a KafkaChannel object that contains the following YAML:
+- Create a Kafka Channel that contains the following YAML:
 
    ```yaml
    apiVersion: messaging.knative.dev/v1beta1
@@ -22,6 +22,7 @@ default channel configuration in Knative Eventing.
      replicationFactor: 1
    ```
 
+<<<<<<< HEAD
 1. Apply the YAML file by running the command:
 
     ```bash
@@ -31,10 +32,12 @@ default channel configuration in Knative Eventing.
 
 
 ## Specifying the default channel configuration
+=======
+## Specifying Kafka as the default Channel implementation
+<!--TODO: Move to admin guide-->
+>>>>>>> ec43bd6f... additional cleanup
 
-1. To configure the usage of the `KafkaChannel` CRD as the
-   [default channel configuration](../../../channels/channel-types-defaults),
-   edit the `default-ch-webhook` ConfigMap as follows:
+1. To configure Kafka Channel as the [default channel configuration](../../../channels/channel-types-defaults), modify the `default-ch-webhook` ConfigMap so that it contains the following YAML:
 
    ```yaml
    apiVersion: v1
@@ -53,6 +56,7 @@ default channel configuration in Knative Eventing.
            replicationFactor: 1
    ```
 
+<<<<<<< HEAD
 1. Apply the YAML file by running the command:
 
     ```bash
@@ -63,6 +67,9 @@ default channel configuration in Knative Eventing.
 ## Creating an Apache Kafka channel
 
 1. After `KafkaChannel` is set as the default Channel type, you can create a Kafka Channel by creating a generic Channel object that contains the following YAML:
+=======
+1. If Kafka is configured as the default Channel implementation for your cluster, creating a Channel with the following default YAML creates a Kafka Channel:
+>>>>>>> ec43bd6f... additional cleanup
 
    ```yaml
    apiVersion: messaging.knative.dev/v1
@@ -71,6 +78,7 @@ default channel configuration in Knative Eventing.
      name: testchannel-one
    ```
 
+<<<<<<< HEAD
 1. Apply the YAML file by running the command:
 
     ```bash
@@ -80,29 +88,28 @@ default channel configuration in Knative Eventing.
 
 1. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
    using the command:
+=======
+1. Verify that the Channel was created properly by checking that your Kafka cluster has a `testchannel-one` Topic. If you are using Strimzi, you can run the command:
+>>>>>>> ec43bd6f... additional cleanup
 
-   ```bash
-   kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
-   ```
+  ```bash
+  kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
+  ```
 
-   The output looks similar to the following:
+  The output looks similar to the following:
 
-   ```
-   ...
-   __consumer_offsets
-   knative-messaging-kafka.default.my-kafka-channel
-   knative-messaging-kafka.default.testchannel-one
-   ...
-   ```
+  ```
+  ...
+  __consumer_offsets
+  knative-messaging-kafka.default.my-kafka-channel
+  knative-messaging-kafka.default.testchannel-one
+  ...
+  ```
 
-The Apache Kafka topic that is created by the channel implementation contains
-the name of the namespace, `default` in this example, followed by the actual
-name of the channel.  In the consolidated channel implementation, it is also
-prefixed with `knative-messaging-kafka` to indicate that it is an Apache Kafka
-channel from Knative.
+  The Kafka Topic that is created by the Channel contains the name of the namespace, `default` in this example, followed by the name of the Channel. In the consolidated Channel implementation, it is also prefixed with `knative-messaging-kafka` to indicate that it is a Kafka Channel from Knative.
 
 !!! note
-    The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
+    The topic of a Kafka Channel is an implementation detail and records from it should not be consumed from different applications.
 
 ## Configuring the Knative Broker to use Kafka Channels
 
