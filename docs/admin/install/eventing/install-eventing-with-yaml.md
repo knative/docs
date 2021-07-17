@@ -50,18 +50,8 @@ Follow the procedure for the Channel of your choice:
 
 === "Apache Kafka Channel"
 
-    1. [Install Apache Kafka for Kubernetes](../../../eventing/samples/kafka/README.md).
-
-    1. Install the Apache Kafka Channel by running the command:
-
-        ```bash
-        curl -L "{{ artifact(org="knative-sandbox",repo="eventing-kafka",file="channel-consolidated.yaml")}}" \
-          | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
-          | kubectl apply -f -
-        ```
-
-        !!! tip
-            To learn more, try the [Apache Kafka Channel sample](../../../eventing/samples/kafka/channel/README.md).
+    1. Install [Strimzi](https://strimzi.io/quickstarts/).
+    1. Install the Apache Kafka Channel for Knative from the [`knative-sandbox` repository](https://github.com/knative-sandbox/eventing-kafka).
 
 === "Google Cloud Pub/Sub Channel"
 

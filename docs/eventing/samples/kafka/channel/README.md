@@ -1,10 +1,3 @@
----
-title: "Apache Kafka Channel Example"
-linkTitle: "Channel Example"
-weight: 20
-type: "docs"
----
-
 # Apache Kafka Channel Example
 
 You can install and configure the Apache Kafka CRD (`KafkaChannel`) as the
@@ -12,14 +5,12 @@ default channel configuration in Knative Eventing.
 
 ## Prerequisites
 
-- Ensure that you meet the
-  [prerequisites listed in the Apache Kafka overview](../).
 - A Kubernetes cluster with
   [Knative Kafka Channel installed](../../../../admin/install/).
 
 ## Creating a `KafkaChannel` channel CRD
 
-1. Create a new object by configuring the YAML file as follows:
+1. Create a KafkaChannel object that contains the following YAML:
 
    ```yaml
    apiVersion: messaging.knative.dev/v1beta1
@@ -69,11 +60,9 @@ default channel configuration in Knative Eventing.
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-## Creating an Apache Kafka channel using the default channel configuration
+## Creating an Apache Kafka channel
 
-1. Now that `KafkaChannel` is set as the default channel configuration,
-   use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
-   channel, using the generic `Channel` below:
+1. After `KafkaChannel` is set as the default Channel type, you can create a Kafka Channel by creating a generic Channel object that contains the following YAML:
 
    ```yaml
    apiVersion: messaging.knative.dev/v1
@@ -81,6 +70,7 @@ default channel configuration in Knative Eventing.
    metadata:
      name: testchannel-one
    ```
+
 1. Apply the YAML file by running the command:
 
     ```bash
@@ -88,12 +78,15 @@ default channel configuration in Knative Eventing.
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-2. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
+1. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
    using the command:
+
    ```bash
    kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
    ```
-   The result is:
+
+   The output looks similar to the following:
+
    ```
    ...
    __consumer_offsets
@@ -111,12 +104,12 @@ channel from Knative.
 !!! note
     The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
 
-## Configuring the Knative broker for Apache Kafka channels
+## Configuring the Knative Broker to use Kafka Channels
 
-1. To setup a broker that will use the new default Kafka channels,
-   create a new _default_ broker by copying the YAML below into a file:
+1. To setup a Broker that uses the Kafka Channels by default, you must
+   create a new _default_ Broker that contains the following YAML:
 
-   ```bash
+   ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Broker
    metadata:
@@ -130,49 +123,107 @@ channel from Knative.
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-This will give you two pods, such as:
-```
-default-broker-filter-64658fc79f-nf596                            1/1     Running     0          15m
-default-broker-ingress-ff79755b6-vj9jt                            1/1     Running     0          15
-```
-Inside the Apache Kafka cluster you should see two new topics, such as:
-```
-...
-knative-messaging-kafka.default.default-kn2-ingress
-knative-messaging-kafka.default.default-kn2-trigger
-...
-```
+## Creating a Service and Trigger that use the Apache Kafka Broker
 
-!!! note
-    The topic of a Kafka channel is an implementation detail and records from it should not be consumed from different applications.
+The following example uses a ApiServerSource to publish events to the Broker, and a Trigger that routes events to a Knative Service.
 
-## Creating a service and trigger to use the Apache Kafka broker
+1. Create a Knative Service:
 
-To use the Apache Kafka based broker, let's take a look at a simple demo. Use
-the`ApiServerSource` to publish events to the broker as well as the `Trigger`
-API, which then routes events to a Knative `Service`.
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: broker-kafka-display
+    spec:
+      template:
+        spec:
+          containers:
+          - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+    ```
 
-1. Install `ksvc`, using the command:
-   ```bash
-   kubectl apply -f 000-ksvc.yaml
-   ```
-2. Install a source that publishes to the default broker
-   ```bash
-   kubectl apply -f 020-k8s-events.yaml
-   ```
-3. Create a trigger that routes the events to the `ksvc`:
-   ```bash
-   kubectl apply -f 030-trigger.yaml
-   ```
+1. Create a ServiceAccount, ClusterRole, and ClusterRoleBinding for the ApiServerSource:
 
-## Verifying your Apache Kafka channel and broker
+    ```yaml
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: events-sa
+      namespace: default
 
-Now that your Eventing cluster is configured for Apache Kafka, you can verify
-your configuration with the following options.
+    ---
 
-### Receive events via Knative
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: event-watcher
+    rules:
+    - apiGroups:
+      - ""
+      resources:
+      - events
+      verbs:
+      - get
+      - list
+      - watch
 
-1. Observe the events in the log of the `ksvc` using the command:
+    ---
+
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: k8s-ra-event-watcher
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: event-watcher
+    subjects:
+    - kind: ServiceAccount
+      name: events-sa
+      namespace: default
+    ```
+
+1. Create an ApiServerSource that sends events to the default Broker:
+
+    ```yaml
+    apiVersion: sources.knative.dev/v1
+    kind: ApiServerSource
+    metadata:
+      name: testevents-kafka-03
+      namespace: default
+    spec:
+      serviceAccountName: events-sa
+      mode: Resource
+      resources:
+      - apiVersion: v1
+        kind: Event
+      sink:
+        ref:
+          apiVersion: eventing.knative.dev/v1
+          kind: Broker
+          name: default
+    ```
+
+1. Create a Trigger that filters events from the Broker to the Service:
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: testevents-trigger
+      namespace: default
+    spec:
+      broker: default
+      subscriber:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: broker-kafka-display
+    ```
+
+## Verifying your Apache Kafka Channel and Broker
+
+- Observe the events in the log of the Service, by running the command:
+
    ```bash
    kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
    ```
@@ -192,11 +243,14 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
 ### TLS authentication
 
 1. Edit your config-kafka ConfigMap:
+
    ```bash
    kubectl -n knative-eventing edit configmap config-kafka
    ```
-2. Set the TLS.Enable field to `true`, for example
-   ```
+
+2. Set the `TLS.Enable` field to `true`:
+
+   ```yaml
    ...
    data:
      sarama: |
@@ -206,10 +260,11 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
              Enable: true
    ...
    ```
+
 3. Optional. If using a custom CA certificate, place your certificate data
-   into the ConfigMap in the data.sarama.config.Net.TLS.Config.RootPEMs field,
-   for example:
-   ```
+   into the ConfigMap in the `data.sarama.config.Net.TLS.Config.RootPEMs` field:
+
+   ```yaml
    ...
    data:
      sarama: |
@@ -237,12 +292,15 @@ To use SASL authentication, you will need the following information:
 !!! note
     It is recommended to also enable TLS as described in the previous section.
 
-1. Edit your config-kafka ConfigMap:
+1. Edit the `config-kafka` ConfigMap:
+
    ```bash
    kubectl -n knative-eventing edit configmap config-kafka
    ```
-2. Set the SASL.Enable field to `true`, for example:
-   ```
+
+2. Set the `SASL.Enable` field to `true`:
+
+   ```yaml
    ...
    data:
      sarama: |
@@ -252,9 +310,11 @@ To use SASL authentication, you will need the following information:
              Enable: true
    ...
    ```
-3. Create a secret with the username, password, and SASL mechanism, for example:
+
+3. Create a secret with the username, password, and SASL mechanism:
+
    ```bash
-   kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
+   kubectl create secret -n <namespace> generic <kafka-auth-secret> \
        --from-literal=password="SecretPassword" \
        --from-literal=saslType="PLAIN" \
        --from-literal=username="my-sasl-user"
@@ -265,7 +325,8 @@ To use SASL authentication, you will need the following information:
 1. If you have created a secret for your desired authentication method by
    using the previous steps, reference the secret and the namespace of the
    secret in the `config-kafka` ConfigMap:
-   ```
+
+   ```yaml
    ...
    data:
      eventing-kafka: |
