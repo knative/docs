@@ -1,6 +1,7 @@
-# Formatting standard and conventions
+# Formatting standards and conventions
 
 ## Documenting Knative API Objects
+
 >  Use upper camel case for Knative API objects.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
@@ -10,6 +11,7 @@
 |ContainerSource | Container Source
 
 ## Using parentheses
+
 >Don’t use parentheses, unless it’s the first instance in a page to explain an acronym that isn’t immediately obvious.
 
 >Parenthetical statements especially should be avoided because if something is important enough to be in the sentence, it should be fully part of that sentence.
@@ -19,11 +21,10 @@
 |Install the Custom Resource Definition (CRD) | Check your CLI (you should see it there)
 |Knative Serving will create a Revision      | Knative will create a Revision (a stateless, snapshot in time of your code and configuration)
 
-
 ## Use sentence case for titles and headings
 
 > Use sentence case for all titles and headings. Only capitalize the first
-word of the heading, except for proper nouns or acronyms.
+word of the heading unless it is a proper noun or an acronym.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
@@ -49,3 +50,17 @@ between the number and the unit.
 |3`&nbsp`GB            | 3 GB
 |4`&nbsp`CPUs          | 4 CPUs
 |14%                   | 14`&nbsp`%
+
+## Use bold for user interface elements
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Click **Fork** | Click "Fork"
+|Select **Other**      | Select "Other"
+
+## Use the international standard for punctuation inside quotes
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Events are recorded with an associated "stage". | Events are recorded with an associated "stage."
+|The copy is called a "fork".      | The copy is called a "fork."
