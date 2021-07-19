@@ -23,8 +23,8 @@
 
 ## Use sentence case for titles and headings
 
-> Use sentence case for all titles and headings. Only capitalize the first
-word of the heading unless it is a proper noun or an acronym.
+> Use sentence case for all titles and headings. Only capitalize the first word of the heading,
+proper nouns, and acronyms.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
