@@ -168,6 +168,8 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
+You can also use other ingress implementations provdied by a third-party. See [Third-Party Ingress Implementations](./knative-third-party-ingress).
+
 ## Verify the installation
 
 !!! success
