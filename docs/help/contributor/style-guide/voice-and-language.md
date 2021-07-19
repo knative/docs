@@ -14,8 +14,8 @@
 |The YAML file specifies the replica count. | The replica count is specified in the YAML file.
 
 ## Use simple and direct language
-> Use simple and direct language. Avoid using unnecessary phrases, such as saying
-"please."
+> Use simple and direct language. Avoid using unnecessary words, such as
+"please".
 
 |:white_check_mark: Correct                          |:no_entry: Incorrect
 |----------------------------|----
@@ -23,11 +23,11 @@
 |See the configuration file. | Please see the configuration file.
 |View the Pods.              | With this next command, we'll view the Pods.
 
-## Address the reader as "you" (Avoid using "we")
+## Address the reader as "you", not "we"
 
 |:white_check_mark: Correct                                     |:no_entry: Incorrect
 |---------------------------------------|------
-|You can create a `Deployment` by ...     | We'll create a `Deployment` by ...
+|You can create a `Deployment` by ...     | We can create a `Deployment` by ...
 |In the preceding output, you can see...| In the preceding output, we can see ...
 |This page teaches you how to use pods.    | In this page, we are going to learn about pods.
 
@@ -58,3 +58,14 @@ identifies the information accordingly.
 |------------------------------------|------
 |In version 1.4, ...                 | In the current version, ...
 |The Federation feature provides ... | The new Federation feature provides ...
+
+## Avoid words that assume a specific level of understanding
+
+Avoid words such as "just", "simply", "easy", "easily", or "simple". These words do not add value.
+
+|:white_check_mark: Correct                    |:no_entry: Incorrect
+|----------------------|------
+|Include one command in ...      | Include just one command in ...
+|Run the container ... | Simply run the container ...
+|You can remove ...       | You can easily remove ...
+|These steps ...      | These simple steps ...
