@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 const express = require('express')
-const { CloudEvent, Emitter, HTTP } = require('cloudevents')
+const { CloudEvent, HTTP } = require('cloudevents')
 const PORT = process.env.PORT || 8080
 const target = process.env.K_SINK
 const app = express()

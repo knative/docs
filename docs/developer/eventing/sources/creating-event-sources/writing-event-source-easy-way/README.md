@@ -7,9 +7,9 @@ aliases:
   - /docs/eventing/samples/writing-event-source-easy-way
 ---
 
-# Writing an event source using Javascript
+# Writing an event source using JavaScript
 
-This tutorial provides instructions to build an event source in Javascript and implement it with a ContainerSource or SinkBinding.
+This tutorial provides instructions to build an event source in JavaScript and implement it with a ContainerSource or SinkBinding.
 
 - Using a [ContainerSource](../../containersource) is a simple way to turn any dispatcher container into a Knative event source.
 - Using [SinkBinding](../../sinkbinding) provides a framework for injecting environment variables into any Kubernetes resource that has a `spec.template` and is [PodSpecable](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#PodSpecable).
@@ -21,88 +21,101 @@ ContainerSource and SinkBinding both work by injecting environment variables to 
 Create the project and add the dependencies:
 
 ```bash
-npm init
-npm install cloudevents-sdk@2.0.1 --save
+npm init -y
+npm install cloudevents got --save
 ```
-
-**NOTE:** Due to this [bug](https://github.com/cloudevents/sdk-javascript/issues/191), you must use version 2.0.1 of the Javascript SDK or newer.
 
 ## Using ContainerSource
 
 A ContainerSource creates a container for your event source image and manages this container.
 
-The sink URL to post the events will be made available to the application through the `K_SINK` environment variable by the ContainerSource.
+The sink URL where events are posted will be made available to the application through the `K_SINK` environment variable by the ContainerSource.
 
 ### Example
 
-The following example event source emits an event to the sink every 1000 milliseconds:
+The following example event source emits an event to the sink every second:
 
 ```javascript
 // File - index.js
+const got = require('got');
+const { CloudEvent, Emitter, emitterFor } = require('cloudevents');
 
-const { CloudEvent, HTTPEmitter } = require("cloudevents-sdk");
+const K_SINK = process.env['K_SINK'];
+K_SINK || logExit('Error: K_SINK Environment variable is not defined');
+console.log(`Sink URL is ${K_SINK}`);
 
-let sinkUrl = process.env['K_SINK'];
-
-console.log("Sink URL is " + sinkUrl);
-
-let emitter = new HTTPEmitter({
-    url: sinkUrl
-});
+const source = 'urn:event:from:heartbeat/example';
+const type = 'heartbeat.example';
 
 let eventIndex = 0;
-setInterval(function () {
-    console.log("Emitting event #" + ++eventIndex);
+setInterval(() => {
+  console.log(`Emitting event # ${++eventIndex}`);
 
-    let myevent = new CloudEvent({
-        source: "urn:event:from:my-api/resource/123",
-        type: "your.event.source.type",
-        id: "your-event-id",
-        dataContentType: "application/json",
-        data: {"hello": "World " + eventIndex},
-    });
+  // Create a new CloudEvent each second
+  const event = new CloudEvent({ source, type, data: {'hello': `World # ${eventIndex}`} });
 
-    // Emit the event
-    emitter.send(myevent)
-        .then(response => {
-            // Treat the response
-            console.log("Event posted successfully");
-            console.log(response.data);
-        })
-        .catch(err => {
-            // Deal with errors
-            console.log("Error during event post");
-            console.error(err);
-        });
+  // Emits the 'cloudevent' Node.js event application-wide
+  event.emit();
 }, 1000);
+
+// Create a function that can post an event
+const emit = emitterFor(event => {
+  got.post(K_SINK, event)
+    .then(response => {
+      console.log('Event posted successfully');
+      console.log(response.data);
+    })
+    .catch(err => {
+      console.log('Error during event post');
+      console.error(err);
+    });
+  });
+
+// Send the CloudEvent any time a Node.js 'cloudevent' event is emitted
+Emitter.on('cloudevent', emit);
+
+registerGracefulExit();
+
+function registerGracefulExit() {
+  process.on('exit', logExit);
+  //catches ctrl+c event
+  process.on('SIGINT', logExit);
+  process.on('SIGTERM', logExit);
+  // catches 'kill pid' (for example: nodemon restart)
+  process.on('SIGUSR1', logExit);
+  process.on('SIGUSR2', logExit);
+}
+
+function logExit(message = 'Exiting...') {
+  // Handle graceful exit
+  console.log(message);
+  process.exit();
+}
 ```
 
 ```dockerfile
 # File - Dockerfile
 
-FROM node:10
+FROM node:16
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 8080
 CMD [ "node", "index.js" ]
-
 ```
 
-The example code uses _Binary_ mode for CloudEvents. To employ structured code, change `let binding = new v1.BinaryHTTPEmitter(config);` to `let binding = new v1.StructuredHTTPEmitter(config);`.
-
-Binary mode is used in most cases because:
-- It is faster in terms of serialization and deserialization.
-- It works better with CloudEvent-aware proxies, such as Knative Channels, and can simply check the header instead of parsing the payload.
-
 ### Procedure
+
+Before publishing the ContainerSource, we must build the application
+image, and push it to a container registry accessible by our cluster.
 
 1. Build and push the image:
 
     ```bash
-    docker build . -t path/to/image/registry/node-knative-heartbeat-source:v1
-    docker push path/to/image/registry/node-knative-heartbeat-source:v1
+    export REGISTRY=docker.io/myregistry
+    docker build . -t $REGISTRY/node-heartbeat-source:v1
+    docker push $REGISTRY/node-heartbeat-source:v1
     ```
 
 2. Create the event display service which logs any CloudEvents posted to it:
@@ -116,7 +129,7 @@ Binary mode is used in most cases because:
       template:
         spec:
           containers:
-            - image: docker.io/aliok/event_display-864884f202126ec3150c5fcef437d90c@sha256:93cb4dcda8fee80a1f68662ae6bf20301471b046ede628f3c3f94f39752fbe08
+            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
 
 3. Create the ContainerSource object:
@@ -125,12 +138,12 @@ Binary mode is used in most cases because:
     apiVersion: sources.knative.dev/v1
     kind: ContainerSource
     metadata:
-      name: test-heartbeats
+      name: heartbeat-source
     spec:
       template:
         spec:
           containers:
-            - image: path/to/image/registry/node-knative-heartbeat-source:v1
+            - image: docker.io/myregistry/node-heartbeat-source:v1
               name: heartbeats
       sink:
         ref:
@@ -148,9 +161,9 @@ Binary mode is used in most cases because:
     Validation: valid
     Context Attributes,
       specversion: 1.0
-      type: your.event.source.type
-      source: urn:event:from:your-api/resource/123
-      id: your-event-id
+      type: heartbeat.example
+      source: urn:event:from:heartbeat/example
+      id: 47e69d34-def7-449b-8382-3652495f9163
       datacontenttype: application/json
     Data,
       {
@@ -161,7 +174,7 @@ Binary mode is used in most cases because:
 5. Optional: If you are interested in seeing what is injected into the event source as a `K_SINK`, you can check the logs:
 
     ```bash
-    $ kubectl logs test-heartbeats-deployment-7575c888c7-85w5t
+    $ kubectl logs heartbeat-source-7575c888c7-85w5t
 
     Sink URL is http://event-display.default.svc.cluster.local
     Emitting event #1
@@ -187,7 +200,7 @@ SinkBinding does not create any containers. It injects the sink information to a
       template:
         spec:
           containers:
-            - image: docker.io/aliok/event_display-864884f202126ec3150c5fcef437d90c@sha256:93cb4dcda8fee80a1f68662ae6bf20301471b046ede628f3c3f94f39752fbe08
+            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
 
 2. Create a Kubernetes deployment that runs the event source:
@@ -211,7 +224,7 @@ SinkBinding does not create any containers. It injects the sink information to a
         spec:
           containers:
           - name: node-heartbeats
-            image: path/to/image/registry/node-knative-heartbeat-source:v1
+            image: docker.io/myregistry/node-heartbeat-source:v1
             ports:
             - containerPort: 8080
     ```
@@ -259,9 +272,9 @@ SinkBinding does not create any containers. It injects the sink information to a
     Validation: valid
     Context Attributes,
       specversion: 1.0
-      type: your.event.source.type
-      source: urn:event:from:your-api/resource/123
-      id: your-event-id
+      type: heartbeat.example
+      source: urn:event:from:heartbeat/example
+      id: 47e69d34-def7-449b-8382-3652495f9163
       datacontenttype: application/json
     Data,
       {
@@ -272,9 +285,9 @@ SinkBinding does not create any containers. It injects the sink information to a
     Validation: valid
     Context Attributes,
       specversion: 1.0
-      type: your.event.source.type
-      source: urn:event:from:your-api/resource/123
-      id: your-event-id
+      type: heartbeat.example
+      source: urn:event:from:heartbeat/example
+      id: 47e69d34-def7-449b-8382-3652495f9163
       datacontenttype: application/json
     Data,
       {
