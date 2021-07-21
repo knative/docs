@@ -57,54 +57,54 @@ Service, which dumps incoming messages into its log:
         To create a Knative service you must have Knative Serving installed on your cluster.
 
     === "kn"
-    - To create a sink, run the command:
+        - To create a sink, run the command:
 
-        ```bash
-        kn service create event-display --port 8080 --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-        ```
+            ```bash
+            kn service create event-display --port 8080 --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+            ```
 
     === "YAML"
-    1. Create a YAML file using the example below:
+        1. Create a YAML file using the example below:
 
-        ```yaml
-        apiVersion: apps/v1
-        kind: Deployment
-        metadata:
-          name: event-display
-        spec:
-          replicas: 1
-          selector:
-            matchLabels: &labels
-              app: event-display
-          template:
+            ```yaml
+            apiVersion: apps/v1
+            kind: Deployment
             metadata:
-              labels: *labels
+              name: event-display
             spec:
-              containers:
-                - name: event-display
-                  image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+              replicas: 1
+              selector:
+                matchLabels: &labels
+                  app: event-display
+              template:
+                metadata:
+                  labels: *labels
+                spec:
+                  containers:
+                    - name: event-display
+                      image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 
-        ---
+            ---
 
-        kind: Service
-        apiVersion: v1
-        metadata:
-          name: event-display
-        spec:
-          selector:
-            app: event-display
-          ports:
-          - protocol: TCP
-            port: 80
-            targetPort: 8080
-        ```
+            kind: Service
+            apiVersion: v1
+            metadata:
+              name: event-display
+            spec:
+              selector:
+                app: event-display
+              ports:
+              - protocol: TCP
+                port: 80
+                targetPort: 8080
+            ```
 
-    1. Apply the YAML file by running the command:
+        1. Apply the YAML file by running the command:
 
-        ```bash
-        kubectl apply --filename <filename>.yaml
-        ```
-        Where `<filename>` is the name of the file you created in the previous step.
+            ```bash
+            kubectl apply --filename <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
 
 1. Create a concrete ContainerSource with specific arguments and environment settings:
