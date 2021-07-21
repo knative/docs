@@ -32,7 +32,8 @@ The following example shows how you can configure a PingSource as an event sourc
 
     Creating a namespace for the PingSource example allows you to isolate the components created by this demo, so that it is easier for you to view changes and remove components when you are finished.
 
-1. To verify that the PingSource is working correctly, create an example sink in the `pingsource-example` namespace that dumps incoming messages to a log:
+1. To verify that the PingSource is working correctly, create an example sink in the
+`pingsource-example` namespace that dumps incoming messages to a log:
 
     ```yaml
     apiVersion: apps/v1
@@ -66,6 +67,13 @@ The following example shows how you can configure a PingSource as an event sourc
         port: 80
         targetPort: 8080
     ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 1. Create a PingSource that sends an event containing `{"message": "Hello world!"}` every minute:
 
@@ -107,7 +115,7 @@ The following example shows how you can configure a PingSource as an event sourc
               --data '{"message": "Hello world!"}' \
               --sink http://event-display.pingsource-example.svc.cluster.local
             ```
-            
+
 1. Optional: Create a PingSource that sends binary data.
 
     If you want to send binary data in an event, this cannot be directly serialized in YAML. However, you can use `dataBase64` in place of `data` in the PingSource spec to carry a data payload that is base64 encoded.
