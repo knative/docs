@@ -72,7 +72,7 @@ If concurrency reaches the hard limit, surplus requests will be buffered and mus
 
 ### Hard limit
 
-The hard limit is specified [per Revision](./autoscaler-types.md#global-versus-per-revision-settings) using the `containerConcurrency` field on the Revision spec. This setting is not an annotation.
+The hard limit is specified [per Revision](autoscaler-types.md#global-versus-per-revision-settings) using the `containerConcurrency` field on the Revision spec. This setting is not an annotation.
 
 There is no global setting for the hard limit in the autoscaling ConfigMap, because `containerConcurrency` has implications outside of autoscaling, such as on buffering and queuing of requests. However, a default value can be set for the Revision's `containerConcurrency` field in `config-defaults.yaml`.
 

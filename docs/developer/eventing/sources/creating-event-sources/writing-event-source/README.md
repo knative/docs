@@ -35,10 +35,10 @@ Optional:
 
 ## Steps
 
-1. [Separation of Concerns](./01-theory)
-2. [API Definition](./02-lifecycle-and-types)
-3. [Controller](./03-controller)
-4. [Reconciler](./04-reconciler)
-5. [Receive Adapter](./05-receive-adapter)
-6. [Example YAML](./06-yaml)
-7. [Moving the event source to the `knative-sandbox` organization](./07-knative-sandbox)
+1. [Separation of Concerns](01-theory)
+2. [API Definition](02-lifecycle-and-types)
+3. [Controller](03-controller)
+4. [Reconciler](04-reconciler)
+5. [Receive Adapter](05-receive-adapter)
+6. [Example YAML](06-yaml)
+7. [Moving the event source to the `knative-sandbox` organization](07-knative-sandbox)
