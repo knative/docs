@@ -31,7 +31,7 @@ the template below:
      name: default
      namespace: <namespace>
     ```
-    Where `<namespace>` is the your namespace.
+    Where `<namespace>` is your namespace.
 
 1. Apply the YAML file by running the command:
 
@@ -45,7 +45,7 @@ the template below:
     ```bash
     kubectl -n <namespace> get broker default
     ```
-    Where `<namespace>` is the your namespace.
+    Where `<namespace>` is your namespace.
 
     This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
