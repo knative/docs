@@ -137,7 +137,7 @@ by creating a YAML file using the template below:
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 

@@ -69,7 +69,7 @@ You can also apply an updated domain configuration:
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
