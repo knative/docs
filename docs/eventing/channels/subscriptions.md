@@ -62,38 +62,43 @@ For more information about Subscription objects, see
 
 
 === "YAML"
-    Create a Subscription object in a YAML file:
+    1. Create a YAML file for the Subscription object using the example below:
 
-    ```yaml
-    kubectl apply -f <<EOF
-    apiVersion: messaging.knative.dev/v1
-    kind: Subscription
-    metadata:
-      name: <subscription-name> # Name of the Subscription.
-      namespace: default
-    spec:
-      channel:
+        ```yaml
         apiVersion: messaging.knative.dev/v1
-        kind: Channel
-        name: <channel-name> # Configuration settings for the Channel that the Subscription connects to.
-      delivery:
-        deadLetterSink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: <service-name>
-            # Configuration settings for event delivery.
-            # This tells the Subscription what happens to events that cannot be delivered to the Subscriber.
-            # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
-            # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
-            # The deadLetterSink value must be a Destination.
-      subscriber:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: <service-name> # Configuration settings for the Subscriber. This is the event Sink that events are delivered to from the Channel.
-    EOF
-    ```
+        kind: Subscription
+        metadata:
+          name: <subscription-name> # Name of the Subscription.
+          namespace: default
+        spec:
+          channel:
+            apiVersion: messaging.knative.dev/v1
+            kind: Channel
+            name: <channel-name> # Configuration settings for the Channel that the Subscription connects to.
+          delivery:
+            deadLetterSink:
+              ref:
+                apiVersion: serving.knative.dev/v1
+                kind: Service
+                name: <service-name>
+                # Configuration settings for event delivery.
+                # This tells the Subscription what happens to events that cannot be delivered to the Subscriber.
+                # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
+                # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
+                # The deadLetterSink value must be a Destination.
+          subscriber:
+            ref:
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              name: <service-name> # Configuration settings for the Subscriber. This is the event Sink that events are delivered to from the Channel.
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 
 ## Listing Subscriptions

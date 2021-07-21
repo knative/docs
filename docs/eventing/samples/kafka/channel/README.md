@@ -20,9 +20,8 @@ default channel configuration in Knative Eventing.
 ## Creating a `KafkaChannel` channel CRD
 
 1. Create a new object by configuring the YAML file as follows:
-   ```bash
-   kubectl apply -f - <<EOF
-   ---
+
+   ```yaml
    apiVersion: messaging.knative.dev/v1beta1
    kind: KafkaChannel
    metadata:
@@ -30,17 +29,23 @@ default channel configuration in Knative Eventing.
    spec:
      numPartitions: 3
      replicationFactor: 1
-   EOF
    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
 
 ## Specifying the default channel configuration
 
 1. To configure the usage of the `KafkaChannel` CRD as the
    [default channel configuration](../../../channels/channel-types-defaults),
    edit the `default-ch-webhook` ConfigMap as follows:
-   ```bash
-   kubectl apply -f - <<EOF
-   ---
+
+   ```yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
@@ -55,23 +60,34 @@ default channel configuration in Knative Eventing.
          spec:
            numPartitions: 3
            replicationFactor: 1
-   EOF
    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ## Creating an Apache Kafka channel using the default channel configuration
 
 1. Now that `KafkaChannel` is set as the default channel configuration,
    use the `channels.messaging.knative.dev` CRD to create a new Apache Kafka
-   channel, using the generic `Channel`:
-   ```bash
-   kubectl apply -f - <<EOF
-   ---
+   channel, using the generic `Channel` below:
+
+   ```yaml
    apiVersion: messaging.knative.dev/v1
    kind: Channel
    metadata:
      name: testchannel-one
-   EOF
    ```
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
 2. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
    using the command:
    ```bash
@@ -97,16 +113,22 @@ channel from Knative.
 
 ## Configuring the Knative broker for Apache Kafka channels
 
-1. To setup a broker that will use the new default Kafka channels, you must
-   create a new _default_ broker, using the command:
+1. To setup a broker that will use the new default Kafka channels,
+   create a new _default_ broker by copying the YAML below into a file:
+
    ```bash
-   kubectl create -f - <<EOF
    apiVersion: eventing.knative.dev/v1
    kind: Broker
    metadata:
     name: default
-   EOF
    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 This will give you two pods, such as:
 ```

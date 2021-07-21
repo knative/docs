@@ -34,16 +34,21 @@ The functions used in these examples live in
 
 ### Creating the Broker
 
-To create the cluster default Broker type:
+1. To create the cluster default Broker type, copy the YAML below into a file:
 
-```bash
-kubectl create -f - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
- name: default
-EOF
-```
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+     name: default
+    ```
+    
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ### Create the Knative Services
 

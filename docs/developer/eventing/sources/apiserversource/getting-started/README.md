@@ -30,119 +30,146 @@ command:
         these are isolated from the many other components that may exist in your `default` namespace.<br><br>
         It also makes removing the source easier, since you can simply delete the namespace to remove all of the resources.
 
-1. Create a ServiceAccount by running the command:
+1. Create a ServiceAccount:
 
-    ```yaml
-    kubectl create -f - <<EOF
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: <service-account>
-      namespace: <namespace>
-    EOF
-    ```
-    Where:
-
-    - `<service-account>` is the name of the ServiceAccount that you want to create.
-    - `<namespace>` is the namespace that you created in step 1 above.
-
-1. Create a ClusterRole by running the command:
-
-    ```yaml
-    kubectl create -f - <<EOF
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRole
-    metadata:
-      name: <cluster-role>
-    rules:
-    - apiGroups:
-      - ""
-      resources:
-      - events
-      verbs:
-      - get
-      - list
-      - watch
-    EOF
-    ```
-    Where `<cluster-role>` is the name of the ClusterRole that you want to create.
-
-1. Create a ClusterRoleBinding by running the command:
-
-    ```yaml
-    kubectl create -f - <<EOF
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRoleBinding
-    metadata:
-      name: <cluster-role-binding>
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: <cluster-role>
-    subjects:
-    - kind: ServiceAccount
-      name: <service-account>
-      namespace: <namespace>
-    EOF
-    ```
-    Where:
-
-    - `<cluster-role-binding>` is the name of the ClusterRoleBinding that you want to create.
-    - `<cluster-role>` is the name of the ClusterRole that you created in step 3 above.
-    - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
-    - `<namespace>` is the name of the namespace that you created in step 1 above.
-
-1. Create the ApiServerSource object by running the command:
-
-    === "kn"
-
-        ```bash
-        kn source apiserver create <apiserversource> \
-          --namespace <namespace> \
-          --mode "Resource" \
-          --resource "Event:v1" \
-          --service-account <service-account> \
-          --sink <sink>
-        ```
-        Where:
-
-        - `<apiserversource>` is the name of the source that you want to create.
-        - `<namespace>` is the name of the namespace that you created in step 1 above.
-        - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
-        - `<sink>` is the name of the PodSpecable object that you want to use as a sink.
-        A PodSpecable is an object that describes a PodSpec.
-
-    === "YAML"
+    1. Create a YAML file using the template below:
 
         ```yaml
-        kubectl create -f - <<EOF
-        apiVersion: sources.knative.dev/v1
-        kind: ApiServerSource
+        apiVersion: v1
+        kind: ServiceAccount
         metadata:
-         name: <apiserversource>
-         namespace: <namespace>
-        spec:
-         serviceAccountName: <service-account>
-         mode: <event-mode>
-         resources:
-           - apiVersion: v1
-             kind: Event
-         sink:
-           ref:
-             apiVersion: v1
-             kind: <sink-kind>
-             name: <sink-name>
-        EOF
+          name: <service-account>
+          namespace: <namespace>
         ```
         Where:
 
-        - `<apiserversource>` is the name of the source that you want to create.
-        - `<namespace>` is the name of the namespace that you created in step 1 above.
-        - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
-        - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
-        - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
-        - `<sink-name>` is the name of your sink.
+        - `<service-account>` is the name of the ServiceAccount that you want to create.
+        - `<namespace>` is the namespace that you created in step 1 above.
 
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply --filename <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
+1. Create a ClusterRole:
+
+    1. Create a YAML file using the template below:
+
+        ```yaml
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        metadata:
+          name: <cluster-role>
+        rules:
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - get
+          - list
+          - watch
+        ```
+        Where `<cluster-role>` is the name of the ClusterRole that you want to create.
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply --filename <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
+1. Create a ClusterRoleBinding:
+
+    1. Create a YAML file using the template below:
+
+        ```yaml
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        metadata:
+          name: <cluster-role-binding>
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: <cluster-role>
+        subjects:
+        - kind: ServiceAccount
+          name: <service-account>
+          namespace: <namespace>
+        ```
+        Where:
+
+        - `<cluster-role-binding>` is the name of the ClusterRoleBinding that you want to create.
+        - `<cluster-role>` is the name of the ClusterRole that you created in step 3 above.
+        - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
+        - `<namespace>` is the name of the namespace that you created in step 1 above.
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply --filename <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
+1. Create the ApiServerSource object:
+
+    === "kn"
+        - To create the ApiServerSource, run the command:
+
+            ```bash
+            kn source apiserver create <apiserversource> \
+              --namespace <namespace> \
+              --mode "Resource" \
+              --resource "Event:v1" \
+              --service-account <service-account> \
+              --sink <sink>
+            ```
+            Where:
+
+            - `<apiserversource>` is the name of the source that you want to create.
+            - `<namespace>` is the name of the namespace that you created in step 1 above.
+            - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
+            - `<sink>` is the name of the PodSpecable object that you want to use as a sink.
+            A PodSpecable is an object that describes a PodSpec.
+
+    === "YAML"
+        1. Create a YAML file using the template below:
+
+            ```yaml
+            apiVersion: sources.knative.dev/v1
+            kind: ApiServerSource
+            metadata:
+             name: <apiserversource>
+             namespace: <namespace>
+            spec:
+             serviceAccountName: <service-account>
+             mode: <event-mode>
+             resources:
+               - apiVersion: v1
+                 kind: Event
+             sink:
+               ref:
+                 apiVersion: v1
+                 kind: <sink-kind>
+                 name: <sink-name>
+            ```
+            Where:
+
+            - `<apiserversource>` is the name of the source that you want to create.
+            - `<namespace>` is the name of the namespace that you created in step 1 above.
+            - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
+            - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
+            - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+            - `<sink-name>` is the name of your sink.
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply --filename <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
 ## Verify the ApiServerSource object
 

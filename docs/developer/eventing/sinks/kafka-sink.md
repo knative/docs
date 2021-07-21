@@ -151,10 +151,9 @@ in particular, [Producer configurations](https://kafka.apache.org/documentation/
 
 To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
 
-1. Apply the `kafka-config-logging` ConfigMap by running the command:
+1. Create a YAML file using the `kafka-config-logging` ConfigMap below:
 
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -170,8 +169,14 @@ To enable debug logging for data plane components change the logging level to `D
             <appender-ref ref="jsonConsoleAppender"/>
           </root>
         </configuration>
-    EOF
     ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 2. Restart the `kafka-sink-receiver`:
 

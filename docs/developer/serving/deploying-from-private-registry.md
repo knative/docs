@@ -20,7 +20,7 @@ To configure using a private container registry, you must:
 
     ```bash
     kubectl create secret docker-registry <registry-credential-secrets> \
-      --docker-server=<private-registry-url> \
+      --docker-server=<private-registry-url>] \
       --docker-email=<private-registry-email> \
       --docker-username=<private-registry-user> \
       --docker-password=<private-registry-password>

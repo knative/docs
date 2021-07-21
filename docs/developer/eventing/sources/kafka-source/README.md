@@ -69,28 +69,34 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
    cd knative-docs/docs/eventing/samples/kafka/source
    ```
 
-2. Build the Event Display Service (`event-display.yaml`)
+2. Build the Event Display Service by copying the YAML below into a file:
 
-   ```yaml
-   kubectl apply -f - <<EOF
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: event-display
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - # This corresponds to
-             # https://github.com/knative/eventing/tree/main/cmd/event_display/main.go
-             image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-    EOF
-   ```
-   Example output:
-   ```
-   service.serving.knative.dev/event-display created
-   ```
+     ```yaml
+     apiVersion: serving.knative.dev/v1
+     kind: Service
+     metadata:
+       name: event-display
+       namespace: default
+     spec:
+       template:
+         spec:
+           containers:
+             - # This corresponds to
+               # https://github.com/knative/eventing/tree/main/cmd/event_display/main.go
+               image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+     ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
+    Example output:
+    ```bash
+    service.serving.knative.dev/event-display created
+    ```
 
 1. Ensure that the Service pod is running. The pod name will be prefixed with
    `event-display`.

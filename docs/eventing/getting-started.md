@@ -21,23 +21,31 @@ kubectl create namespace event-example
 
 The [broker](../broker) allows you to route events to different event sinks or consumers.
 
-1. Add a broker named `default` to your namespace by entering the following command:
+1. Add a broker named `default` to your namespace by creating a YAML file using
+the template below:
 
     ```yaml
-    kubectl create -f - <<EOF
     apiVersion: eventing.knative.dev/v1
     kind: broker
     metadata:
      name: default
-     namespace: event-example
-    EOF
+     namespace: <namespace>
     ```
+    Where `<namespace>` is the your namespace.
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 1. Verify that the broker is working correctly, by entering the following command:
 
     ```bash
-    kubectl -n event-example get broker default
+    kubectl -n <namespace> get broker default
     ```
+    Where `<namespace>` is the your namespace.
 
     This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
@@ -54,11 +62,9 @@ The [broker](../broker) allows you to route events to different event sinks or c
 In this step, you create two event consumers, `hello-display` and `goodbye-display`, to
 demonstrate how you can configure your event producers to target a specific consumer.
 
-1. To deploy the `hello-display` consumer to your cluster, run the following
-   command:
+1. To deploy the `hello-display` consumer to your cluster, copy the YAML below into a file:
 
      ```yaml
-     kubectl -n event-example apply -f - << EOF
      apiVersion: apps/v1
      kind: Deployment
      metadata:
@@ -89,14 +95,19 @@ demonstrate how you can configure your event producers to target a specific cons
        - protocol: TCP
          port: 80
          targetPort: 8080
-     EOF
      ```
 
-1. To deploy the `goodbye-display` consumer to your cluster, run the following
-   command:
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
+1. To deploy the `goodbye-display` consumer to your cluster, copy the YAML below
+into a file:
 
      ```yaml
-     kubectl -n event-example apply -f - << EOF
      apiVersion: apps/v1
      kind: Deployment
      metadata:
@@ -128,8 +139,13 @@ demonstrate how you can configure your event producers to target a specific cons
        - protocol: TCP
          port: 80
          targetPort: 8080
-     EOF
      ```
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 1. Verify that the event consumers are working by entering the following command:
      ```bash
@@ -151,9 +167,8 @@ A [trigger](../broker/triggers) defines the events that each event consumer rece
 Brokers use triggers to forward events to the correct consumers.
 Each trigger can specify a filter that enables selection of relevant events based on the Cloud Event context attributes.
 
-1. Create a trigger by entering the following command:
+1. Create a trigger by copying the YAML below into a file:
    ```yaml
-   kubectl -n event-example apply -f - << EOF
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
@@ -168,14 +183,19 @@ Each trigger can specify a filter that enables selection of relevant events base
         apiVersion: v1
         kind: Service
         name: hello-display
-   EOF
    ```
    The command creates a trigger that sends all events of type `greeting` to
    your event consumer named `hello-display`.
 
-1. To add a second trigger, enter the following command:
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
+1. To add a second trigger, copy the YAML below into a file:
    ```yaml
-   kubectl -n event-example apply -f - << EOF
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
    metadata:
@@ -190,10 +210,16 @@ Each trigger can specify a filter that enables selection of relevant events base
         apiVersion: v1
         kind: Service
         name: goodbye-display
-   EOF
    ```
    The command creates a trigger that sends all events of source `sendoff` to
    your event consumer named `goodbye-display`.
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 1. Verify that the triggers are working correctly by running the following
    command:
@@ -219,28 +245,33 @@ This guide uses `curl` commands to manually send individual events as HTTP reque
 
 The broker can only be accessed from within the cluster where Knative Eventing is installed. You must create a pod within that cluster to act as an event producer that will execute the `curl` commands.
 
-To create a pod, enter the following command:
-```yaml
-kubectl -n event-example apply -f - << EOF
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    run: curl
-  name: curl
-spec:
-  containers:
-    # This could be any image that we can SSH into and has curl.
-  - image: radial/busyboxplus:curl
-    imagePullPolicy: IfNotPresent
-    name: curl
-    resources: {}
-    stdin: true
-    terminationMessagePath: /dev/termination-log
-    terminationMessagePolicy: File
-    tty: true
-EOF
-```
+1. To create a pod, copy the YAML below into a file:
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      labels:
+        run: curl
+      name: curl
+    spec:
+      containers:
+        # This could be any image that we can SSH into and has curl.
+      - image: radial/busyboxplus:curl
+        imagePullPolicy: IfNotPresent
+        name: curl
+        resources: {}
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ## Sending events to the broker
 

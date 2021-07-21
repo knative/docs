@@ -22,34 +22,9 @@ serve a Knative Service at this domain.
 
 ## Procedure
 
-1. By default, in order to create a DomainMapping you, or a cluster
-   administrator, must first delegate the domain name to the namespace you wish
-   to create the DomainMapping in by creating a ClusterDomainClaim.
-   ClusterDomainClaims delegate a domain name to a namespace, so that
-   DomainMappings in that namespace can use the domain name.
+1. Create a `DomainMapping` object by creating a YAML file using the template below:
 
-    Create a ClusterDomainClaim by entering the following command:
-      ```yaml
-      kubectl apply -f - <<EOF
-      apiVersion: networking.internal.knative.dev/v1alpha1
-      kind: ClusterDomainClaim
-      metadata:
-        name: <domain-name>
-      spec:
-        namespace: <namespace>
-      EOF
-      ```
-
-    !!! tip
-        You can avoid this step by setting the `autocreateClusterDomainClaims`
-        property to "true" in the `config-network` config map, in the
-        `knative-serving` namespace. This allows any user, in any namespace, to
-        map any domain name, even ones in other namespaces or for domain names
-        that they do not own.
-
-1. Create a DomainMapping object by entering the following command:
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: serving.knative.dev/v1alpha1
     kind: DomainMapping
     metadata:
@@ -60,7 +35,6 @@ serve a Knative Service at this domain.
         name: <service-name>
         kind: Service
         apiVersion: serving.knative.dev/v1
-    EOF
     ```
     Where:
 
@@ -68,7 +42,15 @@ serve a Knative Service at this domain.
     - `<namespace>` is the namespace that contains both the `DomainMapping` and `Service` objects.
     - `<service-name>` is the name of the service that will be mapped to the domain.
 
-    !!! tip
+        !!! note
+
         You can also map to other targets as long as they conform to the Addressable contract and their resolved URL is of the form `{name}.{namespace}.{clusterdomain}`, where `{name}` and `{namespace}` are the name and namespace of a Kubernetes service, and `{clusterdomain}`is the cluster domain. Examples of objects that conform to this contract include Knative Services, Routes, and Kubernetes services.
 
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply --filename <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+    
 1. Point the domain name to the IP address of your Knative cluster. Details of this step differ depending on your domain registrar.
