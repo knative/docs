@@ -36,7 +36,7 @@ the template below:
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -100,7 +100,7 @@ demonstrate how you can configure your event producers to target a specific cons
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -143,7 +143,7 @@ into a file:
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -190,7 +190,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -217,7 +217,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -269,7 +269,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 

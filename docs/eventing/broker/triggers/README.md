@@ -37,7 +37,7 @@ delivers them to the Knative Serving service `my-service`:
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -65,7 +65,7 @@ delivers them to the custom path `/my-custom-path` for the Kubernetes service `m
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -105,6 +105,6 @@ This example filters events from the `default` broker that are of type
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply --filename <filename>.yaml
+    kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
