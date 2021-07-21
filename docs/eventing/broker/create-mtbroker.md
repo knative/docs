@@ -49,6 +49,13 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
          name: <broker-name>
         ```
 
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
     1. Optional: Verify that the broker is working correctly, by entering the following command:
 
         ```bash
