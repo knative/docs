@@ -1,31 +1,31 @@
 !!! todo "Installing the `quickstart` plugin"
     === "Using a binary"
          You can install the `quickstart` plugin by:
-    
+
          1. Download the binary for your system from the <a href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"> `quickstart` release page</a>.
-    
+
          1. Rename the binary, make it executable, and rename it to `kn-quickstart`:
-    
+
              ```
              mv kn-quickstart-darwin-amd64 kn-quickstart
              chmod +x kn-quickstart
              ```
-    
+
             (the original name will depend on your system architecture, i.e. `kn-quickstart-darwin-amd64`, `kn-quickstart-linux-amd64`, etc.)
-    
+
          1. Move the executable binary file to the `kn` plugins directory:
-    
+
              ```
              mkdir -p ~/.config/kn/plugins
              mv kn-quickstart ~/.config/kn/plugins
              ```
-       
+
          1. Verify that the plugin is working, for example:
-    
+
              ```
              kn quickstart --help
              ```
-        
+
     === "Using Go"
         1. Check out the `kn-plugin-quickstart` repository:
 
@@ -39,19 +39,20 @@
               ```
               hack/build.sh
               ```
+
         1. Move the executable binary file to the `kn` plugins directory:
-    
+
              ```
              mkdir -p ~/.config/kn/plugins
              mv kn-quickstart ~/.config/kn/plugins
              ```
-       
+
          1. Verify that the plugin is working, for example:
-    
+
              ```
              kn quickstart --help
              ```
-      
+
 The `quickstart` plugin completes the following functions:
 
 1. **Checks if you have [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} installed,** and creates a cluster called `knative`.
