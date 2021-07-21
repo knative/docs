@@ -1,4 +1,4 @@
-## Voice and language
+# Voice and language
 
 ## Use present tense
 
@@ -50,7 +50,7 @@ Avoid making promises or giving hints about the future. If you need to talk
 about a feature in development, add a boilerplate under the front matter that
 identifies the information accordingly.
 
-### Avoid statements that will soon be out of date
+## Avoid statements that will soon be out of date
 > Avoid using wording that becomes outdated quickly like "currently" and
 "new". A feature that is new today is not new for long.
 
