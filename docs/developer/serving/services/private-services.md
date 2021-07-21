@@ -3,14 +3,13 @@
 By default, Services deployed through Knative are published to an external IP
 address, making them public Services on a public IP address and with a public URL.
 
-Knative provides three ways to enable private services which are only available
+Knative provides two ways to enable private services which are only available
 inside the cluster:
 
 1. To make all Knative Services private, change the default domain to
    `svc.cluster.local` by [editing the `config-domain` ConfigMap](../../../../serving/using-a-custom-domain). This changes all Services deployed through Knative to only be published to the cluster.
 1. To make an individual Service private, the Service or Route can be
    labelled with `networking.knative.dev/visibility=cluster-local` so that it is not published to the external gateway.
-1. Use [custom domain mappings](../../../../serving/creating-domain-mappings).
 
 ## Using the cluster-local label
 

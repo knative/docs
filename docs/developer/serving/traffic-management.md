@@ -4,6 +4,34 @@ You can manage traffic routing to different Revisions of a Knative Service by mo
 
 When you create a Knative Service, it does not have any default `traffic` spec settings. By setting the `traffic` spec, you can split traffic over any number of fixed Revisions, or send traffic to the latest Revision by setting `latestRevision: true` in the spec for a Service.
 
+## Using tags to create target URLs
+
+In the following example, the spec defines an attribute called `tag`:
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: example-service
+  namespace: default
+spec:
+...
+  traffic:
+  - percent: 0
+    revisionName: example-service-1
+    tag: staging
+  - percent: 40
+    revisionName: example-service-2
+  - percent: 60
+    revisionName: example-service-3
+```
+
+When a `tag` attribute is applied to a Route, an address for the specific traffic target is created.
+
+In the above example, you can access the staging target by accessing `staging-<route name>.<namespace>.<domain>`. The targets for `example-service-2` and `example-service-3` can only be accessed using the main route, `<route name>.<namespace>.<domain>`.
+
+When a traffic target is tagged, a new Kubernetes Service is created for that Service, so that other Services can access it within the cluster. From the previous example, a new Kubernetes Service called `staging-<route name>` will be created in the same namespace. This Service has the ability to override the visibility of this specific Route by applying the label `networking.knative.dev/visibility` with value `cluster-local`. See the documentation on [private services](../../developer/serving/services/private-services) for more information about how to restrict visibility on specific Routes.
+
 ## Traffic routing examples
 
 The following example shows a `traffic` spec where 100% of traffic is routed to the `latestRevision` of the Service. Under `status` you can see the name of the latest Revision that `latestRevision` was resolved to:
