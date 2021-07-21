@@ -80,7 +80,7 @@ If something is important enough to be in the sentence, it should be fully part 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
 |Custom Resource Definition (CRD) |Check your CLI (you should see it there)
-|Knative Serving will create a Revision |Knative will create a Revision (a stateless, snapshot in time of your code and configuration)|
+|Knative Serving creates a Revision |Knative creates a Revision (a stateless, snapshot in time of your code and configuration)|
 
 ### Use the international standard for punctuation inside quotes
 
