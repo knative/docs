@@ -4,7 +4,7 @@ Kafka-backed Channels differ from other Channel implementations because they pro
 
 Event persistence enables certain advanced use cases to be supported, such as the ability to replay prior events by repositioning their current location in the event stream. This feature is useful when attempting to recover from unexpected Subscriber downtime.
 
-The [ResetOffset custom resource definition (CRD)](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset) exposes the ability to manipulate the location of the ConsumerGroup Offsets in the event stream of a given Knative Subscription. Without the ResetOffset CRD, you must manually stop ConsumerGroups and manipulating Offsets.
+The [ResetOffset custom resource definition (CRD)](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset) exposes the ability to manipulate the location of the ConsumerGroup Offsets in the event stream of a given Knative Subscription. Without the ResetOffset CRD, you must manually stop ConsumerGroups and manipulate the Offsets.
 
 !!! note
     ResetOffsets are currently only supported by the Distributed KafkaChannel
