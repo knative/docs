@@ -49,7 +49,7 @@ Where:
 
 - `<resetoffset-name>` is the name of the ResetOffset CRD.
 - `<namespace>` is the namespace where you want to create the ResetOffset CRD.
-- `<subcription-namespace>` is the namespace where your Subscription exists.
+- `<subscription-namespace>` is the namespace where your Subscription exists.
 - `<subscription-name>` is the name of the Subscription.
 
 ## Repositioning offsets to a specific point in the event stream
