@@ -243,9 +243,9 @@ The following example uses a ApiServerSource to publish events to the Broker, an
 
 - Observe the events in the log of the Service, by running the command:
 
-   ```bash
-   kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
-   ```
+    ```bash
+    kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
+    ```
 
 ## Authentication against an Apache Kafka cluster
 
