@@ -13,8 +13,7 @@ https://knative.dev.
 
 ## Website
 
-The Knative documentation website is built with [hugo](https://gohugo.io/) templates in
-[Knative Website Repo](https://github.com/knative/website).
+The Knative documentation website is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
 ### View published documentation
 
@@ -27,15 +26,27 @@ contributor guidelines.
 
 ### Run website locally
 
-Refer to this [doc](https://github.com/knative/website/blob/main/DEVELOPMENT.md) in the website repo.
+For instructions, see Knative's [MkDocs contributor guide](https://knative.dev/docs/help/contributor/mkdocs-contributor-guide).
 
 ### Website source files
 
 Source files for the documentation on the website are located within the
 [`/docs`](./docs) directory of this repo.
 
+### Documentation versions for Knative releases
+
+Each release of the Knative docs are available in the website (starting with
+0.3) and their source files are all stored in
+[branches of this repo](./doc-releases.md).
+
+## Contributing to docs
+
+We're excited that you're interested in contributing to the Knative documentation! Check out the resources below to get started.
+
+### Getting started
+
 If you want to contribute a fix or add new content to the documentation, you can
-navigate through this repo or use the `Edit this page` on each of the pages of
+navigate through the [`/docs`](./docs) repo or use the `Edit this page` pencil icon on each of the pages of
 the website.
 
 Before you can contribute, first start by reading the Knative contributor
@@ -50,28 +61,18 @@ Source files for all Knative community and governance topics are located
 separately in the [knative/community](https://github.com/knative/community/)
 repo.
 
-### Documentation versions for Knative releases
+To help you get started, see the following resources:
 
-Each release of the Knative docs are available in the website (starting with
-0.3) and their source files are all stored in
-[branches of this repo](./doc-releases.md).
-
-## Contributing
-
-We're excited that you're interested in contributing to the Knative documentation! Check out the resources below to get started.
-
-## Getting started
-
-- [Knative contributor's guide](./help/contributing) -- Contains information about how
+- [Knative docs contributor's guide](https://knative.dev/docs/help/contributor/) -- Contains information about how
   to contribute.
 
 - New content templates:
-  - [Concept](./docs/contributor/templates/template-concept.md)
-  - [Procedure](./docs/contributor/templates/template-procedure.md)
-  - [Troubleshooting](./docs/contributor/templates/template-troubleshooting.md)
-  - [Blog](./docs/contributor/templates/template-blog-entry.md)
+  - [Concept](./docs/help/contributor/templates/template-concept.md)
+  - [Procedure](./docs/help/contributor/templates/template-procedure.md)
+  - [Troubleshooting](./docs/help/contributor/templates/template-troubleshooting.md)
+  - [Blog](./docs/help/contributor/templates/template-blog-entry.md)
 
-## Getting help
+### Getting help
 
 - [#docs on the Knative Slack](https://slack.knative.dev) -- The #docs channel
   is the best place to go if you have questions about making changes to the
