@@ -1,6 +1,6 @@
 # Feature and extension flags
 
-The Knative API is designed to be portable, and abstracts away specific implementation details for user deployments, while intending to empower users to surface extra features and extensions that are possible within their platform of choice.
+The Knative API is designed to be portable, and abstracts away specific implementation details for user deployments. The intention of the API is to empower users to surface extra features and extensions that are possible within their platform of choice.
 
 This document introduces two concepts:
 
