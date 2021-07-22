@@ -435,7 +435,7 @@ To use SASL authentication, you will need the following information:
     ```
 
     !!! note
-        The default secret name and namespace are `kafka-cluster` and `knative-eventing` respectively. If you reference a secret in a different namespace, be sure you configure your roles and bindings so that the `knative-eventing` pods can access it.
+        The default secret name and namespace are `kafka-cluster` and `knative-eventing` respectively. If you reference a secret in a different namespace, make sure you configure your roles and bindings so that the `knative-eventing` Pods can access it.
 
 ## Channel configuration
 
