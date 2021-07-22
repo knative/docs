@@ -1,30 +1,15 @@
 !!! todo "Installing the `quickstart` plugin"
+    === "Using Homebrew"
+        For macOS, you can install the `quickstart` plugin by using <a href="https://github.com/knative/homebrew-client">Homebrew</a>.
+            ```
+            brew install knative-sandbox/kn-plugins/quickstart
+            mkdir -p ~/.config/kn/plugins && cp /usr/local/bin/kn-quickstart ~/.config/kn/plugins
+            ```
+        
     === "Using a binary"
-         You can install the `quickstart` plugin by:
-
-         1. Download the binary for your system from the <a href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"> `quickstart` release page</a>.
-
-         1. Rename the binary, make it executable, and rename it to `kn-quickstart`:
-
-             ```
-             mv kn-quickstart-darwin-amd64 kn-quickstart
-             chmod +x kn-quickstart
-             ```
-
-            (the original name will depend on your system architecture, i.e. `kn-quickstart-darwin-amd64`, `kn-quickstart-linux-amd64`, etc.)
-
-         1. Move the executable binary file to the `kn` plugins directory:
-
-             ```
-             mkdir -p ~/.config/kn/plugins
-             mv kn-quickstart ~/.config/kn/plugins
-             ```
-
-         1. Verify that the plugin is working, for example:
-
-             ```
-             kn quickstart --help
-             ```
+         You can install the `quickstart` plugin by downloading the executable binary for your system and placing it in the `~/.config/kn/plugins` directory. 
+         
+         A link to the latest stable binary release is available on the <a href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"> `quickstart` release page</a>.
 
     === "Using Go"
         1. Check out the `kn-plugin-quickstart` repository:
