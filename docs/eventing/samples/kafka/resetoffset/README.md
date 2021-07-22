@@ -78,5 +78,5 @@ Where:
 - `<resetoffset-name>` is the name of the ResetOffset CRD.
 - `<offset-time>` is the specified offset time. You will need to set an [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp relative to your use case, for example `"2021-06-17T17:30:00Z"`.
 - `<namespace>` is the namespace where you want to create the ResetOffset CRD.
-- `<subcription-namespace>` is the namespace where your Subscription exists.
+- `<subscription-namespace>` is the namespace where your Subscription exists.
 - `<subscription-name>` is the name of the Subscription.
