@@ -11,7 +11,7 @@ The [ResetOffset custom resource definition (CRD)](https://github.com/knative-sa
     implementation.
 
 !!! warning
-    Repositioning the ConsumerGroup Offsets will impact the event ordering and
+    Repositioning the ConsumerGroup Offsets impacts the event ordering and
     is intended for failure recovery scenarios. This capability needs to be used
     with caution only after reviewing the [CRD documentation](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset).
 
