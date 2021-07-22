@@ -397,7 +397,7 @@ To use SASL authentication, you will need the following information:
     kubectl -n knative-eventing edit configmap config-kafka
     ```
 
-1. Set the SASL.Enable field to `true`:
+1. Set the `SASL.Enable` field to `true`:
 
     ```yaml
     ...
