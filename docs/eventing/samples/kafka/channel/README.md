@@ -308,7 +308,7 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
     kubectl -n knative-eventing edit configmap config-kafka
     ```
 
-1. Set the TLS.Enable field to `true`:
+1. Set the `TLS.Enable` field to `true`:
 
     ```yaml
     ...
