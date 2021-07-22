@@ -52,8 +52,8 @@ default Channel configuration for Knative Eventing.
           apiVersion: messaging.knative.dev/v1beta1
           kind: KafkaChannel
         spec:
-            numPartitions: 3
-            replicationFactor: 1
+          numPartitions: 3
+          replicationFactor: 1
     ```
 
 <<<<<<< HEAD
