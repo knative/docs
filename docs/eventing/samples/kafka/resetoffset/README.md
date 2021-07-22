@@ -41,7 +41,7 @@ spec:
   ref:
     apiVersion: messaging.knative.dev/v1
     kind: Subscription
-    namespace: <subcription-namespace>
+    namespace: <subscription-namespace>
     name: <subscription-name>
 ```
 
