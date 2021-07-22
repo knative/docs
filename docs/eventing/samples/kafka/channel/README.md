@@ -321,7 +321,7 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
     ...
     ```
 
-1. Optional: If you are using a custom CA certificate, add your certificate data to the ConfigMap in the `data.sarama.config.Net.TLS.Config.RootPEMs field`:
+1. Optional: If you are using a custom CA certificate, add your certificate data to the ConfigMap in the `data.sarama.config.Net.TLS.Config.RootPEMs` field:
 
     ```yaml
     ...
