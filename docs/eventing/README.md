@@ -18,7 +18,7 @@ Consume an event without creating a publisher
 :   You can use a trigger to consume events from a broker based on event attributes. The application receives events as an HTTP POST.
 
 !!! tip
-    Multiple event producers and sinks can be used together to create more advanced [Knative Eventing flows](./flows/README.md) to solve complex use cases.
+    Multiple event producers and sinks can be used together to create more advanced [Knative Eventing flows](flows/README.md) to solve complex use cases.
 
 <!--TODO: What about channels?-->
 
@@ -43,4 +43,4 @@ the registry contain (all) the required information for a consumer to create a
 Trigger without resorting to some other out-of-band mechanism.
 
 To learn how to use the registry, see the
-[Event Registry documentation](./event-registry.md).
+[Event Registry documentation](event-registry.md).

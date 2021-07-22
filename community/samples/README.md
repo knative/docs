@@ -30,8 +30,8 @@ Knative Serving sample apps.
 
 | Sample Name | Description | Language(s) |
 | ----------- | ----------- | ----------- |
-| Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](./serving/helloworld-clojure/), [Dart](./serving/helloworld-dart/), [Elixir](./serving/helloworld-elixir/), [Haskell](./serving/helloworld-haskell/), [Java - Micronaut](./serving/helloworld-java-micronaut/), [Java - Quarkus](./serving/helloworld-java-quarkus/), [R - Go Server](./serving/helloworld-r/), [Rust](./serving/helloworld-rust/), [Swift](./serving/helloworld-swift/), [Vertx](./serving/helloworld-vertx/) |
-| Machine Learning | A quick introduction to using Knative Serving to serve machine learning models | [Python - BentoML](./serving/machinelearning-python-bentoml)
+| Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](serving/helloworld-clojure/), [Dart](serving/helloworld-dart/), [Elixir](serving/helloworld-elixir/), [Haskell](serving/helloworld-haskell/), [Java - Micronaut](serving/helloworld-java-micronaut/), [Java - Quarkus](serving/helloworld-java-quarkus/), [R - Go Server](serving/helloworld-r/), [Rust](serving/helloworld-rust/), [Swift](serving/helloworld-swift/), [Vertx](serving/helloworld-vertx/) |
+| Machine Learning | A quick introduction to using Knative Serving to serve machine learning models | [Python - BentoML](serving/machinelearning-python-bentoml)
 
 #### Eventing and Eventing Resources samples
 

@@ -188,7 +188,7 @@ the known commands:
 - You can also use Prow to manage labels on PRs with `/kind ...`,
   `/good-first-issue`, or `/area ...`
 
-- See the [Branches](./structure/#branches) section for details about how
+- See the [Branches](structure/#branches) section for details about how
   to use the `/cherrypick` command.
 
 ### Common GitHub PRs FAQs
