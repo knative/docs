@@ -19,7 +19,7 @@ In the following example, you can configure a single collector instance using a 
 !!! tip
     For more complex deployments, you can automate some of these steps by using the [OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator).
 
-![Diagram of components reporting to collector, which is scraped by Prometheus](./system-diagram.svg)
+![Diagram of components reporting to collector, which is scraped by Prometheus](system-diagram.svg)
 
 <!-- yuml.me UML rendering of:
 [queue-proxy1]->[Collector]

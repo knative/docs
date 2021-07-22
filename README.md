@@ -31,7 +31,7 @@ For instructions, see Knative's [MkDocs contributor guide](https://knative.dev/d
 ### Website source files
 
 Source files for the documentation on the website are located within the
-[`/docs`](./docs) directory of this repo.
+[`/docs`](docs) directory of this repo.
 
 ### Documentation versions for Knative releases
 
@@ -67,10 +67,10 @@ To help you get started, see the following resources:
   to contribute.
 
 - New content templates:
-  - [Concept](./docs/help/contributor/templates/template-concept.md)
-  - [Procedure](./docs/help/contributor/templates/template-procedure.md)
-  - [Troubleshooting](./docs/help/contributor/templates/template-troubleshooting.md)
-  - [Blog](./docs/help/contributor/templates/template-blog-entry.md)
+  - [Concept](docs/help/contributor/templates/template-concept.md)
+  - [Procedure](docs/help/contributor/templates/template-procedure.md)
+  - [Troubleshooting](docs/help/contributor/templates/template-troubleshooting.md)
+  - [Blog](docs/help/contributor/templates/template-blog-entry.md)
 
 ### Getting help
 
