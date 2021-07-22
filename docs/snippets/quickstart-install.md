@@ -5,10 +5,10 @@
             brew install knative-sandbox/kn-plugins/quickstart
             mkdir -p ~/.config/kn/plugins && cp /usr/local/bin/kn-quickstart ~/.config/kn/plugins
             ```
-        
+
     === "Using a binary"
-         You can install the `quickstart` plugin by downloading the executable binary for your system and placing it in the `~/.config/kn/plugins` directory. 
-         
+         You can install the `quickstart` plugin by downloading the executable binary for your system and placing it in the `~/.config/kn/plugins` directory.
+
          A link to the latest stable binary release is available on the <a href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"> `quickstart` release page</a>.
 
     === "Using Go"
