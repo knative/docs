@@ -17,7 +17,7 @@ default Channel configuration for Knative Eventing.
     kind: KafkaChannel
     metadata:
       name: my-kafka-channel
-      spec:
+    spec:
         numPartitions: 3
         replicationFactor: 1
     ```
