@@ -9,7 +9,7 @@ will create a `Sequence` instead. A Sequence lets us define an in-order list of 
 Let's see this in action now. We will create the following topology where the event is passed from Producer to Consumer 1, who transforms the event, and then passes it
 along to Consumer 2, which displays the event.
 
-![seq](./assets/sequence.png)
+![seq](assets/sequence.png)
 
 First, let's create the final consumer:
 

@@ -82,7 +82,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    ```
 
 1. Run bundle. If you don't have bundler installed, copy the
-   [Gemfile.lock](./Gemfile.lock) to your working directory.
+   [Gemfile.lock](Gemfile.lock) to your working directory.
 
    ```bash
    bundle install

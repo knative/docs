@@ -86,5 +86,5 @@ The net-istio-controller deployment reconciles a cluster's ingress into an
   click
   [here](https://github.com/knative/specs/blob/main/specs/serving/overview.md).
 - For a high-level analysis of Serving, look at the [documentation here](./).
-- Check out the Knative Serving code samples [here](./samples/) for more
+- Check out the Knative Serving code samples [here](samples/) for more
   hands-on tutorials.

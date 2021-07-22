@@ -87,7 +87,7 @@ strimzi-cluster-operator-77555d4b69-sbrt4     1/1     Running   0          3m14s
 ### Installation script
 
 If you want to install the latest version of Strimzi, in just one step, we have
-a [script](./kafka_setup.sh) for your convenience, which does exactly the same
+a [script](kafka_setup.sh) for your convenience, which does exactly the same
 steps that are listed above:
 
 ```bash
@@ -100,5 +100,5 @@ A number of different examples, showing the `KafkaSource`, `KafkaChannel` and
 `KafkaBinding` can be found here:
 
 - [`KafkaSource` to `Service`](../../sources/kafka-source)
-- [`KafkaChannel` and Broker](./channel/)
-- [`KafkaBinding`](./binding/)
+- [`KafkaChannel` and Broker](channel/)
+- [`KafkaBinding`](binding/)

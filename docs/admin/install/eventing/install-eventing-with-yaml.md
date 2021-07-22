@@ -21,7 +21,7 @@ To install the Eventing component:
     ```
 
     !!! info
-        For information about the YAML files in Knative Eventing, see [Description Tables for YAML Files](./eventing-installation-files.md).
+        For information about the YAML files in Knative Eventing, see [Description Tables for YAML Files](eventing-installation-files.md).
 
 ## Verify the installation
 
