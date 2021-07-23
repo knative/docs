@@ -42,7 +42,7 @@ The functions used in these examples live in
     metadata:
      name: default
     ```
-    
+
 1. Apply the YAML file by running the command:
 
     ```bash
