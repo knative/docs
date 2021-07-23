@@ -22,7 +22,7 @@ Knative will attempt to never have less than this number of replicas at any one 
 * **Possible values:** integer
 * **Default:** `0` if scale-to-zero is enabled and class KPA is used, `1` otherwise
 
-**NOTE:** For more information about scale-to-zero configuration, see the documentation on [Configuring scale to zero](./scale-to-zero.md).
+**NOTE:** For more information about scale-to-zero configuration, see the documentation on [Configuring scale to zero](scale-to-zero.md).
 
 **Example:**
 

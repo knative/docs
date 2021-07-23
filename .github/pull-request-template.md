@@ -8,13 +8,13 @@ original PR. Best practice is to open a PR for the cherry-pick yourself after
 your original PR has been merged into the main branch. Once the cherry-pick PR
 has merged, remove the cherry-pick label from the original PR.
 
-- [Knative contributor's guide](./help/contributing) -- lists all resources for contributing to
+- [Knative contributor's guide](help/contributing) -- lists all resources for contributing to
 Knative documentation.
 
 Use one of the new content templates:
-  - [Documentation](./template-docs-page.md) -- Instructions and a template that
+  - [Documentation](template-docs-page.md) -- Instructions and a template that
     you can use to help you add new documentation.
-  - [Blog](./template-blog-entry.md) -- Instructions and a template that
+  - [Blog](template-blog-entry.md) -- Instructions and a template that
     you can use to help you post to the Knative blog.
 
 Learn more about contributing to the Knative Docs:

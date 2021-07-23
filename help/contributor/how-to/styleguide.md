@@ -112,5 +112,5 @@ Avoid using wording that becomes outdated quickly like "currently" and
 
 ## Other related items
 
-* [Page formatting standards](./formatting.md)
-* [Include dynamic content with shortcodes](./shortcodes.md)
+* [Page formatting standards](formatting.md)
+* [Include dynamic content with shortcodes](shortcodes.md)

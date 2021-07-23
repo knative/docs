@@ -9,7 +9,7 @@ This page shows the formatting standards for the Knative documentation. Knative 
 Markdown to markup the content and Hugo with the Docsy template, to build the website. To ensure
 consistency across our documentation, we have agreed on these formatting standards.
 
-[Learn about the Hugo/Docsy requirements for each page](./frontmatter.md)
+[Learn about the Hugo/Docsy requirements for each page](frontmatter.md)
 
 ## Linking: Use relative URLs
 
@@ -20,7 +20,7 @@ Linking conventions:
 
  - Links between files in the same directory must be prefixed with: `./`
 
-    Example: `[Shortcodes](./shortcodes.md)` renders as [Shortcodes](./shortcodes.md)
+    Example: `[Shortcodes](shortcodes.md)` renders as [Shortcodes](shortcodes.md)
 
  - To link across folders, add `../` for each directory that you must travel
    towards the root docs directory.

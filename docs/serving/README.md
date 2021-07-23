@@ -45,14 +45,14 @@ serverless workload behaves on the cluster:
   are immutable objects and can be retained for as long as useful. Knative
   Serving Revisions can be automatically scaled up and down according to
   incoming traffic. See
-  [Configuring the Autoscaler](./autoscaling) for more
+  [Configuring the Autoscaler](autoscaling) for more
   information.
 
 ![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/main/docs/spec/images/object_model.png)
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](./samples/)
+To get started with Serving, check out one of the [hello world](samples/)
 sample projects. These projects use the `Service` resource, which manages all of
 the details for you.
 
@@ -64,11 +64,11 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## More samples and demos
 
-- [Knative Serving code samples](./samples/)
+- [Knative Serving code samples](samples/)
 
 ## Debugging Knative Serving issues
 
-- [Debugging Application Issues](./debugging-application-issues)
+- [Debugging Application Issues](debugging-application-issues)
 
 ## Configuration and Networking
 
@@ -78,7 +78,7 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## Observability
 
-- [Serving Metrics API](./metrics)
+- [Serving Metrics API](metrics)
 
 ## Known Issues
 

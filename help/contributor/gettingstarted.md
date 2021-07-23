@@ -111,7 +111,7 @@ working tutorial or how-to.
 
 ## What's next
 
-- [Learn how to use GitHub and clone the `knative/docs` repo](./how-to/github.md)
-- [Read the "How to" guides](./how-to/)
-- [Learn how to post to the blog](./new-blog/)
-- [Learn how the website works](./publishing.md)
+- [Learn how to use GitHub and clone the `knative/docs` repo](how-to/github.md)
+- [Read the "How to" guides](how-to/)
+- [Learn how to post to the blog](new-blog/)
+- [Learn how the website works](publishing.md)

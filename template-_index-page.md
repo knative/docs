@@ -99,7 +99,7 @@ limited to them).
 
 The following demonstrates a generic landing page. For more
 information about stucturing a how-to guide, see the
-[new page template instructions](./template-docs-page.md).
+[new page template instructions](template-docs-page.md).
 
 Learn how to do something very cool.
 
@@ -196,7 +196,7 @@ limited to them).
 <!--
 The following demonstrates a generic landing page. For more
 information about stucturing a how-to guide, see the
-[new page template instructions](./template-docs-page.md).
+[new page template instructions](template-docs-page.md).
 -->
 
 Learn how to do something very cool.

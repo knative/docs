@@ -5,7 +5,7 @@ how-to document.
 
 Use this template if you are creating a new page in an existing folder. If you
 are creating a new folder, you must also create the `_index.md`. For more
-information, see the [`_index.md` template instructions](./template-_index-page.md).
+information, see the [`_index.md` template instructions](template-_index-page.md).
 
 [**Copy a version of this template without the instructions**](#copy-the-template)
 
@@ -84,7 +84,7 @@ Knative-specific stuff below. For example:
 ```
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
 
-- A Kubernetes cluster with [Knative installed](./docs/install/).
+- A Kubernetes cluster with [Knative installed](docs/install/).
   <!-- Make sue to use relative links. -->
 - The latest version of ... running?
 - Privileges to .....
@@ -160,9 +160,9 @@ Remember to keep it focused and targeted, too many links are not as useful.
 
 Now that you have an example running, learn how to enable .....:
 
-- [Link](./serving/example.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
-- [Link](./eventing/example.md)
-- [Link](./search-example.md)
+- [Link](serving/example.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
+- [Link](eventing/example.md)
+- [Link](search-example.md)
 
 
 # Copy the template
@@ -225,7 +225,7 @@ This is where you get past any of the non-Knative items so that you can focus on
 
 To complete the steps in this task, you must ..... meet/have/install/create/? the following:
 
-- A Kubernetes cluster with [Knative installed](./docs/install/).
+- A Kubernetes cluster with [Knative installed](docs/install/).
   <!-- Make sue to use relative links. -->
 - The latest version of ... running?
 - Privileges to .....
@@ -290,8 +290,8 @@ Remember to keep it focused and targeted, too many links are not as useful.
 
 Now that you have an example running, learn how to enable .....:
 
-- [Link](./serving/example.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
-- [Link](./eventing/example.md)
-- [Link](./search-example.md)
+- [Link](serving/example.md) <!-- Always use relative links if linking to a page within the Docs repo. -->
+- [Link](eventing/example.md)
+- [Link](search-example.md)
 
 ```
