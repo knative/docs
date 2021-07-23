@@ -18,5 +18,3 @@ into a single location:
          * [Procedure](docs/contributor/templates/template-procedure.md)
          * [Troubleshooting](docs/contributor/templates/template-troubleshooting.md)
          * [Blog](docs/contributor/templates/template-blog-entry.md)
-   * [Website help](https://knative.dev/docs/help/contributor/publishing)
-   * [Maintainer help](https://knative.dev/docs/help/maintainer/)
