@@ -42,7 +42,7 @@ Create a sample service:
     kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
-    
+
 === "kn CLI"
 
     ```
