@@ -9,7 +9,9 @@ Apply code formatting only to special-purpose text:
 
 * Filenames
 * Path names
+* Fields and values from a YAML file
 * Any text that goes into a CLI
+* CLI names
 
 ## Specify the programming language
 
