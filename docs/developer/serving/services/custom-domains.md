@@ -47,7 +47,7 @@ DomainMappings in that namespace can use the domain name.
         spec:
           namespace: <namespace>
         ```
-        
+
     1. Apply the YAML file by running the command:
 
         ```bash
