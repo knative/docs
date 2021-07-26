@@ -30,9 +30,7 @@ is to install it by using [Strimzi](https://strimzi.io).
    ```
 1. Install the Strimzi operator, like:
    ```bash
-   curl -L "https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.16.2/strimzi-cluster-operator-0.16.2.yaml" \
-     | sed 's/namespace: .*/namespace: kafka/' \
-     | kubectl -n kafka apply -f -
+   kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
    ```
 1. Describe the size of your Apache Kafka installation in `kafka.yaml`, like:
    ```yaml
@@ -42,16 +40,23 @@ is to install it by using [Strimzi](https://strimzi.io).
      name: my-cluster
    spec:
      kafka:
-       version: 2.4.0
+       version: 2.8.0
        replicas: 1
        listeners:
-         plain: {}
-         tls: {}
+         - name: plain
+           port: 9092
+           type: internal
+           tls: false
+         - name: tls
+           port: 9093
+           type: internal
+           tls: true
        config:
          offsets.topic.replication.factor: 1
          transaction.state.log.replication.factor: 1
          transaction.state.log.min.isr: 1
-         log.message.format.version: "2.4"
+         log.message.format.version: "2.8"
+         inter.broker.protocol.version: "2.8"
        storage:
          type: ephemeral
      zookeeper:
