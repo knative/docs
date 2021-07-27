@@ -14,7 +14,7 @@ PingSource, feeding events to a [`Sequence`](../).
 Sequence can then do either external work, or out of band create additional
 events.
 
-![Logical Configuration](sequence-terminal.png)
+![Logical Configuration](./sequence-terminal.png)
 
 The functions used in these examples live in
 [https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).

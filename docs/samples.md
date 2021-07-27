@@ -17,8 +17,8 @@ closer with your goals.
 
 View the set of Knative code samples that are actively tested and maintained:
 
-- [Eventing and Eventing Sources code samples](eventing/samples/)
-- [Serving code samples](serving/samples/)
+- [Eventing and Eventing Sources code samples](./eventing/samples/)
+- [Serving code samples](./serving/samples/)
 
 ### Community owned and maintained
 

@@ -134,5 +134,5 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 
 | Name | Maintainer | Description |
 | -- | -- | -- |
-| [KafkaSink](kafka-sink.md)  | Knative  | Send events to a Kafka topic |
+| [KafkaSink](./kafka-sink.md)  | Knative  | Send events to a Kafka topic |
 | [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |

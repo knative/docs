@@ -35,7 +35,7 @@ To deploy a local container image, you need to disable image tag resolution by r
 docker tag local-image dev.local/local-image
 ```
 
-[Learn more about image tag resolution.](tag-resolution)
+[Learn more about image tag resolution.](./tag-resolution)
 
 The Hello World sample app reads in an `env` variable, `TARGET`, then prints "Hello World: \${TARGET}!". If `TARGET` isn't defined, it will print "NOT SPECIFIED".
 

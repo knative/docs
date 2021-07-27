@@ -70,7 +70,7 @@ See the [Fluent Bit](https://docs.fluentbit.io/manual/installation/kubernetes) d
 
 When you create a ConfigMap during the installation steps, you must:
 
-- Replace the ElasticSearch configuration with the [`fluent-bit-configmap.yaml`](fluent-bit-configmap.yaml), or
+- Replace the ElasticSearch configuration with the [`fluent-bit-configmap.yaml`](./fluent-bit-configmap.yaml), or
 - Add the following block to the ConfigMap, and update the
 `@INCLUDE output-elasticsearch.conf` to be `@INCLUDE output-forward.conf`:
 

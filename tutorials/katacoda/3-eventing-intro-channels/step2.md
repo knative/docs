@@ -4,7 +4,7 @@ We will walk through the simplest to more complicated topologies
 ### 1:1 Event Delivery
 The most straightforward use case is that whenever events are produced, you want some code to handle that event.
 
-![1to1](assets/1to1.png)
+![1to1](./assets/1to1.png)
 Looking at the diagram above, we’ll create the components in the reverse order.
 Let's create a consumer that will display the events that are sent to it:
 
@@ -57,7 +57,7 @@ With a standard format for events, like Cloud Events, your function already know
 receiving the event and you’ll only need to update your business logic to handle processing the
 new data type. As an extension to the previous example, a second producer can send events to the
 same consumer. In the diagram below, you can see an updated drawing where a new producer (Producer2) and event (Event2) have been added.
-![Nto1](assets/Nto1.png)
+![Nto1](./assets/Nto1.png)
 
 Let us create the second producer:
 

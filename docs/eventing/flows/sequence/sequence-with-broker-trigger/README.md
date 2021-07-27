@@ -25,7 +25,7 @@ into the Broker and create another Trigger which will then display those events.
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
-![Logical Configuration](sequence-with-broker-trigger.png)
+![Logical Configuration](./sequence-with-broker-trigger.png)
 
 The functions used in these examples live in
 [https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).

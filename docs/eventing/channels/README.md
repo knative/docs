@@ -18,5 +18,5 @@ A channel provides an event delivery mechanism that can fan-out received events,
 ## Next steps
 
 - Learn about [default available channel types](channel-types-defaults)
-- Create a [channel](create-default-channel)
-- Create a [subscription](subscriptions)
+- Create a [channel](./create-default-channel)
+- Create a [subscription](./subscriptions)

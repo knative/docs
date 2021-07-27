@@ -14,12 +14,12 @@ A Trigger describes a filter on event attributes which should be delivered to Co
 
 ### Example
 Suppose we want to implement the following workflow for events
-![broker-eg](assets/broker-eg.png)
+![broker-eg](./assets/broker-eg.png)
 
 We can implement this with Channel and Subscription, but in order for that we’d need 6 Channels and have two instances of Consumer1 (because we would need to have it output
 to two different channels to separate Red and Yellow without Consumer2 and Consumer4 having to filter out the events they didn’t want). We would furthermore need to have 6
 Subscription objects. By using the Broker / Trigger we only have to declare that Consumer1 is interested in Blue and Orange events, Consumer2 is interested in Red events and so forth. The new topology now becomes:
-![broker](assets/broker.png)
+![broker](./assets/broker.png)
 
 To see this in action let us first create a Broker:
 

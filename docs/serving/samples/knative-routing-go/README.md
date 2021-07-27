@@ -264,7 +264,7 @@ with updated host will be forwarded to `knative-ingress-gateway` Gateway again.
 The Gateway proxy checks the updated host, and forwards it to `Search` or
 `Login` service according to its host setting.
 
-![Object model](images/knative-routing-sample-flow.png)
+![Object model](./images/knative-routing-sample-flow.png)
 
 ## Using internal services and `"httpProtocol": "Redirected"`
 

@@ -11,7 +11,7 @@ The metric configuration defines which metric type is watched by the Autoscaler.
 
 ## Setting metrics per revision
 
-For [per-revision](autoscaler-types.md#global-versus-per-revision-settings) configuration, this is determined using the `autoscaling.knative.dev/metric` annotation.
+For [per-revision](./autoscaler-types.md#global-versus-per-revision-settings) configuration, this is determined using the `autoscaling.knative.dev/metric` annotation.
 The possible metric types that can be configured per revision depend on the type of Autoscaler implementation you are using:
 
 * The default KPA Autoscaler supports the `concurrency` and `rps` metrics.
@@ -19,7 +19,7 @@ The possible metric types that can be configured per revision depend on the type
 
 <!-- TODO: Add details about different metrics types, how concurrency and rps differ. Explain cpu. -->
 
-For more information about KPA and HPA, see the documentation on [Supported Autoscaler types](autoscaler-types.md).
+For more information about KPA and HPA, see the documentation on [Supported Autoscaler types](./autoscaler-types.md).
 
 * **Per-revision annotation key:** `autoscaling.knative.dev/metric`
 * **Possible values:** `"concurrency"`, `"rps"` or `"cpu"`, depending on your Autoscaler type. The `cpu` metric is only supported on revisions with the HPA class.
@@ -73,5 +73,5 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
 
 ## Next steps
 
-* Configure [concurrency targets](concurrency.md) for applications
-* Configure [requests per second targets](rps-target.md) for replicas of an application
+* Configure [concurrency targets](./concurrency.md) for applications
+* Configure [requests per second targets](./rps-target.md) for replicas of an application

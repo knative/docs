@@ -8,14 +8,14 @@ type: "docs"
 # Configuring scale to zero
 
 !!! warning
-    Scale to zero can only be enabled if you are using the KnativePodAutoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Supported Autoscaler types](autoscaler-types.md).
+    Scale to zero can only be enabled if you are using the KnativePodAutoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Supported Autoscaler types](./autoscaler-types.md).
 
 ## Enable scale to zero
 
 The scale to zero value controls whether Knative allows replicas to scale down to zero (if set to `true`), or stop at 1 replica if set to `false`.
 
 !!! note
-    For more information about scale bounds configuration per Revision, see the documentation on [Configuring scale bounds](scale-bounds.md).
+    For more information about scale bounds configuration per Revision, see the documentation on [Configuring scale bounds](./scale-bounds.md).
 
 * **Global key:** `enable-scale-to-zero`
 * **Per-revision annotation key:** No per-revision setting.

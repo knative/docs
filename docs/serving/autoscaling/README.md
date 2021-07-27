@@ -16,16 +16,16 @@ The Autoscaler component watches traffic flow to the application, and scales rep
 Knative services default to using autoscaling settings that are suitable for the majority of use cases. However, some workloads may require a custom, more finely-tuned configuration.
 This guide provides information about configuration options that you can modify to fit the requirements of your workload.
 
-For more information about how autoscaling for Knative works, see the [Autoscaling concepts](autoscaling-concepts) documentation.
+For more information about how autoscaling for Knative works, see the [Autoscaling concepts](./autoscaling-concepts) documentation.
 
-For more information about which metrics can be used to control the Autoscaler, see the [metrics](autoscaling-metrics) documentation.
+For more information about which metrics can be used to control the Autoscaler, see the [metrics](./autoscaling-metrics) documentation.
 
 ## Optional autoscaling configuration tasks
 
 * Configure your Knative deployment to use the Kubernetes Horizontal Pod Autoscaler (HPA)
 instead of the default KPA.
 For how to install HPA, see [Install optional Serving extensions](../../install/install-extensions#install-optional-serving-extensions).
-* Disable scale to zero functionality for your cluster ([global configuration only](scale-to-zero)).
-* Configure the [type of metrics](autoscaling-metrics) your Autoscaler consumes.
-* Configure [concurrency limits](concurrency) for applications.
-* Try out the [Go Autoscale Sample App](autoscale-go/).
+* Disable scale to zero functionality for your cluster ([global configuration only](./scale-to-zero)).
+* Configure the [type of metrics](./autoscaling-metrics) your Autoscaler consumes.
+* Configure [concurrency limits](./concurrency) for applications.
+* Try out the [Go Autoscale Sample App](./autoscale-go/).

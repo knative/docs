@@ -79,7 +79,7 @@ event-display   http://event-display.default.1.2.3.4.sslip.io   event-display-gq
 In order to run the heartbeats container as an event source, you have to create
 a concrete ContainerSource with specific arguments and environment settings. Be
 sure to replace `heartbeats_image_uri` with a valid uri for your heartbeats
-image in your image repo in [heartbeats-source.yaml](heartbeats-source.yaml)
+image in your image repo in [heartbeats-source.yaml](./heartbeats-source.yaml)
 file. Note that arguments and environment variables are set and will be passed
 to the container.
 
@@ -175,6 +175,6 @@ event source is a sample for your reference.
 ### Create the ContainerSource using this container image
 
 When the container image is ready, a YAML file will be used to create a concrete
-`ContainerSource`. Use [heartbeats-source.yaml](heartbeats-source.yaml) as a
+`ContainerSource`. Use [heartbeats-source.yaml](./heartbeats-source.yaml) as a
 sample for reference. [Learn more about the ContainerSource
 specification](../../../eventing#containersource).

@@ -15,7 +15,7 @@ Learn how to join the community of Knative contributors.
 
 Knative is designed for different personas:
 
-![Diagram that displays different Audiences for Knative](images/knative-audience.svg)
+![Diagram that displays different Audiences for Knative](./images/knative-audience.svg)
 
 ### Developers
 

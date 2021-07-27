@@ -16,7 +16,7 @@ See the [Istio Documentation](https://istio.io/latest/docs/setup/additional-setu
 
 Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS.
 
-![Knative request flow](images/architecture.png)
+![Knative request flow](./images/architecture.png)
 
 Generally, mutual TLS can be configured normally as [in Istio's documentation](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/). However, since the activator can be in the request path of Knative services, it must have sidecars injected. The simplest way to do this is to label the `knative-serving` namespace:
 

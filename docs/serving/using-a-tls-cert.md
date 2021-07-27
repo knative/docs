@@ -32,7 +32,7 @@ cert-manager tool:
   also use cert-manager to configure Knative to automatically obtain new TLS
   certificates and renew existing ones. If you want to enable Knative to
   automatically provision TLS certificates, instead see the
-  [Enabling automatic TLS certificate provisioning](using-auto-tls.md) topic.
+  [Enabling automatic TLS certificate provisioning](./using-auto-tls.md) topic.
 
 By default, the [Let's Encrypt Certificate Authority (CA)][le] is used to
 demonstrate how to enable HTTPS connections, but you can configure Knative to
@@ -61,7 +61,7 @@ You must meet the following requirements to enable secure HTTPS connections:
 - Knative Serving must be installed. For details about installing the Serving
   component, see the [Knative installation guides](../install/).
 - You must configure your Knative cluster to use a
-  [custom domain](using-a-custom-domain.md).
+  [custom domain](./using-a-custom-domain.md).
 
 !!! warning
     Istio only supports a single certificate per Kubernetes cluster.
@@ -131,7 +131,7 @@ provisioning:
 
   To use cert-manager to manually obtain certificates:
 
-  1.  [Install and configure cert-manager](installing-cert-manager.md).
+  1.  [Install and configure cert-manager](./installing-cert-manager.md).
 
   1.  Continue to the steps below about
       [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
@@ -140,7 +140,7 @@ provisioning:
 - **Automatic certificates**: Configure Knative to use cert-manager for
   automatically obtaining and renewing TLS certificate. The steps for installing
   and configuring cert-manager for this method are covered in full in the
-  [Enabling automatic TLS cert provisioning](using-auto-tls.md) topic.
+  [Enabling automatic TLS cert provisioning](./using-auto-tls.md) topic.
 
 ## Manually adding a TLS certificate
 
@@ -149,7 +149,7 @@ cert-manager tool to manually obtain a new certificate, you can use the
 following steps to add that certificate to your Knative cluster.
 
 For instructions about enabling Knative for automatic certificate provisioning,
-see [Enabling automatic TLS cert provisioning](using-auto-tls.md). Otherwise,
+see [Enabling automatic TLS cert provisioning](./using-auto-tls.md). Otherwise,
 continue below for instructions about manually adding a certificate.
 
 

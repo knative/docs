@@ -11,7 +11,7 @@ The following settings are specific to the Knative Pod Autoscaler (KPA).
 
 ## Modes
 
-The KPA acts on [metrics](autoscaling-metrics.md) (`concurrency` or `rps`) aggregated over time-based windows.
+The KPA acts on [metrics](./autoscaling-metrics.md) (`concurrency` or `rps`) aggregated over time-based windows.
 
 These windows define the amount of historical data that the Autoscaler takes into account, and are used to smooth the data over the specified amount of time.
 The shorter these windows are, the more quickly the Autoscaler will react.

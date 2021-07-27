@@ -56,7 +56,7 @@ docker tag yourreponame/helloworld-scala:<version> dev.local/helloworld-scala:<v
 Otherwise Knative Serving won't be able to resolve this image from the Minikube
 Docker Repository.
 
-You specify the repository in [build.sbt](build.sbt):
+You specify the repository in [build.sbt](./build.sbt):
 
 ```scala
 dockerRepository := Some("your_repository_name")
@@ -69,7 +69,7 @@ You can learn more about the build configuration syntax
 
 Importantly, in the `service.yaml` file, **change the
 image reference to match up with the repository**, name, and version specified
-in the [build.sbt](build.sbt) in the previous section.
+in the [build.sbt](./build.sbt) in the previous section.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -111,7 +111,7 @@ local Docker Repository.
 
 === "yaml"
 
-    Apply the [Service yaml definition](service.yaml):
+    Apply the [Service yaml definition](./service.yaml):
 
     ```bash
     kubectl apply -f service.yaml

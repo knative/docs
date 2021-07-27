@@ -25,7 +25,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Deploy the Service
 
-1. Deploy the [sample](service.yaml) Knative Service:
+1. Deploy the [sample](./service.yaml) Knative Service:
 
      ```bash
      kubectl apply -f docs/serving/autoscaling/autoscale-go/service.yaml

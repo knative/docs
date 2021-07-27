@@ -13,7 +13,7 @@ We are going to create the following logical configuration. We create a
 PingSource, feeding events to a [`Sequence`](../), then
 taking the output of that `Sequence` and displaying the resulting output.
 
-![Logical Configuration](sequence-reply-to-event-display.png)
+![Logical Configuration](./sequence-reply-to-event-display.png)
 
 The functions used in these examples live in
 [https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).

@@ -40,7 +40,7 @@ kubectl patch cm config-features -n knative-serving -p '{"data":{"tag-header-bas
 Follow the instructions in [helloworld-go](../hello-world/helloworld-go) to build the `helloworld` image and upload it
 to your container repository.
 
-Replace `{username}` in the [sample.yaml](sample.yaml) with your Docker Hub username.
+Replace `{username}` in the [sample.yaml](./sample.yaml) with your Docker Hub username.
 
 ## Setting up the revisions with tag
 
