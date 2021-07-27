@@ -5,7 +5,7 @@ into a single location:
 #### [Go to the How-to guides for Knative docs contributors](https://knative.dev/docs/help/)
 
 **Quick links**:
-* [Docs help](https://knative.dev/help/contributor/)
+* [Docs help](https://knative.dev/docs/help/contributor/)
     * New content templates:
         * [Concept](docs/help/contributor/templates/template-concept.md)
         * [Procedure](docs/help/contributor/templates/template-procedure.md)
