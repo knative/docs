@@ -9,10 +9,10 @@ _build:
 All information about contributing to the Knative documentation has been moved
 into a single location:
 
-#### [Go to the How-to guides for Knative docs contributors](https://knative.dev/docs/help/)
+#### [Go to the How-to guides for Knative docs contributors](https://knative.dev/help/)
 
 **Quick links**:
-   * [Docs help](https://knative.dev/docs/help/contributor/)
+   * [Docs help](https://knative.dev/help/contributor/)
       * New content templates:
          * [Concept](docs/help/contributor/templates/template-concept.md)
          * [Procedure](docs/help/contributor/templates/template-procedure.md)
