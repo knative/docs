@@ -18,7 +18,7 @@ topics list common errors and solutions.
 - [Blog](docs/help/contributor/templates/template-blog-entry.md) -- Instructions and a template that you
 can use to help you post to the Knative blog.
 
-Consult [Knative contributor's guide](docs/help/contributor/readme.md) for all resources for contributing to
+Consult [Knative contributor's guide](https://knative.dev/docs/help/contributor) for all resources for contributing to
 Knative documentation.
 
 Learn more about contributing to the Knative Docs:
