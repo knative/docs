@@ -213,7 +213,6 @@ nav:
           - Overview: eventing/samples/kafka/README.md
           - Binding Example: eventing/samples/kafka/binding/README.md
           - Channel Example: eventing/samples/kafka/channel/README.md
-          - ResetOffset Example: eventing/samples/kafka/resetoffset/README.md
         - Parallel:
           - Overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
