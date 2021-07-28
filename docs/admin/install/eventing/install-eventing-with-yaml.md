@@ -26,7 +26,7 @@ To install Knative Eventing:
 ## Verify the installation
 
 !!! success
-    Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`. To do so, run the command:
+    Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`, by running the following command and inspecting the output:
 
     ```bash
     kubectl get pods --namespace knative-eventing
