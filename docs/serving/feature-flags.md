@@ -110,7 +110,7 @@ spec:
 * **Type**: extension
 * **ConfigMap key:** `kubernetes.podspec-volumes-emptydir`
 
-This extension controls whether [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) can be specified.
+This extension controls whether [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) volumes can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
