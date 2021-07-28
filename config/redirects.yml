@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      serving/feature-flags.md: admin/serving/feature-flags.md
       serving/using-subroutes.md: developer/serving/traffic-management.md
       serving/rolling-out-latest-revision.md: developer/serving/rolling-out-latest-revision.md
       serving/tag-resolution.md: developer/serving/tag-resolution.md

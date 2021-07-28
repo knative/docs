@@ -53,6 +53,7 @@ nav:
         - Knative Serving configuration:
           - Configure Deployment resources: admin/serving/deployment.md
           - Configuring gradual rollout of traffic to Revisions: admin/serving/rolling-out-latest-revision-configmap.md
+          - Feature and extension flags: admin/serving/feature-flags.md
         # Eventing config
         - Knative Eventing configuration:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
@@ -137,7 +138,6 @@ nav:
         - Installing cert-manager: serving/installing-cert-manager.md
         - Configuring HTTPS connections: serving/using-a-tls-cert.md
         - Enabling auto-TLS certs: serving/using-auto-tls.md
-        - Feature and extension flags: serving/feature-flags.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
         - Setting up a custom domain: serving/using-a-custom-domain.md
         - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
