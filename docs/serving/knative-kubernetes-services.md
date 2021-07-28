@@ -84,5 +84,5 @@ The net-istio-controller deployment reconciles a cluster's ingress into an
 
 - For a deeper look at the services and deployments involved in Knative Serving,
   see the [specs](https://github.com/knative/specs/blob/main/specs/serving/overview.md) repository.
-- For a high-level analysis of Serving, see the [Serving overview](README.md).
+- For a high-level analysis of Knative Serving, see the [Knative Serving overview](README.md).
 - For hands-on tutorials, see the [Knative Serving code samples](samples/README.md).
