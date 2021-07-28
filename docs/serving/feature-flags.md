@@ -106,6 +106,29 @@ spec:
           image: gcr.io/knative-samples/helloworld-java
 ```
 
+## EmptyDir
+* **Type**: extension
+* **ConfigMap key:** `kubernetes.podspec-volumes-emptydir`
+
+This extension controls whether [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) volumes can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      containers:
+          ...
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
+      volumes:
+        - name: cache
+          emptyDir: {}
+```
+
 ## Kubernetes Node Affinity
 
 * **Type**: extension
