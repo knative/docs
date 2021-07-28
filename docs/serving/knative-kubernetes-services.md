@@ -6,7 +6,7 @@ that are active when running Knative Serving.
 
 ## Before You Begin
 
-1. This guide assumes that you have [installed Knative Serving](/admin/install/serving/install-serving-with-yaml).
+1. This guide assumes that you have [installed Knative Serving](../admin/install/serving/install-serving-with-yaml.md).
 2. Verify that you have the proper components in your cluster. To view the
    services installed in your cluster, use the command:
 
@@ -83,8 +83,6 @@ The net-istio-controller deployment reconciles a cluster's ingress into an
 ## What's Next
 
 - For a deeper look at the services and deployments involved in Knative Serving,
-  click
-  [here](https://github.com/knative/specs/blob/main/specs/serving/overview.md).
-- For a high-level analysis of Serving, look at the [documentation here](./).
-- Check out the Knative Serving code samples [here](samples/) for more
-  hands-on tutorials.
+  see the [specs](https://github.com/knative/specs/blob/main/specs/serving/overview.md) repository.
+- For a high-level analysis of Knative Serving, see the [Knative Serving overview](README.md).
+- For hands-on tutorials, see the [Knative Serving code samples](samples/README.md).
