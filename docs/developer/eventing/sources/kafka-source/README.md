@@ -307,7 +307,7 @@ KafkaSource expects these files to be in pem format, if it is in other format li
    ```
 
 2. Apply the KafkaSource, change bootstrapServers and topics accordingly.
-```yaml
+   ```yaml
    apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
    metadata:
