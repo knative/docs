@@ -171,11 +171,24 @@ Follow the procedure for the networking layer of your choice:
 ## Verify the installation
 
 !!! success
-    Monitor the Knative components until all of the components display `Running` or
-    `Completed` beneath `STATUS`:
+    Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`.
+    You can do this by running the following command and inspecting the output:
 
     ```bash
-    kubectl get pods --namespace knative-serving
+    kubectl get pods -n knative-serving
+    ```
+
+    Example output:
+
+    ```{ .bash .no-copy }
+    NAME                                      READY   STATUS    RESTARTS   AGE
+    3scale-kourier-control-54cc54cc58-mmdgq   1/1     Running   0          81s
+    activator-67656dcbbb-8mftq                1/1     Running   0          97s
+    autoscaler-df6856b64-5h4lc                1/1     Running   0          97s
+    controller-788796f49d-4x6pm               1/1     Running   0          97s
+    domain-mapping-65f58c79dc-9cw6d           1/1     Running   0          97s
+    domainmapping-webhook-cc646465c-jnwbz     1/1     Running   0          97s
+    webhook-859796bc7-8n5g2                   1/1     Running   0          96s
     ```
 
 <!-- These are snippets from the docs/snippets directory -->
@@ -262,4 +275,3 @@ The tabs below expand to show instructions for installing each Serving extension
         ```bash
         kubectl apply -f {{ artifact(repo="serving",file="serving-nscert.yaml")}}
         ```
-

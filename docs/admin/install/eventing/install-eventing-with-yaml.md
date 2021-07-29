@@ -25,12 +25,21 @@ To install Knative Eventing:
 
 ## Verify the installation
 
-!!! success "Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`:"
+!!! success
+    Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`.
+    You can do this by running the following command and inspecting the output:
 
-    ```{ .bash .no-copy }
-    kubectl get pods --namespace knative-eventing
+    ```bash
+    kubectl get pods -n knative-eventing
     ```
 
+    Example output:
+
+    ```{ .bash .no-copy }
+    NAME                                   READY   STATUS    RESTARTS   AGE
+    eventing-controller-7995d654c7-qg895   1/1     Running   0          2m18s
+    eventing-webhook-fff97b47c-8hmt8       1/1     Running   0          2m17s
+    ```
 
 ## Optional: Install a default Channel (messaging) layer
 
