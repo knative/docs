@@ -308,7 +308,7 @@ By default the `KafkaSource` starts consuming from the `latest` offset in each p
         name: event-display
    ```
 
-*NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. Also this field will be honored, only if there are no prior commited offsets for that consumer group.
+*NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. Also this field will be honored, only if there are no prior committed offsets for that consumer group.
 
 ## Connecting to a TLS enabled Kafka broker
 
