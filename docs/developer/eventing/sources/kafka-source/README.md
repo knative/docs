@@ -287,7 +287,7 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
 
 ## (Optional) Specify the initial offset
 
-By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case, you want to consume from the earliest offset, use this field to configure the same.
+By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case you want to consume from the earliest offset, set the initialOffset field to `earliest`.
 
    ```yaml
    apiVersion: sources.knative.dev/v1beta1
@@ -308,7 +308,7 @@ By default the `KafkaSource` starts consuming from the `latest` offset in each p
         name: event-display
    ```
 
-*NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. Also this field will be honored, only if there are no prior committed offsets for that consumer group.
+*NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
 
 ## Connecting to a TLS enabled Kafka broker
 
