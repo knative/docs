@@ -287,7 +287,7 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
 
 ## (Optional) Specify the initial offset
 
-By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case you want to consume from the earliest, use this field to configure that same.
+By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case, you want to consume from the earliest offset, use this field to configure the same.
 
    ```yaml
    apiVersion: sources.knative.dev/v1beta1
