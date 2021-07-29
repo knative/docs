@@ -175,7 +175,7 @@ Follow the procedure for the networking layer of your choice:
     You can do this by running the following command and inspecting the output:
 
     ```bash
-    kubectl get pods -n knative-eventing
+    kubectl get pods -n knative-serving
     ```
 
     Example output:
