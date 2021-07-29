@@ -46,7 +46,7 @@ We're excited that you're interested in contributing to the Knative documentatio
 ### Getting started
 
 If you want to contribute a fix or add new content to the documentation, you can
-navigate through the [`/docs`](./docs) repo or use the `Edit this page` pencil icon on each of the pages of
+navigate through the [`/docs`](docs) repo or use the `Edit this page` pencil icon on each of the pages of
 the website.
 
 Before you can contribute, first start by reading the Knative contributor
