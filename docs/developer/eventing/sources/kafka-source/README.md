@@ -285,6 +285,31 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
         name: event-display
    ```
 
+## (Optional) Specify the initial offset
+
+By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case you want to consume from the earliest, use this field to configure that same.
+
+   ```yaml
+   apiVersion: sources.knative.dev/v1beta1
+   kind: KafkaSource
+   metadata:
+    name: kafka-source
+   spec:
+    consumerGroup: knative-group
+    initialOffset: earliest
+    bootstrapServers:
+    - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
+    topics:
+    - knative-demo-topic
+    sink:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: event-display
+   ```
+
+*NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in an validation error. Also this field will be honored, only if there are no prior commited offsets for that consumer group.
+
 ## Connecting to a TLS enabled Kafka broker
 
 The KafkaSource supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files
