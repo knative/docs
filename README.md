@@ -37,7 +37,7 @@ Source files for the documentation on the website are located within the
 
 Each release of the Knative docs is available in the website (starting with
 0.3) and their source files are all stored in
-[branches of this repo](./doc-releases.md).
+[branches of this repo](doc-releases.md).
 
 ## Contributing to docs
 
