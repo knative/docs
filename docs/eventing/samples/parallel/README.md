@@ -25,5 +25,5 @@ trivial filtering, transformation and routing of the incoming events.
 
 The examples are:
 
-- [Parallel with multiple branches and global reply](./multiple-branches/)
-- [Parallel with mutually exclusive cases](./mutual-exclusivity/)
+- [Parallel with multiple branches and global reply](multiple-branches/)
+- [Parallel with mutually exclusive cases](mutual-exclusivity/)

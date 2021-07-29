@@ -21,7 +21,7 @@ To install the Knative Serving component:
     ```
 
     !!! info
-        For information about the YAML files in Knative Serving, see [Knative Serving installation files](./serving-installation-files.md).
+        For information about the YAML files in Knative Serving, see [Knative Serving installation files](serving-installation-files.md).
 
 ## Install a networking layer
 

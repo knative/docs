@@ -89,8 +89,8 @@ kubectl -n knative-eventing edit configmap config-tracing
 To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access
 traces are provided in the Knative Serving observability section:
 
- - [Zipkin](./../serving/accessing-traces.md#zipkin)
- - [Jaeger](./../serving/accessing-traces.md#jaeger)
+ - [Zipkin](../serving/accessing-traces.md#zipkin)
+ - [Jaeger](../serving/accessing-traces.md#jaeger)
 
 ### Example
 
@@ -128,10 +128,10 @@ Given the above, the expected path and behavior of an event is as follows:
 
 This is a screenshot of the trace view in Zipkin. All the red letters have been added to the screenshot and correspond to the expectations earlier in this section:
 
-![Annotated Trace](./images/AnnotatedTrace.png)
+![Annotated Trace](images/AnnotatedTrace.png)
 
 This is the same screenshot without the annotations.
 
-![Raw Trace](./images/RawTrace.png)
+![Raw Trace](images/RawTrace.png)
 
-If you are interested, here is the [raw JSON](./data/ee46c4c6be1df717b3b82f55b531912f.json) of the trace.
+If you are interested, here is the [raw JSON](data/ee46c4c6be1df717b3b82f55b531912f.json) of the trace.

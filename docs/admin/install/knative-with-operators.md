@@ -664,5 +664,5 @@ ko delete -f config/
 
 ## What's next
 
-- [Configure Knative Serving using Operator](./operator/configuring-serving-cr.md)
-- [Configure Knative Eventing using Operator](./operator/configuring-eventing-cr.md)
+- [Configure Knative Serving using Operator](operator/configuring-serving-cr.md)
+- [Configure Knative Eventing using Operator](operator/configuring-eventing-cr.md)

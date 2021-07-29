@@ -72,7 +72,7 @@ You can also apply an updated domain configuration:
 > If you have an existing deployment, Knative reconciles the change made to the ConfigMap, and automatically updates the host name for all of the deployed Services and Routes.
 
 Deploy an app (for example,
-[`helloworld-go`](./samples/hello-world/helloworld-go/)), to your
+[`helloworld-go`](samples/hello-world/helloworld-go/)), to your
 cluster as normal. You can retrieve the URL in Knative Route "helloworld-go"
 with the following command:
 
@@ -123,7 +123,7 @@ Follow these steps to make your domain publicly accessible:
 ### Set static IP for Knative Gateway
 
 You might want to
-[set a static IP for your Knative gateway](./gke-assigning-static-ip-address),
+[set a static IP for your Knative gateway](gke-assigning-static-ip-address),
 so that the gateway IP does not change each time your cluster is restarted.
 
 ### Update your DNS records
