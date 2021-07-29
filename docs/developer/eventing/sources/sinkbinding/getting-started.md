@@ -92,27 +92,31 @@ create a Knative service.
     ```
 
 === "YAML"
-    Create a Knative service by running:
+    1. Create a YAML file for the Knative service using the template below:
 
-    ```yaml
-    kubectl apply -f - <<EOF
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: <app-name>
-    spec:
-      template:
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        metadata:
+          name: <app-name>
         spec:
-          containers:
-            - image: <image-url>
-    EOF
-    ```
-    Where:
+          template:
+            spec:
+              containers:
+                - image: <image-url>
+        ```
+        Where:
 
-    - `<app-name>` is the name of the application. For example, `event-display`.
-    - `<image-url>` is the URL of the image container.
-    For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`.
+        - `<app-name>` is the name of the application. For example, `event-display`.
+        - `<image-url>` is the URL of the image container.
+        For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`.
 
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 ## Create a subject
 
@@ -130,10 +134,9 @@ use the following sample to create a CronJob object as the subject.
 The following CronJob makes a single cloud event that targets `K_SINK` and adds
 any extra overrides given by `CE_OVERRIDES`.
 
-1. Create the CronJob by running:
+1. Create a YAML file for the CronJob using the example below:
 
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: batch/v1beta1
     kind: CronJob
     metadata:
@@ -165,9 +168,14 @@ any extra overrides given by `CE_OVERRIDES`.
                       valueFrom:
                         fieldRef:
                           fieldPath: metadata.namespace
-    EOF
     ```
 
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ## Create a SinkBinding object
 
@@ -209,40 +217,45 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     ```
 
 === "YAML"
-    Create a `SinkBinding` object by running:
+    1. Create a YAML file for the `SinkBinding` object using the template below:
 
-    ```yaml
-    kubectl apply -f - <<EOF
-    apiVersion: sources.knative.dev/v1
-    kind: SinkBinding
-    metadata:
-      name: <name>
-    spec:
-      subject:
-        apiVersion: <api-version>
-        kind: <kind>
-        selector:
-          matchLabels:
-            <label-key>: <label-value>
-      sink:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: <sink>
-    EOF
-    ```
-    Where:
+        ```yaml
+        apiVersion: sources.knative.dev/v1
+        kind: SinkBinding
+        metadata:
+          name: <name>
+        spec:
+          subject:
+            apiVersion: <api-version>
+            kind: <kind>
+            selector:
+              matchLabels:
+                <label-key>: <label-value>
+          sink:
+            ref:
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              name: <sink>
+        ```
+        Where:
 
-    - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
-    - `<api-version>` is the API version of the subject. For example `batch/v1`.
-    - `<kind>` is the Kind of your subject. For example `Job`.
-    - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
-    that have a matching label. For example, `app: heartbeat-cron` selects any subject
-    with the label `app=heartbeat-cron`.
-    - `<sink>` is the sink to connect. For example `event-display`.
+        - `<name>` is the name of the SinkBinding object you want to create. For example, `bind-heartbeat`.
+        - `<api-version>` is the API version of the subject. For example `batch/v1`.
+        - `<kind>` is the Kind of your subject. For example `Job`.
+        - `<label-key>: <label-value>` is a map of key-value pairs to select subjects
+        that have a matching label. For example, `app: heartbeat-cron` selects any subject
+        with the label `app=heartbeat-cron`.
+        - `<sink>` is the sink to connect. For example `event-display`.
 
-    For more information about the fields you can configure for the SinkBinding
-    object, see [Sink Binding Reference](reference.md).
+        For more information about the fields you can configure for the SinkBinding
+        object, see [Sink Binding Reference](reference.md).
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 
 ## Verify the SinkBinding object

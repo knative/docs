@@ -5,21 +5,27 @@ Channel object.
 
 To create a Channel:
 
-* Create a [Channel object](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Channel) by running:
+1. Create a YAML file for the [Channel object](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Channel)
+using the template below:
 
     ```yaml
-    kubectl apply -f <<EOF
     apiVersion: messaging.knative.dev/v1
     kind: Channel
     metadata:
       name: <example-channel>
       namespace: <namespace>
-    EOF
     ```
     Where:
 
     * `<example-channel>` is the name of the Channel you want to create.
     * `<namespace>` is the name of your target namespace.
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 If you create this object in the `default` namespace, according to the default ConfigMap
 example in [Channel types and defaults](/eventing/channels/channel-types-defaults), it is an

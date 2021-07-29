@@ -367,11 +367,11 @@ Play around with the CloudEvent attributes in the curl command and the trigger s
 `source=knative/eventing/samples/hello-world`. This event enters the eventing
 mesh via the Broker and can be delivered to other services using a Trigger
 
-1. Deploy a pod that receives any CloudEvent and logs the event to its output.
+1. Using the example below, create a YAML file for a Pod that receives any
+CloudEvent and logs the event to its output:
 
       ```yaml
-      kubectl -n knative-samples apply -f - <<EOF
-      # event-display app deploment
+      # event-display app deployment
       apiVersion: apps/v1
       kind: Deployment
       metadata:
@@ -405,13 +405,19 @@ mesh via the Broker and can be delivered to other services using a Trigger
           - protocol: TCP
             port: 80
             targetPort: 8080
-      EOF
       ```
 
-1. Create a trigger to deliver the event to the above service
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
+1. Using the example below, create a YAML file for a trigger to deliver the event
+to the above service:
 
        ```yaml
-       kubectl -n knative-samples apply -f - <<EOF
        apiVersion: eventing.knative.dev/v1
        kind: Trigger
        metadata:
@@ -428,8 +434,14 @@ mesh via the Broker and can be delivered to other services using a Trigger
              apiVersion: v1
              kind: Service
              name: event-display
-       EOF
        ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 1. [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
 

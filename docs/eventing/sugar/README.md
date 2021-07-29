@@ -27,15 +27,22 @@ kubectl apply --filename {{ artifact( repo="eventing", file="eventing-sugar-cont
 One way to create a Broker is to manually apply a resource to a cluster using
 the default settings:
 
-```bash
-kubectl create -f - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  name: default
-  namespace: default
-EOF
-```
+1. Copy the YAML below into a file:
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+      namespace: default
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 There might be cases where automated Broker creation is desirable, such as on
 namespace creation, or on Trigger creation. The Sugar controller enables those
@@ -55,16 +62,23 @@ Sugar Controller will automatically recreate a default Broker.
 
 Creating a "default" Broker when creating a Namespace:
 
-```bash
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: example
-  labels:
-    eventing.knative.dev/injection: enabled
-EOF
-```
+1. Copy the YAML below into a file:
+
+    ```yaml
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: example
+      labels:
+        eventing.knative.dev/injection: enabled
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 To automatically create a Broker after a namespace exists, label the Namespace:
 

@@ -259,72 +259,86 @@ Helloworld-python app logs the context and the msg of the above event, and repli
 ## Verify reply from helloworld-python app
 The `helloworld-python` app replies with an event type `type= dev.knative.samples.hifromknative`, and source `source=knative/eventing/samples/hello-world`. The event enters the eventing mesh through the broker, and can be delivered to event sinks using a trigger
 
-  1. Deploy a pod that receives any CloudEvent and logs the event to its output:
+1. Deploy a Pod that receives any CloudEvent and logs the event to its output.
 
-      ```yaml
-      kubectl -n knative-samples apply -f - <<EOF
-      # event-display app deploment
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: event-display
-        namespace: knative-samples
-      spec:
-        replicas: 1
-        selector:
-          matchLabels: &labels
+    1. Copy the YAML below into a file:
+
+        ```yaml
+        # event-display app deploment
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: event-display
+          namespace: knative-samples
+        spec:
+          replicas: 1
+          selector:
+            matchLabels: &labels
+              app: event-display
+          template:
+            metadata:
+              labels: *labels
+            spec:
+              containers:
+                - name: helloworld-python
+                  image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+        ---
+        # Service that exposes event-display app.
+        # This will be the subscriber for the Trigger
+        kind: Service
+        apiVersion: v1
+        metadata:
+          name: event-display
+          namespace: knative-samples
+        spec:
+          selector:
             app: event-display
-        template:
-          metadata:
-            labels: *labels
-          spec:
-            containers:
-              - name: helloworld-python
-                image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-      ---
-      # Service that exposes event-display app.
-      # This will be the subscriber for the Trigger
-      kind: Service
-      apiVersion: v1
-      metadata:
-        name: event-display
-        namespace: knative-samples
-      spec:
-        selector:
-          app: event-display
-        ports:
-          - protocol: TCP
-            port: 80
-            targetPort: 8080
-      EOF
-      ```
+          ports:
+            - protocol: TCP
+              port: 80
+              targetPort: 8080
+        ```
 
-  1. Create a trigger to deliver the event to the previously created service:
+    1. Apply the YAML file by running the command:
 
-      ```yaml
-      kubectl -n knative-samples apply -f - <<EOF
-      apiVersion: eventing.knative.dev/v1
-      kind: Trigger
-      metadata:
-        name: event-display
-        namespace: knative-samples
-      spec:
-        broker: default
-        filter:
-          attributes:
-            type: dev.knative.samples.hifromknative
-            source: knative/eventing/samples/hello-world
-        subscriber:
-          ref:
-            apiVersion: v1
-            kind: Service
-            name: event-display
-      EOF
-      ```
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
-  1. [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
+1. Create a trigger to deliver the event to the previously created service.
 
-  1. Check the logs of `event-display` Service:
+    1. Copy the YAML below into a file:
+
+        ```yaml
+        apiVersion: eventing.knative.dev/v1
+        kind: Trigger
+        metadata:
+          name: event-display
+          namespace: knative-samples
+        spec:
+          broker: default
+          filter:
+            attributes:
+              type: dev.knative.samples.hifromknative
+              source: knative/eventing/samples/hello-world
+          subscriber:
+            ref:
+              apiVersion: v1
+              kind: Service
+              name: event-display
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
+1. [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
+
+1. Check the logs of `event-display` Service:
 
     ```bash
     kubectl -n knative-samples logs -l app=event-display --tail=50
