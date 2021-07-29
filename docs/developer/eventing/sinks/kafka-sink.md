@@ -151,7 +151,7 @@ in particular, [Producer configurations](https://kafka.apache.org/documentation/
 
 To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
 
-1. Create a YAML file using the `kafka-config-logging` ConfigMap below:
+1. Create the `kafka-config-logging` ConfigMap as a YAML file that contains the following:
 
     ```yaml
     apiVersion: v1
