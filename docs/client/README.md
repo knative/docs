@@ -32,9 +32,11 @@ After you have installed `kubectl` or `kn`, these tools will search for the `kub
 
 A `kubeconfig` file is usually automatically created when you create a Kubernetes cluster.
 
-You can also specify the configuration by setting the environment variable `$KUBECONFIG` that points to the config file.
+You can also specify a config file in the following ways:
 
-`kn` has the `--config` option which can also be used for specifying a config file like `--config path/to/config`.
+- Setting the environment variable `$KUBECONFIG`, and point it to the kubeconfig file.
+
+- Using the `kn` CLI `--config` option, for example, `kn --config path/to/config service list`. The default config is at `~/.config/kn/config.yaml`.
 
 For more information about `kubeconfig` files, see <a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/" target="_blank">Organizing Cluster Access Using kubeconfig Files</a>.
 
