@@ -21,6 +21,12 @@ kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )
 
 Verify your installation:
 
+Be sure to set the current namespace to the `default` as the operator is installed to `default` namespace:
+```
+kubectl config set-context --current --namespace=default 
+```
+
+Check the operator deployment:
 ```
 kubectl get deployment knative-operator
 ```
