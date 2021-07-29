@@ -171,10 +171,11 @@ Follow the procedure for the networking layer of your choice:
 ## Verify the installation
 
 !!! success
-    Monitor the Knative components until all of the components display `Running` or `Completed` beneath `STATUS`. To do so, run the command:
+    Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`.
+    You can do this by running the following command and inspecting the output:
 
     ```bash
-    kubectl get pods --namespace knative-serving
+    kubectl get pods -n knative-eventing
     ```
 
     Example output:
