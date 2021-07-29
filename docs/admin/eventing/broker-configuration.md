@@ -112,15 +112,23 @@ When a Broker is created without a specified `BrokerClass` annotation, the defau
 
 The following example creates a Broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
 
-```bash
-kubectl create -f - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  name: default
-  namespace: default
-EOF
-```
+1. Create a YAML file for your Broker using the example below:
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+      namespace: default
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
 
 ### Configuring the Broker class
 

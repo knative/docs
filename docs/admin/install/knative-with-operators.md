@@ -190,7 +190,7 @@ NAME              VERSION             READY   REASON
 knative-serving   <version number>    True
 ```
 
-### Installing with Different Networking Layers
+### Installing with different networking layers
 
 ??? "Installing the Knative Serving component with different network layers"
 
@@ -225,9 +225,8 @@ knative-serving   <version number>    True
           kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
           ```
 
-        1. To configure Knative Serving to use Ambassador, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
+        1. To configure Knative Serving to use Ambassador, copy the YAML below into a file:
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
@@ -237,8 +236,14 @@ knative-serving   <version number>    True
             config:
               network:
                 ingress.class: "ambassador.ingress.networking.knative.dev"
-          EOF
           ```
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
         1. Fetch the External IP or CNAME:
           ```bash
@@ -256,9 +261,8 @@ knative-serving   <version number>    True
           kubectl apply --filename {{artifact(repo="net-contour",file="contour.yaml")}}
           ```
 
-        1. To configure Knative Serving to use Contour, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
+        1. To configure Knative Serving to use Contour, copy the YAML below into a file:
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
@@ -271,8 +275,13 @@ knative-serving   <version number>    True
             config:
               network:
                 ingress.class: "contour.ingress.networking.knative.dev"
-          EOF
           ```
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
         1. Fetch the External IP or CNAME:
           ```bash
@@ -285,9 +294,8 @@ knative-serving   <version number>    True
 
         The following commands install Kourier and enable its Knative integration.
 
-        1. To configure Knative Serving to use Kourier, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
+        1. To configure Knative Serving to use Kourier, copy the YAML below into a file:
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
@@ -300,8 +308,14 @@ knative-serving   <version number>    True
             config:
               network:
                 ingress.class: "kourier.ingress.networking.knative.dev"
-          EOF
           ```
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
         1. Fetch the External IP or CNAME:
           ```bash
