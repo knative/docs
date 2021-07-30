@@ -110,7 +110,7 @@ For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot wit
 For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
 !!! note
-    Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
+    Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `<username>` with your Docker Hub username.
 
 1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
@@ -128,36 +128,34 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 === "yaml"
 
-       1. Create a new file, `service.yaml` and copy the following service definition
-          into the file. Make sure to replace `{username}` with your Docker Hub
-          username.
+    1. Create a new file named `service.yaml` and copy the following service definition
+    into the file.
 
-          ```yaml
-          kubectl apply -f - <<EOF
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          metadata:
-            name: helloworld-java-spring
-            namespace: default
-          spec:
-            template:
-              spec:
-                containers:
-                  - image: docker.io/{username}/helloworld-java-spring
-                    env:
-                      - name: TARGET
-                        value: "Spring Boot Sample v1"
-          EOF
-          ```
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        metadata:
+          name: helloworld-java-spring
+          namespace: default
+        spec:
+          template:
+            spec:
+              containers:
+                - image: docker.io/<username>/helloworld-java-spring
+                  env:
+                    - name: TARGET
+                      value: "Spring Boot Sample v1"
+        ```
+        Where `<username>` is your Docker Hub username.
 
-       Ensure that the container image value
-       in `service.yaml` matches the container you built in the previous step. Apply
-       the configuration using `kubectl`:
+        Ensure that the container image value in `service.yaml` matches the
+        container you built in the previous step.
 
-       ```bash
-       kubectl apply --filename service.yaml
-       ```
+    1. Apply the YAML file by running the command:
 
+        ```bash
+        kubectl apply -f service.yaml
+        ```
 
 === "kn"
 
