@@ -127,7 +127,7 @@ Apply code formatting only to special-purpose text:
 
     - Creating or updating a resource:
 
-        1. Create a YAML file using the template below:
+        1. Create a YAML file using the following template:
 
             ```yaml
             # YAML FILE CONTENTS
