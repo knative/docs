@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - image: docker.io/{username}/helloworld-java-spring
+      - image: docker.io/<username>/helloworld-java-spring
         env:
         - name: TARGET
           value: "Spring Boot Sample v1"
