@@ -238,6 +238,23 @@ spec:
                   fieldPath: spec.nodeName
 ```
 
+## Kubernetes Priority Class Name
+
+- **Type**: extension
+- **ConfigMap key:** `kubernetes.podspec-priorityclassname`
+
+This flag controls whether [priorityClassName](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      priorityClassName: high-priority
+```
+
 ## Kubernetes Dry Run
 
 * **Type**: extension
