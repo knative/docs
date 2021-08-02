@@ -19,10 +19,10 @@ You can define flags in the `config-features` ConfigMap in the `knative-serving`
 Flags can have the following values:
 
 Enabled
-: The feature or extension is enabled and currently in use, or active.
+: The feature or extension is enabled and currently in use.
 
 Allowed
-: The feature or extension is enabled and can be used or made active, for example, by using an additional annotation or spec configuration for a resource.
+: The feature or extension is enabled and can be used, for example, by using an additional annotation or spec configuration for a resource.
 
 Disabled
 : The feature cannot be used.
@@ -32,20 +32,18 @@ Disabled
 When features and extensions are introduced to Knative, they follow a lifecycle of three stages:
 
 Alpha stage
-: Might be buggy. Enabling the feature may expose bugs.
-: Support for feature may be dropped at any time without notice.
-: The API may change in incompatible ways in a later software release without notice.
+: Might contain bugs.
+: Support for the feature might be dropped at any time without notice.
+: The API might change in a later software release in ways that make it incompatible with older releases without notice.
 : Recommended for use only in short-lived testing clusters, due to increased risk of bugs and lack of long-term support.
 
 Beta stage
-
-: The feature is well tested. Enabling the feature is considered safe.
-: Support for the overall feature will not be dropped, though details may change.
-: The schema and/or semantics of objects may change in incompatible ways in a subsequent beta or stable release. When this happens, we will provide instructions for migrating to the next version. This may require deleting, editing, or re-creating API objects. The editing process may require some thought. This may require downtime for applications that rely on the feature.
-: Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases. If you have multiple clusters that can be upgraded independently, you may be able to relax this restriction.
+: The feature is well tested and safe to enable.
+: Support for the overall feature will not be dropped, though details might change.
+: The schema and semantics of objects might change in incompatible ways in a subsequent beta or stable release. If this happens, instructions are provided for migrating to the next version. These types of changes might require you to delete, modify, or re-create API objects, and might require downtime for applications that rely on the feature.
+: Recommended for only non-business-critical uses because of the potential for incompatible changes in subsequent releases. If you have multiple clusters that can be upgraded independently, you might be able to relax this restriction.
 
 General Availability (GA) stage
-
 : Stable versions of the feature or extension are included in official, stable Knative releases.
 
 ### Feature lifecycle stages
@@ -263,7 +261,7 @@ spec:
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-dryrun`
 
-This flag controls whether Knative attempts to validate the Pod spec derived from a Knative Service spec by using the Kubernetes API server before accepting the object.
+This flag controls whether Knative attempts to validate the Pod spec derived from a Knative Service spec, by using the Kubernetes API server before accepting the object.
 
 When this extension is `enabled`, the server always runs this validation.
 
@@ -304,7 +302,7 @@ spec:
 
 This flag controls whether a subset of the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) can be used.
 
-When set to `enabled` or `allowed`, the following PodSecurityContext properties are permitted:
+When set to `enabled` or `allowed`, the following `PodSecurityContext` properties are permitted:
 
 - FSGroup
 - RunAsGroup
@@ -312,13 +310,14 @@ When set to `enabled` or `allowed`, the following PodSecurityContext properties 
 - SupplementalGroups
 - RunAsUser
 
-When set to `enabled` or `allowed`, the following container SecurityContext properties are permitted:
+When set to `enabled` or `allowed`, the following container `SecurityContext` properties are permitted:
 
-- RunAsNonRoot (also allowed without this flag only when set to true)
-- RunAsGroup
-- RunAsUser (already allowed without this flag)
+- `RunAsNonRoot` (also allowed without this flag only when set to true)
+- `RunAsGroup`
+- `RunAsUser` (already allowed without this flag)
 
-This flag should be used with caution, since PodSecurityContext properties may affect non-user sidecar containers that come from Knative or your service mesh.
+!!! warning
+    Use this flag with caution. `PodSecurityContext` properties can affect non-user sidecar containers that come from Knative or your service mesh.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -329,7 +328,7 @@ spec:
     spec:
       securityContext:
         runAsUser: 1000
-        ...
+...
 ```
 
 ## Kubernetes security context capabilities
