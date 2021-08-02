@@ -12,7 +12,7 @@
         You can install `kn` by downloading the executable binary for your system and placing it in the system path.
 
         1. Download the binary for your system from the <a href="https://github.com/knative/client/releases" target="_blank">`kn` release page</a>.
-        
+
         1. Rename the binary, make it executable, and rename it to `kn`:
 
          ```
@@ -27,12 +27,12 @@
          ```
          mv kn /usr/local/bin
          ```
-   
+
      1. Verify that the plugin is working, for example:
 
          ```
          kn version
-         ``` 
+         ```
 
     === "Using Go"
 
