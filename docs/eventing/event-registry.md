@@ -283,7 +283,7 @@ the next topic: How do we actually populate the registry in the first place?
 
 ## Next steps
 
-1. [Installing Knative](../../docs/admin/install/README.md).
+1. [Installing Knative](../../admin/install/).
 
 1. [Knative code samples](../samples/) is a useful resource to better understand
    some of the Event Sources (remember to point them to a Broker if you want
