@@ -37,7 +37,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    cd app
    ```
 
-1. Create a file named `index.php` and copy the code block below into it:
+2. Create a file named `index.php` and copy the code block below into it:
 
    ```php
    <?php
@@ -46,7 +46,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    ?>
    ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. See
+3. Create a file named `Dockerfile` and copy the code block below into it. See
    [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
    ```docker
@@ -67,14 +67,14 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
    ```
 
-1. Create a `.dockerignore` file to ensure that any files related to a local
+4. Create a `.dockerignore` file to ensure that any files related to a local
    build do not affect the container that you build for deployment.
 
    ```ignore
    README.md
    ```
 
-1. Create a new file, `service.yaml` and copy the following service definition
+5. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
@@ -114,7 +114,7 @@ folder) you're ready to build and deploy the sample app.
        docker push {username}/helloworld-php
        ```
 
-    1. After the build has completed and the container is pushed to docker hub, you
+    2. After the build has completed and the container is pushed to docker hub, you
        can deploy the app into your cluster. Ensure that the container image value
        in `service.yaml` matches the container you built in the previous step. Apply
        the configuration using `kubectl`:
@@ -162,7 +162,7 @@ folder) you're ready to build and deploy the sample app.
      for your app.
    - Automatically scale your pods up and down (including to zero active pods).
 
-1. To find the URL for your service, use
+2. To find the URL for your service, use
 
 
 === "kubectl"
@@ -189,7 +189,7 @@ folder) you're ready to build and deploy the sample app.
 
 
 
-1. Now you can make a request to your app and see the result. Replace
+3. Now you can make a request to your app and see the result. Replace
    the URL below with the URL returned in the previous command.
 
    ```bash
