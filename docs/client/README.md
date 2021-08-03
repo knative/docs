@@ -33,7 +33,6 @@ After you have installed `kubectl` or `kn`, these tools will search for the `kub
 You can also set the environment variable `$KUBECONFIG`, and point it to the kubeconfig file.
 
 Using the `kn` CLI, we can specify following options to connect to the cluster.
-- `--config` option can be used to specify `kn config`, for example, `kn --config path/to/config service list`. The default config is at `~/.config/kn/config.yaml`.
 - `--kubeconfig` option is equivalent to setting the `$KUBECONFIG` environment variable and can be used to point to the kubeconfig file.
 - `--context` can be used to specify the name of a context from the existing kubeconfig. (One of the output list of: `kubectl config get-contexts`)
 
