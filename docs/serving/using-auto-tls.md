@@ -76,7 +76,7 @@ and which DNS provider validates those requests.
               name: letsencrypt-dns-issuer
             solvers:
             - dns01:
-                clouddns:
+                cloudDNS:
                   # Set this to your GCP project-id
                   project: $PROJECT_ID
                   # Set this to the secret that we publish our service account key
