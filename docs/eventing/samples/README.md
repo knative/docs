@@ -1,11 +1,3 @@
----
-title: "Knative Eventing code samples"
-linkTitle: "Code samples"
-weight: 100
-type: "docs"
-showlandingtoc: "true"
----
-
 # Knative Eventing code samples
 
 Use the following code samples to help you understand the various use cases for

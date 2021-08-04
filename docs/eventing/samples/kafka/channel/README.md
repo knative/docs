@@ -99,28 +99,9 @@ default Channel configuration for Knative Eventing.
     !!! note
         The topic of a Kafka Channel is an implementation detail and records from it should not be consumed from different applications.
 
-## Configuring the Knative Broker to use Kafka Channels
-
-1. To setup a Broker that uses the Kafka Channels by default, you must
-   create a new _default_ Broker that contains the following YAML:
-
-   ```yaml
-   apiVersion: eventing.knative.dev/v1
-   kind: Broker
-   metadata:
-    name: default
-   ```
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
-
 ## Creating a Service and Trigger that use the Apache Kafka Broker
 
-The following example uses a ApiServerSource to publish events to the Broker you have created in the previous step, and a Trigger that routes those events to a Knative Service.
+The following example uses a ApiServerSource to publish events to an existing Broker, and a Trigger that routes those events to a Knative Service.
 <!--TODO: Not sure this example makes sense, why would you have an event source AND channels?-->
 
 1. Create a Knative Service:
@@ -248,9 +229,7 @@ The following example uses a ApiServerSource to publish events to the Broker you
 
     Where `<filename>` is the name of the file you created in the previous step.
 
-## Verifying your Apache Kafka Channel and Broker
-
-- Observe the events in the log of the Service, by running the command:
+1. Verifying the Kafka Channel is working, by observing events in the log of the Service, by running the command:
 
     ```bash
     kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
