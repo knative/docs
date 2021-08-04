@@ -6,11 +6,11 @@ default Channel configuration for Knative Eventing.
 ## Prerequisites
 
 - A Kubernetes cluster with
-  [Knative Kafka Channel installed](../../../../admin/install/).
+  [Knative Eventing](../../../../admin/install/eventing/install-eventing-with-yaml.md), as well as the optional Broker and Kafka Channel components.
 
 ## Creating a Kafka Channel
 
-- Create a Kafka Channel that contains the following YAML:
+1. Create a Kafka Channel that contains the following YAML:
 
     ```yaml
     apiVersion: messaging.knative.dev/v1beta1
@@ -22,7 +22,6 @@ default Channel configuration for Knative Eventing.
       replicationFactor: 1
     ```
 
-<<<<<<< HEAD
 1. Apply the YAML file by running the command:
 
     ```bash
@@ -30,12 +29,8 @@ default Channel configuration for Knative Eventing.
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-
-## Specifying the default channel configuration
-=======
 ## Specifying Kafka as the default Channel implementation
 <!--TODO: Move to admin guide-->
->>>>>>> ec43bd6f... additional cleanup
 
 1. To configure Kafka Channel as the [default channel configuration](../../../channels/channel-types-defaults), modify the `default-ch-webhook` ConfigMap so that it contains the following YAML:
 
@@ -56,20 +51,17 @@ default Channel configuration for Knative Eventing.
           replicationFactor: 1
     ```
 
-<<<<<<< HEAD
 1. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
     ```
+
     Where `<filename>` is the name of the file you created in the previous step.
 
 ## Creating an Apache Kafka channel
 
 1. After `KafkaChannel` is set as the default Channel type, you can create a Kafka Channel by creating a generic Channel object that contains the following YAML:
-=======
-1. If Kafka is configured as the default Channel implementation for your cluster, creating a Channel with the following default YAML creates a Kafka Channel:
->>>>>>> ec43bd6f... additional cleanup
 
     ```yaml
     apiVersion: messaging.knative.dev/v1
@@ -78,19 +70,15 @@ default Channel configuration for Knative Eventing.
       name: testchannel-one
     ```
 
-<<<<<<< HEAD
 1. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
     ```
+
     Where `<filename>` is the name of the file you created in the previous step.
 
-1. Check Kafka for a `testchannel-one` topic. With Strimzi this can be done by
-   using the command:
-=======
 1. Verify that the Channel was created properly by checking that your Kafka cluster has a `testchannel-one` Topic. If you are using Strimzi, you can run the command:
->>>>>>> ec43bd6f... additional cleanup
 
     ```bash
     kubectl -n kafka exec -it my-cluster-kafka-0 -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
@@ -98,7 +86,7 @@ default Channel configuration for Knative Eventing.
 
     The output looks similar to the following:
 
-    ```
+    ```bash
     ...
     __consumer_offsets
     knative-messaging-kafka.default.my-kafka-channel
@@ -113,7 +101,6 @@ default Channel configuration for Knative Eventing.
 
 ## Configuring the Knative Broker to use Kafka Channels
 
-<<<<<<< HEAD
 1. To setup a Broker that uses the Kafka Channels by default, you must
    create a new _default_ Broker that contains the following YAML:
 
@@ -132,19 +119,9 @@ default Channel configuration for Knative Eventing.
     Where `<filename>` is the name of the file you created in the previous step.
 
 ## Creating a Service and Trigger that use the Apache Kafka Broker
-=======
-The following example uses a ApiServerSource to publish events to the Broker, and a Trigger that routes events to a Knative Service.
+
+The following example uses a ApiServerSource to publish events to the Broker you have created in the previous step, and a Trigger that routes those events to a Knative Service.
 <!--TODO: Not sure this example makes sense, why would you have an event source AND channels?-->
-
-1. Create a Broker that uses Kafka Channels by default:
->>>>>>> aaec0a42... additional cleanup
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-     name: default
-    ```
 
 1. Create a Knative Service:
 
@@ -261,47 +238,6 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
 
 ### TLS authentication
 
-<<<<<<< HEAD
-1. Edit your config-kafka ConfigMap:
-
-   ```bash
-   kubectl -n knative-eventing edit configmap config-kafka
-   ```
-
-2. Set the `TLS.Enable` field to `true`:
-
-   ```yaml
-   ...
-   data:
-     sarama: |
-       config: |
-         Net:
-           TLS:
-             Enable: true
-   ...
-   ```
-
-3. Optional. If using a custom CA certificate, place your certificate data
-   into the ConfigMap in the `data.sarama.config.Net.TLS.Config.RootPEMs` field:
-
-   ```yaml
-   ...
-   data:
-     sarama: |
-       config: |
-         Net:
-           TLS:
-             Config:
-               RootPEMs: # Array of Root Certificate PEM Files (Use '|-' Syntax To Preserve Linefeeds & Avoiding Terminating \n)
-               - |-
-                 -----BEGIN CERTIFICATE-----
-                 MIIGDzCCA/egAwIBAgIUWq6j7u/25wPQiNMPZqL6Vy0rkvQwDQYJKoZIhvcNAQEL
-                 ...
-                 771uezZAFqd1GLLL8ZYRmCsAMg==
-                 -----END CERTIFICATE-----
-   ...
-   ```
-=======
 1. Edit the `config-kafka` ConfigMap:
 
     ```bash
@@ -340,7 +276,6 @@ Kafka cluster, with the two supported TLS and SASL authentication methods.
                   -----END CERTIFICATE-----
     ...
     ```
->>>>>>> aaec0a42... additional cleanup
 
 ### SASL authentication
 
@@ -354,45 +289,6 @@ To use SASL authentication, you will need the following information:
 
 1. Edit the `config-kafka` ConfigMap:
 
-<<<<<<< HEAD
-   ```bash
-   kubectl -n knative-eventing edit configmap config-kafka
-   ```
-
-2. Set the `SASL.Enable` field to `true`:
-
-   ```yaml
-   ...
-   data:
-     sarama: |
-       config: |
-         Net:
-           SASL:
-             Enable: true
-   ...
-   ```
-
-3. Create a secret with the username, password, and SASL mechanism:
-
-   ```bash
-   kubectl create secret -n <namespace> generic <kafka-auth-secret> \
-       --from-literal=password="SecretPassword" \
-       --from-literal=saslType="PLAIN" \
-       --from-literal=username="my-sasl-user"
-   ```
-
-### All authentication methods
-
-1. If you have created a secret for your desired authentication method by
-   using the previous steps, reference the secret and the namespace of the
-   secret in the `config-kafka` ConfigMap:
-
-   ```yaml
-   ...
-   data:
-     eventing-kafka: |
-       kafka:
-=======
     ```bash
     kubectl -n knative-eventing edit configmap config-kafka
     ```
@@ -428,7 +324,6 @@ To use SASL authentication, you will need the following information:
     data:
        eventing-kafka: |
         kafka:
->>>>>>> aaec0a42... additional cleanup
          authSecretName: <kafka-auth-secret>
          authSecretNamespace: <namespace>
     ...
