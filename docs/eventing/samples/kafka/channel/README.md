@@ -17,9 +17,9 @@ default Channel configuration for Knative Eventing.
     kind: KafkaChannel
     metadata:
       name: my-kafka-channel
-    spec:
-      numPartitions: 3
-      replicationFactor: 1
+      spec:
+        numPartitions: 3
+        replicationFactor: 1
     ```
 
 1. Apply the YAML file by running the command:
@@ -46,9 +46,9 @@ default Channel configuration for Knative Eventing.
         clusterDefault:
           apiVersion: messaging.knative.dev/v1beta1
           kind: KafkaChannel
-        spec:
-          numPartitions: 3
-          replicationFactor: 1
+          spec:
+            numPartitions: 3
+            replicationFactor: 1
     ```
 
 1. Apply the YAML file by running the command:
@@ -137,6 +137,14 @@ The following example uses a ApiServerSource to publish events to the Broker you
           - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+
+    Where `<filename>` is the name of the file you created in the previous step.
+
 1. Create a ServiceAccount, ClusterRole, and ClusterRoleBinding for the ApiServerSource:
 
     ```yaml
@@ -178,6 +186,14 @@ The following example uses a ApiServerSource to publish events to the Broker you
       namespace: default
     ```
 
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+
+    Where `<filename>` is the name of the file you created in the previous step.
+
 1. Create an ApiServerSource that sends events to the default Broker:
 
     ```yaml
@@ -199,6 +215,14 @@ The following example uses a ApiServerSource to publish events to the Broker you
           name: default
     ```
 
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+
+    Where `<filename>` is the name of the file you created in the previous step.
+
 1. Create a Trigger that filters events from the Broker to the Service:
 
     ```yaml
@@ -215,6 +239,14 @@ The following example uses a ApiServerSource to publish events to the Broker you
           kind: Service
           name: broker-kafka-display
     ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ## Verifying your Apache Kafka Channel and Broker
 
