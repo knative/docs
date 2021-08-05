@@ -210,7 +210,6 @@ nav:
           - GO: eventing/samples/helloworld/helloworld-go/README.md
           - Python: eventing/samples/helloworld/helloworld-python/README.md
         - Apache Kafka:
-          - Overview: eventing/samples/kafka/README.md
           - Binding Example: eventing/samples/kafka/binding/README.md
           - Channel Example: eventing/samples/kafka/channel/README.md
           - ResetOffset Example: eventing/samples/kafka/resetoffset/README.md
