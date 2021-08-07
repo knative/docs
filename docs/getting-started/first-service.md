@@ -78,4 +78,7 @@ curl http://hello.default.127.0.0.1.nip.io
 Hello World!
 ```
 
+    ??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.nip.io`?"
+        In some cases `*.nip.io` addresses are not able to be resolved. This can be solved by adding a snippet to the `/etc/systemd/resolved.conf`. See the comments [here](https://github.com/IBM-Blockchain/blockchain-vscode-extension/issues/2878#issuecomment-890147917) and [here](https://github.com/IBM-Blockchain/blockchain-vscode-extension/issues/2878#issuecomment-890246282) for more details.
+
 Congratulations :tada:, you've just created your first Knative Service. Up next, Autoscaling!
