@@ -41,7 +41,7 @@ To submit a blog post, follow the steps below.
 #### Suitable content:
 - **Original content only**
 - Knative [new feature releases and project updates](#communicating-new-project-releases)
-- Tutorials and demos [start a blog](./blog-page.md)
+- Tutorials and demos [start a blog](blog-page.md)
 - Use cases
 - Content that is specific to a vendor or platform about Knative installation and use
 

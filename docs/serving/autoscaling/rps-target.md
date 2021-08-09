@@ -10,7 +10,7 @@ type: "docs"
 This setting specifies a target for requests-per-second per replica of an application.
 
 * **Global key:** `requests-per-second-target-default`
-* **Per-revision annotation key:** `autoscaling.knative.dev/target` (your revision must also be configured to use the `rps` [metric annotation](./autoscaling-metrics.md))
+* **Per-revision annotation key:** `autoscaling.knative.dev/target` (your revision must also be configured to use the `rps` [metric annotation](autoscaling-metrics.md))
 * **Possible values:** An integer.
 * **Default:** `"200"`
 

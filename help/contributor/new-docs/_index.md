@@ -11,8 +11,8 @@ To contribute new documentation, follow these steps:
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
 1. You can use a template to get started:
-   * [New docs file](./docs-page.md)
-   * [New `_index.md` file](./index-page.md)
+   * [New docs file](docs-page.md)
+   * [New `_index.md` file](index-page.md)
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
 1. Write your new content. See the [How-to guides](/help/contributor/how-to/)
    to help you with this process. Feel free to reach out to the

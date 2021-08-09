@@ -24,7 +24,7 @@ See <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" target="_b
 
 **NOTE:** `kn` cannot be used to install Knative components such as Serving or Eventing.
 
-See [Installing `kn`](./install-kn/).
+See [Installing `kn`](install-kn/).
 
 ## Connecting CLI tools to your cluster
 

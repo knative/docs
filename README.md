@@ -32,7 +32,7 @@ Refer to this [doc](https://github.com/knative/website/blob/main/DEVELOPMENT.md)
 ### Website source files
 
 Source files for the documentation on the website are located within the
-[`/docs`](./docs) directory of this repo.
+[`/docs`](docs) directory of this repo.
 
 If you want to contribute a fix or add new content to the documentation, you can
 navigate through this repo or use the `Edit this page` on each of the pages of
@@ -54,7 +54,7 @@ repo.
 
 Each release of the Knative docs are available in the website (starting with
 0.3) and their source files are all stored in
-[branches of this repo](./doc-releases.md).
+[branches of this repo](doc-releases.md).
 
 ## Contributing
 
@@ -62,13 +62,13 @@ We're excited that you're interested in contributing to the Knative documentatio
 
 ## Getting started
 
-- [Knative contributor's guide](./help/contributing) -- Contains information about how
+- [Knative contributor's guide](help/contributing) -- Contains information about how
   to contribute.
 
 - New content templates:
-  - [Documentation](./template-docs-page.md) -- Instructions and a template that
+  - [Documentation](template-docs-page.md) -- Instructions and a template that
     you can use to help you add new documentation.
-  - [Blog](./template-blog-entry.md) -- Instructions and a template that
+  - [Blog](template-blog-entry.md) -- Instructions and a template that
     you can use to help you post to the Knative blog.
 
 ## Getting help

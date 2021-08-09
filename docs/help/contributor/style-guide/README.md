@@ -8,7 +8,7 @@ If you notice gaps in the style guide or have queries, please post in [the Docs 
 
 ## Table of Contents
 
-1. [Formatting standards](./style-and-formatting.md)
-1. [Voice and language](./voice-and-language.md)
-1. [Documenting code](./documenting-code.md)
-1. [Word and phrase list](./word-and-phrase-list.md)
+1. [Formatting standards](style-and-formatting.md)
+1. [Voice and language](voice-and-language.md)
+1. [Documenting code](documenting-code.md)
+1. [Word and phrase list](word-and-phrase-list.md)
