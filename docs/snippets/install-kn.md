@@ -23,13 +23,13 @@
             The original name depends on your system architecture, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
 
         1. Move the executable binary file to a directory on your PATH by running the command:
-   
+
             ```
             mv kn /usr/local/bin
             ```
-   
+
         1. Verify that the plugin is working by running the command:
-   
+
             ```
             kn version
             ```
