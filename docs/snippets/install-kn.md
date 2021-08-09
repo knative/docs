@@ -16,11 +16,11 @@
         1. Rename the binary to `kn` and make it executable by running the commands:
 
             ```
-            mv kn-darwin-amd64 kn
+            mv <path-to-binary-file> kn
             chmod +x kn
             ```
 
-            The original name depends on your system architecture, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
+            Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
 
         1. Move the executable binary file to a directory on your PATH by running the command:
 
