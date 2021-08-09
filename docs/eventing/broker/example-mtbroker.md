@@ -38,6 +38,6 @@ metadata:
 
 - You can specify any valid `name` for your broker. Using `default` will create a broker named `default`.
 - The `namespace` must be an existing namespace in your cluster. Using `default` will create the broker in the current namespace.
-- You can set the `eventing.knative.dev/broker.class` annotation to change the class of the broker. The default broker class is `MTChannelBasedBroker`, but Knative also supports use of the `KafkaBroker` class. For more information about Kafka brokers, see the [Apache Kafka Broker](../kafka-broker) documentation.
+- You can set the `eventing.knative.dev/broker.class` annotation to change the class of the broker. The default broker class is `MTChannelBasedBroker`, but Knative also supports use of the `Kafka` broker class. For more information about Kafka brokers, see the [Apache Kafka Broker](../kafka-broker) documentation.
 - `spec.config` is used to specify the default backing channel configuration for MT channel-based broker implementations. For more information on configuring the default channel type, see the documentation on [ConfigMaps](../configmaps).
 - `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [broker event delivery](../broker-event-delivery).
