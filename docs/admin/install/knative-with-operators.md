@@ -556,7 +556,7 @@ knative-eventing   <version number>    True
 
     === "Apache Kafka"
 
-        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install Kafka as the eventing source, apply the content of the Eventing CR as below:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
