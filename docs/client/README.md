@@ -34,7 +34,7 @@ You can also set the environment variable `$KUBECONFIG`, and point it to the kub
 
 Using the `kn` CLI, you can specify the following options to connect to the cluster:
 
-- `--kubeconfig` option is equivalent to setting the `$KUBECONFIG` environment variable and can be used to point to the kubeconfig file.
+- `--kubeconfig`: use this option to point to the `kubeconfig` file. This is equivalent to setting the `$KUBECONFIG` environment variable.
 - `--context` can be used to specify the name of a context from the existing kubeconfig. (One of the output list of: `kubectl config get-contexts`)
 
 
