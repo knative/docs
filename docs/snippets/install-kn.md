@@ -13,26 +13,26 @@
 
         1. Download the binary for your system from the <a href="https://github.com/knative/client/releases" target="_blank">`kn` release page</a>.
 
-        1. Rename the binary, make it executable, and rename it to `kn`:
+        1. Rename the binary to `kn` and make it executable by running the commands:
 
-         ```
-         mv kn-darwin-amd64 kn
-         chmod +x kn
-         ```
+            ```
+            mv kn-darwin-amd64 kn
+            chmod +x kn
+            ```
 
-        (the original name will depend on your system architecture, i.e. `kn-darwin-amd64`, `kn-linux-amd64`, etc.)
+            The original name depends on your system architecture, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
 
-     1. Move the executable binary file to a directory on your PATH:
-
-         ```
-         mv kn /usr/local/bin
-         ```
-
-     1. Verify that the plugin is working, for example:
-
-         ```
-         kn version
-         ```
+        1. Move the executable binary file to a directory on your PATH by running the command:
+   
+            ```
+            mv kn /usr/local/bin
+            ```
+   
+        1. Verify that the plugin is working by running the command:
+   
+            ```
+            kn version
+            ```
 
     === "Using Go"
 
