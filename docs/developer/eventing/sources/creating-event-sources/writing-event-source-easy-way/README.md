@@ -107,8 +107,8 @@ CMD [ "node", "index.js" ]
 
 ### Procedure
 
-Before publishing the ContainerSource, we must build the application
-image, and push it to a container registry accessible by our cluster.
+Before publishing the ContainerSource, you must build the application
+image, and push it to a container registry that your cluster can access.
 
 1. Build and push the image:
 
