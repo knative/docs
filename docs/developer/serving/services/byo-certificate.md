@@ -62,4 +62,4 @@ Assuming you have followed the steps from [Configuring custom domains](../custom
     ```bash
     curl https://<domain-name>
     ```
-    If the certificate is self-signed skip verfication by adding the `-k` flag to curl
+    If the certificate is self-signed skip verification by adding the `-k` flag to curl
