@@ -15,8 +15,8 @@ Assuming you have followed the steps from [Configuring custom domains](../custom
 
 1. Create a plain Kubernetes [TLS Secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets):
 
-    Assuming you have obtained the `cert` and `key` files from your Certificate Authority provider or self-signed. 
-    
+    Assuming you have obtained the `cert` and `key` files from your Certificate Authority provider or self-signed.
+
     Use kubectl to create the secret:
     ```bash
     kubectl create secret tls <tls-secret-name> --cert=path/to/cert/file --key=path/to/key/file
@@ -56,7 +56,7 @@ Assuming you have followed the steps from [Configuring custom domains](../custom
     The `URL` column of the status should show the mapped domain with the scheme updated to https:
     ```
     NAME                      URL                               READY   REASON
-    <domain-name>             https://<domain-name>             True 
+    <domain-name>             https://<domain-name>             True
     ```
     1. Hit the service if exposed publicly:
     ```bash
