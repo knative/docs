@@ -1,5 +1,7 @@
 # Custom TLS certificate for DomainMapping
 
+{{ feature(beta="0.24") }}
+
 By providing the reference to an existing _TLS Certificate_ you can instruct a `DomainMapping` to use that
 certificate to secure the mapped service, using this feature will skip _autoTLS_ certificate creation.
 
@@ -42,7 +44,7 @@ Assuming you have followed the steps from [Configuring custom domains](../custom
     ```
     Where:
 
-    - `<tls-secret-name>` is the name of the TLS secret created in the previous step
+    - `<tls-secret-name>` is the name of the TLS secret created in the previous step.
     - `<domain-name>` is the domain name that you want to map a Service to.
     - `<namespace>` is the namespace that contains both the `DomainMapping` and `Service` objects.
     - `<service-name>` is the name of the service that will be mapped to the domain.
@@ -62,4 +64,4 @@ Assuming you have followed the steps from [Configuring custom domains](../custom
     ```bash
     curl https://<domain-name>
     ```
-    If the certificate is self-signed skip verification by adding the `-k` flag to curl
+    If the certificate is self-signed skip verification by adding the `-k` flag to curl.
