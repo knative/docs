@@ -1,0 +1,50 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Knative Reference Documentation</title>
+    <link>https://knative.dev/v0.23-docs/reference/</link>
+    <description>Recent content in Knative Reference Documentation on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.23-docs/reference/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.23-Docs: Knative Release Notes</title>
+      <link>https://knative.dev/v0.23-docs/reference/relnotes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.23-docs/reference/relnotes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;For details about the Knative releases, see the following pages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving/releases&#34;&gt;Knative Serving releases&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving-operator/releases&#34;&gt;Knative Serving Operator releases&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/client/releases&#34;&gt;Knative CLI releases&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/eventing/releases&#34;&gt;Knative Eventing releases&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.23-Docs: Knative API Reference Documentation</title>
+      <link>https://knative.dev/v0.23-docs/reference/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.23-docs/reference/api/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

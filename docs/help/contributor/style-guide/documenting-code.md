@@ -4,16 +4,20 @@
     //todo
 
 ## Words requiring code formatting
-Use code formatting to indicate special purpose text. Apply code formatting to the following content:
 
-* Filenames and path names
+Apply code formatting only to special-purpose text:
+
+* Filenames
+* Path names
+* Fields and values from a YAML file
 * Any text that goes into a CLI
+* CLI names
 
 ## Specify the programming language
 
-> Be sure to specify the language your code is in as part of the code block
+> Specify the language your code is in as part of the code block
 
-> Specify non-language specific code, like CLI commands, specify ```bash (see below for formatting).
+> Specify non-language specific code, like CLI commands, with ```bash (see below for formatting).
 
 === ":white_check_mark: Correct"
     ```go
@@ -68,10 +72,10 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
 
 >It meets these criteria:
 
->* Explicitly mentions running the command (this isn’t always obvious)
-* **Uses “run”** (and not “type”, “execute”, etc -- we want consistency)
-* Starts with the key information that describes the command, e.g. “To do X...run Y command:”, “Do X by running Y command:”
-* As short as possible
+>* It explicitly mentions running the command, which isn’t always obvious
+* It uses “run”; not “type”, “execute”, etc -- we want consistency
+* It describes what the command does before stating the command.
+* It's as short as possible
 
 > If you must deviate from the standard line, ensure you still meet the above criteria.
 
@@ -109,41 +113,61 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     Where `<service-name>` is the name of your Knative Service.
 
 ## Documenting YAML
-//TODO CONTENT TABS (ex. kn + YAML)
->Use **kubectl apply** for files/objects that the user creates — it works for both “create” and “update”, and the source of truth is their local files.
 
->Use **kubectl edit** for files which are shipped as part of the Knative software, like the serving/eventing ConfigMaps.
+<!-- TODO CONTENT TABS (ex. kn + YAML) -->
+>When documenting YAML, use two steps. Use step 1 to create the YAML file, and step 2 to apply the YAML file.
 
-> be sure to use ```yaml at the beginning of your code block if you are typing yaml code as part of a CLI command
+>Use **kubectl apply** for files/objects that the user creates: it works for both “create” and “update”, and the source of truth is their local files.
+
+>Use **kubectl edit** for files which are shipped as part of the Knative software, like the Knative Serving and Knative Eventing ConfigMaps.
+
+> Write ```yaml at the beginning of your code block if you are typing YAML code as part of a CLI command.
 
 === ":white_check_mark: Correct"
 
-    Creating or updating a resource:
-    ```yaml
-    kubectl apply -f - <<EOF
-    # code
-    EOF
-    ```
+    - Creating or updating a resource:
 
-    Editing a ConfigMap:
-    ```bash
-    kubectl -n <namespace> edit configmap <resource-name>
-    ```
+        1. Create a YAML file using the following template:
+
+            ```yaml
+            # YAML FILE CONTENTS
+            ```
+        2. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
+
+    - Editing a ConfigMap:
+
+        ```bash
+        kubectl -n <namespace> edit configmap <resource-name>
+        ```
 
 === ":no_entry: Incorrect"
+
+    **Example 1:**
+
     ```yaml
     cat <<EOF | kubectl create -f -
     # code
     EOF
     ```
 
+    **Example 2:**
 
+    ```yaml
+    kubectl apply -f - <<EOF
+    # code
+    EOF
+    ```
 
 ## Referencing variables in code blocks
 
 >Format variables in code blocks like so: <service-name>
 
-> - All lower case
+> - All lowercase
 - Hyphens between words
 - Explanation for each variable below code block
 - Explanation format is “Where... `<service-name>` is…"
@@ -172,14 +196,14 @@ Use code formatting to indicate special purpose text. Apply code formatting to t
     Where:
 
     * `<service-name>` is the name of your Knative Service.
-    * `<revision-name>` is the desired name of your revision
+    * `<revision-name>` is the desired name of your revision.
 
 === ":no_entry: Incorrect"
     ```bash
     kn create service <service-name> --revision-name <revision-name>
     ```
     Where `<service-name>` is the name of your Knative Service.<br>
-    Where `<revision-name>` is the desired name of your revision
+    Where `<revision-name>` is the desired name of your revision.
 
 
 

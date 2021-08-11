@@ -16,7 +16,6 @@ aliases:
   - yanweiguo
   channel-wg-leads:
   - matzew
-  - slinkydeveloper
   client-reviewers:
   - itsmurugappan
   client-wg-leads:
@@ -40,9 +39,11 @@ aliases:
   - snneji
   docs-wg-leads: []
   docs-writers:
+  - RichardJJG
   - abrennan89
   - carieshmarie
   - richieescarez
+  - snneji
   eventing-reviewers:
   - aslom
   - tayarani
@@ -52,11 +53,9 @@ aliases:
   - antoineco
   - lberk
   - n3wscott
-  - slinkydeveloper
   eventing-wg-leads:
   - devguyio
   - lionelvillard
-  - vaikas
   eventing-writers:
   - akashrv
   - aliok
@@ -67,8 +66,6 @@ aliases:
   - matzew
   - n3wscott
   - pierDipi
-  - slinkydeveloper
-  - vaikas
   knative-admin:
   - RichieEscarez
   - bsnchan
@@ -85,7 +82,7 @@ aliases:
   - mbehrendt
   - pmorie
   - rhuss
-  - ronavn
+  - spencerdillard
   - thisisnotapril
   - vaikas
   knative-milestone-maintainers:
@@ -102,12 +99,12 @@ aliases:
   - julz
   - lionelvillard
   - markusthoemmes
+  - matzew
   - n3wscott
   - nak3
   - navidshaikh
   - rhuss
   - shashwathi
-  - slinkydeveloper
   - tanzeeb
   - tcnghia
   - vagababov
@@ -207,6 +204,7 @@ aliases:
   - yanweiguo
   serving-reviewers:
   - julz
+  - psschwei
   - whaught
   serving-writers:
   - dprotaso
@@ -232,7 +230,7 @@ aliases:
   trademark-committee:
   - bsnchan
   - duglin
-  - ronavn
+  - spencerdillard
   ux-wg-leads:
   - csantanapr
   - omerbensaadon

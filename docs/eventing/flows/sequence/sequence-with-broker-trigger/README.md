@@ -25,7 +25,7 @@ into the Broker and create another Trigger which will then display those events.
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.
 
-![Logical Configuration](./sequence-with-broker-trigger.png)
+![Logical Configuration](sequence-with-broker-trigger.png)
 
 The functions used in these examples live in
 [https://github.com/knative/eventing/blob/main/cmd/appender/main.go](https://github.com/knative/eventing/blob/main/cmd/appender/main.go).
@@ -34,16 +34,21 @@ The functions used in these examples live in
 
 ### Creating the Broker
 
-To create the cluster default Broker type:
+1. To create the cluster default Broker type, copy the YAML below into a file:
 
-```bash
-kubectl create -f - <<EOF
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
- name: default
-EOF
-```
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+     name: default
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ### Create the Knative Services
 

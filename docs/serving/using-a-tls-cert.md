@@ -32,7 +32,7 @@ cert-manager tool:
   also use cert-manager to configure Knative to automatically obtain new TLS
   certificates and renew existing ones. If you want to enable Knative to
   automatically provision TLS certificates, instead see the
-  [Enabling automatic TLS certificate provisioning](./using-auto-tls.md) topic.
+  [Enabling automatic TLS certificate provisioning](using-auto-tls.md) topic.
 
 By default, the [Let's Encrypt Certificate Authority (CA)][le] is used to
 demonstrate how to enable HTTPS connections, but you can configure Knative to
@@ -61,7 +61,7 @@ You must meet the following requirements to enable secure HTTPS connections:
 - Knative Serving must be installed. For details about installing the Serving
   component, see the [Knative installation guides](../install/).
 - You must configure your Knative cluster to use a
-  [custom domain](./using-a-custom-domain.md).
+  [custom domain](using-a-custom-domain.md).
 
 !!! warning
     Istio only supports a single certificate per Kubernetes cluster.
@@ -131,7 +131,7 @@ provisioning:
 
   To use cert-manager to manually obtain certificates:
 
-  1.  [Install and configure cert-manager](./installing-cert-manager.md).
+  1.  [Install and configure cert-manager](installing-cert-manager.md).
 
   1.  Continue to the steps below about
       [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
@@ -140,7 +140,7 @@ provisioning:
 - **Automatic certificates**: Configure Knative to use cert-manager for
   automatically obtaining and renewing TLS certificate. The steps for installing
   and configuring cert-manager for this method are covered in full in the
-  [Enabling automatic TLS cert provisioning](./using-auto-tls.md) topic.
+  [Enabling automatic TLS cert provisioning](using-auto-tls.md) topic.
 
 ## Manually adding a TLS certificate
 
@@ -149,17 +149,17 @@ cert-manager tool to manually obtain a new certificate, you can use the
 following steps to add that certificate to your Knative cluster.
 
 For instructions about enabling Knative for automatic certificate provisioning,
-see [Enabling automatic TLS cert provisioning](./using-auto-tls.md). Otherwise,
+see [Enabling automatic TLS cert provisioning](using-auto-tls.md). Otherwise,
 continue below for instructions about manually adding a certificate.
 
 
 === "Contour"
 
     To manually add a TLS certificate to your Knative cluster, you must create a
-    Kubernetes secret and then configure the Knative Contour plugin
+    Kubernetes secret and then configure the Knative Contour plugin.
 
     1. Create a Kubernetes secret to hold your TLS certificate, `cert.pem`, and the
-       private key, `key.pem`, by entering the following command:
+       private key, `key.pem`, by running the command:
 
            ```bash
            kubectl create -n contour-external secret tls default-cert \
@@ -167,13 +167,13 @@ continue below for instructions about manually adding a certificate.
              --cert cert.pem
            ```
 
-        !!! warning
+        !!! note
             Take note of the namespace and secret name. You will need these in future steps.
 
-    1. Contour requires you to create a delegation to use this certificate and private key in different namespaces. You can create this resource by running the command:
+    1. To use this certificate and private key in different namespaces, you must
+    create a delegation. To do so, create a YAML file using the template below:
 
          ```yaml
-         kubectl apply -f - <<EOF
          apiVersion: projectcontour.io/v1
          kind: TLSCertificateDelegation
          metadata:
@@ -184,11 +184,16 @@ continue below for instructions about manually adding a certificate.
              - secretName: default-cert
                targetNamespaces:
                - "*"
-         EOF
          ```
+    1. Apply the YAML file by running the command:
 
-    1. Update the Knative Contour plugin to start using the certificate as a fallback
-       when auto-TLS is disabled. This can be done with the following patch:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
+    1. Update the Knative Contour plugin to use the certificate as a fallback
+       when auto-TLS is disabled by running the command:
 
          ```bash
          kubectl patch configmap config-contour -n knative-serving \

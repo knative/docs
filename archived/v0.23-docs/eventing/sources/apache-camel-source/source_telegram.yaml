@@ -1,0 +1,35 @@
+# Apache Camel Telegram Source
+#
+# Telegram Component documentation: https://camel.apache.org/components/latest/telegram-component.html
+# Simple language documentation: https://camel.apache.org/manual/latest/simple-language.html
+#
+# List of available Apache Camel components: https://camel.apache.org/components/latest/
+#
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-telegram-source
+spec:
+  source:
+    flow:
+      from:
+        uri: telegram:bots
+        parameters:
+          authorizationToken: "<put-your-token-here>"
+        steps:
+          - set-header:
+              name: ce-author
+              simple: "${body.from.firstName} ${body.from.lastName}"
+          - set-header:
+              name: ce-chat
+              simple: "${body.chat.id}"
+          - set-header:
+              name: Content-Type
+              constant: text/plain
+          - transform:
+              simple: "${body.text}"
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1
+      kind: InMemoryChannel
+      name: camel-test

@@ -1,0 +1,153 @@
+# This is a simple example that creates a source and sends events to a function.
+
+# The namespace the example lives in.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-debug
+
+---
+
+# The event source.
+
+apiVersion: sources.knative.dev/v1alpha1
+kind: ApiServerSource
+metadata:
+  name: src
+  namespace: knative-debug
+spec:
+  serviceAccountName: service-account
+  mode: Resource
+  resources:
+    - apiVersion: v1
+      kind: Event
+  sink:
+    ref:
+      apiVersion: messaging.knative.dev/v1
+      kind: InMemoryChannel
+      name: chan
+
+---
+
+# The Channel events are sent to.
+
+apiVersion: messaging.knative.dev/v1
+kind: InMemoryChannel
+metadata:
+  name: chan
+  namespace: knative-debug
+---
+
+# The Subscription to the InMemoryChannel.
+
+apiVersion: messaging.knative.dev/v1
+kind: Subscription
+metadata:
+  name: sub
+  namespace: knative-debug
+spec:
+  channel:
+    apiVersion: messaging.knative.dev/v1
+    kind: InMemoryChannel
+    name: chan
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: svc
+
+---
+
+# K8s Service which points at the Deployment below.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc
+  namespace: knative-debug
+spec:
+  selector:
+    app: fn
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+
+# K8s Deployment that simply writes input requests to its log.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fn
+  namespace: knative-debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fn
+  template:
+    metadata:
+      labels:
+        app: fn
+    spec:
+      containers:
+        - name: user-container
+          image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+          ports:
+            - containerPort: 8080
+
+---
+
+# Everything after this is just structure for the above.
+
+---
+
+# K8s Service Account that runs `src`'s container.
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-account
+  namespace: knative-debug
+
+---
+
+# The permissions that `src` needs.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: event-watcher
+  namespace: knative-debug
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+
+---
+
+# Give `src`'s service account the necessary permissions.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: k8s-ra-event-watcher
+  namespace: knative-debug
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: event-watcher
+subjects:
+  - kind: ServiceAccount
+    name: service-account
+    namespace: knative-debug

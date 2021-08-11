@@ -12,17 +12,24 @@ The Knative Operator supports up to the last three major releases. For example, 
 
 To upgrade, apply the Operator custom resources, adding the `spec.version` for the Knative version that you want to upgrade to:
 
-```yaml
-kubectl apply -f - <<EOF
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  version: "0.23"
-EOF
-```
+1. Copy the YAML below into a file:
+
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      version: "0.23"
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ## Verifying an upgrade by viewing pods
 
@@ -46,8 +53,8 @@ You can confirm that your Knative components have upgraded successfully, by view
     autoscaler-6bbc885cfd-vkrgg                              1/1     Running     0          57s
     autoscaler-hpa-5cdd7c6b69-hxzv4                          1/1     Running     0          55s
     controller-64dd4bd56-wzb2k                               1/1     Running     0          57s
-    istio-webhook-75cc84fbd4-dkcgt                           1/1     Running     0          50s
-    networking-istio-6dcbd4b5f4-mxm8q                        1/1     Running     0          51s
+    net-istio-webhook-75cc84fbd4-dkcgt                       1/1     Running     0          50s
+    net-istio-controller-6dcbd4b5f4-mxm8q                    1/1     Running     0          51s
     storage-version-migration-serving-serving-0.20.0-82hjt   0/1     Completed   0          50s
     webhook-75f5d4845d-zkrdt                                 1/1     Running     0          56s
     ```
@@ -112,8 +119,9 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 
 === "Knative Serving"
 
+1. Copy the YAML below into a file:
+
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: operator.knative.dev/v1alpha1
     kind: KnativeServing
     metadata:
@@ -121,13 +129,20 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
       namespace: knative-serving
     spec:
       version: "0.22"
-    EOF
     ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 === "Knative Eventing"
 
+1. Copy the YAML below into a file:
+
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: operator.knative.dev/v1alpha1
     kind: KnativeEventing
     metadata:
@@ -135,5 +150,10 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
       namespace: knative-eventing
     spec:
       version: "0.22"
-    EOF
     ```
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.

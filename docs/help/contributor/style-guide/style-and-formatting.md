@@ -1,43 +1,46 @@
-# Formatting standard and conventions
+# Formatting standards and conventions
 
-## Documenting Knative API Objects
-> Any Knative API Objects ought to use Title case.
+## Titles and headings
 
-|:white_check_mark: Correct                  |:no_entry: Incorrect
-|--------------------|-----
-|Channels | `Channels`
-|Broker      | broker
+### Use sentence case for titles and headings
 
-
-## Using parentheses
->Don’t use parentheses, unless it’s the first instance in a page to explain an acronym that isn’t immediately obvious.
-
->Parenthetical statements especially should be avoided because if something is important enough to be in the sentence, it should be fully part of that sentence.
+> Only capitalize proper nouns, acronyms, and the first word of the heading.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
-|Install the Custom Resource Definition (CRD) | Check your CLI (you should see it there)
-|Knative Serving will create a Revision      | Knative will create a Revision (a stateless, snapshot in time of your code and configuration)
+|## Configure the feature | ## Configure the Feature
+|### Using feature      | ### Using Feature
+|### Using HTTPS         | ### Using https
 
-
-## Use sentence case for titles and headings
-
-> Use sentence case for all titles and headings. Only capitalize the first
-word of the heading, except for proper nouns or acronyms.
+### Do not use code formatting inside headings
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
-|Configuring feature | Configuring Feature
-|Using feature      | Using Feature
-|Using HTTPS         | Using https
+|## Configure the class annotation | ## Configure the \`class\` annotation
 
-## Create descriptive links
+### Use imperatives for headings of procedures
+
+> For consistency, brevity, and to better signpost where action is expected of the reader, make procedure headings imperatives.
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|----------------------|-----
+|## Install Knative Serving            | ## Installation of Knative Serving
+|### Configure DNS          | ### Configuring DNS
+|## Verify the installation                   | ## How to verify the installation
+
+## Links
+
+### Make links descriptive
 
 |:white_check_mark: Correct                                     |:no_entry: Incorrect
 |---------------------------------------|------
-|Check out [this excellent article](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021) explaining <br> what makes a good hyperlink    | Check out the article [here](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021)
+|For an explanation of what makes a good hyperlink, see this [this article](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021).| See this article [here](https://medium.com/@heyoka/Correctnt-use-click-here-f32f445d1021).
 
-## Use spaces in units of measurement
+<!-- Add rule here, see https://github.com/knative/docs/issues/4034 -->
+
+## Formatting
+
+### Use nonbreaking spaces in units of measurement other than percent
 
 > For most units of measurement, when you specify a number with the unit, use a nonbreaking space
 between the number and the unit.
@@ -49,3 +52,39 @@ between the number and the unit.
 |3`&nbsp`GB            | 3 GB
 |4`&nbsp`CPUs          | 4 CPUs
 |14%                   | 14`&nbsp`%
+
+### Use bold for user interface elements
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Click **Fork** | Click "Fork"
+|Select **Other**      | Select "Other"
+
+## General style
+
+### Use upper camel case for Knative API objects
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Channels | channels
+|Broker      | broker
+|ContainerSource | Container Source
+
+### Only use parentheses for acronym explanations
+
+>Put an acronym inside parentheses after its explanation. Don’t use parentheses for anything else.
+
+>Parenthetical statements especially should be avoided because readers skip them.
+If something is important enough to be in the sentence, it should be fully part of that sentence.
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Custom Resource Definition (CRD) |Check your CLI (you should see it there)
+|Knative Serving creates a Revision |Knative creates a Revision (a stateless, snapshot in time of your code and configuration)|
+
+### Use the international standard for punctuation inside quotes
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|Events are recorded with an associated "stage". | Events are recorded with an associated "stage."
+|The copy is called a "fork".      | The copy is called a "fork."

@@ -1,0 +1,423 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Welcome to Knative</title>
+    <link>https://knative.dev/v0.23-docs/</link>
+    <description>Recent content in Welcome to Knative on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.23-docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.23-Docs: </title>
+      <link>https://knative.dev/v0.23-docs/smoketest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.23-docs/smoketest/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;hidden-smoketest-page&#34;&gt;Hidden smoketest page&lt;/h1&gt;
+&lt;p&gt;Use this page to test your changes and ensure that there are not any issues,
+unwanted behaviors, or regression that are caused by your changes.&lt;/p&gt;
+&lt;p&gt;Below are a set of site elements that have causes issues in the past.&lt;/p&gt;
+&lt;h2 id=&#34;lists&#34;&gt;Lists&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Top level:
+&lt;ol&gt;
+&lt;li&gt;A nested list item.
+&lt;ol&gt;
+&lt;li&gt;another level lower&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Nested code sample: &lt;br&gt;Syntax: &lt;code&gt;{&lt;code&gt;{&amp;lt; readfile
+file=&amp;quot;../community/samples/serving/helloworld-java-quarkus/service.yaml&amp;quot;
+code=&amp;ldquo;true&amp;rdquo; lang=&amp;ldquo;yaml&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt; &lt;br&gt;Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;helloworld-java-quarkus&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/saturnism/helloworld-java-quarkus&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TARGET&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Quarkus Sample v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+&lt;/li&gt;
+&lt;li&gt;This should be the third bullet (3.).
+&lt;ol&gt;
+&lt;li&gt;More nested code: &lt;br&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; readfile
+file=&amp;quot;/serving/samples/hello-world/helloworld-go/Dockerfile&amp;quot; code=&amp;ldquo;true&amp;rdquo;
+lang=&amp;ldquo;go&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt; &lt;br&gt;Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Use&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;official&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Golang&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;build&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;artifact&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;This&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;based&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Debian&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;sets&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GOPATH&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;golang&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1.13&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builder&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Create&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;change&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;directory&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;WORKDIR&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Retrieve&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;application&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;dependencies&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;modules&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Allows&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builds&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;reuse&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;downloaded&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;dependencies&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;COPY&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;RUN&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;download&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Copy&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;code&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;COPY&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Build&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;binary&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;readonly&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ensures&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;immutable&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;RUN&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;CGO_ENABLED&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GOOS&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;linux&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;build&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mod&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;readonly&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;o&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;server&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Use&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;official&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Alpine&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;lean&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;production&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;https&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//hub.docker.com/_/alpine
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;https&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;alpine&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;RUN&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;apk&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;no&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cache&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ca&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;certificates&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Copy&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;binary&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;production&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;image&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;builder&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;stage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;COPY&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;builder&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server&lt;/span&gt;
+
+&lt;span style=&#34;color:#a40000&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Run&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;web&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;service&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;container&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;startup&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;CMD&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+&lt;/li&gt;
+&lt;li&gt;Another nested ordered list item (2.)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;code-samples&#34;&gt;Code samples&lt;/h2&gt;
+&lt;p&gt;The following use the
+&lt;a href=&#34;https://github.com/knative/website/blob/main/layouts/shortcodes/readfile.md&#34;&gt;&lt;code&gt;readfile&lt;/code&gt; shortcode&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; readfile file=&amp;quot;../hack/reference-docs-gen-config.json&amp;quot; code=&amp;ldquo;true&amp;rdquo; lang=&amp;ldquo;json&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hideMemberFields&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;TypeMeta&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hideTypePatterns&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ParseError$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;List$&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;externalPackages&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^k8s\\.io/apimachinery/pkg/apis/meta/v1\\.Duration$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^k8s\\.io/(api|apimachinery/pkg/apis)/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#{{lower .TypeIdentifier}}-{{arrIndex .PackageSegments -1}}-{{arrIndex .PackageSegments -2}}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^knative\\.dev/pkg/apis/duck&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://pkg.go.dev/knative.dev/pkg/apis/duck/{{arrIndex .PackageSegments -1}}#{{.TypeIdentifier}}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^knative\\.dev/pkg/apis\\.URL$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://pkg.go.dev/knative.dev/pkg/apis#URL&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^knative\\.dev/networking/pkg/apis/networking&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://pkg.go.dev/knative.dev/networking/pkg/apis/networking#{{.TypeIdentifier}}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeMatchPrefix&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;^time\\.Duration$&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;docsURLTemplate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://golang.org/pkg/time/#Duration&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typeDisplayNamePrefixOverrides&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;k8s.io/api/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Kubernetes &amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;k8s.io/apimachinery/pkg/apis/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Kubernetes &amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;markdownDisabled&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+&lt;/p&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; readfile file=&amp;quot;./serving/samples/cloudevents/cloudevents-nodejs/service.yaml&amp;quot; code=&amp;ldquo;true&amp;rdquo; lang=&amp;ldquo;yaml&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copyright 2020 The Knative Authors&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Licensed under the Apache License, Version 2.0 (the &amp;#34;License&amp;#34;);&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# you may not use this file except in compliance with the License.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# You may obtain a copy of the License at&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#     https://www.apache.org/licenses/LICENSE-2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Unless required by applicable law or agreed to in writing, software&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# distributed under the License is distributed on an &amp;#34;AS IS&amp;#34; BASIS,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# See the License for the specific language governing permissions and&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# limitations under the License.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudevents-nodejs&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;registry/repository/image:tag&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Uncomment this to send events somewhere.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# env:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# - name: K_SINK&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   value: http://default-broker.default.svc.cluster.local&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+&lt;/p&gt;
+&lt;h2 id=&#34;install-version-numbers-and-clone-branch-commands&#34;&gt;Install version numbers and Clone branch commands&lt;/h2&gt;
+&lt;p&gt;Examples of how the manual and dynamic version number or branch name can be
+added in-line with the
+&lt;a href=&#34;https://github.com/knative/website/blob/main/layouts/shortcodes/version.md&#34;&gt;&lt;code&gt;version&lt;/code&gt; shortcode&lt;/a&gt;
+(uses the define values from
+&lt;a href=&#34;https://github.com/knative/website/blob/main/config/_default/params.toml&#34;&gt;config/_default/params.toml&lt;/a&gt;)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; version &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as: v0.23.0&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;kubectl apply version/v0.23.0/is-the-latest/docs-version.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; version override=&amp;ldquo;v0.2.2&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as: v0.2.2&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;kubectl apply the-version-override/v0.2.2/is-manually-specified.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; version patch=&amp;quot;.20&amp;quot; &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as: v0.23.20&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;kubectl apply this-is-a-point-release/v0.23.20/filename.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; branch &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as: release-0.23&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;git clone -b &amp;quot;release-0.23&amp;quot; https://github.com/knative/docs knative-docs&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortcode: &lt;code&gt;{&lt;code&gt;{&amp;lt; branch override=&amp;ldquo;release-0.NEXT&amp;rdquo; &amp;gt;}&lt;/code&gt;}&lt;/code&gt;
+renders as: release-0.NEXT&lt;/p&gt;
+&lt;p&gt;Example:
+&lt;code&gt;git clone -b &amp;quot;release-0.NEXT&amp;quot; https://github.com/knative/docs knative-docs&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;tabs&#34;&gt;Tabs&lt;/h2&gt;
+&lt;p&gt;How to include tabbed content in your page. Note that you can set a default tab.&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;tabs_example&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;tabs_example-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs_example-0&#34; role=&#34;tab&#34; aria-controls=&#34;tabs_example-0&#34; aria-selected=&#34;true&#34;&gt;Regular example&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;tabs_example-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs_example-1&#34; role=&#34;tab&#34; aria-controls=&#34;tabs_example-1&#34; aria-selected=&#34;true&#34;&gt;Include example&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;tabs_example-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;tabs_example-0-tab&#34;&gt;
+    
+      
+This is a regular example tab.
+
+    
+  &lt;/div&gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;tabs_example-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;tabs_example-1-tab&#34;&gt;
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copyright 2020 The Knative Authors&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Licensed under the Apache License, Version 2.0 (the &amp;#34;License&amp;#34;);&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# you may not use this file except in compliance with the License.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# You may obtain a copy of the License at&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#     https://www.apache.org/licenses/LICENSE-2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Unless required by applicable law or agreed to in writing, software&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# distributed under the License is distributed on an &amp;#34;AS IS&amp;#34; BASIS,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# See the License for the specific language governing permissions and&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# limitations under the License.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;multi-container&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/savita3020/servingcontainer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containerPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;8881&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/savita3020/sidecarcontainer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

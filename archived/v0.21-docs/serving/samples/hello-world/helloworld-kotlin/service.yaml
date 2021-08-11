@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-kotlin
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: docker.io/{username}/helloworld-kotlin
+        env:
+        - name: TARGET
+          value: "Kotlin Sample v1"

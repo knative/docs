@@ -66,19 +66,6 @@ Uninstall any Serving extensions you have installed by following the relevant st
 
 
 
-=== "DomainMapping CRD"
-
-    To uninstall the `DomainMapping` components run:
-
-    ```bash
-    kubectl delete -f {{ artifact( repo="serving", file="serving-domainmapping.yaml") }}
-    kubectl delete -f {{ artifact( repo="serving", file="serving-domainmapping-crds.yaml") }}
-    ```
-
-
-
-
-
 ### Uninstalling a networking layer
 
 Follow the relevant procedure to uninstall the networking layer you installed:

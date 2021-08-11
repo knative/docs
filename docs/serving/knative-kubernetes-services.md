@@ -6,7 +6,7 @@ that are active when running Knative Serving.
 
 ## Before You Begin
 
-1. This guide assumes that you have [installed Knative Serving](/admin/install/serving/install-serving-with-yaml).
+1. This guide assumes that you have [installed Knative Serving](../admin/install/serving/install-serving-with-yaml.md).
 2. Verify that you have the proper components in your cluster. To view the
    services installed in your cluster, use the command:
 
@@ -33,13 +33,13 @@ that are active when running Knative Serving.
       This returns an output similar to the following:
 
      ```{ .bash .no-copy }
-     NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-     activator                1         1         1            1           1h
-     autoscaler               1         1         1            1           1h
-     controller               1         1         1            1           1h
-     networking-certmanager   1         1         1            1           1h
-     networking-istio         1         1         1            1           1h
-     webhook                  1         1         1            1           1h
+     NAME                         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+     activator                    1         1         1            1           1h
+     autoscaler                   1         1         1            1           1h
+     controller                   1         1         1            1           1h
+     net-certmanager-controller   1         1         1            1           1h
+     net-istio-controller         1         1         1            1           1h
+     webhook                      1         1         1            1           1h
      ```
 
 These services and deployments are installed by the `serving.yaml` file during
@@ -71,20 +71,18 @@ The webhook intercepts all Kubernetes API calls as well as all CRD insertions
 and updates. It sets default values, rejects inconsitent and invalid objects,
 and validates and mutates Kubernetes API calls.
 
-### Deployment: networking-certmanager
+### Deployment: net-certmanager-controller
 
 The certmanager reconciles cluster ingresses into cert manager objects.
 
-### Deployment: networking-istio
+### Deployment: net-istio-controller
 
-The networking-istio deployment reconciles a cluster's ingress into an
+The net-istio-controller deployment reconciles a cluster's ingress into an
 [Istio virtual service](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
 
 ## What's Next
 
 - For a deeper look at the services and deployments involved in Knative Serving,
-  click
-  [here](https://github.com/knative/specs/blob/main/specs/serving/overview.md).
-- For a high-level analysis of Serving, look at the [documentation here](./).
-- Check out the Knative Serving code samples [here](./samples/) for more
-  hands-on tutorials.
+  see the [specs](https://github.com/knative/specs/blob/main/specs/serving/overview.md) repository.
+- For a high-level analysis of Knative Serving, see the [Knative Serving overview](README.md).
+- For hands-on tutorials, see the [Knative Serving code samples](samples/README.md).

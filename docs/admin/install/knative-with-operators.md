@@ -3,8 +3,7 @@
 Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 You can install the Serving component, Eventing component, or both on your cluster.
 
-!!! warning
-    The Knative Operator is still in Alpha phase. It has not been tested in a production environment, and should be used for development or test purposes only.
+{{ feature(beta="0.25") }}
 
 --8<-- "prerequisites.md"
 
@@ -56,7 +55,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -77,7 +76,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -120,7 +119,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -146,7 +145,7 @@ kubectl logs -f deploy/knative-operator
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-serving
+          name: knative-serving
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeServing
@@ -171,14 +170,14 @@ kubectl get deployment -n knative-serving
 If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
 is a sample output:
 ```
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-activator          1/1     1            1           18s
-autoscaler         1/1     1            1           18s
-autoscaler-hpa     1/1     1            1           14s
-controller         1/1     1            1           18s
-istio-webhook      1/1     1            1           12s
-networking-istio   1/1     1            1           12s
-webhook            1/1     1            1           17s
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+activator              1/1     1            1           18s
+autoscaler             1/1     1            1           18s
+autoscaler-hpa         1/1     1            1           14s
+controller             1/1     1            1           18s
+net-istio-webhook      1/1     1            1           12s
+net-istio-controller   1/1     1            1           12s
+webhook                1/1     1            1           17s
 ```
 
 1. Check the status of Knative Serving Custom Resource:
@@ -191,7 +190,7 @@ NAME              VERSION             READY   REASON
 knative-serving   <version number>    True
 ```
 
-### Installing with Different Networking Layers
+### Installing with different networking layers
 
 ??? "Installing the Knative Serving component with different network layers"
 
@@ -226,9 +225,8 @@ knative-serving   <version number>    True
           kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
           ```
 
-        1. To configure Knative Serving to use Ambassador, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
+        1. To configure Knative Serving to use Ambassador, copy the YAML below into a file:
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
@@ -238,8 +236,14 @@ knative-serving   <version number>    True
             config:
               network:
                 ingress.class: "ambassador.ingress.networking.knative.dev"
-          EOF
           ```
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
         1. Fetch the External IP or CNAME:
           ```bash
@@ -257,9 +261,8 @@ knative-serving   <version number>    True
           kubectl apply --filename {{artifact(repo="net-contour",file="contour.yaml")}}
           ```
 
-        1. To configure Knative Serving to use Contour, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
+        1. To configure Knative Serving to use Contour, copy the YAML below into a file:
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
@@ -272,8 +275,13 @@ knative-serving   <version number>    True
             config:
               network:
                 ingress.class: "contour.ingress.networking.knative.dev"
-          EOF
           ```
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
         1. Fetch the External IP or CNAME:
           ```bash
@@ -286,9 +294,8 @@ knative-serving   <version number>    True
 
         The following commands install Kourier and enable its Knative integration.
 
-        1. To configure Knative Serving to use Kourier, apply the content of the Serving CR as below:
-          ```bash
-          cat <<-EOF | kubectl apply -f -
+        1. To configure Knative Serving to use Kourier, copy the YAML below into a file:
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
@@ -301,8 +308,14 @@ knative-serving   <version number>    True
             config:
               network:
                 ingress.class: "kourier.ingress.networking.knative.dev"
-          EOF
           ```
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
         1. Fetch the External IP or CNAME:
           ```bash
@@ -311,7 +324,10 @@ knative-serving   <version number>    True
 
           Save this for configuring DNS below.
 
+<!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
+{% include "real-dns-operator.md" %}
+{% include "temporary-dns.md" %}
 
 ## Installing the Knative Eventing component
 
@@ -326,7 +342,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -347,7 +363,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -387,7 +403,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -413,7 +429,7 @@ knative-serving   <version number>    True
         apiVersion: v1
         kind: Namespace
         metadata:
-        name: knative-eventing
+          name: knative-eventing
         ---
         apiVersion: operator.knative.dev/v1alpha1
         kind: KnativeEventing
@@ -463,6 +479,166 @@ NAME               VERSION             READY   REASON
 knative-eventing   <version number>    True
 ```
 
+### Installing with different eventing sources
+
+??? "Installing the Knative Eventing component with different eventing sources"
+
+    Knative Operator can configure Knative Eventing component with different eventing sources. Click on each tab below to
+    see how you can configure Knative Eventing with different eventing sources:
+
+    === "Ceph"
+
+        To configure Knative Eventing to install Ceph as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              ceph:
+                enabled: true
+          EOF
+          ```
+
+    === "Apache CouchDB"
+
+        To configure Knative Eventing to install Apache CouchDB as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              couchdb:
+                enabled: true
+          EOF
+          ```
+
+    === "GitHub"
+
+        To configure Knative Eventing to install GitHub as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              github:
+                enabled: true
+          EOF
+          ```
+
+    === "GitLab"
+
+        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              gitlab:
+                enabled: true
+          EOF
+          ```
+
+    === "Apache Kafka"
+
+        To configure Knative Eventing to install Kafka as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              kafka:
+                enabled: true
+          EOF
+          ```
+
+    === "NATS Streaming"
+
+        To configure Knative Eventing to install NATS Streaming as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              natss:
+                enabled: true
+          EOF
+          ```
+
+    === "Prometheus"
+
+        To configure Knative Eventing to install Prometheus as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              prometheus:
+                enabled: true
+          EOF
+          ```
+
+    === "RabbitMQ"
+
+        To configure Knative Eventing to install RabbitMQ as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              rabbitmq:
+                enabled: true
+          EOF
+          ```
+
+    === "Redis"
+
+        To configure Knative Eventing to install Redis as the eventing source, apply the content of the Eventing CR as below:
+          ```bash
+          cat <<-EOF | kubectl apply -f -
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeEventing
+          metadata:
+            name: knative-eventing
+            namespace: knative-eventing
+          spec:
+            source:
+              redis:
+                enabled: true
+          EOF
+          ```
+
 ## Uninstall Knative
 
 ### Removing the Knative Serving component
@@ -502,5 +678,5 @@ ko delete -f config/
 
 ## What's next
 
-- [Configure Knative Serving using Operator](./operator/configuring-serving-cr.md)
-- [Configure Knative Eventing using Operator](./operator/configuring-eventing-cr.md)
+- [Configure Knative Serving using Operator](operator/configuring-serving-cr.md)
+- [Configure Knative Eventing using Operator](operator/configuring-eventing-cr.md)

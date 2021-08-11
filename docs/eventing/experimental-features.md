@@ -61,7 +61,7 @@ data:
 
 **Stage**: Alpha, disabled by default
 
-**Tracking issue**: https://github.com/knative/eventing/issues/5086
+**Tracking issue**: [#5086](https://github.com/knative/eventing/issues/5086)
 
 When using the `KReference` type to refer to another Knative resource, you can just specify the API `group` of the resource, instead of the full `APIVersion`.
 
@@ -84,7 +84,7 @@ name: my-channel
 With this feature you can allow Knative to resolve the full `APIVersion` and further upgrades, deprecations and removals of the referred CRD without affecting existing resources.
 
 !!! note
-    At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref`.
+    At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
 
 ### DeliverySpec.Timeout field
 
@@ -92,7 +92,7 @@ With this feature you can allow Knative to resolve the full `APIVersion` and fur
 
 **Stage**: Alpha, disabled by default
 
-**Tracking issue**: https://github.com/knative/eventing/issues/5148
+**Tracking issue**: [#5148](https://github.com/knative/eventing/issues/5148)
 
 When using the `delivery` spec to configure event delivery parameters, you can use `timeout` field to specify the timeout for each sent HTTP request. The duration of the `timeout` parameter is specified using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
 

@@ -1,0 +1,37 @@
+---
+title: "Available Channels"
+#linkTitle: "Channels"
+weight: 40
+type: "docs"
+---
+
+{{ "" }}
+
+{{- /* This will be interpreted given a yamlChannels object. */ -}}
+
+{{- /* Ignore this next paragraph, it is only intended in the generated markdown, not here. */ -}}
+<!--
+This is a generated file and should not be changed manually. All changes should follow the
+procedure:
+
+1. Update the information in [`channels.yaml`](channels.yaml).
+
+2. Run the generator tool:
+    ```shell
+    go run eventing/channels/generator/main.go
+    ```
+-->
+
+This is a non-exhaustive list of the available Channels for Knative Eventing.
+
+Notes:
+
+* Inclusion in this list is not an endorsement, nor does it imply any level of
+  support.
+
+Name | Status | Support | Description
+--- | --- | --- | ---
+{{ range .Channels -}}
+[{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Support }} | {{ .Description }}
+{{- end }}
+

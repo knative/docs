@@ -96,16 +96,24 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 #### Broker
 
-1. Install the default `Broker`.
+To install the default Broker:
 
-   ```bash
-   kubectl create -f - <<EOF
+1. Copy the YAML below into a file:
+
+   ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Broker
    metadata:
     name: default
-   EOF
    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
 
 #### GCP PubSub Source
 
@@ -126,7 +134,7 @@ for all events coming out of it.
 1.  Deploy `trigger.yaml`.
 
     ```bash
-    kubectl apply --filename docs/eventing/samples/iot-core/trigger.yaml
+    kubectl apply -f docs/eventing/samples/iot-core/trigger.yaml
     ```
 
     - This uses a very simple Knative Service to see that events are flowing.

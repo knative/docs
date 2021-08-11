@@ -16,6 +16,16 @@
   width: 3rem;
   height: 2.4rem;
 }
+.md-header__button.md-logo {
+  transition-duration: 0.2s;
+  transition-property: transform;
+}
+
+.md-header__button.md-logo:hover {
+  opacity: 1;
+  transform: rotate(5deg);
+  -webkit-transform: rotate(5deg);
+}
 
 .md-nav__item--nested>.md-nav__link, .md-nav__item a {
   color: var(--nav-item-color);
@@ -55,21 +65,192 @@
 
 /* bit of a hack to stop the banner taking space when empty */
 .md-announce .md-announce__inner {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+}
+.md-announce {
+  background: #fff5b5;
+}
+.md-announce .versionwarning p {
+  color: black;
+}
+.md-announce a {
+  color: blue;
+  text-decoration: underline;
 }
 
 /* text sizing of tables, Alert, Warnings, Notes*/
 .md-typeset table, .md-typeset table:not([class]) {
   font-size: 100%;
-
 }
 
 .md-typeset .admonition {
   font-size: 100%;
 }
 
+/* Giving h4 tag distinctive style because it is non-differntial with bold text */
+.md-typeset h4 {
+  font-size: .9rem;
+  font-weight: normal;
+}
+
 /* fix wrapping behavior of code in tables */
 .md-typeset table code {
   word-break: normal;
+}
+
+/* Widen the main column a bit to help with wide tables.
+   Note that extra-wide columns can make it hard to read prose,
+   so there is a tradeoff here. */
+.md-grid {
+  max-width: 68rem;
+}
+
+/*Make definition list definitions stand out*/
+.md-typeset dt {
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Cookie Banner */
+#cookieModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+}
+
+#cookieModal .modal-dialog .opt-out {
+  display: none;
+}
+
+.modal-dialog {
+  position: fixed;
+  margin: 0;
+  top: 35px;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  left: 5%;
+  padding-left: 8%;
+  padding-right: 8%;
+  color: black;
+}
+
+.cookienotice {
+  overflow: hidden;
+  outline: 0;
+  position: fixed;
+  display: none;
+  padding-top: 15px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #c3c3c3;
+  z-index: 1000;
+  text-align: center;
+  color: black;
+}
+
+.cookienotice .text {
+  float: left;
+  margin-left: 15px;
+  margin-right: 100px;
+  font-size: .875rem;
+}
+
+.cookienotice .text p {
+  margin-top: 0;
+}
+
+.cookienotice .buttons {
+  position: fixed;
+  right: 0;
+  float: right;
+  padding-right: 15px;
+}
+
+.cookienotice .buttons .close {
+  margin-right: 15px;
+  top: 0;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  cursor: pointer;
+}
+
+.cookienotice .buttons .ok {
+  background: #6695ca;
+  color: #fff;
+  margin-right: 15px;
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.modal-body {
+  position: relative;
+  flex: auto;
+  padding: 1rem;
+}
+
+.modal-content {
+  box-shadow: 1px 1px 4px #000000;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  outline: 0;
+}
+
+/* Tame the footer and make the prev/next stand out */
+.md-footer {
+    color: var(--md-typeset-a-color);
+    background-color: var(--md-default-bg-color);
+}
+
+.md-footer-meta {
+    background-color: var(--md-footer-bg-color);
+}
+
+.footer-links {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+.footer-links a {
+  margin: 0.4em;
+}
+
+/* Feature State Labels */
+.feature-alpha, .feature-beta, .feature-stable {
+  font-variant: small-caps;
+  padding: 0.1em;
+  border-bottom: 1px dotted #999;
+  display: inline-block;
+  font-weight: bold;
+}
+.feature-alpha {
+  background: rgb(255, 218, 218);
+}
+.feature-beta {
+  background: rgb(251, 244, 182);
+}
+.feature-stable {
+  background: rgb(228, 255, 218);
 }

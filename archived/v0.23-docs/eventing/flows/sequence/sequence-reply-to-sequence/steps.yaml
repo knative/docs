@@ -1,0 +1,80 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: first
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 0"
+
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: second
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 1"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: third
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 2"
+
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: fourth
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 3"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: fifth
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 4"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sixth
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 5"
+---

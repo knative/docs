@@ -55,32 +55,38 @@ mesh by [manually injecting the Istio sidecars][1].
 
 Enter the following command to install Istio:
 
-```bash
-cat << EOF > ./istio-minimal-operator.yaml
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  values:
-    global:
-      proxy:
-        autoInject: disabled
-      useMCP: false
-      # The third-party-jwt is not enabled on all k8s.
-      # See: https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens
-      jwtPolicy: first-party-jwt
+To install Istio without sidecar injection:
 
-  addonComponents:
-    pilot:
-      enabled: true
+1. Create a `istio-minimal-operator.yaml` file using the template below:
 
-  components:
-    ingressGateways:
-      - name: istio-ingressgateway
-        enabled: true
-EOF
+    ```yaml
+    apiVersion: install.istio.io/v1alpha1
+    kind: IstioOperator
+    spec:
+      values:
+        global:
+          proxy:
+            autoInject: disabled
+          useMCP: false
+          # The third-party-jwt is not enabled on all k8s.
+          # See: https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens
+          jwtPolicy: first-party-jwt
 
-istioctl install -f istio-minimal-operator.yaml
-```
+      addonComponents:
+        pilot:
+          enabled: true
+
+      components:
+        ingressGateways:
+          - name: istio-ingressgateway
+            enabled: true
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    istioctl install -f istio-minimal-operator.yaml
+    ```
 
 #### Installing Istio with sidecar injection
 
@@ -108,26 +114,32 @@ Since there are some networking communications between knative-serving namespace
 and the namespace where your services running on, you need additional
 preparations for mTLS enabled environment.
 
-- Enable sidecar container on `knative-serving` system namespace.
+1. Enable sidecar container on `knative-serving` system namespace.
 
-```bash
-kubectl label namespace knative-serving istio-injection=enabled
-```
+    ```bash
+    kubectl label namespace knative-serving istio-injection=enabled
+    ```
 
-- Set `PeerAuthentication` to `PERMISSIVE` on knative-serving system namespace.
+1. Set `PeerAuthentication` to `PERMISSIVE` on knative-serving system namespace
+by creating a YAML file using the template below:
 
-```bash
-cat <<EOF | kubectl apply -f -
-apiVersion: "security.istio.io/v1beta1"
-kind: "PeerAuthentication"
-metadata:
-  name: "default"
-  namespace: "knative-serving"
-spec:
-  mtls:
-    mode: PERMISSIVE
-EOF
-```
+    ```bash
+    apiVersion: "security.istio.io/v1beta1"
+    kind: "PeerAuthentication"
+    metadata:
+      name: "default"
+      namespace: "knative-serving"
+    spec:
+      mtls:
+        mode: PERMISSIVE
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 After you install the cluster local gateway, your service and deployment for the local gateway is named `knative-local-gateway`.
 
@@ -138,16 +150,16 @@ need to update gateway configmap `config-istio` under the `knative-serving` name
 
 1. Edit the `config-istio` configmap:
 
-```bash
-kubectl edit configmap config-istio -n knative-serving
-```
+    ```bash
+    kubectl edit configmap config-istio -n knative-serving
+    ```
 
 2. Replace the `local-gateway.knative-serving.knative-local-gateway` field with the custom service. As an example, if you name both
 the service and deployment `custom-local-gateway` under the namespace `istio-system`, it should be updated to:
 
-```
-custom-local-gateway.istio-system.svc.cluster.local
-```
+    ```
+    custom-local-gateway.istio-system.svc.cluster.local
+    ```
 
 As an example, if both the custom service and deployment are labeled with `custom: custom-local-gateway`, not the default
 `istio: knative-local-gateway`, you must update gateway instance `knative-local-gateway` in the `knative-serving` namespace:

@@ -86,27 +86,27 @@
 
   <section class="usedby-container">
     <div class="md-grid md-typeset" style="width: 100%">
-      <div style="display: flex; justify-content: center">
-        <h3 style="margin-bottom: 0">Trusted by:</h3>
+      <div id="usedby-title">
+        <h3>Trusted by:</h3>
       </div>
-      <div style="display: inline-flex; justify-content: center; flex-gap: 2em; flex-wrap: wrap" id="usedby">
+      <div id="usedby">
         <div class="logo">
-          <img src="images/Google.png" alt="" width="220" draggable="false" />
+          <img src="images/corporate-logos/Google.svg" alt="" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/Tanzu.png" alt="" width="220" draggable="false" />
+          <img src="images/corporate-logos/vmware.svg" alt="" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/IBM.png" alt="" width="150" draggable="false" />
+          <img src="images/corporate-logos/IBM.svg" alt="" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/Redhat.png" alt="" width="150" draggable="false" />
+          <img src="images/corporate-logos/Redhat.svg" alt="" draggable="false" />
         </div>
         <div class="logo">
-          <img src="images/Triggermesh.png" alt="" width="100" draggable="false" />
+          <img src="images/corporate-logos/Triggermesh.svg" alt="" draggable="false" />
         </div>
-        <div class="logo" style="font-style: italic; font-size: smaller; color: #999">..and more!</div>
       </div>
+      <div id="usedby-more">..and more!</div>
     </div>
   </section>
 
@@ -138,21 +138,30 @@
     </div>
   </section>
 
-  <section class="calltoaction-container">
+  <section class="whats-next-container">
     <div class="md-grid md-typeset">
       <h2>What's Next?</h2>
-      <div style="display: flex; gap: 2em;" class="component-flex">
-        <div>
+      <div class="component-flex">
+        <div class="pane">
+          <div class="twemoji">
+            {% include ".icons/fontawesome/brands/slack.svg" %}
+          </div>
           <h4>Talk to us on Slack</h4>
           <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
           <p>Interested in learning more, speaking to other contributors, or finding answers?</p>
         </div>
-        <div>
+        <div class="pane">
+          <div class="twemoji">
+            {% include ".icons/fontawesome/brands/github.svg" %}
+          </div>
           <h4>Contributions Welcome</h4>
           <a href="./help/contributor/" title="Contributing Link" class="md-button">Contribute</a>
           <p>Want to join the fun on Github? New users are always welcome!</p>
         </div>
-        <div>
+        <div class="pane">
+          <div class="twemoji">
+            {% include ".icons/fontawesome/brands/twitter.svg" %}
+          </div>
           <h4>Follow us on Twitter</h4>
           <a href="https://twitter.com/KnativeProject" title="Twitter Link" class="md-button">Follow</a>
           <p>For features announcements, interesting Knative news, and other great things.</p>
@@ -180,4 +189,6 @@
 {% endblock %}
 
 <!-- Application footer -->
-{% block footer %}{% endblock %}
+{% block footer %}
+  {% include "partials/footer.html" %}
+{% endblock %}

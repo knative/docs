@@ -45,10 +45,9 @@ To change the {default-domain} value there are a few steps involved:
 
 You can also apply an updated domain configuration:
 
-1. Replace the `example.org` and `example.com` values with the new domain you want to use and run the command:
+1. Create a YAML file using the template below:
 
      ```yaml
-     kubectl apply -f - <<EOF
      apiVersion: v1
      kind: ConfigMap
      metadata:
@@ -64,15 +63,22 @@ You can also apply an updated domain configuration:
        # Although it will match all routes, it is the least-specific rule so it
        # will only be used if no other domain matches.
        example.com: ""
-       EOF
      ```
+     Replace `example.org` and `example.com` with the new domain you want to use.
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ## Deploy an application
 
 > If you have an existing deployment, Knative reconciles the change made to the ConfigMap, and automatically updates the host name for all of the deployed Services and Routes.
 
 Deploy an app (for example,
-[`helloworld-go`](./samples/hello-world/helloworld-go/)), to your
+[`helloworld-go`](samples/hello-world/helloworld-go/)), to your
 cluster as normal. You can retrieve the URL in Knative Route "helloworld-go"
 with the following command:
 
@@ -123,7 +129,7 @@ Follow these steps to make your domain publicly accessible:
 ### Set static IP for Knative Gateway
 
 You might want to
-[set a static IP for your Knative gateway](./gke-assigning-static-ip-address),
+[set a static IP for your Knative gateway](gke-assigning-static-ip-address),
 so that the gateway IP does not change each time your cluster is restarted.
 
 ### Update your DNS records

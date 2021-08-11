@@ -33,7 +33,7 @@ Knative supports the following Auto TLS modes:
       - In this mode, a single Certificate will be provisioned per namespace and is reused across the Knative Services within the same namespace.
 
     - **Provision Certificate per Knative Service is supported when using DNS-01 challenge mode.**
-      - This is the recommended mode for better certificate islation between Knative Services.
+      - This is the recommended mode for better certificate isolation between Knative Services.
       - In this mode, a Certificate will be provisioned for each Knative Service.
       - The TLS effective time is longer as it needs Certificate provision for each Knative Service creation.
 
@@ -45,72 +45,75 @@ Knative supports the following Auto TLS modes:
 
 ## Enabling Auto TLS
 
-1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster to define who issues the TLS certificates, how requests are validated,
+1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster
+to define who issues the TLS certificates, how requests are validated,
 and which DNS provider validates those requests.
 
-    ### ClusterIssuer for DNS-01 challenge
+    - **ClusterIssuer for DNS-01 challenge:** use the cert-manager reference to determine how to configure your `ClusterIssuer` file.
 
-    Use the cert-manager reference to determine how to configure your
-    `ClusterIssuer` file:
-    - See the generic
-      [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
-    - Also see the
-      [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
+        - See the generic [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
+        - Also see the
+        [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
 
-      **Example**: Cloud DNS `ClusterIssuer` configuration file:
+        For example, the following `ClusterIssuer` file named `letsencrypt-issuer` is
+        configured for the Let's Encrypt CA and Google Cloud DNS.
+        The Let's Encrypt account info, required `DNS-01` challenge type, and
+        Cloud DNS provider info is defined under `spec`.
 
-      The following `letsencrypt-issuer` named `ClusterIssuer` file is
-      configured for the Let's Encrypt CA and Google Cloud DNS. Under `spec`,
-      the Let's Encrypt account info, required `DNS-01` challenge type, and
-      Cloud DNS provider info defined.
+        ```yaml
+        apiVersion: cert-manager.io/v1
+        kind: ClusterIssuer
+        metadata:
+          name: letsencrypt-dns-issuer
+        spec:
+          acme:
+            server: https://acme-v02.api.letsencrypt.org/directory
+            # This will register an issuer with LetsEncrypt.  Replace
+            # with your admin email address.
+            email: myemail@gmail.com
+            privateKeySecretRef:
+              # Set privateKeySecretRef to any unused secret name.
+              name: letsencrypt-dns-issuer
+            solvers:
+            - dns01:
+                cloudDNS:
+                  # Set this to your GCP project-id
+                  project: $PROJECT_ID
+                  # Set this to the secret that we publish our service account key
+                  # in the previous step.
+                  serviceAccountSecretRef:
+                    name: cloud-dns-key
+                    key: key.json
+        ```
 
-      ```bash
-      apiVersion: cert-manager.io/v1
-      kind: ClusterIssuer
-      metadata:
-        name: letsencrypt-dns-issuer
-      spec:
-        acme:
-          server: https://acme-v02.api.letsencrypt.org/directory
-          # This will register an issuer with LetsEncrypt.  Replace
-          # with your admin email address.
-          email: myemail@gmail.com
-          privateKeySecretRef:
-            # Set privateKeySecretRef to any unused secret name.
-            name: letsencrypt-dns-issuer
-          solvers:
-          - dns01:
-              clouddns:
-                # Set this to your GCP project-id
-                project: $PROJECT_ID
-                # Set this to the secret that we publish our service account key
-                # in the previous step.
-                serviceAccountSecretRef:
-                  name: cloud-dns-key
-                  key: key.json
-      ```
+    - **ClusterIssuer for HTTP-01 challenge**
 
-    ###  ClusterIssuer for HTTP-01 challenge
+        To apply the ClusterIssuer for HTTP01 challenge:
 
-    Run the following command to apply the ClusterIssuer for HTT01 challenge:
+        1. Create a YAML file using the template below:
 
-    ```yaml
-    kubectl apply -f - <<EOF
-    apiVersion: cert-manager.io/v1
-    kind: ClusterIssuer
-    metadata:
-      name: letsencrypt-http01-issuer
-    spec:
-      acme:
-        privateKeySecretRef:
-          name: letsencrypt
-        server: https://acme-v02.api.letsencrypt.org/directory
-        solvers:
-        - http01:
-           ingress:
-             class: istio
-    EOF
-    ```
+            ```yaml
+            apiVersion: cert-manager.io/v1
+            kind: ClusterIssuer
+            metadata:
+              name: letsencrypt-http01-issuer
+            spec:
+              acme:
+                privateKeySecretRef:
+                  name: letsencrypt
+                server: https://acme-v02.api.letsencrypt.org/directory
+                solvers:
+                - http01:
+                   ingress:
+                     class: istio
+            ```
+
+        1. Apply the YAML file by running the command:
+
+            ```bash
+            kubectl apply -f <filename>.yaml
+            ```
+            Where `<filename>` is the name of the file you created in the previous step.
 
 1.  Ensure that the ClusterIssuer is created successfully:
 
@@ -130,36 +133,36 @@ providers, are provided in
 [DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
 
 
-### Install networking-certmanager deployment
+### Install net-certmanager-controller deployment
 
-1.  Determine if `networking-certmanager` is already installed by running the
+1.  Determine if `net-certmanager-controller` is already installed by running the
     following command:
 
     ```bash
-    kubectl get deployment networking-certmanager -n knative-serving
+    kubectl get deployment net-certmanager-controller -n knative-serving
     ```
 
-1.  If `networking-certmanager` is not found, run the following command:
+1.  If `net-certmanager-controller` is not found, run the following command:
 
     ```bash
     kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
-### Install networking-ns-cert component
+### Install net-nscert-controller component
 
-If you choose to use the mode of provisioning certificate per namespace, you need to install `networking-ns-cert` components.
+If you choose to use the mode of provisioning certificate per namespace, you need to install `net-nscert-controller` components.
 
 **IMPORTANT:** Provisioning a certificate per namespace only works with DNS-01
  challenge. This component cannot be used with HTTP-01 challenge.
 
-1. Determine if `networking-ns-cert` deployment is already installed by
+1. Determine if `net-nscert-controller` deployment is already installed by
 running the following command:
 
     ```bash
-    kubectl get deployment networking-ns-cert -n knative-serving
+    kubectl get deployment net-nscert-controller -n knative-serving
     ```
 
-1. If `networking-ns-cert` deployment is not found, run the following command:
+1. If `net-nscert-controller` deployment is not found, run the following command:
 
     ```bash
     kubectl apply --filename {{ artifact( repo="serving", file="serving-nscert.yaml") }}
@@ -329,4 +332,18 @@ Using the previous `autoscale-go` example:
 ```
 NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
 autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+```
+
+### Disable Auto TLS per namespace
+
+If you have Auto TLS enabled to provision a certificate per namespace, you can choose to disable it for an individual namespace by adding the annotation `networking.knative.dev/disableWildcardCert: true`
+1. Edit your namespace `kubectl edit namespace default` and add the annotation:
+```yaml
+ apiVersion: v1
+ kind: Namespace
+ metadata:
+   annotations:
+    ...
+     networking.knative.dev/disableWildcardCert: "true"
+    ...
 ```

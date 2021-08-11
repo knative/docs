@@ -19,8 +19,9 @@ Create a sample service:
 
 === "Apply YAML"
 
+1. Create a YAML file using the example below:
+
     ```yaml
-    kubectl apply -f - <<EOF
     apiVersion: serving.knative.dev/v1
     kind: Service
     metadata:
@@ -34,8 +35,13 @@ Create a sample service:
           env:
             - name: TARGET
               value: "Go Sample v1"
-    EOF
     ```
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 === "kn CLI"
 

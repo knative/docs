@@ -19,11 +19,11 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version.
 #    Order matters :-), Most recent first.
-VERSIONS=("0.23" "0.22" "0.21")
-# 3) For now, set branches too. (This will go away when all branches are release-NN).
-DOCS_BRANCHES=("mkrelease-0.23" "mkrelease-0.22" "mkrelease-0.22")
-RELEASE_BRANCHES=("v0.23.0" "v0.22.0" "v0.21.0")
-REPOS=("julz" "julz" "julz")
+VERSIONS=("0.24" "0.23" "0.22" "0.21")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+RELEASE_BRANCHES=("v0.24.0")                     # Release version for serving/eventing yaml files and api references.
+# 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
+DOCS_BRANCHES=("release-0.24")
+REPOS=("knative" "knative" "knative")
 # 4) PR the result to main.
 # 5) Party.
 
@@ -48,11 +48,9 @@ else
 
   # Latest release branch to /docs
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/docs "$TEMP/docs-$latest"
-  # This won't work until release 0.24 is cut in serving and eventing.
-  # TODO: Uncomment this when 0.24 is cut.
-  # curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
-  # curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
-  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=$latest mkdocs build -d $SITE/docs; popd
+  curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
+  curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
+  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
   versionjson=""
@@ -64,7 +62,7 @@ else
     # git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "$TEMP/docs-$version"
     # curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
     # curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
-    # pushd "$TEMP/docs-$version"; KNATIVE_VERSION=$version VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
+    # pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
   done
 
   # Set up the version file to point to the built docs.
@@ -117,12 +115,15 @@ if [ -z "$SKIP_BLOG" ]; then
   find . -type f -path '*/content/*.md' \
       -exec sed -i '/](/ { /http/ !{s#\.md##g} }' {} +
 
+  # Move about cookie page in.
+  cp -rfv content-override/en/about-analytics-cookies.md content/en/
+
   # Run the hugo build as normal!
   hugo
   popd
 
   # Hugo builds to public/, just copy over to site/ to match up with mkdocs
-  for d in blog community css scss webfonts images js; do
+  for d in blog community css scss webfonts images js "about-analytics-cookies"; do
     mv temp/website/public/$d site/
   done
 
@@ -131,6 +132,13 @@ if [ -z "$SKIP_BLOG" ]; then
   cp golang/*.html site/golang/
   cat golang/_redirects >> site/_redirects
 fi
+
+# Temporarily, copy staticly built old versions of non-mkdocs docs until these scroll out of support
+# TODO(jz) remove these each release until they disappear!
+cp -r archived/scss/* site/scss/
+cp -r archived/v0.23-docs site/v0.23-docs
+cp -r archived/v0.22-docs site/v0.22-docs
+cp -r archived/v0.21-docs site/v0.21-docs
 
 # Home page is served from docs, so add a redirect.
 # TODO(jz) in production this should be done with a netlify 301 (or maybe just copy docs/index up with a base set).
@@ -141,14 +149,14 @@ cat << EOF > site/index.html
   <meta charset="utf-8">
   <title>Redirecting</title>
   <noscript>
-    <meta http-equiv="refresh" content="1; url=development/" />
+    <meta http-equiv="refresh" content="1; url=docs/" />
   </noscript>
   <script>
-   window.location.replace("development/");
+   window.location.replace("docs/");
   </script>
 </head>
 <body>
-  Redirecting to <a href="development/">development/</a>...
+  Redirecting to <a href="docs/">docs/</a>...
 </body>
 </html>
 EOF

@@ -1,0 +1,1004 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knative – Event sources</title>
+    <link>https://knative.dev/v0.21-docs/eventing/sources/</link>
+    <description>Recent content in Event sources on Knative</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://knative.dev/v0.21-docs/eventing/sources/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.21-Docs: APIServerSource</title>
+      <link>https://knative.dev/v0.21-docs/eventing/sources/apiserversource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/eventing/sources/apiserversource/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;img src=&#34;https://img.shields.io/badge/API_Version-v1-red?style=flat-square&#34; alt=&#34;version&#34;&gt;&lt;/p&gt;
+&lt;p&gt;An APIServerSource brings Kubernetes API server events into Knative.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;The APIServerSource source type is enabled by default when you install Knative Eventing.&lt;/p&gt;
+&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
+&lt;p&gt;This example shows how to create an APIServerSource that listens to Kubernetes Events and
+send CloudEvents to the Event Display Service.&lt;/p&gt;
+&lt;h3 id=&#34;creating-a-namespace&#34;&gt;Creating a namespace&lt;/h3&gt;
+&lt;p&gt;Create a new namespace called &lt;code&gt;apiserversource-example&lt;/code&gt; by entering the following
+command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl create namespace apiserversource-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-the-event-display-service&#34;&gt;Creating the Event Display Service&lt;/h3&gt;
+&lt;p&gt;In this step, you create one event consumer, &lt;code&gt;event-display&lt;/code&gt; to verify that
+&lt;code&gt;APIServerSource&lt;/code&gt; is properly working.&lt;/p&gt;
+&lt;p&gt;To deploy the &lt;code&gt;event-display&lt;/code&gt; consumer to your cluster, run the following
+command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n apiserversource-example apply -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: apps/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Deployment
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  replicas: 1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    matchLabels: &amp;amp;labels
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      app: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  template:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      labels: *labels
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      containers:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;        - name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;---
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    app: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  ports:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  - protocol: TCP
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    port: 80
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    targetPort: 8080
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-a-service-account&#34;&gt;Creating a Service Account&lt;/h3&gt;
+&lt;p&gt;Create a Service Account that the &lt;code&gt;ApiServerSource&lt;/code&gt; runs as. The
+&lt;code&gt;ApiServerSource&lt;/code&gt; watches for Kubernetes events and forwards them to the
+Knative Eventing Broker.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n apiserversource-example apply -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: ServiceAccount
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; name: events-sa
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; namespace: apiserversource-example
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;---
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: rbac.authorization.k8s.io/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: ClusterRole
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; name: event-watcher
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;rules:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; - apiGroups:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     - &amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;   resources:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     - events
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;   verbs:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     - get
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     - list
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     - watch
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;---
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: rbac.authorization.k8s.io/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: ClusterRoleBinding
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; name: k8s-ra-event-watcher
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;roleRef:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; apiGroup: rbac.authorization.k8s.io
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; kind: ClusterRole
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; name: event-watcher
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;subjects:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; - kind: ServiceAccount
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;   name: events-sa
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;   namespace: apiserversource-example
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-the-apiserversource&#34;&gt;Creating the APIServerSource&lt;/h3&gt;
+&lt;p&gt;In order to receive kubernetes events, you need to create a concrete APIServerSource for the namespace.&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;create-source&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;create-source-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#create-source-0&#34; role=&#34;tab&#34; aria-controls=&#34;create-source-0&#34; aria-selected=&#34;true&#34;&gt;YAML&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;create-source-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#create-source-1&#34; role=&#34;tab&#34; aria-controls=&#34;create-source-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;create-source-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;create-source-0-tab&#34;&gt;
+    
+      &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n apiserversource-example apply -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: sources.knative.dev/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: ApiServerSource
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; name: testevents
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; namespace: apiserversource-example
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; serviceAccountName: events-sa
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; mode: Resource
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; resources:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;   - apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     kind: Event
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; sink:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;   ref:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;     name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;create-source-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;create-source-1-tab&#34;&gt;
+    
+      &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn &lt;span style=&#34;color:#204a87&#34;&gt;source&lt;/span&gt; apiserver create testevents &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace apiserversource-example &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --mode &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Event:v1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --service-account events-sa &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --sink  --sink http://event-display.svc.cluster.local
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;creating-events&#34;&gt;Creating Events&lt;/h3&gt;
+&lt;p&gt;Create events by launching a pod in the default namespace. Create a &lt;code&gt;busybox&lt;/code&gt;
+container and immediately delete it:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n apiserversource-example run busybox --image&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;busybox --restart&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;Never -- ls
+kubectl -n apiserversource-example delete pod busybox
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;verify&#34;&gt;Verify&lt;/h3&gt;
+&lt;p&gt;We will verify that the Kubernetes events were sent into the Knative eventing
+system by looking at our message dumper function logs.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n apiserversource-example logs -l &lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;event-display --tail&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should see log lines similar to:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.apiserver.resource.update
+  source: https://10.96.0.1:443
+  subject: /apis/v1/namespaces/apiserversource-example/events/testevents.15dd3050eb1e6f50
+  id: e0447eb7-36b5-443b-9d37-faf4fe5c62f0
+  time: 2020-07-28T19:14:54.719501054Z
+  datacontenttype: application/json
+Extensions,
+  kind: Event
+  name: busybox.1626008649e617e3
+  namespace: apiserversource-example
+Data,
+  {
+    &amp;quot;apiVersion&amp;quot;: &amp;quot;v1&amp;quot;,
+    &amp;quot;count&amp;quot;: 1,
+    &amp;quot;eventTime&amp;quot;: null,
+    &amp;quot;firstTimestamp&amp;quot;: &amp;quot;2020-07-28T19:14:54Z&amp;quot;,
+    &amp;quot;involvedObject&amp;quot;: {
+      &amp;quot;apiVersion&amp;quot;: &amp;quot;v1&amp;quot;,
+      &amp;quot;fieldPath&amp;quot;: &amp;quot;spec.containers{busybox}&amp;quot;,
+      &amp;quot;kind&amp;quot;: &amp;quot;Pod&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;busybox&amp;quot;,
+      &amp;quot;namespace&amp;quot;: &amp;quot;apiserversource-example&amp;quot;,
+      &amp;quot;resourceVersion&amp;quot;: &amp;quot;28987493&amp;quot;,
+      &amp;quot;uid&amp;quot;: &amp;quot;1efb342a-737b-11e9-a6c5-42010a8a00ed&amp;quot;
+    },
+    &amp;quot;kind&amp;quot;: &amp;quot;Event&amp;quot;,
+    &amp;quot;lastTimestamp&amp;quot;: &amp;quot;2020-07-28T19:14:54Z&amp;quot;,
+    &amp;quot;message&amp;quot;: &amp;quot;Started container&amp;quot;,
+    &amp;quot;metadata&amp;quot;: {
+      &amp;quot;creationTimestamp&amp;quot;: &amp;quot;2020-07-28T19:14:54Z&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;busybox.1626008649e617e3&amp;quot;,
+      &amp;quot;namespace&amp;quot;: &amp;quot;default&amp;quot;,
+      &amp;quot;resourceVersion&amp;quot;: &amp;quot;506088&amp;quot;,
+    &amp;quot;selfLink&amp;quot;: &amp;quot;/api/v1/namespaces/apiserversource-example/events/busybox.1626008649e617e3&amp;quot;,
+      &amp;quot;uid&amp;quot;: &amp;quot;2005af47-737b-11e9-a6c5-42010a8a00ed&amp;quot;
+    },
+    &amp;quot;reason&amp;quot;: &amp;quot;Started&amp;quot;,
+    &amp;quot;reportingComponent&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;reportingInstance&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;source&amp;quot;: {
+      &amp;quot;component&amp;quot;: &amp;quot;kubelet&amp;quot;,
+      &amp;quot;host&amp;quot;: &amp;quot;gke-knative-auto-cluster-default-pool-23c23c4f-xdj0&amp;quot;
+    },
+    &amp;quot;type&amp;quot;: &amp;quot;Normal&amp;quot;
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h3&gt;
+&lt;p&gt;Delete the &lt;code&gt;apiserversource-example&lt;/code&gt; namespace and all of its resources from your
+cluster by entering the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete namespace apiserversource-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference-documentation&#34;&gt;Reference Documentation&lt;/h2&gt;
+&lt;p&gt;See the &lt;a href=&#34;../../../reference/api/eventing/#sources.knative.dev/v1.APIServerSource&#34;&gt;APIServerSource specification&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+&lt;p&gt;For any inquiries about this source, please reach out on to the
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-users&#34;&gt;Knative users group&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.21-Docs: ContainerSource</title>
+      <link>https://knative.dev/v0.21-docs/eventing/sources/containersource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/eventing/sources/containersource/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;img src=&#34;https://img.shields.io/badge/API_Version-v1-red?style=flat-square&#34; alt=&#34;version&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ContainerSource will start a container image which will generate events under
+certain situations and send messages to a sink URI. It also can be an easy way
+to support your own event sources in Knative. This guide shows how to configure
+ContainerSource as an event source for functions and summarizes guidelines for
+creating your own event source as a ContainerSource.&lt;/p&gt;
+&lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://github.com/google/ko&#34;&gt;ko&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;KO_DOCKER_REPO&lt;/code&gt;
+(e.g. &lt;code&gt;gcr.io/[gcloud-project]&lt;/code&gt; or &lt;code&gt;docker.io/&amp;lt;username&amp;gt;&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Authenticated with your &lt;code&gt;KO_DOCKER_REPO&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://docs.docker.com/install/&#34;&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;The ContainerSource source type is enabled by default when you install Knative Eventing.&lt;/p&gt;
+&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
+&lt;p&gt;This example shows how the heartbeats container sends events to the Event Display Service.&lt;/p&gt;
+&lt;h3 id=&#34;preparing-the-heartbeats-image&#34;&gt;Preparing the heartbeats image&lt;/h3&gt;
+&lt;p&gt;Knative &lt;a href=&#34;https://github.com/knative/eventing-contrib&#34;&gt;event-sources&lt;/a&gt; has a
+sample of heartbeats event source. You could clone the source code by&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone -b &amp;quot;release-0.21&amp;quot; https://github.com/knative/eventing-contrib.git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then build a heartbeats image and publish to your image repo with&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ko publish knative.dev/eventing-contrib/cmd/heartbeats
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;creating-a-namespace&#34;&gt;Creating a namespace&lt;/h3&gt;
+&lt;p&gt;Create a new namespace called &lt;code&gt;containersource-example&lt;/code&gt; by entering the following
+command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl create namespace containersource-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-the-event-display-service&#34;&gt;Creating the Event Display Service&lt;/h3&gt;
+&lt;p&gt;In order to verify &lt;code&gt;ContainerSource&lt;/code&gt; is working, we will create a Event Display
+Service that dumps incoming messages to its log.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n containersource-example apply -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: apps/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Deployment
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  replicas: 1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    matchLabels: &amp;amp;labels
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      app: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  template:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      labels: *labels
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      containers:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;        - name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;---
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    app: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  ports:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  - protocol: TCP
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    port: 80
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    targetPort: 8080
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-the-containersource-using-the-heartbeats-image&#34;&gt;Creating the ContainerSource using the heartbeats image&lt;/h3&gt;
+&lt;p&gt;In order to run the heartbeats container as an event source, you have to create
+a concrete ContainerSource with specific arguments and environment settings. Be
+sure to replace &lt;code&gt;heartbeats_image_uri&lt;/code&gt; with a valid uri for your heartbeats
+image you published in the previous step.
+Note that arguments and environment variables are set and will be passed
+to the container.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n containersource-example apply -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: sources.knative.dev/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: ContainerSource
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: test-heartbeats
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  template:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      containers:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;        # This corresponds to a heartbeats image uri you build and publish in the previous step
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;        # e.g. gcr.io/[gcloud-project]/knative.dev/eventing-contrib/cmd/heartbeats
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;        - image: &amp;lt;heartbeats_image_uri&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;          name: heartbeats
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;          args:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;            - --period=1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;          env:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;            - name: POD_NAME
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;              value: &amp;#34;mypod&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;            - name: POD_NAMESPACE
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;              value: &amp;#34;event-test&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  sink:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    ref:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;verify&#34;&gt;Verify&lt;/h3&gt;
+&lt;p&gt;View the logs for the &lt;code&gt;event-display&lt;/code&gt; event consumer by
+entering the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n containersource-example logs -l &lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;event-display --tail&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;200&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This returns the &lt;code&gt;Attributes&lt;/code&gt; and &lt;code&gt;Data&lt;/code&gt; of the events that the ContainerSource sent to the &lt;code&gt;event-display&lt;/code&gt; Service:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.eventing.samples.heartbeat
+  source: https://knative.dev/eventing-contrib/cmd/heartbeats/#event-test/mypod
+  id: 2b72d7bf-c38f-4a98-a433-608fbcdd2596
+  time: 2019-10-18T15:23:20.809775386Z
+  contenttype: application/json
+Extensions,
+  beats: true
+  heart: yes
+  the: 42
+Data,
+  {
+    &amp;quot;id&amp;quot;: 2,
+    &amp;quot;label&amp;quot;: &amp;quot;&amp;quot;
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h3&gt;
+&lt;p&gt;Delete the &lt;code&gt;containersource-example&lt;/code&gt; namespace and all of its resources from your
+cluster by entering the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete namespace containersource-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference-documentation&#34;&gt;Reference Documentation&lt;/h2&gt;
+&lt;p&gt;See the &lt;a href=&#34;../../../reference/api/eventing/#sources.knative.dev/v1.ContainerSource&#34;&gt;ContainerSource specification&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+&lt;p&gt;For any inquiries about this source, please reach out on to the
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-users&#34;&gt;Knative users group&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.21-Docs: PingSource</title>
+      <link>https://knative.dev/v0.21-docs/eventing/sources/pingsource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/eventing/sources/pingsource/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;img src=&#34;https://img.shields.io/badge/API_Version-v1beta2-red?style=flat-square&#34; alt=&#34;version&#34;&gt;&lt;/p&gt;
+&lt;p&gt;A PingSource produces events with a fixed payload on a specified cron schedule.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;The PingSource source type is enabled by default when you install Knative Eventing.&lt;/p&gt;
+&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
+&lt;p&gt;This example shows how to send an event every minute to a Event Display Service.&lt;/p&gt;
+&lt;h3 id=&#34;creating-a-namespace&#34;&gt;Creating a namespace&lt;/h3&gt;
+&lt;p&gt;Create a new namespace called &lt;code&gt;pingsource-example&lt;/code&gt; by entering the following
+command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl create namespace pingsource-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-the-event-display-service&#34;&gt;Creating the Event Display Service&lt;/h3&gt;
+&lt;p&gt;In this step, you create one event consumer, &lt;code&gt;event-display&lt;/code&gt; to verify that
+&lt;code&gt;PingSource&lt;/code&gt; is properly working.&lt;/p&gt;
+&lt;p&gt;To deploy the &lt;code&gt;event-display&lt;/code&gt; consumer to your cluster, run the following
+command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n pingsource-example apply -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: apps/v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Deployment
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  replicas: 1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    matchLabels: &amp;amp;labels
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      app: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  template:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      labels: *labels
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      containers:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;        - name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;---
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    app: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  ports:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  - protocol: TCP
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    port: 80
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    targetPort: 8080
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-the-pingsource&#34;&gt;Creating the PingSource&lt;/h3&gt;
+&lt;p&gt;You can now create the &lt;code&gt;PingSource&lt;/code&gt; sending an event containing
+&lt;code&gt;{&amp;quot;message&amp;quot;: &amp;quot;Hello world!&amp;quot;}&lt;/code&gt; every minute.&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;create-source&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;create-source-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#create-source-0&#34; role=&#34;tab&#34; aria-controls=&#34;create-source-0&#34; aria-selected=&#34;true&#34;&gt;YAML&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;create-source-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#create-source-1&#34; role=&#34;tab&#34; aria-controls=&#34;create-source-1&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;create-source-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;create-source-0-tab&#34;&gt;
+    
+      &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl create -n pingsource-example -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: sources.knative.dev/v1beta2
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: PingSource
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: test-ping-source
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  schedule: &amp;#34;*/1 * * * *&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  contentType: &amp;#34;application/json&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  data: &amp;#39;{&amp;#34;message&amp;#34;: &amp;#34;Hello world!&amp;#34;}&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  sink:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    ref:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;create-source-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;create-source-1-tab&#34;&gt;
+    
+      &lt;p&gt;Notice that the namespace is specified in two places in the command in &lt;code&gt;--namespace&lt;/code&gt; and the &lt;code&gt;--sink&lt;/code&gt; hostname&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kn &lt;span style=&#34;color:#204a87&#34;&gt;source&lt;/span&gt; ping create test-ping-source &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace pingsource-example &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --schedule &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;*/1 * * * *&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --data &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;message&amp;#34;: &amp;#34;Hello world!&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --sink http://event-display.pingsource-example.svc.cluster.local
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;optional-create-a-pingsource-with-binary-data&#34;&gt;(Optional) Create a PingSource with binary data&lt;/h2&gt;
+&lt;p&gt;Sometimes you may want to send binary data, which cannot be directly serialized in yaml, to downstream. This can be achieved by using &lt;code&gt;dataBase64&lt;/code&gt; as the payload. As the name suggests, &lt;code&gt;dataBase64&lt;/code&gt; should carry data that is base64 encoded.&lt;/p&gt;
+&lt;p&gt;Please note that &lt;code&gt;data&lt;/code&gt; and &lt;code&gt;dataBase64&lt;/code&gt; cannot co-exist.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl create -n pingsource-example -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: sources.knative.dev/v1beta2
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: PingSource
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: test-ping-source-binary
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  schedule: &amp;#34;*/1 * * * *&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  contentType: &amp;#34;text/plain&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  dataBase64: &amp;#34;ZGF0YQ==&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  sink:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    ref:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      apiVersion: v1
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      kind: Service
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      name: event-display
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;verify&#34;&gt;Verify&lt;/h3&gt;
+&lt;p&gt;View the logs for the &lt;code&gt;event-display&lt;/code&gt; event consumer by
+entering the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl -n pingsource-example logs -l &lt;span style=&#34;color:#000&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;event-display --tail&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This returns the &lt;code&gt;Attributes&lt;/code&gt; and &lt;code&gt;Data&lt;/code&gt; of the events that the PingSource sent to the &lt;code&gt;event-display&lt;/code&gt; Service:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source
+  id: 49f04fe2-7708-453d-ae0a-5fbaca9586a8
+  time: 2021-03-25T19:41:00.444508332Z
+  datacontenttype: application/json
+Data,
+  &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Hello world!&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you created a PingSource with binary data, you should also see the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source-binary
+  id: ddd7bad2-9b6a-42a7-8f9b-b64494a6ce43
+  time: 2021-03-25T19:38:00.455013472Z
+  datacontenttype: text/plain
+Data,
+  data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h3&gt;
+&lt;p&gt;Delete the &lt;code&gt;pingsource-example&lt;/code&gt; namespace and all of its resources from your
+cluster by entering the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete namespace pingsource-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference-documentation&#34;&gt;Reference Documentation&lt;/h2&gt;
+&lt;p&gt;See the &lt;a href=&#34;../../../reference/api/eventing/#sources.knative.dev/v1beta2.PingSource&#34;&gt;PingSource specification&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+&lt;p&gt;For any inquiries about this source, please reach out on to the
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/knative-users&#34;&gt;Knative users group&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.21-Docs: Sink binding</title>
+      <link>https://knative.dev/v0.21-docs/eventing/sources/sinkbinding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/eventing/sources/sinkbinding/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;img src=&#34;https://img.shields.io/badge/API_Version-v1-red?style=flat-square&#34; alt=&#34;version&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;SinkBinding&lt;/code&gt; custom object supports decoupling event production from delivery addressing.&lt;/p&gt;
+&lt;p&gt;You can use sink binding to connect Kubernetes resources that embed a &lt;code&gt;PodSpec&lt;/code&gt; and want to produce events, such as an event source, to an addressable Kubernetes object that can receive events, also known as an &lt;em&gt;event sink&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sink binding can be used to create new event sources using any of the familiar compute objects that Kubernetes makes available.
+For example, &lt;code&gt;Deployment&lt;/code&gt;, &lt;code&gt;Job&lt;/code&gt;, &lt;code&gt;DaemonSet&lt;/code&gt;, or &lt;code&gt;StatefulSet&lt;/code&gt; objects, or Knative abstractions, such as &lt;code&gt;Service&lt;/code&gt; or &lt;code&gt;Configuration&lt;/code&gt; objects, can be used.&lt;/p&gt;
+&lt;p&gt;Sink binding injects environment variables into the &lt;code&gt;PodTemplateSpec&lt;/code&gt; of the event sink, so that the application code does not need to interact directly with the Kubernetes API to locate the event destination.&lt;/p&gt;
+&lt;p&gt;Sink binding operates in one of two modes; &lt;code&gt;Inclusion&lt;/code&gt; or &lt;code&gt;Exclusion&lt;/code&gt;.
+You can set the mode by modifying the &lt;code&gt;SINK_BINDING_SELECTION_MODE&lt;/code&gt; of the &lt;code&gt;eventing-webhook&lt;/code&gt; deployment accordingly. The mode determines the default scope of the webhook.&lt;/p&gt;
+&lt;p&gt;By default, the webhook is set to &lt;code&gt;exclusion&lt;/code&gt; mode, which means that any namespace that does not have the label &lt;code&gt;bindings.knative.dev/exclude: true&lt;/code&gt; will be subject to mutation evalutation.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;SINK_BINDING_SELECTION_MODE&lt;/code&gt; is set to &lt;code&gt;inclusion&lt;/code&gt;, only the resources in a namespace labelled with &lt;code&gt;bindings.knative.dev/include: true&lt;/code&gt; will be considered.  In &lt;code&gt;inclusion&lt;/code&gt; mode, any SinkBinding resource created will automatically label the &lt;code&gt;subject&lt;/code&gt; namespace with &lt;code&gt;bindings.knative.dev/include: true&lt;/code&gt; for inclusion in the potential environment variable inclusions.&lt;/p&gt;
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;The following procedures show how you can create a sink binding and connect it to a service and event source in your cluster.&lt;/p&gt;
+&lt;h3 id=&#34;creating-a-namespace&#34;&gt;Creating a namespace&lt;/h3&gt;
+&lt;p&gt;Create a namespace called &lt;code&gt;sinkbinding-example&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl create namespace sinkbinding-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-a-knative-service&#34;&gt;Creating a Knative service&lt;/h3&gt;
+&lt;p&gt;Create a Knative service if you do not have an existing event sink that you want to connect to the sink binding.&lt;/p&gt;
+&lt;h4 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;You must have Knative Serving installed on your cluster.&lt;/li&gt;
+&lt;li&gt;Optional: If you want to use &lt;code&gt;kn&lt;/code&gt; commands with sink binding, you must install the &lt;code&gt;kn&lt;/code&gt; CLI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;procedure&#34;&gt;Procedure&lt;/h4&gt;
+&lt;p&gt;Create a Knative service:&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;knative_service&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;knative_service-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#knative_service-0&#34; role=&#34;tab&#34; aria-controls=&#34;knative_service-0&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;knative_service-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#knative_service-1&#34; role=&#34;tab&#34; aria-controls=&#34;knative_service-1&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;knative_service-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;knative_service-0-tab&#34;&gt;
+    
+      &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kn service create hello --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --env &lt;span style=&#34;color:#000&#34;&gt;RESPONSE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Hello Serverless!&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;knative_service-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;knative_service-1-tab&#34;&gt;
+    
+      &lt;ol&gt;
+&lt;li&gt;Copy the sample YAML into a &lt;code&gt;service.yaml&lt;/code&gt; file:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;event-display&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Apply the file:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl apply --filename service.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;creating-a-cron-job&#34;&gt;Creating a cron job&lt;/h3&gt;
+&lt;p&gt;Create a cron job if you do not have an existing event source that you want to connect to the sink binding.&lt;/p&gt;
+&lt;!-- TODO: Add kn command--&gt;
+&lt;p&gt;Create a &lt;code&gt;CronJob&lt;/code&gt; object:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Copy the sample YAML into a &lt;code&gt;cronjob.yaml&lt;/code&gt; file:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;batch/v1beta1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;CronJob&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;heartbeat-cron&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Run every minute&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;schedule&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;*/1 * * * *&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;jobTemplate&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;heartbeat-cron&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;restartPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Never&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;single-heartbeat&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/heartbeats&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;period=1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ONE_SHOT&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;POD_NAME&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;valueFrom&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;fieldRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;fieldPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;metadata.name&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;POD_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;valueFrom&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;fieldRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;fieldPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;metadata.namespace&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Apply the file:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl apply --filename heartbeats-source.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;cloning-a-sample-heartbeat-cron-job&#34;&gt;Cloning a sample heartbeat cron job&lt;/h4&gt;
+&lt;p&gt;Knative &lt;a href=&#34;https://github.com/knative/eventing-contrib&#34;&gt;event-contrib&lt;/a&gt; contains a
+sample heartbeats event source.&lt;/p&gt;
+&lt;h5 id=&#34;prerequisites-1&#34;&gt;Prerequisites&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure that &lt;code&gt;ko publish&lt;/code&gt; is set up correctly:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/knative/serving/blob/master/DEVELOPMENT.md#environment-setup&#34;&gt;&lt;code&gt;KO_DOCKER_REPO&lt;/code&gt;&lt;/a&gt;
+must be set. For example, &lt;code&gt;gcr.io/[gcloud-project]&lt;/code&gt; or &lt;code&gt;docker.io/&amp;lt;username&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;You must have authenticated with your &lt;code&gt;KO_DOCKER_REPO&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;procedure-1&#34;&gt;Procedure&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;Clone the &lt;code&gt;event-contib&lt;/code&gt; repository:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git clone -b &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;release-0.21&amp;#34;&lt;/span&gt; https://github.com/knative/eventing-contrib.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Build a heartbeats image, and publish the image to your image repository:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ko publish knative.dev/eventing-contrib/cmd/heartbeats
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!-- TODO: Add tabs if there are kn commands etc to do this also--&gt;
+&lt;h2 id=&#34;creating-a-sinkbinding-object&#34;&gt;Creating a SinkBinding object&lt;/h2&gt;
+&lt;p&gt;Create a &lt;code&gt;SinkBinding&lt;/code&gt; object that directs events from your cron job to the event sink.&lt;/p&gt;
+&lt;h3 id=&#34;prerequisites-2&#34;&gt;Prerequisites&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;You must have Knative Eventing installed on your cluster.&lt;/li&gt;
+&lt;li&gt;Optional: If you want to use &lt;code&gt;kn&lt;/code&gt; commands with sink binding, you must install the &lt;code&gt;kn&lt;/code&gt; CLI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;procedure-2&#34;&gt;Procedure&lt;/h3&gt;
+&lt;p&gt;Create a sink binding:&lt;/p&gt;
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;sinkbinding&#34; role=&#34;tablist&#34;&gt;
+  
+    
+    
+    
+      
+    
+    &lt;li class=&#34;nav-item active&#34;&gt;
+      &lt;a class=&#34;nav-link active&#34; id=&#34;sinkbinding-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#sinkbinding-0&#34; role=&#34;tab&#34; aria-controls=&#34;sinkbinding-0&#34; aria-selected=&#34;true&#34;&gt;kn&lt;/a&gt;
+    &lt;/li&gt;
+  
+    
+    
+    
+    &lt;li class=&#34;nav-item &#34;&gt;
+      &lt;a class=&#34;nav-link &#34; id=&#34;sinkbinding-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#sinkbinding-1&#34; role=&#34;tab&#34; aria-controls=&#34;sinkbinding-1&#34; aria-selected=&#34;true&#34;&gt;yaml&lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+
+&lt;div class=&#34;tab-content&#34; &gt;
+
+  
+  
+  
+    
+  
+  &lt;div class=&#34;tab-pane fade show active&#34; id=&#34;sinkbinding-0&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;sinkbinding-0-tab&#34;&gt;
+    
+      &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kn &lt;span style=&#34;color:#204a87&#34;&gt;source&lt;/span&gt; binding create bind-heartbeat &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --namespace sinkbinding-example &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --subject &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Job:batch/v1:app=heartbeat-cron&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --sink http://event-display.svc.cluster.local &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --ce-override &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sink=bound&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  
+  
+  
+  &lt;div class=&#34;tab-pane fade &#34; id=&#34;sinkbinding-1&#34; role=&#34;tabpanel&#34; aria-labelledby=&#34;sinkbinding-1-tab&#34;&gt;
+    
+      &lt;ol&gt;
+&lt;li&gt;Copy the sample YAML into a &lt;code&gt;cronjob.yaml&lt;/code&gt; file:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sources.knative.dev/v1alpha1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SinkBinding&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;bind-heartbeat&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;subject&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;batch/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Job&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;heartbeat-cron&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sink&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ref&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;serving.knative.dev/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;event-display&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Apply the file:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl apply --filename heartbeats-source.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+    
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;verification-steps&#34;&gt;Verification steps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Verify that a message was sent to the Knative eventing system by looking at the &lt;code&gt;event-display&lt;/code&gt; service logs:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl logs -l serving.knative.dev/service&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;event-display -c user-container --since&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;10m
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Observe the lines showing the request headers and body of the event message, sent by the heartbeats source to the display function:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  ☁️  cloudevents.Event
+  Validation: valid
+  Context Attributes,
+    specversion: 1.0
+    type: dev.knative.eventing.samples.heartbeat
+    source: https://knative.dev/eventing-contrib/cmd/heartbeats/#default/heartbeat-cron-1582120020-75qrz
+    id: 5f4122be-ac6f-4349-a94f-4bfc6eb3f687
+    time: 2020-02-19T13:47:10.41428688Z
+    datacontenttype: application/json
+  Extensions,
+    beats: &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+    heart: yes
+    the: &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;42&lt;/span&gt;
+  Data,
+    &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+      &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;: 1,
+      &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h2&gt;
+&lt;p&gt;Delete the &lt;code&gt;sinkbinding-example&lt;/code&gt; namespace and all of its resources from your
+cluster:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl delete namespace sinkbinding-example
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.21-Docs: Apache Camel source</title>
+      <link>https://knative.dev/v0.21-docs/eventing/sources/apache-camel-source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://knative.dev/v0.21-docs/eventing/sources/apache-camel-source/</guid>
+      <description>
+        
+        
+        &lt;p&gt;These samples show how to configure Camel Sources. These event sources are highly dynamic and allow you to
+generate events from a variety of systems (cloud platforms, social networks, datastores, message brokers, legacy systems, etc.),
+leveraging all the &lt;a href=&#34;https://camel.apache.org/components/latest/&#34;&gt;300+ components provided by Apache Camel&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;All Camel Sources use &lt;a href=&#34;https://github.com/apache/camel-k&#34;&gt;Apache Camel K&lt;/a&gt; as the runtime engine.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../../../install&#34;&gt;Install Knative Serving and Eventing&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the &lt;a href=&#34;https://github.com/apache/camel-k&#34;&gt;Apache Camel K&lt;/a&gt; Operator in
+any namespace where you want to run Camel sources.&lt;/p&gt;
+&lt;p&gt;The preferred version that is compatible with Camel sources is
+&lt;a href=&#34;https://github.com/apache/camel-k/releases&#34;&gt;Camel K v1.0.0-M4&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Installation instructions are provided in the
+&lt;a href=&#34;https://camel.apache.org/camel-k/latest/installation/installation.html&#34;&gt;Apache Camel K Manual&lt;/a&gt;.
+Documentation includes specific instructions for common Kubernetes
+environments, including development clusters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the Camel Source from the &lt;code&gt;camel.yaml&lt;/code&gt; in the
+&lt;a href=&#34;https://github.com/knative-sandbox/eventing-camel/releases&#34;&gt;Knative Eventing Camel release page&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply --filename camel.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;create-test-resources&#34;&gt;Create Test Resources&lt;/h3&gt;
+&lt;p&gt;All the &lt;code&gt;CamelSource&lt;/code&gt; examples use some test resources for the purpose of displaying the generated events.
+The following resources need to be created:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a simple Knative event display service that prints incoming events to its log&lt;/li&gt;
+&lt;li&gt;an in-memory channel named &lt;code&gt;camel-test&lt;/code&gt; that buffers events created by the
+event source&lt;/li&gt;
+&lt;li&gt;a subscription to direct events from the test channel to the event display
+service&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Deploy the &lt;a href=&#34;./display_resources.yaml&#34;&gt;&lt;code&gt;display_resources.yaml&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply --filename display_resources.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;run-a-timer-camelsource&#34;&gt;Run a Timer CamelSource&lt;/h3&gt;
+&lt;p&gt;The samples directory contains some sample sources that can be used to generate
+events.&lt;/p&gt;
+&lt;p&gt;The simplest example of &lt;code&gt;CamelSource&lt;/code&gt;, that does not require additional
+configuration, is the timer source.&lt;/p&gt;
+&lt;p&gt;The timer source periodically generates &amp;ldquo;Hello world!&amp;rdquo; events and forwards them to the provided destination.&lt;/p&gt;
+&lt;p&gt;If you want, you can customize the source behavior using options available in
+the Apache Camel documentation for the
+&lt;a href=&#34;https://camel.apache.org/components/latest/timer-component.html&#34;&gt;timer component&lt;/a&gt;.
+All Camel components are documented in the
+&lt;a href=&#34;https://camel.apache.org/components/latest/&#34;&gt;Apache Camel Website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Install the &lt;a href=&#34;source_timer.yaml&#34;&gt;timer CamelSource&lt;/a&gt; from source:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f source_timer.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Verify that the published events were sent into the Knative eventing system by
+looking at what is downstream of the &lt;code&gt;CamelSource&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl logs --selector serving.knative.dev/service&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;camel-event-display -c user-container
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you have deployed the timer source, you should see new log lines appearing every
+3 seconds.&lt;/p&gt;
+&lt;h3 id=&#34;run-a-mqtt-camelsource&#34;&gt;Run a MQTT CamelSource&lt;/h3&gt;
+&lt;p&gt;One of the 300+ Camel components that you can leverage is &lt;a href=&#34;https://camel.apache.org/components/latest/paho-component.html&#34;&gt;Camel-Paho&lt;/a&gt;,
+based on the &lt;a href=&#34;https://www.eclipse.org/paho/&#34;&gt;Eclipse Paho&lt;/a&gt; open source project.&lt;/p&gt;
+&lt;p&gt;A source based on Paho (like the provided &lt;a href=&#34;source_mqtt.yaml&#34;&gt;MQTT CamelSource&lt;/a&gt;) allows to bridge any MQTT broker to a Knative resource,
+automatically converting IoT messages to Cloudevents.&lt;/p&gt;
+&lt;p&gt;To use the MQTT source, you need a MQTT broker running and reachable from your cluster.
+For example, it&amp;rsquo;s possible to run a &lt;a href=&#34;https://mosquitto.org/&#34;&gt;Mosquito MQTT Broker&lt;/a&gt; for testing purposes.&lt;/p&gt;
+&lt;p&gt;First, edit the &lt;a href=&#34;source_mqtt.yaml&#34;&gt;MQTT CamelSource&lt;/a&gt; and put the
+correct address of the MQTT broker in the &lt;code&gt;brokerUrl&lt;/code&gt; field.
+You also need to provide the name of the topic that you want to subscribe to: just change &lt;code&gt;paho:mytopic&lt;/code&gt; to match
+the topic that you want to use.&lt;/p&gt;
+&lt;p&gt;You can also scale this source out, in order to obtain more throughput, by changing the value of the &lt;code&gt;replicas&lt;/code&gt; field.
+By default it creates &lt;em&gt;2&lt;/em&gt; replicas for demonstration purposes.&lt;/p&gt;
+&lt;p&gt;To reduce noise in the event display, you can remove all previously created
+CamelSources from the namespace:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete camelsource --all
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Install the &lt;a href=&#34;source_mqtt.yaml&#34;&gt;mqtt CamelSource&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f source_mqtt.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can now send MQTT messages to your broker using your favourite client (you can even use Camel K for sending test events).&lt;/p&gt;
+&lt;p&gt;Each message you send to the MQTT broker will be printed by the event display as a Cloudevent.&lt;/p&gt;
+&lt;p&gt;You can verify that your messages reach the event display by checking its logs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl logs --selector serving.knative.dev/service&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;camel-event-display -c user-container
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;run-a-telegram-camelsource&#34;&gt;Run a Telegram CamelSource&lt;/h3&gt;
+&lt;p&gt;Another useful component available with Camel is the Telegram component. It can
+be used to forward messages of a &lt;a href=&#34;https://telegram.org/&#34;&gt;Telegram&lt;/a&gt; chat into
+Knative channels as events.&lt;/p&gt;
+&lt;p&gt;Before using the provided Telegram &lt;code&gt;CamelSource&lt;/code&gt; example, you need to follow the
+instructions on the Telegram website for creating a
+&lt;a href=&#34;https://core.telegram.org/bots&#34;&gt;Telegram Bot&lt;/a&gt;. The quickest way to create a bot
+is to contact the &lt;a href=&#34;https://telegram.me/botfather&#34;&gt;Bot Father&lt;/a&gt;, another Telegram
+Bot, using your preferred Telegram client (mobile or web). After you create the
+bot, you will receive an &lt;strong&gt;authorization token&lt;/strong&gt; that is needed for the source
+to work.&lt;/p&gt;
+&lt;p&gt;First, edit the &lt;a href=&#34;source_telegram.yaml&#34;&gt;telegram CamelSource&lt;/a&gt; and put the
+authorization token, replacing the &lt;code&gt;&amp;lt;put-your-token-here&amp;gt;&lt;/code&gt; placeholder.&lt;/p&gt;
+&lt;p&gt;To reduce noise in the event display, you can remove all previously created
+CamelSources from the namespace:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete camelsource --all
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Install the &lt;a href=&#34;source_telegram.yaml&#34;&gt;telegram CamelSource&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f source_telegram.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, you can contact your bot with any Telegram client. Each message you send to
+the bot will be printed by the event display as a Cloudevent.&lt;/p&gt;
+&lt;p&gt;You can verify that your messages reach the event display by checking its logs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl logs --selector serving.knative.dev/service&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;camel-event-display -c user-container
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;run-an-http-poller-camelsource&#34;&gt;Run an HTTP Poller CamelSource&lt;/h3&gt;
+&lt;p&gt;CamelSources are not limited to using a single Camel component. For example,
+you can combine the &lt;a href=&#34;https://camel.apache.org/components/latest/timer-component.html&#34;&gt;Camel Timer component&lt;/a&gt;
+with the &lt;a href=&#34;https://camel.apache.org/components/latest/http-component.html&#34;&gt;Camel HTTP component&lt;/a&gt;
+to periodically fetch an external API, transform the result into a Cloudevent and forward it to a
+given destination.&lt;/p&gt;
+&lt;p&gt;The example will retrieve a static JSON file from a remote URL, but you can edit the
+&lt;a href=&#34;source_http_poller.yaml&#34;&gt;HTTP poller CamelSource&lt;/a&gt; to add your own API.&lt;/p&gt;
+&lt;p&gt;If you have previously deployed other CamelSources, to reduce noise in the event
+display, you can remove them all from the namespace:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete camelsource --all
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Install the &lt;a href=&#34;source_http_poller.yaml&#34;&gt;HTTP poller CamelSource&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl apply -f source_http_poller.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The event display will show some JSON data periodically pulled from the external
+REST API. To check the logs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl logs --selector serving.knative.dev/service&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;camel-event-display -c user-container
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,43 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: first
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 0"
+
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: second
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 1"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: third
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        env:
+        - name: MESSAGE
+          value: " - Handled by 2"
+        - name: TYPE
+          value: "samples.http.mod3"
+
+---

@@ -1,0 +1,2235 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.79.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="../../../images/favicon.ico" >
+
+<title>Enabling requests to Knative services when additional authorization policies are enabled | Knative</title><meta property="og:title" content="Enabling requests to Knative services when additional authorization policies are enabled" />
+<meta property="og:description" content="Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services. If you have configured additional security features, such as Istio&rsquo;s authorization policy, you must enable access to your Knative service for these system pods.
+Before you begin You must meet the following prerequisites to use Istio AuthorizationPolicy:
+ Istio must be used for your Knative Ingress. Istio sidecar injection must be enabled.  Mutual TLS in Knative Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://knative.dev/v0.21-docs/serving/istio-authorization/" />
+<meta property="og:site_name" content="Knative" />
+<meta itemprop="name" content="Enabling requests to Knative services when additional authorization policies are enabled">
+<meta itemprop="description" content="Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services. If you have configured additional security features, such as Istio&rsquo;s authorization policy, you must enable access to your Knative service for these system pods.
+Before you begin You must meet the following prerequisites to use Istio AuthorizationPolicy:
+ Istio must be used for your Knative Ingress. Istio sidecar injection must be enabled.  Mutual TLS in Knative Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS.">
+
+<meta itemprop="wordCount" content="528">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Enabling requests to Knative services when additional authorization policies are enabled"/>
+<meta name="twitter:description" content="Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services. If you have configured additional security features, such as Istio&rsquo;s authorization policy, you must enable access to your Knative service for these system pods.
+Before you begin You must meet the following prerequisites to use Istio AuthorizationPolicy:
+ Istio must be used for your Knative Ingress. Istio sidecar injection must be enabled.  Mutual TLS in Knative Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS."/>
+
+
+
+
+
+<link rel="preload" href="../../../scss/main.min.969b89d22c508c469327696fad5599103dbda9df3bd4b3b5e5cc9e8e1ac7879d.css" as="style">
+<link href="../../../scss/main.min.969b89d22c508c469327696fad5599103dbda9df3bd4b3b5e5cc9e8e1ac7879d.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+
+<meta name="google-site-verification" content="knbzameE514X1-2MyT4a18Bzc49Jbzdd7NipLte_9A8" />
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-148338258-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YRMNFYE32R"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YRMNFYE32R', { 'anonymize_ip': false });
+}
+</script>
+
+
+<script src="../../../js/cookie-consent.js"></script>
+<script src="../../../js/script.js"></script>
+
+
+
+    <title>Enabling requests to Knative services when additional authorization policies are enabled | Knative</title>
+  </head>
+  <body class="td-page">
+    <header>
+      
+
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+  <a class="navbar-brand" href="../../../">
+    <span class="navbar-logo"><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="62.23mm" height="50.292mm" viewBox="0 0 62.23 50.292" id="svg8" inkscape:version="0.92.2pre0 (973e216, 2017-07-25)" sodipodi:docname="logo.svg" style="enable-background:new"><defs id="defs2"/><sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:zoom=".35" inkscape:cx="-33.828568" inkscape:cy="-367.81715" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1920" inkscape:window-height="1141" inkscape:window-x="0" inkscape:window-y="161" inkscape:window-maximized="1"/><g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" style="display:inline;opacity:1" transform="translate(-0.63499904,-1.2230464)"><image y="1.2230464" x=".63499904" id="image18" xlink:href="data:image/png;base64,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" preserveAspectRatio="none" height="50.292" width="62.23"/></g></svg> </span>
+    <span class="brand-name font-weight-bold">Knative</span>
+  </a>
+  <div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+    <ul class="navbar-nav mt-2 mt-lg-0">
+      
+      
+      <li class="nav-item dropdown d-none d-lg-block">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+  
+
+  
+
+  
+
+    
+      
+      
+      
+      
+      
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+  <span class="d-none d-lg-inline d-xl-inline active">Documentation  v0.21</span>
+  <span class="d-sm-inline d-md-inline d-lg-none d-xl-none">Release:  v0.21</span>
+</a>
+
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+  <a class="dropdown-item" href="../../../docs/">Latest Version</a>
+  <a class="dropdown-item" style="color:#bcbcbc" href="../../../development/">(Development)</a>
+</div>
+
+      </li>
+      
+      
+      
+        
+        
+        
+        
+        
+        	
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        <li class="nav-item mr-4 mb-2 mb-lg-0">
+          <a class="nav-link" href="../../../blog/"><span>Blog</span></a>
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        <li class="nav-item mr-4 mb-2 mb-lg-0">
+          <a class="nav-link" href="../../../community/"><span>Community</span></a>
+        
+      
+      
+    </ul>
+  </div>
+  <div class="navbar-nav d-none d-xl-block">
+<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
+
+</div>
+</nav>
+
+<section lang="en" id="announcement">
+  <h4>Black lives matter.</h4>
+  <p>We stand in solidarity with the Black community.<br>
+    <strong>Racism is unacceptable.</strong><br>
+    It conflicts with the <a href=https://github.com/knative/community/blob/main/VALUES.md>core values of the Knative project</a> and our community does not tolerate it.</p>
+</section>
+
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main main-docs">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    <div class="nav-item dropdown d-block d-lg-none">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+  
+
+  
+
+  
+
+    
+      
+      
+      
+      
+      
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+  <span class="d-none d-lg-inline d-xl-inline active">Documentation  v0.21</span>
+  <span class="d-sm-inline d-md-inline d-lg-none d-xl-none">Release:  v0.21</span>
+</a>
+
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+  <a class="dropdown-item" href="../../../docs/">Latest Version</a>
+  <a class="dropdown-item" style="color:#bcbcbc" href="../../../development/">(Development)</a>
+</div>
+
+    </div>
+    
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="v021-docs">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/install/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Installing Knative</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsinstall">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallany-kubernetes-cluster" href="../../../v0.21-docs/install/any-kubernetes-cluster/">Installing Knative</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallknative-with-operators" href="../../../v0.21-docs/install/knative-with-operators/">Installing Knative components using Operator</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallinstall-kn" href="../../../v0.21-docs/install/install-kn/">Installing the Knative CLI</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallinstalling-istio" href="../../../v0.21-docs/install/installing-istio/">Installing Istio for Knative</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallcheck-install-version" href="../../../v0.21-docs/install/check-install-version/">Checking your install version</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstalloperatorconfiguring-serving-cr" href="../../../v0.21-docs/install/operator/configuring-serving-cr/">Configuring the Serving Operator Custom Resource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallupgrade-installation" href="../../../v0.21-docs/install/upgrade-installation/">Upgrading your installation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstallupgrade-installation-with-operator" href="../../../v0.21-docs/install/upgrade-installation-with-operator/">Upgrading your installation with Knative operator</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/install/collecting-logs/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Collecting logs</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsinstallcollecting-logs">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsinstalloperatorconfiguring-eventing-cr" href="../../../v0.21-docs/install/operator/configuring-eventing-cr/">Configuring the Eventing Operator custom resource</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsclientconnecting-kn-to-your-cluster" href="../../../v0.21-docs/client/connecting-kn-to-your-cluster/">Connecting to your cluster</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsknative-offerings" href="../../../v0.21-docs/knative-offerings/">Knative Offerings</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Serving Component</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="v021-docsserving">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservinggetting-started-knative-app" href="../../../v0.21-docs/serving/getting-started-knative-app/">Getting started</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingknative-kubernetes-services" href="../../../v0.21-docs/serving/knative-kubernetes-services/">Knative Kubernetes Services</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingcustom-metrics-api" href="../../../v0.21-docs/serving/custom-metrics-api/">Custom-metrics API</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingdeployingprivate-registry" href="../../../v0.21-docs/serving/deploying/private-registry/">Deploying from private registries</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/services/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Services</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsservingservices">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingservicesdeployment" href="../../../v0.21-docs/serving/services/deployment/">Deployment Configuration</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingservicescreating-services" href="../../../v0.21-docs/serving/services/creating-services/">Creating Knative services</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingaccessing-traces" href="../../../v0.21-docs/serving/accessing-traces/">Accessing request traces</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/autoscaling/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Autoscaling</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsservingautoscaling">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingautoscaling-concepts" href="../../../v0.21-docs/serving/autoscaling/autoscaling-concepts/">Autoscaling concepts</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingautoscaling-metrics" href="../../../v0.21-docs/serving/autoscaling/autoscaling-metrics/">Metrics</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingautoscaling-targets" href="../../../v0.21-docs/serving/autoscaling/autoscaling-targets/">Targets</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingscale-to-zero" href="../../../v0.21-docs/serving/autoscaling/scale-to-zero/">Configuring scale to zero</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingconcurrency" href="../../../v0.21-docs/serving/autoscaling/concurrency/">Configuring concurrency</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingscale-bounds" href="../../../v0.21-docs/serving/autoscaling/scale-bounds/">Configuring scale bounds</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingrps-target" href="../../../v0.21-docs/serving/autoscaling/rps-target/">Configuring the requests per second (RPS) target</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingkpa-specific" href="../../../v0.21-docs/serving/autoscaling/kpa-specific/">Additional autoscaling configuration for Knative Pod Autoscaler</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingautoscalingautoscale-go" href="../../../v0.21-docs/serving/autoscaling/autoscale-go/">Autoscale Sample App - Go</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingcluster-local-route" href="../../../v0.21-docs/serving/cluster-local-route/">Configuring cluster-local services</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-subroutes" href="../../../v0.21-docs/serving/using-subroutes/">Creating and using Subroutes</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingrolling-out-latest-revision" href="../../../v0.21-docs/serving/rolling-out-latest-revision/">Gradually rolling out latest Revisions</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingdebugging-application-issues" href="../../../v0.21-docs/serving/debugging-application-issues/">Debugging issues with your application</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-v021-docsservingistio-authorization" href="../../../v0.21-docs/serving/istio-authorization/">Enabling requests to Knative services when additional authorization policies are enabled</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/load-balancing/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Load balancing</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsservingload-balancing">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingload-balancingtarget-burst-capacity" href="../../../v0.21-docs/serving/load-balancing/target-burst-capacity/">Configuring target burst capacity</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservinggke-assigning-static-ip-address" href="../../../v0.21-docs/serving/gke-assigning-static-ip-address/">Assigning static IPs - GKE</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingconfig-ha" href="../../../v0.21-docs/serving/config-ha/">Configuring high-availability components</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingfeature-flags" href="../../../v0.21-docs/serving/feature-flags/">Feature/Extension Flags</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsetting-up-custom-ingress-gateway" href="../../../v0.21-docs/serving/setting-up-custom-ingress-gateway/">Configuring the ingress gateway</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-a-custom-domain" href="../../../v0.21-docs/serving/using-a-custom-domain/">Setting up a custom domain</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-a-custom-domain-per-service" href="../../../v0.21-docs/serving/using-a-custom-domain-per-service/">Setting up a custom domain per Service</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-a-tls-cert" href="../../../v0.21-docs/serving/using-a-tls-cert/">Configuring HTTPS connections</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservinginstalling-cert-manager" href="../../../v0.21-docs/serving/installing-cert-manager/">Installing cert-manager</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-cert-manager-on-gcp" href="../../../v0.21-docs/serving/using-cert-manager-on-gcp/">Configuring HTTPS with Cloud DNS</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingcreating-domain-mappings" href="../../../v0.21-docs/serving/creating-domain-mappings/">Creating Domain Mappings (Alpha)</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-auto-tls" href="../../../v0.21-docs/serving/using-auto-tls/">Enabling auto TLS certs</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingwebhook-customizations" href="../../../v0.21-docs/serving/webhook-customizations/">Exclude namespaces from the Knative webhook</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingusing-external-dns-on-gcp" href="../../../v0.21-docs/serving/using-external-dns-on-gcp/">Using ExternalDNS on Google Cloud Platform to automate DNS setup</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingtag-resolution" href="../../../v0.21-docs/serving/tag-resolution/">Tag resolution</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/samples/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Code samples</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsservingsamples">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/samples/cloudevents/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Cloud Events apps</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsservingsamplescloudevents">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplescloudeventscloudevents-dotnet" href="../../../v0.21-docs/serving/samples/cloudevents/cloudevents-dotnet/">.NET</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplescloudeventscloudevents-go" href="../../../v0.21-docs/serving/samples/cloudevents/cloudevents-go/">Go</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplescloudeventscloudevents-spring" href="../../../v0.21-docs/serving/samples/cloudevents/cloudevents-spring/">Java and Spring</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplescloudeventscloudevents-vertx" href="../../../v0.21-docs/serving/samples/cloudevents/cloudevents-vertx/">Java and Vert.x</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplescloudeventscloudevents-nodejs" href="../../../v0.21-docs/serving/samples/cloudevents/cloudevents-nodejs/">Node.js</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplescloudeventscloudevents-rust" href="../../../v0.21-docs/serving/samples/cloudevents/cloudevents-rust/">Rust</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplesgitwebhook-go" href="../../../v0.21-docs/serving/samples/gitwebhook-go/">GitHub Webhook - Go</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplesgrpc-ping-go" href="../../../v0.21-docs/serving/samples/grpc-ping-go/">gRPC Server - Go</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/serving/samples/hello-world/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Hello world apps</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsservingsampleshello-world">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-csharp" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-csharp/">.NET</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-go" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-go/">Go</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-java-spark" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-java-spark/">Java (Spark)</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-java-spring" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-java-spring/">Java (Spring)</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-kotlin" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-kotlin/">Kotlin</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-nodejs" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-nodejs/">Node.js</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-php" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-php/">PHP</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-python" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-python/">Python</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-ruby" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-ruby/">Ruby</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-scala" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-scala/">Scala</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsampleshello-worldhelloworld-shell" href="../../../v0.21-docs/serving/samples/hello-world/helloworld-shell/">Shell</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplesmulti-container" href="../../../v0.21-docs/serving/samples/multi-container/">multi-container samples</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplesrest-api-go" href="../../../v0.21-docs/serving/samples/rest-api-go/">RESTful service - Go</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplesknative-routing-go" href="../../../v0.21-docs/serving/samples/knative-routing-go/">Routing services - Go</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplessecrets-go" href="../../../v0.21-docs/serving/samples/secrets-go/">Secrets - Go</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplestag-header-based-routing" href="../../../v0.21-docs/serving/samples/tag-header-based-routing/">Tag Header Based Routing</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplestraffic-splitting" href="../../../v0.21-docs/serving/samples/traffic-splitting/">Traffic splitting</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingsamplesblue-green-deployment" href="../../../v0.21-docs/serving/samples/blue-green-deployment/">Routing and managing traffic</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsservingspecknative-api-specification-10" href="../../../v0.21-docs/serving/spec/knative-api-specification-1.0/"></a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Eventing Component</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventing">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventinggetting-started" href="../../../v0.21-docs/eventing/getting-started/">Getting started</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/sources/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Event sources</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsources">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsourcesapiserversource" href="../../../v0.21-docs/eventing/sources/apiserversource/">APIServerSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsourcescontainersource" href="../../../v0.21-docs/eventing/sources/containersource/">ContainerSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsourcespingsource" href="../../../v0.21-docs/eventing/sources/pingsource/">PingSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsourcessinkbinding" href="../../../v0.21-docs/eventing/sources/sinkbinding/">Sink binding</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsourcesapache-camel-source" href="../../../v0.21-docs/eventing/sources/apache-camel-source/">Camel source</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingevent-registry" href="../../../v0.21-docs/eventing/event-registry/">Event registry</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/flows/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Flows</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingflows">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingflowsparallel" href="../../../v0.21-docs/eventing/flows/parallel/">Parallel</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingflowssequence" href="../../../v0.21-docs/eventing/flows/sequence/">Sequence</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/channels/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Channels</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingchannels">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingchannelschannel-types-defaults" href="../../../v0.21-docs/eventing/channels/channel-types-defaults/">Channel types and defaults</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingchannelscreate-default-channel" href="../../../v0.21-docs/eventing/channels/create-default-channel/">Creating channels</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingchannelschannels-crds" href="../../../v0.21-docs/eventing/channels/channels-crds/">Available Channels</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/sugar/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Sugar Controller</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsugar">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingevent-delivery" href="../../../v0.21-docs/eventing/event-delivery/">Event delivery</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/broker/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Broker</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingbroker">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingbrokerkafka-broker" href="../../../v0.21-docs/eventing/broker/kafka-broker/">Apache Kafka Broker</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingbrokerconfig-br-defaults" href="../../../v0.21-docs/eventing/broker/config-br-defaults/">Default Broker ConfigMap</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingbrokerkafka-configmap" href="../../../v0.21-docs/eventing/broker/kafka-configmap/">Kafka Channel ConfigMap</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/broker/alternate/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Alternate Brokers</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingbrokeralternate">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/sink/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Sink</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsink">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsinkkafka-sink" href="../../../v0.21-docs/eventing/sink/kafka-sink/">Apache Kafka Sink</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/triggers/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Triggers</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingtriggers">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingdebugging" href="../../../v0.21-docs/eventing/debugging/">Debugging</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingaccessing-traces" href="../../../v0.21-docs/eventing/accessing-traces/">Accessing CloudEvent traces</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Code samples</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsamples">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/kafka/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Apache Kafka</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsampleskafka">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleskafkabinding" href="../../../v0.21-docs/eventing/samples/kafka/binding/">Binding Example</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleskafkachannel" href="../../../v0.21-docs/eventing/samples/kafka/channel/">Channel Example</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleskafkasource" href="../../../v0.21-docs/eventing/samples/kafka/source/">Source Example</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplescontainer-source" href="../../../v0.21-docs/eventing/samples/container-source/">Container source</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/writing-event-source-easy-way/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Event Source - easy way</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsampleswriting-event-source-easy-way">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/helloworld/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Hello World</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsampleshelloworld">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/helloworld/helloworld-go/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">GO</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsampleshelloworldhelloworld-go">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/helloworld/helloworld-python/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Python</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsampleshelloworldhelloworld-python">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/parallel/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Parallel</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsamplesparallel">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/parallel/multiple-branches/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Multiple Cases</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsamplesparallelmultiple-branches">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/parallel/mutual-exclusivity/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Mutual Exclusivity</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsamplesparallelmutual-exclusivity">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplesping-source" href="../../../v0.21-docs/eventing/samples/ping-source/">PingSource</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/sequence/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Sequences</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsamplessequence">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplessequencesequence-terminal" href="../../../v0.21-docs/eventing/samples/sequence/sequence-terminal/">Create additional events</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplessequencesequence-reply-to-event-display" href="../../../v0.21-docs/eventing/samples/sequence/sequence-reply-to-event-display/">Displaying sequence output</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplessequencesequence-reply-to-sequence" href="../../../v0.21-docs/eventing/samples/sequence/sequence-reply-to-sequence/">Using Sequences in series</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplessequencesequence-with-broker-trigger" href="../../../v0.21-docs/eventing/samples/sequence/sequence-with-broker-trigger/">Using with Broker and Trigger</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplescloud-audit-logs-source" href="../../../v0.21-docs/eventing/samples/cloud-audit-logs-source/">CloudAuditLogsSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplescloud-pubsub-source" href="../../../v0.21-docs/eventing/samples/cloud-pubsub-source/">CloudPubSubSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplescloud-scheduler-source" href="../../../v0.21-docs/eventing/samples/cloud-scheduler-source/">CloudSchedulerSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplescloud-storage-source" href="../../../v0.21-docs/eventing/samples/cloud-storage-source/">CloudStorageSource</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplesgithub-source" href="../../../v0.21-docs/eventing/samples/github-source/">GitHub source</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplesgitlab-source" href="../../../v0.21-docs/eventing/samples/gitlab-source/">GitLab source</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsamplesiot-core" href="../../../v0.21-docs/eventing/samples/iot-core/">IoT core</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleskubernetes-event-source" href="../../../v0.21-docs/eventing/samples/kubernetes-event-source/">Kubernetes event</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/eventing/samples/writing-event-source/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Writing an Event Source</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docseventingsampleswriting-event-source">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source01-theory" href="../../../v0.21-docs/eventing/samples/writing-event-source/01-theory/">Design of an Event Source</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source02-lifecycle-and-types" href="../../../v0.21-docs/eventing/samples/writing-event-source/02-lifecycle-and-types/">Lifecycle and Types</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source03-controller" href="../../../v0.21-docs/eventing/samples/writing-event-source/03-controller/">Controller Implemetation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source04-reconciler" href="../../../v0.21-docs/eventing/samples/writing-event-source/04-reconciler/">Reconciler Implementation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source05-receive-adapter" href="../../../v0.21-docs/eventing/samples/writing-event-source/05-receive-adapter/">Receive Adapter Implementation</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source06-yaml" href="../../../v0.21-docs/eventing/samples/writing-event-source/06-yaml/">Publishing to your cluster</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docseventingsampleswriting-event-source07-knative-sandbox" href="../../../v0.21-docs/eventing/samples/writing-event-source/07-knative-sandbox/">Moving to knative-sandbox</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docssamples" href="../../../v0.21-docs/samples/">Code samples</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/reference/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Reference</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsreference">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/reference/relnotes/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release notes</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsreferencerelnotes">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/reference/api/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">API</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsreferenceapi">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsreferenceapiserving-api" href="../../../v0.21-docs/reference/api/serving-api/">Serving API</a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="../../../v0.21-docs/reference/api/eventing/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Eventing API</a>
+  </li>
+  <ul>
+    <li class="collapse " id="v021-docsreferenceapieventing">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docsreferenceresources" href="../../../v0.21-docs/reference/resources/">Additional resources</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-v021-docssmoketest" href="../../../v0.21-docs/smoketest/"></a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+  
+
+  
+  <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    <a href="https://github.com/knative/docs/tree/release-0.21/docs/serving/istio-authorization.md" target="_blank" rel="noopener noreferrer"><i class="fa fa-edit fa-fw"></i> View/Edit this page</a>
+
+    
+
+    
+    
+    <a href="https://github.com/knative/docs/issues/new?title=Enabling%20requests%20to%20Knative%20services%20when%20additional%20authorization%20policies%20are%20enabled%28v0.21-docs/serving/istio-authorization.md%29&amp;labels=kind%25!F%28MISSING%29bug&amp;template=bug-in-existing-docs.md" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+    
+    
+    
+
+    
+    
+    <hr>
+    <a href="https://github.com/knative/docs/blob/main/template-docs-page.md" target="_blank" rel="noopener noreferrer"><i class="fa fa-copy fa-fw"></i> New page template</a>
+    <a href="../../../help/contributor/" target="_blank" rel="noopener noreferrer"><i class="fa fa-book fa-fw"></i> Docs help</a>
+    
+
+    
+    
+  </div>
+  
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#before-you-begin">Before you begin</a></li>
+        <li><a href="#mutual-tls-in-knative">Mutual TLS in Knative</a></li>
+        <li><a href="#health-checking-and-metrics-collection">Health checking and metrics collection</a></li>
+        <li><a href="#allowing-access-from-system-pods-by-paths">Allowing access from system pods by paths</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+  
+  
+  <div class="pageinfo pageinfo-primary" style="border: 4px solid red; padding: 2em; background: #fc0;">
+    This version of the documentation is no longer actively maintained. The site that you are
+      currently viewing is an archived snapshot. 
+      <p>For up-to-date documentation, see the <a href="../../../docs/" target="_blank">latest version</a>.</p>
+  </div>
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://knative.dev/v0.21-docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://knative.dev/v0.21-docs/serving/">Serving Component</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://knative.dev/v0.21-docs/serving/istio-authorization/">Enabling requests to Knative services when additional authorization policies are enabled</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+  <h1>Enabling requests to Knative services when additional authorization policies are enabled</h1>
+  
+  <p>Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services.
+If you have configured additional security features, such as Istio&rsquo;s authorization policy, you must enable access to your Knative service for these system pods.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>You must meet the following prerequisites to use Istio AuthorizationPolicy:</p>
+<ul>
+<li><a href="https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component">Istio must be used for your Knative Ingress</a>.</li>
+<li><a href="https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/">Istio sidecar injection must be enabled</a>.</li>
+</ul>
+<h2 id="mutual-tls-in-knative">Mutual TLS in Knative</h2>
+<p>Because Knative requests are frequently routed through activator, some considerations need to be made when using mutual TLS.</p>
+<p><img src="../images/architecture.png" alt="Knative request flow"></p>
+<p>Generally, mutual TLS can be configured normally as <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">in Istio&rsquo;s documentation</a>. However, since the activator can be in the request path of Knative services, it must have sidecars injected. The simplest way to do this is to label the <code>knative-serving</code> namespace:</p>
+<pre><code>kubectl label namespace knative-serving istio-injection=enabled
+</code></pre><p>If the activator isn&rsquo;t injected:</p>
+<ul>
+<li>In PERMISSIVE mode, you&rsquo;ll see requests appear without the expected <code>X-Forwarded-Client-Cert</code> header when forwarded by the activator.</li>
+</ul>
+<pre><code>$ kubectl exec deployment/httpbin -c httpbin -it -- curl -s http://httpbin.knative.svc.cluster.local/headers
+{
+  &quot;headers&quot;: {
+    &quot;Accept&quot;: &quot;*/*&quot;,
+    &quot;Accept-Encoding&quot;: &quot;gzip&quot;,
+    &quot;Forwarded&quot;: &quot;for=10.72.0.30;proto=http&quot;,
+    &quot;Host&quot;: &quot;httpbin.knative.svc.cluster.local&quot;,
+    &quot;K-Proxy-Request&quot;: &quot;activator&quot;,
+    &quot;User-Agent&quot;: &quot;curl/7.58.0&quot;,
+    &quot;X-B3-Parentspanid&quot;: &quot;b240bdb1c29ae638&quot;,
+    &quot;X-B3-Sampled&quot;: &quot;0&quot;,
+    &quot;X-B3-Spanid&quot;: &quot;416960c27be6d484&quot;,
+    &quot;X-B3-Traceid&quot;: &quot;750362ce9d878281b240bdb1c29ae638&quot;,
+    &quot;X-Envoy-Attempt-Count&quot;: &quot;1&quot;,
+    &quot;X-Envoy-Internal&quot;: &quot;true&quot;
+  }
+}
+</code></pre><ul>
+<li>In STRICT mode, requests will simply be rejected.</li>
+</ul>
+<p>To understand when requests are forwarded through the activator, see <a href="https://knative.dev/docs/serving/autoscaling/target-burst-capacity/">documentation</a> on the <code>TargetBurstCapacity</code> setting.</p>
+<p>This also means that many Istio AuthorizationPolicies won&rsquo;t work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.</p>
+<p>For example, the following policy allows requests from within pods in the <code>serving-tests</code> namespace to other pods in the <code>serving-tests</code> namespace.</p>
+<pre><code>apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: allow-serving-tests
+ namespace: serving-tests
+spec:
+ action: ALLOW
+ rules:
+ - from:
+   - source:
+      namespaces: [&quot;serving-tests&quot;]
+</code></pre><p>Requests here will fail when forwarded by the activator, because the Istio proxy at the destination service will see the source namespace of the requests as <code>knative-serving</code>, which is the namespace of the activator.</p>
+<p>Currently, the easiest way around this is to explicitly allow requests from the <code>knative-serving</code> namespace, for example by adding it to the list in the above policy:</p>
+<pre><code>apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: allow-serving-tests
+ namespace: serving-tests
+spec:
+ action: ALLOW
+ rules:
+ - from:
+   - source:
+      namespaces: [&quot;serving-tests&quot;, &quot;knative-serving&quot;]
+</code></pre><h2 id="health-checking-and-metrics-collection">Health checking and metrics collection</h2>
+<p>In addition to allowing your application path, you&rsquo;ll need to configure Istio AuthorizationPolicy
+to allow health checking and metrics collection to your applications from system pods.
+You can allow access from system pods <a href="#allow-access-from-system-pods-by-paths">by paths</a>.</p>
+<h2 id="allowing-access-from-system-pods-by-paths">Allowing access from system pods by paths</h2>
+<p>Knative system pods access your application using the following paths:</p>
+<ul>
+<li><code>/metrics</code></li>
+<li><code>/healthz</code></li>
+</ul>
+<p>The <code>/metrics</code> path allows the autoscaler pod to collect metrics.
+The <code>/healthz</code> path allows system pods to probe the service.</p>
+<p>You can add the <code>/metrics</code> and <code>/healthz</code> paths to the AuthorizationPolicy as shown in the example:</p>
+<pre><code>$ cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allowlist-by-paths
+  namespace: serving-tests
+spec:
+  action: ALLOW
+  rules:
+  - to:
+    - operation:
+        paths:
+        - /metrics   # The path to collect metrics by system pod.
+        - /healthz   # The path to probe by system pod.
+EOF
+</code></pre>
+  
+    <style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="feedback--answer feedback--answer-yes">Yes</button>
+<button class="feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/knative/docs/issues/new/?title=Page%20is%20helpful&labels=kind%2Fmeta">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/knative/docs/issues/new/?title=Page%20needs%20improvement&labels=kind%2Fmeta">tell us how we can improve</a>.
+</p>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+
+    <br />
+  
+  
+  
+  
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+
+
+<div class="cookienotice">
+  <div class="text">
+    <p>We use analytics and cookies to understand site traffic. Information about your use of
+      our site is shared with Google for that purpose. <a href="../../../about-analytics-cookies/">Learn more.</a>
+    </p>
+  </div>  
+  <div class="buttons">
+    <a class="close" onclick="closenotice()">&times;</a>
+    <a class="ok btn-sm" onclick="acceptcookie()">OK</a>
+  </div>
+</div>
+
+
+<footer class="bg-light py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h4" data-toggle="tooltip" data-placement="top" title="Knative users Group">
+    <a class="text-white" target="_blank" href="https://groups.google.com/forum/#!forum/knative-users" rel="noopener noreferrer">
+      <i class="fa fa-users"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h4" data-toggle="tooltip" data-placement="top" title="Twitter">
+    <a class="text-white" target="_blank" href="https://twitter.com/KnativeProject" rel="noopener noreferrer">
+      <i class="fab fa-twitter"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h4" data-toggle="tooltip" data-placement="top" title="Stack Overflow questions">
+    <a class="text-white" target="_blank" href="https://stackoverflow.com/questions/tagged/*knative*" rel="noopener noreferrer">
+      <i class="fab fa-stack-overflow"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+        <h6 class="text-white">Knative users</h6>
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h4" data-toggle="tooltip" data-placement="top" title="Knative GitHub repo">
+    <a class="text-white" target="_blank" href="https://github.com/knative" rel="noopener noreferrer">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h4" data-toggle="tooltip" data-placement="top" title="Knative Slack channels">
+    <a class="text-white" target="_blank" href="https://slack.knative.dev/" rel="noopener noreferrer">
+      <i class="fab fa-slack"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h4" data-toggle="tooltip" data-placement="top" title="Knative developers Group">
+    <a class="text-white" target="_blank" href="https://groups.google.com/forum/#!forum/knative-dev" rel="noopener noreferrer">
+      <i class="fa fa-users"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+        <h6 class="text-white">Knative developers</h6>
+      </div>
+      
+      <div class="col-12 col-sm-4 text-center py-0 order-sm-2">
+        <small class="text-white">
+          
+          <p>&copy; 2021 The Knative Authors | <b><a class="text-white" href="https://policies.google.com/privacy">Privacy Policy</a></b> | <b><a class="text-white" href="../../../about-analytics-cookies/">Cookie Usage</a></b> | <b><a class="text-white" href="https://github.com/knative/docs/blob/main/LICENSE">Knative Licensing</a></b><br>
+          <span class="d-none d-lg-inline d-xl-inline" style="white-space:nowrap"><a class="text-white" href="https://creativecommons.org/licenses/by/4.0/">CC By 4.0</a>, <a class="text-white" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></span></p>
+          
+        </small>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+
+
+<div id="cookieModal" class="modal custom fade" role="dialog" data-backdrop="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>We use cookies. <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank">Google Analytics</a> is used to improve your experience and help us understand site traffic and page usage.</p>
+        <div class="consent-buttons">
+          <button type="button" class="btn btn-sm mr-3 mb-4" onclick="learnaboutcookies()">Learn more</button>
+          <button type="button" class="btn btn-sm btn-secondary mr-3 mb-4" onclick="acceptcookie()">Accept</button>
+          <div class="opt-out">
+            <hr>
+            <p><a href="../../../about-analytics-cookies/">Learn about analytics cookies and how you can take steps to opt-out from sharing your usage data.</a></p>
+            <button type="button" class="btn btn-sm btn-primary mr-3 mb-4" onclick="optout()">I understand how to opt-out, hide this notice.</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script src="../../../js/main.min.0eb628081f501fb45a97ecf9bc83764c24ebfe4eb636392b5823203b80144184.js" integrity="sha256-DrYoCB9QH7Ral&#43;z5vIN2TCTr/k62NjkrWCMgO4AUQYQ=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>
