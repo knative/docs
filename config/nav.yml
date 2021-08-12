@@ -67,7 +67,7 @@ nav:
             - Creating a Service: developer/serving/services/creating-services.md
             - Configuring private Services: developer/serving/services/private-services.md
             - Configuring custom domains: developer/serving/services/custom-domains.md
-            - Custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
+            - Using a custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - Traffic management: developer/serving/traffic-management.md
           - Configuring gradual rollout of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
