@@ -79,7 +79,7 @@ The following example shows how you can configure a PingSource as an event sourc
 
     === "YAML"
 
-        1. Copy the YAML below into a file:
+        1. Copy the following YAML into a file:
 
             ```yaml
             apiVersion: sources.knative.dev/v1
@@ -122,7 +122,7 @@ The following example shows how you can configure a PingSource as an event sourc
 
     To create a PingSource that uses base64 encoded data:
 
-    1. Create a YAML file using the template below:
+    1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: sources.knative.dev/v1

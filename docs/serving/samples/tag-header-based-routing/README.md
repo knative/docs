@@ -19,7 +19,7 @@ Currently Istio, Contour and Kourier ingress support this feature.
 ## Prerequestie
 
 1. A Knative cluster that has an ingress controller installed
-with Knative version 0.16 and above.
+with Knative v0.16 and later.
 
 1. Move into the docs directory:
 

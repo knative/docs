@@ -22,7 +22,7 @@ kubectl create namespace event-example
 The [broker](../broker) allows you to route events to different event sinks or consumers.
 
 1. Add a broker named `default` to your namespace by creating a YAML file using
-the template below:
+the following template:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
@@ -62,7 +62,7 @@ the template below:
 In this step, you create two event consumers, `hello-display` and `goodbye-display`, to
 demonstrate how you can configure your event producers to target a specific consumer.
 
-1. To deploy the `hello-display` consumer to your cluster, copy the YAML below into a file:
+1. To deploy the `hello-display` consumer to your cluster, copy the following YAML into a file:
 
      ```yaml
      apiVersion: apps/v1
@@ -104,7 +104,7 @@ demonstrate how you can configure your event producers to target a specific cons
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-1. To deploy the `goodbye-display` consumer to your cluster, copy the YAML below
+1. To deploy the `goodbye-display` consumer to your cluster, copy the following YAML
 into a file:
 
      ```yaml
@@ -167,7 +167,7 @@ A [trigger](../broker/triggers) defines the events that each event consumer rece
 Brokers use triggers to forward events to the correct consumers.
 Each trigger can specify a filter that enables selection of relevant events based on the Cloud Event context attributes.
 
-1. Create a trigger by copying the YAML below into a file:
+1. Create a trigger by copying the following YAML into a file:
    ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -194,7 +194,7 @@ Each trigger can specify a filter that enables selection of relevant events base
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-1. To add a second trigger, copy the YAML below into a file:
+1. To add a second trigger, copy the following YAML into a file:
    ```yaml
    apiVersion: eventing.knative.dev/v1
    kind: Trigger
@@ -245,7 +245,7 @@ This guide uses `curl` commands to manually send individual events as HTTP reque
 
 The broker can only be accessed from within the cluster where Knative Eventing is installed. You must create a pod within that cluster to act as an event producer that will execute the `curl` commands.
 
-1. To create a pod, copy the YAML below into a file:
+1. To create a pod, copy the following YAML into a file:
     ```yaml
     apiVersion: v1
     kind: Pod
@@ -304,7 +304,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
        When the broker receives your event, `hello-display` will activate and send
        it to the event consumer of the same name.
        If the event has been received, you will receive a `202 Accepted` response
-       similar to the one below:
+       similar to the following example:
 
        ```{ .bash .no-copy }
        < HTTP/1.1 202 Accepted
@@ -327,7 +327,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
        When the broker receives your event, `goodbye-display` will activate and
        send the event to the event consumer of the same name.
        If the event has been received, you will receive a `202 Accepted` response
-       similar to the one below:
+       similar to the following example:
        ```
        < HTTP/1.1 202 Accepted
        < Content-Length: 0
@@ -348,7 +348,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
        When the broker receives your event, `hello-display` and `goodbye-display`
        will activate and send the event to the event consumers of the same name.
        If the event has been received, you will receive a `202 Accepted` response
-       similar to the one below:
+       similar to the following example:
        ```{ .bash .no-copy }
        < HTTP/1.1 202 Accepted
        < Content-Length: 0

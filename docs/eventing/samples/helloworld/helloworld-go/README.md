@@ -20,7 +20,7 @@ along with a
 However, you can also deploy the app as a
 [Knative Serving Service](../../../../serving/).
 
-Follow the steps below to create the sample code and then deploy the app to your
+Perform the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -103,8 +103,8 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
         }
        ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
+1. In your project directory, create a file named `Dockerfile` and copy the following code
+   block into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
        ```docker
@@ -244,13 +244,13 @@ folder) you're ready to build and deploy the sample app.
 1. After the build has completed and the container is pushed to docker hub, you
    can deploy the sample application into your cluster. Ensure that the
    container image value in `sample-app.yaml` matches the container you built in
-   the previous step. Apply the configuration using `kubectl`:
+   the previous step. Apply the configuration by running the following command in `kubectl`:
 
        ```bash
        kubectl apply --filename sample-app.yaml
        ```
 
-1. Above command created a namespace `knative-samples` and create a default Broker it. Verify using the following command:
+1. Verify that the command created the namespace `knative-samples` and a default Broker by running the command:
 
       ```bash
       kubectl get broker --namespace knative-samples
@@ -316,7 +316,7 @@ with correct CloudEvent headers set.
 
 ### Verify that event is received by helloworld-go app
 
-Helloworld-go app logs the context and the msg of the above event, and replies
+Helloworld-go app logs the context and the msg of this event, and replies
 back with another event.
 
 1.  Display helloworld-go app logs
@@ -367,7 +367,7 @@ Play around with the CloudEvent attributes in the curl command and the trigger s
 `source=knative/eventing/samples/hello-world`. This event enters the eventing
 mesh via the Broker and can be delivered to other services using a Trigger
 
-1. Using the example below, create a YAML file for a Pod that receives any
+1. Using the following example, create a YAML file for a Pod that receives any
 CloudEvent and logs the event to its output:
 
       ```yaml
@@ -414,8 +414,8 @@ CloudEvent and logs the event to its output:
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-1. Using the example below, create a YAML file for a trigger to deliver the event
-to the above service:
+1. Using the following example, create a YAML file for a trigger to deliver the event
+to this service:
 
        ```yaml
        apiVersion: eventing.knative.dev/v1

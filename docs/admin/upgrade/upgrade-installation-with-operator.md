@@ -12,7 +12,7 @@ The Knative Operator supports up to the last three major releases. For example, 
 
 To upgrade, apply the Operator custom resources, adding the `spec.version` for the Knative version that you want to upgrade to:
 
-1. Copy the YAML below into a file:
+1. Copy the following YAML into a file:
 
     ```yaml
     apiVersion: operator.knative.dev/v1alpha1
@@ -119,7 +119,7 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 
 === "Knative Serving"
 
-1. Copy the YAML below into a file:
+1. Copy the following YAML into a file:
 
     ```yaml
     apiVersion: operator.knative.dev/v1alpha1
@@ -140,7 +140,7 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 
 === "Knative Eventing"
 
-1. Copy the YAML below into a file:
+1. Copy the following YAML into a file:
 
     ```yaml
     apiVersion: operator.knative.dev/v1alpha1

@@ -25,7 +25,7 @@ To install the Knative Serving component:
 
 ## Install a networking layer
 
-The tabs below expand to show instructions for installing a networking layer.
+The following tabs expand to show instructions for installing a networking layer.
 Follow the procedure for the networking layer of your choice:
 
 <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
@@ -55,7 +55,7 @@ Follow the procedure for the networking layer of your choice:
         ```
 
         !!! tip
-            Save this to use in the [Configure DNS](#configure-dns) section below.
+            Save this to use in the following [Configure DNS](#configure-dns) section.
 
 
 === "Ambassador"
@@ -105,7 +105,7 @@ Follow the procedure for the networking layer of your choice:
         ```
 
         !!! tip
-            Save this to use in the [Configure DNS](#configure-dns) section below.
+            Save this to use in the following [Configure DNS](#configure-dns) section.
 
 
 === "Contour"
@@ -139,7 +139,7 @@ Follow the procedure for the networking layer of your choice:
         ```
 
         !!! tip
-            Save this to use in the [Configure DNS](#configure-dns) section below.
+            Save this to use in the following [Configure DNS](#configure-dns) section.
 
 === "Istio"
 
@@ -166,7 +166,7 @@ Follow the procedure for the networking layer of your choice:
         ```
 
         !!! tip
-            Save this to use in the [Configure DNS](#configure-dns) section below.
+            Save this to use in the following [Configure DNS](#configure-dns) section.
 
 ## Verify the installation
 
@@ -198,7 +198,7 @@ Follow the procedure for the networking layer of your choice:
 
 ## Install optional Serving extensions
 
-The tabs below expand to show instructions for installing each Serving extension.
+The following tabs expand to show instructions for installing each Serving extension.
 
 === "HPA autoscaling"
 

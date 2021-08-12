@@ -11,7 +11,7 @@ A simple web app written in PHP that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
 it will use `World` as the `TARGET`.
 
-Follow the steps below to create the sample code and then deploy the app to your
+Perform the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -37,7 +37,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    cd app
    ```
 
-1. Create a file named `index.php` and copy the code block below into it:
+1. Create a file named `index.php` and copy the following code block into it:
 
    ```php
    <?php
@@ -46,7 +46,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
    ?>
    ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. See
+1. Create a file named `Dockerfile` and copy the following code block into it. See
    [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
    ```docker
@@ -190,7 +190,7 @@ folder) you're ready to build and deploy the sample app.
 
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    ```bash
    curl http://helloworld-php.default.1.2.3.4.sslip.io

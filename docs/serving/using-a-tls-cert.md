@@ -25,7 +25,7 @@ cert-manager tool:
 - **Manually obtain and renew certificates**: Both the Certbot and cert-manager
   tools can be used to manually obtain TLS certificates. In general, after you
   obtain a certificate, you must create a Kubernetes secret to use that
-  certificate in your cluster. See the complete set of steps below for details
+  certificate in your cluster. See the procedures later in this topic for details
   about manually obtaining and configuring certificates.
 
 - **Enable Knative to automatically obtain and renew TLS certificates**: You can
@@ -80,7 +80,7 @@ tools to obtain a certificate from Let's Encrypt:
 - Setup cert-manager to either manually obtain a certificate, or to
   automatically provision certificates
 
-This page covers details for both of the above options.
+This page covers details for both of the mentioned options.
 
 For details about using other CA's, see the tool's reference documentation:
 
@@ -133,7 +133,7 @@ provisioning:
 
   1.  [Install and configure cert-manager](installing-cert-manager.md).
 
-  1.  Continue to the steps below about
+  1.  Continue to the steps about
       [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
       creating and using a Kubernetes secret.
 
@@ -150,7 +150,7 @@ following steps to add that certificate to your Knative cluster.
 
 For instructions about enabling Knative for automatic certificate provisioning,
 see [Enabling automatic TLS cert provisioning](using-auto-tls.md). Otherwise,
-continue below for instructions about manually adding a certificate.
+follow the steps in the relevant tab to manually add a certificate:
 
 
 === "Contour"
@@ -171,7 +171,7 @@ continue below for instructions about manually adding a certificate.
             Take note of the namespace and secret name. You will need these in future steps.
 
     1. To use this certificate and private key in different namespaces, you must
-    create a delegation. To do so, create a YAML file using the template below:
+    create a delegation. To do so, create a YAML file using the following template:
 
          ```yaml
          apiVersion: projectcontour.io/v1
@@ -238,8 +238,8 @@ continue below for instructions about manually adding a certificate.
           Example:
 
           ```yaml
-          # Please edit the object below. Lines beginning with a '#' will be ignored.
-          # and an empty file will abort the edit. If an error occurs while saving this
+          # Edit the following object. Lines beginning with a '#' will be ignored.
+          # An empty file will abort the edit. If an error occurs while saving this
           # file will be reopened with the relevant failures.
           apiVersion: networking.istio.io/v1alpha3
           kind: Gateway
@@ -265,7 +265,7 @@ continue below for instructions about manually adding a certificate.
                   mode: SIMPLE
                   credentialName: tls-cert
           ```
-          In the example above, `TLS_HOSTS` represents the hosts of your TLS certificate. It can be a single host, multiple hosts, or a wildcard host.
+          In this example, `TLS_HOSTS` represents the hosts of your TLS certificate. It can be a single host, multiple hosts, or a wildcard host.
           For detailed instructions, please refer [Istio documentation](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
 
 

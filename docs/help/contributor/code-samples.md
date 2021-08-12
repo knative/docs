@@ -51,7 +51,7 @@ either internal contributor content, or external-facing user content.
       [`e2e` tests](https://github.com/knative/docs/tree/main/test).
 
   - **Community owned and maintained samples**: For sample code which doesn't
-    meet the above criteria, put the code in a separate repository and link to
+    meet the mentioned criteria, put the code in a separate repository and link to
     it [from this page](https://github.com/knative/docs/tree/main/community/samples/README.md).
     These samples might not receive regular maintenance. It is possible that a
     sample is no longer current and is not actively maintained by its original

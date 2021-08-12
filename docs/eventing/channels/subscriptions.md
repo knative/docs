@@ -62,7 +62,7 @@ For more information about Subscription objects, see
 
 
 === "YAML"
-    1. Create a YAML file for the Subscription object using the example below:
+    1. Create a YAML file for the Subscription object using the following example:
 
         ```yaml
         apiVersion: messaging.knative.dev/v1

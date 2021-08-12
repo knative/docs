@@ -72,7 +72,7 @@ spec:
 
 Requests here will fail when forwarded by the activator, because the Istio proxy at the destination service will see the source namespace of the requests as `knative-serving`, which is the namespace of the activator.
 
-Currently, the easiest way around this is to explicitly allow requests from the `knative-serving` namespace, for example by adding it to the list in the above policy:
+Currently, the easiest way around this is to explicitly allow requests from the `knative-serving` namespace, for example by adding it to the list in the policy mentioned earlier:
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -104,7 +104,7 @@ The `/healthz` path allows system pods to probe the service.
 
 To add the `/metrics` and `/healthz` paths to the AuthorizationPolicy:
 
-1. Create a YAML file for your AuthorizationPolicy using the example below:
+1. Create a YAML file for your AuthorizationPolicy using the following example:
 
     ```yaml
     apiVersion: security.istio.io/v1beta1

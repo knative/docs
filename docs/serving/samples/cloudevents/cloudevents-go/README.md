@@ -22,7 +22,7 @@ can use for testing. It supports running in two modes:
 The application will use `$K_SINK`-mode whenever the environment variable is
 specified.
 
-Follow the steps below to create the sample code and then deploy the app to your
+Perform the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -58,7 +58,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
 1. Choose how you would like to build the application:
 
-   
+
 === "Dockerfile"
 
        If you look in `Dockerfile`, you will see a method for pulling in the
@@ -87,10 +87,10 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-go
 
 1. Choose how you would like to deploy the application:
 
-   
+
 === "yaml (with Dockerfile)"
 
-       If you look in `service.yaml`, take the `<image>` name above and insert it
+       If you look in `service.yaml`, take the `<image>` name you used earlier and insert it
        into the `image:` field, then run:
 
        ```bash

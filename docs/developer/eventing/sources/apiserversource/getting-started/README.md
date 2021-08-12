@@ -32,7 +32,7 @@ command:
 
 1. Create a ServiceAccount:
 
-    1. Create a YAML file using the template below:
+    1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: v1
@@ -44,7 +44,7 @@ command:
         Where:
 
         - `<service-account>` is the name of the ServiceAccount that you want to create.
-        - `<namespace>` is the namespace that you created in step 1 above.
+        - `<namespace>` is the namespace that you created in step 1 earlier.
 
     1. Apply the YAML file by running the command:
 
@@ -55,7 +55,7 @@ command:
 
 1. Create a ClusterRole:
 
-    1. Create a YAML file using the template below:
+    1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: rbac.authorization.k8s.io/v1
@@ -83,7 +83,7 @@ command:
 
 1. Create a ClusterRoleBinding:
 
-    1. Create a YAML file using the template below:
+    1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: rbac.authorization.k8s.io/v1
@@ -102,9 +102,9 @@ command:
         Where:
 
         - `<cluster-role-binding>` is the name of the ClusterRoleBinding that you want to create.
-        - `<cluster-role>` is the name of the ClusterRole that you created in step 3 above.
-        - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
-        - `<namespace>` is the name of the namespace that you created in step 1 above.
+        - `<cluster-role>` is the name of the ClusterRole that you created in step 3 earlier.
+        - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
+        - `<namespace>` is the name of the namespace that you created in step 1 earlier.
 
     1. Apply the YAML file by running the command:
 
@@ -129,13 +129,13 @@ command:
             Where:
 
             - `<apiserversource>` is the name of the source that you want to create.
-            - `<namespace>` is the name of the namespace that you created in step 1 above.
-            - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
+            - `<namespace>` is the name of the namespace that you created in step 1 earlier.
+            - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
             - `<sink>` is the name of the PodSpecable object that you want to use as a sink.
             A PodSpecable is an object that describes a PodSpec.
 
     === "YAML"
-        1. Create a YAML file using the template below:
+        1. Create a YAML file using the following template:
 
             ```yaml
             apiVersion: sources.knative.dev/v1
@@ -158,8 +158,8 @@ command:
             Where:
 
             - `<apiserversource>` is the name of the source that you want to create.
-            - `<namespace>` is the name of the namespace that you created in step 1 above.
-            - `<service-account>` is the name of the ServiceAccount that you created in step 2 above.
+            - `<namespace>` is the name of the namespace that you created in step 1 earlier.
+            - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
             - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
             - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
             - `<sink-name>` is the name of your sink.
@@ -178,14 +178,14 @@ command:
     ```bash
     kubectl run busybox --image=busybox --namespace=<namespace> --restart=Never -- ls
     ```
-    Where `<namespace>` is the name of the namespace that you created in step 1 above.
+    Where `<namespace>` is the name of the namespace that you created in step 1 earlier.
 
 1. Delete the test pod by running the command:
 
     ```bash
     kubectl --namespace=<namespace> delete pod busybox
     ```
-    Where `<namespace>` is the name of the namespace that you created in step 1 above.
+    Where `<namespace>` is the name of the namespace that you created in step 1 earlier.
 
 1. View the logs to verify that Kubernetes events were sent to the sink by the Knative Eventing system by running the command:
 
@@ -194,8 +194,8 @@ command:
     ```
     Where:
 
-    - `<namespace>` is the name of the namespace that you created in step 1 above.
-    - `<sink>` is the name of the PodSpecable object that you used as a sink in step 5 above.
+    - `<namespace>` is the name of the namespace that you created in step 1 earlier.
+    - `<sink>` is the name of the PodSpecable object that you used as a sink in step 5 earlier.
 
     Example log output:
 
@@ -260,4 +260,4 @@ To remove the ApiServerSource object and all of the related resources:
     ```bash
     kubectl delete namespace <namespace>
     ```
-    Where `<namespace>` is the name of the namespace that you created in step 1 above.
+    Where `<namespace>` is the name of the namespace that you created in step 1 earlier.

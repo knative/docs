@@ -113,7 +113,7 @@ spec:
         name: third
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you want
+Change `default` to create the `Sequence` in the Namespace where you want
 the resources to be created.
 
 Here, if you are using different type of Channel, you need to change the

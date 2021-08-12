@@ -37,7 +37,7 @@ DomainMappings in that namespace can use the domain name.
         map any domain name, even ones in other namespaces or for domain names
         that they do not own.
 
-    1. Create a YAML file using the template below:
+    1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: networking.internal.knative.dev/v1alpha1
@@ -57,7 +57,7 @@ DomainMappings in that namespace can use the domain name.
 
 1. Create a DomainMapping object:
 
-    1. Create a YAML file using the template below:
+    1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: serving.knative.dev/v1alpha1

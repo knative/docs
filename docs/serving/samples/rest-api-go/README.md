@@ -77,7 +77,7 @@ To build and push to a container registry using Docker:
    ```
 
 1. Substitute the image reference path in the template with our published image
-   path. The command below substitutes using the \${REPO} variable into a new
+   path. The following command substitutes using the \${REPO} variable into a new
    file called `docs/serving/samples/rest-api-go/sample.yaml`.
 
    ```bash
@@ -94,7 +94,7 @@ Knative Serving sample:
 kubectl apply --filename docs/serving/samples/rest-api-go/sample.yaml
 ```
 
-The above command creates a Knative Service within your Kubernetes cluster in
+This command creates a Knative Service within your Kubernetes cluster in
 the default namespace.
 
 ## Explore the Service

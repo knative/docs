@@ -156,9 +156,9 @@ The autoscaler supports customization through annotations. There are two
 autoscaler classes built into Knative:
 
 1. `kpa.autoscaling.knative.dev` which is the concurrency-based autoscaler
-   described above (the default), and
+   described earlier (the default), and
 2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which
-   autoscales on CPU usage.
+   autoscales on CPU use.
 
    Example of a Service scaled on CPU:
 

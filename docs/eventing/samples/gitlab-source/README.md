@@ -53,8 +53,8 @@ We will:
 
 ### Create a Knative Service
 
-The `event-display.yaml` file shown below defines the basic service which will
-receive events from the GitLab source.
+The `event-display.yaml` file defines the basic service which will
+receive events from the GitLab source:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -83,12 +83,12 @@ kubectl -n default apply -f event-display.yaml
    webhooks. Also decide on a secret token that your source will use to
    authenticate the incoming webhooks from GitLab.
 
-1. Update a secret values in `secret.yaml` defined below:
+1. Update secret values in `secret.yaml` as defined here:
 
    `accessToken` is the personal access token created in step 1 and
    `secretToken` is any token of your choosing.
 
-   Hint: you can generate a random _secretToken_ with:
+   Hint: you can generate a random _secretToken_ by running the command:
 
    ```bash
    head -c 8 /dev/urandom | base64

@@ -98,7 +98,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
 
 To install the default Broker:
 
-1. Copy the YAML below into a file:
+1. Copy the following YAML into a file:
 
    ```yaml
    apiVersion: eventing.knative.dev/v1

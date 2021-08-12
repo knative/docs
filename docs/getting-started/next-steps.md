@@ -9,7 +9,7 @@ This topic provides a list of resources to help you continue your Knative journe
 
 ## :test_tube: Knative samples
 
-Try out some of the Knative samples below:
+Try out some of the following Knative samples:
 
 - [Converting a Kubernetes Service to a Knative Service](../../serving/convert-deployment-to-knative-service/)
 - [Knative Serving code samples](../../serving/samples/)
@@ -17,7 +17,7 @@ Try out some of the Knative samples below:
 
 ## :page_with_curl: Explore the Knative docs
 
-Explore the guides below for documentation specific to your role:
+See the following guides for documentation specific to your role:
 
 - [Developer Guide](../developer/README.md)
 - [Admin Guide](../admin/README.md)

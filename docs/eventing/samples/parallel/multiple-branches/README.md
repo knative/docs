@@ -101,8 +101,8 @@ spec:
         - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you want
-your resources to be created.
+Change `default` to create the `Sequence` in the Namespace where you want
+your resources to be created by running the command:
 
 ```bash
 kubectl -n default create -f ./event-display.yaml

@@ -45,7 +45,7 @@ To change the {default-domain} value there are a few steps involved:
 
 You can also apply an updated domain configuration:
 
-1. Create a YAML file using the template below:
+1. Create a YAML file using the following template:
 
      ```yaml
      apiVersion: v1

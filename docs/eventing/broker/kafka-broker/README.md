@@ -105,7 +105,7 @@ data:
   bootstrap.servers: "my-cluster-kafka-bootstrap.kafka:9092"
 ```
 
-The above `ConfigMap` is installed in the cluster. You can edit
+This `ConfigMap` is installed in the cluster. You can edit
 the configuration or create a new one with the same values
 depending on your needs.
 

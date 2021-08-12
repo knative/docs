@@ -33,8 +33,8 @@ If you want to use different type of `Channel`, you will have to modify the
 
 ### Create the Knative Services
 
-Change `default` below to create the steps in the Namespace where you want
-resources created.
+Change `default` to create the steps in the Namespace where you want
+resources created as in the following example:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -159,8 +159,8 @@ spec:
       name: second-sequence
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you want
-your resources created.
+Change `default` to create the `Sequence` in the Namespace where you want
+your resources created:
 
 ```bash
 kubectl -n default create -f ./sequence1.yaml
@@ -219,8 +219,8 @@ spec:
         - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
-Change `default` below to create the `Sequence` in the Namespace where you want
-your resources created.
+Change `default` to create the `Sequence` in the Namespace where you want
+your resources created:
 
 ```bash
 kubectl -n default create -f ./event-display.yaml

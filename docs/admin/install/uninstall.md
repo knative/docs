@@ -6,8 +6,8 @@ type: "docs"
 
 # Uninstalling Knative
 
-To uninstall an Operator-based Knative installation, follow the [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation) procedure below.
-To uninstall a YAML-based Knative installation, follow the [Uninstall a YAML-based Knative Installation](#uninstall-a-yaml-based-knative-installation) procedure below.
+To uninstall an Operator-based Knative installation, see the following [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation) procedure.
+To uninstall a YAML-based Knative installation, see the following [Uninstall a YAML-based Knative Installation](#uninstall-a-yaml-based-knative-installation) procedure.
 
 
 ## Uninstalling a YAML-based Knative installation
@@ -17,7 +17,7 @@ To uninstall a YAML-based Knative installation:
 
 ### Uninstalling optional Serving extensions
 
-Uninstall any Serving extensions you have installed by following the relevant steps below:
+Uninstall any Serving extensions you have installed by performing the steps in the following relevant tab:
 
 
 
@@ -73,7 +73,7 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 <!-- This indentation is important for things to render properly. -->
 
-   
+
 === "Ambassador"
 
     The following commands uninstall Ambassador and enable its Knative integration.
@@ -162,7 +162,7 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 
 ### Uninstalling optional Eventing extensions
 
-Uninstall any Eventing extensions you have installed by following the relevant procedure below:
+Uninstall any Eventing extensions you have installed by following the relevant procedure:
 
 
 
@@ -294,7 +294,7 @@ Uninstall each channel layer you have installed:
 
 <!-- This indentation is important for things to render properly. -->
 
-   
+
 === "Apache Kafka Channel"
 
     Uninstall the Apache Kafka Channel by running:
@@ -364,7 +364,7 @@ Uninstall each channel layer you have installed:
 
 ## Uninstall an Operator-based Knative installation
 
-To uninstall an Operator-based Knative installation, follow the procedures below.
+To uninstall an Operator-based Knative installation, follow these procedures:
 
 
 ### Removing the Knative Serving component

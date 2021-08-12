@@ -115,7 +115,7 @@ and
 [https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)
 
 ### Content Tabs
-Content tabs are handy way to organize lots of information in a visually pleasing way. Some documentation from [https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#usage](https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#usage) is reproduced below.
+Content tabs are handy way to organize lots of information in a visually pleasing way. Some documentation from [https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#usage](https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#usage) is reproduced here:
 === "Grouping Code blocks"
     Code blocks are one of the primary targets to be grouped, and can be considered a special case of content tabs, as tabs with a single code block are always rendered without horizontal spacing.
     Example:
@@ -234,7 +234,7 @@ To search a database of Icons and Emojis (all of which can be used on Knative.de
 
 The Knative site uses [mkdocs-redirects](https://github.com/datarobot/mkdocs-redirects) to "redirect" users from a page that may no longer exist (or has been moved) to their desired location.
 
-Adding re-directs to the Knative site is done in one centralized place, `docs/config/redirects.yml`. The format is shown below:
+Adding re-directs to the Knative site is done in one centralized place, `docs/config/redirects.yml`. The format is shown here:
 
 ```
 plugins:

@@ -103,7 +103,7 @@ You can do this by copying the following code into the `servingcontainer.go` fil
    ```text
    cd -
    cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
-   ``` 
+   ```
 
 1. Create a basic web server which listens on port 8882.
 You can do this by copying the following code into the `sidecarcontainer.go` file:
@@ -183,12 +183,12 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
 
 1. Use Go tool to create a
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest:
-   
+
    servingcontainer
    ```bash
    cd -
    cd knative-docs/docs/serving/samples/multi-container/servingcontainer
-   go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer 
+   go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer
    ```
    sidecarcontainer
    ```bash
@@ -250,7 +250,7 @@ After you have modified the sample code files you can build and deploy the sampl
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    ```bash
    curl http://multi-container.default.1.2.3.4.sslip.io

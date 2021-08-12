@@ -11,7 +11,7 @@ A simple web app written in Node.js that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
 specified, it will use "World" as the TARGET.
 
-Follow the steps below to create the sample code and then deploy the app to your
+Perform the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -91,8 +91,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-nodejs
    }
    ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Node.js app,
+1. In your project directory, create a file named `Dockerfile` and copy the following code
+   block into it. For detailed instructions on dockerizing a Node.js app,
    see
    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
@@ -191,7 +191,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    ```bash
    curl http://helloworld-nodejs.default.1.2.3.4.sslip.io

@@ -7,7 +7,7 @@ SinkBinding resolves a sink as a URI, sets the URI in the environment
 variable `K_SINK`, and adds the URI to a subject using `K_SINK`.
 If the URI changes, SinkBinding updates the value of `K_SINK`.
 
-In the examples below, the sink is a Knative Service and the subject is a CronJob.
+In the following examples, the sink is a Knative Service and the subject is a CronJob.
 If you have an existing subject and sink, you can replace the examples with your
 own values.
 
@@ -92,7 +92,7 @@ create a Knative service.
     ```
 
 === "YAML"
-    1. Create a YAML file for the Knative service using the template below:
+    1. Create a YAML file for the Knative service using the following template:
 
         ```yaml
         apiVersion: serving.knative.dev/v1
@@ -134,7 +134,7 @@ use the following sample to create a CronJob object as the subject.
 The following CronJob makes a single cloud event that targets `K_SINK` and adds
 any extra overrides given by `CE_OVERRIDES`.
 
-1. Create a YAML file for the CronJob using the example below:
+1. Create a YAML file for the CronJob using the following example:
 
     ```yaml
     apiVersion: batch/v1beta1
@@ -217,7 +217,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     ```
 
 === "YAML"
-    1. Create a YAML file for the `SinkBinding` object using the template below:
+    1. Create a YAML file for the `SinkBinding` object using the following template:
 
         ```yaml
         apiVersion: sources.knative.dev/v1
