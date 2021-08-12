@@ -116,9 +116,6 @@ spec:
 Change `default` in the following command to create the `Sequence` in the namespace where you want
 the resources to be created:
 
-Here, if you are using different type of Channel, you need to change the
-spec.channelTemplate to point to your desired Channel.
-
 ```bash
 kubectl -n default create -f ./sequence.yaml
 ```
