@@ -33,8 +33,8 @@ If you want to use different type of `Channel`, you will have to modify the
 
 ### Create the Knative Services
 
-Change `default` to create the steps in the Namespace where you want
-resources created as in the following example:
+Change `default` in the following command to create the steps in the namespace where you want
+resources created:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
