@@ -1,28 +1,31 @@
 <!-- General PR guidelines:
 
-Most PRs should be opened against the main branch.
+Most PRs should be opened against the main branch in the
+[Docs GitHub repository](https://github.com/knative/docs).
 
-If the change should also be in the most recent release, add the
-corresponding "cherrypick-0.X" label; for example, "cherrypick-0.12", to the
-original PR. Best practice is to open a PR for the cherry-pick yourself after
-your original PR has been merged into the main branch. Once the cherry-pick PR
-has merged, remove the cherry-pick label from the original PR.
-
-Use one of the new content templates:
+Use one of the content templates when writing a new document:
 - [Concept](docs/contributor/templates/template-concept.md) -- Conceptual topics explain how things
 work or what things mean. They provide helpful context to readers. They do not include procedures.
 - [Procedure](docs/contributor/templates/template-procedure.md) -- Procedural (how-to) topics
-include detailed steps to perform a task as well as some context about the task.
-- [Troubleshooting](docs/contributor/templates/template-troubleshooting.md) -- Troubleshooting 
+include detailed steps for performing a task as well as some context about the task.
+- [Troubleshooting](docs/contributor/templates/template-troubleshooting.md) -- Troubleshooting
 topics list common errors and solutions.
 - [Blog](docs/contributor/templates/template-blog-entry.md) -- Instructions and a template that you
 can use to help you post to the Knative blog.
 
-Consult [Knative contributor's guide](help/contributing) for all resources for contributing to
-Knative documentation.
+When you add a new document to the /docs directory, the navigation menu updates automatically.
+For more information, see the
+[MkDocs documentation](https://www.mkdocs.org/user-guide/writing-your-docs/#configure-pages-and-navigation).
 
-Learn more about contributing to the Knative Docs:
-https://github.com/knative/docs
+If your changes should also be in the most recent release, add the corresponding "cherrypick-0.X"
+label to the original PR; for example, "cherrypick-0.12".
+Best practice is to open a PR for the cherry-pick yourself after your original PR has been merged
+into the main branch.
+After the cherry-pick PR has merged, remove the cherry-pick label from the original PR.
+
+For all resources for contributing to the Knative documentation, see the
+[Knative contributor's guide](help/contributing).
+
  -->
 
 "Fixes #issue-number" or "Add description of the problem this PR solves"
