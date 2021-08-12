@@ -28,7 +28,7 @@ General steps the reconciliation process needs to cover:
     ```go
     src.Status.MarkSink(sb.Status.SinkURI)
     ```
-1. Return a new reconciler event stating that the process is done
+1. Return a new reconciler event stating that the process is done:
     ```go
     return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SampleSourceReconciled", "SampleSource reconciled: \"%s/%s\"", namespace, name)
     ```
