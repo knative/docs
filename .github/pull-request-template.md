@@ -1,7 +1,7 @@
 <!-- General PR guidelines:
 
 Most PRs should be opened against the main branch in the
-[Docs GitHub repository](https://github.com/knative/docs).
+[`knative/docs` GitHub repository](https://github.com/knative/docs).
 
 Use one of the content templates when writing a new document:
 - [Concept](docs/contributor/templates/template-concept.md) -- Conceptual topics explain how things
