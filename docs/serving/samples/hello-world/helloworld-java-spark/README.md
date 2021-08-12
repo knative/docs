@@ -39,8 +39,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Spark Java
+1. In your project directory, create a file named `Dockerfile` and copy the following code
+   block into it. For detailed instructions on dockerizing a Spark Java
    app, see [Spark with Docker](http://sparkjava.com/tutorials/docker). For
    additional information on multi-stage docker builds for Java see
    [Creating Smaller Java Image using Docker Multi-stage Build](https://github.com/arun-gupta/docker-java-multistage). Navigate to your project directory and copy the following code into a new file named `Dockerfile`:
@@ -165,7 +165,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java
 
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    Example:
 

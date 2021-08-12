@@ -3,7 +3,7 @@
 Use this page to test your changes and ensure that there are not any issues,
 unwanted behaviors, or regression that are caused by your changes.
 
-Below are a set of site elements that have causes issues in the past.
+This is a set of site elements that have causes issues in the past:
 
 ## Lists
 
@@ -84,6 +84,3 @@ How to include tabbed content in your page. Note that you can set a default tab.
 
     {{< tab name="Include example" >}}
     {{% readfile file="./serving/samples/multi-container/service.yaml" code="true" lang="yaml" %}}
-
-
-

@@ -105,7 +105,7 @@ These extension attributes are as follows:
 
 ### Channel support
 
-The table below summarizes what delivery parameters are supported for each Channel implementation.
+The following table summarizes which delivery parameters are supported for each Channel implementation.
 
 | Channel Type | Supported Delivery Parameters |
 | - | - |

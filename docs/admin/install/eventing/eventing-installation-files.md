@@ -7,7 +7,7 @@ This guide provides reference information about the core Knative Eventing YAML f
 
 For information about installing these files, see [Installing Knative Eventing using YAML files](../install-eventing-with-yaml).
 
-The table below describes the installation files included in Knative Eventing:
+The following table describes the installation files included in Knative Eventing:
 
 | File name | Description | Dependencies|
 | --- | --- | --- |

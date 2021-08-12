@@ -5,7 +5,7 @@ A simple web app written in Python that you can use to test knative eventing. It
 We will deploy the app as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) along with a [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
 However, you can also deploy the app as a [Knative Serving Service](../../../../serving/).
 
-Follow the steps below to create the sample code and then deploy the app to your
+Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -55,8 +55,8 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
     Flask==1.1.1
     ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. For detailed instructions on dockerizing a Go app, see
+1. In your project directory, create a file named `Dockerfile` and copy the following code
+   block into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
     ```docker
@@ -223,7 +223,7 @@ You can send an HTTP request directly to the Knative [broker](../../../broker) i
 
 ### Verify that event is received by helloworld-python app
 
-Helloworld-python app logs the context and the msg of the above event, and replies back with another event.
+The Helloworld-python app logs the context and the msg of the event you created earlier, and replies with another event.
 
   1. Display helloworld-python app logs
       ```bash
@@ -261,7 +261,7 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
 
 1. Deploy a Pod that receives any CloudEvent and logs the event to its output.
 
-    1. Copy the YAML below into a file:
+    1. Copy the following YAML into a file:
 
         ```yaml
         # event-display app deploment
@@ -308,7 +308,7 @@ The `helloworld-python` app replies with an event type `type= dev.knative.sample
 
 1. Create a trigger to deliver the event to the previously created service.
 
-    1. Copy the YAML below into a file:
+    1. Copy the following YAML into a file:
 
         ```yaml
         apiVersion: eventing.knative.dev/v1

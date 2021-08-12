@@ -112,7 +112,7 @@ When a Broker is created without a specified `BrokerClass` annotation, the defau
 
 The following example creates a Broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
 
-1. Create a YAML file for your Broker using the example below:
+1. Create a YAML file for your Broker using the following example:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1

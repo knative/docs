@@ -37,7 +37,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    cd app
    ```
 
-1. Create a file named `app.rb` and copy the code block below into it:
+1. Create a file named `app.rb` and copy the following code block into it:
 
    ```ruby
    require 'sinatra'
@@ -50,7 +50,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    end
    ```
 
-1. Create a file named `Dockerfile` and copy the code block below into it. See
+1. Create a file named `Dockerfile` and copy the following code block into it. See
    [official Ruby docker image](https://hub.docker.com/_/ruby/) for more
    details.
 
@@ -72,7 +72,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
    CMD ["ruby", "./app.rb"]
    ```
 
-1. Create a file named `Gemfile` and copy the text block below into it.
+1. Create a file named `Gemfile` and copy the following text block into it.
 
    ```gem
    source 'https://rubygems.org'
@@ -217,7 +217,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-ruby
 
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    Example:
 

@@ -69,7 +69,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
    cd knative-docs/docs/eventing/samples/kafka/source
    ```
 
-2. Build the Event Display Service by copying the YAML below into a file:
+2. Build the Event Display Service by copying the following YAML into a file:
 
      ```yaml
      apiVersion: serving.knative.dev/v1
@@ -152,8 +152,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ### Verify
 
-1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic,
-   like shown below:
+1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic as in the following example:
    ```
    kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic knative-demo-topic
    If you don't see a command prompt, try pressing enter.
@@ -293,7 +292,7 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
 
 ## Connecting to a TLS enabled Kafka broker
 
-The KafkaSource supports TLS and SASL authentication methods. For enabling TLS authentication, please have the below files
+The KafkaSource supports TLS and SASL authentication methods. To enable TLS authentication, you must have the following files:
 
 * CA Certificate
 * Client Certificate and Key

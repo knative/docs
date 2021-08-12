@@ -27,7 +27,7 @@ kubectl apply --filename {{ artifact( repo="eventing", file="eventing-sugar-cont
 One way to create a Broker is to manually apply a resource to a cluster using
 the default settings:
 
-1. Copy the YAML below into a file:
+1. Copy the following YAML into a file:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
@@ -55,14 +55,14 @@ use-cases:
   controller will create a Broker named by that Trigger in the Trigger's
   Namespace.
 
-When a Broker is deleted and the above labels or annotations are in-use, the
+When a Broker is deleted and the mentioned labels or annotations are in use, the
 Sugar Controller will automatically recreate a default Broker.
 
 ### Namespace Examples
 
 Creating a "default" Broker when creating a Namespace:
 
-1. Copy the YAML below into a file:
+1. Copy the following YAML into a file:
 
     ```yaml
     apiVersion: v1

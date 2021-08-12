@@ -9,7 +9,7 @@ The ContainerSource object starts a container image that generates events and
 sends messages to a sink URI. You can also use ContainerSource to support your
 own event sources in Knative.
 
-In the examples below, the event source is a heartbeats container and the sink
+In the following examples, the event source is a heartbeats container and the sink
 is a Knative Service.
 If you have an existing event source and sink, you can replace the examples with
 your own values.
@@ -20,7 +20,7 @@ Before you can create a ContainerSource object:
 
 - You must have [Knative Eventing](../../../admin/install/install-eventing-with-yaml)
 installed on your cluster.
-- If you want to use the example heartbeats event source below, you must also:
+- If you want to use the following example heartbeats event source, you must also:
     - Install [ko](https://github.com/google/ko)
     - Set `KO_DOCKER_REPO`. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`
     - Authenticate with your `KO_DOCKER_REPO`
@@ -30,7 +30,7 @@ installed on your cluster.
 
 1. Build an image of your event source and publish it to your image repository.
 Your image must read the environment variable `K_SINK` and post messages to the
-URL specified in  `K_SINK`. If you do not already have an image, you can use
+URL specified in `K_SINK`. If you do not already have an image, you can use
 the following example heartbeats event source by running the commands:
 
     ```bash
@@ -64,7 +64,7 @@ Service, which dumps incoming messages into its log:
             ```
 
     === "YAML"
-        1. Create a YAML file using the example below:
+        1. Create a YAML file using the following example:
 
             ```yaml
             apiVersion: apps/v1
@@ -126,7 +126,7 @@ Service, which dumps incoming messages into its log:
             For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_container_create.md#kn-source-container-create).
 
     === "YAML"
-        1. Create a YAML file using the template below:
+        1. Create a YAML file using the following template:
 
             ```yaml
             apiVersion: sources.knative.dev/v1
@@ -196,7 +196,7 @@ Service, which dumps incoming messages into its log:
 
 1. Verify that the output returns the properties of the events that your
 ContainerSource sent to your sink.
-In the example below, the command has returned the `Attributes` and `Data` properties
+In the following example, the command has returned the `Attributes` and `Data` properties
 of the events that the ContainerSource sent to the `event-display` Service:
 
     ```

@@ -10,7 +10,7 @@ To use Kafka Channels, you must:
 
 ## Create a `kafka-channel` ConfigMap
 
-1. Create a YAML file for the `kafka-channel` ConfigMap using the template below:
+1. Create a YAML file for the `kafka-channel` ConfigMap using the following template:
 
     ```yaml
     apiVersion: v1
@@ -38,7 +38,7 @@ To use Kafka Channels, you must:
     Where `<filename>` is the name of the file you created in the previous step.
 
 
-1. Optional. To create a Broker that uses Kafka Channels, specify the `kafka-channel` ConfigMap in the Broker spec. You can do this by creating a YAML file using the template below:
+1. Optional. To create a Broker that uses Kafka Channels, specify the `kafka-channel` ConfigMap in the Broker spec. You can do this by creating a YAML file using the following template:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1

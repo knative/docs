@@ -120,7 +120,7 @@ from a private container registry](../../../serving/deploying-from-private-regis
 This example shows how you can define custom image links that can be defined in the CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
-In the example below:
+In the following example:
 
 - the custom tag `v0.13.0` is used for all images
 - all image links are accessible without using secrets
@@ -204,7 +204,7 @@ This example uses a secret named `regcred`. You must create your own private sec
 - [From command line for docker credentials](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line)
 - [Create your own secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-your-own-secrets)
 
-After you create this secret, edit the Operator CR by appending the content below:
+After you create this secret, edit the Operator CR by appending the following content:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -219,7 +219,7 @@ spec:
       - name: regcred
 ```
 
-The field `imagePullSecrets` expects a list of secrets. You can add multiple secrets to access the images as below:
+The field `imagePullSecrets` expects a list of secrets. You can add multiple secrets to access the images as follows:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -387,7 +387,7 @@ spec:
       ephemeral-storage: 4Gi
 ```
 
-If you would like to add another container `autoscaler` with the same configuration, you need to change your CR as below:
+If you would like to add another container `autoscaler` with the same configuration, you need to change your CR as follows:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1

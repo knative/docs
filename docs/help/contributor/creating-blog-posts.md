@@ -18,7 +18,7 @@ This section covers documentation, processes, and roles for the [Knative blog](h
 
 Anyone can write a blog post and submit it for review. Commercial content is not allowed. Please refer to the [blog guidelines](#blog-guidelines) for more guidance.
 
-To submit a blog post, follow the steps below.
+To submit a blog post:
 
 1. [Sign the Contributor License Agreements](https://github.com/knative/community/blob/main/CONTRIBUTING.md#contributor-license-agreements) if you have not yet done so.
 1. Familiarize yourself with the Markdown format for existing blog posts in the [docs repository](https://github.com/knative/docs/tree/main/blog). Blog posts are categorized into different directories. You can explore the directories to find examples.

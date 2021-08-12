@@ -268,7 +268,7 @@ The Gateway proxy checks the updated host, and forwards it to `Search` or
 
 ## Using internal services and `"httpProtocol": "Redirected"`
 
-Using the above approach, services will be available using two entrypoints into the cluster:
+Using the approach explained in the previous section, services will be available using two entrypoints into the cluster:
 The original ones provided by Knative Serving (`search-service.default.example.com` and `login-service.default.example.com`),
 as well as the additional entrypoints `example.com/search` and `example.com/login`
 provided by the manually added VirtualService (`entry-route`).
@@ -309,4 +309,3 @@ To clean up the sample resources:
 kubectl delete --filename docs/serving/samples/knative-routing-go/sample.yaml
 kubectl delete --filename docs/serving/samples/knative-routing-go/routing.yaml
 ```
-

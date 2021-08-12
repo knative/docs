@@ -59,7 +59,7 @@ spec:
 
 ---
 
-# K8s Service which points at the Deployment below.
+# K8s Service which points at the following deployment.
 
 apiVersion: v1
 kind: Service

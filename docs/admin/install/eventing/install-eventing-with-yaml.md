@@ -43,7 +43,7 @@ To install Knative Eventing:
 
 ## Optional: Install a default Channel (messaging) layer
 
-The tabs below expand to show instructions for installing a default Channel layer.
+The following tabs expand to show instructions for installing a default Channel layer.
 Follow the procedure for the Channel of your choice:
 
 <!-- This indentation is important for things to render properly. -->
@@ -92,7 +92,7 @@ Follow the procedure for the Channel of your choice:
 
 ## Optional: Install a Broker layer:
 
-The tabs below expand to show instructions for installing the Broker layer.
+The following tabs expand to show instructions for installing the Broker layer.
 Follow the procedure for the Broker of your choice:
 
 <!-- This indentation is important for things to render properly. -->
@@ -196,7 +196,7 @@ Follow the procedure for the Broker of your choice:
 
 ## Install optional Eventing extensions
 
-The tabs below expand to show instructions for installing each Eventing extension.
+The following tabs expand to show instructions for installing each Eventing extension.
 <!-- This indentation is important for things to render properly. -->
 
 === "Apache Kafka Sink"

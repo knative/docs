@@ -90,7 +90,7 @@ and which DNS provider validates those requests.
 
         To apply the ClusterIssuer for HTTP01 challenge:
 
-        1. Create a YAML file using the template below:
+        1. Create a YAML file using the following template:
 
             ```yaml
             apiVersion: cert-manager.io/v1

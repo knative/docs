@@ -42,7 +42,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    cd app
    ```
 
-1. Create a file named `app.py` and copy the code block below into it:
+1. Create a file named `app.py` and copy the following code block into it:
 
    ```python
    import os
@@ -61,8 +61,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
    ```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it. See
+1. In your project directory, create a file named `Dockerfile` and copy the following code
+   block into it. See
    [official Python docker image](https://hub.docker.com/_/python/) for more
    details.
 
@@ -205,8 +205,8 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
 
 
-1. Now you can make a request to your app and see the result. Replace the URL
-   below with the URL returned in the previous command.
+1. Now you can make a request to your app and see the result. Replace the following URL
+   with the URL returned in the previous command.
 
    Example:
 

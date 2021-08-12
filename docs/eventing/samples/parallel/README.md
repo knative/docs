@@ -16,7 +16,7 @@ All examples are using the
 
 ## Examples
 
-For each of these examples below, we'll use
+Each of the following examples use
 [`PingSource`](../../sources/ping-source/) as the source of events.
 
 We also use simple

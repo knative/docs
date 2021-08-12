@@ -19,7 +19,7 @@ Create a sample service:
 
 === "Apply YAML"
 
-1. Create a YAML file using the example below:
+1. Create a YAML file using the following example:
 
     ```yaml
     apiVersion: serving.knative.dev/v1
