@@ -24,7 +24,7 @@ into the main branch.
 After the cherry-pick PR has merged, remove the cherry-pick label from the original PR.
 
 For all resources for contributing to the Knative documentation, see the
-[Knative contributor's guide](help/contributing).
+[Knative contributor's guide](help/contributing/README.md).
 
  -->
 
