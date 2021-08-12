@@ -24,7 +24,7 @@ General steps the reconciliation process needs to cover:
     src.Status.PropagateDeploymentAvailability(ra)
     ```
 1. Follow the later [Reconcile/Create the SinkBinding](#reconcilecreate-the-sinkbinding) procedure for the receive adapter targeting the sink.
-1. MarkSink with the result
+1. `MarkSink` with the result:
     ```go
     src.Status.MarkSink(sb.Status.SinkURI)
     ```
