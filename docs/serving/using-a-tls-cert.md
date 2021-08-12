@@ -80,7 +80,7 @@ tools to obtain a certificate from Let's Encrypt:
 - Setup cert-manager to either manually obtain a certificate, or to
   automatically provision certificates
 
-This page covers details for both of the mentioned options.
+This page covers details for both options.
 
 For details about using other CA's, see the tool's reference documentation:
 

@@ -18,7 +18,7 @@
     1. Instruct `curl` to connect to the External IP or CNAME defined by the
        networking layer mentioned in section 3, and use the `-H "Host:"` command-line
        option to specify the Knative application's host name.
-       For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the mentioned `helloworld-go` application, use:
+       For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
        ```bash
        curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
        ```

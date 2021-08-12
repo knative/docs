@@ -83,12 +83,12 @@ kubectl -n default apply -f event-display.yaml
    webhooks. Also decide on a secret token that your source will use to
    authenticate the incoming webhooks from GitLab.
 
-1. Update secret values in `secret.yaml` as defined here:
+1. Update the secret values in `secret.yaml` as follows:
 
    `accessToken` is the personal access token created in step 1 and
    `secretToken` is any token of your choosing.
 
-   Hint: you can generate a random _secretToken_ by running the command:
+   Tip: you can generate a random _secretToken_ by running the command:
 
    ```bash
    head -c 8 /dev/urandom | base64

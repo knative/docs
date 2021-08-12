@@ -158,7 +158,7 @@ autoscaler classes built into Knative:
 1. `kpa.autoscaling.knative.dev` which is the concurrency-based autoscaler
    described earlier (the default), and
 2. `hpa.autoscaling.knative.dev` which delegates to the Kubernetes HPA which
-   autoscales on CPU use.
+   autoscales on CPU usage.
 
    Example of a Service scaled on CPU:
 

@@ -12,7 +12,7 @@ to use a Kubernetes secret as a Volume with Knative. We will create a new Google
 Service Account and place it into a Kubernetes secret, then we will mount it
 into a container as a Volume.
 
-Perform the following steps to create the sample code and then deploy the app to your
+Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 

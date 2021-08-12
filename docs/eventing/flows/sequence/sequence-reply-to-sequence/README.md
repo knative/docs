@@ -159,7 +159,7 @@ spec:
       name: second-sequence
 ```
 
-Change `default` to create the `Sequence` in the Namespace where you want
+Change `default` in the following command to create the `Sequence` in the namespace where you want
 your resources created:
 
 ```bash
@@ -219,7 +219,7 @@ spec:
         - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ```
 
-Change `default` to create the `Sequence` in the Namespace where you want
+Change `default` in the following command to create the `Sequence` in the namespace where you want
 your resources created:
 
 ```bash

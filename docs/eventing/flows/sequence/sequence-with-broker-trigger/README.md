@@ -98,8 +98,8 @@ spec:
 
 ```
 
-Change the `default` namespace to create the services in the namespace where you have
-configured your broker by running the command:
+Change `default` in the following command to create the services in the namespace where you have
+configured your broker:
 
 ```bash
 kubectl -n default create -f ./steps.yaml
@@ -142,8 +142,8 @@ spec:
       name: default
 ```
 
-Change the `default` namespace to create the sequence in the namespace where you have
-configured your broker by running the command:
+Change `default` in the following command to create the sequence in the namespace where you have
+configured your broker:
 
 ```bash
 kubectl -n default create -f ./sequence.yaml
@@ -170,8 +170,8 @@ spec:
       name: default
 ```
 
-Change the `default` namespace to create the PingSource in the namespace where you have
-configured your broker and sequence by running the command:
+Change `default` in the following command to create the PingSource in the namespace where you have
+configured your broker and sequence:
 
 ```bash
 kubectl -n default create -f ./ping-source.yaml
@@ -196,8 +196,8 @@ spec:
       name: sequence
 ```
 
-Change the `default` namespace to create the trigger in the namespace where you have
-configured your broker and sequence by running the command:
+Change `default` in the following command to create the trigger in the namespace where you have
+configured your broker and sequence:
 
 ```bash
 kubectl -n default create -f ./trigger.yaml
@@ -235,8 +235,8 @@ spec:
 
 ```
 
-Change `default` namespace to create the service and trigger in the namespace
-where you have configured your broker by running the command:
+Change `default` in the following command to create the service and trigger in the namespace
+where you have configured your broker:
 
 ```bash
 kubectl -n default create -f ./display-trigger.yaml

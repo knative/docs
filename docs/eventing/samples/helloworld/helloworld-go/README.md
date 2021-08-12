@@ -20,7 +20,7 @@ along with a
 However, you can also deploy the app as a
 [Knative Serving Service](../../../../serving/).
 
-Perform the following steps to create the sample code and then deploy the app to your
+Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -244,7 +244,7 @@ folder) you're ready to build and deploy the sample app.
 1. After the build has completed and the container is pushed to docker hub, you
    can deploy the sample application into your cluster. Ensure that the
    container image value in `sample-app.yaml` matches the container you built in
-   the previous step. Apply the configuration by running the following command in `kubectl`:
+   the previous step. Apply the configuration by running the following command:
 
        ```bash
        kubectl apply --filename sample-app.yaml
@@ -316,8 +316,8 @@ with correct CloudEvent headers set.
 
 ### Verify that event is received by helloworld-go app
 
-Helloworld-go app logs the context and the msg of this event, and replies
-back with another event.
+The Helloworld-go app logs the context and the msg of the event you created earlier, and replies
+with another event.
 
 1.  Display helloworld-go app logs
 
@@ -415,7 +415,7 @@ CloudEvent and logs the event to its output:
     Where `<filename>` is the name of the file you created in the previous step.
 
 1. Using the following example, create a YAML file for a trigger to deliver the event
-to this service:
+to the `event-display` Service:
 
        ```yaml
        apiVersion: eventing.knative.dev/v1

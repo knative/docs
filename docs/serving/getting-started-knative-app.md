@@ -168,7 +168,7 @@ To see if your app has been deployed successfully, you need the URL created by K
    > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
    If you changed the name from `helloworld-go` to something else when creating
-   the `.yaml` file, replace `helloworld-go` in the commands listed earlier with the name you entered.
+   the `.yaml` file, replace `helloworld-go` in these commands with the name you entered.
 
 1. Now you can make a request to your app and see the results. Replace
    the URL with the one returned by the command in the previous step.

@@ -33,7 +33,7 @@ To see event types in the registry that are available to subscribe to, enter the
 kubectl get eventtypes -n <namespace>
 ```
 
-The following example shows the output of executing the earlier command using the
+The following example shows the output of executing the `kubectl get eventtypes` command using the
 `default` namespace in a testing cluster. We will address the question of how
 this registry was populated in a later section.
 

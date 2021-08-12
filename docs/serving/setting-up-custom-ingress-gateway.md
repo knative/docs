@@ -49,7 +49,7 @@ Replace the label selector with the label of your service:
 istio: ingressgateway
 ```
 
-For the mentioned service, it should be updated to:
+For the example `custom-ingressgateway` service mentioned earlier, it should be updated to:
 
 ```
 istio: custom-gateway
@@ -84,7 +84,7 @@ namespace:
 
 1. Edit the file to add the `gateway.knative-serving.knative-ingress-gateway: <ingress_name>.<ingress_namespace>.svc.cluster.local` field with
 the fully qualified url of your service.
-For the mentioned service, it should be updated to:
+For the example `custom-ingressgateway` service mentioned earlier, it should be updated to:
 
      ```yaml
      apiVersion: v1
@@ -154,7 +154,7 @@ namespace:
 
 1. Edit the file to add the `gateway.<gateway-namespace>.<gateway-name>: istio-ingressgateway.istio-system.svc.cluster.local` field with
 the customized gateway.
-For the gateway mentioned, it should be updated to:
+For the example `knative-custom-gateway` mentioned earlier, it should be updated to:
 
      ```yaml
      apiVersion: v1

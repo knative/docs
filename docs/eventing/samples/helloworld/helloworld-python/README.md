@@ -5,7 +5,7 @@ A simple web app written in Python that you can use to test knative eventing. It
 We will deploy the app as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) along with a [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
 However, you can also deploy the app as a [Knative Serving Service](../../../../serving/).
 
-Perform the following steps to create the sample code and then deploy the app to your
+Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
@@ -223,7 +223,7 @@ You can send an HTTP request directly to the Knative [broker](../../../broker) i
 
 ### Verify that event is received by helloworld-python app
 
-Helloworld-python app logs the context and the msg of this event, and replies back with another event.
+The Helloworld-python app logs the context and the msg of the event you created earlier, and replies with another event.
 
   1. Display helloworld-python app logs
       ```bash

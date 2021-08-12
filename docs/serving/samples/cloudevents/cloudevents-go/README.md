@@ -22,7 +22,7 @@ can use for testing. It supports running in two modes:
 The application will use `$K_SINK`-mode whenever the environment variable is
 specified.
 
-Perform the following steps to create the sample code and then deploy the app to your
+Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
