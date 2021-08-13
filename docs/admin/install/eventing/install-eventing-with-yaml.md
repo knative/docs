@@ -43,25 +43,15 @@ To install Knative Eventing:
 
 ## Optional: Install a default Channel (messaging) layer
 
-The tabs below expand to show instructions for installing a default Channel layer.
+The following tabs expand to show instructions for installing a default Channel layer.
 Follow the procedure for the Channel of your choice:
 
 <!-- This indentation is important for things to render properly. -->
 
 === "Apache Kafka Channel"
 
-    1. [Install Apache Kafka for Kubernetes](../../../eventing/samples/kafka/README.md).
-
-    1. Install the Apache Kafka Channel by running the command:
-
-        ```bash
-        curl -L "{{ artifact(org="knative-sandbox",repo="eventing-kafka",file="channel-consolidated.yaml")}}" \
-          | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
-          | kubectl apply -f -
-        ```
-
-        !!! tip
-            To learn more, try the [Apache Kafka Channel sample](../../../eventing/samples/kafka/channel/README.md).
+    1. Install [Strimzi](https://strimzi.io/quickstarts/).
+    1. Install the Apache Kafka Channel for Knative from the [`knative-sandbox` repository](https://github.com/knative-sandbox/eventing-kafka).
 
 === "Google Cloud Pub/Sub Channel"
 
@@ -102,7 +92,7 @@ Follow the procedure for the Channel of your choice:
 
 ## Optional: Install a Broker layer:
 
-The tabs below expand to show instructions for installing the Broker layer.
+The following tabs expand to show instructions for installing the Broker layer.
 Follow the procedure for the Broker of your choice:
 
 <!-- This indentation is important for things to render properly. -->
@@ -206,7 +196,7 @@ Follow the procedure for the Broker of your choice:
 
 ## Install optional Eventing extensions
 
-The tabs below expand to show instructions for installing each Eventing extension.
+The following tabs expand to show instructions for installing each Eventing extension.
 <!-- This indentation is important for things to render properly. -->
 
 === "Apache Kafka Sink"

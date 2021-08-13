@@ -10,26 +10,28 @@ aliases:
 # Reconciler Implementation and Design
 
 ## Reconciler Functionality
+
 General steps the reconciliation process needs to cover:
-1. Update the `ObservedGeneration` and initialize the `Status` conditions (as defined in `samplesource_lifecycle.go` and `samplesource_types.go`)
-```go
-src.Status.InitializeConditions()
-src.Status.ObservedGeneration = src.Generation
-```
-2. Create/reconcile the Receive Adapter (detailed below)
-3. If successful, update the `Status` and `MarkDeployed`
-```go
-src.Status.PropagateDeploymentAvailability(ra)
-```
-4. Create/reconcile the `SinkBinding` for the Receive Adapter targeting the `Sink` (detailed below)
-5. MarkSink with the result
-```go
-src.Status.MarkSink(sb.Status.SinkURI)
-```
-6. Return a new reconciler event stating that the process is done
-```go
-return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SampleSourceReconciled", "SampleSource reconciled: \"%s/%s\"", namespace, name)
-```
+
+1. Update the `ObservedGeneration` and initialize the `Status` conditions as defined in `samplesource_lifecycle.go` and `samplesource_types.go`:
+    ```go
+    src.Status.InitializeConditions()
+    src.Status.ObservedGeneration = src.Generation
+    ```
+1. Follow the later [Reconcile/Create the Receive Adapter](#reconcilecreate-the-receive-adapter) procedure.
+1. If successful, update the `Status` and `MarkDeployed`:
+    ```go
+    src.Status.PropagateDeploymentAvailability(ra)
+    ```
+1. Follow the later [Reconcile/Create the SinkBinding](#reconcilecreate-the-sinkbinding) procedure for the receive adapter targeting the sink.
+1. `MarkSink` with the result:
+    ```go
+    src.Status.MarkSink(sb.Status.SinkURI)
+    ```
+1. Return a new reconciler event stating that the process is done:
+    ```go
+    return pkgreconciler.NewEvent(corev1.EventTypeNormal, "SampleSourceReconciled", "SampleSource reconciled: \"%s/%s\"", namespace, name)
+    ```
 
 ## Reconcile/Create The Receive Adapter
 As part of the source reconciliation, we have to create and deploy
@@ -76,7 +78,7 @@ return pkgreconciler.NewEvent(corev1.EventTypeNormal, "DeploymentUpdated", "upda
 ## Reconcile/Create The SinkBinding
 Instead of directly giving the details of the sink to the receive adapter, use a `SinkBinding` to bind the receive adapter with the sink.
 
-Steps here are almost the same with the `Deployment` reconciliation above, but it is for another resource, `SinkBinding`.
+Steps here are almost the same with the `Deployment` reconciliation mentioned earlier, but it is for another resource, `SinkBinding`.
 
 1. Create a `Reference` for the receive adapter deployment. This deployment will be `SinkBinding`'s source:
 ```go

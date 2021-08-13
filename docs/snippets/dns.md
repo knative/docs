@@ -2,7 +2,7 @@
 
 You can configure DNS to prevent the need to run curl commands with a host header.
 
-The tabs below expand to show instructions for configuring DNS.
+The following tabs expand to show instructions for configuring DNS.
 Follow the procedure for the DNS of your choice:
 
 === "Magic DNS (sslip.io)"

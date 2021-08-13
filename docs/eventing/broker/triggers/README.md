@@ -18,7 +18,7 @@ The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pk
 The following trigger receives all the events from the `default` broker and
 delivers them to the Knative Serving service `my-service`:
 
-1. Create a YAML file using the example below:
+1. Create a YAML file using the following example:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
@@ -45,7 +45,7 @@ delivers them to the Knative Serving service `my-service`:
 The following trigger receives all the events from the `default` broker and
 delivers them to the custom path `/my-custom-path` for the Kubernetes service `my-service`:
 
-1. Create a YAML file using the example below:
+1. Create a YAML file using the following example:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
@@ -82,7 +82,7 @@ This example filters events from the `default` broker that are of type
 `dev.knative.foo.bar` and have the extension `myextension` with the value
 `my-extension-value`.
 
-1. Create a YAML file using the example below:
+1. Create a YAML file using the following example:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1

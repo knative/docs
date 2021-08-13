@@ -33,7 +33,7 @@ Knative supports the following Auto TLS modes:
       - In this mode, a single Certificate will be provisioned per namespace and is reused across the Knative Services within the same namespace.
 
     - **Provision Certificate per Knative Service is supported when using DNS-01 challenge mode.**
-      - This is the recommended mode for better certificate islation between Knative Services.
+      - This is the recommended mode for better certificate isolation between Knative Services.
       - In this mode, a Certificate will be provisioned for each Knative Service.
       - The TLS effective time is longer as it needs Certificate provision for each Knative Service creation.
 
@@ -76,7 +76,7 @@ and which DNS provider validates those requests.
               name: letsencrypt-dns-issuer
             solvers:
             - dns01:
-                clouddns:
+                cloudDNS:
                   # Set this to your GCP project-id
                   project: $PROJECT_ID
                   # Set this to the secret that we publish our service account key
@@ -90,7 +90,7 @@ and which DNS provider validates those requests.
 
         To apply the ClusterIssuer for HTTP01 challenge:
 
-        1. Create a YAML file using the template below:
+        1. Create a YAML file using the following template:
 
             ```yaml
             apiVersion: cert-manager.io/v1

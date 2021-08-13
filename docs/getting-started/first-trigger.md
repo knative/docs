@@ -40,7 +40,7 @@ trigger.eventing.knative.dev/cloudevents-player created
 ??? question "What CloudEvents is my Trigger listening for?"
     Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
 
-    An example on how to use Filters is provided below.
+    The following example shows how to use Filters.
 
 Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 

@@ -6,7 +6,7 @@ They provide helpful context to readers. They do not include procedures.
 
 ## Template
 
-The template below includes the standard sections that should appear in conceptual topics, including a topic introduction sentence, an overview, and placeholders for additional sections and subsections.
+The following template includes the standard sections that should appear in conceptual topics, including a topic introduction sentence, an overview, and placeholders for additional sections and subsections.
 Copy and paste the markdown from the template to use it in your topic.
 
 ```
@@ -41,7 +41,7 @@ Copy and paste the markdown to use it in your topic.
 
 ### Table
 
-Introduce the table with a sentence. For example, “The table below details which operations must be made available to a developer accessing a Knative Route using a minimal profile.”
+Introduce the table with a sentence. For example, “The following table lists which operations must be made available to a developer accessing a Knative Route using a minimal profile.”
 
 #### Markdown Table Template
 

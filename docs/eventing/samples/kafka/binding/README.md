@@ -13,7 +13,7 @@ enables easy bootstrapping of a Kafka client.
 
 ## Create a Job that uses KafkaBinding
 
-In the below example a Kubernetes Job will be using the KafkaBinding to produce
+In the following example a Kubernetes Job will be using the KafkaBinding to produce
 messages on a Kafka Topic, which will be received by the Event Display service
 via Kafka Source
 
@@ -68,8 +68,7 @@ via Kafka Source
 
 1. (Optional) Deploy the Event Display Service via kn cli:
 
-   Alternatively, you can create the knative service using the `kn` cli like
-   below
+   Alternatively, you can create the knative service by running the following command in the `kn` CLI.
 
    ```
    kn service create event-display --image=gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
@@ -224,7 +223,7 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
 ## Connecting to a TLS enabled Kafka broker
 
 The KafkaBinding supports TLS and SASL authentication methods. For injecting TLS
-authentication, please have the below files
+authentication, you must have the following files:
 
 - CA Certificate
 - Client Certificate and Key

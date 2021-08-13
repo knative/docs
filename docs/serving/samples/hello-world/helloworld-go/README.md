@@ -211,7 +211,7 @@ You will need:
 ## Verifying
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    ```bash
    curl http://helloworld-go.default.1.2.3.4.sslip.io

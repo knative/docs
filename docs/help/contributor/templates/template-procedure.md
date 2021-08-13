@@ -6,7 +6,7 @@ to perform a task as well as some context about the task.
 
 ## Template
 
-The template below includes the standard sections that should appear in procedural topics, including
+The following template includes the standard sections that should appear in procedural topics, including
 a topic sentence, an overview section, and sections for each task within the procedure.
 Copy and paste the markdown from the template to use it in your topic.
 
@@ -39,7 +39,7 @@ To [task]:
 
 ## Prerequisites
 
-Use one of the formats described below for the Prerequisites section.
+Use one of the following formats for the Prerequisites section.
 
 
 ### Formatting for two or more prerequisites
@@ -110,8 +110,9 @@ Copy and paste the markdown to use it in your topic.
 
 ### “Fill-in-the-Fields” Table
 
-Where the reader must enter many values in, say, a YAML file, use a table within the procedure as
-below:
+Where the reader must enter many values in, for example, a YAML file, use a table within the
+procedure as follows:
+
 Open the YAML file.
 
 ```yaml
@@ -129,7 +130,7 @@ spec:
     Key6: Value6
 ```
 
-Change the relevant values to your needs, using the table below as a guide.
+Change the relevant values to your needs, using the following table as a guide.
 
 | Key   | Value Type     | Description  |
 |-------|----------------|--------------|
@@ -143,7 +144,7 @@ Change the relevant values to your needs, using the table below as a guide.
 
 ### Table
 
-Introduce the table with a sentence. For example, “The table below details which operations must be
+Introduce the table with a sentence. For example, “The following table lists which operations must be
 made available to a developer accessing a Knative Route using a minimal profile.”
 
 

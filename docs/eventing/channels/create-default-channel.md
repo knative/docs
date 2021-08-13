@@ -6,7 +6,7 @@ Channel object.
 To create a Channel:
 
 1. Create a YAML file for the [Channel object](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Channel)
-using the template below:
+using the following template:
 
     ```yaml
     apiVersion: messaging.knative.dev/v1

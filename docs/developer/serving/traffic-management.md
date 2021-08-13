@@ -28,7 +28,7 @@ spec:
 
 When a `tag` attribute is applied to a Route, an address for the specific traffic target is created.
 
-In the above example, you can access the staging target by accessing `staging-<route name>.<namespace>.<domain>`. The targets for `example-service-2` and `example-service-3` can only be accessed using the main route, `<route name>.<namespace>.<domain>`.
+In this example, you can access the staging target by accessing `staging-<route name>.<namespace>.<domain>`. The targets for `example-service-2` and `example-service-3` can only be accessed using the main route, `<route name>.<namespace>.<domain>`.
 
 When a traffic target is tagged, a new Kubernetes Service is created for that Service, so that other Services can access it within the cluster. From the previous example, a new Kubernetes Service called `staging-<route name>` will be created in the same namespace. This Service has the ability to override the visibility of this specific Route by applying the label `networking.knative.dev/visibility` with value `cluster-local`. See the documentation on [private services](../../developer/serving/services/private-services) for more information about how to restrict visibility on specific Routes.
 

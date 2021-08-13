@@ -87,7 +87,7 @@ func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl 
 ```
 
 Sample source's [`update-codegen.sh`](https://github.com/knative-sandbox/sample-source/blob/main/hack/update-codegen.sh) have the configuration
-to have the required things above generated and injected:
+to have the required things mentioned earlier generated and injected:
 ```bash
 # Generation
 ${CODEGEN_PKG}/generate-groups.sh "deepcopy,client,informer,lister" \

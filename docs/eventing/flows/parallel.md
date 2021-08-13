@@ -26,7 +26,7 @@ Parallel has three parts for the Spec:
       executed. Both `filter` and `subscriber` must be `Addressable`.
    1. the event returned by the `subscriber` is sent to the branch `reply`
       object. When the `reply` is empty, the event is sent to the `spec.reply`
-      object (see below).
+      object.
 1. (optional) `channelTemplate` defines the Template which will be used to
    create `Channel`s.
 1. (optional) `reply` defines where the result of each branch is sent to when

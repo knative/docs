@@ -34,11 +34,13 @@ if necessary.
 
 ### Putting your docs in the right place
 
-Generally, the `knative/docs` repo contains Knative specific user-facing content
-and blog content.
+Generally, the `knative/docs` repo contains Knative-specific user-facing content and blog content.
 
-Contributor-focused content belongs in one of the other Knative code
-repositories (`knative/serving`, `knative/eventing`, etc.).
+When you add a new document to the /docs directory, the navigation menu updates automatically.
+For more information, see the
+[MkDocs documentation](https://www.mkdocs.org/user-guide/writing-your-docs/#configure-pages-and-navigation).
+
+Contributor-focused content belongs in one of the other Knative code repositories (`knative/serving`, `knative/eventing`, etc).
 
 
 ### Docs versioning

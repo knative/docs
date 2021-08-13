@@ -7,7 +7,7 @@ This guide provides reference information about the core Knative Serving YAML fi
 
 For information about installing these files, see [Installing Knative Serving using YAML files](../install-serving-with-yaml).
 
-The table below describes the installation files included in Knative Serving:
+The following table describes the installation files included in Knative Serving:
 
 | File name | Description | Dependencies|
 | --- | --- | --- |

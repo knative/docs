@@ -34,7 +34,7 @@ instructions. If you're familiar with Istio and know what kind of installation
 you want, read through the options and choose the installation that suits your
 needs.
 
-You can easily customize your Istio installation with `istioctl`. The below sections
+You can easily customize your Istio installation with `istioctl`. The following sections
 cover a few useful Istio configurations and their benefits.
 
 ### Choosing an Istio installation
@@ -57,7 +57,7 @@ Enter the following command to install Istio:
 
 To install Istio without sidecar injection:
 
-1. Create a `istio-minimal-operator.yaml` file using the template below:
+1. Create a `istio-minimal-operator.yaml` file using the following template:
 
     ```yaml
     apiVersion: install.istio.io/v1alpha1
@@ -99,7 +99,7 @@ injection][2]. The Istio service mesh provides a few benefits:
 - Allows you to use the [Istio authorization policy][4], controlling the access
   to each Knative service based on Istio service roles.
 
-To automatic sidecar injection, set `autoInject: enabled` in addition to above
+For automatic sidecar injection, set `autoInject: enabled` in addition to the earlier
 operator configuration.
 
 ```
@@ -121,7 +121,7 @@ preparations for mTLS enabled environment.
     ```
 
 1. Set `PeerAuthentication` to `PERMISSIVE` on knative-serving system namespace
-by creating a YAML file using the template below:
+by creating a YAML file using the following template:
 
     ```bash
     apiVersion: "security.istio.io/v1beta1"
@@ -174,7 +174,7 @@ Replace the label selector with the label of your service:
 istio: knative-local-gateway
 ```
 
-For the service above, it should be updated to:
+For the service mentioned earlier, it should be updated to:
 
 ```
 custom: custom-local-gateway
@@ -218,7 +218,7 @@ You can edit this by using the following command:
 kubectl edit cm config-domain --namespace knative-serving
 ```
 
-Given the external IP above, change the content to:
+Given this external IP, change the content to:
 
 ```
 apiVersion: v1

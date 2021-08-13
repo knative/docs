@@ -28,9 +28,15 @@ See [Installing `kn`](install-kn/).
 
 ## Connecting CLI tools to your cluster
 
-After you have installed `kubectl` or `kn`, these tools will search for the `kubeconfig` file of your cluster in the default location of `$HOME/.kube/config`, and will use this file to connect to the cluster.
+After you have installed `kubectl` or `kn`, these tools will search for the `kubeconfig` file of your cluster in the default location of `$HOME/.kube/config`, and will use this file to connect to the cluster. A `kubeconfig` file is usually automatically created when you create a Kubernetes cluster.
 
-A `kubeconfig` file is usually automatically created when you create a Kubernetes cluster.
+You can also set the environment variable `$KUBECONFIG`, and point it to the kubeconfig file.
+
+Using the `kn` CLI, you can specify the following options to connect to the cluster:
+
+- `--kubeconfig`: use this option to point to the `kubeconfig` file. This is equivalent to setting the `$KUBECONFIG` environment variable.
+- `--context`: use this option to specify the name of a context from the existing `kubeconfig` file. Use one of the contexts from the output of `kubectl config get-contexts`.
+
 
 You can also specify a config file in the following ways:
 

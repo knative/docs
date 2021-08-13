@@ -31,7 +31,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 
 ## Building
 
-1. Create a new file named `script.sh` and paste the script below. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
+1. Create a new file named `script.sh` and paste the following script. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
 
   ```bash
   #!/bin/sh
@@ -48,7 +48,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
   # Like printing the date, checking CGI environment variables, ...
   ```
 
-1. Create a new file named `Dockerfile` and copy the code block below into it.
+1. Create a new file named `Dockerfile` and copy the following code block into it.
 
    ```docker
    # Busybox image that contains the simple 'httpd'
@@ -194,7 +194,7 @@ folder) you're ready to build and deploy the sample app.
 
 
 1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    Example:
 

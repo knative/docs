@@ -11,7 +11,28 @@
 
         You can install `kn` by downloading the executable binary for your system and placing it in the system path.
 
-        A link to the latest stable binary release is available on the <a href="https://github.com/knative/client/releases" target="_blank">`kn` release page</a>.
+        1. Download the binary for your system from the <a href="https://github.com/knative/client/releases" target="_blank">`kn` release page</a>.
+
+        1. Rename the binary to `kn` and make it executable by running the commands:
+
+            ```
+            mv <path-to-binary-file> kn
+            chmod +x kn
+            ```
+
+            Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
+
+        1. Move the executable binary file to a directory on your PATH by running the command:
+
+            ```
+            mv kn /usr/local/bin
+            ```
+
+        1. Verify that the plugin is working by running the command:
+
+            ```
+            kn version
+            ```
 
     === "Using Go"
 

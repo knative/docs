@@ -79,7 +79,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
-1. In your project directory, create a file named `Dockerfile` and copy the code block below into it:
+1. In your project directory, create a file named `Dockerfile` and copy the following code block into it:
 
    ```docker
    # Use the official maven/Java 8 image to create a build artifact: https://hub.docker.com/_/maven
@@ -213,7 +213,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 
 1. Make a request to your app and observe the result. Replace
-   the URL below with the URL returned in the previous command.
+   the following URL with the URL returned in the previous command.
 
    Example:
 

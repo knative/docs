@@ -17,7 +17,7 @@ Apply code formatting only to special-purpose text:
 
 > Specify the language your code is in as part of the code block
 
-> Specify non-language specific code, like CLI commands, with ```bash (see below for formatting).
+> Specify non-language specific code, like CLI commands, with ```bash. See the following examples for formatting.
 
 === ":white_check_mark: Correct"
     ```go
@@ -77,7 +77,7 @@ Apply code formatting only to special-purpose text:
 * It describes what the command does before stating the command.
 * It's as short as possible
 
-> If you must deviate from the standard line, ensure you still meet the above criteria.
+> If you must deviate from the standard line, ensure you still meet these criteria.
 
 === ":white_check_mark: Correct"
     Create the service by running the command:
@@ -105,7 +105,7 @@ Apply code formatting only to special-purpose text:
 
     **Example 3:**
 
-    Run the command below to create a service:
+    Run the following command to create a service:
 
     ```bash
     kn create service <service-name>
@@ -127,7 +127,7 @@ Apply code formatting only to special-purpose text:
 
     - Creating or updating a resource:
 
-        1. Create a YAML file using the template below:
+        1. Create a YAML file using the following template:
 
             ```yaml
             # YAML FILE CONTENTS
@@ -171,7 +171,6 @@ Apply code formatting only to special-purpose text:
 - Hyphens between words
 - Explanation for each variable below code block
 - Explanation format is “Where... `<service-name>` is…"
-- If there are multiple variables, see below.
 
 ### Single variable
 === ":white_check_mark: Correct"

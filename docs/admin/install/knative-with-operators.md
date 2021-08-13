@@ -97,7 +97,7 @@ kubectl logs -f deploy/knative-operator
 
         The field `spec.manifests` is used to specify one or multiple URL links of Knative Serving component. Do not forget to
         add the valid URL of the Knative network ingress plugin. Knative Serving component is still tightly-coupled with a network
-        ingress plugin in the operator. As in the above example, you can use `net-istio`. The ordering of the URLs is critical.
+        ingress plugin in the operator. As in the example mentioned earlier, you can use `net-istio`. The ordering of the URLs is critical.
         Put the manifest you want to apply first on the top.
 
     === "Install Customized Knative Serving"
@@ -114,7 +114,7 @@ kubectl logs -f deploy/knative-operator
         1. You can use the overwrite mode to customize all the Knative Serving manifests. For example, the version of the customized
         Knative Serving is `$spec_version`, and it is available at `https://my-serving/serving.yaml`. You choose `net-istio`
         as the ingress plugin, which is available at `https://my-net-istio/net-istio.yaml`. You can create the content of Serving
-        CR as below to install your Knative Serving and the istio ingress:
+        CR as in the following example to install your Knative Serving and the istio ingress:
         ```
         apiVersion: v1
         kind: Namespace
@@ -140,7 +140,7 @@ kubectl logs -f deploy/knative-operator
 
         1. You can use the append mode to add your customized manifests into the default manifests. For example, you only customize
         a few resources, and make them available at `https://my-serving/serving-custom.yaml`. You still need to install the default
-        Knative Serving. In this case, you can create the content of Serving CR as below:
+        Knative Serving. In this case, you can create the content of Serving CR as follows:
         ```
         apiVersion: v1
         kind: Namespace
@@ -195,7 +195,7 @@ knative-serving   <version number>    True
 ??? "Installing the Knative Serving component with different network layers"
 
     Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
-    layer, if the ingress is not specified in the Knative Serving CR. Click on each tab below to see how you can configure
+    layer, if the ingress is not specified in the Knative Serving CR. Click on each of the following tabs to see how you can configure
     Knative Serving with different ingresses:
 
     === "Ambassador"
@@ -225,7 +225,7 @@ knative-serving   <version number>    True
           kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
           ```
 
-        1. To configure Knative Serving to use Ambassador, copy the YAML below into a file:
+        1. To configure Knative Serving to use Ambassador, copy the following YAML into a file:
           ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
@@ -250,7 +250,7 @@ knative-serving   <version number>    True
           kubectl --namespace ambassador get service ambassador
           ```
 
-          Save this for configuring DNS below.
+          Save this for configuring DNS later.
 
     === "Contour"
 
@@ -261,7 +261,7 @@ knative-serving   <version number>    True
           kubectl apply --filename {{artifact(repo="net-contour",file="contour.yaml")}}
           ```
 
-        1. To configure Knative Serving to use Contour, copy the YAML below into a file:
+        1. To configure Knative Serving to use Contour, copy the following YAML into a file:
           ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
@@ -288,13 +288,13 @@ knative-serving   <version number>    True
           kubectl --namespace contour-external get service envoy
           ```
 
-          Save this for configuring DNS below.
+          Save this for configuring DNS later.
 
     === "Kourier"
 
         The following commands install Kourier and enable its Knative integration.
 
-        1. To configure Knative Serving to use Kourier, copy the YAML below into a file:
+        1. To configure Knative Serving to use Kourier, copy the following YAML into a file:
           ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
@@ -322,7 +322,7 @@ knative-serving   <version number>    True
           kubectl --namespace knative-serving get service kourier
           ```
 
-          Save this for configuring DNS below.
+          Save this for configuring DNS later.
 
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
@@ -397,7 +397,7 @@ knative-serving   <version number>    True
 
         1. You can use the overwrite mode to customize all the Knative Eventing manifests. For example, the version of the customized
           Knative Eventing is `$spec_version`, and it is available at `https://my-eventing/eventing.yaml`. You can create the
-          content of Eventing CR as below to install your Knative Eventing:
+          content of Eventing CR to install your Knative Eventing as follows:
 
         ```
         apiVersion: v1
@@ -423,7 +423,7 @@ knative-serving   <version number>    True
 
         1. You can use the append mode to add your customized manifests into the default manifests. For example, you only customize
           a few resources, and make them available at `https://my-eventing/eventing-custom.yaml`. You still need to install the default
-          Knative eventing. In this case, you can create the content of Eventing CR as below:
+          Knative eventing. In this case, you can create the content of Eventing CR as follows:
 
         ```
         apiVersion: v1
@@ -483,12 +483,12 @@ knative-eventing   <version number>    True
 
 ??? "Installing the Knative Eventing component with different eventing sources"
 
-    Knative Operator can configure Knative Eventing component with different eventing sources. Click on each tab below to
+    Knative Operator can configure Knative Eventing component with different eventing sources. Click on each of the following tabs to
     see how you can configure Knative Eventing with different eventing sources:
 
     === "Ceph"
 
-        To configure Knative Eventing to install Ceph as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install Ceph as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -505,7 +505,7 @@ knative-eventing   <version number>    True
 
     === "Apache CouchDB"
 
-        To configure Knative Eventing to install Apache CouchDB as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install Apache CouchDB as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -522,7 +522,7 @@ knative-eventing   <version number>    True
 
     === "GitHub"
 
-        To configure Knative Eventing to install GitHub as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install GitHub as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -539,7 +539,7 @@ knative-eventing   <version number>    True
 
     === "GitLab"
 
-        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -556,7 +556,7 @@ knative-eventing   <version number>    True
 
     === "Apache Kafka"
 
-        To configure Knative Eventing to install GitLab as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install Kafka as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -573,7 +573,7 @@ knative-eventing   <version number>    True
 
     === "NATS Streaming"
 
-        To configure Knative Eventing to install NATS Streaming as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install NATS Streaming as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -590,7 +590,7 @@ knative-eventing   <version number>    True
 
     === "Prometheus"
 
-        To configure Knative Eventing to install Prometheus as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install Prometheus as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -607,7 +607,7 @@ knative-eventing   <version number>    True
 
     === "RabbitMQ"
 
-        To configure Knative Eventing to install RabbitMQ as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install RabbitMQ as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1
@@ -624,7 +624,7 @@ knative-eventing   <version number>    True
 
     === "Redis"
 
-        To configure Knative Eventing to install Redis as the eventing source, apply the content of the Eventing CR as below:
+        To configure Knative Eventing to install Redis as the eventing source, apply the content of the Eventing CR as follows:
           ```bash
           cat <<-EOF | kubectl apply -f -
           apiVersion: operator.knative.dev/v1alpha1

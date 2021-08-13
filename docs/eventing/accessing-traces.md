@@ -109,7 +109,7 @@ For this example, assume the following details:
       the Kubernetes Service `logger`.
 - An event is sent to the Broker with the type `transformer`, by the Pod named `sender`.
 
-Given the above, the expected path and behavior of an event is as follows:
+Given this scenario, the expected path and behavior of an event is as follows:
 
 1. `sender` Pod sends the request to the Broker.
 1. Go to the Broker's ingress Pod.

@@ -137,7 +137,7 @@ Some images are defined by using the environment variable in Knative Eventing. T
 This example shows how you can define custom image links that can be defined in the KnativeEventing CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
-In the example below:
+In the following example:
 
 - The custom tag `latest` is used for all images.
 - All image links are accessible without using secrets.

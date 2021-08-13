@@ -127,7 +127,7 @@ kubectl --namespace default apply --filename github-source.yaml
 Verify the GitHub webhook was created by looking at the list of
 webhooks under the Settings tab in your GitHub repository. A hook
 should be listed that points to your Knative cluster with a green
-check mark to the left of the hook URL, as shown below.
+check mark to the left of the hook URL, as shown in the following image:
 
 ![GitHub Webhook](webhook_created.png "GitHub webhook screenshot")
 

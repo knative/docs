@@ -33,7 +33,7 @@ To see event types in the registry that are available to subscribe to, enter the
 kubectl get eventtypes -n <namespace>
 ```
 
-Below, we show an example output of executing the above command using the
+The following example shows the output of executing the `kubectl get eventtypes` command using the
 `default` namespace in a testing cluster. We will address the question of how
 this registry was populated in a later section.
 
@@ -123,7 +123,7 @@ Now that you know what events can be consumed from the Brokers' event meshes,
 you can create Triggers to subscribe to particular events.
 
 Here are a few example Triggers that subscribe to events using exact matching on
-`type` and/or `source`, based on the above registry output:
+`type` and/or `source`, based on the registry output mentioned earlier:
 
 1. Subscribes to GitHub _pushes_ from any source.
 
@@ -145,7 +145,7 @@ Here are a few example Triggers that subscribe to events using exact matching on
          name: push-service
    ```
 
-   As per the registry output above, only two sources exist for that particular
+   As per the registry output mentioned, only two sources exist for that particular
    type of event (_knative's eventing and serving_ repositories). If later on
    new sources are registered for GitHub pushes, this trigger will be able to
    consume them.
@@ -245,8 +245,8 @@ the next topic: How do we actually populate the registry in the first place?
   - AwsSqsSource
 
   Let's look at an example, in particular, the KafkaSource sample we used to
-  populate the registry in our testing cluster. Below is what the yaml looks
-  like.
+  populate the registry in our testing cluster. This is what the YAML looks
+  like:
 
   ```yaml
   apiVersion: sources.knative.dev/v1beta1
@@ -270,7 +270,7 @@ the next topic: How do we actually populate the registry in the first place?
   KafkaSource, please refer to the
   [KafKaSource sample](../samples/kafka/).
 
-  For this discussion, the relevant information from the yaml above are the
+  For this discussion, the relevant information from the YAML mentioned are the
   `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We
   currently only support automatic creation of EventTypes for Sources instances
   that point to Brokers. Regarding `topics`, this is what we use to generate the
@@ -283,7 +283,8 @@ the next topic: How do we actually populate the registry in the first place?
 
 ## Next steps
 
-1. [Installing Knative](../../getting-started/install-knative-quickstart/).
+1. [Installing Knative](../../admin/install/).
+
 1. [Knative code samples](../samples/) is a useful resource to better understand
    some of the Event Sources (remember to point them to a Broker if you want
    automatic registration of EventTypes in the registry).
