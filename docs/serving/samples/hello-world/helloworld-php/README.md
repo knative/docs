@@ -165,7 +165,7 @@ folder) you're ready to build and deploy the sample app.
 2. To find the URL for your service, use
 
 
-=== "kubectl"
+    === "kubectl"
 
        ```
        kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,URL:.status.url
