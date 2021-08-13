@@ -19,7 +19,6 @@ kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )
 
 ## Verify your installation
 
-Verify your installation:
 
 1. Because the operator is installed to the `default` namespace, ensure you set the current namespace to `default` by running the command:
 
