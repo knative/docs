@@ -136,7 +136,6 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 | -- | -- | -- |
 | [KafkaSink](kafka-sink.md)  | Knative  | Send events to a Kafka topic |
 | [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |
-| [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |
 | [Golang](https://github.com/triggermesh/bringyourown/tree/master/targets/go)  | Triggermesh  | A simple Target written in Go |
 | [Python](https://github.com/triggermesh/bringyourown/tree/master/targets/python)  | Triggermesh  |  A simple Target written in Python |
 
