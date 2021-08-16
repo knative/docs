@@ -1,10 +1,3 @@
----
-title: "Multiple Cases"
-linkTitle: "Multiple Cases"
-weight: 20
-type: "docs"
----
-
 # Multiple Cases
 
 We are going to create a Parallel with two branches:

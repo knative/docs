@@ -1,10 +1,3 @@
----
-title: "Installing cert-manager for TLS certificates"
-linkTitle: "Installing cert-manager"
-weight: 62
-type: "docs"
----
-
 # Installing cert-manager for TLS certificates
 
 Install the [Cert-Manager](https://github.com/jetstack/cert-manager) tool to

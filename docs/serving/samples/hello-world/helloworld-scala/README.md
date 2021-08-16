@@ -1,10 +1,3 @@
----
-title: "Hello World - Scala using Akka HTTP"
-linkTitle: "Scala"
-weight: 1
-type: "docs"
----
-
 # Hello World - Scala using Akka HTTP
 
 A microservice which demonstrates how to get set up and running with Knative

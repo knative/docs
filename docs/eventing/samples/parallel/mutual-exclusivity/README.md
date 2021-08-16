@@ -1,10 +1,3 @@
----
-title: "Mutual Exclusive Cases"
-linkTitle: "Mutual Exclusivity"
-weight: 20
-type: "docs"
----
-
 # Mutual Exclusive Cases
 
 In this example, we are going to see how we can create a Parallel with mutually

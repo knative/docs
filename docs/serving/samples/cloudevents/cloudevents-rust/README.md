@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Rust"
-linkTitle: "Rust"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Rust
 
 A simple web app written in Rust using [Actix web](https://github.com/actix/actix-web)
@@ -166,6 +159,3 @@ To remove the sample app from your cluster, delete the service.
     ```bash
     kn service delete cloudevents-rust
     ```
-
-
-

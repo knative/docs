@@ -1,10 +1,3 @@
----
-title: "Creating a broker"
-weight: 01
-type: "docs"
-showlandingtoc: "false"
----
-
 # Creating a broker
 
 Once you have installed Knative Eventing, you can create an instance of the multi-tenant (MT) channel-based broker that is provided by default. The default backing channel type for an MT channel-based broker is InMemoryChannel.

@@ -1,10 +1,3 @@
----
-title: "Knative code samples"
-linkTitle: "Code samples"
-weight: 90
-type: "docs"
----
-
 # Knative code samples
 
 Find and use Knative code samples to help you get up and running with common use

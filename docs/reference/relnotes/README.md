@@ -1,10 +1,4 @@
----
-title: "Knative Release Notes"
-linkTitle: "Release notes"
-weight: 10
-type: "docs"
-showlandingtoc: "false"
----
+# Knative release notes
 
 For details about the Knative releases, see the following pages:
 

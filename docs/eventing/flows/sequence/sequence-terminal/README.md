@@ -1,12 +1,3 @@
----
-title: "Sequence terminal"
-linkTitle: "Create additional events"
-weight: 20
-type: "docs"
-aliases:
-   - /docs/eventing/samples/sequence/sequence-terminal
----
-
 # Sequence terminal
 
 We are going to create the following logical configuration. We create a

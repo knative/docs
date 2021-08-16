@@ -1,10 +1,3 @@
----
-title: "Container Source Example"
-linkTitle: "Container source"
-weight: 10
-type: "docs"
----
-
 # Container Source Example
 
 ContainerSource will start a container image which will generate events under

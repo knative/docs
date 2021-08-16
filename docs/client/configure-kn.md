@@ -1,9 +1,3 @@
----
-title: "Customizing kn"
-weight: 03
-type: "docs"
----
-
 # Customizing kn
 
 You can customize your `kn` CLI setup by creating a `config.yaml` configuration file. You can provide this configuration by using the `--config` flag, otherwise the configuration is picked up from a default location. The default configuration location conforms to the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), and is different for Unix systems and Windows systems.

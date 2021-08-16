@@ -1,12 +1,3 @@
----
-title: "Using Sequence with Broker and Trigger"
-linkTitle: "Using with Broker and Trigger"
-weight: 20
-type: "docs"
-aliases:
-   - /docs/eventing/samples/sequence/sequence-with-broker-trigger
----
-
 # Using Sequence with Broker and Trigger
 
 We are going to create the following logical configuration. We create a

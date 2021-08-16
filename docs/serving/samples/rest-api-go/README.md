@@ -1,10 +1,3 @@
----
-title: "Creating a RESTful Service - Go"
-linkTitle: "RESTful service - Go"
-weight: 1
-type: "docs"
----
-
 # Creating a RESTful Service - Go
 
 This "stock ticker" sample demonstrates how to create and run a simple RESTful

@@ -1,10 +1,3 @@
----
-title: "Hello world - .NET Core"
-linkTitle: ".NET"
-weight: 1
-type: "docs"
----
-
 # Hello world - .NET Core
 
 A simple web app written in C# using .NET Core 3.1 that you can use for testing.

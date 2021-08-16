@@ -1,10 +1,3 @@
----
-title: "Targets"
-linkTitle: "Targets"
-weight: 04
-type: "docs"
----
-
 # Targets
 
 Configuring a target provide the Autoscaler with a value that it tries to maintain for the configured metric for a revision.
@@ -56,6 +49,3 @@ The `target` annotation, used to configure per-revision targets,  is _metric agn
         autoscaler:
           container-concurrency-target-default: "200"
     ```
-
-
-

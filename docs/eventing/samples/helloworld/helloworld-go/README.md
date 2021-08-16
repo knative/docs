@@ -1,10 +1,3 @@
----
-title: "Hello World - Golang"
-linkTitle: "GO"
-weight: 20
-type: "docs"
----
-
 # Hello World - Golang
 
 A simple web app written in Go that you can use to test knative eventing. It

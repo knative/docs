@@ -1,10 +1,3 @@
----
-title: "Knative Serving"
-weight: 05
-type: "docs"
-showlandingtoc: "false"
----
-
 # Knative Serving
 
 Knative Serving builds on Kubernetes and Istio to support deploying and serving

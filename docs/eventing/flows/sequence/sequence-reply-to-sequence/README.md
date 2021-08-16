@@ -1,12 +1,3 @@
----
-title: "Sequence wired to another Sequence"
-linkTitle: "Using Sequences in series"
-weight: 20
-type: "docs"
-aliases:
-   - /docs/eventing/samples/sequence/sequence-reply-to-sequence
----
-
 # Sequence wired to another Sequence
 
 We are going to create the following logical configuration. We create a

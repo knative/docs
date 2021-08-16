@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Java and Spring"
-linkTitle: "Java and Spring"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Java and Spring
 
 A simple web app written in Java using Spring Cloud Function that can receive CloudEvents. It
@@ -150,6 +143,3 @@ To remove the sample app from your cluster, delete the service:
     ```bash
     kn service delete cloudevents-spring
     ```
-
-
-

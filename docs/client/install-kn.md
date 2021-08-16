@@ -1,11 +1,3 @@
----
-title: "Installing kn"
-weight: 02
-type: "docs"
-aliases:
-  - /docs/install/install-kn
----
-
 # Installing kn
 
 This guide provides details about how you can install the Knative `kn` CLI.
