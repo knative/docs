@@ -1,10 +1,3 @@
----
-title: "Debugging Knative Eventing"
-linkTitle: "Debugging"
-weight: 80
-type: "docs"
----
-
 # Debugging Knative Eventing
 
 This is an evolving document on how to debug a non-working Knative Eventing
@@ -373,11 +366,5 @@ However if we see something like:
 Then we know there was a problem posting to
 `http://svc.knative-debug.svc.cluster.local/`.
 
-TODO Finish this section. Especially after the Channel Dispatcher emits K8s
-events about failures.
-
-#### `fn`
-
-TODO Fill in this section.
-
-# TODO Finish the guide.
+<!--TODO Finish this section. Especially after the Channel Dispatcher emits K8s
+events about failures.-->

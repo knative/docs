@@ -144,7 +144,6 @@ nav:
       - Code samples:
         - Overview: serving/samples/README.md
         - Cloud Events apps:
-          - Overview: serving/samples/cloudevents/README.md
           - .NET: serving/samples/cloudevents/cloudevents-dotnet/README.md
           - Go: serving/samples/cloudevents/cloudevents-go/README.md
           - Node.js: serving/samples/cloudevents/cloudevents-nodejs/README.md
@@ -154,7 +153,6 @@ nav:
         - GitHub Webhook - Go: serving/samples/gitwebhook-go/README.md
         - gRPC Server - Go: serving/samples/grpc-ping-go/README.md
         - Hello world apps:
-          - Overview: serving/samples/hello-world/README.md
           - .NET: serving/samples/hello-world/helloworld-csharp/README.md
           - Go: serving/samples/hello-world/helloworld-go/README.md
           - Java (Spark): serving/samples/hello-world/helloworld-java-spark/README.md

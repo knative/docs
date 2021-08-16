@@ -1,12 +1,3 @@
----
-title: "Triggers"
-weight: 02
-type: "docs"
-showlandingtoc: "false"
-aliases:
-  - docs/eventing/triggers
----
-
 # Triggers
 
 A trigger represents a desire to subscribe to events from a specific broker.

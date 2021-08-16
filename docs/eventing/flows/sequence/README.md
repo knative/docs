@@ -1,13 +1,3 @@
----
-title: "Sequence"
-weight: 20
-type: "docs"
-aliases:
-   - /docs/eventing/sequence.md
-   - /docs/eventing/samples/sequence
-showlandingtoc: "false"
----
-
 # Sequence
 
 Sequence CRD provides a way to define an in-order list of functions that will be

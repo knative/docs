@@ -1,10 +1,3 @@
----
-title: "Apache Kafka Binding Example"
-linkTitle: "Binding Example"
-weight: 20
-type: "docs"
----
-
 # Apache Kafka Binding Example
 
 KafkaBinding is responsible for injecting Kafka bootstrap connection information

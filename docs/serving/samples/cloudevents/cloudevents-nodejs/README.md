@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Node.js"
-linkTitle: "Node.js"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Node.js
 
 A simple web app written in Node.js that can receive and send Cloud Events that you
@@ -134,6 +127,3 @@ To remove the sample app from your cluster, delete the service.
     ```bash
     kn service delete cloudevents-nodejs
     ```
-
-
-

@@ -1,9 +1,3 @@
----
-title: "Load balancing"
-weight: 30
-type: "docs"
----
-
 # Load balancing
 
 You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer.

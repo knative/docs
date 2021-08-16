@@ -1,10 +1,3 @@
----
-title: "Knative Eventing - Hello World app"
-linkTitle: "Hello World"
-weight: 10
-type: "docs"
----
-
 # Knative Eventing - Hello World app
 
 Following examples include a simple web app written in the language of your choice that you can

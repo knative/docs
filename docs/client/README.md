@@ -1,13 +1,3 @@
----
-title: "CLI tools"
-weight: 04
-type: "docs"
-showlandingtoc: "false"
-aliases:
-  - /docs/reference/resources
-  - /docs/client/connecting-kn-to-your-cluster
----
-
 # CLI tools
 
 The following CLI tools are supported for use with Knative.

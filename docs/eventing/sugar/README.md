@@ -1,11 +1,3 @@
----
-title: "Knative Eventing Sugar Controller"
-linkTitle: "Sugar Controller"
-weight: 40
-type: "docs"
-showlandingtoc: "true"
----
-
 # Knative Eventing Sugar Controller
 
 Knative Eventing Sugar Controller will react to special labels and annotations

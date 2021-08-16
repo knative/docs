@@ -1,9 +1,3 @@
----
-title: "Event registry"
-weight: 25
-type: "docs"
----
-
 # Event registry
 
 ## Overview

@@ -1,10 +1,3 @@
----
-title: "Hello World - Go"
-linkTitle: "Go"
-weight: 1
-type: "docs"
----
-
 # Hello World - Go
 
 This guide describes the steps required to to create the `helloworld-go` sample app

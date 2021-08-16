@@ -1,10 +1,3 @@
----
-title: "Configuring scale to zero"
-linkTitle: "Configuring scale to zero"
-weight: 20
-type: "docs"
----
-
 # Configuring scale to zero
 
 !!! warning

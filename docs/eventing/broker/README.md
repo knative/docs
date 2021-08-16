@@ -1,12 +1,3 @@
----
-title: "Brokers"
-weight: 60
-type: "docs"
-showlandingtoc: "false"
-aliases:
-  - docs/eventing/broker/alternate
----
-
 # Brokers
 
 Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that define an event mesh for collecting a pool of [CloudEvents](https://cloudevents.io/). Brokers provide a discoverable endpoint, `status.address`, for event ingress, and triggers for event delivery. Event producers can send events to a broker by POSTing the event to the `status.address.url` of the broker.

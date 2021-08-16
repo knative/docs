@@ -1,10 +1,3 @@
----
-title: "gRPC Server - Go"
-#linkTitle: ""
-weight: 1
-type: "docs"
----
-
 # gRPC Server - Go
 
 A [gRPC](https://grpc.io) server written in Go.
@@ -48,8 +41,8 @@ for production containers.
 3. Update the `service.yaml` file in the project to reference the published image from step 1.
 
    Replace `{username}` in `service.yaml` with your Docker Hub user name:
-   
-   
+
+
   ```yaml
   apiVersion: serving.knative.dev/v1
   kind: Service
@@ -64,7 +57,7 @@ for production containers.
           ports:
             - name: h2c
               containerPort: 8080
-  ``` 
+  ```
 
 4. Use `kubectl` to deploy the service.
 
@@ -116,4 +109,3 @@ docker run --rm {username}/grpc-ping-go \
 
 The arguments after the container tag `{username}/grpc-ping-go` are used
 instead of the entrypoint command defined in the Dockerfile `CMD` statement.
-  

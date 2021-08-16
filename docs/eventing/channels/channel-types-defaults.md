@@ -1,6 +1,6 @@
 # Channel types and defaults
-Knative uses two types of Channels:
 
+Knative uses two types of Channels:
 
 * A generic Channel object.
 * Channel implementations that each have their own custom resource definitions (CRDs), such as

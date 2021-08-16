@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Java and Vert.x"
-linkTitle: "Java and Vert.x"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Java and Vert.x
 
 A simple web app written in Java using Vert.x that can receive CloudEvents. It

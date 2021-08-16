@@ -1,10 +1,3 @@
----
-title: "Accessing CloudEvent traces"
-#linkTitle: "OPTIONAL_ALTERNATE_NAV_TITLE"
-weight: 85
-type: "docs"
----
-
 # Accessing CloudEvent traces
 
 Depending on the request tracing tool that you have installed on your Knative

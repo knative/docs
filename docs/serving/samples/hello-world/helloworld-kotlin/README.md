@@ -1,10 +1,3 @@
----
-title: "Hello World - Kotlin"
-linkTitle: "Kotlin"
-weight: 1
-type: "docs"
----
-
 # Hello World - Kotlin
 
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can

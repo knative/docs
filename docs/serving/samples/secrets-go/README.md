@@ -1,10 +1,3 @@
----
-title: "Knative Secrets - Go"
-linkTitle: "Secrets - Go"
-weight: 1
-type: "docs"
----
-
 # Knative Secrets - Go
 
 A simple web app written in Go that you can use for testing. It demonstrates how

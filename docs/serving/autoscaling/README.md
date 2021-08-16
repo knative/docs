@@ -1,12 +1,3 @@
----
-title: "Autoscaling"
-linkTitle: "Autoscaling"
-weight: 20
-type: "docs"
-aliases:
-    - /docs/serving/configuring-autoscaling/
----
-
 # Autoscaling
 
 One of the main features of Knative is automatic scaling of replicas for an application to closely match incoming demand, including scaling applications to zero if no traffic is being received.

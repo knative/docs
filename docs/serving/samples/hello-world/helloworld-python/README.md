@@ -1,10 +1,3 @@
----
-title: "Hello World - Python"
-linkTitle: "Python"
-weight: 1
-type: "docs"
----
-
 # Hello World - Python
 
 This guide describes the steps required to create the `helloworld-python` sample

@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Go"
-linkTitle: "Go"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Go
 
 A simple web app written in Go that can receive and send Cloud Events that you
