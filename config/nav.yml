@@ -101,7 +101,7 @@ nav:
             - Kafka source: developer/eventing/sources/kafka-source/README.md
             - PingSource:
               - Creating a PingSource object: developer/eventing/sources/ping-source/README.md
-              - PingSource reference: developer/eventing/sources/ping-source/reference.md 
+              - PingSource reference: developer/eventing/sources/ping-source/reference.md
             - SinkBinding:
               - Overview: developer/eventing/sources/sinkbinding/README.md
               - Creating a SinkBinding object: developer/eventing/sources/sinkbinding/getting-started.md
