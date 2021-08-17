@@ -1,143 +1,80 @@
----
-title: "PingSource"
-weight: 31
-type: "docs"
-aliases:
-  - /docs/eventing/sources/pingsource
-  - ../cronjob-source
-  - /docs/eventing/samples/ping-source
----
+# Creating a PingSource object
 
-# PingSource
+![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
-![version](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
+This topic describes how to create a PingSource object.
 
 A PingSource is an event source that produces events with a fixed payload on a specified [cron](https://en.wikipedia.org/wiki/Cron) schedule.
 
-The following example shows how you can configure a PingSource as an event source that sends events every minute to a Knative service named `event-display` that is used as a sink.
+The following example shows how you can configure a PingSource as an event source
+that sends events every minute to a Knative service named `event-display` that is used as a sink.
+If you have an existing sink, you can replace the examples with your own values.
 
 ## Before you begin
 
-1. To create a PingSource, you must install [Knative Eventing](../../../../eventing/README.md). The PingSource event source type is enabled by default when you install Knative Eventing.
-1. Optional: You can use either `kubectl` or `kn` commands to create components such as a sink and PingSource. To install `kn`, see [Installing kn](../../../../client/install-kn.md).
-1. Optional: You can use either `kubectl` or `kail` for logging during the verification step in this procedure. For more information about `kail`, see [kail](https://github.com/boz/kail) in GitHub.
+To create a PingSource:
 
-## Procedure
+- You must install [Knative Eventing](../../../../admin/install/eventing/install-eventing-with-yaml.md).
+The PingSource event source type is enabled by default when you install Knative Eventing.
+- You can use either `kubectl` or [`kn`](../../../../client/install-kn.md) commands
+to create components such as a sink and PingSource.
+- You can use either `kubectl` or [`kail`](https://github.com/boz/kail) for logging
+during the verification step in this procedure.
 
-1. Optional: Create a new namespace called `pingsource-example` by entering the following command:
+## Create a PingSource object
 
-    ```bash
-    kubectl create namespace pingsource-example
-    ```
-
-    Creating a namespace for the PingSource example allows you to isolate the components created by this demo, so that it is easier for you to view changes and remove components when you are finished.
-
-1. To verify that the PingSource is working correctly, create an example sink in the
-`pingsource-example` namespace that dumps incoming messages to a log:
-
-    ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: event-display
-    spec:
-      replicas: 1
-      selector:
-        matchLabels: &labels
-          app: event-display
-      template:
-        metadata:
-          labels: *labels
-        spec:
-          containers:
-            - name: event-display
-              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-
-    ---
-
-    kind: Service
-    apiVersion: v1
-    metadata:
-      name: event-display
-    spec:
-      selector:
-        app: event-display
-      ports:
-      - protocol: TCP
-        port: 80
-        targetPort: 8080
-    ```
-
-1. Apply the YAML file by running the command:
+1. Optional: Create a namespace for your PingSource by running the command:
 
     ```bash
-    kubectl apply -f <filename>.yaml
+    kubectl create namespace <namespace>
     ```
-    Where `<filename>` is the name of the file you created in the previous step.
 
-1. Create a PingSource that sends an event containing `{"message": "Hello world!"}` every minute:
+    Where `<namespace>` is the namespace that you want your PingSource to use.
+    For example, `pingsource-example`.
 
-    === "YAML"
+    !!! note
+        Creating a namespace for your PingSource and related components allows
+        you to view changes and events for this workflow more easily, because
+        these are isolated from the other components that might exist in your
+        `default` namespace.<br><br>
+        It also makes removing the source easier, because you can delete the
+        namespace to remove all of the resources.
 
-        1. Copy the following YAML into a file:
+1. Create a sink. If you do not have your own sink, you can use the following example Knative Service that dumps incoming messages to a log:
 
-            ```yaml
-            apiVersion: sources.knative.dev/v1
-            kind: PingSource
-            metadata:
-              name: test-ping-source
-            spec:
-              schedule: "*/1 * * * *"
-              contentType: "application/json"
-              data: '{"message": "Hello world!"}'
-              sink:
-                ref:
-                  apiVersion: v1
-                  kind: Service
-                  name: event-display
-            ```
-
-        1. Apply the YAML file by running the command:
-
-            ```bash
-            kubectl apply -f <filename>.yaml
-            ```
-            Where `<filename>` is the name of the file you created in the previous step.
-
-    === "kn"
-
-        - To create the PingSource, run the command:
-
-            ```bash
-            kn source ping create test-ping-source \
-              --namespace pingsource-example \
-              --schedule "*/1 * * * *" \
-              --data '{"message": "Hello world!"}' \
-              --sink http://event-display.pingsource-example.svc.cluster.local
-            ```
-
-1. Optional: Create a PingSource that sends binary data.
-
-    If you want to send binary data in an event, this cannot be directly serialized in YAML. However, you can use `dataBase64` in place of `data` in the PingSource spec to carry a data payload that is base64 encoded.
-
-    To create a PingSource that uses base64 encoded data:
-
-    1. Create a YAML file using the following template:
+    1. Copy the YAML below into a file:
 
         ```yaml
-        apiVersion: sources.knative.dev/v1
-        kind: PingSource
+        apiVersion: apps/v1
+        kind: Deployment
         metadata:
-          name: test-ping-source-binary
+          name: event-display
         spec:
-          schedule: "*/1 * * * *"
-          contentType: "text/plain"
-          dataBase64: "ZGF0YQ=="
-          sink:
-            ref:
-              apiVersion: v1
-              kind: Service
-              name: event-display
+          replicas: 1
+          selector:
+            matchLabels: &labels
+              app: event-display
+          template:
+            metadata:
+              labels: *labels
+            spec:
+              containers:
+                - name: event-display
+                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+        ---
+
+        kind: Service
+        apiVersion: v1
+        metadata:
+          name: event-display
+        spec:
+          selector:
+            app: event-display
+          ports:
+          - protocol: TCP
+            port: 80
+            targetPort: 8080
         ```
 
     1. Apply the YAML file by running the command:
@@ -147,8 +84,143 @@ The following example shows how you can configure a PingSource as an event sourc
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
-1. View the logs for the `event-display` event consumer by
-entering the following command:
+1. Create the PingSource object.
+
+    !!! note
+        The data you want to send must be represented as text in the PingSource YAML file.
+        Events that send binary data cannot be directly serialized in YAML.
+        However, you can send binary data that is base64 encoded by using
+        `dataBase64` in place of `data` in the PingSource spec.
+
+    Use one of the following options:
+
+    === "kn"
+
+        - To create a PingSource that sends data that can be represented as
+        plain text, such as text, JSON, or XML, run the command:
+
+            ```bash
+            kn source ping create <pingsource-name> \
+              --namespace <namespace> \
+              --schedule "<cron-schedule>" \
+              --data '<data>' \
+              --sink <sink-name>
+            ```
+            Where:
+
+            - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source`.
+            - `<namespace>` is the name of the namespace that you created in step 1 above.
+            - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
+            - `<data>` is the data you want to send. This data must be represented as text, not binary. For example, a JSON object such as `{"message": "Hello world!"}`.
+            - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
+
+            For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_ping_create.md).
+
+    === "YAML"
+
+        - To create a PingSource that sends data that can be represented as plain text,
+        such as text, JSON, or XML:
+
+            1. Create a YAML file using the template below:
+
+                ```yaml
+                apiVersion: sources.knative.dev/v1
+                kind: PingSource
+                metadata:
+                  name: <pingsource-name>
+                spec:
+                  schedule: "<cron-schedule>"
+                  contentType: "<content-type>"
+                  data: '<data>'
+                  sink:
+                    ref:
+                      apiVersion: v1
+                      kind: <sink-kind>
+                      name: <sink-name>
+                ```
+                Where:
+
+                - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source`.
+                - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
+                - `<content-type>` is the media type of the data you want to send, for example, `application/json`.
+                - `<data>` is the data you want to send. This data must be represented as text, not binary. For example, a JSON object such as `{"message": "Hello world!"}`.
+                - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+                - `<sink-name>` is the name of your sink, for example, `event-display`.
+
+                For more information about the fields you can configure for the PingSource object, see [PingSource reference](reference.md).
+
+            1. Apply the YAML file by running the command:
+
+                ```bash
+                kubectl apply -f <filename>.yaml
+                ```
+                Where `<filename>` is the name of the file you created in the previous step.
+
+    === "kn: binary data"
+
+        - To create a PingSource that sends binary data, run the command:
+
+            ```bash
+            kn source ping create <pingsource-name> \
+              --namespace <namespace> \
+              --schedule "<cron-schedule>" \
+              --encoding base64
+              --data '<base64-data>' \
+              --sink <sink-name>
+            ```
+            Where:
+
+            - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source`.
+            - `<namespace>` is the name of the namespace that you created in step 1 above.
+            - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
+            - `<base64-data>` is the base64 encoded binary data that you want to send, for example, `ZGF0YQ==`.
+            - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
+
+            For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_ping_create.md).
+
+    === "YAML: binary data"
+
+        - To create a PingSource that sends binary data:
+
+            1. Create a YAML file using the template below:
+
+                ```yaml
+                apiVersion: sources.knative.dev/v1
+                kind: PingSource
+                metadata:
+                  name: <pingsource-name>
+                spec:
+                  schedule: "<cron-schedule>"
+                  contentType: "<content-type>"
+                  dataBase64: "<base64-data>"
+                  sink:
+                    ref:
+                      apiVersion: v1
+                      kind: <sink-kind>
+                      name: <sink-name>
+                ```
+                Where:
+
+                - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source-binary`.
+                - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
+                - `<content-type>` is the media type of the data you want to send, for example, `application/json`.
+                - `<base64-data>` is the base64 encoded binary data that you want to send, for example, `ZGF0YQ==`.
+                - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+                - `<sink-name>` is the name of your sink, for example, `event-display`.
+
+                For more information about the fields you can configure for the PingSource object, see [PingSource reference](reference.md).
+
+            1. Apply the YAML file by running the command:
+
+                ```bash
+                kubectl apply -f <filename>.yaml
+                ```
+                Where `<filename>` is the name of the file you created in the previous step.
+
+
+## Verify the PingSource object
+
+1. View the logs for the `event-display` event consumer by running the command:
 
     === "kubectl"
 
@@ -163,7 +235,10 @@ entering the following command:
         kail -l serving.knative.dev/service=event-display -c user-container --since=10m
         ```
 
-    This returns the `Attributes` and `Data` of the events that the PingSource sent to the `event-display` service:
+1. Verify that the output returns the properties of the events that your
+PingSource sent to your sink.
+In the example below, the command has returned the `Attributes` and `Data` properties
+of the events that the PingSource sent to the `event-display` Service:
 
     ```{ .bash .no-copy }
     ☁️  cloudevents.Event
@@ -181,69 +256,47 @@ entering the following command:
       }
     ```
 
-    If you created a PingSource that sends binary data, you will also see output similar to the following:
 
-    ```{ .bash .no-copy }
-    ☁️  cloudevents.Event
-    Validation: valid
-    Context Attributes,
-      specversion: 1.0
-      type: dev.knative.sources.ping
-      source: /apis/v1/namespaces/pingsource-example/pingsources/test-ping-source-binary
-      id: ddd7bad2-9b6a-42a7-8f9b-b64494a6ce43
-      time: 2021-03-25T19:38:00.455013472Z
-      datacontenttype: text/plain
-    Data,
-      data
-    ```
+## Delete the PingSource object
 
-1. Optional: You can delete the `pingsource-example` namespace and all related resources from your cluster by entering the following command:
+You can either delete the PingSource and all related resources, or delete the resources individually:
 
+- To remove the PingSource object and all of the related resources, delete the namespace by running the command:
 
     ```bash
-    kubectl delete namespace pingsource-example
+    kubectl delete namespace <namespace>
     ```
+    Where `<namespace>` is the namespace that contains the PingSource object.
 
-1. Optional: You can also delete the PingSource instance only by entering the following command:
 
-    === "kubectl"
-
-        ```bash
-        kubectl delete pingsources.sources.knative.dev test-ping-source
-        ```
-
+- To delete the PingSource instance only, run the command:
 
     === "kn"
 
         ```bash
-        kn source ping delete test-ping-source
+        kn source ping delete <pingsource-name>
         ```
-
-
-    === "kubectl: binary data PingSource"
-
-        ```bash
-        kubectl delete pingsources.sources.knative.dev test-ping-source-binary
-        ```
-
-
-    === "kn: binary data PingSource"
-
-        ```bash
-        kn source ping delete test-ping-source-binary
-        ```
-
-1. Optional: Delete the `event-display` service:
+        Where `<pingsource-name>` is the name of the PingSource you want to delete, for example, `test-ping-source`.
 
     === "kubectl"
 
         ```bash
-        kubectl delete service.serving.knative.dev event-display
+        kubectl delete pingsources.sources.knative.dev <pingsource-name>
         ```
+        Where `<pingsource-name>` is the name of the PingSource you want to delete, for example, `test-ping-source`.
 
+- To delete the sink only, run the command:
 
     === "kn"
 
         ```bash
-        kn service delete event-display
+        kn service delete <sink-name>
         ```
+        Where `<sink-name>` is the name of your sink, for example, `event-display`.
+
+    === "kubectl"
+
+        ```bash
+        kubectl delete service.serving.knative.dev <sink-name>
+        ```
+        Where `<sink-name>` is the name of your sink, for example, `event-display`.
