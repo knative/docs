@@ -133,7 +133,7 @@ During the creation of a Service, Knative performs the following steps:
 
 To deploy the app:
 
-=== "yaml"
+=== "YAML"
 
     1. Create a new file named `service.yaml` and copy the following service definition
     into the file:
