@@ -3,20 +3,20 @@
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
 Services. To learn more about using secure connections in Knative, see
-[Configuring HTTPS with TLS certificates](../using-a-tls-cert).
+[Configuring HTTPS with TLS certificates](using-a-tls-cert.md).
 
 ## Before you begin
 
 The following must be installed on your Knative cluster:
 
-- [Knative Serving](../../../admin/install/).
-- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher. See [Install a networking layer](../../../admin/install/install-serving-with-yaml#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../../../admin/install/installing-istio#installing-istio-with-SDS-to-secure-the-ingress-gateway).
+- [Knative Serving](../admin/install/serving/install-serving-with-yaml.md).
+- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, Contour v1.1 or higher, or Gloo v0.18.16 or higher. See [Install a networking layer](../admin/install/serving/install-serving-with-yaml.md#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../admin/install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
 
     !!! note
         Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
 
-- [`cert-manager` version `1.0.0` or higher](../installing-cert-manager).
-- Your Knative cluster must be configured to use a [custom domain](../using-a-custom-domain).
+- [`cert-manager` version `1.0.0` or higher](installing-cert-manager.md).
+- Your Knative cluster must be configured to use a [custom domain](using-a-custom-domain.md).
 - Your DNS provider must be setup and configured to your domain.
 - If you want to use HTTP-01 challenge, you need to configure your custom
 domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.

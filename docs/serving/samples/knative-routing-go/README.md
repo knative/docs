@@ -15,7 +15,7 @@ the Login service.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/)
+1. A Kubernetes cluster with [Knative Serving](../../../admin/install/serving/install-serving-with-yaml.md)
    installed.
 2. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).

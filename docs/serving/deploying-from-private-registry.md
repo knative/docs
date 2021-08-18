@@ -14,7 +14,7 @@ and then deploy those configurations to your Knative cluster.
 
 You need:
 
-- A Kubernetes cluster with [Knative Serving installed](../../install/).
+- A Kubernetes cluster with [Knative Serving installed](../admin/install/serving/install-serving-with-yaml.md).
 - The credentials to the private container registry where your container images are stored.
 
 ## Configuring your credentials in Knative
@@ -84,4 +84,4 @@ your credentials and have access to your container images in the private registr
 
 ## What's next
 
-[Learn how to create a Knative service](../getting-started-knative-app).
+[Learn how to create a Knative service](getting-started-knative-app.md).
