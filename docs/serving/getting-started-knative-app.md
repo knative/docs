@@ -7,14 +7,14 @@ using cURL requests.
 
 You need:
 
-- A Kubernetes cluster with [Knative Serving installed](../install/).
+- A Kubernetes cluster with [Knative Serving installed](../admin/install/serving/install-serving-with-yaml.md).
 - An image of the app that you'd like to deploy available on a container registry. The image of the sample app used in this guide is available on
   Google Container Registry.
 
 ## Sample application
 
 This guide demonstrates the basic workflow for deploying the
-[Hello World sample app (Go)](../serving/samples/hello-world/helloworld-go) from the
+[Hello World sample app (Go)](samples/hello-world/helloworld-go/README.md) from the
 [Google Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling).
 You can use these steps as a guide for deploying your container images from other
 registries like [Docker Hub](https://docs.docker.com/docker-hub/repos/).
@@ -26,7 +26,7 @@ To deploy a local container image, you need to disable image tag resolution by r
 docker tag local-image dev.local/local-image
 ```
 
-[Learn more about image tag resolution.](tag-resolution)
+[Learn more about image tag resolution.](../developer/serving/tag-resolution.md)
 
 The Hello World sample app reads in an `env` variable, `TARGET`, then prints "Hello World: \${TARGET}!". If `TARGET` isn't defined, it will print "NOT SPECIFIED".
 
@@ -34,7 +34,7 @@ The Hello World sample app reads in an `env` variable, `TARGET`, then prints "He
 
 The easiest way to deploy a Knative Service is by using the Knative CLI [kn](https://github.com/knative/client).
 
-**Prerequisite:** Install the `kn` binary as described in [Installing the Knative CLI](../install/install-kn)
+**Prerequisite:** Install the `kn` binary as described in [Installing the Knative CLI](../client/install-kn.md)
 
 It will create a corresponding resource description internally as when using a YAML file directly.
 `kn` provides a command-line mechanism for managing Services.
@@ -156,7 +156,7 @@ To see if your app has been deployed successfully, you need the URL created by K
 
 
    > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
+   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](using-a-custom-domain.md).
 
    If you changed the name from `helloworld-go` to something else when creating
    the `.yaml` file, replace `helloworld-go` in these commands with the name you entered.

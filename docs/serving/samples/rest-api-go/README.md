@@ -7,7 +7,7 @@ like `AAPL`,`AMZN`, `GOOG`, `MSFT`, etc.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/) installed
+1. A Kubernetes cluster with [Knative Serving](../../../admin/install/serving/install-serving-with-yaml.md) installed
    and DNS configured.
 1. [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment)
    installed locally.
