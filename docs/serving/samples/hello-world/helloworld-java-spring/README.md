@@ -129,7 +129,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 === "yaml"
 
     1. Create a new file named `service.yaml` and copy the following service definition
-    into the file.
+    into the file:
 
         ```yaml
         apiVersion: serving.knative.dev/v1
