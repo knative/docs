@@ -101,8 +101,8 @@ To access the console in your web browser:
 
 1. Enter the command:
 
-        ```bash
-        kubectl port-forward --namespace metrics service/prometheus-operated 9090
-        ```
+    ```bash
+    kubectl port-forward --namespace metrics service/prometheus-operated 9090
+    ```
 
-1. Access the console in your browser via http://localhost:9090.
+1. Access the console in your browser via `http://localhost:9090`.
