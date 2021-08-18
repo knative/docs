@@ -105,12 +105,12 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
     CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
 
     ```
-For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
+    For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
 
-For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
+    For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
-!!! note
-    Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `<username>` with your Docker Hub username.
+    !!! note
+        Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
 
 1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
