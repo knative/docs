@@ -109,9 +109,6 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
 
     For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
 
-    !!! note
-        Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username.
-
 1. Use Docker to build the sample code into a container, then push the container to the Docker registry:
 
     ```bash
@@ -121,10 +118,20 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-java-spring
     # Push the container to docker registry
     docker push {username}/helloworld-java-spring
     ```
+    Where `{username}` is your Docker Hub username.
+
+
 ## Deploying the app
 
 After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
+During the creation of a Service, Knative performs the following steps:
+
+- Create a new immutable revision for this version of the app.
+- Network programming to create a Route, ingress, Service, and load balancer for your app.
+- Automatically scale your pods up and down, including scaling down to zero active pods.
+
+To deploy the app:
 
 === "yaml"
 
@@ -148,8 +155,8 @@ After the build has completed and the container is pushed to Docker Hub, you can
         ```
         Where `{username}` is your Docker Hub username.
 
-        Ensure that the container image value in `service.yaml` matches the
-        container you built in the previous step.
+        !!! note
+            Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
 
     1. Apply the YAML file by running the command:
 
@@ -167,11 +174,6 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
        This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
-During the creation of a Service, Knative performs the following steps:
-
-- Create a new immutable revision for this version of the app.
-- Network programming to create a Route, ingress, Service, and load balancer for your app.
-- Automatically scale your pods up and down, including scaling down to zero active pods.
 
 ## Verification
 
