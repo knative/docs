@@ -141,12 +141,12 @@ After the build has completed and the container is pushed to Docker Hub, you can
           template:
             spec:
               containers:
-                - image: docker.io/<username>/helloworld-java-spring
+                - image: docker.io/{username}/helloworld-java-spring
                   env:
                     - name: TARGET
                       value: "Spring Boot Sample v1"
         ```
-        Where `<username>` is your Docker Hub username.
+        Where `{username}` is your Docker Hub username.
 
         Ensure that the container image value in `service.yaml` matches the
         container you built in the previous step.
