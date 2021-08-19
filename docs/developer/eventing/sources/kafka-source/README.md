@@ -11,63 +11,71 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 <!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
 
-## Prerequisites
+## Installing the Kafka event source CRD
 
 - A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#optional-install-a-default-channel-messaging-layer) or the [Knative Operator](../../../../admin/install/knative-with-operators.md/#installing-with-different-eventing-sources).
 
-<!--TODO: Split event source installations into their own section and update links-->
+```bash
+kubectl apply -f https://storage.googleapis.com/knative-nightly/eventing-kafka/latest/source.yaml
+```
+<!--Taken from https://github.com/knative-sandbox/eventing-kafka - not sure if there's a newer command-->
 
 ## Optional: Create a Kafka topic
 
-1. If using Strimzi, you can set a topic modifying `source/kafka-topic.yaml`
-   with your desired:
+1. If you are using Strimzi, create a KafkaTopic:
 
-    - Topic
-    - Cluster Name
-    - Partitions
-    - Replicas
+    ```yaml
+    apiVersion: kafka.strimzi.io/v1beta2
+    kind: KafkaTopic
+    metadata:
+      name: knative-demo-topic
+      namespace: kafka
+      labels:
+        strimzi.io/cluster: my-cluster
+    spec:
+      partitions: 3
+      replicas: 1
+      config:
+        retention.ms: 7200000
+        segment.bytes: 1073741824
+    ```
 
-   ```yaml
-   apiVersion: kafka.strimzi.io/v1beta2
-   kind: KafkaTopic
-   metadata:
-     name: knative-demo-topic
-     namespace: kafka
-     labels:
-       strimzi.io/cluster: my-cluster
-   spec:
-     partitions: 3
-     replicas: 1
-     config:
-       retention.ms: 7200000
-       segment.bytes: 1073741824
-   ```
-
-2. Deploy the `KafkaTopic`
+2. Deploy the `KafkaTopic` by running the command:
 
    ```bash
-   $ kubectl apply -f strimzi-topic.yaml
+   kubectl apply -f <filename>.yaml
+   ```
+
+   Where `<filename>` is the name of your KafkaTopic YAML file.
+
+   Example output:
+   ```bash
    kafkatopic.kafka.strimzi.io/knative-demo-topic created
    ```
 
-3. Ensure the `KafkaTopic` is running.
+3. Ensure the `KafkaTopic` is running, by running the command:
 
    ```bash
-   $ kubectl -n kafka get kafkatopics.kafka.strimzi.io
+   kubectl -n kafka get kafkatopics.kafka.strimzi.io
+   ```
+
+   Example output:
+
+   ```bash
    NAME                 AGE
    knative-demo-topic   16s
    ```
 
-## Create the Event Display service
+## Create a Service
 
-1. Download a copy of the code:
+1. Download a copy of the sample code:
 
    ```bash
    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
    cd knative-docs/docs/eventing/samples/kafka/source
    ```
 
-2. Build the Event Display Service by copying the following YAML into a file:
+2. Create the `event-display` Service as a YAML file:
 
      ```yaml
      apiVersion: serving.knative.dev/v1
@@ -89,23 +97,29 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```bash
     kubectl apply -f <filename>.yaml
     ```
+
     Where `<filename>` is the name of the file you created in the previous step.
 
     Example output:
+
     ```bash
     service.serving.knative.dev/event-display created
     ```
 
-1. Ensure that the Service pod is running. The pod name will be prefixed with
-   `event-display`.
+1. Ensure that the Service pod is running, by running the command:
 
    ```bash
-   $ kubectl get pods
+   kubectl get pods
+   ```
+
+   The pod name is prefixed with `event-display`:
+
+   ```bash
    NAME                                            READY     STATUS    RESTARTS   AGE
    event-display-00001-deployment-5d5df6c7-gv2j4   2/2       Running   0          72s
    ```
 
-### Apache Kafka Event Source
+### Kafka event source
 
 1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics,
    etc...:
@@ -128,37 +142,44 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
          name: event-display
    ```
 
-1. Deploy the event source.
-   ```
-   $ kubectl apply -f event-source.yaml
+1. Deploy the event source:
+
+   ```bash
+   kubectl apply -f event-source.yaml
    ...
    kafkasource.sources.knative.dev/kafka-source created
    ```
+
 1. Check that the event source pod is running. The pod name will be prefixed
    with `kafka-source`.
-   ```
-   $ kubectl get pods
+
+   ```bash
+   kubectl get pods
    NAME                                  READY     STATUS    RESTARTS   AGE
    kafka-source-xlnhq-5544766765-dnl5s   1/1       Running   0          40m
    ```
 1. Ensure the Apache Kafka Event Source started with the necessary
    configuration.
-   ```
-   $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
+
+   ```bash
+   kubectl logs --selector='knative-eventing-source-name=kafka-source'
    {"level":"info","ts":"2020-05-28T10:39:42.104Z","caller":"adapter/adapter.go:81","msg":"Starting with config: ","Topics":".","ConsumerGroup":"...","SinkURI":"...","Name":".","Namespace":"."}
    ```
 
 ### Verify
 
 1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic as in the following example:
-   ```
+
+   ```bash
    kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic knative-demo-topic
    If you don't see a command prompt, try pressing enter.
    >{"msg": "This is a test!"}
    ```
+
 1. Check that the Apache Kafka Event Source consumed the message and sent it to
    its sink properly. Since these logs are captured in debug level, edit the key `level` of `config-logging` configmap in `knative-sources` namespace to look like this:
-   ```
+
+   ```bash
    data:
      loglevel.controller: info
      loglevel.webhook: info
@@ -187,8 +208,8 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
    ```
    Now manually delete the kafkasource deployment and allow the `kafka-controller-manager` deployment running in `knative-sources` namespace to redeploy it. Debug level logs should be visible now.
 
-   ```
-   $ kubectl logs --selector='knative-eventing-source-name=kafka-source'
+   ```bash
+   kubectl logs --selector='knative-eventing-source-name=kafka-source'
    ...
 
    {"level":"debug","ts":"2020-05-28T10:40:29.400Z","caller":"kafka/consumer_handler.go:77","msg":"Message claimed","topic":".","value":"."}
@@ -218,27 +239,26 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
        }
    ```
 
-## Teardown Steps
+## Clean up steps
 
-1. Remove the Apache Kafka Event Source
-   ```
+1. Delete the Kafka event source:
 
-   $ kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
+   ```bash
+   kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
    "kafka-source" deleted
-
    ```
 
-2. Remove the Event Display
+2. Delete the `event-display` Service:
 
-   ```
-   $ kubectl delete -f source/event-display.yaml service.serving.knative.dev
+   ```bash
+   kubectl delete -f source/event-display.yaml service.serving.knative.dev
    "event-display" deleted
    ```
 
-3. Remove the Apache Kafka Event Controller
+3. Remove the Kafka event controller:
 
-   ```
-   $ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+   ```bash
+   kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
    serviceaccount "kafka-controller-manager" deleted
    clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
    deleted clusterrolebinding.rbac.authorization.k8s.io
@@ -251,7 +271,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 4. Optional: Remove the Apache Kafka Topic
 
    ```bash
-   $ kubectl delete -f kafka-topic.yaml
+   kubectl delete -f kafka-topic.yaml
    kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
    ```
 
@@ -268,7 +288,8 @@ You can specify the key deserializer among four types:
 * `float` for 32-bit & 64-bit floating points
 * `byte-array` for a Base64 encoded byte array
 
-To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the `KafkaSource` definition like:
+To specify the key deserializer, add the label `kafkasources.sources.knative.dev/key-type` to the `KafkaSource` definition, as shown in the following example:
+
    ```yaml
    apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
@@ -289,6 +310,7 @@ To specify it, add the label `kafkasources.sources.knative.dev/key-type` to the 
         name: event-display
    ```
 
+<<<<<<< HEAD
 ## (Optional) Specify the initial offset
 
 By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case you want to consume from the earliest offset, set the initialOffset field to `earliest`.
@@ -315,6 +337,9 @@ By default the `KafkaSource` starts consuming from the `latest` offset in each p
 *NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
 
 ## Connecting to a TLS enabled Kafka broker
+=======
+## Connecting to a TLS-enabled Kafka broker
+>>>>>>> 82d4022c... remove link, add command instead
 
 The KafkaSource supports TLS and SASL authentication methods. To enable TLS authentication, you must have the following files:
 
@@ -323,17 +348,19 @@ The KafkaSource supports TLS and SASL authentication methods. To enable TLS auth
 
 KafkaSource expects these files to be in pem format, if it is in other format like jks, please convert to pem.
 
-1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up
+1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up:
 
-   ```
-   $ kubectl create secret generic cacert --from-file=caroot.pem
+   ```bash
+   kubectl create secret generic cacert --from-file=caroot.pem
    secret/cacert created
+   ```
 
-   $ kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
+   ```bash
+   kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
    secret/key created
    ```
 
-2. Apply the KafkaSource, change bootstrapServers and topics accordingly.
+2. Apply the KafkaSource. Modify the `bootstrapServers` and `topics` fields accordingly.
 
    ```yaml
    apiVersion: sources.knative.dev/v1beta1
