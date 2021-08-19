@@ -1,6 +1,47 @@
-# Collecting Metrics with OpenTelemetry
+# Collecting Metrics in Knative
 
-You can set up the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) to receive metrics from Knative components and distribute them to Prometheus.
+Knative offers two solutions for collecting metrics:
+- [Prometheus](https://prometheus.io/)
+- [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
+
+[Grafana](https://grafana.com/oss/) dashboards are available for metrics collected directly with Prometheus.
+
+You can also set up the OpenTelemetry Collector to receive metrics from Knative components and distribute them to other metrics providers that support OpenTelemetry.
+
+## About Prometheus
+
+[Prometheus](https://prometheus.io/) is an open-source tool for collecting and
+aggregating timeseries metrics. It can be used to scrape the OpenTelemetry collector that you created in the previous step.
+
+## Setting up Prometheus
+
+1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator/helm) by entering the following command:
+
+       ```bash
+       helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+       helm repo update
+       helm install prometheus prometheus-community/kube-prometheus-stack -n default
+       ```
+        
+    !!! caution
+        You will need to ensure that the helm chart has following values configured, otherwise the ServiceMonitors/Podmonitors will not work.
+         ```yaml
+         kube-state-metrics:
+           metricLabelsAllowlist:
+             - pods=[*]
+             - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+           prometheus:
+             prometheusSpec:
+               serviceMonitorSelectorNilUsesHelmValues: false
+               podMonitorSelectorNilUsesHelmValues: false
+ 
+1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
+
+       ```bash
+       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
+       ```
+1. Grafana dashboards can be imported from https://github.com/knative-sandbox/monitoring/tree/main/grafana.
+ 
 
 ## About OpenTelemetry
 
@@ -18,6 +59,9 @@ In the following example, you can configure a single collector instance using a 
 
 !!! tip
     For more complex deployments, you can automate some of these steps by using the [OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator).
+    
+!!! caution
+    The Grafana dashboards at https://github.com/knative-sandbox/monitoring/tree/main/grafana don't work with metrics scraped from OpenTelemetry Collector.
 
 ![Diagram of components reporting to collector, which is scraped by Prometheus](system-diagram.svg)
 
@@ -68,41 +112,3 @@ In the following example, you can configure a single collector instance using a 
 
 1. Fetch `http://localhost:8889/metrics` to see the exported metrics.
 
-## About Prometheus
-
-[Prometheus](https://prometheus.io/) is an open-source tool for collecting and
-aggregating timeseries metrics. It can be used to scrape the OpenTelemetry collector that you created in the previous step.
-
-## Setting up Prometheus
-
-1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) by entering the following command:
-
-       ```bash
-       kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
-       ```
-
-    !!! caution
-        The manifest provided installs the Prometheus Operator into the `default` namespace. If you want to install the Operator in a different namespace, you must download the [YAML manifest](https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml) and update any namespace references to your target namespace.
-
-1. Create a `ServiceMonitor` object to track the OpenTelemetry collector.
-1. Create a `ServiceAccount` object with the ability to read Kubernetes services and pods, so that Prometheus can track the resource endpoints.
-1. Apply the `prometheus.yaml` file to create a Prometheus instance, by entering the following command:
-
-       ```bash
-       kubectl apply -f prometheus.yaml
-       ```
-<!--TODO: Add links / commands for the two steps above?-->
-
-### Make the Prometheus instance public
-
-By default, the Prometheus instance is only exposed on a private service named `prometheus-operated`.
-
-To access the console in your web browser:
-
-1. Enter the command:
-
-        ```bash
-        kubectl port-forward --namespace metrics service/prometheus-operated 9090
-        ```
-
-1. Access the console in your browser via http://localhost:9090.
