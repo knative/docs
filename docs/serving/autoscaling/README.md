@@ -15,7 +15,7 @@ For more information about which metrics can be used to control the Autoscaler, 
 
 * Configure your Knative deployment to use the Kubernetes Horizontal Pod Autoscaler (HPA)
 instead of the default KPA.
-For how to install HPA, see [Install optional Serving extensions](../../admin/install/serving/install-extensions.md#install-optional-serving-extensions).
+For how to install HPA, see [Install optional Serving extensions](../../admin/install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).
 * Disable scale to zero functionality for your cluster ([global configuration only](scale-to-zero.md)).
 * Configure the [type of metrics](autoscaling-metrics.md) your Autoscaler consumes.
 * Configure [concurrency limits](concurrency.md) for applications.
