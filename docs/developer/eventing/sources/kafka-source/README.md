@@ -1,10 +1,3 @@
----
-title: "Apache Kafka Source Example"
-linkTitle: "Source Example"
-weight: 20
-type: "docs"
----
-
 # Apache Kafka Source Example
 
 Tutorial on how to build and deploy a `KafkaSource` event source.
@@ -13,38 +6,42 @@ Tutorial on how to build and deploy a `KafkaSource` event source.
 
 The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents via HTTP to its configured `sink`.
 
-*NOTE:* In case you need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets you might want to implement a _Kafka Consumer_, using one of the available Apache Kafka SDKs, to handle the messages yourself, rather than using the Knative `KafkaSource`.
+!!! note
+    If need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets, you can implement a Kafka Consumer by using one of the available Apache Kafka SDKs.
+
+<!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative Kafka Source installed.
-For more information, see [Installing Knative](../../../../admin/install/README.md).
+- A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#optional-install-a-default-channel-messaging-layer) or the [Knative Operator](../../../../admin/install/knative-with-operators.md/#installing-with-different-eventing-sources).
 
-## Apache Kafka Topic (Optional)
+<!--TODO: Split event source installations into their own section and update links-->
+
+## Optional: Create a Kafka topic
 
 1. If using Strimzi, you can set a topic modifying `source/kafka-topic.yaml`
    with your desired:
 
-- Topic
-- Cluster Name
-- Partitions
-- Replicas
+    - Topic
+    - Cluster Name
+    - Partitions
+    - Replicas
 
-  ```yaml
-  apiVersion: kafka.strimzi.io/v1beta2
-  kind: KafkaTopic
-  metadata:
-    name: knative-demo-topic
-    namespace: kafka
-    labels:
-      strimzi.io/cluster: my-cluster
-  spec:
-    partitions: 3
-    replicas: 1
-    config:
-      retention.ms: 7200000
-      segment.bytes: 1073741824
-  ```
+   ```yaml
+   apiVersion: kafka.strimzi.io/v1beta2
+   kind: KafkaTopic
+   metadata:
+     name: knative-demo-topic
+     namespace: kafka
+     labels:
+       strimzi.io/cluster: my-cluster
+   spec:
+     partitions: 3
+     replicas: 1
+     config:
+       retention.ms: 7200000
+       segment.bytes: 1073741824
+   ```
 
 2. Deploy the `KafkaTopic`
 
@@ -230,16 +227,17 @@ For more information, see [Installing Knative](../../../../admin/install/README.
    "kafka-source" deleted
 
    ```
-   2. Remove the Event Display
-   ```
 
+2. Remove the Event Display
+
+   ```
    $ kubectl delete -f source/event-display.yaml service.serving.knative.dev
    "event-display" deleted
-
-   ```
-   3. Remove the Apache Kafka Event Controller
    ```
 
+3. Remove the Apache Kafka Event Controller
+
+   ```
    $ kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
    serviceaccount "kafka-controller-manager" deleted
    clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
@@ -248,16 +246,16 @@ For more information, see [Installing Knative](../../../../admin/install/README.
    customresourcedefinition.apiextensions.k8s.io "kafkasources.sources.knative.dev"
    deleted service "kafka-controller" deleted statefulset.apps
    "kafka-controller-manager" deleted
-
    ```
-4. (Optional) Remove the Apache Kafka Topic
+
+4. Optional: Remove the Apache Kafka Topic
 
    ```bash
    $ kubectl delete -f kafka-topic.yaml
    kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
    ```
 
-## (Optional) Specify the key deserializer
+## Optional: Specify the key deserializer
 
 When `KafkaSource` receives a message from Kafka, it dumps the key in the Event
 extension called `Key` and dumps Kafka message headers in the extensions
@@ -326,18 +324,17 @@ The KafkaSource supports TLS and SASL authentication methods. To enable TLS auth
 KafkaSource expects these files to be in pem format, if it is in other format like jks, please convert to pem.
 
 1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up
-   ```
 
+   ```
    $ kubectl create secret generic cacert --from-file=caroot.pem
    secret/cacert created
 
    $ kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
    secret/key created
-
-
    ```
 
 2. Apply the KafkaSource, change bootstrapServers and topics accordingly.
+
    ```yaml
    apiVersion: sources.knative.dev/v1beta1
    kind: KafkaSource
