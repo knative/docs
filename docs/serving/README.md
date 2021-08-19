@@ -61,13 +61,13 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## Debugging Knative Serving issues
 
-- [Debugging Application Issues](../developer/serving/troubleshooting/debugging-application-issues.md)
+- [Debugging application issues](../developer/serving/troubleshooting/debugging-application-issues.md)
 
 ## Configuration and Networking
 
 - [Configuring cluster local routes](../developer/serving/services/private-services.md)
 - [Using a custom domain](using-a-custom-domain.md)
-- [Using subroutes](../developer/serving/services/using-subroutes.md)
+- [Traffic management](../developer/serving/traffic-management.md)
 
 ## Observability
 
