@@ -60,6 +60,14 @@ between the number and the unit.
 |Click **Fork** | Click "Fork"
 |Select **Other**      | Select "Other"
 
+### Use tables for definition lists
+
+When listing terms and their definitions, use table formatting instead of definition list formatting.
+
+|:white_check_mark: Correct                  |:no_entry: Incorrect
+|--------------------|-----
+|`|Value |Description |`<br>`|------|---------------------|`<br>`|Value1|Description of Value1|`<br>`|Value2|Description of Value2|`|`Value1`<br>`: Description of Value1`<br><br>`Value2`<br>`: Description of Value2`|
+
 ## General style
 
 ### Use upper camel case for Knative API objects
