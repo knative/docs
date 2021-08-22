@@ -30,7 +30,12 @@ Follow the instructions in the documentation
 
 
 ### Highlights
-- TBD
+- In preparation for GA, the **net-kourier** components have been renamed. See [Breaking Changes](#-breaking-or-notable-changes) in the Serving section.
+- The depecreated namespace label `networking.internal.knative.dev/disableWildcardCert` is now removed. See [Breaking Changes](#-breaking-or-notable-changes) in the Serving section.
+- Trigger ready status now takes into account the `DeadLetterURI`
+- The `kn` CLI now looks for plugin in the `$PATH` allowing for easy installation of plugins like `kn-quickstart`
+
+
 
 
 ### Serving v0.25
@@ -130,6 +135,8 @@ Follow the instructions in the documentation
 - Add support for multiple containers in Service spec ([#1382](https://github.com/knative/client/pull/1382))
 - Make `--cmd` flag as an array instead of string ([#1380](https://github.com/knative/client/pull/1380))
 - Add an `client.knative.dev/updateTimestamp` annotation to trigger a new revision when required ([#1364](https://github.com/knative/client/pull/1364))
+
+- The new plugin `kn-quickstart` is now part of the home-brew plugins suite. Install the plugin using `brew install knative-sandbox/kn-plugins/quickstart` then use it with `kn quickstart kind` this will create a kind cluster with knative installed. Make sure to update `kn` to `v0.25` for example using `brew upgrade kn`
 
 #### 🐞 Bug Fixes
 
