@@ -71,7 +71,7 @@ Follow the instructions in the documentation
 
 #### 🐞 Bug Fixes
 
-- TBD
+- Set `ENABLE_HTTP2_AUTO_DETECTION` to false by default if the feature is not enabled. ([#11760](https://github.com/knative/serving/pull/11760))
 
 ### Eventing v0.25
 
