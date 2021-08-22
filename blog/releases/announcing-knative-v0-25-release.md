@@ -154,7 +154,6 @@ Follow the instructions in the documentation
 - [upodroid](@https://github.com/upodroid)
 - [senthilnathan](@https://github.com/senthilnathan)
 - [psschwei](@https://github.com/psschwei)
-- [julz](@https://github.com/julz)
 
 
 
