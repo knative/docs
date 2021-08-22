@@ -97,20 +97,22 @@ Follow the instructions in the documentation
 
 #### 💫 New Features & Changes
 
-- TBD
-
-
-#### RabbitMQ Eventing v0.25
-
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/v0.25.0 -->
-
-#### 💫 New Features & Changes
-
-- TBD
+- The Trigger status contains the resolved URL of the configured dead letter sink. ([#1092](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1092))
 
 #### 🐞 Bug Fixes
 
-- TBD
+- Fix to support subscribers that are Kubernete service, service's endpoint doesn't contain a trailing slash. ([#1123](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1123))
+
+#### Apache Kafka Source and Channels v0.25
+
+<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka/releases/tag/v0.25.0 -->
+
+#### 💫 New Features & Changes
+
+- Distributed KafkaChannel Dispatcher will now re-queue KafkaChannels after failed reconciliation which will improve various failure recovery scenarios, but could consume CPU resources if reconciliation is blocked by underlying system issues (bad Kafka Secret config, etc.) ([#795](https://github.com/knative-sandbox/eventing-kafka/pull/795))
+- Separated CRDs to extra, additional yaml manifest (similar to eventing) ([#799](https://github.com/knative-sandbox/eventing-kafka/pull/799))
+- Enabled support for ResetOffset CRD in distributed KafkaChannel, see config/command/resetoffset for details. ([#761](https://github.com/knative-sandbox/eventing-kafka/pull/761))
+- The consolidated KafkaChannel dispatcher is now owned by the controller. ([#798](https://github.com/knative-sandbox/eventing-kafka/pull/798))
 
 
 ### Client v0.25
@@ -152,6 +154,10 @@ Follow the instructions in the documentation
 - [@antoineco](https://github.com/antoineco)
 - [@evankanderson](https://github.com/evankanderson)
 - [@lionelvillard](https://github.com/lionelvillard)
+- [@pierDipi](https://github.com/pierDipi)
+- [@travis-minke-sap](https://github.com/travis-minke-sap)
+- [@matzew](https://github.com/matzew)
+- [@devguyio](https://github.com/devguyio)
 
 
 ### Learn more
