@@ -23,7 +23,7 @@ Follow the instructions in the documentation
 - [Eventing v0.25](#Eventing-v025)
 - [Eventing Extensions](#Eventing-Extensions)
     - [Apache Kafka Broker v0.25](#Apache-Kafka-Broker-v025)
-    - [Apache Kafka Source and Channels v0.25](##apache-kafka-source-and-channels-v025)
+    - [Apache Kafka Source and Channels v0.25](#apache-kafka-source-and-channels-v025)
 - `kn` [CLI v0.25](#Client-v025)
 - [Thank you contributors](#Thank-you-contributors)
 
