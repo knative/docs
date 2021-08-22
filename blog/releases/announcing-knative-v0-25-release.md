@@ -77,22 +77,16 @@ Follow the instructions in the documentation
 
 <!-- Original notes are here: https://github.com/knative/eventing/releases/tag/v0.25.1 -->
 
-#### 🚨 Breaking or Notable Changes
-
-- TBD
 
 #### 💫 New Features & Changes
 
-- TBD
+- Add `DeadLetterURI` to Trigger status, block ready until it is resolvable ([#5551](https://github.com/knative/eventing/pull/5551))
+- Add a health endpoint to `event_display` for enabling readiness probes. ([#5608](https://github.com/knative/eventing/pull/5608))
+- Adds support for HTTP OPTIONS and CloudEvents Webhook preflight ([#5542](https://github.com/knative/eventing/pull/5542))
 
 #### 🐞 Bug Fixes
 
-- TBD
-
-
-#### 🧹 Clean up
-
-- TBD
+- PingSource schedules starting with `@every` are now properly rejected. ([#5585](https://github.com/knative/eventing/pull/5585))
 
 
 ### Eventing Extensions
@@ -149,12 +143,15 @@ Follow the instructions in the documentation
 - [@julz](https://github.com/julz)
 - [@nak3](https://github.com/nak3)
 - [@psschwei](https://github.com/psschwei)
-- [nealhu](@https://github.com/nealhu)
-- [zhaojizhuang](@https://github.com/zhaojizhuang)
-- [upodroid](@https://github.com/upodroid)
-- [senthilnathan](@https://github.com/senthilnathan)
-- [psschwei](@https://github.com/psschwei)
-
+- [@nealhu](@https://github.com/nealhu)
+- [@zhaojizhuang](@https://github.com/zhaojizhuang)
+- [@upodroid](@https://github.com/upodroid)
+- [@senthilnathan](@https://github.com/senthilnathan)
+- [@psschwei](@https://github.com/psschwei)
+- [@benmoss](https://github.com/benmoss)
+- [@antoineco](https://github.com/antoineco)
+- [@evankanderson](https://github.com/evankanderson)
+- [@lionelvillard](https://github.com/lionelvillard)
 
 
 ### Learn more
