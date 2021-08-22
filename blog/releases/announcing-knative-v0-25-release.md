@@ -117,20 +117,30 @@ Follow the instructions in the documentation
 
 ### Client v0.25
 
-<!-- Original notes are here: https://github.com/knative/client/blob/main/CHANGELOG.adoc#v0250-2021-06-29 -->
+<!-- Original notes are here: https://github.com/knative/client/blob/main/CHANGELOG.adoc#v0250-2021-08-10 -->
 
 #### 💫 New Features & Changes
 
-- TBD
+- Deprecate `lookup-path` as path lookup will always be enabled in the future ([#1422](https://github.com/knative/client/pull/1422))
+- Add `--tls` option to domain create command ([#1419](https://github.com/knative/client/pull/1419))
+- Lookup plugins in `$PATH` by default ([#1412](https://github.com/knative/client/pull/1412))
+- Add `--class` flag to broker create command ([#1402](https://github.com/knative/client/pull/1402))
+- Add `darwin/arm64` support to kn ([#1401](https://github.com/knative/client/pull/1401))
+- Add `base64` data handling to Ping commands ([#1392](https://github.com/knative/client/pull/1392)) ([#1388](https://github.com/knative/client/pull/1388))
+- Add support for multiple containers in Service spec ([#1382](https://github.com/knative/client/pull/1382))
+- Make `--cmd` flag as an array instead of string ([#1380](https://github.com/knative/client/pull/1380))
+- Add an `client.knative.dev/updateTimestamp` annotation to trigger a new revision when required ([#1364](https://github.com/knative/client/pull/1364))
 
 #### 🐞 Bug Fixes
 
-- TBD
+- Fix plugin lookup for arguments with slashes ([#1415](https://github.com/knative/client/pull/1415))
+- Show server error messages without any taints ([#1406](https://github.com/knative/client/pull/1406))
+- Fix path not being escaped when applying a regex on Windows ([#1395](https://github.com/knative/client/pull/1395))
+- Fix wait for ready to skip non modified event first ([#1390](https://github.com/knative/client/pull/1390))
 
+### Operator v0.24
 
-### Operator v0.25
-
-<!-- Original notes are here: https://github.com/knative/operator/releases/tag/v0.25.0 -->
+<!-- Original notes are here: https://github.com/knative/operator/releases/tag/v0.24.0 -->
 
 #### 💫 New Features & Changes
 
@@ -158,6 +168,12 @@ Follow the instructions in the documentation
 - [@travis-minke-sap](https://github.com/travis-minke-sap)
 - [@matzew](https://github.com/matzew)
 - [@devguyio](https://github.com/devguyio)
+- [@rhuss](https://github.com/rhuss)
+- [@itsmurugappan](https://github.com/itsmurugappan)
+- [@dsimansk](https://github.com/dsimansk)
+- [@cardil](https://github.com/cardil)
+- [@vyasgun](https://github.com/vyasgun)
+
 
 
 ### Learn more
