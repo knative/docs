@@ -172,6 +172,6 @@ rm -rf $TEMP
 if [ "$1" = "serve" ]; then
   npx http-server site
 else
-  echo "Tu serve the site run:"
+  echo "To serve the website run:"
   echo "npx http-server site"
 fi
