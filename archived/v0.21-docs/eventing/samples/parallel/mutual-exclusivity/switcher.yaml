@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: me-even-odd-switcher
+spec:
+  template:
+    spec:
+      containers:
+      - image: villardl/switcher-nodejs:0.1
+        env:
+        - name: EXPRESSION
+          value: Math.round(Date.parse(event.time) / 60000) % 2
+        - name: CASES
+          value: '[0, 1]'

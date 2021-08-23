@@ -1,0 +1,59 @@
+# Copyright 2018 The Knative Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: entry-route
+  namespace: default
+spec:
+  # This is the gateway shared in knative service mesh.
+  gateways:
+  - knative-ingress-gateway.knative-serving.svc.cluster.local
+  # Set host to the domain name that you own.
+  hosts:
+  - example.com
+  http:
+  - match:
+    - uri:
+        prefix: "/search"
+    rewrite:
+      # Rewrite the original host header to the host header of Search service
+      # in order to redirect requests to Search service.
+      authority: search-service.default.example.com
+    route:
+      # Basically here we redirect the request to the cluster entry again with
+      # updated header "search-service.default.example.com" so the request will
+      # eventually be directed to Search service.
+      - destination:
+          host: istio-ingressgateway.istio-system.svc.cluster.local
+          port:
+            number: 80
+        weight: 100
+  - match:
+    - uri:
+        prefix: "/login"
+    rewrite:
+      # Rewrite the original host header to the host header of Search service
+      # in order to redirect requests to Search service.
+      authority: login-service.default.example.com
+    route:
+      # Basically here we redirect the request to the cluster entry again with
+      # updated header "login-service.default.example.com" so the request will
+      # eventually be directed to LOgin service.
+      - destination:
+          host: istio-ingressgateway.istio-system.svc.cluster.local
+          port:
+            number: 80
+        weight: 100
