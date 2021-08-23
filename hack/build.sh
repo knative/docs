@@ -21,7 +21,7 @@ set -x
 #    Order matters :-), Most recent first.
 VERSIONS=("0.25" "0.24" "0.23" "0.22")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
 VERSIONS_GENERATORS=("mkdocs" "mkdocs" "hugo" "hugo")  # update this to always be 4 in the next two releases replace hugo with mkdocs, remove the copy of static hugo site at the bottom
-RELEASE_BRANCHES=("v0.25.0")                     # Release version for serving/eventing yaml files and api references.
+RELEASE_BRANCHES=("v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
 # 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
 DOCS_BRANCHES=("release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
 REPOS=("knative" "knative" "knative")
@@ -170,7 +170,8 @@ EOF
 rm -rf $TEMP
 
 if [ "$1" = "serve" ]; then
-  pushd site
-  npx http-server
-  popd
+  npx http-server site
+else
+  echo "Tu serve the site run:"
+  echo "npx http-server site"
 fi
