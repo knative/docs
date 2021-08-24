@@ -43,6 +43,12 @@
 |`[Kafka Broker](../kafka-broker/README.md)`|`<a href="../kafka-broker/README.md">Kafka Broker</a>`|
 |`[Kafka Broker](../kafka-broker/README.md){target=_blank}`|`<a href="../kafka-broker/README.md" target="_blank">Kafka Broker</a>`|
 
+### Include the .md extension in internal links
+
+|:white_check_mark: Correct                                     |:no_entry: Incorrect|
+|---------------------------------------|------|
+|`[Setting up a custom domain](../serving/using-a-custom-domain.md)`|`[Setting up a custom domain](../serving/using-a-custom-domain)`|
+
 ### Link to files, not folders
 
 |:white_check_mark: Correct                                     |:no_entry: Incorrect|
@@ -54,12 +60,6 @@
 |:white_check_mark: Correct                                     |:no_entry: Incorrect|
 |---------------------------------------|------|
 |`[Kafka Broker](../kafka-broker/README.md)`|`[Kafka Broker](../kafka-broker/readme.md)`|
-
-### Include the .md extension in internal links
-
-|:white_check_mark: Correct                                     |:no_entry: Incorrect|
-|---------------------------------------|------|
-|`[Setting up a custom domain](../serving/using-a-custom-domain.md)`|`[Setting up a custom domain](../serving/using-a-custom-domain)`|
 
 ## Formatting
 
