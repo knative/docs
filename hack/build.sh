@@ -19,10 +19,11 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version.
 #    Order matters :-), Most recent first.
-VERSIONS=("0.24" "0.23" "0.22" "0.21")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-RELEASE_BRANCHES=("v0.24.0")                     # Release version for serving/eventing yaml files and api references.
+VERSIONS=("0.25" "0.24" "0.23" "0.22")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+VERSIONS_GENERATORS=("mkdocs" "mkdocs" "hugo" "hugo")  # update this to always be 4 in the next two releases replace hugo with mkdocs, remove the copy of static hugo site at the bottom
+RELEASE_BRANCHES=("v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
 # 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
-DOCS_BRANCHES=("release-0.24")
+DOCS_BRANCHES=("release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
 REPOS=("knative" "knative" "knative")
 # 4) PR the result to main.
 # 5) Party.
@@ -42,14 +43,14 @@ if [ "$BUILD_VERSIONS" == "no" ]; then
 else
   # Versioning: pre-release (HEAD): docs => development/
   cp -r . $TEMP/docs-main
-  curl -f --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/docs-main/docs/reference/api/serving-api.md"
-  curl -f --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/docs-main/docs/reference/api/eventing-api.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/docs-main/docs/reference/api/serving-api.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/docs-main/docs/reference/api/eventing-api.md"
   pushd "$TEMP/docs-main"; mkdocs build -f mkdocs.yml -d $SITE/development; popd
 
   # Latest release branch to /docs
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/docs "$TEMP/docs-$latest"
-  curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
-  curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
   pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
@@ -59,10 +60,15 @@ else
     versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
 
     # This is a hack to make old sites links be handled by netlify redirects, we want the drop down but not the content yet
-    # git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "$TEMP/docs-$version"
-    # curl -f --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
-    # curl -f --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
-    # pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
+    # Just do it for older version that are mkdocs and not hugo
+    if [ "${VERSIONS_GENERATORS[$i+1]}" == "mkdocs" ]; then
+      echo "Building ${VERSIONS_GENERATORS[$i+1]} for previous version $version"
+      git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${REPOS[i+1]}/docs "$TEMP/docs-$version"
+      curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
+      curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
+      pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
+    fi
+
   done
 
   # Set up the version file to point to the built docs.
@@ -138,7 +144,6 @@ fi
 cp -r archived/scss/* site/scss/
 cp -r archived/v0.23-docs site/v0.23-docs
 cp -r archived/v0.22-docs site/v0.22-docs
-cp -r archived/v0.21-docs site/v0.21-docs
 
 # Home page is served from docs, so add a redirect.
 # TODO(jz) in production this should be done with a netlify 301 (or maybe just copy docs/index up with a base set).
@@ -165,7 +170,8 @@ EOF
 rm -rf $TEMP
 
 if [ "$1" = "serve" ]; then
-  pushd site
-  npx http-server
-  popd
+  npx http-server site
+else
+  echo "To serve the website run:"
+  echo "npx http-server site"
 fi
