@@ -47,7 +47,7 @@
 
 |:white_check_mark: Correct                                     |:no_entry: Incorrect|
 |---------------------------------------|------|
-|`[Kafka Broker](../kafka-broker/README.md)`|`[Kafka Broker](../kafka-broker)`|
+|`[Kafka Broker](../kafka-broker/README.md)`|`[Kafka Broker](../kafka-broker/)`|
 
 ### Ensure the letter case is correct
 
