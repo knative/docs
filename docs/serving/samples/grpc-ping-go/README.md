@@ -11,7 +11,7 @@ for production containers.
 
 ## Prerequisites
 
-- [Install the latest version of Knative Serving](../../../install/).
+- [Install the latest version of Knative Serving](../../../admin/install/serving/install-serving-with-yaml.md).
 
 - Install [docker](https://www.docker.com/).
 
