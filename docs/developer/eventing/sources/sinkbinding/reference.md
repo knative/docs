@@ -14,7 +14,7 @@ A `SinkBinding` resource supports the following parameters:
 | [`kind`][kubernetes-overview] | Identifies this resource object as a `SinkBinding` object. | Required |
 | [`metadata`][kubernetes-overview] | Specifies metadata that uniquely identifies the `SinkBinding` object. For example, a `name`. | Required |
 | [`spec`][kubernetes-overview] | Specifies the configuration information for this `SinkBinding` object. | Required |
-| [`spec.sink`](../../../../developer/eventing/sinks) | A reference to an object that resolves to a URI to use as the sink. | Required |
+| [`spec.sink`](../../../../developer/eventing/sinks/README.md) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | [`spec.subject`](#subject-parameter) | A reference to the resources for which the "runtime contract" is augmented by Binding implementations. | Required |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
 

@@ -17,7 +17,8 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ## Prerequisites
 
-- A Kubernetes cluster with [Knative Kafka Source installed](../../../admin/install/).
+- A Kubernetes cluster with Knative Kafka Source installed.
+For more information, see [Installing Knative](../../../admin/install/README.md).
 
 ## Apache Kafka Topic (Optional)
 

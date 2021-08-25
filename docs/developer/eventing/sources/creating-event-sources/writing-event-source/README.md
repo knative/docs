@@ -11,7 +11,7 @@ aliases:
 # Creating an event source by using the sample event source
 
 This guide explains how to create your own event source for Knative
-Eventing by using a [sample repository](https://github.com/knative-sandbox/sample-source), and explains the key concepts behind each required component. Documentation for the default [Knative event sources](../../../sources) can be used as an additional reference.
+Eventing by using a [sample repository](https://github.com/knative-sandbox/sample-source), and explains the key concepts behind each required component. Documentation for the default [Knative event sources](../../../sources/README.md) can be used as an additional reference.
 
 After completing the provided tutorial, you will have created a basic event source controller and a receive adapter. Events can be viewed by using the `event_display` Knative service.
 <!--TODO: Provide links to docs about what the event source controller and receiver adapter are-->
