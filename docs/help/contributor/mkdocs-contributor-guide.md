@@ -234,7 +234,7 @@ We use the following admonition boxes only. Use admonitions sparingly; too many 
 
     ```
     !!! tip
-        A Tip suggests an helpful, but not mandatory, action to take.
+        A Tip suggests a helpful, but not mandatory, action to take.
     ```
 
     ```
