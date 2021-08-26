@@ -19,6 +19,7 @@
 /eventing-autoscaler-keda/* go-get=1 /golang/eventing-autoscaler-keda.html 200
 /eventing-awssqs/* go-get=1 /golang/eventing-awssqs.html 200
 /eventing-ceph/* go-get=1 /golang/eventing-ceph.html 200
+/eventing-contrib/* go-get=1 /golang/eventing-contrib.html 200
 /eventing-couchdb/* go-get=1 /golang/eventing-couchdb.html 200
 /eventing-github/* go-get=1 /golang/eventing-github.html 200
 /eventing-gitlab/* go-get=1 /golang/eventing-gitlab.html 200
