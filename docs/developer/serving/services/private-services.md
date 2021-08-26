@@ -7,7 +7,7 @@ Knative provides two ways to enable private services which are only available
 inside the cluster:
 
 1. To make all Knative Services private, change the default domain to
-   `svc.cluster.local` by [editing the `config-domain` ConfigMap](../../../../serving/using-a-custom-domain.md). This changes all Services deployed through Knative to only be published to the cluster.
+   `svc.cluster.local` by [editing the `config-domain` ConfigMap](../../../serving/using-a-custom-domain.md). This changes all Services deployed through Knative to only be published to the cluster.
 1. To make an individual Service private, the Service or Route can be
    labelled with `networking.knative.dev/visibility=cluster-local` so that it is not published to the external gateway.
 
@@ -23,7 +23,7 @@ To configure a Knative Service so that it is only available on the cluster-local
     ```
 
     By labeling the Kubernetes Service you can restrict visibility in a more
-    fine-grained way. See [subroutes](../../../../serving/traffic-management.md) for information about tagged routes.
+    fine-grained way. See [Traffic management](../traffic-management.md) for information about tagged routes.
 
 - To label a Route when the Route is used directly without a Knative Service:
 
@@ -39,7 +39,7 @@ To configure a Knative Service so that it is only available on the cluster-local
 
 ### Example
 
-You can deploy the [Hello World sample](../../../../serving/samples/hello-world/helloworld-go.md) and then convert it to be an cluster-local Service by labelling the Service:
+You can deploy the [Hello World sample](../../../serving/samples/hello-world/helloworld-go/README.md) and then convert it to be an cluster-local Service by labelling the Service:
 
 ```bash
 kubectl label kservice helloworld-go networking.knative.dev/visibility=cluster-local

@@ -5,7 +5,7 @@
 You can configure the `rollout-duration` parameter per Knative Service or Route by using an annotation.
 
 !!! tip
-    For information about global, ConfigMap configurations for roll-out durations, see the [Administration guide](../../../admin/serving/rolling-out-latest-revision-configmap.md)
+    For information about global, ConfigMap configurations for roll-out durations, see the [Administration guide](../../admin/serving/rolling-out-latest-revision-configmap.md).
 
 ```yaml
 apiVersion: serving.knative.dev/v1
