@@ -128,7 +128,7 @@ kn source binding create bind-heartbeat \
 The `svc` in `http://event-display.svc.cluster.local` determines that the sink is a Knative Service. Other default sink prefixes include Channel and Broker.
 
 !!! tip
-    You can configure which resources can be used with the `--sink` flag for `kn` CLI commands by [Customizing kn](../../../../client/configure-kn/#example-configuration-file).
+    You can configure which resources can be used with the `--sink` flag for `kn` CLI commands by [Customizing kn](../../../client/configure-kn.md#example-configuration-file).
 
 ## Supported third-party sink types
 
