@@ -24,6 +24,7 @@
 /eventing-gitlab/* go-get=1 /golang/eventing-gitlab.html 200
 /eventing-kafka/* go-get=1 /golang/eventing-kafka.html 200
 /eventing-kafka-broker/* go-get=1 /golang/eventing-kafka-broker.html 200
+/eventing-kogito/* go-get=1 /golang/eventing-kogito.html 200
 /eventing-natss/* go-get=1 /golang/eventing-natss.html 200
 /eventing-prometheus/* go-get=1 /golang/eventing-prometheus.html 200
 /eventing-rabbitmq/* go-get=1 /golang/eventing-rabbitmq.html 200
