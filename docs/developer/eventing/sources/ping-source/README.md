@@ -18,9 +18,9 @@ The following example shows how you can configure a PingSource as an event sourc
 
 ## Before you begin
 
-1. To create a PingSource, you must install [Knative Eventing](../../../eventing/README.md). The PingSource event source type is enabled by default when you install Knative Eventing.
-1. Optional: You can use either `kubectl` or [`kn`](../../../client/install-kn.md) commands to create components such as a sink and PingSource.
-1. Optional: You can use either `kubectl` or [`kail`](https://github.com/boz/kail) for logging during the verification step in this procedure.
+1. To create a PingSource, you must install [Knative Eventing](../../../../eventing/README.md). The PingSource event source type is enabled by default when you install Knative Eventing.
+1. Optional: You can use either `kubectl` or `kn` commands to create components such as a sink and PingSource. To install `kn`, see [Installing kn](../../../../client/install-kn.md).
+1. Optional: You can use either `kubectl` or `kail` for logging during the verification step in this procedure. For more information about `kail`, see [kail](https://github.com/boz/kail) in GitHub.
 
 ## Procedure
 

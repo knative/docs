@@ -6,8 +6,8 @@ You can create a Knative service by applying a YAML file or using the `kn servic
 
 To create a Knative service, you will need:
 
-* A Kubernetes cluster with Knative Serving installed. For more information, see [Installing Knative]](../../../../admin/install/README.md).
-* Optional: To use the `kn service create` command, you must [install the `kn` CLI](../../../../client/install-kn.md).
+* A Kubernetes cluster with Knative Serving installed. For more information, see [Installing Knative](../../../admin/install/README.md).
+* Optional: To use the `kn service create` command, you must [install the `kn` CLI](../../../client/install-kn.md).
 
 ## Procedure
 

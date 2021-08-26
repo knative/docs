@@ -235,4 +235,4 @@ namespace:
 
 ## Reference Documentation
 
-See the [ContainerSource specification](../../../reference/api/eventing/eventing-api.md#sources.knative.dev/v1.ContainerSource).
+See the [ContainerSource reference](reference.md).
