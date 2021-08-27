@@ -144,4 +144,4 @@ You can delete a Subscription by using the `kn` or `kubectl` CLI tools.
 
 ## Next steps
 
-- [Creating a Channel using cluster or namespace defaults](/eventing/channels/create-default-channel)
+- [Creating a Channel using cluster or namespace defaults](create-default-channel.md)
