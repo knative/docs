@@ -11,6 +11,7 @@
 /build-spike/* go-get=1 /golang/build-spike.html 200
 /caching/* go-get=1 /golang/caching.html 200
 /client/* go-get=1 /golang/client.html 200
+/client-pkg/* go-get=1 /golang/client-pkg.html 200
 /community/* go-get=1 /golang/community.html 200
 /control-protocol/* go-get=1 /golang/control-protocol.html 200
 /discovery/* go-get=1 /golang/discovery.html 200

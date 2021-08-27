@@ -28,8 +28,9 @@ import (
 )
 
 var (
-	knativeOrgs   = []string{"knative", "knative-sandbox"}
-	allowedRepoRe = regexp.MustCompile("^[a-z][-a-z0-9]+$")
+	knativeOrgs        = []string{"knative", "knative-sandbox"}
+	allowedRepoRe      = regexp.MustCompile("^[a-z][-a-z0-9]+$")
+	archivedExceptions = []string{"eventing-contrib"}
 )
 
 // repoInfo provides a simple holder for GitHub repo information needed to
@@ -80,7 +81,7 @@ func fetchRepos(orgs []string) ([]repoInfo, error) {
 					log.Printf("Ignoring repo %s, matched by ignore %q", *r.Name, allowedRepoRe)
 					continue
 				}
-				if *r.Archived {
+				if *r.Archived && !inArchivedExceptions(*r.Name) {
 					log.Print("Ignoring archived repo: ", *r.Name)
 					continue
 				}
@@ -180,5 +181,13 @@ func (ris riSlice) Less(i, j int) bool {
 
 func (ris riSlice) Swap(i, j int) {
 	ris[i], ris[j] = ris[j], ris[i]
+}
 
+func inArchivedExceptions(n string) bool {
+	for _, r := range archivedExceptions {
+		if r == n {
+			return true
+		}
+	}
+	return false
 }
