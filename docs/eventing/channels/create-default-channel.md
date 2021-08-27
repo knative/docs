@@ -28,7 +28,7 @@ using the following template:
     Where `<filename>` is the name of the file you created in the previous step.
 
 If you create this object in the `default` namespace, according to the default ConfigMap
-example in [Channel types and defaults](/eventing/channels/channel-types-defaults), it is an
+example in [Channel types and defaults](channel-types-defaults.md), it is an
 InMemoryChannel Channel implementation.
 
 <!-- TODO: Add tabs for kn etc-->
@@ -52,7 +52,7 @@ Where:
 * `<example-channel>` is the name of the Channel you want to create.
 * `<namespace>` is the name of your target namespace.
 * `<channel-template-kind>` is the kind of Channel, such as InMemoryChannel or KafkaChannel,
-based on the default ConfigMap. See an example in [Channel types and defaults](/eventing/channels/channel-types-defaults).
+based on the default ConfigMap. See an example in [Channel types and defaults](channel-types-defaults.md).
 
 !!! note
     The `spec.channelTemplate` property cannot be changed after creation, because it is
