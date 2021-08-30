@@ -114,7 +114,7 @@ Follow the instructions in the documentation
 #### 💫 New Features & Changes
 
 - Distributed KafkaChannel Dispatcher will now re-queue KafkaChannels after failed reconciliation which will improve various failure recovery scenarios, but could consume CPU resources if reconciliation is blocked by underlying system issues (bad Kafka Secret config, etc.) ([#795](https://github.com/knative-sandbox/eventing-kafka/pull/795))
-- Separated CRDs to extra, additional yaml manifest (similar to eventing) ([#799](https://github.com/knative-sandbox/eventing-kafka/pull/799))
+- Separated CRDs to extra, additional YAML manifest (similar to eventing) ([#799](https://github.com/knative-sandbox/eventing-kafka/pull/799))
 - Enabled support for ResetOffset CRD in distributed KafkaChannel, see config/command/resetoffset for details. ([#761](https://github.com/knative-sandbox/eventing-kafka/pull/761))
 - The consolidated KafkaChannel dispatcher is now owned by the controller. ([#798](https://github.com/knative-sandbox/eventing-kafka/pull/798))
 
@@ -134,8 +134,8 @@ Follow the instructions in the documentation
 - Add `darwin/arm64` support to kn ([#1401](https://github.com/knative/client/pull/1401))
 - Add `base64` data handling to Ping commands ([#1392](https://github.com/knative/client/pull/1392)) ([#1388](https://github.com/knative/client/pull/1388))
 - Add support for multiple containers in Service spec ([#1382](https://github.com/knative/client/pull/1382))
-- Make `--cmd` flag as an array instead of string ([#1380](https://github.com/knative/client/pull/1380))
-- Add an `client.knative.dev/updateTimestamp` annotation to trigger a new revision when required ([#1364](https://github.com/knative/client/pull/1364))
+- Make `--cmd` flag an array instead of string ([#1380](https://github.com/knative/client/pull/1380))
+- Add a `client.knative.dev/updateTimestamp` annotation to trigger a new revision when required ([#1364](https://github.com/knative/client/pull/1364))
 
 
 #### 🐞 Bug Fixes
