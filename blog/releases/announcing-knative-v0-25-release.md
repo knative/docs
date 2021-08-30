@@ -105,7 +105,7 @@ Follow the instructions in the documentation
 
 #### 🐞 Bug Fixes
 
-- Fix to support subscribers that are Kubernete service, service's endpoint doesn't contain a trailing slash. ([#1123](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1123))
+- Fix to support subscribers that are a Kubernetes service. The service's endpoint doesn't contain a trailing slash. ([#1123](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1123))
 
 #### Apache Kafka Source and Channels v0.25
 
