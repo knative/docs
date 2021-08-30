@@ -188,7 +188,7 @@ spec:
   template:
     spec:
       containers:
-        - image: benmoss/heartbeats:latest
+        - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
           name: heartbeats
           args:
             - --period=1
@@ -224,7 +224,7 @@ spec:
   template:
     spec:
       containers:
-        - image: benmoss/event_display:latest
+        - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/event_display:latest
           env:
             - name: K_CONFIG_TRACING
               value: '{"backend":"zipkin","debug":"true","zipkin-endpoint":"http://otel-collector.observability:9411/api/v2/spans"}'
@@ -243,7 +243,7 @@ spec:
   template:
     spec:
       containers:
-        - image: benmoss/heartbeats:latest
+        - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
           name: heartbeats
           args:
             - --period=1
@@ -319,7 +319,7 @@ spec:
   template:
     spec:
       containers:
-        - image: benmoss/heartbeats:latest
+        - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
           name: heartbeats
           args:
             - --period=1
