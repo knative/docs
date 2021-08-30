@@ -25,6 +25,7 @@ Follow the instructions in the documentation
     - [Apache Kafka Broker v0.25](#Apache-Kafka-Broker-v025)
     - [Apache Kafka Source and Channels v0.25](#apache-kafka-source-and-channels-v025)
 - `kn` [CLI v0.25](#Client-v025)
+- [Operator v0.25](#Operator-v025)
 - [Thank you contributors](#Thank-you-contributors)
 
 
@@ -145,6 +146,14 @@ Follow the instructions in the documentation
 - Fix path not being escaped when applying a regex on Windows ([#1395](https://github.com/knative/client/pull/1395))
 - Fix wait for ready to skip non modified event first ([#1390](https://github.com/knative/client/pull/1390))
 
+## Operator v0.25
+
+<!-- Original notes are here: https://github.com/knative/operator/releases/tag/v0.25.0 -->
+
+#### 💫 New Features & Changes
+
+- Detect missing Istio requirement and suggests user to instal the Istio Gateway CRD [#697](https://github.com/knative/operator/pull/613)
+
 
 ### Thank you, contributors
 
@@ -169,6 +178,7 @@ Follow the instructions in the documentation
 - [@dsimansk](https://github.com/dsimansk)
 - [@cardil](https://github.com/cardil)
 - [@vyasgun](https://github.com/vyasgun)
+- [houshengbo](https://github.com/houshengbo)
 
 
 
