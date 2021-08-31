@@ -13,7 +13,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ## Installing the Kafka event source CRD
 
-- A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions) or the [Knative Operator](../../../../admin/install/knative-with-operators.md/#installing-with-different-eventing-sources).
+- A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions) or the [Knative Operator](../../../../admin/install/knative-with-operators.md#installing-with-different-eventing-sources).
 
 ## Optional: Create a Kafka topic
 
@@ -145,21 +145,29 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
     ```bash
     kubectl apply -f event-source.yaml
-    ...
+    ```
+
+    Example output:
+
+    ```bash
     kafkasource.sources.knative.dev/kafka-source created
     ```
 
-1. Check that the event source pod is running. The pod name will be prefixed
-   with `kafka-source`.
+1. Check that the event source pod is running:
 
     ```bash
     kubectl get pods
+    ```
+
+    The pod name will be prefixed with `kafka-source`:
+
+    ```bash
     NAME                                  READY     STATUS    RESTARTS   AGE
     kafka-source-xlnhq-5544766765-dnl5s   1/1       Running   0          40m
     ```
 
-1. Ensure the Apache Kafka Event Source started with the necessary
-   configuration.
+1. Ensure that the Kafka event source started with the necessary
+   configuration:
 
     ```bash
     kubectl logs --selector='knative-eventing-source-name=kafka-source'
@@ -172,11 +180,12 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
     ```bash
     kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic knative-demo-topic
-    If you don't see a command prompt, try pressing enter.
-    >{"msg": "This is a test!"}
     ```
 
-1. Check that the Apache Kafka Event Source consumed the message and sent it to
+    !!! tip
+        If you don't see a command prompt, try pressing enter.
+
+1. Check that the Kafka event source consumed the message and sent it to
    its sink properly. Since these logs are captured in debug level, edit the key `level` of `config-logging` configmap in `knative-sources` namespace to look like this:
 
     ```bash
@@ -206,21 +215,28 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
         }
     ```
 
-    Now manually delete the kafkasource deployment and allow the `kafka-controller-manager` deployment running in `knative-sources` namespace to redeploy it. Debug level logs should be visible now.
+1. Manually delete the Kafka source deployment and allow the `kafka-controller-manager` deployment running in the `knative-sources` namespace to redeploy it. Debug level logs should be visible now.
 
     ```bash
     kubectl logs --selector='knative-eventing-source-name=kafka-source'
-    ...
+    ```
 
+    Example output:
+
+    ```bash
     {"level":"debug","ts":"2020-05-28T10:40:29.400Z","caller":"kafka/consumer_handler.go:77","msg":"Message claimed","topic":".","value":"."}
     {"level":"debug","ts":"2020-05-28T10:40:31.722Z","caller":"kafka/consumer_handler.go:89","msg":"Message marked","topic":".","value":"."}
     ```
 
-1. Ensure the Event Display received the message sent to it by the Event Source.
+1. Verify that the Service received the message from the event source:
 
     ```bash
     kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
+    ```
 
+    Example output:
+
+    ```bash
     ☁️ cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -245,6 +261,11 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
     ```bash
     kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
+    ```
+
+    Example output:
+
+    ```bash
     "kafka-source" deleted
     ```
 
@@ -252,6 +273,11 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
     ```bash
     kubectl delete -f source/event-display.yaml service.serving.knative.dev
+    ```
+
+    Example output:
+
+    ```bash
     "event-display" deleted
     ```
 
@@ -259,6 +285,11 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
     ```bash
     kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
+    ```
+
+    Example output:
+
+    ```bash
     serviceaccount "kafka-controller-manager" deleted
     clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
     deleted clusterrolebinding.rbac.authorization.k8s.io
@@ -272,6 +303,11 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
     ```bash
     kubectl delete -f kafka-topic.yaml
+    ```
+
+    Example output:
+
+    ```bash
     kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
     ```
 
