@@ -310,8 +310,7 @@ To specify the key deserializer, add the label `kafkasources.sources.knative.dev
         name: event-display
    ```
 
-<<<<<<< HEAD
-## (Optional) Specify the initial offset
+## Optional: Specify the initial offset
 
 By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case you want to consume from the earliest offset, set the initialOffset field to `earliest`.
 
@@ -334,12 +333,10 @@ By default the `KafkaSource` starts consuming from the `latest` offset in each p
         name: event-display
    ```
 
-*NOTE:* valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
+!!! note
+    Valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
 
-## Connecting to a TLS enabled Kafka broker
-=======
 ## Connecting to a TLS-enabled Kafka broker
->>>>>>> 82d4022c... remove link, add command instead
 
 The KafkaSource supports TLS and SASL authentication methods. To enable TLS authentication, you must have the following files:
 
