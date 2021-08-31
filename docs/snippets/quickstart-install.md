@@ -24,11 +24,10 @@
               hack/build.sh
               ```
 
-        1. Move the executable binary file to the `kn` plugins directory:
+        1. Move the executable binary file to a directory on your `PATH`:
 
              ```
-             mkdir -p ~/.config/kn/plugins
-             mv kn-quickstart ~/.config/kn/plugins
+             mv kn-quickstart /usr/local/bin
              ```
 
          1. Verify that the plugin is working, for example:
