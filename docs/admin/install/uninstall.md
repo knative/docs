@@ -334,7 +334,7 @@ Uninstall each channel layer you have installed:
     1. Uninstall the NATS Streaming channel by running:
 
         ```bash
-        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-natss", file="300-natss-channel.yaml") }}
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-natss", file="eventing-natss.yaml") }}
         ```
 
     1. Uninstall NATS Streaming for Kubernetes. For more information, see the [eventing-natss](https://github.com/knative-sandbox/eventing-natss/tree/main/config) repository in GitHub.
