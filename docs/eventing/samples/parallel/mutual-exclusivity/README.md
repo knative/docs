@@ -4,16 +4,16 @@ In this example, we are going to see how we can create a Parallel with mutually
 exclusive branches.
 
 This example is the same as the
-[multiple branches example](../multiple-branches/) except that we are
+[multiple branches example](../multiple-branches/README.md) except that we are
 now going to rely on the Knative
 [switch](https://github.com/lionelvillard/knative-functions#switch) function to
-provide a soft mutual exclusivity guarantee.
+provide a soft mutual exclusivity guarantee .
 
 NOTE: this example must be deployed in the default namespace.
 
 ## Prerequisites
 
-Please refer to the sample overview for the [prerequisites](../).
+Please refer to the sample overview for the [prerequisites](../README.md).
 
 ### Create the Knative Services
 

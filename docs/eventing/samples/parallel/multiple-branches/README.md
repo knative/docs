@@ -9,7 +9,7 @@ The events produced by each branch are then sent to the `event-display` service.
 
 ## Prerequisites
 
-Please refer to the sample overview for the [prerequisites](../).
+Please refer to the sample overview for the [prerequisites](../README.md).
 
 ### Create the Knative Services
 

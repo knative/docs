@@ -38,4 +38,4 @@ Parallel has three parts for the Status:
 
 ## Examples
 
-Learn how to use Parallel by following the [examples](../../samples/parallel/)
+Learn how to use Parallel by following the [examples](../samples/parallel/README.md)

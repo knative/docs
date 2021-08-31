@@ -32,7 +32,7 @@ default Channel configuration for Knative Eventing.
 ## Specifying Kafka as the default Channel implementation
 <!--TODO: Move to admin guide-->
 
-1. To configure Kafka Channel as the [default channel configuration](../../../channels/channel-types-defaults), modify the `default-ch-webhook` ConfigMap so that it contains the following YAML:
+1. To configure Kafka Channel as the [default channel configuration](../../../channels/channel-types-defaults.md), modify the `default-ch-webhook` ConfigMap so that it contains the following YAML:
 
     ```yaml
     apiVersion: v1
