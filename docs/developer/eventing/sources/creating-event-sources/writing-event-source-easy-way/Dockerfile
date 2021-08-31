@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:16-slim
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -12,7 +12,7 @@ RUN npm install
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY . .
+COPY index.js ./
 
 EXPOSE 8080
-CMD [ "node", "index.js" ]
+CMD [ "npm", "start" ]
