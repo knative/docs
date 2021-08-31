@@ -13,12 +13,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ## Installing the Kafka event source CRD
 
-- A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#optional-install-a-default-channel-messaging-layer) or the [Knative Operator](../../../../admin/install/knative-with-operators.md/#installing-with-different-eventing-sources).
-
-```bash
-kubectl apply -f https://storage.googleapis.com/knative-nightly/eventing-kafka/latest/source.yaml
-```
-<!--Taken from https://github.com/knative-sandbox/eventing-kafka - not sure if there's a newer command-->
+- A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions) or the [Knative Operator](../../../../admin/install/knative-with-operators.md/#installing-with-different-eventing-sources).
 
 ## Optional: Create a Kafka topic
 
