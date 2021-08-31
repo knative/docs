@@ -19,7 +19,7 @@ kubectl create namespace event-example
 
 ## Adding a broker to the namespace
 
-The [broker](../broker) allows you to route events to different event sinks or consumers.
+The [broker](broker/README.md) allows you to route events to different event sinks or consumers.
 
 1. Add a broker named `default` to your namespace by creating a YAML file using
 the following template:
@@ -55,7 +55,7 @@ the following template:
     ```
 
     If `READY` is `False`, wait a few moments and then run the command again.
-    If you continue to receive the `False` status, see the [Debugging Guide](../debugging/) to troubleshoot the issue.
+    If you continue to receive the `False` status, see the [Debugging Guide](debugging/README.md) to troubleshoot the issue.
 
 ## Creating event consumers
 
@@ -159,11 +159,11 @@ into a file:
      goodbye-display   1/1     1            1           16s
      ```
    The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
-   If the numbers do not match, see the [Debugging Guide](../debugging/) to troubleshoot the issue.
+   If the numbers do not match, see the [Debugging Guide](debugging/README.md) to troubleshoot the issue.
 
 ## Creating triggers
 
-A [trigger](../broker/triggers) defines the events that each event consumer receives.
+A [trigger](broker/triggers/README.md) defines the events that each event consumer receives.
 Brokers use triggers to forward events to the correct consumers.
 Each trigger can specify a filter that enables selection of relevant events based on the Cloud Event context attributes.
 
@@ -237,7 +237,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 
     The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
     The exact value depends on the broker implementation.
-    If this value looks incorrect, see the [Debugging Guide](../debugging/) to troubleshoot the issue.
+    If this value looks incorrect, see the [Debugging Guide](debugging/README.md) to troubleshoot the issue.
 
 ## Creating a pod as an event producer
 

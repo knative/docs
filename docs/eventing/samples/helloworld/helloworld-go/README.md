@@ -11,7 +11,7 @@ We will deploy the app as a
 along with a
 [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
 However, you can also deploy the app as a
-[Knative Serving Service](../../../../serving/).
+[Knative Serving Service](../../../../serving/README.md).
 
 Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -24,7 +24,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
 
 ## Before you begin
 
-- A Kubernetes cluster with [Knative Eventing](../../../../admin/install) installed.
+- A Kubernetes cluster with [Knative Eventing](../../../../admin/install/README.md) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -252,7 +252,7 @@ folder) you're ready to build and deploy the sample app.
       **Note:** you can also use injection based on labels with the
       Eventing sugar controller.
       For how to install the Eventing sugar controller, see
-      [Install optional Eventing extensions](../../../../admin/install/install-extensions#install-optional-eventing-extensions).
+      [Install optional Eventing extensions](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions).
 
 1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.
@@ -277,7 +277,7 @@ application and trigger are ready, let's send a CloudEvent.
 
 ### Send CloudEvent to the Broker
 
-We can send an http request directly to the [Broker](../../../broker/)
+We can send an http request directly to the [Broker](../../../broker/README.md)
 with correct CloudEvent headers set.
 
 1. Deploy a curl pod and SSH into it
@@ -351,7 +351,7 @@ with another event.
 
     ```
 
-Play around with the CloudEvent attributes in the curl command and the trigger specification to [understand how triggers work](../../../broker/triggers).
+Play around with the CloudEvent attributes in the curl command and the trigger specification to [understand how triggers work](../../../broker/triggers/README.md).
 
 ## Verify reply from helloworld-go app
 

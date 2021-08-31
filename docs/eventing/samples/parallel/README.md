@@ -12,12 +12,12 @@ All examples require:
   - Knative Serving
 
 All examples are using the
-[default channel template](../../channels/create-default-channel).
+[default channel template](../../../eventing/channels/create-default-channel.md).
 
 ## Examples
 
 Each of the following examples use
-[`PingSource`](../../sources/ping-source/) as the source of events.
+[`PingSource`](../../../developer/eventing/sources/ping-source/README.md) as the source of events.
 
 We also use simple
 [functions](https://github.com/lionelvillard/knative-functions) to perform
@@ -25,5 +25,5 @@ trivial filtering, transformation and routing of the incoming events.
 
 The examples are:
 
-- [Parallel with multiple branches and global reply](multiple-branches/)
-- [Parallel with mutually exclusive cases](mutual-exclusivity/)
+- [Parallel with multiple branches and global reply](multiple-branches/README.md)
+- [Parallel with mutually exclusive cases](mutual-exclusivity/README.md)
