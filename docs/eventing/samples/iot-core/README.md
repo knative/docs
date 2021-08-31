@@ -60,7 +60,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     gcloud pubsub topics create $IOTCORE_TOPIC_DEVICE
     ```
 
-1.  Setup [Knative Eventing](../../../eventing).
+1.  Set up [Knative Eventing](../../../eventing/README.md).
 
 #### GCP PubSub Source
 

@@ -10,13 +10,13 @@ Knative Service.
 You will need:
 
 1. An internet-accessible Kubernetes cluster with Knative Serving installed.
-   Follow the [installation instructions](../../../install/) if you
+   Follow the [installation instructions](../../../admin/install/README.md) if you
    need to create one.
 1. Ensure Knative Serving is
    [configured with a domain name](../../../serving/using-a-custom-domain.md)
 1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
    that allows GitLab to call into the cluster.
-1. Install [Knative Eventing](../../../eventing).
+1. Install [Knative Eventing](../../../eventing/README.md).
 
 ### Install GitLab Event Source
 
