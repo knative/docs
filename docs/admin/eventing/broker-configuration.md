@@ -68,7 +68,8 @@ data:
 
 Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap.
 
-For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](../kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
+For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the
+[Kafka Channel ConfigMap](kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
 
 ### Changing the default Channel implementation for a namespace
 
