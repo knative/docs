@@ -79,6 +79,19 @@ Hello World!
 ```
 
 ??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.nip.io`?"
-    In some cases `*.nip.io` addresses are not able to be resolved. This can be solved by adding a snippet to the `/etc/systemd/resolved.conf`. See the comments [here](https://github.com/IBM-Blockchain/blockchain-vscode-extension/issues/2878#issuecomment-890147917) and [here](https://github.com/IBM-Blockchain/blockchain-vscode-extension/issues/2878#issuecomment-890246282) for more details.
+
+    In some cases `*.nip.io` addresses are not able to be resolved. This can be fixed by having external nameservers resolve the addresses instead of the local nameserver.
+
+    The exact steps will differ according to your distribution. For example, with Ubuntu derived systems which use `systemd-resolved`, you can add the following entry to the `/etc/systemd/resolved.conf`:
+
+    ```ini
+    [Resolve]
+    DNS=8.8.8.8
+    Domains=~nip.io.
+    ```
+
+    Then simply restart the service with `sudo service systemd-resolved restart`.
+
+    For MacOS users, you can add the DNS and domain using the network settings as explained [here](https://support.apple.com/en-gb/guide/mac-help/mh14127/mac).
 
 Congratulations :tada:, you've just created your first Knative Service. Up next, Autoscaling!
