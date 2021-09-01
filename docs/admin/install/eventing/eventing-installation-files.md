@@ -5,7 +5,7 @@ This guide provides reference information about the core Knative Eventing YAML f
 - The custom resource definitions (CRDs) and core components required to install Knative Eventing.
 - Optional components that you can apply to customize your installation.
 
-For information about installing these files, see [Installing Knative Eventing using YAML files](../install-eventing-with-yaml).
+For information about installing these files, see [Installing Knative Eventing using YAML files](../install-eventing-with-yaml.md).
 
 The following table describes the installation files included in Knative Eventing:
 
