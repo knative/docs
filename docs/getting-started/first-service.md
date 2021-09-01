@@ -80,7 +80,7 @@ Hello World!
 
 ??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.nip.io`?"
 
-    In some cases `*.nip.io` addresses are not able to be resolved. This can be fixed by having external nameservers resolve the addresses instead of the local nameserver.
+    In some cases your dns server may be set up not to resolve `*.nip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses. For example:
 
     The exact steps will differ according to your distribution. For example, with Ubuntu derived systems which use `systemd-resolved`, you can add the following entry to the `/etc/systemd/resolved.conf`:
 
