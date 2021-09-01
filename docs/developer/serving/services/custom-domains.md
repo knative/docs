@@ -6,7 +6,7 @@ Each Knative Service is automatically assigned a default domain name when it is 
 
 You can create a `DomainMapping` object to map a single, non-wildcard domain to a specific Knative Service.
 
-For example, if you own the domain name `example.org`, and you configure the domain DNS to reference your Knative cluster, you can use domain mapping to
+For example, if you own the domain name `example.org`, and you configure the domain DNS to reference your Knative cluster, you can use DomainMapping to
 serve a Knative Service at this domain.
 
 !!! note
