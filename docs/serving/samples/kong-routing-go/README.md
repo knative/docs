@@ -95,7 +95,6 @@ Build the application container and publish it to a container registry:
       ${REPO}/kong-routing-go`. If you manually changed the `.yaml` file, you
       must replace `${REPO}` with the correct path on your local machine.
     - Run this command:
-
       ```bash
       perl -pi -e "s@github.com/knative/docs/docs/serving/samples@${REPO}@g" docs/serving/samples/kong-routing-go/sample.yaml
       ```
@@ -217,31 +216,23 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
     accessing these services.
 
     - Send a request to the _Search_ service:
-
       ```bash
       curl http://${GATEWAY_IP}/search --header "Host: example.com"
       ```
-
       or
-
       ```bash
       curl http://${GATEWAY_IP}/search --header "Host: <YOUR_DOMAIN_NAME>"
       ```
-
       for the case using your own domain.
 
     - Send a request to the _Login_ service:
-
       ```bash
       curl http://${GATEWAY_IP}/login --header "Host: example.com"
       ```
-
       or
-
       ```bash
       curl http://${GATEWAY_IP}/login --header "Host: <YOUR_DOMAIN_NAME>"
       ```
-
       for the case using your own domain.
 
 ## How It Works
