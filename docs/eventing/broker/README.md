@@ -6,7 +6,7 @@ Event delivery mechanics are an implementation detail that depend on the configu
 [broker class](../../admin/eventing/broker-configuration.md#broker-class-options).
 Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
-<img src="images/broker-workflow.svg" width="70%">
+![An event enters a Broker. The Broker uses Triggers to forward the event to the appropriate Subscriber.](images/broker-workflow.svg)
 
 After an event has entered a broker, it can be forwarded to subscribers by using triggers. Triggers allow events to be filtered by attributes, so that events with particular attributes can be sent to subscribers that have registered interest in events with those attributes.
 
