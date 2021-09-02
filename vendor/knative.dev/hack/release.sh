@@ -610,6 +610,7 @@ function publish_to_github() {
   [[ -n "${RELEASE_BRANCH}" ]] && commitish="--commitish=${RELEASE_BRANCH}"
   for i in {2..0}; do
     hub_tool release create \
+        --prerelease \
         ${attachments[@]} \
         --file="${description}" \
         "${commitish}" \
