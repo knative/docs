@@ -1,7 +1,7 @@
 !!! todo "Installing the `kn` CLI"
 
     === "Using Homebrew"
-        For macOS, you can install `kn` by using <a href="https://github.com/knative/homebrew-client" target="_blank">Homebrew</a>.
+        For macOS, you can install `kn` by using [Homebrew](https://github.com/knative/homebrew-client){target=_blank}.
 
         ```
         brew install knative/client/kn
@@ -11,7 +11,7 @@
 
         You can install `kn` by downloading the executable binary for your system and placing it in the system path.
 
-        1. Download the binary for your system from the <a href="https://github.com/knative/client/releases" target="_blank">`kn` release page</a>.
+        1. Download the binary for your system from the [`kn` release page](https://github.com/knative/client/releases){target=_blank}.
 
         1. Rename the binary to `kn` and make it executable by running the commands:
 
@@ -59,7 +59,7 @@
 
         Links to images are available here:
 
-        - <a href="https://gcr.io/knative-releases/knative.dev/client/cmd/kn" target="_blank">Latest release</a>
+        - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}
 
         You can run `kn` from a container image. For example:
 

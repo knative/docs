@@ -2,7 +2,11 @@
 The last super power :rocket: of Knative Serving we'll go over in this tutorial is traffic splitting.
 
 ??? question "What are some common traffic splitting use-cases?"
-    Splitting traffic is useful for a number of very common modern infrastructure needs, such as **<a href= "https://martinfowler.com/bliki/BlueGreenDeployment.html" target="blank_">blue/green deployments</a> and <a href="https://martinfowler.com/bliki/CanaryRelease.html" target="blank_">canary deployments</a>.** Bringing these industry standards to bear on Kubernetes is **as simple as a single CLI command on Knative** or YAML tweak, let's see how!
+    Splitting traffic is useful for a number of very common modern infrastructure needs, such as
+    **[blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html){target=blank_}
+    and
+    [canary deployments](https://martinfowler.com/bliki/CanaryRelease.html){target=blank_}.**
+    Bringing these industry standards to bear on Kubernetes is **as simple as a single CLI command on Knative** or YAML tweak, let's see how!
 
 
 ## Creating a new Revision
