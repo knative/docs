@@ -13,10 +13,10 @@ Nightly-built executable binaries are available for users who want to install th
 
 Links to the latest nightly-built executable binaries are available here:
 
-- <a href="https://storage.googleapis.com/knative-nightly/client/latest/kn-darwin-amd64" target="_blank">macOS</a>
-- <a href="https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64" target="_blank">Linux</a>
-- <a href="https://storage.googleapis.com/knative-nightly/client/latest/kn-windows-amd64.exe" target="_blank">Windows</a>
+- [macOS](https://storage.googleapis.com/knative-nightly/client/latest/kn-darwin-amd64){target=_blank}
+- [Linux](https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64){target=_blank}
+- [Windows](https://storage.googleapis.com/knative-nightly/client/latest/kn-windows-amd64.exe){target=_blank}
 
 ## Using kn with Tekton
 
-See the <a href="http://hub.tekton.dev/tekton/task/kn" target="_blank">Tekton documentation</a>.
+See the [Tekton documentation](http://hub.tekton.dev/tekton/task/kn){target=_blank}.

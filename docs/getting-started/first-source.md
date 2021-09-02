@@ -1,11 +1,8 @@
 In this tutorial, you use the [CloudEvents Player](https://github.com/ruromero/cloudevents-player){target=blank} to showcase the core concepts of Knative Eventing. By the end of this tutorial, you should have an architecture that looks like this:
 
-<figure>
-  <img src="../images/event_diagram.png" draggable="false">
-  <figcaption>Figure 6.6 from <a href = "https://www.manning.com/books/knative-in-action" target="_blank">Knative in Action</a> <br>
-Here, the CloudEvents Player is acting as both a <code>Source</code> and a <code>Sink</code> for CloudEvents.
-  </figcaption>
-</figure>
+![The CloudEvents Player acts as both a Source and a Sink for CloudEvents](images/event_diagram.png)
+
+The above image is Figure 6.6 from [Knative in Action](https://www.manning.com/books/knative-in-action){target=_blank}.
 
 ## Creating your first Source
 The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of the Broker as an environment variable, `BROKER_URL`. You will send CloudEvents to the Broker through the CloudEvents Player application.
@@ -58,12 +55,9 @@ Create the CloudEvents Player Service:
     ```
 
 ## Examining the CloudEvents Player
-**You can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.nip.io){target=_blank} in your browser, the **Create Event** form appears.
+**You can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.nip.io){target=_blank} in your browser, the **Create Event** form appears:
 
-<figure>
-  <img src="../images/event_form.png" draggable="false">
-  <figcaption>The user interface for the CloudEvents Player</figcaption>
-</figure>
+![The user interface for the CloudEvents Player](images/event_form.png)
 
 ??? question "What do these fields mean?"
     | Field          | Description |
