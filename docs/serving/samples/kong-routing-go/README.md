@@ -1,10 +1,3 @@
----
-title: "Routing across multiple Knative services with Kong"
-linkTitle: "Routing services with Kong"
-weight: 1
-type: "docs"
----
-
 # Routing across multiple Knative services with Kong
 
 This example shows how to map multiple Knative services to different paths under

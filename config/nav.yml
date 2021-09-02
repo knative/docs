@@ -166,6 +166,7 @@ nav:
           - Scala: serving/samples/hello-world/helloworld-scala/README.md
           - Shell: serving/samples/hello-world/helloworld-shell/README.md
         - Routing services - Go: serving/samples/knative-routing-go/README.md
+        - Routing services with Kong - Go: serving/samples/kong-routing-go/README.md
         - multi-container samples: serving/samples/multi-container/README.md
         - RESTful service - Go: serving/samples/rest-api-go/README.md
         - Secrets - Go: serving/samples/secrets-go/README.md
