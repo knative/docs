@@ -43,7 +43,7 @@ trigger.eventing.knative.dev/cloudevents-player created
 
 Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 
-![CloudEvents Player user interface](../images/event_received.png){draggable=false}
+![CloudEvents Player user interface](images/event_received.png){draggable=false}
 
 You may need to refresh the page to see your changes.
 
