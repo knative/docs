@@ -1,6 +1,6 @@
 !!! todo "Installing the `quickstart` plugin"
     === "Using Homebrew"
-        For macOS, you can install the `quickstart` plugin by using <a href="https://brew.sh" target="_blank">Homebrew</a>.
+        For macOS, you can install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}.
             ```
             brew install knative-sandbox/kn-plugins/quickstart
             ```
@@ -8,7 +8,7 @@
     === "Using a binary"
          You can install the `quickstart` plugin by downloading the executable binary for your system and placing it on your `PATH` (for example, in `/usr/local/bin`).
 
-         A link to the latest stable binary release is available on the <a href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"> `quickstart` release page</a>.
+         A link to the latest stable binary release is available on the [`quickstart` release page](https://github.com/knative-sandbox/kn-plugin-quickstart/releases){target=_blank}.
 
     === "Using Go"
         1. Check out the `kn-plugin-quickstart` repository:
