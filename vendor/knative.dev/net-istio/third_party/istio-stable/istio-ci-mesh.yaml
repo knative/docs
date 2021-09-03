@@ -30,8 +30,7 @@ spec:
         targetAverageUtilization: 60
     gateways:
       istio-ingressgateway:
-        autoscaleMin: 2
-        autoscaleMax: 5
+        autoscaleEnabled: false
     sidecarInjectorWebhook:
       rewriteAppHTTPProbe: true
 
@@ -49,6 +48,7 @@ spec:
       - name: istio-ingressgateway
         enabled: true
         k8s:
+          replicaCount: 3
           env:
             - name: 'TERMINATION_DRAIN_DURATION_SECONDS'
               value: '20'

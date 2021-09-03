@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The Knative Authors
+# Copyright 2020 The Knative Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 source "$(dirname $0)/../library.sh"
 
-install_yaml "$(dirname $0)/${1%%.*}/istio.yaml"
+generate "1.8.4" "$(dirname $0)"
+
+# Temporarily disable mTLS STRICT in mesh mode
+# see: this (https://github.com/knative-sandbox/net-istio/issues/503)
+# To reenable this create the file extra/istio-mesh.yaml with the following
+#
+# ---
+# apiVersion: "security.istio.io/v1beta1"
+# kind: "PeerAuthentication"
+# metadata:
+#   name: "default"
+#   namespace: "istio-system"
+# spec:
+#   mtls:
+#     mode: STRICT
+

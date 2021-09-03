@@ -269,10 +269,10 @@ gopkg.in/go-playground/webhooks.v3/github
 # gopkg.in/yaml.v2 v2.3.0
 ## explicit
 gopkg.in/yaml.v2
-# knative.dev/hack v0.0.0-20210309141825-9b73a256fd9a
+# knative.dev/hack v0.0.0-20210325223819-b6ab329907d3
 ## explicit
 knative.dev/hack
-# knative.dev/net-istio v0.21.1-0.20210316183142-f9ffb013940a
+# knative.dev/net-istio v0.22.1
 ## explicit
 knative.dev/net-istio/third_party
 knative.dev/net-istio/third_party/istio-stable
