@@ -4,7 +4,7 @@
         For macOS, you can install `kn` by using [Homebrew](https://github.com/knative/homebrew-client){target=_blank}.
 
         ```
-        brew install knative/client/kn
+        brew install kn
         ```
 
     === "Using a binary"
