@@ -19,7 +19,7 @@ Some resources can opt in to multiple duck types.
 <!-- TODO: point to Discovery ClusterDuckType documentation. -->
 
 A fundamental use of duck typing in Knative is using object references in resource _specs_ to point
-to another resource.
+to other resources.
 The definition of the object containing the reference prescribes the expected duck type of the
 resource being referenced.
 
