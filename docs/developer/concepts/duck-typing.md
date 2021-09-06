@@ -46,7 +46,7 @@ following: <!-- If possible, we want to call these examples "resource" shapes, n
 <spec ignored for Sizable>
 status:
   height: <in centimetres>
-  weight: <in grams>
+  weight: <in kilograms>
 ```
 
 Now the instance of `pointee` could look like this:
@@ -63,8 +63,8 @@ status:
   lastFeeding: 2 hours ago
   hungry: true
   age: 2
-  height: 27
-  weight: 70
+  height: 60
+  weight: 20
 ```
 
 When the `Example` resource functions, it only acts on the information in the Sizable duck type
@@ -94,8 +94,8 @@ status:
   college: true
   hungry: true
   age: 22
-  height: 62
-  weight: 120
+  height: 170
+  weight: 50
 ```
 
 The `Example` resource is able to apply the logic configured for it, without explicit
