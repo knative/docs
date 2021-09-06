@@ -125,7 +125,7 @@ status:
 
 ### Binding
 
-With a direct subject, Binding is expected to be in the following shape:
+With a direct `subject`, Binding is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version
@@ -138,7 +138,7 @@ spec:
     name: a-name
 ```
 
-With an indirect subject, Binding is expected to be in the following shape:
+With an indirect `subject`, Binding is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version
