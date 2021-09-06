@@ -18,57 +18,9 @@ A PingSource definition supports the following fields:
 | `spec.data` | The data used as the body of the event posted to the sink. Default is empty. Mutually exclusive with `dataBase64`. | Required if not sending base64 encoded data |
 | `spec.dataBase64` | A base64-encoded string of the actual event's body posted to the sink. Default is empty. Mutually exclusive with `data`. | Required if sending base64 encoded data |
 | `spec.schedule` | Specifies the cron schedule. Defaults to `* * * * *`. | Optional |
-| [`spec.sink`](#sink-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
+| [`spec.sink`](../../sinks/README.md) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | `spec.timezone` | Modifies the actual time relative to the specified timezone. Defaults to the system time zone. <br><br> See the [list of valid tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia. For general information about time zones, see the [IANA](https://www.iana.org/time-zones) website.  | Optional |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
-
-
-### Sink parameter
-
-The `sink` parameter is a reference to an object that resolves to a URI to use as the sink.
-
-A `sink` definition supports the following fields:
-
-| Field | Description | Required or optional |
-|-------|-------------|----------------------|
-| `ref` | This points to an Addressable. | Required if _not_ using `uri`  |
-| `ref.apiVersion` | API version of the referent. | Required if using `ref` |
-| [`ref.kind`][kubernetes-kinds] | Kind of the referent. | Required if using `ref` |
-| [`ref.name`][kubernetes-names] | Name of the referent. | Required if using `ref` |
-| [`ref.namespace`][kubernetes-namespaces] | Namespace of the referent. If omitted this defaults to the object holding it. | Optional |
-| `uri` | This can be an absolute URL with a non-empty scheme and non-empty host that points to the target or a relative URI. Relative URIs are resolved using the base URI retrieved from Ref. | Required if _not_ using `ref` |
-
-!!! note
-    At least one of `ref` or `uri` is required. If both are specified, `uri` is
-    resolved into the URL from the Addressable `ref` result.
-
-#### Example: sink parameter
-
-Given the following YAML, if `ref` resolves into
-`"http://mysink.default.svc.cluster.local"`, then `uri` is added to this
-resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
-
-<!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
-
-```yaml
-apiVersion: sources.knative.dev/v1
-kind: PingSource
-metadata:
-  name: test-heartbeats
-spec:
-  ...
-  sink:
-    ref:
-      apiVersion: v1
-      kind: Service
-      namespace: default
-      name: mysink
-    uri: /extra/path
-```
-
-!!! contract
-    This results in the `K_SINK` environment variable being set as
-    `"http://mysink.default.svc.cluster.local/extra/path"`.  <!-- unsure about this -->
 
 
 ### CloudEvent Overrides
