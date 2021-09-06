@@ -6,7 +6,6 @@ Duck typing means that the compatibility of a resource for use in a Knative syst
 certain properties that are used to identify the resource control plane shape and behaviors.
 These properties are based on a set of common definitions for different types of resources, called
 duck types.
-<!-- What are the duck types? The properties? The common definitions? The types of resources? -->
 
 Knative can use a resource as if it is the generic duck type, without specific knowledge about the
 resource type, if:
@@ -22,6 +21,8 @@ A fundamental use of duck typing in Knative is using object references in resour
 to other resources.
 The definition of the object containing the reference prescribes the expected duck type of the
 resource being referenced.
+
+## Example
 
 In the following example, a Knative `Example` resource named `pointer` references a `Dog` resource
 named `pointee` in its spec:
@@ -39,7 +40,7 @@ spec:
 ```
 
 If the expected shape of a Sizable duck type is that, in the `status`, the schema shape is the
-following: <!-- If possible, we want to call these examples "resource" shapes, not "schema" shapes, because we've only talked of "resources" so far. Ask an engineer if that's okay. -->
+following:
 
 ```yaml
 <standard metadata>
