@@ -38,7 +38,7 @@ spec:
     name: pointee
 ```
 
-If the expected shape of a Sizable duck type is that in the status, the schema shape is the
+If the expected shape of a Sizable duck type is that, in the `status`, the schema shape is the
 following: <!-- If possible, we want to call these examples "resource" shapes, not "schema" shapes, because we've only talked of "resources" so far. Ask an engineer if that's okay. -->
 
 ```yaml
