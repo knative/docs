@@ -136,3 +136,11 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 | -- | -- | -- |
 | [KafkaSink](kafka-sink.md)  | Knative  | Send events to a Kafka topic |
 | [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |
+
+
+[kubernetes-kinds]:
+  https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+[kubernetes-names]:
+  https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+[kubernetes-namespaces]:
+  https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
