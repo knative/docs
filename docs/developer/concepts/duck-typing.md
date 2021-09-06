@@ -43,8 +43,6 @@ If the expected shape of a Sizable duck type is that, in the `status`, the schem
 following:
 
 ```yaml
-<standard metadata>
-<spec ignored for Sizable>
 status:
   height: <in centimetres>
   weight: <in kilograms>
