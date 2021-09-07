@@ -1,13 +1,13 @@
-# Apache Kafka Source Example
+# Apache Kafka source example
 
 Tutorial on how to build and deploy a `KafkaSource` event source.
 
 ## Background
 
-The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents via HTTP to its configured `sink`.
+The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`.
 
 !!! note
-    If need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets, you can implement a Kafka Consumer by using one of the available Apache Kafka SDKs.
+    If you need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets, you can implement a Kafka Consumer by using one of the available Apache Kafka SDKs.
 
 <!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
 
@@ -64,7 +64,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ## Create a Service
 
-1. Clone the sample code Github repository, and navigate to the local directory of the repository:
+1. Clone the sample code GitHub repository, and navigate to the local directory of the repository:
 
     ```bash
     git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
@@ -105,13 +105,13 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     service.serving.knative.dev/event-display created
     ```
 
-1. Ensure that the Service pod is running, by running the command:
+1. Ensure that the Service Pod is running, by running the command:
 
     ```bash
     kubectl get pods
     ```
 
-    The pod name is prefixed with `event-display`:
+    The Pod name is prefixed with `event-display`:
 
     ```bash
     NAME                                            READY     STATUS    RESTARTS   AGE
@@ -153,13 +153,13 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     kafkasource.sources.knative.dev/kafka-source created
     ```
 
-1. Check that the event source pod is running:
+1. Verify that the event source Pod is running:
 
     ```bash
     kubectl get pods
     ```
 
-    The pod name will be prefixed with `kafka-source`:
+    The Pod name is prefixed with `kafka-source`:
 
     ```bash
     NAME                                  READY     STATUS    RESTARTS   AGE
@@ -185,8 +185,8 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     !!! tip
         If you don't see a command prompt, try pressing enter.
 
-1. Check that the Kafka event source consumed the message and sent it to
-   its sink properly. Since these logs are captured in debug level, edit the key `level` of `config-logging` configmap in `knative-sources` namespace to look like this:
+1. Verify that the Kafka event source consumed the message and sent it to
+   its Sink properly. Because these logs are captured in debug level, edit the key `level` of `config-logging` ConfigMap in `knative-sources` namespace to look like this:
 
     ```bash
     data:
@@ -370,16 +370,16 @@ By default the `KafkaSource` starts consuming from the `latest` offset in each p
    ```
 
 !!! note
-    Valid values for `initialOffset` is `earliest` or `latest`, any other value would result in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
+    Valid values for `initialOffset` is `earliest` or `latest`. Any other value results in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
 
-## Connecting to a TLS-enabled Kafka broker
+## Connecting to a TLS-enabled Kafka Broker
 
 The KafkaSource supports TLS and SASL authentication methods. To enable TLS authentication, you must have the following files:
 
 * CA Certificate
 * Client Certificate and Key
 
-KafkaSource expects these files to be in pem format, if it is in other format like jks, please convert to pem.
+KafkaSource expects these files to be in pem format, if it is in other format like jks, convert to pem.
 
 1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up, by running the commands:
 
