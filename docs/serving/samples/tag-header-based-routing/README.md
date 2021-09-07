@@ -1,9 +1,3 @@
----
-title: "Tag Header Based Routing"
-weight: 1
-type: "docs"
----
-
 # Tag Header Based Routing
 
 This sample explains the use of tag header based routing.
@@ -16,16 +10,16 @@ the same URL of Knative Service. To do this, you must set the specific header `K
 
 Currently Istio, Contour and Kourier ingress support this feature.
 
-## Prerequestie
+## Prerequisites
 
 1. A Knative cluster that has an ingress controller installed
 with Knative v0.16 and later.
 
 1. Move into the docs directory:
 
-```bash
-cd $GOPATH/src/github.com/knative/docs
-```
+    ```bash
+    cd $GOPATH/src/github.com/knative/docs
+    ```
 
 ## Enabling tag header based routing
 
@@ -37,7 +31,7 @@ kubectl patch cm config-features -n knative-serving -p '{"data":{"tag-header-bas
 
 ## Build images
 
-Follow the instructions in [helloworld-go](../hello-world/helloworld-go) to build the `helloworld` image and upload it
+Follow the instructions in [helloworld-go](../hello-world/helloworld-go/README.md) to build the `helloworld` image and upload it
 to your container repository.
 
 Replace `{username}` in the [sample.yaml](sample.yaml) with your Docker Hub username.

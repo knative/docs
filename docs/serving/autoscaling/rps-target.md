@@ -1,10 +1,3 @@
----
-title: "Configuring the requests per second (RPS) target"
-linkTitle: "Configuring the requests per second (RPS) target"
-weight: 50
-type: "docs"
----
-
 # Configuring the requests per second (RPS) target
 
 This setting specifies a target for requests-per-second per replica of an application.
@@ -56,6 +49,3 @@ This setting specifies a target for requests-per-second per replica of an applic
         autoscaler:
           requests-per-second-target-default: "150"
     ```
-
-
-

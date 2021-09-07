@@ -1,7 +1,7 @@
 # Getting Started with Knative
 ## Before you begin
 !!! warning
-    Knative Quickstart Environments are for experimentation use only. For production installation, see our [Administrator's Guide](../admin)
+    Knative Quickstart Environments are for experimentation use only. For production installation, see our [Administrator's Guide](../admin/README.md)
 
 Before you can get started with a Knative Quickstart deployment you must install kind and the Kubernetes CLI.
 

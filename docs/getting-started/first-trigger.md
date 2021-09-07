@@ -35,7 +35,6 @@
     trigger.eventing.knative.dev/cloudevents-trigger created
     ```
 
-
 trigger.eventing.knative.dev/cloudevents-player created
 ??? question "What CloudEvents is my Trigger listening for?"
     Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
@@ -44,12 +43,9 @@ trigger.eventing.knative.dev/cloudevents-player created
 
 Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 
-<figure>
-  <img src="../images/event_received.png" draggable="false">
-  <figcaption>You may need to refresh the page to see your changes</figcaption>
-</figure>
+![CloudEvents Player user interface](images/event_received.png){draggable=false}
 
-
+You may need to refresh the page to see your changes.
 
 ??? question "What if I want to filter on CloudEvent attributes?"
     First, delete your existing Trigger:

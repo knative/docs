@@ -1,10 +1,3 @@
----
-title: "Multiple Cases"
-linkTitle: "Multiple Cases"
-weight: 20
-type: "docs"
----
-
 # Multiple Cases
 
 We are going to create a Parallel with two branches:
@@ -16,7 +9,7 @@ The events produced by each branch are then sent to the `event-display` service.
 
 ## Prerequisites
 
-Please refer to the sample overview for the [prerequisites](../).
+Please refer to the sample overview for the [prerequisites](../README.md).
 
 ### Create the Knative Services
 

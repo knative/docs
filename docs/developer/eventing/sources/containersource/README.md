@@ -18,7 +18,7 @@ your own values.
 
 Before you can create a ContainerSource object:
 
-- You must have [Knative Eventing](../../../admin/install/install-eventing-with-yaml)
+- You must have [Knative Eventing](../../../../admin/install/eventing/install-eventing-with-yaml.md)
 installed on your cluster.
 - If you want to use the following example heartbeats event source, you must also:
     - Install [ko](https://github.com/google/ko)
@@ -235,4 +235,4 @@ namespace:
 
 ## Reference Documentation
 
-See the [ContainerSource specification](../../../reference/api/eventing/eventing/#sources.knative.dev/v1.ContainerSource).
+See the [ContainerSource reference](reference.md).

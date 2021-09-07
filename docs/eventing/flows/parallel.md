@@ -1,11 +1,3 @@
----
-title: "Parallel"
-weight: 20
-type: "docs"
-aliases:
-   - /docs/eventing/parallel.md
----
-
 # Parallel
 
 Parallel CRD provides a way to easily define a list of branches, each receiving
@@ -46,4 +38,4 @@ Parallel has three parts for the Status:
 
 ## Examples
 
-Learn how to use Parallel by following the [examples](../../samples/parallel/)
+Learn how to use Parallel by following the [examples](../samples/parallel/README.md)

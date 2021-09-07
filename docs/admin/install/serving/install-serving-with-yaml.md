@@ -220,7 +220,7 @@ The following tabs expand to show instructions for installing each Serving exten
     install the components needed to support the provisioning of TLS certificates
     through cert-manager.
 
-    1. Install [cert-manager version v1.0.0 or later](../../../../serving/installing-cert-manager).
+    1. Install [cert-manager version v1.0.0 or later](../../../serving/installing-cert-manager.md).
 
     1. Install the component that integrates Knative with `cert-manager` by running the command:
 
@@ -229,7 +229,7 @@ The following tabs expand to show instructions for installing each Serving exten
         ```
 
     1. Configure Knative to automatically configure TLS certificates by following the steps in
-    [Enabling automatic TLS certificate provisioning](../../../../serving/using-auto-tls).
+    [Enabling automatic TLS certificate provisioning](../../../serving/using-auto-tls.md).
 
 === "TLS with HTTP01"
 

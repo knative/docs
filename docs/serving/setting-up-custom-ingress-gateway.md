@@ -1,11 +1,4 @@
----
-title: "Setting up custom ingress gateway"
-linkTitle: "Configuring the ingress gateway"
-weight: 55
-type: "docs"
----
-
-# Setting up custom ingress gateway
+# Configuring the ingress gateway
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within
 Knative service mesh, which is the `knative-ingress-gateway` Gateway under
@@ -103,30 +96,35 @@ We can replace the default gateway with our own gateway with following steps.
 
 Let's say you replace the default `knative-ingress-gateway` gateway with
 `knative-custom-gateway` in `custom-ns`.
-First, we create the `knative-custom-gateway` gateway.
+First, create the `knative-custom-gateway` gateway:
 
-```
-cat <<EOF | kubectl apply -f -
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: knative-custom-gateway
-  namespace: custom-ns
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "*"
-EOF
-```
+1. Create a YAML file using the following template:
 
-!!! note
-    Replace the label selector `istio: ingressgateway` with the label of your service.
+    ```yaml
+    apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
+    metadata:
+      name: knative-custom-gateway
+      namespace: custom-ns
+    spec:
+      selector:
+        istio: <service-label>
+      servers:
+      - port:
+          number: 80
+          name: http
+          protocol: HTTP
+        hosts:
+        - "*"
+    ```
+    Where `<service-label>` is a label to select your service, for example, `ingressgateway`.
+
+2. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ### Step 2: Update the gateway ConfigMap
 

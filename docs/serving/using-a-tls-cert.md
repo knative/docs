@@ -1,12 +1,3 @@
----
-title: "Configuring HTTPS with TLS certificates"
-linkTitle: "Configuring HTTPS connections"
-weight: 60
-type: "docs"
-aliases:
-  - /docs/serving/using-an-ssl-cert/
----
-
 # Configuring HTTPS with TLS certificates
 
 Learn how to configure secure HTTPS connections in Knative using TLS
@@ -59,7 +50,7 @@ use and configure your certificate issuer to use the
 You must meet the following requirements to enable secure HTTPS connections:
 
 - Knative Serving must be installed. For details about installing the Serving
-  component, see the [Knative installation guides](../install/).
+  component, see the [Knative installation guides](../admin/install/serving/install-serving-with-yaml.md).
 - You must configure your Knative cluster to use a
   [custom domain](using-a-custom-domain.md).
 
@@ -267,10 +258,6 @@ follow the steps in the relevant tab to manually add a certificate:
           ```
           In this example, `TLS_HOSTS` represents the hosts of your TLS certificate. It can be a single host, multiple hosts, or a wildcard host.
           For detailed instructions, please refer [Istio documentation](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
-
-
-
-
 
 ## What's next:
 

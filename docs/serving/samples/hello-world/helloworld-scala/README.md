@@ -1,10 +1,3 @@
----
-title: "Hello World - Scala using Akka HTTP"
-linkTitle: "Scala"
-weight: 1
-type: "docs"
----
-
 # Hello World - Scala using Akka HTTP
 
 A microservice which demonstrates how to get set up and running with Knative
@@ -24,7 +17,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
 
 ## Before you begin
 
-- A Kubernetes cluster [installation](../../../../install/) with
+- A Kubernetes cluster [installation](../../../../admin/install/serving/install-serving-with-yaml.md) with
   Knative Serving up and running.
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed

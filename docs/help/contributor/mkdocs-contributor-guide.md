@@ -209,17 +209,38 @@ Snippets can handle recursive file inclusion. And if Snippets encounters the sam
 For more info, see: [https://facelessuser.github.io/pymdown-extensions/extensions/snippets/](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/)
 
 ### Admonitions
-=== "Admontion"
-    !!! tip
-        Admonitions (like this one) are a great way to highlight important bits of information for readers.
 
-=== "Formating"
+We use the following admonition boxes only. Use admonitions sparingly; too many admonitions can be distracting.
+
+=== "Admonitions"
+    !!! note
+        A Note contains information that is useful, but not essential.
+        A reader can skip a note without bypassing required information.
+        If the information suggests an action to take, use a tip instead.
+
+    !!! tip
+        A Tip suggests an helpful, but not mandatory, action to take.
+
+    !!! warning
+        A Warning draws attention to potential trouble.
+
+=== "Formatting"
+    ```
+    !!! note
+        A Note contains information that is useful, but not essential.
+        A reader can skip a note without bypassing required information.
+        If the information suggests an action to take, use a tip instead.
+    ```
+
     ```
     !!! tip
-        Admonitions (like this one) are a great way to highlight important bits of information for readers.
+        A Tip suggests a helpful, but not mandatory, action to take.
     ```
-For formatting (including more advanced Admonitions), see: [https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage)
 
+    ```
+    !!! warning
+        A Warning draws attention to potential trouble.
+    ```
 
 ### Icons and Emojis
 Material for MkDocs supports using Material Icons and Emojis using easy shortcodes.

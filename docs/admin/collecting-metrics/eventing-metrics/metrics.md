@@ -36,7 +36,9 @@ By aggregating the metrics over the http code, events can be separated into two 
 | event_dispatch_latencies | The time spent dispatching an event from a in-memory Channel | Histogram | container_name<br>event_type<br>namespace_name=<br>response_code<br>response_code_class<br>unique_name | Milliseconds | Stable
 
 !!! note
-    A number of metrics eg. controller, Go runtime and others are omitted here as they are common across most components. For more about these metrics check the [Serving metrics API section](../../serving-metrics/metrics).
+    A number of metrics eg. controller, Go runtime and others are omitted here as they are common
+    across most components. For more about these metrics check the
+    [Serving metrics API section](../serving-metrics/metrics.md).
 
 ## Eventing sources
 

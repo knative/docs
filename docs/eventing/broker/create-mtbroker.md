@@ -1,10 +1,3 @@
----
-title: "Creating a broker"
-weight: 01
-type: "docs"
-showlandingtoc: "false"
----
-
 # Creating a broker
 
 Once you have installed Knative Eventing, you can create an instance of the multi-tenant (MT) channel-based broker that is provided by default. The default backing channel type for an MT channel-based broker is InMemoryChannel.
@@ -37,7 +30,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
 === "kubectl"
 
-    The YAML in the following example creates a broker named `default` in the current namespace. For more information about configuring broker options using YAML, see the full [broker configuration example](../example-mtbroker).
+    The YAML in the following example creates a broker named `default` in the current namespace. For more information about configuring broker options using YAML, see the full [broker configuration example](example-mtbroker.md).
 
     1. Create a broker in the current namespace by creating a YAML file using the
     following template:

@@ -1,10 +1,3 @@
----
-title: "Hello world - .NET Core"
-linkTitle: ".NET"
-weight: 1
-type: "docs"
----
-
 # Hello world - .NET Core
 
 A simple web app written in C# using .NET Core 3.1 that you can use for testing.
@@ -23,7 +16,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-csharp
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/) if you need to
+  [installation instructions](../../../../admin/install/serving/install-serving-with-yaml.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).

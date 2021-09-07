@@ -70,6 +70,10 @@
 }
 .md-announce {
   background: #fff5b5;
+  background: repeating-linear-gradient(-50deg, #ffe8b5, #ffe8b5 80px, #fff5b5 80px, #fff5b5 160px);
+}
+.md-announce .versionwarning h1 {
+  font-weight: bold;
 }
 .md-announce .versionwarning p {
   color: black;

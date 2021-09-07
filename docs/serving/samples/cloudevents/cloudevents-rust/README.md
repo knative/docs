@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Rust"
-linkTitle: "Rust"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Rust
 
 A simple web app written in Rust using [Actix web](https://github.com/actix/actix-web)
@@ -36,7 +29,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-rust
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/) if you need to
+  [installation instructions](../../../../admin/install/serving/install-serving-with-yaml.md)if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -166,6 +159,3 @@ To remove the sample app from your cluster, delete the service.
     ```bash
     kn service delete cloudevents-rust
     ```
-
-
-

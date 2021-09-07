@@ -1,10 +1,3 @@
----
-title: "Binding running services to an IoT core"
-linkTitle: "IoT core"
-weight: 40
-type: "docs"
----
-
 # Binding running services to an IoT core
 
 This sample shows how to bind a running service to an
@@ -67,7 +60,7 @@ export IOTCORE_TOPIC_DEVICE="iot-demo-device-pubsub-topic"
     gcloud pubsub topics create $IOTCORE_TOPIC_DEVICE
     ```
 
-1.  Setup [Knative Eventing](../../../eventing).
+1.  Set up [Knative Eventing](../../../eventing/README.md).
 
 #### GCP PubSub Source
 

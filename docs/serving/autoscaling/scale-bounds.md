@@ -1,10 +1,3 @@
----
-title: "Configuring scale bounds"
-linkTitle: "Configuring scale bounds"
-weight: 50
-type: "docs"
----
-
 # Configuring scale bounds
 
 You can configure upper and lower bounds to control autoscaling behavior.

@@ -1,10 +1,3 @@
----
-title: "Knative Offerings"
-linkTitle: "Knative Offerings"
-weight: 07
-type: "docs"
----
-
 # Knative Offerings
 
 Knative has a rich community with many vendors participating, and many of those

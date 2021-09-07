@@ -1,10 +1,3 @@
----
-title: "Routing across multiple Knative services - Go"
-linkTitle: "Routing services - Go"
-weight: 1
-type: "docs"
----
-
 # Routing across multiple Knative services - Go
 
 This example shows how to map multiple Knative services to different paths under
@@ -22,7 +15,7 @@ the Login service.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/)
+1. A Kubernetes cluster with [Knative Serving](../../../admin/install/serving/install-serving-with-yaml.md)
    installed.
 2. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).

@@ -14,11 +14,13 @@ data:
       prometheus:
         endpoint: "0.0.0.0:8889"
 
+    extensions:
+      health_check:
+      pprof:
+      zpages:
+      
     service:
-      extensions:
-        health_check:
-        pprof:
-        zpages:
+      extensions: [health_check, pprof, zpages]
       pipelines:
         metrics:
           receivers: [opencensus]

@@ -1,10 +1,3 @@
----
-title: "Cloud Events - Node.js"
-linkTitle: "Node.js"
-weight: 1
-type: "docs"
----
-
 # Cloud Events - Node.js
 
 A simple web app written in Node.js that can receive and send Cloud Events that you
@@ -34,7 +27,7 @@ cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/) if you need to
+  [installation instructions](../../../../admin/install/serving/install-serving-with-yaml.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
@@ -134,6 +127,3 @@ To remove the sample app from your cluster, delete the service.
     ```bash
     kn service delete cloudevents-nodejs
     ```
-
-
-

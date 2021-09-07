@@ -1,10 +1,3 @@
----
-title: "Installing cert-manager for TLS certificates"
-linkTitle: "Installing cert-manager"
-weight: 62
-type: "docs"
----
-
 # Installing cert-manager for TLS certificates
 
 Install the [Cert-Manager](https://github.com/jetstack/cert-manager) tool to
@@ -26,17 +19,14 @@ cert-manager.
 You must meet the following requirements to install cert-manager for Knative:
 
 - Knative Serving must be installed. For details about installing the Serving
-  component, see the [Knative installation guides](../install/).
+  component, see the [Knative installation guide](../admin/install/serving/install-serving-with-yaml.md).
 - You must configure your Knative cluster to use a
   [custom domain](using-a-custom-domain.md).
 - Knative currently supports cert-manager version `1.0.0` and higher.
 
 ## Downloading and installing cert-manager
 
-Follow the steps from the official `cert-manager` website to download and install cert-manager
-
-   [Installation steps](https://cert-manager.io/docs/installation/kubernetes/)
-
+To download and install cert-manager, follow the [Installation steps](https://cert-manager.io/docs/installation/kubernetes/) from the official `cert-manager` website.
 
 ## Completing the Knative configuration for TLS support
 

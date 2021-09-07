@@ -1,10 +1,3 @@
----
-title: "Hello World - Go"
-linkTitle: "Go"
-weight: 1
-type: "docs"
----
-
 # Hello World - Go
 
 This guide describes the steps required to to create the `helloworld-go` sample app
@@ -15,7 +8,8 @@ If `TARGET` is not specified, `World` is used as the default value.
 ## Prerequisites
 
 You will need:
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/).
+
+- A Kubernetes cluster with [Knative installed and DNS configured](../../../../admin/install/serving/install-serving-with-yaml.md).
 - [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured.
 - Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
 

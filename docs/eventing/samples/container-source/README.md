@@ -1,10 +1,3 @@
----
-title: "Container Source Example"
-linkTitle: "Container source"
-weight: 10
-type: "docs"
----
-
 # Container Source Example
 
 ContainerSource will start a container image which will generate events under
@@ -17,8 +10,8 @@ creating your own event source as a ContainerSource.
 
 ### Prerequisites
 
-1. Setup [Knative Serving](../../../serving).
-1. Setup [Knative Eventing and Sources](../../../eventing).
+1. Set up [Knative Serving](../../../serving/README.md).
+1. Set up [Knative Eventing and Sources](../../../eventing/README.md).
 
 ### Prepare the heartbeats image
 
@@ -176,5 +169,4 @@ event source is a sample for your reference.
 
 When the container image is ready, a YAML file will be used to create a concrete
 `ContainerSource`. Use [heartbeats-source.yaml](heartbeats-source.yaml) as a
-sample for reference. [Learn more about the ContainerSource
-specification](../../../eventing#containersource).
+sample for reference.

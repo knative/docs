@@ -1,10 +1,3 @@
----
-title: "Metrics"
-linkTitle: "Metrics"
-weight: 03
-type: "docs"
----
-
 # Metrics
 
 The metric configuration defines which metric type is watched by the Autoscaler.

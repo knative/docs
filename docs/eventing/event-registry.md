@@ -1,9 +1,3 @@
----
-title: "Event registry"
-weight: 25
-type: "docs"
----
-
 # Event registry
 
 ## Overview
@@ -14,13 +8,13 @@ type information in the cluster data store.
 
 ## Before you begin
 
-1. Read about the [broker](../broker/) and [trigger](../broker/triggers/) objects.
+1. Read about the [Broker](broker/README.md) and [Trigger](broker/triggers/README.md) objects.
 1. Be familiar with the
    [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the
    [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
    section.
-1. Be familiar with [event sources](../sources).
+1. Be familiar with [event sources](../developer/eventing/sources/README.md).
 
 ## Discovering events with the registry
 
@@ -268,7 +262,7 @@ the next topic: How do we actually populate the registry in the first place?
 
   If you are interested in more information regarding configuration options of a
   KafkaSource, please refer to the
-  [KafKaSource sample](../samples/kafka/).
+  [KafKaSource sample](samples/kafka/binding/README.md).
 
   For this discussion, the relevant information from the YAML mentioned are the
   `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We
@@ -283,8 +277,8 @@ the next topic: How do we actually populate the registry in the first place?
 
 ## Next steps
 
-1. [Installing Knative](../../admin/install/).
+1. [Installing Knative](../admin/install/README.md)
 
-1. [Knative code samples](../samples/) is a useful resource to better understand
+1. [Knative code samples](samples/README.md) is a useful resource to better understand
    some of the Event Sources (remember to point them to a Broker if you want
    automatic registration of EventTypes in the registry).

@@ -1,23 +1,14 @@
----
-title: "Configuring target burst capacity"
-linkTitle: "Configuring target burst capacity"
-weight: 50
-type: "docs"
-aliases:
-    - /docs/serving/autoscaling/target-burst-capacity
----
-
 # Configuring target burst capacity
 
-_Target burst capacity_ is a [global and per-revision](../../serving/autoscaling/autoscaler-types.md#global-versus-per-revision-settings) integer setting that determines the size of traffic burst a Knative application can handle without buffering.
+_Target burst capacity_ is a [global and per-revision](../autoscaling/autoscaler-types.md#global-versus-per-revision-settings) integer setting that determines the size of traffic burst a Knative application can handle without buffering.
 If a traffic burst is too large for the application to handle, the _Activator_ service will be placed in the request path to protect the revision and optimize request load balancing.
 
 The Activator service is responsible for receiving and buffering requests for inactive revisions, or for revisions where a traffic burst is larger than the limits of what can be handled without buffering for that revision. It can also quickly spin up additional pods for capacity, and throttle how quickly requests are sent to pods.
 
 Target burst capacity can be configured using a combination of the following parameters:
 
-- Setting the targeted concurrency limits for the revision. See [concurrency](../../serving/autoscaling/concurrency).
-- Setting the target utilization parameters. See [target utilization](../../serving/autoscaling/concurrency#target-utilization).
+- Setting the targeted concurrency limits for the revision. See [concurrency](../autoscaling/concurrency.md).
+- Setting the target utilization parameters. See [target utilization](../autoscaling/concurrency.md#target-utilization).
 - Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](#setting-the-target-burst-capacity).
 
 ## Setting the target burst capacity
@@ -73,7 +64,7 @@ Target burst capacity can be configured using a combination of the following par
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `0`, the Activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
 
 !!! note
-    Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/api/serving-api) documentation.
+    Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/api/serving-api.md) documentation.
 
 - If `autoscaling.knative.dev/targetBurstCapacity` is set to `-1`, the Activator is always in the request path, regardless of the revision size.
 

@@ -1,10 +1,3 @@
----
-title: "Hello World - PHP"
-linkTitle: "PHP"
-weight: 1
-type: "docs"
----
-
 # Hello World - PHP
 
 A simple web app written in PHP that you can use for testing. It reads in an env
@@ -23,7 +16,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-php
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/) if you need to
+  [installation instructions](../../../../admin/install/serving/install-serving-with-yaml.md) if you need to
   create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).

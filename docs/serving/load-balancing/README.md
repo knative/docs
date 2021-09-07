@@ -1,9 +1,3 @@
----
-title: "Load balancing"
-weight: 30
-type: "docs"
----
-
 # Load balancing
 
 You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer.
@@ -22,7 +16,7 @@ The Activator load balancing algorithm works as follows:
 - If concurrency is unlimited, the request is sent to the better of two random choices.
 - If concurrency is set to a value less or equal than 3, the Activator will send the request to the first pod that has capacity. Otherwise, requests will be balanced in a round robin fashion, with respect to container concurrency.
 
-For more information, see the documentation on [concurrency](../../serving/autoscaling/concurrency).
+For more information, see the documentation on [concurrency](../autoscaling/concurrency.md).
 
 ## Configuring target burst capacity
 
@@ -30,7 +24,7 @@ Target burst capacity is mainly responsible for determining whether the Activato
 
 Target burst capacity can be configured using a combination of the following parameters:
 
-- Setting the targeted concurrency limits for the revision. See [concurrency](../../serving/autoscaling/concurrency).
-- Setting the target utilization parameters. See [target utilization](../../serving/autoscaling/concurrency#target-utilization).
-- Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](target-burst-capacity#setting-the-target-burst-capacity).
-- Setting the Activator capacity by using the `config-autoscaler` ConfigMap. See [Setting the Activator capacity](activator-capacity#setting-the-activator-capacity)
+- Setting the targeted concurrency limits for the revision. See [concurrency](../autoscaling/concurrency.md).
+- Setting the target utilization parameters. See [target utilization](../autoscaling/concurrency.md#target-utilization).
+- Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](target-burst-capacity.md#setting-the-target-burst-capacity).
+- Setting the Activator capacity by using the `config-autoscaler` ConfigMap. See [Setting the Activator capacity](activator-capacity.md#setting-the-activator-capacity).

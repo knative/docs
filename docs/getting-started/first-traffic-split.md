@@ -2,14 +2,18 @@
 The last super power :rocket: of Knative Serving we'll go over in this tutorial is traffic splitting.
 
 ??? question "What are some common traffic splitting use-cases?"
-    Splitting traffic is useful for a number of very common modern infrastructure needs, such as **<a href= "https://martinfowler.com/bliki/BlueGreenDeployment.html" target="blank_">blue/green deployments</a> and <a href="https://martinfowler.com/bliki/CanaryRelease.html" target="blank_">canary deployments</a>.** Bringing these industry standards to bear on Kubernetes is **as simple as a single CLI command on Knative** or YAML tweak, let's see how!
+    Splitting traffic is useful for a number of very common modern infrastructure needs, such as
+    **[blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html){target=blank_}
+    and
+    [canary deployments](https://martinfowler.com/bliki/CanaryRelease.html){target=blank_}.**
+    Bringing these industry standards to bear on Kubernetes is **as simple as a single CLI command on Knative** or YAML tweak, let's see how!
 
 
 ## Creating a new Revision
 You may have noticed that when you created your Knative Service you assigned it a `revision-name`, "world". If you used `kn`, when your Service was created Knative returned both a URL and a "latest revision" for your Knative Service. **But what happens if you make a change to your Service?**
 
 ??? question "What exactly is a Revision?""
-    You can think of a <a href="../../serving/#serving-resources" target ="blank_">Revision </a> as a stateless, autoscaling, snapshot-in-time of application code and configuration.
+    You can think of a [Revision](../serving/README.md#serving-resources){target=_blank} as a stateless, autoscaling, snapshot-in-time of application code and configuration.
 
     A new Revision will get created each and every time you make changes to your Knative Service, whether you assign it a name or not. When splitting traffic, Knative splits traffic between different Revisions of your Knative Service.
 

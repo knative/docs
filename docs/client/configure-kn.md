@@ -1,9 +1,3 @@
----
-title: "Customizing kn"
-weight: 03
-type: "docs"
----
-
 # Customizing kn
 
 You can customize your `kn` CLI setup by creating a `config.yaml` configuration file. You can provide this configuration by using the `--config` flag, otherwise the configuration is picked up from a default location. The default configuration location conforms to the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), and is different for Unix systems and Windows systems.
@@ -28,7 +22,7 @@ eventing:
 
 Where
 
-- `path-lookup` specifies whether `kn` should look for [plugins](kn-plugins) in the `PATH` environment variable. This is a boolean configuration option. The default value is `false`.
+- `path-lookup` specifies whether `kn` should look for [plugins](kn-plugins.md) in the `PATH` environment variable. This is a boolean configuration option. The default value is `false`.
 - `directory` specifies the directory where `kn` will look for plugins. The default path depends on the operating system, as described earlier. This can be any directory that is visible to the user.
 - `sink-mappings` defines the Kubernetes Addressable resource that is used when you use the `--sink` flag with a `kn` CLI command.
     - `prefix`: The prefix you want to use to describe your sink. Service, `svc`, `channel`, and `broker` are predefined prefixes in `kn`.

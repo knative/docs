@@ -1,10 +1,3 @@
----
-title: "Hello World - Spark Java Framework"
-linkTitle: "Java (Spark)"
-weight: 1
-type: "docs"
----
-
 # Hello World - Spark Java Framework
 
 A simple web app written in Java using Spark Java Framework that you can use for
@@ -14,7 +7,8 @@ This guide describes the steps required to to create the `helloworld-java` sampl
 ## Prerequisites
 
 You will need:
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/).
+
+- A Kubernetes cluster with [Knative installed and DNS configured](../../../../admin/install/serving/install-serving-with-yaml.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).

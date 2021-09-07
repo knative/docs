@@ -1,6 +1,6 @@
 # Channel types and defaults
-Knative uses two types of Channels:
 
+Knative uses two types of Channels:
 
 * A generic Channel object.
 * Channel implementations that each have their own custom resource definitions (CRDs), such as
@@ -24,7 +24,7 @@ Cluster administrators can modify the default Channel implementation settings by
 
 
 For more information about modifying ConfigMaps, see
-[Configuring the Eventing Operator custom resource](/admin/install/operator/configuring-eventing-cr/#setting-a-default-channel).
+[Configuring the Eventing Operator custom resource](../../admin/install/operator/configuring-eventing-cr.md#setting-a-default-channel).
 
 Default Channels can be configured for the cluster, a namespace on the cluster, or both.
 
@@ -62,4 +62,4 @@ data:
 ## Next steps
 
 
-- Create an [InMemoryChannel](../create-default-channel)
+- Create an [InMemoryChannel](create-default-channel.md)

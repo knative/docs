@@ -1,10 +1,3 @@
----
-title: "Hello World - Shell"
-linkTitle: "Shell"
-weight: 1
-type: "docs"
----
-
 # Hello World - Shell
 
 This guide describes the steps required to create the `helloworld-shell` sample app and deploy it to your
@@ -24,7 +17,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-shell
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/).
+  [installation instructions](../../../../admin/install/serving/install-serving-with-yaml.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
