@@ -5,6 +5,7 @@
 
 ### Getting started
 
+- [Code of Conduct](https://knative.dev/community/contributing/code-of-conduct)
 - [Becoming a contributor](becoming-a-contributor.md)
 - [Knative MkDocs contributor guide](mkdocs-contributor-guide.md)
 - [GitHub workflow for Knative documentation](github.md)
