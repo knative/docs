@@ -21,7 +21,10 @@ A PingSource definition supports the following fields:
 | [`spec.sink`](../../sinks/README.md) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | `spec.timezone` | Modifies the actual time relative to the specified timezone. Defaults to the system time zone. <br><br> See the [list of valid tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia. For general information about time zones, see the [IANA](https://www.iana.org/time-zones) website.  | Optional |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
-
+| `status`|  Defines the observed state of PingSource.   | Optional |
+| `status.observedGeneration` |  The 'Generation' of the Service that was last processed by the controller.  | Optional |
+| `status.conditions` |  The latest available observations of a resource's current state. | Optional |
+| `status.sinkUri` |  The current active sink URI that has been configured for the Source.  | Optional |
 
 ### CloudEvent Overrides
 
@@ -61,6 +64,7 @@ spec:
     ```{ .json .no-copy }
     { "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
     ```
+
 
 [kubernetes-overview]:
   https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
