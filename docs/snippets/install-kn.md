@@ -1,7 +1,7 @@
 !!! todo "Installing the `kn` CLI"
 
     === "Using Homebrew"
-        For macOS, you can install `kn` by using [Homebrew](https://brew.sh"){target=_blank}.
+        For macOS, you can install `kn` by using [Homebrew](https://brew.sh){target=_blank}.
 
         ```
         brew install knative/client/kn
