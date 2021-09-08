@@ -85,7 +85,7 @@ type ACKCode int
 
 // Enum of supported ACK codes.
 const (
-	CodeSuccess ACKCode = iota 
+	CodeSuccess ACKCode = iota
 	CodeFailure
 )
 
@@ -206,9 +206,9 @@ kubectl apply -f manifest.yaml
 
 Verify that the service is running:
 ```sh
-kubectl get ksvc 
+kubectl get ksvc
 NAME          URL                                            LATESTCREATED         LATESTREADY            READY   REASON
-demo-service  http://demo-service.dmo.10.64.140.43.xip.io    demo-service-00001     demo-service-00001     True    
+demo-service  http://demo-service.dmo.10.64.140.43.xip.io    demo-service-00001     demo-service-00001     True
 ```
 
 Send it a Cloudevent to trigger the service and verify the expected results:
@@ -234,7 +234,7 @@ curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
 < Content-Length: 86
 < Content-Type: application/json
 < Date: Wed, 08 Sep 2021 19:00:16 GMT
-< 
+<
 * Connection #0 to host localhost left intact
 {"code":0,"detail":{"message":"event processed successfully","processing_time_ms":32}}* Closing connection 0
 ```
@@ -255,7 +255,7 @@ curl -v "https://dce.demo-sink.dev.demo.io" \
        -d '{"fromName":"richard","toName":"bob","message":"hello"}'
 ```
 
-We can represent the expected data in this event as a struct in Golang, 
+We can represent the expected data in this event as a struct in Golang,
 add this struct to the `main.go` file.
 ```go
 type EventData struct {
@@ -292,11 +292,11 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 
 Remove the `randomDelay()` function as it is no longer needed.
 
-Rebuild and push the container, as described in the steps above, or run 
+Rebuild and push the container, as described in the steps above, or run
 the application locally:
 
 ```sh
-go run . 
+go run .
 ```
 
 Send it an event and verify the expected results:
@@ -322,7 +322,7 @@ curl -v "http://localhost:8080" \
 < Content-Length: 98
 < Content-Type: application/json
 < Date: Wed, 08 Sep 2021 19:40:37 GMT
-< 
+<
 * Connection #0 to host localhost left intact
 {"code":0,"detail":{"message":"Hello richard! Thank you for the message!","processing_time_ms":0}}* Closing connection 0
 ```
