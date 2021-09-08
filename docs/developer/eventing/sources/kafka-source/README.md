@@ -11,13 +11,18 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 <!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
 
-## Installing the Kafka event source CRD
+## Install the Kafka event source CRD
 
-- A Kubernetes cluster with the Kafka event source installed. You can install the Kafka event source by using [YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions) or the [Knative Operator](../../../../admin/install/knative-with-operators.md#installing-with-different-eventing-sources).
+- Set up a Kubernetes cluster with the Kafka event source installed.
+You can install the Kafka event source by using
+[YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions)
+or the [Knative Operator](../../../../admin/install/knative-with-operators.md#installing-with-different-eventing-sources).
 
 ## Optional: Create a Kafka topic
 
-1. If you are using Strimzi, create a KafkaTopic:
+If you are using Strimzi:
+
+1. Create a `KafkaTopic` YAML file:
 
     ```yaml
     apiVersion: kafka.strimzi.io/v1beta2
@@ -35,28 +40,25 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
         segment.bytes: 1073741824
     ```
 
-2. Deploy the `KafkaTopic` by running the command:
+2. Deploy the `KafkaTopic` YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
     ```
-
-    Where `<filename>` is the name of your KafkaTopic YAML file.
+    Where `<filename>` is the name of your `KafkaTopic` YAML file.
 
     Example output:
-
     ```bash
     kafkatopic.kafka.strimzi.io/knative-demo-topic created
     ```
 
-3. Ensure that the `KafkaTopic` is running, by running the command:
+3. Ensure that the `KafkaTopic` is running by running the command:
 
     ```bash
     kubectl -n kafka get kafkatopics.kafka.strimzi.io
     ```
 
     Example output:
-
     ```bash
     NAME                 AGE
     knative-demo-topic   16s
@@ -96,11 +98,9 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```bash
     kubectl apply -f <filename>.yaml
     ```
-
     Where `<filename>` is the name of the file you created in the previous step.
 
     Example output:
-
     ```bash
     service.serving.knative.dev/event-display created
     ```
@@ -112,7 +112,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     The Pod name is prefixed with `event-display`:
-
     ```bash
     NAME                                            READY     STATUS    RESTARTS   AGE
     event-display-00001-deployment-5d5df6c7-gv2j4   2/2       Running   0          72s
@@ -120,8 +119,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 ### Kafka event source
 
-1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics,
-   etc...:
+1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics, and so on:
 
     ```yaml
     apiVersion: sources.knative.dev/v1beta1
@@ -148,7 +146,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     kafkasource.sources.knative.dev/kafka-source created
     ```
@@ -160,7 +157,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     The Pod name is prefixed with `kafka-source`:
-
     ```bash
     NAME                                  READY     STATUS    RESTARTS   AGE
     kafka-source-xlnhq-5544766765-dnl5s   1/1       Running   0          40m
@@ -183,7 +179,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     !!! tip
-        If you don't see a command prompt, try pressing enter.
+        If you don't see a command prompt, try pressing **Enter**.
 
 1. Verify that the Kafka event source consumed the message and sent it to
    its Sink properly. Because these logs are captured in debug level, edit the key `level` of `config-logging` ConfigMap in `knative-sources` namespace to look like this:
@@ -222,7 +218,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     {"level":"debug","ts":"2020-05-28T10:40:29.400Z","caller":"kafka/consumer_handler.go:77","msg":"Message claimed","topic":".","value":"."}
     {"level":"debug","ts":"2020-05-28T10:40:31.722Z","caller":"kafka/consumer_handler.go:89","msg":"Message marked","topic":".","value":"."}
@@ -235,7 +230,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     ☁️ cloudevents.Event
     Validation: valid
@@ -264,7 +258,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     "kafka-source" deleted
     ```
@@ -276,7 +269,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     "event-display" deleted
     ```
@@ -288,7 +280,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     serviceaccount "kafka-controller-manager" deleted
     clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
@@ -306,16 +297,14 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     ```
 
     Example output:
-
     ```bash
     kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
     ```
 
 ## Optional: Specify the key deserializer
 
-When `KafkaSource` receives a message from Kafka, it dumps the key in the Event
-extension called `Key` and dumps Kafka message headers in the extensions
-starting with `kafkaheader`.
+When `KafkaSource` receives a message from Kafka, it dumps the key in the Event extension called
+`Key` and dumps Kafka message headers in the extensions starting with `kafkaheader`.
 
 You can specify the key deserializer among four types:
 
@@ -324,53 +313,57 @@ You can specify the key deserializer among four types:
 * `float` for 32-bit & 64-bit floating points
 * `byte-array` for a Base64 encoded byte array
 
-To specify the key deserializer, add the label `kafkasources.sources.knative.dev/key-type` to the `KafkaSource` definition, as shown in the following example:
+To specify the key deserializer, add the label `kafkasources.sources.knative.dev/key-type` to the
+`KafkaSource` definition, as shown in the following example:
 
-   ```yaml
-   apiVersion: sources.knative.dev/v1beta1
-   kind: KafkaSource
-   metadata:
-    name: kafka-source
-    labels:
-      kafkasources.sources.knative.dev/key-type: int
-   spec:
-    consumerGroup: knative-group
-    bootstrapServers:
-    - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
-    topics:
-    - knative-demo-topic
-    sink:
-      ref:
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        name: event-display
-   ```
+```yaml
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+name: kafka-source
+labels:
+  kafkasources.sources.knative.dev/key-type: int
+spec:
+consumerGroup: knative-group
+bootstrapServers:
+- my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
+topics:
+- knative-demo-topic
+sink:
+  ref:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: event-display
+```
 
 ## Optional: Specify the initial offset
 
-By default the `KafkaSource` starts consuming from the `latest` offset in each partition. In case you want to consume from the earliest offset, set the initialOffset field to `earliest`.
+By default the `KafkaSource` starts consuming from the latest offset in each partition. If you want
+to consume from the earliest offset, set the initialOffset field to `earliest`, for example:
 
-   ```yaml
-   apiVersion: sources.knative.dev/v1beta1
-   kind: KafkaSource
-   metadata:
-    name: kafka-source
-   spec:
-    consumerGroup: knative-group
-    initialOffset: earliest
-    bootstrapServers:
-    - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
-    topics:
-    - knative-demo-topic
-    sink:
-      ref:
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        name: event-display
-   ```
+```yaml
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+name: kafka-source
+spec:
+consumerGroup: knative-group
+initialOffset: earliest
+bootstrapServers:
+- my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
+topics:
+- knative-demo-topic
+sink:
+  ref:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: event-display
+```
 
 !!! note
-    Valid values for `initialOffset` is `earliest` or `latest`. Any other value results in a validation error. This field will be honored only if there are no prior committed offsets for that consumer group.
+    The valid values for `initialOffset` are `earliest` and `latest`. Any other value results in a
+    validation error. This field is honored only if there are no prior committed offsets for that
+    consumer group.
 
 ## Connecting to a TLS-enabled Kafka Broker
 
