@@ -51,8 +51,7 @@ const (
 	eventSrcName = "io.demo.targets.go-sample"
 
 	ceExtProcessedType   = "processedtype"
-	ceExtProcessedID     = "processedid"
-	ceExtProcessedSource = "processedsource"
+
 )
 
 // Handler runs a CloudEvents receiver.
@@ -135,8 +134,6 @@ func newAckEvent(e cloudevents.Event, code ACKCode, detail interface{}) *cloudev
 	resp.SetType(eventTypeAck)
 	resp.SetSource(eventSrcName)
 	resp.SetExtension(ceExtProcessedType, e.Type())
-	resp.SetExtension(ceExtProcessedSource, e.Source())
-	resp.SetExtension(ceExtProcessedID, e.ID())
 
 	data := &ACKResponse{
 		Code:   code,
