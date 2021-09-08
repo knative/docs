@@ -2,17 +2,30 @@
 
 Knative enables [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) of its components by using [duck typing](https://en.wikipedia.org/wiki/Duck_typing).
 
-Duck typing means that the compatibility of a resource for use in a Knative system is determined by certain properties being present that can be used to identify the resource control plane shape and behaviors. These properties are based on a set of common definitions for different types of resources, called duck types.
+Duck typing means that the compatibility of a resource for use in a Knative system is determined by
+certain properties that are used to identify the resource control plane shape and behaviors.
+These properties are based on a set of common definitions for different types of resources, called
+duck types.
 
-If a resource has the same fields in the same schema locations as the common definition specifies, and the same control or data plane behaviors as the common definition specifies, Knative can use that resource as if it is the generic duck type, without specific knowledge about the resource type. Some resources may choose to opt-in to multiple duck types.
+Knative can use a resource as if it is the generic duck type, without specific knowledge about the
+resource type, if:
+
+* The resource has the same fields in the same schema locations as the common definition specifies
+* The same control or data plane behaviors as the common definition specifies
+
+Some resources can opt in to multiple duck types.
 
 <!-- TODO: point to Discovery ClusterDuckType documentation. -->
 
-A fundamental use of duck typing in Knative is the use of object references in
-resource _specs_ to point to another resource. The definition of the object
-containing the reference prescribes the expected duck type of the resource being referenced.
+A fundamental use of duck typing in Knative is using object references in resource _specs_ to point
+to other resources.
+The definition of the object containing the reference prescribes the expected duck type of the
+resource being referenced.
 
-In the following example, a Knative `Example` resource named `pointer` references a `Dog` resource named `pointee` in its spec:
+## Example
+
+In the following example, a Knative `Example` resource named `pointer` references a `Dog` resource
+named `pointee` in its spec:
 
 ```yaml
 apiVersion: sample.knative.dev/v1
@@ -26,15 +39,13 @@ spec:
     name: pointee
 ```
 
-Assume the expected shape of a "Sizable" duck type is that in the status, we
-expect the following schema shape:
+If the expected shape of a Sizable duck type is that, in the `status`, the schema shape is the
+following:
 
 ```yaml
-<standard metadata>
-<spec ignored for Sizable>
 status:
-  height: <in inches>
-  weight: <in pounds>
+  height: <in centimetres>
+  weight: <in kilograms>
 ```
 
 Now the instance of `pointee` could look like this:
@@ -51,16 +62,15 @@ status:
   lastFeeding: 2 hours ago
   hungry: true
   age: 2
-  height: 27
-  weight: 70
+  height: 60
+  weight: 20
 ```
 
-When the `Example` resource needs to do its work, it only acts on the
-information included in the "Sizable" duck type shape, and the `Dog`
-implementation is free to have the information that makes the most sense for
-that resource. The power of duck typing is apparent when we extend the system
-with a new type, say, `Human`. Assuming the new resource adheres to the contract
-set by the "Sizable".
+When the `Example` resource functions, it only acts on the information in the Sizable duck type
+shape, and the `Dog` implementation is free to have the information that makes the most sense for
+that resource.
+The power of duck typing is apparent when we extend the system with a new type, for example,
+`Human`, if the new resource adheres to the contract set by Sizable.
 
 ```yaml
 apiVersion: sample.knative.dev/v1
@@ -83,12 +93,12 @@ status:
   college: true
   hungry: true
   age: 22
-  height: 62
-  weight: 120
+  height: 170
+  weight: 50
 ```
 
-The `Example` resource was able to do the logic it is set to do without explicit
-knowlage of `Human` or `Dog`.
+The `Example` resource is able to apply the logic configured for it, without explicit
+knowledge of `Human` or `Dog`.
 
 ## Knative Duck Types
 
@@ -114,9 +124,7 @@ status:
 
 ### Binding
 
-Binding is expected to be in the following shape:
-
-(with direct subject)
+With a direct `subject`, Binding is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version
@@ -129,7 +137,7 @@ spec:
     name: a-name
 ```
 
-(with indirect subject)
+With an indirect `subject`, Binding is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version
@@ -146,9 +154,7 @@ spec:
 
 ### Source
 
-Source is expected to be in the following shape:
-
-(with ref sink)
+With a `ref` Sink, Source is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version
@@ -170,7 +176,7 @@ status:
   sinkUri: http://host
 ```
 
-(with uri sink)
+With a `uri` Sink, Source is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version
@@ -189,7 +195,7 @@ status:
   sinkUri: http://host/path?query
 ```
 
-(with ref and uri sink)
+With `ref` and `uri` Sinks, Source is expected to be in the following shape:
 
 ```yaml
 apiVersion: group/version

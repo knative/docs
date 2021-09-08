@@ -1,15 +1,17 @@
 !!! todo "Installing the `kn` CLI"
 
     === "Using Homebrew"
-        For macOS, you can install `kn` by using [Homebrew](https://brew.sh/){target=_blank}.
+        For macOS, you can install `kn` by using [Homebrew](https://brew.sh){target=_blank}.
 
         ```
         brew install kn
         ```
 
+        Note: Quickstart requires `kn` version 0.25 or later. To upgrade an existing install to the latest version, run `brew upgrade kn`.
+
     === "Using a binary"
 
-        You can install `kn` by downloading the executable binary for your system and placing it in the system path.
+        You can install `kn` by downloading the executable binary for your system and placing it in the system path. Note that you will need `kn` version 0.25 or later.
 
         1. Download the binary for your system from the [`kn` release page](https://github.com/knative/client/releases){target=_blank}.
 
