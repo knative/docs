@@ -175,7 +175,42 @@ COPY --from=builder /project/demosink /
 ENTRYPOINT ["/demosink"]
 ```
 
-Build the image:
+Run the application locally to debug:
+
+```sh
+go run .
+```
+
+Send it an event and verify the expected results:
+```sh
+curl -v "http://localhost:8080" \
+       -X POST \
+       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+       -H "Ce-Specversion: 1.0" \
+       -H "Ce-Type: io.demo.email.send" \
+       -H "Ce-Source: dev.knative.samples/demo" \
+       -H "Content-Type: application/json" \
+       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
+* upload completely sent off: 55 out of 55 bytes
+< HTTP/1.1 200 OK
+< Ce-Id: 70eb24d9-3678-4c08-9332-315cbae7fe1e
+< Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
+< Ce-Processedsource: dev.knative.samples/demo
+< Ce-Processedtype: io.demo.email.send
+< Ce-Source: io.demo.targets.go-sample
+< Ce-Specversion: 1.0
+< Ce-Time: 2021-09-08T19:40:37.1619Z
+< Ce-Type: com.example.target.ack
+< Content-Length: 98
+< Content-Type: application/json
+< Date: Wed, 08 Sep 2021 19:40:37 GMT
+<
+* Connection #0 to host localhost left intact
+{"code":0,"detail":{"message":"Hello richard! Thank you for the message!","processing_time_ms":0}}* Closing connection 0
+```
+
+
+When you are ready to deploy, build and publish the container image:
 
 Google:
 ```sh
@@ -292,37 +327,4 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 
 Remove the `randomDelay()` function as it is no longer needed.
 
-Rebuild and push the container, as described in the steps above, or run
-the application locally:
-
-```sh
-go run .
-```
-
-Send it an event and verify the expected results:
-```sh
-curl -v "http://localhost:8080" \
-       -X POST \
-       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: io.demo.email.send" \
-       -H "Ce-Source: dev.knative.samples/demo" \
-       -H "Content-Type: application/json" \
-       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
-* upload completely sent off: 55 out of 55 bytes
-< HTTP/1.1 200 OK
-< Ce-Id: 70eb24d9-3678-4c08-9332-315cbae7fe1e
-< Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
-< Ce-Processedsource: dev.knative.samples/demo
-< Ce-Processedtype: io.demo.email.send
-< Ce-Source: io.demo.targets.go-sample
-< Ce-Specversion: 1.0
-< Ce-Time: 2021-09-08T19:40:37.1619Z
-< Ce-Type: com.example.target.ack
-< Content-Length: 98
-< Content-Type: application/json
-< Date: Wed, 08 Sep 2021 19:40:37 GMT
-<
-* Connection #0 to host localhost left intact
-{"code":0,"detail":{"message":"Hello richard! Thank you for the message!","processing_time_ms":0}}* Closing connection 0
-```
+Now we can run the application locally or build an image and deploy, as described above.
