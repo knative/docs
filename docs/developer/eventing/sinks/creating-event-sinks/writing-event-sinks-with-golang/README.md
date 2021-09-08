@@ -11,7 +11,7 @@ This tutorial provides instructions to build an event sink in Golang and impleme
 
 ## A Quick Overview of Building and Deploying a Simple Event Sink with Golang
 
-Below we will create a simple Sink that receives CloudEvents and performs a dummy operation on them.
+Below we will create a simple Sink that receives CloudEvents and performs an example operation on them.
 
 From within the `$GOPATH`, Create a folder `demosink` with a new file `main.go`:
 ```go
@@ -113,7 +113,7 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 	// simulate processing time
 	randomDelay()
 
-	res := &dummyResult{
+	res := &exampleResult{
 		Message:        "event processed successfully",
 		ProcessingTime: time.Since(tBegin).Milliseconds(),
 	}
@@ -121,9 +121,9 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 	return res, nil
 }
 
-// dummyResult represents a fictional structured result of some event
+// exampleResult represents a fictional structured result of some event
 // processing.
-type dummyResult struct {
+type exampleResult struct {
 	Message        string `json:"message"`
 	ProcessingTime int64  `json:"processing_time_ms"`
 }
@@ -285,7 +285,7 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 	log.Printf("Received event with message of : %+v\n", ed.Message)
 	newMessage := "Hello " + ed.Fromname + "! Thank you for the message!"
 
-	res := &dummyResult{
+	res := &exampleResult{
 		Message:        newMessage,
 		ProcessingTime: time.Since(tBegin).Milliseconds(),
 	}
