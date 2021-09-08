@@ -86,8 +86,8 @@ type ACKCode int
 
 // Enum of supported ACK codes.
 const (
-	CodeSuccess ACKCode = iota // 0
-	CodeFailure                // 1
+	CodeSuccess ACKCode = iota 
+	CodeFailure
 )
 
 // receive implements the handler's receive logic.
