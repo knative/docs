@@ -295,7 +295,9 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 
 Remove the `randomDelay()` function as it is no longer needed.
 
-Run the application locally:
+Rebuild and push the container, as described in the steps above, or run 
+the application locally:
+
 ```sh
 go run . 
 ```
