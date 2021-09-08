@@ -181,11 +181,11 @@ ENTRYPOINT ["/demosink"]
 Build the image:
 
 Google:
-```cmd
+```sh
 gcloud builds submit --tag gcr.io/<project-name>/<image-name> .
 ```
 Docker:
-```cmd
+```sh
 docker build -t <user-name>/<image-name> .
 ```
 
@@ -203,19 +203,19 @@ spec:
 ```
 
 Apply this manifest:
-```cmd
+```sh
 kubectl apply -f manifest.yaml
 ```
 
 Verify that the service is running:
-```cmd
+```sh
 kubectl get ksvc 
 NAME          URL                                            LATESTCREATED         LATESTREADY            READY   REASON
 demo-service  http://demo-service.dmo.10.64.140.43.xip.io    demo-service-00001     demo-service-00001     True    
 ```
 
 Send it a Cloudevent to trigger the service and verify the expected results:
-```cmd
+```sh
 curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
        -X POST \
        -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
@@ -247,7 +247,7 @@ curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
 
 Consider this example Cloudevent for the purpose of this demo:
 
-```cmd
+```sh
 curl -v "https://dce.demo-sink.dev.demo.io" \
        -X POST \
        -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
@@ -296,12 +296,12 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 Remove the `randomDelay()` function as it is no longer needed.
 
 Run the application locally:
-```cmd
+```sh
 go run . 
 ```
 
 Send it an event and verify the expected results:
-```cmd
+```sh
 curl -v "http://localhost:8080" \
        -X POST \
        -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
