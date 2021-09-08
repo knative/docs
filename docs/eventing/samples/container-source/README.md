@@ -35,6 +35,26 @@ ko publish knative.dev/eventing/cmd/heartbeats
 - you to be authenticated with your `KO_DOCKER_REPO`
 - [`docker`](https://docs.docker.com/install/) to be installed
 
+If `ko` is not available, use the following manifest to deploy a heartbeats source with `kubectl`:
+
+
+    apiVersion: sources.knative.dev/v1
+    kind: ContainerSource
+    metadata:
+      name: heartbeat-source
+    spec:
+      template:
+        spec:
+          containers:
+            - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
+              name: heartbeats
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
+
+
 ### Create a Knative Service
 
 In order to verify `ContainerSource` is working, we will create a Event Display
