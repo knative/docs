@@ -23,7 +23,7 @@ kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )
 1. Because the operator is installed to the `default` namespace, ensure you set the current namespace to `default` by running the command:
 
     ```
-    kubectl config set-context --current --namespace=default 
+    kubectl config set-context --current --namespace=default
     ```
 
 1. Check the operator deployment by running the command:
