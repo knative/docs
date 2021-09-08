@@ -143,7 +143,7 @@ image, and push it to a container registry that your cluster can access.
       template:
         spec:
           containers:
-            - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
+            - image: docker.io/myregistry/node-heartbeat-source:v1
               name: heartbeats
       sink:
         ref:
@@ -224,7 +224,7 @@ SinkBinding does not create any containers. It injects the sink information to a
         spec:
           containers:
           - name: node-heartbeats
-            image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
+            image: docker.io/myregistry/node-heartbeat-source:v1
             ports:
             - containerPort: 8080
     ```
