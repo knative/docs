@@ -13,12 +13,12 @@ data:
       logging:
       prometheus:
         endpoint: "0.0.0.0:8889"
-
-    service:
-      extensions:
+    extensions:
         health_check:
         pprof:
-        zpages:
+        zpages
+    service:
+      extensions: [health_check, pprof, zpages]
       pipelines:
         metrics:
           receivers: [opencensus]
