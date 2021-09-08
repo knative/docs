@@ -268,7 +268,7 @@ type EventData struct {
 }
 ```
 
-Now we need to update the `processEvent()` function found on line 93 of the `main.go` file.
+Now we need to update the `processEvent()` function found in the `main.go` file.
 
 ```go
 // processEvent processes the event and returns the result of the processing.
