@@ -41,6 +41,24 @@ the following example heartbeats event source by running the commands:
     ko publish ko://knative.dev/eventing/cmd/heartbeats
     ```
 
+If `ko` is not available, use the following [manifest](https://github.com/knative/docs/blob/mkdocs/docs/eventing/samples/container-source/heartbeats-source.yaml) to deploy a heartbeats source with `kubectl`:
+
+    apiVersion: sources.knative.dev/v1
+    kind: ContainerSource
+    metadata:
+      name: heartbeat-source
+    spec:
+      template:
+        spec:
+          containers:
+            - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
+              name: heartbeats
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
+
 1. Create a namespace for your ContainerSource by running the command:
 
     ```bash
