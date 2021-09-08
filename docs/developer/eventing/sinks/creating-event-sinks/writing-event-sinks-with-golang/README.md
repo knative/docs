@@ -48,7 +48,7 @@ func main() {
 const (
 	eventTypeAck = "com.example.target.ack"
 
-	eventSrcName = "io.triggermesh.targets.go-sample"
+	eventSrcName = "io.demo.targets.go-sample"
 
 	ceExtProcessedType   = "processedtype"
 	ceExtProcessedID     = "processedid"
@@ -230,7 +230,7 @@ curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
 < Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
 < Ce-Processedsource: dev.knative.samples/demo
 < Ce-Processedtype: io.demo.test.event
-< Ce-Source: io.triggermesh.targets.go-sample
+< Ce-Source: io.demo.targets.go-sample
 < Ce-Specversion: 1.0
 < Ce-Time: 2021-09-08T19:00:16.291182Z
 < Ce-Type: com.example.target.ack
@@ -248,7 +248,7 @@ curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
 Consider this example Cloudevent for the purpose of this demo:
 
 ```cmd
-curl -v "https://dce.demo-sink.dev.triggermesh.io" \
+curl -v "https://dce.demo-sink.dev.demo.io" \
        -X POST \
        -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
        -H "Ce-Specversion: 1.0" \
@@ -316,7 +316,7 @@ curl -v "http://localhost:8080" \
 < Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
 < Ce-Processedsource: dev.knative.samples/demo
 < Ce-Processedtype: io.demo.email.send
-< Ce-Source: io.triggermesh.targets.go-sample
+< Ce-Source: io.demo.targets.go-sample
 < Ce-Specversion: 1.0
 < Ce-Time: 2021-09-08T19:40:37.1619Z
 < Ce-Type: com.example.target.ack
