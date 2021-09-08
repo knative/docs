@@ -106,6 +106,7 @@ nav:
               - SinkBinding reference: developer/eventing/sources/sinkbinding/reference.md
           - Event delivery: developer/eventing/event-delivery.md
           - Event sinks:
+            - Writing an event source using Golang: developer/eventing/sinks/creating-event-sinks/writing-event-sinks-with-golang/README.md
             - About sinks: developer/eventing/sinks/README.md
             - KafkaSink: developer/eventing/sinks/kafka-sink.md
     # Developer concepts
