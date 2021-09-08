@@ -186,11 +186,10 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     Create a `SinkBinding` object by running:
 
     ```bash
-    kn source binding create <name> \
-      --namespace <namespace> \
-      --subject "<subject>" \
-      --sink <sink> \
-      --ce-override "<cloudevent-overrides>"
+    kn source binding create bind-heartbeat \
+     --subject "Job:batch/v1:app=heartbeat-cron" \
+     --sink event-display \
+     --ce-override "sink=bound"
     ```
     Where:
 
