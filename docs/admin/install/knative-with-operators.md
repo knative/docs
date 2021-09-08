@@ -26,7 +26,7 @@ kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )
     kubectl config set-context --current --namespace=default
     ```
 
-1. Check the operator deployment by running the command:
+1. Check the operator deployment status by running the command:
 
     ```
     kubectl get deployment knative-operator
