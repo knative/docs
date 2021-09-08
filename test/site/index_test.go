@@ -69,14 +69,14 @@ func TestHugoBundles(t *testing.T) {
 		if err != nil {
 			return err // unable to open
 		}
-		bundleFiles := []string{"_index.md", "index.md", "index.html", "_index.html"}
+		bundleFiles := []string{"index.md", "index.html", "_index.html"}
 		for _, name := range bundleFiles {
 			_, err = os.Stat(filepath.Join(path, name))
 			if err == nil {
 				return nil
 			}
 		}
-		return fmt.Errorf("README.md missing bundle (you need an 'index.md' or '_index.md') in %q", path)
+		return fmt.Errorf("README.md missing bundle (you need an 'index.md') in %q", path)
 	})
 
 	if err != nil {

@@ -12,7 +12,7 @@ plugins:
       admin/install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
       admin/install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
       client/connecting-kn-to-your-cluster/index.md: client/README.md
-      concepts/overview.md: _index.md
+      concepts/overview.md: index.md
       eventing/broker/alternate/index.md: eventing/broker/README.md
       eventing/broker/broker-event-delivery.md: developer/eventing/event-delivery.md
       eventing/broker/configmaps/README.md: admin/eventing/broker-configuration.md
