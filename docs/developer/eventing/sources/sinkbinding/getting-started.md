@@ -137,7 +137,7 @@ any extra overrides given by `CE_OVERRIDES`.
 1. Create a YAML file for the CronJob using the following example:
 
     ```yaml
-    apiVersion: batch/v1beta1
+    apiVersion: batch/v1
     kind: CronJob
     metadata:
       name: heartbeat-cron
