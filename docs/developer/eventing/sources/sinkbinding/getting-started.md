@@ -154,7 +154,7 @@ any extra overrides given by `CE_OVERRIDES`.
               restartPolicy: Never
               containers:
                 - name: single-heartbeat
-                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/heartbeats
+                  image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
                   args:
                   - --period=1
                   env:
