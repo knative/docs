@@ -35,7 +35,7 @@ ko publish knative.dev/eventing/cmd/heartbeats
 - you to be authenticated with your `KO_DOCKER_REPO`
 - [`docker`](https://docs.docker.com/install/) to be installed
 
-If `ko` is not available, use the following manifest to deploy a heartbeats source with `kubectl`:
+If `ko` is not available, use the following [manifest](https://github.com/knative/docs/blob/mkdocs/docs/eventing/samples/container-source/heartbeats-source.yaml) to deploy a heartbeats source with `kubectl`:
 
 
     apiVersion: sources.knative.dev/v1
