@@ -30,7 +30,7 @@ BentoML creates a model API server by using prediction service abstraction. In t
 
 1. Requires a `scikit-learn` model.
 1. Asks BentoML to identify the required `pip` dependencies.
-3. Defines an API, which is the entry point for accessing this machine learning service.
+1. Defines an API, which is the entry point for accessing this machine learning service.
 
 {{% readfile file="iris_classifier.py" %}}
 
