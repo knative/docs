@@ -59,7 +59,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     NAME                 AGE
     knative-demo-topic   16s
     ```
