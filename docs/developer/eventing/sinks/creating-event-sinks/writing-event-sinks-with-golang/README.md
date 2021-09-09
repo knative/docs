@@ -276,16 +276,16 @@ In the following procedure, you can create a simple sink that receives CloudEven
 
 Consider this example Cloudevent for the purpose of this demo:
 
-	```sh
-	curl -v "https://dce.demo-sink.dev.demo.io" \
-	       -X POST \
-	       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-	       -H "Ce-Specversion: 1.0" \
-	       -H "Ce-Type: io.demo.email.send" \
-	       -H "Ce-Source: dev.knative.samples/demo" \
-	       -H "Content-Type: application/json" \
-	       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
-	```
+```sh
+curl -v "https://dce.demo-sink.dev.demo.io" \
+       -X POST \
+       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+       -H "Ce-Specversion: 1.0" \
+       -H "Ce-Type: io.demo.email.send" \
+       -H "Ce-Source: dev.knative.samples/demo" \
+       -H "Content-Type: application/json" \
+       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
+```
 
 1. Update the main.go file to include this struct. The `EventData` struct
 will be used to unmarshal the Cloudevent payload specified in the Cloudevent above.
