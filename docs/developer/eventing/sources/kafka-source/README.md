@@ -48,7 +48,7 @@ If you are using Strimzi:
     Where `<filename>` is the name of your `KafkaTopic` YAML file.
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     kafkatopic.kafka.strimzi.io/knative-demo-topic created
     ```
 
