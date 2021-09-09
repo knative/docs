@@ -1,8 +1,8 @@
 # Writing an event sink using Golang
 
-This tutorial provides instructions to build an event sink in Golang and implement it as a ksvc.
+This tutorial provides instructions to build an event sink in Golang and implement it as a Knative Service.
 
-## A Quick Overview of Building and Deploying a Simple Event Sink with Golang
+## A quick overview of building and deploying a simple event sink with Golang
 
 Below we will create a simple Sink that receives CloudEvents and performs an example operation on them.
 
@@ -268,7 +268,7 @@ curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
 ```
 
 
-## Processing an Event Containing a Structured Payload
+## Processing an event containing a structured payload
 
 Consider this example Cloudevent for the purpose of this demo:
 
