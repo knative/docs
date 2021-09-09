@@ -50,6 +50,6 @@ example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/defaul
 ??? question "Are there any other components of Knative Eventing?"
     Though it is out of scope for this tutorial, Knative Eventing has many components which can be used in many ways to suit your needs.
 
-    If you want to find out more about the different components of Knative Eventing, such as Channels, Sequences and Parallel flows, check out the <a href="../../eventing" target="blank_">Knative Eventing</a> documentation.
+    If you want to find out more about the different components of Knative Eventing, such as Channels, Sequences and Parallel flows, check out the [Knative Eventing documentation](../eventing/README.md){target=_blank}.
 
 **Next, you'll take a look at a simple implementation** of Sources, Brokers, Triggers and Sinks using an app called the Cloud Events Player.
