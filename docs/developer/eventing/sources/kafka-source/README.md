@@ -146,7 +146,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     kafkasource.sources.knative.dev/kafka-source created
     ```
 
