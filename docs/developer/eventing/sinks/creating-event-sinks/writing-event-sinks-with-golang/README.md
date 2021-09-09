@@ -4,9 +4,9 @@ This tutorial provides instructions to build an event sink in Golang and impleme
 
 ## A Quick Overview of Building and Deploying a Simple Event Sink with Golang
 
-Below we will create a simple Sink that receives CloudEvents and performs an example operation on them.
+In the following procedure, you can create a simple sink that receives CloudEvents and performs an example operation on them.
 
-From within the `$GOPATH`, Create a folder `demosink` with a new file `main.go`:
+1. From within the `$GOPATH`, create a folder named `demosink`, that contains a new file named `main.go`:
 ```go
 package main
 
@@ -150,23 +150,24 @@ func randomDelay() {
 
 ```
 
-Create the `go.mod` file and run `tidy`:
+1. Create the `go.mod` file, then run the following commands:
 ```
 go mod init
 go mod tidy
 ```
 
-Create a new file `Dockerfile` in the same folder:
-```dockerfile
-FROM golang:1.15-buster AS builder
-ENV CGO_ENABLED 0
-WORKDIR /project
-COPY . ./
-RUN go build
-FROM gcr.io/distroless/static:nonroot
-COPY --from=builder /project/demosink /
-ENTRYPOINT ["/demosink"]
-```
+1. Create a new file `Dockerfile` in the same folder:
+    
+    ```dockerfile
+    FROM golang:1.15-buster AS builder
+    ENV CGO_ENABLED 0
+    WORKDIR /project
+    COPY . ./
+    RUN go build
+    FROM gcr.io/distroless/static:nonroot
+    COPY --from=builder /project/demosink /
+    ENTRYPOINT ["/demosink"]
+    ```
 
 Run the application locally to debug:
 
