@@ -151,10 +151,11 @@ func randomDelay() {
 ```
 
 1. Create the `go.mod` file, then run the following commands:
-```
-go mod init
-go mod tidy
-```
+
+	```
+	go mod init
+	go mod tidy
+	```
 
 1. Create a new file `Dockerfile` in the same folder:
     
@@ -169,104 +170,109 @@ go mod tidy
     ENTRYPOINT ["/demosink"]
     ```
 
-Run the application locally to debug:
+1. Run the application locally to debug:
 
-```sh
-go run .
-```
+	```sh
+	go run .
+	```
 
-Send it an event and verify the expected results:
-```sh
-curl -v "http://localhost:8080" \
-       -X POST \
-       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: io.demo.email.send" \
-       -H "Ce-Source: dev.knative.samples/demo" \
-       -H "Content-Type: application/json" \
-       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
-* upload completely sent off: 55 out of 55 bytes
-< HTTP/1.1 200 OK
-< Ce-Id: 70eb24d9-3678-4c08-9332-315cbae7fe1e
-< Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
-< Ce-Processedsource: dev.knative.samples/demo
-< Ce-Processedtype: io.demo.email.send
-< Ce-Source: io.demo.targets.go-sample
-< Ce-Specversion: 1.0
-< Ce-Time: 2021-09-08T19:40:37.1619Z
-< Ce-Type: com.example.target.ack
-< Content-Length: 98
-< Content-Type: application/json
-< Date: Wed, 08 Sep 2021 19:40:37 GMT
-<
-* Connection #0 to host localhost left intact
-{"code":0,"detail":{"message":"Hello richard! Thank you for the message!","processing_time_ms":0}}* Closing connection 0
-```
+1. Send it an event and verify the expected results:
+
+	```sh
+	curl -v "http://localhost:8080" \
+	       -X POST \
+	       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+	       -H "Ce-Specversion: 1.0" \
+	       -H "Ce-Type: io.demo.email.send" \
+	       -H "Ce-Source: dev.knative.samples/demo" \
+	       -H "Content-Type: application/json" \
+	       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
+	* upload completely sent off: 55 out of 55 bytes
+	< HTTP/1.1 200 OK
+	< Ce-Id: 70eb24d9-3678-4c08-9332-315cbae7fe1e
+	< Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
+	< Ce-Processedsource: dev.knative.samples/demo
+	< Ce-Processedtype: io.demo.email.send
+	< Ce-Source: io.demo.targets.go-sample
+	< Ce-Specversion: 1.0
+	< Ce-Time: 2021-09-08T19:40:37.1619Z
+	< Ce-Type: com.example.target.ack
+	< Content-Length: 98
+	< Content-Type: application/json
+	< Date: Wed, 08 Sep 2021 19:40:37 GMT
+	<
+	* Connection #0 to host localhost left intact
+	{"code":0,"detail":{"message":"Hello richard! Thank you for the message!","processing_time_ms":0}}* Closing connection 0
+	```
 
 
-When you are ready to deploy, build and publish the container image:
+1. When you are ready to deploy, build and publish the container image:
 
 Google:
-```sh
-gcloud builds submit --tag gcr.io/<project-name>/<image-name> .
-```
+	```sh
+	gcloud builds submit --tag gcr.io/<project-name>/<image-name> .
+	```
 Docker:
-```sh
-docker build -t <user-name>/<image-name> .
-```
+	```sh
+	docker build -t <user-name>/<image-name> .
+	```
 
-Create a manifest.yaml file:
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
- name: demo-service
-spec:
- template:
-  spec:
-   containers:
-    - image: <image-name>
-```
+1. Create a manifest.yaml file:
 
-Apply this manifest:
-```sh
-kubectl apply -f manifest.yaml
-```
+	```yaml
+	apiVersion: serving.knative.dev/v1
+	kind: Service
+	metadata:
+	 name: demo-service
+	spec:
+	 template:
+	  spec:
+	   containers:
+	    - image: <image-name>
+	```
 
-Verify that the service is running:
-```sh
-kubectl get ksvc
-NAME          URL                                            LATESTCREATED         LATESTREADY            READY   REASON
-demo-service  http://demo-service.dmo.10.64.140.43.xip.io    demo-service-00001     demo-service-00001     True
-```
+1. Apply this manifest:
 
-Send it a Cloudevent to trigger the service and verify the expected results:
-```sh
-curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
-       -X POST \
-       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: io.demo.test.event" \
-       -H "Ce-Source: dev.knative.samples/demo" \
-       -H "Content-Type: application/json" \
-       -d '{"test":"data"}'
-* upload completely sent off: 15 out of 15 bytes
-< HTTP/1.1 200 OK
-< Ce-Id: 0086d811-c609-4619-beb3-66965f9a1e64
-< Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
-< Ce-Processedsource: dev.knative.samples/demo
-< Ce-Processedtype: io.demo.test.event
-< Ce-Source: io.demo.targets.go-sample
-< Ce-Specversion: 1.0
-< Ce-Time: 2021-09-08T19:00:16.291182Z
-< Ce-Type: com.example.target.ack
-< Content-Length: 86
-< Content-Type: application/json
-< Date: Wed, 08 Sep 2021 19:00:16 GMT
-<
-* Connection #0 to host localhost left intact
-{"code":0,"detail":{"message":"event processed successfully","processing_time_ms":32}}* Closing connection 0
-```
+	```sh
+	kubectl apply -f manifest.yaml
+	```
+
+1. Verify that the service is running:
+
+	```sh
+	kubectl get ksvc
+	NAME          URL                                            LATESTCREATED         LATESTREADY            READY   REASON
+	demo-service  http://demo-service.dmo.10.64.140.43.xip.io    demo-service-00001     demo-service-00001     True
+	```
+
+1. Send it a Cloudevent to trigger the service and verify the expected results:
+
+	```sh
+	curl -v "http://demo-service.dmo.10.64.140.43.xip.io " \
+	       -X POST \
+	       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+	       -H "Ce-Specversion: 1.0" \
+	       -H "Ce-Type: io.demo.test.event" \
+	       -H "Ce-Source: dev.knative.samples/demo" \
+	       -H "Content-Type: application/json" \
+	       -d '{"test":"data"}'
+	* upload completely sent off: 15 out of 15 bytes
+	< HTTP/1.1 200 OK
+	< Ce-Id: 0086d811-c609-4619-beb3-66965f9a1e64
+	< Ce-Processedid: 536808d3-88be-4077-9d7a-a3f162705f79
+	< Ce-Processedsource: dev.knative.samples/demo
+	< Ce-Processedtype: io.demo.test.event
+	< Ce-Source: io.demo.targets.go-sample
+	< Ce-Specversion: 1.0
+	< Ce-Time: 2021-09-08T19:00:16.291182Z
+	< Ce-Type: com.example.target.ack
+	< Content-Length: 86
+	< Content-Type: application/json
+	< Date: Wed, 08 Sep 2021 19:00:16 GMT
+	<
+	* Connection #0 to host localhost left intact
+	{"code":0,"detail":{"message":"event processed successfully","processing_time_ms":32}}* Closing connection 0
+	```
 
 
 ## Processing an event containing a structured payload
@@ -294,7 +300,7 @@ type EventData struct {
 }
 ```
 
-Now we need to update the `processEvent()` function found in the `main.go` file.
+1. Update the `processEvent()` function found in the `main.go` file.
 
 ```go
 // processEvent processes the event and returns the result of the processing.
@@ -319,6 +325,6 @@ func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
 }
 ```
 
-Remove the `randomDelay()` function as it is no longer needed.
+1. Remove the `randomDelay()` function as it is no longer needed.
 
-Now we can run the application locally or build an image and deploy, as described above.
+1. Run the application locally or build an image and deploy, as described above.
