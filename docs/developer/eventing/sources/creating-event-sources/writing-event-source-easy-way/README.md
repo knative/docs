@@ -11,8 +11,8 @@ aliases:
 
 This tutorial provides instructions to build an event source in Javascript and implement it with a ContainerSource or SinkBinding.
 
-- Using a [ContainerSource](../../containersource) is a simple way to turn any dispatcher container into a Knative event source.
-- Using [SinkBinding](../../sinkbinding) provides a framework for injecting environment variables into any Kubernetes resource that has a `spec.template` and is [PodSpecable](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#PodSpecable).
+- Using a [ContainerSource](../../containersource/README.md) is a simple way to turn any dispatcher container into a Knative event source.
+- Using [SinkBinding](../../sinkbinding/README.md) provides a framework for injecting environment variables into any Kubernetes resource that has a `spec.template` and is [PodSpecable](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#PodSpecable).
 
 ContainerSource and SinkBinding both work by injecting environment variables to an application. Injected environment variables at minimum contain the URL of a sink that will receive events.
 
