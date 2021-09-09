@@ -158,7 +158,7 @@ func randomDelay() {
 	```
 
 1. Create a new file `Dockerfile` in the same folder:
-    
+
     ```dockerfile
     FROM golang:1.15-buster AS builder
     ENV CGO_ENABLED 0
