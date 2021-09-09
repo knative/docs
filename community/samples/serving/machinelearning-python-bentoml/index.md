@@ -1,70 +1,60 @@
----
-title: "Hello World - Python BentoML"
-linkTitle: "Python Bentoml"
-weight: 1
-type: "docs"
----
+# Hello World - Python BentoML sample
 
-A simple machine learning model with API serving that is written in python and
-using [BentoML](https://github.com/bentoml/BentoML). BentoML is an open source
-framework for high performance ML model serving, which supports all major machine
-learning frameworks including Keras, Tensorflow, PyTorch, Fast.ai, XGBoost and etc.
+A simple machine learning model with API serving that is written in Python and
+using [BentoML](https://github.com/bentoml/BentoML).
 
-This sample will walk you through the steps of creating and deploying a machine learning
-model using python. It will use BentoML to package a classifier model trained
-on the Iris dataset. Afterward, it will create a container image and
+BentoML is an open source framework for high performance ML model serving, which supports all major machine learning frameworks including Keras, Tensorflow, PyTorch, Fast.ai, and XGBoost.
+
+This sample walks you through the steps of creating and deploying a machine learning model using Python. It uses BentoML to package a classifier model that is trained on the Iris dataset, and then creates a container image and
 deploy the image to Knative.
 
-Knative deployment guide with BentoML is also available in the
-[BentoML documentation](https://docs.bentoml.org/en/latest/deployment/knative.html)
+Knative deployment guide with BentoML is also available in the [BentoML documentation](https://docs.bentoml.org/en/latest/deployment/knative.html).
 
-## Before you begin
+## Prerequisites
 
-- A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../../docs/install/) if you need to
-  create one.
-- [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured. Docker Hub will be used for a container registry).
-- Python 3.6 or above installed and running on your local machine.
-  - Install `scikit-learn` and `bentoml` packages:
+- You must have a Kubernetes cluster with Knative installed. See the [installation instructions](../../../../docs/admin/install/README.md) for more information.
+- You must have [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured. Docker Hub is used as a container registry.
+- You must have Python 3.6 or above installed and running on your local machine.
+- You must install the `scikit-learn` and `bentoml` packages:
 
     ```bash
     pip install scikit-learn
     pip install bentoml
     ```
 
-## Recreating sample code
+## About the sample code
 
-Run the following code on your local machine, to train a machine learning model and deploy it
-as API endpoint with KNative Serving.
+### iris_classifier
 
-1. BentoML creates a model API server, via prediction service abstraction. In
-  `iris_classifier.py`, it defines a prediction service that requires a scikit-learn
-  model, asks BentoML to figure out the required pip dependencies, also defines an
-  API, which is the entry point for accessing this machine learning service.
+BentoML creates a model API server by using prediction service abstraction. In the `iris_classifier.py` file, a prediction service is defined, which:
 
-    {{% readfile file="iris_classifier.py" %}}
+1. Requires a `scikit-learn` model.
+1. Asks BentoML to identify the required `pip` dependencies.
+3. Defines an API, which is the entry point for accessing this machine learning service.
 
-2. In `main.py`, it uses the classic
-  [iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set)
-  to train a classification model which can predict the species of an iris flower with
-  given data and then save the model with BentoML to local disk.
+{{% readfile file="iris_classifier.py" %}}
 
-    {{% readfile file="main.py" %}}
+### main
 
-    Run the `main.py` file to train and save the model:
+In the `main.py` file, the [iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set) is used to train a classification model, which can predict the species of an iris flower with given data, and then saves the model to the local disk by using BentoML.
+
+{{% readfile file="main.py" %}}
+
+## Procedure
+
+1. Run the `main.py` file to train and save the model:
 
     ```bash
     python main.py
     ```
 
-3. Use BentoML CLI to check saved model's information.
+1. Run the following `bentoml` CLI command to check saved model's information:
 
     ```bash
     bentoml get IrisClassifier:latest
     ```
 
-    Example:
+    Example output:
 
     ```bash
     > bentoml get IrisClassifier:latest
@@ -107,15 +97,13 @@ as API endpoint with KNative Serving.
     }
     ```
 
-4. Test run API server. BentoML can start an API server from the saved model. Use
-  BentoML CLI command to start an API server locally and test it with the `curl` command.
+1. Test run the API server. BentoML can start an API server from the saved model. Run the following `bentoml` CLI command to start an API server locally:
 
     ```bash
     bentoml serve IrisClassifier:latest
     ```
 
-    In another terminal window, make `curl` request with sample data to the API server
-    and get prediction result:
+1. Test the API server by using the `curl` command. In a new terminal window, run the following command to make a `curl` request to the API server that uses sample data to get prediction results:
 
     ```bash
     curl -v -i \
@@ -125,13 +113,9 @@ as API endpoint with KNative Serving.
     127.0.0.1:5000/predict
     ```
 
-## Building and deploying the sample
+1. BentoML supports creating an API server docker image from its saved model directory, where a Dockerfile is automatically generated when saving the model.
 
-BentoML supports creating an API server docker image from its saved model directory, where
-a Dockerfile is automatically generated when saving the model.
-
-1. To build an API model server docker image, replace `{username}` with your Docker Hub
-  username and run the following commands.
+    To build an API model server Docker image, replace `{username}` with your Docker Hub username and run the following commands:
 
     ```bash
     # jq might not be installed on your local system, please follow jq install
@@ -145,34 +129,34 @@ a Dockerfile is automatically generated when saving the model.
     docker push {username}/iris-classifier
     ```
 
-2. In `service.yaml`, replace `{username}` with your Docker hub username, and then deploy
-  the service to Knative Serving with `kubectl`:
+1. In sample `service.yaml` file, replace `{username}` with your Docker hub username, and then deploy the Service to Knative Serving by using `kubectl`:
 
     {{% readfile file="service.yaml" %}}
 
     ```bash
-    kubectl apply --filename service.yaml
+    kubectl apply -fe service.yaml
     ```
 
-3. Now that your service is created, Knative performs the following steps:
+1. After the Service has been created, Knative performs the following steps:
 
-    - Create a new immutable revision for this version of the app.
-    - Network programming to create a route, ingress, service, and load
-      balance for your application.
-    - Automatically scale your pods up and down (including to zero active
-      pods).
+    - Creates a new immutable revision for this version of the app.
+    - Carries out network programming to create a route, ingress, service, and load balancer for your application.
+    - Automatically scales pods up and down, including scaling to zero when no pods are receiving requests.
 
-4. Run the following command to find the domain URL for your service:
+1. Run the following command to find the domain URL for your Knative Service:
 
     ```bash
     kubectl get ksvc iris-classifier --output=custom-columns=NAME:.metadata.name,URL:.status.url
+    ```
 
+    Example output:
+
+    ```
     NAME              URL
     iris-classifier   http://iris-classifer.default.example.com
     ```
 
-5. Replace the request URL with the URL return in the previous command, and execute the
-  command to get prediction result from the deployed model API endpoint.
+1. Replace the request URL with the URL that was returned from the previous command, and run the following command to get a prediction result from the deployed model API endpoint:
 
     ```bash
     curl -v -i \
@@ -184,10 +168,8 @@ a Dockerfile is automatically generated when saving the model.
     [0]
     ```
 
-## Removing the sample app deployment
+1. To remove the sample application from your cluster, run the following command:
 
-To remove the application from your cluster, delete the service record:
-
-  ```bash
-  kubectl delete --filename service.yaml
-  ```
+    ```bash
+    kubectl delete -f service.yaml
+    ```
