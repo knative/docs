@@ -7,148 +7,149 @@ This tutorial provides instructions to build an event sink in Golang and impleme
 In the following procedure, you can create a simple sink that receives CloudEvents and performs an example operation on them.
 
 1. From within the `$GOPATH`, create a folder named `demosink`, that contains a new file named `main.go`:
-```go
-package main
 
-import (
-	"context"
-	"log"
-	"math/rand"
-	"time"
+	```go
+	package main
 
-	cloudevents "github.com/cloudevents/sdk-go/v2"
-	"github.com/sethvargo/go-signalcontext"
-)
+	import (
+		"context"
+		"log"
+		"math/rand"
+		"time"
 
-func main() {
-	cli, err := cloudevents.NewDefaultClient()
-	if err != nil {
-		log.Panicf("Unable to create CloudEvents client: %s", err)
+		cloudevents "github.com/cloudevents/sdk-go/v2"
+		"github.com/sethvargo/go-signalcontext"
+	)
+
+	func main() {
+		cli, err := cloudevents.NewDefaultClient()
+		if err != nil {
+			log.Panicf("Unable to create CloudEvents client: %s", err)
+		}
+
+		h := NewHandler(cli)
+
+		log.Print("Running CloudEvents handler")
+
+		ctx, cancel := signalcontext.OnInterrupt()
+		defer cancel()
+
+		if err := h.Run(ctx); err != nil {
+			log.Panicf("Failure during runtime of CloudEvents handler: %s", err)
+		}
 	}
 
-	h := NewHandler(cli)
+	const (
+		eventTypeAck = "com.example.target.ack"
 
-	log.Print("Running CloudEvents handler")
+		eventSrcName = "io.demo.targets.go-sample"
 
-	ctx, cancel := signalcontext.OnInterrupt()
-	defer cancel()
+		ceExtProcessedType   = "processedtype"
 
-	if err := h.Run(ctx); err != nil {
-		log.Panicf("Failure during runtime of CloudEvents handler: %s", err)
-	}
-}
+	)
 
-const (
-	eventTypeAck = "com.example.target.ack"
-
-	eventSrcName = "io.demo.targets.go-sample"
-
-	ceExtProcessedType   = "processedtype"
-
-)
-
-// Handler runs a CloudEvents receiver.
-type Handler struct {
-	cli cloudevents.Client
-}
-
-// NewHandler returns a new Handler for the given CloudEvents client.
-func NewHandler(c cloudevents.Client) *Handler {
-	rand.Seed(time.Now().UnixNano())
-
-	return &Handler{
-		cli: c,
-	}
-}
-
-// Run starts the handler and blocks until it returns.
-func (h *Handler) Run(ctx context.Context) error {
-	return h.cli.StartReceiver(ctx, h.receive)
-}
-
-// ACKResponse represents the data of a CloudEvent payload returned to
-// acknowledge the processing of an event.
-type ACKResponse struct {
-	Code   ACKCode     `json:"code"`
-	Detail interface{} `json:"detail"`
-}
-
-// ACKCode defines the outcome of the processing of an event.
-type ACKCode int
-
-// Enum of supported ACK codes.
-const (
-	CodeSuccess ACKCode = iota
-	CodeFailure
-)
-
-// receive implements the handler's receive logic.
-func (h *Handler) receive(e cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
-	code := CodeSuccess
-	ceResult := cloudevents.ResultACK
-
-	result, err := processEvent(e)
-	// this error handling is for demo purposes only, since processEvent()
-	// always succeeds
-	if err != nil {
-		code = CodeFailure
-		ceResult = cloudevents.ResultNACK
+	// Handler runs a CloudEvents receiver.
+	type Handler struct {
+		cli cloudevents.Client
 	}
 
-	return newAckEvent(e, code, result), ceResult
-}
+	// NewHandler returns a new Handler for the given CloudEvents client.
+	func NewHandler(c cloudevents.Client) *Handler {
+		rand.Seed(time.Now().UnixNano())
 
-// processEvent processes the event and returns the result of the processing.
-func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
-	tBegin := time.Now()
-
-	// simulate processing time
-	randomDelay()
-
-	res := &exampleResult{
-		Message:        "event processed successfully",
-		ProcessingTime: time.Since(tBegin).Milliseconds(),
+		return &Handler{
+			cli: c,
+		}
 	}
 
-	return res, nil
-}
-
-// exampleResult represents a fictional structured result of some event
-// processing.
-type exampleResult struct {
-	Message        string `json:"message"`
-	ProcessingTime int64  `json:"processing_time_ms"`
-}
-
-// newAckEvent returns a CloudEvent that acknowledges the processing of an
-// event.
-func newAckEvent(e cloudevents.Event, code ACKCode, detail interface{}) *cloudevents.Event {
-	resp := cloudevents.NewEvent()
-	resp.SetType(eventTypeAck)
-	resp.SetSource(eventSrcName)
-	resp.SetExtension(ceExtProcessedType, e.Type())
-
-	data := &ACKResponse{
-		Code:   code,
-		Detail: detail,
+	// Run starts the handler and blocks until it returns.
+	func (h *Handler) Run(ctx context.Context) error {
+		return h.cli.StartReceiver(ctx, h.receive)
 	}
 
-	if err := resp.SetData(cloudevents.ApplicationJSON, data); err != nil {
-		log.Panicf("Error serializing CloudEvent data: %s", err)
+	// ACKResponse represents the data of a CloudEvent payload returned to
+	// acknowledge the processing of an event.
+	type ACKResponse struct {
+		Code   ACKCode     `json:"code"`
+		Detail interface{} `json:"detail"`
 	}
 
-	return &resp
-}
+	// ACKCode defines the outcome of the processing of an event.
+	type ACKCode int
 
-// randomDelay sleeps for a random amount of time.
-func randomDelay() {
-	const maxDelay = 100 * time.Millisecond
+	// Enum of supported ACK codes.
+	const (
+		CodeSuccess ACKCode = iota
+		CodeFailure
+	)
 
-	randomDelay := time.Duration(rand.Int63n(int64(maxDelay)))
-	time.Sleep(randomDelay)
-}
+	// receive implements the handler's receive logic.
+	func (h *Handler) receive(e cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
+		code := CodeSuccess
+		ceResult := cloudevents.ResultACK
 
-```
+		result, err := processEvent(e)
+		// this error handling is for demo purposes only, since processEvent()
+		// always succeeds
+		if err != nil {
+			code = CodeFailure
+			ceResult = cloudevents.ResultNACK
+		}
+
+		return newAckEvent(e, code, result), ceResult
+	}
+
+	// processEvent processes the event and returns the result of the processing.
+	func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
+		tBegin := time.Now()
+
+		// simulate processing time
+		randomDelay()
+
+		res := &exampleResult{
+			Message:        "event processed successfully",
+			ProcessingTime: time.Since(tBegin).Milliseconds(),
+		}
+
+		return res, nil
+	}
+
+	// exampleResult represents a fictional structured result of some event
+	// processing.
+	type exampleResult struct {
+		Message        string `json:"message"`
+		ProcessingTime int64  `json:"processing_time_ms"`
+	}
+
+	// newAckEvent returns a CloudEvent that acknowledges the processing of an
+	// event.
+	func newAckEvent(e cloudevents.Event, code ACKCode, detail interface{}) *cloudevents.Event {
+		resp := cloudevents.NewEvent()
+		resp.SetType(eventTypeAck)
+		resp.SetSource(eventSrcName)
+		resp.SetExtension(ceExtProcessedType, e.Type())
+
+		data := &ACKResponse{
+			Code:   code,
+			Detail: detail,
+		}
+
+		if err := resp.SetData(cloudevents.ApplicationJSON, data); err != nil {
+			log.Panicf("Error serializing CloudEvent data: %s", err)
+		}
+
+		return &resp
+	}
+
+	// randomDelay sleeps for a random amount of time.
+	func randomDelay() {
+		const maxDelay = 100 * time.Millisecond
+
+		randomDelay := time.Duration(rand.Int63n(int64(maxDelay)))
+		time.Sleep(randomDelay)
+	}
+
+	```
 
 1. Create the `go.mod` file, then run the following commands:
 
@@ -208,8 +209,6 @@ func randomDelay() {
 
 1. When you are ready to deploy, build and publish the container image:
 
-
-Docker:
 	```sh
 	docker build -t <user-name>/<image-name> .
 	docker push <user-name>/<image-name>
@@ -277,51 +276,52 @@ Docker:
 
 Consider this example Cloudevent for the purpose of this demo:
 
-```sh
-curl -v "https://dce.demo-sink.dev.demo.io" \
-       -X POST \
-       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
-       -H "Ce-Specversion: 1.0" \
-       -H "Ce-Type: io.demo.email.send" \
-       -H "Ce-Source: dev.knative.samples/demo" \
-       -H "Content-Type: application/json" \
-       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
-```
+	```sh
+	curl -v "https://dce.demo-sink.dev.demo.io" \
+	       -X POST \
+	       -H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+	       -H "Ce-Specversion: 1.0" \
+	       -H "Ce-Type: io.demo.email.send" \
+	       -H "Ce-Source: dev.knative.samples/demo" \
+	       -H "Content-Type: application/json" \
+	       -d '{"fromName":"richard","toName":"bob","message":"hello"}'
+	```
 
-We can represent the expected data in this event as a struct in Golang,
-add this struct to the `main.go` file.
-```go
-type EventData struct {
-	Fromname string `json:"fromName"`
-	Toname   string `json:"toName"`
-	Message  string `json:"message"`
-}
-```
+1. Update the main.go file to include this struct. The `EventData` struct
+will be used to unmarshal the Cloudevent payload specified in the Cloudevent above.
+
+	```go
+	type EventData struct {
+		Fromname string `json:"fromName"`
+		Toname   string `json:"toName"`
+		Message  string `json:"message"`
+	}
+	```
 
 1. Update the `processEvent()` function found in the `main.go` file.
 
-```go
-// processEvent processes the event and returns the result of the processing.
-func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
-	tBegin := time.Now()
-	// Create our new struct to hold the event data.
-	ed := &EventData{}
-	// Unmarshal the event data into our struct.
-	if err := e.DataAs(ed); err != nil {
-		return nil, err
-	}
+	```go
+	// processEvent processes the event and returns the result of the processing.
+	func processEvent(e cloudevents.Event) (interface{} /*result*/, error) {
+		tBegin := time.Now()
+		// Create our new struct to hold the event data.
+		ed := &EventData{}
+		// Unmarshal the event data into our struct.
+		if err := e.DataAs(ed); err != nil {
+			return nil, err
+		}
 
-	// Do something with the event data.
-	log.Printf("Received event with message of : %+v\n", ed.Message)
-	newMessage := "Hello " + ed.Fromname + "! Thank you for the message!"
+		// Do something with the event data.
+		log.Printf("Received event with message of : %+v\n", ed.Message)
+		newMessage := "Hello " + ed.Fromname + "! Thank you for the message!"
 
-	res := &exampleResult{
-		Message:        newMessage,
-		ProcessingTime: time.Since(tBegin).Milliseconds(),
+		res := &exampleResult{
+			Message:        newMessage,
+			ProcessingTime: time.Since(tBegin).Milliseconds(),
+		}
+		return res, nil
 	}
-	return res, nil
-}
-```
+	```
 
 1. Remove the `randomDelay()` function as it is no longer needed.
 
