@@ -112,7 +112,7 @@ If you are using Strimzi:
     ```
 
     The Pod name is prefixed with `event-display`:
-    ```bash
+    ```{ .bash .no-copy }
     NAME                                            READY     STATUS    RESTARTS   AGE
     event-display-00001-deployment-5d5df6c7-gv2j4   2/2       Running   0          72s
     ```
