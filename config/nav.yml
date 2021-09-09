@@ -222,7 +222,6 @@ nav:
         - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
         - GitHub source: eventing/samples/github-source/README.md
         - GitLab source: eventing/samples/gitlab-source/README.md
-        - IoT core: eventing/samples/iot-core/README.md
     # Reference docs
     - Reference:
       - Serving: reference/api/serving-api.md
