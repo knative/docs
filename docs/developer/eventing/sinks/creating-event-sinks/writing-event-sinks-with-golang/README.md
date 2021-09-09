@@ -1,10 +1,3 @@
----
-title: "Writing an event sink using Golang"
-weight: 10
-type: "docs"
-showlandingtoc: "false"
----
-
 # Writing an event sink using Golang
 
 This tutorial provides instructions to build an event sink in Golang and implement it as a ksvc.
