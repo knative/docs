@@ -99,7 +99,7 @@ DomainMappings in that namespace to use the domain name.
 
     Where:
     - `<domain-name>` is the domain name that you want to map a Service or Route to.
-    - `<target>` is the name of the Service or Route that is mapped to the domain. You can use a prefix `ksvc:` or `kroute:` to specify whether to map the domain to a Knative Service or Route. If no prefix is given, `ksvc:` is assumed. Additional, you can a `:namespace` suffix to point to a Service or Route in a different namespace than this Domain mapping. E.g. `mysvc` maps to a Service `mysvc` in the same namespace as this mapping, while `kroute:myroute:othernamespace` maps to a Route `myroute` in namespace `othernamespace`.
+    - `<target>` is the name of the Service or Route that is mapped to the domain. You can use a prefix `ksvc:` or `kroute:` to specify whether to map the domain to a Knative Service or Route. If no prefix is given, `ksvc:` is assumed. Additionally, you can use a `:namespace` suffix to point to a Service or Route in a different namespace than this Domain mapping. E.g. `mysvc` maps to a Service `mysvc` in the same namespace as this mapping, while `kroute:myroute:othernamespace` maps to a Route `myroute` in namespace `othernamespace`.
     - `<tls-secret>` is optional and if provided enables the TLS protocol. The value specifies the secret that holds the server certificate.
     - `<namespace>` is the namespace where the DomainMapping  should be created. By default the DomainMapping is created in the current namespace.
 
