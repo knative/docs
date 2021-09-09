@@ -50,7 +50,7 @@ You may need to refresh the page to see your changes.
 ??? question "What if I want to filter on CloudEvent attributes?"
     First, delete your existing Trigger:
     ```bash
-      kn trigger delete cloudevents-player
+      kn trigger delete cloudevents-trigger
     ```
     Now let's add a Trigger that listens for a certain CloudEvent Type
     ```bash
