@@ -12,7 +12,7 @@ blog post, documentation within a code repo, or a vendor site may be the right
 place. Be generous with offering to link to such locations; documents in the
 main documentation come with an ongoing cost of keeping up to date.
 
-[Learn about documenting code samples](/code-samples.md)
+[Learn about documenting code samples](code-samples.md)
 
 
 ## Branches
