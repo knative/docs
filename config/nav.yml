@@ -170,6 +170,7 @@ nav:
         - RESTful service - Go: serving/samples/rest-api-go/README.md
         - Secrets - Go: serving/samples/secrets-go/README.md
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
+        - Hello World - Python BentoML sample: serving/samples/machinelearning-python-bentoml/README.md
     # Eventing
     - Knative Eventing:
       - Overview: eventing/README.md
