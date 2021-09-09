@@ -1,4 +1,4 @@
-# Hello World - Python BentoML sample
+# Python BentoML sample
 
 A simple machine learning model with API serving that is written in Python and
 using [BentoML](https://github.com/bentoml/BentoML).
