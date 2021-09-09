@@ -1,7 +1,7 @@
 # Sequence wired to event-display
 
 We are going to create the following logical configuration. We create a
-PingSource, feeding events to a [`Sequence`](../), then
+PingSource, feeding events to a [`Sequence`](../README.md), then
 taking the output of that `Sequence` and displaying the resulting output.
 
 ![Logical Configuration](sequence-reply-to-event-display.png)

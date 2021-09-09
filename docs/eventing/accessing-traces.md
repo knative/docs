@@ -6,7 +6,7 @@ visualize and trace your requests.
 
 ## Before you begin
 
-You must have a Knative cluster running with the Eventing component installed. [Learn more](../../admin/install/)
+You must have a Knative cluster running with the Eventing component installed. [Learn more](../admin/install/README.md).
 
 ## Configuring tracing
 

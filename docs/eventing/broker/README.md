@@ -2,7 +2,9 @@
 
 Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that define an event mesh for collecting a pool of [CloudEvents](https://cloudevents.io/). Brokers provide a discoverable endpoint, `status.address`, for event ingress, and triggers for event delivery. Event producers can send events to a broker by POSTing the event to the `status.address.url` of the broker.
 
-Event delivery mechanics are an implementation detail that depend on the configured [broker class](configmaps#broker-class-options). Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
+Event delivery mechanics are an implementation detail that depend on the configured
+[broker class](../../admin/eventing/broker-configuration.md#broker-class-options).
+Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
 <img src="images/broker-workflow.svg" width="70%">
 
@@ -24,7 +26,8 @@ The following broker types are available for use with Knative Eventing.
 
 Knative Eventing provides a multi-tenant (MT) channel-based broker implementation that uses channels for event routing.
 
-Before you can use the MT channel-based broker, you must install a [channel implementation](../channels/channel-types-defaults).
+Before you can use the MT channel-based broker, you must install a
+[channel implementation](../channels/channel-types-defaults.md).
 
 ### Alternative broker implementations
 
@@ -38,7 +41,7 @@ The GCP broker is optimized for running in GCP. For more details, refer to the [
 
 #### Apache Kafka broker
 
-For information about the Apache Kafka broker, see [link](kafka-broker).
+For more information, see [Apache Kafka Broker](kafka-broker/README.md).
 
 #### RabbitMQ broker
 
@@ -46,6 +49,6 @@ The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlyin
 
 ## Next steps
 
-- Create a [MT channel-based broker](create-mtbroker).
-- Configure [default broker ConfigMap settings](configmaps/).
+- Create an [MT channel-based broker](create-mtbroker.md).
+- Configure [default broker ConfigMap settings](../../admin/eventing/broker-configuration.md).
 - View the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md).
