@@ -208,13 +208,11 @@ func randomDelay() {
 
 1. When you are ready to deploy, build and publish the container image:
 
-Google:
-	```sh
-	gcloud builds submit --tag gcr.io/<project-name>/<image-name> .
-	```
+
 Docker:
 	```sh
 	docker build -t <user-name>/<image-name> .
+	docker push <user-name>/<image-name>
 	```
 
 1. Create a manifest.yaml file:
