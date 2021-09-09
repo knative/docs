@@ -32,13 +32,13 @@ BentoML creates a model API server by using prediction service abstraction. In t
 1. Asks BentoML to identify the required `pip` dependencies.
 1. Defines an API, which is the entry point for accessing this machine learning service.
 
-{{% readfile file="iris_classifier.py" %}}
+--8<-- "iris_classifier.py"
 
 ### main
 
 In the `main.py` file, the [iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set) is used to train a classification model, which can predict the species of an iris flower with given data, and then saves the model to the local disk by using BentoML.
 
-{{% readfile file="main.py" %}}
+--8<-- "main.py"
 
 ## Procedure
 
