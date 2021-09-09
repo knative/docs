@@ -6,16 +6,16 @@ Knative APIs build on existing Kubernetes APIs, so that Knative resources are co
 
 Common languages and frameworks that include Kubernetes-friendly tooling work smoothly with Knative to reduce the time spent solving common deployment issues, such as:
 
-- [Deploying a container](serving/getting-started-knative-app/)
-- [Routing and managing traffic with blue/green deployment](serving/samples/blue-green-deployment/)
-- [Scaling automatically and sizing workloads based on demand](serving/autoscaling/)
-- [Binding running services to eventing ecosystems](eventing/getting-started/)
+- [Deploying a container](serving/getting-started-knative-app.md)
+- [Routing and managing traffic with blue/green deployment](developer/serving/traffic-management.md#routing-and-managing-traffic-with-blue-green-deployment)
+- [Scaling automatically and sizing workloads based on demand](serving/autoscaling/README.md)
+- [Binding running services to eventing ecosystems](eventing/getting-started.md)
 
 There are two core Knative components that can be installed and used together or independently to provide different functions:
 
-* [Knative Serving](serving/): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
+* [Knative Serving](serving/README.md): Easily manage stateless services on Kubernetes by reducing the developer effort required for autoscaling, networking, and rollouts.
 
-* [Knative Eventing](eventing/): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
+* [Knative Eventing](eventing/README.md): Easily route events between on-cluster and off-cluster components by exposing event routing as configuration rather than embedded in code.
 
 These components are delivered as Kubernetes custom resource definitions (CRDs), which can be configured by a cluster administrator to provide default settings for developer-created applications and event workflow components.
 
@@ -23,15 +23,14 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 
 ### Getting started
 
-- [Installing Knative](install/)
-- [Getting started with app deployment](serving/getting-started-knative-app/)
-- [Getting started with serving](serving/)
-- [Getting started with eventing](eventing/)
+- [Installing Knative](admin/install/README.md)
+- [Getting started with app deployment](serving/getting-started-knative-app.md)
+- [Getting started with serving](serving/README.md)
+- [Getting started with eventing](eventing/README.md)
 
 ### Configuration and networking
 
-- [Using a custom domain](serving/using-a-custom-domain/)
-- [Assigning a static IP address for Knative on Google Kubernetes Engine](serving/gke-assigning-static-ip-address/)
+- [Using a custom domain](serving/using-a-custom-domain.md)
 - [Configuring HTTPS with a custom certificate](serving/using-a-tls-cert/)
 - [Configuring high availability](serving/config-ha/)
 
