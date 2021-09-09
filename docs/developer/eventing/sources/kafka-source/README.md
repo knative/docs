@@ -157,7 +157,7 @@ If you are using Strimzi:
     ```
 
     The Pod name is prefixed with `kafka-source`:
-    ```bash
+    ```{ .bash .no-copy }
     NAME                                  READY     STATUS    RESTARTS   AGE
     kafka-source-xlnhq-5544766765-dnl5s   1/1       Running   0          40m
     ```
@@ -218,7 +218,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     {"level":"debug","ts":"2020-05-28T10:40:29.400Z","caller":"kafka/consumer_handler.go:77","msg":"Message claimed","topic":".","value":"."}
     {"level":"debug","ts":"2020-05-28T10:40:31.722Z","caller":"kafka/consumer_handler.go:89","msg":"Message marked","topic":".","value":"."}
     ```
@@ -230,7 +230,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     ☁️ cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -258,7 +258,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     "kafka-source" deleted
     ```
 
@@ -269,7 +269,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     "event-display" deleted
     ```
 
@@ -280,7 +280,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     serviceaccount "kafka-controller-manager" deleted
     clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
     deleted clusterrolebinding.rbac.authorization.k8s.io
@@ -297,7 +297,7 @@ If you are using Strimzi:
     ```
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
     ```
 
@@ -372,7 +372,7 @@ The KafkaSource supports TLS and SASL authentication methods. To enable TLS auth
 * CA Certificate
 * Client Certificate and Key
 
-KafkaSource expects these files to be in pem format, if it is in other format like jks, convert to pem.
+KafkaSource expects these files to be in PEM format. If they are in another format, such as JKS, convert them to PEM.
 
 1. Create the certificate files as secrets in the namespace where KafkaSource is going to be set up, by running the commands:
 
