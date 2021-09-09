@@ -101,7 +101,7 @@ If you are using Strimzi:
     Where `<filename>` is the name of the file you created in the previous step.
 
     Example output:
-    ```bash
+    ```{ .bash .no-copy }
     service.serving.knative.dev/event-display created
     ```
 
