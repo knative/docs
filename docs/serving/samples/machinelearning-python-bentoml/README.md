@@ -131,10 +131,10 @@ In the `main.py` file, the [iris flower data set](https://en.wikipedia.org/wiki/
 
 1. In sample `service.yaml` file, replace `{username}` with your Docker hub username, and then deploy the Service to Knative Serving by using `kubectl`:
 
-    {{% readfile file="service.yaml" %}}
+    --8<-- "service.yaml"
 
     ```bash
-    kubectl apply -fe service.yaml
+    kubectl apply -f service.yaml
     ```
 
 1. After the Service has been created, Knative performs the following steps:
