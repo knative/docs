@@ -208,11 +208,11 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 
     For example:
     ```bash
-    $ kn source binding create bind-heartbeat \
-      --namespace sinkbinding-example \
-      --subject "Job:batch/v1:app=heartbeat-cron" \
-      --sink http://event-display.svc.cluster.local \
-      --ce-override "sink=bound"
+    $ kn source binding create <name> \
+      --namespace <namespace> \
+      --subject "<subject>" \
+      --sink <sink> \
+      --ce-override "<cloudevent-overrides>"
     ```
 
 === "YAML"
