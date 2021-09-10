@@ -51,7 +51,8 @@ plugins:
       install/check-install-version.md: check-install-version.md
       install/collecting-logs/index.md: admin/collecting-logs/README.md
       install/collecting-metrics/index.md: admin/collecting-metrics/README.md
-      install/getting-started-knative-app/index.md: serving/getting-started-knative-app.md
+      install/getting-started-knative-app/index.md: docs/getting-started/README.md
+      serving/getting-started-knative-app.md: docs/getting-started/README.md
       install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
       # This doesn't exist anymore, we should probably replace it
       install/install-extensions.md: admin/install/README.md
