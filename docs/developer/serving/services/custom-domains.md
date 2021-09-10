@@ -54,6 +54,8 @@ DomainMappings in that namespace to use the domain name.
     namespaces or for domain names that they do not own.
     <!-- insert example snippet -->
 
+=== "Apply YAML"
+
 1. Create a DomainMapping object:
 
     1. Create a YAML file using the following template:
@@ -69,11 +71,14 @@ DomainMappings in that namespace to use the domain name.
             name: <service-name>
             kind: Service
             apiVersion: serving.knative.dev/v1
+          tls:
+            secret: <cert-secret>
         ```
         Where:
         - `<domain-name>` is the domain name that you want to map a Service to.
         - `<namespace>` is the namespace that contains both the `DomainMapping` and `Service` objects.
         - `<service-name>` is the name of the Service that is mapped to the domain.
+        - `<cert-secret>` is the name of a Secret that holds the server certificate for TLS communication. If this optional `tls:` section is provided, the protocol is switched from HTTP to HTTPS.
 
         !!! tip
             You can also map to other targets as long as they conform to the Addressable contract and their resolved URL is of the form `<name>.<namespace>.<clusterdomain>`, where `<name>` and `<namespace>` are the name and namespace of a Kubernetes Service, and `<clusterdomain>`is the cluster domain.
@@ -85,6 +90,20 @@ DomainMappings in that namespace to use the domain name.
         kubectl apply -f <filename>.yaml
         ```
         Where `<filename>` is the name of the file you created in the previous step.
+
+=== "kn CLI"
+
+    ```
+    kn domain create <domain-name> --ref <target> --tls <tls-secret> --namespace <namespace>
+    ```
+
+    Where:
+    - `<domain-name>` is the domain name that you want to map a Service or Route to.
+    - `<target>` is the name of the Service or Route that is mapped to the domain. You can use a prefix `ksvc:` or `kroute:` to specify whether to map the domain to a Knative Service or Route. If no prefix is given, `ksvc:` is assumed. Additionally, you can use a `:namespace` suffix to point to a Service or Route in a different namespace than this Domain mapping. E.g. `mysvc` maps to a Service `mysvc` in the same namespace as this mapping, while `kroute:myroute:othernamespace` maps to a Route `myroute` in namespace `othernamespace`.
+    - `<tls-secret>` is optional and if provided enables the TLS protocol. The value specifies the secret that holds the server certificate.
+    - `<namespace>` is the namespace where the DomainMapping  should be created. By default the DomainMapping is created in the current namespace.
+
+    In addition to creating DomainMappings, `kn domain` can be used to list, describe, update and delete existing DomainMappings. See `kn domain --help` for more information.
 
 1. Point the domain name to the IP address of your Knative cluster. Details of this step differ
 depending on your domain registrar.
