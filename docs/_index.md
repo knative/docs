@@ -31,23 +31,22 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 ### Configuration and networking
 
 - [Using a custom domain](serving/using-a-custom-domain.md)
-- [Configuring HTTPS with a custom certificate](serving/using-a-tls-cert/)
-- [Configuring high availability](serving/config-ha/)
+- [Configuring HTTPS with a custom certificate](serving/using-a-tls-cert.md)
+- [Configuring high availability](serving/config-ha.md)
 
 ### Samples and demos
 
-- [Autoscaling](serving/autoscaling/autoscale-go/)
-- [Binding running services to eventing ecosystems](eventing/samples/kubernetes-event-source/)
-- [REST API sample](serving/samples/rest-api-go/)
-- [All samples for serving](serving/samples/)
-- [All samples for eventing](eventing/samples/)
+- [Autoscaling](serving/autoscaling/autoscale-go/README.md)
+- [REST API sample](serving/samples/rest-api-go/README.md)
+- [All samples for serving](serving/samples/README.md)
+- [All samples for eventing](eventing/samples/README.md)
 
 ### Observability
 
-- [Serving Metrics API](serving/metrics/)
-- [Eventing Metrics API](eventing/metrics/)
-- [Collecting metrics](install/collecting-metrics)
+- [Serving Metrics](admin/collecting-metrics/serving-metrics/metrics.md)
+- [Eventing Metrics](admin/collecting-metrics/eventing-metrics/metrics.md)
+- [Collecting metrics](install/collecting-metrics/README.md)
 
 ### Debugging
 
-- [Debugging application issues](serving/debugging-application-issues/)
+- [Debugging application issues](developer/serving/troubleshooting/debugging-application-issues.md)

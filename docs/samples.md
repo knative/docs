@@ -10,12 +10,12 @@ closer with your goals.
 
 View the set of Knative code samples that are actively tested and maintained:
 
-- [Eventing and Eventing Sources code samples](eventing/samples/)
-- [Serving code samples](serving/samples/)
+- [Eventing and Eventing Sources code samples](eventing/samples/README.md)
+- [Serving code samples](serving/samples/README.md)
 
 ### Community owned and maintained
 
-[View code samples that are contributed and maintained by the community](../community/samples/).
+[View code samples that are contributed and maintained by the community](../community/samples/README.md).
 
 ### External code samples
 
