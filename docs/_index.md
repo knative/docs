@@ -45,7 +45,7 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 
 - [Serving Metrics](admin/collecting-metrics/serving-metrics/metrics.md)
 - [Eventing Metrics](admin/collecting-metrics/eventing-metrics/metrics.md)
-- [Collecting metrics](install/collecting-metrics/README.md)
+- [Collecting metrics](admin/collecting-metrics/README.md)
 
 ### Debugging
 
