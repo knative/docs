@@ -6,7 +6,6 @@ Knative APIs build on existing Kubernetes APIs, so that Knative resources are co
 
 Common languages and frameworks that include Kubernetes-friendly tooling work smoothly with Knative to reduce the time spent solving common deployment issues, such as:
 
-- [Deploying a container](serving/getting-started-knative-app.md)
 - [Routing and managing traffic with blue/green deployment](developer/serving/traffic-management.md#routing-and-managing-traffic-with-blue-green-deployment)
 - [Scaling automatically and sizing workloads based on demand](serving/autoscaling/README.md)
 - [Binding running services to eventing ecosystems](eventing/getting-started.md)
@@ -24,7 +23,6 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 ### Getting started
 
 - [Installing Knative](admin/install/README.md)
-- [Getting started with app deployment](serving/getting-started-knative-app.md)
 - [Getting started with serving](serving/README.md)
 - [Getting started with eventing](eventing/README.md)
 
