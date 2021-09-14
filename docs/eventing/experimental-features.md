@@ -98,7 +98,8 @@ With this feature you can allow Knative to resolve the full `APIVersion` and
 further upgrades, deprecations and removals of the referred CRD without
 affecting existing resources.
 
-!!! note At the moment this feature is implemented only for
+!!! note
+    At the moment this feature is implemented only for
 `Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
 
 ### DeliverySpec.Timeout field
@@ -157,6 +158,7 @@ to templated URI. For instance it allows you to directly reference non-addressab
 
 Mappings are defined (by the administrator) in `config-reference-mapping`. The following example maps `JobDefinition` to a Job runner service:
 
+{% raw %}
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -165,8 +167,9 @@ metadata:
   namespace: knative-eventing
 data:
   JobDefinition.v1.mygroup:
-    https://jobrunner.{{ .SystemNamespace }}.svc.cluster.local/{{ .Name }}
+    "https://jobrunner.{{ .SystemNamespace }}.svc.cluster.local/{{ .Name }}"
 ```
+{% endraw %}
 
 The key must be of the form `<Kind>.<version>.<group>`. The value must resolved
 to a valid URI. Currently, the following template data are supported:
