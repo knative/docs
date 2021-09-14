@@ -1,27 +1,35 @@
 # Experimental features
 
-In Knative we want to keep the innovation alive, experimenting and delivering new features without affecting the stability of the project.
+In Knative we want to keep the innovation alive, experimenting and delivering
+new features without affecting the stability of the project.
 
-In order to achieve that goal in Knative Eventing, we have a process to include new features.
-This allows users like you to try out new features and provide feedback back to the project.
+In order to achieve that goal in Knative Eventing, we have a process to include
+new features. This allows users like you to try out new features and provide
+feedback back to the project.
 
-This document explains how to enable experimental features and which ones are available today.
+This document explains how to enable experimental features and which ones are
+available today.
 
-For more details about the process, the feature phases, quality requirements and guarantees, check out the [Experimental features process documentation](https://github.com/knative/eventing/blob/main/docs/experimental-features.md).
+For more details about the process, the feature phases, quality requirements and
+guarantees, check out the
+[Experimental features process documentation](https://github.com/knative/eventing/blob/main/docs/experimental-features.md).
 
-!!! warning
-    Depending on the feature stage, an experimental feature might be unstable and break your Knative setup or even your cluster setup, use them with caution.
-    For more details about quality guarantees, check out the [Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition).
+!!! warning Depending on the feature stage, an experimental feature might be
+unstable and break your Knative setup or even your cluster setup, use them with
+caution. For more details about quality guarantees, check out the
+[Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition).
 
 ## Before you begin
 
-You must have a Knative cluster running with the Eventing component installed. [Learn more](../admin/install/README.md)
+You must have a Knative cluster running with the Eventing component installed.
+[Learn more](../admin/install/README.md)
 
 ## Experimental features configuration
 
-When installing Eventing, the `config-features` ConfigMap is added to your cluster in the `knative-eventing` namespace.
-In order to enable a feature, you just need to add it to the config map and set its value to `enabled`.
-For example, to enable `new-cool-feature`:
+When installing Eventing, the `config-features` ConfigMap is added to your
+cluster in the `knative-eventing` namespace. In order to enable a feature, you
+just need to add it to the config map and set its value to `enabled`. For
+example, to enable `new-cool-feature`:
 
 ```yaml
 apiVersion: v1
@@ -63,9 +71,14 @@ data:
 
 **Tracking issue**: [#5086](https://github.com/knative/eventing/issues/5086)
 
-When using the `KReference` type to refer to another Knative resource, you can just specify the API `group` of the resource, instead of the full `APIVersion`.
 
-For example, in order to refer to an `InMemoryChannel`, instead of the following spec:
+**Persona**: Developer
+
+When using the `KReference` type to refer to another Knative resource, you can
+just specify the API `group` of the resource, instead of the full `APIVersion`.
+
+For example, in order to refer to an `InMemoryChannel`, instead of the following
+spec:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
@@ -81,10 +94,12 @@ kind: InMemoryChannel
 name: my-channel
 ```
 
-With this feature you can allow Knative to resolve the full `APIVersion` and further upgrades, deprecations and removals of the referred CRD without affecting existing resources.
+With this feature you can allow Knative to resolve the full `APIVersion` and
+further upgrades, deprecations and removals of the referred CRD without
+affecting existing resources.
 
-!!! note
-    At the moment this feature is implemented only for `Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
+!!! note At the moment this feature is implemented only for
+`Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
 
 ### DeliverySpec.Timeout field
 
@@ -94,9 +109,15 @@ With this feature you can allow Knative to resolve the full `APIVersion` and fur
 
 **Tracking issue**: [#5148](https://github.com/knative/eventing/issues/5148)
 
-When using the `delivery` spec to configure event delivery parameters, you can use `timeout` field to specify the timeout for each sent HTTP request. The duration of the `timeout` parameter is specified using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
+**Persona**: Developer
 
-The following example shows a Subscription that retries sending an event 3 times, and on each retry the request timeout is going to be 5 seconds:
+When using the `delivery` spec to configure event delivery parameters, you can
+use `timeout` field to specify the timeout for each sent HTTP request. The
+duration of the `timeout` parameter is specified using the
+[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
+
+The following example shows a Subscription that retries sending an event 3
+times, and on each retry the request timeout is going to be 5 seconds:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
@@ -117,4 +138,58 @@ spec:
     timeout: PT5S
 ```
 
-You can specify a `delivery` spec for Channels, Subscriptions, Brokers, Triggers, and any other resource spec that accepts the `delivery` field.
+You can specify a `delivery` spec for Channels, Subscriptions, Brokers,
+Triggers, and any other resource spec that accepts the `delivery` field.
+
+### Knative Reference mapping
+
+**Flag name**: `kreference-mapping`
+
+**Stage**: Alpha, disabled by default
+
+**Tracking issue**: [#5148](https://github.com/knative/eventing/issues/5593)
+
+**Persona**: Administrator, Developer
+
+When enabled, this feature allows you to provide mappings from
+[Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination)
+to templated URI. For instance it allows you to directly reference non-addressable resources everywhere Knative Eventing accepts a reference (e.g. PingSource sink, Trigger subscriber, etc...).
+
+Mappings are defined (by the administrator) in `config-reference-mapping`. The following example maps `JobDefinition` to a Job runner service:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kreference-mapping
+  namespace: knative-eventing
+data:
+  JobDefinition.v1.mygroup:
+    https://jobrunner.{{ .SystemNamespace }}.svc.cluster.local/{{ .Name }}
+```
+
+The key must be of the form `<Kind>.<version>.<group>`. The value must resolved
+to a valid URI. Currently, the following template data are supported:
+
+- Name: name of the referenced object
+- Namespace: namespace of the referenced object
+- SystemNamespace: namespace of where Knative Eventing is installed
+
+Given the above mapping, the following example shows how a developer can directly reference `JobDefinition` objects in PingSource:
+
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: PingSource
+metadata:
+  name: trigger-job-every-minute
+spec:
+  schedule: "*/1 * * * *"
+  sink:
+    ref:
+      apiVersion: v1
+      kind: JobDefinition
+      name: ajob
+```
+
+!!! note
+    Currently only PingSource supports this experimental feature.
