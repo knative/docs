@@ -189,7 +189,7 @@ spec:
   schedule: "*/1 * * * *"
   sink:
     ref:
-      apiVersion: v1
+      apiVersion: mygroup/v1
       kind: JobDefinition
       name: ajob
 ```
