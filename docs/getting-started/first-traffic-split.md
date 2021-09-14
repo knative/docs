@@ -61,7 +61,7 @@ Instead of `TARGET`="World" update the environment variable `TARGET` on your Kna
 
     ==**Expected output:**==
     ```{ .bash .no-copy }
-    service.serving.knative.dev/hello created
+    service.serving.knative.dev/hello configured
     ```
 
 
