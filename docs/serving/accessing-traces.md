@@ -29,8 +29,8 @@ In order to access request traces, you use the Zipkin visualization tool.
     reasons, the Zipkin UI is exposed only within the cluster.
 
 1.  Navigate to the
-    [Zipkin UI](http://localhost:8001/api/v1/namespaces/istio-system/services/zipkin:9411/proxy/zipkin/).
-
+    Access the Zipkin UI at http://localhost:8001/api/v1/namespaces/REPLACEME/services/zipkin:9411/proxy/zipkin/
+    Replace `REPLACEME` in the link with the namespace where zipkin is deployed (eg. knative-serving).
 1.  Click "Find Traces" to see the latest traces. You can search for a trace ID
     or look at traces of a specific application. Click on a trace to see a
     detailed view of a specific call.
@@ -50,9 +50,9 @@ In order to access request traces, you use the Jaeger visualization tool.
     This command starts a local proxy of Jaeger on port 8001. For security
     reasons, the Jaeger UI is exposed only within the cluster.
 
-1.  Navigate to the
-    [Jaeger UI](http://localhost:8001/api/v1/namespaces/istio-system/services/jaeger-query:16686/proxy/search/).
-
+1.  Access the Zipkin UI at http://localhost:8001/api/v1/namespaces/REPLACEME/services/jaeger-query:16686/proxy/search/
+    Replace `REPLACEME` in the link with the namespace where Jaeger is deployed (eg. knative-serving).
+    
 1.  Select the service of interest and click "Find Traces" to see the latest
     traces. Click on a trace to see a detailed view of a specific call.
 
