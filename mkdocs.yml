@@ -7,7 +7,7 @@ extra_css:
   - stylesheets/extra.css
 
 repo_url: https://github.com/knative/docs
-edit_uri: edit/mkdocs/docs
+edit_uri: edit/main/docs
 
 theme:
   name: material
@@ -80,7 +80,7 @@ extra:
   # TODO: Replace with https://github.com/mkdocs/mkdocs/pull/2267 once mkdocs 1.2 is out.
   version_warning: !!python/object/apply:os.getenv ["VERSION_WARNING"]
   knative_version: !!python/object/apply:os.getenv ["KNATIVE_VERSION"]
-  branch: !!python/object/apply:os.getenv ["SAMPLES_BRANCH", "mkdocs"]
+  branch: !!python/object/apply:os.getenv ["SAMPLES_BRANCH", "main"]
   analytics:
     provider: google
     property: G-YRMNFYE32R
