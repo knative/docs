@@ -1,1 +1,1 @@
-[https://github.com/knative/docs/tree/mkdocs](https://github.com/knative/docs/tree/mkdocs)
+[https://github.com/knative/docs/tree/main](https://github.com/knative/docs/tree/main)
