@@ -1,4 +1,4 @@
-## Clean Up
+## Clean Up 2
 
 === "kn"
     Delete the Service by running the command:
