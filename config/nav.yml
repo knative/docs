@@ -54,6 +54,7 @@ nav:
           - Configure Deployment resources: admin/serving/deployment.md
           - Configuring gradual rollout of traffic to Revisions: admin/serving/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: admin/serving/feature-flags.md
+          - Configure the Defaults ConfigMap: admin/serving/config-defaults.md
         # Eventing config
         - Knative Eventing configuration:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
