@@ -8,7 +8,23 @@ by a Knative Service.
 1. Set up [Knative Serving](../../../serving/README.md).
 1. Ensure Knative Serving is [configured with a domain name](../../../serving/using-a-custom-domain.md) that allows GitHub to call into the cluster.
 1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
-1. Set up [Knative Eventing](../../../eventing/README.md) with the GitHub source.
+1. Set up [Knative Eventing](../../../eventing/README.md).
+
+### Install GitHub Event Source
+
+GitHub Event source lives in [knative-sandbox/eventing-github](https://github.com/knative-sandbox/eventing-github). Head to the releases page, find the latest release with the `github.yaml`
+artifact and replace  `<RELEASE>` with the version tag:
+
+```bash
+kubectl apply -f https://github.com/knative-sandbox/eventing-github/releases/download/<RELEASE>/github.yaml
+```
+
+Check that the manager is running:
+
+```bash
+kubectl -n knative-sources get pods --selector control-plane=github-controller-manager
+```
+
 
 ### Create a Knative Service
 
