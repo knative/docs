@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/feature-flags.md: admin/serving/feature-flags.md
       serving/using-subroutes.md: developer/serving/traffic-management.md
       serving/rolling-out-latest-revision.md: developer/serving/rolling-out-latest-revision.md
