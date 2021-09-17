@@ -13,6 +13,7 @@
 /client/* go-get=1 /golang/client.html 200
 /client-pkg/* go-get=1 /golang/client-pkg.html 200
 /community/* go-get=1 /golang/community.html 200
+/container-freezer/* go-get=1 /golang/container-freezer.html 200
 /control-protocol/* go-get=1 /golang/control-protocol.html 200
 /discovery/* go-get=1 /golang/discovery.html 200
 /docs/* go-get=1 /golang/docs.html 200
