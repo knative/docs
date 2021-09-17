@@ -382,12 +382,10 @@ KafkaSource expects these files to be in PEM format. If they are in another form
 
     ```bash
     kubectl create secret generic cacert --from-file=caroot.pem
-    secret/cacert created
     ```
 
     ```bash
     kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
-    secret/key created
     ```
 
 2. Apply the KafkaSource. Modify the `bootstrapServers` and `topics` fields accordingly.
