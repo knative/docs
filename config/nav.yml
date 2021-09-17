@@ -65,6 +65,7 @@ nav:
           - Services:
             - About Knative Services: developer/serving/services/README.md
             - Creating a Service: developer/serving/services/creating-services.md
+            - Service metrics: developer/serving/services/service-metrics.md
             - Configuring private Services: developer/serving/services/private-services.md
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Using a custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
