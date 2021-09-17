@@ -167,6 +167,10 @@ If you are using Strimzi:
 
     ```bash
     kubectl logs --selector='knative-eventing-source-name=kafka-source'
+    ```
+    
+    Example output:
+    ```{ .bash .no-copy }
     {"level":"info","ts":"2020-05-28T10:39:42.104Z","caller":"adapter/adapter.go:81","msg":"Starting with config: ","Topics":".","ConsumerGroup":"...","SinkURI":"...","Name":".","Namespace":"."}
     ```
 
