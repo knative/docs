@@ -1,5 +1,3 @@
-# Knative Quickstart plugin
-
 ---
 title: Knative Quickstart plugin
 linkTitle: Knative Quickstart
