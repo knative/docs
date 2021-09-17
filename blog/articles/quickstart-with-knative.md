@@ -4,7 +4,7 @@
 title: Knative Quickstart plugin
 linkTitle: Knative Quickstart
 author: "Paul Schweigert, Senior Software Engineer @ IBM"
-date: tbd
+date: 2021-09-17
 description: Knative quickstart is a plugin for the Knative client that enables users to quick set up a local Knative environment from the command line
 type: "blog"
 ---
