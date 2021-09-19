@@ -44,7 +44,7 @@ The `quickstart` plugin completes the following functions:
 
 !!! todo "Install Knative and Kubernetes on a local Docker Daemon using `kn quickstart`"
     ```bash
-    kn quickstart kind
+    kn-quickstart kind
     ```
 
 ??? bug "Having issues with Kind?"

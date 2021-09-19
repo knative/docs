@@ -126,7 +126,7 @@ Follow the instructions in the documentation
 
 #### 💫 New Features & Changes
 
-- The new plugin `kn-quickstart` is now part of the home-brew plugins suite. Install the plugin using `brew install knative-sandbox/kn-plugins/quickstart` then use it with `kn quickstart kind` this will create a kind cluster with knative installed. Make sure to update `kn` to `v0.25` for example using `brew upgrade kn`
+- The new plugin `kn-quickstart` is now part of the home-brew plugins suite. Install the plugin using `brew install knative-sandbox/kn-plugins/quickstart` then use it with `kn-quickstart kind` this will create a kind cluster with knative installed. Make sure to update `kn` to `v0.25` for example using `brew upgrade kn`
 
 - Deprecate `lookup-path` as path lookup will always be enabled in the future ([#1422](https://github.com/knative/client/pull/1422))
 - Add `--tls` option to domain create command ([#1419](https://github.com/knative/client/pull/1419))
