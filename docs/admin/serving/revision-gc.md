@@ -1,9 +1,9 @@
-# Revision Garbage Collection 
+# Revision Garbage Collection
 
 The `config-gc` ConfigMap contains settings that determine how to clean up in-active revisions. This ConfigMap is located in the `knative-serving` namespace.
 
 
-## Cluster wide configuration
+## Cluster-wide Configuration
 
 The following properties allow you to configure revision garbage collection:
 
@@ -31,14 +31,14 @@ retain-since-create-time: "disabled"
 retain-since-last-active-time: "disabled"
 ```
 
-#### Keep around the last ten non-active revisions:
+#### Keep around the last ten non-active revisions
 ```
 retain-since-create-time: "disabled"
 retain-since-last-active-time: "disabled"
 max-non-active-revisions: "10"
 ```
 
-#### Disable GC 
+#### Disable GC
 ```
 retain-since-create-time: "disabled"
 retain-since-last-active-time: "disabled"
@@ -47,9 +47,9 @@ max-non-active-revisions: "disabled"
 
 #### Complex Example
 
-This example config wll keep recently deployed or active revisions, 
-always maintain the last two in case of rollback, and prevent burst 
-activity from exploding the count of old revisions:
+This example config wll keep recently deployed or active revisions,
+always maintain the last two in case of rollback, and prevent burst
+activity from exploding the count of old revisions.
 
 ```
 retain-since-create-time: "48h"
@@ -70,9 +70,8 @@ metadata:
 spec:
   template:
     metadata:
-      annotations: 
+      annotations:
         serving.knative.dev/no-gc: "true"
     spec:
 ...
 ```
-

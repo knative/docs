@@ -1,4 +1,4 @@
-# Revision Garbage Collection 
+# Revision Garbage Collection
 
 Knative will automatically clean up inactive revisions as configured by the operator. For more information, see the [operator settings](../admin/serving/revision-gc.md).
 
@@ -12,11 +12,8 @@ metadata:
 spec:
   template:
     metadata:
-      annotations: 
+      annotations:
         serving.knative.dev/no-gc: "true"
     spec:
 ...
 ```
-
-
-
