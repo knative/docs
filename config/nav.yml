@@ -56,6 +56,7 @@ nav:
           - Feature and extension flags: admin/serving/feature-flags.md
         # Eventing config
         - Knative Eventing configuration:
+          - Configure Channel defaults: admin/eventing/channel-configuration.md
           - Configure Broker defaults: admin/eventing/broker-configuration.md
           - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
     # Developer guide
