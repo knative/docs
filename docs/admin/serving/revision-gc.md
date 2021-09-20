@@ -83,7 +83,7 @@ data:
 
 ## Per-revision options
 
-You can always retain a revision by adding the `serving.knative.dev/no-gc: "true"` annotation 
+You can always retain a revision by adding the `serving.knative.dev/no-gc: "true"` annotation
 
 ```yaml
 apiVersion: serving.knative.dev/v1

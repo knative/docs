@@ -6,7 +6,7 @@ You can always retain a revision by adding the `serving.knative.dev/no-gc: "true
 
 ```yaml
 apiVersion: serving.knative.dev/v1
-kind: Revision 
+kind: Revision
 metadata:
   annotations:
     serving.knative.dev/no-gc: "true"
