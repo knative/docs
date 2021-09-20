@@ -26,4 +26,4 @@ data:
         kind: InMemoryChannel
 ```
 
-This configuration is going to be used by default, if no channel implementation is specified. 
+This configuration is going to be used by default, if no channel implementation is specified.

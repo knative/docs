@@ -92,7 +92,7 @@ Follow the procedure for the Channel of your choice:
 
 ### Setting a default channel
 
-If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap. 
+If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
 
 ```yaml
 apiVersion: v1
@@ -123,7 +123,7 @@ data:
 
 ### Setting the default channel for the broker
 
-If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. 
+If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
 
 ```yaml
 apiVersion: v1
