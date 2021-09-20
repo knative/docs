@@ -90,9 +90,9 @@ Follow the procedure for the Channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
-### Setting a default channel
+### Setting a default Channel
 
-If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
+If you are using different channel implementations, such as KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
 
 ```yaml
 apiVersion: v1
@@ -119,11 +119,13 @@ data:
           retry: 5
 ```
 
-**NOTE:** The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
+!!! note 
 
-### Setting the default channel for the broker
+  The `clusterDefault` setting determines the global, cluster-wide default Channel type. You can configure Channel defaults for individual namespaces by using the `namespaceDefaults` setting.
 
-If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
+### Setting the default Channel for the Broker
+
+If you are using a Channel-based broker, you can change the default Channel type for the Broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
 
 ```yaml
 apiVersion: v1

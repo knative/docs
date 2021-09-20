@@ -15,7 +15,6 @@ metadata:
     app.kubernetes.io/version: devel
     app.kubernetes.io/part-of: knative-eventing
 data:
-  # Configuration for defaulting channels that do not specify CRD implementations.
   default-ch-config: |
     clusterDefault:
       apiVersion: messaging.knative.dev/v1
@@ -26,4 +25,8 @@ data:
         kind: InMemoryChannel
 ```
 
-This configuration is going to be used by default, if no channel implementation is specified.
+This configuration is going to be used by the Channel CRD to create platform specific implementations. 
+
+!!! note 
+
+  The `clusterDefault` setting determines the global, cluster-wide default Channel type. You can configure Channel defaults for individual namespaces by using the `namespaceDefaults` setting.
