@@ -120,7 +120,7 @@ nav:
         - Load balancing:
           - Overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
-      - Revision Garbage Collection: docs/serving/revision-gc.md
+      - Revision Garbage Collection: serving/revision-gc.md
       - Autoscaling:
         - Overview: serving/autoscaling/README.md
         - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
