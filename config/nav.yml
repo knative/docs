@@ -51,7 +51,7 @@ nav:
         - Uninstalling Knative: admin/install/uninstall.md
         # Serving config
         - Knative Serving configuration:
-          - Revision Garbage Collection: admin/serving/revision-gc.md
+          - Revision garbage collection: admin/serving/revision-gc.md
           - Configure Deployment resources: admin/serving/deployment.md
           - Configuring gradual rollout of traffic to Revisions: admin/serving/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: admin/serving/feature-flags.md
@@ -120,7 +120,7 @@ nav:
         - Load balancing:
           - Overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
-      - Revision Garbage Collection: serving/revision-gc.md
+      - Revision garbage collection: serving/revision-gc.md
       - Autoscaling:
         - Overview: serving/autoscaling/README.md
         - Supported autoscaler types: serving/autoscaling/autoscaler-types.md

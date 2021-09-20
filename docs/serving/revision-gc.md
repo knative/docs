@@ -1,19 +1,15 @@
-# Revision Garbage Collection
+# Revision garbage collection
 
-Knative will automatically clean up inactive revisions as configured by the operator. For more information, see the [operator settings](../admin/serving/revision-gc.md).
+Knative automatically cleans up inactive revisions as configured by the Operator. For more information, see the [Operator settings](../admin/serving/revision-gc.md).
 
-To always retain a revision add the annotation `serving.knative.dev/no-gc: "true"`
+You can always retain a revision by adding the `serving.knative.dev/no-gc: "true"` annotation
 
 ```yaml
 apiVersion: serving.knative.dev/v1
-kind: Service
+kind: Revision 
 metadata:
-  name: my-service
+  annotations:
+    serving.knative.dev/no-gc: "true"
 spec:
-  template:
-    metadata:
-      annotations:
-        serving.knative.dev/no-gc: "true"
-    spec:
 ...
 ```
