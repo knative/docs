@@ -1,4 +1,4 @@
-# Configuring Services custom Ingress Class
+# Configuring Services custom ingress class
 
 By default, when a Knative Service is created an Ingress Class (`ingress.class`) is automatically chosen for it based on the content of the `networking-config` ConfigMap located inside the `knative-serving` namespace. 
 
