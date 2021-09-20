@@ -25,7 +25,7 @@ data:
         kind: InMemoryChannel
 ```
 
-This configuration is going to be used by the Channel CRD to create platform specific implementations. 
+This configuration is used by the Channel custom resource definition (CRD) to create platform specific implementations. 
 
 !!! note 
 
