@@ -90,6 +90,58 @@ Follow the procedure for the Channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
+### Setting a default channel
+
+If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap. 
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: default-ch-webhook
+  namespace: knative-eventing
+data:
+  default-ch-config: |
+  clusterDefault:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: KafkaChannel
+      spec:
+      numPartitions: 10
+      replicationFactor: 1
+  namespaceDefaults:
+      my-namespace:
+      apiVersion: messaging.knative.dev/v1
+      kind: InMemoryChannel
+      spec:
+          delivery:
+          backoffDelay: PT0.5S
+          backoffPolicy: exponential
+          retry: 5
+```
+
+**NOTE:** The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
+
+### Setting the default channel for the broker
+
+If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. 
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-br-default-channel
+  namespace: knative-eventing
+spec:
+  config:
+    config-br-default-channel:
+      channelTemplateSpec: |
+        apiVersion: messaging.knative.dev/v1beta1
+        kind: KafkaChannel
+        spec:
+          numPartitions: 6
+          replicationFactor: 1
+```
+
 ## Optional: Install a Broker layer:
 
 The following tabs expand to show instructions for installing the Broker layer.
