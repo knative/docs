@@ -20,6 +20,7 @@ To add an ingress class annotation to a Service, run the following command:
 kubectl annotate kservice <service-name> network.knative.dev/ingress.class=<ingress-type>
 ```
 Where:
+
 - `<service-name>` is the name of the Service that you are applying the annotation to.
 - `<ingress-type` is the type of ingress that is used as the ingress class for the Service.
 
