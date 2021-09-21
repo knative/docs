@@ -72,6 +72,7 @@ nav:
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Using a custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
+            - HTTP(S) Redirect: developer/serving/services/http-option.md
           - Traffic management: developer/serving/traffic-management.md
           - Configuring gradual rollout of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
           - Deploying from private registries: developer/serving/deploying-from-private-registry.md
