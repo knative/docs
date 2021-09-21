@@ -7,14 +7,15 @@ The `config-gc` ConfigMap contains settings that determine in-active revisions a
 
 The following properties allow you to configure revision garbage collection:
 
--|-
 name|description
+-|-
 `retain-since-create-time`| Duration since creation before considering a revision for GC or "disabled"
 `retain-since-last-active-time`| Duration since active before considering a revision for GC or "disabled"
 `min-non-active-revisions`| Minimum number of non-active revisions to retain.
 `max-non-active-revisions`| Maximum number of non-active revisions to retain or "disabled" to disable any maximum limit.
 
 Revisions are retained if they fall into any one of the following categories
+
 - Is active and is being reference by a route
 - Created within `retain-since-create-time`
 - Last referenced by a route within `retain-since-last-active-time`
@@ -49,7 +50,7 @@ data:
   max-non-active-revisions: "10"
 ```
 
-#### Disable GC
+#### Disable garbage collection
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -64,7 +65,7 @@ data:
 
 #### Complex example
 
-Th following example configuration keeps recently deployed or active revisions,
+The following example configuration keeps recently deployed or active revisions,
 always maintains the last two revisions in case of rollback, and prevents burst
 activity from exploding the count of old revisions:
 
@@ -83,7 +84,7 @@ data:
 
 ## Per-revision options
 
-You can always retain a revision by adding the `serving.knative.dev/no-gc: "true"` annotation
+You can configure a revision so that it is never garbage collected by adding the `serving.knative.dev/no-gc: "true"` annotation:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
