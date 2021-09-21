@@ -15,7 +15,7 @@ kubectl annotate kservice <service-name> networking.knative.dev/ingress.class=<i
 Where:
 
 - `<service-name>` is the name of the Service that you are applying the annotation to.
-- `<ingress-type` is the type of ingress that is used as the ingress class for the Service.
+- `<ingress-type>` is the type of ingress that is used as the ingress class for the Service.
 
 !!! note
     This annotation overrides the `ingress.class` value specified in the `config-network` ConfigMap.
