@@ -5,7 +5,7 @@ Metrics are listed next.
 
 ## Activator
 
-The following metrics allow the user to understand how application responds when traffic goes through the activator, for example, when scaling from zero. For example high request latency means that requests are taken too much time be fulfilled.
+The following metrics allow the user to understand how application responds when traffic goes through the activator, for example, when scaling from zero. For example, high request latency means that the requests are taking too much time to be fulfilled.
 
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
