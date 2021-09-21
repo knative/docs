@@ -7,7 +7,7 @@ The `config-gc` ConfigMap contains settings that determine in-active revisions a
 
 The following properties allow you to configure revision garbage collection:
 
-name|description
+Name|Description
 -|-
 `retain-since-create-time`| Duration since creation before considering a revision for GC or "disabled"
 `retain-since-last-active-time`| Duration since active before considering a revision for GC or "disabled"
