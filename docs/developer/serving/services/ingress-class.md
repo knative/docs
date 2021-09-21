@@ -16,13 +16,12 @@ Generally it is recommended for Knative Services to use the default `ingress.cla
 You can configure each Service to use a different ingress class by specifying the `network.knative.dev/ingress.class` annotation.
 
 To add an ingress class annotation to a Service, run the following command:
-    ```bash
-    kubectl annotate kservice <service-name> network.knative.dev/ingress.class=<ingress-type>
-    ```
-    Where:
-    
-    - `<service-name>` is the name of the Service that you are applying the annotation to.
-    - `<ingress-type` is the type of ingress that is used as the ingress class for the Service.
+```bash
+kubectl annotate kservice <service-name> network.knative.dev/ingress.class=<ingress-type>
+```
+Where:
+- `<service-name>` is the name of the Service that you are applying the annotation to.
+- `<ingress-type` is the type of ingress that is used as the ingress class for the Service.
 
 !!! note
     This annotation overrides the configuration specified in the `networking-config` ConfigMap.
