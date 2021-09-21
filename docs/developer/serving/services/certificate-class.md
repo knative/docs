@@ -1,6 +1,6 @@
 # Configuring Services custom certificate class
 
-When autoTLS is enabled and Knative Services are created, a Certificate Class (`certificate.class`) is automatically chosen based on the value in the `config-network` ConfigMap located inside the `knative-serving` namespace. This ConfigMap is part of Knative Serving installation. If the certificate class is not specified, this defaults to `cert-manager.certificate.networking.knative.dev`. Once configured the `certificate.class` is used for all Knative Services unless it is overriden with an `certificate.class` annotation.
+When autoTLS is enabled and Knative Services are created, a Certificate Class (`certificate.class`) is automatically chosen based on the value in the `config-network` ConfigMap located inside the `knative-serving` namespace. This ConfigMap is part of Knative Serving installation. If the certificate class is not specified, this defaults to `cert-manager.certificate.networking.knative.dev`. Once configured the `certificate.class` is used for all Knative Services unless it is overridden with an `certificate.class` annotation.
 
 ## Using the certificate class annotation
 
