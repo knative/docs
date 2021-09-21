@@ -1,6 +1,6 @@
 # Configuring HTTP(S) Redirect
 
-Operators can disable HTTP traffic by modifying the value of `httpProtocol` in the `config-network` ConfigMap. This is located in the `knative-serving` namespace and is part of Knative Serving's installation. 
+Operators can disable HTTP traffic by modifying the value of `httpProtocol` in the `config-network` ConfigMap. This is located in the `knative-serving` namespace and is part of Knative Serving's installation.
 
 The available values are:
 
