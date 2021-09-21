@@ -25,6 +25,8 @@ data:
         kind: InMemoryChannel
 ```
 
+By changing the `data.default-ch-config` property we can define the clusterDefaults and per Namespace defaults. 
+
 This configuration is used by the Channel custom resource definition (CRD) to create platform specific implementations. 
 
 !!! note 

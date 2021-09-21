@@ -127,6 +127,8 @@ data:
 
 If you are using a Channel-based broker, you can change the default Channel type for the Broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
 
+By setting the `spec.config.config-br-default-channel.channelTemplateSpec` template like is shown in the example, a `KafkaChannel` will be created with a predefined number of partitions and replication factor. 
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
