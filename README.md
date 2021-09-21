@@ -12,7 +12,7 @@ Welcome to the source file repository for our documentation on
 https://knative.dev.
 
 ## Website
-
+ 
 The Knative documentation website is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
 ### View published documentation
