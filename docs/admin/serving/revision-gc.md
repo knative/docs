@@ -14,7 +14,7 @@ Name|Description
 `min-non-active-revisions`| Minimum number of non-active revisions to retain.
 `max-non-active-revisions`| Maximum number of non-active revisions to retain or "disabled" to disable any maximum limit.
 
-Revisions are retained if they fall into any one of the following categories
+Revisions are retained if they belong to any one of the following categories:
 
 - Is active and is being reference by a route
 - Created within `retain-since-create-time`
