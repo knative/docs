@@ -16,7 +16,7 @@ data:
     extensions:
         health_check:
         pprof:
-        zpages
+        zpages:
     service:
       extensions: [health_check, pprof, zpages]
       pipelines:
