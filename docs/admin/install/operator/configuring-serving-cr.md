@@ -468,7 +468,7 @@ while other system deployments have `2` Replicas by using `spec.high-availabilit
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
-  name: ks
+  name: knative-serving
   namespace: knative-serving
 spec:
   high-availability:
@@ -493,11 +493,83 @@ The following KnativeServing resource overrides the `webhook` deployment to use 
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
-  name: ks
+  name: knative-serving
   namespace: knative-serving
 spec:
   deployments:
   - name: webhook
     nodeSelector:
       disktype: hdd
+```
+
+### Override tolerations
+
+The KnativeServing resource is able to override tolerations for the Knative Serving deployment resources.
+For example, if you would like to add the following tolerations
+
+```yaml
+tolerations:
+- key: "key1"
+  operator: "Equal"
+  value: "value1"
+  effect: "NoSchedule"
+```
+
+to the deployment `activator`, you need to change your KnativeServing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: activator
+    tolerations:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoSchedule"
+```
+
+### Override the affinity
+
+The KnativeServing resource is able to override the affinity, including nodeAffinity, podAffinity, and podAntiAffinity,
+for the Knative Serving deployment resources. For example, if you would like to add the following nodeAffinity
+
+```yaml
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: disktype
+          operator: In
+          values:
+          - ssd
+```
+
+to the deployment `activator`, you need to change your KnativeServing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: activator
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+            - key: disktype
+              operator: In
+              values:
+              - ssd
 ```

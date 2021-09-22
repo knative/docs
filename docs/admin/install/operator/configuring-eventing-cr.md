@@ -10,8 +10,6 @@ aliases:
 
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
 
-**NOTE:** Kubernetes spec level policies cannot be configured using the Knative Operators.
-
 <!--TODO: break this into sub sections like for the channels sections, i.e. a page per topic-->
 
 ## Installing a specific version of Eventing
@@ -315,4 +313,101 @@ spec:
     limits:
       cpu: 1000m
       memory: 250Mi
+```
+
+### Override the nodeSelector
+
+The KnativeEventing resource is able to override the nodeSelector for the Knative Eventing deployment resources.
+For example, if you would like to add the following tolerations
+
+```yaml
+nodeSelector:
+  disktype: hdd
+```
+
+to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  deployments:
+  - name: eventing-controller
+    nodeSelector:
+      disktype: hdd
+```
+
+### Override tolerations
+
+The KnativeEventing resource is able to override tolerations for the Knative Eventing deployment resources.
+For example, if you would like to add the following tolerations
+
+```yaml
+tolerations:
+- key: "key1"
+  operator: "Equal"
+  value: "value1"
+  effect: "NoSchedule"
+```
+
+to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  deployments:
+  - name: eventing-controller
+    tolerations:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoSchedule"
+```
+
+### Override the affinity
+
+The KnativeEventing resource is able to override the affinity, including nodeAffinity, podAffinity, and podAntiAffinity,
+for the Knative Eventing deployment resources. For example, if you would like to add the following nodeAffinity
+
+```yaml
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: disktype
+          operator: In
+          values:
+          - ssd
+```
+
+to the deployment `activator`, you need to change your KnativeEventing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  deployments:
+  - name: activator
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+            - key: disktype
+              operator: In
+              values:
+              - ssd
 ```
