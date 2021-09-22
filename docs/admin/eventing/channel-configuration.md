@@ -30,5 +30,4 @@ By changing the `data.default-ch-config` property we can define the clusterDefau
 This configuration is used by the Channel custom resource definition (CRD) to create platform specific implementations. 
 
 !!! note 
-
   The `clusterDefault` setting determines the global, cluster-wide default Channel type. You can configure Channel defaults for individual namespaces by using the `namespaceDefaults` setting.

@@ -90,61 +90,7 @@ Follow the procedure for the Channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
-### Setting a default Channel
-
-If you are using different channel implementations, such as KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: default-ch-webhook
-  namespace: knative-eventing
-data:
-  default-ch-config: |
-  clusterDefault:
-      apiVersion: messaging.knative.dev/v1beta1
-      kind: KafkaChannel
-      spec:
-      numPartitions: 10
-      replicationFactor: 1
-  namespaceDefaults:
-      my-namespace:
-      apiVersion: messaging.knative.dev/v1
-      kind: InMemoryChannel
-      spec:
-          delivery:
-          backoffDelay: PT0.5S
-          backoffPolicy: exponential
-          retry: 5
-```
-
-!!! note 
-
-  The `clusterDefault` setting determines the global, cluster-wide default Channel type. You can configure Channel defaults for individual namespaces by using the `namespaceDefaults` setting.
-
-### Setting the default Channel for the Broker
-
-If you are using a Channel-based broker, you can change the default Channel type for the Broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
-
-By setting the `spec.config.config-br-default-channel.channelTemplateSpec` template like is shown in the example, a `KafkaChannel` will be created with a predefined number of partitions and replication factor. 
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-default-channel
-  namespace: knative-eventing
-spec:
-  config:
-    config-br-default-channel:
-      channelTemplateSpec: |
-        apiVersion: messaging.knative.dev/v1beta1
-        kind: KafkaChannel
-        spec:
-          numPartitions: 6
-          replicationFactor: 1
-```
+You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../eventing/channel-configuration.md) section.
 
 ## Optional: Install a Broker layer:
 
