@@ -199,11 +199,57 @@ knative-serving   <version number>    True
 
 ### Installing with different networking layers
 
-??? "Installing the Knative Serving component with different network layers"
+!!! note "Installing the Knative Serving component with different network layers"
 
     Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
     layer, if the ingress is not specified in the Knative Serving CR. Click on each of the following tabs to see how you can configure
     Knative Serving with different ingresses:
+
+    === "Istio (default)"
+
+        The following commands install Istio and enable its Knative integration.
+
+        1. [Install Istio](installing-istio.md).
+
+        1. To configure Knative Serving to use Istio, copy the following YAML into a file:
+          ```yaml
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeServing
+          metadata:
+            name: knative-serving
+            namespace: knative-serving
+          ```
+
+        1. If Istio is installed under a namespace other than the default `istio-system`, you need to change the content
+           of the YAML into:
+          ```bash
+          apiVersion: operator.knative.dev/v1alpha1
+          kind: KnativeServing
+          metadata:
+            name: knative-serving
+            namespace: knative-serving
+          spec:
+            config:
+              istio:
+                local-gateway.<local-gateway-namespace>.knative-local-gateway: "knative-local-gateway.<istio-namespace>.svc.cluster.local"
+          ```
+
+          Where `<local-gateway-namespace>` is the local gateway namespace, which is the same as Knative Serving
+          namespace `knative-serving`, and <istio-namespace> is the namespace, where Istio is installed.
+
+        1. Apply the YAML file by running the command:
+          ```bash
+          kubectl apply -f <filename>.yaml
+          ```
+
+          Where `<filename>` is the name of the file you created in the previous step.
+
+        1. Fetch the External IP or CNAME:
+          ```bash
+          kubectl get svc istio-ingressgateway -n <istio-namespace>
+          ```
+
+          Save this for configuring DNS later.
 
     === "Ambassador"
 
