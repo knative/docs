@@ -1,4 +1,4 @@
-# Creating a SinkBinding object
+# Create a SinkBinding
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
@@ -17,7 +17,6 @@ Before you can create a SinkBinding object:
 
 - You must have Knative Eventing installed on your cluster.
 - Optional: If you want to use `kn` commands with SinkBinding, install the `kn` CLI.
-
 
 ## Optional: Choose SinkBinding namespace selection behavior
 
@@ -46,7 +45,6 @@ To set the SinkBinding object to inclusion mode:
     kubectl -n knative-eventing set env deployments eventing-webhook --containers="eventing-webhook" --list | grep SINK_BINDING
     ```
 
-
 ## Create a namespace
 
 If you do not have an existing namespace, create a namespace for the SinkBinding object:
@@ -61,7 +59,6 @@ For example, `sinkbinding-example`.
     If you have selected inclusion mode, you must add the
     `bindings.knative.dev/include: true` label to the namespace to enable
     SinkBinding behavior.
-
 
 ## Create a sink
 
@@ -258,7 +255,6 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
-
 ## Verify the SinkBinding object
 
 1. Verify that a message was sent to the Knative eventing system by looking at the
@@ -301,7 +297,7 @@ sent by the source to the display function. For example:
         }
     ```
 
-## Delete the SinkBinding object
+## Delete a SinkBinding
 
 To delete the SinkBinding object and all of the related resources in the namespace,
 delete the namespace by running:
