@@ -143,7 +143,6 @@ fi
 # TODO(jz) remove these each release until they disappear!
 cp -r archived/scss/* site/scss/
 cp -r archived/v0.23-docs site/v0.23-docs
-cp -r archived/v0.22-docs site/v0.22-docs
 
 # Home page is served from docs, so add a redirect.
 # TODO(jz) in production this should be done with a netlify 301 (or maybe just copy docs/index up with a base set).
