@@ -346,13 +346,13 @@ data:
 {% raw %}
 enable-service-links specifies the default value used for the
 enableServiceLinks field of the PodSpec, when it is omitted by the user.
-See: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#accessing-the-service
+See [the Kubernetes Documentation for the enableServiceLinks Feature](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#accessing-the-service).
 
 This is a tri-state flag with possible values of (true|false|default).
 
 In environments with large number of services it is suggested
 to set this value to `false`.
-See https://github.com/knative/serving/issues/8498.
+See [serving#8498](https://github.com/knative/serving/issues/8498).
 {% endraw %}
 
 **Key**: `enable-service-links`
