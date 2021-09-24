@@ -5,6 +5,10 @@ FROM golang:1.13 as builder
 # Create and change to the app directory.
 WORKDIR /app
 
+RUN echo "############################"
+RUN curl https://repo.maven.apache.org
+RUN echo "############################"
+
 # Retrieve application dependencies using go modules.
 # Allows container builds to reuse downloaded dependencies.
 COPY go.* ./
