@@ -88,7 +88,7 @@ there’s no longer a tight coupling between the producer and consumer.
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: test-ping-source-channel
