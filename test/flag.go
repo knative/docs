@@ -18,8 +18,6 @@ package test
 
 import (
 	"flag"
-	"fmt"
-	"os"
 	"strings"
 )
 
