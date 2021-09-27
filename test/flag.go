@@ -37,9 +37,28 @@ type EnvironmentFlags struct {
 
 func initializeFlags() *EnvironmentFlags {
 	var f EnvironmentFlags
+	flag.StringVar(&f.Cluster, "cluster", "",
+		"Provide the cluster to test against. Defaults to the current cluster in kubeconfig.")
+
+	flag.BoolVar(&f.LogVerbose, "logverbose", false,
+		"Set this flag to true if you would like to see verbose logging.")
+
+	flag.BoolVar(&f.EmitMetrics, "emitmetrics", false,
+		"Set this flag to true if you would like tests to emit metrics, e.g. latency of resources being realized in the system.")
+
+	flag.StringVar(&f.DockerRepo, "dockerrepo", os.Getenv("KO_DOCKER_REPO"),
+		"Provide the uri of the docker repo you have uploaded the test image to using `uploadtestimage.sh`. Defaults to $KO_DOCKER_REPO")
+
+	flag.StringVar(&f.Tag, "tag", "latest", "Provide the version tag for the test images.")
+
 	flag.StringVar(&f.Languages, "languages", "", "Comma separated languages to run e2e test on.")
 
 	return &f
+}
+
+// ImagePath is a helper function to prefix image name with repo and suffix with tag
+func ImagePath(name string) string {
+	return fmt.Sprintf("%s/%s:%s", Flags.DockerRepo, name, Flags.Tag)
 }
 
 // GetAllowedLanguages is a helper function to return a map of allowed languages based on Languages filter

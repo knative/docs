@@ -1,0 +1,64 @@
+languages:
+  - language: "java-spring"
+    expectedOutput: "Hello Spring Boot Sample v1!"
+    preCommands:
+      - exec: "unzip"
+        args: "../sampleapp/helloworld-java-spring.zip -d helloworld-java-spring_tmp"
+    copies:
+      - "/src/main/java/com/example/helloworld/HelloworldApplication.java"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "go"
+    expectedOutput: "Hello Go Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-go/go.mod helloworld-go_tmp/go.mod"
+    copies:
+      - "helloworld.go"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "kotlin"
+    expectedOutput: "Hello Kotlin Sample v1!"
+    copies:
+      - "/src/main/kotlin/com/example/hello/Main.kt"
+      - "build.gradle"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "nodejs"
+    expectedOutput: "Hello Node.js Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-nodejs/package-lock.json helloworld-nodejs_tmp/package-lock.json"
+    copies:
+      - "index.js"
+      - "package.json"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "php"
+    expectedOutput: "Hello PHP Sample v1!"
+    copies:
+      - "index.php"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "python"
+    expectedOutput: "Hello Python Sample v1!"
+    copies:
+      - "app.py"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "ruby"
+    expectedOutput: "Hello Ruby Sample v1!"
+    preCommands:
+      - exec: "cp"
+        args: "../../docs/serving/samples/hello-world/helloworld-ruby/Gemfile.lock helloworld-ruby_tmp/Gemfile.lock"
+    copies:
+      - "app.rb"
+      - "Gemfile"
+      - "service.yaml"
+      - "Dockerfile"
+  - language: "shell"
+    expectedOutput: "Hello Shell Sample v1!"
+    copies:
+      - "script.sh"
+      - "service.yaml"
+      - "Dockerfile"
