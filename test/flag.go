@@ -27,7 +27,7 @@ var Flags = initializeFlags()
 
 // EnvironmentFlags define the flags that are needed to run the e2e tests.
 type EnvironmentFlags struct {
-	Languages   string // Allowed languages to run
+	Languages string // Allowed languages to run
 }
 
 func initializeFlags() *EnvironmentFlags {

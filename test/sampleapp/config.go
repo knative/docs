@@ -25,7 +25,7 @@ import (
 
 const (
 	// using these defaults if not provided, see useDefaultIfNotProvided function below
-	defaultSrcDir               = "../../docs/serving/samples/hello-world/helloworld-%s"
+	defaultSrcDir = "../../docs/serving/samples/hello-world/helloworld-%s"
 
 	// ActionMsg serves as documentation purpose, which will be referenced for
 	// clearly displaying error messages.
@@ -45,9 +45,9 @@ type AllConfigs struct {
 
 // LanguageConfig contains all information for building/deploying an app
 type LanguageConfig struct {
-	Language             string    `yaml:"language"`
-	SrcDir               string    `yaml:"srcDir"`  // Directory contains sample code
-	Copies               []string  `yaml:"copies"`               // Files to be copied by the user from SrcDir
+	Language string   `yaml:"language"`
+	SrcDir   string   `yaml:"srcDir"` // Directory contains sample code
+	Copies   []string `yaml:"copies"` // Files to be copied by the user from SrcDir
 }
 
 // UseDefaultIfNotProvided sets default value of SrcDir if not provided
