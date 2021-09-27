@@ -7,6 +7,7 @@ hack/__pycache__
 /site/
 /temp/
 /node_modules/
+venv/
 
 
 .settings/
