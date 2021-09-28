@@ -222,7 +222,7 @@ knative-serving   <version number>    True
 
         1. If Istio is installed under a namespace other than the default `istio-system`, you need to change the content
            of the YAML into:
-          ```bash
+          ```yaml
           apiVersion: operator.knative.dev/v1alpha1
           kind: KnativeServing
           metadata:
