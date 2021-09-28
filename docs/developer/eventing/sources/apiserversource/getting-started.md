@@ -26,9 +26,9 @@ command:
 
     !!! note
         Creating a namespace for your ApiServerSource and related components
-        allows you to view changes and events for this workflow more easily, since
-        these are isolated from the many other components that may exist in your `default` namespace.<br><br>
-        It also makes removing the source easier, since you can simply delete the namespace to remove all of the resources.
+        allows you to view changes and events for this workflow more easily, because
+        these are isolated from the other components that might exist in your `default` namespace.<br><br>
+        It also makes removing the source easier, because you can delete the namespace to remove all of the resources.
 
 1. Create a ServiceAccount:
 
@@ -65,10 +65,11 @@ command:
         rules:
           <rules>
         ```
-        Where
-        - `<role>` is the name of the Role that you want to create.
-        - `<rules>` are the set of permissions you want to grant to the APIServerSource object. This set of permissions must match the resources you want to received events from.
+        Where:
 
+        - `<role>` is the name of the Role that you want to create.
+        - `<rules>` are the set of permissions you want to grant to the APIServerSource object.
+        This set of permissions must match the resources you want to receive events from.
         For example, to receive events related to the `events` resource, use the following set of permissions:
         ```yaml
         - apiGroups:
@@ -81,8 +82,8 @@ command:
           - watch
         ```
 
-        !!! note
-        The only required verbs are `get`, `list` and `watch`.
+            !!! note
+                The only required verbs are `get`, `list` and `watch`.
 
     1. Apply the YAML file by running the command:
 
@@ -112,7 +113,7 @@ command:
         Where:
 
         - `<role-binding>` is the name of the RoleBinding that you want to create.
-        - `<cluster-role>` is the name of the Role that you created in step 3 earlier.
+        - `<role>` is the name of the Role that you created in step 3 earlier.
         - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
         - `<namespace>` is the name of the namespace that you created in step 1 earlier.
 
@@ -191,6 +192,8 @@ command:
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
             - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
 
+            For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_apiserver_create.md#kn-source-apiserver-create).
+
     === "YAML"
         1. Create a YAML file using the following template:
 
@@ -198,7 +201,7 @@ command:
             apiVersion: sources.knative.dev/v1
             kind: ApiServerSource
             metadata:
-             name: <apiserversource>
+             name: <apiserversource-name>
              namespace: <namespace>
             spec:
              serviceAccountName: <service-account>
@@ -214,12 +217,14 @@ command:
             ```
             Where:
 
-            - `<apiserversource>` is the name of the source that you want to create.
+            - `<apiserversource-name>` is the name of the source that you want to create.
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
             - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
-            - `<sink-kind>` is any supported [Addressable](https://knative.dev/docs/developer/concepts/duck-typing/#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
+            - `<sink-kind>` is any supported [Addressable](../../../concepts/duck-typing.md#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
             - `<sink-name>` is the name of your sink.
+
+            For more information about the fields you can configure for the ApiServerSource object, see [ApiServerSource reference](reference.md).
 
         1. Apply the YAML file by running the command:
 
@@ -230,14 +235,14 @@ command:
 
 ## Verify the ApiServerSource object
 
-1. Make the Kubernetes API server create events by launching a test pod in your namespace by running the command:
+1. Make the Kubernetes API server create events by launching a test Pod in your namespace by running the command:
 
     ```bash
     kubectl run busybox --image=busybox --namespace=<namespace> --restart=Never -- ls
     ```
     Where `<namespace>` is the name of the namespace that you created in step 1 earlier.
 
-1. Delete the test pod by running the command:
+1. Delete the test Pod by running the command:
 
     ```bash
     kubectl --namespace=<namespace> delete pod busybox
@@ -308,7 +313,7 @@ command:
       }
     ```
 
-## Delete the ApiServerSource
+## Delete the ApiServerSource object
 
 To remove the ApiServerSource object and all of the related resources:
 
