@@ -1,6 +1,6 @@
 # Creating an ApiServerSource object
 
-![version](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
 This topic describes how to create an ApiServerSource object.
 
@@ -8,11 +8,11 @@ This topic describes how to create an ApiServerSource object.
 
 Before you can create an ApiServerSource object:
 
-- You must have [Knative Eventing](../../../../../admin/install/eventing/install-eventing-with-yaml.md)
+- You must have [Knative Eventing](../../../../admin/install/eventing/install-eventing-with-yaml.md)
 installed on your cluster.
 - You must install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 tool.
-- Optional: If you want to use the `kn` commands, install the [`kn`](../../../../../client/install-kn.md) tool.
+- Optional: If you want to use the `kn` commands, install the [`kn`](../../../../client/install-kn.md) tool.
 
 ## Create an ApiServerSource object
 
@@ -53,16 +53,24 @@ command:
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
-1. Create a ClusterRole:
+1. Create a Role:
 
     1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: rbac.authorization.k8s.io/v1
-        kind: ClusterRole
+        kind: Role
         metadata:
-          name: <cluster-role>
+          name: <role>
         rules:
+          <rules>
+        ```
+        Where
+        - `<role>` is the name of the Role that you want to create.
+        - `<rules>` are the set of permissions you want to grant to the APIServerSource object. This set of permissions must match the resources you want to received events from.
+
+        For example, to receive events related to the `events` resource, use the following set of permissions:
+        ```yaml
         - apiGroups:
           - ""
           resources:
@@ -72,7 +80,9 @@ command:
           - list
           - watch
         ```
-        Where `<cluster-role>` is the name of the ClusterRole that you want to create.
+
+        !!! note
+        The only required verbs are `get`, `list` and `watch`.
 
     1. Apply the YAML file by running the command:
 
@@ -81,19 +91,19 @@ command:
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
-1. Create a ClusterRoleBinding:
+1. Create a RoleBinding:
 
     1. Create a YAML file using the following template:
 
         ```yaml
         apiVersion: rbac.authorization.k8s.io/v1
-        kind: ClusterRoleBinding
+        kind: RoleBinding
         metadata:
-          name: <cluster-role-binding>
+          name: <role-binding>
         roleRef:
           apiGroup: rbac.authorization.k8s.io
-          kind: ClusterRole
-          name: <cluster-role>
+          kind: Role
+          name: <role>
         subjects:
         - kind: ServiceAccount
           name: <service-account>
@@ -101,10 +111,58 @@ command:
         ```
         Where:
 
-        - `<cluster-role-binding>` is the name of the ClusterRoleBinding that you want to create.
-        - `<cluster-role>` is the name of the ClusterRole that you created in step 3 earlier.
+        - `<role-binding>` is the name of the RoleBinding that you want to create.
+        - `<cluster-role>` is the name of the Role that you created in step 3 earlier.
         - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
         - `<namespace>` is the name of the namespace that you created in step 1 earlier.
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
+
+1. Create a sink. If you do not have your own sink, you can use the following example Service that dumps incoming messages to a log:
+
+    1. Copy the YAML below into a file:
+
+        ```yaml
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: event-display
+          namespace: <namespace>
+        spec:
+          replicas: 1
+          selector:
+            matchLabels: &labels
+              app: event-display
+          template:
+            metadata:
+              labels: *labels
+            spec:
+              containers:
+                - name: event-display
+                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+
+        ---
+
+        kind: Service
+        apiVersion: v1
+        metadata:
+          name: event-display
+          namespace: <namespace>
+        spec:
+          selector:
+            app: event-display
+          ports:
+          - protocol: TCP
+            port: 80
+            targetPort: 8080
+        ```
+
+        Where `<namespace>` is the name of the namespace that you created in step 1 above.
 
     1. Apply the YAML file by running the command:
 
@@ -124,15 +182,14 @@ command:
               --mode "Resource" \
               --resource "Event:v1" \
               --service-account <service-account> \
-              --sink <sink>
+              --sink <sink-name>
             ```
             Where:
 
             - `<apiserversource>` is the name of the source that you want to create.
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
-            - `<sink>` is the name of the PodSpecable object that you want to use as a sink.
-            A PodSpecable is an object that describes a PodSpec.
+            - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
 
     === "YAML"
         1. Create a YAML file using the following template:
@@ -161,7 +218,7 @@ command:
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
             - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
-            - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+            - `<sink-kind>` is any supported [Addressable](https://knative.dev/docs/developer/concepts/duck-typing/#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
             - `<sink-name>` is the name of your sink.
 
         1. Apply the YAML file by running the command:

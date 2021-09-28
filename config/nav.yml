@@ -96,7 +96,7 @@ nav:
                 - Moving to knative-sandbox: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
             - ApiServerSource:
               - Overview: developer/eventing/sources/apiserversource/README.md
-              - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
+              - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started.md
               - ApiServerSource reference: developer/eventing/sources/apiserversource/reference.md
             - Camel source: developer/eventing/sources/apache-camel-source/README.md
             - ContainerSource:

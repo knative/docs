@@ -40,7 +40,7 @@ during the verification step in this procedure.
         It also makes removing the source easier, because you can delete the
         namespace to remove all of the resources.
 
-1. Create a sink. If you do not have your own sink, you can use the following example Knative Service that dumps incoming messages to a log:
+1. Create a sink. If you do not have your own sink, you can use the following example Service that dumps incoming messages to a log:
 
     1. Copy the YAML below into a file:
 
@@ -49,6 +49,7 @@ during the verification step in this procedure.
         kind: Deployment
         metadata:
           name: event-display
+          namespace: <namespace>
         spec:
           replicas: 1
           selector:
@@ -68,6 +69,7 @@ during the verification step in this procedure.
         apiVersion: v1
         metadata:
           name: event-display
+          namespace: <namespace>
         spec:
           selector:
             app: event-display
@@ -76,6 +78,8 @@ during the verification step in this procedure.
             port: 80
             targetPort: 8080
         ```
+
+        Where `<namespace>` is the name of the namespace that you created in step 1 above.
 
     1. Apply the YAML file by running the command:
 
@@ -128,6 +132,7 @@ during the verification step in this procedure.
                 kind: PingSource
                 metadata:
                   name: <pingsource-name>
+                  namespace: <namespace>
                 spec:
                   schedule: "<cron-schedule>"
                   contentType: "<content-type>"
@@ -141,10 +146,11 @@ during the verification step in this procedure.
                 Where:
 
                 - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source`.
+                - `<namespace>` is the name of the namespace that you created in step 1 above.
                 - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
                 - `<content-type>` is the media type of the data you want to send, for example, `application/json`.
                 - `<data>` is the data you want to send. This data must be represented as text, not binary. For example, a JSON object such as `{"message": "Hello world!"}`.
-                - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+                - `<sink-kind>` is any supported [Addressable](https://knative.dev/docs/developer/concepts/duck-typing/#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
                 - `<sink-name>` is the name of your sink, for example, `event-display`.
 
                 For more information about the fields you can configure for the PingSource object, see [PingSource reference](reference.md).
@@ -167,6 +173,7 @@ during the verification step in this procedure.
                 kind: PingSource
                 metadata:
                   name: <pingsource-name>
+                  namespace: <namespace>
                 spec:
                   schedule: "<cron-schedule>"
                   contentType: "<content-type>"
@@ -180,10 +187,11 @@ during the verification step in this procedure.
                 Where:
 
                 - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source-binary`.
+                - `<namespace>` is the name of the namespace that you created in step 1 above.
                 - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
                 - `<content-type>` is the media type of the data you want to send, for example, `application/json`.
                 - `<base64-data>` is the base64 encoded binary data that you want to send, for example, `ZGF0YQ==`.
-                - `<sink-kind>` is any supported PodSpecable object that you want to use as a sink, for example, `Service` or `Deployment`. A PodSpecable is an object that describes a PodSpec.
+                - `<sink-kind>` is any supported [Addressable](https://knative.dev/docs/developer/concepts/duck-typing/#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
                 - `<sink-name>` is the name of your sink, for example, `event-display`.
 
                 For more information about the fields you can configure for the PingSource object, see [PingSource reference](reference.md).
