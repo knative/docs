@@ -113,13 +113,13 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
-   === "yaml"
+=== "yaml"
 
        1. Create a new file, `service.yaml` and copy the following service
           definition into the file. Make sure to replace `{username}` with your
           Docker Hub username or with the URL provided by your container registry
 
-          ```yaml
+        ```yaml
           apiVersion: serving.knative.dev/v1
           kind: Service
           metadata:
@@ -133,7 +133,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
                     env:
                       - name: TARGET
                         value: "Python Sample v1"
-          ```
+        ```
 
        Ensure that the container image value in `service.yaml` matches the container
        you built in the previous step. Apply the configuration using `kubectl`:
@@ -170,10 +170,12 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
    > Note: If your URL includes `example.com` then consult the setup instructions for
    > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
 
-   === "kubectl"
+    === "kubectl"
 
-       ```bash
-       kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+        ```bash
+        kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+        ```
+
        ```
 
        Example:
