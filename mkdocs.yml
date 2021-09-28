@@ -18,7 +18,6 @@ theme:
     - navigation.tabs
     - navigation.tracking
     - navigation.tabs.sticky
-    - navigation.indexes
     - navigation.top
 
 markdown_extensions:
