@@ -220,7 +220,7 @@ of the events that the ContainerSource sent to the `event-display` Service:
       }
     ```
 
-## Cleanup
+## Delete the ContainerSource object
 
 To delete the ContainerSource object and all of the related resources in the
 namespace:

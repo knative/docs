@@ -205,7 +205,8 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     Cloud Event overrides control the output format and modifications of the event
     sent to the sink and are applied before sending the event.
     You can provide this flag multiple times.
-    <!-- TODO provide link to information about the flags for the kn command -->
+
+    For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_binding_create.md#kn-source-binding-create).
 
     For example:
     ```bash
@@ -300,7 +301,7 @@ sent by the source to the display function. For example:
         }
     ```
 
-## Cleanup
+## Delete the SinkBinding object
 
 To delete the SinkBinding object and all of the related resources in the namespace,
 delete the namespace by running:
