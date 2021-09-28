@@ -75,7 +75,7 @@ Finally, create the producer to create the event:
 
 ```
 cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: ping-source-sequence
