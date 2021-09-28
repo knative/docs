@@ -6,7 +6,7 @@ set -x
 # Builds blog and community into the site by cloning the website repo, copying blog/community dirs in, running hugo.
 # Also builds previous versions unless BUILD_VERSIONS=no.
 # - Results are written to site/ as normal.
-# - Run as "./hack/build.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
+# - Run as "./hack/build-with-blog.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
 #
 # PREREQS (Unless BUILD_BLOG=no is set):
 # 1. Install Hugo: https://www.docsy.dev/docs/getting-started/#install-hugo
@@ -19,12 +19,12 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version.
 #    Order matters :-), Most recent first.
-VERSIONS=("0.26" "0.25" "0.24" "0.23")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-VERSIONS_GENERATORS=("mkdocs" "mkdocs" "mkdocs" "hugo")  # update this to always be 4 in the next two releases replace hugo with mkdocs, remove the copy of static hugo site at the bottom
-RELEASE_BRANCHES=("v0.26.0" "v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
+VERSIONS=("0.25" "0.24" "0.23" "0.22")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+VERSIONS_GENERATORS=("mkdocs" "mkdocs" "hugo" "hugo")  # update this to always be 4 in the next two releases replace hugo with mkdocs, remove the copy of static hugo site at the bottom
+RELEASE_BRANCHES=("v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
 # 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
-DOCS_BRANCHES=("release-0.26" "release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
-REPOS=("knative" "knative" "knative" "knative")
+DOCS_BRANCHES=("release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
+REPOS=("knative" "knative" "knative")
 # 4) PR the result to main.
 # 5) Party.
 
@@ -82,11 +82,8 @@ EOF
 fi
 
 # Create the blog
-# TODO copy templates, stylesheets, etc. into blog directory
-cd blog/
-mkdocs build -f mkdocs.yml -d ../site/blog
-cd -
-
+mv blog site/
+cp -r images snippets stylesheets site/blog/
 
 if [ -z "$SKIP_BLOG" ]; then
   # Clone out the website and community repos for the hugo bits.
@@ -147,6 +144,7 @@ fi
 # TODO(jz) remove these each release until they disappear!
 cp -r archived/scss/* site/scss/
 cp -r archived/v0.23-docs site/v0.23-docs
+cp -r archived/v0.22-docs site/v0.22-docs
 
 # Home page is served from docs, so add a redirect.
 # TODO(jz) in production this should be done with a netlify 301 (or maybe just copy docs/index up with a base set).

@@ -232,15 +232,16 @@ nav:
         - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
         - GitHub source: eventing/samples/github-source/README.md
         - GitLab source: eventing/samples/gitlab-source/README.md
-    # Reference docs
-    - Reference:
-      - Serving: reference/api/serving-api.md
-      - Eventing: reference/api/eventing-api.md
+
     # Client
     - Client:
       - Overview: client/README.md
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
+    - Blog: /blog/
+    # Reference docs
+    - Reference:
+      - Serving: reference/api/serving-api.md
+      - Eventing: reference/api/eventing-api.md
     - "Join the Community ➠": /community/
-    - "Read the Blog ➠": /blog/

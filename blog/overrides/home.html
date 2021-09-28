@@ -1,0 +1,185 @@
+{% extends "main.html" %} {% block content %}
+<link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}" />
+
+<div class="md-container">
+  <section class="home-container">
+    <div class="animated-gradient">
+      <img src="images/logo/rgb/knative-logo-rgb.png" style="display: none;"/>
+    </div>
+    <div class="md-grid md-typeset">
+      <div class="mdx-hero">
+        <div>
+          <h1>Enterprise-grade Serverless on your own terms.</h1>
+          <h2>Kubernetes-based platform to deploy and manage modern serverless workloads.</h2>
+          <p style="display: block">
+            <a href="{{ 'getting-started/' | url }}" class="md-button md-button--primary">
+              Developer? Get Started Here!
+            </a>
+            <a href="{{ 'admin/install/' | url }}" class="md-button"> Cluster Administrator? Get Started Here!</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-container">
+    <div class="md-grid md-typeset">
+      <h2>Highlights</h2>
+      <ul class="task-list-control" style="columns: 2">
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled />
+          <span class="task-list-indicator"></span>
+          <b>Stand up scalable, secure, stateless services in seconds.</b>
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Focused API</b> with
+          higher level abstractions for common app use-cases.
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
+          ><b>Pluggable components</b> let you bring your own logging and monitoring, networking, and service mesh.
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Run Knative anywhere
+          Kubernetes runs, <b>never worry about vendor lock-in.</b>
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
+          ><b>Seamless developer experience</b>, supports GitOps, DockerOps, ManualOps, etc..
+        </li>
+        <li class="task-list-item">
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
+          ><b>Supports many common tools and frameworks</b> such as Django, Ruby on Rails, Spring, and many more.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="intro-container">
+    <div class="md-grid md-typeset">
+      <img
+        src="images/rocket.svg"
+        class="rocket"
+        alt=""
+        draggable="false"
+      />
+      <div>
+        <h2>Make your developers more productive</h2>
+        <p>
+          Knative components build on top of Kubernetes,
+          <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
+          codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
+          difficult" parts of deploying and managing cloud native services so you don't have to.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="usedby-container">
+    <div class="md-grid md-typeset" style="width: 100%">
+      <div id="usedby-title">
+        <h3>Trusted by:</h3>
+      </div>
+      <div id="usedby">
+        <div class="logo">
+          <img src="images/corporate-logos/Google.svg" alt="" draggable="false" />
+        </div>
+        <div class="logo">
+          <img src="images/corporate-logos/vmware.svg" alt="" draggable="false" />
+        </div>
+        <div class="logo">
+          <img src="images/corporate-logos/IBM.svg" alt="" draggable="false" />
+        </div>
+        <div class="logo">
+          <img src="images/corporate-logos/Redhat.svg" alt="" draggable="false" />
+        </div>
+        <div class="logo">
+          <img src="images/corporate-logos/Triggermesh.svg" alt="" draggable="false" />
+        </div>
+      </div>
+      <div id="usedby-more">..and more!</div>
+    </div>
+  </section>
+
+  <section class="components-container">
+    <div class="md-grid md-typeset">
+      <div>
+        <h2>Knative Components</h2>
+      </div>
+      <div style="display: flex; gap: 4em;" class="component-flex">
+        <div>
+          <div>
+            <h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4>
+          </div>
+          <p>
+            Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking,
+            autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.
+          </p>
+        </div>
+        <div>
+          <div>
+            <h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4>
+          </div>
+          <p>
+            Universal subscription, delivery, and management of events. Build modern apps by attaching compute to a data
+            stream with declarative event connectivity and developer-friendly object model.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="whats-next-container">
+    <div class="md-grid md-typeset">
+      <h2>What's Next?</h2>
+      <div class="component-flex">
+        <div class="pane">
+          <div class="twemoji">
+            {% include ".icons/fontawesome/brands/slack.svg" %}
+          </div>
+          <h4>Talk to us on Slack</h4>
+          <a href="https://slack.knative.dev" title="Slack Link" class="md-button">Talk</a>
+          <p>Interested in learning more, speaking to other contributors, or finding answers?</p>
+        </div>
+        <div class="pane">
+          <div class="twemoji">
+            {% include ".icons/fontawesome/brands/github.svg" %}
+          </div>
+          <h4>Contributions Welcome</h4>
+          <a href="./help/contributor/" title="Contributing Link" class="md-button">Contribute</a>
+          <p>Want to join the fun on Github? New users are always welcome!</p>
+        </div>
+        <div class="pane">
+          <div class="twemoji">
+            {% include ".icons/fontawesome/brands/twitter.svg" %}
+          </div>
+          <h4>Follow us on Twitter</h4>
+          <a href="https://twitter.com/KnativeProject" title="Twitter Link" class="md-button">Follow</a>
+          <p>For features announcements, interesting Knative news, and other great things.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const logos = document.getElementById("usedby").getElementsByTagName("div");
+        for (let i = 0; i < logos.length - 1; i++) {
+            // Technically there's a chance two elements end up with the same
+            // random order in which case the result won't be truly random (it'll be based
+            // on the original document order). This really doesn't matter.
+            logos[i].style.order = Math.floor(Math.random() * 99);
+        }
+        logos[logos.length - 1].style.order = 100;
+    })
+  </script>
+{% endblock %}
+
+<!-- Application footer -->
+{% block footer %}
+  {% include "partials/footer.html" %}
+{% endblock %}

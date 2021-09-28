@@ -1,0 +1,54 @@
+nav:
+    - Home: /docs/
+    - Getting started: /docs/getting-started/
+    # Administration guide
+    - Administration guide: /docs/admin/
+    # Developer guide
+    - Developer guide: /docs/developer/
+    # Serving
+    - Knative Serving: /docs/serving/
+    # Eventing
+    - Knative Eventing: /docs/eventing/
+    # Client
+    - Client: /docs/client/
+    # Blog
+    - Blog:
+      - index.md
+      - Releases:
+          - releases/announcing-knative-v0-26-release.md
+          - releases/announcing-knative-v0-25-release.md
+          - releases/announcing-knative-v0-24-release.md
+          - releases/announcing-knative-v0-23-release.md
+          - releases/announcing-knative-v0-22-release.md
+          - releases/announcing-knative-v0-21-release.md
+          - releases/announcing-knative-v0-20-release.md
+          - releases/announcing-knative-v0-19-release.md
+          - releases/announcing-knative-v0-18-release.md
+          - releases/announcing-knative-v0-17-release.md
+          - releases/announcing-knative-v0-5-release.md
+          - releases/announcing-knative-v0-4-release.md
+          - releases/announcing-knative-v0-3-release.md
+          - releases/announcing-knative-v0-2-release.md
+      - Articles:
+          - articles/distributed-tracing.md
+          - articles/event-drive-app-knative-eventing-kogito.md
+          - articles/orchestrating-cloud-events-with.md
+          - articles/event-driven-image-bigquery-processing-pipelines.md
+          - articles/get-started-knative-eventing.md
+          - articles/knative-v0-3-autoscaling-a-love-story.md
+          - articles/ko-fast-kubernetes-microservice-development-in-go.md
+          - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
+          - articles/set-up-a-local-knative-environment-with-kind.md
+      - Steering Committee:
+          - steering/toc-2021-election-announcement.md
+          - steering/2020-11-ksc-elections.md
+          - steering/governance-changes.md
+          - steering/2020-05-toc_election_results.md
+          - steering/2020-01-annual-report-2019.md
+          - steering/2019-12-updates.md
+      - Events:
+          - events/knative-at-kubecon-eu-2019.md
+          - events/knative-at-kubecon-seattle.md
+    # Reference docs
+    - Reference: /docs/reference/
+    - "Join the Community ➠": /community/
