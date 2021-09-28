@@ -145,7 +145,7 @@ command:
             spec:
               containers:
                 - name: event-display
-                  image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+                  image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 
         ---
 

@@ -88,7 +88,7 @@ create a Knative service.
     For example:
 
     ```bash
-    $ kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    $ kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 
 === "YAML"
@@ -109,7 +109,7 @@ create a Knative service.
 
         - `<app-name>` is the name of the application. For example, `event-display`.
         - `<image-url>` is the URL of the image container.
-        For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`.
+        For example, `gcr.io/knative-releases/knative.dev/eventing/cmd/event_display`.
 
     1. Apply the YAML file by running the command:
 
