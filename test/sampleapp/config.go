@@ -19,19 +19,13 @@ package sampleapp
 import (
 	"fmt"
 	"io/ioutil"
-	"os/exec"
-	"strings"
-	"testing"
 
 	yaml "gopkg.in/yaml.v2"
 )
 
 const (
 	// using these defaults if not provided, see useDefaultIfNotProvided function below
-	defaultSrcDir               = "../../docs/serving/samples/hello-world/helloworld-%s"
-	defaultWorkDir              = "helloworld-%s_tmp"
-	defaultAppName              = "helloworld-%s"
-	defaultYamlImagePlaceHolder = "docker.io/{username}/helloworld-%s"
+	defaultSrcDir = "../../docs/serving/samples/hello-world/helloworld-%s"
 
 	// ActionMsg serves as documentation purpose, which will be referenced for
 	// clearly displaying error messages.
@@ -51,44 +45,15 @@ type AllConfigs struct {
 
 // LanguageConfig contains all information for building/deploying an app
 type LanguageConfig struct {
-	Language             string    `yaml:"language"`
-	ExpectedOutput       string    `yaml:"expectedOutput"`
-	SrcDir               string    `yaml:"srcDir"`  // Directory contains sample code
-	WorkDir              string    `yaml:"workDir"` // Temp work directory
-	AppName              string    `yaml:"appName"`
-	YamlImagePlaceholder string    `yaml:"yamlImagePlaceholder"` // Token to be replaced by real docker image URI
-	PreCommands          []Command `yaml:"preCommands"`          // Commands to be ran before copying
-	Copies               []string  `yaml:"copies"`               // Files to be copied from SrcDir to WorkDir
-	PostCommands         []Command `yaml:"postCommands"`         // Commands to be ran after copying
+	Language string   `yaml:"language"`
+	SrcDir   string   `yaml:"srcDir"` // Directory contains sample code
+	Copies   []string `yaml:"copies"` // Files to be copied by the user from SrcDir
 }
 
-// Command contains shell commands
-type Command struct {
-	Exec string `yaml:"exec"`
-	Args string `yaml:"args"`
-}
-
-// UseDefaultIfNotProvided sets default value to SrcDir, WorkDir, AppName, and YamlImagePlaceholder if not provided
+// UseDefaultIfNotProvided sets default value of SrcDir if not provided
 func (lc *LanguageConfig) UseDefaultIfNotProvided() {
 	if "" == lc.SrcDir {
 		lc.SrcDir = fmt.Sprintf(defaultSrcDir, lc.Language)
-	}
-	if "" == lc.WorkDir {
-		lc.WorkDir = fmt.Sprintf(defaultWorkDir, lc.Language)
-	}
-	if "" == lc.AppName {
-		lc.AppName = fmt.Sprintf(defaultAppName, lc.Language)
-	}
-	if "" == lc.YamlImagePlaceholder {
-		lc.YamlImagePlaceholder = fmt.Sprintf(defaultYamlImagePlaceHolder, lc.Language)
-	}
-}
-
-// Run runs command and fail if it failed
-func (c *Command) Run(t *testing.T) {
-	args := strings.Split(c.Args, " ")
-	if output, err := exec.Command(c.Exec, args...).CombinedOutput(); err != nil {
-		t.Fatalf("Error executing: '%s' '%s' -err: '%v'", c.Exec, c.Args, strings.TrimSpace(string(output)))
 	}
 }
 
