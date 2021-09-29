@@ -9,6 +9,10 @@ plugins:
       serving/deploying-from-private-registry.md: developer/serving/deploying-from-private-registry.md
       serving/samples/blue-green-deployment.md: developer/serving/traffic-management.md
       serving/samples/traffic-splitting/README.md: developer/serving/traffic-management.md
+      admin/collecting-logs/README.md: admin/observability/collecting-logs/README.md
+      admin/collecting-metrics/README.md: admin/observability/collecting-metrics/README.md
+      admin/collecting-metrics/eventing-metrics/metrics.md: admin/observability/collecting-metrics/eventing-metrics/metrics.md
+      admin/collecting-metrics/serving-metrics/metrics.md: admin/observability/collecting-metrics/serving-metrics/metrics.md
       admin/install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
       admin/install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
       client/connecting-kn-to-your-cluster/index.md: client/README.md
@@ -19,7 +23,7 @@ plugins:
       eventing/broker/kafka-broker/kafka-configmap.md: admin/eventing/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
       eventing/event-delivery.md: developer/eventing/event-delivery.md
-      eventing/metrics.md: admin/collecting-metrics/eventing-metrics/metrics.md
+      eventing/metrics.md: admin/observability/collecting-metrics/eventing-metrics/metrics.md
       eventing/parallel.md: eventing/flows/parallel.md
       eventing/samples/apache-camel-source/index.md: developer/eventing/sources/apache-camel-source/README.md
       eventing/samples/gcp-pubsub-source/README.md: eventing/samples/cloud-pubsub-source/README.md
