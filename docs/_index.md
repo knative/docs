@@ -41,10 +41,10 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 
 ### Observability
 
-- [Collecting logs](admin/observability/collecting-logs/README.md)
+- [Collecting logs](admin/observability/collecting-logs/collecting-logs.md)
 - [Serving Metrics](admin/observability/collecting-metrics/serving-metrics/metrics.md)
 - [Eventing Metrics](admin/observability/collecting-metrics/eventing-metrics/metrics.md)
-- [Collecting metrics](admin/observability/collecting-metrics/README.md)
+- [Collecting metrics](admin/observability/collecting-metrics/collecting-metrics.md)
 
 ### Debugging
 
