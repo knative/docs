@@ -46,7 +46,7 @@ nav:
         - Observability:
           - Collecting logs: admin/observability/collecting-logs/README.md
           - Collecting metrics: admin/observability/collecting-metrics/README.md
-          - Configuring logging: admin/observibility/config-logging/logging.md
+          - Configuring logging: admin/observability/config-logging/logging.md
           - Knative Eventing metrics: admin/observability/collecting-metrics/eventing-metrics/metrics.md
           - Knative Serving metrics: admin/observability/collecting-metrics/serving-metrics/metrics.md
         - Uninstalling Knative: admin/install/uninstall.md
