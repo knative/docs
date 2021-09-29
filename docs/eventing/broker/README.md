@@ -45,7 +45,8 @@ For more information, see [Apache Kafka Broker](kafka-broker/README.md).
 
 #### RabbitMQ broker
 
-The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlying implementation. For more information, see the [RabbitMQ broker](https://github.com/knative-sandbox/eventing-rabbitmq) in GitHub.
+The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlying implementation.
+For more information, see [RabbitMQ Broker](rabbitmq-broker/README.md) or [the docs available on GitHub](https://github.com/knative-sandbox/eventing-rabbitmq).
 
 ## Next steps
 

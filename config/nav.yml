@@ -204,8 +204,8 @@ nav:
         - Creating a broker: eventing/broker/create-mtbroker.md
         - Triggers: eventing/broker/triggers/README.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
-        - Apache Kafka Broker:
-          - Overview: eventing/broker/kafka-broker/README.md
+        - Apache Kafka Broker: eventing/broker/kafka-broker/README.md
+        - RabbitMQ Broker: eventing/broker/rabbitmq-broker/README.md
       - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Experimental Features: eventing/experimental-features.md
