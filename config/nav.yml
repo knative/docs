@@ -42,8 +42,7 @@ nav:
           - Overview: admin/upgrade/README.md
           - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
-        - Logging: admin/observability/collecting-logs/README.md
-        # Administrator metrics
+        # Administrator configuration of observability tools
         - Observability:
           - Collecting logs: admin/observability/collecting-logs/README.md
           - Collecting metrics: admin/observability/collecting-metrics/README.md

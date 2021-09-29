@@ -54,8 +54,8 @@ plugins:
       help/README.md: help/contributor/README.md
       install/README.md: admin/install/README.md
       install/check-install-version.md: check-install-version.md
-      install/collecting-logs/index.md: admin/collecting-logs/README.md
-      install/collecting-metrics/index.md: admin/collecting-metrics/README.md
+      install/collecting-logs/index.md: admin/observability/collecting-logs/README.md
+      install/collecting-metrics/index.md: admin/observability/collecting-metrics/README.md
       install/getting-started-knative-app/index.md: getting-started/README.md
       serving/getting-started-knative-app.md: getting-started/README.md
       install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
@@ -78,7 +78,7 @@ plugins:
       serving/configuring-autoscaling/index.md: serving/autoscaling/README.md
       serving/creating-domain-mappings.md: developer/serving/services/custom-domains.md
       serving/debugging-application-issues.md: developer/serving/troubleshooting/debugging-application-issues.md
-      serving/metrics.md: admin/collecting-metrics/serving-metrics/metrics.md
+      serving/metrics.md: admin/observability/collecting-metrics/serving-metrics/metrics.md
       serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
       serving/services/README.md: developer/serving/services/README.md
       serving/services/creating-services.md: developer/serving/services/creating-services.md
