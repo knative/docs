@@ -44,7 +44,7 @@ nav:
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
         - Logging: admin/observability/collecting-logs/README.md
         # Administrator metrics
-        - Observability
+        - Observability:
           - Collecting logs: admin/observability/collecting-logs/README.md
           - Collecting metrics: admin/observability/collecting-metrics/README.md
           - Configuring logging: admin/observibility/config-logging/logging.md
