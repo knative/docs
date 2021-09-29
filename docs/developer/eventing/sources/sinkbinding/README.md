@@ -1,6 +1,6 @@
 # SinkBinding
 
-![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
+![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
 The SinkBinding object supports decoupling event production from
 delivery addressing.

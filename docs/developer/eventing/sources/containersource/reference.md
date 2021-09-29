@@ -1,5 +1,7 @@
 # ContainerSource reference
 
+![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
+
 This topic provides reference information about the configurable fields for the
 ContainerSource object.
 
@@ -14,57 +16,9 @@ A ContainerSource definition supports the following fields:
 | [`kind`][kubernetes-overview] | Identifies this resource object as a ContainerSource object. | Required |
 | [`metadata`][kubernetes-overview] | Specifies metadata that uniquely identifies the ContainerSource object. For example, a `name`. | Required |
 | [`spec`][kubernetes-overview] | Specifies the configuration information for this ContainerSource object. | Required |
-| [`spec.sink`](#sink-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
+| [`spec.sink`](../../sinks/README.md#sink-as-a-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | [`spec.template`](#template-parameter) | A `template` in the shape of `Deployment.spec.template` to be used for this ContainerSource. | Required |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
-
-
-### Sink parameter
-
-The `sink` parameter is a reference to an object that resolves to a URI to use as the sink.
-
-A `sink` definition supports the following fields:
-
-| Field | Description | Required or optional |
-|-------|-------------|----------------------|
-| `ref` | This points to an Addressable. | Required if _not_ using `uri`  |
-| `ref.apiVersion` | API version of the referent. | Required if using `ref` |
-| [`ref.kind`][kubernetes-kinds] | Kind of the referent. | Required if using `ref` |
-| [`ref.name`][kubernetes-names] | Name of the referent. | Required if using `ref` |
-| [`ref.namespace`][kubernetes-namespaces] | Namespace of the referent. If omitted this defaults to the object holding it. | Optional |
-| `uri` | This can be an absolute URL with a non-empty scheme and non-empty host that points to the target or a relative URI. Relative URIs are resolved using the base URI retrieved from Ref. | Required if _not_ using `ref` |
-
-!!! note
-    At least one of `ref` or `uri` is required. If both are specified, `uri` is
-    resolved into the URL from the Addressable `ref` result.
-
-#### Example: sink parameter
-
-Given the following YAML, if `ref` resolves into
-`"http://mysink.default.svc.cluster.local"`, then `uri` is added to this
-resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
-
-<!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
-
-```yaml
-apiVersion: sources.knative.dev/v1
-kind: ContainerSource
-metadata:
-  name: test-heartbeats
-spec:
-  ...
-  sink:
-    ref:
-      apiVersion: v1
-      kind: Service
-      namespace: default
-      name: mysink
-    uri: /extra/path
-```
-
-!!! contract
-    This results in the `K_SINK` environment variable being set as
-    `"http://mysink.default.svc.cluster.local/extra/path"`.  <!-- unsure about this -->
 
 
 ### Template parameter
@@ -139,11 +93,5 @@ spec:
 
 [kubernetes-overview]:
   https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
-[kubernetes-kinds]:
-  https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-[kubernetes-names]:
-  https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-[kubernetes-namespaces]:
-  https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 [cloudevents-attribute-naming]:
   https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#attribute-naming-convention

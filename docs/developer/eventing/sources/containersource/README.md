@@ -1,6 +1,6 @@
 # Creating a ContainerSource object
 
-![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
+![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
 This topic describes how to configure ContainerSource as an event source for
 functions.
@@ -220,7 +220,7 @@ of the events that the ContainerSource sent to the `event-display` Service:
       }
     ```
 
-## Cleanup
+## Delete the ContainerSource object
 
 To delete the ContainerSource object and all of the related resources in the
 namespace:

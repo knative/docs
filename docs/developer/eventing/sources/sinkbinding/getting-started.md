@@ -1,6 +1,6 @@
 # Creating a SinkBinding object
 
-![API version v1](https://img.shields.io/badge/API_Version-v1-red?style=flat-square)
+![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
 This topic describes how to create a SinkBinding object.
 SinkBinding resolves a sink as a URI, sets the URI in the environment
@@ -88,7 +88,7 @@ create a Knative service.
     For example:
 
     ```bash
-    $ kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    $ kn service create event-display --image gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 
 === "YAML"
@@ -109,7 +109,7 @@ create a Knative service.
 
         - `<app-name>` is the name of the application. For example, `event-display`.
         - `<image-url>` is the URL of the image container.
-        For example, `gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display`.
+        For example, `gcr.io/knative-releases/knative.dev/eventing/cmd/event_display`.
 
     1. Apply the YAML file by running the command:
 
@@ -205,7 +205,8 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     Cloud Event overrides control the output format and modifications of the event
     sent to the sink and are applied before sending the event.
     You can provide this flag multiple times.
-    <!-- TODO provide link to information about the flags for the kn command -->
+
+    For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_binding_create.md#kn-source-binding-create).
 
     For example:
     ```bash
@@ -300,7 +301,7 @@ sent by the source to the display function. For example:
         }
     ```
 
-## Cleanup
+## Delete the SinkBinding object
 
 To delete the SinkBinding object and all of the related resources in the namespace,
 delete the namespace by running:

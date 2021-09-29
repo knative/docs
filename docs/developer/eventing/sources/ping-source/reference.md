@@ -1,5 +1,7 @@
 # PingSource reference
 
+![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
+
 This topic provides reference information about the configurable fields for the
 PingSource object.
 
@@ -18,7 +20,7 @@ A PingSource definition supports the following fields:
 | `spec.data` | The data used as the body of the event posted to the sink. Default is empty. Mutually exclusive with `dataBase64`. | Required if not sending base64 encoded data |
 | `spec.dataBase64` | A base64-encoded string of the actual event's body posted to the sink. Default is empty. Mutually exclusive with `data`. | Required if sending base64 encoded data |
 | `spec.schedule` | Specifies the cron schedule. Defaults to `* * * * *`. | Optional |
-| [`spec.sink`](../../sinks/README.md) | A reference to an object that resolves to a URI to use as the sink. | Required |
+| [`spec.sink`](../../sinks/README.md#sink-as-a-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | `spec.timezone` | Modifies the actual time relative to the specified timezone. Defaults to the system time zone. <br><br> See the [list of valid tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia. For general information about time zones, see the [IANA](https://www.iana.org/time-zones) website.  | Optional |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
 | `status`|  Defines the observed state of PingSource.   | Optional |
