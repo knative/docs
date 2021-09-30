@@ -8,7 +8,7 @@ Generally it is recommended for Knative Services to use the default `certificate
 
 You can configure each Service to use a different certificate class by specifying the `networking.knative.dev/certificate.class` annotation.
 
-To add an certifcate class annotation to a Service, run the following command:
+To add a certificate class annotation to a Service, run the following command:
 ```bash
 kubectl annotate kservice <service-name> networking.knative.dev/certifcate.class=<certificate-provider>
 ```
