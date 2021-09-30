@@ -69,7 +69,8 @@ nav:
             - Creating a Service: developer/serving/services/creating-services.md
             - Service metrics: developer/serving/services/service-metrics.md
             - Configuring private Services: developer/serving/services/private-services.md
-            - Configuring Services custom ingress class: developer/serving/services/ingress-class.md
+            - Configuring ingress class: developer/serving/services/ingress-class.md
+            - Configuring certificate class: developer/serving/services/certificate-class.md
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Using a custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
