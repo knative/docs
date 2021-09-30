@@ -118,3 +118,31 @@ spec:
 ```
 
 You can specify a `delivery` spec for Channels, Subscriptions, Brokers, Triggers, and any other resource spec that accepts the `delivery` field.
+
+### Strict Subscriber
+
+**Flag name**: `strict-subscriber`
+
+**Stage**: Alpha, disabled by default
+
+**Tracking issue**: [#5762](https://github.com/knative/eventing/pull/5762)
+
+When defining a Subscription, if this flag is enabled, validation will fail if the field `spec.subscriber` is not defined. This flag was implemented to follow the latest version of the [Knative Eventing Spec that can be found here](https://github.com/knative/specs/tree/main/specs/eventing)
+
+A Subscription like the following example will fail validation if the previous flag is enabled: 
+```
+```yaml
+apiVersion: messaging.knative.dev/v1
+kind: Subscription
+metadata:
+  name: example-subscription
+  namespace: example-namespace
+spec:
+  reply: 
+    ref:
+     apiVersion: serving.knative.dev/v1
+     kind: Service
+     name: example-reply
+```
+
+With the flag disabled (default behavior) the Subscription can define a subscriber or a reply field and validation will succeed, this is the behavior default behavior in version 0.26 and before.
