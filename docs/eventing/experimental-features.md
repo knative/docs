@@ -17,21 +17,8 @@ development, see the
 [Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition)
 documentation.
 
-In order to achieve that goal in Knative Eventing, we have a process to include
-new features. This allows users like you to try out new features and provide
-feedback back to the project.
-
 This document explains how to enable experimental features and which ones are
 available today.
-
-For more details about the process, the feature phases, quality requirements and
-guarantees, check out the
-[Experimental features process documentation](https://github.com/knative/eventing/blob/main/docs/experimental-features.md).
-
-!!! warning Depending on the feature stage, an experimental feature might be
-unstable and break your Knative setup or even your cluster setup, use them with
-caution. For more details about quality guarantees, check out the
-[Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition).
 
 ## Before you begin
 
