@@ -1,7 +1,21 @@
 # Experimental features
 
-In Knative we want to keep the innovation alive, experimenting and delivering
-new features without affecting the stability of the project.
+In order to keep Knative innovative, the maintainers of this project have
+developed an
+[experimental features process](https://github.com/knative/eventing/blob/main/docs/experimental-features.md),
+that allows new, experimental features to be delivered and tested by users,
+without affecting the stability of the core project.
+
+<!--TODO: Add note about HOW / where users can provide feedback, otherwise there's not much point mentioning that-->
+
+!!! warning
+    Experimental features are unstable and may cause issues in your
+Knative setup or even your cluster setup. These features should be used with
+caution, and should never be tested on a production environment. For more
+information about quality guarantees for features at different stages of
+development, see the
+[Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition)
+documentation.
 
 In order to achieve that goal in Knative Eventing, we have a process to include
 new features. This allows users like you to try out new features and provide
@@ -21,15 +35,17 @@ caution. For more details about quality guarantees, check out the
 
 ## Before you begin
 
-You must have a Knative cluster running with the Eventing component installed.
-[Learn more](../admin/install/README.md)
+You must have a Knative cluster running with Knative Eventing installed.
 
 ## Experimental features configuration
 
-When installing Eventing, the `config-features` ConfigMap is added to your
-cluster in the `knative-eventing` namespace. In order to enable a feature, you
-just need to add it to the config map and set its value to `enabled`. For
-example, to enable `new-cool-feature`:
+When you install Knative Eventing, the `config-features` ConfigMap is added to
+your cluster in the `knative-eventing` namespace.
+
+In order to enable a feature, you must add it to the `config-features` ConfigMap
+under the `data` spec, and set the value for the feature to `enabled`. For example,
+to enable a feature called `new-cool-feature`, you would add the following ConfigMap
+entry:
 
 ```yaml
 apiVersion: v1
@@ -71,7 +87,6 @@ data:
 
 **Tracking issue**: [#5086](https://github.com/knative/eventing/issues/5086)
 
-
 **Persona**: Developer
 
 When using the `KReference` type to refer to another Knative resource, you can
@@ -100,7 +115,7 @@ affecting existing resources.
 
 !!! note
     At the moment this feature is implemented only for
-`Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
+    `Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
 
 ### DeliverySpec.Timeout field
 
@@ -118,7 +133,7 @@ duration of the `timeout` parameter is specified using the
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
 
 The following example shows a Subscription that retries sending an event 3
-times, and on each retry the request timeout is going to be 5 seconds:
+times, and on each retry the request timeout is 5 seconds:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
@@ -142,7 +157,7 @@ spec:
 You can specify a `delivery` spec for Channels, Subscriptions, Brokers,
 Triggers, and any other resource spec that accepts the `delivery` field.
 
-### Knative Reference mapping
+### Knative reference mapping
 
 **Flag name**: `kreference-mapping`
 
@@ -152,13 +167,19 @@ Triggers, and any other resource spec that accepts the `delivery` field.
 
 **Persona**: Administrator, Developer
 
-When enabled, this feature allows you to provide mappings from
-[Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination)
-to templated URI. For instance it allows you to directly reference non-addressable resources everywhere Knative Eventing accepts a reference (e.g. PingSource sink, Trigger subscriber, etc...).
+When enabled, this feature allows you to provide mappings from a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination) to a templated URI.
 
-Mappings are defined (by the administrator) in `config-reference-mapping`. The following example maps `JobDefinition` to a Job runner service:
+
+!!! note
+    Currently only PingSource supports this experimental feature.
+
+For example, you can directly reference non-addressable resources anywhere that Knative Eventing accepts a reference, such as for a PingSource sink, or a Trigger subscriber.
+
+Mappings are defined by a cluster administrator in the `config-reference-mapping` ConfigMap.
+The following example maps `JobDefinition` to a Job runner service:
 
 {% raw %}
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -166,19 +187,20 @@ metadata:
   name: config-kreference-mapping
   namespace: knative-eventing
 data:
-  JobDefinition.v1.mygroup:
-    "https://jobrunner.{{ .SystemNamespace }}.svc.cluster.local/{{ .Name }}"
+  JobDefinition.v1.mygroup: "https://jobrunner.{{ .SystemNamespace }}.svc.cluster.local/{{ .Name }}"
 ```
+
 {% endraw %}
 
 The key must be of the form `<Kind>.<version>.<group>`. The value must resolved
 to a valid URI. Currently, the following template data are supported:
 
-- Name: name of the referenced object
-- Namespace: namespace of the referenced object
-- SystemNamespace: namespace of where Knative Eventing is installed
+- Name: The name of the referenced object
+- Namespace: The namespace of the referenced object
+- SystemNamespace: The namespace of where Knative Eventing is installed
 
-Given the above mapping, the following example shows how a developer can directly reference `JobDefinition` objects in PingSource:
+Given the above mapping, the following example shows how you can directly reference
+`JobDefinition` objects in a PingSource:
 
 ```yaml
 apiVersion: sources.knative.dev/v1
@@ -194,5 +216,3 @@ spec:
       name: ajob
 ```
 
-!!! note
-    Currently only PingSource supports this experimental feature.
