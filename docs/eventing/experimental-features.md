@@ -130,7 +130,6 @@ You can specify a `delivery` spec for Channels, Subscriptions, Brokers, Triggers
 When defining a Subscription, if this flag is enabled, validation will fail if the field `spec.subscriber` is not defined. This flag was implemented to follow the latest version of the [Knative Eventing Spec that can be found here](https://github.com/knative/specs/tree/main/specs/eventing)
 
 A Subscription like the following example will fail validation if the previous flag is enabled: 
-```
 ```yaml
 apiVersion: messaging.knative.dev/v1
 kind: Subscription
