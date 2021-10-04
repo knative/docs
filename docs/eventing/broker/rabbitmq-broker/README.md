@@ -1,4 +1,4 @@
-# RabbitMQ Broker
+# Creating a RabbitMQ Broker
 
 This topic describes how to create a RabbitMQ Broker.
 
