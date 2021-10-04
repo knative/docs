@@ -227,4 +227,4 @@ spec:
      name: example-reply
 ```
 
-With the flag disabled (default behavior) the Subscription can define either a subscriber or a reply field, and validation will succeed. This is the behavior default behavior in Knative v0.26 and earlier.
+With the flag disabled (default behavior) the Subscription can define either a subscriber or a reply field, and validation will succeed. This is the default behavior in Knative v0.26 and earlier.
