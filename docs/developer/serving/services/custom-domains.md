@@ -13,6 +13,11 @@ serve a Knative Service at this domain.
     If you create a domain mapping to map to a [private Knative Service](private-services.md),
     the private Knative Service is accessible from public internet with the custom domain of the domain mapping.
 
+!!! tip
+    This section instructs how to customize the domain of each service regardless of the default domain.
+    If you want to customize the domain template to assign the default domain name,
+    please refer to [setting up a custom domain template](../../../serving/using-a-custom-domain.md).
+
 ## Prerequisites
 
 - You must have access to a Kubernetes cluster, with Knative Serving and an Ingress implementation installed. For more information, see the [Installation documentation](../../../admin/install/README.md).

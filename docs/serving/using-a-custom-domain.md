@@ -1,10 +1,15 @@
-# Setting up a custom domain
+# Setting up a custom domain template
 
 By default, Knative Serving routes use `example.com` as the default domain. The
 fully qualified domain name for a route by default is
 `{route}.{namespace}.{default-domain}`.
 
 To change the {default-domain} value there are a few steps involved:
+
+!!! tip
+    Customizing domain template effects on your cluster globally.
+    If you want to constomize the domain of each service, use `DomainMapping` instead.
+    For more details, please refer to [configuring custom domains](../developer/serving/services/custom-domains.md).
 
 ## Edit using kubectl
 
