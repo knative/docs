@@ -6,7 +6,7 @@ The Knative Serving Operator can be configured with the following options:
 - [Knative Serving configuration by ConfigMap](#knative-serving-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
-- [Replace default istio-ingressgateway service](#replace-default-istio-ingressgateway-service)
+- [Replace the default istio-ingressgateway service](#replace-the-default-istio-ingressgateway-service)
 - [Replace the knative-ingress-gateway gateway](#replace-the-knative-ingress-gateway-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
@@ -261,9 +261,9 @@ spec:
     type: ConfigMap
 ```
 
-## Replace default istio-ingressgateway-service
+## Replace the default istio-ingressgateway-service
 
-To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md/#step-1-create-the-gateway-service-and-deployment-instance).
+To set up a custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway-service-and-deployment-instance).
 
 ### Step 2: Update the Knative gateway
 
@@ -306,11 +306,11 @@ spec:
       gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.custom-ns.svc.cluster.local"
 ```
 
-The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}}.{{gateway_name}}`.
+The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
 
 ## Replace the knative-ingress-gateway gateway
 
-To create the ingress gateway, follow [**Step 1: Create the Gateway**](../../../serving/setting-up-custom-ingress-gateway.md/#step-1-create-the-gateway).
+To create the ingress gateway, follow [**Step 1: Create the Gateway**](../../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway).
 
 ### Step 2: Update Gateway ConfigMap
 
@@ -328,7 +328,7 @@ spec:
       gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
 ```
 
-The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}}.{{gateway_name}}`.
+The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
 
 ## Configuration of cluster local gateway
 
