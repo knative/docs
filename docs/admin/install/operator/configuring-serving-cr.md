@@ -344,9 +344,9 @@ spec:
 
 ## High availability
 
-By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following leader-elected controllers: `controller`, `autoscaler-hpa`, `net-istio-controller`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
+By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for the all deployments managed by the operator.
 
-The following configuration specifies a replica count of 3 for the controllers and a minimum of 3 activators (which may scale higher if needed):
+The following configuration specifies a replica count of 3 for the deployments:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -358,6 +358,21 @@ spec:
   high-availability:
     replicas: 3
 ```
+
+This field also configures the `HorizontalPodAutoscaler` resources based on the `spec.high-availability`. Let's say operator includes the following HorizontalPodAutoscaler:
+
+```yaml
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  ...
+spec:
+  minReplicas: 3
+  maxReplicas: 5
+```
+
+If you configures `replicas: 2` (less than minReplicas), the operator transforms the `minReplicas` to `1`.
+Also if you configures `replicas: 6` (more than maxReplicas), the operator transforms the `maxReplicas` to `maxReplicas + (replicas - minReplicas)` which is `8`.
 
 ## System Resource Settings
 
