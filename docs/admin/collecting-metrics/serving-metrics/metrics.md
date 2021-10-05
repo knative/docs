@@ -33,7 +33,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 | not_ready_pods | Number of pods that are not ready currently | Gauge | configuration_name=<br>namespace_name=<br>revision_name<br>service_name |  Dimensionless | Stable |
 | pending_pods | Number of pods that are pending currently | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name | Dimensionless | Stable |
 | terminating_pods | Number of pods that are terminating currently | Gauge | configuration_name<br>namespace_name<br>revision_name<br>service_name<br> | Dimensionless | Stable |
-| scrape_time | Time to scrape metrics from the service pods in milliseconds | Histogram | configuration_name<br>namespace_name<br>revision_name<br>service_name<br> | Milliseconds | Stable |
+| scrape_time | Time autoscaler takes to scrape metrics from the service pods in milliseconds | Histogram | configuration_name<br>namespace_name<br>revision_name<br>service_name<br> | Milliseconds | Stable |
 
 ## Controller
 
