@@ -33,7 +33,7 @@ Follow the instructions in the documentation
 ### Highlights
 
 - **Kubernetes 1.20+ is now required**
-- Improvements for istio mesh compatibility mode.
+- Improvements for Istio mesh compatibility mode.
 - New features in eventing kafka
 - New CLI plugins available
 - Many improvements in install operator
