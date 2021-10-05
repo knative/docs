@@ -12,7 +12,7 @@ Follow this blog to keep up-to-date with Knative.
 
     Read about Knative-centric features, tools, and related topics.
 
-* **Steering Committee and TOC**
+* **Steering Committee and TOC:**
 
     Updates on Knative governance, technical direction, and the community.
 
