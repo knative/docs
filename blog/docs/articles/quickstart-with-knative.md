@@ -1,5 +1,5 @@
 ---
-title: Annoucing the Knative Quickstart plugin
+title: Announcing the Knative Quickstart plugin
 linkTitle: Knative Quickstart
 author: "Paul Schweigert, Senior Software Engineer @ IBM"
 date: 2021-09-17
