@@ -46,6 +46,7 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+      toc_depth: 1
   - def_list
 
 plugins:
