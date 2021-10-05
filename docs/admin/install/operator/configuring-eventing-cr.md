@@ -340,7 +340,7 @@ spec:
       disktype: hdd
 ```
 
-### Override tolerations
+### Override the tolerations
 
 The KnativeEventing resource is able to override tolerations for the Knative Eventing deployment resources.
 For example, if you would like to add the following tolerations

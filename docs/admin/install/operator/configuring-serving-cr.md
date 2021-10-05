@@ -485,7 +485,7 @@ spec:
 !!! note
     The KnativeServing resource `label` and `annotation` settings override the webhook's labels and annotations for both Deployments and Pods.
 
-### Override nodeSelector
+### Override the nodeSelector
 
 The following KnativeServing resource overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
 
@@ -502,7 +502,7 @@ spec:
       disktype: hdd
 ```
 
-### Override tolerations
+### Override the tolerations
 
 The KnativeServing resource is able to override tolerations for the Knative Serving deployment resources.
 For example, if you would like to add the following tolerations
