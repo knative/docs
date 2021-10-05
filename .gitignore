@@ -8,6 +8,8 @@ hack/__pycache__
 /temp/
 /temp-blog/
 /blog/site/
+/blog/overrides/
+/blog/docs/stylesheets/
 /node_modules/
 
 

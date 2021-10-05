@@ -83,6 +83,8 @@ fi
 
 # Create the blog
 # TODO copy templates, stylesheets, etc. into blog directory
+cp -r overrides blog/
+cp -r docs/images docs/stylesheets blog/docs/
 cd blog/
 mkdocs build -f mkdocs.yml -d ../site/blog
 cd -
