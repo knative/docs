@@ -1,4 +1,4 @@
-# Sources Configurations
+# Configure event source defaults
 
 Each Knative Source can be configured depending on how it is generating events. This document contains details about how to configure the available Sources that can be configured.
 
