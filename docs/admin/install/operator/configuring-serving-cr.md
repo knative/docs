@@ -344,7 +344,7 @@ spec:
 
 ## High availability
 
-By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for the all deployments managed by the operator.
+By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for all deployments managed by the operator.
 
 The following configuration specifies a replica count of 3 for the deployments:
 
