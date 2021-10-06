@@ -233,6 +233,7 @@ Knative Serving with different ingresses:
         ```
 
         Where:
+
         - `<local-gateway-namespace>` is the local gateway namespace, which is the same as Knative Serving namespace `knative-serving`.
         - `<istio-namespace>` is the namespace where Istio is installed.
 
