@@ -39,8 +39,8 @@
   border-bottom: 1px solid var(--home-color);
 }
 
-.md-tabs__list li:nth-last-child(1),
-.md-tabs__list li:nth-last-child(2) {
+/* Make community tab distinct until it moves to mkdocs */
+.md-tabs__list li:nth-last-child(1) {
   background: var(--home-color);
   float: right;
 }
