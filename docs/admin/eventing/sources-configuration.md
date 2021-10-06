@@ -1,6 +1,6 @@
 # Configure event source defaults
 
-Each Knative Source can be configured depending on how it is generating events. This document contains details about how to configure the available Sources that can be configured.
+This topic describes how to configure defaults for Knative event sources. You can configure event sources depending on how they generate events.
 
 ## Ping Source Configurations
 
