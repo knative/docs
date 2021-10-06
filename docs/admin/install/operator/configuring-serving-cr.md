@@ -359,7 +359,7 @@ spec:
     replicas: 3
 ```
 
-This field also configures the `HorizontalPodAutoscaler` resources based on the `spec.high-availability`. Let's say operator includes the following HorizontalPodAutoscaler:
+The `replicas` field also configures the `HorizontalPodAutoscaler` resources based on the `spec.high-availability`. Let's say the operator includes the following HorizontalPodAutoscaler:
 
 ```yaml
 apiVersion: autoscaling/v2beta2
