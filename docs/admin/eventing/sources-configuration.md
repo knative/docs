@@ -9,7 +9,7 @@ A [Ping Source](../../developer/eventing/sources/ping-source/README.md) is an ev
 In addition to the parameters that you can configure in the PingSource resource, there is a global ConfigMap called `config-ping-defaults`.
 This ConfigMap allows you to change the maximum amount of data that the PingSource adds to the CloudEvents it produces.
 
-The `dataMaxSize` parameter allows you to set the max number of bytes allowed to be sent for message excluding any base64 decoding. The default value (-1) is no limit set for data.
+The `dataMaxSize` parameter allows you to set the maximum number of bytes allowed to be sent for a message excluding any base64 decoding. The default value, `-1`, sets no limit for data.
 
 ```
 apiVersion: v1
