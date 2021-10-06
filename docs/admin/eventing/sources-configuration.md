@@ -22,7 +22,7 @@ data:
   dataMaxSize: -1
 ```
 
-You can edit this `ConfigMap` by running:
+You can edit this ConfigMap by running the command:
 
 ```
 kubectl edit cm config-ping-defaults -n knative-eventing
