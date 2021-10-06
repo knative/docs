@@ -2,7 +2,7 @@
 
 This topic describes how to configure defaults for Knative event sources. You can configure event sources depending on how they generate events.
 
-## Ping Source Configurations
+## Configure defaults for PingSource
 
 PingSource is an event source that produces events with a fixed payload on a specified cron schedule. For how to create a new PingSource, see [Creating a PingSource object](../../developer/eventing/sources/ping-source/README.md).
 For the available parameters, see [PingSource reference](../../developer/eventing/sources/ping-source/reference.md).
