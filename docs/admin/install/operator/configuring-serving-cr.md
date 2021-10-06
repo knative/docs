@@ -371,8 +371,9 @@ spec:
   maxReplicas: 5
 ```
 
-If you configures `replicas: 2` (less than minReplicas), the operator transforms the `minReplicas` to `1`.
-Also if you configures `replicas: 6` (more than maxReplicas), the operator transforms the `maxReplicas` to `maxReplicas + (replicas - minReplicas)` which is `8`.
+If you configure `replicas: 2`, which is less than `minReplicas`, the operator transforms `minReplicas` to `1`.
+
+If you configure `replicas: 6`, which is more than `maxReplicas`, the operator transforms `maxReplicas` to `maxReplicas + (replicas - minReplicas)` which is `8`.
 
 ## System Resource Settings
 
