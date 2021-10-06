@@ -7,9 +7,9 @@ fully qualified domain name for a route by default is
 To change the {default-domain} value there are a few steps involved:
 
 !!! tip
-    Customizing domain template effects on your cluster globally.
-    If you want to constomize the domain of each service, use `DomainMapping` instead.
-    For more details, please refer to [configuring custom domains](../developer/serving/services/custom-domains.md).
+    Customizing a domain template affects your cluster globally.
+    If you want to customize the domain of each service, use `DomainMapping` instead.
+    For more information, see [Configuring custom domains](../developer/serving/services/custom-domains.md).
 
 ## Edit using kubectl
 
