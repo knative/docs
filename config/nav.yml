@@ -68,6 +68,7 @@ nav:
             - Creating a Service: developer/serving/services/creating-services.md
             - Service metrics: developer/serving/services/service-metrics.md
             - Configuring private Services: developer/serving/services/private-services.md
+            - Configuring Services custom ingress class: developer/serving/services/ingress-class.md
             - Configuring custom domains: developer/serving/services/custom-domains.md
             - Using a custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
             - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
@@ -95,6 +96,7 @@ nav:
                 - Moving to knative-sandbox: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
             - ApiServerSource:
               - Overview: developer/eventing/sources/apiserversource/README.md
+              - Creating an ApiServerSource object: developer/eventing/sources/apiserversource/getting-started/README.md
               - ApiServerSource reference: developer/eventing/sources/apiserversource/reference.md
             - Camel source: developer/eventing/sources/apache-camel-source/README.md
             - ContainerSource:
@@ -201,6 +203,8 @@ nav:
         - Creating a broker: eventing/broker/create-mtbroker.md
         - Triggers: eventing/broker/triggers/README.md
         - Broker configuration example: eventing/broker/example-mtbroker.md
+        - Apache Kafka Broker:
+          - Overview: eventing/broker/kafka-broker/README.md
       - Debugging: eventing/debugging/README.md
       - Accessing CloudEvent traces: eventing/accessing-traces.md
       - Experimental Features: eventing/experimental-features.md
