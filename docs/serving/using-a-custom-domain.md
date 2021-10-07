@@ -88,7 +88,7 @@ kubectl get route helloworld-go --output jsonpath="{.status.url}"
 
 You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 
-## Temporary DNS
+## Verify the domain using temporary DNS
 
 If you are using curl to access the sample applications, or your own Knative app, there is a temporary approach
 to verify the customized domain.
@@ -108,7 +108,7 @@ In the case of the provided `helloworld-go` sample application, using the defaul
 Hello Go Sample v1!
 ```
 
-Refer to the "Publish your Domain" method for a permanent solution.
+Refer to the [Publish your Domain](#publish-your-domain) method for a permanent solution.
 
 ## Publish your Domain
 
