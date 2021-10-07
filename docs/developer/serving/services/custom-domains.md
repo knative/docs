@@ -14,7 +14,7 @@ serve a Knative Service at this domain.
     the private Knative Service is accessible from public internet with the custom domain of the domain mapping.
 
 !!! tip
-    This topic instructs how to customize the domain of each service regardless of the default domain.
+    This topic instructs how to customize the domain of each service, regardless of the default domain.
     If you want to customize the domain template to assign the default domain name,
     see [Setting up a custom domain template](../../../serving/using-a-custom-domain.md).
 
