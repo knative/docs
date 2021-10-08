@@ -107,7 +107,7 @@ Trigger's behaviour can be modified by setting the following two annotations:
 - `eventing.knative.dev/injection`: if set to `enabled` Eventing will automatically create a Broker for a trigger if it doesn't exist, in the namespace where the Trigger is created.
 - `knative.dev/dependency`: this annotation is used to mark the sources that the Trigger depends on. If one of the dependencies is not ready, the Trigger will not be ready.
 
-The following is an example of a trigger with a dependency:
+The following YAML is an example of a Trigger with a dependency:
 ```yaml
 apiVersion: eventing.knative.dev/v1
     kind: Trigger
