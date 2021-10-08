@@ -102,7 +102,7 @@ This example filters events from the `default` broker that are of type
 
 ## Trigger annotations
 
-Trigger's behaviour can be modified by setting the following two annotations:
+You can modify a Trigger's behavior by setting the following two annotations:
 
 - `eventing.knative.dev/injection`: if set to `enabled`, Eventing automatically creates a Broker for a Trigger if it doesn't exist. The Broker is created in the namespace where the Trigger is created. This applies only if the [Eventing Sugar Controller](../../sugar/README.md) is enabled. 
 - `knative.dev/dependency`: this annotation is used to mark the sources that the Trigger depends on. If one of the dependencies is not ready, the Trigger will not be ready.
