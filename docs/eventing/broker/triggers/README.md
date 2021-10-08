@@ -100,7 +100,7 @@ This example filters events from the `default` broker that are of type
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-## Trigger's Annotations
+## Trigger annotations
 
 Trigger's behaviour can be modified by setting the following two annotations:
 
