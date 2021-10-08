@@ -108,7 +108,7 @@ Trigger's behaviour can be modified by setting the following two annotations:
 - `knative.dev/dependency`: this annotation is used to mark the sources that the Trigger depends on. If one of the dependencies is not ready, the Trigger will not be ready.
 
 The following is an example of a trigger with a dependency:
-```
+```yaml
 apiVersion: eventing.knative.dev/v1
     kind: Trigger
     metadata:
