@@ -104,26 +104,26 @@ This example filters events from the `default` broker that are of type
 
 You can modify a Trigger's behavior by setting the following two annotations:
 
-- `eventing.knative.dev/injection`: if set to `enabled`, Eventing automatically creates a Broker for a Trigger if it doesn't exist. The Broker is created in the namespace where the Trigger is created. This applies only if the [Eventing Sugar Controller](../../sugar/README.md) is enabled. 
+- `eventing.knative.dev/injection`: if set to `enabled`, Eventing automatically creates a Broker for a Trigger if it doesn't exist. The Broker is created in the namespace where the Trigger is created. This applies only if the [Eventing Sugar Controller](../../sugar/README.md) is enabled. This annotation only works if you have the [Sugar Controller](../../sugar/README.md) enabled, which is optional and not enabled by default. 
 - `knative.dev/dependency`: this annotation is used to mark the sources that the Trigger depends on. If one of the dependencies is not ready, the Trigger will not be ready.
 
 The following YAML is an example of a Trigger with a dependency:
 ```yaml
 apiVersion: eventing.knative.dev/v1
-    kind: Trigger
-    metadata:
-      name: my-service-trigger
-      annotations:
-        knative.dev/dependency: '{"kind":"PingSource","name":"test-ping-source","apiVersion":"sources.knative.dev/v1"}'
-    spec:
-      broker: default
-      filter:
-        attributes:
-          type: dev.knative.foo.bar
-          myextension: my-extension-value
-      subscriber:
-        ref:
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          name: my-service
+kind: Trigger
+metadata:
+  name: my-service-trigger
+  annotations:
+    knative.dev/dependency: '{"kind":"PingSource","name":"test-ping-source","apiVersion":"sources.knative.dev/v1"}'
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.foo.bar
+      myextension: my-extension-value
+    subscriber:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: my-service
 ```
