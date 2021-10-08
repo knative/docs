@@ -33,10 +33,13 @@ Knative Serving sample apps.
 | Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](serving/helloworld-clojure/), [Dart](serving/helloworld-dart/), [Elixir](serving/helloworld-elixir/), [Haskell](serving/helloworld-haskell/), [Java - Micronaut](serving/helloworld-java-micronaut/), [Java - Quarkus](serving/helloworld-java-quarkus/), [R - Go Server](serving/helloworld-r/), [Rust](serving/helloworld-rust/), [Swift](serving/helloworld-swift/), [Vertx](serving/helloworld-vertx/) |
 | Machine Learning | A quick introduction to using Knative Serving to serve machine learning models | [Python - BentoML](serving/machinelearning-python-bentoml)
 
-#### Eventing and Eventing Resources samples
+### Eventing and Eventing Resources samples
 
-- _Be the first to contribute an Eventing or Eventing Sources code sample to the
-  community collection._
+Knative Eventing sample apps.
+
+| Sample Name | Description | Language(s) |
+| ----------- | ----------- | ----------- |
+| Workflow as a function flow | A sample application illustrating Workflow as a function flow concept that builds on top of Knative Eventing and CloudEvents. |[Java (with BPMN or with Serverless workflow)](eventing/automatiko)|
 
 ### Client samples
 

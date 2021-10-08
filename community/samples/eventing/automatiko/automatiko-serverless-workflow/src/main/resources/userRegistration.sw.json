@@ -1,0 +1,187 @@
+{
+	"id": "userRegistration",
+	"name": "User Registration Workflow",
+	"version": "1.0",
+	"start": "Validate User",
+	"functions": [
+		{
+			"name": "isValid",
+			"operation": "isValid",
+			"type": "expression"
+		},
+		{
+			"name": "assignUserIdAndPassword",
+			"operation": "assignUserIdAndPassword",
+			"type": "expression"
+		},
+		{
+			"name": "Notify invalid data",
+			"operation": "notifyInvalidData",
+			"type": "expression"
+		},
+		{
+			"name": "Notify success",
+			"operation": "notifySuccess",
+			"type": "expression"
+		},
+		{
+			"name": "Notify server error",
+			"operation": "notifyServerError",
+			"type": "expression"
+		},
+		{
+			"name": "getUserByName",
+			"operation": "api/swagger.json#getUserByName",
+			"type": "rest"
+		},
+		{
+			"name": "createUser",
+			"operation": "api/swagger.json#createUser",
+			"type": "rest"
+		}
+	],
+	"states": [
+		{
+			"name": "Validate User",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Validate User",
+					"functionRef": {
+						"refName": "isValid",
+						"arguments": {
+							"data": "$..*"
+						}
+					}
+				}
+			],
+			"transition": "Is User Valid"
+		},
+		{
+			"name": "Is User Valid",
+			"type": "switch",
+			"dataConditions": [
+				{
+					"name": "Valid",
+					"condition": "{{ $.[?(@.valid == true)] }}",
+					"transition": "Generate username and password"
+				},
+				{
+					"name": "Invalid",
+					"condition": "{{ $.[?(@.valid == false)] }}",
+					"transition": "Notify invalid data"
+				}
+			]
+		},
+		{
+			"name": "Generate username and password",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Generate username and password",
+					"functionRef": {
+						"refName": "assignUserIdAndPassword",
+						"arguments": {
+							"data": "$..*"
+						}
+					}
+				}
+			],
+			"transition": "Check already registered"
+		},
+		{
+			"name": "Check already registered",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Is user registered",
+					"functionRef": {
+						"refName": "getUserByName",
+						"arguments": {
+							"user": "username"
+						}
+					}
+				}
+			],
+			"onErrors": [
+				{
+					"error": "NotFound",
+					"code": "404",
+					"transition": "Register user"
+				}
+			],
+			"end": true
+		},
+		{
+			"name": "Register user",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Create",
+					"functionRef": {
+						"refName": "createUser",
+						"arguments": {
+							"user": "user"
+						}
+					}
+				}
+			],
+			"onErrors": [
+				{
+					"error": "NotFound",
+					"code": "500",
+					"transition": "Notify server error"
+				}
+			],
+			"transition": "Notify success"
+		},
+		{
+			"name": "Notify invalid data",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Notify invalid data",
+					"functionRef": {
+						"refName": "Notify invalid data",
+						"arguments": {
+							"user": "user"
+						}
+					}
+				}
+			],
+			"end": true
+		},
+		{
+			"name": "Notify success",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Send successful notification",
+					"functionRef": {
+						"refName": "Notify success",
+						"arguments": {
+							"user": "user"
+						}
+					}
+				}
+			],
+			"end": true
+		},
+		{
+			"name": "Notify server error",
+			"type": "operation",
+			"actions": [
+				{
+					"name": "Send server error notification",
+					"functionRef": {
+						"refName": "Notify success",
+						"arguments": {
+							"user": "user"
+						}
+					}
+				}
+			],
+			"end": true
+		}
+	]
+}
