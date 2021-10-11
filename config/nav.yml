@@ -114,7 +114,7 @@ nav:
               - Overview: developer/eventing/sources/sinkbinding/README.md
               - Creating a SinkBinding object: developer/eventing/sources/sinkbinding/getting-started.md
               - SinkBinding reference: developer/eventing/sources/sinkbinding/reference.md
-          - Event delivery: developer/eventing/event-delivery.md
+          - Handling delivery failure: developer/eventing/event-delivery.md
           - Event sinks:
             - About sinks: developer/eventing/sinks/README.md
             - KafkaSink: developer/eventing/sinks/kafka-sink.md
