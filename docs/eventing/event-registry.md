@@ -1,8 +1,8 @@
 # Using the event registry
 
-The event registry is designed for use with the Broker and Trigger model, and
-provides information to help you create Triggers.
-The registry maintains a catalog of event types that each Broker can consume.
+The event registry maintains a catalog of event types that each Broker can consume.
+It is designed for use with the Broker and Trigger model, and provides information
+to help you create Triggers.
 
 This topic introduces the EventType custom resource and provides information about
 how to populate the event registry, how to discover events using the registry,
