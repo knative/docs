@@ -1,13 +1,5 @@
 # Regenerate /golang instructions
 
-1. Install `redir-gen`
+This tool regenerates the redirects in the `golang/` folder.
 
-```sh
-go get knative.dev/website/tools/redir-gen
-```
-
-2. From `docs` root directory, run `redir-gen`
-
-```sh
-$ redir-gen
-```
+Run as `go run ./tools/redir-gen/` from the root of the project.
