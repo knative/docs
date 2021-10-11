@@ -83,6 +83,7 @@ nav:
           - Troubleshooting:
             - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
         - Knative Eventing:
+          - Overview: developer/eventing/README.md
           - Event sources:
             - Overview: developer/eventing/sources/README.md
             - Creating an event source:
