@@ -35,15 +35,15 @@ new adapter with passed variables via the `EnvConfigAccessor`. The created adapt
     }
     ```
 
-1. A `Start` function, implemented as an interface to the adapter struct:
+1. A `Start` function, implemented as an interface to the adapter `struct`:
 
     ```go
     func (a *Adapter) Start(stopCh <-chan struct{}) error {
     ```
 
-    `stopCh` is the signal to stop the Adapter.  Otherwise the role of the function is to process the next event.
+    `stopCh` is the signal to stop the adapter. Otherwise, the role of the function is to process the next event.
 
-    In the case of the `sample-source`, it creates an event to forward to the specified cloudevent sink/client every X interval, as specified by the loaded `EnvConfigAccessor` (loaded via the resource yaml).
+    In the case of the `sample-source`, this function creates a CloudEvent to forward to the specified sink every X interval, as specified by the `EnvConfigAccessor` parameter, which is loaded by the resource YAML:
 
     ```go
     func (a *Adapter) Start(stopCh <-chan struct{}) error {
@@ -101,13 +101,13 @@ new adapter with passed variables via the `EnvConfigAccessor`. The created adapt
         ra, err := r.KubeClientSet.AppsV1().Deployments(namespace).Get(expected.Name, metav1.GetOptions{})
         ```
 
-    1. Otherwise, create a receive adapter deployment:
+    1. If there is no existing receive adapter deployment, create one:
 
         ```go
         ra, err = r.KubeClientSet.AppsV1().Deployments(namespace).Create(expected)
         ```
 
-    1. Check if the expected spec if different from the existing spec, and update the deployment if required:
+    1. Check if the expected spec is different from the existing spec, and update the deployment if required:
 
         ```go
         } else if r.podSpecImageSync(expected.Spec.Template.Spec, ra.Spec.Template.Spec) {
@@ -119,9 +119,9 @@ new adapter with passed variables via the `EnvConfigAccessor`. The created adapt
 
     1. If updated, record the event:
 
-    ```go
-    return pkgreconciler.NewEvent(corev1.EventTypeNormal, "DeploymentUpdated", "updated deployment: \"%s/%s\"", namespace, name)
-    ```
+        ```go
+        return pkgreconciler.NewEvent(corev1.EventTypeNormal, "DeploymentUpdated", "updated deployment: \"%s/%s\"", namespace, name)
+        ```
 
     1. If successful, update the `Status` and `MarkDeployed`:
 
@@ -129,7 +129,7 @@ new adapter with passed variables via the `EnvConfigAccessor`. The created adapt
         src.Status.PropagateDeploymentAvailability(ra)
         ```
 
-1. Create a sinkbinding to bind the receive adapter with the sink.
+1. Create a SinkBinding to bind the receive adapter with the sink.
 
     1. Create a `Reference` for the receive adapter deployment. This deployment is the SinkBinding's source:
 
@@ -149,13 +149,13 @@ new adapter with passed variables via the `EnvConfigAccessor`. The created adapt
         sb, err := r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Get(expected.Name, metav1.GetOptions{})
         ```
 
-    1. If no existing SinkBinding exists, create one:
+    1. If there is no existing SinkBinding, create one:
 
         ```go
         sb, err = r.EventingClientSet.SourcesV1alpha2().SinkBindings(namespace).Create(expected)
         ```
 
-    1. Check if the expected spec is different to the existing spec, and update the `SinkBinding` if required:
+    1. Check if the expected spec is different to the existing spec, and update the SinkBinding if required:
 
         ```go
         else if r.specChanged(sb.Spec, expected.Spec) {

@@ -9,16 +9,6 @@ own event sources in Knative.
 To create a custom event source using ContainerSource, you must create a
 container image, and a ContainerSource that uses your image URI.
 
-## Develop, build and publish a container image
-
-A container image can be developed with any language, and can be built and published by using any tools you like. Here are some basic guidelines:
-
-- The container image must have a `main` method.
-- The `main` method accepts parameters from arguments and environment
-  variables.
-- Two environments variables are be injected by the ContainerSource controller; `K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
-- The event messages are sent to the sink URI specified in `K_SINK`. The message can be any format, however [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) format is recommended.
-
 ## Before you begin
 
 Before you can create a ContainerSource object:
@@ -30,6 +20,16 @@ installed on your cluster.
     - Set `KO_DOCKER_REPO`. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`
     - Authenticate with your `KO_DOCKER_REPO`
     - Install [`docker`](https://docs.docker.com/install/)
+
+## Develop, build and publish a container image
+
+You can develop a container image by using any language, and can build and publish your image by using any tools you like. The following are some basic guidelines:
+
+- The container image must have a `main` method.
+- The `main` method accepts parameters from arguments and environment
+  variables.
+- Two environments variables are injected by the ContainerSource controller; `K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
+- The event messages are sent to the sink URI specified in `K_SINK`. The message can be any format; however, [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) format is recommended.
 
 ## Create a ContainerSource object
 

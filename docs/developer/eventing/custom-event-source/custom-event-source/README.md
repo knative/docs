@@ -6,7 +6,7 @@ If you want to create a custom event source for a specific event producer type, 
 |------|---------------------|
 |Receive adapter|Contains logic that specifies how to get events from a producer, what the sink URI is, and how to translate events into the CloudEvent format.|
 |Kubernetes controller|Manages the event source and reconciles underlying receive adapter deployments.|
-|Custom resource definition (CRD)|Provides the configuration that is used by the controller to manage the receive adapter.|
+|Custom resource definition (CRD)|Provides the configuration that the controller uses to manage the receive adapter.|
 
 <!--TODO: Add links to components pages-->
 

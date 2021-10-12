@@ -41,8 +41,8 @@ Optional:
     - Source ready
     - Sink provided
     - Deployed
-    - Eventtype provided
-    - K8s resources correct
+    - EventType provided
+    - Kubernetes resources correct
 
 <!-- TODO: Add definitions / explanations for these statuses-->
 
@@ -116,7 +116,7 @@ Optional:
     )
     ```
 
-1. Define the functions to be called from the reconciler functions to set the lifecycle conditions. This is typically done in `pkg/apis/samples/VERSION/samplesource_lifecycle.go`:
+1. Set the lifecycle conditions by defining the functions to be called from the reconciler functions. This is typically done in `pkg/apis/samples/VERSION/samplesource_lifecycle.go`:
 
     ```go
     // InitializeConditions sets relevant unset conditions to Unknown state.
