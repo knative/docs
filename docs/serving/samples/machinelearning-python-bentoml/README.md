@@ -32,7 +32,9 @@ BentoML creates a model API server by using prediction service abstraction. In t
 1. Asks BentoML to identify the required `pip` dependencies.
 1. Defines an API, which is the entry point for accessing this machine learning service.
 
---8<-- "iris_classifier.py"
+```python
+--8<-- "../serving/samples/machinelearning-python-bentoml/iris_classifier.py"
+```
 
 ### main
 
