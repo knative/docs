@@ -8,7 +8,9 @@ You can override the default behavior for each Service or global configuration.
 
 * **Global key:** `httpProtocol`
 * **Per-revision annotation key:** `networking.knative.dev/httpOption`
-* **Possible values:** `enabled` or `redirected`. (`enabled` means services will accept HTTP traffic. `redirected` means services send a 301 redirect for all HTTP connections and ask clients to use HTTPS instead.)
+* **Possible values:**
+    * `enabled` &mdash; Services accept HTTP traffic.
+    * `redirected` &mdash; Services send a 301 redirect for all HTTP connections and ask clients to use HTTPS instead.
 * **Default:** `enabled`
 
 **Example:**
