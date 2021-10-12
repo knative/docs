@@ -99,7 +99,7 @@ option to specify the Knative application's host name.
 For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
 
 ```bash
-curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
+curl -H "Host: helloworld-go.default.mydomain.com" http://192.168.39.228:32198
 ```
 
 In the case of the provided `helloworld-go` sample application, using the default configuration, the output is:
