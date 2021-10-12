@@ -91,8 +91,8 @@ nav:
           - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md
           - HTTPS redirection: developer/serving/services/http-option.md
         - Traffic management: developer/serving/traffic-management.md
-          - Configuring gradual rollout of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
-          - Tag resolution: developer/serving/tag-resolution.md
+        - Configuring gradual rollout of traffic to Revisions: developer/serving/rolling-out-latest-revision.md
+        - Tag resolution: developer/serving/tag-resolution.md
         - Deploying from private registries: developer/serving/deploying-from-private-registry.md
         - Troubleshooting:
           - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
