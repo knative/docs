@@ -2,7 +2,7 @@
 
 Operators can force HTTPS redirection for all Services. See the `httpProtocol` mentioned in the [Turn on AutoTLS](../../../serving/using-auto-tls.md) page for more details.
 
-### Overriding the default HTTP behaviour
+## Overriding the default HTTP behavior
 
 You can override the default behavior for each Service or global configuration.
 
