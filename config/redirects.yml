@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md: eventing/samples/writing-event-source-easy-way/README.md
       developer/eventing/sources/containersource/reference.md: developer/eventing/custom-event-source/containersource/reference.md
       developer/eventing/sources/sinkbinding/reference.md: developer/eventing/custom-event-source/sinkbinding/reference.md
       developer/eventing/sources/sinkbinding/getting-started.md: developer/eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
