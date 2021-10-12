@@ -1,20 +1,8 @@
----
-title: "Writing an event source using Javascript"
-weight: 10
-type: "docs"
-showlandingtoc: "false"
-aliases:
-  - /docs/eventing/samples/writing-event-source-easy-way
----
-
 # Writing an event source using JavaScript
 
 This tutorial provides instructions to build an event source in JavaScript and implement it with a ContainerSource or SinkBinding.
 
-- Using a [ContainerSource](../../containersource/README.md) is a simple way to turn any dispatcher container into a Knative event source.
-- Using [SinkBinding](../../sinkbinding/README.md) provides a framework for injecting environment variables into any Kubernetes resource that has a `spec.template` and is [PodSpecable](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#PodSpecable).
-
-ContainerSource and SinkBinding both work by injecting environment variables to an application. Injected environment variables at minimum contain the URL of a sink that will receive events.
+ContainerSource and SinkBinding both work by injecting environment variables to an application. Injected environment variables at minimum contain the URL of a sink that receives events.
 
 ## Bootstrapping
 
@@ -118,7 +106,7 @@ image, and push it to a container registry that your cluster can access.
     docker push $REGISTRY/node-heartbeat-source:v1
     ```
 
-2. Create the event display service which logs any CloudEvents posted to it:
+1. Create the event display service which logs any CloudEvents posted to it:
 
     ```yaml
     apiVersion: serving.knative.dev/v1
@@ -132,7 +120,7 @@ image, and push it to a container registry that your cluster can access.
             - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
 
-3. Create the ContainerSource object:
+1. Create the ContainerSource object:
 
     ```yaml
     apiVersion: sources.knative.dev/v1
@@ -152,11 +140,13 @@ image, and push it to a container registry that your cluster can access.
           name: event-display
     ```
 
-4. Check the logs of the event display service. You will see a new message is pushed every second:
+1. Check the logs of the `event-display` Service. You can observe that a new message is pushed every second:
 
     ```bash
     $ kubectl logs -l serving.knative.dev/service=event-display -c user-container
+    ```
 
+    ```bash
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -171,11 +161,13 @@ image, and push it to a container registry that your cluster can access.
       }
     ```
 
-5. Optional: If you are interested in seeing what is injected into the event source as a `K_SINK`, you can check the logs:
+1. Optional: If you are interested in seeing what is injected into the event source as a `K_SINK`, you can check the logs:
 
     ```bash
     $ kubectl logs heartbeat-source-7575c888c7-85w5t
+    ```
 
+    ```bash
     Sink URL is http://event-display.default.svc.cluster.local
     Emitting event #1
     Emitting event #2
@@ -189,7 +181,7 @@ SinkBinding does not create any containers. It injects the sink information to a
 
 ### Procedure
 
-1. Create an event display service:
+1. Create the `event-display` service:
 
     ```yaml
     apiVersion: serving.knative.dev/v1
@@ -203,7 +195,7 @@ SinkBinding does not create any containers. It injects the sink information to a
             - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
     ```
 
-2. Create a Kubernetes deployment that runs the event source:
+1. Create a Kubernetes Deployment that runs the event source:
 
     ```yaml
     apiVersion: apps/v1
@@ -229,18 +221,20 @@ SinkBinding does not create any containers. It injects the sink information to a
             - containerPort: 8080
     ```
 
-3. Because the SinkBinding has not yet been created, you will see an error message, because the `K_SINK` environment variable is not yet injected:
+1. Because the SinkBinding has not yet been created, you will see an error message, because the `K_SINK` environment variable is not yet injected:
 
     ```bash
     $ kubectl logs node-heartbeats-deployment-9ffbb644b-llkzk
+    ```
 
+    ```bash
     Sink URL is undefined
     Emitting event #1
     Error during event post
     TypeError [ERR_INVALID_ARG_TYPE]: The "url" argument must be of type string. Received type undefined
     ```
 
-4. Create the SinkBinding object:
+1. Create the SinkBinding object:
 
     ```yaml
     apiVersion: sources.knative.dev/v1
@@ -261,13 +255,15 @@ SinkBinding does not create any containers. It injects the sink information to a
           name: event-display
     ```
 
-    You will see the pods are recreated and this time the `K_SINK` environment variable is injected.
+    Observe that the Pods are recreated and this time the `K_SINK` environment variable is injected.
 
-    Also note that since the `replicas` is set to 2, there will be 2 pods that are posting events to the sink.
+    Since the `replicas` is set to 2, there are 2 pods that are posting events to the sink:
 
     ```bash
     $ kubectl logs event-display-dpplv-deployment-67c9949cf9-bvjvk -c user-container
+    ```
 
+    ```bash
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,

@@ -1,18 +1,13 @@
-# Creating a ContainerSource object
+# Create a ContainerSource
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
-
-This topic describes how to configure ContainerSource as an event source for
-functions.
 
 The ContainerSource object starts a container image that generates events and
 sends messages to a sink URI. You can also use ContainerSource to support your
 own event sources in Knative.
 
-In the following examples, the event source is a heartbeats container and the sink
-is a Knative Service.
-If you have an existing event source and sink, you can replace the examples with
-your own values.
+To create a custom event source using ContainerSource, you must create a
+container image, and a ContainerSource that uses your image URI.
 
 ## Before you begin
 
@@ -25,6 +20,13 @@ installed on your cluster.
     - Set `KO_DOCKER_REPO`. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`
     - Authenticate with your `KO_DOCKER_REPO`
     - Install [`docker`](https://docs.docker.com/install/)
+
+## Develop, build and publish a container image
+
+You can develop a container image by using any language, and can build and publish your image by using any tools you like. The following are some basic guidelines:
+
+- Two environments variables are injected by the ContainerSource controller; `K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
+- The event messages are sent to the sink URI specified in `K_SINK`. The message must be sent as a POST in [CloudEvents HTTP format](https://github.com/cloudevents/spec/blob/v1.0.1/http-protocol-binding.md).
 
 ## Create a ContainerSource object
 
