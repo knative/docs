@@ -66,7 +66,7 @@ new adapter with passed variables via the `EnvConfigAccessor`. The created adapt
     }
     ```
 
-## Procedure
+## Managing the Receive Adapter in the Controller
 
 1. Update the `ObservedGeneration` and initialize the `Status` conditions, as defined in the `samplesource_lifecycle.go` and `samplesource_types.go` files:
 
