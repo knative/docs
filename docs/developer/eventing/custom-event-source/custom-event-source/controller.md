@@ -78,7 +78,7 @@ func NewController(ctx context.Context, cmw configmap.Watcher) *controller.Impl 
     }
     ```
 
-    A `configmap.Watcher`and a context, which the injected listers use for the reconciler struct arguments, are passed to this implementation:
+    A `configmap.Watcher` and a context, which the injected listers use for the reconciler struct arguments, are passed to this implementation.
 
 1. Import the base reconciler from the `knative.dev/pkg` dependency:
 

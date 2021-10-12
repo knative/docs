@@ -25,11 +25,8 @@ installed on your cluster.
 
 You can develop a container image by using any language, and can build and publish your image by using any tools you like. The following are some basic guidelines:
 
-- The container image must have a `main` method.
-- The `main` method accepts parameters from arguments and environment
-  variables.
 - Two environments variables are injected by the ContainerSource controller; `K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
-- The event messages are sent to the sink URI specified in `K_SINK`. The message can be any format; however, [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) format is recommended.
+- The event messages are sent to the sink URI specified in `K_SINK`. The message must be sent as a POST in [CloudEvents HTTP format](https://github.com/cloudevents/spec/blob/v1.0.1/http-protocol-binding.md).
 
 ## Create a ContainerSource object
 

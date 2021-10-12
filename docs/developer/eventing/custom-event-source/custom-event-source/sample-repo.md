@@ -13,7 +13,7 @@ Optional:
 
 - Install the [`ko`](https://github.com/google/ko/) CLI tool.
 - Install the [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) CLI tool.
-- Set up [minikube](https://github.com/kubernetes/minikube).
+- Set up [minikube](https://github.com/kubernetes/minikube) or [kind](https://kind.sigs.k8s.io/).
 
 ## Sample files overview
 
