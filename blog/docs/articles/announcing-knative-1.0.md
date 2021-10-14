@@ -13,6 +13,7 @@ During the last several years, Knative has overcome many initial limitations to 
 **We believe this milestone brings Knative a big step closer to achieving our mission of simplifying the developer’s experience on Kubernetes and empowering teams to focus on what’s important.**
 
 This is what will happen on Nov. 2, 2021:
+
 * All the repositories covered in ["the release train"](https://github.com/knative/release) will have a 1.0- release.
 * The core components (Serving, Eventing) will be [general available (GA)](https://github.com/knative/community/blob/main/mechanics/MATURITY-LEVELS.md#stable); extension components (serving/eventing features, net-* plugins, channel/broker, sources) will either be in Alpha, Beta, or GA state.. Their respective maturity level will be published on their README.md or documentation pages.
 
