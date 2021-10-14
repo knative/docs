@@ -22,9 +22,13 @@ Follow this blog to keep up-to-date with Knative.
 
 # Featured Posts
 
+## Announcing: Knative 1.0 :tada:
+Knative is going 1.0!
+
+[Read more :octicons-arrow-right-24:](articles/announcing-knative-1.0.md){ .md-button }
+
 ## Distributed tracing with Knative, OpenTelemetry and Jaeger
 
 When trying to understand and diagnose our systems, one of the most basic tools we learn to lean on is the stack trace. Stack traces give us a structured view of the flow of logic that our program is executing in order to help us wrap our heads ...
 
 [Read more :octicons-arrow-right-24:](articles/distributed-tracing.md){ .md-button }
-
