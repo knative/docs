@@ -6,7 +6,7 @@ by a Knative Service.
 ## Before you begin
 
 1. Set up [Knative Serving](../../../serving/README.md).
-1. Ensure Knative Serving is [configured with a domain name](../../../serving/using-a-custom-domain.md) that allows GitHub to call into the cluster.
+1. Ensure Knative Serving is [configured with a domain name](../../../admin/serving/changing-default-domain.md) that allows GitHub to call into the cluster.
 1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
 1. Set up [Knative Eventing](../../../eventing/README.md).
 

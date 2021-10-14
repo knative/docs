@@ -66,6 +66,7 @@ nav:
           - Configuring gradual rollout of traffic to Revisions: admin/serving/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: admin/serving/feature-flags.md
           - Configure the Defaults ConfigMap: admin/serving/config-defaults.md
+          - Changing the default domain: admin/serving/changing-default-domain.md
         # Eventing config
         - Knative Eventing configuration:
           - Configure Channel defaults: admin/eventing/channel-configuration.md
@@ -87,7 +88,6 @@ nav:
           - Configuring ingress class: developer/serving/services/ingress-class.md
           - Configuring certificate class: developer/serving/services/certificate-class.md
           - Configuring custom domains: developer/serving/services/custom-domains.md
-          - Changing the default domain: developer/serving/changing-default-domain.md
           - Using a custom TLS certificate for DomainMapping: developer/serving/services/byo-certificate.md
           # TODO: Add security section to docs?
           - Configure resource requests and limits: developer/serving/services/configure-requests-limits-services.md

@@ -28,7 +28,7 @@ These components are delivered as Kubernetes custom resource definitions (CRDs),
 
 ### Configuration and networking
 
-- [Using a custom domain](serving/using-a-custom-domain.md)
+- [Using a custom domain](admin/serving/changing-default-domain.md)
 - [Configuring HTTPS with a custom certificate](serving/using-a-tls-cert.md)
 - [Configuring high availability](serving/config-ha.md)
 

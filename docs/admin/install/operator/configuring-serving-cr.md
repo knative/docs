@@ -44,7 +44,7 @@ The KnativeServing custom resource (CR) allows you to set values for these Confi
 Knative Serving has multiple ConfigMaps that are named with the prefix `config-`.
 The `spec.config` in the KnativeServing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
-In the [setup a custom domain example](../../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
+In the [setup a custom domain example](../../serving/changing-default-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
 
 ```yaml

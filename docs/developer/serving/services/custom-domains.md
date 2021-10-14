@@ -16,7 +16,7 @@ serve a Knative Service at this domain.
 !!! tip
     This topic instructs how to customize the domain of each service, regardless of the default domain.
     If you want to customize the domain template to assign the default domain name,
-    see [Changing the default domain](../../../serving/using-a-custom-domain.md).
+    see [Changing the default domain](../../../admin/serving/changing-default-domain.md).
 
 ## Prerequisites
 
