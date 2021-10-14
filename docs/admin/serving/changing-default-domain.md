@@ -1,6 +1,6 @@
 # Changing the default domain
 
-Customizing a domain template affects your cluster globally. If you want to customize the domain of each service, use `DomainMapping` instead. For more information, see [Configuring custom domains](./services/custom-domains.md).
+Customizing a domain template affects your cluster globally. If you want to customize the domain of each service, use `DomainMapping` instead. For more information, see [Configuring custom domains](../../developer/serving/services/custom-domains.md).
 
 ## Procedure
 
@@ -71,7 +71,7 @@ Customizing a domain template affects your cluster globally. If you want to cust
 
 > If you have an existing deployment, Knative reconciles the change made to the ConfigMap, and automatically updates the host name for all of the deployed Services and Routes.
 
-Deploy an app (for example, [`helloworld-go`](samples/hello-world/helloworld-go/README.md)), to your cluster as normal. You can retrieve the URL in Knative Route "helloworld-go" with the following command:
+Deploy an app (for example, [`helloworld-go`](../../serving/samples/hello-world/helloworld-go/README.md)), to your cluster as normal. You can retrieve the URL in Knative Route "helloworld-go" with the following command:
 
 ```bash
 kubectl get route helloworld-go --output jsonpath="{.status.url}"
@@ -83,7 +83,7 @@ You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 
 If you are using curl to access the sample applications, or your own Knative app, there is a temporary approach to verify the customized domain.
 
-Instruct `curl` to connect to the External IP or CNAME defined by the networking layer mentioned in [Install a networking layer](../admin/install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line option to specify the Knative application's host name. For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
+Instruct `curl` to connect to the External IP or CNAME defined by the networking layer mentioned in [Install a networking layer](../install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line option to specify the Knative application's host name. For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
 
 ```bash
 curl -H "Host: helloworld-go.default.example.com" http://192.168.39.228:32198
