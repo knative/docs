@@ -70,7 +70,7 @@ and which DNS provider validates those requests.
             server: https://acme-v02.api.letsencrypt.org/directory
             # This will register an issuer with LetsEncrypt.  Replace
             # with your admin email address.
-            email: myemail@gmail.com
+            email: name@example.com
             privateKeySecretRef:
               # Set privateKeySecretRef to any unused secret name.
               name: letsencrypt-dns-issuer
