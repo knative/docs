@@ -1,5 +1,5 @@
 ---
-title: "Announcing: Knative 1.0 :tada:"
+title: "Announcing: Knative 1.0 🎉"
 linkTitle: "Announcing: Knative 1.0"
 date: 2021-10-14
 description: "Announcing the release of Knative 1.0 on November 2, 2021."
