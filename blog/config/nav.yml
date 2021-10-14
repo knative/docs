@@ -31,7 +31,7 @@ nav:
           - releases/announcing-knative-v0-2-release.md
       - Articles:
           - articles/announcing-knative-1.0.md
-            articles/quickstart-with-knative.md
+          - articles/quickstart-with-knative.md
           - articles/distributed-tracing.md
           - articles/event-drive-app-knative-eventing-kogito.md
           - articles/orchestrating-cloud-events-with.md
