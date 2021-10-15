@@ -20,7 +20,7 @@ aggregating timeseries metrics and alerting. It can be used to scrape the OpenTe
        ```bash
        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
        helm repo update
-       helm install prometheus prometheus-community/kube-prometheus-stack -n default -f values.yaml 
+       helm install prometheus prometheus-community/kube-prometheus-stack -n default -f values.yaml
        # values.yaml contains at minimum the configuration below
        ```
 
@@ -35,14 +35,14 @@ aggregating timeseries metrics and alerting. It can be used to scrape the OpenTe
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
             podMonitorSelectorNilUsesHelmValues: false
- 
+
 1. Apply the ServiceMonitors/PodMonitors to cqollect metrics from Knative.
 
        ```bash
        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
        ```
 1. Grafana dashboards can be imported from https://github.com/knative-sandbox/monitoring/tree/main/grafana.
- 
+
 1. If you are using the Grafana Helm Chart with the Dashboard Sidecar configured, you can load the dashboards by applying the following configmap.
 
        ```bash
@@ -79,7 +79,7 @@ In the following example, you can configure a single collector instance using a 
 
 !!! tip
     For more complex deployments, you can automate some of these steps by using the [OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator).
-    
+
 !!! caution
     The Grafana dashboards at https://github.com/knative-sandbox/monitoring/tree/main/grafana don't work with metrics scraped from OpenTelemetry Collector.
 
