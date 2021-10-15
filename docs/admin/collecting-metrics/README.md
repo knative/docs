@@ -1,6 +1,6 @@
 # Collecting Metrics in Knative
 
-Knative offers two solutions for collecting metrics:
+Knative offers two popular architectures for collecting metrics:
 - [Prometheus](https://prometheus.io/)
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 
@@ -10,19 +10,20 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 
 ## About Prometheus
 
-[Prometheus](https://prometheus.io/) is an open-source tool for collecting and
-aggregating timeseries metrics. It can be used to scrape the OpenTelemetry collector that you created in the previous step.
+[Prometheus](https://prometheus.io/) is an open-source tool for collecting,
+aggregating timeseries metrics and alerting. It can be used to scrape the OpenTelemetry Collector that you created in the previous step when Prometheus is used a standalone monitoring and alerting system.
 
 ## Setting up Prometheus
 
-1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator/helm) by entering the following command:
+1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator/helm) by using [Helm](https://helm.sh/docs/intro/using_helm/):
 
        ```bash
        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
        helm repo update
-       helm install prometheus prometheus-community/kube-prometheus-stack -n default
+       helm install prometheus prometheus-community/kube-prometheus-stack -n default -f values.yaml 
+       # values.yaml contains at minimum the configuration below
        ```
-        
+
     !!! caution
         You will need to ensure that the helm chart has following values configured, otherwise the ServiceMonitors/Podmonitors will not work.
          ```yaml
@@ -42,6 +43,11 @@ aggregating timeseries metrics. It can be used to scrape the OpenTelemetry colle
        ```
 1. Grafana dashboards can be imported from https://github.com/knative-sandbox/monitoring/tree/main/grafana.
  
+1. If you are using the Grafana Helm Chart with the Dashboard Sidecar configured, you can load the dashboards by applying the following configmap.
+
+       ```bash
+       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/grafana/dashboards.yaml
+       ```
 
 ## About OpenTelemetry
 
