@@ -26,17 +26,17 @@ aggregating timeseries metrics and alerting. It can be used to scrape the OpenTe
 
     !!! caution
         You will need to ensure that the helm chart has following values configured, otherwise the ServiceMonitors/Podmonitors will not work.
-         ```yaml
-         kube-state-metrics:
-           metricLabelsAllowlist:
-             - pods=[*]
-             - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
-           prometheus:
-             prometheusSpec:
-               serviceMonitorSelectorNilUsesHelmValues: false
-               podMonitorSelectorNilUsesHelmValues: false
+        ```yaml
+        kube-state-metrics:
+          metricLabelsAllowlist:
+            - pods=[*]
+            - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+        prometheus:
+          prometheusSpec:
+            serviceMonitorSelectorNilUsesHelmValues: false
+            podMonitorSelectorNilUsesHelmValues: false
  
-1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
+1. Apply the ServiceMonitors/PodMonitors to cqollect metrics from Knative.
 
        ```bash
        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
