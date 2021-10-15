@@ -50,7 +50,7 @@ In the following example, you can configure a single collector instance using a 
        ```bash
        kubectl patch --namespace knative-serving configmap/config-observability \
          --type merge \
-         --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
+         --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
        kubectl patch --namespace knative-eventing configmap/config-observability \
          --type merge \
          --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
