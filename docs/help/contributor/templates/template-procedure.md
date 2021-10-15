@@ -71,7 +71,7 @@ For example:
 
 Before you create the `helloworld-java` sample app, you must have a Kubernetes cluster with Knative
 installed and DNS configured.
-See the [installation instructions](../../../install/) if you need to create one.
+See the [installation instructions](../../../install/README.md) if you need to create one.
 
 
 ## Task 1

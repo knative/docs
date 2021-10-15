@@ -4,7 +4,7 @@ This page shows how to install and configure an Apache KafkaSink.
 
 ## Prerequisites
 
-You must have access to a Kubernetes cluster with [Knative Eventing installed](../../../admin/install/).
+You must have access to a Kubernetes cluster with [Knative Eventing installed](../../../admin/install/README.md).
 
 ## Installation
 

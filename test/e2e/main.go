@@ -14,4 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package e2etest
+// Temporarily have an empty package here until we remove the prow jobs
+// https://github.com/knative/test-infra/pull/2891
+package e2e

@@ -28,6 +28,7 @@
 #   KAFKA_TLS_KEY_SECRET_KEY: Key within secret containing client key to use when connecting with TLS (optional)
 #   KAFKA_TLS_CA_CERT_SECRET_NAME: Name of secret containing server CA cert to use when connecting with TLS (optional)
 #   KAFKA_TLS_CA_CERT_SECRET_KEY: Key within secret containing server CA cert to use when connecting with TLS (optional)
+#   KAFKA_INITIAL_OFFSET initial offset for the consumer group, should be one of 'earliest' or 'latest' (optional)
 
 apiVersion: sources.knative.dev/v1beta1
 kind: KafkaSource
@@ -35,6 +36,7 @@ metadata:
   name: kafka-source
 spec:
   consumerGroup: KAFKA_CONSUMER_GROUP_NAME
+  initialOffset: KAFKA_INITIAL_OFFSET
   bootstrapServers:
     - KAFKA_BOOTSTRAP_SERVERS
   topics:

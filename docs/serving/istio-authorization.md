@@ -8,7 +8,7 @@ If you have configured additional security features, such as Istio's authorizati
 You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
 - Istio must be used for your Knative Ingress.
-See [Install a networking layer](../../admin/install/install-serving-with-yaml/#install-a-networking-layer).
+See [Install a networking layer](../admin/install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 - Istio sidecar injection must be enabled.
 See the [Istio Documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
 
@@ -50,7 +50,7 @@ If the activator isn't injected:
 
 - In STRICT mode, requests will simply be rejected.
 
-To understand when requests are forwarded through the activator, see [documentation](../load-balancing/target-burst-capacity/) on the `TargetBurstCapacity` setting.
+To understand when requests are forwarded through the activator, see the [target burst capacity](load-balancing/target-burst-capacity.md) documentation.
 
 This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.
 

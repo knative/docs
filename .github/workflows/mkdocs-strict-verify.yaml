@@ -19,7 +19,7 @@ name: Knative Verify
 
 on:
   pull_request:
-    branches: [ 'mkdocs', 'release-*' ]
+    branches: [ 'main', 'release-*' ]
 
 jobs:
 

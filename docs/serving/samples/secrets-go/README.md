@@ -17,7 +17,7 @@ cd knative-docs/docs/serving/samples/secrets-go
 ## Before you begin
 
 - A Kubernetes cluster with Knative installed. Follow the
-  [installation instructions](../../../install/) if you need to create
+  [installation instructions](../../../admin/install/serving/install-serving-with-yaml.md) if you need to create
   one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).

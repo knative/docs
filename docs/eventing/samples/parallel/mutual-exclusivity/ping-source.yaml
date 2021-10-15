@@ -1,4 +1,4 @@
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: me-ping-source

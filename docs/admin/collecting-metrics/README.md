@@ -49,6 +49,20 @@ aggregating timeseries metrics and alerting. It can be used to scrape the OpenTe
        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/grafana/dashboards.yaml
        ```
 
+### Access the Prometheus instance locally
+
+By default, the Prometheus instance is only exposed on a private service named `prometheus-operated`.
+
+To access the console in your web browser:
+
+1. Enter the command:
+
+    ```bash
+    kubectl port-forward -n default svc/prometheus-operated 9090
+    ```
+
+1. Access the console in your browser via `http://localhost:9090`.
+
 ## About OpenTelemetry
 
 OpenTelemetry is a CNCF observability framework for cloud-native software, which provides a collection of tools, APIs, and SDKs.
@@ -84,16 +98,14 @@ In the following example, you can configure a single collector instance using a 
 1. Create a namespace for the collector to run in, by entering the following command:
 
        ```bash
-       kubectl create namespace <namespace>
+       kubectl create namespace metrics
        ```
-    Where
-
-    - `<namespace>` is the name of the namespace that you want to create for the collector.
+    The next step uses the `metrics` namespace for creating the collector.
 
 1. Create a Deployment, Service, and ConfigMap for the collector by entering the following command:
 
        ```bash
-       kubectl apply -f https://raw.githubusercontent.com/knative/docs/master/docs/install/collecting-metrics/collector.yaml
+       kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/admin/collecting-metrics/collector.yaml
        ```
 
 1. Update the `config-observability` ConfigMaps in the Knative Serving and
@@ -117,4 +129,3 @@ In the following example, you can configure a single collector instance using a 
     ```
 
 1. Fetch `http://localhost:8889/metrics` to see the exported metrics.
-

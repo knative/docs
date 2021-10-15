@@ -7,7 +7,7 @@ Follow the procedure for the DNS of your choice:
 
 === "Magic DNS (sslip.io)"
 
-    Knative provides a Kubernetes Job called `default-domain` that configures Knative Serving to use <a href="http://sslip.io">sslip.io</a> as the default DNS suffix.
+    Knative provides a Kubernetes Job called `default-domain` that configures Knative Serving to use [sslip.io](http://sslip.io) as the default DNS suffix.
 
     ```bash
     kubectl apply -f {{artifact(repo="serving",file="serving-default-domain.yaml")}}

@@ -1,7 +1,7 @@
 # Sequence wired to another Sequence
 
 We are going to create the following logical configuration. We create a
-PingSource, feeding events to a [`Sequence`](../), then
+PingSource, feeding events to a [`Sequence`](../README.md), then
 taking the output of that `Sequence` and sending it to a second `Sequence` and
 finally displaying the resulting output.
 
@@ -223,7 +223,7 @@ This will create a PingSource which will send a CloudEvent with
 `{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: ping-source

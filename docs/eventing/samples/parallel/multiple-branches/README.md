@@ -9,7 +9,7 @@ The events produced by each branch are then sent to the `event-display` service.
 
 ## Prerequisites
 
-Please refer to the sample overview for the [prerequisites](../).
+Please refer to the sample overview for the [prerequisites](../README.md).
 
 ### Create the Knative Services
 
@@ -152,7 +152,7 @@ This will create a PingSource which will send a CloudEvent with
 `{"message": "Even or odd?"}` as the data payload every minute.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: ping-source

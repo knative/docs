@@ -128,7 +128,7 @@ kn source binding create bind-heartbeat \
 The `svc` in `http://event-display.svc.cluster.local` determines that the sink is a Knative Service. Other default sink prefixes include Channel and Broker.
 
 !!! tip
-    You can configure which resources can be used with the `--sink` flag for `kn` CLI commands by [Customizing kn](../../../../client/configure-kn/#example-configuration-file).
+    You can configure which resources can be used with the `--sink` flag for `kn` CLI commands by [Customizing kn](../../../client/configure-kn.md#example-configuration-file).
 
 ## Supported third-party sink types
 
@@ -136,3 +136,11 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 | -- | -- | -- |
 | [KafkaSink](kafka-sink.md)  | Knative  | Send events to a Kafka topic |
 | [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |
+
+
+[kubernetes-kinds]:
+  https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+[kubernetes-names]:
+  https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+[kubernetes-namespaces]:
+  https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/

@@ -1,6 +1,22 @@
 plugins:
   redirects:
     redirect_maps:
+      developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md: eventing/samples/writing-event-source-easy-way/README.md
+      developer/eventing/sources/containersource/reference.md: developer/eventing/custom-event-source/containersource/reference.md
+      developer/eventing/sources/sinkbinding/reference.md: developer/eventing/custom-event-source/sinkbinding/reference.md
+      developer/eventing/sources/sinkbinding/getting-started.md: developer/eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
+      developer/eventing/sources/sinkbinding/README.md: developer/eventing/custom-event-source/sinkbinding/README.md
+      developer/eventing/sources/containersource/README.md: developer/eventing/custom-event-source/containersource/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md: developer/eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md: developer/eventing/custom-event-source/custom-event-source/publish-event-source.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md: developer/eventing/custom-event-source/custom-event-source/receive-adapter.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md: developer/eventing/custom-event-source/custom-event-source/receive-adapter.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md: developer/eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/README.md: developer/eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md: developer/eventing/custom-event-source/custom-event-source/controller.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md: developer/eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/README.md: developer/eventing/custom-event-source/README.md
+      serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/feature-flags.md: admin/serving/feature-flags.md
       serving/using-subroutes.md: developer/serving/traffic-management.md
       serving/rolling-out-latest-revision.md: developer/serving/rolling-out-latest-revision.md
@@ -29,29 +45,21 @@ plugins:
       eventing/samples/sequence/sequence-reply-to-sequence/index.md: eventing/flows/sequence/sequence-reply-to-sequence/README.md
       eventing/samples/sequence/sequence-terminal/index.md: eventing/flows/sequence/sequence-terminal/README.md
       eventing/samples/sequence/sequence-with-broker-trigger/index.md: eventing/flows/sequence/sequence-with-broker-trigger/README.md
-      eventing/samples/sinkbinding/README.md: developer/eventing/sources/sinkbinding/README.md
-      eventing/samples/writing-event-source-easy-way/index.md: developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md
-      eventing/samples/writing-event-source/01-theory/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md
-      eventing/samples/writing-event-source/02-lifecycle-and-types/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md
-      eventing/samples/writing-event-source/03-controller/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md
-      eventing/samples/writing-event-source/04-reconciler/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md
-      eventing/samples/writing-event-source/05-receive-adapter/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md
-      eventing/samples/writing-event-source/06-yaml/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md
-      eventing/samples/writing-event-source/07-knative-sandbox/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md
-      eventing/samples/writing-event-source/index.md: developer/eventing/sources/creating-event-sources/writing-event-source/README.md
+      eventing/samples/sinkbinding/README.md: developer/eventing/custom-event-source/sinkbinding/README.md
       eventing/sequence.md: eventing/flows/sequence/README.md
       eventing/sink/README.md: developer/eventing/sinks/README.md
       eventing/sink/kafka-sink.md: developer/eventing/sinks/kafka-sink.md
       eventing/sources/apiserversource/index.md: developer/eventing/sources/apiserversource/README.md
       eventing/sources/pingsource/index.md: developer/eventing/sources/ping-source/README.md
-      eventing/sources/containersource.md: developer/eventing/sources/containersource/README.md
+      eventing/sources/containersource.md: developer/eventing/custom-event-source/containersource/README.md
       eventing/triggers/index.md: eventing/broker/triggers/README.md
       help/README.md: help/contributor/README.md
       install/README.md: admin/install/README.md
       install/check-install-version.md: check-install-version.md
       install/collecting-logs/index.md: admin/collecting-logs/README.md
       install/collecting-metrics/index.md: admin/collecting-metrics/README.md
-      install/getting-started-knative-app/index.md: serving/getting-started-knative-app.md
+      install/getting-started-knative-app/index.md: getting-started/README.md
+      serving/getting-started-knative-app.md: getting-started/README.md
       install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
       # This doesn't exist anymore, we should probably replace it
       install/install-extensions.md: admin/install/README.md

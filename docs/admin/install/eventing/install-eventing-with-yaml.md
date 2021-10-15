@@ -85,10 +85,12 @@ Follow the procedure for the Channel of your choice:
     1. Install the NATS Streaming Channel by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-natss",file="300-natss-channel.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-natss",file="eventing-natss.yaml")}}
         ```
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
+
+You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../eventing/channel-configuration.md) section.
 
 ## Optional: Install a Broker layer:
 

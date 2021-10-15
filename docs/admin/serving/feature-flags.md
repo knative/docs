@@ -364,4 +364,26 @@ spec:
 * **Type**: Extension
 * **ConfigMap key:** `tag-header-based-routing`
 
-This flags controls whether [tag header based routing](samples/tag-header-based-routing/) is enabled.
+This flags controls whether [tag header based routing](../../serving/samples/tag-header-based-routing/README.md) is enabled.
+
+## Kubernetes init containers
+
+* **Type**: Extension
+* **ConfigMap key:** `kubernetes.podspec-init-containers`
+
+This flag controls whether [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) can be used.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      ...
+      initContainers:
+        - name: init-myservice
+          image: busybox
+          command: ['sh', '-c', "service_setup.sh"]
+...
+```

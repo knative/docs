@@ -6,7 +6,7 @@ visualize and trace your requests.
 
 ## Before you begin
 
-You must have a Knative cluster running with the Eventing component installed. [Learn more](../../admin/install/)
+You must have a Knative cluster running with the Eventing component installed. [Learn more](../admin/install/README.md).
 
 ## Configuring tracing
 
@@ -127,4 +127,4 @@ This is the same screenshot without the annotations.
 
 ![Raw Trace](images/RawTrace.png)
 
-If you are interested, here is the [raw JSON](data/ee46c4c6be1df717b3b82f55b531912f.json) of the trace.
+If you are interested, here is the [raw JSON](data/2e571e6948ff981283825bb2bf51c87d.json) of the trace.

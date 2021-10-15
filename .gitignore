@@ -6,7 +6,12 @@ __pycache__
 hack/__pycache__
 /site/
 /temp/
+/temp-blog/
+/blog/site/
+/blog/overrides/
+/blog/docs/stylesheets/
 /node_modules/
+venv/
 
 
 .settings/

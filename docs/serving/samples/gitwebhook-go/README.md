@@ -11,7 +11,7 @@ You must meet the following requirements to run this sample:
   [Google Domains](https://domains.google/).
 - A Kubernetes cluster running with the following:
   - Knative Serving must be installed. For details about setting up a Knative
-    cluster, see the [installation guides](../../../install/).
+    cluster, see the [installation guide](../../../admin/install/serving/install-serving-with-yaml.md).
   - Your Knative cluster must be
     [configured to use your custom domain](../../using-a-custom-domain.md).
   - You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.

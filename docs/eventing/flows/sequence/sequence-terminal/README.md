@@ -1,7 +1,7 @@
 # Sequence terminal
 
 We are going to create the following logical configuration. We create a
-PingSource, feeding events to a [`Sequence`](../).
+PingSource, feeding events to a [`Sequence`](../README.md).
 Sequence can then do either external work, or out of band create additional
 events.
 
@@ -117,7 +117,7 @@ This will create a PingSource which will send a CloudEvent with
 `{"message": "Hello world!"}` as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: ping-source

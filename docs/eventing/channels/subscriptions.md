@@ -7,7 +7,7 @@ known as the Subscriber) to deliver events to. You can also specify some Sink-sp
 as how to handle failures.
 
 For more information about Subscription objects, see
-[Subscription](https://knative.dev/docs/reference/api/eventing/#messaging.knative.dev/v1.Subscription).
+[Subscription](https://knative.dev/docs/reference/api/eventing-api/#messaging.knative.dev/v1.Subscription).
 
 ## Creating a Subscription
 
@@ -144,4 +144,4 @@ You can delete a Subscription by using the `kn` or `kubectl` CLI tools.
 
 ## Next steps
 
-- [Creating a Channel using cluster or namespace defaults](/eventing/channels/create-default-channel)
+- [Creating a Channel using cluster or namespace defaults](create-default-channel.md)

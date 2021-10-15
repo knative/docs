@@ -1,4 +1,4 @@
-# Event delivery
+# Handling Delivery Failure
 
 You can configure event delivery parameters for Knative Eventing components that are applied in cases where an event fails to be delivered
 
@@ -81,6 +81,17 @@ The following table summarizes which delivery parameters are supported for each 
 Failed events may, depending on the specific Channel implementation in use, be
 enhanced with extension attributes prior to forwarding to the`deadLetterSink`.
 These extension attributes are as follows:
+
+- **knativeerrordest**
+    - **Type:** String
+    - **Description:** The original destination URL to which the failed event
+      was sent.  This could be either a `delivery` or `reply` URL based on
+      which operation encountered the failed event.
+    - **Constraints:** Always present because every HTTP Request has a
+      destination URL.
+    - **Examples:**
+        - "http://myservice.mynamespace.svc.cluster.local:3000/mypath"
+        - ...any `deadLetterSink` URL...
 
 - **knativeerrorcode**
     - **Type:** Int

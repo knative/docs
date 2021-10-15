@@ -78,4 +78,20 @@ curl http://hello.default.127.0.0.1.nip.io
 Hello World!
 ```
 
+??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.nip.io`?"
+
+    In some cases your DNS server may be set up not to resolve `*.nip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses.
+
+    The exact steps will differ according to your distribution. For example, with Ubuntu derived systems which use `systemd-resolved`, you can add the following entry to the `/etc/systemd/resolved.conf`:
+
+    ```ini
+    [Resolve]
+    DNS=8.8.8.8
+    Domains=~nip.io.
+    ```
+
+    Then simply restart the service with `sudo service systemd-resolved restart`.
+
+    For MacOS users, you can add the DNS and domain using the network settings as explained [here](https://support.apple.com/en-gb/guide/mac-help/mh14127/mac).
+
 Congratulations :tada:, you've just created your first Knative Service. Up next, Autoscaling!

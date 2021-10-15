@@ -5,7 +5,7 @@ This guide provides reference information about the core Knative Serving YAML fi
 - The custom resource definitions (CRDs) and core components required to install Knative Serving.
 - Optional components that you can apply to customize your installation.
 
-For information about installing these files, see [Installing Knative Serving using YAML files](../install-serving-with-yaml).
+For information about installing these files, see [Installing Knative Serving using YAML files](install-serving-with-yaml.md).
 
 The following table describes the installation files included in Knative Serving:
 

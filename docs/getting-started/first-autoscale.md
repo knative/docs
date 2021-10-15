@@ -2,12 +2,21 @@
 **Remember those super powers :rocket: we talked about?** One of Knative Serving's powers is built-in automatic scaling (autoscaling). This means your Knative Service only spins up your application to perform its job -- in this case, saying "Hello world!" -- if it is needed; otherwise, it will "scale to zero" by spinning down and waiting for a new request to come in.
 
 ??? question "What about scaling up to meet increased demand?"
-    Knative Autoscaling also allows you to easily configure your service to scale up (horizontal autoscaling) to meet increased demand as well as control the number of instances that spin up using <a href= "../../serving/autoscaling/concurrency/" target="_blank"> "concurrency limits and other options,"</a> but that's beyond the scope of this tutorial.
+    Knative Autoscaling also allows you to easily configure your service to scale up
+    (horizontal autoscaling) to meet increased demand as well as control the number of instances that
+    spin up using
+    [concurrency limits and other options](../../serving/autoscaling/concurrency/){target=_blank},
+    but that's beyond the scope of this tutorial.
 
-**Let's see this in action!** We're going to peek under the hood at the <a href= "https://kubernetes.io/docs/concepts/workloads/pods/" target="blank_">Pod</a> in Kubernetes where our Knative Service is running to watch our "Hello world!" Service scale up and down.
+**Let's see this in action!** We're going to peek under the hood at the
+[Pod](https://kubernetes.io/docs/concepts/workloads/pods/){target=blank_} in Kubernetes where our
+Knative Service is running to watch our "Hello world!" Service scale up and down.
 
 ### Run your Knative Service
-Let's run our "Hello world!" Service just one more time. This time, try the Knative Service `URL` in your browser [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, or you can use your terminal with `curl`.
+Let's run our "Hello world!" Service just one more time. This time, try the Knative Service `URL` in
+your browser
+[http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, or you
+can use your terminal with `curl`.
 ```bash
 curl http://hello.default.127.0.0.1.nip.io
 ```
@@ -46,4 +55,4 @@ Exit the watch command with `Ctrl+c`.
 Some people call this **Serverless** :tada: :taco: :fire: Up next, traffic splitting!
 
 ??? question "Want to go deeper on Autoscaling?"
-    Interested in getting in the weeds with Knative Autoscaling? Check out the <a href= "../../serving/autoscaling/" target="_blank"> autoscaling page</a> for concepts, samples, and more!
+    Interested in getting in the weeds with Knative Autoscaling? Check out the [autoscaling documentation](../serving/autoscaling/README.md){target=_blank} for concepts, samples, and more!

@@ -17,19 +17,18 @@ import (
 	"context"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
 	"sort"
-	"strings"
 
 	"github.com/google/go-github/v32/github"
 )
 
 var (
-	knativeOrgs   = []string{"knative", "knative-sandbox"}
-	allowedRepoRe = regexp.MustCompile("^[a-z][-a-z0-9]+$")
+	knativeOrgs        = []string{"knative", "knative-sandbox"}
+	allowedRepoRe      = regexp.MustCompile("^[a-z][-a-z0-9]+$")
+	archivedExceptions = []string{"eventing-contrib"}
 )
 
 // repoInfo provides a simple holder for GitHub repo information needed to
@@ -80,7 +79,7 @@ func fetchRepos(orgs []string) ([]repoInfo, error) {
 					log.Printf("Ignoring repo %s, matched by ignore %q", *r.Name, allowedRepoRe)
 					continue
 				}
-				if *r.Archived {
+				if *r.Archived && !inArchivedExceptions(*r.Name) {
 					log.Print("Ignoring archived repo: ", *r.Name)
 					continue
 				}
@@ -110,37 +109,19 @@ const (
 # DO NOT EDIT!
 #
 # To regenerate, run:
+#   go run ./tools/redir-gen/
 `
 )
 
 func appendRedirs(ris []repoInfo) error {
 	redirFilename := "golang/_redirects"
-	redirFile, err := os.OpenFile(redirFilename, os.O_RDWR|os.O_CREATE, 0755)
+	redirFile, err := os.OpenFile(redirFilename, os.O_TRUNC|os.O_WRONLY|os.O_CREATE, 0755)
 	if err != nil {
 		return fmt.Errorf("unable to open %q: %w", redirFilename, err)
 	}
 	defer redirFile.Close()
 
-	redirs, err := ioutil.ReadAll(redirFile)
-	if err != nil {
-		return fmt.Errorf("unable to read %q: %w", redirFilename, err)
-	}
-
-	seekTo := int64(strings.Index(string(redirs), autogenPrefix))
-	if seekTo == -1 {
-		seekTo = int64(len(redirs))
-	}
-	if _, err := redirFile.Seek(seekTo, 0); err != nil {
-		return fmt.Errorf("unable to seek in %q: %w", redirFilename, err)
-	}
-	if redirFile.Truncate(seekTo) != nil {
-		return fmt.Errorf("unable to truncate %q: %w", redirFilename, err)
-	}
-
 	if _, err := redirFile.WriteString(autogenPrefix); err != nil {
-		return fmt.Errorf("unable to write to %q: %w", redirFilename, err)
-	}
-	if _, err := redirFile.WriteString(fmt.Sprintf("#   %s\n", strings.Join(os.Args, " "))); err != nil {
 		return fmt.Errorf("unable to write to %q: %w", redirFilename, err)
 	}
 	for _, ri := range ris {
@@ -180,5 +161,13 @@ func (ris riSlice) Less(i, j int) bool {
 
 func (ris riSlice) Swap(i, j int) {
 	ris[i], ris[j] = ris[j], ris[i]
+}
 
+func inArchivedExceptions(n string) bool {
+	for _, r := range archivedExceptions {
+		if r == n {
+			return true
+		}
+	}
+	return false
 }

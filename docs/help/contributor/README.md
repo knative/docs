@@ -5,6 +5,7 @@
 
 ### Getting started
 
+- [Code of Conduct](https://knative.dev/community/contributing/code-of-conduct)
 - [Becoming a contributor](becoming-a-contributor.md)
 - [Knative MkDocs contributor guide](mkdocs-contributor-guide.md)
 - [GitHub workflow for Knative documentation](github.md)
@@ -37,5 +38,5 @@ If you notice gaps in the style guide or have queries, please post in [the Docs 
 - [Formatting standard and conventions](style-guide/style-and-formatting.md)
 - [Voice and language](style-guide/voice-and-language.md)
 - [Word and phrase list](style-guide/word-and-phrase-list.md)
-- [Content re-use](https://github.com/knative/docs/tree/mkdocs/docs/snippets)
+- [Content re-use](https://github.com/knative/docs/tree/main/docs/snippets)
 - [Using shortcodes (TBD)]()

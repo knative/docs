@@ -205,6 +205,34 @@ Apply code formatting only to special-purpose text:
     Where `<revision-name>` is the desired name of your revision.
 
 
+### Indicating code excerpts
+
+> If you are documenting an excerpt of a YAML file, rather than an entire working YAML example, include `...` in places where context is missing to indicate that the example is only a part of the required file.
+
+=== ":white_check_mark: Correct"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+    ...
+    spec:
+    ...
+      traffic:
+      - percent: 54
+        revisionName: config-00008
+    ...
+    ```
+
+=== ":no_entry: Incorrect"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+    spec:
+      traffic:
+      - percent: 54
+        revisionName: config-00008
+    ```
 
 ## CLI output
 > CLI Output should include the custom css "{ .bash .no-copy }" in place of "bash" which removes the "Copy to clipboard button" on the right side of the code block

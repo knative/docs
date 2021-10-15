@@ -5,6 +5,7 @@ aliases:
   api-core-wg-leads:
   - dprotaso
   autoscaling-reviewers:
+  - psschwei
   - taragu
   autoscaling-wg-leads:
   - markusthoemmes
@@ -14,8 +15,6 @@ aliases:
   - markusthoemmes
   - vagababov
   - yanweiguo
-  channel-wg-leads:
-  - matzew
   client-reviewers:
   - itsmurugappan
   client-wg-leads:
@@ -27,14 +26,17 @@ aliases:
   - maximilien
   - navidshaikh
   - rhuss
-  conformance-wg-leads:
-  - tayarani
+  conformance-task-force-leads:
+  - omerbensaadon
+  - salaboy
   conformance-writers:
-  - tayarani
+  - omerbensaadon
+  - salaboy
   docs-reviewers:
   - RichardJJG
   - jonatasbaldin
   - mpetason
+  - nainaz
   - omerbensaadon
   - pmbanugo
   - snneji
@@ -53,7 +55,6 @@ aliases:
   - akashrv
   - antoineco
   - lberk
-  - n3wscott
   eventing-wg-leads:
   - devguyio
   - lionelvillard
@@ -65,11 +66,10 @@ aliases:
   - lberk
   - lionelvillard
   - matzew
-  - n3wscott
   - pierDipi
   - vaikas
   knative-admin:
-  - RichieEscarez
+  - ZhiminXiang
   - bsnchan
   - dprotaso
   - duglin
@@ -79,43 +79,17 @@ aliases:
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
-  - lionelvillard
   - markusthoemmes
   - mbehrendt
+  - omerbensaadon
   - pmorie
   - rhuss
   - spencerdillard
   - thisisnotapril
   - vaikas
-  - yanweiguo
-  knative-milestone-maintainers:
-  - ImJasonH
-  - ZhiminXiang
-  - andrew-su
-  - aslom
-  - chaodaiG
-  - chizhg
-  - csantanapr
-  - dprotaso
-  - evankanderson
-  - igsong
-  - julz
-  - lionelvillard
-  - markusthoemmes
-  - matzew
-  - n3wscott
-  - nak3
-  - navidshaikh
-  - rhuss
-  - shashwathi
-  - tanzeeb
-  - tcnghia
-  - vagababov
-  - vaikas
   knative-release-leads:
-  - RichieEscarez
-  - lionelvillard
-  - yanweiguo
+  - ZhiminXiang
+  - evankanderson
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -147,7 +121,6 @@ aliases:
   - jcrossley3
   - markusthoemmes
   - matzew
-  - n3wscott
   - trshafer
   operations-wg-leads:
   - houshengbo
@@ -158,7 +131,6 @@ aliases:
   - jcrossley3
   - markusthoemmes
   - matzew
-  - n3wscott
   - trshafer
   pkg-configmap-reviewers:
   - dprotaso
@@ -217,7 +189,6 @@ aliases:
   - vagababov
   source-wg-leads:
   - lionelvillard
-  - n3wscott
   steering-committee:
   - bsnchan
   - mbehrendt
@@ -231,8 +202,8 @@ aliases:
   - markusthoemmes
   - rhuss
   trademark-committee:
-  - bsnchan
   - duglin
+  - omerbensaadon
   - spencerdillard
   ux-wg-leads:
   - csantanapr

@@ -2,7 +2,7 @@
 
 We are going to create the following logical configuration. We create a
 PingSource, feeding events into the Broker, then we create a `Filter` that wires
-those events into a [`Sequence`](../) consisting of 3
+those events into a [`Sequence`](../README.md) consisting of 3
 steps. Then we take the end of the Sequence and feed newly minted events back
 into the Broker and create another Trigger which will then display those events.
 
@@ -146,7 +146,7 @@ This will create a PingSource which will send a CloudEvent with {"message":
 "Hello world!"} as the data payload every 2 minutes.
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta2
+apiVersion: sources.knative.dev/v1
 kind: PingSource
 metadata:
   name: ping-source
