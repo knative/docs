@@ -22,6 +22,10 @@
   .md-sidebar--primary {
     display: none;
   }
+
+  [dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner {
+    margin-left: 0;
+  }
 }
 
 @keyframes continuousgradient {
