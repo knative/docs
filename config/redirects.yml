@@ -25,7 +25,7 @@ plugins:
       serving/samples/blue-green-deployment.md: developer/serving/traffic-management.md
       serving/samples/traffic-splitting/README.md: developer/serving/traffic-management.md
       admin/collecting-logs/README.md: admin/observability/collecting-logs/collecting-logs.md
-      admin/collecting-metrics/collecting-metrics.md: admin/observability/collecting-metrics/collecting-metrics.md
+      admin/collecting-metrics/README.md: admin/observability/collecting-metrics/collecting-metrics.md
       admin/collecting-metrics/eventing-metrics/metrics.md: admin/observability/collecting-metrics/eventing-metrics/metrics.md
       admin/collecting-metrics/serving-metrics/metrics.md: admin/observability/collecting-metrics/serving-metrics/metrics.md
       admin/install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
