@@ -93,39 +93,27 @@ kubectl get route helloworld-go --output jsonpath="{.status.url}"
 
 You should see the full customized domain: `helloworld-go.default.mydomain.com`.
 
-And you can check the IP address of your Knative gateway by running:
+## Verify the domain using temporary DNS
+
+If you are using curl to access the sample applications, or your own Knative app, there is a temporary approach
+to verify the customized domain.
+
+Instruct `curl` to connect to the External IP or CNAME defined by the
+networking layer mentioned in [Install a networking layer](../admin/install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line
+option to specify the Knative application's host name.
+For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
 
 ```bash
-export INGRESSGATEWAY=istio-ingressgateway
-
-if kubectl get configmap config-istio -n knative-serving &> /dev/null; then
-    export INGRESSGATEWAY=istio-ingressgateway
-fi
-
-kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"
+curl -H "Host: helloworld-go.default.mydomain.com" http://192.168.39.228:32198
 ```
 
-## Local DNS setup
-
-You can map the domain to the IP address of your Knative gateway in your local
-machine with:
-
-```bash
-INGRESSGATEWAY=istio-ingressgateway
-
-export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
-
-# helloworld-go is the generated Knative Route of "helloworld-go" sample.
-# You need to replace it with your own Route in your project.
-export DOMAIN_NAME=`kubectl get route helloworld-go --output jsonpath="{.status.url}" | cut -d'/' -f 3`
-
-# Add the record of Gateway IP and domain name into file "/etc/hosts"
-echo -e "$GATEWAY_IP\t$DOMAIN_NAME" | sudo tee -a /etc/hosts
+In the case of the provided `helloworld-go` sample application, using the default configuration, the output is:
 
 ```
+Hello Go Sample v1!
+```
 
-You can now access your domain from the browser in your machine and do some
-quick checks.
+Refer to the [Publish your Domain](#publish-your-domain) method for a permanent solution.
 
 ## Publish your Domain
 

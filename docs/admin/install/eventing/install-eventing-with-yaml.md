@@ -90,6 +90,8 @@ Follow the procedure for the Channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
+You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../eventing/channel-configuration.md) section.
+
 ## Optional: Install a Broker layer:
 
 The following tabs expand to show instructions for installing the Broker layer.

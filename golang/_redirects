@@ -4,7 +4,7 @@
 # DO NOT EDIT!
 #
 # To regenerate, run:
-#   ./tools/redir-gen/redir-gen
+#   go run ./tools/redir-gen/
 /actions-downstream-test/* go-get=1 /golang/actions-downstream-test.html 200
 /actions-kind/* go-get=1 /golang/actions-kind.html 200
 /async-component/* go-get=1 /golang/async-component.html 200
