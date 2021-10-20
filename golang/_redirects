@@ -41,6 +41,7 @@
 /kn-plugin-event/* go-get=1 /golang/kn-plugin-event.html 200
 /kn-plugin-func/* go-get=1 /golang/kn-plugin-func.html 200
 /kn-plugin-migration/* go-get=1 /golang/kn-plugin-migration.html 200
+/kn-plugin-operator/* go-get=1 /golang/kn-plugin-operator.html 200
 /kn-plugin-quickstart/* go-get=1 /golang/kn-plugin-quickstart.html 200
 /kn-plugin-sample/* go-get=1 /golang/kn-plugin-sample.html 200
 /kn-plugin-service-log/* go-get=1 /golang/kn-plugin-service-log.html 200
