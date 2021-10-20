@@ -45,16 +45,24 @@ All Sources are part of the `sources` category.
 
 | Name | API Version | Maintainer | Description
 |--|--|--|--|
+[AWS CodeCommit](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Registers for events emitted by an [AWS CodeCommit](https://aws.amazon.com/codecommit/) source code repository.
+[Amazon CloudWatch Logs](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Subscribes to log events from an [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/) stream.
+[Amazon CloudWatch](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Collects metrics from [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/).
+[Amazon Cognito Identity](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Registers for events from [Amazon Cognito](https://aws.amazon.com/cognito/) identity pools.
+[Amazon Cognito User](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Registers for events from [Amazon Cognito](https://aws.amazon.com/cognito/) user pools.
+[Amazon DynamoDB](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Reads records from an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) stream.
+[Amazon Kinesis](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Reads records from an [Amazon Kinesis](https://aws.amazon.com/kinesis/) stream.
+[Amazon RDS Performance Insights](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Subscribes to metrics from [Amazon RDS Performance Insights](https://aws.amazon.com/rds/performance-insights/).
+[Amazon SNS](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Subscribes to messages from an [Amazon SNS](https://aws.amazon.com/sns/) topic.
+[Amazon SQS](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes messages from an [Amazon SQS](https://aws.amazon.com/sqs/) queue.
 [Auto Container Source](https://github.com/Harwayne/auto-container-source) | Proof of Concept | None | AutoContainerSource is a controller that allows the Source CRDs _without_ needing a controller. It notices CRDs with a specific label and starts controlling resources of that type. It utilizes Container Source as underlying infrastructure.
-[Amazon CloudWatch](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awscloudwatchsource) | Supported | TriggerMesh | Collects metrics from [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/).
-[Amazon CloudWatch Logs](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awscloudwatchlogssource) | Supported | TriggerMesh | Subscribes to log events from an [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/) stream.
-[Amazon CodeCommit](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awscodecommitsource/README.md) | Supported | TriggerMesh | Registers for events emitted by an [Amazon CodeCommit](https://aws.amazon.com/codecommit/) source code repository.
-[Amazon Cognito Identity](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awscognitoidentitysource/README.md) | Supported | TriggerMesh | Registers for events from [Amazon Cognito](https://aws.amazon.com/cognito/) identity pools.
-[Amazon Cognito User](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awscognitouserpoolsource/README.md) | Supported | TriggerMesh | Registers for events from [Amazon Cognito](https://aws.amazon.com/cognito/) user pools.
-[Amazon DynamoDB](https://github.com/triggermesh/aws-event-sources/blob/master/cmd/awsdynamodbsource/README.md) | Supported | TriggerMesh | Reads records from an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) stream.
-[Amazon Kinesis](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awskinesissource/README.md) | Supported | TriggerMesh | Reads records from an [Amazon Kinesis](https://aws.amazon.com/kinesis/) stream.
-[Amazon SNS](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awssnssource/README.md) | Supported | TriggerMesh | Subscribes to messages from an [Amazon SNS](https://aws.amazon.com/sns/) topic.
-[Amazon SQS](https://github.com/triggermesh/aws-event-sources/tree/master/cmd/awssqssource/README.md) | Supported | TriggerMesh | Consumes messages from an [Amazon SQS](https://aws.amazon.com/sqs/) queue.
+[Azure Activity Logs](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from the [Azure Activity Logs](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log).
+[Azure Blob Storage](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
+[Azure Event Grid](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Retrieve events from [Azure Event Grid](https://azure.microsoft.com/en-us/services/event-grid/).
+[Azure Event Hubs](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from [Azure Event Hubs](https://azure.microsoft.com/en-us/services/event-hubs/).
+[Azure IoT Hub](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes event from [Azure IoT Hub](https://azure.microsoft.com/en-us/services/iot-hub/).
+[Azure Queue Storage](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Retrieve messages from [Azure Queue Storage](https://azure.microsoft.com/en-us/services/storage/queues/).
+[Azure Service Bus](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes messages from an [Azure Service Bus](https://azure.microsoft.com/en-us/services/service-bus/) queue.
 [BitBucket](https://github.com/nachocano/bitbucket-source) | Proof of Concept | None | Registers for events of the specified types on the specified BitBucket organization/repository. Brings those events into Knative.
 [CloudAuditLogsSource](https://github.com/google/knative-gcp/blob/main/docs/examples/cloudauditlogssource/README.md) | v1 | Google | Registers for events of the specified types on the specified [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/). Brings those events into Knative. Refer to the [CloudAuditLogsSource](../../../eventing/samples/cloud-audit-logs-source/README.md) example for more details.
 [CloudPubSubSource](https://github.com/google/knative-gcp/blob/main/docs/examples/cloudpubsubsource/README.md) | v1 | Google | Brings [Cloud Pub/Sub](https://cloud.google.com/pubsub/) messages into Knative. The CloudPubSubSource fires a new event each time a message is published on a [Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/). See the [CloudPubSubSource](../../../eventing/samples/cloud-pubsub-source/README.md) example for more details.
@@ -63,13 +71,23 @@ All Sources are part of the `sources` category.
 [DockerHubSource](https://github.com/tom24d/eventing-dockerhub) | v1alpha1 | None | Retrieves events from [Docker Hub Webhooks](https://docs.docker.com/docker-hub/webhooks/) and transforms them into CloudEvents for consumption in Knative.
 [FTP / SFTP](https://github.com/vaikas-google/ftp) | Proof of concept | None | Watches for files being uploaded into a FTP/SFTP and generates events for those.
 [GitHub Issue Comments](https://github.com/BrianMMcClain/github-issue-comment-source)| Proof of Concept | None | Polls a specific GitHub issue for new comments.
+[Google Cloud Audit Logs](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Registers for events from [Google Cloud Audit Logs](https://cloud.google.com/logging/docs/audit/).
+[Google Cloud Billing](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Retrieves events from [Google Cloud Billing](https://cloud.google.com/billing/).
+[Google Cloud Pub/Sub](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Retrieves [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) messages.
+[Google Cloud Source Repositories](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from [Google Cloud Source Repositories](https://cloud.google.com/source-repositories).
+[Google Cloud Storage](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from [Google Cloud Storage](https://cloud.google.com/storage).
+[HTTP Poller](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Periodically pulls events from an HTTP/S URL.
 [Heartbeat](https://github.com/Harwayne/auto-container-source/tree/master/heartbeat-source) | Proof of Concept | None | Uses an in-memory timer to produce events as the specified interval. Uses AutoContainerSource for underlying infrastructure.
-[Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
 [K8s](https://github.com/Harwayne/auto-container-source/tree/master/k8s-event-source) | Proof of Concept | None | Brings Kubernetes cluster events into Knative. Uses AutoContainerSource for underlying infrastructure.
+[Konnek](https://konnek.github.io/docs/#/) | Active Development | None | Retrieves events from cloud platforms (like AWS and GCP) and transforms them into CloudEvents for consumption in Knative.
+[Oracle Cloud Infrastructure](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Retrieves metrics from [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/).
 [RedisSource](https://github.com/knative-sandbox/eventing-redis/tree/main/source) | v1alpha1 | None | Brings Redis Stream into Knative.
-[Slack](https://github.com/triggermesh/knative-sources) | v1alpha1 | TriggerMesh | Subscribes to events from Slack.
+[Salesforce](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from a [Salesforce](https://www.salesforce.com) channel.
+[Slack](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Subscribes to events from [Slack](https://slack.com).
+[Twilio](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Receive events from [Twilio](https://twilio.com).
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/main/README.md) | Active Development | VMware | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
-[Zendesk](https://github.com/triggermesh/knative-sources) | v1alpha1 | TriggerMesh | Subscribes to events from Zendesk.
+[Webhook](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Ingest events from a webhook using HTTP.
+[Zendesk](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Subscribes to events from Zendesk.
 
 ## Additional resources
 
