@@ -1,6 +1,6 @@
 # Collecting Metrics in Knative
 
-Knative offers two popular architectures for collecting metrics:
+Knative supports different popular tools for collecting metrics:
 - [Prometheus](https://prometheus.io/)
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 
@@ -11,7 +11,7 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 ## About Prometheus
 
 [Prometheus](https://prometheus.io/) is an open-source tool for collecting,
-aggregating timeseries metrics and alerting. It can be used to scrape the OpenTelemetry Collector that you created in the previous step when Prometheus is used a standalone monitoring and alerting system.
+aggregating timeseries metrics and alerting. It can also be used to scrape the OpenTelemetry Collector that is demonstrated below when Prometheus is used.
 
 ## Setting up Prometheus
 
