@@ -60,7 +60,6 @@ nav:
           - Configuring logging: admin/observability/config-logging/logging.md
           - Knative Eventing metrics: admin/observability/collecting-metrics/eventing-metrics/metrics.md
           - Knative Serving metrics: admin/observability/collecting-metrics/serving-metrics/metrics.md
-        - Uninstalling Knative: admin/install/uninstall.md
         # Serving config
         - Knative Serving configuration:
           - Revision garbage collection: admin/serving/revision-gc.md
