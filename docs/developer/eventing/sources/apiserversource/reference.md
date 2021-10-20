@@ -20,7 +20,7 @@ An ApiServerSource definition supports the following fields:
 | `spec.mode` | EventMode controls the format of the event. Set to `Reference` to send a `dataref` event type for the resource being watched. Only a reference to the resource is included in the event payload. Set to `Resource` to have the full resource lifecycle event in the payload. Defaults to `Reference`. | Optional |
 | [`spec.owner`](#owner-parameter) | ResourceOwner is an additional filter to only track resources that are owned by a specific resource type. If ResourceOwner matches Resources[n] then Resources[n] is allowed to pass the ResourceOwner filter. | Optional |
 | [`spec.serviceAccountName`](#serviceaccountname-parameter) | The name of the ServiceAccount to use to run this source. Defaults to `default` if not set. | Optional |
-| [`spec.sink`](#sink-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
+| [`spec.sink`](../../sinks/README.md#sink-as-a-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
 
 
@@ -113,28 +113,32 @@ spec:
 
 ServiceAccountName is a reference to a Kubernetes service account.
 
-The proper permissions need to be assigned to the ApiServerSource object in order
-to track the lifecycle events of the specified [`resources`](#resources-parameter).
+To track the lifecycle events of the specified [`resources`](#resources-parameter),
+you must assign the proper permissions to the ApiServerSource object.
 
-#### Example: tracking pods
+#### Example: tracking Pods
 
-The following 4 YAMLs create a ServiceAccount, Role and RoleBinding
-and grant the permission to get, list and watch Pod resources in `<namespace>` for the
-ApiServerSource.
+The following YAML files create a ServiceAccount, Role and RoleBinding
+and grant the permission to get, list and watch Pod resources in the namespace
+`apiserversource-example` for the ApiServerSource.
+
+Example ServiceAccount:
 
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: <service-account>
-  namespace: <namespace>
+  name: test-service-account
+  namespace: apiserversource-example
 ```
+
+Example Role with permission to get, list and watch Pod resources:
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: <role>
+  name: test-role
 rules:
   - apiGroups:
     - ""
@@ -146,30 +150,34 @@ rules:
     - watch
 ```
 
+Example RoleBinding:
+
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: <role-binding>
+  name: test-role-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: <role>
+  name: test-role
 subjects:
   - kind: ServiceAccount
-    name: <service-account>
-    namespace: <namespace>
+    name: test-service-account
+    namespace: apiserversource-example
 ```
+
+Example ApiServerSource using `test-service-account`:
 
 ```yaml
 apiVersion: sources.knative.dev/v1
 kind: ApiServerSource
 metadata:
- name: <apiserversource>
- namespace: <namespace>
+ name: test-apiserversource
+ namespace: apiserversource-example
 spec:
   # ...
-  serviceAccountName: <service-account>
+  serviceAccountName: test-service-account
   ...
 ```
 
@@ -201,54 +209,6 @@ spec:
     kind: Deployment
   ...
 ```
-
-### Sink parameter
-
-Sink is a reference to an object that resolves to a URI to use as the sink.
-
-A `sink` definition supports the following fields:
-
-| Field | Description | Required or optional |
-|-------|-------------|----------------------|
-| `ref` | This points to an Addressable. | Required if _not_ using `uri`  |
-| `ref.apiVersion` | API version of the referent. | Required if using `ref` |
-| [`ref.kind`][kubernetes-kinds] | Kind of the referent. | Required if using `ref` |
-| [`ref.namespace`][kubernetes-namespaces] | Namespace of the referent. If omitted this defaults to the object holding it. | Optional |
-| [`ref.name`][kubernetes-names] | Name of the referent. | Required if using `ref` |
-| `uri` | This can be an absolute URL with a non-empty scheme and non-empty host that points to the target or a relative URI. Relative URIs are resolved using the base URI retrieved from Ref. | Required if _not_ using `ref` |
-
-!!! note
-    At least one of `ref` or `uri` is required. If both are specified, `uri` is
-    resolved into the URL from the Addressable `ref` result.
-
-#### Example: Sink parameter
-
-Given the following YAML, if `ref` resolves into
-`"http://mysink.default.svc.cluster.local"`, then `uri` is added to this
-resulting in `"http://mysink.default.svc.cluster.local/extra/path"`.
-
-<!-- TODO we should have a page to point to describing the ref+uri destinations and the rules we use to resolve those and reuse the page. -->
-
-```yaml
-apiVersion: sources.knative.dev/v1
-kind: ApiServerSource
-metadata:
- name: <apiserversource>
- namespace: <namespace>
-spec:
-  ...
-  sink:
-    ref:
-      apiVersion: v1
-      kind: Service
-      namespace: default
-      name: mysink
-    uri: /extra/path
-```
-
-!!! contract
-    This results in the `K_SINK` environment variable being set on the sink container
-    as `"http://mysink.default.svc.cluster.local/extra/path"`.
 
 
 ### CloudEvent Overrides
@@ -298,9 +258,5 @@ spec:
   https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 [label-selectors]:
   http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-[kubernetes-names]:
-  https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-[kubernetes-namespaces]:
-  https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 [cloudevents-attribute-naming]:
   https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#attribute-naming-convention

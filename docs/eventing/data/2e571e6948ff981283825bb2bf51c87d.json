@@ -1,0 +1,762 @@
+[
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "8f386b31634e1099",
+    "id": "956e8ea84c502ec4",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1634126338370650,
+    "duration": 4064,
+    "localEndpoint": {
+      "serviceName": "recordevents",
+      "ipv4": "172.17.0.22"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338370659,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "recordevents.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "98c5ba8e979ac706",
+    "id": "46b3af23e192d025",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1634126338354802,
+    "duration": 186,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338354815,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "br-kne-trigger-kn-channel.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "f96ca6bec9385784",
+    "id": "8a55a3471770d9a3",
+    "kind": "CLIENT",
+    "name": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+    "timestamp": 1634126338355634,
+    "duration": 2304,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "http.status_code": "200",
+      "http.url": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "46b3af23e192d025",
+    "id": "f96ca6bec9385784",
+    "kind": "CLIENT",
+    "name": "knative.dev",
+    "timestamp": 1634126338355587,
+    "duration": 2396,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "transformer",
+      "messaging.destination": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "46b3af23e192d025",
+    "id": "d79bacac2eca5245",
+    "kind": "CLIENT",
+    "name": "knative.dev",
+    "timestamp": 1634126338355130,
+    "duration": 10754,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "transformer",
+      "messaging.destination": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "d79bacac2eca5245",
+    "id": "6884a9357c01d564",
+    "kind": "CLIENT",
+    "name": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+    "timestamp": 1634126338355184,
+    "duration": 12531,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "http.status_code": "200",
+      "http.url": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "df42679f0d3ac3ea",
+    "id": "3d0f9ae2ff156002",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1634126338368047,
+    "duration": 197,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338368054,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "br-kne-trigger-kn-channel.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "202",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "cef7966b4d4de221",
+    "id": "5fe093f49a846441",
+    "kind": "CLIENT",
+    "name": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+    "timestamp": 1634126338368376,
+    "duration": 554,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "http.status_code": "200",
+      "http.url": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "3d0f9ae2ff156002",
+    "id": "cef7966b4d4de221",
+    "kind": "CLIENT",
+    "name": "knative.dev",
+    "timestamp": 1634126338368346,
+    "duration": 612,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "logger",
+      "messaging.destination": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "f0c8907de8bbe660",
+    "id": "81b18d0636f36880",
+    "kind": "CLIENT",
+    "name": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+    "timestamp": 1634126338368436,
+    "duration": 6747,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "http.status_code": "202",
+      "http.url": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "3d0f9ae2ff156002",
+    "id": "f0c8907de8bbe660",
+    "kind": "CLIENT",
+    "name": "knative.dev",
+    "timestamp": 1634126338368408,
+    "duration": 6850,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "logger",
+      "messaging.destination": "http://broker-filter.knative-eventing.svc.cluster.local/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "db9bdb36a03b57a0",
+    "id": "356a23b401c5b31c",
+    "name": "trigger:transformer.eventing-e2e1",
+    "timestamp": 1634126338368744,
+    "duration": 74,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "logger",
+      "messaging.destination": "trigger:transformer.eventing-e2e1",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "5fe093f49a846441",
+    "id": "db9bdb36a03b57a0",
+    "kind": "SERVER",
+    "name": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+    "timestamp": 1634126338368653,
+    "duration": 175,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338368699,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "http.status_code": "200",
+      "http.url": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "08837ff5508085de",
+    "id": "6251c772b209e25a",
+    "name": "trigger:logger.eventing-e2e1",
+    "timestamp": 1634126338368766,
+    "duration": 6222,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "logger",
+      "messaging.destination": "trigger:logger.eventing-e2e1",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "81b18d0636f36880",
+    "id": "08837ff5508085de",
+    "kind": "SERVER",
+    "name": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+    "timestamp": 1634126338368653,
+    "duration": 6369,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338368664,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "http.status_code": "202",
+      "http.url": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "1b3ea0d064a75bc3",
+    "id": "ac269d59b2dedde2",
+    "kind": "CLIENT",
+    "name": "/eventing-e2e1/br",
+    "timestamp": 1634126338366059,
+    "duration": 2569,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "http.host": "broker-ingress.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/eventing-e2e1/br",
+      "http.status_code": "202",
+      "http.url": "http://broker-ingress.knative-eventing.svc.cluster.local/eventing-e2e1/br",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "d79bacac2eca5245",
+    "id": "1b3ea0d064a75bc3",
+    "kind": "CLIENT",
+    "name": "knative.dev",
+    "timestamp": 1634126338366015,
+    "duration": 2648,
+    "localEndpoint": {
+      "serviceName": "imc-dispatcher",
+      "ipv4": "10.107.147.232"
+    },
+    "tags": {
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "logger",
+      "messaging.destination": "http://broker-ingress.knative-eventing.svc.cluster.local/eventing-e2e1/br",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "2bf12b89c5ba7365",
+    "id": "98c5ba8e979ac706",
+    "kind": "CLIENT",
+    "timestamp": 1634126338352174,
+    "duration": 2977,
+    "localEndpoint": {
+      "serviceName": "broker-ingress.knative-eventing",
+      "ipv4": "10.103.251.15"
+    },
+    "tags": {
+      "http.host": "br-kne-trigger-kn-channel.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "202",
+      "http.url": "http://br-kne-trigger-kn-channel.eventing-e2e1.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "be1c9d83f3da1fc4",
+    "id": "2bf12b89c5ba7365",
+    "name": "broker:br.eventing-e2e1",
+    "timestamp": 1634126338351952,
+    "duration": 3367,
+    "localEndpoint": {
+      "serviceName": "broker-ingress.knative-eventing",
+      "ipv4": "10.103.251.15"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "transformer",
+      "messaging.destination": "broker:br.eventing-e2e1",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "87d5d25b1230704e",
+    "id": "be1c9d83f3da1fc4",
+    "kind": "SERVER",
+    "name": "/eventing-e2e1/br",
+    "timestamp": 1634126338351777,
+    "duration": 3560,
+    "localEndpoint": {
+      "serviceName": "broker-ingress.knative-eventing",
+      "ipv4": "10.103.251.15"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338351794,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "broker-ingress.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/eventing-e2e1/br",
+      "http.status_code": "202",
+      "http.url": "/eventing-e2e1/br",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "726ed8993b5a6f49",
+    "id": "df42679f0d3ac3ea",
+    "kind": "CLIENT",
+    "timestamp": 1634126338367914,
+    "duration": 443,
+    "localEndpoint": {
+      "serviceName": "broker-ingress.knative-eventing",
+      "ipv4": "10.103.251.15"
+    },
+    "tags": {
+      "http.host": "br-kne-trigger-kn-channel.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "202",
+      "http.url": "http://br-kne-trigger-kn-channel.eventing-e2e1.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "059a4994697a1ba8",
+    "id": "726ed8993b5a6f49",
+    "name": "broker:br.eventing-e2e1",
+    "timestamp": 1634126338367841,
+    "duration": 589,
+    "localEndpoint": {
+      "serviceName": "broker-ingress.knative-eventing",
+      "ipv4": "10.103.251.15"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "logger",
+      "messaging.destination": "broker:br.eventing-e2e1",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "ac269d59b2dedde2",
+    "id": "059a4994697a1ba8",
+    "kind": "SERVER",
+    "name": "/eventing-e2e1/br",
+    "timestamp": 1634126338367627,
+    "duration": 839,
+    "localEndpoint": {
+      "serviceName": "broker-ingress.knative-eventing",
+      "ipv4": "10.103.251.15"
+    },
+    "tags": {
+      "http.host": "broker-ingress.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/eventing-e2e1/br",
+      "http.status_code": "202",
+      "http.url": "/eventing-e2e1/br",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "fa17a87d2ce46f69",
+    "id": "81cd93b93eb2fa23",
+    "name": "trigger:logger.eventing-e2e1",
+    "timestamp": 1634126338357609,
+    "duration": 142,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "transformer",
+      "messaging.destination": "trigger:logger.eventing-e2e1",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "8a55a3471770d9a3",
+    "id": "fa17a87d2ce46f69",
+    "kind": "SERVER",
+    "name": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+    "timestamp": 1634126338357449,
+    "duration": 318,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338357463,
+        "value": "Received 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "http.status_code": "200",
+      "http.url": "/triggers/eventing-e2e1/logger/4d6cb7be-d488-4fdf-9d27-6f61324ba079",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "54e6effa8d6dcce5",
+    "id": "aeb43778eff62862",
+    "kind": "CLIENT",
+    "timestamp": 1634126338357897,
+    "duration": 7706,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "tags": {
+      "http.host": "transformer.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "200",
+      "http.url": "http://transformer.eventing-e2e1.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "27ff4b3cdd289ea7",
+    "id": "54e6effa8d6dcce5",
+    "name": "trigger:transformer.eventing-e2e1",
+    "timestamp": 1634126338357599,
+    "duration": 8103,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "transformer",
+      "messaging.destination": "trigger:transformer.eventing-e2e1",
+      "messaging.message_id": "event-1",
+      "messaging.protocol": "HTTP",
+      "messaging.system": "knative"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "6884a9357c01d564",
+    "id": "27ff4b3cdd289ea7",
+    "kind": "SERVER",
+    "name": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+    "timestamp": 1634126338357453,
+    "duration": 8260,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338357468,
+        "value": "Received 35 bytes"
+      },
+      {
+        "timestamp": 1634126338365631,
+        "value": "Sent 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "broker-filter.knative-eventing.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "http.status_code": "200",
+      "http.url": "/triggers/eventing-e2e1/transformer/9a7dc5d8-9439-48dc-bf35-389df993ee87",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "6251c772b209e25a",
+    "id": "8f386b31634e1099",
+    "kind": "CLIENT",
+    "timestamp": 1634126338369024,
+    "duration": 5921,
+    "localEndpoint": {
+      "serviceName": "broker-filter.knative-eventing",
+      "ipv4": "10.103.218.239"
+    },
+    "tags": {
+      "http.host": "recordevents.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "",
+      "http.status_code": "202",
+      "http.url": "http://recordevents.eventing-e2e1.svc.cluster.local",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "aeb43778eff62862",
+    "id": "ae21fdaa557da7f6",
+    "kind": "SERVER",
+    "name": "/",
+    "timestamp": 1634126338360077,
+    "duration": 5160,
+    "localEndpoint": {
+      "serviceName": "transformer",
+      "ipv4": "172.17.0.23"
+    },
+    "annotations": [
+      {
+        "timestamp": 1634126338360088,
+        "value": "Received 35 bytes"
+      },
+      {
+        "timestamp": 1634126338365226,
+        "value": "Sent 35 bytes"
+      }
+    ],
+    "tags": {
+      "http.host": "transformer.eventing-e2e1.svc.cluster.local",
+      "http.method": "POST",
+      "http.path": "/",
+      "http.status_code": "200",
+      "http.url": "/",
+      "http.user_agent": "Go-http-client/1.1",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "parentId": "5070fe3842f6a822",
+    "id": "87d5d25b1230704e",
+    "kind": "CLIENT",
+    "name": "/eventing-e2e1/br",
+    "timestamp": 1634126338348270,
+    "duration": 7379,
+    "localEndpoint": {
+      "serviceName": "sender",
+      "ipv4": "172.17.0.24"
+    },
+    "tags": {
+      "http.host": "",
+      "http.method": "POST",
+      "http.path": "/eventing-e2e1/br",
+      "http.status_code": "202",
+      "http.url": "http://broker-ingress.knative-eventing.svc.cluster.local/eventing-e2e1/br",
+      "opencensus.status_description": "OK"
+    }
+  },
+  {
+    "traceId": "2e571e6948ff981283825bb2bf51c87d",
+    "id": "5070fe3842f6a822",
+    "kind": "CLIENT",
+    "name": "cloudevents.client",
+    "timestamp": 1634126338348097,
+    "duration": 7624,
+    "localEndpoint": {
+      "serviceName": "sender",
+      "ipv4": "172.17.0.24"
+    },
+    "tags": {
+      "cloudevents.datacontenttype": "application/json",
+      "cloudevents.id": "event-1",
+      "cloudevents.source": "sender",
+      "cloudevents.specversion": "1.0",
+      "cloudevents.type": "transformer"
+    }
+  }
+]

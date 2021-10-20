@@ -4,7 +4,7 @@
 # DO NOT EDIT!
 #
 # To regenerate, run:
-#   redir-gen
+#   go run ./tools/redir-gen/
 /actions-downstream-test/* go-get=1 /golang/actions-downstream-test.html 200
 /actions-kind/* go-get=1 /golang/actions-kind.html 200
 /async-component/* go-get=1 /golang/async-component.html 200
@@ -52,8 +52,8 @@
 /monitoring/* go-get=1 /golang/monitoring.html 200
 /net-certmanager/* go-get=1 /golang/net-certmanager.html 200
 /net-contour/* go-get=1 /golang/net-contour.html 200
+/net-gateway-api/* go-get=1 /golang/net-gateway-api.html 200
 /net-http01/* go-get=1 /golang/net-http01.html 200
-/net-ingressv2/* go-get=1 /golang/net-ingressv2.html 200
 /net-istio/* go-get=1 /golang/net-istio.html 200
 /net-kourier/* go-get=1 /golang/net-kourier.html 200
 /networking/* go-get=1 /golang/networking.html 200

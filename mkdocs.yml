@@ -18,7 +18,6 @@ theme:
     - navigation.tabs
     - navigation.tracking
     - navigation.tabs.sticky
-    - navigation.indexes
     - navigation.top
 
 markdown_extensions:
@@ -59,7 +58,6 @@ plugins:
       # (either the include shortcode or not-converted-yet tabs).
       - snippets/*
       - smoketest.md
-      - "*/_index.md" # pretty much all shortcodes
   awesome-pages:
     filename: ".index"
     collapse_single_pages: true

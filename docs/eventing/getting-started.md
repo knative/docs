@@ -21,17 +21,15 @@ kubectl create namespace event-example
 
 The [broker](broker/README.md) allows you to route events to different event sinks or consumers.
 
-1. Add a broker named `default` to your namespace by creating a YAML file using
-the following template:
+1. Add a broker named `default` to your namespace by copying the following YAML into a file:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
-    kind: broker
+    kind: Broker
     metadata:
      name: default
-     namespace: <namespace>
+     namespace: event-example
     ```
-    Where `<namespace>` is your namespace.
 
 1. Apply the YAML file by running the command:
 
@@ -43,9 +41,8 @@ the following template:
 1. Verify that the broker is working correctly, by entering the following command:
 
     ```bash
-    kubectl -n <namespace> get broker default
+    kubectl -n event-example get broker default
     ```
-    Where `<namespace>` is your namespace.
 
     This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
 
@@ -69,6 +66,7 @@ demonstrate how you can configure your event producers to target a specific cons
      kind: Deployment
      metadata:
        name: hello-display
+       namespace: event-example
      spec:
        replicas: 1
        selector:
@@ -88,6 +86,7 @@ demonstrate how you can configure your event producers to target a specific cons
      apiVersion: v1
      metadata:
        name: hello-display
+       namespace: event-example
      spec:
        selector:
          app: hello-display
@@ -112,6 +111,7 @@ into a file:
      kind: Deployment
      metadata:
        name: goodbye-display
+       namespace: event-example
      spec:
        replicas: 1
        selector:
@@ -132,6 +132,7 @@ into a file:
      apiVersion: v1
      metadata:
        name: goodbye-display
+       namespace: event-example
      spec:
        selector:
          app: goodbye-display
@@ -173,6 +174,7 @@ Each trigger can specify a filter that enables selection of relevant events base
    kind: Trigger
    metadata:
      name: hello-display
+     namespace: event-example
    spec:
      broker: default
      filter:
@@ -200,6 +202,7 @@ Each trigger can specify a filter that enables selection of relevant events base
    kind: Trigger
    metadata:
      name: goodbye-display
+     namespace: event-example
    spec:
      broker: default
      filter:
@@ -253,6 +256,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
       labels:
         run: curl
       name: curl
+      namespace: event-example
     spec:
       containers:
         # This could be any image that we can SSH into and has curl.
@@ -334,7 +338,7 @@ The broker can only be accessed from within the cluster where Knative Eventing i
        < Date: Mon, 12 Aug 2019 19:48:18 GMT
        ```
     - To make the third request, which creates an event that has the `type`
-       `greeting` and the`source` `sendoff`, run the following in the SSH terminal:
+       `greeting` and the `source` `sendoff`, run the following in the SSH terminal:
        ```bash
        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
          -X POST \

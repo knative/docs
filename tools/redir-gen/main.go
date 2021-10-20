@@ -17,12 +17,10 @@ import (
 	"context"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
 	"sort"
-	"strings"
 
 	"github.com/google/go-github/v32/github"
 )
@@ -111,37 +109,19 @@ const (
 # DO NOT EDIT!
 #
 # To regenerate, run:
+#   go run ./tools/redir-gen/
 `
 )
 
 func appendRedirs(ris []repoInfo) error {
 	redirFilename := "golang/_redirects"
-	redirFile, err := os.OpenFile(redirFilename, os.O_RDWR|os.O_CREATE, 0755)
+	redirFile, err := os.OpenFile(redirFilename, os.O_TRUNC|os.O_WRONLY|os.O_CREATE, 0755)
 	if err != nil {
 		return fmt.Errorf("unable to open %q: %w", redirFilename, err)
 	}
 	defer redirFile.Close()
 
-	redirs, err := ioutil.ReadAll(redirFile)
-	if err != nil {
-		return fmt.Errorf("unable to read %q: %w", redirFilename, err)
-	}
-
-	seekTo := int64(strings.Index(string(redirs), autogenPrefix))
-	if seekTo == -1 {
-		seekTo = int64(len(redirs))
-	}
-	if _, err := redirFile.Seek(seekTo, 0); err != nil {
-		return fmt.Errorf("unable to seek in %q: %w", redirFilename, err)
-	}
-	if redirFile.Truncate(seekTo) != nil {
-		return fmt.Errorf("unable to truncate %q: %w", redirFilename, err)
-	}
-
 	if _, err := redirFile.WriteString(autogenPrefix); err != nil {
-		return fmt.Errorf("unable to write to %q: %w", redirFilename, err)
-	}
-	if _, err := redirFile.WriteString(fmt.Sprintf("#   %s\n", strings.Join(os.Args, " "))); err != nil {
 		return fmt.Errorf("unable to write to %q: %w", redirFilename, err)
 	}
 	for _, ri := range ris {

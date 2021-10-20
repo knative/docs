@@ -34,11 +34,9 @@ In the following example, you can configure a single collector instance using a 
 1. Create a namespace for the collector to run in, by entering the following command:
 
        ```bash
-       kubectl create namespace <namespace>
+       kubectl create namespace metrics
        ```
-    Where
-
-    - `<namespace>` is the name of the namespace that you want to create for the collector.
+    The next step uses the `metrics` namespace for creating the collector.
 
 1. Create a Deployment, Service, and ConfigMap for the collector by entering the following command:
 
@@ -52,7 +50,7 @@ In the following example, you can configure a single collector instance using a 
        ```bash
        kubectl patch --namespace knative-serving configmap/config-observability \
          --type merge \
-         --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
+         --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
        kubectl patch --namespace knative-eventing configmap/config-observability \
          --type merge \
          --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'

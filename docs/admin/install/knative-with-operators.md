@@ -197,139 +197,186 @@ NAME              VERSION             READY   REASON
 knative-serving   <version number>    True
 ```
 
-### Installing with different networking layers
+### Installing Knative Serving with different networking layers
 
-??? "Installing the Knative Serving component with different network layers"
+Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
+layer, if the ingress is not specified in the Knative Serving CR. Click on each of the following tabs to see how you can configure
+Knative Serving with different ingresses:
 
-    Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
-    layer, if the ingress is not specified in the Knative Serving CR. Click on each of the following tabs to see how you can configure
-    Knative Serving with different ingresses:
+=== "Istio (default)"
 
-    === "Ambassador"
+    The following commands install Istio and enable its Knative integration.
 
-        The following commands install Ambassador and enable its Knative integration.
+    1. [Install Istio](installing-istio.md).
 
-        1. Create a namespace to install Ambassador in:
-          ```bash
-          kubectl create namespace ambassador
-          ```
+    1. To configure Knative Serving to use Istio, copy the following YAML into a file:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        ```
 
-        1. Install Ambassador:
-          ```bash
-          kubectl apply --namespace ambassador \
-            --filename https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
-            --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-            --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-          ```
+    1. If Istio is installed under a namespace other than the default `istio-system`, add the `spec.config.istio` field
+       to the YAML file as follows:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          config:
+            istio:
+              local-gateway.<local-gateway-namespace>.knative-local-gateway: "knative-local-gateway.<istio-namespace>.svc.cluster.local"
+        ```
 
-        1. Give Ambassador the required permissions:
-          ```bash
-          kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
-          ```
+        Where:
 
-        1. Enable Knative support in Ambassador:
-          ```bash
-          kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
-          ```
+        - `<local-gateway-namespace>` is the local gateway namespace, which is the same as Knative Serving namespace `knative-serving`.
+        - `<istio-namespace>` is the namespace where Istio is installed.
 
-        1. To configure Knative Serving to use Ambassador, copy the following YAML into a file:
-          ```yaml
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          spec:
-            config:
-              network:
-                ingress.class: "ambassador.ingress.networking.knative.dev"
-          ```
+    1. Apply the YAML file by running the command:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
 
-        1. Apply the YAML file by running the command:
+        Where `<filename>` is the name of the file you created in the previous step.
 
-            ```bash
-            kubectl apply -f <filename>.yaml
-            ```
-            Where `<filename>` is the name of the file you created in the previous step.
+    1. Fetch the External IP or CNAME by running the command:
+        ```bash
+        kubectl get svc istio-ingressgateway -n <istio-namespace>
+        ```
 
-        1. Fetch the External IP or CNAME:
-          ```bash
-          kubectl --namespace ambassador get service ambassador
-          ```
+        Save this for configuring DNS later.
 
-          Save this for configuring DNS later.
+=== "Ambassador"
 
-    === "Contour"
+    The following commands install Ambassador and enable its Knative integration.
 
-        The following commands install Contour and enable its Knative integration.
+    1. Create a namespace to install Ambassador in:
+        ```bash
+        kubectl create namespace ambassador
+        ```
 
-        1. Install a properly configured Contour:
-          ```bash
-          kubectl apply --filename {{artifact(repo="net-contour",file="contour.yaml")}}
-          ```
+    1. Install Ambassador:
+        ```bash
+        kubectl apply --namespace ambassador \
+          --filename https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
+          --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
+          --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
+        ```
 
-        1. To configure Knative Serving to use Contour, copy the following YAML into a file:
-          ```yaml
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          spec:
-            ingress:
-              contour:
-                enabled: true
-            config:
-              network:
-                ingress.class: "contour.ingress.networking.knative.dev"
-          ```
-        1. Apply the YAML file by running the command:
+    1. Give Ambassador the required permissions:
+        ```bash
+        kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
+        ```
 
-            ```bash
-            kubectl apply -f <filename>.yaml
-            ```
-            Where `<filename>` is the name of the file you created in the previous step.
+    1. Enable Knative support in Ambassador:
+        ```bash
+        kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
+        ```
 
-        1. Fetch the External IP or CNAME:
-          ```bash
-          kubectl --namespace contour-external get service envoy
-          ```
+    1. To configure Knative Serving to use Ambassador, copy the following YAML into a file:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          config:
+            network:
+              ingress.class: "ambassador.ingress.networking.knative.dev"
+        ```
 
-          Save this for configuring DNS later.
+    1. Apply the YAML file by running the command:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
 
-    === "Kourier"
+        Where `<filename>` is the name of the file you created in the previous step.
 
-        The following commands install Kourier and enable its Knative integration.
+    1. Fetch the External IP or CNAME by running the command:
+        ```bash
+        kubectl --namespace ambassador get service ambassador
+        ```
 
-        1. To configure Knative Serving to use Kourier, copy the following YAML into a file:
-          ```yaml
-          apiVersion: operator.knative.dev/v1alpha1
-          kind: KnativeServing
-          metadata:
-            name: knative-serving
-            namespace: knative-serving
-          spec:
-            ingress:
-              kourier:
-                enabled: true
-            config:
-              network:
-                ingress.class: "kourier.ingress.networking.knative.dev"
-          ```
+        Save this for configuring DNS later.
 
-        1. Apply the YAML file by running the command:
+=== "Contour"
 
-            ```bash
-            kubectl apply -f <filename>.yaml
-            ```
-            Where `<filename>` is the name of the file you created in the previous step.
+    The following commands install Contour and enable its Knative integration.
 
-        1. Fetch the External IP or CNAME:
-          ```bash
-          kubectl --namespace knative-serving get service kourier
-          ```
+    1. Install a properly configured Contour:
+        ```bash
+        kubectl apply --filename {{artifact(repo="net-contour",file="contour.yaml")}}
+        ```
 
-          Save this for configuring DNS later.
+    1. To configure Knative Serving to use Contour, copy the following YAML into a file:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          ingress:
+            contour:
+              enabled: true
+          config:
+            network:
+              ingress.class: "contour.ingress.networking.knative.dev"
+        ```
+
+    1. Apply the YAML file by running the command:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+    1. Fetch the External IP or CNAME by running the command:
+        ```bash
+        kubectl --namespace contour-external get service envoy
+        ```
+
+        Save this for configuring DNS later.
+
+=== "Kourier"
+
+    The following commands install Kourier and enable its Knative integration.
+
+    1. To configure Knative Serving to use Kourier, copy the following YAML into a file:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          ingress:
+            kourier:
+              enabled: true
+          config:
+            network:
+              ingress.class: "kourier.ingress.networking.knative.dev"
+        ```
+
+    1. Apply the YAML file by running the command:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+    1. Fetch the External IP or CNAME by running the command:
+        ```bash
+        kubectl --namespace knative-serving get service kourier
+        ```
+
+        Save this for configuring DNS later.
 
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}

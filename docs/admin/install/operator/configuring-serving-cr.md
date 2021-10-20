@@ -6,7 +6,8 @@ The Knative Serving Operator can be configured with the following options:
 - [Knative Serving configuration by ConfigMap](#knative-serving-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
-- [Knative ingress gateway](#configuration-of-knative-ingress-gateway)
+- [Replace the default istio-ingressgateway service](#replace-the-default-istio-ingressgateway-service)
+- [Replace the knative-ingress-gateway gateway](#replace-the-knative-ingress-gateway-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [High availability](#high-availability)
 - [System resource settings](#system-resource-settings)
@@ -260,9 +261,9 @@ spec:
     type: ConfigMap
 ```
 
-## Configuration of Knative ingress gateway
+## Replace the default istio-ingressgateway-service
 
-To set up custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md).
+To set up a custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway-service-and-deployment-instance).
 
 ### Step 2: Update the Knative gateway
 
@@ -280,7 +281,7 @@ spec:
       enabled: true
       knative-ingress-gateway:
         selector:
-          custom: ingressgateway
+          istio: ingressgateway
 ```
 
 ### Step 3: Update Gateway ConfigMap
@@ -299,13 +300,35 @@ spec:
       enabled: true
       knative-ingress-gateway:
         selector:
-          custom: ingressgateway
+          istio: ingressgateway
   config:
     istio:
-      gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.istio-system.svc.cluster.local"
+      gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.custom-ns.svc.cluster.local"
 ```
 
-The key in `spec.config.istio` is in the format of `gateway.{{gateway_namespace}}.{{gateway_name}}`.
+The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
+
+## Replace the knative-ingress-gateway gateway
+
+To create the ingress gateway, follow [**Step 1: Create the Gateway**](../../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway).
+
+### Step 2: Update Gateway ConfigMap
+
+You will need to update the Istio ConfigMap:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  config:
+    istio:
+      gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+```
+
+The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
 
 ## Configuration of cluster local gateway
 
@@ -344,9 +367,9 @@ spec:
 
 ## High availability
 
-By default, Knative Serving runs a single instance of each controller. The `spec.high-availability` field allows you to configure the number of replicas for the following leader-elected controllers: `controller`, `autoscaler-hpa`, `net-istio-controller`. This field also configures the `HorizontalPodAutoscaler` resources for the data plane (`activator`):
+By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for all deployments managed by the operator.
 
-The following configuration specifies a replica count of 3 for the controllers and a minimum of 3 activators (which may scale higher if needed):
+The following configuration specifies a replica count of 3 for the deployments:
 
 ```yaml
 apiVersion: operator.knative.dev/v1alpha1
@@ -358,6 +381,22 @@ spec:
   high-availability:
     replicas: 3
 ```
+
+The `replicas` field also configures the `HorizontalPodAutoscaler` resources based on the `spec.high-availability`. Let's say the operator includes the following HorizontalPodAutoscaler:
+
+```yaml
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  ...
+spec:
+  minReplicas: 3
+  maxReplicas: 5
+```
+
+If you configure `replicas: 2`, which is less than `minReplicas`, the operator transforms `minReplicas` to `1`.
+
+If you configure `replicas: 6`, which is more than `maxReplicas`, the operator transforms `maxReplicas` to `maxReplicas + (replicas - minReplicas)` which is `8`.
 
 ## System Resource Settings
 
@@ -429,7 +468,7 @@ while other system deployments have `2` Replicas by using `spec.high-availabilit
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
-  name: ks
+  name: knative-serving
   namespace: knative-serving
 spec:
   high-availability:
@@ -446,7 +485,7 @@ spec:
 !!! note
     The KnativeServing resource `label` and `annotation` settings override the webhook's labels and annotations for both Deployments and Pods.
 
-### Override nodeSelector
+### Override the nodeSelector
 
 The following KnativeServing resource overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
 
@@ -454,11 +493,83 @@ The following KnativeServing resource overrides the `webhook` deployment to use 
 apiVersion: operator.knative.dev/v1alpha1
 kind: KnativeServing
 metadata:
-  name: ks
+  name: knative-serving
   namespace: knative-serving
 spec:
   deployments:
   - name: webhook
     nodeSelector:
       disktype: hdd
+```
+
+### Override the tolerations
+
+The KnativeServing resource is able to override tolerations for the Knative Serving deployment resources.
+For example, if you would like to add the following tolerations
+
+```yaml
+tolerations:
+- key: "key1"
+  operator: "Equal"
+  value: "value1"
+  effect: "NoSchedule"
+```
+
+to the deployment `activator`, you need to change your KnativeServing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: activator
+    tolerations:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoSchedule"
+```
+
+### Override the affinity
+
+The KnativeServing resource is able to override the affinity, including nodeAffinity, podAffinity, and podAntiAffinity,
+for the Knative Serving deployment resources. For example, if you would like to add the following nodeAffinity
+
+```yaml
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: disktype
+          operator: In
+          values:
+          - ssd
+```
+
+to the deployment `activator`, you need to change your KnativeServing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: activator
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+            - key: disktype
+              operator: In
+              values:
+              - ssd
 ```
