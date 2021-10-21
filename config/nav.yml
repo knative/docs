@@ -53,12 +53,13 @@ nav:
           - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
         # Uninstall
         - Uninstalling Knative: admin/install/uninstall.md
-        # Observability
-        - Logging: admin/collecting-logs/README.md
-        - Metrics:
-          - About metrics: admin/collecting-metrics/README.md
-          - Knative Eventing metrics: admin/collecting-metrics/eventing-metrics/metrics.md
-          - Knative Serving metrics: admin/collecting-metrics/serving-metrics/metrics.md
+        # Administrator configuration of observability tools
+        - Observability:
+          - Collecting logs: admin/observability/collecting-logs/collecting-logs.md
+          - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
+          - Configuring logging: admin/observability/config-logging/logging.md
+          - Knative Eventing metrics: admin/observability/collecting-metrics/eventing-metrics/metrics.md
+          - Knative Serving metrics: admin/observability/collecting-metrics/serving-metrics/metrics.md
         # Serving config
         - Knative Serving configuration:
           - Revision garbage collection: admin/serving/revision-gc.md

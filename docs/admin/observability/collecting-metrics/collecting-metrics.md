@@ -106,7 +106,7 @@ In the following example, you can configure a single collector instance using a 
 1. Create a Deployment, Service, and ConfigMap for the collector by entering the following command:
 
        ```bash
-       kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/admin/collecting-metrics/collector.yaml
+       kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/admin/observability/collecting-metrics/collector.yaml
        ```
 
 1. Update the `config-observability` ConfigMaps in the Knative Serving and
@@ -115,7 +115,7 @@ In the following example, you can configure a single collector instance using a 
        ```bash
        kubectl patch --namespace knative-serving configmap/config-observability \
          --type merge \
-         --patch '{"data":{"metrics.backend-destination":"opencensus","request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
+         --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.request-metrics-backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
        kubectl patch --namespace knative-eventing configmap/config-observability \
          --type merge \
          --patch '{"data":{"metrics.backend-destination":"opencensus","metrics.opencensus-address":"otel-collector.metrics:55678"}}'
