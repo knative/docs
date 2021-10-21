@@ -41,7 +41,7 @@ In the following example, you can configure a single collector instance using a 
 1. Create a Deployment, Service, and ConfigMap for the collector by entering the following command:
 
        ```bash
-       kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/admin/collecting-metrics/collector.yaml
+       kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/admin/observability/collecting-metrics/collector.yaml
        ```
 
 1. Update the `config-observability` ConfigMaps in the Knative Serving and

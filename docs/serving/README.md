@@ -71,7 +71,7 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## Observability
 
-- [Serving Metrics API](../admin/collecting-metrics/serving-metrics/metrics.md)
+- [Serving Metrics API](../admin/observability/collecting-metrics/serving-metrics/metrics.md)
 
 ## Known Issues
 
