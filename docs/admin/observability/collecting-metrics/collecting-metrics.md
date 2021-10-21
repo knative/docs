@@ -37,7 +37,7 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
             podMonitorSelectorNilUsesHelmValues: false
         ```
 
-1. Apply the ServiceMonitors/PodMonitors to cqollect metrics from Knative.
+1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
 
        ```bash
        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
