@@ -120,8 +120,8 @@ nav:
       # TODO: Create separate files for Serving and Eventing
       - Observability:
           - Collecting logs: admin/observability/collecting-logs/collecting-logs.md
-          - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
           - Configuring logging: admin/observability/config-logging/logging.md
+          - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
           - Knative Serving metrics: admin/observability/collecting-metrics/serving-metrics/metrics.md
       # Serving - troubleshooting
       - Troubleshooting:
@@ -203,8 +203,8 @@ nav:
       # TODO: Create separate files for Serving and Eventing
       - Observability:
         - Collecting logs: admin/observability/collecting-logs/collecting-logs.md
-        - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
         - Configuring logging: admin/observability/config-logging/logging.md
+        - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
         - Knative Eventing metrics: admin/observability/collecting-metrics/eventing-metrics/metrics.md
       # Eventing - troubleshooting
       - Troubleshooting:
