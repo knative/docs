@@ -232,12 +232,12 @@ Here are a some example Triggers that subscribe to events using exact matching o
          name: push-service
     ```
     !!! note
-        As the example registry output mentioned, only two sources, Knative's
-        Eventing and Serving repositories, exist for that particular type of event.
+        As the example registry output mentioned, only two sources, the `knative/eventing`
+        and `knative/serving` GitHub repositories, exist for that particular type of event.
         If later on new sources are registered for GitHub pushes, this Trigger
         is able to consume them.
 
-* Subscribes to GitHub _pull requests_ from Knative's Eventing repository:
+* Subscribes to GitHub _pull requests_ from the `knative/eventing` GitHub repository:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
