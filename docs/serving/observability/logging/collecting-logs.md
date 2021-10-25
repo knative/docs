@@ -1,0 +1,1 @@
+--8<-- "collecting-logs.md"
