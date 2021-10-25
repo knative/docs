@@ -115,7 +115,7 @@ Follow the procedure for the Broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
-    For more information, see the [Kafka Broker](../../../eventing/broker/kafka-broker/README.md) documentation.
+    For more information, see the [Kafka Broker](../../eventing/broker/kafka-broker/README.md) documentation.
 
 === "MT-Channel-based"
 

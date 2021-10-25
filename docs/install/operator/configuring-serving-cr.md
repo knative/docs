@@ -44,7 +44,7 @@ The KnativeServing custom resource (CR) allows you to set values for these Confi
 Knative Serving has multiple ConfigMaps that are named with the prefix `config-`.
 The `spec.config` in the KnativeServing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
-In the [setup a custom domain example](../../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
+In the [setup a custom domain example](../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
 `config-domain` is:
 
 ```yaml
@@ -263,7 +263,7 @@ spec:
 
 ## Replace the default istio-ingressgateway-service
 
-To set up a custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway-service-and-deployment-instance).
+To set up a custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway-service-and-deployment-instance).
 
 ### Step 2: Update the Knative gateway
 
@@ -310,7 +310,7 @@ The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.
 
 ## Replace the knative-ingress-gateway gateway
 
-To create the ingress gateway, follow [**Step 1: Create the Gateway**](../../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway).
+To create the ingress gateway, follow [**Step 1: Create the Gateway**](../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway).
 
 ### Step 2: Update Gateway ConfigMap
 
@@ -336,7 +336,7 @@ Update `spec.ingress.istio.knative-local-gateway` to select the labels of the ne
 
 ### Default local gateway name:
 
-Go through the guide [here](../installing-istio.md#installing-istio-without-sidecar-injection) to use local cluster gateway,
+Go through the [installing Istio](../serving/installing-istio.md#installing-istio-without-sidecar-injection) guide to use local cluster gateway,
 if you use the default gateway called `knative-local-gateway`.
 
 ### Non-default local gateway name:

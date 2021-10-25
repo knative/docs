@@ -18,7 +18,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../admin/install/serving/install-serving-with-yaml.md).
+  [installation instructions](../../../../install/serving/install-serving-with-yaml.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - (optional) The Knative CLI client

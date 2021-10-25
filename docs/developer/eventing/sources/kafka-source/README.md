@@ -15,8 +15,8 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 - Set up a Kubernetes cluster with the Kafka event source installed.
 You can install the Kafka event source by using
-[YAML](../../../../admin/install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions)
-or the [Knative Operator](../../../../admin/install/knative-with-operators.md#installing-with-different-eventing-sources).
+[YAML](../../../../install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions)
+or the [Knative Operator](../../../../install/operator/knative-with-operators.md#installing-with-different-eventing-sources).
 
 ## Optional: Create a Kafka topic
 
