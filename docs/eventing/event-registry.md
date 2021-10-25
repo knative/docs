@@ -84,7 +84,7 @@ You can populate the registry with EventType objects manually or automatically.
 Automatic registration can be the easier method, but it only supports a subset of
 event sources.
 
-### Manual Registration
+### Manual registration
 
 For manual registration, the cluster configurator applies EventTypes YAML files
 the same as with any other Kubernetes resource.
