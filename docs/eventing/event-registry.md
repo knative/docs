@@ -123,7 +123,7 @@ Broker as their sink.
 
 #### Procedure for automatic registration
 
-- To register EventTypes automatically, apply your Event Source YAML file by running:
+- To register EventTypes automatically, apply your event source YAML file by running the command:
 
     ```bash
     kubectl apply -f <event-source.yaml>
@@ -131,7 +131,7 @@ Broker as their sink.
 
 After your event source is instantiated, EventTypes are added to the registry.
 
-#### Example: automatic registration using KafkSource
+#### Example: Automatic registration using KafkaSource
 
 Given the following KafkaSource sample to populate the registry:
 
