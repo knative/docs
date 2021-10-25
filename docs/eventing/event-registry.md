@@ -101,7 +101,7 @@ To apply EventTypes YAML files manually:
     kubectl apply -f <event-type.yaml>
     ```
 
-### Automatic Registration
+### Automatic registration
 
 Because manual registration might be tedious and error-prone, Knative also supports
 registering EventTypes automatically.
