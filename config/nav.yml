@@ -117,12 +117,11 @@ nav:
           - Feature and extension flags: admin/serving/feature-flags.md
           - Configure the Defaults ConfigMap: admin/serving/config-defaults.md
       # Serving - observability
-      # TODO: Create separate files for Serving and Eventing
       - Observability:
-          - Collecting logs: admin/observability/collecting-logs/collecting-logs.md
-          - Configuring logging: admin/observability/config-logging/logging.md
-          - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
-          - Knative Serving metrics: admin/observability/collecting-metrics/serving-metrics/metrics.md
+        - Collecting logs: serving/observability/logging/collecting-logs.md
+        - Configuring logging: serving/observability/logging/config-logging.md
+        - Collecting metrics: serving/observability/metrics/collecting-metrics.md
+        - Knative Serving metrics: serving/observability/metrics/serving-metrics.md
       # Serving - troubleshooting
       - Troubleshooting:
         - Debugging application issues: developer/serving/troubleshooting/debugging-application-issues.md
@@ -200,12 +199,11 @@ nav:
           - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
           - Configure event source defaults: admin/eventing/sources-configuration.md
       # Eventing - observability
-      # TODO: Create separate files for Serving and Eventing
       - Observability:
-        - Collecting logs: admin/observability/collecting-logs/collecting-logs.md
-        - Configuring logging: admin/observability/config-logging/logging.md
-        - Collecting metrics: admin/observability/collecting-metrics/collecting-metrics.md
-        - Knative Eventing metrics: admin/observability/collecting-metrics/eventing-metrics/metrics.md
+        - Collecting logs: eventing/observability/logging/collecting-logs.md
+        - Configuring logging: eventing/observability/logging/config-logging.md
+        - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
+        - Knative Eventing metrics: eventing/observability/metrics/eventing-metrics.md
       # Eventing - troubleshooting
       - Troubleshooting:
         - Debugging: eventing/debugging/README.md
