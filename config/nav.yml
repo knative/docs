@@ -24,7 +24,7 @@ nav:
 ###############################################################################
     # Installing
 ###############################################################################
-    - Installing:
+    - Installing Knative:
       - Overview: admin/install/README.md
       # Serving Installation
       - Install Knative Serving:
