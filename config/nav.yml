@@ -24,7 +24,7 @@ nav:
 ###############################################################################
     # Installing
 ###############################################################################
-    - Installing Knative:
+    - Installing:
       - Overview: admin/install/README.md
       # Serving Installation
       - Install Knative Serving:
@@ -62,7 +62,7 @@ nav:
 ###############################################################################
     # Serving
 ###############################################################################
-    - Knative Serving:
+    - Serving:
       - Overview: serving/README.md
       # Serving - developer docs
       - Developer Topics:
@@ -129,7 +129,7 @@ nav:
 ###############################################################################
     # Eventing
 ###############################################################################
-    - Knative Eventing:
+    - Eventing:
       - Overview: eventing/README.md
       - Eventing getting started: eventing/getting-started.md # do we need this as well as the getting started guide?
       # Eventing - developer docs
@@ -190,6 +190,7 @@ nav:
           - Broker configuration example: eventing/broker/example-mtbroker.md
           - Apache Kafka Broker: eventing/broker/kafka-broker/README.md
           - RabbitMQ Broker: eventing/broker/rabbitmq-broker/README.md
+        - Accessing CloudEvent traces: eventing/accessing-traces.md 
       # Eventing - admin docs
       - Administrator topics:
         # Eventing config
@@ -198,7 +199,6 @@ nav:
           - Configure Broker defaults: admin/eventing/broker-configuration.md
           - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
           - Configure event source defaults: admin/eventing/sources-configuration.md
-        - Accessing CloudEvent traces: eventing/accessing-traces.md # not sure whether this is admin or dev (or neither)
       # Eventing - observability
       # TODO: Create separate files for Serving and Eventing
       - Observability:
