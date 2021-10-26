@@ -190,7 +190,7 @@ nav:
           - Broker configuration example: eventing/broker/example-mtbroker.md
           - Apache Kafka Broker: eventing/broker/kafka-broker/README.md
           - RabbitMQ Broker: eventing/broker/rabbitmq-broker/README.md
-        - Accessing CloudEvent traces: eventing/accessing-traces.md 
+        - Accessing CloudEvent traces: eventing/accessing-traces.md
       # Eventing - admin docs
       - Administrator topics:
         # Eventing config
