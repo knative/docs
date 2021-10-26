@@ -110,7 +110,7 @@ nav:
         - Changing the default domain: serving/using-a-custom-domain.md
         - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
         # Serving config
-        - Knative Serving configuration:
+        - Serving configuration:
           - Revision garbage collection: admin/serving/revision-gc.md
           - Configure Deployment resources: admin/serving/deployment.md
           - Configuring gradual rollout of traffic to Revisions: admin/serving/rolling-out-latest-revision-configmap.md
@@ -193,7 +193,7 @@ nav:
       # Eventing - admin docs
       - Administrator topics:
         # Eventing config
-        - Knative Eventing configuration:
+        - Eventing configuration:
           - Configure Channel defaults: admin/eventing/channel-configuration.md
           - Configure Broker defaults: admin/eventing/broker-configuration.md
           - Configure Kafka Channel defaults: admin/eventing/kafka-channel-configuration.md
@@ -269,7 +269,10 @@ nav:
     - Blog: /blog/
     # Reference docs
     - Reference:
-      - Serving: reference/api/serving-api.md
-      - Eventing: reference/api/eventing-api.md
-      - Duck typing: developer/concepts/duck-typing.md
+      - Overview: reference/README.md
+      - API:
+        - Serving: reference/api/serving-api.md
+        - Eventing: reference/api/eventing-api.md
+      - Concepts:
+        - Duck types: developer/concepts/duck-typing.md
     - "Join the Community ➠": /community/
