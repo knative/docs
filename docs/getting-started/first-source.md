@@ -78,10 +78,10 @@ Create the CloudEvents Player Service:
 
 ??? tip "Want to send events via the command line instead?"
     As an alternative to the Web form, events can also be sent/viewed via the command line.
-    
+
     To post an event:
     ```bash
-    curl -v http://cloudevents-player.default.127.0.0.1.nip.io \
+    curl -i http://cloudevents-player.default.127.0.0.1.nip.io \
         -H "Content-Type: application/json" \
         -H "Ce-Id: 123456789" \
         -H "Ce-Specversion: 1.0" \
@@ -89,10 +89,10 @@ Create the CloudEvents Player Service:
         -H "Ce-Source: command-line" \
         -d '{"msg":"Hello CloudEvents!"}'
     ```
-    
+
     And to view events:
     ```bash
-    curl -v http://cloudevents-player.default.127.0.0.1.nip.io/messages \
+    curl http://cloudevents-player.default.127.0.0.1.nip.io/messages \
         -H "Content-Type: application/json"
     ```
 
