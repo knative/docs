@@ -32,7 +32,7 @@ information back and forth between your Services and these components.
 
 
 ## Examining the Broker
-As part of the `KonK` install, an In-Memory Broker should have already be installed in your Cluster. Check to see that it is installed by running the command:
+As part of the `kn quickstart` install, an In-Memory Broker should have already be installed in your Cluster. Check to see that it is installed by running the command:
 
 ```bash
 kn broker list
