@@ -3,7 +3,7 @@
 Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that define an event mesh for collecting a pool of [CloudEvents](https://cloudevents.io/). Brokers provide a discoverable endpoint, `status.address`, for event ingress, and triggers for event delivery. Event producers can send events to a broker by POSTing the event to the `status.address.url` of the broker.
 
 Event delivery mechanics are an implementation detail that depend on the configured
-[broker class](../../admin/eventing/broker-configuration.md#broker-class-options).
+[broker class](../configuration/broker-configuration.md#broker-class-options).
 Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
 ![An event enters a Broker. The Broker uses Triggers to forward the event to the appropriate Subscriber.](images/broker-workflow.svg)
@@ -51,5 +51,5 @@ For more information, see [RabbitMQ Broker](rabbitmq-broker/README.md) or [the d
 ## Next steps
 
 - Create an [MT channel-based broker](create-mtbroker.md).
-- Configure [default broker ConfigMap settings](../../admin/eventing/broker-configuration.md).
+- Configure [default broker ConfigMap settings](../configuration/broker-configuration.md).
 - View the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/broker.md).

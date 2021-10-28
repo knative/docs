@@ -3,7 +3,7 @@
 {{ feature(beta="0.24") }}
 
 By providing the reference to an existing _TLS Certificate_ you can instruct a `DomainMapping` to use that
-certificate to secure the mapped service. Using this feature skips [autoTLS](../../../serving/using-auto-tls.md) certificate creation.
+certificate to secure the mapped service. Using this feature skips [autoTLS](../using-auto-tls.md) certificate creation.
 
 ## Prerequisites
 

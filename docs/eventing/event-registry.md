@@ -14,7 +14,7 @@ type information in the cluster data store.
    particularly the
    [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
    section.
-1. Be familiar with [event sources](../developer/eventing/sources/README.md).
+1. Be familiar with [event sources](../eventing/sources/README.md).
 
 ## Discovering events with the registry
 

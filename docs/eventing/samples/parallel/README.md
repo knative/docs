@@ -17,7 +17,7 @@ All examples are using the
 ## Examples
 
 Each of the following examples use
-[`PingSource`](../../../developer/eventing/sources/ping-source/README.md) as the source of events.
+[`PingSource`](../../../eventing/sources/ping-source/README.md) as the source of events.
 
 We also use simple
 [functions](https://github.com/lionelvillard/knative-functions) to perform
