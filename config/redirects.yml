@@ -1,41 +1,90 @@
 plugins:
   redirects:
     redirect_maps:
-      developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md: eventing/samples/writing-event-source-easy-way/README.md
-      developer/eventing/sources/containersource/reference.md: eventing/custom-event-source/containersource/reference.md
-      developer/eventing/sources/sinkbinding/reference.md: eventing/custom-event-source/sinkbinding/reference.md
-      developer/eventing/sources/sinkbinding/getting-started.md: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
-      developer/eventing/sources/sinkbinding/README.md: eventing/custom-event-source/sinkbinding/README.md
-      developer/eventing/sources/containersource/README.md: eventing/custom-event-source/containersource/README.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md: eventing/custom-event-source/custom-event-source/README.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md: eventing/custom-event-source/custom-event-source/publish-event-source.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md: eventing/custom-event-source/custom-event-source/receive-adapter.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md: eventing/custom-event-source/custom-event-source/receive-adapter.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md: eventing/custom-event-source/custom-event-source/README.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/README.md: eventing/custom-event-source/custom-event-source/README.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md: eventing/custom-event-source/custom-event-source/controller.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md: eventing/custom-event-source/custom-event-source/README.md
-      developer/eventing/sources/creating-event-sources/README.md: eventing/custom-event-source/README.md
-      serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
-      serving/feature-flags.md: serving/configuration/feature-flags.md
-      serving/using-subroutes.md: serving/traffic-management.md
-      serving/samples/blue-green-deployment.md: serving/traffic-management.md
-      serving/samples/traffic-splitting/README.md: serving/traffic-management.md
-      serving/installing-cert-manager.md: install/serving/installing-cert-manager.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
-      admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
       admin/collecting-metrics/eventing-metrics/metrics.md: eventing/observability/metrics/eventing-metrics.md
+      admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
       admin/collecting-metrics/serving-metrics/metrics.md: serving/observability/metrics/serving-metrics.md
+      admin/eventing/broker-configuration.md: eventing/configuration/broker-configuration.md
+      admin/eventing/channel-configuration.md: eventing/configuration/channel-configuration.md
+      admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
+      admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
+      admin/install/eventing/eventing-installation-files.md: install/eventing/eventing-installation-files.md
+      admin/install/eventing/install-eventing-with-yaml.md: install/eventing/install-eventing-with-yaml.md
       admin/install/install-eventing-with-yaml.md: install/eventing/install-eventing-with-yaml.md
       admin/install/install-serving-with-yaml.md: install/serving/install-serving-with-yaml.md
       admin/install/installing-istio.md: install/serving/installing-istio.md
+      admin/install/installing-istio.md: install/serving/installing-istio.md
+      admin/install/knative-offerings.md: install/knative-offerings.md
+      admin/install/knative-with-operators.md: install/operator/knative-with-operators.md
+      admin/install/operator/configuring-eventing-cr.md: install/operator/configuring-eventing-cr.md
+      admin/install/operator/configuring-serving-cr.md: install/operator/configuring-serving-cr.md
+      admin/install/README.md: install/README.md
+      admin/install/serving/install-serving-with-yaml.md: install/serving/install-serving-with-yaml.md
+      admin/install/serving/serving-installation-files.md: install/serving/serving-installation-files.md
+      admin/install/uninstall.md: install/uninstall.md
+      admin/serving/config-defaults.md: serving/configuration/config-defaults.md
+      admin/serving/deployment.md: serving/configuration/deployment.md
+      admin/serving/feature-flags.md: serving/configuration/feature-flags.md
+      admin/serving/revision-gc.md: serving/configuration/revision-gc.md
+      admin/serving/rolling-out-latest-revision-configmap.md: serving/configuration/rolling-out-latest-revision-configmap.md
+      admin/upgrade/index.md: install/upgrade/README.md
+      admin/upgrade/upgrade-installation-with-operator.md: install/upgrade/upgrade-installation-with-operator.md
+      admin/upgrade/upgrade-installation.md: install/upgrade/upgrade-installation.md
+      check-install-version.md: install/upgrade/check-install-version.md
+      client/configure-kn.md: install/client/configure-kn.md
       client/connecting-kn-to-your-cluster/index.md: install/client/README.md
+      client/install-kn.md: install/client/install-kn.md
+      client/kn-plugins.md: install/client/kn-plugins.md
+      client/README.md: install/client/README.md
       concepts/overview.md: index.md
+      developer/concepts/duck-typing.md: reference/concepts/duck-typing.md
+      developer/eventing/event-delivery.md: eventing/event-delivery.md
+      developer/eventing/sinks/kafka-sink.md: eventing/sinks/kafka-sink.md
+      developer/eventing/sinks/README.md: eventing/sinks/README.md
+      developer/eventing/sources/apache-camel-source/README.md: eventing/sources/apache-camel-source/README.md
+      developer/eventing/sources/apiserversource/getting-started.md: eventing/sources/apiserversource/getting-started.md
+      developer/eventing/sources/apiserversource/reference.md: eventing/sources/apiserversource/reference.md
+      developer/eventing/sources/containersource/README.md: eventing/custom-event-source/containersource/README.md
+      developer/eventing/sources/containersource/reference.md: eventing/custom-event-source/containersource/reference.md
+      developer/eventing/sources/creating-event-sources/README.md: eventing/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md: eventing/samples/writing-event-source-easy-way/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md: eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md: eventing/custom-event-source/custom-event-source/controller.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md: eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md: eventing/custom-event-source/custom-event-source/receive-adapter.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md: eventing/custom-event-source/custom-event-source/receive-adapter.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md: eventing/custom-event-source/custom-event-source/publish-event-source.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md: eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/README.md: eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/kafka-source/README.md: eventing/sources/kafka-source/README.md
+      developer/eventing/sources/ping-source/README.md: eventing/sources/ping-source/README.md
+      developer/eventing/sources/ping-source/reference.md: eventing/sources/ping-source/reference.md
+      developer/eventing/sources/README.md: eventing/sources/README.md
+      developer/eventing/sources/sinkbinding/getting-started.md: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
+      developer/eventing/sources/sinkbinding/README.md: eventing/custom-event-source/sinkbinding/README.md
+      developer/eventing/sources/sinkbinding/reference.md: eventing/custom-event-source/sinkbinding/reference.md
+      developer/serving/deploying-from-private-registry.md: serving/deploying-from-private-registry.md
+      developer/serving/rolling-out-latest-revision.md: serving/rolling-out-latest-revision.md
+      developer/serving/services/byo-certificate.md: serving/services/byo-certificate.md
+      developer/serving/services/certificate-class.md: serving/services/certificate-class.md
+      developer/serving/services/configure-requests-limits-services.md: serving/services/configure-requests-limits-services.md
+      developer/serving/services/creating-services.md: serving/services/creating-services.md
+      developer/serving/services/custom-domains.md: serving/services/custom-domains.md
+      developer/serving/services/http-option.md: serving/services/http-option.md
+      developer/serving/services/ingress-class.md: serving/services/ingress-class.md
+      developer/serving/services/private-services.md: serving/services/private-services.md
+      developer/serving/services/README.md: serving/services/README.md
+      developer/serving/services/service-metrics.md: serving/services/service-metrics.md
+      developer/serving/tag-resolution.md: serving/tag-resolution.md
+      developer/serving/traffic-management.md: serving/traffic-management.md
+      developer/serving/troubleshooting/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
       eventing/broker/alternate/index.md: eventing/broker/README.md
       eventing/broker/broker-event-delivery.md: eventing/event-delivery.md
       eventing/broker/configmaps/README.md: eventing/configuration/broker-configuration.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
+      evetnting/debugging/README.md: eventing/troubleshooting/README.md
       eventing/metrics.md: eventing/observability/metrics/eventing-metrics.md
       eventing/parallel.md: eventing/flows/parallel.md
       eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
@@ -49,33 +98,18 @@ plugins:
       eventing/samples/sequence/sequence-with-broker-trigger/index.md: eventing/flows/sequence/sequence-with-broker-trigger/README.md
       eventing/samples/sinkbinding/README.md: eventing/custom-event-source/sinkbinding/README.md
       eventing/sequence.md: eventing/flows/sequence/README.md
-      eventing/sink/README.md: eventing/sinks/README.md
       eventing/sink/kafka-sink.md: eventing/sinks/kafka-sink.md
+      eventing/sink/README.md: eventing/sinks/README.md
       eventing/sources/apiserversource/index.md: eventing/sources/apiserversource/README.md
-      eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
       eventing/sources/containersource.md: eventing/custom-event-source/containersource/README.md
+      eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
       eventing/triggers/index.md: eventing/broker/triggers/README.md
       help/README.md: help/contributor/README.md
-      admin/install/README.md: install/README.md
-      check-install-version.md: install/upgrade/check-install-version.md
       install/collecting-logs/index.md: serving/observability/logging/collecting-logs.md
       install/collecting-metrics/index.md: serving/observability/metrics/collecting-metrics.md
       install/getting-started-knative-app/index.md: getting-started/README.md
-      serving/getting-started-knative-app.md: getting-started/README.md
-      # This doesn't exist anymore, we should probably replace it
       install/install-extensions.md: install/README.md
-      client/install-kn.md: install/client/install-kn.md
-      client/configure-kn.md: install/client/configure-kn.md
-      client/kn-plugins.md: install/client/kn-plugins.md
-      client/README.md: install/client/README.md
       install/installation-files.md: install/README.md
-      admin/install/installing-istio.md: install/serving/installing-istio.md
-      admin/install/knative-offerings.md: install/knative-offerings.md
-      admin/install/knative-with-operators.md: install/operator/knative-with-operators.md
-      admin/install/eventing/install-eventing-with-yaml.md: install/eventing/install-eventing-with-yaml.md
-      admin/install/serving/install-serving-with-yaml.md: install/serving/install-serving-with-yaml.md
-      admin/install/operator/configuring-eventing-cr.md: install/operator/configuring-eventing-cr.md
-      admin/install/operator/configuring-serving-cr.md: install/operator/configuring-serving-cr.md
       install/prerequisites.md: install/README.md
       operator/configuring-eventing-cr/index.md: install/operator/configuring-eventing-cr.md
       operator/configuring-serving-cr/index.md: install/operator/configuring-serving-cr.md
@@ -85,51 +119,17 @@ plugins:
       serving/configuring-autoscaling/index.md: serving/autoscaling/README.md
       serving/creating-domain-mappings.md: serving/services/custom-domains.md
       serving/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
+      serving/feature-flags.md: serving/configuration/feature-flags.md
+      serving/getting-started-knative-app.md: getting-started/README.md
+      serving/installing-cert-manager.md: install/serving/installing-cert-manager.md
       serving/metrics.md: serving/observability/metrics/serving-metrics.md
       serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
-      serving/services/README.md: serving/services/README.md
+      serving/samples/blue-green-deployment.md: serving/traffic-management.md
+      serving/samples/traffic-splitting/README.md: serving/traffic-management.md
       serving/services/creating-services.md: serving/services/creating-services.md
       serving/services/deployment.md: serving/configuration/deployment.md
       serving/services/private-services.md: serving/services/private-services.md
+      serving/services/README.md: serving/services/README.md
+      serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
-      admin/install/uninstall.md: install/uninstall.md
-      admin/upgrade/index.md: install/upgrade/README.md
-      admin/upgrade/upgrade-installation-with-operator.md: install/upgrade/upgrade-installation-with-operator.md
-      admin/upgrade/upgrade-installation.md: install/upgrade/upgrade-installation.md
-      admin/install/eventing/eventing-installation-files.md: install/eventing/eventing-installation-files.md
-      admin/install/serving/serving-installation-files.md: install/serving/serving-installation-files.md
-      admin/serving/config-defaults.md: serving/configuration/config-defaults.md
-      admin/serving/deployment.md: serving/configuration/deployment.md
-      admin/serving/feature-flags.md: serving/configuration/feature-flags.md
-      admin/serving/revision-gc.md: serving/configuration/revision-gc.md
-      admin/serving/rolling-out-latest-revision-configmap.md: serving/configuration/rolling-out-latest-revision-configmap.md
-      developer/serving/services/byo-certificate.md: serving/services/byo-certificate.md
-      developer/serving/services/certificate-class.md: serving/services/certificate-class.md
-      developer/serving/services/configure-requests-limits-services.md: serving/services/configure-requests-limits-services.md
-      developer/serving/services/creating-services.md: serving/services/creating-services.md
-      developer/serving/services/custom-domains.md: serving/services/custom-domains.md
-      developer/serving/services/http-option.md: serving/services/http-option.md
-      developer/serving/services/ingress-class.md: serving/services/ingress-class.md
-      developer/serving/services/private-services.md: serving/services/private-services.md
-      developer/serving/services/README.md: serving/services/README.md
-      developer/serving/services/service-metrics.md: serving/services/service-metrics.md
-      developer/serving/troubleshooting/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
-      developer/serving/deploying-from-private-registry.md: serving/deploying-from-private-registry.md
-      developer/serving/rolling-out-latest-revision.md: serving/rolling-out-latest-revision.md
-      developer/serving/tag-resolution.md: serving/tag-resolution.md
-      developer/serving/traffic-management.md: serving/traffic-management.md
-      admin/eventing/broker-configuration.md: eventing/configuration/broker-configuration.md
-      admin/eventing/channel-configuration.md: eventing/configuration/channel-configuration.md
-      admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
-      admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
-      developer/eventing/sinks/kafka-sink.md: eventing/sinks/kafka-sink.md
-      developer/eventing/sinks/README.md: eventing/sinks/README.md
-      developer/eventing/sources/apache-camel-source/README.md: eventing/sources/apache-camel-source/README.md
-      developer/eventing/sources/apiserversource/getting-started.md: eventing/sources/apiserversource/getting-started.md
-      developer/eventing/sources/apiserversource/reference.md: eventing/sources/apiserversource/reference.md
-      developer/eventing/sources/kafka-source/README.md: eventing/sources/kafka-source/README.md
-      developer/eventing/sources/ping-source/README.md: eventing/sources/ping-source/README.md
-      developer/eventing/sources/ping-source/reference.md: eventing/sources/ping-source/reference.md
-      developer/eventing/sources/README.md: eventing/sources/README.md
-      developer/eventing/event-delivery.md: eventing/event-delivery.md
-      developer/concepts/duck-typing.md: reference/concepts/duck-typing.md
+      serving/using-subroutes.md: serving/traffic-management.md

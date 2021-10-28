@@ -206,7 +206,7 @@ nav:
         - Knative Eventing metrics: eventing/observability/metrics/eventing-metrics.md
       # Eventing - troubleshooting
       - Troubleshooting:
-        - Debugging: eventing/debugging/README.md
+        - Debugging: eventing/troubleshooting/README.md
       - Experimental Features: eventing/experimental-features.md
 ###############################################################################
     # Code samples
