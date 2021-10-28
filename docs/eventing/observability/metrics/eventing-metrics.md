@@ -38,7 +38,7 @@ By aggregating the metrics over the http code, events can be separated into two 
 !!! note
     A number of metrics eg. controller, Go runtime and others are omitted here as they are common
     across most components. For more about these metrics check the
-    [Serving metrics API section](../serving-metrics/metrics.md).
+    [Serving metrics API section](../../../serving/observability/metrics/serving-metrics.md).
 
 ## Eventing sources
 
