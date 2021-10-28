@@ -44,7 +44,7 @@ nav:
         - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
       # kn Installation
-      - Install kn:
+      - Install the Knative CLI:
         - Overview: install/client/README.md
         - Installing kn: install/client/install-kn.md
         - Customizing kn: install/client/configure-kn.md
