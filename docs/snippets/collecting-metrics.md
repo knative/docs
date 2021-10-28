@@ -1,6 +1,7 @@
 # Collecting Metrics in Knative
 
 Knative supports different popular tools for collecting metrics:
+
 - [Prometheus](https://prometheus.io/)
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 
