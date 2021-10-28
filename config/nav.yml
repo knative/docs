@@ -272,5 +272,5 @@ nav:
         - Serving: reference/api/serving-api.md
         - Eventing: reference/api/eventing-api.md
       - Concepts:
-        - Duck types: developer/concepts/duck-typing.md
+        - Duck types: reference/concepts/duck-typing.md
     - "Join the Community ➠": /community/

@@ -132,3 +132,4 @@ plugins:
       developer/eventing/sources/ping-source/reference.md: eventing/sources/ping-source/reference.md
       developer/eventing/sources/README.md: eventing/sources/README.md
       developer/eventing/event-delivery.md: eventing/event-delivery.md
+      developer/concepts/duck-typing.md: reference/concepts/duck-typing.md
