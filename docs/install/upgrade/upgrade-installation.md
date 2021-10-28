@@ -2,6 +2,7 @@
 
 If you installed Knative using YAML, you can use the `kubectl apply` command in
 this topic to upgrade your Knative components and plugins.
+If you installed using the Operator, see [Upgrading using the Knative Operator](upgrade-installation-with-operator.md).
 
 ## Before you begin
 
@@ -58,7 +59,7 @@ For the various subprojects there is a K8s job to help operators perform this mi
 ## Performing the upgrade
 
 To upgrade, apply the YAML files for the subsequent minor versions of all your installed Knative components and features, remembering to only upgrade by one minor version at a time.
-Before upgrading, [check your Knative version](../../check-install-version.md).
+Before upgrading, [check your Knative version](check-install-version.md).
 
 For a cluster running version 0.22 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to v0.23.0:
 
