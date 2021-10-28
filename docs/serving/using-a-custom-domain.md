@@ -99,7 +99,7 @@ If you are using curl to access the sample applications, or your own Knative app
 to verify the customized domain.
 
 Instruct `curl` to connect to the External IP or CNAME defined by the
-networking layer mentioned in [Install a networking layer](../admin/install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line
+networking layer mentioned in [Install a networking layer](../install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line
 option to specify the Knative application's host name.
 For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
 

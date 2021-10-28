@@ -15,6 +15,6 @@ However, you can also deploy the app as a [Knative Serving Service](../../../ser
 - A Kubernetes cluster with [Knative Eventing](../../getting-started.md#installing-knative-eventing)
   installed.
   - If you decide to deploy the app as a Knative Serving Service then you will have to install
-    [Knative Serving](../../../admin/install/README.md).
+    [Knative Serving](../../../install/README.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).

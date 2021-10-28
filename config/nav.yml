@@ -25,40 +25,40 @@ nav:
     # Installing
 ###############################################################################
     - Installing:
-      - Overview: admin/install/README.md
+      - Overview: install/README.md
       # Serving Installation
       - Install Knative Serving:
-        - Install Serving with YAML: admin/install/serving/install-serving-with-yaml.md
-        - Knative Serving installation files: admin/install/serving/serving-installation-files.md
+        - Install Serving with YAML: install/serving/install-serving-with-yaml.md
+        - Knative Serving installation files: install/serving/serving-installation-files.md
         # Istio Installation
-        - Installing Istio for Knative: admin/install/installing-istio.md
+        - Installing Istio for Knative: install/serving/installing-istio.md
         # Cert-manager Installation
-        - Installing cert-manager: serving/installing-cert-manager.md
+        - Installing cert-manager: install/serving/installing-cert-manager.md
       # Eventing Installation
       - Install Knative Eventing:
-        - Install Eventing with YAML: admin/install/eventing/install-eventing-with-yaml.md
-        - Knative Eventing installation files: admin/install/eventing/eventing-installation-files.md
+        - Install Eventing with YAML: install/eventing/install-eventing-with-yaml.md
+        - Knative Eventing installation files: install/eventing/eventing-installation-files.md
       # Operator Installation
       - Install with Knative Operator:
-        - Installing with the Operator: admin/install/knative-with-operators.md
-        - Configuring Knative Eventing CRDs: admin/install/operator/configuring-eventing-cr.md
-        - Configuring Knative Serving CRDs: admin/install/operator/configuring-serving-cr.md
+        - Installing with the Operator: install/operator/knative-with-operators.md
+        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+        - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
       # kn Installation
       - Install kn:
-        - Overview: client/README.md
-        - Installing kn: client/install-kn.md
-        - Customizing kn: client/configure-kn.md
-        - kn plugins: client/kn-plugins.md
+        - Overview: install/client/README.md
+        - Installing kn: install/client/install-kn.md
+        - Customizing kn: install/client/configure-kn.md
+        - kn plugins: install/client/kn-plugins.md
       # Vendor docs
-      - Using a Knative-based offering: admin/install/knative-offerings.md
+      - Using a Knative-based offering: install/knative-offerings.md
       # Upgrading Knative
       - Upgrading your installation:
-        - Overview: admin/upgrade/README.md
-        - Checking your Knative version: check-install-version.md
-        - Upgrading with the Knative Operator: admin/upgrade/upgrade-installation-with-operator.md
-        - Upgrading with kubectl: admin/upgrade/upgrade-installation.md
+        - Overview: install/upgrade/README.md
+        - Checking your Knative version: install/upgrade/check-install-version.md
+        - Upgrading with kubectl: install/upgrade/upgrade-installation.md
+        - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
       # Uninstall
-      - Uninstalling Knative: admin/install/uninstall.md
+      - Uninstalling Knative: install/uninstall.md
 ###############################################################################
     # Serving
 ###############################################################################

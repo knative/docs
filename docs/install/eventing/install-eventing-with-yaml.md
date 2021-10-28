@@ -90,7 +90,7 @@ Follow the procedure for the Channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
-You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../eventing/channel-configuration.md) section.
+You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../admin/eventing/channel-configuration.md) section.
 
 ## Optional: Install a Broker layer:
 
@@ -115,7 +115,7 @@ Follow the procedure for the Broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
-    For more information, see the [Kafka Broker](../../../eventing/broker/kafka-broker/README.md) documentation.
+    For more information, see the [Kafka Broker](../../eventing/broker/kafka-broker/README.md) documentation.
 
 === "MT-Channel-based"
 
@@ -215,7 +215,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
         ```
 
-    For more information, see the [Kafka Sink](../../../developer/eventing/sinks/kafka-sink.md) documentation.
+    For more information, see the [Kafka Sink](../../developer/eventing/sinks/kafka-sink.md) documentation.
 
 === "Sugar Controller"
 
@@ -261,7 +261,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="mt-github.yaml")}}
         ```
 
-    To learn more, try the [GitHub source sample](../../../eventing/samples/github-source/README.md)
+    To learn more, try the [GitHub source sample](../../eventing/samples/github-source/README.md)
 
 === "Apache Kafka Source"
 
@@ -271,7 +271,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka",file="source.yaml")}}
         ```
 
-    To learn more, try the [Apache Kafka source sample](../../../developer/eventing/sources/kafka-source/README.md).
+    To learn more, try the [Apache Kafka source sample](../../developer/eventing/sources/kafka-source/README.md).
 
 
 === "GCP Sources"
@@ -286,10 +286,10 @@ The following tabs expand to show instructions for installing each Eventing exte
 
     To learn more, try the following samples:
 
-    - [Cloud Pub/Sub source sample](../../../eventing/samples/cloud-pubsub-source/README.md)
-    - [Cloud Storage source sample](../../../eventing/samples/cloud-storage-source/README.md)
-    - [Cloud Scheduler source sample](../../../eventing/samples/cloud-scheduler-source/README.md)
-    - [Cloud Audit Logs source sample](../../../eventing/samples/cloud-audit-logs-source/README.md)
+    - [Cloud Pub/Sub source sample](../../eventing/samples/cloud-pubsub-source/README.md)
+    - [Cloud Storage source sample](../../eventing/samples/cloud-storage-source/README.md)
+    - [Cloud Scheduler source sample](../../eventing/samples/cloud-scheduler-source/README.md)
+    - [Cloud Audit Logs source sample](../../eventing/samples/cloud-audit-logs-source/README.md)
 
 
 === "Apache CouchDB Source"

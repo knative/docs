@@ -17,7 +17,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
 
 ## Before you begin
 
-- A Kubernetes cluster with [Knative Eventing](../../../../admin/install/README.md) installed.
+- A Kubernetes cluster with [Knative Eventing](../../../../install/README.md) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 

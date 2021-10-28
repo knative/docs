@@ -207,7 +207,7 @@ Knative Serving with different ingresses:
 
     The following commands install Istio and enable its Knative integration.
 
-    1. [Install Istio](installing-istio.md).
+    1. [Install Istio](../serving/installing-istio.md).
 
     1. To configure Knative Serving to use Istio, copy the following YAML into a file:
         ```yaml
@@ -732,5 +732,5 @@ ko delete -f config/
 
 ## What's next
 
-- [Configure Knative Serving using Operator](operator/configuring-serving-cr.md)
-- [Configure Knative Eventing using Operator](operator/configuring-eventing-cr.md)
+- [Configure Knative Serving using Operator](configuring-serving-cr.md)
+- [Configure Knative Eventing using Operator](configuring-eventing-cr.md)

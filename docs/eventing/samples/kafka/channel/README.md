@@ -6,7 +6,7 @@ default Channel configuration for Knative Eventing.
 ## Prerequisites
 
 - A Kubernetes cluster with
-  [Knative Eventing](../../../../admin/install/eventing/install-eventing-with-yaml.md), as well as the optional Broker and Kafka Channel components.
+  [Knative Eventing](../../../../install/eventing/install-eventing-with-yaml.md), as well as the optional Broker and Kafka Channel components.
 
 ## Creating a Kafka Channel
 

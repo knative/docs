@@ -24,7 +24,7 @@ Cluster administrators can modify the default Channel implementation settings by
 
 
 For more information about modifying ConfigMaps, see
-[Configuring the Eventing Operator custom resource](../../admin/install/operator/configuring-eventing-cr.md#setting-a-default-channel).
+[Configuring the Eventing Operator custom resource](../../install/operator/configuring-eventing-cr.md#setting-a-default-channel).
 
 Default Channels can be configured for the cluster, a namespace on the cluster, or both.
 

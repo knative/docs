@@ -24,13 +24,15 @@ plugins:
       serving/deploying-from-private-registry.md: developer/serving/deploying-from-private-registry.md
       serving/samples/blue-green-deployment.md: developer/serving/traffic-management.md
       serving/samples/traffic-splitting/README.md: developer/serving/traffic-management.md
+      serving/installing-cert-manager.md: install/serving/installing-cert-manager.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
       admin/collecting-metrics/eventing-metrics/metrics.md: eventing/observability/metrics/eventing-metrics.md
       admin/collecting-metrics/serving-metrics/metrics.md: serving/observability/metrics/serving-metrics.md
-      admin/install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
-      admin/install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
-      client/connecting-kn-to-your-cluster/index.md: client/README.md
+      admin/install/install-eventing-with-yaml.md: install/eventing/install-eventing-with-yaml.md
+      admin/install/install-serving-with-yaml.md: install/serving/install-serving-with-yaml.md
+      admin/install/installing-istio.md: install/serving/installing-istio.md
+      client/connecting-kn-to-your-cluster/index.md: install/client/README.md
       concepts/overview.md: index.md
       eventing/broker/alternate/index.md: eventing/broker/README.md
       eventing/broker/broker-event-delivery.md: developer/eventing/event-delivery.md
@@ -58,27 +60,28 @@ plugins:
       eventing/sources/containersource.md: developer/eventing/custom-event-source/containersource/README.md
       eventing/triggers/index.md: eventing/broker/triggers/README.md
       help/README.md: help/contributor/README.md
-      install/README.md: admin/install/README.md
-      install/check-install-version.md: check-install-version.md
+      admin/install/README.md: install/README.md
+      check-install-version.md: install/upgrade/check-install-version.md
       install/collecting-logs/index.md: serving/observability/logging/collecting-logs.md
       install/collecting-metrics/index.md: serving/observability/metrics/collecting-metrics.md
       install/getting-started-knative-app/index.md: getting-started/README.md
       serving/getting-started-knative-app.md: getting-started/README.md
-      install/install-eventing-with-yaml.md: admin/install/eventing/install-eventing-with-yaml.md
       # This doesn't exist anymore, we should probably replace it
-      install/install-extensions.md: admin/install/README.md
-      install/install-kn/index.md: client/install-kn.md
-      install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
-      install/installation-files.md: admin/install/README.md
-      install/installing-istio.md: admin/install/installing-istio.md
-      install/knative-offerings.md: admin/install/knative-offerings.md
-      install/knative-with-operators.md: admin/install/knative-with-operators.md
-      install/operator/configuring-eventing-cr.md: admin/install/operator/configuring-eventing-cr.md
-      install/operator/configuring-serving-cr.md: admin/install/operator/configuring-serving-cr.md
-      install/prerequisites.md: admin/install/README.md
-      operator/configuring-eventing-cr/index.md: admin/install/operator/configuring-eventing-cr.md
-      operator/configuring-serving-cr/index.md: admin/install/operator/configuring-serving-cr.md
-      reference/resources/index.md: client/README.md
+      install/install-extensions.md: install/README.md
+      client/install-kn.md: install/client/install-kn.md
+      client/configure-kn.md: install/client/configure-kn.md
+      client/kn-plugins.md: install/client/kn-plugins.md
+      client/README.md: install/client/README.md
+      install/installation-files.md: install/README.md
+      admin/install/installing-istio.md: install/serving/installing-istio.md
+      admin/install/knative-offerings.md: install/knative-offerings.md
+      admin/install/knative-with-operators.md: install/operator/knative-with-operators.md
+      admin/install/operator/configuring-eventing-cr.md: install/operator/configuring-eventing-cr.md
+      admin/install/operator/configuring-serving-cr.md: install/operator/configuring-serving-cr.md
+      install/prerequisites.md: install/README.md
+      operator/configuring-eventing-cr/index.md: install/operator/configuring-eventing-cr.md
+      operator/configuring-serving-cr/index.md: install/operator/configuring-serving-cr.md
+      reference/resources/index.md: install/client/README.md
       serving/autoscaling/autoscaling-concepts.md: serving/autoscaling/autoscaler-types.md
       serving/autoscaling/target-burst-capacity/index.md: serving/load-balancing/target-burst-capacity.md
       serving/configuring-autoscaling/index.md: serving/autoscaling/README.md
@@ -91,7 +94,9 @@ plugins:
       serving/services/deployment.md: admin/serving/deployment.md
       serving/services/private-services.md: developer/serving/services/private-services.md
       serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
-      uninstall.md: admin/install/uninstall.md
-      upgrade/index.md: admin/upgrade/README.md
-      upgrade/upgrade-installation-with-operator.md: admin/upgrade/upgrade-installation-with-operator.md
-      upgrade/upgrade-installation.md: admin/upgrade/upgrade-installation.md
+      admin/install/uninstall.md: install/uninstall.md
+      admin/upgrade/index.md: install/upgrade/README.md
+      admin/upgrade/upgrade-installation-with-operator.md: install/upgrade/upgrade-installation-with-operator.md
+      admin/upgrade/upgrade-installation.md: install/upgrade/upgrade-installation.md
+      admin/install/eventing/eventing-installation-files.md: install/eventing/eventing-installation-files.md
+      admin/install/serving/serving-installation-files.md: install/serving/serving-installation-files.md
