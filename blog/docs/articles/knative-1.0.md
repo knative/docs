@@ -6,7 +6,7 @@ description: "Details on the 1.0 release of Knative"
 type: "blog"
 ---
 
-![1.0 Banner Image](blog/docs/articles/images/1.0Banner.jpg)
+![1.0 Banner Image](blog/images/1.0Banner.jpg)
 
 ***Authors: Carlos Santana (IBM), Omer Bensaadon (VMware), Maria Cruz (Google)***
 
