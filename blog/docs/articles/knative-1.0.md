@@ -1,12 +1,12 @@
 ---
 title: "Knative 1.0: What's new?"
-linkTitle: "Announcing: Knative 1.0"
+linkTitle: "Knative 1.0: What's new?"
 date: 2021-11-02
 description: "Details on the 1.0 release of Knative"
 type: "blog"
 ---
 
-!['1.0 Banner Image'](blog/images/1.0Banner.jpg)
+![1.0 Banner Image](blog/docs/articles/images/1.0Banner.jpg)
 
 ***Authors: Carlos Santana (IBM), Omer Bensaadon (VMware), Maria Cruz (Google)***
 
@@ -15,6 +15,7 @@ Today we release Knative 1.0, reaching an important milestone made possible than
 
 ## What's New in 1.0
 In addition to a lot of bug fixes, stability and performance enhancements, the community has shipped the following improvements (in approximately chronological order):
+
 * Support for multiple HTTP routing layers beyond Istio (Contour, Kourier, Ambassador have all implemented this layer)
 * Support for multiple storage layers for Eventing concepts with common Subscription methods (implemented by Kafka, GCP PubSub, and RabbitMQ).
 * Designed a “Duck types” abstraction to allow processing arbitrary Kubernetes resources that have common fields (like status.conditions and status.address).
@@ -44,6 +45,7 @@ Join the Knative community meetup on November 17, 2021, to hear from Knative mai
 Thank you to our contributors!
 Achieving this milestone has truly been a community effort, we’d be remiss not to thank some of the people who helped us get here.
 Thanks to…
+
 * Knative Supporting Companies
   * Google
   * IBM
@@ -62,15 +64,15 @@ Thanks to…
 
 Only read past this point if you're curious about the reasoning about the release mechanics; there's no actionable information below.
 
-Some additional background information:
-Knative is composed of many components that are versioned together.
-Those components have different levels of maturity, ranging from already-GA to experimental.
-We still want to keep the versions in sync and decided to go for 1.0 for all components.
-GA levels are marked for components individually.
+* Knative is composed of many components that are versioned together.
+* Those components have different levels of maturity, ranging from already-GA to experimental.
+* We still want to keep the versions in sync and decided to go for 1.0 for all components.
+* GA levels are marked for components individually.
 
-Q: Why number all components 1.0?
-A: Two reasons, one user-facing and one contributor-facing. The big user-facing reason is that it gives users a single number to hang on to when understanding what they've installed and what works together. The smaller contributor-facing reason is that all our infrastructure is designed to manage a single version number, and updating it to support multiple version numbers doesn't seem like a good use of time given the first point.
+??? question "Why number all components 1.0?""
+    Two reasons, one user-facing and one contributor-facing. The big user-facing reason is that it gives users a single number to hang on to when understanding what they've installed and what works together. The smaller contributor-facing reason is that all our infrastructure is designed to manage a single version number, and updating it to support multiple version numbers doesn't seem like a good use of time given the first point.
 
-Q: Isn't "1.0 and Beta" for a component like eventing-rabbitmq or eventing-kafka-broker confusing?
-A: Unless we wait for everything related to Knative to be done, we'll always have some components or features that are in an alpha or beta state. While this sometimes happens along a component boundary, it can also happen within a component, so the version number can't be a sole indicator of "GA or not". (This happens to other projects like Kubernetes as well, and to specific features in Serving or Eventing.)
-Going forward, one of the things we'll need to be clear about is the maturity level of various components or features, and moving features along the path to either GA or retirement.
+??? question "Isn't "1.0 and Beta" for a component like eventing-rabbitmq or eventing-kafka-broker confusing?""
+    Unless we wait for everything related to Knative to be done, we'll always have some components or features that are in an alpha or beta state. While this sometimes happens along a component boundary, it can also happen within a component, so the version number can't be a sole indicator of "GA or not". (This happens to other projects like Kubernetes as well, and to specific features in Serving or Eventing.)
+
+    Going forward, one of the things we'll need to be clear about is the maturity level of various components or features, and moving features along the path to either GA or retirement.
