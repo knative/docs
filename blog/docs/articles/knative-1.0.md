@@ -62,7 +62,7 @@ Thanks to…
 
 ---
 
-Only read past this point if you're curious about the reasoning about the release mechanics; there's no actionable information below.
+**Only read past this point if you're curious about the reasoning about the release mechanics; there's no actionable information below.**
 
 * Knative is composed of many components that are versioned together.
 * Those components have different levels of maturity, ranging from already-GA to experimental.
