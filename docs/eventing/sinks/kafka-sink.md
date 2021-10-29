@@ -80,7 +80,7 @@ spec:
   topic: mytopic
   bootstrapServers:
    - my-cluster-kafka-bootstrap.kafka:9092
-  
+
   # CloudEvent content mode of Kafka messages sent to the topic.
   # Possible values:
   # - structured
