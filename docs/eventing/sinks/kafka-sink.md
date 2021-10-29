@@ -50,18 +50,6 @@ spec:
   topic: mytopic
   bootstrapServers:
    - my-cluster-kafka-bootstrap.kafka:9092
-  # CloudEvent content mode of Kafka messages sent to the topic.
-  # Possible values:
-  # - structured
-  # - binary
-  #
-  # default: structured.
-  #
-  # CloudEvent spec references:
-  # - https://github.com/cloudevents/spec/blob/v1.0/spec.md#message
-  #	- https://github.com/cloudevents/spec/blob/v1.0/kafka-protocol-binding.md#33-structured-content-mode
-  #	- https://github.com/cloudevents/spec/blob/v1.0/kafka-protocol-binding.md#32-binary-content-mode
-  contentMode: binary # or structured
 ```
 
 ## Output Topic Content Mode
