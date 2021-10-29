@@ -3,7 +3,7 @@
 When you create an event source, you can specify a _sink_ where events are sent to from the source. A sink is an _Addressable_ or a _Callable_ resource that can receive incoming events from other resources. Knative Services, Channels, and Brokers are all examples of sinks.
 
 Addressable objects
-:   Addressable objects receive and acknowledge an event delivered over HTTP to an address defined in their `status.address.url` field. As a special case, the core [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#service-v1-core) also fulfils the Addressable interface.
+:   Addressable objects receive and acknowledge an event delivered over HTTP to an address defined in their `status.address.url` field. As a [special case](#kubernetes-service-as-a-sink), the core [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#service-v1-core) also fulfils the Addressable interface.
 
 Callable objects
 :   Callable objects are able to receive an event delivered over HTTP and transform the event, returning 0 or 1 new events in the HTTP response. These returned events may be further processed in the same way that events from an external event source are processed.
@@ -54,6 +54,19 @@ spec:
 !!! contract
     This results in the `K_SINK` environment variable being set on the `subject`
     as `"http://mysink.default.svc.cluster.local/extra/path"`.
+
+## Kubernetes Service as a sink
+
+If Sink `ref` points to the Kubernetes core Service object, the destination port is chosen according to the following logic:
+
+- `knative.dev/destination-port` Service annotation can explicitly pin the port name that should be used as a destination,
+- Otherwise, if port annotation is not set,
+
+    \- _single-port_ Service's only port will be used as a destination,
+
+    \- _multi-port_ Service's port 80 will be used if it is exposed by the service.
+
+In all other cases or if the port specified in `knative.dev/destination-port` annotation does not exist in the service, sink URI resolution will fail.
 
 ## Using custom resources as sinks
 
