@@ -16,11 +16,11 @@ serve a Knative Service at this domain.
 !!! tip
     This topic instructs how to customize the domain of each service, regardless of the default domain.
     If you want to customize the domain template to assign the default domain name,
-    see [Changing the default domain](../../../serving/using-a-custom-domain.md).
+    see [Changing the default domain](../using-a-custom-domain.md).
 
 ## Prerequisites
 
-- You must have access to a Kubernetes cluster, with Knative Serving and an Ingress implementation installed. For more information, see the [Installation documentation](../../../install/README.md).
+- You must have access to a Kubernetes cluster, with Knative Serving and an Ingress implementation installed. For more information, see the [Serving Installation documentation](../../install/serving/install-serving-with-yaml.md).
 - You must have the domain mapping feature enabled on your cluster.
 - You must have access to [a Knative service](creating-services.md) that you can map a domain to.
 - You must own or have access to a domain name to map, and be able to change the domain DNS to point to your Knative cluster by using the tools provided by your domain registrar.

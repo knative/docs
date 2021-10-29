@@ -13,7 +13,7 @@ container image, and a ContainerSource that uses your image URI.
 
 Before you can create a ContainerSource object:
 
-- You must have [Knative Eventing](../../../../install/eventing/install-eventing-with-yaml.md)
+- You must have [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md)
 installed on your cluster.
 - If you want to use the following example heartbeats event source, you must also:
     - Install [ko](https://github.com/google/ko)

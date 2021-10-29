@@ -180,7 +180,7 @@ something went wrong during `chan` reconciliation. See
 
 ##### `src`
 
-`src` is a [`ApiServerSource`](../../developer/eventing/sources/apiserversource/README.md).
+`src` is a [`ApiServerSource`](../../eventing/sources/apiserversource/README.md).
 
 First we will verify that `src` is writing to `chan`.
 

@@ -13,7 +13,7 @@ Before installing Knative, you must meet the following prerequisites:
     - If you have multiple nodes in your cluster, for each node you need at least 2&nbsp;CPUs, 4&nbsp;GB of memory, and 20&nbsp;GB of disk storage.
 - You have a cluster that uses Kubernetes v1.20 or newer.
 - You have installed the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- Your Kubernetes cluster must have access to the internet, because Kubernetes needs to be able to fetch images. To pull from a private registry, see [Deploying images from a private container registry](/docs/developer/serving/deploying-from-private-registry/).
+- Your Kubernetes cluster must have access to the internet, because Kubernetes needs to be able to fetch images. To pull from a private registry, see [Deploying images from a private container registry](/docs/serving/deploying-from-private-registry/).
 
 !!! caution
     The system requirements provided are recommendations only. The requirements for your installation might vary, depending on whether you use optional components, such as a networking layer.

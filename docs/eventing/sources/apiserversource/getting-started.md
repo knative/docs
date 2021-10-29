@@ -8,11 +8,11 @@ This topic describes how to create an ApiServerSource object.
 
 Before you can create an ApiServerSource object:
 
-- You must have [Knative Eventing](../../../../install/eventing/install-eventing-with-yaml.md)
+- You must have [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md)
 installed on your cluster.
 - You must install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 tool.
-- Optional: If you want to use the `kn` commands, install the [`kn`](../../../../install/client/configure-kn.md) tool.
+- Optional: If you want to use the `kn` commands, install the [`kn`](../../../install/client/configure-kn.md) tool.
 
 ## Create an ApiServerSource object
 
@@ -221,7 +221,7 @@ command:
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
             - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
-            - `<sink-kind>` is any supported [Addressable](../../../concepts/duck-typing.md#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
+            - `<sink-kind>` is any supported [Addressable](../../../reference/concepts/duck-typing.md#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
             - `<sink-name>` is the name of your sink.
 
             For more information about the fields you can configure for the ApiServerSource object, see [ApiServerSource reference](reference.md).

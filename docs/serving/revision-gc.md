@@ -1,6 +1,6 @@
 # Revision garbage collection
 
-Knative automatically cleans up inactive revisions as configured by the Operator. For more information, see the [Operator settings](../admin/serving/revision-gc.md).
+Knative automatically cleans up inactive revisions as configured by the Operator. For more information, see the [Operator settings](../serving/configuration/revision-gc.md).
 
 You can configure a revision so that it is never garbage collected by adding the `serving.knative.dev/no-gc: "true"` annotation:
 

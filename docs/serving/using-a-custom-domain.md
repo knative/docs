@@ -9,7 +9,7 @@ To change the {default-domain} value there are a few steps involved:
 !!! tip
     Customizing a domain template affects your cluster globally.
     If you want to customize the domain of each service, use `DomainMapping` instead.
-    For more information, see [Configuring custom domains](../developer/serving/services/custom-domains.md).
+    For more information, see [Configuring custom domains](services/custom-domains.md).
 
 ## Edit using kubectl
 
