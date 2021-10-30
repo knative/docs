@@ -258,3 +258,16 @@ Apply code formatting only to special-purpose text:
     <some-code>
     ```
     ````
+
+
+## Documentation of flags
+> Always use the short version of flags used in a command than the extended version, i.e., use ```-n``` rather than ```--namespace```
+=== ":white_check_mark: Correct"
+     ```bash
+     kubectl apply -f <filename>.yaml -n <namespace>
+     ```
+
+=== ":no_entry: Incorrect"
+      ```bash
+      kubectl apply --filename <filename>.yaml --namespace <namespace>
+      ```
