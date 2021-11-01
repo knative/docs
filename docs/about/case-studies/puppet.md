@@ -9,7 +9,7 @@ hide:
       <img src="../../../images/case-studies/puppet.png" alt="" draggable="false" />
 </div>
 <div>
-<em style="color:#0071c7;font-size: 1em;">"I'm a strong believer in working with open source vendors. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor—all of which we depend on to make our product functional"</em>
+<em style="color:#0071c7;font-size: 1em;">"I'm a strong believer in working with open source projects. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor—all of which we depend on to make our product functional"</em>
 </div>
 <div>
 <p style="color:#0071c7;font-size: 1em;">-- Noah Fontes, Senior Principal Software Engineer for Puppet</p>
@@ -52,7 +52,7 @@ However, while all of this sounds amazing, it can be difficult to manage and con
 
 The open architecture allows Relay to integrate dozens of different services and platforms into workflows. A look at the [Relay integrations GitHub page](https://github.com/relay-integrations) provides a list of these integrations and demonstrates their commitment to the open source community.
 
-"I'm a strong believer in working with open source vendors. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor—all of which we depend on to make our product functional," says Fontes.
+"I'm a strong believer in working with open source projects. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor—all of which we depend on to make our product functional," says Fontes.
 
 <h2 style="color:#0071c7;"> Results: automated infrastructure management</h2>
 
