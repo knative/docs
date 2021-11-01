@@ -13,8 +13,11 @@ type: "blog"
 Today we release Knative 1.0, reaching an important milestone made possible thanks to the contributions and collaboration of over 600 developers. The Knative project was released by Google in July 2018, and it was developed in close partnership with VMWare, IBM, Red Hat, and SAP. Over the last 3 years, Knative has become [the most widely-installed serverless layer on Kubernetes.](https://www.cncf.io/wp-content/uploads/2020/11/CNCF_Survey_Report_2020.pdf)
 
 
-## What's New in 1.0
-In addition to a lot of bug fixes, stability and performance enhancements, the community has shipped the following improvements (in approximately chronological order):
+## What's new
+
+In case you haven't been following Knative's development closely, there have been a lot of changes since our initial release in July 2018.
+
+In addition to a myriad of bug fixes, stability and performance enhancements, our community has shipped the following improvements, in approximately chronological order:
 
 * Support for multiple HTTP routing layers beyond Istio (Contour, Kourier, Ambassador have all implemented this layer)
 * Support for multiple storage layers for Eventing concepts with common Subscription methods (implemented by Kafka, GCP PubSub, and RabbitMQ).
