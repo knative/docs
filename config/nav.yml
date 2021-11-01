@@ -273,9 +273,9 @@ nav:
         - Eventing: reference/api/eventing-api.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
+    - "Join the Community ➠": /community/
     - Case Studies:
       - deepc: about/case-studies/deepc.md
-      - outfit7: about/case-studies/outfit7.md
-      - puppet: about/case-studies/puppet.md
-    - "Join the Community ➠": /community/
+      - Outfit7: about/case-studies/outfit7.md
+      - Puppet: about/case-studies/puppet.md
 
