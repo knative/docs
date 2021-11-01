@@ -12,7 +12,7 @@ hide:
 <em style="color:#0071c7;font-size: 1em;">“It should be possible for somebody with an algorithm to have it on the platform in an hour”</em>
 </div>
 <div>
-<p style="color:#0071c7;font-size: 1em;">-- Andrew Webber, Senior Software Engineer</p>
+<p style="color:#0071c7;font-size: 1em;">-- Andrew Webber, Senior Software Engineer for deepc</p>
 </div>
 
 </td>

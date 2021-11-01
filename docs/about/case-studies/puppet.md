@@ -2,6 +2,22 @@
 hide:
   - toc
 ---
+<table style="border: 0;">
+  <tr>
+<td style="border: 0;">
+<div style="min-width: 20mm;">
+      <img src="../../../images/case-studies/puppet.png" alt="" draggable="false" />
+</div>
+<div>
+<em style="color:#0071c7;font-size: 1em;">"I'm a strong believer in working with open source vendors. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor—all of which we depend on to make our product functional"</em>
+</div>
+<div>
+<p style="color:#0071c7;font-size: 1em;">-- Noah Fontes, Senior Principal Software Engineer for Puppet</p>
+</div>
+
+</td>
+
+<td style="border: 0;">
 <h1 style="color:#0071c7;font-size: 3em;">Puppet Case Study</h1>
 
 <h2 style="font-weight: bold;">Relay by Puppet Brings Workflows to Everything using Knative</h2>
@@ -52,6 +68,13 @@ Knative aims to make scalable, secure, stateless architectures available quickly
 
 <h2 style="color:#0071c7;">Find out more</h2>
 
-- [Getting started with Knative](../../../getting-started/)
-- [Knative Serving](../../../serving/)
-- [A Basic Introduction to Webhooks](https://www.markheath.net/post/basic-introduction-webhooks)
+<ul>
+<li><a href="../../../getting-started/">Getting started with Knative</a></li>
+<li><a href="../../../serving/">Knative Serving</a></li>
+<li><a href="../../../eventing/">Knative Eventing</a></li>
+<li><a href="https://www.markheath.net/post/basic-introduction-webhooks">A Basic Introduction to Webhooks</a></li>
+</ul>
+
+    </td>
+  </tr>
+</table>

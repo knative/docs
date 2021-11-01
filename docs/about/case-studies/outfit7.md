@@ -12,7 +12,7 @@ hide:
 <em style="color:#0071c7;font-size: 1em;">"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em>
 </div>
 <div>
-<p style="color:#0071c7;font-size: 1em;">-- said Tilen Kavčič, Outfit7 Software Engineer</p>
+<p style="color:#0071c7;font-size: 1em;">-- said Tilen Kavčič, Software Engineer for outfit7</p>
 </div>
 
 </td>
