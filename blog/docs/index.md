@@ -22,7 +22,7 @@ Follow this blog to keep up-to-date with Knative.
 
 # Featured Posts
 
-## Knative 1.0, What's new?
+## Knative 1.0 is out!
 Details on the 1.0 release of Knative
 
 [Read more :octicons-arrow-right-24:](articles/knative-1.0.md){ .md-button }
