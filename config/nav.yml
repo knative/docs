@@ -273,7 +273,7 @@ nav:
         - Eventing: reference/api/eventing-api.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
-    - About:
+    - Case Studies:
       - deepc: about/case-studies/deepc.md
       - outfit7: about/case-studies/outfit7.md
       - puppet: about/case-studies/puppet.md
