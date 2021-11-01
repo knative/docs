@@ -19,7 +19,7 @@ In case you haven't been following Knative's development closely, there have bee
 
 In addition to a myriad of bug fixes, stability and performance enhancements, our community has shipped the following improvements, in approximately chronological order:
 
-* Support for multiple HTTP routing layers beyond Istio (Contour, Kourier, Ambassador have all implemented this layer)
+* Support for multiple HTTP routing layers beyond (including Istio, Contour, Kourier and Ambassador)
 * Support for multiple storage layers for Eventing concepts with common Subscription methods (implemented by Kafka, GCP PubSub, and RabbitMQ).
 * Designed a “Duck types” abstraction to allow processing arbitrary Kubernetes resources that have common fields (like status.conditions and status.address).
 * A command-line client with support for additional feature plugins
