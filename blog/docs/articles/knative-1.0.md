@@ -45,7 +45,7 @@ In addition to a myriad of bug fixes, stability and performance enhancements, ou
 ## Get Involved!
 Join the Knative community meetup on November 17, 2021, to hear from Knative maintainer Ville Aikas about the latest changes coming with Knative 1.0. Newcomers to the Knative community are always welcome! Join the Knative Slack space to ask questions and troubleshoot issues as you get acquainted with the project. Finally, find all the project documentation on the Knative website and contribute to the project on GitHub.
 
-Thank you to our contributors!
+## Thank you to our contributors!
 Achieving this milestone has truly been a community effort, we’d be remiss not to thank some of the people who helped us get here.
 Thanks to…
 
