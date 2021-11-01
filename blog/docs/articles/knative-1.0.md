@@ -49,7 +49,7 @@ Knative steering committee member Ville Aikas is [the guest on the Kubernetes Po
 Newcomers to the Knative community are always welcome! [Join the Knative Slack space](https://slack.knative.dev/) to ask questions and troubleshoot issues as you get acquainted with the project. Finally, find all the [project documentation](https://knative.dev/docs/) on the Knative website and [contribute to the project on GitHub](https://github.com/knative).
 
 ## Thank you to our contributors!
-Achieving this milestone has truly been a community effort, we’d be remiss not to thank some of the people who helped us get here.
+Achieving this milestone has truly been a community effort — we’d be remiss not to thank some of the people who helped us get here.
 Thanks to…
 
 * Knative Supporting Companies
