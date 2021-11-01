@@ -21,7 +21,7 @@ In addition to a myriad of bug fixes, stability and performance enhancements, ou
 
 * Support for multiple HTTP routing layers (including Istio, Contour, Kourier and Ambassador)
 * Support for multiple storage layers for Eventing concepts with common Subscription methods (including Kafka, GCP PubSub, and RabbitMQ)
-* Designed a “Duck types” abstraction to allow processing arbitrary Kubernetes resources that have common fields (like status.conditions and status.address).
+* A “duck type” abstraction to allow processing arbitrary Kubernetes resources that have common fields (like status.conditions and status.address).
 * A command-line client with support for additional feature plugins
 * Moved from an ad-hoc release process to an every 6 week process
 * Support for HTTP2, grpc, and websockets
