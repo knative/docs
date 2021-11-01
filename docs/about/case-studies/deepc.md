@@ -2,12 +2,28 @@
 hide:
   - toc
 ---
-<h1 style="color:#0071c7;font-size: 3em;">Deepc Case Study</h1>
+<table style="border: 0;">
+  <tr>
+<td style="border: 0;">
+<div style="min-width: 20mm;">
+      <img src="../../../images/case-studies/deepc.png" alt="" draggable="false" />
+</div>
+<div>
+<em style="color:#0071c7;font-size: 1em;">“It should be possible for somebody with an algorithm to have it on the platform in an hour”</em>
+</div>
+<div>
+<p style="color:#0071c7;font-size: 1em;">-- Andrew Webber, Senior Software Engineer</p>
+</div>
 
+</td>
+
+<td style="border: 0;">
+<h1 style="color:#0071c7;font-size: 3em;">deepc Case Study</h1>
 <h2 style="font-weight: bold;">AI Startup deepc Connects Researchers to Radiologists with Knative Eventing</h2>
 
 deepc is a startup at the cutting edge, bringing advanced data techniques and artificial intelligence to healthcare. The German company helps radiologists  access better diagnostics and resources through cloud-based technology. Their goal is to elevate treatment  quality across the board while creating more efficiency and improvement in medical settings.
 This revolution in technology comes with hefty challenges. Care systems are highly regulated, making patient privacy and safety a top priority for deepc. Doctors and medical staff also demand that new technologies be reliable and stable when lives are on the line.
+
 
 
 <h2 style="color:#0071c7;">Rising to the challenge</h2>
@@ -45,6 +61,12 @@ deepc has already done amazing things as a company, with many more features plan
 
 <h2 style="color:#0071c7;">Find out more</h2>
 
-- [Getting started with Knative](../../../getting-started/)
-- [Knative Serving](../../../serving/)
-- [Knative Eventing](../../../eventing/)
+<ul>
+<li><a href="../../../getting-started/">Getting started with Knative</a></li>
+<li><a href="../../../serving/">Knative Serving</a></li>
+<li><a href="../../../eventing/">Knative Eventing</a></li>
+</ul>
+
+    </td>
+  </tr>
+</table>
