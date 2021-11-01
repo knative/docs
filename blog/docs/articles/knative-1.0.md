@@ -42,8 +42,11 @@ In addition to a myriad of bug fixes, stability and performance enhancements, ou
 * A quickstart, for developers to try Knative locally
 * Simplified management and publication of Services using DomainMapping
 
-## Get Involved!
-Join the Knative community meetup on November 17, 2021, to hear from Knative maintainer Ville Aikas about the latest changes coming with Knative 1.0. Newcomers to the Knative community are always welcome! Join the Knative Slack space to ask questions and troubleshoot issues as you get acquainted with the project. Finally, find all the project documentation on the Knative website and contribute to the project on GitHub.
+## Learn more
+Knative steering committee member Ville Aikas is [the guest on the Kubernetes Podcast from Google this week](https://kubernetespodcast.com/episode/166-knative-1.0/), telling the story of the creation of the project and its journey to 1.0.  You can also join [the Knative community meetup on November 17,](https://calendar.google.com/calendar/u/0/r/eventedit/NnAycjJyZmdlMTF1b2FuOGJzZjZ1dXA0aTZfMjAyMTExMjRUMTczMDAwWiBrbmF0aXZlLnRlYW1fOXE4M2JnMDdxczViOXJyc2xwNWpvcjRsNnNAZw?tab=mc) where Ville will talk about the latest changes to the project.
+
+## Get involved
+Newcomers to the Knative community are always welcome! [Join the Knative Slack space](https://slack.knative.dev/) to ask questions and troubleshoot issues as you get acquainted with the project. Finally, find all the [project documentation](https://knative.dev/docs/) on the Knative website and [contribute to the project on GitHub](https://github.com/knative).
 
 ## Thank you to our contributors!
 Achieving this milestone has truly been a community effort, we’d be remiss not to thank some of the people who helped us get here.
