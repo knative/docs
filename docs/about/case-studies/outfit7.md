@@ -2,6 +2,22 @@
 hide:
   - toc
 ---
+<table style="border: 0;">
+  <tr>
+<td style="border: 0;">
+<div style="min-width: 20mm;">
+      <img src="../../../images/case-studies/outfit7.png" alt="" draggable="false" />
+</div>
+<div>
+<em style="color:#0071c7;font-size: 1em;">"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em>
+</div>
+<div>
+<p style="color:#0071c7;font-size: 1em;">-- said Tilen Kavčič, Outfit7 Software Engineer</p>
+</div>
+
+</td>
+
+<td style="border: 0;">
 <h1 style="color:#0071c7;font-size: 3em;">Outfit7 Case Study</h1>
 
 <h2 style="font-weight: bold;">Game maker Outfit7 automates high-performance ad bidding with Knative Serving</h2>
@@ -49,6 +65,12 @@ Outfit7 shows no signs of slowing down. “As we want to support our vision in e
 
 <h2 style="color:#0071c7;">Find out more</h2>
 
-- [Getting started with Knative](../../../getting-started/)
-- [Knative Serving](../../../serving/)
-- [Knative Eventing](../../../eventing/)
+<ul>
+<li><a href="../../../getting-started/">Getting started with Knative</a></li>
+<li><a href="../../../serving/">Knative Serving</a></li>
+<li><a href="../../../eventing/">Knative Eventing</a></li>
+</ul>
+
+    </td>
+  </tr>
+</table>
