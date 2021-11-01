@@ -97,6 +97,7 @@ body {
 .home-container,
 .features-container,
 .intro-container,
+.case-studies-container,
 .components-container {
   margin: 0;
   border: 0;
@@ -167,8 +168,46 @@ body {
   margin: 0 0 0 2em;
 }
 
-.usedby-container {
+.case-studies-container {
   background: #fff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+}
+.case-studies-container #case-studies-title {
+  display: flex;
+  justify-content: center;
+}
+
+.case-studies-container #case-studies {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.case-studies-container #case-studies-more {
+  font-style: italic;
+  font-size: smaller;
+  color: #aaa;
+  text-align: center;
+}
+
+.case-studies-container .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3em 1em;
+  width: 150pt;
+  height: 36pt;
+}
+
+.case-studies-container .logo img {
+  max-width: 150pt;
+  max-height: 36pt;
+}
+
+.usedby-container {
+  background: #d6e1f3;
   color: #000;
   display: flex;
   justify-content: center;
