@@ -68,6 +68,7 @@ All Sources are part of the `sources` category.
 [CloudPubSubSource](https://github.com/google/knative-gcp/blob/main/docs/examples/cloudpubsubsource/README.md) | v1 | Google | Brings [Cloud Pub/Sub](https://cloud.google.com/pubsub/) messages into Knative. The CloudPubSubSource fires a new event each time a message is published on a [Google Cloud Platform PubSub topic](https://cloud.google.com/pubsub/). See the [CloudPubSubSource](../samples/cloud-pubsub-source/README.md) example for more details.
 [CloudSchedulerSource](https://github.com/google/knative-gcp/blob/main/docs/examples/cloudschedulersource/README.md) | v1 | Google | Create, update, and delete [Google Cloud Scheduler](https://cloud.google.com/scheduler/) Jobs. When those jobs are triggered, receive the event inside Knative. See the [CloudSchedulerSource](../samples/cloud-scheduler-source/README.md) example for further details.
 [CloudStorageSource](https://github.com/google/knative-gcp/blob/main/docs/examples/cloudstoragesource/README.md) | v1 | Google | Registers for events of the specified types on the specified [Google Cloud Storage](https://cloud.google.com/storage/) bucket and optional object prefix. Brings those events into Knative. See the [CloudStorageSource](../samples/cloud-storage-source/README.md) example.
+[Direktiv](https://github.com/direktiv/direktiv-knative-source/tree/main/cmd/direktiv-source) | Proof of concept | Direktiv | Receive events from [Direktiv](https://github.com/direktiv/direktiv).
 [DockerHubSource](https://github.com/tom24d/eventing-dockerhub) | v1alpha1 | None | Retrieves events from [Docker Hub Webhooks](https://docs.docker.com/docker-hub/webhooks/) and transforms them into CloudEvents for consumption in Knative.
 [FTP / SFTP](https://github.com/vaikas-google/ftp) | Proof of concept | None | Watches for files being uploaded into a FTP/SFTP and generates events for those.
 [GitHub Issue Comments](https://github.com/BrianMMcClain/github-issue-comment-source)| Proof of Concept | None | Polls a specific GitHub issue for new comments.
@@ -84,6 +85,7 @@ All Sources are part of the `sources` category.
 [RedisSource](https://github.com/knative-sandbox/eventing-redis/tree/main/source) | v1alpha1 | None | Brings Redis Stream into Knative.
 [Salesforce](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Consumes events from a [Salesforce](https://www.salesforce.com) channel.
 [Slack](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Subscribes to events from [Slack](https://slack.com).
+[SNMP](https://github.com/direktiv/direktiv-knative-source/tree/main/cmd/snmp-source) | Proof of concept | Direktiv | Receive events via SNMP.
 [Twilio](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Receive events from [Twilio](https://twilio.com).
 [VMware](https://github.com/vmware-tanzu/sources-for-knative/blob/main/README.md) | Active Development | VMware | Brings [vSphere](https://www.vmware.com/products/vsphere.html) events into Knative.
 [Webhook](https://github.com/triggermesh/triggermesh/) | Supported | TriggerMesh | Ingest events from a webhook using HTTP.
