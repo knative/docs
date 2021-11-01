@@ -1,6 +1,6 @@
 ---
-title: "Knative 1.0: What's new?"
-linkTitle: "Knative 1.0: What's new?"
+title: "Knative 1.0 is out!"
+linkTitle: "Knative 1.0 is out!"
 date: 2021-11-02
 description: "Details on the 1.0 release of Knative"
 type: "blog"
