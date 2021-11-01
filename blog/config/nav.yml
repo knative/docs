@@ -15,7 +15,7 @@ nav:
     - Reference: /docs/reference/
     - "Join the Community ➠": /community/
     # Blog
-    - Blog:
+    - "Blog ➠":
       - index.md
       - Releases:
           - releases/announcing-knative-v0-26-release.md
