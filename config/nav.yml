@@ -264,6 +264,7 @@ nav:
           - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
           - GitHub source: eventing/samples/github-source/README.md
           - GitLab source: eventing/samples/gitlab-source/README.md
+    - Blog: /blog/
     # Reference docs
     - Reference:
       - Overview: reference/README.md
@@ -273,4 +274,4 @@ nav:
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
     - "Join the Community ➠": /community/
-    - "Blog ➠": /blog/
+    - Blog: /blog/
