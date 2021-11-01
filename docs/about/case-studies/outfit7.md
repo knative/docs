@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 <table style="border: 0;">
-  <tr>
+<tr style="background-color: var(--md-default-bg-color);">
 <td style="border: 0;">
 <div style="min-width: 20mm;">
       <img src="../../../images/case-studies/outfit7.png" alt="" draggable="false" />
