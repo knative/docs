@@ -50,7 +50,7 @@ Knative is composed of many components that are versioned together.  Those compo
 
 Two reasons: one user-facing, and one contributor-facing. The big, user-facing reason is that it gives users a single number to hang on to when understanding what they've installed and what works together. The smaller, contributor-facing reason is that all our infrastructure is designed to manage a single version number, and updating it to support multiple version numbers doesn't seem like a good use of time given the first point.
 
-### Isn't a component being both "1.0" and "Beta" confusing? 
+### Isn't a component being both "1.0" and "Beta" confusing?
 
 Unless we wait for everything related to Knative to be done, we'll always have some components or features that are in an alpha or beta state. While this sometimes happens along a component boundary, it can also happen within a component, so the version number can't be a sole indicator of "GA or not". (This happens to other projects like Kubernetes as well, and to specific features in Serving or Eventing.)
 
@@ -79,4 +79,3 @@ Thanks to…
 * The Knative Trademark Committee
 * All Knative Contributors, past and present
 * Google for sponsoring our website, testing infrastructure and producing the community meetup every month.
-
