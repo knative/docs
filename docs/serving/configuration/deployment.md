@@ -23,35 +23,35 @@ metadata:
 data:
   # This is the Go import path for the binary that is containerized
   # and substituted here.
-  queueSidecarImage: ko://knative.dev/serving/cmd/queue
+  queue-sidecar-image: ko://knative.dev/serving/cmd/queue
   # List of repositories for which tag to digest resolving should be skipped
-  registriesSkippingTagResolving: "kind.local,ko.local,dev.local"
-  # digestResolutionTimeout is the maximum time allowed for an image's
+  registries-skipping-tag-resolving: "kind.local,ko.local,dev.local"
+  # digest-resolution-timeout is the maximum time allowed for an image's
   # digests to be resolved.
-  digestResolutionTimeout: "10s"
-  # ProgressDeadline is the duration we wait for the deployment to
+  digest-resolution-timeout: "10s"
+  # progress-deadline is the duration we wait for the deployment to
   # be ready before considering it failed.
-  progressDeadline: "600s"
-  # queueSidecarCPURequest is the requests.cpu to set for the queue proxy sidecar container.
+  progress-deadline: "600s"
+  # queue-sidecar-cpu-request is the requests.cpu to set for the queue proxy sidecar container.
   # If omitted, a default value (currently "25m"), is used.
-  queueSidecarCPURequest: "25m"
-  # queueSidecarCPULimit is the limits.cpu to set for the queue proxy sidecar container.
+  queue-sidecar-cpu-request: "25m"
+  # queue-sidecar-cpu-limit is the limits.cpu to set for the queue proxy sidecar container.
   # If omitted, no value is specified and the system default is used.
-  queueSidecarCPULimit: "1000m"
-  # queueSidecarMemoryRequest is the requests.memory to set for the queue proxy container.
+  queue-sidecar-cpu-limit: "1000m"
+  # queue-sidecar-memory-request is the requests.memory to set for the queue proxy container.
   # If omitted, no value is specified and the system default is used.
-  queueSidecarMemoryRequest: "400Mi"
-  # queueSidecarMemoryLimit is the limits.memory to set for the queue proxy container.
+  queue-sidecar-memory-request: "400Mi"
+  # queuesidecarmemorylimit is the limits.memory to set for the queue proxy container.
   # If omitted, no value is specified and the system default is used.
-  queueSidecarMemoryLimit: "800Mi"
-  # queueSidecarEphemeralStorageRequest is the requests.ephemeral-storage to
+  queue-sidecar-memory-limit: "800Mi"
+  # queuesidecarephemeralstoragerequest is the requests.ephemeral-storage to
   # set for the queue proxy sidecar container.
   # If omitted, no value is specified and the system default is used.
-  queueSidecarEphemeralStorageRequest: "512Mi"
-  # queueSidecarEphemeralStorageLimit is the limits.ephemeral-storage to set
+  queue-sidecar-ephemeral-storage-request: "512Mi"
+  # queuesidecarephemeralstoragelimit is the limits.ephemeral-storage to set
   # for the queue proxy sidecar container.
   # If omitted, no value is specified and the system default is used.
-  queueSidecarEphemeralStorageLimit: "1024Mi"
+  queue-sidecar-ephemeral-storage-limit: "1024Mi"
 ```
 
 ## Configuring progress deadlines
@@ -83,12 +83,12 @@ metadata:
   annotations:
     knative.dev/example-checksum: "fa67b403"
 data:
-  progressDeadline: "10m"
+  progress-deadline: "10m"
 ```
 
 ## Skipping tag resolution
 
-You can configure Knative Serving to skip tag resolution for Deployments by modifying the `registriesSkippingTagResolving` ConfigMap setting.
+You can configure Knative Serving to skip tag resolution for Deployments by modifying the `registries-skipping-tag-resolving` ConfigMap setting.
 
 The following example shows how to disable tag resolution for `registry.example.com`:
 
@@ -104,5 +104,5 @@ metadata:
     knative.dev/example-checksum: "fa67b403"
 data:
   # List of repositories for which tag to digest resolving should be skipped
-  registriesSkippingTagResolving: registry.example.com
+  registries-skipping-tag-resolving: registry.example.com
 ```
