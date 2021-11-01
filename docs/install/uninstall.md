@@ -50,16 +50,6 @@ Uninstall any Serving extensions you have installed by performing the steps in t
 
 
 
-=== "TLS wildcard support"
-
-    Uninstall the components needed to provision wildcard certificates in each namespace by running:
-
-    ```bash
-    kubectl delete -f {{ artifact( repo="serving", file="serving-nscert.yaml") }}
-    ```
-
-
-
 ### Uninstalling a networking layer
 
 Follow the relevant procedure to uninstall the networking layer you installed:
