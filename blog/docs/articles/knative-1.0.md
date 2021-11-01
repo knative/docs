@@ -53,13 +53,13 @@ Achieving this milestone has truly been a community effort — we’d be remiss 
 Thanks to…
 
 * Knative Supporting Companies
-  * Google
-  * IBM
-  * Red Hat
-  * SAP
-  * TriggerMesh
-  * VMware
-  * [And many more](https://knative.teststats.cncf.io/d/5/companies-table?orgId=1&var-period_name=Last%202%20years&var-metric=contributions)
+    * Google
+    * IBM
+    * Red Hat
+    * SAP
+    * TriggerMesh
+    * VMware
+    * [And many more](https://knative.teststats.cncf.io/d/5/companies-table?orgId=1&var-period_name=Last%202%20years&var-metric=contributions)
 * The Knative Technical Oversight Committee
 * The Knative Steering Committee
 * The Knative Trademark Committee
