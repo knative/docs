@@ -26,21 +26,21 @@ In addition to a myriad of bug fixes, stability and performance enhancements, ou
 * Moved from an ad-hoc release process to an every 6 week process
 * Support for HTTP2, grpc, and websockets
 * Introduced Brokers and Triggers to simplify publishing and subscribing to events while decoupling producers and consumers
-* Support for Eventing components delivering to non-Knative components, including off-cluster components or specific URLs on a host.
+* Support for Eventing components delivering to non-Knative components, including off-cluster components or specific URLs on a host
 * Support for automatic provisioning of TLS certificates (either via DNS or HTTP01 challenges)
-* Eventing supports customizing delivery options for event destinations, including retries and dead-letter queues for undeliverable messages
-* Event tracing support for both Brokers and Channels for improved debugging
-* Spawned the Tekton project from Knative Build
-* Added Parallel and Sequence components to codify certain composite eventing workflows.
-* Documented and cataloged Event Sources and how to contribute them (currently covering about 40 different event sources)
-* Tested “hitless” upgrades with no dropped requests between minor version releases
-* Redesigned API shapes for Serving to match PodTemplateSpec used by Deployment, CronJob, etc to simplify usage for Kubernetes-aware users
-* Added support for injecting event destination addresses into PodTemplateSpec shaped objects
-* Support for HPA autoscaling as well as Knative Pod Autoscaling based on concurrency or rps.
+* Custom delivery options for event destinations, including retries and dead-letter queues for undeliverable messages
+* Event tracing support for both Brokers and Channels, for improved debugging
+* [The Tekton project](https://tekton.dev/), spawned from Knative Build
+* Parallel and Sequence components, to codify certain composite eventing workflows
+* Documentation for Event Sources and how to contribute them, currently covering about 40 different event sources
+* "Hitless” upgrades with no dropped requests between minor version releases
+* Redesign of API shapes for Serving to match the PodTemplateSpec used by Deployment, CronJob, etc, to simplify usage for Kubernetes-aware users
+* Support for injecting event destination addresses into PodTemplateSpec shaped objects
+* Support for horizontal pod autoscaling based on concurrency or RPS
 * High availability of control plane components using leader election slices
-* Added an operator to help administrators install Knative
-* Added a quickstart for developer try Knative locally
-* Simplified management and publication of Services using DomainMapping (beta)
+* An operator, to help administrators install Knative
+* A quickstart, for developers to try Knative locally
+* Simplified management and publication of Services using DomainMapping
 
 ## Get Involved!
 Join the Knative community meetup on November 17, 2021, to hear from Knative maintainer Ville Aikas about the latest changes coming with Knative 1.0. Newcomers to the Knative community are always welcome! Join the Knative Slack space to ask questions and troubleshoot issues as you get acquainted with the project. Finally, find all the project documentation on the Knative website and contribute to the project on GitHub.
