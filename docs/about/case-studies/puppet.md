@@ -22,15 +22,15 @@ hide:
 
 <h2 style="font-weight: bold;">Relay by Puppet Brings Workflows to Everything using Knative</h2>
 
-[Puppet](https://puppet.com) is a software company specializing in infrastructure automation. The company was founded in 2009 to solve some of the most complex problems for those who work in operations. Around 2019, the team noticed that cloud operations teams weren’t able to effectively manage modern cloud-native applications because they were relying on manual workflow processes. The group saw an opportunity here to build out a platform to connect events triggered by modern architectures to ensure cloud environments remained secure, compliant, and cost effective.
+<a href=https://puppet.com>Puppet</a> is a software company specializing in infrastructure automation. The company was founded in 2009 to solve some of the most complex problems for those who work in operations. Around 2019, the team noticed that cloud operations teams weren’t able to effectively manage modern cloud-native applications because they were relying on manual workflow processes. The group saw an opportunity here to build out a platform to connect events triggered by modern architectures to ensure cloud environments remained secure, compliant, and cost effective.
 
-This is the story of how [Relay](https://puppet.com/products/relay), a cloud-native workflow automation platform, was created, and how Knative and Kubernetes modernize and super-charge business process automation.
+This is the story of how <a href=https://puppet.com/products/relay>Relay</a>, a cloud-native workflow automation platform, was created, and how Knative and Kubernetes modernize and super-charge business process automation.
 
 <h2 style="color:#0071c7;"> The glue for DevOps</h2>
 
 When Puppet first began exploring the power and flexibility of Knative to trigger their Tekton-based workflow execution engine, they weren't quite sure where their journey was going to take them. Knative offered an attractive feature set, so they began building and experimenting. They wanted to build an event-driven DevOps tool; they weren't interested in building just another continuous integration product. In addition, as they continued to explore, they realized that they wanted something flexible and not tied to just one vertical. Whatever they were building, it was not going to focus on just one market.
 
-As their target came into focus, they realized that the serverless applications and functions enabled by [Knative Serving](../../../serving/) would be perfect for a cloud-based business process automation service. Out of this realization, they built [Relay](https://relay.sh), a cloud workflow automation product that helps Cloud Ops teams solve the integration and eventing issues that arise as organizations adopt multiple clouds and SaaS products alongside legacy solutions.
+As their target came into focus, they realized that the serverless applications and functions enabled by <a href="../../../serving/">Knative Serving</a> would be perfect for a cloud-based business process automation service. Out of this realization, they built <a href=https://relay.sh>Relay</a>, a cloud workflow automation product that helps Cloud Ops teams solve the integration and eventing issues that arise as organizations adopt multiple clouds and SaaS products alongside legacy solutions.
 
 <h2 style="color:#0071c7;"> Containers and webhooks</h2>
 
@@ -40,7 +40,7 @@ Containers and webhooks are key elements in the Relay architecture. Containers a
 
 Allowing fully-configurable webhooks gives users the flexibility needed to incorporate business processes of all kinds. With webhooks, Relay can interact with nearly any web-based API to trigger rich, fully featured workflows across third party SaaS products, cloud services, web applications, and even system utilities.
 
-Knative Serving provides important infrastructure for Relay. It allows webhooks and services to scale automatically, [even down to zero](../../../serving/autoscaling/scale-to-zero/). This allows Relay to support pretty much any integration, including those used by only a small number of users. With autoscaling, those services don't consume resources while they are not being used.
+Knative Serving provides important infrastructure for Relay. It allows webhooks and services to scale automatically, <a href="../../../serving/autoscaling/scale-to-zero/">even down to zero</a>. This allows Relay to support pretty much any integration, including those used by only a small number of users. With autoscaling, those services don't consume resources while they are not being used.
 
 <h2 style="color:#0071c7;"> What is Knative Serving?</h2>
 
@@ -50,17 +50,17 @@ However, while all of this sounds amazing, it can be difficult to manage and con
 
 <h2 style="color:#0071c7;"> Workflow integrations</h2>
 
-The open architecture allows Relay to integrate dozens of different services and platforms into workflows. A look at the [Relay integrations GitHub page](https://github.com/relay-integrations) provides a list of these integrations and demonstrates their commitment to the open source community.
+The open architecture allows Relay to integrate dozens of different services and platforms into workflows. A look at the <a href="https://github.com/relay-integrations">Relay integrations GitHub page</a> provides a list of these integrations and demonstrates their commitment to the open source community.
 
 "I'm a strong believer in working with open source projects. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor—all of which we depend on to make our product functional," says Fontes.
 
 <h2 style="color:#0071c7;"> Results: automated infrastructure management</h2>
 
-While Relay's infrastructure runs on Google Cloud Platform, its [library of workflows, integrations, steps, and triggers](https://relay.sh/library/) includes services across all major cloud service providers. Relay customers can integrate across Microsoft Azure, AWS, and Oracle Cloud Infrastructure among others. By combining these integrations with SaaS offerings, it truly is becoming the [Zapier](https://zapier.com/) of infrastructure management.
+While Relay's infrastructure runs on Google Cloud Platform, its <a href="https://relay.sh/library/">library of workflows, integrations, steps, and triggers</a> includes services across all major cloud service providers. Relay customers can integrate across Microsoft Azure, AWS, and Oracle Cloud Infrastructure among others. By combining these integrations with SaaS offerings, it truly is becoming the <a href=https://zapier.com/">Zapier</a> of infrastructure management.
 
 “Our customers have diverse needs for managing their workloads that are often best implemented as web APIs. Our product provides a serverless microservice environment powered by Knative that allows them to build this complex tooling without the management and maintenance overhead of traditional deployment architectures. We pass the cost savings on to them, and everyone is happier," said Fontes.
 
-Building and deploying Relay would not have been possible without the existing infrastructure offered by systems such as Knative and [Tekton](https://tekton.dev). Remarkably, Fontes' team never grew above eight engineers. Once they solidified their plan for Relay, they were able to bring it to production in just three months.
+Building and deploying Relay would not have been possible without the existing infrastructure offered by systems such as Knative and <a href="https://tekton.dev">Tekton</a>. Remarkably, Fontes' team never grew above eight engineers. Once they solidified their plan for Relay, they were able to bring it to production in just three months.
 
 "Thanks to Knative, getting Relay out the door was easier than we thought it would be." says Fontes.
 
