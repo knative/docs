@@ -40,11 +40,11 @@ The open architecture allows Relay to integrate dozens of different services and
 
 <h2 style="color:#0071c7;"> Results: automated infrastructure management</h2>
 
-While Relay's infrastructure runs on Google Cloud Platform, its [library of workflows, integrations, steps, and triggers](https://relay.sh/library/) includes services across all major cloud service providers. Relay customers can integrate across Microsoft Azure, AWS, and Oracle Cloud Infrastructure among others. By combining these integrations with SaaS offerings, it truly is becoming the Zapier of infrastructure management.
+While Relay's infrastructure runs on Google Cloud Platform, its [library of workflows, integrations, steps, and triggers](https://relay.sh/library/) includes services across all major cloud service providers. Relay customers can integrate across Microsoft Azure, AWS, and Oracle Cloud Infrastructure among others. By combining these integrations with SaaS offerings, it truly is becoming the [Zapier](https://zapier.com/) of infrastructure management.
 
 “Our customers have diverse needs for managing their workloads that are often best implemented as web APIs. Our product provides a serverless microservice environment powered by Knative that allows them to build this complex tooling without the management and maintenance overhead of traditional deployment architectures. We pass the cost savings on to them, and everyone is happier," said Fontes.
 
-Building and deploying Relay would not have been possible without the existing infrastructure offered by systems such as Knative and Tekton. Remarkably, Fontes' team never grew above eight engineers. Once they solidified their plan for Relay, they were able to bring it to production in just three months.
+Building and deploying Relay would not have been possible without the existing infrastructure offered by systems such as Knative and [Tekton](https://tekton.dev). Remarkably, Fontes' team never grew above eight engineers. Once they solidified their plan for Relay, they were able to bring it to production in just three months.
 
 "Thanks to Knative, getting Relay out the door was easier than we thought it would be." says Fontes.
 
