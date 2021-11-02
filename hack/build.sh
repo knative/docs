@@ -48,7 +48,7 @@ else
   pushd "$TEMP/docs-main"; mkdocs build -f mkdocs.yml -d $SITE/development; popd
 
   # Latest release branch to /docs
-  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/knative-docs "$TEMP/docs-$latest"
+  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/docs "$TEMP/docs-$latest"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
   pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
