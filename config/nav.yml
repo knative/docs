@@ -273,4 +273,8 @@ nav:
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
     - "Join the Community ➠": /community/
+    - Case Studies:
+      - deepc: about/case-studies/deepc.md
+      - Outfit7: about/case-studies/outfit7.md
+      - Puppet: about/case-studies/puppet.md
     - Blog: /blog/

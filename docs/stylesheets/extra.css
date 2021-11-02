@@ -40,7 +40,8 @@
 }
 
 .md-tabs__list li:nth-last-child(1),
-.md-tabs__list li:nth-last-child(2) {
+.md-tabs__list li:nth-last-child(2),
+.md-tabs__list li:nth-last-child(3){
   background: var(--home-color);
   float: right;
 }
