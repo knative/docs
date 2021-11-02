@@ -132,6 +132,9 @@ Instructions about configuring cert-manager, for all the supported DNS
 providers, are provided in
 [DNS01 challenge providers and configuration instructions](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers).
 
+Note that DNS-01 challenges can be used to either validate an
+individual domain name or to validate an entire namespace using a
+wildcard certificate like `*.my-ns.example.com`.
 
 ### Install net-certmanager-controller deployment
 
@@ -148,25 +151,30 @@ providers, are provided in
     kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
-### Install net-nscert-controller component
-
-If you choose to use the mode of provisioning certificate per namespace, you need to install `net-nscert-controller` components.
+### Provising certificates per namespace (wildcard certificates)
 
 **IMPORTANT:** Provisioning a certificate per namespace only works with DNS-01
  challenge. This component cannot be used with HTTP-01 challenge.
 
-1. Determine if `net-nscert-controller` deployment is already installed by
-running the following command:
+The per-namespace certificate manager uses namespace labels to select which
+namespaces should have a certificate applied. For more details on namespace
+selectors, see
+[the Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors).
 
-    ```bash
-    kubectl get deployment net-nscert-controller -n knative-serving
-    ```
+Prior to release 1.0, the fixed label
+`networking.knative.dev/disableWildcardCert: true` was used to disable
+certificate generation for a namespace. In 1.0 and later, other labels such as
+`kubernetes.io/metadata.name` may be used to select or restrict namespaces.
 
-1. If `net-nscert-controller` deployment is not found, run the following command:
+To enable certificates for all namespaces except those with the
+`networking.knative.dev/disableWildcardCert: true` label, use the following
+command:
 
-    ```bash
-    kubectl apply --filename {{ artifact( repo="serving", file="serving-nscert.yaml") }}
-    ```
+```bash
+kubectl patch --namespace knative-serving configmap config-network -p '{"data": {"namespace-wildcard-cert-selector": "{\"matchExpressions\": [{\"key\":\"networking.knative.dev/disableWildcardCert\", \"operator\": \"NotIn\", \"values\":[\"true\"]}]}"}}'
+```
+
+This selects all namespaces where the label value is not in the set `"true"`.
 
 ### Configure config-certmanager ConfigMap
 
@@ -332,18 +340,4 @@ Using the previous `autoscale-go` example:
 ```
 NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
 autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
-```
-
-### Disable Auto TLS per namespace
-
-If you have Auto TLS enabled to provision a certificate per namespace, you can choose to disable it for an individual namespace by adding the annotation `networking.knative.dev/disableWildcardCert: true`
-1. Edit your namespace `kubectl edit namespace default` and add the annotation:
-```yaml
- apiVersion: v1
- kind: Namespace
- metadata:
-   annotations:
-    ...
-     networking.knative.dev/disableWildcardCert: "true"
-    ...
 ```
