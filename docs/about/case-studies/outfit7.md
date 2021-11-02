@@ -47,7 +47,7 @@ Knative Serving gave Outfit7 access to a robust set of tools and features that a
 
 Knative works as a layer installed on the top of Kubernetes. It brings the power of serverless workloads to the scalable capabilities of Kubernetes. Teams quickly spin up container-based applications without needing to consider the details of Kubernetes.
 
-Knative also implifies project deployments to Kubernetes. Mitja Bezenšek, Lead Developer on Outfit7's backend team, estimated that the traditional development that Knative replaced would have required three full time engineers to maintain. Their new platform operates with minimal work and allows the developers to deploy updates at will.
+Knative also simplifies project deployments to Kubernetes. Mitja Bezenšek, Lead Developer on Outfit7's backend team, estimated that the traditional development that Knative replaced would have required three full time engineers to maintain. Their new platform operates with minimal work and allows the developers to deploy updates at will.
 
 <h2 style="color:#0071c7;">The open source community</h2>
 
