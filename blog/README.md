@@ -88,3 +88,8 @@ If a major change to the site navigation is made (for example, adding a new sect
 
 For changes that are not top-level (i.e. adding a subsection to the "Getting started" guide or creating a new category of blog post), the change only needs to be made in the relevant section, as it's invisible to the other (for example, the subsectino of the "Getting started" guide only needs to be made in `docs/config/nav.yml`)
 
+## Common files between main site and blog, also known as non nav.yml files
+
+All fiels in `docs/overrides`, `docs/images`, and `docs/stylesheets` are copied to the blog at build-time. 
+
+What this means is that any changes to files in those directories (for example, updating the main site layout editing `docs/stylesheets/extra.css`) will go live _on the blog_ as soon as those changes are pushed to `main`. In contrast, on the main site those changes will appear in the development branch and only go live on what users see when they are cherry-picked into the current release branch.
