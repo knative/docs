@@ -19,12 +19,12 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version.
 #    Order matters :-), Most recent first.
-VERSIONS=("0.26" "0.25" "0.24" "0.23")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-VERSIONS_GENERATORS=("mkdocs" "mkdocs" "mkdocs" "hugo")  # update this to always be 4 in the next two releases replace hugo with mkdocs, remove the copy of static hugo site at the bottom
-RELEASE_BRANCHES=("v0.26.0" "v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
+VERSIONS=("1.0" "0.26" "0.25" "0.24")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+VERSIONS_GENERATORS=("mkdocs" "mkdocs" "mkdocs" "mkdocs")  # update this to always be 4 in the next two releases replace hugo with mkdocs, remove the copy of static hugo site at the bottom
+RELEASE_BRANCHES=("knative-v1.0.0" "v0.26.0" "v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
 # 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
-DOCS_BRANCHES=("release-0.26" "release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
-REPOS=("knative" "knative" "knative" "knative")
+DOCS_BRANCHES=("release-1.0" "release-0.26" "release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
+REPOS=("csantanapr" "knative" "knative" "knative")
 # 4) PR the result to main.
 # 5) Party.
 
@@ -48,7 +48,7 @@ else
   pushd "$TEMP/docs-main"; mkdocs build -f mkdocs.yml -d $SITE/development; popd
 
   # Latest release branch to /docs
-  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/docs "$TEMP/docs-$latest"
+  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${REPOS[0]}/knative-docs "$TEMP/docs-$latest"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
   pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
@@ -147,8 +147,8 @@ fi
 
 # Temporarily, copy staticly built old versions of non-mkdocs docs until these scroll out of support
 # TODO(jz) remove these each release until they disappear!
-cp -r archived/scss/* site/scss/
-cp -r archived/v0.23-docs site/v0.23-docs
+#cp -r archived/scss/* site/scss/
+#cp -r archived/v0.23-docs site/v0.23-docs
 
 # Home page is served from docs, so add a redirect.
 # TODO(jz) in production this should be done with a netlify 301 (or maybe just copy docs/index up with a base set).
