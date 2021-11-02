@@ -2,6 +2,7 @@
 hide:
   - toc
 ---
+<h1 style="color:#0071c7;font-size: 3em;">deepc Case Study</h1>
 <table style="border: 0;">
 <tr style="background-color: var(--md-default-bg-color);">
 <td style="border: 0;">
@@ -18,7 +19,6 @@ hide:
 </td>
 
 <td style="border: 0;">
-<h1 style="color:#0071c7;font-size: 3em;">deepc Case Study</h1>
 <h2 style="font-weight: bold;">AI Startup deepc Connects Researchers to Radiologists with Knative Eventing</h2>
 
 deepc is a startup at the cutting edge, bringing advanced data techniques and artificial intelligence to healthcare. The German company helps radiologists  access better diagnostics and resources through cloud-based technology. Their goal is to elevate treatment  quality across the board while creating more efficiency and improvement in medical settings.

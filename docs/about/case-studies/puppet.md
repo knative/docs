@@ -2,6 +2,7 @@
 hide:
   - toc
 ---
+<h1 style="color:#0071c7;font-size: 3em;">Puppet Case Study</h1>
 <table style="border: 0;">
 <tr style="background-color: var(--md-default-bg-color);">
 <td style="border: 0;">
@@ -18,7 +19,6 @@ hide:
 </td>
 
 <td style="border: 0;">
-<h1 style="color:#0071c7;font-size: 3em;">Puppet Case Study</h1>
 
 <h2 style="font-weight: bold;">Relay by Puppet Brings Workflows to Everything using Knative</h2>
 
