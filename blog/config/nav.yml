@@ -11,6 +11,9 @@ nav:
     - Knative Eventing: /docs/eventing/
     # Client
     - Client: /docs/client/
+    # Reference docs
+    - Reference: /docs/reference/
+    - "Join the Community ➠": /community/
     # Blog
     - Blog:
       - index.md
@@ -51,6 +54,3 @@ nav:
       - Events:
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
-    # Reference docs
-    - Reference: /docs/reference/
-    - "Join the Community ➠": /community/
