@@ -29,6 +29,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/knative-1.0.md
           - articles/announcing-knative-1.0.md
           - articles/quickstart-with-knative.md
           - articles/distributed-tracing.md

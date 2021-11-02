@@ -22,10 +22,10 @@ Follow this blog to keep up-to-date with Knative.
 
 # Featured Posts
 
-## Announcing: Knative 1.0 :tada:
-Knative is going 1.0!
+## Knative 1.0 is out!
+Details on the 1.0 release of the Knative project.
 
-[Read more :octicons-arrow-right-24:](articles/announcing-knative-1.0.md){ .md-button }
+[Read more :octicons-arrow-right-24:](articles/knative-1.0.md){ .md-button }
 
 ## Distributed tracing with Knative, OpenTelemetry and Jaeger
 
