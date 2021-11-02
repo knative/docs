@@ -12,7 +12,7 @@ hide:
 <em style="color:#0071c7;font-size: 1em;">"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em>
 </div>
 <div>
-<p style="color:#0071c7;font-size: 1em;">-- Tilen Kavčič, Software Engineer for outfit7</p>
+<p style="color:#0071c7;font-size: 1em;">-- Tilen Kavčič, Software Engineer for Outfit7</p>
 </div>
 
 </td>
@@ -53,7 +53,7 @@ Knative also simplifies project deployments to Kubernetes. Mitja Bezenšek, Lead
 
 Outfit7's team was blown away by the supportive and helpful community around Knative. After discovering a problem with network scaling, the team was surprised by how easy it was to find answers and solutions.
 
-<h2 style="color:#0071c7;"><em>"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em> -- Tilen Kavčič, Software Engineer for outfit7</h2>
+<h2 style="color:#0071c7;"><em>"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em> -- Tilen Kavčič, Software Engineer for Outfit7</h2>
 
 <h2 style="color:#0071c7;">Sharing their story</h2>
 
