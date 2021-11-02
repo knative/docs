@@ -24,7 +24,7 @@ VERSIONS_GENERATORS=("mkdocs" "mkdocs" "mkdocs" "mkdocs")  # update this to alwa
 RELEASE_BRANCHES=("knative-v1.0.0" "v0.26.0" "v0.25.0" "v0.24.0")                     # Release version for serving/eventing yaml files and api references.
 # 3) For now, set branches and repos for old versions of docs. (This will go away when all docs branches are release-$version).
 DOCS_BRANCHES=("release-1.0" "release-0.26" "release-0.25" "release-0.24") # add a branch here for the next 2 releases until everything is mkdocs
-REPOS=("csantanapr" "knative" "knative" "knative")
+REPOS=("knative" "knative" "knative" "knative")
 # 4) PR the result to main.
 # 5) Party.
 
