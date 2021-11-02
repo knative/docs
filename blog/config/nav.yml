@@ -14,7 +14,7 @@ nav:
     # Reference docs
     - Reference: /docs/reference/
     - "Join the Community ➠": /community/
-    - Case Studies: /docs/about/case-studies/
+    - Case Studies: /docs/about/case-studies/deepc
     # Blog
     - Blog:
       - index.md
