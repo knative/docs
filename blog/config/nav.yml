@@ -1,21 +1,16 @@
 nav:
     - Home: /docs/
     - Getting started: /docs/getting-started/
-    # Administration guide
-    - Administration guide: /docs/admin/
-    # Developer guide
-    - Developer guide: /docs/developer/
-    # Serving
-    - Knative Serving: /docs/serving/
-    # Eventing
-    - Knative Eventing: /docs/eventing/
-    # Client
-    - Client: /docs/client/
-    # Reference docs
+    - Installing: /docs/install/
+    - Serving: /docs/serving/
+    - Eventing: /docs/eventing/
+    - Code samples: /docs/samples.md
     - Reference: /docs/reference/
     - "Join the Community ➠": /community/
-    - Case Studies: /docs/about/case-studies/deepc
+    - Case studies: /docs/about/case-studies/deepc
+  #####################################################
     # Blog
+  #####################################################
     - Blog:
       - index.md
       - Releases:
@@ -46,6 +41,7 @@ nav:
           - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
           - articles/set-up-a-local-knative-environment-with-kind.md
       - Steering Committee:
+          - steering/steering-elections-2021.md
           - steering/toc-2021-election-announcement.md
           - steering/2020-11-ksc-elections.md
           - steering/governance-changes.md
