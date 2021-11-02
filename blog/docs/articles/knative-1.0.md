@@ -66,16 +66,13 @@ Newcomers to the Knative community are always welcome! [Join the Knative Slack s
 Achieving this milestone has truly been a community effort — we’d be remiss not to thank some of the people who helped us get here.
 Thanks to…
 
-* Knative Supporting Companies
-    * Google
+* The companies supporting Knative, including
+    * Google (who also sponsor our website and testing infrastructure, and produce the community meetup every month)
     * IBM
     * Red Hat
     * SAP
     * TriggerMesh
     * VMware
-    * [And many more](https://knative.teststats.cncf.io/d/5/companies-table?orgId=1&var-period_name=Last%202%20years&var-metric=contributions)
-* The Knative Technical Oversight Committee
-* The Knative Steering Committee
-* The Knative Trademark Committee
-* All Knative Contributors, past and present
-* Google for sponsoring our website, testing infrastructure and producing the community meetup every month.
+    * [and many more!](https://knative.teststats.cncf.io/d/5/companies-table?orgId=1&var-period_name=Last%20decade&var-metric=contributions)
+* The members of our [Technical Oversight Committee](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md), [Steering Committee](https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md) and [Trademark Committee](https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md)
+* All Knative contributors, past and present
