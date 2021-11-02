@@ -235,9 +235,9 @@ nav:
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
-    - Blog: /blog/
     # Reference docs
     - Reference:
       - Serving: reference/api/serving-api.md
       - Eventing: reference/api/eventing-api.md
     - "Join the Community ➠": /community/
+    - Blog: /blog/
