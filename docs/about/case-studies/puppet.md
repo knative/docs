@@ -47,7 +47,7 @@ Knative Serving provides important infrastructure for Relay. It allows webhooks 
 
 Modern cloud-based applications deal with massive scaling challenges through several approaches. At the core of most of these is the use of containers: discrete computing units that run single applications, single services, or even just single functions. This approach is incredibly powerful, allowing services to scale the amount of resources they consume as demand dictates.
 
-However, while all of this sounds amazing, it can be difficult to manage and configure. One of the most successful solutions for delivering this advanced architecture is Knative Serving. This framework builds on top of Kubernetes to support the deploying and management of serverless applications, services, and functions. In particular, Knative Services focuses on being easy to configure, deploy, and manage.
+However, while all of this sounds amazing, it can be difficult to manage and configure. One of the most successful solutions for delivering this advanced architecture is Knative Serving. This framework builds on top of Kubernetes to support the deployment and management of serverless applications, services, and functions. In particular, Knative Services focuses on being easy to configure, deploy, and manage.
 
 <h2 style="color:#0071c7;"> Workflow integrations</h2>
 
