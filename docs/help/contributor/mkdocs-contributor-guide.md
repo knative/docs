@@ -64,7 +64,7 @@ In your terminal, find your way over to the location of the cloned repo. Once yo
     ```
     Once you have those npm packages installed, run:
     ```
-    ./hack/build-with-blog.sh serve
+    ./hack/build.sh serve
     ```
     !!! note
         Unfortunately, there aren’t live previews for this version of the local preview.
