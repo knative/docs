@@ -1,11 +1,17 @@
 # Knative Eventing
 
-Knative Eventing enables developers to use an [event-driven architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) with serverless applications. An event-driven architecture is based on the concept of decoupled relationships between event producers that create events, and event consumers, or [_sinks_](../eventing/sinks/README.md), that receive events.
+Knative Eventing provides tools for routing [CloudEvents](https://cloudevents.io) from event producers to sinks, enabling developers to use an [event-driven architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) with their applications. Knative Eventing resources are loosely coupled, and can be developed and deployed independently of each other.
 
-In a Knative Eventing deployment, event [Sources](../eventing/sources/README.md) are the primary event producers, however you can also configure a sink or _subscriber_ to respond to HTTP requests by sending a response event. Examples of sinks in a Knative Eventing deployment include Knative Services, Channels and Brokers.
+Knative Eventing uses standard HTTP POST requests to send and receive events between event producers and sinks. These events conform to the [CloudEvents specifications](https://cloudevents.io/), which enables creating, parsing, sending, and receiving events in any programming language. Event producers and event consumers are independent. Any producer can generate events before there are active event consumers that are listening. Any event consumer can express interest in an event or class of events, before there are producers that are creating those events.
+
+Other services can be connected to the Knative Eventing system. These services can perform the following functions:
+
+- Create new applications without modifying the event producer or event   consumer.
+- Select and target specific subsets of the events from their producers.
+
+Knative Eventing is consistent with the [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless), which ensures cross-service interoperability.
+
 <!--TODO: Add response / reply event information, maybe diagrams-->
-
-Knative Eventing uses standard HTTP POST requests to send and receive events between event producers and sinks. These events conform to the [CloudEvents specifications](https://cloudevents.io/), which enables creating, parsing, sending, and receiving events in any programming language.
 
 ## Common use cases
 
@@ -22,16 +28,33 @@ Consume an event without creating a publisher
 
 <!--TODO: What about channels?-->
 
-## Design overview
+## Eventing components
 
-Knative Eventing is designed around the following goals:
+An event-driven architecture is based on the concept of decoupled relationships between event producers that create events, and event consumers, or [_sinks_](../eventing/sinks/README.md), that receive events. It builds on  delivery over HTTP by providing configuration and management of pluggable event-routing components.
 
-1. Knative Eventing resources are loosely coupled, and can be developed and deployed independently of each other.
-1. Event producers and event consumers are independent. Any producer can generate events before there are active event consumers that are listening. Any event consumer can express interest in an event or class of events, before there are producers that are creating those events.
-1. Knative Eventing is consistent with the [CloudEvents](https://github.com/cloudevents/spec/blob/master/spec.md#design-goals) specification that is developed by the [CNCF Serverless WG](https://lists.cncf.io/g/cncf-wg-serverless), which ensures cross-service interoperability.
-1. Other services can be connected to the Knative Eventing system. These services can perform the following functions:
-    - Create new applications without modifying the event producer or event   consumer.
-    - Select and target specific subsets of the events from their producers.
+A sink or _subscriber_ can also be configured to respond to HTTP requests by sending a response event. Examples of sinks in a Knative Eventing deployment include Knative Services, Channels and Brokers.
+
+### Event sources
+
+In a Knative Eventing deployment, event [Sources](../eventing/sources/README.md) are the primary event producers. Events are sent to a sink or _subscriber_.
+<!--TODO: Explain difference / relationship between sink/subscriber? All of this might be too in depth for an overview IMO.-->
+
+### Broker and Trigger
+
+[Brokers](../eventing/broker/README.md) and [Triggers](../eventing/broker/triggers/README.md) provide an "event mesh" model, which allows an event producer to deliver events to a Broker, which then distributes them uniformly to consumers by using Triggers.
+
+This delivers the following benefits:
+
+- Consumers can register for specific types of events without needing to
+  negotiate directly with event producers.
+- Event routing can be optimized by the underlying platform using the specified
+  filter conditions.
+
+### Channel and Subscription
+
+[Channels](../eventing/channels/README.md) and [Subscriptions](../eventing/channels/subscriptions/README.md) provide a "event pipe" model which transforms and routes events between Channels using Subscriptions.
+
+This model is appropriate for event pipelines where events from one system need to be transformed and then routed to another process.
 
 ### Event registry
 
