@@ -27,6 +27,12 @@ Details on the 1.0 release of the Knative project.
 
 [Read more :octicons-arrow-right-24:](articles/knative-1.0.md){ .md-button }
 
+## Highlighting the value of Knative for the c-suite
+
+Deploy faster and more cost-effectively without hard-to-find, specialized expertise. Knative—building on Kubernetes—supports serverless code  development and deployment. This allows your developers to focus on creating code and deploying resilient applications fast without having to become experts on Kubernetes...
+
+[Read more :octicons-arrow-right-24:](articles/highlighting-value-knative-c-suite.md){ .md-button }
+
 ## Distributed tracing with Knative, OpenTelemetry and Jaeger
 
 When trying to understand and diagnose our systems, one of the most basic tools we learn to lean on is the stack trace. Stack traces give us a structured view of the flow of logic that our program is executing in order to help us wrap our heads ...
