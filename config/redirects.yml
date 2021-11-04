@@ -84,7 +84,7 @@ plugins:
       eventing/broker/configmaps/README.md: eventing/configuration/broker-configuration.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
-      evetnting/debugging/README.md: eventing/troubleshooting/README.md
+      eventing/debugging/README.md: eventing/troubleshooting/README.md
       eventing/metrics.md: eventing/observability/metrics/eventing-metrics.md
       eventing/parallel.md: eventing/flows/parallel.md
       eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
@@ -126,10 +126,7 @@ plugins:
       serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
       serving/samples/blue-green-deployment.md: serving/traffic-management.md
       serving/samples/traffic-splitting/README.md: serving/traffic-management.md
-      serving/services/creating-services.md: serving/services/creating-services.md
       serving/services/deployment.md: serving/configuration/deployment.md
-      serving/services/private-services.md: serving/services/private-services.md
-      serving/services/README.md: serving/services/README.md
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
       serving/using-subroutes.md: serving/traffic-management.md
