@@ -4,7 +4,7 @@ The Knative website has a basic, top-level navigation that looks like this:
 
 ```yaml
 nav:
-    - Home: 
+    - Home:
     - Getting started:
     - Installing:
     - Serving:
@@ -12,10 +12,10 @@ nav:
     - Code samples:
     - Reference:
     - "Join the Community ➠":
-    - Blog: 
+    - Blog:
 ```
 
-Currently, we maintain two different copies of the navigation. 
+Currently, we maintain two different copies of the navigation.
 
 ## docs/config/nav.yml
 
@@ -80,16 +80,16 @@ A couple of key points:
 
 ## Updating the blog
 
-When a new blog post is created, it will also need to be added to the blog navigation (i.e. to `docs/blog/config/nav.yml`) in the appropriate section. 
+When a new blog post is created, it will also need to be added to the blog navigation (i.e. to `docs/blog/config/nav.yml`) in the appropriate section.
 
 ## Updating the site navigation
 
 If a major change to the site navigation is made (for example, adding a new section to the top navigation tabs), then the change will need to be made in both `docs/config/nav.yml` and `docs/blog/config/nav.yml`.
 
-For changes that are not top-level (i.e. adding a subsection to the "Getting started" guide or creating a new category of blog post), the change only needs to be made in the relevant section, as it's invisible to the other (for example, the subsectino of the "Getting started" guide only needs to be made in `docs/config/nav.yml`)
+For changes that are not top-level (i.e. adding a subsection to the "Getting started" guide or creating a new category of blog post), the change only needs to be made in the relevant section, as it's invisible to the other (for example, the subsection of the "Getting started" guide only needs to be made in `docs/config/nav.yml`)
 
 ## Common files between main site and blog, also known as non nav.yml files
 
-All fiels in `docs/overrides`, `docs/images`, and `docs/stylesheets` are copied to the blog at build-time. 
+All files in `docs/overrides`, `docs/images`, and `docs/stylesheets` are copied to the blog at build-time.
 
-What this means is that any changes to files in those directories (for example, updating the main site layout editing `docs/stylesheets/extra.css`) will go live _on the blog_ as soon as those changes are pushed to `main`. In contrast, on the main site those changes will appear in the development branch and only go live on what users see when they are cherry-picked into the current release branch.
+What this means is that any changes to files in those directories (for example, updating the main site layout editing `docs/stylesheets/extra.css`) will go live _on the blog_ as soon as those changes are pushed to `main`. In contrast, on the main site those changes will appear in the development branch and only go live when they are cherry-picked into the current release branch.
