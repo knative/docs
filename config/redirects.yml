@@ -44,6 +44,7 @@ plugins:
       developer/eventing/sinks/README.md: eventing/sinks/README.md
       developer/eventing/sources/apache-camel-source/README.md: eventing/sources/apache-camel-source/README.md
       developer/eventing/sources/apiserversource/getting-started.md: eventing/sources/apiserversource/getting-started.md
+      developer/eventing/sources/apiserversource/README.md: eventing/sources/apiserversource/README.md
       developer/eventing/sources/apiserversource/reference.md: eventing/sources/apiserversource/reference.md
       developer/eventing/sources/containersource/README.md: eventing/custom-event-source/containersource/README.md
       developer/eventing/sources/containersource/reference.md: eventing/custom-event-source/containersource/reference.md
@@ -100,7 +101,6 @@ plugins:
       eventing/sequence.md: eventing/flows/sequence/README.md
       eventing/sink/kafka-sink.md: eventing/sinks/kafka-sink.md
       eventing/sink/README.md: eventing/sinks/README.md
-      eventing/sources/apiserversource/index.md: eventing/sources/apiserversource/README.md
       eventing/sources/containersource.md: eventing/custom-event-source/containersource/README.md
       eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
       eventing/triggers/index.md: eventing/broker/triggers/README.md
