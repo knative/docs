@@ -61,9 +61,7 @@ While Relay's infrastructure runs on Google Cloud Platform, its <a href="https:/
 
 “Our customers have diverse needs for managing their workloads that are often best implemented as web APIs. Our product provides a serverless microservice environment powered by Knative that allows them to build this complex tooling without the management and maintenance overhead of traditional deployment architectures. We pass the cost savings on to them, and everyone is happier," said Fontes.
 
-Building and deploying Relay would not have been possible without the existing infrastructure offered by systems such as Knative and <a href="https://tekton.dev">Tekton</a>. Remarkably, Fontes' team never grew above eight engineers. Once they solidified their plan for Relay, they were able to bring it to production in just three months.
-
- says Fontes.
+Building and deploying Relay would not have been possible without the existing infrastructure offered by systems such as Knative and <a href="https://tekton.dev">Tekton</a>. Remarkably, Fontes' team never grew above eight engineers. Once they solidified their plan for Relay, they were able to bring it to production in just three months, says Fontes.
 
 <h2 style="color:#0071c7;"><em>"Thanks to Knative, getting Relay out the door was easier than we thought it would be."</em> said Noah Fontes, Senior Principal Software Engineer.</h2>
 
