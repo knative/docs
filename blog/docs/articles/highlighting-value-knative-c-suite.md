@@ -13,7 +13,7 @@ type: "blog"
 <td style="border: 0;" width="33%">
 
 <div style="padding:50px;">
-<em style="color:#0071c7;font-size: 1em;">"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud,developers focus on the business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps.. Knative is a framework that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</em>
+<em style="color:#0071c7;font-size: 1em;">"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud developers focus on the business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps.. Knative is a framework that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</em>
 <p style="color:#0071c7;font-size: 1em;">-- Aparna Sinha, Director of Product Management, Google</p>
 </div>
 
@@ -73,7 +73,7 @@ type: "blog"
 
 <p>For more than ten years, DevOps has been a promise of an effective application development process that deploys faster with less bugs. Offering immense capability but introducing significant complexity, Kubernetes is a key link in realizing value from DevOps. To achieve value at scale, cluster administrators need specialized knowledge, and in the past developers did as well. Knative provides a serverless experience that greatly reduces the need for those who develop and deploy code to have Kubernetes expertise. Operators get consistent, manageable containers when possible and the flexibility to deploy any image when necessary.
 
-<p><i>"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud,developers focus on the  business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps.. Knative is a framework  that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</i>
+<p><i>"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud developers focus on the  business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps.. Knative is a framework  that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</i>
 <br>- Aparna Sinha, Director of Product Management, Google
 
 <p><i>“The entire idea of cloud native and serverless go together with digital transformation happening at any company. You need to modernize the way you manage apps and develop.”</i>
