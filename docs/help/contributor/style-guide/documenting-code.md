@@ -261,7 +261,7 @@ Apply code formatting only to special-purpose text:
 
 
 ## Documentation of flags
-> Always use the short version of flags used in a command than the extended version, i.e., use ```-n``` rather than ```--namespace```
+> Always use the short version of flags used in a command rather than the extended version. For example, use `-n` rather than `--namespace`.
 === ":white_check_mark: Correct"
      ```bash
      kubectl apply -f <filename>.yaml -n <namespace>
