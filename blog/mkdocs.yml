@@ -74,6 +74,7 @@ plugins:
 copyright: "Copyright © 2021 The Knative Authors"
 
 extra:
+  homepage: https://knative.dev/docs
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/KnativeProject
