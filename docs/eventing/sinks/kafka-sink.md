@@ -52,6 +52,49 @@ spec:
    - my-cluster-kafka-bootstrap.kafka:9092
 ```
 
+## Output Topic Content Mode
+
+The CloudEvent specification defines 2 modes to transport a CloudEvent: structured and binary.
+
+> A "structured-mode message" is one where the event is fully encoded using a stand-alone event
+> format and stored in the message body.
+>
+> The structured content mode keeps event metadata and data together in the payload, allowing
+> simple forwarding of the same event across multiple routing hops, and across multiple protocols.
+>
+> A "binary-mode message" is one where the event data is stored in the message body, and event
+> attributes are stored as part of message meta-data.
+>
+> The binary content mode accommodates any shape of event data, and allows for efficient transfer
+> and without transcoding effort.
+
+A KafkaSink object with a specified `contentMode` looks similar to the following:
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KafkaSink
+metadata:
+  name: my-kafka-sink
+  namespace: default
+spec:
+  topic: mytopic
+  bootstrapServers:
+   - my-cluster-kafka-bootstrap.kafka:9092
+
+  # CloudEvent content mode of Kafka messages sent to the topic.
+  # Possible values:
+  # - structured
+  # - binary
+  #
+  # default: structured.
+  #
+  # CloudEvent spec references:
+  # - https://github.com/cloudevents/spec/blob/v1.0/spec.md#message
+  #	- https://github.com/cloudevents/spec/blob/v1.0/kafka-protocol-binding.md#33-structured-content-mode
+  #	- https://github.com/cloudevents/spec/blob/v1.0/kafka-protocol-binding.md#32-binary-content-mode
+  contentMode: binary # or structured
+```
+
 ## Security
 
 Knative supports the following Apache Kafka security features:
