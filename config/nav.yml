@@ -183,7 +183,7 @@ nav:
         - Sugar Controller: eventing/sugar/README.md
         - Brokers:
           - Overview: eventing/broker/README.md
-          - Event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
+          - Using the Event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
           - Creating a broker: eventing/broker/create-mtbroker.md
           - Triggers: eventing/broker/triggers/README.md
           - Broker configuration example: eventing/broker/example-mtbroker.md
