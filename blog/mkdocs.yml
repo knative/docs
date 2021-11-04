@@ -1,7 +1,7 @@
 INHERIT: config/nav.yml
 
 site_name: Knative
-site_url: https://knative.dev/blog
+site_url: https://knative.dev/docs
 site_description: Knative Blog
 extra_css:
   - stylesheets/extra.css
@@ -74,6 +74,7 @@ plugins:
 copyright: "Copyright © 2021 The Knative Authors"
 
 extra:
+  homepage: https://knative.dev/docs
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/KnativeProject
