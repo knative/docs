@@ -52,7 +52,7 @@ This delivers the following benefits:
 
 ### Channel and Subscription
 
-[Channels](../eventing/channels/README.md) and [Subscriptions](../eventing/channels/subscriptions/README.md) provide a "event pipe" model which transforms and routes events between Channels using Subscriptions.
+[Channels](../eventing/channels/README.md) and [Subscriptions](../eventing/channels/subscriptions.md) provide a "event pipe" model which transforms and routes events between Channels using Subscriptions.
 
 This model is appropriate for event pipelines where events from one system need to be transformed and then routed to another process.
 
@@ -65,5 +65,4 @@ The registry consists of a collection of event types. The event types stored in
 the registry contain (all) the required information for a consumer to create a
 Trigger without resorting to some other out-of-band mechanism.
 
-To learn how to use the registry, see the
-[Event Registry documentation](event-registry.md).
+To learn how to use the registry, see the [Event Registry documentation](event-registry.md).
