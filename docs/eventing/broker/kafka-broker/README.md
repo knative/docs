@@ -9,7 +9,7 @@ Notable features are:
 - Control plane High Availability
 - Horizontally scalable data plane
 - [Extensively configurable](#kafka-producer-and-consumer-configurations)
-- Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/v1.0/extensions/partitioning.md)
+- Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/v1.0.1/extensions/partitioning.md)
 - Support any Kafka version, see [compatibility matrix](https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix)
 
 ## Prerequisites

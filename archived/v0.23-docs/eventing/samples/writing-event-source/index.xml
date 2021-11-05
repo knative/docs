@@ -45,7 +45,7 @@
 &lt;/ul&gt;
 &lt;h1 id=&#34;theory&#34;&gt;Theory&lt;/h1&gt;
 &lt;p&gt;Quick Introduction to Knative Eventing Sources
-A Knative Source is Kubernetes Custom Resource that generates or imports an event and pushes that event to another endpoint on the cluster via a &lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0/primer.md&#34;&gt;CloudEvents&lt;/a&gt;.&lt;/p&gt;
+A Knative Source is Kubernetes Custom Resource that generates or imports an event and pushes that event to another endpoint on the cluster via a &lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0.1/primer.md&#34;&gt;CloudEvents&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/knative/eventing/blob/master/docs/spec/sources.md&#34;&gt;The specification&lt;/a&gt;
 for Knative Eventing Sources contains a number of requirements that
 together define a well-behaved Knative Source.&lt;/p&gt;

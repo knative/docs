@@ -741,9 +741,9 @@ type information in the cluster data store.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Read about the &lt;a href=&#34;../broker/&#34;&gt;broker&lt;/a&gt; and &lt;a href=&#34;../broker/triggers/&#34;&gt;trigger&lt;/a&gt; objects.&lt;/li&gt;
 &lt;li&gt;Be familiar with the
-&lt;a href=&#34;https://github.com/cloudevents/spec/blob/master/spec.md&#34;&gt;CloudEvents spec&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0.1/spec.md&#34;&gt;CloudEvents spec&lt;/a&gt;,
 particularly the
-&lt;a href=&#34;https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes&#34;&gt;Context Attributes&lt;/a&gt;
+&lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#context-attributes&#34;&gt;Context Attributes&lt;/a&gt;
 section.&lt;/li&gt;
 &lt;li&gt;Be familiar with &lt;a href=&#34;../sources&#34;&gt;event sources&lt;/a&gt;.&lt;/li&gt;
 &lt;/ol&gt;
