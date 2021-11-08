@@ -19,20 +19,21 @@ Follow the instructions in the documentation
 
 #### Table of Contents
 - [Highlights](#highlights)
-- [Serving v1.0](#Serving-v10)
-- [Eventing v1.0](#Eventing-v10)
-- [Eventing Extensions](#Eventing-Extensions)
-    - [Apache Kafka Broker v1.0](#Apache-Kafka-Broker-v10)
-    - [Apache Kafka Source and Channels v1.0](#apache-kafka-source-and-channels-v10)
-    - [Eventing Kogito v1.0](#eventing-kogito-v10)
-- `kn` [CLI v1.0](#Client-v10)
-- [Operator v1.0](#Operator-v10)
-- [Thank you contributors](#Thank-you-contributors)
+- [Serving v1.0](#serving-v10)
+- [Eventing v1.0](#eventing-v10)
+- [Eventing Extensions](#eventing-extensions)
+    - [Apache Kafka Broker v1.0](#apache-kafka-broker-v10)
+    - [RabbitMQ Broker and Source v1.0](#rabbitmq-broker-and-source-v10)
+- `kn` [CLI v1.0](#client-v10)
+- [Knative Operator v1.0](#operator-v10)
+- [Thank you contributors](#thank-you-contributors)
 
 
 ### Highlights
 
-- TBD
+- All components versions are now tag `knative-v1.0.0`, for users using go library use version `v0.27`
+- The per-namespace wildcard certificate provisioner has been integrated into the base controllers
+- By default, the Prefer: reply header is forwarded to Broker Triggers' subscribers
 
 
 
@@ -115,8 +116,6 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 - ServiceAccount knative-kafka-data-plane for KafkaSink has been renamed to knative-kafka-sink-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
 - ClusterRoleBinding knative-kafka-data-plane for KafkaSink has been renamed to knative-kafka-sink-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
 - Set status.deadLetterSinkUri of Broker and Trigger to the resolved URI of spec.delivery.deadLetterSink. ([#1349](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1349))
-
-### Eventing Extensions
 
 #### RabbitMQ Broker and Source v1.0
 
