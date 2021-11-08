@@ -31,7 +31,7 @@ Follow the instructions in the documentation
 
 ### Highlights
 
-- All components versions are now tag `knative-v1.0.0`, for users using go library use version `v0.27`
+- All components versions are now tagged `knative-v1.0.0`, for users using go library use version `v0.27`
 - The per-namespace wildcard certificate provisioner has been integrated into the base controllers
 - By default, the Prefer: reply header is forwarded to Broker Triggers' subscribers
 
