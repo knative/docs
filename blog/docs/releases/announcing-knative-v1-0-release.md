@@ -148,7 +148,7 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 - Calculate traffic split when N-1 revisions are specified ([#1483](https://github.com/knative/client/pull/1483))
 - Create a default config file if it doesn’t exist ([#1472](https://github.com/knative/client/pull/1472))
 
-##### 🐞 Bug Fixes
+#### 🐞 Bug Fixes
 
 - Fix domain describe reference to show correct kind ([#1477](https://github.com/knative/client/pull/1477))
 
