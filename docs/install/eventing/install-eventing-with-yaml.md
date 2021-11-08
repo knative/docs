@@ -168,7 +168,7 @@ Follow the procedure for the Broker of your choice:
           name: imc-channel
           namespace: knative-eventing
         data:
-          channelTemplateSpec: |
+          channel-template-spec: |
             apiVersion: messaging.knative.dev/v1
             kind: InMemoryChannel
         ---
@@ -178,7 +178,7 @@ Follow the procedure for the Broker of your choice:
           name: kafka-channel
           namespace: knative-eventing
         data:
-          channelTemplateSpec: |
+          channel-template-spec: |
             apiVersion: messaging.knative.dev/v1alpha1
             kind: KafkaChannel
             spec:
