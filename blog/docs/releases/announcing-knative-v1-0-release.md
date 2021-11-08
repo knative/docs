@@ -163,7 +163,7 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 - Adding COC, contributing doc ([#790](https://github.com/knative/operator/pull/790))
 - Remove pingsource-mt-adapter from the list of unsupported HA ([#788](https://github.com/knative/operator/pull/788))
 - Apply high-availability to all deployments managed by operator ([#749](https://github.com/knative/operator/pull/749))
-fix misspelling wih -> with ([#781](https://github.com/knative/operator/pull/781))
+fix misspelling of `with` ([#781](https://github.com/knative/operator/pull/781))
 - Add the support of spec.deployments.affinity ([#777](https://github.com/knative/operator/pull/777))
 - Adjust maxReplicas in HPA when high-availability has larger number ([#748](https://github.com/knative/operator/pull/748))
 - Prepare the Knative Operator for the label app.kubernetes.io/version ([#738](https://github.com/knative/operator/pull/738))
