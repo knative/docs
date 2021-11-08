@@ -26,11 +26,11 @@
     ```
 
     After you've created your YAML file, named something like `ce-trigger.yaml`, apply it by running the command:
-    ``` bash
+    ```bash
     kubectl apply -f ce-trigger.yaml
     ```
 
-    ==**Expected Output**==
+==**Expected Output**==
     ```{ .bash .no-copy }
     trigger.eventing.knative.dev/cloudevents-trigger created
     ```
