@@ -109,13 +109,13 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 
 ##### 💫 New Features & Changes
 
-- ClusterRole knative-kafka-data-plane for KafkaBroker has been renamed to knative-kafka-broker-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ServiceAccount knative-kafka-data-plane for KafkaBroker has been renamed to knative-kafka-broker-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ClusterRoleBinding knative-kafka-data-plane for KafkaBroker has been renamed to knative-kafka-broker-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ClusterRole knative-kafka-data-plane for KafkaSink has been renamed to knative-kafka-sink-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ServiceAccount knative-kafka-data-plane for KafkaSink has been renamed to knative-kafka-sink-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ClusterRoleBinding knative-kafka-data-plane for KafkaSink has been renamed to knative-kafka-sink-data-plane ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- Set status.deadLetterSinkUri of Broker and Trigger to the resolved URI of spec.delivery.deadLetterSink. ([#1349](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1349))
+- ClusterRole `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
+- ServiceAccount `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
+- ClusterRoleBinding `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
+- ClusterRole `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
+- ServiceAccount `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
+- ClusterRoleBinding `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
+- Set `status.deadLetterSinkUri` of Broker and Trigger to the resolved URI of `spec.delivery.deadLetterSink` ([#1349](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1349))
 
 #### RabbitMQ Broker and Source v1.0
 
@@ -138,13 +138,13 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 
 #### 💫 New Features & Changes
 
-- Remove deprecated flags --lookup-path ([#1506](https://github.com/knative/client/pull/1506))
-- Rename --extra-containers to --containers ([#1499](https://github.com/knative/client/pull/1499))
-- Remove deprecated flags --min-scale and --max-scale ([#1498](https://github.com/knative/client/pull/1498))
-- Remove deprecated flags --limits-cpu and --limits-memory ([#1498](https://github.com/knative/client/pull/1498))
+- Remove deprecated flags `--lookup-path` ([#1506](https://github.com/knative/client/pull/1506))
+- Rename `--extra-containers` to `--containers` ([#1499](https://github.com/knative/client/pull/1499))
+- Remove deprecated flags `--min-scale` and `--max-scale` ([#1498](https://github.com/knative/client/pull/1498))
+- Remove deprecated flags `--limits-cpu` and `--limits-memory` ([#1498](https://github.com/knative/client/pull/1498))
 - Add more explanation to missing API error message ([#1497](https://github.com/knative/client/pull/1497))
-- Deprecate --concurrency-target and --concurrency-utilization in favor of --scale-target and --scale-utilization, respectively ([#1490](https://github.com/knative/client/pull/1490))
-- Deprecate --autoscale-window in favor of --scale-window ([#1489](https://github.com/knative/client/pull/1489))
+- Deprecate `--concurrency-target` and `--concurrency-utilization` in favor of `--scale-target` and `--scale-utilization`, respectively ([#1490](https://github.com/knative/client/pull/1490))
+- Deprecate `--autoscale-window` in favor of `--scale-window` ([#1489](https://github.com/knative/client/pull/1489))
 - Calculate traffic split when N-1 revisions are specified ([#1483](https://github.com/knative/client/pull/1483))
 - Create a default config file if it doesn’t exist ([#1472](https://github.com/knative/client/pull/1472))
 
@@ -155,7 +155,7 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 
 ## Operator v1.0
 
-<!-- Original notes are here: https://github.com/knative/operator/releases/tag/knative-v1.0.1 -->
+<!-- Original notes are here: https://github.com/knative/operator/releases/tag/knative-v1.0.0   -->
 
 #### 💫 New Features & Changes
 
