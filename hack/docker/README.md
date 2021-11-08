@@ -8,7 +8,7 @@ You can use a Docker container and run MkDocs from the container, so no local in
     ```bash
     npm run dev:build
     ```
-- To start developing run command the following command in the root directory of the git repo (where **package.json** and **mkdocs.yaml** are located)
+- To start developing run the following command in the root directory of the git repo (where **package.json** and **mkdocs.yaml** are located)
     ```bash
     npm run dev
     ```
