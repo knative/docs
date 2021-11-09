@@ -123,12 +123,11 @@ Subscriptions, Brokers, Triggers, and any other resource spec that accepts the
 
 The `retryAfterMax` field will only take effect if the `delivery` spec is
 configured to perform retries, and will only pertain to retry attempts on
-**429** and **503** response codes.
-
-The `retryAfterMax` field provides an override to prevent large **Retry-After**
-durations from impacting throughput, and must be specified using
-the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.  Specifying
-a "zero" value of "PT0S" will effectively disable **Retry-After** support.
+**429** and **503** response codes. The field provides an override to prevent
+large **Retry-After** durations from impacting throughput, and must be specified
+using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
+Specifying a "zero" value of "PT0S" will effectively disable **Retry-After**
+support.
 
 Prior to this experimental feature, Knative Eventing implementations have not
 supported **Retry-After** headers, and this is an attempt to provide a path
@@ -139,7 +138,7 @@ the final state will be **opt-out** as follows...
 
 <table>
 <tr>
-<td><b>EF Stage</b></td>
+<td><b>Feature Stage</b></td>
 <td><b>Feature Flag</b></td>
 <td><b>retryAfterMax Field Absent</b></td>
 <td><b>retryAfterMax Field Present</b></td>
@@ -191,14 +190,14 @@ spec:
 
 !!! note
     While the experimental feature flag will enforce all DeliverySpec usage of
-    the `RetryAfterMax` field via Webhook validation, it does not guarantee all
+    the `retryAfterMax` field via Webhook validation, it does not guarantee all
     implementations (Channels, Sources, etc.) will actually implement support
     for the field.  The shared `HTTPMessageSender.SendWithRetries()` logic
     has been enhanced to support this feature, and all implementations using it
     to perform retries will automatically benefit.  Sandbox implementations NOT
     based on this shared library (e.g. RabbitMQ, Google Pub/Sub, etc.) would
     require additional development effort to respect/enforce the new
-    `RetryAfterMax`field.
+    `retryAfterMax`field.
 
 ### DeliverySpec.Timeout field
 
