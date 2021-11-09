@@ -239,7 +239,6 @@ nav:
         - Routing services - Go: serving/samples/knative-routing-go/README.md
         - Routing services with Kong - Go: serving/samples/kong-routing-go/README.md
         - multi-container samples: serving/samples/multi-container/README.md
-        - RESTful service - Go: serving/samples/rest-api-go/README.md
         - Secrets - Go: serving/samples/secrets-go/README.md
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
       - Eventing code samples:
