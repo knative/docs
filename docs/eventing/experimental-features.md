@@ -103,7 +103,7 @@ affecting existing resources.
     At the moment this feature is implemented only for
     `Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
 
-### DeliverySpec.RetryAfter field
+### DeliverySpec.RetryAfterMax field
 
 **Flag name**: `delivery-retryafter`
 
@@ -114,11 +114,57 @@ affecting existing resources.
 **Persona**: Developer
 
 When using the `delivery` spec to configure event delivery parameters, you can
-use the `retryAfter` fields to specify whether to respect **Retry-After**
-headers when calculating the backoff time for retrying 429 and 503 response
-codes. The optional `maxDuration` field provides an override to prevent large
-**Retry-After** durations from impacting throughput, and must be specified using
-the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
+use the `retryAfterMax` field to specify how
+HTTP [Retry-After](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3)
+headers are handled when calculating backoff times for retrying **429** and
+**503** responses. You can specify a `delivery` spec for Channels,
+Subscriptions, Brokers, Triggers, and any other resource spec that accepts the
+`delivery` field.
+
+The `retryAfterMax` field will only take effect if the `delivery` spec is
+configured to perform retries, and will only pertain to retry attempts on
+**429** and **503** response codes.
+
+The `retryAfterMax` field provides an override to prevent large **Retry-After**
+durations from impacting throughput, and must be specified using
+the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.  Specifying
+a "zero" value of "PT0S" will effectively disable **Retry-After** support.
+
+Prior to this experimental feature, Knative Eventing implementations have not
+supported **Retry-After** headers, and this is an attempt to provide a path
+for standardizing that support.  To begin the feature will be **opt-in**, but
+the final state will be **opt-out** as follows...
+
+{% raw %}
+
+<table>
+<tr>
+<td><b>EF Stage</b></td>
+<td><b>Feature Flag</b></td>
+<td><b>retryAfterMax Field Absent</b></td>
+<td><b>retryAfterMax Field Present</b></td>
+</tr>
+<tr>
+<td>Alpha / Beta</td>
+<td>Disabled</td>
+<td>Accepted by Webhook Validation & Retry-After headers NOT enforced</td>
+<td>Rejected by WebHook Validation</td>
+</tr>
+<tr>
+<td>Alpha / Beta</td>
+<td>Enabled</td>
+<td>Accepted by Webhook Validation & Retry-After headers NOT enforced</td>
+<td>Accepted by Webhook Validation & Retry-After headers enforced if max override > 0</td>
+</tr>
+<tr>
+<td>Stable / GA</td>
+<td>n/a</td>
+<td>Retry-After headers enforced without max override</td>
+<td>Retry-After headers enforced if max override > 0</td>
+</tr>
+</table>
+
+{% endraw %}
 
 The following example shows a Subscription that retries sending an event 3
 times, and respects **Retry-After** headers while imposing a max backoff of
@@ -140,13 +186,19 @@ spec:
     backoffDelay: PT2S
     backoffPolicy: linear
     retry: 3
-    retryAfter:
-      enabled: true
-      maxDuration: PT120S
+    retryAfterMax: PT120S
 ```
 
-You can specify a `delivery` spec for Channels, Subscriptions, Brokers,
-Triggers, and any other resource spec that accepts the `delivery` field.
+!!! note
+    While the experimental feature flag will enforce all DeliverySpec usage of
+    the `RetryAfterMax` field via Webhook validation, it does not guarantee all
+    implementations (Channels, Sources, etc.) will actually implement support
+    for the field.  The shared `HTTPMessageSender.SendWithRetries()` logic
+    has been enhanced to support this feature, and all implementations using it
+    to perform retries will automatically benefit.  Sandbox implementations NOT
+    based on this shared library (e.g. RabbitMQ, Google Pub/Sub, etc.) would
+    require additional development effort to respect/enforce the new
+    `RetryAfterMax`field.
 
 ### DeliverySpec.Timeout field
 
