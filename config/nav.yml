@@ -25,7 +25,7 @@ nav:
     # Installing
 ###############################################################################
     - Installing:
-      - Overview: install/README.md
+      - install/README.md
       # Serving Installation
       - Install Knative Serving:
         - Install Serving with YAML: install/serving/install-serving-with-yaml.md
@@ -45,7 +45,7 @@ nav:
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
       # kn Installation
       - Install the Knative CLI:
-        - Overview: install/client/README.md
+        - install/client/README.md
         - Installing kn: install/client/install-kn.md
         - Customizing kn: install/client/configure-kn.md
         - kn plugins: install/client/kn-plugins.md
@@ -53,7 +53,7 @@ nav:
       - Using a Knative-based offering: install/knative-offerings.md
       # Upgrading Knative
       - Upgrading your installation:
-        - Overview: install/upgrade/README.md
+        - install/upgrade/README.md
         - Checking your Knative version: install/upgrade/check-install-version.md
         - Upgrading with kubectl: install/upgrade/upgrade-installation.md
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
@@ -63,7 +63,7 @@ nav:
     # Serving
 ###############################################################################
     - Serving:
-      - Overview: serving/README.md
+      - serving/README.md
       # Serving - developer docs
       - Developer Topics:
         - Services:
@@ -83,11 +83,11 @@ nav:
         - Tag resolution: serving/tag-resolution.md
         - Deploying from private registries: serving/deploying-from-private-registry.md
         - Load balancing:
-          - Overview: serving/load-balancing/README.md
+          - Load balancing overview: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
         - Revision garbage collection: serving/revision-gc.md
         - Autoscaling:
-          - Overview: serving/autoscaling/README.md
+          - Autoscaling overview: serving/autoscaling/README.md
           - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
           - Metrics: serving/autoscaling/autoscaling-metrics.md
           - Targets: serving/autoscaling/autoscaling-targets.md
@@ -129,14 +129,14 @@ nav:
     # Eventing
 ###############################################################################
     - Eventing:
-      - Overview: eventing/README.md
+      - eventing/README.md
       - Eventing getting started: eventing/getting-started.md # do we need this as well as the getting started guide?
       # Eventing - developer docs
       - Developer topics:
         - Event sources:
-          - Overview: eventing/sources/README.md
+          - Event sourcer overview: eventing/sources/README.md
           - ApiServerSource:
-            - Overview: eventing/sources/apiserversource/README.md
+            - ApiServerSource overview: eventing/sources/apiserversource/README.md
             - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
             - ApiServerSource reference: eventing/sources/apiserversource/reference.md
           - CamelSource: eventing/sources/apache-camel-source/README.md
@@ -146,9 +146,9 @@ nav:
             - PingSource reference: eventing/sources/ping-source/reference.md
         # BYO event source
         - Custom event sources:
-          - Overview: eventing/custom-event-source/README.md
+          - Custom event sources overview: eventing/custom-event-source/README.md
           - Create a custom event source:
-            - Overview: eventing/custom-event-source/custom-event-source/README.md
+            - Custom a custom event source overview: eventing/custom-event-source/custom-event-source/README.md
             - Using the Knative sample repository:
               - Overview: eventing/custom-event-source/custom-event-source/sample-repo.md
               - Create a controller: eventing/custom-event-source/custom-event-source/controller.md
