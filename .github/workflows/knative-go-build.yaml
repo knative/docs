@@ -27,7 +27,7 @@ jobs:
     name: Build
     strategy:
       matrix:
-        go-version: [1.16.x]
+        go-version: [1.17.x]
         platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
@@ -56,6 +56,7 @@ jobs:
                 grep -v '^./hack/' | \
                 grep -v '^./third_party' | \
                 cut -f3 -d' ' | \
+                tr ',' '\n' | \
                 sort | uniq | \
                 grep -v '^!' | \
                 tr '\n' ' ')"

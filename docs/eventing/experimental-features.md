@@ -228,6 +228,7 @@ to a valid URI. Currently, the following template data are supported:
 
 - Name: The name of the referenced object
 - Namespace: The namespace of the referenced object
+- UID: The UID of the referenced object
 - SystemNamespace: The namespace of where Knative Eventing is installed
 
 Given the above mapping, the following example shows how you can directly reference

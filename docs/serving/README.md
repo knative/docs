@@ -61,17 +61,17 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## Debugging Knative Serving issues
 
-- [Debugging application issues](../developer/serving/troubleshooting/debugging-application-issues.md)
+- [Debugging application issues](../serving/troubleshooting/debugging-application-issues.md)
 
 ## Configuration and Networking
 
-- [Configuring cluster local routes](../developer/serving/services/private-services.md)
+- [Configuring cluster local routes](../serving/services/private-services.md)
 - [Using a custom domain](using-a-custom-domain.md)
-- [Traffic management](../developer/serving/traffic-management.md)
+- [Traffic management](../serving/traffic-management.md)
 
 ## Observability
 
-- [Serving Metrics API](../admin/collecting-metrics/serving-metrics/metrics.md)
+- [Serving Metrics API](observability/metrics/serving-metrics.md)
 
 ## Known Issues
 

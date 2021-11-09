@@ -1,59 +1,33 @@
-# Event registry
+# Using the event registry
 
-## Overview
+The event registry maintains a catalog of event types that each Broker can consume.
+It is designed for use with the Broker and Trigger model, and provides information
+to help you create Triggers.
 
-The event registry maintains a catalog of event types that can be consumed
-from different brokers. It introduces the EventType custom resource in order to persist the event
-type information in the cluster data store.
+This topic introduces the EventType custom resource and provides information about
+how to populate the event registry, how to discover events using the registry,
+and how to leverage that information to subscribe to events of interest.
 
 ## Before you begin
 
-1. Read about the [Broker](broker/README.md) and [Trigger](broker/triggers/README.md) objects.
-1. Be familiar with the
-   [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
+It's recommended that you have a basic understanding of the following:
+
+- [Brokers](broker/README.md)
+- [Triggers](broker/triggers/README.md)
+- The [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
    particularly the
    [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
-   section.
-1. Be familiar with [event sources](../developer/eventing/sources/README.md).
+   section
+- [Event sources](sources/README.md)
 
-## Discovering events with the registry
+## About EventType objects
 
-Using the registry, you can discover different types of events that can be consumed by broker event meshes. The registry is designed for use with
-the broker and trigger model, and aims to help you create triggers.
+EventType objects represent a type of event that can be consumed from a Broker,
+such as Kafka messages or GitHub pull requests.
+EventType objects are used to populate the event registry and persist event type
+information in the cluster datastore.
 
-To see event types in the registry that are available to subscribe to, enter the following command:
-
-```
-kubectl get eventtypes -n <namespace>
-```
-
-The following example shows the output of executing the `kubectl get eventtypes` command using the
-`default` namespace in a testing cluster. We will address the question of how
-this registry was populated in a later section.
-
-```
-NAME                                         TYPE                                    SOURCE                                                               SCHEMA        BROKER     DESCRIPTION     READY     REASON
-dev.knative.source.github.push-34cnb         dev.knative.source.github.push          https://github.com/knative/eventing                                                default                    True
-dev.knative.source.github.push-44svn         dev.knative.source.github.push          https://github.com/knative/serving                                                 default                    True
-dev.knative.source.github.pullrequest-86jhv  dev.knative.source.github.pull_request  https://github.com/knative/eventing                                                default                    True
-dev.knative.source.github.pullrequest-97shf  dev.knative.source.github.pull_request  https://github.com/knative/serving                                                 default                    True
-dev.knative.kafka.event-cjvcr                dev.knative.kafka.event                 /apis/v1/namespaces/default/kafkasources/kafka-sample#news                         default                    True
-dev.knative.kafka.event-tdt48                dev.knative.kafka.event                 /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo                 default                    True
-google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                                     dev                        False     BrokerIsNotReady
-```
-
-**NOTE:** This assumes that the event sources emitting the events reference a broker as their sink.
-
-There are seven different EventType objects in the registry of the
-`default` namespace.
-
-Use the following command to see an example of what the YAML for an EventType object looks like:
-
-```
-kubectl get eventtype dev.knative.source.github.push-34cnb -o yaml
-```
-
-Omitting irrelevant fields:
+The following is an example EventType YAML that omits irrelevant fields:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1beta1
@@ -79,55 +53,174 @@ status:
       type: Ready
 ```
 
-From a consumer standpoint, the fields that matter the most are the `spec`
-fields as well as the `status`.
+For the full specification for an EventType object, see the
+[EventType API reference](../reference/api/eventing-api.md#eventing.knative.dev/v1beta1.EventType).
 
-The `name` is advisory (i.e., non-authoritative), and we typically generate it
-(`generateName`) to avoid naming collisions (e.g., two EventTypes listening to
-pull requests on two different Github repositories). As `name` nor
-`generateName` are needed for consumers to create Triggers, we defer their
-discussion for later on.
+The `metadata.name` field is advisory, that is, non-authoritative.
+It is typically generated using `generateName` to avoid naming collisions.
+`metadata.name` is not needed when you create Triggers.
 
-Regarding `status`, its main purpose it to tell consumers (or cluster operators)
-whether the EventType is ready for consumption or not. That _readiness_ is based
-on the Broker being ready. We can see from the example output that the PubSub
-EventType is not ready, as its `dev` Broker isn't.
+For consumers, the fields that matter the most are `spec` and `status`.
+This is because these fields provide the information you need to create Triggers,
+which is the source and type of event and whether the Broker is ready to receive
+events.
 
-Let's talk in more details about the `spec` fields:
+The following table has more information about the `spec` and `status` fields of
+EventType objects:
+<!-- info in table needs review for tech accuracy -->
 
-- `type`: is authoritative. This refers to the CloudEvent type as it enters into
-  the event mesh. It is mandatory. Event consumers can (and in most cases would)
-  create Triggers filtering on this attribute.
+| Field | Description | Required or optional |
+|-------|-------------|----------------------|
+| `spec.type` | Refers to the [CloudEvent type](https://github.com/cloudevents/spec/blob/master/spec.md#type) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. This field is authoritative. | Required |
+| `spec.source` | Refers to the [CloudEvent source](https://github.com/cloudevents/spec/blob/master/spec.md#source-1) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. | Required |
+| `spec.schema` | A valid URI with the EventType schema such as a JSON schema or a protobuf schema. | Optional |
+| `spec.description` | A string describing what the EventType is about. | Optional |
+| `spec.broker` | Refers to the Broker that can provide the EventType. | Required |
+| `status` | Tells consumers, or cluster operators, whether the EventType is ready to be consumed or not. The _readiness_ is based on the Broker being ready. | Optional |
 
-- `source`: refers to the CloudEvent source as it enters into the event mesh. It
-  is mandatory. Event consumers can (and in most cases would) create Triggers
-  filtering on this attribute.
+## Populate the registry with events
 
-- `schema`: is a valid URI with the EventType schema. It may be a JSON schema, a
-  protobuf schema, etc. It is optional.
+You can populate the registry with EventType objects manually or automatically.
+Automatic registration can be the easier method, but it only supports a subset of
+event sources.
 
-- `description`: is a string describing what the EventType is about. It is
-  optional.
+### Manual registration
 
-- `broker` refers to the Broker that can provide the EventType. It is mandatory.
+For manual registration, the cluster configurator applies EventTypes YAML files
+the same as with any other Kubernetes resource.
+<!-- does Knative support manual registration for all event sources? -->
 
-## Subscribing to events
+To apply EventTypes YAML files manually:
 
-Now that you know what events can be consumed from the Brokers' event meshes,
+1. Create an EventType YAML file. For information about the required fields, see
+[About EventType objects](#about-eventtype-objects).
+
+1.  Apply the YAML by running the command:
+
+    ```bash
+    kubectl apply -f <event-type.yaml>
+    ```
+
+### Automatic registration
+
+Because manual registration might be tedious and error-prone, Knative also supports
+registering EventTypes automatically.
+EventTypes are created automatically when an event source is instantiated.
+
+#### Support for automatic registration
+
+Knative supports automatic registration of EventTypes for the following event sources:
+
+- CronJobSource
+- ApiServerSource
+- GithubSource
+- GcpPubSubSource
+- KafkaSource
+- AwsSqsSource
+
+Knative only supports automatic creation of EventTypes for sources that have a
+Broker as their sink.
+
+#### Procedure for automatic registration
+
+- To register EventTypes automatically, apply your event source YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <event-source.yaml>
+    ```
+
+After your event source is instantiated, EventTypes are added to the registry.
+
+#### Example: Automatic registration using KafkaSource
+
+Given the following KafkaSource sample to populate the registry:
+
+```yaml
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+  name: kafka-sample
+  namespace: default
+spec:
+  bootstrapServers:
+   - my-cluster-kafka-bootstrap.kafka:9092
+  topics:
+   - knative-demo
+   - news
+  sink:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default
+```
+
+The `topics` field in the above example is used to generate the EventType `source` field.
+
+After running `kubectl apply` using the above YAML, the KafkaSource `kafka-source-sample`
+is instantiated, and two EventTypes are added to the registry because there are
+two topics.
+
+## Discover events using the registry
+
+Using the registry, you can discover the different types of events that Broker
+event meshes can consume.
+
+### View all event types you can subscribe to
+
+- To see a list of event types in the registry that are available to subscribe to,
+run the command:
+
+    ```bash
+    kubectl get eventtypes -n <namespace>
+    ```
+
+    Example output using the `default` namespace in a testing cluster:
+
+    ```bash
+    NAME                                         TYPE                                    SOURCE                                                               SCHEMA        BROKER     DESCRIPTION     READY     REASON
+    dev.knative.source.github.push-34cnb         dev.knative.source.github.push          https://github.com/knative/eventing                                                default                    True
+    dev.knative.source.github.push-44svn         dev.knative.source.github.push          https://github.com/knative/serving                                                 default                    True
+    dev.knative.source.github.pullrequest-86jhv  dev.knative.source.github.pull_request  https://github.com/knative/eventing                                                default                    True
+    dev.knative.source.github.pullrequest-97shf  dev.knative.source.github.pull_request  https://github.com/knative/serving                                                 default                    True
+    dev.knative.kafka.event-cjvcr                dev.knative.kafka.event                 /apis/v1/namespaces/default/kafkasources/kafka-sample#news                         default                    True
+    dev.knative.kafka.event-tdt48                dev.knative.kafka.event                 /apis/v1/namespaces/default/kafkasources/kafka-sample#knative-demo                 default                    True
+    google.pubsub.topic.publish-hrxhh            google.pubsub.topic.publish             //pubsub.googleapis.com/knative/topics/testing                                     dev                        False     BrokerIsNotReady
+    ```
+
+    This example output shows seven different EventType objects in the registry
+    of the `default` namespace.
+    It assumes that the event sources emitting the events reference a Broker as their sink.
+
+
+### View the YAML for an EventType object
+
+- To see the YAML for an EventType object, run the command:
+
+    ```bash
+    kubectl get eventtype <name> -o yaml
+    ```
+    Where `<name>` is the name of an EventType object and can be found in the `NAME`
+    column of the registry output. For example, `dev.knative.source.github.push-34cnb`.
+
+For an example EventType YAML, see
+[About EventType objects](#about-eventtype-objects) earlier on this page.
+
+## About subscribing to events
+
+After you know what events can be consumed from the Brokers' event meshes,
 you can create Triggers to subscribe to particular events.
 
-Here are a few example Triggers that subscribe to events using exact matching on
-`type` and/or `source`, based on the registry output mentioned earlier:
+Here are a some example Triggers that subscribe to events using exact matching on
+`type` or `source`, based on the registry output mentioned earlier:
 
-1. Subscribes to GitHub _pushes_ from any source.
+* Subscribes to GitHub _pushes_ from any source:
 
-   ```yaml
-   apiVersion: eventing.knative.dev/v1
-   kind: Trigger
-   metadata:
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
      name: push-trigger
      namespace: default
-   spec:
+    spec:
      broker: default
      filter:
        attributes:
@@ -137,22 +230,22 @@ Here are a few example Triggers that subscribe to events using exact matching on
          apiVersion: serving.knative.dev/v1
          kind: Service
          name: push-service
-   ```
+    ```
+    !!! note
+        As the example registry output mentioned, only two sources, the `knative/eventing`
+        and `knative/serving` GitHub repositories, exist for that particular type of event.
+        If later on new sources are registered for GitHub pushes, this Trigger
+        is able to consume them.
 
-   As per the registry output mentioned, only two sources exist for that particular
-   type of event (_knative's eventing and serving_ repositories). If later on
-   new sources are registered for GitHub pushes, this trigger will be able to
-   consume them.
+* Subscribes to GitHub _pull requests_ from the `knative/eventing` GitHub repository:
 
-1. Subscribes to GitHub _pull requests_ from _knative's eventing_ repository.
-
-   ```yaml
-   apiVersion: eventing.knative.dev/v1
-   kind: Trigger
-   metadata:
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
      name: gh-knative-eventing-pull-trigger
      namespace: default
-   spec:
+    spec:
      broker: default
      filter:
        attributes:
@@ -163,17 +256,17 @@ Here are a few example Triggers that subscribe to events using exact matching on
          apiVersion: serving.knative.dev/v1
          kind: Service
          name: gh-knative-eventing-pull-service
-   ```
+    ```
 
-1. Subscribes to Kafka messages sent to the _knative-demo_ topic
+* Subscribes to Kafka messages sent to the _knative-demo_ topic:
 
-   ```yaml
-   apiVersion: eventing.knative.dev/v1
-   kind: Trigger
-   metadata:
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
      name: kafka-knative-demo-trigger
      namespace: default
-   spec:
+    spec:
      broker: default
      filter:
        attributes:
@@ -184,18 +277,17 @@ Here are a few example Triggers that subscribe to events using exact matching on
          apiVersion: serving.knative.dev/v1
          kind: Service
          name: kafka-knative-demo-service
-   ```
+    ```
 
-1. Subscribes to PubSub messages from GCP's _knative_ project sent to the
-   _testing_ topic
+* Subscribes to PubSub messages from GCP's _knative_ project sent to the _testing_ topic:
 
-   ```yaml
-   apiVersion: eventing.knative.dev/v1
-   kind: Trigger
-   metadata:
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
      name: gcp-pubsub-knative-testing-trigger
      namespace: default
-   spec:
+    spec:
      broker: dev
      filter:
        attributes:
@@ -205,80 +297,14 @@ Here are a few example Triggers that subscribe to events using exact matching on
          apiVersion: serving.knative.dev/v1
          kind: Service
          name: gcp-pubsub-knative-testing-service
-   ```
+    ```
 
-   Note that events won't be able to be consumed by this Trigger's subscriber
-   until the Broker becomes ready.
-
-## Populating the registry
-
-Now that we know how to discover events using the registry and how we can
-leverage that information to subscribe to events of interest, let's move on to
-the next topic: How do we actually populate the registry in the first place?
-
-- Manual Registration
-
-  In order to populate the registry, a cluster configurator can manually
-  register the EventTypes. This means that the configurator can simply apply
-  EventTypes yaml files, just as with any other Kubernetes resource:
-
-  `kubectl apply -f <event_type.yaml>`
-
-- Automatic Registration
-
-  As Manual Registration might be tedious and error-prone, we also support
-  automatic registration of EventTypes. The creation of the EventTypes is done
-  upon instantiation of an Event Source. We currently support automatic
-  registration of EventTypes for the following Event Sources:
-
-  - CronJobSource
-  - ApiServerSource
-  - GithubSource
-  - GcpPubSubSource
-  - KafkaSource
-  - AwsSqsSource
-
-  Let's look at an example, in particular, the KafkaSource sample we used to
-  populate the registry in our testing cluster. This is what the YAML looks
-  like:
-
-  ```yaml
-  apiVersion: sources.knative.dev/v1beta1
-  kind: KafkaSource
-  metadata:
-    name: kafka-sample
-    namespace: default
-  spec:
-    bootstrapServers:
-     - my-cluster-kafka-bootstrap.kafka:9092
-    topics:
-     - knative-demo
-     - news
-    sink:
-      apiVersion: eventing.knative.dev/v1
-      kind: Broker
-      name: default
-  ```
-
-  If you are interested in more information regarding configuration options of a
-  KafkaSource, please refer to the
-  [KafKaSource sample](samples/kafka/binding/README.md).
-
-  For this discussion, the relevant information from the YAML mentioned are the
-  `sink` and the `topics`. We observe that the `sink` is of kind `Broker`. We
-  currently only support automatic creation of EventTypes for Sources instances
-  that point to Brokers. Regarding `topics`, this is what we use to generate the
-  EventTypes `source` field, which is equal to the CloudEvent source attribute.
-
-  When you `kubectl apply` this yaml, the KafkaSource `kafka-source-sample` will
-  be instantiated, and two EventTypes will be added to the registry (as there
-  are two topics). You can see that in the registry example output from the
-  previous sections.
+    !!! note
+        The example registry output mentioned earlier lists this Broker's readiness as `false`.
+        This Trigger's subscriber cannot consume events until the Broker becomes ready.
 
 ## Next steps
 
-1. [Installing Knative](../admin/install/README.md)
-
-1. [Knative code samples](samples/README.md) is a useful resource to better understand
-   some of the Event Sources (remember to point them to a Broker if you want
-   automatic registration of EventTypes in the registry).
+[Knative code samples](samples/README.md) is a useful resource to better understand
+some of the event sources. Remember, you must point the sources to a Broker if you want
+automatic registration of EventTypes in the registry.

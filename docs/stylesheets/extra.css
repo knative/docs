@@ -39,8 +39,9 @@
   border-bottom: 1px solid var(--home-color);
 }
 
-/* Make community tab distinct until it moves to mkdocs */
-.md-tabs__list li:nth-last-child(1) {
+.md-tabs__list li:nth-last-child(1),
+.md-tabs__list li:nth-last-child(2),
+.md-tabs__list li:nth-last-child(3){
   background: var(--home-color);
   float: right;
 }
@@ -70,7 +71,6 @@
 }
 .md-announce {
   background: #fff5b5;
-  background: repeating-linear-gradient(-50deg, #ffe8b5, #ffe8b5 80px, #fff5b5 80px, #fff5b5 160px);
 }
 .md-announce .versionwarning h1 {
   font-weight: bold;

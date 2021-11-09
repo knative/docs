@@ -17,10 +17,10 @@ Try out some of the following Knative samples:
 
 ## :page_with_curl: Explore the Knative docs
 
-See the following guides for documentation specific to your role:
+See the following guides for documentation specific to your use case:
 
-- [Developer Guide](../developer/README.md)
-- [Admin Guide](../admin/README.md)
+- [Serving Guide](../serving/README.md)
+- [Eventing Guide](../eventing/README.md)
 
 ## :book: Knative books
 

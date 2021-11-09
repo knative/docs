@@ -1,20 +1,20 @@
 nav:
     - Home: /docs/
     - Getting started: /docs/getting-started/
-    # Administration guide
-    - Administration guide: /docs/admin/
-    # Developer guide
-    - Developer guide: /docs/developer/
-    # Serving
-    - Knative Serving: /docs/serving/
-    # Eventing
-    - Knative Eventing: /docs/eventing/
-    # Client
-    - Client: /docs/client/
+    - Installing: /docs/install/
+    - Serving: /docs/serving/
+    - Eventing: /docs/eventing/
+    - Code samples: /docs/samples.md
+    - Reference: /docs/reference/
+    - "Join the Community ➠": /community/
+    - Case studies: /docs/about/case-studies/deepc
+  #####################################################
     # Blog
+  #####################################################
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-0-release.md
           - releases/announcing-knative-v0-26-release.md
           - releases/announcing-knative-v0-25-release.md
           - releases/announcing-knative-v0-24-release.md
@@ -30,6 +30,9 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/highlighting-value-knative-c-suite.md
+          - articles/knative-1.0.md
+          - articles/announcing-knative-1.0.md
           - articles/quickstart-with-knative.md
           - articles/distributed-tracing.md
           - articles/event-drive-app-knative-eventing-kogito.md
@@ -41,6 +44,7 @@ nav:
           - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
           - articles/set-up-a-local-knative-environment-with-kind.md
       - Steering Committee:
+          - steering/steering-elections-2021.md
           - steering/toc-2021-election-announcement.md
           - steering/2020-11-ksc-elections.md
           - steering/governance-changes.md
@@ -50,6 +54,3 @@ nav:
       - Events:
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
-    # Reference docs
-    - Reference: /docs/reference/
-    - "Join the Community ➠": /community/

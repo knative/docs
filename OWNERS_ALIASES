@@ -34,7 +34,6 @@ aliases:
   - salaboy
   docs-reviewers:
   - RichardJJG
-  - jonatasbaldin
   - mpetason
   - nainaz
   - omerbensaadon
@@ -69,7 +68,6 @@ aliases:
   - pierDipi
   - vaikas
   knative-admin:
-  - ZhiminXiang
   - bsnchan
   - dprotaso
   - duglin
@@ -80,7 +78,9 @@ aliases:
   - knative-prow-updater-robot
   - knative-test-reporter-robot
   - markusthoemmes
+  - matzew
   - mbehrendt
+  - nak3
   - omerbensaadon
   - pmorie
   - rhuss
@@ -88,8 +88,8 @@ aliases:
   - thisisnotapril
   - vaikas
   knative-release-leads:
-  - ZhiminXiang
-  - evankanderson
+  - matzew
+  - nak3
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -100,6 +100,7 @@ aliases:
   - ZhiminXiang
   - andrew-su
   - arturenault
+  - carlisia
   - markusthoemmes
   - nak3
   - shashwathi
@@ -157,6 +158,7 @@ aliases:
   - evankanderson
   - gerardo-lc
   - joshua-bone
+  - kvmware
   - steuhs
   productivity-wg-leads:
   - chizhg
@@ -178,7 +180,9 @@ aliases:
   serving-observability-writers:
   - yanweiguo
   serving-reviewers:
+  - carlisia
   - julz
+  - nealhu
   - psschwei
   - whaught
   serving-writers:

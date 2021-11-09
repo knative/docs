@@ -76,9 +76,27 @@ Create the CloudEvents Player Service:
 
 ![CloudEvents Player Send](images/event_sent.png)
 
-
 ??? tip "Clicking the :fontawesome-solid-envelope: shows you the CloudEvent as the Broker sees it."
-    ![Event_Details](images/event_details.png)
+    ![Event_Details](images/event_details.
+
+??? question "Want to send events via the command line instead?"
+    As an alternative to the Web form, events can also be sent/viewed via the command line.
+
+    To post an event:
+    ```bash
+    curl -i http://cloudevents-player.default.127.0.0.1.nip.io \
+        -H "Content-Type: application/json" \
+        -H "Ce-Id: 123456789" \
+        -H "Ce-Specversion: 1.0" \
+        -H "Ce-Type: some-type" \
+        -H "Ce-Source: command-line" \
+        -d '{"msg":"Hello CloudEvents!"}'
+    ```
+
+    And to view events:
+    ```bash
+    curl http://cloudevents-player.default.127.0.0.1.nip.io/messages
+    ```
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our Broker... but where has the event gone? **Well, right now, nowhere!**
 

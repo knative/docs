@@ -9,7 +9,7 @@ To change the {default-domain} value there are a few steps involved:
 !!! tip
     Customizing a domain template affects your cluster globally.
     If you want to customize the domain of each service, use `DomainMapping` instead.
-    For more information, see [Configuring custom domains](../developer/serving/services/custom-domains.md).
+    For more information, see [Configuring custom domains](services/custom-domains.md).
 
 ## Edit using kubectl
 
@@ -99,7 +99,7 @@ If you are using curl to access the sample applications, or your own Knative app
 to verify the customized domain.
 
 Instruct `curl` to connect to the External IP or CNAME defined by the
-networking layer mentioned in [Install a networking layer](../admin/install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line
+networking layer mentioned in [Install a networking layer](../install/serving/install-serving-with-yaml.md#install-a-networking-layer), and use the `-H "Host:"` command-line
 option to specify the Knative application's host name.
 For example, if the networking layer defines your External IP and port to be `http://192.168.39.228:32198` and you wish to access the `helloworld-go` application mentioned earlier, use:
 

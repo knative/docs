@@ -52,7 +52,7 @@ The [broker](broker/README.md) allows you to route events to different event sin
     ```
 
     If `READY` is `False`, wait a few moments and then run the command again.
-    If you continue to receive the `False` status, see the [Debugging Guide](debugging/README.md) to troubleshoot the issue.
+    If you continue to receive the `False` status, see the [Debugging Guide](troubleshooting/README.md) to troubleshoot the issue.
 
 ## Creating event consumers
 
@@ -160,7 +160,7 @@ into a file:
      goodbye-display   1/1     1            1           16s
      ```
    The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
-   If the numbers do not match, see the [Debugging Guide](debugging/README.md) to troubleshoot the issue.
+   If the numbers do not match, see the [Debugging Guide](troubleshooting/README.md) to troubleshoot the issue.
 
 ## Creating triggers
 
@@ -240,7 +240,7 @@ Each trigger can specify a filter that enables selection of relevant events base
 
     The `SUBSCRIBER_URI` has a value similar to `triggerName.namespaceName.svc.cluster.local`.
     The exact value depends on the broker implementation.
-    If this value looks incorrect, see the [Debugging Guide](debugging/README.md) to troubleshoot the issue.
+    If this value looks incorrect, see the [Debugging Guide](troubleshooting/README.md) to troubleshoot the issue.
 
 ## Creating a pod as an event producer
 

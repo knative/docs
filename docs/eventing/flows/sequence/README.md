@@ -39,7 +39,7 @@ Sequence has four parts for the Status:
 
 ## Examples
 
-For each of the following examples, you use a [`PingSource`](../../../developer/eventing/sources/ping-source/README.md) as the source of events.
+For each of the following examples, you use a [`PingSource`](../../../eventing/sources/ping-source/README.md) as the source of events.
 
 We also use a very simple [transformer](https://github.com/knative/eventing/blob/main/cmd/appender/main.go) which performs very trivial transformation of the incoming events to demonstrate they have passed through each stage.
 

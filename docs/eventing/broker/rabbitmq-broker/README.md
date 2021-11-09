@@ -6,7 +6,7 @@ This topic describes how to create a RabbitMQ Broker.
 
 To use the RabbitMQ Broker, you must have the following installed:
 
-1. [Knative Eventing](../../../admin/install/eventing/install-eventing-with-yaml.md)
+1. [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md)
 1. [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator)
 1. [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator)
 
