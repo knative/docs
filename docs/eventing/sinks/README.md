@@ -68,6 +68,8 @@ If Sink `ref` points to the Kubernetes core Service object, the destination port
 
 In all other cases or if the port specified in `knative.dev/destination-port` annotation does not exist in the service, sink URI resolution will fail.
 
+The default protocol used in Sink URL is HTTP unless the destination port is 443 - in that case, HTTPS will be used as a URL scheme.
+
 ## Using custom resources as sinks
 
 To use a Kubernetes custom resource (CR) as a sink for events, you must:
