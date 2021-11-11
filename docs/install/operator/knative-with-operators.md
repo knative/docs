@@ -182,8 +182,8 @@ activator              1/1     1            1           18s
 autoscaler             1/1     1            1           18s
 autoscaler-hpa         1/1     1            1           14s
 controller             1/1     1            1           18s
-net-istio-webhook      1/1     1            1           12s
-net-istio-controller   1/1     1            1           12s
+domain-mapping         1/1     1            1           12s
+domainmapping-webhoop  1/1     1            1           12s
 webhook                1/1     1            1           17s
 ```
 
