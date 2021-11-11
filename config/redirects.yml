@@ -115,6 +115,7 @@ plugins:
       operator/configuring-serving-cr/index.md: install/operator/configuring-serving-cr.md
       reference/resources/index.md: install/client/README.md
       serving/autoscaling/autoscaling-concepts.md: serving/autoscaling/autoscaler-types.md
+      samples.md: samples/README.md
       serving/autoscaling/target-burst-capacity/index.md: serving/load-balancing/target-burst-capacity.md
       serving/configuring-autoscaling/index.md: serving/autoscaling/README.md
       serving/creating-domain-mappings.md: serving/services/custom-domains.md

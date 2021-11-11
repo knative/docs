@@ -10,8 +10,8 @@ closer with your goals.
 
 View the set of Knative code samples that are actively tested and maintained:
 
-- [Eventing and Eventing Sources code samples](eventing/samples/README.md)
-- [Serving code samples](serving/samples/README.md)
+- [Eventing and Eventing Sources code samples](../eventing/samples/README.md)
+- [Serving code samples](../serving/samples/README.md)
 
 ### Community owned and maintained
 

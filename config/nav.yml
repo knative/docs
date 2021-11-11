@@ -212,7 +212,7 @@ nav:
     # Code samples
 ###############################################################################
     - Code samples:
-      - Overview: samples.md
+      - Overview: samples/README.md
       - Serving code samples:
         - Overview: serving/samples/README.md
         - Cloud Events apps:
