@@ -509,15 +509,16 @@ If Knative Eventing has been successfully deployed, all deployments of the Knati
 is a sample output:
 
 ```
-NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
-broker-controller      1/1     1            1           63s
-broker-filter          1/1     1            1           62s
-broker-ingress         1/1     1            1           62s
-eventing-controller    1/1     1            1           67s
-eventing-webhook       1/1     1            1           67s
-imc-controller         1/1     1            1           59s
-imc-dispatcher         1/1     1            1           59s
-mt-broker-controller   1/1     1            1           62s
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+eventing-controller     1/1     1            1           43s
+eventing-webhook        1/1     1            1           42s
+imc-controller          1/1     1            1           39s
+imc-dispatcher          1/1     1            1           38s
+mt-broker-controller    1/1     1            1           36s
+mt-broker-filter        1/1     1            1           37s
+mt-broker-ingress       1/1     1            1           37s
+pingsource-mt-adapter   0/0     0            0           43s
+sugar-controller        1/1     1            1           36s
 ```
 
 ### Check the status of Knative Eventing Custom Resource:
