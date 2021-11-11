@@ -25,7 +25,7 @@ nav:
     # Installing
 ###############################################################################
     - Installing:
-      - Overview: install/README.md
+      - About installing Knative: install/README.md
       # Serving Installation
       - Install Knative Serving:
         - Install Serving with YAML: install/serving/install-serving-with-yaml.md
@@ -45,7 +45,7 @@ nav:
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
       # kn Installation
       - Install the Knative CLI:
-        - Overview: install/client/README.md
+        - CLI tools overview: install/client/README.md
         - Installing kn: install/client/install-kn.md
         - Customizing kn: install/client/configure-kn.md
         - kn plugins: install/client/kn-plugins.md
@@ -53,7 +53,7 @@ nav:
       - Using a Knative-based offering: install/knative-offerings.md
       # Upgrading Knative
       - Upgrading your installation:
-        - Overview: install/upgrade/README.md
+        - About upgrading Knative: install/upgrade/README.md
         - Checking your Knative version: install/upgrade/check-install-version.md
         - Upgrading with kubectl: install/upgrade/upgrade-installation.md
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
@@ -63,7 +63,7 @@ nav:
     # Serving
 ###############################################################################
     - Serving:
-      - Overview: serving/README.md
+      - Knative Serving overview: serving/README.md
       # Serving - developer docs
       - Developer Topics:
         - Services:
@@ -83,14 +83,14 @@ nav:
         - Tag resolution: serving/tag-resolution.md
         - Deploying from private registries: serving/deploying-from-private-registry.md
         - Load balancing:
-          - Overview: serving/load-balancing/README.md
+          - About load balancing: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
         - Revision garbage collection: serving/revision-gc.md
         - Autoscaling:
-          - Overview: serving/autoscaling/README.md
+          - About autoscaling: serving/autoscaling/README.md
           - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
-          - Metrics: serving/autoscaling/autoscaling-metrics.md
-          - Targets: serving/autoscaling/autoscaling-targets.md
+          - Configuring metrics: serving/autoscaling/autoscaling-metrics.md
+          - Configuring targets: serving/autoscaling/autoscaling-targets.md
           - Configuring scale to zero: serving/autoscaling/scale-to-zero.md
           - Configuring concurrency: serving/autoscaling/concurrency.md
           - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
@@ -129,14 +129,14 @@ nav:
     # Eventing
 ###############################################################################
     - Eventing:
-      - Overview: eventing/README.md
+      - Knative Eventing overview: eventing/README.md
       - Eventing getting started: eventing/getting-started.md # do we need this as well as the getting started guide?
       # Eventing - developer docs
       - Developer topics:
         - Event sources:
-          - Overview: eventing/sources/README.md
+          - About event sources: eventing/sources/README.md
           - ApiServerSource:
-            - Overview: eventing/sources/apiserversource/README.md
+            - About ApiServerSource: eventing/sources/apiserversource/README.md
             - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
             - ApiServerSource reference: eventing/sources/apiserversource/reference.md
           - CamelSource: eventing/sources/apache-camel-source/README.md
@@ -146,16 +146,16 @@ nav:
             - PingSource reference: eventing/sources/ping-source/reference.md
         # BYO event source
         - Custom event sources:
-          - Overview: eventing/custom-event-source/README.md
+          - Custom event sources overview: eventing/custom-event-source/README.md
           - Create a custom event source:
-            - Overview: eventing/custom-event-source/custom-event-source/README.md
+            - Creating an event source overview: eventing/custom-event-source/custom-event-source/README.md
             - Using the Knative sample repository:
-              - Overview: eventing/custom-event-source/custom-event-source/sample-repo.md
+              - Configure the sample: eventing/custom-event-source/custom-event-source/sample-repo.md
               - Create a controller: eventing/custom-event-source/custom-event-source/controller.md
               - Create a receive adapter: eventing/custom-event-source/custom-event-source/receive-adapter.md
-            - Publish an event source to your cluster: eventing/custom-event-source/custom-event-source/publish-event-source.md
+            - Publishing an event source to your cluster: eventing/custom-event-source/custom-event-source/publish-event-source.md
           - SinkBinding:
-            - Overview: eventing/custom-event-source/sinkbinding/README.md
+            - About SinkBinding: eventing/custom-event-source/sinkbinding/README.md
             - Create a SinkBinding: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
             - SinkBinding reference: eventing/custom-event-source/sinkbinding/reference.md
           - ContainerSource:
@@ -166,25 +166,25 @@ nav:
           - KafkaSink: eventing/sinks/kafka-sink.md
         - Handling delivery failure: eventing/event-delivery.md
         - Flows:
-          - Overview: eventing/flows/README.md
+          - About flows: eventing/flows/README.md
           - Parallel: eventing/flows/parallel.md
           - Sequence:
-            - Overview: eventing/flows/sequence/README.md
-            - Displaying sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+            - About Sequences: eventing/flows/sequence/README.md
+            - Displaying Sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
             - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
             - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
             - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
         - Channels:
-          - Overview: eventing/channels/README.md
+          - About Channels: eventing/channels/README.md
           - Channel types and defaults: eventing/channels/channel-types-defaults.md
-          - Creating a channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
+          - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
           - Available Channels: eventing/channels/channels-crds.md
           - Subscriptions: eventing/channels/subscriptions.md
         - Sugar Controller: eventing/sugar/README.md
         - Brokers:
-          - Overview: eventing/broker/README.md
+          - About Brokers: eventing/broker/README.md
           - Using the Event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
-          - Creating a broker: eventing/broker/create-mtbroker.md
+          - Creating a Broker: eventing/broker/create-mtbroker.md
           - Triggers: eventing/broker/triggers/README.md
           - Broker configuration example: eventing/broker/example-mtbroker.md
           - Apache Kafka Broker: eventing/broker/kafka-broker/README.md
@@ -212,9 +212,9 @@ nav:
     # Code samples
 ###############################################################################
     - Code samples:
-      - Overview: samples.md
+      - Code sample overview: samples.md
       - Serving code samples:
-        - Overview: serving/samples/README.md
+        - About Serving code samples: serving/samples/README.md
         - Cloud Events apps:
           - .NET: serving/samples/cloudevents/cloudevents-dotnet/README.md
           - Go: serving/samples/cloudevents/cloudevents-go/README.md
@@ -242,9 +242,9 @@ nav:
         - Secrets - Go: serving/samples/secrets-go/README.md
         - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
       - Eventing code samples:
-        - Overview: eventing/samples/README.md
+        - About Eventing code samples: eventing/samples/README.md
         - Hello World:
-          - Overview: eventing/samples/helloworld/README.md
+          - Hello World sample overview: eventing/samples/helloworld/README.md
           - GO: eventing/samples/helloworld/helloworld-go/README.md
           - Python: eventing/samples/helloworld/helloworld-python/README.md
           - Writing an event source using Javascript: eventing/samples/writing-event-source-easy-way/README.md
@@ -253,7 +253,7 @@ nav:
           - Channel Example: eventing/samples/kafka/channel/README.md
           - ResetOffset Example: eventing/samples/kafka/resetoffset/README.md
         - Parallel:
-          - Overview: eventing/samples/parallel/README.md
+          - Parallel sample overview: eventing/samples/parallel/README.md
           - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
           - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
         - Sources:
@@ -265,7 +265,7 @@ nav:
           - GitLab source: eventing/samples/gitlab-source/README.md
     # Reference docs
     - Reference:
-      - Overview: reference/README.md
+      - Reference overview: reference/README.md
       - API:
         - Serving: reference/api/serving-api.md
         - Eventing: reference/api/eventing-api.md

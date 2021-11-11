@@ -19,6 +19,7 @@ theme:
     - navigation.tracking
     - navigation.tabs.sticky
     - navigation.top
+    - navigation.indexes
 
 markdown_extensions:
   # - mdx_include:
