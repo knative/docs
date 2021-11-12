@@ -12,7 +12,7 @@ You can configure the `rollout-duration` parameter by modifying the `config-netw
      name: config-network
      namespace: knative-serving
     data:
-      rolloutDuration: "380s"  # Value in seconds.
+      rollout-duration: "380s"  # Value in seconds.
     ```
 
 === "Operator configuration"
