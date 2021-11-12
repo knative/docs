@@ -232,7 +232,7 @@ variables.&lt;/li&gt;
 &lt;code&gt;K_SINK&lt;/code&gt; and &lt;code&gt;K_CE_OVERRIDES&lt;/code&gt;, resolved from &lt;code&gt;spec.sink&lt;/code&gt; and &lt;code&gt;spec.ceOverrides&lt;/code&gt; respectively.&lt;/li&gt;
 &lt;li&gt;The event messages shall be sent to the sink URI specified in &lt;code&gt;K_SINK&lt;/code&gt;. The message can be any
 format.
-&lt;a href=&#34;https://github.com/cloudevents/spec/blob/master/spec.md#design-goals&#34;&gt;CloudEvents&lt;/a&gt;
+&lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#design-goals&#34;&gt;CloudEvents&lt;/a&gt;
 format is recommended.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/knative/eventing/blob/main/cmd/heartbeats/main.go&#34;&gt;heartbeats&lt;/a&gt;
