@@ -85,6 +85,7 @@ nav:
         - Load balancing:
           - About load balancing: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
+          - Configuring Activator capacity: serving/load-balancing/activator-capacity.md
         - Revision garbage collection: serving/revision-gc.md
         - Autoscaling:
           - About autoscaling: serving/autoscaling/README.md
