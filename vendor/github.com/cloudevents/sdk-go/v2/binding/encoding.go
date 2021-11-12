@@ -6,9 +6,9 @@ import "errors"
 type Encoding int
 
 const (
-	// Binary encoding as specified in https://github.com/cloudevents/spec/blob/master/spec.md#message
+	// Binary encoding as specified in https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#message
 	EncodingBinary Encoding = iota
-	// Structured encoding as specified in https://github.com/cloudevents/spec/blob/master/spec.md#message
+	// Structured encoding as specified in https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#message
 	EncodingStructured
 	// Message is an instance of EventMessage or it contains EventMessage nested (through MessageWrapper)
 	EncodingEvent

@@ -504,7 +504,7 @@ with Apache Kafka for the Knative Broker and Trigger model.&lt;/p&gt;
 &lt;li&gt;Control plane High Availability&lt;/li&gt;
 &lt;li&gt;Horizontally scalable data plane&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#kafka-producer-and-consumer-configurations&#34;&gt;Extensively configurable&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Ordered delivery of events based on &lt;a href=&#34;https://github.com/cloudevents/spec/blob/master/extensions/partitioning.md&#34;&gt;CloudEvents partitioning extension&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ordered delivery of events based on &lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0.1/extensions/partitioning.md&#34;&gt;CloudEvents partitioning extension&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Support any Kafka version, see &lt;a href=&#34;https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix&#34;&gt;compatibility matrix&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
