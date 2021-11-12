@@ -125,9 +125,10 @@ The `retryAfterMax` field will only take effect if the `delivery` spec is
 configured to perform retries, and will only pertain to retry attempts on
 **429** and **503** response codes. The field provides an override to prevent
 large **Retry-After** durations from impacting throughput, and must be specified
-using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format.
-Specifying a "zero" value of "PT0S" will effectively disable **Retry-After**
-support.
+using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format. The
+larger of the normal backoff duration and the Retry-After header value will be
+used for the subsequent retry attempt. Specifying a "zero" value of "PT0S" will
+effectively disable **Retry-After** support.
 
 Prior to this experimental feature, Knative Eventing implementations have not
 supported **Retry-After** headers, and this is an attempt to provide a path
