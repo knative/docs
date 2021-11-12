@@ -168,35 +168,6 @@ kubectl logs -f deploy/knative-operator
         Knative operator will install the default manifests of Knative Serving at the version `$spec_version`, and then install
         your customized manifests based on them.
 
-### Verify the Knative Serving deployment:
-
-1. Monitor the Knative deployments:
-```
-kubectl get deployment -n knative-serving
-```
-If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
-is a sample output:
-```
-NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
-activator              1/1     1            1           18s
-autoscaler             1/1     1            1           18s
-autoscaler-hpa         1/1     1            1           14s
-controller             1/1     1            1           18s
-domain-mapping         1/1     1            1           12s
-domainmapping-webhook  1/1     1            1           12s
-webhook                1/1     1            1           17s
-```
-
-1. Check the status of Knative Serving Custom Resource:
-```
-kubectl get KnativeServing knative-serving -n knative-serving
-```
-If Knative Serving is successfully installed, you should see:
-```
-NAME              VERSION             READY   REASON
-knative-serving   <version number>    True
-```
-
 ### Installing Knative Serving with different networking layers
 
 Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
@@ -377,6 +348,36 @@ Knative Serving with different ingresses:
         ```
 
         Save this for configuring DNS later.
+
+
+### Verify the Knative Serving deployment:
+
+1. Monitor the Knative deployments:
+```
+kubectl get deployment -n knative-serving
+```
+If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
+is a sample output:
+```
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+activator              1/1     1            1           18s
+autoscaler             1/1     1            1           18s
+autoscaler-hpa         1/1     1            1           14s
+controller             1/1     1            1           18s
+domain-mapping         1/1     1            1           12s
+domainmapping-webhook  1/1     1            1           12s
+webhook                1/1     1            1           17s
+```
+
+1. Check the status of Knative Serving Custom Resource:
+```
+kubectl get KnativeServing knative-serving -n knative-serving
+```
+If Knative Serving is successfully installed, you should see:
+```
+NAME              VERSION             READY   REASON
+knative-serving   <version number>    True
+```
 
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
