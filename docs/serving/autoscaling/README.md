@@ -4,9 +4,9 @@ Knative Serving provides automatic scaling, or _autoscaling_, for applications t
 
 For example, if an application is receiving no traffic, and scale to zero is enabled, Knative Serving scales the application down to zero pods. If scaling to zero is disabled, the application is scaled down to the minimum number of pods specified for applications on the cluster. Pods can also be scaled up to meet demand if traffic to the application increases.
 
-You can enable and disable scale to zero functionality for your cluster if you have cluster administrator permissions. See ([global configuration](scale-to-zero.md)).
+You can enable and disable scale to zero functionality for your cluster if you have cluster administrator permissions. See [Configuring scale to zero](scale-to-zero.md).
 <!--TODO: How can you check if you have it enabled if you're not a cluster admin?-->
-To use autoscaling for your application if it is enabled on your cluster, you must configure concurrency and scale bounds.
+To use autoscaling for your application if it is enabled on your cluster, you must configure [concurrency](concurrency.md) and [scale bounds](scale-bounds.md).
 <!--TODO: Include this in the basic config before other settings-->
 
 ## Additional resources
