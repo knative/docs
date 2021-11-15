@@ -17,9 +17,9 @@ default Channel configuration for Knative Eventing.
     kind: KafkaChannel
     metadata:
       name: my-kafka-channel
-      spec:
-        numPartitions: 3
-        replicationFactor: 1
+    spec:
+      numPartitions: 3
+      replicationFactor: 1
     ```
 
 1. Apply the YAML file by running the command:
