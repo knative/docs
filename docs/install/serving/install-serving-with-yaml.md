@@ -250,7 +250,7 @@ The following tabs expand to show instructions for installing each Serving exten
           --patch '{"data":{"certificate-class":"net-http01.certificate.networking.knative.dev"}}'
         ```
 
-    3. Enable auto-TLS by running the command:
+    3. Enable autoTLS by running the command:
 
         ```bash
         kubectl patch configmap/config-network \
