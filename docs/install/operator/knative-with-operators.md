@@ -49,6 +49,13 @@ kubectl logs -f deploy/knative-operator
 
 ## Installing the Knative Serving component
 
+### Prepare the networking layer
+
+Knative Serving relies on the networking layer to manage the ingress and egress traffic. Istio is the default network layer
+for Knative Operator configuration. Please follow [Install Istio](../serving/installing-istio.md) before proceeding.
+
+If you would like to leverage networking layers other than Istio, directly go to [this section](#installing-knative-serving-with-different-networking-layers).
+
 ### Create and apply the Knative Serving CR:
 
 !!! note "Install Current Serving"
