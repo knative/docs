@@ -41,14 +41,14 @@ data:
   # queue-sidecar-memory-request is the requests.memory to set for the queue proxy container.
   # If omitted, no value is specified and the system default is used.
   queue-sidecar-memory-request: "400Mi"
-  # queuesidecarmemorylimit is the limits.memory to set for the queue proxy container.
+  # queue-sidecar-memory-limit is the limits.memory to set for the queue proxy container.
   # If omitted, no value is specified and the system default is used.
   queue-sidecar-memory-limit: "800Mi"
-  # queuesidecarephemeralstoragerequest is the requests.ephemeral-storage to
+  # queue-sidecar-ephemeral-storage-request is the requests.ephemeral-storage to
   # set for the queue proxy sidecar container.
   # If omitted, no value is specified and the system default is used.
   queue-sidecar-ephemeral-storage-request: "512Mi"
-  # queuesidecarephemeralstoragelimit is the limits.ephemeral-storage to set
+  # queue-sidecar-ephemeral-storage-limit is the limits.ephemeral-storage to set
   # for the queue proxy sidecar container.
   # If omitted, no value is specified and the system default is used.
   queue-sidecar-ephemeral-storage-limit: "1024Mi"

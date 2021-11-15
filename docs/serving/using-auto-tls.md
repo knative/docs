@@ -225,7 +225,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 Update the
 [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml)
-in the `knative-serving` namespace to enable `auto-tls`and specify how HTTP
+in the `knative-serving` namespace to enable `auto-tls` and specify how HTTP
 requests are handled:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
