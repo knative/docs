@@ -62,13 +62,13 @@ If Sink `ref` points to the Kubernetes core Service object, the destination port
 - `knative.dev/destination-port` Service annotation can explicitly pin the port name that should be used as a destination,
 - Otherwise, if port annotation is not set,
 
-    \- _single-port_ Service's only port will be used as a destination,
+    - For _single-port_: the Service's only port is used as a destination.
 
-    \- _multi-port_ Service's port 80 will be used if it is exposed by the service.
+    - For _multi-port_: the Service's port 80 is used if it is exposed by the service.
 
-In all other cases or if the port specified in `knative.dev/destination-port` annotation does not exist in the service, sink URI resolution will fail.
+In all other cases, or if the port specified in `knative.dev/destination-port` annotation does not exist in the Service, Sink URI resolution fails.
 
-The default protocol used in Sink URL is HTTP unless the destination port is 443 - in that case, HTTPS will be used as a URL scheme.
+The default protocol used in Sink URL is HTTP. If the destination port is 443, HTTPS is used as a URL scheme.
 
 ## Using custom resources as sinks
 
