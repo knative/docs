@@ -194,7 +194,7 @@ kubectl get cm  -n knative-serving config-network -o yaml
 ```
 
 {% raw %}
-Then look for the value for `domainTemplate`. If it is
+Then look for the value for `domain-template`. If it is
 `{{.Name}}-{{.Namespace}}.{{.Domain}}`, you need to change
 `search-service.default` into `search-service-default` and
 `login-service.default` into `login-service-default` as well in `routing.yaml`.
@@ -259,7 +259,7 @@ The Gateway proxy checks the updated host, and forwards it to `Search` or
 
 ![Object model](images/knative-routing-sample-flow.png)
 
-## Using internal services and `"httpProtocol": "Redirected"`
+## Using internal services and `"http-protocol": "Redirected"`
 
 Using the approach explained in the previous section, services will be available using two entrypoints into the cluster:
 The original ones provided by Knative Serving (`search-service.default.example.com` and `login-service.default.example.com`),
@@ -290,8 +290,8 @@ kubectl apply --filename docs/serving/samples/knative-routing-go/routing-interna
 will replace the custom routing rule with one that uses the `knative-local-gateway`, enabling access
 via `example.com/search` and `example.com/login` again.
 
-With these changes, you can also use [the `autoTLS` feature](../../using-auto-tls.md) in combination with the global setting
-`"httpProtocol": "Redirected"`, which would otherwise try to redirect the `entry-route`
+With these changes, you can also use [the `auto-tls` feature](../../using-auto-tls.md) in combination with the global setting
+`"http-protocol": "Redirected"`, which would otherwise try to redirect the `entry-route`
 VirtualService requests from HTTP to HTTPS, failing the request.
 
 ## Clean Up

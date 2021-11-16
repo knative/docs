@@ -194,7 +194,7 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
     kubectl get cm config-network -n knative-serving -o yaml
     ```
 
-    Then, look for the value for `domainTemplate`. If it is {% raw
+    Then, look for the value for `domain-template`. If it is {% raw
     %}`{{.Name}}-{{.Namespace}}.{{.Domain}}`{% endraw %}, you need to change
     `search-service.default` into `search-service-default` and
     `login-service.default` into `login-service-default` as well in

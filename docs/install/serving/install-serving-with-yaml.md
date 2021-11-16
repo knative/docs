@@ -45,7 +45,7 @@ Follow the procedure for the networking layer of your choice:
       kubectl patch configmap/config-network \
         --namespace knative-serving \
         --type merge \
-        --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+        --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
       ```
 
     1. Fetch the External IP address or CNAME by running the command:
@@ -95,7 +95,7 @@ Follow the procedure for the networking layer of your choice:
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"ingress.class":"ambassador.ingress.networking.knative.dev"}}'
+          --patch '{"data":{"ingress-class":"ambassador.ingress.networking.knative.dev"}}'
         ```
 
     1. Fetch the External IP address or CNAME by running the command:
@@ -129,7 +129,7 @@ Follow the procedure for the networking layer of your choice:
       kubectl patch configmap/config-network \
         --namespace knative-serving \
         --type merge \
-        --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+        --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
       ```
 
     1. Fetch the External IP address or CNAME by running the command:
@@ -241,20 +241,20 @@ The following tabs expand to show instructions for installing each Serving exten
         kubectl apply -f {{ artifact(repo="net-http01",file="release.yaml")}}
         ```
 
-    2. Configure the `certificate.class` to use this certificate type by running the command:
+    2. Configure the `certificate-class` to use this certificate type by running the command:
 
         ```bash
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"certificate.class":"net-http01.certificate.networking.knative.dev"}}'
+          --patch '{"data":{"certificate-class":"net-http01.certificate.networking.knative.dev"}}'
         ```
 
-    3. Enable auto-TLS by running the command:
+    3. Enable autoTLS by running the command:
 
         ```bash
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"autoTLS":"Enabled"}}'
+          --patch '{"data":{"auto-tls":"Enabled"}}'
         ```
