@@ -44,28 +44,28 @@ The `quickstart` plugin completes the following functions:
 
 
 !!! todo "Install Knative and Kubernetes locally"
-=== "Using kind"
+    === "Using kind"
 
-    Install Knative and Kubernetes on a local Docker daemon by running:
-    ```bash
-    kn quickstart kind
-    ```
+        Install Knative and Kubernetes on a local Docker daemon by running:
+        ```bash
+        kn quickstart kind
+        ```
 
-    After the plugin is finished, verify you have a cluster called `knative`:
-    ```bash
-    kind get clusters
-    ```
+        After the plugin is finished, verify you have a cluster called `knative`:
+        ```bash
+        kind get clusters
+        ```
 
-=== "Using minikube"
+    === "Using minikube"
 
-    Install Knative and Kubernetes in a minikube instance by running:
-    ```bash
-    kn quickstart minikube
-    ```
+        Install Knative and Kubernetes in a minikube instance by running:
+        ```bash
+        kn quickstart minikube
+        ```
 
-    After the plugin is finished, verify you have a cluster called `knative`:
-    ```bash
-    minikube profile list
-    ```
+        After the plugin is finished, verify you have a cluster called `knative`:
+        ```bash
+        minikube profile list
+        ```
 
 
