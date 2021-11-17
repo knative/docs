@@ -15,7 +15,7 @@ The possible metric types that can be configured per revision depend on the type
 For more information about KPA and HPA, see the documentation on [Supported Autoscaler types](autoscaler-types.md).
 
 * **Per-revision annotation key:** `autoscaling.knative.dev/metric`
-* **Possible values:** `"concurrency"`, `"rps"`, `"cpu"`, `"memory"` or any custom metric name, depending on your Autoscaler type. The `cpu`/`memory`/custom metrics are only supported on revisions with the HPA class.
+* **Possible values:** `"concurrency"`, `"rps"`, `"cpu"`, `"memory"` or any custom metric name, depending on your Autoscaler type. The `cpu`/`memory`/`custom` metrics are only supported on revisions with the HPA class.
 * **Default:** `"concurrency"`
 
 
