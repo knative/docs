@@ -47,11 +47,6 @@ The `quickstart` plugin completes the following functions:
     kn quickstart kind
     ```
 
-??? bug "Having issues with Kind?"
-    We've found that some users (specifically Linux) may have trouble with Docker and, subsequently, Kind. Though this tutorial assumes you have Kind installed, you can easily follow along with a different installation.
-
-    We have provide an alternative Quickstart on `minikube` here: [https://github.com/csantanapr/knative-minikube](https://github.com/csantanapr/knative-minikube){_target="_blank"}
-
 Installing may take a few minutes. After the plugin is finished, check to make sure you have a Cluster called `knative`
 !!! success "Verify Installation"
     ```bash
