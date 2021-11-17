@@ -104,5 +104,5 @@ working tutorial or how-to.
 For further resources to help you to contribute to Knative documentation, see
 the [Knative docs contributor guide README](../README.md).
 
-For more information about Knative's values and processes, see the 
+For more information about Knative's values and processes, see the
 [community repo](https://github.com/knative/community).
