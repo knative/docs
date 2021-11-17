@@ -60,7 +60,7 @@ Write a sentence or two to introduce the content of the list.
 For example, “If you want to fix or add content to a past release, you can find the source files in
 the following folders.”. Optionally, include bold lead-ins before each list item.
 
-**NOTE:** For the formatting to render correctly, you must add a line of whitespace
+**NOTE:** For the formatting to render correctly, you must add an empty line
 between the list and the preceding sentence.
 
 #### Markdown ordered list template
@@ -102,7 +102,7 @@ Write a sentence or two to introduce the content of the list.
 For example, “Your own path to becoming a Knative contributor can begin in any of the following
 components:”. Optionally, include bold lead-ins before each list item.
 
-**NOTE:** For the formatting to render correctly, you must add a line of whitespace
+**NOTE:** For the formatting to render correctly, you must add an empty line
 between the list and the preceding sentence.
 
 #### Markdown unordered list template
