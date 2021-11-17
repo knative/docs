@@ -31,27 +31,28 @@ Follow the procedure for the networking layer of your choice:
 <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 <!-- This indentation is important for things to render properly. -->
 
-=== "Kourier (Choose this if you are not sure)"
+=== "Istio (default)"
 
-    The following commands install Kourier and enable its Knative integration.
+    The following commands install Istio and enable its Knative integration.
 
-    1. Install the Knative Kourier controller by running the command:
-    ```bash
-    kubectl apply -f {{ artifact(repo="net-kourier",file="kourier.yaml")}}
-    ```
+    1. Install a properly configured Istio by following the
+    [Advanced Istio installation](installing-istio.md) instructions or by running the command:
 
-    1. Configure Knative Serving to use Kourier by default by running the command:
-      ```bash
-      kubectl patch configmap/config-network \
-        --namespace knative-serving \
-        --type merge \
-        --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
-      ```
+        ```bash
+        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",file="istio.yaml")}}
+        kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
+        ```
+
+    1. Install the Knative Istio controller by running the command:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
+        ```
 
     1. Fetch the External IP address or CNAME by running the command:
 
         ```bash
-        kubectl --namespace kourier-system get service kourier
+        kubectl --namespace istio-system get service istio-ingressgateway
         ```
 
         !!! tip
@@ -141,32 +142,34 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
-=== "Istio"
 
-    The following commands install Istio and enable its Knative integration.
 
-    1. Install a properly configured Istio by following the
-    [Advanced Istio installation](installing-istio.md) instructions or by running the command:
+=== "Kourier"
 
-        ```bash
-        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",file="istio.yaml")}}
-        kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
-        ```
+    The following commands install Kourier and enable its Knative integration.
 
-    1. Install the Knative Istio controller by running the command:
+    1. Install the Knative Kourier controller by running the command:
+    ```bash
+    kubectl apply -f {{ artifact(repo="net-kourier",file="kourier.yaml")}}
+    ```
 
-        ```bash
-        kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
-        ```
+    1. Configure Knative Serving to use Kourier by default by running the command:
+      ```bash
+      kubectl patch configmap/config-network \
+        --namespace knative-serving \
+        --type merge \
+        --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+      ```
 
     1. Fetch the External IP address or CNAME by running the command:
 
         ```bash
-        kubectl --namespace istio-system get service istio-ingressgateway
+        kubectl --namespace kourier-system get service kourier
         ```
 
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
+
 
 ## Verify the installation
 
