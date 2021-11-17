@@ -50,8 +50,8 @@ The `quickstart` plugin completes the following functions:
     ```bash
     kn quickstart kind
     ```
-    
-    Verify the installation 
+
+    Verify the installation
     ```bash
     kind get clusters
     ```
@@ -62,11 +62,11 @@ The `quickstart` plugin completes the following functions:
     ```bash
     kn quickstart minikube
     ```
-    
-    Verify the installation 
+
+    Verify the installation
     ```bash
     minikube profile list
     ```
-    
+
 Installing may take a few minutes. After the plugin is finished, check to make sure you have a Cluster called `knative`
 
