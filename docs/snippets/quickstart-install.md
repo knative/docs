@@ -38,7 +38,7 @@
 
 The `quickstart` plugin completes the following functions:
 
-1. **Checks if you have the selected kubernetes instance installed,** and creates a cluster called `knative`.
+1. **Checks if you have the selected Kubernetes instance installed,** and creates a cluster called `knative`.
 2. **Installs Knative Serving with Kourier** as the default networking layer, and nip.io as the DNS.
 3. **Installs Knative Eventing** and creates an in-memory Broker and Channel implementation.
 
@@ -46,27 +46,26 @@ The `quickstart` plugin completes the following functions:
 !!! todo "Install Knative and Kubernetes locally"
 === "Using kind"
 
-    This will install Knative and Kubernetes on a local Docker daemon
+    Install Knative and Kubernetes on a local Docker daemon by running:
     ```bash
     kn quickstart kind
     ```
 
-    Verify the installation
+    After the plugin is finished, verify you have a cluster called `knative`:
     ```bash
     kind get clusters
     ```
 
 === "Using minikube"
 
-    This will install Knative and Kubernetes in a minikube instance
+    Install Knative and Kubernetes in a minikube instance by running:
     ```bash
     kn quickstart minikube
     ```
 
-    Verify the installation
+    After the plugin is finished, verify you have a cluster called `knative`:
     ```bash
     minikube profile list
     ```
 
-Installing may take a few minutes. After the plugin is finished, check to make sure you have a Cluster called `knative`
 
