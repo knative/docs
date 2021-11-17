@@ -61,7 +61,7 @@ For example, “If you want to fix or add content to a past release, you can fin
 the following folders.”. Optionally, include bold lead-ins before each list item.
 
 **NOTE:** For the formatting to render correctly, you must add a line of whitespace
-between the list and the preceeding sentence.
+between the list and the preceding sentence.
 
 #### Markdown ordered list template
 
@@ -103,7 +103,7 @@ For example, “Your own path to becoming a Knative contributor can begin in any
 components:”. Optionally, include bold lead-ins before each list item.
 
 **NOTE:** For the formatting to render correctly, you must add a line of whitespace
-between the list and the preceeding sentence.
+between the list and the preceding sentence.
 
 #### Markdown unordered list template
 
