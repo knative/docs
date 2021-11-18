@@ -115,16 +115,17 @@ Service, which dumps incoming messages into its log:
         - To create the ContainerSource, run the command:
 
             ```bash
-            kn source container create <name> --image <image-uri> --sink <sink>
+            kn source container create <name> --image <image-uri> --sink <sink> -e POD_NAME=<pod-name> -e POD_NAMESPACE=<pod-namespace>
             ```
             Where:
 
             - `<name>` is the name you want for your ContainerSource object,
             for example, `test-heartbeats`.
             - `<image-uri>` corresponds to the image URI you built and published
-            in step 1, for example, `gcr.io/[gcloud-project]/knative.dev/eventing/cmd/heartbeats`.
-            - `<sink>` is the name of your sink, for example `<event-display>`.
-
+            in step 1, for example, `gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats`.
+            - `<pod-name>` is the name of the Pod that the container runs in, for example, `mypod`.
+            - `<pod-namespace>` is the namespace that the Pod runs in, for example, `event-test`.
+            - `<sink>` is the name of your sink, for example, `event-display`.
             For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_container_create.md#kn-source-container-create).
 
     === "YAML"
@@ -159,7 +160,7 @@ Service, which dumps incoming messages into its log:
             - `<containersource-name>` is the name you want for your ContainerSource,
             for example, `test-heartbeats`.
             - `<event-source-image-uri>` corresponds to the image URI you built and published
-            in step 1, for example, `gcr.io/[gcloud-project]/knative.dev/eventing/cmd/heartbeats`.
+            in step 1, for example, `gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats`.
             - `<container-name>` is the name of your event source, for example, `heartbeats`.
             - `<pod-name>` is the name of the Pod that the container runs in, for example, `mypod`.
             - `<pod-namespace>` is the namespace that the Pod runs in, for example, `event-test`.
