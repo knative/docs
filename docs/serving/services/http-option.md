@@ -23,7 +23,7 @@ You can override the default behavior for each Service or global configuration.
       name: example
       namespace: default
       annotations:
-        networking.knative.dev/httpOption: "enabled"
+        networking.knative.dev/httpOption: "redirected"
     spec:
       ...
     ```
@@ -36,7 +36,7 @@ You can override the default behavior for each Service or global configuration.
       name: config-network
       namespace: knative-serving
     data:
-      http-protocol: "enabled"
+      http-protocol: "redirected"
     ```
 
 === "Global (Operator)"
@@ -48,5 +48,5 @@ You can override the default behavior for each Service or global configuration.
     spec:
       config:
         network:
-          httpProtocol: "enabled"
+          httpProtocol: "redirected"
     ```
