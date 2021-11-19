@@ -12,7 +12,8 @@ See [Install and Set Up `kubectl`](https://kubernetes.io/docs/tasks/tools/instal
 
 `kn` provides a quick and easy interface for creating Knative resources such as services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
-**NOTE:** `kn` cannot be used to install Knative components such as Serving or Eventing.
+!!! note
+    `kn` cannot be used to install Knative components such as Serving or Eventing.
 
 See [Installing `kn`](install-kn.md).
 

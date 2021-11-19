@@ -291,8 +291,8 @@ requests are handled:
        ...
      ```
 
-    **Note:**
-    When using HTTP-01 challenge, `http-protocol` field has to be set to `Enabled` to make sure HTTP-01 challenge requests can be accepted by the cluster.
+    !!! note
+        When using HTTP-01 challenge, `http-protocol` field has to be set to `Enabled` to make sure HTTP-01 challenge requests can be accepted by the cluster.
 
 1.  Ensure that the file was updated successfully:
 
@@ -311,8 +311,8 @@ be able to handle HTTPS traffic.
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 
-1.  When the certificate is provisioned (which could take up to several minutes depending on
-    the challenge type), you should see something like:
+1.  When the certificate is provisioned (which could take up to several minutes depending on the challenge type), you should see something like:
+
     ```
     NAME               URL                                           LATESTCREATED            LATESTREADY              READY   REASON
     autoscale-go       https://autoscale-go.default.{custom-domain}   autoscale-go-6jf85 autoscale-go-6jf85       True  
