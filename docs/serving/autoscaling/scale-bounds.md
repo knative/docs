@@ -157,23 +157,17 @@ When the Revision is created, the larger of initial scale and lower bound is aut
           allow-zero-initial-scale: "true"
     ```
 
+## Stable window
 
+The stable window defines minimal time that will pass between descisions to change the scale of a revision.
 
+* **Global key:** `stable-window`
+* **Per-revision annotation key:** `autoscaling.knative.dev/window`
+* **Possible values:** Duration, `6s` <= value <= `1h`
+* **Default:** `60s`
 
-
-## Scale Down Delay
-
-Scale Down Delay specifies a time window which must pass at reduced concurrency
-before a scale-down decision is applied. This can be useful, for example, to
-keep containers around for a configurable duration to avoid a cold start
-penalty if new requests come in. Unlike setting a lower bound, the revision
-will eventually be scaled down if reduced concurrency is maintained for the
-delay period.
-
-* **Global key:** `scale-down-delay`
-* **Per-revision annotation key:** `autoscaling.knative.dev/scaleDownDelay`
-* **Possible values:** Duration, `0s` <= value <= `1h`
-* **Default:** `0s` (no delay)
+!!! note
+    During scale down, the last Replica will only be removed after there has not been any traffic to the Revision for the entire duration of the stable window.
 
 **Example:**
 
@@ -188,7 +182,7 @@ delay period.
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/scaleDownDelay: "15m"
+            autoscaling.knative.dev/window: "40s"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -199,10 +193,10 @@ delay period.
     apiVersion: v1
     kind: ConfigMap
     metadata:
-      name: config-autoscaler
-      namespace: knative-serving
+     name: config-autoscaler
+     namespace: knative-serving
     data:
-      scale-down-delay: "15m"
+     stable-window: "40s"
     ```
 
 === "Global (Operator)"
@@ -214,9 +208,8 @@ delay period.
     spec:
       config:
         autoscaler:
-          scale-down-delay: "15m"
+          stable-window: "40s"
     ```
-
 
 
 
