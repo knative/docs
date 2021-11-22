@@ -5,7 +5,7 @@
 You must meet the following prerequisites before you are able to contribute to
 the docs. The following steps are specific to docs contributions.
 For more information about contributing to the Knative project, see the
-[Knative contribution guidelines](https://github.com/knative/community/blob/main/contributing.md).
+[Knative contribution guidelines](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
 
 1. If you don't already have an account, you must create
    [a new GitHub account](https://github.com/join).
