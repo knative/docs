@@ -24,9 +24,9 @@ The Knative website includes versioned docs for recent releases, the Knative
 blog, links to all community resources, as well as Knative governance and
 contributor guidelines.
 
-### Run website locally
+### Run the website locally
 
-For instructions, see Knative's [MkDocs contributor guide](how-to-contribute/previewing-docs-locally.md).
+For instructions, see Knative's [docs contributor guide](contribute-to-docs/getting-started/previewing-docs-locally.md).
 
 ### Website source files
 
