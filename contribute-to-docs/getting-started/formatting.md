@@ -179,6 +179,6 @@ as well as usage information, see the
 
 
 ## TODO (Add Requests Here)
-Navigation using lukasgeiter/mkdocs-awesome-pages-plugin: An MkDocs plugin that simplifies configuring page titles and their order
-Index.md vs. README.md
-awesome-pages
+- Navigation using lukasgeiter/mkdocs-awesome-pages-plugin: An MkDocs plugin that simplifies configuring page titles and their order
+- Index.md vs. README.md
+- awesome-pages
