@@ -17,7 +17,7 @@ To contribute new documentation, follow these steps:
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
 1. Write your new content. See the [style guide](../style-guide/README.md) to help you with this
    process. Feel free to reach out to the
-   [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience) with any questions.
+   [DUX working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience) with any questions.
 1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
    to kick off the review process. For details, see our [Using GitHub help](../getting-started/github-workflow.md).
 
@@ -57,7 +57,7 @@ giving readers all the information you have, because you are unsure about
 what information they need.
 
 If you need help identifying the audience for you content, we are happy to help
-and answer all your questions during the [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience)
+and answer all your questions during the [DUX working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience)
 weekly meetings.
 
 ## Content types
@@ -202,7 +202,7 @@ main documentation come with an ongoing cost of keeping up to date.
 
 Generally, the `knative/docs` repo contains Knative-specific user-facing content and blog content.
 
-When you add a new document to the [`/docs`](docs) directory, the navigation menu updates automatically.
+When you add a new document to the [`/docs`](../../docs) directory, the navigation menu updates automatically.
 For more information, see the
 [MkDocs documentation](https://www.mkdocs.org/user-guide/writing-your-docs/#configure-pages-and-navigation).
 
