@@ -157,9 +157,65 @@ When the Revision is created, the larger of initial scale and lower bound is aut
           allow-zero-initial-scale: "true"
     ```
 
+### Scale Down Delay
+
+Scale Down Delay specifies a time window which must pass at reduced concurrency
+before a scale-down decision is applied. This can be useful, for example, to
+keep containers around for a configurable duration to avoid a cold start
+penalty if new requests come in. Unlike setting a lower bound, the revision
+will eventually be scaled down if reduced concurrency is maintained for the
+delay period. *only supported for KPA*
+
+* **Global key:** `scale-down-delay`
+* **Per-revision annotation key:** `autoscaling.knative.dev/scaleDownDelay`
+* **Possible values:** Duration, `0s` <= value <= `1h`
+* **Default:** `0s` (no delay)
+
+**Example:**
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/scaleDownDelay: "15m"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
+      scale-down-delay: "15m"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          scale-down-delay: "15m"
+    ```
+
 ## Stable window
 
-The stable window defines minimal time that will pass between descisions to change the scale of a revision.
+The stable window defines minimal time that will pass between descisions to change the scale of a revision. [Panic mode](kpa-specific.md) can override this setting.
 
 * **Global key:** `stable-window`
 * **Per-revision annotation key:** `autoscaling.knative.dev/window`
