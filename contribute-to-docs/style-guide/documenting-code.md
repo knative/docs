@@ -106,7 +106,7 @@ Write \`\`\`yaml at the beginning of your code block if you are typing YAML code
 
 :white_check_mark: **Correct**
 
-    - Creating or updating a resource:
+- Creating or updating a resource:
 
         1. Create a YAML file using the following template:
 
@@ -120,7 +120,7 @@ Write \`\`\`yaml at the beginning of your code block if you are typing YAML code
             ```
             Where `<filename>` is the name of the file you created in the previous step.
 
-    - Editing a ConfigMap:
+- Editing a ConfigMap:
 
         ```bash
         kubectl -n <namespace> edit configmap <resource-name>
