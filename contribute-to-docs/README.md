@@ -4,10 +4,10 @@
 
 - [Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md)
 - [Becoming a contributor](getting-started/becoming-a-contributor.md)
+- [GitHub workflow for Knative documentation](getting-started/github-workflow.md)
 - [Previewing the website locally](getting-started/previewing-docs-locally.md)
 - [Formatting content](getting-started/formatting.md)
 - [Navigation and redirects](getting-started/navigation-and-redirects.md)
-- [GitHub workflow for Knative documentation](getting-started/github-workflow.md)
 - [Branches and cherrypicking](getting-started/branches-and-cherrypicking.md)
 
 
@@ -38,4 +38,4 @@ If you notice gaps in the style guide or have queries, please post in [the Docs 
 - [Voice and language](style-guide/voice-and-language.md)
 - [Word and phrase list](style-guide/word-and-phrase-list.md)
 - [Content re-use](style-guide/content-reuse.md)
-- [Using shortcodes (TBD)]()
+- Using shortcodes (TBD)
