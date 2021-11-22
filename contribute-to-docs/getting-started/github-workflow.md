@@ -70,10 +70,6 @@ for Pull Requests (PRs).
 General details about how to open a PR are covered in the
 [Knative guidelines](https://github.com/knative/community/).
 
-Note that PRs for fixes to the look or behavior of the <https://knative.dev>
-website, must be opened the
-[`knative/website` repo](https://github.com/knative/website/pulls).
-
 <!-- This could use a pass to be more focused on what a PR submitter should do at the start of the process. -->
 
 1. [Ensure that your fork is up-to-date](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork).
