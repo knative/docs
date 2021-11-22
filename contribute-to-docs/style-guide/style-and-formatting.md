@@ -87,9 +87,24 @@ Don't use spacing when the unit of measurement is percent.
 
 When listing terms and their definitions, use table formatting instead of definition list formatting.
 
-|:white_check_mark: Correct                  |:no_entry: Incorrect
-|--------------------|-----
-|`|Value |Description |`<br>`|------|---------------------|`<br>`|Value1|Description of Value1|`<br>`|Value2|Description of Value2|`|`Value1`<br>`: Description of Value1`<br><br>`Value2`<br>`: Description of Value2`|
+:white_check_mark: **Correct**
+
+```
+| Value  | Description           |
+|--------|-----------------------|
+| Value1 | Description of Value1 |
+| Value2 | Description of Value2 |
+```
+
+:no_entry: **Incorrect**
+
+```
+**Value1:**
+Description of Value1
+
+**Value2:**
+Description of Value2
+```
 
 ## General style
 
