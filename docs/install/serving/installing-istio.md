@@ -57,35 +57,8 @@ Enter the following command to install Istio:
 
 To install Istio without sidecar injection:
 
-1. Create a `istio-minimal-operator.yaml` file using the following template:
-
-    ```yaml
-    apiVersion: install.istio.io/v1alpha1
-    kind: IstioOperator
-    spec:
-      values:
-        global:
-          proxy:
-            autoInject: disabled
-          useMCP: false
-          # The third-party-jwt is not enabled on all k8s.
-          # See: https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens
-          jwtPolicy: first-party-jwt
-
-      addonComponents:
-        pilot:
-          enabled: true
-
-      components:
-        ingressGateways:
-          - name: istio-ingressgateway
-            enabled: true
-    ```
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    istioctl install -f istio-minimal-operator.yaml
+    ```sh
+    istioctl install -y
     ```
 
 #### Installing Istio with sidecar injection
