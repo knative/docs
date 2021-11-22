@@ -1,22 +1,17 @@
 # Autoscaling
 
-One of the main features of Knative is automatic scaling of replicas for an application to closely match incoming demand, including scaling applications to zero if no traffic is being received.
-Knative Serving enables this by default, using the Knative Pod Autoscaler (KPA).
-The Autoscaler component watches traffic flow to the application, and scales replicas up or down based on configured metrics.
+Knative Serving provides automatic scaling, or _autoscaling_, for applications to match incoming demand. This is provided by default, by using the Knative Pod Autoscaler (KPA).
 
-Knative services default to using autoscaling settings that are suitable for the majority of use cases. However, some workloads may require a custom, more finely-tuned configuration.
-This guide provides information about configuration options that you can modify to fit the requirements of your workload.
+For example, if an application is receiving no traffic and scale to zero is enabled, Knative Serving scales the application down to zero replicas. If scaling to zero is disabled, the application is scaled down to the minimum number of replicas specified for applications on the cluster. Replicas are scaled up to meet demand if traffic to the application increases.
 
-For more information about autoscaling in Knative, see the [Autoscaler types](autoscaler-types.md) documentation.
+You can enable and disable scale to zero functionality for your cluster if you have cluster administrator permissions. See [Configuring scale to zero](scale-to-zero.md).
+<!--TODO: How can you check if you have it enabled if you're not a cluster admin?-->
+To use autoscaling for your application if it is enabled on your cluster, you must configure [concurrency](concurrency.md) and [scale bounds](scale-bounds.md).
+<!--TODO: Include this in the basic config before other settings-->
 
-For more information about which metrics can be used to control the Autoscaler, see the [metrics](autoscaling-metrics.md) documentation.
+## Additional resources
 
-## Optional autoscaling configuration tasks
-
-* Configure your Knative deployment to use the Kubernetes Horizontal Pod Autoscaler (HPA)
-instead of the default KPA.
-For how to install HPA, see [Install optional Serving extensions](../../install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).
-* Disable scale to zero functionality for your cluster ([global configuration only](scale-to-zero.md)).
-* Configure the [type of metrics](autoscaling-metrics.md) your Autoscaler consumes.
-* Configure [concurrency limits](concurrency.md) for applications.
+<!--TODO: Move KPA details, metrics to admin / advanced section; too in depth for intro)-->
 * Try out the [Go Autoscale Sample App](autoscale-go/README.md).
+* Configure your Knative deployment to use the Kubernetes Horizontal Pod Autoscaler (HPA) instead of the default KPA. For how to install HPA, see [Install optional Serving extensions](../../install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).
+* Configure the [types of metrics](autoscaling-metrics.md) that the Autoscaler consumes.
