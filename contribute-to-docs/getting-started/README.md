@@ -8,8 +8,8 @@ Table of contents:
 
 - [Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md)
 - [Becoming a contributor](becoming-a-contributor.md)
+- [GitHub workflow for Knative documentation](github-workflow.md)
 - [Previewing the website locally](previewing-docs-locally.md)
 - [Formatting content](formatting.md)
 - [Navigation and redirects](navigation-and-redirects.md)
-- [GitHub workflow for Knative documentation](github-workflow.md)
 - [Branches and cherrypicking](branches-and-cherrypicking.md)
