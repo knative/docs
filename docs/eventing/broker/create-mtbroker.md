@@ -13,7 +13,8 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
         kn broker create <broker-name> -n <namespace>
         ```
 
-        **NOTE:** If you choose not to specify a namespace, the broker will be created in the current namespace.
+        !!! note
+            If you choose not to specify a namespace, the broker will be created in the current namespace.
 
     1. Optional: Verify that the broker was created by listing existing brokers. Enter the following command:
 

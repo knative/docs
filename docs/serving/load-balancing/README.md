@@ -1,8 +1,6 @@
 # Load balancing
 
-You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer.
-
-**NOTE:** To do this, you must first ensure that individual pod addressability is enabled.
+You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer. To do this, you must first ensure that individual pod addressability is enabled.
 
 ## Activator pod selection
 
