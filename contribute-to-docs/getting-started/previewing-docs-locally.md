@@ -1,6 +1,6 @@
 # Previewing the website locally
 
-Knative.dev uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+The Knative website uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
 to render documentation.
 You can choose to install MkDocs locally or use a Docker image.
 
