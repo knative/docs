@@ -145,7 +145,7 @@ Use the `/assign` command to set the owner. For example: `/assign @owner_id`
 **For code related changes**, initially set the owner of your PR to the SME who
 should review for technical accuracy. If you don't know who the appropriate
 owner is, nor who your reviewers should be for your PR, you can assign the
-[current working group lead](https://github.com/knative/community/tree/main/WORKING-GROUPS.md) of the related component.
+[current working group lead](https://github.com/knative/community/tree/main/working-groups/WORKING-GROUPS.md) of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
 `/cc` command. For example: `/cc @stakeholder_id1 @stakeholder_id2`
@@ -153,7 +153,7 @@ If you want to notify and include other stakeholders in your PR review, use the
 
 ## Reviewing PRs
 
-[See the Knative community guidelines about reviewing PRs](https://github.com/knative/community/blob/main/reviewing.md)
+[See the Knative community guidelines about reviewing PRs](https://github.com/knative/community/blob/main/REVIEWING.md)
 
 
 ## Using Prow to manage PRs and Issues
