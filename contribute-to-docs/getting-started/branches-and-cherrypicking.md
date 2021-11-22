@@ -35,7 +35,7 @@ in the product, or for a fix or update existing content.
   [`main`](https://github.com/knative/docs/tree/main/).
 
 - **Fixes and updates**: If you find an issue in a past release, for example a
-  typo or out-of-date content, you likely need to [cherrypick](#cherrypicking) your PR.
+  typo or out-of-date content, you likely need to cherrypick your PR.
   Add the "`cherrypick` labels" to your
   original PR to indicate in which of the past release that your change affects.
 
@@ -46,7 +46,7 @@ repo.
 
 ## Cherrypicking
 
-You can use the [`/cherrypick` tool](https://github.com/kubernetes/test-infra/tree/master/prow/external-plugins/cherrypicker)
+You can use the [`/cherrypick` tool](https://github.com/kubernetes/test-infra/tree/master/prow/external-plugins/cherrypicker#cherrypicker)
 to automatically cherrypick changes from `main` to previous releases.
 
 For example, if you find a typo in a page of the `v1.0` release, then that
@@ -57,7 +57,7 @@ To fix the typo:
 1.  Open a PR against the
     [`main`](https://github.com/knative/docs/tree/main/) branch.
 1.  In a comment on your PR, use the
-    [`/cherrypick` tool](https://github.com/kubernetes/test-infra/tree/master/prow/external-plugins/cherrypicker)
+    [`/cherrypick` tool](https://github.com/kubernetes/test-infra/tree/master/prow/external-plugins/cherrypicker#cherrypicker)
     to indicate which of the past release branches should also be fixed. Generally, we only
     maintain the most recent numbered release.
 
