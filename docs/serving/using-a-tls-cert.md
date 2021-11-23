@@ -184,7 +184,7 @@ follow the steps in the relevant tab to manually add a certificate:
         Where `<filename>` is the name of the file you created in the previous step.
 
     1. Update the Knative Contour plugin to use the certificate as a fallback
-       when auto-TLS is disabled by running the command:
+       when autoTLS is disabled by running the command:
 
          ```bash
          kubectl patch configmap config-contour -n knative-serving \

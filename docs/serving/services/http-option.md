@@ -1,12 +1,12 @@
 # HTTPS redirection
 
-Operators can force HTTPS redirection for all Services. See the `httpProtocol` mentioned in the [Turn on AutoTLS](../using-auto-tls.md) page for more details.
+Operators can force HTTPS redirection for all Services. See the `http-protocol` mentioned in the [Turn on AutoTLS](../using-auto-tls.md) page for more details.
 
 ## Overriding the default HTTP behavior
 
 You can override the default behavior for each Service or global configuration.
 
-* **Global key:** `httpProtocol`
+* **Global key:** `http-protocol`
 * **Per-revision annotation key:** `networking.knative.dev/httpOption`
 * **Possible values:**
     * `enabled` &mdash; Services accept HTTP traffic.
@@ -23,7 +23,7 @@ You can override the default behavior for each Service or global configuration.
       name: example
       namespace: default
       annotations:
-        networking.knative.dev/httpOption: "enabled"
+        networking.knative.dev/httpOption: "redirected"
     spec:
       ...
     ```
@@ -36,7 +36,7 @@ You can override the default behavior for each Service or global configuration.
       name: config-network
       namespace: knative-serving
     data:
-      httpProtocol: "enabled"
+      http-protocol: "redirected"
     ```
 
 === "Global (Operator)"
@@ -48,5 +48,5 @@ You can override the default behavior for each Service or global configuration.
     spec:
       config:
         network:
-          httpProtocol: "enabled"
+          httpProtocol: "redirected"
     ```
