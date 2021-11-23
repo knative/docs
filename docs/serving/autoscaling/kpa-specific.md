@@ -78,7 +78,7 @@ The panic window is defined as a percentage of the stable window to assure that 
 This value indicates how the window over which historical data is evaluated will shrink upon entering panic mode. For example, a value of `10.0` means that in panic mode the window will be 10% of the stable window size.
 
 * **Global key:** `panic-window-percentage`
-* **Per-revision annotation key:** `autoscaling.knative.dev/panicWindowPercentage`
+* **Per-revision annotation key:** `autoscaling.knative.dev/panic-window-percentage`
 * **Possible values:** float, `1.0` <= value <= `100.0`
 * **Default:** `10.0`
 
@@ -95,7 +95,7 @@ This value indicates how the window over which historical data is evaluated will
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/panicWindowPercentage: "20.0"
+            autoscaling.knative.dev/panic-window-percentage: "20.0"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -156,7 +156,7 @@ The default setting of `200.0` means that panic mode will be start if traffic is
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/panicThresholdPercentage: "150.0"
+            autoscaling.knative.dev/panic-threshold-percentage: "150.0"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go

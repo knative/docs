@@ -35,7 +35,7 @@ Create the CloudEvents Player Service:
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/minScale: "1"
+            autoscaling.knative.dev/min-scale: "1"
         spec:
           containers:
             - image: ruromero/cloudevents-player:latest
