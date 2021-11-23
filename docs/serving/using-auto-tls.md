@@ -162,16 +162,16 @@ selectors, see
 [the Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors).
 
 Prior to release 1.0, the fixed label
-`networking.knative.dev/disableWildcardCert: true` was used to disable
+`networking.knative.dev/disable-wildcard-cert: true` was used to disable
 certificate generation for a namespace. In 1.0 and later, other labels such as
 `kubernetes.io/metadata.name` may be used to select or restrict namespaces.
 
 To enable certificates for all namespaces except those with the
-`networking.knative.dev/disableWildcardCert: true` label, use the following
+`networking.knative.dev/disable-wildcard-cert: true` label, use the following
 command:
 
 ```bash
-kubectl patch --namespace knative-serving configmap config-network -p '{"data": {"namespace-wildcard-cert-selector": "{\"matchExpressions\": [{\"key\":\"networking.knative.dev/disableWildcardCert\", \"operator\": \"NotIn\", \"values\":[\"true\"]}]}"}}'
+kubectl patch --namespace knative-serving configmap config-network -p '{"data": {"namespace-wildcard-cert-selector": "{\"matchExpressions\": [{\"key\":\"networking.knative.dev/disable-wildcard-cert\", \"operator\": \"NotIn\", \"values\":[\"true\"]}]}"}}'
 ```
 
 This selects all namespaces where the label value is not in the set `"true"`.
@@ -322,7 +322,7 @@ be able to handle HTTPS traffic.
 
 ### Disable Auto TLS per service or route
 
-If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disableAutoTLS: true`.
+If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disable-auto-tls: true`.
 
 Using the previous `autoscale-go` example:
 
@@ -333,7 +333,7 @@ Using the previous `autoscale-go` example:
  metadata:
    annotations:
     ...
-     networking.knative.dev/disableAutoTLS: "true"
+     networking.knative.dev/disable-auto-tls: "true"
     ...
 ```
 2. The service URL should now be **http**, indicating that AutoTLS is disabled:
