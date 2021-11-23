@@ -14,7 +14,7 @@ metadata:
   name: helloworld-go
   namespace: default
   annotations:
-    serving.knative.dev/rolloutDuration: "380s"
+    serving.knative.dev/rollout-duration: "380s"
 ```
 
 {% include "route-status-updates.md" %}

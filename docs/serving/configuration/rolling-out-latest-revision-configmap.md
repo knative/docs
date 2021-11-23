@@ -24,7 +24,7 @@ You can configure the `rollout-duration` parameter by modifying the `config-netw
     spec:
       config:
         network:
-           rolloutDuration: "380s"
+           rollout-duration: "380s"
     ```
 
 {% include "route-status-updates.md" %}
