@@ -48,5 +48,5 @@ You can override the default behavior for each Service or global configuration.
     spec:
       config:
         network:
-          httpProtocol: "redirected"
+          http-protocol: "redirected"
     ```

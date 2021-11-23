@@ -139,7 +139,7 @@ This value is a percentage of the traffic that the current amount of replicas ca
 The default setting of `200.0` means that panic mode will be start if traffic is twice as high as the current replica population can handle.
 
 * **Global key:** `panic-threshold-percentage`
-* **Per-revision annotation key:** `autoscaling.knative.dev/panicThresholdPercentage`
+* **Per-revision annotation key:** `autoscaling.knative.dev/panic-threshold-percentage`
 * **Possible values:** float, `110.0` <= value <= `1000.0`
 * **Default:** `200.0`
 
