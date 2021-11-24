@@ -157,7 +157,7 @@ func (ec EventContextV03) AsV1() *EventContextV1 {
 }
 
 // Validate returns errors based on requirements from the CloudEvents spec.
-// For more details, see https://github.com/cloudevents/spec/blob/v1.0.1/spec.md
+// For more details, see https://github.com/cloudevents/spec/blob/master/spec.md
 // As of Feb 26, 2019, commit 17c32ea26baf7714ad027d9917d03d2fff79fc7e
 // + https://github.com/cloudevents/spec/pull/387 -> datacontentencoding
 // + https://github.com/cloudevents/spec/pull/406 -> subject
