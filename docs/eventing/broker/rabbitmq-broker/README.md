@@ -7,8 +7,9 @@ This topic describes how to create a RabbitMQ Broker.
 To use the RabbitMQ Broker, you must have the following installed:
 
 1. [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md)
-1. [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator)
-1. [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator)
+1. [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator) - our recommendation is [latest release](https://github.com/rabbitmq/cluster-operator/releases/latest)
+1. [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
+1. [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
 
 ## Install the RabbitMQ controller
 
@@ -40,14 +41,14 @@ To use the RabbitMQ Broker, you must have the following installed:
 
     1. Create a YAML file using the following template:
 
-        ```bash
+        ```yaml
         apiVersion: rabbitmq.com/v1beta1
         kind: RabbitmqCluster
         metadata:
           name: <cluster-name>
         ```
         Where `<cluster-name>` is the name you want for your RabbitMQ cluster,
-        for example, `hello-world`.
+        for example, `rabbitmq`.
 
     1. Apply the YAML file by running the command:
 
@@ -68,10 +69,10 @@ will be `true` in the output of the following command:
 
     ```{ .bash .no-copy }
     NAME          ALLREPLICASREADY   RECONCILESUCCESS   AGE
-    hello-world   True               True               38s
+    rabbitmq      True               True               38s
     ```
 
-For more information about configuring the RabbitmqCluster CRD, see the
+For more information about configuring the `RabbitmqCluster` CRD, see the
 [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
 
 ## Create a RabbitMQ Broker object
@@ -90,33 +91,14 @@ For more information about configuring the RabbitmqCluster CRD, see the
         apiVersion: rabbitmq.com/v1beta1
         kind: RabbitmqCluster
         name: <cluster-name>
-      # Optional
-      delivery:
-        deadLetterSink:
-          ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: <deadlettersink-name>
-          uri: <deadlettersink-uri>
     ```
-    Where:
-
-    - `<cluster-name>` is the name you gave your RabbitMQ cluster.
-    - `<deadlettersink-name>` is the name of the Service you want to use for
-    dead-lettered messages, for example, `dlq-service`.
-    - `<deadlettersink-uri>` is the URI you want to use for dead-lettered messages,
-    for example, `https://my.dlq.example.com`.
-
-    !!! note
-        Specifying a `delivery.deadLetterSink` is optional. You can specify it either
-        as an object reference using the `ref` field, or URI using the `uri` field.
+    Where `<cluster-name>` is the name you gave your RabbitMQ cluster in the step above.
 
 1. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>
     ```
-
     Where `<filename>` is the name of the file you created in the previous step.
 
 ## Additional information
