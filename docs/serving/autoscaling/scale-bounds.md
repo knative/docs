@@ -157,7 +157,7 @@ When the Revision is created, the larger of initial scale and lower bound is aut
           allow-zero-initial-scale: "true"
     ```
 
-### Scale Down Delay
+## Scale Down Delay
 
 Scale Down Delay specifies a time window which must pass at reduced concurrency
 before a scale-down decision is applied. This can be useful, for example, to
