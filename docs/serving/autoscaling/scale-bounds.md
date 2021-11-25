@@ -215,7 +215,7 @@ delay period. *only supported for KPA*
 
 ## Stable window
 
-The stable window defines minimal time that will pass between descisions to change the scale of a revision. [Panic mode](kpa-specific.md) can override this setting.
+The stable window defines minimal time that passes between decisions to change the scale of a revision. [Panic mode](kpa-specific.md) can override this setting.
 
 * **Global key:** `stable-window`
 * **Per-revision annotation key:** `autoscaling.knative.dev/window`
