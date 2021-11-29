@@ -66,7 +66,7 @@ so it may take longer on your cluster depending on image download speeds.
 ```
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml &&
 kubectl -n cert-manager wait --for=condition=Ready pods --all &&
-kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
+kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/download/v0.40.0/opentelemetry-operator.yaml
 ```
 
 
@@ -77,12 +77,12 @@ operator](https://github.com/jaegertracing/jaeger-operator#getting-started)
 
 ```
 kubectl create namespace observability &&
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml &&
 kubectl create -n observability \
-	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml \
-	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml \
-	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml \
-	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml \
-	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
+	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/service_account.yaml \
+	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role.yaml \
+	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role_binding.yaml \
+	-f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/operator.yaml
 ```
 
 
@@ -135,7 +135,8 @@ spec:
       logging:
       jaeger:
         endpoint: "simplest-collector.observability:14250"
-        insecure: true
+        tls:
+          insecure: true
 
     service:
       pipelines:
