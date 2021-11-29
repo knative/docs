@@ -135,34 +135,11 @@ supported **Retry-After** headers, and this is an attempt to provide a path
 for standardizing that support.  To begin the feature will be **opt-in**, but
 the final state will be **opt-out** as follows...
 
-<table>
-    <thead>
-        <tr>
-            <th>Feature Stage</th>
-            <th>Feature Flag</th>
-            <th>retryAfterMax Field Absent</th>
-            <th>retryAfterMax Field Present</th>
-        </tr>
-    </thead>
-    <tr>
-        <td>Alpha / Beta</td>
-        <td>Disabled</td>
-        <td>Accepted by Webhook Validation & Retry-After headers NOT enforced</td>
-        <td>Rejected by WebHook Validation</td>
-    </tr>
-    <tr>
-        <td>Alpha / Beta</td>
-        <td>Enabled</td>
-        <td>Accepted by Webhook Validation & Retry-After headers NOT enforced</td>
-        <td>Accepted by Webhook Validation & Retry-After headers enforced if max override > 0</td>
-    </tr>
-    <tr>
-        <td>Stable / GA</td>
-        <td>n/a</td>
-        <td>Retry-After headers enforced without max override</td>
-        <td>Retry-After headers enforced if max override > 0</td>
-    </tr>
-</table>
+| Feature Stage | Feature Flag | retryAfterMax Field Absent | retryAfterMax Field Present |
+| --- | --- | --- | --- |
+| Alpha / Beta | Disabled | Accepted by Webhook Validation & Retry-After headers NOT enforced | Rejected by WebHook Validation |
+| Alpha / Beta | Enabled | Accepted  by Webhook Validation & Retry-After headers NOT enforced | Accepted by Webhook Validation & Retry-After headers enforced if max override > 0 |
+| Stable / GA | n/a | Retry-After headers enforced without max override | Retry-After headers enforced if max override > 0 |
 
 The following example shows a Subscription that retries sending an event 3
 times, and respects **Retry-After** headers while imposing a max backoff of
