@@ -77,25 +77,6 @@ and clone the repo.
     mkdocs serve --dirtyreload
     ```
 
-  - **Local Preview including Blog**
-
-    1. First, install the necessary extensions:
-
-      ```
-      npm install -g postcss postcss-cli autoprefixer http-server
-      ```
-
-    1. After you have those npm packages installed, run the commnand:
-
-      ```
-      ./hack/build.sh serve
-      ```
-
-    !!! note
-        Unfortunately, there aren’t live previews for this version of the local preview.
-        <!-- What does this mean? -->
-
-
     When the preview has built, you'll see the following:
 
     ```{ .bash .no-copy }
