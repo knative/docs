@@ -164,7 +164,9 @@ before a scale-down decision is applied. This can be useful, for example, to
 keep containers around for a configurable duration to avoid a cold start
 penalty if new requests come in. Unlike setting a lower bound, the revision
 will eventually be scaled down if reduced concurrency is maintained for the
-delay period. !!! note "Only Supported for the default KPA autoscaler class"
+delay period. 
+!!! note 
+    Only supported for the default KPA autoscaler class.
 
 * **Global key:** `scale-down-delay`
 * **Per-revision annotation key:** `autoscaling.knative.dev/scaleDownDelay`
