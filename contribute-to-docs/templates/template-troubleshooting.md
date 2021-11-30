@@ -15,10 +15,12 @@ This can be omitted if the cause of the error is unknown.
 
 ## Example Troubleshooting Table
 
-##  Troubleshooting
+```
+##  Troubleshooting item
 
 | **Error Description** |
 |----------|------------|
 | Symptom  | During the event something breaks. |
 | Cause    | The thing is broken. |
 | Solution | To solve this issue, do the following:<br><br>1. This.<br>2. That. |
+```

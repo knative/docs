@@ -1,6 +1,6 @@
 # Creating blog posts
 
-The Knative blog is owned by the [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience).
+The Knative blog is owned by the [DUX working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience).
 
 This section covers documentation, processes, and roles for the [Knative blog](https://knative.dev/blog/).
 

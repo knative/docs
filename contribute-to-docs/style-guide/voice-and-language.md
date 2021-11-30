@@ -14,7 +14,8 @@
 |The YAML file specifies the replica count. | The replica count is specified in the YAML file.
 
 ## Use simple and direct language
-> Use simple and direct language. Avoid using unnecessary words, such as
+
+Use simple and direct language. Avoid using unnecessary words, such as
 "please".
 
 |:white_check_mark: Correct                          |:no_entry: Incorrect
@@ -33,7 +34,7 @@
 
 ## Avoid jargon, idioms, and Latin
 
-> Some readers speak English as a second language. Avoid jargon, idioms, and Latin to help
+Some readers speak English as a second language. Avoid jargon, idioms, and Latin to help
 make their understanding easier.
 
 |:white_check_mark: Correct                    |:no_entry: Incorrect
@@ -51,7 +52,8 @@ about a feature in development, add a boilerplate under the front matter that
 identifies the information accordingly.
 
 ## Avoid statements that will soon be out of date
-> Avoid using wording that becomes outdated quickly like "currently" and
+
+Avoid using wording that becomes outdated quickly like "currently" and
 "new". A feature that is new today is not new for long.
 
 |:white_check_mark: Correct                                  |:no_entry: Incorrect
