@@ -88,7 +88,7 @@ nav:
           - Using a custom TLS certificate for DomainMapping: serving/services/byo-certificate.md
           # TODO: Add security section to docs?
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
-          - HTTPS redirection: serving/services/http-option.md
+          - HTTPS redirection: serving/services/http-protocol.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
         - Tag resolution: serving/tag-resolution.md

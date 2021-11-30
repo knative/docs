@@ -136,7 +136,7 @@ For example, if `containerConcurrency` is set to 10, and the target utilization 
 Requests numbered 7 to 10 will still be sent to the existing replicas, but this allows for additional replicas to be started in anticipation of being needed when the `containerConcurrency` limit is reached.
 
 * **Global key:** `container-concurrency-target-percentage`
-* **Per-revision annotation key:** `autoscaling.knative.dev/targetUtilizationPercentage`
+* **Per-revision annotation key:** `autoscaling.knative.dev/target-utilization-percentage`
 * **Possible values:** float
 * **Default:** `70`
 
@@ -153,7 +153,7 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/targetUtilizationPercentage: "80"
+            autoscaling.knative.dev/target-utilization-percentage: "80"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go

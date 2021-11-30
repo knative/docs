@@ -72,7 +72,7 @@ plugins:
       developer/serving/services/configure-requests-limits-services.md: serving/services/configure-requests-limits-services.md
       developer/serving/services/creating-services.md: serving/services/creating-services.md
       developer/serving/services/custom-domains.md: serving/services/custom-domains.md
-      developer/serving/services/http-option.md: serving/services/http-option.md
+      developer/serving/services/http-option.md: serving/services/http-protocol.md
       developer/serving/services/ingress-class.md: serving/services/ingress-class.md
       developer/serving/services/private-services.md: serving/services/private-services.md
       developer/serving/services/README.md: serving/services/README.md
@@ -130,3 +130,4 @@ plugins:
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
       serving/using-subroutes.md: serving/traffic-management.md
+      serving/services/http-option.md: serving/services/http-protocol.md

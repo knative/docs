@@ -322,7 +322,7 @@ be able to handle HTTPS traffic.
 
 ### Disable Auto TLS per service or route
 
-If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disableAutoTLS: true`.
+If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disable-auto-tls: true`.
 
 Using the previous `autoscale-go` example:
 
@@ -333,7 +333,7 @@ Using the previous `autoscale-go` example:
  metadata:
    annotations:
     ...
-     networking.knative.dev/disableAutoTLS: "true"
+     networking.knative.dev/disable-auto-tls: "true"
     ...
 ```
 2. The service URL should now be **http**, indicating that AutoTLS is disabled:
