@@ -63,19 +63,18 @@ and clone the repo.
 1. In your terminal, go to the directory of the cloned repo.
 
 1. Start the preview by running one of the following commands:
+    - **Local Preview**
 
-  - **Local Preview**
+      ```
+      mkdocs serve
+      ```
 
-    ```
-    mkdocs serve
-    ```
-
-  - **Local Preview with Dirty Reload**
+    - **Local Preview with Dirty Reload**
     If you’re only changing a single page in the `/docs/` folder that is not the homepage or `nav.yml`, adding the flag `--dirtyreload` makes the site rebuild super crazy insta-fast.
 
-    ```
-    mkdocs serve --dirtyreload
-    ```
+      ```
+      mkdocs serve --dirtyreload
+      ```
 
     When the preview has built, you'll see the following:
 
