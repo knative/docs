@@ -34,7 +34,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "concurrency"
     ```
 
-=== Per-revision rps configuration
+=== "Per-revision rps configuration"
 
     ```yaml
     apiVersion: serving.knative.dev/v1
