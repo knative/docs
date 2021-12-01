@@ -81,7 +81,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "memory"
     ```
 
-=== Per-revision custom metric configuration
+=== "Per-revision custom metric configuration"
 
     You can create an HPA to scale the revision by a metric that you specify.
     The HPA will be configured to use the **average value** of your metric over all the Pods of the revision.
