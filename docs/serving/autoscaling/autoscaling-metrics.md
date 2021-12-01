@@ -49,7 +49,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "rps"
     ```
 
-=== Per-revision cpu configuration
+=== "Per-revision cpu configuration"
 
     ```yaml
     apiVersion: serving.knative.dev/v1
