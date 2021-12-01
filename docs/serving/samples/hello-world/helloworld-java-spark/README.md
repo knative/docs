@@ -11,7 +11,7 @@ You will need:
 - A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/serving/install-serving-with-yaml.md).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
-- [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+- [OpenJDK 11 or later](https://adoptium.net/?variant=openjdk11&jvmVariant=hotspot).
 
 ## Develop
 
