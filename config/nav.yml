@@ -64,6 +64,17 @@ nav:
 ###############################################################################
     - Serving:
       - Knative Serving overview: serving/README.md
+      - Autoscaling:
+        - About autoscaling: serving/autoscaling/README.md
+        - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
+        - Configuring metrics: serving/autoscaling/autoscaling-metrics.md
+        - Configuring targets: serving/autoscaling/autoscaling-targets.md
+        - Configuring scale to zero: serving/autoscaling/scale-to-zero.md
+        - Configuring concurrency: serving/autoscaling/concurrency.md
+        - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
+        - Configuring scale bounds: serving/autoscaling/scale-bounds.md
+        - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
+        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
       # Serving - developer docs
       - Developer Topics:
         - Services:
@@ -77,7 +88,7 @@ nav:
           - Using a custom TLS certificate for DomainMapping: serving/services/byo-certificate.md
           # TODO: Add security section to docs?
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
-          - HTTPS redirection: serving/services/http-option.md
+          - HTTPS redirection: serving/services/http-protocol.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
         - Tag resolution: serving/tag-resolution.md
@@ -87,17 +98,6 @@ nav:
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
           - Configuring Activator capacity: serving/load-balancing/activator-capacity.md
         - Revision garbage collection: serving/revision-gc.md
-        - Autoscaling:
-          - About autoscaling: serving/autoscaling/README.md
-          - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
-          - Configuring metrics: serving/autoscaling/autoscaling-metrics.md
-          - Configuring targets: serving/autoscaling/autoscaling-targets.md
-          - Configuring scale to zero: serving/autoscaling/scale-to-zero.md
-          - Configuring concurrency: serving/autoscaling/concurrency.md
-          - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
-          - Configuring scale bounds: serving/autoscaling/scale-bounds.md
-          - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
-          - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
       # Serving - admin docs
       - Administrator Topics:
         - Kubernetes services: serving/knative-kubernetes-services.md

@@ -9,12 +9,12 @@ Target burst capacity can be configured using a combination of the following par
 
 - Setting the targeted concurrency limits for the revision. See [concurrency](../autoscaling/concurrency.md).
 - Setting the target utilization parameters. See [target utilization](../autoscaling/concurrency.md#target-utilization).
-- Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](#setting-the-target-burst-capacity).
+- Setting the target burst capacity. You can configure target burst capacity using the `target-burst-capacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](#setting-the-target-burst-capacity).
 
 ## Setting the target burst capacity
 
 - **Global key:** `target-burst-capacity`
-- **Per-revision annotation key:** `autoscaling.knative.dev/targetBurstCapacity`
+- **Per-revision annotation key:** `autoscaling.knative.dev/target-burst-capacity`
 - **Possible values:** float (`0` means the Activator is only in path when scaled to 0, `-1` means the Activator is always in path)
 - **Default:** `200`
 
@@ -32,7 +32,7 @@ Target burst capacity can be configured using a combination of the following par
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/targetBurstCapacity: "200"
+            autoscaling.knative.dev/target-burst-capacity: "200"
     ```
 
 === "Global (ConfigMap)"
@@ -61,11 +61,11 @@ Target burst capacity can be configured using a combination of the following par
 
 
 
-- If `autoscaling.knative.dev/targetBurstCapacity` is set to `0`, the Activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
+- If `autoscaling.knative.dev/target-burst-capacity` is set to `0`, the Activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
 
 !!! note
     Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress gateway, see the [Serving API](../../reference/api/serving-api.md) documentation.
 
-- If `autoscaling.knative.dev/targetBurstCapacity` is set to `-1`, the Activator is always in the request path, regardless of the revision size.
+- If `autoscaling.knative.dev/target-burst-capacity` is set to `-1`, the Activator is always in the request path, regardless of the revision size.
 
-- If `autoscaling.knative.dev/targetBurstCapacity` is set to another integer, the Activator may be in the path, depending on the revision scale and load.
+- If `autoscaling.knative.dev/target-burst-capacity` is set to another integer, the Activator may be in the path, depending on the revision scale and load.

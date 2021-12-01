@@ -189,10 +189,10 @@ autoscaler classes built into Knative:
            autoscaling.knative.dev/metric: concurrency
            # Target 10 requests in-flight per pod.
            autoscaling.knative.dev/target: "10"
-           # Disable scale to zero with a minScale of 1.
-           autoscaling.knative.dev/minScale: "1"
+           # Disable scale to zero with a min scale of 1.
+           autoscaling.knative.dev/min-scale: "1"
            # Limit scaling to 100 pods.
-           autoscaling.knative.dev/maxScale: "100"
+           autoscaling.knative.dev/max-scale: "100"
        spec:
          containers:
            - image: gcr.io/knative-samples/autoscale-go:0.1

@@ -34,66 +34,123 @@ Write a sentence or two to describe the content in this section.
 Write a sentence or two to describe the content in this section.
 ```
 
-## Conceptual Content Samples
+## Conceptual content samples
 
 This section provides common content types that appear in conceptual topics.
 Copy and paste the markdown to use it in your topic.
 
-### Table
+### Tables
 
-Introduce the table with a sentence. For example, “The following table lists which operations must be made available to a developer accessing a Knative Route using a minimal profile.”
+Introduce the table with a sentence. For example, “The following table lists which operations must be
+made available to a developer accessing a Knative Route using a minimal profile.”
 
-#### Markdown Table Template
 
+#### Markdown table template
+
+```
 |Header 1|Header 2|
 |--------|--------|
 |Data1   |Data2   |
 |Data3   |Data4   |
+```
 
-### Ordered List
+### Ordered lists
 
 Write a sentence or two to introduce the content of the list.
-For example, “If you want to fix or add content to a past release, you can find the source files in the following folders.”.
-Optionally, include bold lead-ins before each list item.
+For example, “If you want to fix or add content to a past release, you can find the source files in
+the following folders.”. Optionally, include bold lead-ins before each list item.
 
-#### Markdown Ordered List Templates
+**NOTE:** For the formatting to render correctly, you must add an empty line
+between the list and the preceding sentence.
+
+#### Markdown ordered list template
+
+```
+Introductory sentence:
 
 1. Item 1
 1. Item 2
 1. Item 3
+```
+
+```
+Introductory sentence:
 
 1. **Lead-in description:** Item 1
 1. **Lead-in description:** Item 2
 1. **Lead-in description:** Item 3
+```
 
-### Unordered List
+#### Nested ordered lists template
+
+For formatting to render correctly, nested items must be indented by four spaces
+in relation to their parent item.
+
+```
+Introductory sentence:
+
+1. Item 1
+
+    1. Item 1a
+
+1. Item 2
+```
+
+### Unordered Lists
 
 Write a sentence or two to introduce the content of the list.
-For example, “Your own path to becoming a Knative contributor can begin in any of the following components:”.
-Optionally, include bold lead-ins before each list item.
+For example, “Your own path to becoming a Knative contributor can begin in any of the following
+components:”. Optionally, include bold lead-ins before each list item.
 
-#### Markdown Unordered List Template
+**NOTE:** For the formatting to render correctly, you must add an empty line
+between the list and the preceding sentence.
+
+#### Markdown unordered list template
+
+```
+Introductory sentence:
 
 * List item
 * List item
 * List item
+```
+
+```
+Introductory sentence:
 
 * **Lead-in**: List item
 * **Lead-in**: List item
 * **Lead-in**: List item
+```
 
+#### Nested unordered list template
 
-### Note
+Nested items must be indented by four spaces in relation to their parent item.
+
+```
+Introductory sentence:
+
+* List item
+
+    * List sub-item
+
+* List item
+```
+
+### Notes
 
 Ensure the text beneath the **note** is indented as much as **note** is.
 
+```
 !!! note
     This is a note.
+```
 
-
-### Warning
+### Warnings
 
 If the note regards an issue that could lead to data loss, the note should be a warning.
 
+```
 !!! warning
     This is a warning.
+```

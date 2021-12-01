@@ -37,7 +37,7 @@ type Protocol struct {
 
 	// OptionsHandlerFn handles the OPTIONS method requests and is intended to
 	// implement the abuse protection spec:
-	// https://github.com/cloudevents/spec/blob/v1.0.1/http-webhook.md#4-abuse-protection
+	// https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#4-abuse-protection
 	OptionsHandlerFn http.HandlerFunc
 	WebhookConfig    *WebhookConfig
 

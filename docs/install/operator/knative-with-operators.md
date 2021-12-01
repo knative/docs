@@ -288,7 +288,7 @@ Knative Serving with different ingresses:
         spec:
           config:
             network:
-              ingress.class: "ambassador.ingress.networking.knative.dev"
+              ingress-class: "ambassador.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
@@ -327,7 +327,7 @@ Knative Serving with different ingresses:
               enabled: true
           config:
             network:
-              ingress.class: "contour.ingress.networking.knative.dev"
+              ingress-class: "contour.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
@@ -361,7 +361,7 @@ Knative Serving with different ingresses:
               enabled: true
           config:
             network:
-              ingress.class: "kourier.ingress.networking.knative.dev"
+              ingress-class: "kourier.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
