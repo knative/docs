@@ -30,9 +30,9 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
     spec:
       template:
         metadata:
-      annotations:
-        autoscaling.knative.dev/metric: "concurrency"
-```
+          annotations:
+            autoscaling.knative.dev/metric: "concurrency"
+    ```
 
 === Per-revision rps configuration
 
