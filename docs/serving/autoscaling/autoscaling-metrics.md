@@ -82,22 +82,25 @@ spec:
     ```
 
 === Per-revision custom metric configuration
-Assuming that you have a custom metric named `metricName` you can create an HPA to autoscale the revision by that metric.
-The HPA will be configured to use the **average value** of that metric over all the pods of the revision.
 
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+    You can create an HPA to scale the revision by a metric that you specify.
+    The HPA will be configured to use the **average value** of your metric over all the Pods of the revision.
+
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
-        autoscaling.knative.dev/metric: "metricName"
-```
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
+            autoscaling.knative.dev/metric: "<metric-name>"
+    ```
+
+    Where `<metric-name>` is your custom metric.
 
 
 
