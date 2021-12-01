@@ -36,18 +36,18 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
 
 === Per-revision rps configuration
 
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/metric: "rps"
-```
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/metric: "rps"
+    ```
 
 === Per-revision cpu configuration
 
