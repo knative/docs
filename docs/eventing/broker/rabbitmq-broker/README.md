@@ -46,6 +46,9 @@ To use the RabbitMQ Broker, you must have the following installed:
         kind: RabbitmqCluster
         metadata:
           name: <cluster-name>
+          annotations:
+            # A single RabbitMQ cluster per Knative Eventing installation
+            rabbitmq.com/topology-allowed-namespaces: "*"
         ```
         Where `<cluster-name>` is the name you want for your RabbitMQ cluster,
         for example, `rabbitmq`.
