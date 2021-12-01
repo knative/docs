@@ -67,19 +67,19 @@ spec:
 
 === Per-revision memory configuration
 
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
     metadata:
-      annotations:
-        autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
-        autoscaling.knative.dev/metric: "memory"
-```
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
+            autoscaling.knative.dev/metric: "memory"
+    ```
 
 === Per-revision custom metric configuration
 Assuming that you have a custom metric named `metricName` you can create an HPA to autoscale the revision by that metric.
