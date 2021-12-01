@@ -19,7 +19,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
 * **Default:** `"concurrency"`
 
 
-=== Per-revision concurrency configuration
+=== "Per-revision concurrency configuration"
 
     ```yaml
     apiVersion: serving.knative.dev/v1
