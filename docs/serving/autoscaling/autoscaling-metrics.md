@@ -65,7 +65,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "cpu"
     ```
 
-=== Per-revision memory configuration
+=== "Per-revision memory configuration"
 
     ```yaml
     apiVersion: serving.knative.dev/v1
