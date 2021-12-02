@@ -224,6 +224,40 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
 
 _NOTE: `ca.crt` can be omitted to fallback to use system's root CA set._
 
+## Consumer Offsets Commit Interval
+
+Kafka consumers keep track of the last successfully sent events by committing offsets.
+
+For performance reasons, it's not recommended committing offsets every time an event is successfully sent to a
+subscriber.
+
+Knative Kafka Broker commits the offset every `auto.commit.interval.ms` milliseconds.
+
+`auto.commit.interval.ms` can be changed by changing the `config-kafka-broker-data-plane` `ConfigMap`
+in the `knative-eventing` namespace by changing the parameter `auto.commit.interval.ms` as follows:
+
+```yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kafka-broker-data-plane
+  namespace: knative-eventing
+data:
+  # Some configurations omitted ...
+  config-kafka-broker-consumer.properties: |
+    # Some configurations omitted ...
+
+    # Commit the offset every 5000 millisecods (5 seconds)
+    auto.commit.interval.ms=5000
+```
+
+!!! note
+    While Knative Kafka Broker guarantees at least once delivery, hence your applications may
+    receive duplicate events, the higher the commit interval is the higher is the probability
+    of receiving duplicate events since when a Consumer restarts, it starts again from last
+    committed offsets.
+
 ## Kafka Producer and Consumer configurations
 
 Knative exposes all available Kafka producer and consumer configurations that can be modified to suit your workloads.
