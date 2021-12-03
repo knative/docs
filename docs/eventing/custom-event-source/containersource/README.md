@@ -11,15 +11,7 @@ container image, and a ContainerSource that uses your image URI.
 
 ## Before you begin
 
-Before you can create a ContainerSource object:
-
-- You must have [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md)
-installed on your cluster.
-- If you want to use the following example heartbeats event source, you must also:
-    - Install [ko](https://github.com/google/ko)
-    - Set `KO_DOCKER_REPO`. For example, `gcr.io/[gcloud-project]` or `docker.io/<username>`
-    - Authenticate with your `KO_DOCKER_REPO`
-    - Install [`docker`](https://docs.docker.com/install/)
+Before you can create a ContainerSource object, you must have [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md) installed on your cluster.
 
 ## Develop, build and publish a container image
 
@@ -30,17 +22,26 @@ You can develop a container image by using any language, and can build and publi
 
 ## Create a ContainerSource object
 
-1. Build an image of your event source and publish it to your image repository.
-Your image must read the environment variable `K_SINK` and post messages to the
-URL specified in `K_SINK`. If you do not already have an image, you can use
-the following example heartbeats event source by running the commands:
+1. Build an image of your event source and publish it to your image repository. Your image must read the environment variable `K_SINK` and post messages to the URL specified in `K_SINK`.
 
-    ```bash
-    git clone -b "{{ branch }}" https://github.com/knative/eventing.git
-    ```
+    You can use the following YAML to deploy a demo `heartbeats` event source:
 
-    ```bash
-    ko publish ko://knative.dev/eventing/cmd/heartbeats
+    ```yaml
+    apiVersion: sources.knative.dev/v1
+    kind: ContainerSource
+    metadata:
+      name: heartbeat-source
+    spec:
+      template:
+        spec:
+          containers:
+            - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats:latest
+              name: heartbeats
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
     ```
 
 1. Create a namespace for your ContainerSource by running the command:
@@ -49,11 +50,9 @@ the following example heartbeats event source by running the commands:
     kubectl create namespace <namespace>
     ```
 
-    Where `<namespace>` is the namespace that you want your ContainerSource to use.
-    For example, `containersource-example`.
+    Where `<namespace>` is the namespace that you want your ContainerSource to use. For example, `heartbeat-source`.
 
-1. Create a sink. If you do not already have a sink, you can use the following Knative
-Service, which dumps incoming messages into its log:
+1. Create a sink. If you do not already have a sink, you can use the following Knative Service, which dumps incoming messages into its log:
 
     !!! note
         To create a Knative service you must have Knative Serving installed on your cluster.
