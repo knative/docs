@@ -205,9 +205,10 @@ After the container image is built, push it to an external registry that your Kn
 	-d '{"user" : {"email" : "mike.strong@email.com",  "firstName" : "mike",  "lastName" : "strong"}}'
 	```
 
-	This will go via number of events being exchanged over the Knative broker and invoking functions defined in the workflow. It also uses Swagger Petstore REST api so in case of successful user registration it will be visible in Swagger Petstore as new user.
+	This will go by number of events being exchanged over the Knative broker and invoking functions defined in the workflow. It also uses Swagger Petstore REST API, so in case of successful user registration it will be visible in Swagger Petstore as new user.
 
-	**NOTE** That Swagger Petstore does not have reliable storage thus it might require few get requests to be issued to see it there.
+	!!! note
+	    That Swagger Petstore does not have reliable storage thus it might require few get requests to be issued to see it there.
 
 #### Clean up
 
@@ -282,7 +283,7 @@ gcloud run deploy user-registration-gcp-cloudrun --platform=managed --image=gcr.
 
 **NOTE**: `CHANGE_ME` will be replaced with the Google Cloud project id configured in `src/main/resources/application.properties` during the build.
 
-This will provision all required components such as
+This provisions all required components such as:
 
 - PubSub Topics
 - Eventarc Triggers
@@ -290,27 +291,25 @@ This will provision all required components such as
 
 #### Run the service on Google Cloud Run
 
-Once service is deployed you can publish first message (for example using Google Console) to the `io.automatiko.examples.userRegistration` topic with following content.
+After the service is deployed you can publish first message. For example, by using Google Console with the following `io.automatiko.examples.userRegistration` topic:
 
 
 ```
 {"user" : {"email" : "mike.strong@email.com",  "firstName" : "mike",  "lastName" : "strong"}}
 ```
 
-This will go via number of events being exchanged over the Google Cloud PubSub topics and invoking functions defined in the workflow.
-
+This goes by the number of events being exchanged over the Google Cloud PubSub topics and invoking functions defined in the workflow.
 
 ## Summing up
 
-Workflow as a function flow implements common scenario for serverless usage where
-individual functions build up a complete business case. It allows to use workflow to design complete business logic and then slice it into functions that are composed into a function flow based on the actual logic defined by the workflow definition. Yet each function can be invoked at anytime making the workflow to act as a blueprint that can start at any place and continue according to defined flow of activities aka functions.
+Workflow as a function flow implements common scenario for serverless usage where individual functions build up a complete business case. It allows you to use a workflow to design complete business logic and then slice it into functions that are composed into a function flow, based on the actual logic defined by the workflow definition. Yet each function can be invoked at anytime making the workflow to act as a blueprint that can start at any place and continue according to defined flow of functions.
 
-Workflow as a function flow takes advantage of Knative Eventing as the backbone of the communication to enable
+Workflow as a function flow takes advantage of Knative Eventing as the backbone of the communication to enable:
 
-- scalability as each function is invoked via Knative broker
-- all data exchange is done with Cloud Events
-- flexibility at which point in the workflow definition instance should be started
-- use "listen to yourself" principle to avoid long running actions impacting overall performance
+- Scalability as each function is invoked by using the Knative broker.
+- All data exchange is done with Cloud Events.
+- Flexibility with regard to which point in the workflow definition instance should be started.
+- Use "listen to yourself" principle to avoid long running actions impacting overall performance.
 
 At the same time it is simple in deployment as it relies on single service and automatically defined triggers to integrate with Knative broker.
 
