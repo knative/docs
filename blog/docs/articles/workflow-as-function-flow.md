@@ -127,87 +127,87 @@ After the container image is built, push it to an external registry that your Kn
 
 ### Deploy to Knative cluster
 
-Create a Knative eventing broker, for example by using following command:
+1. Create a Knative eventing broker, for example by using following command:
 
-```
-kubectl apply -f - << EOF
-apiVersion: eventing.knative.dev/v1
-kind: broker
-metadata:
- name: default
- namespace: knative-eventing
-EOF
-```
+	```
+	kubectl apply -f - << EOF
+	apiVersion: eventing.knative.dev/v1
+	kind: broker
+	metadata:
+	 name: default
+	 namespace: knative-eventing
+	EOF
+	```
 
-Complete deployment file is generated as part of the build and can be found in `target/functions/user-registration-{version}.yaml`. To deploy it issue following command:
+	Complete deployment file is generated as part of the build and can be found in `target/functions/user-registration-{version}.yaml`. To deploy it issue following command:
 
-```
-kubectl apply -f target/functions/user-registration-{version}.yaml
-```
+	```
+	kubectl apply -f target/functions/user-registration-{version}.yaml
+	```
 
-This will provision complete service and all the Knative Eventing triggers. In addition it will also create sink binding to make the service an event source to be able to publish events from function execution.
+	This will provision complete service and all the Knative Eventing triggers. In addition it will also create sink binding to make the service an event source to be able to publish events from function execution.
 
-You can also deploy `cloudevents-player` that will display all events flowing through the broker with following commands
+2. Optionally deploy `cloudevents-player` that will display all events flowing through the broker with following commands
 
 
-```
-kubectl apply -n knative-eventing -f - << EOF
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: cloudevents-player
-spec:
-  template:
-    metadata:
-      annotations:
-        autoscaling.knative.dev/minScale: "1"
-    spec:
-      containers:
-        - image: quay.io/ruben/cloudevents-player:latest
-          env:
-            - name: PLAYER_MODE
-              value: KNATIVE
-            - name: PLAYER_BROKER
-              value: default
----
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: cloudevents-player
-  annotations:
-    knative-eventing-injection: enabled
-spec:
-  broker: default
-  subscriber:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: cloudevents-player
-EOF
-```
+	```
+	kubectl apply -n knative-eventing -f - << EOF
+	apiVersion: serving.knative.dev/v1
+	kind: Service
+	metadata:
+	  name: cloudevents-player
+	spec:
+	  template:
+	    metadata:
+	      annotations:
+	        autoscaling.knative.dev/minScale: "1"
+	    spec:
+	      containers:
+	        - image: quay.io/ruben/cloudevents-player:latest
+	          env:
+	            - name: PLAYER_MODE
+	              value: KNATIVE
+	            - name: PLAYER_BROKER
+	              value: default
+	---
+	apiVersion: eventing.knative.dev/v1
+	kind: Trigger
+	metadata:
+	  name: cloudevents-player
+	  annotations:
+	    knative-eventing-injection: enabled
+	spec:
+	  broker: default
+	  subscriber:
+	    ref:
+	      apiVersion: serving.knative.dev/v1
+	      kind: Service
+	      name: cloudevents-player
+	EOF
+	```
 
-Get the url of the default broker use following command
+3. Get the url of the default broker use following command
 
-```
-kubectl get broker default
-```
+	```
+	kubectl get broker default
+	```
 
-Send request to the broker to start user registration
+4. Send request to the broker to start user registration
 
-```
-curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knative-eventing/default" \
--X POST \
--H "Ce-Id: 1234" \
--H "Ce-Specversion: 1.0" \
--H "Ce-Type: io.automatiko.examples.userRegistration" \
--H "Ce-Source: curl" \
--H "Content-Type: application/json" \
--d '{"user" : {"email" : "mike.strong@email.com",  "firstName" : "mike",  "lastName" : "strong"}}'
-```
+	```
+	curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knative-eventing/default" \
+	-X POST \
+	-H "Ce-Id: 1234" \
+	-H "Ce-Specversion: 1.0" \
+	-H "Ce-Type: io.automatiko.examples.userRegistration" \
+	-H "Ce-Source: curl" \
+	-H "Content-Type: application/json" \
+	-d '{"user" : {"email" : "mike.strong@email.com",  "firstName" : "mike",  "lastName" : "strong"}}'
+	```
 
-This will go via number of events being exchanged over the Knative broker and invoking functions defined in the workflow. It also uses Swagger Petstore REST api so in case of successful user registration it will be visible in Swagger Petstore as new user.
+	This will go via number of events being exchanged over the Knative broker and invoking functions defined in the workflow. It also uses Swagger Petstore REST api so in case of successful user registration it will be visible in Swagger Petstore as new user.
 
-**NOTE** That Swagger Petstore does not have reliable storage thus it might require few get requests to be issued to see it there.
+	**NOTE** That Swagger Petstore does not have reliable storage thus it might require few get requests to be issued to see it there.
 
 #### Clean up
 
@@ -224,29 +224,29 @@ To be able to use the same service for Google Cloud Run there are two additional
 
 1. Add dependency to `pom.xml`
 
-````
-<dependency>
-  <groupId>io.automatiko.extras</groupId>
-  <artifactId>automatiko-gcp-pubsub-sink</artifactId>
-</dependency>
-````
+	````
+	<dependency>
+	  <groupId>io.automatiko.extras</groupId>
+	  <artifactId>automatiko-gcp-pubsub-sink</artifactId>
+	</dependency>
+	````
 
 2. Add two properties to `src/main/resources/application.properties` file
 
-````
-quarkus.automatiko.target-deployment=gcp-pubsub
-quarkus.google.cloud.project-id=CHANGE_ME
-````
+	````
+	quarkus.automatiko.target-deployment=gcp-pubsub
+	quarkus.google.cloud.project-id=CHANGE_ME
+	````
 
-**NOTE**: Remember to change `CHANGE_ME` to actual project id of your Google Cloud project
+	**NOTE**: Remember to change `CHANGE_ME` to actual project id of your Google Cloud project
 
-Next build the application with following maven command
+3. Build the application with following maven command
 
-````
-mvnw clean package -Pcontainer-native
-````
+	````
+	mvnw clean package -Pcontainer-native
+	````
 
-This will build a container with the service that is using native executable built with GraalVM so the build process will take a while but it will be really light and fast at execution.
+	This will build a container with the service that is using native executable built with GraalVM so the build process will take a while but it will be really light and fast at execution.
 
 ### Push built container to Google Cloud Container registry
 
