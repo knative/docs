@@ -9,22 +9,21 @@ type: "blog"
 
 Various organisations started to look into serverless as a way of building business logic that can take advantage of the cloud. As it might look at first, it's not an easy task to rely strictly on functions that represent independent logic pieces. There is a risk of losing the big picture and by that not having full control over day-to-day operations.
 
-Knative comes with a great foundation to built upon when thinking about serverless, functions
-and events. Especially the Knative Eventing shines thanks to its integration with Cloud Events
+Knative provides a great foundation to build upon when thinking about serverless, functions
+and events. Knative Eventing especially shines thanks to its integration with Cloud Events
 and various broker implementations that provide different characteristics from event delivery standpoint.
 
-At the same time, workflows (in various formats) have been seen as a good way to express business logic that allows to understand the big picture. Combining both (workflows and Knative Eventing) is the main topic of this article.
+At the same time, workflows in various formats have been seen as a good way to express business logic that enables understanding of the big picture. Combining both workflows and Knative Eventing is the main topic of this article.
 
+## Worfklow as a function flow
 
-## Worfklow as a Function Flow
+Workflows date from the Service Oriented Architecture (SOA) times, when standards such as BPEL and then BPMN were introduced. Various vendors started to build platforms that were built around the workflow concepts, often called Process Management Suites or Business Process Management (BPM).
 
-Workflows have been around for quite some time. It dates from the SOA (Service Oriented Architecture) times where standards such as BPEL and then BPMN were introduced. Various vendors started to build platforms that were built around the workflow concepts many times called Process Management Suites or Business Process Management (in short BPM).
+These platforms are often big, centralised servers that aim to orchestrate all other systems in a standardised way. This turned out to be too complex to bring value, and in many cases is referred as traditional BPM, which is already outdated, although these are still in use today.
 
-Most of the cases, these platforms are big, centralised servers that aim at orchestrating all other systems in a standardised way. That turned out to be too complex to bring value and in many cases is referred as traditional BPM which is already a thing of the past (even though still in use).
+Newer approaches make workflows completely distributed, so that each activity of the workflow runs as separate container.
 
-Newer approaches are moving workflows to a different level, for example to make workflows completely distributed to the extend that each activity of the workflow runs as separate container.
-
-This bring us to the concept of Workflow as a Function Flow. The main idea behind it is to allow users to model the business logic as complete as possible - meaning to define the business use case from the beginning till the end but take advantage of capabilities of the serverless platforms like Knative. That means that at runtime the workflow logic will be executed as set of functions that are
+This bring us to the concept of workflow as a function flow, which allows users to model the business logic as completely as possible. Users can define the business use case from the beginning until the end, and take advantage of capabilities of serverless platforms like Knative. That means that at runtime the workflow logic will be executed as a set of functions that are:
 
 - **self contained** - focus on the “one” aspect of the business logic
 - **independent** - they rely on data given to execute logic defined and return outputs regardless if they were dealing with same instance or a different one
@@ -43,64 +42,64 @@ Automatiko supports following types of workflows
 
 ### Slicing workflow into functions
 
-Functions are built based on executing activities - activities that can change workflow state and data. Such activities will then represent a particular fragment of business logic that will be encapsulated as function. Executing activities can
+Functions are built based on executing activities that can change workflow state and data. Such activities will then represent a particular fragment of business logic that will be encapsulated as function.
+
+Executing activities can:
 
 - be single activity
 - include other activities to control logic
-- be combined with other (executing) activities to form so called continuation
+- be combined with other executing activities to form continuation
 
 Functions are named automatically based on workflow or activity names or explicitly by user using custom attributes.
 
-Each function will then become a dedicated entry point that will
+Each function then becomes a dedicated entry point, which:
 
-- have input that is built based on workflow data
+- has input that is built based on workflow data
 - can produce one or more outputs
-- will have Knative trigger associated with the function
+- has a Knative trigger associated with the function
 
 ![Slice workflow into functions](/blog/articles/images/workflow-function-flow-function-slice.png)
 *Slice workflow into functions*
 
 ### Inputs and outputs as Cloud Events
 
-Once the functions are derived from the workflow, they will always have one event as input
-and can produce one or more events as outputs. The logic defined in the workflow and actual data context of a particular workflow instance will drive the number of events produced. Regardless of the event being an input or output it is
+After the functions are derived from the workflow, they will always have one event as input, and can produce one or more events as outputs. The logic defined in the workflow and actual data context of a particular workflow instance drives the number of events produced.
 
-- built based on data objects defined in the workflow
-- filed automatically based on execution context
-- uses **type** attribute as link to function
-- uses **source** attribute as identifier of the function being executed including unique identifier of workflow instance for correlation purposes
+Regardless of whether the event is an input or output:
+
+- it is built based on data objects defined in the workflow
+- it is filed automatically based on execution context
+- it uses **type** attribute as link to function
+- it uses **source** attribute as identifier of the function being executed including unique identifier of workflow instance for correlation purposes
 
 ![Inputs and outputs as events](/blog/articles/images/workflow-function-flow-function-io.png)
 *Inputs and outputs as events*
 
-Functions always exchange events through Knative Eventing broker. They never call each other directly to make sure they are completely decoupled and event driven. This will allow for greater scalability as each function call can be handled by another replica of the service.
+Functions always exchange events through the Knative Eventing broker. They never call each other directly, which ensures that they are completely decoupled and event driven. This allows for greater scalability, as each function call can be handled by another replica of the service.
 
 ### Deployment
 
-First of all, the heavy work that requires parsing workflow definition, slicing that into
-functions and events and packaging into deployable unit is done at build time.
+The heavy work that requires parsing workflow definition, slicing that into functions and events, and packaging this in to a deployable unit, is done at build time.
 
-Automatiko project that implements this concept is a java based implementation that takes advantage of [GraalVM](https://www.graalvm.org) to be able to compile into native executable that brings small memory footprint at runtime and lightning fast startup time.
+The Automatiko project implements this concept. It is a java based implementation that takes advantage of [GraalVM](https://www.graalvm.org) to compile into a native executable, which has a small memory footprint at runtime and lightning fast startup time.
 
-With that said, workflow as a function flow with Automatiko compiles into single service and by that into a single container image, that includes all the functions. Each and every function can be invoked at any time on any replica of the service.
+Workflow as a function flow with Automatiko compiles into single service and by that into a single container image, that includes all the functions. Each and every function can be invoked at any time on any replica of the service.
 
-At the same time (during build) Knative manifest file is generated to ease deployment to the cluster. That consists of
+At the same time during build, a Knative manifest file is generated to ease deployment to the cluster. The Knative manifest file consists of:
 
-- Knative serving service
-- sink binding to inject broker location
+- a Knative serving service
+- a sink binding to inject broker location
 - triggers for each function created out of the workflow
 
-So this serves as a starting point to have fully runnable service directly after build. It can be modified further to adopt to particular configuration of Knative in the cluster.
-
-Enough theory, let's look at example of this concept.
+This serves as a starting point to have fully runnable service directly after build. It can be modified further to adopt to particular configuration of Knative in the cluster.
 
 ## User registration example
 
-This example it is a simple user registration that performs various checks and registers user in the Swagger PetStore service.
+This example shows a simple user registration that performs various checks and registers the user in the Swagger PetStore service.
 
-See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/userregistration.html)
+You can see more information about this example in the [Automatiko documentation](https://docs.automatiko.io/main/0.0.0/examples/userregistration.html).
 
-This example comes with two flavours (depending of what DSL is used to create workflow definition)
+This example comes with two flavours, depending which DSL is used to create the workflow definition:
 
 ![Slice workflow into functions](/blog/articles/images/workflow-function-flow-function-example-bpmn.png)
 *BPMN*
@@ -108,23 +107,23 @@ This example comes with two flavours (depending of what DSL is used to create wo
 ![Slice workflow into functions](/blog/articles/images/workflow-function-flow-function-example-sw.png)
 *Serverless Workflow Spec*
 
-To try out the example yourself clone one of the flavours of this example project
+To try out the example yourself, clone one of the flavours of this example project:
 
 * [User Registration BPMN](https://github.com/automatiko-io/automatiko-examples/tree/main/user-registration)
 * [User Registration Serverless Workflow](https://github.com/automatiko-io/automatiko-examples/tree/main/user-registration-sw)
 * [User Registration BPMN on Google Cloud Run](https://github.com/automatiko-io/automatiko-examples/tree/main/user-registration-gcp-cloudrun)
 
-and build the application by issuing following maven command from within the cloned repository
+After you have cloned the project, build the application by running the following command in the cloned repository:
 
 ````
 mvn clean package -Pcontainer-native
 ````
 
-This will build a container with the service that is using native executable built with GraalVM so the build process will take a while but it will be really light and fast at execution.
+This command builds a container with the service that is using native executable built with GraalVM. The build process might take a while.
 
 ### Push built container to registry
 
-Once the container image is built push it to external registry that your Knative cluster can pull from.
+After the container image is built, push it to an external registry that your Knative cluster can pull from.
 
 ### Deploy to Knative cluster
 
