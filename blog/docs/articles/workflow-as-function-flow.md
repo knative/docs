@@ -239,7 +239,8 @@ To be able to use the same service for Google Cloud Run there are two additional
 	quarkus.google.cloud.project-id=CHANGE_ME
 	````
 
-	**NOTE**: Remember to change `CHANGE_ME` to actual project id of your Google Cloud project
+	!!! note
+	    Remember to change `CHANGE_ME` to actual project id of your Google Cloud project
 
 3. Build the application with following maven command
 
@@ -247,7 +248,7 @@ To be able to use the same service for Google Cloud Run there are two additional
 	mvnw clean package -Pcontainer-native
 	````
 
-	This will build a container with the service that is using native executable built with GraalVM so the build process will take a while but it will be really light and fast at execution.
+	This command builds a container with the service that is using native executable built with GraalVM. The build process might take a while.
 
 ### Push built container to Google Cloud Container registry
 
@@ -281,7 +282,8 @@ gcloud eventarc triggers create userregistration --event-filters="type=google.cl
 gcloud run deploy user-registration-gcp-cloudrun --platform=managed --image=gcr.io/CHANGE_ME/user/user-registration-gcp-cloudrun:1.0.0 --region=us-central1
 ````
 
-**NOTE**: `CHANGE_ME` will be replaced with the Google Cloud project id configured in `src/main/resources/application.properties` during the build.
+!!! note
+	 `CHANGE_ME` will be replaced with the Google Cloud project id configured in `src/main/resources/application.properties` during the build.
 
 This provisions all required components such as:
 
