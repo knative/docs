@@ -10,8 +10,8 @@ closer with your goals.
 
 View the set of Knative code samples that are actively tested and maintained:
 
-- [Eventing and Eventing Sources code samples](eventing/samples/README.md)
-- [Serving code samples](serving/samples/README.md)
+- [Eventing and Eventing Sources code samples](eventing.md)
+- [Serving code samples](serving.md)
 
 ### Community owned and maintained
 
@@ -19,7 +19,7 @@ View the set of Knative code samples that are actively tested and maintained:
 
 ### External code samples
 
-A list of links to Knative code samples located outside the Knative org on GitHub:
+A list of links to Knative code samples located outside of Knative repos:
 
 - [Image processing using Knative Eventing, Cloud Run on GKE (Knative Serving implementation) and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
 - [A potpourri of Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)

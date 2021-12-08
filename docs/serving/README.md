@@ -43,7 +43,7 @@ serverless workload behaves on the cluster:
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](samples/README.md)
+To get started with Serving, check out one of the [hello world](../samples/serving.md)
 sample projects. These projects use the `Service` resource, which manages all of
 the details for you.
 
@@ -55,17 +55,17 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## More samples and demos
 
-- [Knative Serving code samples](samples/README.md)
+- [Knative Serving code samples](../samples/serving.md)
 
 ## Debugging Knative Serving issues
 
-- [Debugging application issues](../serving/troubleshooting/debugging-application-issues.md)
+- [Debugging application issues](troubleshooting/debugging-application-issues.md)
 
 ## Configuration and Networking
 
-- [Configuring cluster local routes](../serving/services/private-services.md)
+- [Configuring cluster local routes](services/private-services.md)
 - [Using a custom domain](using-a-custom-domain.md)
-- [Traffic management](../serving/traffic-management.md)
+- [Traffic management](traffic-management.md)
 
 ## Observability
 

@@ -1,4 +1,4 @@
-# Multiple Cases
+# Parallel with multiple cases
 
 We are going to create a Parallel with two branches:
 

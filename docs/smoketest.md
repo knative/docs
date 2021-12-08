@@ -1,5 +1,6 @@
 # Hidden smoketest page
 
+<!-- is this page still needed? -->
 Use this page to test your changes and ensure that there are not any issues,
 unwanted behaviors, or regression that are caused by your changes.
 
