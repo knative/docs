@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-java-quarkus
+spec:
+  template:
+    spec:
+      containers:
+      - image: docker.io/saturnism/helloworld-java-quarkus
+        env:
+        - name: TARGET
+          value: "Quarkus Sample v1"
