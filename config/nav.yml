@@ -272,7 +272,9 @@ nav:
         - Eventing: reference/api/eventing-api.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
-    - "Join the Community ➠": /community/
+    - "Join the Community ➠":
+      - Contribute to Knative: community/contributing.md
+      - About the community: community/about.md
     - Case studies:
       - deepc: about/case-studies/deepc.md
       - Outfit7: about/case-studies/outfit7.md

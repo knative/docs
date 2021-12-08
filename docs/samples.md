@@ -15,12 +15,11 @@ View the set of Knative code samples that are actively tested and maintained:
 
 ### Community owned and maintained
 
-[View code samples that are contributed and maintained by the community](https://knative.dev/community/samples/).
+[View code samples that are contributed and maintained by the community](https://github.com/knative/docs/tree/main/samples/community).
 
 ### External code samples
 
-A list of links to Knative code samples that live outside of
-[https://knative.dev](https://knative.dev):
+A list of links to Knative code samples located outside the Knative org on GitHub:
 
 - [Image processing using Knative Eventing, Cloud Run on GKE (Knative Serving implementation) and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
 - [A potpourri of Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)
