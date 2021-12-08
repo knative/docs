@@ -364,7 +364,7 @@ spec:
 * **Type**: Extension
 * **ConfigMap key:** `tag-header-based-routing`
 
-This flags controls whether [tag header based routing](https://github.com/knative/docs/tree/main/samples/serving/tag-header-based-routing) is enabled.
+This flags controls whether [tag header based routing](https://github.com/knative/docs/tree/main/code-samples/serving/tag-header-based-routing) is enabled.
 
 ## Kubernetes init containers
 
