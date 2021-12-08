@@ -1,0 +1,15 @@
+name:                helloworld-haskell
+version:             0.1.0.0
+dependencies:
+- base >= 4.7 && < 5
+- scotty
+- text
+
+executables:
+  helloworld-haskell-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
