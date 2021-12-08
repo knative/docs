@@ -1,0 +1,11 @@
+README.md
+_index.md
+.editorconfig
+.gitignore
+.git
+target/
+.settings
+.idea
+.project
+.classpath
+*.iml
