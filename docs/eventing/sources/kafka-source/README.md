@@ -73,9 +73,9 @@ If you are using Strimzi:
     ```
 
     ```bash
-    cd knative-docs/docs/eventing/samples/kafka/source
+    cd knative-docs/samples/eventing/kafka/source
     ```
-
+    <!--  does this folder exist? -->
 2. Create the `event-display` Service as a YAML file:
 
      ```yaml

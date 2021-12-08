@@ -1,4 +1,4 @@
-# Mutual Exclusive Cases
+# Parallel with mutually exclusive cases
 
 In this example, we are going to see how we can create a Parallel with mutually
 exclusive branches.
