@@ -261,7 +261,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="mt-github.yaml")}}
         ```
 
-    To learn more, try the [GitHub source sample](https://github.com/knative/docs/tree/main/samples/eventing/github-source)
+    To learn more, try the [GitHub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/github-source)
 
 === "Apache Kafka Source"
 
@@ -286,10 +286,10 @@ The following tabs expand to show instructions for installing each Eventing exte
 
     To learn more, try the following samples:
 
-    - [Cloud Pub/Sub source sample](https://github.com/knative/docs/tree/main/samples/eventing/cloud-pubsub-source)
-    - [Cloud Storage source sample](https://github.com/knative/docs/tree/main/samples/eventing/cloud-storage-source)
-    - [Cloud Scheduler source sample](https://github.com/knative/docs/tree/main/samples/eventing/cloud-scheduler-source)
-    - [Cloud Audit Logs source sample](https://github.com/knative/docs/tree/main/samples/eventing/cloud-audit-logs-source)
+    - [Cloud Pub/Sub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-pubsub-source)
+    - [Cloud Storage source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-storage-source)
+    - [Cloud Scheduler source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-scheduler-source)
+    - [Cloud Audit Logs source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-audit-logs-source)
 
 
 === "Apache CouchDB Source"
