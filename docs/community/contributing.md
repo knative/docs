@@ -50,12 +50,12 @@ Do you have a Knative code sample that demonstrates a use-case or product integr
 Beyond the official documentation there are endless possibilities for combining tools, platforms, languages, and products. By submitting a tutorial you can share your experience and help others who are solving similar problems.
 
 Community tutorials are stored in Markdown files under the
-[`samples/community`](https://github.com/knative/docs/tree/main/samples/community).
+[`code-samples/community`](https://github.com/knative/docs/tree/main/code-samples/community).
 These documents are contributed, reviewed, and maintained by the community.
 
 Submit a Pull Request to the community sample directory under the Knative component folder that aligns with your document. For example, Knative Serving samples are under the serving folder. A reviewer will be assigned to review your submission. They’ll work with you to ensure that your submission is clear, correct, and meets the style guide, but it helps if you follow it as you write your tutorial.
 
-- [Contribute code samples](https://github.com/knative/docs/tree/main/samples/community):
+- [Contribute code samples](https://github.com/knative/docs/tree/main/code-samples/community):
 Share your samples with the community.
 
 - [Link existing code samples](../samples.md#external-code-samples):

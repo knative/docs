@@ -62,7 +62,7 @@ plugins:
       community/calendar.md: https://github.com/knative/community/blob/main/CALENDAR.MD
       community/meetup.md: community/contributing.md
       community/annual_reports.md: https://github.com/knative/community/tree/main/annual_reports
-      community/samples.md: https://github.com/knative/docs/tree/main/samples/community
+      community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
       concepts/overview.md: index.md
       developer/concepts/duck-typing.md: reference/concepts/duck-typing.md
       developer/eventing/event-delivery.md: eventing/event-delivery.md
