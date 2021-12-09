@@ -1,12 +1,7 @@
 # Contribute to Knative
 
-Welcome to the Knative community!
-
 This is the starting point for becoming a contributor - improving code, improving docs, giving talks, etc.
-Knative is an open source project that anyone in the community can use, improve, and enjoy.
-We'd love you to join us!
-
-Here are a few ways to find out what's happening and get involved.
+Here are a few ways to get involved.
 
 ## Community guidelines
 
