@@ -59,8 +59,8 @@ plugins:
       community/contributing/trademark-committee.md: https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md
       community/contributing/roles.md: https://github.com/knative/community/blob/main/ROLES.md
       community/contributing/reviewing.md: https://github.com/knative/community/blob/main/REVIEWING.md
-      community/calendar.md: community/contributing.md#calendar
-      community/meetup.md: community/contributing.md#community-meetup
+      community/calendar.md: https://github.com/knative/community/blob/main/CALENDAR.MD
+      community/meetup.md: community/contributing.md
       community/annual_reports.md: https://github.com/knative/community/tree/main/annual_reports
       community/samples.md: https://github.com/knative/docs/tree/main/samples/community
       concepts/overview.md: index.md
