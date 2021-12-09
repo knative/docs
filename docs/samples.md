@@ -15,7 +15,7 @@ View the set of Knative code samples that are actively tested and maintained:
 
 ### Community owned and maintained
 
-[View code samples that are contributed and maintained by the community](https://github.com/knative/docs/tree/main/samples/community).
+[View code samples that are contributed and maintained by the community](https://github.com/knative/docs/tree/main/code-samples/community).
 
 ### External code samples
 
