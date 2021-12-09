@@ -189,7 +189,7 @@ above.
         <title>Hello Knative</title>
         <link rel="stylesheet" type="text/css" href="/css/app-833cc7e8eeed7a7953c5a02e28130dbd.css?vsn=d">
       </head>
-      
+
       <body>
         <div class="container">
           <header class="header">
