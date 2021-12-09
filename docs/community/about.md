@@ -85,7 +85,7 @@ process to sunset features that are getting no apparent usage, but are time cons
 ## Community Calendar
 
 The [Knative community calendar](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com) ([iCal export file](https://calendar.google.com/calendar/ical/knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com/public/basic.ics))
-contains events, such as working group meetings and meetups, that provide the opportunity to learn more about Knative and meet other users and contributors.
+contains events that provide the opportunity to learn more about Knative and meet other users and contributors. This includes Working Group, Steering Committee, and other community meetings.
 
 Events don't have to be organized by the Knative project to be added to the calendar.
 If you want to add an event to the calendar please send an email to
