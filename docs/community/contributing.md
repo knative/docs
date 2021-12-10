@@ -3,16 +3,17 @@
 This is the starting point for becoming a contributor - improving code, improving docs, giving talks, etc.
 Here are a few ways to get involved.
 
-## Community guidelines
+## Prerequisites
 
-If you want to get more involved by contributing to Knative, first take a look at the
-following community guidelines:
+If you want to contribute to Knative, you must do the following:
 
-- [Contributing to Knative](https://github.com/knative/community/blob/main/CONTRIBUTING.md):
-guidelines and advice on becoming a contributor.
+- Before you can make a contribution, you must fill out the [Google 
+Contributor License Agreement (CLA)](https://cla.developers.google.com/) using the same email address you used to register for Github.
+For more information, see [Contributor license agreements](https://github.com/knative/community/blob/main/CONTRIBUTING.md#contributor-license-agreements).
 
-- [Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md):
-all contributors must abide by the code of conduct.
+- Read the [Knative contributor guide](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
+
+- Read the [Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md).
 
 For more information about how the Knative community is run, see [About the Knative community](about.md).
 
@@ -27,7 +28,7 @@ following components, look for GitHub issues marked with the good first issue la
 - **Knative Serving:**
 
     - For how to get started contributing, see the [Serving Development workflow](https://github.com/knative/serving/blob/main/DEVELOPMENT.md).
-    - For good starter issues, see [Serving issues](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
+    - For good starter issues, see [Serving issues](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22).
 
 - **Knative Eventing:**
     - For how to get started contributing, see the [Eventing Development workflow](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md).
