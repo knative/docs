@@ -5,7 +5,7 @@ a description of Knative's audience.
 
 ## Community values
 
-This section links to documents about Knative's values.
+This section links to documents about our values.
 
 - [Knative project values](https://github.com/knative/community/blob/main/VALUES.md):
 shared goals and values for the community.
@@ -25,7 +25,7 @@ a single technical oversight committee monitoring the overall project.
 the Knative governance framework.
 
 - [Community roles](https://github.com/knative/community/blob/main/ROLES.md):
-describes the roles individuals can assume within the Knative community.
+describes the roles individuals can assume within the Knative community such as member, approver, or working group lead.
 
 - [Working groups](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md):
 provides information about our various working groups.
@@ -82,7 +82,7 @@ Knative past and future release dates.
 process to sunset features that are getting no apparent usage, but are time consuming to maintain.
 
 
-## Community Calendar
+## Community calendar
 
 The [Knative community calendar](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com) ([iCal export file](https://calendar.google.com/calendar/ical/knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com/public/basic.ics))
 contains events that provide the opportunity to learn more about Knative and meet other users and contributors. This includes Working Group, Steering Committee, and other community meetings.
