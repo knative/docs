@@ -4,6 +4,6 @@ Use the following code samples to help you understand the various use cases for
 Knative Eventing and Event Sources.
 [Learn more about Knative Eventing and Eventing Sources](https://knative.dev/docs/eventing/).
 
-[**See all Knative code samples**](https://knative.dev/docs/samples/)
+[**Browse more Knative code samples**](..)
 
 For a table describing the available Eventing code samples, see the [Knative documentation](https://knative.dev/docs/samples/eventing/).

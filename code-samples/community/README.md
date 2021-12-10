@@ -7,7 +7,7 @@ contributed and maintained by members of the Knative community.
 
 [Learn more about the lifespan of samples](https://github.com/knative/docs/blob/main/contribute-to-docs/what-to-contribute/creating-code-samples.md#user-focused-content)
 
-[**See all Knative code samples**](../README.md)
+[**Browse more Knative code samples**](..)
 
 ## Interactive Serving sample
 
