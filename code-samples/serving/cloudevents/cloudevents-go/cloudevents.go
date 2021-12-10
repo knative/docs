@@ -71,7 +71,7 @@ func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Even
 
 	r := cloudevents.NewEvent(cloudevents.VersionV1)
 	r.SetType("dev.knative.docs.sample")
-	r.SetSource("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go")
+	r.SetSource("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go")
 	if err := r.SetData("application/json", resp); err != nil {
 		return cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
 	}
@@ -93,7 +93,7 @@ func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Eve
 
 	r := cloudevents.NewEvent(cloudevents.VersionV1)
 	r.SetType("dev.knative.docs.sample")
-	r.SetSource("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-go")
+	r.SetSource("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go")
 	if err := r.SetData("application/json", resp); err != nil {
 		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
 	}

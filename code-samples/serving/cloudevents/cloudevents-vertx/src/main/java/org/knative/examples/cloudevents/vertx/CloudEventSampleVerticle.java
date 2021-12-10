@@ -71,7 +71,7 @@ public class CloudEventSampleVerticle extends AbstractVerticle {
               // Let's modify the event changing the source
               CloudEvent outputEvent = CloudEventBuilder
                   .v1(event)
-                  .withSource(URI.create("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-vertx"))
+                  .withSource(URI.create("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-vertx"))
                   .build();
 
               // Set response status code
@@ -123,7 +123,7 @@ public class CloudEventSampleVerticle extends AbstractVerticle {
             // Let's modify the event changing the source
             CloudEvent outputEvent = CloudEventBuilder
                 .v1(event)
-                .withSource(URI.create("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-vertx"))
+                .withSource(URI.create("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-vertx"))
                 .build();
 
             // Send the request to the sink and check the response

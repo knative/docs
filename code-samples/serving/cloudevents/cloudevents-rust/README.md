@@ -22,15 +22,14 @@ cluster. You can also download a working copy of the sample by running the
 following commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/cloudevents/cloudevents-rust
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/serving/cloudevents/cloudevents-rust
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/serving/install-serving-with-yaml.md)if you need to
-  create one.
+- A Kubernetes cluster with Knative installed and DNS configured.  See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - This guide uses Rust `musl` toolchain to build the image in order to create
@@ -132,7 +131,7 @@ You'll get as result:
 < ce-specversion: 1.0
 < ce-id: 123-abc
 < ce-type: dev.knative.docs.sample
-< ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust
+< ce-source: https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust
 < date: Sat, 23 May 2020 09:00:01 GMT
 <
 {"name":"Dave"}

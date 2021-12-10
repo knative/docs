@@ -22,15 +22,14 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/cloudevents/cloudevents-spring
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/serving/cloudevents/cloudevents-spring
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/serving/install-serving-with-yaml.md) if you need to
-  create one.
+- A Kubernetes cluster with Knative installed and DNS configured.  See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -106,7 +105,7 @@ You'll see on the console:
 < HTTP/1.1 202 Accepted
 < ce-specversion: 1.0
 < ce-id: 123-abc
-< ce-source: https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-spring
+< ce-source: https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-spring
 < ce-type: curl.demo
 < content-type: application/json
 < content-length: 15

@@ -9,7 +9,8 @@ If `TARGET` is not specified, `World` is used as the default value.
 
 You will need:
 
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/serving/install-serving-with-yaml.md).
+- A Kubernetes cluster with Knative installed and DNS configured.  See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine, and a Docker Hub account configured.
 - Optional: You can use the Knative CLI client [`kn`](https://github.com/knative/client/releases) to simplify resource creation and deployment. Alternatively, you can use `kubectl` to apply resource files directly.
 
@@ -55,8 +56,8 @@ You will need:
    following commands:
 
    ```bash
-   git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-   cd knative-docs/docs/serving/samples/hello-world/helloworld-go
+   git clone https://github.com/knative/docs.git knative-docs
+   cd knative-docs/code-samples/serving/hello-world/helloworld-go
    ```
 
 
@@ -99,7 +100,7 @@ You will need:
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
    ```bash
-   go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
+   go mod init github.com/knative/docs/code-samples/serving/hello-world/helloworld-go
    ```
 
 ## Deploying

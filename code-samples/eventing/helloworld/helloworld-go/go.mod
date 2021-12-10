@@ -1,4 +1,4 @@
-module knative.dev/docs/docs/eventing/samples/helloworld/helloworld-go
+module knative.dev/docs/code-samples/eventing/helloworld/helloworld-go
 
 go 1.14
 

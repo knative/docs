@@ -6,7 +6,7 @@ default Channel configuration for Knative Eventing.
 ## Prerequisites
 
 - A Kubernetes cluster with
-  [Knative Eventing](../../../../install/eventing/install-eventing-with-yaml.md), as well as the optional Broker and Kafka Channel components.
+  [Knative Eventing](https://knative.dev/docs/install/eventing/install-eventing-with-yaml), as well as the optional Broker and Kafka Channel components.
 
 ## Creating a Kafka Channel
 
@@ -32,7 +32,7 @@ default Channel configuration for Knative Eventing.
 ## Specifying Kafka as the default Channel implementation
 <!--TODO: Move to admin guide-->
 
-1. To configure Kafka Channel as the [default channel configuration](../../../channels/channel-types-defaults.md), modify the `default-ch-webhook` ConfigMap so that it contains the following YAML:
+1. To configure Kafka Channel as the [default channel configuration](https://knative.dev/docs/eventing/channels/channel-types-defaults), modify the `default-ch-webhook` ConfigMap so that it contains the following YAML:
 
     ```yaml
     apiVersion: v1
@@ -96,8 +96,7 @@ default Channel configuration for Knative Eventing.
 
     The Kafka Topic that is created by the Channel contains the name of the namespace, `default` in this example, followed by the name of the Channel. In the consolidated Channel implementation, it is also prefixed with `knative-messaging-kafka` to indicate that it is a Kafka Channel from Knative.
 
-    !!! note
-        The topic of a Kafka Channel is an implementation detail and records from it should not be consumed from different applications.
+**Note:** The topic of a Kafka Channel is an implementation detail and records from it should not be consumed from different applications.
 
 ## Creating a Service and Trigger that use the Apache Kafka Broker
 
@@ -243,9 +242,7 @@ or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section
 shows how to configure a Kafka Channel to work against a protected Apache
 Kafka cluster, with the two supported TLS and SASL authentication methods.
 
-!!! note
-    Kafka Channels require certificates to be in `.pem` format. If your files
-    are in a different format, you must convert them to `.pem`.
+**Note:** Kafka Channels require certificates to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
 
 ### TLS authentication
 
@@ -295,8 +292,7 @@ To use SASL authentication, you will need the following information:
 * A username and password.
 * The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
 
-!!! note
-    It is recommended to also enable TLS as described in the previous section.
+**Note:** It is recommended to also enable TLS as described in the previous section.
 
 1. Edit the `config-kafka` ConfigMap:
 
@@ -340,8 +336,7 @@ To use SASL authentication, you will need the following information:
     ...
     ```
 
-    !!! note
-        The default secret name and namespace are `kafka-cluster` and `knative-eventing` respectively. If you reference a secret in a different namespace, make sure you configure your roles and bindings so that the `knative-eventing` Pods can access it.
+**Note:** The default secret name and namespace are `kafka-cluster` and `knative-eventing` respectively. If you reference a secret in a different namespace, make sure you configure your roles and bindings so that the `knative-eventing` Pods can access it.
 
 ## Channel configuration
 

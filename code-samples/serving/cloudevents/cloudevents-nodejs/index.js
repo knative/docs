@@ -39,7 +39,7 @@ const receiveAndSend = (cloudEvent, res) => {
   const data = handle(cloudEvent.data)
   const ce = new CloudEvent({
     type: 'dev.knative.docs.sample',
-    source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
+    source: 'https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-nodejs',
     data
   })
   const message = HTTP.binary(ce); // Or HTTP.structured(ce))
@@ -66,7 +66,7 @@ const receiveAndReply = (cloudEvent, res) => {
   const data = handle(cloudEvent.data)
   const ce = new CloudEvent({
     type: 'dev.knative.docs.sample',
-    source: 'https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-nodejs',
+    source: 'https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-nodejs',
     data
   })
 

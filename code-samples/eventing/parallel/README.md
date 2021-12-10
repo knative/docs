@@ -12,12 +12,12 @@ All examples require:
   - Knative Serving
 
 All examples are using the
-[default channel template](../../../eventing/channels/create-default-channel.md).
+[default channel template](https://knative.dev/docs/eventing/channels/create-default-channel).
 
 ## Examples
 
 Each of the following examples use
-[`PingSource`](../../../eventing/sources/ping-source/README.md) as the source of events.
+[`PingSource`](https://knative.dev/docs/eventing/sources/ping-source/) as the source of events.
 
 We also use simple
 [functions](https://github.com/lionelvillard/knative-functions) to perform

@@ -20,15 +20,14 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/cloudevents/cloudevents-nodejs
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/serving/cloudevents/cloudevents-nodejs
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/serving/install-serving-with-yaml.md) if you need to
-  create one.
+- A Kubernetes cluster with Knative installed and DNS configured.  See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 

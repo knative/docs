@@ -6,23 +6,16 @@ Event persistence enables certain advanced use cases to be supported, such as th
 
 The [ResetOffset custom resource definition (CRD)](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset) exposes the ability to manipulate the location of the ConsumerGroup Offsets in the event stream of a given Knative Subscription. Without the ResetOffset CRD, you must manually stop ConsumerGroups and manipulate the Offsets.
 
-!!! note
-    ResetOffsets are currently only supported by the Distributed KafkaChannel
-    implementation.
+**Note:** ResetOffsets are currently only supported by the Distributed KafkaChannel implementation.
 
-!!! warning
-    Repositioning the ConsumerGroup Offsets impacts the event ordering and
-    is intended for failure recovery scenarios. This capability needs to be used
-    with caution only after reviewing the [CRD documentation](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset).
+**Warning:** Repositioning the ConsumerGroup Offsets impacts the event ordering and is intended for failure recovery scenarios. This capability needs to be used with caution only after reviewing the [CRD documentation](https://github.com/knative-sandbox/eventing-kafka/tree/main/config/command/resetoffset).
 
 ## Prerequisites
 
 - A Kubernetes cluster with the [Kafka Channel implementation](https://knative.dev/docs/eventing/channels/channels-crds/) installed.
 - A valid KafkaChannel resource and Subscription exist.
 
-!!! note
-    The ResetOffset CRD is a single-use operation, and should be
-    deleted from the cluster once it has been executed.
+**Note:** The ResetOffset CRD is a single-use operation, and should be deleted from the cluster once it has been executed.
 
 ## Repositioning offsets to the oldest available event
 

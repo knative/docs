@@ -73,7 +73,7 @@ public class KSinkCloudEventSampleApplicationIntegrationTests {
 		assertThat(sink.get("ce-id")).isNotEqualTo("12345");
 		assertThat(sink).containsEntry("ce-type", "org.knative.examples.cloudevents.spring.Response");
 		assertThat(sink).containsEntry("ce-source",
-				"https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-spring");
+				"https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-spring");
 
 	}
 

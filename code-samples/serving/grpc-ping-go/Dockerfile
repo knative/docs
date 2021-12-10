@@ -21,7 +21,7 @@ FROM golang:1.13 as builder
 RUN go get google.golang.org/grpc
 
 # Copy local code to the container image.
-WORKDIR /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go
+WORKDIR /go/src/github.com/knative/docs/code-samples/serving/grpc-ping-go
 COPY . ./
 
 # Build the command inside the container.
@@ -35,8 +35,8 @@ RUN CGO_ENABLED=0 go build -tags=grpcping -o ./ping-client ./client
 FROM gcr.io/distroless/static
 
 # Copy the binaries to the production image from the builder stage.
-COPY --from=builder /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go/ping-server /server
-COPY --from=builder /go/src/github.com/knative/docs/docs/serving/samples/grpc-ping-go/ping-client /client
+COPY --from=builder /go/src/github.com/knative/docs/code-samples/serving/grpc-ping-go/ping-server /server
+COPY --from=builder /go/src/github.com/knative/docs/code-samples/serving/grpc-ping-go/ping-client /client
 
 # Run the service on container startup.
 CMD ["/server"]
