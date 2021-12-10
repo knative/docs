@@ -11,14 +11,14 @@ You can also download a working copy of the sample, by running the following
 commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/hello-world/helloworld-python
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/serving/hello-world/helloworld-python
 ```
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../../install/serving/install-serving-with-yaml.md).
+- A Kubernetes cluster with Knative installed and DNS configured. See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - (optional) The Knative CLI client
@@ -168,7 +168,7 @@ cd knative-docs/docs/serving/samples/hello-world/helloworld-python
 
 1. Run one of the followings commands to find the domain URL for your service.
    > Note: If your URL includes `example.com` then consult the setup instructions for
-   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](../serving/using-a-custom-domain).
+   > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](https://knative.dev/docs/serving/using-a-custom-domain).
 
     === "kubectl"
 

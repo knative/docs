@@ -44,7 +44,7 @@ public class CloudEventSampleApplicationIntegrationTests {
 		assertThat(headers.get("ce-id")).isNotEqualTo("12345");
 		assertThat(headers).containsEntry("ce-type", Arrays.asList("org.knative.examples.cloudevents.spring.Response"));
 		assertThat(headers).containsEntry("ce-source",
-				Arrays.asList("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-spring"));
+				Arrays.asList("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-spring"));
 
 	}
 

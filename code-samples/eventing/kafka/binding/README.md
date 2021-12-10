@@ -13,7 +13,7 @@ via Kafka Source
 ### Prerequisites
 
 1. You must ensure that you meet the
-   [prerequisites listed in the Apache Kafka overview](../../../broker/kafka-broker/README.md#prerequisites).
+   [prerequisites listed in the Apache Kafka overview](https://knative.dev/docs/eventing/broker/kafka-broker/#prerequisites).
 2. This feature is available from Knative Eventing 0.15+
 
 ### Creating a `KafkaSource` source CRD
@@ -61,7 +61,7 @@ via Kafka Source
 
 1. (Optional) Deploy the Event Display Service via kn cli:
 
-   Alternatively, you can create the knative service by running the following command in the `kn` CLI.
+   Alternatively, you can create the Knative Service by running the following command in the `kn` CLI.
 
    ```
    kn service create event-display --image=gcr.io/knative-releases/knative.dev/eventing/cmd/event_display

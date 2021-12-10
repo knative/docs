@@ -30,7 +30,7 @@ namespace CloudEventsSample.Controllers
     {
         private const string CloudEventResponseType = "dev.knative.docs.sample";
         private const string CloudEventResponseUri =
-            "https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-dotnet";
+            "https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-dotnet";
 
         private static readonly Lazy<string> SinkUri =
             new Lazy<string>(() => Environment.GetEnvironmentVariable("K_SINK"));

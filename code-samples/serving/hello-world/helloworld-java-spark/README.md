@@ -8,7 +8,8 @@ This guide describes the steps required to to create the `helloworld-java` sampl
 
 You will need:
 
-- A Kubernetes cluster with [Knative installed and DNS configured](../../../../install/serving/install-serving-with-yaml.md).
+- A Kubernetes cluster with Knative installed and DNS configured. See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured.
 - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
@@ -21,8 +22,8 @@ You can also download a working copy of the sample, by running the
 following commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/hello-world/helloworld-java
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/serving/hello-world/helloworld-java
 ```
 
 1. Run the application locally:

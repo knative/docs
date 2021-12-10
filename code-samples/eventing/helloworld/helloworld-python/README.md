@@ -3,7 +3,7 @@
 A simple web app written in Python that you can use to test knative eventing. It shows how to consume a [CloudEvent](https://cloudevents.io/) in Knative eventing, and optionally how to respond back with another CloudEvent in the http response, by adding the Cloud Eventing headers outlined in the Cloud Events standard definition.
 
 We will deploy the app as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) along with a [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
-However, you can also deploy the app as a [Knative Serving Service](../../../../serving/README.md).
+However, you can also deploy the app as a [Knative Serving Service](https://knative.dev/docs/serving/).
 
 Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
@@ -11,13 +11,13 @@ following commands:
 
 ```bash
 # Clone the relevant branch version such as "release-0.13"
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/eventing/samples/helloworld/helloworld-python
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/eventing/helloworld/helloworld-python
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster with [Knative Eventing](../../../../install/README.md) installed.
+- A Kubernetes cluster with [Knative Eventing](https://knative.dev/docs/install/eventing/install-eventing-with-yaml) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -199,7 +199,7 @@ After you have deployed the application, and have verified that the namespace, s
 
 ### Send CloudEvent to the Broker
 
-You can send an HTTP request directly to the Knative [Broker](../../../broker/README.md) if the correct CloudEvent headers are set.
+You can send an HTTP request directly to the Knative [Broker](https://knative.dev/docs/eventing/broker/) if the correct CloudEvent headers are set.
 
 1. Deploy a curl pod and SSH into it:
 
@@ -254,7 +254,8 @@ The Helloworld-python app logs the context and the msg of the event you created 
         {"msg":"Hi from Knative!"}
 
       ```
-  Try the CloudEvent attributes in the curl command and the trigger specification to understand how [Triggers](../../../broker/triggers/README.md) work.
+  Try the CloudEvent attributes in the curl command and the trigger specification to understand how
+  [Triggers](https://knative.dev/docs/eventing/broker/triggers/) work.
 
 ## Verify reply from helloworld-python app
 The `helloworld-python` app replies with an event type `type= dev.knative.samples.hifromknative`, and source `source=knative/eventing/samples/hello-world`. The event enters the eventing mesh through the broker, and can be delivered to event sinks using a trigger

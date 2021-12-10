@@ -5,10 +5,10 @@ by a Knative Service.
 
 ## Before you begin
 
-1. Set up [Knative Serving](../../../serving/README.md).
-1. Ensure Knative Serving is [configured with a domain name](../../../serving/using-a-custom-domain.md) that allows GitHub to call into the cluster.
+1. Set up [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
+1. Ensure Knative Serving is [configured with a domain name](https://knative.dev/docs/serving/using-a-custom-domain) that allows GitHub to call into the cluster.
 1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
-1. Set up [Knative Eventing](../../../eventing/README.md).
+1. Set up [Knative Eventing](https://knative.dev/docs/install/eventing/install-eventing-with-yaml).
 
 ### Install GitHub Event Source
 
@@ -103,8 +103,7 @@ Source for a specific namespace. Be sure to replace the
 by your GitHub user.
 
 If using GitHub enterprise you will need to add an additional githubAPIURL
-field to the spec specifying your GitHub enterprise API endpoint, see
-[here](../../README.md#githubsource)
+field to the spec specifying your GitHub enterprise API endpoint.
 
 ```yaml
 apiVersion: sources.knative.dev/v1alpha1

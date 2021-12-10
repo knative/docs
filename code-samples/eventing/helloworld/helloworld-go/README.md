@@ -11,20 +11,20 @@ We will deploy the app as a
 along with a
 [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/).
 However, you can also deploy the app as a
-[Knative Serving Service](../../../../serving/README.md).
+[Knative Serving Service](https://knative.dev/docs/serving/).
 
 Do the following steps to create the sample code and then deploy the app to your
 cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/eventing/helloworld/helloworld-go
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster with [Knative Eventing](../../../../install/README.md) installed.
+- A Kubernetes cluster with [Knative Eventing](https://knative.dev/docs/install/eventing/install-eventing-with-yaml) installed.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
@@ -214,7 +214,7 @@ cd knative-docs/docs/eventing/samples/helloworld/helloworld-go
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
 
        ```bash
-       go mod init github.com/knative/docs/docs/serving/samples/hello-world/helloworld-go
+       go mod init github.com/knative/docs/code-samples/serving/hello-world/helloworld-go
        ```
 
 ## Building and deploying the sample
@@ -252,7 +252,7 @@ folder) you're ready to build and deploy the sample app.
       **Note:** you can also use injection based on labels with the
       Eventing sugar controller.
       For how to install the Eventing sugar controller, see
-      [Install optional Eventing extensions](../../../../install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions).
+      [Install optional Eventing extensions](https://knative.dev/docs/install/eventing/install-eventing-with-yaml/#install-optional-eventing-extensions).
 
 1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
       service names helloworld-go. Verify using the following command.
@@ -277,7 +277,7 @@ application and trigger are ready, let's send a CloudEvent.
 
 ### Send CloudEvent to the Broker
 
-We can send an http request directly to the [Broker](../../../broker/README.md)
+We can send an http request directly to the [Broker](https://knative.dev/docs/eventing/broker/)
 with correct CloudEvent headers set.
 
 1. Deploy a curl pod and SSH into it
@@ -351,7 +351,7 @@ with another event.
 
     ```
 
-Play around with the CloudEvent attributes in the curl command and the trigger specification to [understand how triggers work](../../../broker/triggers/README.md).
+Play around with the CloudEvent attributes in the curl command and the trigger specification to [understand how triggers work](https://knative.dev/docs/eventing/broker/triggers/).
 
 ## Verify reply from helloworld-go app
 

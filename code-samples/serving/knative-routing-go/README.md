@@ -15,7 +15,7 @@ the Login service.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/serving/install-serving-with-yaml.md)
+1. A Kubernetes cluster with [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml)
    installed.
 2. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
@@ -28,7 +28,7 @@ the Login service.
 4. Check out the code:
 
 ```
-go get -d github.com/knative/docs/docs/serving/samples/knative-routing-go
+go get -d github.com/knative/docs/code-samples/serving/knative-routing-go
 ```
 
 ## Setup
@@ -72,7 +72,7 @@ export REPO="docker.io/<username>"
 ```
 docker build \
   --tag "${REPO}/knative-routing-go" \
-  --file=docs/serving/samples/knative-routing-go/Dockerfile .
+  --file=code-samples/serving/knative-routing-go/Dockerfile .
 ```
 
 4. Push your container to a container registry:
@@ -82,10 +82,10 @@ docker push "${REPO}/knative-routing-go"
 ```
 
 5. Replace the image reference path with our published image path in the
-   configuration file `docs/serving/samples/knative-routing-go/sample.yaml`:
+   configuration file `code-samples/serving/knative-routing-go/sample.yaml`:
 
    - Manually replace:
-     `image: github.com/knative/docs/docs/serving/samples/knative-routing-go`
+     `image: github.com/knative/docs/code-samples/serving/knative-routing-go`
      with `image: ${REPO}/knative-routing-go` If you manually changed the .yaml
      file, you must replace \${REPO} with the correct path on your local
      machine.
@@ -95,7 +95,7 @@ docker push "${REPO}/knative-routing-go"
    - Run this command:
 
    ```
-   perl -pi -e "s@github.com/knative/docs/docs/serving/samples@${REPO}@g" docs/serving/samples/knative-routing-go/sample.yaml
+   perl -pi -e "s@github.com/knative/docs/code-samples/serving@${REPO}@g" code-samples/serving/knative-routing-go/sample.yaml
    ```
 
 ## Deploy the Service
@@ -103,7 +103,7 @@ docker push "${REPO}/knative-routing-go"
 Deploy the Knative Serving sample:
 
 ```
-kubectl apply --filename docs/serving/samples/knative-routing-go/sample.yaml
+kubectl apply --filename code-samples/serving/knative-routing-go/sample.yaml
 ```
 
 ## Exploring the Routes
@@ -174,7 +174,7 @@ You should see: `Login Service is called !`
 1. Apply the custom routing rules defined in `routing.yaml` file with:
 
 ```
-kubectl apply --filename docs/serving/samples/knative-routing-go/routing.yaml
+kubectl apply --filename code-samples/serving/knative-routing-go/routing.yaml
 ```
 
 If you have configured a custom domain name for your service, please replace all
@@ -284,13 +284,13 @@ and `login-service.default.example.com`. After doing so, your previous routing r
 Running
 
 ```
-kubectl apply --filename docs/serving/samples/knative-routing-go/routing-internal.yaml
+kubectl apply --filename code-samples/serving/knative-routing-go/routing-internal.yaml
 ```
 
 will replace the custom routing rule with one that uses the `knative-local-gateway`, enabling access
 via `example.com/search` and `example.com/login` again.
 
-With these changes, you can also use [the `auto-tls` feature](../../using-auto-tls.md) in combination with the global setting
+With these changes, you can also use [the `auto-tls` feature](https://knative.dev/docs/serving/using-auto-tls) in combination with the global setting
 `"http-protocol": "Redirected"`, which would otherwise try to redirect the `entry-route`
 VirtualService requests from HTTP to HTTPS, failing the request.
 
@@ -299,6 +299,6 @@ VirtualService requests from HTTP to HTTPS, failing the request.
 To clean up the sample resources:
 
 ```bash
-kubectl delete --filename docs/serving/samples/knative-routing-go/sample.yaml
-kubectl delete --filename docs/serving/samples/knative-routing-go/routing.yaml
+kubectl delete --filename code-samples/serving/knative-routing-go/sample.yaml
+kubectl delete --filename code-samples/serving/knative-routing-go/routing.yaml
 ```

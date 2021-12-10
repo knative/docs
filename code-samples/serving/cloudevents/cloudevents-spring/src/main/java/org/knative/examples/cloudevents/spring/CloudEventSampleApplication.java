@@ -29,7 +29,7 @@ public class CloudEventSampleApplication {
 	@Bean
 	public CloudEventAttributesProvider cloudEventAttributesProvider() {
 		return attrs -> attrs.setType("org.knative.examples.cloudevents.spring.Response")
-				.setSource("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-spring");
+				.setSource("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-spring");
 	}
 
 	@Bean

@@ -11,14 +11,14 @@ cluster. You can also download a working copy of the sample, by running the
 following commands:
 
 ```bash
-git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-cd knative-docs/docs/serving/samples/hello-world/helloworld-scala
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/serving/hello-world/helloworld-scala
 ```
 
 ## Before you begin
 
-- A Kubernetes cluster [installation](../../../../install/serving/install-serving-with-yaml.md) with
-  Knative Serving up and running.
+- A Kubernetes cluster with Knative Serving up and running. See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed locally, and running, optionally a
   Docker Hub account configured or some other Docker Repository installed
   locally.

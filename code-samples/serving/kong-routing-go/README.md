@@ -19,7 +19,7 @@ to the _Login_ service.
 
 ## Prerequisites
 
-1.  A Kubernetes cluster with [Knative Serving](../../../install/) and
+1.  A Kubernetes cluster with [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml) and
     [Kong](https://docs.konghq.com/kubernetes-ingress-controller/1.3.x/guides/using-kong-with-knative/)
     installed.
 1.  Install
@@ -33,7 +33,7 @@ to the _Login_ service.
 1.  Check out the code:
 
     ```bash
-    go get -d github.com/knative/docs/docs/serving/samples/kong-routing-go
+    go get -d github.com/knative/docs/code-samples/serving/kong-routing-go
     ```
 
 ## Setup
@@ -77,7 +77,7 @@ Build the application container and publish it to a container registry:
     ```bash
     docker build \
       --tag "${REPO}/kong-routing-go" \
-      --file=docs/serving/samples/kong-routing-go/Dockerfile .
+      --file=code-samples/serving/kong-routing-go/Dockerfile .
     ```
 
 1.  Push your container to a container registry:
@@ -87,16 +87,16 @@ Build the application container and publish it to a container registry:
     ```
 
 1.  Replace the image reference path with our published image path in the
-    configuration file `docs/serving/samples/kong-routing-go/sample.yaml` in one
+    configuration file `code-samples/serving/kong-routing-go/sample.yaml` in one
     of the following ways:
 
     - Manually replace `image:
-      github.com/knative/docs/docs/serving/samples/kong-routing-go` with `image:
+      github.com/knative/docs/code-samples/serving/kong-routing-go` with `image:
       ${REPO}/kong-routing-go`. If you manually changed the `.yaml` file, you
       must replace `${REPO}` with the correct path on your local machine.
     - Run this command:
       ```bash
-      perl -pi -e "s@github.com/knative/docs/docs/serving/samples@${REPO}@g" docs/serving/samples/kong-routing-go/sample.yaml
+      perl -pi -e "s@github.com/knative/docs/code-samples/serving@${REPO}@g" code-samples/serving/kong-routing-go/sample.yaml
       ```
 
 ## Deploy the Service
@@ -104,7 +104,7 @@ Build the application container and publish it to a container registry:
 Deploy the Knative Serving sample:
 
 ```bash
-kubectl apply -f docs/serving/samples/kong-routing-go/sample.yaml
+kubectl apply -f code-samples/serving/kong-routing-go/sample.yaml
 ```
 
 Inspect the deployed Knative services with:
@@ -177,7 +177,7 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
 1.  Apply the custom routing rules defined in the `routing.yaml` file:
 
     ```bash
-    kubectl apply -f docs/serving/samples/kong-routing-go/routing.yaml
+    kubectl apply -f code-samples/serving/kong-routing-go/routing.yaml
     ```
 
     If you have configured a custom domain name for your service, please replace
@@ -252,6 +252,6 @@ request to the _Search_ or _Login_ service according to the header value.
 To clean up the sample resources:
 
 ```bash
-kubectl delete --filename docs/serving/samples/kong-routing-go/sample.yaml
-kubectl delete --filename docs/serving/samples/kong-routing-go/routing.yaml
+kubectl delete --filename code-samples/serving/kong-routing-go/sample.yaml
+kubectl delete --filename code-samples/serving/kong-routing-go/routing.yaml
 ```

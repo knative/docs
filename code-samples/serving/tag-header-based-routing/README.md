@@ -49,7 +49,7 @@ routed to the second Revision.
 Run the following command to set up the Knative Service and Revisions.
 
 ```
-kubectl apply -f docs/serving/samples/tag-header-based-routing/sample.yaml
+kubectl apply -f code-samples/serving/tag-header-based-routing/sample.yaml
 ```
 
 ## Check the created resources

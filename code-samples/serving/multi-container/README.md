@@ -4,9 +4,8 @@ A simple web app written in Go that you can use for multi container testing.
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [installation instructions](../../../install/serving/install-serving-with-yaml.md) if you need to
-  create one.
+- A Kubernetes cluster with Knative installed and DNS configured.  See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 - Make sure multi-container flag is enabled as part of `config-features` configmap.
@@ -32,7 +31,7 @@ You can update the default files and YAML by using the steps outlined in this se
 ### Serving Container
 1. After you have cloned the sample repository, navigate to the servingcontainer directory:
 
-   `cd knative-docs/docs/serving/samples/multi-container/servingcontainer`
+   `cd knative-docs/code-samples/serving/multi-container/servingcontainer`
 1. Create a basic web server which listens on port 8881.
 You can do this by copying the following code into the `servingcontainer.go` file:
 
@@ -95,7 +94,7 @@ You can do this by copying the following code into the `servingcontainer.go` fil
 1. After you have cloned the sample repository, navigate to the sidecarcontainer directory:
    ```text
    cd -
-   cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
+   cd knative-docs/code-samples/serving/multi-container/sidecarcontainer
    ```
 
 1. Create a basic web server which listens on port 8882.
@@ -152,7 +151,7 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
 
 1. After you have cloned the sample repository, navigate to the `multi-container` directory:
    1. `cd -`
-   2. `cd knative-docs/docs/serving/samples/multi-container/`
+   2. `cd knative-docs/code-samples/serving/multi-container/`
 
 1. Copy the following YAML service definition into the `service.yaml` file:
 
@@ -180,14 +179,14 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
    servingcontainer
    ```bash
    cd -
-   cd knative-docs/docs/serving/samples/multi-container/servingcontainer
-   go mod init github.com/knative/docs/docs/serving/samples/multi-container/servingcontainer
+   cd knative-docs/code-samples/serving/multi-container/servingcontainer
+   go mod init github.com/knative/docs/code-samples/serving/multi-container/servingcontainer
    ```
    sidecarcontainer
    ```bash
    cd -
-   cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
-   go mod init github.com/knative/docs/docs/serving/samples/multi-container/sidecarcontainer
+   cd knative-docs/code-samples/serving/multi-container/sidecarcontainer
+   go mod init github.com/knative/docs/code-samples/serving/multi-container/sidecarcontainer
    ```
 
 ## Building and deploying the sample
@@ -201,10 +200,10 @@ After you have modified the sample code files you can build and deploy the sampl
    ```bash
    # Build the container on your local machine
    cd -
-   cd knative-docs/docs/serving/samples/multi-container/servingcontainer
+   cd knative-docs/code-samples/serving/multi-container/servingcontainer
    docker build -t {username}/servingcontainer .
    cd -
-   cd knative-docs/docs/serving/samples/multi-container/sidecarcontainer
+   cd knative-docs/code-samples/serving/multi-container/sidecarcontainer
    docker build -t {username}/sidecarcontainer .
    # Push the container to docker registry
    docker push {username}/servingcontainer
@@ -218,7 +217,7 @@ After you have modified the sample code files you can build and deploy the sampl
 
    ```bash
    cd -
-   cd knative-docs/docs/serving/samples/multi-container
+   cd knative-docs/code-samples/serving/multi-container
    kubectl apply --filename service.yaml
    ```
 

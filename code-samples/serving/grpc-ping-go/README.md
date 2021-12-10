@@ -11,7 +11,8 @@ for production containers.
 
 ## Prerequisites
 
-- [Install the latest version of Knative Serving](../../../install/serving/install-serving-with-yaml.md).
+- Install the latest version of Knative Serving. See
+  [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 
 - Install [docker](https://www.docker.com/).
 
@@ -22,8 +23,8 @@ for production containers.
 1. Download a copy of the code:
 
   ```bash
-  git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-  cd knative-docs/docs/serving/samples/grpc-ping-go
+  git clone https://github.com/knative/docs.git knative-docs
+  cd knative-docs/code-samples/serving/grpc-ping-go
   ```
 
 2. Use Docker to build a container image for this service and push to Docker Hub.

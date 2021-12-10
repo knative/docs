@@ -34,7 +34,7 @@ async fn reply_event(
 
     // Build response event cloning the original event and setting the new type and source
     let response_event = EventBuilderV10::from(request_event)
-        .source("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust")
+        .source("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust")
         .ty("dev.knative.docs.sample")
         .build()
         // If i can't build the event, fail with internal server error
@@ -58,7 +58,7 @@ async fn forward_event(
 
     // Build response event cloning the original event and setting the new type and source
     let forward_event = EventBuilderV10::from(request_event)
-        .source("https://github.com/knative/docs/docs/serving/samples/cloudevents/cloudevents-rust")
+        .source("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust")
         .ty("dev.knative.docs.sample")
         .build()
         // If i can't build the event, fail with internal server error

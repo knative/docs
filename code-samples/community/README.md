@@ -3,10 +3,7 @@
 Get up and running with one of the community code samples. These samples are
 contributed and maintained by members of the Knative community.
 
-!!! note
-    These samples might become outdated or the original author might be unable
-    to maintain their contribution. If you find that something isn't working,
-    lend a helping hand and fix it in a PR.
+**Note:** These samples might become outdated or the original author might be unable to maintain their contribution. If you find that something isn't working, lend a helping hand and fix it in a PR.
 
 [Learn more about the lifespan of samples](https://github.com/knative/docs/blob/main/contribute-to-docs/what-to-contribute/creating-code-samples.md#user-focused-content)
 

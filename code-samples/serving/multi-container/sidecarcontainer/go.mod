@@ -1,3 +1,3 @@
-module github.com/knative/docs/docs/serving/samples/multi-container/sidecarcontainer
+module github.com/knative/docs/code-samples/serving/multi-container/sidecarcontainer
 
 go 1.15
