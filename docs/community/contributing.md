@@ -7,8 +7,7 @@ Here are a few ways to get involved.
 
 If you want to contribute to Knative, you must do the following:
 
-- Before you can make a contribution, you must fill out the [Google 
-Contributor License Agreement (CLA)](https://cla.developers.google.com/) using the same email address you used to register for Github.
+- Before you can make a contribution, you must fill out the [Google Contributor License Agreement (CLA)](https://cla.developers.google.com/) using the same email address you used to register for Github.
 For more information, see [Contributor license agreements](https://github.com/knative/community/blob/main/CONTRIBUTING.md#contributor-license-agreements).
 
 - Read the [Knative contributor guide](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
