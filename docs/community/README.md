@@ -7,5 +7,5 @@ We'd love you to join us!
 
 In this section:
 
-- [Contribute to Knative](contributing.md): Helpful tips for how to get started contributing to Knative.
-- [About the Knative community](about.md): Information about the Knative community and how it is run.
+- [Contribute to Knative](contributing.md): helpful tips for how to get started contributing to Knative.
+- [About the Knative community](about.md): information about the Knative community and how it's run.
