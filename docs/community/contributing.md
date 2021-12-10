@@ -13,7 +13,7 @@ For more information, see [Contributor license agreements](https://github.com/kn
 
 - Read the [Knative contributor guide](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
 
-- Read the [Code of Conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md).
+- Read the [Code of conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md).
 
 For more information about how the Knative community is run, see [About the Knative community](about.md).
 
@@ -27,16 +27,16 @@ following components, look for GitHub issues marked with the good first issue la
 
 - **Knative Serving:**
 
-    - For how to get started contributing, see the [Serving Development workflow](https://github.com/knative/serving/blob/main/DEVELOPMENT.md).
+    - For how to get started contributing, see the [Serving development workflow](https://github.com/knative/serving/blob/main/DEVELOPMENT.md).
     - For good starter issues, see [Serving issues](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22).
 
 - **Knative Eventing:**
-    - For how to get started contributing, see the [Eventing Development workflow](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md).
+    - For how to get started contributing, see the [Eventing development workflow](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md).
     - For good starter issues, see [Eventing issues](https://github.com/knative/eventing/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
 
 - **Knative Client (kn):**
 
-    - For how to get started contributing, see the [Client Development workflow](https://github.com/knative/client/blob/main/docs/DEVELOPMENT.md).
+    - For how to get started contributing, see the [Client development workflow](https://github.com/knative/client/blob/main/docs/DEVELOPMENT.md).
     - For good starter issues, see [Client issues](https://github.com/knative/client/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
 
 - **Documentation:**
