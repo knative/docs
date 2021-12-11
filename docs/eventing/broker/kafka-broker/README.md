@@ -101,7 +101,8 @@ This `ConfigMap` is installed in the cluster. You can edit
 the configuration or create a new one with the same values
 depending on your needs.
 
-**NOTE:** The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
+!!! note
+    The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
 
 ## Set as default broker implementation
 
@@ -170,7 +171,8 @@ data:
 The `Secret` `my_secret` must exist in the same namespace of the `ConfigMap` referenced by `broker.spec.config`,
 in this case: `knative-eventing`.
 
-_Note: Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)._
+!!! note
+    Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail).
 
 ### Authentication using SASL
 
@@ -222,7 +224,8 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
   --from-file=user.key=<my_key.pem_file_path>
 ```
 
-_NOTE: `ca.crt` can be omitted to fallback to use system's root CA set._
+!!! note
+    `ca.crt` can be omitted to fallback to use system's root CA set.
 
 ## Kafka Producer and Consumer configurations
 

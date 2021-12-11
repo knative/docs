@@ -39,7 +39,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/[gcloud-project]/knative.dev/eventing/cmd/heartbeats
+        - image: gcr.io/knative-nightly/knative.dev/eventing/cmd/heartbeats
           name: heartbeats
           args:
             - --period=1

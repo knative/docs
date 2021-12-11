@@ -129,10 +129,8 @@ If you see this condition, check the following to continue debugging:
 - [Check Pod status](#check-pod-status)
 - [Check Istio routing](#check-ingressistio-routing)
 
-If you see other conditions, look up the meaning of the conditions in Knative
-[Error Conditions and Reporting](https://github.com/knative/serving/blob/main/docs/spec/errors.md).
-Note: some of them are not implemented yet. An alternative is to
-[check Pod status](#check-pod-status).
+!!! tip
+    If you see other conditions, you can look up the meaning of the conditions in Knative [Error Conditions and Reporting](https://github.com/knative/serving/blob/main/docs/spec/errors.md). An alternative is to [check Pod status](#check-pod-status).
 
 ## Check Pod status
 

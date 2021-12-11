@@ -293,7 +293,7 @@ Knative Serving with different ingresses:
         spec:
           config:
             network:
-              ingress.class: "ambassador.ingress.networking.knative.dev"
+              ingress-class: "ambassador.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
@@ -332,7 +332,7 @@ Knative Serving with different ingresses:
               enabled: true
           config:
             network:
-              ingress.class: "contour.ingress.networking.knative.dev"
+              ingress-class: "contour.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
@@ -349,7 +349,32 @@ Knative Serving with different ingresses:
 
         Save this for configuring DNS later.
 
-### Verify the Knative Serving deployment:
+=== "Kourier"
+
+    The following commands install Kourier and enable its Knative integration.
+
+    1. To configure Knative Serving to use Kourier, copy the following YAML into a file:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          ingress:
+            kourier:
+              enabled: true
+          config:
+            network:
+              ingress-class: "kourier.ingress.networking.knative.dev"
+        ```
+
+    1. Apply the YAML file by running the command:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
 
 1. Monitor the Knative deployments:
 ```

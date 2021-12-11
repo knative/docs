@@ -4,7 +4,7 @@
 
 ### Use sentence case for titles and headings
 
-> Only capitalize proper nouns, acronyms, and the first word of the heading.
+Only capitalize proper nouns, acronyms, and the first word of the heading.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |--------------------|-----
@@ -20,7 +20,7 @@
 
 ### Use imperatives for headings of procedures
 
-> For consistency, brevity, and to better signpost where action is expected of the reader, make procedure headings imperatives.
+For consistency, brevity, and to better signpost where action is expected of the reader, make procedure headings imperatives.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |----------------------|-----
@@ -65,10 +65,10 @@
 
 ### Use nonbreaking spaces in units of measurement other than percent
 
-> For most units of measurement, when you specify a number with the unit, use a nonbreaking space
+For most units of measurement, when you specify a number with the unit, use a nonbreaking space
 between the number and the unit.
 
-> Don't use spacing when the unit of measurement is percent.
+Don't use spacing when the unit of measurement is percent.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
 |----------------------|-----
@@ -87,9 +87,24 @@ between the number and the unit.
 
 When listing terms and their definitions, use table formatting instead of definition list formatting.
 
-|:white_check_mark: Correct                  |:no_entry: Incorrect
-|--------------------|-----
-|`|Value |Description |`<br>`|------|---------------------|`<br>`|Value1|Description of Value1|`<br>`|Value2|Description of Value2|`|`Value1`<br>`: Description of Value1`<br><br>`Value2`<br>`: Description of Value2`|
+:white_check_mark: **Correct**
+
+```
+| Value  | Description           |
+|--------|-----------------------|
+| Value1 | Description of Value1 |
+| Value2 | Description of Value2 |
+```
+
+:no_entry: **Incorrect**
+
+```
+**Value1:**
+Description of Value1
+
+**Value2:**
+Description of Value2
+```
 
 ## General style
 
@@ -103,9 +118,9 @@ When listing terms and their definitions, use table formatting instead of defini
 
 ### Only use parentheses for acronym explanations
 
->Put an acronym inside parentheses after its explanation. Don’t use parentheses for anything else.
+Put an acronym inside parentheses after its explanation. Don’t use parentheses for anything else.
 
->Parenthetical statements especially should be avoided because readers skip them.
+Parenthetical statements especially should be avoided because readers skip them.
 If something is important enough to be in the sentence, it should be fully part of that sentence.
 
 |:white_check_mark: Correct                  |:no_entry: Incorrect
