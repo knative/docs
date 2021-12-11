@@ -23,7 +23,7 @@ either internal contributor content, or external-facing user content.
 - _Documentation_: Content for developers or administrators using Knative. This
   documentation belongs in the
   [`knative/docs` repo](https://github.com/knative/docs). All content in
-  `knative/docs` is published to https://knative.dev.
+  `knative/docs` is published to the [Knative website](https://knative.dev).
 
 - _Code samples_: Includes user-facing code samples and their accompanying
   step-by-step instructions. Code samples add a particular burden because they
@@ -45,10 +45,6 @@ either internal contributor content, or external-facing user content.
       attention or use, those samples will be moved into the
       “[community maintained](https://github.com/knative/docs/tree/main/community/samples)”
       set of samples.
-
-    - _Passes e2e testing_ - All code samples within
-      `docs/[*component*]/samples` folders must align with (and pass) the
-      [`e2e` tests](https://github.com/knative/docs/tree/main/test).
 
   - **Community owned and maintained samples**: For sample code which doesn't
     meet the mentioned criteria, put the code in a separate repository and link to

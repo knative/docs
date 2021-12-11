@@ -4,7 +4,7 @@ Tutorial on how to build and deploy a `KafkaSource` event source.
 
 ## Background
 
-The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`.
+The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
 !!! note
     If you need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets, you can implement a Kafka Consumer by using one of the available Apache Kafka SDKs.

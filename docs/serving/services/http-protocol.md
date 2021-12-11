@@ -7,7 +7,7 @@ Operators can force HTTPS redirection for all Services. See the `http-protocol` 
 You can override the default behavior for each Service or global configuration.
 
 * **Global key:** `http-protocol`
-* **Per-revision annotation key:** `networking.knative.dev/httpOption`
+* **Per-revision annotation key:** `networking.knative.dev/http-protocol`
 * **Possible values:**
     * `enabled` &mdash; Services accept HTTP traffic.
     * `redirected` &mdash; Services send a 301 redirect for all HTTP connections and ask clients to use HTTPS instead.
@@ -23,7 +23,7 @@ You can override the default behavior for each Service or global configuration.
       name: example
       namespace: default
       annotations:
-        networking.knative.dev/httpOption: "enabled"
+        networking.knative.dev/http-protocol: "redirected"
     spec:
       ...
     ```
@@ -36,7 +36,7 @@ You can override the default behavior for each Service or global configuration.
       name: config-network
       namespace: knative-serving
     data:
-      http-protocol: "enabled"
+      http-protocol: "redirected"
     ```
 
 === "Global (Operator)"
@@ -48,5 +48,5 @@ You can override the default behavior for each Service or global configuration.
     spec:
       config:
         network:
-          httpProtocol: "enabled"
+          http-protocol: "redirected"
     ```

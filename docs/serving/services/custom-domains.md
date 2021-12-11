@@ -77,7 +77,7 @@ DomainMappings in that namespace to use the domain name.
                 kind: Service
                 apiVersion: serving.knative.dev/v1
               tls:
-                secret: <cert-secret>
+                secretName: <cert-secret>
             ```
             Where:
 

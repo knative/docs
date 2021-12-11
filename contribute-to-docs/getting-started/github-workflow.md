@@ -26,8 +26,7 @@ To check out your fork of the `knative/docs` repository:
 You are now able to open PRs, start reviews, and contribute fixes the
 `knative/docs` repo. See the following sections to learn more.
 
-**Important**: Remember to regularly
-[syncing your fork](https://help.github.com/articles/syncing-a-fork/).
+**Important**: Remember to regularly [sync your fork](https://help.github.com/articles/syncing-a-fork/).
 
 
 ## Report documentation issues
@@ -59,10 +58,7 @@ Note that product behavior or code issues should be filed against the
 [individual Knative repositories](http://github.com/knative).
 
 Documentation issues should go in the
-[`knative/docs` repo](https://github.com/knative/docs/issues) but if the issue
-is specific to the look or behavior of the <https://knative.dev> website, open
-the issue in the
-[`knative/website` repo](https://github.com/knative/website/issues).
+[`knative/docs` repo](https://github.com/knative/docs/issues).
 
 
 ## Open PRs to fix documentation issues
@@ -73,10 +69,6 @@ for Pull Requests (PRs).
 
 General details about how to open a PR are covered in the
 [Knative guidelines](https://github.com/knative/community/).
-
-Note that PRs for fixes to the look or behavior of the <https://knative.dev>
-website, must be opened the
-[`knative/website` repo](https://github.com/knative/website/pulls).
 
 <!-- This could use a pass to be more focused on what a PR submitter should do at the start of the process. -->
 
@@ -89,7 +81,7 @@ website, must be opened the
    - If you are updating an existing page, locate that file and begin making
      changes.
 
-     For example, from any page on `knative.dev`, you can click the
+     For example, from any page on the Knative website, you can click the
      pencil icon in the upper right corner to open that page in GitHub.
 
    - If you are adding new content, you must follow the
@@ -106,6 +98,8 @@ website, must be opened the
 
 1. [Assign an owner to the PR](#assigning-owners-and-reviewers)
    to request a review.
+
+### PR review process
 
 Here's what generally happens after you send the PR for review:
 
@@ -125,10 +119,9 @@ Here's what generally happens after you send the PR for review:
     - The SME is responsible for reviewing the technical accuracy and adding the
       `lgtm` label.
 
-    - The
-      [Knative technical writers](https://github.com/knative/docs/blob/main/OWNERS_ALIASES)
+    - The [Knative technical writers](https://github.com/knative/docs/blob/main/OWNERS_ALIASES)
       are who provide the `approved` label when the content meets quality,
-      clarity, and organization standards (see [Style Guide](#style-guide)).
+      clarity, and organization standards (see the [Knative style guide](../style-guide/README.md)).
 
 We appreciate contributions to the docs, so if you open a PR we will help you
 get it merged. You can also post in the `#docs`
@@ -148,7 +141,7 @@ Use the `/assign` command to set the owner. For example: `/assign @owner_id`
 **For code related changes**, initially set the owner of your PR to the SME who
 should review for technical accuracy. If you don't know who the appropriate
 owner is, nor who your reviewers should be for your PR, you can assign the
-[current working group lead](https://github.com/knative/community/tree/main/WORKING-GROUPS.md) of the related component.
+[current working group lead](https://github.com/knative/community/tree/main/working-groups/WORKING-GROUPS.md) of the related component.
 
 If you want to notify and include other stakeholders in your PR review, use the
 `/cc` command. For example: `/cc @stakeholder_id1 @stakeholder_id2`
@@ -156,7 +149,7 @@ If you want to notify and include other stakeholders in your PR review, use the
 
 ## Reviewing PRs
 
-[See the Knative community guidelines about reviewing PRs](https://github.com/knative/community/blob/main/reviewing.md)
+[See the Knative community guidelines about reviewing PRs](https://github.com/knative/community/blob/main/REVIEWING.md)
 
 
 ## Using Prow to manage PRs and Issues
@@ -188,7 +181,7 @@ the known commands:
 - You can also use Prow to manage labels on PRs with `/kind ...`,
   `/good-first-issue`, or `/area ...`
 
-- See [Branches](structure.md#branches) for details about how
+- See [Cherrypicking](branches-and-cherrypicking.md#cherrypicking) for details about how
   to use the `/cherrypick` command.
 
 ### Common GitHub PRs FAQs

@@ -1,8 +1,6 @@
 # Load balancing
 
-You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer.
-
-**NOTE:** To do this, you must first ensure that individual pod addressability is enabled.
+You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer. To do this, you must first ensure that individual pod addressability is enabled.
 
 ## Activator pod selection
 
@@ -26,5 +24,5 @@ Target burst capacity can be configured using a combination of the following par
 
 - Setting the targeted concurrency limits for the revision. See [concurrency](../autoscaling/concurrency.md).
 - Setting the target utilization parameters. See [target utilization](../autoscaling/concurrency.md#target-utilization).
-- Setting the target burst capacity. You can configure target burst capacity using the `autoscaling.knative.dev/targetBurstCapacity` annotation key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](target-burst-capacity.md#setting-the-target-burst-capacity).
+- Setting the target burst capacity. You can configure target burst capacity using the `target-burst-capacity` key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](target-burst-capacity.md#setting-the-target-burst-capacity).
 - Setting the Activator capacity by using the `config-autoscaler` ConfigMap. See [Setting the Activator capacity](activator-capacity.md#setting-the-activator-capacity).

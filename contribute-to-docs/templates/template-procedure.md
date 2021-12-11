@@ -102,149 +102,202 @@ Write a few sentences to describe the task and provide additional context on the
 2. Step 2
 ```
 
-## Procedure Content Samples
+## Procedure content samples
 
 This section provides common content types that appear in procedural topics.
 Copy and paste the markdown to use it in your topic.
 
 
-### “Fill-in-the-Fields” Table
+### Markdown embedded image
 
-Where the reader must enter many values in, for example, a YAML file, use a table within the
-procedure as follows:
+The following is an embedded image reference in markdown.
 
-Open the YAML file.
-
-```yaml
-Key1: Value1
-Key2: Value2
-metadata:
-  annotations:
-    # case-sensitive
-    Key3: Value3
-  Key4: Value4
-  Key5: Value5
-spec:
-  # Configuration specific to this broker.
-  config:
-    Key6: Value6
+```
+![Annotated procedure topic](../images/annotated-procedure-topic.png)
 ```
 
-Change the relevant values to your needs, using the following table as a guide.
+![Annotated procedure topic](../images/annotated-procedure-topic.png)
 
-| Key   | Value Type     | Description  |
-|-------|----------------|--------------|
-| Key1  | String         | Description  |
-| Key2  | Integer        | Description  |
-| Key3  | String         | Description  |
-| Key4  | String         | Description  |
-| Key5  | Float          | Description  |
-| Key6  | String         | Description  |
-
-
-### Table
+### Tables
 
 Introduce the table with a sentence. For example, “The following table lists which operations must be
 made available to a developer accessing a Knative Route using a minimal profile.”
 
 
-#### Markdown Table Template
+#### Markdown table template
 
+```
 |Header 1|Header 2|
 |--------|--------|
 |Data1   |Data2   |
 |Data3   |Data4   |
+```
+
+#### “Fill-in-the-Fields” table
+
+Where the reader must enter many values in, for example, a YAML file, use a table within the
+procedure as follows:
+
+    1. Open the YAML file.
+
+        ```yaml
+        Key1: Value1
+        Key2: Value2
+        metadata:
+          annotations:
+            # case-sensitive
+            Key3: Value3
+          Key4: Value4
+          Key5: Value5
+        spec:
+          # Configuration specific to this broker.
+          config:
+            Key6: Value6
+        ```
+
+    2. Change the relevant values to your needs, using the following table as a guide.
+
+        | Value   | Value Type     | Description  |
+        |---------|----------------|--------------|
+        | Value1  | String         | Description  |
+        | Value2  | Integer        | Description  |
+        | Value3  | String         | Description  |
+        | Value4  | String         | Description  |
+        | Value5  | Float          | Description  |
+        | Value6  | String         | Description  |
 
 
-### Ordered List
+### Ordered lists
 
 Write a sentence or two to introduce the content of the list.
 For example, “If you want to fix or add content to a past release, you can find the source files in
 the following folders.”. Optionally, include bold lead-ins before each list item.
 
+**NOTE:** For the formatting to render correctly, you must add an empty line
+between the list and the preceding sentence.
 
-#### Markdown Ordered List Templates
+#### Markdown ordered list template
+
+```
+Introductory sentence:
 
 1. Item 1
 1. Item 2
 1. Item 3
+```
+
+```
+Introductory sentence:
 
 1. **Lead-in description:** Item 1
 1. **Lead-in description:** Item 2
 1. **Lead-in description:** Item 3
+```
 
+#### Nested ordered lists template
 
-### Unordered List
+For formatting to render correctly, nested items must be indented by four spaces
+in relation to their parent item.
+
+```
+Introductory sentence:
+
+1. Item 1
+
+    1. Item 1a
+
+1. Item 2
+```
+
+### Unordered Lists
 
 Write a sentence or two to introduce the content of the list.
 For example, “Your own path to becoming a Knative contributor can begin in any of the following
 components:”. Optionally, include bold lead-ins before each list item.
 
+**NOTE:** For the formatting to render correctly, you must add an empty line
+between the list and the preceding sentence.
 
-#### Markdown Unordered List Template
+#### Markdown unordered list template
+
+```
+Introductory sentence:
 
 * List item
 * List item
 * List item
+```
+
+```
+Introductory sentence:
 
 * **Lead-in**: List item
 * **Lead-in**: List item
 * **Lead-in**: List item
+```
 
+#### Nested unordered list template
 
-#### Note
+Nested items must be indented by four spaces in relation to their parent item.
+
+```
+Introductory sentence:
+
+* List item
+
+    * List sub-item
+
+* List item
+```
+
+### Notes
 
 Ensure the text beneath the **note** is indented as much as **note** is.
 
+```
 !!! note
     This is a note.
+```
 
-
-#### Warning
+### Warnings
 
 If the note regards an issue that could lead to data loss, the note should be a warning.
 
+```
 !!! warning
     This is a warning.
+```
 
-
-#### Markdown Embedded Image
-
-The following is an embedded image reference in markdown.
-
-![Annotated procedure topic](../../../images/annotated-procedure-topic.png)
-
-
-#### Tabs
+### Tabs
 
 Place multiple versions of the same procedure (such as a kn CLI procedure vs a YAML procedure)
-within tabs. Indent the opening tabs tags 3 spaces to make the tabs display properly.
+within tabs. Indent the tab content four spaces to make the tabs display properly.
 
-== "tab1 name"
+    == "tab1 name"
 
-    This is a stem:
+        This is a stem:
 
-    1. This is a step.
+        1. This is a step.
 
-      ```
-      This is some code.
-      ```
+          ```
+          This is some code.
+          ```
 
-    1. This is another step.
+        1. This is another step.
 
-== "tab2 name"
+    == "tab2 name"
 
-    This is a stem:
+        This is a stem:
 
-    1. This is a step.
+        1. This is a step.
 
-      ```
-      This is some code.
-      ```
+          ```
+          This is some code.
+          ```
 
-    1. This is another step.
+        1. This is another step.
 
 
-### Documenting Code and Code Snippets
+### Documenting code and code snippets
 
-For instructions on how to format code and code snippets, see the Style Guide.
+For instructions on how to format code and code snippets, see the [Style guide](../style-guide/documenting-code.md).

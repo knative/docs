@@ -19,7 +19,7 @@ type: "blog"
 
 <div style="padding:50px;">
 <em style="color:#0071c7;font-size: 1em;">"The entire idea of cloud native and serverless go together with digital transformation happening at any company. You need to modernize the way you manage apps and develop."</em>
-<p style="color:#0071c7;font-size: 1em;">-- Sebastian Goasguen, co-founder of Triggermesh</p>
+<p style="color:#0071c7;font-size: 1em;">-- Sebastian Goasguen, co-founder of TriggerMesh</p>
 </div>
 
 <div style="padding:50px">
@@ -77,7 +77,7 @@ type: "blog"
 <br>- Aparna Sinha, Director of Product Management, Google
 
 <p><i>“The entire idea of cloud native and serverless go together with digital transformation happening at any company. You need to modernize the way you manage apps and develop.”</i>
-<br>- Sebastian Goasguen, co-founder of Triggermesh, which provides integration-as-code using a Knative platform
+<br>- Sebastian Goasguen, co-founder of TriggerMesh, which provides integration-as-code using a Knative platform
 
 <h2 style="font-weight: bold;">A note to the CTO</h2>
 

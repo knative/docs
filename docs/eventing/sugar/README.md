@@ -104,8 +104,8 @@ spec:
 EOF
 ```
 
-> _Note_: If the named Broker already exists, the Sugar controller will do
-> nothing, and the Trigger will not own the existing Broker.
+!!! note
+    If the named Broker already exists, the Sugar controller does nothing, and the Trigger will not own the existing Broker.
 
 This will make a Broker called "sugar" in the Namespace "hello", and attempt to
 send events to the "event-display" service.

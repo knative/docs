@@ -24,9 +24,9 @@ The Knative website includes versioned docs for recent releases, the Knative
 blog, links to all community resources, as well as Knative governance and
 contributor guidelines.
 
-### Run website locally
+### Run the website locally
 
-For instructions, see Knative's [MkDocs contributor guide](https://knative.dev/docs/help/contributor/mkdocs-contributor-guide).
+For instructions, see Knative's [docs contributor guide](contribute-to-docs/getting-started/previewing-docs-locally.md).
 
 ### Website source files
 
@@ -55,7 +55,7 @@ reading about how to contribute to the docs, you should take a moment to learn
 about the Knative code of conduct, governance, values, and the various working
 groups and committees.
 
-[Knative community and contributor guidelines](https://knative.dev/community/contributing/)
+[Knative community and contributor guidelines](https://github.com/knative/community/)
 
 Source files for all Knative community and governance topics are located
 separately in the [knative/community](https://github.com/knative/community/)
@@ -63,14 +63,14 @@ repo.
 
 To help you get started, see the following resources:
 
-- [Knative docs contributor's guide](https://knative.dev/docs/help/contributor/) -- Contains information about how
+- [Knative docs contributor's guide](contribute-to-docs/README.md) -- Contains information about how
   to contribute.
 
 - New content templates:
-  - [Concept](docs/help/contributor/templates/template-concept.md)
-  - [Procedure](docs/help/contributor/templates/template-procedure.md)
-  - [Troubleshooting](docs/help/contributor/templates/template-troubleshooting.md)
-  - [Blog](docs/help/contributor/templates/template-blog-entry.md)
+  - [Concept](contribute-to-docs/templates/template-concept.md)
+  - [Procedure](contribute-to-docs/templates/template-procedure.md)
+  - [Troubleshooting](contribute-to-docs/templates/template-troubleshooting.md)
+  - [Blog](contribute-to-docs/templates/template-blog-entry.md)
 
 ### Getting help
 

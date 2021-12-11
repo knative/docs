@@ -5,15 +5,13 @@ aliases:
   api-core-wg-leads:
   - dprotaso
   autoscaling-reviewers:
+  - nader-ziada
   - psschwei
   - taragu
   autoscaling-wg-leads:
-  - markusthoemmes
-  - vagababov
+  - julz
   autoscaling-writers:
   - julz
-  - markusthoemmes
-  - vagababov
   - yanweiguo
   client-reviewers:
   - itsmurugappan
@@ -39,11 +37,14 @@ aliases:
   - omerbensaadon
   - pmbanugo
   - snneji
-  docs-wg-leads: []
+  docs-wg-leads:
+  - csantanapr
+  - snneji
   docs-writers:
   - RichardJJG
   - abrennan89
   - carieshmarie
+  - csantanapr
   - richieescarez
   - snneji
   eventing-reviewers:
@@ -68,7 +69,7 @@ aliases:
   - pierDipi
   - vaikas
   knative-admin:
-  - bsnchan
+  - csantanapr
   - dprotaso
   - duglin
   - evankanderson
@@ -77,11 +78,10 @@ aliases:
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
+  - lance
   - markusthoemmes
   - matzew
-  - mbehrendt
   - nak3
-  - omerbensaadon
   - pmorie
   - rhuss
   - spencerdillard
@@ -101,7 +101,6 @@ aliases:
   - andrew-su
   - arturenault
   - carlisia
-  - markusthoemmes
   - nak3
   - shashwathi
   - tcnghia
@@ -120,7 +119,6 @@ aliases:
   - aliok
   - houshengbo
   - jcrossley3
-  - markusthoemmes
   - matzew
   - trshafer
   operations-wg-leads:
@@ -130,7 +128,6 @@ aliases:
   - aliok
   - houshengbo
   - jcrossley3
-  - markusthoemmes
   - matzew
   - trshafer
   pkg-configmap-reviewers:
@@ -159,6 +156,7 @@ aliases:
   - gerardo-lc
   - joshua-bone
   - kvmware
+  - shinigambit
   - steuhs
   productivity-wg-leads:
   - chizhg
@@ -182,6 +180,7 @@ aliases:
   serving-reviewers:
   - carlisia
   - julz
+  - nader-ziada
   - nealhu
   - psschwei
   - whaught
@@ -194,8 +193,8 @@ aliases:
   source-wg-leads:
   - lionelvillard
   steering-committee:
-  - bsnchan
-  - mbehrendt
+  - csantanapr
+  - lance
   - pmorie
   - thisisnotapril
   - vaikas
@@ -207,11 +206,11 @@ aliases:
   - rhuss
   trademark-committee:
   - duglin
-  - omerbensaadon
+  - evankanderson
   - spencerdillard
   ux-wg-leads:
   - csantanapr
-  - omerbensaadon
+  - snneji
   ux-writers:
   - csantanapr
-  - omerbensaadon
+  - snneji

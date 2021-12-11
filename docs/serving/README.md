@@ -1,15 +1,13 @@
 # Knative Serving
 
-Knative Serving builds on Kubernetes to support deploying and serving
-of serverless applications and functions. Serving is easy to get started with
-and scales to support advanced scenarios.
-
-The Knative Serving project provides middleware components that enable:
+Knative Serving provides components that enable:
 
 - Rapid deployment of serverless containers.
-- Autoscaling including scaling pods down to zero.
-- Support for multiple networking layers such as Ambassador, Contour, Kourier, Gloo, and Istio for integration into existing environments.
+- Autoscaling, including scaling pods down to zero.
+- Support for multiple networking layers, such as Ambassador, Contour, Kourier, Gloo, and Istio, for integration into existing environments.
 - Point-in-time snapshots of deployed code and configurations.
+
+Knative Serving supports both HTTP and [HTTPS](using-a-tls-cert.md) networking protocols.
 
 ## Serving resources
 

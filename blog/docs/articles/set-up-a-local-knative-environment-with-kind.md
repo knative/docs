@@ -26,7 +26,7 @@ Next, create a Kubernetes cluster using KinD, and expose the ports the ingress g
 ```bash
 cat > clusterconfig.yaml <<EOF
 kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha3
+apiVersion: kind.sigs.k8s.io/v1alpha4
 nodes:
 - role: control-plane
   extraPortMappings:
@@ -68,7 +68,7 @@ Have a nice day! 👋
 Now that the cluster is running, you can add Knative components using the Knative CRDs. At the time of writing, the latest available version is 0.15.
 
 ```bash
-$ kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-crds.yaml
+$ kubectl apply --filename https://github.com/knative/serving/releases/download/knative-v1.0.0/serving-crds.yaml
 ```
 
 ```bash
@@ -87,7 +87,7 @@ customresourcedefinition.apiextensions.k8s.io/images.caching.internal.knative.de
 After the CRDs, the core components are next to be installed on your cluster. For brevity, the unchanged components are removed from the response.
 
 ```bash
-$ kubectl apply --filename https://github.com/knative/serving/releases/download/v0.15.0/serving-core.yaml
+$ kubectl apply --filename https://github.com/knative/serving/releases/download/knative-v1.0.0/serving-core.yaml
 ```
 
 ```bash
@@ -132,7 +132,7 @@ Next, choose a networking layer. This example uses Kourier. Kourier is the optio
 To install Kourier and make it available as a service leveraging the node ports, you’ll need to download the YAML file first and make a few changes.
 
 ```bash
-curl -Lo kourier.yaml https://github.com/knative-sandbox/net-kourier/releases/download/v0.15.0/kourier.yaml
+curl -Lo kourier.yaml https://github.com/knative/net-kourier/releases/download/knative-v1.0.0/kourier.yaml
 ```
 
 By default, the Kourier service is set to be of type `LoadBalancer`. On local machines, this type doesn’t work, so you’ll have to change the type to `NodePort` and add `nodePort` elements to the two listed ports.

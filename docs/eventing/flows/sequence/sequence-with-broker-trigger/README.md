@@ -11,7 +11,8 @@ into the Broker and create another Trigger which will then display those events.
 - Knative Serving
 - `InMemoryChannel`
 
-**NOTE:** The examples use the `default` namespace.
+!!! note
+    The examples use the `default` namespace.
 
 If you want to use different type of `Channel`, you will have to modify the
 `Sequence.Spec.ChannelTemplate` to create the appropriate Channel resources.

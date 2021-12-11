@@ -38,22 +38,34 @@
 
 The `quickstart` plugin completes the following functions:
 
-1. **Checks if you have [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} installed,** and creates a cluster called `knative`.
-1. **Installs Knative Serving with Kourier** as the default networking layer, and nip.io as the DNS.
-1. **Installs Knative Eventing** and creates an in-memory Broker and Channel implementation.
+1. **Checks if you have the selected Kubernetes instance installed,** and creates a cluster called `knative`.
+2. **Installs Knative Serving with Kourier** as the default networking layer, and nip.io as the DNS.
+3. **Installs Knative Eventing** and creates an in-memory Broker and Channel implementation.
 
-!!! todo "Install Knative and Kubernetes on a local Docker Daemon using `kn quickstart`"
-    ```bash
-    kn quickstart kind
-    ```
 
-??? bug "Having issues with Kind?"
-    We've found that some users (specifically Linux) may have trouble with Docker and, subsequently, Kind. Though this tutorial assumes you have Kind installed, you can easily follow along with a different installation.
+!!! todo "Install Knative and Kubernetes locally"
+    === "Using kind"
 
-    We have provide an alternative Quickstart on `minikube` here: [https://github.com/csantanapr/knative-minikube](https://github.com/csantanapr/knative-minikube){_target="_blank"}
+        Install Knative and Kubernetes on a local Docker daemon by running:
+        ```bash
+        kn quickstart kind
+        ```
 
-Installing may take a few minutes. After the plugin is finished, check to make sure you have a Cluster called `knative`
-!!! success "Verify Installation"
-    ```bash
-    kind get clusters
-    ```
+        After the plugin is finished, verify you have a cluster called `knative`:
+        ```bash
+        kind get clusters
+        ```
+
+    === "Using minikube"
+
+        Install Knative and Kubernetes in a minikube instance by running:
+        ```bash
+        kn quickstart minikube
+        ```
+
+        After the plugin is finished, verify you have a cluster called `knative`:
+        ```bash
+        minikube profile list
+        ```
+
+

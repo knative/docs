@@ -5,21 +5,21 @@ To contribute new documentation, follow these steps:
 1. Identify the audience and intended use for the information.
 1. Choose the [type of content](#content-types) you wish to contribute.
 1. Use one of the new content templates:
-    - [Concept](templates/template-concept.md) -- Conceptual topics explain how
+    - [Concept](../templates/template-concept.md) -- Conceptual topics explain how
     things work or what things mean. They provide helpful context to readers. They do not include
     procedures.
-    - [Procedure](templates/template-procedure.md) -- Procedural (how-to) topics
+    - [Procedure](../templates/template-procedure.md) -- Procedural (how-to) topics
     include detailed steps to perform a task as well as some context about the task.
-    - [Troubleshooting](templates/template-troubleshooting.md) -- Troubleshooting
+    - [Troubleshooting](../templates/template-troubleshooting.md) -- Troubleshooting
     topics list common errors and solutions.
-    - [Blog](templates/template-blog-entry.md) -- Instructions and a template
+    - [Blog](../templates/template-blog-entry.md) -- Instructions and a template
     that you can use to help you post to the Knative blog.
 1. [Choose appropriate titles and filenames](#choosing-titles-and-filenames).
-1. Write your new content. See the [style guide](/README.md#style) to help you with this
+1. Write your new content. See the [style guide](../style-guide/README.md) to help you with this
    process. Feel free to reach out to the
-   [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience) with any questions.
+   [DUX working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience) with any questions.
 1. Open a PR in the [knative/docs GitHub repository](https://github.com/knative/docs)
-   to kick off the review process. For details, see our [Using GitHub help](/github.md#prs).
+   to kick off the review process. For details, see our [Using GitHub help](../getting-started/github-workflow.md).
 
 ## Identify the audience and intended use
 
@@ -57,7 +57,7 @@ giving readers all the information you have, because you are unsure about
 what information they need.
 
 If you need help identifying the audience for you content, we are happy to help
-and answer all your questions during the [DUX working group](https://knative.dev/community/contributing/working-groups/working-groups/#documentation--user-experience)
+and answer all your questions during the [DUX working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience)
 weekly meetings.
 
 ## Content types
@@ -182,7 +182,39 @@ a new folder if you are adding multiple topics/files, or if you are grouping
 related content. The names for each file do not need to repeat the folder name
 since that context is already established.
 
+## Content structure
+
+**TODO: link to intended documentation layout.** A general warning about
+[Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law): documents will
+naturally tend to be distributed by team that produced them. Try to fight this,
+and organize documents based on where the _reader_ will look for them. (i.e. all
+tutorials together, maybe with indications as to which components they use,
+rather than putting all serving tutorials in one place)
+
+In some cases, the right place for a document may not be on the docs website — a
+blog post, documentation within a code repo, or a vendor site may be the right
+place. Be generous with offering to link to such locations; documents in the
+main documentation come with an ongoing cost of keeping up to date.
+
+[Learn about documenting code samples](creating-code-samples.md)
+
+### Putting your docs in the right place
+
+Generally, the `knative/docs` repo contains Knative-specific user-facing content and blog content.
+
+When you add a new document to the [`/docs`](../../docs) directory, the navigation menu updates automatically.
+For more information, see the
+[MkDocs documentation](https://www.mkdocs.org/user-guide/writing-your-docs/#configure-pages-and-navigation).
+
+Contributor-focused content belongs in one of the other Knative code repositories
+([`knative/serving`](https://github.com/knative/serving), [`knative/eventing`](https://github.com/knative/eventing), etc).
+
+## Branches
+
+For information about which branch you should choose and how to cherrypick, see
+[Branches and cherrypicking](../getting-started/branches-and-cherrypicking.md).
+
 ## Submit your contribution to GitHub
 
-If you are not familiar with GitHub, see our [working with GitHub guide](/github.md)
+If you are not familiar with GitHub, see our [working with GitHub guide](../getting-started/github-workflow.md)
 to learn how to submit documentation changes.

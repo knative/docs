@@ -5,7 +5,7 @@
 You must meet the following prerequisites before you are able to contribute to
 the docs. The following steps are specific to docs contributions.
 For more information about contributing to the Knative project, see the
-[Knative contribution guidelines](https://github.com/knative/community/blob/main/contributing.md).
+[Knative contribution guidelines](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
 
 1. If you don't already have an account, you must create
    [a new GitHub account](https://github.com/join).
@@ -69,7 +69,7 @@ Knative documentation:
 - Attend a Documentation working group meeting
   -- Come join us to ask questions, get help, and meet other docs contributors.
 
-  [See meeting details, times, and the agenda](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation)
+  [See meeting details, times, and the agenda](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience)
 
 ## Workflow overview
 
@@ -98,3 +98,11 @@ also ask a few clarifying questions, or add details such as diagrams or notes if
 needed. It's not necessarily expected that tech writers will actually execute
 the steps of a tutorial — it's expected that the SME is responsible for a
 working tutorial or how-to.
+
+## Further resources
+
+For further resources to help you to contribute to Knative documentation, see
+the [Knative docs contributor guide README](../README.md).
+
+For more information about Knative's values and processes, see the
+[community repo](https://github.com/knative/community).

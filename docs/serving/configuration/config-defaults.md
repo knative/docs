@@ -43,7 +43,6 @@ none is specified.
 
 **Default**: `"300"` (5 minutes)
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -53,7 +52,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-timeout-seconds: "300" # 5 minutes
-
 ```
 
 ### Max Revision Timeout Seconds
@@ -71,7 +69,6 @@ should also be increased to prevent in-flight requests being disrupted.
 
 **Default**: `"600"` (10 minutes)
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -81,7 +78,6 @@ metadata:
   namespace:  knative-serving
 data:
   max-revision-timeout-seconds: "600" # 10 minutes
-
 ```
 
 ### Revision Cpu Request
@@ -97,7 +93,6 @@ By default, it is not set by Knative.
 
 **Default**: `"400m"` (0.4 of a CPU (aka 400 milli-CPU))
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -107,7 +102,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-cpu-request: "400m" # 0.4 of a CPU (aka 400 milli-CPU)
-
 ```
 
 ### Revision Memory Request
@@ -123,7 +117,6 @@ By default, it is not set by Knative.
 
 **Default**: `"100M"` (100 megabytes of memory)
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -133,7 +126,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-memory-request: "100M" # 100 megabytes of memory
-
 ```
 
 ### Revision Ephemeral Storage Request
@@ -147,7 +139,6 @@ specified and the system default is used.
 
 **Default**: `"500M"` (500 megabytes of storage)
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -157,7 +148,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-ephemeral-storage-request: "500M" # 500 megabytes of storage
-
 ```
 
 ### Revision Cpu Limit
@@ -173,7 +163,6 @@ By default, it is not set by Knative.
 
 **Default**: `"1000m"` (1 CPU (aka 1000 milli-CPU))
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -183,7 +172,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-cpu-limit: "1000m" # 1 CPU (aka 1000 milli-CPU)
-
 ```
 
 ### Revision Memory Limit
@@ -199,7 +187,6 @@ By default, it is not set by Knative.
 
 **Default**: `"200M"` (200 megabytes of memory)
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -209,7 +196,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-memory-limit: "200M" # 200 megabytes of memory
-
 ```
 
 ### Revision Ephemeral Storage Limit
@@ -223,7 +209,6 @@ specified and the system default is used.
 
 **Default**: `"750M"` (750 megabytes of storage)
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -233,7 +218,6 @@ metadata:
   namespace:  knative-serving
 data:
   revision-ephemeral-storage-limit: "750M" # 750 megabytes of storage
-
 ```
 
 ### Container Name Template
@@ -249,7 +233,6 @@ enclosing Service or Configuration, so values such as
 
 **Default**: `"user-container"`
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -259,7 +242,6 @@ metadata:
   namespace:  knative-serving
 data:
   container-name-template: "user-container"
-
 ```
 
 ### Container Concurrency
@@ -275,7 +257,6 @@ the pod receives.
 
 **Default**: `"0"`
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -285,11 +266,12 @@ metadata:
   namespace:  knative-serving
 data:
   container-concurrency: "0"
-
 ```
 
 ### Container Concurrency Max Limit
+
 {% raw %}
+
 The container concurrency max limit is an operator setting ensuring that
 the individual revisions cannot have arbitrary large concurrency
 values, or autoscaling targets. `container-concurrency` default setting
@@ -297,15 +279,14 @@ must be at or below this value.
 
 Must be greater than 1.
 
-Note: even with this set, a user can choose a containerConcurrency
-of 0 (i.e. unbounded) unless allow-container-concurrency-zero is
-set to "false".
+!!! note
+    Even with this set, a user can choose a `containerConcurrency` value of 0 (unbounded) unless `allow-container-concurrency-zero` is set to "false".
+
 {% endraw %}
 
 **Key**: `container-concurrency-max-limit`
 
 **Default**: `"1000"`
-
 
 **Example:**
 ```yaml
@@ -316,7 +297,6 @@ metadata:
   namespace:  knative-serving
 data:
   container-concurrency-max-limit: "1000"
-
 ```
 
 ### Allow Container Concurrency Zero
@@ -329,7 +309,6 @@ specify 0 (i.e. unbounded) for containerConcurrency.
 
 **Default**: `"true"`
 
-
 **Example:**
 ```yaml
 apiVersion:  v1
@@ -339,26 +318,23 @@ metadata:
   namespace:  knative-serving
 data:
   allow-container-concurrency-zero: "true"
-
 ```
 
 ### Enable Service Links
+
 {% raw %}
-enable-service-links specifies the default value used for the
-enableServiceLinks field of the PodSpec, when it is omitted by the user.
-See [the Kubernetes Documentation for the enableServiceLinks Feature](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#accessing-the-service).
+
+enable-service-links specifies the default value used for the enableServiceLinks field of the PodSpec, when it is omitted by the user. See [the Kubernetes Documentation for the enableServiceLinks Feature](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#accessing-the-service).
 
 This is a tri-state flag with possible values of (true|false|default).
 
-In environments with large number of services it is suggested
-to set this value to `false`.
-See [serving#8498](https://github.com/knative/serving/issues/8498).
+In environments with large number of services it is suggested to set this value to `false`. See [serving#8498](https://github.com/knative/serving/issues/8498).
+
 {% endraw %}
 
 **Key**: `enable-service-links`
 
 **Default**: `"false"`
-
 
 **Example:**
 ```yaml
@@ -369,6 +345,4 @@ metadata:
   namespace:  knative-serving
 data:
   enable-service-links: "false"
-
 ```
-
