@@ -200,7 +200,7 @@ fix misspelling of `with` ([#781](https://github.com/knative/operator/pull/781))
 
 ### Learn more
 
-Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
+Knative is an open source project that anyone in the [community](https://knative.dev/docs/community/) can use, improve, and enjoy. We'd love you to join us!
 
 - [Welcome to Knative](https://knative.dev/docs)
 - [Getting started documentation](https://knative.dev/docs/getting-started)
