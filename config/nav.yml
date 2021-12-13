@@ -233,5 +233,8 @@ nav:
       - Installing kn: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
-    - "Join the Community ➠": /community/
+    - "Join the Community ➠":
+      - Overview: community/README.md
+      - Contribute to Knative: community/contributing.md
+      - About the community: community/about.md
     - "Read the Blog ➠": /blog/
