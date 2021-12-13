@@ -58,7 +58,7 @@ nav:
     - Installing: /docs/install/
     - Serving: /docs/serving/
     - Eventing: /docs/eventing/
-    - Code samples: /docs/samples.md
+    - Code samples: /docs/samples/
     - Reference: /docs/reference/
     - "Join the Community ➠": /community/
     - Case studies: /docs/about/case-studies/deepc

@@ -175,7 +175,7 @@ Now that our tracing infrastructure is all deployed and configured, we can start
 taking advantage of it by deploying some services. We can deploy [the heartbeat
 image](https://github.com/knative/eventing/blob/41e36eea88aada0f73e98ff5fb39b6509135dda1/cmd/heartbeats/main.go)
 as a
-[ContainerSource](https://knative.dev/docs/eventing/samples/container-source/)
+[ContainerSource](https://knative.dev/docs/eventing/custom-event-source/containersource/)
 to test and see that everything is wired up correctly:
 
 

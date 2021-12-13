@@ -4,7 +4,7 @@ Use the following code samples to help you understand the various Knative
 Serving resources and how they can be applied across common use cases.
 [Learn more about Knative Serving](../serving/README.md).
 
-[**See all Knative code samples**](https://github.com/knative/docs/tree/main/samples)
+See [all Knative code samples](https://github.com/knative/docs/tree/main/code-samples) in GitHub.
 
 | Name               | Description                 | Languages                 |
 | ------------------ | ----------------------------| :-----------------------: |

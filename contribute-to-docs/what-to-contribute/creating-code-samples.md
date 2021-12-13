@@ -33,7 +33,7 @@ either internal contributor content, or external-facing user content.
   - **Knative owned and maintained**: Includes code samples that are actively
     maintained and e2e tested. To ensure content is current and balance
     available resources, only the code samples that meet the following
-    requirements are located in the `docs/[*component*]/samples` folders of the
+    requirements are located in the `code-samples/serving` and `code-samples/eventing` folders of the
     `knative/docs` repo:
 
     - _Actively maintained_ - The code sample has an active Knative team member
@@ -43,12 +43,12 @@ either internal contributor content, or external-facing user content.
     - _Receives regular traffic_ - To avoid hosting and maintaining unused or
       stale content, if code samples are not being viewed and fail to receive
       attention or use, those samples will be moved into the
-      “[community maintained](https://github.com/knative/docs/tree/main/community/samples)”
+      “[community maintained](https://github.com/knative/docs/tree/main/code-samples/community)”
       set of samples.
 
   - **Community owned and maintained samples**: For sample code which doesn't
     meet the mentioned criteria, put the code in a separate repository and link to
-    it [from this page](https://github.com/knative/docs/tree/main/community/samples/README.md).
+    it [from this page](https://github.com/knative/docs/tree/main/code-samples/community/README.md).
     These samples might not receive regular maintenance. It is possible that a
     sample is no longer current and is not actively maintained by its original
     author. While we encourage a contributor to maintain their content, we

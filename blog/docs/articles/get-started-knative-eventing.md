@@ -96,4 +96,4 @@ kubectl logs -l serving.knative.dev/service=test-display -c user-container — t
 ## Further Reading
 Give the demo a whirl and [let me know](https://twitter.com/developing4data) how you get on!
 
-If you want to learn more, then you can check out some other examples in the [Knative docs.](https://knative.dev/docs/eventing/samples/) The [‘Knative Cookbook’](https://developers.redhat.com/books/knative-cookbook/?v=1) is another great resource for learning more about Knative Serving and Eventing.
+If you want to learn more, then you can check out some other examples in the [Knative docs](https://knative.dev/docs/samples/eventing). The [‘Knative Cookbook’](https://developers.redhat.com/books/knative-cookbook/?v=1) is another great resource for learning more about Knative Serving and Eventing.
