@@ -231,13 +231,14 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
 
 Kafka consumers keep track of the last successfully sent events by committing offsets.
 
-For performance reasons, it's not recommended committing offsets every time an event is successfully sent to a
-subscriber.
-
 Knative Kafka Broker commits the offset every `auto.commit.interval.ms` milliseconds.
 
-`auto.commit.interval.ms` can be changed by changing the `config-kafka-broker-data-plane` `ConfigMap`
-in the `knative-eventing` namespace by changing the parameter `auto.commit.interval.ms` as follows:
+!!! note
+    To prevent negative impacts to performance, it is not recommended committing
+    offsets every time an event is successfully sent to a subscriber.
+
+The interval can be changed by changing the `config-kafka-broker-data-plane` `ConfigMap`
+in the `knative-eventing` namespace by modifying the parameter `auto.commit.interval.ms` as follows:
 
 ```yaml
 
@@ -256,10 +257,10 @@ data:
 ```
 
 !!! note
-    While Knative Kafka Broker guarantees at least once delivery, hence your applications may
-    receive duplicate events, the higher the commit interval is the higher is the probability
-    of receiving duplicate events since when a Consumer restarts, it starts again from last
-    committed offsets.
+    Knative Kafka Broker guarantees at least once delivery, which means that your applications may
+    receive duplicate events. A higher commit interval means that there is a higher probability of
+    receiving duplicate events, because when a Consumer restarts, it restarts from the last
+    committed offset.
 
 ## Kafka Producer and Consumer configurations
 
