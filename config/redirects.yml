@@ -13,6 +13,32 @@ plugins:
       admin/install/install-serving-with-yaml.md: admin/install/serving/install-serving-with-yaml.md
       client/connecting-kn-to-your-cluster/index.md: client/README.md
       concepts/overview.md: _index.md
+      community/contributing/code-of-conduct.md: https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md
+      community/contributing/contributing.md: https://github.com/knative/community/blob/main/CONTRIBUTING.md
+      community/contributing/governance.md: https://github.com/knative/community/blob/main/GOVERNANCE.md
+      community/contributing/mechanics.md: https://github.com/knative/community/tree/main/mechanics
+      community/contributing/mechanics/creating-a-sandbox-repo.md: https://github.com/knative/community/blob/main/mechanics/CREATING-A-SANDBOX-REPO.md
+      community/contributing/mechanics/sc.md: https://github.com/knative/community/blob/main/mechanics/SC.md
+      community/contributing/mechanics/toc.md: https://github.com/knative/community/blob/main/mechanics/TOC.md
+      community/contributing/mechanics/working-group-processes.md: https://github.com/knative/community/blob/main/mechanics/WORKING-GROUP-PROCESSES.md
+      community/contributing/mechanics/feature-tracks.md: https://github.com/knative/community/blob/main/mechanics/FEATURE-TRACKS.md
+      community/contributing/mechanics/golang-policy.md: https://github.com/knative/community/blob/main/mechanics/GOLANG-POLICY.md
+      community/contributing/mechanics/release-versioning-principles.md: https://github.com/knative/community/blob/main/mechanics/RELEASE-VERSIONING-PRINCIPLES.md
+      community/contributing/mechanics/release-schedule.md: https://github.com/knative/community/blob/main/mechanics/RELEASE-SCHEDULE.md
+      community/contributing/mechanics/sunsetting-features.md: https://github.com/knative/community/blob/main/mechanics/SUNSETTING-FEATURES.md
+      community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
+      community/contributing/repository-guidelines.md: https://github.com/knative/community/blob/main/REPOSITORY-GUIDELINES.md
+      community/contributing/tech-oversight-committee.md: https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md
+      community/contributing/steering-committee.md: https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md
+      community/contributing/slack-guidelines.md: https://github.com/knative/community/blob/main/SLACK-GUIDELINES.md
+      community/contributing/values.md: https://github.com/knative/community/blob/main/VALUES.md
+      community/contributing/trademark-committee.md: https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md
+      community/contributing/roles.md: https://github.com/knative/community/blob/main/ROLES.md
+      community/contributing/reviewing.md: https://github.com/knative/community/blob/main/REVIEWING.md
+      community/calendar.md: https://github.com/knative/community/blob/main/CALENDAR.MD
+      community/meetup.md: community/contributing.md
+      community/annual_reports.md: https://github.com/knative/community/tree/main/annual_reports
+      community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
       eventing/broker/alternate/index.md: eventing/broker/README.md
       eventing/broker/broker-event-delivery.md: developer/eventing/event-delivery.md
       eventing/broker/configmaps/README.md: admin/eventing/broker-configuration.md

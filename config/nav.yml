@@ -239,5 +239,8 @@ nav:
     - Reference:
       - Serving: reference/api/serving-api.md
       - Eventing: reference/api/eventing-api.md
-    - "Join the Community ➠": /community/
+    - "Join the Community ➠":
+      - Overview: community/README.md
+      - Contribute to Knative: community/contributing.md
+      - About the community: community/about.md
     - Blog: /blog/
