@@ -128,7 +128,7 @@ Knative is a diverse, open, and inclusive community.
 Your own path to becoming a Knative contributor can begin in any of the
 following components:
 
-## Knative authors
+## Knative authors
 
 Knative is an open source project with an active development community.
 The project was started by Google but has contributions from a growing number of industry-leading companies.
