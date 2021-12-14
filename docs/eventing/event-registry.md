@@ -305,6 +305,6 @@ Here are a some example Triggers that subscribe to events using exact matching o
 
 ## Next steps
 
-[Knative code samples](samples/README.md) is a useful resource to better understand
+[Knative code samples](../samples/eventing.md) is a useful resource to better understand
 some of the event sources. Remember, you must point the sources to a Broker if you want
 automatic registration of EventTypes in the registry.

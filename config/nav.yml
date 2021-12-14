@@ -213,57 +213,9 @@ nav:
     # Code samples
 ###############################################################################
     - Code samples:
-      - Code sample overview: samples.md
-      - Serving code samples:
-        - About Serving code samples: serving/samples/README.md
-        - Cloud Events apps:
-          - .NET: serving/samples/cloudevents/cloudevents-dotnet/README.md
-          - Go: serving/samples/cloudevents/cloudevents-go/README.md
-          - Node.js: serving/samples/cloudevents/cloudevents-nodejs/README.md
-          - Rust: serving/samples/cloudevents/cloudevents-rust/README.md
-          - Java and Spring: serving/samples/cloudevents/cloudevents-spring/README.md
-          - Java and Vert.x: serving/samples/cloudevents/cloudevents-vertx/README.md
-        - GitHub Webhook - Go: serving/samples/gitwebhook-go/README.md
-        - gRPC Server - Go: serving/samples/grpc-ping-go/README.md
-        - Hello world apps:
-          - .NET: serving/samples/hello-world/helloworld-csharp/README.md
-          - Go: serving/samples/hello-world/helloworld-go/README.md
-          - Java (Spark): serving/samples/hello-world/helloworld-java-spark/README.md
-          - Hello World - Spring Boot Java: serving/samples/hello-world/helloworld-java-spring/README.md
-          - Kotlin: serving/samples/hello-world/helloworld-kotlin/README.md
-          - Node.js: serving/samples/hello-world/helloworld-nodejs/README.md
-          - PHP: serving/samples/hello-world/helloworld-php/README.md
-          - Python: serving/samples/hello-world/helloworld-python/README.md
-          - Ruby: serving/samples/hello-world/helloworld-ruby/README.md
-          - Scala: serving/samples/hello-world/helloworld-scala/README.md
-          - Shell: serving/samples/hello-world/helloworld-shell/README.md
-        - Routing services - Go: serving/samples/knative-routing-go/README.md
-        - Routing services with Kong - Go: serving/samples/kong-routing-go/README.md
-        - multi-container samples: serving/samples/multi-container/README.md
-        - Secrets - Go: serving/samples/secrets-go/README.md
-        - Tag Header Based Routing: serving/samples/tag-header-based-routing/README.md
-      - Eventing code samples:
-        - About Eventing code samples: eventing/samples/README.md
-        - Hello World:
-          - Hello World sample overview: eventing/samples/helloworld/README.md
-          - GO: eventing/samples/helloworld/helloworld-go/README.md
-          - Python: eventing/samples/helloworld/helloworld-python/README.md
-          - Writing an event source using Javascript: eventing/samples/writing-event-source-easy-way/README.md
-        - Apache Kafka:
-          - Binding Example: eventing/samples/kafka/binding/README.md
-          - Channel Example: eventing/samples/kafka/channel/README.md
-          - ResetOffset Example: eventing/samples/kafka/resetoffset/README.md
-        - Parallel:
-          - Parallel sample overview: eventing/samples/parallel/README.md
-          - Multiple Cases: eventing/samples/parallel/multiple-branches/README.md
-          - Mutual Exclusivity: eventing/samples/parallel/mutual-exclusivity/README.md
-        - Sources:
-          - CloudAuditLogsSource: eventing/samples/cloud-audit-logs-source/README.md
-          - CloudPubSubSource: eventing/samples/cloud-pubsub-source/README.md
-          - CloudSchedulerSource: eventing/samples/cloud-scheduler-source/README.md
-          - CloudStorageSource: eventing/samples/cloud-storage-source/README.md
-          - GitHub source: eventing/samples/github-source/README.md
-          - GitLab source: eventing/samples/gitlab-source/README.md
+      - Code sample overview: samples/README.md
+      - Serving code samples: samples/serving.md
+      - Eventing code samples: samples/eventing.md
     # Reference docs
     - Reference:
       - Reference overview: reference/README.md

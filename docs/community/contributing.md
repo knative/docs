@@ -58,7 +58,7 @@ Submit a Pull Request to the community sample directory under the Knative compon
 - [Contribute code samples](https://github.com/knative/docs/tree/main/code-samples/community):
 Share your samples with the community.
 
-- [Link existing code samples](../samples.md#external-code-samples):
+- [Link existing code samples](../samples/README.md#external-code-samples):
 Link to your Knative samples that live on another site.
 
 

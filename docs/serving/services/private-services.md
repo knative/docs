@@ -39,7 +39,7 @@ To configure a Knative Service so that it is only available on the cluster-local
 
 ### Example
 
-You can deploy the [Hello World sample](../samples/hello-world/helloworld-go/README.md) and then convert it to be an cluster-local Service by labelling the Service:
+You can deploy the [Hello World sample](https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-go) and then convert it to be an cluster-local Service by labelling the Service:
 
 ```bash
 kubectl label kservice helloworld-go networking.knative.dev/visibility=cluster-local

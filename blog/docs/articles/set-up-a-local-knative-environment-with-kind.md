@@ -286,7 +286,7 @@ The ports, and how they’re tied to the host, should be the same as you’ve de
 
 ## Step 4: Deploying your first app
 Now that the cluster, Knative, and the networking components are ready, you can deploy an app.
-The straightforward [Go app](https://knative.dev/docs/eventing/samples/helloworld/helloworld-go/) that already exists, is an excellent example app to deploy.
+The straightforward [Go app](https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-go) that already exists, is an excellent example app to deploy.
 The first step is to create a yaml file with the hello world service definition:
 
 ```bash

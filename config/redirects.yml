@@ -75,7 +75,6 @@ plugins:
       developer/eventing/sources/containersource/README.md: eventing/custom-event-source/containersource/README.md
       developer/eventing/sources/containersource/reference.md: eventing/custom-event-source/containersource/reference.md
       developer/eventing/sources/creating-event-sources/README.md: eventing/custom-event-source/README.md
-      developer/eventing/sources/creating-event-sources/writing-event-source-easy-way/README.md: eventing/samples/writing-event-source-easy-way/README.md
       developer/eventing/sources/creating-event-sources/writing-event-source/01-theory.md: eventing/custom-event-source/custom-event-source/README.md
       developer/eventing/sources/creating-event-sources/writing-event-source/02-lifecycle-and-types.md: eventing/custom-event-source/custom-event-source/controller.md
       developer/eventing/sources/creating-event-sources/writing-event-source/03-controller.md: eventing/custom-event-source/custom-event-source/README.md
@@ -115,15 +114,32 @@ plugins:
       eventing/metrics.md: eventing/observability/metrics/eventing-metrics.md
       eventing/parallel.md: eventing/flows/parallel.md
       eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
-      eventing/samples/gcp-pubsub-source/README.md: eventing/samples/cloud-pubsub-source/README.md
+      eventing/samples/cloud-audit-logs-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-audit-logs-source
+      eventing/samples/cloud-pubsub-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-pubsub-source
+      eventing/samples/cloud-scheduler-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-scheduler-source
+      eventing/samples/cloud-storage-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-storage-source
+      eventing/samples/gcp-pubsub-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-pubsub-source
+      eventing/samples/github-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/github-source
+      eventing/samples/gitlab-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/gitlab-source
+      eventing/samples/helloworld/helloworld-go/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-go
+      eventing/samples/helloworld/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-python
+      eventing/samples/helloworld/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld
+      eventing/samples/kafka/binding/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/binding
+      eventing/samples/kafka/channel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/channel
+      eventing/samples/kafka/resetoffset/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/resetoffset
       eventing/samples/kubernetes-event-source/index.md: eventing/sources/apiserversource/README.md
+      eventing/samples/parallel/multiple-branches/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/multiple-branches
+      eventing/samples/parallel/mutual-exclusivity/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/mutual-exclusivity
+      eventing/samples/parallel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel
       eventing/samples/ping-source/index.md: eventing/sources/ping-source/README.md
+      eventing/samples/README.md: samples/eventing.md
       eventing/samples/sequence/index.md: eventing/flows/sequence/README.md
       eventing/samples/sequence/sequence-replay-to-event-display/index.md: eventing/flows/sequence/sequence-reply-to-event-display/README.md
       eventing/samples/sequence/sequence-reply-to-sequence/index.md: eventing/flows/sequence/sequence-reply-to-sequence/README.md
       eventing/samples/sequence/sequence-terminal/index.md: eventing/flows/sequence/sequence-terminal/README.md
       eventing/samples/sequence/sequence-with-broker-trigger/index.md: eventing/flows/sequence/sequence-with-broker-trigger/README.md
       eventing/samples/sinkbinding/README.md: eventing/custom-event-source/sinkbinding/README.md
+      eventing/samples/writing-event-source-easy-way/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/writing-event-source-easy-way
       eventing/sequence.md: eventing/flows/sequence/README.md
       eventing/sink/kafka-sink.md: eventing/sinks/kafka-sink.md
       eventing/sink/README.md: eventing/sinks/README.md
@@ -151,9 +167,34 @@ plugins:
       serving/metrics.md: serving/observability/metrics/serving-metrics.md
       serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
       serving/samples/blue-green-deployment.md: serving/traffic-management.md
+      serving/samples/cloudevents/cloudevents-dotnet/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-dotnet
+      serving/samples/cloudevents/cloudevents-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-go
+      serving/samples/cloudevents/cloudevents-nodejs/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-nodejs
+      serving/samples/cloudevents/cloudevents-rust/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-rust
+      serving/samples/cloudevents/cloudevents-spring/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-spring
+      serving/samples/cloudevents/cloudevents-vertx/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-vertx
+      serving/samples/gitwebhook-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/gitwebhook-go
+      serving/samples/grpc-ping-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/grpc-ping-go
+      serving/samples/hello-world/helloworld-csharp/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-csharp
+      serving/samples/hello-world/helloworld-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-go
+      serving/samples/hello-world/helloworld-java-spark/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-java-spark
+      serving/samples/hello-world/helloworld-java-spring/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-java-spring
+      serving/samples/hello-world/helloworld-kotlin/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-kotlin
+      serving/samples/hello-world/helloworld-nodejs/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-nodejs
+      serving/samples/hello-world/helloworld-php/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-php
+      serving/samples/hello-world/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-python
+      serving/samples/hello-world/helloworld-ruby/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-ruby
+      serving/samples/hello-world/helloworld-scala/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-scala
+      serving/samples/hello-world/helloworld-shell/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-shell
+      serving/samples/knative-routing-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/knative-routing-go
+      serving/samples/kong-routing-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/kong-routing-go
+      serving/samples/multi-container/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/multicontainer
+      serving/samples/README.md: samples/serving.md
+      serving/samples/secrets-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/secrets-go
+      serving/samples/tag-header-based-routing/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/tag-header-based-routing
       serving/samples/traffic-splitting/README.md: serving/traffic-management.md
       serving/services/deployment.md: serving/configuration/deployment.md
+      serving/services/http-option.md: serving/services/http-protocol.md
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
       serving/using-subroutes.md: serving/traffic-management.md
-      serving/services/http-option.md: serving/services/http-protocol.md

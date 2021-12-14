@@ -1,5 +1,6 @@
 # Hidden smoketest page
 
+<!-- is this page still needed? -->
 Use this page to test your changes and ensure that there are not any issues,
 unwanted behaviors, or regression that are caused by your changes.
 
@@ -11,14 +12,14 @@ This is a set of site elements that have causes issues in the past:
   1. A nested list item.
      1. another level lower
   1. Nested code sample: <br>Syntax: <code>{<code>{< readfile
-     file="../community/samples/serving/helloworld-java-quarkus/service.yaml"
+     file="../code-samples/community/serving/helloworld-java-quarkus/service.yaml"
      code="true" lang="yaml" >}</code>}</code> <br>Example:
-     {{< readfile file="../community/samples/serving/helloworld-java-quarkus/service.yaml" code="true" lang="yaml" >}}
+     {{< readfile file="../code-samples/community/serving/helloworld-java-quarkus/service.yaml" code="true" lang="yaml" >}}
   1. This should be the third bullet (3.).
      1. More nested code: <br>Shortcode: <code>{<code>{< readfile
-        file="/serving/samples/hello-world/helloworld-go/Dockerfile" code="true"
+        file="/code-samples/serving/hello-world/helloworld-go/Dockerfile" code="true"
         lang="go" >}</code>}</code> <br>Example:
-        {{< readfile file="./serving/samples/hello-world/helloworld-go/Dockerfile" code="true" lang="go" >}}
+        {{< readfile file="./code-samples/serving/hello-world/helloworld-go/Dockerfile" code="true" lang="go" >}}
      1. Another nested ordered list item (2.)
 
 ## Code samples
@@ -30,9 +31,9 @@ Shortcode: <code>{<code>{< readfile file="../hack/reference-docs-gen-config.json
    renders as:
 {{< readfile file="../hack/reference-docs-gen-config.json" code="true" lang="json" >}}
 
-Shortcode: <code>{<code>{< readfile file="./serving/samples/cloudevents/cloudevents-nodejs/service.yaml" code="true" lang="yaml" >}</code>}</code>
+Shortcode: <code>{<code>{< readfile file="./code-samples/serving/cloudevents/cloudevents-nodejs/service.yaml" code="true" lang="yaml" >}</code>}</code>
    renders as:
-{{< readfile file="./serving/samples/cloudevents/cloudevents-nodejs/service.yaml" code="true" lang="yaml" >}}
+{{< readfile file="./code-samples/serving/cloudevents/cloudevents-nodejs/service.yaml" code="true" lang="yaml" >}}
 
 
 ## Install version numbers and Clone branch commands
@@ -83,4 +84,4 @@ How to include tabbed content in your page. Note that you can set a default tab.
 
 
     {{< tab name="Include example" >}}
-    {{% readfile file="./serving/samples/multi-container/service.yaml" code="true" lang="yaml" %}}
+    {{% readfile file="./code-samples/serving/multi-container/service.yaml" code="true" lang="yaml" %}}

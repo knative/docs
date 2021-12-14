@@ -12,8 +12,8 @@ This topic provides a list of resources to help you continue your Knative journe
 Try out some of the following Knative samples:
 
 - [Converting a Kubernetes Service to a Knative Service](../serving/convert-deployment-to-knative-service.md)
-- [Knative Serving code samples](../serving/samples/README.md)
-- [Knative Eventing and Event source code samples](../eventing/samples/README.md)
+- [Knative Serving code samples](../samples/serving.md)
+- [Knative Eventing and Event source code samples](../samples/eventing.md)
 
 ## :page_with_curl: Explore the Knative docs
 
