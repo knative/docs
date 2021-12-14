@@ -28,7 +28,7 @@
 
 Delete the Cluster
 
-Delete your `konk` Cluster" by running the command:
+Delete your `kind` Cluster by running the command:
     ```bash
     kind delete clusters knative
     ```
