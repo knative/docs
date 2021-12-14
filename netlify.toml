@@ -18,3 +18,9 @@
   from = "/contributing/"
   to = "/community/contributing/"
   status = 301
+
+[[redirects]]
+  from = "/about-analytics-cookies/"
+  to = "/development/about-analytics-cookies/"
+  status = 301
+
