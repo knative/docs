@@ -1,5 +1,0 @@
-micronaut:
-  application:
-    name: helloworld-micronaut
-  server:
-    port: ${PORT:8080}
