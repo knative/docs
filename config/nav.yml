@@ -224,8 +224,8 @@ nav:
         - Eventing: reference/api/eventing-api.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
-    - "Join the Community ➠":
-      - Community Overview: community/README.md
+    - "Community ➠":
+      - Welcome to the community: community/README.md
       - Contribute to Knative: community/contributing.md
       - About the community: community/about.md
     - Case studies:
