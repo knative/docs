@@ -11,7 +11,7 @@ We are happy to announce that [Carlos Santana](https://twitter.com/csantanapr) a
 
 The competition was fierce with 6 very strong candidates to choose from, so thank you to everyone who ran in this election and everyone who took the time to cast your ballot!
 
-As announced recently as part of [Knative’s application to become a CNCF](https://knative.dev/blog/steering/knative-cncf-donation/) incubating project, [April Nassi](https://twitter.com/thisisnotapril) will remain on the Steering Committee for one more year to help coordinate the transition of infrastructure and ensure a smooth process to bring Knative into the CNCF.
+As announced recently in [Knative’s application](https://knative.dev/blog/steering/knative-cncf-donation/) to become a CNCF incubating project, [April Nassi](https://twitter.com/thisisnotapril) will remain on the Steering Committee for one more year to help coordinate the transition of infrastructure and ensure a smooth process to bring Knative into the CNCF.
 
 Lance and Carlos will serve together with continuing Steering Committee members [Paul Morie](https://twitter.com/cheddarmint), [Ville Aikas](https://twitter.com/AikasVille), and April Nassi. We would also like to thank our outgoing member [Michael Behrendt](https://twitter.com/michael_beh) for his service as one of the original Steering Committee members serving over the past several years.
 
