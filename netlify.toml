@@ -18,3 +18,8 @@
   from = "/contributing/"
   to = "/community/contributing/"
   status = 301
+
+[[redirects]]
+  from = "/docs/help/contributor/*"
+  to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
+  status = 301
