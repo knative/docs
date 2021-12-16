@@ -404,6 +404,9 @@ The operator custom resource allows you to configure system resources for the Kn
 Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
 `net-istio-controller` and `queue-proxy`.
 
+!!! info
+    If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
+
 To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
 
 For example, the following KnativeServing resource configures the `activator` to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
