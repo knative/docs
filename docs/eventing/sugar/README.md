@@ -81,9 +81,9 @@ kubectl label namespace default eventing.knative.dev/injection=enabled
 If the Broker named "default" already exists in the Namespace, the Sugar
 Controller will do nothing.
 
-### Trigger Examples
+### Trigger Example
 
-Create a Broker named by a Trigger (`spec.broker`) in the Trigger's Namespace:
+Create a "default" Broker in the Trigger's Namespace when creating a Trigger:
 
 ```bash
 kubectl apply -f - << EOF
@@ -95,7 +95,7 @@ metadata:
   annotations:
     eventing.knative.dev/injection: enabled
 spec:
-  broker: sugar
+  broker: default
   subscriber:
     ref:
       apiVersion: v1
@@ -104,11 +104,6 @@ spec:
 EOF
 ```
 
-!!! note
-    If the named Broker already exists, the Sugar controller does nothing, and the Trigger will not own the existing Broker.
+This will make a Broker called "default" in the Namespace "hello", and attempt to send events to the "event-display" service.
 
-This will make a Broker called "sugar" in the Namespace "hello", and attempt to
-send events to the "event-display" service.
-
-If the Broker of the given name already exists in the Namespace, the Sugar
-Controller will do nothing.
+If the Broker named "default" already exists in the Namespace, the Sugar Controller will do nothing and the Trigger will not own the existing Broker.
