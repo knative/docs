@@ -10,14 +10,15 @@ set -x
 
 
 # Releasing a new version:
-# 1) Make a release-M.M branch as normal.
-# 2) Update VERSIONS below (on main) to add the new version, and remove the oldest version keeping only last four versions
+# 1) Make a release-NN branch as normal.
+# 2) Update VERSIONS and RELEASE_BRANCHES below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.1" "1.0" "0.26" "0.25") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-# 3) PR the result to main.
-# 4) Party.
+VERSIONS=("1.1" "1.0" "0.26" "0.25")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+RELEASE_BRANCHES=("knative-v1.1.0" "knative-v1.0.0" "v0.26.0" "v0.25.0") # Release version for serving/eventing yaml files and api references.
+# 4) PR the result to main.
+# 5) Party.
 
-RELEASE_BRANCHES=("release-${VERSIONS[0]}" "release-${VERSIONS[1]}" "release-${VERSIONS[2]}" "release-${VERSIONS[3]}") # add a branch here for the next 2 releases until everything is mkdocs
+DOCS_BRANCHES=("release-${VERSIONS[0]}" "release-${VERSIONS[1]}" "release-${VERSIONS[2]}" "release-${VERSIONS[3]}")
 latest=${VERSIONS[0]}
 previous=("${VERSIONS[@]:1}")
 
@@ -36,10 +37,10 @@ else
   pushd "$TEMP/docs-main"; mkdocs build -f mkdocs.yml -d $SITE/development; popd
 
   # Latest release branch to /docs
-  git clone --depth 1 -b ${RELEASE_BRANCHES[0]} https://github.com/knative/docs "$TEMP/docs-$latest"
+  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/knative/docs "$TEMP/docs-$latest"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
-  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${RELEASE_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
+  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
   versionjson=""
@@ -48,10 +49,10 @@ else
     versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
 
     echo "Building for previous version $version"
-    git clone --depth 1 -b ${RELEASE_BRANCHES[$i+1]} https://github.com/knative/docs "$TEMP/docs-$version"
+    git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/knative/docs "$TEMP/docs-$version"
     curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
     curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
-    pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]//knative-} SAMPLES_BRANCH="${RELEASE_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
+    pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]//knative-} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
 
   done
 
