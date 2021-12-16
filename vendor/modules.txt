@@ -29,11 +29,7 @@ github.com/cloudevents/sdk-go/v2/protocol/http
 github.com/cloudevents/sdk-go/v2/types
 # github.com/eclipse/paho.mqtt.golang v1.1.1
 ## explicit
-github.com/eclipse/paho.mqtt.golang
 github.com/eclipse/paho.mqtt.golang/packets
-# github.com/form3tech-oss/jwt-go v3.2.2+incompatible
-## explicit
-github.com/form3tech-oss/jwt-go
 # github.com/fsnotify/fsnotify v1.4.9
 ## explicit
 # github.com/golang/protobuf v1.4.3
