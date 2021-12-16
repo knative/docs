@@ -11,8 +11,9 @@ nav:
     - Eventing:
     - Code samples:
     - Reference:
-    - "Join the Community ➠":
     - Blog:
+    - Case studies:
+    - Community:
 ```
 
 Currently, we maintain two different copies of the navigation.
@@ -35,12 +36,12 @@ Note here that each link assumes that the present working directory is `docs/doc
 The Blog and Community pages instead use absolute links to their sections:
 
 ```yaml
-    - "Join the Community ➠": /community/
+    - Blog: /blog/
     - Case Studies:
       - deepc: about/case-studies/deepc.md
       - Outfit7: about/case-studies/outfit7.md
       - Puppet: about/case-studies/puppet.md
-    - Blog: /blog/
+    - Community: /community/
 ```
 
 Note that the Blog link is `/blog/` and not `blog/` (and similar for the community site).
@@ -60,14 +61,15 @@ nav:
     - Eventing: /docs/eventing/
     - Code samples: /docs/samples/
     - Reference: /docs/reference/
-    - "Join the Community ➠": /community/
-    - Case studies: /docs/about/case-studies/deepc
     - Blog:
       - index.md
       - Releases:
           - releases/announcing-knative-v0-26-release.md
           - releases/announcing-knative-v0-25-release.md
           - releases/announcing-knative-v0-24-release.md
+            ...
+    - Case studies: /docs/about/case-studies/deepc
+    - Community: /community/
 ```
 
 A couple of key points:

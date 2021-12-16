@@ -21,25 +21,24 @@ Anyone can write a blog post and submit it for review. Commercial content is not
 To submit a blog post:
 
 1. [Sign the Contributor License Agreements](https://github.com/knative/community/blob/main/CONTRIBUTING.md#contributor-license-agreements) if you have not yet done so.
-1. Familiarize yourself with the Markdown format for existing blog posts in the [docs repository](https://github.com/knative/docs/tree/main/blog). Blog posts are categorized into different directories. You can explore the directories to find examples.
+1. Familiarize yourself with the Markdown format for existing blog posts in the [docs repository](https://github.com/knative/docs/tree/main/blog/docs). Blog posts are categorized into different directories. You can explore the directories to find examples.
 1. Write your blog post in a text editor of your choice.
 1. (Optional) If you need help with markdown, check out [StakEdit](https://stackedit.io/app#) or read [GitHub's formatting syntax](https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax) for more information.
-1. Choose a directory in the [docs repository](https://github.com/knative/docs/tree/main/blog), and click **Create new file**.
-1. Paste your content into the editor and save it. Name the file in the following way: *[BLOG] Your proposed title* , but don’t put the date in the file name. The blog reviewers will work with you on the final file name, and the date on which the blog will be published.
-1. When you save the file, GitHub will walk you through the pull request (PR) process.
+1. Update the navigation files as described on the [Updating the Blog](https://github.com/knative/docs/blob/main/blog/README.md) page.
+1. Open a pull request (PR) for your blog post.
 1. A reviewer is assigned to all pull requests automatically. The reviewer checks your submission, and works with you on feedback and final details. When the pull request is approved, the blog will be scheduled for publication.
 1. Ping editorial team members on Slack [#docs](https://knative.slack.com/archives/C9CV04DNJ) channel with a link to your recently created PR.
 
-### Blog Guidelines
+## Blog Guidelines
 
-#### Suitable content:
+### Suitable content:
 - **Original content only**
 - Knative [new feature releases and project updates](#communicating-new-project-releases)
 - Tutorials and demos
 - Use cases
 - Content that is specific to a vendor or platform about Knative installation and use
 
-#### Unsuitable Content:
+### Unsuitable Content:
 - Blogs that do not address Knative in any way
 - Content that doesn't interact with Knative APIs or interfaces
 - Vendor pitches
