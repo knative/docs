@@ -14,7 +14,7 @@ set -x
 # 2) Update VERSIONS and RELEASE_BRANCHES below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
 VERSIONS=("1.1" "1.0" "0.26" "0.25")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-RELEASE_BRANCHES=("knative-v1.1.0" "knative-v1.0.0" "v0.26.0" "v0.25.0")# Release version for serving/eventing yaml files and api references.
+RELEASE_BRANCHES=("knative-v1.1.0" "knative-v1.0.0" "v0.26.0" "v0.25.0") # Release version for serving/eventing yaml files and api references.
 # 4) PR the result to main.
 # 5) Party.
 
