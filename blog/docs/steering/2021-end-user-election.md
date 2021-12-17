@@ -7,7 +7,7 @@ Hello, Knative community,
 
 We want to kick off the Knative Steering Committee (SC) End User election, and we are ready to accept nominations from End Users!
 
-This is the first time an End User is elected to become a member of the Knative Steering Committee (SC)
+This will be the first time an End User is elected to become a member of the Knative Steering Committee (SC).
 
 The Knative Steering Committee (SC) is responsible for the general health of the Knative community. The End User seat will bring more diversity into the SC representation, which the SC will elect.
 
