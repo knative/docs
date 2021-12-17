@@ -5,7 +5,7 @@ date: 2021-12-17
 
 Hello, Knative community,
 
-We want to kick off the Knative Steering Committee (SC) End User election, and we are ready to accept nominations from End Users!
+We want to kick off the Knative Steering Committee End User election, and we are ready to accept nominations from End Users!
 
 This will be the first time an End User is elected to become a member of the Knative Steering Committee (SC).
 
