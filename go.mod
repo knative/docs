@@ -5,7 +5,6 @@ go 1.14
 require (
 	cloud.google.com/go/storage v1.10.0
 	github.com/cloudevents/sdk-go/v2 v2.2.0
-	github.com/eclipse/paho.mqtt.golang v1.1.1
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.5 // indirect
