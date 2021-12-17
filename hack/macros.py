@@ -31,7 +31,14 @@ def define_env(env):
                     repo=repo,
                     file=file)
         else:
-            return 'https://github.com/{org}/{repo}/releases/download/{version}/{file}'.format(
+            if version.startswith("v1."):
+                return 'https://github.com/{org}/{repo}/releases/download/knative-{version}/{file}'.format(
+                    repo=repo,
+                    file=file,
+                    version=version,
+                    org=org)
+            else:
+                return 'https://github.com/{org}/{repo}/releases/download/{version}/{file}'.format(
                     repo=repo,
                     file=file,
                     version=version,
