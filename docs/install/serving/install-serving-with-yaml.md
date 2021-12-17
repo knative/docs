@@ -169,7 +169,7 @@ Follow the procedure for the networking layer of your choice:
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
 !!! info
-    You can also use other ingress implementations provdied. See [Unofficial Ingress Implementations](../ingress-implementations).
+    You can also use other ingress implementations provided. See [unofficial ingress implementations](../ingress-implementations).
 
 ## Verify the installation
 
