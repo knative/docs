@@ -97,7 +97,7 @@ metadata:
 spec:
   config:
     config-br-default-channel:
-      channelTemplateSpec: |
+      channel-template-spec: |
         apiVersion: messaging.knative.dev/v1beta1
         kind: KafkaChannel
         spec:

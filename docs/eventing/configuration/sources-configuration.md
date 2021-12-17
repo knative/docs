@@ -10,7 +10,7 @@ For the available parameters, see [PingSource reference](../../eventing/sources/
 In addition to the parameters that you can configure in the PingSource resource, there is a global ConfigMap called `config-ping-defaults`.
 This ConfigMap allows you to change the maximum amount of data that the PingSource adds to the CloudEvents it produces.
 
-The `dataMaxSize` parameter allows you to set the maximum number of bytes allowed to be sent for a message excluding any base64 decoding. The default value, `-1`, sets no limit for data.
+The `data-max-size` parameter allows you to set the maximum number of bytes allowed to be sent for a message excluding any base64 decoding. The default value, `-1`, sets no limit for data.
 
 ```
 apiVersion: v1
@@ -19,7 +19,7 @@ metadata:
   name: config-ping-defaults
   namespace: knative-eventing
 data:
-  dataMaxSize: -1
+  data-max-size: -1
 ```
 
 You can edit this ConfigMap by running the command:
