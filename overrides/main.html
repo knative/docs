@@ -4,6 +4,7 @@
 <meta name="theme-color" content="#1a7dc9" />
 {% endblock %}
 
+{% block announce %}
 {% if config.extra.version_warning %}
 <div class="versionwarning" style="margin: .6rem auto; padding: 0 .8rem">
   <h1>⚠ You are viewing an archived snapshot of the documentation for Knative version: {{ config.extra.knative_version }}</h1>
@@ -12,10 +13,6 @@
   </p>
 </div>
 {% endif %}
-{% block announce %}
-<div class="versionwarning" style="display: flex; justify-content: center;">
-  <p>Knative is 1.0! 🎉  Check out our announcement on the <a href=https://knative.dev/blog/articles/knative-1.0/>Knative Blog<a/></p>
-</div>
 {% endblock %}
 
 {% block scripts %}
