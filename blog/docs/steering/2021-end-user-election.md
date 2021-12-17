@@ -15,6 +15,7 @@ If you want to stand for election, we have detailed instructions in the [Steerin
 
 
 Here are a few important deadlines to keep in mind:
+
 - January 26: All candidate nominations due by 0000 UTC
 - January 31: Announcement of selection
 
