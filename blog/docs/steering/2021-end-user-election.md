@@ -11,7 +11,7 @@ This will be the first time an End User is elected to become a member of the Kna
 
 The Knative Steering Committee is responsible for the general health of the Knative community. The End User seat will bring more diversity into the Steering Committee representation, which the Steering Committee will elect.
 
-If you want to stand for election, we have detailed instructions in the [SC End User guide](https://github.com/knative/community/blob/main/elections/2021-SC-EU/enduser.md)
+If you want to stand for election, we have detailed instructions in the [Steering Committee End User guide](https://github.com/knative/community/blob/main/elections/2021-SC-EU/enduser.md)
 
 
 Here are a few important deadlines to keep in mind:
