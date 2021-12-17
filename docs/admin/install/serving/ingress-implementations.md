@@ -1,7 +1,6 @@
 # Unofficial ingress implementations
 
-In addition to the Knative Ingress implementations in the ([install a networking layer](../install-serving-with-yaml/#install-a-networking-layer)) section,
-there are other Knative Ingress implementations.
+In addition to the Knative ingress implementations in the ([install a networking layer](../install-serving-with-yaml/#install-a-networking-layer)) section, there are other Knative ingress implementations.
 
 Here is the list of the ingress implementations (alphabetically):
 
