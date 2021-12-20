@@ -62,12 +62,14 @@ command:
         kind: Role
         metadata:
           name: <role>
+          namespace: <namespace>
         rules:
           <rules>
         ```
         Where:
 
         - `<role>` is the name of the Role that you want to create.
+        - `<namespace>` is the name of the namespace that you created in step 1 earlier.
         - `<rules>` are the set of permissions you want to grant to the APIServerSource object.
         This set of permissions must match the resources you want to receive events from.
         For example, to receive events related to the `events` resource, use the following set of permissions:
@@ -101,6 +103,7 @@ command:
         kind: RoleBinding
         metadata:
           name: <role-binding>
+          namespace: <namespace>
         roleRef:
           apiGroup: rbac.authorization.k8s.io
           kind: Role
@@ -113,9 +116,9 @@ command:
         Where:
 
         - `<role-binding>` is the name of the RoleBinding that you want to create.
+        - `<namespace>` is the name of the namespace that you created in step 1 earlier.
         - `<role>` is the name of the Role that you created in step 3 earlier.
         - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
-        - `<namespace>` is the name of the namespace that you created in step 1 earlier.
 
     1. Apply the YAML file by running the command:
 
