@@ -303,66 +303,66 @@ The broker can only be accessed from within the cluster where Knative Eventing i
 
     - To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
-    ```bash
-    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
-    -X POST \
-    -H "Ce-Id: say-hello" \
-    -H "Ce-Specversion: 1.0" \
-    -H "Ce-Type: greeting" \
-    -H "Ce-Source: not-sendoff" \
-    -H "Content-Type: application/json" \
-    -d '{"msg":"Hello Knative!"}'
-    ```
+        ```bash
+        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
+        -X POST \
+        -H "Ce-Id: say-hello" \
+        -H "Ce-Specversion: 1.0" \
+        -H "Ce-Type: greeting" \
+        -H "Ce-Source: not-sendoff" \
+        -H "Content-Type: application/json" \
+        -d '{"msg":"Hello Knative!"}'
+        ```
 
-    When the broker receives your event, `hello-display` will activate and send it to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
+        When the broker receives your event, `hello-display` will activate and send it to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
 
-    ```{ .bash .no-copy }
-    < HTTP/1.1 202 Accepted
-    < Content-Length: 0
-    < Date: Mon, 12 Aug 2019 19:48:18 GMT
-    ```
+        ```{ .bash .no-copy }
+        < HTTP/1.1 202 Accepted
+        < Content-Length: 0
+        < Date: Mon, 12 Aug 2019 19:48:18 GMT
+        ```
 
     - To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
 
-    ```bash
-    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
-    -X POST \
-    -H "Ce-Id: say-goodbye" \
-    -H "Ce-Specversion: 1.0" \
-    -H "Ce-Type: not-greeting" \
-    -H "Ce-Source: sendoff" \
-    -H "Content-Type: application/json" \
-    -d '{"msg":"Goodbye Knative!"}'
-    ```
+        ```bash
+        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
+        -X POST \
+        -H "Ce-Id: say-goodbye" \
+        -H "Ce-Specversion: 1.0" \
+        -H "Ce-Type: not-greeting" \
+        -H "Ce-Source: sendoff" \
+        -H "Content-Type: application/json" \
+        -d '{"msg":"Goodbye Knative!"}'
+        ```
 
-    When the broker receives your event, `goodbye-display` will activate and send the event to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
+        When the broker receives your event, `goodbye-display` will activate and send the event to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
 
-    ```
-    < HTTP/1.1 202 Accepted
-    < Content-Length: 0
-    < Date: Mon, 12 Aug 2019 19:48:18 GMT
-    ```
+        ```
+        < HTTP/1.1 202 Accepted
+        < Content-Length: 0
+        < Date: Mon, 12 Aug 2019 19:48:18 GMT
+        ```
 
     - To make the third request, which creates an event that has the `type` `greeting` and the `source` `sendoff`, run the following in the SSH terminal:
 
-    ```bash
-    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
-    -X POST \
-    -H "Ce-Id: say-hello-goodbye" \
-    -H "Ce-Specversion: 1.0" \
-    -H "Ce-Type: greeting" \
-    -H "Ce-Source: sendoff" \
-    -H "Content-Type: application/json" \
-    -d '{"msg":"Hello Knative! Goodbye Knative!"}'
-    ```
+        ```bash
+        curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
+        -X POST \
+        -H "Ce-Id: say-hello-goodbye" \
+        -H "Ce-Specversion: 1.0" \
+        -H "Ce-Type: greeting" \
+        -H "Ce-Source: sendoff" \
+        -H "Content-Type: application/json" \
+        -d '{"msg":"Hello Knative! Goodbye Knative!"}'
+        ```
 
-    When the broker receives your event, `hello-display` and `goodbye-display` will activate and send the event to the event consumers of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
+        When the broker receives your event, `hello-display` and `goodbye-display` will activate and send the event to the event consumers of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
 
-    ```{ .bash .no-copy }
-    < HTTP/1.1 202 Accepted
-    < Content-Length: 0
-    < Date: Mon, 12 Aug 2019 19:48:18 GMT
-    ```
+        ```{ .bash .no-copy }
+        < HTTP/1.1 202 Accepted
+        < Content-Length: 0
+        < Date: Mon, 12 Aug 2019 19:48:18 GMT
+        ```
 
 1.  Exit SSH by typing `exit` into the command prompt.
 
