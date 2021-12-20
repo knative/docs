@@ -40,16 +40,17 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
 
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
 
-       ```bash
-       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
-       ```
-1. Grafana dashboards can be imported from https://github.com/knative-sandbox/monitoring/tree/main/grafana.
+    ```bash
+    kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
+    ```
+
+1. Grafana dashboards can be imported from the [`knative-sandbox` repository](https://github.com/knative-sandbox/monitoring/tree/main/grafana).
 
 1. If you are using the Grafana Helm Chart with the Dashboard Sidecar configured, you can load the dashboards by applying the following configmap.
 
-       ```bash
-       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/grafana/dashboards.yaml
-       ```
+    ```bash
+    kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/grafana/dashboards.yaml
+    ```
 
 ### Access the Prometheus instance locally
 

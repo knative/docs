@@ -103,8 +103,7 @@ demonstrate how you can configure your event producers to target a specific cons
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-1. To deploy the `goodbye-display` consumer to your cluster, copy the following YAML
-into a file:
+1. To deploy the `goodbye-display` consumer to your cluster, copy the following YAML into a file:
 
      ```yaml
      apiVersion: apps/v1
@@ -141,26 +140,32 @@ into a file:
          port: 80
          targetPort: 8080
      ```
+
 1. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
     ```
+
     Where `<filename>` is the name of the file you created in the previous step.
 
 1. Verify that the event consumers are working by entering the following command:
+
      ```bash
      kubectl -n event-example get deployments hello-display goodbye-display
      ```
-   This lists the `hello-display` and `goodbye-display` consumers that you
-   deployed:
-     ```{ .bash .no-copy }
-     NAME              READY   UP-TO-DATE   AVAILABLE   AGE
-     hello-display     1/1     1            1           26s
-     goodbye-display   1/1     1            1           16s
-     ```
-   The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
-   If the numbers do not match, see the [Debugging Guide](troubleshooting/README.md) to troubleshoot the issue.
+
+    This lists the `hello-display` and `goodbye-display` consumers that you    deployed:
+
+    ```{ .bash .no-copy }
+    NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+    hello-display     1/1     1            1           26s
+    goodbye-display   1/1     1            1           16s
+    ```
+
+    The number of replicas in the **READY** column should match the number of replicas in the **AVAILABLE** column.
+
+    If the numbers do not match, see the [Debugging Guide](troubleshooting/README.md) to troubleshoot the issue.
 
 ## Creating triggers
 
@@ -280,11 +285,13 @@ The broker can only be accessed from within the cluster where Knative Eventing i
 ## Sending events to the broker
 
 1. SSH into the pod by running the following command:
+
     ```bash
     kubectl -n event-example attach curl -it
     ```
 
     You will see a prompt similar to the following:
+
     ```{ .bash .no-copy }
     Defaulting container name to curl.
     Use 'kubectl describe pod/ -n event-example' to see all of the containers in this pod.
@@ -293,71 +300,69 @@ The broker can only be accessed from within the cluster where Knative Eventing i
     ```
 
 1. Make a HTTP request to the broker. To show the various types of events you can send, you will make three requests:
-    - To make the first request, which creates an event that has the `type`
-       `greeting`, run the following in the SSH terminal:
-       ```bash
-       curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
-         -X POST \
-         -H "Ce-Id: say-hello" \
-         -H "Ce-Specversion: 1.0" \
-         -H "Ce-Type: greeting" \
-         -H "Ce-Source: not-sendoff" \
-         -H "Content-Type: application/json" \
-         -d '{"msg":"Hello Knative!"}'
-       ```
-       When the broker receives your event, `hello-display` will activate and send
-       it to the event consumer of the same name.
-       If the event has been received, you will receive a `202 Accepted` response
-       similar to the following example:
 
-       ```{ .bash .no-copy }
-       < HTTP/1.1 202 Accepted
-       < Content-Length: 0
-       < Date: Mon, 12 Aug 2019 19:48:18 GMT
-       ```
-    - To make the second request, which creates an event that has the `source`
-       `sendoff`, run the following in the SSH terminal:
+    - To make the first request, which creates an event that has the `type` `greeting`, run the following in the SSH terminal:
 
-       ```bash
-       curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
-         -X POST \
-         -H "Ce-Id: say-goodbye" \
-         -H "Ce-Specversion: 1.0" \
-         -H "Ce-Type: not-greeting" \
-         -H "Ce-Source: sendoff" \
-         -H "Content-Type: application/json" \
-         -d '{"msg":"Goodbye Knative!"}'
-       ```
-       When the broker receives your event, `goodbye-display` will activate and
-       send the event to the event consumer of the same name.
-       If the event has been received, you will receive a `202 Accepted` response
-       similar to the following example:
-       ```
-       < HTTP/1.1 202 Accepted
-       < Content-Length: 0
-       < Date: Mon, 12 Aug 2019 19:48:18 GMT
-       ```
-    - To make the third request, which creates an event that has the `type`
-       `greeting` and the `source` `sendoff`, run the following in the SSH terminal:
-       ```bash
-       curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
-         -X POST \
-         -H "Ce-Id: say-hello-goodbye" \
-         -H "Ce-Specversion: 1.0" \
-         -H "Ce-Type: greeting" \
-         -H "Ce-Source: sendoff" \
-         -H "Content-Type: application/json" \
-         -d '{"msg":"Hello Knative! Goodbye Knative!"}'
-       ```
-       When the broker receives your event, `hello-display` and `goodbye-display`
-       will activate and send the event to the event consumers of the same name.
-       If the event has been received, you will receive a `202 Accepted` response
-       similar to the following example:
-       ```{ .bash .no-copy }
-       < HTTP/1.1 202 Accepted
-       < Content-Length: 0
-       < Date: Mon, 12 Aug 2019 19:48:18 GMT
-       ```
+    ```bash
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
+    -X POST \
+    -H "Ce-Id: say-hello" \
+    -H "Ce-Specversion: 1.0" \
+    -H "Ce-Type: greeting" \
+    -H "Ce-Source: not-sendoff" \
+    -H "Content-Type: application/json" \
+    -d '{"msg":"Hello Knative!"}'
+    ```
+
+    When the broker receives your event, `hello-display` will activate and send it to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
+
+    ```{ .bash .no-copy }
+    < HTTP/1.1 202 Accepted
+    < Content-Length: 0
+    < Date: Mon, 12 Aug 2019 19:48:18 GMT
+    ```
+
+    - To make the second request, which creates an event that has the `source` `sendoff`, run the following in the SSH terminal:
+
+    ```bash
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
+    -X POST \
+    -H "Ce-Id: say-goodbye" \
+    -H "Ce-Specversion: 1.0" \
+    -H "Ce-Type: not-greeting" \
+    -H "Ce-Source: sendoff" \
+    -H "Content-Type: application/json" \
+    -d '{"msg":"Goodbye Knative!"}'
+    ```
+
+    When the broker receives your event, `goodbye-display` will activate and send the event to the event consumer of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
+
+    ```
+    < HTTP/1.1 202 Accepted
+    < Content-Length: 0
+    < Date: Mon, 12 Aug 2019 19:48:18 GMT
+    ```
+
+    - To make the third request, which creates an event that has the `type` `greeting` and the `source` `sendoff`, run the following in the SSH terminal:
+
+    ```bash
+    curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/event-example/default" \
+    -X POST \
+    -H "Ce-Id: say-hello-goodbye" \
+    -H "Ce-Specversion: 1.0" \
+    -H "Ce-Type: greeting" \
+    -H "Ce-Source: sendoff" \
+    -H "Content-Type: application/json" \
+    -d '{"msg":"Hello Knative! Goodbye Knative!"}'
+    ```
+
+    When the broker receives your event, `hello-display` and `goodbye-display` will activate and send the event to the event consumers of the same name. If the event has been received, you will receive a `202 Accepted` response similar to the following example:
+
+    ```{ .bash .no-copy }
+    < HTTP/1.1 202 Accepted
+    < Content-Length: 0
+    < Date: Mon, 12 Aug 2019 19:48:18 GMT
+    ```
 
 1.  Exit SSH by typing `exit` into the command prompt.
 
