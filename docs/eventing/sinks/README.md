@@ -2,11 +2,9 @@
 
 When you create an event source, you can specify a _sink_ where events are sent to from the source. A sink is an _Addressable_ or a _Callable_ resource that can receive incoming events from other resources. Knative Services, Channels, and Brokers are all examples of sinks.
 
-Addressable objects
-:   Addressable objects receive and acknowledge an event delivered over HTTP to an address defined in their `status.address.url` field. As a special case, the core [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#service-v1-core) also fulfils the Addressable interface.
+Addressable objects receive and acknowledge an event delivered over HTTP to an address defined in their `status.address.url` field. As a special case, the core [Kubernetes Service object](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#service-v1-core) also fulfils the Addressable interface.
 
-Callable objects
-:   Callable objects are able to receive an event delivered over HTTP and transform the event, returning 0 or 1 new events in the HTTP response. These returned events may be further processed in the same way that events from an external event source are processed.
+Callable objects are able to receive an event delivered over HTTP and transform the event, returning 0 or 1 new events in the HTTP response. These returned events may be further processed in the same way that events from an external event source are processed.
 
 ## Sink as a parameter
 
