@@ -75,16 +75,15 @@ aliases:
   - knative-prow-updater-robot
   - knative-test-reporter-robot
   - lance
-  - matzew
-  - nak3
   - pmorie
+  - psschwei
   - rhuss
   - spencerdillard
   - thisisnotapril
   - vaikas
   knative-release-leads:
-  - matzew
-  - nak3
+  - dprotaso
+  - psschwei
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
