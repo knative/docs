@@ -51,9 +51,9 @@ Enter the following command to install Istio:
 
 To install Istio without sidecar injection:
 
-    ```sh
-    istioctl install -y
-    ```
+```sh
+istioctl install -y
+```
 
 #### Installing Istio with sidecar injection
 
