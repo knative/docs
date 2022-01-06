@@ -3,7 +3,6 @@
 The Knative Serving Operator can be configured with the following options:
 
 - [Version configuration](#version-configuration)
-- [Knative Serving configuration by ConfigMap](#knative-serving-configuration-by-configmap)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Replace the default istio-ingressgateway service](#replace-the-default-istio-ingressgateway-service)
@@ -36,68 +35,6 @@ enables upgrading or downgrading the Knative Serving version, without needing to
 
 !!! important
     The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v0.22.0, you must upgrade to v0.23.0 before upgrading to v0.24.0.
-
-## Knative Serving configuration by ConfigMap
-
-The Operator manages the Knative Serving installation. It overwrites any updates to ConfigMaps which are used to configure Knative Serving.
-The KnativeServing custom resource (CR) allows you to set values for these ConfigMaps by using the Operator.
-Knative Serving has multiple ConfigMaps that are named with the prefix `config-`.
-The `spec.config` in the KnativeServing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
-
-In the [setup a custom domain example](../../serving/using-a-custom-domain.md), you can see the content of the ConfigMap
-`config-domain` is:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-domain
-  namespace: knative-serving
-data:
-  example.org: |
-    selector:
-      app: prod
-  example.com: ""
-```
-
-Using the operator, specify the ConfigMap `config-domain` using the operator CR:
-
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  config:
-    domain:
-      example.org: |
-        selector:
-          app: prod
-      example.com: ""
-```
-
-You can apply values to multiple ConfigMaps. This example sets `stable-window` to 60s in `config-autoscaler` as well as specifying `config-domain`:
-
-```yaml
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  config:
-    domain:
-      example.org: |
-        selector:
-          app: prod
-      example.com: ""
-    autoscaler:
-      stable-window: "60s"
-```
-
-All the ConfigMaps are created in the same namespace as the operator CR. You can use the operator CR as the
-unique entry point to edit all of them.
 
 ## Private repository and private secrets
 

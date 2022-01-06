@@ -1,11 +1,3 @@
----
-title: "Configuring the Eventing Operator custom resource"
-weight: 60
-type: "docs"
-aliases:
-- /docs/operator/configuring-eventing-cr/
----
-
 # Configuring the Eventing Operator custom resource
 
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
@@ -35,16 +27,6 @@ If Knative Eventing is already managed by the Operator, updating the `spec.versi
 
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
 if the current Knative Eventing deployment is version 0.18.x, you must upgrade to 0.19.x before upgrading to 0.20.x.
-
-## Configuring Knative Eventing using ConfigMaps
-
-The Operator manages the Knative Eventing installation. It overwrites any updates to ConfigMaps which are used to configure Knative Eventing.
-The KnativeEventing CR allows you to set values for these ConfigMaps by using the Operator.
-
-All Knative Eventing ConfigMaps are created in the same namespace as the KnativeEventing CR. You can use the KnativeEventing CR as a unique entry point to edit all ConfigMaps.
-
-Knative Eventing has multiple ConfigMaps that are named with the prefix `config-`.
-The `spec.config` in the KnativeEventing CR has one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which will be used for the ConfigMap `data`.
 
 ### Setting a default channel
 
