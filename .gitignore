@@ -13,6 +13,8 @@ hack/__pycache__
 /node_modules/
 venv/
 
+# TODO clean up images copied between blog/ and docs/
+blog/docs/images/case-studies/
 
 .settings/
 .classpath

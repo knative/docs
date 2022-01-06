@@ -5,14 +5,12 @@ go 1.14
 require (
 	cloud.google.com/go/storage v1.10.0
 	github.com/cloudevents/sdk-go/v2 v2.2.0
-	github.com/eclipse/paho.mqtt.golang v1.1.1
-	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/go-github/v32 v32.1.0
-	github.com/google/uuid v1.2.0
+	github.com/google/uuid v1.2.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/onsi/gomega v1.10.1 // indirect
@@ -30,7 +28,7 @@ require (
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
 	honnef.co/go/tools v0.0.1-2020.1.5 // indirect
-	knative.dev/hack v0.0.0-20211028194650-b96d65a5ff5e
+	knative.dev/hack v0.0.0-20211203062838-e11ac125e707
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2

@@ -17,7 +17,7 @@ Let's take a look at how these components interact:
 
 ### CloudEvents
 Knative Eventing uses
-[CloudEvents](https://github.com/cloudevents/spec/blob/master/primer.md){target=blank_} to send
+[CloudEvents](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md){target=blank_} to send
 information back and forth between your Services and these components.
 
 ??? question "What are CloudEvents?"

@@ -7,7 +7,7 @@ This type of integration requires more effort than using some simpler integratio
 !!! note
     If you have created a new event source type that is not a part of the core Knative project, you can open a pull request to add it to the list of [Third-Party Sources](../../sources/#third-party-sources), and announce the new source in one of the [Knative Slack](https://slack.knative.dev/) channels.
 
-    You can also add your event source to the [`knative-sandbox`](https://github.com/knative-sandbox) organization, by following the instructions to [create a sandbox repository](https://knative.dev/community/contributing/mechanics/creating-a-sandbox-repo/).
+    You can also add your event source to the [`knative-sandbox`](https://github.com/knative-sandbox) organization, by following the instructions to [create a sandbox repository](https://github.com/knative/community/blob/main/mechanics/CREATING-A-SANDBOX-REPO.md).
 
 ## Required components
 

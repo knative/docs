@@ -3,8 +3,6 @@
 Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 You can install the Serving component, Eventing component, or both on your cluster.
 
-{{ feature(beta="0.25") }}
-
 --8<-- "prerequisites.md"
 
 ## Installing the latest release
@@ -168,42 +166,47 @@ kubectl logs -f deploy/knative-operator
         Knative operator will install the default manifests of Knative Serving at the version `$spec_version`, and then install
         your customized manifests based on them.
 
-### Verify the Knative Serving deployment:
-
-1. Monitor the Knative deployments:
-```
-kubectl get deployment -n knative-serving
-```
-If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
-is a sample output:
-```
-NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
-activator              1/1     1            1           18s
-autoscaler             1/1     1            1           18s
-autoscaler-hpa         1/1     1            1           14s
-controller             1/1     1            1           18s
-net-istio-webhook      1/1     1            1           12s
-net-istio-controller   1/1     1            1           12s
-webhook                1/1     1            1           17s
-```
-
-1. Check the status of Knative Serving Custom Resource:
-```
-kubectl get KnativeServing knative-serving -n knative-serving
-```
-If Knative Serving is successfully installed, you should see:
-```
-NAME              VERSION             READY   REASON
-knative-serving   <version number>    True
-```
-
 ### Installing Knative Serving with different networking layers
 
 Knative Operator can configure Knative Serving component with different network layer options. Istio is the default network
 layer, if the ingress is not specified in the Knative Serving CR. Click on each of the following tabs to see how you can configure
 Knative Serving with different ingresses:
 
-=== "Istio (default)"
+=== "Kourier (Choose this if you are not sure)"
+
+    The following commands install Kourier and enable its Knative integration.
+
+    1. To configure Knative Serving to use Kourier, copy the following YAML into a file:
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          ingress:
+            kourier:
+              enabled: true
+          config:
+            network:
+              ingress-class: "kourier.ingress.networking.knative.dev"
+        ```
+
+    1. Apply the YAML file by running the command:
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+    1. Fetch the External IP or CNAME by running the command:
+        ```bash
+        kubectl --namespace knative-serving get service kourier
+        ```
+
+        Save this for configuring DNS later.
+
+=== "Istio"
 
     The following commands install Istio and enable its Knative integration.
 
@@ -288,7 +291,7 @@ Knative Serving with different ingresses:
         spec:
           config:
             network:
-              ingress.class: "ambassador.ingress.networking.knative.dev"
+              ingress-class: "ambassador.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
@@ -327,7 +330,7 @@ Knative Serving with different ingresses:
               enabled: true
           config:
             network:
-              ingress.class: "contour.ingress.networking.knative.dev"
+              ingress-class: "contour.ingress.networking.knative.dev"
         ```
 
     1. Apply the YAML file by running the command:
@@ -344,39 +347,33 @@ Knative Serving with different ingresses:
 
         Save this for configuring DNS later.
 
-=== "Kourier"
 
-    The following commands install Kourier and enable its Knative integration.
+1. Monitor the Knative deployments:
+```
+kubectl get deployment -n knative-serving
+```
+If Knative Serving has been successfully deployed, all deployments of the Knative Serving will show `READY` status. Here
+is a sample output:
+```
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+activator              1/1     1            1           18s
+autoscaler             1/1     1            1           18s
+autoscaler-hpa         1/1     1            1           14s
+controller             1/1     1            1           18s
+domain-mapping         1/1     1            1           12s
+domainmapping-webhook  1/1     1            1           12s
+webhook                1/1     1            1           17s
+```
 
-    1. To configure Knative Serving to use Kourier, copy the following YAML into a file:
-        ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
-        kind: KnativeServing
-        metadata:
-          name: knative-serving
-          namespace: knative-serving
-        spec:
-          ingress:
-            kourier:
-              enabled: true
-          config:
-            network:
-              ingress.class: "kourier.ingress.networking.knative.dev"
-        ```
-
-    1. Apply the YAML file by running the command:
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-    1. Fetch the External IP or CNAME by running the command:
-        ```bash
-        kubectl --namespace knative-serving get service kourier
-        ```
-
-        Save this for configuring DNS later.
+1. Check the status of Knative Serving Custom Resource:
+```
+kubectl get KnativeServing knative-serving -n knative-serving
+```
+If Knative Serving is successfully installed, you should see:
+```
+NAME              VERSION             READY   REASON
+knative-serving   <version number>    True
+```
 
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
@@ -509,15 +506,16 @@ If Knative Eventing has been successfully deployed, all deployments of the Knati
 is a sample output:
 
 ```
-NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
-broker-controller      1/1     1            1           63s
-broker-filter          1/1     1            1           62s
-broker-ingress         1/1     1            1           62s
-eventing-controller    1/1     1            1           67s
-eventing-webhook       1/1     1            1           67s
-imc-controller         1/1     1            1           59s
-imc-dispatcher         1/1     1            1           59s
-mt-broker-controller   1/1     1            1           62s
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+eventing-controller     1/1     1            1           43s
+eventing-webhook        1/1     1            1           42s
+imc-controller          1/1     1            1           39s
+imc-dispatcher          1/1     1            1           38s
+mt-broker-controller    1/1     1            1           36s
+mt-broker-filter        1/1     1            1           37s
+mt-broker-ingress       1/1     1            1           37s
+pingsource-mt-adapter   0/0     0            0           43s
+sugar-controller        1/1     1            1           36s
 ```
 
 ### Check the status of Knative Eventing Custom Resource:

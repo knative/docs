@@ -1,15 +1,13 @@
 # Knative Serving
 
-Knative Serving builds on Kubernetes to support deploying and serving
-of serverless applications and functions. Serving is easy to get started with
-and scales to support advanced scenarios.
-
-The Knative Serving project provides middleware components that enable:
+Knative Serving provides components that enable:
 
 - Rapid deployment of serverless containers.
-- Autoscaling including scaling pods down to zero.
-- Support for multiple networking layers such as Ambassador, Contour, Kourier, Gloo, and Istio for integration into existing environments.
+- Autoscaling, including scaling pods down to zero.
+- Support for multiple networking layers, such as Ambassador, Contour, Kourier, Gloo, and Istio, for integration into existing environments.
 - Point-in-time snapshots of deployed code and configurations.
+
+Knative Serving supports both HTTP and [HTTPS](using-a-tls-cert.md) networking protocols.
 
 ## Serving resources
 
@@ -45,7 +43,7 @@ serverless workload behaves on the cluster:
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](samples/README.md)
+To get started with Serving, check out one of the [hello world](../samples/serving.md)
 sample projects. These projects use the `Service` resource, which manages all of
 the details for you.
 
@@ -57,17 +55,17 @@ For more information on the resources and their interactions, see the [Resource 
 
 ## More samples and demos
 
-- [Knative Serving code samples](samples/README.md)
+- [Knative Serving code samples](../samples/serving.md)
 
 ## Debugging Knative Serving issues
 
-- [Debugging application issues](../serving/troubleshooting/debugging-application-issues.md)
+- [Debugging application issues](troubleshooting/debugging-application-issues.md)
 
 ## Configuration and Networking
 
-- [Configuring cluster local routes](../serving/services/private-services.md)
+- [Configuring cluster local routes](services/private-services.md)
 - [Using a custom domain](using-a-custom-domain.md)
-- [Traffic management](../serving/traffic-management.md)
+- [Traffic management](traffic-management.md)
 
 ## Observability
 

@@ -25,7 +25,7 @@ Since our "Hello world" Service is being deployed as a Knative Service, not a Ku
     ==**Expected output:**==
     ```{ .bash .no-copy }
     Service hello created to latest revision 'hello-world' is available at URL:
-    http://hello.default.127.0.0.1.nip.io
+    http://hello.default.127.0.0.1.sslip.io
     ```
 
 === "YAML"
@@ -66,10 +66,10 @@ Since our "Hello world" Service is being deployed as a Knative Service, not a Ku
     kn service list
     ```
 ## Ping your Knative Service
-Ping your Knative Service by opening [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank} in your browser of choice or by running the command:
+Ping your Knative Service by opening [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank} in your browser of choice or by running the command:
 
 ```
-curl http://hello.default.127.0.0.1.nip.io
+curl http://hello.default.127.0.0.1.sslip.io
 ```
 
 
@@ -78,16 +78,16 @@ curl http://hello.default.127.0.0.1.nip.io
 Hello World!
 ```
 
-??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.nip.io`?"
+??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.sslip.io`?"
 
-    In some cases your DNS server may be set up not to resolve `*.nip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses.
+    In some cases your DNS server may be set up not to resolve `*.sslip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses.
 
     The exact steps will differ according to your distribution. For example, with Ubuntu derived systems which use `systemd-resolved`, you can add the following entry to the `/etc/systemd/resolved.conf`:
 
     ```ini
     [Resolve]
     DNS=8.8.8.8
-    Domains=~nip.io.
+    Domains=~sslip.io.
     ```
 
     Then simply restart the service with `sudo service systemd-resolved restart`.

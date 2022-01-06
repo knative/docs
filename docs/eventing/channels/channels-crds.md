@@ -13,10 +13,8 @@ procedure:
 
 This is a non-exhaustive list of the available Channels for Knative Eventing.
 
-Notes:
-
-* Inclusion in this list is not an endorsement, nor does it imply any level of
-  support.
+!!! note
+    Inclusion in this list is not an endorsement, nor does it imply any level of support.
 
 Name | Status | Support | Description
 --- | --- | --- | ---

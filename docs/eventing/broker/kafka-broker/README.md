@@ -9,7 +9,7 @@ Notable features are:
 - Control plane High Availability
 - Horizontally scalable data plane
 - [Extensively configurable](#kafka-producer-and-consumer-configurations)
-- Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/master/extensions/partitioning.md)
+- Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/v1.0.1/extensions/partitioning.md)
 - Support any Kafka version, see [compatibility matrix](https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix)
 
 ## Prerequisites
@@ -101,7 +101,8 @@ This `ConfigMap` is installed in the cluster. You can edit
 the configuration or create a new one with the same values
 depending on your needs.
 
-**NOTE:** The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
+!!! note
+    The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
 
 ## Set as default broker implementation
 
@@ -170,7 +171,8 @@ data:
 The `Secret` `my_secret` must exist in the same namespace of the `ConfigMap` referenced by `broker.spec.config`,
 in this case: `knative-eventing`.
 
-_Note: Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)._
+!!! note
+    Certificates and keys must be in [`PEM` format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail).
 
 ### Authentication using SASL
 
@@ -222,7 +224,43 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
   --from-file=user.key=<my_key.pem_file_path>
 ```
 
-_NOTE: `ca.crt` can be omitted to fallback to use system's root CA set._
+!!! note
+    `ca.crt` can be omitted to fallback to use system's root CA set.
+
+## Consumer Offsets Commit Interval
+
+Kafka consumers keep track of the last successfully sent events by committing offsets.
+
+Knative Kafka Broker commits the offset every `auto.commit.interval.ms` milliseconds.
+
+!!! note
+    To prevent negative impacts to performance, it is not recommended committing
+    offsets every time an event is successfully sent to a subscriber.
+
+The interval can be changed by changing the `config-kafka-broker-data-plane` `ConfigMap`
+in the `knative-eventing` namespace by modifying the parameter `auto.commit.interval.ms` as follows:
+
+```yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kafka-broker-data-plane
+  namespace: knative-eventing
+data:
+  # Some configurations omitted ...
+  config-kafka-broker-consumer.properties: |
+    # Some configurations omitted ...
+
+    # Commit the offset every 5000 millisecods (5 seconds)
+    auto.commit.interval.ms=5000
+```
+
+!!! note
+    Knative Kafka Broker guarantees at least once delivery, which means that your applications may
+    receive duplicate events. A higher commit interval means that there is a higher probability of
+    receiving duplicate events, because when a Consumer restarts, it restarts from the last
+    committed offset.
 
 ## Kafka Producer and Consumer configurations
 

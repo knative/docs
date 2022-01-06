@@ -22,6 +22,16 @@ Follow this blog to keep up-to-date with Knative.
 
 # Featured Posts
 
+## Knative joining the CNCF
+Details on intention to join CNCF as incubating project.
+
+[Read more :octicons-arrow-right-24:](steering/knative-cncf-donation.md){ .md-button }
+
+## Welcome new members to Steering Committee
+Details on the Steering Committee 2021 election results.
+
+[Read more :octicons-arrow-right-24:](steering/2021-12-14-steering-elections-results.md){ .md-button }
+
 ## Knative 1.0 is out!
 Details on the 1.0 release of the Knative project.
 

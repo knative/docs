@@ -53,7 +53,7 @@ DomainMappings in that namespace to use the domain name.
             ```
             Where `<filename>` is the name of the file you created in the previous step.
 
-    * To create ClusterDomainClaims automatically: set the `autocreateClusterDomainClaims` property
+    * To create ClusterDomainClaims automatically: set the `autocreate-cluster-domain-claims` property
     to `true` in the `config-network` ConfigMap in the `knative-serving` namespace.
     This allows any user, in any namespace, to map any domain name, including ones in other
     namespaces or for domain names that they do not own.
@@ -77,7 +77,7 @@ DomainMappings in that namespace to use the domain name.
                 kind: Service
                 apiVersion: serving.knative.dev/v1
               tls:
-                secret: <cert-secret>
+                secretName: <cert-secret>
             ```
             Where:
 

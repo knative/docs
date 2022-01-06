@@ -280,7 +280,7 @@ The latest network ingress v0.21.0 artifacts, bundled within the image of this o
 
 ### Learn more
 
-Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
+Knative is an open source project that anyone in the [community](https://knative.dev/docs/community/) can use, improve, and enjoy. We'd love you to join us!
 
 - [Welcome to Knative](https://knative.dev/docs#welcome-to-knative)
 - [Getting started documentation](https://knative.dev/docs/#getting-started)

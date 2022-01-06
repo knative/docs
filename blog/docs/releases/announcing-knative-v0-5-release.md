@@ -64,7 +64,7 @@ Knative Eventing Object Model
 
 <li name="fe75" id="fe75" class="graf graf--li graf-after--li"> <a href="https://knative.dev/contributing/" target="_blank" >Knative meetings and work groups</a > </li>
 
-<li name="cf03" id="cf03" class="graf graf--li graf-after--li"> <a href="https://knative.dev/community/" target="_blank" >Questions and issues</a > </li>
+<li name="cf03" id="cf03" class="graf graf--li graf-after--li"> <a href="https://knative.dev/docs/community/" target="_blank" >Questions and issues</a > </li>
 
 <li name="19ce" id="19ce" class="graf graf--li graf-after--li"> Knative on Twitter (<a href="https://twitter.com/KnativeProject" data-href="https://twitter.com/KnativeProject" class="markup--anchor markup--li-anchor" rel="nofollow noopener noopener noopener noopener" target="_blank" >@KnativeProject</a >) </li>
 

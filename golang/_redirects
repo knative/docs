@@ -60,13 +60,14 @@
 /networking/* go-get=1 /golang/networking.html 200
 /operator/* go-get=1 /golang/operator.html 200
 /pkg/* go-get=1 /golang/pkg.html 200
+/pkg/* https://pkg.go.dev/knative.dev/pkg/:splat
 /reconciler-test/* go-get=1 /golang/reconciler-test.html 200
 /release/* go-get=1 /golang/release.html 200
 /sample-controller/* go-get=1 /golang/sample-controller.html 200
 /sample-source/* go-get=1 /golang/sample-source.html 200
 /serving/* go-get=1 /golang/serving.html 200
+/serving/* https://pkg.go.dev/knative.dev/serving/:splat
 /specs/* go-get=1 /golang/specs.html 200
 /test-infra/* go-get=1 /golang/test-infra.html 200
 /ux/* go-get=1 /golang/ux.html 200
-/website/* go-get=1 /golang/website.html 200
 /wg-repository/* go-get=1 /golang/wg-repository.html 200

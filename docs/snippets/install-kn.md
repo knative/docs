@@ -7,7 +7,8 @@
         brew install kn
         ```
 
-        Note: Quickstart requires `kn` version 0.25 or later. To upgrade an existing install to the latest version, run `brew upgrade kn`.
+        !!! note
+            Quickstart requires `kn` version 0.25 or later. To upgrade an existing install to the latest version, run `brew upgrade kn`.
 
     === "Using a binary"
 

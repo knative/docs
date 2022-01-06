@@ -225,7 +225,7 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 Update the
 [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml)
-in the `knative-serving` namespace to enable `autoTLS`and specify how HTTP
+in the `knative-serving` namespace to enable `auto-tls` and specify how HTTP
 requests are handled:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
@@ -234,11 +234,11 @@ requests are handled:
     kubectl edit configmap config-network --namespace knative-serving
     ```
 
-1.  Add the `autoTLS: Enabled` attribute under the `data` section:
+1.  Add the `auto-tls: Enabled` attribute under the `data` section:
 
     ```bash
     data:
-      autoTLS: Enabled
+      auto-tls: Enabled
     ```
 
     Example:
@@ -251,20 +251,20 @@ requests are handled:
       namespace: knative-serving
     data:
        ...
-       autoTLS: Enabled
+       auto-tls: Enabled
        ...
     ```
 
 1.  Configure how HTTP and HTTPS requests are handled in the
-  [`httpProtocol`](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L109)
+  [`http-protocol`](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L109)
   attribute.
 
     By default, Knative ingress is configured to serve HTTP traffic
-    (`httpProtocol: Enabled`). Now that your cluster is configured to use TLS
+    (`http-protocol: Enabled`). Now that your cluster is configured to use TLS
     certificates and handle HTTPS traffic, you can specify whether or not any
     HTTP traffic is allowed.
 
-    Supported `httpProtocol` values:
+    Supported `http-protocol` values:
 
     - `Enabled`: Serve HTTP traffic.
     - `Disabled`: Rejects all HTTP traffic.
@@ -273,7 +273,7 @@ requests are handled:
 
      ```bash
      data:
-       httpProtocol: Redirected
+       http-protocol: Redirected
      ```
 
      Example:
@@ -286,13 +286,13 @@ requests are handled:
        namespace: knative-serving
      data:
        ...
-       autoTLS: Enabled
-       httpProtocol: Redirected
+       auto-tls: Enabled
+       http-protocol: Redirected
        ...
      ```
 
-    **Note:**
-    When using HTTP-01 challenge, `httpProtocol` field has to be set to `Enabled` to make sure HTTP-01 challenge requests can be accepted by the cluster.
+    !!! note
+        When using HTTP-01 challenge, `http-protocol` field has to be set to `Enabled` to make sure HTTP-01 challenge requests can be accepted by the cluster.
 
 1.  Ensure that the file was updated successfully:
 
@@ -311,8 +311,8 @@ be able to handle HTTPS traffic.
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 
-1.  When the certificate is provisioned (which could take up to several minutes depending on
-    the challenge type), you should see something like:
+1.  When the certificate is provisioned (which could take up to several minutes depending on the challenge type), you should see something like:
+
     ```
     NAME               URL                                           LATESTCREATED            LATESTREADY              READY   REASON
     autoscale-go       https://autoscale-go.default.{custom-domain}   autoscale-go-6jf85 autoscale-go-6jf85       True  
@@ -322,7 +322,7 @@ be able to handle HTTPS traffic.
 
 ### Disable Auto TLS per service or route
 
-If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disableAutoTLS: true`.
+If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disable-auto-tls: true`.
 
 Using the previous `autoscale-go` example:
 
@@ -333,7 +333,7 @@ Using the previous `autoscale-go` example:
  metadata:
    annotations:
     ...
-     networking.knative.dev/disableAutoTLS: "true"
+     networking.knative.dev/disable-auto-tls: "true"
     ...
 ```
 2. The service URL should now be **http**, indicating that AutoTLS is disabled:

@@ -11,7 +11,7 @@ type: "blog"
 Democracy is a beautiful thing, those that want to dedicate their own time to improve a community can step up and those that have the right to vote can freely speak their mind to elect the candidate they think will be a net positive to the community.
 
 We are running an election to fill out the two (2) seats due for election
-this year on the [Knative Steering Committee](https://knative.dev/community/contributing/steering-committee/). Each elected member will serve
+this year on the [Knative Steering Committee](https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md). Each elected member will serve
 a two (2) year term.
 
 This election will shape the future of Knative as a community and project.

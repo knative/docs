@@ -14,9 +14,9 @@ It's recommended that you have a basic understanding of the following:
 
 - [Brokers](broker/README.md)
 - [Triggers](broker/triggers/README.md)
-- The [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md),
+- The [CloudEvents spec](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md),
    particularly the
-   [Context Attributes](https://github.com/cloudevents/spec/blob/master/spec.md#context-attributes)
+   [Context Attributes](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#context-attributes)
    section
 - [Event sources](sources/README.md)
 
@@ -71,8 +71,8 @@ EventType objects:
 
 | Field | Description | Required or optional |
 |-------|-------------|----------------------|
-| `spec.type` | Refers to the [CloudEvent type](https://github.com/cloudevents/spec/blob/master/spec.md#type) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. This field is authoritative. | Required |
-| `spec.source` | Refers to the [CloudEvent source](https://github.com/cloudevents/spec/blob/master/spec.md#source-1) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. | Required |
+| `spec.type` | Refers to the [CloudEvent type](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#type) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. This field is authoritative. | Required |
+| `spec.source` | Refers to the [CloudEvent source](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#source-1) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. | Required |
 | `spec.schema` | A valid URI with the EventType schema such as a JSON schema or a protobuf schema. | Optional |
 | `spec.description` | A string describing what the EventType is about. | Optional |
 | `spec.broker` | Refers to the Broker that can provide the EventType. | Required |
@@ -305,6 +305,6 @@ Here are a some example Triggers that subscribe to events using exact matching o
 
 ## Next steps
 
-[Knative code samples](samples/README.md) is a useful resource to better understand
+[Knative code samples](../samples/eventing.md) is a useful resource to better understand
 some of the event sources. Remember, you must point the sources to a Broker if you want
 automatic registration of EventTypes in the registry.

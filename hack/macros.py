@@ -27,12 +27,18 @@ def define_env(env):
         """
         version = os.environ.get("KNATIVE_VERSION")
         if version == None:
-            return 'https://storage.googleapis.com/{org}-nightly/{repo}/latest/{file}'.format(
+            return 'https://storage.googleapis.com/knative-nightly/{repo}/latest/{file}'.format(
+                    repo=repo,
+                    file=file)
+        else:
+            if version.startswith("v1."):
+                return 'https://github.com/{org}/{repo}/releases/download/knative-{version}/{file}'.format(
                     repo=repo,
                     file=file,
+                    version=version,
                     org=org)
-        else:
-            return 'https://github.com/{org}/{repo}/releases/download/{version}/{file}'.format(
+            else:
+                return 'https://github.com/{org}/{repo}/releases/download/{version}/{file}'.format(
                     repo=repo,
                     file=file,
                     version=version,

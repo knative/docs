@@ -4,9 +4,9 @@ nav:
     - Installing: /docs/install/
     - Serving: /docs/serving/
     - Eventing: /docs/eventing/
-    - Code samples: /docs/samples.md
+    - Code samples: /docs/samples/
     - Reference: /docs/reference/
-    - "Join the Community ➠": /community/
+    - "Community": /docs/community/
     - Case studies: /docs/about/case-studies/deepc
   #####################################################
     # Blog
@@ -30,6 +30,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/workflow-as-function-flow.md
           - articles/highlighting-value-knative-c-suite.md
           - articles/knative-1.0.md
           - articles/announcing-knative-1.0.md
@@ -44,6 +45,9 @@ nav:
           - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
           - articles/set-up-a-local-knative-environment-with-kind.md
       - Steering Committee:
+          - steering/knative-cncf-donation.md
+          - steering/2021-end-user-election.md
+          - steering/2021-12-14-steering-elections-results.md
           - steering/steering-elections-2021.md
           - steering/toc-2021-election-announcement.md
           - steering/2020-11-ksc-elections.md

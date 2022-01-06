@@ -5,9 +5,9 @@
 
 Before you can get started with a Knative Quickstart deployment you must install kind, the Kubernetes CLI, and the Knative CLI.
 
-### Install Kind (Kubernetes in Docker)
+### Prepare local Kubernetes cluster
 
-You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker) to run a local Kubernetes cluster with Docker container nodes.
+You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker) or [`minikube`](https://minikube.sigs.k8s.io/docs/start/){target=_blank} to run a local Kubernetes cluster with Docker container nodes.
 
 ### Install the Kubernetes CLI
 

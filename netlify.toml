@@ -16,5 +16,20 @@
 
 [[redirects]]
   from = "/contributing/"
-  to = "/community/contributing/"
+  to = "/docs/community/"
+  status = 301
+
+[[redirects]]
+  from = "/community/*"
+  to = "/docs/community/"
+  status = 301
+
+[[redirects]]
+  from = "/about-analytics-cookies/"
+  to = "/development/about-analytics-cookies/"
+  status = 301
+
+[[redirects]]
+  from = "/docs/help/contributor/*"
+  to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
   status = 301

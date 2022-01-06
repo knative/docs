@@ -27,13 +27,6 @@ github.com/cloudevents/sdk-go/v2/observability
 github.com/cloudevents/sdk-go/v2/protocol
 github.com/cloudevents/sdk-go/v2/protocol/http
 github.com/cloudevents/sdk-go/v2/types
-# github.com/eclipse/paho.mqtt.golang v1.1.1
-## explicit
-github.com/eclipse/paho.mqtt.golang
-github.com/eclipse/paho.mqtt.golang/packets
-# github.com/form3tech-oss/jwt-go v3.2.2+incompatible
-## explicit
-github.com/form3tech-oss/jwt-go
 # github.com/fsnotify/fsnotify v1.4.9
 ## explicit
 # github.com/golang/protobuf v1.4.3
@@ -130,11 +123,8 @@ golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
 golang.org/x/net/idna
-golang.org/x/net/internal/socks
 golang.org/x/net/internal/timeseries
-golang.org/x/net/proxy
 golang.org/x/net/trace
-golang.org/x/net/websocket
 # golang.org/x/oauth2 v0.0.0-20201208152858-08078c50e5b5
 ## explicit
 golang.org/x/oauth2
@@ -296,7 +286,7 @@ gopkg.in/go-playground/webhooks.v3/github
 gopkg.in/yaml.v2
 # honnef.co/go/tools v0.0.1-2020.1.5
 ## explicit
-# knative.dev/hack v0.0.0-20211028194650-b96d65a5ff5e
+# knative.dev/hack v0.0.0-20211203062838-e11ac125e707
 ## explicit
 knative.dev/hack
 # go.opencensus.io => go.opencensus.io v0.20.2

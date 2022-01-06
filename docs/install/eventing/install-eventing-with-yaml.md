@@ -168,7 +168,7 @@ Follow the procedure for the Broker of your choice:
           name: imc-channel
           namespace: knative-eventing
         data:
-          channelTemplateSpec: |
+          channel-template-spec: |
             apiVersion: messaging.knative.dev/v1
             kind: InMemoryChannel
         ---
@@ -178,7 +178,7 @@ Follow the procedure for the Broker of your choice:
           name: kafka-channel
           namespace: knative-eventing
         data:
-          channelTemplateSpec: |
+          channel-template-spec: |
             apiVersion: messaging.knative.dev/v1alpha1
             kind: KafkaChannel
             spec:
@@ -261,7 +261,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="mt-github.yaml")}}
         ```
 
-    To learn more, try the [GitHub source sample](../../eventing/samples/github-source/README.md)
+    To learn more, try the [GitHub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/github-source)
 
 === "Apache Kafka Source"
 
@@ -286,10 +286,10 @@ The following tabs expand to show instructions for installing each Eventing exte
 
     To learn more, try the following samples:
 
-    - [Cloud Pub/Sub source sample](../../eventing/samples/cloud-pubsub-source/README.md)
-    - [Cloud Storage source sample](../../eventing/samples/cloud-storage-source/README.md)
-    - [Cloud Scheduler source sample](../../eventing/samples/cloud-scheduler-source/README.md)
-    - [Cloud Audit Logs source sample](../../eventing/samples/cloud-audit-logs-source/README.md)
+    - [Cloud Pub/Sub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-pubsub-source)
+    - [Cloud Storage source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-storage-source)
+    - [Cloud Scheduler source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-scheduler-source)
+    - [Cloud Audit Logs source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-audit-logs-source)
 
 
 === "Apache CouchDB Source"

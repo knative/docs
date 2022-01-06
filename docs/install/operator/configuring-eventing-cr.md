@@ -48,7 +48,7 @@ The `spec.config` in the KnativeEventing CR has one `<name>` entry for each Conf
 
 ### Setting a default channel
 
-If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap. 
+If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
 
 You can do this by modifying the KnativeEventing CR:
 
@@ -79,11 +79,12 @@ spec:
                 retry: 5
 ```
 
-**NOTE:** The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
+!!! note
+    The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
 
 ### Setting the default channel for the broker
 
-If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap. 
+If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
 
 You can do this by modifying the KnativeEventing CR:
 
@@ -96,7 +97,7 @@ metadata:
 spec:
   config:
     config-br-default-channel:
-      channelTemplateSpec: |
+      channel-template-spec: |
         apiVersion: messaging.knative.dev/v1beta1
         kind: KafkaChannel
         spec:
@@ -295,6 +296,9 @@ Requests and limits can be configured for the following containers:
 - `mt-broker-controller`
 
 To override resource settings for a specific container, you must create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
+
+!!! info
+    If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
 
 For example, the following KnativeEventing CR configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
 

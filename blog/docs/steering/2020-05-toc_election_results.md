@@ -8,9 +8,9 @@ aliases:
   - /blog/2019/05/12/2020-toc-election-results/
 ---
 
-This week, the Knative project successfully held its first TOC elections. The event constituted a milestone for the project’s governance, with 70% of voter turnout: 83 of the most active contributors to the project, representing companies like IBM, Pivotal, SAP, Google, VMWare, RedHat, and others participated in this election process. 
+This week, the Knative project successfully held its first TOC elections. The event constituted a milestone for the project’s governance, with 70% of voter turnout: 83 of the most active contributors to the project, representing companies like IBM, Pivotal, SAP, Google, VMWare, RedHat, and others participated in this election process.
 
-The new [technical stewardship](https://knative.dev/community/contributing/tech-oversight-committee/) for Knative now has more vendor diversity, with members representing RedHat, VMWare, and Google, as follows:
+The new [technical stewardship](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md) for Knative now has more vendor diversity, with members representing RedHat, VMWare, and Google, as follows:
 
 * Nghia Tran (Google) _- new member_
 
@@ -21,11 +21,11 @@ The new [technical stewardship](https://knative.dev/community/contributing/tech-
 * Matt Moore (VMWare) - _existing member_
 
 * Evan Anderson (VMWare) - _existing member_
- 
+
 Congratulations to the newly elected members!
 
 
-Here is a brief introduction from the new members of the TOC: 
+Here is a brief introduction from the new members of the TOC:
 
 **Nghia Tran:**
 <br> _I have been involved with Knative in the very early days, and in the past two years I have been leading the Networking Working Group.  I am honored to receive much support in the election.  My hope is that I can help increase collaboration in the project, as well as help improve Knative users experience.  Hopefully that would lead to even wider adoption than the early success that we currently enjoy._
@@ -40,4 +40,4 @@ _Open-source is very dear to my heart so first and foremost I want to ensure tha
 
 Watch the presentation of the new members at the [last community meetup.](https://youtu.be/24owwOKj86E)
 
-The new [election process](https://knative.dev/community/contributing/mechanics/toc/) proved to be solid, and it will be repeated annually for this project. Thank you to everyone who participated in this process, and we look forward to more collaborations in the future!
+The new [election process](https://github.com/knative/community/blob/main/mechanics/TOC.md) proved to be solid, and it will be repeated annually for this project. Thank you to everyone who participated in this process, and we look forward to more collaborations in the future!

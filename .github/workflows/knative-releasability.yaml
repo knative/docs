@@ -38,9 +38,9 @@ jobs:
     env:
       #########################################
       #   Update this section each release.   #
-      RELEASE: 'v1.0'
-      MODULE_RELEASE: 'v0.27'
-      SLACK_CHANNEL: 'release-1dot0'
+      RELEASE: 'v1.1'
+      MODULE_RELEASE: 'v0.28'
+      SLACK_CHANNEL: 'release-1dot1'
       #########################################
 
     steps:
@@ -66,7 +66,7 @@ jobs:
           go-version: 1.17.x
 
       - name: Install Dependencies
-        run: GO111MODULE=on go get knative.dev/test-infra/buoy@main
+        run: go install knative.dev/test-infra/buoy@main
 
       - name: Check out code
         uses: actions/checkout@v2

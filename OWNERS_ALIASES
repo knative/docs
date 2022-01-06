@@ -5,15 +5,13 @@ aliases:
   api-core-wg-leads:
   - dprotaso
   autoscaling-reviewers:
+  - nader-ziada
   - psschwei
   - taragu
   autoscaling-wg-leads:
-  - markusthoemmes
-  - vagababov
+  - julz
   autoscaling-writers:
   - julz
-  - markusthoemmes
-  - vagababov
   - yanweiguo
   client-reviewers:
   - itsmurugappan
@@ -33,18 +31,17 @@ aliases:
   - omerbensaadon
   - salaboy
   docs-reviewers:
-  - RichardJJG
-  - mpetason
   - nainaz
   - omerbensaadon
   - pmbanugo
   - snneji
-  docs-wg-leads: []
+  docs-wg-leads:
+  - csantanapr
+  - snneji
   docs-writers:
-  - RichardJJG
   - abrennan89
-  - carieshmarie
-  - richieescarez
+  - csantanapr
+  - psschwei
   - snneji
   eventing-reviewers:
   - aslom
@@ -68,7 +65,7 @@ aliases:
   - pierDipi
   - vaikas
   knative-admin:
-  - bsnchan
+  - csantanapr
   - dprotaso
   - duglin
   - evankanderson
@@ -77,19 +74,16 @@ aliases:
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
-  - markusthoemmes
-  - matzew
-  - mbehrendt
-  - nak3
-  - omerbensaadon
+  - lance
   - pmorie
+  - psschwei
   - rhuss
   - spencerdillard
   - thisisnotapril
   - vaikas
   knative-release-leads:
-  - matzew
-  - nak3
+  - dprotaso
+  - psschwei
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -101,7 +95,6 @@ aliases:
   - andrew-su
   - arturenault
   - carlisia
-  - markusthoemmes
   - nak3
   - shashwathi
   - tcnghia
@@ -120,7 +113,6 @@ aliases:
   - aliok
   - houshengbo
   - jcrossley3
-  - markusthoemmes
   - matzew
   - trshafer
   operations-wg-leads:
@@ -130,7 +122,6 @@ aliases:
   - aliok
   - houshengbo
   - jcrossley3
-  - markusthoemmes
   - matzew
   - trshafer
   pkg-configmap-reviewers:
@@ -159,15 +150,14 @@ aliases:
   - gerardo-lc
   - joshua-bone
   - kvmware
+  - shinigambit
   - steuhs
   productivity-wg-leads:
   - chizhg
-  - n3wscott
   productivity-writers:
   - chaodaiG
   - chizhg
   - coryrc
-  - n3wscott
   security-wg-leads:
   - evankanderson
   - julz
@@ -182,20 +172,20 @@ aliases:
   serving-reviewers:
   - carlisia
   - julz
+  - nader-ziada
   - nealhu
   - psschwei
   - whaught
   serving-writers:
   - dprotaso
   - julz
-  - markusthoemmes
   - tcnghia
   - vagababov
   source-wg-leads:
   - lionelvillard
   steering-committee:
-  - bsnchan
-  - mbehrendt
+  - csantanapr
+  - lance
   - pmorie
   - thisisnotapril
   - vaikas
@@ -203,15 +193,14 @@ aliases:
   - dprotaso
   - evankanderson
   - julz
-  - markusthoemmes
   - rhuss
   trademark-committee:
   - duglin
-  - omerbensaadon
+  - evankanderson
   - spencerdillard
   ux-wg-leads:
   - csantanapr
-  - omerbensaadon
+  - snneji
   ux-writers:
   - csantanapr
-  - omerbensaadon
+  - snneji

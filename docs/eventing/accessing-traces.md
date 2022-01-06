@@ -16,6 +16,7 @@ With the exception of importers, the Knative Eventing tracing is configured thro
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
 You can use the `config-tracing` ConfigMap to configure the following Eventing components:
+
  - Brokers
  - Triggers
  - InMemoryChannel
@@ -63,6 +64,7 @@ You can configure your `config-tracing` with following options:
    the server.
 
 ### Viewing your `config-tracing` ConfigMap
+
 To view your current configuration:
 
 ```bash
@@ -79,19 +81,17 @@ kubectl -n knative-eventing edit configmap config-tracing
 
 ## Accessing traces in Eventing
 
-To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access
-traces are provided in the Knative Serving observability section:
+To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access traces are provided in the Knative Serving observability section:
 
  - [Zipkin](../serving/accessing-traces.md#zipkin)
  - [Jaeger](../serving/accessing-traces.md#jaeger)
 
 ### Example
 
-The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the
-[`TestBrokerTracing`](https://github.com/knative/eventing/blob/main/test/conformance/broker_tracing_test.go)
-End-to-End test.
+The following demonstrates how to trace requests in Knative Eventing with Zipkin, using the [`TestBrokerTracing`](https://github.com/knative/eventing/blob/main/test/conformance/broker_tracing_test.go) End-to-End test.
 
 For this example, assume the following details:
+
 - Everything happens in the `includes-incoming-trace-id-2qszn` namespace.
 - The Broker is named `br`.
 - There are two Triggers that are associated with the Broker:

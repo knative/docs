@@ -4,7 +4,7 @@ Knative uses two types of Channels:
 
 * A generic Channel object.
 * Channel implementations that each have their own custom resource definitions (CRDs), such as
-InMemoryChannel and KafkaChannel.
+InMemoryChannel and KafkaChannel. The KafkaChannel supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
 Custom Channel implementations each have their own event delivery mechanisms, such as in-memory
 or Broker-based. Examples of Brokers include KafkaBroker and the GCP Pub/Sub Broker.

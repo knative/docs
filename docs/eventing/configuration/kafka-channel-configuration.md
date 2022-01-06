@@ -19,7 +19,7 @@ To use Kafka Channels, you must:
       name: kafka-channel
       namespace: knative-eventing
     data:
-      channelTemplateSpec: |
+      channel-template-spec: |
         apiVersion: messaging.knative.dev/v1beta1
         kind: KafkaChannel
         spec:

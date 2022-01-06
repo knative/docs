@@ -43,14 +43,16 @@ For each of the following examples, you use a [`PingSource`](../../../eventing/s
 
 We also use a very simple [transformer](https://github.com/knative/eventing/blob/main/cmd/appender/main.go) which performs very trivial transformation of the incoming events to demonstrate they have passed through each stage.
 
-### [Sequence with no reply (terminal last Step)](../sequence/sequence-terminal/README.md)
+### Sequence with no reply
 
 For the first example, we'll use a 3 Step `Sequence` that is wired directly into
 the `PingSource`. Each of the steps simply tacks on "- Handled by
 <STEP NUMBER>", for example the first Step in the `Sequence` will take the
 incoming message and append "- Handled by 0" to the incoming message.
 
-### [Sequence with reply (last Step produces output)](../sequence/sequence-reply-to-event-display/README.md)
+See [Sequence with no reply (terminal last Step)](../sequence/sequence-terminal/README.md).
+
+### Sequence with reply
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired
 directly into the `PingSource`. Each of the steps simply tacks on "- Handled
@@ -60,7 +62,9 @@ incoming message and append "- Handled by 0" to the incoming message.
 The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire
 the output of the last Step to an event display pod.
 
-### [Chaining Sequences together](../sequence/sequence-reply-to-sequence/README.md)
+See [Sequence with reply (last Step produces output)](../sequence/sequence-reply-to-event-display/README.md).
+
+### Chaining Sequences together
 
 For the next example, we'll use the same 3 Step `Sequence` that is wired
 directly into the `PingSource`. Each of the steps simply tacks on "- Handled
@@ -71,9 +75,13 @@ The only difference is that we'll use the `Subscriber.Spec.Reply` field to wire
 the output of the last Step to another `Sequence` that does the same message
 modifications as the first pipeline (with different steps however).
 
-### [Using Sequence with Broker/Trigger model](../sequence/sequence-with-broker-trigger/README.md)
+See [Chaining Sequences together](../sequence/sequence-reply-to-sequence/README.md).
+
+### Using Sequence with Broker/Trigger model
 
 You can also create a Trigger which targets `Sequence`. This time we'll wire
 `PingSource` to send events to a `Broker` and then we'll have the `Sequence`
 emit the resulting Events back into the Broker so that the results of the
-`Sequence` can be observed by other `Trigger`s.
+`Sequence` can be observed by other Triggers.
+
+See [Using Sequence with Broker/Trigger model](../sequence/sequence-with-broker-trigger/README.md).

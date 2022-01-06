@@ -183,7 +183,7 @@ The plugins that are released aligned with v0.22 are:
 
 ### Learn more
 
-Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
+Knative is an open source project that anyone in the [community](https://knative.dev/docs/community/) can use, improve, and enjoy. We'd love you to join us!
 
 - [Welcome to Knative](https://knative.dev/docs#welcome-to-knative)
 - [Getting started documentation](https://knative.dev/docs/#getting-started)

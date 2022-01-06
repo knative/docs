@@ -11,11 +11,12 @@ This value controls the minimum number of replicas that each Revision should hav
 Knative will attempt to never have less than this number of replicas at any one point in time.
 
 * **Global key:** n/a
-* **Per-revision annotation key:** `autoscaling.knative.dev/minScale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/min-scale`
 * **Possible values:** integer
 * **Default:** `0` if scale-to-zero is enabled and class KPA is used, `1` otherwise
 
-**NOTE:** For more information about scale-to-zero configuration, see the documentation on [Configuring scale to zero](scale-to-zero.md).
+!!! note
+    For more information about scale-to-zero configuration, see the documentation on [Configuring scale to zero](scale-to-zero.md).
 
 **Example:**
 
@@ -30,7 +31,7 @@ Knative will attempt to never have less than this number of replicas at any one 
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/minScale: "3"
+            autoscaling.knative.dev/min-scale: "3"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -48,7 +49,7 @@ If the `max-scale-limit` global key is set, Knative ensures that neither the glo
 When `max-scale-limit` is set to a positive value, a revision with a max scale above that value (including 0, which means unlimited) is disallowed.
 
 * **Global key:** `max-scale`
-* **Per-revision annotation key:** `autoscaling.knative.dev/maxScale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/max-scale`
 * **Possible values:** integer
 * **Default:** `0` which means unlimited
 
@@ -65,7 +66,7 @@ When `max-scale-limit` is set to a positive value, a revision with a max scale a
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/maxScale: "3"
+            autoscaling.knative.dev/max-scale: "3"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -109,7 +110,7 @@ After the Revision has reached this scale one time, this value is ignored. This 
 When the Revision is created, the larger of initial scale and lower bound is automatically chosen as the initial target scale.
 
 * **Global key:** `initial-scale` in combination with `allow-zero-initial-scale`
-* **Per-revision annotation key:** `autoscaling.knative.dev/initialScale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/initial-scale`
 * **Possible values:** integer
 * **Default:** `1`
 
@@ -126,7 +127,7 @@ When the Revision is created, the larger of initial scale and lower bound is aut
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/initialScale: "0"
+            autoscaling.knative.dev/initial-scale: "0"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -171,7 +172,7 @@ will eventually be scaled down if reduced concurrency is maintained for the
 delay period.
 
 * **Global key:** `scale-down-delay`
-* **Per-revision annotation key:** `autoscaling.knative.dev/scaleDownDelay`
+* **Per-revision annotation key:** `autoscaling.knative.dev/scale-down-delay`
 * **Possible values:** Duration, `0s` <= value <= `1h`
 * **Default:** `0s` (no delay)
 
@@ -188,7 +189,7 @@ delay period.
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/scaleDownDelay: "15m"
+            autoscaling.knative.dev/scale-down-delay: "15m"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
@@ -216,9 +217,4 @@ delay period.
         autoscaler:
           scale-down-delay: "15m"
     ```
-
-
-
-
-
 ---

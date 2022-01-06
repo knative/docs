@@ -58,6 +58,34 @@ Follow the procedure for the networking layer of your choice:
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
 
+=== "Istio"
+
+    The following commands install Istio and enable its Knative integration.
+
+    1. Install a properly configured Istio by following the
+    [Advanced Istio installation](installing-istio.md) instructions or by running the command:
+
+        ```bash
+        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",file="istio.yaml")}}
+        kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
+        ```
+
+    1. Install the Knative Istio controller by running the command:
+
+        ```bash
+        kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
+        ```
+
+    1. Fetch the External IP address or CNAME by running the command:
+
+        ```bash
+        kubectl --namespace istio-system get service istio-ingressgateway
+        ```
+
+        !!! tip
+            Save this to use in the following [Configure DNS](#configure-dns) section.
+
+
 === "Ambassador"
 
     The following commands install Ambassador and enable its Knative integration.
@@ -95,7 +123,7 @@ Follow the procedure for the networking layer of your choice:
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"ingress.class":"ambassador.ingress.networking.knative.dev"}}'
+          --patch '{"data":{"ingress-class":"ambassador.ingress.networking.knative.dev"}}'
         ```
 
     1. Fetch the External IP address or CNAME by running the command:
@@ -129,7 +157,7 @@ Follow the procedure for the networking layer of your choice:
       kubectl patch configmap/config-network \
         --namespace knative-serving \
         --type merge \
-        --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+        --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
       ```
 
     1. Fetch the External IP address or CNAME by running the command:
@@ -141,32 +169,6 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
-=== "Istio"
-
-    The following commands install Istio and enable its Knative integration.
-
-    1. Install a properly configured Istio by following the
-    [Advanced Istio installation](installing-istio.md) instructions or by running the command:
-
-        ```bash
-        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",file="istio.yaml")}}
-        kubectl apply -f {{ artifact(repo="net-istio",file="istio.yaml")}}
-        ```
-
-    1. Install the Knative Istio controller by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
-        ```
-
-    1. Fetch the External IP address or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace istio-system get service istio-ingressgateway
-        ```
-
-        !!! tip
-            Save this to use in the following [Configure DNS](#configure-dns) section.
 
 ## Verify the installation
 
@@ -241,20 +243,20 @@ The following tabs expand to show instructions for installing each Serving exten
         kubectl apply -f {{ artifact(repo="net-http01",file="release.yaml")}}
         ```
 
-    2. Configure the `certificate.class` to use this certificate type by running the command:
+    2. Configure the `certificate-class` to use this certificate type by running the command:
 
         ```bash
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"certificate.class":"net-http01.certificate.networking.knative.dev"}}'
+          --patch '{"data":{"certificate-class":"net-http01.certificate.networking.knative.dev"}}'
         ```
 
-    3. Enable auto-TLS by running the command:
+    3. Enable autoTLS by running the command:
 
         ```bash
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"autoTLS":"Enabled"}}'
+          --patch '{"data":{"auto-tls":"Enabled"}}'
         ```

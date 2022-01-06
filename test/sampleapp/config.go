@@ -25,7 +25,7 @@ import (
 
 const (
 	// using these defaults if not provided, see useDefaultIfNotProvided function below
-	defaultSrcDir = "../../docs/serving/samples/hello-world/helloworld-%s"
+	defaultSrcDir = "../../code-samples/serving/hello-world/helloworld-%s"
 
 	// ActionMsg serves as documentation purpose, which will be referenced for
 	// clearly displaying error messages.
