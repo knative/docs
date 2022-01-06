@@ -29,6 +29,11 @@ var (
 	knativeOrgs        = []string{"knative", "knative-sandbox"}
 	allowedRepoRe      = regexp.MustCompile("^[a-z][-a-z0-9]+$")
 	archivedExceptions = []string{"eventing-contrib"}
+
+	// Repos known to contain Go libraries, so that requesting
+	// https://knative.dev/<repo> in a browser should redirect to
+	// https://pkg.go.dev/knative.dev/<repo>
+	redirectingGoRepos = []string{"pkg", "serving"}
 )
 
 // repoInfo provides a simple holder for GitHub repo information needed to
@@ -102,6 +107,8 @@ const (
 `
 	redirText = `/{{.Repo}}/* go-get=1 /golang/{{.Repo}}.html 200
 `
+	godocRedirText = `/{{.Repo}}/* https://pkg.go.dev/knative.dev/{{.Repo}}/:splat
+`
 
 	autogenPrefix = `
 # This file is AUTO-GENERATED
@@ -125,8 +132,13 @@ func appendRedirs(ris []repoInfo) error {
 		return fmt.Errorf("unable to write to %q: %w", redirFilename, err)
 	}
 	for _, ri := range ris {
-		if redirTemplate.Execute(redirFile, ri) != nil {
+		if err := redirTemplate.Execute(redirFile, ri); err != nil {
 			return fmt.Errorf("unable to write %s to %q: %w", ri.Repo, redirFilename, err)
+		}
+		if isGoRepo(ri.Repo) {
+			if err := godocRedirTemplate.Execute(redirFile, ri); err != nil {
+				return fmt.Errorf("unable to write godoc redirect for %s to %q: %w", ri.Repo, redirFilename, err)
+			}
 		}
 	}
 	return nil
@@ -134,6 +146,7 @@ func appendRedirs(ris []repoInfo) error {
 
 var fileTemplate = template.Must(template.New("gohtml").Parse(goHTML))
 var redirTemplate = template.Must(template.New("redir").Parse(redirText))
+var godocRedirTemplate = template.Must(template.New("redir").Parse(godocRedirText))
 
 // createGoGetFile creates a static HTML file providing a knative.dev mapping
 // for the specified org and repo.
@@ -165,6 +178,15 @@ func (ris riSlice) Swap(i, j int) {
 
 func inArchivedExceptions(n string) bool {
 	for _, r := range archivedExceptions {
+		if r == n {
+			return true
+		}
+	}
+	return false
+}
+
+func isGoRepo(n string) bool {
+	for _, r := range redirectingGoRepos {
 		if r == n {
 			return true
 		}
