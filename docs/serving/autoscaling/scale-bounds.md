@@ -225,7 +225,7 @@ The stable window defines the sliding time window over which metrics are average
 * **Default:** `60s`
 
 !!! note
-    During scale down, the last Replica will only be removed after there has not been any traffic to the Revision for the entire duration of the stable window.
+    During scale down, in most cases the last Replica is removed after there has been no traffic to the Revision for the entire duration of the stable window.
 
 **Example:**
 
