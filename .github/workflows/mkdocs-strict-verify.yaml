@@ -33,7 +33,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     env:
-      GOPATH: ${{ github.workspace }}
+      GOPATH: ""
 
     steps:
     - uses: actions/checkout@v2
@@ -45,6 +45,26 @@ jobs:
 
     - name: Install requirements
       run: python3 -m pip install -r requirements.txt
+
+    - name: Get client docs
+      uses: actions/checkout@v2
+      with:
+        repository: knative/client
+        fetch-depth: 1
+        path: client
+
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
+
+    - name: Build client docs
+      run: |
+        cd client
+        mkdir -p out/docs/cmd
+        go run hack/generate-docs.go out
+        mv out/docs/cmd ../docs/reference/client
+        cd ..
 
     - name: Verify MkDocs
       run: mkdocs build --strict
