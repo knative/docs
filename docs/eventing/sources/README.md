@@ -22,6 +22,8 @@ All Sources are part of the `sources` category.
     kubectl get sources
     ```
 
+Please note: Event Sources which import events from other messaging technologies (such as Kafka or Rabbit) are not responsible for setting [Optional Attributes](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#optional-attributes) such as the `datacontenttype`. This is considered a responsibility of the original event producer, and the Source will simply append attributes if they exist.
+
 ## Knative Sources
 
 | Name | API Version | Maintainer | Description |
