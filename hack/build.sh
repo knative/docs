@@ -28,16 +28,10 @@ readonly SITE=$PWD/site
 rm -rf site/
 
 if [ "$BUILD_VERSIONS" == "no" ]; then
-  git clone --depth 1 https://github.com/knative/client "$TEMP/client-latest"
-  mkdir -p "$TEMP/client-latest/out/docs/cmd"
-  pushd "$TEMP/client-latest"; go run hack/generate-docs.go out; mv out/docs/cmd "$DOCS/reference/client"; popd
   # HEAD to /docs if we're not doing versioning.
   mkdocs build -f mkdocs.yml -d site/docs
 else
   # Versioning: pre-release (HEAD): docs => development/
-  git clone --depth 1 https://github.com/knative/client "$TEMP/client-main"
-  mkdir -p "$TEMP/client-main/out/docs/cmd"
-  pushd "$TEMP/client-main"; go run hack/generate-docs.go out; mv out/docs/cmd "$DOCS/reference/client"; popd
   cp -r . $TEMP/docs-main
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/docs-main/docs/reference/api/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/docs-main/docs/reference/api/eventing-api.md"
@@ -45,9 +39,6 @@ else
 
   # Latest release branch to /docs
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/knative/docs "$TEMP/docs-$latest"
-  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/knative/client "$TEMP/client-$latest"
-  mkdir -p "$TEMP/client-$latest/out/docs/cmd"
-  pushd "$TEMP/client-$latest"; go run hack/generate-docs.go out; mv out/docs/cmd "$TEMP/docs-$latest/docs/reference/client"; popd
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
   pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
@@ -60,9 +51,6 @@ else
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/knative/docs "$TEMP/docs-$version"
-    git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/knative/client "$TEMP/client-$version"
-    mkdir -p "$TEMP/client-$version/out/docs/cmd"
-    pushd "$TEMP/client-$version"; go run hack/generate-docs.go out; mv out/docs/cmd "$TEMP/docs-$version/docs/reference/client"; popd
     curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${RELEASE_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
     curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${RELEASE_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
     pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]//knative-} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
@@ -116,7 +104,6 @@ EOF
 
 # Clean up
 rm -rf $TEMP
-rm -rf $DOCS/reference/client
 
 if [ "$1" = "serve" ]; then
   npx http-server site
