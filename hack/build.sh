@@ -23,7 +23,6 @@ latest=${VERSIONS[0]}
 previous=("${VERSIONS[@]:1}")
 
 readonly TEMP="$(mktemp -d)"
-readonly DOCS=$PWD/docs
 readonly SITE=$PWD/site
 rm -rf site/
 
