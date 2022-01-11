@@ -274,13 +274,14 @@ nav:
             - kn service update: reference/client/kn_service_update.md
           - kn source:
             - kn source: reference/client/kn_source.md
-            - kn source create: reference/client/kn_source_apiserver_create.md
-            - kn source delete: reference/client/kn_source_apiserver_delete.md
-            - kn source describe: reference/client/kn_source_apiserver_describe.md
             - kn source apiserver:
               - kn source apiserver: reference/client/kn_source_apiserver.md
+              - kn source apiserver create: reference/client/kn_source_apiserver_create.md
+              - kn source apiserver delete: reference/client/kn_source_apiserver_delete.md
+              - kn source apiserver describe: reference/client/kn_source_apiserver_describe.md
               - kn source apiserver list: reference/client/kn_source_apiserver_list.md
               - kn source apiserver update: reference/client/kn_source_apiserver_update.md
+            - kn source binding:
               - kn source binding: reference/client/kn_source_binding.md
               - kn source binding create: reference/client/kn_source_binding_create.md
               - kn source binding delete: reference/client/kn_source_binding_delete.md
