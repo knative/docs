@@ -223,6 +223,7 @@ nav:
       - API:
         - Serving: reference/api/serving-api.md
         - Eventing: reference/api/eventing-api.md
+      - Client: reference/client/README.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
     - "Community":
