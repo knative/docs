@@ -2,7 +2,7 @@
 
 When container-freezer is enabled, queue-proxy will call an endpoint API when its traffic drops to zero or scales up from zero.
 
-Within official endpoint API implementation contianer-freezer, the running process will be frozen when the pod's traffic drop to zero and resumed when the pod's traffic scales up from zero. The endpoint API is user-specific implementation, we can even implement it as a billing component, because it knows when the requests are being handled.
+Within official endpoint API implementation container-freezer, the running process will be frozen when the pod's traffic drop to zero and resumed when the pod's traffic scales up from zero. The endpoint API is user-specific implementation, we can even implement it as a billing component, because it knows when the requests are being handled.
 
 ## Configure min-scale
 
@@ -50,4 +50,4 @@ data:
 
 ## Next
 * Implement your own user-specific endpoint api and deploying it in cluster.
-* Using the official implementation [contianer-freezer](https://github.com/knative-sandbox/container-freezer).
+* Using the official implementation [container-freezer](https://github.com/knative-sandbox/container-freezer).
