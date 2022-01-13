@@ -1,4 +1,4 @@
-## Configure DNS
+### Configure DNS
 
 You can configure DNS to prevent the need to run curl commands with a host header.
 

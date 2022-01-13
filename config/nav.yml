@@ -40,10 +40,10 @@ nav:
         - Knative Eventing installation files: install/eventing/eventing-installation-files.md
       # Operator Installation
       - Install with Knative Operator:
-        - Installing with the Operator: install/operator/knative-with-operators.md
-        - Configuring Knative by using the Operator: install/operator/configuring-with-operator.md
-        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+        - Installing using the Operator: install/operator/knative-with-operators.md
+        - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
+        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
       # kn Installation
       - Install the Knative CLI:
         - CLI tools overview: install/client/README.md
