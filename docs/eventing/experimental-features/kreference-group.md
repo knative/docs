@@ -1,4 +1,4 @@
-# KReference.Group Field
+# KReference.Group field
 
 **Flag name**: `kreference-group`
 
@@ -32,5 +32,6 @@ With this feature you can allow Knative to resolve the full `APIVersion` and
 further upgrades, deprecations and removals of the referred CRD without
 affecting existing resources.
 
-!!! note At the moment this feature is implemented only for
-`Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.
+!!! note
+    At the moment this feature is implemented only for
+    `Subscription.Spec.Subscriber.Ref` and `Subscription.Spec.Channel`.

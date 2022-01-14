@@ -1,4 +1,4 @@
-# New Trigger Filters
+# New trigger filters
 
 **Flag name**: `new-trigger-filters`
 
@@ -24,7 +24,7 @@
     + [Why `filters` and not another name that wouldn't be conflicting with the `filter` field?](#why--filters--and-not-another-name-that-wouldn-t-be-conflicting-with-the--filter--field-)
 
 ## Overview
-This experimental features enables a new `filters` field in Triggers that conforms to the filters API field defined in the [`CloudEvents Subscriptions API`](https://github.com/cloudevents/spec/blob/master/subscriptions-api.md#323-filters) and allows users to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event.
+This experimental features enables a new `filters` field in Triggers that conforms to the filters API field defined in the [`CloudEvents Subscriptions API`](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters) and allows users to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event.
 
 The following example shows a Trigger using the new `filters` field
 ```yaml=
@@ -114,7 +114,7 @@ The nested expression evaluated must evaluate to false.
 filters:
   - not:
       - exact:
-          type: com.github.push       
+          type: com.github.push 
 ```
 ### `sql`
 
@@ -141,7 +141,7 @@ spec:
     attributes:
       type: dev.knative.foo.bar
       myextension: my-extension-value
-  # Enhanced filters field. This will override the old filter field. 
+  # Enhanced filters field. This will override the old filter field.
   filters:
     - sql: "type == 'dev.knative.foo.bar' AND myextension == 'my-extension-value'"
   subscriber:

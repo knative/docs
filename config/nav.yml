@@ -211,7 +211,8 @@ nav:
         - Debugging: eventing/troubleshooting/README.md
       - Experimental Features:
         - About Eventing experimental features: eventing/experimental-features/README.md
-        - DeliverySpec.Timeout field: eventing/experimental-features/delivery-retryafter.md
+        - DeliverySpec.Timeout field: eventing/experimental-features/delivery-timeout.md
+        - DeliverySpec.RetryAfterMax field: eventing/experimental-features/delivery-retryafter.md
         - New Trigger Filters: eventing/experimental-features/new-trigger-filters.md
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md

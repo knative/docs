@@ -1,10 +1,10 @@
-# Knative Reference Mapping
+# Knative reference mapping
 
 **Flag name**: `kreference-mapping`
 
 **Stage**: Alpha, disabled by default
 
-**Tracking issue**: [#5148](https://github.com/knative/eventing/issues/5593)
+**Tracking issue**: [#5593](https://github.com/knative/eventing/issues/5593)
 
 **Persona**: Administrator, Developer
 
@@ -12,7 +12,8 @@ When enabled, this feature allows you to provide mappings from
 a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination)
 to a templated URI.
 
-!!! note Currently only PingSource supports this experimental feature.
+!!! note
+    Currently only PingSource supports this experimental feature.
 
 For example, you can directly reference non-addressable resources anywhere that
 Knative Eventing accepts a reference, such as for a PingSource sink, or a
