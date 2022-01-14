@@ -53,7 +53,7 @@ The `filters` field supports the following dialects:
 
 ### `exact`
 
-CloudEvent attribute String value must match exactly the specified String value.
+CloudEvent attribute String value must match exactly the specified String value. Matching is case-sensitive. 
 
 ```yaml=
 filters:
@@ -62,7 +62,7 @@ filters:
 ```
 ### `prefix`
 
-CloudEvent attribute String value must start with the specified String value (case sensetive).
+CloudEvent attribute String value must start with the specified String value. Matching is case-sensitive.
 
 ```yaml=
 filters:
@@ -72,7 +72,7 @@ filters:
 
 ### `suffix`
 
-CloudEvent attribute String value must end with the specified String value (case sensitive).
+CloudEvent attribute String value must end with the specified String value. Matching is case-sensitive.
 
 ```yaml=
 filters:
@@ -118,7 +118,7 @@ filters:
 ```
 ### `sql`
 
-The provided [CloudEvents SQL Expression](https://github.com/cloudevents/spec/blob/master/expression-language.md) must evaluate to true.
+The provided [CloudEvents SQL Expression](https://github.com/cloudevents/spec/blob/main/cesql/spec.md) must evaluate to true.
 
 ```yaml=
 filters:
