@@ -160,7 +160,7 @@ To rollback to a previous version of Knative Eventing:
     spec:
       version: "<previous-version>"
     ```
-    Where `<previous-version>` is the Knative version that you want to upgrade to.
+    Where `<previous-version>` is the Knative version that you want to downgrade to.
 
 1. Apply the YAML file by running the command:
 
