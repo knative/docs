@@ -1,7 +1,13 @@
 echo "Installing kn cli..."
-wget https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64 -O kn
+wget https://github.com/knative/client/releases/download/knative-v1.1.0/kn-linux-amd64 -O kn
 chmod +x kn
 mv kn /usr/local/bin/
+echo "Done"
+
+echo "Installing quickstart ..."
+wget https://github.com/knative-sandbox/kn-plugin-quickstart/releases/download/knative-v1.1.0/kn-quickstart-linux-amd64 -O kn-quickstart
+chmod +x kn-quickstart
+mv kn-quickstart /usr/local/bin/
 echo "Done"
 
 echo "Waiting for Kubernetes to start. This may take a few moments, please wait..."
@@ -10,3 +16,7 @@ echo "Kubernetes Started"
 
 export latest_version=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/knative/serving/tags?per_page=1 | jq -r .[0].name)
 echo "Latest knative version is: ${latest_version}"
+
+echo "Installing quickstart ..."
+kn quickstart minikube
+echo "Done"
