@@ -45,7 +45,7 @@ spec:
 
 ## About the filters field
 * An array of filter expressions that evaluates to true or false. If any filter expression in the array evaluates to false, the event will not be sent to the `subscriber`.
-* Each filter expression follows a "dialect" that defines the type of filter and the set of additional properties that are allowed within the filter expression.
+* Each filter expression follows a dialect that defines the type of filter and the set of additional properties that are allowed within the filter expression.
 
 ## Supported filter dialects
 
