@@ -70,7 +70,8 @@ Knative Eventing
 
 | Feature | Flag | Description | Maturity |
 | ------- | ---- | ----------- | -------- |
-| KReference.Group field | kreference-group | Specifiy the API `group` of `KReference` resources without the API version | Alpha, disabled by default |
 | DeliverySpec.RetryAfterMax field  | delivery-retryafter |Specifiy a maximum retry duration that overrides HTTP [Retry-After](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3) headers when calculating backoff times for retrying **429** and **503** responses | Alpha, disabled by default |
+| KReference.Group field | kreference-group | Specifiy the API `group` of `KReference` resources without the API version | Alpha, disabled by default |
+| Knative reference mapping | kreference-mapping | provide mappings from a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination) to a templated URI | Alpha, disabled by default |
 | Knative reference mapping | kreference-mapping | provide mappings from a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination) to a templated URI | Alpha, disabled by default |
 | Strict Subscriber | strict-subscriber | Consider Subscriptions invalid if the field `spec.subscriber` is not defined | Alpha, disabled by default |
