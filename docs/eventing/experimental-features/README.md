@@ -1,9 +1,8 @@
 # Eventing experimental features
 
-In order to keep Knative innovative, the maintainers of this project have
-developed an
+To keep Knative innovative, the maintainers of this project have developed an
 [experimental features process](https://github.com/knative/eventing/blob/main/docs/experimental-features.md)
-, that allows new, experimental features to be delivered and tested by users,
+that allows new, experimental features to be delivered and tested by users
 without affecting the stability of the core project.
 
 <!--TODO: Add note about HOW / where users can provide feedback, otherwise there's not much point mentioning that-->
@@ -28,7 +27,7 @@ You must have a Knative cluster running with Knative Eventing installed.
 When you install Knative Eventing, the `config-features` ConfigMap is added to
 your cluster in the `knative-eventing` namespace.
 
-In order to enable a feature, you must add it to the `config-features` ConfigMap
+To enable a feature, you must add it to the `config-features` ConfigMap
 under the `data` spec, and set the value for the feature to `enabled`. For
 example, to enable a feature called `new-cool-feature`, you would add the
 following ConfigMap entry:
@@ -47,7 +46,7 @@ data:
   new-cool-feature: enabled
 ```
 
-In order to disable it, you can either remove the flag or set it to `disabled`:
+To disable it, you can either remove the flag or set it to `disabled`:
 
 ```yaml
 apiVersion: v1
@@ -66,13 +65,13 @@ data:
 ## Available experimental features
 
 The following table gives an overview of the available experimental features in
-Knative Eventing
+Knative Eventing:
 
 | Feature | Flag | Description | Maturity |
 | ------- | ---- | ----------- | -------- |
-| DeliverySpec.RetryAfterMax field  | delivery-retryafter |Specify a maximum retry duration that overrides HTTP [Retry-After](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3) headers when calculating backoff times for retrying **429** and **503** responses | Alpha, disabled by default |
-| DeliverySpec.Timeout field | delivery-timeout |For using `delivery` spec to configure event delivery parameters, you can use `timeout` field to specify the timeout for each sent HTTP request.| Alpha, disabled by default |
-| KReference.Group field | kreference-group | Specify the API `group` of `KReference` resources without the API version | Alpha, disabled by default |
-| Knative reference mapping | kreference-mapping | Provide mappings from a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination) to a templated URI | Alpha, disabled by default |
-| New trigger filters | new-trigger-filters | Enables in a new Trigger `filters` field that supports a set of powerful filter expressions | Alpha, disabled by default |
-| Strict Subscriber | strict-subscriber | Consider Subscriptions invalid if the field `spec.subscriber` is not defined | Alpha, disabled by default |
+| [DeliverySpec.RetryAfterMax field](delivery-retryafter.md)  | `delivery-retryafter` | Specify a maximum retry duration that overrides HTTP [Retry-After](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3) headers when calculating backoff times for retrying **429** and **503** responses. | Alpha, disabled by default |
+| [DeliverySpec.Timeout field](delivery-timeout.md) | `delivery-timeout` | When using the `delivery` spec to configure event delivery parameters, you can use  the`timeout` field to specify the timeout for each sent HTTP request. | Alpha, disabled by default |
+| [KReference.Group field](kreference-group.md) | `kreference-group` | Specify the API `group` of `KReference` resources without the API version. | Alpha, disabled by default |
+| [Knative reference mapping](kreference-mapping.md) | `kreference-mapping` | Provide mappings from a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination) to a templated URI. | Alpha, disabled by default |
+| [New trigger filters](new-trigger-filters.md) | `new-trigger-filters` | Enables a new Trigger `filters` field that supports a set of powerful filter expressions. | Alpha, disabled by default |
+| [Strict Subscriber](strict-subscriber.md) | `strict-subscriber` | Invalidates Subscriptions if the field `spec.subscriber` is not defined. | Alpha, disabled by default |
