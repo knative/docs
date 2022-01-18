@@ -30,6 +30,7 @@ To use container-freezer, the value of per-revision annotation key `autoscaling.
 ## Configure the endpoint API address
 
 queue-proxy calls the endpoint API address when container-freezer is enabled, so you need to configure the API address.
+
 1. Open the `config-deployment` ConfigMap by running the command:
     ```bash
     kubectl edit configmap config-deployment -n knative-serving
@@ -44,6 +45,7 @@ queue-proxy calls the endpoint API address when container-freezer is enabled, so
     data:
       concurrency-state-endpoint: "http://$HOST_IP:9696"
     ```
+
     !!! note
         If you use `$HOST_IP`, queue-proxy inserts the appropriate value for each node because the official implementation is a daemonset. If you implement the endpoint API as a service in the cluster, use a specific service address such as `http://billing.default.svc:9696`.
 
