@@ -45,8 +45,7 @@ queue-proxy calls the endpoint API address when container-freezer is enabled, so
       concurrency-state-endpoint: "http://$HOST_IP:9696"
     ```
     !!! note
-        If you use `$HOST_IP`, queue-proxy inserts the appropriate value for each node because the official
-implementation is a daemonset. If you implement the endpoint API as a service in the cluster, use a specific service address such as `http://billing.default.svc:9696`.
+        If you use `$HOST_IP`, queue-proxy inserts the appropriate value for each node because the official implementation is a daemonset. If you implement the endpoint API as a service in the cluster, use a specific service address such as `http://billing.default.svc:9696`.
 
 ## Next
 * Implement your own user-specific endpoint API, and deploy it in cluster.
