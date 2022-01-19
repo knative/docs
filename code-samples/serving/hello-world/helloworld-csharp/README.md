@@ -1,6 +1,6 @@
 # Hello world - .NET Core
 
-A simple web app written in C# using .NET Core 3.1 that you can use for testing.
+A simple web app written in C# using .NET 6.0 that you can use for testing.
 It reads in an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET
 is not specified, it will use "World" as the TARGET.
 
@@ -19,16 +19,16 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-csharp
   [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- You have installed [.NET Core SDK 3.1](https://www.microsoft.com/net/core).
+- You have installed [.NET Core SDK 6.0](https://www.microsoft.com/net/).
 
 ## Recreating the sample code
 
 1. First, make sure you have
-   [.NET Core SDK 3.1](https://www.microsoft.com/net/core) installed:
+   [.NET SDK 6.0](https://www.microsoft.com/net/) installed:
 
    ```bash
    dotnet --version
-   3.1.100
+   6.0.101
    ```
 
 1. From the console, create a new empty web project using the dotnet command:
@@ -75,25 +75,21 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-csharp
 
    ```docker
    # Use Microsoft's official build .NET image.
-   FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+   FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
    WORKDIR /app
 
-   # Install production dependencies.
-   # Copy csproj and restore as distinct layers.
+   # Copy csproj and restore as distinct layers
    COPY *.csproj ./
    RUN dotnet restore
 
-   # Copy local code to the container image.
+   # Copy everything else and build
    COPY . ./
-   WORKDIR /app
-
-   # Build a release artifact.
    RUN dotnet publish -c Release -o out
 
-   # Use Microsoft's official runtime .NET image.
-   FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+   # Build runtime image
+   FROM mcr.microsoft.com/dotnet/aspnet:6.0
    WORKDIR /app
-   COPY --from=build /app/out ./
+   COPY --from=build-env /app/out .
 
    # Run the web service on container startup.
    ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
