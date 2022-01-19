@@ -33,6 +33,7 @@ metadata:
   namespace: knative-serving
 data:
   min-non-active-revisions: "0"
+  max-non-active-revisions: "0"
   retain-since-create-time: "disabled"
   retain-since-last-active-time: "disabled"
 ```
