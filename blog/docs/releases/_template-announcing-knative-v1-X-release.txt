@@ -39,7 +39,7 @@ Follow the instructions in the documentation
 
 #### 🚨 Breaking or Notable Changes
 
-- TODO: Add any breaking or notable changes
+- TODO: Add any breaking or notable changes, using format `TEXT ([#PR-NUMBER](PR-URL))`
 
 #### 💫 New Features & Changes
 
@@ -48,8 +48,6 @@ Follow the instructions in the documentation
 #### 🐞 Bug Fixes
 
 - TODO: Add bugs here
-
-- Fixes an issue where TLS certificates are requested before domain-ownership is established. ([#12080](https://github.com/knative/serving/pull/12080))
 
 ### Eventing TODO-KNATIVE-VERSION
 
@@ -106,7 +104,7 @@ Follow the instructions in the documentation
 
 - TODO: Add bugs here
 
-## Operator TODO-KNATIVE-VERSION
+### Operator TODO-KNATIVE-VERSION
 
 <!-- Original notes are here: https://github.com/knative/operator/releases/tag/knative-TODO-KNATIVE-VERSION   -->
 
@@ -120,7 +118,7 @@ Follow the instructions in the documentation
 
 ### Thank you, contributors
 
-- TODO: Add list of authors to PRs in this release and the release leads. Use fomat `[@username](https://github.com/username)`
+- TODO:Add list of authors to PRs in this release and the release leads. Use fomat `[@username](https://github.com/username)` and sorted
 
 
 ### Learn more
