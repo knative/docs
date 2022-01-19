@@ -36,7 +36,7 @@ The `filters` field supports the following dialects:
 
 ### `exact`
 
-CloudEvent attribute String value must exactly match the specified String value. Matching is case-sensitive. 
+CloudEvent attribute String value must exactly match the specified String value. Matching is case-sensitive.
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -48,6 +48,8 @@ spec:
   filters:
     - exact:
         type: com.github.push
+```
+
 ### `prefix`
 
 CloudEvent attribute String value must start with the specified String value. Matching is case-sensitive.
@@ -62,6 +64,7 @@ spec:
   filters:
     - prefix:
         type: com.github.
+```
 
 ### `suffix`
 
@@ -77,6 +80,7 @@ spec:
   filters:
     - suffix:
         type: .created
+```
 
 ### `all`
 
@@ -95,6 +99,7 @@ spec:
             type: com.github.push
         - exact:
             subject: https://github.com/cloudevents/spec
+```
 
 ### `any`
 
@@ -113,6 +118,7 @@ spec:
             type: com.github.push
         - exact:
             subject: https://github.com/cloudevents/spec
+```
 
 ### `not`
 
@@ -143,6 +149,7 @@ spec:
   ...
   filters:
     - sql: "source LIKE '%commerce%' AND type IN ('order.created', 'order.updated', 'order.canceled')"
+```
 
 ## Conflict with the current `filter` field
 
@@ -169,6 +176,7 @@ spec:
       kind: Service
       name: my-service
 ```
+
 ## FAQ
 
 ### Why add yet another field? Why not make the current `filter` field more robust?
