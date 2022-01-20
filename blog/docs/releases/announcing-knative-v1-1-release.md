@@ -60,7 +60,7 @@ Follow the instructions in the documentation
 
 #### 💫 New Features & Changes
 
-- New experimental-feature "delivery-retryafter" flag allows use of "DeliverySpec.retryAfter" to configure handling of Retry-After headers in 429 / 503 responses. See [experimental-features.md](https://github.com/knative/docs/blob/main/docs/eventing/experimental-features.md) ([#5813](https://github.com/knative/eventing/pull/5813))
+- New experimental-feature "delivery-retryafter" flag allows use of "DeliverySpec.retryAfter" to configure handling of Retry-After headers in 429 / 503 responses. See [experimental-features](https://github.com/knative/docs/blob/main/docs/eventing/experimental-features) ([#5813](https://github.com/knative/eventing/pull/5813))
 - All core Knative Eventing Pods should now be able to run in the restricted pod security standard profile ([#5863](https://github.com/knative/eventing/pull/5863))
 - Triggers now include a CloudEvents Subscriptions API compatible filters field as an experimental feature ([#5715](https://github.com/knative/eventing/pull/5715))
 
