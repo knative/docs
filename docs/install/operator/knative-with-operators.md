@@ -213,12 +213,52 @@ layer to the CR, and configure DNS.
 
 ### Install the networking layer
 
-Knative Operator can configure Knative Serving component with different network layer options.
+Knative Operator can configure the Knative Serving component with different network layer options.
 Istio is the default network layer if the ingress is not specified in the
-Knative Serving CR.
+Knative Serving CR. If you choose to use the default Istio network layer, you must install Istio on your cluster.
+Because of this, you might find it easier to configure Kourier as your networking layer.
 
 Click on each of the following tabs to see how you can configure
 Knative Serving with different ingresses:
+
+=== "Kourier (Choose this if you are not sure)"
+
+    The following steps install Kourier and enable its Knative integration:
+
+    1. To configure Knative Serving to use Kourier, add `spec.ingress.kourier` and
+    `spec.config.network` to your Serving CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          # ...
+          ingress:
+            kourier:
+              enabled: true
+          config:
+            network:
+              ingress-class: "kourier.ingress.networking.knative.dev"
+        ```
+
+    1. Apply the YAML file for your Serving CR by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of your Serving CR file.
+
+    1. Fetch the External IP or CNAME by running the command:
+
+        ```bash
+        kubectl --namespace knative-serving get service kourier
+        ```
+
+        Save this for configuring DNS later.
 
 === "Istio (default)"
 
@@ -259,45 +299,6 @@ Knative Serving with different ingresses:
 
         ```bash
         kubectl get svc istio-ingressgateway -n <istio-namespace>
-        ```
-
-        Save this for configuring DNS later.
-
-=== "Kourier"
-
-    The following steps install Kourier and enable its Knative integration:
-
-    1. To configure Knative Serving to use Kourier, add `spec.ingress.kourier` and
-    `spec.config.network` to your Serving CR YAML file as follows:
-
-        ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
-        kind: KnativeServing
-        metadata:
-          name: knative-serving
-          namespace: knative-serving
-        spec:
-          # ...
-          ingress:
-            kourier:
-              enabled: true
-          config:
-            network:
-              ingress-class: "kourier.ingress.networking.knative.dev"
-        ```
-
-    1. Apply the YAML file for your Serving CR by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of your Serving CR file.
-
-    1. Fetch the External IP or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace knative-serving get service kourier
         ```
 
         Save this for configuring DNS later.
