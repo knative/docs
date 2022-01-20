@@ -31,7 +31,7 @@ Instead of `TARGET`="World" update the environment variable `TARGET` on your Kna
     ==**Expected output:**==
     ```{ .bash .no-copy }
     Service hello created to latest revision 'hello-knative' is available at URL:
-    http://hello.default.127.0.0.1.nip.io
+    http://hello.default.127.0.0.1.sslip.io
     ```
 
 === "YAML"
@@ -67,9 +67,9 @@ Instead of `TARGET`="World" update the environment variable `TARGET` on your Kna
 
 Note, since we are updating an existing Knative Service `hello`, the URL doesn't change, but our new Revision should have the new name `hello-knative`
 
-Let's access our Knative Service again on your browser [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank} to see the change, or use `curl` in your terminal:
+Let's access our Knative Service again on your browser [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank} to see the change, or use `curl` in your terminal:
 ```bash
-curl http://hello.default.127.0.0.1.nip.io
+curl http://hello.default.127.0.0.1.sslip.io
 ```
 
 ==**Expected output:**==
@@ -168,19 +168,19 @@ hello-knative   hello     50%              2            10m   3 OK / 4     True
 hello-world     hello     50%              1            36m   3 OK / 4     True
 ```
 
-Access your Knative service on the browser again [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, and refresh multiple times to see the different output being served by each Revision.
+Access your Knative service on the browser again [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, and refresh multiple times to see the different output being served by each Revision.
 
 Similarly, you can `curl` the Service URL multiple times to see the traffic being split between the Revisions.
 ```bash
-curl http://hello.default.127.0.0.1.nip.io
+curl http://hello.default.127.0.0.1.sslip.io
 ```
 
 ==**Expected output:**==
 ```{ .bash .no-copy }
-curl http://hello.default.127.0.0.1.nip.io
+curl http://hello.default.127.0.0.1.sslip.io
 Hello Knative!
 
-curl http://hello.default.127.0.0.1.nip.io
+curl http://hello.default.127.0.0.1.sslip.io
 Hello World!
 ```
 

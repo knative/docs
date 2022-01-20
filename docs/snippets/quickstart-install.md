@@ -39,7 +39,7 @@
 The `quickstart` plugin completes the following functions:
 
 1. **Checks if you have the selected Kubernetes instance installed,** and creates a cluster called `knative`.
-2. **Installs Knative Serving with Kourier** as the default networking layer, and nip.io as the DNS.
+2. **Installs Knative Serving with Kourier** as the default networking layer, and sslip.io as the DNS.
 3. **Installs Knative Eventing** and creates an in-memory Broker and Channel implementation.
 
 
@@ -67,5 +67,3 @@ The `quickstart` plugin completes the following functions:
         ```bash
         minikube profile list
         ```
-
-

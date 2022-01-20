@@ -18,7 +18,7 @@ Create the CloudEvents Player Service:
     ==**Expected Output**==
     ```{ .bash .no-copy }
     Service 'cloudevents-player' created to latest revision 'cloudevents-player-vwybw-1' is available at URL:
-    http://cloudevents-player.default.127.0.0.1.nip.io
+    http://cloudevents-player.default.127.0.0.1.sslip.io
     ```
 
     ??? question "Why is my Revision named something different!"
@@ -55,7 +55,7 @@ Create the CloudEvents Player Service:
     ```
 
 ## Examining the CloudEvents Player
-**You can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.nip.io){target=_blank} in your browser, the **Create Event** form appears:
+**You can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.sslip.io){target=_blank} in your browser, the **Create Event** form appears:
 
 ![The user interface for the CloudEvents Player](images/event_form.png)
 
@@ -84,7 +84,7 @@ Create the CloudEvents Player Service:
 
     To post an event:
     ```bash
-    curl -i http://cloudevents-player.default.127.0.0.1.nip.io \
+    curl -i http://cloudevents-player.default.127.0.0.1.sslip.io \
         -H "Content-Type: application/json" \
         -H "Ce-Id: 123456789" \
         -H "Ce-Specversion: 1.0" \
@@ -95,7 +95,7 @@ Create the CloudEvents Player Service:
 
     And to view events:
     ```bash
-    curl http://cloudevents-player.default.127.0.0.1.nip.io/messages
+    curl http://cloudevents-player.default.127.0.0.1.sslip.io/messages
     ```
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our Broker... but where has the event gone? **Well, right now, nowhere!**
