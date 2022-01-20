@@ -76,6 +76,7 @@ nav:
         - Configuring scale bounds: serving/autoscaling/scale-bounds.md
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
         - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
+        - Configuring container-freezer: serving/autoscaling/container-freezer.md
       # Serving - developer docs
       - Developer Topics:
         - Services:
