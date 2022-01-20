@@ -37,35 +37,21 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-csharp
    dotnet new web -o helloworld-csharp
    ```
 
-1. Update the `CreateHostBuilder` definition in `Program.cs` by adding
-   `.UseUrls()` to define the serving port:
+1. Update the `Program.cs` to read the port and define the serving url:
 
    ```csharp
-   public static IHostBuilder CreateHostBuilder(string[] args)
-   {
-       string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-       string url = String.Concat("http://0.0.0.0:", port);
+   var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+   var url = $"http://0.0.0.0:{port}";
 
-      return Host.CreateDefaultBuilder(args)
-          .ConfigureWebHostDefaults(webBuilder =>
-          {
-              webBuilder.UseStartup<Startup>().UseUrls(url);
-          });
-   }
+   app.Run(url);
    ```
 
-1. Update the `app.UseEndpoints(...)` statement in `Startup.cs` to read and return the
-   TARGET environment variable:
+1. Update the `Program.cs` to read and return the `TARGET` environment variable:
 
    ```csharp
-   app.UseEndpoints(endpoints =>
-   {
-      endpoints.MapGet("/", async context =>
-      {
-          var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
-          await context.Response.WriteAsync($"Hello {target}!\n");
-      });
-   });
+   var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
+
+   app.MapGet("/", () => $"Hello {target}!");
    ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the following code
