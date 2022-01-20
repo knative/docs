@@ -48,7 +48,7 @@ Follow the instructions in the documentation
 
 - Allow setting TCP and HTTP port to be equal to containerPort on readiness and liveness probes ([#12225](https://github.com/knative/serving/pull/12225))
 - Drops the unix socket listener from Queue Proxy, since it is no longer used ([#12298](https://github.com/knative/serving/pull/12298))
-- Generated HPAs are now v2beta2.
+- Generated HPAs are now v2beta2
     - Window annotation will be set to HPA stabilization window ([#12278](https://github.com/knative/serving/pull/12278))
 - Remove performance tests using Mako ([#12266](https://github.com/knative/serving/pull/12266))
 - The activator optimisation which directly probes the queue proxy for readiness rather than waiting for Kubernetes to report readiness is now disabled when exec probes are used (since queue proxy cannot execute these probes on the user container's behalf) ([#12250](https://github.com/knative/serving/pull/12250))
@@ -60,7 +60,7 @@ Follow the instructions in the documentation
 
 #### 💫 New Features & Changes
 
-- New experimental-feature "delivery-retryafter" flag allows use of "DeliverySpec.retryAfter" to configure handling of Retry-After headers in 429 / 503 responses. See https://github.com/knative/docs/blob/main/docs/eventing/experimental-features.md ([#5813](https://github.com/knative/eventing/pull/5813))
+- New experimental-feature "delivery-retryafter" flag allows use of "DeliverySpec.retryAfter" to configure handling of Retry-After headers in 429 / 503 responses. See [experimental-features.md](https://github.com/knative/docs/blob/main/docs/eventing/experimental-features.md) ([#5813](https://github.com/knative/eventing/pull/5813))
 - All core Knative Eventing Pods should now be able to run in the restricted pod security standard profile ([#5863](https://github.com/knative/eventing/pull/5863))
 - Triggers now include a CloudEvents Subscriptions API compatible filters field as an experimental feature ([#5715](https://github.com/knative/eventing/pull/5715))
 
@@ -107,8 +107,8 @@ For more information: [data-plane.md](https://github.com/knative/specs/blob/c348
 - Do not expose the broker class that the controller operates on as an environment variable ([#512](https://github.com/knative-sandbox/eventing-rabbitmq/pull/512))
 - Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
 - The RabbitMQ Source now translates RabbitMQ messages according to the RabbitMQ Protocol Binding Spec for CloudEvents ([#475](https://github.com/knative-sandbox/eventing-rabbitmq/pull/475))
-  - Falls back to RabbitMQ message content type if it is not set on the CloudEvent data or headers.
-  - Avoids re-wrapping RabbitMQ messages that are already in the CloudEvent format
+    - Falls back to RabbitMQ message content type if it is not set on the CloudEvent data or headers
+    - Avoids re-wrapping RabbitMQ messages that are already in the CloudEvent format
 
 #### 🐞 Bug Fixes
 
