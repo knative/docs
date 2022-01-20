@@ -14,7 +14,7 @@ type: "blog"
 A new version of Knative is now available across multiple components.
 
 Follow the instructions in the documentation
-[Installing Knative](https://knative.dev/docs/admin/install/) for the respective component.
+[Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
 #### Table of Contents
 - [Highlights](#highlights)
@@ -31,7 +31,7 @@ Follow the instructions in the documentation
 ### Highlights
 
 - Serving now has a global `min-scale` configuration
-- Eventing brings more experimental features
+- Eventing has more experimental features
 
 
 ### Serving v1.1
@@ -48,10 +48,9 @@ Follow the instructions in the documentation
 
 - Allow setting TCP and HTTP port to be equal to containerPort on readiness and liveness probes ([#12225](https://github.com/knative/serving/pull/12225))
 - Drops the unix socket listener from Queue Proxy, since it is no longer used ([#12298](https://github.com/knative/serving/pull/12298))
-- Generated HPAs are now v2beta2
-    - Window annotation will be set to HPA stabilization window ([#12278](https://github.com/knative/serving/pull/12278))
+- Generated HPAs are now v2beta2. Window annotation will be set to HPA stabilization window ([#12278](https://github.com/knative/serving/pull/12278))
 - Remove performance tests using Mako ([#12266](https://github.com/knative/serving/pull/12266))
-- The activator optimisation which directly probes the queue proxy for readiness rather than waiting for Kubernetes to report readiness is now disabled when exec probes are used (since queue proxy cannot execute these probes on the user container's behalf) ([#12250](https://github.com/knative/serving/pull/12250))
+- The activator optimization which directly probes the queue proxy for readiness rather than waiting for Kubernetes to report readiness is now disabled when exec probes are used (since queue proxy cannot execute these probes on the user container's behalf) ([#12250](https://github.com/knative/serving/pull/12250))
 - Use pkg/drain in queue proxy ([#12033](https://github.com/knative/serving/pull/12033))
 
 ### Eventing v1.1
@@ -60,14 +59,14 @@ Follow the instructions in the documentation
 
 #### 💫 New Features & Changes
 
-- New experimental-feature "delivery-retryafter" flag allows use of "DeliverySpec.retryAfter" to configure handling of Retry-After headers in 429 / 503 responses. See [experimental-features](https://github.com/knative/docs/blob/main/docs/eventing/experimental-features) ([#5813](https://github.com/knative/eventing/pull/5813))
+- New experimental-feature "delivery-retryafter" flag allows use of "DeliverySpec.retryAfter" to configure handling of Retry-After headers in 429 / 503 responses. See [experimental-features](https://knative.dev/development/eventing/experimental-features/delivery-retryafter.md). ([#5813](https://github.com/knative/eventing/pull/5813))
 - All core Knative Eventing Pods should now be able to run in the restricted pod security standard profile ([#5863](https://github.com/knative/eventing/pull/5863))
 - Triggers now include a CloudEvents Subscriptions API compatible filters field as an experimental feature ([#5715](https://github.com/knative/eventing/pull/5715))
 
 #### 🐞 Bug Fixes
 
-- The Sequence type accepts any Channel spec field in the spec.channelTemplate.spec field ([#5955](https://github.com/knative/eventing/pull/5955))
-- Upgrade dependencies that contains vulnerabilities in snyk DB ([#5889](https://github.com/knative/eventing/pull/5889))
+- The Sequence type accepts any Channel spec field in the `spec.channelTemplate.spec` field ([#5955](https://github.com/knative/eventing/pull/5955))
+- Upgrade dependencies that contains vulnerabilities in Snyk DB ([#5889](https://github.com/knative/eventing/pull/5889))
 
 ### Eventing Extensions
 
@@ -79,14 +78,14 @@ Follow the instructions in the documentation
 
 - Add a new implementation of the KafkaSource API ([#1415](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1415))
 - Kafka Broker event delivery is hundreds of times faster ([#1405](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1405))
-- broker.spec.config is now required ([#1555](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1555))
+- `broker.spec.config` is now required ([#1555](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1555))
 
 #### 💫 New Features & Changes
 
 - The kafka-controller deployment emits probe requests against the data plane (kafka-sink-receiver and kafka-broker-receiver) to determine Kafka Broker and KafkaSink readiness ([#1495](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1495))
-- You can now configure which header format(b3 multi header, b3 single header, and w3c trace-context) to be used while using Zipkin backend ([#1546](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1546))
-- Handle non-retryable HTTP status codes as reported in the spec:
-For more information: [data-plane.md](https://github.com/knative/specs/blob/c348f501de9eb998b4fd010c54d9127033ee41be/specs/eventing/data-plane.md#event-acknowledgement-and-delivery-retry) ([#1574](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1574))
+- You can now configure which header format (b3 multi header, b3 single header, and w3c trace-context) to be used while using Zipkin backend ([#1546](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1546))
+- Handle non-retryable HTTP status codes as reported in the spec.
+For more information, see the [Eventing spec](https://github.com/knative/specs/blob/c348f501de9eb998b4fd010c54d9127033ee41be/specs/eventing/data-plane.md#event-acknowledgement-and-delivery-retry) in GitHub ([#1574](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1574))
 
 
 #### RabbitMQ Broker and Source v1.1
@@ -97,15 +96,9 @@ For more information: [data-plane.md](https://github.com/knative/specs/blob/c348
 #### 💫 New Features & Changes
 
 - Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
-- Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
-- Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
-- Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
-- RabbitMQ source now can use predeclared queues instead of creating new ones ([#493](https://github.com/knative-sandbox/eventing-rabbitmq/pull/493))
-- Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
-- Now the source Adapter processes messages concurrently depending on the channel_config.prefetch_count argument (default to 1) ([#522](https://github.com/knative-sandbox/eventing-rabbitmq/pull/522))
-- Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
+- RabbitMQ source now can use predefined queues instead of creating new ones ([#493](https://github.com/knative-sandbox/eventing-rabbitmq/pull/493))
+- Now the source Adapter processes messages concurrently depending on the `channel_config.prefetch_count` argument (default to 1) ([#522](https://github.com/knative-sandbox/eventing-rabbitmq/pull/522))
 - Do not expose the broker class that the controller operates on as an environment variable ([#512](https://github.com/knative-sandbox/eventing-rabbitmq/pull/512))
-- Adds tracing with opencensus to the dispatcher and ingress ([#370](https://github.com/knative-sandbox/eventing-rabbitmq/pull/370))
 - The RabbitMQ Source now translates RabbitMQ messages according to the RabbitMQ Protocol Binding Spec for CloudEvents ([#475](https://github.com/knative-sandbox/eventing-rabbitmq/pull/475))
     - Falls back to RabbitMQ message content type if it is not set on the CloudEvent data or headers
     - Avoids re-wrapping RabbitMQ messages that are already in the CloudEvent format
@@ -134,10 +127,11 @@ For more information: [data-plane.md](https://github.com/knative/specs/blob/c348
 
 #### 💫 New Features & Changes
 
-- Refactor image transformer to deduplicate and simplify it ([#863](https://github.com/knative/operator/pull/863))
+- Refactor image transformer to de-duplicate and simplify it ([#863](https://github.com/knative/operator/pull/863))
 
-### Thank you, contributors and release leads([@matzew](https://github.com/matzew), [@nak3](https://github.com/nak3))
+### Thank you, contributors
 
+Release leads: ([@matzew](https://github.com/matzew) and [@nak3](https://github.com/nak3))
 - [@benmoss](https://github.com/benmoss)
 - [@boaz0](https://github.com/boaz0)
 - [@devguyio](https://github.com/devguyio)
