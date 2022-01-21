@@ -105,7 +105,7 @@ spec:
           image: gcr.io/knative-samples/helloworld-java
 ```
 
-## EmptyDir
+## Kubernetes EmptyDir Volume
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-volumes-emptydir`
@@ -127,6 +127,34 @@ spec:
       volumes:
         - name: cache
           emptyDir: {}
+```
+
+## Kubernetes PersistentVolumeClaim
+
+* **Type**: Extension
+* **ConfigMap keys:** `kubernetes.podspec-persistent-volume-claim` <br/> `kubernetes.podspec-persistent-volume-write`
+
+This extension controls whether [`PersistentVolumeClaim`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) can be specified
+and whether write access is allowed for the corresponding volume.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+ template:
+   spec:
+     containers:
+         ...
+         volumeMounts:
+           - mountPath: /data
+             name: mydata
+             readOnly: true
+     volumes:
+       - name: mydata
+         persistentVolumeClaim:
+           claimName: minio-pv-claim
+           readOnly: true
 ```
 
 ## Kubernetes node affinity
