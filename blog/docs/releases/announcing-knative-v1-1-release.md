@@ -132,6 +132,7 @@ For more information, see the [Eventing spec](https://github.com/knative/specs/b
 ### Thank you, contributors
 
 Release leads: ([@matzew](https://github.com/matzew) and [@nak3](https://github.com/nak3))
+
 - [@benmoss](https://github.com/benmoss)
 - [@boaz0](https://github.com/boaz0)
 - [@devguyio](https://github.com/devguyio)
