@@ -1,0 +1,137 @@
+---
+title: "TODO-KNATIVE-VERSION release"
+linkTitle: "TODO-KNATIVE-VERSION release"
+Author: "[TODO-YOUR-NAME](https://twitter.com/TODO-YOUR-USERNAME)"
+Author handle: https://github.com/TODO-YOUR-USERNAME
+date: TODO-DATE-FORMAT-yyyy-mm-dd
+description: "Knative TODO-KNATIVE-VERSION release announcement"
+type: "blog"
+---
+
+
+### Announcing Knative TODO-KNATIVE-VERSION Release
+
+A new version of Knative is now available across multiple components.
+
+Follow the instructions in the documentation
+[Installing Knative](https://knative.dev/docs/install/) for the respective component.
+
+#### Table of Contents
+- [Highlights](#highlights)
+- [Serving TODO-KNATIVE-VERSION](#serving-TODO-KNATIVE-VERSION-NOSPACES)
+- [Eventing TODO-KNATIVE-VERSION](#eventing-TODO-KNATIVE-VERSION-NOSPACES)
+- [Eventing Extensions](#eventing-extensions)
+    - [Apache Kafka Broker TODO-KNATIVE-VERSION](#apache-kafka-broker-TODO-KNATIVE-VERSION-NOSPACES)
+    - [RabbitMQ Broker and Source TODO-KNATIVE-VERSION](#rabbitmq-broker-and-source-TODO-KNATIVE-VERSION-NOSPACES)
+- `kn` [CLI TODO-KNATIVE-VERSION](#client-TODO-KNATIVE-VERSION-NOSPACES)
+- [Knative Operator TODO-KNATIVE-VERSION](#operator-TODO-KNATIVE-VERSION-NOSPACES)
+- [Thank you contributors](#thank-you-contributors)
+
+
+### Highlights
+
+- TODO: Add list of highlights for the release
+
+
+### Serving TODO-KNATIVE-VERSION
+
+<!-- Original notes are here: https://github.com/knative/serving/releases/tag/knative-TODO-KNATIVE-VERSION -->
+
+#### 🚨 Breaking or Notable Changes
+
+- TODO: Add any breaking or notable changes, using format `TEXT ([#PR-NUMBER](PR-URL))`
+
+#### 💫 New Features & Changes
+
+- TODO: Add new features and changes here
+
+#### 🐞 Bug Fixes
+
+- TODO: Add bugs here
+
+### Eventing TODO-KNATIVE-VERSION
+
+<!-- Original notes are here: https://github.com/knative/eventing/releases/tag/knative-TODO-KNATIVE-VERSION -->
+
+#### 🚨 Breaking or Notable Changes
+
+- TODO: Add any breaking or notable changes
+
+#### 💫 New Features & Changes
+
+- TODO: Add new features and changes here
+
+#### 🐞 Bug Fixes
+
+- TODO: Add bugs here
+
+### Eventing Extensions
+
+#### Apache Kafka Broker TODO-KNATIVE-VERSION
+
+<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-TODO-KNATIVE-VERSION -->
+
+#### 💫 New Features & Changes
+
+- TODO: Add new features and changes here
+
+#### 🐞 Bug Fixes
+
+- TODO: Add bugs here
+
+#### RabbitMQ Broker and Source TODO-KNATIVE-VERSION
+
+<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-TODO-KNATIVE-VERSION -->
+
+
+#### 💫 New Features & Changes
+
+- TODO: Add new features and changes here
+
+#### 🐞 Bug Fixes
+
+- TODO: Add bugs here
+
+### Client TODO-KNATIVE-VERSION
+
+<!-- Original notes are here: https://github.com/knative/client/blob/main/CHANGELOG.adoc#TODO-CLI-CHANGELOG-ENTRY -->
+
+#### 💫 New Features & Changes
+
+- TODO: Add new features and changes here
+
+#### 🐞 Bug Fixes
+
+- TODO: Add bugs here
+
+### Operator TODO-KNATIVE-VERSION
+
+<!-- Original notes are here: https://github.com/knative/operator/releases/tag/knative-TODO-KNATIVE-VERSION   -->
+
+#### 💫 New Features & Changes
+
+- TODO: Add new features and changes here
+
+#### 🐞 Bug Fixes
+
+- TODO: Add bugs here
+
+### Thank you, contributors
+
+- TODO:Add list of authors to PRs in this release and the release leads. Use fomat `[@username](https://github.com/username)` and sorted
+
+
+### Learn more
+
+Knative is an open source project that anyone in the [community](https://knative.dev/docs/community/) can use, improve, and enjoy. We'd love you to join us!
+
+- [Welcome to Knative](https://knative.dev/docs)
+- [Getting started documentation](https://knative.dev/docs/getting-started)
+- [Samples](https://knative.dev/docs/samples)
+- [Knative working groups](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md)
+- [Knative User Mailing List](https://groups.google.com/forum/#!forum/knative-users)
+- [Knative Development Mailing List](https://groups.google.com/forum/#!forum/knative-dev)
+- Knative on Twitter [@KnativeProject](https://twitter.com/KnativeProject)
+- Knative on [StackOverflow](https://stackoverflow.com/questions/tagged/knative)
+- Knative [Slack](https://slack.knative.dev)
+- Knative on [YouTube](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)
