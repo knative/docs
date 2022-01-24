@@ -9,19 +9,23 @@ plugins:
       admin/eventing/channel-configuration.md: eventing/configuration/channel-configuration.md
       admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
       admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
-      admin/install/eventing/eventing-installation-files.md: install/eventing/eventing-installation-files.md
-      admin/install/eventing/install-eventing-with-yaml.md: install/eventing/install-eventing-with-yaml.md
-      admin/install/install-eventing-with-yaml.md: install/eventing/install-eventing-with-yaml.md
-      admin/install/install-serving-with-yaml.md: install/serving/install-serving-with-yaml.md
-      admin/install/installing-istio.md: install/serving/installing-istio.md
-      admin/install/installing-istio.md: install/serving/installing-istio.md
+      admin/install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
+      install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
+      admin/install/eventing/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
+      admin/install/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
+      install/eventing/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
+      admin/install/install-serving-with-yaml.md: install/yaml-install/serving/install-serving-with-yaml.md
+      admin/install/installing-istio.md: install/installing-istio.md
+      install/serving/installing-istio.md: install/installing-istio.md
       admin/install/knative-offerings.md: install/knative-offerings.md
       admin/install/knative-with-operators.md: install/operator/knative-with-operators.md
       admin/install/operator/configuring-eventing-cr.md: install/operator/configuring-eventing-cr.md
       admin/install/operator/configuring-serving-cr.md: install/operator/configuring-serving-cr.md
       admin/install/README.md: install/README.md
-      admin/install/serving/install-serving-with-yaml.md: install/serving/install-serving-with-yaml.md
-      admin/install/serving/serving-installation-files.md: install/serving/serving-installation-files.md
+      admin/install/serving/install-serving-with-yaml.md: install/yaml-install/serving/install-serving-with-yaml.md
+      install/serving/install-serving-with-yaml.md: install/yaml-install/serving/install-serving-with-yaml.md
+      admin/install/serving/serving-installation-files.md: install/yaml-install/serving/serving-installation-files.md
+      install/serving/serving-installation-files.md: install/yaml-install/serving/serving-installation-files.md
       admin/install/uninstall.md: install/uninstall.md
       admin/serving/config-defaults.md: serving/configuration/config-defaults.md
       admin/serving/deployment.md: serving/configuration/deployment.md
@@ -162,7 +166,8 @@ plugins:
       serving/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
       serving/feature-flags.md: serving/configuration/feature-flags.md
       serving/getting-started-knative-app.md: getting-started/README.md
-      serving/installing-cert-manager.md: install/serving/installing-cert-manager.md
+      serving/installing-cert-manager.md: install/installing-cert-manager.md
+      install/serving/installing-cert-manager.md: install/installing-cert-manager.md
       serving/metrics.md: serving/observability/metrics/serving-metrics.md
       serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
       serving/samples/blue-green-deployment.md: serving/traffic-management.md

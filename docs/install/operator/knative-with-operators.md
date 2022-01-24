@@ -264,7 +264,7 @@ Knative Serving with different ingresses:
 
     The following steps install Istio to enable its Knative integration:
 
-    1. [Install Istio](../serving/installing-istio.md).
+    1. [Install Istio](../installing-istio.md).
 
     1. If you installed Istio under a namespace other than the default `istio-system`:
         1. Add `spec.config.istio` to your Serving CR YAML file as follows:

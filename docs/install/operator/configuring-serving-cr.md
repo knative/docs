@@ -273,7 +273,7 @@ Update `spec.ingress.istio.knative-local-gateway` to select the labels of the ne
 
 ### Default local gateway name:
 
-Go through the [installing Istio](../serving/installing-istio.md#installing-istio-without-sidecar-injection) guide to use local cluster gateway,
+Go through the [installing Istio](../installing-istio.md#installing-istio-without-sidecar-injection) guide to use local cluster gateway,
 if you use the default gateway called `knative-local-gateway`.
 
 ### Non-default local gateway name:

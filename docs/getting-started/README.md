@@ -1,28 +1,28 @@
 # Getting Started with Knative
+
+This tutorial will guide you through using some of the most commonly used features in Knative.
+
+For Knative Serving you will create a Service, scale your Service, and then split
+traffic between two revisions of the Service.
+For Knative Eventing you will learn about Brokers, create a Source, and create a Trigger.
+It is recommended that you complete the topics in this tutorial in order.
+
 ## Before you begin
-!!! warning
-    Knative Quickstart Environments are for experimentation use only. For production installation, see our [Installing Guide](../install/README.md)
 
-Before you can get started with a Knative Quickstart deployment you must install kind, the Kubernetes CLI, and the Knative CLI.
+Before you start this tutorial, you must Install Knative Serving and Knative Eventing.
+Choose one of the following:
 
-### Prepare local Kubernetes cluster
+- **Quickstart installation:** You can install a local distribution of Knative for development use by following the [Knative Quickstart installation](quickstart-install.md).
 
-You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker) or [`minikube`](https://minikube.sigs.k8s.io/docs/start/){target=_blank} to run a local Kubernetes cluster with Docker container nodes.
-
-### Install the Kubernetes CLI
-
-The [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank}, allows you to run commands against Kubernetes clusters. You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
-
-### Install the Knative CLI
-
-The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources, such as Knative Services and Event Sources, without the need to create or modify YAML files directly.
-
-`kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
-
---8<-- "install-kn.md"
-
-## Install the Knative "Quickstart" environment
-
-You can get started with a local deployment of Knative by using the Knative `quickstart` plugin.
-
---8<-- "quickstart-install.md"
+- **Manual installation:** Alternatively, you can install Knative
+[using YAML](../install/yaml-install/README.md) or
+[using the Operator](../install/operator/knative-with-operators.md).
+These methods take longer than quickstart, but are suitable for production and
+enable you to  customize your installation.
+If you install manually, you must install the following configuration for this tutorial:
+    - For Knative Serving:
+        - Kourier networking layer
+        - Magic DNS
+    - For Knative Eventing:
+        - In-Memory default Channel
+        - MT-Channel-based Broker

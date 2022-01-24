@@ -1,3 +1,36 @@
+# Install Knative using Quickstart
+
+This topic describes how to install Knative Serving and Eventing using
+the Knative Quickstart plugin.
+The plugin installs a preconfigured Knative deployment on a local Kubernetes cluster.
+
+!!! warning
+    Knative Quickstart Environments are for experimentation use only. For a production ready installation, see [Installing with YAML](/docs/install/yaml-install/) or [Installing with the Operator](/docs/install/operator/knative-with-operators/).
+
+## Before you begin
+
+Before you can get started with a Knative Quickstart deployment you must install kind, the Kubernetes CLI, and the Knative CLI.
+
+### Prepare a local Kubernetes cluster
+
+You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker) or [`minikube`](https://minikube.sigs.k8s.io/docs/start/){target=_blank} to run a local Kubernetes cluster with Docker container nodes.
+
+### Install the Kubernetes CLI
+
+The [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank}, allows you to run commands against Kubernetes clusters. You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
+
+### Install the Knative CLI
+
+The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources, such as Knative Services and Event Sources, without the need to create or modify YAML files directly.
+
+`kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
+
+--8<-- "install-kn.md"
+
+## Install the Knative "Quickstart" environment
+
+You can get started with a local deployment of Knative by using the Knative `quickstart` plugin.
+
 !!! todo "Installing the `quickstart` plugin"
     === "Using Homebrew"
         For macOS, you can install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}.

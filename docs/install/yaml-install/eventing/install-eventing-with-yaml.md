@@ -90,9 +90,9 @@ Follow the procedure for the Channel of your choice:
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
 
-You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../eventing/configuration/channel-configuration.md) section.
+You can change the default channel implementation by following the instructions described in the [Configure Channel defaults](../../../eventing/configuration/channel-configuration.md) section.
 
-## Optional: Install a Broker layer:
+## Optional: Install a Broker layer
 
 The following tabs expand to show instructions for installing the Broker layer.
 Follow the procedure for the Broker of your choice:
@@ -115,7 +115,7 @@ Follow the procedure for the Broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
-    For more information, see the [Kafka Broker](../../eventing/broker/kafka-broker/README.md) documentation.
+    For more information, see the [Kafka Broker](../../../eventing/broker/kafka-broker/README.md) documentation.
 
 === "MT-Channel-based"
 
@@ -215,7 +215,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
         ```
 
-    For more information, see the [Kafka Sink](../../eventing/sinks/kafka-sink.md) documentation.
+    For more information, see the [Kafka Sink](../../../eventing/sinks/kafka-sink.md) documentation.
 
 === "Sugar Controller"
 
@@ -271,7 +271,7 @@ The following tabs expand to show instructions for installing each Eventing exte
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka",file="source.yaml")}}
         ```
 
-    To learn more, try the [Apache Kafka source sample](../../eventing/sources/kafka-source/README.md).
+    To learn more, try the [Apache Kafka source sample](../../../eventing/sources/kafka-source/README.md).
 
 
 === "GCP Sources"
