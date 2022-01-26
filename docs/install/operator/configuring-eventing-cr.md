@@ -281,6 +281,7 @@ To override resource settings for a specific container, you must create an entry
 
 !!! info
     If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
+    Visit [Override System Resources based on the deployment](#override-the-resources) to specify the resources for a container within a specific deployment.
 
 For example, the following KnativeEventing CR configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
 
@@ -299,6 +300,39 @@ spec:
     limits:
       cpu: 1000m
       memory: 250Mi
+```
+
+## Override system deployments
+
+If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in the CR.
+Currently `resources`, `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+
+### Override the resources
+
+The KnativeEventing custom resource is able to configure system resources for the Knative system containers based on the deployment.
+Requests and limits can be configured for all the available containers within the deployment, like `eventing-controller`, `eventing-webhook`,
+`imc-controller`, etc.
+
+For example, the following KnativeEventing resource configures the container `eventing-controller` in the deployment `eventing-controller` to request
+0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  deployments:
+  - name: eventing-controller
+    resources:
+    - container: eventing-controller
+      requests:
+        cpu: 300m
+        memory: 100Mi
+      limits:
+        cpu: 1000m
+        memory: 250Mi
 ```
 
 ### Override the nodeSelector
