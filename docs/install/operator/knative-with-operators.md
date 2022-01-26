@@ -303,69 +303,6 @@ Knative Serving with different ingresses:
 
         Save this for configuring DNS later.
 
-=== "Ambassador"
-
-    The following steps install Ambassador and enable its Knative integration:
-
-    1. Create a namespace to install Ambassador in:
-
-        ```bash
-        kubectl create namespace ambassador
-        ```
-
-    1. Install Ambassador:
-
-        ```bash
-        kubectl apply --namespace ambassador \
-          --filename https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
-          --filename https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-          --filename https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-        ```
-
-    1. Give Ambassador the required permissions:
-
-        ```bash
-        kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
-        ```
-
-    1. Enable Knative support in Ambassador:
-
-        ```bash
-        kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
-        ```
-
-    1. To configure Knative Serving to use Ambassador, add `spec.config.network`
-    to your Serving CR YAML file as follows:
-
-        ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
-        kind: KnativeServing
-        metadata:
-          name: knative-serving
-          namespace: knative-serving
-        spec:
-          # ...
-          config:
-            network:
-              ingress-class: "ambassador.ingress.networking.knative.dev"
-        ```
-
-    1. Apply the YAML file for your Serving CR by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of your Serving CR file.
-
-    1. Fetch the External IP or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace ambassador get service ambassador
-        ```
-
-        Save this for configuring DNS later.
-
 === "Contour"
 
     The following steps install Contour and enable its Knative integration:
