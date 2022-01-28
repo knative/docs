@@ -152,6 +152,7 @@ plugins:
       install/install-extensions.md: install/README.md
       install/installation-files.md: install/README.md
       install/prerequisites.md: install/README.md
+      install/knative-with-operators.md: install/operator/knative-with-operators.md
       operator/configuring-eventing-cr/index.md: install/operator/configuring-eventing-cr.md
       operator/configuring-serving-cr/index.md: install/operator/configuring-serving-cr.md
       reference/resources/index.md: install/client/README.md
