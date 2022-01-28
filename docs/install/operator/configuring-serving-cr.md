@@ -123,7 +123,7 @@ spec:
       controller: docker.io/knative-images-repo3/controller:v0.13.0
       webhook: docker.io/knative-images-repo4/webhook:v0.13.0
       autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0
-      net-istio-controller: docker.io/knative-images-repo6/prefix-net-istio-controller:v0.13.0
+      net-istio-controller/controller: docker.io/knative-images-repo6/prefix-net-istio-controller:v0.13.0
       net-istio-webhook/webhook: docker.io/knative-images-repo6/net-istio-webhook:v0.13.0
       queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0
 ```
