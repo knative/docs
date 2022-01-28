@@ -100,7 +100,6 @@ This will always be sent while using this Kafka Broker since it supports handlin
 
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.2.0 -->
 
-
 #### 💫 New Features & Changes
 
 - Improved Broker's and Source's README docs, sample descriptions, and files. ([#555](https://github.com/knative-sandbox/eventing-rabbitmq/pull/555))
@@ -162,7 +161,7 @@ Release leads: [@dprotaso](https://github.com/dprotaso) and [@psschwei](https://
 - [@ChunyiLyu](https://github.com/ChunyiLyu)
 - [@devguyio](https://github.com/devguyio)
 - [@dprotaso](https://github.com/dprotaso)
-- [@gabo1208](https://github.com/gabo1208])
+- [@gabo1208](https://github.com/gabo1208)
 - [@gvmw](https://github.com/gvmw)
 - [@houshengbo](https://github.com/houshengbo)
 - [@ikvmw](https://github.com/ikvmw)
