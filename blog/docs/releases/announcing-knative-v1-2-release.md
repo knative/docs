@@ -103,11 +103,26 @@ This will always be sent while using this Kafka Broker since it supports handlin
 
 #### 💫 New Features & Changes
 
-- Release notes coming soon
+- Improved Broker's and Source's README docs, sample descriptions, and files. ([#555](https://github.com/knative-sandbox/eventing-rabbitmq/pull/555))
+- Add publisher confirms to ingress. Return 200 only when RabbitMQ confirms receiving and storing the message. ([#568](https://github.com/knative-sandbox/eventing-rabbitmq/pull/568))
+- Makefile-based workflow. Includes migrating GitHub Actions. ([#525](https://github.com/knative-sandbox/eventing-rabbitmq/pull/525), [#569](https://github.com/knative-sandbox/eventing-rabbitmq/pull/569), [#579](https://github.com/knative-sandbox/eventing-rabbitmq/pull/579))
+- Various code refactoring and code health improvements. ([#552](https://github.com/knative-sandbox/eventing-rabbitmq/pull/552), [#572](https://github.com/knative-sandbox/eventing-rabbitmq/pull/572))
+- Source adapter trigger dispatcher homologation. Now the Source Adapter and
+Broker Dispatcher's Prefetch Count behavior is the same.
+Updated the Trigger's webhook to validate the following ([#536](https://github.com/knative-sandbox/eventing-rabbitmq/pull/536)):
+    - Has a default value of 1. FIFO behavior
+    - Have limits: 1 ≤ prefetchCount ≤ 1000
+- All core Knative Eventing RabbitMQ Pods should now be able to run in the restricted Pod security standard profile. ([#541](https://github.com/knative-sandbox/eventing-rabbitmq/pull/541))
 
 #### 🐞 Bug Fixes
 
-- Release notes coming soon
+- Removing the dead letter sink on a Trigger will now properly fall back to the
+Broker's dead letter sink, if one is defined. ([#533](https://github.com/knative-sandbox/eventing-rabbitmq/pull/533))
+- Messages sent to RabbitMQ are now marked as Persistent ([#560](https://github.com/knative-sandbox/eventing-rabbitmq/pull/560)):
+    - Configuring messages sent into the RabbitMQ Broker to be persistent as the
+    Queues used by the Broker are always durable.
+    - Now if the user set the configuration of the RabbitMQ Source Exchange and
+    Queue to be durable, the messages are also durable.
 
 
 ### Client v1.2
@@ -143,9 +158,14 @@ This will always be sent while using this Kafka Broker since it supports handlin
 
 Release leads: [@dprotaso](https://github.com/dprotaso) and [@psschwei](https://github.com/psschwei)
 
+- [@benmoss](https://github.com/benmoss)
+- [@ChunyiLyu](https://github.com/ChunyiLyu)
 - [@devguyio](https://github.com/devguyio)
 - [@dprotaso](https://github.com/dprotaso)
+- [@gabo1208](https://github.com/gabo1208])
+- [@gvmw](https://github.com/gvmw)
 - [@houshengbo](https://github.com/houshengbo)
+- [@ikvmw](https://github.com/ikvmw)
 - [@jhill072](https://github.com/jhill072)
 - [@julz](https://github.com/julz)
 - [@lionelvillard](https://github.com/lionelvillard)
