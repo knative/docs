@@ -1,5 +1,9 @@
 # Installing Knative
 
+!!! tip
+    You can install a local distribution of Knative for development purposes
+    using the [Knative Quickstart plugin](../getting-started/quickstart-install.md).
+
 You can install the Serving component, Eventing component, or both on your cluster by using one of the following deployment options:
 
 - Use a YAML-based installation:
@@ -7,7 +11,6 @@ You can install the Serving component, Eventing component, or both on your clust
     - [Install Knative Eventing by using YAML](yaml-install/eventing/install-eventing-with-yaml.md)
 - Use the [Knative Operator](operator/knative-with-operators.md) to install and
 configure Knative.
-- Use the [Knative Quickstart plugin](quickstart-install.md) to install a preconfigured, local distribution of Knative for development purposes.
 - Follow the documentation for vendor managed [Knative offerings](knative-offerings.md).
 
 You can also [upgrade an existing Knative installation](upgrade/README.md).

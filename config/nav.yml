@@ -48,7 +48,6 @@ nav:
         - Installing kn: install/client/install-kn.md
         - Customizing kn: install/client/configure-kn.md
         - kn plugins: install/client/kn-plugins.md
-      - Install using Quickstart: install/quickstart-install.md
       # Istio Installation
       - Installing Istio for Knative: install/installing-istio.md
       # Cert-manager Installation
