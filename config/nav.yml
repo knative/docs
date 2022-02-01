@@ -8,9 +8,9 @@ nav:
 ###############################################################################
     # Getting started
 ###############################################################################
-    - Getting started:
+    - Tutorial:
         - Tutorial overview: getting-started/README.md
-        - Install Knative using Quickstart: getting-started/quickstart-install.md
+        - Set up Knative on a local cluster: getting-started/quickstart-install.md
         - Using Knative Serving:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
