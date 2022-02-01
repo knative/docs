@@ -14,7 +14,7 @@ Notable features are:
 
 ## Prerequisites
 
-1. [Installing Eventing using YAML files](../../../install/eventing/install-eventing-with-yaml.md).
+1. [Installing Eventing using YAML files](../../../install/yaml-install/eventing/install-eventing-with-yaml.md).
 2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
 
 ## Installation
