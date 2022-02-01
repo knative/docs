@@ -1,38 +1,32 @@
-## Clean Up
+# Clean Up
 
-=== "kn"
-    Delete the Service by running the command:
+You can delete your cluster to free up resources.
+If you need to, it's really fast to install Knative again on a new cluster using Quickstart!
 
-    ```bash
-    kn service delete cloudevents-player
-    ```
+Alternatively, you can continue to use this cluster for [further experimentation](next-steps.md).
 
-    Delete the Trigger by running the command:
+## Delete the Cluster
 
-    ```bash
-    kn trigger delete cloudevents-trigger
-    ```
+=== "kind"
 
-=== "kubectl"
-    Delete the Service by running the command
+    Delete your `kind` Cluster by running the command:
 
-    ```bash
-    kubectl delete -f cloudevents.yaml
-    ```
-
-    Delete the Trigger by running the command:
-
-    ```bash
-    kubectl delete -f ce-trigger.yaml
-    ```
-
-Delete the Cluster
-
-Delete your `kind` Cluster by running the command:
     ```bash
     kind delete clusters knative
     ```
-!!! success "Verify Output"
-    ```{ .bash .no-copy }
-    Deleted clusters: ["knative"]
+    !!! success "Verify Output"
+        ```{ .bash .no-copy }
+        Deleted clusters: ["knative"]
+        ```
+
+=== "minikube"
+
+    Delete your `minikube` Cluster by running the command:
+
+    ```bash
+    minikube delete -p knative
     ```
+    !!! success "Verify Output"
+        ```{ .bash .no-copy }
+
+        ```
