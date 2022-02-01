@@ -5,7 +5,7 @@ the Knative Quickstart plugin.
 The plugin installs a preconfigured Knative deployment on a local Kubernetes cluster.
 
 !!! warning
-    Knative Quickstart Environments are for experimentation use only. For a production ready installation, see [Installing with YAML](/docs/install/yaml-install/) or [Installing with the Operator](/docs/install/operator/knative-with-operators/).
+    Knative Quickstart Environments are for experimentation use only. For a production ready installation, see [Installing with YAML](../install/serving/README.md) or [Installing with the Operator](../install/operator/knative-with-operators/).
 
 ## Before you begin
 

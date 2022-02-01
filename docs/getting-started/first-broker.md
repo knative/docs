@@ -1,5 +1,6 @@
-## Sources, Brokers, Triggers, Sinks, oh my!
-For the purposes of this tutorial, let's keep it simple. You will focus on four powerful Eventing components: Source, Trigger, Broker, and Sink.
+# Sources, Brokers, Triggers, Sinks, oh my!
+
+For the purposes of this tutorial, let's keep it simple. You will focus on four powerful Eventing components: **Source, Trigger, Broker, and Sink**.
 
 Let's take a look at how these components interact:
 
@@ -15,7 +16,8 @@ Let's take a look at how these components interact:
 !!! note "A note on Sources and Sinks"
     A Knative Service can act as both a Source and a Sink for events, and for good reason. You may want to consume events from the Broker and send modified events back to the Broker, as you would in any pipeline use-case.
 
-### CloudEvents
+## CloudEvents
+
 Knative Eventing uses
 [CloudEvents](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md){target=blank_} to send
 information back and forth between your Services and these components.
@@ -32,6 +34,7 @@ information back and forth between your Services and these components.
 
 
 ## Examining the Broker
+
 As part of the `kn quickstart` install, an In-Memory Broker should have already be installed in your Cluster. Check to see that it is installed by running the command:
 
 ```bash
