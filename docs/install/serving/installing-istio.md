@@ -214,7 +214,8 @@ See the [Uninstall Istio](https://istio.io/docs/setup/install/istioctl/#uninstal
 
 ## What's next
 
-- Try the [Getting Started guide](../../getting-started/README.md) for Knative Serving.
+- View the [Knative Serving documentation](../../serving/README.md).
+- Try some Knative Serving [code samples](../../samples/README.md).
 
 [1]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
