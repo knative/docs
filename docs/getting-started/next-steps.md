@@ -1,6 +1,3 @@
----
-hide_next: true
----
 # Next Steps
 
 This topic provides a list of resources to help you continue your Knative journey.

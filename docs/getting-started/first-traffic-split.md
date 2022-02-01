@@ -185,16 +185,3 @@ Hello World!
 ```
 
 Congratulations, :tada: you've successfully split traffic between 2 different Revisions of a Knative Service. Up next, Knative Eventing!
-
-## Clean Up
-You won't need the `hello` Service in the Knative Eventing tutorial, so it's best to clean up before you move forward:
-
-=== "kn"
-    ```bash
-    kn service delete hello
-    ```
-
-=== "kubectl"
-    ```bash
-    kubectl delete -f hello.yaml
-    ```
