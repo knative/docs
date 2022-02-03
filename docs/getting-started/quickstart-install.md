@@ -1,4 +1,4 @@
-# Install Knative using the quickstart plugin
+# Install Knative using quickstart
 
 This topic describes how to install a local deployment of Knative Serving and Eventing using
 the Knative `quickstart` plugin.
