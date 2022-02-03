@@ -1,9 +1,10 @@
 # Clean Up
 
-You can delete your cluster to free up resources.
-If you need to, it's really fast to install Knative again on a new cluster using Quickstart!
+We recommend that you delete the cluster used for this tutorial to free up resources
+on your local machine.
 
-Alternatively, you can continue to use this cluster for [further experimentation](next-steps.md).
+If you want to continue experimenting with Knative after deleting the cluster,
+you can reinstall Knative on a new cluster using the [Quickstart plugin](quickstart-install.md) again.
 
 ## Delete the Cluster
 
