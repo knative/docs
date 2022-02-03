@@ -9,7 +9,7 @@ The plugin installs a preconfigured Knative deployment on a local Kubernetes clu
 
 ## Before you begin
 
-Before you can get started with a Knative Quickstart deployment you must install kind, the Kubernetes CLI, and the Knative CLI.
+Before you can get started with a Knative Quickstart deployment you must install kind or minikube, the Kubernetes CLI, and the Knative CLI.
 
 ### Prepare a local Kubernetes cluster
 
