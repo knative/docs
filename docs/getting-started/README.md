@@ -12,4 +12,4 @@ Then, on your new cluster, you will carry out common tasks for **Knative Serving
 We recommend that you complete the topics in this tutorial in order.
 
 !!! tip
-    Hit ++"."++ on your keyboard to move forward in the tutorial. Use ++","++ to go back at any time.
+    Hit ++"."++ (period) on your keyboard to move forward in the tutorial. Use ++","++ (comma) to go back at any time.
