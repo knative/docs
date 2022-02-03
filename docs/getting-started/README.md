@@ -2,8 +2,8 @@
 
 This tutorial lets you try out some of the commonly used features in Knative.
 
-In the first lesson you will install Knative locally using the Knative Quickstart plugin.
-To follow the tutorial you must use the Quickstart plugin to install Knative.
+In the first lesson you will install Knative locally using the Knative `quickstart` plugin.
+To follow the tutorial you must use the `quickstart` plugin to install Knative.
 The plugin provides a Knative deployment for development use, which has
 been configured with the components you need for this tutorial.
 
