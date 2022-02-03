@@ -4,30 +4,31 @@ We recommend that you delete the cluster used for this tutorial to free up resou
 on your local machine.
 
 If you want to continue experimenting with Knative after deleting the cluster,
-you can reinstall Knative on a new cluster using the [Quickstart plugin](quickstart-install.md) again.
+you can reinstall Knative on a new cluster using the [`quickstart` plugin](quickstart-install.md) again.
 
 ## Delete the Cluster
 
 === "kind"
 
-    Delete your `kind` Cluster by running the command:
+    Delete your `kind` cluster by running the command:
 
     ```bash
     kind delete clusters knative
     ```
-    !!! success "Verify Output"
+    !!! success "Example output"
         ```{ .bash .no-copy }
         Deleted clusters: ["knative"]
         ```
 
 === "minikube"
 
-    Delete your `minikube` Cluster by running the command:
+    Delete your `minikube` cluster by running the command:
 
     ```bash
     minikube delete -p knative
     ```
-    !!! success "Verify Output"
+    !!! success "Example output"
         ```{ .bash .no-copy }
-
+        🔥  Deleting "knative" in hyperkit ...
+        💀  Removed all traces of the "knative" cluster.
         ```
