@@ -48,12 +48,11 @@ def define_env(env):
     def clientdocs():
         """Generates a link to the client docs for the current release version.
 
-        When the version in the KNATIVE_VERSION environment variable is
+        When the version in the SAMPLES_BRANCH environment variable is
         empty this links to the main branch, otherwise it links to the
         matching release in Github.
         """
-        version = os.environ.get("KNATIVE_VERSION")
+        version = os.environ.get("SAMPLES_BRANCH")
         if version is None:
             return 'https://github.com/knative/client/blob/main/docs/cmd/kn.md'
-
-        return 'https://github.com/knative/client/blob/release-{version}/docs/cmd/kn.md'.format(version=version)
+        return 'https://github.com/knative/client/blob/{version}/docs/cmd/kn.md'.format(version=version)

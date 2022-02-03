@@ -158,10 +158,6 @@ When the Revision is created, the larger of initial scale and lower bound is aut
           allow-zero-initial-scale: "true"
     ```
 
-
-
-
-
 ## Scale Down Delay
 
 Scale Down Delay specifies a time window which must pass at reduced concurrency
@@ -169,7 +165,9 @@ before a scale-down decision is applied. This can be useful, for example, to
 keep containers around for a configurable duration to avoid a cold start
 penalty if new requests come in. Unlike setting a lower bound, the revision
 will eventually be scaled down if reduced concurrency is maintained for the
-delay period.
+delay period. 
+!!! note 
+    Only supported for the default KPA autoscaler class.
 
 * **Global key:** `scale-down-delay`
 * **Per-revision annotation key:** `autoscaling.knative.dev/scale-down-delay`
@@ -217,4 +215,58 @@ delay period.
         autoscaler:
           scale-down-delay: "15m"
     ```
+## Stable window
+
+The stable window defines the sliding time window over which metrics are averaged to provide the input for scaling decisions when the autoscaler is not in [Panic mode](kpa-specific.md).
+
+* **Global key:** `stable-window`
+* **Per-revision annotation key:** `autoscaling.knative.dev/window`
+* **Possible values:** Duration, `6s` <= value <= `1h`
+* **Default:** `60s`
+
+!!! note
+    During scale down, in most cases the last Replica is removed after there has been no traffic to the Revision for the entire duration of the stable window.
+
+**Example:**
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/window: "40s"
+        spec:
+          containers:
+            - image: gcr.io/knative-samples/helloworld-go
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+     name: config-autoscaler
+     namespace: knative-serving
+    data:
+     stable-window: "40s"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          stable-window: "40s"
+    ```
+
 ---

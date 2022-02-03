@@ -343,6 +343,7 @@ Requests and limits can be configured for the following containers: `activator`,
 
 !!! info
     If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
+    Visit [Override System Resources based on the deployment](#override-the-resources) to specify the resources for a container within a specific deployment.
 
 To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
 
@@ -397,7 +398,35 @@ spec:
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
-Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+Currently `resources`, `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+
+### Override the resources
+
+The KnativeServing custom resource is able to configure system resources for the Knative system containers based on the deployment.
+Requests and limits can be configured for all the available containers within the deployment, like `activator`, `autoscaler`,
+`controller`, `webhook`, `autoscaler-hpa`, `net-istio-controller`, etc.
+
+For example, the following KnativeServing resource configures the container `activator` in the deployment `activator` to request
+0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
+
+```yaml
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: activator
+    resources:
+    - container: activator
+      requests:
+        cpu: 300m
+        memory: 100Mi
+      limits:
+        cpu: 1000m
+        memory: 250Mi
+```
 
 ### Override replicas, labels and annotations
 

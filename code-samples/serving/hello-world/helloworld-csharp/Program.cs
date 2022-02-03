@@ -1,26 +1,11 @@
-﻿using System;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace helloworld_csharp
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+var url = $"http://0.0.0.0:{port}";
+var target = Environment.GetEnvironmentVariable("TARGET") ?? "World";
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-            string url = String.Concat("http://0.0.0.0:", port);
+var app = builder.Build();
 
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>().UseUrls(url);
-                });
-        }
-    }
-}
+app.MapGet("/", () => $"Hello {target}!");
+
+app.Run(url);

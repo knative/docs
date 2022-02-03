@@ -58,27 +58,6 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 <!-- This indentation is important for things to render properly. -->
 
 
-=== "Ambassador"
-
-    The following commands uninstall Ambassador and enable its Knative integration.
-
-    1. Uninstall Ambassador by running:
-
-       ```bash
-       kubectl delete --namespace ambassador \
-        -f https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
-        -f https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-        -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-       ```
-
-    1. Delete the Ambassador namespace:
-
-       ```bash
-       kubectl delete namespace ambassador
-       ```
-
-
-
 === "Contour"
 
     The following commands uninstall Contour and enable its Knative integration.

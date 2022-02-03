@@ -7,6 +7,7 @@ aliases:
   autoscaling-reviewers:
   - nader-ziada
   - psschwei
+  - skonto
   - taragu
   autoscaling-wg-leads:
   - julz
@@ -65,10 +66,12 @@ aliases:
   - pierDipi
   - vaikas
   knative-admin:
+  - carlisia
   - csantanapr
   - dprotaso
   - duglin
   - evankanderson
+  - itsmurugappan
   - julz
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -76,14 +79,14 @@ aliases:
   - knative-test-reporter-robot
   - lance
   - pmorie
-  - psschwei
   - rhuss
   - spencerdillard
   - thisisnotapril
   - vaikas
+  - xtreme-sameer-vohra
   knative-release-leads:
-  - dprotaso
-  - psschwei
+  - carlisia
+  - xtreme-sameer-vohra
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -148,16 +151,16 @@ aliases:
   - efiturri
   - evankanderson
   - gerardo-lc
-  - joshua-bone
   - kvmware
   - shinigambit
-  - steuhs
   productivity-wg-leads:
   - chizhg
   productivity-writers:
+  - cardil
   - chaodaiG
   - chizhg
   - coryrc
+  - psschwei
   security-wg-leads:
   - evankanderson
   - julz
@@ -175,6 +178,7 @@ aliases:
   - nader-ziada
   - nealhu
   - psschwei
+  - skonto
   - whaught
   serving-writers:
   - dprotaso
@@ -185,6 +189,7 @@ aliases:
   - lionelvillard
   steering-committee:
   - csantanapr
+  - itsmurugappan
   - lance
   - pmorie
   - thisisnotapril

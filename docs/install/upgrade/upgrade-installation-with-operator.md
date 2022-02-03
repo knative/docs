@@ -15,7 +15,7 @@ The Knative Operator supports up to the last three major releases. For example, 
 
 To upgrade, apply the Operator custom resources, adding the `spec.version` for the Knative version that you want to upgrade to:
 
-1. Copy the following YAML into a file:
+1. Create a YAML file containing the following:
 
     ```yaml
     apiVersion: operator.knative.dev/v1alpha1
@@ -24,8 +24,9 @@ To upgrade, apply the Operator custom resources, adding the `spec.version` for t
       name: knative-serving
       namespace: knative-serving
     spec:
-      version: "0.23"
+      version: "<new-version>"
     ```
+    Where `<new-version>` is the Knative version that you want to upgrade to.
 
 1. Apply the YAML file by running the command:
 
@@ -122,7 +123,9 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 
 === "Knative Serving"
 
-1. Copy the following YAML into a file:
+To rollback to a previous version of Knative Serving:
+
+1. Create a YAML file containing the following:
 
     ```yaml
     apiVersion: operator.knative.dev/v1alpha1
@@ -131,8 +134,9 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
       name: knative-serving
       namespace: knative-serving
     spec:
-      version: "0.22"
+      version: "<previous-version>"
     ```
+    Where `<previous-version>` is the Knative version that you want to downgrade to.
 
 1. Apply the YAML file by running the command:
 
@@ -143,7 +147,9 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 
 === "Knative Eventing"
 
-1. Copy the following YAML into a file:
+To rollback to a previous version of Knative Eventing:
+
+1. Create a YAML file containing the following:
 
     ```yaml
     apiVersion: operator.knative.dev/v1alpha1
@@ -152,8 +158,10 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
       name: knative-eventing
       namespace: knative-eventing
     spec:
-      version: "0.22"
+      version: "<previous-version>"
     ```
+    Where `<previous-version>` is the Knative version that you want to downgrade to.
+
 1. Apply the YAML file by running the command:
 
     ```bash

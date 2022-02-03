@@ -15,10 +15,10 @@ Knative Service is running to watch our "Hello world!" Service scale up and down
 ### Run your Knative Service
 Let's run our "Hello world!" Service just one more time. This time, try the Knative Service `URL` in
 your browser
-[http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, or you
+[http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, or you
 can use your terminal with `curl`.
 ```bash
-curl http://hello.default.127.0.0.1.nip.io
+curl http://hello.default.127.0.0.1.sslip.io
 ```
 
 You can watch the pods and see how they scale to zero after traffic stops going to the URL.
@@ -40,7 +40,7 @@ hello-world                              0/2     Terminating
 ```
 
 ### Scale up your Knative Service
-Rerun the Knative Service in your browser [http://hello.default.127.0.0.1.nip.io](http://hello.default.127.0.0.1.nip.io){target=_blank}, and you will see a new pod running again.
+Rerun the Knative Service in your browser [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, and you will see a new pod running again.
 
 ==**Expected output:**==
 ```{ .bash .no-copy }
