@@ -30,6 +30,6 @@
     "uilayout": "terminal"
   },
   "backend": {
-    "imageid": "minikube-running"
+    "imageid": "ubuntu:2004"
   }
 }
