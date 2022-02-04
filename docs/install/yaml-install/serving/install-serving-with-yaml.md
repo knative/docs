@@ -85,6 +85,7 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
+
 === "Contour"
 
     The following commands install Contour and enable its Knative integration.
