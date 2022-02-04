@@ -1,28 +1,15 @@
-# Getting Started with Knative
-## Before you begin
-!!! warning
-    Knative Quickstart Environments are for experimentation use only. For production installation, see our [Installing Guide](../install/README.md)
+# Welcome to the Knative Quickstart tutorial
 
-Before you can get started with a Knative Quickstart deployment you must install kind, the Kubernetes CLI, and the Knative CLI.
+This tutorial lets you try out some of the commonly used features in Knative.
 
-### Prepare local Kubernetes cluster
+In the first lesson you will install Knative locally using the Knative `quickstart` plugin.
+To follow the tutorial you must use the `quickstart` plugin to install Knative.
+The plugin provides a Knative deployment for development use, which has
+been configured with the components you need for this tutorial.
 
-You can use [`kind`](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker) or [`minikube`](https://minikube.sigs.k8s.io/docs/start/){target=_blank} to run a local Kubernetes cluster with Docker container nodes.
+Then, on your new cluster, you will carry out common tasks for **Knative Serving** and **Knative Eventing**.
 
-### Install the Kubernetes CLI
+We recommend that you complete the topics in this tutorial in order.
 
-The [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank}, allows you to run commands against Kubernetes clusters. You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
-
-### Install the Knative CLI
-
-The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources, such as Knative Services and Event Sources, without the need to create or modify YAML files directly.
-
-`kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
-
---8<-- "install-kn.md"
-
-## Install the Knative "Quickstart" environment
-
-You can get started with a local deployment of Knative by using the Knative `quickstart` plugin.
-
---8<-- "quickstart-install.md"
+!!! tip
+    Hit ++"."++ (period) on your keyboard to move forward in the tutorial. Use ++","++ (comma) to go back at any time.

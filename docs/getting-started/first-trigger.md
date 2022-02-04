@@ -1,4 +1,4 @@
-## Creating your first Trigger
+# Creating your first Trigger
 === "kn"
 
     ```bash
