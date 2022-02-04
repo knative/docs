@@ -77,7 +77,7 @@ Create the CloudEvents Player Service:
 ![CloudEvents Player Send](images/event_sent.png)
 
 ??? tip "Clicking the :fontawesome-solid-envelope: shows you the CloudEvent as the Broker sees it."
-    ![Event_Details](images/event_details.
+    ![Event Details](images/event_details.png){:width="500px"}
 
 ??? question "Want to send events via the command line instead?"
     As an alternative to the Web form, events can also be sent/viewed via the command line.

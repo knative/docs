@@ -1,6 +1,4 @@
 # Deploying your first Knative Service
-!!! tip
-    Hit ++"."++ on your keyboard to move forward in the tutorial. Use ++","++ to go back at any time.
 
 **In this tutorial, you will deploy a "Hello world" service.**
 

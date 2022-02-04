@@ -1,7 +1,8 @@
 # Installing Knative
 
 !!! tip
-    You can install a local distribution of Knative for development use by following the [Getting started guide](../getting-started/README.md){_blank}.
+    You can install a local distribution of Knative for development purposes
+    using the [Knative `quickstart` plugin](../getting-started/quickstart-install.md).
 
 You can install the Serving component, Eventing component, or both on your cluster by using one of the following deployment options:
 

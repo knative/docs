@@ -5,7 +5,8 @@ Before installing Knative, you must meet the following prerequisites:
 - **For prototyping purposes**, Knative works on most local deployments of Kubernetes. For example, you can use a local, one-node cluster that has 2&nbsp;CPUs and 4&nbsp;GB of memory.
 
     !!! tip
-        You can install a local distribution of Knative for development use by following the [Getting started guide](/docs/getting-started/){_blank}.
+        You can install a local distribution of Knative for development purposes
+        using the [Knative Quickstart plugin](/docs/getting-started/quickstart-install.md)
 
 - **For production purposes**, it is recommended that:
 
