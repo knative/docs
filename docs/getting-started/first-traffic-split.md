@@ -1,5 +1,5 @@
 # Basics of Traffic Splitting
-The last super power :rocket: of Knative Serving we'll go over in this tutorial is traffic splitting.
+The last super power :rocket: of Knative Serving we'll go over in this tutorial is **traffic splitting**.
 
 ??? question "What are some common traffic splitting use-cases?"
     Splitting traffic is useful for a number of very common modern infrastructure needs, such as
