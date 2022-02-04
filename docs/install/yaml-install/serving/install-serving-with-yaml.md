@@ -85,57 +85,6 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
-
-=== "Ambassador"
-
-    The following commands install Ambassador and enable its Knative integration.
-
-    1. Create a namespace in which to install Ambassador by running the command:
-
-        ```bash
-        kubectl create namespace ambassador
-        ```
-
-    1. Install Ambassador by running the command:
-
-        ```bash
-        kubectl apply --namespace ambassador \
-          -f https://getambassador.io/yaml/ambassador/ambassador-crds.yaml \
-          -f https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml \
-          -f https://getambassador.io/yaml/ambassador/ambassador-service.yaml
-        ```
-
-    1. Give Ambassador the required permissions by running the command:
-
-        ```bash
-        kubectl patch clusterrolebinding ambassador -p '{"subjects":[{"kind": "ServiceAccount", "name": "ambassador", "namespace": "ambassador"}]}'
-        ```
-
-    1. Enable Knative support in Ambassador by running the command:
-
-        ```bash
-        kubectl set env --namespace ambassador  deployments/ambassador AMBASSADOR_KNATIVE_SUPPORT=true
-        ```
-
-    1. Configure Knative Serving to use Ambassador by default by running the command:
-
-        ```bash
-        kubectl patch configmap/config-network \
-          --namespace knative-serving \
-          --type merge \
-          --patch '{"data":{"ingress-class":"ambassador.ingress.networking.knative.dev"}}'
-        ```
-
-    1. Fetch the External IP address or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace ambassador get service ambassador
-        ```
-
-        !!! tip
-            Save this to use in the following [Configure DNS](#configure-dns) section.
-
-
 === "Contour"
 
     The following commands install Contour and enable its Knative integration.
