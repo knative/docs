@@ -10,6 +10,8 @@ mv kn /usr/local/bin/
 echo "Done"
 
 echo "Waiting for Kubernetes to start. This may take a few moments, please wait..."
+useradd -u 1024 -g docker -m docker
+sudo -H -u docker bash -c 'minikube start'
 minikube start
 while [ `minikube status &>/dev/null; echo $?` -ne 0 ]; do sleep 1; done
 echo "Kubernetes Started"
