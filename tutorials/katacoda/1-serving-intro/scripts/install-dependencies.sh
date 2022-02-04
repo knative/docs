@@ -12,7 +12,7 @@ mv ./kind /usr/local/bin/kind
 echo "Kubernetes Started"
 
 echo "Installing kn cli..."
-wget https://github.com/knative/client/releases/download/knative-v1.1.0/kn-linux-amd64 -O kn
+wget https://github.com/knative/client/releases/download/knative-v1.2.0/kn-linux-amd64 -O kn
 chmod +x kn
 mv kn /usr/local/bin/
 echo "Done"
@@ -24,7 +24,7 @@ echo "Done"
 #echo "Kubernetes Started"
 
 echo "Installing quickstart ..."
-wget https://github.com/knative-sandbox/kn-plugin-quickstart/releases/download/knative-v1.1.0/kn-quickstart-linux-amd64 -O kn-quickstart
+wget https://github.com/knative-sandbox/kn-plugin-quickstart/releases/download/knative-v1.2.0/kn-quickstart-linux-amd64 -O kn-quickstart
 chmod +x kn-quickstart
 mv kn-quickstart /usr/local/bin/
 echo "Done"
