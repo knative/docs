@@ -1,5 +1,5 @@
 {
-  "title": "Getting Started with Knative Serving (kn cli) v1",
+  "title": "Getting Started with Knative Serving (kn cli) v8-kind",
   "description": "Introduction to Knative by installing knative serving and deploying an application (If you want to script your workflow, or really don't like yaml)",
   "difficulty": "Beginner",
   "time": "20",

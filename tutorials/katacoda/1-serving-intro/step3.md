@@ -1,47 +1,64 @@
-## Blue/Green deploy
-The Knative `service` resource creates additional resources "route, configuration and revision" to manage the lifecycle of the application.
-- revision: just like a git revision, any change to the Service's `spec.template` results in a new revision
-- route: control traffic to several revisions
+## Scaling to Zero
 
-You can list those resources by running `kubectl get ksvc,configuration,route,revision` or by using the `kn` cli
+**Remember those super powers 🚀 we talked about?** One of Knative Serving's powers is built-in automatic scaling (autoscaling). 
+This means your Knative Service only spins up your application to perform its job -- in this case, saying "Hello world!" 
+-- if it is needed; otherwise, it will "scale to zero" by spinning down and waiting for a new request to come in.
 
-We will now update the service to change the `TARGET` env variable to `green`.
+> **What about scaling up to meet increased demand?**
+> Knative Autoscaling also allows you to easily configure your service to scale up (horizontal autoscaling) to meet 
+> increased demand as well as control the number of instances that spin up using 
+> [concurrency limits and other options](https://knative.dev/docs/serving/autoscaling/concurrency/), 
+> but that's beyond the scope of this tutorial.
 
-But, before we do that, let us update the revision name to "hello-v1", so that we can direct traffic to it.
+
+**Let's see this in action!** We're going to peek under the hood at the [Pod](https://kubernetes.io/docs/concepts/workloads/pods/)
+in Kubernetes where our Knative Service is 
+running to watch our "Hello world!" Service scale up and down.
+
+### Run your Knative Service
+Let's run our "Hello world!" Service just one more time. Use your terminal with curl.
+`curl http://hello.default.127.0.0.1.sslip.io`{{execute}}
+
+You can watch the pods and see how they scale to zero after traffic stops going to the URL
+`kubectl get pod -l serving.knative.dev/service=hello -w`{{execute}}
+
+> **Warning**
+> It may take up to 2 minutes for your Pods to scale down. Pinging your service again will reset this timer.
+
+**Expected output:**
+```sh
+NAME                                     READY   STATUS
+hello-world                              2/2     Running
+hello-world                              2/2     Terminating
+hello-world                              1/2     Terminating
+hello-world                              0/2     Terminating
 ```
-kn service update demo --revision-name="demo-v1"```{{execute T1}}
 
-Now, let's update the env variable to `green`, but let's do it as a dark launch i.e. zero traffic will go to this new revision:
-```
-kn service update demo --env TARGET=green --revision-name="demo-v2" --traffic demo-v1=100,demo-v2=0
-```{{execute T1}}
+Exit the watch command with
+`^C`{{execute ctrl-seq}}
 
-This will result in a new `revision` being created. Verify this by running `kn revision list`{{execute T1}}.
+### Scale up your Knative Service
+Rerun the Knative Service in your terminal and you will see a new pod running again.
+`curl http://hello.default.127.0.0.1.sslip.io`{{execute}}
 
-All these revisions are capable of serving requests. Let's tag the `green` revision, so as to get a custom hostname to be able to access the revision.
-```
-kn service update demo --tag demo-v2=v2
-```{{execute T1}}
+You can watch the pods and see how they scale up again
+`kubectl get pod -l serving.knative.dev/service=hello -w`{{execute}}
 
-You can now test the `green` revision like so: (This hostname can  be listed with `kn route describe demo` command).
+**Expected output:**
+```sh
+NAME                                     READY   STATUS
+hello-world                              0/2     Pending
+hello-world                              0/2     ContainerCreating
+hello-world                              1/2     Running
+hello-world                              2/2     Running
 ```
-curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: v2-demo.default.example.com'
-```{{execute T1}}
 
-We now need to split our traffic between the two revisions.
-```
-kn service update demo --traffic demo-v1=50,@latest=50
-```{{execute T1}}
-Then proceed by issuing the curl command multiple times to see that the traffic is split between the two revisions.
-```
-curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
-```{{execute T1}}
+Exit the watch command with
+`^C`{{execute ctrl-seq}}
 
-We can now make all traffic go to the `green` revision:
-```
-kn service update demo --traffic @latest=100
-```{{execute T1}}
-Then proceed by issuing the curl command multiple times to see that all traffic is routed to `green` revision.
-```
-curl http://$MINIKUBE_IP:$INGRESS_PORT/ -H 'Host: demo.default.example.com'
-```{{execute T1}}
+Some people call this **Serverless** 🎉 🌮 🔥 Up next, traffic splitting!
+
+> **Want to go deeper on Autoscaling?**
+> Interested in getting in the weeds with Knative Autoscaling? Check out the 
+> [autoscaling documentation](https://knative.dev/docs/serving/autoscaling/) for concepts, 
+> samples, and more!
