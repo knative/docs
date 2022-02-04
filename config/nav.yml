@@ -27,18 +27,15 @@ nav:
 ###############################################################################
     - Installing:
       - About installing Knative: install/README.md
-      # Serving Installation
-      - Install Knative Serving:
-        - Install Serving with YAML: install/serving/install-serving-with-yaml.md
-        - Knative Serving installation files: install/serving/serving-installation-files.md
-        # Istio Installation
-        - Installing Istio for Knative: install/serving/installing-istio.md
-        # Cert-manager Installation
-        - Installing cert-manager: install/serving/installing-cert-manager.md
-      # Eventing Installation
-      - Install Knative Eventing:
-        - Install Eventing with YAML: install/eventing/install-eventing-with-yaml.md
-        - Knative Eventing installation files: install/eventing/eventing-installation-files.md
+      #YAML Installation
+      - Install Knative with YAML:
+        - About YAML-based installation: install/yaml-install/README.md
+        - Install Knative Serving:
+          - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
+          - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
+        - Install Knative Eventing:
+          - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
+          - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
       # Operator Installation
       - Install with Knative Operator:
         - Installing using the Operator: install/operator/knative-with-operators.md
@@ -51,6 +48,12 @@ nav:
         - Installing kn: install/client/install-kn.md
         - Customizing kn: install/client/configure-kn.md
         - kn plugins: install/client/kn-plugins.md
+      # Advanced options for Serving
+      - Install advanced options:
+        # Istio Installation
+        - Install Istio for Knative: install/installing-istio.md
+        # Cert-manager Installation
+        - Install cert-manager: install/installing-cert-manager.md
       # Vendor docs
       - Using a Knative-based offering: install/knative-offerings.md
       # Upgrading Knative
