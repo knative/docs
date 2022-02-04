@@ -12,8 +12,6 @@ The following must be installed on your Knative cluster:
 - [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md).
 - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
 
-    !!! note
-        Currently, [Ambassador](https://github.com/datawire/ambassador) is unsupported for use with Auto TLS.
 
 - [`cert-manager` version `1.0.0` or higher](../install/installing-cert-manager.md).
 - Your Knative cluster must be configured to use a [custom domain](using-a-custom-domain.md).
