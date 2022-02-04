@@ -8,7 +8,7 @@ If you have configured additional security features, such as Istio's authorizati
 You must meet the following prerequisites to use Istio AuthorizationPolicy:
 
 - Istio must be used for your Knative Ingress.
-See [Install a networking layer](../install/serving/install-serving-with-yaml.md#install-a-networking-layer).
+See [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 - Istio sidecar injection must be enabled.
 See the [Istio Documentation](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/).
 
