@@ -16,8 +16,8 @@ You need:
 
 ## Supported Istio versions
 
-The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.9.5**.
-Versions in the 1.9 line are generally fine too.
+The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.12**.
+Versions in the 1.12 line are generally fine too.
 
 ## Installing Istio
 
@@ -214,7 +214,8 @@ See the [Uninstall Istio](https://istio.io/docs/setup/install/istioctl/#uninstal
 
 ## What's next
 
-- Try the [Getting Started guide](../getting-started/README.md) for Knative Serving.
+- View the [Knative Serving documentation](../../serving/README.md).
+- Try some Knative Serving [code samples](../../samples/README.md).
 
 [1]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
