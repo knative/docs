@@ -20,8 +20,8 @@ nav:
           - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
           - Introducing the CloudEvents Player: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
-          - Clean Up: getting-started/clean-up.md
         - What's Next?: getting-started/next-steps.md
+        - Clean Up: getting-started/clean-up.md
 ###############################################################################
     # Installing
 ###############################################################################
