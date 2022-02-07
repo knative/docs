@@ -78,8 +78,6 @@ Beta stage
 GA stage
 : The feature is allowed by default.
 
-# Available Flags
-
 ## Multiple containers
 
 * **Type**: Feature
@@ -129,12 +127,12 @@ spec:
           emptyDir: {}
 ```
 
-## Kubernetes PersistentVolumeClaim
+## Kubernetes PersistentVolumeClaim (PVC)
 
 * **Type**: Extension
 * **ConfigMap keys:** `kubernetes.podspec-persistent-volume-claim` <br/> `kubernetes.podspec-persistent-volume-write`
 
-This extension controls whether [`PersistentVolumeClaim`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) can be specified
+This extension controls whether [`PersistentVolumeClaim (PVC)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) can be specified
 and whether write access is allowed for the corresponding volume.
 
 ```yaml
