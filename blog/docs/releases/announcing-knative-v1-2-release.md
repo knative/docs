@@ -30,6 +30,7 @@ Follow the instructions in the documentation
 ### Highlights
 
 - Minimum Kubernetes version is now v1.21.
+- Serving added experimental support for PVC.
 - Eventing ConfigMap element names are standardized to kebab case.
 Use `data-max-size` and `channel-template-spec` instead of the previous camel case
 elements, which have been deprecated.
@@ -48,9 +49,16 @@ For more information, see [Eventing v1.2](#eventing-v12).
 
 #### 💫 New Features & Changes
 
-- Changes liveness probes to directly probe the user container rather than queue proxy. ([#12479](https://github.com/knative/serving/pull/12479))
 - Improves the error message when a DomainMapping cannot be reconciled because `autocreate-cluster-domain-claims` is false and the CDC does not exist. ([#12439](https://github.com/knative/serving/pull/12439))
 - Utilizes Kubernetes's immediate trigger of readiness probes after startup. Restores default `periodSeconds` for readiness probe to Kubernetes default (10s). ([#12550](https://github.com/knative/serving/pull/12550))
+
+#### 🐞 Bug Fixes
+
+- Changes liveness probes to directly probe the user container rather than queue proxy. ([#12479](https://github.com/knative/serving/pull/12479))
+
+#### 🧪 Experimental
+
+- Adds PVC support behind the feature flags `kubernetes.podspec-persistent-volume-claim` and `kubernetes.podspec-persistent-volume-write`. ([#12458](https://github.com/knative/serving/pull/12458))
 
 
 ### Eventing v1.2
@@ -171,6 +179,7 @@ Release leads: [@dprotaso](https://github.com/dprotaso) and [@psschwei](https://
 - [@odacremolbap](https://github.com/odacremolbap)
 - [@pierDipi](https://github.com/pierDipi)
 - [@psschwei](https://github.com/psschwei)
+- [@skonto](https://github.com/skonto)
 - [@steven0711dong](https://github.com/steven0711dong)
 - [@vyasgun](https://github.com/vyasgun)
 
