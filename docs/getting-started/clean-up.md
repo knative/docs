@@ -7,7 +7,7 @@ We recommend that you delete the cluster used for this tutorial to free up resou
 on your local machine.
 
 If you want to continue experimenting with Knative after deleting the cluster,
-you can reinstall Knative on a new cluster using the [`quickstart` plugin](quickstart-install.md) again.
+you can reinstall Knative on a new cluster using the [`quickstart` plugin](quickstart-install.md#run-the-knative-quickstart-plugin) again.
 
 ## Delete the Cluster
 
