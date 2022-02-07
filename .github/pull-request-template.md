@@ -17,11 +17,8 @@ When you add a new document to the /docs directory, the navigation menu updates 
 For more information, see the
 [MkDocs documentation](https://www.mkdocs.org/user-guide/writing-your-docs/#configure-pages-and-navigation).
 
-If your changes should also be in the most recent release, add the corresponding "cherrypick-0.X"
-label to the original PR; for example, "cherrypick-0.12".
-Best practice is to open a PR for the cherry-pick yourself after your original PR has been merged
-into the main branch.
-After the cherry-pick PR has merged, remove the cherry-pick label from the original PR.
+If your changes should also be in the most recent release, use [/cherrypick](https://prow.k8s.io/command-help#cherrypick) command; 
+for example, "/cherrypick release-1.2" for Prow to generate a PR for the `release-1.2` branch.
 
 For all resources for contributing to the Knative documentation, see the
 [Knative contributor's guide](help/contributing/README.md).
