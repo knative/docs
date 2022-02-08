@@ -33,7 +33,7 @@ To get started, install the Knative `quickstart` plugin:
         ```bash
         brew install knative-sandbox/kn-plugins/quickstart
         ```
-        
+
     - Upgrade an existing install to the latest version by running the command:
 
         ```bash
