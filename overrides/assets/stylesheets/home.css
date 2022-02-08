@@ -48,15 +48,28 @@
   color: black
 }
 
-.md-tabs {
+.md-header[data-md-state=shadow], .md-tabs {
   background-color: #f3f1f2;
+}
+
+.md-tabs {
   border: none;
   color: black;
   font-weight: bold;
 }
 
-.md-tabs a:nth-last-child(-n+3) {
+.md-tabs__list li:nth-last-child(1),
+.md-tabs__list li:nth-last-child(2),
+.md-tabs__list li:nth-last-child(3) {
+  background-color: #024c93;
   color: white;
+  padding: 0 2em;
+}
+
+.md-tabs__list li:nth-last-child(1) a,
+.md-tabs__list li:nth-last-child(2) a,
+.md-tabs__list li:nth-last-child(3) a {
+  opacity: 1;
 }
 
 .md-header__source {
@@ -74,6 +87,10 @@
 
 .md-search__icon[for=__search] {
   color: black;
+}
+
+.md-source__icon+.md-source__repository {
+  font-weight: bold;
 }
 
 /* containers specific css */
@@ -153,6 +170,7 @@ h2.secondary-headline, h3.trusted-by {
   color: #024c93;
   margin-top: 1em;
   margin-bottom: 0;
+  font-weight: bold;
 }
 
 .trusted-by-container #usedby {
