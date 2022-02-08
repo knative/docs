@@ -3,20 +3,41 @@
 
 <div class="md-container">
   <section class="home-container">
-    <div class="animated-gradient">
-      <img src="images/logo/rgb/knative-logo-rgb.png" style="display: none;"/>
-    </div>
     <div class="md-grid md-typeset">
       <div class="mdx-hero">
-        <div>
-          <h1>Enterprise-grade Serverless on your own terms.</h1>
-          <h2>Kubernetes-based platform to deploy and manage modern serverless workloads.</h2>
+        <div class="headline-section">
+          <h1 class="main-headline">
+            Knative is an open-source enterprise-level<br>
+            solution for leveraging Kubernetes in<br>
+            in serverless applications.
+          </h1>
+          <h2>Serverless workloads in Kubernetes environments.</h2>
           <p style="display: block">
             <a href="{{ 'getting-started/' | url }}" class="md-button md-button--primary">
-              Developer? Get Started Here!
+              Developer? Start Here!
             </a>
-            <a href="{{ 'install/' | url }}" class="md-button"> Cluster Administrator? Get Started Here!</a>
+            <a href="{{ 'install/' | url }}" class="md-button"> Cluster Administrator? Start Here!</a>
           </p>
+          <div class="trusted-by-container">
+            <h3 class="trusted-by">Trusted by</h3>
+            <div id="usedby">
+              <div class="logo">
+                <img src="images/corporate-logos/Google.svg" alt="" draggable="false" />
+              </div>
+              <div class="logo">
+                <img src="images/corporate-logos/vmware.svg" alt="" draggable="false" />
+              </div>
+              <div class="logo">
+                <img src="images/corporate-logos/IBM.svg" alt="" draggable="false" />
+              </div>
+              <div class="logo">
+                <img src="images/corporate-logos/Redhat.svg" alt="" draggable="false" />
+              </div>
+              <div class="logo triggermesh">
+                <img src="images/corporate-logos/triggermesh_logo_hp.png" alt="" draggable="false" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,20 +57,20 @@
           higher level abstractions for common app use-cases.
         </li>
         <li class="task-list-item">
-          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
-          ><b>Pluggable components</b> let you bring your own logging and monitoring, networking, and service mesh.
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Pluggable components</b>
+          let you bring your own logging and monitoring, networking, and service mesh.
         </li>
         <li class="task-list-item">
           <input type="checkbox" checked disabled /><span class="task-list-indicator"></span>Run Knative anywhere
           Kubernetes runs, <b>never worry about vendor lock-in.</b>
         </li>
         <li class="task-list-item">
-          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
-          ><b>Seamless developer experience</b>, supports GitOps, DockerOps, ManualOps, etc..
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Seamless developer
+            experience</b>, supports GitOps, DockerOps, ManualOps, etc..
         </li>
         <li class="task-list-item">
-          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span
-          ><b>Supports many common tools and frameworks</b> such as Django, Ruby on Rails, Spring, and many more.
+          <input type="checkbox" checked disabled /><span class="task-list-indicator"></span><b>Supports many common
+            tools and frameworks</b> such as Django, Ruby on Rails, Spring, and many more.
         </li>
       </ul>
     </div>
@@ -57,12 +78,7 @@
 
   <section class="intro-container">
     <div class="md-grid md-typeset">
-      <img
-        src="images/rocket.svg"
-        class="rocket"
-        alt=""
-        draggable="false"
-      />
+      <img src="images/rocket.svg" class="rocket" alt="" draggable="false" />
       <div>
         <h2>Make your developers more productive</h2>
         <p>
@@ -83,53 +99,26 @@
       <div id="case-studies">
 
         <a href="{{ 'about/case-studies/deepc/' | url }}">
-        <div class="logo">
-          <img src="images/case-studies/deepc.png" alt="" draggable="false" />
-        </div>
+          <div class="logo">
+            <img src="images/case-studies/deepc.png" alt="" draggable="false" />
+          </div>
         </a>
 
         <a href="{{ 'about/case-studies/outfit7/' | url }}">
-        <div class="logo">
-          <img src="images/case-studies/outfit7.png" alt="" draggable="false" />
-        </div>
+          <div class="logo">
+            <img src="images/case-studies/outfit7.png" alt="" draggable="false" />
+          </div>
         </a>
 
         <a href="{{ 'about/case-studies/puppet/' | url }}">
-        <div class="logo">
-          <img src="images/case-studies/puppet.png" alt="" draggable="false" />
-        </div>
+          <div class="logo">
+            <img src="images/case-studies/puppet.png" alt="" draggable="false" />
+          </div>
         </a>
 
       </div>
     </div>
   </section>
-
-  <section class="usedby-container">
-    <div class="md-grid md-typeset" style="width: 100%">
-      <div id="usedby-title">
-        <h3>Trusted by:</h3>
-      </div>
-      <div id="usedby">
-        <div class="logo">
-          <img src="images/corporate-logos/Google.svg" alt="" draggable="false" />
-        </div>
-        <div class="logo">
-          <img src="images/corporate-logos/vmware.svg" alt="" draggable="false" />
-        </div>
-        <div class="logo">
-          <img src="images/corporate-logos/IBM.svg" alt="" draggable="false" />
-        </div>
-        <div class="logo">
-          <img src="images/corporate-logos/Redhat.svg" alt="" draggable="false" />
-        </div>
-        <div class="logo">
-          <img src="images/corporate-logos/Triggermesh.svg" alt="" draggable="false" />
-        </div>
-      </div>
-      <div id="usedby-more">..and more!</div>
-    </div>
-  </section>
-
   <section class="components-container">
     <div class="md-grid md-typeset">
       <div>
@@ -193,22 +182,22 @@
 {% endblock %}
 
 {% block scripts %}
-  {{ super() }}
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const logos = document.getElementById("usedby").getElementsByTagName("div");
-        for (let i = 0; i < logos.length - 1; i++) {
-            // Technically there's a chance two elements end up with the same
-            // random order in which case the result won't be truly random (it'll be based
-            // on the original document order). This really doesn't matter.
-            logos[i].style.order = Math.floor(Math.random() * 99);
-        }
-        logos[logos.length - 1].style.order = 100;
-    })
-  </script>
+{{ super() }}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const logos = document.getElementById("usedby").getElementsByTagName("div");
+    for (let i = 0; i < logos.length - 1; i++) {
+      // Technically there's a chance two elements end up with the same
+      // random order in which case the result won't be truly random (it'll be based
+      // on the original document order). This really doesn't matter.
+      logos[i].style.order = Math.floor(Math.random() * 99);
+    }
+    logos[logos.length - 1].style.order = 100;
+  })
+</script>
 {% endblock %}
 
 <!-- Application footer -->
 {% block footer %}
-  {% include "partials/footer.html" %}
+{% include "partials/footer.html" %}
 {% endblock %}

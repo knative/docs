@@ -34,28 +34,8 @@
   100% {background-position: 0% 50%;}
 }
 
-.animated-gradient {
-  animation-name: continuousgradient;
-  background: linear-gradient(-45deg, #1d6ba6, #000);
-  animation-duration: 12s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  background-repeat: no-repeat;
-  background-size: 300% 100%;
-  opacity: 0.4;
-  z-index: -1;
-  padding: 20px;
-}
-
-.animated-gradient img {
-  display: block !important;
+.headline-section {
+  text-align: center;
 }
 
 .md-typeset img,
@@ -63,16 +43,11 @@
   max-width: initial;
 }
 
-/* Fixes logo aspect ratio in Safari */
-section.home-container img {
-  object-fit: contain;
-  object-position: right;
-}
-
+/* Home headline section css */
 section.home-container {
   min-height: 435px;
   justify-content: center;
-  color: #fff;
+  background-color: white;
   position: relative;
   display: flex;
   align-items: center;
@@ -93,7 +68,6 @@ body {
 }
 
 .whats-next-container,
-.usedby-container,
 .home-container,
 .features-container,
 .intro-container,
@@ -105,23 +79,68 @@ body {
   padding-bottom: 5em;
 }
 
+.home-container .md-button, .home-container .md-button--primary {
+  color: white;
+  width: 28%;
+  font-size: large;
+  padding: 0.525em 1em;
+  min-width: fit-content;
+}
+
 .home-container .md-button {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
-  color: var(--md-primary-bg-color);
+  background-color: #52b3dd;
+  border-color: #52b3dd;
 }
 
 .home-container .md-button--primary {
-  background-color: var(--md-primary-bg-color);
-  color: hsla(280deg, 37%, 48%, 1);
-  border-color: var(--md-primary-bg-color);
+  margin-top: 0.5rem;
+  background-color: #024c8f;
+  border-color: #024c8f;
+}
+
+h2.secondary-headline, h3.trusted-by {
+  color: black;
+  font-weight: 700;
+}
+
+.secondary-headline {
+  margin-top: 8px;
 }
 
 .home-container h1 {
-  color: #fff;
+  color: #024c8f;
   font-weight: bolder;
+  font-size: 3.2vw;
   margin-top: 1em;
   margin-bottom: 0;
+}
+
+.trusted-by-container #usedby {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.trusted-by-container .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120pt;
+  height: 36pt;
+}
+
+.trusted-by-container .logo img {
+  max-width: 86pt;
+  max-height: 24pt;
+}
+
+.trusted-by-container .logo.triggermesh {
+  width: 162pt;
+}
+
+.trusted-by-container .logo.triggermesh img {
+  width: 121pt;
+  height: auto;
 }
 
 .home-container h2 {
@@ -206,44 +225,6 @@ body {
   max-height: 36pt;
 }
 
-.usedby-container {
-  background: #d6e1f3;
-  color: #000;
-  display: flex;
-  justify-content: center;
-}
-
-.usedby-container #usedby-title {
-  display: flex;
-  justify-content: center;
-}
-
-.usedby-container #usedby {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.usedby-container #usedby-more {
-  font-style: italic;
-  font-size: smaller;
-  color: #aaa;
-  text-align: center;
-}
-
-.usedby-container .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 3em 1em;
-  width: 150pt;
-  height: 36pt;
-}
-
-.usedby-container .logo img {
-  max-width: 150pt;
-  max-height: 36pt;
-}
 
 .features-container {
   color: #000;
@@ -253,7 +234,6 @@ body {
 @media only screen and (max-width: 1440px) {
   .components-container,
   .whats-next-container,
-  .usedby-container,
   .home-container,
   .features-container,
   .intro-container {
