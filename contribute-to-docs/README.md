@@ -39,3 +39,9 @@ If you notice gaps in the style guide or have queries, please post in [the Docs 
 - [Word and phrase list](style-guide/word-and-phrase-list.md)
 - [Content re-use](style-guide/content-reuse.md)
 - Using shortcodes (TBD)
+
+## Maintainer guides
+
+How-to guides for maintainers of the Knative docs repo and website:
+
+- [Releasing a new version of the Knative documentation](docs-release-process.md)
