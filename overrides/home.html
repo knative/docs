@@ -67,71 +67,102 @@
     </div>
   </section>
 
-  <section class="intro-container">
+  <section class="knative-components-container">
     <div class="md-grid md-typeset">
-      <img src="images/rocket.svg" class="rocket" alt="" draggable="false" />
-      <div>
-        <h2>Make your developers more productive</h2>
-        <p>
-          Knative components build on top of Kubernetes,
-          <b>abstracting away the complex details and enabling developers to focus on what matters</b>. Built by
-          codifying the best practices shared by successful real-world implementations, Knative solves the "boring but
-          difficult" parts of deploying and managing cloud native services so you don't have to.
+      <h1>Knative Components</h1>
+      <p class="normal-text">
+        Knative has two main components that empower teams working with Kubernetes. Serving and<br>
+        Eventing work together to automate and manage tasks and applications.
+      </p>
+      <img src="images/home-images/knative_componets_image.png" alt="" draggable="false" />
+      <div class="text-table">
+        <p class="normal-text">
+          Run serverless containers in Kubernetes with ease. Knative takes care of the details of networking,
+          autoscaling (even to zero), and revision tracking. Teams can focus on core logic using any programming
+          language.
+        </p>
+        <p class="normal-text">
+          Universal subscription, delivery and management of events. Build modern apps by attaching compute to a data
+          stream with declarative event connectivity and developer friendly object models.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="case-studies-container">
-    <div class="md-grid md-typeset" style="width: 100%">
-      <div id="case-studies-title">
-        <h3>Case Studies:</h3>
-      </div>
-      <div id="case-studies">
-
-        <a href="{{ 'about/case-studies/deepc/' | url }}">
-          <div class="logo">
-            <img src="images/case-studies/deepc.png" alt="" draggable="false" />
-          </div>
-        </a>
-
-        <a href="{{ 'about/case-studies/outfit7/' | url }}">
-          <div class="logo">
-            <img src="images/case-studies/outfit7.png" alt="" draggable="false" />
-          </div>
-        </a>
-
-        <a href="{{ 'about/case-studies/puppet/' | url }}">
-          <div class="logo">
-            <img src="images/case-studies/puppet.png" alt="" draggable="false" />
-          </div>
-        </a>
-
-      </div>
+  <section class="trying-it-all-container">
+    <div class="md-grid md-typeset">
+      <h1>Trying it all together</h1>
+      <p class="normal-text">
+        From container to URL<br>
+        with less YAML config
+      </p>
+      <p class="normal-text">
+        Scale down to zero<br>
+        based on traffic patterns
+      </p>
+      <p class="normal-text">
+        Control traffic shifting<br>
+        for smoother rollouts
+      </p>
     </div>
   </section>
-  <section class="components-container">
-    <div class="md-grid md-typeset">
-      <div>
-        <h2>Knative Components</h2>
-      </div>
-      <div style="display: flex; gap: 4em;" class="component-flex">
-        <div>
-          <div>
-            <h4><a style="color: white" href="{{ 'serving' | url }}">Serving ›</a></h4>
-          </div>
-          <p>
-            Run serverless containers on Kubernetes with ease, Knative takes care of the details of networking,
-            autoscaling (even to zero), and revision tracking. You just have to focus on your core logic.
+
+  <section class="case-studies-container">
+    <div class="md-grid md-typeset" style="width: 100%">
+      <h1>Case Studies:</h1>
+      <div id="case-studies">
+        <div class="col">
+          <a href="{{ 'about/case-studies/deepc/' | url }}">
+            <div class="logo">
+              <img src="images/case-studies/deepc.png" alt="" draggable="false" />
+            </div>
+          </a>
+          <p class="normal-text">
+            "It should be possible for<br>
+            somebody with an algorithm<br>
+            to have it on the platform in an hour"
+
+            -- Andrew Webber,
+            Senior Software Engineer for deepc
           </p>
         </div>
-        <div>
-          <div>
-            <h4><a style="color: white" href="{{ 'eventing' | url }}">Eventing ›</a></h4>
-          </div>
-          <p>
-            Universal subscription, delivery, and management of events. Build modern apps by attaching compute to a data
-            stream with declarative event connectivity and developer-friendly object model.
+        <div class="col">
+          <a href="{{ 'about/case-studies/outfit7/' | url }}">
+            <div class="logo">
+              <img src="images/case-studies/outfit7.png" alt="" draggable="false" />
+            </div>
+          </a>
+          <p class="normal-text">
+            "The community support is<br>
+            really great. The hands-on<br>
+            experience with Knative was<br>
+            so impressive. On the Slack<br>
+            channel, we got actual<br>
+            engineers to answer our questions"
+
+            --Tilen Kavcic,
+            Software Engineer for Outfit7
+          </p>
+        </div>
+        <div class="col">
+          <a href="{{ 'about/case-studies/puppet/' | url }}">
+            <div class="logo">
+              <img src="images/case-studies/puppet.png" alt="" draggable="false" />
+            </div>
+          </a>
+          <p class="normal-text">
+            "I'm a strong believer in<br>
+            working with open-source<br>
+            vendors. We've made<br>
+            contributions to numerous<br>
+            projects, including Tekton,<br>
+            Knative, Ambassador, and<br>
+            gVisor --All of which we depend<br>
+            on to make our product<br>
+            functional."
+
+            --Noah Fontes,
+            Senior Principal Software Engineer for Puppet
           </p>
         </div>
       </div>
