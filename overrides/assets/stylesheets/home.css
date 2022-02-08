@@ -39,7 +39,9 @@
   text-align: center;
 }
 
-.why-serverless-container, .need-to-know-more-container{
+.why-serverless-container, .need-to-know-more-container,
+.knative-components-container, .trying-it-all-container,
+.whats-next-container {
   text-align: center;
   padding: 2em;
 }
@@ -109,13 +111,12 @@ h2.secondary-headline, h3.trusted-by {
   font-weight: 700;
 }
 
-.secondary-headline {
-  margin-top: 8px;
+h1 {
+  font-weight: bold;
 }
 
 .home-container h1 {
   color: #024c8f;
-  font-weight: bolder;
   font-size: 3.2vw;
   margin-top: 1em;
   margin-bottom: 0;
@@ -150,16 +151,18 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .home-container h2 {
-  margin: 0;
+  margin-top: 10px;
+  color: black;
+  font-weight: bold;
 }
 
 /* need to know more section css */
-.need-to-know-more-container {
+.need-to-know-more-container, .knative-components-container,
+.whats-next-container {
   background-color: #024c93;
 }
 
-.need-to-know-more-container h1 {
-  font-weight: bold;
+.need-to-know-more-container h1, .whats-next-container h1 {
   color: white;
 }
 
@@ -171,10 +174,37 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 /* why serverless container css */
-.why-serverless-container {
+.why-serverless-container, .trying-it-all-container {
   background-color: #f3f1f2;
+  color: var(--md-default-fg-color--light);
 }
 
+.why-serverless-container h1, .trying-it-all-container h1,
+.case-studies-container h1 {
+ color: #044a91;
+}
+
+.why-serverless-container .normal-text,
+.trying-it-all-container .normal-text {
+  font-weight: 600;
+}
+
+/* knative components container css */
+.knative-components-container h1 {
+  color: #7dc47e;
+}
+
+/* trying it all container css */
+.trying-it-all-container {
+
+}
+
+/* case studies container css */
+.case-studies-container {
+
+}
+
+/* whats next container css */
 .whats-next-container {
   color: #fff;
   background: #1b2f52;
@@ -253,7 +283,6 @@ h2.secondary-headline, h3.trusted-by {
   max-width: 150pt;
   max-height: 36pt;
 }
-
 
 .features-container {
   color: #000;
