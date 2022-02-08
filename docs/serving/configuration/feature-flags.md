@@ -78,7 +78,9 @@ Beta stage
 GA stage
 : The feature is allowed by default.
 
-## Multiple containers
+## Available Flags
+
+### Multiple containers
 
 * **Type**: Feature
 * **ConfigMap key:** `multi-container`
@@ -103,7 +105,7 @@ spec:
           image: gcr.io/knative-samples/helloworld-java
 ```
 
-## Kubernetes EmptyDir Volume
+### Kubernetes EmptyDir Volume
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-volumes-emptydir`
@@ -127,7 +129,7 @@ spec:
           emptyDir: {}
 ```
 
-## Kubernetes PersistentVolumeClaim (PVC)
+### Kubernetes PersistentVolumeClaim (PVC)
 
 * **Type**: Extension
 * **ConfigMap keys:** `kubernetes.podspec-persistent-volume-claim` <br/> `kubernetes.podspec-persistent-volume-write`
@@ -155,7 +157,7 @@ spec:
            readOnly: true
 ```
 
-## Kubernetes node affinity
+### Kubernetes node affinity
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-affinity`
@@ -181,7 +183,7 @@ spec:
                 - e2e-az2
 ```
 
-## Kubernetes host aliases
+### Kubernetes host aliases
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-hostaliases`
@@ -202,7 +204,7 @@ spec:
         - "bar.local"
 ```
 
-## Kubernetes node selector
+### Kubernetes node selector
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-nodeselector`
@@ -220,7 +222,7 @@ spec:
         labelName: labelValue
 ```
 
-## Kubernetes toleration
+### Kubernetes toleration
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-tolerations`
@@ -240,7 +242,7 @@ spec:
         effect: "NoSchedule"
 ```
 
-## Kubernetes Downward API
+### Kubernetes Downward API
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-fieldref`
@@ -264,7 +266,7 @@ spec:
                   fieldPath: spec.nodeName
 ```
 
-## Kubernetes priority class name
+### Kubernetes priority class name
 
 - **Type**: extension
 - **ConfigMap key:** `kubernetes.podspec-priorityclassname`
@@ -282,7 +284,7 @@ spec:
 ...
 ```
 
-## Kubernetes dry run
+### Kubernetes dry run
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-dryrun`
@@ -303,7 +305,7 @@ metadata:
 ...
 ```
 
-## Kubernetes runtime class
+### Kubernetes runtime class
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-runtimeclass`
@@ -321,7 +323,7 @@ spec:
 ...
 ```
 
-## Kubernetes security context
+### Kubernetes security context
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-securitycontext`
@@ -357,7 +359,7 @@ spec:
 ...
 ```
 
-## Kubernetes security context capabilities
+### Kubernetes security context capabilities
 
 * **Type**: Extension
 * **ConfigMap key**: `kubernetes.containerspec-addcapabilities`
@@ -385,14 +387,14 @@ spec:
              - NET_BIND_SERVICE
 ```
 
-## Tag header based routing
+### Tag header based routing
 
 * **Type**: Extension
 * **ConfigMap key:** `tag-header-based-routing`
 
 This flags controls whether [tag header based routing](https://github.com/knative/docs/tree/main/code-samples/serving/tag-header-based-routing) is enabled.
 
-## Kubernetes init containers
+### Kubernetes init containers
 
 * **Type**: Extension
 * **ConfigMap key:** `kubernetes.podspec-init-containers`
