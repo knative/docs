@@ -34,6 +34,39 @@
   100% {background-position: 0% 50%;}
 }
 
+/* header css */
+.md-header {
+  color: black
+}
+
+.md-tabs {
+  background-color: #f3f1f2;
+  border: none;
+  color: black;
+  font-weight: bold;
+}
+
+.md-tabs a:nth-last-child(-n+3) {
+  color: white;
+}
+
+.md-header__source {
+  color: #034b95;
+}
+
+.md-search__input {
+  background-color: white;
+  border: black 1px solid;
+}
+
+.md-search__input.focus-visible {
+  border: none;
+}
+
+.md-search__icon[for=__search] {
+  color: black;
+}
+
 /* containers specific css */
 .headline-section  {
   text-align: center;
