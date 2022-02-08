@@ -6,11 +6,11 @@ https://github.com/knative/release.
 
 To release a new version of the docs you must:
 
-1. [Check dependancies](#check-dependancies)
+1. [Check dependencies](#check-dependencies)
 1. [Create a release branch](#create-a-release-branch)
 1. [Generate the new docs version](#generate-the-new-docs-version)
 
-## Check dependancies
+## Check dependencies
 
 You cannot release a new version of the docs until the Knative components have
 built their new release.
