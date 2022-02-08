@@ -29,7 +29,8 @@ markdown_extensions:
   - attr_list
   - meta
   - pymdownx.superfences
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.details
   - pymdownx.snippets:
       base_path: docs/snippets
