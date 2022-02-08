@@ -1,6 +1,6 @@
 # Knative Kafka Broker
 
-The Knative Kafka Broker is a Apache Kafka native implementation of the Knative Broker API, that reduces
+The Knative Kafka Broker is an Apache Kafka native implementation of the Knative Broker API that reduces
 network hops, supports any Kafka version, and has a better integration with Kafka for the Broker and Trigger model.
 
 Notable features are:
