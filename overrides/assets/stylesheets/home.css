@@ -34,8 +34,14 @@
   100% {background-position: 0% 50%;}
 }
 
-.headline-section {
+/* containers specific css */
+.headline-section  {
   text-align: center;
+}
+
+.why-serverless-container, .need-to-know-more-container{
+  text-align: center;
+  padding: 2em;
 }
 
 .md-typeset img,
@@ -43,7 +49,7 @@
   max-width: initial;
 }
 
-/* Home headline section css */
+/* home headline section css */
 section.home-container {
   min-height: 435px;
   justify-content: center;
@@ -51,7 +57,7 @@ section.home-container {
   position: relative;
   display: flex;
   align-items: center;
-  padding-bottom: 0;
+  padding-bottom: 2em;
   padding-top: 0;
 }
 
@@ -87,7 +93,7 @@ body {
   min-width: fit-content;
 }
 
-.home-container .md-button {
+.home-container .md-button, .need-to-know-more-container .md-button {
   background-color: #52b3dd;
   border-color: #52b3dd;
 }
@@ -147,9 +153,32 @@ h2.secondary-headline, h3.trusted-by {
   margin: 0;
 }
 
+/* need to know more section css */
+.need-to-know-more-container {
+  background-color: #024c93;
+}
+
+.need-to-know-more-container h1 {
+  font-weight: bold;
+  color: white;
+}
+
+.need-to-know-more-container .md-button {
+  font-size: x-large;
+  margin-top: 1em;
+  padding: 4px 3em;
+  color: white;
+}
+
+/* why serverless container css */
+.why-serverless-container {
+  background-color: #f3f1f2;
+}
+
 .whats-next-container {
   color: #fff;
   background: #1b2f52;
+  justify-content: center;
 }
 
 .whats-next-container .component-flex {
