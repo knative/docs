@@ -3,7 +3,6 @@ The Knative CLI (`kn`) provides a quick and easy interface for creating Knative 
 The `kn` CLI also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 === "Using Homebrew"
-    For macOS:
 
     - Install `kn` by using [Homebrew](https://brew.sh){target=_blank}:
 
