@@ -6,7 +6,8 @@ the Knative `quickstart` plugin.
 The plugin installs a preconfigured Knative deployment on a local Kubernetes cluster.
 
 !!! warning
-    Knative `quickstart` environments are for experimentation use only. For a production ready installation, see [Installing Knative](../install/README.md).
+    Knative `quickstart` environments are for experimentation use only.
+    For a production ready installation, see [Installing Knative](../install/README.md).
 
 ## Before you begin
 
@@ -25,12 +26,18 @@ Before you can get started with a Knative `quickstart` deployment you must intst
 To get started, install the Knative `quickstart` plugin:
 
 === "Using Homebrew"
-    For macOS, you can install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
 
-    ```bash
-    brew install knative-sandbox/kn-plugins/quickstart
-    ```
+    - Install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
 
+        ```bash
+        brew install knative-sandbox/kn-plugins/quickstart
+        ```
+
+    - Upgrade an existing install to the latest version by running the command:
+
+        ```bash
+        brew upgrade knative-sandbox/kn-plugins/quickstart
+        ```
 === "Using a binary"
     1. Download the executable binary for your system from the [`quickstart` release page](https://github.com/knative-sandbox/kn-plugin-quickstart/releases){target=_blank}.
 
