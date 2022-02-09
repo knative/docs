@@ -12,7 +12,7 @@ The plugin installs a preconfigured Knative deployment on a local Kubernetes clu
 
 ## Before you begin
 
-Before you can get started with a Knative `quickstart` deployment you must intstall:
+Before you can get started with a Knative `quickstart` deployment you must install:
 
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start){target=_blank} (Kubernetes in Docker)
 or [minikube](https://minikube.sigs.k8s.io/docs/start/){target=_blank} to enable
@@ -31,8 +31,6 @@ You can use `kubectl` to deploy applications, inspect and manage cluster resourc
 To get started, install the Knative `quickstart` plugin:
 
 === "Using Homebrew"
-    For macOS:
-
     - Install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
 
         ```bash
