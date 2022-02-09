@@ -65,20 +65,20 @@
 }
 
 /* bit of a hack to stop the banner taking space when empty */
-.md-banner .md-banner__inner {
+.md-announce .md-announce__inner {
   margin: 0 auto;
   padding: 0;
 }
-.md-banner {
+.md-announce {
   background: #fff5b5;
 }
-.md-banner .versionwarning h1 {
+.md-announce .versionwarning h1 {
   font-weight: bold;
 }
-.md-banner .versionwarning p {
+.md-announce .versionwarning p {
   color: black;
 }
-.md-banner a {
+.md-announce a {
   color: blue;
   text-decoration: underline;
 }
