@@ -40,7 +40,8 @@
 }
 
 .md-tabs__list li:nth-last-child(1),
-.md-tabs__list li:nth-last-child(2) {
+.md-tabs__list li:nth-last-child(2),
+.md-tabs__list li:nth-last-child(3){
   background: var(--home-color);
   float: right;
 }
@@ -64,21 +65,20 @@
 }
 
 /* bit of a hack to stop the banner taking space when empty */
-.md-announce .md-announce__inner {
+.md-banner .md-banner__inner {
   margin: 0 auto;
   padding: 0;
 }
-.md-announce {
+.md-banner {
   background: #fff5b5;
-  background: repeating-linear-gradient(-50deg, #ffe8b5, #ffe8b5 80px, #fff5b5 80px, #fff5b5 160px);
 }
-.md-announce .versionwarning h1 {
+.md-banner .versionwarning h1 {
   font-weight: bold;
 }
-.md-announce .versionwarning p {
+.md-banner .versionwarning p {
   color: black;
 }
-.md-announce a {
+.md-banner a {
   color: blue;
   text-decoration: underline;
 }
