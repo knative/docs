@@ -27,7 +27,8 @@ nav:
 ###############################################################################
     - Installing:
       - About installing Knative: install/README.md
-      #YAML Installation
+      - Install Knative using quickstart: install/quickstart-install.md
+      # YAML Installation
       - Install Knative with YAML:
         - About YAML-based installation: install/yaml-install/README.md
         - Install Knative Serving:
