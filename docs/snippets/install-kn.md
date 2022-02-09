@@ -3,14 +3,18 @@ The Knative CLI (`kn`) provides a quick and easy interface for creating Knative 
 The `kn` CLI also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 === "Using Homebrew"
-    For macOS, you can install `kn` by using [Homebrew](https://brew.sh){target=_blank}:
 
-    ```bash
-    brew install kn
-    ```
+    - Install `kn` by using [Homebrew](https://brew.sh){target=_blank}:
 
-    !!! note
-        The `quickstart` plugin requires `kn` v0.25 or later. To upgrade an existing install to the latest version, run `brew upgrade kn`.
+        ```bash
+        brew install kn
+        ```
+
+    - Upgrade an existing install to the latest version by running the command:
+
+        ```bash
+        brew upgrade kn
+        ```
 
     ??? bug "Having issues upgrading `kn` using Homebrew?"
 
