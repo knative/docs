@@ -77,7 +77,7 @@
 }
 
 .md-search__icon[for=__search] {
-  color: black;
+  color: var(--md-default-fg-color--light);
 }
 
 .md-source__icon+.md-source__repository {
@@ -91,9 +91,9 @@
 
 .why-serverless-container, .need-to-know-more-container,
 .knative-components-container, .trying-it-all-container,
-.whats-next-container {
+.whats-next-container, .whats-next-container {
   text-align: center;
-  padding: 2em;
+  padding: 3em;
 }
 
 .md-typeset img,
@@ -127,17 +127,15 @@ body {
 
 .whats-next-container,
 .home-container,
-.features-container,
-.intro-container,
-.case-studies-container,
-.components-container {
+.case-studies-container {
   margin: 0;
   border: 0;
   padding-top: 2em;
   padding-bottom: 5em;
 }
 
-.home-container .md-button, .home-container .md-button--primary {
+.home-container .md-button,
+.home-container .md-button--primary {
   color: white;
   width: 28%;
   font-size: large;
@@ -145,7 +143,8 @@ body {
   min-width: fit-content;
 }
 
-.home-container .md-button, .need-to-know-more-container .md-button {
+.home-container .md-button,
+.need-to-know-more-container .md-button {
   background-color: #52b3dd;
   border-color: #52b3dd;
 }
@@ -161,16 +160,15 @@ h2.secondary-headline, h3.trusted-by {
   font-weight: 700;
 }
 
-h1 {
+.md-typeset h1 {
   font-weight: bold;
+  font-size: 3.2vw;
 }
 
 .home-container h1 {
   color: #024c8f;
-  font-size: 3.2vw;
   margin-top: 1em;
   margin-bottom: 0;
-  font-weight: bold;
 }
 
 .trusted-by-container #usedby {
@@ -245,23 +243,98 @@ h1 {
   color: #7dc47e;
 }
 
+.knative-components-container .text-table .normal-text {
+  width: 30%;
+  text-align: start;
+}
+
+.knative-components-container .text-table .normal-text:last-child {
+  padding-left: 2em;
+  margin-left: 25%;
+}
+
+.knative-components-container .components-content .components-img {
+  max-width: 80%;
+  padding: 2em;
+}
+
+.text-table {
+  display: flex;
+  max-width: 80%;
+  margin: auto;
+  padding: 0 2.5em;
+}
+
 /* trying it all container css */
 .trying-it-all-container {
-
 }
 
 /* case studies container css */
 .case-studies-container {
+  text-align: center;
+  justify-content: center;
+  color: black;
+  display: flex;
+  background-color: white;
+}
 
+.case-studies-container h1 {
+  margin-bottom: 0.45em;
+}
+
+.case-studies-container .cases-table {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.case-studies-container .logo {
+  display: flex;
+  height: 26px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 2em;
+}
+
+.case-studies-container .col {
+  min-width: 38%;
+  max-width: 40%;
+}
+
+.case-studies-container .logo img {
+  max-width: 110px
+}
+
+.case-studies-container .logo .deepc {
+  width: 108px;
+}
+
+.case-studies-container .logo .outfit7 {
+  max-height: 18px;
+  max-width: 98px;
+}
+
+.case-studies-container .logo .puppet {
+  width: 94px;
+}
+
+.case-studies-container .normal-text {
+  text-align: start;
+  padding: 0 2em;
+  color: #497bb2;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.25;
+  font-family: serif;
+}
+
+.case-studies-container hr {
+  border-bottom: 2px solid #89c487;
+  display: flow-root;
+  margin: .4em 5em -4px 2em;
 }
 
 /* whats next container css */
-.whats-next-container {
-  color: #fff;
-  background: #1b2f52;
-  justify-content: center;
-}
-
 .whats-next-container .component-flex {
   display: flex;
   gap: 2em;
@@ -277,7 +350,8 @@ h1 {
   justify-content: center;
 }
 
-.whats-next-container .twemoji, .whats-next-container .twemoji svg {
+.whats-next-container .twemoji,
+.whats-next-container .twemoji svg {
   height: 3.5em;
   width: 3.5em;
 }
@@ -291,61 +365,9 @@ h1 {
   margin: 0.5em auto;
 }
 
-.intro-container img {
-  height: 10em;
-  float: right;
-  margin: 0 0 0 2em;
-}
-
-.case-studies-container {
-  background: #fff;
-  color: #000;
-  display: flex;
-  justify-content: center;
-}
-.case-studies-container #case-studies-title {
-  display: flex;
-  justify-content: center;
-}
-
-.case-studies-container #case-studies {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.case-studies-container #case-studies-more {
-  font-style: italic;
-  font-size: smaller;
-  color: #aaa;
-  text-align: center;
-}
-
-.case-studies-container .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 3em 1em;
-  width: 150pt;
-  height: 36pt;
-}
-
-.case-studies-container .logo img {
-  max-width: 150pt;
-  max-height: 36pt;
-}
-
-.features-container {
-  color: #000;
-  background: #fff;
-}
-
 @media only screen and (max-width: 1440px) {
-  .components-container,
   .whats-next-container,
-  .home-container,
-  .features-container,
-  .intro-container {
+  .home-container {
     padding: 40px;
   }
 }
@@ -354,23 +376,13 @@ h1 {
   .component-flex {
     flex-wrap: wrap;
   }
-
-  .intro-container img {
-    display: block;
-    margin:0 auto;
-    float: none;
-  }
-}
-
-/*fixing issue in safari css */
-.md-typeset .task-list-item {
-  margin-left: 25px;
 }
 
 /* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
 footer nav.md-footer__inner {
   padding: 0;
 }
+
 footer .md-footer-meta .md-footer-meta__inner {
   padding: 1em 0;
 }
