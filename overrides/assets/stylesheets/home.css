@@ -4,7 +4,7 @@
 }
 
 .md-main__inner .md-content__inner,
-.md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner {
+.md-sidebar--primary:not([hidden])~.md-content>.md-content__inner {
   margin: 0;
   padding: 0;
 }
@@ -18,6 +18,7 @@
     display: none;
   }
 }
+
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary {
     display: none;
@@ -29,9 +30,17 @@
 }
 
 @keyframes continuousgradient {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* header css */
@@ -85,7 +94,7 @@
 }
 
 /* containers specific css */
-.headline-section  {
+.headline-section {
   text-align: center;
 }
 
@@ -113,7 +122,7 @@ section.home-container {
   padding-top: 0;
 }
 
-.home-container > .md-typeset {
+.home-container>.md-typeset {
   flex-grow: 2;
 }
 
@@ -230,7 +239,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .why-serverless-container h1, .trying-it-all-container h1,
 .case-studies-container h1 {
- color: #044a91;
+  color: #044a91;
 }
 
 .why-serverless-container .normal-text,
@@ -266,8 +275,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 /* trying it all container css */
-.trying-it-all-container {
-}
+.trying-it-all-container {}
 
 /* case studies container css */
 .case-studies-container {
@@ -366,6 +374,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 @media only screen and (max-width: 1440px) {
+
   .whats-next-container,
   .home-container {
     padding: 40px;
