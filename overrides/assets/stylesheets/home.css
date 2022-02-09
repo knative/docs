@@ -86,7 +86,7 @@
 }
 
 .md-search__icon[for=__search] {
-  color: black;
+  color: var(--md-default-fg-color--light);
 }
 
 .md-source__icon+.md-source__repository {
@@ -170,7 +170,6 @@ h2.secondary-headline, h3.trusted-by {
   color: #024c93;
   margin-top: 1em;
   margin-bottom: 0;
-  font-weight: bold;
 }
 
 .trusted-by-container #usedby {
