@@ -26,7 +26,6 @@ Before you can get started with a Knative `quickstart` deployment you must intst
 To get started, install the Knative `quickstart` plugin:
 
 === "Using Homebrew"
-    For macOS:
 
     - Install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
 
