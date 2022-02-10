@@ -61,6 +61,11 @@
   line-height: 1.2;
 }
 
+.home-page .md-typeset {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
 .md-typeset img,
 .md-typeset svg {
   max-width: initial;
@@ -234,6 +239,50 @@ h2.secondary-headline, h3.trusted-by {
 
 .why-serverless-container .md-typeset img:hover {
   transform: scale(1.15);
+}
+
+.why-serverless-container .md-typeset h1 {
+  margin-bottom: 1rem;
+}
+
+.why-serverless-container .md-typeset h2 {
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
+.why-serverless-container .normal-text {
+  margin: 0 auto 2rem;
+  max-width: 75%;
+}
+
+.why-serverless-container .img-table {
+  margin: 1rem auto -1rem;
+}
+
+.why-serverless-container .img-row {
+  display: flex;
+  width: 100%;
+}
+
+.why-serverless-container .img-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.why-serverless-container .md-typeset img {
+  max-width: 120px;
+}
+
+.why-serverless-container .md-typeset img:hover {
+  animation: scale 1s ease-in-out;
+}
+
+@keyframes scale {
+  to {
+    transform: scale(1.1);
+  }
 }
 
 /* knative components container css */
