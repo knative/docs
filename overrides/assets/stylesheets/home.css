@@ -55,6 +55,11 @@
   padding: 3em;
 }
 
+.home-page .md-typeset {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
 .md-typeset img,
 .md-typeset svg {
   max-width: initial;
@@ -192,6 +197,50 @@ h2.secondary-headline, h3.trusted-by {
   font-weight: 600;
 }
 
+.why-serverless-container .md-typeset h1 {
+  margin-bottom: 1rem;
+}
+
+.why-serverless-container .md-typeset h2 {
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
+.why-serverless-container .normal-text {
+  margin: 0 auto 2rem;
+  max-width: 75%;
+}
+
+.why-serverless-container .img-table {
+  margin: 1rem auto -1rem;
+}
+
+.why-serverless-container .img-row {
+  display: flex;
+  width: 100%;
+}
+
+.why-serverless-container .img-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.why-serverless-container .md-typeset img {
+  max-width: 120px;
+}
+
+.why-serverless-container .md-typeset img:hover {
+  animation: scale 1s ease-in-out;
+}
+
+@keyframes scale {
+  to {
+    transform: scale(1.1);
+  }
+}
+
 /* knative components container css */
 .knative-components-container h1 {
   color: #7dc47e;
@@ -200,11 +249,14 @@ h2.secondary-headline, h3.trusted-by {
 .knative-components-container .text-table .normal-text {
   width: 30%;
   text-align: start;
+  margin-left: 1%;
+  font-size: .8rem;
+  margin-top: -1rem;
 }
 
 .knative-components-container .text-table .normal-text:last-child {
   padding-left: 2em;
-  margin-left: 25%;
+  margin-left: 32%;
 }
 
 .knative-components-container .components-content .components-img {
@@ -238,7 +290,8 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .cases-table {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  max-width: 90%;
+  margin: auto;
 }
 
 .case-studies-container .logo {
@@ -327,7 +380,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 @media only screen and (max-width: 800px) {
-  .component-flex {
+  .component-flex, .case-studies-container .cases-table {
     flex-wrap: wrap;
   }
 }
