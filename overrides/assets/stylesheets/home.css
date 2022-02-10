@@ -228,16 +228,12 @@ h2.secondary-headline, h3.trusted-by {
 
 .why-serverless-container .md-typeset img {
   max-width: 120px;
+  transform: scale(1);
+  transition: transform 0.25s ease-in-out 0s;
 }
 
 .why-serverless-container .md-typeset img:hover {
-  animation: scale 500ms linear;
-}
-
-@keyframes scale {
-  to {
-    transform: scale(1.15);
-  }
+  transform: scale(1.15);
 }
 
 /* knative components container css */
