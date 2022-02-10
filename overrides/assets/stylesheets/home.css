@@ -262,18 +262,19 @@ h2.secondary-headline, h3.trusted-by {
   margin: 1rem auto -1rem;
 }
 
-.why-serverless-container .img-row,
-.trying-it-all-container .img-row {
+.img-row {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 }
 
-.why-serverless-container .img-col,
-.trying-it-all-container .img-col {
+.img-col {
   display: flex;
   flex-direction: column;
   flex: 1;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .why-serverless-container .md-typeset img {
@@ -281,7 +282,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .why-serverless-container .md-typeset img:hover {
-  animation: scale 800ms ease-in;
+  animation: scale 500ms linear;
 }
 
 @keyframes scale {
