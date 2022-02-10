@@ -53,7 +53,7 @@
 .whats-next-container, .whats-next-container,
 .case-studies-container {
   text-align: center;
-  padding: 2em 3em 5em;
+  padding: 4em 3em;
 }
 
 .home-page .md-typeset {
@@ -370,6 +370,7 @@ h2.secondary-headline, h3.trusted-by {
   font-style: italic;
   line-height: 1.1;
   font-family: serif;
+  font-size: .95rem;
 }
 
 .case-studies-container hr {
