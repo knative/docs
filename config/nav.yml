@@ -18,7 +18,7 @@ nav:
         - Using Knative Eventing:
           - Introducing Knative Eventing: getting-started/getting-started-eventing.md
           - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
-          - Introducing the CloudEvents Player: getting-started/first-source.md
+          - Using a Knative Service as a Source: getting-started/first-source.md
           - Creating your first Trigger: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
         - Clean Up: getting-started/clean-up.md
