@@ -43,56 +43,6 @@
   }
 }
 
-/* header css */
-.md-header {
-  color: black
-}
-
-.md-header[data-md-state=shadow], .md-tabs {
-  background-color: #f3f1f2;
-}
-
-.md-tabs {
-  border: none;
-  color: black;
-  font-weight: bold;
-}
-
-.md-tabs__list li:nth-last-child(1),
-.md-tabs__list li:nth-last-child(2),
-.md-tabs__list li:nth-last-child(3) {
-  background-color: #024c93;
-  color: white;
-  padding: 0 2em;
-}
-
-.md-tabs__list li:nth-last-child(1) a,
-.md-tabs__list li:nth-last-child(2) a,
-.md-tabs__list li:nth-last-child(3) a {
-  opacity: 1;
-}
-
-.md-header__source {
-  color: #034b95;
-}
-
-.md-search__input {
-  background-color: white;
-  border: black 1px solid;
-}
-
-.md-search__input.focus-visible {
-  border: none;
-}
-
-.md-search__icon[for=__search] {
-  color: var(--md-default-fg-color--light);
-}
-
-.md-source__icon+.md-source__repository {
-  font-weight: bold;
-}
-
 /* containers specific css */
 .headline-section {
   text-align: center;
