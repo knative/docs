@@ -44,7 +44,7 @@ echo "Latest knative version is: ${latest_version}"
 
 echo "Installing quickstart ..."
 kn quickstart kind &
-sleep 1m
+sleep 3m
 kubectl get deployment -n knative-serving -o yaml | yq 'del(.items[]?.spec.template.spec.containers[]?.resources)' | kubectl apply -f -
 kubectl get deployment -n knative-eventing -o yaml | yq 'del(.items[]?.spec.template.spec.containers[]?.resources)' | kubectl apply -f -
 echo "Done"

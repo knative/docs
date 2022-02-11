@@ -10,4 +10,4 @@
 > Once you see a prompt, you can click on the command below, and verify you have a cluster called `knative`, and they 
 > will be copied and run for you in the terminal on the right.
 
-    `kind get clusters`{{execute}}
+`kind get clusters`{{execute}}

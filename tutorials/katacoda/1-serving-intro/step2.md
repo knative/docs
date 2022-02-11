@@ -8,7 +8,7 @@ Since our "Hello world" Service is being deployed as a Knative Service, not a Ku
 
 ## Knative Service: "Hello world!"
 
-```shell
+```sh
 kn service create hello \
 --image gcr.io/knative-samples/helloworld-go \
 --port 8080 \
@@ -23,11 +23,13 @@ kn service create hello \
 **Expected output:**
 Ping your Knative Service by running the command:
 
-```Service hello created to latest revision 'hello-world' is available at URL:
-http://hello.default.127.0.0.1.sslip.io````
+`Service hello created to latest revision 'hello-world' is available at URL:
+http://hello.default.127.0.0.1.sslip.io`
 
 ## Ping your Knative Service
 `curl http://hello.default.127.0.0.1.sslip.io`{{execute}}
 
 **Expected output:**
 `Hello World!`
+
+Congratulations 🎉, you've just created your first Knative Service. Up next, Autoscaling!
