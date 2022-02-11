@@ -33,5 +33,5 @@ export latest_version=$(curl -H "Accept: application/vnd.github.v3+json" https:/
 echo "Latest knative version is: ${latest_version}"
 
 echo "Installing quickstart ..."
-kn quickstart kind
+#kn quickstart kind
 echo "Done"
