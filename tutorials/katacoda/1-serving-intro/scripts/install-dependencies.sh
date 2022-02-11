@@ -11,6 +11,11 @@ mv ./kind /usr/local/bin/kind
 #kind create cluster --wait 30s
 echo "Kubernetes Started"
 
+echo "Installing kubectl ..."
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+echo "Done"
+
 echo "Installing kn cli..."
 wget https://github.com/knative/client/releases/download/knative-v1.2.0/kn-linux-amd64 -O kn
 chmod +x kn
@@ -29,9 +34,17 @@ chmod +x kn-quickstart
 mv kn-quickstart /usr/local/bin/
 echo "Done"
 
+echo "Installing yt ..."
+snap install yq
+echo "Done"
+
+
 export latest_version=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/knative/serving/tags?per_page=1 | jq -r .[0].name)
 echo "Latest knative version is: ${latest_version}"
 
 echo "Installing quickstart ..."
-#kn quickstart kind
+kn quickstart kind &
+sleep 1m
+kubectl get deployment -n knative-serving -o yaml | yq 'del(.items[]?.spec.template.spec.containers[]?.resources)' | kubectl apply -f -
+kubectl get deployment -n knative-eventing -o yaml | yq 'del(.items[]?.spec.template.spec.containers[]?.resources)' | kubectl apply -f -
 echo "Done"
