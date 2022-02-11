@@ -1,4 +1,4 @@
-# Apache Kafka source example
+# Apache Kafka Source
 
 Tutorial on how to build and deploy a `KafkaSource` event source.
 
@@ -6,19 +6,42 @@ Tutorial on how to build and deploy a `KafkaSource` event source.
 
 The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
-!!! note
-    If you need a more sophisticated Kafka Consumer, with direct access to specific partitions or offsets, you can implement a Kafka Consumer by using one of the available Apache Kafka SDKs.
-
 <!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
 
-## Install the Kafka event source CRD
+## Installation
 
-- Set up a Kubernetes cluster with the Kafka event source installed.
-You can install the Kafka event source by using
-[YAML](../../../install/yaml-install/eventing/install-eventing-with-yaml.md#install-optional-eventing-extensions)
-or the [Knative Operator](../../../install/operator/knative-with-operators.md#installing-with-different-eventing-sources).
+1. Install the Kafka controller by entering the following command:
 
-## Optional: Create a Kafka topic
+    ```bash
+    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    ```
+
+1. Install the Kafka Source data plane by entering the following command:
+
+    ```bash
+    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
+    ```
+
+1. Verify that `kafka-controller` and `kafka-source-dispatcher` are running,
+   by entering the following command:
+
+    ```bash
+    kubectl get deployments.apps -n knative-eventing
+    ```
+
+    Example output:
+    ```{ .bash .no-copy }
+    NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+    kafka-controller               1/1     1            1           3s
+    kafka-source-dispatcher        1/1     1            1           4s
+    ```
+
+## Create a Kafka topic
+
+!!! note
+    The create a Kafka topic section assumes you're using Strimzi to operate Apache Kafka,
+    however equivalent operations can be replicated using the Apache Kafka CLI or any
+    other tool.
 
 If you are using Strimzi:
 
@@ -150,28 +173,16 @@ If you are using Strimzi:
     kafkasource.sources.knative.dev/kafka-source created
     ```
 
-1. Verify that the event source Pod is running:
+1. Verify that the KafkaSource is ready:
 
     ```bash
-    kubectl get pods
-    ```
-
-    The Pod name is prefixed with `kafka-source`:
-    ```{ .bash .no-copy }
-    NAME                                  READY     STATUS    RESTARTS   AGE
-    kafka-source-xlnhq-5544766765-dnl5s   1/1       Running   0          40m
-    ```
-
-1. Ensure that the Kafka event source started with the necessary
-   configuration:
-
-    ```bash
-    kubectl logs --selector='knative-eventing-source-name=kafka-source'
+    kubectl get kafkasource kafka-source
     ```
 
     Example output:
     ```{ .bash .no-copy }
-    {"level":"info","ts":"2020-05-28T10:39:42.104Z","caller":"adapter/adapter.go:81","msg":"Starting with config: ","Topics":".","ConsumerGroup":"...","SinkURI":"...","Name":".","Namespace":"."}
+    NAME           TOPICS                   BOOTSTRAPSERVERS                            READY   REASON   AGE
+    kafka-source   ["knative-demo-topic"]   ["my-cluster-kafka-bootstrap.kafka:9092"]   True             26h
     ```
 
 ### Verify
@@ -184,48 +195,6 @@ If you are using Strimzi:
 
     !!! tip
         If you don't see a command prompt, try pressing **Enter**.
-
-1. Verify that the Kafka event source consumed the message and sent it to
-   its Sink properly. Because these logs are captured in debug level, edit the key `level` of `config-logging` ConfigMap in `knative-sources` namespace to look like this:
-
-    ```bash
-    data:
-      loglevel.controller: info
-      loglevel.webhook: info
-      zap-logger-config: |
-        {
-          "level": "debug",
-          "development": false,
-          "outputPaths": ["stdout"],
-          "errorOutputPaths": ["stderr"],
-          "encoding": "json",
-          "encoderConfig": {
-            "timeKey": "ts",
-            "levelKey": "level",
-            "nameKey": "logger",
-            "callerKey": "caller",
-            "messageKey": "msg",
-            "stacktraceKey": "stacktrace",
-            "lineEnding": "",
-            "levelEncoder": "",
-            "timeEncoder": "iso8601",
-            "durationEncoder": "",
-            "callerEncoder": ""
-          }
-        }
-    ```
-
-1. Manually delete the Kafka source deployment and allow the `kafka-controller-manager` deployment running in the `knative-sources` namespace to redeploy it. Debug level logs should be visible now.
-
-    ```bash
-    kubectl logs --selector='knative-eventing-source-name=kafka-source'
-    ```
-
-    Example output:
-    ```{ .bash .no-copy }
-    {"level":"debug","ts":"2020-05-28T10:40:29.400Z","caller":"kafka/consumer_handler.go:77","msg":"Message claimed","topic":".","value":"."}
-    {"level":"debug","ts":"2020-05-28T10:40:31.722Z","caller":"kafka/consumer_handler.go:89","msg":"Message marked","topic":".","value":"."}
-    ```
 
 1. Verify that the Service received the message from the event source:
 
@@ -275,23 +244,6 @@ If you are using Strimzi:
     Example output:
     ```{ .bash .no-copy }
     "event-display" deleted
-    ```
-
-3. Remove the Kafka event controller:
-
-    ```bash
-    kubectl delete -f https://storage.googleapis.com/knative-releases/eventing-contrib/latest/kafka-source.yaml
-    ```
-
-    Example output:
-    ```{ .bash .no-copy }
-    serviceaccount "kafka-controller-manager" deleted
-    clusterrole.rbac.authorization.k8s.io "eventing-sources-kafka-controller"
-    deleted clusterrolebinding.rbac.authorization.k8s.io
-    "eventing-sources-kafka-controller" deleted
-    customresourcedefinition.apiextensions.k8s.io "kafkasources.sources.knative.dev"
-    deleted service "kafka-controller" deleted statefulset.apps
-    "kafka-controller-manager" deleted
     ```
 
 4. Optional: Remove the Apache Kafka Topic
@@ -349,7 +301,7 @@ to consume from the earliest offset, set the initialOffset field to `earliest`, 
 apiVersion: sources.knative.dev/v1beta1
 kind: KafkaSource
 metadata:
-name: kafka-source
+  name: kafka-source
 spec:
 consumerGroup: knative-group
 initialOffset: earliest
@@ -366,7 +318,7 @@ sink:
 
 !!! note
     The valid values for `initialOffset` are `earliest` and `latest`. Any other value results in a
-    validation error. This field is honored only if there are no prior committed offsets for that
+    validation error. This field is honored only if there are no committed offsets for that
     consumer group.
 
 ## Connecting to a TLS-enabled Kafka Broker
