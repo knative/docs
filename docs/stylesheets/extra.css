@@ -70,6 +70,23 @@ a.md-header__button.md-logo img {
   border: black 1px solid;
 }
 
+.md-search__input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #4d4d4d;
+  opacity: 1;
+  /* Firefox */
+}
+
+.md-search__input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #4d4d4d;
+}
+
+.md-search__input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #4d4d4d;
+}
+
 .md-search__input.focus-visible {
   border: none;
 }
