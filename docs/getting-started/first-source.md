@@ -1,12 +1,13 @@
-# Using a Knative Service as a Source
+# Using a Knative Service as a source
 
 In this tutorial, you will use the [CloudEvents Player](https://github.com/ruromero/cloudevents-player){target=blank} app to showcase the core concepts of Knative Eventing. By the end of this tutorial, you should have an architecture that looks like this:
 
-![The CloudEvents Player acts as both a Source and a Sink for CloudEvents](images/event_diagram.png)
+![The CloudEvents Player acts as both a source and a sink for CloudEvents](images/event_diagram.png)
 
 The above image is Figure 6.6 from [Knative in Action](https://www.manning.com/books/knative-in-action){target=_blank}.
 
-## Creating your first Source
+## Creating your first source
+
 The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of the Broker as an environment variable, `BROKER_URL`. You will send CloudEvents to the Broker through the CloudEvents Player application.
 
 Create the CloudEvents Player Service:

@@ -4,13 +4,13 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
 === "Using Homebrew"
 
-    - Install `kn` by using [Homebrew](https://brew.sh){target=_blank}:
+    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}:
 
         ```bash
         brew install kn
         ```
 
-    - Upgrade an existing install to the latest version by running the command:
+    - To upgrade an existing install to the latest version by running the command:
 
         ```bash
         brew upgrade kn

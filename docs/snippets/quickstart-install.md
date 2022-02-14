@@ -31,13 +31,13 @@ You can use `kubectl` to deploy applications, inspect and manage cluster resourc
 To get started, install the Knative `quickstart` plugin:
 
 === "Using Homebrew"
-    - Install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
+    - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
 
         ```bash
         brew install knative-sandbox/kn-plugins/quickstart
         ```
 
-    - Upgrade an existing install to the latest version by running the command:
+    - To upgrade an existing install to the latest version by running the command:
 
         ```bash
         brew upgrade knative-sandbox/kn-plugins/quickstart
