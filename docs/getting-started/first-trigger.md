@@ -1,14 +1,19 @@
-# Triggers and Sinks
+# Using Triggers and sinks
 
-TODO: Add some intro info here.
+In the last topic we used the CloudEvents Player as an event source to send events to the Broker.
+We now want the event to go from the Broker to an event sink.
+
+In this topic, we will use the CloudEvents Player as a sink as well as a source.
+This means we will be using the CloudEvents Player to both send and receive events.
+We will use a Trigger to listen for events in the Broker to send to the sink.
 
 ## Creating your first Trigger
 
-TODO: Add some explanation here.
+Create a Trigger that listens for CloudEvents from the event source and places them into the sink, which is also the CloudEvents Player app.
 
 === "kn"
 
-    To create a Trigger, run the command:
+    To create the Trigger, run the command:
     ```bash
     kn trigger create cloudevents-trigger --sink cloudevents-player  --broker example-broker
     ```
@@ -51,7 +56,7 @@ TODO: Add some explanation here.
 
     The expand the next note to see how to use Filters.
 
-Now, when we go back to the CloudEvents Player and send an Event, we see that CloudEvents are both sent and received by the CloudEvents Player:
+Now, when we go back to the CloudEvents Player and send an event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 
 ![CloudEvents Player user interface](images/event_received.png){draggable=false}
 
