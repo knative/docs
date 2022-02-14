@@ -3,16 +3,16 @@
 The Knative website uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
 to render documentation.
 
-If you don't want to use any tool locally you can use [GitPod](https://gitpod.io/#https://github.com/knative/docs)
-this will allow you to edit the files on a Web IDE and with live preview.
+If you don't want to use any tool locally, you can use [GitPod](https://gitpod.io/#https://github.com/knative/docs)
+this will allow you to edit the files on a Web IDE and live preview.
 
-If you choose to run the site locally we strongly recommend using a container.
+If you choose to run the site locally, we strongly recommend using a container.
 
-Regardless of the method use, when you submit a PR, there is going to be a livepreview link available in a comment on the PR.
+Regardless of the method used, when you submit a PR, a live preview link will be available in a comment on the PR.
 
 ## Use the Docker container
 
-To start the livepreview run the following script
+To start the live preview, run the following script.
 ```
 ./hack/docker/run.sh
 ```
@@ -20,15 +20,15 @@ Then open a web browser on http://localhost:8000
 
 You can edit any file under `./docs` and the live preview autoreloads.
 
-When your done with your changes you can stop the container in another terminal
+When you're done with your changes, you can stop the container in another terminal.
 ```
 ./hack/docker/stop.sh
 ```
-You can run a full build of the website with all versions using
+You can run a complete build of the website with all versions using.
 ```
 ./hack/docker/test.sh
 ```
-The build output is the full static site located in `./site`.
+The build output is the entire static site located in `./site`.
 
 You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3
 
