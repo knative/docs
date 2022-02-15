@@ -14,6 +14,8 @@ Regardless of the method used, when you submit a PR, a live preview link will be
 
 You can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or any docker engine supported for your operating system that is compatible with the `docker` CLI, for example [colima](https://github.com/abiosoft/colima).
 
+### Live preview
+
 To start the live preview, run the following script.
 ```
 ./hack/docker/run.sh
@@ -23,6 +25,9 @@ Then open a web browser on http://localhost:8000
 You can edit any file under `./docs` and the live preview autoreloads.
 
 When you're done with your changes, you can stop the container using `Ctrl+C`.
+
+
+### Full site build (optional)
 
 You can run a complete build of the website with all versions using.
 ```
@@ -53,16 +58,11 @@ For some (e.g. folks using RHEL), you might have to use pip3.
 1. Install Material for MkDocs by running:
 
     ```
-    pip install mkdocs-material
+    pip install -r requirements.txt
     ```
 
     For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
 
-1. Install the extensions to MkDocs needed for Knative by running:
-
-    ```
-    pip install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin mkdocs-redirects
-    ```
 
 If you have `pip3` you can use the above commands and replace `pip` with `pip3`
 
