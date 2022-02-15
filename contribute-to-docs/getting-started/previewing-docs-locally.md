@@ -53,15 +53,13 @@ from the [Python website](https://www.python.org).
 
 For some (e.g. folks using RHEL), you might have to use pip3.
 
-#### Install using pip
+Install Material for MkDocs and dependencies by running:
 
-1. Install Material for MkDocs by running:
+```
+pip install -r requirements.txt
+```
 
-    ```
-    pip install -r requirements.txt
-    ```
-
-    For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
+For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
 
 
 If you have `pip3` you can use the above commands and replace `pip` with `pip3`
