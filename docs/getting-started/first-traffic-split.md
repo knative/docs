@@ -101,12 +101,12 @@ We can easily see a list of our existing revisions with the `kn` CLI.
     !!! Success "Expected output"
         ```{ .bash .no-copy }
         NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
-        hello-knative   hello     100%             2            30s   3 OK / 4     True    
-        hello-world     hello                      1            5m    3 OK / 4     True    
+        hello-knative   hello     100%             2            30s   3 OK / 4     True
+        hello-world     hello                      1            5m    3 OK / 4     True
         ```
 
 === "kubectl"
-     Though the following example doesn't cover it, you can peak under the hood to Kubernetes to see the revisions as Kubernetes sees them by running the command:  
+    Though the following example doesn't cover it, you can peak under the hood to Kubernetes to see the revisions as Kubernetes sees them by running the command:
     ```bash
     kubectl get revisions
     ```
