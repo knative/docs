@@ -3,7 +3,7 @@
 In the last topic we used the CloudEvents Player as an event source to send events to the Broker.
 We now want the event to go from the Broker to an event sink.
 
-In this topic, we will use the CloudEvents Player as a sink as well as a source.
+In this topic, we will use the CloudEvents Player as the sink as well as a source.
 This means we will be using the CloudEvents Player to both send and receive events.
 We will use a Trigger to listen for events in the Broker to send to the sink.
 

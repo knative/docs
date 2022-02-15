@@ -31,13 +31,16 @@ You can use `kubectl` to deploy applications, inspect and manage cluster resourc
 To get started, install the Knative `quickstart` plugin:
 
 === "Using Homebrew"
-    - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}:
+
+    Do one of the following:
+
+    - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}, run the command:
 
         ```bash
         brew install knative-sandbox/kn-plugins/quickstart
         ```
 
-    - To upgrade an existing install to the latest version by running the command:
+    - To upgrade an existing `quickstart` install to the latest version, run the command:
 
         ```bash
         brew upgrade knative-sandbox/kn-plugins/quickstart
@@ -118,3 +121,12 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         ```bash
         minikube profile list
         ```
+    1. To finish setting up networking for minikube, run the following command in a separate terminal window:
+        ```bash
+        minikube tunnel --profile knative
+        ```
+        The tunnel must continue running in a terminal window while you are using your Knative `quickstart` environment.
+
+        !!! note
+            To terminate the process and clean up network routes, enter `Ctrl-C`.
+            For more information about the `minikube tunnel` command, see the [minikube documentation](https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel).
