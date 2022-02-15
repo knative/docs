@@ -33,7 +33,7 @@ First, deploy the Knative Service. This service accepts the environment variable
 === "YAML"
     1. Copy the following YAML into a file named `hello.yaml`:
 
-        ``` bash
+        ``` yaml
         apiVersion: serving.knative.dev/v1
         kind: Service
         metadata:
