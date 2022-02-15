@@ -125,7 +125,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         ```bash
         minikube tunnel --profile knative
         ```
-        The tunnel must continue running in a terminal window while you are using your Knative `quickstart` environment.
+        The tunnel must continue to run in a terminal window while you are using your Knative `quickstart` environment.
 
         !!! note
             To terminate the process and clean up network routes, enter `Ctrl-C`.
