@@ -10,7 +10,7 @@ If you choose to run the site locally, we strongly recommend using a container.
 
 Regardless of the method used, when you submit a PR, a live preview link will be available in a comment on the PR.
 
-## Use the Docker container
+## (Option 1): Use the Docker container
 
 To start the live preview, run the following script.
 ```
@@ -20,10 +20,8 @@ Then open a web browser on http://localhost:8000
 
 You can edit any file under `./docs` and the live preview autoreloads.
 
-When you're done with your changes, you can stop the container in another terminal.
-```
-./hack/docker/stop.sh
-```
+When you're done with your changes, you can stop the container using `Ctrl+C`.
+
 You can run a complete build of the website with all versions using.
 ```
 ./hack/docker/test.sh
@@ -32,6 +30,11 @@ The build output is the entire static site located in `./site`.
 
 You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3
 
+
+## (Option 2) Using native Python mkdocs CLI
+
+The website is built using [material-mkdocs](https://squidfunk.github.io/mkdocs-material/) which is a python tool based
+on the `[mkdocs](https://www.mkdocs.org/) project.
 
 ### Install Material for MkDocs locally
 
