@@ -1,5 +1,5 @@
 {
-  "title": "Getting Started with Knative Serving (kn cli) v6-kind",
+  "title": "Getting Started with Knative Serving (kn cli) v7-kind",
   "description": "Introduction to Knative by installing knative serving and deploying an application (If you want to script your workflow, or really don't like yaml)",
   "difficulty": "Beginner",
   "time": "20",
@@ -27,7 +27,7 @@
     }
   },
   "environment": {
-    "uilayout": "terminal"
+    "uilayout": "terminal-terminal"
   },
   "backend": {
     "imageid": "ubuntu:2004"
