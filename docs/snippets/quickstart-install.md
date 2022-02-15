@@ -121,7 +121,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         ```bash
         minikube profile list
         ```
-    1. To finish setting up networking for minikube, run the following command in a separate terminal window:
+    1. To finish setting up networking for minikube, start the `minikube tunnel` process in a separate terminal window:
         ```bash
         minikube tunnel --profile knative
         ```
