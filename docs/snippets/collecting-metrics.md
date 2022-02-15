@@ -9,6 +9,9 @@ Knative supports different popular tools for collecting metrics:
 
 You can also set up the OpenTelemetry Collector to receive metrics from Knative components and distribute them to other metrics providers that support OpenTelemetry.
 
+    !!! warning
+        You can't use OpenTelemetry Collector and Prometheus at the same time. The default metrics backend is Prometheus. You will need to remove `metrics.backend-destination` and `metrics.request-metrics-backend-destination` keys from the config-observability Configmap to enable Prometheus metrics.
+
 ## About Prometheus
 
 [Prometheus](https://prometheus.io/) is an open-source tool for collecting,
@@ -46,7 +49,7 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
 
 1. Grafana dashboards can be imported from the [`knative-sandbox` repository](https://github.com/knative-sandbox/monitoring/tree/main/grafana).
 
-1. If you are using the Grafana Helm Chart with the Dashboard Sidecar configured, you can load the dashboards by applying the following configmap.
+1. If you are using the Grafana Helm Chart with the Dashboard Sidecar enabled, you can load the dashboards by applying the following configmaps.
 
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/grafana/dashboards.yaml
