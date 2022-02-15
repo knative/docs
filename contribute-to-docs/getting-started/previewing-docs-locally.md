@@ -16,7 +16,7 @@ You can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or 
 
 ### Live preview
 
-To start the live preview, run the following script.
+To start the live preview, from any directory run the following script.
 ```
 ./hack/docker/run.sh
 ```
@@ -29,7 +29,7 @@ When you're done with your changes, you can stop the container using `Ctrl+C`.
 
 ### Full site build (optional)
 
-You can run a complete build of the website with all versions using.
+You can run a complete build of the website with all versions, from any directory run the following script.
 ```
 ./hack/docker/test.sh
 ```
