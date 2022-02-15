@@ -8,7 +8,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 
 <!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
 
-## Installation
+## Installing Kafka source
 
 1. Install the Kafka controller by entering the following command:
 
