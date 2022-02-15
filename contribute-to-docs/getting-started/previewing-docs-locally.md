@@ -12,6 +12,8 @@ Regardless of the method used, when you submit a PR, a live preview link will be
 
 ## (Option 1): Use the Docker container
 
+You can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or any docker engine supported for your operating system that is compatible with the `docker` CLI, for example [colima](https://github.com/abiosoft/colima).
+
 To start the live preview, run the following script.
 ```
 ./hack/docker/run.sh
