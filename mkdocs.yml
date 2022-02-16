@@ -11,7 +11,7 @@ edit_uri: edit/main/docs
 
 theme:
   name: material
-  logo: images/logo/rgb/knative-logo-rgb.png
+  logo: images/logo/rgb/knative-logo.png
   favicon: images/favicon.ico
   custom_dir: overrides
   features:

@@ -13,7 +13,7 @@ edit_uri: edit/main/blog/docs
 theme:
   name: material
   docs_dir: blog/
-  logo: images/logo/rgb/knative-logo-rgb.png
+  logo: images/logo/rgb/knative-logo.png
   favicon: images/favicon.ico
   custom_dir: overrides
   features:
