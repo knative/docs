@@ -415,6 +415,10 @@ h2.secondary-headline, h3.trusted-by {
   color: #7cc57c;
 }
 
+.md-typeset .md-button {
+  color: #024c93;
+}
+
 @media only screen and (max-width: 1219px) {
   .md-header__topic {
     margin: 0;
