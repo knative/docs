@@ -79,7 +79,7 @@ First, deploy the Knative Service. This service accepts the environment variable
 
 Ping your Knative Service by opening [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank} in your browser of choice or by running the command:
 
-```
+```bash
 curl http://hello.default.127.0.0.1.sslip.io
 ```
 
