@@ -16,7 +16,7 @@ You can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or 
 
 ### Live preview
 
-To start the live preview, from any directory run the following script.
+To start the live preview, run the following script from the root directory of your local Knative docs repo:
 ```
 ./hack/docker/run.sh
 ```
@@ -29,13 +29,13 @@ When you're done with your changes, you can stop the container using `Ctrl+C`.
 
 ### Full site build (optional)
 
-You can run a complete build of the website with all versions, from any directory run the following script.
+To run a complete build of the website with all versions, run the following script from the root directory of your local Knative docs repo:
 ```
 ./hack/docker/test.sh
 ```
 The build output is the entire static site located in `./site`.
 
-You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3
+You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3.
 
 
 ## (Option 2) Using native Python mkdocs CLI
