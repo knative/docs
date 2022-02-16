@@ -66,7 +66,7 @@ Since our "Hello world" Service is being deployed as a Knative Service, not a Ku
 ## Ping your Knative Service
 Ping your Knative Service by opening [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank} in your browser of choice or by running the command:
 
-```
+```bash
 curl http://hello.default.127.0.0.1.sslip.io
 ```
 
