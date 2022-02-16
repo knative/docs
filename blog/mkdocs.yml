@@ -71,7 +71,7 @@ plugins:
       as_update: false
       datetime_format: "%Y-%m-%d"
 
-copyright: "Copyright © 2021 The Knative Authors"
+copyright: "Copyright © 2022 The Knative Authors"
 
 extra:
   homepage: https://knative.dev/docs
