@@ -146,7 +146,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trusted-by-container .logo.triggermesh img {
-  width: 121pt;
+  max-width: 120pt;
   height: auto;
 }
 
