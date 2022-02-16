@@ -10,9 +10,13 @@ If you choose to run the site locally, we strongly recommend using a container.
 
 Regardless of the method used, when you submit a PR, a live preview link will be available in a comment on the PR.
 
-## Use the Docker container
+## (Option 1): Use the Docker container
 
-To start the live preview, run the following script.
+You can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or any docker engine supported for your operating system that is compatible with the `docker` CLI, for example [colima](https://github.com/abiosoft/colima).
+
+### Live preview
+
+To start the live preview, from any directory run the following script.
 ```
 ./hack/docker/run.sh
 ```
@@ -20,11 +24,12 @@ Then open a web browser on http://localhost:8000
 
 You can edit any file under `./docs` and the live preview autoreloads.
 
-When you're done with your changes, you can stop the container in another terminal.
-```
-./hack/docker/stop.sh
-```
-You can run a complete build of the website with all versions using.
+When you're done with your changes, you can stop the container using `Ctrl+C`.
+
+
+### Full site build (optional)
+
+You can run a complete build of the website with all versions, from any directory run the following script.
 ```
 ./hack/docker/test.sh
 ```
@@ -32,6 +37,11 @@ The build output is the entire static site located in `./site`.
 
 You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3
 
+
+## (Option 2) Using native Python mkdocs CLI
+
+The website is built using [material-mkdocs](https://squidfunk.github.io/mkdocs-material/) which is a python tool based
+on the `[mkdocs](https://www.mkdocs.org/) project.
 
 ### Install Material for MkDocs locally
 
@@ -43,21 +53,14 @@ from the [Python website](https://www.python.org).
 
 For some (e.g. folks using RHEL), you might have to use pip3.
 
-#### Install using pip
+Install Material for MkDocs and dependencies by running:
 
-1. Install Material for MkDocs by running:
+```
+pip install -r requirements.txt
+```
 
-    ```
-    pip install mkdocs-material
-    ```
+For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
 
-    For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
-
-1. Install the extensions to MkDocs needed for Knative by running:
-
-    ```
-    pip install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin mkdocs-redirects
-    ```
 
 If you have `pip3` you can use the above commands and replace `pip` with `pip3`
 
