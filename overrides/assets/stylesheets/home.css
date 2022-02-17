@@ -296,7 +296,7 @@ h2.secondary-headline, h3.trusted-by {
   margin-top: 20px;
 }
 
-.trying-it-all-container .md-button.call-to-action {
+.trying-it-all-container .md-typeset .md-button.call-to-action {
   font-size: x-large;
   padding: 0.5rem 2em;
   background-color: #024c93;
@@ -415,8 +415,8 @@ h2.secondary-headline, h3.trusted-by {
   color: #7cc57c;
 }
 
-.md-typeset .md-button {
-  color: #024c93;
+.md-typeset .md-button.white {
+  color: white;
 }
 
 @media only screen and (max-width: 1219px) {
