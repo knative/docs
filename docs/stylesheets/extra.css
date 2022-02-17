@@ -317,10 +317,24 @@ a.md-header__button.md-logo img {
   outline: 0;
 }
 
+.modal-dialog .md-button {
+  color: #024c93;
+}
+
+.modal-dialog .md-button--primary {
+  color: white;
+  background-color: #024c93;
+}
+
 /* Tame the footer and make the prev/next stand out */
 .md-footer {
   color: var(--md-typeset-a-color);
   background-color: #024c93;
+}
+
+.md-footer .md-footer-copyright {
+  color: #1a7dc9;
+  font-weight: bold;
 }
 
 .md-footer-meta {
