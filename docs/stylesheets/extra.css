@@ -5,7 +5,7 @@
 }
 
 .md-clipboard {
-  color: var(--md-primary-fg-color);
+  color: #024c93;
 }
 
 .highlight.no-copy .md-clipboard {
@@ -356,4 +356,10 @@ a.md-header__button.md-logo img {
 
 .feature-stable {
   background: rgb(228, 255, 218);
+}
+
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__item--active>.md-nav__link {
+    color: var(--nav-item-color);
+  }
 }
