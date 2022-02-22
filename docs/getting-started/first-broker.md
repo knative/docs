@@ -1,6 +1,6 @@
 # Sources, Brokers, Triggers, Sinks, oh my!
 
-For the purposes of this tutorial, let's keep it simple. You will focus on four powerful Eventing components: **Source, Trigger, Broker, and Sink**.
+For the purposes of this tutorial, let's keep it simple. You will focus on four powerful Eventing components: **Source**, **Trigger**, **Broker**, and **Sink**.
 
 Let's take a look at how these components interact:
 
@@ -35,17 +35,17 @@ information back and forth between your Services and these components.
 
 ## Examining the Broker
 
-As part of the `kn quickstart` install, an In-Memory Broker should have already be installed in your Cluster. Check to see that it is installed by running the command:
+As part of the `kn quickstart` install, an In-Memory Broker should already be installed in your Cluster. Check to see that it is installed by running the command:
 
 ```bash
 kn broker list
 ```
 
-==**Expected Output**==
-```{ .bash .no-copy }
-NAME             URL                                                                                AGE   CONDITIONS   READY   REASON
-example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker     5m    5 OK / 5    True
-```
+!!! Success "Expected output"
+    ```{ .bash .no-copy }
+    NAME             URL                                                                                AGE   CONDITIONS   READY   REASON
+    example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker     5m    5 OK / 5    True
+    ```
 !!! warning
     In-Memory Brokers are for development use only and must not be used in a production deployment.
 
@@ -55,4 +55,4 @@ example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/defaul
 
     If you want to find out more about the different components of Knative Eventing, such as Channels, Sequences and Parallel flows, check out the [Knative Eventing documentation](../eventing/README.md){target=_blank}.
 
-**Next, you'll take a look at a simple implementation** of Sources, Brokers, Triggers and Sinks using an app called the Cloud Events Player.
+**Next, you'll take a look at a simple implementation** of Sources, Brokers, Triggers and Sinks using an app called the CloudEvents Player.

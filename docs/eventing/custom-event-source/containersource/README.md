@@ -11,7 +11,7 @@ container image, and a ContainerSource that uses your image URI.
 
 ## Before you begin
 
-Before you can create a ContainerSource object, you must have [Knative Eventing](../../../install/eventing/install-eventing-with-yaml.md) installed on your cluster.
+Before you can create a ContainerSource object, you must have [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md) installed on your cluster.
 
 ## Develop, build and publish a container image
 

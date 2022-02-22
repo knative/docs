@@ -6,7 +6,7 @@ Before installing Knative, you must meet the following prerequisites:
 
     !!! tip
         You can install a local distribution of Knative for development purposes
-        using the [Knative Quickstart plugin](/docs/getting-started/quickstart-install.md)
+        using the [Knative Quickstart plugin](/docs/getting-started/quickstart-install/)
 
 - **For production purposes**, it is recommended that:
 

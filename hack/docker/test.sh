@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
+SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
+IMAGE=${1:-ghcr.io/knative/knative-docs:latest}
+
 set -x
 
-NAME=${1:-knative-docs-dev}
-PORT=${2:-8000}
-IMAGE=${3:-knative-docs-dev}
 
-docker run --rm -v "${PWD}:/site" -it --entrypoint "" ${IMAGE} hack/build.sh
+docker run --rm -v "${SCRIPT_DIR}/../../:/site" -it --entrypoint "" ${IMAGE} hack/build.sh

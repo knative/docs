@@ -146,7 +146,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trusted-by-container .logo.triggermesh img {
-  width: 121pt;
+  max-width: 120pt;
   height: auto;
 }
 
@@ -296,7 +296,7 @@ h2.secondary-headline, h3.trusted-by {
   margin-top: 20px;
 }
 
-.trying-it-all-container .md-button.call-to-action {
+.trying-it-all-container .md-typeset .md-button.call-to-action {
   font-size: x-large;
   padding: 0.5rem 2em;
   background-color: #024c93;
@@ -413,6 +413,10 @@ h2.secondary-headline, h3.trusted-by {
 
 .whats-next-container .twemoji svg:hover {
   color: #7cc57c;
+}
+
+.md-typeset .md-button.white {
+  color: white;
 }
 
 @media only screen and (max-width: 1219px) {
