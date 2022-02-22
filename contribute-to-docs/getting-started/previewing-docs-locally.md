@@ -2,9 +2,48 @@
 
 The Knative website uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
 to render documentation.
-You can choose to install MkDocs locally or use a Docker image.
 
-## Install Material for MkDocs locally
+If you don't want to use any tool locally, you can use [GitPod](https://gitpod.io/#https://github.com/knative/docs)
+this will allow you to edit the files on a Web IDE and live preview.
+
+If you choose to run the site locally, we strongly recommend using a container.
+
+Regardless of the method used, when you submit a PR, a live preview link will be available in a comment on the PR.
+
+## (Option 1): Use the Docker container
+
+You can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or any docker engine supported for your operating system that is compatible with the `docker` CLI, for example [colima](https://github.com/abiosoft/colima).
+
+### Live preview
+
+To start the live preview, run the following script from the root directory of your local Knative docs repo:
+```
+./hack/docker/run.sh
+```
+Then open a web browser on http://localhost:8000
+
+You can edit any file under `./docs` and the live preview autoreloads.
+
+When you're done with your changes, you can stop the container using `Ctrl+C`.
+
+
+### Full site build (optional)
+
+To run a complete build of the website with all versions, run the following script from the root directory of your local Knative docs repo:
+```
+./hack/docker/test.sh
+```
+The build output is the entire static site located in `./site`.
+
+You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3.
+
+
+## (Option 2) Using native Python mkdocs CLI
+
+The website is built using [material-mkdocs](https://squidfunk.github.io/mkdocs-material/) which is a python tool based
+on the `[mkdocs](https://www.mkdocs.org/) project.
+
+### Install Material for MkDocs locally
 
 Material for MkDocs is Python based and uses pip to install most of its required
 packages, as well as the optional add-ons we use.
@@ -14,42 +53,18 @@ from the [Python website](https://www.python.org).
 
 For some (e.g. folks using RHEL), you might have to use pip3.
 
-### Install using pip
+Install Material for MkDocs and dependencies by running:
 
-1. Install Material for MkDocs by running:
+```
+pip install -r requirements.txt
+```
 
-    ```
-    pip install mkdocs-material
-    ```
+For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
 
-    For more detailed instructions, see [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
 
-1. Install the extensions to MkDocs needed for Knative by running:
+If you have `pip3` you can use the above commands and replace `pip` with `pip3`
 
-    ```
-    pip install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin mkdocs-redirects
-    ```
-
-### Install using pip3
-
-1. Install Material for MkDocs by running:
-
-    ```
-    pip3 install mkdocs-material
-    ```
-
-    For more detailed instructions, see the [Material for MkDocs documentation](https://squidfunk.github.io/mkdocs-material/getting-started/#installation)
-
-1. Install the extensions to MkDocs needed for Knative by running:
-
-    ```
-    pip3 install mkdocs-material-extensions mkdocs-macros-plugin mkdocs-exclude mkdocs-awesome-pages-plugin mkdocs-redirects
-    ```
-
-## Use the Docker container
-//TODO DOCKER CONTAINER EXTENSIONS
-
-## Setting up local preview
+### Setting up local preview
 
 When using the local preview, anytime you change any file in your local copy of
 the `/docs` directory and hit save, the site automatically rebuilds to reflect your changes!
@@ -70,7 +85,7 @@ and clone the repo.
       ```
 
     - **Local Preview with Dirty Reload**
-    If you’re only changing a single page in the `/docs/` folder that is not the homepage or `nav.yml`, adding the flag `--dirtyreload` makes the site rebuild super crazy insta-fast.
+    If you’re only changing a single page in the `/docs/` folder that is not the homepage or `nav.yml`, adding the flag `--dirtyreload` makes the site rebuild faster.
 
       ```
       mkdocs serve --dirtyreload

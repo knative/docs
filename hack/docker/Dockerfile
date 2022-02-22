@@ -8,5 +8,3 @@ COPY ./requirements.txt /site/
 
 # Python Dependencies
 RUN pip --no-cache-dir install -r requirements.txt
-# NodeJS Dependencies
-RUN npm ci

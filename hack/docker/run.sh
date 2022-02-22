@@ -1,12 +1,11 @@
 #!/usr/bin/env sh
 
+SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
+PORT=${2:-8000}
+IMAGE=${3:-ghcr.io/knative/knative-docs:latest}
+
 set -x
 
-NAME=${1:-knative-docs-dev}
-PORT=${2:-8000}
-IMAGE=${3:-knative-docs-dev}
 
-docker run --name "${NAME}" -d -p "${PORT}:8000" -v "${PWD}:/site" ${IMAGE} serve --dirtyreload --dev-addr=0.0.0.0:8000
-echo "Dev environment running with live reloading enabled. Open http://localhost:${PORT} to see the site"
-echo "For live logs run:"
-echo "docker logs -f ${NAME}"
+docker run --rm -p "${PORT}:8000" -v "${SCRIPT_DIR}/../../:/site" ${IMAGE} serve --dirtyreload --dev-addr=0.0.0.0:8000
+

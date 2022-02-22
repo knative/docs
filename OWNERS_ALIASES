@@ -66,10 +66,11 @@ aliases:
   - pierDipi
   - vaikas
   knative-admin:
+  - carlisia
   - csantanapr
   - dprotaso
-  - duglin
   - evankanderson
+  - itsmurugappan
   - julz
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -77,14 +78,15 @@ aliases:
   - knative-test-reporter-robot
   - lance
   - pmorie
-  - psschwei
   - rhuss
+  - smoser-ibm
   - spencerdillard
   - thisisnotapril
   - vaikas
+  - xtreme-sameer-vohra
   knative-release-leads:
-  - dprotaso
-  - psschwei
+  - carlisia
+  - xtreme-sameer-vohra
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -150,6 +152,7 @@ aliases:
   - evankanderson
   - gerardo-lc
   - kvmware
+  - mgencur
   - shinigambit
   productivity-wg-leads:
   - chizhg
@@ -187,6 +190,7 @@ aliases:
   - lionelvillard
   steering-committee:
   - csantanapr
+  - itsmurugappan
   - lance
   - pmorie
   - thisisnotapril
@@ -197,8 +201,8 @@ aliases:
   - julz
   - rhuss
   trademark-committee:
-  - duglin
   - evankanderson
+  - smoser-ibm
   - spencerdillard
   ux-wg-leads:
   - csantanapr

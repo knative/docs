@@ -4,27 +4,29 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
 === "Using Homebrew"
 
-    - Install `kn` by using [Homebrew](https://brew.sh){target=_blank}:
+    Do one of the following:
+
+    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command:
 
         ```bash
         brew install kn
         ```
 
-    - Upgrade an existing install to the latest version by running the command:
+    - To upgrade an existing `kn` install to the latest version, run the command:
 
         ```bash
         brew upgrade kn
         ```
 
-    ??? bug "Having issues upgrading `kn` using Homebrew?"
+        ??? bug "Having issues upgrading `kn` using Homebrew?"
 
-        If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
+            If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
 
-        ```bash
-        brew tap --repair
-        brew update
-        brew upgrade kn
-        ```
+            ```bash
+            brew tap --repair
+            brew update
+            brew upgrade kn
+            ```
 
 === "Using a binary"
 

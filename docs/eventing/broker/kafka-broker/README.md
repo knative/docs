@@ -1,8 +1,7 @@
-# Apache Kafka Broker
+# Knative Kafka Broker
 
-The Apache Kafka Broker is a native Broker implementation, that reduces
-network hops, supports any Kafka version, and has a better integration
-with Apache Kafka for the Knative Broker and Trigger model.
+The Knative Kafka Broker is an Apache Kafka native implementation of the Knative Broker API that reduces
+network hops, supports any Kafka version, and has a better integration with Kafka for the Broker and Trigger model.
 
 Notable features are:
 
@@ -14,7 +13,7 @@ Notable features are:
 
 ## Prerequisites
 
-1. [Installing Eventing using YAML files](../../../install/eventing/install-eventing-with-yaml.md).
+1. [Installing Eventing using YAML files](../../../install/yaml-install/eventing/install-eventing-with-yaml.md).
 2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
 
 ## Installation
