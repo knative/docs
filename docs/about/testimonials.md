@@ -4,7 +4,7 @@
 
   <div class="testimonial">
     <div class="img">
-      <img src="../images/testimonials/kelsey.png" alt="">
+      <img src="../../images/testimonials/kelsey.png" alt="">
     </div>
     <div class="quote">
       <div class="phrase">"If Kubernetes is an electrical grid, then Knative is its light switch."</div>
@@ -22,7 +22,7 @@
   <br>
   <div class="testimonial blue">
     <div class="img">
-      <img src="../images/testimonials/blue_zero_scaling_icon.svg" alt="">
+      <img src="../../images/testimonials/blue_zero_scaling_icon.svg" alt="">
     </div>
     <div class="quote">
       <b>Scale to Zero</b> is a feature of Knative Serving that automatically turns off services running in containers when there is no demand for them. Instead of running programs on standby, they can be turned off and turned back on when needed again. Scale to zero reduces costs over time and helps manage technical resources.
@@ -35,7 +35,7 @@
   <br>
   <div class="testimonial">
     <div class="img">
-      <img src="../images/testimonials/michael.png" alt="">
+      <img src="../../images/testimonials/michael.png" alt="">
     </div>
     <div class="quote">
       <div class="phrase">"I often think of Knative as part of 'Serverless 2.0.' It combines the good things about serverless with a loosening of constraints around execution time and availability of resources."</div><br>
@@ -56,7 +56,7 @@
   <br>
   <div class="testimonial">
     <div class="img">
-      <img src="../images/testimonials/aparna.png" alt="">
+      <img src="../../images/testimonials/aparna.png" alt="">
     </div>
     <div class="quote">
       <div class="phrase">"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud developers focus on the business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps. Knative is a framework that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</div><br>
@@ -71,7 +71,7 @@
   <br>
   <div class="testimonial">
     <div class="img">
-      <img src="../images/testimonials/tilen.png" alt="">
+      <img src="../../images/testimonials/tilen.png" alt="">
     </div>
     <div class="quote">
       <div class="phrase">"The amount of internal work needed to use Knative is minuscule"</div><br>
@@ -86,8 +86,8 @@
 
   <h2>Find out more</h2>
   <div class="find-links">
-    <a href="./case-studies">> Case Studies: Read about organizations using Knative, from platform developers to proven companies to innovative startups</a><br>
-    <a href="../getting-started/">> Check the getting started guide to get up and running with Knative in an afternoon</a><br>
-    <a href="../community/">> Join the Knative Slack to talk to the community</a>
+    <a href="../case-studies/deepc">> Case Studies: Read about organizations using Knative, from platform developers to proven companies to innovative startups</a><br>
+    <a href="../../getting-started/">> Check the getting started guide to get up and running with Knative in an afternoon</a><br>
+    <a href="../../community/">> Join the Knative Slack to talk to the community</a>
   </div>
 </div>
