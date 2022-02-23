@@ -43,7 +43,7 @@
       IBM is a committed sponsor of Knative
     </div>
   </div>
-  
+  <br>
   <h2>Knative in the broader ecosystem</h2>
   <p class="normal-text">
     To understand Knative more fully, it is important to know that it exists in a larger ecosystem of services that work together. For example, Knative acts as a framework on top of Kubernetes that helps build a serverless platform. Kubernetes itself is a system that orchestrates the creation and running of containers used in app deployment, scaling, and more. Those contain ers can run anything, from simple tools written in python to complex Al systems. Containers were developed to help tackle the problem of complexity. As development teams build software products, they create massive codebases. Left unorganized, those codebases can become gigantic and confusing-even for those who make them. Containers solve this problem by breaking codebases into small, self-contained processes that can interact to do work. They also help developers manage complex webs of dependencies like APIs and databases. These containers are easier to maintain for teams looking to work fast while maintaining best practices.
@@ -78,14 +78,14 @@
       -Tilen Kavčič, Backend Developer for Outfit7, which uses Knative for key backend system
     </div>
   </div>
-
+  <br>
   <h2>The advantage of Open Source</h2>
   <p class="normal-text">
     Open source has been a powerful resource for creating business solutions for decades. Kubernetes and Knative are now paving the way for that relationship to become stronger. Each project has significant support from some of the biggest names in tech including IBM, Google, Redhat, and VMware. The Kubernetes and Knative ecosystem consists of widely adopt ed projects that are proven across many installations for a multitude of uses. The open-source foundation of Knative means that anyone using the platform can participate in the community to get help, solve problems, and influence the direction of deployment for future versions.
   </p>
 
   <h2>Find out more</h2>
-  > Case Studies: Read about organizations using Knative, from platform developers to proven companies to innovative startups
-  > Download the getting started guide to get up and running with Knative in an afternoon
-  > Join the Knative Slack to talk to the community
+    <a href="./case-studies">> Case Studies: Read about organizations using Knative, from platform developers to proven companies to innovative startups</a><br>
+    <a href="../getting-started/">> Check the getting started guide to get up and running with Knative in an afternoon</a><br>
+    <a href="../community/">> Join the Knative Slack to talk to the community</a>
 </div>
