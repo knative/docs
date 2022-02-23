@@ -240,7 +240,7 @@ nav:
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
     - About:
-      - Testimonials: about/index.html
+      - Testimonials: about/README.md
     - "Community":
       - Welcome to the community: community/README.md
       - Contribute to Knative: community/contributing.md
