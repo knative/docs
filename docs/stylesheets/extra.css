@@ -376,6 +376,12 @@ a.md-header__button.md-logo img {
   color: black;
 }
 
+/* Testimonials */
+.testimonials h1 {
+  color: #014c8e;
+  margin-bottom: -14px;
+}
+
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active>.md-nav__link {
     color: var(--nav-item-color);

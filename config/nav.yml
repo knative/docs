@@ -239,6 +239,8 @@ nav:
       - Client: reference/client/README.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
+    - About:
+      - Testimonials: about/index.html
     - "Community":
       - Welcome to the community: community/README.md
       - Contribute to Knative: community/contributing.md
