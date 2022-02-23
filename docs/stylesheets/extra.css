@@ -377,9 +377,83 @@ a.md-header__button.md-logo img {
 }
 
 /* Testimonials */
+.testimonials h1, .testimonials h2,
+.testimonials h3, .testimonials .normal-text,
+.testimonials .quote {
+  font-family: inherit;
+}
+
+.testimonials h1, .testimonials h2,
+.testimonials h3 {
+  font-weight: bold;
+}
+
 .testimonials h1 {
   color: #014c8e;
-  margin-bottom: -14px;
+  margin-bottom: -26px;
+}
+
+.testimonials h2 {
+  font-size: 2em;
+  color: #034c93;
+}
+
+.testimonials h3 {
+  font-size: 1.65em;
+}
+
+.testimonials .testimonial {
+  display: flex;
+}
+
+.testimonials .testimonial .img {
+  margin: 0 30px 0 60px;
+}
+
+.testimonials .quote {
+  margin: auto 0;
+  text-align: start;
+  padding: 0 2em;
+  color: #497bb2;
+  font-weight: 600;
+  line-height: 1.1;
+  font-family: inherit;
+  font-size: .85rem;
+  border-left: #53b2dd 4.5px solid;
+}
+
+.testimonials .testimonial img {
+  max-width: 130px;
+}
+
+.testimonials .testimonial.blue img {
+  max-width: 160px;
+  width: 160px;
+}
+
+.testimonials .testimonial.blue {
+  border-top: #4db3d9 4.5px solid;
+  padding-top: 40px;
+}
+
+.testimonials .testimonial.blue .quote {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #4db3d9;
+  border: none;
+}
+
+.testimonials .quote .phrase {
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.testimonials .normal-text {
+  font-weight: 600;
+  font-size: .86rem;
+  color: #6e6e6e;
 }
 
 @media screen and (max-width: 76.1875em) {
