@@ -78,14 +78,16 @@
       -Tilen Kavčič, Backend Developer for Outfit7, which uses Knative for key backend system
     </div>
   </div>
-  <br>
+  
   <h2>The advantage of Open Source</h2>
   <p class="normal-text">
     Open source has been a powerful resource for creating business solutions for decades. Kubernetes and Knative are now paving the way for that relationship to become stronger. Each project has significant support from some of the biggest names in tech including IBM, Google, Redhat, and VMware. The Kubernetes and Knative ecosystem consists of widely adopt ed projects that are proven across many installations for a multitude of uses. The open-source foundation of Knative means that anyone using the platform can participate in the community to get help, solve problems, and influence the direction of deployment for future versions.
   </p>
 
   <h2>Find out more</h2>
+  <div class="find-links">
     <a href="./case-studies">> Case Studies: Read about organizations using Knative, from platform developers to proven companies to innovative startups</a><br>
     <a href="../getting-started/">> Check the getting started guide to get up and running with Knative in an afternoon</a><br>
     <a href="../community/">> Join the Knative Slack to talk to the community</a>
+  </div>
 </div>
