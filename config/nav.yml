@@ -239,14 +239,14 @@ nav:
       - Client: reference/client/README.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
-    - About:
-      - Testimonials: about/testimonials.md
     - "Community":
       - Welcome to the community: community/README.md
       - Contribute to Knative: community/contributing.md
       - About the community: community/about.md
-    - Case studies:
-      - deepc: about/case-studies/deepc.md
-      - Outfit7: about/case-studies/outfit7.md
-      - Puppet: about/case-studies/puppet.md
+    - About:
+      - Testimonials: about/testimonials.md
+      - Case studies:
+        - deepc: about/case-studies/deepc.md
+        - Outfit7: about/case-studies/outfit7.md
+        - Puppet: about/case-studies/puppet.md
     - Blog: /blog/
