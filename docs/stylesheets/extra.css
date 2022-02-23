@@ -389,13 +389,14 @@ a.md-header__button.md-logo img {
 }
 
 .testimonials h1 {
-  color: #014c8e;
+  color: #024c93;
   margin-bottom: -26px;
 }
 
 .testimonials h2 {
   font-size: 2em;
-  color: #034c93;
+  color: #024c93;
+  margin-bottom: -12px;
 }
 
 .testimonials h3 {
@@ -407,7 +408,7 @@ a.md-header__button.md-logo img {
 }
 
 .testimonials .testimonial .img {
-  margin: 0 30px 0 60px;
+  margin: auto 30px auto 60px;
 }
 
 .testimonials .quote {
@@ -419,7 +420,7 @@ a.md-header__button.md-logo img {
   line-height: 1.1;
   font-family: inherit;
   font-size: .85rem;
-  border-left: #53b2dd 4.5px solid;
+  border-left: #4db3d9 4.5px solid;
 }
 
 .testimonials .testimonial img {
@@ -432,12 +433,12 @@ a.md-header__button.md-logo img {
 }
 
 .testimonials .testimonial.blue {
-  border-top: #4db3d9 4.5px solid;
-  padding-top: 40px;
+  border-top: #4db3d9 2.5px solid;
+  padding-top: 60px;
 }
 
 .testimonials .testimonial.blue .quote {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 500;
   color: #4db3d9;
   border: none;
@@ -454,6 +455,10 @@ a.md-header__button.md-logo img {
   font-weight: 600;
   font-size: .86rem;
   color: #6e6e6e;
+}
+
+.testimonials a {
+  color: #175494;
 }
 
 @media screen and (max-width: 76.1875em) {
