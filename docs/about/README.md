@@ -59,7 +59,7 @@
       <img src="../images/testimonials/aparna.png" alt="">
     </div>
     <div class="quote">
-      <div class="phrase">"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud developers focus on the business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps.. Knative is a framework that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</div><br>
+      <div class="phrase">"What we are doing with Knative is to provide a developer experience that makes it easier to focus on code. Cloud developers focus on the business problems they are solving without having to coordinate or wait for approvals from platform teams to scale their apps. Knative is a framework that helps automate platform capabilities so your apps can scale as if they were running on Serverless compute."</div><br>
       -Aparna Sinha, Director of Product Management, Google
     </div>
   </div>
@@ -78,7 +78,7 @@
       -Tilen Kavčič, Backend Developer for Outfit7, which uses Knative for key backend system
     </div>
   </div>
-  
+
   <h2>The advantage of Open Source</h2>
   <p class="normal-text">
     Open source has been a powerful resource for creating business solutions for decades. Kubernetes and Knative are now paving the way for that relationship to become stronger. Each project has significant support from some of the biggest names in tech including IBM, Google, Redhat, and VMware. The Kubernetes and Knative ecosystem consists of widely adopt ed projects that are proven across many installations for a multitude of uses. The open-source foundation of Knative means that anyone using the platform can participate in the community to get help, solve problems, and influence the direction of deployment for future versions.
