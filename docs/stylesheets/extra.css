@@ -461,6 +461,10 @@ a.md-header__button.md-logo img {
   color: #175494;
 }
 
+.testimonials .find-links {
+  padding-top: 16px;
+}
+
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active>.md-nav__link {
     color: var(--nav-item-color);
