@@ -19,29 +19,30 @@ Create a sample service:
 
 === "Apply YAML"
 
-1. Create a YAML file using the following example:
+    1. Create a YAML file using the following example:
 
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-     name: helloworld-go
-     namespace: default
-    spec:
-     template:
-      spec:
-       containers:
-        - image: gcr.io/knative-samples/helloworld-go
-          env:
-            - name: TARGET
-              value: "Go Sample v1"
-    ```
-1. Apply the YAML file by running the command:
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        metadata:
+        name: helloworld-go
+        namespace: default
+        spec:
+        template:
+        spec:
+        containers:
+            - image: gcr.io/knative-samples/helloworld-go
+            env:
+                - name: TARGET
+                value: "Go Sample v1"
+        ```
+        
+    1. Apply the YAML file by running the command:
 
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 === "kn CLI"
 
