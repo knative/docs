@@ -11,6 +11,7 @@ nav:
     - Eventing:
     - Code samples:
     - Reference:
+    - About:
     - Blog:
     - Case studies:
     - Community:
@@ -61,6 +62,7 @@ nav:
     - Eventing: /docs/eventing/
     - Code samples: /docs/samples/
     - Reference: /docs/reference/
+    - About: /docs/about/
     - Blog:
       - index.md
       - Releases:
