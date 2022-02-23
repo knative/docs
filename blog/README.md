@@ -5,15 +5,14 @@ The Knative website has a basic, top-level navigation that looks like this:
 ```yaml
 nav:
     - Home:
-    - Getting started:
+    - Tutorial:
     - Installing:
     - Serving:
     - Eventing:
     - Code samples:
     - Reference:
-    - About:
     - Blog:
-    - Case studies:
+    - About:
     - Community:
 ```
 
@@ -34,15 +33,16 @@ The main one, for the website as a whole, is located at [`docs/config/nav.yml`](
 
 Note here that each link assumes that the present working directory is `docs/docs/`, so for example the "Getting Started" README which is located in `docs/docs/getting-started/README.md` is listed as `getting-started/README.md`
 
-The Blog and Community pages instead use absolute links to their sections:
+The Blog pages instead use absolute links to its sections:
 
 ```yaml
+    - About:
+      - Testimonials: about/testimonials.md
+      - Case studies:
+        - deepc: about/case-studies/deepc.md
+        - Outfit7: about/case-studies/outfit7.md
+        - Puppet: about/case-studies/puppet.md
     - Blog: /blog/
-    - Case Studies:
-      - deepc: about/case-studies/deepc.md
-      - Outfit7: about/case-studies/outfit7.md
-      - Puppet: about/case-studies/puppet.md
-    - Community: /community/
 ```
 
 Note that the Blog link is `/blog/` and not `blog/` (and similar for the community site).
@@ -56,13 +56,14 @@ In order to do this, we essentially have a separate mkdocs site for the blog tha
 ```yaml
 nav:
     - Home: /docs/
-    - Getting started: /docs/getting-started/
+    - Tutorial: /docs/getting-started/
     - Installing: /docs/install/
     - Serving: /docs/serving/
     - Eventing: /docs/eventing/
     - Code samples: /docs/samples/
     - Reference: /docs/reference/
-    - About: /docs/about/
+    - Community: /docs/community/
+    - About: /docs/about/testimonials
     - Blog:
       - index.md
       - Releases:
@@ -70,8 +71,6 @@ nav:
           - releases/announcing-knative-v0-25-release.md
           - releases/announcing-knative-v0-24-release.md
             ...
-    - Case studies: /docs/about/case-studies/deepc
-    - Community: /community/
 ```
 
 A couple of key points:
