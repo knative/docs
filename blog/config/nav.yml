@@ -1,13 +1,13 @@
 nav:
     - Home: /docs/
-    - Getting started: /docs/getting-started/
+    - Tutorial: /docs/getting-started/
     - Installing: /docs/install/
     - Serving: /docs/serving/
     - Eventing: /docs/eventing/
     - Code samples: /docs/samples/
     - Reference: /docs/reference/
-    - "Community": /docs/community/
-    - About: /docs/about/testimonials
+    - Community: /docs/community/
+    - About: /docs/about/testimonials/
   #####################################################
     # Blog
   #####################################################
