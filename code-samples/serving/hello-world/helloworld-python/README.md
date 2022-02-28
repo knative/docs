@@ -113,56 +113,52 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
 1. After the build has completed and the container is pushed to Docker Hub, you
    can deploy the app into your cluster.
 
-=== "yaml"
 
-       1. Create a new file, `service.yaml` and copy the following service
-          definition into the file. Make sure to replace `{username}` with your
-          Docker Hub username or with the URL provided by your container registry
+### "yaml"
+Create a new file, `service.yaml` and copy the following service
+definition into the file. Make sure to replace `{username}` with your
+Docker Hub username or with the URL provided by your container registry
 
-        ```yaml
-          apiVersion: serving.knative.dev/v1
-          kind: Service
-          metadata:
-            name: helloworld-python
-            namespace: default
-          spec:
-            template:
-              spec:
-                containers:
-                  - image: docker.io/{username}/helloworld-python
-                    env:
-                      - name: TARGET
-                        value: "Python Sample v1"
-        ```
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+name: helloworld-python
+namespace: default
+spec:
+template:
+    spec:
+    containers:
+        - image: docker.io/{username}/helloworld-python
+        env:
+            - name: TARGET
+            value: "Python Sample v1"
+```
 
-       Ensure that the container image value in `service.yaml` matches the container
-       you built in the previous step. Apply the configuration using `kubectl`:
+Ensure that the container image value in `service.yaml` matches the container
+you built in the previous step. Apply the configuration using `kubectl`:
 
-       ```bash
-       kubectl apply --filename service.yaml
-       ```
+```bash
+kubectl apply --filename service.yaml
+```
 
-=== "kn"
+### "kn"
+With `kn` you can deploy the service with
 
-       With `kn` you can deploy the service with
+```bash
+kn service create helloworld-python --image=docker.io/{username}/helloworld-python --env TARGET="Python Sample v1"
+```
 
-       ```bash
-       kn service create helloworld-python --image=docker.io/{username}/helloworld-python --env TARGET="Python Sample v1"
-       ```
+This will wait until your service is deployed and ready, and ultimately it
+will print the URL through which you can access the service.
 
-       This will wait until your service is deployed and ready, and ultimately it
-       will print the URL through which you can access the service.
+During the creation of your service, Knative performs the following steps:
 
-
-
-
-   During the creation of your service, Knative performs the following steps:
-
-   - Creates a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
-     for your app.
-   - Automatically scales your pods up and down, including scaling down to zero
-     active pods.
+- Creates a new immutable revision for this version of the app.
+- Network programming to create a route, ingress, service, and load balance
+    for your app.
+- Automatically scales your pods up and down, including scaling down to zero
+    active pods.
 
 ## Verification
 
@@ -170,32 +166,30 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
    > Note: If your URL includes `example.com` then consult the setup instructions for
    > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](https://knative.dev/docs/serving/using-a-custom-domain).
 
-    === "kubectl"
+### "kubectl"
 
-        ```bash
-        kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-        ```
+```bash
+kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+```
 
-       ```
+Example:
 
-       Example:
+```bash
+NAME                      URL
+helloworld-python    http://helloworld-python.default.1.2.3.4.sslip.io
+```
 
-       ```bash
-       NAME                      URL
-       helloworld-python    http://helloworld-python.default.1.2.3.4.sslip.io
-       ```
+### "kn"
 
-=== "kn"
+```bash
+kn service describe helloworld-python -o url
+```
 
-       ```bash
-       kn service describe helloworld-python -o url
-       ```
+Example:
 
-       Example:
-
-       ```bash
-       http://helloworld-python.default.1.2.3.4.sslip.io
-       ```
+```bash
+http://helloworld-python.default.1.2.3.4.sslip.io
+```
 
 
 
@@ -219,14 +213,14 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
 
 To remove the sample app from your cluster, delete the service record.
 
-=== "kubectl"
+### "kubectl"
 
-    ```bash
-    kubectl delete --filename service.yaml
-    ```
+```bash
+kubectl delete --filename service.yaml
+```
 
-=== "kn"
+### "kn"
 
-    ```bash
-    kn service delete helloworld-python
-    ```
+```bash
+kn service delete helloworld-python
+```
