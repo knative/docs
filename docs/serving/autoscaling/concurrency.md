@@ -76,8 +76,8 @@ The hard limit is specified [per Revision](autoscaler-types.md#global-versus-per
 
 There is no global setting for the hard limit in the autoscaling ConfigMap, because `containerConcurrency` has implications outside of autoscaling, such as on buffering and queuing of requests. However, a default value can be set for the Revision's `containerConcurrency` field in `config-defaults.yaml`.
 
-* The default value is `0`, meaning that there is no limit on the number of requests that are allowed to flow into the revision.
-* A value greater than `0` specifies the exact number of requests that are allowed to flow to the replica at any one time.
+The default value is `0`, meaning that there is no limit on the number of requests that are allowed to flow into the revision.
+A value greater than `0` specifies the exact number of requests that are allowed to flow to the replica at any one time.
 
 * **Global key:** `container-concurrency` (in `config-defaults.yaml`)
 * **Per-revision spec key:** `containerConcurrency`
@@ -85,8 +85,8 @@ There is no global setting for the hard limit in the autoscaling ConfigMap, beca
 * **Default:** `0`, meaning no limit
 
 
+**Example:**
 === "Per Revision"
-    **Example:**
     ```yaml
     apiVersion: serving.knative.dev/v1
     kind: Service
