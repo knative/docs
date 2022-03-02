@@ -17,7 +17,7 @@ Read what some of the Knative [adopters](https://github.com/knative/community/bl
 - IBM, [Knative joins the CNCF as a serverless incubation project](https://developer.ibm.com/blogs/knative-joins-the-cncf-as-a-serverless-incubation-project)
 - Red Hat, [Red Hat co-founded project Knative accepted as CNCF incubating project](https://www.redhat.com/en/blog/red-hat-co-founded-project-knative-accepted-cncf-incubating-project)
 - TriggerMesh, [CNCF Welcomes Knative as Latest Incubating Project](https://www.triggermesh.com/blog/cncf-welcomes-knative-as-latest-incubating-project)
-- VMware, _blog to be publish soon_
+- VMware, [Congratulations Knative on Joining the CNCF!](https://blogs.vmware.com/opensource/2022/03/02/congratulations-knative-on-joining-the-cncf)
 
 
 Cheers,
