@@ -11,6 +11,15 @@ Now that the project has been officially accepted, we continue the work of movin
 
 We are very excited about this important step for the Knative community and hope to celebrate with you at [KnativeCon](https://events.linuxfoundation.org/knativecon-europe) this May. We also recognize that many in our global community have their attention focused elsewhere. We wish our Ukrainian community members and contributors throughout Eastern Europe safety for themselves and their families and peace soon.
 
+Read what some of the Knative [adopters](https://github.com/knative/community/blob/main/ADOPTERS.MD) have to say about this significant milestone:
+- Chainguard, [Knative is now a CNCF project, and why this matters for software security](https://blog.chainguard.dev/knative-is-now-a-cncf-project-and-why-this-matters-for-software-security/)
+- Google, [Congratulations Knative on becoming part of the CNCF](https://cloud.google.com/blog/products/containers-kubernetes/knative-enters-the-cncf-as-an-incubating-project)
+- IBM, [Knative joins the CNCF as a serverless incubation project](https://developer.ibm.com/blogs/knative-joins-the-cncf-as-a-serverless-incubation-project)
+- Red Hat, [Red Hat co-founded project Knative accepted as CNCF incubating project](https://www.redhat.com/en/blog/red-hat-co-founded-project-knative-accepted-cncf-incubating-project)
+- TriggerMesh, [CNCF Welcomes Knative as Latest Incubating Project](https://www.triggermesh.com/blog/cncf-welcomes-knative-as-latest-incubating-project)
+- VMware, [Congratulations Knative on Joining the CNCF!](https://blogs.vmware.com/opensource/2022/03/02/congratulations-knative-on-joining-the-cncf)
+
+
 Cheers,
 
 Knative Steering Committee (SC)
