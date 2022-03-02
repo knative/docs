@@ -22,10 +22,10 @@ Follow this blog to keep up-to-date with Knative.
 
 # Featured Posts
 
-## Knative joining the CNCF
-Details on intention to join CNCF as incubating project.
+## Knative joins the CNCF
+This is a big milestone for our project and we are excited to join the [CNCF](https://www.cncf.io)
 
-[Read more :octicons-arrow-right-24:](steering/knative-cncf-donation.md){ .md-button }
+[Read more :octicons-arrow-right-24:](steering/cncf.md){ .md-button }
 
 ## Knative 1.2 is out!
 Details on the 1.2 release of the Knative project.
