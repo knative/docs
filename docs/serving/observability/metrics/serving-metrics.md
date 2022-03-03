@@ -7,9 +7,9 @@ Metrics are listed next.
 
 The following metrics can help you to understand how an application responds when traffic passes through the activator. For example, when scaling from zero, high request latency might mean that requests are taking too much time to be fulfilled.
 
-| ```Metric Name``` | Description | Type | Tags | Unit | Status |
+| Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
-| request_concurrency | Concurrent requests that are routed to Activator<br>These are requests reported by the concurrency reporter which may not be done yet.<br> This is the average concurrency over a reporting period | Gauge | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
+| ```request_concurrency``` | Concurrent requests that are routed to Activator<br>These are requests reported by the concurrency reporter which may not be done yet.<br> This is the average concurrency over a reporting period | Gauge | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
 | ```request_count``` | The number of requests that are routed to Activator.<br>These are requests that have been fulfilled from the activator handler. | Counter | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```response_code```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
 | ```request_latencies``` | The response time in millisecond for the fulfilled routed requests | Histogram | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```response_code```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Milliseconds | Stable |
 
