@@ -10,7 +10,7 @@ This page describes Knative security and disclosure information.
 
 We're extremely grateful for security researchers and users that report vulnerabilities to the Knative Open Source Community. All reports are thoroughly investigated by a set of community volunteers.
 
-To make a report, please email the private security@knative.team list with the s ecurity detauls and the details expected for all Knative bug reports. 
+To make a report, please email the private security@knative.team list with the security detauls and the details expected for all Knative bug reports.
 
 ### When Should I Report a Vulnerability?
 
