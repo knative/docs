@@ -15,7 +15,7 @@ All plugins can be installed by downloading the current release from Github and 
 
 ### Homebrew
 
-Some plugins can be installed via the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/)) For example, the `kn-admin` plugin can be installed by running `brew install knative-sandbox/kn-plugins/admin`. 
+Some plugins can be installed via the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/)) For example, the `kn-admin` plugin can be installed by running `brew install knative-sandbox/kn-plugins/admin`.
 
 ## List of Knative plugins
 
