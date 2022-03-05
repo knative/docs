@@ -239,6 +239,7 @@ nav:
       - Client: reference/client/README.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
+      - Security: reference/security/README.md
     - "Community":
       - Welcome to the community: community/README.md
       - Contribute to Knative: community/contributing.md
