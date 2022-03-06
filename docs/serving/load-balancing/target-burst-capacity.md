@@ -60,7 +60,7 @@ Target burst capacity can be configured using a combination of the following par
 
 !!! note
 
-    Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress 
+    Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress
     gateway, see the [Serving API](../../reference/api/serving-api.md) documentation.
 
 
