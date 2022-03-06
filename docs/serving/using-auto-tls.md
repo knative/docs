@@ -151,7 +151,7 @@ wildcard certificate like `*.my-ns.example.com`.
 
 ### Provising certificates per namespace (wildcard certificates)
 
-!!! warning 
+!!! warning
 
   Provisioning a certificate per namespace only works with DNS-01
   challenge. This component cannot be used with HTTP-01 challenge.
