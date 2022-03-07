@@ -9,26 +9,31 @@ The `kn` CLI supports the use of plugins. Plugins enable you to extend the funct
 
 ## How to install a plugin
 
-### Manaul installation
+### Manual installation
 
-All plugins can be installed by downloading the current release from Github and placing it somewhere on your `PATH`. You may need to rename the file to remove any OS/architecture information (for example, `kn-admin-darwin-amd64` should be renamed to `kn-admin`).
+You can manually install all plugins. To manually install a plugin:
+
+1. Download the current release from GitHub. See the [list of Knative plugins](list-of-knative-plugins) you can download.
+1. Rename the file to remove the OS and architecture information. For example, rename `kn-admin-darwin-amd64` to `kn-admin`.
+1. Make the plugin executable. For example, `chmod +x kn-admin`.
+1. Move the file to either a directory on your `PATH` or to the [`plugins/` directory](configure-kn.md) for your operating system. 
 
 ### Homebrew
 
-Some plugins can be installed via the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/)) For example, the `kn-admin` plugin can be installed by running `brew install knative-sandbox/kn-plugins/admin`.
+You can install some plugins can be installed using the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/). For example, you can install the `kn-admin` plugin by running `brew install knative-sandbox/kn-plugins/admin`.
 
 ## List of Knative plugins
 
 | Plugin | Description | Available via Homebrew? |
 | --- | --- | :---: |
-| [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) | Kn plugin for managing a Kubernetes based Knative installation | Y |
-| [kn-plugin-diag](https://github.com/knative-sandbox/kn-plugin-diag) | Kn plugin for exposing detailed information for different layers of knative objects for diagnose | N |
-| [kn-plugin-event](https://github.com/knative-sandbox/kn-plugin-event) | Kn plugin for sending events to Knative sinks | Y |
-| [kn-plugin-func](https://github.com/knative-sandbox/kn-plugin-func) | Kn plugin for functions | Y |
-| [kn-plugin-migration](https://github.com/knative-sandbox/kn-plugin-migration) | Kn plugin for migrating Knative services from one cluster to another | N |
-| [kn-plugin-operator](https://github.com/knative-sandbox/kn-plugin-operator) | Kn plugin for managing Knative with Knative Operator | N |
-| [kn-plugin-quickstart](https://github.com/knative-sandbox/kn-plugin-quickstart) | Kn plugin for installation of Knative cluster for developers to quickstart | Y |
-| [kn-plugin-service-log](https://github.com/knative-sandbox/kn-plugin-service-log) | Kn plugin for showing the standard output of Knative services | N |
-| [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka) | Kn plugin for managing Kafka event sources | Y |
-| [kn-plugin-source-kamelet](https://github.com/knative-sandbox/kn-plugin-source-kamelet) | Kn plugin for managing Kamelets and KameletBindings | Y |
+| [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) | `kn` plugin for managing a Kubernetes based Knative installation | Y |
+| [kn-plugin-diag](https://github.com/knative-sandbox/kn-plugin-diag) | `kn` plugin for diagnosing issues by exposing detailed information for different layers of Knative objects | N |
+| [kn-plugin-event](https://github.com/knative-sandbox/kn-plugin-event) | `kn` plugin for sending events to Knative sinks | Y |
+| [kn-plugin-func](https://github.com/knative-sandbox/kn-plugin-func) | `kn` plugin for functions | Y |
+| [kn-plugin-migration](https://github.com/knative-sandbox/kn-plugin-migration) | `kn` plugin for migrating Knative Services from one cluster to another | N |
+| [kn-plugin-operator](https://github.com/knative-sandbox/kn-plugin-operator) | `kn` plugin for managing Knative with Knative Operator | N |
+| [kn-plugin-quickstart](https://github.com/knative-sandbox/kn-plugin-quickstart) | `kn` plugin for developers to install a quickstart Knative cluster for experimentation purposes | Y |
+| [kn-plugin-service-log](https://github.com/knative-sandbox/kn-plugin-service-log) | `kn` plugin for showing the standard output of Knative Services | N |
+| [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka) | `kn` plugin for managing Kafka event sources | Y |
+| [kn-plugin-source-kamelet](https://github.com/knative-sandbox/kn-plugin-source-kamelet) | `kn` plugin for managing Kamelets and KameletBindings | Y |
 
