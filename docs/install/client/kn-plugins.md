@@ -16,7 +16,7 @@ You can manually install all plugins. To manually install a plugin:
 1. Download the current release from GitHub. See the [list of Knative plugins](list-of-knative-plugins) you can download.
 1. Rename the file to remove the OS and architecture information. For example, rename `kn-admin-darwin-amd64` to `kn-admin`.
 1. Make the plugin executable. For example, `chmod +x kn-admin`.
-1. Move the file to either a directory on your `PATH` or to the [`plugins/` directory](configure-kn.md) for your operating system.
+1. Move the file to a directory on your `PATH`. For example, `/usr/local/bin`.
 
 ### Homebrew
 
