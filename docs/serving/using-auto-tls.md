@@ -151,8 +151,9 @@ wildcard certificate like `*.my-ns.example.com`.
 
 ### Provising certificates per namespace (wildcard certificates)
 
-!!! warning Provisioning a certificate per namespace only works with DNS-01
- challenge. This component cannot be used with HTTP-01 challenge.
+!!! warning
+    Provisioning a certificate per namespace only works with DNS-01
+    challenge. This component cannot be used with HTTP-01 challenge.
 
 The per-namespace certificate manager uses namespace labels to select which
 namespaces should have a certificate applied. For more details on namespace
