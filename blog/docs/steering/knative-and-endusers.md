@@ -58,9 +58,9 @@ bypassed for advanced users. We also built components to integrate with our
 enterprise applications. The below pictures show our deployment model and
 integrations we had built in-house.
 
-![Architecture](/blog/steering/images/enduser-platform-architecture.png)
+![](/blog/steering/images/enduser-platform-architecture.png)
 
-![Integration](/blog/steering/images/enduser-enterprise-integration.png)
+![](/blog/steering/images/enduser-enterprise-integration.png)
 
 With the above deployment model and integrations, we were able to give clean
 code to URL experience for our internal users. With just a few params,
@@ -121,18 +121,13 @@ doors for the end-users to share their story at Kubecon.
 
 ## Closing Thoughts
 
-<div style="clear: both;">
-  <div style="float: left; margin-right 1em;">
-    <img src="/blog/steering/images/enduser-timeline.png" alt="">
-  </div>
-  <div>
-    <p>In closing thoughts, I would like to share what Knative has been for me. A
+In closing thoughts, I would like to share what Knative has been for me. A
 couple of years ago, I started experimenting with Knative not knowing that I
 would be on the Knative steering committee one day. I have not contributed to
 every single OSS project out there but have been part of various communities,
 raising issues, providing feedback, being on the slack channel, etc., with that
 experience I can confidently say being part of this community has been rewarding
 on every front. It wouldn’t be an exaggeration to say that Knative has been one
-of my driving forces during these covid times.</p>
-  </div>
-</div>
+of my driving forces during these covid times.
+
+![](/blog/steering/images/enduser-timeline.png)
