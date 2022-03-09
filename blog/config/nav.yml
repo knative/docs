@@ -58,6 +58,7 @@ nav:
           - steering/2020-05-toc_election_results.md
           - steering/2020-01-annual-report-2019.md
           - steering/2019-12-updates.md
+          - steering/knative-and-endusers.md
       - Events:
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
