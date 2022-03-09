@@ -121,7 +121,7 @@ doors for the end-users to share their story at Kubecon.
 
 ## Closing Thoughts
 
-![Timeline](/blog/steering/images/enduser-timeline.png) | In closing thoughts, I
+| ![Timeline](/blog/steering/images/enduser-timeline.png) | In closing thoughts, I
 would like to share what Knative has been for me. A couple of years ago, I
 started experimenting with Knative not knowing that I would be on the Knative
 steering committee one day. I have not contributed to every single OSS project
@@ -129,6 +129,5 @@ out there but have been part of various communities, raising issues, providing
 feedback, being on the slack channel, etc., with that experience I can
 confidently say being part of this community has been rewarding on every front.
 It wouldn’t be an exaggeration to say that Knative has been one of my driving
-forces during these covid times.
-
-- | -
+forces during these covid times. |
+| - | - |
