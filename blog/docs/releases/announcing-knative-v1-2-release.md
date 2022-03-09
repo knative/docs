@@ -3,7 +3,7 @@ title: "v1.2 release"
 linkTitle: "v1.2 release"
 Author: "Samia Nneji"
 Author handle: https://github.com/snneji
-date: 2021-01-25
+date: 2022-01-25
 description: "Knative v1.2 release announcement"
 type: "blog"
 ---
