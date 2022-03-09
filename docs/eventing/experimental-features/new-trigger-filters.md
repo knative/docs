@@ -18,7 +18,7 @@ metadata:
 spec:
   broker: default
   filters:
-    - sql: "source LIKE '%commerce%' AND type IN ('order.created', 'order.updated', 'order.canceled')"
+    - cesql: "source LIKE '%commerce%' AND type IN ('order.created', 'order.updated', 'order.canceled')"
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -136,7 +136,7 @@ spec:
         - exact:
             type: com.github.push 
 ```
-### `sql`
+### `cesql`
 
 The provided [CloudEvents SQL Expression](https://github.com/cloudevents/spec/blob/main/cesql/spec.md) must evaluate to true.
 
@@ -148,7 +148,7 @@ metadata:
 spec:
   ...
   filters:
-    - sql: "source LIKE '%commerce%' AND type IN ('order.created', 'order.updated', 'order.canceled')"
+    - cesql: "source LIKE '%commerce%' AND type IN ('order.created', 'order.updated', 'order.canceled')"
 ```
 
 ## Conflict with the current `filter` field
@@ -169,7 +169,7 @@ spec:
       myextension: my-extension-value
   # Enhanced filters field. This will override the old filter field.
   filters:
-    - sql: "type == 'dev.knative.foo.bar' AND myextension == 'my-extension-value'"
+    - cesql: "type == 'dev.knative.foo.bar' AND myextension == 'my-extension-value'"
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
