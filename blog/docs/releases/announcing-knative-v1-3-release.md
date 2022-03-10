@@ -8,7 +8,6 @@ description: "Knative v1.3 release announcement"
 type: "blog"
 ---
 
-
 ## Announcing Knative v1.3 Release
 
 A new version of Knative is now available across multiple components.
@@ -40,15 +39,26 @@ Follow the instructions in the documentation
 
 ## 🚨 Breaking or Notable Changes
 
-- TODO: Add any breaking or notable changes, using format `TEXT ([#PR-NUMBER](PR-URL))`
+- Dropped the alpha field `RevisionSpec.MaxDurationSeconds` in favour of fixing the behavior of the existing `Timeout` field. ([#12635](https://github.com/knative/serving/pull/12635))
+
 
 ### 💫 New Features & Changes
 
-- TODO: Add new features and changes here
+- Allow the readiness probe port to be different than the user container port. ([#12606](https://github.com/knative/serving/pull/12606))
+- `net-certmanager` starts testing cert-manager v1.7.1. ([#12605](https://github.com/knative/serving/pull/12605))
 
 ### 🐞 Bug Fixes
 
-- TODO: Add bugs here
+- Bump prometheus/client_golang to v1.11.1 in order to address [CVE-2022-21698](https://github.com/advisories/GHSA-cg3q-j54f-5p7p). ([#12653](https://github.com/knative/serving/pull/12653))
+- Ensure the activator drains properly and the autoscaler rolls out conservatively.
+This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.com/knative/serving/pull/12617))
+- Fix an activator crash that could disrupt traffic (503). ([#12679](https://github.com/knative/serving/pull/12679))
+- Fix the tag to digest resolution when the registry credential is in a Kubernetes secret. ([#12655](https://github.com/knative/serving/pull/12655))
+- Provides more detailed error messages for invalid values of `autoscaling.knative.dev/initial-scale`. ([#12704](https://github.com/knative/serving/pull/12704))
+- Remove an unnecessary start delay when resolving a tag to digest. ([#12668](https://github.com/knative/serving/pull/12668))
+- Switches selectors for Knative resources to use the recommended `app.kubernetes.io` labels. ([#12587](https://github.com/knative/serving/pull/12587))
+- The validating webhook returns a more accurate error for invalid `autoscaling.knative.dev/target` values. ([#12698](https://github.com/knative/serving/pull/12698))
+- Updates serving configmap validating webhook to use an objectSelector to reduce unnecessary webhook invocations. ([#12612](https://github.com/knative/serving/pull/12612))
 
 ## Eventing v1.3
 
@@ -131,9 +141,14 @@ Release leads:
 
 Contributors:
 
+- [@dprotaso](https://github.com/dprotaso)
 - [@dsimansk](https://github.com/dsimansk)
 - [@itsmurugappan](https://github.com/itsmurugappan)
+- [@izabelacg](https://github.com/izabelacg)
 - [@kobayashi](https://github.com/kobayashi)
+- [@nak3](https://github.com/nak3)
+- [@psschwei](https://github.com/psschwei)
+- [@qu1queee](https://github.com/qu1queee)
 - [@vyasgun](https://github.com/vyasgun)
 
 ## Learn more
