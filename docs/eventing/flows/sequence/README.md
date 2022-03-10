@@ -4,9 +4,9 @@ Sequence CRD provides a way to define an in-order list of functions that will be
 invoked. Each step can modify, filter or create a new kind of an event. Sequence
 creates `Channel`s and `Subscription`s under the hood.
 
-    !!! info
-        Sequence needs "hairpin" traffic. Please verify that your pod can reach itself via the service IP.
-        If the "hairpin" traffic is not available, you can reach out to your cluster administrator since its a cluster level (typically CNI) setting.
+!!! info
+    Sequence needs "hairpin" traffic. Please verify that your pod can reach itself via the service IP.
+    If the "hairpin" traffic is not available, you can reach out to your cluster administrator since its a cluster level (typically CNI) setting.
 
 
 ## Usage
