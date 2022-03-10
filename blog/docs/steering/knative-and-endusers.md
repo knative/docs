@@ -16,14 +16,14 @@ representing end users @ Knative Steering Committee)_**
 Knative is an open-source community that values end-user
 contributions/interactions highly, this is evident in PRs, monthly meetups,
 slack interactions, etc. To top it all, recently Knative opened an end-user seat
-in the steering committee. This is very significant for a couple of reasons
+in the Steering Committee. This is very significant for a couple of reasons
 
 - Instills confidence in end-user organizations to use Knative in production
 - Very few OSS communities have end-user representation in the steering
   committee
 
 I am pleased to share that I have been elected as the first end-user
-representative in the steering committee. In this blog, I would like to share my
+representative in the Steering Committee. In this blog, I would like to share my
 organization’s Knative experience so far.
 
 ## Why Knative?
@@ -43,11 +43,11 @@ solution, there were a handful of them at various maturity levels, Knative was
 the one that stood out for us
 
 - Best scaling performance compared to all its peers.
-- Developer experience (single knative service resource yields Kubernetes
+- Developer experience (single Knative service resource yields Kubernetes
   deployment + service + ingress + certificate + custom domain).
 - Robust Primitives for building a developer platform.
 - OSS Community with a good governance model
-- Not backed by a single vendor
+- Backed by multiple vendors
 - Great support for an open and free project
 
 ## Implementation
@@ -55,17 +55,17 @@ the one that stood out for us
 To cater to developers with varying skill levels we built an abstraction on top
 of Knative. This layer kept the barrier of entry low for new users and could be
 bypassed for advanced users. We also built components to integrate with our
-enterprise applications. The below pictures show our deployment model and
-integrations we had built in-house.
+enterprise applications. The below pictures shows our deployment model and
+integrations we have built in-house.
 
-![](/blog/steering/images/enduser-platform-architecture.png)
+![Platform Architecture](/blog/steering/images/enduser-platform-architecture.png)
 
-![](/blog/steering/images/enduser-enterprise-integration.png)
+![Enterprise Integration](/blog/steering/images/enduser-enterprise-integration.png)
 
 With the above deployment model and integrations, we were able to give clean
 code to URL experience for our internal users. With just a few params,
-developers were able to deploy their services and receive a TLS enabled secured
-URL in seconds.
+developers were able to deploy their services and receive a TLS enabled URL in
+seconds.
 
 ## Interaction with Community
 
@@ -123,11 +123,11 @@ doors for the end-users to share their story at Kubecon.
 
 In closing thoughts, I would like to share what Knative has been for me. A
 couple of years ago, I started experimenting with Knative not knowing that I
-would be on the Knative steering committee one day. I have not contributed to
+would be on the Knative Steering Committee one day. I have not contributed to
 every single OSS project out there but have been part of various communities,
 raising issues, providing feedback, being on the slack channel, etc., with that
 experience I can confidently say being part of this community has been rewarding
 on every front. It wouldn’t be an exaggeration to say that Knative has been one
 of my driving forces during these covid times.
 
-![](/blog/steering/images/enduser-timeline.png)
+![My Knative Timeline](/blog/steering/images/enduser-timeline.png)
