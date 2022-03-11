@@ -18,7 +18,6 @@ running to watch our "Hello world!" Service scale up and down.
 ### Run your Knative Service
 Let's run our "Hello world!" Service just one more time. Use your terminal with curl.
 ```sh
-externalIP=$(kubectl get service/envoy -n contour-external --output=jsonpath='{.status.loadBalancer.ingress[0].ip}')
 curl -H "Host: hello.default.example.com" $externalIP
 ```{{execute T1}}
 
@@ -38,7 +37,7 @@ hello-world                              0/2     Terminating
 ```
 
 ### Scale up your Knative Service
-Go back to the `Terminal 1` tab and rerun the Knative Service in your terminal and you will see a new pod running again.
+Go back to the `Terminal` tab, and rerun the Knative Service in your terminal and you will see a new pod running again.
 `curl -H "Host: hello.default.example.com" $externalIP`{{execute T1}}
 
 Go back to the `Terminal 2` tab, and you can watch the pods and see how they scale up again
