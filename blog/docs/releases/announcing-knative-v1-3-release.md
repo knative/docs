@@ -135,16 +135,16 @@ Now if the user set the configuration of the RabbitMQ Source Exchange and Queue 
 
 ### 💫 New Features & Changes
 
-- Refactor the common functions for the APIs for the API transition ([#941](https://github.com/knative/operator/pull/941))
-- Add v1beta1 api into the Knative Operator ([#945](https://github.com/knative/operator/pull/945))
-- Add the conversion function for v1alpha1 and v1beta1 ([#948](https://github.com/knative/operator/pull/948))
-- Add conversion webhook module ([#936](https://github.com/knative/operator/pull/936))
-- Enable v1beta1 APIs ([#968](https://github.com/knative/operator/pull/968))
-- Promote v1beta1 as the storage version ([#969](https://github.com/knative/operator/pull/969))
+- Refactor the common functions for the APIs for the API transition. ([#941](https://github.com/knative/operator/pull/941))
+- Add v1beta1 API into the Knative Operator. ([#945](https://github.com/knative/operator/pull/945))
+- Add the conversion function for v1alpha1 and v1beta1. ([#948](https://github.com/knative/operator/pull/948))
+- Add conversion webhook module. ([#936](https://github.com/knative/operator/pull/936))
+- Enable v1beta1 APIs. ([#968](https://github.com/knative/operator/pull/968))
+- Promote v1beta1 as the storage version. ([#969](https://github.com/knative/operator/pull/969))
 
 ### 🐞 Bug Fixes
 
-- Keep the default image name the same as the original ([#958](https://github.com/knative/operator/pull/958))
+- Keep the default image name the same as the original. ([#958](https://github.com/knative/operator/pull/958))
 
 ## Thank you, contributors
 
