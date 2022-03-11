@@ -1,5 +1,5 @@
 {
-  "title": "Getting Started with Knative Serving (kn cli) v8-kind",
+  "title": "Getting Started with Knative Serving k8s1.18 image - 7",
   "description": "Introduction to Knative by installing knative serving and deploying an application (If you want to script your workflow, or really don't like yaml)",
   "difficulty": "Beginner",
   "time": "20",
@@ -15,6 +15,7 @@
       },
       {
         "title": "Step 3",
+        "code": "scripts/step3-foreground.sh",
         "text": "step3.md"
       }
     ],
@@ -30,6 +31,6 @@
     "uilayout": "terminal"
   },
   "backend": {
-    "imageid": "ubuntu:2004"
+    "imageid": "kubernetes-cluster-running:1.18"
   }
 }

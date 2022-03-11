@@ -17,10 +17,12 @@ running to watch our "Hello world!" Service scale up and down.
 
 ### Run your Knative Service
 Let's run our "Hello world!" Service just one more time. Use your terminal with curl.
-`curl http://hello.default.127.0.0.1.sslip.io`{{execute}}
+```sh
+curl -H "Host: hello.default.example.com" $externalIP
+```{{execute T1}}
 
-You can watch the pods and see how they scale to zero after traffic stops going to the URL
-`kubectl get pod -l serving.knative.dev/service=hello -w`{{execute}}
+You can watch the pods and see how they scale to zero after traffic stops going to the URL (opened in a new Terminal tab)
+`kubectl get pod -l serving.knative.dev/service=hello -w`{{execute T2}}
 
 > **Warning**
 > It may take up to 2 minutes for your Pods to scale down. Pinging your service again will reset this timer.
@@ -34,15 +36,11 @@ hello-world                              1/2     Terminating
 hello-world                              0/2     Terminating
 ```
 
-Exit the watch command with
-`^C`{{execute ctrl-seq}}
-
 ### Scale up your Knative Service
 Rerun the Knative Service in your terminal and you will see a new pod running again.
-`curl http://hello.default.127.0.0.1.sslip.io`{{execute}}
+`curl -H "Host: hello.default.example.com" $externalIP`{{execute T1}}
 
-You can watch the pods and see how they scale up again
-`kubectl get pod -l serving.knative.dev/service=hello -w`{{execute}}
+Go back to the `Terminal 2` tab, and you can watch the pods and see how they scale up again
 
 **Expected output:**
 ```sh

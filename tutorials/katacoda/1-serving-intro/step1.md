@@ -1,13 +1,23 @@
 ## Installation
-> The startup script running on the right will install the `kn` cli, the `quickstart` plugin and wait for kubernetes 
-> to start. The `quickstart` plugin completes the following functions:
+> The startup script running on the right will:
 
-1. **Checks if you have the selected Kubernetes instance installed**.
-2. **Creates a cluster called `knative`**
-3. **Installs Knative Serving** with Kourier as the default networking layer, and sslip.io as the DNS.
-4. **Installs Knative Eventing** and creates an in-memory Broker and Channel implementation.
+1. **Check kubernetes is up and running**.
+2. **Install knative serving with Contour as the default networking layer**.
+3. **Install knative `kn` cli**.
+4. **Assign variable `$externalIP` with the external IP of your kubernetes cluster**.
 
-> Once you see a prompt, you can click on the command below, and verify you have a cluster called `knative`, and they 
-> will be copied and run for you in the terminal on the right.
+> Once you see a prompt, you can click on the command below, 
+> it will be copied and run for you in the terminal on the right.
+> This command will show you general information about your cluster.
 
-`kind get clusters`{{execute}}
+`kubectl cluster-info`{{execute}}
+
+**Expected output:**
+(something similar to this)
+```sh
+Kubernetes master is running at https://172.17.0.14:6443
+KubeDNS is running at https://172.17.0.14:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+```
+

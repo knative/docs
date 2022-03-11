@@ -24,10 +24,10 @@ kn service create hello \
 Ping your Knative Service by running the command:
 
 `Service hello created to latest revision 'hello-world' is available at URL:
-http://hello.default.127.0.0.1.sslip.io`
+http://hello.default.example.com`
 
 ## Ping your Knative Service
-`curl http://hello.default.127.0.0.1.sslip.io`{{execute}}
+`curl -H "Host: hello.default.example.com" $externalIP`{{execute}}
 
 **Expected output:**
 `Hello World!`
