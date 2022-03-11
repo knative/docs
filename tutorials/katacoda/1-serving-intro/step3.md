@@ -37,7 +37,7 @@ hello-world                              0/2     Terminating
 ```
 
 ### Scale up your Knative Service
-Go back to the `Terminal` tab, and rerun the Knative Service in your terminal and you will see a new pod running again.
+Rerun the Knative Service in your terminal and you will see a new pod running again.
 `curl -H "Host: hello.default.example.com" $externalIP`{{execute T1}}
 
 Go back to the `Terminal 2` tab, and you can watch the pods and see how they scale up again
