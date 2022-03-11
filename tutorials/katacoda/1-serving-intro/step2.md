@@ -24,7 +24,7 @@ kn service create hello \
 Ping your Knative Service by running the command:
 
 `Service hello created to latest revision 'hello-world' is available at URL:
-http://hhello.default.example.com`
+http://hello.default.example.com`
 
 ## Ping your Knative Service
 `curl -H "Host: hello.default.example.com" $externalIP`{{execute}}
