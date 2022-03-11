@@ -13,8 +13,8 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS and RELEASE_BRANCHES below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.2" "1.1" "1.0" "0.26")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-RELEASE_BRANCHES=("knative-v1.2.0" "knative-v1.1.0" "knative-v1.0.0" "v0.26.0") # Release version for serving/eventing yaml files and api references.
+VERSIONS=("1.3" "1.2" "1.1" "1.0")                  # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+RELEASE_BRANCHES=("knative-v1.3.0" "knative-v1.2.0" "knative-v1.1.0" "v1.0.0") # Release version for serving/eventing yaml files and api references.
 # 4) PR the result to main.
 # 5) Party.
 
