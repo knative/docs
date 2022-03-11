@@ -66,7 +66,6 @@ kubectl patch configmap/config-network \
 
 echo "Waiting for external IP \"service/envoy\" to be assigned..."; \
 until kubectl get service/envoy -n contour-external --output=jsonpath='{.status.loadBalancer}' | grep "ingress"; do : ; done
-echo "External IP assigned ${externalIP}"
 
 echo "Installing kn cli..."
 wget https://github.com/knative/client/releases/download/knative-v1.2.0/kn-linux-amd64 -O kn
