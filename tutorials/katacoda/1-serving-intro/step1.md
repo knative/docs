@@ -13,7 +13,7 @@
 `kubectl cluster-info`{{execute}}
 
 **Expected output:**
-
+(something similar to this)
 ```sh
 Kubernetes master is running at https://172.17.0.14:6443
 KubeDNS is running at https://172.17.0.14:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
