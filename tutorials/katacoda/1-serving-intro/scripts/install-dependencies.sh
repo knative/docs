@@ -53,8 +53,6 @@
 
 launch.sh
 
-#kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-crds.yaml
-#kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-core.yaml
 kubectl apply -f https://github.com/knative/serving/releases/download/v0.22.3/serving-crds.yaml
 kubectl apply -f https://github.com/knative/serving/releases/download/v0.22.3/serving-core.yaml
 
@@ -66,10 +64,13 @@ kubectl patch configmap/config-network \
   --type merge \
   --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
 
+echo "Waiting for external IP \"service/api\" to be assigned..."; \
+until kubectl get service/envoy -n contour-external --output=jsonpath='{.status.loadBalancer}' | grep "ingress"; do : ; done
+externalIP=$(kubectl get service/envoy -n contour-external --output=jsonpath='{.status.loadBalancer.ingress[0].ip}')
+echo "External IP assigned ${externalIP}"
 
-echo "Installing quickstart ..."
-wget https://github.com/knative-sandbox/kn-plugin-quickstart/releases/download/knative-v1.2.0/kn-quickstart-linux-amd64 -O kn-quickstart
-chmod +x kn-quickstart
-mv kn-quickstart /usr/local/bin/
+echo "Installing kn cli..."
+wget https://github.com/knative/client/releases/download/knative-v1.2.0/kn-linux-amd64 -O kn
+chmod +x kn
+mv kn /usr/local/bin/
 echo "Done"
-
