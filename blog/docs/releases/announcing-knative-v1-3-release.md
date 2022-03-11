@@ -82,11 +82,11 @@ This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.
 
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-v1.3.0 -->
 
-### 💫 New Features & Changes
+#### 💫 New Features & Changes
 
 - TODO: Add new features and changes here
 
-### 🐞 Bug Fixes
+#### 🐞 Bug Fixes
 
 - TODO: Add bugs here
 
@@ -94,14 +94,24 @@ This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.
 
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.3.0 -->
 
+#### 💫 New Features & Changes
 
-### 💫 New Features & Changes
+- Add publisher confirms to ingress. Return HTTP Status 200 only when RabbitMQ confirms receiving and storing the message. See issue [#334](https://github.com/knative-sandbox/eventing-rabbitmq/issues/334). ([#568](https://github.com/knative-sandbox/eventing-rabbitmq/pull/568))
+- The Source Adapter and Broker Dispatcher's Prefetch Count behavior is the same. Updated the Trigger's webhook to validate:
+    - Has a default value of 1. FIFO behavior
+    - Have limits: 1 ≤ prefetchCount ≤ 1000 ([#536](https://github.com/knative-sandbox/eventing-rabbitmq/pull/536))
+- All core Knative Eventing RabbitMQ pods should now be able to run in the restricted pod security standard profile. ([#541](https://github.com/knative-sandbox/eventing-rabbitmq/pull/541))
+- Various refactorings and code health improvements. ([#552](https://github.com/knative-sandbox/eventing-rabbitmq/pull/552), [#572](https://github.com/knative-sandbox/eventing-rabbitmq/pull/572))
+- Makefile-based worklow, includes migrating GitHub Actions. ([#525](https://github.com/knative-sandbox/eventing-rabbitmq/pull/525), [#569](https://github.com/knative-sandbox/eventing-rabbitmq/pull/569), [#579](https://github.com/knative-sandbox/eventing-rabbitmq/pull/579))
+- Improved Broker and Source README docs and Samples description and files. ([#555](https://github.com/knative-sandbox/eventing-rabbitmq/pull/555))
 
-- TODO: Add new features and changes here
 
-### 🐞 Bug Fixes
+#### 🐞 Bug Fixes
 
-- TODO: Add bugs here
+- Removing the dead letter sink on a trigger will now properly fall back to the Broker's dead letter sink, if one is defined. ([#533](https://github.com/knative-sandbox/eventing-rabbitmq/pull/533))
+- Configuring messages sent into the RabbitMQ Broker to be persistent as the Queues used by the Broker are always durable.
+Now if the user set the configuration of the RabbitMQ Source Exchange and Queue to be durable, the messages are also durable. ([#560](https://github.com/knative-sandbox/eventing-rabbitmq/pull/560))
+
 
 ## Client v1.3
 
@@ -115,11 +125,11 @@ This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.
 
 - Fix traffic split auto-redirection to only consider the active revisions. ([#1617](https://github.com/knative/client/pull/1617))
 - Fix missing Azure auth provider. ([#1616](https://github.com/knative/client/pull/1616))
-- Remove hardcoded `kn` for usage and error. ([#1603](https://github.com/knative/client/pull/1603)) <!-- Tell CLI team to update link in changelog. -->
+- Remove hardcoded `kn` for usage and error. ([#1603](https://github.com/knative/client/pull/1603)) 
 - Fix display version of Serving and Eventing. ([#1601](https://github.com/knative/client/pull/1601))
 
 
-## Operator TODO-KNATIVE-VERSION
+## Operator v1.3
 
 <!-- Original notes are here: https://github.com/knative/operator/releases/tag/knative-v1.3.0   -->
 
@@ -141,8 +151,13 @@ Release leads:
 
 Contributors:
 
+- [@benmoss](https://github.com/benmoss)
+- [@ChunyiLyu](https://github.com/ChunyiLyu)
 - [@dprotaso](https://github.com/dprotaso)
 - [@dsimansk](https://github.com/dsimansk)
+- [@gabo1208](https://github.com/gabo1208)
+- [@gvmw](https://github.com/gvmw)
+- [@ikvmw](https://github.com/ikvmw)
 - [@itsmurugappan](https://github.com/itsmurugappan)
 - [@izabelacg](https://github.com/izabelacg)
 - [@kobayashi](https://github.com/kobayashi)

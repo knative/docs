@@ -71,11 +71,11 @@ Follow the instructions in the documentation
 
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-TODO-KNATIVE-VERSION -->
 
-### 💫 New Features & Changes
+#### 💫 New Features & Changes
 
 - TODO: Add new features and changes here
 
-### 🐞 Bug Fixes
+#### 🐞 Bug Fixes
 
 - TODO: Add bugs here
 
@@ -84,11 +84,11 @@ Follow the instructions in the documentation
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-TODO-KNATIVE-VERSION -->
 
 
-### 💫 New Features & Changes
+#### 💫 New Features & Changes
 
 - TODO: Add new features and changes here
 
-### 🐞 Bug Fixes
+#### 🐞 Bug Fixes
 
 - TODO: Add bugs here
 
