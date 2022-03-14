@@ -51,7 +51,7 @@ and which DNS provider validates those requests.
 
         - See the generic [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
         - Also see the
-        [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
+        [`DNS01` example](https://cert-manager.io/docs/configuration/acme/dns01/)
 
         For example, the following `ClusterIssuer` file named `letsencrypt-issuer` is
         configured for the Let's Encrypt CA and Google Cloud DNS.

@@ -36,8 +36,7 @@ use and configure your certificate issuer to use the
 
 [cm]: https://github.com/jetstack/cert-manager
 [cm-docs]: https://cert-manager.readthedocs.io/en/latest/getting-started/
-[cm-providers]:
-  http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers
+[cm-providers]: https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers
 [le]: https://letsencrypt.org
 [le-faqs]: https://letsencrypt.org/docs/faq/
 [cb]: https://certbot.eff.org
