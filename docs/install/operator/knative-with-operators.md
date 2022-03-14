@@ -48,6 +48,15 @@ To track the log of the Operator, run the command:
 kubectl logs -f deploy/knative-operator
 ```
 
+### Upgrade the existing custom resources
+
+If you upgrade from Knative Operator 1.2 or prior versions to the current version, run the following command to upgrade
+the existing custom resources to v1beta1 after the installation of Knative Operator:
+
+```bash
+kubectl create -f {{artifact(org="knative",repo="operator",file="operator-post-install.yaml" )}}
+```
+
 ## Installing the Knative Serving component
 
 To install Knative Serving you must create a custom resource (CR), add a networking
@@ -67,7 +76,7 @@ layer to the CR, and configure DNS.
         metadata:
           name: knative-serving
         ---
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeServing
         metadata:
           name: knative-serving
@@ -97,7 +106,7 @@ layer to the CR, and configure DNS.
         metadata:
           name: knative-serving
         ---
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeServing
         metadata:
           name: knative-serving
@@ -157,7 +166,7 @@ layer to the CR, and configure DNS.
     metadata:
       name: knative-serving
     ---
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -194,7 +203,7 @@ layer to the CR, and configure DNS.
     metadata:
       name: knative-serving
     ---
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -229,7 +238,7 @@ Knative Serving with different ingresses:
     `spec.config.network` to your Serving CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeServing
         metadata:
           name: knative-serving
@@ -270,7 +279,7 @@ Knative Serving with different ingresses:
         1. Add `spec.config.istio` to your Serving CR YAML file as follows:
 
             ```yaml
-            apiVersion: operator.knative.dev/v1alpha1
+            apiVersion: operator.knative.dev/v1beta1
             kind: KnativeServing
             metadata:
               name: knative-serving
@@ -317,7 +326,7 @@ Knative Serving with different ingresses:
     `spec.config.network` to your Serving CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeServing
         metadata:
           name: knative-serving
@@ -407,7 +416,7 @@ Optionally, you can install the Knative Eventing component with different event 
         metadata:
           name: knative-eventing
         ---
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -437,7 +446,7 @@ Optionally, you can install the Knative Eventing component with different event 
         metadata:
           name: knative-eventing
         ---
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -489,7 +498,7 @@ Optionally, you can install the Knative Eventing component with different event 
     metadata:
       name: knative-eventing
     ---
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeEventing
     metadata:
       name: knative-eventing
@@ -525,7 +534,7 @@ Optionally, you can install the Knative Eventing component with different event 
     metadata:
       name: knative-eventing
     ---
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeEventing
     metadata:
       name: knative-eventing
@@ -555,7 +564,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.ceph` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -582,7 +591,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.couchdb` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -609,7 +618,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.github` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -636,7 +645,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.gitlab` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -663,7 +672,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.kafka` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -690,7 +699,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.natss` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -717,7 +726,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.prometheus` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -744,7 +753,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.rabbitmq` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing
@@ -771,7 +780,7 @@ see how you can configure Knative Eventing with different event sources:
     1. Add `spec.source.redis` to your Eventing CR YAML file as follows:
 
         ```yaml
-        apiVersion: operator.knative.dev/v1alpha1
+        apiVersion: operator.knative.dev/v1beta1
         kind: KnativeEventing
         metadata:
           name: knative-eventing

@@ -10,7 +10,7 @@ Cluster administrators can install a specific version of Knative Eventing by usi
 if you want to install Knative Eventing v0.19.0, you can apply the following KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -35,7 +35,7 @@ If you are using different channel implementations, like the KafkaChannel, or yo
 You can do this by modifying the KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -71,7 +71,7 @@ If you are using a channel-based broker, you can change the default channel type
 You can do this by modifying the KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -137,7 +137,7 @@ In the following example:
 2. Define your the KnativeEventing CR with following content:
 
   ```yaml
-  apiVersion: operator.knative.dev/v1alpha1
+  apiVersion: operator.knative.dev/v1beta1
   kind: KnativeEventing
   metadata:
     name: knative-eventing
@@ -171,7 +171,7 @@ For example, to define the following list of images:
 The KnativeEventing CR must be modified to include the full list. For example:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -190,7 +190,7 @@ If you want to replace the image defined by the environment variable, you must m
 For example, if you want to replace the image defined by the environment variable `DISPATCHER_IMAGE`, in the container `controller`, of the deployment `imc-controller`, and the target image is `docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest`, the KnativeEventing CR would be as follows:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -215,7 +215,7 @@ This example uses a secret named `regcred`. Refer to the [Kubernetes documentati
 After you create the secret, edit the KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -230,7 +230,7 @@ spec:
 The field `imagePullSecrets` requires a list of secrets. You can add multiple secrets to access the images:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -254,7 +254,7 @@ The field `defaultBrokerClass` indicates which class to use; if empty, the Chann
 The following example CR specifies MTChannelBasedBroker as the default:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -286,7 +286,7 @@ To override resource settings for a specific container, you must create an entry
 For example, the following KnativeEventing CR configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -317,7 +317,7 @@ For example, the following KnativeEventing resource configures the container `ev
 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -348,7 +348,7 @@ nodeSelector:
 to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -376,7 +376,7 @@ tolerations:
 to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -412,7 +412,7 @@ affinity:
 to the deployment `activator`, you need to change your KnativeEventing CR as below:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
