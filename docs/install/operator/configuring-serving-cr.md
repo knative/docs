@@ -1,8 +1,9 @@
 # Configuring the Knative Serving Operator custom resource
 
-The Knative Serving Operator can be configured with the following options:
+Knative Serving can be configured with the following options:
 
 - [Version configuration](#version-configuration)
+- [Install customized Knative Serving](#install-customized-knative-serving)
 - [Private repository and private secret](#private-repository-and-private-secrets)
 - [SSL certificate for controller](#ssl-certificate-for-controller)
 - [Replace the default istio-ingressgateway service](#replace-the-default-istio-ingressgateway-service)
@@ -35,6 +36,82 @@ enables upgrading or downgrading the Knative Serving version, without needing to
 
 !!! important
     The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v0.22.0, you must upgrade to v0.23.0 before upgrading to v0.24.0.
+
+## Install customized Knative Serving
+
+The Operator provides you with the flexibility to install Knative Serving customized to your own requirements. As long
+as the manifests of customized Knative Serving are accessible to the Operator, you can install them.
+
+There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_. With
+overwrite mode, you must define all manifests needed for Knative Serving to install because the Operator will no
+longer install any default manifests. With append mode, you only need to define your customized manifests. The
+customized manifests are installed after default manifests are applied.
+
+**Overwrite mode:**
+
+You can use overwrite mode when you want to customize all Knative Serving manifests.
+
+For example, if you want to install Knative Serving and istio ingress and you want customize both components, you can
+create the following YAML file:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-serving
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: $spec_version
+  manifests:
+  - URL: https://my-serving/serving.yaml
+  - URL: https://my-net-istio/net-istio.yaml
+```
+
+This example installs the customized Knative Serving at version `$spec_version` which is available at
+`https://my-serving/serving.yaml`, and the customized ingress plugin `net-istio` which is available at
+`https://my-net-istio/net-istio.yaml`.
+
+!!! attention
+    You can make the customized Knative Serving available in one or multiple links, as the `spec.manifests` supports a list of links.
+    The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
+
+We strongly recommend you to specify the version and the valid links to the customized Knative Serving, by leveraging
+both `spec_version` and `spec.manifests`. Do not skip either field.
+
+**Append mode:**
+
+You can use append mode to add your customized manifests into the default manifests.
+
+For example, if you only want to customize a few resources but you still want to install the default Knative Serving,
+you can create the following YAML file:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-serving
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  version: $spec_version
+  additionalManifests:
+  - URL: https://my-serving/serving-custom.yaml
+```
+
+This example installs the default Knative Serving, and installs your customized resources available at
+`https://my-serving/serving-custom.yaml`.
+
+Knative Operator installs the default manifests of Knative Serving at the version `$spec_version`, and then installs
+your customized manifests based on them.
 
 ## Private repository and private secrets
 

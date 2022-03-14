@@ -64,161 +64,32 @@ layer to the CR, and configure DNS.
 
 ### Create the Knative Serving custom resource
 
-=== "Install the current version (default)"
+To create the custom resource for the latest available Knative Serving in the Operator:
 
-    To create the custom resource for the latest available Knative Serving in the Operator:
+1. Copy the following YAML into a file:
 
-    1. Copy the following YAML into a file:
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-serving
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+```
+!!! note
+   When you don't specify a version by using `spec.version` field, the Operator defaults to the latest available version.
 
-        ```yaml
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: knative-serving
-        ---
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeServing
-        metadata:
-          name: knative-serving
-          namespace: knative-serving
-        ```
-        !!! note
-            When you don't specify a version by using `spec.version` field, the Operator defaults to the latest available version.
+1. Apply the YAML file by running the command:
 
-    1. Apply the YAML file by running the command:
+```bash
+kubectl apply -f <filename>.yaml
+```
 
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "Install another version of Knative Serving"
-
-    You can install a new release of Knative Serving without upgrading the Operator.
-    To install a new version of Knative Serving:
-
-    1. Create a YAML file containing the following:
-
-        ```yaml
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: knative-serving
-        ---
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeServing
-        metadata:
-          name: knative-serving
-          namespace: knative-serving
-        spec:
-          version: "<new-version>"
-          manifests:
-            - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-core.yaml
-            - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-hpa.yaml
-            - URL: https://github.com/knative/serving/releases/download/v${VERSION}/serving-post-install-jobs.yaml
-            - URL: https://github.com/knative/net-istio/releases/download/v${VERSION}/net-istio.yaml
-        ```
-        <!-- I'm not sure why you need to apply these manifests here, don't these install by default? -->
-
-        Where `<new-version>` is the Knative version you want to use, for example `1.0`. This field is used to set the version of Knative Serving and to automatically replace the tag `${VERSION}`.
-
-        !!! attention
-            The field `spec.manifests` is used to specify one or multiple URL links
-            of the Knative Serving component.
-            The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
-
-            You must add a valid URL of the Knative network ingress plugin. You can use `net-istio`.
-            Knative Serving component is tightly-coupled with a network ingress plugin in the Operator.
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "Install customized Knative Serving"
-
-    The Operator provides you with the flexibility to install Knative Serving
-    customized to your own requirements.
-    As long as the manifests of customized Knative Serving are accessible to
-    the Operator, you can install them.
-
-    There are two modes available for you to install customized manifests:
-    _overwrite mode_ and _append mode_.
-    With overwrite mode, you must define all manifests needed for Knative Serving
-    to install because the Operator will no longer install any default manifests.
-    With append mode, you only need to define your customized manifests.
-    The customized manifests are installed after default manifests are applied.
-
-    **Overwrite mode:**
-
-    You can use overwrite mode when you want to customize all Knative Serving manifests.
-
-    For example, if you want to install Knative Serving and istio ingress and you
-    want customize both components, you can create the following YAML file:
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-serving
-    ---
-    apiVersion: operator.knative.dev/v1beta1
-    kind: KnativeServing
-    metadata:
-      name: knative-serving
-      namespace: knative-serving
-    spec:
-      version: $spec_version
-      manifests:
-        - URL: https://my-serving/serving.yaml
-        - URL: https://my-net-istio/net-istio.yaml
-    ```
-
-    This example installs the customized Knative Serving at version `$spec_version`
-    which is available at `https://my-serving/serving.yaml`, and the customized ingress plugin `net-istio`
-    which is available at `https://my-net-istio/net-istio.yaml`.
-
-    !!! attention
-        You can make the customized Knative Serving available in one or multiple links, as the `spec.manifests` supports a list of links.
-        The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
-
-        We strongly recommend you to specify the version and the valid links to the
-        customized Knative Serving, by leveraging both `spec_version` and `spec.manifests`.
-        Do not skip either field.
-
-    **Append mode:**
-
-    You can use append mode to add your customized manifests into the default manifests.
-
-    For example, if you only want to customize a few resources but you still want
-    to install the default Knative Serving, you can create the following YAML file:
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-serving
-    ---
-    apiVersion: operator.knative.dev/v1beta1
-    kind: KnativeServing
-    metadata:
-      name: knative-serving
-      namespace: knative-serving
-    spec:
-      version: $spec_version
-      additionalManifests:
-        - URL: https://my-serving/serving-custom.yaml
-    ```
-
-    This example installs the default Knative Serving, and installs
-    your customized resources available at `https://my-serving/serving-custom.yaml`.
-
-    Knative Operator installs the default manifests of Knative Serving at the
-    version `$spec_version`, and then installs your customized manifests based on them.
+Where `<filename>` is the name of the file you created in the previous step.
 
 ### Install the networking layer
 
@@ -404,152 +275,33 @@ Optionally, you can install the Knative Eventing component with different event 
 
 ### Create the Knative Eventing custom resource
 
-=== "Install the current version (default)"
+To create the custom resource for the latest available Knative Eventing in the Operator:
 
-    To create the custom resource for the latest available Knative Eventing in the Operator:
+1. Copy the following YAML into a file:
 
-    1. Copy the following YAML into a file:
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+```
 
-        ```yaml
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: knative-eventing
-        ---
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        ```
-        !!! note
-            When you do not specify a version by using `spec.version` field, the Operator defaults to the latest available version.
+!!! note
+    When you do not specify a version by using `spec.version` field, the Operator defaults to the latest available version.
 
-    1. Apply the YAML file by running the command:
+1. Apply the YAML file by running the command:
 
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
+```bash
+kubectl apply -f <filename>.yaml
+```
 
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "Install another version of Knative Eventing"
-
-    You can install a new release of Knative Eventing without upgrading the Operator.
-    To install a new version of Knative Eventing:
-
-    1. Create a YAML file containing the following:
-
-        ```yaml
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: knative-eventing
-        ---
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        spec:
-          version: "<new-version>"
-          manifests:
-            - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing.yaml
-            - URL: https://github.com/knative/eventing/releases/download/v${VERSION}/eventing-post-install-jobs.yaml
-        ```
-        Where `<new-version>` is the Knative version you want to use, for example `1.0`. This field is used to set the version of Knative Eventing and to automatically replace the tag `${VERSION}`.
-        !!! attention
-            The field `spec.manifests` is used to specify one or multiple URL links
-            of the Knative Serving component.
-            The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "Install customized Knative Eventing"
-
-    The Operator provides you with the flexibility to install Knative Eventing
-    customized to your own requirements.
-    As long as the manifests of customized Knative Eventing are accessible to
-    the Operator, you can install them.
-
-    There are two modes available for you to install customized manifests:
-    _overwrite mode_ and _append mode_.
-    With overwrite mode, you must define all manifests needed for Knative Eventing
-    to install because the Operator will no longer install any default manifests.
-    With append mode, you only need to define your customized manifests.
-    The customized manifests are installed after default manifests are applied.
-
-    **Overwrite mode:**
-
-    Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
-
-    For example, if you want to install a customized Knative Eventing only,
-    you can create and apply the following Eventing CR:
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-eventing
-    ---
-    apiVersion: operator.knative.dev/v1beta1
-    kind: KnativeEventing
-    metadata:
-      name: knative-eventing
-      namespace: knative-eventing
-    spec:
-      version: $spec_version
-      manifests:
-        - URL: https://my-eventing/eventing.yaml
-    ```
-
-    This example installs the customized Knative Eventing at version `$spec_version`
-    which is available at `https://my-eventing/eventing.yaml`.
-
-    !!! attention
-        You can make the customized Knative Eventing available in one or multiple links, as the `spec.manifests` supports a list of links.
-        The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
-
-        We strongly recommend you to specify the version and the valid links to the
-        customized Knative Eventing, by leveraging both `spec.version` and `spec.manifests`.
-        Do not skip either field.
-
-    **Append mode:**
-
-    You can use append mode to add your customized manifests into the default manifests.
-
-    For example, if you only want to customize a few resources but you still want
-    to install the default Knative Eventing,
-    you can create and apply the following Eventing CR:
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-eventing
-    ---
-    apiVersion: operator.knative.dev/v1beta1
-    kind: KnativeEventing
-    metadata:
-      name: knative-eventing
-      namespace: knative-eventing
-    spec:
-      version: $spec_version
-      additionalManifests:
-        - URL: https://my-eventing/eventing-custom.yaml
-    ```
-
-    This example installs the default Knative Eventing, and installs your customized
-    resources available at `https://my-eventing/eventing-custom.yaml`.
-
-    Knative Operator installs the default manifests of Knative Eventing at the
-    version `$spec_version`, and then installs your customized manifests based on them.
+Where `<filename>` is the name of the file you created in the previous step.
 
 ### Installing Knative Eventing with event sources
 

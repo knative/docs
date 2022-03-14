@@ -1,8 +1,19 @@
 # Configuring the Eventing Operator custom resource
 
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
+Knative Eventing can be configured with the following options:
 
-<!--TODO: break this into sub sections like for the channels sections, i.e. a page per topic-->
+- [Installing a specific version of Eventing](#installing-a-specific-version-of-eventing)
+- [Installing customized Knative Eventing](#installing-customized-knative-eventing)
+- [Setting a default channel](#setting-a-default-channel)
+- [Setting the default channel for the broker](#setting-the-default-channel-for-the-broker)
+- [Private repository and private secrets](#private-repository-and-private-secrets)
+- [Download images in a predefined format without secrets](#download-images-in-a-predefined-format-without-secrets)
+- [Download images from different repositories without secrets](#download-images-from-different-repositories-without-secrets)
+- [Download images with secrets](#download-images-with-secrets)
+- [Configuring the default broker class](#configuring-the-default-broker-class)
+- [System resource settings](#system-resource-settings)
+- [Override system deployments](#override-system-deployments)
 
 ## Installing a specific version of Eventing
 
@@ -27,6 +38,80 @@ If Knative Eventing is already managed by the Operator, updating the `spec.versi
 
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
 if the current Knative Eventing deployment is version 0.18.x, you must upgrade to 0.19.x before upgrading to 0.20.x.
+
+## Installing customized Knative Eventing
+
+The Operator provides you with the flexibility to install Knative Eventing customized to your own requirements.
+As long as the manifests of customized Knative Eventing are accessible to the Operator, you can install them.
+
+There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
+With overwrite mode, you must define all manifests needed for Knative Eventing to install because the Operator will
+no longer install any default manifests. With append mode, you only need to define your customized manifests.
+The customized manifests are installed after default manifests are applied.
+
+**Overwrite mode:**
+
+Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
+
+For example, if you want to install a customized Knative Eventing only, you can create and apply the following
+Eventing CR:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  manifests:
+  - URL: https://my-eventing/eventing.yaml
+```
+
+This example installs the customized Knative Eventing at version `$spec_version` which is available at
+`https://my-eventing/eventing.yaml`.
+
+!!! attention
+    You can make the customized Knative Eventing available in one or multiple links, as the `spec.manifests` supports a list of links.
+    The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
+
+We strongly recommend you to specify the version and the valid links to the customized Knative Eventing, by leveraging
+both `spec.version` and `spec.manifests`. Do not skip either field.
+
+**Append mode:**
+
+You can use append mode to add your customized manifests into the default manifests.
+
+For example, if you only want to customize a few resources but you still want to install the default Knative Eventing,
+you can create and apply the following Eventing CR:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  additionalManifests:
+  - URL: https://my-eventing/eventing-custom.yaml
+```
+
+This example installs the default Knative Eventing, and installs your customized resources available at
+`https://my-eventing/eventing-custom.yaml`.
+
+Knative Operator installs the default manifests of Knative Eventing at the version `$spec_version`, and then
+installs your customized manifests based on them.
 
 ### Setting a default channel
 
