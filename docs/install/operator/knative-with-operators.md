@@ -50,8 +50,8 @@ kubectl logs -f deploy/knative-operator
 
 ### Upgrade the existing custom resources
 
-If you upgrade from Knative Operator 1.2 or prior versions to the current version, run the following command to upgrade
-the existing custom resources to v1beta1 after the installation of Knative Operator:
+If you are upgrading an existing Operator install from v1.2 (or earlier) to v1.3 (or later), run the following command
+to upgrade the existing custom resources to `v1beta1`:
 
 ```bash
 kubectl create -f {{artifact(org="knative",repo="operator",file="operator-post-install.yaml" )}}
