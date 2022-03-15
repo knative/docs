@@ -4,3 +4,6 @@ mkdocs-macros-plugin>=0.5.12
 mkdocs-awesome-pages-plugin>=2.5
 mkdocs-redirects>=1.0.3
 mkdocs-rss-plugin>=0.18.0
+pygithub==1.55
+semver==2.13.0
+
