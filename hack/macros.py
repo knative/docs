@@ -29,7 +29,7 @@ class GithubReleases:
         tags.sort(key=semver.VersionInfo.parse, reverse=True)
 
         if len(tags) > 0:
-            return tags[0]  
+            return tags[0]
         else:
             return None
 
@@ -64,10 +64,10 @@ def define_env(env):
 
         if version == None:
             return f'https://storage.googleapis.com/knative-nightly/{repo}/latest/{file}'
-        
+
         version = version.removeprefix('v')
 
-        try:            
+        try:
             v = semver.VersionInfo.parse(version)
             latest_version = g.latest_release(f'{v.major}.{v.minor}', org, repo)
 
@@ -79,7 +79,7 @@ def define_env(env):
             else:
                 return f'https://github.com/{org}/{repo}/releases/download/{latest_version}/{file}'
         except:
-            # We use sys.exit(1) otherwise the mkdocs build doesn't 
+            # We use sys.exit(1) otherwise the mkdocs build doesn't
             # fail on exceptions in macros
             print_to_stdout(f'exception raised for {org}/{repo}/{file}\n', traceback.format_exc())
             sys.exit(1)
