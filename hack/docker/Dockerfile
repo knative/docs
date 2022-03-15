@@ -1,6 +1,7 @@
 FROM squidfunk/mkdocs-material
 
-RUN apk add --no-cache --update nodejs npm bash hugo curl
+RUN apk add --no-cache --update nodejs npm bash hugo curl \
+  build-base libffi-dev
 
 WORKDIR /site
 COPY ./package*.json /site/
