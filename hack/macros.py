@@ -65,7 +65,8 @@ def define_env(env):
         if version == None:
             return f'https://storage.googleapis.com/knative-nightly/{repo}/latest/{file}'
 
-        version = version.removeprefix('knative-v')
+        version = version.removeprefix('knative-')
+        version = version.removeprefix('v')
 
         try:
             v = semver.VersionInfo.parse(version)
