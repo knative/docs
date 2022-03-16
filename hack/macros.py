@@ -74,10 +74,8 @@ def define_env(env):
             if latest_version is None:
                 print_to_stdout(f'repo "{org}/{repo}" has no tags using latest release for file "{file}"')
                 return f'https://github.com/{org}/{repo}/releases/latest/download/{file}'
-            elif version.startswith("1."):
-                return f'https://github.com/{org}/{repo}/releases/download/knative-v{latest_version}/{file}'
             else:
-                return f'https://github.com/{org}/{repo}/releases/download/{latest_version}/{file}'
+                return f'https://github.com/{org}/{repo}/releases/download/knative-v{latest_version}/{file}'
         except:
             # We use sys.exit(1) otherwise the mkdocs build doesn't
             # fail on exceptions in macros
