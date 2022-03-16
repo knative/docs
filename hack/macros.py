@@ -81,7 +81,7 @@ def define_env(env):
             latest_version = releases.get_latest(f'{v.major}.{v.minor}', org, repo)
 
             if latest_version is None:
-                print_to_stdout(f'repo "{org}/{repo}" has no tags using latest release for file "{file}"')
+                print_to_stdout(f'repo "{org}/{repo}" has no tags for version "{version}" using latest release for file "{file}"')
                 return f'https://github.com/{org}/{repo}/releases/latest/download/{file}'
             else:
                 return f'https://github.com/{org}/{repo}/releases/download/knative-v{latest_version}/{file}'
