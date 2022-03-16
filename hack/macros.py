@@ -21,7 +21,7 @@ class GithubReleases:
         self.tags_for_repo = {}
         self.client = Github(os.getenv("GITHUB_TOKEN"))
 
-    def get_latest(self, major_minor, org, repo):
+    def get_latest(self, version, org, repo):
         key = f'{org}/{repo}'
 
         if key not in self.tags_for_repo:
@@ -35,7 +35,13 @@ class GithubReleases:
             self.tags_for_repo[key] = tags
 
         tags = self.tags_for_repo[key]
-        tags = list(filter(lambda tag: tag.startswith(major_minor), tags))
+        tags = list(filter(lambda tag: tag.startswith(f'{version.major}.{version.minor}'), tags))
+
+        # Try the go.mod tag format 'v0.x.y' if v1.x.y doesn't work
+        if len(tags) == 0:
+            tags = self.tags_for_repo[key]
+            version = version.replace(major=0, minor=version.minor+27)
+            tags = list(filter(lambda tag: tag.startswith(f'{version.major}.{version.minor}'), tags))
 
         if len(tags) > 0:
             return tags[0]
@@ -78,7 +84,7 @@ def define_env(env):
 
         try:
             v = semver.VersionInfo.parse(version)
-            latest_version = releases.get_latest(f'{v.major}.{v.minor}', org, repo)
+            latest_version = releases.get_latest(v, org, repo)
 
             if latest_version is None:
                 print_to_stdout(f'repo "{org}/{repo}" has no tags for version "{version}" using latest release for file "{file}"')
