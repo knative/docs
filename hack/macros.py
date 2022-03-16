@@ -14,7 +14,7 @@ class GithubReleases:
         self.tags_for_repo = {}
         self.client = Github(os.getenv("GITHUB_TOKEN"))
 
-    def latest_release(self, major_minor, org, repo):
+    def get_latest(self, major_minor, org, repo):
         key = f'{org}/{repo}'
 
         if key not in self.tags_for_repo:
@@ -34,7 +34,7 @@ class GithubReleases:
             return None
 
 def define_env(env):
-    g = GithubReleases()
+    releases = GithubReleases()
 
     @env.macro
     def feature(alpha="", beta="", stable=""):
@@ -69,7 +69,7 @@ def define_env(env):
 
         try:
             v = semver.VersionInfo.parse(version)
-            latest_version = g.latest_release(f'{v.major}.{v.minor}', org, repo)
+            latest_version = releases.get_latest(f'{v.major}.{v.minor}', org, repo)
 
             if latest_version is None:
                 print_to_stdout(f'repo "{org}/{repo}" has no tags using latest release for file "{file}"')
