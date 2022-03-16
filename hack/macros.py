@@ -6,8 +6,8 @@ import traceback
 from github import Github
 
 # By default mkdocs swallows print() messages from macros
-def print_to_stdout(*a):
-    print(*a, file = sys.stdout)
+def print_to_stdout(*vargs):
+    print(*vargs, file = sys.stdout)
 
 class GithubReleases:
     def __init__(self):
