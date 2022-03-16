@@ -12,14 +12,14 @@ def print_to_stdout(*vargs):
 class GithubReleases:
     def __init__(self):
         self.tags_for_repo = {}
-        self.g = Github(os.getenv("GITHUB_TOKEN"))
+        self.client = Github(os.getenv("GITHUB_TOKEN"))
 
     def latest_release(self, major_minor, org, repo):
         key = f'{org}/{repo}'
 
         if key not in self.tags_for_repo:
             tags = []
-            for release in self.g.get_repo(key, lazy=True).get_releases():
+            for release in self.client.get_repo(key, lazy=True).get_releases():
                 tags.append(release.tag_name)
             tags = map(lambda tag: tag.removeprefix("knative-v"), tags)
             self.tags_for_repo[key] = list(tags)
