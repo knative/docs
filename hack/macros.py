@@ -9,6 +9,13 @@ from github import Github
 def print_to_stdout(*vargs):
     print(*vargs, file = sys.stdout)
 
+def safe_semver_parse(v):
+    try:
+        return semver.VersionInfo.parse(v)
+    except:
+        # If the tag isn't semver
+        return semver.VersionInfo.parse('0.0.0')
+
 class GithubReleases:
     def __init__(self):
         self.tags_for_repo = {}
@@ -21,12 +28,14 @@ class GithubReleases:
             tags = []
             for release in self.client.get_repo(key, lazy=True).get_releases():
                 tags.append(release.tag_name)
-            tags = map(lambda tag: tag.removeprefix("knative-v"), tags)
-            self.tags_for_repo[key] = list(tags)
 
-        tags = self.tags_for_repo[key].copy()
+            tags = map(lambda tag: tag.removeprefix("knative-").removeprefix("v"), tags)
+            tags = list(tags)
+            tags.sort(key=safe_semver_parse, reverse=True)
+            self.tags_for_repo[key] = tags
+
+        tags = self.tags_for_repo[key]
         tags = list(filter(lambda tag: tag.startswith(major_minor), tags))
-        tags.sort(key=semver.VersionInfo.parse, reverse=True)
 
         if len(tags) > 0:
             return tags[0]
@@ -65,8 +74,7 @@ def define_env(env):
         if version == None:
             return f'https://storage.googleapis.com/knative-nightly/{repo}/latest/{file}'
 
-        version = version.removeprefix('knative-')
-        version = version.removeprefix('v')
+        version = version.removeprefix('knative-').removeprefix("v")
 
         try:
             v = semver.VersionInfo.parse(version)
