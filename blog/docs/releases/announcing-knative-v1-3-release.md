@@ -12,8 +12,8 @@ type: "blog"
 
 A new version of Knative is now available across multiple components.
 
-Follow the instructions in the documentation
-[Installing Knative](https://knative.dev/docs/install/) for the respective component.
+Follow the instructions in
+[Installing Knative](https://knative.dev/docs/install/) to install the components you require.
 
 ## Table of Contents
 
