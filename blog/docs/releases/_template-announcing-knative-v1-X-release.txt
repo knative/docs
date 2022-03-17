@@ -16,7 +16,7 @@ A new version of Knative is now available across multiple components.
 Follow the instructions in the documentation
 [Installing Knative](https://knative.dev/docs/install/) for the respective component.
 
-### Table of Contents
+## Table of Contents
 - [Highlights](#highlights)
 - [Serving TODO-KNATIVE-VERSION](#serving-TODO-KNATIVE-VERSION-NOSPACES)
 - [Eventing TODO-KNATIVE-VERSION](#eventing-TODO-KNATIVE-VERSION-NOSPACES)
