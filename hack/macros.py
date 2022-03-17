@@ -9,9 +9,15 @@ from github import Github
 def print_to_stdout(*vargs):
     print(*vargs, file = sys.stdout)
 
+def removeprefix(s, prefix):
+    if s.startswith(prefix):
+        return s[len(prefix):]
+    else:
+        return s[:]
+
 def drop_prefix(tag):
-    tag = tag.removeprefix("knative-")
-    tag = tag.removeprefix("v")
+    tag = removeprefix(tag, "knative-")
+    tag = removeprefix(tag, "v")
     return tag
 
 def is_major_minor(tag, version):
