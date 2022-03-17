@@ -120,11 +120,11 @@ Follow the instructions in the documentation
 
 Release Leads:
 
-- TODO: List the release leads here. Use format `[@username](https://github.com/username)`.
+- TODO: List the release leads. Use format `[@username](https://github.com/username)`.
 
 Contributors:
 
-- TODO: Add a list of authors to PRs in this release. Use format `[@username](https://github.com/username)` and sort alphabetically.
+- TODO: Add a list of authors of the PRs listed these release notes. Use format `[@username](https://github.com/username)` and sort alphabetically.
 
 ## Learn more
 
