@@ -133,7 +133,7 @@ Now if the user set the configuration of the RabbitMQ Source Exchange and Queue 
 
 ### 💫 New Features & Changes
 
-- Added Knative Eventtype support. ([#1598](https://github.com/knative/client/pull/1598))
+- Added Knative eventtype support. ([#1598](https://github.com/knative/client/pull/1598))
 
 ### 🐞 Bug Fixes
 
