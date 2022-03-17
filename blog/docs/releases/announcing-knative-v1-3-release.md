@@ -33,7 +33,7 @@ Follow the instructions in the documentation
 - The readiness probe port can now be different than the user container port.
 - `net-certmanager` is now testing cert-manager v1.7.1.
 - Various improvements and bug fixes for Eventing.
-- The `kn` CLI has added Knative EventType support.
+- The `kn` CLI has added Knative `eventtype` support.
 - The Knative Operator has enabled v1beta1 API.
 
 ## Serving v1.3

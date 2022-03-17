@@ -118,11 +118,13 @@ Follow the instructions in the documentation
 
 ## Thank you, contributors
 
-Release Leads: TODO: Add release leads here
+Release Leads:
+
+- TODO: List the release leads here. Use format `[@username](https://github.com/username)`.
 
 Contributors:
 
-- TODO:Add list of authors to PRs in this release and the release leads. Use fomat `[@username](https://github.com/username)` and sorted
+- TODO: Add a list of authors to PRs in this release. Use format `[@username](https://github.com/username)` and sort alphabetically.
 
 ## Learn more
 
