@@ -53,6 +53,16 @@ to include the new version, and remove the oldest. Order matters, most recent fi
 
 1. PR the result to main.
 
+## Update the dot-release Job
+
+Edit the `.github/workflows/knative-dot-release-build.yaml` file to the just-cut release. For example, if v1.2 was the version just cut:
+
+```yaml
+on:
+  push:
+    branches: [ 'release-1.2' ]
+```
+
 ## How GitHub and Netlify are hooked up
 
 TODO: add information about how the docs are built and served using Netlify
