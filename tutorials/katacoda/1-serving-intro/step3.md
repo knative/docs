@@ -21,7 +21,8 @@ Let's run our "Hello world!" Service just one more time. Use your terminal with 
 curl -H "Host: hello.default.example.com" $externalIP
 ```{{execute T1}}
 
-You can watch the pods and see how they scale to zero after traffic stops going to the URL (opened in a new Terminal tab)
+You can watch the pods and see how they scale to zero after traffic stops going to the URL (opened in a new Terminal tab,
+if the command does not run automatically, click the command bellow again)
 `kubectl get pod -l serving.knative.dev/service=hello -w`{{execute T2}}
 
 > **Warning**

@@ -21,12 +21,11 @@ kn service create hello \
 > Note the name "world" which you passed in as "revision-name," naming your Revisions will help you to more easily identify them, but don't worry, you'll learn more about Revisions later.
 
 **Expected output:**
-Ping your Knative Service by running the command:
-
 `Service hello created to latest revision 'hello-world' is available at URL:
 http://hello.default.example.com`
 
 ## Ping your Knative Service
+Run this command:
 `curl -H "Host: hello.default.example.com" $externalIP`{{execute}}
 
 **Expected output:**
