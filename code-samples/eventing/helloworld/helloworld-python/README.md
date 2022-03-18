@@ -52,7 +52,7 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-python
 1. Add a `requirements.txt` file containing the following contents:
 
     ```bash
-    Flask==1.1.1
+    Flask==2.0.3
     ```
 
 1. In your project directory, create a file named `Dockerfile` and copy the following code
@@ -60,7 +60,7 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-python
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
     ```docker
-    FROM python:alpine3.7
+    FROM python:3.9-alpine
 
     COPY . /app
 
