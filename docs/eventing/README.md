@@ -61,3 +61,7 @@ the registry contain (all) the required information for a consumer to create a
 Trigger without resorting to some other out-of-band mechanism.
 
 To learn how to use the registry, see the [Event Registry documentation](event-registry.md).
+
+### Installation
+
+You can install Knative Eventing via [Quickstart plugin](https://knative.dev/docs/install/quickstart-install/#install-the-knative-quickstart-plugin), [YAML file](https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/), or the [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/).

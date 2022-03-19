@@ -41,6 +41,10 @@ serverless workload behaves on the cluster:
 
 ![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/main/docs/spec/images/object_model.png)
 
+### Installation
+
+You can install Knative Serving via [Quickstart plugin](https://knative.dev/docs/install/quickstart-install/#install-the-knative-quickstart-plugin), [YAML file](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/), or the [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/).
+
 ## Getting Started
 
 To get started with Serving, check out one of the [hello world](../samples/serving.md)
