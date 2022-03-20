@@ -64,4 +64,4 @@ To learn how to use the registry, see the [Event Registry documentation](event-r
 
 ### Installation
 
-You can install Knative Eventing via [Quickstart plugin](https://knative.dev/docs/install/quickstart-install/#install-the-knative-quickstart-plugin), [YAML file](https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/), or the [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/).
+You can install Knative Eventing via the methods listed on the [installation page](https://knative.dev/docs/install/).

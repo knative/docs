@@ -43,7 +43,7 @@ serverless workload behaves on the cluster:
 
 ### Installation
 
-You can install Knative Serving via [Quickstart plugin](https://knative.dev/docs/install/quickstart-install/#install-the-knative-quickstart-plugin), [YAML file](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/), or the [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/).
+You can install Knative Serving via the methods listed on the [installation page](https://knative.dev/docs/install/).
 
 ## Getting Started
 
