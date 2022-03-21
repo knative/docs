@@ -13,6 +13,10 @@
 [context.deploy-preview]
   publish = "site"
 
+# Envvars for deploy preview
+[context.deploy-preview.environment]
+  BUILD_VERSIONS="no"
+
 [[redirects]]
   from = "/contributing/"
   to = "/docs/community/"
