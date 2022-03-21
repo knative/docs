@@ -43,7 +43,7 @@ serverless workload behaves on the cluster:
 
 ### Installation
 
-You can install Knative Serving via the methods listed on the [installation page](https://knative.dev/docs/install/).
+You can install Knative Serving via the methods listed on the [installation page](../install/README.md).
 
 ## Getting Started
 

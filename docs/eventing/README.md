@@ -64,4 +64,4 @@ To learn how to use the registry, see the [Event Registry documentation](event-r
 
 ### Installation
 
-You can install Knative Eventing via the methods listed on the [installation page](https://knative.dev/docs/install/).
+You can install Knative Eventing via the methods listed on the [installation page](../install/README.md).
