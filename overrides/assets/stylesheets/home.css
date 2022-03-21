@@ -422,17 +422,18 @@ h2.secondary-headline, h3.trusted-by {
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
+  padding-top: 0;
 }
 
-.cncf-notice-container h2 {
+.cncf-notice-container h3 {
   font-weight: bold;
   color: var(--md-default-fg-color--light);
 }
 
 .md-typeset img.cncf-logo {
-  width: 45%;
-  max-width: 700px;
-  margin: 2rem;
+  width: 40%;
+  max-width: 500px;
+  margin: 1rem;
 }
 
 @media only screen and (max-width: 1219px) {
