@@ -428,6 +428,7 @@ h2.secondary-headline, h3.trusted-by {
 .cncf-notice-container h3 {
   font-weight: bold;
   color: var(--md-default-fg-color--light);
+  margin-top: 0;
 }
 
 .md-typeset img.cncf-logo {
