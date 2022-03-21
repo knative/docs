@@ -51,7 +51,7 @@
 .why-serverless-container, .need-to-know-more-container,
 .knative-components-container, .trying-it-all-container,
 .whats-next-container, .whats-next-container,
-.case-studies-container {
+.case-studies-container, .cncf-notice-container {
   text-align: center;
   padding: 4em 3em;
 }
@@ -417,6 +417,22 @@ h2.secondary-headline, h3.trusted-by {
 
 .md-typeset .md-button.white {
   color: white;
+}
+
+/* cncf notice container css */
+.cncf-notice-container {
+  background-color: white;
+}
+
+.cncf-notice-container h2 {
+  font-weight: bold;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset img.cncf-logo {
+  width: 45%;
+  max-width: 700px;
+  margin: 2rem;
 }
 
 @media only screen and (max-width: 1219px) {
