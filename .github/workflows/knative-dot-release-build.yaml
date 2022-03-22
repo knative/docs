@@ -17,7 +17,7 @@ name: Build site for dot releases
 
 on:
   push:
-    branches: [ 'release-1.3' ]
+    branches: [ 'release-1.*' ]
 
 jobs:
   dot-release:

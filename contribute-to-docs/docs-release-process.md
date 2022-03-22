@@ -9,7 +9,6 @@ To release a new version of the docs you must:
 1. [Check dependencies](#check-dependencies)
 1. [Create a release branch](#create-a-release-branch)
 1. [Generate the new docs version](#generate-the-new-docs-version)
-1. [Update the dot-release job](#update-the-dot-release-job)
 
 ## Check dependencies
 
@@ -53,16 +52,6 @@ to include the new version, and remove the oldest. Order matters, most recent fi
     ```
 
 1. PR the result to main.
-
-## Update the dot release job
-
-Edit the [`.github/workflows/knative-dot-release-build.yaml`](../.github/workflows/knative-dot-release-build.yaml) file to the new release. For example, if you have just cut v1.2:
-
-```yaml
-on:
-  push:
-    branches: [ 'release-1.2' ]
-```
 
 ## How GitHub and Netlify are hooked up
 
