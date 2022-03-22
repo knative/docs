@@ -192,7 +192,7 @@ Now you will need to set Kourier as the default networking layer for Knative Ser
 $ kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
-  --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+  --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
 ```
 
 If you want to validate that the patch command was successful, run the command:
@@ -203,7 +203,7 @@ $ kubectl describe configmap/config-network --namespace knative-serving
 
 ```bash
 ... (abbreviated for readability)
-ingress.class:
+ingress-class:
 ----
 kourier.ingress.networking.knative.dev
 ...
