@@ -11,31 +11,28 @@ The last super power :rocket: of Knative Serving we'll go over in this tutorial 
 
 ## Creating a new Revision
 
-You may have noticed that when you created your Knative Service you assigned it a `revision-name`, `world`. If you used `kn` when your Service was created, Knative returned both a URL and a "latest revision" for your Knative Service. **But what happens if you make a change to your Service?**
+A new Revision gets created each and every time you make changes to the configuration of your Knative Service. When splitting traffic, Knative splits traffic between different Revisions of your Knative Service.
 
 ??? question "What exactly is a Revision?"
-    You can think of a [Revision](../serving/README.md#serving-resources){target=_blank} as a stateless, autoscaling, snapshot-in-time of application code and configuration.
+    You can think of a [Revision](../serving/README.md#serving-resources){target=_blank} snapshot-in-time of application code and configuration.
 
-    A new Revision will get created each and every time you make changes to your Knative Service, whether you assign it a name or not. When splitting traffic, Knative splits traffic between different Revisions of your Knative Service.
+### Create a new Revision
 
-### Create the Revision: hello-knative
-
-Instead of `TARGET=World` update the environment variable `TARGET` on your Knative Service `hello` to greet "Knative" instead.  Name this new revision `hello-knative`.
+Instead of `TARGET=World` update the environment variable `TARGET` on your Knative Service `hello` to greet "Knative" instead.
 
 === "kn"
 
     Deploy the updated version of your Knative Service by running the command:
     ``` bash
     kn service update hello \
-    --env TARGET=Knative \
-    --revision-name=knative
+    --env TARGET=Knative
     ```
 
     As before, `kn` prints out some helpful information to the CLI.
     !!! Success "Expected output"
         ```{ .bash .no-copy }
-        Service hello created to latest revision 'hello-knative' is available at URL:
-        http://hello.default.127.0.0.1.sslip.io
+        Service 'hello' created to latest revision 'hello-00002' is available at URL:
+        http://hello.default.${LOADBALANCER_IP}.sslip.io
         ```
 
 === "YAML"
@@ -48,8 +45,6 @@ Instead of `TARGET=World` update the environment variable `TARGET` on your Knati
           name: hello
         spec:
           template:
-            metadata:
-              name: hello-knative
             spec:
               containers:
                 - image: gcr.io/knative-samples/helloworld-go
@@ -70,13 +65,14 @@ Instead of `TARGET=World` update the environment variable `TARGET` on your Knati
             ```
 
 
-Note, since we are updating an existing Knative Service `hello`, the URL doesn't change, but our new Revision should have the new name `hello-knative`
+Note that since we are updating an existing Knative Service `hello`, the URL doesn't change, but our new Revision should have the new name `hello-00002`.
 
-### View the new Revision
+### Access the new Revision
 
-To see the change, access the Knative Service again on your browser [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, or use `curl` in your terminal:
+To see the change, access the Knative Service again on your browser or use `curl` in your terminal:
 ```bash
-curl http://hello.default.127.0.0.1.sslip.io
+echo "Accessing URL $(kn service describe hello -o url)"
+curl "$(kn service describe hello -o url)"
 ```
 
 !!! Success "Expected output"
@@ -86,12 +82,11 @@ curl http://hello.default.127.0.0.1.sslip.io
 
 ## Splitting Traffic
 
-You may at this point be wondering, "where did 'Hello World!' go?" Remember, Revisions are a stateless snapshot-in-time of application code and configuration, so your "hello-world" `Revision` is still available to you.
+You may at this point be wondering, "where did 'Hello World!' go?" Remember, Revisions are a immutable snapshot-in-time of application code and configuration, so your old `hello-00001` Revision is still available to you.
 
 ### List your Revisions
 
-We can easily see a list of our existing revisions with the `kn` CLI.
-
+We can easily see a list of our existing Revisions with the `kn` or `kubectl` CLI.
 
 === "kn"
     View a list of revisions by running the command:
@@ -101,18 +96,25 @@ We can easily see a list of our existing revisions with the `kn` CLI.
     !!! Success "Expected output"
         ```{ .bash .no-copy }
         NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
-        hello-knative   hello     100%             2            30s   3 OK / 4     True
-        hello-world     hello                      1            5m    3 OK / 4     True
+        hello-00002     hello     100%             2            30s   3 OK / 4     True
+        hello-00001     hello                      1            5m    3 OK / 4     True
         ```
 
 === "kubectl"
-    Though the following example doesn't cover it, you can peak under the hood to Kubernetes to see the revisions as Kubernetes sees them by running the command:
+    View a list of Revisions by running the command:
     ```bash
     kubectl get revisions
     ```
+    !!! Success "Expected output"
+        ```{ .bash .no-copy }
+        NAME          CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON   ACTUAL REPLICAS   DESIRED REPLICAS
+        hello-00001   hello                            1            True             0                 0
+        hello-00002   hello                            2            True             0                 0
+        ```
 
-When running the `kn` command, the column most relevant for our purposes is `TRAFFIC`. It looks like 100% of traffic is going to our latest `Revision` ("hello-knative")
-and 0% of traffic is going to the Revision we configured earlier ("hello-world").
+
+When running the `kn` command, the column most relevant for our purposes is `TRAFFIC`. We can see that 100% of traffic is going to our latest Revision, `hello-00002`, which is on the row with the highest `GENERATION`.
+0% of traffic is going to the Revision we configured earlier, `hello-00001`.
 
 When you create a new Revision of a Knative Service, Knative defaults to directing 100% of traffic to this latest Revision. **We can change this default behavior by specifying how much traffic we want each of our Revisions to receive.**
 
@@ -124,7 +126,7 @@ Lets split traffic between our two Revisions:
     Run the command:
     ```bash
     kn service update hello \
-    --traffic hello-world=50 \
+    --traffic hello-00001=50 \
     --traffic @latest=50
     ```
 
@@ -137,8 +139,6 @@ Lets split traffic between our two Revisions:
           name: hello
         spec:
           template:
-            metadata:
-              name: hello-knative
             spec:
               containers:
                 - image: gcr.io/knative-samples/helloworld-go
@@ -150,8 +150,9 @@ Lets split traffic between our two Revisions:
           traffic:
           - latestRevision: true
             percent: 50
-          - revisionName: hello-world
+          - latestRevision: false
             percent: 50
+            revisionName: hello-00001
         ```
     1. Apply the YAML by running the command:
         ``` bash
@@ -159,45 +160,34 @@ Lets split traffic between our two Revisions:
         ```
 
 !!! info
-    `@latest` will always point to our "latest" `Revision` which, at the moment, is `hello-knative`.
+    `@latest` will always point to our "latest" Revision which, at the moment, is `hello-00002`.
 
 ### Verify the traffic split
 
-Verify traffic split has configured correctly by listing the revisions again.
-
-=== "kn"
-    Run the command:
-    ```bash
-    kn revisions list
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
-        hello-knative   hello     50%              2            10m   3 OK / 4     True
-        hello-world     hello     50%              1            36m   3 OK / 4     True
-        ```
-
-=== "kubectl"
-     Though the following example doesn't cover it, you can peak under the hood to Kubernetes to see the revisions as Kubernetes sees them by running the command:
-    ```bash
-    kubectl get revisions
-    ```
-
-
-Access your Knative service on the browser again [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, and refresh multiple times to see the different output being served by each Revision.
-
-Similarly, you can `curl` the Service URL multiple times to see the traffic being split between the Revisions.
+Verify that the traffic split has configured correctly by listing the revisions again, run the command:
 ```bash
-curl http://hello.default.127.0.0.1.sslip.io
+kn revisions list
+```
+!!! Success "Expected output"
+    ```{ .bash .no-copy }
+    NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
+    hello-00002     hello     50%              2            10m   3 OK / 4     True
+    hello-00001     hello     50%              1            36m   3 OK / 4     True
+    ```
+
+
+Access your Knative Service multiple times on the browser to see the different output being served by each Revision.
+
+Similarly, you can access the Service URL from the terminal multiple times to see the traffic being split between the Revisions.
+```bash
+echo "Accessing URL $(kn service describe hello -o url)"
+curl "$(kn service describe hello -o url)"
 ```
 
 !!! Success "Expected output"
     ```{ .bash .no-copy }
-    curl http://hello.default.127.0.0.1.sslip.io
     Hello Knative!
-
-    curl http://hello.default.127.0.0.1.sslip.io
+    Hello World!
+    Hello Knative!
     Hello World!
     ```
-
-Congratulations, :tada: you've successfully split traffic between two different Revisions of a Knative Service. Up next, Knative Eventing!
