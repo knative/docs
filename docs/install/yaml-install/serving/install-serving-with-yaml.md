@@ -76,6 +76,18 @@ Follow the procedure for the networking layer of your choice:
         kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
         ```
 
+    1. Configure Knative Serving to use Istio by default by running the command:
+
+        ```bash
+        kubectl patch configmap/config-network \
+          --namespace knative-serving \
+          --type merge \
+          --patch '{"data":{"ingress-class":"istio.ingress.networking.knative.dev"}}'
+        ```
+
+        !!! tip
+            Since Knative Serving uses Istio by default, you can omit this step.
+
     1. Fetch the External IP address or CNAME by running the command:
 
         ```bash
