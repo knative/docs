@@ -35,6 +35,7 @@
 /hack/* go-get=1 /golang/hack.html 200
 /homebrew-client/* go-get=1 /golang/homebrew-client.html 200
 /homebrew-kn-plugins/* go-get=1 /golang/homebrew-kn-plugins.html 200
+/infra/* go-get=1 /golang/infra.html 200
 /integration/* go-get=1 /golang/integration.html 200
 /kn-plugin-admin/* go-get=1 /golang/kn-plugin-admin.html 200
 /kn-plugin-diag/* go-get=1 /golang/kn-plugin-diag.html 200
