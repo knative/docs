@@ -41,9 +41,9 @@ serverless workload behaves on the cluster:
 
 ![Diagram that displays how the Serving resources coordinate with each other.](https://github.com/knative/serving/raw/main/docs/spec/images/object_model.png)
 
-### Installation
+## Installation
 
-You can install Knative Serving via the methods listed on the [installation page](../install/README.md).
+You can install Knative Serving using the methods listed on the [installation page](../install/README.md).
 
 ## Getting Started
 
