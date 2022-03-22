@@ -14,5 +14,5 @@ kubectl apply --filename https://github.com/knative/net-contour/releases/downloa
 kubectl patch configmap/config-network \
       --namespace knative-serving \
       --type merge \
-      --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+      --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
 echo "Knative Serving Installed."

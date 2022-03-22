@@ -45,7 +45,7 @@ Follow the procedure for the networking layer of your choice:
       kubectl patch configmap/config-network \
         --namespace knative-serving \
         --type merge \
-        --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+        --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
       ```
 
     1. Fetch the External IP address or CNAME by running the command:
