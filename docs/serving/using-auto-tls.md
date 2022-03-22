@@ -149,7 +149,7 @@ wildcard certificate like `*.my-ns.example.com`.
     kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
-### Provising certificates per namespace (wildcard certificates)
+### Provisioning certificates per namespace (wildcard certificates)
 
 !!! warning
     Provisioning a certificate per namespace only works with DNS-01
