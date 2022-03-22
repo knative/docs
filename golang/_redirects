@@ -5,6 +5,7 @@
 #
 # To regenerate, run:
 #   go run ./tools/redir-gen/
+/actions/* go-get=1 /golang/actions.html 200
 /actions-downstream-test/* go-get=1 /golang/actions-downstream-test.html 200
 /actions-kind/* go-get=1 /golang/actions-kind.html 200
 /async-component/* go-get=1 /golang/async-component.html 200
@@ -35,6 +36,7 @@
 /hack/* go-get=1 /golang/hack.html 200
 /homebrew-client/* go-get=1 /golang/homebrew-client.html 200
 /homebrew-kn-plugins/* go-get=1 /golang/homebrew-kn-plugins.html 200
+/infra/* go-get=1 /golang/infra.html 200
 /integration/* go-get=1 /golang/integration.html 200
 /kn-plugin-admin/* go-get=1 /golang/kn-plugin-admin.html 200
 /kn-plugin-diag/* go-get=1 /golang/kn-plugin-diag.html 200
