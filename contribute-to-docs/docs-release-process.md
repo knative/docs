@@ -55,7 +55,7 @@ to include the new version, and remove the oldest. Order matters, most recent fi
 
 ## Update the dot-release Job
 
-Edit the `.github/workflows/knative-dot-release-build.yaml` file to the just-cut release. For example, if v1.2 was the version just cut:
+Edit the [`.github/workflows/knative-dot-release-build.yaml`](../.github/workflows/knative-dot-release-build.yaml) file to the new release. For example, if you have just cut v1.2:
 
 ```yaml
 on:
