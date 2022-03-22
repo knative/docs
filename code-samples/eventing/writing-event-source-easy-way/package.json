@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cloudevents": "^4.0.3",
-    "got": "^11.8.2"
+    "cloudevents": "^6.0.1"
   }
 }

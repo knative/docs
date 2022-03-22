@@ -1,5 +1,4 @@
-const got = require('got');
-const { CloudEvent, Emitter, emitterFor } = require('cloudevents');
+const { CloudEvent, Emitter, emitterFor, httpTransport } = require('cloudevents');
 
 const K_SINK = process.env['K_SINK'];
 K_SINK || logExit('Error: K_SINK Environment variable is not defined');
@@ -20,17 +19,7 @@ setInterval(() => {
 }, 1000);
 
 // Create a function that can post an event
-const emit = emitterFor(event => {
-  got.post(K_SINK, event)
-    .then(response => {
-      console.log('Event posted successfully');
-      console.log(response.data);
-    })
-    .catch(err => {
-      console.log('Error during event post');
-      console.error(err);
-    });
-  });
+const emit = emitterFor(httpTransport(K_SINK));
 
 // Send the CloudEvent any time a Node.js 'cloudevent' event is emitted
 Emitter.on('cloudevent', emit);
@@ -49,6 +38,6 @@ function registerGracefulExit() {
 
 function logExit(message = 'Exiting...') {
   // Handle graceful exit
-  console.log(message);
+  process.stdout.write(`${message}\n`);
   process.exit();
 }
