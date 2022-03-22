@@ -18,11 +18,10 @@ Knative Service is running to watch our "Hello world!" Service scale up and down
 ## Watch your Knative Service scale to zero
 
 Let's run our "Hello world!" Service just one more time. This time, try the Knative Service `URL` in
-your browser
-[http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, or you
-can use your terminal with `curl`.
+your browser or you can use your terminal with `curl`.
 ```bash
-curl http://hello.default.127.0.0.1.sslip.io
+echo "Accessing URL $(kn service describe hello -o url)"
+curl "$(kn service describe hello -o url)"
 ```
 
 Now watch the pods and see how they scale to zero after traffic stops going to the URL.
@@ -45,7 +44,7 @@ kubectl get pod -l serving.knative.dev/service=hello -w
 
 ## Scale up your Knative Service
 
-Rerun the Knative Service in your browser [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank}, and you will see a new pod running again.
+Rerun the Knative Service in your browser and you will see a new pod running again.
 
 !!! Success "Expected output"
     ```{ .bash .no-copy }
@@ -55,7 +54,7 @@ Rerun the Knative Service in your browser [http://hello.default.127.0.0.1.sslip.
     hello-world                              1/2     Running
     hello-world                              2/2     Running
     ```
-Exit the watch command with `Ctrl+c`.
+Exit the `kubectl watch` command with `Ctrl+c`.
 
 Some people call this **Serverless** :tada: :taco: :fire: Up next, traffic splitting!
 
