@@ -111,7 +111,7 @@ This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.
 
 #### 💫 New Features & Changes
 
-- Broker URLs updated to be `http://<broker-URL>/<namespace>/<broker-name>` ([#587](https://github.com/knative-sandbox/eventing-rabbitmq/pull/587))
+- Broker URLs updated to be `http://<broker-URL>/<namespace>/<broker-name>`. ([#587](https://github.com/knative-sandbox/eventing-rabbitmq/pull/587))
 - Short testing guide for contributors, .env -> (direnv friendly).envrc ([#599](https://github.com/knative-sandbox/eventing-rabbitmq/pull/599))
 
 ## Client v1.3
