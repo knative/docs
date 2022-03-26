@@ -6,4 +6,5 @@ mkdocs-redirects>=1.0.3
 mkdocs-rss-plugin>=0.18.0
 pygithub==1.55
 semver==2.13.0
+jinja2==3.0.3
 
