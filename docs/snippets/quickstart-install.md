@@ -126,9 +126,9 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         ```bash
         minikube tunnel --profile knative
         ```
-        The tunnel must continue to run in a terminal window while you are using your Knative `quickstart` environment at any time.
+        The tunnel must continue to run in a terminal window any time you are using your Knative `quickstart` environment.
 
-        The tunnel command is required as it would allow Knative ingress service to be accesible as a LoadBalancer from your host computer.
+        The tunnel command is required because it allows your cluster to access Knative ingress service as a LoadBalancer from your host computer.
 
         !!! note
             To terminate the tunnel process and clean up network routes, enter `Ctrl-C`.
