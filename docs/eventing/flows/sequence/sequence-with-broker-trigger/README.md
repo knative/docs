@@ -207,7 +207,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
