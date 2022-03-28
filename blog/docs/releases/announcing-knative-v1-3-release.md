@@ -107,25 +107,12 @@ This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.
 
 ### RabbitMQ Broker and Source v1.3
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.3.0 -->
+<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.3.1 -->
 
 #### 💫 New Features & Changes
 
-- Added publisher confirms to ingress. Return HTTP Status 200 only when RabbitMQ confirms receiving and storing the message. See issue [#334](https://github.com/knative-sandbox/eventing-rabbitmq/issues/334). ([#568](https://github.com/knative-sandbox/eventing-rabbitmq/pull/568))
-- The Source Adapter and Broker Dispatcher's Prefetch Count behavior is now the same. Updated the Trigger's webhook to validate:
-    - Has a default value of 1. FIFO behavior
-    - Have limits: 1 ≤ prefetchCount ≤ 1000 ([#536](https://github.com/knative-sandbox/eventing-rabbitmq/pull/536))
-- All core Knative Eventing RabbitMQ pods should now be able to run in the restricted pod security standard profile. ([#541](https://github.com/knative-sandbox/eventing-rabbitmq/pull/541))
-- Various refactorings and code health improvements. ([#552](https://github.com/knative-sandbox/eventing-rabbitmq/pull/552), [#572](https://github.com/knative-sandbox/eventing-rabbitmq/pull/572))
-- Makefile-based worklow, includes migrating GitHub Actions. ([#525](https://github.com/knative-sandbox/eventing-rabbitmq/pull/525), [#569](https://github.com/knative-sandbox/eventing-rabbitmq/pull/569), [#579](https://github.com/knative-sandbox/eventing-rabbitmq/pull/579))
-- Improved Broker and Source README docs and Samples description and files. ([#555](https://github.com/knative-sandbox/eventing-rabbitmq/pull/555))
-
-#### 🐞 Bug Fixes
-
-- Removing the dead letter sink on a trigger will now properly fall back to the Broker's dead letter sink, if one is defined. ([#533](https://github.com/knative-sandbox/eventing-rabbitmq/pull/533))
-- Configuring messages sent into the RabbitMQ Broker to be persistent as the Queues used by the Broker are always durable.
-Now if the user set the configuration of the RabbitMQ Source Exchange and Queue to be durable, the messages are also durable. ([#560](https://github.com/knative-sandbox/eventing-rabbitmq/pull/560))
-
+- Broker URLs updated to be `http://<broker-URL>/<namespace>/<broker-name>`. ([#587](https://github.com/knative-sandbox/eventing-rabbitmq/pull/587))
+- Short testing guide for contributors, converting from `.env` -> to `(direnv friendly).envrc` environment files. ([#599](https://github.com/knative-sandbox/eventing-rabbitmq/pull/599))
 
 ## Client v1.3
 
@@ -178,6 +165,7 @@ Contributors:
 - [@devguyio](https://github.com/devguyio)
 - [@dsimansk](https://github.com/dsimansk)
 - [@gabo1208](https://github.com/gabo1208)
+- [@gab-satchi](https://github.com/gab-satchi)
 - [@gvmw](https://github.com/gvmw)
 - [@houshengbo](https://github.com/houshengbo)
 - [@ikvmw](https://github.com/ikvmw)
