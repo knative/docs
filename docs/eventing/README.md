@@ -14,6 +14,7 @@ Other services can be connected to the Knative Eventing system. These services c
 ## Installation
 
 You can install Knative Eventing via the methods listed on the [installation page](../install/README.md).
+
 ## Common use cases
 
 Knative Eventing supports the following use cases:
@@ -64,11 +65,3 @@ the registry contain (all) the required information for a consumer to create a
 Trigger without resorting to some other out-of-band mechanism.
 
 To learn how to use the registry, see the [Event Registry documentation](event-registry.md).
-
-<<<<<<< HEAD
-
-=======
-## Installation
-
-You can install Knative Eventing using the methods listed on the [installation page](../install/README.md).
->>>>>>> main
