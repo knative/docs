@@ -82,7 +82,7 @@ curl "$(kn service describe hello -o url)"
 
 ## Splitting Traffic
 
-You may at this point be wondering, "where did 'Hello World!' go?" Remember, Revisions are a immutable snapshot-in-time of application code and configuration, so your old `hello-00001` Revision is still available to you.
+You may at this point be wondering, "where did 'Hello World!' go?" Remember, Revisions are an immutable snapshot-in-time of application code and configuration, so your old `hello-00001` Revision is still available to you.
 
 ### List your Revisions
 
@@ -164,7 +164,7 @@ Lets split traffic between our two Revisions:
 
 ### Verify the traffic split
 
-Verify that the traffic split has configured correctly by listing the revisions again, run the command:
+To verify that the traffic split has configured correctly, list the revisions again by running the command:
 ```bash
 kn revisions list
 ```
@@ -176,7 +176,7 @@ kn revisions list
     ```
 
 
-Access your Knative Service multiple times on the browser to see the different output being served by each Revision.
+Access your Knative Service multiple times in your browser to see the different output being served by each Revision.
 
 Similarly, you can access the Service URL from the terminal multiple times to see the traffic being split between the Revisions.
 ```bash
