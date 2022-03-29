@@ -11,6 +11,10 @@ Other services can be connected to the Knative Eventing system. These services c
 - Create new applications without modifying the event producer or event   consumer.
 - Select and target specific subsets of the events from their producers.
 
+## Installation
+
+You can install Knative Eventing via the methods listed on the [installation page](../install/README.md).
+
 ## Common use cases
 
 Knative Eventing supports the following use cases:
