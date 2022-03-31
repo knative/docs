@@ -24,7 +24,7 @@ Stable mode is used for general operation, while panic mode by default has a muc
 * **Default:** `60s`
 
 !!! note
-    During scale down, the last Replica will only be removed after there has not been any traffic to the Revision for the entire duration of the stable window.
+    When scaling to zero Replicas, the last Replica will only be removed after there has not been any traffic to the Revision for the entire duration of the stable window.
 
 **Example:**
 
