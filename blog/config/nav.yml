@@ -33,6 +33,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/google-summer-of-code-2022.md
           - articles/workflow-as-function-flow.md
           - articles/highlighting-value-knative-c-suite.md
           - articles/knative-1.0.md
@@ -63,3 +64,4 @@ nav:
       - Events:
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
+
