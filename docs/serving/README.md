@@ -9,6 +9,10 @@ Knative Serving provides components that enable:
 
 Knative Serving supports both HTTP and [HTTPS](using-a-tls-cert.md) networking protocols.
 
+## Installation
+
+You can install Knative Serving via the methods listed on the [installation page](../install/README.md).
+
 ## Serving resources
 
 Knative Serving defines a set of objects as Kubernetes Custom Resource
