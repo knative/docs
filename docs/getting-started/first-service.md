@@ -13,36 +13,30 @@ First, deploy the Knative Service. This service accepts the environment variable
 
     Deploy the Service by running the command:
 
-    ``` bash
+    ```bash
     kn service create hello \
     --image gcr.io/knative-samples/helloworld-go \
     --port 8080 \
-    --env TARGET=World \
-    --revision-name=world
+    --env TARGET=World
     ```
-
-    ??? question "Why did I pass in `revision-name`?"
-        Note the name "world" which you passed in as "revision-name," naming your `Revisions` will help you to more easily identify them, but don't worry, you'll learn more about `Revisions` later.
-
     !!! Success "Expected output"
         ```{ .bash .no-copy }
         Service hello created to latest revision 'hello-world' is available at URL:
-        http://hello.default.127.0.0.1.sslip.io
+        http://hello.default.${LOADBALANCER_IP}.sslip.io
         ```
+        The value of `${LOADBALANCER_IP}` above depends on your type of cluster,
+        for `kind` it will be `127.0.0.1` for `minikube` depends on the local tunnel.
 
 === "YAML"
     1. Copy the following YAML into a file named `hello.yaml`:
 
-        ``` yaml
+        ```yaml
         apiVersion: serving.knative.dev/v1
         kind: Service
         metadata:
           name: hello
         spec:
           template:
-            metadata:
-              # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
-              name: hello-world
             spec:
               containers:
                 - image: gcr.io/knative-samples/helloworld-go
@@ -54,33 +48,46 @@ First, deploy the Knative Service. This service accepts the environment variable
         ```
     1. Deploy the Knative Service by running the command:
 
-        ``` bash
+        ```bash
         kubectl apply -f hello.yaml
         ```
-        ??? question "Why did I pass in the second name, `hello-world`?"
-            Note the name `hello-world` which you passed in under `metadata` in your YAML file. Naming your `Revisions` will help you to more easily identify them, but don't worry if this if a bit confusing now, you'll learn more about `Revisions` later.
         !!! Success "Expected output"
             ```{ .bash .no-copy }
             service.serving.knative.dev/hello created
             ```
-    1. To see the URL where your Knative Service is hosted, leverage the `kn` CLI:
 
+## List your Knative Service
+
+To see the URL where your Knative Service is hosted, leverage the `kn` CLI:
+
+=== "kn"
+    View a list of Knative services by running the command:
+    ```bash
+    kn service list
+    ```
+    !!! Success "Expected output"
         ```bash
-        kn service list
+        NAME    URL                                                LATEST        AGE   CONDITIONS   READY
+        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001   13s   3 OK / 3     True
         ```
-        !!! Success "Expected output"
-            ```bash
-            NAME    URL                                          LATEST        AGE   CONDITIONS   READY   REASON
-            hello   http://hello.default.127.0.0.1.sslip.io   hello-world   13s   3 OK / 3     True
-            ```
+=== "kubectl"
+    View a list of Knative services by running the command:
+    ```bash
+    kubectl get ksvc
+    ```
+    !!! Success "Expected output"
+        ```bash
+        NAME    URL                                                LATESTCREATED   LATESTREADY   READY   REASON
+        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001     hello-00001   True
+        ```
 
+## Access your Knative Service
 
-## Ping your Knative Service
-
-Ping your Knative Service by opening [http://hello.default.127.0.0.1.sslip.io](http://hello.default.127.0.0.1.sslip.io){target=_blank} in your browser of choice or by running the command:
+Access your Knative Service by opening the previous URL in your browser or by running the command:
 
 ```bash
-curl http://hello.default.127.0.0.1.sslip.io
+echo "Accessing URL $(kn service describe hello -o url)"
+curl "$(kn service describe hello -o url)"
 ```
 
 !!! Success "Expected output"
@@ -88,7 +95,7 @@ curl http://hello.default.127.0.0.1.sslip.io
     Hello World!
     ```
 
-??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.127.0.0.1.sslip.io`?"
+??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.${LOADBALANCER_IP}.sslip.io`?"
 
     In some cases your DNS server may be set up not to resolve `*.sslip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses.
 

@@ -20,7 +20,8 @@ you to run a local Kubernetes cluster with Docker container nodes.
 - The [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank}
 to run commands against Kubernetes clusters.
 You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
-- The Knative CLI (`kn`) v0.25 or later. For instructions, see the next section.
+- The Knative CLI (`kn`). For instructions, see the next section.
+- You need minimum of 3&nbsp;CPUs and 3&nbsp;GB of RAM available for the cluster to be created.
 
 ### Install the Knative CLI
 
@@ -96,6 +97,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
 === "Using kind"
 
+
     1. Install Knative and Kubernetes on a local Docker daemon by running:
 
         ```bash
@@ -112,21 +114,29 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
     1. Install Knative and Kubernetes in a minikube instance by running:
 
+        !!! note
+            The minikube cluster will be created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a
+            different value not lower than 3&nbsp;GB by running the command `minikube config set memory 3078` before this command.
         ```bash
         kn quickstart minikube
         ```
+
+    1. The output of the previous command asked you to run minikube tunnel.
+       Run the following command to start the process in a secondary terminal window, then return to the primary window and press enter to continue:
+        ```bash
+        minikube tunnel --profile knative
+        ```
+        The tunnel must continue to run in a terminal window any time you are using your Knative `quickstart` environment.
+
+        The tunnel command is required because it allows your cluster to access Knative ingress service as a LoadBalancer from your host computer.
+
+        !!! note
+            To terminate the tunnel process and clean up network routes, enter `Ctrl-C`.
+            For more information about the `minikube tunnel` command, see the [minikube documentation](https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel).
 
     1. After the plugin is finished, verify you have a cluster called `knative`:
 
         ```bash
         minikube profile list
         ```
-    1. To finish setting up networking for minikube, start the `minikube tunnel` process in a separate terminal window:
-        ```bash
-        minikube tunnel --profile knative
-        ```
-        The tunnel must continue to run in a terminal window while you are using your Knative `quickstart` environment.
 
-        !!! note
-            To terminate the process and clean up network routes, enter `Ctrl-C`.
-            For more information about the `minikube tunnel` command, see the [minikube documentation](https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel).
