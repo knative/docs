@@ -6,7 +6,7 @@
 3. **Install knative `kn` cli**.
 4. **Assign variable `$externalIP` with the external IP of your kubernetes cluster**.
 
-> Once you see a prompt, you can click on the command below, 
+> Once you see a prompt, you can click on the command below,
 > it will be copied and run for you in the terminal on the right.
 > This command will show you general information about your cluster.
 
