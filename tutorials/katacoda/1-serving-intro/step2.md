@@ -12,16 +12,11 @@ Since our "Hello world" Service is being deployed as a Knative Service, not a Ku
 kn service create hello \
 --image gcr.io/knative-samples/helloworld-go \
 --port 8080 \
---env TARGET=World \
---revision-name=world
+--env TARGET=World
 ```{{execute}}
 
-
-> **Why did I pass in revision-name?**
-> Note the name "world" which you passed in as "revision-name," naming your Revisions will help you to more easily identify them, but don't worry, you'll learn more about Revisions later.
-
 **Expected output:**
-`Service hello created to latest revision 'hello-world' is available at URL:
+`Service hello created to latest revision 'hello-00001' is available at URL:
 http://hello.default.example.com`
 
 ## Ping your Knative Service

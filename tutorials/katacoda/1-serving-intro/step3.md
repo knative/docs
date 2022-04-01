@@ -30,11 +30,11 @@ if the command does not run automatically, click the command bellow again)
 
 **Expected output:**
 ```sh
-NAME                                     READY   STATUS
-hello-world                              2/2     Running
-hello-world                              2/2     Terminating
-hello-world                              1/2     Terminating
-hello-world                              0/2     Terminating
+NAME          READY   STATUS
+hello-world   2/2     Running
+hello-world   2/2     Terminating
+hello-world   1/2     Terminating
+hello-world   0/2     Terminating
 ```
 
 ### Scale up your Knative Service
@@ -45,11 +45,11 @@ Go back to the `Terminal 2` tab, and you can watch the pods and see how they sca
 
 **Expected output:**
 ```sh
-NAME                                     READY   STATUS
-hello-world                              0/2     Pending
-hello-world                              0/2     ContainerCreating
-hello-world                              1/2     Running
-hello-world                              2/2     Running
+NAME          READY   STATUS
+hello-world   0/2     Pending
+hello-world   0/2     ContainerCreating
+hello-world   1/2     Running
+hello-world   2/2     Running
 ```
 
 Exit the watch command with
