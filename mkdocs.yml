@@ -64,7 +64,7 @@ plugins:
     collapse_single_pages: true
     strict: false
 
-copyright: "Copyright © 2022 The Knative Authors"
+copyright: "Copyright © 2022 The Knative Authors | Documentation Distributed under CC BY 4.0"
 
 extra:
   social:

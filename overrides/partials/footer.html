@@ -64,24 +64,25 @@
       <!-- Copyright and theme information -->
       <div class="md-footer-copyright">
         {% if config.copyright %}
-          <div class="md-footer-copyright__highlight">
             {{ config.copyright }}
-          </div>
         {% endif %}
-        Made with
-        <a
-          href="https://squidfunk.github.io/mkdocs-material/"
-          target="_blank" rel="noopener"
-        >
-          Material for MkDocs
-        </a>
         {{ extracopyright }}
+        <div class="footer-links">
+          Made with
+          <a
+            href="https://squidfunk.github.io/mkdocs-material/"
+            target="_blank" rel="noopener"
+          >
+            Material for MkDocs
+          </a>
+        </div>
       </div>
 
-      <div class="footer-links md-footer-copyright">
+      <div class="footer-links">
         <a href="https://policies.google.com/privacy">Privacy Policy</a> |
         <a href="/development/about-analytics-cookies/">Cookie Usage</a> |
-        <a href="https://github.com/knative/docs/blob/main/LICENSE">Knative Licensing</a>
+        <a href="https://github.com/knative/docs/blob/main/LICENSE">Knative Source Code Apache-2.0 Licensing</a> |
+        <a href="https://github.com/knative/docs/blob/main/LICENSE-docs">Knative Documentation CC BY 4.0 Licensing</a> |
       </div>
 
       <!-- Social links -->
