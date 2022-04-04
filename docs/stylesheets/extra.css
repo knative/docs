@@ -333,7 +333,6 @@ a.md-header__button.md-logo img {
 }
 
 .md-footer .md-footer-copyright {
-  color: #1a7dc9;
   font-weight: bold;
 }
 
@@ -349,6 +348,7 @@ a.md-header__button.md-logo img {
 
 .footer-links a {
   margin: 0.4em;
+  text-decoration: underline
 }
 
 /* Feature State Labels */
