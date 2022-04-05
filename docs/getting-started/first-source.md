@@ -63,7 +63,7 @@ Create the CloudEvents Player Service:
 If you open the Service URL in your browser, the **Create Event** form appears.
 
 The Service URL is `http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io`,
-for example, http://cloudevents-player.default.127.0.0.1.sslip.io for `kind`.
+for example, [http://cloudevents-player.default.127.0.0.1.sslip.io](http://cloudevents-player.default.127.0.0.1.sslip.io) for `kind`.
 
 ![The user interface for the CloudEvents Player](images/event_form.png)
 
