@@ -119,11 +119,11 @@ recreate the source files from this folder.
    spec:
      template:
        spec:
-       containers:
-         - image: docker.io/{username}/helloworld-rust
-           env:
-             - name: TARGET
-           value: "Rust Sample v1"
+         containers:
+           - image: docker.io/{username}/helloworld-rust
+             env:
+               - name: TARGET
+                 value: "Rust Sample v1"
    ```
 
 ## Build and deploy this sample
