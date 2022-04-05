@@ -21,7 +21,7 @@ Create the CloudEvents Player Service:
     !!! Success "Expected output"
         ```{ .bash .no-copy }
         Service 'cloudevents-player' created to latest revision 'cloudevents-player-vwybw-1' is available at URL:
-        http://cloudevents-player.default.127.0.0.1.sslip.io
+        http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io
         ```
 
     ??? question "Why is my Revision named something different!"
@@ -59,7 +59,11 @@ Create the CloudEvents Player Service:
 
 ## Examining the CloudEvents Player
 
-**You can use the CloudEvents Player to send and receive CloudEvents.** If you open the [Service URL](http://cloudevents-player.default.127.0.0.1.sslip.io){target=_blank} in your browser, the **Create Event** form appears:
+**You can use the CloudEvents Player to send and receive CloudEvents.**
+If you open the Service URL in your browser, the **Create Event** form appears.
+
+The Service URL is `http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io`,
+for example, [http://cloudevents-player.default.127.0.0.1.sslip.io](http://cloudevents-player.default.127.0.0.1.sslip.io) for `kind`.
 
 ![The user interface for the CloudEvents Player](images/event_form.png)
 
@@ -92,7 +96,7 @@ Try sending an event using the CloudEvents Player interface:
 
     To post an event:
     ```bash
-    curl -i http://cloudevents-player.default.127.0.0.1.sslip.io \
+    curl -i http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io \
         -H "Content-Type: application/json" \
         -H "Ce-Id: 123456789" \
         -H "Ce-Specversion: 1.0" \
@@ -103,7 +107,7 @@ Try sending an event using the CloudEvents Player interface:
 
     And to view events:
     ```bash
-    curl http://cloudevents-player.default.127.0.0.1.sslip.io/messages
+    curl http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io/messages
     ```
 
 The :material-send: icon in the "Status" column implies that the event has been sent to our Broker... but where has the event gone? **Well, right now, nowhere!**
