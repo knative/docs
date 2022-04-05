@@ -25,18 +25,18 @@ Create a sample service:
         apiVersion: serving.knative.dev/v1
         kind: Service
         metadata:
-        name: helloworld-go
-        namespace: default
+          name: helloworld-go
+          namespace: default
         spec:
-        template:
-        spec:
-        containers:
-            - image: gcr.io/knative-samples/helloworld-go
-            env:
-                - name: TARGET
-                value: "Go Sample v1"
+          template:
+            spec:
+              containers:
+                - image: gcr.io/knative-samples/helloworld-go
+                  env:
+                    - name: TARGET
+                      value: "Go Sample v1"
         ```
-        
+
     1. Apply the YAML file by running the command:
 
         ```bash
