@@ -41,17 +41,22 @@ To get started, install the Knative `quickstart` plugin:
         brew install knative-sandbox/kn-plugins/quickstart
         ```
 
-    - To upgrade an existing `quickstart` install to the latest version, run the command:
+    - To upgrade an existing `quickstart` installation to the latest version, run the command:
 
         ```bash
         brew upgrade knative-sandbox/kn-plugins/quickstart
         ```
 === "Using a binary"
-    1. Download the executable binary for your system from the [`quickstart` release page](https://github.com/knative-sandbox/kn-plugin-quickstart/releases){target=_blank}.
+
+    1. Download the binary for your system from the [`quickstart` release page](https://github.com/knative-sandbox/kn-plugin-quickstart/releases){target=_blank}.
+
+    1. Rename the file to remove the OS and architecture information. For example, rename `kn-quickstart-amd64` to `kn-quickstart`.
+
+    1. Make the plugin executable. For example, `chmod +x kn-quickstart`.
 
     1. Move the executable binary file to a directory on your `PATH`, for example, in `/usr/local/bin`.
 
-    1. Verify that the plugin is working, for example:
+    1. Verify that the plugin is working by running the command:
 
         ```bash
         kn quickstart --help
@@ -77,7 +82,7 @@ To get started, install the Knative `quickstart` plugin:
           mv kn-quickstart /usr/local/bin
           ```
 
-     1. Verify that the plugin is working, for example:
+     1. Verify that the plugin is working by running the command:
 
           ```bash
           kn quickstart --help
@@ -139,4 +144,3 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         ```bash
         minikube profile list
         ```
-
