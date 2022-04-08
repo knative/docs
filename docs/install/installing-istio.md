@@ -35,7 +35,7 @@ cover a few useful Istio configurations and their benefits.
 
 You can install Istio with or without a service mesh:
 
-- [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)(Recommended
+- [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection) (Recommended
      default installation)
 
 - [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
