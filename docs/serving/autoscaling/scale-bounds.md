@@ -10,7 +10,7 @@ This can be a default configuration for all Revisions, or for a specific Revisio
 This value controls the minimum number of replicas that each Revision should have.
 Knative will attempt to never have less than this number of replicas at any one point in time.
 
-* **Global key:** n/a
+* **Global key:** `min-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/min-scale`
 * **Possible values:** integer
 * **Default:** `0` if scale-to-zero is enabled and class KPA is used, `1` otherwise
@@ -36,6 +36,30 @@ Knative will attempt to never have less than this number of replicas at any one 
           containers:
             - image: gcr.io/knative-samples/helloworld-go
     ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
+      min-scale: "3"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          min-scale: "3"
+    ```
+
 
 
 
