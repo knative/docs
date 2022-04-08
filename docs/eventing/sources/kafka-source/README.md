@@ -89,17 +89,7 @@ If you are using Strimzi:
 
 ## Create a Service
 
-1. Clone the sample code GitHub repository, and navigate to the local directory of the repository:
-
-    ```bash
-    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-    ```
-
-    ```bash
-    cd knative-docs/code-samples/eventing/kafka/source
-    ```
-    <!--  does this folder exist? -->
-2. Create the `event-display` Service as a YAML file:
+1. Create the `event-display` Service as a YAML file:
 
      ```yaml
      apiVersion: serving.knative.dev/v1
@@ -116,7 +106,7 @@ If you are using Strimzi:
                image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
      ```
 
-1. Apply the YAML file by running the command:
+2. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
@@ -128,7 +118,7 @@ If you are using Strimzi:
     service.serving.knative.dev/event-display created
     ```
 
-1. Ensure that the Service Pod is running, by running the command:
+3. Ensure that the Service Pod is running, by running the command:
 
     ```bash
     kubectl get pods
@@ -162,7 +152,7 @@ If you are using Strimzi:
           name: event-display
     ```
 
-1. Deploy the event source:
+2. Deploy the event source:
 
     ```bash
     kubectl apply -f event-source.yaml
@@ -173,7 +163,7 @@ If you are using Strimzi:
     kafkasource.sources.knative.dev/kafka-source created
     ```
 
-1. Verify that the KafkaSource is ready:
+3. Verify that the KafkaSource is ready:
 
     ```bash
     kubectl get kafkasource kafka-source
@@ -196,7 +186,7 @@ If you are using Strimzi:
     !!! tip
         If you don't see a command prompt, try pressing **Enter**.
 
-1. Verify that the Service received the message from the event source:
+2. Verify that the Service received the message from the event source:
 
     ```bash
     kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
@@ -246,7 +236,7 @@ If you are using Strimzi:
     "event-display" deleted
     ```
 
-4. Optional: Remove the Apache Kafka Topic
+3. Optional: Remove the Apache Kafka Topic
 
     ```bash
     kubectl delete -f kafka-topic.yaml
