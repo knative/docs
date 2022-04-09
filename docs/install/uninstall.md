@@ -133,15 +133,15 @@ Uninstall any Eventing extensions you have installed by following the relevant p
 
     1. Uninstall the Kafka Sink data plane:
 
-       ```bash
-       kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
-       ```
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
+        ```
 
     1. Uninstall the Kafka controller:
 
-       ```bash
-       kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
-       ```
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+        ```
 
 
 
