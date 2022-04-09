@@ -106,7 +106,7 @@ If you are using Strimzi:
                image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
      ```
 
-2. Apply the YAML file by running the command:
+1. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
@@ -118,7 +118,7 @@ If you are using Strimzi:
     service.serving.knative.dev/event-display created
     ```
 
-3. Ensure that the Service Pod is running, by running the command:
+1. Ensure that the Service Pod is running, by running the command:
 
     ```bash
     kubectl get pods
@@ -152,7 +152,7 @@ If you are using Strimzi:
           name: event-display
     ```
 
-2. Deploy the event source:
+1. Deploy the event source:
 
     ```bash
     kubectl apply -f event-source.yaml
@@ -163,7 +163,7 @@ If you are using Strimzi:
     kafkasource.sources.knative.dev/kafka-source created
     ```
 
-3. Verify that the KafkaSource is ready:
+1. Verify that the KafkaSource is ready:
 
     ```bash
     kubectl get kafkasource kafka-source
@@ -186,7 +186,7 @@ If you are using Strimzi:
     !!! tip
         If you don't see a command prompt, try pressing **Enter**.
 
-2. Verify that the Service received the message from the event source:
+1. Verify that the Service received the message from the event source:
 
     ```bash
     kubectl logs --selector='serving.knative.dev/service=event-display' -c user-container
@@ -236,7 +236,7 @@ If you are using Strimzi:
     "event-display" deleted
     ```
 
-3. Optional: Remove the Apache Kafka Topic
+4. Optional: Remove the Apache Kafka Topic
 
     ```bash
     kubectl delete -f kafka-topic.yaml
