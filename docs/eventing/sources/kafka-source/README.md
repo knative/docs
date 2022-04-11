@@ -89,17 +89,7 @@ If you are using Strimzi:
 
 ## Create a Service
 
-1. Clone the sample code GitHub repository, and navigate to the local directory of the repository:
-
-    ```bash
-    git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
-    ```
-
-    ```bash
-    cd knative-docs/code-samples/eventing/kafka/source
-    ```
-    <!--  does this folder exist? -->
-2. Create the `event-display` Service as a YAML file:
+1. Create the `event-display` Service as a YAML file:
 
      ```yaml
      apiVersion: serving.knative.dev/v1
