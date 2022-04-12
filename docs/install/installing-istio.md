@@ -160,8 +160,8 @@ all of the pods show a `STATUS` of `Running` or `Completed`:
 kubectl get pods --namespace istio-system
 ```
 !!! tip
->   Tip: You can append the `--watch` flag to the `kubectl get` commands to view
->   the pod status in realtime. You use `CTRL + C` to exit watch mode.
+    You can append the `--watch` flag to the `kubectl get` commands to view
+    the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
 ### Configuring DNS
 
