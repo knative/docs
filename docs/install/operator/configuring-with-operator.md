@@ -16,7 +16,7 @@ The `spec.config` in the Knative custom resources have one `<name>` entry for ea
 You can specify that the `KnativeServing` custom resource uses the `config-domain` ConfigMap  as follows:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving
@@ -33,7 +33,7 @@ spec:
 You can apply values to multiple ConfigMaps. This example sets `stable-window` to 60s in the `config-autoscaler` ConfigMap, as well as specifying the `config-domain` ConfigMap:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving

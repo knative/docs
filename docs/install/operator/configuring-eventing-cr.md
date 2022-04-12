@@ -1,8 +1,19 @@
 # Configuring the Eventing Operator custom resource
 
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
+Knative Eventing can be configured with the following options:
 
-<!--TODO: break this into sub sections like for the channels sections, i.e. a page per topic-->
+- [Installing a specific version of Eventing](#installing-a-specific-version-of-eventing)
+- [Installing customized Knative Eventing](#installing-customized-knative-eventing)
+- [Setting a default channel](#setting-a-default-channel)
+- [Setting the default channel for the broker](#setting-the-default-channel-for-the-broker)
+- [Private repository and private secrets](#private-repository-and-private-secrets)
+- [Download images in a predefined format without secrets](#download-images-in-a-predefined-format-without-secrets)
+- [Download images from different repositories without secrets](#download-images-from-different-repositories-without-secrets)
+- [Download images with secrets](#download-images-with-secrets)
+- [Configuring the default broker class](#configuring-the-default-broker-class)
+- [System resource settings](#system-resource-settings)
+- [Override system deployments](#override-system-deployments)
 
 ## Installing a specific version of Eventing
 
@@ -10,7 +21,7 @@ Cluster administrators can install a specific version of Knative Eventing by usi
 if you want to install Knative Eventing v0.19.0, you can apply the following KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -28,6 +39,80 @@ If Knative Eventing is already managed by the Operator, updating the `spec.versi
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
 if the current Knative Eventing deployment is version 0.18.x, you must upgrade to 0.19.x before upgrading to 0.20.x.
 
+## Installing customized Knative Eventing
+
+The Operator provides you with the flexibility to install Knative Eventing customized to your own requirements.
+As long as the manifests of customized Knative Eventing are accessible to the Operator, you can install them.
+
+There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
+With overwrite mode, you must define all manifests needed for Knative Eventing to install because the Operator will
+no longer install any default manifests. With append mode, you only need to define your customized manifests.
+The customized manifests are installed after default manifests are applied.
+
+**Overwrite mode:**
+
+Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
+
+For example, if you want to install a customized Knative Eventing only, you can create and apply the following
+Eventing CR:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  manifests:
+  - URL: https://my-eventing/eventing.yaml
+```
+
+This example installs the customized Knative Eventing at version `$spec_version` which is available at
+`https://my-eventing/eventing.yaml`.
+
+!!! attention
+    You can make the customized Knative Eventing available in one or multiple links, as the `spec.manifests` supports a list of links.
+    The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
+
+We strongly recommend you to specify the version and the valid links to the customized Knative Eventing, by leveraging
+both `spec.version` and `spec.manifests`. Do not skip either field.
+
+**Append mode:**
+
+You can use append mode to add your customized manifests into the default manifests.
+
+For example, if you only want to customize a few resources but you still want to install the default Knative Eventing,
+you can create and apply the following Eventing CR:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  additionalManifests:
+  - URL: https://my-eventing/eventing-custom.yaml
+```
+
+This example installs the default Knative Eventing, and installs your customized resources available at
+`https://my-eventing/eventing-custom.yaml`.
+
+Knative Operator installs the default manifests of Knative Eventing at the version `$spec_version`, and then
+installs your customized manifests based on them.
+
 ### Setting a default channel
 
 If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
@@ -35,7 +120,7 @@ If you are using different channel implementations, like the KafkaChannel, or yo
 You can do this by modifying the KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -71,7 +156,7 @@ If you are using a channel-based broker, you can change the default channel type
 You can do this by modifying the KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -137,7 +222,7 @@ In the following example:
 2. Define your the KnativeEventing CR with following content:
 
   ```yaml
-  apiVersion: operator.knative.dev/v1alpha1
+  apiVersion: operator.knative.dev/v1beta1
   kind: KnativeEventing
   metadata:
     name: knative-eventing
@@ -171,7 +256,7 @@ For example, to define the following list of images:
 The KnativeEventing CR must be modified to include the full list. For example:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -190,7 +275,7 @@ If you want to replace the image defined by the environment variable, you must m
 For example, if you want to replace the image defined by the environment variable `DISPATCHER_IMAGE`, in the container `controller`, of the deployment `imc-controller`, and the target image is `docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest`, the KnativeEventing CR would be as follows:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -215,7 +300,7 @@ This example uses a secret named `regcred`. Refer to the [Kubernetes documentati
 After you create the secret, edit the KnativeEventing CR:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -230,7 +315,7 @@ spec:
 The field `imagePullSecrets` requires a list of secrets. You can add multiple secrets to access the images:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -254,7 +339,7 @@ The field `defaultBrokerClass` indicates which class to use; if empty, the Chann
 The following example CR specifies MTChannelBasedBroker as the default:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -286,7 +371,7 @@ To override resource settings for a specific container, you must create an entry
 For example, the following KnativeEventing CR configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -317,7 +402,7 @@ For example, the following KnativeEventing resource configures the container `ev
 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -348,7 +433,7 @@ nodeSelector:
 to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -376,7 +461,7 @@ tolerations:
 to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
@@ -412,7 +497,7 @@ affinity:
 to the deployment `activator`, you need to change your KnativeEventing CR as below:
 
 ```yaml
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
