@@ -1,6 +1,6 @@
 # Knative Eventing Sugar Controller
 
-Knative Eventing Sugar Controller will react to special labels and annotations
+Knative Eventing Sugar Controller will react to configured labels
 to produce or control eventing resources in a cluster or namespace. This allows
 cluster operators and developers to focus on creating fewer resources, and the
 underlying eventing infrastructure is created on-demand, and cleaned up when no
@@ -8,11 +8,8 @@ longer needed.
 
 ## Installing
 
-The following command installs the Eventing Sugar Controller:
-
-```bash
-kubectl apply --filename {{ artifact( repo="eventing", file="eventing-sugar-controller.yaml") }}
-```
+The Sugar Controller is `disabled` by default and can be enabled by configuring `config-sugar` ConfigMap.
+See below for a simple example and [Configure Sugar Controller](../configuration/sugar-configuration.md) for more details.
 
 ## Automatic Broker Creation
 
@@ -38,16 +35,33 @@ the default settings:
 
 There might be cases where automated Broker creation is desirable, such as on
 namespace creation, or on Trigger creation. The Sugar controller enables those
-use-cases:
+use-cases. The following sample configuration of the `sugar-config` ConfigMap
+enables Sugar Controller for all Namespaces & Triggers.
 
-- When a Namespace is labeled with `eventing.knative.dev/injection=enabled`, the
-  sugar controller will create a default Broker named "default" in that
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+    name: config-sugar
+    namespace: knative-eventing
+    labels:
+        eventing.knative.dev/release: devel
+    data:
+      # Use an empty object to enable for all namespaces
+      namespace-selector: |
+        {}
+
+      # Use an empty object to enable for all triggers
+      trigger-selector: |
+        {}
+    ```
+
+- When a Namespace is created, the Sugar controller will create a Broker named "default" in that
   namespace.
-- When a Trigger is annotated with `eventing.knative.dev/injection=enabled`, the
-  controller will create a Broker named by that Trigger in the Trigger's
-  Namespace.
+- When a Trigger is created, the Sugar controller will create a Broker named "default" in the
+  Trigger's namespace.
 
-When a Broker is deleted and the mentioned labels or annotations are in use, the
+When a Broker is deleted and but the referenced label selectors are in use, the
 Sugar Controller will automatically recreate a default Broker.
 
 ### Namespace Examples
@@ -61,8 +75,6 @@ Creating a "default" Broker when creating a Namespace:
     kind: Namespace
     metadata:
       name: example
-      labels:
-        eventing.knative.dev/injection: enabled
     ```
 
 1. Apply the YAML file by running the command:
@@ -92,8 +104,6 @@ kind: Trigger
 metadata:
   name: hello-sugar
   namespace: hello
-  annotations:
-    eventing.knative.dev/injection: enabled
 spec:
   broker: default
   subscriber:
