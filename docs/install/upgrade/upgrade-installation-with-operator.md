@@ -123,48 +123,48 @@ If the upgrade fails, you can rollback to restore your Knative to the previous v
 
 === "Knative Serving"
 
-To rollback to a previous version of Knative Serving:
+    To rollback to a previous version of Knative Serving:
 
-1. Create a YAML file containing the following:
+    1. Create a YAML file containing the following:
 
-    ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
-    kind: KnativeServing
-    metadata:
-      name: knative-serving
-      namespace: knative-serving
-    spec:
-      version: "<previous-version>"
-    ```
-    Where `<previous-version>` is the Knative version that you want to downgrade to.
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          version: "<previous-version>"
+        ```
+        Where `<previous-version>` is the Knative version that you want to downgrade to.
 
-1. Apply the YAML file by running the command:
+    1. Apply the YAML file by running the command:
 
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 === "Knative Eventing"
 
-To rollback to a previous version of Knative Eventing:
+    To rollback to a previous version of Knative Eventing:
 
-1. Create a YAML file containing the following:
+    1. Create a YAML file containing the following:
 
-    ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
-    kind: KnativeEventing
-    metadata:
-      name: knative-eventing
-      namespace: knative-eventing
-    spec:
-      version: "<previous-version>"
-    ```
-    Where `<previous-version>` is the Knative version that you want to downgrade to.
+        ```yaml
+        apiVersion: operator.knative.dev/v1alpha1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          version: "<previous-version>"
+        ```
+        Where `<previous-version>` is the Knative version that you want to downgrade to.
 
-1. Apply the YAML file by running the command:
+    1. Apply the YAML file by running the command:
 
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.

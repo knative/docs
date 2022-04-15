@@ -31,9 +31,9 @@ Uninstall any Serving extensions you have installed by performing the steps in t
 
     1. Uninstall the component that integrates Knative with cert-manager:
 
-       ```bash
-       kubectl delete -f {{ artifact( repo="net-certmanager", file="release.yaml") }}
-       ```
+        ```bash
+        kubectl delete -f {{ artifact( repo="net-certmanager", file="release.yaml") }}
+        ```
 
     1. Optional: if you no longer need cert-manager, uninstall it by following the steps in the
     [cert-manager documentation](https://cert-manager.io/docs/installation/uninstall/kubernetes/).
@@ -133,15 +133,15 @@ Uninstall any Eventing extensions you have installed by following the relevant p
 
     1. Uninstall the Kafka Sink data plane:
 
-       ```bash
-       kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
-       ```
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
+        ```
 
     1. Uninstall the Kafka controller:
 
-       ```bash
-       kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
-       ```
+        ```bash
+        kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+        ```
 
 
 
