@@ -49,7 +49,6 @@ nav:
           - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
           - articles/set-up-a-local-knative-environment-with-kind.md
       - Steering Committee:
-          - steering/2022-04-14-annual-report-2021.md
           - steering/knative-and-endusers.md
           - steering/cncf.md
           - steering/knative-cncf-donation.md
@@ -63,6 +62,7 @@ nav:
           - steering/2020-01-annual-report-2019.md
           - steering/2019-12-updates.md
       - Events:
+          - events/install-fest-04-2022.md
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
 
