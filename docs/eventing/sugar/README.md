@@ -38,24 +38,22 @@ namespace creation, or on Trigger creation. The Sugar controller enables those
 use-cases. The following sample configuration of the `sugar-config` ConfigMap
 enables Sugar Controller for all Namespaces & Triggers.
 
-    ```yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-    name: config-sugar
-    namespace: knative-eventing
-    labels:
-        eventing.knative.dev/release: devel
-    data:
-      # Use an empty object to enable for all namespaces
-      namespace-selector: |
-        {}
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+name: config-sugar
+namespace: knative-eventing
+labels:
+    eventing.knative.dev/release: devel
+data:
+  # Use an empty object to enable for all namespaces
+  namespace-selector: |
+    {}
 
-      # Use an empty object to enable for all triggers
-      trigger-selector: |
-        {}
-    ```
-
+  # Use an empty object to enable for all triggers
+  trigger-selector: |
+    {}
 - When a Namespace is created, the Sugar controller will create a Broker named "default" in that
   namespace.
 - When a Trigger is created, the Sugar controller will create a Broker named "default" in the
