@@ -206,6 +206,7 @@ nav:
           - Configure Broker defaults: eventing/configuration/broker-configuration.md
           - Configure Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
+          - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
       # Eventing - observability
       - Observability:
         - Collecting logs: eventing/observability/logging/collecting-logs.md
