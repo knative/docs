@@ -36,7 +36,7 @@ the default settings:
 There might be cases where automated Broker creation is desirable, such as on
 namespace creation, or on Trigger creation. The Sugar controller enables those
 use-cases. The following sample configuration of the `sugar-config` ConfigMap
-enables Sugar Controller for all Namespaces & Triggers.
+enables Sugar Controller for select Namespaces & all Triggers.
 
 ```yaml
 apiVersion: v1
@@ -47,14 +47,18 @@ namespace: knative-eventing
 labels:
     eventing.knative.dev/release: devel
 data:
-  # Use an empty object to enable for all namespaces
+  # Specify a label selector to selectively apply sugaring to certain namespaces
   namespace-selector: |
-    {}
-
+    matchExpressions:
+    - key: "my.custom.injection.key"
+      operator: "In"
+      values: ["enabled"]
   # Use an empty object to enable for all triggers
   trigger-selector: |
     {}
-- When a Namespace is created, the Sugar controller will create a Broker named "default" in that
+```
+
+- When a Namespace is created with label `my.custom.injection.key: enabled` , the Sugar controller will create a Broker named "default" in that
   namespace.
 - When a Trigger is created, the Sugar controller will create a Broker named "default" in the
   Trigger's namespace.
@@ -73,6 +77,8 @@ Creating a "default" Broker when creating a Namespace:
     kind: Namespace
     metadata:
       name: example
+      labels:
+        my.custom.injection.key: enabled
     ```
 
 1. Apply the YAML file by running the command:
@@ -85,7 +91,7 @@ Creating a "default" Broker when creating a Namespace:
 To automatically create a Broker after a namespace exists, label the Namespace:
 
 ```bash
-kubectl label namespace default eventing.knative.dev/injection=enabled
+kubectl label namespace default my.custom.injection.key=enabled
 ```
 
 If the Broker named "default" already exists in the Namespace, the Sugar

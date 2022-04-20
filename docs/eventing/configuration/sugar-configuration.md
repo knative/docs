@@ -22,14 +22,12 @@ namespace: knative-eventing
 labels:
     eventing.knative.dev/release: devel
 data:
-  # Use an empty object to enable for selected namespaces
   namespace-selector: |
     matchExpressions:
     - key: "eventing.knative.dev/injection"
       operator: "In"
       values: ["enabled"]
 
-  # Use an empty object to enable for selected triggers
   trigger-selector: |
     matchExpressions:
     - key: "eventing.knative.dev/injection"
