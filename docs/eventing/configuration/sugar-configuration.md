@@ -33,11 +33,13 @@ data:
     - key: "eventing.knative.dev/injection"
       operator: "In"
       values: ["enabled"]
+```
+
 The Sugar Controller will only operate on Namespaces or Triggers with the label `eventing.knative.dev/injection: enabled`. This also emulates the legacy Sugar Controller behavior for Namespaces.
 
 
 You can edit this ConfigMap by running the command:
 
-```
+```bash
 kubectl edit cm config-sugar -n knative-eventing
 ```
