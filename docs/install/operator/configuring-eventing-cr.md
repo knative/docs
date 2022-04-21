@@ -204,36 +204,38 @@ Some images are defined by using the environment variable in Knative Eventing. T
 This example shows how you can define custom image links that can be defined in the KnativeEventing CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
-In the following example:
+In this example:
 
 - The custom tag `latest` is used for all images.
 - All image links are accessible without using secrets.
 - Images are defined in the accepted format `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
+To define your image links:
+
 1. Push images to the following image tags:
 
-  | Deployment | Container | Docker image |
-  |----|----|----|
-  | `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:latest` |
-  |  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:latest` |
-  | `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
-  |  | `controller` | `docker.io/knative-images/controller:latest` |
-  |  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
+    | Deployment | Container | Docker image |
+    |----|----|----|
+    | `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:latest` |
+    |  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:latest` |
+    | `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
+    |  | `controller` | `docker.io/knative-images/controller:latest` |
+    |  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
 
 2. Define your KnativeEventing CR with following content:
 
-  ```yaml
-  apiVersion: operator.knative.dev/v1beta1
-  kind: KnativeEventing
-  metadata:
-    name: knative-eventing
-    namespace: knative-eventing
-  spec:
-    registry:
-      default: docker.io/knative-images/${NAME}:latest
-      override:
-        broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:latest
-  ```
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeEventing
+    metadata:
+      name: knative-eventing
+      namespace: knative-eventing
+    spec:
+      registry:
+        default: docker.io/knative-images/${NAME}:latest
+        override:
+          broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:latest
+    ```
 
     - `${NAME}` maps to the container name in each `Deployment` resource.
     - `default` is used to define the image format for all containers, except the container `eventing-controller` in the deployment `broker-controller`. To replace the image for this container, use the `override`
@@ -244,17 +246,17 @@ In the following example:
 
 If your custom image links are not defined in a uniform format, you will need to individually include each link in the KnativeEventing CR.
 
-For example, to define the following list of images:
+For example, given the following list of images:
 
 | Deployment | Container | Docker Image |
 |----|----|----|
-| `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:latest` |
-|  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:latest` |
-|  | `controller` | `docker.io/knative-images/controller:latest` |
-|  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
-| `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
+| `eventing-controller` | `eventing-controller` | `docker.io/knative-images-repo1/eventing-controller:latest` |
+|  | `eventing-webhook` | `docker.io/knative-images-repo2/eventing-webhook:latest` |
+|  | `controller` | `docker.io/knative-images-repo3/imc-controller:latest` |
+|  | `dispatcher` | `docker.io/knative-images-repo4/imc-dispatcher:latest` |
+| `broker-controller` | `eventing-controller` | `docker.io/knative-images-repo5/broker-eventing-controller:latest` |
 
-The KnativeEventing CR must be modified to include the full list. For example:
+You must modify the KnativeEventing CR to include the full list. For example:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
