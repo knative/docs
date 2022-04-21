@@ -1,7 +1,7 @@
 # Configuring the Eventing Operator custom resource
 
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
-Knative Eventing can be configured with the following options:
+You can configure Knative Eventing with the following options:
 
 - [Installing a specific version of Eventing](#installing-a-specific-version-of-eventing)
 - [Installing customized Knative Eventing](#installing-customized-knative-eventing)
@@ -45,11 +45,12 @@ The Operator provides you with the flexibility to install Knative Eventing custo
 As long as the manifests of customized Knative Eventing are accessible to the Operator, you can install them.
 
 There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
-With overwrite mode, you must define all manifests needed for Knative Eventing to install because the Operator will
-no longer install any default manifests. With append mode, you only need to define your customized manifests.
+With overwrite mode, under `.spec.manifests`, you must define all manifests needed for Knative Eventing
+to install because the Operator will no longer install any default manifests.
+With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
 The customized manifests are installed after default manifests are applied.
 
-**Overwrite mode:**
+### Overwrite mode
 
 Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
 
@@ -83,7 +84,7 @@ This example installs the customized Knative Eventing at version `$spec_version`
 We strongly recommend you to specify the version and the valid links to the customized Knative Eventing, by leveraging
 both `spec.version` and `spec.manifests`. Do not skip either field.
 
-**Append mode:**
+### Append mode
 
 You can use append mode to add your customized manifests into the default manifests.
 
@@ -113,7 +114,7 @@ This example installs the default Knative Eventing, and installs your customized
 Knative Operator installs the default manifests of Knative Eventing at the version `$spec_version`, and then
 installs your customized manifests based on them.
 
-### Setting a default channel
+## Setting a default channel
 
 If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
 
@@ -149,7 +150,7 @@ spec:
 !!! note
     The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
 
-### Setting the default channel for the broker
+## Setting the default channel for the broker
 
 If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
 
@@ -219,7 +220,7 @@ In the following example:
   |  | `controller` | `docker.io/knative-images/controller:latest` |
   |  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
 
-2. Define your the KnativeEventing CR with following content:
+2. Define your KnativeEventing CR with following content:
 
   ```yaml
   apiVersion: operator.knative.dev/v1beta1

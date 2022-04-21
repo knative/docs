@@ -1,6 +1,6 @@
 # Configuring the Knative Serving Operator custom resource
 
-Knative Serving can be configured with the following options:
+You can configure Knative Serving with the following options:
 
 - [Version configuration](#version-configuration)
 - [Install customized Knative Serving](#install-customized-knative-serving)
@@ -42,16 +42,17 @@ enables upgrading or downgrading the Knative Serving version, without needing to
 The Operator provides you with the flexibility to install Knative Serving customized to your own requirements. As long
 as the manifests of customized Knative Serving are accessible to the Operator, you can install them.
 
-There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_. With
-overwrite mode, you must define all manifests needed for Knative Serving to install because the Operator will no
-longer install any default manifests. With append mode, you only need to define your customized manifests. The
-customized manifests are installed after default manifests are applied.
+There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
+With overwrite mode, under `.spec.manifests`, you must define all manifests needed for
+Knative Serving to install because the Operator will no longer install any default manifests.
+With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
+The customized manifests are installed after default manifests are applied.
 
-**Overwrite mode:**
+### Overwrite mode
 
 You can use overwrite mode when you want to customize all Knative Serving manifests.
 
-For example, if you want to install Knative Serving and istio ingress and you want customize both components, you can
+For example, if you want to install Knative Serving and Istio ingress and you want customize both components, you can
 create the following YAML file:
 
 ```yaml
@@ -83,7 +84,7 @@ This example installs the customized Knative Serving at version `$spec_version` 
 We strongly recommend you to specify the version and the valid links to the customized Knative Serving, by leveraging
 both `spec_version` and `spec.manifests`. Do not skip either field.
 
-**Append mode:**
+### Append mode
 
 You can use append mode to add your customized manifests into the default manifests.
 
