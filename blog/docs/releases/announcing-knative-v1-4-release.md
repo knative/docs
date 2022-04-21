@@ -63,24 +63,24 @@ Follow the instructions in
 
 - The sugar reconciler has been integrated into the base eventing controller and is now controlled by two LabelSelector fields.
   `namespace-sugar-selector` and `trigger-sugar-selector` fields in the `config-sugar` ConfigMap in `knative-eventing` Namespace allow you to use a Kubernetes LabelSelector to choose which namespaces or triggers respectively should have a Broker provisioned.
-  
+
   To migrate existing usage of the sugar controller, do the following:
-  
+
   1. Set the namespace-sugar-selector to the value:
       matchExpressions:
       - key: "eventing.knative.dev/injection"
         operator: "In"
         values: ["enabled"]
-  
+
   2. Set the trigger-sugar-selector to the value:
       matchExpressions:
       - key: "eventing.knative.dev/injection"
         operator: "In"
         values: ["enabled"]
-  
+
   3. Remove the Deployment defined by the eventing-sugar-controller.yaml resources
      in the previous release. (#6027, @xtreme-sameer-vohra)
- 
+
 - Reduced duplication of observability.yaml config map which existed in multiple locations by symlinking "config/channels/in-memory-channel/configmaps/observability.yaml" to "config/core/configmaps/observability.yaml". (#6301, @matzew)
 - Reduced duplication of tracing.yaml config map which existed in multiple locations by symlinking "config/channels/in-memory-channel/configmaps/tracing.yaml" to "config/core/configmaps/tracing.yaml". (#6295, @xtreme-sameer-vohra)
 - The `sendevent` tool is not part of Eventing core anymore, an alternative is available as `kn` plugin https://github.com/knative-sandbox/kn-plugin-event (#6284, @pierDipi)
@@ -118,7 +118,7 @@ Follow the instructions in
 - Now performance graphs for the RabbitMQ Broker are going to be generated for every mayor version release inside our performance test directories (#668, @gabo1208)
 - Now the RabbitMQ Source, when failing to send an event, does not get stuck in a cycle requeueing messages as they come. It follows a retries based backoff strategy (and does not reqeue them if the prefetchCount is 1) (#614, @gabo1208)
 - Now the RabbitMQ's Broker Ingress pod can recover from a closed Channel or Connection (#648, @gabo1208)
-- 🧹 Changed prefetchCount env variable name to Parallelism in both Trigger and Source, to better reflect its functionallity (#676, @gabo1208)
+- 🧹 Changed prefetchCount env variable name to Parallelism in both Trigger and Source, to better reflect its functionality (#676, @gabo1208)
 - Remove support for managed RabbitMQ brokers (#708, @gab-satchi)
 
 
