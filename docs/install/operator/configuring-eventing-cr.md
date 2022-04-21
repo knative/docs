@@ -1,7 +1,7 @@
 # Configuring the Eventing Operator custom resource
 
 You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
-Knative Eventing can be configured with the following options:
+You can configure Knative Eventing with the following options:
 
 - [Installing a specific version of Eventing](#installing-a-specific-version-of-eventing)
 - [Installing customized Knative Eventing](#installing-customized-knative-eventing)
@@ -45,11 +45,12 @@ The Operator provides you with the flexibility to install Knative Eventing custo
 As long as the manifests of customized Knative Eventing are accessible to the Operator, you can install them.
 
 There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
-With overwrite mode, you must define all manifests needed for Knative Eventing to install because the Operator will
-no longer install any default manifests. With append mode, you only need to define your customized manifests.
+With overwrite mode, under `.spec.manifests`, you must define all manifests needed for Knative Eventing
+to install because the Operator will no longer install any default manifests.
+With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
 The customized manifests are installed after default manifests are applied.
 
-**Overwrite mode:**
+### Overwrite mode
 
 Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
 
@@ -83,7 +84,7 @@ This example installs the customized Knative Eventing at version `$spec_version`
 We strongly recommend you to specify the version and the valid links to the customized Knative Eventing, by leveraging
 both `spec.version` and `spec.manifests`. Do not skip either field.
 
-**Append mode:**
+### Append mode
 
 You can use append mode to add your customized manifests into the default manifests.
 
@@ -113,7 +114,7 @@ This example installs the default Knative Eventing, and installs your customized
 Knative Operator installs the default manifests of Knative Eventing at the version `$spec_version`, and then
 installs your customized manifests based on them.
 
-### Setting a default channel
+## Setting a default channel
 
 If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
 
@@ -149,7 +150,7 @@ spec:
 !!! note
     The `clusterDefault` setting determines the global, cluster-wide default channel type. You can configure channel defaults for individual namespaces by using the `namespaceDefaults` setting.
 
-### Setting the default channel for the broker
+## Setting the default channel for the broker
 
 If you are using a channel-based broker, you can change the default channel type for the broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
 
@@ -203,36 +204,38 @@ Some images are defined by using the environment variable in Knative Eventing. T
 This example shows how you can define custom image links that can be defined in the KnativeEventing CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
-In the following example:
+In this example:
 
 - The custom tag `latest` is used for all images.
 - All image links are accessible without using secrets.
 - Images are defined in the accepted format `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
+To define your image links:
+
 1. Push images to the following image tags:
 
-  | Deployment | Container | Docker image |
-  |----|----|----|
-  | `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:latest` |
-  |  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:latest` |
-  | `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
-  |  | `controller` | `docker.io/knative-images/controller:latest` |
-  |  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
+    | Deployment | Container | Docker image |
+    |----|----|----|
+    | `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:latest` |
+    |  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:latest` |
+    | `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
+    |  | `controller` | `docker.io/knative-images/controller:latest` |
+    |  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
 
-2. Define your the KnativeEventing CR with following content:
+2. Define your KnativeEventing CR with following content:
 
-  ```yaml
-  apiVersion: operator.knative.dev/v1beta1
-  kind: KnativeEventing
-  metadata:
-    name: knative-eventing
-    namespace: knative-eventing
-  spec:
-    registry:
-      default: docker.io/knative-images/${NAME}:latest
-      override:
-        broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:latest
-  ```
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeEventing
+    metadata:
+      name: knative-eventing
+      namespace: knative-eventing
+    spec:
+      registry:
+        default: docker.io/knative-images/${NAME}:latest
+        override:
+          broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:latest
+    ```
 
     - `${NAME}` maps to the container name in each `Deployment` resource.
     - `default` is used to define the image format for all containers, except the container `eventing-controller` in the deployment `broker-controller`. To replace the image for this container, use the `override`
@@ -243,17 +246,17 @@ In the following example:
 
 If your custom image links are not defined in a uniform format, you will need to individually include each link in the KnativeEventing CR.
 
-For example, to define the following list of images:
+For example, given the following list of images:
 
 | Deployment | Container | Docker Image |
 |----|----|----|
-| `eventing-controller` | `eventing-controller` | `docker.io/knative-images/eventing-controller:latest` |
-|  | `eventing-webhook` | `docker.io/knative-images/eventing-webhook:latest` |
-|  | `controller` | `docker.io/knative-images/controller:latest` |
-|  | `dispatcher` | `docker.io/knative-images/dispatcher:latest` |
-| `broker-controller` | `eventing-controller` | `docker.io/knative-images/broker-eventing-controller:latest` |
+| `eventing-controller` | `eventing-controller` | `docker.io/knative-images-repo1/eventing-controller:latest` |
+|  | `eventing-webhook` | `docker.io/knative-images-repo2/eventing-webhook:latest` |
+|  | `controller` | `docker.io/knative-images-repo3/imc-controller:latest` |
+|  | `dispatcher` | `docker.io/knative-images-repo4/imc-dispatcher:latest` |
+| `broker-controller` | `eventing-controller` | `docker.io/knative-images-repo5/broker-eventing-controller:latest` |
 
-The KnativeEventing CR must be modified to include the full list. For example:
+You must modify the KnativeEventing CR to include the full list. For example:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1

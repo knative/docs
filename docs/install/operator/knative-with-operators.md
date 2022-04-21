@@ -50,7 +50,7 @@ kubectl logs -f deploy/knative-operator
 
 ### Upgrade the existing custom resources
 
-If you are upgrading an existing Operator install from v1.2 (or earlier) to v1.3 (or later), run the following command
+If you are upgrading an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command
 to upgrade the existing custom resources to `v1beta1`:
 
 ```bash
@@ -68,28 +68,28 @@ To create the custom resource for the latest available Knative Serving in the Op
 
 1. Copy the following YAML into a file:
 
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-serving
----
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-```
-!!! note
-   When you don't specify a version by using `spec.version` field, the Operator defaults to the latest available version.
+    ```yaml
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: knative-serving
+    ---
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    ```
+    !!! note
+        When you don't specify a version by using `spec.version` field, the Operator defaults to the latest available version.
 
 1. Apply the YAML file by running the command:
 
-```bash
-kubectl apply -f <filename>.yaml
-```
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
 
-Where `<filename>` is the name of the file you created in the previous step.
+    Where `<filename>` is the name of the file you created in the previous step.
 
 ### Install the networking layer
 
@@ -279,27 +279,27 @@ To create the custom resource for the latest available Knative Eventing in the O
 
 1. Copy the following YAML into a file:
 
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-eventing
----
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-```
+    ```yaml
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: knative-eventing
+    ---
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeEventing
+    metadata:
+      name: knative-eventing
+      namespace: knative-eventing
+    ```
 
-!!! note
-    When you do not specify a version by using `spec.version` field, the Operator defaults to the latest available version.
+    !!! note
+        When you do not specify a version by using `spec.version` field, the Operator defaults to the latest available version.
 
 1. Apply the YAML file by running the command:
 
-```bash
-kubectl apply -f <filename>.yaml
-```
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
 
 Where `<filename>` is the name of the file you created in the previous step.
 
