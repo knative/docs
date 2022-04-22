@@ -528,7 +528,7 @@ Currently `labels`, `annotations` and `selector` are supported.
 
 ### Override labels and annotations and selector
 
-The following KnativeEventing resource overrides the `eventing-webhook` service to have the label `mylabel: foo`, the annotation `myannotataions: bar`,
+The following KnativeEventing resource overrides the `eventing-webhook` service to have the label `mylabel: foo`, the annotation `myannotations: bar`,
 the selector `myselector: bar`.
 
 ```yaml
@@ -543,7 +543,7 @@ spec:
     labels:
       mylabel: foo
     annotations:
-      myannotataions: bar
+      myannotations: bar
     selector:
       myselector: bar
 ```
