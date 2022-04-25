@@ -124,16 +124,29 @@ Follow the instructions in
 
 ## Client v1.4
 
-<!-- Original notes are here: https://github.com/knative/client/blob/main/CHANGELOG.adoc#TODO-CLI-CHANGELOG-ENTRY -->
+<!-- Original notes are here: https://github.com/knative/client/releases/tag/knative-v1.4.0 -->
 
 ### 💫 New Features & Changes
 
-- Added --timeout flag to service create, update, apply (#1643, @vyasgun)
-- Added --pull-policy flag to service create, update, apply (#1644, @vyasgun)
-- Added --wait-window flag to configure error window between errors during service create (#1645, @vyasgun)
-- Added --scale-metric flag to configure metric name (#1653, @vyasgun)
-- Added subpath functionality to --mount flag (#1655, @vyasgun)
-- Use T.TempDir to create temporary test directory (#1660, @Juneezee)
+- The compile dependencies have been updated to Knative Serving v1.4.0, Knative Eventing v1.4.0 (Go module versions are v0.31.0).
+- Some new flags have been added to `kn service create`, `kn service update` and `kn service apply`:
+  - `--timeout` for specifying the amount of time (in seconds) to wait for the application to respond to a request before returning with a timeout error. The value of this option sets the `.spec.template.spec.timeoutSecond` field on the service. The server-side default is used if not provided, which is 300s by default.
+  - `--pull-policy` for setting the imagePullPolicy for the application's image. Like for a pod's container, this can one of `Always`, `Never`, `IfNotPresent`. The pull policy will be applied against the digest of the resolved image (Knative always resolves an image tag to a digest) and not the image tag.
+  - `--wait-window` for setting the error window which allows intermediate errors while waiting for the ready status of a service. If not given, a default of 2 seconds is used (i.e. if an error state occurs but gets back to a success state within two seconds, then `kn` won't return an error but considers to be an expected fluctuation during the reconciliation process).
+  - `--scale-metric` for setting the `autoscaling.knative.dev/metric` annotation on a service that specifies the metric the autoscaler should scale on. Possible value are `concurrency`, `cpu`, `memory` and `rps`.
+- Added subpath functionality to the `--mount` flag so that subdirectories of a volume can be mounted. For example, `--mount /mydir=cm:myconfigmap/cmkey` will mount the value of key `cmkey` in ConfigMap `myconfigmap` to a directory `/mydir` within the services' application container.
+
+### Released Plugins
+
+- The kn-plugin-event plugin is now included since this release.
+- The plugins that are released in parallel and aligned with Knative v1.4.0 are:
+  - `kn-plugin-admin` for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-sandbox/kn-plugin-admin/releases/tag/knative-v1.4.0)
+  - `kn-plugin-quickstart` to quickly set up a local Knative environment from the command line. | [download](https://github.com/knative-sandbox/kn-plugin-quickstart/releases/tag/knative-v1.4.0)
+  - `kn-plugin-source-kafka` for managing a Kafka Source that has been installed via eventing-kafka on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kafka/releases/tag/knative-v1.4.0)
+  - `kn-plugin-source-kamelet` for managing Kamelet Sources that has been installed via Camel-K on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kamelet/releases/tag/knative-v1.4.0)
+  - `kn-plugin-event` for creating and sending CloudEvents from insider or outside the cluster | [download](https://github.com/knative-sandbox/kn-plugin-event/releases/tag/knative-v1.4.0)
+
+  Note: All those plugins are released separately and are technically not part of this knative/client release, however they are aligned to share the same Knative dependencies and can be targeted for inlining.
 
 
 ## Operator v1.4
