@@ -164,7 +164,7 @@ Follow the instructions in
 
 ### 🐞 Bug Fixes
 
-- Change int32 into *int32 for Replicas (#1029, thanks @houshengbo)
+- Allows knative deployments to be scaled to zero to disable them if not needed (#1029, thanks @houshengbo)
 
 ## Thank you, contributors
 
