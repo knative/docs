@@ -58,9 +58,6 @@ Follow the instructions in
 ### 🚨 Breaking or Notable Changes
 
 - The minimum Kubernetes version is 1.22. (#6280, @pierDipi)
-
-### 💫 New Features & Changes
-
 - The sugar reconciler has been integrated into the base eventing controller and is now controlled by two LabelSelector fields.
   `namespace-sugar-selector` and `trigger-sugar-selector` fields in the `config-sugar` ConfigMap in `knative-eventing` Namespace allow you to use a Kubernetes LabelSelector to choose which namespaces or triggers respectively should have a Broker provisioned.
 
@@ -80,6 +77,8 @@ Follow the instructions in
 
   3. Remove the Deployment defined by the eventing-sugar-controller.yaml resources
      in the previous release. (#6027, @xtreme-sameer-vohra)
+
+### 💫 New Features & Changes
 
 - Reduced duplication of observability.yaml config map which existed in multiple locations by symlinking "config/channels/in-memory-channel/configmaps/observability.yaml" to "config/core/configmaps/observability.yaml". (#6301, @matzew)
 - Reduced duplication of tracing.yaml config map which existed in multiple locations by symlinking "config/channels/in-memory-channel/configmaps/tracing.yaml" to "config/core/configmaps/tracing.yaml". (#6295, @xtreme-sameer-vohra)
@@ -112,6 +111,9 @@ Follow the instructions in
 
 <!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.4.0 -->
 
+### 🚨 Breaking or Notable Changes
+
+- Remove support for managed RabbitMQ brokers (#708, @gab-satchi)
 
 #### 💫 New Features & Changes
 
@@ -119,8 +121,6 @@ Follow the instructions in
 - Now the RabbitMQ Source, when failing to send an event, does not get stuck in a cycle requeueing messages as they come. It follows a retries based backoff strategy (and does not reqeue them if the prefetchCount is 1) (#614, @gabo1208)
 - Now the RabbitMQ's Broker Ingress pod can recover from a closed Channel or Connection (#648, @gabo1208)
 - 🧹 Changed prefetchCount env variable name to Parallelism in both Trigger and Source, to better reflect its functionality (#676, @gabo1208)
-- Remove support for managed RabbitMQ brokers (#708, @gab-satchi)
-
 
 ## Client v1.4
 
