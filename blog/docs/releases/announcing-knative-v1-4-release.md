@@ -37,16 +37,19 @@ Follow the instructions in
 
 <!-- Original notes are here: https://github.com/knative/serving/releases/tag/knative-v1.4.0 -->
 
-🚨 Breaking or Notable
+### 🚨 Breaking or Notable
+
  - Our minimum supported Kubernetes version is now 1.22 ([#12753](https://github.com/knative/serving/pull/12753))
  - When using the Horizontal Pod Autoscaler (HPA), revisions will only be marked as ready after the initial-scale / min-scale value is reached. For example, if min-scale: "4", the revision will not be marked ready until all four pods are ready. Note that revisions may take slightly longer to become ready after this change. See https://knative.dev/docs/serving/autoscaling/scale-bounds/ for more details. ([#12811](https://github.com/knative/serving/pull/12811))
 
-💫 New Features & Changes
+### 💫 New Features & Changes
+
  - Support annotations 'networking.knative.dev/http-protocol' for Overriding the default HTTP behavior per service in DomainMapping CRD. ([#12786](https://github.com/knative/serving/pull/12786))
  - serving.knative.dev/release labels, deprecated in v1.3, have been removed. Please switch over to using app.kubernetes.io/name: knative-serving and app.kubernetes.io/version: $VERSION. ([#12754](https://github.com/knative/serving/pull/12754))
  - Users can configure a per-revision progress deadline by setting the serving.knative.dev/progress-deadline annotation in .spec.template.metadata.annotations ([#12751](https://github.com/knative/serving/pull/12751))
 
-🐞 Bug Fixes
+### 🐞 Bug Fixes
+
  - Changes the default target-burst-capacity to 210 in order to fix a configuration issue that caused rapid swapping of activator in/out of path. ([#12774](https://github.com/knative/serving/pull/12744))
  - Fix gc: delete revision in correct order ([#12752](https://github.com/knative/serving/pull/12752))
  - Fix tag to digest resolution when using imagePullSecrets ([#12836](https://github.com/knative/serving/pull/12836))
