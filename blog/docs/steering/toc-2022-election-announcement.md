@@ -3,7 +3,7 @@ title: TOC 2022 election announcement
 date: 2022-04-26
 ---
 
-It’s time to kick off the [Knative Technical Oversight Committee](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md) (TOC) elections for 2022, and we are ready to accept nominations! 
+It’s time to kick off the [Knative Technical Oversight Committee](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md) (TOC) elections for 2022, and we are ready to accept nominations!
 
 This election will shape the future of Knative as a community and project. While WGs help shape the individual direction of the project, the TOC covers the technical direction, health of the project and community as a whole. There are 4 seats up for election and each of those seats will be held for two year terms.
 
