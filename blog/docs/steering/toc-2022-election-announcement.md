@@ -27,5 +27,7 @@ We will be using [Elekto](https://elections.knative.dev) once again for this ele
 You can learn more about the [TOC election process here](https://github.com/knative/community/tree/main/elections/2022-TOC).
 
 Cheers,
+
 Dawn Foster and Josh Berkus
+
 TOC Election Officers
