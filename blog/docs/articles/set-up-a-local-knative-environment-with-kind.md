@@ -16,7 +16,7 @@ There are many options for creating a Kubernetes cluster on your local machine. 
 You can install KinD on your machine by running the following commands:
 
 ```bash
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.8.1/kind-$(uname)-amd64
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.12.0/kind-$(uname)-amd64
 chmod +x ./kind
 mv ./kind /some-dir-in-your-PATH/kind
 ```
@@ -26,7 +26,7 @@ Next, create a Kubernetes cluster using KinD, and expose the ports the ingress g
 ```bash
 cat > clusterconfig.yaml <<EOF
 kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha4
+apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
   extraPortMappings:
@@ -137,7 +137,7 @@ curl -Lo kourier.yaml https://github.com/knative/net-kourier/releases/download/k
 
 By default, the Kourier service is set to be of type `LoadBalancer`. On local machines, this type doesn’t work, so you’ll have to change the type to `NodePort` and add `nodePort` elements to the two listed ports.
 
-The complete Service portion (which runs from line 75 to line 94 in the document), should be replaced with:
+Look for the `kourier` Service portion and add the values from `containerPort` used in `clusterconfig.yaml` as `nodePort` values (31080 and 31443):
 
 ```yaml
 apiVersion: v1
@@ -172,18 +172,16 @@ $ kubectl apply --filename kourier.yaml
 
 ```bash
 namespace/kourier-system created
-configmap/config-logging created
-configmap/config-observability created
-configmap/config-leader-election created
-service/kourier created
-deployment.apps/3scale-kourier-gateway created
-deployment.apps/3scale-kourier-control created
-clusterrole.rbac.authorization.k8s.io/3scale-kourier created
-serviceaccount/3scale-kourier created
-clusterrolebinding.rbac.authorization.k8s.io/3scale-kourier created
-service/kourier-internal created
-service/kourier-control created
 configmap/kourier-bootstrap created
+configmap/config-kourier created
+serviceaccount/net-kourier created
+clusterrole.rbac.authorization.k8s.io/net-kourier created
+clusterrolebinding.rbac.authorization.k8s.io/net-kourier created
+deployment.apps/net-kourier-controller created
+service/net-kourier-controller created
+deployment.apps/3scale-kourier-gateway created
+service/kourier created
+service/kourier-internal created
 ```
 
 Now you will need to set Kourier as the default networking layer for Knative Serving. You can do this by entering the command:
@@ -258,7 +256,6 @@ $ kubectl get pods --namespace kourier-system
 
 ```bash
 NAME                                      READY   STATUS    RESTARTS   AGE
-3scale-kourier-control-699cbc695-ztswk    1/1     Running   0          10m
 3scale-kourier-gateway-7df98bb5db-5bw79   1/1     Running   0          10m
 ```
 
@@ -269,8 +266,8 @@ $ kubectl --namespace kourier-system get service kourier
 ```
 
 ```bash
-NAME      TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
-kourier   NodePort   10.98.179.178   <none>        80:31080/TCP,443:31443/TCP   87m
+NAME      TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+kourier   LoadBalancer   10.98.179.178   <none>        80:31080/TCP,443:31443/TCP   87m
 ```
 
 ```bash
@@ -339,7 +336,7 @@ $ curl -v http://helloworld-go.default.127.0.0.1.sslip.io
 ```
 
 ```bash
-Hello Knative Serving is up and running with Kourier!!
+Hello Hello Knative Serving is up and running with Kourier!!
 ```
 
 ## Step 5: Cleaning up
