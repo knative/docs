@@ -1,6 +1,6 @@
 {
-  "title": "Getting Started with Knative Eventing",
-  "description": "With Knative Serving, we have a powerful tool which can take our containerized code and deploy it with relative ease. With Knative Eventing, you gain a few new super powers \uD83D\uDE80 that allow you to build Event-Driven Applications.",
+  "title": "Getting Started with Knative Eventing v2",
+  "description": "With Knative Eventing, you gain a few new super powers \uD83D\uDE80 that allow you to build Event-Driven Applications.",
   "difficulty": "Beginner",
   "time": "20",
   "details": {

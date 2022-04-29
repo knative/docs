@@ -22,6 +22,13 @@ chmod +x kn &> /dev/null
 mv kn /usr/local/bin/ &> /dev/null
 echo "Done"
 
+echo "Installing jq..."
+curl -sLo jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+chmod +x jq &> /dev/null
+mv jq /usr/local/bin/ &> /dev/null
+echo "Done"
+
+
 kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.5/eventing-crds.yaml &> /dev/null
 kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.5/eventing-core.yaml &> /dev/null
 kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.5/in-memory-channel.yaml &> /dev/null
@@ -37,6 +44,7 @@ data:
     apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
 EOF
-sleep 5
+echo "Setting up knative eventing..."
+sleep 15
 kn broker create example-broker
 kubectl wait --for=condition=ready broker example-broker
