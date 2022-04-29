@@ -1,5 +1,5 @@
 {
-  "title": "Getting Started with Knative Eventing v2",
+  "title": "Getting Started with Knative Eventing",
   "description": "With Knative Eventing, you gain a few new super powers \uD83D\uDE80 that allow you to build Event-Driven Applications.",
   "difficulty": "Beginner",
   "time": "20",
@@ -16,10 +16,6 @@
       {
         "title": "Step 3",
         "text": "step3.md"
-      },
-      {
-        "title": "Step 4",
-        "text": "step4.md"
       }
     ],
     "intro": {

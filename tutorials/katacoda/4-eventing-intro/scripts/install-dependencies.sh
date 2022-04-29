@@ -45,6 +45,7 @@ data:
     kind: InMemoryChannel
 EOF
 echo "Setting up knative eventing..."
-sleep 15
+sleep 20
 kn broker create example-broker
+sleep 3
 kubectl wait --for=condition=ready broker example-broker

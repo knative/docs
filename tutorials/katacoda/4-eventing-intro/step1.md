@@ -21,8 +21,8 @@ For the purposes of this tutorial, let's keep it simple. You will focus on four 
 Eventing components: **Source, Trigger, Broker**, and **Sink**.
 
 Let's take a look at how these components interact:
-![sources-borkers-triggers-sink](assets/sources-borkers-triggers-sink.png)
-![sources-borkers-triggers-sink-legend](assets/sources-borkers-triggers-sink-legend.png)
+![sources-brokers-triggers-sink](assets/sources-brokers-triggers-sink.png)
+![sources-brokers-triggers-sink-legend](assets/sources-brokers-triggers-sink-legend.png)
 
 > ✏️ **A note on Sources and Sinks**
 > A Knative Service can act as both a Source and a Sink for events, and for good reason. 
@@ -51,8 +51,27 @@ Check to see that it is installed by running the command:
 NAME             URL                                                                                AGE   CONDITIONS   READY   REASON
 example-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker     5m    5 OK / 5    True
 ```
+❌ **Unexpected output:**
+If you get this output
+```sh
+NAME             URL   AGE   CONDITIONS   READY       REASON
+example-broker         35s   0 OK / 0     <unknown>   <unknown>
+```
+If you get this output run the following commands to recreate the broker. If you got the
+**Expected output** there is no need to run these commands.
+```sh
+kn broker delete example-broker
+```{{execute}}
+```sh
+kn broker create example-broker
+```{{execute}}
 
-> ⚠️ **Warning**
+And check the status again
+
+`kn broker list`{{execute}}
+
+
+> ⚠️ **Note**
 > In-Memory Brokers are for development use only and must not be used in a production deployment.
  
 > ❓ **Are there any other components of Knative Eventing?**

@@ -30,16 +30,23 @@ To be able to access the service we need to create an entry in `/etc/hosts` like
 echo "${externalIP} cloudevents-player.default.example.com" >> /etc/hosts
 ```{{execute}}
 
+☕ The variable `${externalIP}` was set during the initialization of this tutorial and holds the External IP of the
+Ingress Controller. You can check this IP running this command:
+```sh
+kubectl get service/envoy -n contour-external  
+```{{execute}}
+
 And also we need to `port-forward` the requests to the Ingress controller. We do this by running:
 ```sh
 kubectl port-forward -n contour-external service/envoy 8080:80 &
+
 ```{{execute}}
 This process is going to run in the brackground.
 
 ### Sending an event
 Try sending an event using the CloudEvents service just deployed:
 ```sh
-curl -i http://cloudevents-player.default.example.com \
+curl -i http://cloudevents-player.default.example.com/messages \
     -H "Content-Type: application/json" \
     -H "Ce-Id: 123456789" \
     -H "Ce-Specversion: 1.0" \
@@ -71,12 +78,37 @@ server: envoy
 
 
 ### Get events
-To get the list of Events run this command:
+To get the list of Events SENT run this command:
 ```sh
 curl http://cloudevents-player.default.example.com/messages | jq
 ```{{execute}}
 
-You can now see that the event has been sent to our Broker... but where has the event gone? 
+✅ ** Expected output:**
+```sh
+[
+  {
+    "event": {
+      "attributes": {
+        "datacontenttype": "application/json",
+        "id": "123456789",
+        "mediaType": "application/json",
+        "source": "command-line",
+        "specversion": "1.0",
+        "type": "some-type"
+      },
+      "data": {
+        "msg": "Hello CloudEvents!"
+      },
+      "extensions": {}
+    },
+    "id": "23456789",
+    "receivedAt": "2022-04-29T23:21:13.66322+02:00[Europe/Madrid]",
+    "type": "SENT"
+  }
+]
+```
+
+You can now see that the event has been SENT to our Broker... but where has the event gone? 
 **Well, right now, nowhere!**
 
 A Broker is simply a receptacle for events. In order for your events to be sent anywhere, 

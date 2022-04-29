@@ -1,116 +1,160 @@
-### 1:N Event Delivery
+## Using Triggers and sinks
+In the last topic we used the CloudEvents Player as an event source to send events to the Broker. 
+We now want the event to go from the Broker to an event sink.
 
-Similar to the first scenario, you can have multiple consumers that are all interested in the same event. You might want
-to run multiple checks or update multiple systems with the new event. There are two ways you can handle this scenario.
-The first way to handle this is an extension of the first diagram. Each consumer is directly tied to the producer.
-![1toN](assets/1toN.png)
+In this topic, we will use the CloudEvents Player as the sink as well as a source. 
+This means we will be using the CloudEvents Player to both send and receive events. We will use a Trigger 
+to listen for events in the Broker to send to the sink.
 
-This manner of handling multiple consumers for an event, also called the fanout pattern, introduces a bunch of complex
-problems for our application architecture. Problems like what if the producer crashes after delivering an event to only a subset of consumers?
-what if a client was temporarily un-available, how does it get the messages it missed? etc.
 
-Rather than burdening the producers to handle these problems, Knative Eventing introduces the concept of a Channel.
-![channel](assets/channel.png)
+### Creating your first Trigger
+Create a Trigger that listens for CloudEvents from the event source and places them into the sink, which is also the 
+CloudEvents Player app.
 
-### Channel
+To create the Trigger, run the command:
+```sh
+kn trigger create cloudevents-trigger --sink cloudevents-player  --broker example-broker
 
-Channels help de-couple the Producers from Consumers. The Producer only publishes to the channel and the consumer registers a `Subscription` to get events from the channel.
-There are several kinds of channels, but they all implement the capability to deliver events to all consumers and persist the events. This resolves both the problems (producer crashing, clients temporarily offline) mentioned above.
-When you create the channel, you can choose which kind of channel is most appropriate for your use case.
-For development, an “in memory” channel may be sufficient, but for production you may need persistence, retry, and replay capabilities for reliability and/or compliance.
-
-### Subscription
-Consumers of the events need to let the channel know they’re interested to receive events by creating a subscription.
-
-Let's see this in action now. First we install and create an in-memory channel:
-Install an in-memory channel. (Knative also supports Apache Kafka Channel, Google Cloud Pub/Sub Channel and NATS Channel as options)
-```
-kubectl apply --filename https://github.com/knative/eventing/releases/download/${latest_version}/in-memory-channel.yaml
 ```{{execute}}
 
-Now, create an in-memory channel: InMemory channels are great for testing because they add very little overhead and require
-almost no resources. The downside, though, is that you have no persistence and retries. For this example, an InMemory channel is well suited.
-
+✅ **Expected output:**
+```sh
+Trigger 'cloudevents-trigger' successfully created in namespace 'default'.
 ```
-cat <<EOF | kubectl create -f -
-apiVersion: messaging.knative.dev/v1
-kind: InMemoryChannel
-metadata:
-  name: pingevents
-EOF
+
+> ❓ **What CloudEvents is my Trigger listening for?**
+> Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any 
+> CloudEvents coming into the Broker.
+
+### Sending an event and get it from CloudEvents
+Send an Event again with a different ID:
+```sh
+curl -i http://cloudevents-player.default.example.com/messages \
+    -H "Content-Type: application/json" \
+    -H "Ce-Id: 111" \
+    -H "Ce-Specversion: 1.0" \
+    -H "Ce-Type: some-type" \
+    -H "Ce-Source: command-line" \
+    -d '{"msg":"Hello CloudEvents!"}'
 ```{{execute}}
 
-We will now create 3 consumers:
-
+✅ ** Expected output:**
+```sh
+HTTP/1.1 202 Accepted
+content-length: 0
+date: Fri, 29 Apr 2022 19:57:04 GMT
+x-envoy-upstream-service-time: 4
+server: envoy
 ```
-for i in 1 2 3; do
-cat <<EOF | kubectl create -f -
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: event-display${i}
-spec:
-  template:
-    spec:
-      containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-EOF
-done
+
+Now list the messages in CloudEvents:
+```sh
+curl http://cloudevents-player.default.example.com/messages | jq
 ```{{execute}}
 
-Now that the channel and the consumers exist, we will need to create the subscriptions
-to make sure the consumers can get the messages.
-
+✅ ** Expected output:**
+```sh
+[
+  {
+    "event": {
+      "attributes": {
+        "datacontenttype": "application/json",
+        "id": "111",
+        "mediaType": "application/json",
+        "source": "command-line",
+        "specversion": "1.0",
+        "type": "some-type"
+      },
+      "data": {
+        "msg": "Hello CloudEvents!"
+      },
+      "extensions": {}
+    },
+    "id": "111",
+    "receivedAt": "2022-04-29T23:54:51.956189+02:00[Europe/Madrid]",
+    "type": "RECEIVED"
+  },
+  {
+    "event": {
+      "attributes": {
+        "datacontenttype": "application/json",
+        "id": "111",
+        "mediaType": "application/json",
+        "source": "command-line",
+        "specversion": "1.0",
+        "type": "some-type"
+      },
+      "data": {
+        "msg": "Hello CloudEvents!"
+      },
+      "extensions": {}
+    },
+    "id": "111",
+    "receivedAt": "2022-04-29T23:54:51.932247+02:00[Europe/Madrid]",
+    "type": "SENT"
+  }
+]
 ```
-for i in 1 2 3; do
-cat <<EOF | kubectl create -f -
-apiVersion: messaging.knative.dev/v1
-kind: Subscription
-metadata:
-    name: subscriber-${i}
-spec:
-    channel:
-        apiVersion: messaging.knative.dev/v1
-        kind: InMemoryChannel
-        name: pingevents
-    subscriber:
-        ref:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: event-display${i}
-EOF
-done
+Note that you have two records in the list, one for the SENT message and the other for the RECEIVED message.
+
+❓ **What if I want to filter on CloudEvent attributes?**
+First, delete your existing Trigger:
+```sh
+kn trigger delete cloudevents-trigger
 ```{{execute}}
 
-Finally, we create the Producers. As before, we will create a PingSource producer. The “sink” element describes where to send
-events. Rather than sending the events to a service, events are sent to a channel with the name “pingevents” which means
-there’s no longer a tight coupling between the producer and consumer.
+Now let's add a Trigger that listens for a certain CloudEvent Type
 
-```
-cat <<EOF | kubectl create -f -
-apiVersion: sources.knative.dev/v1
-kind: PingSource
-metadata:
-  name: test-ping-source-channel
-spec:
-  schedule: "*/1 * * * *"
-  data: '{"message": "Message from Channel!"}'
-  sink:
-    ref:
-      apiVersion: messaging.knative.dev/v1
-      kind: InMemoryChannel
-      name: pingevents
-EOF
+```sh
+kn trigger create cloudevents-player-filter --sink cloudevents-player  --broker example-broker --filter type=some-type
+
 ```{{execute}}
 
-To verify event delivery, you can check the logs of all three consumers: (You will not see an event there for a minute after creating the producer):
-```
-# it is likely that is pod is still being created after scaling down to zero
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display1 --timeout=90s
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display2 --timeout=90s
-kubectl wait --for=condition=ready pod -l serving.knative.dev/service=event-display3 --timeout=90s
-# see the logs
-kubectl logs -l serving.knative.dev/service=event-display1 -c user-container --since=10m --tail=50
-kubectl logs -l serving.knative.dev/service=event-display2 -c user-container --since=10m --tail=50
-kubectl logs -l serving.knative.dev/service=event-display3 -c user-container --since=10m --tail=50
+If you send a CloudEvent with type `some-type`, it is reflected in the CloudEvents Player. 
+The Trigger ignores any other types.
+
+Let us send another event with a different type `other-type`:
+```sh
+curl -i http://cloudevents-player.default.example.com/messages \
+    -H "Content-Type: application/json" \
+    -H "Ce-Id: 222" \
+    -H "Ce-Specversion: 1.0" \
+    -H "Ce-Type: other-type" \
+    -H "Ce-Source: command-line" \
+    -d '{"msg":"Hello CloudEvents!"}'
 ```{{execute}}
+
+When you list the messages again you can see that the message id 222 was SENT but not RECEIVED.
+```sh
+curl http://cloudevents-player.default.example.com/messages | jq
+```{{execute}}
+✅ ** Expected output:**
+```sh
+[
+  {
+    "event": {
+      "attributes": {
+        "datacontenttype": "application/json",
+        "id": "222",
+        "mediaType": "application/json",
+        "source": "command-line",
+        "specversion": "1.0",
+        "type": "other-type"
+      },
+      "data": {
+        "msg": "Hello CloudEvents!"
+      },
+      "extensions": {}
+    },
+    "id": "222",
+    "receivedAt": "2022-04-29T23:56:23.983083+02:00[Europe/Madrid]",
+    "type": "SENT"
+  }
+]
+```
+
+You can filter on any aspect of the CloudEvent you would like to.
+
+
+Some people call this "Event-Driven Architecture" which can be used to create your own "Functions as a Service" 
+on Kubernetes 🎉 🌮 🔥
