@@ -1,5 +1,5 @@
 ## Installation
-> The startup script running on the right will:
+The startup script running on the right will:
 
 1. **Check Kubernetes is up and running**.
 2. **Install Knative Serving with Contour as the default networking layer**.
