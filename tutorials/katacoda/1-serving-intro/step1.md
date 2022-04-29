@@ -1,10 +1,10 @@
 ## Installation
 > The startup script running on the right will:
 
-1. **Check kubernetes is up and running**.
-2. **Install knative serving with Contour as the default networking layer**.
-3. **Install knative `kn` cli**.
-4. **Assign variable `$externalIP` with the external IP of your kubernetes cluster**.
+1. **Check Kubernetes is up and running**.
+2. **Install Knative Serving with Contour as the default networking layer**.
+3. **Install the Knative `kn` CLI**.
+4. **Assign the variable `$externalIP` with the external IP of your Kubernetes cluster**.
 
 > Once you see a prompt, you can click on the command below,
 > it will be copied and run for you in the terminal on the right.
