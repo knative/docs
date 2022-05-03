@@ -1,6 +1,6 @@
 # Configuring the Knative Serving Operator custom resource
 
-Knative Serving can be configured with the following options:
+You can configure Knative Serving with the following options:
 
 - [Version configuration](#version-configuration)
 - [Install customized Knative Serving](#install-customized-knative-serving)
@@ -42,16 +42,17 @@ enables upgrading or downgrading the Knative Serving version, without needing to
 The Operator provides you with the flexibility to install Knative Serving customized to your own requirements. As long
 as the manifests of customized Knative Serving are accessible to the Operator, you can install them.
 
-There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_. With
-overwrite mode, you must define all manifests needed for Knative Serving to install because the Operator will no
-longer install any default manifests. With append mode, you only need to define your customized manifests. The
-customized manifests are installed after default manifests are applied.
+There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
+With overwrite mode, under `.spec.manifests`, you must define all manifests needed for
+Knative Serving to install because the Operator will no longer install any default manifests.
+With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
+The customized manifests are installed after default manifests are applied.
 
-**Overwrite mode:**
+### Overwrite mode
 
 You can use overwrite mode when you want to customize all Knative Serving manifests.
 
-For example, if you want to install Knative Serving and istio ingress and you want customize both components, you can
+For example, if you want to install Knative Serving and Istio ingress and you want customize both components, you can
 create the following YAML file:
 
 ```yaml
@@ -83,7 +84,7 @@ This example installs the customized Knative Serving at version `$spec_version` 
 We strongly recommend you to specify the version and the valid links to the customized Knative Serving, by leveraging
 both `spec_version` and `spec.manifests`. Do not skip either field.
 
-**Append mode:**
+### Append mode
 
 You can use append mode to add your customized manifests into the default manifests.
 
@@ -130,61 +131,63 @@ must be created in the same namespace as the Knative Serving Deployments. See
 [deploying images from a private container registry](../../serving/deploying-from-private-registry.md) for configuration details.
 
 
-### Download images in a predefined format without secrets:
+### Download images in a predefined format without secrets
 
 This example shows how you can define custom image links that can be defined in the CR using the simplified format
 `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
 In the following example:
 
-- the custom tag `v0.13.0` is used for all images
-- all image links are accessible without using secrets
-- images are pushed as `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`
+- The custom tag `latest` is used for all images.
+- All image links are accessible without using secrets.
+- Images are pushed as `docker.io/knative-images/${NAME}:{CUSTOM-TAG}`.
 
-First, you need to make sure your images pushed to the following image tags:
+To define your image links:
 
-| Container | Docker Image |
-|----|----|
-|`activator` | `docker.io/knative-images/activator:v0.13.0` |
-| `autoscaler` | `docker.io/knative-images/autoscaler:v0.13.0` |
-| `controller` | `docker.io/knative-images/controller:v0.13.0` |
-| `webhook` | `docker.io/knative-images/webhook:v0.13.0` |
-| `autoscaler-hpa` | `docker.io/knative-images/autoscaler-hpa:v0.13.0` |
-| `net-istio-controller` | `docker.io/knative-images/net-istio-controller:v0.13.0` |
-| `queue-proxy` | `docker.io/knative-images/queue-proxy:v0.13.0` |
+1. Push images to the following image tags:
 
-Then, you need to define your operator CR with following content:
+    | Container | Docker Image |
+    |----|----|
+    |`activator` | `docker.io/knative-images/activator:latest` |
+    | `autoscaler` | `docker.io/knative-images/autoscaler:latest` |
+    | `controller` | `docker.io/knative-images/controller:latest` |
+    | `webhook` | `docker.io/knative-images/webhook:latest` |
+    | `autoscaler-hpa` | `docker.io/knative-images/autoscaler-hpa:latest` |
+    | `net-istio-controller` | `docker.io/knative-images/net-istio-controller:latest` |
+    | `queue-proxy` | `docker.io/knative-images/queue-proxy:latest` |
 
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  registry:
-    default: docker.io/knative-images/${NAME}:v0.13.0
-```
+2. Define your operator CR with following content:
+
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      registry:
+        default: docker.io/knative-images/${NAME}:latest
+    ```
 
 ### Download images individually without secrets
 
 If your custom image links are not defined in a uniform format by default, you will need to individually include each
 link in the CR.
 
-For example, to given the following images:
+For example, given the following images:
 
 | Container | Docker Image |
 |----|----|
-| `activator` | `docker.io/knative-images-repo1/activator:v0.13.0` |
-| `autoscaler` | `docker.io/knative-images-repo2/autoscaler:v0.13.0` |
-| `controller` | `docker.io/knative-images-repo3/controller:v0.13.0` |
-| `webhook` | `docker.io/knative-images-repo4/webhook:v0.13.0` |
-| `autoscaler-hpa` | `docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0` |
-| `net-istio-controller` | `docker.io/knative-images-repo6/prefix-net-istio-controller:v0.13.0` |
-| `net-istio-webhook` | `docker.io/knative-images-repo6/net-istio-webhooko:v0.13.0` |
-| `queue-proxy` | `docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0` |
+| `activator` | `docker.io/knative-images-repo1/activator:latest` |
+| `autoscaler` | `docker.io/knative-images-repo2/autoscaler:latest` |
+| `controller` | `docker.io/knative-images-repo3/controller:latest` |
+| `webhook` | `docker.io/knative-images-repo4/webhook:latest` |
+| `autoscaler-hpa` | `docker.io/knative-images-repo5/autoscaler-hpa:latest` |
+| `net-istio-controller` | `docker.io/knative-images-repo6/prefix-net-istio-controller:latest` |
+| `net-istio-webhook` | `docker.io/knative-images-repo6/net-istio-webhooko:latest` |
+| `queue-proxy` | `docker.io/knative-images-repo7/queue-proxy-suffix:latest` |
 
-The Operator CR should be modified to include the full list:
+You must modify the Operator CR to include the full list. For example:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -195,14 +198,14 @@ metadata:
 spec:
   registry:
     override:
-      activator: docker.io/knative-images-repo1/activator:v0.13.0
-      autoscaler: docker.io/knative-images-repo2/autoscaler:v0.13.0
-      controller: docker.io/knative-images-repo3/controller:v0.13.0
-      webhook: docker.io/knative-images-repo4/webhook:v0.13.0
-      autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:v0.13.0
-      net-istio-controller/controller: docker.io/knative-images-repo6/prefix-net-istio-controller:v0.13.0
-      net-istio-webhook/webhook: docker.io/knative-images-repo6/net-istio-webhook:v0.13.0
-      queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:v0.13.0
+      activator: docker.io/knative-images-repo1/activator:latest
+      autoscaler: docker.io/knative-images-repo2/autoscaler:latest
+      controller: docker.io/knative-images-repo3/controller:latest
+      webhook: docker.io/knative-images-repo4/webhook:latest
+      autoscaler-hpa: docker.io/knative-images-repo5/autoscaler-hpa:latest
+      net-istio-controller/controller: docker.io/knative-images-repo6/prefix-net-istio-controller:latest
+      net-istio-webhook/webhook: docker.io/knative-images-repo6/net-istio-webhook:latest
+      queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:latest
 ```
 
 !!! note
@@ -348,12 +351,12 @@ The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.
 
 Update `spec.ingress.istio.knative-local-gateway` to select the labels of the new cluster-local ingress gateway:
 
-### Default local gateway name:
+### Default local gateway name
 
 Go through the [installing Istio](../installing-istio.md#installing-istio-without-sidecar-injection) guide to use local cluster gateway,
 if you use the default gateway called `knative-local-gateway`.
 
-### Non-default local gateway name:
+### Non-default local gateway name
 
 If you create custom local gateway with a name other than `knative-local-gateway`, update `config.istio` and the
 `knative-local-gateway` selector:
