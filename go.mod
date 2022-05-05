@@ -28,7 +28,7 @@ require (
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
 	honnef.co/go/tools v0.0.1-2020.1.5 // indirect
-	knative.dev/hack v0.0.0-20220426205654-2a09b5c38889
+	knative.dev/hack v0.0.0-20220505013956-ccf82ad03f32
 )
 
 replace go.opencensus.io => go.opencensus.io v0.20.2
