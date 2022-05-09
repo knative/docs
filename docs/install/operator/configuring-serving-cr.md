@@ -9,6 +9,7 @@ You can configure Knative Serving with the following options:
 - [Replace the default istio-ingressgateway service](#replace-the-default-istio-ingressgateway-service)
 - [Replace the knative-ingress-gateway gateway](#replace-the-knative-ingress-gateway-gateway)
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
+- [Servers configuration for Istio gateways](#servers-configuration-for-istio-gateways)
 - [High availability](#high-availability)
 - [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
@@ -377,6 +378,37 @@ spec:
       knative-local-gateway:
         selector:
           custom: custom-local-gateway
+  config:
+    istio:
+      local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+```
+
+## Servers configuration for Istio gateways:
+
+You can leverage the KnativeServing CR to configure the hosts and port of the servers stanzas for `knative-local-gateway`
+or `knative-ingress-gateway` gateways. For example, you would like to specify the host into `<test-ip>` and configure the
+port with the number: 443, the name: https and protocol: HTTPS, and the target_port 8443 for `knative-local-gateway`,
+apply the following yaml content:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    istio:
+      enabled: true
+      knative-local-gateway:
+        servers:
+        - port:
+            number: 443
+            name: https
+            protocol: HTTPS
+            target_port: 8443
+          hosts:
+          - <test-ip>
   config:
     istio:
       local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
