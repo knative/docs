@@ -14,6 +14,7 @@ You can configure Knative Eventing with the following options:
 - [Configuring the default broker class](#configuring-the-default-broker-class)
 - [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
+- [Override system services](#override-system-services)
 
 ## Installing a specific version of Eventing
 
@@ -518,4 +519,31 @@ spec:
               operator: In
               values:
               - ssd
+```
+
+## Override system services
+
+If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.
+Currently `labels`, `annotations` and `selector` are supported.
+
+### Override labels and annotations and selector
+
+The following KnativeEventing resource overrides the `eventing-webhook` service to have the label `mylabel: foo`, the annotation `myannotataions: bar`,
+the selector `myselector: bar`.
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  services:
+  - name: eventing-webhook
+    labels:
+      mylabel: foo
+    annotations:
+      myannotataions: bar
+    selector:
+      myselector: bar
 ```

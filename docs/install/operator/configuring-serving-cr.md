@@ -12,6 +12,7 @@ You can configure Knative Serving with the following options:
 - [High availability](#high-availability)
 - [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
+- [Override system services](#override-system-services)
 
 ## Version configuration
 
@@ -592,4 +593,31 @@ spec:
               operator: In
               values:
               - ssd
+```
+
+## Override system services
+
+If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.
+Currently `labels`, `annotations` and `selector` are supported.
+
+### Override labels and annotations and selector
+
+The following KnativeServing resource overrides the `webhook` service to have the label `mylabel: foo`, the annotation `myannotataions: bar`,
+the selector `myselector: bar`.
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  services:
+  - name: webhook
+    labels:
+      mylabel: foo
+    annotations:
+      myannotataions: bar
+    selector:
+      myselector: bar
 ```
