@@ -482,7 +482,7 @@ Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 
 ### Override replicas, labels and annotations
 
-The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotataions: bar`,
+The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotations: bar`,
 while other system deployments have `2` Replicas by using `spec.high-availability`.
 
 ```yaml
@@ -500,7 +500,7 @@ spec:
     labels:
       mylabel: foo
     annotations:
-      myannotataions: bar
+      myannotations: bar
 ```
 
 !!! note
@@ -602,7 +602,7 @@ Currently `labels`, `annotations` and `selector` are supported.
 
 ### Override labels and annotations and selector
 
-The following KnativeServing resource overrides the `webhook` service to have the label `mylabel: foo`, the annotation `myannotataions: bar`,
+The following KnativeServing resource overrides the `webhook` service to have the label `mylabel: foo`, the annotation `myannotations: bar`,
 the selector `myselector: bar`.
 
 ```yaml
@@ -617,7 +617,7 @@ spec:
     labels:
       mylabel: foo
     annotations:
-      myannotataions: bar
+      myannotations: bar
     selector:
       myselector: bar
 ```
