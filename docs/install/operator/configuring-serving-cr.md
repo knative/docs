@@ -387,7 +387,7 @@ spec:
 
 You can leverage the KnativeServing CR to configure the hosts and port of the servers stanzas for `knative-local-gateway`
 or `knative-ingress-gateway` gateways. For example, you would like to specify the host into `<test-ip>` and configure the
-port with the number: 443, the name: https and protocol: HTTPS, and the target_port 8443 for `knative-local-gateway`,
+port with `number: 443`, `name: https`, `protocol: HTTPS`, and `target_port: 8443` for `knative-local-gateway`,
 apply the following yaml content:
 
 ```yaml
