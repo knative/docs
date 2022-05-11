@@ -30,7 +30,7 @@ apiVersion: kind.sigs.k8s.io/v1alpha4
 nodes:
 - role: control-plane
   extraPortMappings:
-	## expose port 31380 of the node to port 80 on the host
+	## expose port 31080 of the node to port 80 on the host
   - containerPort: 31080
     hostPort: 80
 	## expose port 31443 of the node to port 443 on the host
