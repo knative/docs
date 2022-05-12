@@ -11,7 +11,6 @@ You can configure Knative Serving with the following options:
 - [Cluster local gateway](#configuration-of-cluster-local-gateway)
 - [Servers configuration for Istio gateways](#servers-configuration-for-istio-gateways)
 - [High availability](#high-availability)
-- [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
 - [Override system services](#override-system-services)
 
@@ -448,69 +447,38 @@ If you configure `replicas: 2`, which is less than `minReplicas`, the operator t
 
 If you configure `replicas: 6`, which is more than `maxReplicas`, the operator transforms `maxReplicas` to `maxReplicas + (replicas - minReplicas)` which is `8`.
 
-## System Resource Settings
-
-The operator custom resource allows you to configure system resources for the Knative system containers.
-Requests and limits can be configured for the following containers: `activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`,
-`net-istio-controller` and `queue-proxy`.
-
-!!! info
-    If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
-
-To override resource settings for a specific container, create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
-
-For example, the following KnativeServing resource configures the `activator` to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
-
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  resources:
-  - container: activator
-    requests:
-      cpu: 300m
-      memory: 100Mi
-    limits:
-      cpu: 1000m
-      memory: 250Mi
-      ephemeral-storage: 4Gi
-```
-
-If you would like to add another container `autoscaler` with the same configuration, you need to change your CR as follows:
-
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  resources:
-  - container: activator
-    requests:
-      cpu: 300m
-      memory: 100Mi
-    limits:
-      cpu: 1000m
-      memory: 250Mi
-      ephemeral-storage: 4Gi
-  - container: autoscaler
-    requests:
-      cpu: 300m
-      memory: 100Mi
-    limits:
-      cpu: 1000m
-      memory: 250Mi
-      ephemeral-storage: 4Gi
-```
-
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
 Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+
+### Override the resources
+
+The KnativeServing custom resource is able to configure system resources for the Knative system containers based on the deployment.
+Requests and limits can be configured for all the available containers within the deployment, like `activator`, `autoscaler`,
+`controller`, etc.
+
+For example, the following KnativeServing resource configures the container `controller` in the deployment `controller` to request
+0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: controller
+    resources:
+    - container: controller
+      requests:
+        cpu: 300m
+        memory: 100Mi
+      limits:
+        cpu: 1000m
+        memory: 250Mi
+```
 
 ### Override replicas, labels and annotations
 

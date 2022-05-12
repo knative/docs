@@ -12,7 +12,6 @@ You can configure Knative Eventing with the following options:
 - [Download images from different repositories without secrets](#download-images-from-different-repositories-without-secrets)
 - [Download images with secrets](#download-images-with-secrets)
 - [Configuring the default broker class](#configuring-the-default-broker-class)
-- [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
 - [Override system services](#override-system-services)
 
@@ -350,45 +349,6 @@ metadata:
   namespace: knative-eventing
 spec:
   defaultBrokerClass: MTChannelBasedBroker
-```
-
-## System resource settings
-
-The KnativeEventing CR allows you to configure system resources for Knative system containers.
-
-Requests and limits can be configured for the following containers:
-
-- `eventing-controller`
-- `eventing-webhook`
-- `imc-controller`
-- `imc-dispatcher`
-- `mt-broker-ingress`
-- `mt-broker-ingress`
-- `mt-broker-controller`
-
-To override resource settings for a specific container, you must create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
-
-!!! info
-    If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
-    Visit [Override System Resources based on the deployment](#override-the-resources) to specify the resources for a container within a specific deployment.
-
-For example, the following KnativeEventing CR configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
-
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  resources:
-  - container: eventing-webhook
-    requests:
-      cpu: 300m
-      memory: 100Mi
-    limits:
-      cpu: 1000m
-      memory: 250Mi
 ```
 
 ## Override system deployments
