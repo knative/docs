@@ -6,16 +6,10 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
     Do one of the following:
 
-    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command:
+    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade kn`instead if you are upgrading from a previous version):
 
         ```bash
-        brew install kn
-        ```
-
-    - To upgrade an existing `kn` install to the latest version, run the command:
-
-        ```bash
-        brew upgrade kn
+        brew install knative/client/kn
         ```
 
         ??? bug "Having issues upgrading `kn` using Homebrew?"
@@ -23,9 +17,9 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
             If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
 
             ```bash
-            brew tap --repair
-            brew update
-            brew upgrade kn
+            brew uninstall kn
+            brew untap knative/client --force
+            brew install knative/client/kn
             ```
 
 === "Using a binary"
