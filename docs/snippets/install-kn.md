@@ -24,7 +24,7 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
 === "Using a binary"
 
-    You can install `kn` by downloading the executable binary for your system and placing it in the system path. Note that you will need `kn` v0.25 or later.
+    You can install `kn` by downloading the executable binary for your system and placing it in the system path.
 
     1. Download the binary for your system from the [`kn` release page](https://github.com/knative/client/releases){target=_blank}.
 
