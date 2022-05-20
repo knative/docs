@@ -35,17 +35,12 @@ To get started, install the Knative `quickstart` plugin:
 
     Do one of the following:
 
-    - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}, run the command:
+    - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
 
         ```bash
         brew install knative-sandbox/kn-plugins/quickstart
         ```
 
-    - To upgrade an existing `quickstart` installation to the latest version, run the command:
-
-        ```bash
-        brew upgrade knative-sandbox/kn-plugins/quickstart
-        ```
 === "Using a binary"
 
     1. Download the binary for your system from the [`quickstart` release page](https://github.com/knative-sandbox/kn-plugin-quickstart/releases){target=_blank}.
@@ -103,7 +98,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 === "Using kind"
 
 
-    1. Install Knative and Kubernetes on a local Docker daemon by running:
+    1. Install Knative and Kubernetes using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) by running:
 
         ```bash
         kn quickstart kind
@@ -117,7 +112,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
 === "Using minikube"
 
-    1. Install Knative and Kubernetes in a minikube instance by running:
+    1. Install Knative and Kubernetes in a [minikube](https://minikube.sigs.k8s.io/docs/start/) instance by running:
 
         !!! note
             The minikube cluster will be created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a
