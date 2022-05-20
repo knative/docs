@@ -31,7 +31,7 @@ Before you can use the MT channel-based broker, you must install a
 
 ### Alternative broker implementations
 
-In the Knative Eventing ecosystem, alternative broker implementations are welcome as long as they respect the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#broker).
+In the Knative Eventing ecosystem, alternative broker implementations are welcome as long as they respect the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/control-plane.md#broker-lifecycle).
 
 The following is a list of brokers provided by the community or vendors:
 
