@@ -1,14 +1,14 @@
 ## Using Triggers and sinks
-In the last topic we used the CloudEvents Player as an event source to send events to the Broker. 
+In the last topic we used the CloudEvents Player as an event source to send events to the Broker.
 We now want the event to go from the Broker to an event sink.
 
-In this topic, we will use the CloudEvents Player as the sink as well as a source. 
-This means we will be using the CloudEvents Player to both send and receive events. We will use a Trigger 
+In this topic, we will use the CloudEvents Player as the sink as well as a source.
+This means we will be using the CloudEvents Player to both send and receive events. We will use a Trigger
 to listen for events in the Broker to send to the sink.
 
 
 ### Creating your first Trigger
-Create a Trigger that listens for CloudEvents from the event source and places them into the sink, which is also the 
+Create a Trigger that listens for CloudEvents from the event source and places them into the sink, which is also the
 CloudEvents Player app.
 
 To create the Trigger, run the command:
@@ -23,7 +23,7 @@ Trigger 'cloudevents-trigger' successfully created in namespace 'default'.
 ```
 
 > ❓ **What CloudEvents is my Trigger listening for?**
-> Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any 
+> Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any
 > CloudEvents coming into the Broker.
 
 ### Sending an event and get it from CloudEvents
@@ -110,7 +110,7 @@ kn trigger create cloudevents-player-filter --sink cloudevents-player  --broker 
 
 ```{{execute}}
 
-If you send a CloudEvent with type `some-type`, it is reflected in the CloudEvents Player. 
+If you send a CloudEvent with type `some-type`, it is reflected in the CloudEvents Player.
 The Trigger ignores any other types.
 
 Let us send another event with a different type `other-type`:
@@ -156,5 +156,5 @@ curl http://cloudevents-player.default.example.com/messages | jq
 You can filter on any aspect of the CloudEvent you would like to.
 
 
-Some people call this "Event-Driven Architecture" which can be used to create your own "Functions as a Service" 
+Some people call this "Event-Driven Architecture" which can be used to create your own "Functions as a Service"
 on Kubernetes 🎉 🌮 🔥

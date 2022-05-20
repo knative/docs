@@ -1,11 +1,11 @@
 ## Using a Knative Service as a source
-In this tutorial, you will use the [CloudEvents](https://github.com/ruromero/cloudevents-player) Player app to showcase the core concepts of Knative Eventing. 
+In this tutorial, you will use the [CloudEvents](https://github.com/ruromero/cloudevents-player) Player app to showcase the core concepts of Knative Eventing.
 By the end of this tutorial, you should have an architecture that looks like this:
 ![cloud-events-app](assets/cloud-events-app.png)
 The above image is Figure 6.6 from [Knative in Action](https://www.manning.com/books/knative-in-action).
 
 ### Creating your first source
-The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of the Broker as an environment variable, 
+The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of the Broker as an environment variable,
 `BROKER_URL`. You will send CloudEvents to the Broker through the CloudEvents Player application.
 
 Create the CloudEvents Player Service:
@@ -33,7 +33,7 @@ echo "${externalIP} cloudevents-player.default.example.com" >> /etc/hosts
 ☕ The variable `${externalIP}` was set during the initialization of this tutorial and holds the External IP of the
 Ingress Controller. You can check this IP running this command:
 ```sh
-kubectl get service/envoy -n contour-external  
+kubectl get service/envoy -n contour-external
 ```{{execute}}
 
 And also we need to `port-forward` the requests to the Ingress controller. We do this by running:
@@ -108,9 +108,9 @@ curl http://cloudevents-player.default.example.com/messages | jq
 ]
 ```
 
-You can now see that the event has been SENT to our Broker... but where has the event gone? 
+You can now see that the event has been SENT to our Broker... but where has the event gone?
 **Well, right now, nowhere!**
 
-A Broker is simply a receptacle for events. In order for your events to be sent anywhere, 
-you must create a **Trigger** which listens for your events and places them somewhere. 
+A Broker is simply a receptacle for events. In order for your events to be sent anywhere,
+you must create a **Trigger** which listens for your events and places them somewhere.
 And, you're in luck; you'll create your first **Trigger** on the next page!
