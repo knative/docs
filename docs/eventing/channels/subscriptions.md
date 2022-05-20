@@ -52,7 +52,7 @@ For more information about Subscription objects, see
         - `--sink-reply` and `--sink-dead-letter` are optional arguments. They can be used to specify where the Sink reply is sent, and where to send the CloudEvent in case of a failure, respectively. Both use the same naming conventions for specifying the Sink as the `--sink` flag.
 
 
-    This example command creates a Channel named `mysubscription` that routes events from a Channel
+    This example command creates a Subscription named `mysubscription` that routes events from a Channel
     named `mychannel` to a Knative service named `myservice`.
 
 
