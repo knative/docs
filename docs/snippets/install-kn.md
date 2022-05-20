@@ -6,7 +6,7 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
     Do one of the following:
 
-    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade kn`instead if you are upgrading from a previous version):
+    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
 
         ```bash
         brew install knative/client/kn
