@@ -57,7 +57,7 @@ spec:
 
 To use a Kubernetes custom resource (CR) as a sink for events, you must:
 
-1. Make the CR Addressable. You must ensure that the CR contains a `status.address.url`. For more information, see the spec for [Addressable resources](https://github.com/knative/specs/blob/main/specs/eventing/interfaces.md#addressable).
+1. Make the CR Addressable. You must ensure that the CR contains a `status.address.url`. For more information, see the spec for [Addressable resources](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#addressable).
 
 1. Create an Addressable-resolver ClusterRole to obtain the necessary RBAC rules for the sink to receive events.
 
