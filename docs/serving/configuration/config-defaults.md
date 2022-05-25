@@ -39,7 +39,7 @@ See below for a description of each property.
 
 ### Revision timeout seconds
 {% raw %}
-The `revision-timeout-seconds` value determines the default number of seconds to use for the revision's per-request timeout if none is specified.
+The revision timeout value determines the default number of seconds to use for the revision's per-request timeout if none is specified.
 {% endraw %}
 
 * **Global key:** `revision-timeout-seconds`
@@ -67,14 +67,10 @@ The `revision-timeout-seconds` value determines the default number of seconds to
     metadata:
       name: helloworld-go
       namespace: default
-    spec:
-      template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-timeout-seconds: "300"
-        spec:
-          containers:
-            - image: gcr.io/knative-samples/helloworld-go
+      spec:
+        timeout: 300
+        containers:
+          - image: gcr.io/knative-samples/helloworld-go
     ```
 
 ### Max revision timeout seconds
@@ -109,14 +105,10 @@ If this value is increased, the activator's `terminationGraceTimeSeconds` should
     metadata:
       name: helloworld-go
       namespace: default
-    spec:
-      template:
-        metadata:
-          annotations:
-            serving.knative.dev/max-revision-timeout-seconds: "600"
-        spec:
-          containers:
-            - image: gcr.io/knative-samples/helloworld-go
+      spec:
+        timeout: 600
+        containers:
+          - image: gcr.io/knative-samples/helloworld-go
     ```
 
 ### Revision CPU request
@@ -409,7 +401,7 @@ the pod receives.
 {% endraw %}
 
 * **Global key:** `container-concurrency`
-* **Per-revision annotation key:** `serving.knative.dev/container-concurrency`
+* **Per-revision spec key:** `containerConcurrency`
 * **Possible values:** integer
 * **Default:** `"0"`
 
@@ -435,12 +427,8 @@ the pod receives.
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/container-name-template: "0"
         spec:
-          containers:
-            - image: gcr.io/knative-samples/helloworld-go
+          containerConcurrency: 0
     ```
 
 ### Container concurrency max limit
