@@ -451,13 +451,14 @@ The `container-concurrency-max-limit` is an Operator setting that disables arbit
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
+      namespace: knative-serving
     spec:
       config:
-        data:
+        defaults:
           container-concurrency-max-limit: "1000"
     ```
 
