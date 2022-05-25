@@ -435,7 +435,7 @@ the pod receives.
 
 {% raw %}
 
-The `container-concurrency-max-limit` is an Operator setting that disables arbitrary large concurrency values, or autoscaling targets, for individual revisions. The `container-concurrency` default setting must be at or below this value. The value of the `container-concurrency-max-limit` setting must be greater than 1.
+The `container-concurrency-max-limit` setting disables arbitrary large concurrency values, or autoscaling targets, for individual revisions. The `container-concurrency` default setting must be at or below this value. The value of the `container-concurrency-max-limit` setting must be greater than 1.
 
 !!! note
     Even with this set, a user can choose a `containerConcurrency` value of zero (unbounded), unless `allow-container-concurrency-zero` is set to `"false"`.
@@ -448,6 +448,17 @@ The `container-concurrency-max-limit` is an Operator setting that disables arbit
 * **Default:** `"1000"`
 
 **Example:**
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion:  v1
+    kind:  ConfigMap
+    metadata:
+      name:  config-defaults
+      namespace:  knative-serving
+    data:
+      container-concurrency-max-limit: "1000"
+    ```
 
 === "Global (Operator)"
     ```yaml
