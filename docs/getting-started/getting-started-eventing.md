@@ -1,11 +1,11 @@
-# Introducing the Knative Eventing
+# Introducing Knative Eventing
 
-With Knative Serving, we have a powerful tool which can take our containerized code and deploy it with relative ease. **With Knative Eventing, you gain a few new super powers :rocket:** that allow you to build **Event-Driven Applications**.
+Knative Eventing provides you with helpful tools that can be used to create event-driven applications, by easily attaching event sources, triggers, and other options to your Knative Services.
 
-??? question "What are Event Driven Applications?"
-    Event-driven applications are designed to detect events as they occur, and then deal with them using some event-handling procedure. Producing and consuming events with an "event-handling procedure" is precisely what Knative Eventing enables.
+Event-driven applications are designed to detect events as they occur, and process these events by using user-defined, event-handling procedures.
 
-    Want to find out more about Event-Driven Architecture and Knative Eventing? Check out this CNCF Session aptly named ["Event-driven architecture with Knative events"](https://www.cncf.io/online-programs/event-driven-architecture-with-knative-events/){target=blank}
+!!! tip
+    To find out more about event-driven architecture and Knative Eventing, check out this CNCF Session about [event-driven architecture with Knative events](https://www.cncf.io/online-programs/event-driven-architecture-with-knative-events/){target=blank}
 
 ## Knative Eventing examples
 
