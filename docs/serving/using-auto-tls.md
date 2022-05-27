@@ -324,5 +324,5 @@ Using the previous `autoscale-go` example:
 
     ```bash
     NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
-    autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+    autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True
     ```
