@@ -117,4 +117,4 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
 ## Next steps
 
-Now that you have installed Knative, you can learn how to deploy your first Knative. Service in the next topic in this tutorial.
+Now that you have installed Knative, you can learn how to deploy your first Knative Service in the next topic in this tutorial.
