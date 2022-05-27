@@ -31,13 +31,13 @@ Knative supports the following Auto TLS modes:
     In this mode, your cluster needs to be able to talk to your DNS server to verify the ownership of your domain.
 
     - **Provision Certificate per namespace is supported when using DNS-01 challenge mode.**
-      - This is the recommended mode for faster certificate provision.
-      - In this mode, a single Certificate will be provisioned per namespace and is reused across the Knative Services within the same namespace.
+        - This is the recommended mode for faster certificate provision.
+        - In this mode, a single Certificate will be provisioned per namespace and is reused across the Knative Services within the same namespace.
 
     - **Provision Certificate per Knative Service is supported when using DNS-01 challenge mode.**
-      - This is the recommended mode for better certificate isolation between Knative Services.
-      - In this mode, a Certificate will be provisioned for each Knative Service.
-      - The TLS effective time is longer as it needs Certificate provision for each Knative Service creation.
+        - This is the recommended mode for better certificate isolation between Knative Services.
+        - In this mode, a Certificate will be provisioned for each Knative Service.
+        - The TLS effective time is longer as it needs Certificate provision for each Knative Service creation.
 
 1.  Using HTTP-01 challenge
 
