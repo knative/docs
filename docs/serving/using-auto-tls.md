@@ -1,4 +1,4 @@
-# Enabling automatic TLS certificate provisioning
+# Enabling auto-TLS certs
 
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
@@ -10,12 +10,15 @@ Services. To learn more about using secure connections in Knative, see
 The following must be installed on your Knative cluster:
 
 - [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md).
+
 - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
 
-
 - [`cert-manager` version `1.0.0` or higher](../install/installing-cert-manager.md).
+
 - Your Knative cluster must be configured to use a [custom domain](using-a-custom-domain.md).
+
 - Your DNS provider must be setup and configured to your domain.
+
 - If you want to use HTTP-01 challenge, you need to configure your custom
 domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
 
@@ -26,6 +29,7 @@ Knative supports the following Auto TLS modes:
 1.  Using DNS-01 challenge
 
     In this mode, your cluster needs to be able to talk to your DNS server to verify the ownership of your domain.
+
     - **Provision Certificate per namespace is supported when using DNS-01 challenge mode.**
       - This is the recommended mode for faster certificate provision.
       - In this mode, a single Certificate will be provisioned per namespace and is reused across the Knative Services within the same namespace.
@@ -68,7 +72,7 @@ and which DNS provider validates those requests.
             server: https://acme-v02.api.letsencrypt.org/directory
             # This will register an issuer with LetsEncrypt.  Replace
             # with your admin email address.
-            email: myemail@gmail.com
+            email: test-email@knative.dev
             privateKeySecretRef:
               # Set privateKeySecretRef to any unused secret name.
               name: letsencrypt-dns-issuer
@@ -146,7 +150,7 @@ wildcard certificate like `*.my-ns.example.com`.
 1.  If `net-certmanager-controller` is not found, run the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact( repo="net-certmanager", file="release.yaml") }}
+    kubectl apply -f {{ artifact( repo="net-certmanager", file="release.yaml") }}
     ```
 
 ### Provising certificates per namespace (wildcard certificates)
@@ -182,21 +186,12 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 1.  Run the following command to edit your `config-certmanager` ConfigMap:
 
     ```bash
-    kubectl edit configmap config-certmanager --namespace knative-serving
+    kubectl edit configmap config-certmanager -n knative-serving
     ```
 
 1.  Add the `issuerRef` within the `data` section:
 
-    ```bash
-    data:
-      issuerRef: |
-        kind: ClusterIssuer
-        name: letsencrypt-http01-issuer
-    ```
-
-    Example:
-
-    ```bash
+    ```yaml
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -210,38 +205,28 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
         name: letsencrypt-http01-issuer
     ```
 
-    `issueRef` defines which `ClusterIssuer` will be used by Knative to issue
+    `issueRef` defines which `ClusterIssuer` is used by Knative to issue
     certificates.
 
 1.  Ensure that the file was updated successfully:
 
     ```bash
-    kubectl get configmap config-certmanager --namespace knative-serving --output yaml
+    kubectl get configmap config-certmanager -n knative-serving -o yaml
     ```
 
 ### Turn on Auto TLS
 
-Update the
-[`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml)
-in the `knative-serving` namespace to enable `auto-tls` and specify how HTTP
-requests are handled:
+Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `auto-tls` and specify how HTTP requests are handled:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
     ```bash
-    kubectl edit configmap config-network --namespace knative-serving
+    kubectl edit configmap config-network -n knative-serving
     ```
 
 1.  Add the `auto-tls: Enabled` attribute under the `data` section:
 
-    ```bash
-    data:
-      auto-tls: Enabled
-    ```
-
-    Example:
-
-    ```bash
+    ```yaml
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -253,9 +238,7 @@ requests are handled:
        ...
     ```
 
-1.  Configure how HTTP and HTTPS requests are handled in the
-  [`http-protocol`](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L109)
-  attribute.
+1.  Configure how HTTP and HTTPS requests are handled in the [`http-protocol`](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L109) attribute.
 
     By default, Knative ingress is configured to serve HTTP traffic
     (`http-protocol: Enabled`). Now that your cluster is configured to use TLS
@@ -269,25 +252,25 @@ requests are handled:
     - `Redirected`: Responds to HTTP request with a `302` redirect to ask the
       clients to use HTTPS.
 
-     ```bash
-     data:
-       http-protocol: Redirected
-     ```
+    ```yaml
+    data:
+      http-protocol: Redirected
+    ```
 
-     Example:
+    Example:
 
-     ```bash
-     apiVersion: v1
-     kind: ConfigMap
-     metadata:
-       name: config-network
-       namespace: knative-serving
-     data:
-       ...
-       auto-tls: Enabled
-       http-protocol: Redirected
-       ...
-     ```
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-network
+      namespace: knative-serving
+    data:
+      ...
+      auto-tls: Enabled
+      http-protocol: Redirected
+      ...
+    ```
 
     !!! note
         When using HTTP-01 challenge, `http-protocol` field has to be set to `Enabled` to make sure HTTP-01 challenge requests can be accepted by the cluster.
@@ -295,7 +278,7 @@ requests are handled:
 1.  Ensure that the file was updated successfully:
 
     ```bash
-    kubectl get configmap config-network --namespace knative-serving --output yaml
+    kubectl get configmap config-network -n knative-serving -o yaml
     ```
 
 Congratulations! Knative is now configured to obtain and renew TLS certificates.
@@ -305,13 +288,14 @@ be able to handle HTTPS traffic.
 ### Verify Auto TLS
 
 1.  Run the following comand to create a Knative Service:
+
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
     ```
 
 1.  When the certificate is provisioned (which could take up to several minutes depending on the challenge type), you should see something like:
 
-    ```
+    ```bash
     NAME               URL                                           LATESTCREATED            LATESTREADY              READY   REASON
     autoscale-go       https://autoscale-go.default.{custom-domain}   autoscale-go-6jf85 autoscale-go-6jf85       True  
     ```
@@ -325,17 +309,20 @@ If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS
 Using the previous `autoscale-go` example:
 
 1. Edit the service using `kubectl edit service.serving.knative.dev/autoscale-go -n default` and add the annotation:
-```yaml
- apiVersion: serving.knative.dev/v1
- kind: Service
- metadata:
-   annotations:
-    ...
-     networking.knative.dev/disable-auto-tls: "true"
-    ...
-```
-2. The service URL should now be **http**, indicating that AutoTLS is disabled:
-```
-NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
-autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
-```
+
+    ```yaml
+     apiVersion: serving.knative.dev/v1
+     kind: Service
+     metadata:
+       annotations:
+        ...
+         networking.knative.dev/disable-auto-tls: "true"
+        ...
+    ```
+
+1. The service URL should now be **http**, indicating that AutoTLS is disabled:
+
+    ```bash
+    NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON
+    autoscale-go   http://autoscale-go.default.1.arenault.dev   autoscale-go-dd42t   8m17s   3 OK / 3     True    
+    ```
