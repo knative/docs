@@ -84,8 +84,15 @@ passed through the tag resolution stage. You will need to create a new revision 
 
 # Create your Knative Service Resource
 
-1. Create a file named `service.yaml` with the contents below for your Knative service. The `imagePullPolicy` should be `Never` or `IfNotPresent` to skip
-pulling the image.
+1. Create the service, either using the `kn` CLI or `kubectl`, with an image pull policy of `Never` or `IfNotPresent`
+
+When using `kn`,
+  ```
+kn service create my.example.com/helloworld-go --pull-policy never
+
+  ```
+
+If you prefer kubectl, then apply a `service.yaml` with the contents below.
 
   ```
 apiVersion: serving.knative.dev/v1 # Current version of Knative
@@ -102,12 +109,6 @@ spec:
           env:
             - name: TARGET
               value: "there!"
-  ```
-
-2. Apply this service.
-
-  ```
-kubectl apply -f service.yaml
   ```
 
 
