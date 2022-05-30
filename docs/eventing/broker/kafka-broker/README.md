@@ -59,6 +59,8 @@ metadata:
   annotations:
     # case-sensitive
     eventing.knative.dev/broker.class: Kafka
+    # Optional annotation to point to an externally managed kafka topic:
+    # kafka.eventing.knative.dev/external.topic: <topic-name>
   name: default
   namespace: default
 spec:
@@ -225,6 +227,27 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
 
 !!! note
     `ca.crt` can be omitted to fallback to use system's root CA set.
+
+## Bring your own topic
+
+By default the Knative Kafka Broker creates its own internal topic, however it is possible to point to an externally managed topic, using the `kafka.eventing.knative.dev/external.topic` annotation:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    # case-sensitive
+    eventing.knative.dev/broker.class: Kafka
+    kafka.eventing.knative.dev/external.topic: <my-topic-name>
+  name: default
+  namespace: default
+spec:
+...
+```
+
+!!! note
+    Be aware that using an external topic the Knative Kafka Broker does not own the topic and therefor is _not_ responsible for the topic at all. This includes the topic lifecycle or its general validity. Also be aware of other restrictions for general access to the topic, using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
 
 ## Consumer Offsets Commit Interval
 
