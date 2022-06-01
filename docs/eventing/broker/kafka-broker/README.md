@@ -243,7 +243,7 @@ metadata:
   name: default
   namespace: default
 spec:
-...
+  # other spec fields ...
 ```
 
 !!! note
