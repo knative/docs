@@ -247,7 +247,7 @@ spec:
 ```
 
 !!! note
-    Be aware that using an external topic the Knative Kafka Broker does not own the topic and therefor is _not_ responsible for the topic at all. This includes the topic lifecycle or its general validity. Also be aware of other restrictions for general access to the topic, using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
+    When using an external topic, the Knative Kafka Broker does not own the topic and is not responsible for managing the topic. This includes the topic lifecycle or its general validity. Other restrictions for general access to the topic may apply. See the documentation about using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
 
 ## Consumer Offsets Commit Interval
 
