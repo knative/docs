@@ -1,4 +1,4 @@
-# About this Quickstart tutorial
+# About this Quickstart
 
 Get started with a simplified, local Knative deployment by using the Knative `quickstart` plugin and tutorial documentation.
 

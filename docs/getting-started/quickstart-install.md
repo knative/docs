@@ -2,21 +2,22 @@
 
 To get started, install the Knative CLI and the `quickstart` plugin.
 
-# Install the Knative CLI
+## Install the Knative CLI
 
 --8<-- "install-kn.md"
 
-# Install the Knative quickstart plugin
+## Install the Knative quickstart plugin
 
 === "Using Homebrew"
 
-    Do one of the following:
+    To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}, run the following command:
 
-    - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
+    ```bash
+    brew install knative-sandbox/kn-plugins/quickstart
+    ```
 
-        ```bash
-        brew install knative-sandbox/kn-plugins/quickstart
-        ```
+    !!! note
+        Use `brew upgrade` instead of `brew install` if you are upgrading from a previous version.
 
 === "Using a binary"
 
@@ -35,30 +36,36 @@ To get started, install the Knative CLI and the `quickstart` plugin.
         ```
 
 === "Using Go"
-    1. Check out the `kn-plugin-quickstart` repository:
 
-          ```bash
-          git clone https://github.com/knative-sandbox/kn-plugin-quickstart.git
-          cd kn-plugin-quickstart/
-          ```
+    1. Clone the `kn-plugin-quickstart` repository:
+
+        ```bash
+        git clone https://github.com/knative-sandbox/kn-plugin-quickstart.git
+        ```
+
+    1. Navigate to the `kn-plugin-quickstart` directory:
+
+        ```bash
+        cd kn-plugin-quickstart
+        ```
 
     1. Build an executable binary:
 
-          ```bash
-          hack/build.sh
-          ```
+        ```bash
+        hack/build.sh
+        ```
 
     1. Move the executable binary file to a directory on your `PATH`:
 
-          ```bash
-          mv kn-quickstart /usr/local/bin
-          ```
+        ```bash
+        mv kn-quickstart /usr/local/bin
+        ```
 
      1. Verify that the plugin is working by running the command:
 
-          ```bash
-          kn quickstart --help
-          ```
+        ```bash
+        kn quickstart --help
+        ```
 
 # Run the Knative quickstart plugin
 
@@ -69,11 +76,7 @@ The `quickstart` plugin completes the following functions:
 1. **Installs Knative Serving** with Kourier as the default networking layer, and sslip.io as the DNS
 1. **Installs Knative Eventing** and creates an in-memory Broker and Channel implementation
 
-
-To get a local deployment of Knative, run the `quickstart` plugin:
-
-=== "Using kind"
-
+=== "Run the `quickstart` plugin with kind"
 
     1. Install Knative and Kubernetes using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) by running:
 
@@ -87,22 +90,24 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         kind get clusters
         ```
 
-=== "Using minikube"
+=== "Run the `quickstart` plugin with minikube"
 
-    1. Install Knative and Kubernetes in a [minikube](https://minikube.sigs.k8s.io/docs/start/) instance by running:
+    1. Install Knative and Kubernetes in a [minikube](https://minikube.sigs.k8s.io/docs/start/) instance by running the following command:
 
-        !!! note
-            The minikube cluster will be created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a
-            different value not lower than 3&nbsp;GB by running the command `minikube config set memory 3078` before this command.
         ```bash
         kn quickstart minikube
         ```
 
+        !!! note
+            The minikube cluster is created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a different value not lower than 3&nbsp;GB by running the command `minikube config set memory 3078` before this command.
+
     1. The output of the previous command asked you to run minikube tunnel.
        Run the following command to start the process in a secondary terminal window, then return to the primary window and press enter to continue:
+
         ```bash
         minikube tunnel --profile knative
         ```
+        
         The tunnel must continue to run in a terminal window any time you are using your Knative `quickstart` environment.
 
         The tunnel command is required because it allows your cluster to access Knative ingress service as a LoadBalancer from your host computer.
