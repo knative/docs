@@ -4,23 +4,21 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
 === "Using Homebrew"
 
-    Do one of the following:
+    To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
 
-    - To install `kn` by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
+    ```bash
+    brew install knative/client/kn
+    ```
+
+    ??? bug "Having issues upgrading `kn` using Homebrew?"
+
+    If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the following commands:
 
         ```bash
+        brew uninstall kn
+        brew untap knative/client --force
         brew install knative/client/kn
         ```
-
-        ??? bug "Having issues upgrading `kn` using Homebrew?"
-
-            If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
-
-            ```bash
-            brew uninstall kn
-            brew untap knative/client --force
-            brew install knative/client/kn
-            ```
 
 === "Using a binary"
 
@@ -53,34 +51,32 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
     1. Check out the `kn` client repository:
 
-          ```bash
-          git clone https://github.com/knative/client.git
-          cd client/
-          ```
+        ```bash
+        git clone https://github.com/knative/client.git
+        cd client/
+        ```
 
     1. Build an executable binary:
 
-          ```bash
-          hack/build.sh -f
-          ```
+        ```bash
+        hack/build.sh -f
+        ```
 
     1. Move `kn` into your system path, and verify that `kn` commands are working properly. For example:
 
-          ```bash
-          kn version
-          ```
+        ```bash
+        kn version
+        ```
 
 === "Using a container image"
 
-    Links to images are available here:
+    1. Download an image for the [latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}.
 
-    - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}
+    1. Run `kn` from a container image. For example:
 
-    You can run `kn` from a container image. For example:
+        ```bash
+        docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
+        ```
 
-    ```bash
-    docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
-    ```
-
-    !!! note
-        Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
+        !!! note
+            Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
