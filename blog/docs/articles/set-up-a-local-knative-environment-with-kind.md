@@ -8,6 +8,10 @@ folder with media files: 'N/A'
 labels: Articles
 ---
 
+!!! warning
+
+    The [quickstart plugin](https://knative.dev/docs/getting-started/quickstart-install/) is now the recommended way to set up a local Knative environment for development purposes.
+
 Knative builds on Kubernetes to abstract away complexity for developers, and enables them to focus on delivering value to their business. The complex (and sometimes boring) parts of building apps to run on Kubernetes are managed by Knative. In this post, we will focus on setting up a lightweight environment to help you to develop modern apps faster using Knative.
 
 ## Step 1: Setting up your Kubernetes deployment using KinD
