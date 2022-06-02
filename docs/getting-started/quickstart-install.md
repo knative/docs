@@ -101,19 +101,19 @@ The `quickstart` plugin completes the following functions:
         !!! note
             The minikube cluster is created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a different value not lower than 3&nbsp;GB by running the command `minikube config set memory 3078` before this command.
 
-    1. The output of the previous command asked you to run minikube tunnel.
-       Run the following command to start the process in a secondary terminal window, then return to the primary window and press enter to continue:
+    1. The output of the previous command asked you to run minikube tunnel. Run the following command to start the process in a secondary terminal window, then return to the primary window and press enter to continue:
 
         ```bash
         minikube tunnel --profile knative
         ```
-        
-        The tunnel must continue to run in a terminal window any time you are using your Knative `quickstart` environment.
 
         The tunnel command is required because it allows your cluster to access Knative ingress service as a LoadBalancer from your host computer.
 
         !!! note
+            The tunnel must continue to run in a terminal window any time you are using your Knative `quickstart` environment.
+
             To terminate the tunnel process and clean up network routes, enter `Ctrl-C`.
+
             For more information about the `minikube tunnel` command, see the [minikube documentation](https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel).
 
     1. After the plugin is finished, verify you have a cluster called `knative`:
