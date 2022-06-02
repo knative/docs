@@ -65,8 +65,8 @@ Before upgrading, [check your Knative version](check-install-version.md).
 For a cluster running version 1.1 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to version 1.2:
 
 ```bash
-kubectl apply -f https://github.com/knative/serving/releases/download/v1.2.0/serving-core.yaml \
--f https://github.com/knative/eventing/releases/download/v1.2.0/eventing.yaml \
+kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.2.0/serving-core.yaml \
+-f https://github.com/knative/eventing/releases/download/knative-v1.2.0/eventing.yaml \
 ```
 
 ### Run post-install tools after the upgrade
