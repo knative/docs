@@ -1,10 +1,12 @@
+# Install Knative
+
+To get started, install the Knative CLI and the `quickstart` plugin.
+
 # Install the Knative CLI
 
 --8<-- "install-kn.md"
 
 # Install the Knative quickstart plugin
-
-To get started, install the Knative `quickstart` plugin:
 
 === "Using Homebrew"
 

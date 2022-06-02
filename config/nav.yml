@@ -8,9 +8,9 @@ nav:
 ###############################################################################
     # Getting started
 ###############################################################################
-    - Tutorial:
-        - Tutorial introduction: getting-started/README.md
-        - Install Knative using quickstart: getting-started/quickstart-install.md
+    - Quickstart:
+        - About this Quickstart: getting-started/README.md
+        - Install Knative: getting-started/quickstart-install.md
         - Using Knative Serving:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
@@ -138,7 +138,6 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
-      - Eventing getting started: eventing/getting-started.md # do we need this as well as the getting started guide?
       # Eventing - developer docs
       - Developer topics:
         - Event sources:

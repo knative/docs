@@ -1,6 +1,6 @@
-# Welcome to the Knative Quickstart tutorial
+# About this Quickstart tutorial
 
-Following this Quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.
+Get started with a simplified, local Knative deployment by using the Knative `quickstart` plugin and tutorial documentation.
 
 You can use this simple Knative deployment to try out commonly used features of **Knative Serving** and **Knative Eventing**.
 
