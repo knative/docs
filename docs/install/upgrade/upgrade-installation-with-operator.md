@@ -6,7 +6,7 @@ If you installed using YAML, see [Upgrading with kubectl](upgrade-installation.m
 The attribute `spec.version` is the only field you need to change in the
 Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"0.23"` to upgrade to the 0.23 release, you do not need to specify the exact `patch` number.
 
-The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 0.23, it bundles and supports the installation of Knative versions 0.20, 0.21, 0.22 and 0.23.
+The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 1.5, it bundles and supports the installation of Knative versions 1.4, 1.3, 1.2 and 1.1.
 
 !!! note
     In the following examples, Knative Serving custom resources are installed in the `knative-serving` namespace, and  Knative Eventing custom resources are installed in the `knative-eventing` namespace.
@@ -46,7 +46,7 @@ You can confirm that your Knative components have upgraded successfully, by view
     Enter the following command to view information about pods in the `knative-serving` namespace:
 
     ```bash
-    kubectl get pods --namespace knative-serving
+    kubectl get pods -n knative-serving
     ```
 
     The command returns an output similar to the following:
@@ -67,7 +67,7 @@ You can confirm that your Knative components have upgraded successfully, by view
     Enter the following command to view information about pods in the `knative-eventing` namespace:
 
     ```bash
-    kubectl get pods --namespace knative-eventing
+    kubectl get pods -n knative-eventing
     ```
 
     The command returns an output similar to the following:
@@ -93,27 +93,27 @@ You can verify the status of a Knative component by checking that the custom res
 === "Knative Serving"
 
     ```bash
-    kubectl get KnativeServing knative-serving --namespace knative-serving
+    kubectl get KnativeServing knative-serving -n knative-serving
     ```
 
     This command returns an output similar to the following:
 
     ```{ .bash .no-copy }
     NAME              VERSION         READY   REASON
-    knative-serving   0.20.0          True
+    knative-serving   1.1.0          True
     ```
 
 === "Knative Eventing"
 
     ```bash
-    kubectl get KnativeEventing knative-eventing --namespace knative-eventing
+    kubectl get KnativeEventing knative-eventing -n knative-eventing
     ```
 
     This command returns an output similar to the following:
 
     ```{ .bash .no-copy }
     NAME               VERSION        READY   REASON
-    knative-eventing   0.20.0         True
+    knative-eventing   1.1.0         True
     ```
     <!--- END snippet-->
 

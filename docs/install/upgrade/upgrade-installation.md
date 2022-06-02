@@ -31,11 +31,11 @@ namespace. For example, if you are upgrading Knative Serving and Eventing, enter
 each namespace:
 
 ```bash
-kubectl get pods --namespace knative-serving
+kubectl get pods -n knative-serving
 ```
 
 ```bash
-kubectl get pods --namespace knative-eventing
+kubectl get pods -n knative-eventing
 ```
 
 ### Upgrade plugins
@@ -45,12 +45,12 @@ you upgrade your Knative components.
 
 ### Run pre-install tools before upgrade
 
-In some upgrades there are some steps that must happen before the actual
-upgrade, and these are identified in the release notes.
+For some upgrades, there are steps that must be completed before the actual
+upgrade. These steps, where applicable, are identified in the release notes.
 
 ### Upgrade existing resources to the latest stored version
 
-Our custom resources are stored within Kubernetes at a particular version.
+Knative custom resources are stored within Kubernetes at a particular version.
 As we introduce newer and remove older supported versions, you must migrate the resources to the designated stored version. This ensures removing older versions
 will succeed when upgrading.
 
@@ -59,13 +59,14 @@ For the various subprojects there is a K8s job to help operators perform this mi
 ## Performing the upgrade
 
 To upgrade, apply the YAML files for the subsequent minor versions of all your installed Knative components and features, remembering to only upgrade by one minor version at a time.
+
 Before upgrading, [check your Knative version](check-install-version.md).
 
-For a cluster running version 0.22 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to v0.23.0:
+For a cluster running version 1.1 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to version 1.1:
 
 ```bash
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.23.0/serving-core.yaml \
--f https://github.com/knative/eventing/releases/download/v0.23.0/eventing.yaml \
+kubectl apply -f https://github.com/knative/serving/releases/download/v1.2.0/serving-core.yaml \
+-f https://github.com/knative/eventing/releases/download/v1.2.0/eventing.yaml \
 ```
 
 ### Run post-install tools after the upgrade
@@ -80,11 +81,11 @@ All pods will restart during the upgrade and their age will reset.
 If you upgraded Knative Serving and Eventing, enter the following commands to get information about the pods for each namespace:
 
 ```bash
-kubectl get pods --namespace knative-serving
+kubectl get pods -n knative-serving
 ```
 
 ```bash
-kubectl get pods --namespace knative-eventing
+kubectl get pods -n knative-eventing
 ```
 
 These commands return something similar to:
