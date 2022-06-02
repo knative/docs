@@ -62,7 +62,7 @@ To upgrade, apply the YAML files for the subsequent minor versions of all your i
 
 Before upgrading, [check your Knative version](check-install-version.md).
 
-For a cluster running version 1.1 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to version 1.1:
+For a cluster running version 1.1 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to version 1.2:
 
 ```bash
 kubectl apply -f https://github.com/knative/serving/releases/download/v1.2.0/serving-core.yaml \
