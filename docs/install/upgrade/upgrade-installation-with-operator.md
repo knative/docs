@@ -119,7 +119,7 @@ You can verify the status of a Knative component by checking that the custom res
 
 ## Rollback to an earlier version
 
-If the upgrade fails, you can rollback to restore your Knative to the previous version. For example, if something goes wrong with an upgrade to 0.23, and your previous version is 0.22, you can apply the following custom resources to restore Knative Serving and Knative Eventing to version 0.22.
+If the upgrade fails, you can rollback to restore your Knative to the previous version. For example, if something goes wrong with an upgrade to 1.2, and your previous version is 1.1, you can apply the following custom resources to restore Knative Serving and Knative Eventing to version 1.1.
 
 === "Knative Serving"
 
