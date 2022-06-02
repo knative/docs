@@ -4,7 +4,7 @@ This topic describes how to upgrade Knative if you installed using the Operator.
 If you installed using YAML, see [Upgrading with kubectl](upgrade-installation.md).
 
 The attribute `spec.version` is the only field you need to change in the
-Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"0.23"` to upgrade to the 0.23 release, you do not need to specify the exact `patch` number.
+Serving or Eventing custom resource to perform an upgrade. You do not need to specify the version for the `patch` number, because the Knative Operator matches the latest available `patch` number, as long as you specify `major.minor` for the version. For example, you only need to specify `"1.1"` to upgrade to the 1.1 release, you do not need to specify the exact `patch` number.
 
 The Knative Operator supports up to the last three major releases. For example, if the current version of the Operator is 1.5, it bundles and supports the installation of Knative versions 1.4, 1.3, 1.2 and 1.1.
 
