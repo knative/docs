@@ -24,8 +24,3 @@ you to run a local Kubernetes cluster with Docker container nodes.
 - The Knative CLI (`kn`). For instructions, see the next section.
 
 - You need to have a minimum of 3&nbsp;CPUs and 3&nbsp;GB of RAM available for the cluster to be created.
-
-!!! tip
-    Hit ++"."++ (period) on your keyboard to move forward in the tutorial. Use ++","++ (comma) to go back at any time.
-
-<!--TODO: This tip only applies for users using a keyboard, i.e. not great for responsive design, since it doesn't work for users on mobile devices. Should we remove it or have it only appear on certain devices? Is responsive design really possible using mkdocs?-->
