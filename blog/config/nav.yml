@@ -34,6 +34,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/using-sideloaded-images-with-kind.md
           - articles/google-summer-of-code-2022.md
           - articles/workflow-as-function-flow.md
           - articles/highlighting-value-knative-c-suite.md
