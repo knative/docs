@@ -595,6 +595,29 @@ spec:
               - ssd
 ```
 
+### Override the environment variables
+
+The KnativeServing resource is able to override or add the environment variables for the containers in the Knative Serving
+deployment resources. For example, if you would like to change the value of environment variable `METRICS_DOMAIN` in the
+container `controller` into "knative.dev/my-repo" for the deployment `controller`, you need to change your KnativeServing
+CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  deployments:
+  - name: controller
+    env:
+    - container: controller
+      envVars:
+      - name: METRICS_DOMAIN
+        value: "knative.dev/my-repo"
+```
+
 ## Override system services
 
 If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.

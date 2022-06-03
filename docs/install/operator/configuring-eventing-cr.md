@@ -481,6 +481,29 @@ spec:
               - ssd
 ```
 
+### Override the environment variables
+
+The KnativeEventing resource is able to override or add the environment variables for the containers in the Knative Eventing
+deployment resources. For example, if you would like to change the value of environment variable `METRICS_DOMAIN` in the
+container `eventing-controller` into "knative.dev/my-repo" for the deployment `eventing-controller`, you need to change
+your KnativeEventing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  deployments:
+  - name: eventing-controller
+    env:
+    - container: eventing-controller
+      envVars:
+      - name: METRICS_DOMAIN
+        value: "knative.dev/my-repo"
+```
+
 ## Override system services
 
 If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.
