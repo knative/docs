@@ -13,8 +13,7 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS and RELEASE_BRANCHES below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.4" "1.3" "1.2" "1.1") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
-RELEASE_BRANCHES=("knative-v1.4.0" "knative-v1.3.0" "knative-v1.2.0" "v1.1.0") # Release version for serving/eventing yaml files and api references.
+VERSIONS=("1.5" "1.4" "1.3" "1.2") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
 # 4) PR the result to main.
 # 5) Party.
 
@@ -41,7 +40,7 @@ else
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${GIT_SLUG} "$TEMP/docs-$latest"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
-  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${RELEASE_BRANCHES[0]//knative-} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
+  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION=${VERSIONS[0]} SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
   versionjson=""
@@ -53,7 +52,7 @@ else
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
     curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
     curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
-    pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${RELEASE_BRANCHES[i+1]//knative-} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
+    pushd "$TEMP/docs-$version"; KNATIVE_VERSION=${VERSIONS[i+1]} SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
 
   done
 
