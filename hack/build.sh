@@ -11,7 +11,7 @@ set -x
 
 # Releasing a new version:
 # 1) Make a release-NN branch as normal.
-# 2) Update VERSIONS and RELEASE_BRANCHES below (on main) to include the new version, and remove the oldest
+# 2) Update VERSIONS below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
 VERSIONS=("1.5" "1.4" "1.3" "1.2") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
 # 4) PR the result to main.
