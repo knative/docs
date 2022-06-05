@@ -49,7 +49,7 @@ kind load docker-image --name knative dev.local/helloworld-go
 docker exec -it knative-control-plane crictl images | grep helloworld
   ```
 
-# Create the Knative Service
+## Create the Knative Service
 
 1. Create the service with an image pull policy of `Never` or `IfNotPresent`
 
