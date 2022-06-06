@@ -118,7 +118,7 @@ kn service update example-service --traffic green=80 --traffic blue=20
 It is also possible to add tags to Revisions and then split traffic according to the tags you have set:
 
 ```bash
-kn service update example --tag green=revision-0001 --tag blue=@latest
+kn service update example --tag revision-0001=green --tag @latest=blue
 ```
 
 The `@latest` tag means that `blue` resolves to the latest Revision of the Service. The following example sends 80% of traffic to the latest Revision and 20% to a Revision named `v1`.
