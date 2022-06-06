@@ -116,7 +116,7 @@ For special cases users are recommended to reach out to Knative community.
   -  The Source's Receive Adapter have deployment resources requests and limits ([#771](https://github.com/knative-sandbox/eventing-rabbitmq/issues/771))
 -  The Broker's ingress uses the Binary representation of the CloudEvents
   -  The Broker's Dispatcher uses the protocol binding to get a CloudEvent from a RabbitMQ Message
-  -  Added performance tests for the source using the new Ingress CE Binary represenation, that makes the Ingress plugable to the Source ([#751](https://github.com/knative-sandbox/eventing-rabbitmq/issues/751))
+  -  Added performance tests for the source using the new Ingress CE Binary representation, that makes the Ingress plugable to the Source ([#751](https://github.com/knative-sandbox/eventing-rabbitmq/issues/751))
 -  Script to automate the generation of the performance results per release
   - Complete performance results graph tests for the RabbitMQ's Broker and Source ([#767](https://github.com/knative-sandbox/eventing-rabbitmq/issues/767))
 
