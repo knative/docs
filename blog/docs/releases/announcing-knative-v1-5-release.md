@@ -3,7 +3,7 @@ title: "1.5 release"
 linkTitle: "1.5 release"
 Author: "[dprotaso](https://twitter.com/lintinmybelly)"
 Author handle: https://github.com/dprotaso
-date: 06-06-2022
+date: 2022-06-06
 description: "Knative 1.5  release announcement"
 type: "blog"
 ---
@@ -22,7 +22,7 @@ Follow the instructions in [Installing Knative](https://knative.dev/docs/install
 - [Eventing Extensions](#eventing-extensions)
     - [Apache Kafka Broker](#apache-kafka-broker)
     - [RabbitMQ Broker and Source](#rabbitmq-broker-and-source)
-- `kn` [CLI](#client)
+- [`kn` CLI](#client)
 - [Knative Operator](#operator)
 - [Thank you contributors](#thank-you-contributors)
 
