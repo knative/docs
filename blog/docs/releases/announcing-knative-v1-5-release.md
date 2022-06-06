@@ -1,10 +1,10 @@
 ---
-title: "1.5 release"
-linkTitle: "1.5 release"
+title: "v1.5 release"
+linkTitle: "v1.5 release"
 Author: "[dprotaso](https://twitter.com/lintinmybelly)"
 Author handle: https://github.com/dprotaso
 date: 2022-06-06
-description: "Knative 1.5  release announcement"
+description: "Knative 1.5 release announcement"
 type: "blog"
 ---
 
