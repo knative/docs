@@ -4,16 +4,6 @@
 aliases:
   api-core-wg-leads:
   - dprotaso
-  autoscaling-reviewers:
-  - nader-ziada
-  - psschwei
-  - skonto
-  - taragu
-  autoscaling-wg-leads:
-  - julz
-  autoscaling-writers:
-  - julz
-  - yanweiguo
   client-reviewers:
   - itsmurugappan
   client-wg-leads:
@@ -50,7 +40,6 @@ aliases:
   - tommyreddad
   eventing-triage:
   - akashrv
-  - antoineco
   - lberk
   eventing-wg-leads:
   - lionelvillard
@@ -58,7 +47,6 @@ aliases:
   eventing-writers:
   - akashrv
   - aliok
-  - antoineco
   - lberk
   - lionelvillard
   - matzew
@@ -68,16 +56,15 @@ aliases:
   - csantanapr
   - dprotaso
   - evankanderson
-  - ikvmw
+  - gab-satchi
   - itsmurugappan
-  - julz
   - knative-automation
   - knative-prow-releaser-robot
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
   - lance
-  - nader-ziada
+  - n3wscott
   - pmorie
   - rhuss
   - smoser-ibm
@@ -85,8 +72,8 @@ aliases:
   - thisisnotapril
   - vaikas
   knative-release-leads:
-  - ikvmw
-  - nader-ziada
+  - dprotaso
+  - gab-satchi
   knative-robots:
   - knative-automation
   - knative-prow-releaser-robot
@@ -105,11 +92,9 @@ aliases:
   - vagababov
   - yanweiguo
   networking-wg-leads:
-  - ZhiminXiang
   - nak3
   networking-writers:
   - JRBANCEL
-  - ZhiminXiang
   - nak3
   - vagababov
   operations-reviewers:
@@ -185,9 +170,12 @@ aliases:
   - psschwei
   - skonto
   - whaught
+  serving-wg-leads:
+  - dprotaso
   serving-writers:
   - dprotaso
   - julz
+  - psschwei
   - tcnghia
   - vagababov
   steering-committee:
@@ -200,7 +188,7 @@ aliases:
   technical-oversight-committee:
   - dprotaso
   - evankanderson
-  - julz
+  - n3wscott
   - rhuss
   trademark-committee:
   - evankanderson

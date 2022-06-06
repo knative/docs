@@ -41,18 +41,17 @@ We keep the last 4 releases available per [our support window](https://github.co
 
 To generate the new docs version:
 
-1. In `hack/build.sh` on the main branch, update `VERSIONS` and `RELEASE_BRANCHES`
+1. In `hack/build.sh` on the main branch, update `VERSIONS`
 to include the new version, and remove the oldest. Order matters, most recent first.
 
     For example:
 
     ```
-    VERSIONS=("1.2" "1.1" "1.0" "0.26")
-    RELEASE_BRANCHES=("knative-v1.2.0" "knative-v1.1.0" "knative-v1.0.0" "v0.26.0")
+    VERSIONS=("1.5" "1.4" "1.3" "1.2")
     ```
 
 1. PR the result to main.
 
 ## How GitHub and Netlify are hooked up
 
-TODO: add information about how the docs are built and served using Netlify
+Netlify build is configure via [netlify.toml](../netlify.toml)

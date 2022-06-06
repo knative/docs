@@ -48,8 +48,8 @@ nav:
           - articles/knative-v0-3-autoscaling-a-love-story.md
           - articles/ko-fast-kubernetes-microservice-development-in-go.md
           - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
-          - articles/set-up-a-local-knative-environment-with-kind.md
       - Steering Committee:
+          - steering/toc-2022-election-announcement.md
           - steering/2022-04-14-annual-report-2021.md
           - steering/knative-and-endusers.md
           - steering/cncf.md

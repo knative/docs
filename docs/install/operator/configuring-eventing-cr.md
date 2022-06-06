@@ -12,8 +12,8 @@ You can configure Knative Eventing with the following options:
 - [Download images from different repositories without secrets](#download-images-from-different-repositories-without-secrets)
 - [Download images with secrets](#download-images-with-secrets)
 - [Configuring the default broker class](#configuring-the-default-broker-class)
-- [System resource settings](#system-resource-settings)
 - [Override system deployments](#override-system-deployments)
+- [Override system services](#override-system-services)
 
 ## Installing a specific version of Eventing
 
@@ -351,45 +351,6 @@ spec:
   defaultBrokerClass: MTChannelBasedBroker
 ```
 
-## System resource settings
-
-The KnativeEventing CR allows you to configure system resources for Knative system containers.
-
-Requests and limits can be configured for the following containers:
-
-- `eventing-controller`
-- `eventing-webhook`
-- `imc-controller`
-- `imc-dispatcher`
-- `mt-broker-ingress`
-- `mt-broker-ingress`
-- `mt-broker-controller`
-
-To override resource settings for a specific container, you must create an entry in the `spec.resources` list with the container name and the [Kubernetes resource settings](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
-
-!!! info
-    If multiple deployments share the same container name, the configuration in `spec.resources` for that certain container will apply to all the deployments.
-    Visit [Override System Resources based on the deployment](#override-the-resources) to specify the resources for a container within a specific deployment.
-
-For example, the following KnativeEventing CR configures the `eventing-webhook` container to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU, 250MB RAM, and 4GB of local storage:
-
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  resources:
-  - container: eventing-webhook
-    requests:
-      cpu: 300m
-      memory: 100Mi
-    limits:
-      cpu: 1000m
-      memory: 250Mi
-```
-
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in the CR.
@@ -518,4 +479,54 @@ spec:
               operator: In
               values:
               - ssd
+```
+
+### Override the environment variables
+
+The KnativeEventing resource is able to override or add the environment variables for the containers in the Knative Eventing
+deployment resources. For example, if you would like to change the value of environment variable `METRICS_DOMAIN` in the
+container `eventing-controller` into "knative.dev/my-repo" for the deployment `eventing-controller`, you need to change
+your KnativeEventing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  deployments:
+  - name: eventing-controller
+    env:
+    - container: eventing-controller
+      envVars:
+      - name: METRICS_DOMAIN
+        value: "knative.dev/my-repo"
+```
+
+## Override system services
+
+If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.
+Currently `labels`, `annotations` and `selector` are supported.
+
+### Override labels and annotations and selector
+
+The following KnativeEventing resource overrides the `eventing-webhook` service to have the label `mylabel: foo`, the annotation `myannotations: bar`,
+the selector `myselector: bar`.
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  services:
+  - name: eventing-webhook
+    labels:
+      mylabel: foo
+    annotations:
+      myannotations: bar
+    selector:
+      myselector: bar
 ```

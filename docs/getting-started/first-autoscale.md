@@ -29,7 +29,7 @@ Now watch the pods and see how they scale to zero after traffic stops going to t
 kubectl get pod -l serving.knative.dev/service=hello -w
 ```
 
-!!! warning
+!!! note
     It may take up to 2 minutes for your Pods to scale down. Pinging your service again will reset this timer.
 
 
