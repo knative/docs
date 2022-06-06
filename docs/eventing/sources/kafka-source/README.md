@@ -1,9 +1,5 @@
 # Apache Kafka Source
 
-Tutorial on how to build and deploy a `KafkaSource` event source.
-
-## Background
-
 The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
 <!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
@@ -13,13 +9,13 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 1. Install the Kafka controller by entering the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
 1. Install the Kafka Source data plane by entering the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
     ```
 
 1. Verify that `kafka-controller` and `kafka-source-dispatcher` are running,
@@ -39,9 +35,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
 ## Create a Kafka topic
 
 !!! note
-    The create a Kafka topic section assumes you're using Strimzi to operate Apache Kafka,
-    however equivalent operations can be replicated using the Apache Kafka CLI or any
-    other tool.
+    The create a Kafka topic section assumes you're using Strimzi to operate Apache Kafka, however equivalent operations can be replicated using the Apache Kafka CLI or any other tool.
 
 If you are using Strimzi:
 
@@ -83,8 +77,8 @@ If you are using Strimzi:
 
     Example output:
     ```{ .bash .no-copy }
-    NAME                 AGE
-    knative-demo-topic   16s
+    NAME                 CLUSTER      PARTITIONS   REPLICATION FACTOR
+    knative-demo-topic   my-cluster   3            1
     ```
 
 ## Create a Service
