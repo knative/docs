@@ -417,7 +417,7 @@ If you configure `replicas: 6`, which is more than `maxReplicas`, the operator t
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
-Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+Currently `resources`, `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 
 ### Override the resources
 
