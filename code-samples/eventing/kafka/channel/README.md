@@ -89,12 +89,11 @@ default Channel configuration for Knative Eventing.
     ```bash
     ...
     __consumer_offsets
-    knative-messaging-kafka.default.my-kafka-channel
     knative-messaging-kafka.default.testchannel-one
     ...
     ```
 
-    The Kafka Topic that is created by the Channel contains the name of the namespace, `default` in this example, followed by the name of the Channel. In the consolidated Channel implementation, it is also prefixed with `knative-messaging-kafka` to indicate that it is a Kafka Channel from Knative.
+    The Kafka Topic that is created by the Channel contains the name of the namespace, `default` in this example, followed by the name of the Channel.
 
 **Note:** The topic of a Kafka Channel is an implementation detail and records from it should not be consumed from different applications.
 
@@ -234,131 +233,18 @@ The following example uses a ApiServerSource to publish events to an existing Br
     kubectl logs --selector='serving.knative.dev/service=broker-kafka-display' -c user-container
     ```
 
-## Authentication against an Apache Kafka cluster
-
-In production environments it is common that the Apache Kafka cluster is
-secured using [TLS](http://kafka.apache.org/documentation/#security_ssl)
-or [SASL](http://kafka.apache.org/documentation/#security_sasl). This section
-shows how to configure a Kafka Channel to work against a protected Apache
-Kafka cluster, with the two supported TLS and SASL authentication methods.
-
-**Note:** Kafka Channels require certificates to be in `.pem` format. If your files are in a different format, you must convert them to `.pem`.
-
-### TLS authentication
-
-1. Edit the `config-kafka` ConfigMap:
-
-    ```bash
-    kubectl -n knative-eventing edit configmap config-kafka
-    ```
-
-1. Set the `TLS.Enable` field to `true`:
-
-    ```yaml
-    ...
-    data:
-      sarama: |
-        config: |
-          Net:
-            TLS:
-              Enable: true
-    ...
-    ```
-
-1. Optional: If you are using a custom CA certificate, add your certificate data to the ConfigMap in the `data.sarama.config.Net.TLS.Config.RootPEMs` field:
-
-    ```yaml
-    ...
-    data:
-      sarama: |
-        config: |
-          Net:
-            TLS:
-              Config:
-                RootPEMs: # Array of Root Certificate PEM Files (Use '|-' Syntax To Preserve Linefeeds & Avoiding Terminating \n)
-                - |-
-                  -----BEGIN CERTIFICATE-----
-                  MIIGDzCCA/egAwIBAgIUWq6j7u/25wPQiNMPZqL6Vy0rkvQwDQYJKoZIhvcNAQEL
-                  ...
-                  771uezZAFqd1GLLL8ZYRmCsAMg==
-                  -----END CERTIFICATE-----
-    ...
-    ```
-
-### SASL authentication
-
-To use SASL authentication, you will need the following information:
-
-* A username and password.
-* The type of SASL mechanism you wish to use. For example; `PLAIN`, `SCRAM-SHA-256` or `SCRAM-SHA-512`.
-
-**Note:** It is recommended to also enable TLS as described in the previous section.
-
-1. Edit the `config-kafka` ConfigMap:
-
-    ```bash
-    kubectl -n knative-eventing edit configmap config-kafka
-    ```
-
-1. Set the `SASL.Enable` field to `true`:
-
-    ```yaml
-    ...
-    data:
-      sarama: |
-        config: |
-          Net:
-            SASL:
-              Enable: true
-    ...
-    ```
-
-1. Create a secret that uses the username, password, and SASL mechanism:
-
-    ```bash
-    kubectl create secret --namespace <namespace> generic <kafka-auth-secret> \
-        --from-literal=password="SecretPassword" \
-        --from-literal=saslType="PLAIN" \
-        --from-literal=username="my-sasl-user"
-    ```
-
-### All authentication methods
-
-1. If you have created a secret for your desired authentication method by using the previous steps, reference the secret and the namespace of the secret in the `config-kafka` ConfigMap:
-
-    ```yaml
-    ...
-    data:
-       eventing-kafka: |
-        kafka:
-         authSecretName: <kafka-auth-secret>
-         authSecretNamespace: <namespace>
-    ...
-    ```
-
-**Note:** The default secret name and namespace are `kafka-cluster` and `knative-eventing` respectively. If you reference a secret in a different namespace, make sure you configure your roles and bindings so that the `knative-eventing` Pods can access it.
-
 ## Channel configuration
 
-The `config-kafka` ConfigMap allows for a variety of Channel options such as:
+KafkaChannel provides various configuration options, such as:
 
-- CPU and Memory requests and limits for the dispatcher (and receiver for
-  the distributed Channel type) deployments created by the controller
+- Authentication
+
+- Encryption
 
 - Kafka Topic default values (number of partitions, replication factor, and
   retention time)
 
-- Maximum idle connections/connections per host for Knative cloudevents
-
 - The brokers string for your Kafka connection
 
-- The name and namespace of your TLS/SASL authentication secret
-
-- The Kafka admin type (distributed channel only)
-
-- Nearly all the settings exposed in a [Sarama Config Struct](https://github.com/Shopify/sarama/blob/master/config.go)
-
-- Sarama debugging assistance (via sarama.enableLogging)
-
-For detailed information (particularly for the distributed channel), see the
-[Distributed Channel README](https://github.com/knative-sandbox/eventing-kafka/blob/main/config/channel/distributed/README.md)
+For detailed information on configuration options, see the
+[KafkaChannel README](https://github.com/knative-sandbox/eventing-kafka-broker/blob/main/docs/channel/README.md).
