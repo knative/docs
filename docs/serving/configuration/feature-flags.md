@@ -308,7 +308,7 @@ metadata:
 ### Kubernetes runtime class
 
 * **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-runtimeclass`
+* **ConfigMap key:** `kubernetes.podspec-runtimeclassname`
 
 This flag controls whether the [runtime class](https://kubernetes.io/docs/concepts/containers/runtime-class/) can be used.
 
