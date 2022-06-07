@@ -43,7 +43,7 @@ The revision timeout value determines the default number of seconds to use for t
 {% endraw %}
 
 * **Global key:** `revision-timeout-seconds`
-* **Per-revision annotation key:** `serving.knative.dev/revision-timeout-seconds`
+* **Per-revision annotation key:** `timeout`
 * **Possible values:** integer
 * **Default:** `"300"` (5 minutes)
 
@@ -81,7 +81,7 @@ If this value is increased, the activator's `terminationGraceTimeSeconds` should
 {% endraw %}
 
 * **Global key:** `max-revision-timeout-seconds`
-* **Per-revision annotation key:** `serving.knative.dev/max-revision-timeout-seconds`
+* **Per-revision annotation key:** `timeout`
 * **Possible values:** integer
 * **Default:** `"600"` (10 minutes)
 
@@ -117,7 +117,7 @@ The `revision-cpu-request` value determines the CPU allocation assigned to revis
 {% endraw %}
 
 * **Global key:** `revision-cpu-request`
-* **Per-revision annotation key:** `serving.knative.dev/revision-cpu-request`
+* **Per-revision annotation key:** `cpu`
 * **Possible values:** integer
 * **Default:** `"400m"` (0.4 of a CPU, or 400 milli-CPU)
 
@@ -143,12 +143,12 @@ The `revision-cpu-request` value determines the CPU allocation assigned to revis
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-cpu-request: "400m"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
+              resources:
+                requests:
+                  cpu: "400m"
     ```
 
 ### Revision memory request
@@ -158,7 +158,7 @@ to revisions by default. If this value is omitted, the system default is used. T
 {% endraw %}
 
 * **Global key:** `revision-memory-request`
-* **Per-revision annotation key:** `serving.knative.dev/revision-memory-request`
+* **Per-revision annotation key:** `memory`
 * **Possible values:** integer
 * **Default:** `"100M"` (100 megabytes of memory)
 
@@ -184,12 +184,12 @@ to revisions by default. If this value is omitted, the system default is used. T
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-memory-request: "400m"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
+              resources:
+                requests:
+                  memory: "100M"
     ```
 
 ### Revision Ephemeral Storage Request
@@ -199,7 +199,7 @@ allocation assigned to revisions by default. If this value is omitted, the syste
 {% endraw %}
 
 * **Global key:** `revision-ephemeral-storage-request`
-* **Per-revision annotation key:** `serving.knative.dev/revision-ephemeral-storage-request`
+* **Per-revision annotation key:** `ephemeral-storage`
 * **Possible values:** integer
 * **Default:** `"500M"` (500 megabytes of storage)
 
@@ -225,12 +225,12 @@ allocation assigned to revisions by default. If this value is omitted, the syste
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-ephemeral-storage-request: "500M"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
+              resources:
+                requests:
+                  ephemeral-storage: "500M"
     ```
 
 ### Revision CPU limit
@@ -239,7 +239,7 @@ The `revision-cpu-limit` value determines the default CPU allocation limit for r
 {% endraw %}
 
 * **Global key:** `revision-cpu-limit`
-* **Per-revision annotation key:** `serving.knative.dev/revision-cpu-limit`
+* **Per-revision annotation key:** `cpu`
 * **Possible values:** integer
 * **Default:** `"1000m"` (1 CPU, or 1000 milli-CPU)
 
@@ -265,12 +265,12 @@ The `revision-cpu-limit` value determines the default CPU allocation limit for r
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-cpu-limit: "1000m"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
+              resources:
+                requests:
+                  cpu: "1000m"
     ```
 
 ### Revision memory limit
@@ -279,7 +279,7 @@ The `revision-memory-limit` value determines the default memory allocation limit
 {% endraw %}
 
 * **Global key:** `revision-memory-limit`
-* **Per-revision annotation key:** `serving.knative.dev/revision-memory-limit`
+* **Per-revision annotation key:** `memory`
 * **Possible values:** integer
 * **Default:** `"200M"` (200 megabytes of memory)
 
@@ -305,12 +305,12 @@ The `revision-memory-limit` value determines the default memory allocation limit
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-memory-limit: "200M"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
+              resources:
+                requests:
+                  memory: "200M"
     ```
 
 ### Revision Ephemeral Storage Limit
@@ -319,7 +319,7 @@ The `revision-ephemeral-storage-limit` value determines the default ephemeral st
 {% endraw %}
 
 * **Global key:** `revision-ephemeral-storage-limit`
-* **Per-revision annotation key:** `serving.knative.dev/revision-ephemeral-storage-limit`
+* **Per-revision annotation key:** `ephemeral-storage`
 * **Possible values:** integer
 * **Default:** `"750M"` (750 megabytes of storage)
 
@@ -345,12 +345,12 @@ The `revision-ephemeral-storage-limit` value determines the default ephemeral st
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/revision-ephemeral-storage-limit: "750M"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
+              resources:
+                requests:
+                  ephemeral-storage: "750M"
     ```
 
 ### Container name template
@@ -360,7 +360,7 @@ container name if no container name is specified. This field supports Go templat
 {% endraw %}
 
 * **Global key:** `container-name-template`
-* **Per-revision annotation key:** `serving.knative.dev/container-name-template`
+* **Per-revision annotation key:** `name`
 * **Possible values:** string
 * **Default:** `"user-container"`
 
@@ -386,12 +386,10 @@ container name if no container name is specified. This field supports Go templat
       namespace: default
     spec:
       template:
-        metadata:
-          annotations:
-            serving.knative.dev/container-name-template: "user-container"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - name: user-container
+              image: gcr.io/knative-samples/helloworld-go
     ```
 
 ### Container concurrency
