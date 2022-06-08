@@ -68,9 +68,11 @@ The revision timeout value determines the default number of seconds to use for t
       name: helloworld-go
       namespace: default
       spec:
-        timeout: 300
-        containers:
-          - image: gcr.io/knative-samples/helloworld-go
+        template:
+          spec:
+            timeout: 300
+            containers:
+            - image: gcr.io/knative-samples/helloworld-go
     ```
 
 ### Max revision timeout seconds
@@ -81,7 +83,7 @@ If this value is increased, the activator's `terminationGraceTimeSeconds` should
 {% endraw %}
 
 * **Global key:** `max-revision-timeout-seconds`
-* **Per-revision annotation key:** `timeout`
+* **Per-revision annotation key:** N/A
 * **Possible values:** integer
 * **Default:** `"600"` (10 minutes)
 
@@ -96,19 +98,6 @@ If this value is increased, the activator's `terminationGraceTimeSeconds` should
       namespace:  knative-serving
     data:
       max-revision-timeout-seconds: "600"
-    ```
-
-=== "Per Revision"
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: helloworld-go
-      namespace: default
-      spec:
-        timeout: 600
-        containers:
-          - image: gcr.io/knative-samples/helloworld-go
     ```
 
 ### Revision CPU request
