@@ -138,7 +138,6 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
-      - Eventing getting started: eventing/getting-started.md # do we need this as well as the getting started guide?
       # Eventing - developer docs
       - Developer topics:
         - Event sources:

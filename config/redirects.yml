@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      eventing/getting-started.md: getting-started/getting-started-eventing.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
       admin/collecting-metrics/eventing-metrics/metrics.md: eventing/observability/metrics/eventing-metrics.md
