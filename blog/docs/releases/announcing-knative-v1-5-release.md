@@ -8,7 +8,6 @@ description: "Knative 1.5 release announcement"
 type: "blog"
 ---
 
-
 ## Announcing Knative 1.5 Release
 
 A new version of Knative is now available across multiple components.
@@ -16,7 +15,6 @@ A new version of Knative is now available across multiple components.
 Follow the instructions in [Installing Knative](https://knative.dev/docs/install/) to install the components you require.
 
 ## Table of Contents
-- [Highlights](#highlights)
 - [Serving](#serving)
 - [Eventing](#eventing)
 - [Eventing Extensions](#eventing-extensions)
@@ -202,4 +200,3 @@ Knative is an open source project that anyone in the [community](https://knative
 - Knative on [StackOverflow](https://stackoverflow.com/questions/tagged/knative)
 - Knative [Slack](https://slack.knative.dev)
 - Knative on [YouTube](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)
-
