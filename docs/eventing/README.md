@@ -28,6 +28,18 @@ Knative Eventing supports the following use cases:
 
 <!--TODO: What about channels?-->
 
+## Eventing examples
+
+**Knative Eventing acts as the "glue" between the disparate parts of your architecture** and allows you to easily communicate between those parts in a fault-tolerant way. Some examples include:
+
+:material-file-document: [Creating and responding to Kubernetes API events](../eventing/sources/apiserversource/README.md){target=blank}
+
+--8<-- "YouTube_icon.svg"
+[Creating an image processing pipeline](https://www.youtube.com/watch?v=DrmOpjAunlQ){target=blank}
+
+--8<-- "YouTube_icon.svg"
+[Facilitating AI workloads at the edge in large-scale, drone-powered sustainable agriculture projects](https://www.youtube.com/watch?v=lVfJ5WEQ5_s){target=blank}
+
 ## Eventing components
 
 An event-driven architecture is based on the concept of decoupled relationships between event producers that create events, and event consumers, or [_sinks_](../eventing/sinks/README.md), that receive events. It builds on  delivery over HTTP by providing configuration and management of pluggable event-routing components.
