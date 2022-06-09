@@ -7,4 +7,4 @@ Event-driven applications are designed to detect events as they occur, and proce
 !!! tip
     To find out more about event-driven architecture and Knative Eventing, check out this CNCF Session about [event-driven architecture with Knative events](https://www.cncf.io/online-programs/event-driven-architecture-with-knative-events/){target=blank}
 
-After you install Knative Eventing, you can create, send, and verify events. This tutorial shows how you can use a basic workflow for managing events that uses **Event Sources**, **Brokers**, **Triggers**, and **Sinks**.
+After you install Knative Eventing, you can create, send, and verify events. This tutorial shows how you can use a basic workflow for managing events that uses [**Event Sources**](../eventing/sources/README.md#event-sources){target=_blank}, [**Brokers**](../eventing/broker/README.md#brokers){target=_blank}, [**Triggers**](../eventing/broker/triggers/README.md#triggers){target=_blank}, and [**Sinks**](../eventing/sinks/README.md#about-sinks).
