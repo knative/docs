@@ -2,7 +2,7 @@
 - /docs/getting-started/README.md
 - /docs/install/quickstart-install.md
 -->
-# Before you begin
+## Before you begin
 
 !!! warning
     Knative `quickstart` environments are for experimentation use only.

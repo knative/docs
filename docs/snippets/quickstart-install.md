@@ -2,7 +2,7 @@
 - /docs/getting-started/quickstart-install.md
 - /docs/install/quickstart-install.md
 -->
-# Install the Knative quickstart plugin
+## Install the Knative quickstart plugin
 
 To get started, install the Knative `quickstart` plugin:
 
