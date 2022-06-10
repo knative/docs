@@ -10,7 +10,7 @@ nav:
 ###############################################################################
     - Tutorial:
         - Tutorial introduction: getting-started/README.md
-        - Install Knative using quickstart: install/quickstart-install.md
+        - Install Knative using quickstart: getting-started/quickstart-install.md
         - Using Knative Serving:
           - First Knative Service: getting-started/first-service.md
           - Scaling to Zero: getting-started/first-autoscale.md
