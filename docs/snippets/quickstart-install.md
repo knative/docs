@@ -58,7 +58,7 @@ To get started, install the Knative `quickstart` plugin:
           kn quickstart --help
           ```
 
-# Run the Knative quickstart plugin
+## Run the Knative quickstart plugin
 
 The `quickstart` plugin completes the following functions:
 
