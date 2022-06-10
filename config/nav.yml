@@ -17,9 +17,10 @@ nav:
           - Traffic Splitting: getting-started/first-traffic-split.md
         - Using Knative Eventing:
           - Introducing Knative Eventing: getting-started/getting-started-eventing.md
-          - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
+          # remove all of this and replace with a decent tutorial
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
+          #
         - What's Next?: getting-started/next-steps.md
         - Clean Up: getting-started/clean-up.md
 ###############################################################################
