@@ -6,7 +6,7 @@ Following this quickstart tutorial provides you with a simplified, local Knative
 --8<-- "install-kn.md"
 --8<-- "quickstart-install.md"
 
-# Next steps
+## Next steps
 
 - Learn how to deploy your first Service in the [Knative tutorial](../getting-started/first-service.md).
 - Try out Knative [code samples](../samples/README.md).
