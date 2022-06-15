@@ -1,3 +1,9 @@
+<!-- Snippet used in the following topics:
+- /docs/install/client/install-kn.md
+- /docs/getting-started/quickstart-install.md
+- docs/install/quickstart-install.md
+-->
+
 ## Install the Knative CLI
 
 The Knative CLI (`kn`) provides a quick and easy interface for creating Knative resources, such as Knative Services and Event Sources, without the need to create or modify YAML files directly.
