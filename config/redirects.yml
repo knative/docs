@@ -1,6 +1,9 @@
 plugins:
   redirects:
     redirect_maps:
+      community/contributing.md : contributing/contributing.md
+      community/about.md : contributing/about.md
+      community/README.md : contributing/README.md
       eventing/getting-started.md: getting-started/getting-started-eventing.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
@@ -61,7 +64,7 @@ plugins:
       community/contributing/trademark-committee.md: https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md
       community/contributing/values.md: https://github.com/knative/community/blob/main/VALUES.md
       community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
-      community/meetup.md: community/contributing.md
+      community/meetup.md: contributing/contributing.md
       community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
       concepts/overview.md: index.md
       developer/concepts/duck-typing.md: reference/concepts/duck-typing.md
