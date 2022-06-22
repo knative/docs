@@ -127,7 +127,6 @@ plugins:
       eventing/samples/helloworld/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-python
       eventing/samples/kafka/binding/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/binding
       eventing/samples/kafka/channel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/channel
-      eventing/samples/kafka/resetoffset/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/resetoffset
       eventing/samples/kubernetes-event-source/index.md: eventing/sources/apiserversource/README.md
       eventing/samples/parallel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel
       eventing/samples/parallel/multiple-branches/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/multiple-branches
