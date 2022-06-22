@@ -1,4 +1,4 @@
-# Welcome to the Knative community!
+# Welcome to the Knative community
 
 Knative is an open source project that anyone in the community can use, improve, and enjoy.
 We'd love you to join us!
