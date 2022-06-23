@@ -1,4 +1,4 @@
-# About the Knative community
+# About the community
 
 This page provides links to documents for common Knative community practices and
 a description of Knative's audience.
@@ -80,7 +80,6 @@ Knative past and future release dates.
 
 - [Sunsetting features](https://github.com/knative/community/blob/main/mechanics/SUNSETTING-FEATURES.md#knative-feature-sunsetting):
 process to sunset features that are getting no apparent usage, but are time consuming to maintain.
-
 
 ## Community calendar
 

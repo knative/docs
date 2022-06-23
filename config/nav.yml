@@ -138,7 +138,6 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
-      - Eventing getting started: eventing/getting-started.md # do we need this as well as the getting started guide?
       # Eventing - developer docs
       - Developer topics:
         - Event sources:
@@ -241,10 +240,10 @@ nav:
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
       - Security: reference/security/README.md
-    - Community:
-      - Welcome to the community: community/README.md
-      - Contribute to Knative: community/contributing.md
-      - About the community: community/about.md
+    - Contributing:
+      - Welcome to the Knative community: contributing/README.md
+      - Contribute to Knative: contributing/contributing.md
+      - About the community: contributing/about.md
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:
