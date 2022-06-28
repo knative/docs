@@ -417,7 +417,7 @@ If you would like to override some configurations for a specific deployment, you
 
 ### Override the resources
 
-The `KnativeServing` CR is able to configure system resources for the Knative system containers based on the deployment. Requests and limits can be configured for all the available containers within the deployment, such as `activator`, `autoscaler`, or `controller`.
+The `KnativeServing` CR is able to configure system resources for the Knative system containers based on the deployment. Requests and limits can be configured for all the available containers within a deployment.
 
 For example, the following `KnativeServing` CR configures the container `controller` in the deployment `controller` to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
 
