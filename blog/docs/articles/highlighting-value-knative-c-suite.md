@@ -1,5 +1,7 @@
 # Highlighting the Value of Knative for the C-Suite
 
+**Authors: [Carlos Santana](https://twitter.com/csantanapr) (IBM) and [Omer Bensaadon](https://twitter.com/omer_bensaadon) (VMware)**
+
 **Date: 2021-11-04**
 
 <table style="border: 0;">
