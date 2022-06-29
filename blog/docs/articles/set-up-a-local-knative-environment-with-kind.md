@@ -1,12 +1,8 @@
----
-title: 'How to set up a local Knative environment with KinD and without DNS headaches'
-author: Leon Stigter
-author handle: https://twitter.com/retgits
-date: 2020-06-03
-description: A how-to guide to deploy Knative, Kourier, and your first app on top of a Kubernetes cluster.
-folder with media files: 'N/A'
-labels: Articles
----
+# How to set up a local Knative environment with KinD and without DNS headaches
+
+**Author: [Leon Stigter](https://twitter.com/retgits), Product @ AWS Cloud**
+
+**Date: 2020-06-03**
 
 !!! warning
 

@@ -1,11 +1,8 @@
----
-title: Workflow as a Function Flow with Automatiko
-linkTitle: Knative Eventing backed Workflow as a Function Flow
-author: "[Maciej Swiderski](https://twitter.com/SwiderskiMaciek), Software Engineer @ OpenEnterprise."
-date: 2021-08-20
-description: Slicing business logic into functions and events.
-type: "blog"
----
+# Workflow as a Function Flow with Automatiko
+
+**Author: [Maciej Swiderski](https://twitter.com/SwiderskiMaciek), Software Engineer @ OpenEnterprise**
+
+**Date: 2021-08-20**
 
 Various organisations started to look into serverless as a way of building business logic that can take advantage of the cloud. As it might look at first, it's not an easy task to rely strictly on functions that represent independent logic pieces. There is a risk of losing the big picture and by that not having full control over day-to-day operations.
 

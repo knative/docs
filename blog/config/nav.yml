@@ -20,6 +20,8 @@ nav:
           - releases/announcing-knative-v1-2-release.md
           - releases/announcing-knative-v1-1-release.md
           - releases/announcing-knative-v1-0-release.md
+          - releases/knative-1.0.md
+          - releases/announcing-knative-1.0.md
           - releases/announcing-knative-v0-26-release.md
           - releases/announcing-knative-v0-25-release.md
           - releases/announcing-knative-v0-24-release.md
@@ -35,11 +37,8 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
-          - articles/google-summer-of-code-2022.md
           - articles/workflow-as-function-flow.md
           - articles/highlighting-value-knative-c-suite.md
-          - articles/knative-1.0.md
-          - articles/announcing-knative-1.0.md
           - articles/quickstart-with-knative.md
           - articles/distributed-tracing.md
           - articles/event-drive-app-knative-eventing-kogito.md
@@ -65,7 +64,7 @@ nav:
           - steering/2020-01-annual-report-2019.md
           - steering/2019-12-updates.md
       - Events:
+          - events/google-summer-of-code-2022.md
           - events/install-fest-04-2022.md
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
-

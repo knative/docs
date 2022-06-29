@@ -1,11 +1,8 @@
----
-title: "Event-driven Image and BigQuery processing pipelines with Knative on
-Google Cloud"
-date: 2020-06-19
-description: "Using Knative Eventing to build event-driven image and BigQuery
-processing pipelines on Google Cloud"
-type: "blog"
----
+# Event-driven Image and BigQuery processing pipelines with Knative on Google Cloud
+
+**Author: [Mete Atamel](https://twitter.com/meteatamel), Software Engineer & Developer Advocate @ Google**
+
+**Date: 2020-06-19**
 
 In this blog post, I will outline two event-driven processing pipelines that I
 recently built with Knative Eventing. Along the way, I will explain event sources,
