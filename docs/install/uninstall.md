@@ -176,7 +176,7 @@ Uninstall any Eventing extensions you have installed by following the relevant p
     Uninstall the Apache Kafka source by running:
 
     ```bash
-    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka", file="source.yaml") }}
+    kubectl delete -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
     ```
 
 
@@ -263,9 +263,7 @@ Uninstall each channel layer you have installed:
     Uninstall the Apache Kafka Channel by running:
 
        ```bash
-       curl -L "{{ artifact(org="knative-sandbox", repo="eventing-kafka", file="channel-consolidated.yaml") }}" \
-        | sed 's/REPLACE_WITH_CLUSTER_URL/my-cluster-kafka-bootstrap.kafka:9092/' \
-        | kubectl delete -f -
+       kubectl delete -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-channel.yaml")}}
        ```
 
        <!-- Ideally write steps for uninstalling Apache Kafka for Kubernetes here. -->

@@ -50,8 +50,28 @@ Follow the procedure for the Channel of your choice:
 
 === "Apache Kafka Channel"
 
-    1. Install [Strimzi](https://strimzi.io/quickstarts/).
-    1. Install the Apache Kafka Channel for Knative from the [`knative-sandbox` repository](https://github.com/knative-sandbox/eventing-kafka).
+
+    The following commands install the KafkaChannel and run event routing in a system
+    namespace. The `knative-eventing` namespace is used by default.
+
+    1. Install the Kafka controller by running the following command:
+
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
+        ```
+
+    1. Install the KafkaChannel data plane by running the following command:
+
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-channel.yaml")}}
+        ```
+
+    1. If you're upgrading from the previous version, run the following command:
+
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
+        ```
+
 
 === "Google Cloud Pub/Sub Channel"
 
@@ -114,6 +134,13 @@ Follow the procedure for the Broker of your choice:
         ```bash
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
+
+    1. If you're upgrading from the previous version, run the following command:
+
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
+        ```
+
 
     For more information, see the [Kafka Broker](../../../eventing/broker/kafka-broker/README.md) documentation.
 
@@ -265,10 +292,16 @@ The following tabs expand to show instructions for installing each Eventing exte
 
 === "Apache Kafka Source"
 
-    * Install the Apache Kafka Source by running the command:
+    1. Install the Apache Kafka Source by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka",file="source.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-source.yaml")}}
+        ```
+
+    1. If you're upgrading from the previous version, run the following command:
+
+        ```bash
+        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
 
     To learn more, try the [Apache Kafka source sample](../../../eventing/sources/kafka-source/README.md).
