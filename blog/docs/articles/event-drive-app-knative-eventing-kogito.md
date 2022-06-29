@@ -1,6 +1,7 @@
 # Orchestrating Events with Knative and Kogito
 
 **Authors: [Ricardo Zanini](https://twitter.com/zaninirica), Principal Software Engineer @ RedHat, and [Tihomir Surdilovic](https://twitter.com/tsurdilo), Software Developer @ Red Hat**
+
 **Date: 2020-12-17**
 
 [Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. It is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.

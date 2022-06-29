@@ -1,6 +1,7 @@
 # How to set up a local Knative environment with KinD and without DNS headaches
 
 **Author: [Leon Stigter](https://twitter.com/retgits), Product @ AWS Cloud**
+
 **Date: 2020-06-03**
 
 !!! warning

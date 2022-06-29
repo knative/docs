@@ -1,6 +1,7 @@
 # Distributed tracing with Knative, OpenTelemetry and Jaeger
 
 **Author: [Ben Moss](https://twitter.com/mossity), Software Engineer @ [VMware](http://vmware.com)**
+
 **Date: 2021-08-20**
 
 When trying to understand and diagnose our systems, one of the most basic tools

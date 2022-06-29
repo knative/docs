@@ -1,6 +1,7 @@
 # Getting started with Knative Eventing using Bitcoin transaction data
 
 **Author: [Johana Saladas](https://twitter.com/developing4data), software engineer at IBM**
+
 **Date: 2020-05-01**
 
 I’ve been exploring [Knative Eventing](https://knative.dev/docs/eventing/), a system that enables a cloud native eventing ecosystem to be easily deployed through the use of **event producers** and **event consumers.** Most of the work on this demo has been done in version 0.11, and I have also run it in version 0.13, and now it also works on version 0.15.
