@@ -1,10 +1,6 @@
----
-title: "Knative v0.3 Autoscaling — A Love Story"
-linkTitle: "Knative v0.3 Autoscaling"
-date: 2019-03-27
-description: "New options in Knative v0.3 for customizing the autoscaling subsystem."
-type: "blog"
----
+# Knative v0.3 Autoscaling — A Love Story
+
+**Date: 2019-03-27**
 
 <article class="h-entry">
 

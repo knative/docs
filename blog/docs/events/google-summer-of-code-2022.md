@@ -1,10 +1,6 @@
----
-title: "Knative community participating in Google Summer of Code 2022"
-linkTitle: "Knative community participating in Google Summer of Code 2022"
-date: 2022-03-31
-description: "Knative community participating in Google Summer of Code 2022"
-type: "blog"
----
+# Knative community participating in Google Summer of Code 2022
+
+**Date: 2022-03-31**
 
 Knative community is participating in [Google Summer of Code](https://summerofcode.withgoogle.com/) (GSOC) program, part of the Cloud Native Computing Foundation (CNCF).
 

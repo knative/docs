@@ -1,11 +1,7 @@
----
-title: Distributed tracing with Knative, OpenTelemetry and Jaeger
-linkTitle: Distributed tracing with Knative, OpenTelemetry and Jaeger
-author: "[Ben Moss](https://twitter.com/mossity), Software Engineer @ [VMware](http://vmware.com)."
-date: 2021-08-20
-description: Integrating OpenCensus, OpenTelemetry, and Jaeger with Knative.
-type: "blog"
----
+# Distributed tracing with Knative, OpenTelemetry and Jaeger
+
+**Author: [Ben Moss](https://twitter.com/mossity), Software Engineer @ [VMware](http://vmware.com)**
+**Date: 2021-08-20**
 
 When trying to understand and diagnose our systems, one of the most basic tools
 we learn to lean on is the stack trace. Stack traces give us a structured view

@@ -1,12 +1,6 @@
----
-title: "Highlighting the Value of Knative for the C-Suite"
-linkTitle: "Highlighting the Value of Knative for the C-Suite"
-date: 2021-11-04
-description: "Deploy faster and more cost-effectively without hard-to-find, specialized expertise."
-type: "blog"
----
-
 # Highlighting the Value of Knative for the C-Suite
+
+**Date: 2021-11-04**
 
 <table style="border: 0;">
 <tr style="background-color: var(--md-default-bg-color);">

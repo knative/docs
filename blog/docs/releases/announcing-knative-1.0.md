@@ -1,10 +1,6 @@
----
-title: "Announcing: Knative 1.0 🎉"
-linkTitle: "Announcing: Knative 1.0"
-date: 2021-10-14
-description: "Announcing the release of Knative 1.0 on November 2, 2021."
-type: "blog"
----
+# Announcing: Knative 1.0
+
+**Date: 2021-10-14**
 
 After more than 3 years of active development, with many [commercial adopters](https://github.com/knative/community/blob/main/ADOPTERS.MD), **we are pleased to announce the release of Knative 1.0 on Nov. 2, 2021.** Thanks to the over 600 contributors to Knative for helping us reach this milestone!
 
