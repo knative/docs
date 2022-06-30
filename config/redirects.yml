@@ -35,11 +35,7 @@ plugins:
       admin/upgrade/upgrade-installation-with-operator.md: install/upgrade/upgrade-installation-with-operator.md
       admin/upgrade/upgrade-installation.md: install/upgrade/upgrade-installation.md
       check-install-version.md: install/upgrade/check-install-version.md
-      client/README.md: install/client/README.md
-      client/configure-kn.md: install/client/configure-kn.md
-      client/connecting-kn-to-your-cluster/index.md: install/client/README.md
-      client/install-kn.md: install/client/install-kn.md
-      client/kn-plugins.md: install/client/kn-plugins.md
+      client/connecting-kn-to-your-cluster/index.md: client/README.md
       community/annual_reports.md: https://github.com/knative/community/tree/main/annual_reports
       community/calendar.md: https://github.com/knative/community/blob/main/CALENDAR.MD
       community/contributing/code-of-conduct.md: https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md
@@ -163,7 +159,7 @@ plugins:
       install/serving/serving-installation-files.md: install/yaml-install/serving/serving-installation-files.md
       operator/configuring-eventing-cr/index.md: install/operator/configuring-eventing-cr.md
       operator/configuring-serving-cr/index.md: install/operator/configuring-serving-cr.md
-      reference/resources/index.md: install/client/README.md
+      reference/resources/index.md: client/README.md
       serving/autoscaling/autoscaling-concepts.md: serving/autoscaling/autoscaler-types.md
       serving/autoscaling/target-burst-capacity/index.md: serving/load-balancing/target-burst-capacity.md
       serving/configuring-autoscaling/index.md: serving/autoscaling/README.md

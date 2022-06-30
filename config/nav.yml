@@ -28,6 +28,7 @@ nav:
     - Installing:
       - About installing Knative: install/README.md
       - Install Knative using quickstart: install/quickstart-install.md
+      - Installing the Knative CLI: client/install-kn.md
       # YAML Installation
       - Install Knative with YAML:
         - About YAML-based installation: install/yaml-install/README.md
@@ -43,12 +44,6 @@ nav:
         - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
         - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
-      # kn Installation
-      - Install the Knative CLI:
-        - CLI tools overview: install/client/README.md
-        - Installing kn: install/client/install-kn.md
-        - Customizing kn: install/client/configure-kn.md
-        - kn plugins: install/client/kn-plugins.md
       # Advanced options for Serving
       - Install advanced options:
         # Istio Installation
@@ -223,6 +218,14 @@ nav:
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
         - Strict Subscriber: eventing/experimental-features/strict-subscriber.md
+###############################################################################
+    # CLI
+###############################################################################
+    - Knative CLI:
+      - CLI tools: client/README.md
+      - Installing the Knative CLI: client/install-kn.md
+      - Customizing kn: client/configure-kn.md
+      - kn plugins: client/kn-plugins.md
 ###############################################################################
     # Code samples
 ###############################################################################

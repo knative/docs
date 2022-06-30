@@ -1,12 +1,10 @@
-# Using the event registry
+# Event registry
 
-The event registry maintains a catalog of event types that each Broker can consume.
-It is designed for use with the Broker and Trigger model, and provides information
-to help you create Triggers.
+Knative Eventing defines an `EventType` object to make it easier for consumers to discover the types of events they can consume from Brokers.
 
-This topic introduces the EventType custom resource and provides information about
-how to populate the event registry, how to discover events using the registry,
-and how to leverage that information to subscribe to events of interest.
+The event registry maintains a catalog of event types that each Broker can consume. The event types stored in the registry contain all required information for a consumer to create a Trigger without resorting to some other out-of-band mechanism.
+
+This topic provides information about how you can populate the event registry, how to discover events using the registry, and how to leverage that information to subscribe to events of interest.
 
 ## Before you begin
 
