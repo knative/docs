@@ -1,19 +1,6 @@
 # Configuring the Eventing Operator custom resource
 
-You can configure the Knative Eventing operator by modifying settings in the KnativeEventing custom resource (CR).
-You can configure Knative Eventing with the following options:
-
-- [Installing a specific version of Eventing](#installing-a-specific-version-of-eventing)
-- [Installing customized Knative Eventing](#installing-customized-knative-eventing)
-- [Setting a default channel](#setting-a-default-channel)
-- [Setting the default channel for the broker](#setting-the-default-channel-for-the-broker)
-- [Private repository and private secrets](#private-repository-and-private-secrets)
-- [Download images in a predefined format without secrets](#download-images-in-a-predefined-format-without-secrets)
-- [Download images from different repositories without secrets](#download-images-from-different-repositories-without-secrets)
-- [Download images with secrets](#download-images-with-secrets)
-- [Configuring the default broker class](#configuring-the-default-broker-class)
-- [Override system deployments](#override-system-deployments)
-- [Override system services](#override-system-services)
+You can configure the Knative Eventing operator by modifying settings in the `KnativeEventing` custom resource (CR).
 
 ## Installing a specific version of Eventing
 
