@@ -1,24 +1,12 @@
 # Configuring the Knative Serving Operator custom resource
 
-You can configure Knative Serving with the following options:
+You can modify the KnativeServing CR to configure different options for Knative Serving.
 
-- [Version configuration](#version-configuration)
-- [Install customized Knative Serving](#install-customized-knative-serving)
-- [Private repository and private secret](#private-repository-and-private-secrets)
-- [SSL certificate for controller](#ssl-certificate-for-controller)
-- [Replace the default istio-ingressgateway service](#replace-the-default-istio-ingressgateway-service)
-- [Replace the knative-ingress-gateway gateway](#replace-the-knative-ingress-gateway-gateway)
-- [Cluster local gateway](#configuration-of-cluster-local-gateway)
-- [Servers configuration for Istio gateways](#servers-configuration-for-istio-gateways)
-- [High availability](#high-availability)
-- [Override system deployments](#override-system-deployments)
-- [Override system services](#override-system-services)
-
-## Version configuration
+## Configure the Knative Serving version
 
 Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field.
 
-For example, if you want to install Knative Serving v0.23.0, you can apply the following `KnativeServing` custom resource:
+For example, if you want to install Knative Serving v1.5, you can apply the following `KnativeServing` custom resource:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -27,41 +15,38 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: 0.23.0
+  version: 1.5
 ```
 
-If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving. If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always includes the latest 3 minor release versions. For example, if the current version of the Knative Operator is v0.24.0, the earliest version of Knative Serving available through the Operator is v0.22.0.
+If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving.
 
-If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource
-enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
+If users specify an invalid or unavailable version, the Knative Operator does nothing.
+
+The Knative Operator always includes the latest 3 release versions. For example, if the current version of the Knative Operator is v1.5, the earliest version of Knative Serving available through the Operator is v1.2.
+
+If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
 
 !!! important
-    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v0.22.0, you must upgrade to v0.23.0 before upgrading to v0.24.0.
+    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.3, you must upgrade to v1.4 before upgrading to v1.5.
 
 ## Install customized Knative Serving
 
-The Operator provides you with the flexibility to install Knative Serving customized to your own requirements. As long
-as the manifests of customized Knative Serving are accessible to the Operator, you can install them.
+There are two modes available that you can use to install customized Knative Serving manifests: _overwrite mode_ and _append mode_.
 
-There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
-With overwrite mode, under `.spec.manifests`, you must define all manifests needed for
-Knative Serving to install because the Operator will no longer install any default manifests.
-With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
-The customized manifests are installed after default manifests are applied.
+If you are using overwrite mode, under `.spec.manifests`, you must define all required manifests to install Knative Serving, because the Operator does not install any default manifests.
+
+If you are using append mode, under `.spec.additionalManifests`, you only need to define your customized manifests. The customized manifests are installed after default manifests are applied.
 
 ### Overwrite mode
 
 You can use overwrite mode when you want to customize all Knative Serving manifests.
 
-For example, if you want to install Knative Serving and Istio ingress and you want customize both components, you can
-create the following YAML file:
+!!! important
+    You must specify both the version and valid URLs for your custom Knative Serving manifests.
+
+For example, if you want to install customized versions of both Knative Serving and the Istio ingress, you can create a `KnativeServing` CR similar to the following example:
 
 ```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-serving
----
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
@@ -74,30 +59,20 @@ spec:
   - URL: https://my-net-istio/net-istio.yaml
 ```
 
-This example installs the customized Knative Serving at version `$spec_version` which is available at
-`https://my-serving/serving.yaml`, and the customized ingress plugin `net-istio` which is available at
-`https://my-net-istio/net-istio.yaml`.
+You can make the customized Knative Serving available in one or multiple links, as the `spec.manifests` supports a list of links.
 
-!!! attention
-    You can make the customized Knative Serving available in one or multiple links, as the `spec.manifests` supports a list of links.
-    The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
+!!! important
+    The ordering of manifest URLs is critical. Put the manifest you want to apply first at the top of the list.
 
-We strongly recommend you to specify the version and the valid links to the customized Knative Serving, by leveraging
-both `spec_version` and `spec.manifests`. Do not skip either field.
+This example installs the customized Knative Serving at version `$spec_version` which is available at `https://my-serving/serving.yaml`, and the customized ingress plugin `net-istio` which is available at `https://my-net-istio/net-istio.yaml`.
 
 ### Append mode
 
-You can use append mode to add your customized manifests into the default manifests.
+You can use append mode to add your customized Knative Serving manifests in addition to the default manifests.
 
-For example, if you only want to customize a few resources but you still want to install the default Knative Serving,
-you can create the following YAML file:
+For example, if you only want to customize a few resources but you still want to install the default Knative Serving, you can create a `KnativeServing` CR similar to the following example:
 
 ```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-serving
----
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
@@ -109,15 +84,11 @@ spec:
   - URL: https://my-serving/serving-custom.yaml
 ```
 
-This example installs the default Knative Serving, and installs your customized resources available at
-`https://my-serving/serving-custom.yaml`.
-
-Knative Operator installs the default manifests of Knative Serving at the version `$spec_version`, and then installs
-your customized manifests based on them.
+This example installs the default Knative Serving manifests, and then installs the customized resources available at `https://my-serving/serving-custom.yaml` for the version `$spec_version`.
 
 ## Private repository and private secrets
 
-You can use the `spec.registry` section of the operator CR to change the image references to point to a private registry or [specify imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod):
+You can use the `spec.registry` section of the Operator CR to change the image references to point to a private registry or [specify imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod):
 
 - `default`: this field defines a image reference template for all Knative images. The format
 is `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. If you use the same tag for all your images, the only difference is the image name. `${NAME}` is
@@ -130,7 +101,6 @@ location. This section is only needed when the registry images do not match the 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See
 [deploying images from a private container registry](../../serving/deploying-from-private-registry.md) for configuration details.
-
 
 ### Download images in a predefined format without secrets
 
@@ -279,74 +249,68 @@ spec:
     type: ConfigMap
 ```
 
-## Replace the default istio-ingressgateway-service
+## Replace the default Istio ingress gateway service
 
-To set up a custom ingress gateway, follow [**Step 1: Create Gateway Service and Deployment Instance**](../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway-service-and-deployment-instance).
+1. [Create a gateway Service and Deployment instance](../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway-service-and-deployment-instance).
 
-### Step 2: Update the Knative gateway
+1. Update the Knative gateway by updating the `ingress.istio.knative-ingress-gateway` spec to select the labels of the new ingress gateway:
 
-Update `spec.ingress.istio.knative-ingress-gateway` to select the labels of the new ingress gateway:
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      ingress:
+        istio:
+          enabled: true
+          knative-ingress-gateway:
+            selector:
+              istio: ingressgateway
+    ```
 
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  ingress:
-    istio:
-      enabled: true
-      knative-ingress-gateway:
-        selector:
-          istio: ingressgateway
-```
+1. Update the Istio ingress gateway ConfigMap:
 
-### Step 3: Update Gateway ConfigMap
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      ingress:
+        istio:
+          enabled: true
+          knative-ingress-gateway:
+            selector:
+              istio: ingressgateway
+      config:
+        istio:
+          gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.custom-ns.svc.cluster.local"
+    ```
 
-Additionally, you will need to update the Istio ConfigMap:
+    The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
 
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  ingress:
-    istio:
-      enabled: true
-      knative-ingress-gateway:
-        selector:
-          istio: ingressgateway
-  config:
-    istio:
-      gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.custom-ns.svc.cluster.local"
-```
+## Replace the ingress gateway
 
-The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
+1. [Create a gateway](../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway).
 
-## Replace the knative-ingress-gateway gateway
+1. Update the Istio ingress gateway ConfigMap:
 
-To create the ingress gateway, follow [**Step 1: Create the Gateway**](../../serving/setting-up-custom-ingress-gateway.md#step-1-create-the-gateway).
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      config:
+        istio:
+          gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+    ```
 
-### Step 2: Update Gateway ConfigMap
-
-You will need to update the Istio ConfigMap:
-
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeServing
-metadata:
-  name: knative-serving
-  namespace: knative-serving
-spec:
-  config:
-    istio:
-      gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
-```
-
-The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
+    The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
 
 ## Configuration of cluster local gateway
 
@@ -449,17 +413,13 @@ If you configure `replicas: 6`, which is more than `maxReplicas`, the operator t
 
 ## Override system deployments
 
-If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in CR.
-Currently `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+If you would like to override some configurations for a specific deployment, you can override the configuration by modifying the `deployments` spec in the `KnativeServing` CR. Currently `resources`, `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
 
 ### Override the resources
 
-The KnativeServing custom resource is able to configure system resources for the Knative system containers based on the deployment.
-Requests and limits can be configured for all the available containers within the deployment, like `activator`, `autoscaler`,
-`controller`, etc.
+The `KnativeServing` CR is able to configure system resources for the Knative system containers based on the deployment. Requests and limits can be configured for all the available containers within a deployment.
 
-For example, the following KnativeServing resource configures the container `controller` in the deployment `controller` to request
-0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
+For example, the following `KnativeServing` CR configures the container `controller` in the deployment `controller` to request 0.3 CPU and 100MB of RAM, and sets hard limits of 1 CPU and 250MB RAM:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -482,8 +442,7 @@ spec:
 
 ### Override replicas, labels and annotations
 
-The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotations: bar`,
-while other system deployments have `2` Replicas by using `spec.high-availability`.
+The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotations: bar`, while other system deployments have `2` Replicas by using `spec.high-availability`.
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -504,11 +463,11 @@ spec:
 ```
 
 !!! note
-    The KnativeServing resource `label` and `annotation` settings override the webhook's labels and annotations for both Deployments and Pods.
+    The `KnativeServing` CR `label` and `annotation` settings override the webhook's labels and annotations for Deployments and Pods.
 
 ### Override the nodeSelector
 
-The following KnativeServing resource overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
+The following `KnativeServing` CR overrides the `webhook` deployment to use the `disktype: hdd` nodeSelector:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
