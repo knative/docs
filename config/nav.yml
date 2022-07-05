@@ -27,8 +27,8 @@ nav:
 ###############################################################################
     - Installing:
       - About installing Knative: install/README.md
+      - Install the Knative CLI: client/install-kn.md
       - Install Knative using quickstart: install/quickstart-install.md
-      - Installing the Knative CLI: client/install-kn.md
       # YAML Installation
       - Install Knative with YAML:
         - About YAML-based installation: install/yaml-install/README.md
@@ -40,7 +40,7 @@ nav:
           - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
       # Operator Installation
       - Install with Knative Operator:
-        - Installing using the Operator: install/operator/knative-with-operators.md
+        - Install by using the Knative Operator: install/operator/knative-with-operators.md
         - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
         - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
