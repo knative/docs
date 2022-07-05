@@ -1,4 +1,4 @@
-# Installing Knative using the Operator
+# Install by using the Knative Operator
 
 Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
 You can install the Serving component, Eventing component, or both on your cluster.
