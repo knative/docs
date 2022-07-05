@@ -21,17 +21,12 @@ For more information about contributing to the Knative project, see the
    By participating, you are expected to uphold this code. Please report all
    unacceptable behavior to <knative-code-of-conduct@googlegroups.com>.
 
-1. Sign the contributor license agreements (CLA):
-
-   Knative requires the [Google CLA](https://cla.developers.google.com).
+1. Sign the the CNCF contributor license agreement (CLA), [EasyCLA](https://easycla.lfx.linuxfoundation.org/).
 
    **Important:** You must fill out the CLA with the same email address that you
    used to create your GitHub account. Also see the note about private accounts.
 
-   Once you are CLA'ed, we'll be able to accept your pull requests. This is
-   necessary because you own the copyright to your changes, even after your
-   contribution becomes part of this project. So this agreement simply gives us
-   permission to use and redistribute your contributions as part of the project.
+   After you have signed the CLA, your pull requests can be accepted. This is necessary because you own the copyright to your changes, even after your contribution becomes part of this project. So this agreement simply gives us permission to use and redistribute your contributions as part of the project.
 
    Private accounts not supported: Your contributions are verified using the
    email address for which you use to sign the CLA. Therefore,
