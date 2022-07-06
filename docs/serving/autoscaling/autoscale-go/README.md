@@ -4,10 +4,9 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/yaml-install/serving/install-serving-with-yaml.md))
-   installed.
-1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
-1. Clone this repository, and move into the sample directory:
+1. Install Knative Serving.
+1. Install the `hey` load generator (`go get -u github.com/rakyll/hey`).
+1. Clone this repository, and navigate to the sample directory:
 
      ```bash
      git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs

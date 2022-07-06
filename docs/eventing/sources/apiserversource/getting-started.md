@@ -8,10 +8,8 @@ This topic describes how to create an ApiServerSource object.
 
 Before you can create an ApiServerSource object:
 
-- You must have [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
-installed on your cluster.
-- You must install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-tool.
+- Install Knative Eventing.
+- Install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) tool.
 - Optional: If you want to use the `kn` commands, install the [`kn`](../../../client/configure-kn.md) tool.
 
 ## Create an ApiServerSource object

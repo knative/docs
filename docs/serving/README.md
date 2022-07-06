@@ -7,11 +7,7 @@ Knative Serving provides components that enable:
 - Support for multiple networking layers, such as Contour, Kourier, and Istio, for integration into existing environments.
 - Point-in-time snapshots of deployed code and configurations.
 
-Knative Serving supports both HTTP and [HTTPS](using-a-tls-cert.md) networking protocols.
-
-## Installation
-
-You can install Knative Serving via the methods listed on the [installation page](../install/README.md).
+Knative Serving supports both HTTP and [HTTPS](security/using-a-tls-cert.md) networking protocols.
 
 ## Serving resources
 

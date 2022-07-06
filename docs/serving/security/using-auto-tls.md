@@ -9,13 +9,13 @@ Services. To learn more about using secure connections in Knative, see
 
 The following must be installed on your Knative cluster:
 
-- [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md).
+- Knative Serving.
 
-- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
+- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher.
 
-- [`cert-manager` version `1.0.0` or higher](../install/installing-cert-manager.md).
+- `cert-manager` version `1.0.0` or higher.
 
-- Your Knative cluster must be configured to use a [custom domain](using-a-custom-domain.md).
+- Your Knative cluster must be configured to use a custom domain.
 
 - Your DNS provider must be setup and configured to your domain.
 

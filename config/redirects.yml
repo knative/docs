@@ -1,9 +1,12 @@
 plugins:
   redirects:
     redirect_maps:
-      community/contributing.md : contributing/contributing.md
-      community/about.md : contributing/about.md
-      community/README.md : contributing/README.md
+      serving/using-a-tls-cert.md: serving/security/using-a-tls-cert.md
+      serving/using-auto-tls.md: serving/security/using-auto-tls.md
+      install/installing-cert-manager.md: serving/security/cert-manager.md
+      community/contributing.md: contributing/contributing.md
+      community/about.md: contributing/about.md
+      community/README.md: contributing/README.md
       eventing/getting-started.md: getting-started/getting-started-eventing.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
@@ -14,17 +17,17 @@ plugins:
       admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
       admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
       admin/install/README.md: install/README.md
-      admin/install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
-      admin/install/eventing/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
-      admin/install/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
-      admin/install/install-serving-with-yaml.md: install/yaml-install/serving/install-serving-with-yaml.md
+      admin/install/eventing/eventing-installation-files.md: eventing/install/README.md
+      admin/install/eventing/install-eventing-with-yaml.md: eventing/install/README.md
+      admin/install/install-eventing-with-yaml.md: eventing/install/README.md
+      admin/install/install-serving-with-yaml.md: serving/install/README.md
       admin/install/installing-istio.md: install/installing-istio.md
       admin/install/knative-offerings.md: install/knative-offerings.md
-      admin/install/knative-with-operators.md: install/operator/knative-with-operators.md
+      admin/install/knative-with-operators.md: install/README.md
       admin/install/operator/configuring-eventing-cr.md: install/operator/configuring-eventing-cr.md
       admin/install/operator/configuring-serving-cr.md: install/operator/configuring-serving-cr.md
-      admin/install/serving/install-serving-with-yaml.md: install/yaml-install/serving/install-serving-with-yaml.md
-      admin/install/serving/serving-installation-files.md: install/yaml-install/serving/serving-installation-files.md
+      admin/install/serving/install-serving-with-yaml.md: serving/install/README.md
+      admin/install/serving/serving-installation-files.md: serving/install/README.md
       admin/install/uninstall.md: install/uninstall.md
       admin/serving/config-defaults.md: serving/configuration/config-defaults.md
       admin/serving/deployment.md: serving/configuration/deployment.md
@@ -146,16 +149,16 @@ plugins:
       eventing/triggers/index.md: eventing/broker/triggers/README.md
       install/collecting-logs/index.md: serving/observability/logging/collecting-logs.md
       install/collecting-metrics/index.md: serving/observability/metrics/collecting-metrics.md
-      install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
-      install/eventing/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
+      install/eventing/eventing-installation-files.md: eventing/install/README.md
+      install/eventing/install-eventing-with-yaml.md: eventing/install/README.md
       install/getting-started-knative-app/index.md: getting-started/README.md
       install/install-extensions.md: install/README.md
       install/installation-files.md: install/README.md
       install/prerequisites.md: install/README.md
-      install/serving/install-serving-with-yaml.md: install/yaml-install/serving/install-serving-with-yaml.md
-      install/serving/installing-cert-manager.md: install/installing-cert-manager.md
+      install/serving/install-serving-with-yaml.md: serving/install/README.md
+      install/serving/installing-cert-manager.md: serving/install/README.md
       install/serving/installing-istio.md: install/installing-istio.md
-      install/serving/serving-installation-files.md: install/yaml-install/serving/serving-installation-files.md
+      install/serving/serving-installation-files.md: serving/install/README.md
       operator/configuring-eventing-cr/index.md: install/operator/configuring-eventing-cr.md
       operator/configuring-serving-cr/index.md: install/operator/configuring-serving-cr.md
       reference/resources/index.md: client/README.md
@@ -166,7 +169,7 @@ plugins:
       serving/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
       serving/feature-flags.md: serving/configuration/feature-flags.md
       serving/getting-started-knative-app.md: getting-started/README.md
-      serving/installing-cert-manager.md: install/installing-cert-manager.md
+      serving/installing-cert-manager.md: serving/install/README.md
       serving/metrics.md: serving/observability/metrics/serving-metrics.md
       serving/samples/README.md: samples/serving.md
       serving/samples/autoscale-go/index.md: serving/autoscaling/autoscale-go/README.md
@@ -199,6 +202,6 @@ plugins:
       serving/services/deployment.md: serving/configuration/deployment.md
       serving/services/http-option.md: serving/services/http-protocol.md
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
-      serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
+      serving/using-an-ssl-cert/index.md: serving/security/using-a-tls-cert.md
       serving/using-subroutes.md: serving/traffic-management.md
       about/case-studies/README.md: about/case-studies/deepc.md

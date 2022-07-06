@@ -14,12 +14,9 @@ If you have an existing sink, you can replace the examples with your own values.
 
 To create a PingSource:
 
-- You must install [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md).
-The PingSource event source type is enabled by default when you install Knative Eventing.
-- You can use either `kubectl` or [`kn`](../../../client/install-kn.md) commands
-to create components such as a sink and PingSource.
-- You can use either `kubectl` or [`kail`](https://github.com/boz/kail) for logging
-during the verification step in this procedure.
+- Install Knative Eventing. The PingSource event source type is enabled by default when you install Knative Eventing.
+- You can use either `kubectl` or [`kn`](../../../client/install-kn.md) commands to create components such as a sink and PingSource.
+- You can use either `kubectl` or [`kail`](https://github.com/boz/kail) for logging during the verification step in this procedure.
 
 ## Create a PingSource object
 

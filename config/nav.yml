@@ -26,38 +26,26 @@ nav:
     # Installing
 ###############################################################################
     - Installing:
-      - About installing Knative: install/README.md
-      - Install the Knative CLI: client/install-kn.md
-      - Install Knative using quickstart: install/quickstart-install.md
-      # YAML Installation
-      - Install Knative with YAML:
-        - About YAML-based installation: install/yaml-install/README.md
-        - Install Knative Serving:
-          - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
-          - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
-        - Install Knative Eventing:
-          - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
-          - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
-      # Operator Installation
-      - Install with Knative Operator:
-        - Install by using the Knative Operator: install/operator/knative-with-operators.md
-        - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
-        - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
-        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
-      # Advanced options for Serving
-      - Install advanced options:
-        # Istio Installation
-        - Install Istio for Knative: install/installing-istio.md
-        # Cert-manager Installation
-        - Install cert-manager: install/installing-cert-manager.md
-      # Vendor docs
-      - Using a Knative-based offering: install/knative-offerings.md
+      - Installation options: install/README.md
+      - Quickstart: install/quickstart-install.md
+      # Serving
+      - Install Knative Serving: serving/install/README.md
+      # Eventing
+      - Install Knative Eventing: eventing/install/README.md
       # Upgrading Knative
-      - Upgrading your installation:
+      - Upgrading Knative:
         - About upgrading Knative: install/upgrade/README.md
         - Checking your Knative version: install/upgrade/check-install-version.md
         - Upgrading with kubectl: install/upgrade/upgrade-installation.md
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
+      # kn Installation
+      - Install the Knative CLI:
+        - CLI tools overview: client/README.md
+        - Installing kn: client/install-kn.md
+        - Customizing kn: client/configure-kn.md
+        - kn plugins: client/kn-plugins.md
+      # Vendor docs
+      - Commercial Knative products: install/knative-offerings.md
       # Uninstall
       - Uninstalling Knative: install/uninstall.md
 ###############################################################################
@@ -65,6 +53,12 @@ nav:
 ###############################################################################
     - Serving:
       - Knative Serving overview: serving/README.md
+      - Install Knative Serving: serving/install/README.md
+      - Security:
+        - Using Cert Manager: serving/security/cert-manager.md
+        - Configuring HTTPS connections: serving/security/using-a-tls-cert.md
+        - Enabling auto-TLS certs: serving/security/using-auto-tls.md
+        - TLS with HTTP01: serving/security/tls-http01.md
       - Autoscaling:
         - About autoscaling: serving/autoscaling/README.md
         - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
@@ -107,8 +101,6 @@ nav:
         - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
         - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
         - Configuring high-availability components: serving/config-ha.md
-        - Configuring HTTPS connections: serving/using-a-tls-cert.md
-        - Enabling auto-TLS certs: serving/using-auto-tls.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
         - Configuring domain names: serving/using-a-custom-domain.md
         - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
@@ -133,6 +125,7 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
+      - Install Knative Eventing: eventing/install/README.md
       # Eventing - developer docs
       - Developer topics:
         - Event sources:

@@ -35,6 +35,13 @@ To upgrade, apply the Operator custom resources, adding the `spec.version` for t
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
+!!! important
+    If you are upgrading an existing Knative Operator install from v1.2 or earlier to v1.3 or later, run the following command to upgrade the existing custom resources to `v1beta1`:
+
+    ```bash
+    kubectl create -f {{artifact(org="knative",repo="operator",file="operator-post-install.yaml" )}}
+    ```
+
 ## Verifying an upgrade by viewing pods
 
 You can confirm that your Knative components have upgraded successfully, by viewing the status of the pods for the components in the relevant namespace.

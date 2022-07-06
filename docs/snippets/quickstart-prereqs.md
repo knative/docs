@@ -7,8 +7,7 @@
 
 !!! warning
     Knative `quickstart` environments are for experimentation use only.
-    For a production ready installation, see the [YAML-based installation](/docs/install/yaml-install/)
-    or the [Knative Operator installation](/docs/install/operator/knative-with-operators/).
+    For a production ready installation, see [Installation options](/docs/install/).
 
 Before you can get started with a Knative `quickstart` deployment you must install:
 

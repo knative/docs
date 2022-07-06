@@ -1,22 +1,18 @@
-# Installing Knative
+# Installation options
 
-You can install the Serving component, Eventing component, or both on your
-cluster by using one of the following deployment options:
+You can install Knative Serving, Knative Eventing, or both on your
+cluster.
 
-- Use the [Knative Quickstart plugin](quickstart-install.md) to install a
-preconfigured, local distribution of Knative for development purposes.
+<!--TODO: INTRO FOR SERVING, EVENTING-->
 
-- Use a YAML-based installation to install a production ready deployment:
-    - [Install Knative Serving by using YAML](yaml-install/serving/install-serving-with-yaml.md)
-    - [Install Knative Eventing by using YAML](yaml-install/eventing/install-eventing-with-yaml.md)
+## Knative Serving
 
-- Use the [Knative Operator](operator/knative-with-operators.md) to install and
-configure a production ready deployment.
+--8<-- "installing-serving-intro.md"
 
-- Follow the documentation for vendor managed [Knative offerings](knative-offerings.md).
+## Knative Eventing
 
-You can also [upgrade an existing Knative installation](upgrade/README.md).
+--8<-- "installing-eventing-intro.md"
 
-!!! note
-    Knative installation instructions assume you are running Mac or Linux with a bash shell.
-<!-- TODO: Link to provisioning guide for advanced installation -->
+## Quickstart
+
+--8<-- "about-quickstart.md"

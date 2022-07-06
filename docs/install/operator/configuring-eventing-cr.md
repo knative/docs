@@ -26,6 +26,253 @@ If Knative Eventing is already managed by the Operator, updating the `spec.versi
 Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
 if the current Knative Eventing deployment is version 0.18.x, you must upgrade to 0.19.x before upgrading to 0.20.x.
 
+## Installing Knative Eventing with event sources
+
+Knative Operator can configure the Knative Eventing component with different event sources. Click on each of the following tabs to see how you can configure Knative Eventing with different event sources:
+
+=== "Ceph"
+
+    To configure Knative Eventing to install Ceph as the event source:
+
+    1. Add `spec.source.ceph` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            ceph:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "Apache CouchDB"
+
+    To configure Knative Eventing to install Apache CouchDB as the event source:
+
+    1. Add `spec.source.couchdb` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            couchdb:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "GitHub"
+
+    To configure Knative Eventing to install GitHub as the event source:
+
+    1. Add `spec.source.github` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            github:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "GitLab"
+
+    To configure Knative Eventing to install GitLab as the event source:
+
+    1. Add `spec.source.gitlab` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            gitlab:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "Apache Kafka"
+
+    To configure Knative Eventing to install Kafka as the event source:
+
+    1. Add `spec.source.kafka` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            kafka:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "NATS Streaming"
+
+    To configure Knative Eventing to install NATS Streaming as the event source:
+
+    1. Add `spec.source.natss` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            natss:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "Prometheus"
+
+    To configure Knative Eventing to install Prometheus as the event source:
+
+    1. Add `spec.source.prometheus` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            prometheus:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "RabbitMQ"
+
+    To configure Knative Eventing to install RabbitMQ as the event source,
+
+    1. Add `spec.source.rabbitmq` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            rabbitmq:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "Redis"
+
+    To configure Knative Eventing to install Redis as the event source:
+
+    1. Add `spec.source.redis` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            redis:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
 ## Installing customized Knative Eventing
 
 The Operator provides you with the flexibility to install Knative Eventing customized to your own requirements.

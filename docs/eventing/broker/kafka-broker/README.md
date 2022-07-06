@@ -15,21 +15,21 @@ The Knative Kafka Broker stores incoming CloudEvents as Kafka records, using the
 
 ## Prerequisites
 
-1. [Installing Eventing using YAML files](../../../install/yaml-install/eventing/install-eventing-with-yaml.md).
-2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
+1. You have installed Knative Eventing.
+2. You have access to an Apache Kafka cluster. For more information, see the [Strimzi Quickstart documentation](https://strimzi.io/quickstarts/).
 
 ## Installation
 
 1. Install the Kafka controller by entering the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
 1. Install the Kafka Broker data plane by entering the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-broker.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-broker.yaml") }}
     ```
 
 1. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
@@ -190,7 +190,7 @@ To use a specific SASL mechanism replace `<sasl_mechanism>` with the mechanism o
 ### Authentication using SASL without encryption
 
 ```bash
-kubectl create secret --namespace <namespace> generic <my_secret> \
+kubectl create secret -n <namespace> generic <my_secret> \
   --from-literal=protocol=SASL_PLAINTEXT \
   --from-literal=sasl.mechanism=<sasl_mechanism> \
   --from-literal=user=<my_user> \
@@ -200,7 +200,7 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
 ### Authentication using SASL and encryption using SSL
 
 ```bash
-kubectl create secret --namespace <namespace> generic <my_secret> \
+kubectl create secret -n <namespace> generic <my_secret> \
   --from-literal=protocol=SASL_SSL \
   --from-literal=sasl.mechanism=<sasl_mechanism> \
   --from-file=ca.crt=caroot.pem \
@@ -211,7 +211,7 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
 ### Encryption using SSL without client authentication
 
 ```bash
-kubectl create secret --namespace <namespace> generic <my_secret> \
+kubectl create secret -n <namespace> generic <my_secret> \
   --from-literal=protocol=SSL \
   --from-file=ca.crt=<my_caroot.pem_file_path> \
   --from-literal=user.skip=true
@@ -220,7 +220,7 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
 ### Authentication and encryption using SSL
 
 ```bash
-kubectl create secret --namespace <namespace> generic <my_secret> \
+kubectl create secret -n <namespace> generic <my_secret> \
   --from-literal=protocol=SSL \
   --from-file=ca.crt=<my_caroot.pem_file_path> \
   --from-file=user.crt=<my_cert.pem_file_path> \

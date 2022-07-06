@@ -45,14 +45,11 @@ use and configure your certificate issuer to use the
 [cb-providers]: https://certbot.eff.org/docs/using.html#changing-the-acme-server
 [cb-cli]: https://certbot.eff.org/docs/using.html#certbot-command-line-options
 
-## Before you begin
+## Prerequisites
 
-You must meet the following requirements to enable secure HTTPS connections:
-
-- Knative Serving must be installed. For details about installing the Serving
-  component, see the [Knative installation guides](../install/yaml-install/serving/install-serving-with-yaml.md).
+- You have installed Knative Serving.
 - You must configure your Knative cluster to use a
-  [custom domain](using-a-custom-domain.md).
+  [custom domain](../using-a-custom-domain.md).
 
 !!! warning
     Istio only supports a single certificate per Kubernetes cluster.
@@ -122,7 +119,7 @@ provisioning:
 
   To use cert-manager to manually obtain certificates:
 
-  1.  [Install and configure cert-manager](../install/installing-cert-manager.md).
+  1.  Install and configure cert-manager.
 
   1.  Continue to the steps about
       [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
@@ -191,8 +188,6 @@ follow the steps in the relevant tab to manually add a certificate:
            -p '{"data":{"default-tls-secret":"contour-external/default-cert"}}'
          ```
 
-
-
 === "Istio"
     To manually add a TLS certificate to your Knative cluster, you create a
     Kubernetes secret and then configure the `knative-ingress-gateway`:
@@ -205,7 +200,6 @@ follow the steps in the relevant tab to manually add a certificate:
          --key key.pem \
          --cert cert.pem
        ```
-
 
     1. Configure Knative to use the new secret that you created for HTTPS
        connections:

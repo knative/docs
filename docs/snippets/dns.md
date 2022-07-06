@@ -20,3 +20,28 @@ Follow the procedure for the DNS of your choice:
         is running.
 
         In these cases, see the "Real DNS" or "Temporary DNS" tabs.
+
+
+#### Configure DNS using Istio ingress
+
+1. Fetch the External IP or CNAME by running the command:
+
+    ```bash
+    kubectl -n istio-system get service istio-ingressgateway
+    ```
+
+#### Configure DNS using Kourier ingress
+
+1. Fetch the External IP or CNAME by running the command:
+
+    ```bash
+    kubectl -n kourier-system get service kourier
+    ```
+
+#### Configure DNS using Contour ingress
+
+1. Fetch the External IP or CNAME by running the command:
+
+    ```bash
+    kubectl -n contour-external get service envoy
+    ```
