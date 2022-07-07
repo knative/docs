@@ -94,4 +94,4 @@ spec:
 [kubernetes-overview]:
   https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields
 [cloudevents-attribute-naming]:
-  https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#attribute-naming-convention
+  https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#attribute-naming-convention

@@ -18,7 +18,7 @@ Before you can create a ContainerSource object, you must have [Knative Eventing]
 You can develop a container image by using any language, and can build and publish your image by using any tools you like. The following are some basic guidelines:
 
 - Two environments variables are injected by the ContainerSource controller; `K_SINK` and `K_CE_OVERRIDES`, resolved from `spec.sink` and `spec.ceOverrides` respectively.
-- The event messages are sent to the sink URI specified in `K_SINK`. The message must be sent as a POST in [CloudEvents HTTP format](https://github.com/cloudevents/spec/blob/v1.0.1/http-protocol-binding.md).
+- The event messages are sent to the sink URI specified in `K_SINK`. The message must be sent as a POST in [CloudEvents HTTP format](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/http-protocol-binding.md).
 
 ## Create a ContainerSource object
 
