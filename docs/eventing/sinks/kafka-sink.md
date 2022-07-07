@@ -89,9 +89,9 @@ spec:
   # default: structured.
   #
   # CloudEvent spec references:
-  # - https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#message
-  #	- https://github.com/cloudevents/spec/blob/v1.0.1/kafka-protocol-binding.md#33-structured-content-mode
-  #	- https://github.com/cloudevents/spec/blob/v1.0.1/kafka-protocol-binding.md#32-binary-content-mode
+  # - https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#message
+  #	- https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#33-structured-content-mode
+  #	- https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode
   contentMode: binary # or structured
 ```
 

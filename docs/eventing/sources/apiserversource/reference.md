@@ -259,4 +259,4 @@ spec:
 [label-selectors]:
   http://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
 [cloudevents-attribute-naming]:
-  https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#attribute-naming-convention
+  https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#attribute-naming-convention
