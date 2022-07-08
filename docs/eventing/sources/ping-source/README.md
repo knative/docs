@@ -191,7 +191,7 @@ during the verification step in this procedure.
                 - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
                 - `<content-type>` is the media type of the data you want to send, for example, `application/json`.
                 - `<base64-data>` is the base64 encoded binary data that you want to send, for example, `ZGF0YQ==`.
-                - `<sink-kind>` is any supported [Addressable](../../../reference/concepts/duck-typing.md#addressable) object that you want to use as a sink, for example, `Service` or `Deployment`.
+                - `<sink-kind>` is any supported [Addressable](../../../reference/concepts/duck-typing.md#addressable) object that you want to use as a sink, for example, a Kubernetes Service.
                 - `<sink-name>` is the name of your sink, for example, `event-display`.
 
                 For more information about the fields you can configure for the PingSource object, see [PingSource reference](reference.md).
