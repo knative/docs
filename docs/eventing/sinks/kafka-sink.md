@@ -86,7 +86,7 @@ spec:
   # - structured
   # - binary
   #
-  # default: structured.
+  # default: binary.
   #
   # CloudEvent spec references:
   # - https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#message
