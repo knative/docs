@@ -5,24 +5,11 @@ The `kn` CLI supports the use of plugins. Plugins enable you to extend the funct
 !!! warning
     The plugins must be named with the prefix `kn-` to be detected by `kn`. For example, `kn-func` will be detected but `func` won't be detected.
 
-<!--TODO: Add details about using different available plugins-->
-
-## How to install a plugin
-
-### Manual installation
-
-You can manually install all plugins. To manually install a plugin:
-
-1. Download the current release of the plugin from GitHub. See the [list of Knative plugins](#list-of-knative-plugins) you can download.
-1. Rename the file to remove the OS and architecture information. For example, rename `kn-admin-darwin-amd64` to `kn-admin`.
-1. Make the plugin executable. For example, `chmod +x kn-admin`.
-1. Move the file to a directory on your `PATH`. For example, `/usr/local/bin`.
-
-### Homebrew
-
-You can install some plugins can be installed using the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/). For example, you can install the `kn-admin` plugin by running `brew install knative-sandbox/kn-plugins/admin`.
-
 ## List of Knative plugins
+
+You can view all available `kn` plugins in the [Knative Sandbox repository](https://github.com/orgs/knative-sandbox/repositories?q=kn+plugin&type=all&language=&sort=).
+
+<!--TODO: If we're including the following table, the Client WG must be responsible for ensuring that the table is kept up to date, otherwise it should be removed from the docs and just the link to the sandbox repo should be provided-->
 
 | Plugin | Description | Available via Homebrew? |
 | --- | --- | :---: |
@@ -37,3 +24,15 @@ You can install some plugins can be installed using the [Knative plugins Homebre
 | [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka) | `kn` plugin for managing Kafka event sources | Y |
 | [kn-plugin-source-kamelet](https://github.com/knative-sandbox/kn-plugin-source-kamelet) | `kn` plugin for managing Kamelets and KameletBindings | Y |
 
+## Manually install a plugin
+
+You can manually install all plugins. To manually install a plugin:
+
+1. Download the current release of the plugin from GitHub. See the [list of Knative plugins](#list-of-knative-plugins) you can download.
+1. Rename the file to remove the OS and architecture information. For example, rename `kn-admin-darwin-amd64` to `kn-admin`.
+1. Make the plugin executable. For example, `chmod +x kn-admin`.
+1. Move the file to a directory on your `PATH`. For example, `/usr/local/bin`.
+
+## Install a plugin by using Homebrew
+
+You can install some plugins can be installed using the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/). For example, you can install the `kn-admin` plugin by running `brew install knative-sandbox/kn-plugins/admin`.
