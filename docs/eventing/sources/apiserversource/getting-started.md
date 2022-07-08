@@ -12,7 +12,7 @@ Before you can create an ApiServerSource object:
 installed on your cluster.
 - You must install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 tool.
-- Optional: If you want to use the `kn` commands, install the [`kn`](../../../install/client/configure-kn.md) tool.
+- Optional: If you want to use the `kn` commands, install the [`kn`](../../../client/configure-kn.md) tool.
 
 ## Create an ApiServerSource object
 
