@@ -37,6 +37,8 @@ The build output is the entire static site located in `./site`.
 
 You can preview the website locally by running a webserver using this directory like `npx http-server site -p 8000` if you have Node.js or `python3 -m http.server 8000` if you have Python 3.
 
+To run this script, you will need to set the `GITHUB_TOKEN` environmental variable to your [Github Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+
 
 ## (Option 2) Using native Python mkdocs CLI
 
