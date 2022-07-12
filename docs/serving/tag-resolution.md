@@ -37,7 +37,7 @@ If you are using a registry that has a self-signed certificate, you must configu
                 secretName: custom-certs
     ```
 
-    Knative Serving accepts the [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://golang.org/pkg/crypto/x509/#pkg-overview) environment variables.
+    Knative Serving accepts the [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://pkg.go.dev/crypto/x509#SystemCertPool) environment variables.
 
 1. Create a secret in the `knative-serving` namespace that points to your root CA certificate, and then save the current Knative Serving `controller` Deployment:
 
