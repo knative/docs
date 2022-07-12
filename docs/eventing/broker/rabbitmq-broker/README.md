@@ -78,7 +78,29 @@ will be `true` in the output of the following command:
 For more information about configuring the `RabbitmqCluster` CRD, see the
 [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
 
-## Create a RabbitMQ Broker object
+## Create a RabbitMQ broker config object
+
+1. Create a YAML file using the following template:
+    ```yaml
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: RabbitmqBrokerConfig
+    metadata:
+      name: <rabbitmq-broker-config-name>
+    spec:
+      rabbitmqClusterReference:
+        name: <cluster-name>
+      queueType: quorum
+    ```
+    Where <cluster-name> is the name of the RabbitMQ cluster created in the step above.
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl create -f <filename>
+    ```
+   Where `<filename>` is the name of the file you created in the previous step.
+
+## Create a RabbitMQ broker object
 
 1. Create a YAML file using the following template:
 
@@ -88,14 +110,14 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
     metadata:
       annotations:
         eventing.knative.dev/broker.class: RabbitMQBroker
-      name: <cluster-name>
+      name: <broker-name>
     spec:
       config:
         apiVersion: rabbitmq.com/v1beta1
-        kind: RabbitmqCluster
-        name: <cluster-name>
+        kind: RabbitmqBrokerConfig
+        name: <rabbitmq-broker-config-name>
     ```
-    Where `<cluster-name>` is the name you gave your RabbitMQ cluster in the step above.
+    Where `<rabbitmq-broker-config-name>` is the name you gave your RabbitMQ Broker config in the step above.
 
 1. Apply the YAML file by running the command:
 
