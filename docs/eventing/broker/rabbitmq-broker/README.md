@@ -78,7 +78,7 @@ will be `true` in the output of the following command:
 For more information about configuring the `RabbitmqCluster` CRD, see the
 [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
 
-## Create a RabbitMQ Broker Config object
+## Create a RabbitMQ broker config object
 
 1. Create a YAML file using the following template:
     ```yaml
@@ -100,7 +100,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
     ```
    Where `<filename>` is the name of the file you created in the previous step.
 
-## Create a RabbitMQ Broker object
+## Create a RabbitMQ broker object
 
 1. Create a YAML file using the following template:
 
