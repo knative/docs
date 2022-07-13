@@ -25,8 +25,8 @@ nav:
 ###############################################################################
     # Installing
 ###############################################################################
-    - Installing:
-      - Installation options: install/README.md
+    - Install Knative:
+      - Overview: install/README.md
       - Quickstart: install/quickstart-install.md
       # Serving
       - Install Knative Serving: serving/install/README.md
