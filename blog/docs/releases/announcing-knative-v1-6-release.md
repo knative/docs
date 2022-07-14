@@ -23,20 +23,26 @@ This release brings a number of smaller improvements to the core Knative Serving
     - [RabbitMQ Broker and Source](#rabbitmq-broker-and-source)
 - [Thank you contributors](#thank-you-contributors)
 
-## Serving [(release notes)](https://github.com/knative/serving/releases/tag/knative-v1.6.0)
+## Serving
+
+[Release Notes](https://github.com/knative/serving/releases/tag/knative-v1.6.0)
 
 ### 💫 New Features & Changes
 
 * The `HTTPRedirect` feature is stable and the feature flag has been removed. This feature enabled use of the `networking.knative.dev/httpOption` annotation to configure HTTP -> HTTPS redirect on a per-service basis. [#13084](https://github.com/knative/serving/pull/13084)
 * The Serving API no longer rejects unknown fields, and instead relies on the kubernetes apiserver to prune (remove) those fields. [#13095](https://github.com/knative/serving/pull/13095), [#13111](https://github.com/knative/serving/pull/13111)
 
-## Eventing [(release notes)](https://github.com/knative/eventing/releases/tag/knative-v1.6.0)
+## Eventing
+
+[Release Notes](https://github.com/knative/eventing/releases/tag/knative-v1.6.0)
 
 ### 🐞 Bug Fixes
 
 * Parallel was creating invalid subscriptions in some cases. [#6405](https://github.com/knative/eventing/pull/6405)
 
-## Client [(release notes)](https://github.com/knative/client/releases/tag/knative-v1.6.0)
+## Client
+
+[Release Notes](https://github.com/knative/client/releases/tag/knative-v1.6.0)
 
 ### 💫 New Features & Changes
 
@@ -44,7 +50,9 @@ This release brings a number of smaller improvements to the core Knative Serving
 * Serving support for `--probe-*` flags have been added to manage service liveness and readiness [#1697](https://github.com/knative/client/pull/1697)
 * Serving support for mounting EmptyDir and PersistentVolumeClaims has been added [#1679](https://github.com/knative/client/pull/1679), [#1693](https://github.com/knative/client/pull/1693)
 
-## Operator [(release notes)](https://github.com/knative/operator/releases/tag/knative-v1.6.0)
+## Operator
+
+[Release Notes](https://github.com/knative/operator/releases/tag/knative-v1.6.0)
 
 ### 💫 New Features & Changes
 
