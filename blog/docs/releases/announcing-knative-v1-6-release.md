@@ -1,20 +1,14 @@
----
-title: "v1.6 release"
-linkTitle: "v1.6 release"
-Author: "Evan Anderson and Paul Schweigert"
-Author handle: https://github.com/dprotaso
-date: 2022-07-12
-description: "Knative 1.6 release announcement"
-type: "blog"
----
+**Authors: [Evan Anderson](https://twitter.com/e_k_anderson) (VMware), Paul Schweigert (IBM)
 
-## Announcing Knative 1.6 Release
+**Date: 2022-07-12**
+
+# Announcing Knative 1.6 Release
 
 A new version of Knative is now available across multiple components.
 
 Follow the instructions in [Installing Knative](https://knative.dev/docs/install/) to install the components you require.
 
-This release brings a number of smaller improvements to the core Knative Serving and eventing components, and several improvements to specific plugins, in particular `net-kourier`, `net-gateway-api`, and `eventing-rabbitmq`.
+This release brings a number of smaller improvements to the core Knative Serving and Eventing components, and several improvements to specific plugins, in particular `net-kourier`, `net-gateway-api`, and `eventing-rabbitmq`.
 
 ## Table of Contents
 - [Serving](#serving)
