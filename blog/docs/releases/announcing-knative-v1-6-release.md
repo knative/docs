@@ -1,4 +1,4 @@
-**Authors: [Evan Anderson](https://twitter.com/e_k_anderson) (VMware), Paul Schweigert (IBM)
+**Authors: [Evan Anderson](https://twitter.com/e_k_anderson) (VMware), Paul Schweigert (IBM)**
 
 **Date: 2022-07-12**
 
