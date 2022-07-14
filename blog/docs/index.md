@@ -27,10 +27,10 @@ This is a big milestone for our project and we are excited to join the [CNCF](ht
 
 [Read more :octicons-arrow-right-24:](steering/cncf.md){ .md-button }
 
-### Knative 1.4 is out!
-Details on the 1.4 release of the Knative project.
+### Knative 1.6 is out!
+Details on the 1.6 release of the Knative project.
 
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-4-release.md){ .md-button }
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-6-release.md){ .md-button }
 
 ### Highlighting the value of Knative for the c-suite
 
