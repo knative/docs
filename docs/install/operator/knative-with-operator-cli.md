@@ -213,3 +213,8 @@ see how you can configure Knative Eventing with different event sources:
         ```bash
         kn-operator enable eventing-source --redis --namespace knative-eventing
         ```
+
+## What's next
+
+- [Configure Knative Serving using Operator](configuring-serving-cr.md)
+- [Configure Knative Eventing using Operator](configuring-eventing-cr.md)
