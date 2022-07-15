@@ -14,7 +14,13 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: 0.19.0
+  version: "1.6"
+```
+
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator install --component eventing -v 1.6 -n knative-eventing
 ```
 
 If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Eventing.
@@ -224,6 +230,13 @@ To define your image links:
           broker-controller/eventing-controller: docker.io/knative-images-repo1/broker-eventing-controller:latest
     ```
 
+   You can also run the following commands to make the equivalent change:
+
+    ```bash
+    kn-operator configure images --component eventing --imageKey default --imageURL docker.io/knative-images/${NAME}:latest -n knative-eventing
+    kn-operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/broker-eventing-controller:latest -n knative-eventing
+    ```
+
     - `${NAME}` maps to the container name in each `Deployment` resource.
     - `default` is used to define the image format for all containers, except the container `eventing-controller` in the deployment `broker-controller`. To replace the image for this container, use the `override`
     field to specify individually, by using `broker-controller/eventing-controller` as the key.
@@ -261,6 +274,16 @@ spec:
       broker-controller/eventing-controller: docker.io/knative-images-repo5/broker-eventing-controller:latest
 ```
 
+You can also run the following commands to make the equivalent change:
+
+```bash
+kn-operator configure images --component eventing --deployName eventing-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/eventing-controller:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName eventing-webhook --imageKey eventing-webhook --imageURL docker.io/knative-images-repo2/eventing-webhook:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName imc-controller --imageKey controller --imageURL docker.io/knative-images-repo3/imc-controller:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName imc-dispatcher --imageKey dispatcher --imageURL docker.io/knative-images-repo4/imc-dispatcher:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo5/broker-eventing-controller:latest -n knative-eventing
+```
+
 If you want to replace the image defined by the environment variable, you must modify the KnativeEventing CR.
 For example, if you want to replace the image defined by the environment variable `DISPATCHER_IMAGE`, in the container `controller`, of the deployment `imc-controller`, and the target image is `docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest`, the KnativeEventing CR would be as follows:
 
@@ -279,6 +302,17 @@ spec:
       imc-dispatcher/dispatcher: docker.io/knative-images-repo4/imc-dispatcher:latest
       broker-controller/eventing-controller: docker.io/knative-images-repo5/broker-eventing-controller:latest
       DISPATCHER_IMAGE: docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest
+```
+
+You can also run the following commands to make the equivalent change:
+
+```bash
+kn-operator configure images --component eventing --deployName eventing-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/eventing-controller:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName eventing-webhook --imageKey eventing-webhook --imageURL docker.io/knative-images-repo2/eventing-webhook:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName imc-controller --imageKey controller --imageURL docker.io/knative-images-repo3/imc-controller:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName imc-dispatcher --imageKey dispatcher --imageURL docker.io/knative-images-repo4/imc-dispatcher:latest -n knative-eventing
+kn-operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo5/broker-eventing-controller:latest -n knative-eventing
+kn-operator configure images --component eventing --imageKey DISPATCHER_IMAGE -controller --imageURL docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest -n knative-eventing
 ```
 
 ### Download images with secrets
@@ -371,6 +405,12 @@ spec:
         memory: 250Mi
 ```
 
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure resources --component eventing --deployName eventing-controller --container eventing-controller --requestCPU 300m --requestMemory 100Mi --limitCPU 1000m --limitMemory 250Mi -n knative-eventing
+```
+
 ### Override the nodeSelector
 
 The KnativeEventing resource is able to override the nodeSelector for the Knative Eventing deployment resources.
@@ -394,6 +434,12 @@ spec:
   - name: eventing-controller
     nodeSelector:
       disktype: hdd
+```
+
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure nodeSelector --component eventing --deployName eventing-controller --key disktype --value hdd -n knative-eventing
 ```
 
 ### Override the tolerations
@@ -425,6 +471,12 @@ spec:
       operator: "Equal"
       value: "value1"
       effect: "NoSchedule"
+```
+
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure tolerations --component eventing --deployName eventing-controller --key key1 --operator Equal --value value1 --effect NoSchedule -n knative-eventing
 ```
 
 ### Override the affinity
@@ -491,6 +543,12 @@ spec:
         value: "knative.dev/my-repo"
 ```
 
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure envvars --component eventing --deployName eventing-controller --container eventing-controller --name METRICS_DOMAIN --value "knative.dev/my-repo" -n knative-eventing
+```
+
 ## Override system services
 
 If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.
@@ -516,4 +574,12 @@ spec:
       myannotations: bar
     selector:
       myselector: bar
+```
+
+You can also run the following commands to make the equivalent change:
+
+```bash
+kn-operator configure labels --component eventing --serviceName eventing-webhook --key mylabel --value foo -n knative-eventing
+kn-operator configure annotations --component eventing --serviceName eventing-webhook --key myannotations --value bar -n knative-eventing
+kn-operator configure selectors --component eventing --serviceName eventing-webhook --key myselector --value bar -n knative-eventing
 ```
