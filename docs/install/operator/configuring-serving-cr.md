@@ -18,6 +18,12 @@ spec:
   version: 1.5
 ```
 
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator install --component serving -v 1.5 -n knative-serving
+```
+
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving.
 
 If users specify an invalid or unavailable version, the Knative Operator does nothing.
@@ -140,6 +146,12 @@ To define your image links:
         default: docker.io/knative-images/${NAME}:latest
     ```
 
+   You can also run the following command to make the equivalent change:
+
+    ```bash
+    kn-operator configure images --component serving --imageKey default --imageURL docker.io/knative-images/${NAME}:latest -n knative-serving
+    ```
+
 ### Download images individually without secrets
 
 If your custom image links are not defined in a uniform format by default, you will need to individually include each
@@ -177,6 +189,19 @@ spec:
       net-istio-controller/controller: docker.io/knative-images-repo6/prefix-net-istio-controller:latest
       net-istio-webhook/webhook: docker.io/knative-images-repo6/net-istio-webhook:latest
       queue-proxy: docker.io/knative-images-repo7/queue-proxy-suffix:latest
+```
+
+You can also run the following commands to make the equivalent change:
+
+```bash
+kn-operator configure images --component serving --imageKey activator --imageURL docker.io/knative-images-repo1/activator:latest -n knative-serving
+kn-operator configure images --component serving --imageKey autoscaler --imageURL docker.io/knative-images-repo2/autoscaler:latest -n knative-serving
+kn-operator configure images --component serving --imageKey controller --imageURL docker.io/knative-images-repo3/controller:latest -n knative-serving
+kn-operator configure images --component serving --imageKey webhook --imageURL docker.io/knative-images-repo4/webhook:latest -n knative-serving
+kn-operator configure images --component serving --imageKey autoscaler-hpa --imageURL docker.io/knative-images-repo5/autoscaler-hpa:latest -n knative-serving
+kn-operator configure images --component serving --deployName net-istio-controller --imageKey controller --imageURL docker.io/knative-images-repo6/prefix-net-istio-controller:latest -n knative-serving
+kn-operator configure images --component serving --deployName net-istio-webhook --imageKey webhook --imageURL docker.io/knative-images-repo6/net-istio-webhook:latest -n knative-serving
+kn-operator configure images --component serving --imageKey queue-proxy --imageURL docker.io/knative-images-repo7/queue-proxy-suffix:latest -n knative-serving
 ```
 
 !!! note
@@ -395,6 +420,12 @@ spec:
     replicas: 3
 ```
 
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure replicas --component serving --replicas 3 -n knative-serving
+```
+
 The `replicas` field also configures the `HorizontalPodAutoscaler` resources based on the `spec.high-availability`. Let's say the operator includes the following HorizontalPodAutoscaler:
 
 ```yaml
@@ -440,6 +471,12 @@ spec:
         memory: 250Mi
 ```
 
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure resources --component serving --deployName controller --container controller --requestCPU 300m --requestMemory 100Mi --limitCPU 1000m --limitMemory 250Mi -n knative-serving
+```
+
 ### Override replicas, labels and annotations
 
 The following KnativeServing resource overrides the `webhook` deployment to have `3` Replicas, the label `mylabel: foo`, and the annotation `myannotations: bar`, while other system deployments have `2` Replicas by using `spec.high-availability`.
@@ -462,6 +499,15 @@ spec:
       myannotations: bar
 ```
 
+You can also run the following commands to make the equivalent change:
+
+```bash
+kn-operator configure replicas --component serving --replicas 2 -n knative-serving
+kn-operator configure replicas --component serving --deployName webhook --replicas 3 -n knative-serving
+kn-operator configure labels --component serving --deployName webhook --key mylabel --value foo -n knative-serving
+kn-operator configure annotations --component serving --deployName webhook --key myannotations --value bar -n knative-serving
+```
+
 !!! note
     The `KnativeServing` CR `label` and `annotation` settings override the webhook's labels and annotations for Deployments and Pods.
 
@@ -480,6 +526,12 @@ spec:
   - name: webhook
     nodeSelector:
       disktype: hdd
+```
+
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure nodeSelectors --component serving --deployName webhook --key disktype --value hdd -n knative-serving
 ```
 
 ### Override the tolerations
@@ -511,6 +563,12 @@ spec:
       operator: "Equal"
       value: "value1"
       effect: "NoSchedule"
+```
+
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure tolerations --component serving --deployName activator --key key1 --operator Equal --value value1 --effect NoSchedule -n knative-serving
 ```
 
 ### Override the affinity
@@ -577,6 +635,12 @@ spec:
         value: "knative.dev/my-repo"
 ```
 
+You can also run the following command to make the equivalent change:
+
+```bash
+kn-operator configure envvars --component serving --deployName controller --container controller --name METRICS_DOMAIN --value "knative.dev/my-repo" -n knative-serving
+```
+
 ## Override system services
 
 If you would like to override some configurations for a specific service, you can override the configuration by using `spec.services` in CR.
@@ -602,4 +666,12 @@ spec:
       myannotations: bar
     selector:
       myselector: bar
+```
+
+You can also run the following commands to make the equivalent change:
+
+```bash
+kn-operator configure labels --component serving --serviceName webhook --key mylabel --value foo -n knative-serving
+kn-operator configure annotations --component serving --serviceName webhook --key myannotations --value bar -n knative-serving
+kn-operator configure selectors --component serving --serviceName webhook --key myselector --value bar -n knative-serving
 ```
