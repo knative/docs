@@ -133,6 +133,18 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
+      - Brokers:
+        - What is a broker?: eventing/broker/README.md
+        - Broker types:
+          - Choosing a broker type: eventing/broker/choosing-a-broker.md
+          - Knative Kafka broker: eventing/broker/kafka-broker/README.md
+          - RabbitMQ broker: eventing/broker/rabbitmq-broker/README.md
+        - Configuring your cluster to use brokers: eventing/broker/broker-setup.md
+        - How Knative brokers work - a deep dive: eventing/broker/how-brokers-work.md
+        - Configure event delivery: eventing/broker/broker-event-delivery-config.md
+        - Using the event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
+        - Creating a broker: eventing/broker/create-mtbroker.md
+        - Triggers: eventing/broker/triggers/README.md
       # Eventing - developer docs
       - Developer topics:
         - Event sources:
@@ -183,21 +195,12 @@ nav:
           - Available Channels: eventing/channels/channels-crds.md
           - Subscriptions: eventing/channels/subscriptions.md
         - Sugar Controller: eventing/sugar/README.md
-        - Brokers:
-          - About Brokers: eventing/broker/README.md
-          - Using the Event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
-          - Creating a Broker: eventing/broker/create-mtbroker.md
-          - Triggers: eventing/broker/triggers/README.md
-          - Broker configuration example: eventing/broker/example-mtbroker.md
-          - Knative Kafka Broker: eventing/broker/kafka-broker/README.md
-          - RabbitMQ Broker: eventing/broker/rabbitmq-broker/README.md
         - Accessing CloudEvent traces: eventing/accessing-traces.md
       # Eventing - admin docs
       - Administrator topics:
         # Eventing config
         - Eventing configuration:
           - Configure Channel defaults: eventing/configuration/channel-configuration.md
-          - Configure Broker defaults: eventing/configuration/broker-configuration.md
           - Configure Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md

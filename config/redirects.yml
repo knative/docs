@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      eventing/broker/example-mtbroker.md: eventing/broker/README.md
       community/contributing.md : contributing/contributing.md
       community/about.md : contributing/about.md
       community/README.md : contributing/README.md
@@ -9,7 +10,7 @@ plugins:
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
       admin/collecting-metrics/eventing-metrics/metrics.md: eventing/observability/metrics/eventing-metrics.md
       admin/collecting-metrics/serving-metrics/metrics.md: serving/observability/metrics/serving-metrics.md
-      admin/eventing/broker-configuration.md: eventing/configuration/broker-configuration.md
+      admin/eventing/broker-configuration.md: eventing/broker/README.md
       admin/eventing/channel-configuration.md: eventing/configuration/channel-configuration.md
       admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
       admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
@@ -105,8 +106,8 @@ plugins:
       developer/serving/traffic-management.md: serving/traffic-management.md
       developer/serving/troubleshooting/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
       eventing/broker/alternate/index.md: eventing/broker/README.md
-      eventing/broker/broker-event-delivery.md: eventing/event-delivery.md
-      eventing/broker/configmaps/README.md: eventing/configuration/broker-configuration.md
+      eventing/broker/broker-event-delivery.md: eventing/broker/broker-event-delivery-config.md
+      eventing/broker/configmaps/README.md: eventing/broker/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
       eventing/debugging/README.md: eventing/troubleshooting/README.md

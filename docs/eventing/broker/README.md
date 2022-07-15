@@ -1,55 +1,41 @@
-# Brokers
+# What is a broker?
 
-Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that define an event mesh for collecting a pool of [CloudEvents](https://cloudevents.io/). Brokers provide a discoverable endpoint, `status.address`, for event ingress, and triggers for event delivery. Event producers can send events to a broker by POSTing the event to the `status.address.url` of the broker.
+A broker is middleware that is used to manage event delivery between event producers and consumers.
 
-Event delivery mechanics are an implementation detail that depend on the configured
-[broker class](../configuration/broker-configuration.md#broker-class-options).
-Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
+Knative brokers manage CloudEvents, and use a traditional publish-subscribe pattern. If non-CloudEvent spec events are sent to a Knative broker, the event is transformed to use the correct schema automatically before it is routed to an event consumer.
 
-![An event enters a Broker. The Broker uses Triggers to forward the event to the appropriate Subscriber.](images/broker-workflow.svg)
+## Why use Knative brokers?
 
-After an event has entered a broker, it can be forwarded to subscribers by using triggers. Triggers allow events to be filtered by attributes, so that events with particular attributes can be sent to subscribers that have registered interest in events with those attributes.
+In a Knative deployment, brokers provide the following benefits over having to configure sending and managing events directly between each producer and consumer:
 
-A subscriber can be any URL or _Addressable_ resource. Subscribers can also reply to an active request from the broker, and can respond with a new CloudEvent that will be sent back into the broker.
+- You can use triggers to filter which events are sent to which consumers from the broker's common event pool.
 
-For most use cases, a single broker per namespace is sufficient, but
-there are several use cases where multiple brokers can simplify
-architecture. For example, separate brokers for events containing Personally
-Identifiable Information (PII) and non-PII events can simplify audit and access
-control rules.
+- You can configure event delivery options for each event consumer, including specifications about what to do if an event is not able to be delivered.
 
-## Broker types
+- You can configure the order in which events are sent from the broker to a consumer.
 
-The following broker types are available for use with Knative Eventing.
+- You can use the Knative event registry to discover event types that brokers can consume, and create triggers for these event types.
 
-### Multi-tenant channel-based broker
+- You can view metrics to understand how efficiency your event-driven applications are working, and troubleshoot any event delivery performance issues.
 
-Knative Eventing provides a multi-tenant (MT) channel-based broker implementation that uses channels for event routing.
+<!--
+- Security at various levels of authentication, authorization and topic/channel access control.
 
-Before you can use the MT channel-based broker, you must install a
-[channel implementation](../channels/channel-types-defaults.md).
+- Optimization of scaling to support the varying traffic density of certain event types through intelligent clustering.
+-->
 
-### Alternative broker implementations
+## Next concepts
 
-In the Knative Eventing ecosystem, alternative broker implementations are welcome as long as they respect the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/control-plane.md#broker-lifecycle).
-
-The following is a list of brokers provided by the community or vendors:
-
-#### GCP broker
-
-The GCP broker is optimized for running in GCP. For more details, refer to the [documentation](https://github.com/google/knative-gcp/blob/master/docs/install/install-gcp-broker.md).
-
-#### Apache Kafka broker
-
-For more information, see [Apache Kafka Broker](kafka-broker/README.md).
-
-#### RabbitMQ broker
-
-The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlying implementation.
-For more information, see [RabbitMQ Broker](rabbitmq-broker/README.md) or [the docs available on GitHub](https://github.com/knative-sandbox/eventing-rabbitmq).
-
-## Next steps
-
-- Create an [MT channel-based broker](create-mtbroker.md).
-- Configure [default broker ConfigMap settings](../configuration/broker-configuration.md).
-- View the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#broker).
+- [Choosing a broker type](choosing-a-broker.md)
+- Good links about (advanced) event brokers
+- Event producer
+- Event consumer
+- Publish-subscribe pattern
+- Triggers and filtering
+- Event ordering
+- [CloudEvents](https://cloudevents.io/)
+- Event registry
+- Broker security
+- High availability and autoscaling
+- Event delivery and delivery failure
+- Observability and metrics
