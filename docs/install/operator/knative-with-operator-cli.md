@@ -8,6 +8,8 @@ resources.
 
 ## Install the Knative Operator CLI Plugin
 
+Before you install the Knative Operator CLI Plugin, first install the [Knative CLI](../../client/install-kn.md).
+
 === "MacOS"
 
     1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.6.0).
@@ -34,10 +36,16 @@ Make the plugin executable by running the command:
 chmod +x kn-operator
 ```
 
-Move the file to a directory on your `PATH` by running:
+Create the directory for the `kn` plugin:
 
 ```bash
-mv kn-operator /usr/local/bin
+mkdir -p ~/.config/kn/plugins
+```
+
+Move the file to a plugin directory for `kn`:
+
+```bash
+cp kn-operator ~/.config/kn/plugins
 ```
 
 ## Verify the installation of the Knative Operator CLI Plugin
@@ -45,7 +53,7 @@ mv kn-operator /usr/local/bin
 You can run the following command to verify the installation:
 
 ```bash
-kn-operator -h
+kn operator -h
 ```
 
 You should see more information about how to use this CLI plugin.
@@ -58,19 +66,19 @@ and the version is the latest.
 To install the latest version of Knative Operator, run:
 
 ```bash
-kn-operator install
+kn operator install
 ```
 
 To install Knative Operator under a certain namespace, e.g. knative-operator, run:
 
 ```bash
-kn-operator install -n knative-operator
+kn operator install -n knative-operator
 ```
 
 To install Knative Operator of a specific version, e.g. 1.6.0, run:
 
 ```bash
-kn-operator install -v 1.6.0
+kn operator install -v 1.6.0
 ```
 
 ## Installing the Knative Serving component
@@ -81,19 +89,19 @@ and the version is the latest.
 To install the latest version of Knative Serving, run:
 
 ```bash
-kn-operator install --component serving
+kn operator install --component serving
 ```
 
 To install Knative Serving under a certain namespace, e.g. knative-serving, run:
 
 ```bash
-kn-operator install --component serving -n knative-serving
+kn operator install --component serving -n knative-serving
 ```
 
 To install Knative Operator of a specific version, e.g. 1.6.0, run:
 
 ```bash
-kn-operator install --component serving -n knative-serving -v 1.6
+kn operator install --component serving -n knative-serving -v 1.6
 ```
 
 ### Install the networking layer
@@ -108,7 +116,7 @@ you can configure Knative Serving with different ingresses:
     1. To configure Knative Serving to use Kourier, run the command as follows:
 
         ```bash
-        kn-operator enable ingress --kourier -n knative-serving
+        kn operator enable ingress --kourier -n knative-serving
         ```
 
 === "Istio (default)"
@@ -120,7 +128,7 @@ you can configure Knative Serving with different ingresses:
     1. To configure Knative Serving to use Istio, run the command as follows:
 
         ```bash
-        kn-operator enable ingress --istio -n knative-serving
+        kn operator enable ingress --istio -n knative-serving
 
 === "Contour"
 
@@ -135,7 +143,7 @@ you can configure Knative Serving with different ingresses:
     1. To configure Knative Serving to use Contour, run the command as follows:
 
         ```bash
-        kn-operator enable ingress --contour -n knative-serving
+        kn operator enable ingress --contour -n knative-serving
 
 ## Installing the Knative Eventing component
 
@@ -145,19 +153,19 @@ and the version is the latest.
 To install the latest version of Knative Eventing, run:
 
 ```bash
-kn-operator install --component eventing
+kn operator install --component eventing
 ```
 
 To install Knative Eventing under a certain namespace, e.g. knative-eventing, run:
 
 ```bash
-kn-operator install --component eventing -n knative-eventing
+kn operator install --component eventing -n knative-eventing
 ```
 
 To install Knative Operator of a specific version, e.g. 1.6.0, run:
 
 ```bash
-kn-operator install --component eventing -n knative-eventing -v 1.6
+kn operator install --component eventing -n knative-eventing -v 1.6
 ```
 
 ### Installing Knative Eventing with event sources
@@ -171,7 +179,7 @@ see how you can configure Knative Eventing with different event sources:
     1. To install the eventing source Ceph, run the following command:
 
         ```bash
-        kn-operator enable eventing-source --ceph --namespace knative-eventing
+        kn operator enable eventing-source --ceph --namespace knative-eventing
         ```
 
 === "GitHub"
@@ -179,7 +187,7 @@ see how you can configure Knative Eventing with different event sources:
     1. To install the eventing source Github, run the following command:
 
         ```bash
-        kn-operator enable eventing-source --github --namespace knative-eventing
+        kn operator enable eventing-source --github --namespace knative-eventing
         ```
 
 === "GitLab"
@@ -187,7 +195,7 @@ see how you can configure Knative Eventing with different event sources:
     1. To install the eventing source Gitlab, run the following command:
 
         ```bash
-        kn-operator enable eventing-source --gitlab --namespace knative-eventing
+        kn operator enable eventing-source --gitlab --namespace knative-eventing
         ```
 
 === "Apache Kafka"
@@ -195,7 +203,7 @@ see how you can configure Knative Eventing with different event sources:
     1. To install the eventing source Kafka, run the following command:
 
         ```bash
-        kn-operator enable eventing-source --kafka --namespace knative-eventing
+        kn operator enable eventing-source --kafka --namespace knative-eventing
         ```
 
 === "RabbitMQ"
@@ -203,7 +211,7 @@ see how you can configure Knative Eventing with different event sources:
     1. To install the eventing source RabbitMQ, run the following command:
 
         ```bash
-        kn-operator enable eventing-source --rabbitmq --namespace knative-eventing
+        kn operator enable eventing-source --rabbitmq --namespace knative-eventing
         ```
 
 === "Redis"
@@ -211,7 +219,7 @@ see how you can configure Knative Eventing with different event sources:
     1. To install the eventing source Redis, run the following command:
 
         ```bash
-        kn-operator enable eventing-source --redis --namespace knative-eventing
+        kn operator enable eventing-source --redis --namespace knative-eventing
         ```
 
 ## What's next
