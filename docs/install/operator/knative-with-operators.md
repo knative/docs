@@ -342,33 +342,6 @@ see how you can configure Knative Eventing with different event sources:
 
         Where `<filename>` is the name of the file you created in the previous step.
 
-=== "Apache CouchDB"
-
-    To configure Knative Eventing to install Apache CouchDB as the event source:
-
-    1. Add `spec.source.couchdb` to your Eventing CR YAML file as follows:
-
-        ```yaml
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        spec:
-          # ...
-          source:
-            couchdb:
-              enabled: true
-        ```
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
 === "GitHub"
 
     To configure Knative Eventing to install GitHub as the event source:
@@ -439,60 +412,6 @@ see how you can configure Knative Eventing with different event sources:
           # ...
           source:
             kafka:
-              enabled: true
-        ```
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "NATS Streaming"
-
-    To configure Knative Eventing to install NATS Streaming as the event source:
-
-    1. Add `spec.source.natss` to your Eventing CR YAML file as follows:
-
-        ```yaml
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        spec:
-          # ...
-          source:
-            natss:
-              enabled: true
-        ```
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "Prometheus"
-
-    To configure Knative Eventing to install Prometheus as the event source:
-
-    1. Add `spec.source.prometheus` to your Eventing CR YAML file as follows:
-
-        ```yaml
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        spec:
-          # ...
-          source:
-            prometheus:
               enabled: true
         ```
 
