@@ -41,6 +41,7 @@ nav:
       # Operator Installation
       - Install with Knative Operator:
         - Install by using the Knative Operator: install/operator/knative-with-operators.md
+        - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
         - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
         - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
