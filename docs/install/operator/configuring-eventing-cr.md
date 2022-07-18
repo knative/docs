@@ -232,7 +232,7 @@ To define your image links:
 
    You can also run the following commands to make the equivalent change:
 
-    ```bash
+    ```yaml
     kn operator configure images --component eventing --imageKey default --imageURL docker.io/knative-images/${NAME}:latest -n knative-eventing
     kn operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/broker-eventing-controller:latest -n knative-eventing
     ```
