@@ -8,37 +8,46 @@ helps to provide consistency for Deployments. For more information, see the docu
 
 ## Custom certificates
 
-If you are using a registry that has a self-signed certificate, you must configure the Knative Serving controller to trust that certificate.
+If you are using a registry that has a self-signed certificate, you must configure the default Knative Serving `controller` Deployment to trust that certificate. You can configure trusting certificates by mounting your certificates into the `controller` Deployment, and then setting the environment variable appropriately.
 
-Knative Serving accepts the [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://golang.org/pkg/crypto/x509/#pkg-overview) environment variables.
+### Procedure
 
-You can configure trusting certificates by mounting your certificates into
-the controller Deployment, and then setting the environment variable appropriately.
+1. If you are using a `custom-certs` secret that contains your CA certificates, add the following spec to the default Knative Serving `controller` Deployment:
 
-For example, if you are using a `custom-certs` secret that contains your CA certificates, the Deployment object is as follows:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: controller
-  namespace: knative-serving
-spec:
-  template:
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: controller
+      namespace: knative-serving
     spec:
-      containers:
-        - name: controller
-          volumeMounts:
+      template:
+        spec:
+          containers:
+            - name: controller
+              volumeMounts:
+                - name: custom-certs
+                  mountPath: /path/to/custom/certs
+              env:
+                - name: SSL_CERT_DIR
+                  value: /path/to/custom/certs
+          volumes:
             - name: custom-certs
-              mountPath: /path/to/custom/certs
-          env:
-            - name: SSL_CERT_DIR
-              value: /path/to/custom/certs
-      volumes:
-        - name: custom-certs
-          secret:
-            secretName: custom-certs
-```
+              secret:
+                secretName: custom-certs
+    ```
+
+    Knative Serving accepts the [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://pkg.go.dev/crypto/x509#SystemCertPool) environment variables.
+
+1. Create a secret in the `knative-serving` namespace that points to your root CA certificate, and then save the current Knative Serving `controller` Deployment:
+
+    ```bash
+    kubectl -n knative-serving create secret generic customca --from-file=ca.crt=/root/ca.crt
+    ```
+
+    ```bash
+    kubectl -n knative-serving get deploy/controller -o yaml > knative-serving-controller.yaml
+    ```
 
 ## Corporate proxy
 
