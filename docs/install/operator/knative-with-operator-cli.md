@@ -129,6 +129,7 @@ you can configure Knative Serving with different ingresses:
 
         ```bash
         kn operator enable ingress --istio -n knative-serving
+        ```
 
 === "Contour"
 
@@ -144,6 +145,7 @@ you can configure Knative Serving with different ingresses:
 
         ```bash
         kn operator enable ingress --contour -n knative-serving
+        ```
 
 ## Installing the Knative Eventing component
 
