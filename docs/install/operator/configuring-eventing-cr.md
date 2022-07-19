@@ -505,3 +505,20 @@ kn operator configure labels --component eventing --serviceName eventing-webhook
 kn operator configure annotations --component eventing --serviceName eventing-webhook --key myannotations --value bar -n knative-eventing
 kn operator configure selectors --component eventing --serviceName eventing-webhook --key myselector --value bar -n knative-eventing
 ```
+
+## Override system podDisruptionBudgets
+
+You can configure the `minAvailable` for a specific podDisruptionBudget resource based on the name. For example, if you would like
+to change `minAvailable` into 70% for the podDisruptionBudget named `eventing-webhook`, you need to change your KnativeEventing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  podDisruptionBudgets:
+  - name: eventing-webhook
+    minAvailable: 70%
+```
