@@ -129,7 +129,7 @@ nav:
       # Serving - troubleshooting
       - Troubleshooting:
         - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
-    # Eventing reference docs
+    # Serving reference docs
       - Reference:
         - Serving API: serving/reference/serving-api.md
 ###############################################################################
