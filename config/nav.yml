@@ -129,6 +129,9 @@ nav:
       # Serving - troubleshooting
       - Troubleshooting:
         - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
+    # Eventing reference docs
+      - Reference:
+        - Serving API: serving/reference/api/serving-api.md
 ###############################################################################
     # Eventing
 ###############################################################################
@@ -219,6 +222,9 @@ nav:
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
         - Strict Subscriber: eventing/experimental-features/strict-subscriber.md
+    # Eventing reference docs
+      - Reference:
+        - Eventing API: eventing/reference/api/eventing-api.md
 ###############################################################################
     # CLI
 ###############################################################################
@@ -236,11 +242,6 @@ nav:
       - Eventing code samples: samples/eventing.md
     # Reference docs
     - Reference:
-      - Reference overview: reference/README.md
-      - API:
-        - Serving: reference/api/serving-api.md
-        - Eventing: reference/api/eventing-api.md
-      - Client: reference/client/README.md
       - Concepts:
         - Duck types: reference/concepts/duck-typing.md
       - Security: reference/security/README.md
