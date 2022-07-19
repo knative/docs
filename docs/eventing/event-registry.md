@@ -52,7 +52,7 @@ status:
 ```
 
 For the full specification for an EventType object, see the
-[EventType API reference](../reference/api/eventing-api.md#eventing.knative.dev/v1beta1.EventType).
+[EventType API reference](../eventing/reference/eventing-api.md#eventing.knative.dev/v1beta1.EventType).
 
 The `metadata.name` field is advisory, that is, non-authoritative.
 It is typically generated using `generateName` to avoid naming collisions.

@@ -61,7 +61,7 @@ Target burst capacity can be configured using a combination of the following par
 !!! note
 
     Ingress gateway load balancing requires additional configuration. For more information about load balancing using an ingress
-    gateway, see the [Serving API](../../reference/api/serving-api.md) documentation.
+    gateway, see the [Serving API](../../serving/reference/serving-api.md) documentation.
 
 
 - If `autoscaling.knative.dev/target-burst-capacity` is set to `0`, the Activator is only added to the request path during scale from zero scenarios, and ingress load balancing will be applied.
