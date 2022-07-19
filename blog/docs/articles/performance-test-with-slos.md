@@ -5,8 +5,6 @@
 **Date: 2022-07-18**
 
 
-> Launch performance tests for Knative services (HTTP and gRPC) and validate their service-level objectives (SLOs) **in seconds**.
-
 Performance testing is a core building block in the robust delivery of HTTP and gRPC services. One way to accomplish this is by sending a stream of requests to the target service, and evaluating the responses for error and latency-related violations. From a developer’s perspective, this approach has three main considerations, namely, i) the load-related characteristics of the request stream, such as the request rate; ii) the shape of the requests, in particular, whether the service requires any payload/data to be sent as part of the requests; and iii) the service-level objectives (SLOs) used to validate the quality of the target service.
 
 You can use [Iter8](https://iter8.tools), the open source Kubernetes release optimizer, to flexibly launch performance tests for Knative services **in seconds**, with precise control over all of the above. This article introduces these capabilities.
