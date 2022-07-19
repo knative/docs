@@ -1,6 +1,9 @@
 plugins:
   redirects:
     redirect_maps:
+      reference/client/README.md: client/README.md
+      reference/api/eventing-api.md: eventing/reference/eventing-api.md
+      reference/api/serving-api.md: serving/reference/serving-api.md
       community/contributing.md: contributing/contributing.md
       community/about.md: contributing/about.md
       community/README.md: contributing/README.md
