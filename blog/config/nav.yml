@@ -38,6 +38,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/performance-test-with-slos.md
           - articles/workflow-as-function-flow.md
           - articles/highlighting-value-knative-c-suite.md
           - articles/quickstart-with-knative.md

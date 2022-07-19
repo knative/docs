@@ -27,7 +27,6 @@ A list of links to Knative code samples located outside of Knative repos:
 - [Knative Eventing (Cloud Events) example using spring-boot and spring-cloud-streams + Kafka](https://salaboy.com/2020/02/20/getting-started-with-knative-2020/)
 - [Image processing pipeline using Knative Eventing on GKE, Google Cloud Vision API and ImageSharp library](https://github.com/meteatamel/knative-tutorial/blob/master/docs/image-processing-pipeline.md)
 - [BigQuery processing pipeline using Knative Eventing on GKE, Cloud Scheduler, BigQuery, mathplotlib and SendGrid](https://github.com/meteatamel/knative-tutorial/blob/master/docs/bigquery-processing-pipeline.md)
-- [Performance (load) testing with SLO validation for Knative HTTP services](https://iter8.tools/0.8/tutorials/load-test-http/community/knative/loadtest/)
-- [Performance (load) testing with SLO validation for Knative gRPC services](https://iter8.tools/0.8/tutorials/load-test-grpc/community/knative/loadtest/)
+- [Performance testing with SLO validation](/blog/articles/performance-test-with-slos/)
 
 _Please add links to your externally hosted Knative code sample._

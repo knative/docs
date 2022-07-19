@@ -20,3 +20,6 @@ blog/docs/images/case-studies/
 .classpath
 .project
 *.class
+
+# Ignore Python virtual environments
+.venv
