@@ -131,7 +131,7 @@ nav:
         - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
     # Eventing reference docs
       - Reference:
-        - Serving API: serving/reference/api/serving-api.md
+        - Serving API: serving/reference/serving-api.md
 ###############################################################################
     # Eventing
 ###############################################################################
@@ -224,7 +224,7 @@ nav:
         - Strict Subscriber: eventing/experimental-features/strict-subscriber.md
     # Eventing reference docs
       - Reference:
-        - Eventing API: eventing/reference/api/eventing-api.md
+        - Eventing API: eventing/reference/eventing-api.md
 ###############################################################################
     # CLI
 ###############################################################################
