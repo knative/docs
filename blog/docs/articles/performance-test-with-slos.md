@@ -23,7 +23,7 @@ You can use [Iter8](https://iter8.tools), the open source Kubernetes release opt
 ### Iter8 experiment
 [Iter8](https://iter8.tools) introduces the notion of an [experiment](https://iter8.tools/0.11/getting-started/concepts/#iter8-experiment), which is a list of configurable tasks that are executed in a specific sequence.
 
-<img src="../images/iter8-intro-dark.png" alt="Iter8 experiment" width="600"/>
+<img src="/blog/docs/articles/images/iter8-intro-dark.png" alt="Iter8 experiment" width="600"/>
 
 [Iter8](https://iter8.tools) packs a number of powerful features that facilitate Kubernetes app testing and experimentation. They include the following.
 
@@ -48,7 +48,7 @@ brew install iter8@0.11
 ### Tutorial: Performance test for Knative HTTP service
 In this tutorial, we will launch an Iter8 experiment that generates load for a Knative HTTP service, collects Iter8's built-in HTTP metrics, and validates the specified service-level objectives (SLOs). This experiment is illustrated in the figure below.
 
-<img src="../images/iter8-http.png" alt="HTTP performance test" width="800"/>
+<img src="/blog/docs/articles/images/iter8-http.png" alt="HTTP performance test" width="800"/>
 
 Install Knative in your Kubernetes cluster, and deploy your Knative HTTP Service as described in [this Knative tutorial](https://knative.dev/docs/getting-started/first-service/). 
 
@@ -120,12 +120,12 @@ Once the experiment completes (~5 secs), view the experiment report as follows.
     ```
 
     ??? note "The HTML report looks like this"
-        ![HTML report](images/iter8-report.html.png)
+        ![HTML report](/blog/docs/articles/images/iter8-report.html.png)
 
 ### Tutorial: Performance test for Knative gRPC service
 In this tutorial, we will launch an Iter8 experiment that generates load for a Knative gRPC service, collects Iter8's built-in gRPC metrics, and validates the specified service-level objectives (SLOs). This experiment is illustrated in the figure below.
 
-<img src="../images/iter8-grpc.png" alt="gRPC performance test" width="800"/>
+<img src="/blog/docs/articles/images/iter8-grpc.png" alt="gRPC performance test" width="800"/>
 
 Use the [Knative (`kn`) CLI](https://knative.dev/docs/client/install-kn/) to update the Knative service deployed in the [above tutorial](#tutorial-performance-test-for-knative-http-service) to a gRPC service as follows.
 
