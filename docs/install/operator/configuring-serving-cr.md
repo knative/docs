@@ -148,7 +148,7 @@ To define your image links:
 
    You can also run the following command to make the equivalent change:
 
-    ```yaml
+    ```bash
     kn operator configure images --component serving --imageKey default --imageURL docker.io/knative-images/${NAME}:latest -n knative-serving
     ```
 
