@@ -1,9 +1,9 @@
 plugins:
   redirects:
     redirect_maps:
-      community/contributing.md : contributing/contributing.md
-      community/about.md : contributing/about.md
-      community/README.md : contributing/README.md
+      community/contributing.md: contributing/contributing.md
+      community/about.md: contributing/about.md
+      community/README.md: contributing/README.md
       eventing/getting-started.md: getting-started/getting-started-eventing.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
