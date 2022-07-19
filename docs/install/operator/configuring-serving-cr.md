@@ -675,3 +675,20 @@ kn operator configure labels --component serving --serviceName webhook --key myl
 kn operator configure annotations --component serving --serviceName webhook --key myannotations --value bar -n knative-serving
 kn operator configure selectors --component serving --serviceName webhook --key myselector --value bar -n knative-serving
 ```
+
+## Override system podDisruptionBudgets
+
+You can configure the `minAvailable` for a specific podDisruptionBudget resource based on the name. For example, if you would like
+to change `minAvailable` into 70% for the podDisruptionBudget named `activator-pdb`, you need to change your KnativeServing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  podDisruptionBudgets:
+  - name: activator-pdb
+    minAvailable: 70%
+```
