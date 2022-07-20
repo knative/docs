@@ -1,13 +1,6 @@
-# Deploying your first Knative Service
+# Deploying a Knative Service
 
-**In this tutorial, you will deploy a "Hello world" service.**
-
-Since our "Hello world" Service is being deployed as a Knative Service, not a Kubernetes Service, it gets some **super powers out of the box** :rocket:.
-
-## Knative Service: "Hello world!"
-
-First, deploy the Knative Service. This service accepts the environment variable,
-`TARGET`, and prints `Hello ${TARGET}!`.
+In this tutorial, you will deploy a "Hello world" Knative Service that accepts the environment variable `TARGET` and prints `Hello ${TARGET}!`.
 
 === "kn"
 
@@ -56,12 +49,12 @@ First, deploy the Knative Service. This service accepts the environment variable
             service.serving.knative.dev/hello created
             ```
 
-## List your Knative Service
+## List Knative Services
 
-To see the URL where your Knative Service is hosted, leverage the `kn` CLI:
+Use the Knative (`kn`) CLI to view the URL where your Knative Service is hosted:
 
 === "kn"
-    View a list of Knative services by running the command:
+    View a list of Knative Services by running the command:
     ```bash
     kn service list
     ```
@@ -71,7 +64,7 @@ To see the URL where your Knative Service is hosted, leverage the `kn` CLI:
         hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001   13s   3 OK / 3     True
         ```
 === "kubectl"
-    View a list of Knative services by running the command:
+    View a list of Knative Services by running the command:
     ```bash
     kubectl get ksvc
     ```
@@ -81,7 +74,7 @@ To see the URL where your Knative Service is hosted, leverage the `kn` CLI:
         hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001     hello-00001   True
         ```
 
-## Access your Knative Service
+## Access the Knative Service
 
 Access your Knative Service by opening the previous URL in your browser or by running the command:
 
@@ -110,5 +103,3 @@ curl "$(kn service describe hello -o url)"
     Then simply restart the service with `sudo service systemd-resolved restart`.
 
     For MacOS users, you can add the DNS and domain using the network settings as explained [here](https://support.apple.com/en-gb/guide/mac-help/mh14127/mac).
-
-Congratulations :tada:, you've just created your first Knative Service. Up next, Autoscaling!
