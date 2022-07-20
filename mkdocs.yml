@@ -34,8 +34,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.snippets:
       base_path: docs/snippets
-      url_download: true
-      check_paths: true
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
