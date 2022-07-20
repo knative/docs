@@ -1,6 +1,6 @@
-# Scaling to Zero
+# Autoscaling
 
-Knative Serving provides automatic scaling, also known as **autoscaling**. This means that a Knative Service only spins up your application to perform its job (in this case, saying "Hello world!") if it is needed. Otherwise, it will **scale to zero** by spinning down and waiting for a new request to come in.
+Knative Serving provides automatic scaling, also known as **autoscaling**. This means that a Knative Service by default scales down to zero running pods when it is not in use.
 
 ## List your Knative Service
 

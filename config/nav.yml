@@ -13,7 +13,7 @@ nav:
         - Install Knative using quickstart: getting-started/quickstart-install.md
         - Using Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
-          - Scaling to zero: getting-started/first-autoscale.md
+          - Autoscaling: getting-started/first-autoscale.md
           - Traffic splitting: getting-started/first-traffic-split.md
         - Using Knative Eventing:
           - Introducing Knative Eventing: getting-started/getting-started-eventing.md
