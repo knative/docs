@@ -18,9 +18,6 @@
 # It is started by prow for each PR.
 # For convenience, it can also be executed manually.
 
-# Force presubmit link checking only.
-DISABLE_MD_LINTING=1
-
 source $(dirname $0)/../vendor/knative.dev/hack/presubmit-tests.sh
 
 initialize_environment
