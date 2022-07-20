@@ -52,8 +52,15 @@ else
 
   # Latest release branch to /docs
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${GIT_SLUG} "$TEMP/docs-$latest"
-  curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/serving/reference/serving-api.md"
-  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/eventing/reference/eventing-api.md"
+
+  if (( $(echo "$latest > 1.6" | bc -l) )); then
+      curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/serving/reference/serving-api.md"
+      curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/eventing/reference/eventing-api.md"
+  else
+      curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
+  fi
+
   pushd "$TEMP/docs-$latest"; KNATIVE_VERSION="${VERSIONS[0]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
 
   # Previous release branches release-$version to /v$version-docs
@@ -64,8 +71,13 @@ else
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
-    curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
-    curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
+    if (( $(echo "$version > 1.6" | bc -l) )); then
+        curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
+        curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
+    else
+        curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
+        curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
+    fi
     pushd "$TEMP/docs-$version"; KNATIVE_VERSION="${VERSIONS[i+1]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
 
   done
