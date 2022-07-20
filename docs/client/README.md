@@ -17,6 +17,10 @@ See [Install and Set Up `kubectl`](https://kubernetes.io/docs/tasks/tools/instal
 
 See [Installing `kn`](install-kn.md).
 
+### kn reference documentation
+
+See the [`kn` documentation]({{ clientdocs() }}){target=_blank} in Github.
+
 ## Connecting CLI tools to your cluster
 
 After you have installed `kubectl` or `kn`, these tools will search for the `kubeconfig` file of your cluster in the default location of `$HOME/.kube/config`, and will use this file to connect to the cluster. A `kubeconfig` file is usually automatically created when you create a Kubernetes cluster.

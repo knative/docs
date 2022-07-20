@@ -1,9 +1,8 @@
-mkdocs-material==8.2.7
-mkdocs-exclude>=1.0
-mkdocs-macros-plugin>=0.5.12
-mkdocs-awesome-pages-plugin>=2.5
-mkdocs-redirects>=1.0.3
-mkdocs-rss-plugin>=0.18.0
+mkdocs-material==8.3.9
+mkdocs-exclude>=1.0.2
+mkdocs-macros-plugin>=0.7.0
+mkdocs-awesome-pages-plugin>=2.7.0
+mkdocs-redirects>=1.0.4
+mkdocs-rss-plugin>=1.1.0
 pygithub==1.55
 semver==2.13.0
-

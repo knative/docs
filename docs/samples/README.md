@@ -1,32 +1,42 @@
 # Knative code samples
 
-Find and use Knative code samples to help you get up and running with common use
-cases. Code samples include content from the Knative team and community members.
+You can use Knative code samples to help you get up and running with common use
+cases.
 
-Browse all code samples to find other languages and use cases that might align
-closer with your goals.
+## Knative owned samples
 
-### Knative owned and maintained
-
-View the set of Knative code samples that are actively tested and maintained:
+Knative code samples that are actively tested and maintained by Knative working groups:
 
 - [Eventing and Eventing Sources code samples](eventing.md)
 - [Serving code samples](serving.md)
 
-### Community owned and maintained
+## Community owned samples
 
-[View code samples that are contributed and maintained by the community](https://github.com/knative/docs/tree/main/code-samples/community).
+Get up and running with one of the community code samples. These samples are
+contributed and maintained by members of the Knative community. [View code samples that are contributed and maintained by the community](https://github.com/knative/docs/tree/main/code-samples/community).
 
-### External code samples
+**Note:** These samples might become outdated or the original author might be unable to maintain their contribution. If you find that something isn't working, lend a helping hand and fix it in a PR.
+
+[Learn more about the lifespan of samples](https://github.com/knative/docs/blob/main/contribute-to-docs/what-to-contribute/creating-code-samples.md#user-focused-content)
+
+| Sample Name | Description | Language(s) |
+| ----------- | ----------- | ----------- |
+| Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](serving/helloworld-clojure/), [Dart](serving/helloworld-dart/), [Elixir](serving/helloworld-elixir/), [Haskell](serving/helloworld-haskell/), [Java - Micronaut](serving/helloworld-java-micronaut/), [Java - Quarkus](serving/helloworld-java-quarkus/), [R - Go Server](serving/helloworld-r/), [Rust](serving/helloworld-rust/), [Swift](serving/helloworld-swift/), [Vertx](serving/helloworld-vertx/) |
+| Machine Learning | A quick introduction to using Knative Serving to serve machine learning models | [Python - BentoML](serving/machinelearning-python-bentoml)
+
+## External code samples
 
 A list of links to Knative code samples located outside of Knative repos:
 
-- [Image processing using Knative Eventing, Cloud Run on GKE (Knative Serving implementation) and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
-- [A potpourri of Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)
-- [Knfun - a complete Knative example of three functions using Twitter and Watson API that use kn to deploy and manage functions](https://github.com/maximilien/knfun)
-- [Knative Eventing (Cloud Events) example using spring-boot and spring-cloud-streams + Kafka](https://salaboy.com/2020/02/20/getting-started-with-knative-2020/)
-- [Image processing pipeline using Knative Eventing on GKE, Google Cloud Vision API and ImageSharp library](https://github.com/meteatamel/knative-tutorial/blob/master/docs/image-processing-pipeline.md)
-- [BigQuery processing pipeline using Knative Eventing on GKE, Cloud Scheduler, BigQuery, mathplotlib and SendGrid](https://github.com/meteatamel/knative-tutorial/blob/master/docs/bigquery-processing-pipeline.md)
-- [Performance testing with SLO validation](/blog/articles/performance-test-with-slos/)
+<!--LINK TITLES must match the title of the sample page they link to to avoid confusion and provide a consistent UX). If descriptions are required here, this should be converted to a table as above-->
 
-_Please add links to your externally hosted Knative code sample._
+- [Image processing using Knative Eventing, Cloud Run on GKE and Google Cloud Vision API](https://github.com/akashrv/knative-samples/blob/master/docs/image-processing.md)
+- [Knative Eventing Examples](https://github.com/lionelvillard/knative-examples)
+- [knfun](https://github.com/maximilien/knfun)
+- [Getting Started with Knative 2020](https://salaboy.com/2020/02/20/getting-started-with-knative-2020/)
+- [Image Processing Pipeline](https://github.com/meteatamel/knative-tutorial/blob/master/docs/image-processing-pipeline.md)
+- [BigQuery Processing Pipeline](https://github.com/meteatamel/knative-tutorial/blob/master/docs/bigquery-processing-pipeline.md)
+- [Simple Performance Testing with SLOs](/blog/articles/performance-test-with-slos/)
+
+!!! tip
+    Add a link here to your externally hosted Knative code sample.

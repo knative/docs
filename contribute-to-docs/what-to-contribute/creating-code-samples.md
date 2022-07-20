@@ -47,9 +47,7 @@ either internal contributor content, or external-facing user content.
       set of samples.
 
   - **Community owned and maintained samples**: For sample code which doesn't
-    meet the mentioned criteria, put the code in a separate repository and link to
-    it [from this page](https://github.com/knative/docs/tree/main/code-samples/community/README.md).
-    These samples might not receive regular maintenance. It is possible that a
+    meet the mentioned criteria, put the code in a separate repository and link to it [from this page](../../docs/samples/README.md). These samples might not receive regular maintenance. It is possible that a
     sample is no longer current and is not actively maintained by its original
     author. While we encourage a contributor to maintain their content, we
     acknowledge that it's not always possible for certain reasons, for example
