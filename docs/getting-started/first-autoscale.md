@@ -1,37 +1,72 @@
 # Scaling to Zero
 
-**Remember those super powers :rocket: we talked about?** One of Knative Serving's powers is built-in automatic scaling, also known as **autoscaling**.
-This means your Knative Service only spins up your application to perform its job (in this case, saying "Hello world!") if it is needed.
-Otherwise, it will **scale to zero** by spinning down and waiting for a new request to come in.
+Knative Serving provides automatic scaling, also known as **autoscaling**. This means that a Knative Service only spins up your application to perform its job (in this case, saying "Hello world!") if it is needed. Otherwise, it will **scale to zero** by spinning down and waiting for a new request to come in.
 
-??? question "What about scaling up to meet increased demand?"
-    Knative Autoscaling also allows you to easily configure your service to scale up
-    (horizontal autoscaling) to meet increased demand as well as control the number of instances that
-    spin up using
-    [concurrency limits and other options](../../serving/autoscaling/concurrency/){target=_blank},
-    but that's beyond the scope of this tutorial.
+## List your Knative Service
 
-**Let's see this in action!** We're going to peek under the hood at the
-[Pod](https://kubernetes.io/docs/concepts/workloads/pods/){target=blank_} in Kubernetes where our
-Knative Service is running to watch our "Hello world!" Service scale up and down.
+Use the Knative (`kn`) CLI to view the URL where your Knative Service is hosted:
 
-## Watch your Knative Service scale to zero
+=== "kn"
+    View a list of Knative Services by running the command:
+    ```bash
+    kn service list
+    ```
+    !!! Success "Expected output"
+        ```bash
+        NAME    URL                                                LATEST        AGE   CONDITIONS   READY
+        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001   13s   3 OK / 3     True
+        ```
+=== "kubectl"
+    View a list of Knative Services by running the command:
+    ```bash
+    kubectl get ksvc
+    ```
+    !!! Success "Expected output"
+        ```bash
+        NAME    URL                                                LATESTCREATED   LATESTREADY   READY   REASON
+        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001     hello-00001   True
+        ```
 
-Let's run our "Hello world!" Service just one more time. This time, try the Knative Service `URL` in
-your browser or you can use your terminal with `curl`.
+## Access your Knative Service
+
+Access your Knative Service by opening the previous URL in your browser or by running the command:
+
 ```bash
 echo "Accessing URL $(kn service describe hello -o url)"
 curl "$(kn service describe hello -o url)"
 ```
 
-Now watch the pods and see how they scale to zero after traffic stops going to the URL.
+!!! Success "Expected output"
+    ```{ .bash .no-copy }
+    Hello World!
+    ```
+
+??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.${LOADBALANCER_IP}.sslip.io`?"
+
+    In some cases your DNS server may be set up not to resolve `*.sslip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses.
+
+    The exact steps will differ according to your distribution. For example, with Ubuntu derived systems which use `systemd-resolved`, you can add the following entry to the `/etc/systemd/resolved.conf`:
+
+    ```ini
+    [Resolve]
+    DNS=8.8.8.8
+    Domains=~sslip.io.
+    ```
+
+    Then simply restart the service with `sudo service systemd-resolved restart`.
+
+    For MacOS users, you can add the DNS and domain using the network settings as explained [here](https://support.apple.com/en-gb/guide/mac-help/mh14127/mac).
+
+## Observe autoscaling
+
+Watch the pods and see how they scale to zero after traffic stops going to the URL:
+
 ```bash
 kubectl get pod -l serving.knative.dev/service=hello -w
 ```
 
 !!! note
-    It may take up to 2 minutes for your Pods to scale down. Pinging your service again will reset this timer.
-
+    It may take up to 2 minutes for your pods to scale down. Pinging your service again resets this timer.
 
 !!! Success "Expected output"
     ```{ .bash .no-copy }
@@ -44,7 +79,7 @@ kubectl get pod -l serving.knative.dev/service=hello -w
 
 ## Scale up your Knative Service
 
-Rerun the Knative Service in your browser and you will see a new pod running again.
+Rerun the Knative Service in your browser. You can see a new pod running again:
 
 !!! Success "Expected output"
     ```{ .bash .no-copy }
@@ -54,9 +89,5 @@ Rerun the Knative Service in your browser and you will see a new pod running aga
     hello-world                              1/2     Running
     hello-world                              2/2     Running
     ```
+
 Exit the `kubectl watch` command with `Ctrl+c`.
-
-Some people call this **Serverless** :tada: :taco: :fire: Up next, traffic splitting!
-
-??? question "Want to go deeper on Autoscaling?"
-    Interested in getting in the weeds with Knative Autoscaling? Check out the [autoscaling documentation](../serving/autoscaling/README.md){target=_blank} for concepts, samples, and more!
