@@ -19,7 +19,7 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
 
 ## Setting up Prometheus
 
-1. Install the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator/helm) by using [Helm](https://helm.sh/docs/intro/using_helm/):
+1. Install the [Prometheus Operator](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
 
        ```bash
        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
