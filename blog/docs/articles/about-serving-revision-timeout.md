@@ -1,15 +1,8 @@
----
-title: "about serving revision timeout"
-linkTitle: "about serving revision timeout"
-Author: "[Nader Ziada](https://twitter.com/nziada)"
-Author handle: https://github.com/nader-ziada
-date: 2022-07-20
-description: "Serving revision timeout different fields"
-type: "blog"
----
-
-
 ## About Serving Revision timeouts
+
+**Author: [Nader Ziada](https://twitter.com/nziada),  Software Engineer @ [VMware](http://vmware.com)**
+
+**Date: 2020-07-20**
 
 Going through an http request to a Knative Revision’s lifecycle, you will find several different timeout values that handle different aspects of the request response time.
 
