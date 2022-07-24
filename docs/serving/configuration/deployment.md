@@ -136,16 +136,16 @@ data:
 
 In order to use queue proxy extensions, make sure that the queue proxy image you are using was built with the extensions you wish to activate. See [Queue Proxy Runtime Extensions](../queue-runtime-extensions.md).
 
-Building a queue proxy image with extensions enable you to later activate and use the added extensions through configuration. A specific service can activate and configure queue proxy extensions by adding `qpextention.knative.dev/*` annotations - See [Controlling Extensions with Annotations](./services/queue-proxy-extensions.md). 
+Building a queue proxy image with extensions enable you to later activate and use the added extensions through configuration. A specific service can activate and configure queue proxy extensions by adding `qpextension.knative.dev/*` annotations - See [Controlling Extensions with Annotations](./services/queue-proxy-extensions.md). 
 
 The cluster default to activate and configure queue proxy extensions can be set using `queue-extensions-*` parameters in the `config-deployment` configmap.
 
-Setting a value of:  `queue-extention-<ExtensionName>-activate: "enable"` or `queue-extention-<ExtensionName>-config-<Key>: "<Val>"` in the `config-deployment` configmap, will add by default the annotation `qpextention.knative.dev/<ExtensionName>-activate: "enable"` and `qpextention.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` respectivly to the `spec.template.metadata` of the service deployment before copying the service specific `qpextention.knative.dev/*` annotations.
+Setting a value of:  `queue-extension-<ExtensionName>-activate: "enable"` or `queue-extension-<ExtensionName>-config-<Key>: "<Val>"` in the `config-deployment` configmap, will add by default the annotation `qpextension.knative.dev/<ExtensionName>-activate: "enable"` and `qpextension.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` respectivly to the `spec.template.metadata` of the service deployment before copying the service specific `qpextension.knative.dev/*` annotations.
 
 For example, the following config will add by default the annotations:
-- `qpextention.knative.dev/testgate-activate: "enable"`
-- `qpextention.knative.dev/testgate-config-sender: "Joe"`
-- `qpextention.knative.dev/testgate-config-response: "CU"`
+- `qpextension.knative.dev/testgate-activate: "enable"`
+- `qpextension.knative.dev/testgate-config-sender: "Joe"`
+- `qpextension.knative.dev/testgate-config-response: "CU"`
 
 to all deployments of all services. As a result, all services will activate `testgate` and be configured by default with `{sender: "Joe", response: "CU"}`
 
@@ -160,7 +160,7 @@ metadata:
   annotations:
     knative.dev/example-checksum: "fa67b403"
 data:
-  queue-extention-testgate-activate: "enable"
-  queue-extention-testgate-config-response: "CU"
-  queue-extention-testgate-config-sender: "Joe"
+  queue-extension-testgate-activate: "enable"
+  queue-extension-testgate-config-response: "CU"
+  queue-extension-testgate-config-sender: "Joe"
 ```
