@@ -131,3 +131,29 @@ metadata:
 data:
   concurrency-state-endpoint: "http://$HOST_IP:9696"
 ```
+
+## Activate and Configure Queue Proxy Extensions
+
+In order to use queue proxy extensions, make sure that the queue proxy image you are using was built with the extensions you wish to activate. Building a queue proxy image with extensions enable you to later activate and use the added extensions through configuration. A specific service can activate and configure queue proxy extensions by adding `qpextention.knative.dev/*` annotations under the: `spec.template.metadata` of the service custom resource definition. The cluster default to activate and configure queue proxy extensions can be set using `queue-extensions-*` parameters in the `config-deployment` configmap.
+
+Setting a value of:  `queue-extention-<ExtensionName>-activate: "enable"` will add by default the annotation `qpextention.knative.dev/<ExtensionName>-activate: "enable"` to the  podSpec of all services.
+
+Setting a value of:  `queue-extention-<ExtensionName>-config-<Key>: "<Val>"` will add by default the annotation `qpextention.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` to the  podSpec of all services.
+
+For example, the following config will add by default the annotations: `qpextention.knative.dev/testgate-activate: "enable"`, `queue-extention-testgate-config-sender: "Joe"` and `queue-extention-testgate-config-response: "CU"` to the  podSpec of all services.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-deployment
+  namespace: knative-serving
+  labels:
+    serving.knative.dev/release: devel
+  annotations:
+    knative.dev/example-checksum: "fa67b403"
+data:
+  queue-extention-testgate-activate: "enable"
+  queue-extention-testgate-config-sender: "Joe"
+  queue-extention-testgate-config-response: "CU"
+```
