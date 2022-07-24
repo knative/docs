@@ -1,6 +1,7 @@
-# Activate and Configure Queue Proxy Extensions Per Service
+# Configuring Queue Proxy Extensions
 
-In order to use queue proxy extensions, make sure that the queue proxy image you are using was built with the extensions you wish to activate.
+In order to use queue proxy extensions, make sure that the queue proxy image you are using was built with the extensions you wish to activate. See [Queue Proxy Runtime Extensions](../queue-runtime-extensions.md).
+
 Building a queue proxy image with extensions enable you to later activate and use the added extensions through configuration.
 A service can activate and configure queue proxy extensions by adding `qpextention.knative.dev/*` annotations under the: `spec.template.metadata` of the service custom resource definition.
 
@@ -67,3 +68,5 @@ Create a sample service:
     ```
 
 After the service has been created, Knative propogate the annotations to the podSpec of the service deployment. When a pod is created, the queue proxy container will try to activate the `testgate` extension (if such an extension is avaliable in the queue proxy image) and configure it with: `{ sender: "Joe", response: "CU"}` 
+
+See also [Extensions Default Configuration](../configuration/deployment.md) for adding default `qpextention.knative.dev/*` annotations for cluster services.  
