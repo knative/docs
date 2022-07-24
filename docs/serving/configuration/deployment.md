@@ -132,9 +132,13 @@ data:
   concurrency-state-endpoint: "http://$HOST_IP:9696"
 ```
 
-## Activate and Configure Queue Proxy Extensions
+## Extensions Default Configuration
 
-In order to use queue proxy extensions, make sure that the queue proxy image you are using was built with the extensions you wish to activate. Building a queue proxy image with extensions enable you to later activate and use the added extensions through configuration. A specific service can activate and configure queue proxy extensions by adding `qpextention.knative.dev/*` annotations under: `spec.template.metadata` of the service custom resource definition. The cluster default to activate and configure queue proxy extensions can be set using `queue-extensions-*` parameters in the `config-deployment` configmap.
+In order to use queue proxy extensions, make sure that the queue proxy image you are using was built with the extensions you wish to activate. See [Queue Proxy Runtime Extensions](../queue-runtime-extensions.md).
+
+Building a queue proxy image with extensions enable you to later activate and use the added extensions through configuration. A specific service can activate and configure queue proxy extensions by adding `qpextention.knative.dev/*` annotations - See [Controlling Extensions with Annotations](./services/queue-proxy-extensions.md). 
+
+The cluster default to activate and configure queue proxy extensions can be set using `queue-extensions-*` parameters in the `config-deployment` configmap.
 
 Setting a value of:  `queue-extention-<ExtensionName>-activate: "enable"` or `queue-extention-<ExtensionName>-config-<Key>: "<Val>"` in the `config-deployment` configmap, will add by default the annotation `qpextention.knative.dev/<ExtensionName>-activate: "enable"` and `qpextention.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` respectivly to the `spec.template.metadata` of the service deployment before copying the service specific `qpextention.knative.dev/*` annotations.
 
