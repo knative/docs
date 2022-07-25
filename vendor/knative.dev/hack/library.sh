@@ -558,9 +558,6 @@ function go_run() {
   if [[ "$package" != *@* ]]; then
     abort 'Package for "go_run" needs to have @version'
   fi
-  if [[ "$package" == *@latest ]] && [[ "$package" != knative.dev* ]]; then
-    warning 'Using @latest version for external dependencies is unsafe. Use numbered version!'
-  fi
   shift 1
   GORUN_PATH="${GORUN_PATH:-$(go env GOPATH)}"
   # Some CI environments may have non-writable GOPATH
@@ -580,7 +577,6 @@ function go_run() {
 #             $3..$n - parameters passed to the tool.
 # Deprecated: use go_run instead
 function run_go_tool() {
-  warning 'The "run_go_tool" function is deprecated. Use "go_run" instead.'
   local package=$1
   # If no `@version` is provided, default to adding `@latest`
   if [[ "$package" != *@* ]]; then
@@ -650,7 +646,7 @@ function go_update_deps() {
     else
       group "Upgrading to release ${RELEASE}"
     fi
-    FLOATING_DEPS+=( $(go_run knative.dev/test-infra/buoy@latest buoy float ${REPO_ROOT_DIR}/go.mod "${buoyArgs[@]}") )
+    FLOATING_DEPS+=( $(go_run knative.dev/test-infra/buoy@latest float ${REPO_ROOT_DIR}/go.mod "${buoyArgs[@]}") )
     if [[ ${#FLOATING_DEPS[@]} > 0 ]]; then
       echo "Floating deps to ${FLOATING_DEPS[@]}"
       go get -d ${FLOATING_DEPS[@]}
