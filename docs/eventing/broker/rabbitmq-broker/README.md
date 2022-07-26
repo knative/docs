@@ -7,7 +7,7 @@ This topic describes how to create a RabbitMQ Broker.
 To use the RabbitMQ Broker, you must have the following installed:
 
 1. [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
-1. [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator) - our recommendation is [latest release](https://github.com/rabbitmq/cluster-operator/releases/latest)
+1. [RabbitMQ Cluster Operator (optional)](https://github.com/rabbitmq/cluster-operator) - our recommendation is [latest release](https://github.com/rabbitmq/cluster-operator/releases/latest)
 1. [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
 1. [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
 
@@ -35,7 +35,7 @@ To use the RabbitMQ Broker, you must have the following installed:
     rabbitmq-broker-webhook        1/1     1            1           4s
     ```
 
-## Create a RabbitMQ cluster
+## Create a RabbitMQ cluster (optional)
 
 1. Deploy a RabbitMQ cluster:
 
@@ -78,7 +78,25 @@ will be `true` in the output of the following command:
 For more information about configuring the `RabbitmqCluster` CRD, see the
 [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
 
-## Create a RabbitMQ broker config object
+## Reference an external RabbitMQ Cluster
+
+1. Create a Secret that store the external RabbitMQ Cluster Credentials and uri
+
+  ```yaml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: rabbitmq-secret-credentials
+  # This is just a sample, don't use it this way in production
+  stringData:
+    username: $EXTERNAL_RABBITMQ_USERNAME
+    password: $EXTERNAL_RABBITMQ_PASSWORD
+    uri: $EXTERNAL_RABBITMQ_MANAGEMENT_UI_URI:$PORT
+  ```
+
+and in the next step reference the secret in the `RabbitMQ Broker Config`
+
+## Create a RabbitMQ Broker config object
 
 1. Create a YAML file using the following template:
     ```yaml
@@ -88,7 +106,11 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
       name: <rabbitmq-broker-config-name>
     spec:
       rabbitmqClusterReference:
+        # if a local cluster is being used, name and connectionSecret cannot be set at the same time 
         name: <cluster-name>
+        # if an external rabbitmq cluster is being used
+        connectionSecret:
+          name: rabbitmq-secret-credentials
       queueType: quorum
     ```
     Where <cluster-name> is the name of the RabbitMQ cluster created in the step above.
@@ -100,7 +122,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
     ```
    Where `<filename>` is the name of the file you created in the previous step.
 
-## Create a RabbitMQ broker object
+## Create a RabbitMQ Broker object
 
 1. Create a YAML file using the following template:
 

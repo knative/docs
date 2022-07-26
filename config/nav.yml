@@ -150,6 +150,7 @@ nav:
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
+          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
