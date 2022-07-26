@@ -148,7 +148,7 @@ and in the next step reference the secret in the `RabbitMQ Broker Config`
       name: <source-name>
     spec:
       rabbitmqClusterReference:
-        # if a local cluster is being used, name and connectionSecret cannot be set at the same time 
+        # if a local cluster is being used. name and connectionSecret cannot be set at the same time
         name: <cluster-name>
         # if an external rabbitmq cluster is being used
         connectionSecret:
