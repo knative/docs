@@ -16,8 +16,8 @@ You need:
 
 ## Supported Istio versions
 
-The current known-to-be-stable version of Istio tested in conjunction with Knative is **v1.12**.
-Versions in the 1.12 line are generally fine too.
+You can see which version is the latest to have been tested [in the most recent net-istio releases](https://github.com/knative-sandbox/net-istio/releases).
+
 
 ## Installing Istio
 
