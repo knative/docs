@@ -67,6 +67,6 @@ Create a sample service:
         --annotation qpextension.knative.dev/testgate-config-sender=Joe
     ```
 
-After the service has been created, Knative propogate the annotations to the podSpec of the service deployment. When a pod is created, the queue proxy container will try to activate the `testgate` extension (if such an extension is avaliable in the queue proxy image) and configure it with: `{ sender: "Joe", response: "CU"}` 
+After the service has been created, Knative propogates the annotations to the podSpec of the service deployment. When a pod is created, the queue proxy container will mount a volume that contains the pod annotations and activate the `testgate` extension (if such an extension is avaliable in the queue proxy image). The `testgate` extension will than be configured with the configuration: `{ sender: "Joe", response: "CU"}` 
 
 See also [Extensions Default Configuration](../configuration/deployment.md) for adding default `qpextension.knative.dev/*` annotations for cluster services.  
