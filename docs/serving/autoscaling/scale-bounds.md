@@ -184,10 +184,10 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 
 ## Scale Up Minimum
 
-This value controls the minimum number of replicas that will be created when the Revision scales up from zero. 
+This value controls the minimum number of replicas that will be created when the Revision scales up from zero.
 
 * **Global key:** n/a
-* **Per-revision annotation key:** `autoscaling.knative.dev/active-min-scale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/activation-scale`
 * **Possible values:** integer
 * **Default:** `1`
 
@@ -205,7 +205,7 @@ This value controls the minimum number of replicas that will be created when the
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/active-min-scale: "5"
+            autoscaling.knative.dev/activation-scale: "5"
         spec:
           containers:
             - image: gcr.io/knative-samples/helloworld-go
