@@ -80,21 +80,21 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
 
 ## Reference an external RabbitMQ Cluster
 
-1. Create a Secret that store the external RabbitMQ Cluster Credentials and uri
+1. Create a Secret that stores the external RabbitMQ Cluster Credentials and URI:
 
-  ```yaml
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: rabbitmq-secret-credentials
-  # This is just a sample, don't use it this way in production
-  stringData:
-    username: $EXTERNAL_RABBITMQ_USERNAME
-    password: $EXTERNAL_RABBITMQ_PASSWORD
-    uri: $EXTERNAL_RABBITMQ_MANAGEMENT_UI_URI:$PORT
-  ```
+    ```yaml
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: rabbitmq-secret-credentials
+    # This is just a sample, don't use it this way in production
+    stringData:
+      username: $EXTERNAL_RABBITMQ_USERNAME
+      password: $EXTERNAL_RABBITMQ_PASSWORD
+      uri: $EXTERNAL_RABBITMQ_MANAGEMENT_UI_URI:$PORT
+    ```
 
-and in the next step reference the secret in the `RabbitMQ Broker Config`
+You will reference this Secret in the RabbitMQ Broker config later
 
 ## Create a RabbitMQ Broker config object
 
@@ -106,18 +106,18 @@ and in the next step reference the secret in the `RabbitMQ Broker Config`
       name: <rabbitmq-broker-config-name>
     spec:
       rabbitmqClusterReference:
-        # if a local cluster is being used. name and connectionSecret cannot be set at the same time
+        # Configure name if a local cluster is being used.
         name: <cluster-name>
-        # if an external rabbitmq cluster is being used
+        # Configure connectionSecret if an external RabbitMQ cluster is being used.
         connectionSecret:
           name: rabbitmq-secret-credentials
       queueType: quorum
     ```
-    Where: 
-    
+    Where:
+
     - <rabbitmq-broker-config-name> is the name you want for your RabbitMQ Broker config object.
     - <cluster-name> is the name of the RabbitMQ cluster you created earlier.
-    
+
     !!! note
         You cannot set `name` and `connectionSecret` at the same time.
 
