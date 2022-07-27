@@ -206,7 +206,7 @@ It might take a while for the Source to start sending events to the Sink.
     }
 ```
 
-Congratulations! Your new RabbitMQ Source its working!
+Congratulations! Your new RabbitMQ Source is working!
 
 ### Cleanup
 
