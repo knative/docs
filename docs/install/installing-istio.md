@@ -16,8 +16,7 @@ You need:
 
 ## Supported Istio versions
 
-You can see which version is the latest to have been tested [in the most recent net-istio releases](https://github.com/knative-sandbox/net-istio/releases).
-
+You can view the latest tested Istio version on the [Knative Net Istio releases page](https://github.com/knative-sandbox/net-istio/releases).
 
 ## Installing Istio
 
