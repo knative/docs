@@ -185,7 +185,7 @@ and in the next step reference the secret in the `RabbitMQ Broker Config`
 ### Verify
 
 Check the event-display service to see if it is receiving events.
-It may take a while for the Source to start sending events to the Sink, so be patient :p!
+It might take a while for the Source to start sending events to the Sink.
 
 ```sh
   kubectl -l='serving.knative.dev/service=event-display' logs -c user-container
