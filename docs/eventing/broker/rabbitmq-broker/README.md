@@ -113,7 +113,13 @@ and in the next step reference the secret in the `RabbitMQ Broker Config`
           name: rabbitmq-secret-credentials
       queueType: quorum
     ```
-    Where <cluster-name> is the name of the RabbitMQ cluster created in the step above.
+    Where: 
+    
+    - <rabbitmq-broker-config-name> is the name you want for your RabbitMQ Broker config object.
+    - <cluster-name> is the name of the RabbitMQ cluster you created earlier.
+    
+    !!! note
+        You cannot set `name` and `connectionSecret` at the same time.
 
 1. Apply the YAML file by running the command:
 
