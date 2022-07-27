@@ -15,6 +15,16 @@ The following table describes the supported versions of Serving and Eventing for
 
 Before you install the Knative Serving and Eventing components, first install the Knative Operator.
 
+### Upgrade the existing custom resources
+
+Knative Operator 1.5 is the last version supporting the CRDs with both `v1alpha1` and `v1beta1`. If you are upgrading
+an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command to upgrade the existing
+custom resources to `v1beta1` before installing the current version:
+
+```bash
+kubectl create -f https://github.com/knative/operator/releases/download/knative-v1.5.1/operator-post-install.yaml
+```
+
 ### Install the latest Knative Operator release
 
 To install the latest stable Operator release, run the command:
@@ -52,15 +62,6 @@ To track the log of the Operator, run the command:
 
 ```bash
 kubectl logs -f deploy/knative-operator
-```
-
-### Upgrade the existing custom resources
-
-If you are upgrading an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command
-to upgrade the existing custom resources to `v1beta1`:
-
-```bash
-kubectl create -f {{artifact(org="knative",repo="operator",file="operator-post-install.yaml" )}}
 ```
 
 ## Installing the Knative Serving component
