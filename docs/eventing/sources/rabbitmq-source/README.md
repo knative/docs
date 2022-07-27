@@ -167,6 +167,13 @@ and in the next step reference the secret in the `RabbitMQ Broker Config`
           kind: Service
           name: event-display
     ```
+    Where:
+
+    - `<source-name>` is the name you want for your RabbitMQ Source object.
+    - `<cluster-name>` is the name of the RabbitMQ cluster you created earlier.
+
+    !!! note
+        You cannot set `name` and `connectionSecret` at the same time.
 
 1. Apply the YAML file by running the command:
 
