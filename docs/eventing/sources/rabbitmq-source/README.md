@@ -216,4 +216,4 @@ kubectl delete -f <source-yaml-filename> <service-yaml-filename> <secret-yaml-fi
 
 ## Additional information
 
-To report a bug or request a feature, open an issue in the [eventing-rabbitmq repository](https://github.com/knative-sandbox/eventing-rabbitmq).
+To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-sandbox/eventing-rabbitmq).
