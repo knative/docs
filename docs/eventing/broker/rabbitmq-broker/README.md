@@ -126,10 +126,12 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-## Configure ordering vs high throughput
+## Configure message ordering
 
-By default, triggers will consume messages one at a time and preserve ordering. If ordering of events isn't important and higher performance is desired, it can be configured using the
-`parallelism` annoation. Setting `parallelism` to `n` will create `n` workers for the trigger that will all consume messages in parallel. An example of a trigger with parallelism set to `10`:
+By default, Triggers will consume messages one at a time to preserve ordering. If ordering of events isn't important and higher performance is desired, you can configure this by using the
+`parallelism` annotation. Setting `parallelism` to `n` creates `n` workers for the Trigger that will all consume messages in parallel.
+
+The following YAML shows an example of a Trigger with parallelism set to `10`:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -138,9 +140,7 @@ metadata:
   name: high-throughput-trigger
   annotations:
     rabbitmq.eventing.knative.dev/parallelism: "10"
-spec:
 ...
-```
 
 ## Additional information
 
