@@ -184,7 +184,7 @@ You will reference this Secret in the RabbitMQ Source object later.
 
 ### Verify
 
-Check the event-display service to see if it is receiving events.
+Check the event-display Service to see if it is receiving events.
 It might take a while for the Source to start sending events to the Sink.
 
 ```sh
