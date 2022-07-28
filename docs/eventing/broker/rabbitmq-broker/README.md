@@ -80,7 +80,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
 
 ## Reference an external RabbitMQ Cluster
 
-1. Create a Secret that stores the external RabbitMQ Cluster Credentials and URI:
+1. Create a Secret that stores the external RabbitMQ cluster credentials and URI:
 
     ```yaml
     apiVersion: v1
