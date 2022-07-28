@@ -1,19 +1,18 @@
-# Creating a RabbitMQ Source
+# Creating a RabbitMQSource
 
-This topic describes how to create a RabbitMQ Source.
+This topic describes how to create a RabbitMQSource.
 
 ## Prerequisites
 
-To use the RabbitMQ Source, you must have the following installed:
-
-1. [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
-1. [RabbitMQ Cluster Operator (optional)](https://github.com/rabbitmq/cluster-operator) - our recommendation is [latest release](https://github.com/rabbitmq/cluster-operator/releases/latest)
-1. [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
-1. [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
+1. You have installed [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
+1. You have installed [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
+1. You have installed [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
+1. A working RabbitMQ Instance, we recommend to create one Using the [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator). 
+For more information about configuring the `RabbitmqCluster` CRD, see the[RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html)
 
 ## Install the RabbitMQ controller
 
-1. Install the RabbitMQ Source controller by running the command:
+1. Install the RabbitMQSource controller by running the command:
 
     ```bash
     kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-rabbitmq", file="rabbitmq-source.yaml") }}
@@ -33,111 +32,9 @@ To use the RabbitMQ Source, you must have the following installed:
     rabbitmq-webhook                1/1     1            1           4s
     ```
 
-## Create a RabbitMQ cluster (optional)
+{% include "event-display.md" %}
 
-1. Deploy a RabbitMQ cluster:
-
-    1. Create a YAML file using the following template:
-
-        ```yaml
-        apiVersion: rabbitmq.com/v1beta1
-        kind: RabbitmqCluster
-        metadata:
-          name: <cluster-name>
-          annotations:
-            # A single RabbitMQ cluster per Knative Eventing installation
-            rabbitmq.com/topology-allowed-namespaces: "*"
-        ```
-        Where `<cluster-name>` is the name you want for your RabbitMQ cluster,
-        for example, `rabbitmq`.
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl create -f <filename>
-        ```
-        Where `<filename>` is the name of the file you created in the previous step.
-
-1. Wait for the cluster to become ready. When the cluster is ready, `ALLREPLICASREADY`
-will be `true` in the output of the following command:
-
-    ```bash
-    kubectl get rmq <cluster-name>
-    ```
-    Where `<cluster-name>` is the name you gave your cluster in the step above.
-
-    Example output:
-
-    ```{ .bash .no-copy }
-    NAME          ALLREPLICASREADY   RECONCILESUCCESS   AGE
-    rabbitmq      True               True               38s
-    ```
-
-For more information about configuring the `RabbitmqCluster` CRD, see the
-[RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
-
-## Reference an external RabbitMQ Cluster
-
-1. Create a Secret that stores the external RabbitMQ Cluster Credentials and URI:
-
-    ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: rabbitmq-secret-credentials
-    # This is just a sample, don't use it this way in production
-    stringData:
-      username: $EXTERNAL_RABBITMQ_USERNAME
-      password: $EXTERNAL_RABBITMQ_PASSWORD
-      uri: $EXTERNAL_RABBITMQ_MANAGEMENT_UI_URI:$PORT
-    ```
-
-You will reference this Secret in the RabbitMQ Source object later.
-
-## Create a Service
-
-1. Create the `event-display` Service as a YAML file:
-
-     ```yaml
-     apiVersion: serving.knative.dev/v1
-     kind: Service
-     metadata:
-       name: event-display
-       namespace: default
-     spec:
-       template:
-         spec:
-           containers:
-             - # This corresponds to
-               # https://github.com/knative/eventing/tree/main/cmd/event_display/main.go
-               image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-     ```
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
-
-    Example output:
-    ```{ .bash .no-copy }
-    service.serving.knative.dev/event-display created
-    ```
-
-1. Ensure that the Service Pod is running, by running the command:
-
-    ```bash
-    kubectl get pods
-    ```
-
-    The Pod name is prefixed with `event-display`:
-    ```{ .bash .no-copy }
-    NAME                                            READY     STATUS    RESTARTS   AGE
-    event-display-00001-deployment-5d5df6c7-gv2j4   2/2       Running   0          72s
-    ```
-
-## Create a RabbitMQ Source object
+## Create a RabbitMQSource object
 
 1. Create a YAML file using the following template:
 
@@ -148,7 +45,7 @@ You will reference this Secret in the RabbitMQ Source object later.
       name: <source-name>
     spec:
       rabbitmqClusterReference:
-        # Configure name if a local cluster is being used.
+        # Configure name if a RabbitMQ Cluster Operator is being used.
         name: <cluster-name>
         # Configure connectionSecret if an external RabbitMQ cluster is being used.
         connectionSecret:
@@ -169,11 +66,11 @@ You will reference this Secret in the RabbitMQ Source object later.
     ```
     Where:
 
-    - `<source-name>` is the name you want for your RabbitMQ Source object.
+    - `<source-name>` is the name you want for your RabbitMQSource object.
     - `<cluster-name>` is the name of the RabbitMQ cluster you created earlier.
 
     !!! note
-        You cannot set `name` and `connectionSecret` at the same time.
+        You cannot set `name` and `connectionSecret` at the same time, since `name` is for a RabbitMQ Cluster Operator instance running in the same cluster as the Source, and `connectionSecret` is for an external RabbitMQ server.
 
 1. Apply the YAML file by running the command:
 
@@ -206,14 +103,27 @@ It might take a while for the Source to start sending events to the Sink.
     }
 ```
 
-Congratulations! Your new RabbitMQ Source is working!
-
 ### Cleanup
 
-```sh
-kubectl delete -f <source-yaml-filename> <service-yaml-filename> <secret-yaml-filename> <cluster-yaml-filename>
-```
+1. Delete the RabbitMQSource:
+
+    ```sh
+    kubectl delete -f <source-yaml-filename>
+    ```
+
+1. Delete the RabbitMQ credentials secret:
+
+    ```sh
+    kubectl delete -f <secret-yaml-filename>
+    ```
+
+1. Delete the event display Service:
+
+    ```sh
+    kubectl delete -f <service-yaml-filename>
+    ```
 
 ## Additional information
 
-To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-sandbox/eventing-rabbitmq).
+- For more samples visit the [`eventing-rabbitmq` Github repository samples directory](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/samples)
+- To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-sandbox/eventing-rabbitmq).
