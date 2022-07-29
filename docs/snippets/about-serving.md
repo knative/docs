@@ -33,8 +33,6 @@ The primary Knative Serving resources are Services, Routes, Configurations, and 
   code and configuration for each modification made to the workload. Revisions
   are immutable objects and can be retained for as long as useful. Knative
   Serving Revisions can be automatically scaled up and down according to
-  incoming traffic. See
-  [Configuring the Autoscaler](autoscaling/README.md) for more
-  information.
+  incoming traffic.
 
 For more information on the resources and their interactions, see the [Resource Types Overview](https://github.com/knative/specs/blob/main/specs/serving/overview.md) in the `serving` Github repository.
