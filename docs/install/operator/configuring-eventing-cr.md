@@ -2,111 +2,6 @@
 
 You can configure the Knative Eventing operator by modifying settings in the `KnativeEventing` custom resource (CR).
 
-## Installing a specific version of Eventing
-
-Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example,
-if you want to install Knative Eventing v0.19.0, you can apply the following KnativeEventing CR:
-
-```yaml
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  version: "1.6"
-```
-
-You can also run the following command to make the equivalent change:
-
-```bash
-kn operator install --component eventing -v 1.6 -n knative-eventing
-```
-
-If `spec.version` is not specified, the Knative Operator will install the latest available version of Knative Eventing.
-If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
-includes the latest 3 minor release versions.
-
-If Knative Eventing is already managed by the Operator, updating the `spec.version` field in the KnativeEventing CR enables upgrading or downgrading the Knative Eventing version, without requiring modifications to the Operator.
-
-Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example,
-if the current Knative Eventing deployment is version 0.18.x, you must upgrade to 0.19.x before upgrading to 0.20.x.
-
-## Installing customized Knative Eventing
-
-The Operator provides you with the flexibility to install Knative Eventing customized to your own requirements.
-As long as the manifests of customized Knative Eventing are accessible to the Operator, you can install them.
-
-There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
-With overwrite mode, under `.spec.manifests`, you must define all manifests needed for Knative Eventing
-to install because the Operator will no longer install any default manifests.
-With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
-The customized manifests are installed after default manifests are applied.
-
-### Overwrite mode
-
-Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
-
-For example, if you want to install a customized Knative Eventing only, you can create and apply the following
-Eventing CR:
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-eventing
----
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  version: $spec_version
-  manifests:
-  - URL: https://my-eventing/eventing.yaml
-```
-
-This example installs the customized Knative Eventing at version `$spec_version` which is available at
-`https://my-eventing/eventing.yaml`.
-
-!!! attention
-    You can make the customized Knative Eventing available in one or multiple links, as the `spec.manifests` supports a list of links.
-    The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
-
-We strongly recommend you to specify the version and the valid links to the customized Knative Eventing, by leveraging
-both `spec.version` and `spec.manifests`. Do not skip either field.
-
-### Append mode
-
-You can use append mode to add your customized manifests into the default manifests.
-
-For example, if you only want to customize a few resources but you still want to install the default Knative Eventing,
-you can create and apply the following Eventing CR:
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-eventing
----
-apiVersion: operator.knative.dev/v1beta1
-kind: KnativeEventing
-metadata:
-  name: knative-eventing
-  namespace: knative-eventing
-spec:
-  version: $spec_version
-  additionalManifests:
-  - URL: https://my-eventing/eventing-custom.yaml
-```
-
-This example installs the default Knative Eventing, and installs your customized resources available at
-`https://my-eventing/eventing-custom.yaml`.
-
-Knative Operator installs the default manifests of Knative Eventing at the version `$spec_version`, and then
-installs your customized manifests based on them.
-
 ## Setting a default channel
 
 If you are using different channel implementations, like the KafkaChannel, or you want a specific configuration of the InMemoryChannel to be the default configuration, you can change the default behavior by updating the `default-ch-webhook` ConfigMap.
@@ -278,9 +173,21 @@ You can also run the following commands to make the equivalent change:
 
 ```bash
 kn operator configure images --component eventing --deployName eventing-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/eventing-controller:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName eventing-webhook --imageKey eventing-webhook --imageURL docker.io/knative-images-repo2/eventing-webhook:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName imc-controller --imageKey controller --imageURL docker.io/knative-images-repo3/imc-controller:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName imc-dispatcher --imageKey dispatcher --imageURL docker.io/knative-images-repo4/imc-dispatcher:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo5/broker-eventing-controller:latest -n knative-eventing
 ```
 
@@ -308,10 +215,25 @@ You can also run the following commands to make the equivalent change:
 
 ```bash
 kn operator configure images --component eventing --deployName eventing-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/eventing-controller:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName eventing-webhook --imageKey eventing-webhook --imageURL docker.io/knative-images-repo2/eventing-webhook:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName imc-controller --imageKey controller --imageURL docker.io/knative-images-repo3/imc-controller:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName imc-dispatcher --imageKey dispatcher --imageURL docker.io/knative-images-repo4/imc-dispatcher:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo5/broker-eventing-controller:latest -n knative-eventing
+```
+
+```bash
 kn operator configure images --component eventing --imageKey DISPATCHER_IMAGE -controller --imageURL docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest -n knative-eventing
 ```
 
@@ -399,16 +321,16 @@ spec:
     - container: eventing-controller
       requests:
         cpu: 300m
-        memory: 100Mi
+        memory: 100M
       limits:
         cpu: 1000m
-        memory: 250Mi
+        memory: 250M
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator configure resources --component eventing --deployName eventing-controller --container eventing-controller --requestCPU 300m --requestMemory 100Mi --limitCPU 1000m --limitMemory 250Mi -n knative-eventing
+kn operator configure resources --component eventing --deployName eventing-controller --container eventing-controller --requestCPU 300m --requestMemory 100M --limitCPU 1000m --limitMemory 250M -n knative-eventing
 ```
 
 ### Override the nodeSelector
