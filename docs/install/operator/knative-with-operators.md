@@ -15,17 +15,12 @@ The following table describes the supported versions of Serving and Eventing for
 
 Before you install the Knative Serving and Eventing components, first install the Knative Operator.
 
-### Upgrade the existing custom resources
+!!! warning
+    Knative Operator 1.5 is the last version that supports CRDs with both `v1alpha1` and `v1beta1`. If you are upgrading an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command to upgrade the existing custom resources to `v1beta1` before installing the current version:
 
-Knative Operator 1.5 is the last version supporting the CRDs with both `v1alpha1` and `v1beta1`. If you are upgrading
-an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command to upgrade the existing
-custom resources to `v1beta1` before installing the current version:
-
-```bash
-kubectl create -f https://github.com/knative/operator/releases/download/knative-v1.5.1/operator-post-install.yaml
-```
-
-### Install the latest Knative Operator release
+    ```bash
+    kubectl create -f https://github.com/knative/operator/releases/download/knative-v1.5.1/operator-post-install.yaml
+    ```
 
 To install the latest stable Operator release, run the command:
 
@@ -64,10 +59,9 @@ To track the log of the Operator, run the command:
 kubectl logs -f deploy/knative-operator
 ```
 
-## Installing the Knative Serving component
+## Install Knative Serving
 
-To install Knative Serving you must create a custom resource (CR), add a networking
-layer to the CR, and configure DNS.
+To install Knative Serving you must create a custom resource (CR), add a networking layer to the CR, and configure DNS.
 
 ### Create the Knative Serving custom resource
 
@@ -275,7 +269,7 @@ Knative Serving with different ingresses:
 {% include "real-dns-operator.md" %}
 {% include "temporary-dns.md" %}
 
-## Installing the Knative Eventing component
+## Install Knative Eventing
 
 To install Knative Eventing you must apply the custom resource (CR).
 Optionally, you can install the Knative Eventing component with different event sources.
@@ -309,6 +303,109 @@ To create the custom resource for the latest available Knative Eventing in the O
     ```
 
 Where `<filename>` is the name of the file you created in the previous step.
+
+### Installing a specific version of Eventing
+
+Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example, if you want to install Knative Eventing v1.6, you can apply the following KnativeEventing CR:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: "1.6"
+```
+
+You can also run the following command to make the equivalent change:
+
+```bash
+kn operator install --component eventing -v 1.6 -n knative-eventing
+```
+
+If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Eventing.
+If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
+includes the latest 3 minor release versions.
+
+If Knative Eventing is already managed by the Operator, updating the `spec.version` field in the KnativeEventing CR enables upgrading or downgrading the Knative Eventing version, without requiring modifications to the Operator.
+
+Note that the Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Eventing deployment is version 1.4, you must upgrade to 1.5 before upgrading to 1.6.
+
+### Installing customized Knative Eventing
+
+The Operator provides you with the flexibility to install Knative Eventing customized to your own requirements.
+As long as the manifests of customized Knative Eventing are accessible to the Operator, you can install them.
+
+There are two modes available for you to install customized manifests: _overwrite mode_ and _append mode_.
+With overwrite mode, under `.spec.manifests`, you must define all manifests needed for Knative Eventing
+to install because the Operator will no longer install any default manifests.
+With append mode, under `.spec.additionalManifests`, you only need to define your customized manifests.
+The customized manifests are installed after default manifests are applied.
+
+#### Overwrite mode
+
+Use overwrite mode when you want to customize all Knative Eventing manifests to be installed.
+
+For example, if you want to install a customized Knative Eventing only, you can create and apply the following
+Eventing CR:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  manifests:
+  - URL: https://my-eventing/eventing.yaml
+```
+
+This example installs the customized Knative Eventing at version `$spec_version` which is available at
+`https://my-eventing/eventing.yaml`.
+
+!!! attention
+    You can make the customized Knative Eventing available in one or multiple links, as the `spec.manifests` supports a list of links.
+    The ordering of the URLs is critical. Put the manifest you want to apply first on the top.
+
+We strongly recommend you to specify the version and the valid links to the customized Knative Eventing, by leveraging
+both `spec.version` and `spec.manifests`. Do not skip either field.
+
+#### Append mode
+
+You can use append mode to add your customized manifests into the default manifests.
+
+For example, if you only want to customize a few resources but you still want to install the default Knative Eventing,
+you can create and apply the following Eventing CR:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-eventing
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  version: $spec_version
+  additionalManifests:
+  - URL: https://my-eventing/eventing-custom.yaml
+```
+
+This example installs the default Knative Eventing, and installs your customized resources available at
+`https://my-eventing/eventing-custom.yaml`.
+
+Knative Operator installs the default manifests of Knative Eventing at the version `$spec_version`, and then
+installs your customized manifests based on them.
 
 ### Installing Knative Eventing with event sources
 
