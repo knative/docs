@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      reference/concepts/duck-typing.md: concepts/duck-typing.md
       reference/client/README.md: client/README.md
       reference/api/eventing-api.md: eventing/reference/eventing-api.md
       reference/api/serving-api.md: serving/reference/serving-api.md
@@ -66,7 +67,7 @@ plugins:
       community/meetup.md: contributing/contributing.md
       community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
       concepts/overview.md: index.md
-      developer/concepts/duck-typing.md: reference/concepts/duck-typing.md
+      developer/concepts/duck-typing.md: concepts/duck-typing.md
       developer/eventing/event-delivery.md: eventing/event-delivery.md
       developer/eventing/sinks/README.md: eventing/sinks/README.md
       developer/eventing/sinks/kafka-sink.md: eventing/sinks/kafka-sink.md

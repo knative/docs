@@ -6,6 +6,12 @@ nav:
 ###############################################################################
     - Home: index.md
 ###############################################################################
+    # Concepts
+###############################################################################
+    - Concepts:
+      - Overview: concepts/README.md
+      - Duck types: concepts/duck-typing.md
+###############################################################################
     # Getting started
 ###############################################################################
     - Tutorial:
@@ -242,9 +248,8 @@ nav:
       - Eventing code samples: samples/eventing.md
     # Reference docs
     - Reference:
-      - Concepts:
-        - Duck types: reference/concepts/duck-typing.md
       - Security: reference/security/README.md
+      - Release notes: reference/relnotes/README.md
     - Contributing:
       - Welcome to the Knative community: contributing/README.md
       - Contribute to Knative: contributing/contributing.md
