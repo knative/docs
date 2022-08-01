@@ -9,7 +9,6 @@ Examples of supported Knative Serving use cases:
 - Rapid deployment of serverless containers.
 - Autoscaling, including scaling pods down to zero.
 - Support for multiple networking layers, such as Contour, Kourier, and Istio, for integration into existing environments.
-- Point-in-time snapshots of deployed code and configurations.
 
 Knative Serving supports both HTTP and [HTTPS](using-a-tls-cert.md) networking protocols.
 
