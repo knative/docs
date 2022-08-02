@@ -1,4 +1,4 @@
-# Creating a RabbitMQBroker
+# Creating a RabbitMQBroker object
 
 This topic describes how to create a RabbitMQBroker.
 
