@@ -7,8 +7,7 @@ This topic describes how to create a RabbitMQBroker.
 1. You have installed [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
 1. You have installed [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
 1. You have installed [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
-1. A working RabbitMQ Instance, we recommend to create one Using the [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator).
-For more information about configuring the `RabbitmqCluster` CRD, see the [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html)
+1. You have access to a working RabbitMQ instance. You can create a RabbitMQ instance by using the [RabbitMQ Cluster Kubernetes Operator](https://github.com/rabbitmq/cluster-operator). For more information see the [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
 
 ## Install the RabbitMQ controller
 
