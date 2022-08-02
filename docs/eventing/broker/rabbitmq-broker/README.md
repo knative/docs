@@ -1,6 +1,6 @@
 # Creating a RabbitMQBroker object
 
-This topic describes how to create a RabbitMQBroker object.
+This topic describes how to create a RabbitMQ Broker.
 
 ## Prerequisites
 
