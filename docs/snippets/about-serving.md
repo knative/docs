@@ -28,7 +28,7 @@ The primary Knative Serving resources are Services, Routes, Configurations, and 
   configuration and follows the Twelve-Factor App methodology. Modifying a
   configuration creates a new revision.
 
-- [Revision](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision){target=_blank}:
+- [Revisions](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision){target=_blank}:
   The `revision.serving.knative.dev` resource is a point-in-time snapshot of the
   code and configuration for each modification made to the workload. Revisions
   are immutable objects and can be retained for as long as useful. Knative
