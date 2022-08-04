@@ -7,7 +7,7 @@
 * **[Autoscaling](../../serving/autoscaling/README.md){target=_blank}**
     - Revisions can be automatically scaled up and down according to incoming traffic.
 
-* **[Traffic routing](../../serving/traffic-management.md){target=_blank}**
+* **[Configuring gradual rollout of traffic to Revisions](../../serving/rolling-out-latest-revision.md){target=_blank}**
     - Revisions enable progressive roll-out and roll-back of application changes by changing the HTTP routing between Service names and Revision instances.
 <!--
 - **Garbage collection**
