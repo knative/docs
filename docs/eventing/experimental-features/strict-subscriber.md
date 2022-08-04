@@ -2,7 +2,7 @@
 
 **Flag name**: `strict-subscriber`
 
-**Stage**: Alpha, disabled by default
+**Stage**: Beta, enabled by default
 
 **Tracking issue**: [#5762](https://github.com/knative/eventing/pull/5762)
 

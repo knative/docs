@@ -2,7 +2,7 @@
 
 **Flag name**: `delivery-timeout`
 
-**Stage**: Alpha, disabled by default
+**Stage**: Beta, enabled by default
 
 **Tracking issue**: [#5148](https://github.com/knative/eventing/issues/5148)
 
