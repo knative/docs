@@ -223,7 +223,8 @@ command:
             - `<apiserversource-name>` is the name of the source that you want to create.
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
-            - `kind: Service` and `name: event-display` is the name of the service that you created in step 5 earlier.
+            - `kind: Service` is any supported Addressable object that you want to use as a sink
+            - `name: event-display` is the name of the Service that you created in step 5 earlier.
 
             For more information about the fields you can configure for the ApiServerSource object, see [ApiServerSource reference](reference.md).
 
