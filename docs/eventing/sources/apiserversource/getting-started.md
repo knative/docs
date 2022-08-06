@@ -186,14 +186,14 @@ command:
               --mode "Resource" \
               --resource "Event:v1" \
               --service-account <service-account> \
-              --sink <sink-name>
+              --sink <sink>
             ```
             Where:
 
             - `<apiserversource>` is the name of the source that you want to create.
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
-            - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
+            - `<sink>` is the sink you created in step 5 earlier, for example, Service url: `http://event-display.<namespace>.svc.cluster.local`
 
             For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_apiserver_create.md#kn-source-apiserver-create).
 
@@ -208,24 +208,22 @@ command:
              namespace: <namespace>
             spec:
              serviceAccountName: <service-account>
-             mode: <event-mode>
+             mode: Resource
              resources:
                - apiVersion: v1
                  kind: Event
              sink:
                ref:
                  apiVersion: v1
-                 kind: <sink-kind>
-                 name: <sink-name>
+                 kind: Service
+                 name: event-display
             ```
             Where:
 
             - `<apiserversource-name>` is the name of the source that you want to create.
             - `<namespace>` is the name of the namespace that you created in step 1 earlier.
             - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
-            - `<event-mode>` is either `Resource` or `Reference`. If set to `Resource`, the event payload contains the entire resource that the event is for. If set to `Reference`, the event payload only contains a reference to the resource that the event is for. The default is `Reference`.
-            - `<sink-kind>` is any supported Addressable object that you want to use as a sink, for example, a `Service` or `Deployment`.
-            - `<sink-name>` is the name of your sink.
+            - `kind: Service` and `name: event-display` is the name of the service that you created in step 5 earlier.
 
             For more information about the fields you can configure for the ApiServerSource object, see [ApiServerSource reference](reference.md).
 
