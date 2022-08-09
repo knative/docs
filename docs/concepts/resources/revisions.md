@@ -8,7 +8,7 @@
     - Revisions can be automatically scaled up and down according to incoming traffic.
 
 * **[Configuring gradual rollout of traffic to Revisions](../../serving/rolling-out-latest-revision.md){target=_blank}**
-    - Revisions enable progressive roll-out and roll-back of application changes by changing the HTTP routing between Service names and Revision instances.
+    - Revisions enable progressive roll-out and roll-back of application changes.
 <!--
 - **Garbage collection**
     - TODO: add Something about how this works w/ revisions; only apply for Operator installs? GC docs need a general cleanup before adding something / links here-->
