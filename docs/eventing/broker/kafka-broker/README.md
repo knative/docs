@@ -104,8 +104,8 @@ data:
 
 This `ConfigMap` is installed in the Knative Eventing `SYSTEM_NAMESPACE` in the cluster. You can edit
 the global configuration depending on your needs. You can also override these settings on a
-per broker base, by providing a different `ConfigMap` on a different `namespace` on your
-Kafka Broker's `spec.config` field.
+per broker base, by referencing a different `ConfigMap` on a different `namespace` or with a
+different `name` on your Kafka Broker's `spec.config` field.
 
 !!! note
     The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
