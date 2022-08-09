@@ -83,7 +83,9 @@ spec:
         name: dlq-service
 ```
 
-`spec.config` should reference any `ConfigMap` that looks like the following:
+### Configure a Kafka Broker
+
+The `spec.config` should reference any `ConfigMap` in any `namespace` that looks like the following:
 
 ```yaml
 apiVersion: v1
@@ -95,14 +97,15 @@ data:
   # Number of topic partitions
   default.topic.partitions: "10"
   # Replication factor of topic messages.
-  default.topic.replication.factor: "1"
+  default.topic.replication.factor: "3"
   # A comma separated list of bootstrap servers. (It can be in or out the k8s cluster)
   bootstrap.servers: "my-cluster-kafka-bootstrap.kafka:9092"
 ```
 
-This `ConfigMap` is installed in the cluster. You can edit
-the configuration or create a new one with the same values
-depending on your needs.
+This `ConfigMap` is installed in the Knative Eventing `SYSTEM_NAMESPACE` in the cluster. You can edit
+the global configuration depending on your needs. You can also override these settings on a
+per broker base, by providing a different `ConfigMap` on a different `namespace` on your
+Kafka Broker's `spec.config` field.
 
 !!! note
     The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
