@@ -71,7 +71,7 @@ Create a sample service:
     kn service create helloworld-go \
         --image gcr.io/knative-samples/helloworld-go \
         --env TARGET=World \
-        --annotation features.knative.dev/queueproxy-podinfo: enabled \
+        --annotation features.knative.dev/queueproxy-podinfo=enabled \
         --annotation qpextension.knative.dev/testgate-activate=enable \
         --annotation qpextension.knative.dev/testgate-config-response=Goodbye \
         --annotation qpextension.knative.dev/testgate-config-sender=Joe
