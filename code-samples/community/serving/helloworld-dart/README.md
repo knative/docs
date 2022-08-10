@@ -24,7 +24,7 @@ just a few steps:
 1. Create a new Dart app using the `server_shelf` template:
 
    ```shell
-   > dart create -t server-shelf helloworld-dart 
+   > dart create -t server-shelf helloworld-dart
    ```
 
 1. If you want to run locally, install dependencies. If you only want to run in
