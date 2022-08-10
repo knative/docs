@@ -2,7 +2,7 @@
 - /docs/concepts/resources/revisions.md
 - /docs/serving/revisions/README.md
 -->
-Revisions are stateless Knative Serving resources that contain point-in-time snapshots of the application code and configuration for each change made to a Knative Service.
+Revisions are Knative Serving resources that contain point-in-time snapshots of the application code and configuration for each change made to a Knative Service.
 <!--Stateless taken from https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision
 TODO: Update API spec docs to be consistent w/ docs site?-->
 
