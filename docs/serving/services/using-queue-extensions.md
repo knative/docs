@@ -4,7 +4,7 @@ Once your cluster is setup to allow services to use Queue Proxy Extensions, a se
 
 ## Prerequisites for preparing the cluster
 
-1. Make sure you are using a Queue Proxy Image that was built with the extensions that you wish to use - See [Enabling Queue Proxy Pod Info](../queue-extensions.md)
+1. Make sure you are using a Queue Proxy Image that was built with the extensions that you wish to use - See [Queue Proxy Extensions](../queue-extensions.md).
 1. Make sure that the cluster config-features is set with: `queueproxy.mount-podinfo: allowed`  - See [Enabling Queue Proxy Pod Info](../configuration/feature-flags.md#queue-proxy-pod-info) for more details
 
 ## Overview
