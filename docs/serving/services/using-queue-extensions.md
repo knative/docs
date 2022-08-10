@@ -31,45 +31,50 @@ See [Creating a Service](./creating-services.md) for prerequisites to create a s
 
 Create a sample service:
 
+
 === "Apply YAML"
 
-1. Create a YAML file using the following example:
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: helloworld-go
-      namespace: default
-    spec:
-      template:
+    1. Create a YAML file using the following example:
+
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
         metadata:
-            annotations:
-              features.knative.dev/queueproxy-podinfo: enabled
-              qpextention.knative.dev/testgate-activate: enable
-              qpextention.knative.dev/testgate-config-response: CU
-              qpextention.knative.dev/testgate-config-sender: Joe
+          name: helloworld-go
+          namespace: default
         spec:
-          containers:
-            - image: gcr.io/knative-samples/helloworld-go
-              env:
-                - name: TARGET
-                  value: "World"
-    ```
-1. Apply the YAML file by running the command:
-```bash
-kubectl apply -f <filename>.yaml
-```
-Where `<filename>` is the name of the file you created in the previous step.
+          template:
+            metadata:
+                annotations:
+                  features.knative.dev/queueproxy-podinfo: enabled
+                  qpextention.knative.dev/testgate-activate: enable
+                  qpextention.knative.dev/testgate-config-response: CU
+                  qpextention.knative.dev/testgate-config-sender: Joe
+            spec:
+              containers:
+                - image: gcr.io/knative-samples/helloworld-go
+                  env:
+                    - name: TARGET
+                      value: "World"
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 === "kn CLI"
-```sh
-kn service create helloworld-go \
-    --image gcr.io/knative-samples/helloworld-go \
-    --env TARGET=World \
-    --annotation features.knative.dev/queueproxy-podinfo: enabled \
-    --annotation qpextension.knative.dev/testgate-activate=enable \
-    --annotation qpextension.knative.dev/testgate-config-response=Goodbye \
-    --annotation qpextension.knative.dev/testgate-config-sender=Joe
-```
+
+    ```
+    kn service create helloworld-go \
+        --image gcr.io/knative-samples/helloworld-go \
+        --env TARGET=World \
+        --annotation features.knative.dev/queueproxy-podinfo: enabled \
+        --annotation qpextension.knative.dev/testgate-activate=enable \
+        --annotation qpextension.knative.dev/testgate-config-response=Goodbye \
+        --annotation qpextension.knative.dev/testgate-config-sender=Joe
+    ```
 
 After the service has been created, Knative propagates the annotations to the podSpec of the service deployment. When a pod is created, the queue proxy container will mount a volume that contains the pod annotations and activate the `testgate` extension (if such an extension is available in the queue proxy image). The `testgate` extension will than be configured with the configuration: `{ sender: "Joe", response: "CU"}`.
