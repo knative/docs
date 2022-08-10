@@ -74,23 +74,28 @@ For more information about Subscription objects, see
           channel:
             apiVersion: messaging.knative.dev/v1
             kind: Channel
-            name: <channel-name> # Configuration settings for the Channel that the Subscription connects to.
+            name: <channel-name> # Name of the Channel that the Subscription connects to.
           delivery:
             deadLetterSink:
               ref:
                 apiVersion: serving.knative.dev/v1
                 kind: Service
                 name: <service-name>
-                # Configuration settings for event delivery.
-                # This tells the Subscription what happens to events that cannot be delivered to the Subscriber.
-                # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
+                # This tells the Subscription what happens to events that cannot be delivered to the Subscriber. When this is configured, events that failed to be consumed are sent to the deadLetterSink.
                 # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
                 # The deadLetterSink value must be a Destination.
+          reply:
+            ref:
+              apiVersion: messaging.knative.dev/v1
+              kind: InMemoryChannel
+              name: <service-name>
+              # Configuration settings for the reply event. This is the event Sink that events replied from the subscriber are delivered to.
           subscriber:
             ref:
               apiVersion: serving.knative.dev/v1
               kind: Service
-              name: <service-name> # Configuration settings for the Subscriber. This is the event Sink that events are delivered to from the Channel.
+              name: <service-name>
+              # Configuration settings for the Subscriber. This is the event Sink that events are delivered to from the Channel.
         ```
 
     1. Apply the YAML file by running the command:
