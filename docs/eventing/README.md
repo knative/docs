@@ -1,16 +1,10 @@
 # Knative Eventing
 
-Knative Eventing is a collection of APIs that enable you to use an [event-driven architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) with your applications.
+--8<-- "about-eventing.md"
 
-You can use these APIs to create components that route events from event producers to event consumers, or _sinks_, that receive events. Sinks can also be configured to respond to HTTP requests by sending a response event.
-
-Knative Eventing uses standard HTTP POST requests to send and receive events between event producers and sinks. These events conform to the [CloudEvents specifications](https://cloudevents.io/), which enables creating, parsing, sending, and receiving events in any programming language.
-
-In a Knative Eventing deployment, event [Sources](../eventing/sources/README.md) are the primary event producers. Examples of [sinks](../eventing/sinks/README.md) include [Brokers](../eventing/broker/README.md), [Channels](../eventing/channels/README.md), and [Services](../serving/services/README.md).
+In a Knative Eventing deployment, event [Sources](../eventing/sources/README.md){target=_blank} are the primary event producers. Examples of [sinks](../eventing/sinks/README.md){target=_blank} include [Brokers](../eventing/broker/README.md){target=_blank}, [Channels](../eventing/channels/README.md){target=_blank}, and [Services](../serving/services/README.md){target=_blank}.
 
 ## Common use cases
-
-Knative Eventing components are loosely coupled, and can be developed and deployed independently of each other. Any producer can generate events before there are active event consumers that are listening for those events. Any event consumer can express interest in a class of events before there are producers that are creating those events.
 
 Examples of supported Knative Eventing use cases:
 
@@ -19,7 +13,7 @@ Examples of supported Knative Eventing use cases:
 - Consume an event without creating a publisher. You can use a trigger to consume events from a broker based on event attributes. The application receives events as an HTTP POST.
 
 !!! tip
-    Multiple event producers and sinks can be used together to create more advanced [Knative Eventing flows](flows/README.md) to solve complex use cases.
+    Multiple event producers and sinks can be used together to create more advanced [Knative Eventing flows](flows/README.md){target=_blank} to solve complex use cases.
 
 ## Eventing examples
 

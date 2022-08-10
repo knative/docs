@@ -4,12 +4,10 @@ This topic describes how to create a RabbitMQ Broker.
 
 ## Prerequisites
 
-To use the RabbitMQ Broker, you must have the following installed:
-
-1. [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
-1. [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator) - our recommendation is [latest release](https://github.com/rabbitmq/cluster-operator/releases/latest)
-1. [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
-1. [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
+1. You have installed [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
+1. You have installed [CertManager v1.5.4](https://github.com/jetstack/cert-manager/releases/tag/v1.5.4) - easiest integration with RabbitMQ Messaging Topology Operator
+1. You have installed [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) - our recommendation is [latest release](https://github.com/rabbitmq/messaging-topology-operator/releases/latest) with CertManager
+1. You have access to a working RabbitMQ instance. You can create a RabbitMQ instance by using the [RabbitMQ Cluster Kubernetes Operator](https://github.com/rabbitmq/cluster-operator). For more information see the [RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
 
 ## Install the RabbitMQ controller
 
@@ -35,50 +33,7 @@ To use the RabbitMQ Broker, you must have the following installed:
     rabbitmq-broker-webhook        1/1     1            1           4s
     ```
 
-## Create a RabbitMQ cluster
-
-1. Deploy a RabbitMQ cluster:
-
-    1. Create a YAML file using the following template:
-
-        ```yaml
-        apiVersion: rabbitmq.com/v1beta1
-        kind: RabbitmqCluster
-        metadata:
-          name: <cluster-name>
-          annotations:
-            # A single RabbitMQ cluster per Knative Eventing installation
-            rabbitmq.com/topology-allowed-namespaces: "*"
-        ```
-        Where `<cluster-name>` is the name you want for your RabbitMQ cluster,
-        for example, `rabbitmq`.
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl create -f <filename>
-        ```
-        Where `<filename>` is the name of the file you created in the previous step.
-
-1. Wait for the cluster to become ready. When the cluster is ready, `ALLREPLICASREADY`
-will be `true` in the output of the following command:
-
-    ```bash
-    kubectl get rmq <cluster-name>
-    ```
-    Where `<cluster-name>` is the name you gave your cluster in the step above.
-
-    Example output:
-
-    ```{ .bash .no-copy }
-    NAME          ALLREPLICASREADY   RECONCILESUCCESS   AGE
-    rabbitmq      True               True               38s
-    ```
-
-For more information about configuring the `RabbitmqCluster` CRD, see the
-[RabbitMQ website](https://www.rabbitmq.com/kubernetes/operator/using-operator.html).
-
-## Create a RabbitMQ broker config object
+## Create a RabbitMQBrokerConfig object
 
 1. Create a YAML file using the following template:
     ```yaml
@@ -88,10 +43,20 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
       name: <rabbitmq-broker-config-name>
     spec:
       rabbitmqClusterReference:
+        # Configure name if a RabbitMQ Cluster Operator is being used.
         name: <cluster-name>
+        # Configure connectionSecret if an external RabbitMQ cluster is being used.
+        connectionSecret:
+          name: rabbitmq-secret-credentials
       queueType: quorum
     ```
-    Where <cluster-name> is the name of the RabbitMQ cluster created in the step above.
+    Where:
+
+    - <rabbitmq-broker-config-name> is the name you want for your RabbitMQBrokerConfig object.
+    - <cluster-name> is the name of the RabbitMQ cluster you created earlier.
+
+    !!! note
+        You cannot set `name` and `connectionSecret` at the same time, since `name` is for a RabbitMQ Cluster Operator instance running in the same cluster as the Broker, and `connectionSecret` is for an external RabbitMQ server.
 
 1. Apply the YAML file by running the command:
 
@@ -100,7 +65,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
     ```
    Where `<filename>` is the name of the file you created in the previous step.
 
-## Create a RabbitMQ broker object
+## Create a RabbitMQBroker object
 
 1. Create a YAML file using the following template:
 
@@ -117,7 +82,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
         kind: RabbitmqBrokerConfig
         name: <rabbitmq-broker-config-name>
     ```
-    Where `<rabbitmq-broker-config-name>` is the name you gave your RabbitMQ Broker config in the step above.
+    Where `<rabbitmq-broker-config-name>` is the name you gave your RabbitMQBrokerConfig in the step above.
 
 1. Apply the YAML file by running the command:
 
@@ -126,6 +91,23 @@ For more information about configuring the `RabbitmqCluster` CRD, see the
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
+## Configure message ordering
+
+By default, Triggers will consume messages one at a time to preserve ordering. If ordering of events isn't important and higher performance is desired, you can configure this by using the
+`parallelism` annotation. Setting `parallelism` to `n` creates `n` workers for the Trigger that will all consume messages in parallel.
+
+The following YAML shows an example of a Trigger with parallelism set to `10`:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: high-throughput-trigger
+  annotations:
+    rabbitmq.eventing.knative.dev/parallelism: "10"
+...
+
 ## Additional information
 
-To report a bug or request a feature, open an issue in the [eventing-rabbitmq repository](https://github.com/knative-sandbox/eventing-rabbitmq).
+- For more samples visit the [`eventing-rabbitmq` Github repository samples directory](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/samples)
+- To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-sandbox/eventing-rabbitmq).

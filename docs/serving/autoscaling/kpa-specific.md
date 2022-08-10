@@ -136,7 +136,7 @@ This value is a percentage of the traffic that the current amount of replicas ca
 !!! note
     A value of `100.0` (100 percent) means that the Autoscaler is always in panic mode, therefore the  minimum value should be higher than `100.0`.
 
-The default setting of `200.0` means that panic mode will be start if traffic is twice as high as the current replica population can handle.
+The default setting of `200.0` means that panic mode will be started if traffic is twice as high as the current replica population can handle.
 
 * **Global key:** `panic-threshold-percentage`
 * **Per-revision annotation key:** `autoscaling.knative.dev/panic-threshold-percentage`

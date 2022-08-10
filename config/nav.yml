@@ -6,6 +6,12 @@ nav:
 ###############################################################################
     - Home: index.md
 ###############################################################################
+    # Concepts
+###############################################################################
+    - Concepts:
+      - Overview: concepts/README.md
+      - Duck types: concepts/duck-typing.md
+###############################################################################
     # Getting started
 ###############################################################################
     - Tutorial:
@@ -150,6 +156,7 @@ nav:
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
+          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
@@ -242,9 +249,8 @@ nav:
       - Eventing code samples: samples/eventing.md
     # Reference docs
     - Reference:
-      - Concepts:
-        - Duck types: reference/concepts/duck-typing.md
       - Security: reference/security/README.md
+      - Release notes: reference/relnotes/README.md
     - Contributing:
       - Welcome to the Knative community: contributing/README.md
       - Contribute to Knative: contributing/contributing.md
