@@ -15,7 +15,7 @@ For more information about Subscription objects, see
 === "kn"
     Create a Subscription between a Channel and a Sink by running:
 
-    ```
+    ```bash
     kn subscription create <subscription-name> \
       --channel <Group:Version:Kind>:<channel-name> \
       --sink <sink-prefix>:<sink-name> \
@@ -68,29 +68,38 @@ For more information about Subscription objects, see
         apiVersion: messaging.knative.dev/v1
         kind: Subscription
         metadata:
-          name: <subscription-name> # Name of the Subscription.
+          name: <subscription-name>
+          # Name of the Subscription.
           namespace: default
         spec:
           channel:
             apiVersion: messaging.knative.dev/v1
             kind: Channel
-            name: <channel-name> # Configuration settings for the Channel that the Subscription connects to.
+            name: <channel-name>
+            # Name of the Channel that the Subscription connects to.
           delivery:
+            # Optional delivery configuration settings for events.
             deadLetterSink:
+            # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
+            # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
+            # The deadLetterSink value must be a Destination.
               ref:
                 apiVersion: serving.knative.dev/v1
                 kind: Service
                 name: <service-name>
-                # Configuration settings for event delivery.
-                # This tells the Subscription what happens to events that cannot be delivered to the Subscriber.
-                # When this is configured, events that failed to be consumed are sent to the deadLetterSink.
-                # The event is dropped, no re-delivery of the event is attempted, and an error is logged in the system.
-                # The deadLetterSink value must be a Destination.
+          reply:
+            # Optional configuration settings for the reply event.
+            # This is the event Sink that events replied from the subscriber are delivered to.
+            ref:
+              apiVersion: messaging.knative.dev/v1
+              kind: InMemoryChannel
+              name: <service-name>
           subscriber:
+            # Required configuration settings for the Subscriber. This is the event Sink that events are delivered to from the Channel.
             ref:
               apiVersion: serving.knative.dev/v1
               kind: Service
-              name: <service-name> # Configuration settings for the Subscriber. This is the event Sink that events are delivered to from the Channel.
+              name: <service-name>
         ```
 
     1. Apply the YAML file by running the command:
@@ -107,13 +116,13 @@ You can list all existing Subscriptions by using the `kn` CLI tool.
 
 - List all Subscriptions:
 
-    ```
+    ```bash
     kn subscription list
     ```
 
 - List Subscriptions in YAML format:
 
-    ```
+    ```bash
     kn subscription list -o yaml
     ```
 
@@ -121,7 +130,7 @@ You can list all existing Subscriptions by using the `kn` CLI tool.
 
 You can print details about a Subscription by using the `kn` CLI tool:
 
-```
+```bash
 kn subscription describe <subscription-name>
 ```
 <!--TODO: Add an example command and output-->
@@ -132,13 +141,13 @@ kn subscription describe <subscription-name>
 You can delete a Subscription by using the `kn` or `kubectl` CLI tools.
 
 === "kn"
-    ```
+    ```bash
     kn subscription delete <subscription-name>
     ```
 
 
 === "kubectl"
-    ```
+    ```bash
     kubectl subscription delete <subscription-name>
     ```
 
