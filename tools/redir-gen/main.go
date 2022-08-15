@@ -33,7 +33,7 @@ var (
 	// Repos known to contain Go libraries, so that requesting
 	// https://knative.dev/<repo> in a browser should redirect to
 	// https://pkg.go.dev/knative.dev/<repo>
-	redirectingGoRepos = []string{"pkg", "serving"}
+	redirectingGoRepos = []string{"pkg", "serving", "security-guard"}
 )
 
 // repoInfo provides a simple holder for GitHub repo information needed to
