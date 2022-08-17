@@ -1,35 +1,35 @@
-# Using Queue Proxy Extensions
+# How to use extensions enabled by QPoptions
 
-Once your cluster is setup to allow services to use Queue Proxy Extensions, a service can decide which extensions it wish to use and how to configure such extensions. Activating and configuring extensions is described here.
+Once your cluster is setup with extensions enabled by QPOptions, a Service can decide which extensions it wish to use and how to configure such extensions. Activating and configuring extensions is described here.
 
 ## Prerequisites for preparing the cluster
 
-1. Make sure you are using a Queue Proxy Image that was built with the extensions that you wish to use - See [Queue Proxy Extensions](../queue-extensions.md).
-1. Make sure that the cluster config-features is set with: `queueproxy.mount-podinfo: allowed`  - See [Enabling Queue Proxy Pod Info](../configuration/feature-flags.md#queue-proxy-pod-info) for more details
+1. Make sure you are using a Queue Proxy image that was built with the extensions that you wish to use - See [Extending Queue Proxy image with QPoptions](../queue-extensions.md).
+1. Make sure that the cluster config-features is set with: `queueproxy.mount-podinfo: allowed`  - See [Enabling Queue Proxy Pod Info](../configuration/feature-flags.md#queue-proxy-pod-info) for more details.
 
 ## Overview
 
-A service can activate and configure queue proxy extensions by adding `qpextension.knative.dev/*` annotations under the: `spec.template.metadata` of the service custom resource definition.
+A Service can activate and configure extensions by adding `qpoption.knative.dev/*` annotations under the: `spec.template.metadata` of the Service Custom Resource Definition (CRD).
 
-Setting a value of: `qpextension.knative.dev/<ExtensionName>-activate: "enable"` will activate the extension.
+Setting a value of: `qpoption.knative.dev/<ExtensionName>-activate: "enable"` will activate the extension.
 
-Setting a value of: `qpextension.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` will add a configuration of Key: Val to the extension.
+Setting a value of: `qpoption.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` will add a configuration of Key: Val to the extension.
 
-In addition, the service need to ensure that the Pod Info volume is mounted by adding the `features.knative.dev/queueproxy-podinfo: enabled` annotation under the: `spec.template.metadata` of the service custom resource definition.
+In addition, the Service need to ensure that the Pod Info volume is mounted by adding the `features.knative.dev/queueproxy-podinfo: enabled` annotation under the: `spec.template.metadata` of the Service CRD.
 
-You can create a Knative service by applying a YAML file or by using the `kn service create` CLI command.
+You can create a Knative Service by applying a YAML file or by using the `kn service create` CLI command.
 
-## Prerequisites for creating a service
+## Prerequisites for creating a Service
 
-See [Creating a Service](./creating-services.md) for prerequisites to create a service.
+See [Creating a Service](./creating-services.md) for prerequisites to create a Service.
 
 ## Procedure
 
 !!! tip
 
-    The following commands create a `helloworld-go` sample service while activating and configuring the `test-gate` extension for this service. You can modify these commands, including the extension(s) to be activated and the extension configuration.
+    The following commands create a `helloworld-go` sample Service while activating and configuring the `test-gate` extension for this Service. You can modify these commands, including the extension(s) to be activated and the extension configuration.
 
-Create a sample service:
+Create a sample Service:
 
 
 === "Apply YAML"
@@ -47,9 +47,9 @@ Create a sample service:
             metadata:
                 annotations:
                   features.knative.dev/queueproxy-podinfo: enabled
-                  qpextention.knative.dev/testgate-activate: enable
-                  qpextention.knative.dev/testgate-config-response: CU
-                  qpextention.knative.dev/testgate-config-sender: Joe
+                  qpoption.knative.dev/testgate-activate: enable
+                  qpoption.knative.dev/testgate-config-response: CU
+                  qpoption.knative.dev/testgate-config-sender: Joe
             spec:
               containers:
                 - image: gcr.io/knative-samples/helloworld-go
@@ -72,9 +72,9 @@ Create a sample service:
         --image gcr.io/knative-samples/helloworld-go \
         --env TARGET=World \
         --annotation features.knative.dev/queueproxy-podinfo=enabled \
-        --annotation qpextension.knative.dev/testgate-activate=enable \
-        --annotation qpextension.knative.dev/testgate-config-response=Goodbye \
-        --annotation qpextension.knative.dev/testgate-config-sender=Joe
+        --annotation qpoption.knative.dev/testgate-activate=enable \
+        --annotation qpoption.knative.dev/testgate-config-response=Goodbye \
+        --annotation qpoption.knative.dev/testgate-config-sender=Joe
     ```
 
-After the service has been created, Knative propagates the annotations to the podSpec of the service deployment. When a pod is created, the queue proxy container will mount a volume that contains the pod annotations and activate the `testgate` extension (if such an extension is available in the queue proxy image). The `testgate` extension will than be configured with the configuration: `{ sender: "Joe", response: "CU"}`.
+After the Service has been created, Knative propagates the annotations to the podSpec of the Service deployment. When a Service pod is created, the Queue Proxy sidecar will mount a volume that contains the pod annotations and activate the `testgate` extension (if such an extension is available in the Queue Proxy image). The `testgate` extension will than be configured with the configuration: `{ sender: "Joe", response: "CU"}`.

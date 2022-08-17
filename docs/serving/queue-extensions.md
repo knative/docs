@@ -1,15 +1,24 @@
-# Queue Proxy Runtime Extensions
+# Extending Queue Proxy image with QPoptions
 
-Queue Proxy can be built with additional runtime extensions. Such extensions add optional features to Queue Proxy. While Knative core upstream introduce core features available on any knative deployment, Queue Proxy Extensions allow adding additional runtime features. It is up to Downstream to decide which such extensions will be available on what package.
+Knative service pods include two containers:
 
-For example, the [security-guard](https://knative.dev/security-guard) repository includes a Queue Proxy Extension [qpoption](https://knative.dev/security-guard/pkg/qpoption) that offers the ability to add security plus to Queue Proxy. Other extensions may be developed to add other features.
+- The user main service container, which is named `user-container`
+- The Queue Proxy - a sidecar named `queue-proxy` that serves as a reverse proxy in front of the `user-container`
 
-The runtime features available are determined when the Queue Proxy image is built. Queue Proxy defines an orderly manner to activate and to configure extensions - See:
+Queue Proxy can be extended to offer additional optional features. The QPOptions feature of Queue Proxy allows additional runtime packages to extend Queue Proxy capabilities.
+
+For example, the [security-guard](https://knative.dev/security-guard/README.md) repository provides an extension that uses the QPOptions feature. The [Qpoption](https://knative.dev/security-guard/pkg/qpoption/README.md) package enables users to add additional security features to Queue Proxy.
+
+The runtime features available are determined when the Queue Proxy image is built. Queue Proxy defines an orderly manner to activate and to configure extensions.
+
+#### Additional information
 
 - [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of Extensions.
-- [Using Queue Proxy Extensions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
+- [How to use extensions enabled by QPoptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
 
-In order to add extensions, `cmd/queue/main.go` need to be replaced before queue proxy image is built. Here is an example `cmd/queue/main.go` that adds the `test-gate` extension.
+#### Adding extensions
+
+You can add extensions by replacing the `cmd/queue/main.go` file before the Queue Proxy image is built. The following example shows a `cmd/queue/main.go` file that adds the `test-gate` extension:
 
 ```go
   package main

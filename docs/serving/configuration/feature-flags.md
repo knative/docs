@@ -421,13 +421,13 @@ spec:
 * **Type**: Extension
 * **ConfigMap key:** `queueproxy.mount-podinfo`
 
-This feature should be enabled/allowed when using Queue Proxy Extensions. The flag controls whether Knative mounts the Pod Info volume to the queue-proxy container.
+You must set this feature to either "enabled or "allowed" when using QPOptions. The flag controls whether Knative mounts the `pod-info` volume to the `queue-proxy` container.
 
-Mounting the Pod Info volume allows Queue Proxy Extensions to access the service annotations using the file `/etc/podinfo/annnotations`. See [Queue Proxy Extensions](../queue-extensions.md) for more details about extending Queue Proxy.
+Mounting the `pod-info` volume allows extensions that use QPOptions to access the Service annotations, by reading the `/etc/podinfo/annnotations` file. See [Using QPoptions to extend Queue Proxy](../queue-extensions.md) for more details.
 
-When this feature is `enabled`, the Pod Info volume will always be mounted. This is helpful in a case where most/all cluster services are required to use Queue Proxy Extensions.
+When this feature is `enabled`, the `pod-info` volume is always mounted. This is helpful in case where all or most of the cluster Services are required to use extensions that rely on QPOptions.
 
-When this feature is `allowed`, the Pod Info volume will not be mounted by default. Instead, the volume will be mounted only in services that will add the `features.knative.dev/queueproxy-podinfo: enabled` annotation as shown below:
+When this feature is `allowed`, the `pod-info` volume is not mounted by default. Instead, the volume is mounted only for Services that add the `features.knative.dev/queueproxy-podinfo: enabled` annotation as shown below:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
