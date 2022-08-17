@@ -10,6 +10,8 @@ nav:
 ###############################################################################
     - Concepts:
       - Overview: concepts/README.md
+      - Resources:
+        - Revisions: concepts/resources/revisions.md
       - Duck types: concepts/duck-typing.md
 ###############################################################################
     # Getting started
@@ -72,6 +74,12 @@ nav:
 ###############################################################################
     - Serving:
       - Knative Serving overview: serving/README.md
+      - Resources:
+        - Revisions: serving/revisions/README.md
+#        - Administrator configuration options: serving/revisions/revision-admin-config-options.md
+#        - Developer configuration options: serving/revisions/revision-developer-config-options.md
+# placeholders for config until there are some options moved to these sections - follow up PR to keep scope manageable
+# add other resource types
       - Autoscaling:
         - About autoscaling: serving/autoscaling/README.md
         - Supported autoscaler types: serving/autoscaling/autoscaler-types.md

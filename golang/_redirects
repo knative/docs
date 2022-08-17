@@ -65,6 +65,7 @@
 /sample-controller/* go-get=1 /golang/sample-controller.html 200
 /sample-source/* go-get=1 /golang/sample-source.html 200
 /security-guard/* go-get=1 /golang/security-guard.html 200
+/security-guard/* https://pkg.go.dev/knative.dev/security-guard/:splat
 /serving/* go-get=1 /golang/serving.html 200
 /serving/* https://pkg.go.dev/knative.dev/serving/:splat
 /specs/* go-get=1 /golang/specs.html 200
