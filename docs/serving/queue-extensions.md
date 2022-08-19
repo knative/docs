@@ -11,7 +11,7 @@ For example, the [security-guard](https://knative.dev/security-guard/README.md) 
 
 The runtime features available are determined when the Queue Proxy image is built. Queue Proxy defines an orderly manner to activate and to configure extensions.
 
-#### Additional information
+## Additional information
 
 - [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of Extensions.
 - [How to use extensions enabled by QPoptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
