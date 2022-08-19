@@ -13,7 +13,7 @@ A Service can activate and configure extensions by adding `qpoption.knative.dev/
 
 Setting a value of: `qpoption.knative.dev/<ExtensionName>-activate: "enable"` activates the extension.
 
-Setting a value of: `qpoption.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` will add a configuration of Key: Val to the extension.
+Setting a value of: `qpoption.knative.dev/<extension-name>-config-<key>: "<value>"` adds a configuration of `key: value` to the extension.
 
 In addition, the Service need to ensure that the Pod Info volume is mounted by adding the `features.knative.dev/queueproxy-podinfo: enabled` annotation under the: `spec.template.metadata` of the Service CRD.
 
