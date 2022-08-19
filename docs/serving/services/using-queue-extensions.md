@@ -1,10 +1,10 @@
-# How to use extensions enabled by QPoptions
+# Using extensions enabled by QPOptions
 
 Once your cluster is setup with extensions enabled by QPOptions, a Service can decide which extensions it wish to use and how to configure such extensions. Activating and configuring extensions is described here.
 
 ## Prerequisites for preparing the cluster
 
-1. Make sure you are using a Queue Proxy image that was built with the extensions that you wish to use - See [Extending Queue Proxy image with QPoptions](../queue-extensions.md).
+1. Make sure you are using a Queue Proxy image that was built with the extensions that you wish to use - See [Extending Queue Proxy image with QPOptions](../queue-extensions.md).
 1. Make sure that the cluster config-features is set with `queueproxy.mount-podinfo: allowed`. See [Enabling Queue Proxy Pod Info](../configuration/feature-flags.md#queue-proxy-pod-info) for more details.
 
 ## Overview

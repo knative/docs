@@ -423,7 +423,7 @@ spec:
 
 You must set this feature to either "enabled or "allowed" when using QPOptions. The flag controls whether Knative mounts the `pod-info` volume to the `queue-proxy` container.
 
-Mounting the `pod-info` volume allows extensions that use QPOptions to access the Service annotations, by reading the `/etc/podinfo/annnotations` file. See [Extending Queue Proxy image with QPoptions](../queue-extensions.md) for more details.
+Mounting the `pod-info` volume allows extensions that use QPOptions to access the Service annotations, by reading the `/etc/podinfo/annnotations` file. See [Extending Queue Proxy image with QPOptions](../queue-extensions.md) for more details.
 
 When this feature is `enabled`, the `pod-info` volume is always mounted. This is helpful in case where all or most of the cluster Services are required to use extensions that rely on QPOptions.
 

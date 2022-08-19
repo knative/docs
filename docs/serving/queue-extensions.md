@@ -1,4 +1,4 @@
-# Extending Queue Proxy image with QPoptions
+# Extending Queue Proxy image with QPOptions
 
 Knative service pods include two containers:
 
@@ -14,7 +14,7 @@ The runtime features available are determined when the Queue Proxy image is buil
 ## Additional information
 
 - [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of extensions.
-- [How to use extensions enabled by QPoptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
+- [Using extensions enabled by QPOptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
 
 #### Adding extensions
 
