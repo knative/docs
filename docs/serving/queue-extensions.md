@@ -16,7 +16,7 @@ The runtime features available are determined when the Queue Proxy image is buil
 - [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of extensions.
 - [Using extensions enabled by QPOptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
 
-#### Adding extensions
+## Adding extensions
 
 You can add extensions by replacing the `cmd/queue/main.go` file before the Queue Proxy image is built. The following example shows a `cmd/queue/main.go` file that adds the `test-gate` extension:
 
