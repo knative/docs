@@ -4,14 +4,19 @@
 
 ## Related concepts
 
-* **[Autoscaling](../../serving/autoscaling/README.md){target=_blank}**
-    - Revisions can be automatically scaled up and down according to incoming traffic.
+**Autoscaling**
 
-* **[Configuring gradual rollout of traffic to Revisions](../../serving/rolling-out-latest-revision.md){target=_blank}**
-    - Revisions enable progressive roll-out and roll-back of application changes.
+Revisions can be automatically scaled up and down according to incoming traffic. For more information, see [Autoscaling](../../serving/autoscaling/README.md){target=_blank}.
 
-- **Garbage collection**
-    - --8<-- "about-revisions-garbage-collection.md"
+**Gradual rollout of traffic to Revisions**
+
+Revisions enable progressive roll-out and roll-back of application changes. For more information, see [Configuring gradual rollout of traffic to Revisions](../../serving/rolling-out-latest-revision.md){target=_blank}.
+
+**Garbage collection**
+
+--8<-- "about-revisions-garbage-collection.md"
+
+For more information, see _Configuration options for Revisions_ in the [_Next steps_](#next-steps) section.
 
 ## Additional resources
 
