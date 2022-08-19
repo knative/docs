@@ -15,7 +15,7 @@ Setting a value of: `qpoption.knative.dev/<ExtensionName>-activate: "enable"` ac
 
 Setting a value of: `qpoption.knative.dev/<extension-name>-config-<key>: "<value>"` adds a configuration of `key: value` to the extension.
 
-In addition, the Service need to ensure that the Pod Info volume is mounted by adding the `features.knative.dev/queueproxy-podinfo: enabled` annotation under the: `spec.template.metadata` of the Service CRD.
+In addition, the Service must ensure that the Pod Info volume is mounted by adding the `features.knative.dev/queueproxy-podinfo: enabled` annotation under the: `spec.template.metadata` of the Service CRD.
 
 You can create a Knative Service by applying a YAML file or by using the `kn service create` CLI command.
 
