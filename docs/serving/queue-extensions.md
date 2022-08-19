@@ -13,7 +13,7 @@ The runtime features available are determined when the Queue Proxy image is buil
 
 ## Additional information
 
-- [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of Extensions.
+- [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of extensions.
 - [How to use extensions enabled by QPoptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
 
 #### Adding extensions
