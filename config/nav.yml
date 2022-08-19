@@ -75,9 +75,10 @@ nav:
     - Serving:
       - Knative Serving overview: serving/README.md
       - Resources:
-        - Revisions: serving/revisions/README.md
-        - Administrator configuration options: serving/revisions/revision-admin-config-options.md
-        - Developer configuration options: serving/revisions/revision-developer-config-options.md
+        - Revisions:
+          - About Revisions: serving/revisions/README.md
+          - Administrator configuration options: serving/revisions/revision-admin-config-options.md
+          - Developer configuration options: serving/revisions/revision-developer-config-options.md
 # add other resource types
       - Autoscaling:
         - About autoscaling: serving/autoscaling/README.md

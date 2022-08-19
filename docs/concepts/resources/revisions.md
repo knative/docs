@@ -1,4 +1,4 @@
-# Revisions
+# About Revisions
 
 --8<-- "about-revisions.md"
 
