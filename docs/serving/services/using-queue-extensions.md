@@ -11,7 +11,7 @@ Once your cluster is setup with extensions enabled by QPOptions, a Service can d
 
 A Service can activate and configure extensions by adding `qpoption.knative.dev/*` annotations under the: `spec.template.metadata` of the Service Custom Resource Definition (CRD).
 
-Setting a value of: `qpoption.knative.dev/<ExtensionName>-activate: "enable"` will activate the extension.
+Setting a value of: `qpoption.knative.dev/<ExtensionName>-activate: "enable"` activates the extension.
 
 Setting a value of: `qpoption.knative.dev/<ExtensionName>-config-<Key>: "<Val>"` will add a configuration of Key: Val to the extension.
 
