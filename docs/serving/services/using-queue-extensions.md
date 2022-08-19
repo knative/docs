@@ -2,11 +2,6 @@
 
 Once your cluster is setup with extensions enabled by QPOptions, a Service can decide which extensions it wish to use and how to configure such extensions. Activating and configuring extensions is described here.
 
-## Prerequisites for preparing the cluster
-
-1. Make sure you are using a Queue Proxy image that was built with the extensions that you wish to use - See [Extending Queue Proxy image with QPOptions](../queue-extensions.md).
-1. Make sure that the cluster config-features is set with `queueproxy.mount-podinfo: allowed`. See [Enabling Queue Proxy Pod Info](../configuration/feature-flags.md#queue-proxy-pod-info) for more details.
-
 ## Overview
 
 A Service can activate and configure extensions by adding `qpoption.knative.dev/*` annotations under the: `spec.template.metadata` of the Service Custom Resource Definition (CRD).
@@ -19,9 +14,14 @@ In addition, the Service must ensure that the Pod Info volume is mounted by addi
 
 You can create a Knative Service by applying a YAML file or by using the `kn service create` CLI command.
 
-## Prerequisites for creating a Service
+## Prerequisites
 
-See [Creating a Service](./creating-services.md) for prerequisites to create a Service.
+Before you can use extensions enabled by QPOptions, you must:
+
+- Prepare your cluster:
+  - Make sure you are using a Queue Proxy image that was built with the extensions that you wish to use - See [Extending Queue Proxy image with QPOptions](../queue-extensions.md).
+  - Make sure that the cluster config-features is set with `queueproxy.mount-podinfo: allowed`. See [Enabling Queue Proxy Pod Info](../configuration/feature-flags.md#queue-proxy-pod-info) for more details.
+- Meet the prerequisites in [Creating a Service](./creating-services.md)
 
 ## Procedure
 
