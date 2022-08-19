@@ -43,7 +43,7 @@ The revision timeout value determines the default number of seconds to use for t
 {% endraw %}
 
 * **Global key:** `revision-timeout-seconds`
-* **Per-revision annotation key:** `timeout`
+* **Per-revision spec key:** `timeoutSeconds`
 * **Possible values:** integer
 * **Default:** `"300"` (5 minutes)
 
@@ -70,7 +70,7 @@ The revision timeout value determines the default number of seconds to use for t
       spec:
         template:
           spec:
-            timeout: 300
+            timeoutSeconds: 300
             containers:
             - image: gcr.io/knative-samples/helloworld-go
     ```
