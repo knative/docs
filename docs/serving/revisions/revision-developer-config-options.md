@@ -6,7 +6,7 @@ While Revisions cannot be created manually without modifying the Configuration o
 
 --8<-- "about-revisions-garbage-collection.md"
 
-## Disabling garbage collection for a Revision
+### Disabling garbage collection for a Revision
 
 You can configure a Revision so that it is never garbage collected by adding the `serving.knative.dev/no-gc: "true"` annotation:
 
