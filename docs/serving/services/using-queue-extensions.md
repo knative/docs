@@ -77,4 +77,4 @@ Create a sample Service:
         --annotation qpoption.knative.dev/testgate-config-sender=Joe
     ```
 
-After the Service has been created, Knative propagates the annotations to the podSpec of the Service deployment. When a Service pod is created, the Queue Proxy sidecar will mount a volume that contains the pod annotations and activate the `testgate` extension (if such an extension is available in the Queue Proxy image). The `testgate` extension will than be configured with the configuration: `{ sender: "Joe", response: "CU"}`.
+After the Service has been created, Knative propagates the annotations to the podSpec of the Service deployment. When a Service pod is created, the Queue Proxy sidecar will mount a volume that contains the pod annotations and activate the `testgate` extension. This occurs if the `testgate` extension is available in the Queue Proxy image. The `testgate` extension will then be configured with the configuration: `{ sender: "Joe", response: "CU"}`.
