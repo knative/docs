@@ -21,7 +21,7 @@ Revisions are always retained if they belong to any one of the following categor
 
 - The Revision is active and is being reference by a Route.
 - The Revision was created within the time specified by the `retain-since-create-time` setting.
-- The Revision was last referenced by a Route within the tiem specified by the `retain-since-last-active-time` setting.
+- The Revision was last referenced by a Route within the time specified by the `retain-since-last-active-time` setting.
 - There are fewer existing Revisions than the number specified by the `min-non-active-revisions` setting.
 
 ### Examples
