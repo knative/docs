@@ -5,7 +5,7 @@ Knative service pods include two containers:
 - The user main service container, which is named `user-container`
 - The Queue Proxy - a sidecar named `queue-proxy` that serves as a reverse proxy in front of the `user-container`
 
-Queue Proxy can be extended to offer additional optional features. The QPOptions feature of Queue Proxy allows additional runtime packages to extend Queue Proxy capabilities.
+You can extend Queue Proxy to offer additional features. The QPOptions feature of Queue Proxy allows additional runtime packages to extend Queue Proxy capabilities.
 
 For example, the [security-guard](https://knative.dev/security-guard/README.md) repository provides an extension that uses the QPOptions feature. The [Qpoption](https://knative.dev/security-guard/pkg/qpoption/README.md) package enables users to add additional security features to Queue Proxy.
 
