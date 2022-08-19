@@ -26,48 +26,48 @@ Revisions are always retained if they belong to any one of the following categor
 
 ### Examples
 
-#### Immediately clean up any inactive Revisions
+- Immediately clean up any inactive Revisions:
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-gc
-  namespace: knative-serving
-data:
-  min-non-active-revisions: "0"
-  max-non-active-revisions: "0"
-  retain-since-create-time: "disabled"
-  retain-since-last-active-time: "disabled"
-...
-```
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-gc
+      namespace: knative-serving
+    data:
+      min-non-active-revisions: "0"
+      max-non-active-revisions: "0"
+      retain-since-create-time: "disabled"
+      retain-since-last-active-time: "disabled"
+    ...
+    ```
 
-#### Retain the last ten inactive revisions
+- Retain the last ten inactive revisions:
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-gc
-  namespace: knative-serving
-data:
-  retain-since-create-time: "disabled"
-  retain-since-last-active-time: "disabled"
-  max-non-active-revisions: "10"
-...
-```
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-gc
+      namespace: knative-serving
+    data:
+      retain-since-create-time: "disabled"
+      retain-since-last-active-time: "disabled"
+      max-non-active-revisions: "10"
+    ...
+    ```
 
-#### Disable garbage collection on the cluster
+- Disable garbage collection on the cluster:
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-gc
-  namespace: knative-serving
-data:
-  retain-since-create-time: "disabled"
-  retain-since-last-active-time: "disabled"
-  max-non-active-revisions: "disabled"
-...
-```
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-gc
+      namespace: knative-serving
+    data:
+      retain-since-create-time: "disabled"
+      retain-since-last-active-time: "disabled"
+      max-non-active-revisions: "disabled"
+    ...
+    ```
