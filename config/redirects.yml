@@ -1,6 +1,8 @@
 plugins:
   redirects:
     redirect_maps:
+      serving/revision-gc.md: serving/revisions/revision-developer-config-options.md
+      serving/configuration/revision-gc.md: serving/revisions/revision-admin-config-options.md
       reference/concepts/duck-typing.md: concepts/duck-typing.md
       reference/client/README.md: client/README.md
       reference/api/eventing-api.md: eventing/reference/eventing-api.md
@@ -33,7 +35,6 @@ plugins:
       admin/serving/config-defaults.md: serving/configuration/config-defaults.md
       admin/serving/deployment.md: serving/configuration/deployment.md
       admin/serving/feature-flags.md: serving/configuration/feature-flags.md
-      admin/serving/revision-gc.md: serving/configuration/revision-gc.md
       admin/serving/rolling-out-latest-revision-configmap.md: serving/configuration/rolling-out-latest-revision-configmap.md
       admin/upgrade/index.md: install/upgrade/README.md
       admin/upgrade/upgrade-installation-with-operator.md: install/upgrade/upgrade-installation-with-operator.md
