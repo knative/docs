@@ -75,10 +75,10 @@ nav:
     - Serving:
       - Knative Serving overview: serving/README.md
       - Resources:
-        - Revisions: serving/revisions/README.md
-#        - Administrator configuration options: serving/revisions/revision-admin-config-options.md
-#        - Developer configuration options: serving/revisions/revision-developer-config-options.md
-# placeholders for config until there are some options moved to these sections - follow up PR to keep scope manageable
+        - Revisions:
+          - About Revisions: serving/revisions/README.md
+          - Administrator configuration options: serving/revisions/revision-admin-config-options.md
+          - Developer configuration options: serving/revisions/revision-developer-config-options.md
 # add other resource types
       - Autoscaling:
         - About autoscaling: serving/autoscaling/README.md
@@ -115,7 +115,6 @@ nav:
           - About load balancing: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
           - Configuring Activator capacity: serving/load-balancing/activator-capacity.md
-        - Revision garbage collection: serving/revision-gc.md
       # Serving - admin docs
       - Administrator Topics:
         - Kubernetes services: serving/knative-kubernetes-services.md
@@ -131,7 +130,6 @@ nav:
         - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
         # Serving config
         - Serving configuration:
-          - Revision garbage collection: serving/configuration/revision-gc.md
           - Configure Deployment resources: serving/configuration/deployment.md
           - Configuring gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: serving/configuration/feature-flags.md
