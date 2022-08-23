@@ -295,13 +295,13 @@ When this extension is `enabled`, the server always runs this validation.
 
 When this extension is `allowed`, the server does not run this validation by default.
 
-When this extension is `allowed`, you can run this validation for individual Services, by adding the `features.knative.dev/podspec-dryrun":"enabled"` annotation:
+When this extension is `allowed`, you can run this validation for individual Services, by adding the `features.knative.dev/podspec-dryrun: enabled` annotation:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  annotations: features.knative.dev/podspec-dryrun":"enabled"
+  annotations: features.knative.dev/podspec-dryrun: enabled
 ...
 ```
 
@@ -413,5 +413,26 @@ spec:
         - name: init-myservice
           image: busybox
           command: ['sh', '-c', "service_setup.sh"]
+...
+```
+
+### Queue Proxy Pod Info
+
+* **Type**: Extension
+* **ConfigMap key:** `queueproxy.mount-podinfo`
+
+You must set this feature to either "enabled or "allowed" when using QPOptions. The flag controls whether Knative mounts the `pod-info` volume to the `queue-proxy` container.
+
+Mounting the `pod-info` volume allows extensions that use QPOptions to access the Service annotations, by reading the `/etc/podinfo/annnotations` file. See [Extending Queue Proxy image with QPOptions](../queue-extensions.md) for more details.
+
+When this feature is `enabled`, the `pod-info` volume is always mounted. This is helpful in case where all or most of the cluster Services are required to use extensions that rely on QPOptions.
+
+When this feature is `allowed`, the `pod-info` volume is not mounted by default. Instead, the volume is mounted only for Services that add the `features.knative.dev/queueproxy-podinfo: enabled` annotation as shown below:
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations: features.knative.dev/queueproxy-podinfo: enabled
 ...
 ```
