@@ -39,8 +39,6 @@ You can install some plugins can be installed using the [Knative plugins Homebre
 
 ## List available plugins
 
-Available plugins are plugins that are executable, begin with `kn-`, are included in the `kn` plugin directory, and are located somewhere in the execution `$PATH`.
-
 You can list all available (installed) plugins by entering the command:
 
 ```bash
