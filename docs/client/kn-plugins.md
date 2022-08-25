@@ -36,3 +36,11 @@ You can manually install all plugins. To manually install a plugin:
 ## Install a plugin by using Homebrew
 
 You can install some plugins can be installed using the [Knative plugins Homebrew Tap](https://github.com/knative-sandbox/homebrew-kn-plugins/). For example, you can install the `kn-admin` plugin by running `brew install knative-sandbox/kn-plugins/admin`.
+
+## List available plugins
+
+You can list all available (installed) plugins by entering the command:
+
+```bash
+kn plugin list
+```
