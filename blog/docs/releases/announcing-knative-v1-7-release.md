@@ -56,14 +56,6 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 [Release Notes](https://github.com/knative/operator/releases/tag/knative-v1.7.0)
 
-### 💫 New Features & Changes
-
-* TBD
-
-### 🐞 Bug Fixes
-
-* TBD
-
 ## Networking Extensions
 
 ### kourier plugin
