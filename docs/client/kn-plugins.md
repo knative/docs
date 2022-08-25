@@ -5,6 +5,14 @@ The `kn` CLI supports the use of plugins. Plugins enable you to extend the funct
 !!! warning
     The plugins must be named with the prefix `kn-` to be detected by `kn`. For example, `kn-func` will be detected but `func` won't be detected.
 
+## kn source plugins
+
+An event source plugin has the following characteristics:
+
+- It has a name that is part of the `kn source` group.
+- It provides CRUD sub-commands; `create`, `update`, `delete`, `describe`, and sometimes `apply`.
+- It requires a mandatory `--sink` flag to be passed when using the `create` command.
+
 ## List of Knative plugins
 
 You can view all available `kn` plugins in the [Knative Sandbox repository](https://github.com/orgs/knative-sandbox/repositories?q=kn+plugin&type=all&language=&sort=).
