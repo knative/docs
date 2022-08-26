@@ -179,9 +179,9 @@ This will wait until your service is deployed and ready, and ultimately it will 
 
     - For kubectl, run:
 
-```bash
-kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-```
+    ```bash
+    kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+    ```
 
 Example:
 
