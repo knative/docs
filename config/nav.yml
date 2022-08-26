@@ -28,10 +28,10 @@ nav:
           - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
-        - Getting started with Functions:
-          - Create a function:
-          - Build a function:
-          - Deploy a function:
+        #- Getting started with Functions:
+        #  - Create a function:
+        #  - Build a function:
+        #  - Deploy a function:
         - What's Next?: getting-started/next-steps.md
         - Clean Up: getting-started/clean-up.md
 ###############################################################################
