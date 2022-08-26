@@ -142,7 +142,7 @@ Follow the procedure for the Broker of your choice:
         ```
 
 
-    For more information, see the [Kafka Broker](../../../eventing/broker/kafka-broker/README.md) documentation.
+    For more information, see the [Kafka Broker](../../../eventing/brokers/kafka-broker/README.md) documentation.
 
 === "MT-Channel-based"
 
