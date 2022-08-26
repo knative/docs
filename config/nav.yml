@@ -157,13 +157,17 @@ nav:
       - Resources:
         - Brokers:
           - About Brokers: eventing/brokers/README.md
+          - Broker types:
+            - Available Broker types: eventing/brokers/broker-types/README.md
+            # add default IMC broker page, page explaining broker types
+            - Knative Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
+            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-mtbroker.md
           - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
-          - Knative Kafka Broker: eventing/brokers/kafka-broker/README.md
-          - RabbitMQ Broker: eventing/brokers/rabbitmq-broker/README.md
         - Triggers:
-          - About triggers: eventing/triggers/README.md
+          - Creating Triggers: eventing/triggers/README.md
+          # about triggers docs
         #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
         #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
       # Eventing - developer docs
