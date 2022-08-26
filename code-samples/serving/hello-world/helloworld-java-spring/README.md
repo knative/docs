@@ -205,7 +205,7 @@ Example:
 1. Make a request to your app and observe the result. Replace
    the following URL with the URL returned in the previous command.
 
-Example:
+    Example:
 
 ```bash
 curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
