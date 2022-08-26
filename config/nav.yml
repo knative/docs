@@ -16,18 +16,22 @@ nav:
 ###############################################################################
     # Getting started
 ###############################################################################
-    - Tutorial:
-        - Tutorial introduction: getting-started/README.md
-        - Install Knative using quickstart: getting-started/quickstart-install.md
-        - Using Knative Serving:
+    - Tutorials:
+        - Install Knative with the Quickstart plugin: tutorials/quickstart-install/README.md
+        - Install Knative with Kubernetes Operators: tutorials/operators-install/README.md
+        - Getting started with Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
           - Autoscaling: getting-started/first-autoscale.md
           - Traffic splitting: getting-started/first-traffic-split.md
-        - Using Knative Eventing:
+        - Getting started with Knative Eventing:
           - Introducing Knative Eventing: getting-started/getting-started-eventing.md
           - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
+        - Getting started with Functions:
+          - Create a function:
+          - Build a function:
+          - Deploy a function:
         - What's Next?: getting-started/next-steps.md
         - Clean Up: getting-started/clean-up.md
 ###############################################################################

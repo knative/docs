@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      getting-started/README.md: tutorials/quickstart-install/README.md
       serving/revision-gc.md: serving/revisions/revision-developer-config-options.md
       serving/configuration/revision-gc.md: serving/revisions/revision-admin-config-options.md
       reference/concepts/duck-typing.md: concepts/duck-typing.md

@@ -9,8 +9,6 @@ The following table describes the supported versions of Serving and Eventing for
 |----------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | v1.6.0   | v1.6.0<br/>v1.5.0<br/>v1.4.0<br/>v1.3.0, v1.3.1 and v1.3.2 | v1.6.0<br/>v1.5.0 and v1.5.1<br/>v1.4.0, v1.4.1 and v1.4.2<br/>v1.3.0, v1.3.1, v1.3.2 and v1.3.3 |
 
---8<-- "prerequisites.md"
-
 ## Install the Knative Operator
 
 Before you install the Knative Serving and Eventing components, first install the Knative Operator.
@@ -22,34 +20,8 @@ Before you install the Knative Serving and Eventing components, first install th
     kubectl create -f https://github.com/knative/operator/releases/download/knative-v1.5.1/operator-post-install.yaml
     ```
 
-To install the latest stable Operator release, run the command:
-
-```bash
-kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )}}
-```
-
 You can find information about the released versions of the Knative Operator on the [releases page](https://github.com/knative/operator/releases).
 
-### Verify your Knative Operator installation
-
-1. Because the Operator is installed to the `default` namespace, ensure you set the current namespace to `default` by running the command:
-
-    ```bash
-    kubectl config set-context --current --namespace=default
-    ```
-
-1. Check the Operator deployment status by running the command:
-
-    ```bash
-    kubectl get deployment knative-operator
-    ```
-
-    If the Operator is installed correctly, the deployment shows a `Ready` status:
-
-    ```{.bash .no-copy}
-    NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-    knative-operator   1/1     1            1           19h
-    ```
 
 ### Track the log
 
@@ -58,39 +30,6 @@ To track the log of the Operator, run the command:
 ```bash
 kubectl logs -f deploy/knative-operator
 ```
-
-## Install Knative Serving
-
-To install Knative Serving you must create a custom resource (CR), add a networking layer to the CR, and configure DNS.
-
-### Create the Knative Serving custom resource
-
-To create the custom resource for the latest available Knative Serving in the Operator:
-
-1. Copy the following YAML into a file:
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-serving
-    ---
-    apiVersion: operator.knative.dev/v1beta1
-    kind: KnativeServing
-    metadata:
-      name: knative-serving
-      namespace: knative-serving
-    ```
-    !!! note
-        When you don't specify a version by using `spec.version` field, the Operator defaults to the latest available version.
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-
-    Where `<filename>` is the name of the file you created in the previous step.
 
 ### Install the networking layer
 
@@ -229,82 +168,12 @@ Knative Serving with different ingresses:
 
         Save this for configuring DNS later.
 
-### Verify the Knative Serving deployment
-
-1. Monitor the Knative deployments:
-
-    ```bash
-    kubectl get deployment -n knative-serving
-    ```
-
-    If Knative Serving has been successfully deployed, all deployments of the
-    Knative Serving will show `READY` status. Here is a sample output:
-
-    ```{ .bash .no-copy }
-    NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
-    activator              1/1     1            1           18s
-    autoscaler             1/1     1            1           18s
-    autoscaler-hpa         1/1     1            1           14s
-    controller             1/1     1            1           18s
-    domain-mapping         1/1     1            1           12s
-    domainmapping-webhook  1/1     1            1           12s
-    webhook                1/1     1            1           17s
-    ```
-
-1. Check the status of Knative Serving Custom Resource:
-
-    ```bash
-    kubectl get KnativeServing knative-serving -n knative-serving
-    ```
-
-    If Knative Serving is successfully installed, you should see:
-
-    ```{ .bash .no-copy }
-    NAME              VERSION             READY   REASON
-    knative-serving   <version number>    True
-    ```
-
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
 {% include "real-dns-operator.md" %}
 {% include "temporary-dns.md" %}
 
-## Install Knative Eventing
-
-To install Knative Eventing you must apply the custom resource (CR).
-Optionally, you can install the Knative Eventing component with different event sources.
-
-### Create the Knative Eventing custom resource
-
-To create the custom resource for the latest available Knative Eventing in the Operator:
-
-1. Copy the following YAML into a file:
-
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: knative-eventing
-    ---
-    apiVersion: operator.knative.dev/v1beta1
-    kind: KnativeEventing
-    metadata:
-      name: knative-eventing
-      namespace: knative-eventing
-    ```
-
-    !!! note
-        When you do not specify a version by using `spec.version` field, the Operator defaults to the latest available version.
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-
-Where `<filename>` is the name of the file you created in the previous step.
-
-### Installing a specific version of Eventing
+## Installing a specific version of Eventing
 
 Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example, if you want to install Knative Eventing v1.6, you can apply the following KnativeEventing CR:
 
@@ -574,43 +443,6 @@ see how you can configure Knative Eventing with different event sources:
         ```
 
         Where `<filename>` is the name of the file you created in the previous step.
-
-### Verify the Knative Eventing deployment
-
-1. Monitor the Knative deployments:
-
-    ```bash
-    kubectl get deployment -n knative-eventing
-    ```
-
-    If Knative Eventing has been successfully deployed, all deployments of the
-    Knative Eventing will show `READY` status. Here is a sample output:
-
-    ```{.bash .no-copy}
-    NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-    eventing-controller     1/1     1            1           43s
-    eventing-webhook        1/1     1            1           42s
-    imc-controller          1/1     1            1           39s
-    imc-dispatcher          1/1     1            1           38s
-    mt-broker-controller    1/1     1            1           36s
-    mt-broker-filter        1/1     1            1           37s
-    mt-broker-ingress       1/1     1            1           37s
-    pingsource-mt-adapter   0/0     0            0           43s
-    sugar-controller        1/1     1            1           36s
-    ```
-
-1. Check the status of Knative Eventing Custom Resource:
-
-    ```bash
-    kubectl get KnativeEventing knative-eventing -n knative-eventing
-    ```
-
-    If Knative Eventing is successfully installed, you should see:
-
-    ```{.bash .no-copy}
-    NAME               VERSION             READY   REASON
-    knative-eventing   <version number>    True
-    ```
 
 ## Uninstalling Knative
 
