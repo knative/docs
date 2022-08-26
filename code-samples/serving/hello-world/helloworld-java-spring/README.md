@@ -155,7 +155,7 @@ To deploy the app:
     ```
     Where `{username}` is your Docker Hub username.
 
-**Note:** Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
+    **Note:** Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
 
 1. Apply the YAML file by running the command:
 
