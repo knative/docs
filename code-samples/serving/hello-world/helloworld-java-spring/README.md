@@ -198,9 +198,9 @@ kn service describe helloworld-java-spring -o url
 
 Example:
 
-```bash
-http://helloworld-java-spring.default.1.2.3.4.xip.io
-```
+    ```bash
+    http://helloworld-java-spring.default.1.2.3.4.xip.io
+    ```
 
 1. Make a request to your app and observe the result. Replace
    the following URL with the URL returned in the previous command.
