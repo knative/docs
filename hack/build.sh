@@ -53,7 +53,7 @@ else
   # Latest release branch to /docs
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${GIT_SLUG} "$TEMP/docs-$latest"
 
-  if [ ${VERSIONS[0]#*1.} -gt 6 ]; then
+  if [ ${latest#*1.} -gt 6 ]; then
       curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/serving/reference/serving-api.md"
       curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/eventing/reference/eventing-api.md"
   else
