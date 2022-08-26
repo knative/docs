@@ -1,29 +1,6 @@
-# Install by using the Knative Operator
+# Advanced Operator installation options
 
-Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
-You can install the Serving component, Eventing component, or both on your cluster.
-
-The following table describes the supported versions of Serving and Eventing for the Knative Operator:
-
-| Operator | Serving                                                    | Eventing                                                                                         |
-|----------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| v1.6.0   | v1.6.0<br/>v1.5.0<br/>v1.4.0<br/>v1.3.0, v1.3.1 and v1.3.2 | v1.6.0<br/>v1.5.0 and v1.5.1<br/>v1.4.0, v1.4.1 and v1.4.2<br/>v1.3.0, v1.3.1, v1.3.2 and v1.3.3 |
-
-## Install the Knative Operator
-
-Before you install the Knative Serving and Eventing components, first install the Knative Operator.
-
-!!! warning
-    Knative Operator 1.5 is the last version that supports CRDs with both `v1alpha1` and `v1beta1`. If you are upgrading an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command to upgrade the existing custom resources to `v1beta1` before installing the current version:
-
-    ```bash
-    kubectl create -f https://github.com/knative/operator/releases/download/knative-v1.5.1/operator-post-install.yaml
-    ```
-
-You can find information about the released versions of the Knative Operator on the [releases page](https://github.com/knative/operator/releases).
-
-
-### Track the log
+## Track the log
 
 To track the log of the Operator, run the command:
 
@@ -31,7 +8,7 @@ To track the log of the Operator, run the command:
 kubectl logs -f deploy/knative-operator
 ```
 
-### Install the networking layer
+## Install the networking layer
 
 Knative Operator can configure the Knative Serving component with different network layer options.
 Istio is the default network layer if the ingress is not specified in the
@@ -443,43 +420,6 @@ see how you can configure Knative Eventing with different event sources:
         ```
 
         Where `<filename>` is the name of the file you created in the previous step.
-
-## Uninstalling Knative
-
-Knative Operator prevents unsafe removal of Knative resources. Even if the Knative Serving and Knative Eventing CRs are
-successfully removed, all the CRDs in Knative are still kept in the cluster. All your resources relying on Knative CRDs
-can still work.
-
-### Removing the Knative Serving component
-
-To remove the Knative Serving CR run the command:
-
-```bash
-kubectl delete KnativeServing knative-serving -n knative-serving
-```
-
-### Removing Knative Eventing component
-
-To remove the Knative Eventing CR run the command:
-
-```bash
-kubectl delete KnativeEventing knative-eventing -n knative-eventing
-```
-
-### Removing the Knative Operator:
-
-If you have installed Knative using the release page, remove the operator by running the command:
-
-```bash
-kubectl delete -f {{artifact(org="knative",repo="operator",file="operator.yaml")}}
-```
-
-If you have installed Knative from source, uninstall it using the following command while in the root directory
-for the source:
-
-```bash
-ko delete -f config/
-```
 
 ## What's next
 

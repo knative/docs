@@ -1,4 +1,4 @@
-# Install Knative with Kubernetes Operators
+# Install with the Knative Operator
 
 --8<-- "prerequisites.md"
 
@@ -153,3 +153,23 @@ After you have installed the Knative Operator, you can install Knative Eventing.
         NAME               VERSION             READY   REASON
         knative-eventing   <version number>    True
         ```
+
+## Uninstall
+
+1. Remove the `KnativeServing` custom resource:
+
+    ```bash
+    kubectl delete KnativeServing knative-serving -n knative-serving
+    ```
+
+1. Remove the `KnativeEventing` custom resource:
+
+    ```bash
+    kubectl delete KnativeEventing knative-eventing -n knative-eventing
+    ```
+
+1. Remove the Knative Operator:
+
+    ```bash
+    kubectl delete -f {{artifact(org="knative",repo="operator",file="operator.yaml")}}
+    ```

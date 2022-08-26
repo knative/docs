@@ -18,7 +18,7 @@ nav:
 ###############################################################################
     - Tutorials:
         - Install Knative with the Quickstart plugin: tutorials/quickstart-install/README.md
-        - Install Knative with Kubernetes Operators: tutorials/operators-install/README.md
+        - Install with the Knative Operator: tutorials/operators-install/README.md
         - Getting started with Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
           - Autoscaling: getting-started/first-autoscale.md
@@ -51,8 +51,9 @@ nav:
           - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
           - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
       # Operator Installation
-      - Install with Knative Operator:
-        - Install by using the Knative Operator: install/operator/knative-with-operators.md
+      - Knative Operator:
+        - Install with the Knative Operator: tutorials/operators-install/README.md
+        - Advanced Operator installation options: install/operator/knative-with-operators.md
         - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
         - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
         - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
@@ -263,6 +264,8 @@ nav:
     - Reference:
       - Security: reference/security/README.md
       - Release notes: reference/relnotes/README.md
+      - Supported components:
+        - Supported Operator component versions: reference/support/supported-operator-versions.md
     - Contributing:
       - Welcome to the Knative community: contributing/README.md
       - Contribute to Knative: contributing/contributing.md
