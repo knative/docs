@@ -159,9 +159,9 @@ To deploy the app:
 
 1. Apply the YAML file by running the command:
 
-```bash
-kubectl apply -f service.yaml
-```
+    ```bash
+    kubectl apply -f service.yaml
+    ```
 
 ### kn
 
