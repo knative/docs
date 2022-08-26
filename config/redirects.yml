@@ -154,7 +154,6 @@ plugins:
       install/collecting-metrics/index.md: serving/observability/metrics/collecting-metrics.md
       install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
       install/eventing/install-eventing-with-yaml.md: install/yaml-install/eventing/install-eventing-with-yaml.md
-      install/getting-started-knative-app/index.md: getting-started/README.md
       install/install-extensions.md: install/README.md
       install/installation-files.md: install/README.md
       install/prerequisites.md: install/README.md
@@ -171,7 +170,6 @@ plugins:
       serving/creating-domain-mappings.md: serving/services/custom-domains.md
       serving/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
       serving/feature-flags.md: serving/configuration/feature-flags.md
-      serving/getting-started-knative-app.md: getting-started/README.md
       serving/installing-cert-manager.md: install/installing-cert-manager.md
       serving/metrics.md: serving/observability/metrics/serving-metrics.md
       serving/samples/README.md: samples/serving.md
