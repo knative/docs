@@ -211,9 +211,9 @@ Example:
     curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
     Hello Spring Boot Sample v1!
 
-# Even easier with kn:
-curl $(kn service describe helloworld-java-spring -o url)
-```
+    # Even easier with kn:
+    curl $(kn service describe helloworld-java-spring -o url)
+    ```
 
 **Tip:** Add `-v` option to get more detail if the `curl` command fails.
 
