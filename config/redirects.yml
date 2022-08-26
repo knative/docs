@@ -154,7 +154,6 @@ plugins:
       eventing/sink/kafka-sink.md: eventing/sinks/kafka-sink.md
       eventing/sources/containersource.md: eventing/custom-event-source/containersource/README.md
       eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
-      eventing/triggers/index.md: eventing/triggers/README.md
       install/collecting-logs/index.md: serving/observability/logging/collecting-logs.md
       install/collecting-metrics/index.md: serving/observability/metrics/collecting-metrics.md
       install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
