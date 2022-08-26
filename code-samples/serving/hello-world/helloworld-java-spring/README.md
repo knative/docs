@@ -215,7 +215,7 @@ Example:
     curl $(kn service describe helloworld-java-spring -o url)
     ```
 
-**Tip:** Add `-v` option to get more detail if the `curl` command fails.
+    **Tip:** Add `-v` option to get more detail if the `curl` command fails.
 
 ## Deleting the app
 
