@@ -6,17 +6,8 @@ The event registry maintains a catalog of event types that each Broker can consu
 
 This topic provides information about how you can populate the event registry, how to discover events using the registry, and how to leverage that information to subscribe to events of interest.
 
-## Before you begin
-
-It's recommended that you have a basic understanding of the following:
-
-- [Brokers](broker/README.md)
-- [Triggers](broker/triggers/README.md)
-- The [CloudEvents spec](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md),
-   particularly the
-   [Context Attributes](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#context-attributes)
-   section
-- [Event sources](sources/README.md)
+!!! note
+    Before using the event registry, it is recommended that you have a basic understanding of Brokers, Triggers, Event Sources, and the [CloudEvents spec](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md) (particularly the [Context Attributes](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#context-attributes) section).
 
 ## About EventType objects
 

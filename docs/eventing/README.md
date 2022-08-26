@@ -2,10 +2,6 @@
 
 --8<-- "about-eventing.md"
 
-In a Knative Eventing deployment, event [Sources](../eventing/sources/README.md){target=_blank} are the primary event producers. Examples of [sinks](../eventing/sinks/README.md){target=_blank} include [Brokers](../eventing/broker/README.md){target=_blank}, [Channels](../eventing/channels/README.md){target=_blank}, and [Services](../serving/services/README.md){target=_blank}.
-
-## Common use cases
-
 Examples of supported Knative Eventing use cases:
 
 - Publish an event without creating a consumer. You can send events to a broker as an HTTP POST, and use binding to decouple the destination configuration from your application that produces events.

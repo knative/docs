@@ -1,6 +1,12 @@
 plugins:
   redirects:
     redirect_maps:
+      eventing/broker/create-mtbroker.md: eventing/brokers/create-mtbroker.md
+      eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
+      eventing/broker/kafka-broker/README.md: eventing/brokers/kafka-broker/README.md
+      eventing/broker/rabbitmq-broker/README.md: eventing/brokers/rabbitmq-broker/README.md
+      eventing/broker/README.md: eventing/brokers/README.md
+      concepts/resources/revisions.md: concepts/serving-resources/revisions.md
       serving/revision-gc.md: serving/revisions/revision-developer-config-options.md
       serving/configuration/revision-gc.md: serving/revisions/revision-admin-config-options.md
       reference/concepts/duck-typing.md: concepts/duck-typing.md
@@ -15,7 +21,7 @@ plugins:
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
       admin/collecting-metrics/eventing-metrics/metrics.md: eventing/observability/metrics/eventing-metrics.md
       admin/collecting-metrics/serving-metrics/metrics.md: serving/observability/metrics/serving-metrics.md
-      admin/eventing/broker-configuration.md: eventing/configuration/broker-configuration.md
+      admin/eventing/broker-configuration.md: eventing/brokers/broker-admin-config-options.md
       admin/eventing/channel-configuration.md: eventing/configuration/channel-configuration.md
       admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
       admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
@@ -109,9 +115,9 @@ plugins:
       developer/serving/tag-resolution.md: serving/tag-resolution.md
       developer/serving/traffic-management.md: serving/traffic-management.md
       developer/serving/troubleshooting/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
-      eventing/broker/alternate/index.md: eventing/broker/README.md
+      eventing/broker/alternate/index.md: eventing/brokers/README.md
       eventing/broker/broker-event-delivery.md: eventing/event-delivery.md
-      eventing/broker/configmaps/README.md: eventing/configuration/broker-configuration.md
+      eventing/broker/configmaps/README.md: eventing/brokers/broker-admin-config-options.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/channels/default-channels/index.md: eventing/channels/README.md
       eventing/debugging/README.md: eventing/troubleshooting/README.md
@@ -148,7 +154,7 @@ plugins:
       eventing/sink/kafka-sink.md: eventing/sinks/kafka-sink.md
       eventing/sources/containersource.md: eventing/custom-event-source/containersource/README.md
       eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
-      eventing/triggers/index.md: eventing/broker/triggers/README.md
+      eventing/triggers/index.md: eventing/triggers/README.md
       install/collecting-logs/index.md: serving/observability/logging/collecting-logs.md
       install/collecting-metrics/index.md: serving/observability/metrics/collecting-metrics.md
       install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md

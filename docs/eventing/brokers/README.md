@@ -1,16 +1,14 @@
-# Brokers
+# About Brokers
 
-Brokers are Kubernetes [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) that define an event mesh for collecting a pool of [CloudEvents](https://cloudevents.io/). Brokers provide a discoverable endpoint, `status.address`, for event ingress, and triggers for event delivery. Event producers can send events to a broker by POSTing the event to the `status.address.url` of the broker.
+--8<-- "about-brokers.md"
+
+## Event delivery
 
 Event delivery mechanics are an implementation detail that depend on the configured
 [broker class](../configuration/broker-configuration.md#broker-class-options).
 Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
-![An event enters a Broker. The Broker uses Triggers to forward the event to the appropriate Subscriber.](images/broker-workflow.svg)
-
-After an event has entered a broker, it can be forwarded to subscribers by using triggers. Triggers allow events to be filtered by attributes, so that events with particular attributes can be sent to subscribers that have registered interest in events with those attributes.
-
-A subscriber can be any URL or _Addressable_ resource. Subscribers can also reply to an active request from the broker, and can respond with a new CloudEvent that will be sent back into the broker.
+## Advanced use cases
 
 For most use cases, a single broker per namespace is sufficient, but
 there are several use cases where multiple brokers can simplify
@@ -47,6 +45,10 @@ For more information, see [Apache Kafka Broker](kafka-broker/README.md).
 
 The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlying implementation.
 For more information, see [RabbitMQ Broker](rabbitmq-broker/README.md) or [the docs available on GitHub](https://github.com/knative-sandbox/eventing-rabbitmq).
+
+## Additional resources
+
+- [Brokers concept documentation](../../concepts/eventing-resources/brokers.md){target=_blank}
 
 ## Next steps
 
