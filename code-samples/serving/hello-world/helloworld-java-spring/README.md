@@ -207,9 +207,9 @@ Example:
 
     Example:
 
-```bash
-curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
-Hello Spring Boot Sample v1!
+    ```bash
+    curl http://helloworld-java-spring.default.1.2.3.4.sslip.io
+    Hello Spring Boot Sample v1!
 
 # Even easier with kn:
 curl $(kn service describe helloworld-java-spring -o url)
