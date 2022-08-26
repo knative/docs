@@ -138,22 +138,22 @@ To deploy the app:
 1. Create a new file named `service.yaml` and copy the following service definition
    into the file:
 
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-java-spring
-  namespace: default
-spec:
-  template:
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-java-spring
+      namespace: default
     spec:
-      containers:
-        - image: docker.io/{username}/helloworld-java-spring
-          env:
-            - name: TARGET
-              value: "Spring Boot Sample v1"
-```
-Where `{username}` is your Docker Hub username.
+      template:
+        spec:
+          containers:
+            - image: docker.io/{username}/helloworld-java-spring
+              env:
+                - name: TARGET
+                  value: "Spring Boot Sample v1"
+    ```
+    Where `{username}` is your Docker Hub username.
 
 **Note:** Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
 
