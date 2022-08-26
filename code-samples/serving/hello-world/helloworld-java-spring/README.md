@@ -177,7 +177,7 @@ This will wait until your service is deployed and ready, and ultimately it will 
 
 1. Find the domain URL for your service:
 
-### kubectl
+    - For kubectl, run:
 
 ```bash
 kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
