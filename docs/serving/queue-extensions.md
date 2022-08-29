@@ -7,7 +7,7 @@ Knative service pods include two containers:
 
 You can extend Queue Proxy to offer additional features. The QPOptions feature of Queue Proxy allows additional runtime packages to extend Queue Proxy capabilities.
 
-For example, the [security-guard](https://knative.dev/security-guard/README.md) repository provides an extension that uses the QPOptions feature. The [QPOption](https://knative.dev/security-guard/pkg/qpoption/README.md) package enables users to add additional security features to Queue Proxy.
+For example, the [security-guard](https://knative.dev/security-guard#section-readme) repository provides an extension that uses the QPOptions feature. The [QPOption](https://knative.dev/security-guard/pkg/qpoption/README.md) package enables users to add additional security features to Queue Proxy.
 
 The runtime features available are determined when the Queue Proxy image is built. Queue Proxy defines an orderly manner to activate and to configure extensions.
 
