@@ -1,8 +1,8 @@
 INHERIT: config/nav.yml
 
 site_name: Knative
-site_url: https://knative.dev/docs
-site_description: Knative Documentation
+site_url: https://knative.dev
+site_description: Knative project website
 extra_css:
   - stylesheets/extra.css
 
