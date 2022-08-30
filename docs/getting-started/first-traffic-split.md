@@ -143,7 +143,7 @@ Split the traffic between the two Revisions:
         ```
 
 !!! info
-    `@latest` alwayss point to the "latest" Revision which in this case is `hello-00002`.
+    `@latest` always points to the "latest" Revision, which in this case is `hello-00002`.
 
 ## Verify the traffic split
 
