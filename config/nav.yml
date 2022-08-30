@@ -163,10 +163,10 @@ nav:
             - Knative Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-mtbroker.md
-          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
+#          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
-          - Creating Triggers: eventing/triggers/README.md
+          - Using Triggers: eventing/triggers/README.md
           # about triggers docs
         #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
         #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md

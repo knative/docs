@@ -12,6 +12,10 @@
 
 --8<-- "about-subscribers.md"
 
+<!--
 ## Additional resources
 
 ## Next steps
+
+Placeholder to add these later
+-->

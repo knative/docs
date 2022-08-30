@@ -16,12 +16,12 @@ architecture. For example, separate brokers for events containing Personally
 Identifiable Information (PII) and non-PII events can simplify audit and access
 control rules.
 
-## Additional resources
-
-- [Brokers concept documentation](../../concepts/eventing-resources/brokers.md){target=_blank}
-
 ## Next steps
 
 - Create an [MT channel-based broker](create-mtbroker.md).
 - Configure [default broker ConfigMap settings](../configuration/broker-configuration.md).
-- View the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#broker).
+
+## Additional resources
+
+- [Brokers concept documentation](../../concepts/eventing-resources/brokers.md)
+- [Broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#broker){target=_blank}
