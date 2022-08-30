@@ -1,4 +1,4 @@
-# About Triggers
+# Using Triggers
 
 A trigger represents a desire to subscribe to events from a specific broker.
 
