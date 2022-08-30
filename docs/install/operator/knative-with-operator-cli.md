@@ -12,7 +12,7 @@ Before you install the Knative Operator CLI Plugin, first install the [Knative C
 
 === "MacOS"
 
-    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.6.2).
+    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.7.1).
 
     1. Rename the binary to `kn-operator`:
 
@@ -22,7 +22,7 @@ Before you install the Knative Operator CLI Plugin, first install the [Knative C
 
 === "Linux"
 
-    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.6.2).
+    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.7.1).
 
     1. Rename the binary to `kn-operator`:
 
@@ -75,10 +75,10 @@ To install Knative Operator under a certain namespace, e.g. knative-operator, ru
 kn operator install -n knative-operator
 ```
 
-To install Knative Operator of a specific version, e.g. 1.6.0, run:
+To install Knative Operator of a specific version, e.g. 1.7.1, run:
 
 ```bash
-kn operator install -v 1.6.0
+kn operator install -v 1.7.1
 ```
 
 ## Installing the Knative Serving component
@@ -98,11 +98,20 @@ To install Knative Serving under a certain namespace, e.g. knative-serving, run:
 kn operator install --component serving -n knative-serving
 ```
 
-To install Knative Operator of a specific version, e.g. 1.6, run:
+To install Knative Operator of a specific version, e.g. 1.7, run:
 
 ```bash
-kn operator install --component serving -n knative-serving -v "1.6"
+kn operator install --component serving -n knative-serving -v "1.7"
 ```
+
+To install the ingress plugin, e.g Kourier, together with the install command, run:
+
+```bash
+kn operator install --component serving -n knative-serving -v "1.7" --kourier
+```
+
+If you do not specify the ingress plugin, istio is used as the default. However, you need to make sure you install
+[Istio](../installing-istio.md) first.
 
 ### Install the networking layer
 
@@ -164,10 +173,10 @@ To install Knative Eventing under a certain namespace, e.g. knative-eventing, ru
 kn operator install --component eventing -n knative-eventing
 ```
 
-To install Knative Operator of a specific version, e.g. 1.6, run:
+To install Knative Operator of a specific version, e.g. 1.7, run:
 
 ```bash
-kn operator install --component eventing -n knative-eventing -v "1.6"
+kn operator install --component eventing -n knative-eventing -v "1.7"
 ```
 
 ### Installing Knative Eventing with event sources
