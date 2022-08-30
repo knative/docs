@@ -72,7 +72,6 @@ Follow the procedure for the Channel of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
 
-
 === "Google Cloud Pub/Sub Channel"
 
     * Install the Google Cloud Pub/Sub Channel by running the command:
@@ -141,8 +140,7 @@ Follow the procedure for the Broker of your choice:
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
 
-
-    For more information, see the [Kafka Broker](../../../eventing/brokers/kafka-broker/README.md) documentation.
+    For more information, see the [Kafka Broker](../../../eventing/brokers/broker-types/kafka-broker/README.md) documentation.
 
 === "MT-Channel-based"
 
