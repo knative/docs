@@ -5,9 +5,9 @@ You can install the Serving component, Eventing component, or both on your clust
 
 The following table describes the supported versions of Serving and Eventing for the Knative Operator:
 
-| Operator | Serving                                                    | Eventing                                                                                         |
-|----------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| v1.6.0   | v1.6.0<br/>v1.5.0<br/>v1.4.0<br/>v1.3.0, v1.3.1 and v1.3.2 | v1.6.0<br/>v1.5.0 and v1.5.1<br/>v1.4.0, v1.4.1 and v1.4.2<br/>v1.3.0, v1.3.1, v1.3.2 and v1.3.3 |
+| Operator | Serving                                            | Eventing                                                                                         |
+|----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| v1.7.0   | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0<br/>v1.4.0 | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0, v1.5.1, v1.5.2 and v1.5.3<br/>v1.4.0, v1.4.1 and v1.4.2 |
 
 --8<-- "prerequisites.md"
 
@@ -306,7 +306,7 @@ Where `<filename>` is the name of the file you created in the previous step.
 
 ### Installing a specific version of Eventing
 
-Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example, if you want to install Knative Eventing v1.6, you can apply the following KnativeEventing CR:
+Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example, if you want to install Knative Eventing v1.7, you can apply the following KnativeEventing CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -315,13 +315,13 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: "1.6"
+  version: "1.7"
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator install --component eventing -v 1.6 -n knative-eventing
+kn operator install --component eventing -v 1.7 -n knative-eventing
 ```
 
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Eventing.
