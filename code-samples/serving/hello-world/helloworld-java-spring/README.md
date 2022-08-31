@@ -196,7 +196,7 @@ This will wait until your service is deployed and ready, and ultimately it will 
     kn service describe helloworld-java-spring -o url
     ```
 
-Example:
+    Example:
 
     ```bash
     http://helloworld-java-spring.default.1.2.3.4.xip.io
