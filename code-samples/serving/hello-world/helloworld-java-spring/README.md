@@ -185,10 +185,10 @@ This will wait until your service is deployed and ready, and ultimately it will 
 
     Example:
 
-```bash
-NAME                      URL
-helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
-```
+    ```bash
+    NAME                      URL
+    helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
+    ```
 
 ### kn
 
