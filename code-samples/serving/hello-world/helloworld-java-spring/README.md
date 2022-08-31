@@ -183,7 +183,7 @@ This will wait until your service is deployed and ready, and ultimately it will 
     kubectl get ksvc helloworld-java-spring  --output=custom-columns=NAME:.metadata.name,URL:.status.url
     ```
 
-Example:
+    Example:
 
 ```bash
 NAME                      URL
