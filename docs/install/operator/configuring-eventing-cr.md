@@ -508,8 +508,11 @@ kn operator configure selectors --component eventing --serviceName eventing-webh
 
 ## Override system podDisruptionBudgets
 
-You can configure the `minAvailable` for a specific podDisruptionBudget resource based on the name. For example, if you would like
-to change `minAvailable` into 70% for the podDisruptionBudget named `eventing-webhook`, you need to change your KnativeEventing CR as below:
+A Pod Disruption Budget (PDB) allows you to limit the disruption to your application when its pods need to be rescheduled
+for maintenance reasons. Knative Operator allows you to configure the `minAvailable` for a specific podDisruptionBudget
+resource in Eventing based on the name. To understand more about the configuration of the resource podDisruptionBudget, click [here](https://kubernetes.io/docs/tasks/run-application/configure-pdb/).
+For example, if you would like to change `minAvailable` into 70% for the podDisruptionBudget named `eventing-webhook`,
+you need to change your KnativeEventing CR as below:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
