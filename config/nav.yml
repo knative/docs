@@ -201,7 +201,6 @@ nav:
           - ContainerSource:
             - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
             - ContainerSource Reference: eventing/custom-event-source/containersource/reference.md
-        - Using the Event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
         - Event sinks:
           - About sinks: eventing/sinks/README.md
           - KafkaSink: eventing/sinks/kafka-sink.md
@@ -221,8 +220,8 @@ nav:
           - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
           - Available Channels: eventing/channels/channels-crds.md
           - Subscriptions: eventing/channels/subscriptions.md
-        - Sugar Controller: eventing/sugar/README.md
-      # Eventing - admin docs
+        - Event registry: eventing/event-registry.md
+        - Sugar controller: eventing/sugar/README.md
       - Administrator topics:
         # Eventing config
         - Eventing configuration:
