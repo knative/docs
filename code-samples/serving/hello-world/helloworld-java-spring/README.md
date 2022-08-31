@@ -190,7 +190,7 @@ This will wait until your service is deployed and ready, and ultimately it will 
     helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
     ```
 
-### kn
+    - For kn, run:
 
 ```bash
 kn service describe helloworld-java-spring -o url
