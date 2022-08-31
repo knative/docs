@@ -192,9 +192,9 @@ This will wait until your service is deployed and ready, and ultimately it will 
 
     - For kn, run:
 
-```bash
-kn service describe helloworld-java-spring -o url
-```
+    ```bash
+    kn service describe helloworld-java-spring -o url
+    ```
 
 Example:
 
