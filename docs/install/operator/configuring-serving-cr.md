@@ -675,3 +675,23 @@ kn operator configure labels --component serving --serviceName webhook --key myl
 kn operator configure annotations --component serving --serviceName webhook --key myannotations --value bar -n knative-serving
 kn operator configure selectors --component serving --serviceName webhook --key myselector --value bar -n knative-serving
 ```
+
+## Override system podDisruptionBudgets
+
+A Pod Disruption Budget (PDB) allows you to limit the disruption to your application when its pods need to be rescheduled
+for maintenance reasons. Knative Operator allows you to configure the `minAvailable` for a specific podDisruptionBudget
+resource in Serving based on the name. To understand more about the configuration of the resource podDisruptionBudget, click [here](https://kubernetes.io/docs/tasks/run-application/configure-pdb/).
+For example, if you would like to change `minAvailable` into 70% for the podDisruptionBudget named `activator-pdb`, you
+need to change your KnativeServing CR as below:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  podDisruptionBudgets:
+  - name: activator-pdb
+    minAvailable: 70%
+```
