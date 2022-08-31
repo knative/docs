@@ -15,8 +15,11 @@ The Knative Kafka Broker stores incoming CloudEvents as Kafka records, using the
 
 ## Prerequisites
 
-1. [Installing Eventing using YAML files](../../../install/yaml-install/eventing/install-eventing-with-yaml.md).
-2. An Apache Kafka cluster (if you're just getting started you can follow [Strimzi Quickstart page](https://strimzi.io/quickstarts/)).
+1. You have installed Knative Eventing.
+2. You have access to an Apache Kafka cluster.
+
+!!! tip
+    If you need to set up a Kafka cluster, you can do this by following the instructions on the [Strimzi Quickstart page](https://strimzi.io/quickstarts/).
 
 ## Installation
 

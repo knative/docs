@@ -4,7 +4,6 @@ Once you have installed Knative Eventing, you can create an instance of the mult
 
 You can create a broker by using the `kn` CLI or by applying YAML files using `kubectl`.
 
-
 === "kn"
 
     1. You can create a broker in current namespace by entering the following command:
@@ -31,7 +30,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
 === "kubectl"
 
-    The YAML in the following example creates a broker named `default` in the current namespace. For more information about configuring broker options using YAML, see the full [broker configuration example](example-mtbroker.md).
+    The YAML in the following example creates a broker named `default` in the current namespace.
 
     1. Create a broker in the current namespace by creating a YAML file using the
     following template:

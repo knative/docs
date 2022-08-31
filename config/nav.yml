@@ -11,7 +11,10 @@ nav:
     - Concepts:
       - Overview: concepts/README.md
       - Resources:
-        - Revisions: concepts/resources/revisions.md
+        - Serving resources:
+          - Revisions: concepts/serving-resources/revisions.md
+        - Eventing resources:
+          - Brokers: concepts/eventing-resources/brokers.md
       - Duck types: concepts/duck-typing.md
 ###############################################################################
     # Getting started
@@ -25,7 +28,7 @@ nav:
           - Traffic splitting: getting-started/first-traffic-split.md
         - Using Knative Eventing:
           - Introducing Knative Eventing: getting-started/getting-started-eventing.md
-          - Sources, Brokers, Triggers, Sinks: getting-started/first-broker.md
+          - Sources, Brokers, and Triggers: getting-started/first-broker.md
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
         - What's Next?: getting-started/next-steps.md
@@ -151,6 +154,22 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
+      - Resources:
+        - Brokers:
+          - About Brokers: eventing/brokers/README.md
+          - Broker types:
+            - Available Broker types: eventing/brokers/broker-types/README.md
+            # add default IMC broker page, page explaining broker types
+            - Knative Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
+            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
+          - Creating a Broker: eventing/brokers/create-mtbroker.md
+#          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
+          - Developer configuration options: eventing/brokers/broker-developer-config-options.md
+        - Triggers:
+          - Using Triggers: eventing/triggers/README.md
+          # about triggers docs
+        #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
+        #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
       # Eventing - developer docs
       - Developer topics:
         - Event sources:
@@ -201,17 +220,8 @@ nav:
           - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
           - Available Channels: eventing/channels/channels-crds.md
           - Subscriptions: eventing/channels/subscriptions.md
-        - Sugar Controller: eventing/sugar/README.md
-        - Brokers:
-          - About Brokers: eventing/broker/README.md
-          - Using the Event registry: eventing/event-registry.md # does this make sense here since it mentions being used with brokers and triggers?
-          - Creating a Broker: eventing/broker/create-mtbroker.md
-          - Triggers: eventing/broker/triggers/README.md
-          - Broker configuration example: eventing/broker/example-mtbroker.md
-          - Knative Kafka Broker: eventing/broker/kafka-broker/README.md
-          - RabbitMQ Broker: eventing/broker/rabbitmq-broker/README.md
-        - Accessing CloudEvent traces: eventing/accessing-traces.md
-      # Eventing - admin docs
+        - Event registry: eventing/event-registry.md
+        - Sugar controller: eventing/sugar/README.md
       - Administrator topics:
         # Eventing config
         - Eventing configuration:
@@ -222,6 +232,7 @@ nav:
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
       # Eventing - observability
       - Observability:
+        - Accessing CloudEvent traces: eventing/accessing-traces.md
         - Collecting logs: eventing/observability/logging/collecting-logs.md
         - Configuring logging: eventing/observability/logging/config-logging.md
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
