@@ -1,7 +1,6 @@
-# Knative Kafka Broker
+# Kafka Broker
 
-The Knative Kafka Broker is an Apache Kafka native implementation of the Knative Broker API that reduces
-network hops, supports any Kafka version, and has a better integration with Kafka for the Broker and Trigger model.
+The Kafka Broker is an Apache Kafka native implementation of the Knative Broker API that reduces network hops, supports any Kafka version, and has a better integration with Kafka for the Broker and Trigger model.
 
 Notable features are:
 
@@ -11,23 +10,19 @@ Notable features are:
 - Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/extensions/partitioning.md)
 - Support any Kafka version, see [compatibility matrix](https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix)
 
-The Knative Kafka Broker stores incoming CloudEvents as Kafka records, using the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode). This means all CloudEvent attributes and extensions are mapped as [headers on the Kafka record](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#323-metadata-headers), while the `data` of the CloudEvent corresponds to the value of the Kafka record.
+The Kafka Broker stores incoming CloudEvents as Kafka records, using the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode). This means all CloudEvent attributes and extensions are mapped as [headers on the Kafka record](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#323-metadata-headers), while the `data` of the CloudEvent corresponds to the value of the Kafka record.
 
 ## Prerequisites
 
-1. You have installed Knative Eventing.
-2. You have access to an Apache Kafka cluster.
+- You have installed Knative Eventing.
+- You have access to an Apache Kafka cluster.
 
-!!! tip
-    If you need to set up a Kafka cluster, you can do this by following the instructions on the [Strimzi Quickstart page](https://strimzi.io/quickstarts/).
+    !!! tip
+        If you need to set up a Kafka cluster, you can do this by following the instructions on the [Strimzi Quickstart page](https://strimzi.io/quickstarts/).
 
-## Installation
+- You have installed Knative Kafka.
 
-1. Install the Kafka controller by entering the following command:
-
-    ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
-    ```
+## Installing Kafka Broker
 
 1. Install the Kafka Broker data plane by entering the following command:
 

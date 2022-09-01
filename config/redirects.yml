@@ -1,7 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
-      eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
+      eventing/broker/kafka-broker/kafka-configmap.md: eventing/kafka/kafka-channel-configuration.md
       eventing/broker/create-mtbroker.md: eventing/brokers/create-mtbroker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
       eventing/broker/kafka-broker/README.md: eventing/brokers/broker-types/kafka-broker/README.md
@@ -24,7 +24,7 @@ plugins:
       admin/collecting-metrics/serving-metrics/metrics.md: serving/observability/metrics/serving-metrics.md
       admin/eventing/broker-configuration.md: eventing/brokers/broker-admin-config-options.md
       admin/eventing/channel-configuration.md: eventing/configuration/channel-configuration.md
-      admin/eventing/kafka-channel-configuration.md: eventing/configuration/kafka-channel-configuration.md
+      admin/eventing/kafka-channel-configuration.md: eventing/kafka/kafka-channel-configuration.md
       admin/eventing/sources-configuration.md: eventing/configuration/sources-configuration.md
       admin/install/README.md: install/README.md
       admin/install/eventing/eventing-installation-files.md: install/yaml-install/eventing/eventing-installation-files.md
@@ -78,7 +78,7 @@ plugins:
       developer/concepts/duck-typing.md: concepts/duck-typing.md
       developer/eventing/event-delivery.md: eventing/event-delivery.md
       developer/eventing/sinks/README.md: eventing/sinks/README.md
-      developer/eventing/sinks/kafka-sink.md: eventing/sinks/kafka-sink.md
+      developer/eventing/sinks/kafka-sink.md: eventing/kafka/kafka-sink.md
       developer/eventing/sources/README.md: eventing/sources/README.md
       developer/eventing/sources/apache-camel-source/README.md: eventing/sources/apache-camel-source/README.md
       developer/eventing/sources/apiserversource/README.md: eventing/sources/apiserversource/README.md
@@ -95,7 +95,7 @@ plugins:
       developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md: eventing/custom-event-source/custom-event-source/publish-event-source.md
       developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md: eventing/custom-event-source/custom-event-source/README.md
       developer/eventing/sources/creating-event-sources/writing-event-source/README.md: eventing/custom-event-source/custom-event-source/README.md
-      developer/eventing/sources/kafka-source/README.md: eventing/sources/kafka-source/README.md
+      developer/eventing/sources/kafka-source/README.md: eventing/kafka/kafka-source/README.md
       developer/eventing/sources/ping-source/README.md: eventing/sources/ping-source/README.md
       developer/eventing/sources/ping-source/reference.md: eventing/sources/ping-source/reference.md
       developer/eventing/sources/sinkbinding/README.md: eventing/custom-event-source/sinkbinding/README.md
@@ -151,7 +151,7 @@ plugins:
       eventing/samples/writing-event-source-easy-way/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/writing-event-source-easy-way
       eventing/sequence.md: eventing/flows/sequence/README.md
       eventing/sink/README.md: eventing/sinks/README.md
-      eventing/sink/kafka-sink.md: eventing/sinks/kafka-sink.md
+      eventing/sink/kafka-sink.md: eventing/kafka/kafka-sink.md
       eventing/sources/containersource.md: eventing/custom-event-source/containersource/README.md
       eventing/sources/pingsource/index.md: eventing/sources/ping-source/README.md
       install/collecting-logs/index.md: serving/observability/logging/collecting-logs.md

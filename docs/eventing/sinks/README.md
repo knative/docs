@@ -1,4 +1,4 @@
-# About sinks
+# Sinks
 
 When you create an event source, you can specify a _sink_ where events are sent to from the source. A sink is an _Addressable_ or a _Callable_ resource that can receive incoming events from other resources. Knative Services, Channels, and Brokers are all examples of sinks.
 
@@ -84,31 +84,6 @@ To use a Kubernetes custom resource (CR) as a sink for events, you must:
           - watch
     ```
 
-## Filtering events sent to sinks by using Triggers
-
-You can connect a Trigger to a sink, so that events are filtered before they are sent to the sink. A sink that is connected to a Trigger is configured as a `subscriber` in the Trigger resource spec.
-
-For example:
-
-```yaml
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: <trigger-name>
-spec:
-...
-  subscriber:
-    ref:
-      apiVersion: eventing.knative.dev/v1alpha1
-      kind: KafkaSink
-      name: <kafka-sink-name>
-```
-
-Where;
-
-- `<trigger-name>` is the name of the Trigger being connected to the sink.
-- `<kafka-sink-name>` is the name of a KafkaSink object.
-
 ## Specifying sinks using the kn CLI --sink flag
 
 When you create an event-producing CR by using the Knative (`kn`) CLI, you can specify a sink where events are sent to from that resource, by using the `--sink` flag.
@@ -132,9 +107,8 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 
 | Name | Maintainer | Description |
 | -- | -- | -- |
-| [KafkaSink](kafka-sink.md)  | Knative  | Send events to a Kafka topic |
+| [KafkaSink](../kafka/kafka-sink.md)  | Knative  | Send events to a Kafka topic |
 | [RedisSink](https://github.com/knative-sandbox/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |
-
 
 [kubernetes-kinds]:
   https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds

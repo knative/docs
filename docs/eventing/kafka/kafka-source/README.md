@@ -1,16 +1,13 @@
-# Apache Kafka Source
+# Kafka Source
 
 The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
-<!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
+## Prerequisites
+
+- You have installed Knative Eventing.
+- You have installed Knative Kafka.
 
 ## Installing Kafka source
-
-1. Install the Kafka controller by entering the following command:
-
-    ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
-    ```
 
 1. Install the Kafka Source data plane by entering the following command:
 
@@ -18,8 +15,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
     ```
 
-1. Verify that `kafka-controller` and `kafka-source-dispatcher` are running,
-   by entering the following command:
+1. Verify that the `kafka-source-dispatcher` is running, by entering the following command:
 
     ```bash
     kubectl get deployments.apps -n knative-eventing
@@ -28,7 +24,6 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     Example output:
     ```{ .bash .no-copy }
     NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
-    kafka-controller               1/1     1            1           3s
     kafka-source-dispatcher        1/1     1            1           4s
     ```
 
@@ -57,7 +52,7 @@ If you are using Strimzi:
         segment.bytes: 1073741824
     ```
 
-2. Deploy the `KafkaTopic` YAML file by running the command:
+1. Deploy the `KafkaTopic` YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
@@ -69,7 +64,7 @@ If you are using Strimzi:
     kafkatopic.kafka.strimzi.io/knative-demo-topic created
     ```
 
-3. Ensure that the `KafkaTopic` is running by running the command:
+1. Ensure that the `KafkaTopic` is running by running the command:
 
     ```bash
     kubectl -n kafka get kafkatopics.kafka.strimzi.io
@@ -219,7 +214,7 @@ If you are using Strimzi:
     "kafka-source" deleted
     ```
 
-2. Delete the `event-display` Service:
+1. Delete the `event-display` Service:
 
     ```bash
     kubectl delete -f source/event-display.yaml service.serving.knative.dev
@@ -230,7 +225,7 @@ If you are using Strimzi:
     "event-display" deleted
     ```
 
-4. Optional: Remove the Apache Kafka Topic
+1. Optional: Remove the Apache Kafka Topic
 
     ```bash
     kubectl delete -f kafka-topic.yaml
@@ -324,7 +319,7 @@ KafkaSource expects these files to be in PEM format. If they are in another form
     kubectl create secret tls kafka-secret --cert=certificate.pem --key=key.pem
     ```
 
-2. Apply the KafkaSource. Modify the `bootstrapServers` and `topics` fields accordingly.
+1. Apply the KafkaSource. Modify the `bootstrapServers` and `topics` fields accordingly.
 
     ```yaml
     apiVersion: sources.knative.dev/v1beta1

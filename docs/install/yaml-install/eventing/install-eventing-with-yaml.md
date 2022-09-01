@@ -226,22 +226,6 @@ Follow the procedure for the Broker of your choice:
 The following tabs expand to show instructions for installing each Eventing extension.
 <!-- This indentation is important for things to render properly. -->
 
-=== "Apache Kafka Sink"
-
-    1. Install the Kafka controller by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
-        ```
-
-    1. Install the Kafka Sink data plane by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
-        ```
-
-    For more information, see the [Kafka Sink](../../../eventing/sinks/kafka-sink.md) documentation.
-
 === "Sugar Controller"
 
     <!-- Unclear when this feature came in -->
@@ -288,23 +272,6 @@ The following tabs expand to show instructions for installing each Eventing exte
 
     To learn more, try the [GitHub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/github-source)
 
-=== "Apache Kafka Source"
-
-    1. Install the Apache Kafka Source by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-source.yaml")}}
-        ```
-
-    1. If you're upgrading from the previous version, run the following command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
-        ```
-
-    To learn more, try the [Apache Kafka source sample](../../../eventing/sources/kafka-source/README.md).
-
-
 === "GCP Sources"
 
     * Install the GCP Sources by running the command:
@@ -321,7 +288,6 @@ The following tabs expand to show instructions for installing each Eventing exte
     - [Cloud Storage source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-storage-source)
     - [Cloud Scheduler source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-scheduler-source)
     - [Cloud Audit Logs source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-audit-logs-source)
-
 
 === "Apache CouchDB Source"
 

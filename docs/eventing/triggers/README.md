@@ -4,7 +4,7 @@ A trigger represents a desire to subscribe to events from a specific broker.
 
 The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
 
-## Example Triggers
+## Creating a Trigger
 
 The following trigger receives all the events from the `default` broker and
 delivers them to the Knative Serving service `my-service`:
@@ -59,6 +59,31 @@ delivers them to the custom path `/my-custom-path` for the Kubernetes service `m
     kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
+
+## Filtering events sent to Sinks by using Triggers
+
+You can connect a Trigger to a Sink, so that events are filtered before they are sent to the sink. A Sink that is connected to a Trigger is configured as a `subscriber` in the Trigger resource spec.
+
+For example:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: <trigger-name>
+spec:
+...
+  subscriber:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: KafkaSink
+      name: <kafka-sink-name>
+```
+
+Where;
+
+- `<trigger-name>` is the name of the Trigger being connected to the sink.
+- `<kafka-sink-name>` is the name of a KafkaSink object.
 
 ## Trigger filtering
 

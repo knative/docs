@@ -170,7 +170,15 @@ nav:
           # about triggers docs
         #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
         #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
+        - Sinks: eventing/sinks/README.md
       # Eventing - developer docs
+      - Knative Kafka:
+        - Installing Knative Kafka: eventing/kafka/kafka-install.md
+        - Kafka Source: eventing/kafka/kafka-source/README.md
+        - Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
+        - Kafka Sink: eventing/kafka/kafka-sink.md
+        - Configure Kafka Channel defaults: eventing/kafka/kafka-channel-configuration.md
+        # TODO: Need proper kafka channel docs, but moving these existing ones here for now to at least group them
       - Developer topics:
         - Event sources:
           - About event sources: eventing/sources/README.md
@@ -179,7 +187,6 @@ nav:
             - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
             - ApiServerSource reference: eventing/sources/apiserversource/reference.md
           - CamelSource: eventing/sources/apache-camel-source/README.md
-          - KafkaSource: eventing/sources/kafka-source/README.md
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
@@ -201,9 +208,6 @@ nav:
           - ContainerSource:
             - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
             - ContainerSource Reference: eventing/custom-event-source/containersource/reference.md
-        - Event sinks:
-          - About sinks: eventing/sinks/README.md
-          - KafkaSink: eventing/sinks/kafka-sink.md
         - Handling delivery failure: eventing/event-delivery.md
         - Flows:
           - About flows: eventing/flows/README.md
@@ -227,7 +231,6 @@ nav:
         - Eventing configuration:
           - Configure Channel defaults: eventing/configuration/channel-configuration.md
           - Configure Broker defaults: eventing/configuration/broker-configuration.md
-          - Configure Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
       # Eventing - observability
