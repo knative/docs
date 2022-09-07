@@ -40,7 +40,19 @@ fi
 readonly IS_PROW
 [[ ! -v REPO_ROOT_DIR ]] && REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
 readonly REPO_ROOT_DIR
-readonly REPO_NAME="${REPO_NAME:-$(basename "${REPO_ROOT_DIR}")}"
+
+# Resolves the repository name given a root directory.
+# Parameters: $1 - repository root directory.
+function __resolveRepoName() {
+  local repoName
+  repoName="$(basename "${1:-$(git rev-parse --show-toplevel)}")"
+  repoName="${repoName#knative-sandbox-}" # Remove knative-sandbox- prefix if any
+  repoName="${repoName#knative-}" # Remove knative- prefix if any
+  echo "${repoName}"
+}
+default_repo_name="$(__resolveRepoName "${REPO_ROOT_DIR}")"
+readonly REPO_NAME="${REPO_NAME:-$default_repo_name}"
+unset default_repo_name
 
 # Useful flags about the current OS
 IS_LINUX=0
@@ -64,10 +76,6 @@ if [[ -z "${ARTIFACTS:-}" ]]; then
   export ARTIFACTS
 fi
 mkdir -p "$ARTIFACTS"
-
-
-# On a Prow job, redirect stderr to stdout so it's synchronously added to log
-(( IS_PROW )) && exec 2>&1
 
 # Return the major version of a release.
 # For example, "v0.2.1" returns "0"
@@ -94,11 +102,49 @@ function patch_version() {
   echo "${tokens[2]}"
 }
 
-# Print error message and exit 1
+# Calculates the hashcode for a given string.
+# Parameters: $* - string to be hashed.
+# See: https://stackoverflow.com/a/48863502/844449
+function hashCode() {
+  local input="$1"
+  local -i h=0
+  for ((i = 0; i < ${#input}; i++)); do
+    # val is ASCII val
+    printf -v val "%d" "'${input:$i:1}"
+    hval=$((31 * h + val))
+    # hash scheme
+    if ((hval > 2147483647)); then
+      h=$(( (hval - 2147483648) % 2147483648 ))
+    elif ((hval < -2147483648)); then
+      h=$(( (hval + 2147483648) % 2147483648 ))
+    else
+      h=$(( hval ))
+    fi
+  done
+  # final hashCode in decimal
+  printf "%d" $h
+}
+
+# Calculates the retcode for a given string. Makes sure the return code is
+# non-zero.
+# Parameters: $* - string to be hashed.
+function calcRetcode() {
+  local rc=1
+  local rcc
+  rcc="$(hashCode "$*")"
+  if [[ $rcc != 0 ]]; then
+    rc=$(( rcc % 255 ))
+  fi
+  echo "$rc"
+}
+
+# Print error message and call exit(n) where n calculated from the error message.
 # Parameters: $1..$n - error message to be displayed
+# Globals: abort_retcode will change the default retcode to be returned
 function abort() {
-  echo "error: $*"
-  exit 1
+  make_banner '*' "ERROR: $*" >&2
+  readonly abort_retcode="${abort_retcode:-$(calcRetcode "$*")}"
+  exit "$abort_retcode"
 }
 
 # Display a box banner.
@@ -106,11 +152,13 @@ function abort() {
 #             $2 - banner message.
 function make_banner() {
   local msg="$1$1$1$1 $2 $1$1$1$1"
-  local border="${msg//[-0-9A-Za-z _.,\/()\']/$1}"
+  local border="${msg//[^$1]/$1}"
   echo -e "${border}\n${msg}\n${border}"
   # TODO(adrcunha): Remove once logs have timestamps on Prow
   # For details, see https://github.com/kubernetes/test-infra/issues/10100
-  echo -e "$1$1$1$1 $(TZ='UTC' date)\n${border}"
+  if (( IS_PROW )); then
+    echo -e "$1$1$1$1 $(TZ='UTC' date --rfc-3339=ns)\n${border}"
+  fi
 }
 
 # Simple header for logging purposes.
@@ -126,7 +174,7 @@ function subheader() {
 
 # Simple warning banner for logging purposes.
 function warning() {
-  make_banner "!" "$1"
+  make_banner '!' "WARN: $*" >&2
 }
 
 # Checks whether the given function exists.
@@ -448,14 +496,14 @@ function report_go_test() {
   logfile="${xml/junit_/go_test_}"
   logfile="${logfile/.xml/.jsonl}"
   echo "Running go test with args: ${go_test_args[*]}"
+  local gotest_retcode=0
   go_run gotest.tools/gotestsum@v1.8.0 \
     --format "${GO_TEST_VERBOSITY:-testname}" \
     --junitfile "${xml}" \
     --junitfile-testsuite-name relative \
     --junitfile-testcase-classname relative \
     --jsonfile "${logfile}" \
-    -- "${go_test_args[@]}"
-  local gotest_retcode=$?
+    -- "${go_test_args[@]}" || gotest_retcode=$?
   echo "Finished run, return code is ${gotest_retcode}"
 
   echo "XML report written to ${xml}"
@@ -558,6 +606,9 @@ function go_run() {
   if [[ "$package" != *@* ]]; then
     abort 'Package for "go_run" needs to have @version'
   fi
+  if [[ "$package" == *@latest ]] && [[ "$package" != knative.dev* ]]; then
+    warning 'Using @latest version for external dependencies is unsafe. Use numbered version!'
+  fi
   shift 1
   GORUN_PATH="${GORUN_PATH:-$(go env GOPATH)}"
   # Some CI environments may have non-writable GOPATH
@@ -567,7 +618,6 @@ function go_run() {
   export GORUN_PATH
   GOPATH="${GORUN_PATH}" \
   GOFLAGS='' \
-  GO111MODULE='' \
     go run "$package" "$@"
 }
 
@@ -577,6 +627,7 @@ function go_run() {
 #             $3..$n - parameters passed to the tool.
 # Deprecated: use go_run instead
 function run_go_tool() {
+  warning 'The "run_go_tool" function is deprecated. Use "go_run" instead.'
   local package=$1
   # If no `@version` is provided, default to adding `@latest`
   if [[ "$package" != *@* ]]; then
@@ -601,6 +652,26 @@ function add_trap {
   done
 }
 
+# Run a command, described by $1, for every go module in the project.
+# Parameters: $1      - Description of the command being run,
+#             $2 - $n - Arguments to pass to the command.
+function foreach_go_module() {
+  local failed=0
+  local -r cmd="$1"
+  shift
+  local gomod_filepath gomod_dir
+  while read -r gomod_filepath; do
+    gomod_dir="$(dirname "$gomod_filepath")"
+    pushd "$gomod_dir" > /dev/null
+    "$cmd" "$@" || failed=$?
+    popd > /dev/null
+    if (( failed )); then
+      echo "Command '${cmd}' failed in module $gomod_dir: $failed" >&2
+      return $failed
+    fi
+  done < <(find . -name go.mod -type f ! -path "*/vendor/*" ! -path "*/third_party/*")
+}
+
 # Update go deps.
 # Parameters (parsed as flags):
 #   "--upgrade", bool, do upgrade.
@@ -613,14 +684,18 @@ function add_trap {
 # global env var: FLOATING_DEPS
 # --upgrade will set GOPROXY to direct unless it is already set.
 function go_update_deps() {
-  cd "${REPO_ROOT_DIR}" || return 1
+  foreach_go_module __go_update_deps_for_module "$@"
+}
 
-  export GO111MODULE=on
+function __go_update_deps_for_module() {
+  ( # do not modify the environment
+  set -Eeuo pipefail
+
   export GOFLAGS=""
   export GONOSUMDB="${GONOSUMDB:-},knative.dev/*"
   export GONOPROXY="${GONOPROXY:-},knative.dev/*"
 
-  echo "=== Update Deps for Golang"
+  echo "=== Update Deps for Golang module: $(go_mod_module_name)"
 
   local UPGRADE=0
   local RELEASE="v9000.1" # release v9000 is so far in the future, it will always pick the default branch.
@@ -646,7 +721,7 @@ function go_update_deps() {
     else
       group "Upgrading to release ${RELEASE}"
     fi
-    FLOATING_DEPS+=( $(go_run knative.dev/test-infra/buoy@latest float ${REPO_ROOT_DIR}/go.mod "${buoyArgs[@]}") )
+    FLOATING_DEPS+=( $(go_run knative.dev/test-infra/buoy@latest float ./go.mod "${buoyArgs[@]}") )
     if [[ ${#FLOATING_DEPS[@]} > 0 ]]; then
       echo "Floating deps to ${FLOATING_DEPS[@]}"
       go get -d ${FLOATING_DEPS[@]}
@@ -664,6 +739,9 @@ function go_update_deps() {
   go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
   eval "$orig_pipefail_opt"
 
+  if ! [ -d vendor ]; then
+    return 0
+  fi
   group "Removing unwanted vendor files"
 
   # Remove unwanted vendor files
@@ -680,13 +758,15 @@ function go_update_deps() {
 
   group "Removing broken symlinks"
   remove_broken_symlinks ./vendor
+  )
 }
+
 
 # Return the go module name of the current module.
 # Intended to be used like:
 #   export MODULE_NAME=$(go_mod_module_name)
 function go_mod_module_name() {
-  go mod graph | cut -d' ' -f 1 | grep -v '@' | head -1
+  grep -E '^module ' go.mod | cut -d' ' -f2
 }
 
 # Return a GOPATH to a temp directory. Works around the out-of-GOPATH issues
@@ -717,11 +797,10 @@ function run_kntest() {
 # Parameters: $1 - output file, relative to repo root dir.
 #             $2 - directory to inspect.
 function update_licenses() {
-  cd "${REPO_ROOT_DIR}" || return 1
   local dst=$1
   local dir=$2
   shift
-  go_run github.com/google/go-licenses@v1.2.0 \
+  go_run github.com/google/go-licenses@v1.2.1 \
     save "${dir}" --save_path="${dst}" --force || \
     { echo "--- FAIL: go-licenses failed to update licenses"; return 1; }
 }
@@ -729,7 +808,7 @@ function update_licenses() {
 # Run go-licenses to check for forbidden licenses.
 function check_licenses() {
   # Check that we don't have any forbidden licenses.
-  go_run github.com/google/go-licenses@v1.2.0 \
+  go_run github.com/google/go-licenses@v1.2.1 \
     check "${REPO_ROOT_DIR}/..." || \
     { echo "--- FAIL: go-licenses failed the license check"; return 1; }
 }
@@ -762,7 +841,7 @@ function is_protected_project() {
 # Remove symlinks in a path that are broken or lead outside the repo.
 # Parameters: $1 - path name, e.g. vendor
 function remove_broken_symlinks() {
-  for link in $(find $1 -type l); do
+  for link in $(find "$1" -type l); do
     # Remove broken symlinks
     if [[ ! -e ${link} ]]; then
       unlink ${link}
