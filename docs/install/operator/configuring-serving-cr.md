@@ -15,7 +15,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: 1.5
+  version: "1.5"
 ```
 
 You can also run the following command to make the equivalent change:
