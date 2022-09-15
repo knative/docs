@@ -54,7 +54,7 @@ Create a Trigger that listens for CloudEvents from the event source and places t
 ??? question "What CloudEvents is my Trigger listening for?"
     Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
 
-    The expand the next note to see how to use Filters.
+    Expand the next note to see how to use Filters.
 
 Now, when we go back to the CloudEvents Player and send an event, we see that CloudEvents are both sent and received by the CloudEvents Player:
 
