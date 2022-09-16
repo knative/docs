@@ -8,27 +8,27 @@ The following is a full example of a multi-tenant (MT) channel-based Broker obje
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
-   name: default
-   namespace: default
-   annotations:
-     eventing.knative.dev/broker.class: MTChannelBasedBroker
- spec:
-   config:
-     apiVersion: v1
-     kind: ConfigMap
-     name: config-br-default-channel
-     namespace: knative-eventing
-   delivery:
-     deadLetterSink:
-       ref:
-         kind: Service
-         namespace: example-namespace
-         name: example-service
-         apiVersion: v1
-       uri: example-uri
-     retry: 5
-     backoffPolicy: exponential
-     backoffDelay: "2007-03-01T13:00:00Z/P1Y2M10DT2H30M"
+  name: default
+  namespace: default
+  annotations:
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: config-br-default-channel
+    namespace: knative-eventing
+  delivery:
+    deadLetterSink:
+      ref:
+        kind: Service
+        namespace: example-namespace
+        name: example-service
+        apiVersion: v1
+      uri: example-uri
+    retry: 5
+    backoffPolicy: exponential
+    backoffDelay: "2007-03-01T13:00:00Z/P1Y2M10DT2H30M"
 ```
 
 - You can specify any valid `name` for your broker. Using `default` will create a broker named `default`.
