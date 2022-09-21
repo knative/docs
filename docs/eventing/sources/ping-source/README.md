@@ -120,6 +120,28 @@ during the verification step in this procedure.
 
             For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_ping_create.md).
 
+    === "kn: binary data"
+
+        - To create a PingSource that sends binary data, run the command:
+
+            ```bash
+            kn source ping create <pingsource-name> \
+              --namespace <namespace> \
+              --schedule "<cron-schedule>" \
+              --data '<base64-data>' \
+              --encoding 'base64' \
+              --sink <sink-name>
+            ```
+            Where:
+
+            - `<pingsource-name>` is the name of the PingSource that you want to create, for example, `test-ping-source`.
+            - `<namespace>` is the name of the namespace that you created in step 1 above.
+            - `<cron-schedule>` is a cron expression for the schedule for the PingSource to send events, for example, `*/1 * * * *` sends an event every minute.
+            -  `<base64-data>` is the base64 encoded binary data that you want to send, for example, `ZGF0YQ==`.
+            - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
+
+            For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_ping_create.md).
+
     === "YAML"
 
         - To create a PingSource that sends data that can be represented as plain text,
