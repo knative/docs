@@ -106,6 +106,7 @@ metadata:
   annotations:
     rabbitmq.eventing.knative.dev/parallelism: "10"
 ...
+```
 
 ## Additional information
 
