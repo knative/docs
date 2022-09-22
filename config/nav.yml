@@ -22,6 +22,12 @@ nav:
     - Tutorial:
         - Tutorial introduction: getting-started/README.md
         - Install Knative using quickstart: getting-started/quickstart-install.md
+        - Using Knative Functions:
+          - Creating a Knative Function: getting-started/creating-function.md
+          - Building a Function: getting-started/build-function.md
+          - Deploying a Function: getting-started/deploy-function.md
+          - Invoking a Function: getting-started/invoking-function.md
+          - Using Triggers and Event Sources: getting-started/function-triggers.md
         - Using Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
           - Autoscaling: getting-started/first-autoscale.md
