@@ -67,7 +67,7 @@ metadata:
   name: bind-heartbeat
 spec:
   subject:
-    apiVersion: batch/v1beta1
+    apiVersion: batch/v1
     kind: Job
     namespace: default
     selector:
