@@ -2,8 +2,6 @@
 
 The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
 
-<!--TODO: Check if this note is out of scope; should we not mention anything beyond the direct Knative/Kafka integration we provide?-->
-
 ## Installing Kafka source
 
 1. Install the Kafka controller by entering the following command:
@@ -206,41 +204,6 @@ If you are using Strimzi:
         }
     ```
 
-## Clean up steps
-
-1. Delete the Kafka event source:
-
-    ```bash
-    kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
-    ```
-
-    Example output:
-    ```{ .bash .no-copy }
-    "kafka-source" deleted
-    ```
-
-2. Delete the `event-display` Service:
-
-    ```bash
-    kubectl delete -f source/event-display.yaml service.serving.knative.dev
-    ```
-
-    Example output:
-    ```{ .bash .no-copy }
-    "event-display" deleted
-    ```
-
-4. Optional: Remove the Apache Kafka Topic
-
-    ```bash
-    kubectl delete -f kafka-topic.yaml
-    ```
-
-    Example output:
-    ```{ .bash .no-copy }
-    kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
-    ```
-
 ## Optional: Specify the key deserializer
 
 When `KafkaSource` receives a message from Kafka, it dumps the key in the Event extension called
@@ -357,4 +320,102 @@ KafkaSource expects these files to be in PEM format. If they are in another form
          apiVersion: serving.knative.dev/v1
          kind: Service
          name: event-display
+    ```
+
+## Enabling SASL for KafkaSources
+
+Simple Authentication and Security Layer (SASL) is used by Apache Kafka for authentication. If you use SASL authentication on your cluster, users must provide credentials to Knative for communicating with the Kafka cluster, otherwise events cannot be produced or consumed.
+
+### Prerequisites
+
+- You have access to a Kafka cluster that has Simple Authentication and Security Layer (SASL).
+
+### Procedure
+
+1. Create a secret that uses the Kafka cluster's SASL information, by running the following commands:
+
+    ```bash
+    STRIMZI_CRT=$(kubectl -n kafka get secret example-cluster-cluster-ca-cert --template='{{index .data "ca.crt"}}' | base64 --decode )
+    ```
+
+    ```bash
+    SASL_PASSWD=$(kubectl -n kafka get secret example-user --template='{{index .data "password"}}' | base64 --decode )
+    ```
+
+    ```bash
+    kubectl create secret -n default generic <secret_name> \
+        --from-literal=ca.crt="$STRIMZI_CRT" \
+        --from-literal=password="$SASL_PASSWD" \
+        --from-literal=saslType="SCRAM-SHA-512" \
+        --from-literal=user="example-user"
+    ```
+
+1. Create or modify a KafkaSource so that it contains the following spec options:
+
+    ```yaml
+    apiVersion: sources.knative.dev/v1beta1
+    kind: KafkaSource
+    metadata:
+      name: example-source
+    spec:
+    ...
+      net:
+        sasl:
+          enable: true
+          user:
+            secretKeyRef:
+              name: <secret_name>
+              key: user
+          password:
+            secretKeyRef:
+              name: <secret_name>
+              key: password
+          saslType:
+            secretKeyRef:
+              name: <secret_name>
+              key: saslType
+        tls:
+          enable: true
+          caCert:
+            secretKeyRef:
+              name: <secret_name>
+              key: ca.crt
+    ...
+    ```
+
+    Where `<secret_name>` is the name of the secret generated in the previous step.
+
+## Clean up steps
+
+1. Delete the Kafka event source:
+
+    ```bash
+    kubectl delete -f source/source.yaml kafkasource.sources.knative.dev
+    ```
+
+    Example output:
+    ```{ .bash .no-copy }
+    "kafka-source" deleted
+    ```
+
+2. Delete the `event-display` Service:
+
+    ```bash
+    kubectl delete -f source/event-display.yaml service.serving.knative.dev
+    ```
+
+    Example output:
+    ```{ .bash .no-copy }
+    "event-display" deleted
+    ```
+
+4. Optional: Remove the Apache Kafka Topic
+
+    ```bash
+    kubectl delete -f kafka-topic.yaml
+    ```
+
+    Example output:
+    ```{ .bash .no-copy }
+    kafkatopic.kafka.strimzi.io "knative-demo-topic" deleted
     ```
