@@ -15,7 +15,7 @@
   "dependencies": {
     "cloudevents": "^6.0.1",
     "express": "^4.17.3",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.20"
   },
   "devDependencies": {
     "standard": "^14.3.4"
