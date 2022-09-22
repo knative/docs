@@ -2,6 +2,7 @@ package client
 
 import (
 	"fmt"
+
 	"github.com/cloudevents/sdk-go/v2/binding"
 )
 
