@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+
 	"github.com/cloudevents/sdk-go/v2/event"
 	"github.com/cloudevents/sdk-go/v2/extensions"
 	"github.com/cloudevents/sdk-go/v2/observability"

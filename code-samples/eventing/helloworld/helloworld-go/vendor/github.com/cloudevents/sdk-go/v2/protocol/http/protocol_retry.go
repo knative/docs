@@ -3,10 +3,11 @@ package http
 import (
 	"context"
 	"errors"
-	"go.uber.org/zap"
 	"net/http"
 	"net/url"
 	"time"
+
+	"go.uber.org/zap"
 
 	"github.com/cloudevents/sdk-go/v2/binding"
 	cecontext "github.com/cloudevents/sdk-go/v2/context"
