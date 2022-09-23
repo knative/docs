@@ -335,11 +335,11 @@ Simple Authentication and Security Layer (SASL) is used by Apache Kafka for auth
 1. Create a secret that uses the Kafka cluster's SASL information, by running the following commands:
 
     ```bash
-    STRIMZI_CRT=$(kubectl -n kafka get secret example-cluster-cluster-ca-cert --template='{{index .data "ca.crt"}}' | base64 --decode )
+    {% raw %}STRIMZI_CRT=$(kubectl -n kafka get secret example-cluster-cluster-ca-cert --template='{{index.data "ca.crt"}}' | base64 --decode ){% endraw %}
     ```
 
     ```bash
-    SASL_PASSWD=$(kubectl -n kafka get secret example-user --template='{{index .data "password"}}' | base64 --decode )
+    {% raw %}SASL_PASSWD=$(kubectl -n kafka get secret example-user --template='{{index.data "password"}}' | base64 --decode ){% endraw %}
     ```
 
     ```bash
