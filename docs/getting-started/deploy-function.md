@@ -17,5 +17,5 @@ process.
     !!! Success "Expected output"
         ```{ .console .no-copy }
             ✅ Function deployed in namespace "default" and exposed at URL:
-            http://viewer.default.127.0.0.1.sslip.io
+            http://hello.default.127.0.0.1.sslip.io
         ```
