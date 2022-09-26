@@ -18,9 +18,3 @@ channels:
     support: None
     description: >
       Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
-  - name: GCP PubSub
-    url: https://github.com/google/knative-gcp
-    status: Proof of Concept
-    support: None
-    description: >
-      Channels are backed by [GCP PubSub](https://cloud.google.com/pubsub/).
