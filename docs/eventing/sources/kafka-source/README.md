@@ -1,10 +1,14 @@
 # Apache Kafka Source
 
-The `KafkaSource` reads all the messages, from all partitions, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` supports an ordered consumer delivery guaranty, which is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition.
+![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1beta1-yellow?style=flat-square)
 
-## Installing Kafka source
 
-1. Install the Kafka controller by entering the following command:
+The `KafkaSource` reads messages stored in existing [Apache Kafka](https://kafka.apache.org) topics, and sends those messages as CloudEvents through HTTP to its configured `sink`. The `KafkaSource` preserves the order of the messages
+stored in the topic partitions. It does this by waiting for a successful response from the `sink` before it delivers the next message in the same partition.
+## Install the KafkaSource controller
+
+1. Install the `KafkaSource` controller by entering the following command:
 
     ```bash
     kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
@@ -30,7 +34,7 @@ The `KafkaSource` reads all the messages, from all partitions, and sends those m
     kafka-source-dispatcher        1/1     1            1           4s
     ```
 
-## Create a Kafka topic
+## Optional: Create a Kafka topic
 
 !!! note
     The create a Kafka topic section assumes you're using Strimzi to operate Apache Kafka, however equivalent operations can be replicated using the Apache Kafka CLI or any other tool.
