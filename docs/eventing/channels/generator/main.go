@@ -74,7 +74,7 @@ type channel struct {
 	Name        string `yaml:"name"`
 	Url         string `yaml:"url"`
 	Status      string `yaml:"status"` // TODO Make this an enum.
-	Support     string `yaml:"support"`
+	Maintainer  string `yaml:"maintainer"`
 	Description string `yaml:"description"`
 }
 

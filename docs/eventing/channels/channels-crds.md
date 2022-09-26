@@ -1,4 +1,3 @@
-# Available Channels
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:
@@ -16,10 +15,10 @@ This is a non-exhaustive list of the available Channels for Knative Eventing.
 !!! note
     Inclusion in this list is not an endorsement, nor does it imply any level of support.
 
-Name | Status           | Support | Description
---- |------------------| --- | ---
-[InMemoryChannel](https://github.com/knative/eventing/tree/{{ branch }}/config/channels/in-memory-channel/README.md) | Proof of Concept | None | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
-[KafkaChannel](https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{ branch }}/README.md) | Beta             | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
-[NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{ branch }}/config/README.md) | Proof of Concept | None | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
-[KafkaChannel - Consolidated](https://github.com/knative-sandbox/eventing-kafka/tree/{{ branch }}/pkg/channel/consolidated/README.md) | Deprecated | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics. The original Knative KafkaChannel implementation which utilizes a single combined Kafka Producer / Consumer deployment.
-[KafkaChannel - Distributed](https://github.com/knative-sandbox/eventing-kafka/tree/{{ branch }}/pkg/channel/distributed/README.md) | Deprecated | None | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics. An alternate KafkaChannel implementation, contributed by SAP's [Kyma](https://kyma-project.io/) project, which provides a more granular deployment of Producers / Consumers.
+Name | Status | Maintainer | Description
+--- | --- | --- | ---
+[InMemoryChannel](https://github.com/knative/eventing/tree/{{version}}/config/channels/in-memory-channel/README.md) | Stable | Knative | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
+[KafkaChannel](https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{version}}/README.md) | Beta | Knative | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
+[NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{version}}/config/README.md) | Alpha | Knative | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
+
+
