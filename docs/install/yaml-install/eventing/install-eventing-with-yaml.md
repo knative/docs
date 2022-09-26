@@ -50,7 +50,6 @@ Follow the procedure for the Channel of your choice:
 
 === "Apache Kafka Channel"
 
-
     The following commands install the KafkaChannel and run event routing in a system
     namespace. The `knative-eventing` namespace is used by default.
 
@@ -71,20 +70,6 @@ Follow the procedure for the Channel of your choice:
         ```bash
         kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
-
-=== "Google Cloud Pub/Sub Channel"
-
-    * Install the Google Cloud Pub/Sub Channel by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="google",repo="knative-gcp",file="cloud-run-events.yaml")}}
-        ```
-
-        This command installs both the Channel and the GCP Sources.
-
-        !!! tip
-            To learn more, try the [Google Cloud Pub/Sub channel sample](https://github.com/google/knative-gcp/blob/master/docs/examples/channel/README.md).
-
 
 === "In-Memory (standalone)"
 
@@ -303,25 +288,6 @@ The following tabs expand to show instructions for installing each Eventing exte
         ```
 
     To learn more, try the [Apache Kafka source sample](../../../eventing/sources/kafka-source/README.md).
-
-
-=== "GCP Sources"
-
-    * Install the GCP Sources by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="google",repo="knative-gcp",file="cloud-run-events.yaml")}}
-        ```
-
-        This command installs both the Sources and the Channel.
-
-    To learn more, try the following samples:
-
-    - [Cloud Pub/Sub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-pubsub-source)
-    - [Cloud Storage source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-storage-source)
-    - [Cloud Scheduler source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-scheduler-source)
-    - [Cloud Audit Logs source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-audit-logs-source)
-
 
 === "Apache CouchDB Source"
 
