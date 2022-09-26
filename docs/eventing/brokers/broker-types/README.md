@@ -14,10 +14,6 @@ In the Knative Eventing ecosystem, alternative broker implementations are welcom
 
 The following is a list of brokers provided by the community or vendors:
 
-### GCP broker
-
-The GCP broker is optimized for running in GCP. For more details, refer to the [documentation](https://github.com/google/knative-gcp/blob/master/docs/install/install-gcp-broker.md).
-
 ### Apache Kafka broker
 
 For more information, see [Apache Kafka Broker](kafka-broker/README.md).
