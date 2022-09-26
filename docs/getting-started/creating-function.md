@@ -1,7 +1,7 @@
 # Creating a Knative Function
 
 Knative Functions provide a programming model that leverages the Knative
-Serving and eventing APIs to provide a quick and easy way for developers
+Serving and Eventing APIs to provide a quick and easy way for developers
 to deploy their first Knative applications. Function lifecycle management
 includes creating, building, and deploying a function. Optionally, you can
 also test a deployed function by invoking it locally or on a cluster.

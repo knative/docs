@@ -20,4 +20,6 @@ you to run a local Kubernetes cluster with Docker container nodes.
 
 - The Knative CLI (`kn`). For instructions, see the next section.
 
+- The Knative Functions CLI (`func`). For instructions, see the next section.
+
 - You need to have a minimum of 3&nbsp;CPUs and 3&nbsp;GB of RAM available for the cluster to be created.

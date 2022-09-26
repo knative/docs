@@ -1,0 +1,82 @@
+<!-- Snippet used in the following topics:
+- /docs/functions/install-func.md
+- /docs/getting-started/quickstart-install.md
+- docs/install/quickstart-install.md
+-->
+
+## Install the Knative Functions CLI
+
+The Knative Functions CLI (`func`) provides an interface for creating, configuring, building and deploying Knative Functions without the need to create or modify YAML files directly. The `func` CLI can be installed as a standalone binary or as a plugin to the Knative CLI (`kn`). This guide describes how to install the `func` CLI as a standalone binary. To install as a plugin to `kn`, see the [Knative CLI documentation](/docs/client/kn-plugins/#list-of-knative-plugins).
+
+=== "Using Homebrew"
+
+    Do one of the following:
+
+    - To install `func` using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
+
+        ```bash
+        brew tap knative-sandbox/kn-plugins
+        brew install func
+        ```
+=== "Using a binary"
+
+    You can install `func` by downloading the executable binary for your system and placing it in the system path.
+
+    1. Download the binary for your system from the [`func` release page](https://github.com/knative-sandbox/kn-plugin-func/releases){target=_blank}.
+
+    1. Rename the binary to `func` and make it executable by running the commands:
+
+        ```bash
+        mv <path-to-binary-file> func
+        chmod +x func
+        ```
+
+        Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `func_darwin_amd64` or `func_linux_amd64`.
+
+    1. Move the executable binary file to a directory on your PATH by running the command:
+
+        ```bash
+        mv func /usr/local/bin
+        ```
+
+    1. Verify that the CLI is working by running the command:
+
+        ```bash
+        func version
+        ```
+
+=== "Using Go"
+
+    1. Check out the `func` client repository:
+
+          ```bash
+          git clone https://github.com/knative-sandbox/kn-plugin-func.git func
+          cd func/
+          ```
+
+    1. Build an executable binary:
+
+          ```bash
+          make
+          ```
+
+    1. Move `func` into your system path, and verify that `func` commands are working properly. For example:
+
+          ```bash
+          func version
+          ```
+
+=== "Using a container image"
+
+    Links to images are available here:
+
+    - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}
+
+    You can run `kn` from a container image. For example:
+
+    ```bash
+    docker run --rm -it ghcr.io/knative-sandbox/kn-plugin-func/func create -l node -t http myfunc
+    ```
+
+    !!! note
+        Running `func` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `func`.
