@@ -1,10 +1,3 @@
----
-title: "Available Channels"
-#linkTitle: "Channels"
-weight: 40
-type: "docs"
----
-
 {{ "" }}
 
 {{- /* This will be interpreted given a yamlChannels object. */ -}}
@@ -24,14 +17,12 @@ procedure:
 
 This is a non-exhaustive list of the available Channels for Knative Eventing.
 
-Notes:
+!!! note
+    Inclusion in this list is not an endorsement, nor does it imply any level of support.
 
-* Inclusion in this list is not an endorsement, nor does it imply any level of
-  support.
-
-Name | Status | Support | Description
+Name | Status | Maintainer | Description
 --- | --- | --- | ---
 {{ range .Channels -}}
-[{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Support }} | {{ .Description }}
+[{{ .Name }}]({{ .Url }}) | {{ .Status }} | {{ .Maintainer }} | {{ .Description }}
 {{- end }}
 
