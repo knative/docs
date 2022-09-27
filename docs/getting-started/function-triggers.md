@@ -1,13 +1,62 @@
 # Triggers, Brokers, and Event Sources
 
-Functions can be invoked by Knative event sources using triggers. Now you will
-create a trigger that will invoke your function when a CloudEvent is emitted by
-a PingSource.
+In the first Functions tutorial, you created a basic HTTP function.
+In this tutorial, you will create a new function that integrates with Knative
+Eventing. You will use a Knative Event Source to generate events, and a Knative
+Trigger to connect the Event Source to the function.
+
+## Create a CloudEvent Function
+
+To create and deploy a CloudEvent function that echoes the CloudEvent it receives,
+you can use the `kn func create` and `kn func deploy` commands.
+
+=== "func"
+
+    Create the function by running the command:
+
+    ```bash
+    func create -l -t cloudevents go echo
+    ```
+
+    !!! Success "Expected output"
+        ```{ .console .no-copy }
+        Created go function in hello
+        ```
+
+    And deploy the function with the `func deploy` command:
+
+    ```bash
+    func deploy -p echo
+    ```
+
+    !!! Success "Expected output"
+        ```{ .console .no-copy }
+          Received response
+          Context Attributes,
+            specversion: 1.0
+            type: echo
+            source: event.handler
+            id: 3ac510fc-95f8-4958-a18e-3ffbff22c842
+            time: 2022-09-23T12:45:23.981Z
+            datacontenttype: application/json; charset=utf-8
+          Data,
+            {
+              "id": "89f49b4c-c8c4-46d2-a99e-eeca44fa894b",
+              "time": "2022-09-23T12:45:18.852Z",
+              "type": "boson.fn",
+              "source": "/boson/fn",
+              "specversion": "1.0",
+              "datacontenttype": "application/json",
+              "data": {
+                "message": "Hello World"
+              }
+            }
+        ```
 
 ## Create a Broker
 
-First, let's create a Broker. A Broker is a resource that will receive events
-from the Ping Source. The Broker will then forward those events to the Trigger
+Now, let's create a Broker. A Broker is a resource that will receive events
+from the Event Source. The Broker will then forward those events to the Trigger
 which, in turn, will invoke the function. For many of the following commands,
 you will use the `kn` CLI.
 
@@ -26,6 +75,7 @@ you will use the `kn` CLI.
 
 ## Create a PingSource
 
+A PingSource is an Event Source that generates events at a specified interval.
 To create the PingSource, you can also use the `kn` CLI. This command will
 result in a PingSource emitting an event every minute, sending it to the
 default Broker.
