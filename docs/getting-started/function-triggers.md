@@ -20,7 +20,7 @@ you can use the `kn func create` and `kn func deploy` commands.
 
     !!! Success "Expected output"
         ```{ .console .no-copy }
-        Created go function in hello
+        Created go function in echo
         ```
 
     And deploy the function with the `func deploy` command:
@@ -60,6 +60,9 @@ from the Event Source. The Broker will then forward those events to the Trigger
 which, in turn, will invoke the function. For many of the following commands,
 you will use the `kn` CLI.
 
+If you don't already have the `kn` CLI installed, please refer to the [Knative
+Client installation instructions](https://knative.dev/docs/client/install-kn/).
+
 === "func"
 
     Create a default Broker by running the command:
@@ -82,7 +85,7 @@ default Broker.
 
 === "func"
 
-    Create a PingSource by running the command:
+    Create a PingSource called, `ping` by running the command:
 
     ```bash
     kn source ping create ping --sink broker:default --schedule="*/1 * * * *"
@@ -96,14 +99,16 @@ default Broker.
 ## Create a Trigger
 
 Now that the Broker and PingSource are created, you can create a Trigger that
-will forward PingSource events to the function.
+will forward all PingSource events to the function. In the following command,
+the `--sink` flag specifies the function as the event destination for the event
+source.
 
 === "func"
 
     Create a Trigger by running the command:
 
     ```bash
-    kn trigger create ping-trigger -s hello
+    kn trigger create ping-trigger --sink hello
     ```
 
     !!! Success "Expected output"
