@@ -7,7 +7,7 @@ your first Function, and followed the Serving and Eventing tutorials, you
 are ready to learn more about the Function lifecycle and its integration
 with Knative Serving and Eventing.
 
-## Local Builds and Testing
+## Local Builds
 
 In the [Creating a Knative Function](./creating-function.md) tutorial, you
 learned how to create and deploy a Knative Function. During the deployment,
@@ -21,14 +21,38 @@ and
 [`func run`](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func_run.md)
 command reference for more information.
 
-### Invoking Functions
+## On Cluster Builds
+
+In the [Creating a Knative Function](./creating-function.md) tutorial, when
+you deployed your function, the build step was performed on your local computer.
+This may not always be ideal, if you are in a situation where you do not have
+a local Docker daemon running, or in a CI/CD pipeline. In this case a function
+can be built on the cluster using the `func deploy --remote` command. This command
+requires your function to exist in a Git repository. When running the command
+for the first time, you will need to specify the Git URL for your function. For
+example:
+
+```{ .console }
+func deploy --remote --registry <registry> --git-url <git-url> -p hello
+```
+
+As with many `func` commands, after you have specified the Git URL for your
+function once, you can omit it in subsequent commands.
+
+To perform an on-cluster build, you will need to configure your cluster with
+Tekton Pipelines. To learn more about building on your cluster, and those
+requirements, see the
+[On Cluster Build](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/on_cluster_build.md) documentation
+in the `func` documentation.
+
+## Invoking Functions
 
 You can use the `func invoke` CLI command to send a test request to invoke a
 function either locally or on your Knative cluster. This command can be used
-to test that a function is working and able to receive HTTP requests and events
-correctly. If your function is running locally, `func invoke` will send a test
-request to the local instance. You can use the `func invoke` command to send
-test data to your function with the `--data` flag, as well as other options
-to simulate different types of requests. See the
+to test that a function is working and able to receive HTTP requests and
+CloudEvents correctly. If your function is running locally, `func invoke`
+will send a test request to the local instance. You can use the `func invoke`
+command to send test data to your function with the `--data` flag, as well as
+other options to simulate different types of requests. See the
 [func invoke command reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func_invoke.md)
 for more information.

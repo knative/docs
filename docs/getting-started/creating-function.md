@@ -20,15 +20,37 @@ Function that responds to HTTP requests. Supported languages for Knative
 Functions include Go, JavaScript, TypeScript, Java and Rust. In this tutorial,
 you will use Go.
 
-=== "func"
+Create the function by running the command:
 
-    Create the function by running the command:
+```{ .console }
+func create -l go hello
+```
 
-    ```bash
-    func create -l go hello
+!!! Success "Expected output"
+    ```{ .console .no-copy }
+    Created go function in hello
     ```
 
-    !!! Success "Expected output"
-        ```{ .console .no-copy }
-        Created go function in hello
-        ```
+That's it. You have created your first Knative Function. You can now deploy
+it to your cluster. Before you do that, let's take a look at the project.
+In the `hello` directory, you will find the following files:
+
+```{ .console }
+tree hello
+```
+
+!!! Success "Expected output"
+  ```{ .console .no-copy }
+  hello
+  ├── README.md
+  ├── func.yaml
+  ├── go.mod
+  ├── handle.go
+  └── handle_test.go
+  ```
+
+The `handle.go` file contains boilerplate function code. It is where you will
+implement your application logic. You will find a README.md file that contains
+information about the function and links to function reference documentation.
+
+Now, let's deploy the function to your cluster.
