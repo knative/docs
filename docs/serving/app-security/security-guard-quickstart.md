@@ -1,6 +1,6 @@
-# Security-Behavior Monitoring Quickstart
+# Security-Guard Monitoring Quickstart
 
-Before starting the tutorial, learn [about Security Guard](./security-guard-about.md)
+Before starting the tutorial, learn [about Security-Guard](./security-guard-about.md)
 
 In this tutorial, deploy a Hello World service and protect it with Guard.
 
