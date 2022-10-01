@@ -140,7 +140,7 @@ nav:
       # Serving - Application Security
       - Application security:
         - About security-guard: serving/app-security/security-guard-about.md
-        - Security-guard quickstart: serving/app-security/security-guard-quickstart.md 
+        - Security-guard quickstart: serving/app-security/security-guard-quickstart.md
       # Serving - observability
       - Observability:
         - Collecting logs: serving/observability/logging/collecting-logs.md

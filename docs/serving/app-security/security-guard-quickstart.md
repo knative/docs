@@ -74,11 +74,11 @@ Guard offers situational awareness by writing its alerts to the Service queue pr
 
 Example output:
 
-```
-   [...]
-   {"level":"warn","message":"SECURITY ALERT! HttpRequest: Headers: KeyVal: Known Key X-B3-Traceid: Digits: Counter out of Range: 25"}  
-   [...]
-```
+    ```text
+    [...]
+    {"level":"warn","message":"SECURITY ALERT! HttpRequest: Headers: KeyVal: Known Key X-B3-Traceid: Digits: Counter out of Range: 25"}
+    [...]
+    ```
 
 Security alerts appear in the guard log file and start with the string SECURITY ALERT!. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
 
