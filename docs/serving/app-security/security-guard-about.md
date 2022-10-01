@@ -20,7 +20,7 @@ When a known exploit is found effective to compromise a service, the Knative use
 
 ### Misused Services
 
-Users need a way to detect/remove misused service instances while allowing other instances to continue the service - i.e. the user need a way to stop servcie instances that ware exploited and are being misused.
+Users need a way to detect/remove misused service instances while allowing other instances to continue the service - i.e. the user need a way to stop service instances that ware exploited and are being misused.
 
 ## More information
 

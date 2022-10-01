@@ -21,7 +21,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
 !!! tip
 
-    The following commands create a `helloworld-go` sample Service while activating and configuring the `security-guard` extension for this Service. You can modify these commands, including the extension(s) to be activated and the extension configuration.
+    The following commands create a `helloworld-go` sample Service while activating and configuring the `security-guard` extension for this Service. You can modify these commands, including changing the `security-guard` configuration for your service using either the `kn` CLI or changing the service yaml based on this example.
 
 Create a sample securedService:
 
