@@ -6,14 +6,14 @@ In this tutorial, deploy a Hello World service and protect it with Guard.
 
 ## Before you begin
 
-Using Guard require that your cluster will use an enhanced queue-proxy image.
+Using Guard requires that your cluster will use an enhanced queue-proxy image.
 In addition, Guard include automation for auto-learning a per service Guardian. Auto-learning requires you to deploy a guard-service on your kubernetes cluster.
 
 To start this tutorial, after installing Knative Serving, run the following procedure to replace your queue-proxy image and deploy a guard-service in the current namespace.
 
-1. Clone the secueity-guard repository using `git clone git@github.com:knative-sandbox/security-guard.git`
+1. Clone the security-guard repository using `git clone git@github.com:knative-sandbox/security-guard.git`
 
-2. Do `cd secueity-guard`
+2. Do `cd security-guard`
 
 3. Run `ko apply -Rf ./config`
 
