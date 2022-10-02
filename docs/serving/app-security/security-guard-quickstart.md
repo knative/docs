@@ -43,17 +43,17 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
     1. Add the necessary Guard resources to your cluster using:
 
-       ```
-       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/gateAccount.yaml
-       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/serviceAccount.yaml
-       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/guardiansCrd.yaml
-       ```
+        ```
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/gateAccount.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/serviceAccount.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/guardiansCrd.yaml
+        ```
 
     1. Deploy the gate-service on your system to enable automated learning of micro-rules.
 
-      ```
-      kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/guard-service.yaml`
-      ```
+        ```
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/guard-service.yaml`
+        ```
 
 ## Creating and deploying a service
 
