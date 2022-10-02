@@ -11,11 +11,49 @@ In addition, Guard include automation for auto-learning a per service Guardian. 
 
 To start this tutorial, after installing Knative Serving, run the following procedure to replace your queue-proxy image and deploy a guard-service in the current namespace.
 
-1. Clone the security-guard repository using `git clone git@github.com:knative-sandbox/security-guard.git`
+=== "Install from source"
 
-2. Do `cd security-guard`
+    1. Clone the security-guard repository using `git clone git@github.com:knative-sandbox/security-guard.git`
 
-3. Run `ko apply -Rf ./config`
+    1. Do `cd security-guard`
+
+    1. Run `ko apply -Rf ./config`
+
+=== "Install from released images"
+
+    Use released images to update your system to enable Guard:
+
+    1. Replace the queue-sidecar-image with `ghcr.io/knative.dev/security-guard/guard-service`
+       for example if you are not using an operator, you may update config-deployment directly using 
+        `kubectl edit ConfigMaps -n knative-serving config-deployment` to use the released
+        queue-sidecar-image version that include Guard.
+
+        ```
+        apiVersion: v1
+        kind: ConfigMap
+        ...
+        data:
+            queue-sidecar-image: ghcr.io/knative.dev/security-guard/guard-service
+        ```
+
+        If you are not using an operator, you may use the following command to update teh config-deployment ConfigMap:
+        ```
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/queue-proxy.yaml`
+        ```
+
+    1. Add the necessary Guard resources to your cluster using:
+
+       ```
+       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/gateAccount.yaml
+       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/serviceAccount.yaml
+       kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/guardiansCrd.yaml
+       ```
+
+    1. Deploy the gate-service on your system to enable automated learning of micro-rules.
+
+      ```
+      kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/guard-service.yaml`
+      ```
 
 ## Creating and deploying a service
 
