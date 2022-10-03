@@ -8,7 +8,7 @@ The criteria is composed of a set of micro-rules describing the expectations fro
 
 ### Normal Services
 
-Under normal conditions, the Knative user who owns the service is not aware of any known vulnerabilities in the service. Yet, it is reasonable to assumed that the service has weaknesses. Security-Guard offers Knative users the ability to detect/block patterns sent as part of incoming events that may be used to exploit unknown, zero-day, service vulnerabilities.
+Under normal conditions, the Knative user who owns the service is not aware of any known vulnerabilities in the service. Yet, it is reasonable to assume that the service has weaknesses. Security-Guard offers Knative users the ability to detect/block patterns sent as part of incoming events that may be used to exploit unknown, zero-day, service vulnerabilities.
 
 ### Vulnerable Services
 
@@ -16,11 +16,11 @@ Once a CVE that describes a vulnerability in the service is published, the Knati
 
 ### Exploitable Services
 
-When a known exploit is found effective to compromise a service, the Knative user who owns the service need a way to filter incoming events that contain the exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container. Users therefore need a way to detect/block incoming events that include the exploit while allowing other events to be served.
+When a known exploit is found effective to compromise a service, the Knative user who owns the Service needs a way to filter incoming events that contain the exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container. Users therefore need a way to detect/block incoming events that include the exploit while allowing other events to be served.
 
 ### Misused Services
 
-Users need a way to detect/remove misused service instances while allowing other instances to continue the service - i.e. the user need a way to stop service instances that ware exploited and are being misused.
+Users need a way to detect/remove misused Service instances while allowing other instances to continue serve events - i.e. the user needs a way to stop Service instances that are exploited and are being misused.
 
 ## More information
 
