@@ -23,6 +23,24 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
     Use released images to update your system to enable Guard:
 
+    1. Change in config-features the feature named 'queueproxy.mount-podinfo' to `allowed`
+       for example if you are not using an operator, you may update config-features directly using
+        `kubectl edit ConfigMaps -n knative-serving config-features` as follows:
+
+        ```
+        apiVersion: v1
+        kind: ConfigMap
+        ...
+        data:
+            queueproxy.mount-podinfo: allowed
+        ```
+
+        If you are not using an operator, you may use the following command to update teh config-deployment ConfigMap:
+        ```
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/config-features.yaml`
+        ```
+
+   
     1. Replace the queue-sidecar-image with `ghcr.io/knative.dev/security-guard/guard-service`
        for example if you are not using an operator, you may update config-deployment directly using
         `kubectl edit ConfigMaps -n knative-serving config-deployment` to use the released
