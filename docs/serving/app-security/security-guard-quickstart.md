@@ -35,12 +35,11 @@ To start this tutorial, after installing Knative Serving, run the following proc
             queueproxy.mount-podinfo: allowed
         ```
 
-        If you are not using an operator, you may use the following command to update teh config-deployment ConfigMap:
+        If you are not using an operator, you may use the following command to update the config-deployment ConfigMap:
         ```
         kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/config-features.yaml`
         ```
 
-   
     1. Replace the queue-sidecar-image with `ghcr.io/knative.dev/security-guard/guard-service`
        for example if you are not using an operator, you may update config-deployment directly using
         `kubectl edit ConfigMaps -n knative-serving config-deployment` to use the released
@@ -54,7 +53,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
             queue-sidecar-image: ghcr.io/knative.dev/security-guard/guard-service
         ```
 
-        If you are not using an operator, you may use the following command to update teh config-deployment ConfigMap:
+        If you are not using an operator, you may use the following command to update the config-deployment ConfigMap:
         ```
         kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/queue-proxy.yaml`
         ```
