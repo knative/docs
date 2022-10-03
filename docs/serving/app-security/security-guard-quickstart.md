@@ -24,7 +24,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
     Use released images to update your system to enable Guard:
 
     1. Replace the queue-sidecar-image with `ghcr.io/knative.dev/security-guard/guard-service`
-       for example if you are not using an operator, you may update config-deployment directly using 
+       for example if you are not using an operator, you may update config-deployment directly using
         `kubectl edit ConfigMaps -n knative-serving config-deployment` to use the released
         queue-sidecar-image version that include Guard.
 
