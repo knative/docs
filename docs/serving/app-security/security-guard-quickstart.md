@@ -127,4 +127,4 @@ Guard can also be configured to operate in other modes of operation, such as:
 * Move from auto learning to manual micro-rules management after the initial learning period
 * Block requests/responses when they do not conform to the micro-rules
 
-For more information or for troubleshooting help, see the #security channel.
+For more information or for troubleshooting help, see the [#security](https://knative.slack.com/archives/CBYV1E0TG) channel in Knative Slack.
