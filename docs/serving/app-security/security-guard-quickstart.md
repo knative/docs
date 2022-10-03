@@ -118,7 +118,7 @@ Example output:
     [...]
     ```
 
-Security alerts appear in the guard log file and start with the string SECURITY ALERT!. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
+Security alerts appear in the guard log file and start with the string `SECURITY ALERT!`. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
 
 Note that in the default setup, Guard continues to learn any new behavior and therefore avoids reporting alerts repeatedly when the new behavior reoccurs. Correct security procedures should include reviewing any new behavior detected by Guard.
 
