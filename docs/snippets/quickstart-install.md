@@ -24,7 +24,11 @@ To get started, install the Knative `quickstart` plugin:
 
     1. Make the plugin executable. For example, `chmod +x kn-quickstart`.
 
-    1. Move the executable binary file to a directory on your `PATH`, for example, in `/usr/local/bin`.
+    1. Move the executable binary file to a directory on your `PATH` by running the command: 
+    
+        ```bash
+        mv kn-quickstart /usr/local/bin
+        ```
 
     1. Verify that the plugin is working by running the command:
 
