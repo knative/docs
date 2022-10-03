@@ -139,7 +139,7 @@ nav:
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
       # Serving - Application Security
       - Application security:
-        - About security-guard: serving/app-security/security-guard-about.md
+        - About Security-Guard: serving/app-security/security-guard-about.md
         - Security-guard quickstart: serving/app-security/security-guard-quickstart.md
       # Serving - observability
       - Observability:

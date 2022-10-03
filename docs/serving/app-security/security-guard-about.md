@@ -24,6 +24,4 @@ Users need a way to detect/remove misused Service instances while allowing other
 
 ## More information
 
-See a [Security-Guard Monitoring Quickstart](./security-guard-quickstart.md).
-
 See Readme files in the [Security-Guard Github Repository](http://knative.dev/security-guard).
