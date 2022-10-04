@@ -22,10 +22,11 @@ func create -l go -t cloudevents echo
     Created go function in echo
     ```
 
-And deploy the function with the `func deploy` command:
+And deploy the function with the `func deploy` command from within the project directory:
 
 ```{ .console}
-func deploy -p echo
+cd echo
+func deploy
 ```
 
 !!! Success "Expected output"
