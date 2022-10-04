@@ -41,7 +41,7 @@ Knative supports the following Auto TLS modes:
 
 1.  Using HTTP-01 challenge
 
-    - In this type, your cluster does not need to be able to talk to your DNS server. You must map your domain to the IP of the cluser ingress.
+    - In this type, your cluster does not need to be able to talk to your DNS server. You must map your domain to the IP of the cluster ingress.
     - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
     - **HTTP-01 does not support provisioning a certificate per namespace.**
 
@@ -272,9 +272,6 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
       http-protocol: Redirected
       ...
     ```
-
-    !!! note
-        When using HTTP-01 challenge, `http-protocol` field has to be set to `Enabled` to make sure HTTP-01 challenge requests can be accepted by the cluster.
 
 1.  Ensure that the file was updated successfully:
 
