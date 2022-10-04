@@ -1,5 +1,8 @@
 # Creating a RabbitMQSource
 
+![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)
+![version](https://img.shields.io/badge/API_Version-v1alpha1-red?style=flat-square)
+
 This topic describes how to create a RabbitMQSource.
 
 ## Prerequisites
