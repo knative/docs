@@ -13,10 +13,10 @@ registry is specified as `<registry>/<username>`, for example
 This command uses the function project name and the image registry name to
 construct a fully qualified image name for your function.
 
-Deploy the function by running the command specifying the project directory:
+Deploy the function by running the command from within the project directory:
 
 ```{ .console }
-func deploy --registry <registry> -p hello
+func deploy --registry <registry>
 ```
 
 !!! Success "Expected output"

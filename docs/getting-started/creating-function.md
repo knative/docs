@@ -36,17 +36,13 @@ it to your cluster. Before you do that, let's take a look at the project.
 In the `hello` directory, you will find the following files:
 
 ```{ .console }
-tree hello
+cd hello
+ls
 ```
 
 !!! Success "Expected output"
   ```{ .console .no-copy }
-  hello
-  ├── README.md
-  ├── func.yaml
-  ├── go.mod
-  ├── handle.go
-  └── handle_test.go
+   func.yaml   go.mod   handle.go   handle_test.go   README.md
   ```
 
 The `handle.go` file contains boilerplate function code. It is where you will
