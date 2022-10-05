@@ -6,11 +6,12 @@
 
 ## Install the Knative Functions CLI
 
-The Knative Functions CLI (`func`) provides an interface for creating, configuring, building and deploying Knative Functions without the need to create or modify YAML files directly. The `func` CLI can be installed as a standalone binary or as a plugin to the Knative CLI (`kn`). This guide describes how to install the `func` CLI as a standalone binary. To install as a plugin to `kn`, see the [Knative CLI documentation](/docs/client/kn-plugins/#list-of-knative-plugins).
+The Knative Functions CLI (`func`) provides an interface for creating, configuring, building and deploying Knative Functions without the need to create or modify YAML files directly. The `func` CLI can be installed as a standalone binary or as a plugin to the Knative CLI (`kn`). If you already have `kn` installed via [Homebrew](https://brew.sh){target=_blank}, when you install the `func` CLI using [Homebrew](https://brew.sh){target=_blank}, it is automatically recognized as a plugin to `kn` and can be referenced as `kn func` or `func` interchangeably.
+
+
+Do one of the following:
 
 === "Using Homebrew"
-
-    Do one of the following:
 
     - To install `func` using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
 
@@ -18,6 +19,7 @@ The Knative Functions CLI (`func`) provides an interface for creating, configuri
         brew tap knative-sandbox/kn-plugins
         brew install func
         ```
+
 === "Using a binary"
 
     You can install `func` by downloading the executable binary for your system and placing it in the system path.

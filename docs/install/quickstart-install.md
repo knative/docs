@@ -4,11 +4,11 @@ Following this quickstart tutorial provides you with a simplified, local Knative
 
 --8<-- "quickstart-prereqs.md"
 --8<-- "install-kn.md"
---8<-- "install-func.md"
 --8<-- "quickstart-install.md"
 
 ## Next steps
 
-- Learn how to deploy your first Service in the [Knative tutorial](../getting-started/first-service.md).
+- Learn how to use Knative Functions in the [Knative Functions tutorial](../getting-started/func-install.md).
+- Learn how to deploy your first Service in the [Knative Serving tutorial](../getting-started/first-service.md).
 - Try out Knative [code samples](../samples/README.md).
 - See the [Knative Serving](../serving/README.md) and [Knative Eventing](../eventing/README.md) guides.

@@ -1,28 +1,41 @@
-# Triggers, Brokers, and Event Sources
+# Function Event Sources
 
-In the first Functions tutorial, you created a basic function that could receive
+In the previous section, you created a basic function that could receive
 and respond to HTTP requests. Now, let's create a new function that can respond
-to CloudEvents that are sent by Knative Eventing resources. In this tutorial, you
-will create a simple Knative Event Source to generate CloudEvents, a Knative Broker
-to send and receive these events, and a Knative Trigger to connect the event source
-to your Knative Function. First, create and deploy the function.
+to CloudEvents that are sent by Knative Eventing resources.
+
+In this tutorial, you will create a simple Knative event source to generate
+CloudEvents, as well as other Knative Eventing resources. You don't need
+to know anything about Knative Eventing primitives to follow this tutorial.
+However, if you would like to learn more about Knative Eventing, see the
+[Using Knative Eventing](./getting-started-eventing.md) section of this tutorial.
+
+First, create and deploy the function.
 ## Create a CloudEvent Function
 
 To create and deploy a CloudEvent function that echoes the CloudEvent it receives,
-you can use the `kn func create` and `kn func deploy` commands.
+you can use the `create` and `deploy` commands.
 
 Create the function by running the command:
 
-```{ .console }
-func create -l go -t cloudevents echo
-```
+=== "func"
+
+    ```{ .console}
+    func create -l go -t cloudevents echo
+    ```
+
+=== "kn func"
+
+    ```{ .console }
+    kn func create -l go -t cloudevents echo
+    ```
 
 !!! Success "Expected output"
     ```{ .console .no-copy }
     Created go function in echo
     ```
 
-And deploy the function with the `func deploy` command from within the project directory:
+And deploy the function with the `deploy` command from within the project directory:
 
 ```{ .console}
 cd echo
@@ -56,11 +69,9 @@ func deploy
 ## Create a Broker
 
 Now, let's create the Broker. A Broker is a resource that will receive events
-from the Event Source. The Broker will then forward those events to the Trigger
-which, in turn, will invoke the function. For many of the following commands,
-you will use the `kn` CLI.
-
-If you don't already have the `kn` CLI installed, please refer to the [Knative
+from the event source and forward them to other resources.
+For many of the following commands, you will use the `kn` CLI. If you don't
+already have the `kn` CLI installed, please refer to the [Knative
 Client installation instructions](https://knative.dev/docs/client/install-kn/).
 
 Create a default Broker by running the command:
@@ -77,7 +88,7 @@ kn broker create default
 ## Create a PingSource
 
 A PingSource is a Knative Event Source that generates events at a specified interval.
-To create the PingSource, you can also use the `kn` CLI. This command will
+To create the PingSource, you will also use the `kn` CLI. This command will
 result in a PingSource emitting an event every minute, sending it to the
 default Broker.
 
@@ -96,8 +107,7 @@ kn source ping create ping --sink broker:default --schedule="*/1 * * * *"
 
 Now that the Broker and PingSource are created, you can create a Trigger that
 will forward all PingSource events to the function. In the following command,
-the `--sink` flag specifies the function as the event destination for the event
-source.
+the `--sink` flag specifies your function as the destination for the CloudEvents.
 
 Create a Trigger by running the command:
 
@@ -129,3 +139,9 @@ kubectl logs -l function.knative.dev=true --tail=10
     Extensions,
       knativearrivaltime: 2022-09-23T14:25:01.295357548Z
     ```
+
+That's it! To learn
+more about local development with Knative Functions, see
+[Next Steps with Knative Functions](../function-next-steps).
+Or view the [Command Line Reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func.md)
+for detailed descriptions of all CLI commands.

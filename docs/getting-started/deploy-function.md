@@ -15,9 +15,17 @@ construct a fully qualified image name for your function.
 
 Deploy the function by running the command from within the project directory:
 
-```{ .console }
-func deploy --registry <registry>
-```
+=== "func"
+
+    ```{ .console}
+    func deploy --registry <registry>
+    ```
+
+=== "kn func"
+
+    ```{ .console }
+    kn func deploy --registry <registry>
+    ```
 
 !!! Success "Expected output"
     ```{ .console .no-copy }
@@ -49,10 +57,4 @@ func invoke
     Body:
     ```
 
-That's it! You have now created and deployed your first Knative Function. To learn
-more about local development with Knative Functions, see
-[Next Steps with Knative Functions](../function-next-steps).
-To learn how to integrate your function with Knative Eventing, see
-[Function Triggers and Event Sources](../function-triggers).
-Or view the [Command Line Reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func.md)
-for detailed descriptions of all CLI commands.
+Next, you will learn how to integrate a function with Knative Eventing.

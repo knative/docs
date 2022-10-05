@@ -23,8 +23,10 @@ nav:
         - Tutorial introduction: getting-started/README.md
         - Install Knative using quickstart: getting-started/quickstart-install.md
         - Using Knative Functions:
+          - Installing the Functions CLI: getting-started/func-install.md
           - Creating a Function: getting-started/creating-function.md
           - Deploying a Function: getting-started/deploy-function.md
+          - Function Event Sources: getting-started/function-triggers.md
         - Using Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
           - Autoscaling: getting-started/first-autoscale.md
@@ -34,9 +36,6 @@ nav:
           - Sources, Brokers, and Triggers: getting-started/first-broker.md
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
-        - More with Knative Functions:
-          - Next Steps: getting-started/function-next-steps.md
-          - Function Triggers and Event Sources: getting-started/function-triggers.md
         - What's Next?: getting-started/next-steps.md
         - Clean Up: getting-started/clean-up.md
 ###############################################################################

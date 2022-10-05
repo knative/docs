@@ -22,9 +22,17 @@ you will use Go.
 
 Create the function by running the command:
 
-```{ .console }
-func create -l go hello
-```
+=== "func"
+
+    ```{ .console}
+    func create hello
+    ```
+
+=== "kn func"
+
+    ```{ .console }
+    kn func create -l go hello
+    ```
 
 !!! Success "Expected output"
     ```{ .console .no-copy }

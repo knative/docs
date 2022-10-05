@@ -18,6 +18,7 @@ See the following guides for documentation specific to your use case:
 
 - [Serving Guide](../serving/README.md)
 - [Eventing Guide](../eventing/README.md)
+- [Next Steps With Functions](../function-next-steps/)
 
 ## :book: Knative books
 
