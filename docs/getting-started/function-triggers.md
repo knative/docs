@@ -44,26 +44,9 @@ func deploy
 
 !!! Success "Expected output"
     ```{ .console .no-copy }
-      Received response
-      Context Attributes,
-        specversion: 1.0
-        type: echo
-        source: event.handler
-        id: 3ac510fc-95f8-4958-a18e-3ffbff22c842
-        time: 2022-09-23T12:45:23.981Z
-        datacontenttype: application/json; charset=utf-8
-      Data,
-        {
-          "id": "89f49b4c-c8c4-46d2-a99e-eeca44fa894b",
-          "time": "2022-09-23T12:45:18.852Z",
-          "type": "boson.fn",
-          "source": "/boson/fn",
-          "specversion": "1.0",
-          "datacontenttype": "application/json",
-          "data": {
-            "message": "Hello World"
-          }
-        }
+        🙌 Function image built: <registry>/echo:latest
+        ✅ Function deployed in namespace "default" and exposed at URL:
+        http://echo.default.127.0.0.1.sslip.io
     ```
 
 ## Create a Broker
@@ -124,8 +107,12 @@ To see your function being invoked, you can use the `kubectl` CLI to watch the
 logs of the function pod. Watch the logs of the function pod by running the command:
 
 ```{ .console }
-kubectl logs -l function.knative.dev=true --tail=10
+kubectl logs -l function.knative.dev=true --tail=10 -f
 ```
+
+It may take a moment for your function to be fully deployed. The above command uses
+the `-f` flag to follow the logs, so you will see the logs as they are generated.
+Type `Ctrl+C` to exit the command.
 
 !!! Success "Expected output"
     ```{ .console .no-copy }
