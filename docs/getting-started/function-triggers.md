@@ -37,11 +37,19 @@ Create the function by running the command:
 
 And deploy the function with the `deploy` command from within the project directory:
 
-```{ .console}
-cd echo
-func deploy
-```
+=== "func"
 
+    ```{ .console}
+    cd echo
+    func deploy -r <registry>
+    ```
+
+=== "kn func"
+
+    ```{ .console }
+    cd echo
+    kn func deploy -r <registry>
+    ```
 !!! Success "Expected output"
     ```{ .console .no-copy }
         🙌 Function image built: <registry>/echo:latest

@@ -32,9 +32,17 @@ requires your function to exist in a Git repository. When running the command
 for the first time, you will need to specify the Git URL for your function. For
 example:
 
-```{ .console }
-func deploy --remote --registry <registry> --git-url <git-url> -p hello
-```
+=== "func"
+
+    ```{ .console }
+    func deploy --remote --registry <registry> --git-url <git-url> -p hello
+    ```
+
+=== "kn func"
+
+    ```{ .console }
+    kn func deploy --remote --registry <registry> --git-url <git-url> -p hello
+    ```
 
 As with many `func` commands, after you have specified the Git URL for your
 function once, you can omit it in subsequent commands.
