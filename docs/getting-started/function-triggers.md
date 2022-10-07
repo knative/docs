@@ -134,8 +134,18 @@ Type `Ctrl+C` to exit the command.
       knativearrivaltime: 2022-09-23T14:25:01.295357548Z
     ```
 
-That's it! To learn
-more about local development with Knative Functions, see
-[Next Steps with Knative Functions](../function-next-steps).
-Or view the [Command Line Reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func.md)
-for detailed descriptions of all CLI commands.
+## Clean up
+
+To clean up everything you created in this section of the tutorial, run the following commands:
+
+```{ .console }
+kn trigger delete ping-trigger
+kn source ping delete ping
+kn broker delete default
+kn service delete echo
+kn service delete hello
+```
+
+When you deploy a Function, it is deployed as a Knative Service.
+Next up, we'll take a look at how to deploy a Knative Service with the `kn` CLI and a
+pre-built container image, and we'll explore some of the features of Knative Services.

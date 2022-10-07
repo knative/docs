@@ -18,7 +18,8 @@ See the following guides for documentation specific to your use case:
 
 - [Serving Guide](../serving/README.md)
 - [Eventing Guide](../eventing/README.md)
-- [Next Steps With Functions](../function-next-steps/)
+- [Next Steps With Functions](../functions/README.md)
+- [Function Command Line Reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func.md)
 
 ## :book: Knative books
 

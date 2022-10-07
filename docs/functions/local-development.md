@@ -9,7 +9,7 @@ with Knative Serving and Eventing.
 
 ## Local Builds
 
-In the [Creating a Knative Function](./creating-function.md) tutorial, you
+In the [Creating a Knative Function](../getting-started/creating-function.md) tutorial, you
 learned how to create and deploy a Knative Function. During the deployment,
 your function source code was built into an OCI container image before being
 pushed to a container registry. This build step can be performed directly
@@ -23,7 +23,7 @@ command reference for more information.
 
 ## On Cluster Builds
 
-In the [Creating a Knative Function](./creating-function.md) tutorial, when
+In the [Creating a Knative Function](../getting-started/creating-function.md) tutorial, when
 you deployed your function, the build step was performed on your local computer.
 This may not always be ideal, if you are in a situation where you do not have
 a local Docker daemon running, or in a CI/CD pipeline. In this case a function

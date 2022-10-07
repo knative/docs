@@ -33,7 +33,6 @@ responds to HTTP requests. Create the function by running the command:
     Created go function in hello
     ```
 
-That's it. You have created your first Knative Function.
 Let's take a look at the project before deploying it.
 In the `hello` directory, you will find a few files.
 The `handle.go` file is where you will implement your

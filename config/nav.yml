@@ -258,6 +258,13 @@ nav:
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
 ###############################################################################
+    # Functions
+###############################################################################
+    - Functions:
+      - About Knative Functions: functions/README.md
+      - Function Runtimes: functions/runtimes.md
+      - Local Development and Testing: functions/local-development.md
+###############################################################################
     # CLI
 ###############################################################################
     - Knative CLI:
