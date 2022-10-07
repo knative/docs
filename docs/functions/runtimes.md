@@ -12,7 +12,7 @@ and HTTP invocation formats:
 - [TypeScript](https://github.com/knative/func/blob/main/docs/function-developers/typescript.md)
 
 These embedded templates are minimal by design. To make use of more complex
-initial Function boilerplate, or to define runtime environments with
+initial function boilerplate, or to define runtime environments with
 arbitrarily complex requirements, the templates system is fully pluggable.
 
 ## Language Packs
@@ -29,7 +29,8 @@ for the template files.  For example, the Knative Sandbox maintains a set of
 [example templates](https://github.com/knative-sandbox/func-tastic) which can be
 used during project creation.
 
-To use the `metacontroller` template for Node.js from this language pack you can run:
+To use the [`metacontroller`](https://metacontroller.github.io/metacontroller/)
+template for Node.js from this language pack you can run:
 
 ```{ .console }
 func create myfunc -l nodejs -t metacontroller --repository https://github.com/knative-sandbox/func-tastic
@@ -53,5 +54,6 @@ func create -t knative/metacontroller -l nodejs my-controller-function
 ```
 
 A Language Pack can support additional function signatures and can fully customize
-the environment of the final running Function.
-For more information see the [Language Pack Guide](https://github.com/knative/func/blob/main/docs/language-pack-providers/language-pack-contract.md).
+the environment of the final running function.
+For more information see the
+[Language Pack Guide](https://github.com/knative/func/blob/main/docs/language-pack-providers/language-pack-contract.md).
