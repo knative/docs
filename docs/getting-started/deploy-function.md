@@ -4,9 +4,11 @@ Deploy your function using the `func deploy` command. When deploying, your
 function source code is built into an OCI container image, pushed to a
 container registry and then deployed to your cluster as a Knative Service.
 
-Deploying from a local build requires that you have a Docker daemon running
-on your local computer. Additionally, you must have a Docker registry that you
-can push to. Specify the registry using the `--registry` flag. Typically the
+If you followed the [Quickstart](./quickstart-install.md) section of the tutorial,
+you should already have a Docker daemon on your local machine.
+Deploying from a local build requires that you have this available.
+Additionally, you must have a Docker registry that you
+can push to. In the commands shown below, you will indicate the registry using the `--registry` flag. Typically the
 registry is specified as `<registry>/<username>`, for example
 `docker.io/exampleuser`.
 
@@ -37,9 +39,17 @@ Deploy the function by running the command from within the project directory:
 You can use the `func invoke` CLI command to ensure that your function has been
 successfully deployed.
 
-```{ .console }
-func invoke
-```
+=== "func"
+
+    ```{ .console}
+    func invoke
+    ```
+
+=== "kn func"
+
+    ```{ .console }
+    kn func invoke
+    ```
 
 !!! Success "Expected output"
     ```{ .console .no-copy }
@@ -57,4 +67,4 @@ func invoke
     Body:
     ```
 
-Next, you will learn how to integrate a function with Knative Eventing.
+Next, you will learn how to integrate a function with Knative event sources.
