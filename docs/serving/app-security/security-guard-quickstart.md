@@ -37,7 +37,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
         If you are not using an operator, you may use the following command to update the config-deployment ConfigMap:
         ```
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/deploy/config-features.yaml`
+        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/deploy/config-features.yaml`
         ```
 
     1. Replace the queue-sidecar-image with `ghcr.io/knative.dev/security-guard/guard-service`
@@ -49,9 +49,9 @@ To start this tutorial, after installing Knative Serving, run the following proc
     1. Add the necessary Guard resources to your cluster using:
 
         ```
-        kubectl apply -Rf https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/gateAccount.yaml
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/serviceAccount.yaml
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/main/config/resources/guardiansCrd.yaml
+        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/resources/gateAccount.yaml
+        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/resources/serviceAccount.yaml
+        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/resources/guardiansCrd.yaml
         ```
 
     1. Deploy the gate-service on your system to enable automated learning of micro-rules.
