@@ -29,7 +29,7 @@ for the template files.  For example, the Knative Sandbox maintains a set of
 [example templates](https://github.com/knative-sandbox/func-tastic) which can be
 used during project creation.
 
-To use the [`metacontroller`](https://metacontroller.github.io/metacontroller/)
+To use the [`metacontroller`](https://metacontroller.github.io/metacontroller/){target=_blank}
 template for Node.js from this language pack you can run:
 
 ```{ .console }
@@ -39,7 +39,7 @@ func create myfunc -l nodejs -t metacontroller --repository https://github.com/k
 ### Locally Installing a Language Pack
 
 Language Packs can also be installed locally using the
-[`func repository`](https://github.com/knative/func/blob/main/docs/reference/func_repository.md)
+[`func repository`](https://github.com/knative/func/blob/main/docs/reference/func_repository.md){target=_blank}
 command. To add the Knative Sandbox example templates, you can run:
 
 ```{ .console }
@@ -56,4 +56,4 @@ func create -t knative/metacontroller -l nodejs my-controller-function
 A Language Pack can support additional function signatures and can fully customize
 the environment of the final running function.
 For more information see the
-[Language Pack Guide](https://github.com/knative/func/blob/main/docs/language-pack-providers/language-pack-contract.md).
+[Language Pack Guide](https://github.com/knative/func/blob/main/docs/language-pack-providers/language-pack-contract.md){target=_blank}.

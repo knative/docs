@@ -17,15 +17,19 @@ See [Install and Set Up `kubectl`](https://kubernetes.io/docs/tasks/tools/instal
 
 See [Installing `kn`](install-kn.md).
 
+### kn reference documentation
+
+See the [`kn` documentation]({{ clientdocs() }}){target=_blank} in Github.
+
 ## func
 
 `func` provides a quick and easy interface for getting started with Knative Services and Eventing without the need to understand the underlying concepts of Knative.
 
-See [Installing `func`](install-func.md).
+See [Installing `func`](../functions/install-func.md).
 
-### kn reference documentation
+### func reference documentation
 
-See the [`kn` documentation]({{ clientdocs() }}){target=_blank} in Github.
+See the [`func` documentation]({{ funcdocs() }}){target=_blank} in Github.
 
 ## Connecting CLI tools to your cluster
 
