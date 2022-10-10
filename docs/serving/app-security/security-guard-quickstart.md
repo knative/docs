@@ -92,6 +92,7 @@ Create a sample securedService:
         ```bash
         kubectl apply -f <filename>.yaml
         ```
+
         Where `<filename>` is the name of the file you created in the previous step.
 
 === "kn CLI"
@@ -112,25 +113,29 @@ Guard offers situational awareness by writing its alerts to the Service queue pr
 
 For example:
 
-    ```bash
+    ```
     $ curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
     Hello Secured World!
+    
     $ kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
     ...
     {..."message":"SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known"...}
     ...
+    
     $
     ```
 
 Another example:
 
-    ```bash
+    ```
     $ curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
     Hello Secured World!
+    
     $ kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
     ...
     {..."message":"SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16   "...}
     ...
+    
     $
     ```
 
