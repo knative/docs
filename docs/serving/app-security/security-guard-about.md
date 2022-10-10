@@ -22,6 +22,6 @@ When a known exploit is found effective to compromise a service, the Knative use
 
 Users need a way to detect/remove misused Service instances while allowing other instances to continue serve events - i.e. the user needs a way to stop Service instances that are exploited and are being misused.
 
-## More information
+## Additional resources
 
 See Readme files in the [Security-Guard Github Repository](http://knative.dev/security-guard).
