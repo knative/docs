@@ -40,19 +40,27 @@ We next detail each stage and how Security-Guard is used to manage the security 
 
 ### Zero-Day
 
-Under normal conditions, the Knative user who owns the service is not aware of any known vulnerabilities in the service. Yet, it is reasonable to assume that the service has weaknesses. Security-Guard offers Knative users the ability to detect/block patterns sent as part of incoming events that may be used to exploit unknown, zero-day, service vulnerabilities.
+Under normal conditions, the Knative user who owns the service is not aware of any known vulnerabilities in the service. Yet, it is reasonable to assume that the service has weaknesses.
+
+Security-Guard offers Knative users the ability to detect/block patterns sent as part of incoming events that may be used to exploit unknown, zero-day, service vulnerabilities.
 
 ### Vulnerable
 
-Once a CVE that describes a vulnerability in the service is published, the Knative user who owns the service is required to start a process to eliminate the vulnerability by introducing a new revision of the service. This process of removing a known vulnerability may take many weeks to accomplish. Security-Guard enable Knative users to set micro-rules to detect/block incoming events that include patterns that may be used as part of some future exploit targeting the discovered vulnerability. In this way, users are able to continue offering services, although the service has a known vulnerability.
+Once a CVE that describes a vulnerability in the service is published, the Knative user who owns the service is required to start a process to eliminate the vulnerability by introducing a new revision of the service. This process of removing a known vulnerability may take many weeks to accomplish.
+
+Security-Guard enable Knative users to set micro-rules to detect/block incoming events that include patterns that may be used as part of some future exploit targeting the discovered vulnerability. In this way, users are able to continue offering services, although the service has a known vulnerability.
 
 ### Exploitable
 
-When a known exploit is found effective to compromise a known vulnerability included in the service, the Knative user who owns the Service needs a way to filter incoming events that contain the specific exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container. Security-Guard enable Knative users a way to set micro-rules to detect/block incoming events that include specific exploits while allowing other events to be served.
+When a known exploit is found effective in compromising a service, the Knative user who owns the Service needs a way to filter incoming events that contain the specific exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container.
+
+Security-Guard enable Knative users a way to set micro-rules to detect/block incoming events that include specific exploits while allowing other events to be served.
 
 ### Misused
 
-When an offender have established an attack pattern that is able to take over a service instance, by first exploiting one more vulnerabilities and than starting to misuse the service instance, stopping the service instance requires the offender to repeat the attack pattern. At any given time, some service instances may be compromised and misused while other behaving as designed. Security-Guard enable Knative user a way to detect/remove misused Service instances while allowing other instances to continue serve events.
+When an offender has established an attack pattern that is able to take over a service instance, by first exploiting one or more vulnerabilities and then starting to misuse the service instance, stopping the service instance requires the offender to repeat the attack pattern. At any given time, some service instances may be compromised and misused while others behave as designed.
+
+Security-Guard enable Knative user a way to detect/remove misused Service instances while allowing other instances to continue serve events.
 
 ## Additional resources
 
