@@ -16,9 +16,9 @@ pushed to a container registry. This build step can be performed directly
 using the `func build` command to simply build and store the image locally.
 The function can then be run and tested locally as the container image using
 the `func run` command. See the
-[`func build`](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func_build.md){target=_blank}
+[`func build`](https://github.com/knative/func/blob/main/docs/reference/func_build.md){target=_blank}
 and
-[`func run`](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func_run.md){target=_blank}
+[`func run`](https://github.com/knative/func/blob/main/docs/reference/func_run.md){target=_blank}
 command reference for more information.
 
 ## On Cluster Builds
@@ -50,7 +50,7 @@ function once, you can omit it in subsequent commands.
 To perform an on-cluster build, you will need to configure your cluster with
 Tekton Pipelines. To learn more about building on your cluster, and those
 requirements, see the
-[On Cluster Build](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/on_cluster_build.md){target=_blank}
+[On Cluster Build](https://github.com/knative/func/blob/main/docs/reference/on_cluster_build.md){target=_blank}
 reference in the `func` documentation.
 
 ## Invoking Functions
@@ -62,5 +62,5 @@ CloudEvents correctly. If your function is running locally, `func invoke`
 will send a test request to the local instance. You can use the `func invoke`
 command to send test data to your function with the `--data` flag, as well as
 other options to simulate different types of requests. See the
-[func invoke command reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func_invoke.md){target=_blank}
+[func invoke command reference](https://github.com/knative/func/blob/main/docs/reference/func_invoke.md){target=_blank}
 for more information.

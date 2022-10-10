@@ -24,7 +24,7 @@ Do one of the following:
 
     You can install `func` by downloading the executable binary for your system and placing it in the system path.
 
-    1. Download the binary for your system from the [`func` release page](https://github.com/knative-sandbox/kn-plugin-func/releases){target=_blank}.
+    1. Download the binary for your system from the [`func` release page](https://github.com/knative/func/releases){target=_blank}.
 
     1. Rename the binary to `func` and make it executable by running the commands:
 
@@ -52,7 +52,7 @@ Do one of the following:
     1. Check out the `func` client repository:
 
           ```bash
-          git clone https://github.com/knative-sandbox/kn-plugin-func.git func
+          git clone https://github.com/knative/func.git func
           cd func/
           ```
 
@@ -77,7 +77,7 @@ Do one of the following:
     You can run `kn` from a container image. For example:
 
     ```bash
-    docker run --rm -it ghcr.io/knative-sandbox/kn-plugin-func/func create -l node -t http myfunc
+    docker run --rm -it ghcr.io/knative/func/func create -l node -t http myfunc
     ```
 
     !!! note

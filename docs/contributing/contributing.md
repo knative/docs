@@ -39,8 +39,8 @@ following components, look for GitHub issues marked with the good first issue la
 
 - **Functions:**
 
-    - For how to get started contributing, see the [Functions development workflow](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/CONTRIBUTING.md).
-    - For good starter issues, see [Functions issues](https://github.com/knative-sandbox/kn-plugin-func/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fgood-first-issue).
+    - For how to get started contributing, see the [Functions development workflow](https://github.com/knative/func/blob/main/docs/CONTRIBUTING.md).
+    - For good starter issues, see [Functions issues](https://github.com/knative/func/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fgood-first-issue).
 
 - **Documentation:**
 

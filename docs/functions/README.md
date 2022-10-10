@@ -14,4 +14,4 @@ function. You can also test a deployed function by invoking it
 locally or on a cluster. You can do all of these operations using the
 [`func`](./install-func.md) command line interface. To learn more about
 the `func` CLI, see the
-[CLI reference](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/reference/func.md){target=_blank}.
+[CLI reference](https://github.com/knative/func/blob/main/docs/reference/func.md){target=_blank}.
