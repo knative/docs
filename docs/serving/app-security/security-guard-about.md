@@ -2,7 +2,7 @@
 
 Guard provides visibility into the security status of deployed Knative Services, by monitoring the behaviors of user containers and events. It creates a profile of these behaviors, which are compared to a pre-defined criteria. If the profile does not meet the criteria, Guard can log alerts, block events, or stop the Service, depending on user configurations.
 
-The criteria is composed of a set of micro-rules describing the expectations from events and from the pod response and its general behavior. Knative users may choose to set micro-rules manually or may choose to use the Security-Guard offered machine learning feature to automate the creation of micro-rules. A per service set of micro-rules is stored in the Kubernetes system as a Guardian object - See diagram below. The Security-Guard supports storing the Guardian as a ConfigMap or as a CRD.
+The criteria that a profile is compared to is composed of a set of micro-rules. These rules describe expected behaviors for events and user containers, including expected responses. You can choose to set micro-rules manually, or use Guard's machine learning feature to automate the creation of micro-rules. A per-Service set of micro-rules is stored in the Kubernetes system as a `Guardian` object.
 
 ## Security-Guard Use Cases
 
