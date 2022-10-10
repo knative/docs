@@ -19,7 +19,7 @@ responds to HTTP requests. Create the function by running the command:
 === "func"
 
     ```{ .console}
-    func create hello
+    func create -l go hello
     ```
 
 === "kn func"

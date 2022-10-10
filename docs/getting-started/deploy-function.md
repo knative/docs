@@ -7,7 +7,7 @@ container registry and then deployed to your cluster as a Knative Service.
 If you followed the [Quickstart](./quickstart-install.md) section of the tutorial,
 you should already have a Docker daemon on your local machine.
 Deploying from a local build requires that you have this available.
-Additionally, you must have a Docker registry that you
+Additionally, you must have a container registry that you
 can push to. In the commands shown below, you will indicate the registry using the `--registry` flag. Typically the
 registry is specified as `<registry>/<username>`, for example
 `docker.io/exampleuser`.
