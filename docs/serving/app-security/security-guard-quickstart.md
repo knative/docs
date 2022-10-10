@@ -47,7 +47,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
         kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/guardiansCrd.yaml
         ```
 
-    1. Deploy `guard-service` on your system to enable automated learning of micro-rules. In the current version, it is recommended to deploy `guard-service` in any namespace where knative services are deployed. 
+    1. Deploy `guard-service` on your system to enable automated learning of micro-rules. In the current version, it is recommended to deploy `guard-service` in any namespace where knative services are deployed.
 
         An easy way to do that is using:
 
