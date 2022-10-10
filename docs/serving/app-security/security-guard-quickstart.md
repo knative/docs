@@ -24,7 +24,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
     Use released images to update your system to enable Guard:
 
     1. Set the feature named 'queueproxy.mount-podinfo' to `allowed` in the config-features ConfigMap. 
-       
+
         An easy way to do that is using:
 
         ```
@@ -34,7 +34,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
     1. Set the queue-sidecar-image to `gcr.io/knative-releases/knative.dev/security-guard/cmd/queue` in the config-deployment ConfigMap.
 
         An easy way to do that is using:
-        
+
         ```
         kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/queue-proxy.yaml
         ```
@@ -50,7 +50,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
     1. Deploy the gate-service on your system to enable automated learning of micro-rules.
 
         An easy way to do that is using:
-        
+
         ```
         kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/guard-service.yaml
         ```
@@ -89,7 +89,7 @@ Create a sample securedService:
 
     1. Apply the YAML file by running the command:
 
-        ```bash
+        ```
         kubectl apply -f <filename>.yaml
         ```
 
@@ -113,31 +113,37 @@ Guard offers situational awareness by writing its alerts to the Service queue pr
 
 For example:
 
-    ```
-    $ curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
-    Hello Secured World!
-    
-    $ kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
-    ...
-    {..."message":"SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known"...}
-    ...
-    
-    $
-    ```
+    1. Send an event with unexpected query string:
 
-Another example:
+        ```
+        curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
+        ```
 
-    ```
-    $ curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
-    Hello Secured World!
-    
-    $ kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
-    ...
-    {..."message":"SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16   "...}
-    ...
-    
-    $
-    ```
+        Expected Response: `Hello Secured World!`
+
+    1. Check alerts:
+
+        ```
+        kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+        ```
+
+        Expected Response: `...SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known...`
+
+    1. Now send an event with unexpected long url:
+
+        ```
+        curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
+        ```
+
+        Expected Response: `Hello Secured World!`
+
+    1. Check alerts:
+
+        ```
+        kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+        ```
+
+        Expected Response: `...SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16...`
 
 Security alerts appear in the guard log file and start with the string `SECURITY ALERT!`. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
 
