@@ -23,7 +23,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
     Use released images to update your system to enable Guard:
 
-    1. Set the feature named 'queueproxy.mount-podinfo' to `allowed` in the config-features ConfigMap. 
+    1. Set the feature named 'queueproxy.mount-podinfo' to `allowed` in the config-features ConfigMap.
 
         An easy way to do that is using:
 
@@ -113,7 +113,7 @@ Guard offers situational awareness by writing its alerts to the Service queue pr
 
 For example:
 
-    1. Send an event with unexpected query string:
+1. Send an event with unexpected query string:
 
         ```
         curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
@@ -121,7 +121,7 @@ For example:
 
         Expected Response: `Hello Secured World!`
 
-    1. Check alerts:
+1. Check alerts:
 
         ```
         kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
@@ -129,7 +129,7 @@ For example:
 
         Expected Response: `...SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known...`
 
-    1. Now send an event with unexpected long url:
+1. Now send an event with unexpected long url:
 
         ```
         curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
@@ -137,7 +137,7 @@ For example:
 
         Expected Response: `Hello Secured World!`
 
-    1. Check alerts:
+1. Check alerts:
 
         ```
         kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
