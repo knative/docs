@@ -9,7 +9,7 @@ The KPA acts on [metrics](autoscaling-metrics.md) (`concurrency` or `rps`) aggre
 These windows define the amount of historical data that the Autoscaler takes into account, and are used to smooth the data over the specified amount of time.
 The shorter these windows are, the more quickly the Autoscaler will react.
 
-The KPA's implementation has two modes: **stable** and **panic**.
+The KPA's implementation has two modes: **stable** and **panic**. There are separate aggregate windows for each mode: `stable-window` and `panic-window`, respecitvely.
 
 Stable mode is used for general operation, while panic mode by default has a much shorter window, and will be used to quickly scale a revision up if a burst of traffic arrives.
 
