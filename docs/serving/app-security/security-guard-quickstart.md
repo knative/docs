@@ -2,7 +2,7 @@
 
 Before starting the tutorial, learn [about Security-Guard](./security-guard-about.md)
 
-In this tutorial, deploy a Hello World service and protect it with Guard.
+This tutorial shows how you can use Guard to protect a deployed Knative Service.
 
 ## Before you begin
 
