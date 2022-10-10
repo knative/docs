@@ -17,7 +17,7 @@ control rules.
 ## Next steps
 
 - Create an [MT channel-based broker](create-mtbroker.md).
-- Configure [default broker ConfigMap settings](../broker-admin-config-options.md).
+- Configure [default broker ConfigMap settings](broker-admin-config-options.md).
 
 ## Additional resources
 
