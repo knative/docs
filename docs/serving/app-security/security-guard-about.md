@@ -1,6 +1,6 @@
 # About Security-Guard
 
-Security-Guard is a Knative instrumentation to monitor the security-behavior of user-containers and of Knative events in order to provide visibility into the security of deployed services. The instrumentation profile the behavior of received events and the behavior of the user-container processing them. The profiles are compared to a pre-defined  criteria. If the profile does not meet the criteria, Security-Guard may log an alert, may block the event or stop the service instance - all as defined by the knative user.
+Guard provides visibility into the security status of deployed Knative Services, by monitoring the behaviors of user containers and events. It creates a profile of these behaviors, which are compared to a pre-defined criteria. If the profile does not meet the criteria, Guard can log alerts, block events, or stop the Service, depending on user configurations.
 
 The criteria is composed of a set of micro-rules describing the expectations from events and from the pod response and its general behavior. Knative users may choose to set micro-rules manually or may choose to use the Security-Guard offered machine learning feature to automate the creation of micro-rules. A per service set of micro-rules is stored in the Kubernetes system as a Guardian object - See diagram below. The Security-Guard supports storing the Guardian as a ConfigMap or as a CRD.
 
