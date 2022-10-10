@@ -23,15 +23,15 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
     Use released images to update your system to enable Guard:
 
-    1. Set the feature named 'queueproxy.mount-podinfo' to `allowed` in the config-features ConfigMap.
+    1. Set the feature named `queueproxy.mount-podinfo` to `allowed` in the config-features ConfigMap.
 
         An easy way to do that is using:
 
         ```
-        kubectl apply -f https://https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/deploy/config-features.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/deploy/config-features.yaml
         ```
 
-    1. Set the queue-sidecar-image to `gcr.io/knative-releases/knative.dev/security-guard/cmd/queue` in the config-deployment ConfigMap.
+    1. Set the deployment parameter `queue-sidecar-image` to `gcr.io/knative-releases/knative.dev/security-guard/cmd/queue` in the config-deployment ConfigMap.
 
         An easy way to do that is using:
 
@@ -47,7 +47,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
         kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/guardiansCrd.yaml
         ```
 
-    1. Deploy the gate-service on your system to enable automated learning of micro-rules.
+    1. Deploy `guard-service` on your system to enable automated learning of micro-rules. In the current version, it is recommended to deploy `guard-service` in any namespace where knative services are deployed. 
 
         An easy way to do that is using:
 
