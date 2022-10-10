@@ -141,8 +141,8 @@ nav:
       - Application security:
         - About Security-Guard: serving/app-security/security-guard-about.md
         - Installing Security-Guard: serving/app-security/security-guard-install.md
-        - Security-guard quickstart: serving/app-security/security-guard-example-alerts.md
-        - Security-Guard example alerts: serving/app-security/security-guard-about.md
+        - Security-guard quickstart: serving/app-security/security-guard-quickstart.md
+        - Security-Guard example alerts: serving/app-security/security-guard-example-alerts.md
         - Using Security-Guard: serving/app-security/security-guard-using.md
       # Serving - observability
       - Observability:
