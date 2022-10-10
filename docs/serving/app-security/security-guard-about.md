@@ -48,19 +48,19 @@ Security-Guard offers Knative users the ability to detect/block patterns sent as
 
 Once a CVE that describes a vulnerability in the service is published, the Knative user who owns the service is required to start a process to eliminate the vulnerability by introducing a new revision of the service. This process of removing a known vulnerability may take many weeks to accomplish.
 
-Security-Guard enable Knative users to set micro-rules to detect/block incoming events that include patterns that may be used as part of some future exploit targeting the discovered vulnerability. In this way, users are able to continue offering services, although the service has a known vulnerability.
+Security-Guard enables Knative users to set micro-rules to detect/block incoming events that include patterns that may be used as part of some future exploit targeting the discovered vulnerability. In this way, users are able to continue offering services, although the service has a known vulnerability.
 
 ### Exploitable
 
 When a known exploit is found effective in compromising a service, the Knative user who owns the Service needs a way to filter incoming events that contain the specific exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container.
 
-Security-Guard enable Knative users a way to set micro-rules to detect/block incoming events that include specific exploits while allowing other events to be served.
+Security-Guard enables Knative users a way to set micro-rules to detect/block incoming events that include specific exploits while allowing other events to be served.
 
 ### Misused
 
 When an offender has established an attack pattern that is able to take over a service instance, by first exploiting one or more vulnerabilities and then starting to misuse the service instance, stopping the service instance requires the offender to repeat the attack pattern. At any given time, some service instances may be compromised and misused while others behave as designed.
 
-Security-Guard enable Knative user a way to detect/remove misused Service instances while allowing other instances to continue serve events.
+Security-Guard enables Knative user a way to detect/remove misused Service instances while allowing other instances to continue serve events.
 
 ## Additional resources
 
