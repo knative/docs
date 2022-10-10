@@ -16,20 +16,20 @@ A per-Service set of micro-rules is stored in the Kubernetes system as a `Guardi
 
 To list all CRD Guardians use:
 
-    ```
-    kubectl get guardians.guard.security.knative.dev 
-    ```
+```bash
+kubectl get guardians.guard.security.knative.dev
+```
 
 Example Output:
 
-    ```
-    NAME            AGE
-    helloworld-go   10h
-    ```
+```sh
+NAME            AGE
+helloworld-go   10h
+```
 
 ## Security-Guard Use Cases
 
-Security-Guard support four different stages in the life of a knative service from a security standpoint.  
+Security-Guard support four different stages in the life of a knative service from a security standpoint.
 
 * Zero-Day
 * Vulnerable
@@ -44,15 +44,15 @@ Under normal conditions, the Knative user who owns the service is not aware of a
 
 ### Vulnerable
 
-Once a CVE that describes a vulnerability in the service is published, the Knative user who owns the service is required to start a process to eliminate the vulnerability by introducing a new revision of the service. This process of removing a known vulnerability may take many weeks to accomplish. Knative users need to continue offering services, although the service has a known vulnerability, and therefore need to detect/block incoming events that include patterns that may be used as part of some future exploit targeting the discovered vulnerability.
+Once a CVE that describes a vulnerability in the service is published, the Knative user who owns the service is required to start a process to eliminate the vulnerability by introducing a new revision of the service. This process of removing a known vulnerability may take many weeks to accomplish. Security-Guard enable Knative users to set micro-rules to detect/block incoming events that include patterns that may be used as part of some future exploit targeting the discovered vulnerability. In this way, users are able to continue offering services, although the service has a known vulnerability.
 
 ### Exploitable
 
-When a known exploit is found effective to compromise a known vulnerability included in the service, the Knative user who owns the Service needs a way to filter incoming events that contain the specific exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container. Users therefore need a way to detect/block incoming events that include specific exploits while allowing other events to be served.
+When a known exploit is found effective to compromise a known vulnerability included in the service, the Knative user who owns the Service needs a way to filter incoming events that contain the specific exploit. This is normally the case during a successful attack, where a working exploit is able to compromise the user-container. Security-Guard enable Knative users a way to set micro-rules to detect/block incoming events that include specific exploits while allowing other events to be served.
 
 ### Misused
 
-Users need a way to detect/remove misused Service instances while allowing other instances to continue serve events - i.e. the user needs a way to stop Service instances that are exploited and are being misused.
+When an offender have established an attack pattern that is able to take over a service instance, by first exploiting one more vulnerabilities and than starting to misuse the service instance, stopping the service instance requires the offender to repeat the attack pattern. At any given time, some service instances may be compromised and misused while other behaving as designed. Security-Guard enable Knative user a way to detect/remove misused Service instances while allowing other instances to continue serve events.
 
 ## Additional resources
 
