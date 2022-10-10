@@ -436,3 +436,64 @@ metadata:
   annotations: features.knative.dev/queueproxy-podinfo: enabled
 ...
 ```
+
+### Kubernetes Topology Spread Constraints
+
+* **Type**: Extension
+* **ConfigMap key:** `kubernetes.podspec-topologyspreadconstraints`
+
+This flag controls whether [`topology spread constraints`](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      ...
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: node
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            foo: bar
+...
+```
+
+### Kubernetes DNS Policy
+
+* **Type**: Extension
+* **ConfigMap key:** `kubernetes.podspec-dnspolicy`
+
+This flag controls whether a [`DNS policy`](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+...
+```
+
+### Kubernetes Scheduler Name
+
+* **Type**: Extension
+* **ConfigMap key:** `kubernetes.podspec-schedulername`
+
+This flag controls whether a [`scheduler name`](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) can be specified.
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      ...
+      schedulerName: custom-scheduler-example
+...
+```
