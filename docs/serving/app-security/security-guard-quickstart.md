@@ -58,6 +58,6 @@ Create a sample securedService:
 
 After the Service has been created, Guard starts monitoring the Service Pods and all Events sent to the Service.
 
-Continue to [Security-Guard alert example](./security-guard-alert-examples.md) to test your installation
+Continue to [Security-Guard alert example](./security-guard-example-alerts.md) to test your installation
 
 Then continue to [Using Security-Guard](./security-guard-using.md) to learn about managing the security of the service
