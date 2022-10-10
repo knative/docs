@@ -24,7 +24,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
     Use released images to update your system to enable Guard:
 
     1. Change in config-features the feature named 'queueproxy.mount-podinfo' to `allowed`
-       for example if you are not using an operator, you may update config-features directly using
+       Either update config-features directly using
         `kubectl edit ConfigMaps -n knative-serving config-features` as follows:
 
         ```
@@ -35,29 +35,29 @@ To start this tutorial, after installing Knative Serving, run the following proc
             queueproxy.mount-podinfo: allowed
         ```
 
-        If you are not using an operator, you may use the following command to update the config-deployment ConfigMap:
+        Or use the following command to update the config-deployment ConfigMap:
         ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/deploy/config-features.yaml`
+        kubectl apply -f https://https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/deploy/config-features.yaml
         ```
 
     1. Replace the queue-sidecar-image with `ghcr.io/knative.dev/security-guard/guard-service`
        for example if you are not using an operator, you may use the following command to update the config-deployment ConfigMap:
         ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/queue-proxy.yaml`
+        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/queue-proxy.yaml
         ```
 
     1. Add the necessary Guard resources to your cluster using:
 
         ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/resources/gateAccount.yaml
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/resources/serviceAccount.yaml
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/blob/release-0.1/config/resources/guardiansCrd.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/gateAccount.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/serviceAccount.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/guardiansCrd.yaml
         ```
 
     1. Deploy the gate-service on your system to enable automated learning of micro-rules.
 
         ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/guard-service.yaml`
+        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/guard-service.yaml
         ```
 
 ## Creating and deploying a service
@@ -113,14 +113,30 @@ After the Service has been created, Guard starts monitoring the Service Pods and
 
 ## Managing the security of the service
 
-Guard offers situational awareness by writing its alerts to the Service queue proxy log.
+Guard offers situational awareness by writing its alerts to the Service queue proxy log. You may observe the queue-proxy to see alerts.
 
-Example output:
+For example:
 
-    ```text
-    [...]
-    {"level":"warn","message":"SECURITY ALERT! HttpRequest: Headers: KeyVal: Known Key X-B3-Traceid: Digits: Counter out of Range: 25"}
-    [...]
+    ```bash
+    $ curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
+    Hello Secured World!
+    $ kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+    ...
+    {..."message":"SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known"...}
+    ...
+    $
+    ```
+
+Another example:
+
+    ```bash
+    $ curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
+    Hello Secured World!
+    $ kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+    ...
+    {..."message":"SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16   "...}
+    ...
+    $
     ```
 
 Security alerts appear in the guard log file and start with the string `SECURITY ALERT!`. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
