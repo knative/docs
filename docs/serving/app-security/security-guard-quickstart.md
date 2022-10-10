@@ -1,59 +1,10 @@
-# Security-Guard Monitoring Quickstart
+# Security-Guard monitoring quickstart
 
-Before starting the tutorial, learn [about Security-Guard](./security-guard-about.md)
-
-This tutorial shows how you can use Guard to protect a deployed Knative Service.
+This tutorial shows how you can use Security-Guard to protect a deployed Knative Service.
 
 ## Before you begin
 
-Using Guard requires that your cluster will use an enhanced queue-proxy image.
-In addition, Guard include automation for auto-learning a per service Guardian. Auto-learning requires you to deploy a guard-service on your kubernetes cluster.
-
-To start this tutorial, after installing Knative Serving, run the following procedure to replace your queue-proxy image and deploy a guard-service in the current namespace.
-
-=== "Install from source"
-
-    1. Clone the security-guard repository using `git clone git@github.com:knative-sandbox/security-guard.git`
-
-    1. Do `cd security-guard`
-
-    1. Run `ko apply -Rf ./config`
-
-=== "Install from released images and yamls"
-
-    Use released images to update your system to enable Guard:
-
-    1. Set the feature named `queueproxy.mount-podinfo` to `allowed` in the config-features ConfigMap.
-
-        An easy way to do that is using:
-
-        ```
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/deploy/config-features.yaml
-        ```
-
-    1. Set the deployment parameter `queue-sidecar-image` to `gcr.io/knative-releases/knative.dev/security-guard/cmd/queue` in the config-deployment ConfigMap.
-
-        An easy way to do that is using:
-
-        ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/queue-proxy.yaml
-        ```
-
-    1. Add the necessary Guard resources to your cluster using:
-
-        ```
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/gateAccount.yaml
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/serviceAccount.yaml
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.1/config/resources/guardiansCrd.yaml
-        ```
-
-    1. Deploy `guard-service` on your system to enable automated learning of micro-rules. In the current version, it is recommended to deploy `guard-service` in any namespace where knative services are deployed.
-
-        An easy way to do that is using:
-
-        ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.1.0/guard-service.yaml
-        ```
+Before starting the tutorial, make sure to [install Security-Guard](./security-guard-install.md)
 
 ## Creating and deploying a service
 
@@ -107,66 +58,17 @@ Create a sample securedService:
 
 After the Service has been created, Guard starts monitoring the Service Pods and all Events sent to the Service.
 
-## Example alerts
-
-1. Send an event with unexpected query string, for example:
-
-     ```bash
-     curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
-     ```
-
-     This returns an output similar to the following:
-
-     ```sh
-     Hello Secured World!
-     ```
-
-1. Check alerts:
-
-     ```bash
-     kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
-     ```
-
-     This returns an output similar to the following:
-
-     ```sh
-     ...SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known...
-     ```
-
-1. Send an event with unexpected long url, for example:
-
-     ```bash
-     curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
-     ```
-
-     This returns an output similar to the following:
-
-     ```sh
-     Hello Secured World!
-     ```
-
-1. Check alerts:
-
-     ```bash
-     kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
-     ```
-
-     This returns an output similar to the following:
-
-     ```sh
-     ...SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16...
-     ```
-
+Use [Security-Guard alert example](./security-guard-install.md) to test your installation
 
 ## Managing the security of the service
 
-Guard offers situational awareness by writing its alerts to the Service queue proxy log. You may observe the queue-proxy to see alerts.
+Security-Guard offers situational awareness by writing its alerts to the Service queue proxy log. You may observe the queue-proxy to see alerts.
 
-Security alerts appear in the guard log file and start with the string `SECURITY ALERT!`. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
+Security alerts appear in the queue proxy log file and start with the string `SECURITY ALERT!`. The default setup of Security-Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Security-Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Security-Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
 
-Note that in the default setup, Guard continues to learn any new behavior and therefore avoids reporting alerts repeatedly when the new behavior reoccurs. Correct security procedures should include reviewing any new behavior detected by Guard.
+Note that in the default setup, Security-Guard continues to learn any new behavior and therefore avoids reporting alerts repeatedly when the new behavior reoccurs. Correct security procedures should include reviewing any new behavior detected by Security-Guard.
 
-Guard can also be configured to operate in other modes of operation, such as:
+Security-Guard can also be configured to operate in other modes of operation, such as:
 
 * Move from auto learning to manual micro-rules management after the initial learning period
 * Block requests/responses when they do not conform to the micro-rules
