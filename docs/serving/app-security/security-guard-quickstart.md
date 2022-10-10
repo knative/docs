@@ -109,35 +109,58 @@ After the Service has been created, Guard starts monitoring the Service Pods and
 
 ## Example alerts
 
-Guard offers situational awareness by writing its alerts to the Service queue proxy log. You may observe the queue-proxy to see alerts.
+1. Send an event with unexpected query string, for example:
 
-For example:
+     ```bash
+     curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
+     ```
 
-1. Send an event with unexpected query string:
+     This returns an output similar to the following:
 
-    curl "http://helloworld-go.default.52.118.14.2.sslip.io?a=3"
-
-Expected Response: `Hello Secured World!`
-
-1. Check alerts:
-
-    kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
-
-Expected Response: `...SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known...`
-
-1. Now send an event with unexpected long url:
-
-    curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
-
-Expected Response: `Hello Secured World!`
+     ```sh
+     Hello Secured World!
+     ```
 
 1. Check alerts:
 
-    kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+     ```bash
+     kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+     ```
 
-Expected Response: `...SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16...`
+     This returns an output similar to the following:
+
+     ```sh
+     ...SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known...
+     ```
+
+1. Send an event with unexpected long url, for example:
+
+     ```bash
+     curl "http://helloworld-go.default.52.118.14.2.sslip.io/AAAAAAAAAAAAAAAA"
+     ```
+
+     This returns an output similar to the following:
+
+     ```sh
+     Hello Secured World!
+     ```
+
+1. Check alerts:
+
+     ```bash
+     kubectl logs deployment/helloworld-go-00001-deployment queue-proxy|grep "SECURITY ALERT!"
+     ```
+
+     This returns an output similar to the following:
+
+     ```sh
+     ...SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16...
+     ```
+
 
 ## Managing the security of the service
+
+Guard offers situational awareness by writing its alerts to the Service queue proxy log. You may observe the queue-proxy to see alerts.
 
 Security alerts appear in the guard log file and start with the string `SECURITY ALERT!`. The default setup of Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
 
