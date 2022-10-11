@@ -249,7 +249,6 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
     Supported `http-protocol` values:
 
     - `Enabled`: Serve HTTP traffic.
-    - `Disabled`: Rejects all HTTP traffic.
     - `Redirected`: Responds to HTTP request with a `302` redirect to ask the
       clients to use HTTPS.
 
