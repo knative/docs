@@ -60,7 +60,7 @@ Security-Guard enables Knative users a way to set micro-rules to detect/block in
 
 When an offender has established an attack pattern that is able to take over a service instance, by first exploiting one or more vulnerabilities and then starting to misuse the service instance, stopping the service instance requires the offender to repeat the attack pattern. At any given time, some service instances may be compromised and misused while others behave as designed.
 
-Security-Guard enables Knative user a way to detect/remove misused Service instances while allowing other instances to continue serve events.
+Security-Guard enables Knative users a way to detect/remove misused Service instances while allowing other instances to continue serve events.
 
 ## Additional resources
 

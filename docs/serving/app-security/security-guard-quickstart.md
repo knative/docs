@@ -61,3 +61,29 @@ After the Service has been created, Guard starts monitoring the Service Pods and
 Continue to [Security-Guard alert example](./security-guard-example-alerts.md) to test your installation
 
 Then continue to [Using Security-Guard](./security-guard-using.md) to learn about managing the security of the service
+
+## Cleanup
+
+To remove the deployed service use:
+
+=== "Apply YAML"
+
+    1. Delete using the YAML file used to create the service by running the command:
+
+        ```
+        kubectl delete -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "kn CLI"
+
+    ```
+    kn service delete helloworld-go
+    ```
+
+To remove the Guardian of the deployed service use:
+
+    ```sh
+    kubectl delete guardians.guard.security.knative.dev helloworld-go
+    ```
