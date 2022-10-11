@@ -305,14 +305,21 @@ data:
 
     The pod now has two containers:
 
-    ```bash
+    ```{ .bash .no-copy }
     knative-eventing     <broker-ingress-pod-name>           2/2     Running   1              175m
     ```
 
 1. Create a broker, then use get the URL of your broker by running the command:
 
     ```bash
-    kubectl get broker -A
+    kubectl get broker <broker-name>
+    ```
+
+    Example output:
+
+    ```{ .bash .no-copy }
+    NAMESPACE   NAME        URL                                                                          AGE   READY   REASON
+    default     my-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/my-broker   6s    True
     ```
 
 1. Start a `curl` pod:
@@ -336,7 +343,7 @@ data:
 
     Where `<broker-URL>` is the URL of your broker. For example:
 
-    ```bash
+    ```{ .bash .no-copy }
     curl -X POST -v \
     -H "content-type: application/json"  \
     -H "ce-specversion: 1.0"  \
@@ -349,7 +356,7 @@ data:
 
 1. You will receive a `202` HTTP response code, that the broker did accept the request:
 
-    ```bash
+    ```{ .bash .no-copy }
     ...
     * Mark bundle as not supporting multiuse
     < HTTP/1.1 202 Accepted
@@ -397,7 +404,7 @@ data:
 
 1. Now retrying the `curl` command results in a `403 - Forbidden` response code from the server:
 
-    ```bash
+    ```{ .bash .no-copy }
     ...
     * Mark bundle as not supporting multiuse
     < HTTP/1.1 403 Forbidden
@@ -427,7 +434,7 @@ data:
 
     The server now responds with a `202` response code, indicating that it has accepted the HTTP request:
 
-    ```bash
+    ```{ .bash .no-copy }
     * Mark bundle as not supporting multiuse
     < HTTP/1.1 202 Accepted
     < allow: POST, OPTIONS
