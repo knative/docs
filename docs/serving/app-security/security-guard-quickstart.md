@@ -68,13 +68,13 @@ To remove the deployed service use:
 
 === "Apply YAML"
 
-    1. Delete using the YAML file used to create the service by running the command:
+    Delete using the YAML file used to create the service by running the command:
 
-        ```
-        kubectl delete -f <filename>.yaml
-        ```
+    ```
+    kubectl delete -f <filename>.yaml
+    ```
 
-        Where `<filename>` is the name of the file you created in the previous step.
+    Where `<filename>` is the name of the file you created in the previous step.
 
 === "kn CLI"
 
