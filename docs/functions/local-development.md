@@ -12,7 +12,7 @@ and
 [`func run`](https://github.com/knative/func/blob/main/docs/reference/func_run.md){target=_blank}
 command reference for more information.
 
-## On Cluster Builds
+## On-cluster Builds
 
 In the [Creating a Knative Function](../getting-started/creating-function.md) tutorial, when
 you deployed your function, the build step was performed on your local computer.
