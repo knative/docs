@@ -4,7 +4,7 @@ In the previous section, you created a basic function that could receive
 and respond to HTTP requests. Now, let's create a new function that can respond
 to CloudEvents that are sent by Knative Eventing resources.
 
-In this tutorial, you will create a simple Knative event source to generate
+In this section, you will create a simple Knative event source to generate
 CloudEvents, as well as other Knative Eventing resources. You'll learn more
 about Knative Eventing [later on in this tutorial](./getting-started-eventing.md).
 
@@ -102,7 +102,7 @@ the `--sink` flag specifies your function as the destination for the CloudEvents
 Create a Trigger named `ping-trigger` by running the command:
 
 ```{ .console }
-kn trigger create ping-trigger --sink hello
+kn trigger create ping-trigger --sink echo
 ```
 
 !!! Success "Expected output"

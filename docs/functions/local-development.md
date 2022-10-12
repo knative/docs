@@ -1,13 +1,4 @@
-# Next Steps with Knative Functions
-
-Knative Functions are meant to get developers started quickly with Knative.
-Functions are a great way to learn about Knative, and help you understand
-how to use Knative Serving and Eventing resources. Now that you have created
-your first Function, and followed the Serving and Eventing tutorials, you
-are ready to learn more about the Function lifecycle and its integration
-with Knative Serving and Eventing.
-
-## Local Builds
+# Local Development
 
 In the [Creating a Knative Function](../getting-started/creating-function.md) tutorial, you
 learned how to create and deploy a Knative Function. During the deployment,

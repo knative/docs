@@ -1,20 +1,14 @@
 # Creating a Knative Function
 
-Functions are the easiest path to get started with
-Knative, providing a programming model that leverages the Knative
-Serving and Eventing APIs for a quick and easy method of deploying your
-first Knative applications. You don't need to know anything
-about Knative or even Kubernetes resources to get started.
-
-The purpose of this tutorial is to:
-
-- Help you quickly go from a business need to a running application
-- Demonstrate that you do not need Kubernetes knowledge to run a Knative application
-- Show that it is easy to build small integrations which can connect to a larger ecosystem
-- Provide a foundation from which you can begin to explore the rest of Knative and Kubernetes when you need it
-
 In this tutorial, you will create and deploy a Knative Function in Go that
-responds to HTTP requests. Create the function by running the command:
+responds to HTTP requests. The purpose of this tutorial is to:
+
+- Show how to quickly go from a business need to a running application
+- Show that you do not need Kubernetes knowledge to run a Knative application
+- Show that it is easy to build small integrations which can connect to a larger ecosystem
+- Provide a foundation for exploring the rest of Knative and Kubernetes when you need it
+
+Create the function by running the command:
 
 === "func"
 
