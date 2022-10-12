@@ -22,12 +22,17 @@ nav:
     - Tutorial:
         - Tutorial introduction: getting-started/README.md
         - Install Knative using quickstart: getting-started/quickstart-install.md
-        - Using Knative Serving:
+        - Knative Functions:
+          - About Knative Functions: getting-started/about-knative-functions.md
+          - Installing Knative Functions: getting-started/install-func.md
+          - Creating a function: getting-started/create-a-function.md
+          - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
+        - Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
           - Autoscaling: getting-started/first-autoscale.md
           - Traffic splitting: getting-started/first-traffic-split.md
-        - Using Knative Eventing:
-          - Introducing Knative Eventing: getting-started/getting-started-eventing.md
+        - Knative Eventing:
+          - About Knative Eventing: getting-started/getting-started-eventing.md
           - Sources, Brokers, and Triggers: getting-started/first-broker.md
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
@@ -72,6 +77,14 @@ nav:
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
       # Uninstall
       - Uninstalling Knative: install/uninstall.md
+###############################################################################
+    # Functions
+###############################################################################
+    - Functions:
+      - Knative Functions overview: functions/README.md
+      - Installing Knative Functions: functions/install-func.md
+      - Creating functions: functions/creating-functions.md
+      - Building, running, or deploying functions: functions/build-run-deploy-func.md
 ###############################################################################
     # Serving
 ###############################################################################

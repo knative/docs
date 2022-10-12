@@ -24,7 +24,7 @@ You can view all available `kn` plugins in the [Knative Sandbox repository](http
 | [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) | `kn` plugin for managing a Kubernetes based Knative installation | Y |
 | [kn-plugin-diag](https://github.com/knative-sandbox/kn-plugin-diag) | `kn` plugin for diagnosing issues by exposing detailed information for different layers of Knative objects | N |
 | [kn-plugin-event](https://github.com/knative-sandbox/kn-plugin-event) | `kn` plugin for sending events to Knative sinks | Y |
-| [kn-plugin-func](https://github.com/knative-sandbox/kn-plugin-func) | `kn` plugin for functions | Y |
+| [kn-plugin-func](https://github.com/knative/func) | `kn` plugin for functions | Y |
 | [kn-plugin-migration](https://github.com/knative-sandbox/kn-plugin-migration) | `kn` plugin for migrating Knative Services from one cluster to another | N |
 | [kn-plugin-operator](https://github.com/knative-sandbox/kn-plugin-operator) | `kn` plugin for managing Knative with Knative Operator | N |
 | [kn-plugin-quickstart](https://github.com/knative-sandbox/kn-plugin-quickstart) | `kn` plugin for developers to install a quickstart Knative cluster for experimentation purposes | Y |

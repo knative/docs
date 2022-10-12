@@ -25,26 +25,26 @@ following components, look for GitHub issues marked with the good first issue la
 
 - **Knative Serving:**
 
-    - For how to get started contributing, see the [Serving development workflow](https://github.com/knative/serving/blob/main/DEVELOPMENT.md).
+    - To get started with contributing, see the [Serving development workflow](https://github.com/knative/serving/blob/main/DEVELOPMENT.md).
     - For good starter issues, see [Serving issues](https://github.com/knative/serving/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22).
 
 - **Knative Eventing:**
-    - For how to get started contributing, see the [Eventing development workflow](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md).
+    - To get started with contributing, see the [Eventing development workflow](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md).
     - For good starter issues, see [Eventing issues](https://github.com/knative/eventing/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
 
 - **Knative Client (kn):**
 
-    - For how to get started contributing, see the [Client development workflow](https://github.com/knative/client/blob/main/docs/DEVELOPMENT.md).
+    - To get started with contributing, see the [Client development workflow](https://github.com/knative/client/blob/main/docs/DEVELOPMENT.md).
     - For good starter issues, see [Client issues](https://github.com/knative/client/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
 
 - **Functions:**
 
-    - For how to get started contributing, see the [Functions development workflow](https://github.com/knative-sandbox/kn-plugin-func/blob/main/docs/CONTRIBUTING.md).
-    - For good starter issues, see [Functions issues](https://github.com/knative-sandbox/kn-plugin-func/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fgood-first-issue).
+    - To get started with contributing, see the [Functions development workflow](https://github.com/knative/func/blob/main/docs/CONTRIBUTING.md).
+    - For good starter issues, see [Functions issues](https://github.com/knative/func/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fgood-first-issue).
 
 - **Documentation:**
 
-    - For how to get started contributing, see the [Docs contributor guide](https://github.com/knative/docs/blob/main/contribute-to-docs/README.md#knative-docs-contributor-guide).
+    - To get started with contributing, see the [Docs contributor guide](https://github.com/knative/docs/blob/main/contribute-to-docs/README.md#knative-docs-contributor-guide).
     - For good starter issues, see [Documentation issues](https://github.com/knative/docs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Akind%2Fgood-first-issue).
 
 ## Contribute code samples to the community
