@@ -1,4 +1,4 @@
-# Introducing Knative Eventing
+# About Knative Eventing
 
 Knative Eventing provides you with helpful tools that can be used to create event-driven applications, by easily attaching event sources, triggers, and other options to your Knative Services.
 
