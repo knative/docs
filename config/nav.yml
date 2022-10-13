@@ -183,6 +183,9 @@ nav:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
           - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
+          - RedisStreamSource:
+            - About RedisStreamSource: eventing/sources/redis/README.md
+            - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
