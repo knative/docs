@@ -163,7 +163,7 @@ nav:
             - Knative Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-mtbroker.md
-#          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
+          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
@@ -225,7 +225,6 @@ nav:
         # Eventing config
         - Eventing configuration:
           - Configure Channel defaults: eventing/configuration/channel-configuration.md
-          - Configure Broker defaults: eventing/configuration/broker-configuration.md
           - Configure Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
