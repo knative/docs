@@ -4,7 +4,7 @@
 
 This topic describes how to create a `RedisStreamSource` object.
 
-## Install RedisStreamSource
+## Install the RedisStreamSource add-on
 
 `RedisStreamSource` is a Knative Eventing add-on.
 
