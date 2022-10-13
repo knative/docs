@@ -1,4 +1,4 @@
-# Creating a RedisStreamSource object
+# Creating a RedisStreamSource
 
 ![version](https://img.shields.io/badge/API_Version-v1alpha1-red?style=flat-square)
 
