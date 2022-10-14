@@ -170,7 +170,7 @@ nav:
             - Knative Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-mtbroker.md
-#          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
+          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
@@ -185,12 +185,14 @@ nav:
             - About ApiServerSource: eventing/sources/apiserversource/README.md
             - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
             - ApiServerSource reference: eventing/sources/apiserversource/reference.md
-          - CamelSource: eventing/sources/apache-camel-source/README.md
           - KafkaSource: eventing/sources/kafka-source/README.md
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
           - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
+          - RedisStreamSource:
+            - About RedisStreamSource: eventing/sources/redis/README.md
+            - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
@@ -233,7 +235,6 @@ nav:
         # Eventing config
         - Eventing configuration:
           - Configure Channel defaults: eventing/configuration/channel-configuration.md
-          - Configure Broker defaults: eventing/configuration/broker-configuration.md
           - Configure Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md

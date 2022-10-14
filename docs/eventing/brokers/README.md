@@ -4,9 +4,7 @@
 
 ## Event delivery
 
-Event delivery mechanics are an implementation detail that depend on the configured
-[broker class](../configuration/broker-configuration.md#broker-class-options).
-Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
+Event delivery mechanics are an implementation detail that depend on the configured broker class. Using brokers and triggers abstracts the details of event routing from the event producer and event consumer.
 
 ## Advanced use cases
 
@@ -19,7 +17,7 @@ control rules.
 ## Next steps
 
 - Create an [MT channel-based broker](create-mtbroker.md).
-- Configure [default broker ConfigMap settings](../configuration/broker-configuration.md).
+- Configure [default broker ConfigMap settings](broker-admin-config-options.md).
 
 ## Additional resources
 
