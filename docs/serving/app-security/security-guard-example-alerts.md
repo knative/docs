@@ -48,5 +48,3 @@
      ```sh
      ...SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16...
      ```
-
-Continue to [Using Security-Guard](./security-guard-using.md) to learn about managing the security of the service
