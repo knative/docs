@@ -24,7 +24,7 @@ Knative releases from 1.8 onwards are signed with [cosign](https://docs.sigstore
 1. If the signature is valid, you can then verify the SHA256 sums match with the downloaded binary:
     ```sh
     sha256sum --ignore-missing -c checksums.txt
- 
+
 
 !!! note
     `COSIGN_EXPERIMENTAL=1` is used to allow verification of images signed
