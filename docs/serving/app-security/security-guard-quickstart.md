@@ -70,7 +70,7 @@ To remove the deployed service use:
 
     Delete using the YAML file used to create the service by running the command:
 
-    ```
+    ```bash
     kubectl delete -f <filename>.yaml
     ```
 
@@ -78,12 +78,12 @@ To remove the deployed service use:
 
 === "kn CLI"
 
-    ```
+    ```bash
     kn service delete helloworld-go
     ```
 
-To remove the Guardian of the deployed service use:
+   To remove the Guardian of the deployed service use:
 
-    ```sh
+    ```bash
     kubectl delete guardians.guard.security.knative.dev helloworld-go
     ```
