@@ -60,7 +60,7 @@ After the Service has been created, Guard starts monitoring the Service Pods and
 
 Continue to [Security-Guard alert example](./security-guard-example-alerts.md) to test your installation
 
-Then continue to [Using Security-Guard](./security-guard-using.md) to learn about managing the security of the service
+See the [Using Security-Guard section](./security-guard-about.md) to learn about managing the security of the service
 
 ## Cleanup
 
