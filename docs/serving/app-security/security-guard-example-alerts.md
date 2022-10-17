@@ -1,5 +1,5 @@
 
-# Secueity-Guard example alerts
+# Security-Guard example alerts
 
 1. Send an event with unexpected query string, for example:
 
