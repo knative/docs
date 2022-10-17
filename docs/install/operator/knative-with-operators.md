@@ -10,6 +10,7 @@ The following table describes the supported versions of Serving and Eventing for
 | v1.7.0   | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0<br/>v1.4.0 | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0, v1.5.1, v1.5.2 and v1.5.3<br/>v1.4.0, v1.4.1 and v1.4.2 |
 
 --8<-- "prerequisites.md"
+--8<-- "security-prereqs-images.md"
 
 ## Install the Knative Operator
 

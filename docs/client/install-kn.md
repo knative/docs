@@ -2,6 +2,7 @@
 
 This guide provides details about how you can install the Knative `kn` CLI.
 
+--8<-- "security-prereqs-binaries.md"
 --8<-- "install-kn.md"
 
 ## Install kn using the nightly-built binary
