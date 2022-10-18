@@ -25,7 +25,6 @@ Knative releases from 1.8 onwards are signed with [cosign](https://docs.sigstore
     ```sh
     sha256sum --ignore-missing -c checksums.txt
 
-
 !!! note
     `COSIGN_EXPERIMENTAL=1` is used to allow verification of images signed
     in `KEYLESS` mode. To learn more about keyless signing, please refer to

@@ -18,3 +18,9 @@ done < "$input"
 
 kubectl apply -f serving-core.yaml
 ```
+
+!!! note
+    `COSIGN_EXPERIMENTAL=1` is used to allow verification of images signed
+    in `KEYLESS` mode. To learn more about keyless signing, please refer to
+    [Keyless Signatures](https://github.com/sigstore/cosign/blob/main/KEYLESS.md#keyless-signatures)
+    Our signing identity(Subject) for our releases is `signer@knative-nightly.iam.gserviceaccount.com` and the Issuer is `https://accounts.google.com`
