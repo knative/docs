@@ -17,7 +17,7 @@
   </p>
   <br>
   <p class="normal-text">
-    Knative does this through two features. The first is Knative Eventing. Eventing allows developers to set up detailed actions triggered by specific events within a broader environment. The second is Knative Serving, which automatically manages the creation and scaling of services through Kubernetes, including scaling down to zero. Each of these features aims to free up resources that teams would otherwise spend managing systems. They also save businesses money by reacting to conditions in real—time. Meaning, companies only pay for the resources they are using, not the ones they might use.
+    Knative does this through two features. The first is Knative Eventing. Eventing allows developers to set up detailed actions triggered by specific events within a broader environment. The second is Knative Serving, which automatically manages the creation and scaling of services through Kubernetes, including scaling down to zero. Each of these features aims to free up resources that teams would otherwise spend managing systems. They also save businesses money by reacting to conditions in real time. Meaning, companies only pay for the resources they are using, not the ones they might use.
   </p>
   <br>
   <div class="testimonial blue">
