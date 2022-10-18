@@ -2,7 +2,7 @@
 - /docs/getting-started/build-run-deploy-func.md
 - /docs/functions/build-run-deploy-func.md
 -->
-The `deploy` command uses the function project name and the image registry name to construct a fully qualified image name for your function.
+The `deploy` command uses the function project name as the Knative Service name. When the function is built, the project name and the image registry name are used to construct a fully qualified image name for the function.
 
 === "func"
 

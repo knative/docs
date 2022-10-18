@@ -15,7 +15,7 @@
         ```
 
         ```bash
-        chmod +x func
+        chmod +x kn-func
         ```
 
         Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `func_darwin_amd64` or `func_linux_amd64`.
@@ -29,5 +29,5 @@
     1. Verify that the CLI is working by running the command:
 
         ```bash
-        kn-func version
+        kn func version
         ```
