@@ -17,7 +17,7 @@
   </p>
   <br>
   <p class="normal-text">
-    Knative does this through two features. The first is Knative Eventing. Eventing allows developers to set up detailed actions triggered by specific events within a broader environment. The second is Knative Serving, which automatically manages the creation and scaling of services through Kubernetes, including scaling down to zero. Each of these features aims to free up resources that teams would otherwise spend managing systems. They also save businesses money by reacting to conditions in real — time. Meaning, companies only pay for the resources they are using, not the ones they might use.
+    Knative does this through two features. The first is Knative Eventing. Eventing allows developers to set up detailed actions triggered by specific events within a broader environment. The second is Knative Serving, which automatically manages the creation and scaling of services through Kubernetes, including scaling down to zero. Each of these features aims to free up resources that teams would otherwise spend managing systems. They also save businesses money by reacting to conditions in real—time. Meaning, companies only pay for the resources they are using, not the ones they might use.
   </p>
   <br>
   <div class="testimonial blue">
@@ -46,7 +46,7 @@
   <br>
   <h2>Knative in the broader ecosystem</h2>
   <p class="normal-text">
-    To understand Knative more fully, it is important to know that it exists in a larger ecosystem of services that work together. For example, Knative acts as a framework on top of Kubernetes that helps build a serverless platform. Kubernetes itself is a system that orchestrates the creation and running of containers used in app deployment, scaling, and more. Those contain ers can run anything, from simple tools written in python to complex Al systems. Containers were developed to help tackle the problem of complexity. As development teams build software products, they create massive codebases. Left unorganized, those codebases can become gigantic and confusing-even for those who make them. Containers solve this problem by breaking codebases into small, self-contained processes that can interact to do work. They also help developers manage complex webs of dependencies like APIs and databases. These containers are easier to maintain for teams looking to work fast while maintaining best practices.
+    To understand Knative more fully, it is important to know that it exists in a larger ecosystem of services that work together. For example, Knative acts as a framework on top of Kubernetes that helps build a serverless platform. Kubernetes itself is a system that orchestrates the creation and running of containers used in app deployment, scaling, and more. Those containers can run anything, from simple tools written in python to complex Al systems. Containers were developed to help tackle the problem of complexity. As development teams build software products, they create massive codebases. Left unorganized, those codebases can become gigantic and confusing-even for those who make them. Containers solve this problem by breaking codebases into small, self-contained processes that can interact to do work. They also help developers manage complex webs of dependencies like APIs and databases. These containers are easier to maintain for teams looking to work fast while maintaining best practices.
   </p>
 
   <h2>Knative's value in DevOps</h2>
