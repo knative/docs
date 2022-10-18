@@ -10,8 +10,6 @@ After you have created a function project, you can build, run, or deploy your fu
 
 - You have a Docker daemon on your local machine. This is already provided if you have used the Quickstart installation.
 
-- You have access to a container registry and are able to push images to this registry.
-
 ### Procedure
 
 --8<-- "proc-running-function.md"
@@ -37,8 +35,6 @@ After you have created a function project, you can build, run, or deploy your fu
 ### Prerequisites
 
 - You have a Docker daemon on your local machine. This is already provided if you have used the Quickstart installation.
-
-- You have access to a container registry and are able to push images to this registry.
 
 ### Procedure
 
