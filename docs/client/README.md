@@ -15,11 +15,19 @@ See [Install and Set Up `kubectl`](https://kubernetes.io/docs/tasks/tools/instal
 !!! note
     `kn` cannot be used to install Knative components such as Serving or Eventing.
 
-See [Installing `kn`](install-kn.md).
+### Additional resources
 
-### kn reference documentation
+- See [Installing `kn`](install-kn.md).
+- See the [`kn` documentation]({{ clientdocs() }}){target=_blank} in Github.
 
-See the [`kn` documentation]({{ clientdocs() }}){target=_blank} in Github.
+## func
+
+The `func` CLI enables you to create, build, and deploy Knative Functions without the need to create or modify YAML files directly.
+
+### Additional resources
+
+- See [Installing Knative Functions](../functions/install-func.md).
+- See the [`func` documentation]({{ funcdocs() }}){target=_blank} in Github.
 
 ## Connecting CLI tools to your cluster
 

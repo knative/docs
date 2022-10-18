@@ -131,8 +131,6 @@ def define_env(env):
             print_to_stdout(f'exception raised for {org}/{repo}/{file}\n', traceback.format_exc())
             sys.exit(1)
 
-
-
     @env.macro
     def clientdocs():
         """Generates a link to the client docs for the current release version.
@@ -145,3 +143,15 @@ def define_env(env):
         if version is None:
             return 'https://github.com/knative/client/blob/main/docs/cmd/kn.md'
         return 'https://github.com/knative/client/blob/{version}/docs/cmd/kn.md'.format(version=version)
+
+    @env.macro
+    def funcdocs():
+        """Generates a link to the func docs for the current release version.
+        When the version in the SAMPLES_BRANCH environment variable is
+        empty this links to the main branch, otherwise it links to the
+        matching release in Github.
+        """
+        version = os.environ.get("SAMPLES_BRANCH")
+        if version is None:
+            return 'https://github.com/knative/func/blob/main/docs/reference/func.md'
+        return 'https://github.com/knative/func/blob/{version}/docs/reference/func.md'.format(version=version)
