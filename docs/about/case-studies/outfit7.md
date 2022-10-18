@@ -20,7 +20,7 @@ hide:
 
 <td style="border: 0;">
 
-<h2 style="font-weight: bold;">Game maker Outfit7 automates high-performance ad bidding with Knative Serving</h2>
+<h2 style="font-weight: bold;">Game maker Outfit7 automates high performance ad bidding with Knative Serving</h2>
 
 
 Since its founding in 2009, the mobile gaming company Outfit7 has seen astronomical growth—garnering over 17 billion downloads and over 85 billion video views last year.
@@ -29,9 +29,9 @@ Outfit7 was in the Top 5 game publishers list on iOS and Google Play worldwide b
 
 The success of the well-known game developer behind massive hits like the Talking Tom & Friends franchise and stand-alone titles like Mythic Legends created large-scale challenges.
 
-With up to 470 million monthly active users, 20 thousand server requests per second, and terabytes of data generated daily, they needed a stable, high-performance solution. They turned to a Knative and Kubernetes solution to optimize real-time bidding ad sales in a way that can automatically scale up and down as needed.  They were able to develop a system so easy to maintain that it freed up two software engineers who are now able to work on more important tasks, like optimizing backend costs and adding new game features.
+With up to 470 million monthly active users, 20 thousand server requests per second, and terabytes of data generated daily, they needed a stable, high performance solution. They turned to a Knative and Kubernetes solution to optimize real-time bidding ad sales in a way that can automatically scale up and down as needed.  They were able to develop a system so easy to maintain that it freed up two software engineers who are now able to work on more important tasks, like optimizing backend costs and adding new game features.
 
-<h2 style="color:#0071c7;">High-performance in-app bidding</h2>
+<h2 style="color:#0071c7;">High performance in-app bidding</h2>
 
 Ad sales are an important revenue stream of Outfit7. The team needed to walk a careful balance: sell the space for the highest bid, use technical resources efficiently, and make sure ads are served to players quickly. To achieve this they decided to adopt an in-app bidding approach.
 
@@ -49,7 +49,7 @@ Knative works as a layer installed on top of Kubernetes. It brings the power of 
 
 Knative also simplifies project deployments to Kubernetes. Mitja Bezenšek, the Lead Developer on Outfit7's backend team, estimated that the traditional development that Knative replaced would have required three full-time engineers to maintain. Their new platform operates with minimal work and allows the developers to deploy updates at will.
 
-<h2 style="color:#0071c7;">The open-source community</h2>
+<h2 style="color:#0071c7;">The open source community</h2>
 
 Outfit7's team was blown away by the supportive and helpful community around Knative. After discovering a problem with network scaling, the team was surprised by how easy it was to find answers and solutions.
 

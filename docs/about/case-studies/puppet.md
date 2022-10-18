@@ -39,7 +39,7 @@ Containers and webhooks are key elements in the Relay architecture. Containers a
 "We focused on containers because they provide isolation," explains Noah Fontes, Senior Principal Software Engineer for Puppet, "Containers provide discrete units of execution, where users can decrease the maintenance burden of complex systems."
 
 
-Allowing fully-configurable webhooks gives users the flexibility needed to incorporate business processes of all kinds. With webhooks, Relay can interact with nearly any web-based API to trigger rich, fully featured workflows across third-party SaaS products, cloud services, web applications, and even system utilities.
+Allowing fully-configurable webhooks gives users the flexibility needed to incorporate business processes of all kinds. With webhooks, Relay can interact with nearly any web-based API to trigger rich, fully featured workflows across third party SaaS products, cloud services, web applications, and even system utilities.
 
 Knative Serving provides important infrastructure for Relay. It allows webhooks and services to scale automatically, <a href="../../../serving/autoscaling/scale-to-zero/">even down to zero</a>. This allows Relay to support pretty much any integration, including those used by only a small number of users. With autoscaling, those services don't consume resources while they are not being used.
 
@@ -51,13 +51,13 @@ However, while all of this sounds amazing, it can be difficult to manage and con
 
 <h2 style="color:#0071c7;"> Workflow integrations</h2>
 
-The open architecture allows Relay to integrate dozens of different services and platforms into workflows. A look at the <a href="https://github.com/relay-integrations">Relay integrations GitHub page</a> provides a list of these integrations and demonstrates their commitment to the open-source community.
+The open architecture allows Relay to integrate dozens of different services and platforms into workflows. A look at the <a href="https://github.com/relay-integrations">Relay integrations GitHub page</a> provides a list of these integrations and demonstrates their commitment to the open source community.
 
-"I'm a strong believer in working with open-source projects. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor, all of which we depend on to make our product functional," says Fontes.
+"I'm a strong believer in working with open source projects. We've made contributions to numerous projects, including Tekton, Knative, Ambassador, and gVisor, all of which we depend on to make our product functional," says Fontes.
 
 <h2 style="color:#0071c7;"> Results: automated infrastructure management</h2>
 
-While Relay's infrastructure runs on the Google Cloud Platform, its <a href="https://relay.sh/library/">library of workflows, integrations, steps, and triggers</a> includes services across all major cloud service providers. Relay customers can integrate across Microsoft Azure, AWS, and Oracle Cloud Infrastructure among others. By combining these integrations with SaaS offerings, it truly is becoming the <a href=https://zapier.com/">Zapier</a> of infrastructure management.
+While Relay's infrastructure runs on the Google Cloud Platform, it is a <a href="https://relay.sh/library/">library of workflows, integrations, steps, and triggers</a> that includes services across all major cloud service providers. Relay customers can integrate across Microsoft Azure, AWS, and Oracle Cloud Infrastructure among others. By combining these integrations with SaaS offerings, it truly is becoming the <a href=https://zapier.com/">Zapier</a> of infrastructure management.
 
 “Our customers have diverse needs for managing their workloads that are often best implemented as web APIs. Our product provides a serverless microservice environment powered by Knative that allows them to build this complex tooling without the management and maintenance overhead of traditional deployment architectures. We pass the cost savings on to them, and everyone is happier," said Fontes.
 
@@ -65,7 +65,7 @@ Building and deploying Relay would not have been possible without the existing i
 
 <h2 style="color:#0071c7;"><em>"Thanks to Knative, getting Relay out the door was easier than we thought it would be."</em> said Noah Fontes, Senior Principal Software Engineer.</h2>
 
-Knative aims to make scalable, secure, stateless architectures to be available quickly by abstracting away the complex details of a Kubernetes installation and enabling developers to focus on what matters.
+Knative aims to make scalable, secure, stateless architectures available quickly by abstracting away the complex details of a Kubernetes installation and enabling developers to focus on what matters.
 
 <h2 style="color:#0071c7;">Find out more</h2>
 
