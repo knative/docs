@@ -41,7 +41,7 @@ Knative supports the following Auto TLS modes:
 
 1.  Using HTTP-01 challenge
 
-    - In this type, your cluster does not need to be able to talk to your DNS server. You must map your domain to the IP of the cluser ingress.
+    - In this type, your cluster does not need to be able to talk to your DNS server. You must map your domain to the IP of the cluster ingress.
     - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
     - **HTTP-01 does not support provisioning a certificate per namespace.**
 
@@ -288,7 +288,7 @@ be able to handle HTTPS traffic.
 
 ### Verify Auto TLS
 
-1.  Run the following comand to create a Knative Service:
+1.  Run the following command to create a Knative Service:
 
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml
