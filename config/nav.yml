@@ -150,6 +150,12 @@ nav:
           - Configuring gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: serving/configuration/feature-flags.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
+      # Serving - Application Security
+      - Application security:
+        - About Security-Guard: serving/app-security/security-guard-about.md
+        - Installing Security-Guard: serving/app-security/security-guard-install.md
+        - Security-guard quickstart: serving/app-security/security-guard-quickstart.md
+        - Security-Guard example alerts: serving/app-security/security-guard-example-alerts.md
       # Serving - observability
       - Observability:
         - Collecting logs: serving/observability/logging/collecting-logs.md
