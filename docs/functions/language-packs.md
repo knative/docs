@@ -4,7 +4,7 @@ Language packs can be used to extend Knative Functions to support additional run
 
 For more information see the [language pack](https://github.com/knative/func/blob/main/docs/language-pack-providers/language-pack-contract.md){target=_blank} documentation.
 
-## External Git Repositories
+## Using external Git repositories
 
 When creating a new function, a Git repository can be specified as the source
 for the template files. The Knative Sandbox maintains a set of [example templates](https://github.com/knative-sandbox/func-tastic){target=_blank} which can be used during project creation.
