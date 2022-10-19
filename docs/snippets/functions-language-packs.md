@@ -1,3 +1,6 @@
+<!-- Snippet used in the following topics:
+- /docs/functions/language-packs.md
+-->
 Language Packs are the mechanism by which Knative Functions can be extended to
 support additional runtimes, function signatures, even operating systems and
 installed tooling for a function. Language Packs are typically distributed via

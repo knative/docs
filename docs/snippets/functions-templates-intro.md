@@ -15,4 +15,4 @@ Templates allow you to choose the language and invocation format for your functi
 The function templates that are included with the `func` binary are considered the
 "built-in" or default templates. These templates can be extended by installing
 additional templates from a Git repository. These additional templates are called
-[Language Packs](functions-language-packs.md).
+[Language Packs](/docs/functions/language-packs/).
