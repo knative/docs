@@ -29,7 +29,7 @@ the status and future of the project.
 
 Afterwards, Lance Ball will be giving a
 [5 minute lighting talk](https://sched.co/184sX) on building a Twitter
-bot with Knative Knative Functions. The talk will be at 5:45pm and should be a lot of fun!
+bot with Knative Functions. The talk will be at 5:45pm and should be a lot of fun!
 
 ## Wednesday, October 26 KubeCon
 
