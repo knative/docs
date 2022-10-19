@@ -1,10 +1,6 @@
----
-title: "Knative at KubeCon ’22 North America"
-type: "blog"
-date: 2022-10-20
-linkTitle: "Knative at KubeCon ’22 North America"
-description: "Knative talks at KubeCon/KNativeCon 2022 North America"
----
+# Knative at KubeCon ’22 North America
+
+**Date: 2022-10-20**
 
 There's less than a week until
 [KubeCon + KNativeCon Europe 202](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/)
