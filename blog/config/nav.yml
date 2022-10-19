@@ -1,6 +1,7 @@
 nav:
     - Home: /docs/
     - Tutorial: /docs/getting-started/
+    - Concepts: /docs/concepts/
     - Installing: /docs/install/
     - Functions: /docs/functions/
     - Serving: /docs/serving/
