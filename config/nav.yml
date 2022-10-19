@@ -84,7 +84,11 @@ nav:
       - Knative Functions overview: functions/README.md
       - Installing Knative Functions: functions/install-func.md
       - Creating functions: functions/creating-functions.md
-      - Building, running, or deploying functions: functions/build-run-deploy-func.md
+      - Building functions: functions/building-functions.md
+      - Running functions: functions/running-functions.md
+      - Deploying functions: functions/deploying-functions.md
+      - Invoking functions: functions/invoking-functions.md
+      - Language packs: functions/language-packs.md
 ###############################################################################
     # Serving
 ###############################################################################
