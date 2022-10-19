@@ -85,6 +85,8 @@ nav:
       - Installing Knative Functions: functions/install-func.md
       - Creating functions: functions/creating-functions.md
       - Building, running, or deploying functions: functions/build-run-deploy-func.md
+      - Function templates: functions/functions-templates.md
+      - Extending functions with Language Packs: functions/language-packs.md
 ###############################################################################
     # Serving
 ###############################################################################

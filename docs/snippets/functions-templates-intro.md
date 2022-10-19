@@ -1,7 +1,7 @@
 <!-- Snippet used in the following topics:
 - /docs/functions/README.md
 -->
-Knative Functions provides templates that can be used to create basic functions, by initiating a function project boilerplate when you run a `create` command.
+Knative Functions provides built in templates that can be used to create basic functions, by initiating a function project boilerplate when you run a `create` command.
 
 Templates allow you to choose the language and invocation format for your function. The following templates are available with both CloudEvent and HTTP invocation formats:
 
@@ -11,3 +11,8 @@ Templates allow you to choose the language and invocation format for your functi
 - [Quarkus](https://github.com/knative/func/blob/main/docs/function-developers/quarkus.md){target=_blank}
 - [Rust](https://github.com/knative/func/blob/main/docs/function-developers/rust.md){target=_blank}
 - [TypeScript](https://github.com/knative/func/blob/main/docs/function-developers/typescript.md){target=_blank}
+
+The function templates that are included with the `func` binary are considered the
+"built-in" or default templates. These templates can be extended by installing
+additional templates from a Git repository. These additional templates are called
+[Language Packs](functions-language-packs.md).
