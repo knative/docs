@@ -6,7 +6,7 @@ There's less than a week until
 [KubeCon + KnativeCon Europe 202](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/)
 kicks off in Detroit, MI.
 We are excited that the Knative community will be well represented at both events,
-and that, once again we are hosting a full day of Knative content at the
+and that once again we are hosting a full day of Knative content at the
 [KnativeCon](https://events.linuxfoundation.org/knativecon-north-america/) co-located event.
 
 We wanted to share with you a few of the Knative
