@@ -24,7 +24,7 @@ the project. Check out the full schedule on [Sched](https://knativeconna22.sched
 On Tuesday, October 25, we have a 4-hour open
 [Knative project meeting](https://sched.co/1BaTW) for maintainers
 and others who are contributing to the project. The meeting will last from 1 to 5pm
-and will be a great opportunity for Knaive contributors to meet and discuss the
+and will be a great opportunity for Knative contributors to meet and discuss the
 the status and future of the project.
 
 Afterwards, Lance Ball will be giving a
