@@ -2,8 +2,10 @@ nav:
     - Home: /docs/
     - Tutorial: /docs/getting-started/
     - Installing: /docs/install/
+    - Functions: /docs/functions/
     - Serving: /docs/serving/
     - Eventing: /docs/eventing/
+    - Knative CLI: /docs/client/
     - Code samples: /docs/samples/
     - Reference: /docs/reference/
     - Community: /docs/community/
