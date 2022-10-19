@@ -34,7 +34,7 @@ bot with Knative Knative Functions. The talk will be at 5:45pm and should be a l
 ## Wednesday, October 26 KubeCon
 
 On Wednesday, from 11 to 12:30, Evan Andersen and Paul Schweigert will be hosting a
-[Knative contrib fest](https://sched.co/182Pu) where you can get involved in the project
+[Knative ContribFest](https://sched.co/182Pu) where you can get involved in the project
 by learning the tools and processes for contributing to Knative. Join them to develop the skills and knowledge to be a part of the exciting the Knative project.
 
 Later that afternoon, Evan will again be on the stage, this time with Naina Singh,
