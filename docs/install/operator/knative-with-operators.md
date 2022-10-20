@@ -5,9 +5,9 @@ You can install the Serving component, Eventing component, or both on your clust
 
 The following table describes the supported versions of Serving and Eventing for the Knative Operator:
 
-| Operator | Serving                                            | Eventing                                                                                         |
-|----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| v1.7.0   | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0<br/>v1.4.0 | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0, v1.5.1, v1.5.2 and v1.5.3<br/>v1.4.0, v1.4.1 and v1.4.2 |
+| Operator | Serving                                                               | Eventing                                                                                                                                 |
+|----------|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| v1.8     | v1.8.0<br/>v1.7.0, v1.7.1 and v1.7.2<br/>v1.6.0 and v1.6.1<br/>v1.5.0 | v1.8.0<br/>v1.7.0, v1.7.1, v1.7.2 and v1.7.3<br/>v1.6.0, v1.6.1 and v1.6.2<br/>v1.5.0, v1.5.1, v1.5.2, v1.5.3, v1.5.4, v1.5.5 and v1.5.6 |
 
 --8<-- "prerequisites.md"
 
