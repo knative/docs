@@ -27,7 +27,7 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.7" "1.6" "1.5" "1.4") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+VERSIONS=("1.8" "1.7" "1.6" "1.5") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
 # 4) PR the result to main.
 # 5) Party.
 
