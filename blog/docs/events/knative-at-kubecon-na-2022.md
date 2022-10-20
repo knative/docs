@@ -3,7 +3,7 @@
 **Date: 2022-10-20**
 
 There's less than a week until
-[KubeCon + KnativeCon Europe 202](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/)
+[KubeCon + KnativeCon North America 2022](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/)
 kicks off in Detroit, MI.
 We are excited that the Knative community will be well represented at both events,
 and that once again we are hosting a full day of Knative content at the
@@ -46,4 +46,4 @@ then a Q&A session. This is a great opportunity to learn more about Knative Func
 ## See you soon!
 
 We are looking forward to seeing you in Detroit next week, and hope you enjoy
-seeing some educational and entertaining Knative talks.
+seeing some educational and entertaining Knative talks. Visit us at the Knative kiosk in the expo area.
