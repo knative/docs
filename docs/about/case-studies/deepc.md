@@ -38,13 +38,13 @@ deepcOS sends that data to the cloud-based deepc AI platform. This platform does
 <h2 style="color:#0071c7;">A Knative-powered process</h2>
 
 The deepcOS workflow builds on a sophisticated implementation of Knative Eventing. Knative Eventing allows teams to deploy event-driven architecture with serverless applications quickly. In conjunction with Knative Serving, deepc resources and programs scale up and down automatically based on specific event triggers laid out by the developers. Knative takes care of the management, so the process does not need to wait for a person to take action.
-When data is sent to deepc's cloud-based platform, Knative emits an event that triggers a specific AI. After one is selected, Knative starts a container environment for the program to run. Some AI programs may only need one container. Others may require multiple, running parallel or in sequence. In the case of multiple containers, the deepc team created workflows using Knative Eventing to coordinate the complex processes. After the process finishes and provides the output for the radiologist, Knative triggers stopping the active containers.
+When data is sent to deepc's cloud-based platform, Knative emits an event that triggers a specific AI. After one is selected, Knative starts a container environment for the program to run. Some AI programs may only need one container. Others may require multiple, running parallel or in sequence. In the case of multiple containers, the deepc team created workflows using Knative Eventing to coordinate the complex processes. After the process finishes and provides the output for the radiologist, Knative triggers stop the active containers.
 
 <h2 style="color:#0071c7;"><em>"Knative gives us a foundation of consistency,"</em> said Andrew Webber, Senior Software Engineer.</h2>
 
 <h2 style="color:#0071c7;">Bridging between legacy and advanced systems</h2>
 
-The platform makes available AIs developed by leading global companies and researchers.. Knative has also allowed integration with the work of independent researchers through an SDK implementation to radiologists. They don’t need to be Kubernetes experts or take days to bring their work to patients through deepc’s platform.
+The platform makes available AIs developed by leading global companies and researchers. Knative has also allowed integration with the work of independent researchers through an SDK implementation for radiologists. They don’t need to be Kubernetes experts or take days to bring their work to patients through deepc’s platform.
 
 <h2 style="color:#0071c7;"><em>“It should be possible for somebody with an algorithm to have it on the platform in an hour”</em> said Webber.</h2>
 
