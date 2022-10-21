@@ -284,7 +284,7 @@ be able to handle HTTPS traffic.
 
 ### Verify Auto TLS
 
-1.  Run the following comand to create a Knative Service:
+1.  Run the following command to create a Knative Service:
 
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative/docs/main/docs/serving/autoscaling/autoscale-go/service.yaml

@@ -73,7 +73,7 @@ and Route. VirtualService currently doesn't expose a Status field, so if one
 exists and have matching configurations with Ingress and Route, you may
 want to wait a little bit for those settings to propagate.
 
-If you are familar with Istio and `istioctl`, you may try using `istioctl` to
+If you are familiar with Istio and `istioctl`, you may try using `istioctl` to
 look deeper using Istio
 [guide](https://istio.io/help/ops/traffic-management/proxy-cmd/).
 
