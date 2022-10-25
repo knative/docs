@@ -295,9 +295,8 @@ nav:
       - Security: reference/security/README.md
       - Release notes: reference/relnotes/README.md
     - Contributing:
-      - Welcome to the Knative community: contributing/README.md
-      - Contribute to Knative: contributing/contributing.md
-      - About the community: contributing/about.md
+      - About Knative: contributing/README.md
+      - Components: contributing/contributing.md
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:

@@ -1,21 +1,4 @@
-# Contribute to Knative
-
-This is the starting point for becoming a contributor - improving code, improving docs, giving talks, etc.
-Here are a few ways to get involved.
-
-## Prerequisites
-
-If you want to contribute to Knative, you must do the following:
-
-- Before you can make a contribution, you must sign the CNCF [EasyCLA](https://easycla.lfx.linuxfoundation.org/) using the same email address you used to register for Github. For more information, see [Contributor license agreements](https://github.com/knative/community/blob/main/CONTRIBUTING.md#contributor-license-agreements).
-
-- Read the [Knative contributor guide](https://github.com/knative/community/blob/main/CONTRIBUTING.md).
-
-- Read the [Code of conduct](https://github.com/knative/community/blob/main/CODE-OF-CONDUCT.md).
-
-For more information about how the Knative community is run, see [About the Knative community](about.md).
-
-## Contribute to the code
+# Components
 
 Knative is a diverse, open, and inclusive community.
 Development takes place in the [Knative org on GitHub](https://github.com/knative).
@@ -65,7 +48,6 @@ Share your samples with the community.
 - [Link existing code samples](../samples/README.md#external-code-samples):
 Link to your Knative samples that live on another site.
 
-
 ## Learn and connect
 
 Using or want to use Knative? Have any questions? Find out more here:
@@ -84,21 +66,3 @@ or Eventing and chat with other project developers. See also the [Knative Slack 
 
 - [Stack Overflow questions](https://stackoverflow.com/questions/tagged/*knative*):
 Knative tagged questions and curated answers.
-
-## Community Meetup
-
-This virtual event is designed for end users, a space for our community to meet,
-get to know each other, and learn about uses and applications of Knative.
-
-Catch up with past community meetups on our [YouTube channel](https://www.youtube.com/playlist?list=PLQjzPfIiEQLLyCyLBKLlwDLfE_A-P7nyg).
-
-Stay tuned for new events by subscribing to the
-[calendar](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com&ctz=America%2FLos_Angeles) ([iCal export file](https://calendar.google.com/calendar/ical/knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com/public/basic.ics))
-and following us on [Twitter](https://twitter.com/KnativeProject).
-
-## More ways to get involved
-
-Even if there’s not an issue opened for it, we can always use more testing throughout the platform. Similarly, we can always use more docs, richer docs, insightful docs. Or maybe a cool blog post? And if you’re a web developer, we could use your help in spiffing up our public-facing web site.
-
-[Bug reports](https://github.com/knative/serving/issues/new) and friction logs
-from new developers are especially welcome.
