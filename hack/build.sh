@@ -71,7 +71,7 @@ else
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
-    if (( $(echo "$version > 1.6" | bc -l) )); then
+    if [ ${version#*1.} -gt 6 ]; then
         curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
         curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
     else
