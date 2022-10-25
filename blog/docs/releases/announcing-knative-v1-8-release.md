@@ -15,6 +15,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 - [Serving](#serving)
 - [Eventing](#eventing)
 - [`kn` CLI](#client)
+- [Functions](#functions)
 - [Knative Operator](#operator)
 
 ## General
@@ -88,6 +89,19 @@ This release brings a number of smaller improvements to the core Knative Serving
 ### Bug or Regression
 
 * Fix release script version calculation (#1737, @dsimansk)
+
+
+## Functions
+
+This is the first release for Functions as a part of Knative Core.
+
+[Release Notes](https://github.com/knative/func/releases/tag/knative-v1.8.0)
+
+#### 💫 New Features & Changes
+
+* Cancel pipeline run on SIGINT/SIGTERM (#1329, @matejvasek)
+* On cluster build using direct source upload (i.e. git is not needed) (#1298, @matejvasek)
+* Changes package name from knative.dev/kn-plugin-func to knative.dev/func (#1311, @lance)
 
 ## Operator
 
