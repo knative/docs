@@ -22,7 +22,6 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 ### 🚨 Breaking or Notable
 
-* All of our images are now signed with cosign.
 * Our macOS binaries have been notarized so you should be able to run them right away when downloading them from GitHub without having to change Gatekeeper settings.
 
 ### 💫 New Release
