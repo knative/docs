@@ -1,8 +1,7 @@
-## Verifying Images
+## Verifying image signatures
 
 Knative releases from 1.8 onwards are signed with [cosign](https://docs.sigstore.dev/cosign/overview).
 
-- **Verifying Images Signatures**
 
 ```
 # install cosign and jq  if you don't have it
