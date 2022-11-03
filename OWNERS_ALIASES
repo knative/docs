@@ -43,13 +43,11 @@ aliases:
   - akashrv
   - lberk
   eventing-wg-leads:
-  - lionelvillard
   - pierDipi
   eventing-writers:
   - akashrv
   - aliok
   - lberk
-  - lionelvillard
   - matzew
   - odacremolbap
   - pierDipi
@@ -108,11 +106,9 @@ aliases:
   - tcnghia
   - vagababov
   - yanweiguo
-  networking-wg-leads:
-  - nak3
+  networking-wg-leads: []
   networking-writers:
   - JRBANCEL
-  - nak3
   - vagababov
   operations-reviewers:
   - Cynocracy
