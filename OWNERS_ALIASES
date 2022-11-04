@@ -48,6 +48,7 @@ aliases:
   - akashrv
   - aliok
   - lberk
+  - lionelvillard
   - matzew
   - odacremolbap
   - pierDipi
@@ -167,10 +168,8 @@ aliases:
   - upodroid
   security-wg-leads:
   - evankanderson
-  - julz
   security-writers:
   - evankanderson
-  - julz
   serving-observability-reviewers:
   - skonto
   - yanweiguo
