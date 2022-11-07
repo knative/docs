@@ -374,7 +374,7 @@ Simple Authentication and Security Layer (SASL) is used by Apache Kafka for auth
             secretKeyRef:
               name: <secret_name>
               key: password
-          saslType:
+          type:
             secretKeyRef:
               name: <secret_name>
               key: saslType
