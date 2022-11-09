@@ -5,6 +5,14 @@
 
     To access your application using `curl` using this method:
 
+    1. Configure Knative to use a domain reachable from outside the cluster:
+      ```bash
+      kubectl patch configmap/config-domain \
+            --namespace knative-serving \
+            --type merge \
+            --patch '{"data":{"example.com":""}}'
+      ```
+
     1. After starting your application, get the URL of your application:
       ```bash
       kubectl get ksvc
