@@ -1,19 +1,19 @@
 # List of available Channel implementation for persistence of the events associated with a given channel
 channels:
   - name: InMemoryChannel
-    url: https://github.com/knative/eventing/tree/{{version}}/config/channels/in-memory-channel/README.md
+    url: https://github.com/knative/eventing/tree/{{ branch }}/config/channels/in-memory-channel/README.md
     status: Stable
     maintainer: Knative
     description: >
       In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
   - name: KafkaChannel
-    url: https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{version}}/README.md
+    url: https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{ branch }}/README.md
     status: Beta
     maintainer: Knative
     description: >
       Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
   - name: NatssChannel
-    url: https://github.com/knative-sandbox/eventing-natss/tree/{{version}}/config/README.md
+    url: https://github.com/knative-sandbox/eventing-natss/tree/{{ branch }}/config/README.md
     status: Alpha
     maintainer: Knative
     description: >
