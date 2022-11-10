@@ -17,8 +17,8 @@ This is a non-exhaustive list of the available Channels for Knative Eventing.
 
 Name | Status | Maintainer | Description
 --- | --- | --- | ---
-[InMemoryChannel](https://github.com/knative/eventing/tree/{{version}}/config/channels/in-memory-channel/README.md) | Stable | Knative | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
-[KafkaChannel](https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{version}}/README.md) | Beta | Knative | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
-[NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{version}}/config/README.md) | Alpha | Knative | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
+[InMemoryChannel](https://github.com/knative/eventing/tree/{{ branch }}/config/channels/in-memory-channel/README.md) | Stable | Knative | In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
+[KafkaChannel](https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{ branch }}/README.md) | Beta | Knative | Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
+[NatssChannel](https://github.com/knative-sandbox/eventing-natss/tree/{{ branch }}/config/README.md) | Alpha | Knative | Channels are backed by [NATS Streaming](https://github.com/nats-io/nats-streaming-server#configuring).
 
 
