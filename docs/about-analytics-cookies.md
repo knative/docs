@@ -10,7 +10,7 @@ on the website.
 
 Continue to sections below for details about knative.dev, or use the following resources to learn about cookies in general:
 
-- Learn about basic site analytics usuage at: [https://www.cookiechoices.org/](https://www.cookiechoices.org/)
+- Learn about basic site analytics usage at: [https://www.cookiechoices.org/](https://www.cookiechoices.org/)
 
 - You can also watch a video about [how Google uses cookies](http://www.google.com/intl/en/policies/technologies/cookies/).
 
