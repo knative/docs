@@ -271,7 +271,6 @@ nav:
         - New Trigger Filters: eventing/experimental-features/new-trigger-filters.md
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
-        - Strict Subscriber: eventing/experimental-features/strict-subscriber.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
