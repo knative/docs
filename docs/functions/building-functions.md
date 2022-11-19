@@ -21,7 +21,7 @@ If you do not have a local Docker daemon running, or you are using a CI/CD pipel
 ### Prerequisites
 
 - The function must exist in a Git repository.
-- You must configure your cluster to use Tekton Pipelines. See the [on-cluster build](https://github.com/knative/func/blob/main/docs/reference/on_cluster_build.md){target=_blank} documentation.
+- You must configure your cluster to use Tekton Pipelines. See the [on-cluster build](https://github.com/knative/func/blob/main/docs/building-functions/on_cluster_build.md){target=_blank} documentation.
 
 ### Procedure
 
