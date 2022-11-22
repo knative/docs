@@ -84,7 +84,7 @@ spec:
 
 ### `all`
 
-All nested filter expessions must evaluate to true.
+All nested filter expressions must evaluate to true.
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -103,7 +103,7 @@ spec:
 
 ### `any`
 
-At least one nested filter expession must evaluate to true.
+At least one nested filter expression must evaluate to true.
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
