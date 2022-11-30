@@ -8,7 +8,7 @@ We think that there should be an easy way for new Knative users and contributors
 
 During the recent KubeCon NA 2022 in Detroit we had Knative Day, Maintainer Meetup, and ContribFest that showed there are people interested in using or contributing to Knative. However, today we do not have any ongoing online meetings for people to just show up. They can join Slack but that is asynchronous and requires joining yet another Slack, then reading channels, and figuring where to ask your questions. Driving your own engagement can be a barrier to participating in the community.
 
-Therefore, we are organizing the first Knative Virtual Office Hour / Contrib Fest in 2022.
+Therefore, we are organizing the first Knative Virtual Office Hour in 2022.
 
 **When:** [December 9 (Friday) 11:30 AM US Eastern](https://dateful.com/convert/utc?t=430pm&d=2022-12-09)
 **How to join:** Zoom link will be posted in Slack and knative-user mailing list
