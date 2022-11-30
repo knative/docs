@@ -1,12 +1,8 @@
----
-title: "First 🌱 Knative Virtual Office Hour 2022/12/09"
-type: "blog"
-date: 2022-12-01
-linkTitle: "First Knative Virtual Office Hour 2022/12/09"
-description: "Join the Zoom Knative First Knative Virtual Office Hour on 2022/12/09"
----
+# First 🌱 Knative Virtual Office Hour
 
-## First 🌱 Knative Virtual Office Hour
+**Date: 2022-12-01**
+
+**Authors: [Alek Slominski](https://aslom.net/), [Evan Anderson](https://off-by-one.dev/), and Paul Schweigert**
 
 We think that there should be an easy way for new Knative users and contributors to get started with our project. Holding virtual office hours for questions and help with using or contributing to Knative should help to get started with using code and contributing.
 
@@ -44,7 +40,7 @@ No prior knowledge of Knative is required.
 
 Hope to see you there!
 
-[Alek Slominski](https://aslom.net/), [Evan Anderson](https://off-by-one.dev/), and Paul Schweigert
+Alek, Evan, Paul
 
 P.S. If there is enough interest we may continue in 2023.
 
