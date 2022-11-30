@@ -2,7 +2,7 @@
 
 **Date: 2022-12-01**
 
-**Authors: [Alek Slominski](https://aslom.net/), [Evan Anderson](https://off-by-one.dev/), and Paul Schweigert**
+**Authors: [Alek Slominski](https://aslom.net/), [Evan Anderson](https://off-by-one.dev/), [Lance Ball](https://twitter.com/lanceball), and Paul Schweigert**
 
 We think that there should be an easy way for new Knative users and contributors to get started with our project. Holding virtual office hours for questions and help with using or contributing to Knative should help to get started with using code and contributing.
 
@@ -40,7 +40,7 @@ No prior knowledge of Knative is required.
 
 Hope to see you there!
 
-Alek, Evan, Paul
+Alek, Evan, Lance, Paul
 
 P.S. If there is enough interest we may continue in 2023.
 
