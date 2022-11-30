@@ -6,7 +6,7 @@
 
 We think that there should be an easy way for new Knative users and contributors to get started with our project. Holding virtual office hours for questions and help with using or contributing to Knative should help to get started with using code and contributing.
 
-During the recent KubeCon NA 2022 in Detroit we had Knative Day, Maintainer Meetup, and ContribFest that showed that there are people interested in using Knative or contributing to it. However, today we do not have any ongoing online meetings for people to just show up. They can join Slack but that is very asynchronous and joining yet another Slack and then reading channels, figuring where to ask your questions, and driving your own engagement can be a barrier to participating in the community.
+During the recent KubeCon NA 2022 in Detroit we had Knative Day, Maintainer Meetup, and ContribFest that showed there are people interested in using or contributing to Knative. However, today we do not have any ongoing online meetings for people to just show up. They can join Slack but that is asynchronous and requires joining yet another Slack, then reading channels, and figuring where to ask your questions. Driving your own engagement can be a barrier to participating in the community.
 
 Therefore, we are organizing the first Knative Virtual Office Hour / Contrib Fest in 2022.
 
