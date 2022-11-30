@@ -1,16 +1,16 @@
 ---
-title: "First 🌱 Knative Virtual Office Hour / Contrib Fest 2022/12/09"
+title: "First 🌱 Knative Virtual Office Hour 2022/12/09"
 type: "blog"
 date: 2022-12-01
-linkTitle: "First Knative Virtual Office Hour / Contrib Fest 2022/12/09"
-description: "Join the Zoom Knative First Knative Virtual Office Hour / Contrib Fest on 2022/12/09"
+linkTitle: "First Knative Virtual Office Hour 2022/12/09"
+description: "Join the Zoom Knative First Knative Virtual Office Hour on 2022/12/09"
 ---
 
-## First 🌱 Knative Virtual Office Hour / Contrib Fest
+## First 🌱 Knative Virtual Office Hour
 
 We think that there should be an easy way for new Knative users and contributors to get started with our project. Holding virtual office hours for questions and help with using or contributing to Knative should help to get started with using code and contributing.
 
-During the recent KubeCon NA 2022 in Detroit we had Knative Day and ContribFest that showed that there are people interested in using Knative or contributing to it. However, today we do not have any ongoing online meetings for people to just show up. They can join Slack but that is very asynchronous and joining yet another Slack and then reading channels, figuring where to ask your questions, etc. feels very daunting,
+During the recent KubeCon NA 2022 in Detroit we had Knative Day, Maintainer Meetup, and ContribFest that showed that there are people interested in using Knative or contributing to it. However, today we do not have any ongoing online meetings for people to just show up. They can join Slack but that is very asynchronous and joining yet another Slack and then reading channels, figuring where to ask your questions, and driving your own engagement can be a barrier to participating in the community.
 
 Therefore, we are organizing the first Knative Virtual Office Hour / Contrib Fest in 2022.
 
@@ -20,9 +20,7 @@ Therefore, we are organizing the first Knative Virtual Office Hour / Contrib Fes
 **Who should join?**
 
 - You are curious about Knative and you are wondering where to start
-- You would like to contribute to Knative but do not know where to start
-- You have problems with Knative and asking in Slack or Github issues did not get you what you wanted
-- You have great idea for Knative but yo do not want where to start
+- You have great idea for Knative but you do not want where to start
 - You want to get to know how Knative works inside and want to contribute to open source project
 
 **Possible topics for Contib fest:**
