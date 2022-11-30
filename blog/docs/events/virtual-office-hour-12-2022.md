@@ -16,7 +16,9 @@ Therefore, we are organizing the first Knative Virtual Office Hour in 2022.
 **Who should join?**
 
 - You are curious about Knative and you are wondering where to start
+- You have questions about how to build something using Knative
 - You have great idea for Knative but you do not know where or how to share it
+- You want to meet other people using Knative
 - You want to get to know how Knative works inside and want to contribute to open source project
 
 **Possible topics for Contib fest:**
