@@ -1,11 +1,10 @@
-![Knative Booth](images/virtual-office-hour-12-2022-with-text.jpg)
 # First 🌱 Knative Virtual Office Hour
 
 **Date: 2022-12-01**
 
 **Authors: [Alek Slominski](https://aslom.net/), [Evan Anderson](https://off-by-one.dev/), [Lance Ball](https://twitter.com/lanceball), and Paul Schweigert**
 
-
+![Knative Booth](images/virtual-office-hour-12-2022-with-text.jpg)
 
 We think that there should be an easy way for new Knative users and contributors to get started with our project. Holding virtual office hours for questions and help with using or contributing to Knative should help to get started with using code and contributing.
 
