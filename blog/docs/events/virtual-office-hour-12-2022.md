@@ -13,6 +13,7 @@ During the recent KubeCon NA 2022 in Detroit we had Knative Day, Maintainer Meet
 Therefore, we are organizing the first Knative Virtual Office Hour in 2022.
 
 **When:** [December 9 (Friday) 11:30 AM US Eastern](https://dateful.com/convert/utc?t=430pm&d=2022-12-09)
+
 **How to join:** Zoom link will be posted in Slack and knative-user mailing list
 
 **Who should join?**
