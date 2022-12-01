@@ -15,7 +15,7 @@ Therefore, we are organizing the first Knative Virtual Office Hour in 2022.
 **When:** [December 9 (Friday) 11:30 AM US Eastern](https://dateful.com/convert/utc?t=430pm&d=2022-12-09)
 <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=NXFjbzVjM3NqZTU1aHNoYmtkbjA5am1uOW4ga25hdGl2ZS50ZWFtXzlxODNiZzA3cXM1YjlycnNscDVqb3I0bDZzQGc&amp;tmsrc=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com"><img border="0" alt="Add to Google Calendar" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
 
-**How to join:** Zoom: https://zoom.us/j/94310596244
+**How to join:** Zoom: [https://zoom.us/j/94310596244](https://zoom.us/j/94310596244)
 
 **Who should join?**
 
