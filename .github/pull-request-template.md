@@ -21,7 +21,7 @@ If your changes should also be in the most recent release, use [/cherrypick](htt
 for example, "/cherrypick release-1.2" for Prow to generate a PR for the `release-1.2` branch.
 
 For all resources for contributing to the Knative documentation, see the
-[Knative contributor's guide](help/contributing/README.md).
+[Knative contributor's guide](contribute-to-docs/README.md).
 
  -->
 
