@@ -73,7 +73,7 @@ plugins:
       community/contributing/trademark-committee.md: https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md
       community/contributing/values.md: https://github.com/knative/community/blob/main/VALUES.md
       community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
-      community/meetup.md: contributing/contributing.md
+      community/meetup.md: community/README.md
       community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
       concepts/overview.md: index.md
       developer/concepts/duck-typing.md: concepts/duck-typing.md
