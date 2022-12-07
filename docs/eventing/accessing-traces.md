@@ -46,14 +46,10 @@ data:
 
 You can configure your `config-tracing` with following options:
 
- * `backend`: Valid values are `zipkin`, `stackdriver`, or `none`. The default is `none`.
+ * `backend`: Valid values are `zipkin`, or `none`. The default is `none`.
 
  * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces.
    Must be set if backend is set to `zipkin`.
-
- * `stackdriver-project-id`: Specifies the GCP project ID into which the Stackdriver traces are written.
-   You must specify the `backend` as `stackdriver`. If `backend`is unspecified, the GCP project ID is read
-   from GCP metadata when running on GCP.
 
  * `sample-rate`: Specifies the sampling rate. Valid values are decimals from `0` to `1`
    (interpreted as a float64), which indicate the probability that any given request is sampled.
