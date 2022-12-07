@@ -46,7 +46,7 @@ data:
 
 You can configure your `config-tracing` with following options:
 
- * `backend`: Valid values are `zipkin`, or `none`. The default is `none`.
+ * `backend`: Valid values are `zipkin` or `none`. The default is `none`.
 
  * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces.
    Must be set if backend is set to `zipkin`.
