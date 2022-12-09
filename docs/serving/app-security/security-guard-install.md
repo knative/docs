@@ -57,7 +57,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
         kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.3/config/resources/guardiansCrd.yaml
         ```
 
-    1. Deploy `guard-service` on your system to enable automated learning of micro-rules. 
+    1. Deploy `guard-service` on your system to enable automated learning of micro-rules.
 
         An easy way to do that is using:
 
