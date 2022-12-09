@@ -22,7 +22,7 @@
      This returns an output similar to the following:
 
      ```sh
-     ...SECURITY ALERT! HttpRequest: QueryString: KeyVal: Key a is not known...
+     ...SECURITY ALERT! HttpRequest -> [QueryString:[KeyVal:[Key a is not known,],],]
      ```
 
 1. Send an event with unexpected long url, for example:
@@ -46,5 +46,5 @@
      This returns an output similar to the following:
 
      ```sh
-     ...SECURITY ALERT! HttpRequest: Url: KeyVal: Letters: Counter out of Range: 16...
+     ...SECURITY ALERT! HttpRequest -> [Url:[Segments:[Counter out of Range: 1,],Val:[Letters:[Counter out of Range: 16,],Sequences:[Counter out of Range: 1,],],],].
      ```
