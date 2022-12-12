@@ -1,6 +1,6 @@
 # About Security-Guard
 
-Security-Guard provides visibility into the security status of deployed Knative Services, by monitoring the behaviors of user containers and events. Security-Guard also provides control, it allow optional blocking of events based on behavior related to a specific request and to stop an instance of a user container based on its behavior.
+Security-Guard provides visibility into the security status of deployed Knative Services, by monitoring the behaviors of user containers and events. Security-Guard also supports optional blocking of events and termination of user container instances, all based on behavior.
 
 ## Security-Guard profile and criteria
 
