@@ -1,8 +1,5 @@
 # Installing Security-Guard
 
-!!! note
-    Knative operator supports installing Security-Guard. This guide is for users installing Security-Guard without the Knative operator.
-
 Here we show how to install Security-Guard in Knative. Security-Guard is an enhancement to knative-Serving and needs to be installed after the Knative-Serving is successfully installed.
 
 Using Security-Guard requires that your cluster will use an enhanced queue-proxy image.
