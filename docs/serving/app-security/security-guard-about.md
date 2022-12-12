@@ -1,18 +1,18 @@
 # About Security-Guard
 
-Security-Guard provides visibility into the security status of deployed Knative Services, by monitoring the behaviors of user containers and events.
+Security-Guard provides visibility into the security status of deployed Knative Services, by monitoring the behaviors of user containers and events. Security-Guard also supports optional blocking of events and termination of user container instances, all based on behavior.
 
 ## Security-Guard profile and criteria
 
-Security-Guard creates a profile of the user container behavior and of event behavior.
+Security-Guard creates a profile of each user container behavior and of each event behavior.
 The behaviors are then compared to a pre-defined criteria.
-If the profile does not meet the criteria, Security-Guard can log alerts, block events, or stop a Service instance, depending on user configurations.
+If the profile does not meet the criteria, Security-Guard can log alerts, block misbehaving events, or stop misbehaving Service instances, depending on user configurations.
 
 The criteria that a profile is compared to is composed of a set of micro-rules. These rules describe expected behaviors for events and user containers, including expected responses. You can choose to set micro-rules manually, or use Security-Guard's machine learning feature to automate the creation of micro-rules.
 
 ## Guardians
 
-A per-Service set of micro-rules is stored in the Kubernetes system as a `Guardian` object. Under Knative, Security-Guard store Guardians ny default using the `guardians.guard.security.knative.dev` CRDs.
+A per-Service set of micro-rules is stored in the Kubernetes system as a `Guardian` object. Under Knative, Security-Guard store Guardians using the `guardians.guard.security.knative.dev` CRDs.
 
 To list all CRD Guardians use:
 
@@ -31,7 +31,9 @@ helloworld-go   10h
 
 Security-Guard offers situational awareness by writing its alerts to the Service queue proxy log. You may observe the queue-proxy to see alerts.
 
-Security alerts appear in the queue proxy log file and start with the string `SECURITY ALERT!`. The default setup of Security-Guard is to allow any request or response and learn any new pattern after reporting it. When the Service is actively serving requests, it typically takes about 30 min for Security-Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Security-Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
+Security alerts appear in the queue proxy log file and start with the string `SECURITY ALERT!`. The default setup of Security-Guard is to to learn any new pattern after reporting it. By default, Security-Guard will never block events and will never stop Service instances.
+
+When a new Service is deployed and is actively serving requests, it typically takes about 30 min for Security-Guard to learn the patterns of the Service requests and responses and build corresponding micro-rules. After the initial learning period, Security-Guard updates the micro-rules in the Service Guardian, following which, it sends alerts only when a change in behavior is detected.
 
 Note that in the default setup, Security-Guard continues to learn any new behavior and therefore avoids reporting alerts repeatedly when the new behavior reoccurs. Correct security procedures should include reviewing any new behavior detected by Security-Guard.
 
