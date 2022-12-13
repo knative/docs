@@ -34,50 +34,49 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-go
    code creates a basic web server which listens on port 8080:
 
    ```go
+   package main
    import (
-      "context"
-      "log"
-      cloudevents "github.com/cloudevents/sdk-go/v2"
-      "github.com/google/uuid"
+       "context"
+       "log"
+
+       cloudevents "github.com/cloudevents/sdk-go/v2"
+       "github.com/google/uuid"
    )
 
-   func receive(ctx context.Context, event cloudevents.Event)( * cloudevents.Event, cloudevents.Result) {
-      // Here is where your code to process the event will go.
-      // In this example we will log the event msg
-      log.Printf("Event received. \n%s\n", event)
-      data: = & HelloWorld {}
-      if err: = event.DataAs(data);
-      err != nil {
-          log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
-          return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
-      }
-      log.Printf("Hello World Message from received event %q", data.Msg)
-      // Respond with another event (optional)
-      // This is optional and is intended to show how to respond back with another event after processing.
-      // The response will go back into the knative eventing system just like any other event
-      newEvent: = cloudevents.NewEvent()
-      newEvent.SetID(uuid.New().String())
-      newEvent.SetSource("knative/eventing/samples/hello-world")
-      newEvent.SetType("dev.knative.samples.hifromknative")
-      if err: = newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative {
-          Msg: "Hi from helloworld-go app!"
-      });
-      err != nil {
-          return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
-      }
-      log.Printf("Responding with event\n%s\n", newEvent)
-      return &newEvent, nil
+   func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
+       // Here is where your code to process the event will go.
+       // In this example we will log the event msg
+       log.Printf("Event received. \n%s\n", event)
+       data := &HelloWorld{}
+       if err := event.DataAs(data); err != nil {
+           log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
+           return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
+       }
+       log.Printf("Hello World Message from received event %q", data.Msg)
+
+       // Respond with another event (optional)
+       // This is optional and is intended to show how to respond back with another event after processing.
+       // The response will go back into the knative eventing system just like any other event
+       newEvent := cloudevents.NewEvent()
+       newEvent.SetID(uuid.New().String())
+       newEvent.SetSource("knative/eventing/samples/hello-world")
+       newEvent.SetType("dev.knative.samples.hifromknative")
+       if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
+           return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+       }
+       log.Printf("Responding with event\n%s\n", newEvent)
+       return &newEvent, nil
    }
 
    func main() {
-      log.Print("Hello world sample started.")
-      c, err: = cloudevents.NewDefaultClient()
-      if err != nil {
-        log.Fatalf("failed to create client, %v", err)
-      }
-      log.Fatal(c.StartReceiver(context.Background(), receive))
+       log.Print("Hello world sample started.")
+       c, err := cloudevents.NewDefaultClient()
+       if err != nil {
+           log.Fatalf("failed to create client, %v", err)
+       }
+       log.Fatal(c.StartReceiver(context.Background(), receive))
    }
-    ```
+   ```
 
 1. Create a new file named `eventschemas.go` and paste the following code. This
    defines the data schema of the CloudEvents.
@@ -87,14 +86,14 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-go
 
    // HelloWorld defines the Data of CloudEvent with type=dev.knative.samples.helloworld
    type HelloWorld struct {
-       // Msg holds the message from the event
-       Msg string `json:"msg,omitempty,string"`
+     // Msg holds the message from the event
+     Msg string `json:"msg,omitempty,string"`
    }
 
    // HiFromKnative defines the Data of CloudEvent with type=dev.knative.samples.hifromknative
    type HiFromKnative struct {
-       // Msg holds the message from the event
-       Msg string `json:"msg,omitempty,string"`
+     // Msg holds the message from the event
+     Msg string `json:"msg,omitempty,string"`
    }
    ```
 
@@ -102,7 +101,7 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-go
    block into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
-   ```dockerfile
+   ```docker
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
@@ -257,7 +256,7 @@ folder) you're ready to build and deploy the sample app.
    [Install optional Eventing extensions](https://knative.dev/docs/install/eventing/install-eventing-with-yaml/#install-optional-eventing-extensions).
 
 1. It deployed the helloworld-go app as a K8s Deployment and created a K8s
-   service names helloworld-go. Verify using the following command.
+      service names helloworld-go. Verify using the following command.
 
    ```bash
    kubectl --namespace knative-samples get deployments helloworld-go
@@ -266,7 +265,7 @@ folder) you're ready to build and deploy the sample app.
    ```
 
 1. It created a Knative Eventing Trigger to route certain events to the
-   helloworld-go application. Make sure that Ready=true
+      helloworld-go application. Make sure that Ready=true
 
    ```bash
    kubectl --namespace knative-samples get trigger helloworld-go
@@ -363,7 +362,7 @@ Play around with the CloudEvent attributes in the curl command and the trigger s
 mesh via the Broker and can be delivered to other services using a Trigger
 
 1. Using the following example, create a YAML file for a Pod that receives any
-   CloudEvent and logs the event to its output:
+CloudEvent and logs the event to its output:
 
    ```yaml
    # event-display app deployment
@@ -402,73 +401,69 @@ mesh via the Broker and can be delivered to other services using a Trigger
          targetPort: 8080
    ```
 
-1.  Apply the YAML file by running the command:
+1. Apply the YAML file by running the command:
 
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
+   ```bash
+   kubectl apply -f <filename>.yaml
+   ```
+   Where `<filename>` is the name of the file you created in the previous step.
 
-    Where `<filename>` is the name of the file you created in the previous step.
+1. Using the following example, create a YAML file for a trigger to deliver the event
+to the `event-display` Service:
 
-1.  Using the following example, create a YAML file for a trigger to deliver the event
-    to the `event-display` Service:
+   ```yaml
+   apiVersion: eventing.knative.dev/v1
+   kind: Trigger
+   metadata:
+     name: event-display
+     namespace: knative-samples
+   spec:
+     broker: default
+     filter:
+       attributes:
+         type: dev.knative.samples.hifromknative
+         source: knative/eventing/samples/hello-world
+     subscriber:
+       ref:
+         apiVersion: v1
+         kind: Service
+         name: event-display
+   ```
 
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Trigger
-    metadata:
-      name: event-display
-      namespace: knative-samples
-    spec:
-      broker: default
-      filter:
-        attributes:
-          type: dev.knative.samples.hifromknative
-          source: knative/eventing/samples/hello-world
-      subscriber:
-        ref:
-          apiVersion: v1
-          kind: Service
-          name: event-display
-    ```
+1. Apply the YAML file by running the command:
 
-1.  Apply the YAML file by running the command:
+   ```bash
+   kubectl apply -f <filename>.yaml
+   ```
+   Where `<filename>` is the name of the file you created in the previous step.
 
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
+1. [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
 
-    Where `<filename>` is the name of the file you created in the previous step.
+   ```bash
+   kubectl -n knative-samples logs -l app=event-display --tail=50
+   ```
 
-1.  [Send a CloudEvent to the Broker](#send-and-verify-cloudevents)
+   You should see something similar to:
 
-1.  Check the logs of `event-display` service:
-
-    ```bash
-    kubectl -n knative-samples logs -l app=event-display --tail=50
-    ```
-
-    You should see something similar to:
-
-    ```{ .bash .no-copy }
-      cloudevents.Event
-      Validation: valid
-      Context Attributes,
-        specversion: 1.0
-        type: dev.knative.samples.hifromknative
-        source: knative/eventing/samples/hello-world
-        id: 8a7384b9-8bbe-4634-bf0f-ead07e450b2a
-        time: 2019-10-04T22:53:39.844943931Z
-        datacontenttype: application/json
-      Extensions,
-        knativearrivaltime: 2019-10-04T22:53:39Z
-        knativehistory: default-kn2-ingress-kn-channel.knative- samples.svc.cluster.local
-        traceparent: 00-4b01db030b9ea04bb150b77c8fa86509-2740816590a7604f-00
-      Data,
-        {
-          "msg": "Hi from helloworld-go app!"
-        }
-    ```
+   ```{ .bash .no-copy }
+     cloudevents.Event
+     Validation: valid
+     Context Attributes,
+       specversion: 1.0
+       type: dev.knative.samples.hifromknative
+       source: knative/eventing/samples/hello-world
+       id: 8a7384b9-8bbe-4634-bf0f-ead07e450b2a
+       time: 2019-10-04T22:53:39.844943931Z
+       datacontenttype: application/json
+     Extensions,
+       knativearrivaltime: 2019-10-04T22:53:39Z
+       knativehistory: default-kn2-ingress-kn-channel.knative- samples.svc.cluster.local
+       traceparent: 00-4b01db030b9ea04bb150b77c8fa86509-2740816590a7604f-00
+     Data,
+       {
+         "msg": "Hi from helloworld-go app!"
+       }
+   ```
 
 ## Removing the sample app deployment
 
