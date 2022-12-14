@@ -64,6 +64,7 @@
 /pkg/* https://pkg.go.dev/knative.dev/pkg/:splat
 /reconciler-test/* go-get=1 /golang/reconciler-test.html 200
 /release/* go-get=1 /golang/release.html 200
+/runtime/* go-get=1 /golang/func-go.html 200
 /sample-controller/* go-get=1 /golang/sample-controller.html 200
 /sample-source/* go-get=1 /golang/sample-source.html 200
 /security-guard/* go-get=1 /golang/security-guard.html 200
