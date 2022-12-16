@@ -21,5 +21,8 @@ blog/docs/images/case-studies/
 .project
 *.class
 
+# Don't include maven wrapper jar
+maven-wrapper.jar
+
 # Ignore Python virtual environments
 .venv
