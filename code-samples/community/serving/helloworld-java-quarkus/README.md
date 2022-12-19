@@ -202,6 +202,7 @@ which you update and create the necessary build and configuration files:
 1. Run the application locally:
 
    ```bash
+   mvn wrapper:wrapper
    ./mvnw compile quarkus:dev
    ```
 

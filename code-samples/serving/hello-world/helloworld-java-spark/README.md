@@ -29,6 +29,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java
 1. Run the application locally:
 
    ```bash
+   mvn wrapper:wrapper
    ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar
    ```
 
