@@ -114,25 +114,30 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
     ```
     echo "Copy the certificate to file"
-    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  queue-sidecar-rootca
+    ROOTCA="$(mktemp)"
+    FILENAME=`basename $ROOTCA`
+    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  $ROOTCA
 
     echo "Create a temporary config-deployment configmap with the certificate"
-    kubectl create cm config-deployment --from-file queue-sidecar-rootca -o json --dry-run=client> temp.json
+    CERT=`kubectl create cm config-deployment --from-file $ROOTCA -o json --dry-run=client |jq .data.\"$FILENAME\"`
 
     echo "Get the current config-deployment configmap"
-    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > config-deployment.json
+    CURRENT="$(mktemp)"
+    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > $CURRENT
 
     echo "Add queue-sidecar-token-audiences"
-    jq '.data |= . + { "queue-sidecar-token-audiences": "guard-service"}'  config-deployment.json > audiences.json
+    AUDIENCES="$(mktemp)"
+    jq '.data |= . + { "queue-sidecar-token-audiences": "guard-service"}' $CURRENT > $AUDIENCES
 
     echo "Join the two config-deployment configmaps into one"
-    jq -s '.[0] * .[1]' audiences.json temp.json > joined.json
+    MERGED="$(mktemp)"
+    jq  --arg cert "${CERT}" '.data  |= . + { "queue-sidecar-rootca": $cert}' $AUDIENCES > $MERGED
 
     echo "Apply the joined config-deployment configmap"
-    kubectl apply -f joined.json -n knative-serving
+    kubectl apply -f $MERGED -n knative-serving
 
     echo "cleanup"
-    rm joined.json audiences.json queue-sidecar-rootca temp.json config-deployment.json
+    rm $MERGED $AUDIENCES $ROOTCA $CURRENT
 
     echo "Results:"
     kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
@@ -142,13 +147,14 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
     ```
     echo "Get the current config-deployment configmap"
-    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > config-deployment.json
+    CURRENT="$(mktemp)"
+    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > $CURRENT
 
     echo "Apply the joined config-deployment configmap"
-    kubectl apply -f config-deployment.json -n knative-serving
+    kubectl apply -f $CURRENT -n knative-serving
 
     echo "cleanup"
-    rm config-deployment.json
+    rm $CURRENT
 
     echo "Results:"
     kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
@@ -160,13 +166,15 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
     ```
     echo "Copy the certificate to file"
-    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  queue-sidecar-rootca
+    ROOTCA="$(mktemp)"
+    FILENAME=`basename $ROOTCA`
+    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  $ROOTCA
 
     echo "Create a temporary config-deployment configmap with the certificate"
-    CERT=`kubectl create cm config-deployment --from-file queue-sidecar-rootca -o json --dry-run=client |jq .data.\"queue-sidecar-rootca\"`
+    CERT=`kubectl create cm config-deployment --from-file $ROOTCA -o json --dry-run=client |jq .data.\"$FILENAME\"`
 
     echo "cleanup"
-    rm queue-sidecar-rootca
+    rm $ROOTCA
 
     kubectl apply --filename - <<EOF
     apiVersion: v1
