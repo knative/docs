@@ -43,6 +43,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/single-node-kafka-development.md
           - articles/eventing-rabbitmq-announcement.md
           - articles/performance-test-with-slos.md
           - articles/workflow-as-function-flow.md
