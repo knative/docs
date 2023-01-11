@@ -61,15 +61,145 @@ To start this tutorial, after installing Knative Serving, run the following proc
         ```
         kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.3.0/guard-service.yaml
         ```
+=== "Install using the Knative Operator"
+
+    Use the following script to install Security-Guard and Serving using the Knative Operator:
+
+    ```
+    kubectl apply --filename - <<EOF
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: knative-serving
+    ---
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      security:
+        securityGuard:
+          enabled: true
+      ingress:
+        kourier:
+          enabled: true
+      config:
+        network:
+          ingress.class: "kourier.ingress.networking.knative.dev"
+    EOF
+    ```
 
 ## Additional Production Configuration
 
-It is recommended to secure the communication between queue-proxy with the `guard-service` using the following steps:
+It is recommended to secure the communication between queue-proxy with the `guard-service` using one of the following methods:
 
-1. Add `GUARD_SERVICE_TLS=true` to the environment of `guard-service` to enable TLS and server side authentication using a Knative issued certificate. The `guard-service` will be using the keys in the `knative-serving-certs` secret of the `knative-serving` namespace.
+=== "Manual changes to set Security-Guard to use TLS and tokens"
 
-1. Add `GUARD_SERVICE_AUTH=true` to the environment of `guard-service` to enable client side authentication using tokens
+    1. Add `GUARD_SERVICE_TLS=true` to the environment of `guard-service` to enable TLS and server side authentication using a Knative issued certificate. The `guard-service` will be using the keys in the `knative-serving-certs` secret of the `knative-serving` namespace.
 
-1. Set the `QueueSidecarRootCA` parameter of the `config-deployment` configmap in the `knative-serving` namespace to the public key defined in the `knative-serving-certs` secret of the `knative-serving` namespace. This will inform queue-proxy to approve knative issued certificates.
+    1. Add `GUARD_SERVICE_AUTH=true` to the environment of `guard-service` to enable client side authentication using tokens
 
-1. Set `QueueSidecarTokenAudiences = "guard-service"` at the `config-deployment` configmap in the `knative-serving` namespace. This will produce a a token with audience `guard-service` for every queue-proxy instance.
+    1. Set the `queue-sidecar-rootca` parameter of the `config-deployment` configmap in the `knative-serving` namespace to the public key defined under `ca-cert.pem` key in the `knative-serving-certs` secret of the `knative-serving` namespace. This will inform queue-proxy to use TLS and approve the guard-service certificates.
+
+    1. Set `queue-sidecar-token-audiences = "guard-service"` at the `config-deployment` configmap in the `knative-serving` namespace. This will produce a a token with audience `guard-service` for every queue-proxy instance.
+
+=== "Use scripts to set Security-Guard to use TLS and Tokens"
+
+    1. Add `GUARD_SERVICE_TLS=true` to the environment of `guard-service` to enable TLS and server side authentication using a Knative issued certificate. The `guard-service` will be using the keys in the `knative-serving-certs` secret of the `knative-serving` namespace.
+
+    1. Add `GUARD_SERVICE_AUTH=true` to the environment of `guard-service` to enable client side authentication using tokens
+
+    1. Use the following script to set TLS in `config-deployment`:
+
+    ```
+    echo "Copy the certificate to file"
+    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  queue-sidecar-rootca
+
+    echo "Create a temporary config-deployment configmap with the certificate"
+    kubectl create cm config-deployment --from-file queue-sidecar-rootca -o json --dry-run=client> temp.json
+
+    echo "Get the current config-deployment configmap"
+    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > config-deployment.json
+
+    echo "Add queue-sidecar-token-audiences"
+    jq '.data |= . + { "queue-sidecar-token-audiences": "guard-service"}'  config-deployment.json > audiences.json
+
+    echo "Join the two config-deployment configmaps into one"
+    jq -s '.[0] * .[1]' audiences.json temp.json > joined.json
+
+    echo "Apply the joined config-deployment configmap"
+    kubectl apply -f joined.json -n knative-serving
+
+    echo "cleanup"
+    rm joined.json audiences.json queue-sidecar-rootca temp.json config-deployment.json
+
+    echo "Results:"
+    kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
+    ```
+
+    Use the following script to unset TLS in `config-deployment`:
+
+    ```
+    echo "Get the current config-deployment configmap"
+    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > config-deployment.json
+
+    echo "Apply the joined config-deployment configmap"
+    kubectl apply -f config-deployment.json -n knative-serving
+
+    echo "cleanup"
+    rm config-deployment.json
+
+    echo "Results:"
+    kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
+    ```
+
+=== "Install Security-Guard with TLS using the Knative Operator"
+
+    Use the following alternative script to install Security-Guard with TLS and Serving using the Knative Operator:
+
+    ```
+    echo "Copy the certificate to file"
+    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  queue-sidecar-rootca
+
+    echo "Create a temporary config-deployment configmap with the certificate"
+    CERT=`kubectl create cm config-deployment --from-file queue-sidecar-rootca -o json --dry-run=client |jq .data.\"queue-sidecar-rootca\"`
+
+    echo "cleanup"
+    rm queue-sidecar-rootca
+
+    kubectl apply --filename - <<EOF
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+    name: knative-serving
+    ---
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+    name: knative-serving
+    namespace: knative-serving
+    spec:
+    deployments:
+    - name: guard-service
+        env:
+        - container: guard-service
+        envVars:
+        - name: GUARD_SERVICE_TLS
+            value: "true"
+        - name: GUARD_SERVICE_AUTH
+            value: "true"
+    security:
+        securityGuard:
+        enabled: true
+    ingress:
+        kourier:
+        enabled: true
+    config:
+        network:
+        ingress.class: "kourier.ingress.networking.knative.dev"
+        deployment:
+          queue-sidecar-rootca: ${CERT}
+          queue-sidecar-token-audiences: guard-service
+    EOF
+    ```
