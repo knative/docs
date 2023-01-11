@@ -94,7 +94,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
 It is recommended to secure the communication between queue-proxy with the `guard-service` using one of the following methods:
 
-=== "Manual changes to set Security-Guard to use TLS and tokens"
+=== "Manual changes"
 
     1. Add `GUARD_SERVICE_TLS=true` to the environment of `guard-service` to enable TLS and server side authentication using a Knative issued certificate. The `guard-service` will be using the keys in the `knative-serving-certs` secret of the `knative-serving` namespace.
 
@@ -104,7 +104,7 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
     1. Set `queue-sidecar-token-audiences = "guard-service"` at the `config-deployment` configmap in the `knative-serving` namespace. This will produce a a token with audience `guard-service` for every queue-proxy instance.
 
-=== "Use scripts to set Security-Guard to use TLS and Tokens"
+=== "Using scripts"
 
     1. Add `GUARD_SERVICE_TLS=true` to the environment of `guard-service` to enable TLS and server side authentication using a Knative issued certificate. The `guard-service` will be using the keys in the `knative-serving-certs` secret of the `knative-serving` namespace.
 
@@ -160,7 +160,7 @@ It is recommended to secure the communication between queue-proxy with the `guar
     kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
     ```
 
-=== "Install Security-Guard with TLS using the Knative Operator"
+=== "Using Knative Operator"
 
     Use the following alternative script to install Security-Guard with TLS and Serving using the Knative Operator:
 
