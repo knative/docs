@@ -63,11 +63,11 @@ To start this tutorial, after installing Knative Serving, run the following proc
         ```
 === "Install using the Knative Operator"
 
-    Use the following example script to install Security-Guard and Serving using the Knative Operator.
-
     !!! note
-       The example shows a case where kourier ingress is used, make the necessary changes when installing with istio or contour:
+       The example shows a case where kourier ingress is used, make the necessary changes when installing with istio or contour.
 
+    Example script to install Security-Guard and Serving with Kourier using the Knative Operator.
+    
     ```
     kubectl apply --filename - <<EOF
     apiVersion: v1
@@ -165,10 +165,10 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
 === "Using Knative Operator"
 
-    Use the following example script to install Security-Guard with TLS and Serving using the Knative Operator.
-
     !!! note
-       The example shows a case where kourier ingress is used, make the necessary changes when installing with istio or contour:
+       The example below shows a case where kourier ingress is used, make the necessary changes when installing with istio or contour.
+       
+    Example script to install Security-Guard with TLS and Serving with Kourier using the Knative Operator.
 
     ```
     echo "Copy the certificate to file"
