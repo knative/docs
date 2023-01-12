@@ -109,14 +109,14 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
 === "Using scripts"
 
-    1. Use the following script to set TLS and Tokens support in guard-service:
+    Use the following script to set TLS and Tokens support in guard-service:
 
     ```
     echo "Add TLS and Tokens to guard-service"
     kubectl patch deployment guard-service -n knative-serving -p '{"spec":{"template":{"spec":{"containers":[{"name":"guard-service","env":[{"name": "GUARD_SERVICE_TLS", "value": "true"}, {"name": "GUARD_SERVICE_AUTH", "value": "true"}]}]}}}}'
     ```
 
-    1. Use the following script to set TLS and Tokens support in guard-gates:
+    Use the following script to set TLS and Tokens support in guard-gates:
 
     ```
     echo "Copy the certificate to a temporary file"
@@ -134,7 +134,7 @@ It is recommended to secure the communication between queue-proxy with the `guar
     rm  $ROOTCA
     ```
 
-    1. Use the following script to read the TLS and Token settings of both guard-service and guard-gates:
+    Use the following script to read the TLS and Token settings of both guard-service and guard-gates:
 
     ```
     echo "Results:"
@@ -142,14 +142,14 @@ It is recommended to secure the communication between queue-proxy with the `guar
     kubectl get deployment guard-service -n knative-serving -o json|jq .spec.template.spec.containers[0].env
     ```
 
-    1. Use the following script to unset TLS and Tokens support in guard-service:
+    Use the following script to unset TLS and Tokens support in guard-service:
 
     ```
     echo "Remove TLS and Tokens from  guard-service deployment"
     kubectl patch deployment guard-service -n knative-serving -p '{"spec":{"template":{"spec":{"containers":[{"name":"guard-service","env":[{"name": "GUARD_SERVICE_TLS", "value": "false"}, {"name": "GUARD_SERVICE_AUTH", "value": "false"}]}]}}}}'
     ```
 
-    1. Use the following script to unset TLS and Tokens support in guard-gates:
+    Use the following script to unset TLS and Tokens support in guard-gates:
 
     ```
     echo "Remove TLS and Tokens from config-deployment configmap"
