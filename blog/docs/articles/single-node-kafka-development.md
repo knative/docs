@@ -4,7 +4,7 @@
 
 **Date: 2023-01-11**
 
-_In this blog post you will learn howto use a production-like environment for your local development with Knative Broker and Apache Kafka._
+_In this blog post you will learn how to use a production-like environment for your local development with Knative Broker and Apache Kafka._
 
 The [Knative Broker implementation for Apache Kafka](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/) is a Kafka-native implementation of the [Knative Broker APIs](https://knative.dev/docs/eventing/brokers/), offering improvements over the usage of the Channel-based Knative Broker implementation, such as reduced network hops, support of any Kafka version and a better integration with Apache Kafka for the Broker and Trigger model.
 
