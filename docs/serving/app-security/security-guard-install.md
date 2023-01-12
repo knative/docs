@@ -109,58 +109,51 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
 === "Using scripts"
 
-    1. Add `GUARD_SERVICE_TLS=true` to the environment of `guard-service` to enable TLS and server side authentication using a Knative issued certificate. The `guard-service` will be using the keys in the `knative-serving-certs` secret of the `knative-serving` namespace.
-
-    1. Add `GUARD_SERVICE_AUTH=true` to the environment of `guard-service` to enable client side authentication using tokens
-
-    1. Use the following script to set TLS in `config-deployment`:
+    1. Use the following script to set TLS and Tokens support in guard-service:
 
     ```
-    echo "Copy the certificate to file"
+    echo "Add TLS and Tokens to guard-service"
+    kubectl patch deployment guard-service -n knative-serving -p '{"spec":{"template":{"spec":{"containers":[{"name":"guard-service","env":[{"name": "GUARD_SERVICE_TLS", "value": "true"}, {"name": "GUARD_SERVICE_AUTH", "value": "true"}]}]}}}}'
+    ```
+
+    1. Use the following script to set TLS and Tokens support in guard-gates using the `config-deployment`:
+
+    ```
+    echo "Copy the certificate to a temporary file"
     ROOTCA="$(mktemp)"
     FILENAME=`basename $ROOTCA`
     kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  $ROOTCA
 
-    echo "Create a temporary config-deployment configmap with the certificate"
+    echo "Get the certificate in a configmap friendly form"
     CERT=`kubectl create cm config-deployment --from-file $ROOTCA -o json --dry-run=client |jq .data.\"$FILENAME\"`
 
-    echo "Get the current config-deployment configmap"
-    CURRENT="$(mktemp)"
-    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > $CURRENT
-
-    echo "Add queue-sidecar-token-audiences"
-    AUDIENCES="$(mktemp)"
-    jq '.data |= . + { "queue-sidecar-token-audiences": "guard-service"}' $CURRENT > $AUDIENCES
-
-    echo "Join the two config-deployment configmaps into one"
-    MERGED="$(mktemp)"
-    jq  --arg cert "${CERT}" '.data  |= . + { "queue-sidecar-rootca": $cert}' $AUDIENCES > $MERGED
-
-    echo "Apply the joined config-deployment configmap"
-    kubectl apply -f $MERGED -n knative-serving
+    echo "Add TLS and Tokens to config-deployment configmap"
+    kubectl patch cm config-deployment -n knative-serving -p '{"data":{"queue-sidecar-token-audiences": "guard-service", "queue-sidecar-rootca": '"$CERT"'}}'
 
     echo "cleanup"
-    rm $MERGED $AUDIENCES $ROOTCA $CURRENT
-
-    echo "Results:"
-    kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
+    rm  $ROOTCA
     ```
 
-    Use the following script to unset TLS in `config-deployment`:
+    1. Use the following script to read the TLS and Token settings of both guard-service and guard-gates:
 
     ```
-    echo "Get the current config-deployment configmap"
-    CURRENT="$(mktemp)"
-    kubectl get cm config-deployment -n knative-serving -o json | jq 'del(.data, .binaryData | ."queue-sidecar-token-audiences", ."queue-sidecar-rootca" )' > $CURRENT
-
-    echo "Apply the joined config-deployment configmap"
-    kubectl apply -f $CURRENT -n knative-serving
-
-    echo "cleanup"
-    rm $CURRENT
-
     echo "Results:"
     kubectl get cm config-deployment -n knative-serving -o json|jq '.data'
+    kubectl get deployment guard-service -n knative-serving -o json|jq .spec.template.spec.containers[0].env
+    ```
+
+    1. Use the following script to unset TLS and Tokens in support in guard-service:
+
+    ```
+    echo "Remove TLS and Tokens from  guard-service deployment"
+    kubectl patch deployment guard-service -n knative-serving -p '{"spec":{"template":{"spec":{"containers":[{"name":"guard-service","env":[{"name": "GUARD_SERVICE_TLS", "value": "false"}, {"name": "GUARD_SERVICE_AUTH", "value": "false"}]}]}}}}'
+    ```
+
+    1. Use the following script to unset TLS and Tokens in support in guard-gates:
+
+    ```
+    echo "Remove TLS and Tokens from config-deployment configmap"
+    kubectl patch cm config-deployment -n knative-serving -p '{"data":{"queue-sidecar-token-audiences": "", "queue-sidecar-rootca": ""}}'
     ```
 
 === "Using Knative Operator"
