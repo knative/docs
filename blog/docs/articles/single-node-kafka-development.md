@@ -2,7 +2,7 @@
 
 **Author: Matthias Weßendorf, Principal Software Engineer @ Red Hat**
 
-**Date: 2023-01-11**
+**Date: 2023-01-12**
 
 _In this blog post you will learn how to use a production-like environment for your local development with Knative Broker and Apache Kafka._
 
