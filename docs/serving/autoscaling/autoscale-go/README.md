@@ -6,7 +6,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. A Kubernetes cluster with [Knative Serving](../../../install/yaml-install/serving/install-serving-with-yaml.md))
    installed.
-1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
+1. The `hey` load generator installed (`go install github.com/rakyll/hey@latest`).
 1. Clone this repository, and move into the sample directory:
 
      ```bash
