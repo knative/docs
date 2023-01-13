@@ -4,7 +4,7 @@
 
 The Knative community consists of three different audiences:
 
-![Diagram of Knative audiences: users, developers, operators, and contributors](images/knative-audince.svg)
+![Diagram of Knative audiences: users, developers, operators, and contributors](images/knative-audience.svg)
 
 * **Developers** write serverless and event-driven applications using the
   constructs surfaced by Knative.  They build containers and applications which
