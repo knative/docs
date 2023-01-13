@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      contributing/about.md: contributing/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/broker/create-mtbroker.md: eventing/brokers/create-mtbroker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md

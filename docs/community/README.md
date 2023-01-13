@@ -2,6 +2,29 @@
 
 <!-- TODO: what is community, what are the touchpoints -->
 
+The Knative community consists of three different audiences:
+
+![Diagram of Knative audiences: users, developers, operators, and contributors](images/knative-audince.svg)
+
+* **Developers** write serverless and event-driven applications using the
+  constructs surfaced by Knative.  They build containers and applications which
+  leverage the concepts exposed by Knative to deliver services to end users and
+  systems.
+
+* **Operators** build and maintain Kubernetes platforms where Knative is
+  installed.  They also manage the default settings for Knative on those
+  clusters.
+
+* [**Contributors**](./contributing.md) are the authors of the Knative
+  components; they contribute and review source code, run the community
+  meetings, document and publicize the project, and otherwise keep the project
+  running.
+
+Knative components are intended to operate well stand-alone, or integrated into
+a larger platform offering by either an internal systems team or a cloud
+provider.  You can see a [list of organizations that have adopted Knative in our
+community repo](https://github.com/knative/community/tree/main/ADOPTERS.MD).
+
 ## Questions
 
 For the fastest response, you can ask questions on the [`#general`, `#serving`
@@ -30,6 +53,17 @@ A good bug report should include:
 - What you were trying to do, and what happened
 - What version of Knative and Kubernetes you are usinG (if using a cloud provider, indicate which one)
 - Relevant resource yaml, HTTP requests, or log lines
+
+## Community Meetups
+
+This virtual event is designed for end users, a space for our community to meet,
+get to know each other, and learn about uses and applications of Knative.
+
+Catch up with past community meetups on our [YouTube channel](https://www.youtube.com/playlist?list=PLQjzPfIiEQLLyCyLBKLlwDLfE_A-P7nyg).
+
+Stay tuned for new events by subscribing to the
+[calendar](https://calendar.google.com/calendar/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com&ctz=America%2FLos_Angeles) ([iCal export file](https://calendar.google.com/calendar/ical/knative.team_9q83bg07qs5b9rrslp5jor4l6s%40group.calendar.google.com/public/basic.ics))
+and following us on [Twitter](https://twitter.com/KnativeProject).
 
 ## Communication Channels
 
