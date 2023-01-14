@@ -66,7 +66,7 @@ Webhook metrics report useful info about operations. For example, if a large num
 ## Go Runtime - memstats
 
 Each Knative Serving control plane process emits a number of Go runtime [memory statistics](https://golang.org/pkg/runtime/#MemStats) (shown next).
-As a baseline for monitoring purproses, user could start with a subset of the metrics: current allocations (go_alloc), total allocations (go_total_alloc), system memory (go_sys), mallocs (go_mallocs), frees (go_frees) and garbage collection total pause time (total_gc_pause_ns), next gc target heap size (go_next_gc) and number of garbage collection cycles (num_gc).
+As a baseline for monitoring purposes, user could start with a subset of the metrics: current allocations (go_alloc), total allocations (go_total_alloc), system memory (go_sys), mallocs (go_mallocs), frees (go_frees) and garbage collection total pause time (total_gc_pause_ns), next gc target heap size (go_next_gc) and number of garbage collection cycles (num_gc).
 
 | Metric Name | Description | Type | Tags | Unit | Status |
 |:-|:-|:-|:-|:-|:-|
