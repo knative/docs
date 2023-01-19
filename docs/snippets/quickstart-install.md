@@ -94,8 +94,9 @@ To get a local deployment of Knative, run the `quickstart` plugin:
     1. Install Knative and Kubernetes in a [minikube](https://minikube.sigs.k8s.io/docs/start/) instance by running:
 
         !!! note
-            The minikube cluster will be created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a
-            different value not lower than 3&nbsp;GB by running the command `minikube config set memory 3078` before this command.
+            The minikube cluster will be created with 3&nbsp;GB of RAM. You can change to a
+            different value not lower than 3&nbsp;GB by setting a memory config in minikube.
+            For example,  `minikube config set memory 4096` will use 4&nbsp;GB of RAM.
         ```bash
         kn quickstart minikube
         ```
