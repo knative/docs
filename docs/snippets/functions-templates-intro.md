@@ -10,4 +10,5 @@ Templates allow you to choose the language and invocation format for your functi
 - [Go](https://github.com/knative/func/blob/main/docs/function-templates/golang.md){target=_blank}
 - [Quarkus](https://github.com/knative/func/blob/main/docs/function-templates/quarkus.md){target=_blank}
 - [Rust](https://github.com/knative/func/blob/main/docs/function-templates/rust.md){target=_blank}
+- [Spring Boot](https://github.com/knative/func/blob/main/docs/function-templates/springboot.md){target=_blank}
 - [TypeScript](https://github.com/knative/func/blob/main/docs/function-templates/typescript.md){target=_blank}
