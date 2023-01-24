@@ -10,7 +10,7 @@ Notable features are:
 - [Extensively configurable](#kafka-producer-and-consumer-configurations)
 - Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/extensions/partitioning.md)
 - Support any Kafka version, see [compatibility matrix](https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix)
-- Supports 2 [data plane modes](#data-plane-isolation-vs-shared-data-plane): data plane isolation per-namespace or shared data plane 
+- Supports 2 [data plane modes](#data-plane-isolation-vs-shared-data-plane): data plane isolation per-namespace or shared data plane
 
 The Knative Kafka Broker stores incoming CloudEvents as Kafka records, using the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode), because it is more efficient due to its optimizations for transport or routing, as well avoid JSON parsing. Using `binary content mode` means all CloudEvent attributes and extensions are mapped as [headers on the Kafka record](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#323-metadata-headers), while the `data` of the CloudEvent corresponds to the actual value of the Kafka record. This is another benefit of using `binary content mode` over `structured content mode` as it is less _obstructive_ and therefore compatible with systems that do not understand CloudEvents.
 
@@ -393,7 +393,7 @@ When using the Broker class `Kafka`, the Knative Kafka Broker uses a shared data
 
 However, when `KafkaNamespaced` is set as the Broker class, Kafka broker controller creates a new data plane for each namespace that there is a broker exists.
 
-That provides isolation between the data planes, which means that the `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in the user namespace are only used for the broker in that namespace. Please note that, as a consequence, this security feature creates more deployments and uses more resources. 
+That provides isolation between the data planes, which means that the `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in the user namespace are only used for the broker in that namespace. Please note that, as a consequence, this security feature creates more deployments and uses more resources.
 
 To create a `KafkaNamespaced` broker, you must set the `eventing.knative.dev/broker.class` annotation to `KafkaNamespaced`:
 
@@ -432,7 +432,7 @@ Upon the creation of the first `Broker` with `KafkaNamespaced` class, the `kafka
 
 All the configuration mechanisms that are available for the `Kafka` Broker class are also available for the brokers with `KafkaNamespaced` class with these exceptions:
 
-* [Above](#kafka-producer-and-consumer-configurations) it is described how producer and consumer configurations is done by modifying the `config-kafka-broker-data-plane` configmap in the `knative-eventing` namespace. Since Kafka Broker controller propagates this configmap into the user namespace, currently there is no way to configure producer and consumer configurations per namespace. Any value set in the `config-kafka-broker-data-plane` `ConfigMap` in the `knative-eventing` namespace will be also used in the user namespace. 
+* [Above](#kafka-producer-and-consumer-configurations) it is described how producer and consumer configurations is done by modifying the `config-kafka-broker-data-plane` configmap in the `knative-eventing` namespace. Since Kafka Broker controller propagates this configmap into the user namespace, currently there is no way to configure producer and consumer configurations per namespace. Any value set in the `config-kafka-broker-data-plane` `ConfigMap` in the `knative-eventing` namespace will be also used in the user namespace.
 * Because of the same propagation, it is also not possible to confugure consumer offsets commit interval per namespace.
 * A few more configmaps are propagated: `config-tracing` and `kafka-config-logging`. This means, tracing and logging are also not configurable per namespace.
 * Similarly, the data plane deployments are propagated from the `knative-eventing` namespace to the user namespace. This means that the data plane deployments are not configurable per namespace and will be identical to the ones in the `knative-eventing` namespace.
