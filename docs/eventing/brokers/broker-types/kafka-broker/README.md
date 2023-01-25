@@ -391,13 +391,13 @@ The supported consumer delivery guarantees are:
 
 Knative Kafka Broker implementation has 2 planes: control plane and data plane. Control plane consists of controllers that talk to Kubernetes API, watch for custom objects and manage the data plane.
 
-Data plane is the collection of components that talk to Apache Kafka and also to the event sinks. This is where the events flow. Knative Kafka Broker data plane consists of `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments.
+Data plane is the collection of components that listen for incoming events, talk to Apache Kafka and also sends events to the event sinks. This is where the events flow. Knative Kafka Broker data plane consists of `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments.
 
 When using the Broker class `Kafka`, the Knative Kafka Broker uses a shared data plane. That means, `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in `knative-eventing` namespace is used for all Kafka Brokers in the cluster.
 
 However, when `KafkaNamespaced` is set as the Broker class, Kafka broker controller creates a new data plane for each namespace that there is a broker exists. This data plane is used by all `KafkaNamespaced` brokers in that namespace.
 
-That provides isolation between the data planes, which means that the `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in the user namespace are only used for the broker in that namespace. 
+That provides isolation between the data planes, which means that the `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in the user namespace are only used for the broker in that namespace.
 
 !!! note
     As a consequence of separate data planes, this security feature creates more deployments and uses more resources. Unless you have such isolation requirements, it is recommended to go with *regular* Broker with `Kafka` class.
