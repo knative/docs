@@ -389,11 +389,18 @@ The supported consumer delivery guarantees are:
 
 ## Data plane Isolation vs Shared Data plane
 
-When using the Broker class `Kafka`, the Knative Kafka Broker uses a shared data plane, which consists of shared `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments for all Kafka Brokers in the cluster.
+Knative Kafka Broker implementation has separate planes: control plane and data plane. Control plane is the controller which talks to Kubernetes API, watch for custom objects and manage the data plane.
 
-However, when `KafkaNamespaced` is set as the Broker class, Kafka broker controller creates a new data plane for each namespace that there is a broker exists.
+Data plane is the collection of components that go and actually talk to Apache Kafka and also to the event sinks. Data plane consists of `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments.
 
-That provides isolation between the data planes, which means that the `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in the user namespace are only used for the broker in that namespace. Please note that, as a consequence, this security feature creates more deployments and uses more resources.
+When using the Broker class `Kafka`, the Knative Kafka Broker uses a shared data plane. That means, `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in `knative-eventing` namespace is used for all Kafka Brokers in the cluster.
+
+However, when `KafkaNamespaced` is set as the Broker class, Kafka broker controller creates a new data plane for each namespace that there is a broker exists. This data plane is used by all `KafkaNamespaced` brokers in that namespace.
+
+That provides isolation between the data planes, which means that the `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in the user namespace are only used for the broker in that namespace. 
+
+!!! note
+    As a consequence of separate data planes, this security feature creates more deployments and uses more resources. Unless you have such isolation requirements, it is recommended to go with *regular* Broker with `Kafka` class.
 
 To create a `KafkaNamespaced` broker, you must set the `eventing.knative.dev/broker.class` annotation to `KafkaNamespaced`:
 
@@ -412,10 +419,11 @@ spec:
     apiVersion: v1
     kind: ConfigMap
     name: my-config
-    namespace: my-namespace
+    # namespace: my-namespace # no need to define, defaults to Broker's namespace
 ```
 
-Also, the `configmap` that is specified in `spec.config` must be in the same namespace with the `Broker` object:
+!!! note
+    Also, the `configmap` that is specified in `spec.config` **must** be in the same namespace with the `Broker` object:
 
 ```yaml
 apiVersion: v1
