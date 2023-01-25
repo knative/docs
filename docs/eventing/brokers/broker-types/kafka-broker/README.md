@@ -389,9 +389,9 @@ The supported consumer delivery guarantees are:
 
 ## Data plane Isolation vs Shared Data plane
 
-Knative Kafka Broker implementation has separate planes: control plane and data plane. Control plane is the controller which talks to Kubernetes API, watch for custom objects and manage the data plane.
+Knative Kafka Broker implementation has 2 planes: control plane and data plane. Control plane consists of controllers that talk to Kubernetes API, watch for custom objects and manage the data plane.
 
-Data plane is the collection of components that go and actually talk to Apache Kafka and also to the event sinks. Data plane consists of `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments.
+Data plane is the collection of components that talk to Apache Kafka and also to the event sinks. This is where the events flow. Knative Kafka Broker data plane consists of `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments.
 
 When using the Broker class `Kafka`, the Knative Kafka Broker uses a shared data plane. That means, `kafka-broker-receiver` and `kafka-broker-dispatcher` deployments in `knative-eventing` namespace is used for all Kafka Brokers in the cluster.
 
