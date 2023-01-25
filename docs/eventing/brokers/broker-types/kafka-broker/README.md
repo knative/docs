@@ -423,7 +423,7 @@ spec:
 ```
 
 !!! note
-    Also, the `configmap` that is specified in `spec.config` **must** be in the same namespace with the `Broker` object:
+    The `configmap` that is specified in `spec.config` **must** be in the same namespace with the `Broker` object:
 
 ```yaml
 apiVersion: v1
