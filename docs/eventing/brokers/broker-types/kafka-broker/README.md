@@ -408,6 +408,7 @@ metadata:
   namespace: my-namespace
 spec:
   config:
+     # the referenced `configmap` must be in the same namespace with the `Broker` object, in this case `my-namespace`
     apiVersion: v1
     kind: ConfigMap
     name: my-config
