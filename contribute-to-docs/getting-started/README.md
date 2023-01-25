@@ -1,7 +1,7 @@
 # Getting started contributing to Knative docs
 
 This folder contains information you need to get started contributing to Knative documentation.
-If you have any questions, contact us on the [#docs channel on Knative Slack](https://slack.knative.dev).
+If you have any questions, contact us on the [#knative-documentation channel on CNCF Slack](https://cloud-native.slack.com/archives/C04LY5G9ED7).
 We're happy to help!
 
 Table of contents:
