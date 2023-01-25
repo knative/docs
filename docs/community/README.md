@@ -43,7 +43,7 @@ Knative is composed of many different components. We use GitHub Issues to track
 bug reports and feature requests. While it's most helpful if you know the
 specific component that the bug is happening in, we understand that it can be
 difficult to tell sometimes. A clear bug report in the wrong component is much
-better than a partial report in the right component, so feel free to file your issue in these three main repositories if you're not sure:
+better than a partial report in the right component, so feel free to file your issue in one of these three main repositories if you're not sure:
 
 * [Serving](https://github.com/knative/serving/issues/new?template=bug-report.md)
 * [Eventing](https://github.com/knative/eventing/issues/new?template=bug.md)
