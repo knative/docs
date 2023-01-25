@@ -52,7 +52,7 @@ better than a partial report in the right component, so feel free to file your i
 A good bug report should include:
 
 - What you were trying to do, and what happened
-- What version of Knative and Kubernetes you are usinG (if using a cloud provider, indicate which one)
+- What version of Knative and Kubernetes you are using (if using a cloud provider, indicate which one)
 - Relevant resource yaml, HTTP requests, or log lines
 
 ## Community Meetups
