@@ -1,7 +1,9 @@
-# About the community
+# Community Rules and Practices
 
 This page provides links to documents for common Knative community practices and
 a description of Knative's audience.
+
+While the project was started by Google, it has received contributions from [over 200 companies](https://knative.devstats.cncf.io/d/21/prs-authors-companies-table) and is now governed by the [CNCF](https://cncf.io/).
 
 ## Community values
 
@@ -17,9 +19,9 @@ the goals and values we hold as a team.
 
 This section links to documents about how the Knative community is governed.
 
-Knative has public and recorded monthly community meetings.
-Each project has one or more working groups driving the project, and Knative has
-a single technical oversight committee monitoring the overall project.
+Knative has public and recorded monthly community meetings.  Each component has
+one or more working groups driving the effort, and Knative has a single
+technical oversight committee monitoring the overall project.
 
 - [Governance](https://github.com/knative/community/blob/main/GOVERNANCE.md):
 the Knative governance framework.
