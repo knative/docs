@@ -87,7 +87,8 @@ Knative tagged questions and curated answers.
 ### Community Meetups
 
 New to Knative or built something cool?  Share your impressions by
-presenting at the Knative Community Meetup!
+presenting at the Knative Community Meetup!  [Use this form to sign
+up to present.](https://docs.google.com/forms/d/1EQ2Ckxva5S9bM8ePARmgnsV6fneQFSE7DnrqdBS0mXI/viewform)
 
 Catch up with past community meetups on our [YouTube channel](https://www.youtube.com/playlist?list=PLQjzPfIiEQLLyCyLBKLlwDLfE_A-P7nyg).
 

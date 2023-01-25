@@ -79,17 +79,17 @@ Drive. Access to `knative-users@` is automatically approved; access to
 `knative-dev@` is handled via a lightweight approval process -- it helps if you
 provide a one-sentence description when requesting access.
 
+We also use GitHub Issues and [GitHub
+projects](https://github.com/orgs/knative/projects) for tracking longer-term
+efforts, including each working group's roadmap, and the backlog for oversight
+committees like the Technical Oversight Committee and the Steering Committee.
+
 Feature design is generally done via Google Docs stored in a [shared Google
 Drive](https://drive.google.com/drive/folders/0AM-QGZJ-HUA8Uk9PVA). Due to
 limitations of shared drives, the default access control is that all documents
 are *readable* by `knative-users@` and *commentable* and *editable* by
 `knative-dev@`. Documents generally cannot be deleted without special
 intervention.
-
-We also use GitHub Issues and [GitHub
-projects](https://github.com/orgs/knative/projects) for tracking longer-term
-efforts, including each working group's roadmap, and the backlog for oversight
-committees like the Technical Oversight Committee and the Steering Committee.
 
 ## Meetings
 

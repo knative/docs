@@ -294,7 +294,7 @@ nav:
       - Security: reference/security/README.md
       - Release notes: reference/relnotes/README.md
     - Community:
-      - Welcome to the Knative community: community/README.md
+      - How To Get Involved: community/README.md
       - Contribute to Knative: community/contributing.md
       - Community Rules and Practices: community/governance.md
     - About:

@@ -1,4 +1,4 @@
-# About the community
+# Community Rules and Practices
 
 This page provides links to documents for common Knative community practices and
 a description of Knative's audience.
