@@ -70,7 +70,7 @@ and following us on [Twitter](https://twitter.com/KnativeProject).
 
 Much of the community meets on [the CNCF Slack](https://slack.cncf.io/), using the following channels:
 
-* [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7): Geenral discussion about Knative usage
+* [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7): General discussion about Knative usage
 
 * [#knative-client](https://cloud-native.slack.com/archives/C04LY4SKBQR): Discussion about the Knative CLI client `kn`
 
