@@ -31,7 +31,7 @@
 You don't need to read the whole style guide before contributing to Knative documentation.
 Unpolished contributions delivered early are better than perfect contributions delivered late.
 
-If you notice gaps in the style guide or have queries, please post in [the Docs Slack channel](https://knative.slack.com/archives/C9CV04DNJ).
+If you notice gaps in the style guide or have queries, please post in [the #knative-documentation Slack channel](https://cloud-native.slack.com/archives/C04LY5G9ED7).
 
 - [Documenting code](style-guide/documenting-code.md)
 - [Formatting standard and conventions](style-guide/style-and-formatting.md)

@@ -74,7 +74,7 @@ extra:
       link: https://github.com/knative/community
       name: Knative Community on Github
     - icon: fontawesome/brands/slack
-      link: https://slack.knative.dev
+      link: https://slack.cncf.io
       name: Slack
   # TODO: Replace with https://github.com/mkdocs/mkdocs/pull/2267 once mkdocs 1.2 is out.
   version_warning: !!python/object/apply:os.getenv ["VERSION_WARNING"]

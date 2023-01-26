@@ -75,7 +75,7 @@ Discussion and help from your fellow users.
 - [Knative developers group](https://groups.google.com/forum/#!forum/knative-dev)
 Discussion and help from Knative developers.
 
-- [Knative Slack](https://slack.knative.dev):
+- [Knative Slack](https://slack.cncf.io):
 Ping @serving-help or @eventing-help if you run into issues using Knative Serving
 or Eventing and chat with other project developers. See also the [Knative Slack guidelines](https://github.com/knative/community/blob/main/SLACK-GUIDELINES.md).
 

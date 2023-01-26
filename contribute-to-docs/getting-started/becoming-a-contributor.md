@@ -57,7 +57,7 @@ Knative documentation:
 
 ## Get help from the community
 
-- [#docs on the Knative Slack](https://slack.knative.dev) -- The #docs channel
+- [#knative-documentation on the CNCF Slack](https://cloud-native.slack.com/archives/C04LY5G9ED7) -- The #docs channel
   is the best place to go if you have questions about making changes to the
   documentation. We're happy to help!
 

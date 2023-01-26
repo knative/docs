@@ -27,9 +27,9 @@ community repo](https://github.com/knative/community/tree/main/ADOPTERS.MD).
 
 ## Questions
 
-For the fastest response, you can ask questions on the [`#general`, `#serving`,
-`#eventing`, or `#functions` channels of the Knative
-Slack](https://slack.knative.dev/).
+For the fastest response, you can ask questions on the [`#knative`, `#knative-serving`,
+`#knative-eventing`, or `#knative-functions` channels of the Knative
+Slack](https://slack.cncf.io/).
 
 We also have a [Stack Overflow topic,
 `knative`](https://stackoverflow.com/questions/tagged/knative) (as well as
