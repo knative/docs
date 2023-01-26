@@ -69,13 +69,27 @@ and following us on [Twitter](https://twitter.com/KnativeProject).
 ## Communication Channels
 
 Much of the community meets on [the CNCF Slack](https://slack.cncf.io/), using the following channels:
+
 * [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7): Geenral discussion about Knative usage
+
+* [#knative-client](https://cloud-native.slack.com/archives/C04LY4SKBQR): Discussion about the Knative CLI client `kn`
+
+* [#knative-conformance](https://cloud-native.slack.com/archives/C04LKFZ1UFL): Knative API standardization
+
 * [#knative-contributors](https://cloud-native.slack.com/archives/C04LN0620E8): General discussion channel for folks contributing to the Knative project in any capacity
+
 * [#knative-documentation](https://cloud-native.slack.com/archives/C04LY5G9ED7): Knative documentation and website user experience
+
 * [#knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S): Discussion for Knative Eventing
+
+* [#knative-functions](https://cloud-native.slack.com/archives/C04LKEZUXEE): Discussion for Knative Functions
+
 * [#knative-productivity](https://cloud-native.slack.com/archives/C04LY4M2G49): Discussion around Knative integration with test infrastructure, Prow and other tooling on GitHub
+
 * [#knative-release](https://cloud-native.slack.com/archives/C04LY4Y3EHF): Coordinating and managing Knative releases
+
 * [#knative-security](https://cloud-native.slack.com/archives/C04LGJ0D5FF): Discussion area for security issues affecting Knative components
+
 * [#knative-serving](https://cloud-native.slack.com/archives/C04LMU0AX60): Discussion area for Knative Serving and related areas (networking / autoscaling)
 
 
