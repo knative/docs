@@ -71,7 +71,7 @@ and following us on [Twitter](https://twitter.com/KnativeProject).
 Much of the community meets on [the CNCF Slack](https://slack.cncf.io/), using the following channels:
 * [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7): Geenral discussion about Knative usage
 * [#knative-contributors](https://cloud-native.slack.com/archives/C04LN0620E8): General discussion channel for folks contributing to the Knative project in any capacity
-* [#knative-documenation](https://cloud-native.slack.com/archives/C04LY5G9ED7): Knative documentation and website user experience
+* [#knative-documentation](https://cloud-native.slack.com/archives/C04LY5G9ED7): Knative documentation and website user experience
 * [#knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S): Discussion for Knative Eventing
 * [#knative-productivity](https://cloud-native.slack.com/archives/C04LY4M2G49): Discussion around Knative integration with test infrastructure, Prow and other tooling on GitHub
 * [#knative-release](https://cloud-native.slack.com/archives/C04LY4Y3EHF): Coordinating and managing Knative releases
