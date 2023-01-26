@@ -22,7 +22,7 @@ An ApiServerSource definition supports the following fields:
 | [`spec.serviceAccountName`](#serviceaccountname-parameter) | The name of the ServiceAccount to use to run this source. Defaults to `default` if not set. | Optional |
 | [`spec.sink`](../../sinks/README.md#sink-as-a-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
-
+| [`spec.namespaceSelector](#namespace-selector-parameter) | Specifies a label selector to track multiple namespaces. If unspecified, the namespace of the ApiServerSource will be tracked. | Optional |
 
 ### Resources parameter
 
@@ -210,6 +210,69 @@ spec:
   ...
 ```
 
+### NamespaceSelector parameter
+
+The NamespaceSelector is an optional label selector that can be utilized to target more than one namespace. If the selector is unset, the namespace of the ApiServerSource will be tracked.
+
+A `namespaceSelector` supports the following fields:
+
+| Field | Description | Required or optional |
+|-------|-------------|----------------------|
+| `matchExpressions` | A list of label selector requirements. The requirements are ANDed. | Use one of `matchExpressions` or `matchLabels` |
+| `matchExpressions.key` | The label key that the selector applies to. | Required if using `matchExpressions` |
+| `matchExpressions.operator` | Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`. | Required if using `matchExpressions` |
+| `matchExpressions.values` | An array of string values. If `operator` is `In` or `NotIn`, the values array must be non-empty. If `operator` is `Exists` or `DoesNotExist`, the values array must be empty. This array is replaced during a strategic merge patch. | Required if using `matchExpressions` |
+| `matchLabels` | A map of key-value pairs. Each key-value pair in the `matchLabels` map is equivalent to an element of `matchExpressions`, where the key field is `matchLabels.<key>`, the `operator` is `In`, and the `values` array contains only "matchLabels.<value>". The requirements are ANDed. | Use one of `matchExpressions` or `matchLabels` |
+
+#### Example: Target multiple namespaces with matchExpressions
+
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+ name: <apiserversource>
+ namespace: <namespace>
+spec:
+  ...
+  namespaceSelector:
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - production
+          - development
+  ...
+```
+
+#### Example: Target multiple namespaces with matchLabels
+
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+ name: <apiserversource>
+ namespace: <namespace>
+spec:
+  ...
+  namespaceSelector:
+    matchLabels:
+      environment: production
+  ...
+```
+
+#### Example: Target all namespaces with an empty selector
+
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+ name: <apiserversource>
+ namespace: <namespace>
+spec:
+  ...
+  namespaceSelector: {}
+  ...
+```
 
 ### CloudEvent Overrides
 
