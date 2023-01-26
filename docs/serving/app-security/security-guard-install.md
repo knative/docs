@@ -164,6 +164,31 @@ It is recommended to secure the communication between queue-proxy with the `guar
     Example script to install Security-Guard with TLS and Serving with Kourier using the Knative Operator.
 
     ```
+    kubectl apply --filename - <<EOF
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: knative-serving
+    ---
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      security:
+        securityGuard:
+          enabled: true
+      ingress:
+        kourier:
+          enabled: true
+      config:
+        network:
+          ingress.class: "kourier.ingress.networking.knative.dev"
+    EOF
+
+    while ! kubectl get secret knative-serving-certs --namespace knative-serving; do echo "Waiting for my secret. CTRL-C to exit."; sleep 5; done
+
     echo "Copy the certificate to file"
     ROOTCA="$(mktemp)"
     FILENAME=`basename $ROOTCA`
@@ -176,33 +201,28 @@ It is recommended to secure the communication between queue-proxy with the `guar
     rm $ROOTCA
 
     kubectl apply --filename - <<EOF
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-    name: knative-serving
-    ---
     apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
-    name: knative-serving
-    namespace: knative-serving
+      name: knative-serving
+      namespace: knative-serving
     spec:
-    deployments:
-    - name: guard-service
+      deployments:
+      - name: guard-service
         env:
         - container: guard-service
-        envVars:
-        - name: GUARD_SERVICE_TLS
+          envVars:
+          - name: GUARD_SERVICE_TLS
             value: "true"
-        - name: GUARD_SERVICE_AUTH
+          - name: GUARD_SERVICE_AUTH
             value: "true"
-    security:
+      security:
         securityGuard:
-        enabled: true
-    ingress:
+          enabled: true
+      ingress:
         kourier:
-        enabled: true
-    config:
+          enabled: true
+      config:
         network:
           ingress.class: "kourier.ingress.networking.knative.dev"
         deployment:
