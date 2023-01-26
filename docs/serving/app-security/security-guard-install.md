@@ -175,24 +175,22 @@ It is recommended to secure the communication between queue-proxy with the `guar
     metadata:
       name: knative-serving
       namespace: knative-serving
-    spec:
-      security:
-        securityGuard:
-          enabled: true
-      ingress:
-        kourier:
-          enabled: true
-      config:
-        network:
-          ingress.class: "kourier.ingress.networking.knative.dev"
     EOF
 
-    while ! kubectl get secret knative-serving-certs --namespace knative-serving; do echo "Waiting for my secret. CTRL-C to exit."; sleep 5; done
+    echo "Waiting for secret to be created (CTRL-C to exit)"
+    while [[ -z $PEM ]]
+    do
+      echo -n "."
+      sleep 1
+      DOC=`kubectl get secret -n knative-serving knative-serving-certs -o json 2> /dev/null`
+      PEM=`echo $DOC | jq -r '.data."ca-cert.pem"'`
+    done
+    echo " Secret found!"
 
     echo "Copy the certificate to file"
     ROOTCA="$(mktemp)"
     FILENAME=`basename $ROOTCA`
-    kubectl get secret -n knative-serving knative-serving-certs -o json| jq -r '.data."ca-cert.pem"' | base64 -d >  $ROOTCA
+    echo $PEM | base64 -d >  $ROOTCA
 
     echo "Create a temporary config-deployment configmap with the certificate"
     CERT=`kubectl create cm config-deployment --from-file $ROOTCA -o json --dry-run=client |jq .data.\"$FILENAME\"`
