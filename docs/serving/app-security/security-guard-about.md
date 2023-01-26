@@ -42,7 +42,7 @@ Security-Guard can also be configured to operate in other modes of operation, su
 * Move from auto learning to manual micro-rules management after the initial learning period
 * Block requests/responses when they do not conform to the micro-rules
 
-For more information or for troubleshooting help, see the [#security](https://knative.slack.com/archives/CBYV1E0TG) channel in Knative Slack.
+For more information or for troubleshooting help, see the [#knative-security](https://cloud-native.slack.com/archives/C04LGJ0D5FF) channel in Knative Slack.
 
 ## Security-Guard Use Cases
 

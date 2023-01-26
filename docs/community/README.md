@@ -27,9 +27,9 @@ community repo](https://github.com/knative/community/tree/main/ADOPTERS.MD).
 
 ## Questions
 
-For the fastest response, you can ask questions on the [`#general`, `#serving`,
-`#eventing`, or `#functions` channels of the Knative
-Slack](https://slack.knative.dev/).
+For the fastest response, you can ask questions on the [`#knative`, `#knative-serving`,
+`#knative-eventing`, or `#knative-functions` channels of the CNCF
+Slack](https://slack.cncf.io/).
 
 We also have a [Stack Overflow topic,
 `knative`](https://stackoverflow.com/questions/tagged/knative) (as well as
@@ -68,7 +68,16 @@ and following us on [Twitter](https://twitter.com/KnativeProject).
 
 ## Communication Channels
 
-Much of the community meets on [the Knative Slack](https://slack.knative.dev/).
+Much of the community meets on [the CNCF Slack](https://slack.cncf.io/), using the following channels:
+* [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7): Geenral discussion about Knative usage
+* [#knative-contributors](https://cloud-native.slack.com/archives/C04LN0620E8): General discussion channel for folks contributing to the Knative project in any capacity
+* [#knative-documentation](https://cloud-native.slack.com/archives/C04LY5G9ED7): Knative documentation and website user experience
+* [#knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S): Discussion for Knative Eventing
+* [#knative-productivity](https://cloud-native.slack.com/archives/C04LY4M2G49): Discussion around Knative integration with test infrastructure, Prow and other tooling on GitHub
+* [#knative-release](https://cloud-native.slack.com/archives/C04LY4Y3EHF): Coordinating and managing Knative releases
+* [#knative-security](https://cloud-native.slack.com/archives/C04LGJ0D5FF): Discussion area for security issues affecting Knative components
+* [#knative-serving](https://cloud-native.slack.com/archives/C04LMU0AX60): Discussion area for Knative Serving and related areas (networking / autoscaling)
+
 
 We also have user
 ([`knative-users@googlegroups.com`](https://groups.google.com/forum/#!forum/knative-users))

@@ -12,7 +12,7 @@ This section covers documentation, processes, and roles for the [Knative blog](h
 
 ## Contact
 
-- Slack: [#docs](https://knative.slack.com/archives/C9CV04DNJ)
+- Slack: [#knative-documentation](https://cloud-native.slack.com/archives/C04LY5G9ED7)
 
 ## Submit a Post
 
@@ -27,7 +27,7 @@ To submit a blog post:
 1. Update the navigation files as described on the [Updating the Blog](https://github.com/knative/docs/blob/main/blog/README.md) page.
 1. Open a pull request (PR) for your blog post.
 1. A reviewer is assigned to all pull requests automatically. The reviewer checks your submission, and works with you on feedback and final details. When the pull request is approved, the blog will be scheduled for publication.
-1. Ping editorial team members on Slack [#docs](https://knative.slack.com/archives/C9CV04DNJ) channel with a link to your recently created PR.
+1. Ping editorial team members on Slack [#knative-documentation](https://cloud-native.slack.com/archives/C04LY5G9ED7) channel with a link to your recently created PR.
 
 ## Blog Guidelines
 

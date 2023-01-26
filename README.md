@@ -74,7 +74,7 @@ To help you get started, see the following resources:
 
 ### Getting help
 
-- [#docs on the Knative Slack](https://slack.knative.dev) -- The #docs channel
+- [#knative-documentation on the CNCF Slack](https://cloud-native.slack.com/archives/C04LY5G9ED7) -- The #knative-documentation channel
   is the best place to go if you have questions about making changes to the
   documentation. We're happy to help!
 
@@ -93,7 +93,7 @@ of the website pages, or by directly opening an
 If you have a question that you can't find an answer to, we would also like to
 hear about that too. In addition to our docs, you can also reach out to the
 community for assistance. For example, ask a documentation specific question on
-the `#docs` channel in [Slack](https://knative.slack.com/).
+the `#knative-documentation` channel in [Slack](https://cloud-native.slack.com/archives/C04LY5G9ED7).
 
 Also see the [Knative community resource pages](https://knative.dev/docs/community/)
 for a list of all the available community resources, including links to the
