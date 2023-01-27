@@ -22,7 +22,7 @@ An ApiServerSource definition supports the following fields:
 | [`spec.serviceAccountName`](#serviceaccountname-parameter) | The name of the ServiceAccount to use to run this source. Defaults to `default` if not set. | Optional |
 | [`spec.sink`](../../sinks/README.md#sink-as-a-parameter) | A reference to an object that resolves to a URI to use as the sink. | Required |
 | [`spec.ceOverrides`](#cloudevent-overrides) | Defines overrides to control the output format and modifications to the event sent to the sink. | Optional |
-| [`spec.namespaceSelector](#namespace-selector-parameter) | Specifies a label selector to track multiple namespaces. If unspecified, the namespace of the ApiServerSource will be tracked. | Optional |
+| [`spec.namespaceSelector`](#namespaceselector-parameter) | Specifies a label selector to track multiple namespaces. If unspecified, the namespace of the ApiServerSource will be tracked. | Optional |
 
 ### Resources parameter
 
