@@ -117,6 +117,8 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 [Release Notes](https://github.com/knative/operator/releases/tag/knative-v1.9.0)
 
+- Security-Guard version 0.4 can now be installed using the Knative Operator. This new release of Security-Guard also includes TLS+Token support to secure internal communications between Security-Guard components (#1301, @houshengbo)
+
 
 ## Thank you, contributors
 
