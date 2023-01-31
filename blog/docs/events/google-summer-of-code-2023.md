@@ -1,4 +1,4 @@
-# Knative community participating in Google Summer of Code 2023
+# Google Summer of Code 2023 at Knative
 
 **Author: [Ali OK](https://twitter.com/aliok_tr), Principal Software Engineer @ Red Hat**
 
