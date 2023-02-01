@@ -178,6 +178,7 @@ It is recommended to secure the communication between queue-proxy with the `guar
     EOF
 
     echo "Waiting for secret to be created (CTRL-C to exit)"
+    PEM=""
     while [[ -z $PEM ]]
     do
       echo -n "."
