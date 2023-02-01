@@ -74,6 +74,7 @@ nav:
           - steering/2020-01-annual-report-2019.md
           - steering/2019-12-updates.md
       - Events:
+          - events/google-summer-of-code-2023.md
           - events/virtual-office-hour-12-2022.md
           - events/knative-at-kubecon-na-2022.md
           - events/google-summer-of-code-2022.md
