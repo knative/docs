@@ -78,15 +78,16 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
 
     1. Install Knative and Kubernetes using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) by running:
-        !!! note
-            Make sure Port 80 is not binded or busy with any services, otherwise installtion will lead to an error. So, stop the service using that Port.
-            To check port 80 busy or not
-            ```bash
-            netstat -tnlp | grep 80
-            ```
         ```bash
         kn quickstart kind
         ```
+
+        !!! note
+            Quickstart uses Port 80, and it will fail to install if any other services are bound on that port. If you have a service using Port 80, you'll need to stop it before using Quickstart.
+            To check if another service is using Port 80:
+            ```bash
+            netstat -tnlp | grep 80
+            ```
 
     1. After the plugin is finished, verify you have a cluster called `knative`:
 
