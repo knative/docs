@@ -22,8 +22,8 @@ You can view the latest tested Istio version on the [Knative Net Istio releases 
 
 When you install Istio, there are a few options depending on your goals. For a
 basic Istio installation suitable for most Knative use cases, follow the
-[Basic installation with istioctl](#basic-installation-with-istioctl) instructions. If you're familiar with 
-Istio and know what kind of installation you want, read through the options and 
+[Basic installation with istioctl](#basic-installation-with-istioctl) instructions. If you're familiar with
+Istio and know what kind of installation you want, read through the options and
 choose the installation that suits your needs.
 
 ### Basic installation with istioctl
