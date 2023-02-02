@@ -1,0 +1,191 @@
+# Knative Apache Kafka Broker with Isolated Data Plane
+
+**Author: Ali Ok, Principal Software Engineer @ Red Hat**
+
+TODO:
+- Fix the date
+- Wait until https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/ is updated with 1.9 release
+- Introduction
+  - Show regular Kafka Broker
+  - Explain the problem
+- Namespaced broker
+- Integration with Istio
+- Integration with Kube network policy
+
+**Date: 2023-02-01**
+
+_In this blog post, you will learn how to configure Knative's Apache Kafka Broker to use isolated data planes._
+
+The [Knative Broker implementation for Apache Kafka](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/) is a Kafka-native implementation of the [Knative Broker APIs](https://knative.dev/docs/eventing/brokers/), offering improvements over the usage of the Channel-based Knative Broker implementation, such as reduced network hops, support of any Kafka version and a better integration with Apache Kafka for the Broker and Trigger model.
+
+This broker class supports 2 data plane modes: shared and isolated.
+
+## Planes
+
+To give a better overview, it is important to understand what is meant by "data plane".
+
+Knative's Apache Kafka Broker has 2 planes, similar to most of the other Knative and Kubernetes components.
+
+The control plane is the collection of components that are controllers. These controllers manage the data plane, based on the custom objects created by the users. The custom objects managed by the control plane in this case are [`Broker`](https://knative.dev/docs/eventing/reference/eventing-api/#eventing.knative.dev/v1.Broker) and [`Trigger`](https://knative.dev/docs/eventing/reference/eventing-api/#eventing.knative.dev/v1.Trigger).
+
+The data plane is the collection of components that talk to Apache Kafka, based on the configuration given by the control plane. There are 2 components:
+- Ingress is the component that listens for the events by opening an HTTP endpoint. It then forwards events to an Apache Kafka topic for persistence and for synchronization of the pace of consuming and producing events.
+- Dispatcher is the component that receives events from the Apache Kafka topic and dispatches them to the subscribers that are subscribed using the `Trigger` API.
+
+## Shared data plane
+
+When using a broker class of `Kafka`, control plane doesn't create a new data plane. Instead, it configures the existing data plane to support ingressing and dispatching for the created broker custom object.
+
+Creating a development environment Apache Kafka and Knative Kafka Broker is explained in [this](https://knative.dev/blog/articles/single-node-kafka-development/) blog post.
+
+When you follow that article, you will see the data plane of the Kafka Broker created in `knative-eventing` namespace:
+
+```yaml
+kubectl get pods -n knative-eventing
+NAME                                       READY   STATUS    RESTARTS   AGE
+eventing-controller-7b95f495bf-dkqtl       1/1     Running   0          2h4m
+eventing-webhook-8db49d6cc-4f847           1/1     Running   0          2h4m
+kafka-broker-dispatcher-859d684d7d-frw6p   1/1     Running   0          2h4m
+kafka-broker-receiver-67b7ff757-rk9b6      1/1     Running   0          2h4m
+kafka-controller-7cd9bd8649-d62dh          1/1     Running   0          2h4m
+kafka-webhook-eventing-f8c975b99-vc969     1/1     Running   0          2h4m
+```
+
+Knative Kafka Broker data plane consists of `kafka-broker-dispatcher` and `kafka-broker-receiver` pods, and they are shared among all broker custom objects. When another `Broker` is created, control plane will not create any new deployments.
+
+Also, when you `kubectl get` the `Broker` object, you will see its ingress has the address that is using the Kubernetes `Service` named `kafka-broker-ingress` in `knative-eventing` namespace.
+
+```bash
+kubectl get brokers.eventing.knative.dev -A
+
+NAMESPACE  NAME                    URL                                                                                           AGE     READY   REASON
+default    my-demo-kafka-broker    http://kafka-broker-ingress.knative-eventing.svc.cluster.local/default/my-demo-kafka-broker   2h6m    True
+other      other-kafka-broker      http://kafka-broker-ingress.knative-eventing.svc.cluster.local/other/other-kafka-broker       2h6m    True
+```
+
+Since the same ingress service and the same ingress deployment is used, the URL path is used to identify the target broker for any requests made.
+
+For `my-demo-kafka-broker` broker in `default` namespace, `/default/my-demo-kafka-broker` is used. For `other-kafka-broker` broker in `other` namespace, `/other/other-kafka-broker` is used.
+
+## Isolated data plane
+
+After creating a development environment Apache Kafka and Knative Kafka Broker as explained in [this](https://knative.dev/blog/articles/single-node-kafka-development/) blog post, you are ready to go and use `KafkaNamespaced` broker class.
+
+Similar to the global `kafka-broker-config` configmap created in that tutorial, we will create a configmap but in user namespace `default`. In isolated data plane mode, we need to have the configuration for the broker in the same namespace with the broker. 
+
+```bash
+cat <<-EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-broker-config
+  namespace: default
+data:
+  default.topic.partitions: "10"
+  default.topic.replication.factor: "1"
+  bootstrap.servers: "my-cluster-kafka-bootstrap.kafka:9092"
+EOF
+```
+
+We now create the broker, that uses the class `KafkaNamespaced` and also uses the configuration we just created above:
+
+```bash
+cat <<-EOF | kubectl apply -f -
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: KafkaNamespaced
+  name: broker-isolated-data-plane
+  namespace: default
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kafka-broker-config
+    namespace: default
+EOF
+```
+
+When we check the user namespace where the `Broker` object is created in, we will see the data plane pods created:
+
+```bash
+kubectl get pods -n default
+
+NAME                                       READY   STATUS    RESTARTS   AGE
+kafka-broker-dispatcher-8497dd6fb6-h8kdg   1/1     Running   0          15s
+kafka-broker-receiver-84ff47fcd9-cv8j8     1/1     Running   0          15s
+```
+
+Similar to the data plane deployments, we will also see different services used for the `Broker` objects. Thus, the addresses of the brokers will be using a different service than the `kafka-broker-ingress` service in `knative-eventing` namespace.
+
+```bash
+kubectl get brokers.eventing.knative.dev broker-isolated-data-plane -n default
+
+NAME                         URL                                                                                        AGE   READY   REASON
+broker-isolated-data-plane   http://kafka-broker-ingress.default.svc.cluster.local/default/broker-isolated-data-plane   37s   True
+```
+
+In isolated data plane mode, a new data plane is created per namespace and not per `Broker` object. If we create another `Broker` object in the same namespace, it will use the same data plane:
+
+```bash
+cat <<-EOF | kubectl apply -f -
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: KafkaNamespaced
+  name: other-broker-isolated-data-plane
+  namespace: default
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kafka-broker-config
+    namespace: default
+EOF
+```
+
+
+No new data plane pods are created:
+
+```bash
+kubectl get pods -n default
+
+NAME                                       READY   STATUS    RESTARTS   AGE
+kafka-broker-dispatcher-8497dd6fb6-h8kdg   1/1     Running   0          72s
+kafka-broker-receiver-84ff47fcd9-cv8j8     1/1     Running   0          72s
+```
+
+Finally, when **all** of the `Broker` objects with class `KafkaNamespaced` is deleted in the namespace, the data plane will be removed:
+
+```bash
+kubectl delete brokers.eventing.knative.dev -n default --all
+
+kubectl get pods -n default
+
+No resources found in default namespace.
+```
+
+## Use cases
+
+While the shared data plane approach is good for most of the cases, there might be some cases where you would like to have the data plane not shared.
+
+One use case is when you see the potential of a [noisy neighbors problem](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). There might be broker instances which receive tremendous amount of load and this might reduce the performance of other brokers.
+
+Another use case is when you would like to restrict traffic in a self-service manner using Istio. As a  
+
+
+
+
+
+While it is still possible to restrict traffic based on the URL paths of the broker addresses, a better approach would be restricting based on the Kubernetes `Service`s or namespaces. Since isolated data plane mode creates a separate Kubernetes `Service` in user namespace, it is convenient to configure 
+
+TODO:
+- Another use case is when you would like to restrict traffic. While it is still possible to
+- Istio 
+- Kubernetes firewall
+- Easier traffic limiting within the namespace
+
+## Disdvantages
+
