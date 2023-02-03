@@ -2,12 +2,7 @@
 
 **Author: Ali Ok, Principal Software Engineer @ Red Hat**
 
-TODO:
-- Fix the date
-- Wait until https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/ is updated with 1.9 release
-- Disdvantages
-
-**Date: 2023-02-01**
+**Date: 2023-02-03**
 
 _In this blog post, you will learn how to configure Knative's Apache Kafka Broker to use isolated data planes._
 
@@ -23,7 +18,7 @@ Knative's Apache Kafka Broker has 2 planes, similar to most of the other Knative
 
 The control plane is the collection of components that are controllers. These controllers manage the data plane, based on the custom objects created by the users. The custom objects managed by the control plane in this case are [`Broker`](https://knative.dev/docs/eventing/reference/eventing-api/#eventing.knative.dev/v1.Broker) and [`Trigger`](https://knative.dev/docs/eventing/reference/eventing-api/#eventing.knative.dev/v1.Trigger).
 
-The data plane is the collection of components that talk to Apache Kafka, based on the configuration given by the control plane. There are 2 components:
+The data plane is the collection of components that talk to Apache Kafka and the subscribers (targets of triggers), based on the configuration given by the control plane. There are 2 components:
 - Ingress is the component that listens for the events by opening an HTTP endpoint. It then forwards events to an Apache Kafka topic for persistence and for synchronization of the pace of consuming and producing events.
 - Dispatcher is the component that receives events from the Apache Kafka topic and dispatches them to the subscribers that are subscribed using the `Trigger` API.
 
@@ -166,11 +161,18 @@ No resources found in default namespace.
 
 While the shared data plane approach is good for most of the cases, there might be some cases where you would like to have the data plane not shared.
 
-One use case is when you see the potential of a [noisy neighbors problem](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). There might be broker instances which receive tremendous amount of load and this might reduce the performance of other brokers.
+One use case is when you would not like the dispatcher living in `knative-eventing` namespace to talk to the subscribers in other namespaces or, similarly, if you would not like a single ingress deployment to talk to multiple Apache Kafka systems.
 
-Another use case is when you would like to restrict traffic in a self-service manner using Istio. As documented in [Protect a Knative Broker by using JSON Web Token (JWT) and Istio](https://knative.dev/docs/eventing/brokers/broker-admin-config-options/#protect-a-knative-broker-by-using-json-web-token-jwt-and-istio), you can use Istio to restrict traffic based on the URL paths of the broker addresses. However, for the shared data plane approach, the Istio injection label `istio-injection=enabled` needs to be added to the `knative-eventing` namespace. Similarly, the `AuthorizationPolicy` object needs to be created in the `knative-eventing` namespace as the Broker service is created there.
+Another case is when you see the potential of a [noisy neighbors problem](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). There might be broker instances which receive tremendous amount of load and this might reduce the performance of other brokers.
+
+Finally, one other use case is when you would like to restrict traffic in a self-service manner using Istio. As documented in [Protect a Knative Broker by using JSON Web Token (JWT) and Istio](https://knative.dev/docs/eventing/brokers/broker-admin-config-options/#protect-a-knative-broker-by-using-json-web-token-jwt-and-istio), you can use Istio to restrict traffic based on the URL paths of the broker addresses. However, for the shared data plane approach, the Istio injection label `istio-injection=enabled` needs to be added to the `knative-eventing` namespace. Similarly, the `AuthorizationPolicy` object needs to be created in the `knative-eventing` namespace as the Broker service is created there.
 
 In isolated data plane mode however, the data plane is created in the user namespace. Thus, it is convenient to configure Istio in the user namespace. This way, the Istio configuration is not shared with other users. Also, the `AuthorizationPolicy` object can be created in the user namespace in a self-service manner.
 
-## Disdvantages
+## Conclusion
 
+In this blog post, we have seen how to use the new `KafkaNamespaced` broker class. We have seen some use cases where the isolated data plane mode might be useful.
+
+It is also important to understand that although the isolated data plane approach is useful in some cases, it is more resource intensive. Thus, it is recommended to use the shared data plane approach unless you have a good reason to use the isolated data plane approach.
+
+More information about the `KafkaNamespaced` broker class, its limitations and its configuration options can be found in the [documentation](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#configuring-the-order-of-delivered-events).
