@@ -13,6 +13,7 @@ You need:
 
 - A Kubernetes cluster created.
 - [`istioctl`](https://istio.io/docs/setup/install/istioctl/) installed.
+- [Knative Serving](../install/README.md) installed (can also be installed after the Istio).
 
 ## Supported Istio versions
 
@@ -27,11 +28,21 @@ Istio and know what kind of installation you want, read through the options and
 choose the installation that suits your needs.
 
 ### Basic installation with istioctl
-You can easily customize your Istio installation with `istioctl`.
+1. You can easily install and customize your Istio installation with `istioctl`.
 
-```sh
-istioctl install -y
-```
+    ```sh
+    istioctl install -y
+    ```
+
+1. To integrate Istio with Knative Serving install the Knative Istio controller by running the command:
+
+     ```bash
+     kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
+     ```
+
+    !!! hint
+        Make sure to also install [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md) and [configure DNS](../install/yaml-install/serving/install-serving-with-yaml.md#configure-dns).
+
 
 ### Forming a service mesh
 The Istio service mesh provides a few benefits:
