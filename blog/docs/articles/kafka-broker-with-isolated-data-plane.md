@@ -175,4 +175,4 @@ In this blog post, we have seen how to use the new `KafkaNamespaced` broker clas
 
 It is also important to understand that although the isolated data plane approach is useful in some cases, it is more resource intensive. Thus, it is recommended to use the shared data plane approach unless you have a good reason to use the isolated data plane approach.
 
-More information about the `KafkaNamespaced` broker class, its limitations and its configuration options can be found in the [documentation](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#configuring-the-order-of-delivered-events).
+More information about the `KafkaNamespaced` broker class, its limitations and its configuration options can be found in the [documentation](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#data-plane-isolation-vs-shared-data-plane).
