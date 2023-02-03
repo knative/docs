@@ -14,11 +14,11 @@ Furthermore, this broker class supports 2 data plane modes: shared and isolated.
 
 To give a better overview, it is important to understand what a _data plane_ is.
 
-Knative's Apache Kafka Broker has 2 planes, similar to most of the other Knative and Kubernetes components.
+Knative's Apache Kafka Broker has 2 planes, similar to many other Knative and Kubernetes components.
 
 The control plane is the collection of components that are controllers. These controllers manage the data plane, based on the custom objects created by the users. The custom objects managed by the control plane in this case are [`Broker`](https://knative.dev/docs/eventing/reference/eventing-api/#eventing.knative.dev/v1.Broker) and [`Trigger`](https://knative.dev/docs/eventing/reference/eventing-api/#eventing.knative.dev/v1.Trigger).
 
-The data plane is the collection of components that talk to Apache Kafka and the subscribers (targets of triggers), based on the configuration given by the control plane. There are 2 components in Knative Kafka Broker data plane:
+The data plane is the collection of components that talk to Apache Kafka and to the subscribers (targets of triggers), based on the configuration given by the control plane. There are 2 components in Knative Kafka Broker data plane:
 
 - Ingress is the component that listens for the events by opening an HTTP endpoint. It then forwards events to an Apache Kafka topic for persistence and for synchronization of the pace of consuming and producing events.
 - Dispatcher is the component that receives events from the Apache Kafka topic and dispatches them to the subscribers that are subscribed using the `Trigger` API.
