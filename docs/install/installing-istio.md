@@ -66,7 +66,7 @@ preparations for mTLS enabled environment.
     kubectl label namespace knative-serving istio-injection=enabled
     ```
 
-2. Set `PeerAuthentication` to `PERMISSIVE` on knative-serving system namespace
+1. Set `PeerAuthentication` to `PERMISSIVE` on knative-serving system namespace
 by creating a YAML file using the following template:
 
     ```bash
@@ -80,7 +80,7 @@ by creating a YAML file using the following template:
         mode: PERMISSIVE
     ```
 
-3. Apply the YAML file by running the command:
+1. Apply the YAML file by running the command:
 
     ```bash
     kubectl apply -f <filename>.yaml
@@ -89,42 +89,6 @@ by creating a YAML file using the following template:
 
 
 ## Configuring the installation
-
-### Configuring DNS
-
-Knative dispatches to different services based on their hostname, so it is recommended to have DNS properly configured.
-
-To do this, begin by looking up the external IP address that Istio received:
-
-```
-$ kubectl get svc -n istio-system
-NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
-istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
-istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,15011/TCP,8080/TCP,15014/TCP       2m14s
-```
-
-This external IP can be used with your DNS provider with a wildcard `A` record. However, for a basic non-production set
-up, this external IP address can be used with `sslip.io` in the `config-domain` ConfigMap in `knative-serving`.
-
-You can edit this by using the following command:
-
-```
-kubectl edit cm config-domain --namespace knative-serving
-```
-
-Given this external IP, change the content to:
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-domain
-  namespace: knative-serving
-data:
-  # sslip.io is a "magic" DNS provider, which resolves all DNS lookups for:
-  # *.{ip}.sslip.io to {ip}.
-  34.83.80.117.sslip.io: ""
-```
 
 ### Updating the `config-istio` configmap to use a non-default local gateway
 
@@ -170,15 +134,11 @@ If there is a change in service ports (compared to that of
 ## Verifying your Istio installation
 
 View the status of your Istio installation to make sure the installation was
-successful. It might take a few seconds, so rerun the following command until
-all the pods show a `STATUS` of `Running` or `Completed`:
+successful. You can use `istioctl` to verify the installation:
 
 ```bash
-kubectl get pods --namespace istio-system
+istioctl verify-install
 ```
-!!! tip
-You can append the `--watch` flag to the `kubectl get` commands to view
-the pod status in realtime. You use `CTRL + C` to exit watch mode.
 
 
 ## Istio resources
