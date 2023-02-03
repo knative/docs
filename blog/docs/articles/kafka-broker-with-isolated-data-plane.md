@@ -5,12 +5,7 @@
 TODO:
 - Fix the date
 - Wait until https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/ is updated with 1.9 release
-- Introduction
-  - Show regular Kafka Broker
-  - Explain the problem
-- Namespaced broker
-- Integration with Istio
-- Integration with Kube network policy
+- Disdvantages
 
 **Date: 2023-02-01**
 
@@ -20,7 +15,7 @@ The [Knative Broker implementation for Apache Kafka](https://knative.dev/docs/ev
 
 This broker class supports 2 data plane modes: shared and isolated.
 
-## Planes
+## What is a data plane?
 
 To give a better overview, it is important to understand what is meant by "data plane".
 
@@ -173,19 +168,9 @@ While the shared data plane approach is good for most of the cases, there might 
 
 One use case is when you see the potential of a [noisy neighbors problem](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). There might be broker instances which receive tremendous amount of load and this might reduce the performance of other brokers.
 
-Another use case is when you would like to restrict traffic in a self-service manner using Istio. As a  
+Another use case is when you would like to restrict traffic in a self-service manner using Istio. As documented in [Protect a Knative Broker by using JSON Web Token (JWT) and Istio](https://knative.dev/docs/eventing/brokers/broker-admin-config-options/#protect-a-knative-broker-by-using-json-web-token-jwt-and-istio), you can use Istio to restrict traffic based on the URL paths of the broker addresses. However, for the shared data plane approach, the Istio injection label `istio-injection=enabled` needs to be added to the `knative-eventing` namespace. Similarly, the `AuthorizationPolicy` object needs to be created in the `knative-eventing` namespace as the Broker service is created there.
 
-
-
-
-
-While it is still possible to restrict traffic based on the URL paths of the broker addresses, a better approach would be restricting based on the Kubernetes `Service`s or namespaces. Since isolated data plane mode creates a separate Kubernetes `Service` in user namespace, it is convenient to configure 
-
-TODO:
-- Another use case is when you would like to restrict traffic. While it is still possible to
-- Istio 
-- Kubernetes firewall
-- Easier traffic limiting within the namespace
+In isolated data plane mode however, the data plane is created in the user namespace. Thus, it is convenient to configure Istio in the user namespace. This way, the Istio configuration is not shared with other users. Also, the `AuthorizationPolicy` object can be created in the user namespace in a self-service manner.
 
 ## Disdvantages
 
