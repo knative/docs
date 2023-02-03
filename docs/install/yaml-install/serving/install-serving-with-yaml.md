@@ -144,6 +144,7 @@ Follow the procedure for the networking layer of your choice:
     webhook-859796bc7-8n5g2                   1/1     Running   0          96s
     ```
 
+## Configure DNS
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
 {% include "real-dns-yaml.md" %}

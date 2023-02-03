@@ -1,5 +1,3 @@
-### Configure DNS
-
 You can configure DNS to prevent the need to run curl commands with a host header.
 
 The following tabs expand to show instructions for configuring DNS.
