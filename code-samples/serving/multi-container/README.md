@@ -39,7 +39,7 @@ You can do this by copying the following code into the `servingcontainer.go` fil
    package main   
    import (
    	"fmt"
-   	"io/ioutil"
+   	"io"
    	"log"
    	"net/http"
    )
@@ -49,7 +49,7 @@ You can do this by copying the following code into the `servingcontainer.go` fil
    	if err != nil {
    		log.Fatal(err)
    	}
-   	resp, err := ioutil.ReadAll(res.Body)
+   	resp, err := io.ReadAll(res.Body)
    	if err != nil {
    		log.Fatal(err)
    	}
