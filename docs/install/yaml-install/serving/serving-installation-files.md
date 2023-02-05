@@ -11,9 +11,9 @@ The following table describes the installation files included in Knative Serving
 
 | File name | Description | Dependencies|
 | --- | --- | --- |
-| serving-core.yaml | Required: Knative Serving core components. | serving-crds.yaml |
+| serving-core.yaml | Required: Knative Serving core components. | [serving-crds.yaml](https://github.com/knative/docs/blob/5fa1d67ec65fff536b473dcb12b256e4c06a950c/docs/install/yaml-install/serving/install-serving-with-yaml.md) |
 | serving-crds.yaml | Required: Knative Serving core CRDs. | none |
-| serving-default-domain.yaml | Configures Knative Serving to use [http://sslip.io](http://sslip.io) as the default DNS suffix. | serving-core.yaml |
-| serving-hpa.yaml | Components to autoscale Knative revisions through the Kubernetes Horizontal Pod Autoscaler. | serving-core.yaml |
-| serving-post-install-jobs.yaml | Additional jobs after installing `serving-core.yaml`. Currently it is the same as `serving-storage-version-migration.yaml`. | serving-core.yaml |
-| serving-storage-version-migration.yaml | Migrates the storage version of Knative resources, including Service, Route, Revision, and Configuration, from `v1alpha1` and `v1beta1` to `v1`. Required by upgrade from version 0.18 to 0.19. | serving-core.yaml |
+| serving-default-domain.yaml | Configures Knative Serving to use [http://sslip.io](http://sslip.io) as the default DNS suffix. | [serving-core.yaml](https://github.com/knative/docs/blob/5fa1d67ec65fff536b473dcb12b256e4c06a950c/docs/install/yaml-install/serving/install-serving-with-yaml.md) |
+| serving-hpa.yaml | Components to autoscale Knative revisions through the Kubernetes Horizontal Pod Autoscaler. | [serving-core.yaml](https://github.com/knative/docs/blob/5fa1d67ec65fff536b473dcb12b256e4c06a950c/docs/install/yaml-install/serving/install-serving-with-yaml.md) |
+| serving-post-install-jobs.yaml | Additional jobs after installing `serving-core.yaml`. Currently it is the same as `serving-storage-version-migration.yaml`. | [serving-core.yaml](https://github.com/knative/docs/blob/5fa1d67ec65fff536b473dcb12b256e4c06a950c/docs/install/yaml-install/serving/install-serving-with-yaml.md) |
+| serving-storage-version-migration.yaml | Migrates the storage version of Knative resources, including Service, Route, Revision, and Configuration, from `v1alpha1` and `v1beta1` to `v1`. Required by upgrade from version 0.18 to 0.19. | [serving-core.yaml](https://github.com/knative/docs/blob/5fa1d67ec65fff536b473dcb12b256e4c06a950c/docs/install/yaml-install/serving/install-serving-with-yaml.md) |
