@@ -35,7 +35,8 @@ This release brings a number of smaller improvements to the core Knative Serving
   - `allowPrivilegeEscalation` (empty means `true`)
   - `seccompProfile.type` (empty string means `Unconfined`)
   - `capabilities.drop` (default maintains privileges, use `ALL` to drop unneeded linux capabilities) (#13399, @evankanderson)
- 
+- All Serving container images are signed with cosign (@upodroid).
+
 ## 💫 New Features & Changes
 
 - Net-contour respects the `internal-encryption` Knative configuration, and encrypts traffic from Contour controlled Envoy to Activator. Requires Contour 1.24.0 or greater (#819, @KauzClay)
@@ -68,6 +69,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 ## 💫 New Features & Changes
 
 - 📄 ApiServerSource can specify a selector to target one or more namespaces. If the selector is missing, it will default to targeting the namespace in which the source resides (#6665, @gab-satchi)
+- All Eventing container images are signed with cosign (@upodroid).
 
 ## Bug fixes
 
@@ -81,6 +83,8 @@ This release brings a number of smaller improvements to the core Knative Serving
 ### 💫 New Features & Changes
 
 * `quickstart` plugin will now create a local registry. (#376, @ehudyonasi)
+* All Client container images are signed with cosign (@upodroid).
+
 
 ### Small improvements
 
@@ -118,6 +122,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 [Release Notes](https://github.com/knative/operator/releases/tag/knative-v1.9.0)
 
 - Security-Guard version 0.4 can now be installed using the Knative Operator. This new release of Security-Guard also includes TLS+Token support to secure internal communications between Security-Guard components (#1301, @houshengbo)
+- All Operator container images are signed with cosign (@upodroid).
 
 
 ## Thank you, contributors
