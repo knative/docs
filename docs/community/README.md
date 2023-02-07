@@ -139,7 +139,7 @@ our [contributor page](./contributing.md).  **Contributing is not an
 expectation** -- everyone who uses Knative, talks about it, lurks on a mailing
 list, or engages with the ideas is part of our community!  If you _do_ want to
 get more deeply involved, you'll find that contributing to open source can be a
-great career booster as well as
+great career booster.
 
 ## Governance
 
