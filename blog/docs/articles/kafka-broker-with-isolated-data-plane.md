@@ -161,7 +161,7 @@ No resources found in default namespace.
 
 While the shared data plane approach is good for most of the cases, there might be some cases where you would like to have the data plane not shared.
 
-One use case is when you would not like the dispatcher living in `knative-eventing` namespace to talk to the subscribers in other namespaces or, similarly, if you would not like a single ingress deployment to talk to multiple Apache Kafka systems. Obviously, isolated data plane mode creates dispatchers and receivers in the user namespaces and thus, the communication is restricted to the namespace.
+One use case is when you would not like the dispatcher living in the `knative-eventing` namespace to talk to the subscribers in other namespaces or, similarly, if you would not like a single ingress deployment to talk to multiple Apache Kafka systems. Obviously, isolated data plane mode creates dispatchers and receivers in the user namespaces and thus, the communication is restricted to the namespace.
 
 Another case is when you see the potential of a [noisy neighbors problem](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). There might be broker instances which receive tremendous amount of load and this might reduce the performance of other brokers. As the data plane is created per namespace, you can create multiple namespaces and deploy brokers in each namespace. This way, you can isolate the load of each broker instance.
 
