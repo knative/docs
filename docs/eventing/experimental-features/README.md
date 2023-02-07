@@ -74,4 +74,3 @@ Knative Eventing:
 | [KReference.Group field](kreference-group.md) | `kreference-group` | Specify the API `group` of `KReference` resources without the API version. | Alpha, disabled by default |
 | [Knative reference mapping](kreference-mapping.md) | `kreference-mapping` | Provide mappings from a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#destination) to a templated URI. | Alpha, disabled by default |
 | [New trigger filters](new-trigger-filters.md) | `new-trigger-filters` | Enables a new Trigger `filters` field that supports a set of powerful filter expressions. | Alpha, disabled by default |
-| [Strict Subscriber](strict-subscriber.md) | `strict-subscriber` | Invalidates Subscriptions if the field `spec.subscriber` is not defined. | Alpha, disabled by default |

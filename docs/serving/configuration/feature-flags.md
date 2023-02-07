@@ -27,7 +27,7 @@ Allowed
 Disabled
 : The feature cannot be used.
 
-## Lifecyle
+## Lifecycle
 
 When features and extensions are introduced to Knative, they follow a lifecycle of three stages:
 

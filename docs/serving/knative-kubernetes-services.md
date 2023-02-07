@@ -68,7 +68,7 @@ and the revisions into deployments and Knative Pod Autoscalers (KPAs).
 ### Service: webhook
 
 The webhook intercepts all Kubernetes API calls as well as all CRD insertions
-and updates. It sets default values, rejects inconsitent and invalid objects,
+and updates. It sets default values, rejects inconsistent and invalid objects,
 and validates and mutates Kubernetes API calls.
 
 ### Deployment: net-certmanager-controller

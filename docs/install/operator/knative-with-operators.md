@@ -5,9 +5,9 @@ You can install the Serving component, Eventing component, or both on your clust
 
 The following table describes the supported versions of Serving and Eventing for the Knative Operator:
 
-| Operator | Serving                                            | Eventing                                                                                         |
-|----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| v1.7.0   | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0<br/>v1.4.0 | v1.7.0 and v1.7.1<br/>v1.6.0<br/>v1.5.0, v1.5.1, v1.5.2 and v1.5.3<br/>v1.4.0, v1.4.1 and v1.4.2 |
+| Operator | Serving                                                                                                                          | Eventing                                                                                                                                                                 |
+|----------|----------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| v1.9     | v1.9.0<br/>v1.8.0, v1.8.1, v1.8.2 and v1.8.3<br/>v1.7.0, v1.7.1, v1.7.2, v1.7.3 and v1.7.4<br/>v1.6.0, v1.6.1, v1.6.2 and v1.6.3 | v1.9.0<br/>v1.8.0, v1.8.1, v1.8.2, v1.8.3, v1.8.4 and v1.8.5<br/>v1.7.0, v1.7.1, v1.7.2, v1.7.3, v1.7.4, v1.7.5, v1.7.6 and v1.7.7<br/>v1.6.0, v1.6.1, v1.6.2 and v1.6.3 |
 
 --8<-- "prerequisites.md"
 --8<-- "security-prereqs-images.md"
@@ -265,6 +265,7 @@ Knative Serving with different ingresses:
     knative-serving   <version number>    True
     ```
 
+### Configure DNS
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
 {% include "real-dns-operator.md" %}

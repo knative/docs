@@ -22,12 +22,17 @@ nav:
     - Tutorial:
         - Tutorial introduction: getting-started/README.md
         - Install Knative using quickstart: getting-started/quickstart-install.md
-        - Using Knative Serving:
+        - Knative Functions:
+          - About Knative Functions: getting-started/about-knative-functions.md
+          - Installing Knative Functions: getting-started/install-func.md
+          - Creating a function: getting-started/create-a-function.md
+          - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
+        - Knative Serving:
           - Deploying a Knative Service: getting-started/first-service.md
           - Autoscaling: getting-started/first-autoscale.md
           - Traffic splitting: getting-started/first-traffic-split.md
-        - Using Knative Eventing:
-          - Introducing Knative Eventing: getting-started/getting-started-eventing.md
+        - Knative Eventing:
+          - About Knative Eventing: getting-started/getting-started-eventing.md
           - Sources, Brokers, and Triggers: getting-started/first-broker.md
           - Using a Knative Service as a source: getting-started/first-source.md
           - Using Triggers and sinks: getting-started/first-trigger.md
@@ -72,6 +77,18 @@ nav:
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
       # Uninstall
       - Uninstalling Knative: install/uninstall.md
+###############################################################################
+    # Functions
+###############################################################################
+    - Functions:
+      - Knative Functions overview: functions/README.md
+      - Installing Knative Functions: functions/install-func.md
+      - Creating functions: functions/creating-functions.md
+      - Building functions: functions/building-functions.md
+      - Running functions: functions/running-functions.md
+      - Deploying functions: functions/deploying-functions.md
+      - Invoking functions: functions/invoking-functions.md
+      - Language packs: functions/language-packs.md
 ###############################################################################
     # Serving
 ###############################################################################
@@ -137,6 +154,12 @@ nav:
           - Configuring gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: serving/configuration/feature-flags.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
+      # Serving - Application Security
+      - Application security:
+        - About Security-Guard: serving/app-security/security-guard-about.md
+        - Installing Security-Guard: serving/app-security/security-guard-install.md
+        - Security-guard quickstart: serving/app-security/security-guard-quickstart.md
+        - Security-Guard example alerts: serving/app-security/security-guard-example-alerts.md
       # Serving - observability
       - Observability:
         - Collecting logs: serving/observability/logging/collecting-logs.md
@@ -163,7 +186,7 @@ nav:
             - Knative Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-mtbroker.md
-#          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
+          - Administrator configuration options: eventing/brokers/broker-admin-config-options.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
@@ -178,12 +201,14 @@ nav:
             - About ApiServerSource: eventing/sources/apiserversource/README.md
             - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
             - ApiServerSource reference: eventing/sources/apiserversource/reference.md
-          - CamelSource: eventing/sources/apache-camel-source/README.md
           - KafkaSource: eventing/sources/kafka-source/README.md
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
           - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
+          - RedisStreamSource:
+            - About RedisStreamSource: eventing/sources/redis/README.md
+            - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
@@ -226,7 +251,6 @@ nav:
         # Eventing config
         - Eventing configuration:
           - Configure Channel defaults: eventing/configuration/channel-configuration.md
-          - Configure Broker defaults: eventing/configuration/broker-configuration.md
           - Configure Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
@@ -247,7 +271,6 @@ nav:
         - New Trigger Filters: eventing/experimental-features/new-trigger-filters.md
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
-        - Strict Subscriber: eventing/experimental-features/strict-subscriber.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
@@ -270,10 +293,10 @@ nav:
     - Reference:
       - Security: reference/security/README.md
       - Release notes: reference/relnotes/README.md
-    - Contributing:
-      - Welcome to the Knative community: contributing/README.md
-      - Contribute to Knative: contributing/contributing.md
-      - About the community: contributing/about.md
+    - Community:
+      - How To Get Involved: community/README.md
+      - Contribute to Knative: community/contributing.md
+      - Community Rules and Practices: community/governance.md
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:

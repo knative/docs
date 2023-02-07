@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      contributing/about.md: contributing/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/broker/create-mtbroker.md: eventing/brokers/create-mtbroker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
@@ -14,9 +15,10 @@ plugins:
       reference/client/README.md: client/README.md
       reference/api/eventing-api.md: eventing/reference/eventing-api.md
       reference/api/serving-api.md: serving/reference/serving-api.md
-      community/contributing.md: contributing/contributing.md
-      community/about.md: contributing/about.md
-      community/README.md: contributing/README.md
+      community/about.md: community/governance.md
+      contributing/contributing.md: community/contributing.md
+      contributing/about.md: community/governance.md
+      contributing/README.md: community/README.md
       eventing/getting-started.md: getting-started/getting-started-eventing.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
       admin/collecting-metrics/README.md: serving/observability/metrics/collecting-metrics.md
@@ -72,7 +74,7 @@ plugins:
       community/contributing/trademark-committee.md: https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md
       community/contributing/values.md: https://github.com/knative/community/blob/main/VALUES.md
       community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
-      community/meetup.md: contributing/contributing.md
+      community/meetup.md: community/README.md
       community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
       concepts/overview.md: index.md
       developer/concepts/duck-typing.md: concepts/duck-typing.md
@@ -80,7 +82,6 @@ plugins:
       developer/eventing/sinks/README.md: eventing/sinks/README.md
       developer/eventing/sinks/kafka-sink.md: eventing/sinks/kafka-sink.md
       developer/eventing/sources/README.md: eventing/sources/README.md
-      developer/eventing/sources/apache-camel-source/README.md: eventing/sources/apache-camel-source/README.md
       developer/eventing/sources/apiserversource/README.md: eventing/sources/apiserversource/README.md
       developer/eventing/sources/apiserversource/getting-started.md: eventing/sources/apiserversource/getting-started.md
       developer/eventing/sources/apiserversource/reference.md: eventing/sources/apiserversource/reference.md
@@ -124,7 +125,6 @@ plugins:
       eventing/metrics.md: eventing/observability/metrics/eventing-metrics.md
       eventing/parallel.md: eventing/flows/parallel.md
       eventing/samples/README.md: samples/eventing.md
-      eventing/samples/apache-camel-source/index.md: eventing/sources/apache-camel-source/README.md
       eventing/samples/cloud-audit-logs-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-audit-logs-source
       eventing/samples/cloud-pubsub-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-pubsub-source
       eventing/samples/cloud-scheduler-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/cloud-scheduler-source

@@ -78,10 +78,16 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
 
     1. Install Knative and Kubernetes using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) by running:
-
         ```bash
         kn quickstart kind
         ```
+
+        !!! note
+            Quickstart uses Port 80, and it will fail to install if any other services are bound on that port. If you have a service using Port 80, you'll need to stop it before using Quickstart.
+            To check if another service is using Port 80:
+            ```bash
+            netstat -tnlp | grep 80
+            ```
 
     1. After the plugin is finished, verify you have a cluster called `knative`:
 
@@ -94,8 +100,9 @@ To get a local deployment of Knative, run the `quickstart` plugin:
     1. Install Knative and Kubernetes in a [minikube](https://minikube.sigs.k8s.io/docs/start/) instance by running:
 
         !!! note
-            The minikube cluster will be created with 6&nbsp;GB of RAM. If you don't have enough memory, you can change to a
-            different value not lower than 3&nbsp;GB by running the command `minikube config set memory 3078` before this command.
+            The minikube cluster will be created with 3&nbsp;GB of RAM. You can change to a
+            different value not lower than 3&nbsp;GB by setting a memory config in minikube.
+            For example,  `minikube config set memory 4096` will use 4&nbsp;GB of RAM.
         ```bash
         kn quickstart minikube
         ```

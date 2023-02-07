@@ -6,7 +6,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. A Kubernetes cluster with [Knative Serving](../../../install/yaml-install/serving/install-serving-with-yaml.md))
    installed.
-1. The `hey` load generator installed (`go get -u github.com/rakyll/hey`).
+1. The `hey` load generator installed (`go install github.com/rakyll/hey@latest`).
 1. Clone this repository, and move into the sample directory:
 
      ```bash
@@ -119,7 +119,7 @@ with 50 concurrent requests so the autoscaler created 5 pods
 #### Panic
 
 The autoscaler calculates average concurrency over a 60 second window so it
-takes a minute for the system to stablize at the desired level of concurrency.
+takes a minute for the system to stabilize at the desired level of concurrency.
 However the autoscaler also calculates a 6 second `panic` window and will enter
 panic mode if that window reached 2x the target concurrency. In panic mode the
 autoscaler operates on the shorter, more sensitive panic window. Once the panic

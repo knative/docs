@@ -138,5 +138,5 @@ Knative is an open source project that anyone in the [community](https://knative
 - [Knative Development Mailing List](https://groups.google.com/forum/#!forum/knative-dev)
 - Knative on Twitter [@KnativeProject](https://twitter.com/KnativeProject)
 - Knative on [StackOverflow](https://stackoverflow.com/questions/tagged/knative)
-- Knative [Slack](https://slack.knative.dev)
+- Knative [Slack](https://slack.cncf.io)
 - Knative on [YouTube](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)

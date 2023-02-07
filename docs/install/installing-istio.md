@@ -13,6 +13,7 @@ You need:
 
 - A Kubernetes cluster created.
 - [`istioctl`](https://istio.io/docs/setup/install/istioctl/) installed.
+- [Knative Serving](../install/README.md) installed (can also be installed after the Istio).
 
 ## Supported Istio versions
 
@@ -22,65 +23,55 @@ You can view the latest tested Istio version on the [Knative Net Istio releases 
 
 When you install Istio, there are a few options depending on your goals. For a
 basic Istio installation suitable for most Knative use cases, follow the
-[Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection)
-instructions. If you're familiar with Istio and know what kind of installation
-you want, read through the options and choose the installation that suits your
-needs.
+[Basic installation with istioctl](#basic-installation-with-istioctl) instructions. If you're familiar with
+Istio and know what kind of installation you want, read through the options and
+choose the installation that suits your needs.
 
-You can easily customize your Istio installation with `istioctl`. The following sections
-cover a few useful Istio configurations and their benefits.
+### Basic installation with istioctl
+1. You can easily install and customize your Istio installation with `istioctl`.
 
-### Choosing an Istio installation
+    ```sh
+    istioctl install -y
+    ```
 
-You can install Istio with or without a service mesh:
+1. To integrate Istio with Knative Serving install the Knative Istio controller by running the command:
 
-- [Installing Istio without sidecar injection](#installing-istio-without-sidecar-injection) (Recommended
-     default installation)
+     ```bash
+     kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
+     ```
 
-- [Installing Istio with sidecar injection](#installing-istio-with-sidecar-injection)
+    !!! hint
+        Make sure to also install [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md) and [configure DNS](../install/yaml-install/serving/install-serving-with-yaml.md#configure-dns).
 
-If you want to get up and running with Knative quickly, we recommend installing
-Istio without automatic sidecar injection. This install is also recommended for
-users who don't need the Istio service mesh, or who want to enable the service
-mesh by [manually injecting the Istio sidecars][1].
 
-#### Installing Istio without sidecar injection
+### Forming a service mesh
+The Istio service mesh provides a few benefits:
 
-Enter the following command to install Istio:
-
-To install Istio without sidecar injection:
-
-```sh
-istioctl install -y
-```
-
-#### Installing Istio with sidecar injection
-
-If you want to enable the Istio service mesh, you must enable [automatic sidecar
-injection][2]. The Istio service mesh provides a few benefits:
-
-- Allows you to turn on [mutual TLS][3], which secures service-to-service
+- Allows you to turn on [mutual TLS][1], which secures service-to-service
   traffic within the cluster.
 
-- Allows you to use the [Istio authorization policy][4], controlling the access
+- Allows you to use the [Istio authorization policy][2], controlling the access
   to each Knative service based on Istio service roles.
 
-For automatic sidecar injection, set `autoInject: enabled` in addition to the earlier
-operator configuration.
+If you want to use Istio as a service mesh, you must make sure that istio sidecars
+are injected to all `pods` that should be part of the service mesh. There are two ways to achieve this:
 
-```
-    global:
-      proxy:
-        autoInject: enabled
-```
+- Use [automatic sidecar injection][3] and set the `istio-injection=enabled` label on all `namespaces`
+  that should be part of the service-mesh
 
-#### Using Istio mTLS feature
+- Use [manual sidecar injection][4] on all `pods` that should be part of the service-mesh
 
+
+### Using Istio mTLS feature with Knative
 Since there are some networking communications between knative-serving namespace
 and the namespace where your services running on, you need additional
 preparations for mTLS enabled environment.
 
-1. Enable sidecar container on `knative-serving` system namespace.
+!!! note
+    It is strongly recommended to use [automatic sidecar injection][3]
+    to avoid manually injection sidecars to all `pods` in `knative-serving`.
+
+1. Enable sidecar injection on `knative-serving` system namespace.
 
     ```bash
     kubectl label namespace knative-serving istio-injection=enabled
@@ -107,7 +98,8 @@ by creating a YAML file using the following template:
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
-After you install the cluster local gateway, your service and deployment for the local gateway is named `knative-local-gateway`.
+
+## Configuring the installation
 
 ### Updating the `config-istio` configmap to use a non-default local gateway
 
@@ -149,54 +141,16 @@ custom: custom-local-gateway
 If there is a change in service ports (compared to that of
 `knative-local-gateway`), update the port info in the gateway accordingly.
 
-### Verifying your Istio install
 
-View the status of your Istio installation to make sure the install was
-successful. It might take a few seconds, so rerun the following command until
-all of the pods show a `STATUS` of `Running` or `Completed`:
+## Verifying your Istio installation
+
+View the status of your Istio installation to make sure the installation was
+successful. You can use `istioctl` to verify the installation:
 
 ```bash
-kubectl get pods --namespace istio-system
-```
-!!! tip
-    You can append the `--watch` flag to the `kubectl get` commands to view
-    the pod status in realtime. You use `CTRL + C` to exit watch mode.
-
-### Configuring DNS
-
-Knative dispatches to different services based on their hostname, so it is recommended to have DNS properly configured.
-
-To do this, begin by looking up the external IP address that Istio received:
-
-```
-$ kubectl get svc -nistio-system
-NAME                    TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                                      AGE
-istio-ingressgateway    LoadBalancer   10.0.2.24    34.83.80.117   15020:32206/TCP,80:30742/TCP,443:30996/TCP   2m14s
-istio-pilot             ClusterIP      10.0.3.27    <none>         15010/TCP,15011/TCP,8080/TCP,15014/TCP       2m14s
+istioctl verify-install
 ```
 
-This external IP can be used with your DNS provider with a wildcard `A` record. However, for a basic non-production set
-up, this external IP address can be used with `sslip.io` in the `config-domain` ConfigMap in `knative-serving`.
-
-You can edit this by using the following command:
-
-```
-kubectl edit cm config-domain --namespace knative-serving
-```
-
-Given this external IP, change the content to:
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-domain
-  namespace: knative-serving
-data:
-  # sslip.io is a "magic" DNS provider, which resolves all DNS lookups for:
-  # *.{ip}.sslip.io to {ip}.
-  34.83.80.117.sslip.io: ""
-```
 
 ## Istio resources
 
@@ -216,9 +170,9 @@ See the [Uninstall Istio](https://istio.io/docs/setup/install/istioctl/#uninstal
 - View the [Knative Serving documentation](../serving/README.md).
 - Try some Knative Serving [code samples](../samples/README.md).
 
-[1]:
+[1]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
+[2]: https://istio.io/docs/tasks/security/authz-http/
+[3]:
+https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
+[4]:
   https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#manual-sidecar-injection
-[2]:
-  https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#automatic-sidecar-injection
-[3]: https://istio.io/docs/concepts/security/#mutual-tls-authentication
-[4]: https://istio.io/docs/tasks/security/authz-http/

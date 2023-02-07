@@ -16,7 +16,7 @@ The following is a list of brokers provided by the community or vendors:
 
 ### Apache Kafka broker
 
-For more information, see [Apache Kafka Broker](kafka-broker/README.md).
+This broker implementation uses [Apache Kafka](https://kafka.apache.org/) as its backing technology. For more information, see [Apache Kafka Broker](kafka-broker/README.md).
 
 ### RabbitMQ broker
 

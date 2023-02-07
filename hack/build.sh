@@ -27,7 +27,7 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.7" "1.6" "1.5" "1.4") # Docs version, results in the url e.g. knative.dev/docs-0.23/..
+VERSIONS=("1.9" "1.8" "1.7") # Docs version, results in the url e.g. knative.dev/docs-1.9/..
 # 4) PR the result to main.
 # 5) Party.
 
@@ -71,7 +71,7 @@ else
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
-    if (( $(echo "$version > 1.6" | bc -l) )); then
+    if [ ${version#*1.} -gt 6 ]; then
         curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
         curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
     else

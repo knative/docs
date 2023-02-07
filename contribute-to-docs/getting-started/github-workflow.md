@@ -124,8 +124,8 @@ Here's what generally happens after you send the PR for review:
       clarity, and organization standards (see the [Knative style guide](../style-guide/README.md)).
 
 We appreciate contributions to the docs, so if you open a PR we will help you
-get it merged. You can also post in the `#docs`
-[Slack channel](https://knative.slack.com/) to get input on your ideas or find
+get it merged. You can also post in the `#knative-documentation`
+[Slack channel](https://cloud-native.slack.com/archives/C04LY5G9ED7) to get input on your ideas or find
 areas to contribute before creating a PR.
 
 
@@ -197,4 +197,4 @@ and instead the errors are related to timeouts, try re-running the test at a lat
 There are running tasks that could result in timeouts or rate limiting if your test runs at the same
 time.
 
-* Other Issues/Unsure -- reach out in the #docs Slack channel and someone will be happy to help out.
+* Other Issues/Unsure -- reach out in the `#knative-documentation` Slack channel and someone will be happy to help out.
