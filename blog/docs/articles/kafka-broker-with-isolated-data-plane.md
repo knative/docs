@@ -108,7 +108,7 @@ kafka-broker-dispatcher-8497dd6fb6-h8kdg   1/1     Running   0          15s
 kafka-broker-receiver-84ff47fcd9-cv8j8     1/1     Running   0          15s
 ```
 
-Similar to the data plane deployments, we will also see different services used for the `Broker` objects. Thus, the addresses of the brokers will be using a different service than the `kafka-broker-ingress` service in `knative-eventing` namespace.
+Similar to the data plane deployments, we will also see different services used for the `Broker` objects. Thus, the addresses of the brokers will be using a different service than the `kafka-broker-ingress` service in the `knative-eventing` namespace.
 
 ```bash
 kubectl get brokers.eventing.knative.dev broker-isolated-data-plane -n default
