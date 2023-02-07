@@ -44,7 +44,7 @@ kafka-webhook-eventing-f8c975b99-vc969     1/1     Running   0          2h4m
 
 Specifically, Knative Kafka Broker data plane consists of `kafka-broker-dispatcher` and `kafka-broker-receiver` pods, and they are shared among all broker custom objects. When another `Broker` is created, control plane will not create any new deployments.
 
-If you `kubectl get` the `Broker` objects, you will see their _addresses_ are using the Kubernetes `Service` named `kafka-broker-ingress` in `knative-eventing` namespace. Addresses of both brokers are with hostname `kafka-broker-ingress.knative-eventing.svc.cluster.local`.
+If you `kubectl get` the `Broker` objects, you will see their _addresses_ are using the Kubernetes `Service` named `kafka-broker-ingress` in the `knative-eventing` namespace. Addresses of both brokers are with hostname `kafka-broker-ingress.knative-eventing.svc.cluster.local`.
 
 ```bash
 kubectl get brokers.eventing.knative.dev -A
