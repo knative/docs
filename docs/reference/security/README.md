@@ -10,15 +10,15 @@ This page describes Knative security and disclosure information.
 
 ### All platforms
 
-Our releases from 1.8 are signed with [cosign](https://docs.sigstore.dev/cosign/overview). You can use the following steps to verify our binaries.
+Our releases from 1.9 are signed with [cosign](https://docs.sigstore.dev/cosign/overview). You can use the following steps to verify our binaries.
 
 1. Download the files you want, and the `checksums.txt`, `checksum.txt.pem` and `checksums.txt.sig` files from the releases page:
     ```sh
-    # this example verifies the 1.8.0 kn cli from the knative/client repository
-    wget https://github.com/knative/client/releases/download/knative-v1.8.0/checksums.txt
-    wget https://github.com/knative/client/releases/download/knative-v1.8.0/kn-darwin-amd64
-    wget https://github.com/knative/client/releases/download/knative-v1.8.0/checksums.txt.sig
-    wget https://github.com/knative/client/releases/download/knative-v1.8.0/checksums.txt.pem
+    # this example verifies the 1.9.0 kn cli from the knative/client repository
+    wget https://github.com/knative/client/releases/download/knative-v1.9.0/checksums.txt
+    wget https://github.com/knative/client/releases/download/knative-v1.9.0/kn-darwin-amd64
+    wget https://github.com/knative/client/releases/download/knative-v1.9.0/checksums.txt.sig
+    wget https://github.com/knative/client/releases/download/knative-v1.9.0/checksums.txt.pem
     ```
 1. Verify the signature:
     ```sh
@@ -40,7 +40,7 @@ Our releases from 1.8 are signed with [cosign](https://docs.sigstore.dev/cosign/
 
 ### Apple macOS
 
-In addition to signing our binaries with `cosign`, we [notarize](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution) our macOS binaries. You can use the `codesign` utility to verify our binaries from 1.8 release. You should expect an output that looks
+In addition to signing our binaries with `cosign`, we [notarize](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution) our macOS binaries. You can use the `codesign` utility to verify our binaries from 1.9 release. You should expect an output that looks
 like this. The expected TeamIdentifier is `7R64489VHL`
 
 ```
