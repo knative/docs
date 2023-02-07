@@ -29,7 +29,7 @@ When using a broker class of `Kafka`, control plane doesn't create a new data pl
 
 Knative Kafka Broker in shared data plane mode is demonstrated in [this](https://knative.dev/blog/articles/single-node-kafka-development/) blog post.
 
-If you follow that article, you will see the data plane of the Kafka Broker is created in `knative-eventing` namespace:
+If you follow that article, you will see the data plane of the Kafka Broker is created in the `knative-eventing` namespace:
 
 ```yaml
 kubectl get pods -n knative-eventing
