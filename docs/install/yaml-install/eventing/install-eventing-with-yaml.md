@@ -3,6 +3,7 @@
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
 
 --8<-- "prerequisites.md"
+--8<-- "security-prereqs-images.md"
 
 ## Install Knative Eventing
 
