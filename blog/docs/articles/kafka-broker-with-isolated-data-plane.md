@@ -147,7 +147,7 @@ kafka-broker-dispatcher-8497dd6fb6-h8kdg   1/1     Running   0          72s
 kafka-broker-receiver-84ff47fcd9-cv8j8     1/1     Running   0          72s
 ```
 
-Finally, when **all** of the `Broker` objects with class `KafkaNamespaced` is deleted in the namespace, the data plane will be removed:
+Finally, when **all** of the `Broker` objects with class `KafkaNamespaced` in the namespace are deleted, the data plane will be removed:
 
 ```bash
 kubectl delete brokers.eventing.knative.dev -n default --all
