@@ -78,7 +78,7 @@ data:
 EOF
 ```
 
-We now create the broker, that uses the class `KafkaNamespaced` and also uses the configuration we just created above:
+Now we create the broker, that uses the class `KafkaNamespaced` and also uses the configuration we just created above:
 
 ```bash
 cat <<-EOF | kubectl apply -f -
