@@ -2,20 +2,20 @@
 
 Knative releases from 1.9 onwards are signed with [cosign](https://docs.sigstore.dev/cosign/overview).
 
+1. Install [cosign](https://docs.sigstore.dev/cosign/installation/) and [jq](https://stedolan.github.io/jq/).
+
+1. Extract the images from a manifeset and verify the signatures.
 
 ```
-# install cosign and jq  if you don't have it
-
 # download the yaml file, this example uses the serving manifest
 curl -fsSLO https://github.com/knative/serving/releases/download/knative-v1.9.0/serving-core.yaml
 cat serving-core.yaml | grep 'gcr.io/' | awk '{print $2}' > images.txt
 input=images.txt
 while IFS= read -r image
 do
-  COSIGN_EXPERIMENTAL=1 cosign verify "$image" | jq
+  COSIGN_EXPERIMENTAL=1 cosign verify -o text "$image" | jq
 done < "$input"
 
-kubectl apply -f serving-core.yaml
 ```
 
 !!! note
