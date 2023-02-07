@@ -58,7 +58,7 @@ Since the same ingress service and the same ingress deployment is used, the URL 
 
 ## Isolated data plane
 
-After creating a development environment Apache Kafka and Knative Kafka Broker as explained in [this](https://knative.dev/blog/articles/single-node-kafka-development/) blog post, you are already good to go and try Knative Kafka Broker in isolated data plane mode as it this mode is supported out of the box.
+After creating a development environment Apache Kafka and Knative Kafka Broker as explained in [this](https://knative.dev/blog/articles/single-node-kafka-development/) blog post, you are already good to go and try Knative Kafka Broker in isolated data plane mode as this mode is supported out of the box.
 
 To start with, you need to create a configmap that contains the configuration for the broker. In this case, we cannot rely on the cluster-wide configmap in the `knative-eventing` namespace, that was created in the previous blog post.
 
