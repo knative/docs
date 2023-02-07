@@ -5,6 +5,7 @@ you with a parameter-driven way to configure the Knative cluster, without intera
 resources.
 
 --8<-- "prerequisites.md"
+--8<-- "security-prereqs-binaries.md"
 
 ## Install the Knative Operator CLI Plugin
 
