@@ -1,6 +1,6 @@
 ## Verifying CLI binaries
 
-Knative `kn` CLI releases from 1.8 onwards are signed with [cosign](https://docs.sigstore.dev/cosign/overview). You can use the following steps to verify the CLI binaries:
+Knative `kn` CLI releases from 1.9 onwards are signed with [cosign](https://docs.sigstore.dev/cosign/overview). You can use the following steps to verify the CLI binaries:
 
 1. Download the files you want, and the `checksums.txt`, `checksum.txt.pem`, and `checksums.txt.sig` files from the releases page, by running the commands:
 
