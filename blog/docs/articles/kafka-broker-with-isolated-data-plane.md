@@ -62,7 +62,7 @@ After creating a development environment Apache Kafka and Knative Kafka Broker a
 
 To start with, you need to create a configmap that contains the configuration for the broker. In this case, we cannot rely on the cluster-wide configmap in the `knative-eventing` namespace, that was created in the previous blog post.
 
-Similar to the global `kafka-broker-config` configmap created in that tutorial, we will create a configmap but in user namespace `default`. In isolated data plane mode, we need to have the configuration for the broker in the same namespace with the broker.
+Similar to the global `kafka-broker-config` configmap created in that tutorial, we will create a configmap but in user namespace `default`. In isolated data plane mode, we need to have the configuration for the broker in the same namespace as the broker.
 
 ```bash
 cat <<-EOF | kubectl apply -f -
