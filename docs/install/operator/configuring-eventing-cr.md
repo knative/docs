@@ -419,7 +419,7 @@ affinity:
           - ssd
 ```
 
-to the deployment `activator`, you need to change your KnativeEventing CR as below:
+to the deployment `eventing-controller`, you need to change your KnativeEventing CR as below:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -429,7 +429,7 @@ metadata:
   namespace: knative-eventing
 spec:
   deployments:
-  - name: activator
+  - name: eventing-controller
     affinity:
       nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
