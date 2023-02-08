@@ -18,7 +18,7 @@ package sampleapp
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -60,7 +60,7 @@ func (lc *LanguageConfig) UseDefaultIfNotProvided() {
 // GetConfigs parses a config yaml file and return AllConfigs struct
 func GetConfigs(configPath string) (AllConfigs, error) {
 	var lcs AllConfigs
-	content, err := ioutil.ReadFile(configPath)
+	content, err := os.ReadFile(configPath)
 	if nil == err {
 		err = yaml.Unmarshal(content, &lcs)
 	}
