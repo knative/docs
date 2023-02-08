@@ -16,7 +16,7 @@ You can build a container image for your function locally without deploying it t
 
 ## On-cluster Builds
 
-If you do not have a local Docker daemon running, or you are using a CI/CD pipeline, you might want to build your function on the cluster instead of using a local build. You can create an on-cluster build by using the `func deploy --remote` command.
+If you do not have a local Docker daemon running, or you are using a CI/CD pipeline, you might want to build your function on the cluster instead of using a local build. You can create an on-cluster build by using the `func deploy --remote` command, or if you already specified a Git URL before, you'll need to specify the flag as empty, using the `func deploy --remote --git-url=""` command.
 
 ### Prerequisites
 
