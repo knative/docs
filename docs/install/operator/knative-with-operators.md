@@ -265,6 +265,7 @@ Knative Serving with different ingresses:
     knative-serving   <version number>    True
     ```
 
+### Configure DNS
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
 {% include "real-dns-operator.md" %}
