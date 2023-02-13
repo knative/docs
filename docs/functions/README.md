@@ -8,7 +8,7 @@
 
 ## Language packs
 
-Functions can be written in any language supported by the available [language packs](https://github.com/knative/func/blob/main/docs/language-pack-providers/language-pack-contract.md){target=_blank}.
+Functions can be written in any language supported by the available [language packs](https://github.com/knative/func/blob/main/docs/language-packs/language-pack-contract.md){target=_blank}.
 <!--TODO: Remove and replace with lang pack snippet in future PR, similar to templates-->
 
 ## Getting started with functions
