@@ -181,7 +181,7 @@ You can scale a KafkaSource with kubectl by using the following notation:
 kubectl scale kafkasource -n <ns> <kafkasource-name> --replicas=<number-of-replicas> # e.g. 12 replicas for a topic with 12 partitions
 ```
 
-Alternatively, if you are using a GitOps approach, you can add the consumer key as shown in the example below and commit it to your repository:
+Alternatively, if you are using a GitOps approach, you can add the `consumers` key as shown in the example below and commit it to your repository:
 
 ```yaml
 
