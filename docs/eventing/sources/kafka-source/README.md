@@ -171,6 +171,40 @@ If you are using Strimzi:
     kafka-source   ["knative-demo-topic"]   ["my-cluster-kafka-bootstrap.kafka:9092"]   True             26h
     ```
 
+### Scaling 
+
+To schedule more or fewer consumers, a KafkaSource can be scaled, and they can be allocated to different dispatcher pods. The kafkasource status displays such allocation under the status.placements key.
+
+You can scale a KafkaSource with kubectl by using the following notation:
+
+```bash
+kubectl scale kafkasource -n <ns> <kafkasource-name> --replicas=<number-of-replicas> # e.g. 12 replicas for a topic with 12 partitions
+```
+
+Alternatively, if you are using a GitOps approach, you can add the consumer key as shown in the example below and commit it to your repository:
+
+```yaml
+
+    apiVersion: sources.knative.dev/v1beta1
+    kind: KafkaSource
+    metadata:
+      name: kafka-source
+    spec:
+      consumerGroup: knative-group
+      bootstrapServers:
+      - my-cluster-kafka-bootstrap.kafka:9092 
+      consumers: 12    # Number of replicas
+      topics:
+      - knative-demo-topic
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
+
+```
+
+
 ### Verify
 
 1. Produce a message (`{"msg": "This is a test!"}`) to the Apache Kafka topic as in the following example:
