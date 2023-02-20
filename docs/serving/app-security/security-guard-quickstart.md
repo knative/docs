@@ -63,16 +63,16 @@ Create a sample securedService:
     Creating a function using CLI.
 
     Add the following `deploy.annotations` to your `func.yaml` file located in your project dir"
-   
+
     ```
     deploy:
       annotations:
         features.knative.dev/queueproxy-podinfo: enabled
         qpoption.knative.dev/guard-activate: enable
-    ``` 
+    ```
 
     Deploy as you would deploy any other function
-    
+
     ```
     kn func deploy
     ```
