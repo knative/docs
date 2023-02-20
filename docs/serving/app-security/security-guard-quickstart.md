@@ -48,7 +48,7 @@ Create a sample securedService:
 
 === "kn services CLI"
 
-    Creating a service using CLI 
+    Creating a service using CLI
 
     ```
     kn service create helloworld-go \
