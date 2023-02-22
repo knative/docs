@@ -46,7 +46,9 @@ Create a sample securedService:
 
         Where `<filename>` is the name of the file you created in the previous step.
 
-=== "kn CLI"
+=== "kn services CLI"
+
+    Creating a service using CLI
 
     ```
     kn service create helloworld-go \
@@ -54,6 +56,25 @@ Create a sample securedService:
         --env "TARGET=Secured World" \
         --annotation features.knative.dev/queueproxy-podinfo=enabled \
         --annotation qpoption.knative.dev/guard-activate=enable
+    ```
+
+=== "kn func CLI"
+
+    Creating a function using CLI.
+
+    Add the following `deploy.annotations` to your `func.yaml` file located in your project dir"
+
+    ```
+    deploy:
+      annotations:
+        features.knative.dev/queueproxy-podinfo: enabled
+        qpoption.knative.dev/guard-activate: enable
+    ```
+
+    Deploy as you would deploy any other function
+
+    ```
+    kn func deploy
     ```
 
 After the Service has been created, Guard starts monitoring the Service Pods and all Events sent to the Service.
