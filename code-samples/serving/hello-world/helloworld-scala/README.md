@@ -102,89 +102,86 @@ local Docker Repository.
 ## Deploying to Knative Serving
 
 
-=== "yaml"
+**yaml**
 
-    Apply the [Service yaml definition](service.yaml):
+Apply the [Service yaml definition](service.yaml):
 
-    ```bash
-    kubectl apply -f service.yaml
-    ```
+```bash
+kubectl apply -f service.yaml
+```
 
-=== "kn"
+**kn**
 
-     With `kn` you can deploy the service with
+With `kn` you can deploy the service with
 
-       ```bash
-       kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala --env TARGET="Scala Sample v1"
-       ```
+ ```bash
+kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala --env TARGET="Scala Sample v1"
+ ```
 
-       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+ This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
-       The output will look like:
+ The output will look like:
 
-       ```
-       Creating service 'helloworld-scala' in namespace 'default':
+ ```
+ Creating service 'helloworld-scala' in namespace 'default':
+ 0.035s The Configuration is still working to reflect the latest desired specification.
+ 0.139s The Route is still working to reflect the latest desired specification.
+ 0.250s Configuration "helloworld-scala" is waiting for a Revision to become ready.
+ 8.040s ...
+ 8.136s Ingress has not yet been reconciled.
+ 8.277s unsuccessfully observed a new generation
+ 8.398s Ready to serve.
 
-        0.035s The Configuration is still working to reflect the latest desired specification.
-        0.139s The Route is still working to reflect the latest desired specification.
-        0.250s Configuration "helloworld-scala" is waiting for a Revision to become ready.
-        8.040s ...
-        8.136s Ingress has not yet been reconciled.
-        8.277s unsuccessfully observed a new generation
-        8.398s Ready to serve.
+ Service 'helloworld-scala' created to latest revision 'helloworld-scala-abcd-1' is available at URL:
+ http://helloworld-scala.default.1.2.3.4.sslip.io
+```
 
-      Service 'helloworld-scala' created to latest revision 'helloworld-scala-abcd-1' is available at URL:
-      http://helloworld-scala.default.1.2.3.4.sslip.io
-      ```
+**kubectl**
 
-=== "kubectl"
+ 1. Find the service host:
+ ```bash
+kubectl get ksvc helloworld-scala \
+--output=custom-columns=NAME:.metadata.name,URL:.status.url
+# It will print something like this, the URL is what you're looking for.
+# NAME                URL
+# helloworld-scala    http://helloworld-scala.default.1.2.3.4.sslip.io
+ ```
 
-    Then find the service host:
+2. Finally, to try your service, use the obtained URL:
 
-    ```bash
-    kubectl get ksvc helloworld-scala \
-        --output=custom-columns=NAME:.metadata.name,URL:.status.url
-
-    # It will print something like this, the URL is what you're looking for.
-    # NAME                URL
-    # helloworld-scala    http://helloworld-scala.default.1.2.3.4.sslip.io
-    ```
-
-    Finally, to try your service, use the obtained URL:
-
-    ```bash
-    curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
-    ```
+ ```bash
+curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
+ ```
 
 
-=== "kn"
+**kn**
+ 1. Find the service host:
+```bash
+kn service describe helloworld-scala -o url
+```
 
-       ```bash
-       kn service describe helloworld-scala -o url
-       ```
+ Example:
 
-       Example:
+ ```bash
+ http://helloworld-scala.default.1.2.3.4.sslip.io
+ ```
 
-       ```bash
-       http://helloworld-scala.default.1.2.3.4.sslip.io
-       ```
+2. Finally, to try your service, use the obtained URL:
 
-    Finally, to try your service, use the obtained URL:
-
-    ```bash
-    curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
-    ```
+ ```bash
+ curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
+ ```
 
 ## Cleanup
 
-=== "kubectl"
+**kubectl**
 
-    ```bash
-    kubectl delete -f service.yaml
-    ```
+```bash
+kubectl delete -f service.yaml
+```
 
-=== "kn"
+**kn**
 
-    ```bash
-    kn service delete helloworld-scala
-    ```
+```bash
+kn service delete helloworld-scala
+```

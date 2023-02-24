@@ -51,32 +51,28 @@ of operation:
 ## Build and Deploy the Application
 
 In the `Dockerfile`, you can see how the dependencies are installed using npm.
-  You can build and push this to your registry of choice via:
+You can build and push this to your registry of choice via:
 
-   ```bash
-   docker build -t <image> .
-   docker push <image>
-   ```
+ ```bash
+ docker build -t <image> .
+ docker push <image>
+ ```
 
-=== "yaml"
+**yaml**
 
-    To deploy the Knative service, edit the `service.yaml` file and replace
-    `<registry/repository/image:tag>` with the image you have just created.
+ To deploy the Knative service, edit the `service.yaml` file and replace `<registry/repository/image:tag>` with the image you have just created.
 
-       ```bash
-       kubectl apply -f service.yaml
-       ```
+ ```bash
+ kubectl apply -f service.yaml
+ ```
 
-=== "kn"
+**kn**
 
-    To deploy using the `kn` CLI:
+To deploy using the `kn` CLI:
 
-       ```bash
-       kn service create cloudevents-nodejs --image=<image>
-       ```
-
-
-
+```bash
+kn service create cloudevents-nodejs --image=<image>
+```
 
 ## Testing the sample
 
@@ -111,18 +107,14 @@ You will get back:
 
 To remove the sample app from your cluster, delete the service.
 
-=== "yaml"
+**yaml**
 
-    Run:
+ ```bash
+kubectl delete --filename service.yaml
+```
 
-    ```bash
-    kubectl delete --filename service.yaml
-    ```
+**kn**
 
-=== "kn"
-
-    Run:
-
-    ```bash
-    kn service delete cloudevents-nodejs
-    ```
+```bash
+kn service delete cloudevents-nodejs
+```

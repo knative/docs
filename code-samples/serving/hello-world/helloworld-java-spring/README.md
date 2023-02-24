@@ -132,9 +132,9 @@ During the creation of a Service, Knative performs the following steps:
 - Network programming to create a Route, ingress, Service, and load balancer for your app.
 - Automatically scale your pods up and down, including scaling down to zero active pods.
 
-To deploy the app:
+Choose one of the following methods to deploy the app:
 
-### YAML
+**YAML**
 
 1. Create a new file named `service.yaml` and copy the following service definition
    into the file:
@@ -164,15 +164,15 @@ To deploy the app:
     kubectl apply -f service.yaml
     ```
 
-### kn
+**kn**
 
-With `kn` you can deploy the service with
+1. With `kn` you can deploy the service with
 
-```bash
-kn service create helloworld-java-spring --image=docker.io/{username}/helloworld-java-spring --env TARGET="Spring Boot Sample v1"
-```
+    ```bash
+    kn service create helloworld-java-spring --image=docker.io/{username}/helloworld-java-spring --env TARGET="Spring Boot Sample v1"
+    ```
 
-This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+    This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
 ## Verification
 
@@ -220,14 +220,14 @@ This will wait until your service is deployed and ready, and ultimately it will 
 
 ## Deleting the app
 
-To remove the sample app from your cluster, delete the service.
+To remove the sample app from your cluster, delete the service:
 
-### kubectl
+**kubectl**
 ```bash
 kubectl delete -f service.yaml
 ```
 
-### kn
+**kn**
 ```bash
 kn service delete helloworld-java-spring
 ```

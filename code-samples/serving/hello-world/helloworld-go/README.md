@@ -116,85 +116,80 @@ docker push {username}/helloworld-go
 ```
 
 ### Deploying to knative
-After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster.  Choose one of the following methods:
+After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster. Choose one of the following methods:
 
-#### `yaml`
+**yaml**
 
-Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
+1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
 
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-go
-  namespace: default
-spec:
-  template:
-    spec:
-      containers:
-        - image: docker.io/{username}/helloworld-go
-          env:
-            - name: TARGET
-              value: "Go Sample v1"
-```
+ ```yaml
+ apiVersion: serving.knative.dev/v1
+ kind: Service
+ metadata:
+   name: helloworld-go
+   namespace: default
+ spec:
+   template:
+     spec:
+       containers:
+         - image: docker.io/{username}/helloworld-go
+           env:
+             - name: TARGET
+               value: "Go Sample v1"
+ ```
 
-Check that the container image value in the `service.yaml` file matches the container you built in the previous step.
+1. Check that the container image value in the `service.yaml` file matches the container you built in the previous step.
 
-Apply the configuration using `kubectl`:
+1. Apply the configuration using `kubectl`:
 
-```bash
-kubectl apply --filename service.yaml
-```
-
+ ```bash
+ kubectl apply --filename service.yaml
+ ```
 After your service is created, Knative will perform the following steps:
+ - Create a new immutable revision for this version of the app.
+ - Network programming to create a route, ingress, service, and load  balance for your app.
+ - Automatically scale your pods up and down (including to zero active pods).
 
-- Create a new immutable revision for this version of the app.
-- Network programming to create a route, ingress, service, and load balance
-  for your app.
-- Automatically scale your pods up and down (including to zero active pods).
+1. Run the following command to find the domain URL for your service:
+ ```bash
+ kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+ ```
 
-Run the following command to find the domain URL for your service:
-```bash
-kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-```
-
-Example:
-```bash
-NAME                URL
-helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
-```
+ Example:
+ ```bash
+ NAME                URL
+ helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
+ ```
 
 
-#### `kn`
+**kn**
 
-Use `kn` to deploy the service:
+1. Use `kn` to deploy the service:
 
-```bash
-kn service create helloworld-go --image=docker.io/{username}/helloworld-go --env TARGET="Go Sample v1"
-```
+ ```bash
+ kn service create helloworld-go --image=docker.io/{username}/helloworld-go --env TARGET="Go Sample v1"
+ ```
 
-You should see output like this:
-```bash
-Creating service 'helloworld-go' in namespace 'default':
-
+ You should see output like this:
+  ```bash
+  Creating service 'helloworld-go' in namespace 'default':
   0.031s The Configuration is still working to reflect the latest desired specification.
   0.051s The Route is still working to reflect the latest desired specification.
   0.076s Configuration "helloworld-go" is waiting for a Revision to become ready.
-15.694s ...
-15.738s Ingress has not yet been reconciled.
-15.784s Waiting for Envoys to receive Endpoints data.
-16.066s Waiting for load balancer to be ready
-16.237s Ready to serve.
+  15.694s ...
+  15.738s Ingress has not yet been reconciled.
+  15.784s Waiting for Envoys to receive Endpoints data.
+  16.066s Waiting for load balancer to be ready
+  16.237s Ready to serve.
 
-Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL:
-http://helloworld-go.default.1.2.3.4.xip.io
-```
+  Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL: http://helloworld-go.default.1.2.3.4.xip.io
+  ```
 
-You can then access your service through the resulting URL.
-
+1. You can then access your service through the resulting URL.
 
 
-## Verifying
+
+## Verification
 
 Now you can make a request to your app and see the result. Replace the following URL with the URL returned in the previous command.
 
@@ -203,18 +198,18 @@ curl http://helloworld-go.default.1.2.3.4.sslip.io
 Hello Go Sample v1!
 ```
 
-> Note: Add `-v` option to get more detail if the `curl` command failed.
+ > Note: Add `-v` option to get more detail if the `curl` command failed.
 
 ## Removing
 
 To remove the sample app from your cluster, delete the service record:
 
-#### `kubectl`
+**kubectl**
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-#### `kn`
+**kn**
 ```bash
 kn service delete helloworld-go
 ```

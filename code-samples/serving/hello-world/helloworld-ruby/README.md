@@ -81,39 +81,34 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
    bundle install
    ```
 
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
+1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-ruby
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-ruby
-             env:
-               - name: TARGET
-                 value: "Ruby Sample v1"
-   ```
+ ```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld-ruby
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/{username}/helloworld-ruby
+          env:
+            - name: TARGET
+              value: "Ruby Sample v1"
+ ```
 
 ## Deploying
 
-1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the app into your cluster.
+After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
+Choose one of the following methods to deploy the app:
 
-=== "yaml"
+ **yaml**
 
-       1. Create a new file, `service.yaml` and copy the following service definition
-          into the file. Make sure to replace `{username}` with your Docker Hub
-          username.
-
-          ```yaml
+ * Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
+```yaml
        apiVersion: serving.knative.dev/v1
        kind: Service
        metadata:
@@ -127,30 +122,21 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
                  env:
                    - name: TARGET
                      value: "Ruby Sample v1"
-          ```
+```
+Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
+Apply the configuration using `kubectl`:
+```bash
+kubectl apply --filename service.yaml
+```
 
-       Ensure that the container image value
-       in `service.yaml` matches the container you built in the previous step. Apply
-       the configuration using `kubectl`:
-
-       ```bash
-       kubectl apply --filename service.yaml
-       ```
-
-
-=== "kn"
-
-       With `kn` you can deploy the service with
-
-       ```bash
-       kn service create helloworld-ruby --image=docker.io/{username}/helloworld-ruby --env TARGET="Ruby Sample v1"
-       ```
-
-       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
-
-       The output will look like:
-
-       ```
+**kn**
+ * With `kn` you can deploy the service with:
+```bash
+kn service create helloworld-ruby --image=docker.io/{username}/helloworld-ruby --env TARGET="Ruby Sample v1"
+```
+This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
+The output will look like:
+```
        Creating service 'helloworld-ruby' in namespace 'default':
 
         0.035s The Configuration is still working to reflect the latest desired specification.
@@ -163,13 +149,9 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
 
       Service 'helloworld-ruby' created to latest revision 'helloworld-ruby-akhft-1' is available at URL:
       http://helloworld-ruby.default.1.2.3.4.sslip.io
-      ```
+    ```
 
-
-
-
-
-   During the creation of your service, Knative performs the following steps:
+During the creation of your service, Knative performs the following steps:
 
    - Create a new immutable revision for this version of the app.
    - Network programming to create a route, ingress, service, and load balance
@@ -180,39 +162,30 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
 
 1. Run one of the followings commands to find the domain URL for your service.
 
+ **kubectl**
+```bash
+kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+```
 
-=== "kubectl"
-       ```bash
-       kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-       ```
+ Example:
+ ```bash
+NAME                URL
+helloworld-ruby     http://helloworld-ruby.default.1.2.3.4.sslip.io
+ ```
 
-       Example:
+ **kn**
+```bash
+kn service describe helloworld-ruby -o url
+```
+Example:
+```bash
+http://helloworld-ruby.default.1.2.3.4.sslip.io
+```
 
-       ```bash
-       NAME                URL
-       helloworld-ruby    http://helloworld-ruby.default.1.2.3.4.sslip.io
-       ```
+2. Now you can make a request to your app and see the result.
+Replace the following URL with the URL returned in the previous command.
 
-
-=== "kn"
-
-       ```bash
-       kn service describe helloworld-ruby -o url
-       ```
-
-       Example:
-
-       ```bash
-       http://helloworld-ruby.default.1.2.3.4.sslip.io
-       ```
-
-
-
-
-1. Now you can make a request to your app and see the result. Replace
-   the following URL with the URL returned in the previous command.
-
-   Example:
+ Example:
 
    ```bash
    curl http://helloworld-ruby.default.1.2.3.4.sslip.io
@@ -226,17 +199,14 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
 
 ## Removing
 
-To remove the sample app from your cluster, delete the service record.
+To remove the sample app from your cluster, delete the service record:
 
+**kubectl**
+```bash
+kubectl delete --filename service.yaml
+```
 
-=== "kubectl"
-
-      ```bash
-      kubectl delete --filename service.yaml
-      ```
-
-=== "kn"
-
-      ```bash
-      kn service delete helloworld-ruby
-      ```
+**kn**
+```bash
+kn service delete helloworld-ruby
+```

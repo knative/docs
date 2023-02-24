@@ -125,20 +125,15 @@ kubectl delete --filename service.yaml
 
 To remove the sample app from your cluster, delete the service:
 
+**yaml**
 
-=== "yaml"
-
-    Run:
-
-    ```bash
-    kubectl delete --filename service.yaml
-    ```
+```bash
+kubectl delete --filename service.yaml
+```
 
 
-=== "kn"
+**kn**
 
-    Run:
-
-    ```bash
-    kn service delete cloudevents-spring
-    ```
+```bash
+kn service delete cloudevents-spring
+```
