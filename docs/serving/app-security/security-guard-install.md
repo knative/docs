@@ -95,7 +95,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
     kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/gateAccount.yaml
     ```
 
-## Per namespace setup
+## Per Namespace Setup
 
 In order to deploy guard protected services in a namespace, provide `guard-gate` with the necessary permissions on each namespace used:
 
