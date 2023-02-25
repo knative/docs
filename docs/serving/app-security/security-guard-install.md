@@ -91,7 +91,17 @@ To start this tutorial, after installing Knative Serving, run the following proc
         network:
           ingress.class: "kourier.ingress.networking.knative.dev"
     EOF
+
+    kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/gateAccount.yaml
     ```
+
+## Per namespace setup
+
+In order to deploy guard protected services in a namespace, provide `guard-gate` with the necessary permissions on each namespace used:
+
+```
+kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/gateAccount.yaml
+```
 
 ## Additional Production Configuration
 
