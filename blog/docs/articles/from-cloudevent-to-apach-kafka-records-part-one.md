@@ -6,7 +6,7 @@
 
 **Date: 2023-03-01**
 
-_In this blog post you will learn how to store incoming CloudEvents to an Apache Kafka Topic using the KafkaSink component._
+_In this blog post you will learn how to easily store incoming CloudEvents to an Apache Kafka Topic using the KafkaSink component._
 
 
 Apache Kafka is used in a lot of very different use cases but the need to adopt Kafka protocol can be a barrier especially when there are third party components with limited extension possibilities.
@@ -83,12 +83,12 @@ kn event send \
   -f message="Hello"
 ```
 
-With the above command we are sending a `message` as a CloudEvents with the `dev.knative.blog.post` to our `my-kafka-sink` object. The `kn event` plugin creates a valid CloudEvents from this invocation and sends it directly to the addressable URL of the referenced sink.
+With the above command we are sending a `message` as a CloudEvents with the `dev.knative.blog.post` to our `my-kafka-sink` object. The `kn event` plugin generates a valid CloudEvents from this invocation and sends it directly to the addressable URL of the referenced sink.
 
 
 ### Event processing with kcat
 
-[kcat](https://github.com/edenhill/kcat) is the project formerly known as as kafkacat and offers command line modes for producting and consuming records from Apache Kafka.
+[kcat](https://github.com/edenhill/kcat) is the project formerly known as as kafkacat and offers command line modes for producing and consuming records from Apache Kafka.
 
 This allows us to consume the Apache Kafka record (as CloudEvent) stored in the `my-topic` topic of our Apache Kafka cluster:
 
@@ -107,8 +107,8 @@ Message value: {"message":"Hello"}
 ### CloudEvents Binary mode
 
 
-It is import to note that the `KafkaSink` stores incoming CloudEvents as Kafka records, using the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode), because it is more efficient due to its optimizations for transport or routing, as well avoid JSON parsing. Using `binary content mode` means all CloudEvents attributes and extensions are mapped as [headers on the Kafka record](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#323-metadata-headers), while the `data` of the CloudEvent corresponds to the actual value of the Kafka record. This is another benefit of using `binary content mode` over `structured content mode` as it is less _obstructive_ and therefore compatible with systems that do not understand CloudEvents.
+It is important to note that the `KafkaSink` stores incoming CloudEvents as Kafka records, using the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode) by default, because it is more efficient due to its optimizations for transport or routing, as well avoid JSON parsing. Using `binary content mode` means all CloudEvents attributes and extensions are mapped as [headers on the Kafka record](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#323-metadata-headers), while the `data` of the CloudEvent corresponds to the actual value of the Kafka record. This is another benefit of using `binary content mode` over `structured content mode` as it is less _obstructive_ and therefore compatible with systems that do not understand CloudEvents.
 
 ### Outlook
 
-The messages stored in the Kafka topic backed by the Knative `KafkaSink` component can be easily consunmed by any consumer application in the larger ecosystem of the Apache Kafka community. The next post in this article will show how to use the Knative Broker implementation for Apache Kafka to store incoming events and make use of the Knative Eventing tools for routing based on CloudEvents metada as this filtering feature is not directly build into Apache Kafka itself.
+The messages stored in the Kafka topic backed by the Knative `KafkaSink` component can be easily consunmed by any consumer application in the larger ecosystem of the Apache Kafka community. The next post in this article will show how to use the Knative Broker implementation for Apache Kafka to store incoming events and make use of the Knative Eventing tools for routing based on CloudEvents metadata as this filtering feature is not directly build into Apache Kafka itself.
