@@ -4,7 +4,7 @@
 * **Daniele Zonca, Senior Principal Software Engineer @ Red Hat**
 * **Matthias Weßendorf, Principal Software Engineer @ Red Hat**
 
-**Date: 2023-02-23**
+**Date: 2023-03-01**
 
 _In this blog post you will learn how to store incoming CloudEvents to an Apache Kafka Topic using the KafkaSink component._
 
