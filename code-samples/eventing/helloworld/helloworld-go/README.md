@@ -362,45 +362,45 @@ Play around with the CloudEvent attributes in the curl command and the trigger s
 `source=knative/eventing/samples/hello-world`. This event enters the eventing
 mesh via the Broker and can be delivered to other services using a Trigger
 
-1.  Using the following example, create a YAML file for a Pod that receives any
-    CloudEvent and logs the event to its output:
+1. Using the following example, create a YAML file for a Pod that receives any
+   CloudEvent and logs the event to its output:
 
-        ```yaml
-        # event-display app deployment
-        apiVersion: apps/v1
-        kind: Deployment
-        metadata:
-          name: event-display
-          namespace: knative-samples
-        spec:
-          replicas: 1
-          selector:
-            matchLabels: &labels
-              app: event-display
-          template:
-            metadata:
-              labels: *labels
-            spec:
-              containers:
-                - name: helloworld-go
-                  # Source code: https://github.com/knative/eventing/tree/main/cmd/event_display
-                  image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-        ---
-        # Service that exposes event-display app.
-        # This will be the subscriber for the Trigger
-        kind: Service
-        apiVersion: v1
-        metadata:
-          name: event-display
-          namespace: knative-samples
-        spec:
-          selector:
-            app: event-display
-          ports:
-            - protocol: TCP
-              port: 80
-              targetPort: 8080
-        ```
+   ```yaml
+   # event-display app deployment
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: event-display
+     namespace: knative-samples
+   spec:
+     replicas: 1
+     selector:
+       matchLabels: &labels
+         app: event-display
+     template:
+       metadata:
+         labels: *labels
+       spec:
+         containers:
+           - name: helloworld-go
+             # Source code: https://github.com/knative/eventing/tree/main/cmd/event_display
+             image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+   ---
+   # Service that exposes event-display app.
+   # This will be the subscriber for the Trigger
+   kind: Service
+   apiVersion: v1
+   metadata:
+     name: event-display
+     namespace: knative-samples
+   spec:
+     selector:
+       app: event-display
+     ports:
+       - protocol: TCP
+         port: 80
+         targetPort: 8080
+   ```
 
 1.  Apply the YAML file by running the command:
 
@@ -413,24 +413,24 @@ mesh via the Broker and can be delivered to other services using a Trigger
 1.  Using the following example, create a YAML file for a trigger to deliver the event
     to the `event-display` Service:
 
-        ```yaml
-        apiVersion: eventing.knative.dev/v1
-        kind: Trigger
-        metadata:
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: event-display
+      namespace: knative-samples
+    spec:
+      broker: default
+      filter:
+        attributes:
+          type: dev.knative.samples.hifromknative
+          source: knative/eventing/samples/hello-world
+      subscriber:
+        ref:
+          apiVersion: v1
+          kind: Service
           name: event-display
-          namespace: knative-samples
-        spec:
-          broker: default
-          filter:
-            attributes:
-              type: dev.knative.samples.hifromknative
-              source: knative/eventing/samples/hello-world
-          subscriber:
-            ref:
-              apiVersion: v1
-              kind: Service
-              name: event-display
-        ```
+    ```
 
 1.  Apply the YAML file by running the command:
 
