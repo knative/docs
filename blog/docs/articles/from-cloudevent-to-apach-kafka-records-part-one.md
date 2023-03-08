@@ -1,8 +1,6 @@
 # From CloudEvents to Apache Kafka Records, Part I
 
-**Authors:**
-* **Daniele Zonca, Senior Principal Software Engineer @ Red Hat**
-* **Matthias Weßendorf, Principal Software Engineer @ Red Hat**
+**Authors: Daniele Zonca, Senior Principal Software Engineer @ Red Hat, Matthias Weßendorf, Principal Software Engineer @ Red Hat**
 
 **Date: 2023-03-08**
 
