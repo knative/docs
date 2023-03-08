@@ -81,7 +81,7 @@ However, we are instead using the [`kn` client CLI](https://github.com/knative/c
 ```
 kn event send \
   --to KafkaSink:eventing.knative.dev/v1alpha1:my-kafka-sink \
-  -type=dev.knative.blog.post \
+  --type=dev.knative.blog.post \
   -f message="Hello"
 ```
 
