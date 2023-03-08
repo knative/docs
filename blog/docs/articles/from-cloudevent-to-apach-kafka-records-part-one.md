@@ -32,7 +32,11 @@ spec:
   replicas: 1
 ```
 
-This will create a simple topic, with `partitions` and `replicas` both set to `1`, which is **not** recommended on a production environment. Once the manifest has been applied to the Kubernetes cluster it can be queried like:
+This will create a simple topic, with `partitions` and `replicas` both set to `1`, which is **not** recommended on a production environment.
+
+> NOTE: For a production-ready configuration of the Knative Kafka Broker see [this blog](https://developers.redhat.com/articles/2023/03/08/configuring-knative-broker-apache-kafka).
+
+Once the manifest has been applied to the Kubernetes cluster it can be queried like:
 
 ```
 kubectl get kafkatopics.kafka.strimzi.io -n kafka
