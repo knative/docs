@@ -9,7 +9,7 @@ _In this blog post you will learn how to easily store incoming CloudEvents to an
 
 Apache Kafka is used in a lot of very different use cases but the need to adopt Kafka protocol can be a barrier especially when there are third party components with limited extension possibilities.
 
-There are producer of events that doesn't support Kafka protocol and HTTP can be a more flexible option. Strimzi project has a [Bridge component](https://strimzi.io/docs/bridge/latest/) that exposes producer/consumer API via HTTP but it is specific for Kafka so it is essentially the same protocol (with consumer group, offset, etc).
+There are producer of events that do not support Kafka protocol and HTTP can be a more flexible option. Strimzi project has a [Bridge component](https://strimzi.io/docs/bridge/latest/) that exposes producer/consumer API via HTTP but it is specific for Kafka so it is essentially the same protocol (with consumer group, offset, etc).
 
 Do you think CloudEvents requirement might be an issue? CloudEvents defines a [binding also for HTTP format](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/http-protocol-binding.md#31-binary-content-mode) also and especially in binary mode, most of HTTP payload are possibly already a valid CloudEvents!
 
