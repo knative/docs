@@ -177,6 +177,7 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
+      - Event Mesh: eventing/event-mesh.md
       - Resources:
         - Brokers:
           - About Brokers: eventing/brokers/README.md
