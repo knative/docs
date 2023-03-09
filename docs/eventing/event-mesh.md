@@ -11,7 +11,7 @@ The above mentioned _event brokers_ are directly mapping to a key API in Knative
 As visible in the above diagram, the Event Mesh is defined with the `Broker` and `Trigger` APIs for the ingress and the egress of events. Knative Eventing complements the Event Mesh with its Duck type APIs, offering a pool of connector for sending events to the `Broker` and routing events to subscribers using the `Trigger`:
 
 * **Events Ingress**: Support for a connectors API: Source duck type & Callable/Addressable Duck type. Even without any sources installed.
-* **Event routing**: Broker + Triggers 
+* **Event routing**: Broker + Triggers
 * **Event egress** : Sinks API (i.e Callable)
 
 It is important to note that `Source` and `Sink` are not directly part of the Event Mesh. However they are complementary, and benefit from the good Ducktype APIs (`Callable`/`Addressable`) for a smooth integration or connection with the "Event Mesh".
