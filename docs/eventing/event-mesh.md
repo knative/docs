@@ -4,7 +4,7 @@ An Event Mesh is a dynamic infrastructure that is designed to smoothly transport
 
 ## Knative Event Mesh
 
-One of the key APIs in Knative Eventing are the `Broker` and `Trigger` APIs, which basically define an Event Mesh as described above:
+The above mentioned _event brokers_ are directly mapping to a key API in Knative Eventing: The `Broker` API offers a discoverable endpoint for event ingress and the `Trigger` API completes the offering with its event delivery capabilities. With these APIs Knative Eventing offers an Event Mesh as defined above:
 
 ![Raw Trace](images/mesh.png)
 
