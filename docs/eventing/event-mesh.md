@@ -1,6 +1,6 @@
 # Event Mesh
 
-An Event Mesh is a dynamic infrastructure that is designed to smoothly transport events from producers to consumers via a network of interconnected _event brokers_ across any environment, and even between clouds in a seamless and loosely coupled way. In an Event Mesh both, producing and consuming application, can leverage their platform native event APIs. For instance a Phyton or Golang application can produce an event, using their native APIs, while a consuming application written in Java or Node.js can subscribe to it with their own native APIs as well.
+An Event Mesh is a dynamic infrastructure that is designed to smoothly transport events from producers to consumers via a network of interconnected _event brokers_ across any environment, and even between clouds in a seamless and loosely coupled way. In an Event Mesh both, producing and consuming application, can leverage their platform native event APIs. For instance a Python or Golang application can produce an event, using their native APIs, while a consuming application written in Java or Node.js can subscribe to it with their own native APIs as well.
 
 ## Knative Event Mesh
 
