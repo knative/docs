@@ -1,4 +1,4 @@
-# Apache Kafka Sink
+# Knative Sink for Apache Kafka
 
 This page shows how to install and configure an Apache KafkaSink.
 
