@@ -303,4 +303,5 @@ nav:
         - deepc: about/case-studies/deepc.md
         - Outfit7: about/case-studies/outfit7.md
         - Puppet: about/case-studies/puppet.md
+        - PNC: /about/case-studies/pnc.md
     - Blog: /blog/
