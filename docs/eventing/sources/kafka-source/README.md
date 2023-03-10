@@ -1,4 +1,4 @@
-# Apache Kafka Source
+# Knative Source for Apache Kafka
 
 ![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)
 ![version](https://img.shields.io/badge/API_Version-v1beta1-yellow?style=flat-square)
