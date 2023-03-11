@@ -134,7 +134,7 @@ spec:
   filters:
       - not:
           exact:
-              type: com.github.push 
+              type: com.github.push
 ```
 ### `cesql`
 
