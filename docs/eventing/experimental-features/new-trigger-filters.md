@@ -132,9 +132,9 @@ metadata:
 spec:
   ...
   filters:
-    - not:
-        - exact:
-            type: com.github.push 
+      - not:
+          exact:
+              type: com.github.push 
 ```
 ### `cesql`
 
@@ -169,7 +169,7 @@ spec:
       myextension: my-extension-value
   # Enhanced filters field. This will override the old filter field.
   filters:
-    - cesql: "type == 'dev.knative.foo.bar' AND myextension == 'my-extension-value'"
+    - cesql: "type = 'dev.knative.foo.bar' AND myextension = 'my-extension-value'"
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
