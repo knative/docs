@@ -74,5 +74,6 @@
 /serving/* https://pkg.go.dev/knative.dev/serving/:splat
 /specs/* go-get=1 /golang/specs.html 200
 /test-infra/* go-get=1 /golang/test-infra.html 200
+/toolbox/* go-get=1 /golang/toolbox.html 200
 /ux/* go-get=1 /golang/ux.html 200
 /wg-repository/* go-get=1 /golang/wg-repository.html 200
