@@ -1,4 +1,4 @@
-FROM k8s.gcr.io/fluentd-elasticsearch:v2.0.4
+FROM registry.k8s.io/fluentd-elasticsearch:v2.0.4
 
 RUN BUILD_DEPS="make gcc g++ libc6-dev ruby-dev libffi-dev" \
     && clean-install $BUILD_DEPS \

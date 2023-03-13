@@ -6,14 +6,14 @@ depending on whether you installed Knative with YAML or with the Operator.
 ## If you installed with YAML
 
 To verify the version of the Knative component that you have running on your cluster, query for the
-`<component>.knative.dev/release` label.
+`app.kubernetes.io/version` label in corresponding component namespace.
 
 === "Knative Serving"
     Check the installed Knative Serving version by running the command:
 
     ```bash
     {% raw %}
-    kubectl get namespace knative-serving -o 'go-template={{index .metadata.labels "serving.knative.dev/release"}}'
+    kubectl get namespace knative-serving -o 'go-template={{index .metadata.labels "app.kubernetes.io/version"}}'
     {% endraw %}
     ```
 
@@ -29,7 +29,7 @@ To verify the version of the Knative component that you have running on your clu
 
     ```bash
     {% raw %}
-    kubectl get namespace knative-eventing -o 'go-template={{index .metadata.labels "eventing.knative.dev/release"}}'
+    kubectl get namespace knative-eventing -o 'go-template={{index .metadata.labels "app.kubernetes.io/version"}}'
     {% endraw %}
     ```
 
