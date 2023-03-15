@@ -12,4 +12,5 @@ P.S: This event is free for all registered attendees for the conference.
 
 ## Knative Kiosk
 Knative Project will have a half day kiosk in the Expo area during the Conference. We are looking forward to seeing you in Amsterdam at the Project meeting and at the Knative kiosk in the expo area.
-If you cannot attend the KubeConEU 23, don't worry, you can join the conversations in the #knative channel at CNCF Slack. Say Hi to us today on the CNCF Slack [CNCF Slack] (https://communityinviter.com/apps/cloud-native/cncf)
+If you cannot attend the KubeConEU 23, don't worry, you can join the conversations in the #knative channel at CNCF Slack. Say Hi to us today on the CNCF Slack [CNCF Slack](https://communityinviter.com/apps/cloud-native/cncf)
+
