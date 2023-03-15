@@ -12,7 +12,7 @@ This topic provides information about how you can populate the event registry, h
 ## About EventType objects
 
 EventType objects represent a type of event that can be consumed from a Broker,
-such as Kafka messages or GitHub pull requests.
+such as Apache Kafka messages or GitHub pull requests.
 EventType objects are used to populate the event registry and persist event type
 information in the cluster datastore.
 
