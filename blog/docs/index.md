@@ -22,11 +22,11 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
-### Knative at KubeCon + CloudNativeCon North America 2022
+### Knative at KubeCon + CloudNativeCon Europe 2023
 
 We are looking forward to seeing you all there.
 
-[Read more :octicons-arrow-right-24:](events/knative-at-kubecon-na-2022.md){ .md-button }
+[Read more :octicons-arrow-right-24:](events/knative-projectmeeting-kubecon-eu-2023.md){ .md-button }
 
 ### Knative joins the CNCF
 This is a big milestone for our project and we are excited to join the [CNCF](https://www.cncf.io)
