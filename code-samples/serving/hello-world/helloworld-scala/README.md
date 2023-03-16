@@ -102,7 +102,7 @@ local Docker Repository.
 ## Deploying to Knative Serving
 
 
-**yaml**
+### yaml
 
 Apply the [Service yaml definition](service.yaml):
 
@@ -110,7 +110,7 @@ Apply the [Service yaml definition](service.yaml):
 kubectl apply -f service.yaml
 ```
 
-**kn**
+### kn
 
 With `kn` you can deploy the service with
 
@@ -136,7 +136,7 @@ kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala
  http://helloworld-scala.default.1.2.3.4.sslip.io
 ```
 
-**kubectl**
+### kubectl
 
  1. Find the service host:
  ```bash
@@ -154,7 +154,7 @@ curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
  ```
 
 
-**kn**
+### kn
  1. Find the service host:
 ```bash
 kn service describe helloworld-scala -o url
@@ -174,13 +174,13 @@ kn service describe helloworld-scala -o url
 
 ## Cleanup
 
-**kubectl**
+### kubectl
 
 ```bash
 kubectl delete -f service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete helloworld-scala

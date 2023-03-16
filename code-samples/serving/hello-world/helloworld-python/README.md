@@ -114,7 +114,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
 
   Choose one of the following methods to deploy the app:
 
-**yaml**
+### yaml
 
  1. Create a new file, `service.yaml` and copy the following service
     definition into the file. Make sure to replace `{username}` with your
@@ -143,7 +143,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
  kubectl apply --filename service.yaml
  ```
 
-**kn**
+### kn
 
 1. With `kn` you can deploy the service with
 
@@ -171,7 +171,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
    > Note: If your URL includes `example.com` then consult the setup instructions for
    > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](https://knative.dev/docs/serving/using-a-custom-domain).
 
- &nbsp;**kubectl**
+ ### kubectl
 
  ```bash
  kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
@@ -183,7 +183,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
  helloworld-python    http://helloworld-python.default.1.2.3.4.sslip.io
  ```
 
- &nbsp;**kn**
+ ### kn
 
  ```bash
  kn service describe helloworld-python -o url
@@ -213,13 +213,13 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
 
 To remove the sample app from your cluster, delete the service record:
 
-**kubectl**
+### kubectl
 
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete helloworld-python

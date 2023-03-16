@@ -41,13 +41,13 @@ mvn compile jib:build -Dimage=<image_name>
 ```
 2. Choose one of the following methods to deploy the sample:
 
- **yaml**
+ ### yaml
  * To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
 ```bash
 kubectl apply -f service.yaml
 ```
 
- **kn**
+ ### kn
  * If using `kn` to deploy:
 ```bash
 kn service create cloudevents-vertx --image=<image>
@@ -122,13 +122,13 @@ You'll see on the console:
 
 To remove the sample app from your cluster, delete the service:
 
-**yaml**
+### yaml
 
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete cloudevents-vertx

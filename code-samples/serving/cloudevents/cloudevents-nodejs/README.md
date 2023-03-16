@@ -58,7 +58,7 @@ You can build and push this to your registry of choice via:
  docker push <image>
  ```
 
-**yaml**
+### yaml
 
  To deploy the Knative service, edit the `service.yaml` file and replace `<registry/repository/image:tag>` with the image you have just created.
 
@@ -66,7 +66,7 @@ You can build and push this to your registry of choice via:
  kubectl apply -f service.yaml
  ```
 
-**kn**
+### kn
 
 To deploy using the `kn` CLI:
 
@@ -107,13 +107,13 @@ You will get back:
 
 To remove the sample app from your cluster, delete the service.
 
-**yaml**
+### yaml
 
  ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete cloudevents-nodejs

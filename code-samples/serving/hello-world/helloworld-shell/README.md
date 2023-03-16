@@ -84,7 +84,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 Choose one of the following methods to deploy the app:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **yaml**
+### yaml
 1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -107,7 +107,7 @@ Ensure that the container image value in `service.yaml` matches the container yo
 kubectl apply --filename service.yaml
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **kn**
+### kn
 1. With `kn` you can deploy the service with
 ```bash
 kn service create helloworld-shell --image=docker.io/{username}/helloworld-shell --env TARGET="Shell Sample v1"
@@ -140,7 +140,7 @@ During the creation of your service, Knative performs the following steps:
 
 1. Run one of the followings commands to find the domain URL for your service:
 
- **kubectl**
+ ### kubectl
 ```bash
 kubectl get ksvc helloworld-shell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
 ```
@@ -150,7 +150,7 @@ NAME                URL
 helloworld-shell    http://helloworld-shell.default.1.2.3.4.sslip.io
 ```
 
- **kn**
+ ### kn
 ```bash
 kn service describe helloworld-shell -o url
 ```
@@ -178,13 +178,13 @@ http://helloworld-shell.default.1.2.3.4.sslip.io
 
 To remove the sample app from your cluster, delete the service record:
 
-**kubectl**
+### kubectl
 
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete helloworld-shell

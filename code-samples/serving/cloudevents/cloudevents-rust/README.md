@@ -49,7 +49,7 @@ This will build a statically linked binary, in order to create an image from scr
 ```bash
 docker build -t <image> .
 ```
-**yaml**
+### yaml
 
 To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
 
@@ -58,7 +58,7 @@ kubectl apply -f service.yaml
 ```
 
 
-**kn**
+### kn
 
 If using `kn` to deploy:
 
@@ -135,13 +135,13 @@ You'll get as result:
 
 To remove the sample app from your cluster, delete the service:
 
-**yaml**
+### yaml
 
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete cloudevents-rust

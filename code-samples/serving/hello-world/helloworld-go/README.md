@@ -118,7 +118,7 @@ docker push {username}/helloworld-go
 ### Deploying to knative
 After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster. Choose one of the following methods:
 
-**yaml**
+### yaml
 
 1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
 
@@ -162,7 +162,7 @@ After your service is created, Knative will perform the following steps:
  ```
 
 
-**kn**
+### kn
 
 1. Use `kn` to deploy the service:
 
@@ -204,12 +204,12 @@ Hello Go Sample v1!
 
 To remove the sample app from your cluster, delete the service record:
 
-**kubectl**
+### kubectl
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 ```bash
 kn service delete helloworld-go
 ```

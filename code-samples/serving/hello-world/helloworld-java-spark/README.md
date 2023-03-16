@@ -75,7 +75,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java
 
 After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster. Choose one of the following methods:
 
-**kn**
+### kn
 
  1. Use `kn` to deploy the service, make sure to replace `{username}` with your Docker Hub username:
 
@@ -86,7 +86,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
        This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
 
-**kubectl**
+### kubectl
 
  1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
 
@@ -123,7 +123,7 @@ After your service is created, Knative will perform the following steps:
 
  1. Run one of the followings commands to find the domain URL for your service.
 
-  &nbsp;**kn**
+ ### kn
 
  ```bash
  kn service describe helloworld-java -o url
@@ -135,7 +135,7 @@ After your service is created, Knative will perform the following steps:
  http://helloworld-java.default.1.2.3.4.xip.io
   ```
 
- &nbsp;**kubectl**
+ ### kubectl
  ```bash
   kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,URL:.status.url
  ```
@@ -165,12 +165,12 @@ After your service is created, Knative will perform the following steps:
 
 To remove the sample app from your cluster, delete the service record:
 
- &nbsp;**kn**
+### kn
  ```bash
  kn service delete helloworld-java
  ```
 
- &nbsp;**kubectl**
+### kubectl
  ```bash
  kubectl delete --filename service.yaml
  ```

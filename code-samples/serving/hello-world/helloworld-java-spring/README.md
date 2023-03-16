@@ -134,7 +134,7 @@ During the creation of a Service, Knative performs the following steps:
 
 Choose one of the following methods to deploy the app:
 
-**YAML**
+### yaml
 
 1. Create a new file named `service.yaml` and copy the following service definition
    into the file:
@@ -164,7 +164,7 @@ Choose one of the following methods to deploy the app:
     kubectl apply -f service.yaml
     ```
 
-**kn**
+### kn
 
 1. With `kn` you can deploy the service with
 
@@ -222,12 +222,12 @@ Choose one of the following methods to deploy the app:
 
 To remove the sample app from your cluster, delete the service:
 
-**kubectl**
+### kubectl
 ```bash
 kubectl delete -f service.yaml
 ```
 
-**kn**
+### kn
 ```bash
 kn service delete helloworld-java-spring
 ```

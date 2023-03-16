@@ -92,7 +92,7 @@ Once you have recreated the sample code files (or used the files in the sample f
 
 Choose one of the following methods:
 
-**yaml**
+### yaml
  1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
     ```bash
@@ -109,7 +109,7 @@ Choose one of the following methods:
  kubectl apply --filename service.yaml
  ```
 
-**kn**
+### kn
  1. With `kn` you can deploy the service with
 
      ```bash
@@ -139,14 +139,14 @@ Now that your service is created, Knative will perform the following steps:
 
 1. To find the URL for your service, use
 
- **kubectl**
+ ### kubectl
  ```
  kubectl get ksvc helloworld-php  --output=custom columns=NAME:.metadata.name,URL:.status.url
  NAME                URL
  helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
  ```
 
- **kn**
+ ### kn
  ```bash
 kn service describe helloworld-php -o url
 ```
@@ -166,12 +166,12 @@ Hello PHP Sample v1!
 
 To remove the sample app from your cluster, delete the service record:
 
-**kubectl**
+### kubectl
 ```bash
 kubectl delete --filename service.yaml
 ```
 
-**kn**
+### kn
 
 ```bash
 kn service delete helloworld-php
