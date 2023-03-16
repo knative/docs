@@ -25,7 +25,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"math"
 	"strings"
 	"sync"
@@ -77,7 +76,7 @@ func NewGZIPCompressorWithLevel(level int) (Compressor, error) {
 	return &gzipCompressor{
 		pool: sync.Pool{
 			New: func() interface{} {
-				w, err := gzip.NewWriterLevel(ioutil.Discard, level)
+				w, err := gzip.NewWriterLevel(io.Discard, level)
 				if err != nil {
 					panic(err)
 				}
@@ -143,7 +142,7 @@ func (d *gzipDecompressor) Do(r io.Reader) ([]byte, error) {
 		z.Close()
 		d.pool.Put(z)
 	}()
-	return ioutil.ReadAll(z)
+	return io.ReadAll(z)
 }
 
 func (d *gzipDecompressor) Type() string {
@@ -198,7 +197,7 @@ func Header(md *metadata.MD) CallOption {
 // HeaderCallOption is a CallOption for collecting response header metadata.
 // The metadata field will be populated *after* the RPC completes.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -220,7 +219,7 @@ func Trailer(md *metadata.MD) CallOption {
 // TrailerCallOption is a CallOption for collecting response trailer metadata.
 // The metadata field will be populated *after* the RPC completes.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -242,7 +241,7 @@ func Peer(p *peer.Peer) CallOption {
 // PeerCallOption is a CallOption for collecting the identity of the remote
 // peer. The peer field will be populated *after* the RPC completes.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -258,7 +257,8 @@ func (o PeerCallOption) after(c *callInfo, attempt *csAttempt) {
 }
 
 // WaitForReady configures the action to take when an RPC is attempted on broken
-// connections or unreachable servers. If waitForReady is false, the RPC will fail
+// connections or unreachable servers. If waitForReady is false and the
+// connection is in the TRANSIENT_FAILURE state, the RPC will fail
 // immediately. Otherwise, the RPC client will block the call until a
 // connection is available (or the call is canceled or times out) and will
 // retry the call if it fails due to a transient error.  gRPC will not retry if
@@ -281,7 +281,7 @@ func FailFast(failFast bool) CallOption {
 // FailFastCallOption is a CallOption for indicating whether an RPC should fail
 // fast or not.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -296,7 +296,8 @@ func (o FailFastCallOption) before(c *callInfo) error {
 func (o FailFastCallOption) after(c *callInfo, attempt *csAttempt) {}
 
 // MaxCallRecvMsgSize returns a CallOption which sets the maximum message size
-// in bytes the client can receive.
+// in bytes the client can receive. If this is not set, gRPC uses the default
+// 4MB.
 func MaxCallRecvMsgSize(bytes int) CallOption {
 	return MaxRecvMsgSizeCallOption{MaxRecvMsgSize: bytes}
 }
@@ -304,7 +305,7 @@ func MaxCallRecvMsgSize(bytes int) CallOption {
 // MaxRecvMsgSizeCallOption is a CallOption that indicates the maximum message
 // size in bytes the client can receive.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -319,7 +320,8 @@ func (o MaxRecvMsgSizeCallOption) before(c *callInfo) error {
 func (o MaxRecvMsgSizeCallOption) after(c *callInfo, attempt *csAttempt) {}
 
 // MaxCallSendMsgSize returns a CallOption which sets the maximum message size
-// in bytes the client can send.
+// in bytes the client can send. If this is not set, gRPC uses the default
+// `math.MaxInt32`.
 func MaxCallSendMsgSize(bytes int) CallOption {
 	return MaxSendMsgSizeCallOption{MaxSendMsgSize: bytes}
 }
@@ -327,7 +329,7 @@ func MaxCallSendMsgSize(bytes int) CallOption {
 // MaxSendMsgSizeCallOption is a CallOption that indicates the maximum message
 // size in bytes the client can send.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -350,7 +352,7 @@ func PerRPCCredentials(creds credentials.PerRPCCredentials) CallOption {
 // PerRPCCredsCallOption is a CallOption that indicates the per-RPC
 // credentials to use for the call.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -368,7 +370,7 @@ func (o PerRPCCredsCallOption) after(c *callInfo, attempt *csAttempt) {}
 // sending the request.  If WithCompressor is also set, UseCompressor has
 // higher priority.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This API is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -378,7 +380,7 @@ func UseCompressor(name string) CallOption {
 
 // CompressorCallOption is a CallOption that indicates the compressor to use.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -415,7 +417,7 @@ func CallContentSubtype(contentSubtype string) CallOption {
 // ContentSubtypeCallOption is a CallOption that indicates the content-subtype
 // used for marshaling messages.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -429,9 +431,10 @@ func (o ContentSubtypeCallOption) before(c *callInfo) error {
 }
 func (o ContentSubtypeCallOption) after(c *callInfo, attempt *csAttempt) {}
 
-// ForceCodec returns a CallOption that will set the given Codec to be
-// used for all request and response messages for a call. The result of calling
-// String() will be used as the content-subtype in a case-insensitive manner.
+// ForceCodec returns a CallOption that will set codec to be used for all
+// request and response messages for a call. The result of calling Name() will
+// be used as the content-subtype after converting to lowercase, unless
+// CallContentSubtype is also used.
 //
 // See Content-Type on
 // https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests for
@@ -442,7 +445,7 @@ func (o ContentSubtypeCallOption) after(c *callInfo, attempt *csAttempt) {}
 // This function is provided for advanced users; prefer to use only
 // CallContentSubtype to select a registered codec instead.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This API is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -453,7 +456,7 @@ func ForceCodec(codec encoding.Codec) CallOption {
 // ForceCodecCallOption is a CallOption that indicates the codec used for
 // marshaling messages.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -478,7 +481,7 @@ func CallCustomCodec(codec Codec) CallOption {
 // CustomCodecCallOption is a CallOption that indicates the codec used for
 // marshaling messages.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -495,7 +498,7 @@ func (o CustomCodecCallOption) after(c *callInfo, attempt *csAttempt) {}
 // MaxRetryRPCBufferSize returns a CallOption that limits the amount of memory
 // used for buffering this RPC's requests for retry purposes.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This API is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -506,7 +509,7 @@ func MaxRetryRPCBufferSize(bytes int) CallOption {
 // MaxRetryRPCBufferSizeCallOption is a CallOption indicating the amount of
 // memory to be used for caching this RPC for retry purposes.
 //
-// Experimental
+// # Experimental
 //
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
@@ -546,10 +549,11 @@ type parser struct {
 // format. The caller owns the returned msg memory.
 //
 // If there is an error, possible values are:
-//   * io.EOF, when no messages remain
-//   * io.ErrUnexpectedEOF
-//   * of type transport.ConnectionError
-//   * an error from the status package
+//   - io.EOF, when no messages remain
+//   - io.ErrUnexpectedEOF
+//   - of type transport.ConnectionError
+//   - an error from the status package
+//
 // No other error values or types must be returned, which also means
 // that the underlying io.Reader must not return an incompatible
 // error.
@@ -708,15 +712,13 @@ func recvAndDecompress(p *parser, s *transport.Stream, dc Decompressor, maxRecei
 			d, size, err = decompress(compressor, d, maxReceiveMessageSize)
 		}
 		if err != nil {
-			return nil, status.Errorf(codes.Internal, "grpc: failed to decompress the received message %v", err)
+			return nil, status.Errorf(codes.Internal, "grpc: failed to decompress the received message: %v", err)
 		}
-	} else {
-		size = len(d)
-	}
-	if size > maxReceiveMessageSize {
-		// TODO: Revisit the error code. Currently keep it consistent with java
-		// implementation.
-		return nil, status.Errorf(codes.ResourceExhausted, "grpc: received message larger than max (%d vs. %d)", size, maxReceiveMessageSize)
+		if size > maxReceiveMessageSize {
+			// TODO: Revisit the error code. Currently keep it consistent with java
+			// implementation.
+			return nil, status.Errorf(codes.ResourceExhausted, "grpc: received message after decompression larger than max (%d vs. %d)", size, maxReceiveMessageSize)
+		}
 	}
 	return d, nil
 }
@@ -745,7 +747,7 @@ func decompress(compressor encoding.Compressor, d []byte, maxReceiveMessageSize 
 	}
 	// Read from LimitReader with limit max+1. So if the underlying
 	// reader is over limit, the result will be bigger than max.
-	d, err = ioutil.ReadAll(io.LimitReader(dcReader, int64(maxReceiveMessageSize)+1))
+	d, err = io.ReadAll(io.LimitReader(dcReader, int64(maxReceiveMessageSize)+1))
 	return d, len(d), err
 }
 
@@ -758,7 +760,7 @@ func recv(p *parser, c baseCodec, s *transport.Stream, dc Decompressor, m interf
 		return err
 	}
 	if err := c.Unmarshal(d, m); err != nil {
-		return status.Errorf(codes.Internal, "grpc: failed to unmarshal the received message %v", err)
+		return status.Errorf(codes.Internal, "grpc: failed to unmarshal the received message: %v", err)
 	}
 	if payInfo != nil {
 		payInfo.uncompressedBytes = d
@@ -827,33 +829,45 @@ func Errorf(c codes.Code, format string, a ...interface{}) error {
 
 // toRPCErr converts an error into an error from the status package.
 func toRPCErr(err error) error {
-	if err == nil || err == io.EOF {
+	switch err {
+	case nil, io.EOF:
 		return err
-	}
-	if err == io.ErrUnexpectedEOF {
+	case context.DeadlineExceeded:
+		return status.Error(codes.DeadlineExceeded, err.Error())
+	case context.Canceled:
+		return status.Error(codes.Canceled, err.Error())
+	case io.ErrUnexpectedEOF:
 		return status.Error(codes.Internal, err.Error())
 	}
-	if _, ok := status.FromError(err); ok {
-		return err
-	}
+
 	switch e := err.(type) {
 	case transport.ConnectionError:
 		return status.Error(codes.Unavailable, e.Desc)
-	default:
-		switch err {
-		case context.DeadlineExceeded:
-			return status.Error(codes.DeadlineExceeded, err.Error())
-		case context.Canceled:
-			return status.Error(codes.Canceled, err.Error())
-		}
+	case *transport.NewStreamError:
+		return toRPCErr(e.Err)
 	}
+
+	if _, ok := status.FromError(err); ok {
+		return err
+	}
+
 	return status.Error(codes.Unknown, err.Error())
 }
 
 // setCallInfoCodec should only be called after CallOptions have been applied.
 func setCallInfoCodec(c *callInfo) error {
 	if c.codec != nil {
-		// codec was already set by a CallOption; use it.
+		// codec was already set by a CallOption; use it, but set the content
+		// subtype if it is not set.
+		if c.contentSubtype == "" {
+			// c.codec is a baseCodec to hide the difference between grpc.Codec and
+			// encoding.Codec (Name vs. String method name).  We only support
+			// setting content subtype from encoding.Codec to avoid a behavior
+			// change with the deprecated version.
+			if ec, ok := c.codec.(encoding.Codec); ok {
+				c.contentSubtype = strings.ToLower(ec.Name())
+			}
+		}
 		return nil
 	}
 

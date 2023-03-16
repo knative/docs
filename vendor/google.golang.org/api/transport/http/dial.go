@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"go.opencensus.io/plugin/ochttp"
+	"golang.org/x/net/http2"
 	"golang.org/x/oauth2"
 	"google.golang.org/api/googleapi/transport"
 	"google.golang.org/api/internal"
@@ -88,7 +89,7 @@ func newTransport(ctx context.Context, base http.RoundTripper, settings *interna
 		}
 
 		ts := creds.TokenSource
-		if settings.TokenSource != nil {
+		if settings.ImpersonationConfig == nil && settings.TokenSource != nil {
 			ts = settings.TokenSource
 		}
 		trans = &oauth2.Transport{
@@ -175,7 +176,20 @@ func defaultBaseTransport(ctx context.Context, clientCertSource cert.Source) htt
 		}
 	}
 
+	configureHTTP2(trans)
+
 	return trans
+}
+
+// configureHTTP2 configures the ReadIdleTimeout HTTP/2 option for the
+// transport. This allows broken idle connections to be pruned more quickly,
+// preventing the client from attempting to re-use connections that will no
+// longer work.
+func configureHTTP2(trans *http.Transport) {
+	http2Trans, err := http2.ConfigureTransports(trans)
+	if err == nil {
+		http2Trans.ReadIdleTimeout = time.Second * 31
+	}
 }
 
 // fallbackBaseTransport is used in <go1.13 as well as in the rare case if
@@ -205,4 +219,15 @@ func addOCTransport(trans http.RoundTripper, settings *internal.DialSettings) ht
 		Base:        trans,
 		Propagation: &propagation.HTTPFormat{},
 	}
+}
+
+// clonedTransport returns the given RoundTripper as a cloned *http.Transport.
+// It returns nil if the RoundTripper can't be cloned or coerced to
+// *http.Transport.
+func clonedTransport(rt http.RoundTripper) *http.Transport {
+	t, ok := rt.(*http.Transport)
+	if !ok {
+		return nil
+	}
+	return t.Clone()
 }
