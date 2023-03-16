@@ -8,7 +8,7 @@ nav:
     - Eventing: /docs/eventing/
     - Knative CLI: /docs/client/
     - Code samples: /docs/samples/
-    - Reference: /docs/reference/
+    - Reference: /docs/reference/security/
     - Community: /docs/community/
     - About: /docs/about/testimonials/
   #####################################################
