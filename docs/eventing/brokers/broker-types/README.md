@@ -8,6 +8,8 @@ Knative Eventing provides a multi-tenant (MT) channel-based broker implementatio
 
 Before you can use the MT channel-based broker, you must install a channel implementation.
 
+For a more in deep view, you can check out the [developers docs](https://github.com/knative/eventing/blob/main/docs/mt-channel-based-broker/README.md) of the MT channel-based broker.
+
 ## Alternative broker implementations
 
 In the Knative Eventing ecosystem, alternative broker implementations are welcome as long as they respect the [broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/control-plane.md#broker-lifecycle).
