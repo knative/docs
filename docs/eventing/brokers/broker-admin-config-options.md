@@ -45,7 +45,7 @@ spec:
     namespace: knative-eventing
 ```
 
-A Broker object that does not have a `spec.config` specified uses the `config-br-default-channel` ConfigMap dy default because this is specified in the `config-br-defaults` ConfigMap.
+A Broker object that does not have a `spec.config` specified uses the `config-br-default-channel` ConfigMap by default because this is specified in the `config-br-defaults` ConfigMap.
 
 However, if you have installed a different Channel implementation, for example, Kafka, and would like this to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
 
