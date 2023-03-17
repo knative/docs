@@ -88,119 +88,91 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-php
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+Once you have recreated the sample code files (or used the files in the sample folder) you're ready to build and deploy the sample app.
 
+Choose one of the following methods:
 
-=== "yaml"
+### yaml
+ 1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
-    1. Use Docker to build the sample code into a container. To build and push with
-       Docker Hub, run these commands replacing `{username}` with your Docker Hub
-       username:
+    ```bash
+     # Build the container on your local machine
+     docker build -t {username}/helloworld-php .
 
-       ```bash
-       # Build the container on your local machine
-       docker build -t {username}/helloworld-php .
+     # Push the container to docker registry
+     docker push {username}/helloworld-php
+     ```
 
-       # Push the container to docker registry
-       docker push {username}/helloworld-php
-       ```
+ 1. After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
 
-    1. After the build has completed and the container is pushed to docker hub, you
-       can deploy the app into your cluster. Ensure that the container image value
-       in `service.yaml` matches the container you built in the previous step. Apply
-       the configuration using `kubectl`:
+ ```bash
+ kubectl apply --filename service.yaml
+ ```
 
-       ```bash
-       kubectl apply --filename service.yaml
-       ```
+### kn
+ 1. With `kn` you can deploy the service with
 
+     ```bash
+     kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="Ruby Sample v1"
+     ```
 
-=== "kn"
+     This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
-       With `kn` you can deploy the service with
+     The output will look like:
+     ```
+    Creating service 'helloworld-php' in namespace 'default':
+    0.035s The Configuration is still working to reflect the latest desired specification.
+    0.139s The Route is still working to reflect the latest desired specification.
+    0.250s Configuration "helloworld-php" is waiting for a Revision to become ready.
+    8.040s ...
+    8.136s Ingress has not yet been reconciled.
+    8.277s unsuccessfully observed a new generation
+    8.398s Ready to serve.
+    Service 'helloworld-php' created to latest revision 'helloworld-php-akhft-1' is available at URL: http://helloworld-php.default.1.2.3.4.xip.io
+     ```
 
-       ```bash
-       kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="Ruby Sample v1"
-       ```
+Now that your service is created, Knative will perform the following steps:
 
-       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
-
-       The output will look like:
-
-       ```
-       Creating service 'helloworld-php' in namespace 'default':
-
-        0.035s The Configuration is still working to reflect the latest desired specification.
-        0.139s The Route is still working to reflect the latest desired specification.
-        0.250s Configuration "helloworld-php" is waiting for a Revision to become ready.
-        8.040s ...
-        8.136s Ingress has not yet been reconciled.
-        8.277s unsuccessfully observed a new generation
-        8.398s Ready to serve.
-
-      Service 'helloworld-php' created to latest revision 'helloworld-php-akhft-1' is available at URL:
-      http://helloworld-php.default.1.2.3.4.xip.io
-      ```
-
-
-
-
-
-1. Now that your service is created, Knative will perform the following steps:
-
-   - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and a load balancer
-     for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+  - Create a new immutable revision for this version of the app.
+  - Network programming to create a route, ingress, service, and a load balancer for your app.
+  - Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the URL for your service, use
 
+ ### kubectl
+ ```
+ kubectl get ksvc helloworld-php  --output=custom columns=NAME:.metadata.name,URL:.status.url
+ NAME                URL
+ helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
+ ```
 
-=== "kubectl"
-
-       ```
-       kubectl get ksvc helloworld-php  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-       NAME                URL
-       helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
-       ```
-
-
-=== "kn"
-
-       ```bash
-       kn service describe helloworld-php -o url
-       ```
-
-       Example:
-
-       ```bash
-       http://helloworld-php.default.1.2.3.4.xip.io
-       ```
-
-
-
-
+ ### kn
+ ```bash
+kn service describe helloworld-php -o url
+```
+Example:
+ ```bash
+http://helloworld-php.default.1.2.3.4.xip.io
+ ```
 1. Now you can make a request to your app and see the result. Replace
    the following URL with the URL returned in the previous command.
 
-   ```bash
-   curl http://helloworld-php.default.1.2.3.4.sslip.io
-   Hello PHP Sample v1!
-   ```
+ ```bash
+curl http://helloworld-php.default.1.2.3.4.sslip.io
+Hello PHP Sample v1!
+ ```
 
 ## Removing the sample app deployment
 
-To remove the sample app from your cluster, delete the service record.
+To remove the sample app from your cluster, delete the service record:
 
+### kubectl
+```bash
+kubectl delete --filename service.yaml
+```
 
-=== "kubectl"
-    ```bash
-    kubectl delete --filename service.yaml
-    ```
+### kn
 
-=== "kn"
-
-    ```bash
-    kn service delete helloworld-php
-    ```
+```bash
+kn service delete helloworld-php
+```
