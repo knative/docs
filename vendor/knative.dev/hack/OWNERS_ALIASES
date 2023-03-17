@@ -1,0 +1,161 @@
+# This file is auto-generated from peribolos.
+# Do not modify this file, instead modify peribolos/knative.yaml
+
+aliases:
+  client-reviewers:
+  - itsmurugappan
+  client-wg-leads:
+  - dsimansk
+  - navidshaikh
+  - rhuss
+  client-writers:
+  - dsimansk
+  - maximilien
+  - navidshaikh
+  - rhuss
+  - vyasgun
+  conformance-task-force-leads:
+  - salaboy
+  conformance-writers:
+  - salaboy
+  docs-reviewers:
+  - nainaz
+  - pmbanugo
+  - snneji
+  docs-wg-leads:
+  - abrennan89
+  - snneji
+  docs-writers:
+  - abrennan89
+  - csantanapr
+  - psschwei
+  - snneji
+  eventing-reviewers:
+  - aslom
+  eventing-triage:
+  - lberk
+  eventing-wg-leads:
+  - pierDipi
+  eventing-writers:
+  - aliok
+  - lberk
+  - lionelvillard
+  - matzew
+  - odacremolbap
+  - pierDipi
+  func-reviewers:
+  - jrangelramos
+  - nainaz
+  func-writers:
+  - jrangelramos
+  - lance
+  - lkingland
+  - matejvasek
+  - salaboy
+  - zroubalik
+  functions-wg-leads:
+  - lance
+  - salaboy
+  knative-admin:
+  - csantanapr
+  - dprotaso
+  - dsimansk
+  - evankanderson
+  - itsmurugappan
+  - knative-automation
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  - kvmware
+  - lance
+  - mchmarny
+  - nainaz
+  - psschwei
+  - salaboy
+  - smoser-ibm
+  - upodroid
+  - zroubalik
+  knative-release-leads:
+  - evankanderson
+  - psschwei
+  knative-robots:
+  - knative-automation
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  operations-reviewers:
+  - aliok
+  - houshengbo
+  - matzew
+  - maximilien
+  operations-wg-leads:
+  - houshengbo
+  operations-writers:
+  - aliok
+  - houshengbo
+  - matzew
+  - maximilien
+  productivity-leads:
+  - kvmware
+  - upodroid
+  productivity-reviewers:
+  - evankanderson
+  - mgencur
+  productivity-wg-leads:
+  - kvmware
+  - upodroid
+  productivity-writers:
+  - cardil
+  - kvmware
+  - psschwei
+  - upodroid
+  security-wg-leads:
+  - evankanderson
+  security-writers:
+  - evankanderson
+  serving-approvers:
+  - nak3
+  serving-reviewers:
+  - KauzClay
+  - carlisia
+  - izabelacg
+  - jsanin-vmw
+  - kauana
+  - pradnyavmw
+  - retocode
+  - skonto
+  serving-triage:
+  - KauzClay
+  - retocode
+  - skonto
+  serving-wg-leads:
+  - dprotaso
+  - psschwei
+  serving-writers:
+  - dprotaso
+  - nak3
+  - psschwei
+  steering-committee:
+  - csantanapr
+  - itsmurugappan
+  - lance
+  - nainaz
+  - salaboy
+  technical-oversight-committee:
+  - dprotaso
+  - dsimansk
+  - evankanderson
+  - psschwei
+  - zroubalik
+  trademark-committee:
+  - evankanderson
+  - mchmarny
+  - smoser-ibm
+  ux-wg-leads:
+  - abrennan89
+  - snneji
+  ux-writers:
+  - abrennan89
+  - snneji
