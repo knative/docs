@@ -49,43 +49,37 @@ This will build a statically linked binary, in order to create an image from scr
 ```bash
 docker build -t <image> .
 ```
+### yaml
+
+To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+
+```bash
+kubectl apply -f service.yaml
+```
 
 
-=== "yaml"
+### kn
 
-    To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+If using `kn` to deploy:
 
-    ```bash
-    kubectl apply -f service.yaml
-    ```
-
-
-=== "kn"
-
-    If using `kn` to deploy:
-
-    ```bash
-    kn service create cloudevents-rust --image=<image>
-    ```
-
-
-
-
+```bash
+kn service create cloudevents-rust --image=<image>
+```
 
 ## Testing the sample
 
 Get the URL for your Service with:
 
-```bash
-$ kubectl get ksvc
-NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
-cloudevents-rust    http://cloudevents-rust.sslip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
-```
+ ```bash
+ $ kubectl get ksvc
+ NAME                URL                                            LATESTCREATED             LATESTREADY               READY   REASON
+ cloudevents-rust    http://cloudevents-rust.sslip.io                 cloudevents-rust-vl8fq    cloudevents-rust-vl8fq    True
+ ```
 
 Then send a CloudEvent to it with:
 
-```bash
-$ curl \
+ ```bash
+ $ curl \
     -X POST -v \
     -H "content-type: application/json"  \
     -H "ce-specversion: 1.0"  \
@@ -94,11 +88,11 @@ $ curl \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
     http://cloudevents-rust.sslip.io
-```
+ ```
 
 You can also send CloudEvents spawning a temporary curl pod in your cluster with:
 
-```bash
+ ```bash
 $ kubectl run curl \
     --image=curlimages/curl --rm=true --restart=Never -ti -- \
     -X POST -v \
@@ -109,11 +103,11 @@ $ kubectl run curl \
     -H "ce-id: 123-abc"  \
     -d '{"name":"Dave"}' \
     http://cloudevents-rust.default.svc
-```
+ ```
 
 You'll get as result:
 
-```bash
+ ```bash
 > POST / HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/7.69.1
@@ -135,26 +129,20 @@ You'll get as result:
 < date: Sat, 23 May 2020 09:00:01 GMT
 <
 {"name":"Dave"}
-```
+ ```
 
 ## Removing the sample app deployment
 
-To remove the sample app from your cluster, delete the service.
+To remove the sample app from your cluster, delete the service:
 
+### yaml
 
-=== "yaml"
+```bash
+kubectl delete --filename service.yaml
+```
 
-    Run:
+### kn
 
-    ```bash
-    kubectl delete --filename service.yaml
-    ```
-
-
-=== "kn"
-
-    Run:
-
-    ```bash
-    kn service delete cloudevents-rust
-    ```
+```bash
+kn service delete cloudevents-rust
+```

@@ -8,7 +8,7 @@ nav:
     - Eventing: /docs/eventing/
     - Knative CLI: /docs/client/
     - Code samples: /docs/samples/
-    - Reference: /docs/reference/
+    - Reference: /docs/reference/security/
     - Community: /docs/community/
     - About: /docs/about/testimonials/
   #####################################################
@@ -76,6 +76,7 @@ nav:
           - steering/2020-01-annual-report-2019.md
           - steering/2019-12-updates.md
       - Events:
+          - events/knative-projectmeeting-kubecon-eu-2023.md
           - events/google-summer-of-code-2023.md
           - events/virtual-office-hour-12-2022.md
           - events/knative-at-kubecon-na-2022.md
