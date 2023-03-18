@@ -2,6 +2,9 @@
 
 The request logging for knative serving is managed through the `config-observability` ConfigMap in `knative-serving` namespace. The request logs will be printed by the queue-proxy sidecar.
 
+Mentioned below are the flags used to configure request logging and other obervability features.
+
+
 | ConfigMap key                     | Description                                                                                                                                                      |
 | :-------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `logging.enable-var-log-collection`               |  The fluentd daemon set will be set up to collect /var/log if this flag is true. This field defaults to false.                                                                       |
