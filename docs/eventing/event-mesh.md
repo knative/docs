@@ -6,7 +6,7 @@ In an Event Mesh, both producing and consuming applications do not need to imple
 
 ## Knative Event Mesh
 
-The above mentioned _event brokers_ map directly to a core API in Knative Eventing: the [`Broker` API](./brokers) offers a discoverable endpoint for event ingress and the [`Trigger` API](./triggers) completes the offering with its event filtering and delivery capabilities.  With these APIs Knative Eventing offers an Event Mesh as defined above:
+The above mentioned _event brokers_ map directly to a core API in Knative Eventing: the [`Broker` API](../brokers) offers a discoverable endpoint for event ingress and the [`Trigger` API](../triggers) completes the offering with its event filtering and delivery capabilities.  With these APIs Knative Eventing offers an Event Mesh as defined above:
 
 ![Raw Trace](images/mesh.png)
 
