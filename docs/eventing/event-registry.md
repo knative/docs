@@ -60,8 +60,8 @@ EventType objects:
 
 | Field | Description | Required or optional |
 |-------|-------------|----------------------|
-| `spec.type` | Refers to the [CloudEvent type](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. This field is authoritative. | Required |
-| `spec.source` | Refers to the [CloudEvent source](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#source-1) as it enters into the event mesh. Event consumers can create Triggers filtering on this attribute. | Required |
+| `spec.type` | Refers to the [CloudEvent type](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type) as it enters into the [event mesh](../event-mesh). Event consumers can create Triggers filtering on this attribute. This field is authoritative. | Required |
+| `spec.source` | Refers to the [CloudEvent source](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#source-1) as it enters into the [event mesh](../event-mesh). Event consumers can create Triggers filtering on this attribute. | Required |
 | `spec.schema` | A valid URI with the EventType schema such as a JSON schema or a protobuf schema. | Optional |
 | `spec.description` | A string describing what the EventType is about. | Optional |
 | `spec.broker` | Refers to the Broker that can provide the EventType. | Required |
@@ -150,8 +150,7 @@ two topics.
 
 ## Discover events using the registry
 
-Using the registry, you can discover the different types of events that Broker
-event meshes can consume.
+Using the registry, you can discover the different types of events that [Broker event meshes](../event-mesh) can consume.
 
 ### View all event types you can subscribe to
 
@@ -195,7 +194,7 @@ For an example EventType YAML, see
 
 ## About subscribing to events
 
-After you know what events can be consumed from the Brokers' event meshes,
+After you know what events can be consumed from the Brokers' [event meshes](../event-mesh),
 you can create Triggers to subscribe to particular events.
 
 Here are a some example Triggers that subscribe to events using exact matching on
