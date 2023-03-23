@@ -113,7 +113,7 @@ Choose one of the following methods:
  1. With `kn` you can deploy the service with
 
      ```bash
-     kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="Ruby Sample v1"
+     kn service create helloworld-php --image=docker.io/{username}/helloworld-php --env TARGET="PHP Sample v1"
      ```
 
      This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
