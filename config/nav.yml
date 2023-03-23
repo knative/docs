@@ -95,6 +95,21 @@ nav:
     - Serving:
       - Knative Serving overview: serving/README.md
       - Resources:
+        - Services:
+          - About Knative Services: serving/services/README.md
+          - Creating a Service: serving/services/creating-services.md
+          - Configuring Services:
+            - Configuring private Services: serving/services/private-services.md
+            - Configuring Persistent Volume Claims for Services: serving/services/pvc.md
+            - Service metrics: serving/services/service-metrics.md
+            - Configuring ingress class: serving/services/ingress-class.md
+            - Configuring certificate class: serving/services/certificate-class.md
+            - Configuring custom domains: serving/services/custom-domains.md
+            - Using a custom TLS certificate for DomainMapping: serving/services/byo-certificate.md
+            - Using extensions enabled by QPOptions: serving/services/using-queue-extensions.md
+            # TODO: Add security section to docs?
+            - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
+            - HTTPS redirection: serving/services/http-protocol.md      
         - Revisions:
           - About Revisions: serving/revisions/README.md
           - Administrator configuration options: serving/revisions/revision-admin-config-options.md
@@ -114,19 +129,6 @@ nav:
         - Configuring container-freezer: serving/autoscaling/container-freezer.md
       # Serving - developer docs
       - Developer Topics:
-        - Services:
-          - About Knative Services: serving/services/README.md
-          - Creating a Service: serving/services/creating-services.md
-          - Service metrics: serving/services/service-metrics.md
-          - Configuring private Services: serving/services/private-services.md
-          - Configuring ingress class: serving/services/ingress-class.md
-          - Configuring certificate class: serving/services/certificate-class.md
-          - Configuring custom domains: serving/services/custom-domains.md
-          - Using a custom TLS certificate for DomainMapping: serving/services/byo-certificate.md
-          - Using extensions enabled by QPOptions: serving/services/using-queue-extensions.md
-          # TODO: Add security section to docs?
-          - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
-          - HTTPS redirection: serving/services/http-protocol.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
         - Tag resolution: serving/tag-resolution.md

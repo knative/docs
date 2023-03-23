@@ -134,28 +134,10 @@ spec:
 * **Type**: Extension
 * **ConfigMap keys:** `kubernetes.podspec-persistent-volume-claim` <br/> `kubernetes.podspec-persistent-volume-write`
 
-This extension controls whether [`PersistentVolumeClaim (PVC)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) can be specified
+This extension controls whether [`PersistentVolumeClaim (PVC)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/){target=_blank} can be specified
 and whether write access is allowed for the corresponding volume.
 
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-...
-spec:
- template:
-   spec:
-     containers:
-         ...
-         volumeMounts:
-           - mountPath: /data
-             name: mydata
-             readOnly: true
-     volumes:
-       - name: mydata
-         persistentVolumeClaim:
-           claimName: minio-pv-claim
-           readOnly: true
-```
+For more information, see [Permanent data storage](../services/pvc.md){target=_blank}.
 
 ### Kubernetes node affinity
 
