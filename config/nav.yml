@@ -100,7 +100,7 @@ nav:
           - Creating a Service: serving/services/creating-services.md
           - Configuring Services:
             - Configuring private Services: serving/services/private-services.md
-            - Configuring Persistent Volume Claims for Services: serving/services/pvc.md
+            - Permanent data storage: serving/services/pvc.md
             - Service metrics: serving/services/service-metrics.md
             - Configuring ingress class: serving/services/ingress-class.md
             - Configuring certificate class: serving/services/certificate-class.md
