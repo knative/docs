@@ -25,29 +25,9 @@ data:
       namespace: knative-eventing
 ```
 
-## Channel implementation options
+In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](./broker-developer-config-options.md)).
 
-The following example shows a Broker object where the `spec.config` configuration is specified in a `config-br-default-channel` ConfigMap:
-
-```yaml
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  annotations:
-    eventing.knative.dev/broker.class: MTChannelBasedBroker
-  name: default
-spec:
-  # Configuration specific to this broker.
-  config:
-    apiVersion: v1
-    kind: ConfigMap
-    name: config-br-default-channel
-    namespace: knative-eventing
-```
-
-A Broker object that does not have a `spec.config` specified uses the `config-br-default-channel` ConfigMap by default because this is specified in the `config-br-defaults` ConfigMap.
-
-However, if you have installed a different Channel implementation, for example, Kafka, and would like this to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
+However, if you would like like for example a Kafka Channel to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
 
 ```yaml
 apiVersion: v1
@@ -55,38 +35,6 @@ kind: ConfigMap
 metadata:
   name: config-br-defaults
   namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
-data:
-  # Configures the default for any Broker that does not specify a spec.config or Broker class.
-  default-br-config: |
-    clusterDefault:
-      brokerClass: MTChannelBasedBroker
-      apiVersion: v1
-      kind: ConfigMap
-      name: kafka-channel
-      namespace: knative-eventing
-```
-
-Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap.
-
-For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the
-[Kafka Channel ConfigMap](../configuration/kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
-
-### Changing the default Channel implementation for a namespace
-
-You can modify the default Broker creation behavior for one or more namespaces.
-
-For example, if you wanted to use the `kafka-channel` ConfigMap for all other Brokers created, but wanted to use `config-br-default-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
 data:
   # Configures the default for any Broker that does not specify a spec.config or Broker class.
   default-br-config: |
@@ -96,16 +44,38 @@ data:
       kind: ConfigMap
       name: config-kafka-channel
       namespace: knative-eventing
+```
+
+Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `config-kafka-channel` ConfigMap. For more information about creating a `config-kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](../configuration/kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
+
+You can also modify the default Broker configuration for one or more dedicated namespaces, by defining it in the `namespaceDefaults` section. For example, if you want to use the `config-br-default-channel` ConfigMap for all Brokers by default, but want to use `config-kafka-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-br-defaults
+  namespace: knative-eventing
+  labels:
+    eventing.knative.dev/release: devel
+data:
+  default-br-config: |
+    clusterDefault:
+      brokerClass: MTChannelBasedBroker
+      apiVersion: v1
+      kind: ConfigMap
+      name: config-br-default-channel
+      namespace: knative-eventing
     namespaceDefaults:
       namespace-1:
         apiVersion: v1
         kind: ConfigMap
-        name: config-br-default-channel
+        name: config-kafka-channel
         namespace: knative-eventing
       namespace-2:
         apiVersion: v1
         kind: ConfigMap
-        name: config-br-default-channel
+        name: config-kafka-channel
         namespace: knative-eventing
 ```
 

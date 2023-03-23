@@ -3,7 +3,7 @@ plugins:
     redirect_maps:
       contributing/about.md: contributing/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
-      eventing/broker/create-mtbroker.md: eventing/brokers/create-mtbroker.md
+      eventing/broker/create-mtbroker.md: eventing/brokers/create-broker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
       eventing/broker/kafka-broker/README.md: eventing/brokers/broker-types/kafka-broker/README.md
       eventing/broker/rabbitmq-broker/README.md: eventing/brokers/broker-types/rabbitmq-broker/README.md
@@ -212,3 +212,4 @@ plugins:
       serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
       serving/using-subroutes.md: serving/traffic-management.md
       about/case-studies/README.md: about/case-studies/deepc.md
+      eventing/brokers/create-mtbroker.md: eventing/brokers/create-broker.md
