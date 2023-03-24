@@ -79,66 +79,6 @@ data:
         namespace: knative-eventing
 ```
 
-## Configuring delivery spec defaults
-
-You can configure default event delivery parameters for Brokers that are applied in cases where an event fails to be delivered:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
-data:
-  # Configures the default for any Broker that does not specify a spec.config or Broker class.
-  default-br-config: |
-    clusterDefault:
-      brokerClass: MTChannelBasedBroker
-      apiVersion: v1
-      kind: ConfigMap
-      name: kafka-channel
-      namespace: knative-eventing
-      delivery:
-        retry: 10
-        backoffDelay: PT0.2S
-        backoffPolicy: exponential
-    namespaceDefaults:
-      namespace-1:
-        apiVersion: v1
-        kind: ConfigMap
-        name: config-br-default-channel
-        namespace: knative-eventing
-        delivery:
-          deadLetterSink:
-            ref:
-              kind: Service
-              namespace: example-namespace
-              name: example-service
-              apiVersion: v1
-            uri: example-uri
-          retry: 10
-          backoffPolicy: exponential
-          backoffDelay: "PT0.2S"
-```
-
-### Dead letter sink
-
-You can configure the `deadLetterSink` delivery parameter so that if an event fails to be delivered it is sent to the specified event sink.
-
-### Retries
-
-You can set a minimum number of times that the delivery must be retried before the event is sent to the dead letter sink, by configuring the `retry` delivery parameter with an integer value.
-
-### Back off delay
-
-You can set the `backoffDelay` delivery parameter to specify the time delay before an event delivery retry is attempted after a failure. The duration of the `backoffDelay` parameter is specified using the ISO 8601 format.
-
-### Back off policy
-
-The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either linear or exponential. When using the linear back off policy, the back off delay is the time interval specified between retries. When using the exponential backoff policy, the back off delay is equal to `backoffDelay*2^<numberOfRetries>`.
-
 ## Broker class options
 
 When a Broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.
@@ -247,6 +187,66 @@ data:
       namespace2:
         brokerClass: MTChannelBasedBroker
 ```
+
+## Configuring delivery spec defaults
+
+You can configure default event delivery parameters for Brokers that are applied in cases where an event fails to be delivered:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-br-defaults
+  namespace: knative-eventing
+  labels:
+    eventing.knative.dev/release: devel
+data:
+  # Configures the default for any Broker that does not specify a spec.config or Broker class.
+  default-br-config: |
+    clusterDefault:
+      brokerClass: MTChannelBasedBroker
+      apiVersion: v1
+      kind: ConfigMap
+      name: kafka-channel
+      namespace: knative-eventing
+      delivery:
+        retry: 10
+        backoffDelay: PT0.2S
+        backoffPolicy: exponential
+    namespaceDefaults:
+      namespace-1:
+        apiVersion: v1
+        kind: ConfigMap
+        name: config-br-default-channel
+        namespace: knative-eventing
+        delivery:
+          deadLetterSink:
+            ref:
+              kind: Service
+              namespace: example-namespace
+              name: example-service
+              apiVersion: v1
+            uri: example-uri
+          retry: 10
+          backoffPolicy: exponential
+          backoffDelay: "PT0.2S"
+```
+
+### Dead letter sink
+
+You can configure the `deadLetterSink` delivery parameter so that if an event fails to be delivered it is sent to the specified event sink.
+
+### Retries
+
+You can set a minimum number of times that the delivery must be retried before the event is sent to the dead letter sink, by configuring the `retry` delivery parameter with an integer value.
+
+### Back off delay
+
+You can set the `backoffDelay` delivery parameter to specify the time delay before an event delivery retry is attempted after a failure. The duration of the `backoffDelay` parameter is specified using the ISO 8601 format.
+
+### Back off policy
+
+The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either linear or exponential. When using the linear back off policy, the back off delay is the time interval specified between retries. When using the exponential backoff policy, the back off delay is equal to `backoffDelay*2^<numberOfRetries>`.
 
 ## Integrating Istio with Knative Brokers
 
