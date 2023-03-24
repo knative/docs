@@ -114,4 +114,4 @@ The `config-br-defaults` ConfigMap defines default values for any Broker that do
 
 ## Developer Documentation
 
-For further information about the internals of the `MTChannelBasedBroker` and the interactions of its components, check out the [MTChannelBasedBroker developer docs](https://github.com/knative/eventing/blob/main/docs/mt-channel-based-broker/README.md)
+For further information about the internals of the `MTChannelBasedBroker` and the interactions of its components, check out the [MTChannelBasedBroker developer docs](https://github.com/knative/eventing/blob/main/docs/mt-channel-based-broker/README.md).
