@@ -164,6 +164,7 @@ nav:
       - Observability:
         - Collecting logs: serving/observability/logging/collecting-logs.md
         - Configuring logging: serving/observability/logging/config-logging.md
+        - Configuring Request logging: serving/observability/logging/request-logging.md
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
         - Knative Serving metrics: serving/observability/metrics/serving-metrics.md
       # Serving - troubleshooting
