@@ -89,3 +89,61 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
         ```
  
         If the `READY` status is `False`, wait a few moments and then run the command again.
+
+## Broker class options
+
+When a Broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified by default in the `config-br-defaults` ConfigMap. 
+
+The following example creates a Broker called `default` in the `default` namespace, and uses `MTChannelBasedBroker` as the implementation:
+
+1. Create a YAML file for your Broker using the following example:
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      name: default
+      namespace: default
+    ```
+
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+
+
+In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
+
+1. Modify the `eventing.knative.dev/broker.class` annotation. Replace `MTChannelBasedBroker` with the class type you want to use:
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      annotations:
+        eventing.knative.dev/broker.class: MTChannelBasedBroker
+      name: default
+      namespace: default
+    ```
+
+1. Configure the `spec.config` with the details of the ConfigMap that defines the required configuration for the Broker class (e.g. with some Channel configurations in case of the `MTChannelBasedBroker`):
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    metadata:
+      annotations:
+        eventing.knative.dev/broker.class: MTChannelBasedBroker
+      name: default
+      namespace: default
+    spec:
+      config:
+        apiVersion: v1
+        kind: ConfigMap
+        name: config-br-default-channel
+        namespace: knative-eventing
+    ```
+
+For further information about configuring a default broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](./broker-admin-config-options.md#configuring-the-broker-class).

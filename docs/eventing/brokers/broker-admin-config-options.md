@@ -79,73 +79,14 @@ data:
         namespace: knative-eventing
 ```
 
-## Broker class options
 
-When a Broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.
+## Configuring the Broker class
 
-The following example creates a Broker called `default` in the `default` namespace, and uses `MTChannelBasedBroker` as the implementation:
-
-1. Create a YAML file for your Broker using the following example:
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      name: default
-      namespace: default
-    ```
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
-
-
-### Configuring the Broker class
-
-To configure a Broker class, you can modify the
-`eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker
-object. `MTChannelBasedBroker` is the Broker class default.
-
-1. Modify the `eventing.knative.dev/broker.class` annotation. Replace
-`MTChannelBasedBroker` with the class type you want to use:
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      annotations:
-        eventing.knative.dev/broker.class: MTChannelBasedBroker
-      name: default
-      namespace: default
-    ```
-
-1. Configure the `spec.config` with the details of the ConfigMap that defines
-the backing Channel for the Broker class:
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      annotations:
-        eventing.knative.dev/broker.class: MTChannelBasedBroker
-      name: default
-      namespace: default
-    spec:
-      config:
-        apiVersion: v1
-        kind: ConfigMap
-        name: config-br-default-channel
-        namespace: knative-eventing
-    ```
+Besides configuring the Broker class for each broker [individually](create-broker.md#broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
 
 ### Configuring the default BrokerClass for the cluster
 
-You can configure the `clusterDefault` Broker class so that any Broker created in the cluster that does not have a `BrokerClass` annotation uses this default class.
-
-#### Example
+You can configure the `clusterDefault` Broker class so that any Broker created in the cluster that does not have a `BrokerClass` annotation uses this default class:
 
 ```yaml
 apiVersion: v1
