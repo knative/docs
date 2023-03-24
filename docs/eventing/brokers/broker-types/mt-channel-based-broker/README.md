@@ -34,24 +34,24 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
 
     1. Create a MTChannelBasedBroker by creating a YAML file using the following template:
 
-       ```yaml
-       apiVersion: eventing.knative.dev/v1
-       kind: Broker
-       metadata:
-         annotations:
-           eventing.knative.dev/broker.class: MTChannelBasedBroker
-         name: <broker-name>
-       ```
-
-       !!! note
-           Note, that the broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
+        ```yaml
+        apiVersion: eventing.knative.dev/v1
+        kind: Broker
+        metadata:
+          annotations:
+            eventing.knative.dev/broker.class: MTChannelBasedBroker
+          name: <broker-name>
+        ```
+  
+        !!! note
+            Note, that the broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
 
     1. Apply the YAML file:
 
-       ```bash
-       kubectl apply -f <filename>.yaml
-       ```
-       Where `<filename>` is the name of the file you created in the previous step.
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+        Where `<filename>` is the name of the file you created in the previous step.
 
 ## Configuration
 
