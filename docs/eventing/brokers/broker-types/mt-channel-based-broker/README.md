@@ -1,6 +1,6 @@
 # Multi-tenant channel based Broker
 
-The Multi-tenant channel based Broker (MTChannelBasedBroker) uses [channels](../../../channels) for event routing. It is shipped by default with Knative Eventing.
+The Multi-tenant channel based Broker (MTChannelBasedBroker) uses [Channels](../../../channels) for event routing. It is shipped by default with Knative Eventing.
 
 ## Prerequisites
 
@@ -22,26 +22,11 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
 
 === "kn"
 
-    1. You can create a MTChannelBasedBroker by entering the following command:
+    You can create a MTChannelBasedBroker by entering the following command:
 
-        ```bash
-        kn broker create <broker-name> -n <namespace> --class MTChannelBasedBroker
-        ```
-
-        !!! note
-            If you choose not to specify a namespace, the broker will be created in the current namespace
-
-    1. Optional: Verify that the broker was created by listing existing brokers:
-
-        ```bash
-        kn broker list
-        ```
-
-    1. Optional: You can also verify the broker exists by describing the broker you have created:
-
-        ```bash
-        kn broker describe <broker-name>
-        ```
+    ```bash
+    kn broker create <broker-name> --class MTChannelBasedBroker
+    ```
 
 === "kubectl"
 
@@ -49,44 +34,28 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
 
     1. Create a MTChannelBasedBroker by creating a YAML file using the following template:
 
-        ```yaml
-        apiVersion: eventing.knative.dev/v1
-        kind: Broker
-        metadata:
-          annotations:
-            eventing.knative.dev/broker.class: MTChannelBasedBroker
-          name: <broker-name>
-          namespace: <namespace>
-        ```
+       ```yaml
+       apiVersion: eventing.knative.dev/v1
+       kind: Broker
+       metadata:
+         annotations:
+           eventing.knative.dev/broker.class: MTChannelBasedBroker
+         name: <broker-name>
+       ```
 
-        !!! note
-            Note, that the broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
+       !!! note
+           Note, that the broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
 
     1. Apply the YAML file:
 
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-        Where `<filename>` is the name of the file you created in the previous step.
-
-    1. Optional: Verify that the broker is working correctly:
-
-        ```bash
-        kubectl -n <namespace> get broker <broker-name>
-        ```
-
-        This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
-
-        ```bash
-        NAME      READY   REASON   URL                                                                        AGE
-        default   True             http://broker-ingress.knative-eventing.svc.cluster.local/default/default   1m
-        ```
-
-        If the `READY` status is `False`, wait a few moments and then run the command again.
+       ```bash
+       kubectl apply -f <filename>.yaml
+       ```
+       Where `<filename>` is the name of the file you created in the previous step.
 
 ## Configuration
 
-There are multiple ways to configure a Broker. You either can do the configuration on the Broker object itself or you can define some cluster and namespace default values.
+There are multiple ways to configure a Broker. You either can do the configuration on the Broker object itself or you can define some cluster and namespace default values:
 
 ### Broker specific configuration
 
@@ -122,13 +91,13 @@ data:
     kind: InMemoryChannel
 ```
 
-Or for a [Kafka Channel](../configuration/kafka-channel-configuration.md):
+Or for a [Kafka Channel](../../../configuration/kafka-channel-configuration.md) with some Channel specific configuration:
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: config-kafka-channel
+  name: kafka-channel
   namespace: knative-eventing
 data:
   channel-template-spec: |

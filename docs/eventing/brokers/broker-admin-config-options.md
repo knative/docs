@@ -42,13 +42,13 @@ data:
       brokerClass: MTChannelBasedBroker
       apiVersion: v1
       kind: ConfigMap
-      name: config-kafka-channel
+      name: kafka-channel
       namespace: knative-eventing
 ```
 
-Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `config-kafka-channel` ConfigMap. For more information about creating a `config-kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](../configuration/kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
+Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap. For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](../configuration/kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
 
-You can also modify the default Broker configuration for one or more dedicated namespaces, by defining it in the `namespaceDefaults` section. For example, if you want to use the `config-br-default-channel` ConfigMap for all Brokers by default, but want to use `config-kafka-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap:
+You can also modify the default Broker configuration for one or more dedicated namespaces, by defining it in the `namespaceDefaults` section. For example, if you want to use the `config-br-default-channel` ConfigMap for all Brokers by default, but want to use `kafka-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap:
 
 ```yaml
 apiVersion: v1
@@ -70,12 +70,12 @@ data:
       namespace-1:
         apiVersion: v1
         kind: ConfigMap
-        name: config-kafka-channel
+        name: kafka-channel
         namespace: knative-eventing
       namespace-2:
         apiVersion: v1
         kind: ConfigMap
-        name: config-kafka-channel
+        name: kafka-channel
         namespace: knative-eventing
 ```
 
@@ -98,7 +98,7 @@ data:
       brokerClass: MTChannelBasedBroker
       apiVersion: v1
       kind: ConfigMap
-      name: config-kafka-channel
+      name: kafka-channel
       namespace: knative-eventing
       delivery:
         retry: 10
@@ -143,7 +143,7 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
 
 When a Broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.
 
-The following example creates a Broker called `default` in the default namespace, and uses `MTChannelBasedBroker` as the implementation:
+The following example creates a Broker called `default` in the `default` namespace, and uses `MTChannelBasedBroker` as the implementation:
 
 1. Create a YAML file for your Broker using the following example:
 
