@@ -54,19 +54,6 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
         ```
  
         This will create a new Broker of your default broker class and default broker configuration (both defined in the `config-br-defaults` ConfigMap).
- 
-        !!! note
-            If you have multiple Broker classes installed in your cluster, you can specify the broker class via the `eventing.knative.dev/broker.class` annotation, e.g.:
- 
-            ```yaml
-            apiVersion: eventing.knative.dev/v1
-            kind: Broker
-            metadata:
-              annotations:
-                eventing.knative.dev/broker.class: MTChannelBasedBroker
-              name: <broker-name>
-              namespace: <namespace>
-            ```
 
     1. Apply the YAML file:
 
@@ -92,27 +79,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
 ## Broker class options
 
-When a Broker is created without a specified `BrokerClass` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified by default in the `config-br-defaults` ConfigMap. 
-
-The following example creates a Broker called `default` in the `default` namespace, and uses `MTChannelBasedBroker` as the implementation:
-
-1. Create a YAML file for your Broker using the following example:
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      name: default
-      namespace: default
-    ```
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
-
+When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified by default in the `config-br-defaults` ConfigMap. 
 
 In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
 
