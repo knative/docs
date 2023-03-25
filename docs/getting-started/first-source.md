@@ -8,15 +8,17 @@ The above image is Figure 6.6 from [Knative in Action](https://www.manning.com/b
 
 ## Creating your first source
 
-The CloudEvents Player acts as a Source for CloudEvents by intaking the URL of the Broker as an environment variable, `BROKER_URL`. You will send CloudEvents to the Broker through the CloudEvents Player application.
+The CloudEvents Player acts as a Source for CloudEvents by intaking the name of the Broker as an environment variable, `BROKER_NAME`. If the Broker is
+located in a different namespace it is possible to also set the `BROKER_NAMESPACE` environment variable. Alternatively, you can just use the `BROKER_URI`.
+
+You will send CloudEvents to the Broker through the CloudEvents Player application.
 
 Create the CloudEvents Player Service:
 === "kn"
     Run the command:
     ```bash
     kn service create cloudevents-player \
-    --image ruromero/cloudevents-player:latest \
-    --env BROKER_URL=http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker
+    --image quay.io/ruben/cloudevents-player:latest
     ```
     !!! Success "Expected output"
         ```{ .bash .no-copy }
@@ -41,10 +43,7 @@ Create the CloudEvents Player Service:
                 autoscaling.knative.dev/min-scale: "1"
             spec:
               containers:
-                - image: ruromero/cloudevents-player:latest
-                  env:
-                    - name: BROKER_URL
-                      value: http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker
+                - image: quay.io/ruben/cloudevents-player:latest
         ```
 
     1. Apply the YAML file by running the command:
@@ -55,6 +54,48 @@ Create the CloudEvents Player Service:
         !!! Success "Expected output"
             ```{ .bash .no-copy }
             service.serving.knative.dev/cloudevents-player created
+            ```
+
+The service is now running but it doesn't know where the broker is so let's create a
+[SinkBinding](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/) between the service and the broker.
+
+=== "kn"
+    Run the command:
+    ```bash
+    kn source binding create ce-player-binding --subject "Service:serving.knative.dev/v1:cloudevents-player" --sink broker:example-broker
+    ```
+    !!! Success "Expected output"
+        ```{ .bash .no-copy }
+        Sink binding 'ce-player-binding' created in namespace 'default'.
+        ```
+
+=== "YAML"
+    1. Copy the following YAML into a file named `cloudevents-player-binding.yaml`:
+        ```bash
+        apiVersion: sources.knative.dev/v1
+        kind: SinkBinding
+        metadata:
+          name: ce-player-binding
+        spec:
+          sink:
+            ref:
+              apiVersion: eventing.knative.dev/v1
+              kind: Broker
+              name: example-broker
+          subject:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: cloudevents-player
+        ```
+
+    1. Apply the YAML file by running the command:
+        ``` bash
+        kubectl apply -f cloudevents-player-binding.yaml
+        ```
+
+        !!! Success "Expected output"
+            ```{ .bash .no-copy }
+            sinkbinding.sources.knative.dev/ce-player-binding created
             ```
 
 ## Examining the CloudEvents Player
