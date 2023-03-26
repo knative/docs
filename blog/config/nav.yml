@@ -44,6 +44,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/knative-serving-in-k0s.md
           - articles/from-cloudevent-to-apach-kafka-records-part-one.md
           - articles/kafka-broker-with-isolated-data-plane.md
           - articles/single-node-kafka-development.md
