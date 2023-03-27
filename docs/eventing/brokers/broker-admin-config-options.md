@@ -12,8 +12,6 @@ kind: ConfigMap
 metadata:
   name: config-br-defaults
   namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
 data:
   # Configures the default for any Broker that does not specify a spec.config or Broker class.
   default-br-config: |
@@ -56,8 +54,6 @@ kind: ConfigMap
 metadata:
   name: config-br-defaults
   namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
 data:
   default-br-config: |
     clusterDefault:
@@ -94,8 +90,6 @@ kind: ConfigMap
 metadata:
   name: config-br-defaults
   namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
 data:
   # Configures the default for any Broker that does not specify a spec.config or Broker class.
   default-br-config: |
@@ -115,8 +109,6 @@ kind: ConfigMap
 metadata:
   name: config-br-defaults
   namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
 data:
   # Configures the default for any Broker that does not specify a spec.config or Broker class.
   default-br-config: |
@@ -139,8 +131,6 @@ kind: ConfigMap
 metadata:
   name: config-br-defaults
   namespace: knative-eventing
-  labels:
-    eventing.knative.dev/release: devel
 data:
   # Configures the default for any Broker that does not specify a spec.config or Broker class.
   default-br-config: |
