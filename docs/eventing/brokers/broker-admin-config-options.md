@@ -121,6 +121,9 @@ data:
         brokerClass: MTChannelBasedBroker
 ```
 
+  !!! note
+      Be aware that different broker classes usually require different configuration ConfigMaps. See the section at the beginning for an example on a per-namespace configuration of the used ConfigMap.
+
 ## Configuring delivery spec defaults
 
 You can configure default event delivery parameters for Brokers that are applied in cases where an event fails to be delivered:

@@ -83,7 +83,7 @@ When a Broker is created without a specified `eventing.knative.dev/broker.class`
 
 In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
 
-1. Modify the `eventing.knative.dev/broker.class` annotation. Replace `MTChannelBasedBroker` with the class type you want to use:
+1. Set the `eventing.knative.dev/broker.class` annotation. Replace `MTChannelBasedBroker` in the following example with the class type you want to use. Be aware that the broker class annoation is immutable and thus can't be updated after the Broker got created:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
