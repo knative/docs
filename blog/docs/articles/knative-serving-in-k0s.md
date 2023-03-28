@@ -2,22 +2,22 @@
 
 **Author: [Naveenraj Muthuraj](https://twitter.com/naveenraj_m), Graduate Student @ University of Alberta**
 
-**Date: 2023-26-03**
+**Date: 2023-27-03**
 
-_This work is an attempt to deploy **knative serving** in K0s with minimum resources. Let's try 1 CPU and 1 GB RAM._
+_This work is an attempt to deploy **knative serving** in k0s with minimum resources. Let's try 1 CPU and 1 GB RAM._
 
-This document has three sections. In first section we capture the resource required by knative serving and K0s. In second section we monitor the actual resource used by Knative and K0s, to determine the size of our k0s (edge) node. Finally, we install knative serving with reduced resource request/limit to K0s node with 1 CPU and 1.5 GB RAM (Why 1.5 GB ? , see  [Knative + K0s resource usage](#knative--k0s-resource-usage) )
+This document has three sections. In first section we capture the resource required by knative serving and k0s. In second section we monitor the actual resource used by Knative and k0s, to determine the size of our k0s (edge) node. Finally, we install knative serving with reduced resource request/limit to k0s node with 1 CPU and 1.5 GB RAM (Why 1.5 GB ? , see  [Knative + k0s resource usage](#knative-k0s-resource-usage) )
 
-If you just want to install knative serving in k0s, you can directly skip to [Knative in K0s ](#knative-in-edge) Installation section.
+If you just want to install knative serving in k0s, you can directly skip to [Knative in k0s ](#knative-in-k0s) Installation section.
 
 * [Resource Requirement Analysis](#resource-requirment-analysis)  
-    * [Knative Default Resource Requirement](#knative--k0s-default-resource-requirement)
-    * [k0s Default Resource Requirement](#k0s)
-    * [Knative + K0s Default resource requirement](#knative--k0s-default-resource-requirement)
+    * [Knative Serving Default Resource Requirement](#knative-serving-default-resource-requirement)
+    * [k0s Default Resource Requirement](#k0s-default-resource-requirement)
+    * [Knative + k0s Default resource requirement](#knative-k0s-default-resource-requirement)
 * [Resource Usage Analysis](#resource-usage-analysis)
     * [Knative resource monitoring](#knative-resource-monitoring)
-    * [Knative + K0s resource usage](#knative--k0s-resource-usage)
-* [Knative in Edge](#knative-in-edge)  
+    * [Knative + k0s resource usage](#knative-k0s-resource-usage)
+* [Knative in k0s](#knative-in-k0s)  
     * [Create Edge like Node](#create-edge-like-node)
     * [Install k0s](#install-k0s)
     * [Install Metallb for Load balancing](#install-metallb-for-load-balancing)
@@ -31,7 +31,7 @@ If you just want to install knative serving in k0s, you can directly skip to [Kn
 
 In this section we will determine the default Installation resource requirement needed for knative-serving and k0s.
 
-### Knative Serving
+### Knative Serving Default Resource Requirement
 knative-serving
 ```bash
  kubectl get pods  -n knative-serving -o custom-columns="NAME:metadata.name,CPU-REQUEST:spec.containers[*].resources.requests.cpu,CPU-LIMIT:spec.containers[*].resources.limits.cpu,MEM-REQUEST:spec.containers[*].resources.requests.memory,MEM_LIMIT:spec.containers[*].resources.limits.memory"
@@ -78,10 +78,11 @@ NAME                                      CPU-REQUEST   CPU-LIMIT   MEM-REQUEST 
 | webhook                | 100m            | 500m          | 100Mi              | 500Mi            |
 | **Total**              | **860m**        | **5600m**     | **640Mi**          | **5400Mi**       |
 
->\*  default-domain is a Job, and the resource will be freed up once the job completes
+!!! note
+    \*  default-domain is a Job, and the resource will be freed up once the job completes
 
 
-### K0s
+### k0s Default Resource Requirement
 
 **Resource used by default k0s installation**
 
@@ -93,7 +94,7 @@ Mem:             971         558          61           0         351         268
 Swap:           1941         208        1733
 ```
 
-Memory used by K0s - 558 m
+Memory used by k0s - 558 m
 
 
 CPU Usage
@@ -145,13 +146,13 @@ CPU used by BaseOS in idle state 0.7%
 
 The results obtained are comporable to experiments by Neil [[1](#resources)]
 
-### Knative + K0s Default resource requirement
+### Knative + k0s Default resource requirement
 
 Minimum resources needed for VM by the rough estimate 
 
 | **Resource**    | **CPU** | **Memory**       |
 |-----------------|----------|------------------|
-| K0s             | 30m      | 558 + 208 (swap) |
+| k0s             | 30m      | 558 + 208 (swap) |
 | knative-serving | 860m     | 640Mi            |
 | **Total**       | **890m** | **1406Mi**       |
 
@@ -221,20 +222,20 @@ kube-system       metrics-server-7446cc488c-zxdxg           5m           18Mi
 
 
 
-### Knative + K0s resource usage
+### Knative + k0s resource usage
 
 Minimum resources used for VM by the rough estimate 
 
 | **Resource**    | **CPU** | **Memory**       |
 |-----------------|----------|------------------|
-| K0s + knative-serving | < 160m      | < 1406Mi           |
+| k0s + knative-serving | < 160m      | < 1406Mi           |
 
 
 From this early result, it seems like we might be able to reduce CPU count but ~1.4 GB Memory utilization means that there is little room to reduce memory.
 
 Now lets try reducing resource request and limit by 50% and see if we run into any issue.
 
-## Knative in Edge 
+## Knative in k0s 
 
 ### Create Edge like Node
 
@@ -285,7 +286,7 @@ vagrant   Ready    control-plane   61s   v1.26.2+k0s
 
 We can already see the effect of running k0s in 1 CPU and 1.5 GB RAM . 
 
-K0s metrics without any additional installs
+k0s metrics without any additional installs
 
 ```bash
 vagrant@vagrant:~$ sudo k0s kubectl top node
@@ -341,9 +342,9 @@ sudo k0s kubectl apply -f l2_ad.yaml
 Edit deployment files of all knative serving components by reducing resources to 50% of the original value. 
 Ex: if 100m is the orginal value of CPU request/limit , we reduce it to 50m, same is done for memory.
 
-Though reducing by 50% might seem random, when I tried to install the default files , some pods didn't come up due to insufficient CPU. The mimimum request of 890 milli core (see [Knative Default Resource](#knative--k0s-default-resource-requirement)) explains why some pods didn't find  sufficient CPU , since BaseOS + K0s might be using more than 110 m of CPU (1000 - 890)
+Though reducing by 50% might seem random, when I tried to install the default files , some pods didn't come up due to insufficient CPU. The mimimum request of 890 milli core (see [Knative + k0s Default resource requirement](#knative-k0s-default-resource-requirement)) explains why some pods didn't find  sufficient CPU , since BaseOS + k0s might be using more than 110 m of CPU (1000 - 890)
 
-Hence, after monitoring the resource usage (See [Knative+K0s Resource Usage](#knative--k0s-resource-usage)) and with an aim to fit everything in 1 CPU, reducing the resource request/limit by 50% was a safe option.
+Hence, after monitoring the resource usage (See [Knative + k0s Resource Usage](#knative-k0s-resource-usage)) and with an aim to fit everything in 1 CPU, reducing the resource request/limit by 50% was a safe option.
 
 You can use the deployment file I have created with reduced resource for next step.
 
@@ -429,7 +430,7 @@ Let's bring knative to edge.
 1. Neil Cresswell,
 Comparing Resource Consumption in K0s vs K3s vs Microk8s, August 23, 2022 [Blog](https://www.portainer.io/blog/comparing-k0s-k3s-microk8s)
 
-2. [K0s Quick start guide](https://docs.k0sproject.io/v1.23.6+k0s.2/install/)
+2. [k0s Quick start guide](https://docs.k0sproject.io/v1.23.6+k0s.2/install/)
 
 3. [knative docs](https://knative.dev/)
 
