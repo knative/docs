@@ -112,6 +112,9 @@ data:
 
 ## Enable container-freezer service
 
+!!! warning "Deprecated"
+    Container-freezer will be deprecated and removed in Knative v1.10
+
 You can configure queue-proxy to pause pods when not in use by enabling the `container-freezer` service. It calls a stand-alone service (via a user-specified endpoint) when a pod's traffic drops to zero or scales up from zero. To enable it, set `concurrency-state-endpoint` to a non-empty value. With this configuration, you can achieve some features like freezing running processes in pods or billing based on the time it takes to process the requests.
 
 Before you configure this, you need to implement the endpoint API. The official implementation is container-freezer. You can install it by following the installation instructions in the [container-freezer README](https://github.com/knative-sandbox/container-freezer).

@@ -1,5 +1,8 @@
 # Configuring container-freezer
 
+!!! warning "Deprecated"
+    Container-freezer will be deprecated and removed in Knative v1.10
+
 When container-freezer is enabled, queue-proxy calls an endpoint API when its traffic drops to zero or scales up from zero.
 
 Within the community-maintained endpoint API implementation container-freezer, the running process is frozen when the pod's traffic drops to zero, and resumed when the pod's traffic scales up from zero. However, users can also run their own implementation instead (for example, as a billing component to log when requests are being handled).
