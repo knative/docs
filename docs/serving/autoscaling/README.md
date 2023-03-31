@@ -15,4 +15,3 @@ To use autoscaling for your application if it is enabled on your cluster, you mu
 * Try out the [Go Autoscale Sample App](autoscale-go/README.md).
 * Configure your Knative deployment to use the Kubernetes Horizontal Pod Autoscaler (HPA) instead of the default KPA. For how to install HPA, see [Install optional Serving extensions](../../install/yaml-install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).
 * Configure the [types of metrics](autoscaling-metrics.md) that the Autoscaler consumes.
-* Configure your Knative Service to use [container-freezer](container-freezer.md), which freezes the running process when the pod's traffic drops to zero. The most valuable benefit is reducing the cold-start time within this configuration.
