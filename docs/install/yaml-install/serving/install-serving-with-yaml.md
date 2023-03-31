@@ -148,7 +148,7 @@ Follow the procedure for the networking layer of your choice:
 <!-- These are snippets from the docs/snippets directory -->
 {% include "dns.md" %}
 {% include "real-dns-yaml.md" %}
-{% include "temporary-dns.md" %}
+{% include "no-dns.md" %}
 
 ## Install optional Serving extensions
 
