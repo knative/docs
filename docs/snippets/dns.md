@@ -17,4 +17,4 @@ Follow the procedure for the DNS of your choice:
         like minikube unless [`minikube tunnel`](https://minikube.sigs.k8s.io/docs/commands/tunnel/)
         is running.
 
-        In these cases, see the "Real DNS" or "Temporary DNS" tabs.
+        In these cases, see the "Real DNS" or "No DNS" tabs.
