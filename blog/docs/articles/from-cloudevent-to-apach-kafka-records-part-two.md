@@ -7,7 +7,7 @@
 _In this blog post you will learn how to easily store incoming CloudEvents to an Apache Kafka Topic and using Knative Broker and Trigger APIs for content-based event routing._
 
 
-The [first part](https://knative.dev/blog/articles/from-cloudevent-to-apach-kafka-records-part-one/) of this post explained how Knative helps to ingest CloudEvents to an Apache Kafka topic for further processing. The article showed the processing of the CloudEvents Kafka Record with a standard tool from the Apache Kafka ecosystem, like the [`kcat`](https://github.com/edenhill/kcat) CLI. In addition the post also explained the **benefits** of the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode) of CloudEvents, which Knative defaults to. Now, in this article we show a different approach to process the ingested CloudEvents, by leveraging the Knative Broker and Trigger APIs for the event routing.
+The [first part](https://knative.dev/blog/articles/from-cloudevent-to-apach-kafka-records-part-one/) of this post explained how Knative helps to ingest CloudEvents to an Apache Kafka topic for further processing. The article showed the processing of the CloudEvents Kafka Record with a standard tool from the Apache Kafka ecosystem, like the [`kcat`](https://github.com/edenhill/kcat) CLI. In addition, the post also explained the **benefits** of the [binary content mode](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/kafka-protocol-binding.md#32-binary-content-mode) of CloudEvents, which Knative defaults to. Now, in this article we show a different approach to process the ingested CloudEvents, by leveraging the Knative Broker and Trigger APIs for the event routing.
 
 
 ### Setting up Apache Kafka and the Knative Broker
@@ -19,7 +19,7 @@ In order to use the Knative Broker for Apache Kafka you install Apache Kafka fir
 
 ### Setting up the Knative Broker component
 
-The above mentioned article configures all Knative `Broker`s to be in shape of the `Kafka` class, therefore creating a new broker for Apache Kafka is pretty straightforward: 
+The above-mentioned article configures all Knative `Broker`s to be in shape of the `Kafka` class, therefore creating a new broker for Apache Kafka is pretty straightforward: 
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -39,7 +39,7 @@ NAME                   URL                                                      
 my-demo-kafka-broker   http://kafka-broker-ingress.knative-eventing.svc.cluster.local/default/my-demo-kafka-broker   7s    True    
 ```
 
-> NOTE: the Broker is reachable at the mentioned URL but it is not automatically exposed outside the namespace. It is possible to create (and also secure) an `Ingress` to do it. For development, you can also directly use `kn` command line to send events, see [Kn Event Plugin](#kn-event-plugin) section.
+> NOTE: the Broker is reachable at the mentioned URL, but it is not automatically exposed outside the namespace. It is possible to create (and also secure) an `Ingress` to do it. For development, you can also directly use `kn` command line to send events, see [Kn Event Plugin](#kn-event-plugin) section.
 
 But we do not see any information about the Apache Kafka Topic. The reason is that the topic used by the Broker implementation is considered an implementation detail. Let us have a look at the actual broker object:
 
@@ -159,6 +159,6 @@ With the above command we are sending a `message` as a CloudEvents with the `dev
 
 ### Conclusion
 
-The example showed a simple flow from sending events to receiving them. The message are persistent on the Kafka Topic behind the Knative Broker. From there is could be also consumed by any standard Kafka API, how the abstraction that Knative offers does simplify the development process of event-driven applications. With out to much extra configuration it is also possible to filter and route events on their metadata.
+The example showed a simple flow from sending events to receiving them. The messages are persistent on the Kafka Topic behind the Knative Broker. From there it could be also consumed by any standard Kafka API, how the abstraction that Knative offers does simplify the development process of event-driven applications. Without too much extra configuration it is also possible to filter and route events on their metadata.
 
 In addition, the adoption of `Trigger`/`Filter` is not just a way to avoid to reimplement the same pattern in all consumers, but it also makes the whole message processing more efficient because the consumer is _only_ invoked when necessary, and it can even scale to zero if it is a Knative Service!
