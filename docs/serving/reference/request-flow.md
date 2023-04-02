@@ -86,3 +86,12 @@ reliability and scaling of Knative:
 
 * Reports HTTP metrics and traces from just outside the user container, so that
   the infrastructure latency contribution can be measured.
+
+* During startup (before ready), probes the user container more aggressively to
+  enable earlier serving that Kubelet probes (which can probe at most once per
+  second).
+
+  * To support this functionality, Knative Serving rewrites the user-container's
+    `readinessProbe` to an argument to queue-proxy; the queue-proxy's readiness
+    check incorporates both queue-proxy's own readiness and the
+    user-container's.
