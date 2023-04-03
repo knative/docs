@@ -12,7 +12,7 @@ The [first part](https://knative.dev/blog/articles/from-cloudevent-to-apach-kafk
 
 ### Setting up Apache Kafka and the Knative Broker
 
-In order to use the Knative Broker for Apache Kafka you install Apache Kafka first. For this post we are using a local Apache Kafka installation, powered by [Strimzi](https://strimzi.io), as described [here](https://knative.dev/blog/articles/single-node-kafka-development/). The article also discusses how to install the Knative Broker for Apache Kafka for a [local development environment](https://knative.dev/blog/articles/single-node-kafka-development/#installing-knative-eventing-and-the-knative-broker-for-apache-kafka).
+In order to use the Knative Broker for Apache Kafka you need to install Apache Kafka first. For this post we are using a local Apache Kafka installation, powered by [Strimzi](https://strimzi.io), as described [here](https://knative.dev/blog/articles/single-node-kafka-development/). The article also discusses how to install the Knative Broker for Apache Kafka for a [local development environment](https://knative.dev/blog/articles/single-node-kafka-development/#installing-knative-eventing-and-the-knative-broker-for-apache-kafka).
 
 > NOTE: For a production-ready configuration of the Knative Broker for Apache Kafka see [this blog](https://developers.redhat.com/articles/2023/03/08/configuring-knative-broker-apache-kafka).
 
