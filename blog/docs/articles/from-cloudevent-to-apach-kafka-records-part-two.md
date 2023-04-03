@@ -1,8 +1,8 @@
 # From CloudEvents to Apache Kafka Records, Part II
 
-**Authors: Daniele Zonca, Senior Principal Software Engineer @ Red Hat, Matthias Weßendorf, Principal Software Engineer @ Red Hat**
+**Authors: Daniele Zonca, Senior Principal Software Engineer @ Red Hat, Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-**Date: 2023-03-31**
+**Date: 2023-04-03**
 
 _In this blog post you will learn how to easily store incoming CloudEvents to an Apache Kafka Topic and using Knative Broker and Trigger APIs for content-based event routing._
 
@@ -39,7 +39,7 @@ NAME                   URL                                                      
 my-demo-kafka-broker   http://kafka-broker-ingress.knative-eventing.svc.cluster.local/default/my-demo-kafka-broker   7s    True    
 ```
 
-> NOTE: the Broker is reachable at the mentioned URL, but it is not automatically exposed outside the namespace. It is possible to create (and also secure) an `Ingress` to do it. For development, you can also directly use `kn` command line to send events, see [Kn Event Plugin](#kn-event-plugin) section.
+> NOTE: the Broker is reachable at the mentioned URL, inside the cluster. It is possible to create (and also [secure](https://knative.dev/docs/eventing/brokers/broker-admin-config-options/#protect-a-knative-broker-by-using-json-web-token-jwt-and-istio)) an `Ingress` to do it. For development, you can also directly use `kn` command line to send events, see [Kn Event Plugin](#kn-event-plugin) section.
 
 But we do not see any information about the Apache Kafka Topic. The reason is that the topic used by the Broker implementation is considered an implementation detail. Let us have a look at the actual broker object:
 
