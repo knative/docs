@@ -138,7 +138,7 @@ spec:
       name: log-receiver
 ```
 
-We see a Trigger that defines a set of `filter` rules, if those are matching, the CloudEvents from the Kafka topic is routed, using HTTP, to our referenced webserver application. Beside is there is also an [_experimental feature_ in Knative](https://knative.dev/docs/eventing/experimental-features/new-trigger-filters/) which enables a new SQL-like filtering using the `filters` field on the `Trigger` API that implements [CloudEvents Subscriptions API](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters).
+We see a Trigger that defines a set of `filter` rules, if those are matching, the CloudEvent from the Kafka topic is routed, using HTTP, to our referenced webserver application. There is also an [_experimental feature_ in Knative](https://knative.dev/docs/eventing/experimental-features/new-trigger-filters/) which enables a new SQL-like filtering using the `filters` field on the `Trigger` API that implements [CloudEvents Subscriptions API](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters).
 
 > Note: It is highly recommended applying filter attributes on the `Trigger`s for the CloudEvents metadata attributes and extensions. If **no** filter is provided, all occurring CloudEvents are routed to the referenced subscriber, which is a bad application design, expect if you explicitly want to have a logger for all events in the broker.
 
