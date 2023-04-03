@@ -116,7 +116,7 @@ The developers of the consumer applications do not need to know any detail about
 
 It is quite common that a Topic in Apache Kafka is used to contain different types of events that maybe refer to the same [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html) (if you are applying Domain-Driven Design principles). This means that each consumer is going to receive all the events only to filter and process a subset of them.
 
-This is one of the downsides of Apache Kafka protocol: there is no direct filter API for routing of the Records. In order to process or filter events and route them to a different destination, or other Kafka topic, a fully fledged Kafka consumer client needs to be implemented. Or the usege of additional libraries like [Kafka Streams](https://kafka.apache.org/documentation/streams/) is required.
+This is one of the downsides of the Apache Kafka protocol: there is no direct filter API for routing of the Records. In order to process or filter events and route them to a different destination, or other Kafka topic, a fully fledged Kafka consumer client needs to be implemented. Or the usage of additional libraries like [Kafka Streams](https://kafka.apache.org/documentation/streams/) is required.
 
 As you can imagine this is a quite common pattern and Knative Eventing makes it part of the API. The `Trigger` API defines a [powerful set of filters](https://knative.dev/docs/eventing/triggers/) to route CloudEvents based on their metadata:
 
