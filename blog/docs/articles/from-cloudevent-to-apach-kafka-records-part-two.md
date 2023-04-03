@@ -108,7 +108,7 @@ spec:
       name: http
 ```
 
-Here we define a simple `Pod` and its `Service`, which points to an HTTP-Server, that receivers the CloudEvents. As you can see, this is **not** a Kafka specific consumer, _any_ HTTP Webserver, in any language, can be used for processing the CloudEvents coming from an Apache Kafka Topic.
+Here we define a simple `Pod` and its `Service`, which points to an HTTP-Server, that receives the CloudEvents. As you can see, this is **not** a Kafka specific consumer, _any_ HTTP Webserver, in any language, can be used for processing the CloudEvents coming from an Apache Kafka Topic.
 
 The developers of the consumer applications do not need to know any detail about how to program a Kafka consumer application. Knative with its Broker implementation for Apache Kafka abstracts this away, by acting as an HTTP proxy for the consumer applications. This does dramatically simplify the engineering efforts for these focused and self-contained consumer applications.
 
