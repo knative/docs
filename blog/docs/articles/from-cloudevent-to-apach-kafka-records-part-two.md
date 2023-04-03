@@ -155,7 +155,7 @@ kn event send \
   -f message="Hello"
 ```
 
-With the above command we are sending a `message` as a CloudEvents with the `dev.knative.blog.post` to our `my-demo-kafka-broker` object. The `kn event` plugin generates a valid CloudEvents from this invocation and sends it directly to the addressable URL of the referenced component, in this example our `Broker`.
+With the above command we are sending a `message` as a CloudEvents with the `dev.knative.blog.post` type to our `my-demo-kafka-broker` object. The `kn event` plugin generates a valid CloudEvent from this invocation and sends it directly to the addressable URL of the referenced component, in this example our `Broker`.
 
 ### Conclusion
 
