@@ -159,6 +159,6 @@ With the above command we are sending a `message` as a CloudEvents with the `dev
 
 ### Conclusion
 
-The example showed a simple flow from sending events to receiving them. The messages are persistent on the Kafka Topic behind the Knative Broker. From there it could be also consumed by any standard Kafka API, how the abstraction that Knative offers does simplify the development process of event-driven applications. Without too much extra configuration it is also possible to filter and route events on their metadata.
+The example showed a simple flow from sending events to receiving them. The messages are persistent on the Kafka Topic behind the Knative Broker. From there it could be also consumed by any standard Kafka API. However the abstraction that Knative offers does simplify the development process of event-driven applications. Without too much extra configuration it is also possible to filter and route events on their metadata.
 
 In addition, the adoption of `Trigger`/`Filter` is not just a way to avoid to reimplement the same pattern in all consumers, but it also makes the whole message processing more efficient because the consumer is _only_ invoked when necessary, and it can even scale to zero if it is a Knative Service!
