@@ -14,7 +14,9 @@ The [first part](https://knative.dev/blog/articles/from-cloudevent-to-apach-kafk
 
 In order to use the Knative Broker for Apache Kafka you need to install Apache Kafka first. For this post we are using a local Apache Kafka installation, powered by [Strimzi](https://strimzi.io), as described [here](https://knative.dev/blog/articles/single-node-kafka-development/). The article also discusses how to install the Knative Broker for Apache Kafka for a [local development environment](https://knative.dev/blog/articles/single-node-kafka-development/#installing-knative-eventing-and-the-knative-broker-for-apache-kafka).
 
-> NOTE: For a production-ready configuration of the Knative Broker for Apache Kafka see [this blog](https://developers.redhat.com/articles/2023/03/08/configuring-knative-broker-apache-kafka).
+
+!!! note
+    For a production-ready configuration of the Knative Broker for Apache Kafka see [this blog](https://developers.redhat.com/articles/2023/03/08/configuring-knative-broker-apache-kafka).
 
 
 ### Setting up the Knative Broker component
@@ -39,7 +41,8 @@ NAME                   URL                                                      
 my-demo-kafka-broker   http://kafka-broker-ingress.knative-eventing.svc.cluster.local/default/my-demo-kafka-broker   7s    True    
 ```
 
-> NOTE: the Broker is reachable at the mentioned URL, inside the cluster. It is possible to create (and also [secure](https://knative.dev/docs/eventing/brokers/broker-admin-config-options/#protect-a-knative-broker-by-using-json-web-token-jwt-and-istio)) an `Ingress` to do it. For development, you can also directly use `kn` command line to send events, see [Kn Event Plugin](#kn-event-plugin) section.
+!!! note
+    The Broker is reachable at the mentioned URL, inside the cluster. It is possible to create (and also [secure](https://knative.dev/docs/eventing/brokers/broker-admin-config-options/#protect-a-knative-broker-by-using-json-web-token-jwt-and-istio)) an `Ingress` to do it. For development, you can also directly use `kn` command line to send events, see [Kn Event Plugin](#kn-event-plugin) section.
 
 But we do not see any information about the Apache Kafka Topic. The reason is that the topic used by the Broker implementation is considered an implementation detail. Let us have a look at the actual broker object:
 
@@ -70,7 +73,8 @@ status:
 
 The above gives a simplified version of the YAML representation, but note the `spec.config`: It points to the default configuration for all Kafka-enabled Knative Brokers in the cluster. The `kafka-broker-config` ConfigMap configures the notion of the underlying topics, by defining knobs like `partition` or `replication factor`. However, in the `status` of the broker you see the name of the topic: `knative-broker-default-my-demo-kafka-broker`. The name is following the convention `knative-broker-<namespace>-<broker-name>`.
 
-> NOTE: By default the Knative Kafka Broker creates its own internal topic, however this action might be restricted in some environments. For this and any other similar use cases, it is possible to [bring your own topic](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#bring-your-own-topic). 
+!!! note
+    By default the Knative Kafka Broker creates its own internal topic, however this action might be restricted in some environments. For this and any other similar use cases, it is possible to [bring your own topic](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#bring-your-own-topic). 
 
 ### Setting up the Consumer application
 
@@ -140,7 +144,8 @@ spec:
 
 We see a Trigger that defines a set of `filter` rules, if those are matching, the CloudEvent from the Kafka topic is routed, using HTTP, to our referenced webserver application. There is also an [_experimental feature_ in Knative](https://knative.dev/docs/eventing/experimental-features/new-trigger-filters/) which enables a new SQL-like filtering using the `filters` field on the `Trigger` API that implements [CloudEvents Subscriptions API](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters).
 
-> Note: It is highly recommended applying filter attributes on the `Trigger`s for the CloudEvents metadata attributes and extensions. If **no** filter is provided, all occurring CloudEvents are routed to the referenced subscriber, which is a bad application design, expect if you explicitly want to have a logger for all events in the broker.
+!!! note
+    It is highly recommended applying filter attributes on the `Trigger`s for the CloudEvents metadata attributes and extensions. If **no** filter is provided, all occurring CloudEvents are routed to the referenced subscriber, which is a bad application design, expect if you explicitly want to have a logger for all events in the broker.
 
 For `Trigger`s that are executed by a Knative Broker for Apache Kafka it is also possible to [configure the order of delivered events](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#configuring-the-order-of-delivered-events), using the `kafka.eventing.knative.dev/delivery.order` annotation on the `Trigger`.
 
