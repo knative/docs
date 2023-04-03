@@ -68,7 +68,7 @@ status:
     default.topic.replication.factor: "1"
 ```
 
-The above gives a simplified version of the YAML representation, but note the `spec.config`: It points to the default configuration for all Kafka-enabled Knative Brokers in the cluster. The `kafka-broker-config` ConfigMap does configure the notion of the underlying topics, be defining knobs like `partition` or `replication factor`. However, in the `status` of the broker you now see the name of the topic: `knative-broker-default-my-demo-kafka-broker`. The name is following this convention: `knative-broker-<namespace>-<broker-name>`.
+The above gives a simplified version of the YAML representation, but note the `spec.config`: It points to the default configuration for all Kafka-enabled Knative Brokers in the cluster. The `kafka-broker-config` ConfigMap configures the notion of the underlying topics, by defining knobs like `partition` or `replication factor`. However, in the `status` of the broker you see the name of the topic: `knative-broker-default-my-demo-kafka-broker`. The name is following the convention `knative-broker-<namespace>-<broker-name>`.
 
 > NOTE: By default the Knative Kafka Broker creates its own internal topic, however this action might be restricted in some environments. For this and any other similar use cases, it is possible to [bring your own topic](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/#bring-your-own-topic). 
 
