@@ -110,7 +110,7 @@ data:
 
 ### Broker default configuration
 
-The `config-br-defaults` ConfigMap defines default values for any Broker that does not specify a `spec.config` or a Broker class. It is possible to define these defaults cluser wide or on a per namespace basis. Check the [Administrator configuration options](../../broker-admin-config-options.md) on how to set broker defaults cluster wide or on a namespace basis.
+The `config-br-defaults` ConfigMap defines default values for any Broker that does not specify a `spec.config` or a Broker class. It is possible to define these defaults cluser wide or on a per namespace basis. Check the [Administrator configuration options](../../../configuration/broker-configuration.md) on how to set broker defaults cluster wide or on a namespace basis.
 
 ## Developer documentation
 

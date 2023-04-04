@@ -17,7 +17,7 @@ control rules.
 ## Next steps
 
 - Create a [Broker](create-broker.md).
-- Configure [default broker ConfigMap settings](broker-admin-config-options.md).
+- Configure [default broker ConfigMap settings](../configuration/broker-configuration.md).
 
 ## Additional resources
 

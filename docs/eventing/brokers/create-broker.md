@@ -113,4 +113,4 @@ In case you have multiple Broker classes installed in your cluster and want to u
         namespace: knative-eventing
     ```
 
-For further information about configuring a default broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](./broker-admin-config-options.md#configuring-the-broker-class).
+For further information about configuring a default broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).

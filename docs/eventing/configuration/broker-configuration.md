@@ -1,4 +1,4 @@
-# Administrator configuration options
+# Configure Broker defaults
 
 If you have cluster administrator permissions for your Knative installation, you can modify ConfigMaps to change the global default configuration options for Brokers on the cluster.
 
@@ -23,7 +23,7 @@ data:
       namespace: knative-eventing
 ```
 
-In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](./broker-developer-config-options.md)).
+In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](../brokers/broker-developer-config-options.md)).
 
 However, if you would like like for example a Kafka Channel to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
 
@@ -44,7 +44,7 @@ data:
       namespace: knative-eventing
 ```
 
-Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap. For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](../configuration/kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
+Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap. For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](./kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
 
 You can also modify the default Broker configuration for one or more dedicated namespaces, by defining it in the `namespaceDefaults` section. For example, if you want to use the `config-br-default-channel` ConfigMap for all Brokers by default, but want to use `kafka-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap:
 
@@ -78,7 +78,7 @@ data:
 
 ## Configuring the Broker class
 
-Besides configuring the Broker class for each broker [individually](create-broker.md#broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
+Besides configuring the Broker class for each broker [individually](../brokers/create-broker.md#broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
 
 ### Configuring the default BrokerClass for the cluster
 
