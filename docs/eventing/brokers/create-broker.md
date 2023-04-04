@@ -3,7 +3,7 @@
 Once you have installed Knative Eventing and a Broker implementation, you can create an instance of a Broker.
 
 !!! note
-    Knative Eventing provides by default the [multi-tenant (MT) channel-based broker](./broker-types/mt-channel-based-broker/README.md). Its default backing channel is the [`InMemoryChannel`](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md). `InMemoryChannel` should not be used in production. Other broker types and their configuration options can be found under [broker types](./broker-types/README.md).
+    Knative Eventing provides by default the [MTChannelBasedBroker](./broker-types/channel-based-broker/README.md). Its default backing channel is the [`InMemoryChannel`](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md). `InMemoryChannel` should not be used in production. Other broker types and their configuration options can be found under [broker types](./broker-types/README.md).
 
 You can create a broker by using the `kn` CLI or by applying YAML files using `kubectl`.
 

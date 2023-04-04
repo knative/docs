@@ -184,7 +184,7 @@ nav:
           - Broker types:
             - Available Broker types: eventing/brokers/broker-types/README.md
             # add default IMC broker page, page explaining broker types
-            - Multi-tenant channel based Broker: eventing/brokers/broker-types/mt-channel-based-broker/README.md
+            - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
             - Apache Kafka: eventing/brokers/broker-types/kafka-broker/README.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
