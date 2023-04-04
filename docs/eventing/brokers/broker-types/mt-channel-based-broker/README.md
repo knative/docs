@@ -1,7 +1,7 @@
 # Multi-tenant channel based Broker
 
-The Multi-tenant channel based Broker (MTChannelBasedBroker) uses [Channels](../../../channels) for event routing. It is shipped by default with Knative Eventing.
-Users should prefer native Broker implementations (like [Knative Broker for Apache Kafka](../kafka-broker/README.md) or [RabbitMQ Broker](../rabbitmq-broker/README.md)) over the MTChannelBasedBroker and channel combination because it is usually more efficient as they reduce network hops for example. 
+The Multi-tenant Channel based Broker (MTChannelBasedBroker) uses [Channels](../../../channels) for event routing. It is shipped by default with Knative Eventing.
+Users should prefer native Broker implementations (like [Knative Broker for Apache Kafka](../kafka-broker/README.md) or [RabbitMQ Broker](../rabbitmq-broker/README.md)) over the MTChannelBasedBroker and Channel combination because it is usually more efficient as they reduce network hops for example. 
 ## Prerequisites
 
 * You have Knative Eventing installed.
@@ -9,7 +9,7 @@ Users should prefer native Broker implementations (like [Knative Broker for Apac
 
   As the MTChannelBasedBroker is based on Channels, you need to install a Channel implementation. Check out the [available Channels](../../../channels/channels-crds.md) for a (non-exhaustive) list of the available Channels for Knative Eventing.
 
-  You can install e.g. the in-memory channel via:
+  You can install for example the InMemory Channel by running the following command:
   
   ```bash
   kubectl apply -f {{ artifact(repo="eventing",file="in-memory-channel.yaml")}}
@@ -26,10 +26,11 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
     ```bash
     kn broker create <broker-name> --class MTChannelBasedBroker
     ```
+    Where `<broker-name>` is the name of your Broker.
 
 === "kubectl"
 
-    The YAML in the following example creates a broker named `default`.
+    The YAML in the following example creates a Broker.
 
     1. Create a MTChannelBasedBroker by creating a YAML file using the following template:
 
@@ -41,9 +42,10 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
             eventing.knative.dev/broker.class: MTChannelBasedBroker
           name: <broker-name>
         ```
+        Where `<broker-name>` is the name of your Broker.
   
         !!! note
-            Note, that the Broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
+            Note, that the Broker class is specified via the `eventing.knative.dev/broker.class` annotation.
 
     1. Apply the YAML file:
 
@@ -76,7 +78,7 @@ spec:
     namespace: default
 ```
 
-<a name="configuration-configmap"></a>The referenced ConfigMap must contain a `channel-template-spec` that defines the underlining channel implementation for this Broker, as well as some channel specific configurations. For example:
+<a name="configuration-configmap"></a>The referenced ConfigMap must contain a `channel-template-spec` that defines the underlining Channel implementation for this Broker, as well as some Channel specific configurations. For example:
 
 ```yaml
 apiVersion: v1
@@ -109,7 +111,7 @@ data:
 
 ### Broker default configuration
 
-The `config-br-defaults` ConfigMap defines default values for any Broker that does not specify a `spec.config` or a Broker class. It is possible to define these defaults cluser wide or on a per namespace basis. Check the [Administrator configuration options](../../../configuration/broker-configuration.md) on how to set broker defaults cluster wide or on a namespace basis.
+The `config-br-defaults` ConfigMap defines default values for any Broker that does not specify a `spec.config` or a Broker class. It is possible to define these defaults cluser wide or on a per namespace basis. Check the [Administrator configuration options](../../../configuration/broker-configuration.md) on how to set Broker defaults cluster wide or on a namespace basis.
 
 ## Developer documentation
 

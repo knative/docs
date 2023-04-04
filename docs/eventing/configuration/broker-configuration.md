@@ -23,7 +23,7 @@ data:
       namespace: knative-eventing
 ```
 
-In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` Broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](../brokers/broker-developer-config-options.md)).
+In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` Broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the Brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](../brokers/broker-developer-config-options.md)).
 
 However, if you would like like for example a Kafka Channel to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
 
@@ -205,7 +205,7 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     kubectl delete pod <broker-ingress-pod-name> -n knative-eventing
     ```
 
-    Where `<broker-ingress-pod-name>` is the name of your broker ingress pod.
+    Where `<broker-ingress-pod-name>` is the name of your Broker ingress pod.
 
     The pod now has two containers:
 
@@ -213,11 +213,13 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     knative-eventing     <broker-ingress-pod-name>           2/2     Running   1              175m
     ```
 
-1. Create a broker, then use get the URL of your broker by running the command:
+1. Create a broker, then use get the URL of your Broker by running the command:
 
     ```bash
     kubectl get broker <broker-name>
     ```
+
+    Where `<broker-name>` is the name of your Broker.
 
     Example output:
 
@@ -226,13 +228,13 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     default     my-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/my-broker   6s    True
     ```
 
-1. Start a `curl` pod:
+1. Start a `curl` pod by running the following command:
 
     ```bash
     kubectl -n default run curl --image=radial/busyboxplus:curl -i --tty
     ```
 
-1. Send a CloudEvent with an HTTP POST against the broker URL:
+1. Send a CloudEvent with an HTTP POST against the Broker URL by running the following command:
 
     ```bash
     curl -X POST -v \
@@ -245,7 +247,7 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     <broker-URL>
     ```
 
-    Where `<broker-URL>` is the URL of your broker. For example:
+    Where `<broker-URL>` is the URL of your Broker. For example:
 
     ```{ .bash .no-copy }
     curl -X POST -v \
