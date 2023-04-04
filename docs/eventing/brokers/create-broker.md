@@ -53,7 +53,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
           namespace: <namespace>
         ```
  
-        This will create a new Broker of your default broker class and default broker configuration (both defined in the `config-br-defaults` ConfigMap).
+        This creates a new Broker using the default broker class and default broker configuration, both of which are defined in the `config-br-defaults` ConfigMap.
 
     1. Apply the YAML file:
 
