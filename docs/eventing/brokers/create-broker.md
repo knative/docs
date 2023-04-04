@@ -1,39 +1,39 @@
-# Creating a broker
+# Creating a Broker
 
 Once you have installed Knative Eventing and a Broker implementation, you can create an instance of a Broker.
 
 !!! note
-    Knative Eventing provides by default the [MTChannelBasedBroker](./broker-types/channel-based-broker/README.md). Its default backing channel is the [`InMemoryChannel`](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md). `InMemoryChannel` should not be used in production. Other broker types and their configuration options can be found under [broker types](./broker-types/README.md).
+    Knative Eventing provides by default the [MTChannelBasedBroker](./broker-types/channel-based-broker/README.md). Its default backing channel is the [`InMemoryChannel`](https://github.com/knative/eventing/blob/main/config/channels/in-memory-channel/README.md). `InMemoryChannel` should not be used in production. Other Broker types and their configuration options can be found under [Available Broker types](./broker-types/README.md).
 
-You can create a broker by using the `kn` CLI or by applying YAML files using `kubectl`.
+You can create a Broker by using the `kn` CLI or by applying YAML files using `kubectl`.
 
 === "kn"
 
-    1. You can create a broker by entering the following command:
+    1. You can create a Broker by entering the following command:
 
         ```bash
         kn broker create <broker-name> -n <namespace>
         ```
  
-        This will create a new Broker of your default broker class and default broker configuration (both defined in the `config-br-defaults` ConfigMap).
+        This will create a new Broker of your default Broker class and default Broker configuration (both defined in the `config-br-defaults` ConfigMap).
  
         !!! note
-            If you choose not to specify a namespace, the broker will be created in the current namespace.
+            If you choose not to specify a namespace, the Broker will be created in the current namespace.
  
         !!! note
-            If you have multiple Broker classes installed in your cluster, you can specify the broker class via the `--class` parameter, e.g.:
+            If you have multiple Broker classes installed in your cluster, you can specify the Broker class via the `--class` parameter, e.g.:
  
             ```bash
             kn broker create <broker-name> -n <namespace> --class MTChannelBasedBroker
             ```
 
-    1. Optional: Verify that the broker was created by listing existing brokers:
+    1. Optional: Verify that the Broker was created by listing existing Brokers:
 
         ```bash
         kn broker list
         ```
 
-    1. Optional: You can also verify the broker exists by describing the broker you have created:
+    1. Optional: You can also verify the Broker exists by describing the Broker you have created:
 
         ```bash
         kn broker describe <broker-name>
@@ -41,7 +41,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
 
 === "kubectl"
 
-    The YAML in the following example creates a broker named `default`.
+    The YAML in the following example creates a Broker named `default`.
 
     1. Create a Broker by creating a YAML file using the following template:
 
@@ -53,7 +53,7 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
           namespace: <namespace>
         ```
  
-        This creates a new Broker using the default broker class and default broker configuration, both of which are defined in the `config-br-defaults` ConfigMap.
+        This creates a new Broker using the default Broker class and default Broker configuration, both of which are defined in the `config-br-defaults` ConfigMap.
 
     1. Apply the YAML file:
 
@@ -62,13 +62,13 @@ You can create a broker by using the `kn` CLI or by applying YAML files using `k
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
-    1. Optional: Verify that the broker is working correctly:
+    1. Optional: Verify that the Broker is working correctly:
 
         ```bash
         kubectl -n <namespace> get broker <broker-name>
         ```
  
-        This shows information about your broker. If the broker is working correctly, it shows a `READY` status of `True`:
+        This shows information about your Broker. If the Broker is working correctly, it shows a `READY` status of `True`:
  
         ```bash
         NAME      READY   REASON   URL                                                                        AGE
@@ -83,7 +83,7 @@ When a Broker is created without a specified `eventing.knative.dev/broker.class`
 
 In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
 
-1. Set the `eventing.knative.dev/broker.class` annotation. Replace `MTChannelBasedBroker` in the following example with the class type you want to use. Be aware that the broker class annoation is immutable and thus can't be updated after the Broker got created:
+1. Set the `eventing.knative.dev/broker.class` annotation. Replace `MTChannelBasedBroker` in the following example with the class type you want to use. Be aware that the Broker class annoation is immutable and thus can't be updated after the Broker got created:
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
@@ -113,4 +113,4 @@ In case you have multiple Broker classes installed in your cluster and want to u
         namespace: knative-eventing
     ```
 
-For further information about configuring a default broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).
+For further information about configuring a default Broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).
