@@ -1,7 +1,7 @@
 # Multi-tenant channel based Broker
 
 The Multi-tenant channel based Broker (MTChannelBasedBroker) uses [Channels](../../../channels) for event routing. It is shipped by default with Knative Eventing.
-Users should prefer native Broker implementations over the MTChannelBasedBroker and channel combo because it is usually more efficient. 
+Users should prefer native Broker implementations (like [Knative Broker for Apache Kafka](../kafka-broker/README.md) or [RabbitMQ Broker](../rabbitmq-broker/README.md)) over the MTChannelBasedBroker and channel combination because it is usually more efficient as they reduce network hops for example. 
 ## Prerequisites
 
 * You have Knative Eventing installed.
