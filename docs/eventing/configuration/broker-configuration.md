@@ -122,7 +122,7 @@ data:
 ```
 
   !!! note
-      Be aware that different Broker classes usually require different configuration ConfigMaps. See the section at the beginning for an example on a per-namespace configuration of the used ConfigMap.
+      Be aware that different Broker classes usually require different configuration ConfigMaps. See the configuration options of the different [Broker implementations](../brokers/broker-types/README.md) on how their referenced ConfigMaps have to look like (e.g. for [MTChannelBasedBroker](../brokers/broker-types/mt-channel-based-broker/README.md#configuration-configmap) or [Knative Broker for Apache Kafka](../brokers/broker-types/kafka-broker/README.md#configure-a-kafka-broker)).
 
 ## Configuring delivery spec defaults
 

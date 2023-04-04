@@ -77,7 +77,7 @@ spec:
     namespace: default
 ```
 
-The referenced ConfigMap must contain a `channel-template-spec` that defines the underlining channel implementation for this Broker, as well as some channel specific configurations. For example:
+<a name="configuration-configmap"></a>The referenced ConfigMap must contain a `channel-template-spec` that defines the underlining channel implementation for this Broker, as well as some channel specific configurations. For example:
 
 ```yaml
 apiVersion: v1
