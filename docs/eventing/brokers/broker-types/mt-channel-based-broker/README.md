@@ -5,16 +5,15 @@ Users should prefer native Broker implementations (like [Knative Broker for Apac
 ## Prerequisites
 
 * You have Knative Eventing installed.
+* You have a Channel implementation installed.
 
-## Install a channel implementation
+  As the MTChannelBasedBroker is based on Channels, you need to install a Channel implementation. Check out the [available Channels](../../../channels/channels-crds.md) for a (non-exhaustive) list of the available Channels for Knative Eventing.
 
-As the MTChannelBasedBroker is based on Channels, you need to install a Channel implementation. Check out the [available Channels](../../../channels/channels-crds.md) for a (non-exhaustive) list of the available Channels for Knative Eventing.
-
-You can install e.g. the in-memory channel via:
-
-```bash
-kubectl apply -f {{ artifact(repo="eventing",file="in-memory-channel.yaml")}}
-```
+  You can install e.g. the in-memory channel via:
+  
+  ```bash
+  kubectl apply -f {{ artifact(repo="eventing",file="in-memory-channel.yaml")}}
+  ```
 
 ## Create a MTChannelBasedBroker
 
