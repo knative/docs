@@ -44,7 +44,7 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
         ```
   
         !!! note
-            Note, that the broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
+            Note, that the Broker class is specified via the `eventing.knative.dev/broker.class` annotation (as for all Broker types).
 
     1. Apply the YAML file:
 

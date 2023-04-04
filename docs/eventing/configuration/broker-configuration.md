@@ -23,7 +23,7 @@ data:
       namespace: knative-eventing
 ```
 
-In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](../brokers/broker-developer-config-options.md)).
+In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` Broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](../brokers/broker-developer-config-options.md)).
 
 However, if you would like like for example a Kafka Channel to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
 
@@ -80,9 +80,9 @@ data:
 
 Besides configuring the Broker class for each broker [individually](../brokers/create-broker.md#broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
 
-### Configuring the default BrokerClass for the cluster
+### Configuring the default Broker class for the cluster
 
-You can configure the `clusterDefault` Broker class so that any Broker created in the cluster that does not have a `BrokerClass` annotation uses this default class:
+You can configure the `clusterDefault` Broker class so that any Broker created in the cluster that does not have a `eventing.knative.dev/broker.class` annotation uses this default Broker class:
 
 ```yaml
 apiVersion: v1
@@ -97,11 +97,11 @@ data:
       brokerClass: MTChannelBasedBroker
 ```
 
-### Configuring the default BrokerClass for namespaces
+### Configuring the default Broker class for namespaces
 
 You can modify the default Broker class for one or more namespaces.
 
-For example, if you want to use a `KafkaBroker` class for all other Brokers created on the cluster, but you want to use the `MTChannelBasedBroker` class for Brokers created in `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
+For example, if you want to use a `KafkaBroker` Broker class for all other Brokers created on the cluster, but you want to use the `MTChannelBasedBroker` Broker class for Brokers created in `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
 
 ```yaml
 apiVersion: v1
@@ -122,7 +122,7 @@ data:
 ```
 
   !!! note
-      Be aware that different broker classes usually require different configuration ConfigMaps. See the section at the beginning for an example on a per-namespace configuration of the used ConfigMap.
+      Be aware that different Broker classes usually require different configuration ConfigMaps. See the section at the beginning for an example on a per-namespace configuration of the used ConfigMap.
 
 ## Configuring delivery spec defaults
 
