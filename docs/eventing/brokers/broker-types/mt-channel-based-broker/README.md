@@ -4,7 +4,7 @@ The Multi-tenant channel based Broker (MTChannelBasedBroker) uses [Channels](../
 Users should prefer native Broker implementations over the MTChannelBasedBroker and channel combo because it is usually more efficient. 
 ## Prerequisites
 
-You need to have Knative Eventing installed.
+* You have Knative Eventing installed.
 
 ## Install a channel implementation
 
@@ -55,11 +55,11 @@ You can create a MTChannelBasedBroker by using the `kn` CLI or by applying YAML 
 
 ## Configuration
 
-There are multiple ways to configure a Broker. You either can do the configuration on the Broker object itself or you can define some cluster and namespace default values:
+You configure the Broker object itself, or you can define cluster or namespace default values.
 
 ### Broker specific configuration
 
-It is possible to configure each Broker individually. This is done, by referencing a ConfigMap in the Brokers `.spec.config`:
+It is possible to configure each Broker individually by referencing a ConfigMap in the `spec.config`:
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -77,7 +77,7 @@ spec:
     namespace: default
 ```
 
-This referenced ConfigMap must contain a `channel-template-spec`, defining the underlining channel implementation for this Broker and eventually some channel specific configuration. For example:
+The referenced ConfigMap must contain a `channel-template-spec` that defines the underlining channel implementation for this Broker, as well as some channel specific configurations. For example:
 
 ```yaml
 apiVersion: v1
@@ -91,7 +91,7 @@ data:
     kind: InMemoryChannel
 ```
 
-Or for a [Kafka Channel](../../../configuration/kafka-channel-configuration.md) with some Channel specific configuration:
+[Kafka Channel](../../../configuration/kafka-channel-configuration.md) configuration example:
 
 ```yaml
 apiVersion: v1
@@ -112,6 +112,6 @@ data:
 
 The `config-br-defaults` ConfigMap defines default values for any Broker that does not specify a `spec.config` or a Broker class. It is possible to define these defaults cluser wide or on a per namespace basis. Check the [Administrator configuration options](../../broker-admin-config-options.md) on how to set broker defaults cluster wide or on a namespace basis.
 
-## Developer Documentation
+## Developer documentation
 
-For further information about the internals of the `MTChannelBasedBroker` and the interactions of its components, check out the [MTChannelBasedBroker developer docs](https://github.com/knative/eventing/blob/main/docs/mt-channel-based-broker/README.md).
+For more information about `MTChannelBasedBroker`, see the [MTChannelBasedBroker developer documentation](https://github.com/knative/eventing/blob/main/docs/mt-channel-based-broker/README.md).
