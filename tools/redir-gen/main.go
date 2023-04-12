@@ -29,6 +29,14 @@ var (
 	knativeOrgs        = []string{"knative", "knative-sandbox"}
 	allowedRepoRe      = regexp.MustCompile("^[a-z][-a-z0-9]+$")
 	archivedExceptions = []string{"eventing-contrib"}
+	ignoreRepos        = []string{
+		"actions",
+		"community",
+		"docs",
+		"knobots",
+		"monitoring",
+		"release",
+	}
 
 	// Repos known to contain Go libraries, so that requesting
 	// https://knative.dev/<repo> in a browser should redirect to
