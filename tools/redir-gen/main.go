@@ -29,11 +29,23 @@ var (
 	knativeOrgs        = []string{"knative", "knative-sandbox"}
 	allowedRepoRe      = regexp.MustCompile("^[a-z][-a-z0-9]+$")
 	archivedExceptions = []string{"eventing-contrib"}
+	ignoreRepos        = []string{
+		"actions",
+		"community",
+		"docs",
+		"knobots",
+		"monitoring",
+		"release",
+	}
 
 	// Repos known to contain Go libraries, so that requesting
 	// https://knative.dev/<repo> in a browser should redirect to
 	// https://pkg.go.dev/knative.dev/<repo>
 	redirectingGoRepos = []string{"pkg", "serving", "security-guard"}
+
+	repoToModule = map[string]string{
+		"func-go": "runtime",
+	}
 )
 
 // repoInfo provides a simple holder for GitHub repo information needed to
@@ -44,6 +56,11 @@ type repoInfo struct {
 	// Repo is the name of the github repo within the organizatiøon (e.g.
 	// "serving", NOT "knative/serving")
 	Repo string
+
+	// Module is the name of the github repo within the organizatiøon (e.g.
+	// "serving", NOT "knative/serving")
+	Module string
+
 	// DefaultBranch is the name of the default branch. This will be changing
 	// from "master" to "main" over time.
 	DefaultBranch string
@@ -88,7 +105,14 @@ func fetchRepos(orgs []string) ([]repoInfo, error) {
 					log.Print("Ignoring archived repo: ", *r.Name)
 					continue
 				}
-				allRepos = append(allRepos, repoInfo{org, *r.Name, *r.DefaultBranch})
+				repo := repoInfo{Org: org, Repo: *r.Name, DefaultBranch: *r.DefaultBranch}
+
+				if override, ok := repoToModule[repo.Repo]; ok {
+					repo.Module = override
+				} else {
+					repo.Module = repo.Repo
+				}
+				allRepos = append(allRepos, repo)
 			}
 			if resp.NextPage == 0 {
 				break
@@ -101,11 +125,11 @@ func fetchRepos(orgs []string) ([]repoInfo, error) {
 
 const (
 	goHTML = `<html><head>
-    <meta name="go-import" content="knative.dev/{{.Repo}} git https://github.com/{{.Org}}/{{.Repo}}">
-    <meta name="go-source" content="knative.dev/{{.Repo}}     https://github.com/{{.Org}}/{{.Repo}} https://github.com/{{.Org}}/{{.Repo}}/tree/{{.DefaultBranch}}{/dir} https://github.com/{{.Org}}/{{.Repo}}/blob/{{.DefaultBranch}}{/dir}/{file}#L{line}">
+    <meta name="go-import" content="knative.dev/{{.Module}} git https://github.com/{{.Org}}/{{.Repo}}">
+    <meta name="go-source" content="knative.dev/{{.Module}}     https://github.com/{{.Org}}/{{.Repo}} https://github.com/{{.Org}}/{{.Repo}}/tree/{{.DefaultBranch}}{/dir} https://github.com/{{.Org}}/{{.Repo}}/blob/{{.DefaultBranch}}{/dir}/{file}#L{line}">
 </head></html>
 `
-	redirText = `/{{.Repo}}/* go-get=1 /golang/{{.Repo}}.html 200
+	redirText = `/{{.Repo}}/* go-get=:go-get /golang/{{.Repo}}.html 200
 `
 	godocRedirText = `/{{.Repo}}/* https://pkg.go.dev/knative.dev/{{.Repo}}/:splat
 `
