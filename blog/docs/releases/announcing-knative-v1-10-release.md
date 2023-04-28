@@ -1,4 +1,4 @@
-**Authors: [Paul Schweigert](https://github.com/psschwei) (IBM), [Evan Anderson](https://github.com/evankanderson) (VMware)**
+**Authors: [Pierangelo Di Pilato](https://github.com/pierDipi) (Red Hat), [David Simansky](https://github.com/dsimansk) (Red Hat), [Krsna Mahapatra](https://github.com/kvmware) (VMware), [Pradnya Dixit](https://github.com/pradnyavmw) (VMware)**
 
 **Date: 2023-04-25**
 
