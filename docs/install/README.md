@@ -1,5 +1,8 @@
 # Installing Knative
 
+!!! note
+    Please also take a look at the [Serving Architecture](../serving/architecture.md), which explains the Knative components and the general networking concept.
+
 You can install the Serving component, Eventing component, or both on your
 cluster by using one of the following deployment options:
 
