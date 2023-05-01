@@ -23,59 +23,59 @@ webhook-78dc6ddddb-6868n                  1/1     Running   0          2m
 
 **Knative Serving Networking Layer**
 
-For Kourier
-```bash
-kubectl get pods -n knative-serving
+=== "Kourier"
+    ```bash
+    kubectl get pods -n knative-serving
 
-NAME                                      READY   STATUS    RESTARTS   AGE
-net-kourier-controller-5fcbb6d996-fprpd   1/1     Running   0          103s
-```
+    NAME                                      READY   STATUS    RESTARTS   AGE
+    net-kourier-controller-5fcbb6d996-fprpd   1/1     Running   0          103s
+    ```
 
-```bash
-kubectl get pods -n kourier-system
-NAME                                      READY   STATUS    RESTARTS   AGE
-3scale-kourier-gateway-86b9f6dc44-xpn6h   1/1     Running   0          2m22s
-```
+    ```bash
+    kubectl get pods -n kourier-system
+    NAME                                      READY   STATUS    RESTARTS   AGE
+    3scale-kourier-gateway-86b9f6dc44-xpn6h   1/1     Running   0          2m22s
+    ```
 
-For Istio
-```bash
-kubectl get pods -n knative-serving
+=== "Istio"
+    ```bash
+    kubectl get pods -n knative-serving
 
-NAME                                    READY   STATUS    RESTARTS   AGE
-net-istio-controller-ccc455b58-f98ld    1/1     Running   0          19s
-net-istio-webhook-7558dbfc64-5jmt6      1/1     Running   0          19s
-```
-```bash
-kubectl get pods -n istio-system
+    NAME                                    READY   STATUS    RESTARTS   AGE
+    net-istio-controller-ccc455b58-f98ld    1/1     Running   0          19s
+    net-istio-webhook-7558dbfc64-5jmt6      1/1     Running   0          19s
+    ```
+    ```bash
+    kubectl get pods -n istio-system
 
-NAME                                   READY   STATUS    RESTARTS   AGE
-istio-ingressgateway-c7b9f6477-bgr6q   1/1     Running   0          44s
-istiod-79d65bf5f4-5zvtj                1/1     Running   0          29s
-```
+    NAME                                   READY   STATUS    RESTARTS   AGE
+    istio-ingressgateway-c7b9f6477-bgr6q   1/1     Running   0          44s
+    istiod-79d65bf5f4-5zvtj                1/1     Running   0          29s
+    ```
 
-For Contour
-```bash
-kubectl get pods -n knative-serving
+=== "Contour"
+    ```bash
+    kubectl get pods -n knative-serving
 
-NAME                                      READY   STATUS        RESTARTS   AGE
-net-contour-controller-68547b797c-dl8pf   1/1     Running       0          14s
-```
-```bash
-kubectl get pods -n contour-external
+    NAME                                      READY   STATUS        RESTARTS   AGE
+    net-contour-controller-68547b797c-dl8pf   1/1     Running       0          14s
+    ```
+    ```bash
+    kubectl get pods -n contour-external
 
-NAME                            READY   STATUS      RESTARTS   AGE
-contour-7b995cdb68-jg5s8        1/1     Running     0          41s
-contour-certgen-v1.24.2-zmr9r   0/1     Completed   0          41s
-envoy-xkzck                     2/2     Running     0          41s
-```
-```bash
-kubectl get pods -n contour-internal
+    NAME                            READY   STATUS      RESTARTS   AGE
+    contour-7b995cdb68-jg5s8        1/1     Running     0          41s
+    contour-certgen-v1.24.2-zmr9r   0/1     Completed   0          41s
+    envoy-xkzck                     2/2     Running     0          41s
+    ```
+    ```bash
+    kubectl get pods -n contour-internal
 
-NAME                            READY   STATUS      RESTARTS   AGE
-contour-57fcf576fd-wb57c        1/1     Running     0          55s
-contour-certgen-v1.24.2-gqgrx   0/1     Completed   0          55s
-envoy-rht69                     2/2     Running     0          55s
-```
+    NAME                            READY   STATUS      RESTARTS   AGE
+    contour-57fcf576fd-wb57c        1/1     Running     0          55s
+    contour-certgen-v1.24.2-gqgrx   0/1     Completed   0          55s
+    envoy-rht69                     2/2     Running     0          55s
+    ```
 
 **Knative Eventing**
 
