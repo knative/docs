@@ -96,6 +96,7 @@ nav:
 ###############################################################################
     - Serving:
       - Knative Serving overview: serving/README.md
+      - Architecture: serving/architecture.md
       - Resources:
         - Revisions:
           - About Revisions: serving/revisions/README.md
