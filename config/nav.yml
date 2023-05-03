@@ -77,6 +77,8 @@ nav:
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
       # Uninstall
       - Uninstalling Knative: install/uninstall.md
+      # Troubleshooting
+      - Troubleshooting Knative: install/troubleshooting.md
 ###############################################################################
     # Functions
 ###############################################################################
