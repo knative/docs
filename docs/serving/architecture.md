@@ -1,6 +1,8 @@
 # Knative Serving Architecture
 
-Knative Serving consists of several components forming the backbone of the Serverless Platform. This page explains the high-level architecture of Knative Serving.
+Knative Serving consists of several components forming the backbone of the Serverless Platform.
+This page explains the high-level architecture of Knative Serving. Please also refer to [the Knative Serving Overview](./README.md) 
+and [the Request Flow](./request-flow.md) for additional information.
 
 ## Diagram
 
