@@ -15,3 +15,6 @@ Requests endpoint.
 | ```revision_app_request_count``` | The number of requests that are routed to user-container | Counter | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```response_code```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
 | ```revision_app_request_latencies``` | The response time in millisecond |  Histogram | ```configuration_name```<br>```namespace_name```<br>```pod_name```<br>```response_code```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Milliseconds | Stable |
 | ```revision_queue_depth``` | The current number of items in the serving and waiting queue, or not reported if unlimited concurrency | Gauge | ```configuration_name```<br>```event-display```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
+
+!!! note
+    The `revision_queue_depth` metric will be exported only if the revision concurrency hard limit is set to a value greater than 1.
