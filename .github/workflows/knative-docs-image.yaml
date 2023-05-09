@@ -39,3 +39,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: ./code-samples/serving/hello-world/helloworld-go
           tags: ghcr.io/knative/helloworld-go:latest
+
+      - name: Build autoscale-go image
+        uses: docker/build-push-action@v4
+        with:
+          push: false
+          platforms: linux/amd64,linux/arm64
+          context: ./docs/serving/autoscaling/autoscale-go
+          tags: ghcr.io/knative/autoscale-go:latest
