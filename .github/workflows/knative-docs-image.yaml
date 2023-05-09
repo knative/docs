@@ -3,6 +3,10 @@ name: Build Images
 on:
   push:
     branches: ['main']
+    paths:
+    - "code-samples/serving/hello-world/helloworld-go/**"
+    - "docs/serving/autoscaling/autoscale-go/**"
+    - "hack/docker/**"
 
 jobs:
   build-and-push-image:
@@ -43,7 +47,7 @@ jobs:
       - name: Build autoscale-go image
         uses: docker/build-push-action@v4
         with:
-          push: false
+          push: true
           platforms: linux/amd64,linux/arm64
           context: ./docs/serving/autoscaling/autoscale-go
           tags: ghcr.io/knative/autoscale-go:latest
