@@ -98,7 +98,7 @@ spec:
     spec:
       containers:
         - name: first-container
-          image: gcr.io/knative-samples/helloworld-go
+          image: ghcr.io/knative/helloworld-go:latest
           ports:
             - containerPort: 8080
         - name: second-container
@@ -258,7 +258,7 @@ spec:
     spec:
       containers:
         - name: user-container
-          image: gcr.io/knative-samples/helloworld-go
+          image: ghcr.io/knative/helloworld-go:latest
           env:
             - name: MY_NODE_NAME
               valueFrom:
@@ -377,7 +377,7 @@ spec:
  template:
   spec:
    containers:
-     - image: gcr.io/knative-samples/helloworld-go
+     - image: ghcr.io/knative/helloworld-go:latest
        env:
          - name: TARGET
            value: "Go Sample v1"

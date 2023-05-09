@@ -168,7 +168,7 @@ autoscaler classes built into Knative:
            autoscaling.knative.dev/metric: cpu
        spec:
          containers:
-           - image: gcr.io/knative-samples/autoscale-go:0.1
+           - image: ghcr.io/knative/autoscale-go:latest
    ```
 
    Additionally the autoscaler targets and scaling bounds can be specified in
@@ -195,7 +195,7 @@ autoscaler classes built into Knative:
            autoscaling.knative.dev/max-scale: "100"
        spec:
          containers:
-           - image: gcr.io/knative-samples/autoscale-go:0.1
+           - image: ghcr.io/knative/autoscale-go:latest
    ```
 
 !!! note

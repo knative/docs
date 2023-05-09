@@ -42,7 +42,7 @@ Stable mode is used for general operation, while panic mode by default has a muc
             autoscaling.knative.dev/window: "40s"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"
@@ -98,7 +98,7 @@ This value indicates how the window over which historical data is evaluated will
             autoscaling.knative.dev/panic-window-percentage: "20.0"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"
@@ -159,7 +159,7 @@ The default setting of `200.0` means that panic mode will be started if traffic 
             autoscaling.knative.dev/panic-threshold-percentage: "150.0"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"
