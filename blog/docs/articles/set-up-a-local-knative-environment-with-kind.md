@@ -300,7 +300,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-samples/helloworld-go # The URL to the image of the app
+        - image: ghcr.io/knative/helloworld-go:latest # The URL to the image of the app
           env:
             - name: TARGET # The environment variable printed out by the sample app
               value: "Hello Knative Serving is up and running with Kourier!!"

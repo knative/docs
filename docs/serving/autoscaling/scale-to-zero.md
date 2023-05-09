@@ -113,7 +113,7 @@ This contrasts with the `scale-to-zero-grace-period` flag, which determines the 
             autoscaling.knative.dev/scale-to-zero-pod-retention-period: "1m5s"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"
