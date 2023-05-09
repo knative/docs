@@ -54,7 +54,7 @@ Create a sample Service:
                   qpoption.knative.dev/testgate-config-sender: Joe
             spec:
               containers:
-                - image: gcr.io/knative-samples/helloworld-go
+                - image: ghcr.io/knative/helloworld-go:latest
                   env:
                     - name: TARGET
                       value: "World"
@@ -71,7 +71,7 @@ Create a sample Service:
 
     ```
     kn service create helloworld-go \
-        --image gcr.io/knative-samples/helloworld-go \
+        --image ghcr.io/knative/helloworld-go:latest \
         --env TARGET=World \
         --annotation features.knative.dev/queueproxy-podinfo=enabled \
         --annotation qpoption.knative.dev/testgate-activate=enable \
