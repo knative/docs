@@ -65,7 +65,10 @@ Navigate to your project directory and copy the following code into a new file n
 ```dockerfile
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
-FROM golang:1.13 as builder
+FROM golang:latest as builder
+
+ARG TARGETOS
+ARG TARGETARCH
 
 # Create and change to the app directory.
 WORKDIR /app
@@ -80,7 +83,7 @@ COPY . ./
 
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o server
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
