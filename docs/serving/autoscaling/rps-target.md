@@ -24,7 +24,7 @@ This setting specifies a target for requests-per-second per replica of an applic
             autoscaling.knative.dev/metric: "rps"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"

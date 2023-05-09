@@ -36,7 +36,7 @@ Instead of `TARGET=World`, update the environment variable `TARGET` on your Knat
           template:
             spec:
               containers:
-                - image: gcr.io/knative-samples/helloworld-go
+                - image: ghcr.io/knative/helloworld-go:latest
                   ports:
                     - containerPort: 8080
                   env:
@@ -124,7 +124,7 @@ Split the traffic between the two Revisions:
           template:
             spec:
               containers:
-                - image: gcr.io/knative-samples/helloworld-go
+                - image: ghcr.io/knative/helloworld-go:latest
                   ports:
                     - containerPort: 8080
                   env:

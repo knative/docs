@@ -44,7 +44,7 @@ $ kn quickstart kind
 
 Use the Knative client to create a Knative service:
 ```
-$ kn service create hello --image gcr.io/knative-samples/helloworld-go
+$ kn service create hello --image ghcr.io/knative/helloworld-go:latest
 ```
 
 Ready to try it out? Head over to the [Getting Started with Knative](https://knative.dev/docs/getting-started/) guide to learn how to download the plugin and get started with Knative!
