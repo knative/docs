@@ -26,7 +26,7 @@ To use container-freezer, the value of per-revision annotation key `autoscaling.
             autoscaling.knative.dev/min-scale: "3"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 

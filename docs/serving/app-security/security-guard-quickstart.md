@@ -32,7 +32,7 @@ Create a sample securedService:
                   qpoption.knative.dev/guard-activate: enable
             spec:
               containers:
-                - image: gcr.io/knative-samples/helloworld-go
+                - image: ghcr.io/knative/helloworld-go:latest
                   env:
                     - name: TARGET
                       value: "Secured World"
@@ -50,7 +50,7 @@ Create a sample securedService:
 
     ```
     kn service create helloworld-go \
-        --image gcr.io/knative-samples/helloworld-go \
+        --image ghcr.io/knative/helloworld-go:latest \
         --env "TARGET=Secured World" \
         --annotation features.knative.dev/queueproxy-podinfo=enabled \
         --annotation qpoption.knative.dev/guard-activate=enable
