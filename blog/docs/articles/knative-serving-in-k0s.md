@@ -404,7 +404,7 @@ spec:
         autoscaling.knative.dev/minScale: "1"
     spec:
       containers:
-        - image: gcr.io/knative-samples/helloworld-go
+        - image: ghcr.io/knative/helloworld-go:latest
           env:
             - name: TARGET
               value: "Edge!!"
