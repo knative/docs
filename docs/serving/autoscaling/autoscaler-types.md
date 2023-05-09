@@ -43,7 +43,7 @@ The type of Autoscaler implementation (KPA or HPA) can be configured by using th
             autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"

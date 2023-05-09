@@ -31,7 +31,7 @@ Create a sample service:
           template:
             spec:
               containers:
-                - image: gcr.io/knative-samples/helloworld-go
+                - image: ghcr.io/knative/helloworld-go:latest
                   env:
                     - name: TARGET
                       value: "Go Sample v1"
@@ -47,7 +47,7 @@ Create a sample service:
 === "kn CLI"
 
     ```
-    kn service create helloworld-go --image gcr.io/knative-samples/helloworld-go
+    kn service create helloworld-go --image ghcr.io/knative/helloworld-go:latest
     ```
 
 After the service has been created, Knative performs the following tasks:

@@ -72,7 +72,7 @@ The revision timeout value determines the default number of seconds to use for t
           spec:
             timeoutSeconds: 300
             containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 ### Max revision timeout seconds
@@ -134,7 +134,7 @@ The `revision-cpu-request` value determines the CPU allocation assigned to revis
       template:
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
               resources:
                 requests:
                   cpu: "400m"
@@ -175,7 +175,7 @@ to revisions by default. If this value is omitted, the system default is used. T
       template:
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
               resources:
                 requests:
                   memory: "100M"
@@ -216,7 +216,7 @@ allocation assigned to revisions by default. If this value is omitted, the syste
       template:
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
               resources:
                 requests:
                   ephemeral-storage: "500M"
@@ -256,7 +256,7 @@ The `revision-cpu-limit` value determines the default CPU allocation limit for r
       template:
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
               resources:
                 requests:
                   cpu: "1000m"
@@ -296,7 +296,7 @@ The `revision-memory-limit` value determines the default memory allocation limit
       template:
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
               resources:
                 requests:
                   memory: "200M"
@@ -336,7 +336,7 @@ The `revision-ephemeral-storage-limit` value determines the default ephemeral st
       template:
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
               resources:
                 requests:
                   ephemeral-storage: "750M"
@@ -378,7 +378,7 @@ container name if no container name is specified. This field supports Go templat
         spec:
           containers:
             - name: user-container
-              image: gcr.io/knative-samples/helloworld-go
+              image: ghcr.io/knative/helloworld-go:latest
     ```
 
 ### Container concurrency
