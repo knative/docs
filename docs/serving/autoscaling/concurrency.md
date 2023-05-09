@@ -156,7 +156,7 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
             autoscaling.knative.dev/target-utilization-percentage: "80"
         spec:
           containers:
-            - image: gcr.io/knative-samples/helloworld-go
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 === "Global (ConfigMap)"

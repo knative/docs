@@ -8,7 +8,7 @@ In this tutorial, you will deploy a "Hello world" Knative Service that accepts t
 
     ```bash
     kn service create hello \
-    --image gcr.io/knative-samples/helloworld-go \
+    --image ghcr.io/knative/helloworld-go:latest \
     --port 8080 \
     --env TARGET=World
     ```
@@ -32,7 +32,7 @@ In this tutorial, you will deploy a "Hello world" Knative Service that accepts t
           template:
             spec:
               containers:
-                - image: gcr.io/knative-samples/helloworld-go
+                - image: ghcr.io/knative/helloworld-go:latest
                   ports:
                     - containerPort: 8080
                   env:
