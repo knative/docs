@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Images
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-push-image:
-    name: Build knative mkdocs dockerfile
+    name: Build Knative Images
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -15,6 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to the Container registry
         uses: docker/login-action@v1
         with:
@@ -22,9 +25,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push docker image
-        uses: docker/build-push-action@v2
+      - name: Build mkdocs image
+        uses: docker/build-push-action@v4
         with:
           push: true
           file: ./hack/docker/Dockerfile
           tags: ghcr.io/knative/knative-docs:latest
+
+      - name: Build helloworld-go image
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          context: ./code-samples/serving/hello-world/helloworld-go
+          tags: ghcr.io/knative/helloworld-go:latest
