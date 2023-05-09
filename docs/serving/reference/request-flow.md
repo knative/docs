@@ -11,7 +11,7 @@ The following diagram shows the different request flows and control plane loops 
 
 The HTTP router, activator, and autoscaler are all shared cluster-level
 resources; this reduces the overhead for a new Knative service to only metadata
-when the Service is not in use, and allows more efficient management and upgrade
+when the Service is not in use and allows more efficient management and upgrade
 of these shared components.
 
 Routing decisions are made once on a per-request level at the HTTP Router (the
@@ -54,7 +54,7 @@ the ingress router will be re-programmed to send traffic to the activator pods.
 
 Routing traffic between ingress and activators is done by writing a subset of
 the activator endpoints into the Endpoints for the Revision's Service.  The
-Kubernetes Service corresponding to the revision is
+Kubernetes Service corresponding to the Revision is
 [selectorless](https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors), and may either contain the Revision's pod endpoints or the activator endpoints.  The use of a selectorless service is for the following reasons:
 
 * Some ingress implementations do not allow cross-namespace service references.
@@ -63,7 +63,7 @@ Kubernetes Service corresponding to the revision is
 * Some ingress implementations do not handle changing the backing Kubernetes
   Service of a routing endpoint seamlessly.
 
-* By using subsetting on a per-Revisino basis, incoming requests are funneled to
+* By using subsetting on a per-Revision basis, incoming requests are funneled to
   a small number of activators which can more efficiently make ready/not-ready
   capacity decisions.  The small number of effective activators per Revision is
   not a scaling problem because the activators will be removed from the request
