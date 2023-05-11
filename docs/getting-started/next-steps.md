@@ -35,7 +35,6 @@ Books to help you understand Knative concepts and get additional examples:
 Other links to help you get started with Knative:
 
 - [Knative YouTube Channel](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)
-- [Knative.tips](https://knative.tips/)
 
 ## :question: Are we missing something?
 
