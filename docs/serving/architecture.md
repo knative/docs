@@ -15,16 +15,16 @@ and [the Request Flow](./request-flow.md) for additional information.
 | Activator      | The activator is part of the **data-plane**. It is responsible to queue incoming requests (if a `Knative Service` is scaled-to-zero). It communicates with the autoscaler to bring scaled-to-zero Services back up and forward the queued requests. Additional details can be found [here](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md). |
 | Autoscaler     | The autoscaler is responsible to scale the `Knative Services` based on configuration, metrics and incoming requests.                                                                                                                                                                                                                                             |
 | Controller     | It is the controller's job to manage the state of `Knative Resources` within the cluster. It watches several objects, manages the live cycle of dependent resources, and updates the resource state.                                                                                                                                                             |
-| Domain-Mapping | The domain-mapping controller is responsible to manage `DomainMapping` resources. It is an extension of the above `Controller`.                                                                                                                                                                                                                                  |
 | Queue-Proxy    | The Queue-Proxy lives as a `sidecar-container` aside from the `user-container` in a `Knative-Service`. It is responsible to collect metrics and making sure, requests are sent to the `user-container` in the configured rate. It can also act as a queue if necessary, similar to the Activator.                                                                |
 | Webhooks       | Knative Serving has several webhooks responsible to validate and mutate `Knative Resources`.                                                                                                                                                                                                                                                                     |
+| Domain-Mapping | The domain-mapping controller is responsible to manage `DomainMapping` resources. It is an extension of the above `Controller`. It currently is in alpha state and the installation is optional.                                                                                                                                                                 |
 
 ## Networking Layer and Ingress
 
 !!! note
     `Ingress` in this case, does not refer to the [Kubernetes Ingress Resource](https://kubernetes.io/docs/concepts/services-networking/ingress/). It refers to the concept of exposing external access to a resource on the cluster. 
     
-Knative Serving depends on a `Networking Layer` that fulfils the [Knative Serving Specification](https://github.com/knative/specs/tree/main/specs/serving). 
+Knative Serving depends on a `Networking Layer` that fulfils the [Knative Networking Specification](https://github.com/knative/networking). 
 For this, Knative Serving defines the `KIngress` resource, which acts as an abstraction for different multiple pluggable networking layers. Currently, three networking layers are available and supported:
 
 * [net-kourier](https://github.com/knative-sandbox/net-kourier)
