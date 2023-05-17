@@ -16,9 +16,11 @@ Knative `kn` CLI releases from 1.9 onwards are signed with [cosign](https://docs
 1. Verify the signature by running the command:
 
     ```sh
-    COSIGN_EXPERIMENTAL=1 cosign verify-blob \
+    cosign verify-blob \
     --cert checksums.txt.pem \
     --signature checksums.txt.sig \
+    --certificate-identity=signer@knative-releases.iam.gserviceaccount.com \
+    --certificate-oidc-issuer=https://accounts.google.com \
     checksums.txt
     ```
 
@@ -29,4 +31,5 @@ Knative `kn` CLI releases from 1.9 onwards are signed with [cosign](https://docs
     ```
 
 !!! note
-    `COSIGN_EXPERIMENTAL=1` is used to allow verification of images signed in `KEYLESS` mode. To learn more about keyless signing, please refer to [Keyless Signatures](https://github.com/sigstore/cosign/blob/main/KEYLESS.md#keyless-signatures). The signing identity for Knative releases is `signer@knative-nightly.iam.gserviceaccount.com`, and the issuer is `https://accounts.google.com`.
+    Knative images are signed in `KEYLESS` mode. To learn more about keyless signing, please refer to [Keyless Signatures](https://github.com/sigstore/cosign/blob/main/KEYLESS.md#keyless-signatures). The signing identity for Knative releases is `signer@knative-releases.iam.gserviceaccount.com`, and the issuer is `https://accounts.google.com`.
+    
