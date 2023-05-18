@@ -35,21 +35,14 @@ spec:
   kafka:
     replicas: 3
     listeners:
-      # plaintext listerner is added for demonstration purposes, this listener doesn't require
-      # authentication nor encrypts traffic
       - name: plain
         port: 9092
         type: internal
         tls: false
-      # SSL
       - name: tls
         port: 9093
         type: internal
-        # Indicates that this listener will use TLS to encrypt traffic between Kafka cluster and
-        # Kafka clients.
         tls: true
-        # The `authentication` sub-section is added within `tls` to specify that TLS is used for
-        # authentication.
         authentication:
           type: tls
     authorization:
