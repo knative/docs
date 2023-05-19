@@ -17,10 +17,10 @@ managed by the Strimzi operator using Knative Eventing KafkaSource.
 
 To follow this tutorial, you should have the following prerequisites in place:
 
-1. A Kubernetes cluster with Knative Eventing and the .
-2. Strimzi operator installed, see [deploy Strimzi](https://strimzi.io/quickstarts/)
-3. Knative Eventing installed on the Kubernetes cluster, see [Install Knative Eventing](https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/#install-knative-eventing)
-4. Knative Eventing Kafka Source installed on the Kubernetes cluster, see [Install the KafkaSource controller](https://knative.dev/docs/eventing/sources/kafka-source/#install-the-kafkasource-controller)
+1. A Kubernetes cluster.
+2. Strimzi operator installed, see [deploy Strimzi](https://strimzi.io/quickstarts/).
+3. Knative Eventing installed on the Kubernetes cluster, see [Install Knative Eventing](https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/#install-knative-eventing).
+4. Knative Eventing Kafka Source installed on the Kubernetes cluster, see [Install the KafkaSource controller](https://knative.dev/docs/eventing/sources/kafka-source/#install-the-kafkasource-controller).
 
 **Step 1: Create a Kafka cluster**
 
@@ -80,6 +80,7 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: my-demo-topic
+  namespace: kafka
   labels:
     strimzi.io/cluster: my-kafka-cluster
 spec:
@@ -91,7 +92,7 @@ EOF
 Replace `<your-kafka-cluster-name>` with the name of your Kafka cluster managed by the Strimzi
 operator.
 
-**Step 3: Create a KafkaUser***
+**Step 3: Create a KafkaUser**
 
 ```shell
 kubectl apply -f - <<EOF
@@ -206,6 +207,110 @@ spec:
       ports:
         - containerPort: 8080
 EOF
+```
+
+**Verification**
+
+***Step 1: Verify that KafkaSource is ready***
+
+```shell
+kubectl get kafkasource my-kafka-source
+```
+
+Example output:
+```shell
+NAME              TOPICS              BOOTSTRAPSERVERS                                  READY   REASON   AGE
+my-kafka-source   ["my-demo-topic"]   ["my-kafka-cluster-kafka-bootstrap.kafka:9093"]   True             22m
+```
+
+***Step 2: Create a KafkaSink***
+
+To verify that the KafkaSource works, we will use a KafkaSink for simplicity.
+
+```shell
+kubectl apply -f - <<EOF
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KafkaSink
+metadata:
+   name: my-kafka-sink
+spec:
+   topic: my-demo-topic
+   bootstrapServers:
+      - my-kafka-cluster-kafka-bootstrap.kafka:9093
+   auth:
+     secret:
+       ref:
+         name: kafka-secret
+EOF
+```
+
+***Step 3: Get the KafkaSink URL***
+
+```shell
+kubectl get kafkasinks
+```
+
+Example output:
+```shell
+NAME            URL                                                                                  AGE     READY   REASON
+my-kafka-sink   http://kafka-sink-ingress.knative-eventing.svc.cluster.local/default/my-kafka-sink   2m46s   True    
+```
+
+***Step 4: Send event to KafkaSink URL***
+
+```shell
+kubectl run curl  --image=docker.io/curlimages/curl --rm=true --restart=Never -ti \
+  -- -X POST -v \
+  -H "content-type: application/json" \
+  -H "ce-specversion: 1.0" \
+  -H "ce-source: my/curl/command" \
+  -H "ce-type: my.demo.event" \
+  -H "ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947" \
+  -d '{"name":"Knative Demo"}' \
+  http://kafka-sink-ingress.knative-eventing.svc.cluster.local/default/my-kafka-sink
+```
+
+Example output:
+```shell
+*   Trying 10.96.19.218:80...
+* Connected to kafka-sink-ingress.knative-eventing.svc.cluster.local (10.96.19.218) port 80 (#0)
+> POST /default/my-kafka-sink HTTP/1.1
+> Host: kafka-sink-ingress.knative-eventing.svc.cluster.local
+> User-Agent: curl/8.1.0-DEV
+> Accept: */*
+> content-type: application/json
+> ce-specversion: 1.0
+> ce-source: my/curl/command
+> ce-type: my.demo.event
+> ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947
+> Content-Length: 23
+> 
+< HTTP/1.1 202 Accepted
+< content-length: 0
+< 
+* Connection #0 to host kafka-sink-ingress.knative-eventing.svc.cluster.local left intact
+pod "curl" deleted
+```
+
+***Step 5: Viewing events sent by KafkaSink to event display***
+
+```shell
+kubectl logs event-display -f
+```
+
+Example output:
+```shell
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: my.demo.event
+  source: my/curl/command
+  id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947
+  datacontenttype: application/json
+Data,
+  {
+    "name": "Knative Demo"
+  }
 ```
 
 **Conclusion**
