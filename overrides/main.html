@@ -12,6 +12,12 @@
   Knative {{ config.extra.knative_version }} documentation is no longer actively maintained. The documentation you are currently viewing is a static snapshot. For up-to-date documentation, see <a href="{{ base_url }}/../docs/">the latest version</a>.
   </p>
 </div>
+{% else %}
+<div class="versionwarning" style="display: flex; justify-content: center;">
+  <p>Knative TOC Elections are underway. Voting ends May 27.
+  <a href="https://github.com/knative/community/tree/main/elections/2023-TOC">Learn more</a> about the voting process or
+  <a href="https://elections.knative.dev/app/elections/2023-TOC">vote now!</a></p>
+</div>
 {% endif %}
 {% endblock %}
 
