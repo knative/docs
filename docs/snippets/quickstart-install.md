@@ -13,12 +13,12 @@ To get started, install the Knative `quickstart` plugin:
     - To install the `quickstart` plugin by using [Homebrew](https://brew.sh){target=_blank}, run the command (Use `brew upgrade` instead if you are upgrading from a previous version):
 
         ```bash
-        brew install knative-sandbox/kn-plugins/quickstart
+        brew install knative-extension/kn-plugins/quickstart
         ```
 
 === "Using a binary"
 
-    1. Download the binary for your system from the [`quickstart` release page](https://github.com/knative-sandbox/kn-plugin-quickstart/releases){target=_blank}.
+    1. Download the binary for your system from the [`quickstart` release page](https://github.com/knative-extension/kn-plugin-quickstart/releases){target=_blank}.
 
     1. Rename the file to remove the OS and architecture information. For example, rename `kn-quickstart-amd64` to `kn-quickstart`.
 
@@ -40,7 +40,7 @@ To get started, install the Knative `quickstart` plugin:
     1. Check out the `kn-plugin-quickstart` repository:
 
           ```bash
-          git clone https://github.com/knative-sandbox/kn-plugin-quickstart.git
+          git clone https://github.com/knative-extension/kn-plugin-quickstart.git
           cd kn-plugin-quickstart/
           ```
 

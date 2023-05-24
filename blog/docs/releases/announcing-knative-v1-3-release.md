@@ -87,32 +87,32 @@ This helps to avoid hitting 503 errors during upgrade. ([#12617](https://github.
 
 ### Apache Kafka Broker v1.3
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-v1.3.1 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-kafka-broker/releases/tag/knative-v1.3.1 -->
 
 #### 💫 New Features & Changes
 
-- Shows an error in the Broker and Channel status when resolving sink failures. ([#1833](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1833))
-- Added KafkaSource migration logic as a post-install job (`eventing-kafka-post-install.yaml`). ([#1889](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1889))
-- Added Storage-Version-Migrator for KafkaSource and KafkaChannel. ([#1869](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1869))
-- KafkaChannel is now conformant with the spec. Conformance tests are now run with every code change. ([#1825](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1825))
+- Shows an error in the Broker and Channel status when resolving sink failures. ([#1833](https://github.com/knative-extension/eventing-kafka-broker/pull/1833))
+- Added KafkaSource migration logic as a post-install job (`eventing-kafka-post-install.yaml`). ([#1889](https://github.com/knative-extension/eventing-kafka-broker/pull/1889))
+- Added Storage-Version-Migrator for KafkaSource and KafkaChannel. ([#1869](https://github.com/knative-extension/eventing-kafka-broker/pull/1869))
+- KafkaChannel is now conformant with the spec. Conformance tests are now run with every code change. ([#1825](https://github.com/knative-extension/eventing-kafka-broker/pull/1825))
 
 #### 🐞 Bug Fixes
 
-- Added support for Brokers with long namespace and name values. ([#1971](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1971))
-- KafkaChannel reconciler checks for empty subscriber URI. ([#1905](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1905))
+- Added support for Brokers with long namespace and name values. ([#1971](https://github.com/knative-extension/eventing-kafka-broker/pull/1971))
+- KafkaChannel reconciler checks for empty subscriber URI. ([#1905](https://github.com/knative-extension/eventing-kafka-broker/pull/1905))
 
 #### Known issues
 
-- The reference information for metrics is not built successfully for Kafka channels. ([#1824](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1824))
+- The reference information for metrics is not built successfully for Kafka channels. ([#1824](https://github.com/knative-extension/eventing-kafka-broker/pull/1824))
 
 ### RabbitMQ Broker and Source v1.3
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.3.1 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-rabbitmq/releases/tag/knative-v1.3.1 -->
 
 #### 💫 New Features & Changes
 
-- Broker URLs updated to be `http://<broker-URL>/<namespace>/<broker-name>`. ([#587](https://github.com/knative-sandbox/eventing-rabbitmq/pull/587))
-- Short testing guide for contributors, converting from `.env` -> to `(direnv friendly).envrc` environment files. ([#599](https://github.com/knative-sandbox/eventing-rabbitmq/pull/599))
+- Broker URLs updated to be `http://<broker-URL>/<namespace>/<broker-name>`. ([#587](https://github.com/knative-extension/eventing-rabbitmq/pull/587))
+- Short testing guide for contributors, converting from `.env` -> to `(direnv friendly).envrc` environment files. ([#599](https://github.com/knative-extension/eventing-rabbitmq/pull/599))
 
 ## Client v1.3
 

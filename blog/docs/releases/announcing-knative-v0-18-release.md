@@ -18,7 +18,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Kubernetes minimum version has changed to v1.17
   - See our [K8s minimum version principle](https://github.com/knative/community/blob/main/mechanics/RELEASE-VERSIONING-PRINCIPLES.md#k8s-minimum-version-principle)
 - Eventing APIs gradauted from v1beta1 to v1
-- Eventing Contribution sources are moved to a new github organization [knative-sandbox](https://github.com/knative-sandbox)
+- Eventing Contribution sources are moved to a new github organization [knative-extension](https://github.com/knative-extension)
 - The `kn` CLI now has alias for commands and other new features.
 
 Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-installation/) for any concerns applicable to your current version before you upgrade to the latest version.
@@ -72,7 +72,7 @@ Remember to check the [upgrade docs](https://knative.dev/docs/install/upgrade-in
 - [knative/networking#129](https://github.com/knative/networking/pull/129),[knative/networking#132](https://github.com/knative/networking/pull/132),[knative/networking#137](https://github.com/knative/networking/pull/137) Deprecate retry, ingress.spec.visibility and ingress.status.LoadBalancer in Ingress
 - [knative/networking#107](https://github.com/knative/networking/pull/107) Rework RewriteHost to require splits.
 - [#8856](https://github.com/knative/serving/pull/8856) The `tagHeaderBasedRouting` flag in `config-network` is moved to `config-features` as `tag-header-based-routing`.
-- [knative-sandbox/net-istio#237](https://github.com/knative-sandbox/net-istio/pull/237) Add a new local gateway sharing same deployment as ingress Gateway for the future cluster local gateway deprecation
+- [knative-extension/net-istio#237](https://github.com/knative-extension/net-istio/pull/237) Add a new local gateway sharing same deployment as ingress Gateway for the future cluster local gateway deprecation
 
 ### Eventing v0.18
 
@@ -123,7 +123,7 @@ Eventing APIs graduated from v1beta1 to v1
 
 ### Eventing Contributions v0.18
 
-Code moved to the the [knative-sandbox](https://github.com/knative-sandbox/) Github organization
+Code moved to the the [knative-extension](https://github.com/knative-extension/) Github organization
 
 #### Action Required
 
@@ -148,15 +148,15 @@ Code moved to the the [knative-sandbox](https://github.com/knative-sandbox/) Git
 
 #### Code Moved to a different github organization
 
-- [#1576](https://github.com/knative/eventing-contrib/pull/1576) The AWSSQS source artifacts have moved to https://github.com/knative-sandbox/eventing-awssqs
-- [#1574](https://github.com/knative/eventing-contrib/pull/1574) The Camel artifacts have moved to https://github.com/knative-sandbox/eventing-camel
-- [#1585](https://github.com/knative/eventing-contrib/pull/1585) The Ceph source artifacts have moved to https://github.com/knative-sandbox/eventing-ceph
-- [#1583](https://github.com/knative/eventing-contrib/pull/1583) The CouchDB source artifacts have moved to https://github.com/knative-sandbox/eventing-couchdb
-- [#1573](https://github.com/knative/eventing-contrib/pull/1573) The GitHub artifacts have moved to https://github.com/knative-sandbox/eventing-github
-- [#1584](https://github.com/knative/eventing-contrib/pull/1584) The GitLab source artifacts have moved to https://github.com/knative-sandbox/eventing-gitlab
-- [#1587](https://github.com/knative/eventing-contrib/pull/1587) The Natss artifacts have moved to https://github.com/knative-sandbox/eventing-natss
-- [#1586](https://github.com/knative/eventing-contrib/pull/1586) The Prometheus source artifacts have moved to https://github.com/knative-sandbox/eventing-prometheus
-- [#1555](https://github.com/knative/eventing-contrib/pull/1555) Remove camel source from this repo. move it to https://github.com/knative-sandbox/eventing-camel
+- [#1576](https://github.com/knative/eventing-contrib/pull/1576) The AWSSQS source artifacts have moved to https://github.com/knative-extension/eventing-awssqs
+- [#1574](https://github.com/knative/eventing-contrib/pull/1574) The Camel artifacts have moved to https://github.com/knative-extension/eventing-camel
+- [#1585](https://github.com/knative/eventing-contrib/pull/1585) The Ceph source artifacts have moved to https://github.com/knative-extension/eventing-ceph
+- [#1583](https://github.com/knative/eventing-contrib/pull/1583) The CouchDB source artifacts have moved to https://github.com/knative-extension/eventing-couchdb
+- [#1573](https://github.com/knative/eventing-contrib/pull/1573) The GitHub artifacts have moved to https://github.com/knative-extension/eventing-github
+- [#1584](https://github.com/knative/eventing-contrib/pull/1584) The GitLab source artifacts have moved to https://github.com/knative-extension/eventing-gitlab
+- [#1587](https://github.com/knative/eventing-contrib/pull/1587) The Natss artifacts have moved to https://github.com/knative-extension/eventing-natss
+- [#1586](https://github.com/knative/eventing-contrib/pull/1586) The Prometheus source artifacts have moved to https://github.com/knative-extension/eventing-prometheus
+- [#1555](https://github.com/knative/eventing-contrib/pull/1555) Remove camel source from this repo. move it to https://github.com/knative-extension/eventing-camel
 - [#3923](https://github.com/knative/eventing-contrib/pull/3923) versions of eventing.- resources from v1beta1 to v1
     - `brokers.eventing.knative.dev`
     - `triggers.eventing.knative.dev`

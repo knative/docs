@@ -34,7 +34,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - 1.18 is now the minimum Kubernetes version required to use the Apache Kafka broker with Knative Eventing v0.22.
 - Apache Kafka broker now supports the ability to choose between ordered and unordered delivery
 - The CLI `kn` v0.22.0 comes with some bug fixes and minor feature enhancements. It's mostly a polishing release. If you are using the Client API, there is a breaking change that was needed to align with Kubernetes Client API's
-- There are two new CLI plugins to align with the v0.22 release, [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) and [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka)
+- There are two new CLI plugins to align with the v0.22 release, [kn-plugin-admin](https://github.com/knative-extension/kn-plugin-admin) and [kn-plugin-source-kafka](https://github.com/knative-extension/kn-plugin-source-kafka)
 - The Knative Operator v0.22 release contains bug fixes and supports version v0.22 of Knative Serving and Eventing.
 
 
@@ -53,7 +53,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - Raised the resource request and limits of the autoscaler to 100m/100Mi, 1000m/1000Mi respectively. [#10865](https://github.com/knative/serving/pull/10865)
 - Fixed a regression where the latency of starting a pod could be 10s or more. [#10992](https://github.com/knative/serving/pull/10992)
 - Reduced required memory allocations in the activator significantly, particularly when tracing is turned off. [#11016](https://github.com/knative/serving/pull/11016), [#11013](https://github.com/knative/serving/pull/11013), [#11009](https://github.com/knative/serving/pull/11009), [#11008](https://github.com/knative/serving/pull/11008)
-- Fixed the incorrect gateway name format for the domain mapping auto TLS feature for `net-istio` implementation. [net-istio#532](https://github.com/knative-sandbox/net-istio/pull/532)
+- Fixed the incorrect gateway name format for the domain mapping auto TLS feature for `net-istio` implementation. [net-istio#532](https://github.com/knative-extension/net-istio/pull/532)
 
 
 ### Eventing v0.22
@@ -85,18 +85,18 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### Apache Kafka Broker v0.22
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.22.1 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-kafka-broker/releases/tag/v0.22.1 -->
 
 #### 🚨 Breaking or Notable
 
 #### 💫 New Features & Changes
 
-- The Kafka broker now supports ordered delivery. You can choose between ordered and unordered delivery by using the `kafka.eventing.knative.dev/delivery.order` label in the trigger spec. See the [Kafka broker](https://knative.dev/docs/eventing/broker/kafka-broker) documentation. [#589](https://github.com/knative-sandbox/eventing-kafka-broker/pull/)
+- The Kafka broker now supports ordered delivery. You can choose between ordered and unordered delivery by using the `kafka.eventing.knative.dev/delivery.order` label in the trigger spec. See the [Kafka broker](https://knative.dev/docs/eventing/broker/kafka-broker) documentation. [#589](https://github.com/knative-extension/eventing-kafka-broker/pull/)
 
 #### 🐞 Bug Fixes
 
-- Added a producer interceptor, `io.cloudevents.kafka.PartitionKeyExtensionInterceptor`, to provide ordered delivery based on the partitioning extension of the CloudEvents spec. [#751](https://github.com/knative-sandbox/eventing-kafka-broker/pull/751)
-- Fix unable to deploy KafkaSink without Kafka Broker installed. [#714](https://github.com/knative-sandbox/eventing-kafka-broker/pull/714)
+- Added a producer interceptor, `io.cloudevents.kafka.PartitionKeyExtensionInterceptor`, to provide ordered delivery based on the partitioning extension of the CloudEvents spec. [#751](https://github.com/knative-extension/eventing-kafka-broker/pull/751)
+- Fix unable to deploy KafkaSink without Kafka Broker installed. [#714](https://github.com/knative-extension/eventing-kafka-broker/pull/714)
 
 ### Client v0.22
 
@@ -133,8 +133,8 @@ To migrate to the updated API signature, you can pass an already existing contex
 
 The plugins that are released aligned with v0.22 are:
 
-- [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-sandbox/kn-plugin-admin/releases/tag/v0.22.0)
-- [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka) for managing a Kafka Source that has been installed via [eventing-kafka](https://github.com/knative-sandbox/eventing-kafka) on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kafka/releases/tag/v0.22.0)
+- [kn-plugin-admin](https://github.com/knative-extension/kn-plugin-admin) for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-extension/kn-plugin-admin/releases/tag/v0.22.0)
+- [kn-plugin-source-kafka](https://github.com/knative-extension/kn-plugin-source-kafka) for managing a Kafka Source that has been installed via [eventing-kafka](https://github.com/knative-extension/eventing-kafka) on the backend | [download](https://github.com/knative-extension/kn-plugin-source-kafka/releases/tag/v0.22.0)
 
 ### Minor CLI updates
 

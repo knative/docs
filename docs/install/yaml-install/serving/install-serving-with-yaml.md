@@ -96,7 +96,7 @@ Follow the procedure for the networking layer of your choice:
         ```bash
         kubectl apply -f {{ artifact(repo="net-contour",file="contour.yaml")}}
         ```
-        <!-- TODO(https://github.com/knative-sandbox/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
+        <!-- TODO(https://github.com/knative-extension/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
 
     1. Install the Knative Contour controller by running the command:
       ```bash

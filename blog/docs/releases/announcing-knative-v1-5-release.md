@@ -61,8 +61,8 @@ Follow the instructions in [Installing Knative](https://knative.dev/docs/install
 
 #### 💫 New Features & Changes
 
-- Cert-manager is now in version 1.8.0. ([#399](https://github.com/knative-sandbox/net-certmanager/issues/399))
-- Secrets automatically generated due to certificate creation are labeled with a special label key to support proper filtering from K8s informers in components that consume them. ([#402](https://github.com/knative-sandbox/net-certmanager/402))
+- Cert-manager is now in version 1.8.0. ([#399](https://github.com/knative-extension/net-certmanager/issues/399))
+- Secrets automatically generated due to certificate creation are labeled with a special label key to support proper filtering from K8s informers in components that consume them. ([#402](https://github.com/knative-extension/net-certmanager/402))
 
 ### Istio plugin (net-istio)
 
@@ -74,58 +74,58 @@ Secret informer in ingress controller can be enabled to filter secrets based on 
 For special cases users are recommended to reach out to Knative community.
   - In case of AutoTLS provided by Knative net-certmanager this is done transparently.
   - To enable this behavior at net-istio set env var `ENABLE_SECRET_INFORMER_FILTERING_BY_CERT_UID` to `true`.
-  - This will be available by default in future releases. ([#920](https://github.com/knative-sandbox/net-istio/issues/920))
- - local-gateway.mesh: "mesh" option was dropped. ([#915](https://github.com/knative-sandbox/net-istio/issues/915))
+  - This will be available by default in future releases. ([#920](https://github.com/knative-extension/net-istio/issues/920))
+ - local-gateway.mesh: "mesh" option was dropped. ([#915](https://github.com/knative-extension/net-istio/issues/915))
 
 ## Eventing Extensions
 
 ### Apache Kafka Broker
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-1.5 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-kafka-broker/releases/tag/knative-1.5 -->
 
 #### 💫 New Features & Changes
 
-- Deploy just the KafkaSource v2 controller and new statefulset dispatcher (no receiver) for users of KakfaSource ([#2089](https://github.com/knative-sandbox/eventing-kafka-broker/issues/2089))
-- With the `kafka.eventing.knative.dev/external.topic` annotation it is possible to use an externally managed Apache Kafka topic for the broker usage ([#1023](https://github.com/knative-sandbox/eventing-kafka-broker/issues/1023))
-- `vertx_*` metrics have been removed since they were causing unnecessary allocations. ([#2147](https://github.com/knative-sandbox/eventing-kafka-broker/issues/2147))
+- Deploy just the KafkaSource v2 controller and new statefulset dispatcher (no receiver) for users of KakfaSource ([#2089](https://github.com/knative-extension/eventing-kafka-broker/issues/2089))
+- With the `kafka.eventing.knative.dev/external.topic` annotation it is possible to use an externally managed Apache Kafka topic for the broker usage ([#1023](https://github.com/knative-extension/eventing-kafka-broker/issues/1023))
+- `vertx_*` metrics have been removed since they were causing unnecessary allocations. ([#2147](https://github.com/knative-extension/eventing-kafka-broker/issues/2147))
 - 🧽 Update or clean up current behavior
-  The control plane sends retry configurations to the data plane. ([#263](https://github.com/knative-sandbox/eventing-kafka-broker/issues/263/))
+  The control plane sends retry configurations to the data plane. ([#263](https://github.com/knative-extension/eventing-kafka-broker/issues/263/))
 
 
 #### 🐞 Bug Fixes
 
-- Receiver's prober targets services instead of pods directly to allow components to be part of an Istio mesh ([#2112](https://github.com/knative-sandbox/eventing-kafka-broker/issues/2112))
+- Receiver's prober targets services instead of pods directly to allow components to be part of an Istio mesh ([#2112](https://github.com/knative-extension/eventing-kafka-broker/issues/2112))
 
 ### RabbitMQ Broker and Source
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-1.5 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-rabbitmq/releases/tag/knative-1.5 -->
 
 
 ### 🚨 Breaking or Notable
-- With the removal of standalone-broker, Secret type is no longer a supported Broker.Config ([#773](https://github.com/knative-sandbox/eventing-rabbitmq/issues/773))
+- With the removal of standalone-broker, Secret type is no longer a supported Broker.Config ([#773](https://github.com/knative-extension/eventing-rabbitmq/issues/773))
 
 #### 💫 New Features & Changes
 
-- A new type RabbitmqBrokerConfig can be used to configure a Broker ([#780](https://github.com/knative-sandbox/eventing-rabbitmq/issues/780))
-- Dispatcher will timeout after 30s when sending to the subscriber ([#687](https://github.com/knative-sandbox/eventing-rabbitmq/issues/687))
-- Now the docs are better organized and performance tests graphs are correct ([#721](https://github.com/knative-sandbox/eventing-rabbitmq/issues/721))
-- Resource requests for source controller increased ([#738](https://github.com/knative-sandbox/eventing-rabbitmq/issues/738))
+- A new type RabbitmqBrokerConfig can be used to configure a Broker ([#780](https://github.com/knative-extension/eventing-rabbitmq/issues/780))
+- Dispatcher will timeout after 30s when sending to the subscriber ([#687](https://github.com/knative-extension/eventing-rabbitmq/issues/687))
+- Now the docs are better organized and performance tests graphs are correct ([#721](https://github.com/knative-extension/eventing-rabbitmq/issues/721))
+- Resource requests for source controller increased ([#738](https://github.com/knative-extension/eventing-rabbitmq/issues/738))
 - The Broker's Ingress and Dispatcher have deployment resource requests and limits
-  -  The Source's Receive Adapter have deployment resources requests and limits ([#771](https://github.com/knative-sandbox/eventing-rabbitmq/issues/771))
+  -  The Source's Receive Adapter have deployment resources requests and limits ([#771](https://github.com/knative-extension/eventing-rabbitmq/issues/771))
 -  The Broker's ingress uses the Binary representation of the CloudEvents
   -  The Broker's Dispatcher uses the protocol binding to get a CloudEvent from a RabbitMQ Message
-  -  Added performance tests for the source using the new Ingress CE Binary representation, that makes the Ingress plugable to the Source ([#751](https://github.com/knative-sandbox/eventing-rabbitmq/issues/751))
+  -  Added performance tests for the source using the new Ingress CE Binary representation, that makes the Ingress plugable to the Source ([#751](https://github.com/knative-extension/eventing-rabbitmq/issues/751))
 -  Script to automate the generation of the performance results per release
-  - Complete performance results graph tests for the RabbitMQ's Broker and Source ([#767](https://github.com/knative-sandbox/eventing-rabbitmq/issues/767))
+  - Complete performance results graph tests for the RabbitMQ's Broker and Source ([#767](https://github.com/knative-extension/eventing-rabbitmq/issues/767))
 
 #### 🐞 Bug Fixes
 
 - The backoffDelay env variable is parsed correctly on the Broker's and Trigger's Dispatcher
-  - The backoffDelay env variable is parsed correctly on the Source's receive adapter ([#750](https://github.com/knative-sandbox/eventing-rabbitmq/issues/750))
+  - The backoffDelay env variable is parsed correctly on the Source's receive adapter ([#750](https://github.com/knative-extension/eventing-rabbitmq/issues/750))
 - BackoffDelay is used when defined in Broker or Trigger delivery spec
-  - dead letter messaging uses the same delivery spec ([#723](https://github.com/knative-sandbox/eventing-rabbitmq/issues/723))
-- Fixed bug in Trigger dispatcher deployment from getting updated too frequently ([#744](https://github.com/knative-sandbox/eventing-rabbitmq/issues/744))
-- Fixed bug where the broker ingress was not reconnecting after the connection or channel with RabbitMQ was closed ([#778](https://github.com/knative-sandbox/eventing-rabbitmq/issues/778))
+  - dead letter messaging uses the same delivery spec ([#723](https://github.com/knative-extension/eventing-rabbitmq/issues/723))
+- Fixed bug in Trigger dispatcher deployment from getting updated too frequently ([#744](https://github.com/knative-extension/eventing-rabbitmq/issues/744))
+- Fixed bug where the broker ingress was not reconnecting after the connection or channel with RabbitMQ was closed ([#778](https://github.com/knative-extension/eventing-rabbitmq/issues/778))
 
 ## Client
 

@@ -14,7 +14,7 @@ This topic describes how to create a RabbitMQ Broker.
 1. Install the RabbitMQ controller by running the command:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-rabbitmq", file="rabbitmq-broker.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extension", repo="eventing-rabbitmq", file="rabbitmq-broker.yaml") }}
     ```
 
 1. Verify that `rabbitmq-broker-controller` and `rabbitmq-broker-webhook` are running:
@@ -110,5 +110,5 @@ metadata:
 
 ## Additional information
 
-- For more samples visit the [`eventing-rabbitmq` Github repository samples directory](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/samples)
-- To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-sandbox/eventing-rabbitmq).
+- For more samples visit the [`eventing-rabbitmq` Github repository samples directory](https://github.com/knative-extension/eventing-rabbitmq/tree/main/samples)
+- To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-extension/eventing-rabbitmq).

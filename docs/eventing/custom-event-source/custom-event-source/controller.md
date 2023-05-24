@@ -1,6 +1,6 @@
 # Create a controller
 
-You can use the sample repository [`update-codegen.sh`](https://github.com/knative-sandbox/sample-source/blob/main/hack/update-codegen.sh) script to generate and inject the required components (the `clientset`, `cache`, `informers`, and `listers`) into your custom controller.
+You can use the sample repository [`update-codegen.sh`](https://github.com/knative-extension/sample-source/blob/main/hack/update-codegen.sh) script to generate and inject the required components (the `clientset`, `cache`, `informers`, and `listers`) into your custom controller.
 
 **Example controller:**
 

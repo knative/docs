@@ -13,7 +13,7 @@ Before you install the Knative Operator CLI Plugin, first install the [Knative C
 
 === "MacOS"
 
-    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.7.1).
+    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-extension/kn-plugin-operator/releases/tag/knative-v1.7.1).
 
     1. Rename the binary to `kn-operator`:
 
@@ -23,7 +23,7 @@ Before you install the Knative Operator CLI Plugin, first install the [Knative C
 
 === "Linux"
 
-    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-sandbox/kn-plugin-operator/releases/tag/knative-v1.7.1).
+    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-extension/kn-plugin-operator/releases/tag/knative-v1.7.1).
 
     1. Rename the binary to `kn-operator`:
 

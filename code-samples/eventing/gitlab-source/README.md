@@ -17,11 +17,11 @@ You will need:
 
 ### Install GitLab Event Source
 
-GitLab Event source lives in the [knative-sandbox/eventing-gitlab](https://github.com/knative-sandbox/eventing-gitlab). Head to the releases page, find the latest release with `gitlab.yaml`
+GitLab Event source lives in the [knative-extension/eventing-gitlab](https://github.com/knative-extension/eventing-gitlab). Head to the releases page, find the latest release with `gitlab.yaml`
 artifact and replace the `<RELEASE>` with version tag:
 
 ```bash
-kubectl apply -f https://github.com/knative-sandbox/eventing-gitlab/releases/download/<RELEASE>/gitlab.yaml
+kubectl apply -f https://github.com/knative-extension/eventing-gitlab/releases/download/<RELEASE>/gitlab.yaml
 ```
 
 Check that the manager is running:

@@ -57,19 +57,19 @@ Follow the procedure for the Channel of your choice:
     1. Install the Kafka controller by running the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
         ```
 
     1. Install the KafkaChannel data plane by running the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-channel.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-channel.yaml")}}
         ```
 
     1. If you're upgrading from the previous version, run the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
 
 === "In-Memory (standalone)"
@@ -85,12 +85,12 @@ Follow the procedure for the Channel of your choice:
 
 === "NATS Channel"
 
-    1. [Install NATS Streaming for Kubernetes](https://github.com/knative-sandbox/eventing-natss/tree/main/config).
+    1. [Install NATS Streaming for Kubernetes](https://github.com/knative-extension/eventing-natss/tree/main/config).
 
     1. Install the NATS Streaming Channel by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-natss",file="eventing-natss.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-natss",file="eventing-natss.yaml")}}
         ```
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
@@ -111,19 +111,19 @@ Follow the procedure for the Broker of your choice:
     1. Install the Kafka controller by running the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
         ```
 
     1. Install the Kafka Broker data plane by running the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-broker.yaml")}}
         ```
 
     1. If you're upgrading from the previous version, run the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
 
     For more information, see the [Kafka Broker](../../../eventing/brokers/broker-types/kafka-broker/README.md) documentation.
@@ -203,9 +203,9 @@ Follow the procedure for the Broker of your choice:
 === "RabbitMQ Broker"
 
     * Install the RabbitMQ Broker by following the instructions in the
-    [RabbitMQ Knative Eventing Broker README](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/broker).
+    [RabbitMQ Knative Eventing Broker README](https://github.com/knative-extension/eventing-rabbitmq/tree/main/broker).
 
-    For more information, see the [RabbitMQ Broker](https://github.com/knative-sandbox/eventing-rabbitmq) in GitHub.
+    For more information, see the [RabbitMQ Broker](https://github.com/knative-extension/eventing-rabbitmq) in GitHub.
 
 ## Install optional Eventing extensions
 
@@ -217,13 +217,13 @@ The following tabs expand to show instructions for installing each Eventing exte
     1. Install the Kafka controller by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-controller.yaml")}}
         ```
 
     1. Install the Kafka Sink data plane by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-sink.yaml")}}
         ```
 
     For more information, see the [Kafka Sink](../../../eventing/sinks/kafka-sink.md) documentation.
@@ -263,13 +263,13 @@ The following tabs expand to show instructions for installing each Eventing exte
     * To install a single-tenant GitHub source run the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="github.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-github",file="github.yaml")}}
         ```
 
     * To install a multi-tenant GitHub source run the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-github",file="mt-github.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-github",file="mt-github.yaml")}}
         ```
 
     To learn more, try the [GitHub source sample](https://github.com/knative/docs/tree/main/code-samples/eventing/github-source)
@@ -279,13 +279,13 @@ The following tabs expand to show instructions for installing each Eventing exte
     1. Install the Apache Kafka Source by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-source.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-source.yaml")}}
         ```
 
     1. If you're upgrading from the previous version, run the following command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-kafka-broker",file="eventing-kafka-post-install.yaml")}}
         ```
 
     To learn more, try the [Apache Kafka source sample](../../../eventing/sources/kafka-source/README.md).
@@ -295,10 +295,10 @@ The following tabs expand to show instructions for installing each Eventing exte
     * Install the Apache CouchDB Source by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-sandbox",repo="eventing-couchdb",file="couchdb.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extension",repo="eventing-couchdb",file="couchdb.yaml")}}
         ```
 
-    To learn more, read the [Apache CouchDB source](https://github.com/knative-sandbox/eventing-couchdb/blob/main/source/README.md) documentation.
+    To learn more, read the [Apache CouchDB source](https://github.com/knative-extension/eventing-couchdb/blob/main/source/README.md) documentation.
 
 === "VMware Sources and Bindings"
 

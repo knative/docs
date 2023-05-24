@@ -77,21 +77,21 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### Eventing Kafka Broker v0.20
 
-Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eventing-kafka-broker)
+Release Notes for [eventing-kafka-broker](https://github.com/knative-extension/eventing-kafka-broker)
 
 #### 💫 New Features & Changes
-- `kafka-broker-receiver`, `kafka-broker-dispatcher`, and `kafka-sink-receiver` expose Kafka client metrics. ([#435](https://github.com/knative-sandbox/eventing-kafka-broker/pull/435))
-- `kafka-broker-receiver`, `kafka-broker-dispatcher`, and `kafka-sink-receiver` expose JVM metrics (disabled by default) ([#435](https://github.com/knative-sandbox/eventing-kafka-broker/pull/435))
-- Data plane pods produce distributed tracing spans. ([#421](https://github.com/knative-sandbox/eventing-kafka-broker/pull/421))
-- Receivers now specify anti-affinity so that replicas will not be colocated ([#483](https://github.com/knative-sandbox/eventing-kafka-broker/pull/483))
+- `kafka-broker-receiver`, `kafka-broker-dispatcher`, and `kafka-sink-receiver` expose Kafka client metrics. ([#435](https://github.com/knative-extension/eventing-kafka-broker/pull/435))
+- `kafka-broker-receiver`, `kafka-broker-dispatcher`, and `kafka-sink-receiver` expose JVM metrics (disabled by default) ([#435](https://github.com/knative-extension/eventing-kafka-broker/pull/435))
+- Data plane pods produce distributed tracing spans. ([#421](https://github.com/knative-extension/eventing-kafka-broker/pull/421))
+- Receivers now specify anti-affinity so that replicas will not be colocated ([#483](https://github.com/knative-extension/eventing-kafka-broker/pull/483))
 #### 🐞 Bug Fixes
-- Controllers resync state when managed resources change. ([#420](https://github.com/knative-sandbox/eventing-kafka-broker/pull/420))
-- Leader election transition improvements ([#449](https://github.com/knative-sandbox/eventing-kafka-broker/pull/449))
+- Controllers resync state when managed resources change. ([#420](https://github.com/knative-extension/eventing-kafka-broker/pull/420))
+- Leader election transition improvements ([#449](https://github.com/knative-extension/eventing-kafka-broker/pull/449))
 
 #### 🧹 Clean up
-- The data plane is completely non-blocking. ([#438](https://github.com/knative-sandbox/eventing-kafka-broker/pull/438))
-- Skip ConfigMap update when there are no changes ([#511](https://github.com/knative-sandbox/eventing-kafka-broker/pull/511))
-- Change release labels from eventing.knative.dev to kafka.eventing.knative.dev. ([#480](https://github.com/knative-sandbox/eventing-kafka-broker/pull/480))
+- The data plane is completely non-blocking. ([#438](https://github.com/knative-extension/eventing-kafka-broker/pull/438))
+- Skip ConfigMap update when there are no changes ([#511](https://github.com/knative-extension/eventing-kafka-broker/pull/511))
+- Change release labels from eventing.knative.dev to kafka.eventing.knative.dev. ([#480](https://github.com/knative-extension/eventing-kafka-broker/pull/480))
 
 ### Client v0.20
 

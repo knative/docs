@@ -143,7 +143,7 @@ In this case, we will bind any `Job` with the labels `kafka.topic: "logs"`.
 1. Source code for kafka-publisher service
 
    Get the source code of kafka-publisher container image from
-   [here](https://github.com/knative-sandbox/eventing-kafka/blob/main/test/test_images/kafka-publisher/main.go)
+   [here](https://github.com/knative-extension/eventing-kafka/blob/main/test/test_images/kafka-publisher/main.go)
 
 1. Now we will use the kafka-publisher container to send events to kafka topic
    when the Job runs.

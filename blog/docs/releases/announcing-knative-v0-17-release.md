@@ -79,9 +79,9 @@ Kubernetes **1.16** remains as the minimum version.
 - [#8965](https://github.com/knative/serving/pull/8965) The default Kingress timeout is increased to 48 hours to prevent gRPC stream timeout (thanks [@tcnghia](https://github.com/tcnghia))
 - Code in knative/serving/pkg/network is completely moved to knative/networking repo (thanks [@tcnghia](https://github.com/tcnghia))
 - [#8798](https://github.com/knative/serving/pull/8798) Placeholder service's labels and annotations are propagated from Route (thanks [@nak3](https://github.com/nak3))
-- [knative-sandbox/net-istio#170](https://github.com/knative-sandbox/net-istio/pull/170) When auto TLS is enabled, now net-istio controller generates Istio TLS Gateway per Kingress instead of reconciling the knative-ingress-gateway Gateway (thanks [@ZhiminXiang](https://github.com/ZhiminXiang))
-- [knative-sandbox/net-istio#174](https://github.com/knative-sandbox/net-istio/pull/174) Kingress (net-istio) introduces RewriteHost feature (thanks [@julz](https://github.com/julz))
-- [knative-sandbox/net-istio##190](https://github.com/knative-sandbox/net-istio/pull/190) Kingress prober improvement for net-istio: probing a single host instead of every host to improve the throughput of the prober queue (thanks [@JRBANCEL](https://github.com/JRBANCEL))
+- [knative-extension/net-istio#170](https://github.com/knative-extension/net-istio/pull/170) When auto TLS is enabled, now net-istio controller generates Istio TLS Gateway per Kingress instead of reconciling the knative-ingress-gateway Gateway (thanks [@ZhiminXiang](https://github.com/ZhiminXiang))
+- [knative-extension/net-istio#174](https://github.com/knative-extension/net-istio/pull/174) Kingress (net-istio) introduces RewriteHost feature (thanks [@julz](https://github.com/julz))
+- [knative-extension/net-istio##190](https://github.com/knative-extension/net-istio/pull/190) Kingress prober improvement for net-istio: probing a single host instead of every host to improve the throughput of the prober queue (thanks [@JRBANCEL](https://github.com/JRBANCEL))
 </details>
 
 ### Eventing v0.17

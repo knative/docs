@@ -59,8 +59,8 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - A container's readiness probe FailureThreshold & TimeoutSeconds are now defaulted to 3 and 1 respectively when a user opts into non-aggressive probing (ie. PeriodTimeout > 1) ([#10700](https://github.com/knative/serving/pull/10700))
 - Avoids implicitly adding an "Accept-Encoding: gzip" header to proxied requests if one was not already present. ([#10691](https://github.com/knative/serving/pull/10691))
 - Gradual Rollout is possible to set on individual Revisions usingserving.knative.dev/rolloutDuration annotation, ([#10561](https://github.com/knative/serving/pull/10561))
-- Support Istio 1.9 (knative-sandbox/net-istio#515](https://github.com/knative-sandbox/net-istio/pull/515))
-- Support Contour 1.12 (knative-sandbox/net-contour#414](https://github.com/knative-sandbox/net-contour/pull/414))
+- Support Istio 1.9 (knative-extension/net-istio#515](https://github.com/knative-extension/net-istio/pull/515))
+- Support Contour 1.12 (knative-extension/net-contour#414](https://github.com/knative-extension/net-contour/pull/414))
 
 #### 🐞 Bug Fixes
 
@@ -107,68 +107,68 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 #### 🚨 Breaking or Notable
 
 - Kubernetes minimum version has changed to v1.18
-    - Upgrade to v0.19.7 of k8s libraries. Minimum k8s version is now 1.18. ([#213](https://github.com/knative-sandbox/eventing-rabbitmq/pull/213))
+    - Upgrade to v0.19.7 of k8s libraries. Minimum k8s version is now 1.18. ([#213](https://github.com/knative-extension/eventing-rabbitmq/pull/213))
 
 #### 💫 New Features & Changes
 
-- Support new releases of rabbitmq cluster operator v1.0, v1.1, v1.2, v1.3 . ([#204](https://github.com/knative-sandbox/eventing-rabbitmq/pull/204))
+- Support new releases of rabbitmq cluster operator v1.0, v1.1, v1.2, v1.3 . ([#204](https://github.com/knative-extension/eventing-rabbitmq/pull/204))
 
 
 #### 📖 Documentation
-- Added user-facing documentation for the RabbitMQ source ([#201](https://github.com/knative-sandbox/eventing-rabbitmq/pull/201))
+- Added user-facing documentation for the RabbitMQ source ([#201](https://github.com/knative-extension/eventing-rabbitmq/pull/201))
 
 #### 🧹 Clean up
-- Update or clean up current behavior - Use go 1.15 in kind e2e tests. ([#196](https://github.com/knative-sandbox/eventing-rabbitmq/pull/196))
-- Update or clean up current behavior Use go 1.15 in go.mod ([#215](https://github.com/knative-sandbox/eventing-rabbitmq/pull/215))
-- Update the comments in cmd/failer/main.go to match reality. ([#210](https://github.com/knative-sandbox/eventing-rabbitmq/pull/210))
-- Use scripts from hack to determine pod readiness.([#209](https://github.com/knative-sandbox/eventing-rabbitmq/pull/209))
+- Update or clean up current behavior - Use go 1.15 in kind e2e tests. ([#196](https://github.com/knative-extension/eventing-rabbitmq/pull/196))
+- Update or clean up current behavior Use go 1.15 in go.mod ([#215](https://github.com/knative-extension/eventing-rabbitmq/pull/215))
+- Update the comments in cmd/failer/main.go to match reality. ([#210](https://github.com/knative-extension/eventing-rabbitmq/pull/210))
+- Use scripts from hack to determine pod readiness.([#209](https://github.com/knative-extension/eventing-rabbitmq/pull/209))
 
 
 #### Eventing Kafka Source, Channel v0.21
 
 #### 💫 New Features & Changes
 
-- Adding new optional field named sasltype to default kafka-secret to enable other Kafka SASL Methods than PLAIN. Supports SCRAM-SHA-256 or SCRAM-SHA-512. ([#332](https://github.com/knative-sandbox/eventing-kafka/pull/332))
-- Adding tls.enabled flag for public cert usage and allowing skipping CA/User certs and key ([#359](https://github.com/knative-sandbox/eventing-kafka/pull/359))
-- KafkaSource and KafkaChannel will be default use the config-leader-election CM for configs ([#231](https://github.com/knative-sandbox/eventing-kafka/pull/231))
-- Removed support for pooling Azure EventHub Namespaces and now only support a single Namespace/Authentication which limits Azure EventHub usage to their constrained number of EventHubs (Kafka Topics). ([#297](https://github.com/knative-sandbox/eventing-kafka/pull/297))
-- The "distributed" KafkaChannel configuration YAML now includes the KafkaChannel WebHook which provides conversion. ([#187](https://github.com/knative-sandbox/eventing-kafka/pull/187))
-- The KafkaSource will be installed in the knative-eventing namespace, and the old controller in knative-sources is scalled to 0 ([#224](https://github.com/knative-sandbox/eventing-kafka/pull/224))
-- Add a new alternative KafkaSource implementation in which a single global StatefulSet handles all KafkaSource instances. ([#186](https://github.com/knative-sandbox/eventing-kafka/pull/186))
-- It is now possible to define Sarama config defaults for KafkaSource in config-kafka configmap with a sarama field. ([#337](https://github.com/knative-sandbox/eventing-kafka/pull/337))
-- It is now possible to define Sarama config defaults for consolidated channel in config-kafka configmap with a sarama field. ([#305](https://github.com/knative-sandbox/eventing-kafka/pull/305))
-- KafkaChannel CustomResourceDefinition now uses apiextensions.k8s.io/v1 APIs ([#132](https://github.com/knative-sandbox/eventing-kafka/pull/132))
-- The KafkaSource scale subresource can now be used to scale up and down the underlying deployment ([#138](https://github.com/knative-sandbox/eventing-kafka/pull/138))
-- Defaulting the connection args to a sane value ([#353](https://github.com/knative-sandbox/eventing-kafka/pull/353))
+- Adding new optional field named sasltype to default kafka-secret to enable other Kafka SASL Methods than PLAIN. Supports SCRAM-SHA-256 or SCRAM-SHA-512. ([#332](https://github.com/knative-extension/eventing-kafka/pull/332))
+- Adding tls.enabled flag for public cert usage and allowing skipping CA/User certs and key ([#359](https://github.com/knative-extension/eventing-kafka/pull/359))
+- KafkaSource and KafkaChannel will be default use the config-leader-election CM for configs ([#231](https://github.com/knative-extension/eventing-kafka/pull/231))
+- Removed support for pooling Azure EventHub Namespaces and now only support a single Namespace/Authentication which limits Azure EventHub usage to their constrained number of EventHubs (Kafka Topics). ([#297](https://github.com/knative-extension/eventing-kafka/pull/297))
+- The "distributed" KafkaChannel configuration YAML now includes the KafkaChannel WebHook which provides conversion. ([#187](https://github.com/knative-extension/eventing-kafka/pull/187))
+- The KafkaSource will be installed in the knative-eventing namespace, and the old controller in knative-sources is scalled to 0 ([#224](https://github.com/knative-extension/eventing-kafka/pull/224))
+- Add a new alternative KafkaSource implementation in which a single global StatefulSet handles all KafkaSource instances. ([#186](https://github.com/knative-extension/eventing-kafka/pull/186))
+- It is now possible to define Sarama config defaults for KafkaSource in config-kafka configmap with a sarama field. ([#337](https://github.com/knative-extension/eventing-kafka/pull/337))
+- It is now possible to define Sarama config defaults for consolidated channel in config-kafka configmap with a sarama field. ([#305](https://github.com/knative-extension/eventing-kafka/pull/305))
+- KafkaChannel CustomResourceDefinition now uses apiextensions.k8s.io/v1 APIs ([#132](https://github.com/knative-extension/eventing-kafka/pull/132))
+- The KafkaSource scale subresource can now be used to scale up and down the underlying deployment ([#138](https://github.com/knative-extension/eventing-kafka/pull/138))
+- Defaulting the connection args to a sane value ([#353](https://github.com/knative-extension/eventing-kafka/pull/353))
 
 #### 🐞 Bug Fixes
 
 - A bug was fixed in the consolidated KafkaChannel where subscriptions would show up in the channel's status.subscribers before the dispatcher becomes ready to dispatch messages for those subscribers.
-    - Consolidated KafkaChannel dispatcher's horizontal scalability works now seamlessly with reconciler leader election. ([#182](https://github.com/knative-sandbox/eventing-kafka/pull/182))
-- Fix concurrent modification of consumer groups map, which causes undefined behaviours while running reconciliation in the dispatcher ([#352](https://github.com/knative-sandbox/eventing-kafka/pull/352), @slinkydeveloper)
-- Fix crash in Kafka consumer when a rebalance occurs ([#263](https://github.com/knative-sandbox/eventing-kafka/pull/263), @lionelvillard)
-- Fix race on error channel in consumer factory ([#364](https://github.com/knative-sandbox/eventing-kafka/pull/364))
-- The KafkaSource dispatchers now expose metrics and profiling information ([#221](https://github.com/knative-sandbox/eventing-kafka/pull/221))
-- The consolidated KafkaChannel now relies by default on SyncProducer for safer event production. ([#181](https://github.com/knative-sandbox/eventing-kafka/pull/181))
+    - Consolidated KafkaChannel dispatcher's horizontal scalability works now seamlessly with reconciler leader election. ([#182](https://github.com/knative-extension/eventing-kafka/pull/182))
+- Fix concurrent modification of consumer groups map, which causes undefined behaviours while running reconciliation in the dispatcher ([#352](https://github.com/knative-extension/eventing-kafka/pull/352), @slinkydeveloper)
+- Fix crash in Kafka consumer when a rebalance occurs ([#263](https://github.com/knative-extension/eventing-kafka/pull/263), @lionelvillard)
+- Fix race on error channel in consumer factory ([#364](https://github.com/knative-extension/eventing-kafka/pull/364))
+- The KafkaSource dispatchers now expose metrics and profiling information ([#221](https://github.com/knative-extension/eventing-kafka/pull/221))
+- The consolidated KafkaChannel now relies by default on SyncProducer for safer event production. ([#181](https://github.com/knative-extension/eventing-kafka/pull/181))
 
 #### Eventing Kafka Broker v0.21
 
 #### 💫 New Features & Changes
 
-- Add support for SASL and SSL. ([#534](https://github.com/knative-sandbox/eventing-kafka-broker/pull/534), @pierDipi)
+- Add support for SASL and SSL. ([#534](https://github.com/knative-extension/eventing-kafka-broker/pull/534), @pierDipi)
     - [Eventing Kafka Broker documentation](https://knative.dev/docs/eventing/broker/kafka-broker/#security)
     - [Eventing Kafka Sink documentation](https://knative.dev/docs/eventing/sink/kafka-sink/#security)
-- Add support for Trigger.Spec.DeliverySpec ([#612](https://github.com/knative-sandbox/eventing-kafka-broker/pull/612))
-- Improve status fields description in KafkaSink CRD. ([#552](https://github.com/knative-sandbox/eventing-kafka-broker/pull/552))
-- Reduce error logging noise on clean shutdown. ([#625](https://github.com/knative-sandbox/eventing-kafka-broker/pull/625))
-- Support Kubernetes 1.20. ([#542](https://github.com/knative-sandbox/eventing-kafka-broker/pull/542))
+- Add support for Trigger.Spec.DeliverySpec ([#612](https://github.com/knative-extension/eventing-kafka-broker/pull/612))
+- Improve status fields description in KafkaSink CRD. ([#552](https://github.com/knative-extension/eventing-kafka-broker/pull/552))
+- Reduce error logging noise on clean shutdown. ([#625](https://github.com/knative-extension/eventing-kafka-broker/pull/625))
+- Support Kubernetes 1.20. ([#542](https://github.com/knative-extension/eventing-kafka-broker/pull/542))
 
 #### 🐞 Bug Fixes
 
-- Consume topic from the earliest offset ([#557](https://github.com/knative-sandbox/eventing-kafka-broker/pull/557))
-- Fix offset management ([#557](https://github.com/knative-sandbox/eventing-kafka-broker/pull/557))
-- Data plane reconciler handles failed reconciliation. ([#568](https://github.com/knative-sandbox/eventing-kafka-broker/pull/568))
-- Fix TimeoutException and DnsNameResolverTimeoutException. ([#539](https://github.com/knative-sandbox/eventing-kafka-broker/pull/539))
+- Consume topic from the earliest offset ([#557](https://github.com/knative-extension/eventing-kafka-broker/pull/557))
+- Fix offset management ([#557](https://github.com/knative-extension/eventing-kafka-broker/pull/557))
+- Data plane reconciler handles failed reconciliation. ([#568](https://github.com/knative-extension/eventing-kafka-broker/pull/568))
+- Fix TimeoutException and DnsNameResolverTimeoutException. ([#539](https://github.com/knative-extension/eventing-kafka-broker/pull/539))
 
 ### Client v0.21
 
@@ -210,8 +210,8 @@ With release v0.21, Knative ships also it first set of kn plugins, that are alig
 
 The plugins included in version `v0.21` are:
 
-- [kn-plugin-admin](https://github.com/knative-sandbox/kn-plugin-admin) for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-sandbox/kn-plugin-admin/releases/tag/v0.21.0)
-- [kn-plugin-source-kafka](https://github.com/knative-sandbox/kn-plugin-source-kafka) for managing a Kafka Source that has been installed via [eventing-kafka](https://github.com/knative-sandbox/eventing-kafka) on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kafka/releases/tag/v0.21.0)
+- [kn-plugin-admin](https://github.com/knative-extension/kn-plugin-admin) for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-extension/kn-plugin-admin/releases/tag/v0.21.0)
+- [kn-plugin-source-kafka](https://github.com/knative-extension/kn-plugin-source-kafka) for managing a Kafka Source that has been installed via [eventing-kafka](https://github.com/knative-extension/eventing-kafka) on the backend | [download](https://github.com/knative-extension/kn-plugin-source-kafka/releases/tag/v0.21.0)
 
 To give those plugins a try, just download them and put the binary into your execution path. You then get help with kn admin --help and kn source kafka --help, respectively.
 

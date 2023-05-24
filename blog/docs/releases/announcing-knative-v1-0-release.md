@@ -104,32 +104,32 @@ kubernetes readiness propagates more quickly than the activator's probe. ([#1208
 
 #### Apache Kafka Broker v1.0
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-v1.0.0 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-kafka-broker/releases/tag/knative-v1.0.0 -->
 
 
 ##### 💫 New Features & Changes
 
-- ClusterRole `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ServiceAccount `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ClusterRoleBinding `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ClusterRole `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ServiceAccount `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- ClusterRoleBinding `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1315))
-- Set `status.deadLetterSinkUri` of Broker and Trigger to the resolved URI of `spec.delivery.deadLetterSink` ([#1349](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1349))
+- ClusterRole `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-extension/eventing-kafka-broker/pull/1315))
+- ServiceAccount `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-extension/eventing-kafka-broker/pull/1315))
+- ClusterRoleBinding `knative-kafka-data-plane` for KafkaBroker has been renamed to `knative-kafka-broker-data-plane` ([#1315](https://github.com/knative-extension/eventing-kafka-broker/pull/1315))
+- ClusterRole `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-extension/eventing-kafka-broker/pull/1315))
+- ServiceAccount `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-extension/eventing-kafka-broker/pull/1315))
+- ClusterRoleBinding `knative-kafka-data-plane` for KafkaSink has been renamed to `knative-kafka-sink-data-plane` ([#1315](https://github.com/knative-extension/eventing-kafka-broker/pull/1315))
+- Set `status.deadLetterSinkUri` of Broker and Trigger to the resolved URI of `spec.delivery.deadLetterSink` ([#1349](https://github.com/knative-extension/eventing-kafka-broker/pull/1349))
 
 #### RabbitMQ Broker and Source v1.0
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.0.0 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-rabbitmq/releases/tag/knative-v1.0.0 -->
 
 
 ##### 💫 New Features & Changes
 
-- A trigger will now send events to its subscriber in parallel, with the number of in-flight messages defaulting to 10 and configurable via the annotationrabbitmq.eventing.knative.dev/prefetchCount. ([#418](https://github.com/knative-sandbox/eventing-rabbitmq/pull/418))
-- Trigger filters are now enforced to be immutable, since the underlying RMQ binding is immutable ([#468](https://github.com/knative-sandbox/eventing-rabbitmq/pull/468))
+- A trigger will now send events to its subscriber in parallel, with the number of in-flight messages defaulting to 10 and configurable via the annotationrabbitmq.eventing.knative.dev/prefetchCount. ([#418](https://github.com/knative-extension/eventing-rabbitmq/pull/418))
+- Trigger filters are now enforced to be immutable, since the underlying RMQ binding is immutable ([#468](https://github.com/knative-extension/eventing-rabbitmq/pull/468))
 
 ##### 🐞 Bug Fixes
 
-- Brokers will no longer create a queue for dead-lettered events if no dead letter sink is defined ([#453](https://github.com/knative-sandbox/eventing-rabbitmq/pull/453))
+- Brokers will no longer create a queue for dead-lettered events if no dead letter sink is defined ([#453](https://github.com/knative-extension/eventing-rabbitmq/pull/453))
 
 
 ### Client v1.0

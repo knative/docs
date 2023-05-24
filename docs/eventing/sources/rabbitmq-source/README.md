@@ -18,7 +18,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the [Rabbi
 1. Install the RabbitMQSource controller by running the command:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-rabbitmq", file="rabbitmq-source.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extension", repo="eventing-rabbitmq", file="rabbitmq-source.yaml") }}
     ```
 
 1. Verify that `rabbitmq-controller-manager` and `rabbitmq-webhook` are running:
@@ -128,5 +128,5 @@ It might take a while for the Source to start sending events to the Sink.
 
 ## Additional information
 
-- For more samples visit the [`eventing-rabbitmq` Github repository samples directory](https://github.com/knative-sandbox/eventing-rabbitmq/tree/main/samples)
-- To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-sandbox/eventing-rabbitmq).
+- For more samples visit the [`eventing-rabbitmq` Github repository samples directory](https://github.com/knative-extension/eventing-rabbitmq/tree/main/samples)
+- To report a bug or request a feature, open an issue in the [`eventing-rabbitmq` Github repository](https://github.com/knative-extension/eventing-rabbitmq).

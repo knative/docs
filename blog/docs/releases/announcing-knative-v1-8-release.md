@@ -26,7 +26,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 ### 💫 New Release
 
-* [Security-Guard Alpha](https://github.com/knative-sandbox/security-guard/releases/tag/v0.2.0) is now released to allow cyber monitoring and control of knative services.
+* [Security-Guard Alpha](https://github.com/knative-extension/security-guard/releases/tag/v0.2.0) is now released to allow cyber monitoring and control of knative services.
 
 ## Serving
 

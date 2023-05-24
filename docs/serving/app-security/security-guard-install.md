@@ -20,7 +20,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
 
 === "Install from source"
 
-    1. Clone the Security-Guard repository using `git clone git@github.com:knative-sandbox/security-guard.git`
+    1. Clone the Security-Guard repository using `git clone git@github.com:knative-extension/security-guard.git`
 
     1. Do `cd security-guard`
 
@@ -35,7 +35,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
         An easy way to do that is using:
 
         ```
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/deploy/config-features.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-extension/security-guard/release-0.4/config/deploy/config-features.yaml
         ```
 
     1. Set the deployment parameter `queue-sidecar-image` to `gcr.io/knative-releases/knative.dev/security-guard/cmd/queue` in the config-deployment ConfigMap.
@@ -43,15 +43,15 @@ To start this tutorial, after installing Knative Serving, run the following proc
         An easy way to do that is using:
 
         ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.4.0/queue-proxy.yaml
+        kubectl apply -f https://github.com/knative-extension/security-guard/releases/download/v0.4.0/queue-proxy.yaml
         ```
 
     1. Add the necessary Security-Guard resources to your cluster using:
 
         ```
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/gateAccount.yaml
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/serviceAccount.yaml
-        kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/guardiansCrd.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-extension/security-guard/release-0.4/config/resources/gateAccount.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-extension/security-guard/release-0.4/config/resources/serviceAccount.yaml
+        kubectl apply -f https://raw.githubusercontent.com/knative-extension/security-guard/release-0.4/config/resources/guardiansCrd.yaml
         ```
 
     1. Deploy `guard-service` on your system to enable automated learning of micro-rules.
@@ -59,7 +59,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
         An easy way to do that is using:
 
         ```
-        kubectl apply -f https://github.com/knative-sandbox/security-guard/releases/download/v0.4.0/guard-service.yaml
+        kubectl apply -f https://github.com/knative-extension/security-guard/releases/download/v0.4.0/guard-service.yaml
         ```
 === "Install using the Knative Operator"
 
@@ -92,7 +92,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
           ingress.class: "kourier.ingress.networking.knative.dev"
     EOF
 
-    kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/gateAccount.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative-extension/security-guard/release-0.4/config/resources/gateAccount.yaml
     ```
 
 ## Per Namespace Setup
@@ -100,7 +100,7 @@ To start this tutorial, after installing Knative Serving, run the following proc
 In order to deploy guard protected services in a namespace, provide `guard-gate` with the necessary permissions on each namespace used:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/security-guard/release-0.4/config/resources/gateAccount.yaml
+kubectl apply -f https://raw.githubusercontent.com/knative-extension/security-guard/release-0.4/config/resources/gateAccount.yaml
 ```
 
 ## Additional Production Configuration

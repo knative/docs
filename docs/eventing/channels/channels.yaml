@@ -7,13 +7,13 @@ channels:
     description: >
       In-memory channels are a best effort Channel. They should NOT be used in Production. They are useful for development.
   - name: KafkaChannel
-    url: https://github.com/knative-sandbox/eventing-kafka-broker/tree/{{ branch }}/README.md
+    url: https://github.com/knative-extension/eventing-kafka-broker/tree/{{ branch }}/README.md
     status: Beta
     maintainer: Knative
     description: >
       Channels are backed by [Apache Kafka](http://kafka.apache.org/) topics.
   - name: NatssChannel
-    url: https://github.com/knative-sandbox/eventing-natss/tree/{{ branch }}/config/README.md
+    url: https://github.com/knative-extension/eventing-natss/tree/{{ branch }}/config/README.md
     status: Alpha
     maintainer: Knative
     description: >

@@ -97,52 +97,52 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### Eventing Kafka Broker v0.19
 
-Release Notes for [eventing-kafka-broker](https://github.com/knative-sandbox/eventing-kafka-broker)
+Release Notes for [eventing-kafka-broker](https://github.com/knative-extension/eventing-kafka-broker)
 
 **Actions Required (pre-upgrade)**
 - Run `kubectl delete configmap -n knative-eventing kafka-broker-brokers-triggers`
 
 🚨 Breaking
-- Default replication factor is 3 (1 previously) ([#375](https://github.com/knative-sandbox/eventing-kafka-broker/pull/375))
+- Default replication factor is 3 (1 previously) ([#375](https://github.com/knative-extension/eventing-kafka-broker/pull/375))
 
 
 💫 New Features & Changes
-- `eventing-kafka.yaml` can be used to install Broker and KafkaSink. ([#367](https://github.com/knative-sandbox/eventing-kafka-broker/pull/367))
-- Data plane pods expose server and client metrics in Prometheus format. ([#231](https://github.com/knative-sandbox/eventing-kafka-broker/pull/231) [#244](https://github.com/knative-sandbox/eventing-kafka-broker/pull/244))
+- `eventing-kafka.yaml` can be used to install Broker and KafkaSink. ([#367](https://github.com/knative-extension/eventing-kafka-broker/pull/367))
+- Data plane pods expose server and client metrics in Prometheus format. ([#231](https://github.com/knative-extension/eventing-kafka-broker/pull/231) [#244](https://github.com/knative-extension/eventing-kafka-broker/pull/244))
     - The receiver component exposes:
       - `http_requests_produce_total` - Number of accepted produce requests (200-level responses)
       - `http_requests_malformed_total` - Number of malformed produce requests (400-level responses)
     - The dispatcher component exposes:
       - `http_events_sent_total` - Number of events delivered to Apache Kafka
-- The Broker retries sending events. ([#268](https://github.com/knative-sandbox/eventing-kafka-broker/pull/268) [#263](https://github.com/knative-sandbox/eventing-kafka-broker/pull/263) [#258](https://github.com/knative-sandbox/eventing-kafka-broker/pull/258))
+- The Broker retries sending events. ([#268](https://github.com/knative-extension/eventing-kafka-broker/pull/268) [#263](https://github.com/knative-extension/eventing-kafka-broker/pull/263) [#258](https://github.com/knative-extension/eventing-kafka-broker/pull/258))
 
 🐞 Bug Fixes
-- Remove config-logging volume from the controller ([#288](https://github.com/knative-sandbox/eventing-kafka-broker/pull/288))
-- Thread blocked when logging large configurations in debug mode ([#346](https://github.com/knative-sandbox/eventing-kafka-broker/pull/346) [#378](https://github.com/knative-sandbox/eventing-kafka-broker/pull/378))
+- Remove config-logging volume from the controller ([#288](https://github.com/knative-extension/eventing-kafka-broker/pull/288))
+- Thread blocked when logging large configurations in debug mode ([#346](https://github.com/knative-extension/eventing-kafka-broker/pull/346) [#378](https://github.com/knative-extension/eventing-kafka-broker/pull/378))
 
 🧹 Clean up
-- The container image's sizes are ~90MB instead of ~287MB. ([#265](https://github.com/knative-sandbox/eventing-kafka-broker/pull/265) [#306](https://github.com/knative-sandbox/eventing-kafka-broker/pull/306))
-- Gracefully clean up resources on shutdown ([#334](https://github.com/knative-sandbox/eventing-kafka-broker/pull/334))
+- The container image's sizes are ~90MB instead of ~287MB. ([#265](https://github.com/knative-extension/eventing-kafka-broker/pull/265) [#306](https://github.com/knative-extension/eventing-kafka-broker/pull/306))
+- Gracefully clean up resources on shutdown ([#334](https://github.com/knative-extension/eventing-kafka-broker/pull/334))
 - `KafkaSink` usage: https://gist.github.com/matzew/e2c2fcd2696a346f25b8bc9e64bfd0fa
 
 
 #### Eventing Gitlab v0.19
 
-Release Notes for [eventing-gitlab](https://github.com/knative-sandbox/eventing-gitlab)
+Release Notes for [eventing-gitlab](https://github.com/knative-extension/eventing-gitlab)
 
 💫 New Features & Changes
-- Declare event types emitted by a GitLabSource instance so they are propagated as Knative EventTypes. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+- Declare event types emitted by a GitLabSource instance so they are propagated as Knative EventTypes. ([#24](https://github.com/knative-extension/eventing-gitlab/pull/24))
 
 🐞 Bug Fixes
-- Sanitize the type attribute of emitted CloudEvents so it doesn't contain spaces and capital letters. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+- Sanitize the type attribute of emitted CloudEvents so it doesn't contain spaces and capital letters. ([#24](https://github.com/knative-extension/eventing-gitlab/pull/24))
 
 🧹 Clean up
-- Ensure the source attribute of emitted CloudEvents is stable and predictable. ([#24](https://github.com/knative-sandbox/eventing-gitlab/pull/24))
+- Ensure the source attribute of emitted CloudEvents is stable and predictable. ([#24](https://github.com/knative-extension/eventing-gitlab/pull/24))
 
 
 #### Eventing RabbitMQ v0.19
 
-Release Notes for [eventing-rabbitmq](https://github.com/knative-sandbox/eventing-rabbitmq)
+Release Notes for [eventing-rabbitmq](https://github.com/knative-extension/eventing-rabbitmq)
 
 💫 New Features & Changes
 - Implement Dead Letter Queue

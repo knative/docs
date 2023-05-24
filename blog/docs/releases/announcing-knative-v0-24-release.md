@@ -52,7 +52,7 @@ Follow the instructions in the documentation
     are installed alongside Serving. If you're managing your Knative deployment manually with
     `kubectl` **this will require a two-phase upgrade process**. See the below sections:
 
-    * Upgrade of [net-http01 to v0.24.0](https://github.com/knative-sandbox/net-http01/releases/tag/v0.24.0)
+    * Upgrade of [net-http01 to v0.24.0](https://github.com/knative-extension/net-http01/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
@@ -63,7 +63,7 @@ Follow the instructions in the documentation
         $ kubectl delete service challenger -n knative-serving
         ```
 
-    * Upgrade of [net-certmanager to v0.24.0](https://github.com/knative-sandbox/net-certmanager/releases/tag/v0.24.0)
+    * Upgrade of [net-certmanager to v0.24.0](https://github.com/knative-extension/net-certmanager/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
@@ -75,7 +75,7 @@ Follow the instructions in the documentation
           --prune -l networking.knative.dev/certificate-provider=cert-manager
         ```
 
-    * Upgrade [net-istio to v0.24.0](https://github.com/knative-sandbox/net-istio/releases/tag/v0.24.0)
+    * Upgrade [net-istio to v0.24.0](https://github.com/knative-extension/net-istio/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
@@ -87,7 +87,7 @@ Follow the instructions in the documentation
           --prune -l networking.knative.dev/ingress-provider=istio
         ```
 
-    * Upgrade of [net-contour to v0.24.0](https://github.com/knative-sandbox/net-contour/releases/tag/v0.24.0)
+    * Upgrade of [net-contour to v0.24.0](https://github.com/knative-extension/net-contour/releases/tag/v0.24.0)
 
         ```
         # Apply the new release
@@ -99,7 +99,7 @@ Follow the instructions in the documentation
           --prune -l networking.knative.dev/ingress-provider=contour
         ```
 
-    * Upgrade of [net-kourier to v0.24.0](https://github.com/knative-sandbox/net-kourier/releases/tag/v0.24.0).
+    * Upgrade of [net-kourier to v0.24.0](https://github.com/knative-extension/net-kourier/releases/tag/v0.24.0).
     At this point we've deferred the renaming to net-kourier until the next release.
     We're looking to ensure there is no traffic disruption as part of the upgrade.
     Therefore upgrading to v0.24.0 requires no special instructions.
@@ -144,9 +144,9 @@ Follow the instructions in the documentation
 * DomainMapping can now specify a TLS secret to be used as the HTTPS certificate ([#11250](https://github.com/knative/serving/pull/11250))
 * Provides a feature gate that, when enabled, allows adding capabilities from a container's security context ([#11410](https://github.com/knative/serving/pull/11410))
 * `defaultExternalScheme` can now be used for default routes to surface a URL scheme of your choice rather than the default "http". ([#11480](https://github.com/knative/serving/pull/11480))
-* Optimized generated routes to minimize Envoy configuration size ([net-istio#632](https://github.com/knative-sandbox/net-istio/pull/632))
-* Rename Contour's ClusterRole and ClusterRoleBinding to differ from existing contour installation ([net-contour#500](https://github.com/knative-sandbox/net-contour/pull/500))
-* Add a new ConfigMap `config-kourier`, with the initial `enable-service-access-logging` setting ([net-kourier#523](https://github.com/knative-sandbox/net-kourier/pull/523))
+* Optimized generated routes to minimize Envoy configuration size ([net-istio#632](https://github.com/knative-extension/net-istio/pull/632))
+* Rename Contour's ClusterRole and ClusterRoleBinding to differ from existing contour installation ([net-contour#500](https://github.com/knative-extension/net-contour/pull/500))
+* Add a new ConfigMap `config-kourier`, with the initial `enable-service-access-logging` setting ([net-kourier#523](https://github.com/knative-extension/net-kourier/pull/523))
 
 #### 🐞 Bug Fixes
 
@@ -206,33 +206,33 @@ Subscription's users creating their resources with YAMLs are not affected. ([#54
 
 #### Apache Kafka Broker v0.24
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.24.0 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-kafka-broker/releases/tag/v0.24.0 -->
 
 #### 💫 New Features & Changes
 
-- Add some details in the existing Subscriber resolved condition about the delivery order. [#912](https://github.com/knative-sandbox/eventing-kafka-broker/pull/912)
-- Receiver deployment uses all available CPUs. [#985](https://github.com/knative-sandbox/eventing-kafka-broker/pull/985)
-- Now you can specify both in Broker and Trigger delivery specs the new timeout field, as part of the experimental feature delivery-timeout. For more information, see [Experimental features](https://knative.dev/docs/eventing/experimental-features/). [#1034](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1034)
-- Updates Go to v1.16 [#886](https://github.com/knative-sandbox/eventing-kafka-broker/pull/886)
-- Updates protobuf to v3.17.x [#946](https://github.com/knative-sandbox/eventing-kafka-broker/pull/946)
-- Updates vert.x to v4.1 [#900](https://github.com/knative-sandbox/eventing-kafka-broker/pull/900)
+- Add some details in the existing Subscriber resolved condition about the delivery order. [#912](https://github.com/knative-extension/eventing-kafka-broker/pull/912)
+- Receiver deployment uses all available CPUs. [#985](https://github.com/knative-extension/eventing-kafka-broker/pull/985)
+- Now you can specify both in Broker and Trigger delivery specs the new timeout field, as part of the experimental feature delivery-timeout. For more information, see [Experimental features](https://knative.dev/docs/eventing/experimental-features/). [#1034](https://github.com/knative-extension/eventing-kafka-broker/pull/1034)
+- Updates Go to v1.16 [#886](https://github.com/knative-extension/eventing-kafka-broker/pull/886)
+- Updates protobuf to v3.17.x [#946](https://github.com/knative-extension/eventing-kafka-broker/pull/946)
+- Updates vert.x to v4.1 [#900](https://github.com/knative-extension/eventing-kafka-broker/pull/900)
 
 
 #### RabbitMQ Eventing v0.24
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/v0.24.0 -->
+<!-- Original notes are here: https://github.com/knative-extension/eventing-rabbitmq/releases/tag/v0.24.0 -->
 
 #### 💫 New Features & Changes
-- Add validating webhook that checks RabbitMQBroker class brokers for valid [secret, rabbitmqcluster] configurations. ([#324](https://github.com/knative-sandbox/eventing-rabbitmq/pull/324))
-- Provide an option for install that does not have dependency on rabbitmq cluster operator or messaging-topology-operator. That allows you to bring your own rabbitmq broker. ([#309](https://github.com/knative-sandbox/eventing-rabbitmq/pull/309))
-- Add installation instructions for two kinds of brokers. ([#315](https://github.com/knative-sandbox/eventing-rabbitmq/pull/315))
+- Add validating webhook that checks RabbitMQBroker class brokers for valid [secret, rabbitmqcluster] configurations. ([#324](https://github.com/knative-extension/eventing-rabbitmq/pull/324))
+- Provide an option for install that does not have dependency on rabbitmq cluster operator or messaging-topology-operator. That allows you to bring your own rabbitmq broker. ([#309](https://github.com/knative-extension/eventing-rabbitmq/pull/309))
+- Add installation instructions for two kinds of brokers. ([#315](https://github.com/knative-extension/eventing-rabbitmq/pull/315))
 
 #### 🐞 Bug Fixes
-- Fix Standalone Broker to support Trigger DeadLetterSink properly. ([#341](https://github.com/knative-sandbox/eventing-rabbitmq/pull/341))
-- Fix per trigger DeadLetterSink support. ([#337](https://github.com/knative-sandbox/eventing-rabbitmq/pull/337))
-- Fix issue [#320](https://github.com/knative-sandbox/eventing-rabbitmq/issues/320): Fix incorrect links to both nightly and to-be-released standalone broker. ([#325](https://github.com/knative-sandbox/eventing-rabbitmq/pull/325))
-- Remove unnecessary keda permissions since that functionality was moved to https://github.com/knative-sandbox/eventing-autoscaler-keda ([#319](https://github.com/knative-sandbox/eventing-rabbitmq/pull/319))
-- Use better names for all RabbitMQ resources. Both k8s resources as well as RabbitMQ resources for standalone Broker. ([#344](https://github.com/knative-sandbox/eventing-rabbitmq/pull/344))
+- Fix Standalone Broker to support Trigger DeadLetterSink properly. ([#341](https://github.com/knative-extension/eventing-rabbitmq/pull/341))
+- Fix per trigger DeadLetterSink support. ([#337](https://github.com/knative-extension/eventing-rabbitmq/pull/337))
+- Fix issue [#320](https://github.com/knative-extension/eventing-rabbitmq/issues/320): Fix incorrect links to both nightly and to-be-released standalone broker. ([#325](https://github.com/knative-extension/eventing-rabbitmq/pull/325))
+- Remove unnecessary keda permissions since that functionality was moved to https://github.com/knative-extension/eventing-autoscaler-keda ([#319](https://github.com/knative-extension/eventing-rabbitmq/pull/319))
+- Use better names for all RabbitMQ resources. Both k8s resources as well as RabbitMQ resources for standalone Broker. ([#344](https://github.com/knative-extension/eventing-rabbitmq/pull/344))
 
 
 ### Client v0.24

@@ -62,7 +62,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 #### 💫 New Features & Changes
 
-* The timeout can be configured via stream-idle-timeout in config-kourier, the default value is set to "infinity" which means there is no timeout.  Users can change this value in config-kourier with decimal numbers plus a unit suffix such as "ns", "us" (or "µs"), "ms", "s", "m", "h". [#878](https://github.com/knative-sandbox/net-kourier/pull/878)
+* The timeout can be configured via stream-idle-timeout in config-kourier, the default value is set to "infinity" which means there is no timeout.  Users can change this value in config-kourier with decimal numbers plus a unit suffix such as "ns", "us" (or "µs"), "ms", "s", "m", "h". [#878](https://github.com/knative-extension/net-kourier/pull/878)
 
 ## Eventing Extensions
 
@@ -70,12 +70,12 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 #### 💫 New Features & Changes
 
-* Changed partition strategy for rebalancing from default (`RangeAssignor`) to `StickyAssignor` . [#2299](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2299)
-* Failed events are now decorated with Knative error extensions when routed to the `deadLetterSink` for more context. [#2374](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2374)
+* Changed partition strategy for rebalancing from default (`RangeAssignor`) to `StickyAssignor` . [#2299](https://github.com/knative-extension/eventing-kafka-broker/pull/2299)
+* Failed events are now decorated with Knative error extensions when routed to the `deadLetterSink` for more context. [#2374](https://github.com/knative-extension/eventing-kafka-broker/pull/2374)
 
 #### 🐞 Bug Fixes
 
-* Kafka Broker and KafkaSink ignore a trailing slash in the HTTP path. [#2462](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2462)
+* Kafka Broker and KafkaSink ignore a trailing slash in the HTTP path. [#2462](https://github.com/knative-extension/eventing-kafka-broker/pull/2462)
 
 
 ## Thank you, contributors

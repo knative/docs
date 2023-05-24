@@ -26,13 +26,13 @@ The Knative Kafka Broker stores incoming CloudEvents as Kafka records, using the
 1. Install the Kafka controller by entering the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    kubectl apply --filename {{ artifact(org="knative-extension", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
 1. Install the Kafka Broker data plane by entering the following command:
 
     ```bash
-    kubectl apply --filename {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-broker.yaml") }}
+    kubectl apply --filename {{ artifact(org="knative-extension", repo="eventing-kafka-broker", file="eventing-kafka-broker.yaml") }}
     ```
 
 1. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
@@ -447,4 +447,4 @@ All the configuration mechanisms that are available for the `Kafka` Broker class
 
 ## Additional information
 
-- To report a bug or request a feature, open an issue in the [eventing-kafka-broker repository](https://github.com/knative-sandbox/eventing-kafka-broker).
+- To report a bug or request a feature, open an issue in the [eventing-kafka-broker repository](https://github.com/knative-extension/eventing-kafka-broker).
