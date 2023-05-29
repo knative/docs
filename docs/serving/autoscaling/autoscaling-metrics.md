@@ -34,7 +34,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "concurrency"
     ```
 
-=== "Rps"
+=== "Requests per second"
 
     ```yaml
     apiVersion: serving.knative.dev/v1
@@ -49,7 +49,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "rps"
     ```
 
-=== "Cpu"
+=== "CPU"
 
     ```yaml
     apiVersion: serving.knative.dev/v1
