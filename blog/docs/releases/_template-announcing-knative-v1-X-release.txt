@@ -1,3 +1,9 @@
+# vX.X release
+
+**Author: [TODO-YOUR-NAME](https://twitter.com/TODO-YOUR-USERNAME)**
+
+**Date: 202x-xx-xxxx**
+
 ## Announcing Knative TODO-KNATIVE-VERSION Release
 
 A new version of Knative is now available across multiple components.
