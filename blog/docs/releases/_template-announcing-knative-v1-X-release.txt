@@ -1,14 +1,3 @@
----
-title: "TODO-KNATIVE-VERSION release"
-linkTitle: "TODO-KNATIVE-VERSION release"
-Author: "[TODO-YOUR-NAME](https://twitter.com/TODO-YOUR-USERNAME)"
-Author handle: https://github.com/TODO-YOUR-USERNAME
-date: TODO-DATE-FORMAT-yyyy-mm-dd
-description: "Knative TODO-KNATIVE-VERSION release announcement"
-type: "blog"
----
-
-
 ## Announcing Knative TODO-KNATIVE-VERSION Release
 
 A new version of Knative is now available across multiple components.
