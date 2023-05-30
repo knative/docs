@@ -1,10 +1,8 @@
----
-title: "v0.4 release"
-linkTitle: "v0.4 release"
-date: 2019-02-20
-description: "The Knative v0.4 release announcement"
-type: "blog"
----
+**Author: [Carlos Santana](https://twitter.com/csantanapr)**
+
+**Date: 2019-02-20**
+
+# v0.4 release
 
 <article class="h-entry">
 

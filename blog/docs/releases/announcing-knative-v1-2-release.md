@@ -1,13 +1,8 @@
----
-title: "v1.2 release"
-linkTitle: "v1.2 release"
-Author: "Samia Nneji"
-Author handle: https://github.com/snneji
-date: 2022-01-25
-description: "Knative v1.2 release announcement"
-type: "blog"
----
+**Author: [Samia Nneji](https://github.com/snneji)**
 
+**Date: 2022-01-25**
+
+# v1.2 release
 ### Announcing Knative v1.2 Release
 
 A new version of Knative is now available across multiple components.

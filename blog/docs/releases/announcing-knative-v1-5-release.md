@@ -1,13 +1,8 @@
----
-title: "v1.5 release"
-linkTitle: "v1.5 release"
-Author: "[dprotaso](https://twitter.com/lintinmybelly)"
-Author handle: https://github.com/dprotaso
-date: 2022-06-06
-description: "Knative 1.5 release announcement"
-type: "blog"
----
+**Author: [dprotaso](https://twitter.com/lintinmybelly)**
 
+**Date: 2022-06-06**
+
+# v1.5 release
 ## Announcing Knative 1.5 Release
 
 A new version of Knative is now available across multiple components.

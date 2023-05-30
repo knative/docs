@@ -1,13 +1,11 @@
----
-title: "v0.5 release"
-linkTitle: "v0.5 release"
-date: 2019-04-11
-description: "The Knative v0.5 release announcement"
-type: "blog"
-image: knative-eventing.png
----
-
 <body>
+
+**Author: [Carlos Santana](https://twitter.com/csantanapr)**
+
+**Date: 2019-04-11**
+
+# v0.5 release
+
 <article class="h-entry">
 <section data-field="subtitle" class="p-summary">
 Once again, we are excited to announce new release of Knative: a
