@@ -35,3 +35,4 @@ metrics.request-metrics-reporting-period-seconds: "1"
 
 !!! note
     The reporting period is to 1s so that we can push metrics as soon as possible but this could be overwhelming for the targeted metrics backend.
+    Setting a value of zero or a negative value defaults to 10s (does not mean no delay) which is the default reporting period defined by the Opencensus metrics client library. The latter is used by Knative Serving for exporting metrics.
