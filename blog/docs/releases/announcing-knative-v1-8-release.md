@@ -1,6 +1,12 @@
-**Authors: [Lionel Villard](https://github.com/lionelvillard) (IBM), [Kenjiro Nakayama](https://github.com/nak3) (Red Hat)**
-
-**Date: 2022-10-22**
+---
+title: "v1.8 release"
+linkTitle: "v1.8 release"
+author: "[Lionel Villard (IBM)](https://github.com/lionelvillard) and [Kenjiro Nakayama (Red Hat)](https://github.com/nak3)"
+author handle: https://github.com/TODO-YOUR-USERNAME
+date: 2022-10-22
+description: "Knative v1.8 release announcement"
+type: "blog"
+---
 
 # Announcing Knative 1.8 Release
 

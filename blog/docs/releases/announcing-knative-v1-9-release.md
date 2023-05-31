@@ -1,9 +1,9 @@
 ---
 title: "v1.9 release"
 linkTitle: "v1.9 release"
-Author: Paul Schweigert
+Author: [Paul Schweigert](https://twitter.com/psschwei)
 Author handle: https://github.com/psschwei
-date: 2022-01-27
+date: 2023-01-27
 description: "Knative v1.9 release announcement"
 type: "blog"
 image: knative-eventing.png

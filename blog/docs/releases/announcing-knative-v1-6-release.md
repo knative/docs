@@ -1,7 +1,12 @@
-**Authors: [Evan Anderson](https://twitter.com/e_k_anderson) (VMware), Paul Schweigert (IBM)**
-
-**Date: 2022-07-12**
-
+---
+title: "v1.6 release"
+linkTitle: "v1.6 release"
+author: "[Evan Anderson (VMWare)](https://twitter.com/e_k_anderson) and Paul Schweigert (IBM)"
+author handle: https://github.com/e_k_anderson
+date: 2022-07-12
+description: "Knative v1.6 release announcement"
+type: "blog"
+---
 # Announcing Knative 1.6 Release
 
 A new version of Knative is now available across multiple components.

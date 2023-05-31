@@ -1,6 +1,12 @@
-**Authors: [Matthias Wessendorf](https://github.com/matzew) (Red Hat), [Dave Protasowski](https://github.com/dprotaso) (VMware)**
-
-**Date: 2022-08-25**
+---
+title: "v1.7 release"
+linkTitle: "v1.7 release"
+author: "[Matthias Wessendorf (Red Hat)](https://twitter.com/matzew) and [Dave Protasowski (VMWare)](https://github.com/dprotaso)"
+author handle: https://github.com/matzew and https://github.com/dprotaso
+date: 2022-08-25
+description: "Knative v1.7 release announcement"
+type: "blog"
+---
 
 # Announcing Knative 1.7 Release
 
