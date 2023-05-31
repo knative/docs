@@ -78,7 +78,7 @@ This topic describes how to create a RabbitMQ Broker.
       name: <broker-name>
     spec:
       config:
-        apiVersion: rabbitmq.com/v1beta1
+        apiVersion: rabbitmq.com/v1alpha1
         kind: RabbitmqBrokerConfig
         name: <rabbitmq-broker-config-name>
     ```
