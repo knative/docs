@@ -6,7 +6,6 @@ author handle: https://github.com/psschwei
 date: 2023-01-27
 description: "Knative v1.9 release announcement"
 type: "blog"
-image: knative-eventing.png
 ---
 
 # Announcing Knative 1.9 Release

@@ -6,7 +6,6 @@ author handle: https://github.com/pierDipi https://github.com/dsimansk https://g
 date: 2023-04-25
 description: "Knative v1.10 release announcement"
 type: "blog"
-image: knative-eventing.png
 ---
 
 # Announcing Knative 1.10 Release
