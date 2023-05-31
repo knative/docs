@@ -1,8 +1,15 @@
-**Author: [Carlos Santana](https://twitter.com/csantanapr)**
+---
+title: "v0.18 release"
+linkTitle: "v0.18 release"
+Author: Carlos Santana
+Author handle: https://twitter.com/csantanapr
+date: 2020-09-30
+description: "Knative v0.18 release announcement"
+type: "blog"
+image: knative-eventing.png
+---
 
-**Date: 2020-09-30**
 
-# v0.18 release
 ## Announcing Knative v0.18 Release
 
 A new version of Knative is now available across multiple components.

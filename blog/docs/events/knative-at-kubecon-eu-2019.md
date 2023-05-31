@@ -1,6 +1,10 @@
-# Knative at KubeCon’19 Europe
-
-**Date: 2019-05-13**
+---
+title: "Knative at KubeCon’19 Europe"
+type: "blog"
+date: 2019-05-13
+linkTitle: "Knative at KubeCon’19 Europe"
+description: "Knative talks at KubeCon/CloudNativeCon 2019 Europe"
+---
 
 There's only a week until
 [KubeCon + CloudNativeCon Europe 2019](https://events.linuxfoundation.org/events/kubecon-cloudnativecon-europe-2019/)

@@ -1,8 +1,14 @@
-**Author: [Carlos Santana](https://twitter.com/csantanapr)**
+---
+title: "v1.1 release"
+linkTitle: "v1.1 release"
+Author: "[Carlos Santana](https://twitter.com/csantanapr)"
+Author handle: https://github.com/csantanapr
+date: 2021-12-14
+description: "Knative v1.1 release announcement"
+type: "blog"
+---
 
-**Date: 2021-12-44**
 
-# v1.1 release
 ### Announcing Knative v1.1 Release
 
 A new version of Knative is now available across multiple components.

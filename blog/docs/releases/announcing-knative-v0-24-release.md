@@ -1,8 +1,15 @@
-**Author: [Omer Bensaadon](https://twitter.com/omer_bensaadon)**
+---
+title: "v0.24 release"
+linkTitle: "v0.24 release"
+Author: "[Omer Bensaadon](https://twitter.com/omer_bensaadon)"
+Author handle: https://github.com/omerbensaadon
+date: 2021-06-29
+description: "Knative v0.24 release announcement"
+type: "blog"
+image: knative-eventing.png
+---
 
-**Date: 2020-06-29**
 
-# v0.24 Release
 ### Announcing Knative v0.24 Release
 
 A new version of Knative is now available across multiple components.

@@ -1,8 +1,14 @@
-**Author: [Nader Ziada](https://twitter.com/nziada)**
+---
+title: "v1.4 release"
+linkTitle: "v1.4 release"
+Author: "[Nader Ziada](https://twitter.com/nziada)"
+Author handle: https://github.com/nader-ziada
+date: 2022-04-20
+description: "Knative v1.4 release announcement"
+type: "blog"
+---
 
-**Date: 2022-04-20**
 
-# v1.4 release
 ## Announcing Knative 1.4 Release
 
 A new version of Knative is now available across multiple components.

@@ -1,8 +1,10 @@
-**Author: [Carlos Santana](https://twitter.com/csantanapr)**
-
-**Date: 2019-01-15**
-
-# v0.3 release
+---
+title: "v0.3 release"
+linkTitle: "v0.3 release"
+date: "2019-01-15"
+description: "The Knative v0.3 release announcement"
+type: "blog"
+---
 
 <article class="h-entry">
 

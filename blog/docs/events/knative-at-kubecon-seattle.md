@@ -1,6 +1,10 @@
-# Knative at KubeCon Seattle
-
-**Date: 2018-12-04**
+---
+title: "Knative at KubeCon Seattle"
+linkTitle: "KubeCon 2018"
+date: 2018-12-04
+description: "Knative sessions at KubeCon"
+type: "blog"
+---
 
   <article class="h-entry">
     <section data-field="subtitle" class="p-summary">
