@@ -1,13 +1,14 @@
 ---
 title: "v1.10 release"
 linkTitle: "v1.10 release"
-Author: [Pierangelo Di Pilato (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk),  [Krsna Mahapatra (VMWare)](https://github.com/kvmware), [Pradnya Dixit VMWare](https://github.com/pradnyavmw)
-Author handle: https://github.com/pierDipi https://github.com/dsimansk https://github.com/kvmware https://github.com/pradnyavmw
+author: [Pierangelo Di Pilato (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk),  [Krsna Mahapatra (VMWare)](https://github.com/kvmware), [Pradnya Dixit VMWare](https://github.com/pradnyavmw)
+author handle: https://github.com/pierDipi https://github.com/dsimansk https://github.com/kvmware https://github.com/pradnyavmw
 date: 2023-04-25
 description: "Knative v1.10 release announcement"
 type: "blog"
 image: knative-eventing.png
 ---
+
 # Announcing Knative 1.10 Release
 
 A new version of Knative is now available across multiple components.
