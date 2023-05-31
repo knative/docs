@@ -1,7 +1,7 @@
 ---
 title: "v1.9 release"
 linkTitle: "v1.9 release"
-author: [Paul Schweigert](https://twitter.com/psschwei)
+author: "[Paul Schweigert](https://twitter.com/psschwei)"
 author handle: https://github.com/psschwei
 date: 2023-01-27
 description: "Knative v1.9 release announcement"

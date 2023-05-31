@@ -1,7 +1,7 @@
 ---
 title: "v1.10 release"
 linkTitle: "v1.10 release"
-author: [Pierangelo Di Pilato (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk),  [Krsna Mahapatra (VMWare)](https://github.com/kvmware), [Pradnya Dixit VMWare](https://github.com/pradnyavmw)
+author: "[Pierangelo Di Pilato (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk),  [Krsna Mahapatra (VMWare)](https://github.com/kvmware), [Pradnya Dixit VMWare](https://github.com/pradnyavmw)"
 author handle: https://github.com/pierDipi https://github.com/dsimansk https://github.com/kvmware https://github.com/pradnyavmw
 date: 2023-04-25
 description: "Knative v1.10 release announcement"
