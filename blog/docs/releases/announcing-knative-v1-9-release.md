@@ -1,6 +1,12 @@
-**Authors: [Paul Schweigert](https://github.com/psschwei) (IBM), [Evan Anderson](https://github.com/evankanderson) (VMware)**
-
-**Date: 2022-1-27**
+---
+title: "v1.9 release"
+linkTitle: "v1.9 release"
+author: "[Paul Schweigert](https://twitter.com/psschwei)"
+author handle: https://github.com/psschwei
+date: 2023-01-27
+description: "Knative v1.9 release announcement"
+type: "blog"
+---
 
 # Announcing Knative 1.9 Release
 
@@ -29,7 +35,7 @@ This release brings a number of smaller improvements to the core Knative Serving
   where containers have additional privilege due to unset SecurityContext values.
   Explicitly setting these values to any setting, including high-privilege ones,
   will disable this warning.
-  
+
   These fields are:
   - `runAsNonRoot` (empty means `false`)
   - `allowPrivilegeEscalation` (empty means `true`)
