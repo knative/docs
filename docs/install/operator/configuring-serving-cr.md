@@ -403,6 +403,28 @@ spec:
       local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
 ```
 
+## Cutomize kourier-bootstrap for Kourier gateways:
+
+By default, Kourier contains envoy bootstrap configuration in the ConfigMap `kourier-bootstrap`. The `spec.ingress.kourier.bootstrap-configmap` field allows you to specify your customized bootstrap ConfigMap.
+
+This example shows that Kourier Gateawy uses `my-configmap` for the envoy bootstrap config.
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  config:
+    network:
+      ingress-class: kourier.ingress.networking.knative.dev
+  ingress:
+    kourier:
+      bootstrap-configmap: my-configmap
+      enabled: true
+```
+
 ## High availability
 
 By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for all deployments managed by the operator.
