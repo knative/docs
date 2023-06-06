@@ -95,7 +95,10 @@ nav:
     # Serving
 ###############################################################################
     - Serving:
-      - Knative Serving overview: serving/README.md
+      - Knative Serving:
+        - Overview: serving/README.md
+        - Architecture: serving/architecture.md
+        - Request Flow: serving/request-flow.md
       - Resources:
         - Revisions:
           - About Revisions: serving/revisions/README.md
@@ -173,7 +176,6 @@ nav:
         - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
     # Serving reference docs
       - Reference:
-        - Request Flow: serving/reference/request-flow.md
         - Serving API: serving/reference/serving-api.md
 ###############################################################################
     # Eventing
