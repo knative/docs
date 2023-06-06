@@ -38,7 +38,7 @@ For this, Knative Serving defines an internal `KIngress` resource, which acts as
 
 ![Knative Serving Architecture Ingress](images/serving-architecture-ingress.png)
 
-* Each networking layer has a controller that is responsible to watch the `KIngress` resources and configure the `Ingress Gateway` accordingly. It will also report back `status` information to this resource.
+* Each networking layer has a controller that is responsible to watch the `KIngress` resources and configure the `Ingress Gateway` accordingly. It will also report back `status` information through this resource.
 * The `Ingress Gateway` is used to route requests to the `activator` or directly to a Knative Service Pod, depending on the mode (proxy/serve, see [here](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md) for more details). The `Ingress Gateway` is handling requests  from inside the cluster and from outside the cluster.
 * For the `Ingress Gateway` to be reachable outside the cluster, it must be [exposed](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/) using a Kubernetes Service of `type: LoadBalancer` or `type: NodePort`. The community supported networking layers include this as part of the installation. Then [DNS](../install/yaml-install/serving/install-serving-with-yaml.md#configure-dns) is configured to point to the `IP` or `Name` of the `Ingress Gateway`
 
