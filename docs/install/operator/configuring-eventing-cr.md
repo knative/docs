@@ -315,7 +315,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  deployments:
+  workloads:
   - name: eventing-controller
     resources:
     - container: eventing-controller
@@ -352,7 +352,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  deployments:
+  workloads:
   - name: eventing-controller
     nodeSelector:
       disktype: hdd
@@ -386,7 +386,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  deployments:
+  workloads:
   - name: eventing-controller
     tolerations:
     - key: "key1"
@@ -428,7 +428,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  deployments:
+  workloads:
   - name: eventing-controller
     affinity:
       nodeAffinity:
@@ -456,7 +456,7 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  deployments:
+  workloads:
   - name: eventing-controller
     env:
     - container: eventing-controller

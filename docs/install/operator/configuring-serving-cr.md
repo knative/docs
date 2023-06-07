@@ -407,7 +407,7 @@ spec:
 
 By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for all deployments managed by the operator.
 
-The following configuration specifies a replica count of 3 for the deployments:
+The following configuration specifies a replica count of 3 for the workloads:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -459,7 +459,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  deployments:
+  workloads:
   - name: controller
     resources:
     - container: controller
@@ -490,7 +490,7 @@ metadata:
 spec:
   high-availability:
     replicas: 2
-  deployments:
+  workloads:
   - name: webhook
     replicas: 3
     labels:
@@ -522,7 +522,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  deployments:
+  workloads:
   - name: webhook
     nodeSelector:
       disktype: hdd
@@ -556,7 +556,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  deployments:
+  workloads:
   - name: activator
     tolerations:
     - key: "key1"
@@ -598,7 +598,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  deployments:
+  workloads:
   - name: activator
     affinity:
       nodeAffinity:
@@ -626,7 +626,7 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  deployments:
+  workloads:
   - name: controller
     env:
     - container: controller
