@@ -74,7 +74,7 @@ kubectl -n default apply -f event-display.yaml
 ### Create GitLab Tokens
 
 1. Create a
-   [personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+   [project access token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html)
    which the GitLab source will use to register webhooks with the GitLab API.
    The token must have an "api" access scope in order to create repository
    webhooks. Also decide on a secret token that your source will use to
