@@ -153,7 +153,7 @@ kubectl -n default apply -f event-display.yaml
 ### Verify
 
 Verify that GitLab webhook was created by looking at the list of webhooks under
-**Settings >> Integrations** in your GitLab project. A hook should be listed
+**Settings >> Webhooks** in your GitLab project. A hook should be listed
 that points to your Knative cluster.
 
 Create a push event and check the logs of the Pod backing the
