@@ -37,7 +37,7 @@ mt-broker-filter        3/3     3            3           51s
 mt-broker-ingress       3/3     3            3           51s
 ```
 
-For each workload we do see exactly three deployements. Now, take a detailed look at the above shell snippet. You will notice that for the `InMemoryChannel` we do have `6` deployments: `3` for each, the `controller` and the `dispatcher` data-plane. This is not always what you want, since the `InMemoryChannel` is more often used as a tool during development, while in production scenarios other worksloads, like the K[native Broker](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/) or [Knative Channel](https://knative.dev/docs/eventing/configuration/kafka-channel-configuration/) implementations for Apache Kafka are being used. 
+For each workload we do see exactly three deployements. Now, take a detailed look at the above shell snippet. You will notice that for the `InMemoryChannel` we do have `6` deployments: `3` for each, the `controller` and the `dispatcher` data-plane. This is not always what you want, since the `InMemoryChannel` is more often used as a tool during development, while in production scenarios other worksloads, like the [Knative Broker](https://knative.dev/docs/eventing/brokers/broker-types/kafka-broker/) or [Knative Channel](https://knative.dev/docs/eventing/configuration/kafka-channel-configuration/) implementations for Apache Kafka are being used. 
 
 ### Fine tuning the HA configuration with workload overrides
 
