@@ -123,7 +123,7 @@ for example, [http://cloudevents-player.default.127.0.0.1.sslip.io](http://cloud
 
 Try sending an event using the CloudEvents Player interface:
 
-1. Fill in the form with whatever you data you want.
+1. Fill in the form with whatever data you want.
 1. Ensure your Event Source does not contain any spaces.
 1. Click **SEND EVENT**.
 
