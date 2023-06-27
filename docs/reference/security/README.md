@@ -14,15 +14,17 @@ Our releases from 1.9 are signed with [cosign](https://docs.sigstore.dev/cosign/
 
 1. Download the files you want, and the `checksums.txt`, `checksum.txt.pem` and `checksums.txt.sig` files from the releases page:
     ```sh
-    # this example verifies the 1.9.0 kn cli from the knative/client repository
-    wget https://github.com/knative/client/releases/download/knative-v1.9.0/checksums.txt
-    wget https://github.com/knative/client/releases/download/knative-v1.9.0/kn-darwin-amd64
-    wget https://github.com/knative/client/releases/download/knative-v1.9.0/checksums.txt.sig
-    wget https://github.com/knative/client/releases/download/knative-v1.9.0/checksums.txt.pem
+    # this example verifies the 1.10.0 kn cli from the knative/client repository
+    wget https://github.com/knative/client/releases/download/knative-v1.10.0/checksums.txt
+    wget https://github.com/knative/client/releases/download/knative-v1.10.0/kn-darwin-amd64
+    wget https://github.com/knative/client/releases/download/knative-v1.10.0/checksums.txt.sig
+    wget https://github.com/knative/client/releases/download/knative-v1.10.0/checksums.txt.pem
     ```
 1. Verify the signature:
     ```sh
-    COSIGN_EXPERIMENTAL=1 cosign verify-blob \
+    cosign verify-blob \
+    --certificate-identity=signer@knative-releases.iam.gserviceaccount.com \
+    --certificate-oidc-issuer=https://accounts.google.com \
     --cert checksums.txt.pem \
     --signature checksums.txt.sig \
     checksums.txt
