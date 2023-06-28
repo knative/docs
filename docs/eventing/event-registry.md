@@ -1,8 +1,8 @@
 # Event registry
 
-Knative Eventing defines an `EventType` object to make it easier for consumers to discover the types of events they can consume from Brokers.
+Knative Eventing defines an `EventType` object to make it easier for consumers to discover the types of events they can consume from Brokers or Channels.
 
-The event registry maintains a catalog of event types that each Broker can consume. The event types stored in the registry contain all required information for a consumer to create a Trigger without resorting to some other out-of-band mechanism.
+The event registry maintains a catalog of event types that each Broker or Channel can consume. The event types stored in the registry contain all required information for a consumer to create a Trigger without resorting to some other out-of-band mechanism.
 
 This topic provides information about how you can populate the event registry, how to discover events using the registry, and how to leverage that information to subscribe to events of interest.
 
@@ -11,7 +11,7 @@ This topic provides information about how you can populate the event registry, h
 
 ## About EventType objects
 
-EventType objects represent a type of event that can be consumed from a Broker,
+EventType objects represent a type of event that can be consumed from a Broker or Channel,
 such as Apache Kafka messages or GitHub pull requests.
 EventType objects are used to populate the event registry and persist event type
 information in the cluster datastore.
@@ -19,7 +19,7 @@ information in the cluster datastore.
 The following is an example EventType YAML that omits irrelevant fields:
 
 ```yaml
-apiVersion: eventing.knative.dev/v1beta1
+apiVersion: eventing.knative.dev/v1beta2
 kind: EventType
 metadata:
   name: dev.knative.source.github.push-34cnb
@@ -31,19 +31,20 @@ spec:
   source: https://github.com/knative/eventing
   schema:
   description:
-  broker: default
+  reference:
+    apiVersion: eventing.knative.dev/v1
+    kind: Broker
+    name: default
 status:
   conditions:
     - status: "True"
-      type: BrokerExists
-    - status: "True"
-      type: BrokerReady
+      type: ReferenceExists
     - status: "True"
       type: Ready
 ```
 
 For the full specification for an EventType object, see the
-[EventType API reference](../eventing/reference/eventing-api.md#eventing.knative.dev/v1beta1.EventType).
+[EventType API reference](../eventing/reference/eventing-api.md#eventing.knative.dev/v1beta2.EventType).
 
 The `metadata.name` field is advisory, that is, non-authoritative.
 It is typically generated using `generateName` to avoid naming collisions.
@@ -51,8 +52,7 @@ It is typically generated using `generateName` to avoid naming collisions.
 
 For consumers, the fields that matter the most are `spec` and `status`.
 This is because these fields provide the information you need to create Triggers,
-which is the source and type of event and whether the Broker is ready to receive
-events.
+which is the source and type of event and whether the Reference is present to receive events.
 
 The following table has more information about the `spec` and `status` fields of
 EventType objects:
@@ -64,8 +64,8 @@ EventType objects:
 | `spec.source` | Refers to the [CloudEvent source](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#source-1) as it enters into the [event mesh](../event-mesh). Event consumers can create Triggers filtering on this attribute. | Required |
 | `spec.schema` | A valid URI with the EventType schema such as a JSON schema or a protobuf schema. | Optional |
 | `spec.description` | A string describing what the EventType is about. | Optional |
-| `spec.broker` | Refers to the Broker that can provide the EventType. | Required |
-| `status` | Tells consumers, or cluster operators, whether the EventType is ready to be consumed or not. The _readiness_ is based on the Broker being ready. | Optional |
+| `spec.reference` | Refers to the KResource that can provide the EventType. | Required |
+| `status` | Tells consumers, or cluster operators, whether the EventType is ready to be consumed or not. The _readiness_ is based on the KReference being present. | Optional |
 
 ## Populate the registry with events
 
@@ -107,8 +107,7 @@ Knative supports automatic registration of EventTypes for the following event so
 - KafkaSource
 - AwsSqsSource
 
-Knative only supports automatic creation of EventTypes for sources that have a
-Broker as their sink.
+Knative supports automatic creation of EventTypes for sources, that are compliant to the Sources Duck type.
 
 #### Procedure for automatic registration
 
