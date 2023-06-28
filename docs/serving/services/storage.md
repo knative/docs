@@ -1,10 +1,12 @@
-# Configuring storage for Knative services
+# Volume Support for Knative services
 
-Knative Serving integrates with K8s storage capabilities via supporting a subset of ephemeral storage volumes and via PersistentVolumeClaims(PVCs) volume types.
-In detail Knative Serving supports emptyDir by default, secret, configmap, projection and PVCs volume types.
-For more details on volume configuration check the related [feature flags](../configuration/feature-flags.md) when applicable.
+By default Serving supports the mounting the [volume types](https://kubernetes.io/docs/concepts/storage/volumes):`emptyDir`, `secret`, `configMap` and `projected`. [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) are supported but require a [feature flag](../configuration/feature-flags.md) to be enabled.
 
-Here is an example of using PVCs:
+!!! warning
+    Mounting large volumes may add considerable overhead to the application's start up time.
+
+
+Here is an example of using a persistent volume claim with a Knative Service:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -36,8 +38,3 @@ spec:
     requests:
       storage: 1Gi
 ```
-
-The example assumes that the user has enabled PVC support via the corresponding feature flag.
-
-!!! warning
-    Mounting large volumes may add considerable overhead to the application's start up time.
