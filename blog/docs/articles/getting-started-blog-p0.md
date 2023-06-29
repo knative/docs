@@ -62,7 +62,7 @@ in [knative-contributors](https://cloud-native.slack.com/archives/C04LN0620E8). 
 have a question about a topic related to eventing you could also attend the eventing working group meeting and ask it there. We all want you to succeed, so don't
 hesitate to reach out.
 
-## Stick with it
+### Stick with it
 
 Finally, please stick with it! We know that it can be intimidating to get started, and it can be discouraging to try and make a change and get stuck. But if
 you stick with us through this blog series, we promise you that it will be easier. Also, once you get started working on your first issues/PRs, feel free
