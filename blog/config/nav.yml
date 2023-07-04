@@ -45,6 +45,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/getting-started-blog-p0.md
           - articles/improved-ha-configuration.md
           - articles/from-cloudevent-to-apache-kafka-records-part-two.md
           - articles/knative-serving-in-k0s.md
