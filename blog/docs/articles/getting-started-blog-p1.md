@@ -7,7 +7,7 @@
 Welcome back to this introductory blog series! In this article we are going to be providing an introduction to open source: what it is, why you should care, and how you can participate.
 
 If you already have lots of open source experience, you should be able to completely skip this post and jump to the next one, where we will go over how to set up your development
-environment for working on __Knative__. But if you're new to open source, interested in learning more, or want a refresher then we look forward to discussing the what, why, and 
+environment for working on __Knative__. But if you're new to open source, interested in learning more, or want a refresher, then we look forward to discussing the what, why, and 
 how of open source with you!
 
 ## What is Open Source?
