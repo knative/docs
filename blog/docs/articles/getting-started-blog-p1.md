@@ -186,7 +186,7 @@ There are two scenarios where you would likely want to open a PR (or a Merge Req
 are ready to be merged into the project. The second is that you have made some progress but are not finished yet, and would like to get some early feedback or assistance on your changes.
 In both cases, you will want to go through the basic flow to create a PR or MR. If you are using Github and are unsure of how to do this, you can follow the instructions
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
-If you are using Gitlab and are unsure of how to do this, you can follow the instructions [here](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#merge-changes-back-upstream).
+If you are using GitLab and are unsure of how to do this, you can follow the instructions [here](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#merge-changes-back-upstream).
 
 When creating your PR/MR it is important to provide the context of why you are making the changes, what you changes, and how people can test your changes. It is good practice to 
 include a link to the issue the PR/MR is addressing, and to give a bried description of the changes you made. Additionally, your PR/MR should have a brief and descriptive title
