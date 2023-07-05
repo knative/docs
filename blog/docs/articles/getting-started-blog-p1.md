@@ -196,7 +196,7 @@ If your changes are incomplete, you will want to mark the PR/MR as a __draft__, 
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft), and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts). You may also
 want to title your PR/MR as "[WIP]: <descriptive title>". If you have any questions about your changes, this draft PR/MR is a great to command asn ask them as whoever answers
 you will have the context of everything you have done so far. Once you feel your changes are complete/ready, you can convert your PR/MR from its draft status to being ready.
-Instructions for Github can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review),
+Instructions for GitHub can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review),
 and instructions for GitLab can be found [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-ready).
 
 Whether your PR/MR is a draft or is ready for review, don't think that you are finished yet! There is a very good chance that you will spend a fair amount of time in the review
