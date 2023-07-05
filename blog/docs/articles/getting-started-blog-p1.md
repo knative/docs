@@ -116,7 +116,7 @@ use them). This flow can be seen in the diagram below.
 
 ![](/blog/images/open-source-general-work-flow.png)
 
-Now, if you are not familiar with this process it probably feels very confusing. So, to demistify it further, let's break down each part and discuss them in detail.
+Now, if you are not familiar with this process, it probably feels very confusing. So, to demistify it further, let's break down each part and discuss them in detail.
 
 ### Propose a Change
 
