@@ -15,7 +15,7 @@ how of open source with you!
 So, what is open source? The key concept behind open source is that all of the source code is publicly available: anyone can read it, change it, improve on it, and distribute it 
 as they see fit [[1]](https://www.redhat.com/en/topics/open-source/what-is-open-source){:target="_blank"}.
 
-Similar to open source software, there is also free software, which differs primarily from open source by having a less commercial focus [[2]](https://writefreesoftware.org/learn){:target="_blank"}.
+Similar to open source software, there is also free software (free in terms of the user's freedoms - think free speech, not free food), which differs primarily from open source by having a less commercial focus [[2]](https://writefreesoftware.org/learn){:target="_blank"}.
 While there are important philosophical differences between open source software and free software, we are not going to go into those in this article as this is intended as a more
 practical guide.
 
