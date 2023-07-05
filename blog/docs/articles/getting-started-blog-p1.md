@@ -49,7 +49,7 @@ Regardless of why you choose to participate in an open source project or communi
 3. You will be able to see your contributions impactins a large project with potentially very many users (for example one of the Knative repos has around 10M downloads), which can
 feel very rewarding.
 
-With that being said, the fact that you are reading this means that you likely already want to participate in an open source project (hopefully Knative!), so let's dive into some
+With that being said, the fact that you are reading this means that you likely already want to participate in an open source project (hopefully **Knative**!), so let's dive into some
 of the different ways you can contribute.
 
 ## Types of Contributions
