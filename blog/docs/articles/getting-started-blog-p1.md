@@ -12,7 +12,7 @@ how of open source with you!
 
 ## What is Open Source?
 
-So, what is open source? The key concept behind open source is taht all of the source code is publicly available: anyone can read it, change it, improve on it, and distribute it 
+So, what is open source? The key concept behind open source is that all of the source code is publicly available: anyone can read it, change it, improve on it, and distribute it 
 as they see fit [[1]](https://www.redhat.com/en/topics/open-source/what-is-open-source).
 
 Similar to open source software, there is also free software, which differs primarily from open source by having a less commercial focus [[2]](https://writefreesoftware.org/learn).
