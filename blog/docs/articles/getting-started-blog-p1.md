@@ -6,6 +6,8 @@
 
 Welcome back to this introductory blog series! In this article we are going to be providing an introduction to open source: what it is, why you should care, and how you can participate.
 
+![](/blog/images/getting-started-blog-series/post1/hello-open-source.png)
+
 If you already have lots of open source experience, you should be able to completely skip this post and jump to the next one, where we will go over how to set up your development
 environment for working on __Knative__. But if you're new to open source, interested in learning more, or want a refresher, then we look forward to discussing the what, why, and 
 how of open source with you!
@@ -34,6 +36,8 @@ as Python, Go, Rust, and Java are open source.
 Open source is a large, popular, and innovative way to build and share software. Importantly, it is also a process which __you__ can participate in!
 
 ## Why should you participate?
+
+![](/blog/images/getting-started-blog-series/post1/why-contribute.png)
 
 Now that we know what open source software is, as well as some examples of open source software you have probably encountered, why should you participate in open source? Well, there
 are lots of different scenarios in which you may want to participate, so let's discuss a few of them and the benefits you will obtain by participating.
@@ -123,6 +127,8 @@ Now, if you are not familiar with this process, it probably feels very confusing
 
 ### Propose a Change
 
+![](/blog/images/getting-started-blog-series/post1/propose-ideas.png)
+
 The first step of the process is to propose a change. This step is very important if you want to add a new feature as the community may not actually want the feature you want, or
 may want it to work differently than how you envision it. In both cases, if you start coding before proposing the feature, you will be wasting a lot of your time. Different communities
 have different practices for proposing and accepting changes, so try and find out how your community of interest does this (this can often be found in the `CONTRIBUTING.md`, by looking
@@ -137,6 +143,8 @@ as much detail in your proposal/bug report as possible, it will speed up the pro
 been approved you can move on to the next step!
 
 ### Coding your changes!
+
+![](/blog/images/getting-started-blog-series/post1/start-coding.png)
 
 Once your proposal has been accepted, it's time to code your change. In this section we aren't going to spend much time on discussing how to write the code itself (but if you're
 interested in how to write Knative code be sure to check out the rest of this blog series!). Instead, we will be focusing on all the processes you should follow around writing code.
@@ -199,6 +207,8 @@ commit message__, while "added try catch block to prevent crash" would be better
 
 ### Making a PR/MR
 
+![](/blog/images/getting-started-blog-series/post1/ready-for-review.png)
+
 There are two scenarios where you would likely want to open a PR (or a Merge Request (MR) if your project uses GitLab). The first is that you feel your changes are complete and 
 are ready to be merged into the project. The second is that you have made some progress but are not finished yet, and would like to get some early feedback or assistance on your changes.
 In both cases, you will want to go through the basic flow to create a PR or MR. If you are using GitHub and are unsure of how to do this, you can follow the instructions
@@ -220,6 +230,8 @@ Whether your PR/MR is a draft or is ready for review, don't think that you are f
 process, improving your code until it is ready to be merged into the project. Let's discuss this review process next.
 
 ### PR/MR Review Process
+
+![](/blog/images/getting-started-blog-series/post1/getting-feedback.png)
 
 Once you have a PR/MR which is ready, one or more people will review your changes and provide feedback. If this is one of your first contributions to the project, expect lots of
 feedback! It is then up to you to make changes to address those comments. To do this, all you need to do is make a new commit on the same branch you made the PR from, and push the
@@ -243,3 +255,5 @@ Congratulations! You just contributed code to the project and made an impact on 
 As you've hopefully seen in this article, there are many great open source projects out there to contribute to. So, if you're interested, pick one and contribute! There are 
 loads of ways to contribute, and your contributions will be appreciated so long as the project is taking contributions. While contributing (especially contributing code) can be 
 a complex process, it is also a very rewarding experience. So, we hope to see you out there contributing to open source and Knative!
+
+![](/blog/images/getting-started-blog-series/post1/thanks.png)
