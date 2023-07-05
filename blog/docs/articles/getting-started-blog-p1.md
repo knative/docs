@@ -123,7 +123,7 @@ Now, if you are not familiar with this process, it probably feels very confusing
 The first step of the process is to propose a change. This step is very important if you want to add a new feature as the community may not actually want the feature you want, or
 may want it to work differently than how you envision it. In both cases, if you start coding before proposing the feature, you will be wasting a lot of your time. Different communities
 have different practices for proposing and accepting changes, so try and find out how your community of interest does this (this can often be found in the `CONTRIBUTING.md`, by looking
-around the repo and seeing what others are doing, or on the project website). For example, in Knative, we propose new features and report bugs with Github Issues, and we approve them
+around the repo and seeing what others are doing, or on the project website). For example, in Knative, we propose new features and report bugs with GitHub Issues, and we approve them
 by adding the `triage/accepted` label. Additionally, for large features we require a feature proposal document to be created alongside the issue. However, for very small features like 
 fixing the developer documentation, you can also skip this step and just make your change by creating a PR. 
 
