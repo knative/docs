@@ -148,7 +148,7 @@ Generally, the process you will go through to code your changes is:
 8. Your code gets merged!
 
 Firstly, you should generally be working on a fork of the project. You can think of a fork as your own personal copy of the repository, where you have the permissions to make whatever
-changes you want. This is different from the main project repository, where you likely don't have permissions to change the code. To create a fork on Github, you can follow 
+changes you want. This is different from the main project repository, where you likely don't have permissions to change the code. To create a fork on GitHub, you can follow 
 [these instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo). To create a fork on Gitlab, you can follow [these instructions](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html).
 Some important terminology here is that the repository you forked is generally referred to as the "upstream" repository, and we will be referring to your fork as the "origin",
 as that is normally how your local git remotes will be set up. To easily clone a forked repository and set up the git remotes properly, you can use the `git clonefork` command
