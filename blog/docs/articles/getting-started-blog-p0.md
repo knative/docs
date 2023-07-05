@@ -68,4 +68,4 @@ Finally, please stick with it! We know that it can be intimidating to get starte
 you stick with us through this blog series, we promise you that it will be easier. Also, once you get started working on your first issues/PRs, feel free
 to refer back to these blog posts to remember how things work. Your patience and persistence will pay off in the long run, so don't give up!
 
-We hope that you've enjoyed this first post, and we look forward to seeing you in [the next one](/blog/articles/getting-started-blog-p1){:target="_blank"}
+We hope that you've enjoyed this first post, and we look forward to seeing you in [the next one](/blog/articles/getting-started-blog-p1){:target="_blank"}!
