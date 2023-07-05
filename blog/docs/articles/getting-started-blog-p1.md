@@ -13,14 +13,14 @@ how of open source with you!
 ## What is Open Source?
 
 So, what is open source? The key concept behind open source is that all of the source code is publicly available: anyone can read it, change it, improve on it, and distribute it 
-as they see fit [[1]](https://www.redhat.com/en/topics/open-source/what-is-open-source).
+as they see fit [[1]](https://www.redhat.com/en/topics/open-source/what-is-open-source){:target="_blank"}.
 
-Similar to open source software, there is also free software, which differs primarily from open source by having a less commercial focus [[2]](https://writefreesoftware.org/learn).
+Similar to open source software, there is also free software, which differs primarily from open source by having a less commercial focus [[2]](https://writefreesoftware.org/learn){:target="_blank"}.
 While there are important philosophical differences between open source software and free software, we are not going to go into those in this article as this is intended as a more
 practical guide.
 
 There is a lot of popular open source software which you have probably used before, regardless of if you knew it was open source. For example, chances are most of your browser is 
-open source! If you are on Firefox, then your browser ([minus the DRM code](https://www.theguardian.com/technology/2014/may/14/firefox-closed-source-drm-video-browser-cory-doctorow))
+open source! If you are on Firefox, then your browser ([minus the DRM code](https://www.theguardian.com/technology/2014/may/14/firefox-closed-source-drm-video-browser-cory-doctorow)){:target="_blank"}
 is open source. If you are on a Chromium-based browser like Google Chrome or Microsoft Edge then as the name implies your browser is based on the open source project Chromium, but
 there are proprietary components to your browser as well.
 
@@ -82,21 +82,21 @@ requests and proposals, ask questions, and give your feedback on what you like/d
 ### Write Documentation
 
 Another fantastic way to contribute to an open source project is to contribute to the documentation of the project. For example, if you want to contribute to Knative, you could
-try to contribute a fix to one of the [open documentation issues](https://github.com/knative/docs/issues). As software evolves, the documentation tends to lag behind. In order
+try to contribute a fix to one of the [open documentation issues](https://github.com/knative/docs/issues){:target="_blank"}. As software evolves, the documentation tends to lag behind. In order
 to make the project more usable, it is crucial that people actively contribute to keeping the documentation up to date. This is also a very good way to learn more about how
 the project works at a technical level, as explaining concepts can improve your understanding of them.
 
 ### Attend Community Events and Meetings
 
 Medium and large projects (and some small ones too) tend to have meetings and community events. This is a great opportunity to meet more people in the community and share ideas.
-For example, in Knative there are weekly and bi-weekly meetings of the [working groups](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md), where 
+For example, in Knative there are weekly and bi-weekly meetings of the [working groups](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md){:target="_blank"}, where 
 various contributors will discuss what they are working on and will request feedback on features they are proposing. We would love to have you at these meetings, and they are
 a great way to find out more about what is going on in the community and what direction the project is taking. To find out more about when the working group meetings take place
-in Knative, check out the [community calendar](https://calendar.google.com/calendar/u/0/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s@group.calendar.google.com&ctz=America/Los_Angeles).
+in Knative, check out the [community calendar](https://calendar.google.com/calendar/u/0/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s@group.calendar.google.com&ctz=America/Los_Angeles){:target="_blank"}.
 
 ### Reviewing PRs
 
-A more technically-oriented contribution is reviewing [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+A more technically-oriented contribution is reviewing [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests){:target="_blank"}
 (PRs for short). These are also called Merge Requests (MRs) on Gitlab. If you haven't heard of a PR before, it is essentially a way for someone to request that a set of changes
 be made to the code for a project. As such, it is essential that these are carefully reviewed to make sure that they are correct and work properly. While it is likely difficult
 to fully understand everything that is going on in the code if you haven't contributed much code to the project, you can still leave comments and questions about the code
@@ -160,21 +160,21 @@ Generally, the process you will go through to code your changes is:
 
 Firstly, you should generally be working on a fork of the project. You can think of a fork as your own personal copy of the repository, where you have the permissions to make whatever
 changes you want. This is different from the main project repository, where you likely don't have permissions to change the code. To create a fork on GitHub, you can follow 
-[these instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo). To create a fork on GitLab, you can follow [these instructions](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html).
+[these instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo){:target="_blank"}. To create a fork on GitLab, you can follow [these instructions](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html){:target="_blank"}.
 Some important terminology here is that the repository you forked is generally referred to as the "upstream" repository, and we will be referring to your fork as the "origin",
 as that is normally how your local git remotes will be set up. To easily clone a forked repository and set up the git remotes properly, you can use the `git clonefork` command
-which can be installed from [here](https://github.com/cali0707/git-utils). Alternatively, you can use the [git clone](https://git-scm.com/docs/git-clone) and 
-[git remote](https://git-scm.com/docs/git-remote) commands yourself to configure your local copy of your fork. Note that you will want to add a remote to the upstream repository,
+which can be installed from [here](https://github.com/cali0707/git-utils){:target="_blank"}. Alternatively, you can use the [git clone](https://git-scm.com/docs/git-clone){:target="_blank"} and 
+[git remote](https://git-scm.com/docs/git-remote){:target="_blank"} commands yourself to configure your local copy of your fork. Note that you will want to add a remote to the upstream repository,
 and that this remote is commonly named "upstream".
 
 Once you have a fork, have cloned it locally, and have set up your remotes properly you should checkout a new branch to make your changes on. If you are unsure what a branch is and 
-how to make one, we recommend reading [this article](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell). We also recommend that you make your changes on a separate
+how to make one, we recommend reading [this article](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell){:target="_blank"}. We also recommend that you make your changes on a separate
 branch from your main branch, and keep your main branch in sync with the upstream main branch. This way, you will easily be able to get any future changes into your fork, as they will
 share the same history on the main branch. To sync changes your fork's main branch with the upstream main branch, you can use the 
-[GitHub UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)/[GitLab UI](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#from-the-ui)
+[GitHub UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork){:target="_blank"}/[GitLab UI](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#from-the-ui){:target="_blank"}
 and pull those changes to your local main branch, or you can run `git checkout main && git pull upstream main` (assuming you haven't made any commits to your main branch), and 
 then pushing your main branch to your origin. To easily sync your local main and your origin's main with upstream main, you can use the `git sync` command which can be installed
-[here](https://github.com/cali0707/git-utils).
+[here](https://github.com/cali0707/git-utils){:target="_blank"}.
 
 Now that you are working on a branch in your own fork, it's time to code your changes! One important thing to keep in mind as you write your code is the code style of the project.
 If all variables are in camelCase, then your variable names should be in camelCase. If there is a common way to handle errors, then you should handle your errors in the same way.
@@ -193,7 +193,7 @@ you wrote from the rest of the code, then you have done a good job following the
 
 6. Package installment policy (check if there is one or if you can install whatever you need)
 
-When you feel like you have made some progress or that your changes are done, be sure to make a commit. For more information on making commits, read [here](https://www.atlassian.com/git/tutorials/saving-changes/git-commit).
+When you feel like you have made some progress or that your changes are done, be sure to make a commit. For more information on making commits, read [here](https://www.atlassian.com/git/tutorials/saving-changes/git-commit){:target="_blank"}.
 Git commits need a message, so try and provide something as this will make it easier for others to understand your changes. For example, "worked on bug fix" __would not be a great
 commit message__, while "added try catch block to prevent crash" would be better as it __describes what you changed__.
 
@@ -202,19 +202,19 @@ commit message__, while "added try catch block to prevent crash" would be better
 There are two scenarios where you would likely want to open a PR (or a Merge Request (MR) if your project uses GitLab). The first is that you feel your changes are complete and 
 are ready to be merged into the project. The second is that you have made some progress but are not finished yet, and would like to get some early feedback or assistance on your changes.
 In both cases, you will want to go through the basic flow to create a PR or MR. If you are using GitHub and are unsure of how to do this, you can follow the instructions
-[here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
-If you are using GitLab and are unsure of how to do this, you can follow the instructions [here](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#merge-changes-back-upstream).
+[here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork){:target="_blank"}.
+If you are using GitLab and are unsure of how to do this, you can follow the instructions [here](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#merge-changes-back-upstream){:target="_blank"}.
 
 When creating your PR/MR it is important to provide the context of why you are making the changes, what you changes, and how people can test your changes. It is good practice to 
 include a link to the issue the PR/MR is addressing, and to give a bried description of the changes you made. Additionally, your PR/MR should have a brief and descriptive title
 to make it clearer to reviewers what it contains.
 
 If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for Github are 
-[here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft), and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts). You may also
+[here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft){:target="_blank"}, and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts){:target="_blank"}. You may also
 want to title your PR/MR as "[WIP]: \<descriptive title>". If you have any questions about your changes, this draft PR/MR is a great to command asn ask them as whoever answers
 you will have the context of everything you have done so far. Once you feel your changes are complete/ready, you can convert your PR/MR from its draft status to being ready.
-Instructions for GitHub can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review),
-and instructions for GitLab can be found [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-ready).
+Instructions for GitHub can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review){:target="_blank"},
+and instructions for GitLab can be found [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-ready){:target="_blank"}.
 
 Whether your PR/MR is a draft or is ready for review, don't think that you are finished yet! There is a very good chance that you will spend a fair amount of time in the review
 process, improving your code until it is ready to be merged into the project. Let's discuss this review process next.
