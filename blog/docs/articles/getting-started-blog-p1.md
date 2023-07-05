@@ -160,7 +160,7 @@ Once you have a fork, have cloned it locally, and have set up your remotes prope
 how to make one, we recommend reading [this article](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell). We also recommend that you make your changes on a separate
 branch from your main branch, and keep your main branch in sync with the upstream main branch. This way, you will easily be able to get any future changes into your fork, as they will
 share the same history on the main branch. To sync changes your fork's main branch with the upstream main branch, you can use the 
-[Github UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)/[Gitlab UI](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#from-the-ui)
+[GitHub UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)/[GitLab UI](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#from-the-ui)
 and pull those changes to your local main branch, or you can run `git checkout main && git pull upstream main` (assuming you haven't made any commits to your main branch), and 
 then pushing your main branch to your origin. To easily sync your local main and your origin's main with upstream main, you can use the `git sync` command which can be installed
 [here](https://github.com/cali0707/git-utils).
