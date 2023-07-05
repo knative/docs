@@ -44,8 +44,11 @@ a way to contribute!). Another common scenario is that you believe in a software
 fashion. Yet another common situation is that you want to further your career by working with other talented people in a public way, networking and building your skills.
 
 Regardless of why you choose to participate in an open source project or community, many of the benefits will be the same. Primarily, they will be:
+
 1. The opportunity to be part of a vibrant community actively working together to make the best software possible.
+
 2. The opportunity to get to know different technologies and be on the bleeding edge of innovation. Many innovations start in open source projects.
+
 3. You will be able to see your contributions impactins a large project with potentially very many users (for example one of the Knative repos has around 10M downloads), which can
 feel very rewarding.
 
@@ -138,13 +141,21 @@ been approved you can move on to the next step!
 Once your proposal has been accepted, it's time to code your change. In this section we aren't going to spend much time on discussing how to write the code itself (but if you're
 interested in how to write Knative code be sure to check out the rest of this blog series!). Instead, we will be focusing on all the processes you should follow around writing code.
 Generally, the process you will go through to code your changes is:
+
 1. Fork the project and clone it locally
+
 2. Make a branch
+
 3. Commit
+
 4. Create a PR
+
 5. Request reviews
+
 6. Make changes upon request
+
 7. PR is approved.
+
 8. Your code gets merged!
 
 Firstly, you should generally be working on a fork of the project. You can think of a fork as your own personal copy of the repository, where you have the permissions to make whatever
@@ -169,11 +180,17 @@ Now that you are working on a branch in your own fork, it's time to code your ch
 If all variables are in camelCase, then your variable names should be in camelCase. If there is a common way to handle errors, then you should handle your errors in the same way.
 If there are lots of unit tests, then you should unit test your changes (more on tests in Knative in a later blog post). If someone else would be unable to distinguish the code
 you wrote from the rest of the code, then you have done a good job following the project's style. A useful list of things to keep in mind as you work on your code is:
+
 1. Variable, function, and class naming conventions
+
 2. Code formatting/automatic formatter the project is using
+
 3. Is there a commit message convention?
+
 4. File naming conventions
+
 5. Package import rules
+
 6. Package installment policy (check if there is one or if you can install whatever you need)
 
 When you feel like you have made some progress or that your changes are done, be sure to make a commit. For more information on making commits, read [here](https://www.atlassian.com/git/tutorials/saving-changes/git-commit).
@@ -194,7 +211,7 @@ to make it clearer to reviewers what it contains.
 
 If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for Github are 
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft), and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts). You may also
-want to title your PR/MR as "[WIP]: <descriptive title>". If you have any questions about your changes, this draft PR/MR is a great to command asn ask them as whoever answers
+want to title your PR/MR as "[WIP]: \<descriptive title>". If you have any questions about your changes, this draft PR/MR is a great to command asn ask them as whoever answers
 you will have the context of everything you have done so far. Once you feel your changes are complete/ready, you can convert your PR/MR from its draft status to being ready.
 Instructions for GitHub can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review),
 and instructions for GitLab can be found [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-ready).
