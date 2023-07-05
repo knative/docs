@@ -4,6 +4,8 @@
 
 **Date: 2023-07-06**
 
+[](/blog/images/getting-started-blog-series/post0/person-chasing-logo.png)
+
 ## What is this blog series?
 
 This blog series is a collection of posts aimed at helping new contributors get started with contributing code to Knative. So, if you are a new contributor
@@ -26,6 +28,8 @@ In the month prior to writing this blog post, we started our internship at Red H
 learning all about how Knative works and making our first contributions to the project. We get a lot of the pain points that new contributors face because 
 we just faced them ourselves. Our hope is that by creating this blog series we can alleviate some of these pain points for the contibutors who come after 
 us.
+
+[](/blog/images/getting-started-blog-series/post0/reading-side-doodle.png)
 
 With that in mind, let's discuss what pain points we have been experiencing. The first is that Knative is a very large project, with many massive repositories.
 As a new contributor it can be very difficult to know how to navigate the codebase to find where to make your change. There is also a lot of "magic" in the 
@@ -52,6 +56,8 @@ If, as you are reading the articles you ever have any questions, look it up onli
 able to find them is a valuable skill in and of itself. We will do our best to provide you with a curated list of articles to go and learn more with each post
 in this series to provide a starting point to your research, although we encourage you to read beyond what we provide.
 
+[](/blog/images/getting-started-blog-series/post0/person-falling-logo.png)
+
 ### Ask the community
 
 But what if you get stuck or have a question, you've researched it yourself, and you still don't have an answer? Well, that's when the Knative community comes
@@ -69,3 +75,5 @@ you stick with us through this blog series, we promise you that it will be easie
 to refer back to these blog posts to remember how things work. Your patience and persistence will pay off in the long run, so don't give up!
 
 We hope that you've enjoyed this first post, and we look forward to seeing you in [the next one](/blog/articles/getting-started-blog-p1){:target="_blank"}!
+
+[](/blog/imagess/getting-started-blog-series/post0/plant-doodle.png)
