@@ -85,7 +85,7 @@ the project works at a technical level, as explaining concepts can improve your 
 
 ### Attend Community Events and Meetings
 
-Medium and largs projects (and some small ones too) tend to have meetings and community events. This is a great opportunity to meet more people in the community and share ideas.
+Medium and large projects (and some small ones too) tend to have meetings and community events. This is a great opportunity to meet more people in the community and share ideas.
 For example, in Knative there are weekly and bi-weekly meetings of the [working groups](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md), where 
 various contributors will discuss what they are working on and will request feedback on features they are proposing. We would love to have you at these meetings, and they are
 a great way to find out more about what is going on in the community and what direction the project is taking. To find out more about when the working group meetings take place
