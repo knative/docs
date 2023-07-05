@@ -62,7 +62,7 @@ let's discuss some common ways to contribute.
 
 ### Opening Issues
 
-One great way to contribute is to open "issues" on Github/Gitlab, or whatever other platform the community is using. For example, Knative uses Github to keep track of issues. An
+One great way to contribute is to open "issues" on GitHub/GitLab, or whatever other platform the community is using. For example, Knative uses GitHub to keep track of issues. An
 issue could be a bug, or a feature request. So, if there si a bug that is bothering you with some open source project you use, open an issue and report it! Similarly, if there
 is a feature you would like, go ahead and open an issue asking for it. There is no guarantee that the maintainers of the project will fix the issue for you, but they will generally
 try to. This is a great way to contribute to a project as it allows the community to better understand what users like you are thinking about the project, and what problems you
