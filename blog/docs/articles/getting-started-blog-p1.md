@@ -184,7 +184,7 @@ commit message__, while "added try catch block to prevent crash" would be better
 
 There are two scenarios where you would likely want to open a PR (or a Merge Request (MR) if your project uses GitLab). The first is that you feel your changes are complete and 
 are ready to be merged into the project. The second is that you have made some progress but are not finished yet, and would like to get some early feedback or assistance on your changes.
-In both cases, you will want to go through the basic flow to create a PR or MR. If you are using Github and are unsure of how to do this, you can follow the instructions
+In both cases, you will want to go through the basic flow to create a PR or MR. If you are using GitHub and are unsure of how to do this, you can follow the instructions
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
 If you are using GitLab and are unsure of how to do this, you can follow the instructions [here](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#merge-changes-back-upstream).
 
