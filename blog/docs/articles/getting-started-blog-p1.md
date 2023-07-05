@@ -20,7 +20,7 @@ While there are important philosophical differences between open source software
 practical guide.
 
 There is a lot of popular open source software which you have probably used before, regardless of if you knew it was open source. For example, chances are most of your browser is 
-open source! If you are on Firefox, then your browser ([minus the DRM code](https://www.theguardian.com/technology/2014/may/14/firefox-closed-source-drm-video-browser-cory-doctorow)){:target="_blank"}
+open source! If you are on Firefox, then your browser ([minus the DRM code](https://www.theguardian.com/technology/2014/may/14/firefox-closed-source-drm-video-browser-cory-doctorow){:target="_blank"})
 is open source. If you are on a Chromium-based browser like Google Chrome or Microsoft Edge then as the name implies your browser is based on the open source project Chromium, but
 there are proprietary components to your browser as well.
 
