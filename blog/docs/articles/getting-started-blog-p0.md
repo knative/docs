@@ -76,4 +76,4 @@ to refer back to these blog posts to remember how things work. Your patience and
 
 We hope that you've enjoyed this first post, and we look forward to seeing you in [the next one](/blog/articles/getting-started-blog-p1){:target="_blank"}!
 
-![](/blog/images/getting-started-blog-series/post0/plant-doodle.png)
+![](/blog/images/getting-started-blog-series/post1/thanks.png)
