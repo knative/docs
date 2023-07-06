@@ -121,7 +121,7 @@ You'll make a new branch on your fork of the repo, and write some code. When you
 approved by the reviewer, your work will be done and your code will be merged! (Merging means combing your changes with the main code for the codebase, so that everyone is able to 
 use them). This flow can be seen in the diagram below.
 
-![](/blog/images/open-source-general-work-flow.png)
+![](/blog/images/getting-started-blog-series/post1/open-source-workflow.png)
 
 Now, if you are not familiar with this process, it probably feels very confusing. So, to demistify it further, let's break down each part and discuss them in detail.
 
@@ -254,6 +254,9 @@ Congratulations! You just contributed code to the project and made an impact on 
 ## Conclusion
 As you've hopefully seen in this article, there are many great open source projects out there to contribute to. So, if you're interested, pick one and contribute! There are 
 loads of ways to contribute, and your contributions will be appreciated so long as the project is taking contributions. While contributing (especially contributing code) can be 
-a complex process, it is also a very rewarding experience. So, we hope to see you out there contributing to open source and Knative!
+a complex process, it is also a very rewarding experience. So, we hope to see you out there contributing to open source and Knative! 
+
+P.S. If you are interested in getting started contributing to open source, be sure to checkout out [this CNCF article](https://contribute.cncf.io/contributors/getting-started/){:target="_blank"},
+as it provides a great starting point.
 
 ![](/blog/images/getting-started-blog-series/post1/thanks.png)
