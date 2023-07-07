@@ -14,7 +14,7 @@ require (
 	google.golang.org/grpc v1.36.0
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/hack v0.0.0-20230615155948-d7586a218601
+	knative.dev/hack v0.0.0-20230707105034-cc92cdb68f01
 )
 
 require (
