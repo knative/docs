@@ -70,7 +70,7 @@ let's discuss some common ways to contribute.
 ### Opening Issues
 
 One great way to contribute is to open "issues" on GitHub/GitLab, or whatever other platform the community is using. For example, Knative uses GitHub to keep track of issues. An
-issue could be a bug, or a feature request. So, if there si a bug that is bothering you with some open source project you use, open an issue and report it! Similarly, if there
+issue could be a bug, or a feature request. So, if there is a bug that is bothering you with some open source project you use, open an issue and report it! Similarly, if there
 is a feature you would like, go ahead and open an issue asking for it. There is no guarantee that the maintainers of the project will fix the issue for you, but they will generally
 try to. This is a great way to contribute to a project as it allows the community to better understand what users like you are thinking about the project, and what problems you
 have with it.
@@ -100,8 +100,8 @@ in Knative, check out the [community calendar](https://calendar.google.com/calen
 
 ### Reviewing PRs
 
-A more technically-oriented contribution is reviewing [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests){:target="_blank"}
-(PRs for short). These are also called Merge Requests (MRs) on Gitlab. If you haven't heard of a PR before, it is essentially a way for someone to request that a set of changes
+A more technically-oriented contribution is reviewing [pull requests (PRs)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests){:target="_blank"}. 
+These are also called Merge Requests (MRs) on Gitlab. If you haven't heard of a PR before, it is essentially a way for someone to request that a set of changes
 be made to the code for a project. As such, it is essential that these are carefully reviewed to make sure that they are correct and work properly. While it is likely difficult
 to fully understand everything that is going on in the code if you haven't contributed much code to the project, you can still leave comments and questions about the code
 in an attempt to improve the overall quality of the changes. However, if you really don't understand the code, it is likely more useful for you to verify that the changes work
@@ -173,7 +173,11 @@ Some important terminology here is that the repository you forked is generally r
 as that is normally how your local git remotes will be set up. To easily clone a forked repository and set up the git remotes properly, you can use the `git clonefork` command
 which can be installed from [here](https://github.com/cali0707/git-utils){:target="_blank"}. Alternatively, you can use the [git clone](https://git-scm.com/docs/git-clone){:target="_blank"} and 
 [git remote](https://git-scm.com/docs/git-remote){:target="_blank"} commands yourself to configure your local copy of your fork. Note that you will want to add a remote to the upstream repository,
-and that this remote is commonly named "upstream".
+and that this remote is commonly named "upstream". This remote will be used to keep your fork in sync with any changes to the upstream project. To clone it manually yourself, 
+you can run `git clone <url_of_your_fork>`. Next, to add the upstream remote manually, you can
+`cd` into the newly cloned repository, and run `git remote add upstream <url_of_upstream_repo> && git remote set-url --push upstream no_push`. To get the url of your fork and 
+of the upstream remote, navigate to each repo and look for the button saying "Code" on GitHub, or "Clone" on GitLab. If you click on this button, you should see a URL which you can
+copy.
 
 Once you have a fork, have cloned it locally, and have set up your remotes properly you should checkout a new branch to make your changes on. If you are unsure what a branch is and 
 how to make one, we recommend reading [this article](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell){:target="_blank"}. We also recommend that you make your changes on a separate
@@ -209,7 +213,7 @@ commit message__, while "added try catch block to prevent crash" would be better
 
 ![](/blog/images/getting-started-blog-series/post1/ready-for-review.png)
 
-There are two scenarios where you would likely want to open a PR (or a Merge Request (MR) if your project uses GitLab). The first is that you feel your changes are complete and 
+There are two scenarios where you would likely want to open a PR/MR. The first is that you feel your changes are complete and 
 are ready to be merged into the project. The second is that you have made some progress but are not finished yet, and would like to get some early feedback or assistance on your changes.
 In both cases, you will want to go through the basic flow to create a PR or MR. If you are using GitHub and are unsure of how to do this, you can follow the instructions
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork){:target="_blank"}.
@@ -221,7 +225,8 @@ to make it clearer to reviewers what it contains.
 
 If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for Github are 
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft){:target="_blank"}, and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts){:target="_blank"}. You may also
-want to title your PR/MR as "[WIP]: \<descriptive title>". If you have any questions about your changes, this draft PR/MR is a great to command asn ask them as whoever answers
+want to title your PR/MR as "[WIP]: \<descriptive title>" (with _WIP_ for "work in progress"). If you have any questions about your changes, this draft PR/MR is a great place 
+to ask them as whoever answers
 you will have the context of everything you have done so far. Once you feel your changes are complete/ready, you can convert your PR/MR from its draft status to being ready.
 Instructions for GitHub can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review){:target="_blank"},
 and instructions for GitLab can be found [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-ready){:target="_blank"}.

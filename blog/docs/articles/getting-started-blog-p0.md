@@ -25,7 +25,7 @@ concepts of Knative work, we hope that you will also learn something from these 
 ## Why are we writing this blog series?
 
 In the month prior to writing this blog post, we started our internship at Red Hat and began working on Knative. As such, we have just spent the past month
-learning all about how Knative works and making our first contributions to the project. We get a lot of the pain points that new contributors face because 
+learning all about how Knative works and making our first contributions to the project. We understand many of the pain points that new contributors face because 
 we just faced them ourselves. Our hope is that by creating this blog series we can alleviate some of these pain points for the contibutors who come after 
 us.
 
@@ -61,8 +61,8 @@ in this series to provide a starting point to your research, although we encoura
 ### Ask the community
 
 But what if you get stuck or have a question, you've researched it yourself, and you still don't have an answer? Well, that's when the Knative community comes
-into the picture. The community is very supportive and happy to help, you if you have any questions: don't be shu, ask on slack! Depending on the topic, you
-may want to ask it in [knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S), [knative-functions](https://cloud-native.slack.com/archives/C04LKEZUXEE),
+into the picture. The community is very supportive and happy to help, you if you have any questions: don't be shy, ask on slack! Depending on the topic, you
+may want to ask it via Slack in [knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S), [knative-functions](https://cloud-native.slack.com/archives/C04LKEZUXEE),
 [knative-serving](https://cloud-native.slack.com/archives/C04LMU0AX60), or some other `knative-*` channel. If you are unsure, you can always default to asking
 in [knative-contributors](https://cloud-native.slack.com/archives/C04LN0620E8). There are also weekly or bi-weekly working group meetings, so if for example you
 have a question about a topic related to eventing you could also attend the eventing working group meeting and ask it there. We all want you to succeed, so don't
@@ -74,6 +74,6 @@ Finally, please stick with it! We know that it can be intimidating to get starte
 you stick with us through this blog series, we promise you that it will be easier. Also, once you get started working on your first issues/PRs, feel free
 to refer back to these blog posts to remember how things work. Your patience and persistence will pay off in the long run, so don't give up!
 
-We hope that you've enjoyed this first post, and we look forward to seeing you in [the next one](/blog/articles/getting-started-blog-p1){:target="_blank"}!
+We hope that you've enjoyed this first post, and we look forward to seeing you in [the next one](/blog/articles/getting-started-blog-p1)!
 
 ![](/blog/images/getting-started-blog-series/post1/thanks.png)
