@@ -257,6 +257,41 @@ spec:
 !!! note
     When using an external topic, the Knative Kafka Broker does not own the topic and is not responsible for managing the topic. This includes the topic lifecycle or its general validity. Other restrictions for general access to the topic may apply. See the documentation about using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
 
+## Configure Kafka features
+
+There are various kafka features/default values the Knative Kafka Broker uses when interacting with Kafka. You can configure these as follows:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: config-kafka-features
+    namespace: knative-eventing
+    data:
+        # Controls whether the dispatcher should use the rate limiter based on the number of virtual replicas.
+        # 1. Enabled: The rate limiter is applied.
+        # 2. Disabled: The rate limiter is not applied.
+        dispatcher.rate-limiter: "disabled"
+        # Controls whether the dispatcher should record additional metrics.
+        # 1. Enabled: The metrics are recorded.
+        # 2. Disabled: The metrics are not recorded.
+        dispatcher.ordered-executor-metrics: "disabled"
+        # Controls whether the controller should autoscale consumer resources with KEDA
+        # 1. Enabled: KEDA autoscaling of consumers will be setup.
+        # 2. Disabled: KEDA autoscaling of consumers will not be setup.
+        controller.autoscaler: "disabled"{% raw %}
+        # The Go text/template used to generate consumergroup ID for triggers.
+        # The template can reference the trigger Kubernetes metadata only.
+        triggers.consumergroup.template: "knative-trigger-{{ .Namespace }}-{{ .Name }}"
+        # The Go text/template used to generate topics for Brokers.
+        # The template can reference the broker Kubernetes metadata only.
+        brokers.topic.template: "knative-broker-{{ .Namespace }}-{{ .Name }}"
+        # The Go text/template used to generate topics for Channels.
+        # The template can reference the channel Kubernetes metadata only.
+        channels.topic.template: "knative-channel-{{ .Namespace }}-{{ .Name }}"
+        {% endraw %}
+```
+
 ## Consumer Offsets Commit Interval
 
 Kafka consumers keep track of the last successfully sent events by committing offsets.
