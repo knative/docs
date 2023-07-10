@@ -224,8 +224,9 @@ include a link to the issue the PR/MR is addressing, and to give a bried descrip
 to make it clearer to reviewers what it contains.
 
 If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for Github are 
-[here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft){:target="_blank"}, and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts){:target="_blank"}. You may also
-want to title your PR/MR as "[WIP]: \<descriptive title>" (with _WIP_ for "work in progress"). If you have any questions about your changes, this draft PR/MR is a great place 
+[here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft){:target="_blank"}, 
+and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts){:target="_blank"}. You may also
+want to title your PR/MR as "[WIP]: \<descriptive title>" (with WIP for "work in progress"). If you have any questions about your changes, this draft PR/MR is a great place 
 to ask them as whoever answers
 you will have the context of everything you have done so far. Once you feel your changes are complete/ready, you can convert your PR/MR from its draft status to being ready.
 Instructions for GitHub can be found [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#marking-a-pull-request-as-ready-for-review){:target="_blank"},
