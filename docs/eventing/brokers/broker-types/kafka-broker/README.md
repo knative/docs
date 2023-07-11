@@ -272,6 +272,7 @@ metadata:
         # 1. Enabled: The rate limiter is applied.
         # 2. Disabled: The rate limiter is not applied.
         dispatcher.rate-limiter: "disabled"
+        
         # Controls whether the dispatcher should record additional metrics.
         # 1. Enabled: The metrics are recorded.
         # 2. Disabled: The metrics are not recorded.
