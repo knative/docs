@@ -2,7 +2,7 @@
 
 **Authors: [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/) Software Engineering Intern @ [Red Hat](https://www.redhat.com/en), and [Leo Li](https://www.linkedin.com/in/haocheng-leo/) Software Engineering Intern @ [Red Hat](https://www.redhat.com/en)**
 
-**Date: 2023-07-06**
+**Date: 2023-07-11**
 
 ![](/blog/images/getting-started-blog-series/post0/person-chasing-logo.png)
 
