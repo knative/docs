@@ -286,6 +286,7 @@ metadata:
         # The Go text/template used to generate consumergroup ID for triggers.
         # The template can reference the trigger Kubernetes metadata only.
         triggers.consumergroup.template: "knative-trigger-{{ .Namespace }}-{{ .Name }}"
+        
         # The Go text/template used to generate topics for Brokers.
         # The template can reference the broker Kubernetes metadata only.
         brokers.topic.template: "knative-broker-{{ .Namespace }}-{{ .Name }}"
