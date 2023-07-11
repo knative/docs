@@ -277,6 +277,7 @@ metadata:
         # 1. Enabled: The metrics are recorded.
         # 2. Disabled: The metrics are not recorded.
         dispatcher.ordered-executor-metrics: "disabled"
+        
         # Controls whether the controller should autoscale consumer resources with KEDA
         # 1. Enabled: KEDA autoscaling of consumers will be setup.
         # 2. Disabled: KEDA autoscaling of consumers will not be setup.
