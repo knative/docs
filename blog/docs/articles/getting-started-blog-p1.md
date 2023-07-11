@@ -101,7 +101,7 @@ in Knative, check out the [community calendar](https://calendar.google.com/calen
 ### Reviewing PRs
 
 A more technically-oriented contribution is reviewing [pull requests (PRs)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests){:target="_blank"}. 
-These are also called Merge Requests (MRs) on Gitlab. If you haven't heard of a PR before, it is essentially a way for someone to request that a set of changes
+These are also called Merge Requests (MRs) on GitLab. If you haven't heard of a PR before, it is essentially a way for someone to request that a set of changes
 be made to the code for a project. As such, it is essential that these are carefully reviewed to make sure that they are correct and work properly. While it is likely difficult
 to fully understand everything that is going on in the code if you haven't contributed much code to the project, you can still leave comments and questions about the code
 in an attempt to improve the overall quality of the changes. However, if you really don't understand the code, it is likely more useful for you to verify that the changes work
