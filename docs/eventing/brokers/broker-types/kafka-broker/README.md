@@ -289,6 +289,7 @@ metadata:
         # The Go text/template used to generate topics for Brokers.
         # The template can reference the broker Kubernetes metadata only.
         brokers.topic.template: "knative-broker-{{ .Namespace }}-{{ .Name }}"
+        
         # The Go text/template used to generate topics for Channels.
         # The template can reference the channel Kubernetes metadata only.
         channels.topic.template: "knative-channel-{{ .Namespace }}-{{ .Name }}"
