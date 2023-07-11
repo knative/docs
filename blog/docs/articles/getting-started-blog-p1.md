@@ -223,7 +223,7 @@ When creating your PR/MR it is important to provide the context of why you are m
 include a link to the issue the PR/MR is addressing, and to give a bried description of the changes you made. Additionally, your PR/MR should have a brief and descriptive title
 to make it clearer to reviewers what it contains.
 
-If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for Github are 
+If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for GitHub are 
 [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft){:target="_blank"}, 
 and instructions for Gitlab are [here](https://docs.gitlab.com/ee/user/project/merge_requests/drafts.html#mark-merge-requests-as-drafts){:target="_blank"}. You may also
 want to title your PR/MR as "[WIP]: \<descriptive title>" (with WIP for "work in progress"). If you have any questions about your changes, this draft PR/MR is a great place 
