@@ -282,6 +282,7 @@ metadata:
         # 1. Enabled: KEDA autoscaling of consumers will be setup.
         # 2. Disabled: KEDA autoscaling of consumers will not be setup.
         controller.autoscaler: "disabled"{% raw %}
+        
         # The Go text/template used to generate consumergroup ID for triggers.
         # The template can reference the trigger Kubernetes metadata only.
         triggers.consumergroup.template: "knative-trigger-{{ .Namespace }}-{{ .Name }}"
