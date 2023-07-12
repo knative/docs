@@ -64,7 +64,7 @@ of the different ways you can contribute.
 There are many types of contributions which you can make to open source projects, and generally speaking, contributions are always welcome! Keep in mind that __different communities
 will have different guidelines__ on how to contribute and on what, if any, types of contributions they are accepting. Be sure to check with the community first before starting to 
 contribute to make sure that you are positively contributing, and not wasting your time and theirs. For a specific project, you can generally find contribution guidelines either in
-the `README.md` file or in the `CONTRIBUTING.md` file in the repository, although it may also be somewhere on the project's website. When in doube, ask the community! With that caveat,
+the `README.md` file or in the `CONTRIBUTING.md` file in the repository, although it may also be somewhere on the project's website. When in doubt, ask the community! With that caveat,
 let's discuss some common ways to contribute.
 
 ### Opening Issues
