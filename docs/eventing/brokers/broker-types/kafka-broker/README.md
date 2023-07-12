@@ -257,7 +257,7 @@ spec:
 !!! note
     When using an external topic, the Knative Kafka Broker does not own the topic and is not responsible for managing the topic. This includes the topic lifecycle or its general validity. Other restrictions for general access to the topic may apply. See the documentation about using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
 
-## Configure Kafka features
+## Configure Knative Eventing Kafka features
 
 There are various kafka features/default values the Knative Kafka Broker uses when interacting with Kafka. You can configure these as follows:
 
