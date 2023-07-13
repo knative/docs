@@ -1,6 +1,6 @@
 # Volume Support for Knative services
 
-By default Serving supports the mounting the [volume types](https://kubernetes.io/docs/concepts/storage/volumes):`emptyDir`, `secret`, `configMap` and `projected`. [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) are supported but require a [feature flag](../configuration/feature-flags.md) to be enabled.
+By default Serving supports the mounting the [volume types](https://kubernetes.io/docs/concepts/storage/volumes): `emptyDir`, `secret`, `configMap` and `projected`. [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) are supported but require a [feature flag](../configuration/feature-flags.md) to be enabled.
 
 !!! warning
     Mounting large volumes may add considerable overhead to the application's start up time.
