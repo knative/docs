@@ -32,6 +32,8 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
         metadata:
           annotations:
             autoscaling.knative.dev/metric: "concurrency"
+            autoscaling.knative.dev/target-utilization-percentage: "70"
+            #autoscaling.knative.dev/target-utilization-percentage sepcifies a percentage value which when reached autoscaling is performed 
     ```
 
 === "Requests per second"
@@ -47,6 +49,8 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
         metadata:
           annotations:
             autoscaling.knative.dev/metric: "rps"
+            autoscaling.knative.dev/target: "150"
+            #autoscaling.knative.dev/target annotation for rps specifies an integer request per second value
     ```
 
 === "CPU"
@@ -63,6 +67,8 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
           annotations:
             autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
             autoscaling.knative.dev/metric: "cpu"
+            autoscaling.knative.dev/target: "100"
+            #autoscaling.knative.dev/target annotation for cpu specifies the integer value in millicore
     ```
 
 === "Memory"
@@ -79,6 +85,8 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
           annotations:
             autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
             autoscaling.knative.dev/metric: "memory"
+            autoscaling.knative.dev/target: "75"
+            #autoscaling.knative.dev/target annotation for memory specifies the integer value in Mi
     ```
 
 === "Custom metric"
@@ -98,6 +106,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
           annotations:
             autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
             autoscaling.knative.dev/metric: "<metric-name>"
+            autoscaling.knative.dev/target: "<target>"
     ```
 
     Where `<metric-name>` is your custom metric.
