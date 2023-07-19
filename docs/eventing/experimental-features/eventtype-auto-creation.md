@@ -61,39 +61,42 @@ To check the feature is working, create a simple broker:
 
 ## Produce Events to the Broker
 
-Once events are send to the broker the feature kicks in.
+The auto-creation feature is triggered by processed events. Therefore to verify the functionality we need to send a sample event with desired type. This can be achieved in a severals ways, below are two examples using `kn-plugin-event` and `cURL`
+container in a cluster.
 
-### Using `kn event`
+=== "kn event"
 
-Below is an example that sends an event with the `kn` CLI, for improved developer productivity. The kn-event-plugin can be installed with Homebrew, for more details refer to plugin (instalation steps)[https://knative.dev/docs/client/kn-plugins/#install-a-plugin-by-using-homebrew].
+    Below is an example that sends an event with the `kn` CLI, for improved developer productivity. The `kn-plugin-event` plugin can be installed with Homebrew or downloaded directly from GitHub releases, for more details please refer to plugin [instalation steps](https://knative.dev/docs/client/kn-plugins/).
 
-```bash
-brew install knative-sandbox/kn-plugins/event
-```
+    1. Setup `kn event` plugin
+        ```bash
+        brew install knative-sandbox/kn-plugins/event
+        ```
 
-```bash
-kn event send \
-  --to Broker:eventing.knative.dev/v1:my-broker\
-  --type com.corp.integration.warning \
-  -f message="There might be a problem"
-```
+    1. Send event
+        ```bash
+        kn event send \
+          --to Broker:eventing.knative.dev/v1:my-broker\
+          --type com.corp.integration.warning \
+          -f message="There might be a problem"
+        ```
 
-### Using curl container
+=== "cURL container"
 
-An event can be also send via `curl`
+    An event can be send via `curl` in a cluster:
 
-```bash
-kubectl run curl  --image=docker.io/curlimages/curl --rm=true --restart=Never -ti \
-  -- -X POST -v \
-  -H "content-type: application/json" \
-  -H "ce-specversion: 1.0" \
-  -H "ce-source: my/curl/command" \
-  -H "ce-type: my.demo.event" \
-  -H "ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947" \
-  -d '{"name":"Knative Demo"}' \
-  http://broker-ingress.knative-eventing.svc.cluster.local/default/my-broker
-```
-This is more complex, as we have to _craft_ the event as part of the `curl` HTTP POST request... 
+    ```bash
+    kubectl run curl  --image=docker.io/curlimages/curl --rm=true --restart=Never -ti \
+      -- -X POST -v \
+      -H "content-type: application/json" \
+      -H "ce-specversion: 1.0" \
+      -H "ce-source: my/curl/command" \
+      -H "ce-type: my.demo.event" \
+      -H "ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947" \
+      -d '{"name":"Knative Demo"}' \
+      http://broker-ingress.knative-eventing.svc.cluster.local/default/my-broker
+    ```
+    This is more complex, as we have to _craft_ the event as part of the `curl` HTTP POST request.
 
 ## Event Discovery
 
