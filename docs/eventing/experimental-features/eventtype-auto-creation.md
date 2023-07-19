@@ -91,6 +91,6 @@ default     <...>    com.corp.integration.warning   kn-event/v1.9.0            m
 default     <...>    my.demo.event                  my/curl/command            my-broker                 True    
 ```
 
-# Conclusion and Recommendation
+## Conclusion and Recommendation
 
 With out this feature we would not see the two `EventType`s in the system, so we have improved the discoverablilty of events, for consumption. However while this **opt-in** feature is handy for automatic event creation, we **strongly** recommend to create the actual `EventType` manifests for all events that your application `deployments` produce, as part of your Gitops pipeline, rather than relying on this auto-create feature.
