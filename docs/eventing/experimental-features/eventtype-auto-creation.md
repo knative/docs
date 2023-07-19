@@ -100,7 +100,7 @@ container in a cluster.
 
 ## Event Discovery
 
-After the two produced events, we should be able to have discoverable events in the system, based on the `auto-eventtype-creation` feature:
+After the two produced events, we should be able to have discoverable events in the system, based on the `eventtype-auto-creation` feature:
 
 ```
 k get eventtypes.eventing.knative.dev -A 
@@ -111,4 +111,4 @@ default     <...>    my.demo.event                  my/curl/command            m
 
 ## Conclusion and Recommendation
 
-With out this feature we would not see the two `EventType`s in the system, so we have improved the discoverablilty of events, for consumption. However while this _opt-in_ feature is handy for automatic event creation, we **strongly** recommend to create the actual `EventType` manifests for all events that your application `deployments` produce, as part of your Gitops pipeline, rather than relying on this auto-create feature.
+With out this feature we would not see the two `EventType` instances in the system, so we have improved the discoverablilty of events, for consumption. However while this _opt-in_ feature is handy for automatic event creation, we **strongly** recommend to create the actual `EventType` manifests for all events that your application `deployments` produce, as part of your Gitops pipeline, rather than relying on this auto-create feature.
