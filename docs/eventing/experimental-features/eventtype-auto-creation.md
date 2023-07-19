@@ -32,17 +32,32 @@ With this experiemental feature enabled, we get `EventType`s on the broker ingre
 
 To check the feature is working, create a simple broker:
 
-```bash
-kn broker create my-broker
-```
 
-```yaml
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  namespace: default
-  name: my-broker
-```
+=== "kn CLI"
+  
+    ```bash
+    kn broker create my-broker
+    ```
+
+=== "Apply YAML"
+
+    1. Create a YAML file using the following example:
+
+        ```yaml
+        apiVersion: eventing.knative.dev/v1
+        kind: Broker
+        metadata:
+          namespace: default
+          name: my-broker
+        ```
+    
+    1. Apply the YAML file by running the command:
+
+          ```bash
+          kubectl apply -f <filename>.yaml
+          ```
+          Where `<filename>` is the name of the file you created in the previous step.
+
 
 ## Produce Events to the Broker
 
