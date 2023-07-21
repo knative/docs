@@ -9,6 +9,9 @@ A development environment is a place where you can modify and examine code witho
 environment, we are splitting the setup of the development environment into the local setup (i.e. things you set up on your own computer), and the external setup 
 (i.e. things you set up that aren't on your own computer).
 
+![](/blog/images/getting-started-blog-series/post2/doodle001.png)
+*G. Cresnar Premium, Gear Icon, https://www.flaticon.com/free-icon/settings_563541?term=gear&page=1&position=4&origin=search&related_id=563541*
+
 ## Local Setup
 
 The first place you are going to be working on your code is locally on your computer, so let's also begin with your local setup. If you feel like you already
@@ -162,11 +165,19 @@ You can easily interact and navigate Kubernetes resources such as logs for pods 
 
 If you are using VSCode, here is the way to set up your [kubernetes plugin](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools&ssr=false#overview):
 
+![](/blog/images/getting-started-blog-series/post2/vscode001.png)
+
 After you have installed the plugin, you will be able to see it here:
+
+![](/blog/images/getting-started-blog-series/post2/vscode002.png)
 
 If you are using Jetbrains IDEs, here is how to install the [kubernetes plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes):
 
+![](/blog/images/getting-started-blog-series/post2/jb001.png)
+
 After you have installed the plugin, you will be able to see it here:
+
+![](/blog/images/getting-started-blog-series/post2/jb002.png)
 
 ##### Language Support
 
@@ -175,9 +186,15 @@ GoLand for Go, Pycharm for Python, and so on. In order for VSCode to provide IDE
 Similarly in JetBrains, you can often install a plugin for a particular language even if the IDE doesn't suppor that language, although sometimes you will have to pay for the
 appropriate license. Since VSCode needs plugins to have IDE features for a language, we recommend that you install the following plugins:
 
+![](/blog/images/getting-started-blog-series/post2/vscode003.png)
+
+![](/blog/images/getting-started-blog-series/post2/vscode004.png)
+
 ##### Code Formatting
 
 Go code has a built in style guide and formatter, so naturally you can configure this with both VSCode and JetBrainds IDEs. For VSCode, you can follow the following steps:
+
+![](/blog/images/getting-started-blog-series/post2/vscode005.png)
 
 For JetBrains, you can find more details on how to set it up in [this article](https://www.jetbrains.com/help/idea/integration-with-go-tools.html#gofmt).
 
@@ -191,6 +208,8 @@ issues, and how to make a PR.
 As you are working on your code, you will probably want to discuss your changes with others and ask questions. Knative uses __Slack__ as the primary means of communication,
 along with __a mailing list__. There are also weekly and bi-weekly working group meetings which you can join on zoom where we have discussions. To find the community calendar
 (which includes the working group meeting times and links), as well as the link to the slack and the mailing list, you can [read this article](https://knative.dev/docs/community/#communication-channels).
+
+![](/blog/images/getting-started-blog-series/post2/doodle002.png)
 
 ### Claiming an Issue
 
@@ -243,3 +262,5 @@ or "/retest-required" to just retest all failed and required tests.
 
 One last command that you will find useful is "/cc @username", which requests a review from the user with username. You can put multiple users into this command and request
 more than one review in one go (e.g. "/cc @user1 @user2").
+
+![](/blog/images/getting-started-blog-series/post2/doodle003.png)
