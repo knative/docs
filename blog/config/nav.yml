@@ -45,6 +45,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/getting-started-blog-p2.md
           - articles/getting-started-blog-p1.md
           - articles/getting-started-blog-p0.md
           - articles/improved-ha-configuration.md
