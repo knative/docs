@@ -10,6 +10,6 @@ Knative is a platform-agnostic solution for running [serverless](https://en.wiki
 
 --8<-- "about-serving.md"
 
-## Knative Eventing
+## Knative Eventing - The Event-driven application platform for Kubernetes
 
 --8<-- "about-eventing.md"
