@@ -1,4 +1,4 @@
-# Knative Eventing
+# Knative Eventing - The Event-driven application platform for Kubernetes
 
 --8<-- "about-eventing.md"
 

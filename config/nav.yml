@@ -279,6 +279,7 @@ nav:
         - New Trigger Filters: eventing/experimental-features/new-trigger-filters.md
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
+        - EventType auto creation: eventing/experimental-features/eventtype-auto-creation.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
