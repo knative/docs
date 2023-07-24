@@ -60,8 +60,7 @@ Now that you have verified that you have all the prerequisites, let's get starte
 
 Knative runs in a Kubernetes Cluster, which means it runs as a set of Containers. You can think of a container as something which both contains your code and all the
 dependencies needed to run your code, as well as something which runs your code with those packaged dependencies. The two most common tools used to build and run containers
-are __Docker__ and __Podman__, so we will discuss setting both up here. However, do note that we think that __using Docker__ is easier due to its direct integration with a
-container registry. As such, we recommend that you use Docker.
+are __Docker__ and __Podman__, so we will discuss setting both up here. However, do note that we think that __using Docker__ is easier, and as such, we recommend that you use Docker.
 
 ##### Option 1: Setting up Docker
 
@@ -69,9 +68,13 @@ The first step to setting up Docker is to install it. The easiest way to do this
 the Docker Engine for Knative so you can also just [install the Docker Engine](https://docs.docker.com/engine/install/). Note: if you plan on just installing the Docker Engine,
 make sure that you complete the post-install steps.
 
-Once you have Docker installed on your system, you will need to log into a docker account in order to connect to a docker registry later (this is a common step when building
-Knative). If you need to create an account, you can [sign up for one here](https://hub.docker.com/signup). Once you have an account, all you need to do is type 
-`docker login`, and follow the instructions.
+Once you have Docker installed on your system, you will need to log in to a container registry. There are multiple different registries which you can use.
+Firstly, you can use a Docker account to sign into Docker hub. To create one, you can [sign up for one here](https://hub.docker.com/signup). Once you have an account, 
+all you need to do is type `docker login`, and follow the instructions. Another option is to use a registry on [Quay.io](https://quay.io/), or to 
+[create a local registry](https://www.allisonthackston.com/articles/local-docker-registry.html). If you use either of these approaches, or some other registry,
+all you need to do is login with `docker login -u <username> -p <password> <registry_url>`. You only need to include the `-u <username` and `-p <password` options
+if the registry needs you to sign in. For example, to login to a local registry, all you need to do is run `docker login localhost:8080`, assuming that the registry
+is running on `localhost:8080` and you have not enabled authentication on it.
 
 ##### Option 2: Setting up Podman
 
@@ -88,7 +91,7 @@ Similar to setting up Docker, once you have Podman installed onto your system aa
 However, you will need to provide which registry to log in to. So, you will need to run `docker login docker.io`. Once again, note that we recommend using Docker instead of
 Podman.
 
-#### Minikube Setup
+#### Minikube/KinD Setup
 
 Now that you have a container engine on your computer in either Docker or Podman, you are ready to create a local Kubernetes cluster to run Knative in! There are a lot
 of different local Kubernetes versions available, but we have found that minikube tends to work the best. To install minikube, follow the steps in their 
@@ -99,6 +102,10 @@ run `minikube start` to create a new cluster. Note: `minikube start` will resume
 if you are trying to get a new one. Minikube will select a preferred driver automatically according to your operating system and system configuration. If you want to specify
 which driver minikube should use, you can use the `--driver` argument when starting the cluster. For example, if you want to use the Docker driver, you can run 
 `minikube start --driver=docker`.
+
+Another good option to use to run Kubernetes locally is [KinD](https://kind.sigs.k8s.io/). If you want to install KinD, just follow the installation instructions on the home page
+of their website. To create a cluster in KinD, all you have to do is run `kind create cluster`. Similarly, to delete a cluster, you can run `kind delete cluster`. Note: KinD
+runs on top of Docker/Podman, so you will need to have one of those installed and running on your system for KinD to work.
 
 #### ko, kubectl
 
@@ -205,8 +212,9 @@ issues, and how to make a PR.
 ### Community
 
 As you are working on your code, you will probably want to discuss your changes with others and ask questions. Knative uses __Slack__ as the primary means of communication,
-along with __a mailing list__. There are also weekly and bi-weekly working group meetings which you can join on zoom where we have discussions. To find the community calendar
-(which includes the working group meeting times and links), as well as the link to the slack and the mailing list, you can [read this article](https://knative.dev/docs/community/#communication-channels).
+along with __a mailing list__. You can find links to these communication channels [here](https://knative.dev/docs/community/#communication-channels). There are also weekly 
+and bi-weekly working group meetings which you can join on zoom where we have discussions. To find the community calendar(which includes the working group meeting times and
+links), as well as the link to the slack and the mailing list, you can [read this article](https://knative.dev/docs/community/#meetings).
 
 ![](/blog/images/getting-started-blog-series/post2/doodle002.png)
 
@@ -261,5 +269,7 @@ or "/retest-required" to just retest all failed and required tests.
 
 One last command that you will find useful is "/cc @username", which requests a review from the user with username. You can put multiple users into this command and request
 more than one review in one go (e.g. "/cc @user1 @user2").
+
+To find out about all the commands that Knative's instance of Prow supports, as well as their usage, you can read the [Prow commands page](https://prow.knative.dev/command-help).
 
 ![](/blog/images/getting-started-blog-series/post2/doodle003.png)
