@@ -25,13 +25,12 @@ before continuing with your local setup, please ensure that you __have all of th
 
 #### Bash
 
-Your computer will need to have bash installed in order to run all of the installation/setup scripts the other local components will need. Chances are that your
-computer will have bash (linux and mac should, however you may want to upgrade your bash version on mac). If you are on windows, you will need to [install bash](https://itsfoss.com/install-bash-on-windows/).
+Your computer will need to have Bash installed in order to run all of the installation/setup scripts the other local components will need. Chances are that your computer will have Bash (Linux and Mac should, however you may want to upgrade your Bash version on Mac). If you are on Windows, you will need to [install Bash](https://itsfoss.com/install-bash-on-windows/).
 
 #### Git
 
-In order to clone repositories or download various tools, you will need to have git on your computer. If you want to check if git is installed, run `git --version`
-in a terminal window. To install git, follow the [instructions here](https://www.google.com/url?q=https://git-scm.com/book/en/v2/Getting-Started-Installing-Git&sa=D&source=docs&ust=1689957464044285&usg=AOvVaw0TD7GtU1n0kZG9GT1OKb_P).
+In order to clone repositories or download various tools, you will need to have Git on your computer. If you want to check if Git is installed, run `git --version`
+in a terminal window. To install Git, follow the [instructions here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 SSH keys are utilized to authenticate your identity with third-party code repository service providers, such as GitHub or GitLab, without the need for you to enter
 your credentials every time you execute a pull, push, or clone command. This key-based authentication method enhances both security and convenience. If you haven't
@@ -39,7 +38,7 @@ set up your SSH key for GitHub or GitLab yet, we __highly recommend__ that you d
 [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account), and to set up your
 SSH key with GitLab, follow [these instructions](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account).
 
-#### GoLand
+#### Golang (Go)
 
 Most parts of Knative are developed in the Go programming language, so you will need to have this language installed to be able to develop Knative. There are some
 parts of Knative written in other languages, but we will be discussing those in __Post 7__ of this blog series (coming soon!). To install the go programming language,
@@ -47,8 +46,8 @@ follow the instructions [in this article](https://go.dev/doc/install).
 
 #### An Editor 
 
-In order to edit the code, you will need to have an editor installed. The most popular and free editor used these days is [VSCode](https://code.visualstudio.com/), 
-although the paid Jetbrains editors such as [GoLand](https://www.jetbrains.com/go/), and [IntelliJ IDEA](https://www.jetbrains.com/idea/) are also very powerful.
+In order to edit the code, you will need to have an editor installed. One of the most popular and free editor used these days is [VSCode](https://code.visualstudio.com/), 
+although the paid JetBrains editors such as [GoLand](https://www.jetbrains.com/go/), and [IntelliJ IDEA](https://www.jetbrains.com/idea/) are also very powerful.
 Some also prefer to go old school and use [Vim](https://www.vim.org/), [Emacs](https://www.gnu.org/software/emacs/), or the newer fork of Vim, [Neovim](https://neovim.io/)
 (which actually has all the language support that VSCode has if you are willing to configure it yourself). While your choise of editor doesn't impact the quality of code
 which you will produce, it is crucial that you choose one and become comfortable working in it as much of your productivity will come from your ability to use your editor.
@@ -92,19 +91,19 @@ Podman.
 #### Minikube Setup
 
 Now that you have a container engine on your computer in either Docker or Podman, you are ready to create a local Kubernetes cluster to run Knative in! There are a lot
-of different local Kubernetes versions available, but we have found that Minikube tends to work the best. To install minikube, follow the steps in their 
+of different local Kubernetes versions available, but we have found that minikube tends to work the best. To install minikube, follow the steps in their 
 [getting started guide](https://minikube.sigs.k8s.io/docs/start/) up until you get to the "Deploy applications" section.
 
 When debugging or reproducing bugs, you will often want to make a new minikube cluster. To do this, you can delete your current cluster with `minikube delete`, and then
 run `minikube start` to create a new cluster. Note: `minikube start` will resume/update an existing cluster should one exist, so __be sure to delete your cluster first__
 if you are trying to get a new one. Minikube will select a preferred driver automatically according to your operating system and system configuration. If you want to specify
-which driver minikube should use, you can use the `--driver` argument when starting the cluster. For example, if you want to use the docker driver, you can run 
+which driver minikube should use, you can use the `--driver` argument when starting the cluster. For example, if you want to use the Docker driver, you can run 
 `minikube start --driver=docker`.
 
 #### ko, kubectl
 
-Once you have a kubernetes cluster up by running minikube, you will probably want to interact with it! The way you interact with your cluster is through the Command Line
-Interface ((CLI)[https://minikube.sigs.k8s.io/docs/start/]) tool kubectl. You can install kubectl [here](https://kubernetes.io/docs/tasks/tools/), or you can add an alias
+Once you have a Kubernetes cluster up by running minikube, you will probably want to interact with it! The way you interact with your cluster is through the Command Line
+Interface ([CLI](https://minikube.sigs.k8s.io/docs/start/)) tool kubectl. You can install kubectl [here](https://kubernetes.io/docs/tasks/tools/), or you can add an alias
 to the installation of kubectl which comes with minkube by adding `alias kubectl="minikube kubectl --"` to the appropriate config file for your shell. 
 
 You can use kubectl to get all resources of a certain type by running `kubectl get <resource_type> -A`. For example, if you wanted to get all pods in your cluster you
@@ -124,7 +123,7 @@ it can be used recursively in __exactly the same way__ as kubectl with the `-R` 
 #### Installing Knative
 
 Knative runs as a set of Custom Resources, Controllers, and Pods in your cluster. That is to say, it is Kubernetes native. As such, all you need to run Knative locally is
-a local Kubernetes cluster (minikube), and a way to build the source code into containers and apply the kubernetes resources using those images (ko). After running
+a local Kubernetes cluster (e.g. minikube or KinD), and a way to build the source code into containers and apply the kubernetes resources using those images (ko). After running
 `minikube start` to ensure that you have a cluster running, you can install Knative into your cluster by following the steps laid out in [the documentation](https://knative.dev/docs/install/),
 by using ko to apply the `config` directory of one of the repos, or you can use the fabulous set of scripts in the git repo [kn-box](https://github.com/matzew/kn-box). 
 Regardless of the approach you choose, all you need to do is apply some yaml files or run some bash scripts and you will have Knative running locally!
@@ -161,9 +160,9 @@ you think might interest other commmunity members, share it with us [on Slack](h
 ##### Kubernetes
 
 The Kubernetes Plugin is a comprehensive tool for developers, providing a complete solution for building and troubleshooting applications in a Kubernetes environment.
-You can easily interact and navigate Kubernetes resources such as logs for pods with an intuitive explorer tree of Kubernetes resources.
+You can easily interact and navigate Kubernetes resources such as logs for Pods with an intuitive explorer tree of Kubernetes resources.
 
-If you are using VSCode, here is the way to set up your [kubernetes plugin](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools&ssr=false#overview):
+If you are using VSCode, here is the way to set up your [Kubernetes plugin](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools&ssr=false#overview):
 
 ![](/blog/images/getting-started-blog-series/post2/vscode001.png)
 
@@ -171,7 +170,7 @@ After you have installed the plugin, you will be able to see it here:
 
 ![](/blog/images/getting-started-blog-series/post2/vscode002.png)
 
-If you are using Jetbrains IDEs, here is how to install the [kubernetes plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes):
+If you are using Jetbrains IDEs, here is how to install the [Kubernetes plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes):
 
 ![](/blog/images/getting-started-blog-series/post2/jb001.png)
 
