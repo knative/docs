@@ -40,11 +40,11 @@ spec:
     name: testchannel
 ```
 
-The status was also changed, since we do just require the reference to be existing, instead of being also ready itself
+The status was also changed, since we do just require the reference to be existing, instead of being also ready itself.
 
 #### Duck Sources 
 
-The above enhencement did allow an additional change for the build-in sources, or any source that is compliant to the Sources Duck type. For instance until previous releases `EventType` objects where only created automatically when the source was pointing to a broker, because of the above restriction. Now those are created for any referenced sink, on the source, like:
+The above enhancement did allow an additional change for the build-in sources, or any source that is compliant to the Sources Duck type. For instance until previous releases `EventType` objects where only created automatically when the source was pointing to a broker, because of the above restriction. Now those are created for any referenced sink, on the source, like:
 
 ```yaml
 apiVersion: sources.knative.dev/v1
