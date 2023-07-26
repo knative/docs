@@ -67,7 +67,7 @@ Details can be found in the matching [feature track document](https://docs.googl
 
 ### Support for more than just Brokers
 
-The EventType API will deprecate the “broker” field and replace it with a “reference”, which can be any Knative Resource, such a Channel, a Sink, or even a Database.
+The EventType API will deprecate the `.spec.broker` field and replace it with a `.spec.reference`, which can be any Knative Resource, such a Channel, a Sink, or even a Database.
 
 The good news is: This breaks the limitation to only use the event type metadata with the Broker API only. Even when there is no filter on Channel/Subscription APIs, it is still important to know what event types are emitted to components like channels or sinks!
 
