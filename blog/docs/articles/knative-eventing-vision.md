@@ -73,7 +73,7 @@ The good news is: This breaks the limitation to use the event type metadata with
 
 ### CRD for Event Type Definitions
 
-In addition to the above limitation, the fact that for EventType we need established connection between workloads (e.g. PingSource -> Broker) means It is not possible to tell what event type definitions are generally available in Knative Eventing, based on the installed sources/event emitters, independent of running workloads.
+The above limitations show that event types are only discoverable when there are running workloads, such as a PingSource sending events to a broker. Without this connection it is not possible to tell what categories of event types are generally available in Knative Eventing installation.
 
 To address this problem, Knative Eventing will have a new EventTypeDefinition metadata CRD that captures this information independently of running applications.
 
