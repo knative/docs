@@ -48,7 +48,7 @@ Event discovery helps developers to understand which events they can consume and
 
 Knative defines an EventType API which allows for discovery of the types of events that are available in the Knative Eventing system. This helps developers understand what kinds of events can be listened to and processed, which can be particularly helpful in systems with a large number of events being produced.
 
-However currently the EventType is unfortunately underused and is limited to Source-Duck compliant sources, in combination with the Knative Broker API. 
+However currently the EventType is unfortunately underused and is limited to sources which implement the [Knative Source Ducktype](https://github.com/knative/pkg/blob/aef227e72ead466e1ff7a5dddca2c171b0d5f128/apis/duck/v1/source_types.go#L40), in combination with the Knative Broker API.
 
 In order to improve the developer experience of Knative Eventing we are enhancing the event discovery in a couple of ways!
 
