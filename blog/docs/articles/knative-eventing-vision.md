@@ -6,7 +6,7 @@
 
 ## What is next in Knative Eventing?
 
-Knative Eventing has come a long way and has established itself as the goto platform on Kubernetes for event-driven applications. However we are not done with the project and we continue to evolve it. We are improving existing APIs and adding new features to Knative Eventing it as well. Below is a high level overview of what we are currently doing for the next couple of months.
+Knative Eventing has come a long way and has established itself as the goto platform on Kubernetes for event-driven applications. However we are not done with the project and we continue to evolve it. We are improving existing APIs and adding new features to Knative Eventing as well. Below is a high level overview of what we are currently doing for the next couple of months.
 
 Please keep in mind that we need your feedback as well! If there are missing features or needed improvements, please speak up and tell.
 
