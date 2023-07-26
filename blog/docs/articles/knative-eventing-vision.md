@@ -77,7 +77,7 @@ In addition to the above limitation, the fact that for EventType we need establi
 
 To address this problem, Knative Eventing will have a new EventTypeDefinition metadata CRD that captures this information independently of running applications.
 
-Details can be found in the matching [feature track document]( https://docs.google.com/document/d/1vwEWtAm28g_QY9j0b63h8sRpGhvyB1K5ViNr8X3vIiM/edit).
+Details can be found in the matching [feature track document](https://docs.google.com/document/d/1vwEWtAm28g_QY9j0b63h8sRpGhvyB1K5ViNr8X3vIiM/edit).
 
 ## Conclusion
 
