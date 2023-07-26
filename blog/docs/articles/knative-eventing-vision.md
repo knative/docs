@@ -44,7 +44,7 @@ Authorization and admission policies will be the feature that will bridge the se
 
 ## Improved Event discovery
 
-Event discovery helps developers to understand which events they can consume and how they look like, without having to dig through various levels of service documentation.
+Event discovery helps developers to understand which events they can consume and how the events look like, without having to dig through various levels of service documentation.
 
 Knative defines an EventType API which allows for discovery of the types of events that are available in the Knative Eventing system. This helps developers understand what kinds of events can be listened to and processed, which can be particularly helpful in systems with a large number of events being produced.
 
