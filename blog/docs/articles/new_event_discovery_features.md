@@ -70,7 +70,7 @@ default     93774a924a741245a94313745d78e69f   dev.knative.sources.ping   /apis/
 ```
 #### Auto Event Type creation
 
-Furthermore to improve the experience with `EventTypes` consumption and creation, there's a new experimental feature to automatically create `EventTypes` objects based on processed events on the broker ingress. Instead of manually creating them as yaml manifests along the application code that talks to the Broker API. This behaviour can be enabled by feature flag `eventtype-auto-creation` in `config-features` ConfigMap. For futher details and examples pleaase refer to [the documentation](https://knative.dev/docs/eventing/experimental-features/eventtype-auto-create/).
+Furthermore to improve the experience with `EventTypes` consumption and creation, there's a new experimental feature to automatically create `EventTypes` objects based on processed events on the broker ingress. Instead of manually creating them as yaml manifests along the application code that talks to the Broker API. This behaviour can be enabled by feature flag `eventtype-auto-creation` in `config-features` ConfigMap. For futher details and examples please refer to [the documentation](https://knative.dev/docs/eventing/experimental-features/eventtype-auto-create/).
 
 
 
