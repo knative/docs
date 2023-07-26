@@ -60,7 +60,7 @@ In order to improve the developer experience of Knative Eventing we are enhancin
 
 Today the EventType API is limited to Source-Duck compliant sources, and only usable in combination with the Knative Broker API. 
 
-However when using the broker with 3rd party integration, such as regular deployments or even CLI tools like “kn event send” it does not work! We do not see any EvenType information for these common usage patterns.
+However when using the Broker with a 3rd party integration, such as regular deployments or even CLI tools like `kn event send` the EventType is not created automatically! We do not see any EvenType information for these common usage patterns.
 To address this problem we introduce an optional feature flag which can be ENABLED in order to have support for an automatic creation of EventTypes.
 
 Details can be found in the matching [feature track document](https://docs.google.com/document/d/1H8-mkMs5HWd3U7TT6KAWgU9ltDxqZv25Wls-6c4lneA/edit).
