@@ -11,7 +11,7 @@
 
 ## Overview
 
-With the `eventtype-auto-creation` feature, we have possibliy to _auto create_ EventTypes that are received and ingressed by the Knative Broker implementations.
+With the `eventtype-auto-creation` feature, we have possibliy to _auto create_ EventTypes that are received and ingressed by the Knative Broker and Channel implementations.
 
 For making use of this _opt-in_ feature, we must turn it on in the `config-features`, by setting the `eventtype-auto-creation` flag to `enabled`:
 
@@ -26,9 +26,11 @@ data:
 ...
 ```
 
-With this experiemental feature enabled, we get `EventType`s on the broker ingress for free. Instead of manually creating them as yaml manifests along the application code that talks to the `Broker` API. 
+With this experiemental feature enabled, we get `EventType`s on the broker/channel ingress for free, instead of manually creating them as yaml manifests along the application code that talks to the `Broker` or `Channel` API. 
 
 ## Example
+
+### Create a Broker
 
 To check the feature is working, create a simple broker:
 
@@ -59,7 +61,7 @@ To check the feature is working, create a simple broker:
           Where `<filename>` is the name of the file you created in the previous step.
 
 
-## Produce Events to the Broker
+### Produce Events to the Broker
 
 The auto-creation feature is triggered by processed events. Therefore to verify the functionality we need to send a sample event with desired type. This can be achieved in a severals ways, below are two examples using `kn-plugin-event` and `cURL`
 container in a cluster.
@@ -98,7 +100,7 @@ container in a cluster.
     ```
     This is more complex, as we have to _craft_ the event as part of the `curl` HTTP POST request.
 
-## Event Discovery
+### Event Discovery
 
 After the two produced events, we should be able to have discoverable events in the system, based on the `eventtype-auto-creation` feature:
 
