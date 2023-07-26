@@ -24,7 +24,7 @@ Knative Brokers and Channels will provide HTTPS endpoints to receive events. Giv
 
 Event producers will be able to determine the CA root used to sign the Broker or Channel certificate from the Knative resource’s metadata.
 
-For more information, please refer to the [feature track document](https://docs.google.com/document/d/1H-x_oji8LqkCyd7tlsSyclmUe7FAmEJPgRxOU_0pkn8/edit?resourcekey%253D0-lzDIPJsZOP3G17QE_g1lHw#heading%253Dh.8eg1on3fge8w).
+For more information, please refer to the [feature track document](https://docs.google.com/document/d/1H-x_oji8LqkCyd7tlsSyclmUe7FAmEJPgRxOU_0pkn8/edit).
 
 ### Sender identity
 
