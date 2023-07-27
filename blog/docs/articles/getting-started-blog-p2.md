@@ -47,7 +47,7 @@ follow the instructions [in this article](https://go.dev/doc/install){:target="_
 #### An Editor 
 
 In order to edit the code, you will need to have an editor installed. One of the most popular and free editor used these days is [VSCode](https://code.visualstudio.com/){:target="_blank"}, 
-although the paid JetBrains editors such as [GoLand](https://www.jetbrains.com/go/){:target="_blank"}, and [IntelliJ IDEA](https://www.jetbrains.com/idea/){:target="_blank"} are also very powerful.
+although the paid JetBrains editors such as [GoLand](https://www.jetbrains.com/go/){:target="_blank"}, and [IntelliJ IDEA](https://www.jetbrains.com/idea/){:target="_blank"} are also very powerful. It's worth noting that there is a community edition of IntelliJ IDEA which is free and quite powerful.
 Some also prefer to go old school and use [Vim](https://www.vim.org/){:target="_blank"}, [Emacs](https://www.gnu.org/software/emacs/){:target="_blank"}, or the newer fork of Vim, [Neovim](https://neovim.io/){:target="_blank"}
 (which actually has all the language support that VSCode has if you are willing to configure it yourself). While your choise of editor doesn't impact the quality of code
 which you will produce, it is crucial that you choose one and become comfortable working in it as much of your productivity will come from your ability to use your editor.
