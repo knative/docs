@@ -34,7 +34,9 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/metric: "concurrency"
             autoscaling.knative.dev/target-utilization-percentage: "70" 
     ```
-autoscaling.knative.dev/target-utilization-percentage annotation for "Concurrency" specifies a percentage value
+!!! note <br/>
+             The autoscaling.knative.dev/target-utilization-percentage annotation for "Concurrency" 
+              <br/> specifies a percentage value
 
 === "Requests per second"
 
@@ -51,7 +53,9 @@ autoscaling.knative.dev/target-utilization-percentage annotation for "Concurrenc
             autoscaling.knative.dev/metric: "rps"
             autoscaling.knative.dev/target: "150"
     ```
-autoscaling.knative.dev/target annotation for "Requests per second" specifies an integer value
+!!! note <br/>
+         The autoscaling.knative.dev/target annotation for "Requests per second" 
+          <br/> specifies an integer value
 
 === "CPU"
 
@@ -69,7 +73,9 @@ autoscaling.knative.dev/target annotation for "Requests per second" specifies an
             autoscaling.knative.dev/metric: "cpu"
             autoscaling.knative.dev/target: "100"
     ```
-autoscaling.knative.dev/target annotation for "CPU" specifies the integer value in millicore
+!!! note <br/>
+         The autoscaling.knative.dev/target annotation for "CPU" specifies <br/>
+         the integer value in millicore
 
 === "Memory"
 
@@ -83,11 +89,13 @@ autoscaling.knative.dev/target annotation for "CPU" specifies the integer value 
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
+            autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev" 
             autoscaling.knative.dev/metric: "memory"
             autoscaling.knative.dev/target: "75"
     ```
-autoscaling.knative.dev/target annotation for "Memory" specifies the integer value in Mi
+!!! note <br/>
+         The autoscaling.knative.dev/target annotation for "Memory" <br/>
+         specifies the integer value in Mi
 
 === "Custom metric"
 
