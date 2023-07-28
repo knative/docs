@@ -35,7 +35,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/target-utilization-percentage: "70" 
     ```
     !!! note <br/>
-             The autoscaling.knative.dev/target-utilization-percentage annotation for "Concurrency" 
+             The `autoscaling.knative.dev/target-utilization-percentage` annotation for "Concurrency" 
               <br/> specifies a percentage value
 
 === "Requests per second"
@@ -54,7 +54,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/target: "150"
     ```
     !!! note <br/>
-         The autoscaling.knative.dev/target annotation for "Requests per second" 
+         The `autoscaling.knative.dev/target` annotation for "Requests per second" 
           <br/> specifies an integer value
 
 === "CPU"
@@ -74,7 +74,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/target: "100"
     ```
     !!! note <br/>
-         The autoscaling.knative.dev/target annotation for "CPU" specifies <br/>
+         The `autoscaling.knative.dev/target` annotation for "CPU" specifies <br/>
          the integer value in millicore
 
 === "Memory"
@@ -94,7 +94,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/target: "75"
     ```
     !!! note <br/>
-         The autoscaling.knative.dev/target annotation for "Memory" <br/>
+         The `autoscaling.knative.dev/target` annotation for "Memory" <br/>
          specifies the integer value in Mi
 
 === "Custom metric"
