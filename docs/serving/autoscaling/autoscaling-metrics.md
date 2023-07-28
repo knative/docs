@@ -89,7 +89,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev" 
+            autoscaling.knative.dev/class: "hpa.autoscaling.knative.dev"
             autoscaling.knative.dev/metric: "memory"
             autoscaling.knative.dev/target: "75"
     ```
