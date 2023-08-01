@@ -36,7 +36,7 @@ eventing:
     # Api group of the mapped resource
     group: messaging.knative.dev
     # Api version of the mapped resource
-    version: v1alpha1
+    version: v1beta1
     # Kind of the resource
     kind: KafkaChannel
 ```
