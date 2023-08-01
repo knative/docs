@@ -12,7 +12,7 @@ Event discovery is an important part of event-driven applications, since it allo
 
 With the latest 1.11 release of Knative Eventing there were a few improvements related to improved Event discovery:
 
-* `EventType`` API bumped to `v1beta2`
+* `EventType` API bumped to `v1beta2`
 * Making use of `reference`s to point to any Resource like Channels or Sinks, not just brokers
 * Enhance build-in Sources to create eventypes for any binding, not just brokers.
 * Automatic EvenType creation for Brokers
