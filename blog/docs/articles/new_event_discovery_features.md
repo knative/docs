@@ -70,10 +70,12 @@ default     93774a924a741245a94313745d78e69f   dev.knative.sources.ping   /apis/
 ```
 #### Auto Event Type creation
 
-Furthermore to improve the experience with `EventTypes` consumption and creation, there's a new experimental feature to automatically create `EventTypes` objects based on processed events on the broker ingress. Instead of manually creating them as yaml manifests along the application code that talks to the Broker API. This behaviour can be enabled by feature flag `eventtype-auto-creation` in `config-features` ConfigMap. For futher details and examples please refer to [the documentation](https://knative.dev/docs/eventing/experimental-features/eventtype-auto-create/).
+Furthermore to improve the experience with consumption and creation of `EventTypes`, there's a new experimental feature to automatically create `EventTypes` objects based on processed events on the broker ingress and in-memory channels. Instead of manually creating them as yaml manifests along the application code that talks to the Broker or Channel API. This behaviour can be enabled by feature flag `eventtype-auto-creation` in `config-features` ConfigMap. For futher details and examples please refer to [the documentation](https://knative.dev/docs/eventing/experimental-features/eventtype-auto-create/).
 
 
 
 ### Conclusion
 
-tbd.
+This blog post introduced new features and improvements to `EventType` discoroverability. The main motivation is to harden the position of developer's insight into the event-driven applications to ease up the discovery and speed up development. 
+
+We look forward from the community to further enhance `EventType` API and discoverability. Please reach out on the CNCF Slack's #knative-eventing or GitHub issues.
