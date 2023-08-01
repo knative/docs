@@ -78,4 +78,4 @@ Furthermore to improve the experience with consumption and creation of `EventTyp
 
 This blog post introduced new features and improvements to `EventType` discoroverability. The main motivation is to harden the position of developer's insight into the event-driven applications to ease up the discovery and speed up development. 
 
-We look forward from the community to further enhance `EventType` API and discoverability. Please reach out on the CNCF Slack's #knative-eventing or GitHub issues.
+We look forward from the community to further enhance `EventType` API and discoverability. Please reach out on the CNCF Slack's [#knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S) or GitHub [issues](https://github.com/knative/eventing/issues).
