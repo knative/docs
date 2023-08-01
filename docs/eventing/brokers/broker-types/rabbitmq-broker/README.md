@@ -65,32 +65,6 @@ This topic describes how to create a RabbitMQ Broker.
     ```
    Where `<filename>` is the name of the file you created in the previous step.
 
-## Create a RabbitMQBroker object
-
-1. Create a YAML file using the following template:
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      annotations:
-        eventing.knative.dev/broker.class: RabbitMQBroker
-      name: <broker-name>
-    spec:
-      config:
-        apiVersion: eventing.knative.dev/v1alpha1
-        kind: RabbitmqBrokerConfig
-        name: <rabbitmq-broker-config-name>
-    ```
-    Where `<rabbitmq-broker-config-name>` is the name you gave your RabbitMQBrokerConfig in the step above.
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
-
 ## Configure message ordering
 
 By default, Triggers will consume messages one at a time to preserve ordering. If ordering of events isn't important and higher performance is desired, you can configure this by using the
