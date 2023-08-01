@@ -102,7 +102,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 - Add Rust templates linting into CI workflow (#1814, @andrejusc)
 - Add `func environment` to print the current function execution environment as JSON. (#1761, @lance)
-- Add func --domain to choose routes (#1690, @lkingland)
+- Add `func --domain`to choose routes (#1690, @lkingland)
 - Feat: pipeline as code integration for gitlab (#1769, @matejvasek)
 - Fixes a bug where local jobs were sometimes not canceling immediately
   - Startup timeout for local run tasks now configurable (#1750, @lkingland)
