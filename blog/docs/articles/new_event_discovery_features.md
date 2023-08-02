@@ -15,7 +15,7 @@ With the latest 1.11 release of Knative Eventing there were a few improvements r
 * `EventType` API bumped to `v1beta2`
 * Making use of `reference`s to point to any Resource like Channels or Sinks, not just brokers
 * Enhance build-in Sources to create eventypes for any binding, not just brokers.
-* Automatic EvenType creation for Brokers
+* Automatic EvenType creation for Brokers and Channels
 
 #### EventType API changes and version bump
 
