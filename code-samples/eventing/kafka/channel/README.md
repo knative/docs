@@ -247,4 +247,4 @@ KafkaChannel provides various configuration options, such as:
 - The brokers string for your Kafka connection
 
 For detailed information on configuration options, see the
-[KafkaChannel README](https://github.com/knative-sandbox/eventing-kafka-broker/blob/main/docs/channel/README.md).
+[KafkaChannel README](https://github.com/knative-extensions/eventing-kafka-broker/blob/main/docs/channel/README.md).

@@ -100,7 +100,7 @@ code). ([#11999](https://github.com/knative/serving/pull/11999))
 
 #### Apache Kafka Broker v0.26
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.26.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/v0.26.0 -->
 
 ##### 🚨 Breaking or Notable Changes
 
@@ -108,40 +108,40 @@ code). ([#11999](https://github.com/knative/serving/pull/11999))
 
 ##### 🐞 Bug Fixes
 
-- The fields Broker.spec.delivery.deadLetterSink.ref.namespace and Trigger.spec.delivery.deadLetterSink.ref.namespace are optional. By default the controller uses the object namespace. ([#1254](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1254))
+- The fields Broker.spec.delivery.deadLetterSink.ref.namespace and Trigger.spec.delivery.deadLetterSink.ref.namespace are optional. By default the controller uses the object namespace. ([#1254](https://github.com/knative-extensions/eventing-kafka-broker/pull/1254))
 
 #### Apache Kafka Source and Channels v0.26
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka/releases/tag/v0.26.1 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka/releases/tag/v0.26.1 -->
 
 ##### 💫 New Features & Changes
 
-- KafkaChannel CRD Spec now includes a RetentionDuration field, allowing per-channel control over retention. A Post-Install Job (config/post-install/retentionupdate) is available to migrate existing KafkaChannels forward by populating this field. The "topic" configuration defaults which were not working have been removed from the config-kafka ConfigMap. ([#828](https://github.com/knative-sandbox/eventing-kafka/pull/828))
-- KafkaChannel ConfigMap now supports custom Labels and Annotations for dynamically generated resources. ([#806](https://github.com/knative-sandbox/eventing-kafka/pull/806))
-- Provide an option for the user to specify the initial offset for a consumer group in Kafka source, this field is honored only if there are no prior offsets committed for the consumer group. ([#779](https://github.com/knative-sandbox/eventing-kafka/pull/779))
-- KafkaSource now supports ceOverrides. ([#811](https://github.com/knative-sandbox/eventing-kafka/pull/811))
-- The Multi-tenant `KafkaSource` calculates an optimal maximum allowed replica number based on Kafka source partitions count so that scheduler does not schedule more vreplicas than the calculated number ([#822](https://github.com/knative-sandbox/eventing-kafka/pull/822))
-- Autoscaling annotations can now be automatically added to KafkaSource objects. See the documentation for more details. ([#855](https://github.com/knative-sandbox/eventing-kafka/pull/855))
+- KafkaChannel CRD Spec now includes a RetentionDuration field, allowing per-channel control over retention. A Post-Install Job (config/post-install/retentionupdate) is available to migrate existing KafkaChannels forward by populating this field. The "topic" configuration defaults which were not working have been removed from the config-kafka ConfigMap. ([#828](https://github.com/knative-extensions/eventing-kafka/pull/828))
+- KafkaChannel ConfigMap now supports custom Labels and Annotations for dynamically generated resources. ([#806](https://github.com/knative-extensions/eventing-kafka/pull/806))
+- Provide an option for the user to specify the initial offset for a consumer group in Kafka source, this field is honored only if there are no prior offsets committed for the consumer group. ([#779](https://github.com/knative-extensions/eventing-kafka/pull/779))
+- KafkaSource now supports ceOverrides. ([#811](https://github.com/knative-extensions/eventing-kafka/pull/811))
+- The Multi-tenant `KafkaSource` calculates an optimal maximum allowed replica number based on Kafka source partitions count so that scheduler does not schedule more vreplicas than the calculated number ([#822](https://github.com/knative-extensions/eventing-kafka/pull/822))
+- Autoscaling annotations can now be automatically added to KafkaSource objects. See the documentation for more details. ([#855](https://github.com/knative-extensions/eventing-kafka/pull/855))
 
 ##### 🐞 Bug Fixes
 
-- Fix bug: status.address of KafkaChannel is not required anymore, thus conditions are reflected successfully in case of an early stage error ([#857](https://github.com/knative-sandbox/eventing-kafka/pull/857))
-- Remove confusing error message `Kafka source is not ready`. This error is returned as an event regardless the Kafka source has any real issue or not and users should not see this error message unless it is a legitimate error or it is an error they can fix. ([#809](https://github.com/knative-sandbox/eventing-kafka/pull/809))
-- multi-tenant source webhook cluster role has update permission for namespaces/finalizers. ([#854](https://github.com/knative-sandbox/eventing-kafka/pull/854))
+- Fix bug: status.address of KafkaChannel is not required anymore, thus conditions are reflected successfully in case of an early stage error ([#857](https://github.com/knative-extensions/eventing-kafka/pull/857))
+- Remove confusing error message `Kafka source is not ready`. This error is returned as an event regardless the Kafka source has any real issue or not and users should not see this error message unless it is a legitimate error or it is an error they can fix. ([#809](https://github.com/knative-extensions/eventing-kafka/pull/809))
+- multi-tenant source webhook cluster role has update permission for namespaces/finalizers. ([#854](https://github.com/knative-extensions/eventing-kafka/pull/854))
 
 ##### 🧹 Clean up
 
-- Inherent immutability of KafkaChannel and ResetOffset spec fields is now enforced by the kafka-webhook. ([#863](https://github.com/knative-sandbox/eventing-kafka/pull/863))
-- Next generation Multi-Tenant Scheduler and Descheduler: uses a plugin interface to specify a Scheduler profile with predicates and priorities that run filtering and scoring of pods, respectively to compute the best vreplica placements. When the autoscaler adds new pods, scheduler performs a rebalancing of the already placed vreplicas along with the new vreplicas. A Descheduler profile must be installed when vreplicas need to be scaled down and placements removed. ([#768](https://github.com/knative-sandbox/eventing-kafka/pull/768))
-- The consolidated KafkaChannel dispatcher is now owned by the controller. ([#798](https://github.com/knative-sandbox/eventing-kafka/pull/798))
+- Inherent immutability of KafkaChannel and ResetOffset spec fields is now enforced by the kafka-webhook. ([#863](https://github.com/knative-extensions/eventing-kafka/pull/863))
+- Next generation Multi-Tenant Scheduler and Descheduler: uses a plugin interface to specify a Scheduler profile with predicates and priorities that run filtering and scoring of pods, respectively to compute the best vreplica placements. When the autoscaler adds new pods, scheduler performs a rebalancing of the already placed vreplicas along with the new vreplicas. A Descheduler profile must be installed when vreplicas need to be scaled down and placements removed. ([#768](https://github.com/knative-extensions/eventing-kafka/pull/768))
+- The consolidated KafkaChannel dispatcher is now owned by the controller. ([#798](https://github.com/knative-extensions/eventing-kafka/pull/798))
 
 #### Eventing Kogito v0.26
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kogito/releases/tag/v0.26.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kogito/releases/tag/v0.26.0 -->
 
 ##### 💫 New Features & Changes
 
-- Introduce the new Kogito Source CRD and add support to K_SINK environment variable to Kogito services ([#1](https://github.com/knative-sandbox/eventing-kogito/pull/1))
+- Introduce the new Kogito Source CRD and add support to K_SINK environment variable to Kogito services ([#1](https://github.com/knative-extensions/eventing-kogito/pull/1))
 
 ### Client v0.26
 
@@ -150,14 +150,14 @@ code). ([#11999](https://github.com/knative/serving/pull/11999))
 #### 💫 New Features & Changes
 
 - Add `--env-file` option to function create/update command ([#1433](https://github.com/knative/client/pull/1433))
-- New CLI plugin `kn-plugin-kamelet`, a Knative CLI plugin for managing Kamelets and KameletBindings as Knative event sources. Download latest release [here](https://github.com/knative-sandbox/kn-plugin-source-kamelet/releases)
+- New CLI plugin `kn-plugin-kamelet`, a Knative CLI plugin for managing Kamelets and KameletBindings as Knative event sources. Download latest release [here](https://github.com/knative-extensions/kn-plugin-source-kamelet/releases)
     - List available Kamelets
     - Describe Kamelet and print detailed information (e.g. provider, support level, properties)
     - Bind Kamelet as source to a Knative sink (broker, channel, service)
     - List Kamelet bindings
     - Create Kamelet binding to bind source to Knative sink (broker, channel, service)
-- New CLI experimental functions plugin `kn-plugin-func` Download latest release [here](https://github.com/knative-sandbox/kn-plugin-func/releases)
-- New CLI experimental cloud event plugin `kn-plugin-event` Download latest release [here](https://github.com/knative-sandbox/kn-plugin-event/releases)
+- New CLI experimental functions plugin `kn-plugin-func` Download latest release [here](https://github.com/knative-extensions/kn-plugin-func/releases)
+- New CLI experimental cloud event plugin `kn-plugin-event` Download latest release [here](https://github.com/knative-extensions/kn-plugin-event/releases)
 #### 🧹 Clean up
 
 - Remove `DeprecatedImageDigest` field ([#1454](https://github.com/knative/client/pull/1454))

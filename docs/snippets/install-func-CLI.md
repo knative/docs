@@ -7,7 +7,7 @@
     To install `func` using Homebrew, run the following commands:
 
     ```bash
-    brew tap knative-sandbox/kn-plugins
+    brew tap knative-extensions/kn-plugins
     ```
 
     ```bash

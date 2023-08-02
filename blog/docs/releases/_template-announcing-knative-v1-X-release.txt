@@ -68,7 +68,7 @@ Follow the instructions in
 
 ### Apache Kafka Broker TODO-KNATIVE-VERSION
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-TODO-KNATIVE-VERSION -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/knative-TODO-KNATIVE-VERSION -->
 
 #### 💫 New Features & Changes
 
@@ -80,7 +80,7 @@ Follow the instructions in
 
 ### RabbitMQ Broker and Source TODO-KNATIVE-VERSION
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-TODO-KNATIVE-VERSION -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-rabbitmq/releases/tag/knative-TODO-KNATIVE-VERSION -->
 
 
 #### 💫 New Features & Changes

@@ -1,13 +1,13 @@
 # Using the Knative sample repository
 
-The Knative project provides a [sample repository](https://github.com/knative-sandbox/sample-source) that contains a template for a basic event source controller and a receive adapter.
+The Knative project provides a [sample repository](https://github.com/knative-extensions/sample-source) that contains a template for a basic event source controller and a receive adapter.
 
 ## Prerequisites
 
 - You are familiar with Kubernetes and Go development.
 - You have installed Git.
 - You have installed Go.
-- You have cloned the [`sample-source` repository](https://github.com/knative-sandbox/sample-source).
+- You have cloned the [`sample-source` repository](https://github.com/knative-extensions/sample-source).
 
 Optional:
 
