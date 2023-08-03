@@ -44,7 +44,7 @@ To facilitate this, event producers will have the ability to know the CA root us
 Broker or Channel certificate from the Knative resource's metadata.
 
 For more detailed information, please refer to
-the [transport-encryption feature](https://knative.dev/docs/eventing/experimental-features/transport-encryption/)
+the [transport-encryption feature](./../../../docs/eventing/experimental-features/transport-encryption/)
 
 ### Authorization and admission policies
 
