@@ -1,4 +1,4 @@
-# Secure Event processing and improved Event discoverability
+# Vision: Secure Event processing and improved Event discoverability
 
 **Authors: Pierangelo Di Pilato, Senior Software Engineer @ Red Hat, Matthias Weßendorf, Senior
 Principal Software Engineer @ Red Hat**
