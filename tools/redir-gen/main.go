@@ -44,7 +44,7 @@ var (
 	redirectingGoRepos = []string{"pkg", "serving", "security-guard"}
 
 	repoToModule = map[string]string{
-		"func-go": "runtime",
+		"func-go": "func-go",
 	}
 )
 
