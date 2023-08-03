@@ -95,23 +95,23 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 
 #### Apache Kafka Broker v0.23
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.23.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/v0.23.0 -->
 
 
 #### 💫 New Features & Changes
 
-- In Kafka Broker, now the Kafka producer will wait for all ISR replicas ack. [#824](https://github.com/knative-sandbox/eventing-kafka-broker/pull/824)
-- In Kafka Sink, now the Kafka producer will wait for all ISR replicas ack. [#827](https://github.com/knative-sandbox/eventing-kafka-broker/pull/827)
+- In Kafka Broker, now the Kafka producer will wait for all ISR replicas ack. [#824](https://github.com/knative-extensions/eventing-kafka-broker/pull/824)
+- In Kafka Sink, now the Kafka producer will wait for all ISR replicas ack. [#827](https://github.com/knative-extensions/eventing-kafka-broker/pull/827)
 
 #### 🐞 Bug Fixes
 
-- Fix out of bounds in unordered offset manager. [#814](https://github.com/knative-sandbox/eventing-kafka-broker/pull/814)
-- Accept "PLAIN" as a valid sasl.mechanism secret value. [#855](https://github.com/knative-sandbox/eventing-kafka-broker/pull/855),[#840](https://github.com/knative-sandbox/eventing-kafka-broker/pull/840)
+- Fix out of bounds in unordered offset manager. [#814](https://github.com/knative-extensions/eventing-kafka-broker/pull/814)
+- Accept "PLAIN" as a valid sasl.mechanism secret value. [#855](https://github.com/knative-extensions/eventing-kafka-broker/pull/855),[#840](https://github.com/knative-extensions/eventing-kafka-broker/pull/840)
 
 
 #### RabbitMQ Eventing v0.23
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/v0.23.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-rabbitmq/releases/tag/v0.23.0 -->
 
 #### 🚨 Breaking or Notable Changes
 
@@ -120,7 +120,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 #### 🐞 Bug Fixes
 
 - Conformance tests for Broker now work
-- If a Broker / Trigger is deleted but there's no secret to talk to the rabbit cluster, we now remove the resources and log that rabbitmq resources might have been leaked. This happens only when not using the Rabbit Cluster Operator. This left undeletable resources, so this change seems more user friendly. [#271](https://github.com/knative-sandbox/eventing-rabbitmq/pull/271)
+- If a Broker / Trigger is deleted but there's no secret to talk to the rabbit cluster, we now remove the resources and log that rabbitmq resources might have been leaked. This happens only when not using the Rabbit Cluster Operator. This left undeletable resources, so this change seems more user friendly. [#271](https://github.com/knative-extensions/eventing-rabbitmq/pull/271)
 
 ### Client v0.23
 

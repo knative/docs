@@ -94,7 +94,7 @@ plugins:
       developer/eventing/sources/creating-event-sources/writing-event-source/04-reconciler.md: eventing/custom-event-source/custom-event-source/receive-adapter.md
       developer/eventing/sources/creating-event-sources/writing-event-source/05-receive-adapter.md: eventing/custom-event-source/custom-event-source/receive-adapter.md
       developer/eventing/sources/creating-event-sources/writing-event-source/06-yaml.md: eventing/custom-event-source/custom-event-source/publish-event-source.md
-      developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-sandbox.md: eventing/custom-event-source/custom-event-source/README.md
+      developer/eventing/sources/creating-event-sources/writing-event-source/07-knative-extensions.md: eventing/custom-event-source/custom-event-source/README.md
       developer/eventing/sources/creating-event-sources/writing-event-source/README.md: eventing/custom-event-source/custom-event-source/README.md
       developer/eventing/sources/kafka-source/README.md: eventing/sources/kafka-source/README.md
       developer/eventing/sources/ping-source/README.md: eventing/sources/ping-source/README.md

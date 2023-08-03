@@ -26,9 +26,9 @@ and [the Request Flow](./request-flow.md) for additional information.
 Knative Serving depends on a `Networking Layer` that fulfils the [Knative Networking Specification](https://github.com/knative/networking). 
 For this, Knative Serving defines an internal `KIngress` resource, which acts as an abstraction for different multiple pluggable networking layers. Currently, three networking layers are available and supported by the community:
 
-* [net-kourier](https://github.com/knative-sandbox/net-kourier)
-* [net-contour](https://github.com/knative-sandbox/net-contour)
-* [net-istio](https://github.com/knative-sandbox/net-istio)
+* [net-kourier](https://github.com/knative-extensions/net-kourier)
+* [net-contour](https://github.com/knative-extensions/net-contour)
+* [net-istio](https://github.com/knative-extensions/net-istio)
 
 
 ## Traffic flow and DNS

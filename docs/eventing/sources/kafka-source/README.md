@@ -11,13 +11,13 @@ stored in the topic partitions. It does this by waiting for a successful respons
 1. Install the `KafkaSource` controller by entering the following command:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extensions", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
 1. Install the Kafka Source data plane by entering the following command:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extensions", repo="eventing-kafka-broker", file="eventing-kafka-source.yaml") }}
     ```
 
 1. Verify that `kafka-controller` and `kafka-source-dispatcher` are running,
