@@ -203,3 +203,94 @@ status:
   conditions:
   # ...
 ```
+
+Sending events to the Broker using HTTPS endpoints:
+
+```shell
+kubectl run curl -n transport-encryption-test --image=curlimages/curl -i --tty -- sh
+
+```
+
+Save the CA certs from the Broker's `.status.address.CACerts` field into `/tmp/cacerts.pem`
+
+```shell
+cat <<EOF >> /tmp/cacerts.pem
+-----BEGIN CERTIFICATE-----
+MIIBbzCCARagAwIBAgIQAur7vdEcreEWSEQatCYlNjAKBggqhkjOPQQDAjAYMRYw
+FAYDVQQDEw1zZWxmc2lnbmVkLWNhMB4XDTIzMDgwMzA4MzA1N1oXDTIzMTEwMTA4
+MzA1N1owGDEWMBQGA1UEAxMNc2VsZnNpZ25lZC1jYTBZMBMGByqGSM49AgEGCCqG
+SM49AwEHA0IABBqkD9lAwrnXCo/OOdpKzJROSbzCeC73FE/Np+/j8n862Ox5xYwJ
+tAp/o3RDpDa3omhzqZoYumqdtneozGFY/zGjQjBAMA4GA1UdDwEB/wQEAwICpDAP
+BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSHoKjXzfxfudt3mVGU3VudSi6TrTAK
+BggqhkjOPQQDAgNHADBEAiA5z0/TpD7T6vRpN9VQisQMtum/Zg3tThnYA5nFnAW7
+KAIgKR/EzW7f8BPcnlcgXt5kp3Fdqye1SAkjxZzr2a0Zik8=
+-----END CERTIFICATE-----
+EOF
+```
+
+Send the event by running the following command:
+
+```shell
+curl -v -X POST -H "content-type: application/json" -H "ce-specversion: 1.0" -H "ce-source: my/curl/command" -H "ce-type: my.demo.event" -H "ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947" -d '{"name":"Knative Demo"}' --cacert /tmp/cacert
+s.pem https://broker-ingress.knative-eventing.svc.cluster.local/transport-encryption-test/br
+```
+
+Example output:
+
+```shell
+* processing: https://broker-ingress.knative-eventing.svc.cluster.local/transport-encryption-test/br
+*   Trying 10.96.174.249:443...
+* Connected to broker-ingress.knative-eventing.svc.cluster.local (10.96.174.249) port 443
+* ALPN: offers h2,http/1.1
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+*  CAfile: /tmp/cacerts.pem
+*  CApath: none
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: O=local
+*  start date: Aug  3 08:31:02 2023 GMT
+*  expire date: Nov  1 08:31:02 2023 GMT
+*  subjectAltName: host "broker-ingress.knative-eventing.svc.cluster.local" matched cert's "broker-ingress.knative-eventing.svc.cluster.local"
+*  issuer: CN=selfsigned-ca
+*  SSL certificate verify ok.
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* using HTTP/2
+* h2 [:method: POST]
+* h2 [:scheme: https]
+* h2 [:authority: broker-ingress.knative-eventing.svc.cluster.local]
+* h2 [:path: /transport-encryption-test/br]
+* h2 [user-agent: curl/8.2.1]
+* h2 [accept: */*]
+* h2 [content-type: application/json]
+* h2 [ce-specversion: 1.0]
+* h2 [ce-source: my/curl/command]
+* h2 [ce-type: my.demo.event]
+* h2 [ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947]
+* h2 [content-length: 23]
+* Using Stream ID: 1
+> POST /transport-encryption-test/br HTTP/2
+> Host: broker-ingress.knative-eventing.svc.cluster.local
+> User-Agent: curl/8.2.1
+> Accept: */*
+> content-type: application/json
+> ce-specversion: 1.0
+> ce-source: my/curl/command
+> ce-type: my.demo.event
+> ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947
+> Content-Length: 23
+> 
+< HTTP/2 202 
+< allow: POST, OPTIONS
+< content-length: 0
+< date: Thu, 03 Aug 2023 10:08:22 GMT
+< 
+* Connection #0 to host broker-ingress.knative-eventing.svc.cluster.local left intact
+```
