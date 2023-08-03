@@ -89,7 +89,7 @@ To address this problem we introduce an optional feature flag which can be _enab
 have support for an automatic creation of EventTypes.
 
 For more detailed information, please refer to
-the [`eventtype-auto-creation` feature documentation](/docs/eventing/experimental-features/eventtype-auto-creation.md)
+the [`eventtype-auto-creation` feature documentation](/docs/eventing/experimental-features/eventtype-auto-creation)
 
 We see this feature as a quick way of documenting and discovering events that are flowing across an
 organization, however, manually creating `EventType`s is still possible.
