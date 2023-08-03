@@ -21,9 +21,33 @@ Event producers are be able to connect to HTTPS endpoints with cluster-internal 
 
 ## Prerequisites
 
-In order to enable the transport encryption feature, you will need to install cert-manager operator
-by
-following [the cert-manager operator installation instructions](https://cert-manager.io/docs/installation/).
+- In order to enable the transport encryption feature, you will need to install cert-manager
+  operator by
+  following [the cert-manager operator installation instructions](https://cert-manager.io/docs/installation/).
+- [Eventing installation](./../../install)
+
+## Installation
+
+Eventing components use cert-manager issuers and certificates to provision TLS certificates and in
+the release assets, we release such default issuers and certificates that can be customized as
+necessary.
+
+1. Install issuers and certificates, run the following command:
+    ```shell
+    kubectl apply -f {{ artifact(repo="eventing",file="eventing-tls-networking.yaml")}}
+    ```
+2. Verify issuers and certificates are ready
+    ```shell
+    kubectl get certificates.cert-manager.io -n knative-eventing
+    ```
+   Example output:
+    ```shell
+    NAME                           READY   SECRET                         AGE
+    imc-dispatcher-server-tls      True    imc-dispatcher-server-tls      14s
+    mt-broker-filter-server-tls    True    mt-broker-filter-server-tls    14s
+    mt-broker-ingress-server-tls   True    mt-broker-ingress-server-tls   14s
+    selfsigned-ca                  True    eventing-ca                    14s
+    ```
 
 ## Transport Encryption configuration
 
@@ -58,5 +82,124 @@ data:
 
 ## Verifying that the feature is working
 
-// TODO
+Save the following YAML into a file called `default-broker-example.yaml`
 
+```yaml
+# default-broker-example.yaml
+
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: br
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: tr
+spec:
+  broker: br
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: event-display
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: event-display
+  labels:
+    app: event-display
+spec:
+  containers:
+    - name: event-display
+      image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 8080
+```
+
+Apply the `default-broker-example.yaml` file into a test namespace  `transport-encryption-test`:
+
+```shell
+kubectl create namespace transport-encryption-test
+
+kubectl apply -n transport-encryption-test -f defautl-broker-example.yaml
+```
+
+Verify that addresses are all `HTTPS`:
+```shell
+kubectl get brokers.eventing.knative.dev -n transport-encryption-test br -oyaml
+```
+
+Example output:
+
+```shell
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  # ...
+  name: br
+  namespace: transport-encryption-test
+# ...
+status:
+  address:
+    CACerts: |
+      -----BEGIN CERTIFICATE-----
+      MIIBbzCCARagAwIBAgIQAur7vdEcreEWSEQatCYlNjAKBggqhkjOPQQDAjAYMRYw
+      FAYDVQQDEw1zZWxmc2lnbmVkLWNhMB4XDTIzMDgwMzA4MzA1N1oXDTIzMTEwMTA4
+      MzA1N1owGDEWMBQGA1UEAxMNc2VsZnNpZ25lZC1jYTBZMBMGByqGSM49AgEGCCqG
+      SM49AwEHA0IABBqkD9lAwrnXCo/OOdpKzJROSbzCeC73FE/Np+/j8n862Ox5xYwJ
+      tAp/o3RDpDa3omhzqZoYumqdtneozGFY/zGjQjBAMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSHoKjXzfxfudt3mVGU3VudSi6TrTAK
+      BggqhkjOPQQDAgNHADBEAiA5z0/TpD7T6vRpN9VQisQMtum/Zg3tThnYA5nFnAW7
+      KAIgKR/EzW7f8BPcnlcgXt5kp3Fdqye1SAkjxZzr2a0Zik8=
+      -----END CERTIFICATE-----
+    name: https
+    url: https://broker-ingress.knative-eventing.svc.cluster.local/transport-encryption-test/br
+  addresses:
+  - CACerts: |
+      -----BEGIN CERTIFICATE-----
+      MIIBbzCCARagAwIBAgIQAur7vdEcreEWSEQatCYlNjAKBggqhkjOPQQDAjAYMRYw
+      FAYDVQQDEw1zZWxmc2lnbmVkLWNhMB4XDTIzMDgwMzA4MzA1N1oXDTIzMTEwMTA4
+      MzA1N1owGDEWMBQGA1UEAxMNc2VsZnNpZ25lZC1jYTBZMBMGByqGSM49AgEGCCqG
+      SM49AwEHA0IABBqkD9lAwrnXCo/OOdpKzJROSbzCeC73FE/Np+/j8n862Ox5xYwJ
+      tAp/o3RDpDa3omhzqZoYumqdtneozGFY/zGjQjBAMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSHoKjXzfxfudt3mVGU3VudSi6TrTAK
+      BggqhkjOPQQDAgNHADBEAiA5z0/TpD7T6vRpN9VQisQMtum/Zg3tThnYA5nFnAW7
+      KAIgKR/EzW7f8BPcnlcgXt5kp3Fdqye1SAkjxZzr2a0Zik8=
+      -----END CERTIFICATE-----
+    name: https
+    url: https://broker-ingress.knative-eventing.svc.cluster.local/transport-encryption-test/br
+  annotations:
+    knative.dev/channelAPIVersion: messaging.knative.dev/v1
+    knative.dev/channelAddress: https://imc-dispatcher.knative-eventing.svc.cluster.local/transport-encryption-test/br-kne-trigger
+    knative.dev/channelCACerts: |
+      -----BEGIN CERTIFICATE-----
+      MIIBbzCCARagAwIBAgIQAur7vdEcreEWSEQatCYlNjAKBggqhkjOPQQDAjAYMRYw
+      FAYDVQQDEw1zZWxmc2lnbmVkLWNhMB4XDTIzMDgwMzA4MzA1N1oXDTIzMTEwMTA4
+      MzA1N1owGDEWMBQGA1UEAxMNc2VsZnNpZ25lZC1jYTBZMBMGByqGSM49AgEGCCqG
+      SM49AwEHA0IABBqkD9lAwrnXCo/OOdpKzJROSbzCeC73FE/Np+/j8n862Ox5xYwJ
+      tAp/o3RDpDa3omhzqZoYumqdtneozGFY/zGjQjBAMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSHoKjXzfxfudt3mVGU3VudSi6TrTAK
+      BggqhkjOPQQDAgNHADBEAiA5z0/TpD7T6vRpN9VQisQMtum/Zg3tThnYA5nFnAW7
+      KAIgKR/EzW7f8BPcnlcgXt5kp3Fdqye1SAkjxZzr2a0Zik8=
+      -----END CERTIFICATE-----
+    knative.dev/channelKind: InMemoryChannel
+    knative.dev/channelName: br-kne-trigger
+  conditions:
+  # ...
+```
