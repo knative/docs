@@ -17,6 +17,7 @@ nav:
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-11-release.md
           - releases/announcing-knative-v1-10-release.md
           - releases/announcing-knative-v1-9-release.md
           - releases/announcing-knative-v1-8-release.md
@@ -46,6 +47,7 @@ nav:
           - releases/announcing-knative-v0-2-release.md
       - Articles:
           - articles/getting-started-blog-p2.md
+          - articles/new_event_discovery_features.md
           - articles/getting-started-blog-p1.md
           - articles/getting-started-blog-p0.md
           - articles/improved-ha-configuration.md
