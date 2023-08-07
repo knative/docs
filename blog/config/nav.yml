@@ -46,6 +46,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/knative-eventing-vision.md
           - articles/new_event_discovery_features.md
           - articles/getting-started-blog-p1.md
           - articles/getting-started-blog-p0.md
