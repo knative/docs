@@ -50,7 +50,7 @@ Follow the instructions in the documentation
 
     As part of our efforts to GA/1.0 we've standardized on the naming of our networking plugins that
     are installed alongside Serving. If you're managing your Knative deployment manually with
-    `kubectl` **this will require a two-phase upgrade process**. In order to upgrade [net-kourier to v0.25.0](https://github.com/knative-sandbox/net-kourier/releases/tag/v0.25.0) using `kubectl` please follow the steps:
+    `kubectl` **this will require a two-phase upgrade process**. In order to upgrade [net-kourier to v0.25.0](https://github.com/knative-extensions/net-kourier/releases/tag/v0.25.0) using `kubectl` please follow the steps:
 
         ```bash
         # Apply the new release
@@ -98,26 +98,26 @@ Follow the instructions in the documentation
 
 #### Apache Kafka Broker v0.25
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/v0.25.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/v0.25.0 -->
 
 #### 💫 New Features & Changes
 
-- The Trigger status contains the resolved URL of the configured dead letter sink. ([#1092](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1092))
+- The Trigger status contains the resolved URL of the configured dead letter sink. ([#1092](https://github.com/knative-extensions/eventing-kafka-broker/pull/1092))
 
 #### 🐞 Bug Fixes
 
-- Fix to support subscribers that are a Kubernetes service. The service's endpoint doesn't contain a trailing slash. ([#1123](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1123))
+- Fix to support subscribers that are a Kubernetes service. The service's endpoint doesn't contain a trailing slash. ([#1123](https://github.com/knative-extensions/eventing-kafka-broker/pull/1123))
 
 #### Apache Kafka Source and Channels v0.25
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka/releases/tag/v0.25.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka/releases/tag/v0.25.0 -->
 
 #### 💫 New Features & Changes
 
-- Distributed KafkaChannel Dispatcher will now re-queue KafkaChannels after failed reconciliation which will improve various failure recovery scenarios, but could consume CPU resources if reconciliation is blocked by underlying system issues (bad Kafka Secret config, etc.) ([#795](https://github.com/knative-sandbox/eventing-kafka/pull/795))
-- Separated CRDs to extra, additional YAML manifest (similar to eventing) ([#799](https://github.com/knative-sandbox/eventing-kafka/pull/799))
-- Enabled support for ResetOffset CRD in distributed KafkaChannel, see config/command/resetoffset for details. ([#761](https://github.com/knative-sandbox/eventing-kafka/pull/761))
-- The consolidated KafkaChannel dispatcher is now owned by the controller. ([#798](https://github.com/knative-sandbox/eventing-kafka/pull/798))
+- Distributed KafkaChannel Dispatcher will now re-queue KafkaChannels after failed reconciliation which will improve various failure recovery scenarios, but could consume CPU resources if reconciliation is blocked by underlying system issues (bad Kafka Secret config, etc.) ([#795](https://github.com/knative-extensions/eventing-kafka/pull/795))
+- Separated CRDs to extra, additional YAML manifest (similar to eventing) ([#799](https://github.com/knative-extensions/eventing-kafka/pull/799))
+- Enabled support for ResetOffset CRD in distributed KafkaChannel, see config/command/resetoffset for details. ([#761](https://github.com/knative-extensions/eventing-kafka/pull/761))
+- The consolidated KafkaChannel dispatcher is now owned by the controller. ([#798](https://github.com/knative-extensions/eventing-kafka/pull/798))
 
 
 ### Client v0.25
@@ -126,7 +126,7 @@ Follow the instructions in the documentation
 
 #### 💫 New Features & Changes
 
-- The new plugin `kn-quickstart` is now part of the home-brew plugins suite. Install the plugin using `brew install knative-sandbox/kn-plugins/quickstart` then use it with `kn quickstart kind` this will create a kind cluster with knative installed. Make sure to update `kn` to `v0.25` for example using `brew upgrade kn`
+- The new plugin `kn-quickstart` is now part of the home-brew plugins suite. Install the plugin using `brew install knative-extensions/kn-plugins/quickstart` then use it with `kn quickstart kind` this will create a kind cluster with knative installed. Make sure to update `kn` to `v0.25` for example using `brew upgrade kn`
 
 - Deprecate `lookup-path` as path lookup will always be enabled in the future ([#1422](https://github.com/knative/client/pull/1422))
 - Add `--tls` option to domain create command ([#1419](https://github.com/knative/client/pull/1419))

@@ -72,7 +72,7 @@ container in a cluster.
 
     1. Setup `kn event` plugin
         ```bash
-        brew install knative-sandbox/kn-plugins/event
+        brew install knative-extensions/kn-plugins/event
         ```
 
     1. Send event

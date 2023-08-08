@@ -11,7 +11,7 @@ This topic describes how to create a `RedisStreamSource` object.
 1. Install RedisStreamSource by running the command:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-redis", file="redis-source.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extensions", repo="eventing-redis", file="redis-source.yaml") }}
     ```
 
 1. Verify that `redis-controller-manager`is running:
@@ -101,4 +101,4 @@ Where:
 
 ## Additional information
 
-* For more information about Redis Stream source, see the [`eventing-redis` Github repository](https://github.com/knative-sandbox/eventing-redis/tree/main/config/source)
+* For more information about Redis Stream source, see the [`eventing-redis` Github repository](https://github.com/knative-extensions/eventing-redis/tree/main/config/source)

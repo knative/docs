@@ -181,7 +181,7 @@ This selects all namespaces where the label value is not in the set `"true"`.
 
 ### Configure config-certmanager ConfigMap
 
-Update your [`config-certmanager` ConfigMap](https://github.com/knative-sandbox/net-certmanager/blob/main/config/config.yaml)
+Update your [`config-certmanager` ConfigMap](https://github.com/knative-extensions/net-certmanager/blob/main/config/config.yaml)
 in the `knative-serving` namespace to reference your new `ClusterIssuer`.
 
 1.  Run the following command to edit your `config-certmanager` ConfigMap:

@@ -89,16 +89,16 @@ For more information, see [Eventing v1.2](#eventing-v12).
 
 #### Apache Kafka Broker v1.2
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-v1.2.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/knative-v1.2.0 -->
 
 #### 💫 New Features & Changes
 
 - An HTTP header will be supplied to your event consumers when the Broker it is communicating with supports reply events.
-This will always be sent while using this Kafka Broker since it supports handling reply events. ([#1771](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1771))
+This will always be sent while using this Kafka Broker since it supports handling reply events. ([#1771](https://github.com/knative-extensions/eventing-kafka-broker/pull/1771))
 
-- Apply back-pressure by limiting the number of in-flight dispatch requests in the unordered event consumption. ([#1750](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1750))
+- Apply back-pressure by limiting the number of in-flight dispatch requests in the unordered event consumption. ([#1750](https://github.com/knative-extensions/eventing-kafka-broker/pull/1750))
 
-- Support TLS for the metrics server. Now, the receiver and the dispatcher accept the following environment variables ([#1707](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1707)):
+- Support TLS for the metrics server. Now, the receiver and the dispatcher accept the following environment variables ([#1707](https://github.com/knative-extensions/eventing-kafka-broker/pull/1707)):
     - `METRICS_PEM_CERT_PATH`: TLS cert path
     - `METRICS_PEM_KEY_PATH`: TLS key path
     - `METRICS_HOST`: metrics server host
@@ -106,26 +106,26 @@ This will always be sent while using this Kafka Broker since it supports handlin
 
 #### RabbitMQ Broker and Source v1.2
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.2.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-rabbitmq/releases/tag/knative-v1.2.0 -->
 
 #### 💫 New Features & Changes
 
-- Improved Broker's and Source's README docs, sample descriptions, and files. ([#555](https://github.com/knative-sandbox/eventing-rabbitmq/pull/555))
-- Add publisher confirms to ingress. Return 200 only when RabbitMQ confirms receiving and storing the message. ([#568](https://github.com/knative-sandbox/eventing-rabbitmq/pull/568))
-- Makefile-based workflow. Includes migrating GitHub Actions. ([#525](https://github.com/knative-sandbox/eventing-rabbitmq/pull/525), [#569](https://github.com/knative-sandbox/eventing-rabbitmq/pull/569), [#579](https://github.com/knative-sandbox/eventing-rabbitmq/pull/579))
-- Various code refactoring and code health improvements. ([#552](https://github.com/knative-sandbox/eventing-rabbitmq/pull/552), [#572](https://github.com/knative-sandbox/eventing-rabbitmq/pull/572))
+- Improved Broker's and Source's README docs, sample descriptions, and files. ([#555](https://github.com/knative-extensions/eventing-rabbitmq/pull/555))
+- Add publisher confirms to ingress. Return 200 only when RabbitMQ confirms receiving and storing the message. ([#568](https://github.com/knative-extensions/eventing-rabbitmq/pull/568))
+- Makefile-based workflow. Includes migrating GitHub Actions. ([#525](https://github.com/knative-extensions/eventing-rabbitmq/pull/525), [#569](https://github.com/knative-extensions/eventing-rabbitmq/pull/569), [#579](https://github.com/knative-extensions/eventing-rabbitmq/pull/579))
+- Various code refactoring and code health improvements. ([#552](https://github.com/knative-extensions/eventing-rabbitmq/pull/552), [#572](https://github.com/knative-extensions/eventing-rabbitmq/pull/572))
 - Source adapter trigger dispatcher homologation. Now the Source Adapter and
 Broker Dispatcher's Prefetch Count behavior is the same.
-Updated the Trigger's webhook to validate the following ([#536](https://github.com/knative-sandbox/eventing-rabbitmq/pull/536)):
+Updated the Trigger's webhook to validate the following ([#536](https://github.com/knative-extensions/eventing-rabbitmq/pull/536)):
     - Has a default value of 1. FIFO behavior
     - Have limits: 1 ≤ prefetchCount ≤ 1000
-- All core Knative Eventing RabbitMQ Pods should now be able to run in the restricted Pod security standard profile. ([#541](https://github.com/knative-sandbox/eventing-rabbitmq/pull/541))
+- All core Knative Eventing RabbitMQ Pods should now be able to run in the restricted Pod security standard profile. ([#541](https://github.com/knative-extensions/eventing-rabbitmq/pull/541))
 
 #### 🐞 Bug Fixes
 
 - Removing the dead letter sink on a Trigger will now properly fall back to the
-Broker's dead letter sink, if one is defined. ([#533](https://github.com/knative-sandbox/eventing-rabbitmq/pull/533))
-- Messages sent to RabbitMQ are now marked as Persistent ([#560](https://github.com/knative-sandbox/eventing-rabbitmq/pull/560)):
+Broker's dead letter sink, if one is defined. ([#533](https://github.com/knative-extensions/eventing-rabbitmq/pull/533))
+- Messages sent to RabbitMQ are now marked as Persistent ([#560](https://github.com/knative-extensions/eventing-rabbitmq/pull/560)):
     - Configuring messages sent into the RabbitMQ Broker to be persistent as the
     Queues used by the Broker are always durable.
     - Now if the user set the configuration of the RabbitMQ Source Exchange and
