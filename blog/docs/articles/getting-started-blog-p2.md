@@ -4,7 +4,8 @@
 
 **Date: 2023-07-26**
 
-Hi, and welcome back to this introductory blog series! In this article we will be discussing __how to set up your development environment__ for Knative.
+Hi, and welcome back to this introductory blog series! If you want an overview of the full blog series, please check out the [first article](/blog/articles/getting-started-blog-p0).
+In this article we will be discussing __how to set up your development environment__ for Knative.
 A development environment is a place where you can modify and examine code without affecting the currently released code. For setting up your Knative development
 environment, we are splitting the setup of the development environment into the local setup (i.e. things you set up on your own computer), and the external setup 
 (i.e. things you set up that aren't on your own computer).

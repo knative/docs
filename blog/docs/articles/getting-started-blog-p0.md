@@ -16,7 +16,7 @@ concepts of Knative work, we hope that you will also learn something from these 
 
 1. [Introduction and Overview (this post!)](/blog/articles/getting-started-blog-p0)
 2. [Introduction to Open Source](/blog/articles/getting-started-blog-p1)
-3. Environment setup for Knative (coming soon)
+3. [Environment setup for Knative](/blog/articles/getting-started-blog-p3)
 4. Making API changes (coming soon)
 5. Controllers (coming soon)
 6. Testing (coming soon)

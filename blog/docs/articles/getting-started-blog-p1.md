@@ -262,6 +262,8 @@ As you've hopefully seen in this article, there are many great open source proje
 loads of ways to contribute, and your contributions will be appreciated so long as the project is taking contributions. While contributing (especially contributing code) can be 
 a complex process, it is also a very rewarding experience. So, we hope to see you out there contributing to open source and Knative! 
 
+We hope that you enjoyed this article and feel more comfortable contributing to open source now. We also hope to see you in [the next one](/blog/articles/getting-started-blog-p2)!
+
 P.S. If you are interested in getting started contributing to open source, be sure to checkout out [this CNCF article](https://contribute.cncf.io/contributors/getting-started/){:target="_blank"},
 as it provides a great starting point.
 
