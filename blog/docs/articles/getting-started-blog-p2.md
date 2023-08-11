@@ -73,9 +73,8 @@ Once you have Docker installed on your system, you will need to log in to a cont
 Firstly, you can use a Docker account to sign into Docker hub. To create one, you can [sign up for one here](https://hub.docker.com/signup){:target="_blank"}. Once you have an account, 
 all you need to do is type `docker login`, and follow the instructions. Another option is to use a registry on [Quay.io](https://quay.io/){:target="_blank"}, or to 
 [create a local registry](https://www.allisonthackston.com/articles/local-docker-registry.html){:target="_blank"}. If you use either of these approaches, or some other registry,
-all you need to do is login with `docker login -u <username> -p <password> <registry_url>`. You only need to include the `-u <username` and `-p <password` options
-if the registry needs you to sign in. For example, to login to a local registry, all you need to do is run `docker login localhost:8080`, assuming that the registry
-is running on `localhost:8080` and you have not enabled authentication on it.
+all you need to do is login with `docker login <registry_url>`, and then follow the prompts in your terminal. For example, to login to a local registry, all you need to do is run 
+`docker login localhost:8080`, and to log in to [Quay](https://quay.io){:target="_blank"} all you need to do is run `docker login quay.io`.
 
 ##### Option 2: Setting up Podman
 
