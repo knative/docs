@@ -111,7 +111,7 @@ runs on top of Docker/Podman, so you will need to have one of those installed an
 #### ko, kubectl
 
 Once you have a Kubernetes cluster up by running minikube, you will probably want to interact with it! The way you interact with your cluster is through the Command Line
-Interface ([CLI](https://minikube.sigs.k8s.io/docs/start/)){:target="_blank"} tool kubectl. You can install kubectl [here](https://kubernetes.io/docs/tasks/tools/){:target="_blank"}, or you can add an alias
+Interface ([CLI](https://minikube.sigs.k8s.io/docs/start/){:target="_blank"}) tool kubectl. You can install kubectl [here](https://kubernetes.io/docs/tasks/tools/){:target="_blank"}, or you can add an alias
 to the installation of kubectl which comes with minkube by adding `alias kubectl="minikube kubectl --"` to the appropriate config file for your shell. 
 
 You can use kubectl to get all resources of a certain type by running `kubectl get <resource_type> -A`. For example, if you wanted to get all pods in your cluster you
