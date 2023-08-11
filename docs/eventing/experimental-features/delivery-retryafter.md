@@ -65,6 +65,6 @@ spec:
     implementations, such as Channels or Sources, actually implement support
     for the field.  The shared `HTTPMessageSender.SendWithRetries()` logic has
     been enhanced to support this feature, and all implementations using it to
-    perform retries will automatically benefit.  Sandbox implementations not
+    perform retries will automatically benefit.  Extensions implementations not
     based on this shared library, for example RabbitMQ or Google Pub/Sub, would
     require additional development effort to respect the `retryAfterMax` field.
