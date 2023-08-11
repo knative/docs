@@ -4,7 +4,7 @@
 
 **Date: 2023-08-14**
 
-Hi, and welcome back to this introductory blog series! If you want an overview of the full blog series, please check out the [first article](/blog/articles/getting-started-blog-p0).
+Hi, and welcome back to this introductory blog series! If you want an overview of the full blog series, please check out the [first article](/blog/articles/getting-started-blog-p0){:target="_blank"}.
 In this article we will be discussing __how to set up your development environment__ for Knative.
 A development environment is a place where you can modify and examine code without affecting the currently released code. For setting up your Knative development
 environment, we are splitting the setup of the development environment into the local setup (i.e. things you set up on your own computer), and the external setup 
@@ -26,7 +26,7 @@ before continuing with your local setup, please ensure that you __have all of th
 
 #### Bash
 
-Your computer will need to have Bash installed in order to run all of the installation/setup scripts the other local components will need. Chances are that your computer will have Bash (Linux and Mac should, however you may want to upgrade your Bash version on Mac). If you are on **Windows**, you will need to [install Bash](https://itsfoss.com/install-bash-on-windows/).
+Your computer will need to have Bash installed in order to run all of the installation/setup scripts the other local components will need. Chances are that your computer will have Bash (Linux and Mac should, however you may want to upgrade your Bash version on Mac). If you are on **Windows**, you will need to [install Bash](https://itsfoss.com/install-bash-on-windows/){:target="_blank"}.
 
 #### Git
 
@@ -67,7 +67,7 @@ are __Docker__ and __Podman__, so we will discuss setting both up here. However,
 
 The first step to setting up Docker is to install it. The easiest way to do this is to [install Docker Desktop](https://docs.docker.com/get-docker/){:target="_blank"}, although you only need
 the Docker Engine for Knative so you can also just [install the Docker Engine](https://docs.docker.com/engine/install/){:target="_blank"}. Note: if you plan on just installing the Docker Engine,
-make sure that you complete the post-install steps.
+make sure that you complete the [post-install steps](https://docs.docker.com/engine/install/linux-postinstall/){:target="_blank"}.
 
 Once you have Docker installed on your system, you will need to log in to a container registry. There are multiple different registries which you can use.
 Firstly, you can use a Docker account to sign into Docker hub. To create one, you can [sign up for one here](https://hub.docker.com/signup){:target="_blank"}. Once you have an account, 
@@ -178,7 +178,7 @@ After you have installed the plugin, you will be able to see it here:
 
 ![](/blog/images/getting-started-blog-series/post2/vscode002.png)
 
-If you are using Jetbrains IDEs, here is how to install the [Kubernetes plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes):
+If you are using Jetbrains IDEs, here is how to install the [Kubernetes plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes){:target="_blank"}:
 
 ![](/blog/images/getting-started-blog-series/post2/jb001.png)
 
