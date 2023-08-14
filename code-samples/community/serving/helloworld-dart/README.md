@@ -8,11 +8,11 @@ that you can use for testing. It reads in the env variable `TARGET` and prints
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [Knative installation instructions](https://knative.dev/docs/install/) if you need to create
-  one.
+  [Knative installation instructions](https://knative.dev/docs/install/) if
+  you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- [dart-sdk](https://www.dart.dev/tools/sdk#install) installed and
+- The [Dart SDK](https://dart.dev/get-dart) installed and
   configured if you want to run the program locally.
 
 ## Recreating the sample code

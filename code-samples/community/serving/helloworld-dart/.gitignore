@@ -1,4 +1,3 @@
-# See https://www.dartlang.org/guides/libraries/private-files
-.dart_tool
-.packages
+# https://dart.dev/guides/libraries/private-files
+.dart_tool/
 pubspec.lock
