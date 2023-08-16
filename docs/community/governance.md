@@ -65,7 +65,7 @@ election process for our technical oversight committee.
 - [Repository Guidelines](https://github.com/knative/community/blob/main/REPOSITORY-GUIDELINES.md):
 how we create and remove core repositories.
 
-- [Extensions repo process](https://github.com/knative/community/blob/main/mechanics/CREATING-A-SANDBOX-REPO.md):
+- [Extensions repo process](https://github.com/knative/community/blob/main/mechanics/CREATING-AN-EXTENSIONS-REPO.md):
 how to create a repo in the [`knative-extensions`](https://github.com/knative-extensions) GitHub org.
 
 - [Feature tracks](https://github.com/knative/community/blob/main/mechanics/FEATURE-TRACKS.md):
