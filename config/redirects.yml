@@ -56,7 +56,7 @@ plugins:
       community/contributing/contributing.md: https://github.com/knative/community/blob/main/CONTRIBUTING.md
       community/contributing/governance.md: https://github.com/knative/community/blob/main/GOVERNANCE.md
       community/contributing/mechanics.md: https://github.com/knative/community/tree/main/mechanics
-      community/contributing/mechanics/creating-an-extensions-repo.md: https://github.com/knative/community/blob/main/mechanics/CREATING-A-SANDBOX-REPO.md
+      community/contributing/mechanics/creating-an-extensions-repo.md: https://github.com/knative/community/blob/main/mechanics/CREATING-AN-EXTENSIONS-REPO.md
       community/contributing/mechanics/feature-tracks.md: https://github.com/knative/community/blob/main/mechanics/FEATURE-TRACKS.md
       community/contributing/mechanics/golang-policy.md: https://github.com/knative/community/blob/main/mechanics/GOLANG-POLICY.md
       community/contributing/mechanics/release-schedule.md: https://github.com/knative/community/blob/main/mechanics/RELEASE-SCHEDULE.md
