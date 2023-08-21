@@ -218,15 +218,12 @@ folder) you're ready to build and deploy the sample app.
    username:
 
    ```bash
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-java-quarkus .
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-java-quarkus" --push .
 
    # (OR)
-   # Build the container on your local machine - Quarkus native mode
-   docker build -t {username}/helloworld-java-quarkus -f Dockerfile.native .
-
-   # Push the container to docker registry
-   docker push {username}/helloworld-java-quarkus
+   # Build and push the container on your local machine. - Quarkus native mode
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-java-quarkus" --push . -f Dockerfile.native
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you
