@@ -3,6 +3,9 @@
 # https://hub.docker.com/_/golang
 FROM golang:1.15 as builder
 
+ARG TARGETOS
+ARG TARGETARCH
+
 # Create and change to the app directory.
 WORKDIR /app
 
@@ -16,7 +19,7 @@ COPY . ./
 
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o servingcontainer
+RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o servingcontainer
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
