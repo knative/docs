@@ -53,8 +53,8 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-dotnet
    and push this to your registry of choice via:
 
    ```bash
-   docker build -t <image> .
-   docker push <image>
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
    ```
 
 1. If you look in `service.yaml`, take the `<image>` name and insert it
