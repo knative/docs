@@ -72,18 +72,11 @@ Build the application container and publish it to a container registry:
     export REPO="docker.io/<username>"
     ```
 
-1.  Use Docker to build your application container:
+1. Use Docker to build and push your application container:
 
     ```bash
-    docker build \
-      --tag "${REPO}/kong-routing-go" \
-      --file=code-samples/serving/kong-routing-go/Dockerfile .
-    ```
-
-1.  Push your container to a container registry:
-
-    ```bash
-    docker push "${REPO}/kong-routing-go"
+    # Build and push the container on your local machine.
+    docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/kong-routing-go" --push . -f code-samples/serving/kong-routing-go/Dockerfile
     ```
 
 1.  Replace the image reference path with our published image path in the
