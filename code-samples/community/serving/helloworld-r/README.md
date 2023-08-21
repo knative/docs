@@ -77,6 +77,9 @@ cd knative-docs/code-samples/community/serving/hello-world/helloworld-r
   # https://hub.docker.com/_/golang
   FROM golang:1.12 as builder
 
+  ARG TARGETOS
+  ARG TARGETARCH
+
   # Copy local code to the container image.
   WORKDIR /go/src/github.com/knative/docs/helloworld-r
   COPY invoke.go .
@@ -84,7 +87,7 @@ cd knative-docs/code-samples/community/serving/hello-world/helloworld-r
   # Build the command inside the container.
   # (You may fetch or manage dependencies here,
   # either manually or with a tool like "godep".)
-  RUN CGO_ENABLED=0 GOOS=linux go build -v -o invoke
+  RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o invoke
 
   # The official R base image
   # https://hub.docker.com/_/r-base
