@@ -108,6 +108,9 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-go
    # https://hub.docker.com/_/golang
    FROM golang:1.14 as builder
 
+   ARG TARGETOS
+   ARG TARGETARCH
+
    # Copy local code to the container image.
    WORKDIR /app
 
@@ -121,7 +124,7 @@ cd knative-docs/code-samples/eventing/helloworld/helloworld-go
 
    # Build the binary.
    # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-   RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly  -v -o helloworld
+   RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly  -v -o helloworld
 
    # Use a Docker multi-stage build to create a lean production image.
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
