@@ -95,12 +95,15 @@ cd knative-docs/code-samples/serving/secrets-go
    # https://hub.docker.com/_/golang
    FROM golang as builder
 
+   ARG TARGETOS
+   ARG TARGETARCH
+
    # Copy local code to the container image.
    WORKDIR /go/src/github.com/knative/docs/hellosecrets
    COPY . .
 
    # Build the output command inside the container.
-   RUN CGO_ENABLED=0 GOOS=linux go build -v -o hellosecrets
+   RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o hellosecrets
 
    # Use a Docker multi-stage build to create a lean production image.
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
