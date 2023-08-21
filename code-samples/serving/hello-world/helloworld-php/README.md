@@ -96,12 +96,9 @@ Choose one of the following methods:
  1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
     ```bash
-     # Build the container on your local machine
-     docker build -t {username}/helloworld-php .
-
-     # Push the container to docker registry
-     docker push {username}/helloworld-php
-     ```
+    # Build and push the container on your local machine.
+    docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-php" --push .
+    ```
 
  1. After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
 
