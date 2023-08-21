@@ -215,11 +215,8 @@ your sample app to your cluster:
    following commands with your Docker Hub username.
 
    ```bash
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-java-micronaut .
-
-   # Push the container to docker registry
-   docker push {username}/helloworld-java-micronaut
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-java-micronaut" --push .
    ```
 
 1. Now that your container image is in the registry, you can deploy it to your
