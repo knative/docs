@@ -1,6 +1,6 @@
 # Configuring Kafka Features
 
-There are many different configuration options for how Knative Eventing and the Kafka Broker interact with Apache Kafka.
+There are many different configuration options for how Knative Eventing and the Knaitve Broker for Apache Kafka interact with the Apache Kafka clusters.
 
 ## Configure Knative Eventing Kafka features
 
@@ -21,19 +21,19 @@ you can set `dispatcher.ordered-executor-metrics: "enabled"` in the config map b
 By default, the controller will not autoscale the resources being used by the Kafka consumers within the data-plane. If you would like to enable autoscaling of these
 resources with [KEDA](https://keda.sh/), then you can set `controller.autoscaler: "enabled"` in the config map below.
 
-### Consumer Group ID
+### Consumer Group ID for Triggers
 
 By default, the consumer group ID of each Kafka consumer created in the data-plane from a trigger will be made from the template `{% raw %}"knative-trigger-{{ .Namespace }}-{{ .Name }}{% endraw %}`.
 If you want to assign consumer group IDs to your triggers in a different way, you can set use any valid [go text/template](https://pkg.go.dev/text/template) text template
 to generate the consumer group IDs by setting `triggers.consumergroup.template: "your-text-template-here"` in the config map below.
 
-### Broker topic template
+### Broker topic name template
 
 By default, the topic created by a Kafka Broker is named from the template `{% raw %}knative-broker-{{ .Namespace }}-{{ .Name }}{% endraw %}`. If you want to change the template
 used to name Broker topics, you can set `brokers.topic.template: "your-text-template-here"`, where `"your-text-template-here"` is any valid [go text/template](https://pkg.go.dev/text/template)
 in the config map below.
 
-## Channel topic template
+## Channel topic name template
 
 By default, the topic created by a Kafka Channel is named from the template `{% raw %}messaging-kafka.{{ .Namespace }}.{{ .Name }}"`. If you want to change the template
 used to name Channel topics, you can set `channels.topic.template: "your-text-template-here"`, where `"your-text-template-here"` is any valid [go text/template](https://pkg.go.dev/text/template)
