@@ -30,7 +30,7 @@ apiVersion: kind.sigs.k8s.io/v1alpha4
 nodes:
 - role: control-plane
   extraPortMappings:
-	## expose port 31380 of the node to port 80 on the host
+	## expose port 31080 of the node to port 80 on the host
   - containerPort: 31080
     hostPort: 80
 	## expose port 31443 of the node to port 443 on the host
@@ -282,7 +282,7 @@ CONTAINER ID        IMAGE                  COMMAND                  CREATED     
 d53c275d7461        kindest/node:v1.18.2   "/usr/local/bin/entr…"   4 hours ago         Up 4 hours          127.0.0.1:49350->6443/tcp, 0.0.0.0:80->31080/tcp, 0.0.0.0:443->31443/tcp   knative-control-plane
 ```
 
-The ports, and how they’re tied to the host, should be the same as you’ve defined in the clusterconfig file. For example, port 31380 in the cluster is exposed as port 80.
+The ports, and how they’re tied to the host, should be the same as you’ve defined in the clusterconfig file. For example, port 31080 in the cluster is exposed as port 80.
 
 ## Step 4: Deploying your first app
 Now that the cluster, Knative, and the networking components are ready, you can deploy an app.
