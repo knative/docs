@@ -23,7 +23,7 @@ certificate to secure the mapped service. Using this feature skips [autoTLS](../
 1. Update your `DomainMapping` YAML file to use the newly created secret as follows:
 
     ```yaml
-    apiVersion: serving.knative.dev/v1alpha1
+    apiVersion: serving.knative.dev/v1beta1
     kind: DomainMapping
     metadata:
       name: <domain-name>

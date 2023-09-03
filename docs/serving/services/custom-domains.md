@@ -66,7 +66,7 @@ DomainMappings in that namespace to use the domain name.
         1. Create a YAML file using the following template:
 
             ```yaml
-            apiVersion: serving.knative.dev/v1alpha1
+            apiVersion: serving.knative.dev/v1beta1
             kind: DomainMapping
             metadata:
               name: <domain-name>
