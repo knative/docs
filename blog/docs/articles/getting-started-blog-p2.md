@@ -27,6 +27,7 @@ before continuing with your local setup, please ensure that you __have all of th
 #### Bash
 
 Your computer will need to have Bash installed in order to run all of the installation/setup scripts the other local components will need. Chances are that your computer will have Bash (Linux and Mac should, however you may want to upgrade your Bash version on Mac). If you are on **Windows**, you will need to [install Bash](https://itsfoss.com/install-bash-on-windows/){:target="_blank"}.
+Alternatively, Windows users can use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install){:target="_blank"}
 
 #### Git
 
