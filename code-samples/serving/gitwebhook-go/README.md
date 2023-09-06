@@ -35,11 +35,8 @@ You must meet the following requirements to run this sample:
    ```bash
    export DOCKER_HUB_USERNAME=username
 
-   # Build the container, run from the project folder
-   docker build -t ${DOCKER_HUB_USERNAME}/gitwebhook-go .
-
-   # Push the container to the registry
-   docker push ${DOCKER_HUB_USERNAME}/gitwebhook-go
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "${DOCKER_HUB_USERNAME}/gitwebhook-go" --push .
    ```
 
 1. Create a secret that holds two values from GitHub:

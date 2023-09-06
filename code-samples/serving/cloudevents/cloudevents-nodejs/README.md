@@ -54,8 +54,8 @@ In the `Dockerfile`, you can see how the dependencies are installed using npm.
 You can build and push this to your registry of choice via:
 
  ```bash
- docker build -t <image> .
- docker push <image>
+ # Build and push the container on your local machine.
+ docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
  ```
 
 ### yaml

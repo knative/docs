@@ -102,11 +102,8 @@ folder) you're ready to build and deploy the sample app.
    username:
 
    ```bash
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-rserver .
-
-   # Push the container to docker registry
-   docker push {username}/helloworld-rserver
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-rserver" --push .
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you

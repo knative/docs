@@ -14,10 +14,13 @@
 
 FROM golang AS builder
 
+ARG TARGETOS
+ARG TARGETARCH
+
 WORKDIR /go/src/github.com/knative/docs/
 ADD . /go/src/github.com/knative/docs/
 
-RUN CGO_ENABLED=0 go build ./code-samples/serving/knative-routing-go/
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./code-samples/serving/knative-routing-go/
 
 FROM gcr.io/distroless/base
 

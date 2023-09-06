@@ -91,8 +91,9 @@ image, and push it to a container registry that your cluster can access.
 
     ```bash
     export REGISTRY=docker.io/myregistry
-    docker build . -t $REGISTRY/node-heartbeat-source:v1
-    docker push $REGISTRY/node-heartbeat-source:v1
+
+    # Build and push the container on your local machine.
+    docker buildx build --platform linux/arm64,linux/amd64 -t "$REGISTRY/node-heartbeat-source:v1" --push .
     ```
 
 1. Create the event display service which logs any CloudEvents posted to it:

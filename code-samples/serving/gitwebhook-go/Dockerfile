@@ -14,6 +14,9 @@
 
 FROM golang AS builder
 
+ARG TARGETOS
+ARG TARGETARCH
+
 # copy the source
 ADD .   /go/src/github.com/knative/docs/code-samples/serving/gitwebhook-go
 WORKDIR /go/src/github.com/knative/docs/code-samples/serving/gitwebhook-go
@@ -25,7 +28,7 @@ RUN go get gopkg.in/go-playground/webhooks.v3
 RUN go get gopkg.in/go-playground/webhooks.v3/github
 
 # build the sample
-RUN CGO_ENABLED=0 go build -o /go/bin/webhook-sample .
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /go/bin/webhook-sample .
 
 FROM golang:alpine
 

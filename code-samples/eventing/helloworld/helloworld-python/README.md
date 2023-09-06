@@ -161,10 +161,8 @@ folder) you're ready to build and deploy the sample app.
 1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
     ```bash
-    # Build the container on your local machine
-    docker build -t {username}/helloworld-python .
-    # Push the container to docker registry
-    docker push {username}/helloworld-python
+    # Build and push the container on your local machine.
+    docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-python" --push .
     ```
 
 1. After the build has completed and the container is pushed to Docker Hub, you

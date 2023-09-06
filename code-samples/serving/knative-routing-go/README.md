@@ -67,21 +67,14 @@ your dockerhub username and run the following command:
 export REPO="docker.io/<username>"
 ```
 
-3. Use Docker to build your application container:
+3. Use Docker to build and push your application container:
 
 ```
-docker build \
-  --tag "${REPO}/knative-routing-go" \
-  --file=code-samples/serving/knative-routing-go/Dockerfile .
+# Build and push the container on your local machine.
+docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/knative-routing-go" --push . -f code-samples/serving/knative-routing-go/Dockerfile
 ```
 
-4. Push your container to a container registry:
-
-```
-docker push "${REPO}/knative-routing-go"
-```
-
-5. Replace the image reference path with our published image path in the
+4. Replace the image reference path with our published image path in the
    configuration file `code-samples/serving/knative-routing-go/sample.yaml`:
 
    - Manually replace:
