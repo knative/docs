@@ -151,7 +151,7 @@ each individual component is working correctly. On the other hand, the integrati
 we __do not recommend__ running the integration tests locally as they take a lot of time and resources to run. Instead, we suggest that you push your changes directly
 to GitHub once your unit tests are passing, and run the integration tests there.
 
-Each repository will ahve instructions on how to run their unit tests, so look in the `CONTRIBUTING.md` and `DEVELOPMENT.md` files to find out how those work. If
+Each repository will have instructions on how to run their unit tests, so look in the `CONTRIBUTING.md` and `DEVELOPMENT.md` files to find out how those work. If
 they are go tests (chances are that they are), then you can also run the tests on subdirectories or specific files by running `go test -v -race -count=1 <filename_or_directory>`.
 This is very handy as it reduces the feedback loop as you make changes.
 
@@ -190,7 +190,7 @@ After you have installed the plugin, you will be able to see it here:
 
 VSCode is a versatile text editor, designed to support many programming languages though the Language Server Protocol. By contrast, JetBrains IDEs are language-specific -
 GoLand for Go, Pycharm for Python, and so on. In order for VSCode to provide IDE-style support for a language, you will have to install the required plugin(s) for the language.
-Similarly in JetBrains, you can often install a plugin for a particular language even if the IDE doesn't suppor that language, although sometimes you will have to pay for the
+Similarly in JetBrains, you can often install a plugin for a particular language even if the IDE doesn't support that language, although sometimes you will have to pay for the
 appropriate license. Since VSCode needs plugins to have IDE features for a language, we recommend that you install the following plugins:
 
 ![](/blog/images/getting-started-blog-series/post2/vscode003.png)
@@ -199,7 +199,7 @@ appropriate license. Since VSCode needs plugins to have IDE features for a langu
 
 ##### Code Formatting
 
-Go code has a built in style guide and formatter, so naturally you can configure this with both VSCode and JetBrainds IDEs. For VSCode, you can follow the following steps:
+Go code has a built in style guide and formatter, so naturally you can configure this with both VSCode and JetBrains IDEs. For VSCode, you can follow the following steps:
 
 ![](/blog/images/getting-started-blog-series/post2/vscode005.png)
 
@@ -214,7 +214,7 @@ issues, and how to make a PR.
 
 As you are working on your code, you will probably want to discuss your changes with others and ask questions. Knative uses __Slack__ as the primary means of communication,
 along with __a mailing list__. You can find links to these communication channels [here](https://knative.dev/docs/community/#communication-channels){:target="_blank"}. There are also weekly 
-and bi-weekly working group meetings which you can join on zoom where we have discussions. To find the community calendar(which includes the working group meeting times and
+and bi-weekly working group meetings which you can join on zoom where we have discussions. To find the community calendar (which includes the working group meeting times and
 links), as well as the link to the slack and the mailing list, you can [read this article](https://knative.dev/docs/community/#meetings){:target="_blank"}.
 
 ![](/blog/images/getting-started-blog-series/post2/doodle002.png)
