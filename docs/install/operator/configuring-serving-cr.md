@@ -403,7 +403,7 @@ spec:
       local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
 ```
 
-## Cutomize kourier-bootstrap for Kourier gateways:
+## Customize kourier-bootstrap for Kourier gateways:
 
 By default, Kourier contains envoy bootstrap configuration in the ConfigMap `kourier-bootstrap`. The `spec.ingress.kourier.bootstrap-configmap` field allows you to specify your customized bootstrap ConfigMap.
 
