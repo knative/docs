@@ -257,6 +257,134 @@ spec:
 !!! note
     When using an external topic, the Knative Kafka Broker does not own the topic and is not responsible for managing the topic. This includes the topic lifecycle or its general validity. Other restrictions for general access to the topic may apply. See the documentation about using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
 
+## Consumer Offsets Commit Interval
+
+Kafka consumers keep track of the last successfully sent events by committing offsets.
+
+Knative Kafka Broker commits the offset every `auto.commit.interval.ms` milliseconds.
+
+!!! note
+    To prevent negative impacts to performance, it is not recommended committing
+    offsets every time an event is successfully sent to a subscriber.
+
+The interval can be changed by changing the `config-kafka-broker-data-plane` `ConfigMap`
+in the `knative-eventing` namespace by modifying the parameter `auto.commit.interval.ms` as follows:
+
+```yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kafka-broker-data-plane
+  namespace: knative-eventing
+data:
+  # Some configurations omitted ...
+  config-kafka-broker-consumer.properties: |
+    # Some configurations omitted ...
+
+    # Commit the offset every 5000 millisecods (5 seconds)
+    auto.commit.interval.ms=5000
+```
+
+!!! note
+    Knative Kafka Broker guarantees at least once delivery, which means that your applications may
+    receive duplicate events. A higher commit interval means that there is a higher probability of
+    receiving duplicate events, because when a Consumer restarts, it restarts from the last
+    committed offset.
+
+## Kafka Producer and Consumer configurations
+
+Knative exposes all available Kafka producer and consumer configurations that can be modified to suit your workloads.
+
+You can change these configurations by modifying the `config-kafka-broker-data-plane` `ConfigMap` in
+the `knative-eventing` namespace.
+
+Documentation for the settings available in this `ConfigMap` is available on the
+[Apache Kafka website](https://kafka.apache.org/documentation/),
+in particular, [Producer configurations](https://kafka.apache.org/documentation/#producerconfigs)
+and [Consumer configurations](https://kafka.apache.org/documentation/#consumerconfigs).
+
+## Enable debug logging for data plane components
+
+The following YAML shows the default logging configuration for data plane components, that is created during the
+installation step:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-config-logging
+  namespace: knative-eventing
+data:
+  config.xml: |
+    <configuration>
+      <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+      </appender>
+      <root level="INFO">
+        <appender-ref ref="jsonConsoleAppender"/>
+      </root>
+    </configuration>
+```
+
+To change the logging level to `DEBUG`, you must:
+
+1. Apply the following `kafka-config-logging` `ConfigMap` or replace `level="INFO"` with `level="DEBUG"` to the
+`ConfigMap` `kafka-config-logging`:
+
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: kafka-config-logging
+      namespace: knative-eventing
+    data:
+      config.xml: |
+        <configuration>
+          <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+          </appender>
+          <root level="DEBUG">
+            <appender-ref ref="jsonConsoleAppender"/>
+          </root>
+        </configuration>
+    ```
+
+2. Restart the `kafka-broker-receiver` and the `kafka-broker-dispatcher`, by entering the following commands:
+
+    ```bash
+    kubectl rollout restart deployment -n knative-eventing kafka-broker-receiver
+    kubectl rollout restart deployment -n knative-eventing kafka-broker-dispatcher
+    ```
+
+## Configuring the order of delivered events
+
+When dispatching events, the Kafka broker can be configured to support different delivery ordering guarantees.
+
+You can configure the delivery order of events using the `kafka.eventing.knative.dev/delivery.order` annotation on the `Trigger` object:
+
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: my-service-trigger
+  annotations:
+     kafka.eventing.knative.dev/delivery.order: ordered
+spec:
+  broker: my-kafka-broker
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: my-service
+```
+
+The supported consumer delivery guarantees are:
+
+* `unordered`:  An unordered consumer is a non-blocking consumer that delivers messages unordered, while preserving proper offset management. Useful when there is a high demand of parallel consumption and no need for explicit ordering. One example could be processing of click analytics.
+* `ordered`: An ordered consumer is a per-partition blocking consumer that waits for a successful response from the CloudEvent subscriber before it delivers the next message of the partition. Useful when there is a need for more strict ordering or if there is a relationship or grouping between events. One example could be processing of customer orders.
+
+The `unordered` delivery is the default ordering guarantee.
 
 ## Data plane Isolation vs Shared Data plane
 
