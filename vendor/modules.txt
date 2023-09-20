@@ -40,8 +40,6 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/google/go-cmp v0.5.5
-## explicit; go 1.8
 # github.com/google/go-github v17.0.0+incompatible
 ## explicit
 github.com/google/go-github/github
@@ -300,7 +298,7 @@ gopkg.in/go-playground/webhooks.v3/github
 gopkg.in/yaml.v2
 # honnef.co/go/tools v0.0.1-2020.1.5
 ## explicit; go 1.11
-# knative.dev/hack v0.0.0-20230803220206-d7fde305c59f
+# knative.dev/hack v0.0.0-20230919151801-38316f28f0bf
 ## explicit; go 1.18
 knative.dev/hack
 # go.opencensus.io => go.opencensus.io v0.20.2
