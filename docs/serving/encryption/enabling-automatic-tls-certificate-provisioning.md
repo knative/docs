@@ -1,61 +1,65 @@
-# Enabling auto-TLS certs
+# Enabling automatic TLS certificate provisioning
 
 If you install and configure cert-manager, you can configure Knative to
 automatically obtain new TLS certificates and renew existing ones for Knative
-Services. To learn more about using secure connections in Knative, see
-[Configuring HTTPS with TLS certificates](using-a-tls-cert.md).
+Services for external domains (like `application.example.com`). Please note that we are working on bringing automatic HTTPS
+connections for cluster-local domains (like `application.namespace.svc.cluster.local`) as well (for more details see the [issue](https://github.com/knative/serving/issues/13472)).
+
 
 ## Before you begin
 
 The following must be installed on your Knative cluster:
 
-- [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md).
+- [Knative Serving](../../install/yaml-install/serving/install-serving-with-yaml.md).
 
-- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
+- A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) or [Istio with SDS, version 1.3 or higher](../../install/installing-istio.md#installing-istio-with-SDS-to-secure-the-ingress-gateway).
 
-- [`cert-manager` version `1.0.0` or higher](../install/installing-cert-manager.md).
+- [`cert-manager`](../../install/installing-cert-manager.md) version `1.0.0` or higher.
 
-- Your Knative cluster must be configured to use a [custom domain](using-a-custom-domain.md).
+- Your Knative cluster must be configured to use a [custom domain](../using-a-custom-domain.md).
 
 - Your DNS provider must be setup and configured to your domain.
 
-- If you want to use HTTP-01 challenge, you need to configure your custom
-domain to map to the IP of ingress. You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
+- If you want to use HTTP-01 challenge, you need to configure your custom domain to map to the IP of ingress.
+You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
 
-## Automatic TLS provision mode
 
-Knative supports the following Auto TLS modes:
+## Automatic TLS certificate provisioning configurations
+
+Knative supports the following automatic TLS certificate provisioning configurations:
 
 1.  Using DNS-01 challenge
 
-    In this mode, your cluster needs to be able to talk to your DNS server to verify the ownership of your domain.
+    In this configuration, your cluster needs to be able to talk to your DNS server to verify the ownership of your domain.
+    In this configuration, you are able to configure two modes:
 
-    - **Provision Certificate per namespace is supported when using DNS-01 challenge mode.**
+    - **Provisioning of a wildcard Certificate for each namespace**
         - This is the recommended mode for faster certificate provision.
-        - In this mode, a single Certificate will be provisioned per namespace and is reused across the Knative Services within the same namespace.
+        - In this mode, a wildcard Certificate will be provisioned for each namespace and is reused across the Knative Services within the same namespace.
 
-    - **Provision Certificate per Knative Service is supported when using DNS-01 challenge mode.**
-        - This is the recommended mode for better certificate isolation between Knative Services.
+    - **Provisioning of a Certificate for each Knative Service**
+        - This is the recommended mode for better Certificate isolation between Knative Services.
         - In this mode, a Certificate will be provisioned for each Knative Service.
-        - The TLS effective time is longer as it needs Certificate provision for each Knative Service creation.
+        - The time to issue Certificates is longer as more Certificates are created in this mode.
 
 1.  Using HTTP-01 challenge
 
-    - In this type, your cluster does not need to be able to talk to your DNS server. You must map your domain to the IP of the cluster ingress.
-    - When using HTTP-01 challenge, **a certificate will be provisioned per Knative Service.**
-    - **HTTP-01 does not support provisioning a certificate per namespace.**
+    - In this configuration, your cluster does not need to be able to talk to your DNS server, but you must make sure that your DNS entry points to the IP of the cluster ingress.
+    - When using HTTP-01 challenge, **a certificate will be provisioned for each Knative Service.**
+    - **HTTP-01 does not support provisioning wildcard Certificates per namespace.**
 
-## Enabling Auto TLS
 
-1.  Create and add the `ClusterIssuer` configuration file to your Knative cluster
+## Enabling automatic TLS provisioning
+
+### Creating a `ClusterIssuer`
+
+1.  Create and add the `ClusterIssuer` configuration to your Knative cluster
 to define who issues the TLS certificates, how requests are validated,
 and which DNS provider validates those requests.
 
-    - **ClusterIssuer for DNS-01 challenge:** use the cert-manager reference to determine how to configure your `ClusterIssuer` file.
+    - **ClusterIssuer for DNS-01 challenge:**
 
-        - See the generic [`ClusterIssuer` example](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
-        - Also see the
-        [`DNS01` example](https://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html)
+        Refer to the cert-manager documentation, like the [Generic `ClusterIssuer`](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer) and the [`DNS01` example](https://cert-manager.io/docs/configuration/acme/dns01/)
 
         For example, the following `ClusterIssuer` file named `letsencrypt-issuer` is
         configured for the Let's Encrypt CA and Google Cloud DNS.
@@ -90,32 +94,31 @@ and which DNS provider validates those requests.
 
     - **ClusterIssuer for HTTP-01 challenge**
 
-        To apply the ClusterIssuer for HTTP01 challenge:
+        Refer to the cert-manager documentation, like the [`HTTP01 `ClusterIssuer`](https://cert-manager.io/docs/configuration/acme/http01/).
+        
+        For example, the following `ClusterIssuer` uses Let's Encrypt using `HTTP01:
 
-        1. Create a YAML file using the following template:
+        ```yaml
+        apiVersion: cert-manager.io/v1
+        kind: ClusterIssuer
+        metadata:
+          name: letsencrypt-http01-issuer
+        spec:
+          acme:
+            privateKeySecretRef:
+              name: letsencrypt
+            server: https://acme-v02.api.letsencrypt.org/directory
+            solvers:
+            - http01:
+               ingress:
+                 class: istio
+        ```
 
-            ```yaml
-            apiVersion: cert-manager.io/v1
-            kind: ClusterIssuer
-            metadata:
-              name: letsencrypt-http01-issuer
-            spec:
-              acme:
-                privateKeySecretRef:
-                  name: letsencrypt
-                server: https://acme-v02.api.letsencrypt.org/directory
-                solvers:
-                - http01:
-                   ingress:
-                     class: istio
-            ```
+    1. Apply your `ClusterIssuer` YAML file by running the command:
 
-        1. Apply the YAML file by running the command:
-
-            ```bash
-            kubectl apply -f <filename>.yaml
-            ```
-            Where `<filename>` is the name of the file you created in the previous step.
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
 
 1.  Ensure that the ClusterIssuer is created successfully:
 
@@ -124,6 +127,7 @@ and which DNS provider validates those requests.
     ```
 
     Result: The `Status.Conditions` should include `Ready=True`.
+
 
 ### DNS-01 challenge only: Configure your DNS provider
 
@@ -156,28 +160,46 @@ wildcard certificate like `*.my-ns.example.com`.
 ### Provisioning certificates per namespace (wildcard certificates)
 
 !!! warning
-    Provisioning a certificate per namespace only works with DNS-01
+    Provisioning a wildcard Certificate per namespace only works with DNS-01
     challenge. This component cannot be used with HTTP-01 challenge.
 
-The per-namespace certificate manager uses namespace labels to select which
-namespaces should have a certificate applied. For more details on namespace
-selectors, see
-[the Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors).
+The per-namespace configuration uses namespace labels to select which
+namespaces should have a certificate applied. The selection is configured using the 
+key `namespace-wildcard-cert-selector` in the `config-network` ConfigMap. 
+For example, you can use the following configurations:
 
-Prior to release 1.0, the fixed label
-`networking.knative.dev/disableWildcardCert: true` was used to disable
-certificate generation for a namespace. In 1.0 and later, other labels such as
-`kubernetes.io/metadata.name` may be used to select or restrict namespaces.
+- `namespace-wildcard-cert-selector`: `""` = Use an empty value to disable the feature (this is the default).
+- `namespace-wildcard-cert-selector`: `{}` = Use an empty object to enable for all namespaces.
 
-To enable certificates for all namespaces except those with the
-`networking.knative.dev/disableWildcardCert: true` label, use the following
-command:
+You can also configure the selector to opt-out when a specific label is on the namespace:
+
+```yaml
+namespace-wildcard-cert-selector:
+  matchExpressions:
+  - key: "networking.knative.dev/disableWildcardCert"
+    operator: "NotIn"
+    values: ["true"] 
+```
+This selects all namespaces where the label value is not in the set `"true"`.
+
+Or use existing kubernetes labels to select namespaces based on their name:
+
+```yaml
+namespace-wildcard-cert-selector:
+  matchExpressions:
+    - key: "kubernetes.io/metadata.name"
+      operator: "In"
+      values: ["my-namespace", "my-other-namespace"] 
+```
+
+To apply the configuration you can use the following command (optionally adapting the label-selector):
 
 ```bash
 kubectl patch --namespace knative-serving configmap config-network -p '{"data": {"namespace-wildcard-cert-selector": "{\"matchExpressions\": [{\"key\":\"networking.knative.dev/disableWildcardCert\", \"operator\": \"NotIn\", \"values\":[\"true\"]}]}"}}'
 ```
 
-This selects all namespaces where the label value is not in the set `"true"`.
+For more details on namespace selectors, see [the Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors).
+
 
 ### Configure config-certmanager ConfigMap
 
@@ -215,9 +237,9 @@ in the `knative-serving` namespace to reference your new `ClusterIssuer`.
     kubectl get configmap config-certmanager -n knative-serving -o yaml
     ```
 
-### Turn on Auto TLS
+### Turn on automatic TLS provisioning
 
-Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `auto-tls` and specify how HTTP requests are handled:
+Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `external-domain-tls` and specify how HTTP requests are handled:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
@@ -225,7 +247,7 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
     kubectl edit configmap config-network -n knative-serving
     ```
 
-1.  Add the `auto-tls: Enabled` attribute under the `data` section:
+1.  Add the `external-domain-tls: Enabled` attribute under the `data` section:
 
     ```yaml
     apiVersion: v1
@@ -235,22 +257,21 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
       namespace: knative-serving
     data:
        ...
-       auto-tls: Enabled
+       external-domain-tls: Enabled
        ...
     ```
 
-1.  Configure how HTTP and HTTPS requests are handled in the [`http-protocol`](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml#L109) attribute.
+1.  Configure how HTTP and HTTPS requests are handled with the `http-protocol` attribute.
 
     By default, Knative ingress is configured to serve HTTP traffic
     (`http-protocol: Enabled`). Now that your cluster is configured to use TLS
-    certificates and handle HTTPS traffic, you can specify whether or not any
-    HTTP traffic is allowed.
+    certificates and handle HTTPS traffic on external domains, you can specify whether any
+    HTTP traffic is allowed or not.
 
     Supported `http-protocol` values:
 
     - `Enabled`: Serve HTTP traffic.
-    - `Redirected`: Responds to HTTP request with a `302` redirect to ask the
-      clients to use HTTPS.
+    - `Redirected`: Responds to HTTP request with a `302` redirect to ask the clients to use HTTPS.
 
     ```yaml
     data:
@@ -267,7 +288,7 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
       namespace: knative-serving
     data:
       ...
-      auto-tls: Enabled
+      external-domain-tls: Enabled
       http-protocol: Redirected
       ...
     ```
@@ -279,10 +300,11 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
     ```
 
 Congratulations! Knative is now configured to obtain and renew TLS certificates.
-When your TLS certificate is active on your cluster, your Knative services will
-be able to handle HTTPS traffic.
+When your TLS Certificate is issued and available on your cluster, your Knative services will
+be able to handle HTTPS traffic on the external domain.
 
-### Verify Auto TLS
+
+### Verification
 
 1.  Run the following command to create a Knative Service:
 
@@ -294,14 +316,16 @@ be able to handle HTTPS traffic.
 
     ```bash
     NAME               URL                                           LATESTCREATED            LATESTREADY              READY   REASON
-    autoscale-go       https://autoscale-go.default.{custom-domain}   autoscale-go-6jf85 autoscale-go-6jf85       True  
+    autoscale-go       https://autoscale-go.default.{custom-domain}  autoscale-go-6jf85       autoscale-go-6jf85       True  
     ```
 
     Note that the URL will be **https** in this case.
 
-### Disable Auto TLS per service or route
 
-If you have Auto TLS enabled in your cluster, you can choose to disable Auto TLS for individual services or routes by adding the annotation `networking.knative.dev/disable-auto-tls: true`.
+## Disable automatic TLS certificate provisioning per Service or Route
+
+If you have automatic TLS certificate provisioning enabled in your cluster, you can choose to disable the feature 
+for individual Knative Services or Routes by adding the annotation `networking.knative.dev/disable-external-domain-tls: true`.
 
 Using the previous `autoscale-go` example:
 
@@ -313,11 +337,11 @@ Using the previous `autoscale-go` example:
      metadata:
        annotations:
         ...
-         networking.knative.dev/disable-auto-tls: "true"
+         networking.knative.dev/disable-external-domain-tls: "true"
         ...
     ```
 
-1. The service URL should now be **http**, indicating that AutoTLS is disabled:
+1. The service URL should now be **http**, indicating that automatic TLS Certificate provisioning is disabled:
 
     ```bash
     NAME           URL                                          LATEST               AGE     CONDITIONS   READY   REASON

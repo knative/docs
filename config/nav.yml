@@ -126,7 +126,7 @@ nav:
           - Configuring ingress class: serving/services/ingress-class.md
           - Configuring certificate class: serving/services/certificate-class.md
           - Configuring custom domains: serving/services/custom-domains.md
-          - Using a custom TLS certificate for DomainMapping: serving/services/byo-certificate.md
+          - Using a custom TLS certificate for DomainMapping: serving/services/custom-tls-certificate-domain-mapping.md
           - Using extensions enabled by QPOptions: serving/services/using-queue-extensions.md
           # TODO: Add security section to docs?
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
@@ -147,18 +147,18 @@ nav:
         - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
         - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
         - Configuring high-availability components: serving/config-ha.md
-        - Configuring HTTPS connections: serving/using-a-tls-cert.md
-        - Enabling auto-TLS certs: serving/using-auto-tls.md
         - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
         - Configuring domain names: serving/using-a-custom-domain.md
         - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
         - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
-        # Serving config
         - Serving configuration:
           - Configure Deployment resources: serving/configuration/deployment.md
           - Configuring gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
           - Feature and extension flags: serving/configuration/feature-flags.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
+        - Serving encryption configuration:
+          - Using custom TLS certificates in the networking layer: serving/encryption/using-certificates-in-networking-layer.md
+          - Enabling automatic TLS certificate provisioning: serving/encryption/enabling-automatic-tls-certificate-provisioning.md
       # Serving - Application Security
       - Application security:
         - About Security-Guard: serving/app-security/security-guard-about.md

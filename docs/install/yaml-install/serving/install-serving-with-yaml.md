@@ -170,20 +170,9 @@ The following tabs expand to show instructions for installing each Serving exten
 === "TLS with cert-manager"
 
     Knative supports automatically provisioning TLS certificates through
-    [cert-manager](https://cert-manager.io/docs/). The following commands
-    install the components needed to support the provisioning of TLS certificates
-    through cert-manager.
-
-    1. Install [cert-manager version v1.0.0 or later](../../installing-cert-manager.md).
-
-    1. Install the component that integrates Knative with `cert-manager` by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(repo="net-certmanager",file="release.yaml")}}
-        ```
-
-    1. Configure Knative to automatically configure TLS certificates by following the steps in
-    [Enabling automatic TLS certificate provisioning](../../../serving/using-auto-tls.md).
+    [cert-manager](https://cert-manager.io/docs/).
+    Follow the documentation in [Enabling automatic TLS certificate provisioning](../../../serving/encryption/enabling-automatic-tls-certificate-provisioning.md)
+    for more information.
 
 === "TLS with HTTP01"
 
@@ -204,11 +193,11 @@ The following tabs expand to show instructions for installing each Serving exten
           --patch '{"data":{"certificate-class":"net-http01.certificate.networking.knative.dev"}}'
         ```
 
-    3. Enable autoTLS by running the command:
+    3. Enable `external-domain-tls` by running the command:
 
         ```bash
         kubectl patch configmap/config-network \
           --namespace knative-serving \
           --type merge \
-          --patch '{"data":{"auto-tls":"Enabled"}}'
+          --patch '{"data":{"external-domain-tls":"Enabled"}}'
         ```

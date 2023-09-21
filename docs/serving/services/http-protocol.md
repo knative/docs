@@ -1,6 +1,6 @@
 # HTTPS redirection
 
-Operators can force HTTPS redirection for all Services. See the `http-protocol` mentioned in the [Turn on AutoTLS](../using-auto-tls.md) page for more details.
+Operators can force HTTPS redirection for all Services. See the `http-protocol` mentioned in the [Enabling automatic TLS certificate provisioning](../encryption/enabling-automatic-tls-certificate-provisioning.md) page for more details.
 
 ## Overriding the default HTTP behavior
 

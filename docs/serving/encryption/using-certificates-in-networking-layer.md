@@ -1,11 +1,11 @@
-# Configuring HTTPS with TLS certificates
+# Using custom certificates in the networking layers
 
-Learn how to configure secure HTTPS connections in Knative using TLS
-certificates
-([TLS replaces SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security)).
-Configure secure HTTPS connections to enable your Knative services and routes to
-[terminate external TLS connections](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_interception).
-You can configure Knative to handle certificates that you manually specify, or
+Knative allows to use custom TLS certificates to enable secure HTTPS connections for your Knative Services 
+for the external domain (like `application.example.com`). Please note that we are working on bringing automatic HTTPS
+connections for cluster-local domains (like `application.namespace.svc.cluster.local`) as well
+(for more details see the [issue](https://github.com/knative/serving/issues/13472)).
+
+For external domains, you can configure Knative to handle certificates that you manually specify, or
 you can enable Knative to automatically obtain and renew certificates.
 
 You can use either [Certbot][cb] or [cert-manager][cm] to obtain certificates.
@@ -23,7 +23,7 @@ cert-manager tool:
   also use cert-manager to configure Knative to automatically obtain new TLS
   certificates and renew existing ones. If you want to enable Knative to
   automatically provision TLS certificates, instead see the
-  [Enabling automatic TLS certificate provisioning](using-auto-tls.md) topic.
+  [Enabling automatic TLS certificate provisioning](enabling-automatic-tls-certificate-provisioning.md) topic.
 
 By default, the [Let's Encrypt Certificate Authority (CA)][le] is used to
 demonstrate how to enable HTTPS connections, but you can configure Knative to
@@ -36,8 +36,7 @@ use and configure your certificate issuer to use the
 
 [cm]: https://github.com/jetstack/cert-manager
 [cm-docs]: https://cert-manager.readthedocs.io/en/latest/getting-started/
-[cm-providers]:
-  http://docs.cert-manager.io/en/latest/tasks/acme/configuring-dns01/index.html?highlight=supported%20DNS01%20providers#supported-dns01-providers
+[cm-providers]: https://cert-manager.io/docs/configuration/acme/dns01/
 [le]: https://letsencrypt.org
 [le-faqs]: https://letsencrypt.org/docs/faq/
 [cb]: https://certbot.eff.org
@@ -50,9 +49,8 @@ use and configure your certificate issuer to use the
 You must meet the following requirements to enable secure HTTPS connections:
 
 - Knative Serving must be installed. For details about installing the Serving
-  component, see the [Knative installation guides](../install/yaml-install/serving/install-serving-with-yaml.md).
-- You must configure your Knative cluster to use a
-  [custom domain](using-a-custom-domain.md).
+  component, see the [Knative installation guides](../../install/yaml-install/serving/install-serving-with-yaml.md).
+- You must configure your Knative cluster to use a [custom domain](../using-a-custom-domain.md).
 
 !!! warning
     Istio only supports a single certificate per Kubernetes cluster.
@@ -61,7 +59,7 @@ You must meet the following requirements to enable secure HTTPS connections:
 ## Obtaining a TLS certificate
 
 If you already have a signed certificate for your domain, see
-[Manually adding a TLS certificate](#manually-adding-a-tls-certificate) for
+[manually adding a TLS certificate](#manually-adding-a-tls-certificate) for
 details about configuring your Knative cluster.
 
 If you need a new TLS certificate, you can choose to use one of the following
@@ -117,31 +115,24 @@ You can install and use [cert-manager][cm] to either manually obtain a
 certificate or to configure your Knative cluster for automatic certificate
 provisioning:
 
-- **Manual certificates**: Install cert-manager and then use the tool to
-  manually obtain a certificate.
+**Manual certificates**: 
 
-  To use cert-manager to manually obtain certificates:
-
-  1.  [Install and configure cert-manager](../install/installing-cert-manager.md).
+  1.  [Install and configure cert-manager](../../install/installing-cert-manager.md).
 
   1.  Continue to the steps about
       [manually adding a TLS certificate](#manually-adding-a-tls-certificate) by
       creating and using a Kubernetes secret.
 
-- **Automatic certificates**: Configure Knative to use cert-manager for
-  automatically obtaining and renewing TLS certificate. The steps for installing
-  and configuring cert-manager for this method are covered in full in the
-  [Enabling automatic TLS cert provisioning](using-auto-tls.md) topic.
+**Automatic certificates**: 
+
+See [enabling automatic TLS certificate provisioning](enabling-automatic-tls-certificate-provisioning.md).
+
 
 ## Manually adding a TLS certificate
 
 If you have an existing certificate or have used one of the Certbot or
 cert-manager tool to manually obtain a new certificate, you can use the
-following steps to add that certificate to your Knative cluster.
-
-For instructions about enabling Knative for automatic certificate provisioning,
-see [Enabling automatic TLS cert provisioning](using-auto-tls.md). Otherwise,
-follow the steps in the relevant tab to manually add a certificate:
+following steps in the relevant tab to add that certificate to your Knative cluster.
 
 
 === "Contour"
@@ -184,7 +175,7 @@ follow the steps in the relevant tab to manually add a certificate:
         Where `<filename>` is the name of the file you created in the previous step.
 
     1. Update the Knative Contour plugin to use the certificate as a fallback
-       when autoTLS is disabled by running the command:
+       when `external-domain-tls` is disabled by running the command:
 
          ```bash
          kubectl patch configmap config-contour -n knative-serving \
@@ -262,4 +253,4 @@ follow the steps in the relevant tab to manually add a certificate:
 ## What's next:
 
 After your changes are running on your Knative cluster, you can begin using the
-HTTPS protocol for secure access your deployed Knative services.
+HTTPS protocol for secure access your deployed Knative services on external domains.
