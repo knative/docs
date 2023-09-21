@@ -65,6 +65,7 @@
 /security-guard/* go-get=:go-get /golang/security-guard.html 200
 /security-guard/* https://pkg.go.dev/knative.dev/security-guard/:splat
 /serving/* go-get=:go-get /golang/serving.html 200
+/serving-progressive-rollout/* go-get=1 /golang/serving-progressive-rollout.html 200
 /serving/* https://pkg.go.dev/knative.dev/serving/:splat
 /specs/* go-get=:go-get /golang/specs.html 200
 /test-infra/* go-get=:go-get /golang/test-infra.html 200
