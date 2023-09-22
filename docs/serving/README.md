@@ -10,7 +10,7 @@ Examples of supported Knative Serving use cases:
 - Autoscaling, including scaling pods down to zero.
 - Support for multiple networking layers, such as Contour, Kourier, and Istio, for integration into existing environments.
 
-Knative Serving supports both HTTP and [HTTPS](using-a-tls-cert.md) networking protocols.
+Knative Serving supports both HTTP and [HTTPS](encryption/using-certificates-in-networking-layer.md) networking protocols.
 
 ## Installation
 
