@@ -1,7 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
-      contributing/about.md: contributing/README.md
+      contributing/about.md: community/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/broker/create-mtbroker.md: eventing/brokers/create-broker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
@@ -17,7 +17,6 @@ plugins:
       reference/api/serving-api.md: serving/reference/serving-api.md
       community/about.md: community/governance.md
       contributing/contributing.md: community/contributing.md
-      contributing/about.md: community/governance.md
       contributing/README.md: community/README.md
       eventing/getting-started.md: getting-started/getting-started-eventing.md
       admin/collecting-logs/README.md: serving/observability/logging/collecting-logs.md
@@ -105,7 +104,7 @@ plugins:
       developer/serving/deploying-from-private-registry.md: serving/deploying-from-private-registry.md
       developer/serving/rolling-out-latest-revision.md: serving/rolling-out-latest-revision.md
       developer/serving/services/README.md: serving/services/README.md
-      developer/serving/services/byo-certificate.md: serving/services/byo-certificate.md
+      developer/serving/services/byo-certificate.md: serving/services/custom-tls-certificate-domain-mapping.md
       developer/serving/services/certificate-class.md: serving/services/certificate-class.md
       developer/serving/services/configure-requests-limits-services.md: serving/services/configure-requests-limits-services.md
       developer/serving/services/creating-services.md: serving/services/creating-services.md
@@ -209,7 +208,7 @@ plugins:
       serving/services/deployment.md: serving/configuration/deployment.md
       serving/services/http-option.md: serving/services/http-protocol.md
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
-      serving/using-an-ssl-cert/index.md: serving/using-a-tls-cert.md
+      serving/using-an-ssl-cert/index.md: serving/encryption/using-certificates-in-networking-layer.md
       serving/using-subroutes.md: serving/traffic-management.md
       about/case-studies/README.md: about/case-studies/deepc.md
       eventing/brokers/create-mtbroker.md: eventing/brokers/create-broker.md
