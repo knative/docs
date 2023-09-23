@@ -83,6 +83,12 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         ```
 
         !!! note
+            For [KinD](https://kind.sigs.k8s.io/), a local registry will no longer be created by default. Users will need to pass the `--registry` flag if they wish to create a local registry:
+            ```bash
+            kn quickstart kind --registry
+            ```
+
+        !!! note
             Quickstart uses Port 80, and it will fail to install if any other services are bound on that port. If you have a service using Port 80, you'll need to stop it before using Quickstart.
             To check if another service is using Port 80:
             ```bash
