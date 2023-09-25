@@ -80,7 +80,7 @@ data:
   transport-encryption: "strict"
 ```
 
-## Trusting CA in a specific event sender
+## Trusting CA for a specific event sender
 
 Event sources, triggers or subscriptions are considered event senders and they can be configured to
 trust specific CA certificates.
