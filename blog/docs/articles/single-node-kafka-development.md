@@ -125,8 +125,8 @@ eventing-webhook-8db49d6cc-4f847           1/1     Running   0          2h1m
 As the next step we need to install the control- and data-plane for the Knative Kafka broker:
 
 ```bash
-kubectl apply --filename https://github.com/knative-sandbox/eventing-kafka-broker/releases/download/knative-v1.8.4/eventing-kafka-controller.yaml
-kubectl apply --filename https://github.com/knative-sandbox/eventing-kafka-broker/releases/download/knative-v1.8.4/eventing-kafka-broker.yaml
+kubectl apply --filename https://github.com/knative-extensions/eventing-kafka-broker/releases/download/knative-v1.8.4/eventing-kafka-controller.yaml
+kubectl apply --filename https://github.com/knative-extensions/eventing-kafka-broker/releases/download/knative-v1.8.4/eventing-kafka-broker.yaml
 ```
 
 Afterwards we have four new pods in our `knative-eventing` namespace, for our Knative Kafka Broker:

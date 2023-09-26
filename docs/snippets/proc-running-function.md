@@ -16,6 +16,9 @@ The `run` command builds an image for your function if required, and runs this i
     func run [--registry <registry>]
     ```
 
+!!! note
+    The coordinates for the **image registry** can be configured through an environment variable (`FUNC_REGISTRY`) as well.
+
     Using this command also builds the function if necessary.
 
     You can force a rebuild of the image by running the command:

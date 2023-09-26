@@ -12,11 +12,11 @@ by a Knative Service.
 
 ### Install GitHub Event Source
 
-GitHub Event source lives in [knative-sandbox/eventing-github](https://github.com/knative-sandbox/eventing-github). Head to the releases page, find the latest release with the `github.yaml`
+GitHub Event source lives in [knative-extensions/eventing-github](https://github.com/knative-extensions/eventing-github). Head to the releases page, find the latest release with the `github.yaml`
 artifact and replace  `<RELEASE>` with the version tag:
 
 ```bash
-kubectl apply -f https://github.com/knative-sandbox/eventing-github/releases/download/<RELEASE>/github.yaml
+kubectl apply -f https://github.com/knative-extensions/eventing-github/releases/download/<RELEASE>/github.yaml
 ```
 
 Check that the manager is running:

@@ -53,8 +53,8 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-go
 
  * If you look in `Dockerfile`, you will see a method for pulling in the dependencies and building a small Go container based on Alpine. You can build and push this to your registry of choice via:
 ```bash
-docker build -t <image> .
-docker push <image>
+# Build and push the container on your local machine.
+docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
 ```
 
  ### ko

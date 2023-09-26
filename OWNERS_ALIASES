@@ -20,16 +20,23 @@ aliases:
   - salaboy
   docs-reviewers:
   - nainaz
+  - nak3
   - pmbanugo
+  - retocode
+  - skonto
   - snneji
   docs-wg-leads:
   - snneji
   docs-writers:
   - csantanapr
+  - nak3
   - psschwei
+  - retocode
+  - skonto
   - snneji
   eventing-reviewers:
   - aslom
+  - cali0707
   - creydr
   eventing-triage:
   - lberk
@@ -37,12 +44,14 @@ aliases:
   - pierDipi
   eventing-writers:
   - aliok
+  - creydr
   - lberk
   - lionelvillard
   - matzew
   - odacremolbap
   - pierDipi
   func-reviewers:
+  - gauron99
   - jrangelramos
   - nainaz
   func-writers:
@@ -51,17 +60,16 @@ aliases:
   - lkingland
   - matejvasek
   - salaboy
-  - zroubalik
   functions-wg-leads:
-  - lance
+  - lkingland
   - salaboy
   knative-admin:
   - Vishal-Chdhry
   - creydr
   - csantanapr
+  - davidhadas
   - dprotaso
   - dsimansk
-  - evankanderson
   - knative-automation
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -78,7 +86,7 @@ aliases:
   - skonto
   - smoser-ibm
   - upodroid
-  - zroubalik
+  - xtreme-sameer-vohra
   knative-release-leads:
   - Vishal-Chdhry
   - creydr
@@ -125,6 +133,7 @@ aliases:
   - evankanderson
   serving-approvers:
   - nak3
+  - psschwei
   - skonto
   serving-reviewers:
   - KauzClay
@@ -140,7 +149,6 @@ aliases:
   - skonto
   serving-wg-leads:
   - dprotaso
-  - psschwei
   serving-writers:
   - dprotaso
   - nak3
@@ -153,16 +161,22 @@ aliases:
   - puerco
   - salaboy
   technical-oversight-committee:
+  - davidhadas
   - dprotaso
   - dsimansk
   - kvmware
   - psschwei
-  - zroubalik
   trademark-committee:
-  - evankanderson
   - mchmarny
   - smoser-ibm
+  - xtreme-sameer-vohra
   ux-wg-leads:
-  - snneji
+  - cali0707
+  - leo6leo
+  - mmejia02
+  - zainabhusain227
   ux-writers:
-  - snneji
+  - cali0707
+  - leo6leo
+  - mmejia02
+  - zainabhusain227

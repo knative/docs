@@ -11,13 +11,13 @@ You must have access to a Kubernetes cluster with [Knative Eventing installed](.
 1. Install the Kafka controller:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extensions", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
     ```
 
 1. Install the KafkaSink data plane:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-sandbox", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
+    kubectl apply -f {{ artifact(org="knative-extensions", repo="eventing-kafka-broker", file="eventing-kafka-sink.yaml") }}
     ```
 
 1. Verify that `kafka-controller` and `kafka-sink-receiver` Deployments are running:

@@ -76,7 +76,7 @@ my-kafka-sink   http://kafka-sink-ingress.knative-eventing.svc.cluster.local/def
 
 At this point we could just use a pod inside the Kubernetes cluster with the `curl` program installed and send an event to the `URL` of the `KafkaSink`.
 
-However, we are instead using the [`kn` client CLI](https://github.com/knative/client) with its [event plugin](https://github.com/knative-sandbox/kn-plugin-event) for managing cloud events from command line:
+However, we are instead using the [`kn` client CLI](https://github.com/knative/client) with its [event plugin](https://github.com/knative-extensions/kn-plugin-event) for managing cloud events from command line:
 
 ```
 kn event send \

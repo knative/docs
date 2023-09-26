@@ -44,15 +44,15 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
 
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/servicemonitor.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/servicemonitor.yaml
     ```
 
-1. Grafana dashboards can be imported from the [`knative-sandbox` repository](https://github.com/knative-sandbox/monitoring/tree/main/grafana).
+1. Grafana dashboards can be imported from the [`knative-extensions` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
 
 1. If you are using the Grafana Helm Chart with the Dashboard Sidecar enabled, you can load the dashboards by applying the following configmaps.
 
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative-sandbox/monitoring/main/grafana/dashboards.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/grafana/dashboards.yaml
     ```
 
 ### Access the Prometheus instance locally
@@ -87,7 +87,7 @@ In the following example, you can configure a single collector instance using a 
     For more complex deployments, you can automate some of these steps by using the [OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator).
 
 !!! caution
-    The Grafana dashboards at https://github.com/knative-sandbox/monitoring/tree/main/grafana don't work with metrics scraped from OpenTelemetry Collector.
+    The Grafana dashboards at https://github.com/knative-extensions/monitoring/tree/main/grafana don't work with metrics scraped from OpenTelemetry Collector.
 
 ![Diagram of components reporting to collector, which is scraped by Prometheus](system-diagram.svg)
 

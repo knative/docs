@@ -109,11 +109,8 @@ folder) you're ready to build and deploy the sample app.
    username:
 
    ```bash
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-clojure .
-
-   # Push the container to docker registry
-   docker push {username}/helloworld-clojure
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-clojure" --push .
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you

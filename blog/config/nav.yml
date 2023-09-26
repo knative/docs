@@ -17,6 +17,7 @@ nav:
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-11-release.md
           - releases/announcing-knative-v1-10-release.md
           - releases/announcing-knative-v1-9-release.md
           - releases/announcing-knative-v1-8-release.md
@@ -45,6 +46,11 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/knative-eventing-vision.md
+          - articles/new_event_discovery_features.md
+          - articles/getting-started-blog-p2.md
+          - articles/getting-started-blog-p1.md
+          - articles/getting-started-blog-p0.md
           - articles/improved-ha-configuration.md
           - articles/from-cloudevent-to-apache-kafka-records-part-two.md
           - articles/knative-serving-in-k0s.md
@@ -80,6 +86,7 @@ nav:
           - steering/2020-01-annual-report-2019.md
           - steering/2019-12-updates.md
       - Events:
+          - events/fuzzing-audit-2023.md
           - events/knative-projectmeeting-kubecon-eu-2023.md
           - events/google-summer-of-code-2023.md
           - events/virtual-office-hour-12-2022.md

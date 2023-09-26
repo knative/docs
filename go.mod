@@ -14,13 +14,12 @@ require (
 	google.golang.org/grpc v1.36.0
 	gopkg.in/go-playground/webhooks.v3 v3.13.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/hack v0.0.0-20230615155948-d7586a218601
+	knative.dev/hack v0.0.0-20230919151801-38316f28f0bf
 )
 
 require (
 	cloud.google.com/go v0.72.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
-	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect

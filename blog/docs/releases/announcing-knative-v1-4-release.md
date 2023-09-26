@@ -85,7 +85,7 @@ Follow the instructions in
 
 - Reduced duplication of observability.yaml config map which existed in multiple locations by symlinking "config/channels/in-memory-channel/configmaps/observability.yaml" to "config/core/configmaps/observability.yaml". ([#6301](https://github.com/knative/eventing/pull/6301))
 - Reduced duplication of tracing.yaml config map which existed in multiple locations by symlinking "config/channels/in-memory-channel/configmaps/tracing.yaml" to "config/core/configmaps/tracing.yaml". ([#6295](https://github.com/knative/eventing/pull/6295))
-- The `sendevent` tool is not part of Eventing core anymore, an alternative is available as `kn` plugin https://github.com/knative-sandbox/kn-plugin-event ([#6284](https://github.com/knative/eventing/pull/6284))
+- The `sendevent` tool is not part of Eventing core anymore, an alternative is available as `kn` plugin https://github.com/knative-extensions/kn-plugin-event ([#6284](https://github.com/knative/eventing/pull/6284))
 
 ### 🐞 Bug Fixes
 
@@ -97,33 +97,33 @@ Follow the instructions in
 
 ### Apache Kafka Broker v1.4
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-kafka-broker/releases/tag/knative-v1.4.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/knative-v1.4.0 -->
 
 #### 💫 New Features & Changes
 
- - Handle host headers in dataplane for identification of channel instances ([#1990](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1990))
- - There is now auto-migration from old consolidated KafkaChannel to the new KafkaChannel. Low level configuration options such as Sarama settings are not migrated to the new channel. However, channel url and auth settings are migrated. ([#2004](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2004))
- - Discard Consumer records that are not CloudEvents ([#2066](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2066))
- - Dynamically set max.poll.interval.ms based on the delivery spec ([#2058](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2058))
+ - Handle host headers in dataplane for identification of channel instances ([#1990](https://github.com/knative-extensions/eventing-kafka-broker/pull/1990))
+ - There is now auto-migration from old consolidated KafkaChannel to the new KafkaChannel. Low level configuration options such as Sarama settings are not migrated to the new channel. However, channel url and auth settings are migrated. ([#2004](https://github.com/knative-extensions/eventing-kafka-broker/pull/2004))
+ - Discard Consumer records that are not CloudEvents ([#2066](https://github.com/knative-extensions/eventing-kafka-broker/pull/2066))
+ - Dynamically set max.poll.interval.ms based on the delivery spec ([#2058](https://github.com/knative-extensions/eventing-kafka-broker/pull/2058))
  - The default request timeout is 10 minutes now, it was previously set to 10 seconds.
- - It can be overridden using spec.delivery.timeout on Broker, Trigger, KafkaChannel and Subscription. ([#2057](https://github.com/knative-sandbox/eventing-kafka-broker/pull/2057))
- - Add new new-trigger-filters experimental feature. When enabled, Triggers support a new filters field that conforms to the filters API field defined in the CloudEvents Subscriptions API. It allows you to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event. ([#1992](https://github.com/knative-sandbox/eventing-kafka-broker/pull/1992))
+ - It can be overridden using spec.delivery.timeout on Broker, Trigger, KafkaChannel and Subscription. ([#2057](https://github.com/knative-extensions/eventing-kafka-broker/pull/2057))
+ - Add new new-trigger-filters experimental feature. When enabled, Triggers support a new filters field that conforms to the filters API field defined in the CloudEvents Subscriptions API. It allows you to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event. ([#1992](https://github.com/knative-extensions/eventing-kafka-broker/pull/1992))
 
 
 ### RabbitMQ Broker and Source v1.4
 
-<!-- Original notes are here: https://github.com/knative-sandbox/eventing-rabbitmq/releases/tag/knative-v1.4.0 -->
+<!-- Original notes are here: https://github.com/knative-extensions/eventing-rabbitmq/releases/tag/knative-v1.4.0 -->
 
 ### 🚨 Breaking or Notable Changes
 
-- Remove support for managed RabbitMQ brokers ([#708](https://github.com/knative-sandbox/eventing-rabbitmq/pull/708))
+- Remove support for managed RabbitMQ brokers ([#708](https://github.com/knative-extensions/eventing-rabbitmq/pull/708))
 
 #### 💫 New Features & Changes
 
-- Now performance graphs for the RabbitMQ Broker are going to be generated for every mayor version release inside our performance test directories ([#668](https://github.com/knative-sandbox/eventing-rabbitmq/pull/668))
-- Now the RabbitMQ Source, when failing to send an event, does not get stuck in a cycle requeueing messages as they come. It follows a retries based backoff strategy (and does not reqeue them if the prefetchCount is 1) ([#614](https://github.com/knative-sandbox/eventing-rabbitmq/pull/614))
-- Now the RabbitMQ's Broker Ingress pod can recover from a closed Channel or Connection ([#648](https://github.com/knative-sandbox/eventing-rabbitmq/pull/648))
-- Changed prefetchCount env variable name to Parallelism in both Trigger and Source, to better reflect its functionality ([#676](https://github.com/knative-sandbox/eventing-rabbitmq/pull/676))
+- Now performance graphs for the RabbitMQ Broker are going to be generated for every mayor version release inside our performance test directories ([#668](https://github.com/knative-extensions/eventing-rabbitmq/pull/668))
+- Now the RabbitMQ Source, when failing to send an event, does not get stuck in a cycle requeueing messages as they come. It follows a retries based backoff strategy (and does not reqeue them if the prefetchCount is 1) ([#614](https://github.com/knative-extensions/eventing-rabbitmq/pull/614))
+- Now the RabbitMQ's Broker Ingress pod can recover from a closed Channel or Connection ([#648](https://github.com/knative-extensions/eventing-rabbitmq/pull/648))
+- Changed prefetchCount env variable name to Parallelism in both Trigger and Source, to better reflect its functionality ([#676](https://github.com/knative-extensions/eventing-rabbitmq/pull/676))
 
 ## Client v1.4
 
@@ -143,11 +143,11 @@ Follow the instructions in
 
 - The kn-plugin-event plugin is now included since this release.
 - The plugins that are released in parallel and aligned with Knative v1.4.0 are:
-  - `kn-plugin-admin` for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-sandbox/kn-plugin-admin/releases/tag/knative-v1.4.0)
-  - `kn-plugin-quickstart` to quickly set up a local Knative environment from the command line. | [download](https://github.com/knative-sandbox/kn-plugin-quickstart/releases/tag/knative-v1.4.0)
-  - `kn-plugin-source-kafka` for managing a Kafka Source that has been installed via eventing-kafka on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kafka/releases/tag/knative-v1.4.0)
-  - `kn-plugin-source-kamelet` for managing Kamelet Sources that has been installed via Camel-K on the backend | [download](https://github.com/knative-sandbox/kn-plugin-source-kamelet/releases/tag/knative-v1.4.0)
-  - `kn-plugin-event` for creating and sending CloudEvents from insider or outside the cluster | [download](https://github.com/knative-sandbox/kn-plugin-event/releases/tag/knative-v1.4.0)
+  - `kn-plugin-admin` for managing Knative installations that are running on Kubernetes | [download](https://github.com/knative-extensions/kn-plugin-admin/releases/tag/knative-v1.4.0)
+  - `kn-plugin-quickstart` to quickly set up a local Knative environment from the command line. | [download](https://github.com/knative-extensions/kn-plugin-quickstart/releases/tag/knative-v1.4.0)
+  - `kn-plugin-source-kafka` for managing a Kafka Source that has been installed via eventing-kafka on the backend | [download](https://github.com/knative-extensions/kn-plugin-source-kafka/releases/tag/knative-v1.4.0)
+  - `kn-plugin-source-kamelet` for managing Kamelet Sources that has been installed via Camel-K on the backend | [download](https://github.com/knative-extensions/kn-plugin-source-kamelet/releases/tag/knative-v1.4.0)
+  - `kn-plugin-event` for creating and sending CloudEvents from insider or outside the cluster | [download](https://github.com/knative-extensions/kn-plugin-event/releases/tag/knative-v1.4.0)
 
   Note: All those plugins are released separately and are technically not part of this knative/client release, however they are aligned to share the same Knative dependencies and can be targeted for inlining.
 

@@ -3,6 +3,9 @@
 # https://hub.docker.com/_/golang
 FROM golang:1.13 as builder
 
+ARG TARGETOS
+ARG TARGETARCH
+
 # Create and change to the app directory.
 WORKDIR /app
 
@@ -13,7 +16,7 @@ COPY . ./
 # Also builds the binary
 ENV GO111MODULE=on
 RUN go mod init cloudevents.go \
-    && CGO_ENABLED=0 GOOS=linux go build -v -o server
+    && CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o server
 
 # Allows the container builds to reuse downloaded dependencies.
 RUN go mod download

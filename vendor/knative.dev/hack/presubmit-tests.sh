@@ -17,7 +17,7 @@
 # This is a helper script for Knative presubmit test scripts.
 # See README.md for instructions on how to use it.
 
-source $(dirname "${BASH_SOURCE[0]}")/library.sh
+source "$(dirname "${BASH_SOURCE[0]}")"/library.sh
 
 # Custom configuration of presubmit tests
 readonly PRESUBMIT_TEST_FAIL_FAST=${PRESUBMIT_TEST_FAIL_FAST:-0}
@@ -139,7 +139,7 @@ function __build_test_runner_for_module() {
   # Don't merge these two lines, or return code will always be 0.
   # Get all build tags in go code (ignore /vendor, /hack and /third_party)
   local tags
-  tags="$(go run knative.dev/test-infra/tools/go-ls-tags@latest --joiner=,)"
+  tags="$(go run knative.dev/toolbox/go-ls-tags@latest --joiner=,)"
   local go_pkg_dirs
   go_pkg_dirs="$(go list -tags "${tags}" ./...)" || return $?
   if [[ -z "${go_pkg_dirs}" ]]; then

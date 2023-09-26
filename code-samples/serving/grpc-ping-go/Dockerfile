@@ -17,6 +17,9 @@
 # https://hub.docker.com/_/golang
 FROM golang as builder
 
+ARG TARGETOS
+ARG TARGETARCH
+
 # Copy local code to the container image.
 WORKDIR /go/src/github.com/knative/docs/code-samples/serving/grpc-ping-go
 COPY . ./
@@ -26,8 +29,8 @@ RUN go mod tidy
 
 # Build the command inside the container.
 # To facilitate gRPC testing, this container includes a client command.
-RUN CGO_ENABLED=0 go build -tags=grpcping -o ./ping-server
-RUN CGO_ENABLED=0 go build -tags=grpcping -o ./ping-client ./client
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -tags=grpcping -o ./ping-server
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -tags=grpcping -o ./ping-client ./client
 
 # Use a Docker multi-stage build to create a lean production image.
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds

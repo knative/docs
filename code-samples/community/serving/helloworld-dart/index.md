@@ -8,76 +8,33 @@ that you can use for testing. It reads in the env variable `TARGET` and prints
 ## Prerequisites
 
 - A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [Knative installation instructions](https://knative.dev/docs/install/) if you need to create
-  one.
+  [Knative installation instructions](https://knative.dev/docs/install/) if
+  you need to create one.
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- [dart-sdk](https://www.dart.dev/tools/sdk#install) installed and
+- The [Dart SDK](https://dart.dev/get-dart) installed and
   configured if you want to run the program locally.
 
 ## Recreating the sample code
 
-While you can clone all of the code from this directory, it is useful to know
-how to build a hello world Dart application step-by-step. This application can
-be created using the following instructions.
+While you can clone all of the code from this directory, we recommend you create
+your hello world Dart application by using the `dart` developer tool. This takes
+just a few steps:
 
-1. Create a new directory and write `pubspec.yaml` as follows:
+1. Create a new Dart app using the `server_shelf` template:
 
-   ```yaml
-   name: hello_world_dart
-   publish_to: none # let's not accidentally publish this to pub.dartlang.org
-
-   environment:
-     sdk: ">=2.12.0 <3.0.0"
-
-   dependencies:
-     shelf: ^1.0.0
+   ```shell
+   > dart create -t server-shelf helloworld-dart
    ```
 
-2. If you want to run locally, install dependencies. If you only want to run in
+1. If you want to run locally, install dependencies. If you only want to run in
    Docker or Knative, you can skip this step.
 
-   ```bash
-   > pub get
+   ```shell
+   > dart pub get
    ```
 
-3. Create a new file `bin/server.dart` and write the following code:
-
-   ```dart
-   import 'dart:io';
-
-   import 'package:shelf/shelf.dart';
-   import 'package:shelf/shelf_io.dart';
-
-   Future main() async {
-     // Find port to listen on from environment variable.
-     final port = int.parse(Platform.environment['PORT'] ?? '8080');
-
-     // Read $TARGET from environment variable.
-     final target = Platform.environment['TARGET'] ?? 'World';
-
-     Response handler(Request request) => Response.ok('Hello $target');
-
-     // Serve handler on given port.
-     final server = await serve(
-       const Pipeline().addMiddleware(logRequests()).addHandler(handler),
-       InternetAddress.anyIPv4,
-       port,
-     );
-     print('Serving at http://${server.address.host}:${server.port}');
-   }
-   ```
-
-4. Create a new file named `Dockerfile`, this file defines instructions for
-   dockerizing your applications, for dart apps this can be done as follows:
-
-   ```Dockerfile
-   # Use Google's official Dart image.
-   # https://hub.docker.com/r/google/dart-runtime/
-   FROM google/dart-runtime
-   ```
-
-5. Create a new file, `service.yaml` and copy the following service definition
+1. Create a new file, `service.yaml` and copy the following service definition
    into the file. Make sure to replace `{username}` with your Docker Hub
    username.
 
@@ -107,11 +64,8 @@ folder) you're ready to build and deploy the sample app.
    username:
 
    ```bash
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-dart .
-
-   # Push the container to docker registry
-   docker push {username}/helloworld-dart
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-dart" --push .
    ```
 
 1. After the build has completed and the container is pushed to docker hub, you

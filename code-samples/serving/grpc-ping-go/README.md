@@ -32,11 +32,8 @@ for production containers.
   Replace `{username}` with your Docker Hub username then run the commands:
 
   ```bash
-  # Build the container on your local machine.
-  docker build --tag "{username}/grpc-ping-go" .
-
-  # Push the container to docker registry.
-  docker push "{username}/grpc-ping-go"
+  # Build and push the container on your local machine.
+  docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/grpc-ping-go" --push .
   ```
 
 3. Update the `service.yaml` file in the project to reference the published image from step 1.

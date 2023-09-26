@@ -65,10 +65,8 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java
 1. To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
 
    ```bash
-   # Build the container on your local machine
-   docker build -t {username}/helloworld-java .
-   # Push the container to docker registry
-   docker push {username}/helloworld-java
+   # Build and push the container on your local machine.
+   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-java" --push .
    ```
 
 ## Deploy

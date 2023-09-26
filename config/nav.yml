@@ -131,6 +131,7 @@ nav:
           # TODO: Add security section to docs?
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
           - HTTPS redirection: serving/services/http-protocol.md
+          - Volume Support: serving/services/storage.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
         - Tag resolution: serving/tag-resolution.md
@@ -280,6 +281,8 @@ nav:
         - New Trigger Filters: eventing/experimental-features/new-trigger-filters.md
         - KReference.Group field: eventing/experimental-features/kreference-group.md
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
+        - EventType auto creation: eventing/experimental-features/eventtype-auto-creation.md
+        - Transport Encryption: eventing/experimental-features/transport-encryption.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md

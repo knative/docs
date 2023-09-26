@@ -46,7 +46,7 @@ readonly REPO_ROOT_DIR
 function __resolveRepoName() {
   local repoName
   repoName="$(basename "${1:-$(git rev-parse --show-toplevel)}")"
-  repoName="${repoName#knative-sandbox-}" # Remove knative-sandbox- prefix if any
+  repoName="${repoName#knative-extensions-}" # Remove knative-extensions- prefix if any
   repoName="${repoName#knative-}" # Remove knative- prefix if any
   echo "${repoName}"
 }
@@ -497,7 +497,7 @@ function report_go_test() {
   logfile="${logfile/.xml/.jsonl}"
   echo "Running go test with args: ${go_test_args[*]}"
   local gotest_retcode=0
-  go_run gotest.tools/gotestsum@v1.8.0 \
+  go_run gotest.tools/gotestsum@v1.10.1 \
     --format "${GO_TEST_VERBOSITY:-testname}" \
     --junitfile "${xml}" \
     --junitfile-testsuite-name relative \
@@ -510,14 +510,14 @@ function report_go_test() {
   echo "Test log (JSONL) written to ${logfile}"
 
   ansilog="${logfile/.jsonl/-ansi.log}"
-  go_run github.com/haveyoudebuggedit/gotestfmt/v2/cmd/gotestfmt@v2.3.1 \
+  go_run github.com/gotesttools/gotestfmt/v2/cmd/gotestfmt@v2.5.0 \
     -input "${logfile}" \
     -showteststatus \
     -nofail > "$ansilog"
   echo "Test log (ANSI) written to ${ansilog}"
 
   htmllog="${logfile/.jsonl/.html}"
-  go_run github.com/buildkite/terminal-to-html/v3/cmd/terminal-to-html@v3.6.1 \
+  go_run github.com/buildkite/terminal-to-html/v3/cmd/terminal-to-html@v3.9.1 \
     --preview < "$ansilog" > "$htmllog"
   echo "Test log (HTML) written to ${htmllog}"
 
@@ -657,7 +657,7 @@ function foreach_go_module() {
       echo "Command '${cmd}' failed in module $gomod_dir: $failed" >&2
       return $failed
     fi
-  done < <(go_run knative.dev/test-infra/tools/modscope@latest ls -p)
+  done < <(go_run knative.dev/toolbox/modscope@latest ls -p)
 }
 
 # Update go deps.
@@ -709,7 +709,7 @@ function __go_update_deps_for_module() {
     else
       group "Upgrading to release ${RELEASE}"
     fi
-    FLOATING_DEPS+=( $(go_run knative.dev/test-infra/buoy@latest float ./go.mod "${buoyArgs[@]}") )
+    FLOATING_DEPS+=( $(go_run knative.dev/toolbox/buoy@latest float ./go.mod "${buoyArgs[@]}") )
     if [[ ${#FLOATING_DEPS[@]} > 0 ]]; then
       echo "Floating deps to ${FLOATING_DEPS[@]}"
       go get -d ${FLOATING_DEPS[@]}
@@ -718,18 +718,23 @@ function __go_update_deps_for_module() {
     fi
   fi
 
-  group "Go mod tidy and vendor"
+  group "Go mod tidy"
 
   # Prune modules.
-  local orig_pipefail_opt=$(shopt -p -o pipefail)
+  local orig_pipefail_opt
+  orig_pipefail_opt=$(shopt -p -o pipefail)
   set -o pipefail
   go mod tidy 2>&1 | grep -v "ignoring symlink" || true
-  go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
+  if [[ "${FORCE_VENDOR:-false}" == "true" ]] || [ -d vendor ]; then
+    group "Go mod vendor"
+    go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
+  fi
   eval "$orig_pipefail_opt"
 
-  if ! [ -d vendor ]; then
+  if ! [[ "${FORCE_VENDOR:-false}" == "true" ]] && ! [ -d vendor ]; then
     return 0
   fi
+
   group "Removing unwanted vendor files"
 
   # Remove unwanted vendor files
@@ -754,7 +759,7 @@ function __go_update_deps_for_module() {
 # Intended to be used like:
 #   export MODULE_NAME=$(go_mod_module_name)
 function go_mod_module_name() {
-  go_run knative.dev/test-infra/tools/modscope@latest current
+  go_run knative.dev/toolbox/modscope@latest current
 }
 
 # Return a GOPATH to a temp directory. Works around the out-of-GOPATH issues
@@ -788,7 +793,7 @@ function update_licenses() {
   local dst=$1
   local dir=$2
   shift
-  go_run github.com/google/go-licenses@v1.2.1 \
+  go_run github.com/google/go-licenses@v1.6.0 \
     save "${dir}" --save_path="${dst}" --force || \
     { echo "--- FAIL: go-licenses failed to update licenses"; return 1; }
 }
@@ -796,7 +801,7 @@ function update_licenses() {
 # Run go-licenses to check for forbidden licenses.
 function check_licenses() {
   # Check that we don't have any forbidden licenses.
-  go_run github.com/google/go-licenses@v1.2.1 \
+  go_run github.com/google/go-licenses@v1.6.0 \
     check "${REPO_ROOT_DIR}/..." || \
     { echo "--- FAIL: go-licenses failed the license check"; return 1; }
 }

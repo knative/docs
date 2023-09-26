@@ -111,11 +111,8 @@ go mod init github.com/knative/docs/code-samples/serving/hello-world/helloworld-
 To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
 
 ```bash
-# Build the container on your local machine
-docker build -t {username}/helloworld-go .
-
-# Push the container to docker registry
-docker push {username}/helloworld-go
+# Build and push the container on your local machine.
+docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-go" --push .
 ```
 
 ### Deploying to knative

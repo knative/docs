@@ -22,6 +22,11 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### Knative 1.11 is out!
+Details on the 1.11 release of the Knative project.
+
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-11-release.md){ .md-button }
+
 ### Knative at KubeCon + CloudNativeCon Europe 2023
 
 We are looking forward to seeing you all there.
@@ -32,11 +37,6 @@ We are looking forward to seeing you all there.
 This is a big milestone for our project and we are excited to join the [CNCF](https://www.cncf.io)
 
 [Read more :octicons-arrow-right-24:](steering/cncf.md){ .md-button }
-
-### Knative 1.8 is out!
-Details on the 1.8 release of the Knative project.
-
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-8-release.md){ .md-button }
 
 ### Highlighting the value of Knative for the c-suite
 

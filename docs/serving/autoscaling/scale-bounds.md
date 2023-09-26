@@ -185,6 +185,9 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 ## Scale Up Minimum
 
 This value controls the minimum number of replicas that will be created when the Revision scales up from zero.
+After the Revision has reached this scale one time, this value is ignored. This means that the Revision will scale down after the activation scale is reached if the actual traffic received needs a smaller scale.
+
+When the Revision is created, the larger of activation scale and lower bound is automatically chosen as the initial target scale.
 
 * **Global key:** n/a
 * **Per-revision annotation key:** `autoscaling.knative.dev/activation-scale`
