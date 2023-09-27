@@ -1,6 +1,6 @@
 # EventType auto creation for Brokers
 
-**Flag name**: `eventtype-auto-creation`
+**Flag name**: `eventtype-auto-create`
 
 **Stage**: Alpha, disabled by default
 
@@ -13,7 +13,7 @@
 
 With the `eventtype-auto-creation` feature, we have possibliy to _auto create_ EventTypes that are received and ingressed by the Knative Broker and Channel implementations.
 
-For making use of this _opt-in_ feature, we must turn it on in the `config-features`, by setting the `eventtype-auto-creation` flag to `enabled`:
+For making use of this _opt-in_ feature, we must turn it on in the `config-features`, by setting the `eventtype-auto-create` flag to `enabled`:
 
 ```yaml
 apiVersion: v1
@@ -22,7 +22,7 @@ metadata:
   name: config-features
   namespace: knative-eventing
 data:
-  eventtype-auto-creation: "enabled"
+  eventtype-auto-create: "enabled"
 ...
 ```
 
