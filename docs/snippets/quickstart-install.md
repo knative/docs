@@ -50,13 +50,13 @@ To get started, install the Knative `quickstart` plugin:
           hack/build.sh
           ```
 
-    1. Move the executable binary file to a directory on your `PATH`:
+    1. Move the executable binary file to a directory on your `PATH` by running the command:
 
           ```bash
           mv kn-quickstart /usr/local/bin
           ```
 
-     1. Verify that the plugin is working by running the command:
+    1. Verify that the plugin is working by running the command:
 
           ```bash
           kn quickstart --help
