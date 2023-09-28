@@ -45,13 +45,13 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
         Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
 
-    1. Move the executable binary file to a directory on your PATH by running the command:
+    1. Move the executable binary file to a directory on your `PATH` by running the command:
 
         ```bash
         mv kn /usr/local/bin
         ```
 
-    1. Verify that the plugin is working by running the command:
+    1. Verify that `kn` commands are working properly. For example:
 
         ```bash
         kn version
@@ -61,22 +61,28 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
     1. Check out the `kn` client repository:
 
-          ```bash
-          git clone https://github.com/knative/client.git
-          cd client/
-          ```
+        ```bash
+        git clone https://github.com/knative/client.git
+        cd client/
+        ```
 
     1. Build an executable binary:
 
-          ```bash
-          hack/build.sh -f
-          ```
+        ```bash
+        hack/build.sh -f
+        ```
 
-    1. Move `kn` into your system path, and verify that `kn` commands are working properly. For example:
+    1. Move the executable binary file to a directory on your `PATH` by running the command:
 
-          ```bash
-          kn version
-          ```
+        ```bash
+        mv kn /usr/local/bin
+        ```
+
+    1. Verify that `kn` commands are working properly. For example:
+
+        ```bash
+        kn version
+        ```
 
 === "Using a container image"
 
