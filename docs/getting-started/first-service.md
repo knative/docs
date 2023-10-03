@@ -14,7 +14,7 @@ In this tutorial, you will deploy a "Hello world" Knative Service that accepts t
     ```
     !!! Success "Expected output"
         ```{ .bash .no-copy }
-        Service hello created to latest revision 'hello-world' is available at URL:
+        Service hello created to latest revision 'hello-0001' is available at URL:
         http://hello.default.${LOADBALANCER_IP}.sslip.io
         ```
         The value of `${LOADBALANCER_IP}` above depends on your type of cluster,
