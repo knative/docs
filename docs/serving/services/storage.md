@@ -1,6 +1,6 @@
 # Volume Support for Knative services
 
-You can provide data storage for Knative Services by configuring different types of volumes.
+You can provide data storage for Knative Services by configuring different volumes types.
 Serving supports mounting the [volume types](https://kubernetes.io/docs/concepts/storage/volumes): `emptyDir`, `secret`, `configMap` and `projected`.
 [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) are supported but require a [feature flag](../configuration/feature-flags.md) to be enabled.
 
@@ -26,6 +26,8 @@ spec:
 
 * The `kubernetes.podspec-persistent-volume-claim` extension controls whether persistent volumes (PVs) can be used with Knative Serving.
 * The `kubernetes.podspec-persistent-volume-write` extension controls whether PVs are available to Knative Serving with the write access.
+
+> Note that if you have installed Serving via the Knative operator then you need to set the above feature flags at the corresponding Serving CR.
 
 ## Procedure
 
