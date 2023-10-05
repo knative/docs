@@ -6,7 +6,7 @@ Notable features are:
 
 - Control plane High Availability
 - Horizontally scalable data plane
-- [Extensively configurable](#kafka-producer-and-consumer-configurations)
+- [Extensively configurable](./configuring-kafka-features)
 - Ordered delivery of events based on [CloudEvents partitioning extension](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/extensions/partitioning.md)
 - Support any Kafka version, see [compatibility matrix](https://cwiki.apache.org/confluence/display/KAFKA/Compatibility+Matrix)
 - Supports 2 [data plane modes](#data-plane-isolation-vs-shared-data-plane): data plane isolation per-namespace or shared data plane
@@ -440,7 +440,7 @@ Upon the creation of the first `Broker` with `KafkaNamespaced` class, the `kafka
 
 All the configuration mechanisms that are available for the `Kafka` Broker class are also available for the brokers with `KafkaNamespaced` class with these exceptions:
 
-* [Above](#kafka-producer-and-consumer-configurations) it is described how producer and consumer configurations is done by modifying the `config-kafka-broker-data-plane` configmap in the `knative-eventing` namespace. Since Kafka Broker controller propagates this configmap into the user namespace, currently there is no way to configure producer and consumer configurations per namespace. Any value set in the `config-kafka-broker-data-plane` `ConfigMap` in the `knative-eventing` namespace will be also used in the user namespace.
+* [This page](./configuring-kafka-features) describes how producer and consumer configurations is done by modifying the `config-kafka-broker-data-plane` configmap in the `knative-eventing` namespace. Since Kafka Broker controller propagates this configmap into the user namespace, currently there is no way to configure producer and consumer configurations per namespace. Any value set in the `config-kafka-broker-data-plane` `ConfigMap` in the `knative-eventing` namespace will be also used in the user namespace.
 * Because of the same propagation, it is also not possible to configure consumer offsets commit interval per namespace.
 * A few more configmaps are propagated: `config-tracing` and `kafka-config-logging`. This means, tracing and logging are also not configurable per namespace.
 * Similarly, the data plane deployments are propagated from the `knative-eventing` namespace to the user namespace. This means that the data plane deployments are not configurable per namespace and will be identical to the ones in the `knative-eventing` namespace.
