@@ -45,7 +45,7 @@ The `brokers.topic.template` values determines the template used to generate the
       name: config-kafka-features
       namespace: knative-eventing
     data:
-      brokers.topic.template: {% raw %}"knative-broker-{{ .Namespace }}-{{ .Name }}"(% endraw %}
+      brokers.topic.template: {% raw %}"knative-broker-{{ .Namespace }}-{{ .Name }}"{% endraw %}
     ```
 
 ## Channel topic name template
@@ -66,5 +66,5 @@ The `channels.topic.template` value determines the template used to generate the
       name: config-kafka-features
       namespace: knative-eventing
     data:
-      channels.topic.template: {% raw %}"messaging-kafka.{{ .Namespace }}.{{ .Name }}"(% endraw %}
+      channels.topic.template: {% raw %}"messaging-kafka.{{ .Namespace }}.{{ .Name }}"{% endraw %}
     ```
