@@ -25,7 +25,7 @@ Queue proxy exports metrics for the requests endpoint on port 9091. The metrics 
 address which can be set in the same configmap via `metrics.opencensus-address`. User can control the reporting period for both backends with
 `metrics.request-metrics-reporting-period-seconds`. If `metrics.request-metrics-reporting-period-seconds` is not set at all then the reporting period depends on the value of the global reporting period, `metrics.reporting-period-seconds`, that affects both control and data planes. If both properties are not available then the reporting period defaults to 5s for the Prometheus backend and 60s for the Opencensus one.
 
-Here is a sample configuration for the observability configmap in order to connect to the [OpenTelemetry collector](../../observability/metrics/collecting-metrics/#understanding-the-collector):
+Here is a sample configuration for the observability configmap in order to connect to the [OpenTelemetry collector](../observability/metrics/collecting-metrics.md#understanding-the-collector):
 
 ```
 metrics.request-metrics-backend-destination: "opencensus"

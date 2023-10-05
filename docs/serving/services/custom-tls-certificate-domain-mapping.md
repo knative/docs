@@ -3,16 +3,17 @@
 {{ feature(beta="0.24") }}
 
 By providing the reference to an existing _TLS Certificate_ you can instruct a `DomainMapping` to use that
-certificate to secure the mapped service. Using this feature skips [autoTLS](../using-auto-tls.md) certificate creation.
+certificate to secure the mapped service. 
+Please note that for Services using this feature, the automatic certificate creation using [external-domain-tls](../encryption/enabling-automatic-tls-certificate-provisioning.md) is skipped.
 
 ## Prerequisites
 
 - You have followed the steps from [Configuring custom domains](custom-domains.md) and now have a working `DomainMapping`.
-- You must have a TLS certificate from your Certificate Authority provider or self-signed.
+- You must have a TLS certificate from your Certificate Authority provider or a self-signed certificate.
 
 ## Procedure
 
-1. Assuming you have obtained the `cert` and `key` files from your Certificate Authority provider or self-signed, create a plain Kubernetes [TLS Secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) by running the command:
+1. Assuming you have obtained the `cert` and `key` files from your Certificate Authority provider or have self-signed certificate, create a plain Kubernetes [TLS Secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) by running the command:
 
     Use kubectl to create the secret:
     ```bash
