@@ -10,6 +10,7 @@
 /client/* go-get=:go-get /golang/client.html 200
 /client-pkg/* go-get=:go-get /golang/client-pkg.html 200
 /community/* go-get=:go-get /golang/community.html 200
+/control-protocol/* go-get=:go-get /golang/control-protocol.html 200
 /discovery/* go-get=:go-get /golang/discovery.html 200
 /docs/* go-get=:go-get /golang/docs.html 200
 /eventing/* go-get=:go-get /golang/eventing.html 200
@@ -46,7 +47,6 @@
 /kn-plugin-source-kafka/* go-get=:go-get /golang/kn-plugin-source-kafka.html 200
 /kn-plugin-source-kamelet/* go-get=:go-get /golang/kn-plugin-source-kamelet.html 200
 /knobots/* go-get=:go-get /golang/knobots.html 200
-/kperf/* go-get=:go-get /golang/kperf.html 200
 /monitoring/* go-get=:go-get /golang/monitoring.html 200
 /net-certmanager/* go-get=:go-get /golang/net-certmanager.html 200
 /net-contour/* go-get=:go-get /golang/net-contour.html 200
@@ -65,8 +65,8 @@
 /security-guard/* go-get=:go-get /golang/security-guard.html 200
 /security-guard/* https://pkg.go.dev/knative.dev/security-guard/:splat
 /serving/* go-get=:go-get /golang/serving.html 200
-/serving-progressive-rollout/* go-get=1 /golang/serving-progressive-rollout.html 200
 /serving/* https://pkg.go.dev/knative.dev/serving/:splat
+/serving-progressive-rollout/* go-get=:go-get /golang/serving-progressive-rollout.html 200
 /specs/* go-get=:go-get /golang/specs.html 200
 /test-infra/* go-get=:go-get /golang/test-infra.html 200
 /toolbox/* go-get=:go-get /golang/toolbox.html 200

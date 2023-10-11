@@ -28,7 +28,7 @@ import (
 var (
 	knativeOrgs        = []string{"knative", "knative-extensions"}
 	allowedRepoRe      = regexp.MustCompile("^[a-z][-a-z0-9]+$")
-	archivedExceptions = []string{"eventing-contrib"}
+	archivedExceptions = []string{"eventing-contrib", "control-protocol"}
 	ignoreRepos        = []string{
 		"actions",
 		"community",
