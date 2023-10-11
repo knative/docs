@@ -1,0 +1,182 @@
+# This file is auto-generated from peribolos.
+# Do not modify this file, instead modify peribolos/knative.yaml
+
+aliases:
+  client-reviewers:
+  - itsmurugappan
+  client-wg-leads:
+  - dsimansk
+  - navidshaikh
+  - rhuss
+  client-writers:
+  - dsimansk
+  - maximilien
+  - navidshaikh
+  - rhuss
+  - vyasgun
+  conformance-task-force-leads:
+  - salaboy
+  conformance-writers:
+  - salaboy
+  docs-reviewers:
+  - nainaz
+  - nak3
+  - pmbanugo
+  - retocode
+  - skonto
+  - snneji
+  docs-wg-leads:
+  - snneji
+  docs-writers:
+  - csantanapr
+  - nak3
+  - psschwei
+  - retocode
+  - skonto
+  - snneji
+  eventing-reviewers:
+  - aslom
+  - cali0707
+  - creydr
+  eventing-triage:
+  - lberk
+  eventing-wg-leads:
+  - pierDipi
+  eventing-writers:
+  - aliok
+  - creydr
+  - lberk
+  - lionelvillard
+  - matzew
+  - odacremolbap
+  - pierDipi
+  func-reviewers:
+  - gauron99
+  - jrangelramos
+  - nainaz
+  func-writers:
+  - jrangelramos
+  - lance
+  - lkingland
+  - matejvasek
+  - salaboy
+  functions-wg-leads:
+  - lkingland
+  - salaboy
+  knative-admin:
+  - Vishal-Chdhry
+  - creydr
+  - csantanapr
+  - davidhadas
+  - dprotaso
+  - dsimansk
+  - knative-automation
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  - kvmware
+  - lance
+  - mchmarny
+  - nainaz
+  - pierDipi
+  - psschwei
+  - puerco
+  - salaboy
+  - skonto
+  - smoser-ibm
+  - upodroid
+  - xtreme-sameer-vohra
+  knative-release-leads:
+  - Vishal-Chdhry
+  - creydr
+  - dsimansk
+  - pierDipi
+  - skonto
+  knative-robots:
+  - knative-automation
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  operations-reviewers:
+  - aliok
+  - houshengbo
+  - matzew
+  - maximilien
+  operations-wg-leads:
+  - houshengbo
+  operations-writers:
+  - aliok
+  - houshengbo
+  - matzew
+  - maximilien
+  productivity-leads:
+  - kvmware
+  - upodroid
+  productivity-reviewers:
+  - evankanderson
+  - mgencur
+  productivity-wg-leads:
+  - kvmware
+  - upodroid
+  productivity-writers:
+  - cardil
+  - kvmware
+  - psschwei
+  - upodroid
+  security-wg-leads:
+  - davidhadas
+  - evankanderson
+  security-writers:
+  - davidhadas
+  - evankanderson
+  serving-approvers:
+  - nak3
+  - psschwei
+  - skonto
+  serving-reviewers:
+  - KauzClay
+  - jsanin-vmw
+  - kauana
+  - kvmware
+  - retocode
+  - skonto
+  - xtreme-vikram-yadav
+  serving-triage:
+  - KauzClay
+  - retocode
+  - skonto
+  serving-wg-leads:
+  - dprotaso
+  serving-writers:
+  - dprotaso
+  - nak3
+  - psschwei
+  - skonto
+  steering-committee:
+  - csantanapr
+  - lance
+  - nainaz
+  - puerco
+  - salaboy
+  technical-oversight-committee:
+  - davidhadas
+  - dprotaso
+  - dsimansk
+  - kvmware
+  - psschwei
+  trademark-committee:
+  - mchmarny
+  - smoser-ibm
+  - xtreme-sameer-vohra
+  ux-wg-leads:
+  - cali0707
+  - leo6leo
+  - mmejia02
+  - zainabhusain227
+  ux-writers:
+  - cali0707
+  - leo6leo
+  - mmejia02
+  - zainabhusain227
