@@ -17,19 +17,26 @@ be removed unless enough capacity is available. This is intended as one of the A
 ## Background
 
 The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that uses metrics from pods to
-calculate metrics and make scaling decisions. Let's see inde tail what happens when a new Knative service is created.
+calculate metrics and make scaling decisions. Let's see in detail what happens when a new Knative service is created.
+
 Once the user creates a new service the corresponding Knative reconciler creates a Knative Configuration and a Knative Route for that service. Then the Configuration reconciler creates a Revision resource and
 the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
 The Route reconciler will create the ingress resource that will be picked up by the Knative net-* components responsible
 for managing traffic locally in the cluster and externally to the cluster.
+
 Now the creation of the PA earlier triggers the KPA reconciler which goes through certain steps in order to setup an autoscaling configuration for the revision:
+
 - creates an internal Decider resource that holds the initial desired scale in `decider.Status.DesiredScale`and
 sets up a pod scaler via the multi-scaler component. The pod scaler every two seconds calculates a new Scale
 result and makes a decision based on the condition `decider.Status.DesiredScale != sRes.DesiredPodCount` whether to trigger a new reconciliation for the KPA reconciler. Goal is the KPA to get the latest scale result.
+
 - creates a Metric resource that triggers the metrics collector controller to setup a scraper for the revision pods.
+
 - calls a scale method that decides the number of wanted pods and also updates the revision deployment
+
 - creates/updates a ServerlessService (SKS) that holds info about the operation mode (proxy or serve) and stores the activators used in proxy mode. That SKS create/update event triggers a reconciliation for the SKS from its specific controller that creates the required public and private K8s services so traffic can be routed to the K8s deployment.
 This in combination with the networking setup done by the net-* components is the
+
 - updates the PA and reports the active and wanted pods in its status
 
 ## Capacity and Operation Modes in Practice
@@ -39,7 +46,7 @@ hold, that is EBC (excess burst capacity)>0, where EBC = TotalCapacity - Observe
 
 Let's see an example of a service that has a target concurrency of 10 and tbc=10:
 
-```yaml
+```
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -143,10 +150,14 @@ Given the new statistics kpa decides to scale to 3 pods.
 But let's see why is this so. The log above comes from the multi-scaler which reports
 a scaled result that contains EBS as reported above and a desired pod count for different windows.
 
-Roughly the final desired number is (minus corner cases):
+Roughly the final desired number is (there is more logic that covers corner
+  cases and checking against min/max scale limits):
 
+```
 dspc := math.Ceil(observedStableValue / spec.TargetValue)
 dppc := math.Ceil(observedPanicValue / spec.TargetValue)
+```
+
 
 The target value is the utilization in terms of concurrency and that is is 0.7*(revision_target).
 In this case this is 7. So we have for example for the panic window: ceil(19.874/7)=3
