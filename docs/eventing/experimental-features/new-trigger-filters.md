@@ -2,7 +2,7 @@
 
 **Flag name**: `new-trigger-filters`
 
-**Stage**: Alpha, disabled by default
+**Stage**: Beta, enabled by default
 
 **Tracking issue**: [#5204](https://github.com/knative/eventing/issues/5204)
 ## Overview
