@@ -22,7 +22,7 @@ Create the CloudEvents Player Service:
     ```
     !!! Success "Expected output"
         ```{ .bash .no-copy }
-        Service 'cloudevents-player' created to latest revision 'cloudevents-player-vwybw-1' is available at URL:
+        Service 'cloudevents-player' created to latest revision 'cloudevents-player-00001' is available at URL:
         http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io
         ```
 
