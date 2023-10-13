@@ -50,6 +50,7 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
    --type merge \
    --patch '{"data":{"metrics.backend-destination":"promethuus","metrics.request-metrics-backend-destination":"prometheus"}}'
     ```
+
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
 
     ```bash
