@@ -6,18 +6,18 @@
 
 _In this blog post you will learn how to recognize when activator is on the data path and what it triggers that behavior._
 
-A knative service can operate in two modes:proxy mode and serve mode.
-When in proxy mode Activator is on the data path and it will stay on path until certain conditions are met.
+A knative service can operate in two modes: proxy mode and serve mode.
+When in proxy mode, Activator is on the data path, and it will stay on the path until certain conditions (more on this later) are met.
 When these conditions are met Activator is removed from the path and the service transitions to serve mode.
-Although it was not always like that when a service scales from/to zero activator is added by default to the path.
+However, it was not always like that when a service scales from/to zero, the activator is added by default to the data path.
 This default setting often confuses users for reasons we will see next as it is possible that activator will not
-be removed unless enough capacity is available. This is intended as one of the Activator's roles is to offer backpressure capabilities so that it can make sure that a service could serve the traffic.
+be removed unless enough capacity is available. This is intended as one of the Activator's roles is to offer backpressure capabilities so that a Knative service is not overloaded by incoming traffic.
 
 
 ## Background
 
 The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that uses metrics from pods to
-calculate metrics and make scaling decisions. Let's see in detail what happens when a new Knative service is created.
+make scaling decisions. Let's see in detail what happens when a new Knative service is created.
 
 Once the user creates a new service the corresponding Knative reconciler creates a Knative Configuration and a Knative Route for that service. Then the Configuration reconciler creates a Revision resource and
 the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
