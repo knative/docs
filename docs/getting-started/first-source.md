@@ -26,9 +26,6 @@ Create the CloudEvents Player Service:
         http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io
         ```
 
-    ??? question "Why is my Revision named something different!"
-        Because we didn't assign a `revision-name`, Knative Serving automatically created one for us. It's okay if your Revision is named something different.
-
 === "YAML"
     1. Copy the following YAML into a file named `cloudevents-player.yaml`:
         ```bash
