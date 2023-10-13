@@ -40,7 +40,16 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
             serviceMonitorSelectorNilUsesHelmValues: false
             podMonitorSelectorNilUsesHelmValues: false
         ```
+1. Edit the configmap with following commands:
+    ```bash
+    kubectl patch --namespace knative-serving configmap/config-observability \
+    --type merge \
+    --patch '{"data":{"metrics.backend-destination":"promethuus","metrics.request-metrics-backend-destination":"prometheus"}}'
 
+   kubectl patch --namespace knative-serving configmap/config-observability \
+   --type merge \
+   --patch '{"data":{"metrics.backend-destination":"promethuus","metrics.request-metrics-backend-destination":"prometheus"}}'
+    ```
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
 
     ```bash
