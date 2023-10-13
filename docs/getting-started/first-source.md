@@ -22,12 +22,9 @@ Create the CloudEvents Player Service:
     ```
     !!! Success "Expected output"
         ```{ .bash .no-copy }
-        Service 'cloudevents-player' created to latest revision 'cloudevents-player-vwybw-1' is available at URL:
+        Service 'cloudevents-player' created to latest revision 'cloudevents-player-00001' is available at URL:
         http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io
         ```
-
-    ??? question "Why is my Revision named something different!"
-        Because we didn't assign a `revision-name`, Knative Serving automatically created one for us. It's okay if your Revision is named something different.
 
 === "YAML"
     1. Copy the following YAML into a file named `cloudevents-player.yaml`:
