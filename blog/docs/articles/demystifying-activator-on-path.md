@@ -8,7 +8,7 @@ _In this blog post you will learn how to recognize when activator is on the data
 
 A knative service can operate in two modes: proxy mode and serve mode.
 When in proxy mode, Activator is on the data path, and it will stay on the path until certain conditions (more on this later) are met.
-When these conditions are met Activator is removed from the path and the service transitions to serve mode.
+When these conditions are met, Activator is removed from the data path, and the service transitions to serve mode.
 However, it was not always like that when a service scales from/to zero, the activator is added by default to the data path.
 This default setting often confuses users for reasons we will see next as it is possible that activator will not
 be removed unless enough capacity is available. This is intended as one of the Activator's roles is to offer backpressure capabilities so that a Knative service is not overloaded by incoming traffic.
