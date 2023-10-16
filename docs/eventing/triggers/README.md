@@ -102,7 +102,7 @@ This example filters events from the `default` broker that are of type
 
 ### New trigger filters
 
-if you need more powerful filtering options, you can use the [New trigger filters](https://knative.dev/docs/eventing/experimental-features/new-trigger-filters/).
+If you need more powerful filtering options, you can use the [new trigger filters](../experimental-features/new-trigger-filters.md).
 ## Trigger annotations
 
 You can modify a Trigger's behavior by setting the following two annotations:
