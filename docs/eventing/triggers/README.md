@@ -100,6 +100,9 @@ This example filters events from the `default` broker that are of type
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
+### New trigger filters
+
+if you need more powerful filtering options, you can use the [New trigger filters](https://knative.dev/docs/eventing/experimental-features/new-trigger-filters/).
 ## Trigger annotations
 
 You can modify a Trigger's behavior by setting the following two annotations:
