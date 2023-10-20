@@ -68,7 +68,7 @@ copyright: "Copyright © 2022 The Knative Authors"
 
 extra:
   social:
-    - icon: fontawesome/brands/twitter
+    - icon: fontawesome/brands/x-twitter
       link: https://twitter.com/KnativeProject
     - icon: fontawesome/brands/github
       link: https://github.com/knative/community
