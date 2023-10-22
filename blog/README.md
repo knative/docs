@@ -31,9 +31,9 @@ The main one, for the website as a whole, is located at [`docs/config/nav.yml`](
           - Traffic Splitting: getting-started/first-traffic-split.md
 ```
 
-Note here that each link assumes that the present working directory is `docs/docs/`, so for example the "Tutorial" README which is located in `docs/docs/getting-started/README.md` is listed as `getting-started/README.md`
+Note: Here that each link assumes that the present working directory is `docs/docs/`, so for example, the "Tutorial" README  located in `docs/docs/getting-started/README.md` is listed as `getting-started/README.md`
 
-The Blog pages instead use absolute links to its sections:
+The Blog pages instead use absolute links to their sections:
 
 ```yaml
     - About:
@@ -49,9 +49,9 @@ Note that the Blog link is `/blog/` and not `blog/` (and similar for the communi
 
 ## docs/blog/config/nav.yml
 
-The blog is actually a separate, self-contained site that is accessible from the main docs page. We do this partly because the blog is not versioned like the docs (i.e. tied to a specific release) and partly to make the left sidebar navigation look clean (i.e. only display blog posts on the blog site).
+The blog is a separate, self-contained site accessible from the main docs page. We do this partly because the blog is not versioned like the docs (i.e. tied to a specific release) and partly to make the left sidebar navigation look clean (i.e. only display blog posts on the blog site).
 
-In order to do this, we essentially have a separate mkdocs site for the blog that gets copied over into the main site. This is done using the [`hack/build.sh` script](https://github.com/knative/docs/blob/main/hack/build.sh#L84-L90). While we try to copy over as many files as possible from the main site (to avoid duplicating configuration / html / stylesheets / etc), our [`nav.yml` file](docs/blog/config/nav.yml) (located at `docs/blog/config/nav.yml`) is unique to the blog site.
+To do this, we essentially have a separate mkdocs site for the blog that gets copied over into the main site. It's done using the [`hack/build.sh` script](https://github.com/knative/docs/blob/main/hack/build.sh#L84-L90). While we try to copy over as many files as possible from the main site (to avoid duplicating configuration / HTML / stylesheets etc), our [`nav.yml` file](docs/blog/config/nav.yml) (located at `docs/blog/config/nav.yml`) is unique to the blog site.
 
 ```yaml
 nav:
@@ -73,7 +73,7 @@ nav:
             ...
 ```
 
-A couple of key points:
+A few key points:
 
 * The basic, high-level sections are the same as for the main site (Home, Tutorial, etc.).
 
@@ -83,16 +83,16 @@ A couple of key points:
 
 ## Updating the blog
 
-When a new blog post is created, it will also need to be added to the blog navigation (i.e. to `docs/blog/config/nav.yml`) in the appropriate section.
+When a new blog post is created, it  needs to be added to the blog navigation (i.e. to `docs/blog/config/nav.yml`) in the appropriate section.
 
 ## Updating the site navigation
 
-If a major change to the site navigation is made (for example, adding a new section to the top navigation tabs), then the change will need to be made in both `docs/config/nav.yml` and `docs/blog/config/nav.yml`.
+If a major change to the site navigation is made (for example, adding a new section to the top navigation tabs), then the change is to be made in both `docs/config/nav.yml` and `docs/blog/config/nav.yml`.
 
 For changes that are not top-level (i.e. adding a subsection to the "Tutorial" guide or creating a new category of blog post), the change only needs to be made in the relevant section, as it's invisible to the other (for example, the subsection of the "Tutorial" guide only needs to be made in `docs/config/nav.yml`)
 
 ## Common files between main site and blog, also known as non nav.yml files
 
-All files in `docs/overrides`, `docs/images`, and `docs/stylesheets` are copied to the blog at build-time.
+All files in `docs/overrides`, `docs/images`, and `docs/stylesheets` are copied to the blog at build time.
 
 What this means is that any changes to files in those directories (for example, updating the main site layout editing `docs/stylesheets/extra.css`) will go live _on the blog_ as soon as those changes are pushed to `main`. In contrast, on the main site those changes will appear in the development branch and only go live when they are cherry-picked into the current release branch.
