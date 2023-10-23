@@ -1,6 +1,6 @@
 # Use the official Rust image.
 # https://hub.docker.com/_/rust
-FROM rust:1.62.1
+FROM rust:1.73.0
 
 # Copy local code to the container image.
 WORKDIR /usr/src/app
