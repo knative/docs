@@ -25,13 +25,13 @@ recreate the source files from this folder.
    [package]
    name = "hellorust"
    version = "0.0.0"
-   edition = "2018"
+   edition = "2021"
    publish = false
 
    [dependencies]
-   hyper = { version = "0.14.7", features = ["full"]}
-   tokio = { version = "1.5.0", features = ["macros", "rt-multi-thread"] }
-   pretty_env_logger = "0.4.0"
+   hyper = { version = "0.14.27", features = ["full"]}
+   tokio = { version = "1.33.0", features = ["macros", "rt-multi-thread"] }
+   pretty_env_logger = "0.5.0"
    ```
 
 1. Create a `src` folder, then create a new file named `main.rs` in that folder
@@ -93,7 +93,7 @@ recreate the source files from this folder.
    ```docker
    # Use the official Rust image.
    # https://hub.docker.com/_/rust
-   FROM rust:1.51.0
+   FROM rust:1.73.0
 
    # Copy local code to the container image.
    WORKDIR /usr/src/app
