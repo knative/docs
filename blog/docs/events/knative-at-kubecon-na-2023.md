@@ -1,9 +1,9 @@
 # How to catch news about Knative project during KubeCon + CloudNativeCon NA 2023
-Date: 2023-03-13
+Date: 2023-10-24
 
 ![image](images/kubecon.jpg)
 
-Attention cloud-native enthusiasts! If you are in Chicago and want to learn about the Knative project and how it can help you accelerate your journey to adopt Kubernetes, scale AI-Ready Microservices, help you write event-driven apps, and leverage Serverless in your enterprise? Then catch the following sessions on knative and visit us at Knative Kiosk during KubeCon + CloudNativeCon NA 2023 
+Attention cloud-native enthusiasts! If you are in Chicago and want to learn about the Knative project and how it can help you accelerate your journey to adopt Kubernetes, scale AI-Ready Microservices, write event-driven apps, and leverage Serverless in your enterprise - then catch the following sessions on knative and visit us at Knative Kiosk during KubeCon + CloudNativeCon NA 2023 
 ## AppDeveloperCon November 6 2023
 **Monday, November 6 • 10:25am:** Shaping Tomorrow's Technology: Navigating Cloud-Native, Serverless, and Polyglot Programming - Naina Singh & Shaaf Syed, Red Hat
 
