@@ -22,10 +22,10 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
-### Knative 1.11 is out!
-Details on the 1.11 release of the Knative project.
+### Knative 1.12 is out!
+Details on the 1.12 release of the Knative project.
 
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-11-release.md){ .md-button }
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-12-release.md){ .md-button }
 
 ### Knative at KubeCon + CloudNativeCon Europe 2023
 
