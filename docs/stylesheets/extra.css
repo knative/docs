@@ -169,6 +169,14 @@ a.md-header__button.md-logo img {
   color: black;
 }
 
+.md-banner .announcement {
+  color: black;
+  background-color: #FFE6FB;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+
 .md-banner a {
   color: blue;
   text-decoration: underline;

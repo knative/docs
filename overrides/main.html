@@ -12,6 +12,10 @@
   Knative {{ config.extra.knative_version }} documentation is no longer actively maintained. The documentation you are currently viewing is a static snapshot. For up-to-date documentation, see <a href="{{ base_url }}/../docs/">the latest version</a>.
   </p>
 </div>
+{% else %}
+<div class="announcement">
+  <p>Going to KubeCon NA? Join us at the Knative kiosk and catch talks on Monday, Tuesday, and Thursday. <a href="https://knative.dev/blog/events/knative-at-kubecon-na-2023/">Learn More!</a></p>
+</div>
 {% endif %}
 {% endblock %}
 
