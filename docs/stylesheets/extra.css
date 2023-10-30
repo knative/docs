@@ -99,10 +99,13 @@ a.md-header__button.md-logo img {
   font-weight: bold;
 }
 
+.md-tabs__list li:nth-last-child(3) {
+  margin-left: auto;
+}
+
 .md-tabs__list li:nth-last-child(1),
 .md-tabs__list li:nth-last-child(2),
 .md-tabs__list li:nth-last-child(3) {
-  float: right;
   background-color: #024c93;
   color: white;
   padding: 0 2em;

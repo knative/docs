@@ -305,10 +305,7 @@ nav:
     - Reference:
       - Security: reference/security/README.md
       - Release notes: reference/relnotes/README.md
-    - Community:
-      - How To Get Involved: community/README.md
-      - Contribute to Knative: community/contributing.md
-      - Community Rules and Practices: community/governance.md
+    - Blog: /blog/
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:
@@ -316,4 +313,7 @@ nav:
         - Outfit7: about/case-studies/outfit7.md
         - Puppet: about/case-studies/puppet.md
         - PNC Bank: about/case-studies/pnc.md
-    - Blog: /blog/
+    - Community:
+      - How To Get Involved: community/README.md
+      - Contribute to Knative: community/contributing.md
+      - Community Rules and Practices: community/governance.md
