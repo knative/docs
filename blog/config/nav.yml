@@ -9,8 +9,6 @@ nav:
     - Knative CLI: /docs/client/
     - Code samples: /docs/samples/
     - Reference: /docs/reference/security/
-    - Community: /docs/community/
-    - About: /docs/about/testimonials/
   #####################################################
     # Blog
   #####################################################
@@ -97,3 +95,7 @@ nav:
           - events/install-fest-04-2022.md
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
+    #####################################################          
+    # keep the same order as on the main page
+    - About: /docs/about/testimonials/
+    - Community: /docs/community/
