@@ -26,7 +26,7 @@ kubectl patch --namespace knative-serving configmap/config-features \
 
 !!! note
    
-    If you have installed Serving via the Knative operator then you need to set the above feature flags ** only ** at the corresponding Serving CR.
+    If you have installed Serving via the Knative operator then you need to set the above feature flags **only** at the corresponding Serving CR.
 
 ## Procedure
 
