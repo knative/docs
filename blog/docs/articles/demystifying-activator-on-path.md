@@ -7,19 +7,18 @@
 _In this blog post you will learn how to recognize when activator is on the data path and what it triggers that behavior._
 
 A knative service can operate in two modes: proxy mode and serve mode.
-When in proxy mode, Activator is on the data path, and it will stay on the path until certain conditions (more on this later) are met.
+When in proxy mode, Activator is on the data path (which means the incoming requests are routed through the Activator component), and it will stay on the path until certain conditions (more on this later) are met.
 When these conditions are met, Activator is removed from the data path, and the service transitions to serve mode.
 However, it was not always like that when a service scales from/to zero, the activator is added by default to the data path.
-This default setting often confuses users for reasons we will see next as it is possible that activator will not
-be removed unless enough capacity is available. This is intended as one of the Activator's roles is to offer backpressure capabilities so that a Knative service is not overloaded by incoming traffic.
-
+This default setting often confuses users for reasons we will see next as it is possible that activator will not be removed unless enough capacity is available.
+This is intended as one of the Activator's roles is to offer backpressure capabilities so that a Knative service is not overloaded by incoming traffic.
 
 ## Background
 
-The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that uses metrics from pods to
-make scaling decisions. Let's see in detail what happens when a new Knative service is created.
+The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that uses metrics from pods to make scaling decisions.
+Let's see in detail what happens when a new Knative service is created.
 
-Once the user creates a new service the corresponding Knative reconciler creates a Knative Configuration and a Knative Route for that service. Then the Configuration reconciler creates a Revision resource and
+Once the user creates a new service the corresponding Knative reconciler creates a Knative Configuration and a Knative Route for that service. Then the Configuration reconciler creates a `Revision` resource and
 the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
 The Route reconciler will create the ingress resource that will be picked up by the Knative net-* components responsible
 for managing traffic locally in the cluster and externally to the cluster.
@@ -128,14 +127,40 @@ scale from zero based on some initial scale (default 1):
 
 Later on as traffic continues we get proper statistics from activator closer to the rate:
 
-```
-{"severity":"DEBUG","timestamp":"2023-10-10T15:32:56.949001622Z","logger":"autoscaler.stats-websocket-server","caller":"statserver/server.go:193","message":"Received stat message: {Key:default/autoscale-go-00001 Stat:{PodName:activator-59dff6d45c-9rdxh AverageConcurrentRequests:18.873756322609804 AverageProxiedConcurrentRequests:0 RequestCount:19 ProxiedRequestCount:0 ProcessUptime:0 Timestamp:0}}","commit":"f1617ef","address":":8080"}
-```
 
 ```
-{"severity":"INFO","timestamp":"2023-10-10T15:32:56.432854252Z","logger":"autoscaler","caller":"kpa/kpa.go:188","message":"Observed pod counts=kpa.podCounts{want:1, ready:0, notReady:1, pending:1, terminating:0}","commit":"f1617ef","knative.dev/controller":"knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler","knative.dev/kind":"autoscaling.internal.knative.dev.PodAutoscaler","knative.dev/traceid":"7988492e-eea3-4d19-bf5a-8762cf5ff8eb","knative.dev/key":"default/autoscale-go-00001"}
+{
+   "severity":"DEBUG",
+   "timestamp":"2023-10-10T15:32:56.949001622Z",
+   "logger":"autoscaler.stats-websocket-server",
+   "caller":"statserver/server.go:193",
+   "message":"Received stat message: {Key:default/autoscale-go-00001 Stat:{PodName:activator-59dff6d45c-9rdxh AverageConcurrentRequests:18.873756322609804 AverageProxiedConcurrentRequests:0 RequestCount:19 ProxiedRequestCount:0 ProcessUptime:0 Timestamp:0}}",
+   "commit":"f1617ef",
+   "address":":8080"
+}
 
-{"severity":"DEBUG","timestamp":"2023-10-10T15:32:57.241052566Z","logger":"autoscaler","caller":"scaling/autoscaler.go:286","message":"PodCount=0 Total1PodCapacity=10.000 ObsStableValue=19.874 ObsPanicValue=19.874 TargetBC=10.000 ExcessBC=-30.000","commit":"f1617ef","knative.dev/key":"default/autoscale-go-00001"}
+{
+   "severity":"INFO",
+   "timestamp":"2023-10-10T15:32:56.432854252Z",
+   "logger":"autoscaler",
+   "caller":"kpa/kpa.go:188",
+   "message":"Observed pod counts=kpa.podCounts{want:1, ready:0, notReady:1, pending:1, terminating:0}",
+   "commit":"f1617ef",
+   "knative.dev/controller":"knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler",
+   "knative.dev/kind":"autoscaling.internal.knative.dev.PodAutoscaler",
+   "knative.dev/traceid":"7988492e-eea3-4d19-bf5a-8762cf5ff8eb",
+   "knative.dev/key":"default/autoscale-go-00001"
+}
+
+{
+   "severity":"DEBUG",
+   "timestamp":"2023-10-10T15:32:57.241052566Z",
+   "logger":"autoscaler",
+   "caller":"scaling/autoscaler.go:286",
+   "message":"PodCount=0 Total1PodCapacity=10.000 ObsStableValue=19.874 ObsPanicValue=19.874 TargetBC=10.000 ExcessBC=-30.000",
+   "commit":"f1617ef",
+   "knative.dev/key":"default/autoscale-go-00001"
+}
 ```
 
 Since the pod is not up yet: EBS = 0*10 - floor(19.874) - 10 = -30
