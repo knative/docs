@@ -5,6 +5,7 @@ Serving supports mounting the [volume types](https://kubernetes.io/docs/concepts
 [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) are supported but require a [feature flag](../configuration/feature-flags.md) to be enabled.
 
 !!! warning
+    
     Mounting large volumes may add considerable overhead to the application's start up time.
 
 
@@ -12,22 +13,20 @@ Bellow there is an example of using a persistent volume claim with a Knative Ser
 
 ## Prerequisites
 
-Before you can configure PVCs for a Service, this feature must be enabled in the `KnativeServing` ConfigMap:
+Before you can configure PVCs for a Service, this feature must be enabled in the `config-features` ConfigMap as follows:
 
-```yaml
-...
-spec:
-  config:
-    features:
-      "kubernetes.podspec-persistent-volume-claim": enabled
-      "kubernetes.podspec-persistent-volume-write": enabled
-...
+```
+kubectl patch --namespace knative-serving configmap/config-features \
+ --type merge \
+ --patch '{"data":{"kubernetes.podspec-persistent-volume-claim": "enabled", "kubernetes.podspec-persistent-volume-write": "enabled"}}'
 ```
 
 * The `kubernetes.podspec-persistent-volume-claim` extension controls whether persistent volumes (PVs) can be used with Knative Serving.
 * The `kubernetes.podspec-persistent-volume-write` extension controls whether PVs are available to Knative Serving with the write access.
 
-> Note that if you have installed Serving via the Knative operator then you need to set the above feature flags at the corresponding Serving CR.
+!!! note
+   
+    If you have installed Serving via the Knative operator then you need to set the above feature flags ** only ** at the corresponding Serving CR.
 
 ## Procedure
 
@@ -41,8 +40,8 @@ spec:
   template:
     spec:
       containers:
-          ...
-          volumeMounts:
+        ...
+        volumeMounts:
             - mountPath: /data
               name: mydata
               readOnly: false
