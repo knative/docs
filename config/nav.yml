@@ -88,6 +88,7 @@ nav:
       - Creating functions: functions/creating-functions.md
       - Building functions: functions/building-functions.md
       - Running functions: functions/running-functions.md
+      - Subscribing functions: functions/subscribing-functions.md
       - Deploying functions: functions/deploying-functions.md
       - Invoking functions: functions/invoking-functions.md
       - Language packs: functions/language-packs.md
