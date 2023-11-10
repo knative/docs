@@ -31,14 +31,3 @@ and a Knative Broker as the source of events, from where they are consumed.
     ```bash
     kn func subscribe --filter type=com.example --filter extension=my-extension-value
     ```
-
-!!! note
-    When invoking `func deploy` the CLI will create Knative Triggers for the function.
-
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
-        🙌 Function image built: <registry>/hello:latest
-        🎯 Creating Triggers on the cluster
-        ✅ Function deployed in namespace "default" and exposed at URL:
-        http://hello.default.127.0.0.1.sslip.io
-    ```
