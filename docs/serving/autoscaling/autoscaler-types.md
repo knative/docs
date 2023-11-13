@@ -121,50 +121,6 @@ spec:
       annotations:
         autoscaling.knative.dev/target: "70"
 ```
-```
-{
-  "severity": "DEBUG",
-  "timestamp": "2023-10-10T15:32:56.949001622Z",
-  "logger": "autoscaler.stats-websocket-server",
-  "caller": "statserver/server.go:193",
-  "message": "Received stat message: {
-    Key: default/autoscale-go-00001,
-    Stat: {
-      PodName": activator-59dff6d45c-9rdxh,
-      AverageConcurrentRequests: 18.873756322609804,
-      AverageProxiedConcurrentRequests": 0,
-      RequestCount: 19,
-      ProxiedRequestCount: 0,
-      ProcessUptime: 0,
-      Timestamp: 0
-    }
-  }",
-  "commit": "f1617ef",
-  "address": ":8080"
-}
 
-{
-   "severity":"INFO",
-   "timestamp":"2023-10-10T15:32:56.432854252Z",
-   "logger":"autoscaler",
-   "caller":"kpa/kpa.go:188",
-   "message":"Observed pod counts=kpa.podCounts{want:1, ready:0, notReady:1, pending:1, terminating:0}",
-   "commit":"f1617ef",
-   "knative.dev/controller":"knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler",
-   "knative.dev/kind":"autoscaling.internal.knative.dev.PodAutoscaler",
-   "knative.dev/traceid":"7988492e-eea3-4d19-bf5a-8762cf5ff8eb",
-   "knative.dev/key":"default/autoscale-go-00001"
-}
-
-{
-   "severity":"DEBUG",
-   "timestamp":"2023-10-10T15:32:57.241052566Z",
-   "logger":"autoscaler",
-   "caller":"scaling/autoscaler.go:286",
-   "message":"PodCount=0 Total1PodCapacity=10.000 ObsStableValue=19.874 ObsPanicValue=19.874 TargetBC=10.000 ExcessBC=-30.000",
-   "commit":"f1617ef",
-   "knative.dev/key":"default/autoscale-go-00001"
-}
-```
 !!! important
     If you are creating revisions by using a service or configuration, you must set the annotations in the _revision template_ so that any modifications will be applied to each revision as they are created. Setting annotations in the top level metadata of a single revision will not propagate the changes to other revisions and will not apply changes to the autoscaling configuration for your application.
