@@ -2,6 +2,10 @@
 # https://hub.docker.com/_/gradle
 FROM gradle:6.7 as builder
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Copy local code to the container image.
 COPY build.gradle .
 COPY src ./src
@@ -14,8 +18,14 @@ RUN gradle clean build --no-daemon
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM openjdk:8-jre-alpine
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Copy the jar to the production image from the builder stage.
 COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
+
+USER appuser
 
 # Run the web service on container startup.
 CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/helloworld.jar" ]

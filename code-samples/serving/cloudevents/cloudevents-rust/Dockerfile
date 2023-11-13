@@ -14,7 +14,13 @@
 
 FROM scratch
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # To build it: cargo build --target x86_64-unknown-linux-musl --release
 COPY target/x86_64-unknown-linux-musl/release/knative-cloudevents-example /app
+
+USER appuser
 
 CMD ["/app"]

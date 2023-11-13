@@ -2,6 +2,10 @@
 # https://hub.docker.com/_/node
 FROM node:12-slim
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Create and change to the app directory.
 WORKDIR /usr/src/app
 
@@ -15,6 +19,8 @@ RUN npm install --only=production
 
 # Copy local code to the container image.
 COPY . ./
+
+USER appuser
 
 # Run the web service on container startup.
 CMD [ "npm", "start" ]

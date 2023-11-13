@@ -14,6 +14,10 @@
 
 FROM registry.access.redhat.com/ubi8/nodejs-12
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Copy application dependency manifests to the container image.
 # A wildcard is used to ensure both package.json AND package-lock.json are copied.
 # Copying this separately prevents re-running npm install on every code change.
@@ -30,6 +34,8 @@ EXPOSE $PORT
 ARG ENV=production
 
 ENV NODE_ENV $ENV
+
+USER appuser
 
 # Run the web service on container startup.
 CMD npm run $NODE_ENV

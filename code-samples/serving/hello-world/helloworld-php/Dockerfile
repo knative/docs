@@ -2,6 +2,12 @@
 # https://hub.docker.com/_/php
 FROM php:7.3-apache
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
+USER appuser
+
 # Copy local code to the container image.
 COPY index.php /var/www/html/
 

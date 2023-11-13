@@ -2,6 +2,10 @@
 # https://hub.docker.com/_/maven
 FROM maven:3.5-jdk-8-alpine as builder
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Copy local code to the container image.
 WORKDIR /app
 COPY pom.xml .
@@ -15,12 +19,18 @@ RUN mvn package -DskipTests
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM openjdk:8-jre-alpine
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Copy the jar to the production image from the builder stage.
 COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar helloworld.jar
 
 ENV PORT 8080
 
 EXPOSE 8080
+
+USER appuser
 
 # Run the web service on container startup.
 CMD ["java","-jar","helloworld.jar"]

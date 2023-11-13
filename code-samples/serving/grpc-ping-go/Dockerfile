@@ -17,6 +17,10 @@
 # https://hub.docker.com/_/golang
 FROM golang as builder
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 ARG TARGETOS
 ARG TARGETARCH
 
@@ -37,9 +41,15 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -tags=grpcping 
 # https://github.com/GoogleContainerTools/distroless#readme
 FROM gcr.io/distroless/static
 
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g 1000 appuser && \
+    adduser -S -u 1000 -G appuser appuser
+
 # Copy the binaries to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/knative/docs/code-samples/serving/grpc-ping-go/ping-server /server
 COPY --from=builder /go/src/github.com/knative/docs/code-samples/serving/grpc-ping-go/ping-client /client
+
+USER appuser
 
 # Run the service on container startup.
 CMD ["/server"]
