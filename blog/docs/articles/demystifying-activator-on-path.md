@@ -6,7 +6,11 @@
 
 _In this blog post you will learn how to recognize when activator is on the data path and what it triggers that behavior._
 
-A knative service can operate in two modes: proxy mode and serve mode.
+The activator acts as a component on the data path to enable traffic buffering when a service is scaled-to-zero.
+One lesser known feature of activator is, that it can act as a request buffer that handles back-pressure with the goal to not overload a Knative service.
+For this, a Knative service can define how much traffic it can handle using [annotations](https://knative.dev/docs/serving/autoscaling/autoscaling-targets/#configuring-targets).
+The autoscaler component will use this information to calculate the amount of pods needed to handle the incoming traffic for a specific Knative service
+When serving traffic a knative service can operate in two modes: proxy mode and serve mode.
 When in proxy mode, Activator is on the data path (which means the incoming requests are routed through the Activator component), and it will stay on the path until certain conditions (more on this later) are met.
 When these conditions are met, Activator is removed from the data path, and the service transitions to serve mode.
 However, it was not always like that when a service scales from/to zero, the activator is added by default to the data path.
@@ -18,30 +22,30 @@ This is intended as one of the Activator's roles is to offer backpressure capabi
 The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that uses metrics from pods to make scaling decisions.
 Let's see in detail what happens when a new Knative service is created.
 
-Once the user creates a new service the corresponding Knative reconciler creates a Knative Configuration and a Knative Route for that service. Then the Configuration reconciler creates a `Revision` resource and
-the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
-The Route reconciler will create the ingress resource that will be picked up by the Knative net-* components responsible
-for managing traffic locally in the cluster and externally to the cluster.
+Once the user creates a new service the corresponding Knative reconciler creates a Knative Configuration and a Knative Route for that service. 
+Then the Configuration reconciler creates a `Revision` resource and the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
+The Route reconciler will create the ingress resource that will be picked up by the Knative net-* components responsible for managing traffic locally in the cluster and externally to the cluster.
 
-Now the creation of the PA earlier triggers the KPA reconciler which goes through certain steps in order to setup an autoscaling configuration for the revision:
+Now, the creation of the PA triggers the KPA reconciler which goes through certain steps in order to setup an autoscaling configuration for the revision:
 
 - creates an internal Decider resource that holds the initial desired scale in `decider.Status.DesiredScale`and
-sets up a pod scaler via the multi-scaler component. The pod scaler every two seconds calculates a new Scale
-result and makes a decision based on the condition `decider.Status.DesiredScale != sRes.DesiredPodCount` whether to trigger a new reconciliation for the KPA reconciler. Goal is the KPA to get the latest scale result.
+sets up a pod scaler via the multi-scaler component. The pod scaler calculates a new Scale result every two seconds and makes a decision based on the condition `decider.Status.DesiredScale != scaledResult.DesiredPodCount` whether to trigger a new reconciliation for the KPA reconciler. Goal is the KPA to get the latest scale result.
 
 - creates a Metric resource that triggers the metrics collector controller to setup a scraper for the revision pods.
 
-- calls a scale method that decides the number of wanted pods and also updates the revision deployment
+- calls a scale method that decides the number of wanted pods and also updates the K8s raw deployment that corresponds to the revision.
 
-- creates/updates a ServerlessService (SKS) that holds info about the operation mode (proxy or serve) and stores the activators used in proxy mode. That SKS create/update event triggers a reconciliation for the SKS from its specific controller that creates the required public and private K8s services so traffic can be routed to the K8s deployment.
-This in combination with the networking setup done by the net-* components is the
+- creates/updates a ServerlessService (SKS) that holds info about the operation mode (proxy or serve) and stores the number of activators that should be used in proxy mode.
+The number of activators depends on the capacity that needs to be covered.
+That SKS create/update event triggers a reconciliation for the SKS from its specific controller that creates the required public and private K8s services so traffic can be routed to the K8s deployment.
+Also in proxy mode that controller will pick up the number of activators and configure an equal number of endpoints for the revision's [public service](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md#data-flow-examples).
+This in combination with the networking setup done by the net-* components is the end-to-end networking setup that needs to happen for a ksvc to be ready to serve traffic.
 
 - updates the PA and reports the active and wanted pods in its status
 
 ## Capacity and Operation Modes in Practice
 
-As described earlier Activator will be removed if enough capacity is available and there is an invariant that needs to
-hold, that is EBC (excess burst capacity)>0, where EBC = TotalCapacity - ObservedInPanicMode - TargetBurstCapacity(TBC).
+As described earlier Activator will be removed if enough capacity is available and there is an invariant that needs to hold, that is EBC (excess burst capacity)>0, where EBC = TotalCapacity - ObservedInPanicMode - TargetBurstCapacity(TBC).
 
 Let's see an example of a service that has a target concurrency of 10 and tbc=10:
 
@@ -81,7 +85,7 @@ NAME                 MODE    ACTIVATORS   SERVICENAME          PRIVATESERVICENAM
 autoscale-go-00001   Serve   2            autoscale-go-00001   autoscale-go-00001-private   True    
 ```
 
-The reason why we are in Serve mode is because EBC=0. In the logs we get:
+The reason why we are in Serve mode is that because EBC=0. In the logs we get:
 
 
 ```bash
@@ -100,8 +104,7 @@ NAME                 MODE    ACTIVATORS   SERVICENAME          PRIVATESERVICENAM
 autoscale-go-00001   Proxy   2            autoscale-go-00001   autoscale-go-00001-private   Unknown   NoHealthyBackends
 ```
 
-In debug mode also in the logs you can see the state that the autoscaler operates for the specific revision.
-In this case we go directly to:
+When you enable debug logs, you can see this also in the autoscaler logs. In this case we go directly to:
 
 ```
 {"severity":"DEBUG","timestamp":"2023-10-10T15:29:37.241523364Z","logger":"autoscaler","caller":"scaling/autoscaler.go:247","message":"Operating in stable mode.","commit":"f1617ef","knative.dev/key":"default/autoscale-go-00001"}
@@ -113,8 +116,7 @@ Let's send some traffic (experiment was run on Minikube):
 hey -z 600s -c 20 -q 1 -host "autoscale-go.default.example.com" "http://192.168.39.43:32718?sleep=1000"
 ```
 
-Initially activator when get a request in it sends stats to the autoscaler which tries to
-scale from zero based on some initial scale (default 1):
+Initially activator when get a request in it sends stats to the autoscaler which tries to scale from zero based on some initial scale (default 1):
 
 ```
 {"severity":"DEBUG","timestamp":"2023-10-10T15:32:56.178498172Z","logger":"autoscaler.stats-websocket-server","caller":"statserver/server.go:193","message":"Received stat message: {Key:default/autoscale-go-00001 Stat:{PodName:activator-59dff6d45c-9rdxh AverageConcurrentRequests:1 AverageProxiedConcurrentRequests:0 RequestCount:1 ProxiedRequestCount:0 ProcessUptime:0 Timestamp:0}}","commit":"f1617ef","address":":8080"}
@@ -172,11 +174,9 @@ Given the new statistics kpa decides to scale to 3 pods.
 {"severity":"INFO","timestamp":"2023-10-10T15:32:57.241421042Z","logger":"autoscaler","caller":"kpa/scaler.go:370","message":"Scaling from 1 to 3","commit":"f1617ef","knative.dev/controller":"knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler","knative.dev/kind":"autoscaling.internal.knative.dev.PodAutoscaler","knative.dev/traceid":"6dcf87c9-15d8-41d3-95ae-5ca9b3d90705","knative.dev/key":"default/autoscale-go-00001"}
 ```
 
-But let's see why is this so. The log above comes from the multi-scaler which reports
-a scaled result that contains EBS as reported above and a desired pod count for different windows.
+But let's see why is this is the case. The log above comes from the multi-scaler which reports a scaled result that contains EBS as reported above and a desired pod count for different windows.
 
-Roughly the final desired number is (there is more logic that covers corner
-  cases and checking against min/max scale limits):
+Roughly the final desired number is (there is more logic that covers corner cases and checking against min/max scale limits):
 
 ```
 dspc := math.Ceil(observedStableValue / spec.TargetValue)
@@ -200,6 +200,11 @@ Later on when revision is scaled we have:
 EBS = 3*10 - floor(15.792) - 10 = 4
 
 Later on the sks transitions to Serve mode as we have enough capacity until traffic stops and deployment is scaled back to zero.
+
+The above are shown visually next with graphs describing ebc, ready pods and 
+![Excess burst capacity over time](/blog/articles/images/ebc.png)
+![Ready pods over time](/blog/articles/images/readypods.png)
+![Panic mode over time](/blog/articles/images/panic.png)
 
 ### Conclusion
 
