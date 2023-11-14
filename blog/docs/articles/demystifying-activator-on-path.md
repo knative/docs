@@ -62,24 +62,35 @@ where
 ```
 dppc := math.Ceil(observedPanicValue / spec.TargetValue)
 ```
-The target value is the utilization in terms of concurrency and that is 0.7*(revision_target).
-0.7 is the utilization factor for each replica and when reached we need to scale out.
 
-**Note:** if the KPA metrics Requests Per Second(RPS) is used then the utilization factor is 0.75.
+dppc stands for desired panic pod count and expressed what autoscaler needs to achieve in panic mode.
+The target value is the utilization in terms of concurrency that the autoscaler aims for and that is calculated as 0.7*(revision_total).
+Revision total is the maximum possible value of scaling metric that is permitted on the pod and defaults to 100 (container concurrency default).
+The value 0.7 is the utilization factor for each replica and when reached we need to scale out.
+
+**Note:** if the KPA metric Requests Per Second(RPS) is used then the utilization factor is 0.75.
 
 The `observedPanicValue` is the calculated average value seen during the panic window for the concurrency metric.
 The panic threshold is configurable (default 2) and expresses the ratio of desired versus available pods.
 
 After we enter panic mode in order to exit we need to have enough capacity for a period that is equal to the stable window size.
+That also means that autoscaler will try to get enough pods ready in order to increase the capacity.
+Also note here that when operating outside the panic mode the autoscaler does not use `dpcc` but a similar quantity:
+`dspc := math.Ceil(observedStableValue / spec.TargetValue)` which is based on metrics during the stable period.
 
-To quantify the idea of enough capacity to deal with bursts of traffic we introduce the notion of the Excess Burst Capacity(EBC) that needs to be >=0.
+To quantify the idea of enough capacity and to deal with bursts of traffic we introduce the notion of the Excess Burst Capacity(EBC) that needs to be >=0.
 It is defined as:
 
 ```
 EBC = TotalCapacity - ObservedPanicValue - TargetBurstCapacity(TBC).
 ```
 
-Let's see an example of how these are calculated in practice. Here is a service that has a target concurrency of 10 and tbc=10:
+`TotalCapacity` is calculated as ready_pod_count*revision_total. The default TBC is set to 200. 
+Now with the above defaults and given the fact that a request needs to stay around for some time in order concurrency metrics to show enough load, it means you can't get EBC>=0 with a hello-world example.
+The latter which is often confusing for the newcomer as the Knative service never enters serve mode. 
+In the next example we will show the lifecycle of a Knative service that also moves to serve mode and how ebc is calculated in practice. 
+
+Here is a service that has a target concurrency of 10 and tbc=10:
 
 ```
 apiVersion: serving.knative.dev/v1
@@ -106,7 +117,7 @@ The graphs are shown next.
 ![Panic mode over time](/blog/articles/images/panic.png)
 
 
-Let's describe inde tail what we see above. Initially when the ksvc is deployed there is no traffic and one pod is created by default for verification reasons.
+Let's describe in detail what we see above. Initially when the ksvc is deployed there is no traffic and one pod is created by default for verification reasons.
 
 Until the pod is up we have:
 ```bash
