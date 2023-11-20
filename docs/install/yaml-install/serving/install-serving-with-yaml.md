@@ -185,7 +185,9 @@ The following tabs expand to show instructions for installing each Serving exten
     1. Configure Knative to automatically configure TLS certificates by following the steps in
     [Enabling automatic TLS certificate provisioning](../../../serving/using-auto-tls.md).
 
-=== "TLS with HTTP01"
+=== "TLS with HTTP01 (deprecated)"
+
+    ⚠️ The net-http01 component is deprecated and will no longer be shipped in Knative v1.13. For a timeline see: https://github.com/knative/serving/issues/14640. We recommend using cert-manager and configure it to use HTTP01.
 
     Knative supports automatically provisioning TLS certificates using Encrypt HTTP01 challenges. The following commands install the components needed to support TLS.
 
