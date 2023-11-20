@@ -39,17 +39,6 @@ Uninstall any Serving extensions you have installed by performing the steps in t
     [cert-manager documentation](https://cert-manager.io/docs/installation/uninstall/kubernetes/).
 
 
-
-=== "TLS via HTTP01"
-
-    Uninstall the `net-http01` controller by running:
-
-    ```bash
-    kubectl delete -f {{ artifact( repo="net-http01", file="release.yaml") }}
-    ```
-
-
-
 ### Uninstalling a networking layer
 
 Follow the relevant procedure to uninstall the networking layer you installed:
