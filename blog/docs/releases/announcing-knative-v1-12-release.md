@@ -29,6 +29,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 [Release Notes](https://github.com/knative/serving/releases/tag/knative-v1.12.0)
 
 ### 🚨 Breaking or Notable
+- net-http01 component has been deprecated (see: https://github.com/knative/serving/issues/14640)
 - Label the webhook service with "app: webhook" label (#14258, @JordanDeBeer)
 - `auto-tls` is now named `external-domain-tls`  (#14472, @ReToCode)
 - `internal-encryption` is now named `system-internal-tls`  (#14472, @ReToCode)
