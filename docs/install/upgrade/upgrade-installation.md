@@ -69,10 +69,34 @@ kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1
 -f https://github.com/knative/eventing/releases/download/knative-v1.2.0/eventing.yaml \
 ```
 
-### Run post-install tools after the upgrade
+### Run post-install jobs when necessary
 
-In some upgrades there are some steps that must happen after the actual
-upgrade, and these are identified in the release notes.
+When the release notes point out that a Knative custom resource is transitioned to a new version, for example like:
+
+> DomainMapping/v1alpha1 is deprecated - use v1beta1 APIs
+
+you need to run post-install jobs (see [here for details](#upgrade-existing-resources-to-the-latest-stored-version)):
+
+```bash
+# Serving
+kubectl apply -f {{ artifact(repo="serving",file="serving-post-install-jobs.yaml")}}
+
+# Eventing
+kubectl apply -f {{ artifact(repo="eventing",file="eventing-post-install.yaml")}}
+```
+
+Make sure that the jobs complete successfully before continuing:
+
+```bash
+# Serving
+kubectl get job -n knative-serving
+
+# Eventing
+kubectl get job -n knative-eventing
+```
+
+!!! caution
+    You also have to transition the version in your custom resource YAML files if you store them externally, e.g. in git via GitOps.
 
 ## Verifying the upgrade
 
