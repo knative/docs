@@ -107,7 +107,7 @@ Progress deadline setting can be configured at global level through a ConfigMap 
       template:
         metadata:
           annotations:
-            serving.knative.dev/progress-deadline: "45s" 
+            serving.knative.dev/progress-deadline: "60s" 
         spec:
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
