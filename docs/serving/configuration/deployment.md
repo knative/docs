@@ -73,21 +73,45 @@ You may want to configure this setting as a higher value if any of the following
 
 See the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#progress-deadline-seconds) for more information.
 
-The following example shows a snippet of an example Deployment Config Map that sets this value to 10 minutes:
+Progress deadline setting can be configured at global level through a ConfigMap or at the per-revision level using an annotation.
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-deployment
-  namespace: knative-serving
-  labels:
-    serving.knative.dev/release: devel
-  annotations:
-    knative.dev/example-checksum: "fa67b403"
-data:
-  progress-deadline: "10m"
-```
+* **Global key:** `progress-deadline`
+* **Per-revision annotation key:** `serving.knative.dev/progress-deadline`
+* **Possible values:** `time.Duration`
+* **Default:** `"600s"`
+
+**Example:**
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-deployment
+      namespace: knative-serving
+      labels:
+        serving.knative.dev/release: devel
+      annotations:
+        knative.dev/example-checksum: "fa67b403"
+    data:
+      progress-deadline: "10m"
+    ```
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+    spec:
+      template:
+        metadata:
+          annotations:
+            serving.knative.dev/progress-deadline: "45s" 
+        spec:
+          containers:
+            - image: ghcr.io/knative/helloworld-go:latest
+    ```
 
 ## Skipping tag resolution
 
