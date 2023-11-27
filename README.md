@@ -43,6 +43,9 @@ Each release of the Knative docs is available on the website (starting with
 
 We're excited that you're interested in contributing to the Knative documentation! Check out the resources below to get started.
 
+If you are interested in contributing to Knative more broadly, please check out [CLOTRIBUTOR](https://clotributor.dev/search?project=knative&page=1)
+for a list of all the help wanted issues in Knative.
+
 ### Getting started
 
 If you want to contribute a fix or add new content to the documentation, you can
