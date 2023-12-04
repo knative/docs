@@ -20,6 +20,6 @@ The auditors found that Knative does not include provenance with releases; Prove
 
 Knative would like to thank Ada Logics for conducting the security audit, OSTIF for facilitating it and the CNCF for funding the audit.
 
-Knative is an open-source project that encourages community contributions. If you wish to contribute to Knative’s ongoing security work, we recommend that you read through the report, in particular the strategic recommendations and the SAST tooling section, which both include practical recommendations for Knative’s security posture. In addition, work with adopting the slsa-github-generator is an excellent task for anyone who wishes to improve Knative’s supply-chain risk mitigation. If you have questions, comments or suggestions, you can [engage with the community in several ways](https://knative.dev/docs/community/).
+Knative is an open-source project that encourages community contributions. If you wish to contribute to Knative’s ongoing security work, we recommend that you read through the report, in particular the strategic recommendations and the SAST tooling section, which both include practical recommendations for Knative’s security posture. If you have questions, comments or suggestions, you can [engage with the community in several ways](https://knative.dev/docs/community/).
 
 - [Audit report](https://github.com/knative/docs/blob/security-audit-report/reports/ADA-knative-security-audit-2023.pdf)
