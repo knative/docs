@@ -23,7 +23,7 @@ Follow this blog to keep up-to-date with Knative.
 ## Featured Posts
 
 ### Knative Completes Third-Party Security Audit
-A third-party audit by Ada Logics found a small number of issues, including [one CVE](https://github.com/knative/docs/pull/5788).
+A third-party audit by Ada Logics found a small number of issues, including [one CVE](https://github.com/knative/serving/security/advisories/GHSA-qmvj-4qr9-v547).
 
 [Read more :octicons-arrow-right-24:](events/security-audit-2023.md){ .md-button }
 
