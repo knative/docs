@@ -6,6 +6,7 @@
 # To regenerate, run:
 #   go run ./tools/redir-gen/
 /actions/* go-get=:go-get /golang/actions.html 200
+/backstage-plugins/* go-get=:go-get /golang/backstage-plugins.html 200
 /caching/* go-get=:go-get /golang/caching.html 200
 /client/* go-get=:go-get /golang/client.html 200
 /client-pkg/* go-get=:go-get /golang/client-pkg.html 200
