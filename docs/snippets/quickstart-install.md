@@ -79,7 +79,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
     1. Install Knative and Kubernetes using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) by running:
         ```bash
-        kn quickstart kind
+        kn quickstart kind --registry
         ```
 
         !!! note
