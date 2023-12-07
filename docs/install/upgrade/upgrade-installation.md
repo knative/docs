@@ -79,10 +79,10 @@ you need to run post-install jobs (see [here for details](#upgrade-existing-reso
 
 ```bash
 # Serving
-kubectl apply -f {{ artifact(repo="serving",file="serving-post-install-jobs.yaml")}}
+kubectl create -f {{ artifact(repo="serving",file="serving-post-install-jobs.yaml")}}
 
 # Eventing
-kubectl apply -f {{ artifact(repo="eventing",file="eventing-post-install.yaml")}}
+kubectl create -f {{ artifact(repo="eventing",file="eventing-post-install.yaml")}}
 ```
 
 Make sure that the jobs complete successfully before continuing:
