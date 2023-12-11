@@ -31,7 +31,7 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-go
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## The sample code.
+## The sample code
 
 1. If you look in `cloudevents.go`, you will see two key functions for the different modes of operation:
 
@@ -49,45 +49,55 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-go
 
 2. Choose how you would like to build the application:
 
- ### Dockerfile
+### Dockerfile
 
- * If you look in `Dockerfile`, you will see a method for pulling in the dependencies and building a small Go container based on Alpine. You can build and push this to your registry of choice via:
+- If you look in `Dockerfile`, you will see a method for pulling in the dependencies and building a small Go container based on Alpine. You can build and push this to your registry of choice via:
+
 ```bash
 # Build and push the container on your local machine.
 docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
 ```
 
- ### ko
+### ko
 
- * You can use [`ko`](https://github.com/google/ko) to build and push just the image with:
+- You can use [`ko`](https://github.com/google/ko) to build and push just the image with:
+
 ```bash
 ko publish github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go
 ```
- However, if you use `ko` for the next step, this is not necessary.
 
+However, if you use `ko` for the next step, this is not necessary.
 
 3. Choose how you would like to deploy the application:
 
- ### yaml (with Dockerfile)
- * If you look in `service.yaml`, take the `<image>` name you used earlier and insert it into the `image:` field, then run:
+### yaml (with Dockerfile)
+
+- If you look in `service.yaml`, take the `<image>` name you used earlier and insert it into the `image:` field, then run:
+
 ```bash
 kubectl apply -f service.yaml
 ```
 
- ### yaml (with ko)
- * If using `ko` to build and push:
+### yaml (with ko)
+
+- If using `ko` to build and push:
+
 ```bash
 ko apply -f service.yaml
 ```
 
- ### kn (with Dockerfile)
- * If using `kn` to deploy:
+### kn (with Dockerfile)
+
+- If using `kn` to deploy:
+
 ```bash
 kn service create cloudevents-go --image=<IMAGE>
 ```
 
- ### kn (with ko)
- * You can compose `kn` and `ko` to build and deploy with a single step using:
+### kn (with ko)
+
+- You can compose `kn` and `ko` to build and deploy with a single step using:
+
 ```bash
 kn service create cloudevents-go --image=$(ko publish github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go)
 ```

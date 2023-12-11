@@ -50,6 +50,7 @@ This will build a statically linked binary, in order to create an image from scr
 # Build and push the container on your local machine.
 docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
 ```
+
 ### yaml
 
 To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
@@ -57,7 +58,6 @@ To deploy the Knative Service, look in the `service.yaml` and replace `<image>` 
 ```bash
 kubectl apply -f service.yaml
 ```
-
 
 ### kn
 
