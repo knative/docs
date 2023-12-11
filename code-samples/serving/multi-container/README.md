@@ -29,6 +29,7 @@ The `multi-container` directory is provided in the sample code, and contains pre
 You can update the default files and YAML by using the steps outlined in this section.
 
 ### Serving Container
+
 1. After you have cloned the sample repository, navigate to the servingcontainer directory:
 
    `cd knative-docs/code-samples/serving/multi-container/servingcontainer`
@@ -38,32 +39,33 @@ You can do this by copying the following code into the `servingcontainer.go` fil
    ```go
    package main
    import (
-   	"fmt"
-   	"io"
-   	"log"
-   	"net/http"
+      "fmt"
+      "io/ioutil"
+      "log"
+      "net/http"
    )
    func handler(w http.ResponseWriter, r *http.Request) {
-   	log.Println("serving container received a request.")
-   	res, err := http.Get("http://127.0.0.1:8882")
-   	if err != nil {
-   		log.Fatal(err)
-   	}
-   	resp, err := io.ReadAll(res.Body)
-   	if err != nil {
-   		log.Fatal(err)
-   	}
-   	fmt.Fprintln(w, string(resp))
+      log.Println("serving container received a request.")
+      res, err := http.Get("http://127.0.0.1:8882")
+      if err != nil {
+         log.Fatal(err)
+      }
+      resp, err := ioutil.ReadAll(res.Body)
+      if err != nil {
+         log.Fatal(err)
+      }
+      fmt.Fprintln(w, string(resp))
    }
    func main() {
-   	log.Print("serving container started...")
-   	http.HandleFunc("/", handler)
-   	log.Fatal(http.ListenAndServe(":8881", nil))
+      log.Print("serving container started...")
+      http.HandleFunc("/", handler)
+      log.Fatal(http.ListenAndServe(":8881", nil))
    }
    ```
+
 1. Copy the following code into the `Dockerfile` file:
 
-   ```docker
+   ```Dockerfile
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
@@ -74,28 +76,49 @@ You can do this by copying the following code into the `servingcontainer.go` fil
 
    # Create and change to the app directory.
    WORKDIR /app
+
    # Retrieve application dependencies using go modules.
    # Allows container builds to reuse downloaded dependencies.
    COPY go.* ./
    RUN go mod download
+
    # Copy local code to the container image.
    COPY . ./
+
    # Build the binary.
    # -mod=readonly ensures immutable go.mod and go.sum in container builds.
    RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o servingcontainer
+
    # Use the official Alpine image for a lean production container.
    # https://hub.docker.com/_/alpine
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine:3
-   RUN apk add --no-cache ca-certificates
+
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
+
+   # Create and change to the app directory.
+   WORKDIR "/home/${USER}/app"
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup -g $USER_GID $USER && \
+      adduser -u $USER_UID -G $USER -D $USER && \
+      apk add --no-cache ca-certificates
+
    # Copy the binary to the production image from the builder stage.
-   COPY --from=builder /app/servingcontainer /servingcontainer
+   COPY --from=builder /app/servingcontainer ./servingcontainer
+
+   USER $USER
+
    # Run the web service on container startup.
-   CMD ["/servingcontainer"]
+   CMD ["./servingcontainer"]
    ```
 
 ### Sidecar Container
+
 1. After you have cloned the sample repository, navigate to the sidecarcontainer directory:
+
    ```text
    cd -
    cd knative-docs/code-samples/serving/multi-container/sidecarcontainer
@@ -107,24 +130,24 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
    ```go
    package main
    import (
-   	"fmt"
-   	"log"
-   	"net/http"
+      "fmt"
+      "log"
+      "net/http"
    )
    func handler(w http.ResponseWriter, r *http.Request) {
-   	log.Println("sidecar container received a request.")
-   	fmt.Fprintln(w, "Yay!! multi-container works")
+      log.Println("sidecar container received a request.")
+      fmt.Fprintln(w, "Yay!! multi-container works")
    }
    func main() {
-   	log.Print("sidecar container started...")
-   	http.HandleFunc("/", handler)
-   	log.Fatal(http.ListenAndServe(":8882", nil))
+      log.Print("sidecar container started...")
+      http.HandleFunc("/", handler)
+      log.Fatal(http.ListenAndServe(":8882", nil))
    }
    ```
 
 1. Copy the following code into the `Dockerfile` file:
 
-   ```docker
+   ```Dockerfile
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
@@ -135,24 +158,43 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
 
    # Create and change to the app directory.
    WORKDIR /app
+
    # Retrieve application dependencies using go modules.
    # Allows container builds to reuse downloaded dependencies.
    COPY go.* ./
    RUN go mod download
+
    # Copy local code to the container image.
    COPY . ./
+
    # Build the binary.
    # -mod=readonly ensures immutable go.mod and go.sum in container builds.
    RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o sidecarcontainer
+
    # Use the official Alpine image for a lean production container.
    # https://hub.docker.com/_/alpine
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine:3
-   RUN apk add --no-cache ca-certificates
+
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
+
+   # Create and change to the app directory.
+   WORKDIR "/home/${USER}/app"
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup -g $USER_GID $USER && \
+      adduser -u $USER_UID -G $USER -D $USER && \
+      apk add --no-cache ca-certificates
+
    # Copy the binary to the production image from the builder stage.
-   COPY --from=builder /app/sidecarcontainer /sidecarcontainer
+   COPY --from=builder /app/sidecarcontainer ./sidecarcontainer
+
+   USER $USER
+
    # Run the web service on container startup.
-   CMD ["/sidecarcontainer"]
+   CMD ["./sidecarcontainer"]
    ```
 
 ### Writing Knative Service YAML
@@ -185,12 +227,15 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
    [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest:
 
    servingcontainer
+
    ```bash
    cd -
    cd knative-docs/code-samples/serving/multi-container/servingcontainer
    go mod init github.com/knative/docs/code-samples/serving/multi-container/servingcontainer
    ```
+
    sidecarcontainer
+
    ```bash
    cd -
    cd knative-docs/code-samples/serving/multi-container/sidecarcontainer

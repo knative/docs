@@ -32,7 +32,23 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /go/bin/webh
 
 FROM golang:alpine
 
-EXPOSE 8080
-COPY --from=builder /go/bin/webhook-sample /app/webhook-sample
+ARG USER=appuser
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
 
-ENTRYPOINT ["/app/webhook-sample"]
+ENV PORT=8080
+
+# Create and change to the app directory.
+WORKDIR "/home/${USER}/app"
+
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g $USER_GID $USER && \
+    adduser -u $USER_UID -G $USER -D $USER
+
+COPY --from=builder /go/bin/webhook-sample ./webhook-sample
+
+EXPOSE $PORT
+
+USER $USER
+
+ENTRYPOINT ["./webhook-sample"]

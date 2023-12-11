@@ -89,7 +89,7 @@ cd knative-docs/code-samples/serving/secrets-go
    block into it. For detailed instructions on dockerizing a Go app, see
    [Deploying Go servers with Docker](https://blog.golang.org/docker).
 
-   ```docker
+   ```Dockerfile
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
@@ -109,18 +109,25 @@ cd knative-docs/code-samples/serving/secrets-go
    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
    FROM alpine
 
-   # Enable the use of outbound https
-   RUN apk add --no-cache ca-certificates
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
+
+   # Create and change to the app directory.
+   WORKDIR "/home/${USER}/app"
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup -g $USER_GID $USER && \
+       adduser -u $USER_UID -G $USER -D $USER && \
+       apk add --no-cache ca-certificates
 
    # Copy the binary to the production image from the builder stage.
-   COPY --from=builder /go/src/github.com/knative/docs/hellosecrets/hellosecrets /hellosecrets
+   COPY --from=builder /go/src/github.com/knative/docs/hellosecrets/hellosecrets ./hellosecrets
 
-   # Service must listen to $PORT environment variable.
-   # This default value facilitates local development.
-   ENV PORT 8080
+   USER $USER
 
    # Run the web service on container startup.
-   CMD ["/hellosecrets"]
+   CMD ["./hellosecrets"]
    ```
 
 1. [Create a new Google Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).

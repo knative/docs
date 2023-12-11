@@ -1,7 +1,7 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang:1.15 as builder
+FROM golang:1.16 as builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -25,10 +25,23 @@ RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod
 # https://hub.docker.com/_/alpine
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM alpine:3
-RUN apk add --no-cache ca-certificates
+
+ARG USER=appuser
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
+# Create and change to the app directory.
+WORKDIR "/home/${USER}/app"
+
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g $USER_GID $USER && \
+    adduser -u $USER_UID -G $USER -D $USER && \
+    apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/sidecarcontainer /sidecarcontainer
+COPY --from=builder /app/sidecarcontainer ./sidecarcontainer
+
+USER $USER
 
 # Run the web service on container startup.
-CMD ["/sidecarcontainer"]
+CMD ["./sidecarcontainer"]

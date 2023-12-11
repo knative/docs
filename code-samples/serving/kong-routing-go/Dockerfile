@@ -22,9 +22,14 @@ ADD . /go/src/github.com/knative/docs/
 
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./code-samples/serving/kong-routing-go/
 
-FROM gcr.io/distroless/base
+FROM gcr.io/distroless/base:nonroot
 
-EXPOSE 8080
-COPY --from=builder /go/src/github.com/knative/docs/kong-routing-go /sample
+ENV PORT=8080
 
-ENTRYPOINT ["/sample"]
+WORKDIR "/home/nonroot/app"
+
+COPY --from=builder /go/src/github.com/knative/docs/kong-routing-go ./sample
+
+EXPOSE $PORT
+
+ENTRYPOINT ["./sample"]

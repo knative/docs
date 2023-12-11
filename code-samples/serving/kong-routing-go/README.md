@@ -19,18 +19,18 @@ to the _Login_ service.
 
 ## Prerequisites
 
-1.  A Kubernetes cluster with [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml) and
+1. A Kubernetes cluster with [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml) and
     [Kong](https://docs.konghq.com/kubernetes-ingress-controller/1.3.x/guides/using-kong-with-knative/)
     installed.
-1.  Install
+1. Install
     [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
-1.  Acquire a domain name.
+1. Acquire a domain name.
     - In this example, we use `example.com`. If you don't have a domain name,
       you can modify your hosts file (on macOS or Linux) to map `example.com` to
       your cluster's ingress IP.
     - If you have configured a custom domain for your Knative installation, we
       will refer to it as `<YOUR_DOMAIN_NAME>` in the rest of this document
-1.  Check out the code:
+1. Check out the code:
 
     ```bash
     go get -d github.com/knative/docs/code-samples/serving/kong-routing-go
@@ -49,13 +49,13 @@ Then, check the value for `data`. The domain name should be in the format of
 
 Build the application container and publish it to a container registry:
 
-1.  Move into the sample directory:
+1. Move into the sample directory:
 
     ```bash
     cd $GOPATH/src/github.com/knative/docs
     ```
 
-1.  Set your preferred container registry:
+1. Set your preferred container registry:
 
     If you use Google Container Registry (GCR), you will need to enable the [GCR
     API](https://console.cloud.google.com/apis/library/containerregistry.googleapis.com)
@@ -79,7 +79,7 @@ Build the application container and publish it to a container registry:
     docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/kong-routing-go" --push . -f code-samples/serving/kong-routing-go/Dockerfile
     ```
 
-1.  Replace the image reference path with our published image path in the
+1. Replace the image reference path with our published image path in the
     configuration file `code-samples/serving/kong-routing-go/sample.yaml` in one
     of the following ways:
 
@@ -88,6 +88,7 @@ Build the application container and publish it to a container registry:
       ${REPO}/kong-routing-go`. If you manually changed the `.yaml` file, you
       must replace `${REPO}` with the correct path on your local machine.
     - Run this command:
+
       ```bash
       perl -pi -e "s@github.com/knative/docs/code-samples/serving@${REPO}@g" code-samples/serving/kong-routing-go/sample.yaml
       ```
@@ -121,14 +122,14 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
 
 ### Access the Services
 
-1.  Find the gateway IP and export it as an environment variable:
+1. Find the gateway IP and export it as an environment variable:
 
     ```bash
     export GATEWAY_IP=`kubectl get svc $INGRESSGATEWAY -n kong \
         --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`
     ```
 
-1.  Find the _Search_ service URL:
+1. Find the _Search_ service URL:
 
     ```bash
     kubectl get route search-service --output=custom-columns=NAME:.metadata.name,URL:.status.url
@@ -136,12 +137,12 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
 
     The output should looks like this:
 
-    ```
+    ```bash
     NAME              URL
     search-service    http://search-service.default.example.com
     ```
 
-1.  Make a cURL request to the service:
+1. Make a cURL request to the service:
 
     ```bash
     curl http://${GATEWAY_IP} --header "Host:search-service.default.example.com"
@@ -149,11 +150,11 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
 
     The output should look like this:
 
-    ```
+    ```text
     Search Service is called!
     ```
 
-1.  Similarly, you can also directly access _Login_ service:
+1. Similarly, you can also directly access _Login_ service:
 
     ```bash
     curl http://${GATEWAY_IP} --header "Host:login-service.default.example.com"
@@ -161,13 +162,13 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
 
     The output should look like this:
 
-    ```
+    ```text
     Login Service is called!
     ```
 
 ## Apply Custom Routing Rule
 
-1.  Apply the custom routing rules defined in the `routing.yaml` file:
+1. Apply the custom routing rules defined in the `routing.yaml` file:
 
     ```bash
     kubectl apply -f code-samples/serving/kong-routing-go/routing.yaml
@@ -193,7 +194,7 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
     `login-service.default` into `login-service-default` as well in
     `routing.yaml`.
 
-1.  The `routing.yaml` file will create an ingress that forwards incoming
+1. The `routing.yaml` file will create an ingress that forwards incoming
     requests at `example.com/search` to `search-service.default.example.com` by
     updating the "Host" header to `search-service.default.example.com` and
     stripping the request path. This modified request is then forwarded to the
@@ -204,28 +205,36 @@ kubectl get svc $INGRESSGATEWAY -n kong --output yaml
     kubectl get ingress {search,login}-service-ingress -n kong --output yaml
     ```
 
-1.  Send a request to the _Search_ service and the _Login_ service by using
+1. Send a request to the _Search_ service and the _Login_ service by using
     their corresponding URLs. You should get the same results as directly
     accessing these services.
 
     - Send a request to the _Search_ service:
+
       ```bash
       curl http://${GATEWAY_IP}/search --header "Host: example.com"
       ```
+
       or
+
       ```bash
       curl http://${GATEWAY_IP}/search --header "Host: <YOUR_DOMAIN_NAME>"
       ```
+
       for the case using your own domain.
 
     - Send a request to the _Login_ service:
+
       ```bash
       curl http://${GATEWAY_IP}/login --header "Host: example.com"
       ```
+
       or
+
       ```bash
       curl http://${GATEWAY_IP}/login --header "Host: <YOUR_DOMAIN_NAME>"
       ```
+
       for the case using your own domain.
 
 ## How It Works
