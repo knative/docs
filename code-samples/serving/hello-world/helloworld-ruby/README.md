@@ -47,19 +47,33 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
    [official Ruby docker image](https://hub.docker.com/_/ruby/) for more
    details.
 
-   ```docker
+   ```Dockerfile
    # Use the official lightweight Ruby image.
    # https://hub.docker.com/_/ruby
    FROM ruby:2.6-slim
 
-   # Install production dependencies.
-   WORKDIR /usr/src/app
-   COPY Gemfile Gemfile.lock ./
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
+
    ENV BUNDLE_FROZEN=true
-   RUN gem install bundler && bundle install
+   ENV PORT=8080
+
+   # Create and change to the app directory.
+   WORKDIR "/home/${USER}/app"
+
+   # Install production dependencies.
+   COPY Gemfile Gemfile.lock ./
+
+   RUN addgroup --gid $USER_GID $USER && \
+       adduser -u $USER_UID --ingroup $USER --disabled-password $USER && \
+       gem install bundler && bundle install
 
    # Copy local code to the container image.
-   COPY . ./
+   COPY app.rb ./
+
+   # Set the non-root user as current.
+   USER $USER
 
    # Run the web service on container startup.
    CMD ["ruby", "./app.rb"]
@@ -105,9 +119,10 @@ After the build has completed and the container is pushed to Docker Hub, you can
 
 Choose one of the following methods to deploy the app:
 
- ### yaml
+### yaml
 
- * Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
+- Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
+
 ```yaml
        apiVersion: serving.knative.dev/v1
        kind: Service
@@ -123,20 +138,26 @@ Choose one of the following methods to deploy the app:
                    - name: TARGET
                      value: "Ruby Sample v1"
 ```
+
 Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
 Apply the configuration using `kubectl`:
+
 ```bash
 kubectl apply --filename service.yaml
 ```
 
 ### kn
- * With `kn` you can deploy the service with:
+
+- With `kn` you can deploy the service with:
+
 ```bash
 kn service create helloworld-ruby --image=docker.io/{username}/helloworld-ruby --env TARGET="Ruby Sample v1"
 ```
+
 This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 The output will look like:
-```
+
+```text
        Creating service 'helloworld-ruby' in namespace 'default':
 
         0.035s The Configuration is still working to reflect the latest desired specification.
@@ -168,16 +189,20 @@ kubectl get ksvc helloworld-ruby  --output=custom-columns=NAME:.metadata.name,UR
 ```
 
  Example:
+
  ```bash
 NAME                URL
 helloworld-ruby     http://helloworld-ruby.default.1.2.3.4.sslip.io
  ```
 
- ### kn
+### kn
+
 ```bash
 kn service describe helloworld-ruby -o url
 ```
+
 Example:
+
 ```bash
 http://helloworld-ruby.default.1.2.3.4.sslip.io
 ```
@@ -202,11 +227,13 @@ Replace the following URL with the URL returned in the previous command.
 To remove the sample app from your cluster, delete the service record:
 
 ### kubectl
+
 ```bash
 kubectl delete --filename service.yaml
 ```
 
 ### kn
+
 ```bash
 kn service delete helloworld-ruby
 ```

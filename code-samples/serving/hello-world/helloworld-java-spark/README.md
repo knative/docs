@@ -41,25 +41,47 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java
    additional information on multi-stage docker builds for Java see
    [Creating Smaller Java Image using Docker Multi-stage Build](https://github.com/arun-gupta/docker-java-multistage). Navigate to your project directory and copy the following code into a new file named `Dockerfile`:
 
-   ```docker
-    FROM maven:3.5-jdk-8-alpine as builder
+   ```Dockerfile
+   # Use the official maven/Java 8 image to create a build artifact.
+   # https://hub.docker.com/_/maven
+   FROM maven:3.5-jdk-8-alpine as builder
 
-    # Copy local code to the container image.
-    WORKDIR /app
-    COPY pom.xml .
-    COPY src ./src
+   # Copy local code to the container image.
+   WORKDIR /app
+   COPY pom.xml .
+   COPY src ./src
 
-    RUN mvn package -DskipTests
+   # Build a release artifact.
+   RUN mvn package -DskipTests
 
-    FROM openjdk:8-jre-alpine
+   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
+   # https://hub.docker.com/_/openjdk
+   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+   FROM openjdk:8-jre-alpine
 
-    # Copy the jar to the production image from the builder stage.
-    COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar helloworld.jar
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
 
-    ENV PORT 8080
-    EXPOSE 8080
-    # Run the web service on container startup.
-    CMD ["java","-jar","helloworld.jar"]
+   ENV PORT=8080
+
+   # Create and change to the app directory.
+   WORKDIR "/home/${USER}/app"
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup -g $USER_GID $USER && \
+       adduser -u $USER_UID -G $USER -D $USER
+
+   # Copy the jar to the production image from the builder stage.
+   COPY --from=builder /app/target/helloworld-0.0.1-SNAPSHOT-jar-with-dependencies.jar ./helloworld.jar
+
+   EXPOSE $PORT
+
+   # Set the non-root user as current.
+   USER $USER
+
+   # Run the web service on container startup.
+   CMD ["java","-jar","./helloworld.jar"]
    ```
 
 1. To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
@@ -81,8 +103,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
  kn service create helloworld-java --image=docker.io/{username}/helloworld-java --env TARGET="SparkJava Sample v1"
  ```
 
-       This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
-
+This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
 ### kubectl
 
@@ -112,16 +133,15 @@ spec:
 
 After your service is created, Knative will perform the following steps:
 
-   - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
-     for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
+- Create a new immutable revision for this version of the app.
+- Network programming to create a route, ingress, service, and load balance for your app.
+- Automatically scale your pods up and down (including to zero active pods).
 
 ## Verify
 
  1. Run one of the followings commands to find the domain URL for your service.
 
- ### kn
+### kn
 
  ```bash
  kn service describe helloworld-java -o url
@@ -133,7 +153,8 @@ After your service is created, Knative will perform the following steps:
  http://helloworld-java.default.1.2.3.4.xip.io
   ```
 
- ### kubectl
+### kubectl
+
  ```bash
   kubectl get ksvc helloworld-java  --output=custom-columns=NAME:.metadata.name,URL:.status.url
  ```
@@ -164,11 +185,13 @@ After your service is created, Knative will perform the following steps:
 To remove the sample app from your cluster, delete the service record:
 
 ### kn
+
  ```bash
  kn service delete helloworld-java
  ```
 
 ### kubectl
+
  ```bash
  kubectl delete --filename service.yaml
  ```

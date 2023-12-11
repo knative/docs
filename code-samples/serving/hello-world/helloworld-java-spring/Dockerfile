@@ -14,8 +14,26 @@ RUN mvn package -DskipTests
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM openjdk:8-jre-alpine
 
+ARG USER=appuser
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
+ENV PORT=8080
+
+# Create and change to the app directory.
+WORKDIR "/home/${USER}/app"
+
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g $USER_GID $USER && \
+    adduser -u $USER_UID -G $USER -D $USER
+
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
+COPY --from=builder /app/target/helloworld-*.jar ./helloworld.jar
+
+EXPOSE $PORT
+
+# Set the non-root user as current.
+USER $USER
 
 # Run the web service on container startup.
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "./helloworld.jar"]

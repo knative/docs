@@ -59,10 +59,9 @@ git clone https://github.com/knative/docs.git knative-docs
 cd knative-docs/code-samples/serving/hello-world/helloworld-go
 ```
 
-
 Navigate to your project directory and copy the following code into a new file named `Dockerfile`:
 
-```dockerfile
+```Dockerfile
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 FROM golang:latest as builder
@@ -89,13 +88,27 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -
 # https://hub.docker.com/_/alpine
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM alpine:3
-RUN apk add --no-cache ca-certificates
+
+ARG USER=appuser
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
+# Create and change to the app directory.
+WORKDIR "/home/${USER}/app"
+
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g $USER_GID $USER && \
+    adduser -u $USER_UID -G $USER -D $USER && \
+    apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/server /server
+COPY --from=builder /app/server ./server
+
+# Set the non-root user as current.
+USER $USER
 
 # Run the web service on container startup.
-CMD ["/server"]
+CMD ["./server"]
 ```
 
 Use the Go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
@@ -116,6 +129,7 @@ docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld
 ```
 
 ### Deploying to knative
+
 After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster. Choose one of the following methods:
 
 ### yaml
@@ -145,22 +159,25 @@ After the build has completed and the container is pushed to docker hub, you can
  ```bash
  kubectl apply --filename service.yaml
  ```
+
 After your service is created, Knative will perform the following steps:
- - Create a new immutable revision for this version of the app.
- - Network programming to create a route, ingress, service, and load  balance for your app.
- - Automatically scale your pods up and down (including to zero active pods).
+
+- Create a new immutable revision for this version of the app.
+- Network programming to create a route, ingress, service, and load  balance for your app.
+- Automatically scale your pods up and down (including to zero active pods).
 
 1. Run the following command to find the domain URL for your service:
+
  ```bash
  kubectl get ksvc helloworld-go  --output=custom-columns=NAME:.metadata.name,URL:.status.url
  ```
 
  Example:
+
  ```bash
  NAME                URL
  helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
  ```
-
 
 ### kn
 
@@ -171,6 +188,7 @@ After your service is created, Knative will perform the following steps:
  ```
 
  You should see output like this:
+
   ```bash
   Creating service 'helloworld-go' in namespace 'default':
   0.031s The Configuration is still working to reflect the latest desired specification.
@@ -186,8 +204,6 @@ After your service is created, Knative will perform the following steps:
   ```
 
 1. You can then access your service through the resulting URL.
-
-
 
 ## Verification
 
@@ -205,11 +221,13 @@ Hello Go Sample v1!
 To remove the sample app from your cluster, delete the service record:
 
 ### kubectl
+
 ```bash
 kubectl delete --filename service.yaml
 ```
 
 ### kn
+
 ```bash
 kn service delete helloworld-go
 ```

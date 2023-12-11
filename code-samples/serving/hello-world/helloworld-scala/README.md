@@ -101,7 +101,6 @@ local Docker Repository.
 
 ## Deploying to Knative Serving
 
-
 ### yaml
 
 Apply the [Service yaml definition](service.yaml):
@@ -122,7 +121,7 @@ kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala
 
  The output will look like:
 
- ```
+ ```text
  Creating service 'helloworld-scala' in namespace 'default':
  0.035s The Configuration is still working to reflect the latest desired specification.
  0.139s The Route is still working to reflect the latest desired specification.
@@ -139,6 +138,7 @@ kn service create helloworld-scala --image=docker.io/{username}/helloworld-scala
 ### kubectl
 
  1. Find the service host:
+
  ```bash
 kubectl get ksvc helloworld-scala \
 --output=custom-columns=NAME:.metadata.name,URL:.status.url
@@ -153,9 +153,10 @@ kubectl get ksvc helloworld-scala \
 curl -v http://helloworld-scala.default.1.2.3.4.sslip.io
  ```
 
-
 ### kn
+
  1. Find the service host:
+
 ```bash
 kn service describe helloworld-scala -o url
 ```
