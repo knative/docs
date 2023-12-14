@@ -47,14 +47,6 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
     kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/servicemonitor.yaml
     ```
 
-1. Grafana dashboards can be imported from the [`knative-extensions` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
-
-1. If you are using the Grafana Helm Chart with the Dashboard Sidecar enabled, you can load the dashboards by applying the following configmaps.
-
-    ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/grafana/dashboards.yaml
-    ```
-
 ### Access the Prometheus instance locally
 
 By default, the Prometheus instance is only exposed on a private service named `prometheus-operated`.
@@ -68,6 +60,58 @@ To access the console in your web browser:
     ```
 
 1. Access the console in your browser via `http://localhost:9090`.
+
+### Setting up Grafana
+
+1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
+
+1. If you are using the Grafana Helm Chart with the Dashboard Sidecar enabled, you can load the dashboards by applying the following configmaps.
+
+    ```bash
+    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/grafana/dashboards.yaml
+    ```
+
+    !!! caution
+        You will need to ensure that the helm chart has following values configured, otherwise the dashboards loading will not work.
+        ```yaml
+        grafana:
+          sidecar:
+            dashboards:
+              enabled: true
+              searchNamespace: ALL
+        ```
+        If you have an existing configmaps check the value of `grafana_dashboard` label. In case this is `true`, add the `labelValue: true` attribute to the helm chart above.
+        ```bash
+        kubectl -n knative-serving get configmaps/knative-serving-dashboards -o jsonpath="{.metadata.labels.grafana_dashboard}"; echo
+        ```
+
+#### Access the Grafana instance locally
+
+By default, the Grafana instance is only exposed on a private service named `prometheus-grafana`.
+
+To access the dashboards in your web browser:
+
+1. Enter the command:
+
+    ```bash
+    kubectl port-forward -n default svc/prometheus-grafana 3000:80
+    ```
+
+1. Access the dashboards in your browser via `http://localhost:3000`.
+
+1. Use the default credentials to login:
+   
+    ```text
+    username: admin
+    password: prom-operator
+    ```
+
+    !!! tip
+        You can get current credentials as follows or change password adding `adminPassword: <pwd>` attribute to the helm chart above.
+        ```bash
+        kubectl get secret prometheus-grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
+        kubectl get secret prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+        ```
 
 ## About OpenTelemetry
 
