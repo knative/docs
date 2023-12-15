@@ -69,7 +69,7 @@ You can do this by copying the following code into the `servingcontainer.go` fil
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang:1.15 as builder
+   FROM golang:1.21 as builder
 
    ARG TARGETOS
    ARG TARGETARCH
@@ -151,7 +151,7 @@ You can do this by copying the following code into the `sidecarcontainer.go` fil
    # Use the official Golang image to create a build artifact.
    # This is based on Debian and sets the GOPATH to /go.
    # https://hub.docker.com/_/golang
-   FROM golang:1.15 as builder
+   FROM golang:1.21 as builder
 
    ARG TARGETOS
    ARG TARGETARCH
