@@ -33,7 +33,7 @@ To get started, install the Knative `quickstart` plugin:
     1. Verify that the plugin is working by running the command:
 
         ```bash
-        kn quickstart --help
+        kn-quickstart --help
         ```
 
 === "Using Go"
@@ -59,7 +59,7 @@ To get started, install the Knative `quickstart` plugin:
     1. Verify that the plugin is working by running the command:
 
           ```bash
-          kn quickstart --help
+          kn-quickstart --help
           ```
 
 ## Run the Knative quickstart plugin
@@ -79,7 +79,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
 
     1. Install Knative and Kubernetes using [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) by running:
         ```bash
-        kn quickstart kind
+        kn-quickstart kind
         ```
 
         !!! note
@@ -104,7 +104,7 @@ To get a local deployment of Knative, run the `quickstart` plugin:
             different value not lower than 3&nbsp;GB by setting a memory config in minikube.
             For example,  `minikube config set memory 4096` will use 4&nbsp;GB of RAM.
         ```bash
-        kn quickstart minikube
+        kn-quickstart minikube
         ```
 
     1. The output of the previous command asked you to run minikube tunnel.
