@@ -56,7 +56,7 @@ To access the console in your web browser:
 1. Enter the command:
 
     ```bash
-    kubectl port-forward -n default svc/prometheus-operated 9090
+    kubectl port-forward -n default svc/prometheus-kube-prometheus-prometheus 9090:9090
     ```
 
 1. Access the console in your browser via `http://localhost:9090`.
@@ -80,10 +80,7 @@ To access the console in your web browser:
               enabled: true
               searchNamespace: ALL
         ```
-        If you have an existing configmaps check the value of `grafana_dashboard` label. In case this is `true`, add the `labelValue: true` attribute to the helm chart above.
-        ```bash
-        kubectl -n knative-serving get configmaps/knative-serving-dashboards -o jsonpath="{.metadata.labels.grafana_dashboard}"; echo
-        ```
+        If you have an existing configmap and the dashboards loading doesn't work, add the `labelValue: true` attribute to the helm chart after the `searchNamespace: ALL` declaration.
 
 #### Access the Grafana instance locally
 
@@ -105,13 +102,6 @@ To access the dashboards in your web browser:
     username: admin
     password: prom-operator
     ```
-
-    !!! tip
-        You can get current credentials as follows or change password adding `adminPassword: <pwd>` attribute to the helm chart above.
-        ```bash
-        kubectl get secret prometheus-grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
-        kubectl get secret prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-        ```
 
 ## About OpenTelemetry
 
