@@ -10,6 +10,9 @@ ARG TARGETARCH
 WORKDIR /go/src/github.com/knative/docs/hellosecrets
 COPY . .
 
+RUN go mod init hellosecrets && \
+    go mod tidy
+
 # Build the output command inside the container.
 RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o hellosecrets
 

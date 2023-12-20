@@ -18,19 +18,16 @@ ARG TARGETOS
 ARG TARGETARCH
 
 # copy the source
-ADD .   /go/src/github.com/knative/docs/code-samples/serving/gitwebhook-go
 WORKDIR /go/src/github.com/knative/docs/code-samples/serving/gitwebhook-go
+COPY . .
 
-# install dependencies
-RUN go get github.com/google/go-github/github
-RUN go get golang.org/x/oauth2
-RUN go get gopkg.in/go-playground/webhooks.v3
-RUN go get gopkg.in/go-playground/webhooks.v3/github
+RUN go mod init gitwebhook-go && \
+    go mod tidy
 
 # build the sample
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /go/bin/webhook-sample .
 
-FROM golang:alpine
+FROM alpine
 
 ARG USER=appuser
 ARG USER_UID=1001
