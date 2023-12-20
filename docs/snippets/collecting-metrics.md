@@ -12,14 +12,17 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 !!! warning
     You can't use OpenTelemetry Collector and Prometheus at the same time. The default metrics backend is Prometheus. You will need to remove `metrics.backend-destination` and `metrics.request-metrics-backend-destination` keys from the config-observability Configmap to enable Prometheus metrics.
 
-## About Prometheus
+## About the Prometheus Stack
 
-[Prometheus](https://prometheus.io/) is an open-source tool for collecting,
-aggregating timeseries metrics and alerting. It can also be used to scrape the OpenTelemetry Collector that is demonstrated below when Prometheus is used.
+[Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) is a preconfigured collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules, combined to provide end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator. The stack includes by default some Prometheus packages and Grafana.
 
-## Setting up Prometheus
+[Prometheus](https://prometheus.io/) is an open-source tool for collecting, aggregating timeseries metrics and alerting. It can also be used to scrape the OpenTelemetry Collector that is demonstrated below when Prometheus is used.
 
-1. Install the [Prometheus Operator](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
+[Grafana](https://grafana.com/oss/) is an open-source platform for data analytics and visualization, enabling users to create customizable dashboards for monitoring and analyzing metrics from various data sources.
+
+## Setting up the Prometheus Stack
+
+1. Install the [Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
 
        ```bash
        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -61,7 +64,7 @@ To access the console in your web browser:
 
 1. Access the console in your browser via `http://localhost:9090`.
 
-### Setting up Grafana
+### Import Grafana dashboards
 
 1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
 
