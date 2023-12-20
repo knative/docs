@@ -49,7 +49,7 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
 
 ### Access the Prometheus instance locally
 
-By default, the Prometheus instance is only exposed on a private service named `prometheus-operated`.
+By default, the Prometheus instance is only exposed on a private service named `prometheus-kube-prometheus-prometheus`.
 
 To access the console in your web browser:
 
