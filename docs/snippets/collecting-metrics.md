@@ -14,11 +14,11 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 
 ## About the Prometheus Stack
 
-[Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) is a preconfigured collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules, combined to provide end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator. The stack includes by default some Prometheus packages and Grafana.
-
 [Prometheus](https://prometheus.io/) is an open-source tool for collecting, aggregating timeseries metrics and alerting. It can also be used to scrape the OpenTelemetry Collector that is demonstrated below when Prometheus is used.
 
 [Grafana](https://grafana.com/oss/) is an open-source platform for data analytics and visualization, enabling users to create customizable dashboards for monitoring and analyzing metrics from various data sources.
+
+[Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) is a preconfigured collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules, combined to provide end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator. The stack includes by default some Prometheus packages and Grafana.
 
 ## Setting up the Prometheus Stack
 
