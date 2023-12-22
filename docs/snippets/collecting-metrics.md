@@ -64,6 +64,27 @@ To access the console in your web browser:
 
 1. Access the console in your browser via `http://localhost:9090`.
 
+### Access the Grafana instance locally
+
+By default, the Grafana instance is only exposed on a private service named `prometheus-grafana`.
+
+To access the dashboards in your web browser:
+
+1. Enter the command:
+
+    ```bash
+    kubectl port-forward -n default svc/prometheus-grafana 3000:80
+    ```
+
+1. Access the dashboards in your browser via `http://localhost:3000`.
+
+1. Use the default credentials to login:
+   
+    ```text
+    username: admin
+    password: prom-operator
+    ```
+
 ### Import Grafana dashboards
 
 1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
@@ -84,27 +105,6 @@ To access the console in your web browser:
               searchNamespace: ALL
         ```
         If you have an existing configmap and the dashboards loading doesn't work, add the `labelValue: true` attribute to the helm chart after the `searchNamespace: ALL` declaration.
-
-#### Access the Grafana instance locally
-
-By default, the Grafana instance is only exposed on a private service named `prometheus-grafana`.
-
-To access the dashboards in your web browser:
-
-1. Enter the command:
-
-    ```bash
-    kubectl port-forward -n default svc/prometheus-grafana 3000:80
-    ```
-
-1. Access the dashboards in your browser via `http://localhost:3000`.
-
-1. Use the default credentials to login:
-   
-    ```text
-    username: admin
-    password: prom-operator
-    ```
 
 ## About OpenTelemetry
 
