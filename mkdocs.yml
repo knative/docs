@@ -50,9 +50,6 @@ plugins:
   search:
     # Spaces, dashes, periods and forward-slash (so serving.knative.dev/blibble can be searched as blibble).
     separator: '[\/\s\-\.]+'
-  macros:
-    module_name: hack/macros
-    include_dir: docs/snippets
   exclude:
     glob:
       # Exclude files that contain hugo specific shortcodes
@@ -63,6 +60,9 @@ plugins:
     filename: ".index"
     collapse_single_pages: true
     strict: false
+  macros:
+    module_name: hack/macros
+    include_dir: docs/snippets
 
 copyright: "Copyright © 2022 The Knative Authors"
 
