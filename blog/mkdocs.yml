@@ -71,6 +71,9 @@ plugins:
       as_creation: "date"
       as_update: false
       datetime_format: "%Y-%m-%d"
+  git-revision-date-localized:
+      type: iso_date
+      enable_creation_date: true
 
 copyright: "Copyright © 2022 The Knative Authors"
 
