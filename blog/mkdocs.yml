@@ -74,6 +74,8 @@ plugins:
   git-revision-date-localized:
       type: iso_date
       enable_creation_date: true
+      exclude:
+        - index.md
 
 copyright: "Copyright © 2022 The Knative Authors"
 
