@@ -158,6 +158,7 @@ nav:
           - Feature and extension flags: serving/configuration/feature-flags.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
         - Serving encryption configuration:
+          - Overview: serving/encryption/encryption-overview.md
           - Using custom TLS certificates in the networking layer: serving/encryption/using-certificates-in-networking-layer.md
           - Enabling automatic TLS certificate provisioning: serving/encryption/enabling-automatic-tls-certificate-provisioning.md
       # Serving - Application Security
