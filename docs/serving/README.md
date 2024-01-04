@@ -10,7 +10,7 @@ Examples of supported Knative Serving use cases:
 - Autoscaling, including scaling pods down to zero.
 - Support for multiple networking layers, such as Contour, Kourier, and Istio, for integration into existing environments.
 
-Knative Serving supports both HTTP and [HTTPS](encryption/using-certificates-in-networking-layer.md) networking protocols.
+Knative Serving supports both HTTP and [HTTPS](encryption/encryption-overview.md) networking protocols.
 
 ## Installation
 
@@ -19,7 +19,7 @@ You can install Knative Serving via the methods listed on the [installation page
 ## Getting Started
 
 To get started with Serving, check out one of the [hello world](../samples/serving.md)
-sample projects. These projects use the `Service` resource, which manages all of
+sample projects. These projects use the `Service` resource, which manages all
 the details for you.
 
 With the `Service` resource, a deployed service will automatically have a

@@ -167,9 +167,8 @@ The following tabs expand to show instructions for installing each Serving exten
 
     <!-- TODO(https://github.com/knative/docs/issues/2152): Link to a more in-depth guide on HPA-class autoscaling -->
 
-=== "TLS with cert-manager"
+=== "Knative encryption with cert-manager"
 
-    Knative supports automatically provisioning TLS certificates through
-    [cert-manager](https://cert-manager.io/docs/).
-    Follow the documentation in [Enabling automatic TLS certificate provisioning](../../../serving/encryption/enabling-automatic-tls-certificate-provisioning.md)
+    Knative supports encryption features through  [cert-manager](https://cert-manager.io/docs/).
+    Follow the documentation in [Serving encryption](../../../serving/encryption/encryption-overview.md)
     for more information.

@@ -41,7 +41,7 @@ Only one of them can be active at the same time!
 
 #### Using a certificate for each Knative Service
 
-Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `external-domain-tls` and specify how HTTP requests are handled:
+Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `external-domain-tls`:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
@@ -67,7 +67,7 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
 
 !!! warning
     Provisioning a wildcard Certificate per namespace only works with DNS-01
-    challenge. This component cannot be used with HTTP-01 challenge.
+    challenge. This feature cannot be used with HTTP-01 challenge.
 
 The per-namespace configuration uses namespace labels to select which namespaces should have a 
 certificate applied. The selection is configured using the key `namespace-wildcard-cert-selector`
