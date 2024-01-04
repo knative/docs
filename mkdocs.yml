@@ -19,6 +19,7 @@ theme:
     - navigation.tracking
     - navigation.tabs.sticky
     - navigation.top
+    - content.code.copy
 
 markdown_extensions:
   # - mdx_include:
