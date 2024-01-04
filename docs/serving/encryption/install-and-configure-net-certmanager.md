@@ -20,8 +20,8 @@ kubectl apply -f {{ artifact( repo="net-certmanager", file="release.yaml") }}
 ```
 
 !!! warning
-    Knative, per default, installs a self-signed cert-manager `ClusterIssuer` for an easy quick-start. 
-    This issuer should **NOT BE USED IN PRODUCTION**! You can add a label filter to the command above, 
+    Per default, this installs a self-signed cert-manager `ClusterIssuer` for an easy quick-start. 
+    This issuer should **NOT BE USED IN PRODUCTION**! You can add a label filter to the command above 
     to remove the issuer from the installation and configure your issuer manually: `--selector knative.dev/issuer-install!="true"`
 
 Installing net-certmanager using the Knative operator is not yet supported. 
@@ -39,9 +39,9 @@ for the [three Knative Serving encryption features](./encryption-overview.md):
 * `systemInternalIssuerRef`: issuer for certificates for system-internal-tls certificates used by Knative internal components.
 
 Per default, Knative uses a self-signed `ClusterIssuer` and net-certmanager references that `ClusterIssuer` for all three configurations.
-As this **should not be used in production**, you should think about which CA should be used for each use-case and 
-how trust will be distributed to the clients calling the encrypted services. For the Knative system components, Knative provides 
-a way to specify a bundle of CAs that should be trusted (more on this below).
+As this **should not be used in production** (and does not support rotating the CA without downtime),
+you should think about which CA should be used for each use-case and how trust will be distributed to the clients calling the encrypted services. 
+For the Knative system components, Knative provides a way to specify a bundle of CAs that should be trusted (more on this below).
 
 There is no general answer on how to structure this, here an example on how it could look like:
 
@@ -57,7 +57,7 @@ There is no general answer on how to structure this, here an example on how it c
 In general, you can refer to the [cert-manager documentation](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer). There are examples available for:
 
 * [CA based on a K8s secret](https://cert-manager.io/docs/configuration/ca/)
-* [Let's encrypt](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
+* [HTTP-01 challenges, e.g. Let's encrypt](https://cert-manager.io/docs/configuration/acme/#creating-a-basic-acme-issuer)
 * [DNS-01 challenges](https://cert-manager.io/docs/configuration/acme/dns01/)
 * [Self-signed issuers](https://cert-manager.io/docs/configuration/selfsigned/)
 
@@ -67,10 +67,10 @@ In general, you can refer to the [cert-manager documentation](https://cert-manag
 `cluster-local-domain-tls` needs to be able to sign certificates for cluster-local domains like `myapp.<namespace>`, `myapp.<namespace>.svc` and `myapp.<namespace>.svc.cluster.local`. 
 As the CA usually is not within the cluster, verification via ACME protocol (DNS01/HTTP01) is not possible. You can use an issuer that allows creating the these certificates (e.g. CA issuer).
 
-`system-internal-tls` needs to be able to sign specific SANs that Knative validates for. As these kn-routingcomponents are not strictly routable, the defined set of SANs is:
+`system-internal-tls` needs to be able to sign specific SANs that Knative validates for. The defined set of SANs is:
 
 * `kn-routing`
-* `kn-user-<namespace>` (where <namespace> is each namespace where Knative Services are created)
+* `kn-user-<namespace>` (<namespace> is each namespace where Knative Services are/will be created)
 * `data-plane.knative.dev`
 
 As this is also not possible via ACME protocol (DNS01/HTTP01), you need to configure an issuer that allows creating the these certificates (e.g. CA issuer).
@@ -139,15 +139,15 @@ trust needs to be distributed:
 
 ### Trusting for cluster internal clients (e.g. Knative or Vanilla K8s workload)
 
-As we do not control all your workload and the settings are highly dependent on your runtime and/or language, this is out of scope of Knative.
-But here a few points to consider. There are several ways on how to provide CAs to your application:
+As Knative does not control all workload and the settings are highly dependent on your runtime and/or language, this is out of scope of Knative.
+But here a few points to consider, as there are several ways on how to provide CAs to your application:
 
-* Adding the CA bundle to a Container image on build-time (be aware that this causes more strain on CA rotation)
+* Adding the CA bundle to a Container image on build-time (be aware that this complicates CA rotation, you basically need to rebuild every application)
 * Mounting a CA bundle to the filesystem (e.g. from a `Secret` or `ConfigMap`)
 * Reading it from environment variable
 * Accessing it from a `Secret`/`ConfigMap` via K8s API
 
-Important is to decide if a reload without downtime is necessary, if so the workload must either watch changes on the K8s resource or watch the filesystem. For the latter it is important, that `ionotify` on changing Secrets/ConfigMaps does not work super reliable on K8s. Tests showed that it is more reliable to regularly poll and check the certificate on the filesystem for changes.
+Important is to decide if a reload without downtime is necessary, if yes, the workload must either watch changes on the K8s resource or watch the filesystem. For the latter it is important, that `ionotify` on changing Secrets/ConfigMaps does not work super reliable on K8s. Tests showed that it is more reliable to regularly poll and check the certificate on the filesystem for changes.
 
 Here are a few examples for golang:
 
@@ -158,7 +158,7 @@ Here are a few examples for golang:
 
 ### Trusting for Knative system components
 
-Knative system components can be configured to trust one or many CA bundles from `ConfigMaps`. The cluster operator needs to make sure,
+Knative system components can be configured to trust one or many CA bundles from `ConfigMaps`. The cluster operator needs to ensure,
 to configure them accordingly to avoid any downtimes [during a rotation](#trust-during-rotation). Knative components look for a `ConfigMap`
 in the namespace where the component runs, e.g:
 
@@ -167,8 +167,8 @@ in the namespace where the component runs, e.g:
 * kourier-system (when using net-kourier)
 * Each namespace where a Knative Service runs
 
-Knative looks for a `ConfigMap` with the label `knative-ca-trust-bundle="true"` and will read all keys. One key can contain one or multiple CAs/Intermediates. 
-If they are valid, they will be added to the trust store of the Knative components.
+Knative looks for a `ConfigMap` with the label `knative-ca-trust-bundle="true"` and will read all `data` keys (regardless of the name). 
+One key can contain one or multiple CAs/Intermediates. If they are valid, they will be added to the trust store of the Knative components.
 
 Here is an example of how `ConfigMap` could look like:
 
@@ -211,7 +211,7 @@ to automatically distribute the CA bundles. Please refer to their documentation 
 
 ### Trust during rotation
 
-During a rotation of a CA and/or Intermediate certificates your clients will need to trust the old and the new chain until the
+During a rotation of a CA and/or Intermediate certificates your clients will need to trust the old and the new CA/chain until the
 rotation is done. Using the [trust approach](#managing-trust-and-rotation-without-downtime) from above, you can do a full
 chain rotation without downtime:
 

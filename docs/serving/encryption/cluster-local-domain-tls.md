@@ -1,5 +1,7 @@
 # Configure cluster-local domain encryption
 
+{% include "encryption-notice.md" %}
+
 ## Before you begin
 
 You must meet the following requirements to enable secure HTTPS connections:
