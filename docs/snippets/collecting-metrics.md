@@ -12,14 +12,17 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 !!! warning
     You can't use OpenTelemetry Collector and Prometheus at the same time. The default metrics backend is Prometheus. You will need to remove `metrics.backend-destination` and `metrics.request-metrics-backend-destination` keys from the config-observability Configmap to enable Prometheus metrics.
 
-## About Prometheus
+## About the Prometheus Stack
 
-[Prometheus](https://prometheus.io/) is an open-source tool for collecting,
-aggregating timeseries metrics and alerting. It can also be used to scrape the OpenTelemetry Collector that is demonstrated below when Prometheus is used.
+[Prometheus](https://prometheus.io/) is an open-source tool for collecting, aggregating timeseries metrics and alerting. It can also be used to scrape the OpenTelemetry Collector that is demonstrated below when Prometheus is used.
 
-## Setting up Prometheus
+[Grafana](https://grafana.com/oss/) is an open-source platform for data analytics and visualization, enabling users to create customizable dashboards for monitoring and analyzing metrics from various data sources.
 
-1. Install the [Prometheus Operator](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
+[Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) is a preconfigured collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules, combined to provide end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator. The stack includes by default some Prometheus packages and Grafana.
+
+## Setting up the Prometheus Stack
+
+1. Install the [Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
 
        ```bash
        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -47,7 +50,44 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
     kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/servicemonitor.yaml
     ```
 
-1. Grafana dashboards can be imported from the [`knative-extensions` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
+### Access the Prometheus instance locally
+
+By default, the Prometheus instance is only exposed on a private service named `prometheus-kube-prometheus-prometheus`.
+
+To access the console in your web browser:
+
+1. Enter the command:
+
+    ```bash
+    kubectl port-forward -n default svc/prometheus-kube-prometheus-prometheus 9090:9090
+    ```
+
+1. Access the console in your browser via `http://localhost:9090`.
+
+### Access the Grafana instance locally
+
+By default, the Grafana instance is only exposed on a private service named `prometheus-grafana`.
+
+To access the dashboards in your web browser:
+
+1. Enter the command:
+
+    ```bash
+    kubectl port-forward -n default svc/prometheus-grafana 3000:80
+    ```
+
+1. Access the dashboards in your browser via `http://localhost:3000`.
+
+1. Use the default credentials to login:
+   
+    ```text
+    username: admin
+    password: prom-operator
+    ```
+
+### Import Grafana dashboards
+
+1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
 
 1. If you are using the Grafana Helm Chart with the Dashboard Sidecar enabled, you can load the dashboards by applying the following configmaps.
 
@@ -55,19 +95,16 @@ aggregating timeseries metrics and alerting. It can also be used to scrape the O
     kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/grafana/dashboards.yaml
     ```
 
-### Access the Prometheus instance locally
-
-By default, the Prometheus instance is only exposed on a private service named `prometheus-operated`.
-
-To access the console in your web browser:
-
-1. Enter the command:
-
-    ```bash
-    kubectl port-forward -n default svc/prometheus-operated 9090
-    ```
-
-1. Access the console in your browser via `http://localhost:9090`.
+    !!! caution
+        You will need to ensure that the helm chart has following values configured, otherwise the dashboards loading will not work.
+        ```yaml
+        grafana:
+          sidecar:
+            dashboards:
+              enabled: true
+              searchNamespace: ALL
+        ```
+        If you have an existing configmap and the dashboards loading doesn't work, add the `labelValue: true` attribute to the helm chart after the `searchNamespace: ALL` declaration.
 
 ## About OpenTelemetry
 
