@@ -121,8 +121,8 @@ data:
         brokerClass: MTChannelBasedBroker
 ```
 
-  !!! note
-      Be aware that different Broker classes usually require different configuration ConfigMaps. See the configuration options of the different [Broker implementations](../brokers/broker-types/README.md) on how their referenced ConfigMaps have to look like (e.g. for [MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/README.md#configuration-configmap) or [Knative Broker for Apache Kafka](../brokers/broker-types/kafka-broker/README.md#configure-a-kafka-broker)).
+!!! note
+    Be aware that different Broker classes usually require different configuration ConfigMaps. Seethe configuration options of the different [Broker implementations](../brokers/broker-typesREADME.md) on how their referenced ConfigMaps have to look like (e.g. for[MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/READMEmd#configuration-configmap) or [Knative Broker for Apache Kafka](../brokers/broker-typeskafka-broker/README.md#configure-a-kafka-broker)).
 
 ## Configuring delivery spec defaults
 
