@@ -8,7 +8,12 @@ hack/__pycache__
 /temp/
 /temp-blog/
 /blog/site/
-/blog/overrides/
+!/blog/overrides/
+/blog/overrides/*
+!/blog/overrides/partials/
+/blog/overrides/partials/*
+!/blog/overrides/partials/source-file.html
+!/blog/overrides/partials/content.html
 /blog/docs/stylesheets/
 /node_modules/
 venv/

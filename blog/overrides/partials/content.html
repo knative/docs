@@ -1,0 +1,20 @@
+<!-- based on https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/content.html   -->
+
+<style>
+    .md-typeset h1:nth-of-type(2),
+    .md-content__button:nth-of-type(2) {
+        display: none;
+    }
+</style>
+
+<h1 id="TODO">
+    {% for toc_item in page.toc %}
+        {{ toc_item.title }}
+        <a class="headerlink" href="{{ toc_item.url }}" title="Permanent link">¶</a>
+    {% endfor %}
+</h1>
+
+{% include "partials/source-file.html" %}
+
+<!-- Page content -->
+{{ page.content }}
