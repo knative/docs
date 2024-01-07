@@ -7,12 +7,19 @@
     }
 </style>
 
-<h1 id="TODO">
+
+{% if page.toc %}
     {% for toc_item in page.toc %}
-        {{ toc_item.title }}
-        <a class="headerlink" href="{{ toc_item.url }}" title="Permanent link">¶</a>
+        <h1 id="TODO">
+            {{ toc_item.title }}
+            <a class="headerlink" href="{{ toc_item.url }}" title="Permanent link">¶</a>
+        </h1>
     {% endfor %}
-</h1>
+{% elif  page.title %}
+    <h1>
+        {{ page.title }}
+    </h1>
+{% endif %}
 
 {% include "partials/source-file.html" %}
 
