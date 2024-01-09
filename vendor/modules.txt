@@ -299,7 +299,7 @@ gopkg.in/go-playground/webhooks.v3/github
 gopkg.in/yaml.v2
 # honnef.co/go/tools v0.0.1-2020.1.5
 ## explicit; go 1.11
-# knative.dev/hack v0.0.0-20231201014241-7030d5bf584d
+# knative.dev/hack v0.0.0-20240108153050-3ea694d6dad7
 ## explicit; go 1.18
 knative.dev/hack
 # go.opencensus.io => go.opencensus.io v0.20.2
