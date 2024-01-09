@@ -1,5 +1,6 @@
-<!-- based on https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/content.html   -->
+<link rel="stylesheet" href="{{ 'assets/stylesheets/content.css' | url }}" />
 
+<!-- based on https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/content.html   -->
 {% if page.toc %}
     {% for toc_item in page.toc %}
         <h1 id="{{ toc_item.url[1::] }}">
