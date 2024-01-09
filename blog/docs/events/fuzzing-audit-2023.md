@@ -2,8 +2,6 @@
 
 **Author: [Adam Korczynski](https://twitter.com/AdamKorcz4), Security Engineer @ [Ada Logics](https://adalogics.com/)**
 
-**Date: 2023-07-13**
-
 Knative is happy to announce the completion of its fuzzing security audit. The audit was carried out by Ada Logics and is part of an initiative by the CNCF to [bring fuzzing to the CNCF landscape](https://www.cncf.io/blog/2022/06/28/improving-security-by-fuzzing-the-cncf-landscape). The audit spanned several months in late 2022 and early 2023 and resulted in 29 fuzzers written for 3 Knative sub-projects. The fuzzers found a single issue in a 3rd-party dependency that has been fixed.
 
 Read the full report for the audit here: [Knative Fuzzing Report](https://github.com/knative/docs/tree/main/reports/ADA-knative-fuzzing-audit-22-23.pdf).

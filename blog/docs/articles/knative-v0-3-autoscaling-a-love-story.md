@@ -2,8 +2,6 @@
 
 **Author: [Joseph Burnett](https://github.com/josephburnett), Software Engineer @ Google**
 
-**Date: 2019-03-27**
-
 <article class="h-entry">
 
 <section data-field="subtitle" class="p-summary">

@@ -1,5 +1,4 @@
 # Announcing Knative Project meeting and Knative Kiosk in the expo area at KubeCon + CloudNativeCon Europe 2023
-Date: 2023-03-13
 
 ![image](images/kubecon.jpg)
 

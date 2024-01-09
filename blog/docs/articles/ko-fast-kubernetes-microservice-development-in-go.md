@@ -2,8 +2,6 @@
 
 **Author: [Matt Moore](https://twitter.com/mattomata), Founder/CTO @ Chainguard**
 
-**Date: 2018-12-18**
-
   <article class="h-entry">
     <section data-field="body" class="e-content">
       <section name="f298" class="section section--body section--first section--last">

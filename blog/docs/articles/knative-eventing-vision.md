@@ -3,8 +3,6 @@
 **Authors: Pierangelo Di Pilato, Senior Software Engineer @ Red Hat, Matthias Weßendorf, Senior
 Principal Software Engineer @ Red Hat**
 
-**Date: 2023-08-07**
-
 ## What is next in Knative Eventing?
 
 Knative Eventing has made significant strides and solidified its position as the platform on

@@ -4,8 +4,6 @@
 
 **Authors: [Carlos Santana](https://twitter.com/csantanapr) (IBM), [Omer Bensaadon](https://twitter.com/omer_bensaadon) (VMware), [Maria Cruz](https://twitter.com/marianarra_) (Google)**
 
-**Date: 2021-11-02**
-
 Today we release Knative 1.0, reaching an important milestone made possible thanks to the contributions and collaboration of over 600 developers. The Knative project was released by Google in July 2018, and it was developed in close partnership with VMWare, IBM, Red Hat, and SAP. Over the last 3 years, Knative has become [the most widely-installed serverless layer on Kubernetes.](https://www.cncf.io/wp-content/uploads/2020/11/CNCF_Survey_Report_2020.pdf)
 
 

@@ -1,7 +1,5 @@
 # First 🌱 Knative Virtual Office Hour
 
-**Date: 2022-12-01**
-
 **Authors: [Alek Slominski](https://aslom.net/), [Evan Anderson](https://off-by-one.dev/), [Lance Ball](https://twitter.com/lanceball), and Paul Schweigert**
 
 ![Knative Booth](images/virtual-office-hour-12-2022-with-text.jpg)

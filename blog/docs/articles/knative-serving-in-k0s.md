@@ -2,8 +2,6 @@
 
 **Author: [Naveenraj Muthuraj](https://twitter.com/naveenraj_m), Graduate Student @ University of Alberta**
 
-**Date: 2023-27-03**
-
 _This work is an attempt to deploy **knative serving** in k0s with minimum resources. Let's try 1 CPU and 1 GB RAM._
 
 This document has three sections. In first section we capture the resource required by knative serving and k0s. In second section we monitor the actual resource used by Knative and k0s, to determine the size of our k0s (edge) node. Finally, we install knative serving with reduced resource request/limit to k0s node with 1 CPU and 1.5 GB RAM (Why 1.5 GB ? , see  [Knative + k0s resource usage](#knative-k0s-resource-usage) )

@@ -2,8 +2,6 @@
 
 **Authors: David Simansky, Senior Software Engineer @ Red Hat, Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-**Date: 2023-07-26**
-
 _In this blog post you will learn about the new enhancements in Knative Eventing around event discovery._
 
 Event discovery is an important part of event-driven applications, since it allows developers to better understand system dynamics and what events to consume. It does enable a more efficient and robust application design.

@@ -2,8 +2,6 @@
 
 **Author: [Adam Korczynski](https://twitter.com/AdamKorcz4), Security Engineer @ [Ada Logics](https://adalogics.com/)**
 
-**Date: 2023-11-27**
-
 Knative is happy to announce the completion of its third-party security audit conducted by [Ada Logics](https://adalogics.com/) and facilitated by the [Open Source Technology Improvement Fund](https://ostif.org/). This is Knative’s second third-party security audit in just a few months. In July this year, Knative completed a fuzzing security audit also conducted by Ada Logics. While the fuzzing security audit focused on improving the state of fuzzing Knative in an automated manner, today Knative completed an audit that focused on threat modelling, manual code auditing and a supply-chain risk assessment. 
 
 During the audit, Ada Logics was in close communication with the Knative team and shared findings ad hoc as the audit progressed. The Knative team and Ada Logics collaborated on mitigation and fixes of the issues found. 
