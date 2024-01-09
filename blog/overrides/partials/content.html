@@ -1,16 +1,8 @@
 <!-- based on https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/content.html   -->
 
-<style>
-    .md-typeset h1:nth-of-type(2),
-    .md-content__button:nth-of-type(2) {
-        display: none;
-    }
-</style>
-
-
 {% if page.toc %}
     {% for toc_item in page.toc %}
-        <h1 id="TODO">
+        <h1 id="{{ toc_item.url[1::] }}">
             {{ toc_item.title }}
             <a class="headerlink" href="{{ toc_item.url }}" title="Permanent link">¶</a>
         </h1>

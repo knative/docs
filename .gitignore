@@ -10,6 +10,11 @@ hack/__pycache__
 /blog/site/
 !/blog/overrides/
 /blog/overrides/*
+!/blog/overrides/assets/
+/blog/overrides/assets/*
+!/blog/overrides/assets/stylesheets
+/blog/overrides/assets/stylesheets/*
+!/blog/overrides/assets/stylesheets/content.css
 !/blog/overrides/partials/
 /blog/overrides/partials/*
 !/blog/overrides/partials/source-file.html
