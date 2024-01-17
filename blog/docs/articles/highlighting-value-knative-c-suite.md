@@ -2,8 +2,6 @@
 
 **Authors: [Carlos Santana](https://twitter.com/csantanapr) (IBM) and [Omer Bensaadon](https://twitter.com/omer_bensaadon) (VMware)**
 
-**Date: 2021-11-04**
-
 <table style="border: 0;">
 <tr style="background-color: var(--md-default-bg-color);">
 <td style="border: 0;" width="33%">

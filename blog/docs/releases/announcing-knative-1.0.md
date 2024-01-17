@@ -1,7 +1,5 @@
 # Announcing: Knative 1.0
 
-**Date: 2021-10-14**
-
 After more than 3 years of active development, with many [commercial adopters](https://github.com/knative/community/blob/main/ADOPTERS.MD), **we are pleased to announce the release of Knative 1.0 on Nov. 2, 2021.** Thanks to the over 600 contributors to Knative for helping us reach this milestone!
 
 During the last several years, Knative has overcome many initial limitations to become the most [widely-installed serverless layer on Kubernetes](https://www.cncf.io/wp-content/uploads/2020/11/CNCF_Survey_Report_2020.pdf). There were some challenges in figuring out what the bar for “1.0” was, as many components have been production-ready and battle-tested for quite some time now.

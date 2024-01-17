@@ -2,8 +2,6 @@
 
 **Author: [Ben Moss](https://twitter.com/mossity), Software Engineer @ [VMware](http://vmware.com)**
 
-**Date: 2021-08-20**
-
 When trying to understand and diagnose our systems, one of the most basic tools
 we learn to lean on is the stack trace. Stack traces give us a structured view
 of the flow of logic that our program is executing in order to help us wrap our

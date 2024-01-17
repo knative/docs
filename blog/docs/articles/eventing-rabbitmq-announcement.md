@@ -2,12 +2,10 @@
 
 **Author: Gab Satchi, Senior Software Engineer @ VMware**
 
-**Date: 2022-07-26**
-
 We’re excited to announce that [Eventing RabbitMQ](https://github.com/knative-extensions/eventing-rabbitmq) is now Generally Available (GA). With this milestone, the APIs provided will remain stable in future iterations.
 A quick start can be found [here](https://knative.dev/docs/eventing/broker/rabbitmq-broker/).
 
-# Key Features
+## Key Features
 
 ### Use any RabbitMQ instance
 

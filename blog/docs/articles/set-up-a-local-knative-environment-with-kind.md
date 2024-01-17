@@ -2,8 +2,6 @@
 
 **Author: [Leon Stigter](https://twitter.com/retgits), Product @ AWS Cloud**
 
-**Date: 2020-06-03**
-
 !!! warning
 
     The [quickstart plugin](https://knative.dev/docs/getting-started/quickstart-install/) is now the recommended way to set up a local Knative environment for development purposes.

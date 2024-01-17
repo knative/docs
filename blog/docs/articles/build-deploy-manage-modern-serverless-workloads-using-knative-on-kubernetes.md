@@ -2,8 +2,6 @@
 
 **Author: [Mark Chmarny](https://twitter.com/mchmarny), TL for Cloud OSS @Google**
 
-**Date: 2018-11-14**
-
   <article class="h-entry">
     <section data-field="description" class="p-summary">
       By now, Kubernetes should be the default target for your deployments. Yes, there are still use-cases where Kubernetes is not the optimal…

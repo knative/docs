@@ -2,8 +2,6 @@
 
 **Authors: [Ricardo Zanini](https://twitter.com/zaninirica), Principal Software Engineer @ RedHat, and [Tihomir Surdilovic](https://twitter.com/tsurdilo), Software Developer @ Red Hat**
 
-**Date: 2020-12-17**
-
 [Kogito](https://kogito.kie.org/) is a platform for the development of cloud-native business automation applications. It is designed targeting cloud-native architectures, and it comes with a series of features to make it easy for architects and developers to create business applications.
 
 Kogito implements the [CNCF Serverless Workflow Project](https://github.com/serverlessworkflow/specification), which is a specification for defining workflow models that orchestrate event-driven, serverless applications. It focuses on defining a vendor-neutral, platform-independent, and declarative workflow model for orchestrating services that can be used across multiple cloud and container platforms. To date, the Serverless Workflow specification is a CNCF sandbox project.

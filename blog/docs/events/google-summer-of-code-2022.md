@@ -2,8 +2,6 @@
 
 **Author: [Ali OK](https://twitter.com/aliok_tr), Principal Software Engineer @ Red Hat**
 
-**Date: 2022-03-31**
-
 Knative community is participating in [Google Summer of Code](https://summerofcode.withgoogle.com/) (GSOC) program, part of the Cloud Native Computing Foundation (CNCF).
 
 [Google Summer of Code](https://summerofcode.withgoogle.com/) (GSoC for short) is a program that brings more contributors into open
