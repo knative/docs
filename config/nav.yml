@@ -131,7 +131,7 @@ nav:
           - Using extensions enabled by QPOptions: serving/services/using-queue-extensions.md
           # TODO: Add security section to docs?
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
-          - HTTPS redirection: serving/services/http-protocol.md
+          - Configuring HTTP: serving/services/http-protocol.md
           - Volume Support: serving/services/storage.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
