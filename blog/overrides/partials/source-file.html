@@ -4,10 +4,10 @@
 
 <p class="md-source-file">
     <strong>
-        {% if page.meta.git_creation_date_localized == page.meta.git_revision_date_localized%}
-            Published on:
-            {{ page.meta.git_creation_date_localized }}
-        {% else %}
+        Published on:
+        {{ page.meta.git_creation_date_localized }}
+        {% if page.meta.git_creation_date_localized != page.meta.git_revision_date_localized%}
+            ,&nbsp;
             Revised on:
             {{ page.meta.git_revision_date_localized }}
         {% endif %}
