@@ -2,8 +2,6 @@
 
 **Author: Paul Schweigert, Senior Software Engineer @ IBM**
 
-**Date: 2021-09-17**
-
 We're pleased to announce that the [`quickstart` plugin](https://github.com/knative-extensions/kn-plugin-quickstart) for the Knative client is now available. The plugin allows users to very easily set up a local Knative environment with just a single command using a local [KinD](https://kind.sigs.k8s.io/) or [minikube](https://minikube.sigs.k8s.io/) cluster.
 
 ```

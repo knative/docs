@@ -2,8 +2,6 @@
 
 **Author: Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-**Date: 2023-06-13**
-
 _In this blog post you will learn how to use the Knative Operator to maintain a fine-grain configuration for high availablitly of Knative workloads._
 
 The [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/) gives you a declarative API to describe your Knative Serving and Eventing installation. The `spec` field has several properties to define the desired behavior.

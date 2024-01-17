@@ -2,8 +2,6 @@
 
 **Authors: [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/) Software Engineering Intern @ [Red Hat](https://www.redhat.com/en), and [Leo Li](https://www.linkedin.com/in/haocheng-leo/) Software Engineering Intern @ [Red Hat](https://www.redhat.com/en)**
 
-**Date: 2023-08-14**
-
 Hi, and welcome back to this introductory blog series! If you want an overview of the full blog series, please check out the [first article](/blog/articles/getting-started-blog-p0){:target="_blank"}.
 In this article we will be discussing __how to set up your development environment__ for Knative.
 A development environment is a place where you can modify and examine code without affecting the currently released code. For setting up your Knative development

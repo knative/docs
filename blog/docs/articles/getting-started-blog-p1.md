@@ -2,8 +2,6 @@
 
 **Authors: [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/) Software Engineering Intern @ [Red Hat](https://www.redhat.com/en), and [Leo Li](https://www.linkedin.com/in/haocheng-leo/) Software Engineering Intern @ [Red Hat](https://www.redhat.com/en)**
 
-**Date: 2023-07-11**
-
 Welcome back to this introductory blog series! In this article we are going to be providing an introduction to open source: what it is, why you should care, and how you can participate.
 
 ![](/blog/images/getting-started-blog-series/post1/hello-open-source.png)

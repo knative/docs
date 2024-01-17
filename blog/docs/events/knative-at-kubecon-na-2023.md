@@ -1,5 +1,4 @@
 # How to catch news about Knative project during KubeCon + CloudNativeCon NA 2023
-Date: 2023-10-24
 
 ![image](images/kubecon.jpg)
 

@@ -1,7 +1,5 @@
 # Knative at KubeCon ’22 North America
 
-**Date: 2022-10-20**
-
 There's less than a week until
 [KubeCon + KnativeCon North America 2022](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/)
 kicks off in Detroit, MI.
