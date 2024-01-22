@@ -158,57 +158,57 @@ Send events to the Broker using OIDC authentication:
     ```shell
     $ curl -v http://broker-ingress.knative-eventing.svc.cluster.local/authentication-oidc-test/br -H "Content-Type:application/json" -H "Ce-Id:1" -H "Ce-Source:cloud-event-example" -H "Ce-Type:myCloudEventGreeting" -H "Ce-Specversion:1.0" -d "{\"name\": \"unauthenticated\"}"
 
-   * Host broker-ingress.knative-eventing.svc.cluster.local:80 was resolved.
-   * IPv6: (none)
-   * IPv4: 10.96.110.167
-   *   Trying 10.96.110.167:80...
-   * Connected to broker-ingress.knative-eventing.svc.cluster.local (10.96.110.167) port 80
-   > POST /authentication-oidc-test/br HTTP/1.1
-   > Host: broker-ingress.knative-eventing.svc.cluster.local
-   > User-Agent: curl/8.5.0
-   > Accept: */*
-   > Content-Type:application/json
-   > Ce-Id:1
-   > Ce-Source:cloud-event-example
-   > Ce-Type:myCloudEventGreeting
-   > Ce-Specversion:1.0
-   > Content-Length: 27
-   > 
-   < HTTP/1.1 401 Unauthorized
-   < Allow: POST, OPTIONS
-   < Date: Mon, 22 Jan 2024 13:33:57 GMT
-   < Content-Length: 0
-   < 
-   * Connection #0 to host broker-ingress.knative-eventing.svc.cluster.local left intact
+    * Host broker-ingress.knative-eventing.svc.cluster.local:80 was resolved.
+    * IPv6: (none)
+    * IPv4: 10.96.110.167
+    *   Trying 10.96.110.167:80...
+    * Connected to broker-ingress.knative-eventing.svc.cluster.local (10.96.110.167) port 80
+    > POST /authentication-oidc-test/br HTTP/1.1
+    > Host: broker-ingress.knative-eventing.svc.cluster.local
+    > User-Agent: curl/8.5.0
+    > Accept: */*
+    > Content-Type:application/json
+    > Ce-Id:1
+    > Ce-Source:cloud-event-example
+    > Ce-Type:myCloudEventGreeting
+    > Ce-Specversion:1.0
+    > Content-Length: 27
+    > 
+    < HTTP/1.1 401 Unauthorized
+    < Allow: POST, OPTIONS
+    < Date: Mon, 22 Jan 2024 13:33:57 GMT
+    < Content-Length: 0
+    < 
+    * Connection #0 to host broker-ingress.knative-eventing.svc.cluster.local left intact
 
-   ~ $ curl -v http://broker-ingress.knative-eventing.svc.cluster.local/authentication-oidc-test/br -H "Content-Type:application/json" -H "Ce-Id:1" -H "Ce-Source:cloud-event-example" -H "Ce-Type:myCloudEventGreeting" -H "Ce-Specversion:1.0" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlZBWmppNEVJZkVSV
-   DZoYTA4dU1xTWJxSHFYQTgtbE00VU1tMmpFZUNuakUifQ.eyJhdWQiOlsiZXZlbnRpbmcua25hdGl2ZS5kZXYvYnJva2VyL2F1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdC9iciJdLCJleHAiOjE3MDU5MzQwMDgsImlhdCI6MTcwNTkzMDQwOCwiaXNzIjoiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJhdXRoZW50aWNhdGlvbi1vaWRjLXRlc3QiLCJ
-   zZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoib2lkYy10ZXN0LXVzZXIiLCJ1aWQiOiI3MTlkMWI3ZC1hZjBkLTQzMDAtOGUxNy1lNTk4YmZmN2VmYTIifX0sIm5iZiI6MTcwNTkzMDQwOCwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmF1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdDpvaWRjLXRlc3QtdXNlciJ9.UrleSi54mxgThesyrC4kzG7rO3-Fic1B3kPOY8k1l-oslhvw3dbT0n24bvP96m7Ke4ZGoXE3Efo
-   966LZM_61-bfntFbw8kTRe_w6wGXVGpadrBSZsIChVgFYqsPNX_7r1LSNTy5tFXze9phVz6EpO7XeUct_PXyYLASNw0LNXWyqbcEqBNtgWmDKHaS_1pIscFP6MaoGVj968hpVqli8O6okQUQitIoPwFEGAIbaBlIX6Z5ZqlGwL9eqbIiNEMEgjlduv9dyZVmpDc0hsF6GHk2RnAhLeOniUNdUo4VO3z27TJY5JYK7xIMBD6Z5dUAhud9ofA8VWEl7Mziw4fsdCw" -d "{\"name\": \"authenticated\"}"
-   * Host broker-ingress.knative-eventing.svc.cluster.local:80 was resolved.
-   * IPv6: (none)
-   * IPv4: 10.96.110.167
-   *   Trying 10.96.110.167:80...
-   * Connected to broker-ingress.knative-eventing.svc.cluster.local (10.96.110.167) port 80
-   > POST /authentication-oidc-test/br HTTP/1.1
-   > Host: broker-ingress.knative-eventing.svc.cluster.local
-   > User-Agent: curl/8.5.0
-   > Accept: */*
-   > Content-Type:application/json
-   > Ce-Id:1
-   > Ce-Source:cloud-event-example
-   > Ce-Type:myCloudEventGreeting
-   > Ce-Specversion:1.0
-   > Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlZBWmppNEVJZkVSVDZoYTA4dU1xTWJxSHFYQTgtbE00VU1tMmpFZUNuakUifQ.eyJhdWQiOlsiZXZlbnRpbmcua25hdGl2ZS5kZXYvYnJva2VyL2F1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdC9iciJdLCJleHAiOjE3MDU5MzQwMDgsImlhdCI6MTcwNTkzMDQwOCwiaXNzIjoiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJhdXRoZW50aWNhdGlvbi1vaWRjLXRlc3QiLCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoib2lkYy10ZXN0LXVzZXIiLCJ1aWQiOiI3MTlkMWI3ZC1hZjBkLTQzMDAtOGUxNy1lNTk4YmZmN2VmYTIifX0sIm5iZiI6MTcwNTkzMDQwOCwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmF1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdDpvaWRjLXRlc3QtdXNlciJ9.UrleSi54mxgThesyrC4kzG7rO3-Fic1B3kPOY8k1l-oslhvw3dbT0n24bvP96m7Ke4ZGoXE3Efo966LZM_61-bfntFbw8kTRe_w6wGXVGpadrBSZsIChVgFYqsPNX_7r1LSNTy5tFXze9phVz6EpO7XeUct_PXyYLASNw0LNXWyqbcEqBNtgWmDKHaS_1pIscFP6MaoGVj968hpVqli8O6okQUQitIoPwFEGAIbaBlIX6Z5ZqlGwL9eqbIiNEMEgjlduv9dyZVmpDc0hsF6GHk2RnAhLeOniUNdUo4VO3z27TJY5JYK7xIMBD6Z5dUAhud9ofA8VWEl7Mziw4fsdCw
-   > Content-Length: 25
-   > 
-   < HTTP/1.1 202 Accepted
-   < Allow: POST, OPTIONS
-   < Date: Mon, 22 Jan 2024 13:34:27 GMT
-   < Content-Length: 0
-   < 
-   * Connection #0 to host broker-ingress.knative-eventing.svc.cluster.local left intact
-   ~ $
+    ~ $ curl -v http://broker-ingress.knative-eventing.svc.cluster.local/authentication-oidc-test/br -H "Content-Type:application/json" -H "Ce-Id:1" -H "Ce-Source:cloud-event-example" -H "Ce-Type:myCloudEventGreeting" -H "Ce-Specversion:1.0" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlZBWmppNEVJZkVSV
+    DZoYTA4dU1xTWJxSHFYQTgtbE00VU1tMmpFZUNuakUifQ.eyJhdWQiOlsiZXZlbnRpbmcua25hdGl2ZS5kZXYvYnJva2VyL2F1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdC9iciJdLCJleHAiOjE3MDU5MzQwMDgsImlhdCI6MTcwNTkzMDQwOCwiaXNzIjoiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJhdXRoZW50aWNhdGlvbi1vaWRjLXRlc3QiLCJ
+    zZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoib2lkYy10ZXN0LXVzZXIiLCJ1aWQiOiI3MTlkMWI3ZC1hZjBkLTQzMDAtOGUxNy1lNTk4YmZmN2VmYTIifX0sIm5iZiI6MTcwNTkzMDQwOCwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmF1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdDpvaWRjLXRlc3QtdXNlciJ9.UrleSi54mxgThesyrC4kzG7rO3-Fic1B3kPOY8k1l-oslhvw3dbT0n24bvP96m7Ke4ZGoXE3Efo
+    966LZM_61-bfntFbw8kTRe_w6wGXVGpadrBSZsIChVgFYqsPNX_7r1LSNTy5tFXze9phVz6EpO7XeUct_PXyYLASNw0LNXWyqbcEqBNtgWmDKHaS_1pIscFP6MaoGVj968hpVqli8O6okQUQitIoPwFEGAIbaBlIX6Z5ZqlGwL9eqbIiNEMEgjlduv9dyZVmpDc0hsF6GHk2RnAhLeOniUNdUo4VO3z27TJY5JYK7xIMBD6Z5dUAhud9ofA8VWEl7Mziw4fsdCw" -d "{\"name\": \"authenticated\"}"
+    * Host broker-ingress.knative-eventing.svc.cluster.local:80 was resolved.
+    * IPv6: (none)
+    * IPv4: 10.96.110.167
+    *   Trying 10.96.110.167:80...
+    * Connected to broker-ingress.knative-eventing.svc.cluster.local (10.96.110.167) port 80
+    > POST /authentication-oidc-test/br HTTP/1.1
+    > Host: broker-ingress.knative-eventing.svc.cluster.local
+    > User-Agent: curl/8.5.0
+    > Accept: */*
+    > Content-Type:application/json
+    > Ce-Id:1
+    > Ce-Source:cloud-event-example
+    > Ce-Type:myCloudEventGreeting
+    > Ce-Specversion:1.0
+    > Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlZBWmppNEVJZkVSVDZoYTA4dU1xTWJxSHFYQTgtbE00VU1tMmpFZUNuakUifQ.eyJhdWQiOlsiZXZlbnRpbmcua25hdGl2ZS5kZXYvYnJva2VyL2F1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdC9iciJdLCJleHAiOjE3MDU5MzQwMDgsImlhdCI6MTcwNTkzMDQwOCwiaXNzIjoiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJhdXRoZW50aWNhdGlvbi1vaWRjLXRlc3QiLCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoib2lkYy10ZXN0LXVzZXIiLCJ1aWQiOiI3MTlkMWI3ZC1hZjBkLTQzMDAtOGUxNy1lNTk4YmZmN2VmYTIifX0sIm5iZiI6MTcwNTkzMDQwOCwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmF1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdDpvaWRjLXRlc3QtdXNlciJ9.UrleSi54mxgThesyrC4kzG7rO3-Fic1B3kPOY8k1l-oslhvw3dbT0n24bvP96m7Ke4ZGoXE3Efo966LZM_61-bfntFbw8kTRe_w6wGXVGpadrBSZsIChVgFYqsPNX_7r1LSNTy5tFXze9phVz6EpO7XeUct_PXyYLASNw0LNXWyqbcEqBNtgWmDKHaS_1pIscFP6MaoGVj968hpVqli8O6okQUQitIoPwFEGAIbaBlIX6Z5ZqlGwL9eqbIiNEMEgjlduv9dyZVmpDc0hsF6GHk2RnAhLeOniUNdUo4VO3z27TJY5JYK7xIMBD6Z5dUAhud9ofA8VWEl7Mziw4fsdCw
+    > Content-Length: 25
+    > 
+    < HTTP/1.1 202 Accepted
+    < Allow: POST, OPTIONS
+    < Date: Mon, 22 Jan 2024 13:34:27 GMT
+    < Content-Length: 0
+    < 
+    * Connection #0 to host broker-ingress.knative-eventing.svc.cluster.local left intact
+    ~ $
     ```
 3. Verify the 2nd event reached the event-display pod
     ```shell
