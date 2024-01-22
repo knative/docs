@@ -16,7 +16,7 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 
 ## Prerequisites
 
-- [Eventing installation](./../../install)
+- [Eventing installation](./../../../install)
 
 ## Sender Identity Configuration
 
