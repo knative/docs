@@ -110,7 +110,7 @@ kubectl -n authentication-oidc-test get broker br -o yaml
 
 Example output:
 
-```shell
+```yaml
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
