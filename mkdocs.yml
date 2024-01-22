@@ -20,6 +20,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.top
     - content.code.copy
+    - content.action.edit
 
 markdown_extensions:
   # - mdx_include:
