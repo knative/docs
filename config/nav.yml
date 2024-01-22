@@ -284,6 +284,7 @@ nav:
         - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
         - EventType auto creation: eventing/experimental-features/eventtype-auto-creation.md
         - Transport Encryption: eventing/experimental-features/transport-encryption.md
+        - Sender Identity: eventing/experimental-features/sender-identity.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
