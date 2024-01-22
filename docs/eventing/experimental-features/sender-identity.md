@@ -18,6 +18,9 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 
 - [Eventing installation](./../../../install)
 
+!!! note
+    To not provide the access token in cleartext over the wire, transport-encryption should be enabled as well. Take a look at [Transport-Encryption](./transport-encryption.md), which explains how to enable the transport encryption feature flag.
+
 ## Sender Identity Configuration
 
 The possible values for `authentication-oidc` are:
