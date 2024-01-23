@@ -63,6 +63,11 @@ For more details on why the issue appears see [here](https://github.com/golang/g
 
 In order to enable the HTTP/1 full duplex support you can set the corresponding annotation at the service level as follows:
 
+!!! warning
+
+    Test with your http clients before enabling, as older clients may not provide support for HTTP/1 full duplex.
+
+
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -77,6 +82,3 @@ spec:
 ...
 ```
 
-!!! warning
-
-    Test with your http clients before enabling, as older clients may not provide support for HTTP/1 full duplex.
