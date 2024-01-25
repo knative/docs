@@ -90,6 +90,7 @@ Only dependency update
 
 ## Thank you, contributors
 **Release Leads:**
+
 - [@skonto](https://github.com/skonto)
 
 - [@ReToCode](https://github.com/ReToCode)
