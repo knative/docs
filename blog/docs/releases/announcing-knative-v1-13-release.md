@@ -1,3 +1,15 @@
+---
+title: "v1.13 release"
+linkTitle: "v1.13 release"
+author: "[Stavros Kontopoulos (Red Hat)](https://github.com/skonto), [Reto Lehmann (Red Hat)](https://github.com/ReToCode), [Pierluigi Di Cintio (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk), [Calum Murray (Red Hat)](https://github.com/Cali0707), [Leo Lee (Red Hat)](https://github.com/Leo6Leo), [Christian Regidor (Red Hat)](https://github.com/creydr)"
+
+author handle: https://github.com/skonto https://github.com/ReToCode https://github.com/pierDipi https://github.com/dsimansk https://github.com/Cali0707 https://github.com/Leo6Leo https://github.com/creydr
+
+date: 2024-1-25
+description: "Knative v1.13 release announcement"
+type: "blog"
+---
+
 # Announcing Knative 1.13 Release
 
 A new version of Knative is now available across multiple components. Follow the instructions in [Installing Knative](https://knative.dev/docs/install/) to install the components you require.
