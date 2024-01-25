@@ -1,7 +1,7 @@
 ---
 title: "v1.13 release"
 linkTitle: "v1.13 release"
-author: "[Stavros Kontopoulos (Red Hat)](https://github.com/skonto), [Reto Lehmann (Red Hat)](https://github.com/ReToCode), [Pierluigi Di Cintio (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk), [Calum Murray (Red Hat)](https://github.com/Cali0707), [Leo Lee (Red Hat)](https://github.com/Leo6Leo), [Christian Regidor (Red Hat)](https://github.com/creydr)"
+author: "[Stavros Kontopoulos (Red Hat)](https://github.com/skonto), [Reto Lehmann (Red Hat)](https://github.com/ReToCode), [Pierangelo Di Pilato (Red Hat)](https://github.com/pierDipi), [David Simansky (Red Hat)](https://github.com/dsimansk), [Calum Murray (Red Hat)](https://github.com/Cali0707), [Leo Li (Red Hat)](https://github.com/Leo6Leo), [Christoph Stäbler (Red Hat)](https://github.com/creydr)"
 
 author handle: https://github.com/skonto https://github.com/ReToCode https://github.com/pierDipi https://github.com/dsimansk https://github.com/Cali0707 https://github.com/Leo6Leo https://github.com/creydr
 
