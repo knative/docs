@@ -44,16 +44,13 @@ This release brings a number of smaller improvements to the core Knative Serving
 - Use underlying input channels audience as sequence audience ([#7387](https://github.com/knative/eventing/pull/7387), [@md-saif-husain](https://github.com/md-saif-husain))
 
 #### 🐞 Bug Fixes
-- PingSource TLS & OIDC test ([#7416](https://github.com/knative/eventing/pull/7416), [@Leo6Leo](https://github.com/Leo6Leo))
 - Enable storage of EventType v1beta2 instead of v1beta1 ([#7594](https://github.com/knative/eventing/pull/7594), [@dsimansk](https://github.com/dsimansk))
 - EventType v1beta1 deprecation ([#7453](https://github.com/knative/eventing/pull/7453) and [#7303](https://github.com/knative/eventing/pull/7303), [@matzew](https://github.com/matzew))
-- Add Prerequisite for e2e test to check if OIDC authentication is enabled ([#7609](https://github.com/knative/eventing/pull/7609), [@creydr](https://github.com/creydr))
 - Fix mt-broker-ingress watch Broker ([#7499](https://github.com/knative/eventing/pull/7499), [@xiangpingjiang](https://github.com/xiangpingjiang))
 - Refactor the AuthStatus Logic ([#7417](https://github.com/knative/eventing/pull/7417), [@xiangpingjiang](https://github.com/xiangpingjiang))
 - InMemoryChannel send a 202 response only after successfully delivering the event to all subscribers ([#7415](https://github.com/knative/eventing/pull/7415), [@Cali0707](https://github.com/Cali0707))
 - Under OIDC mode, all the outgoing event request will be appended with JWT Authorization header ([#7452](https://github.com/knative/eventing/pull/7452), [@Leo6Leo](https://github.com/Leo6Leo))
 - Use `kmeta.ChildName()` to generate OIDC service account name ([#7521](https://github.com/knative/eventing/pull/7521), [@xiangpingjiang](https://github.com/xiangpingjiang))
-- When running `hack/install.sh`, all the related testing environments will be set up as well. ([#7418](https://github.com/knative/eventing/pull/7418), [@Leo6Leo](https://github.com/Leo6Leo))
 
 ### Client
 **Release Notes:** [Knative Client 1.13](https://github.com/knative/client/releases/tag/knative-v1.13.0)
@@ -94,11 +91,17 @@ Only dependency update
 ## Thank you, contributors
 **Release Leads:**
 - [@skonto](https://github.com/skonto)
+
 - [@ReToCode](https://github.com/ReToCode)
+
 - [@pierDipi](https://github.com/pierDipi)
+
 - [@dsimansk](https://github.com/dsimansk)
+
 - [@Cali0707](https://github.com/Cali0707)
+
 - [@Leo6Leo](https://github.com/Leo6Leo)
+
 - [@creydr](https://github.com/creydr)
 
 ## Learn more
