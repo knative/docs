@@ -24,7 +24,7 @@ Event producers are be able to connect to HTTPS endpoints with cluster-internal 
 - In order to enable the transport encryption feature, you will need to install cert-manager
   operator by
   following [the cert-manager operator installation instructions](https://cert-manager.io/docs/installation/).
-- [Eventing installation](./../../install)
+- [Eventing installation](./../../../install)
 
 ## Installation
 
