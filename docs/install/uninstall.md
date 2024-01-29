@@ -102,13 +102,13 @@ Follow the relevant procedure to uninstall the networking layer you installed:
 1. Uninstall the Serving core components by running:
 
     ```
-    kubectl delete -f https://storage.googleapis.com/knative-nightly/serving/latest/serving-core.yaml
+    kubectl delete -f {{ artifact(repo="serving",file="serving-core.yaml")}}
     ```
 
 1. Uninstall the required custom resources by running:
 
     ```
-    kubectl delete -f https://storage.googleapis.com/knative-nightly/serving/latest/serving-crds.yaml
+    kubectl delete -f {{ artifact(repo="serving",file="serving-crds.yaml")}}
     ```
 
 
@@ -302,13 +302,13 @@ Uninstall each channel layer you have installed:
 1. Uninstall the Eventing core components by running:
 
     ```
-    kubectl delete -f https://storage.googleapis.com/knative-nightly/eventing/latest/eventing-core.yaml
+    kubectl delete -f {{ artifact(repo="eventing",file="eventing-core.yaml")}}
     ```
 
 1. Uninstall the required custom resources by running:
 
     ```
-    kubectl delete -f https://storage.googleapis.com/knative-nightly/eventing/latest/eventing-crds.yaml
+    kubectl delete -f {{ artifact(repo="eventing",file="eventing-crds.yaml")}}
     ```
 
 
