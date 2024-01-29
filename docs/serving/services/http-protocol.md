@@ -61,7 +61,7 @@ For more details on why the issue appears see [here](https://github.com/golang/g
 
 ### Configure HTTP/1 Full Duplex support
 
-In order to enable the HTTP/1 full duplex support you can set the corresponding annotation at the service level as follows:
+In order to enable the HTTP/1 full duplex support you can set the corresponding annotation at the revision spec level as follows:
 
 !!! warning
 
@@ -74,11 +74,11 @@ kind: Service
 metadata:
   name: example-service
   namespace: default
-  annotations:
-    features.knative.dev/http-full-duplex: "Enabled"
 spec:
   template:
     spec:
+      annotations:
+        features.knative.dev/http-full-duplex: "Enabled"
 ...
 ```
 
