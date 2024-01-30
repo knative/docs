@@ -134,16 +134,6 @@ Uninstall any Eventing extensions you have installed by following the relevant p
 
 
 
-=== "Sugar Controller"
-
-    Uninstall the Eventing Sugar Controller by running:
-
-    ```bash
-    kubectl delete -f {{ artifact( repo="eventing", file="eventing-sugar-controller.yaml") }}
-    ```
-
-
-
 === "GitHub Source"
 
     Uninstall a single-tenant GitHub source by running:
