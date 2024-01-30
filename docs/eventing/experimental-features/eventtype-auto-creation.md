@@ -1,4 +1,4 @@
-# EventType auto creation for Brokers
+# EventType auto creation for improved discoverability
 
 **Flag name**: `eventtype-auto-create`
 
