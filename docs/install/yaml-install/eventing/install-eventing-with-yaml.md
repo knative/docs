@@ -228,31 +228,6 @@ The following tabs expand to show instructions for installing each Eventing exte
 
     For more information, see the [Kafka Sink](../../../eventing/sinks/kafka-sink.md) documentation.
 
-=== "Sugar Controller"
-
-    <!-- Unclear when this feature came in -->
-
-    1. Install the Eventing Sugar Controller by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(repo="eventing",file="eventing-sugar-controller.yaml")}}
-        ```
-
-        The Knative Eventing Sugar Controller reacts to special labels and
-        annotations and produce Eventing resources. For example:
-
-        - When a namespace is labeled with `eventing.knative.dev/injection=enabled`, the
-          controller creates a default Broker in that namespace.
-        - When a Trigger is annotated with `eventing.knative.dev/injection=enabled`, the
-          controller creates a Broker named by that Trigger in the Trigger's namespace.
-
-    1. Enable the default Broker on a namespace (here `default`) by running the command:
-
-        ```bash
-        kubectl label namespace <namespace-name> eventing.knative.dev/injection=enabled
-        ```
-        Where `<namespace-name>` is the name of the namespace.
-
 === "GitHub Source"
 
     A single-tenant GitHub source creates one Knative service per GitHub source.
