@@ -147,7 +147,8 @@ But here a few points to consider, as there are several ways on how to provide C
 * Reading it from environment variable
 * Accessing it from a `Secret`/`ConfigMap` via K8s API
 
-Important is to decide if a reload without downtime is necessary, if yes, the workload must either watch changes on the K8s resource or watch the filesystem. For the latter it is important, that `ionotify` on changing Secrets/ConfigMaps does not work super reliable on K8s. Tests showed that it is more reliable to regularly poll and check the certificate on the filesystem for changes.
+If reloading certificates without downtime is important for your client, the workload must either watch changes on the K8s resource (Secret/ConfigMap) or watch the filesystem.
+If the workload is watching the filesystem, it is important to note that using `ionotify` to catch changing Secrets/ConfigMaps is not very reliable on K8s. Tests have shown that it is more reliable to regularly poll and check the certificate on the filesystem for changes.
 
 Here are a few examples for golang:
 
