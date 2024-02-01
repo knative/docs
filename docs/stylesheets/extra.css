@@ -34,7 +34,8 @@ a.md-header__button.md-logo img {
   margin: 5px -14px;
 }
 
-.md-nav__item--nested>.md-nav__link, .md-nav__item a {
+.md-nav__item--nested > .md-nav__link,
+.md-nav__item a {
   color: var(--nav-item-color);
 }
 
@@ -43,16 +44,17 @@ a.md-header__button.md-logo img {
   color: var(--nav-item-color);
 }
 
-.md-nav__item--nested>.md-nav__link:hover {
+.md-nav__item--nested > .md-nav__link:hover {
   color: var(--md-accent-fg-color);
 }
 
 /* header css */
 .md-header {
-  color: black
+  color: black;
 }
 
-.md-header[data-md-state=shadow], .md-tabs {
+.md-header[data-md-state="shadow"],
+.md-tabs {
   background-color: #f3f1f2;
 }
 
@@ -91,11 +93,11 @@ a.md-header__button.md-logo img {
   border: none;
 }
 
-.md-search__icon[for=__search] {
+.md-search__icon[for="__search"] {
   color: var(--md-default-fg-color--light);
 }
 
-.md-source__icon+.md-source__repository {
+.md-source__icon + .md-source__repository {
   font-weight: bold;
 }
 
@@ -134,8 +136,9 @@ a.md-header__button.md-logo img {
   font-weight: 600;
 }
 
-.md-typeset .admonition, .md-typeset details {
-  font-size: .7rem;
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.7rem;
 }
 
 /**Modify H1**/
@@ -146,7 +149,7 @@ a.md-header__button.md-logo img {
   color: var(--nav-item-color);
 }
 
-.md-typeset>h1:first-of-type {
+.md-typeset > h1:first-of-type {
   margin: 0 0 0.75em;
 }
 
@@ -178,7 +181,8 @@ a.md-header__button.md-logo img {
 }
 
 /* text sizing of tables, Alert, Warnings, Notes*/
-.md-typeset table, .md-typeset table:not([class]) {
+.md-typeset table,
+.md-typeset table:not([class]) {
   font-size: 100%;
 }
 
@@ -192,7 +196,7 @@ a.md-header__button.md-logo img {
 
 /* Giving h4 tag distinctive style because it is non-differntial with bold text */
 .md-typeset h4 {
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: normal;
 }
 
@@ -263,7 +267,7 @@ a.md-header__button.md-logo img {
   float: left;
   margin-left: 15px;
   margin-right: 100px;
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 
 .cookienotice .text p {
@@ -286,7 +290,7 @@ a.md-header__button.md-logo img {
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
-  opacity: .5;
+  opacity: 0.5;
   cursor: pointer;
 }
 
@@ -294,8 +298,8 @@ a.md-header__button.md-logo img {
   background: #6695ca;
   color: #fff;
   margin-right: 15px;
-  padding: .25rem .5rem;
-  font-size: .875rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0;
   cursor: pointer;
@@ -316,7 +320,7 @@ a.md-header__button.md-logo img {
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   outline: 0;
 }
 
@@ -337,6 +341,7 @@ a.md-header__button.md-logo img {
 
 .md-footer .md-footer-copyright {
   font-weight: bold;
+  font-size: 15px;
 }
 
 .md-footer-meta {
@@ -345,17 +350,26 @@ a.md-header__button.md-logo img {
 
 .footer-links {
   display: flex;
-  flex-grow: 1;
-  align-items: center;
+  justify-content: right;
+  padding: 10px;
 }
 
 .footer-links a {
-  margin: 0.4em;
-  text-decoration: underline
+  margin: 0.6em;
+  font-weight: lighter;
+  font-size: small;
+  text-decoration: underline;
+}
+
+.divider {
+  margin: 0 5px;
+  font-size: 20px;
 }
 
 /* Feature State Labels */
-.feature-alpha, .feature-beta, .feature-stable {
+.feature-alpha,
+.feature-beta,
+.feature-stable {
   font-variant: small-caps;
   padding: 0.1em;
   border-bottom: 1px dotted #999;
@@ -375,18 +389,21 @@ a.md-header__button.md-logo img {
   background: rgb(228, 255, 218);
 }
 
-.md-nav--primary .md-nav__title[for=__drawer] {
+.md-nav--primary .md-nav__title[for="__drawer"] {
   color: black;
 }
 
 /* Testimonials */
-.testimonials h1, .testimonials h2,
-.testimonials h3, .testimonials .normal-text,
+.testimonials h1,
+.testimonials h2,
+.testimonials h3,
+.testimonials .normal-text,
 .testimonials .quote {
   font-family: inherit;
 }
 
-.testimonials h1, .testimonials h2,
+.testimonials h1,
+.testimonials h2,
 .testimonials h3 {
   font-weight: bold;
 }
@@ -422,7 +439,7 @@ a.md-header__button.md-logo img {
   font-weight: 500;
   line-height: 1.1;
   font-family: inherit;
-  font-size: .85rem;
+  font-size: 0.85rem;
   border-left: #4db3d9 4.5px solid;
 }
 
@@ -456,7 +473,7 @@ a.md-header__button.md-logo img {
 
 .testimonials .normal-text {
   font-weight: 600;
-  font-size: .86rem;
+  font-size: 0.86rem;
   color: #6e6e6e;
 }
 
@@ -469,7 +486,7 @@ a.md-header__button.md-logo img {
 }
 
 @media screen and (max-width: 76.1875em) {
-  .md-nav--primary .md-nav__item--active>.md-nav__link {
+  .md-nav--primary .md-nav__item--active > .md-nav__link {
     color: var(--nav-item-color);
   }
 }
