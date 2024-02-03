@@ -7,7 +7,7 @@ Folder with media files: 'N/A'
 Blog URL: ''
 Labels: Articles
 Reviewers: ''
-date: 2024-02-03
+date: 2024-02-04
 description: "Trademark Committee Dissolved"
 type: "blog"
 
