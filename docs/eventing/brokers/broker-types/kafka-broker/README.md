@@ -113,7 +113,7 @@ different `name` on your Kafka Broker's `spec.config` field.
 !!! note
     The `default.topic.replication.factor` value must be less than or equal to the number of Kafka broker instances in your cluster. For example, if you only have one Kafka broker, the `default.topic.replication.factor` value should not be more than `1`.
 
-Knative supports the full set of topic config options that your version of Kafka supports. To set any of these, you need to add a key to the configmap with the `default.topic.config.` prefix.
+Knative supports the [full set of topic config options that your version of Kafka supports](https://kafka.apache.org/documentation/#topicconfigs). To set any of these, you need to add a key to the configmap with the `default.topic.config.` prefix.
 For example, to set the `retention.ms` value you would modify the `ConfigMap` to look like the following:
 
 ```yaml
@@ -132,7 +132,6 @@ data:
   # Here is our retention.ms config
   default.topic.config.retention.ms: "3600"
 ```
-
 
 ## Set as default broker implementation
 
