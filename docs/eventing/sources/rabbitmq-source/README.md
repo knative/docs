@@ -1,5 +1,7 @@
 # Creating a RabbitMQSource
 
+⚠️ The component is deprecated and will no longer be shipped in future releases. For a timeline see: https://github.com/knative/eventing/issues/7670
+
 ![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)
 ![version](https://img.shields.io/badge/API_Version-v1alpha1-red?style=flat-square)
 
