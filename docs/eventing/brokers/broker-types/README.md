@@ -20,5 +20,7 @@ This Broker implementation uses [Apache Kafka](https://kafka.apache.org/) as its
 
 ### RabbitMQ broker
 
+⚠️ The component is deprecated and will no longer be shipped in future releases. For a timeline see: https://github.com/knative/eventing/issues/7670
+
 The RabbitMQ Broker uses [RabbitMQ](https://www.rabbitmq.com/) for its underlying implementation.
 For more information, see [RabbitMQ Broker](./rabbitmq-broker/README.md) or [the docs available on GitHub](https://github.com/knative-extensions/eventing-rabbitmq).
