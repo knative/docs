@@ -6,7 +6,6 @@ plugins:
       eventing/broker/create-mtbroker.md: eventing/brokers/create-broker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
       eventing/broker/kafka-broker/README.md: eventing/brokers/broker-types/kafka-broker/README.md
-      eventing/broker/rabbitmq-broker/README.md: eventing/brokers/broker-types/rabbitmq-broker/README.md
       eventing/broker/README.md: eventing/brokers/README.md
       concepts/resources/revisions.md: concepts/serving-resources/revisions.md
       serving/revision-gc.md: serving/revisions/revision-developer-config-options.md
