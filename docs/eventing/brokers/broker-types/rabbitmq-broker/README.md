@@ -1,5 +1,7 @@
 # Creating a RabbitMQ Broker
 
+⚠️ The component is deprecated and will no longer be shipped in future releases. For a timeline see: https://github.com/knative/eventing/issues/7670
+
 This topic describes how to create a RabbitMQ Broker.
 
 ## Prerequisites
