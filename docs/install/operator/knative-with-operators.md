@@ -161,7 +161,10 @@ Knative Serving with different ingresses:
               # ...
               config:
                 istio:
-                  local-gateway.<local-gateway-namespace>.knative-local-gateway: "knative-local-gateway.<istio-namespace>.svc.cluster.local"
+                  local-gateways: |
+                    - name: knative-local-gateway
+                      namespace: <local-gateway-namespace>
+                      service: knative-local-gateway.<istio-namespace>.svc.cluster.local
             ```
 
             Where:

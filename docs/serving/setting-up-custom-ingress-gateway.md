@@ -72,17 +72,22 @@ namespace:
          #                              #
          ################################
          # ...
-         gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+         external-gateways: |
+           - name: knative-ingress-gateway
+             namespace: knative-serving
+             service: istio-ingressgateway.istio-system.svc.cluster.local
      ```
 
-1. Edit the file to add the `gateway.knative-serving.knative-ingress-gateway: <ingress_name>.<ingress_namespace>.svc.cluster.local` field with
-the fully qualified url of your service.
+1. Edit the file to add the `external-gateways` field with the fully qualified url of your service.
 For the example `custom-ingressgateway` service mentioned earlier, it should be updated to:
 
      ```yaml
      apiVersion: v1
      data:
-       gateway.knative-serving.knative-ingress-gateway: custom-ingressgateway.custom-ns.svc.cluster.local
+       external-gateways: |
+         - name: knative-ingress-gateway
+           namespace: knative-serving
+           service: custom-ingressgateway.custom-ns.svc.cluster.local
      kind: ConfigMap
      [...]
      ```
@@ -147,21 +152,30 @@ namespace:
          #                              #
          ################################
          # ...
-         gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+         external-gateways: |
+           - name: knative-ingress-gateway
+             namespace: knative-serving
+             service: istio-ingressgateway.istio-system.svc.cluster.local
      ```
 
-1. Edit the file to add the `gateway.<gateway-namespace>.<gateway-name>: istio-ingressgateway.istio-system.svc.cluster.local` field with
-the customized gateway.
+1. Edit the file to add the `external-gateways` field with the customized gateway.
 For the example `knative-custom-gateway` mentioned earlier, it should be updated to:
 
      ```yaml
      apiVersion: v1
      data:
-       gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+       external-gateways: |
+         - name: knative-custom-gateway
+           namespace: custom-ns
+           service: istio-ingressgateway.istio-system.svc.cluster.local
      kind: ConfigMap
      [...]
      ```
 
-The configuration format should be `gateway.<gateway-namespace>.<gateway-name>`.
-`<gateway-namespace>` is optional. When it is omitted, the system searches for
-the gateway in the serving system namespace `knative-serving`.
+The configuration format should be
+```
+  external-gateways: |
+    - name: <gateway-name>
+      namespace: <gateway-namespace>
+      service: <fully-qualified-url-of-istio-ingress-service>
+```

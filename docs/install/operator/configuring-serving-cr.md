@@ -312,10 +312,19 @@ spec:
               istio: ingressgateway
       config:
         istio:
-          gateway.knative-serving.knative-ingress-gateway: "custom-ingressgateway.custom-ns.svc.cluster.local"
+          external-gateways: |
+            - name: knative-ingress-gateway
+              namespace: knative-serving
+              service: custom-ingressgateway.custom-ns.svc.cluster.local
     ```
 
-    The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
+    The key in `spec.config.istio` is in the format of
+    ```
+    external-gateways: |
+      - name: <gateway_name>
+        namespace: <gateway_namespace>
+        service: istio-ingressgateway.istio-system.svc.cluster.local
+    ```
 
 ## Replace the ingress gateway
 
@@ -332,10 +341,19 @@ spec:
     spec:
       config:
         istio:
-          gateway.custom-ns.knative-custom-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+          external-gateways: |
+            - name: knative-custom-gateway
+              namespace: custom-ns
+              service: istio-ingressgateway.istio-system.svc.cluster.local
     ```
 
-    The key in `spec.config.istio` is in the format of `gateway.<gateway_namespace>.<gateway_name>`.
+    The key in `spec.config.istio` is in the format of
+    ```
+    external-gateways: |
+      - name: <gateway_name>
+        namespace: <gateway_namespace>
+        service: istio-ingressgateway.istio-system.svc.cluster.local
+    ```
 
 ## Configuration of cluster local gateway
 
@@ -369,7 +387,10 @@ spec:
           custom: custom-local-gateway
   config:
     istio:
-      local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+      local-gateways: |
+        - name: knative-local-gateway
+          namespace: knative-serving
+          service: custom-local-gateway.istio-system.svc.cluster.local
 ```
 
 ## Servers configuration for Istio gateways:
@@ -400,7 +421,10 @@ spec:
           - <test-ip>
   config:
     istio:
-      local-gateway.knative-serving.knative-local-gateway: "custom-local-gateway.istio-system.svc.cluster.local"
+      local-gateways: |
+        - name: knative-local-gateway
+          namespace: knative-serving
+          service: custom-local-gateway.istio-system.svc.cluster.local
 ```
 
 ## Customize kourier-bootstrap for Kourier gateways:
