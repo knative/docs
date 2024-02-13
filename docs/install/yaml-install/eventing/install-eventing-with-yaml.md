@@ -200,13 +200,6 @@ Follow the procedure for the Broker of your choice:
     !!! warning
         In order to use the KafkaChannel, ensure that it is installed on your cluster, as mentioned previously in this topic.
 
-=== "RabbitMQ Broker"
-
-    * Install the RabbitMQ Broker by following the instructions in the
-    [RabbitMQ Knative Eventing Broker README](https://github.com/knative-extensions/eventing-rabbitmq/tree/main/broker).
-
-    For more information, see the [RabbitMQ Broker](https://github.com/knative-extensions/eventing-rabbitmq) in GitHub.
-
 ## Install optional Eventing extensions
 
 The following tabs expand to show instructions for installing each Eventing extension.
