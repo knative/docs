@@ -1,17 +1,13 @@
 ---
-Title: 'Knative Trademark Committee Dissolved'
-Author: "[Ali Ok](https://github.com/aliok), on behalf of the [Knative Steering Committee](https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md)"
-Author handle: https://github.com/aliok
-Description: Summary of governance changes that involve dissolving the trademark committee.
-Folder with media files: 'N/A'
-Blog URL: ''
-Labels: Articles
-Reviewers: ''
-date: 2024-02-04
-description: "Trademark Committee Dissolved"
+title: "Knative Trademark Committee Dissolved"
+linkTitle: "Knative Trademark Committee Dissolved"
+date: 2024-02-14
+description: "Summary of governance changes that involve dissolving the trademark committee."
 type: "blog"
 
 ---
+
+**_Author: [Ali Ok](https://github.com/aliok), on behalf of the [Knative Steering Committee](https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md)_**
 
 Knative [joined CNCF](https://knative.dev/blog/steering/cncf/) in 2022, and the
 ownership of the branding and trademark has been transferred to the CNCF.
