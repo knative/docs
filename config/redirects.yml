@@ -209,6 +209,5 @@ plugins:
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/using-an-ssl-cert/index.md: serving/encryption/using-certificates-in-networking-layer.md
       serving/using-subroutes.md: serving/traffic-management.md
-      about/case-studies/README.md: about/case-studies/deepc.md
       eventing/brokers/create-mtbroker.md: eventing/brokers/create-broker.md
       eventing/brokers/broker-admin-config-options.md: eventing/configuration/broker-configuration.md
