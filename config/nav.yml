@@ -313,6 +313,7 @@ nav:
         - Outfit7: about/case-studies/outfit7.md
         - Puppet: about/case-studies/puppet.md
         - PNC Bank: about/case-studies/pnc.md
+        - SVA: about/case-studies/sva.md
     - Community:
       - How To Get Involved: community/README.md
       - Contribute to Knative: community/contributing.md
