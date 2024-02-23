@@ -16,21 +16,9 @@
           </p>
           <div class="trusted-by-container">
             <h3 class="trusted-by">Trusted by</h3>
-            <div id="usedby">
-              <div class="logo">
-                <img src="images/corporate-logos/Google.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo">
-                <img src="images/corporate-logos/vmware.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo">
-                <img src="images/corporate-logos/IBM.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo">
-                <img src="images/corporate-logos/Redhat.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo triggermesh">
-                <img src="images/corporate-logos/triggermesh_logo.svg" alt="" draggable="false" />
+            <div class="scroller">
+              <div class="scroller__inner">
+                  <!-- dynamically rendered -->
               </div>
             </div>
           </div>
@@ -331,17 +319,57 @@
 {% block scripts %}
 {{ super() }}
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const logos = document.getElementById("usedby").getElementsByTagName("div");
-    for (let i = 0; i < logos.length - 1; i++) {
-      // Technically there's a chance two elements end up with the same
-      // random order in which case the result won't be truly random (it'll be based
-      // on the original document order). This really doesn't matter.
-      logos[i].style.order = Math.floor(Math.random() * 99);
+  document.addEventListener("DOMContentLoaded", function() {
+    const adopters = [
+      { logoPath: "images/corporate-logos/Google.svg", url: "https://www.google.com" },
+      { logoPath: "images/corporate-logos/vmware.svg", url: "https://www.vmware.com" },
+      { logoPath: "images/corporate-logos/IBM.svg", url: "https://www.ibm.com" },
+      { logoPath: "images/corporate-logos/Redhat.svg", url: "https://www.redhat.com" },
+      { logoPath: "images/corporate-logos/triggermesh_logo.svg", url: "https://www.triggermesh.com" }
+      
+    ];
+
+    const trustedByContainer = document.querySelector(".trusted-by-container .scroller__inner");
+
+    adopters.forEach(adopter => {
+      const adopterLink = document.createElement("a");
+      adopterLink.href = adopter.url;
+      adopterLink.target = "_blank";
+
+      const adopterImg = document.createElement("img");
+      adopterImg.src = adopter.logoPath;
+      adopterImg.alt = "Adopters";
+      adopterImg.classList.add("logo");
+
+      adopterLink.appendChild(adopterImg);
+      trustedByContainer.appendChild(adopterLink);
+    });
+
+    const scrollers = document.querySelectorAll(".scroller");
+
+    // If a user hasn't opted in for reduced motion, then we add the animation
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      addAnimation();
     }
-    logos[logos.length - 1].style.order = 100;
-  })
+
+    function addAnimation() {
+      scrollers.forEach((scroller) => {
+        scroller.setAttribute("data-animated", true);
+
+        const scrollerInner = scroller.querySelector(".scroller__inner");
+        const scrollerContent = Array.from(scrollerInner.children);
+
+        // For each item in the array, clone it -> add aria-hidden to it -> add it into the `.scroller-inner`
+        scrollerContent.forEach((item) => {
+          const duplicatedItem = item.cloneNode(true);
+          duplicatedItem.setAttribute("aria-hidden", true);
+          scrollerInner.appendChild(duplicatedItem);
+        });
+      });
+    }
+  });
 </script>
+
 {% endblock %}
 
 <!-- Application footer -->
