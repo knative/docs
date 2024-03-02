@@ -150,10 +150,17 @@ h2.secondary-headline, h3.trusted-by {
 .scroller[data-animated="true"] .scroller__inner {
   width: max-content;
   flex-wrap: nowrap;
-  animation: scroll var(--_animation-duration, 40s)
+  animation: scroll var(--_animation-duration, 60s)
     var(--_animation-direction, forwards) linear infinite;
 }
 
+.scroller[data-direction="right"] {
+  --_animation-direction: reverse;
+}
+
+.scroller[data-direction="left"] {
+  --_animation-direction: forwards;
+}
 
 @keyframes scroll {
   to {
@@ -176,18 +183,10 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trusted-by-container .logo img {
-  max-width: 86pt;
-  max-height: 24pt;
+  max-width: 100%;
+  max-height: auto;
 }
 
-.trusted-by-container .logo.triggermesh {
-  width: 162pt;
-}
-
-.trusted-by-container .logo.triggermesh img {
-  max-width: 120pt;
-  height: auto;
-}
 
 .home-container h2 {
   margin-top: 10px;

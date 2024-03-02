@@ -18,7 +18,12 @@
             <h3 class="trusted-by">Trusted by</h3>
             <div class="scroller">
               <div class="scroller__inner">
-                  <!-- dynamically rendered -->
+                  <!-- First row of adopters will be populated dynamically -->
+              </div>
+            </div>
+            <div class="scroller" data-direction="right">
+              <div class="scroller__inner">
+                  <!-- Second row of adopters will be populated dynamically -->
               </div>
             </div>
           </div>
@@ -325,29 +330,59 @@
       { logoPath: "images/corporate-logos/vmware.svg", url: "https://www.vmware.com" },
       { logoPath: "images/corporate-logos/IBM.svg", url: "https://www.ibm.com" },
       { logoPath: "images/corporate-logos/Redhat.svg", url: "https://www.redhat.com" },
-      { logoPath: "images/corporate-logos/triggermesh_logo.svg", url: "https://www.triggermesh.com" }
-      
+      { logoPath: "images/corporate-logos/AlibabaCloud.svg", url: "https://cs.console.aliyun.com/" },
+      { logoPath: "images/corporate-logos/Bloomberg.svg", url: "https://www.bloomberg.net/" },
+      { logoPath: "images/corporate-logos/Blue_Origin.svg", url: "https://www.blueorigin.com/" },
+      { logoPath: "images/corporate-logos/BoxInc.svg", url: "https://box.com/" },
+      { logoPath: "images/corporate-logos/controlplane.svg", url: "https://www.controlplane.com/" },
+      { logoPath: "images/corporate-logos/Gojek.svg", url: "https://www.gojek.com/" },
+      { logoPath: "images/corporate-logos/manomano.svg", url: "https://www.manomano.es/" },
+      { logoPath: "images/corporate-logos/propertyxyz.svg", url: "https://property.xyz/" },
+      { logoPath: "images/corporate-logos/spider.svg", url: "https://www.spider.com/" },
+      { logoPath: "images/corporate-logos/TataCommunications.svg", url: "https://www.tatacommunications.com/solutions/cloud/platforms" },
+      { logoPath: "images/corporate-logos/Y_Meadows.svg", url: "https://www.ymeadows.com/" }
     ];
 
-    const trustedByContainer = document.querySelector(".trusted-by-container .scroller__inner");
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
 
-    adopters.forEach(adopter => {
-      const adopterLink = document.createElement("a");
-      adopterLink.href = adopter.url;
-      adopterLink.target = "_blank";
+    // Shuffle the adopters array
+    shuffle(adopters);
 
-      const adopterImg = document.createElement("img");
-      adopterImg.src = adopter.logoPath;
-      adopterImg.alt = "Adopters";
-      adopterImg.classList.add("logo");
+    const trustedByContainers = document.querySelectorAll(".trusted-by-container .scroller__inner");
 
-      adopterLink.appendChild(adopterImg);
-      trustedByContainer.appendChild(adopterLink);
-    });
+    function populateAdopters(container, adopters) {
+      adopters.forEach(adopter => {
+        const adopterLink = document.createElement("a");
+        adopterLink.href = adopter.url;
+        adopterLink.target = "_blank";
 
-    const scrollers = document.querySelectorAll(".scroller");
+        const adopterImg = document.createElement("img");
+        adopterImg.src = adopter.logoPath;
+        adopterImg.alt = "Adopters";
+        adopterImg.classList.add("logo");
+
+        adopterLink.appendChild(adopterImg);
+        container.appendChild(adopterLink);
+      });
+    }
+
+    const firstRowAdopters = adopters.slice(0, adopters.length / 2);
+    const secondRowAdopters = adopters.slice(adopters.length / 2);
+
+    // Shuffle each row's adopters array independently
+    shuffle(firstRowAdopters);
+    shuffle(secondRowAdopters);
+
+    populateAdopters(trustedByContainers[0], firstRowAdopters);
+    populateAdopters(trustedByContainers[1], secondRowAdopters);
 
     // If a user hasn't opted in for reduced motion, then we add the animation
+    const scrollers = document.querySelectorAll(".scroller");
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       addAnimation();
     }
