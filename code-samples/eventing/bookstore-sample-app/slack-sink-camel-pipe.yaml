@@ -1,0 +1,20 @@
+apiVersion: camel.apache.org/v1
+kind: Pipe
+metadata:
+  name: slack-sink-pipe
+spec:
+  source:
+    ref:
+      kind: Broker
+      apiVersion: eventing.knative.dev/v1
+      name: book-review-broker
+    properties:
+      type: new-review-comment
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1
+      name: slack-sink
+    properties:
+      channel: “#bookstore-owner”
+      webhookUrl: <Your Slack Web Hook to the channel above>
