@@ -15,6 +15,7 @@ The notification service is designed to enhance user engagement by providing tim
 
 - Access to a Kubernetes cluster with Knative Eventing and Serving installed.
 - The Camel K CLI (`kamel`) installed on your local machine.
+- Apache Camel-Kamelets Version 4.4.x or later.
 - A Slack workspace with the ability to create incoming webhooks. You can follow the link here to learn more about how to set up the slack workspace.
 
 [//]: # (# FIXME: Add link to Slack documentation)
