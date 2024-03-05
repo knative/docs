@@ -325,22 +325,32 @@
 {{ super() }}
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    // Suggested size for the logo images = 320x96
     const adopters = [
-      { logoPath: "images/corporate-logos/Google.svg", url: "https://www.google.com" },
-      { logoPath: "images/corporate-logos/vmware.svg", url: "https://www.vmware.com" },
-      { logoPath: "images/corporate-logos/IBM.svg", url: "https://www.ibm.com" },
-      { logoPath: "images/corporate-logos/Redhat.svg", url: "https://www.redhat.com" },
-      { logoPath: "images/corporate-logos/AlibabaCloud.svg", url: "https://cs.console.aliyun.com/" },
-      { logoPath: "images/corporate-logos/Bloomberg.svg", url: "https://www.bloomberg.net/" },
-      { logoPath: "images/corporate-logos/Blue_Origin.svg", url: "https://www.blueorigin.com/" },
-      { logoPath: "images/corporate-logos/BoxInc.svg", url: "https://box.com/" },
-      { logoPath: "images/corporate-logos/controlplane.svg", url: "https://www.controlplane.com/" },
-      { logoPath: "images/corporate-logos/Gojek.svg", url: "https://www.gojek.com/" },
+      { logoPath: "images/corporate-logos/alibaba_cloud.svg", url: "https://cs.console.aliyun.com/" },
+      { logoPath: "images/corporate-logos/bloomberg.svg", url: "https://www.bloomberg.net/" },
+      { logoPath: "images/corporate-logos/blue_origin.svg", url: "https://www.blueorigin.com/" },
+      { logoPath: "images/corporate-logos/box.svg", url: "https://box.com/" },
+      { logoPath: "images/corporate-logos/chainguard.svg", url: "https://chainguard.dev/" },
+      { logoPath: "images/corporate-logos/control_plane.svg", url: "https://www.controlplane.com/" },
+      { logoPath: "images/corporate-logos/deepc.svg", url: "https://www.deepc.ai/" },
+      { logoPath: "images/corporate-logos/fulcrum.svg", url: "https://www.fulcrumapp.com/" },
+      { logoPath: "images/corporate-logos/gojek.svg", url: "https://www.gojek.com/" },
+      { logoPath: "images/corporate-logos/google.svg", url: "https://cloud.google.com/anthos/run" },
+      { logoPath: "images/corporate-logos/ibm.svg", url: "https://cloud.ibm.com/codeengine" },
+      { logoPath: "images/corporate-logos/ka-nabell_japan.svg", url: "https://www.ka-nabell.com/" },
+      { logoPath: "images/corporate-logos/kubesphere.svg", url: "https://kubesphere.io/" },
+      { logoPath: "images/corporate-logos/liquidx.svg", url: "https://www.liquidx.com/" },
       { logoPath: "images/corporate-logos/manomano.svg", url: "https://www.manomano.es/" },
-      { logoPath: "images/corporate-logos/propertyxyz.svg", url: "https://property.xyz/" },
+      { logoPath: "images/corporate-logos/optum.svg", url: "https://optum.com/" },
+      { logoPath: "images/corporate-logos/property_xyz.svg", url: "https://property.xyz/" },
+      { logoPath: "images/corporate-logos/redhat.svg", url: "https://www.openshift.com/learn/topics/serverless" },
+      { logoPath: "images/corporate-logos/scaleway.svg", url: "https://www.scaleway.com/en" },
+      { logoPath: "images/corporate-logos/sonavi_labs.svg", url: "https://www.sonavilabs.com/" },
       { logoPath: "images/corporate-logos/spider.svg", url: "https://www.spider.com/" },
-      { logoPath: "images/corporate-logos/TataCommunications.svg", url: "https://www.tatacommunications.com/solutions/cloud/platforms" },
-      { logoPath: "images/corporate-logos/Y_Meadows.svg", url: "https://www.ymeadows.com/" }
+      { logoPath: "images/corporate-logos/tata_comm.svg", url: "https://www.tatacommunications.com/solutions/cloud/platforms" },
+      { logoPath: "images/corporate-logos/vmware.svg", url: "https://network.tanzu.vmware.com/products/serverless" },
+      { logoPath: "images/corporate-logos/y_meadows.svg", url: "https://www.ymeadows.com/" }
     ];
 
     function shuffle(array) {

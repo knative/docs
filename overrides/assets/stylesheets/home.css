@@ -150,7 +150,7 @@ h2.secondary-headline, h3.trusted-by {
 .scroller[data-animated="true"] .scroller__inner {
   width: max-content;
   flex-wrap: nowrap;
-  animation: scroll var(--_animation-duration, 60s)
+  animation: scroll var(--_animation-duration, 90s)
     var(--_animation-direction, forwards) linear infinite;
 }
 
@@ -183,8 +183,8 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trusted-by-container .logo img {
-  max-width: 100%;
-  max-height: auto;
+  max-width: auto;
+  max-height: 48;
 }
 
 
