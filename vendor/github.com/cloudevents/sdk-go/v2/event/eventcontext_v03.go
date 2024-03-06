@@ -1,3 +1,8 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package event
 
 import (
@@ -14,6 +19,17 @@ const (
 	// CloudEventsVersionV03 represents the version 0.3 of the CloudEvents spec.
 	CloudEventsVersionV03 = "0.3"
 )
+
+var specV03Attributes = map[string]struct{}{
+	"type":                {},
+	"source":              {},
+	"subject":             {},
+	"id":                  {},
+	"time":                {},
+	"schemaurl":           {},
+	"datacontenttype":     {},
+	"datacontentencoding": {},
+}
 
 // EventContextV03 represents the non-data attributes of a CloudEvents v0.3
 // event.
@@ -73,11 +89,17 @@ func (ec EventContextV03) ExtensionAs(name string, obj interface{}) error {
 	}
 }
 
-// SetExtension adds the extension 'name' with value 'value' to the CloudEvents context.
+// SetExtension adds the extension 'name' with value 'value' to the CloudEvents
+// context. This function fails if the name uses a reserved event context key.
 func (ec *EventContextV03) SetExtension(name string, value interface{}) error {
 	if ec.Extensions == nil {
 		ec.Extensions = make(map[string]interface{})
 	}
+
+	if _, ok := specV03Attributes[strings.ToLower(name)]; ok {
+		return fmt.Errorf("bad key %q: CloudEvents spec attribute MUST NOT be overwritten by extension", name)
+	}
+
 	if value == nil {
 		delete(ec.Extensions, name)
 		if len(ec.Extensions) == 0 {
@@ -157,7 +179,8 @@ func (ec EventContextV03) AsV1() *EventContextV1 {
 }
 
 // Validate returns errors based on requirements from the CloudEvents spec.
-// For more details, see https://github.com/cloudevents/spec/blob/master/spec.md
+// For more details, see
+// https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md
 // As of Feb 26, 2019, commit 17c32ea26baf7714ad027d9917d03d2fff79fc7e
 // + https://github.com/cloudevents/spec/pull/387 -> datacontentencoding
 // + https://github.com/cloudevents/spec/pull/406 -> subject
