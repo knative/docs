@@ -25,9 +25,17 @@ This plugin leverages Backstage's [entity provider](https://backstage.io/docs/fe
 
 Plugin fetches Knative EventType, Broker, and Trigger resources from the backend. Actually, it doesn't fetch the resources as is since the Kubernetes resources are not particularly designed for using them in this kind of UI, but it fetches better suited representations of the resources where some fields are ignored, some aggregated, and some transformed.
 
+![](/blog/articles/images/knative-backstage-plugins-01.png)
+*Knative EventTypes shown as APIs in Backstage*
+
 Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/concepts/duck-typing/#addressable) or at even a URL directly. Since Backstage side won't know how to handle these, the plugin will only show the trigger's subscriber if it is already registered in Backstage. For this relation, we use the [`backstage.io/kubernetes-id`](https://backstage.io/docs/features/kubernetes/configuration#surfacing-your-kubernetes-components-as-part-of-an-entity) annotation in the Backstage entity and the Kubernetes resource.
 
 How the matching works is documented with diagrams in the [Event Mesh plugin README file](https://github.com/knative-extensions/backstage-plugins?tab=readme-ov-file#event-mesh-plugin-1).
+
+What's really cool about this integration is that Backstage's ability to show graphs. For example, you can see the relationships between EventTypes, Brokers, and Trigger subscribers in a graph.
+
+![](/blog/articles/images/knative-backstage-plugins-02.png)
+*Graphs in Backstage*
 
 ## Demo and quick start
 
@@ -35,6 +43,9 @@ If you would like to see the plugin in action, you can install the backend in yo
 
 However, if you want a quick look at the plugin, you can check out the [demo video](https://www.youtube.com/watch?v=4h1j1v8KrY0).
 The demo video is recorded with the quick start available in Ali Ok's [demo repository](https://github.com/aliok/knative-backstage-demo).
+
+[![Watch the video](https://img.youtube.com/vi/4h1j1v8KrY0/default.jpg)](https://youtu.be/4h1j1v8KrY0)
+
 
 ## Contributions welcome
 
