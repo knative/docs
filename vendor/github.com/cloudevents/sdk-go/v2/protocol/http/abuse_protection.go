@@ -1,3 +1,8 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package http
 
 import (
@@ -7,6 +12,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type WebhookConfig struct {
@@ -18,6 +24,7 @@ type WebhookConfig struct {
 
 const (
 	DefaultAllowedRate = 1000
+	DefaultTimeout     = time.Second * 600
 )
 
 // TODO: implement rate limiting.
