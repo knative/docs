@@ -44,7 +44,7 @@ If you would like to see the plugin in action, you can install the backend in yo
 However, if you want a quick look at the plugin, you can check out the [demo video](https://www.youtube.com/watch?v=4h1j1v8KrY0).
 The demo video is recorded with the quick start available in Ali Ok's [demo repository](https://github.com/aliok/knative-backstage-demo).
 
-[![Watch the video](https://img.youtube.com/vi/4h1j1v8KrY0/default.jpg)](https://youtu.be/4h1j1v8KrY0)
+[![Watch the video](https://img.youtube.com/vi/4h1j1v8KrY0/maxresdefault.jpg)](https://youtu.be/4h1j1v8KrY0)
 
 
 ## Contributions welcome
