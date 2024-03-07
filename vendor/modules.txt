@@ -10,8 +10,8 @@ cloud.google.com/go/internal/version
 # cloud.google.com/go/storage v1.10.0
 ## explicit; go 1.11
 cloud.google.com/go/storage
-# github.com/cloudevents/sdk-go/v2 v2.2.0
-## explicit; go 1.13
+# github.com/cloudevents/sdk-go/v2 v2.15.2
+## explicit; go 1.18
 github.com/cloudevents/sdk-go/v2
 github.com/cloudevents/sdk-go/v2/binding
 github.com/cloudevents/sdk-go/v2/binding/format
@@ -23,13 +23,9 @@ github.com/cloudevents/sdk-go/v2/event/datacodec
 github.com/cloudevents/sdk-go/v2/event/datacodec/json
 github.com/cloudevents/sdk-go/v2/event/datacodec/text
 github.com/cloudevents/sdk-go/v2/event/datacodec/xml
-github.com/cloudevents/sdk-go/v2/extensions
-github.com/cloudevents/sdk-go/v2/observability
 github.com/cloudevents/sdk-go/v2/protocol
 github.com/cloudevents/sdk-go/v2/protocol/http
 github.com/cloudevents/sdk-go/v2/types
-# github.com/fsnotify/fsnotify v1.4.9
-## explicit; go 1.13
 # github.com/golang/protobuf v1.4.3
 ## explicit; go 1.9
 github.com/golang/protobuf/internal/gengogrpc
@@ -58,6 +54,9 @@ github.com/googleapis/gax-go/v2
 # github.com/hashicorp/golang-lru v0.5.4
 ## explicit; go 1.12
 github.com/hashicorp/golang-lru/simplelru
+# github.com/json-iterator/go v1.1.10
+## explicit; go 1.12
+github.com/json-iterator/go
 # github.com/jstemmer/go-junit-report v0.9.1
 ## explicit; go 1.2
 github.com/jstemmer/go-junit-report
@@ -66,14 +65,12 @@ github.com/jstemmer/go-junit-report/parser
 # github.com/kelseyhightower/envconfig v1.4.0
 ## explicit
 github.com/kelseyhightower/envconfig
-# github.com/lightstep/tracecontext.go v0.0.0-20181129014701-1757c391b1ac
+# github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421
 ## explicit
-github.com/lightstep/tracecontext.go/traceparent
-github.com/lightstep/tracecontext.go/tracestate
-# github.com/onsi/ginkgo v1.12.1
-## explicit; go 1.12
-# github.com/onsi/gomega v1.10.1
+github.com/modern-go/concurrent
+# github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742
 ## explicit
+github.com/modern-go/reflect2
 # go.opencensus.io v0.23.0 => go.opencensus.io v0.20.2
 ## explicit
 go.opencensus.io
@@ -83,7 +80,6 @@ go.opencensus.io/metric/metricdata
 go.opencensus.io/metric/metricproducer
 go.opencensus.io/plugin/ochttp
 go.opencensus.io/plugin/ochttp/propagation/b3
-go.opencensus.io/plugin/ochttp/propagation/tracecontext
 go.opencensus.io/resource
 go.opencensus.io/stats
 go.opencensus.io/stats/internal

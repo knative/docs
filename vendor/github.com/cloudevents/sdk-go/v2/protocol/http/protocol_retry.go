@@ -1,12 +1,19 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package http
 
 import (
+	"bytes"
 	"context"
 	"errors"
-	"go.uber.org/zap"
+	"io"
 	"net/http"
-	"net/url"
 	"time"
+
+	"go.uber.org/zap"
 
 	"github.com/cloudevents/sdk-go/v2/binding"
 	cecontext "github.com/cloudevents/sdk-go/v2/context"
@@ -43,65 +50,77 @@ func (p *Protocol) doOnce(req *http.Request) (binding.Message, protocol.Result) 
 }
 
 func (p *Protocol) doWithRetry(ctx context.Context, params *cecontext.RetryParams, req *http.Request) (binding.Message, error) {
-	then := time.Now()
+	start := time.Now()
 	retry := 0
 	results := make([]protocol.Result, 0)
+
+	var (
+		body []byte
+		err  error
+	)
+
+	if req != nil && req.Body != nil {
+		defer func() {
+			if err = req.Body.Close(); err != nil {
+				cecontext.LoggerFrom(ctx).Warnw("could not close request body", zap.Error(err))
+			}
+		}()
+		body, err = io.ReadAll(req.Body)
+		if err != nil {
+			panic(err)
+		}
+		resetBody(req, body)
+	}
 
 	for {
 		msg, result := p.doOnce(req)
 
 		// Fast track common case.
 		if protocol.IsACK(result) {
-			return msg, NewRetriesResult(result, retry, then, results)
+			return msg, NewRetriesResult(result, retry, start, results)
 		}
 
-		// Try again?
-		//
-		// Make sure the error was something we should retry.
-
-		{
-			var uErr *url.Error
-			if errors.As(result, &uErr) {
-				goto DoBackoff
+		var httpResult *Result
+		if errors.As(result, &httpResult) {
+			sc := httpResult.StatusCode
+			if !p.isRetriableFunc(sc) {
+				cecontext.LoggerFrom(ctx).Debugw("status code not retryable, will not try again",
+					zap.Error(httpResult),
+					zap.Int("statusCode", sc))
+				return msg, NewRetriesResult(result, retry, start, results)
 			}
 		}
-
-		{
-			var httpResult *Result
-			if errors.As(result, &httpResult) {
-				// Potentially retry when:
-				// - 404 Not Found
-				// - 413 Payload Too Large with Retry-After (NOT SUPPORTED)
-				// - 425 Too Early
-				// - 429 Too Many Requests
-				// - 503 Service Unavailable (with or without Retry-After) (IGNORE Retry-After)
-				// - 504 Gateway Timeout
-
-				sc := httpResult.StatusCode
-				if sc == 404 || sc == 425 || sc == 429 || sc == 503 || sc == 504 {
-					// retry!
-					goto DoBackoff
-				} else {
-					// Permanent error
-					cecontext.LoggerFrom(ctx).Debugw("status code not retryable, will not try again",
-						zap.Error(httpResult),
-						zap.Int("statusCode", sc))
-					return msg, NewRetriesResult(result, retry, then, results)
-				}
-			}
-		}
-
-	DoBackoff:
-		// Wait for the correct amount of backoff time.
 
 		// total tries = retry + 1
-		if err := params.Backoff(ctx, retry+1); err != nil {
+		if err = params.Backoff(ctx, retry+1); err != nil {
 			// do not try again.
 			cecontext.LoggerFrom(ctx).Debugw("backoff error, will not try again", zap.Error(err))
-			return msg, NewRetriesResult(result, retry, then, results)
+			return msg, NewRetriesResult(result, retry, start, results)
 		}
 
 		retry++
+		resetBody(req, body)
 		results = append(results, result)
+		if msg != nil {
+			// avoid leak, forget message, ignore error
+			_ = msg.Finish(nil)
+		}
+	}
+}
+
+// reset body to allow it to be read multiple times, e.g. when retrying http
+// requests
+func resetBody(req *http.Request, body []byte) {
+	if req == nil || req.Body == nil {
+		return
+	}
+
+	req.Body = io.NopCloser(bytes.NewReader(body))
+
+	// do not modify existing GetBody function
+	if req.GetBody == nil {
+		req.GetBody = func() (io.ReadCloser, error) {
+			return io.NopCloser(bytes.NewReader(body)), nil
+		}
 	}
 }

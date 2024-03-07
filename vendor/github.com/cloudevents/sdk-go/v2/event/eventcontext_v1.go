@@ -1,7 +1,11 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package event
 
 import (
-	"errors"
 	"fmt"
 	"mime"
 	"sort"
@@ -16,6 +20,17 @@ const (
 	// CloudEventsVersionV1 represents the version 1.0 of the CloudEvents spec.
 	CloudEventsVersionV1 = "1.0"
 )
+
+var specV1Attributes = map[string]struct{}{
+	"id":              {},
+	"source":          {},
+	"type":            {},
+	"datacontenttype": {},
+	"subject":         {},
+	"time":            {},
+	"specversion":     {},
+	"dataschema":      {},
+}
 
 // EventContextV1 represents the non-data attributes of a CloudEvents v1.0
 // event.
@@ -69,11 +84,16 @@ func (ec EventContextV1) ExtensionAs(name string, obj interface{}) error {
 	return fmt.Errorf("unknown extension type %T", obj)
 }
 
-// SetExtension adds the extension 'name' with value 'value' to the CloudEvents context.
-// This function fails if the name doesn't respect the regex ^[a-zA-Z0-9]+$
+// SetExtension adds the extension 'name' with value 'value' to the CloudEvents
+// context. This function fails if the name doesn't respect the regex
+// ^[a-zA-Z0-9]+$ or if the name uses a reserved event context key.
 func (ec *EventContextV1) SetExtension(name string, value interface{}) error {
-	if !IsAlphaNumeric(name) {
-		return errors.New("bad key, CloudEvents attribute names MUST consist of lower-case letters ('a' to 'z') or digits ('0' to '9') from the ASCII character set")
+	if err := validateExtensionName(name); err != nil {
+		return err
+	}
+
+	if _, ok := specV1Attributes[strings.ToLower(name)]; ok {
+		return fmt.Errorf("bad key %q: CloudEvents spec attribute MUST NOT be overwritten by extension", name)
 	}
 
 	name = strings.ToLower(name)
@@ -226,10 +246,8 @@ func (ec EventContextV1) Validate() ValidationError {
 	//  OPTIONAL
 	//  If present, MUST adhere to the format specified in RFC 3986
 	if ec.DataSchema != nil {
-		dataSchema := strings.TrimSpace(ec.DataSchema.String())
-		// empty string is not RFC 3986 compatible.
-		if dataSchema == "" {
-			errors["dataschema"] = fmt.Errorf("if present, MUST adhere to the format specified in RFC 3986")
+		if !ec.DataSchema.Validate() {
+			errors["dataschema"] = fmt.Errorf("if present, MUST adhere to the format specified in RFC 3986, Section 4.3. Absolute URI")
 		}
 	}
 

@@ -1,3 +1,8 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package event
 
 import (
@@ -68,7 +73,7 @@ func (e Event) Data() []byte {
 }
 
 // DataAs attempts to populate the provided data object with the event payload.
-// data should be a pointer type.
+// obj should be a pointer type.
 func (e Event) DataAs(obj interface{}) error {
 	data := e.Data()
 
