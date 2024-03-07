@@ -24,7 +24,3 @@ The sample rows inserted for the BookReviews table are shown below:
 | 2  | 2020-01-02 00:02:00 | This book is terrible!       | negative  |
 | 3  | 2020-01-03 00:01:30 | This book is okay.           | neutral   |
 | 4  | 2020-01-04 00:00:00 | Meh                          | neutral   |
-| 5  | 2020-01-04 00:04:00 | I HATE THIS BOOK!            | negative  |
-| 6  | 2020-01-06 00:00:00 | Best thing I have ever read! | positive  |
-| 7  | 2020-01-07 00:12:00 | ABSOLUTELY LOVELY!           | positive  |
-| 8  | 2020-01-08 00:00:00 | Most boring book I picked up | negative  |
