@@ -192,7 +192,7 @@ nav:
             - Available Broker types: eventing/brokers/broker-types/README.md
             # add default IMC broker page, page explaining broker types
             - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
-            - Apache Kafka: 
+            - Apache Kafka:
               - About Apache Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
               - Configuring Kafka features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
           - Creating a Broker: eventing/brokers/create-broker.md
@@ -309,6 +309,7 @@ nav:
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:
+        - List of Case Studies: about/case-studies/README.md
         - deepc: about/case-studies/deepc.md
         - Outfit7: about/case-studies/outfit7.md
         - Puppet: about/case-studies/puppet.md
