@@ -1,5 +1,4 @@
 CREATE TABLE IF NOT EXISTS book_reviews(
-
   id SERIAL PRIMARY KEY,
   post_time datetime NOT NULL,
   content TEXT NOT NULL,
