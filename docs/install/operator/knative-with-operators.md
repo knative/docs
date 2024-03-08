@@ -161,7 +161,10 @@ Knative Serving with different ingresses:
               # ...
               config:
                 istio:
-                  local-gateway.<local-gateway-namespace>.knative-local-gateway: "knative-local-gateway.<istio-namespace>.svc.cluster.local"
+                  local-gateways: |
+                    - name: knative-local-gateway
+                      namespace: <local-gateway-namespace>
+                      service: knative-local-gateway.<istio-namespace>.svc.cluster.local
             ```
 
             Where:
@@ -512,33 +515,6 @@ see how you can configure Knative Eventing with different event sources:
           # ...
           source:
             kafka:
-              enabled: true
-        ```
-
-    1. Apply the YAML file by running the command:
-
-        ```bash
-        kubectl apply -f <filename>.yaml
-        ```
-
-        Where `<filename>` is the name of the file you created in the previous step.
-
-=== "RabbitMQ"
-
-    To configure Knative Eventing to install RabbitMQ as the event source,
-
-    1. Add `spec.source.rabbitmq` to your Eventing CR YAML file as follows:
-
-        ```yaml
-        apiVersion: operator.knative.dev/v1beta1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        spec:
-          # ...
-          source:
-            rabbitmq:
               enabled: true
         ```
 

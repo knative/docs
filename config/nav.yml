@@ -192,10 +192,9 @@ nav:
             - Available Broker types: eventing/brokers/broker-types/README.md
             # add default IMC broker page, page explaining broker types
             - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
-            - Apache Kafka: 
+            - Apache Kafka:
               - About Apache Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
               - Configuring Kafka features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
-            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
@@ -215,7 +214,6 @@ nav:
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
-          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
           - RedisStreamSource:
             - About RedisStreamSource: eventing/sources/redis/README.md
             - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
@@ -311,10 +309,12 @@ nav:
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:
+        - List of Case Studies: about/case-studies/README.md
         - deepc: about/case-studies/deepc.md
         - Outfit7: about/case-studies/outfit7.md
         - Puppet: about/case-studies/puppet.md
         - PNC Bank: about/case-studies/pnc.md
+        - SVA: about/case-studies/sva.md
     - Community:
       - How To Get Involved: community/README.md
       - Contribute to Knative: community/contributing.md

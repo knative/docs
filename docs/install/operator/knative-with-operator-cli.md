@@ -218,14 +218,6 @@ see how you can configure Knative Eventing with different event sources:
         kn operator enable eventing-source --kafka --namespace knative-eventing
         ```
 
-=== "RabbitMQ"
-
-    1. To install the eventing source RabbitMQ, run the following command:
-
-        ```bash
-        kn operator enable eventing-source --rabbitmq --namespace knative-eventing
-        ```
-
 === "Redis"
 
     1. To install the eventing source Redis, run the following command:
