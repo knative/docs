@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS book_reviews(
   id SERIAL PRIMARY KEY,
-  post_time datetime NOT NULL,
+  post_time timestamp NOT NULL,
   content TEXT NOT NULL,
   sentiment TEXT,
   CONSTRAINT sentiment_check CHECK (sentiment IN ('positive', 'negative', 'neutral')),
