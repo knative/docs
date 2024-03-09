@@ -73,7 +73,7 @@ If the `max-scale-limit` global key is set, Knative ensures that neither the glo
 When `max-scale-limit` is set to a positive value, a revision with a max scale above that value (including 0, which means unlimited) is disallowed.
 
 * **Global key:** `max-scale`
-* **Per-revision annotation key:** `autoscaling.knative.dev/max-scale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/maxScale`
 * **Possible values:** integer
 * **Default:** `0` which means unlimited
 
@@ -90,7 +90,7 @@ When `max-scale-limit` is set to a positive value, a revision with a max scale a
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/max-scale: "3"
+            autoscaling.knative.dev/maxScale: "3"
         spec:
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
