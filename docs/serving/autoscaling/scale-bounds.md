@@ -11,7 +11,7 @@ This value controls the minimum number of replicas that each Revision should hav
 Knative will attempt to never have less than this number of replicas at any one point in time.
 
 * **Global key:** `min-scale`
-* **Per-revision annotation key:** `autoscaling.knative.dev/min-scale`
+* **Per-revision annotation key:** `autoscaling.knative.dev/minScale`
 * **Possible values:** integer
 * **Default:** `0` if scale-to-zero is enabled and class KPA is used, `1` otherwise
 
@@ -31,7 +31,7 @@ Knative will attempt to never have less than this number of replicas at any one 
       template:
         metadata:
           annotations:
-            autoscaling.knative.dev/min-scale: "3"
+            autoscaling.knative.dev/minScale: "3"
         spec:
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
@@ -221,8 +221,8 @@ before a scale-down decision is applied. This can be useful, for example, to
 keep containers around for a configurable duration to avoid a cold start
 penalty if new requests come in. Unlike setting a lower bound, the revision
 will eventually be scaled down if reduced concurrency is maintained for the
-delay period. 
-!!! note 
+delay period.
+!!! note
     Only supported for the default KPA autoscaler class.
 
 * **Global key:** `scale-down-delay`

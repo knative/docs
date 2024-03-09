@@ -37,7 +37,7 @@ Create the CloudEvents Player Service:
           template:
             metadata:
               annotations:
-                autoscaling.knative.dev/min-scale: "1"
+                autoscaling.knative.dev/minScale: "1"
             spec:
               containers:
                 - image: quay.io/ruben/cloudevents-player:latest
