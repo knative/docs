@@ -1,10 +1,9 @@
 # Bookstore Notification Service: with Apache Camel K and Knative Eventing
 
-This guide details how to implement a notification service within a bookstore web application that leverages Apache Camel K, Knative, and Slack. This setup enables the bookstore to send automated notifications to a designated Slack channel when specific events occur, such as the submission of a negative review or an announcement within the application.
 
-## Overview
-
-The notification service is designed to enhance user engagement by providing timely updates through Slack notifications. It integrates with external APIs to send these notifications and uses event-driven triggers to initiate them based on user actions or system events.
+As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new review comment. By leveraging Knative Eventing and Apache Camel K, you can set up an event-driven service that automates these notifications, ensuring you're always informed.
+## What feature does this code sample show?
+- Knative's ability to connect with third-party services, such as Slack, through event-driven integration using Apache Camel K.
 
 ## What does the final deliverable look like?
 1. You send a CloudEvent with the review comment to the broker that matches the criteria set in the Slack sink configuration.
@@ -44,7 +43,9 @@ Camel K installed in namespace default
 ```
 ### Step 2: Create the Broker
 
-Initialize a default broker within your Kubernetes cluster using the Knative CLI:
+This broker is created solely for testing purposes and is intended for temporary use during this part of the tutorial only. 
+
+**Method 1**: Initialize a broker within your Kubernetes cluster using the Knative CLI:
 
 ```bash
 $ kn broker create book-review-broker
@@ -54,37 +55,63 @@ You will see this message if the broker is created successfully:
 ```
 Broker ‘book-review-broker’ successfully created in namespace ‘default’.
 ```
+**Method 2**: You can create a new YAML file to create the broker:
+
+*new-knative-broker.yaml*
+```yaml
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: book-review-broker
+  namespace: default
+```
+After you saved the file, you can apply the configuration to your Kubernetes cluster:
+
+```bash
+$ kubectl apply -f new-knative-broker.yaml
+```
+You will see this message if the broker is created successfully:
+
+```
+broker.eventing.knative.dev/book-review-broker created
+```
+
 
 ### Step 3: Configure the Slack Sink
+
+We use a feature called "Pipe" in Camel K to link event sources and destinations. Specifically, the Pipe connects events from a Broker, our source, to a Slack channel through a Slack sink Kamelet, our destination. This setup automatically sends notifications to Slack whenever new events occur, streamlining the flow of information.
+
 
 1. Create a Slack app and generate an incoming webhook URL for your designated channel where notifications will be sent. Refer to Slack documentation for how to do this.
 
 2. Prepare the YAML configuration for the Slack sink, which will forward events to your Slack channel:
 
+*slack-sink.yaml*
 ```yaml
-apiVersion: camel.apache.org/v1
-kind: Pipe
+apiVersion: camel.apache.org/v1  # Specifies the API version of Camel K.
+kind: Pipe  # This resource type is a Pipe, a custom Camel K resource for defining integration flows.
 metadata:
-  name: bookstore-notification-service
+  name: bookstore-notification-service  # The name of the Pipe, which identifies this particular integration flow.
 spec:
-  source:
+  source:  # Defines the source of events for the Pipe.
     ref:
-      kind: Broker
-      apiVersion: eventing.knative.dev/v1
-      name: default
+      kind: Broker  # Specifies the kind of source, in this case, a Knative Eventing Broker.
+      apiVersion: eventing.knative.dev/v1  # The API version of the Knative Eventing Broker.
+      name: book-review-broker  # The name of the Broker, "book-review-broker" in this case
     properties:
-      type: new-review-comment
-  sink:
+      type: new-review-comment  # A filter that specifies the type of events this Pipe will listen for, here it's listening for events of type "new-review-comment". You have to have this type specified.
+  sink:  # Defines the destination for events processed by this Pipe.
     ref:
-      kind: Kamelet
-      apiVersion: camel.apache.org/v1
-      name: slack-sink
+      kind: Kamelet  # Specifies that the sink is a Kamelet, a Camel K component for connecting to external services.
+      apiVersion: camel.apache.org/v1  # The API version for Kamelet.
+      name: slack-sink  # The name of the Kamelet to use as the sink, in this case, a predefined "slack-sink" Kamelet.
     properties:
-      channel: “#bookstore-owner”
-      webhookUrl: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
+      channel: “#bookstore-owner”  # The Slack channel where notifications will be sent.
+      webhookUrl: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"  # The Webhook URL provided by Slack for posting messages to a specific channel.
+
 ```
 
-Make sure to replace `#your-channel` and the `webhookUrl` with your actual Slack channel name and webhook URL.
+Make sure to replace the `webhookUrl` with your actual Slack channel name and webhook URL.
 
 
 3. Apply the configuration to your Kubernetes cluster:
@@ -112,10 +139,24 @@ slack-sink-pipe   Ready      1
 
 To trigger notifications, you'll need to simulate an event that matches the criteria set in your Slack sink configuration. For example, submitting a book review could be an event of type `new-review-comment`.
 
-```bash
-$ kubectl exec -it curler -- /bin/bash
+Directly sending CloudEvents to a broker using curl from an external machine (like your local computer) is typically **constrained** due to the networking and security configurations of Kubernetes clusters.
 
-curl -v "<The URI to your broker>" \
+Therefore, you need to create a new pod in your Kubernetes cluster to send a CloudEvent to the broker. You can use the following command to create a new pod:
+
+```bash
+$ kubectl run curler --image=radial/busyboxplus:curl -it --restart=Never
+```
+You will see this message if you successfully entered the pod's shell
+
+```
+If you don't see a command prompt, try pressing enter.
+[root@curler:/]$ 
+```
+
+
+Using curl command to send a CloudEvent to the broker:
+```bash
+[root@curler:/]$ curl -v "<The URI to your broker>" \
 -X POST \
 -H "Ce-Id: review1" \
 -H "Ce-Specversion: 1.0" \
@@ -134,7 +175,7 @@ NAME                 URL                                                        
 book-review-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/book-review-broker   5m37s   True
 ```
 
+Wait a few seconds, and you should see a notification in your Slack channel. Congratulations! You have successfully set up the notification service for your bookstore.
 ## Conclusion
 
-By following these steps, you have integrated a notification service into your bookstore web application that leverages Apache Camel K and Knative to send event-driven notifications to a Slack channel. This service enhances user engagement by keeping them informed about important events within the bookstore application.
-
+In this tutorial, you learned how to set up an event-driven service that automates notifications to a Slack channel using Knative Eventing and Apache Camel K. By leveraging these technologies, you can easily connect your applications to third-party services, and pass information between them in real-time. 
