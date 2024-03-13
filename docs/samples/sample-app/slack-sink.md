@@ -21,12 +21,11 @@ When a CloudEvent with the type `new-review-comment` is sent to the Knative Even
 Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html).
 
 ??? bug "Having issues installing `kamel`?"
+    If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
 
-        If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
-    
-            ```bash
-                $ export PATH=$PATH:<path-to-kamel-binary>
-            ```
+        ```bash
+            $ export PATH=$PATH:<path-to-kamel-binary>
+        ```
 
 
 
