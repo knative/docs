@@ -8,7 +8,8 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 When a CloudEvent with the type `new-review-comment` is sent to the Knative Eventing Broker, it triggers a message to be sent in a designated Slack channel.
 ## Prerequisites
 
-[//]: # (Warning box: please make sure you have a running cluster with Knative Eventing and Serving installed. If not, click here.)
+!!! warning
+    Please make sure you have a running cluster with Knative Eventing and Serving installed. If not, click here.
 - [The Camel K CLI (`kamel`) installed on your local machine.](#prerequisite-1-install-camel-cli)
 - [Apache Camel-Kamelets Version 4.4.x or later.](#prerequisite-2-install-apache-camel-kamelets)
 - [A Slack workspace with the ability to create incoming webhooks.](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url)
@@ -19,11 +20,14 @@ When a CloudEvent with the type `new-review-comment` is sent to the Knative Even
 ### Prerequisite 1: Install Camel CLI
 Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html).
 
-**Troubleshot**: If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
+??? bug "Having issues installing `kamel`?"
 
-```bash
-$ export PATH=$PATH:<path-to-kamel-binary>
-```
+        If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
+    
+            ```bash
+                $ export PATH=$PATH:<path-to-kamel-binary>
+            ```
+
 
 
 ### Prerequisite 2: Install Apache Camel-Kamelets
