@@ -7,13 +7,6 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 
 ## What does the final deliverable look like?
 When a CloudEvent with the type `new-review-comment` is sent to the Knative Eventing Broker, it triggers a message to be sent in a designated Slack channel.
-## Prerequisites
-
-[//]: # (Warning box: please make sure you have a running cluster with Knative Eventing and Serving installed. If not, click here.)
-- [The Camel K CLI (`kamel`) installed on your local machine.](#prerequisite-1-install-camel-cli)
-- [Apache Camel-Kamelets Version 4.4.x or later.](#prerequisite-2-install-apache-camel-kamelets)
-- [A Slack workspace with the ability to create incoming webhooks.](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url)
-
 
 ## Install prerequisites
 
