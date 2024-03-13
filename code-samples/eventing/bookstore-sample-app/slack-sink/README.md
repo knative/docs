@@ -2,29 +2,32 @@
 
 
 As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new review comment. By leveraging Knative Eventing and Apache Camel K, you can set up an event-driven service that automates these notifications, ensuring you're always informed.
-## What feature does this code sample show?
+## What Knative features will we learn about?
 - Knative's ability to connect with third-party services, such as Slack, through event-driven integration using Apache Camel K.
 
 ## What does the final deliverable look like?
-1. You send a CloudEvent with the review comment to the broker that matches the criteria set in the Slack sink configuration.
-2. The Slack sink consumes the CloudEvent and sends a notification to the designated Slack channel.
-3. The notification appears in the Slack channel, informing the bookstore owner about the new review comment.
-
+When a CloudEvent with the type `new-review-comment` is sent to the Knative Eventing Broker, it triggers a message to be sent in a designated Slack channel.
 ## Prerequisites
 
-- Access to a Kubernetes cluster with Knative Eventing and Serving installed.
-- The Camel K CLI (`kamel`) installed on your local machine.
-- Apache Camel-Kamelets Version 4.4.x or later.
-- A Slack workspace with the ability to create incoming webhooks. You can follow the link here to learn more about how to set up the slack workspace.
+[//]: # (Warning box: please make sure you have a running cluster with Knative Eventing and Serving installed. If not, click here.)
+- [The Camel K CLI (`kamel`) installed on your local machine.](#prerequisite-1-install-camel-cli)
+- [Apache Camel-Kamelets Version 4.4.x or later.](#prerequisite-2-install-apache-camel-kamelets)
+- [A Slack workspace with the ability to create incoming webhooks.](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url)
 
-[//]: # (# FIXME: Add link to Slack documentation)
 
-## Installation Steps
+## Install prerequisites
 
-### Step 1: Install Knative and Camel K
+### Prerequisite 1: Install Camel CLI
+Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html).
 
-Ensure that Knative Eventing and Serving are installed on your Kubernetes cluster. Follow the official [Knative quickstart guide](https://knative.dev/docs/install/quickstart-install/) if necessary. Use the kn quick start command to install both Knative Eventing and Knative Serving components on your Kubernetes cluster is an easy way.
+**Troubleshot**: If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
 
+```bash
+$ export PATH=$PATH:<path-to-kamel-binary>
+```
+
+
+### Prerequisite 2: Install Apache Camel-Kamelets
 Next, install Camel K on your cluster using the Camel K CLI:
 
 ```bash
@@ -41,7 +44,11 @@ You will see this message if the installation is successful:
 OLM is not available in the cluster. Fallback to regular installation.
 Camel K installed in namespace default
 ```
-### Step 2: Create the Broker
+### Prerequisite 3: Create a Slack App and Generate an Incoming Webhook URL
+Follow the instruction here on how to create the slack workspace and generate an incoming webhook URL for your designated channel where notifications will be sent.
+
+## Implementation
+### Step 1: Create the Broker
 
 This broker is created solely for testing purposes and is intended for temporary use during this part of the tutorial only. 
 
@@ -77,7 +84,7 @@ broker.eventing.knative.dev/book-review-broker created
 ```
 
 
-### Step 3: Configure the Slack Sink
+### Step 2: Configure the Slack Sink
 
 We use a feature called "Pipe" in Camel K to link event sources and destinations. Specifically, the Pipe connects events from a Broker, our source, to a Slack channel through a Slack sink Kamelet, our destination. This setup automatically sends notifications to Slack whenever new events occur, streamlining the flow of information.
 
@@ -135,7 +142,7 @@ slack-sink-pipe   Ready      1
 
 
 
-### Step 4: Testing by Triggering Notifications
+### Step 3: Testing by Triggering Notifications
 
 To trigger notifications, you'll need to simulate an event that matches the criteria set in your Slack sink configuration. For example, submitting a book review could be an event of type `new-review-comment`.
 
