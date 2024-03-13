@@ -20,7 +20,7 @@ When a CloudEvent with the type `new-review-comment` is sent to the Knative Even
 ### Prerequisite 1: Install Camel CLI
 Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html).
 
-??? bug "Having issues installing `kamel`?"
+??? bug "Having issues installing `kamel`? Command not found?"
     If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
             $ export PATH=$PATH:<path-to-kamel-binary>
         
@@ -54,8 +54,8 @@ This broker is created solely for testing purposes and is intended for temporary
 
 **Method 1**: Initialize a broker within your Kubernetes cluster using the Knative CLI:
 
-```bash
-$ kn broker create book-review-broker
+```shell
+kn broker create book-review-broker
 ```
 You will see this message if the broker is created successfully:
 
@@ -64,8 +64,7 @@ Broker ‘book-review-broker’ successfully created in namespace ‘default’.
 ```
 **Method 2**: You can create a new YAML file to create the broker:
 
-*new-knative-broker.yaml*
-```yaml
+```yaml title="new-knative-broker.yaml"
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
@@ -75,7 +74,7 @@ metadata:
 After you saved the file, you can apply the configuration to your Kubernetes cluster:
 
 ```bash
-$ kubectl apply -f new-knative-broker.yaml
+kubectl apply -f new-knative-broker.yaml
 ```
 You will see this message if the broker is created successfully:
 
