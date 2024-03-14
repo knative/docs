@@ -12,8 +12,8 @@ def create_cloud_event(data):
     sentiment = json.dumps({"result": data})
 
     attributes = {
-    "type": "com.example.myevent",
-    "source": "https://example.com/myevent",
+    "type": "knative.sampleapp.sentiment.response",
+    "source": "sentiment-analysis",
     }
     data = {"result": sentiment}
 
