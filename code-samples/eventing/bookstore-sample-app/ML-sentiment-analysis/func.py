@@ -3,6 +3,24 @@ from flask import Request,request, jsonify
 import json
 from textblob import TextBlob
 from time import sleep
+from cloudevents.http import CloudEvent, to_structured
+
+
+# The function to convert the sentiment analysis result into a CloudEvent
+def create_cloud_event(data):
+    # Put the sentiment into a JSON object
+    sentiment = json.dumps({"result": data})
+
+    attributes = {
+    "type": "com.example.myevent",
+    "source": "https://example.com/myevent",
+    }
+    data = {"result": sentiment}
+
+    # Create a CloudEvent object
+    event = CloudEvent(attributes, data)
+
+    return event
 
 def analyze_sentiment(data):
    text = data['input']
@@ -13,12 +31,18 @@ def analyze_sentiment(data):
    elif analysis.sentiment.polarity < 0:
        sentiment = "Negative"
 
-    # Put the sentiment into a JSON object
-    sentiment = json.dumps({"result": sentiment})
+    # Convert the sentiment into a CloudEvent
+   sentiment = create_cloud_event(sentiment)
 
-    # Sleep for 5 seconds to simulate a long-running process
-    sleep(3)
-   return sentiment
+    # serialize the CloudEvent to a structured JSON object, the returned value is binary
+   headers, body = to_structured(sentiment)
+
+   # Sleep for 3 seconds to simulate a long-running process
+   sleep(3)
+
+    # Return the sentiment as a JSON object
+   body_json = json.loads(body.decode())
+   return body_json
 
 def main(context: Context):
     """ 
