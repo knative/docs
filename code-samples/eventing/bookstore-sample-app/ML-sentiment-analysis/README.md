@@ -26,8 +26,12 @@ You can follow the [official documentation](https://knative.dev/docs/getting-sta
 Running `func version` to verify the installation, and you should see the version of the `func` CLI you installed.
 
 ## Implementation
-The workflow is simple:
-You use func to create the code template, you fill out your own code, you run func deploy to deploy your application to the cluster.
+The process is straightforward:
+- Begin by utilizing the `func create` command to generate your code template.
+- Next, incorporate your unique code into this template.
+- Finally, execute `func deploy` to deploy your application seamlessly to the Kubernetes cluster.
+
+This workflow ensures a smooth transition from development to deployment within the Knative Functions ecosystem.
 
 [//]: # (Troubleshooting: if you see command not found, you may need to add the `func` CLI to your PATH.)
 ### Step 1: Create a Knative Function template
