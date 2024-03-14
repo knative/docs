@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgresql-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: postgresql-client
+          image: quay.io/enterprisedb/postgresql
+          command: ["psql", "-h", "postgresql", "-U", "myuser", "-d", "mydatabase", "-f", "/sql/sample.sql"]
+          env:
+            - name: PGPASSWORD
+              value: mypassword
+          volumeMounts:
+            - name: sql-volume
+              mountPath: /sql
+      restartPolicy: Never
+      volumes:
+        - name: sql-volume
+          configMap:
+            name: sql-configmap
+  backoffLimit: 4
