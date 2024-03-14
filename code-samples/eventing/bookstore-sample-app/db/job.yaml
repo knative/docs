@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: make-sample-table
+spec:
+  template:
+    spec:
+      containers:
+      - name: postgres-client
+        image: postgres:latest
+        command: ["psql", "-h", "postgresql", "-U", "myuser", "-d", "mydatabase", "-f", "/tmp/sample.sql", "-p", "5432", "-W"]
+        env:
+        - name: PGPASSWORD
+          value: mypassword
+        volumeMounts:
+        - name: sql-files
+          mountPath: /tmp
+          readOnly: true
+      restartPolicy: Never
+      volumes:
+      - name: sql-files
+        configMap:
+          name: sample-sql-configmap
+  backoffLimit: 4

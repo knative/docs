@@ -1,9 +1,9 @@
-CREATE TABLE IF NOT EXISTS book_reviews(
+CREATE TABLE IF NOT EXISTS book_reviews (
   id SERIAL PRIMARY KEY,
   post_time timestamp NOT NULL,
   content TEXT NOT NULL,
   sentiment TEXT,
-  CONSTRAINT sentiment_check CHECK (sentiment IN ('positive', 'negative', 'neutral')),
+  CONSTRAINT sentiment_check CHECK (sentiment IN ('positive', 'negative', 'neutral'))
 );
 
 INSERT INTO book_reviews (post_time, content, sentiment) VALUES 
