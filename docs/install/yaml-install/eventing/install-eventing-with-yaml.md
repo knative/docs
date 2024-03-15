@@ -202,8 +202,6 @@ Follow the procedure for the Broker of your choice:
 
 === "RabbitMQ Broker"
 
-    ⚠️ The component is deprecated and will no longer be shipped in future releases. For a timeline see: https://github.com/knative/eventing/issues/7670
-
     * Install the RabbitMQ Broker by following the instructions in the
     [RabbitMQ Knative Eventing Broker README](https://github.com/knative-extensions/eventing-rabbitmq/tree/main/broker).
 
