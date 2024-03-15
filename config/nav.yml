@@ -195,6 +195,7 @@ nav:
             - Apache Kafka:
               - About Apache Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
               - Configuring Kafka features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
+            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
@@ -214,6 +215,7 @@ nav:
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
+          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
           - RedisStreamSource:
             - About RedisStreamSource: eventing/sources/redis/README.md
             - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
