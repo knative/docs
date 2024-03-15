@@ -1,7 +1,6 @@
 # Sentiment Analysis Service for Bookstore Reviews
 
-Transform how you interpret customer feedback with our Sentiment Analysis Service, specifically designed for bookstore owners. This serverless solution using a library to simulate machine learning models to categorize review comments by sentiment: positive, neutral, or negative. 
-
+As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new **negative** review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple sentiment analysis service to categorize review comments by sentiment.
 ## What Knative features will we learn about?
 
 - The easiness to use **Knative Function** to deploy your service, and make it be managed by **Knative Serving**, which give you the ability to auto-scale your service to zero, and scale up to handle the demand.
@@ -20,10 +19,10 @@ The function's output will be only from
 ### Prerequisite 1: Install Knative `func` CLI
 Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured) by using the func CLI.
 
-In order to deploy your application to your Kubernetes cluster easily with Knative Function, you need to install the `func` CLI.
+In order to do so, you need to install the `func` CLI.
 You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/) to install the `func` CLI.
 
-Running `func version` to verify the installation, and you should see the version of the `func` CLI you installed.
+Running `func version` in your terminal to verify the installation, and you should see the version of the `func` CLI you installed.
 
 ## Implementation
 The process is straightforward:
@@ -49,6 +48,8 @@ func create -l python sentiment-analysis
 ```
 
 This command will create a new directory with the name `sentiment-analysis` and a bunch of files in it. The `func` CLI will generate a basic function template for you to start with.
+
+You can find all the supported languages templates [here](https://knative.dev/docs/functions/).
 
 The file tree will look like this:
 ```bash
@@ -140,7 +141,7 @@ textblob==0.18.0.post0
 parliament-functions==0.1.0
 cloudevents
 ```
-Knative function will automatically install the dependencies when you build the function.
+Knative function will automatically install the dependencies listed here when you build the function.
 
 ### Step 4: Configre the pre-built environment
 In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`,
@@ -179,10 +180,10 @@ setup(
 
 
 ### Step 5: Try to build and run your Knative Function on your local machine
-After you have finished the code, you can build and run your function using the following command:
 
-In knative function, there are two ways to build: using the pack build or using the s2i build. 
-Currently. only the s2i build is supported if you need to run setup.py. When building with s2i, the setup.py file will be executed automatically after the dependencies have been installed.
+In knative function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46) or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43). 
+
+Currently. only the **s2i** build is supported if you need to run setup.py. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
 
 Before we get started, configure the container registry to push the image to the container registry. You can use the following command to configure the container registry:
 
@@ -190,7 +191,7 @@ Before we get started, configure the container registry to push the image to the
 export FUNC_REGISTRY=<your-container-registry>
 ```
 
-In this case, we will use the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43) by using the flag `-b=s2i`, and -v to see the verbose output.
+In this case, we will use the s2i build by adding the flag `-b=s2i`, and `-v` to see the verbose output.
 
 ```bash
 func build -b=s2i -v
