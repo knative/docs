@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image:  quay.io/enterprisedb/postgresql
+          image: quay.io/enterprisedb/postgresql
           env:
             - name: POSTGRES_DB
               value: mydatabase
@@ -24,3 +24,10 @@ spec:
               value: mypassword
           ports:
             - containerPort: 5432
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc

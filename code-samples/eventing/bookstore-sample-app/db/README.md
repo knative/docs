@@ -34,16 +34,20 @@ ii. [kind quickstart](https://kind.sigs.k8s.io/docs/user/quick-start/)
 2. Set up the configmap to link the sample.sql file
 `kubectl create configmap sql-configmap --from-file=sample.sql`
 
-3. Create the deployment pod for the Postgres server
+3. Stand up the Persistent Volume Claim for Postgres server
+`kubectl apply -f PVC.yaml`
+
+4. Create the deployment pod for the Postgres server
 `kubectl apply -f deployment.yaml`
 
-4. Expose the port for the Postgres server
+5. Expose the port for the Postgres server
 `kubectl apply -f service.yaml`
 
-5. Run the job for executing the queries from sample.sql
+6. Run the job for executing the queries from sample.sql
 `kubectl apply -f job.yaml`
 
-6. To interact with the Postgres server
-i. `kubectl exec -it (deployment pod name) -- /bin/bash`
-ii. `psql -h postgresql -U myuser -d mydatabase`
-iii. Use `mypassword` when prompted
+7. To interact with the database
+i. Get the deployment pod name: `kubectl get pods -l app=postgresql`
+ii. `kubectl exec -it (deployment pod name) -- /bin/bash`
+iii. `psql -h postgresql -U myuser -d mydatabase`
+iv. Use `mypassword` when prompted for the password
