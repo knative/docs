@@ -526,6 +526,33 @@ see how you can configure Knative Eventing with different event sources:
 
         Where `<filename>` is the name of the file you created in the previous step.
 
+=== "RabbitMQ"
+
+    To configure Knative Eventing to install RabbitMQ as the event source,
+
+    1. Add `spec.source.rabbitmq` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            rabbitmq:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
 === "Redis"
 
     To configure Knative Eventing to install Redis as the event source:
