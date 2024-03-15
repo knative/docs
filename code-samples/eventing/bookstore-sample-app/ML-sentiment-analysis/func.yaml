@@ -1,10 +1,10 @@
 specVersion: 0.35.0
 name: sentiment-analysis-app
 runtime: python
-registry: docker.io/leo6leoredhat2
-image: docker.io/leo6leoredhat2/sentiment-analysis-app:latest
-imageDigest: sha256:0b2cc5dacfc15dfb019fa5476a89aa608e2214634f3e707e1a2d78ed6c87731c
-created: 2024-03-12T00:18:00.06485162-04:00
+registry: <your docker registry>
+image: <Your docker registry>/sentiment-analysis-app:latest
+imageDigest: sha256:0bc*****d3c
+created: 2024-02-31T00:18:00.06485162-04:00
 build:
   builder: s2i
 deploy:
