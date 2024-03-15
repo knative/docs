@@ -3,7 +3,7 @@
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
 
 --8<-- "prerequisites.md"
---8<-- "security-prereqs-images.md"
+{% include "security-prereqs-images.md" %}
 
 ## Install Knative Eventing
 
@@ -199,6 +199,13 @@ Follow the procedure for the Broker of your choice:
 
     !!! warning
         In order to use the KafkaChannel, ensure that it is installed on your cluster, as mentioned previously in this topic.
+
+=== "RabbitMQ Broker"
+
+    * Install the RabbitMQ Broker by following the instructions in the
+    [RabbitMQ Knative Eventing Broker README](https://github.com/knative-extensions/eventing-rabbitmq/tree/main/broker).
+
+    For more information, see the [RabbitMQ Broker](https://github.com/knative-extensions/eventing-rabbitmq) in GitHub.
 
 ## Install optional Eventing extensions
 

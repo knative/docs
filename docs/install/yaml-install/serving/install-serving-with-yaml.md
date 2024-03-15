@@ -3,7 +3,7 @@
 This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.
 
 --8<-- "prerequisites.md"
---8<-- "security-prereqs-images.md"
+{% include "security-prereqs-images.md" %}
 
 ## Install the Knative Serving component
 
