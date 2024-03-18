@@ -68,38 +68,30 @@ sentiment-analysis
 `func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
 
 ```python title="func.py"
-# parliament is a library that provides a simple way to interact with CloudEvents in Python.
 from parliament import Context
-
 from flask import Request,request, jsonify
 import json
-
-# Import the TextBlob library for sentiment analysis
 from textblob import TextBlob
 from time import sleep
-
-# Import the CloudEvent and to_structured classes from the cloudevents package
 from cloudevents.http import CloudEvent, to_structured
-
 
 # The function to convert the sentiment analysis result into a CloudEvent
 def create_cloud_event(data):
-    # Put the sentiment into a JSON object
-    sentiment = json.dumps({"result": data})
-
     attributes = {
-    "type": "sentiment-analysis-result",
-    "source": "sentiment-analysis-service",
+    "type": "knative.sampleapp.sentiment.response",
+    "source": "sentiment-analysis",
+    "datacontenttype": "application/json",
     }
-    data = {"result": sentiment}
+    
+    # Put the sentiment analysis result into a dictionary
+    data = {"result": data}
 
     # Create a CloudEvent object
     event = CloudEvent(attributes, data)
 
     return event
 
-def analyze_sentiment(data):
-   text = data['input']
+def analyze_sentiment(text):
    analysis = TextBlob(text)
    sentiment = "Neutral"
    if analysis.sentiment.polarity > 0:
@@ -107,18 +99,13 @@ def analyze_sentiment(data):
    elif analysis.sentiment.polarity < 0:
        sentiment = "Negative"
 
-    # Convert the sentiment into a CloudEvent
+   # Convert the sentiment into a CloudEvent
    sentiment = create_cloud_event(sentiment)
-
-    # serialize the CloudEvent to a structured JSON object, the returned value is binary
-   headers, body = to_structured(sentiment)
 
    # Sleep for 3 seconds to simulate a long-running process
    sleep(3)
 
-    # Return the sentiment as a JSON object
-   body_json = json.loads(body.decode())
-   return body_json
+   return sentiment
 
 def main(context: Context):
     """ 
@@ -127,8 +114,10 @@ def main(context: Context):
     CloudEvent received with the request.
     """
 
+    print("Received CloudEvent: ", context.cloud_event)
+
     # Add your business logic here
-    return analyze_sentiment(context.cloud_event.data), 200
+    return analyze_sentiment(context.cloud_event.data)
 
 ```
 
@@ -227,22 +216,40 @@ curl -X POST http://localhost:8080/ \
 -H "ce-type: sentiment-analysis-request" \
 -H "ce-specversion: 1.0" \
 -H "Content-Type: application/json" \
--d '{"input": "I love Knative so much!"}'
+-d '"i love knative"'\
 ```
+where `-H` are the headers, and `-d` is the input text. The input text is a **sting**. Be careful with the quotes.
 
-If the function is running successfully, you will see the following output:
+If the function is running successfully, you will see the following output (the `data` field in the Response CloudEvent only):
 
 ```bash
 {
-  "data": {
-    "result": "{\"result\": \"Positive\"}"
-  },
-  "id": "7b774892-f989-4252-a6b2-f2923a6c8246",
-  "source": "sentiment-analysis",
-  "specversion": "1.0",
-  "time": "2024-02-31T18:42:52.096270+00:00",
-  "type": "knative.sampleapp.sentiment.response"
+  "result": "Positive"
 }
+```
+
+Knative function also have an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent:
+
+```bash
+func invoke -f=cloudevent --data="i love knative commmunity so much!" -v 
+```
+where the `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`, and the `--data` flag is the input text.
+You can read more about `func invoke` [here](https://github.com/knative/func/blob/main/docs/reference/func_invoke.md).
+
+In this case, you will get the full CloudEvent response:
+
+```bash
+Context Attributes,
+  specversion: 1.0
+  type: knative.sampleapp.sentiment.response
+  source: sentiment-analysis
+  id: af0c0f59-9130-4a6c-96ef-6d72c2f4ce50
+  time: 2024-02-31T18:48:00.232436Z
+  datacontenttype: application/json
+Data,
+  {
+    "result": "Positive"
+  }
 
 ```
 
@@ -256,18 +263,66 @@ func deploy -b=s2i -v
 When the deployment is complete, you will see the following output:
 
 ```bash
-🙌 Deployed function: <Your container registry username>/sentiment-analysis-app:latest
+✅ Function updated in namespace "default" and exposed at URL: 
+   http://sentiment-analysis-app.default.svc.cluster.local
+```
+
+You can also find the URL by running the following command:
+
+```bash
+kubectl get kservice -A 
+```
+
+You will see the URL in the output:
+
+```bash
+NAMESPACE   NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
+default     sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00002   sentiment-analysis-app-00002   True    
 ```
 
 ### Step 7: Verify the Deployment
 After deployment, the `func` CLI provides a URL to access your function. You can verify the function's operation by sending a request with a sample review comment.
+
+Simply use Knative function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
+
+```bash
+func invoke -f=cloudevent --data="i love knative community so much" -v -t="http://sentiment-analysis-app.default.svc.cluster.local"
+```
+
+- `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`
+- `--data` flag is the input text
+- `-t` flag is the URI to the Knative Function.
+
+If the function is running successfully, you will see the following output:
+
+```bash
+Context Attributes,
+  specversion: 1.0
+  type: knative.sampleapp.sentiment.response
+  source: sentiment-analysis
+  id: 6a246e0c-2b24-4f22-93c4-f1265c569b2d
+  time: 2024-02-31T19:03:50.434822Z
+  datacontenttype: application/json
+Data,
+  {
+    "result": "Positive"
+  }
+```
+
+---
+Recall note box: you can get the URL to the function by running the following command:
+```bash
+kubectl get kservice -A 
+```
+---
+Another option is to use curl to send a CloudEvent to the function.
 
 But directly sending CloudEvents to a Knative service using curl from an external machine (like your local computer) is typically **constrained** due to the networking and security configurations of Kubernetes clusters.
 
 Therefore, you need to create a new pod in your Kubernetes cluster to send a CloudEvent to the Knative Function service. You can use the following command to create a new pod:
 
 ```bash
-$ kubectl run curler --image=radial/busyboxplus:curl -it --restart=Never
+kubectl run curler --image=radial/busyboxplus:curl -it --restart=Never
 ```
 You will see this message if you successfully entered the pod's shell
 
@@ -275,7 +330,16 @@ You will see this message if you successfully entered the pod's shell
 If you don't see a command prompt, try pressing enter.
 [root@curler:/]$ 
 ```
+---
+FAQ box on the website:
+Error from server (AlreadyExists): pods "curler" already exists
 
+If you see this error, it means that the pod already exists. You can delete the pod using the following command:
+You can directly enter the pod's shell using the following command:
+```bash
+kubectl exec -it curler -- /bin/sh
+```
+---
 
 Using curl command to send a CloudEvent to the broker:
 ```bash
@@ -286,21 +350,14 @@ Using curl command to send a CloudEvent to the broker:
 -H "ce-type: sentiment-analysis-request" \
 -H "ce-specversion: 1.0" \
 -H "Content-Type: application/json" \
--d '{"input": "I love Knative so much! Sent to the cluster"}'
+-d '"I love Knative so much! Sent to the cluster"'
 ```
 
 Expect to receive a JSON response indicating the sentiment classification of the input text.
 
 ```bash
 {
-  "data": {
-    "result": "{\"result\": \"Positive\"}"
-  },
-  "id": "7b774892-f989-4252-a6b2-f2923a6c8246",
-  "source": "sentiment-analysis",
-  "specversion": "1.0",
-  "time": "2024-02-31T18:42:52.096270+00:00",
-  "type": "knative.sampleapp.sentiment.response"
+  "result": "Positive"
 }
 ```
 If you see the response, it means that the function is running successfully.
