@@ -4,7 +4,7 @@
 
 **Date: 2024-03-19**
 
-_In this blog post you will learn how to recognize when activator is on the data path and what it triggers that behavior._
+_In this blog post, you will learn how to recognize when the activator is on the data path and what triggers that behavior._
 
 The [activator](https://github.com/knative/serving/tree/main/docs/scaling#activator) acts as a component on the data path to enable traffic buffering when a service is scaled to zero.
 One lesser-known feature of the activator is that it can act as a request buffer that handles back pressure, protecting a Knative service from overloading.
@@ -12,11 +12,11 @@ For this, a Knative service can define how much traffic it can handle using [ann
 The autoscaler component will use this information to calculate the number of pods needed to handle the incoming traffic for a specific Knative service.
 
 In detail, when serving traffic, a Knative service can operate in two modes: the `proxy` mode and the `serve` mode.
-When in proxy mode, activator is on the data path (which means the incoming requests are routed through the activator component), and it will stay on the path until certain conditions are met (more on this later).
-If these conditions are met, activator will be removed from the data path, and the service will transition to serve mode.
+When in proxy mode, the activator is on the data path (which means the incoming requests are routed through the activator component), and it will stay on the path until certain conditions are met (more on this later).
+If these conditions are met, the activator will be removed from the data path, and the service will transition to serve mode.
 For example, when a service scales from/to zero, the activator is added to the data path by default.
 This default setting often confuses users, as the activator will not be removed from the path unless enough capacity is available.
-This is by intention, as one of the activator's roles is to offer back pressure capabilities so that a Knative service is not overloaded by incoming traffic.
+This is by intention, as one of the activator's roles (as mentioned above) is to offer back pressure capabilities so that a Knative service is not overloaded by incoming traffic.
 
 ## Background
 
@@ -27,10 +27,10 @@ Once the user creates a new service the corresponding Knative reconciler creates
 Then the Configuration reconciler creates a `Revision` resource and the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
 The Route reconciler will create the `Ingress` resource that will be picked up by the Knative net-* components responsible for managing traffic locally in the cluster and externally to the cluster.
 
-Now, the creation of the PA triggers the KPA reconciler, which goes through certain steps in order to set up an autoscaling configuration for the revision:
+Now, the creation of the PA triggers the KPA reconciler, which goes through certain steps to set up an autoscaling configuration for the revision:
 
 - creates an internal Decider resource that holds the initial desired scale in `decider.Status.DesiredScale`and
-sets up a pod scaler via the multi-scaler component. The pod scaler calculates a new Scale result every two seconds and makes a decision based on the condition `decider.Status.DesiredScale != scaledResult.DesiredPodCount` whether to trigger a new reconciliation for the KPA reconciler. Goal is the KPA to get the latest scale result.
+  sets up a pod scaler via the multi-scaler component. The pod scaler calculates a new Scale result every two seconds and makes a decision based on the condition `decider.Status.DesiredScale != scaledResult.DesiredPodCount` whether to trigger a new reconciliation for the KPA reconciler. The goal is the KPA to get the latest scale result.
 
 - creates a Metric resource that triggers the metrics collector controller to set up a scraper for the revision pods.
 
@@ -44,7 +44,7 @@ sets up a pod scaler via the multi-scaler component. The pod scaler calculates a
 !!! note
 
     The SKS create/update event above triggers a reconciliation for the SKS from its specific controller that creates the required public and private K8s services so traffic can be routed to the raw K8s deployment.
-    Also, in the proxy mode the SKS controller will pick up the number of activators and configure an equal number of endpoints for the revision's [public service](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md#data-flow-examples).
+    Also, in the proxy mode, the SKS controller will pick up the number of activators and configure an equal number of endpoints for the revision's [public service](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md#data-flow-examples).
     In combination with the networking setup done by the net-* components (driven by the Ingress resource), this is roughly the end-to-end networking setup that needs to happen for a ksvc to be ready to serve traffic.
 
 
@@ -108,7 +108,7 @@ spec:
       - image: ghcr.io/knative/autoscale-go:latest
 ```
 
-The scenario we are going to demonstrate is to deploy the ksvc, let it scale down to zero and then send traffic for 10 minutes.
+The scenario we are going to demonstrate is to deploy the ksvc, let it scale down to zero, then send traffic for 10 minutes.
 We then collect the logs from the autoscaler and visualize the EBC values, ready pods, and panic mode over time.
 The graphs are shown next.
 
