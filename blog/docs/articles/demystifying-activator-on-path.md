@@ -2,11 +2,11 @@
 
 **Author: [Stavros Kontopoulos](https://twitter.com/s_kontopoulos), Principal Software Engineer @ RedHat**
 
-**Date: 2023-11-14**
+**Date: 2024-03-19**
 
 _In this blog post you will learn how to recognize when activator is on the data path and what it triggers that behavior._
 
-The activator acts as a component on the data path to enable traffic buffering when a service is scaled-to-zero.
+The [activator](https://github.com/knative/serving/tree/main/docs/scaling#activator) acts as a component on the data path to enable traffic buffering when a service is scaled-to-zero.
 One lesser known feature of activator is, that it can act as a request buffer that handles back-pressure with the goal to not overload a Knative service.
 For this, a Knative service can define how much traffic it can handle using [annotations](https://knative.dev/docs/serving/autoscaling/autoscaling-targets/#configuring-targets).
 The autoscaler component will use this information to calculate the amount of pods needed to handle the incoming traffic for a specific Knative service
@@ -128,11 +128,11 @@ autoscale-go-00001   Proxy   2            autoscale-go-00001   autoscale-go-0000
 When the pod is up we have:
 
 ```bash
-$ oc get po
+$ kubectl get po
 NAME                                             READY   STATUS    RESTARTS   AGE
 autoscale-go-00001-deployment-6cc679b9d6-xgrkf   2/2     Running   0          24s
 
-$ oc get sks
+$ kubectl get sks
 NAME                 MODE    ACTIVATORS   SERVICENAME          PRIVATESERVICENAME           READY   REASON
 autoscale-go-00001   Serve   2            autoscale-go-00001   autoscale-go-00001-private   True    
 ```
@@ -140,13 +140,10 @@ autoscale-go-00001   Serve   2            autoscale-go-00001   autoscale-go-0000
 The reason why we are in Serve mode is that because EBC=0. When you enable debug logs, in the logs you get:
 
 ```
-  "severity": "DEBUG",
+  ...
   "timestamp": "2023-10-10T15:29:37.241575214Z",
   "logger": "autoscaler",
-  "caller": "scaling/autoscaler.go:286",
   "message": "PodCount=1 Total1PodCapacity=10.000 ObsStableValue=0.000 ObsPanicValue=0.000 TargetBC=10.000 ExcessBC=0.000",
-  "commit": "f1617ef",
-  "knative.dev/key": "default/autoscale-go-00001"
 ```
 
 EBC = 10 - 0 - 10 = 0
@@ -161,7 +158,7 @@ NAME                 MODE    ACTIVATORS   SERVICENAME          PRIVATESERVICENAM
 autoscale-go-00001   Proxy   2            autoscale-go-00001   autoscale-go-00001-private   Unknown   NoHealthyBackends
 ```
 
-Let's send some traffic (experiment was run on Minikube):
+Let's send some traffic (experiment was run on Minikube and hey tool was used for generating the traffic):
 
 ```bash
 hey -z 600s -c 20 -q 1 -host "autoscale-go.default.example.com" "http://192.168.39.43:32718?sleep=1000"
@@ -170,88 +167,55 @@ hey -z 600s -c 20 -q 1 -host "autoscale-go.default.example.com" "http://192.168.
 Initially activator when get a request in it sends stats to the autoscaler which tries to scale from zero based on some initial scale (default 1):
 
 ```
-  "severity": "DEBUG",
+  ...
   "timestamp": "2023-10-10T15:32:56.178498172Z",
   "logger": "autoscaler.stats-websocket-server",
   "caller": "statserver/server.go:193",
   "message": "Received stat message: {Key:default/autoscale-go-00001 Stat:{PodName:activator-59dff6d45c-9rdxh AverageConcurrentRequests:1 AverageProxiedConcurrentRequests:0 RequestCount:1 ProxiedRequestCount:0 ProcessUptime:0 Timestamp:0}}",
-  "commit": "f1617ef",
   "address": ":8080"
-
-  "severity": "DEBUG",
-  "timestamp": "2023-10-10T15:32:56.178733422Z",
-  "logger": "autoscaler",
-  "caller": "statforwarder/processor.go:64",
-  "message": "Accept stat as owner of bucket autoscaler-bucket-00-of-01",
-  "commit": "f1617ef",
-  "bucket": "autoscaler-bucket-00-of-01",
-  "knative.dev/key": "default/autoscale-go-00001"
 ```
 
 The autoscaler enters panic mode since we don't have enough capacity, EBS is 10*0 -1 -10 = -11
 ```
-  "severity": "DEBUG",
+  ...
   "timestamp": "2023-10-10T15:32:56.178920551Z",
   "logger": "autoscaler",
   "caller": "scaling/autoscaler.go:286",
   "message": "PodCount=0 Total1PodCapacity=10.000 ObsStableValue=1.000 ObsPanicValue=1.000 TargetBC=10.000 ExcessBC=-11.000",
-  "commit": "f1617ef",
-  "knative.dev/key": "default/autoscale-go-00001"
 
-  "severity": "INFO",
   "timestamp": "2023-10-10T15:32:57.24099875Z",
   "logger": "autoscaler",
   "caller": "scaling/autoscaler.go:215",
-  "message": "PANICKING.",
-  "commit": "f1617ef",
-  "knative.dev/key": "default/autoscale-go-00001"
-
+  "message": "PANICKING."
 ```
 Later on as traffic continues we get proper statistics from activator closer to the rate:
 
 ```
-   "severity":"DEBUG",
+   ...
    "timestamp":"2023-10-10T15:32:56.949001622Z",
    "logger":"autoscaler.stats-websocket-server",
-   "caller":"statserver/server.go:193",
    "message":"Received stat message: {Key:default/autoscale-go-00001 Stat:{PodName:activator-59dff6d45c-9rdxh AverageConcurrentRequests:18.873756322609804 AverageProxiedConcurrentRequests:0 RequestCount:19 ProxiedRequestCount:0 ProcessUptime:0 Timestamp:0}}",
-   "commit":"f1617ef",
    "address":":8080"
 
-   "severity":"INFO",
+   ...
    "timestamp":"2023-10-10T15:32:56.432854252Z",
    "logger":"autoscaler",
    "caller":"kpa/kpa.go:188",
    "message":"Observed pod counts=kpa.podCounts{want:1, ready:0, notReady:1, pending:1, terminating:0}",
-   "commit":"f1617ef",
-   "knative.dev/controller":"knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler",
-   "knative.dev/kind":"autoscaling.internal.knative.dev.PodAutoscaler",
-   "knative.dev/traceid":"7988492e-eea3-4d19-bf5a-8762cf5ff8eb",
-   "knative.dev/key":"default/autoscale-go-00001"
 
-   "severity":"DEBUG",
+   ...
    "timestamp":"2023-10-10T15:32:57.241052566Z",
    "logger":"autoscaler",
-   "caller":"scaling/autoscaler.go:286",
    "message":"PodCount=0 Total1PodCapacity=10.000 ObsStableValue=19.874 ObsPanicValue=19.874 TargetBC=10.000 ExcessBC=-30.000",
-   "commit":"f1617ef",
-   "knative.dev/key":"default/autoscale-go-00001"
 ```
 Since the pod is not up yet: EBS = 0*10 - floor(19.874) - 10 = -30
 
 Given the new statistics kpa decides to scale to 3 pods at some point.
 
 ```
-  "severity": "INFO",
   "timestamp": "2023-10-10T15:32:57.241421042Z",
   "logger": "autoscaler",
-  "caller": "kpa/scaler.go:370",
   "message": "Scaling from 1 to 3",
-  "commit": "f1617ef",
-  "knative.dev/controller": "knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler",
-  "knative.dev/kind": "autoscaling.internal.knative.dev.PodAutoscaler",
-  "knative.dev/traceid": "6dcf87c9-15d8-41d3-95ae-5ca9b3d90705",
-  "knative.dev/key": "default/autoscale-go-00001"
 ```
 
 But let's see why is this is the case. The log above comes from the multi-scaler which reports a scaled result that contains EBS as reported above and a desired pod count for different windows.
@@ -264,25 +228,15 @@ In this case the target value is 0.7*10=10. So we have for example for the panic
 As metrics get stabilized and revision is scaled enough we have:
 
 ```
-  "severity": "INFO",
   "timestamp": "2023-10-10T15:33:01.320912032Z",
   "logger": "autoscaler",
   "caller": "kpa/kpa.go:158",
   "message": "SKS should be in Serve mode: want = 3, ebc = 0, #act's = 2 PA Inactive? = false",
-  "commit": "f1617ef",
-  "knative.dev/controller": "knative.dev.serving.pkg.reconciler.autoscaling.kpa.Reconciler",
-  "knative.dev/kind": "autoscaling.internal.knative.dev.PodAutoscaler",
-  "knative.dev/traceid": "f0d22038-130a-4560-bd67-2751ecf3975d",
-  "knative.dev/key": "default/autoscale-go-00001"
-
-
-  "severity": "DEBUG",
-  "timestamp": "2023-10-10T15:33:03.24101879Z",
+  
+  ...
   "logger": "autoscaler",
   "caller": "scaling/autoscaler.go:286",
   "message": "PodCount=3 Total1PodCapacity=10.000 ObsStableValue=16.976 ObsPanicValue=15.792 TargetBC=10.000 ExcessBC=4.000",
-  "commit": "f1617ef",
-  "knative.dev/key": "default/autoscale-go-00001"
 ```
 
 EBS = 3*10 - floor(15.792) - 10 = 4
@@ -290,24 +244,17 @@ EBS = 3*10 - floor(15.792) - 10 = 4
 Then when we reach the required pod count and metrics are stable we get EBC=3*10 - floor(19.968) - 10=0:
 
 ```
-  "severity": "DEBUG",
   "timestamp": "2023-10-10T15:33:59.24118625Z",
   "logger": "autoscaler",
-  "caller": "scaling/autoscaler.go:286",
   "message": "PodCount=3 Total1PodCapacity=10.000 ObsStableValue=19.602 ObsPanicValue=19.968 TargetBC=10.000 ExcessBC=0.000",
-  "commit": "f1617ef",
-  "knative.dev/key": "default/autoscale-go-00001"
 ```
 
 A few seconds later, one minute after we get in panicking mode we get to stable mode (un-panicking):
 
 ```
-  "severity": "INFO",
   "timestamp": "2023-10-10T15:34:01.240916706Z",
   "logger": "autoscaler",
-  "caller": "scaling/autoscaler.go:223",
   "message": "Un-panicking.",
-  "commit": "f1617ef",
   "knative.dev/key": "default/autoscale-go-00001"
 ```
 
