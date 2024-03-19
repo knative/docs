@@ -107,7 +107,7 @@ func validateMessageDeclarations(ms []filedesc.Message, mds []*descriptorpb.Desc
 		if isMessageSet && !flags.ProtoLegacy {
 			return errors.New("message %q is a MessageSet, which is a legacy proto1 feature that is no longer supported", m.FullName())
 		}
-		if isMessageSet && (m.Syntax() != protoreflect.Proto2 || m.Fields().Len() > 0 || m.ExtensionRanges().Len() == 0) {
+		if isMessageSet && (m.Syntax() == protoreflect.Proto3 || m.Fields().Len() > 0 || m.ExtensionRanges().Len() == 0) {
 			return errors.New("message %q is an invalid proto1 MessageSet", m.FullName())
 		}
 		if m.Syntax() == protoreflect.Proto3 {
@@ -239,6 +239,9 @@ func validateExtensionDeclarations(xs []filedesc.Extension, xds []*descriptorpb.
 			return errors.New("extension field %q has an invalid cardinality: %d", x.FullName(), x.Cardinality())
 		}
 		if xd.JsonName != nil {
+			// A bug in older versions of protoc would always populate the
+			// "json_name" option for extensions when it is meaningless.
+			// When it did so, it would always use the camel-cased field name.
 			if xd.GetJsonName() != strs.JSONCamelCase(string(x.Name())) {
 				return errors.New("extension field %q may not have an explicitly set JSON name: %q", x.FullName(), xd.GetJsonName())
 			}
@@ -311,8 +314,8 @@ func checkValidGroup(fd protoreflect.FieldDescriptor) error {
 	switch {
 	case fd.Kind() != protoreflect.GroupKind:
 		return nil
-	case fd.Syntax() != protoreflect.Proto2:
-		return errors.New("invalid under proto2 semantics")
+	case fd.Syntax() == protoreflect.Proto3:
+		return errors.New("invalid under proto3 semantics")
 	case md == nil || md.IsPlaceholder():
 		return errors.New("message must be resolvable")
 	case fd.FullName().Parent() != md.FullName().Parent():
