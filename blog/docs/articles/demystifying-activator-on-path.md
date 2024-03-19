@@ -1,4 +1,4 @@
-# Demystifying Activator on path
+# Demystifying Activator on the data path
 
 **Author: [Stavros Kontopoulos](https://www.linkedin.com/in/stavroskontopoulos), Principal Software Engineer @ RedHat**
 
