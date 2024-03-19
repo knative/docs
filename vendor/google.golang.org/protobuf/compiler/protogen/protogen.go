@@ -5,15 +5,14 @@
 // Package protogen provides support for writing protoc plugins.
 //
 // Plugins for protoc, the Protocol Buffer compiler,
-// are programs which read a CodeGeneratorRequest message from standard input
-// and write a CodeGeneratorResponse message to standard output.
+// are programs which read a [pluginpb.CodeGeneratorRequest] message from standard input
+// and write a [pluginpb.CodeGeneratorResponse] message to standard output.
 // This package provides support for writing plugins which generate Go code.
 package protogen
 
 import (
 	"bufio"
 	"bytes"
-	"encoding/binary"
 	"fmt"
 	"go/ast"
 	"go/parser"
@@ -21,7 +20,6 @@ import (
 	"go/token"
 	"go/types"
 	"io/ioutil"
-	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -38,18 +36,19 @@ import (
 	"google.golang.org/protobuf/reflect/protoregistry"
 
 	"google.golang.org/protobuf/types/descriptorpb"
+	"google.golang.org/protobuf/types/dynamicpb"
 	"google.golang.org/protobuf/types/pluginpb"
 )
 
-const goPackageDocURL = "https://developers.google.com/protocol-buffers/docs/reference/go-generated#package"
+const goPackageDocURL = "https://protobuf.dev/reference/go/go-generated#package"
 
 // Run executes a function as a protoc plugin.
 //
-// It reads a CodeGeneratorRequest message from os.Stdin, invokes the plugin
-// function, and writes a CodeGeneratorResponse message to os.Stdout.
+// It reads a [pluginpb.CodeGeneratorRequest] message from [os.Stdin], invokes the plugin
+// function, and writes a [pluginpb.CodeGeneratorResponse] message to [os.Stdout].
 //
 // If a failure occurs while reading or writing, Run prints an error to
-// os.Stderr and calls os.Exit(1).
+// [os.Stderr] and calls [os.Exit](1).
 func (opts Options) Run(f func(*Plugin) error) {
 	if err := run(opts, f); err != nil {
 		fmt.Fprintf(os.Stderr, "%s: %v\n", filepath.Base(os.Args[0]), err)
@@ -165,8 +164,6 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 
 	packageNames := make(map[string]GoPackageName) // filename -> package name
 	importPaths := make(map[string]GoImportPath)   // filename -> import path
-	mfiles := make(map[string]bool)                // filename set
-	var packageImportPath GoImportPath
 	for _, param := range strings.Split(req.GetParameter(), ",") {
 		var value string
 		if i := strings.Index(param, "="); i >= 0 {
@@ -176,8 +173,6 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 		switch param {
 		case "":
 			// Ignore.
-		case "import_path":
-			packageImportPath = GoImportPath(value)
 		case "module":
 			gen.module = value
 		case "paths":
@@ -199,16 +194,13 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 			}
 		default:
 			if param[0] == 'M' {
-				if i := strings.Index(value, ";"); i >= 0 {
-					pkgName := GoPackageName(value[i+1:])
-					if otherName, ok := packageNames[param[1:]]; ok && pkgName != otherName {
-						return nil, fmt.Errorf("inconsistent package names for %q: %q != %q", value[:i], pkgName, otherName)
-					}
+				impPath, pkgName := splitImportPathAndPackageName(value)
+				if pkgName != "" {
 					packageNames[param[1:]] = pkgName
-					value = value[:i]
 				}
-				importPaths[param[1:]] = GoImportPath(value)
-				mfiles[param[1:]] = true
+				if impPath != "" {
+					importPaths[param[1:]] = impPath
+				}
 				continue
 			}
 			if opts.ParamFunc != nil {
@@ -218,17 +210,12 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 			}
 		}
 	}
-	if gen.module != "" {
-		// When the module= option is provided, we strip the module name
-		// prefix from generated files. This only makes sense if generated
-		// filenames are based on the import path, so default to paths=import
-		// and complain if source_relative was selected manually.
-		switch gen.pathType {
-		case pathTypeLegacy:
-			gen.pathType = pathTypeImport
-		case pathTypeSourceRelative:
-			return nil, fmt.Errorf("cannot use module= with paths=source_relative")
-		}
+
+	// When the module= option is provided, we strip the module name
+	// prefix from generated files. This only makes sense if generated
+	// filenames are based on the import path.
+	if gen.module != "" && gen.pathType == pathTypeSourceRelative {
+		return nil, fmt.Errorf("cannot use module= with paths=source_relative")
 	}
 
 	// Figure out the import path and package name for each file.
@@ -243,119 +230,53 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 	//
 	//     option go_package = "google.golang.org/protobuf/types/known/anypb";
 	//
-	// Build systems which want to exert full control over import paths may
-	// specify M<filename>=<import_path> flags.
-	//
-	// Other approaches are not recommend.
-	generatedFileNames := make(map[string]bool)
-	for _, name := range gen.Request.FileToGenerate {
-		generatedFileNames[name] = true
-	}
-	// We need to determine the import paths before the package names,
-	// because the Go package name for a file is sometimes derived from
-	// different file in the same package.
-	packageNameForImportPath := make(map[GoImportPath]GoPackageName)
+	// Alternatively, build systems which want to exert full control over
+	// import paths may specify M<filename>=<import_path> flags.
 	for _, fdesc := range gen.Request.ProtoFile {
+		// The "M" command-line flags take precedence over
+		// the "go_package" option in the .proto source file.
 		filename := fdesc.GetName()
-		packageName, importPath := goPackageOption(fdesc)
-		switch {
-		case importPaths[filename] != "":
-			// Command line: Mfoo.proto=quux/bar
-			//
-			// Explicit mapping of source file to import path.
-		case generatedFileNames[filename] && packageImportPath != "":
-			// Command line: import_path=quux/bar
-			//
-			// The import_path flag sets the import path for every file that
-			// we generate code for.
-			importPaths[filename] = packageImportPath
-		case importPath != "":
-			// Source file: option go_package = "quux/bar";
-			//
-			// The go_package option sets the import path. Most users should use this.
-			importPaths[filename] = importPath
-		default:
-			// Source filename.
-			//
-			// Last resort when nothing else is available.
-			importPaths[filename] = GoImportPath(path.Dir(filename))
+		impPath, pkgName := splitImportPathAndPackageName(fdesc.GetOptions().GetGoPackage())
+		if importPaths[filename] == "" && impPath != "" {
+			importPaths[filename] = impPath
 		}
-		if packageName != "" {
-			packageNameForImportPath[importPaths[filename]] = packageName
-		}
-	}
-	for _, fdesc := range gen.Request.ProtoFile {
-		filename := fdesc.GetName()
-		packageName, importPath := goPackageOption(fdesc)
-		defaultPackageName := packageNameForImportPath[importPaths[filename]]
-		switch {
-		case packageNames[filename] != "":
-			// A package name specified by the "M" command-line argument.
-		case packageName != "":
-			// TODO: For the "M" command-line argument, this means that the
-			// package name can be derived from the go_package option.
-			// Go package information should either consistently come from the
-			// command-line or the .proto source file, but not both.
-			// See how to make this consistent.
-
-			// Source file: option go_package = "quux/bar";
-			packageNames[filename] = packageName
-		case defaultPackageName != "":
-			// A go_package option in another file in the same package.
-			//
-			// This is a poor choice in general, since every source file should
-			// contain a go_package option. Supported mainly for historical
-			// compatibility.
-			packageNames[filename] = defaultPackageName
-		case generatedFileNames[filename] && packageImportPath != "":
-			// Command line: import_path=quux/bar
-			packageNames[filename] = cleanPackageName(path.Base(string(packageImportPath)))
-		case fdesc.GetPackage() != "":
-			// Source file: package quux.bar;
-			packageNames[filename] = cleanPackageName(fdesc.GetPackage())
-		default:
-			// Source filename.
-			packageNames[filename] = cleanPackageName(baseName(filename))
-		}
-
-		goPkgOpt := string(importPaths[filename])
-		if path.Base(string(goPkgOpt)) != string(packageNames[filename]) {
-			goPkgOpt += ";" + string(packageNames[filename])
+		if packageNames[filename] == "" && pkgName != "" {
+			packageNames[filename] = pkgName
 		}
 		switch {
-		case packageImportPath != "":
-			// Command line: import_path=quux/bar
-			warn("Deprecated use of the 'import_path' command-line argument. In %q, please specify:\n"+
-				"\toption go_package = %q;\n"+
-				"A future release of protoc-gen-go will no longer support the 'import_path' argument.\n"+
-				"See "+goPackageDocURL+" for more information.\n"+
-				"\n", fdesc.GetName(), goPkgOpt)
-		case mfiles[filename]:
-			// Command line: M=foo.proto=quux/bar
-		case packageName != "" && importPath == "":
-			// Source file: option go_package = "quux";
-			warn("Deprecated use of 'go_package' option without a full import path in %q, please specify:\n"+
-				"\toption go_package = %q;\n"+
-				"A future release of protoc-gen-go will require the import path be specified.\n"+
-				"See "+goPackageDocURL+" for more information.\n"+
-				"\n", fdesc.GetName(), goPkgOpt)
-		case packageName == "" && importPath == "":
-			// No Go package information provided.
-			dotIdx := strings.Index(goPkgOpt, ".")   // heuristic for top-level domain
-			slashIdx := strings.Index(goPkgOpt, "/") // heuristic for multi-segment path
-			if isFull := 0 <= dotIdx && dotIdx <= slashIdx; isFull {
-				warn("Missing 'go_package' option in %q, please specify:\n"+
-					"\toption go_package = %q;\n"+
-					"A future release of protoc-gen-go will require this be specified.\n"+
-					"See "+goPackageDocURL+" for more information.\n"+
-					"\n", fdesc.GetName(), goPkgOpt)
-			} else {
-				warn("Missing 'go_package' option in %q,\n"+
-					"please specify it with the full Go package path as\n"+
-					"a future release of protoc-gen-go will require this be specified.\n"+
-					"See "+goPackageDocURL+" for more information.\n"+
-					"\n", fdesc.GetName())
+		case importPaths[filename] == "":
+			// The import path must be specified one way or another.
+			return nil, fmt.Errorf(
+				"unable to determine Go import path for %q\n\n"+
+					"Please specify either:\n"+
+					"\t• a \"go_package\" option in the .proto source file, or\n"+
+					"\t• a \"M\" argument on the command line.\n\n"+
+					"See %v for more information.\n",
+				fdesc.GetName(), goPackageDocURL)
+		case !strings.Contains(string(importPaths[filename]), ".") &&
+			!strings.Contains(string(importPaths[filename]), "/"):
+			// Check that import paths contain at least a dot or slash to avoid
+			// a common mistake where import path is confused with package name.
+			return nil, fmt.Errorf(
+				"invalid Go import path %q for %q\n\n"+
+					"The import path must contain at least one period ('.') or forward slash ('/') character.\n\n"+
+					"See %v for more information.\n",
+				string(importPaths[filename]), fdesc.GetName(), goPackageDocURL)
+		case packageNames[filename] == "":
+			// If the package name is not explicitly specified,
+			// then derive a reasonable package name from the import path.
+			//
+			// NOTE: The package name is derived first from the import path in
+			// the "go_package" option (if present) before trying the "M" flag.
+			// The inverted order for this is because the primary use of the "M"
+			// flag is by build systems that have full control over the
+			// import paths all packages, where it is generally expected that
+			// the Go package name still be identical for the Go toolchain and
+			// for custom build systems like Bazel.
+			if impPath == "" {
+				impPath = importPaths[filename]
 			}
+			packageNames[filename] = cleanPackageName(path.Base(string(impPath)))
 		}
 	}
 
@@ -379,6 +300,8 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 		}
 	}
 
+	// The extracted types from the full import set
+	typeRegistry := newExtensionRegistry()
 	for _, fdesc := range gen.Request.ProtoFile {
 		filename := fdesc.GetName()
 		if gen.FilesByPath[filename] != nil {
@@ -390,6 +313,9 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 		}
 		gen.Files = append(gen.Files, f)
 		gen.FilesByPath[filename] = f
+		if err = typeRegistry.registerAllExtensionsFromFile(f.Desc); err != nil {
+			return nil, err
+		}
 	}
 	for _, filename := range gen.Request.FileToGenerate {
 		f, ok := gen.FilesByPath[filename]
@@ -397,6 +323,20 @@ func (opts Options) New(req *pluginpb.CodeGeneratorRequest) (*Plugin, error) {
 			return nil, fmt.Errorf("no descriptor for generated file: %v", filename)
 		}
 		f.Generate = true
+	}
+
+	// Create fully-linked descriptors if new extensions were found
+	if typeRegistry.hasNovelExtensions() {
+		for _, f := range gen.Files {
+			b, err := proto.Marshal(f.Proto.ProtoReflect().Interface())
+			if err != nil {
+				return nil, err
+			}
+			err = proto.UnmarshalOptions{Resolver: typeRegistry}.Unmarshal(b, f.Proto)
+			if err != nil {
+				return nil, err
+			}
+		}
 	}
 	return gen, nil
 }
@@ -482,7 +422,7 @@ type File struct {
 	// of "dir/foo". Appending ".pb.go" produces an output file of "dir/foo.pb.go".
 	GeneratedFilenamePrefix string
 
-	comments map[pathKey]CommentSet
+	location Location
 }
 
 func newFile(gen *Plugin, p *descriptorpb.FileDescriptorProto, packageName GoPackageName, importPath GoImportPath) (*File, error) {
@@ -498,7 +438,7 @@ func newFile(gen *Plugin, p *descriptorpb.FileDescriptorProto, packageName GoPac
 		Proto:         p,
 		GoPackageName: packageName,
 		GoImportPath:  importPath,
-		comments:      make(map[pathKey]CommentSet),
+		location:      Location{SourceFile: desc.Path()},
 	}
 
 	// Determine the prefix for generated Go files.
@@ -507,12 +447,6 @@ func newFile(gen *Plugin, p *descriptorpb.FileDescriptorProto, packageName GoPac
 		prefix = prefix[:len(prefix)-len(ext)]
 	}
 	switch gen.pathType {
-	case pathTypeLegacy:
-		// The default is to derive the output filename from the Go import path
-		// if the file contains a go_package option,or from the input filename instead.
-		if _, importPath := goPackageOption(p); importPath != "" {
-			prefix = path.Join(string(importPath), path.Base(prefix))
-		}
 	case pathTypeImport:
 		// If paths=import, the output filename is derived from the Go import path.
 		prefix = path.Join(string(f.GoImportPath), path.Base(prefix))
@@ -526,19 +460,6 @@ func newFile(gen *Plugin, p *descriptorpb.FileDescriptorProto, packageName GoPac
 	}
 	f.GeneratedFilenamePrefix = prefix
 
-	for _, loc := range p.GetSourceCodeInfo().GetLocation() {
-		// Descriptors declarations are guaranteed to have unique comment sets.
-		// Other locations may not be unique, but we don't use them.
-		var leadingDetached []Comments
-		for _, s := range loc.GetLeadingDetachedComments() {
-			leadingDetached = append(leadingDetached, Comments(s))
-		}
-		f.comments[newPathKey(loc.Path)] = CommentSet{
-			LeadingDetached: leadingDetached,
-			Leading:         Comments(loc.GetLeadingComments()),
-			Trailing:        Comments(loc.GetTrailingComments()),
-		}
-	}
 	for i, eds := 0, desc.Enums(); i < eds.Len(); i++ {
 		f.Enums = append(f.Enums, newEnum(gen, f, nil, eds.Get(i)))
 	}
@@ -571,43 +492,13 @@ func newFile(gen *Plugin, p *descriptorpb.FileDescriptorProto, packageName GoPac
 	return f, nil
 }
 
-func (f *File) location(idxPath ...int32) Location {
-	return Location{
-		SourceFile: f.Desc.Path(),
-		Path:       idxPath,
+// splitImportPathAndPackageName splits off the optional Go package name
+// from the Go import path when separated by a ';' delimiter.
+func splitImportPathAndPackageName(s string) (GoImportPath, GoPackageName) {
+	if i := strings.Index(s, ";"); i >= 0 {
+		return GoImportPath(s[:i]), GoPackageName(s[i+1:])
 	}
-}
-
-// goPackageOption interprets a file's go_package option.
-// If there is no go_package, it returns ("", "").
-// If there's a simple name, it returns (pkg, "").
-// If the option implies an import path, it returns (pkg, impPath).
-func goPackageOption(d *descriptorpb.FileDescriptorProto) (pkg GoPackageName, impPath GoImportPath) {
-	opt := d.GetOptions().GetGoPackage()
-	if opt == "" {
-		return "", ""
-	}
-	rawPkg, impPath := goPackageOptionRaw(opt)
-	pkg = cleanPackageName(rawPkg)
-	if string(pkg) != rawPkg && impPath != "" {
-		warn("Malformed 'go_package' option in %q, please specify:\n"+
-			"\toption go_package = %q;\n"+
-			"A future release of protoc-gen-go will reject this.\n"+
-			"See "+goPackageDocURL+" for more information.\n"+
-			"\n", d.GetName(), string(impPath)+";"+string(pkg))
-	}
-	return pkg, impPath
-}
-func goPackageOptionRaw(opt string) (rawPkg string, impPath GoImportPath) {
-	// A semicolon-delimited suffix delimits the import path and package name.
-	if i := strings.Index(opt, ";"); i >= 0 {
-		return opt[i+1:], GoImportPath(opt[:i])
-	}
-	// The presence of a slash implies there's an import path.
-	if i := strings.LastIndex(opt, "/"); i >= 0 {
-		return opt[i+1:], GoImportPath(opt)
-	}
-	return opt, ""
+	return GoImportPath(s), ""
 }
 
 // An Enum describes an enum.
@@ -625,15 +516,15 @@ type Enum struct {
 func newEnum(gen *Plugin, f *File, parent *Message, desc protoreflect.EnumDescriptor) *Enum {
 	var loc Location
 	if parent != nil {
-		loc = parent.Location.appendPath(int32(genid.DescriptorProto_EnumType_field_number), int32(desc.Index()))
+		loc = parent.Location.appendPath(genid.DescriptorProto_EnumType_field_number, desc.Index())
 	} else {
-		loc = f.location(int32(genid.FileDescriptorProto_EnumType_field_number), int32(desc.Index()))
+		loc = f.location.appendPath(genid.FileDescriptorProto_EnumType_field_number, desc.Index())
 	}
 	enum := &Enum{
 		Desc:     desc,
 		GoIdent:  newGoIdent(f, desc),
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 	gen.enumsByName[desc.FullName()] = enum
 	for i, vds := 0, enum.Desc.Values(); i < vds.Len(); i++ {
@@ -664,13 +555,13 @@ func newEnumValue(gen *Plugin, f *File, message *Message, enum *Enum, desc proto
 		parentIdent = message.GoIdent
 	}
 	name := parentIdent.GoName + "_" + string(desc.Name())
-	loc := enum.Location.appendPath(int32(genid.EnumDescriptorProto_Value_field_number), int32(desc.Index()))
+	loc := enum.Location.appendPath(genid.EnumDescriptorProto_Value_field_number, desc.Index())
 	return &EnumValue{
 		Desc:     desc,
 		GoIdent:  f.GoImportPath.Ident(name),
 		Parent:   enum,
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 }
 
@@ -694,15 +585,15 @@ type Message struct {
 func newMessage(gen *Plugin, f *File, parent *Message, desc protoreflect.MessageDescriptor) *Message {
 	var loc Location
 	if parent != nil {
-		loc = parent.Location.appendPath(int32(genid.DescriptorProto_NestedType_field_number), int32(desc.Index()))
+		loc = parent.Location.appendPath(genid.DescriptorProto_NestedType_field_number, desc.Index())
 	} else {
-		loc = f.location(int32(genid.FileDescriptorProto_MessageType_field_number), int32(desc.Index()))
+		loc = f.location.appendPath(genid.FileDescriptorProto_MessageType_field_number, desc.Index())
 	}
 	message := &Message{
 		Desc:     desc,
 		GoIdent:  newGoIdent(f, desc),
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 	gen.messagesByName[desc.FullName()] = message
 	for i, eds := 0, desc.Enums(); i < eds.Len(); i++ {
@@ -852,11 +743,11 @@ func newField(gen *Plugin, f *File, message *Message, desc protoreflect.FieldDes
 	var loc Location
 	switch {
 	case desc.IsExtension() && message == nil:
-		loc = f.location(int32(genid.FileDescriptorProto_Extension_field_number), int32(desc.Index()))
+		loc = f.location.appendPath(genid.FileDescriptorProto_Extension_field_number, desc.Index())
 	case desc.IsExtension() && message != nil:
-		loc = message.Location.appendPath(int32(genid.DescriptorProto_Extension_field_number), int32(desc.Index()))
+		loc = message.Location.appendPath(genid.DescriptorProto_Extension_field_number, desc.Index())
 	default:
-		loc = message.Location.appendPath(int32(genid.DescriptorProto_Field_field_number), int32(desc.Index()))
+		loc = message.Location.appendPath(genid.DescriptorProto_Field_field_number, desc.Index())
 	}
 	camelCased := strs.GoCamelCase(string(desc.Name()))
 	var parentPrefix string
@@ -872,7 +763,7 @@ func newField(gen *Plugin, f *File, message *Message, desc protoreflect.FieldDes
 		},
 		Parent:   message,
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 	return field
 }
@@ -927,7 +818,7 @@ type Oneof struct {
 }
 
 func newOneof(gen *Plugin, f *File, message *Message, desc protoreflect.OneofDescriptor) *Oneof {
-	loc := message.Location.appendPath(int32(genid.DescriptorProto_OneofDecl_field_number), int32(desc.Index()))
+	loc := message.Location.appendPath(genid.DescriptorProto_OneofDecl_field_number, desc.Index())
 	camelCased := strs.GoCamelCase(string(desc.Name()))
 	parentPrefix := message.GoIdent.GoName + "_"
 	return &Oneof{
@@ -939,11 +830,11 @@ func newOneof(gen *Plugin, f *File, message *Message, desc protoreflect.OneofDes
 			GoName:       parentPrefix + camelCased,
 		},
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 }
 
-// Extension is an alias of Field for documentation.
+// Extension is an alias of [Field] for documentation.
 type Extension = Field
 
 // A Service describes a service.
@@ -959,12 +850,12 @@ type Service struct {
 }
 
 func newService(gen *Plugin, f *File, desc protoreflect.ServiceDescriptor) *Service {
-	loc := f.location(int32(genid.FileDescriptorProto_Service_field_number), int32(desc.Index()))
+	loc := f.location.appendPath(genid.FileDescriptorProto_Service_field_number, desc.Index())
 	service := &Service{
 		Desc:     desc,
 		GoName:   strs.GoCamelCase(string(desc.Name())),
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 	for i, mds := 0, desc.Methods(); i < mds.Len(); i++ {
 		service.Methods = append(service.Methods, newMethod(gen, f, service, mds.Get(i)))
@@ -988,13 +879,13 @@ type Method struct {
 }
 
 func newMethod(gen *Plugin, f *File, service *Service, desc protoreflect.MethodDescriptor) *Method {
-	loc := service.Location.appendPath(int32(genid.ServiceDescriptorProto_Method_field_number), int32(desc.Index()))
+	loc := service.Location.appendPath(genid.ServiceDescriptorProto_Method_field_number, desc.Index())
 	method := &Method{
 		Desc:     desc,
 		GoName:   strs.GoCamelCase(string(desc.Name())),
 		Parent:   service,
 		Location: loc,
-		Comments: f.comments[newPathKey(loc.Path)],
+		Comments: makeCommentSet(f.Desc.SourceLocations().ByDescriptor(desc)),
 	}
 	return method
 }
@@ -1029,7 +920,7 @@ type GeneratedFile struct {
 	packageNames     map[GoImportPath]GoPackageName
 	usedPackageNames map[GoPackageName]bool
 	manualImports    map[GoImportPath]bool
-	annotations      map[string][]Location
+	annotations      map[string][]Annotation
 }
 
 // NewGeneratedFile creates a new generated file with the given filename
@@ -1042,7 +933,7 @@ func (gen *Plugin) NewGeneratedFile(filename string, goImportPath GoImportPath) 
 		packageNames:     make(map[GoImportPath]GoPackageName),
 		usedPackageNames: make(map[GoPackageName]bool),
 		manualImports:    make(map[GoImportPath]bool),
-		annotations:      make(map[string][]Location),
+		annotations:      make(map[string][]Annotation),
 	}
 
 	// All predeclared identifiers in Go are already used.
@@ -1055,7 +946,7 @@ func (gen *Plugin) NewGeneratedFile(filename string, goImportPath GoImportPath) 
 }
 
 // P prints a line to the generated output. It converts each parameter to a
-// string following the same rules as fmt.Print. It never inserts spaces
+// string following the same rules as [fmt.Print]. It never inserts spaces
 // between parameters.
 func (g *GeneratedFile) P(v ...interface{}) {
 	for _, x := range v {
@@ -1081,7 +972,7 @@ func (g *GeneratedFile) QualifiedGoIdent(ident GoIdent) string {
 	if packageName, ok := g.packageNames[ident.GoImportPath]; ok {
 		return string(packageName) + "." + ident.GoName
 	}
-	packageName := cleanPackageName(baseName(string(ident.GoImportPath)))
+	packageName := cleanPackageName(path.Base(string(ident.GoImportPath)))
 	for i, orig := 1, packageName; g.usedPackageNames[packageName]; i++ {
 		packageName = orig + GoPackageName(strconv.Itoa(i))
 	}
@@ -1092,14 +983,14 @@ func (g *GeneratedFile) QualifiedGoIdent(ident GoIdent) string {
 
 // Import ensures a package is imported by the generated file.
 //
-// Packages referenced by QualifiedGoIdent are automatically imported.
+// Packages referenced by [GeneratedFile.QualifiedGoIdent] are automatically imported.
 // Explicitly importing a package with Import is generally only necessary
 // when the import will be blank (import _ "package").
 func (g *GeneratedFile) Import(importPath GoImportPath) {
 	g.manualImports[importPath] = true
 }
 
-// Write implements io.Writer.
+// Write implements [io.Writer].
 func (g *GeneratedFile) Write(p []byte) (n int, err error) {
 	return g.buf.Write(p)
 }
@@ -1109,8 +1000,8 @@ func (g *GeneratedFile) Skip() {
 	g.skip = true
 }
 
-// Unskip reverts a previous call to Skip, re-including the generated file in
-// the plugin output.
+// Unskip reverts a previous call to [GeneratedFile.Skip],
+// re-including the generated file in the plugin output.
 func (g *GeneratedFile) Unskip() {
 	g.skip = false
 }
@@ -1121,8 +1012,32 @@ func (g *GeneratedFile) Unskip() {
 // The symbol may refer to a type, constant, variable, function, method, or
 // struct field.  The "T.sel" syntax is used to identify the method or field
 // 'sel' on type 'T'.
+//
+// Deprecated: Use the [GeneratedFile.AnnotateSymbol] method instead.
 func (g *GeneratedFile) Annotate(symbol string, loc Location) {
-	g.annotations[symbol] = append(g.annotations[symbol], loc)
+	g.AnnotateSymbol(symbol, Annotation{Location: loc})
+}
+
+// An Annotation provides semantic detail for a generated proto element.
+//
+// See the google.protobuf.GeneratedCodeInfo.Annotation documentation in
+// descriptor.proto for details.
+type Annotation struct {
+	// Location is the source .proto file for the element.
+	Location Location
+
+	// Semantic is the symbol's effect on the element in the original .proto file.
+	Semantic *descriptorpb.GeneratedCodeInfo_Annotation_Semantic
+}
+
+// AnnotateSymbol associates a symbol in a generated Go file with a location
+// in a source .proto file and a semantic type.
+//
+// The symbol may refer to a type, constant, variable, function, method, or
+// struct field.  The "T.sel" syntax is used to identify the method or field
+// 'sel' on type 'T'.
+func (g *GeneratedFile) AnnotateSymbol(symbol string, info Annotation) {
+	g.annotations[symbol] = append(g.annotations[symbol], info)
 }
 
 // Content returns the contents of the generated file.
@@ -1215,25 +1130,24 @@ func (g *GeneratedFile) Content() ([]byte, error) {
 	return out.Bytes(), nil
 }
 
-// metaFile returns the contents of the file's metadata file, which is a
-// text formatted string of the google.protobuf.GeneratedCodeInfo.
-func (g *GeneratedFile) metaFile(content []byte) (string, error) {
+func (g *GeneratedFile) generatedCodeInfo(content []byte) (*descriptorpb.GeneratedCodeInfo, error) {
 	fset := token.NewFileSet()
 	astFile, err := parser.ParseFile(fset, "", content, 0)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	info := &descriptorpb.GeneratedCodeInfo{}
 
 	seenAnnotations := make(map[string]bool)
 	annotate := func(s string, ident *ast.Ident) {
 		seenAnnotations[s] = true
-		for _, loc := range g.annotations[s] {
+		for _, a := range g.annotations[s] {
 			info.Annotation = append(info.Annotation, &descriptorpb.GeneratedCodeInfo_Annotation{
-				SourceFile: proto.String(loc.SourceFile),
-				Path:       loc.Path,
+				SourceFile: proto.String(a.Location.SourceFile),
+				Path:       a.Location.Path,
 				Begin:      proto.Int32(int32(fset.Position(ident.Pos()).Offset)),
 				End:        proto.Int32(int32(fset.Position(ident.End()).Offset)),
+				Semantic:   a.Semantic,
 			})
 		}
 	}
@@ -1280,8 +1194,19 @@ func (g *GeneratedFile) metaFile(content []byte) (string, error) {
 	}
 	for a := range g.annotations {
 		if !seenAnnotations[a] {
-			return "", fmt.Errorf("%v: no symbol matching annotation %q", g.filename, a)
+			return nil, fmt.Errorf("%v: no symbol matching annotation %q", g.filename, a)
 		}
+	}
+
+	return info, nil
+}
+
+// metaFile returns the contents of the file's metadata file, which is a
+// text formatted string of the google.protobuf.GeneratedCodeInfo.
+func (g *GeneratedFile) metaFile(content []byte) (string, error) {
+	info, err := g.generatedCodeInfo(content)
+	if err != nil {
+		return "", err
 	}
 
 	b, err := prototext.Marshal(info)
@@ -1328,24 +1253,10 @@ func cleanPackageName(name string) GoPackageName {
 	return GoPackageName(strs.GoSanitized(name))
 }
 
-// baseName returns the last path element of the name, with the last dotted suffix removed.
-func baseName(name string) string {
-	// First, find the last element
-	if i := strings.LastIndex(name, "/"); i >= 0 {
-		name = name[i+1:]
-	}
-	// Now drop the suffix
-	if i := strings.LastIndex(name, "."); i >= 0 {
-		name = name[:i]
-	}
-	return name
-}
-
 type pathType int
 
 const (
-	pathTypeLegacy pathType = iota
-	pathTypeImport
+	pathTypeImport pathType = iota
 	pathTypeSourceRelative
 )
 
@@ -1359,28 +1270,10 @@ type Location struct {
 }
 
 // appendPath add elements to a Location's path, returning a new Location.
-func (loc Location) appendPath(a ...int32) Location {
-	var n protoreflect.SourcePath
-	n = append(n, loc.Path...)
-	n = append(n, a...)
-	return Location{
-		SourceFile: loc.SourceFile,
-		Path:       n,
-	}
-}
-
-// A pathKey is a representation of a location path suitable for use as a map key.
-type pathKey struct {
-	s string
-}
-
-// newPathKey converts a location path to a pathKey.
-func newPathKey(idxPath []int32) pathKey {
-	buf := make([]byte, 4*len(idxPath))
-	for i, x := range idxPath {
-		binary.LittleEndian.PutUint32(buf[i*4:], uint32(x))
-	}
-	return pathKey{string(buf)}
+func (loc Location) appendPath(num protoreflect.FieldNumber, idx int) Location {
+	loc.Path = append(protoreflect.SourcePath(nil), loc.Path...) // make copy
+	loc.Path = append(loc.Path, int32(num), int32(idx))
+	return loc
 }
 
 // CommentSet is a set of leading and trailing comments associated
@@ -1389,6 +1282,18 @@ type CommentSet struct {
 	LeadingDetached []Comments
 	Leading         Comments
 	Trailing        Comments
+}
+
+func makeCommentSet(loc protoreflect.SourceLocation) CommentSet {
+	var leadingDetached []Comments
+	for _, s := range loc.LeadingDetachedComments {
+		leadingDetached = append(leadingDetached, Comments(s))
+	}
+	return CommentSet{
+		LeadingDetached: leadingDetached,
+		Leading:         Comments(loc.LeadingComments),
+		Trailing:        Comments(loc.TrailingComments),
+	}
 }
 
 // Comments is a comments string as provided by protoc.
@@ -1410,10 +1315,77 @@ func (c Comments) String() string {
 	return string(b)
 }
 
-var warnings = true
+// extensionRegistry allows registration of new extensions defined in the .proto
+// file for which we are generating bindings.
+//
+// Lookups consult the local type registry first and fall back to the base type
+// registry which defaults to protoregistry.GlobalTypes.
+type extensionRegistry struct {
+	base  *protoregistry.Types
+	local *protoregistry.Types
+}
 
-func warn(format string, a ...interface{}) {
-	if warnings {
-		log.Printf("WARNING: "+format, a...)
+func newExtensionRegistry() *extensionRegistry {
+	return &extensionRegistry{
+		base:  protoregistry.GlobalTypes,
+		local: &protoregistry.Types{},
 	}
+}
+
+// FindExtensionByName implements proto.UnmarshalOptions.FindExtensionByName
+func (e *extensionRegistry) FindExtensionByName(field protoreflect.FullName) (protoreflect.ExtensionType, error) {
+	if xt, err := e.local.FindExtensionByName(field); err == nil {
+		return xt, nil
+	}
+
+	return e.base.FindExtensionByName(field)
+}
+
+// FindExtensionByNumber implements proto.UnmarshalOptions.FindExtensionByNumber
+func (e *extensionRegistry) FindExtensionByNumber(message protoreflect.FullName, field protoreflect.FieldNumber) (protoreflect.ExtensionType, error) {
+	if xt, err := e.local.FindExtensionByNumber(message, field); err == nil {
+		return xt, nil
+	}
+
+	return e.base.FindExtensionByNumber(message, field)
+}
+
+func (e *extensionRegistry) hasNovelExtensions() bool {
+	return e.local.NumExtensions() > 0
+}
+
+func (e *extensionRegistry) registerAllExtensionsFromFile(f protoreflect.FileDescriptor) error {
+	if err := e.registerAllExtensions(f.Extensions()); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *extensionRegistry) registerAllExtensionsFromMessage(ms protoreflect.MessageDescriptors) error {
+	for i := 0; i < ms.Len(); i++ {
+		m := ms.Get(i)
+		if err := e.registerAllExtensions(m.Extensions()); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (e *extensionRegistry) registerAllExtensions(exts protoreflect.ExtensionDescriptors) error {
+	for i := 0; i < exts.Len(); i++ {
+		if err := e.registerExtension(exts.Get(i)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// registerExtension adds the given extension to the type registry if an
+// extension with that full name does not exist yet.
+func (e *extensionRegistry) registerExtension(xd protoreflect.ExtensionDescriptor) error {
+	if _, err := e.FindExtensionByName(xd.FullName()); err != protoregistry.NotFound {
+		// Either the extension already exists or there was an error, either way we're done.
+		return err
+	}
+	return e.local.RegisterExtension(dynamicpb.NewExtensionType(xd))
 }
