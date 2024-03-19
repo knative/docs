@@ -194,10 +194,25 @@ When the build is complete, you will see the following output:
 
 This command will build the function and push the image to the container registry. After the build is complete, you can run the function using the following command:
 
+---
+An alert box
+[//]: # (Issue you may experience:)
+
+[//]: # (Error: '/home/Kuack/Documents/knative/docs/code-samples' does not contain an initialized function)
+
+[//]: # (Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory.)
+
+[//]: # ()
+[//]: # (If you are in the right directory, and the error still occurs, try to check your func.yaml,)
+
+[//]: # (as it has to contain the field `created` and the right time stamp to be treated as a valid knative function.)
+
+---
+
 ```bash
-func run
+func run -b=s2i -v
 ```
-In the future, you can skip the step of func build, because func run will automatically build the function for you.
+In the future, you can **skip the step of `func build`**, because func run will automatically build the function for you.
 
 You will see the following output if the function is running successfully:
 
@@ -361,6 +376,30 @@ Expect to receive a JSON response indicating the sentiment classification of the
 }
 ```
 If you see the response, it means that the function is running successfully.
+
+---
+### The magic time about Serverless: autoscaling to zero
+If you use the following command to query all the pods in the cluster, you will see that the pod is running:
+
+```bash
+kubectl get pods -A
+```
+where `-A` is the flag to query all the pods in all namespaces.
+
+And you will find that your sentiment analysis app is running:
+
+```bash
+NAMESPACE   NAME                                        READY   STATUS    RESTARTS   AGE
+default     sentiment-analysis-app-00002-deployment    2/2     Running   0          2m
+```
+
+But if you wait for a while without sending any CloudEvent to your function, and query the pods again, you will find that the pod that has your sentiment analysis app **disappeared**!
+
+
+This is because **Knative Serving's autoscaler** will automatically scale down to zero if there is no request to the function!
+
+---
+
 Congratulations! You have successfully set up the sentiment analysis service for your bookstore.
 
 ## Conclusion
