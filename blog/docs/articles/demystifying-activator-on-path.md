@@ -1,8 +1,6 @@
 # Demystifying Activator on path
 
-**Author: [Stavros Kontopoulos](https://twitter.com/s_kontopoulos), Principal Software Engineer @ RedHat**
-
-**Date: 2024-03-19**
+**Author: [Stavros Kontopoulos](https://www.linkedin.com/in/stavroskontopoulos), Principal Software Engineer @ RedHat**
 
 _In this blog post, you will learn how to recognize when the activator is on the data path and what triggers that behavior._
 
