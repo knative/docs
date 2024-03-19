@@ -14,7 +14,10 @@ The function's output will be only from
 - Negative
 ## Install Prerequisites
 
-[//]: # (Warning box: please make sure you have a running cluster with Knative Eventing and Serving installed. If not, click here. And you have the container registry ready.)
+---
+(Warning box: please make sure you have a running cluster with Knative Eventing and Serving installed. If not, click here. And you have the container registry ready.)
+
+---
 
 ### Prerequisite 1: Install Knative `func` CLI
 Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured) by using the func CLI.
@@ -32,7 +35,10 @@ The process is straightforward:
 
 This workflow ensures a smooth transition from development to deployment within the Knative Functions ecosystem.
 
-[//]: # (Troubleshooting: if you see command not found, you may need to add the `func` CLI to your PATH.)
+---
+a warning box:
+(Troubleshooting: if you see `command not found`, you may need to add the `func` CLI to your PATH.)
+---
 ### Step 1: Create a Knative Function template
 
 Create a new function using the `func` CLI:
@@ -196,16 +202,16 @@ This command will build the function and push the image to the container registr
 
 ---
 An alert box
-[//]: # (Issue you may experience:)
+Issue you may experience:
+```
+Error: '/home/Kuack/Documents/knative/docs/code-samples' does not contain an initialized function
+```
+Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory.
 
-[//]: # (Error: '/home/Kuack/Documents/knative/docs/code-samples' does not contain an initialized function)
 
-[//]: # (Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory.)
+If you are in the right directory, and the error still occurs, try to check your func.yaml,
 
-[//]: # ()
-[//]: # (If you are in the right directory, and the error still occurs, try to check your func.yaml,)
-
-[//]: # (as it has to contain the field `created` and the right time stamp to be treated as a valid knative function.)
+as it has to contain the field `created` and the right time stamp to be treated as a valid knative function.
 
 ---
 
