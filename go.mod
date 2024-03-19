@@ -5,7 +5,7 @@ go 1.18
 require (
 	cloud.google.com/go/storage v1.10.0
 	github.com/cloudevents/sdk-go/v2 v2.15.2
-	github.com/golang/protobuf v1.5.0
+	github.com/golang/protobuf v1.5.4
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/go-github/v32 v32.1.0
 	github.com/kelseyhightower/envconfig v1.4.0
