@@ -168,7 +168,7 @@ in the namespace where the component runs, e.g:
 * kourier-system (when using net-kourier)
 * Each namespace where a Knative Service runs
 
-Knative looks for a `ConfigMap` with the label `knative-ca-trust-bundle="true"` and will read all `data` keys (regardless of the name). 
+Knative looks for a `ConfigMap` with the label `networking.knative.dev/trust-bundle: "true"` and will read all `data` keys (regardless of the name). 
 One key can contain one or multiple CAs/Intermediates. If they are valid, they will be added to the trust store of the Knative components.
 
 Here is an example of how `ConfigMap` could look like:
@@ -199,7 +199,7 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    knative-ca-trust-bundle: "true"
+    networking.knative.dev/trust-bundle: "true"
   name: knative-bundle
   namespace: knative-serving
 ```

@@ -38,6 +38,15 @@ Then, update the [`config-network` ConfigMap](https://github.com/knative/serving
        ...
     ```
 
+1.  Restart the Activator component
+
+    !!! warning
+        When the `system-internal-tls` feature is activated, the Activator component needs to be restarted to reconfigure its internal web server, as this is not possible during runtime.
+ 
+    ```bash
+      kubectl rollout restart deploy/activator -n knative-serving
+    ```
+
 Congratulations! Knative will now use TLS between its internal system components (Ingress-Controller, Activator and Queue-Proxy).
 
 
