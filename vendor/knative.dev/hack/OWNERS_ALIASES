@@ -1,0 +1,173 @@
+# This file is auto-generated from peribolos.
+# Do not modify this file, instead modify peribolos/knative.yaml
+
+aliases:
+  client-reviewers:
+  - itsmurugappan
+  client-wg-leads:
+  - dsimansk
+  - navidshaikh
+  - rhuss
+  client-writers:
+  - dsimansk
+  - maximilien
+  - navidshaikh
+  - rhuss
+  - vyasgun
+  conformance-task-force-leads:
+  - salaboy
+  conformance-writers:
+  - salaboy
+  docs-reviewers:
+  - nainaz
+  - pmbanugo
+  - retocode
+  - skonto
+  - snneji
+  docs-wg-leads:
+  - snneji
+  docs-writers:
+  - csantanapr
+  - retocode
+  - skonto
+  - snneji
+  eventing-reviewers:
+  - Leo6Leo
+  - aslom
+  - cali0707
+  - creydr
+  eventing-triage:
+  - lberk
+  eventing-wg-leads:
+  - pierDipi
+  eventing-writers:
+  - aliok
+  - cali0707
+  - creydr
+  - lberk
+  - lionelvillard
+  - matzew
+  - odacremolbap
+  - pierDipi
+  func-reviewers:
+  - jrangelramos
+  - nainaz
+  func-writers:
+  - gauron99
+  - jrangelramos
+  - lance
+  - lkingland
+  - matejvasek
+  - matzew
+  - salaboy
+  functions-wg-leads:
+  - lkingland
+  - salaboy
+  knative-admin:
+  - Cali0707
+  - Leo6Leo
+  - ReToCode
+  - aliok
+  - cardil
+  - creydr
+  - davidhadas
+  - dprotaso
+  - dsimansk
+  - evankanderson
+  - knative-automation
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  - krsna-m
+  - nainaz
+  - pierDipi
+  - psschwei
+  - puerco
+  - salaboy
+  - skonto
+  - upodroid
+  knative-release-leads:
+  - Cali0707
+  - Leo6Leo
+  - ReToCode
+  - creydr
+  - dsimansk
+  - pierDipi
+  - skonto
+  knative-robots:
+  - knative-automation
+  - knative-prow-releaser-robot
+  - knative-prow-robot
+  - knative-prow-updater-robot
+  - knative-test-reporter-robot
+  operations-reviewers:
+  - aliok
+  - houshengbo
+  - matzew
+  - maximilien
+  operations-wg-leads:
+  - houshengbo
+  operations-writers:
+  - aliok
+  - houshengbo
+  - matzew
+  - maximilien
+  productivity-leads:
+  - cardil
+  - upodroid
+  productivity-reviewers:
+  - evankanderson
+  - mgencur
+  productivity-wg-leads:
+  - cardil
+  - upodroid
+  productivity-writers:
+  - cardil
+  - krsna-m
+  - upodroid
+  security-wg-leads:
+  - davidhadas
+  - evankanderson
+  security-writers:
+  - davidhadas
+  - evankanderson
+  serving-approvers:
+  - psschwei
+  - skonto
+  serving-reviewers:
+  - izabelacg
+  - retocode
+  - skonto
+  serving-triage:
+  - izabelacg
+  - retocode
+  - skonto
+  serving-wg-leads:
+  - dprotaso
+  serving-writers:
+  - dprotaso
+  - psschwei
+  - skonto
+  steering-committee:
+  - aliok
+  - evankanderson
+  - nainaz
+  - puerco
+  - salaboy
+  technical-oversight-committee:
+  - davidhadas
+  - dprotaso
+  - dsimansk
+  - krsna-m
+  - psschwei
+  ux-wg-leads:
+  - cali0707
+  - leo6leo
+  - mmejia02
+  - zainabhusain227
+  ux-writers:
+  - cali0707
+  - leo6leo
+  - mmejia02
+  - zainabhusain227
