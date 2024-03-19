@@ -92,9 +92,9 @@ For the Knative Autoscaler it holds the following.
 
 Now with the above defaults and given the fact that a request needs to stay around for some time in order for concurrency metrics to show enough load for the counted period, it means you can't get EBC>=0 with a hello-world example where requests finish pretty quickly.
 The latter is often confusing for the newcomer as it seems that the Knative service never enters the serve mode. 
-In the next example, we will show the lifecycle of a Knative service that also moves to the serve mode and how EBC is calculated in practice. 
-
-Here is a service that has a target concurrency value of 10 and tbc=10:
+In the next example, we will show the lifecycle of a Knative service that also moves to the serve mode and how EBC is calculated in practice.
+Also, the example uses a sample app that controls how long a request stays around via a sleep operation, see section [Autoscale Sample App - Go](../../../../../docs/serving/autoscaling/autoscale-go/).
+Thus, here is the service for the example that has a target concurrency value of 10 and tbc=10:
 
 ```
 apiVersion: serving.knative.dev/v1
@@ -171,8 +171,6 @@ hey -z 600s -c 20 -q 1 -host "autoscale-go.default.example.com" "http://192.168.
 !!! note 
      
      The experiment was run on Minikube and the [hey](https://github.com/rakyll/hey) tool was used for generating the traffic.
-     For more on the hey tool and the sample app we use in the post check the section [Autoscale Sample App - Go](../../../../../docs/serving/autoscaling/autoscale-go/).
-
 
 Initially activator when receives a request, sends stats to the autoscaler which tries to scale from zero based on some initial scale (default 1):
 
