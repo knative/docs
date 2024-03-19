@@ -158,11 +158,17 @@ NAME                 MODE    ACTIVATORS   SERVICENAME          PRIVATESERVICENAM
 autoscale-go-00001   Proxy   2            autoscale-go-00001   autoscale-go-00001-private   Unknown   NoHealthyBackends
 ```
 
-Let's send some traffic (experiment was run on Minikube and hey tool was used for generating the traffic):
+Let's send some traffic.
 
 ```bash
 hey -z 600s -c 20 -q 1 -host "autoscale-go.default.example.com" "http://192.168.39.43:32718?sleep=1000"
 ```
+
+!!! note 
+     
+     The experiment was run on Minikube and the [hey](https://github.com/rakyll/hey) tool was used for generating the traffic.
+     For more on the hey tool and the sample app we use in the post check the section [Autoscale Sample App - Go](../../../../../docs/serving/autoscaling/autoscale-go/README.md).
+
 
 Initially activator when get a request in it sends stats to the autoscaler which tries to scale from zero based on some initial scale (default 1):
 
