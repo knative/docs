@@ -22,7 +22,7 @@ The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that us
 Let's see in detail what happens when a new Knative service is created.
 
 Once the user creates a new service the corresponding Knative reconciler creates a Knative `Configuration` and a Knative `Route` for that service. 
-Then the Configuration reconciler creates a `Revision` resource and the reconciler for the latter will create a Pod Autoscaler(PA) resource along with the K8s deployment for the service.
+Then the Configuration reconciler creates a `Revision` resource and the reconciler for the latter will create a PodAutoscaler(PA) resource along with the K8s deployment for the service.
 The Route reconciler will create the `Ingress` resource that will be picked up by the Knative net-* components responsible for managing traffic locally in the cluster and externally to the cluster.
 
 Now, the creation of the PA triggers the KPA reconciler, which goes through certain steps to set up an autoscaling configuration for the revision:
@@ -43,8 +43,8 @@ Now, the creation of the PA triggers the KPA reconciler, which goes through cert
 
     The SKS create/update event above triggers a reconciliation for the SKS from its specific controller that creates the required public and private K8s services so traffic can be routed to the raw K8s deployment.
     Also, in the proxy mode, the SKS controller will pick up the number of activators and configure an equal number of endpoints for the revision's [public service](https://github.com/knative/serving/blob/main/docs/scaling/SYSTEM.md#data-flow-examples).
-    In combination with the networking setup done by the net-* components (driven by the Ingress resource), this is roughly the end-to-end networking setup that needs to happen for a ksvc to be ready to serve traffic.
-
+    In combination with the networking setup done by a Knative networking component (driven by the Ingress resource), this is roughly the end-to-end networking setup that needs to happen for a ksvc to be ready to serve traffic.
+    The Knative networking component can be any of the following: net-istio, net-kourier, net-contour, and net-gateway-api.
 
 ## Capacity and Operation Modes in Practice
 
