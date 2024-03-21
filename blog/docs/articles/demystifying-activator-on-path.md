@@ -18,7 +18,7 @@ The autoscaler component will use this information to calculate the number of po
 The default pod autoscaler in Knative (KPA) is a sophisticated algorithm that uses metrics from pods to make scaling decisions.
 Let's see in detail what happens when a new Knative service is created.
 
-Once the user creates a new service the corresponding Knative reconciler creates a Knative `Configuration` and a Knative `Route` for that service (more on the Knative K8s resources [here](https://github.com/knative/specs/blob/main/specs/serving/overview.md). 
+Once the user creates a new service the corresponding Knative reconciler creates a Knative `Configuration` and a Knative `Route` for that service (more on the Knative K8s resources [here](https://github.com/knative/specs/blob/main/specs/serving/overview.md)). 
 Then the Configuration reconciler creates a `Revision` resource and the reconciler for the latter will create a `PodAutoscaler` (PA) resource along with the K8s deployment for the service.
 The Route reconciler will create the `Ingress` resource that will be picked up by the Knative net-* components responsible for managing traffic locally in the cluster and externally to the cluster.
 
