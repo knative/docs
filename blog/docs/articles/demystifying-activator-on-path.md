@@ -84,7 +84,7 @@ EBC = TotalCapacity - ObservedPanicValue - TargetBurstCapacity.
 
 `TotalCapacity` is calculated as `ready_pod_count*revision_total`. The default `TargetBurstCapacity` (TBC) is set to 200.
 
-For the Knative Autoscaler it holds the following.
+At this point, we can formally define the condition based on which activator is removed from the path:
 
 !!! important
     If EBC >=0 then we have enough capacity to serve the traffic and the activator will be removed from the path.
@@ -119,6 +119,9 @@ The graphs are shown next.
 ![Ready pods over time](/blog/articles/images/readypods.png)
 ![Panic mode over time](/blog/articles/images/panic.png)
 
+!!! note
+
+     The experiment was run on Minikube and the [hey](https://github.com/rakyll/hey) tool was used for generating the traffic.
 
 Let's describe in detail what we see above. Initially when the ksvc is deployed there is no traffic and one pod is created by default for verification reasons.
 
@@ -166,10 +169,6 @@ Let's send some traffic.
 ```bash
 hey -z 600s -c 20 -q 1 -host "autoscale-go.default.example.com" "http://192.168.39.43:32718?sleep=1000"
 ```
-
-!!! note 
-     
-     The experiment was run on Minikube and the [hey](https://github.com/rakyll/hey) tool was used for generating the traffic.
 
 Initially when the activator receives a request, it sends stats to the autoscaler which tries to scale from zero based on some initial scale (default 1):
 
