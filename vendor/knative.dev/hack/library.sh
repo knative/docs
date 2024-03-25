@@ -497,7 +497,7 @@ function report_go_test() {
   logfile="${logfile/.xml/.jsonl}"
   echo "Running go test with args: ${go_test_args[*]}"
   local gotest_retcode=0
-  go_run gotest.tools/gotestsum@v1.10.1 \
+  go_run gotest.tools/gotestsum@v1.11.0 \
     --format "${GO_TEST_VERBOSITY:-testname}" \
     --junitfile "${xml}" \
     --junitfile-testsuite-name relative \
@@ -517,7 +517,7 @@ function report_go_test() {
   echo "Test log (ANSI) written to ${ansilog}"
 
   htmllog="${logfile/.jsonl/.html}"
-  go_run github.com/buildkite/terminal-to-html/v3/cmd/terminal-to-html@v3.9.1 \
+  go_run github.com/buildkite/terminal-to-html/v3/cmd/terminal-to-html@v3.11.0 \
     --preview < "$ansilog" > "$htmllog"
   echo "Test log (HTML) written to ${htmllog}"
 
@@ -748,6 +748,8 @@ function __go_update_deps_for_module() {
   orig_pipefail_opt=$(shopt -p -o pipefail)
   set -o pipefail
   go mod tidy 2>&1 | grep -v "ignoring symlink" || true
+  go get toolchain@none
+
   if [[ "${FORCE_VENDOR:-false}" == "true" ]] || [ -d vendor ]; then
     group "Go mod vendor"
     go mod vendor 2>&1 |  grep -v "ignoring symlink" || true

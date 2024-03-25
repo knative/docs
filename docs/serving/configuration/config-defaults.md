@@ -79,7 +79,7 @@ The revision timeout value determines the default number of seconds to use for t
 {% raw %}
 The `max-revision-timeout-seconds` value determines the maximum number of seconds that can be used for `revision-timeout-seconds`. This value must be greater than or equal to `revision-timeout-seconds`. If omitted, the system default is used (600 seconds).
 
-If this value is increased, the activator's `terminationGraceTimeSeconds` should also be increased to prevent in-flight requests from being disrupted.
+If this value is increased, the activator's `terminationGracePeriodSeconds` should also be increased to prevent in-flight requests from being disrupted.
 {% endraw %}
 
 * **Global key:** `max-revision-timeout-seconds`

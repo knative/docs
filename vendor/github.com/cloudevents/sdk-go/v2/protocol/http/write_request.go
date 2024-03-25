@@ -1,10 +1,14 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package http
 
 import (
 	"bytes"
 	"context"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -53,7 +57,7 @@ func (b *httpRequestWriter) SetData(data io.Reader) error {
 func (b *httpRequestWriter) setBody(body io.Reader) error {
 	rc, ok := body.(io.ReadCloser)
 	if !ok && body != nil {
-		rc = ioutil.NopCloser(body)
+		rc = io.NopCloser(body)
 	}
 	b.Body = rc
 	if body != nil {
@@ -63,21 +67,21 @@ func (b *httpRequestWriter) setBody(body io.Reader) error {
 			buf := v.Bytes()
 			b.GetBody = func() (io.ReadCloser, error) {
 				r := bytes.NewReader(buf)
-				return ioutil.NopCloser(r), nil
+				return io.NopCloser(r), nil
 			}
 		case *bytes.Reader:
 			b.ContentLength = int64(v.Len())
 			snapshot := *v
 			b.GetBody = func() (io.ReadCloser, error) {
 				r := snapshot
-				return ioutil.NopCloser(&r), nil
+				return io.NopCloser(&r), nil
 			}
 		case *strings.Reader:
 			b.ContentLength = int64(v.Len())
 			snapshot := *v
 			b.GetBody = func() (io.ReadCloser, error) {
 				r := snapshot
-				return ioutil.NopCloser(&r), nil
+				return io.NopCloser(&r), nil
 			}
 		default:
 			// This is where we'd set it to -1 (at least
@@ -132,5 +136,7 @@ func (b *httpRequestWriter) SetExtension(name string, value interface{}) error {
 	return nil
 }
 
-var _ binding.StructuredWriter = (*httpRequestWriter)(nil) // Test it conforms to the interface
-var _ binding.BinaryWriter = (*httpRequestWriter)(nil)     // Test it conforms to the interface
+var (
+	_ binding.StructuredWriter = (*httpRequestWriter)(nil) // Test it conforms to the interface
+	_ binding.BinaryWriter     = (*httpRequestWriter)(nil) // Test it conforms to the interface
+)

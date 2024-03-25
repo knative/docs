@@ -34,15 +34,16 @@ kind: Service
 metadata:
   name: example-service
   namespace: default
-  annotations:
-    queue.sidecar.serving.knative.dev/cpu-resource-request: "1"
-    queue.sidecar.serving.knative.dev/cpu-resource-limit: "2"
-    queue.sidecar.serving.knative.dev/memory-resource-request: "1Gi"
-    queue.sidecar.serving.knative.dev/memory-resource-limit: "2Gi"
-    queue.sidecar.serving.knative.dev/ephemeral-storage-resource-request: "400Mi"
-    queue.sidecar.serving.knative.dev/ephemeral-storage-resource-limit: "450Mi"
 spec:
   template:
+    metadata:
+      annotations:
+        queue.sidecar.serving.knative.dev/cpu-resource-request: "1"
+        queue.sidecar.serving.knative.dev/cpu-resource-limit: "2"
+        queue.sidecar.serving.knative.dev/memory-resource-request: "1Gi"
+        queue.sidecar.serving.knative.dev/memory-resource-limit: "2Gi"
+        queue.sidecar.serving.knative.dev/ephemeral-storage-resource-request: "400Mi"
+        queue.sidecar.serving.knative.dev/ephemeral-storage-resource-limit: "450Mi"
     spec:
 ...
 ```

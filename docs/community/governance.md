@@ -38,9 +38,6 @@ describes our steering committee.
 - [Technical Oversight Committee (TOC)](https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md):
 describes our technical oversight committee.
 
-- [Trademark Committee](https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md):
-describes our trademark committee.
-
 - [Annual reports](https://github.com/knative/community/tree/main/annual_reports):
 lists previous annual reports.
 

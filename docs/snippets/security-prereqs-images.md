@@ -6,8 +6,8 @@ Knative releases from 1.9 onwards are signed with [cosign](https://docs.sigstore
 
 1. Extract the images from a manifeset and verify the signatures.
 
-```
-curl -sSL https://github.com/knative/serving/releases/download/knative-v1.10.1/serving-core.yaml \
+```bash
+curl -sSL {{ artifact(repo="serving",file="serving-core.yaml") }} \
   | grep 'gcr.io/' | awk '{print $2}' | sort | uniq \
   | xargs -n 1 \
     cosign verify -o text \

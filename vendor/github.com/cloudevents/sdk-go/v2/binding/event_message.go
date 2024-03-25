@@ -1,3 +1,8 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package binding
 
 import (
@@ -17,7 +22,9 @@ const (
 
 // EventMessage type-converts a event.Event object to implement Message.
 // This allows local event.Event objects to be sent directly via Sender.Send()
-//     s.Send(ctx, binding.EventMessage(e))
+//
+//	s.Send(ctx, binding.EventMessage(e))
+//
 // When an event is wrapped into a EventMessage, the original event could be
 // potentially mutated. If you need to use the Event again, after wrapping it into
 // an Event message, you should copy it before
@@ -48,7 +55,7 @@ func (m *EventMessage) ReadBinary(ctx context.Context, b BinaryWriter) (err erro
 	// Pass the body
 	body := (*event.Event)(m).Data()
 	if len(body) > 0 {
-		err = b.SetData(bytes.NewReader(body))
+		err = b.SetData(bytes.NewBuffer(body))
 		if err != nil {
 			return err
 		}

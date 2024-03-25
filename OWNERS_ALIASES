@@ -58,6 +58,7 @@ aliases:
   - lance
   - lkingland
   - matejvasek
+  - matzew
   - salaboy
   functions-wg-leads:
   - lkingland
@@ -67,6 +68,7 @@ aliases:
   - Leo6Leo
   - ReToCode
   - aliok
+  - cardil
   - creydr
   - davidhadas
   - dprotaso
@@ -78,16 +80,12 @@ aliases:
   - knative-prow-updater-robot
   - knative-test-reporter-robot
   - krsna-m
-  - mchmarny
   - nainaz
   - pierDipi
   - psschwei
-  - puerco
   - salaboy
   - skonto
-  - smoser-ibm
   - upodroid
-  - xtreme-sameer-vohra
   knative-release-leads:
   - Cali0707
   - Leo6Leo
@@ -115,13 +113,13 @@ aliases:
   - matzew
   - maximilien
   productivity-leads:
-  - krsna-m
+  - cardil
   - upodroid
   productivity-reviewers:
   - evankanderson
   - mgencur
   productivity-wg-leads:
-  - krsna-m
+  - cardil
   - upodroid
   productivity-writers:
   - cardil
@@ -137,12 +135,11 @@ aliases:
   - psschwei
   - skonto
   serving-reviewers:
-  - KauzClay
-  - krsna-m
+  - izabelacg
   - retocode
   - skonto
   serving-triage:
-  - KauzClay
+  - izabelacg
   - retocode
   - skonto
   serving-wg-leads:
@@ -155,7 +152,6 @@ aliases:
   - aliok
   - evankanderson
   - nainaz
-  - puerco
   - salaboy
   technical-oversight-committee:
   - davidhadas
@@ -163,10 +159,6 @@ aliases:
   - dsimansk
   - krsna-m
   - psschwei
-  trademark-committee:
-  - mchmarny
-  - smoser-ibm
-  - xtreme-sameer-vohra
   ux-wg-leads:
   - cali0707
   - leo6leo
