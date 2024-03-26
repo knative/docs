@@ -32,9 +32,6 @@ def analyze_sentiment(text):
    # Convert the sentiment into a CloudEvent
    sentiment = create_cloud_event(sentiment)
 
-   # Sleep for 3 seconds to simulate a long-running process
-   sleep(3)
-
    return sentiment
 
 def main(context: Context):
