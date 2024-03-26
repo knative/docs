@@ -59,21 +59,34 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
    [official Python docker image](https://hub.docker.com/_/python/) for more
    details.
 
-    ```dockerfile
+    ```Dockerfile
     # Use the official lightweight Python image.
     # https://hub.docker.com/_/python
-    FROM python:3.7-slim
+    FROM python:3.9-slim
+
+    ARG USER=appuser
+    ARG USER_UID=1001
+    ARG USER_GID=$USER_UID
 
     # Allow statements and log messages to immediately appear in the Knative logs
     ENV PYTHONUNBUFFERED True
+    ENV PORT=8080
+    ENV APP_HOME=app
+
+    # Create and change to the app directory.
+    WORKDIR "/home/${USER}/${APP_HOME}"
 
     # Copy local code to the container image.
-    ENV APP_HOME /app
-    WORKDIR $APP_HOME
     COPY . ./
 
+    # Add a user so the server will run as a non-root user.
     # Install production dependencies.
-    RUN pip install Flask gunicorn
+    RUN addgroup --gid $USER_GID $USER && \
+        adduser -u $USER_UID --ingroup $USER --disabled-password $USER && \
+        pip install Flask gunicorn
+
+    # Set the non-root user as current.
+    USER $USER
 
     # Run the web service on container startup. Here we use the gunicorn
     # webserver, with one worker process and 8 threads.
@@ -151,42 +164,42 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
  This will wait until your service is deployed and ready, and ultimately it
  will print the URL through which you can access the service.
 
-
-
-
    During the creation of your service, Knative performs the following steps:
 
-   - Creates a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
+- Creates a new immutable revision for this version of the app.
+- Network programming to create a route, ingress, service, and load balance
      for your app.
-   - Automatically scales your pods up and down, including scaling down to zero
+- Automatically scales your pods up and down, including scaling down to zero
      active pods.
 
 ## Verification
 
  1. Run one of the followings commands to find the domain URL for your service.
+
    > Note: If your URL includes `example.com` then consult the setup instructions for
    > configuring DNS (e.g. with `sslip.io`), or [using a Custom Domain](https://knative.dev/docs/serving/using-a-custom-domain).
 
- ### kubectl
+### kubectl
 
  ```bash
  kubectl get ksvc helloworld-python  --output=custom-columns=NAME:.metadata.name,URL:.status.url
  ```
 
    Example:
+
  ```bash
  NAME                      URL
  helloworld-python    http://helloworld-python.default.1.2.3.4.sslip.io
  ```
 
- ### kn
+### kn
 
  ```bash
  kn service describe helloworld-python -o url
  ```
 
    Example:
+
  ```bash
  http://helloworld-python.default.1.2.3.4.sslip.io
  ```

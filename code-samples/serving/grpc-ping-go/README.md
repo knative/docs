@@ -40,7 +40,6 @@ for production containers.
 
    Replace `{username}` in `service.yaml` with your Docker Hub user name:
 
-
   ```yaml
   apiVersion: serving.knative.dev/v1
   kind: Service

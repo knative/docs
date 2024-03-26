@@ -59,9 +59,10 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-csharp
    app, see
    [Docker images for ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images).
 
-   ```docker
+   ```Dockerfile
    # Use Microsoft's official build .NET image.
-   FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+   FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build-env
+
    WORKDIR /app
 
    # Copy csproj and restore as distinct layers
@@ -73,9 +74,23 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-csharp
    RUN dotnet publish -c Release -o out
 
    # Build runtime image
-   FROM mcr.microsoft.com/dotnet/aspnet:6.0
-   WORKDIR /app
+   FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine
+
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
+
+   # Create and change to the app directory.
+   WORKDIR "/home/${USER}/app"
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup -g $USER_GID $USER && \
+      adduser -u $USER_UID -G $USER -D $USER
+
    COPY --from=build-env /app/out .
+
+   # Set the non-root user as current.
+   USER $USER
 
    # Run the web service on container startup.
    ENTRYPOINT ["dotnet", "helloworld-csharp.dll"]
@@ -143,7 +158,7 @@ folder) you're ready to build and deploy the sample app.
 
 1. To find the URL for your service, use
 
-   ```
+   ```bash
    kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
    helloworld-csharp   http://helloworld-csharp.default.1.2.3.4.sslip.io

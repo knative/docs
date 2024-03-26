@@ -36,19 +36,25 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-vertx
 ## Build and deploy the sample
 
 1. To build the image, run:
+
 ```bash
 mvn compile jib:build -Dimage=<image_name>
 ```
+
 2. Choose one of the following methods to deploy the sample:
 
- ### yaml
- * To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+### yaml
+
+- To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+
 ```bash
 kubectl apply -f service.yaml
 ```
 
- ### kn
- * If using `kn` to deploy:
+### kn
+
+- If using `kn` to deploy:
+
 ```bash
 kn service create cloudevents-vertx --image=<image>
 ```

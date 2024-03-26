@@ -82,7 +82,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java-spring
 
 1. In your project directory, create a file named `Dockerfile` and copy the following code block into it:
 
-    ```docker
+    ```Dockerfile
     # Use the official maven/Java 8 image to create a build artifact: https://hub.docker.com/_/maven
     FROM maven:3.5-jdk-8-alpine as builder
 
@@ -99,13 +99,31 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java-spring
     # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
     FROM openjdk:8-jre-alpine
 
+    ARG USER=appuser
+    ARG USER_UID=1001
+    ARG USER_GID=$USER_UID
+
+    ENV PORT=8080
+
+    # Create and change to the app directory.
+    WORKDIR "/home/${USER}/app"
+
+    # Add a user so the server will run as a non-root user.
+    RUN addgroup -g $USER_GID $USER && \
+        adduser -u $USER_UID -G $USER -D $USER
+
     # Copy the jar to the production image from the builder stage.
-    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
+    COPY --from=builder /app/target/helloworld-*.jar ./helloworld.jar
+
+    EXPOSE $PORT
+
+    # Set the non-root user as current.
+    USER $USER
 
     # Run the web service on container startup.
-    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
-
+    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "./helloworld.jar"]
     ```
+
    For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
 
    For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
@@ -116,8 +134,8 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java-spring
     # Build and push the container on your local machine.
     docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-java-spring" --push .
     ```
-   Where `{username}` is your Docker Hub username.
 
+   Where `{username}` is your Docker Hub username.
 
 ## Deploying the app
 
@@ -151,6 +169,7 @@ Choose one of the following methods to deploy the app:
                 - name: TARGET
                   value: "Spring Boot Sample v1"
     ```
+
     Where `{username}` is your Docker Hub username.
 
     **Note:** Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
@@ -220,11 +239,13 @@ Choose one of the following methods to deploy the app:
 To remove the sample app from your cluster, delete the service:
 
 ### kubectl
+
 ```bash
 kubectl delete -f service.yaml
 ```
 
 ### kn
+
 ```bash
 kn service delete helloworld-java-spring
 ```
