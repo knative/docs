@@ -10,7 +10,7 @@ The following table describes the supported versions of Serving and Eventing for
 | v1.13    | v1.13.0<br/>v1.12.0, v1.12.1, v1.12.2 and v1.12.3<br/>v1.11.0, v1.1.1, v1.11.2, v1.11.3, v1.11.6, v1.11.5 and v1.11.6<br/>v1.10.0, v1.10.1 and v1.10.2 | v1.13.0<br/>v1.12.0, v1.12.1, v1.12.2 and v1.12.3<br/>v1.11.0, v1.11.1, v1.11.2, v1.11.3, v1.11.4, v1.11.5 and v1.11.6<br/>v1.10.0, v1.10.1, v1.10.2, v1.10.3, v1.10.4, v1.10.5 and v1.10.6 |
 
 --8<-- "prerequisites.md"
---8<-- "security-prereqs-images.md"
+{% include "security-prereqs-images.md" %}
 
 ## Install the Knative Operator
 
@@ -515,6 +515,33 @@ see how you can configure Knative Eventing with different event sources:
           # ...
           source:
             kafka:
+              enabled: true
+        ```
+
+    1. Apply the YAML file by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of the file you created in the previous step.
+
+=== "RabbitMQ"
+
+    To configure Knative Eventing to install RabbitMQ as the event source,
+
+    1. Add `spec.source.rabbitmq` to your Eventing CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeEventing
+        metadata:
+          name: knative-eventing
+          namespace: knative-eventing
+        spec:
+          # ...
+          source:
+            rabbitmq:
               enabled: true
         ```
 

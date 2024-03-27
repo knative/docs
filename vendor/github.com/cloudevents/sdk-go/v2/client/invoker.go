@@ -1,7 +1,13 @@
+/*
+ Copyright 2021 The CloudEvents Authors
+ SPDX-License-Identifier: Apache-2.0
+*/
+
 package client
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/cloudevents/sdk-go/v2/binding"
 	cecontext "github.com/cloudevents/sdk-go/v2/context"
@@ -17,9 +23,18 @@ type Invoker interface {
 
 var _ Invoker = (*receiveInvoker)(nil)
 
-func newReceiveInvoker(fn interface{}, fns ...EventDefaulter) (Invoker, error) {
+func newReceiveInvoker(
+	fn interface{},
+	observabilityService ObservabilityService,
+	inboundContextDecorators []func(context.Context, binding.Message) context.Context,
+	fns []EventDefaulter,
+	ackMalformedEvent bool,
+) (Invoker, error) {
 	r := &receiveInvoker{
-		eventDefaulterFns: fns,
+		eventDefaulterFns:        fns,
+		observabilityService:     observabilityService,
+		inboundContextDecorators: inboundContextDecorators,
+		ackMalformedEvent:        ackMalformedEvent,
 	}
 
 	if fn, err := receiver(fn); err != nil {
@@ -32,8 +47,11 @@ func newReceiveInvoker(fn interface{}, fns ...EventDefaulter) (Invoker, error) {
 }
 
 type receiveInvoker struct {
-	fn                *receiverFn
-	eventDefaulterFns []EventDefaulter
+	fn                       *receiverFn
+	observabilityService     ObservabilityService
+	eventDefaulterFns        []EventDefaulter
+	inboundContextDecorators []func(context.Context, binding.Message) context.Context
+	ackMalformedEvent        bool
 }
 
 func (r *receiveInvoker) Invoke(ctx context.Context, m binding.Message, respFn protocol.ResponseFn) (err error) {
@@ -47,18 +65,35 @@ func (r *receiveInvoker) Invoke(ctx context.Context, m binding.Message, respFn p
 	e, eventErr := binding.ToEvent(ctx, m)
 	switch {
 	case eventErr != nil && r.fn.hasEventIn:
-		return respFn(ctx, nil, protocol.NewReceipt(false, "failed to convert Message to Event: %w", eventErr))
+		r.observabilityService.RecordReceivedMalformedEvent(ctx, eventErr)
+		return respFn(ctx, nil, protocol.NewReceipt(r.ackMalformedEvent, "failed to convert Message to Event: %w", eventErr))
 	case r.fn != nil:
 		// Check if event is valid before invoking the receiver function
 		if e != nil {
 			if validationErr := e.Validate(); validationErr != nil {
-				return respFn(ctx, nil, protocol.NewReceipt(false, "validation error in incoming event: %w", validationErr))
+				r.observabilityService.RecordReceivedMalformedEvent(ctx, validationErr)
+				return respFn(ctx, nil, protocol.NewReceipt(r.ackMalformedEvent, "validation error in incoming event: %w", validationErr))
 			}
 		}
 
 		// Let's invoke the receiver fn
 		var resp *event.Event
-		resp, result = r.fn.invoke(ctx, e)
+		resp, result = func() (resp *event.Event, result protocol.Result) {
+			defer func() {
+				if r := recover(); r != nil {
+					result = fmt.Errorf("call to Invoker.Invoke(...) has panicked: %v", r)
+					cecontext.LoggerFrom(ctx).Error(result)
+				}
+			}()
+			ctx = computeInboundContext(m, ctx, r.inboundContextDecorators)
+
+			var cb func(error)
+			ctx, cb = r.observabilityService.RecordCallingInvoker(ctx, e)
+
+			resp, result = r.fn.invoke(ctx, e)
+			defer cb(result)
+			return
+		}()
 
 		if respFn == nil {
 			break
@@ -71,7 +106,7 @@ func (r *receiveInvoker) Invoke(ctx context.Context, m binding.Message, respFn p
 			}
 			// Validate the event conforms to the CloudEvents Spec.
 			if vErr := resp.Validate(); vErr != nil {
-				cecontext.LoggerFrom(ctx).Errorf("cloudevent validation failed on response event: %w", vErr)
+				cecontext.LoggerFrom(ctx).Errorf("cloudevent validation failed on response event: %v", vErr)
 			}
 		}
 
@@ -96,4 +131,15 @@ func (r *receiveInvoker) IsReceiver() bool {
 
 func (r *receiveInvoker) IsResponder() bool {
 	return r.fn.hasEventOut
+}
+
+func computeInboundContext(message binding.Message, fallback context.Context, inboundContextDecorators []func(context.Context, binding.Message) context.Context) context.Context {
+	result := fallback
+	if mctx, ok := message.(binding.MessageContext); ok {
+		result = cecontext.ValuesDelegating(mctx.Context(), fallback)
+	}
+	for _, f := range inboundContextDecorators {
+		result = f(result, message)
+	}
+	return result
 }

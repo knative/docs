@@ -16,21 +16,14 @@
           </p>
           <div class="trusted-by-container">
             <h3 class="trusted-by">Trusted by</h3>
-            <div id="usedby">
-              <div class="logo">
-                <img src="images/corporate-logos/Google.svg" alt="" draggable="false" />
+            <div class="scroller">
+              <div class="scroller__inner">
+                  <!-- First row of adopters will be populated dynamically -->
               </div>
-              <div class="logo">
-                <img src="images/corporate-logos/vmware.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo">
-                <img src="images/corporate-logos/IBM.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo">
-                <img src="images/corporate-logos/Redhat.svg" alt="" draggable="false" />
-              </div>
-              <div class="logo triggermesh">
-                <img src="images/corporate-logos/triggermesh_logo.svg" alt="" draggable="false" />
+            </div>
+            <div class="scroller" data-direction="right">
+              <div class="scroller__inner">
+                  <!-- Second row of adopters will be populated dynamically -->
               </div>
             </div>
           </div>
@@ -224,7 +217,9 @@
 
   <section class="case-studies-container">
     <div class="md-grid md-typeset">
-      <h1>Case Studies</h1>
+      <h1>
+        <a href="{{ 'about/case-studies/' | url }}">Case Studies</a>
+      </h1>
       <div class="cases-table">
         <div class="col">
           <a href="{{ 'about/case-studies/deepc/' | url }}">
@@ -331,17 +326,97 @@
 {% block scripts %}
 {{ super() }}
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const logos = document.getElementById("usedby").getElementsByTagName("div");
-    for (let i = 0; i < logos.length - 1; i++) {
-      // Technically there's a chance two elements end up with the same
-      // random order in which case the result won't be truly random (it'll be based
-      // on the original document order). This really doesn't matter.
-      logos[i].style.order = Math.floor(Math.random() * 99);
+  document.addEventListener("DOMContentLoaded", function() {
+    // Suggested size for the logo images = 320x96
+    const adopters = [
+      { logoPath: "images/corporate-logos/alibaba_cloud.svg", url: "https://cs.console.aliyun.com/" },
+      { logoPath: "images/corporate-logos/bloomberg.svg", url: "https://www.bloomberg.net/" },
+      { logoPath: "images/corporate-logos/blue_origin.svg", url: "https://www.blueorigin.com/" },
+      { logoPath: "images/corporate-logos/box.svg", url: "https://box.com/" },
+      { logoPath: "images/corporate-logos/chainguard.svg", url: "https://chainguard.dev/" },
+      { logoPath: "images/corporate-logos/control_plane.svg", url: "https://www.controlplane.com/" },
+      { logoPath: "images/corporate-logos/deepc.svg", url: "https://www.deepc.ai/" },
+      { logoPath: "images/corporate-logos/fulcrum.svg", url: "https://www.fulcrumapp.com/" },
+      { logoPath: "images/corporate-logos/gojek.svg", url: "https://www.gojek.com/" },
+      { logoPath: "images/corporate-logos/google.svg", url: "https://cloud.google.com/anthos/run" },
+      { logoPath: "images/corporate-logos/ibm.svg", url: "https://cloud.ibm.com/codeengine" },
+      { logoPath: "images/corporate-logos/ka-nabell_japan.svg", url: "https://www.ka-nabell.com/" },
+      { logoPath: "images/corporate-logos/kubesphere.svg", url: "https://kubesphere.io/" },
+      { logoPath: "images/corporate-logos/liquidx.svg", url: "https://www.liquidx.com/" },
+      { logoPath: "images/corporate-logos/manomano.svg", url: "https://www.manomano.es/" },
+      { logoPath: "images/corporate-logos/optum.svg", url: "https://optum.com/" },
+      { logoPath: "images/corporate-logos/property_xyz.svg", url: "https://property.xyz/" },
+      { logoPath: "images/corporate-logos/redhat.svg", url: "https://www.openshift.com/learn/topics/serverless" },
+      { logoPath: "images/corporate-logos/scaleway.svg", url: "https://www.scaleway.com/en" },
+      { logoPath: "images/corporate-logos/sonavi_labs.svg", url: "https://www.sonavilabs.com/" },
+      { logoPath: "images/corporate-logos/spider.svg", url: "https://www.spider.com/" },
+      { logoPath: "images/corporate-logos/tata_comm.svg", url: "https://www.tatacommunications.com/solutions/cloud/platforms" },
+      { logoPath: "images/corporate-logos/vmware.svg", url: "https://network.tanzu.vmware.com/products/serverless" },
+      { logoPath: "images/corporate-logos/y_meadows.svg", url: "https://www.ymeadows.com/" }
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
     }
-    logos[logos.length - 1].style.order = 100;
-  })
+
+    // Shuffle the adopters array
+    shuffle(adopters);
+
+    const trustedByContainers = document.querySelectorAll(".trusted-by-container .scroller__inner");
+
+    function populateAdopters(container, adopters) {
+      adopters.forEach(adopter => {
+        const adopterLink = document.createElement("a");
+        adopterLink.href = adopter.url;
+        adopterLink.target = "_blank";
+
+        const adopterImg = document.createElement("img");
+        adopterImg.src = adopter.logoPath;
+        adopterImg.alt = "Adopters";
+        adopterImg.classList.add("logo");
+
+        adopterLink.appendChild(adopterImg);
+        container.appendChild(adopterLink);
+      });
+    }
+
+    const firstRowAdopters = adopters.slice(0, adopters.length / 2);
+    const secondRowAdopters = adopters.slice(adopters.length / 2);
+
+    // Shuffle each row's adopters array independently
+    shuffle(firstRowAdopters);
+    shuffle(secondRowAdopters);
+
+    populateAdopters(trustedByContainers[0], firstRowAdopters);
+    populateAdopters(trustedByContainers[1], secondRowAdopters);
+
+    // If a user hasn't opted in for reduced motion, then we add the animation
+    const scrollers = document.querySelectorAll(".scroller");
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      addAnimation();
+    }
+
+    function addAnimation() {
+      scrollers.forEach((scroller) => {
+        scroller.setAttribute("data-animated", true);
+
+        const scrollerInner = scroller.querySelector(".scroller__inner");
+        const scrollerContent = Array.from(scrollerInner.children);
+
+        // For each item in the array, clone it -> add aria-hidden to it -> add it into the `.scroller-inner`
+        scrollerContent.forEach((item) => {
+          const duplicatedItem = item.cloneNode(true);
+          duplicatedItem.setAttribute("aria-hidden", true);
+          scrollerInner.appendChild(duplicatedItem);
+        });
+      });
+    }
+  });
 </script>
+
 {% endblock %}
 
 <!-- Application footer -->

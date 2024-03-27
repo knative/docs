@@ -47,6 +47,7 @@ nav:
           - releases/announcing-knative-v0-2-release.md
       - Articles:
           - articles/knative-backstage-plugins.md
+          - articles/demystifying-activator-on-path.md
           - articles/knative-eventing-vision.md
           - articles/new_event_discovery_features.md
           - articles/getting-started-blog-p2.md

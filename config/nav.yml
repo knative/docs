@@ -185,25 +185,21 @@ nav:
     - Eventing:
       - Knative Eventing overview: eventing/README.md
       - Event Mesh: eventing/event-mesh.md
-      - Resources:
+      - Concepts:
         - Brokers:
           - About Brokers: eventing/brokers/README.md
           - Broker types:
             - Available Broker types: eventing/brokers/broker-types/README.md
             # add default IMC broker page, page explaining broker types
             - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
-            - Apache Kafka: 
+            - Apache Kafka:
               - About Apache Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
               - Configuring Kafka features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
+            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
-          # about triggers docs
-        #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
-        #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
-      # Eventing - developer docs
-      - Developer topics:
         - Event sources:
           - About event sources: eventing/sources/README.md
           - ApiServerSource:
@@ -214,9 +210,33 @@ nav:
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
+          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
           - RedisStreamSource:
             - About RedisStreamSource: eventing/sources/redis/README.md
             - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
+        - Channels:
+          - About Channels: eventing/channels/README.md
+          - Channel types and defaults: eventing/channels/channel-types-defaults.md
+          - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
+          - Available Channels: eventing/channels/channels-crds.md
+        - Subscriptions: eventing/channels/subscriptions.md
+        - Event sinks:
+          - About sinks: eventing/sinks/README.md
+          - Apache Kafka Sink: eventing/sinks/kafka-sink.md
+        - Flows:
+          - About flows: eventing/flows/README.md
+          - Parallel: eventing/flows/parallel.md
+          - Sequence:
+            - About Sequences: eventing/flows/sequence/README.md
+            - Displaying Sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+            - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+            - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
+            - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
+          # about triggers docs
+        #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
+        #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
+      # Eventing - developer docs
+      - Developer topics:
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
@@ -234,27 +254,10 @@ nav:
           - ContainerSource:
             - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
             - ContainerSource Reference: eventing/custom-event-source/containersource/reference.md
-        - Event sinks:
-          - About sinks: eventing/sinks/README.md
-          - Apache Kafka Sink: eventing/sinks/kafka-sink.md
         - Handling delivery failure: eventing/event-delivery.md
-        - Flows:
-          - About flows: eventing/flows/README.md
-          - Parallel: eventing/flows/parallel.md
-          - Sequence:
-            - About Sequences: eventing/flows/sequence/README.md
-            - Displaying Sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
-            - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
-            - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
-            - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
-        - Channels:
-          - About Channels: eventing/channels/README.md
-          - Channel types and defaults: eventing/channels/channel-types-defaults.md
-          - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
-          - Available Channels: eventing/channels/channels-crds.md
-          - Subscriptions: eventing/channels/subscriptions.md
         - Event registry: eventing/event-registry.md
         - Sugar controller: eventing/sugar/README.md
+        - Debugging: eventing/troubleshooting/README.md
       - Administrator topics:
         # Eventing config
         - Eventing configuration:
@@ -270,9 +273,6 @@ nav:
         - Configuring logging: eventing/observability/logging/config-logging.md
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
         - Knative Eventing metrics: eventing/observability/metrics/eventing-metrics.md
-      # Eventing - troubleshooting
-      - Troubleshooting:
-        - Debugging: eventing/troubleshooting/README.md
       - Experimental Features:
         - About Eventing experimental features: eventing/experimental-features/README.md
         - DeliverySpec.Timeout field: eventing/experimental-features/delivery-timeout.md
@@ -283,6 +283,7 @@ nav:
         - EventType auto creation: eventing/experimental-features/eventtype-auto-creation.md
         - Transport Encryption: eventing/experimental-features/transport-encryption.md
         - Sender Identity: eventing/experimental-features/sender-identity.md
+      - FAQ: eventing/faq/README.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
@@ -309,6 +310,7 @@ nav:
     - About:
       - Testimonials: about/testimonials.md
       - Case studies:
+        - List of Case Studies: about/case-studies/README.md
         - deepc: about/case-studies/deepc.md
         - Outfit7: about/case-studies/outfit7.md
         - Puppet: about/case-studies/puppet.md
