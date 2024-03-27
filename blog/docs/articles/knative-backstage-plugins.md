@@ -28,9 +28,9 @@ The plugin fetches Knative EventType, Broker, and Trigger resources from the bac
 ![](/blog/articles/images/knative-backstage-plugins-01.png)
 *Knative EventTypes shown as APIs in Backstage*
 
-Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/concepts/duck-typing/#addressable) or at even an URL directly. Since Backstages side won't know how to handle these, the plugin will only show the trigger's subscriber if it is already registered in Backstage. For this relation, we use the [`backstage.io/kubernetes-id`](https://backstage.io/docs/features/kubernetes/configuration#surfacing-your-kubernetes-components-as-part-of-an-entity) annotation in the Backstage entity and the Kubernetes resource.
+Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/concepts/duck-typing/#addressable){:target="_blank"} or at even a URL directly. Since Backstage side won't know how to handle these, the plugin will only show the trigger's subscriber if it is already registered in Backstage. For this relation, we use the [`backstage.io/kubernetes-id`](https://backstage.io/docs/features/kubernetes/configuration#surfacing-your-kubernetes-components-as-part-of-an-entity){:target="_blank"} annotation in the Backstage entity and the Kubernetes resource.
 
-How the matching works is documented with diagrams in the [Event Mesh plugin README file](https://github.com/knative-extensions/backstage-plugins?tab=readme-ov-file#event-mesh-plugin-1).
+How the matching works is documented with diagrams in the [Event Mesh plugin README file](https://github.com/knative-extensions/backstage-plugins?tab=readme-ov-file#event-mesh-plugin-1){:target="_blank"}.
 
 What's really cool about this integration is that Backstage's ability to show graphs. For example, you can see the relationships between EventTypes, Brokers, and Trigger subscribers in a graph.
 
@@ -39,9 +39,9 @@ What's really cool about this integration is that Backstage's ability to show gr
 
 ## Demo and quick start
 
-If you would like to see the plugin in action, you can install the backend in your Kubernetes cluster and the plugin in your Backstage instance.
+If you would like to see the plugin in action, you can [install](https://github.com/knative-extensions/backstage-plugins?tab=readme-ov-file#running-the-backstage-plugin){:target="_blank"} the backend in your Kubernetes cluster and the plugin in your Backstage instance.
 
-However, if you want a quick look at the plugin, you can check out the [demo video](https://www.youtube.com/watch?v=4h1j1v8KrY0).
+However, if you want a quick look at the plugin, you can check out the [demo video](https://www.youtube.com/watch?v=4h1j1v8KrY0){:target="_blank"}.
 The demo video is recorded with the quick start available in Ali Ok's [demo repository](https://github.com/aliok/knative-backstage-demo){:target="_blank"}.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4h1j1v8KrY0?si=tzUmjcrYOfCy6E1H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -59,4 +59,4 @@ We are exploring the possibility of adding more functionality to integrate Backs
 
 ## Contact
 
-If you have any questions or feedback, please feel free to reach out to us. You can find us in the [CNCF Slack](https://cncf.slack.io){:target="_blank"} in the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} channel.
+If you have any questions or feedback, please feel free to reach out to us. You can find us in the [CNCF Slack](https://communityinviter.com/apps/cloud-native/cncf){:target="_blank"} in the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} channel.
