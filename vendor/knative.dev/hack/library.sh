@@ -753,6 +753,8 @@ function __go_update_deps_for_module() {
   if [[ "${FORCE_VENDOR:-false}" == "true" ]] || [ -d vendor ]; then
     group "Go mod vendor"
     go mod vendor 2>&1 |  grep -v "ignoring symlink" || true
+  else
+    go mod download -x
   fi
   eval "$orig_pipefail_opt"
 
