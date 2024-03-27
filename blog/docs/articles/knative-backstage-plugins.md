@@ -51,7 +51,7 @@ The demo video is recorded with the quick start available in Ali Ok's [demo repo
 
 We are looking for contributors to help us improve the plugin and the backend. If you are interested in contributing, please check out the [README file](https://github.com/knative-extensions/backstage-plugins) of the plugins repository. How to start the backend, how to install the plugin, and how to modify the plugin are all documented there.
 
-There are a few issues that are marked as good first issues and we are looking for help with them. If you are interested in contributing, please check out the [good first issues](https://github.com/knative-extensions/backstage-plugins/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+There are a few issues that are marked as good first issues and we are looking for help with them. If you are interested in contributing, please check out the [good first issues](https://github.com/knative-extensions/backstage-plugins/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22){:target="_blank"}.
 
 ## What's next
 
