@@ -13,7 +13,7 @@ resources that are relevant to the developer persona.
 
 ## Plugins and backends
 
-The plugins are the frontend part of the Backstage plugin. They are responsible for rendering the UI and communicating with the backend. The backend is responsible for talking to the Kubernetes API server and providing the necessary information to the frontend. Currently, we only have 1 plugin and it requires a backend to work. We think that most of the plugins we might provide in the future will require a backend-for-frontend to work.
+The plugins are the frontend part of the Backstage plugin. They are responsible for rendering the UI and communicating with the backend. The backend is responsible for talking to the Kubernetes API server and providing the necessary information to the frontend. Currently, we only have one plugin and it requires a backend to work. We think that most of the plugins we might provide in the future will require a backend-for-frontend to work.
 
 ## The Event Mesh plugin
 
