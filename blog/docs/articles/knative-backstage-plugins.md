@@ -59,4 +59,4 @@ We are exploring the possibility of adding more functionality to integrate Backs
 
 ## Contact
 
-If you have any questions or feedback, please feel free to reach out to us. You can find us in the [CNCF Slack](https://cncf.slack.io) in the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7) channel.
+If you have any questions or feedback, please feel free to reach out to us. You can find us in the [CNCF Slack](https://cncf.slack.io){:target="_blank"} in the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} channel.
