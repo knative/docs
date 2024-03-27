@@ -17,7 +17,7 @@ The plugins are the frontend part of the Backstage plugin. They are responsible 
 
 ## The Event Mesh plugin
 
-[The Event Mesh plugin](https://github.com/knative-extensions/backstage-plugins) is a Backstage plugin that allows you to view and manage Knative Eventing resources. The plugin talks to a special backend that runs in the Kubernetes cluster and communicates with the Kubernetes API server. 
+[The Event Mesh plugin](https://github.com/knative-extensions/backstage-plugins){:target="_blank"} is a Backstage plugin that allows you to view and manage Knative Eventing resources. The plugin talks to a special backend that runs in the Kubernetes cluster and communicates with the Kubernetes API server. 
 
 The plugin is not designed to be the ultimate tool for managing Knative Eventing resources. It is designed to be a developer-friendly tool that allows developers to visualize and partially manage the resources that are relevant to them. Given these constraints, the plugin is designed to be read-only, at least for the time being.
 
