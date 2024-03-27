@@ -55,7 +55,7 @@ There are a few issues that are marked as good first issues and we are looking f
 
 ## What's next
 
-We are exploring the possibility of adding more functionality to integrate Backstage with Knative. One aspect here is reusing the [Knative Functions](https://knative.dev/docs/functions/) templates as [Backstage templates](https://backstage.io/docs/features/software-templates/adding-templates). This would allow developers to create new Knative Functions from Backstage and manage them from there, while having the compatibility with the [Func CLI](https://knative.dev/docs/functions/install-func/).
+We are exploring the possibility of adding more functionality to integrate Backstage with Knative. One aspect here is reusing the [Knative Functions](https://knative.dev/docs/functions/){:target="_blank"} templates as [Backstage templates](https://backstage.io/docs/features/software-templates/adding-templates){:target="_blank"}. This would allow developers to create new Knative Functions from Backstage and manage them from there, while having the compatibility with the [Func CLI](https://knative.dev/docs/functions/install-func/){:target="_blank"}.
 
 ## Contact
 
