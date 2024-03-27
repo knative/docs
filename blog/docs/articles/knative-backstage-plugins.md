@@ -23,7 +23,7 @@ The plugin is not designed to be the ultimate tool for managing Knative Eventing
 
 This plugin leverages Backstage's [entity provider](https://backstage.io/docs/features/software-catalog/external-integrations/#custom-entity-providers) and [entity processor](https://backstage.io/docs/features/software-catalog/external-integrations/#custom-processors) concept. The entity provider is responsible for fetching the resources from the backend and the entity processor is responsible for processing the resources and making them available to the frontend. The provider is the part that talks to the custom backend.
 
-Plugin fetches Knative EventType, Broker, and Trigger resources from the backend. Actually, it doesn't fetch the resources as is since the Kubernetes resources are not particularly designed for using them in this kind of UI, but it fetches better suited representations of the resources where some fields are ignored, some aggregated, and some transformed.
+The plugin fetches Knative EventType, Broker, and Trigger resources from the backend. Actually, it doesn't fetch the resources as is since the Kubernetes resources are not particularly designed for using them in this kind of UI, but it fetches better suited representations of the resources where some fields are ignored, some aggregated, and some transformed.
 
 ![](/blog/articles/images/knative-backstage-plugins-01.png)
 *Knative EventTypes shown as APIs in Backstage*
