@@ -4,7 +4,7 @@
 
 ## What's the vision?
 
-[Backstage](https://backstage.io/) is a platform for building developer portals. It provides a unified way to manage and visualize the different resources that developers use in their daily work. 
+[Backstage](https://backstage.io/){:target="_blank"} is a platform for building developer portals. It provides a unified way to manage and visualize the different resources that developers use in their daily work. 
 
 However, Backstage is not your next generation Kubernetes dashboard. It is not designed to replace the Kubernetes dashboard or any other Kubernetes management tool.
 
