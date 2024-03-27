@@ -1,0 +1,5 @@
+
+# Functions use the .func directory for local runtime data which should
+# generally not be tracked in source control. To instruct the system to track
+# .func in source control, comment the following line (prefix it with '# ').
+/.func
