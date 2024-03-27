@@ -2,7 +2,8 @@
 
 ## HTTPS redirection
 
-Operators can force HTTPS redirection for all Services. See the `http-protocol` mentioned in the [Enabling automatic TLS certificate provisioning](../encryption/enabling-automatic-tls-certificate-provisioning.md) page for more details.
+Operators can force HTTPS redirection for all Services. See the `http-protocol` mentioned in
+[Configure external domain encryption](../encryption/external-domain-tls.md) page for more details.
 
 ### Overriding the default HTTP behavior
 
