@@ -28,7 +28,7 @@ The plugin fetches Knative EventType, Broker, and Trigger resources from the bac
 ![](/blog/articles/images/knative-backstage-plugins-01.png)
 *Knative EventTypes shown as APIs in Backstage*
 
-Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/concepts/duck-typing/#addressable) or at even a URL directly. Since Backstage side won't know how to handle these, the plugin will only show the trigger's subscriber if it is already registered in Backstage. For this relation, we use the [`backstage.io/kubernetes-id`](https://backstage.io/docs/features/kubernetes/configuration#surfacing-your-kubernetes-components-as-part-of-an-entity) annotation in the Backstage entity and the Kubernetes resource.
+Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/concepts/duck-typing/#addressable) or at even an URL directly. Since Backstages side won't know how to handle these, the plugin will only show the trigger's subscriber if it is already registered in Backstage. For this relation, we use the [`backstage.io/kubernetes-id`](https://backstage.io/docs/features/kubernetes/configuration#surfacing-your-kubernetes-components-as-part-of-an-entity) annotation in the Backstage entity and the Kubernetes resource.
 
 How the matching works is documented with diagrams in the [Event Mesh plugin README file](https://github.com/knative-extensions/backstage-plugins?tab=readme-ov-file#event-mesh-plugin-1).
 
