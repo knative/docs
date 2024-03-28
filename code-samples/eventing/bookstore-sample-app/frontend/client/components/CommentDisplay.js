@@ -1,6 +1,8 @@
 const CommentDisplay = ({ comment }) => {
+	// Assume receiving a comment object
 	return (
 		<div className='flex my-4 p-4 justify-center'>
+			{/* Customized darkmode not working as expected yet */}
 			<div className='comment-display w-full w-7/12 flex flex-row rounded-lg p-4 bg-gray-800 text-white dark:bg-white'>
 				<div className='flex items-center justify-center md:justify-start md:w-1/12'>
 					<img

@@ -3,10 +3,10 @@ import Header from '../components/Header';
 import BookDetail from '../components/BookDetail';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
-import Toggle from '../components/Toggle';
 import { ThemeProvider } from 'next-themes';
 
 export default function Main() {
+	/* Example Book object */
 	const book = {
 		title: 'Book Mock Up',
 		author: 'me',
@@ -18,7 +18,7 @@ export default function Main() {
 	};
 	return (
 		<div>
-			<ThemeProvider>
+			<ThemeProvider attribute='class'>
 				<Header />
 
 				<main className='container mx-auto my-8'>
