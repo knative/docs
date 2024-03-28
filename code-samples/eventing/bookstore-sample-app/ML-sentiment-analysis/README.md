@@ -65,7 +65,6 @@ sentiment-analysis
 ├── .gitignore                
 ├── requirements.txt         
 ├── app.sh
-├── func.yaml
 ├── Procfile
 └── func.py
 
