@@ -1,14 +1,15 @@
 # Database Service for Bookstore
-In order to run the Bookstore sample application, you need to create a database and populate it with sample data. This document provides the schema and sample data for the database.
+To successfully launch the Bookstore sample application, it's essential to set up a dedicated database populated with specific sample data. This guide provides both the schema for the database and the initial data you'll need to get started.
 
-In this tutorial, we will create a PostgreSQL database and populate it with sample data. We will then create **a k8s deployment** that connects to the PostgreSQL database.
+In this tutorial, we'll embark on creating a PostgreSQL database using Kubernetes (K8s) StatefulSets and populating it with the sample data provided.
 
-We will be discussing when we should use Knative Service and what benefit it can bring to us.
+You might wonder, "Why not leverage Knative Serving to dynamically scale the database service in response to traffic demands?" We'll delve into the optimal scenarios for employing Knative Serving and when it's advantageous for our database service.
+
 ## What Knative features will we learn about?
-- Knative Service
+- Appropriate Use Cases for Knative Service
 
 ## What does the final deliverable look like?
-A k8s deployment file that creates a Knative Service that connects to a PostgreSQL database contains the sample data we specified in the SQL file.
+Our goal is to deploy a PostgreSQL pod within Kubernetes, loaded with the sample data outlined in the accompanying SQL file. This pod will serve as the foundational database service for our bookstore application.
 
 ## Overview
 
@@ -16,10 +17,10 @@ A k8s deployment file that creates a Knative Service that connects to a PostgreS
 The BookReviews table contains all reviews made on the bookstore website. 
 
 See the columns of the BookReviews table below:
-* ID (serial) - Primary Key
-* post_time (datetime) - Posting time of the comment
-* content (text) - The contents of the comment
-* sentiment (text) - The sentiment results (currently, the values it could take on are 'positive' or 'neutral' or 'negative')
+* `ID (serial)` - Primary Key
+* `post_time (datetime)` - Posting time of the comment
+* `content (text)` - The contents of the comment
+* `sentiment (text)` - The sentiment results (currently, the values it could take on are 'positive' or 'neutral' or 'negative')
 
 
 ### The Sample Data
@@ -34,70 +35,62 @@ The sample rows inserted for the BookReviews table are shown below:
 
 
 
-
 ## Implementation
-### Step 1: Create a ConfigMap for SQL Configuration
 
-Use the following command to create a ConfigMap named `sql-configmap` from your `sample.sql` file. This ConfigMap will be used to store your SQL script.
+### Step 1: Acquire Necessary Files from the Repository
+The essential files for setting up your database are located within the `db` directory of our repository. Please download these files to proceed.
 
+### Step 2: Deploying the PostgreSQL Database
+To deploy the PostgreSQL database and populate it with the provided sample data, you'll apply a series of Kubernetes deployment files. Ensure you're positioned in the `code-sample` directory and not within the `db` subdirectory for this operation.
+
+Within this directory, you will find 6 YAML files, each serving a distinct purpose in the setup process:
+- `100-create-configmap.yaml`: Generates a ConfigMap including the SQL file for database initialization.
+- `100-create-secret.yaml`: Produces a Secret holding the PostgreSQL database password.
+- `100-create-volume.yaml`: Creates both a PersistentVolume and a PersistentVolumeClaim for database storage.
+- `200-create-postgre.yaml`: Establishes the StatefulSet for the PostgreSQL database.
+- `300-expose-service.yaml`: Launches a Service to expose the PostgreSQL database externally.
+- `400-create-job.yaml`: Executes a Job that populates the database with the sample data.
+
+Execute the command below to apply all configuration files located in the `db` directory:
 ```bash
-kubectl create configmap sql-configmap --from-file=sample.sql
+kubectl apply -f db
 ```
+The filenames prefixed with numbers dictate the application order, ensuring Kubernetes orchestrates the resource setup accordingly.
 
-### Step 2: Set Up Persistent Storage
-
-Persistent Volume Claims (PVCs) provide a way to request storage for your database that persists beyond the lifecycle of a pod. Apply your PVC configuration to ensure your PostgreSQL database has the necessary storage.
-
+### Step 3: Confirming the Deployment
+Following the application of the deployment files, initialization of the database may require some time. Monitor the deployment's progress by executing:
 ```bash
-kubectl apply -f PVC.yaml
+kubectl get pods -n=default
 ```
-
-### Step 3: Deploy the PostgreSQL Server
-
-Deploy your PostgreSQL server as a pod within your Kubernetes cluster. This deployment will utilize the PVC created in the previous step for storage.
-
+A successful deployment is indicated by the `Running` state of the `postgresql-0` pod, as shown below:
 ```bash
-kubectl apply -f deployment.yaml
+NAMESPACE     NAME                     READY   STATUS      RESTARTS   AGE
+default       postgresql-0             1/1     Running     0          1m
 ```
-
-### Step 4: Expose PostgreSQL Service
-
-Expose your PostgreSQL server within the Kubernetes cluster to allow connections to the database.
-
+Upon observing the pod in a `Running` state, access the pod using the command:
 ```bash
-kubectl apply -f service.yaml
+kubectl exec -it postgresql-0 -n=default -- /bin/bash
 ```
-
-### Step 5: Initialize the Database
-
-Execute the SQL commands from your `sample.sql` file by running a Kubernetes job. This job ensures your database schema and initial data are set up according to your specifications.
-
+Inside the pod, connect to the database with:
 ```bash
-kubectl apply -f job.yaml
+psql -U myuser -d mydatabase
 ```
-
-### Step 6: Interact with Your Database
-
-After setting up your database, you may want to interact with it to run queries or manage data.
-
-1. Retrieve the name of your PostgreSQL deployment pod:
-
+A successful connection will present you with:
 ```bash
-kubectl get pods -l app=postgresql
+mydatabase=#
 ```
-
-2. Enter the pod’s shell:
-
+To verify the initialization of the `BookReviews` table, execute:
+```
+mydatabase=# \dt
+```
+If the output lists the `BookReviews` table as follows, your database has been correctly initialized:
 ```bash
-kubectl exec -it <deployment pod name> -- /bin/bash
+ List of relations
+ Schema |     Name     | Type  | Owner  
+--------+--------------+-------+--------
+ public | book_reviews | table | myuser
+(1 row)
 ```
-
-3. Connect to your PostgreSQL database:
-
-```bash
-psql -h postgresql -U myuser -d mydatabase
-```
-Use `mypassword` when prompted for the password.
 
 ## Conclusion
 
