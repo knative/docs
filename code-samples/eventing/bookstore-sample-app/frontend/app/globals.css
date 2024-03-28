@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* :root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+}*/
+
+/* .comment-display {
+	--bg-cmt: #323232;
+	--text-cmt: white;
+}
+
+@media (prefers-color-scheme: dark) {
+	.comment-display {
+		--bg-cmt: #e3e2e2;
+		--text-cmt: black;
+	}
+} */
+
+/* @layer base {
+	.comment-display {
+		@apply dark:bg-white bg-gray-800;
+		@apply dark:text-black text-white;
+	}
+} */
+
+#__next {
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	/* color: rgb(var(--foreground-rgb)); */
+	/* background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		) */
+	/* background: rgb(var(--background-start-rgb)); */
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+/* .comment-display {
+	background: rgb(var(--bg-cmt));
+	text-decoration-color: rgb(var(--text-cmt));
+} */
