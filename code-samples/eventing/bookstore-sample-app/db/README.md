@@ -12,7 +12,6 @@ You might wonder, "Why not leverage Knative Serving to dynamically scale the dat
 Our goal is to deploy a PostgreSQL pod within Kubernetes, loaded with the sample data outlined in the accompanying SQL file. This pod will serve as the foundational database service for our bookstore application.
 
 ## Overview
-
 ### The Database Schema
 The BookReviews table contains all reviews made on the bookstore website. 
 
@@ -22,7 +21,6 @@ See the columns of the BookReviews table below:
 * `content (text)` - The contents of the comment
 * `sentiment (text)` - The sentiment results (currently, the values it could take on are 'positive' or 'neutral' or 'negative')
 
-
 ### The Sample Data
 The sample rows inserted for the BookReviews table are shown below:
 | id | post_time           | content                      | sentiment |
@@ -31,9 +29,6 @@ The sample rows inserted for the BookReviews table are shown below:
 | 2  | 2020-01-02 00:02:00 | This book is terrible!       | negative  |
 | 3  | 2020-01-03 00:01:30 | This book is okay.           | neutral   |
 | 4  | 2020-01-04 00:00:00 | Meh                          | neutral   |
-
-
-
 
 ## Implementation
 
@@ -95,7 +90,6 @@ If the output lists the `BookReviews` table as follows, your database has been c
 ## Question & Discussion
 1. Why did we choose to deploy our PostgreSQL database using a StatefulSet instead of a Knative Service?
 
-
 We use [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) for databases instead of Knative Service mainly because databases need to remember data (like a notebook that keeps your notes). StatefulSets are good at remembering things because they can save data and have a special name and place where they live. This is very important for databases.
 
 Knative Services are more like notebooks that you use and then throw away when you're done. They're great for tasks that don't need to keep data for a long time. You can make them go away when you don't need them and come back when you do. But databases need to always remember information, so they can't just disappear and come back.
@@ -111,7 +105,5 @@ Note box: However, Knative Service supports Volumes and Persistent Volumes, whic
 
 You can read more about the best use cases for Knative Service [here](https://knative.dev/docs/serving/samples/)!
 
-
 ## Conclusion
-
 By following this guide, you have successfully deployed a PostgreSQL server on a Kubernetes cluster, set up persistent storage, and initialized your database using a Kubernetes job. Congratulations! Your bookstore now has the database service.
