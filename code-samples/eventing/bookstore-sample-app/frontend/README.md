@@ -2,6 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Before running, may need to install node >= v18, next-themes
 First, run the development server:
 
 ```bash
