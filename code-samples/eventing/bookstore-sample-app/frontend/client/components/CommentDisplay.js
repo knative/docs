@@ -1,0 +1,20 @@
+const CommentDisplay = ({ comment }) => {
+	return (
+		<div className='flex my-4 p-4 justify-center'>
+			<div className='comment-display w-full w-7/12 flex flex-row rounded-lg p-4 bg-gray-800 text-white dark:bg-white'>
+				<div className='flex items-center justify-center md:justify-start md:w-1/12'>
+					<img
+						src={comment.avatar}
+						alt='Avatar'
+						className='rounded-full w-10 h-10'
+					/>
+				</div>
+				<div className='md:w-1/12 text-sm text-gray-200'> {comment.time} </div>
+				<div className='md:w-8/12'> {comment.text} </div>
+				<div className='md:w-2/12'> {comment.emotion} </div>
+			</div>
+		</div>
+	);
+};
+
+export default CommentDisplay;
