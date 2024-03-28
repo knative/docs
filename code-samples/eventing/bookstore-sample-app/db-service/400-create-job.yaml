@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgresql-job
+spec:
+  ttlSecondsAfterFinished: 50
+  template:
+    spec:
+      containers:
+        - name: postgresql-client
+          image: quay.io/enterprisedb/postgresql
+          command: ["psql", "-h", "postgresql", "-U", "myuser", "-d", "mydatabase", "-f", "/sql/sample.sql"]
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: POSTGRES_USER
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: POSTGRES_DB
+          volumeMounts:
+            - name: sql-volume
+              mountPath: /sql
+      restartPolicy: Never
+      volumes:
+        - name: sql-volume
+          configMap:
+            name: sql-configmap
+  backoffLimit: 5
