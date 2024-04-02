@@ -13,15 +13,15 @@ The general probing architecture looks like this:
 * Users can optionally define Readiness and/or Liveness probes in the `KnativeService` CR.
 * The Liveness probes are directly executed by the Kubelet against the according container.
 * Readiness probes, on the other hand, are rewritten by Knative to be executed by the Queue-Proxy container.
-* Knative does probing from in places (e.g. Activator, net-* controller and from Queue-Proxy), to make sure the whole network stack is configured and ready. Compare to vanilla Kubernetes, Knative uses faster (called aggressive probing) probing interval to shorten the cold-start times when a Pod is already up and running while Kubernetes itself has not yet reflected that readiness.
+* Knative does probing from in places (e.g. Activator, net-* controller, and from Queue-Proxy), to make sure the whole network stack is configured and ready. Compared to vanilla Kubernetes, Knative uses faster (called aggressive probing) probing interval to shorten the cold-start times when a Pod is already up and running while Kubernetes itself has not yet reflected that readiness.
 * Knative will define a default Readiness probe for the primary user container when no probe is defined by the user. It will check for a TCP socket on the traffic port of the Knative Service.
-* Knative will also define a Readiness probe for the Queue-Proxy container itself. Queue-Proxy's health endpoint aggregates all results from it's the rewritten Readiness probes for all user containers (primary + sidecars). For the aggregated status, Queue-Proxy will call each container's Readiness probe in parallel, wait for their response (or timeout) and report an aggregated result back to Kubernetes. 
+* Knative will also define a Readiness probe for the Queue-Proxy container itself. Queue-Proxy's health endpoint aggregates all results from it's rewritten Readiness probes for all user containers (primary + sidecars). For the aggregated status, Queue-Proxy will call each container's Readiness probe in parallel, wait for their response (or timeout) and report an aggregated result back to Kubernetes. 
 
 Knative will see a Pod as healthy and ready to serve traffic once the Queue-Proxy probe returns a success response and once the Knative networking layer reconfiguration has finished.
 
 !!! note
     Keep in mind, that Knative could see your Pod as healthy and ready while Kubernetes still thinks it is not or vice versa.
-    The `Deployment` and `Pod` status do not reflect the status in `Knative`. To fully check the status that Knative sees, you have to check 
+    The `Deployment` and `Pod` statuses do not reflect the status in `Knative`. To fully check the status that Knative sees, you have to check 
     all the conditions on the object hierarchy of Knative (e.g. `Service`, `Configuration`, `Revision`, `PodAutoscaler`, `ServerlessService`, `Route`, `Ingress`).
 
 
@@ -75,8 +75,8 @@ Supported probe types are:
 
 
 !!! note
-    Be aware that Knative also does some defaulting (checking readiness on the traffic port using a HTTP check) and additional validation to make aggressive probing work.
+    Be aware that Knative also does some defaulting (checking readiness on the traffic port using an HTTP check) and additional validation to make aggressive probing work.
 
 !!! warning
-    As the Queue-Proxy container does not rewrite or check defined Liveness probes, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.
+    As the Queue-Proxy container does not rewrite or check defined Liveness probes, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, you may see, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.
 
