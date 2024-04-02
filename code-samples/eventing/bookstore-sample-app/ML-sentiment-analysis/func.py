@@ -22,7 +22,7 @@ def create_cloud_event(data):
     return event
 
 def analyze_sentiment(text):
-   analysis = TextBlob(text)
+   analysis = TextBlob(text["input"])
    sentiment = "Neutral"
    if analysis.sentiment.polarity > 0:
        sentiment = "Positive"

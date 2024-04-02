@@ -230,13 +230,13 @@ Running on host port 8080
 Now you can test the function by sending a request to the function using the following command:
 
 ```bash
-curl -X POST http://localhost:8080/ \
+curl -X POST http://localhost:8080 \
 -H "ce-id: 12345" \
--H "ce-source: my-local" \
+-H "ce-source: /your/source" \
 -H "ce-type: sentiment-analysis-request" \
 -H "ce-specversion: 1.0" \
 -H "Content-Type: application/json" \
--d '"i love knative"'\
+-d '{"input":"I love Knative so much!"}'
 ```
 where `-H` are the headers, and `-d` is the input text. The input text is a **sting**. Be careful with the quotes.
 
@@ -251,7 +251,7 @@ If the function is running successfully, you will see the following output (the 
 Knative function also have an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent:
 
 ```bash
-func invoke -f=cloudevent --data="i love knative commmunity so much!" -v 
+func invoke -f=cloudevent --data='{"input": "I love Knative so much"}' --content-type=application/json --type="new-comment" -v 
 ```
 where the `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`, and the `--data` flag is the input text.
 You can read more about `func invoke` [here](https://github.com/knative/func/blob/main/docs/reference/func_invoke.md).
