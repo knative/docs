@@ -7,7 +7,7 @@ import { ThemeProvider } from 'next-themes';
 
 export default function Home() {
 	return (
-		<ThemeProvider>
+		<ThemeProvider attribute='class'>
 			<Main />
 		</ThemeProvider>
 	);

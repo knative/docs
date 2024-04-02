@@ -8,25 +8,25 @@ import { ThemeProvider } from 'next-themes';
 export default function Main() {
 	/* Example Book object */
 	const book = {
-		title: 'Book Mock Up',
-		author: 'me',
-		ISBN: '12342432',
-		publisher: 'dsfa',
-		publishedDate: '3333',
-		description: 'You are my fire! Hello world Im a book',
-		price: '$10',
+		img: '/images/Bookcover.jpg',
+		title: 'Building serverless applications on Knative',
+		author: 'Evan Anderson',
+		ISBN: '978-1098142070',
+		publisher: 'Oreilly & Associates Inc',
+		publishedDate: 'December 19, 2023',
+		description:
+			'A Guide to Designing and Writing Serverless Cloud Application',
+		price: '$49',
 	};
 	return (
 		<div>
-			<ThemeProvider attribute='class'>
-				<Header />
+			<Header />
 
-				<main className='container mx-auto my-8'>
-					<BookDetail book={book} />
-					<CommentForm />
-					<CommentList />
-				</main>
-			</ThemeProvider>
+			<main className='container mx-auto my-8'>
+				<BookDetail book={book} />
+				<CommentForm />
+				<CommentList />
+			</main>
 		</div>
 	);
 }

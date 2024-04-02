@@ -1,9 +1,9 @@
 import CommentDisplay from './CommentDisplay';
 const CommentList = () => {
 	const comment = {
-		avatar: '/images/knative-logo.png',
+		avatar: '/images/avatar.jpg',
 		time: '10:05',
-		text: 'Good work!',
+		text: 'I used this provider to insert a different theme object depending on a person ',
 		emotion: 'Happy',
 	};
 	return <CommentDisplay comment={comment} />;
