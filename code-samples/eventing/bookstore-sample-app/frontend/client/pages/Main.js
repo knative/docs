@@ -24,8 +24,13 @@ export default function Main() {
 
 			<main className='container mx-auto my-8'>
 				<BookDetail book={book} />
-				<CommentForm />
-				<CommentList />
+<div className="max-w-4xl mx-auto">
+          <CommentForm />
+          <p className="text-xl font-semibold mt-6 mb-4 text-gray-800 dark:text-gray-200">
+            Comments
+          </p>
+          <CommentList />
+        </div>
 			</main>
 		</div>
 	);
