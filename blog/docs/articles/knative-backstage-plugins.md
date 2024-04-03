@@ -8,7 +8,6 @@
 
 While Backstage is not designed as a next generation Kubernetes Dashboard, it can visualize and partially manage Knative resources. These resources would be read-only and focused on what's relevant to developers.
 
-With these in mind, our vision is to provide a way to visualize and partially manage Knative resources in Backstage. However, these are to be considered as read-only resources and we aim to show
 resources that are relevant to the developer persona.
 
 ## Plugins and backends
