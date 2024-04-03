@@ -39,7 +39,7 @@ What's really cool about this integration is that Backstage's ability to show gr
 
 If you would like to see the plugin in action, you can [install](https://github.com/knative-extensions/backstage-plugins?tab=readme-ov-file#running-the-backstage-plugin){:target="_blank"} the backend in your Kubernetes cluster and the plugin in your Backstage instance.
 
-However, if you want a quick look at the plugin, you can check out the [demo video](https://www.youtube.com/watch?v=4h1j1v8KrY0){:target="_blank"}.
+However, for a quicker look at the plugin, you can check out the [demo video](https://www.youtube.com/watch?v=4h1j1v8KrY0){:target="_blank"}.
 The demo video is recorded with the quick start available in Ali Ok's [demo repository](https://github.com/aliok/knative-backstage-demo){:target="_blank"}.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4h1j1v8KrY0?si=tzUmjcrYOfCy6E1H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
