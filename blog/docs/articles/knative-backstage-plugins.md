@@ -6,7 +6,7 @@
 
 [Backstage](https://backstage.io/){:target="_blank"} is a platform for building developer portals. It provides a unified way to manage and visualize the different resources that developers use in their daily work. 
 
-However, Backstage is not your next generation Kubernetes dashboard. It is not designed to replace the Kubernetes dashboard or any other Kubernetes management tool.
+While Backstage is not designed as a next generation Kubernetes Dashboard, it can visualize and partially manage Knative resources. These resources would be read-only and focused on what's relevant to developers.
 
 With these in mind, our vision is to provide a way to visualize and partially manage Knative resources in Backstage. However, these are to be considered as read-only resources and we aim to show
 resources that are relevant to the developer persona.
