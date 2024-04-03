@@ -133,7 +133,7 @@ The `requirements.txt` file contains the dependencies for the function. You can 
 Flask==3.0.2
 textblob==0.18.0.post0
 parliament-functions==0.1.0
-cloudevents
+cloudevents==1.10.1
 ```
 Knative function will automatically install the dependencies listed here when you build the function.
 
@@ -284,7 +284,7 @@ When the deployment is complete, you will see the following output:
 
 ```bash
 ✅ Function updated in namespace "default" and exposed at URL: 
-   http://sentiment-analysis-app.default.svc.cluster.local
+   http://sentiment-analysis-app.default.10.99.46.8.sslip.io
 ```
 
 You can also find the URL by running the following command:
@@ -299,6 +299,8 @@ You will see the URL in the output:
 NAMESPACE   NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
 default     sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00002   sentiment-analysis-app-00002   True    
 ```
+
+Please note: if your URL ends with .svc.cluster.local, that means you can only access the function from within the cluster. You probably forget to configure the network or [start the tunnel](https://knative.dev/docs/getting-started/quickstart-install/#__tabbed_3_2) if you are using minikube.
 
 ### Step 7: Verify the Deployment
 After deployment, the `func` CLI provides a URL to access your function. You can verify the function's operation by sending a request with a sample review comment.
