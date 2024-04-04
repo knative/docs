@@ -21,13 +21,14 @@ You must meet the following requirements to enable secure HTTPS connections:
 
 ## Automatically obtain and renew certificates
 
-### Installing and configuring net-certmanager
+### Installing and configuring cert-manager and integration
 
 !!! info
     If you want to use HTTP-01 challenge, you need to configure your custom domain to map to the IP of ingress. 
     You can achieve this by adding a DNS A record to map the domain to the IP according to the instructions of your DNS provider.
 
-First, you need to install and configure `cert-manager` and `net-certmanager`. Please refer to [Installing and configuring net-certmanager](./install-and-configure-net-certmanager.md) for details.
+First, you need to install and configure `cert-manager` and the Knative cert-manager integration.
+Please refer to [Configuring Knative cert-manager integration](./configure-certmanager-integration.md) for details.
 
 
 ### Configuring Knative Serving
@@ -43,13 +44,13 @@ Only one of them can be active at the same time!
 
 Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `external-domain-tls`:
 
-1.  Run the following command to edit your `config-network` ConfigMap:
+1. Run the following command to edit your `config-network` ConfigMap:
 
     ```bash
     kubectl edit configmap config-network -n knative-serving
     ```
 
-1.  Add the `external-domain-tls: Enabled` attribute under the `data` section:
+1. Add the `external-domain-tls: Enabled` attribute under the `data` section:
 
     ```yaml
     apiVersion: v1
@@ -61,6 +62,12 @@ Update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/
        ...
        external-domain-tls: Enabled
        ...
+    ```
+
+1. Restart the Knative Serving controller to start the Knative cert-manager integration:
+   
+    ```bash
+    kubectl rollout restart deploy/controller -n knative-serving
     ```
 
 #### Using one wildcard certificate per namespace
@@ -105,6 +112,11 @@ kubectl patch --namespace knative-serving configmap config-network -p '{"data": 
 
 For more details on namespace selectors, see [the Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors).
 
+Restart the Knative Serving controller to start the Knative cert-manager integration:
+
+```bash
+kubectl rollout restart deploy/controller -n knative-serving
+```
 
 Congratulations! Knative is now configured to obtain and renew TLS certificates.
 When your TLS Certificate is issued and available on your cluster, your Knative services will
@@ -277,7 +289,7 @@ Use the following steps in the relevant tab to add your certificate to your Knat
     A quick note on trust, all clients that call the external domain of a Knative Service need to trust the Certificate Authority
     that signed the certificates. This is out of scope of Knative, but needs to be addressed to ensure a working system. Especially,
     when a Certificate Authority performs a rotation of the CA or the intermediate certificates. Find more information on
-    [Install and configure net-certmanager](./install-and-configure-net-certmanager.md#managing-trust-and-rotation-without-downtime).
+    [Configuring Knative cert-manager integration](./configure-certmanager-integration.md#managing-trust-and-rotation-without-downtime).
 
 
 ## Additional configuration

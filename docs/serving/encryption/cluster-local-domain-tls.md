@@ -12,11 +12,16 @@ You must meet the following requirements to enable secure HTTPS connections:
 !!! warning
     This feature is currently only supported with Kourier and Istio as a networking layer.
 
+
+## Installing and configuring cert-manager and integration
+
+First, you need to install and configure `cert-manager` and the Knative cert-manager integration.
+Please refer to [Configuring Knative cert-manager integration](./configure-certmanager-integration.md) for details.
+
+
 ## Enabling cluster-local-domain-tls
 
-First, you need to install and configure `cert-manager` and `net-certmanager`. Please refer to [Installing and configuring net-certmanager](./install-and-configure-net-certmanager.md) for details.
-
-Then, update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `cluster-local-domain-tls`:
+To enable `cluster-local-domain-tls` update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
@@ -36,6 +41,12 @@ Then, update the [`config-network` ConfigMap](https://github.com/knative/serving
        ...
        cluster-local-domain-tls: Enabled
        ...
+    ```
+
+1. Restart the Knative Serving controller to start the Knative cert-manager integration:
+
+    ```bash
+    kubectl rollout restart deploy/controller -n knative-serving
     ```
 
 Congratulations! Knative is now configured to obtain and renew TLS certificates for cluster-local domains.
@@ -73,5 +84,5 @@ status:
     A quick note on trust, all clients that call the cluster-local domain of a Knative Service need to trust the Certificate Authority
     that signed the certificates. This is out of scope of Knative, but needs to be addressed to ensure a working system. Especially,
     when a Certificate Authority performs a rotation of the CA or the intermediate certificates. Find more information on
-    [Install and configure net-certmanager](./install-and-configure-net-certmanager.md#managing-trust-and-rotation-without-downtime).
+    [Configuring Knative cert-manager integration](./configure-certmanager-integration.md#managing-trust-and-rotation-without-downtime).
 

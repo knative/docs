@@ -1,7 +1,7 @@
-# Installing and configuring net-certmanager
+# Configuring Knative cert-manager integration
 
 Knative Serving relies on a bridging-component to use cert-manager for automated certificate provisioning. 
-If you intend to use that feature, you need to install net-certmanager.
+If you intend to use that feature, you need to enable the Knative cert-manager integration.
 
 ## Prerequisites
 
@@ -10,35 +10,20 @@ The following must be installed on your Knative cluster:
 - [Knative Serving](../../install/yaml-install/serving/install-serving-with-yaml.md).
 - [`cert-manager`](../../install/installing-cert-manager.md) version `1.0.0` or higher.
 
-
-## Installing net-certmanager
-
-net-certmanager can be installed using the YAML installation method:
-
-```bash
-kubectl apply -f {{ artifact( repo="net-certmanager", file="release.yaml") }}
-```
-
 !!! warning
-    Per default, this installs a self-signed cert-manager `ClusterIssuer` for an easy quick-start. 
-    This issuer should **NOT BE USED IN PRODUCTION**! You can add a label filter to the command above 
-    to remove the issuer from the installation and configure your issuer manually: `--selector knative.dev/issuer-install!="true"`
-
-Installing net-certmanager using the Knative operator is not yet supported. 
-But the operator can be configured to install additional manifests from YAML,
-see [issue-950](https://github.com/knative/operator/issues/950#issuecomment-1032769274) for more info.
+    Make sure you have installed cert-manager. Otherwise, the Serving controller will not start up correctly.
 
 
 ## Issuer configuration
 
-net-certmanager defines three references to [cert-manager issuers](https://cert-manager.io/docs/configuration/issuers/) to configure different CAs
+The Knative cert-manager integration defines three references to [cert-manager issuers](https://cert-manager.io/docs/configuration/issuers/) to configure different CAs
 for the [three Knative Serving encryption features](./encryption-overview.md):
 
 * `issuerRef`: issuer for external-domain certificates used for ingress.
 * `clusterLocalIssuerRef`: issuer for cluster-local-domain certificates used for ingress.
 * `systemInternalIssuerRef`: issuer for certificates for system-internal-tls certificates used by Knative internal components.
 
-Per default, Knative uses a self-signed `ClusterIssuer` and net-certmanager references that `ClusterIssuer` for all three configurations.
+The following example uses a self-signed `ClusterIssuer` and the Knative cert-manager integration references that `ClusterIssuer` for all three configurations.
 As this **should not be used in production** (and does not support rotating the CA without downtime),
 you should think about which CA should be used for each use-case and how trust will be distributed to the clients calling the encrypted services. 
 For the Knative system components, Knative provides a way to specify a bundle of CAs that should be trusted (more on this below).
@@ -78,20 +63,52 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
 
 ### Configuring issuers
 
-1. Create your `Issuer` and/or `ClusterIssuer`
+!!! warning
+    The self-signed cluster issuer should not be used in production, please see [Issuer configuration](#issuer-configuration) above for more information.
 
-1. Ensure that your namespace `Issuer` or `ClusterIssuer` exists:
+1. Create and apply the following self-signed `ClusterIssuer` to your cluster:
+
+    ```yaml
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: selfsigned-cluster-issuer
+    spec:
+      selfSigned: {}
+    ---
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: knative-selfsigned-issuer
+    spec:
+      ca:
+        secretName: knative-selfsigned-ca
+    ---
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    metadata:
+      name: knative-selfsigned-ca
+      namespace: cert-manager #  If you want to use it as a ClusterIssuer the secret must be in the cert-manager namespace.
+    spec:
+      secretName: knative-selfsigned-ca
+      commonName: knative.dev
+      usages:
+        - server auth
+      isCA: true
+      issuerRef:
+        kind: ClusterIssuer
+        name: selfsigned-cluster-issuer
+    ```
+
+1. Ensure that the `ClusterIssuer` is ready:
 
     ```bash
-    kubectl get clusterissuer <cluster-issuer-name> -o yaml
+    kubectl get clusterissuer selfsigned-cluster-issuer -o yaml
+    kubectl get clusterissuer knative-selfsigned-issuer -o yaml
     ```
-    ```bash
-    kubectl get issuer -n <your-namespace> -o yaml
-    ```
-
     Result: The `Status.Conditions` should include `Ready=True`.
 
-1. Then reference it in the `config-certmanager` ConfigMap:
+1. Then reference the `ClusterIssuer` in the `config-certmanager` ConfigMap:
 
     ```bash
     kubectl edit configmap config-certmanager -n knative-serving
@@ -110,13 +127,13 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
     data:
       issuerRef: |
         kind: ClusterIssuer
-        name: letsencrypt-http01-issuer
+        name: knative-selfsigned-issuer
       clusterLocalIssuerRef: |
         kind: ClusterIssuer
-        name: cluster-local-ca-issuer
+        name: knative-selfsigned-issuer
       systemInternalIssuerRef: |
         kind: ClusterIssuer
-        name: self-signed-issuer
+        name: knative-selfsigned-issuer
     ```
 
     Ensure that the file was updated successfully:

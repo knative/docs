@@ -12,11 +12,15 @@ You must meet the following requirements to enable secure HTTPS connections:
 !!! warning
     This feature is currently only supported with Kourier as a networking layer.
 
+### Installing and configuring cert-manager and integration
+
+First, you need to install and configure `cert-manager` and the Knative cert-manager integration.
+Please refer to [Configuring Knative cert-manager integration](./configure-certmanager-integration.md) for details.
+
+
 ## Enabling system-internal-tls
 
-First, you need to install and configure `cert-manager` and `net-certmanager`. Please refer to [Installing and configuring net-certmanager](./install-and-configure-net-certmanager.md) for details.
-
-Then, update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace to enable `system-internal-tls`:
+To enable `system-internal-tls` update the [`config-network` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/network.yaml) in the `knative-serving` namespace:
 
 1.  Run the following command to edit your `config-network` ConfigMap:
 
@@ -38,13 +42,11 @@ Then, update the [`config-network` ConfigMap](https://github.com/knative/serving
        ...
     ```
 
-1.  Restart the Activator component
-
-    !!! warning
-        When the `system-internal-tls` feature is activated, the Activator component needs to be restarted to reconfigure its internal web server, as this is not possible during runtime.
+1.  Restart the Knative activator and controller component to start the Knative cert-manager integration:
  
     ```bash
-      kubectl rollout restart deploy/activator -n knative-serving
+    kubectl rollout restart deploy/activator -n knative-serving
+    kubectl rollout restart deploy/controller -n knative-serving
     ```
 
 Congratulations! Knative will now use TLS between its internal system components (Ingress-Controller, Activator and Queue-Proxy).
@@ -76,7 +78,7 @@ Congratulations! Knative will now use TLS between its internal system components
 !!! warning
     A quick note on trust, Knative will automatically trust the CA that signed the Certificates, if the cert-manager issuer allows 
     putting the CA directly in the field `ca.crt` of the certificates `Secret`. Regardless of that, Cluster admins **should always**
-    provide a trust-bundle, as described in [Install and configure net-certmanager](./install-and-configure-net-certmanager.md#managing-trust-and-rotation-without-downtime).
+    provide a trust-bundle, as described in  [Configuring Knative cert-manager integration](./configure-certmanager-integration.md#managing-trust-and-rotation-without-downtime).
     This is also strongly recommended in the [cert-manager documentation](https://cert-manager.io/docs/trust/trust-manager/#cert-manager-integration-intentionally-copying-ca-certificates)
     to avoid issues with rotation.
    
