@@ -64,7 +64,8 @@ default       postgresql-0             1/1     Running     0          1m
 ```
 Upon observing the pod in a `Running` state, access the pod using the command:
 ```bash
-kubectl exec -it postgresql-0 -n=default -- /bin/bash
+kubectl exec -it postgresql-0 -- /bin/bash
+
 ```
 Inside the pod, connect to the database with:
 ```bash
