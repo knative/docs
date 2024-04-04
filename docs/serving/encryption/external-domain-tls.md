@@ -86,7 +86,7 @@ in the `config-network` ConfigMap. For example, you can use the following config
 You can also configure the selector to opt-out when a specific label is on the namespace:
 
 ```yaml
-namespace-wildcard-cert-selector:
+namespace-wildcard-cert-selector: |-
   matchExpressions:
   - key: "networking.knative.dev/disableWildcardCert"
     operator: "NotIn"
@@ -97,7 +97,7 @@ This selects all namespaces where the label value is not in the set `"true"`.
 Or use existing kubernetes labels to select namespaces based on their name:
 
 ```yaml
-namespace-wildcard-cert-selector:
+namespace-wildcard-cert-selector: |-
   matchExpressions:
     - key: "kubernetes.io/metadata.name"
       operator: "In"
