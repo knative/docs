@@ -1,17 +1,18 @@
 'use client';
 import React from 'react';
 import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 
 const Toggle = () => {
 	const { systemTheme, theme, setTheme } = useTheme();
-  useEffect(() => {
-    const systemPreference = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
+	useEffect(() => {
+		const systemPreference = window.matchMedia('(prefers-color-scheme: dark)')
+			.matches
+			? 'dark'
+			: 'light';
 
-    setTheme(systemPreference);
-  }, []);
+		setTheme(systemPreference);
+	}, []);
 	return (
 		<button
 			onClick={() => (theme == 'dark' ? setTheme('light') : setTheme('dark'))}

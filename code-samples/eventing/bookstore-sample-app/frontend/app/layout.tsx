@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
 	title: 'Knative Bookstore',
 	description: 'Bookstore Sample Application from Knative',
+	icons: {
+		icon: '/images/knative-logo.png',
+	},
 };
 
 export default function RootLayout({
