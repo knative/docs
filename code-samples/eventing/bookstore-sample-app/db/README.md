@@ -55,7 +55,8 @@ The filenames prefixed with numbers dictate the application order, ensuring Kube
 ### Step 3: Confirming the Deployment
 Following the application of the deployment files, initialization of the database may require some time. Monitor the deployment's progress by executing:
 ```bash
-kubectl get pods -n=default
+kubectl get pods
+
 ```
 A successful deployment is indicated by the `Running` state of the `postgresql-0` pod, as shown below:
 ```bash
