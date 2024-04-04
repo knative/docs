@@ -4,8 +4,14 @@ import { useTheme } from 'next-themes';
 
 const Toggle = () => {
 	const { systemTheme, theme, setTheme } = useTheme();
-	const currentTheme = theme === 'system' ? systemTheme : theme;
+  useEffect(() => {
+    const systemPreference = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
 
+    setTheme(systemPreference);
+  }, []);
 	return (
 		<button
 			onClick={() => (theme == 'dark' ? setTheme('light') : setTheme('dark'))}
