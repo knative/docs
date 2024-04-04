@@ -297,7 +297,7 @@ You will see the URL in the output:
 
 ```bash
 NAMESPACE   NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
-default     sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00002   sentiment-analysis-app-00002   True    
+default     sentiment-analysis-app   http://sentiment-analysis-app.default.10.99.46.8.sslip.io   sentiment-analysis-app-00002   sentiment-analysis-app-00002   True    
 ```
 
 Please note: if your URL ends with .svc.cluster.local, that means you can only access the function from within the cluster. You probably forget to configure the network or [start the tunnel](https://knative.dev/docs/getting-started/quickstart-install/#__tabbed_3_2) if you are using minikube.
@@ -308,7 +308,7 @@ After deployment, the `func` CLI provides a URL to access your function. You can
 Simply use Knative function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
 ```bash
-func invoke -f=cloudevent --data="i love knative community so much" -v -t="http://sentiment-analysis-app.default.svc.cluster.local"
+func invoke -f=cloudevent --data="i love knative community so much" -v -t="http://sentiment-analysis-app.default.10.99.46.8.sslip.io"
 ```
 
 - `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`
@@ -338,34 +338,9 @@ kubectl get kservice -A
 ```
 ---
 Another option is to use curl to send a CloudEvent to the function.
-
-But directly sending CloudEvents to a Knative service using curl from an external machine (like your local computer) is typically **constrained** due to the networking and security configurations of Kubernetes clusters.
-
-Therefore, you need to create a new pod in your Kubernetes cluster to send a CloudEvent to the Knative Function service. You can use the following command to create a new pod:
-
-```bash
-kubectl run curler --image=radial/busyboxplus:curl -it --restart=Never
-```
-You will see this message if you successfully entered the pod's shell
-
-```
-If you don't see a command prompt, try pressing enter.
-[root@curler:/]$ 
-```
----
-FAQ box on the website:
-Error from server (AlreadyExists): pods "curler" already exists
-
-If you see this error, it means that the pod already exists. You can delete the pod using the following command:
-You can directly enter the pod's shell using the following command:
-```bash
-kubectl exec -it curler -- /bin/sh
-```
----
-
 Using curl command to send a CloudEvent to the broker:
 ```bash
-[root@curler:/]$ curl -v "<The URI to your Knative Function>" \
+[root@curler:/]$ curl -v "http://sentiment-analysis-app.default.10.99.46.8.sslip.io" \
 -X POST \
 -H "ce-id: 12345" \
 -H "ce-source: my-local" \
