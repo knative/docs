@@ -1,3 +1,4 @@
+import Emoji from './Emoji';
 const CommentDisplay = ({ comment }) => {
 	// Assume receiving a comment object
 	return (
@@ -11,11 +12,16 @@ const CommentDisplay = ({ comment }) => {
 					/>
 				</div>
 				<div className='md:w-1/12 text-sm text-gray-200 dark:text-black'>
-					{' '}
-					{comment.time}{' '}
+					{comment.time}
 				</div>
-				<div className='md:w-8/12'> {comment.text} </div>
-				<div className='md:w-2/12'> {comment.emotion} </div>
+				<div className='md:w-9/12'> {comment.text} </div>
+				<div className='md:w-1/12 text-4xl'>
+					<Emoji
+						symbol={comment.emotion}
+						label={comment.label}
+						size='text-2xl'
+					/>
+				</div>
 			</div>
 		</div>
 	);

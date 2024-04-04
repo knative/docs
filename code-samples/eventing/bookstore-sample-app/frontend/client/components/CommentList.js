@@ -4,7 +4,8 @@ const CommentList = () => {
 		avatar: '/images/avatar.jpg',
 		time: '10:05',
 		text: 'I used this provider to insert a different theme object depending on a person ',
-		emotion: 'Happy',
+		emotion: '😃',
+		label: 'grinning face',
 	};
 	return <CommentDisplay comment={comment} />;
 };
