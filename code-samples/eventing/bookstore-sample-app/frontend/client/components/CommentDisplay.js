@@ -19,7 +19,7 @@ const CommentDisplay = ({ comment }) => {
 						className='rounded-full w-8 h-8'
 					/>
 				</div>
-				<div className='md:w-1/12 text-sm text-gray-200 dark:text-black'>
+				<div className='md:w-1/12 flex items-center content-center text-gray-200 dark:text-black'>
 					{comment.time}
 				</div>
 				<div className='md:w-9/12 '>
