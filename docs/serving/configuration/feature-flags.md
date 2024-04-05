@@ -105,6 +105,36 @@ spec:
           image: gcr.io/knative-samples/helloworld-java
 ```
 
+### Multiple Container Probing
+
+* **Type**: Feature
+* **ConfigMap key:** `multi-container-probing`
+
+This flag allows specifying probes (readiness/liveness) for multiple containers in a Knative Service spec.
+Please use this feature flag in combination with [multiple containers](#multiple-containers) above.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      containers:
+        - name: first-container
+          image: ghcr.io/knative/helloworld-go:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              port: 8080
+        - name: second-container
+          image: gcr.io/knative-samples/helloworld-java
+          readinessProbe:
+            httpGet:
+              port: 8090
+```
+
 ### Kubernetes EmptyDir Volume
 
 * **Type**: Extension
