@@ -25,7 +25,7 @@ app.post('/add', async (req, res) => {
                 headers: {
                     'Content-Type': 'application/json',
                     'ce-specversion': '1.0',
-                    'ce-type': 'new-comment',
+                    'ce-type': 'sentiment-analysis-request',
                     'ce-source': 'bookstore-eda',
                     'ce-id': '1234',
                 },
@@ -34,8 +34,8 @@ app.post('/add', async (req, res) => {
 
             console.log('Received event:', receivedEvent);
 
-            // Print the response from the broker
-            console.log(await response.text());
+            console.log('Forwarded event:', response);
+
 
             // Return the received cloudevent as a response
             res.status(200).json(response.text());
