@@ -244,6 +244,7 @@ If the function is running successfully, you will see the following output (the 
 
 ```bash
 {
+  "input":"I love Knative so much!",
   "result": "Positive"
 }
 ```
@@ -268,6 +269,7 @@ Context Attributes,
   datacontenttype: application/json
 Data,
   {
+    "input":"I love Knative so much!",
     "result": "Positive"
   }
 
@@ -327,6 +329,7 @@ Context Attributes,
   datacontenttype: application/json
 Data,
   {
+    "input":"I love Knative so much!",
     "result": "Positive"
   }
 ```
@@ -354,6 +357,7 @@ Expect to receive a JSON response indicating the sentiment classification of the
 
 ```bash
 {
+  "input":"I love Knative so much!",
   "result": "Positive"
 }
 ```

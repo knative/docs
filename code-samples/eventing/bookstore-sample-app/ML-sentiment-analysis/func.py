@@ -6,7 +6,7 @@ from time import sleep
 from cloudevents.http import CloudEvent, to_structured
 
 # The function to convert the sentiment analysis result into a CloudEvent
-def create_cloud_event(data):
+def create_cloud_event(inputText,data):
     attributes = {
     "type": "knative.sampleapp.sentiment.response",
     "source": "sentiment-analysis",
@@ -14,7 +14,10 @@ def create_cloud_event(data):
     }
 
     # Put the sentiment analysis result into a dictionary
-    data = {"result": data}
+    data = {
+    "input": inputText,
+    "result": data
+    }
 
     # Create a CloudEvent object
     event = CloudEvent(attributes, data)
@@ -30,7 +33,7 @@ def analyze_sentiment(text):
        sentiment = "Negative"
 
    # Convert the sentiment into a CloudEvent
-   sentiment = create_cloud_event(sentiment)
+   sentiment = create_cloud_event(text["input"],sentiment)
 
    return sentiment
 
