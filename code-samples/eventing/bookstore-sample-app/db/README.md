@@ -5,9 +5,6 @@ In this tutorial, we'll embark on creating a PostgreSQL database using Kubernete
 
 You might wonder, "Why not leverage Knative Serving to dynamically scale the database service in response to traffic demands?" We'll delve into the optimal scenarios for employing Knative Serving and when it's advantageous for our database service.
 
-## What Knative features will we learn about?
-- Appropriate Use Cases for Knative Service
-
 ## What does the final deliverable look like?
 Our goal is to deploy a PostgreSQL pod within Kubernetes, loaded with the sample data outlined in the accompanying SQL file. This pod will serve as the foundational database service for our bookstore application.
 
