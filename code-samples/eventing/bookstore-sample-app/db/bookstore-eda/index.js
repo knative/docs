@@ -2,7 +2,7 @@ const express = require('express');
 const { HTTP, CloudEvent } = require('cloudevents');
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 
 // Middleware to parse JSON bodies
@@ -18,10 +18,10 @@ app.post('/add', async (req, res) => {
             const comment = receivedEvent.data; // Assuming the data contains the comment directly
 
             // Forward the event to the broker by sending the post request to the broker
-            const response = await fetch('http://broker-url', {
+            const response = await fetch('http://broker-ingress.knative-eventing.svc.cluster.local/default/broker', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/cloudevents+json',
+                    'Content-Type': 'application/json',
                     'ce-specversion': '1.0',
                     'ce-type': 'new-comment',
                     'ce-source': 'bookstore-eda',
@@ -29,6 +29,11 @@ app.post('/add', async (req, res) => {
                 },
                 body: JSON.stringify(comment),
             });
+
+            console.log('Received event:');
+
+            // Print the response from the broker
+            console.log(await response.text());
 
             // Return the received cloudevent as a response
             res.status(200).json(receivedEvent);
