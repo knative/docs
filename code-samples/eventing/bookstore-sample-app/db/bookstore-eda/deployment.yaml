@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eda
+  labels:
+    app: eda
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eda
+  template:
+    metadata:
+      labels:
+        app: eda
+    spec:
+      containers:
+      - name: eda
+        image: quay.io/rh-ee-leoli/eda:latest
+        ports:
+        - containerPort: 8000
