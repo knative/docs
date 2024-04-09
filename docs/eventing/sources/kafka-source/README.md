@@ -24,14 +24,16 @@ stored in the topic partitions. It does this by waiting for a successful respons
    by entering the following command:
 
     ```bash
-    kubectl get deployments.apps -n knative-eventing
+    kubectl get deployments.apps,statefulsets.apps -n knative-eventing
     ```
 
     Example output:
     ```{ .bash .no-copy }
-    NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
-    kafka-controller               1/1     1            1           3s
-    kafka-source-dispatcher        1/1     1            1           4s
+    NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/kafka-controller               1/1     1            1           3s
+   
+    NAME                                       READY   AGE
+    statefulset.apps/kafka-source-dispatcher   1/1     3s
     ```
 
 ## Optional: Create a Kafka topic
