@@ -14,7 +14,7 @@ app.post('/add', async (req, res) => {
         const receivedEvent = HTTP.toEvent({ headers: req.headers, body: req.body });
         const brokerURI = process.env.K_SINK;
 
-        if (receivedEvent.type === 'new-comment') {
+        if (receivedEvent.type === 'new-review-comment') {
             // Forward the event to the broker with the necessary CloudEvent headers
             const response = await fetch(brokerURI, {
                 method: 'POST',
