@@ -6,7 +6,7 @@ const port = 8000;
 
 
 // Middleware to parse JSON bodies
-app.use(express.json()); // This line is crucial
+app.use(express.json());
 
 
 app.post('/add', async (req, res) => {
