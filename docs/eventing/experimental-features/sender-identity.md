@@ -234,3 +234,28 @@ Send events to the Broker using OIDC authentication:
         "name": "authenticated"
       }
     ```
+
+## Limitations with Istio
+
+You might experience issues with the [eventing integration with Istio](https://github.com/knative-extensions/eventing-istio) and having the `authentication-oidc` feature flag enabeled, when the JWKS URI is represented via an IP. E.g. like in the following case:
+
+```
+$ kubectl get --raw /.well-known/openid-configuration | jq
+{
+  "issuer": "https://kubernetes.default.svc",
+  "jwks_uri": "https://172.18.0.3:6443/openid/v1/jwks",
+  ...
+}
+```
+
+In this case you need to add the [`traffic.sidecar.istio.io/excludeOutboundIPRanges: <JWKS IP>/32`](https://istio.io/latest/docs/reference/config/annotations/#SidecarTrafficExcludeOutboundIPRanges) annotation to the pod templates of the following deployments:
+* `imc-dispatcher`
+* `mt-broker-ingress`
+* `mt-broker-filter`
+
+For example:
+
+```
+$ kubectl -n knative-eventing patch deploy imc-dispatcher --patch '{"spec":{"template":{"metadata":{"annotations":{"traffic.sidecar.istio.io/excludeOutboundIPRanges":"172.18.0.3/32"}}}}}'
+deployment.apps/imc-dispatcher patched
+```
