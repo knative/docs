@@ -249,9 +249,10 @@ $ kubectl get --raw /.well-known/openid-configuration | jq
 ```
 
 In this case you need to add the [`traffic.sidecar.istio.io/excludeOutboundIPRanges: <JWKS IP>/32`](https://istio.io/latest/docs/reference/config/annotations/#SidecarTrafficExcludeOutboundIPRanges) annotation to the pod templates of the following deployments:
-* `imc-dispatcher`
-* `mt-broker-ingress`
-* `mt-broker-filter`
+
+- `imc-dispatcher`
+- `mt-broker-ingress`
+- `mt-broker-filter`
 
 For example:
 
