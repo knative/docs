@@ -21,6 +21,21 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 !!! note
     To not provide the access token in cleartext over the wire, transport-encryption should be enabled as well. Take a look at [Transport-Encryption](./transport-encryption.md), which explains how to enable the transport encryption feature flag.
 
+## Compatibility
+
+OIDC authentication is currently supported for the following components:
+
+- Brokers:
+    - [MTChannelBasedBroker](./../brokers/broker-types/channel-based-broker/)
+    - [Knative Broker for Apache Kafka](./../brokers/broker-types/kafka-broker/)
+- Channels:
+    - InMemoryChannel
+    - KafkaChannel
+- Sources:
+    - [ApiServerSource](./../sources/apiserversource/)
+    - [PingSource](./../sources/ping-source/)
+    - [KafkaSource](./../sources/kafka-source/)
+
 ## Sender Identity Configuration
 
 The possible values for `authentication-oidc` are:
