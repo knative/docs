@@ -29,8 +29,8 @@ OIDC authentication is currently supported for the following components:
     - [MTChannelBasedBroker](./../brokers/broker-types/channel-based-broker/)
     - [Knative Broker for Apache Kafka](./../brokers/broker-types/kafka-broker/)
 - Channels:
-    - [InMemoryChannel](https://github.com/knative/eventing/tree/release-1.13/config/channels/in-memory-channel/README.md)
-    - [KafkaChannel](https://github.com/knative-extensions/eventing-kafka-broker/tree/release-1.13/README.md)
+    - InMemoryChannel
+    - KafkaChannel
 - Sources:
     - [ApiServerSource](./../sources/apiserversource/)
     - [PingSource](./../sources/ping-source/)
