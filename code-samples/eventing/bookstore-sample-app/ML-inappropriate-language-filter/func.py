@@ -1,6 +1,6 @@
 from parliament import Context
 from profanity_check import predict
-from cloudevents.http import CloudEvent, to_structured
+from cloudevents.http import CloudEvent
 
 # The function to convert the bad word filter result into a CloudEvent
 def create_cloud_event(inputText,data):
