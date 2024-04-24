@@ -3,6 +3,7 @@ import { useState } from 'react';
 const CommentForm = () => {
 	const [hover, setHover] = useState(false);
 	const [comment, setComment] = useState('');
+	const reviewServiceUrl = process.env.K_SINK;
 
 	const handleInputChange = (event) => {
 		setComment(event.target.value);
@@ -11,6 +12,30 @@ const CommentForm = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		console.log('Submitted comment:', comment); // Use inspect to see
+
+		// Send the comment request as cloudevent to the review service
+		fetch(reviewServiceUrl + "/add", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Ce-Type': 'new-review-comment', // Assuming CloudEvents standard
+				'Ce-Specversion': '1.0',
+				'Ce-Source': 'commentForm',
+				'Ce-Id': 'unique-comment-id'
+			},
+			body: JSON.stringify({
+				input: comment
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+				setComment(''); // Clear comment field after submission
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+
 	};
 	return (
 		<div className='flex my-4 p-4 justify-center'>
