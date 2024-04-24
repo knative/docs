@@ -103,7 +103,7 @@ go.uber.org/zap/internal/bufferpool
 go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.17.0
+# golang.org/x/crypto v0.21.0
 ## explicit; go 1.18
 golang.org/x/crypto/cast5
 golang.org/x/crypto/openpgp
@@ -121,8 +121,8 @@ golang.org/x/lint/golint
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.17.0
-## explicit; go 1.17
+# golang.org/x/net v0.23.0
+## explicit; go 1.18
 golang.org/x/net/context
 golang.org/x/net/context/ctxhttp
 golang.org/x/net/http/httpguts
@@ -138,7 +138,7 @@ golang.org/x/oauth2/google
 golang.org/x/oauth2/internal
 golang.org/x/oauth2/jws
 golang.org/x/oauth2/jwt
-# golang.org/x/sys v0.15.0
+# golang.org/x/sys v0.18.0
 ## explicit; go 1.18
 golang.org/x/sys/execabs
 golang.org/x/sys/unix
@@ -300,7 +300,7 @@ gopkg.in/go-playground/webhooks.v3/github
 gopkg.in/yaml.v2
 # honnef.co/go/tools v0.0.1-2020.1.5
 ## explicit; go 1.11
-# knative.dev/hack v0.0.0-20240327150553-47368d631660
+# knative.dev/hack v0.0.0-20240404013450-1133b37da8d7
 ## explicit; go 1.18
 knative.dev/hack
 # go.opencensus.io => go.opencensus.io v0.20.2

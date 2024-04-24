@@ -36,3 +36,4 @@ maven-wrapper.jar
 
 # Ignore Python virtual environments
 .venv
+/code-samples/eventing/bookstore-sample-app/db/bookstore-eda/node_modules/*
