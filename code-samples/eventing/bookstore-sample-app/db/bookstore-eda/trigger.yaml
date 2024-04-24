@@ -1,0 +1,34 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: event-display-trigger
+spec:
+  broker: broker
+  filter:
+    attributes:
+      type: sentiment-analysis-request
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: sentiment-analysis-app
+
+
+---
+
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: reply-trigger
+spec:
+  broker: broker
+  filter:
+    attributes:
+      type: knative.sampleapp.sentiment.response
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+
+
