@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const { HTTP, CloudEvent } = require('cloudevents');
 
@@ -7,7 +8,7 @@ const port = 8000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.post('/add', async (req, res) => {
     try {
