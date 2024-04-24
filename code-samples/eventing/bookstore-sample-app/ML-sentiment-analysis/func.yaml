@@ -1,0 +1,11 @@
+specVersion: 0.35.0
+name: sentiment-analysis-app
+runtime: python
+registry: <your docker registry>
+image: <Your docker registry>/sentiment-analysis-app:latest
+imageDigest: sha256:0bc*****d3c
+created: 2024-02-31T00:18:00.06485162-04:00
+build:
+  builder: s2i
+deploy:
+  namespace: default
