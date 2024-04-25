@@ -1,0 +1,17 @@
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: frontend-sinkbinding-nodejs-server
+  namespace: default
+spec:
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app: bookstore-frontend
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: knative-eda
