@@ -26,11 +26,11 @@ To set up a webhook for sending notifications to your Slack workspace:
 - Create a [Slack app](https://api.slack.com/apps/new), following the instructions by signing in, adding name and workspace to put the app in.
 - After this, you'll be redirected to the setting pages of your new app. Choose **Incoming Webhook** and toggle **Activate Webhook**.
 - Scroll down to click the option **Add New Webhook to Workspace**.
-  ![Alt text](/./screenshots/select-channel.png)
+  ![Alt text](./screenshots/select-channel.png)
 - The page will give you a link associated with the app you created. This link will be where API requests are sent to send messages to your Slack workspace.
-  ![Alt text](/./screenshots/webhooklink.png)
+  ![Alt text](./screenshots/webhooklink.png)
 - To test if the webhook works as needed, you can try sending an API request to this link to see if the message goes through. I used Postman to test this. Remember that this is an application/json file.
-  ![Alt text](/./screenshots/Postman.png)
+  ![Alt text](./screenshots/Postman.png)
 - Afterwards, the text channel should have a new message
-  ![Alt text](/./screenshots/result.png)
+  ![Alt text](./screenshots/result.png)
 - Go to [Slack's webhook documentation](https://api.slack.com/messaging/webhooks) to learn more about setting up webhooks.
