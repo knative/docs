@@ -10,7 +10,7 @@ Our goal is to deploy a PostgreSQL pod within Kubernetes, loaded with the sample
 
 ## Overview
 ### The Database Schema
-The BookReviews table contains all reviews made on the bookstore website. 
+The BookReviews table https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#custom-resources all reviews made on the bookstore website. 
 
 See the columns of the BookReviews table below:
 * `ID (serial)` - Primary Key
