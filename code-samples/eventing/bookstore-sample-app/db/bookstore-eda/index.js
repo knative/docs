@@ -8,7 +8,7 @@ const port = 8000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors());
 
 app.post('/add', async (req, res) => {
     try {
