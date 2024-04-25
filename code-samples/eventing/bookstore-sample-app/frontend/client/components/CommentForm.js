@@ -3,7 +3,6 @@ import { useState } from 'react';
 const CommentForm = () => {
 	const [hover, setHover] = useState(false);
 	const [comment, setComment] = useState('');
-	const reviewServiceUrl = process.env.K_SINK;
 
 	const handleInputChange = (event) => {
 		setComment(event.target.value);
@@ -11,10 +10,8 @@ const CommentForm = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log('Submitted comment:', comment); // Use inspect to see
-
 		// Send the comment request as cloudevent to the review service
-		fetch(reviewServiceUrl + "/add", {
+		fetch( "http://localhost:8080/add", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
