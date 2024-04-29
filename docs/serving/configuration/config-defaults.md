@@ -143,7 +143,7 @@ The revision response start timeout value determines the maximum duration in sec
 
 ### Revision idle timeout seconds
 {% raw %}
-The revision timeout value determines the maximum duration in seconds a request will be allowed to stay open while not receiving any bytes from the user's application. If omitted, the system default is used (infinite).
+The revision idle timeout value determines the maximum duration in seconds a request will be allowed to stay open while not receiving any bytes from the user's application. If omitted, the system default is used (infinite).
 {% endraw %}
 
 * **Global key:** `revision-idle-timeout-seconds`
