@@ -264,6 +264,41 @@ can add to the `config-kafka-features` configmap, [read about the experimental K
         }
     ```
 
+## Handling Delivery Failures
+
+The `KafkaSource` implements the `Delivery` Specificiation, allowing you to configure event delivery parameters for it, which are applied in cases where an event fails to be delivered:
+
+```yaml
+
+    apiVersion: sources.knative.dev/v1beta1
+    kind: KafkaSource
+    metadata:
+      name: kafka-source
+    spec:
+      consumerGroup: knative-group
+      bootstrapServers:
+      - my-cluster-kafka-bootstrap.kafka:9092 # note the kafka namespace
+      topics:
+      - knative-demo-topic
+      delivery:
+        deadLetterSink:
+          ref:
+            apiVersion: serving.knative.dev/v1
+            kind: Service
+            name: example-sink
+        backoffDelay: <duration>
+        backoffPolicy: <policy-type>
+        retry: <integer>
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
+
+```
+
+The `delivery` API is discussed in the [Handling Delivery Failure](../../event-delivery) chapter.
+
 ## Optional: Specify the key deserializer
 
 When `KafkaSource` receives a message from Kafka, it dumps the key in the Event extension called
