@@ -1,6 +1,6 @@
 # Configuring Knative cert-manager integration
 
-Knative Serving relies on a bridging-component to use cert-manager for automated certificate provisioning. 
+Knative Serving relies on a bridging component to use cert-manager for automated certificate provisioning. 
 If you intend to use that feature, you need to enable the Knative cert-manager integration.
 
 ## Prerequisites
@@ -25,7 +25,7 @@ for the [three Knative Serving encryption features](./encryption-overview.md):
 
 The following example uses a self-signed `ClusterIssuer` and the Knative cert-manager integration references that `ClusterIssuer` for all three configurations.
 As this **should not be used in production** (and does not support rotating the CA without downtime),
-you should think about which CA should be used for each use-case and how trust will be distributed to the clients calling the encrypted services. 
+you should think about which CA should be used for each use case and how trust will be distributed to the clients calling the encrypted services. 
 For the Knative system components, Knative provides a way to specify a bundle of CAs that should be trusted (more on this below).
 
 There is no general answer on how to structure this, here an example on how it could look like:
@@ -49,8 +49,8 @@ In general, you can refer to the [cert-manager documentation](https://cert-manag
 !!! important
     Please note, that not all issuer types work for each Knative feature.
 
-`cluster-local-domain-tls` needs to be able to sign certificates for cluster-local domains like `myapp.<namespace>`, `myapp.<namespace>.svc` and `myapp.<namespace>.svc.cluster.local`. 
-As the CA usually is not within the cluster, verification via ACME protocol (DNS01/HTTP01) is not possible. You can use an issuer that allows creating the these certificates (e.g. CA issuer).
+`cluster-local-domain-tls` needs to be able to sign certificates for cluster-local domains like `myapp.<namespace>`, `myapp.<namespace>.svc` and `myapp.<namespace>.svc.cluster.local`.
+The CA is usually outside the cluster, so verification via ACME protocol (DNS01/HTTP01) is impossible. You can use an issuer that allows the creation of these certificates (e.g., a CA issuer). 
 
 `system-internal-tls` needs to be able to sign specific SANs that Knative validates for. The defined set of SANs is:
 

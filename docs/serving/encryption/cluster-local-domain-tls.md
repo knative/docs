@@ -82,7 +82,7 @@ status:
 
 !!! note
     A quick note on trust, all clients that call the cluster-local domain of a Knative Service need to trust the Certificate Authority
-    that signed the certificates. This is out of scope of Knative, but needs to be addressed to ensure a working system. Especially,
+    that signed the certificates. This is out of scope of Knative, but needs to be addressed to ensure a working system. Especially
     when a Certificate Authority performs a rotation of the CA or the intermediate certificates. Find more information on
     [Configuring Knative cert-manager integration](./configure-certmanager-integration.md#managing-trust-and-rotation-without-downtime).
 
