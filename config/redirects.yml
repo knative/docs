@@ -208,7 +208,9 @@ plugins:
       serving/services/deployment.md: serving/configuration/deployment.md
       serving/services/http-option.md: serving/services/http-protocol.md
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
-      serving/using-an-ssl-cert/index.md: serving/encryption/using-certificates-in-networking-layer.md
+      serving/using-an-ssl-cert/index.md: serving/encryption/encryption-overview.md
+      serving/encryption/enabling-automatic-tls-certificate-provisioning.md: serving/encryption/encryption-overview.md
+      serving/encryption/using-certificates-in-networking-layer.md: serving/encryption/encryption-overview.md
       serving/using-subroutes.md: serving/traffic-management.md
       eventing/brokers/create-mtbroker.md: eventing/brokers/create-broker.md
       eventing/brokers/broker-admin-config-options.md: eventing/configuration/broker-configuration.md

@@ -159,8 +159,11 @@ nav:
           - Feature and extension flags: serving/configuration/feature-flags.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
         - Serving encryption configuration:
-          - Using custom TLS certificates in the networking layer: serving/encryption/using-certificates-in-networking-layer.md
-          - Enabling automatic TLS certificate provisioning: serving/encryption/enabling-automatic-tls-certificate-provisioning.md
+          - Overview: serving/encryption/encryption-overview.md
+          - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
+          - Configure external domain encryption: serving/encryption/external-domain-tls.md
+          - Configure cluster-local domain encryption: serving/encryption/cluster-local-domain-tls.md
+          - Configure Knative system-internal encryption: serving/encryption/system-internal-tls.md
       # Serving - Application Security
       - Application security:
         - About Security-Guard: serving/app-security/security-guard-about.md
