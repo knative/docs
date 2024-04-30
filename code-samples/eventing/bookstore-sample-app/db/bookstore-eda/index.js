@@ -22,7 +22,7 @@ app.post('/add', async (req, res) => {
                 headers: {
                     'Content-Type': 'application/json',
                     'ce-specversion': '1.0',
-                    'ce-type': 'sentiment-analysis-request',
+                    'ce-type': 'new-review-comment',
                     'ce-source': 'bookstore-eda',
                     'ce-id': receivedEvent.id,
                 },
