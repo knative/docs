@@ -11,7 +11,7 @@ spec:
       apiVersion: eventing.knative.dev/v1  # The API version of the Knative Eventing Broker.
       name: broker  # The name of the Broker, "book-review-broker" in this case
     properties:
-      type: new-review-comment  # A filter that specifies the type of events this Pipe will listen for, here it's listening for events of type "new-review-comment". You have to have this type specified.
+      type: moderated-comment  # A filter that specifies the type of events this Pipe will listen for, here it's listening for events of type "bad-comment". You have to have this type specified.
   sink:  # Defines the destination for events processed by this Pipe.
     ref:
       kind: Kamelet  # Specifies that the sink is a Kamelet, a Camel K component for connecting to external services.

@@ -1,22 +1,26 @@
 from parliament import Context
-from flask import Request,request, jsonify
+from flask import Request, request, jsonify
 import json
 from textblob import TextBlob
 from time import sleep
 from cloudevents.http import CloudEvent, to_structured
 
+
 # The function to convert the sentiment analysis result into a CloudEvent
-def create_cloud_event(inputText,data):
+def create_cloud_event(inputText, badWordResult, data):
     attributes = {
-    "type": "knative.sampleapp.sentiment.response",
-    "source": "sentiment-analysis",
-    "datacontenttype": "application/json",
+        "type": "moderated-comment",
+        "source": "sentiment-analysis",
+        "datacontenttype": "application/json",
+        "sentimentResult": data,
+        "badwordfilter": badWordResult,
     }
 
     # Put the sentiment analysis result into a dictionary
     data = {
-    "input": inputText,
-    "result": data
+        "reviewText": inputText,
+        "badWordResult": badWordResult,
+        "sentimentResult": data,
     }
 
     # Create a CloudEvent object
@@ -24,27 +28,34 @@ def create_cloud_event(inputText,data):
 
     return event
 
+
 def analyze_sentiment(text):
-   analysis = TextBlob(text["input"])
-   sentiment = "Neutral"
-   if analysis.sentiment.polarity > 0:
-       sentiment = "Positive"
-   elif analysis.sentiment.polarity < 0:
-       sentiment = "Negative"
+    analysis = TextBlob(text["reviewText"])
+    sentiment = "Neutral"
+    if analysis.sentiment.polarity > 0:
+        sentiment = "Positive"
+    elif analysis.sentiment.polarity < 0:
+        sentiment = "Negative"
 
-   # Convert the sentiment into a CloudEvent
-   sentiment = create_cloud_event(text["input"],sentiment)
+    badWordResult = ""
+    try:
+        badWordResult = text["badWordResult"]
+    except:
+        pass
+    # Convert the sentiment into a CloudEvent
+    sentiment = create_cloud_event(text["reviewText"], badWordResult, sentiment)
 
-   return sentiment
+    return sentiment
+
 
 def main(context: Context):
-    """ 
+    """
     Function template
     The context parameter contains the Flask request object and any
     CloudEvent received with the request.
     """
 
-    print("Received CloudEvent: ", context.cloud_event)
+    print("Sentiment Analysis Received CloudEvent: ", context.cloud_event)
 
     # Add your business logic here
     return analyze_sentiment(context.cloud_event.data)
