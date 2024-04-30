@@ -21,7 +21,7 @@ const CommentForm = () => {
 				'Ce-Id': 'unique-comment-id'
 			},
 			body: JSON.stringify({
-				input: comment
+				reviewText: comment
 			})
 		})
 			.then(response => response.json())
