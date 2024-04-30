@@ -1,0 +1,22 @@
+apiVersion: flows.knative.dev/v1
+kind: Sequence
+metadata:
+  name: sequence
+spec:
+  channelTemplate:
+    apiVersion: messaging.knative.dev/v1
+    kind: InMemoryChannel
+  steps:
+    - ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: inappropriate-language-filter
+    - ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: sentiment-analysis-app
+  reply:
+    ref:
+      kind: Broker
+      apiVersion: eventing.knative.dev/v1
+      name: broker
