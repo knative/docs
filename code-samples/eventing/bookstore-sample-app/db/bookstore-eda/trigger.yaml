@@ -1,21 +1,5 @@
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: event-display-trigger
-spec:
-  broker: broker
-  filter:
-    attributes:
-      type: sentiment-analysis-request
-  subscriber:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: sentiment-analysis-app
-
-
----
-
+# This Trigger subscribes to the Broker and filters events based on the type and badwordfilter attribute.
+# Those comments that contain insults are filtered out by the badwordfilter attribute and they will be redirected to the event-display Service.
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
@@ -24,11 +8,11 @@ spec:
   broker: broker
   filter:
     attributes:
-      type: knative.sampleapp.sentiment.response
+      type: moderated-comment
+      badwordfilter: bad
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service
       name: event-display
-
 
