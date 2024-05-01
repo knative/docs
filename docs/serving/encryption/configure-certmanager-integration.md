@@ -70,14 +70,14 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
 
     ```yaml
     apiVersion: cert-manager.io/v1
-    kind: ClusterIssuer
+    kind: ClusterIssuer # this issuer is used by cert-manager to sign all certificates
     metadata:
-      name: selfsigned-cluster-issuer
+      name: cluster-selfsigned-issuer
     spec:
       selfSigned: {}
     ---
     apiVersion: cert-manager.io/v1
-    kind: ClusterIssuer
+    kind: ClusterIssuer # this issuer is specifically for Knative, it will use the CA stored in the secret created by the Certificate below
     metadata:
       name: knative-selfsigned-issuer
     spec:
@@ -85,7 +85,7 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
         secretName: knative-selfsigned-ca
     ---
     apiVersion: cert-manager.io/v1
-    kind: Certificate
+    kind: Certificate # this creates a CA certificate, signed by cluster-selfsigned-issuer and stored in the secret knative-selfsigned-ca
     metadata:
       name: knative-selfsigned-ca
       namespace: cert-manager #  If you want to use it as a ClusterIssuer the secret must be in the cert-manager namespace.
@@ -97,13 +97,13 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
       isCA: true
       issuerRef:
         kind: ClusterIssuer
-        name: selfsigned-cluster-issuer
+        name: cluster-selfsigned-issuer
     ```
 
 1. Ensure that the `ClusterIssuer` is ready:
 
     ```bash
-    kubectl get clusterissuer selfsigned-cluster-issuer -o yaml
+    kubectl get clusterissuer cluster-selfsigned-issuer -o yaml
     kubectl get clusterissuer knative-selfsigned-issuer -o yaml
     ```
     Result: The `Status.Conditions` should include `Ready=True`.
