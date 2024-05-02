@@ -15,6 +15,16 @@ const GreenCheckMark = () => {
   );
 };
 
+const KuackImage = () => {
+  return (
+    <img
+      src="https://i.ibb.co/hD1gG7q/Knative-Bookstore-3.png"
+      alt="Descriptive Alt Text"
+      className=" w-24 shadow-sm m-10"
+    />
+  );
+};
+
 const GreyLoadingSpin = () => {
   return (
     <div role="status">
@@ -59,44 +69,44 @@ const StatusProgress = ({
   responseSuccess,
 }) => {
   return (
-    <div className="relative items-center block p-6 bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-700">
-      <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
-        The process behind your Event Driven Architecture:{" "}
-      </h2>
-      {everSubmit ? (
-        <ul className="space-y-2 text-gray-500 list-inside dark:text-gray-400">
-          <li className="flex items-center">
-            The comment you submitted: {comment}
-          </li>
-          <li className="flex items-center">
-            <GreenCheckMark />
-            Your comment has been packed as a CloudEvent
-          </li>
-          <li className="flex items-center">
-            <GreenCheckMark />
-            The CloudEvent has been sent to Nodejs Server as a POST request via
-            HTTP
-          </li>
-          <li className="flex items-center">
-            <GreenCheckMark />
-            Nodejs Server Forwarded the event to Broker
-          </li>
-          <li className="flex items-center">
-            {!responseSuccess ? <GreyLoadingSpin /> : <GreenCheckMark />}
-            Waiting all microservices to respond
-          </li>
-          <li className="flex items-center">
-            {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
-            Broker received the response from microservices
-          </li>
-          <li className="flex items-center">
-            {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
-            Response received by front end, the cycle has been completed!
-          </li>
-        </ul>
-      ) : (
-        <h1>Try submitting something first!</h1>
-      )}
+    <div className="flex justify-between items-center p-6 bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-700">
+      <div className="flex-1">
+        <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+          The process behind your Event Driven Architecture:
+        </h2>
+        {everSubmit ? (
+          <ul className="space-y-2 text-gray-500 list-inside dark:text-gray-400">
+            <li className="flex items-center">
+              The comment you submitted: {comment}
+            </li>
+            <li className="flex items-center">
+              <GreenCheckMark />
+              Your comment has been packed as a CloudEvent
+            </li>
+            <li className="flex items-center">
+              <GreenCheckMark />
+              The CloudEvent has been sent to Nodejs Server as a POST request
+              via HTTP
+            </li>
+            <li className="flex items-center">
+              <GreenCheckMark />
+              Nodejs Server Forwarded the event to Kafka Broker
+            </li>
+            <li className="flex items-center">
+              {!responseSuccess ? <GreyLoadingSpin /> : <GreenCheckMark />}
+              The CloudEvent has been dispatched by Broker, waiting for an
+              acknowledgement
+            </li>
+            <li className="flex items-center">
+              {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
+              Acknowledgement received, the cycle has been completed!
+            </li>
+          </ul>
+        ) : (
+          <h1>Try submitting something first!</h1>
+        )}
+      </div>
+      <KuackImage />
     </div>
   );
 };
