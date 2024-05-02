@@ -76,8 +76,9 @@ const StatusProgress = ({
         </h2>
         {everSubmit ? (
           <ul className="space-y-2 text-gray-500 list-inside dark:text-gray-400">
-            <li className="flex items-center">
-              The comment you submitted: {comment}
+            <li className="flex items-center text-black dark:text-white">
+              <div className="font-bold p-1">The comment you submitted:</div>
+              {comment}
             </li>
             <li className="flex items-center">
               <GreenCheckMark />
@@ -100,6 +101,10 @@ const StatusProgress = ({
             <li className="flex items-center">
               {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
               Acknowledgement received, the cycle has been completed!
+            </li>
+            <li className="flex items-center">
+              {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
+              Wait a few seconds until the system finish processing the comment
             </li>
           </ul>
         ) : (
@@ -181,7 +186,7 @@ const CommentForm = () => {
               disabled={comment == ""}
               style={{
                 backgroundColor:
-                  comment == "" ? "#c3c6c7" : hover ? "#A0DDFF" : "#A5D8FF",
+                  comment == "" ? "#c3c6c7" : hover ? "#baeafd" : "#A5D8FF",
               }}
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
@@ -204,7 +209,7 @@ const CommentForm = () => {
                 className={`font-bold py-2 px-9 rounded ${
                   hover ? "" : "bg-blue-600"
                 }`}
-                style={{ backgroundColor: hover ? "#a8b3ef" : "#9aa8ff" }}
+                style={{ backgroundColor: hover ? "#bfcaff" : "#9aa8ff" }}
               >
                 Reset
               </button>
