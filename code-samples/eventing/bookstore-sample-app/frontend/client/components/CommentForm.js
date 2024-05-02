@@ -20,7 +20,7 @@ const KuackImage = () => {
     <img
       src="https://i.ibb.co/hD1gG7q/Knative-Bookstore-3.png"
       alt="Descriptive Alt Text"
-      className=" w-24 shadow-sm m-10"
+      className="w-24 mr-8 mt-4 mb-4"
     />
   );
 };
