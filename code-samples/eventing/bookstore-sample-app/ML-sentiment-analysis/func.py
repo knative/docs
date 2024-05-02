@@ -31,11 +31,11 @@ def create_cloud_event(inputText, badWordResult, data):
 
 def analyze_sentiment(text):
     analysis = TextBlob(text["reviewText"])
-    sentiment = "Neutral"
+    sentiment = "neutral"
     if analysis.sentiment.polarity > 0:
-        sentiment = "Positive"
+        sentiment = "positive"
     elif analysis.sentiment.polarity < 0:
-        sentiment = "Negative"
+        sentiment = "negative"
 
     badWordResult = ""
     try:
