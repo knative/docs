@@ -28,7 +28,7 @@ app.ws('/comments', (ws, req) => {
     // Function to send all comments to the connected client
     const sendComments = async () => {
         try {
-            const {rows} = await pool.query('SELECT * FROM book_reviews;');
+            const {rows} = await pool.query('SELECT * FROM book_reviews ORDER BY post_time DESC;');
             const data = JSON.stringify(rows);
             if (ws.readyState === ws.OPEN) {
                 ws.send(data);
@@ -56,6 +56,28 @@ app.ws('/comments', (ws, req) => {
     });
 });
 
+app.post('/insert', async (req, res) => {
+    try {
+
+        // the fields are post_time, content, sentiment
+        // post_time is generated here, in the format of 2020-01-01 00:00:00
+        const receivedEvent = HTTP.toEvent({headers: req.headers, body: req.body});
+        const reviewText = receivedEvent.data.reviewText;
+        const sentimentResult = receivedEvent.data.sentimentResult;
+        const postTime = new Date().toISOString().replace('T', ' ').replace('Z', '');
+
+        // Insert the review into the database
+        await pool.query('INSERT INTO book_reviews (post_time,content, sentiment) VALUES ($1, $2, $3)', [postTime, reviewText, sentimentResult]);
+
+        // Acknowledge the receipt of the event
+        console.log('Review inserted:', reviewText);
+        return res.status(200).json({success: true, message: 'Review inserted successfully'});
+
+    } catch (error) {
+        console.error('Error processing request:', error);
+        return res.status(500).json({error: 'Internal server error'});
+    }
+});
 
 app.post('/add', async (req, res) => {
     try {

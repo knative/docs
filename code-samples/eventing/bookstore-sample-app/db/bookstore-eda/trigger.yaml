@@ -16,3 +16,20 @@ spec:
       kind: Service
       name: event-display
 
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: db-insert-trigger
+spec:
+  broker: broker
+  filter:
+    attributes:
+      type: moderated-comment
+      badwordfilter: good
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: eda-service
+    uri: /insert
