@@ -1,8 +1,7 @@
 ---
 title: "v1.14 release"
 linkTitle: "v1.14 release"
-author: "[Izabela Gomes] (Broadcom)(https://github.com/izabelacg), [David Simansky (Red Hat)](https://github.com/dsimansk), [Calum Murray (Red Hat)](https://github.com/Cali0707), [Christoph Stäbler (Red Hat)](https://github.com/creydr)"
-
+author: "[Izabela Gomes (Broadcom)](https://github.com/izabelacg), [David Simansky (Red Hat)](https://github.com/dsimansk), [Calum Murray (Red Hat)](https://github.com/Cali0707), [Christoph Stäbler (Red Hat)](https://github.com/creydr)"
 author handle: https://github.com/izabelacg https://github.com/dsimansk https://github.com/Cali0707 https://github.com/creydr
 
 date: 2024-5-3
