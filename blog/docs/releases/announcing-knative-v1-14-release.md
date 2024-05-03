@@ -41,13 +41,11 @@ This release brings a number of smaller improvements to the core Knative Serving
 **Release Notes:** [Knative Eventing 1.14](https://github.com/knative/eventing/releases/tag/knative-v1.14.0)
 
 #### 💫 New Features & Changes
-- Enable storage of EventType `v1beta2` instead of `v1beta1` ([#7594](https://github.com/knative/eventing/pull/7594), @dsimansk)
 - EventType Autocreate is now a non blocking operation ([#7709](https://github.com/knative/eventing/pull/7709), @Cali0707)
 - EventTypes are now autocreated on Triggers and Subscriptions when there is a reply event sent to them ([#7733](https://github.com/knative/eventing/pull/7733), @Cali0707)
-- Feature: Added the ability for users to configure `nodeSelector` when deploying `apiserversource` , Users can now configure nodeSelector via config-features by adding key-value pair in the format apiserversources.nodeselector.<key>: <value> ([#7584](https://github.com/knative/eventing/pull/7584), @sadath-12)
-- Merge keys, which were associated with an older version of YAML (1.1), are no longer officially supported in YAML according to its specifications. YAML version 1.2, the current standard, does not include support for merge keys, rendering them obsolete. ([#7662](https://github.com/knative/eventing/pull/7662), @converge)
+- Added the ability to configure a `nodeSelector` when deploying an ApiServerSource ([#7584](https://github.com/knative/eventing/pull/7584), @sadath-12)
+- Replace YAML merge tags, to comply with YAML 1.2 ([#7662](https://github.com/knative/eventing/pull/7662), @converge)
 - StatefulSet scheduling now makes fewer API server requests, reducing APIServer load. ([#7651](https://github.com/knative/eventing/pull/7651), @Cali0707)
-- Using 2.15.2 of Go-sdk for CloudEvents ([#7747](https://github.com/knative/eventing/pull/7747), @matzew)
 
 #### 🐞 Bug Fixes
 - Reduce the scope for the Config validation webhook to only the `knative-eventing` namespace. ([#7792](https://github.com/knative/eventing/pull/7792), @pierDipi)
