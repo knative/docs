@@ -69,8 +69,9 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
 1. Create and apply the following self-signed `ClusterIssuer` to your cluster:
 
     ```yaml
+    # this issuer is used by cert-manager to sign all certificates
     apiVersion: cert-manager.io/v1
-    kind: ClusterIssuer # this issuer is used by cert-manager to sign all certificates
+    kind: ClusterIssuer
     metadata:
       name: cluster-selfsigned-issuer
     spec:
