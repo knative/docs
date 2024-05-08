@@ -2,7 +2,7 @@
 
 **Flag name**: `new-apiserversource-filters`
 
-**Stage**: Beta, enabled by default
+**Stage**: Alpha, disabled by default
 
 **Tracking issue**: [#7791](https://github.com/knative/eventing/issues/7791)
 ## Overview
