@@ -1,3 +1,27 @@
+#apiVersion: eventing.knative.dev/v1
+#kind: Broker
+#metadata:
+#  name: broker
+#  annotations:
+#    # case-sensitive
+#    eventing.knative.dev/broker.class: Kafka
+#    # Optional annotation to point to an externally managed kafka topic:
+#    # kafka.eventing.knative.dev/external.topic: <topic-name>
+#spec:
+#  config:
+#    apiVersion: v1
+#    kind: ConfigMap
+#    name: kafka-broker-config
+#    namespace: knative-eventing
+#
+#---
+
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker
+
+---
 # This Trigger subscribes to the Broker and filters events based on the type and badwordfilter attribute.
 # Those comments that contain insults are filtered out by the badwordfilter attribute and they will be redirected to the event-display Service.
 apiVersion: eventing.knative.dev/v1
