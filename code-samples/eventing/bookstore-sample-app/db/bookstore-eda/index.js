@@ -71,7 +71,20 @@ app.post('/insert', async (req, res) => {
 
         // Acknowledge the receipt of the event
         console.log('Review inserted:', reviewText);
-        return res.status(200).json({success: true, message: 'Review inserted successfully'});
+        const event = new CloudEvent({
+            type: "com.example.reviews.inserted",
+            source: "/api/reviews",
+            data: {
+                success: true,
+                message: "Review inserted successfully"
+            }
+        });
+        // Serialize the event for an HTTP response
+        const serializedEvent = HTTP.binary(event);
+
+        // Set headers and send the CloudEvent
+        res.writeHead(200, serializedEvent.headers);
+        res.end(JSON.stringify(serializedEvent.body));
 
     } catch (error) {
         console.error('Error processing request:', error);
