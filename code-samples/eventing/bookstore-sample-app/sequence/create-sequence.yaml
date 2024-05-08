@@ -8,13 +8,13 @@ spec:
     kind: InMemoryChannel
   steps:
     - ref:
-        apiVersion: serving.knative.dev/v1
+        apiVersion: v1
         kind: Service
-        name: inappropriate-language-filter
+        name: bad-word-filter
     - ref:
-        apiVersion: serving.knative.dev/v1
+        apiVersion: v1
         kind: Service
-        name: sentiment-analysis-app
+        name: sentiment-raw
   reply:
     ref:
       kind: Broker
