@@ -509,6 +509,11 @@ h2.secondary-headline, h3.trusted-by {
   .case-studies-container .col .normal-text {
     padding-right: .5em;
   }
+
+  .img-row {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
