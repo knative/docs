@@ -360,10 +360,11 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .case-studies-container .cases-table {
-  display: flex;
-  justify-content: center;
-  max-width: 90%;
+  width: 90%;
   margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: flex;
 }
 
 .case-studies-container .logo {
@@ -375,8 +376,13 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .case-studies-container .col {
-  min-width: 38%;
-  max-width: 40%;
+  background-color: white;
+  flex-basis: 27%;
+  margin: 5px;
+  box-shadow: 0px 0px 5px 0.2px lightgray;
+  border-radius: 15px;
+  padding: 15px 4px 10px 4px;
+  min-height: 280px;
 }
 
 .case-studies-container .logo img {
@@ -399,18 +405,18 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: #497bb2;
-  font-weight: 600;
-  font-style: italic;
+  color: #0D4984;
+  font-weight: bold;
+  font-style: normal;
   line-height: 1.1;
-  font-family: serif;
-  font-size: .95rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .8rem;
 }
 
 .case-studies-container hr {
-  border-bottom: 2px solid #89c487;
+  border-bottom: 2px solid #0D4984;
   display: flow-root;
-  margin: .4em 5em -4px 2em;
+  margin: .4em 2em -4px 1.5em;
 }
 
 /* whats next container css */
@@ -503,7 +509,8 @@ h2.secondary-headline, h3.trusted-by {
   }
 
   .case-studies-container .col {
-    max-width: 50%;
+    flex-basis: calc(100% / 1);
+    min-width: 100%;
   }
 
   .case-studies-container .col .normal-text {
