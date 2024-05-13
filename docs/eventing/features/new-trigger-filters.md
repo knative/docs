@@ -6,7 +6,7 @@
 
 **Tracking issue**: [#5204](https://github.com/knative/eventing/issues/5204)
 ## Overview
-This experimental feature enables a new `filters` field in Triggers that conforms to the filters API field defined in the [`CloudEvents Subscriptions API`](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters). It allows users to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event.
+This feature enables a new `filters` field in Triggers that conforms to the filters API field defined in the [`CloudEvents Subscriptions API`](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters). It allows users to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event.
 
 The following example shows a Trigger using the new `filters` field:
 
@@ -185,4 +185,4 @@ The reason is twofold. First, at the time of developing `Trigger` APIs, there wa
 
 ### Why `filters` and not another name that wouldn't conflict with the `filter` field?
 
-We considered other names, such as `cefilters`, `subscriptionsAPIFilters`, or `enhancedFilters`, but we decided that this would be a step further from aligning with the Subscriptions API. Instead, we decided it is a good opportunity to conform with the Subscriptions API, at least at the field name level, and to leverage the safety of this being an experimental feature.
+We considered other names, such as `cefilters`, `subscriptionsAPIFilters`, or `enhancedFilters`, but we decided that this would be a step further from aligning with the Subscriptions API. Instead, we decided it is a good opportunity to conform with the Subscriptions API, at least at the field name level, and to leverage the safety of this being a feature.

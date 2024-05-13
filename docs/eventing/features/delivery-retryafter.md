@@ -25,7 +25,7 @@ of the normal backoff duration and the Retry-After header value will be used for
 the subsequent retry attempt. Specifying a "zero" value of `PT0S` effectively
 disables **Retry-After** support.
 
-Prior to this experimental feature, Knative Eventing implementations have not
+Prior to this feature, Knative Eventing implementations have not
 supported **Retry-After** headers, and this is an attempt to provide a path
 for standardizing that support.  To begin, the feature is **opt-in**, but the
 final state will be **opt-out** as follows:
@@ -60,7 +60,7 @@ spec:
 ```
 
 !!! note
-    While the experimental feature flag enforces all DeliverySpec usage of the
+    While the feature flag enforces all DeliverySpec usage of the
     `retryAfterMax` field through Webhook validation, it does not guarantee all
     implementations, such as Channels or Sources, actually implement support
     for the field.  The shared `HTTPMessageSender.SendWithRetries()` logic has

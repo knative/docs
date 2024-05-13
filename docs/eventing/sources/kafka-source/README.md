@@ -208,7 +208,7 @@ Alternatively, if you are using a GitOps approach, you can add the `consumers` k
 
 ### Automatic Scaling with KEDA
 
-Kafka Sources have experimental (Alpha) support for serverless scaling with KEDA, including scale to zero. If you want Knative and KEDA to scale your Kafka source for you,
+Kafka Sources have (Alpha) support for serverless scaling with KEDA, including scale to zero. If you want Knative and KEDA to scale your Kafka source for you,
 you must [install KEDA](https://keda.sh/docs/2.13/deploy/), and then enable the feature flag.
 
 To enable the feature flag, you need to create or modify the `config-kafka-features` configmap in the `knative-eventing` namespace. You can create the file as below:
@@ -226,7 +226,7 @@ To enable the feature flag, you need to create or modify the `config-kafka-featu
 ```
 
 From there, apply the configmap into your cluster and assuming that KEDA is also installed your Kafka Sources will scale for you! For more information on other values you
-can add to the `config-kafka-features` configmap, [read about the experimental Kafka Broker features](../../brokers/broker-types/kafka-broker/configuring-kafka-features).
+can add to the `config-kafka-features` configmap, [read about the Kafka Broker features](../../brokers/broker-types/kafka-broker/configuring-kafka-features).
 
 
 ### Verify

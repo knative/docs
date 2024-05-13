@@ -6,7 +6,7 @@
 
 **Tracking issue**: [#7791](https://github.com/knative/eventing/issues/7791)
 ## Overview
-This experimental feature enables a new `filters` field in APIServerSource that conforms to the filters API field defined in the [`CloudEvents Subscriptions API`](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters). It allows users to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event.
+This feature enables a new `filters` field in APIServerSource that conforms to the filters API field defined in the [`CloudEvents Subscriptions API`](https://github.com/cloudevents/spec/blob/main/subscriptions/spec.md#324-filters). It allows users to specify a set of powerful filter expressions, where each expression evaluates to either true or false for each event.
 
 The following example shows a APIServerSource using the new `filters` field:
 

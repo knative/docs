@@ -26,7 +26,7 @@ data:
 ...
 ```
 
-With this experiemental feature enabled, we get `EventType`s on the broker/channel ingress for free, instead of manually creating them as yaml manifests along the application code that talks to the `Broker` or `Channel` API. 
+With this feature enabled, we get `EventType`s on the broker/channel ingress for free, instead of manually creating them as yaml manifests along the application code that talks to the `Broker` or `Channel` API. 
 
 ## Example
 
