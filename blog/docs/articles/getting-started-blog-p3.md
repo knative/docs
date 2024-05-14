@@ -4,11 +4,11 @@
 
 ![](/blog/images/getting-started-blog-series/post3/001.png)
 
-Hello and welcome back to the blog series! In this blog post we will start making actual code changes to some Knative code. Specifically, we will be learning what an API is in Knative, and how we can change them. To facilitate this and the future coding focused blog posts, we will be building a simple event source based on the Knative sample source code. Our source will function similarly to the sample source and send an event at an interval, except it will allow you to create a text template which will be populated with variables on every event that is sent. By the end of this blog post you should be able to understand what APIs are in Knative, and have modified the sample source API to support our new functionality.
+Hello and welcome back to the blog series! In this blog post we will start making actual code changes to some Knative code. Specifically, we will be learning what an API is in Knative, and how we can change them. To facilitate this and the future coding focused blog posts, we will be building a simple event source based on the Knative sample source code. Our source will function similarly to the sample source and send an event at an interval, except it will allow you to create a text template which will be populated with variables on every event that is sent. By the end of this blog post you should be able to understand what APIs are in Knative, and have modified the sample source API to support our new feature (text templates).
 
 ## What is an API?
 ![](/blog/images/getting-started-blog-series/post3/002.png)
-An API is an “Application Programming Interface”. You can think of it as a contract, where an application provides an interface to users, which the users can use to programmatically specify what they want the application to do for them
+An API is an “Application Programming Interface”. You can think of it as a contract, where an application provides an interface to users which the users can use to programmatically specify what they want the application to do for them
 
 In Knative, APIs take the form of [Kubernetes CustomResourceDefinitions (CRDs)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#custom-resources){:target="_blank"}. These are the definitions of what resources Knative can provide in your cluster. For example, if you want an event broker for your event driven application you are building, you might want to use the Knative Eventing Broker CRD. Users interact with this API by creating instances of the Custom Resource in their cluster. You can think of this in the same way as an Object is an instance of a Class: a Custom Resource is an instance of a Custom Resource Definition.
 
@@ -20,7 +20,7 @@ Once Kubernetes is aware of the CRD (for example, by kubectl apply -f mycrd.yaml
 
 ![](/blog/images/getting-started-blog-series/post3/004.png)
 Now that we know what APIs are (generally, and in the context of Knative), we are ready to explore how we can make changes to them. When we want to update an API there are two, maybe three steps that you need to take.
-Update the struct for the object. In our case, we want to update the SampleSource struct. In Knative, these are often found in pkg/apis/<groupname>/<version>/<resourcename>_types.go. Looking at this struct, we can see that there is a structure to it that all resources generally follow:
+Update the struct for the object. In our case, we want to update the SampleSource struct. In Knative, these are often found in `pkg/apis/<groupname>/<version>/<resourcename>_types.go`. Looking at this struct, we can see that there is a structure to it that all resources generally follow:
 
 ![](/blog/images/getting-started-blog-series/post3/005.png)
 
@@ -42,7 +42,7 @@ type SampleSource struct {
 }
 ```
 
-Looking at this code, we can see that there is a metav1.TypeMeta embedded struct, a metav1.ObjectMeta embedded struct, and then a Spec and a Status embedded struct. This is how Knative objects (and most k8s resources) are structured. The TypeMeta and ObjectMeta provide metadata about the type and the object, and generally all you need to know about them is that the struct needs to include them. The Spec and the Status are the structs that you will actually be modifying. The Spec is where all the options we give the users of Knative will live while the Status is where all the information we give to users about the status of a specific object is stored.
+Looking at this code, we can see that there is a `metav1.TypeMeta` embedded struct, a `metav1.ObjectMeta` embedded struct, and then a `Spec` and a `Status` embedded struct. This is how Knative objects (and most k8s resources) are structured. The TypeMeta and ObjectMeta provide metadata about the type and the object, and generally all you need to know about them is that the struct needs to include them. The Spec and the Status are the structs that you will actually be modifying. The `Spec` is where all the options we give the users of Knative will live while the `Status` is where all the information we give to users about the status of a specific object is stored.
 
 Now that we have an understanding of how the struct works, let’s make our actual changes. Try to add a message template field into the sample source so that users can configure that message in each event. Once you’ve given this a try yourself, continue reading to see how we did it! In general, try to attempt each coding step yourself before reading the “solutions”. We will remind you about this as you continue through the blog posts.
 
@@ -82,10 +82,10 @@ type SampleSourceSpec struct {
 
 ```
 
-1. All we added was the MessageTemplate string to the spec. Note the JSON tag - this is very important! Without a JSON tag, this field will not be read out of a JSON object when the controller receives info about it from the API Server, and the value will not be written to the JSON we send back to the API Server, so it would not be stored in etcd.
+All we added was the MessageTemplate string to the spec. Note the JSON tag - this is very important! Without a JSON tag, this field will not be read out of a JSON object when the controller receives info about it from the API Server, and the value will not be written to the JSON we send back to the API Server, so it would not be stored in etcd.
 
 ![](/blog/images/getting-started-blog-series/post3/007.png)
-2. After updating the struct, we normally want to update the [codegen](https://www.redhat.com/en/blog/kubernetes-deep-dive-code-generation-customresources){:target="_blank"}. Knative uses custom code generators to automatically implement parts of the reconciler (more on that in coming blog posts), as well as [deep copy](https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy){:target="_blank"} functions for the structs and auto-generated API documentation. In our case, we want to update the DeepCopy function for the SampleSourceSpec struct. To update the generated code in Knative, you just need to run ./hack/update-codegen.sh. There may be specific versions of dependencies you need to run this in a given repository, so always check the DEVELOPMENT.md file when setting up your repository for development.
+After updating the struct, we normally want to update the [codegen](https://www.redhat.com/en/blog/kubernetes-deep-dive-code-generation-customresources){:target="_blank"}. Knative uses custom code generators to automatically implement parts of the reconciler (more on that in coming blog posts), as well as [deep copy](https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy){:target="_blank"} functions for the structs and auto-generated API documentation. In our case, we want to update the DeepCopy function for the SampleSourceSpec struct. To update the generated code in Knative, you just need to run ./hack/update-codegen.sh. There may be specific versions of dependencies you need to run this in a given repository, so always check the DEVELOPMENT.md file when setting up your repository for development.
 
 ![](/blog/images/getting-started-blog-series/post3/008.png)
 After updating the struct, you need to also update the CRD yaml file. For us, the CRD we are editing looks like;
