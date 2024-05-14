@@ -203,6 +203,9 @@ If you need to add additional CA bundles for Eventing, you can do so by creating
 !!! important
     Use a name that is unlikely to conflict with existing or future Eventing-provided `ConfigMap` name.
 
+For distributing CA trust bundles, you can leverage [trust-manager](https://cert-manager.io/docs/trust/trust-manager/),
+however, it is not required.
+
 ### Trusting CA for a specific event sender
 
 Event sources, triggers or subscriptions are considered event senders, and they can be configured to
