@@ -13,7 +13,7 @@ a [Knative reference](https://github.com/knative/specs/blob/main/specs/eventing/
 to a templated URI.
 
 !!! note
-    Currently only PingSource supports this experimental feature.
+    Currently only PingSource supports this feature.
 
 For example, you can directly reference non-addressable resources anywhere that
 Knative Eventing accepts a reference, such as for a PingSource sink, or a

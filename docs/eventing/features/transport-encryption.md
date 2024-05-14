@@ -2,7 +2,7 @@
 
 **Flag name**: `transport-encryption`
 
-**Stage**: Alpha, disabled by default
+**Stage**: Beta, disabled by default
 
 **Tracking issue**: [#5957](https://github.com/knative/eventing/issues/5957)
 
@@ -28,15 +28,103 @@ Event producers are be able to connect to HTTPS endpoints with cluster-internal 
 
 ## Installation
 
+### Setup `SelfSigned` `ClusterIssuer`
+
+!!! note
+    ClusterIssuers, are Kubernetes resources that represent certificate authorities (CAs) that are able
+    to generate signed certificates by honoring certificate signing requests. All cert-manager
+    certificates require a referenced issuer that is in a ready condition to attempt to honor the
+    request.
+    Reference: cert-manager.io/docs/concepts/issuer/
+
+!!! important
+    For the simplicity of this guide, we will use a `SelfSigned` issuer as root certificate, however, be
+    aware of the implications and limitations as documented at
+    cert-manager.io/docs/configuration/selfsigned/ of this method.
+    If you’re running your company specific Private Key Infrastructure (PKI), we recommend the CA
+    issuer. Refer to the cert-manager documentation for more details:
+    cert-manager.io/docs/configuration/ca/, however, you can use any other issuer that is usable for
+    cluster-local services.
+
+1. Create a `SelfSigned` `ClusterIssuer`:
+    ```yaml
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: knative-eventing-selfsigned-issuer
+    spec:
+      selfSigned: {}
+    ```
+2. Apply the `ClusterIssuer` resource:
+    ```shell
+    $ kubectl apply -f <filename>
+    ```
+3. Create a root certificate using the previously created `SelfSigned` `ClusterIssuer`:
+    ```yaml
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    metadata:
+      name: knative-eventing-selfsigned-ca
+      namespace: cert-manager # the cert-manager operator namespace
+    spec:
+       # Secret name later used for the ClusterIssuer for Eventing
+      secretName: knative-eventing-ca
+
+      isCA: true
+      commonName: selfsigned-ca
+      privateKey:
+        algorithm: ECDSA
+        size: 256
+
+      issuerRef:
+        name: knative-eventing-selfsigned-issuer
+        kind: ClusterIssuer
+        group: cert-manager.io
+    ```
+4. Apply the `Certificate` resource:
+    ```yaml
+    $ kubectl apply -f <filename>
+    ```
+
+### Setup `ClusterIssuer` for Eventing
+
+1. Create the `knative-eventing-ca-issuer` `ClusterIssuer` for Eventing:
+    ```yaml
+    # This is the issuer that every Eventing component use to issue their server's certs.
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: knative-eventing-ca-issuer
+    spec:
+      ca:
+        # Secret name in the Cert-Manager Operator namespace (cert-manager by default) containing
+        # the certificate that can then be used by Knative Eventing components for new certificates.
+        secretName: knative-eventing-ca 
+    ```
+   !!! important
+        The name of the `ClusterIssuer` must be `knative-eventing-ca-issuer`.
+
+2. Apply the `ClusterIssuer` resource:
+    ```yaml
+    $ kubectl apply -f <filename>
+    ```
+
+### Install the certificates for Eventing components
+
 Eventing components use cert-manager issuers and certificates to provision TLS certificates and in
-the release assets, we release such default issuers and certificates that can be customized as
+the release assets, we release the certificates for Eventing servers that can be customized as
 necessary.
 
-1. Install issuers and certificates, run the following command:
+1. Install certificates, run the following command:
     ```shell
     kubectl apply -f {{ artifact(repo="eventing",file="eventing-tls-networking.yaml")}}
     ```
-2. Verify issuers and certificates are ready
+2. [Optional] If you're using Eventing Kafka components, install certificates for Kafka components
+   by running the following command:
+    ```shell
+    kubectl apply -f {{ artifact(repo="eventing-kafka-broker",file="eventing-kafka-tls-networking.yaml")}}
+    ```
+3. Verify issuers and certificates are ready
     ```shell
     kubectl get certificates.cert-manager.io -n knative-eventing
     ```
@@ -47,6 +135,7 @@ necessary.
     mt-broker-filter-server-tls    True    mt-broker-filter-server-tls    14s
     mt-broker-ingress-server-tls   True    mt-broker-ingress-server-tls   14s
     selfsigned-ca                  True    eventing-ca                    14s
+    ...
     ```
 
 ## Transport Encryption configuration
@@ -67,6 +156,11 @@ The possible values for `transport-encryption` are:
     - Addressables must not accept events to non-HTTPS endpoints
     - Addressables must only advertise HTTPS endpoints
 
+!!! important
+    The `strict` is only enforced on the Broker and Channel receiver/ingress. 
+    When a broker or channel sends events to a subscriber, if that subscriber only has an HTTP
+    address, the broker or channel can still send events over HTTP instead of HTTPS
+
 For example, to enable `strict` transport encryption, the `config-features` ConfigMap will look like
 the following:
 
@@ -80,21 +174,53 @@ data:
   transport-encryption: "strict"
 ```
 
-## Trusting CA for a specific event sender
+## Configure additional CA trust bundles
 
-Event sources, triggers or subscriptions are considered event senders and they can be configured to
+By default, Eventing clients trusts the system root CA (public CA).
+
+If you need to add additional CA bundles for Eventing, you can do so by creating ConfigMaps in the
+`knative-eventing` namespace with label `networking.knative.dev/trust-bundle: true`:
+
+!!! important
+    Whenever CA bundles `ConfigMaps` are updated, the Eventing clients will automatically add them to
+    their trusted CA bundles when a new connection is established.
+
+1. Create a CA bundle for Eventing:
+    ```yaml
+    kind: ConfigMap
+    metadata:
+      name: my-org-eventing-bundle
+      namespace: knative-eventing
+      labels:
+        networking.knative.dev/trust-bundle: "true"
+    # All data keys containing valid PEM-encoded CA bundles will be trusted by Eventing clients.
+    data:
+      ca.crt: ...
+      ca1.crt: ...
+      tls.crt: ...
+    ```
+
+!!! important
+    Use a name that is unlikely to conflict with existing or future Eventing-provided `ConfigMap` name.
+
+For distributing CA trust bundles, you can leverage [trust-manager](https://cert-manager.io/docs/trust/trust-manager/),
+however, it is not required.
+
+### Trusting CA for a specific event sender
+
+Event sources, triggers or subscriptions are considered event senders, and they can be configured to
 trust specific CA certificates.
 
 !!! important
     The CA certs must be PEM formatted certificates. Since it's a multi-line YAML string make sure that
     the `CACerts` value is indented correctly, otherwise when creating the resource it will be rejected.
 
-Triggers and subscriptions can be configured as follow:
+Triggers and subscriptions can be configured as follows:
 
 ```yaml
 spec:
   # ...
-  
+
   subscriber:
     uri: https://mycorp-internal-example.com/v1/api
     CACerts: |-
@@ -131,12 +257,12 @@ spec:
       -----END CERTIFICATE-----
 ```
 
-Similarly, sources can be configured as follow:
+Similarly, sources can be configured as follows:
 
 ```yaml
 spec:
   # ...
-  
+
   sink:
     uri: https://mycorp-internal-example.com/v1/api
     CACerts: |-
@@ -172,6 +298,54 @@ spec:
       fjKaiJUINlK73nZfdklJrX+9ZSCyycErdhh2n1ax
       -----END CERTIFICATE-----
 ```
+
+### Configure custom event sources to trust the Eventing CA
+
+The recommended way of creating custom event sources is using a SinkBinding, SinkBinding will inject
+the configured CA trust bundles as projected volume into each container using the directory
+`/knative-custom-certs`.
+
+!!! note
+    Some organizations might inject company specific CA trust bundles into base container images and
+    automatically configure runtimes (openjdk, node, etc) to trust that CA bundle.
+    In that case, you might not need to configure your clients.
+
+Using the previous example of the my-org-eventing-bundle ConfigMap with data keys being ca.crt,
+ca1.crt and tls.crt, you will have a `/knative-custom-certs` directory that will have the following
+layout:
+
+```bash
+/knative-custom-certs/ca.crt
+/knative-custom-certs/ca1.crt
+/knative-custom-certs/tls.crt
+```
+
+Those files can then be used to add CA trust bundles to HTTP clients sending events to Eventing.
+
+!!!note
+    Depending on the runtime, programming language or library that you’re using, there are different
+    ways of configuring custom CA certs files using command line flags, environment variables, or by
+    reading the content of those files.
+    Refer to their documentation for more details.
+
+### Adding `SelfSigned` `ClusterIssuer` to CA trust bundles
+
+In case you are using a SelfSigned ClusterIssuer as described in the [Setup SelfSigned
+ClusterIssuer section](#setup-selfsigned-clusterissuer), you can add the CA to the Eventing CA trust
+bundles by running the following commands:
+
+1. Export the CA from the knative-eventing-ca secret in the OpenShift Cert-Manager Operator namespace, cert-manager by default:
+    ```shell
+    $ kubectl get secret -n cert-manager knative-eventing-ca -o=jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
+    ```
+2. Create a CA trust bundle in the `knative-eventing` namespace:
+    ```shell
+    $ kubectl create configmap -n knative-eventing my-org-selfsigned-ca-bundle --from-file=ca.crt
+    ```
+3. Label the ConfigMap with networking.knative.dev/trust-bundle: "true" label:
+    ```shell
+    $ kubectl label configmap -n knative-eventing my-org-selfsigned-ca-bundle networking.knative.dev/trust-bundle=true
+    ```
 
 ## Verifying that the feature is working
 
@@ -234,6 +408,7 @@ kubectl apply -n transport-encryption-test -f defautl-broker-example.yaml
 ```
 
 Verify that addresses are all `HTTPS`:
+
 ```shell
 kubectl get brokers.eventing.knative.dev -n transport-encryption-test br -oyaml
 ```
