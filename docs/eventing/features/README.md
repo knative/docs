@@ -8,14 +8,14 @@ without affecting the stability of the core project.
 <!--TODO: Add note about HOW / where users can provide feedback, otherwise there's not much point mentioning that-->
 
 !!! warning
-Features are stable and unstable features and may cause issues in your Knative setup or even your cluster
-setup.
-These features should be used with caution, and should never be tested on a production environment.
-For more
-information about quality guarantees for features at different stages of
-development, see the
-[Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition)
-documentation.
+    Features are stable and unstable features and may cause issues in your Knative setup or even your cluster
+    setup.
+    These features should be used with caution, and should never be tested on a production environment.
+    For more
+    information about quality guarantees for features at different stages of
+    development, see the
+    [Feature stage definition](https://github.com/knative/eventing/blob/main/docs/experimental-features.md#stage-definition)
+    documentation.
 
 This document explains how to enable features and which ones are available today.
 
