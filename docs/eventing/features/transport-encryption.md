@@ -157,8 +157,9 @@ The possible values for `transport-encryption` are:
     - Addressables must only advertise HTTPS endpoints
 
 !!! important
-    The `strict` is only enforced on the Broker and Channel receiver/ingress. Senders can still send
-    events over plaintext HTTP.
+    The `strict` is only enforced on the Broker and Channel receiver/ingress. 
+    When a broker or channel sends events to a subscriber, if that subscriber only has an HTTP
+    address, the broker or channel can still send events over HTTP instead of HTTPS
 
 For example, to enable `strict` transport encryption, the `config-features` ConfigMap will look like
 the following:
