@@ -213,7 +213,7 @@ h2.secondary-headline, h3.trusted-by {
 
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
-  background-color: #f3f1f2;
+  background-color: white;
   color: var(--md-default-fg-color--light);
 }
 
@@ -352,7 +352,8 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
   color: black;
   display: flex;
-  background-color: white;
+  background-color: #F7F7F7;
+  margin-bottom: 5px;
 }
 
 .case-studies-container h1 {
@@ -378,11 +379,9 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .col {
   background-color: white;
   flex-basis: 27%;
-  margin: 5px;
-  box-shadow: 0px 0px 5px 0.2px lightgray;
   border-radius: 15px;
   padding: 15px 4px 10px 4px;
-  min-height: 280px;
+  min-height: 300px;
 }
 
 .case-studies-container .logo img {
@@ -466,7 +465,6 @@ h2.secondary-headline, h3.trusted-by {
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 0;
 }
 
 .cncf-notice-container h3 {
@@ -508,13 +506,19 @@ h2.secondary-headline, h3.trusted-by {
     max-width: 100%;
   }
 
+  .case-studies-container {
+    padding: 4em 1em;
+  }
+
   .case-studies-container .col {
     flex-basis: calc(100% / 1);
     min-width: 100%;
+    margin-bottom: 4%;
   }
 
   .case-studies-container .col .normal-text {
     padding-right: .5em;
+    font-size: 0.7rem;
   }
 }
 
