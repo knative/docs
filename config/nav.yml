@@ -282,7 +282,7 @@ nav:
         - DeliverySpec.Timeout field: eventing/features/delivery-timeout.md
         - DeliverySpec.RetryAfterMax field: eventing/features/delivery-retryafter.md
         - New Trigger Filters: eventing/features/new-trigger-filters.md
-        - New APIServerSource Filters: eventing/experimental-features/new-apiserversource-filters.md
+        - New APIServerSource Filters: eventing/features/new-apiserversource-filters.md
         - KReference.Group field: eventing/features/kreference-group.md
         - Knative reference mapping: eventing/features/kreference-mapping.md
         - EventType auto creation: eventing/features/eventtype-auto-creation.md
