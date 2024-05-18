@@ -1,3 +1,9 @@
+:root {
+  --md-primary-fg-color: #f3f1f2;
+  --md-primary-fg-color--dark: #0D4984;
+  --md-primary-fg-color--light: #6593C8;
+}
+
 .md-main__inner {
   margin: 0;
   max-width: 100%;
