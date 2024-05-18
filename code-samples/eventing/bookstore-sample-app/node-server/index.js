@@ -130,6 +130,10 @@ app.post('/add', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

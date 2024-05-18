@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eda
+  name: node-server
   labels:
-    app: eda
+    app: node-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eda
+      app: node-server
   template:
     metadata:
       labels:
-        app: eda
+        app: node-server
     spec:
       containers:
-      - name: eda
-        image: quay.io/rh-ee-leoli/eda:latest
+      - name: node-server
+        image: quay.io/rh-ee-leoli/node-server:latest
         ports:
         - containerPort: 8000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: eda-service
+  name: node-server-svc
 spec:
   selector:
-    app: eda
+    app: node-server
   ports:
     - protocol: TCP
       port: 80

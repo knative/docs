@@ -1,25 +1,7 @@
-#apiVersion: eventing.knative.dev/v1
-#kind: Broker
-#metadata:
-#  name: broker
-#  annotations:
-#    # case-sensitive
-#    eventing.knative.dev/broker.class: Kafka
-#    # Optional annotation to point to an externally managed kafka topic:
-#    # kafka.eventing.knative.dev/external.topic: <topic-name>
-#spec:
-#  config:
-#    apiVersion: v1
-#    kind: ConfigMap
-#    name: kafka-broker-config
-#    namespace: knative-eventing
-#
-#---
-
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
-  name: broker
+  name: bookstore-broker
 
 ---
 # This Trigger subscribes to the Broker and filters events based on the type and badwordfilter attribute.
@@ -27,13 +9,13 @@ metadata:
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: reply-trigger
+  name: seq-reply-trigger
 spec:
-  broker: broker
+  broker: bookstore-broker
   filter:
     attributes:
-      type: moderated-comment
-      badwordfilter: bad
+      type: moderated-comment # This is the filter that will be applied to the event, only events with the ce-type moderated-comment will be processed
+      badwordfilter: bad # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: bad will be processed
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -46,7 +28,7 @@ kind: Trigger
 metadata:
   name: db-insert-trigger
 spec:
-  broker: broker
+  broker: bookstore-broker
   filter:
     attributes:
       type: moderated-comment
@@ -55,5 +37,5 @@ spec:
     ref:
       apiVersion: v1
       kind: Service
-      name: eda-service
+      name: node-server-svc
     uri: /insert
