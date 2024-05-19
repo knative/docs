@@ -5,7 +5,7 @@ const {Pool} = require('pg');
 const expressWs = require('express-ws');
 
 const app = express();
-const port = 8000;
+const port = 8080;
 
 
 // Middleware to parse JSON bodies

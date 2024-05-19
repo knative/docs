@@ -18,7 +18,7 @@ spec:
       - name: node-server
         image: quay.io/rh-ee-leoli/node-server:latest
         ports:
-        - containerPort: 8000
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -29,6 +29,6 @@ spec:
     app: node-server
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8000
+      port: 8080
+      targetPort: 8080
   type: LoadBalancer
