@@ -34,7 +34,8 @@ const CommentList = ({ setStatus }) => {
 
   return (
     <div>
-      {comments.map((comment, index) => (
+  
+      {comments.length > 0 ? comments.map((comment, index) => (
         <CommentDisplay
           key={index}
           comment={{
@@ -51,7 +52,7 @@ const CommentList = ({ setStatus }) => {
             emotion: comment.sentiment,
           }}
         />
-      ))}
+      )) :<p>No comments available</p>}
     </div>
   );
 };

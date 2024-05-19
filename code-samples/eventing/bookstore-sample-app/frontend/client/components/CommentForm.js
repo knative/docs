@@ -49,6 +49,20 @@ const GreyLoadingSpin = () => {
   );
 };
 
+const RedXMark = () => {
+  return (
+    <svg
+      className="w-4 h-4 me-2 text-red-500 dark:text-red-400 flex-shrink-0"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm2.828 12.828a1 1 0 0 1-1.414 0L10 11.414l-1.414 1.414a1 1 0 0 1-1.414-1.414L8.586 10 7.172 8.586a1 1 0 1 1 1.414-1.414L10 8.586l1.414-1.414a1 1 0 0 1 1.414 1.414L11.414 10l1.414 1.414a1 1 0 0 1 0 1.414Z" />
+    </svg>
+  );
+};
+
 const GreyCheckMark = () => {
   return (
     <svg
@@ -62,6 +76,7 @@ const GreyCheckMark = () => {
     </svg>
   );
 };
+
 const StatusProgress = ({
   comment,
   loadingState,
@@ -91,20 +106,32 @@ const StatusProgress = ({
             </li>
             <li className="flex items-center">
               <GreenCheckMark />
-              Nodejs Server Forwarded the event to Kafka Broker
+              Nodejs Server Forwarded the event to Broker
             </li>
             <li className="flex items-center">
-              {!responseSuccess ? <GreyLoadingSpin /> : <GreenCheckMark />}
-              The CloudEvent has been dispatched by Broker, waiting for an
-              acknowledgement
+              {responseSuccess === "unknown" && <GreyLoadingSpin />}
+              {responseSuccess === "error" && <RedXMark />}
+              {responseSuccess === "success" && <GreenCheckMark />}
+              {responseSuccess === "error"
+                ? "The CloudEvent has been dispatched by Broker, but got error response."
+                : "The CloudEvent has been dispatched by Broker, waiting for an acknowledgement."}
             </li>
             <li className="flex items-center">
-              {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
+              {responseSuccess === "success" ? (
+                <GreenCheckMark />
+              ) : (
+                <GreyCheckMark />
+              )}
               Acknowledgement received, the cycle has been completed!
             </li>
             <li className="flex items-center">
-              {!responseSuccess ? <GreyCheckMark /> : <GreenCheckMark />}
-              Wait a few seconds until the system finish processing the comment
+              {responseSuccess === "success" ? (
+                <GreenCheckMark />
+              ) : (
+                <GreyCheckMark />
+              )}
+              Wait a few seconds until the system finishes processing the
+              comment
             </li>
           </ul>
         ) : (
@@ -115,11 +142,12 @@ const StatusProgress = ({
     </div>
   );
 };
+
 const CommentForm = () => {
   const [hover, setHover] = useState(false);
   const [comment, setComment] = useState("");
   const [loadingState, setLoadingState] = useState(false);
-  const [responseSuccess, setResponseSuccess] = useState(false);
+  const [responseSuccess, setResponseSuccess] = useState("unknown");
   const [everSubmit, setEverSubmit] = useState(false);
 
   const handleInputChange = (event) => {
@@ -130,8 +158,8 @@ const CommentForm = () => {
     event.preventDefault();
     setLoadingState(true);
     setEverSubmit(true);
-    setResponseSuccess(false);
-    // Send the comment request as cloudevent to the review service
+    setResponseSuccess("unknown");
+
     fetch("http://localhost:8080/add", {
       method: "POST",
       headers: {
@@ -145,15 +173,31 @@ const CommentForm = () => {
         reviewText: comment,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          setResponseSuccess("error");
+          setLoadingState(true);
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+      })
       .then((data) => {
         console.log("Success:", data);
-        setResponseSuccess(true);
+        setResponseSuccess("success");
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
+
+  const handleReset = () => {
+    setLoadingState(false);
+    setComment("");
+    setResponseSuccess("unknown");
+    setEverSubmit(false);
+  };
+
   return (
     <div>
       <StatusProgress
@@ -183,10 +227,10 @@ const CommentForm = () => {
               className={`font-bold py-2 px-9 rounded ${
                 hover ? "" : "bg-blue-600"
               }`}
-              disabled={comment == ""}
+              disabled={comment === ""}
               style={{
                 backgroundColor:
-                  comment == "" ? "#c3c6c7" : hover ? "#baeafd" : "#A5D8FF",
+                  comment === "" ? "#c3c6c7" : hover ? "#baeafd" : "#A5D8FF",
               }}
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
@@ -194,18 +238,13 @@ const CommentForm = () => {
               Submit
             </button>
           )}
-          {loadingState && responseSuccess ? (
-            <div className=" flex flex-col ">
+          {responseSuccess === "error" && (
+            <div className="flex flex-col">
               <button
-                type={"button"}
+                type="button"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
-                onClick={() => {
-                  setLoadingState(false);
-                  setComment("");
-                  setResponseSuccess(false);
-                  setEverSubmit(false);
-                }}
+                onClick={handleReset}
                 className={`font-bold py-2 px-9 rounded ${
                   hover ? "" : "bg-blue-600"
                 }`}
@@ -214,7 +253,7 @@ const CommentForm = () => {
                 Reset
               </button>
             </div>
-          ) : null}
+          )}
         </form>
       </div>
     </div>

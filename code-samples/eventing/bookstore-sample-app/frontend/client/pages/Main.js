@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import BookDetail from "../components/BookDetail";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
-import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 
 const StatusBadge = ({ status }) => {
@@ -18,7 +17,7 @@ const StatusBadge = ({ status }) => {
     return (
       <span className="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
         <span className="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
-        Connected to server
+        Connected to node server
       </span>
     );
   } else {
@@ -69,7 +68,7 @@ export default function Main() {
   };
 
   const [status, setStatus] = useState("connecting");
-
+  
   return (
     <div>
       <Header />
