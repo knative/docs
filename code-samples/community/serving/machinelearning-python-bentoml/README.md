@@ -212,12 +212,8 @@ a Dockerfile is automatically generated when saving the model.
   username and run the following commands.
 
     ```bash
-    # jq might not be installed on your local system, please follow jq install
-    # instruction at https://stedolan.github.io/jq/download/
-    saved_path=$(bentoml get iris_classifier:latest -q -o json | jq -r ".uri.uri")
-
     # Build and push the container on your local machine.
-    docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/iris-classifier" --push $saved_path
+    bentoml containerize iris_classifier:latest -t "{username}/iris-classifier" --push
     ```
 
 1. In `service.yaml`, replace `{username}` with your Docker hub username:
