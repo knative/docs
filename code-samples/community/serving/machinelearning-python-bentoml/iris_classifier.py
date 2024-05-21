@@ -1,11 +1,14 @@
-from bentoml import env, artifacts, api, BentoService
-from bentoml.handlers import DataframeHandler
-from bentoml.artifact import SklearnModelArtifact
+import bentoml
+import joblib
 
-@env(auto_pip_dependencies=True)
-@artifacts([SklearnModelArtifact('model')])
-class IrisClassifier(BentoService):
 
-    @api(DataframeHandler)
+@bentoml.service
+class IrisClassifier:
+    iris_model = bentoml.models.get("iris_sklearn:latest")
+
+    def __init__(self):
+        self.model = joblib.load(self.iris_model.path_of("model.pkl"))
+
+    @bentoml.api
     def predict(self, df):
         return self.artifacts.model.predict(df)
