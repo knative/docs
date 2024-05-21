@@ -378,7 +378,7 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .col {
   background-color: white;
   flex-basis: 27%;
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 15px 4px 10px 4px;
   min-height: 300px;
 }
@@ -404,10 +404,10 @@ h2.secondary-headline, h3.trusted-by {
   text-align: start;
   padding: 0 2em;
   color: #0D4984;
-  font-weight: bold;
+  font-weight: 600;
   font-style: normal;
   line-height: 1.1;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
   font-size: .8rem;
 }
 
@@ -506,18 +506,22 @@ h2.secondary-headline, h3.trusted-by {
   }
 
   .case-studies-container {
-    padding: 4em 1em;
+    padding: 2em 1em;
   }
 
   .case-studies-container .col {
     flex-basis: calc(100% / 1);
     min-width: 100%;
-    margin-bottom: 4%;
+    margin-bottom: 10%;
   }
 
   .case-studies-container .col .normal-text {
     padding-right: .5em;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .case-studies-container .md-typeset h1 {
+    font-size: 1.25rem;
   }
 }
 
