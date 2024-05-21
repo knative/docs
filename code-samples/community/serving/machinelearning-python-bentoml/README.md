@@ -39,15 +39,18 @@ as API endpoint with Knative Serving.
   API, which is the entry point for accessing this machine learning service.
 
     ```python
-    from bentoml import env, artifacts, api, BentoService
-    from bentoml.handlers import DataframeHandler
-    from bentoml.artifact import SklearnModelArtifact
+    import bentoml
+    import joblib
 
-    @env(auto_pip_dependencies=True)
-    @artifacts([SklearnModelArtifact('model')])
-    class IrisClassifier(BentoService):
 
-        @api(DataframeHandler)
+    @bentoml.service
+    class IrisClassifier:
+        iris_model = bentoml.models.get("iris_classifier:latest")
+
+        def __init__(self):
+            self.model = joblib.load(self.iris_model.path_of("model.pkl"))
+
+        @bentoml.api
         def predict(self, df):
             return self.artifacts.model.predict(df)
     ```
@@ -58,10 +61,11 @@ as API endpoint with Knative Serving.
   given data and then save the model with BentoML to local disk.
 
     ```python
+    import joblib
     from sklearn import svm
     from sklearn import datasets
 
-    from iris_classifier import IrisClassifier
+    import bentoml
 
     if __name__ == "__main__":
         # Load training data
@@ -72,14 +76,9 @@ as API endpoint with Knative Serving.
         clf = svm.SVC(gamma='scale')
         clf.fit(X, y)
 
-        # Create a iris classifier service instance
-        iris_classifier_service = IrisClassifier()
-
-        # Pack the newly trained model artifact
-        iris_classifier_service.pack('model', clf)
-
-        # Save the prediction service to disk for model serving
-        saved_path = iris_classifier_service.save()
+        with bentoml.models.create("iris_classifier") as bento_model:
+            joblib.dump(clf, bento_model.path_of("model.pkl"))
+        print(f"Model saved: {bento_model}")
     ```
 
 1. Run the `main.py` file to train and save the model:
@@ -91,48 +90,97 @@ as API endpoint with Knative Serving.
 1. Use BentoML CLI to check saved model's information.
 
     ```bash
-    bentoml get IrisClassifier:latest
+    bentoml get iris_classifier:latest
     ```
 
     Example:
 
     ```bash
-    > bentoml get IrisClassifier:latest
+    > bentoml get iris_classifier:latest -o json
     {
-      "name": "IrisClassifier",
-      "version": "20200305171229_0A1411",
-      "uri": {
-        "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200305171229_0A1411"
+      "service": "iris_classifier:IrisClassifier",
+      "name": "iris_classifier",
+      "version": "ar67rxqxqcrqi7ol",
+      "bentoml_version": "1.2.16",
+      "creation_time": "2024-05-21T14:40:20.737900+00:00",
+      "labels": {
+        "owner": "bentoml-team",
+        "project": "gallery"
       },
-      "bentoServiceMetadata": {
+      "models": [],
+      "runners": [],
+      "entry_service": "IrisClassifier",
+      "services": [
+        {
+          "name": "IrisClassifier",
+          "service": "",
+          "models": [
+            {
+              "tag": "iris_sklearn:ml5evdaxpwrqi7ol",
+              "module": "",
+              "creation_time": "2024-05-21T14:21:17.070059+00:00"
+            }
+          ],
+          "dependencies": [],
+          "config": {}
+        }
+      ],
+      "envs": [],
+      "schema": {
         "name": "IrisClassifier",
-        "version": "20200305171229_0A1411",
-        "createdAt": "2020-03-06T01:12:49.431011Z",
-        "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.6.2\nscikit-learn",
-          "pythonVersion": "3.7.3"
-        },
-        "artifacts": [
-          {
-            "name": "model",
-            "artifactType": "SklearnModelArtifact"
-          }
-        ],
-        "apis": [
+        "type": "service",
+        "routes": [
           {
             "name": "predict",
-            "handlerType": "DataframeHandler",
-            "docs": "BentoService API",
-            "handlerConfig": {
-              "orient": "records",
-              "typ": "frame",
-              "input_dtypes": null,
-              "output_orient": "records"
+            "route": "/predict",
+            "batchable": false,
+            "input": {
+              "properties": {
+                "df": {
+                  "title": "Df"
+                }
+              },
+              "required": [
+                "df"
+              ],
+              "title": "Input",
+              "type": "object"
+            },
+            "output": {
+              "title": "AnyIODescriptor"
             }
           }
         ]
+      },
+      "apis": [],
+      "docker": {
+        "distro": "debian",
+        "python_version": "3.11",
+        "cuda_version": null,
+        "env": null,
+        "system_packages": null,
+        "setup_script": null,
+        "base_image": null,
+        "dockerfile_template": null
+      },
+      "python": {
+        "requirements_txt": "./requirements.txt",
+        "packages": null,
+        "lock_packages": true,
+        "pack_git_packages": true,
+        "index_url": null,
+        "no_index": null,
+        "trusted_host": null,
+        "find_links": null,
+        "extra_index_url": null,
+        "pip_args": null,
+        "wheels": null
+      },
+      "conda": {
+        "environment_yml": null,
+        "channels": null,
+        "dependencies": null,
+        "pip": null
       }
     }
     ```
@@ -141,7 +189,7 @@ as API endpoint with Knative Serving.
   BentoML CLI command to start an API server locally and test it with the `curl` command.
 
     ```bash
-    bentoml serve IrisClassifier:latest
+    bentoml serve iris_classifier:latest
     ```
 
     In another terminal window, make `curl` request with sample data to the API server
@@ -166,7 +214,7 @@ a Dockerfile is automatically generated when saving the model.
     ```bash
     # jq might not be installed on your local system, please follow jq install
     # instruction at https://stedolan.github.io/jq/download/
-    saved_path=$(bentoml get IrisClassifier:latest -q | jq -r ".uri.uri")
+    saved_path=$(bentoml get iris_classifier:latest -q -o json | jq -r ".uri.uri")
 
     # Build and push the container on your local machine.
     docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/iris-classifier" --push $saved_path
