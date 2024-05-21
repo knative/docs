@@ -20,4 +20,4 @@ class IrisClassifier:
             default=[[5.2, 2.3, 5.0, 0.7]]
         ),
     ) -> np.ndarray:
-        return self.artifacts.model.predict(df)
+        return self.model.predict(df)
