@@ -3,20 +3,20 @@ kind: Sequence
 metadata:
   name: sequence
 spec:
-  channelTemplate:
+  channelTemplate: # Under the hood, the Sequence will create a Channel for each step in the sequence
     apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   steps:
-    - ref:
-        apiVersion: v1
+    - ref: # This is the first step of the sequence, it will send the event to the inappropriate-language-filter service
+        apiVersion: serving.knative.dev/v1
         kind: Service
-        name: bad-word-filter
-    - ref:
-        apiVersion: v1
+        name: inappropriate-language-filter
+    - ref: # This is the second step of the sequence, it will send the event to the sentiment-analysis-app service
+        apiVersion: serving.knative.dev/v1
         kind: Service
-        name: sentiment-raw
-  reply:
+        name: sentiment-analysis-app
+  reply: # This is the last step of the sequence, it will send the event back to the broker as reply
     ref:
       kind: Broker
       apiVersion: eventing.knative.dev/v1
-      name: broker
+      name: bookstore-broker

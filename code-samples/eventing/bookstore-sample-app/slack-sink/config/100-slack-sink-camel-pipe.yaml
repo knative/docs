@@ -1,7 +1,7 @@
 apiVersion: camel.apache.org/v1  # Specifies the API version of Camel K.
 kind: Pipe  # This resource type is a Pipe, a custom Camel K resource for defining integration flows.
 metadata:
-  name: bookstore-notification-service  # The name of the Pipe, which identifies this particular integration flow.
+  name: pipe  # The name of the Pipe, which identifies this particular integration flow.
   annotations:
     trait.camel.apache.org/mount.configs: "secret:slack-credentials"  # An annotation that specifies the secret to mount for the Pipe.
 spec:
@@ -9,7 +9,7 @@ spec:
     ref:
       kind: Broker  # Specifies the kind of source, in this case, a Knative Eventing Broker.
       apiVersion: eventing.knative.dev/v1  # The API version of the Knative Eventing Broker.
-      name: broker  # The name of the Broker, "book-review-broker" in this case
+      name: bookstore-broker  # The name of the Broker, "book-review-broker" in this case
     properties:
       type: moderated-comment  # A filter that specifies the type of events this Pipe will listen for, here it's listening for events of type "bad-comment". You have to have this type specified.
   sink:  # Defines the destination for events processed by this Pipe.
