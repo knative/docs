@@ -4,6 +4,29 @@ hide:
 ---
 
 # Knative Case Studies
+
+<style>
+
+  @media (max-width: 768px) {
+    table {
+      
+    }
+
+    tr {
+     display: flex;
+      flex-direction:column;
+    }
+
+    td {
+      display: table-cell;
+      padding: 5px;
+    }
+
+    img {
+      max-width: 100px;
+    }
+  }
+</style>
 <table>
     <tr onclick="window.location='./deepc/';" style="cursor: pointer;">
         <td style="text-align: center; vertical-align: middle;"><img src="../../images/case-studies/deepc.png" alt="" draggable="false" style="max-width:300px;" /></td>

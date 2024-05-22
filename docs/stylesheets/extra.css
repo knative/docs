@@ -467,7 +467,14 @@ a.md-header__button.md-logo img {
 .testimonials .find-links {
   padding-top: 16px;
 }
-
+@media screen and (max-width: 530px){
+.testimonial{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+}
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active>.md-nav__link {
     color: var(--nav-item-color);
