@@ -106,7 +106,7 @@ const StatusProgress = ({
             </li>
             <li className="flex items-center">
               <GreenCheckMark />
-              Nodejs Server Forwarded the event to Broker
+              Nodejs Server may forwarded the event to Broker
             </li>
             <li className="flex items-center">
               {responseSuccess === "unknown" && <GreyLoadingSpin />}
@@ -160,7 +160,7 @@ const CommentForm = () => {
     setEverSubmit(true);
     setResponseSuccess("unknown");
 
-    fetch("http://localhost:8080/add", {
+    fetch("http://localhost/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -185,6 +185,7 @@ const CommentForm = () => {
       .then((data) => {
         console.log("Success:", data);
         setResponseSuccess("success");
+        setLoadingState(true);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -238,7 +239,7 @@ const CommentForm = () => {
               Submit
             </button>
           )}
-          {responseSuccess === "error" && (
+          {responseSuccess !== "unknown" && (
             <div className="flex flex-col">
               <button
                 type="button"
