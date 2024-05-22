@@ -99,10 +99,17 @@ body {
   min-width: fit-content;
 }
 
+.cta-1{
+  margin-right: 5px;
+}
+.cta-2{
+  margin-left: 5px;
+}
+
 .home-container .md-button,
 .need-to-know-more-container .md-button {
-  background-color: #52b3dd;
-  border-color: #52b3dd;
+  background-color: #6593C8;
+  border-color: #6593C8;
 }
 
 .home-container .md-button--primary {
@@ -117,7 +124,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .home-container h1 {
-  color: #024c93;
+  color: #081729;
   margin-top: 1em;
   margin-bottom: 0;
 }
@@ -213,8 +220,18 @@ h2.secondary-headline, h3.trusted-by {
 
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
-  background-color: #f3f1f2;
+  background-color: #fff;
   color: var(--md-default-fg-color--light);
+}
+
+.reason-text h2{
+  color: #000;
+}
+
+.reason-text p{
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
 }
 
 .why-serverless-container h1, .trying-it-all-container h1,
@@ -224,7 +241,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .why-serverless-container .normal-text,
 .trying-it-all-container .normal-text {
-  font-weight: 600;
+  font-weight: 400;
   margin: 0 auto 2rem;
   max-width: 75%;
 }
@@ -243,6 +260,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .why-serverless-container .normal-text {
   font-size: .8rem;
+  color: #000;
 }
 
 .img-table {
@@ -276,12 +294,12 @@ h2.secondary-headline, h3.trusted-by {
 
 /* knative components container css */
 .knative-components-container h1 {
-  color: #7dc47e;
+  color: #fff;
 }
 
 .knative-components-container .text-table .normal-text {
   width: 30%;
-  text-align: start;
+  text-align: center;
   margin-left: 1%;
   font-size: .8rem;
   margin-top: -1rem;
@@ -311,9 +329,14 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trying-it-all-container .md-typeset h2 {
-  color: #024c93;
+  color: #000;
   line-height: 1;
   margin-bottom: 1rem;
+}
+
+.why-serverless-container .normal-text, .trying-it-all-container .normal-text {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .trying-it-all-container .img-col {
@@ -343,7 +366,8 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trying-it-all-container .md-button.call-to-action:hover {
-  background-color: var(--md-accent-fg-color);
+  background-color: #013464;
+  border: 1px solid #024C93;
 }
 
 /* case studies container css */
@@ -352,7 +376,7 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
   color: black;
   display: flex;
-  background-color: white;
+  background-color: #F7F7F7;
 }
 
 .case-studies-container h1 {
@@ -362,8 +386,9 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .cases-table {
   display: flex;
   justify-content: center;
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
+  gap: 20px;
 }
 
 .case-studies-container .logo {
@@ -377,6 +402,16 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .col {
   min-width: 38%;
   max-width: 40%;
+  padding: 16px 0;
+  background: #fff;
+  border-radius: 16px;
+}
+
+.case-studies-container .col:hover {
+transform: translate3D(0,-1px,0) scale(1.03); /* move up slightly and zoom in */
+box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+transition: all .4s ease; /* zoom in */
+cursor: pointer;
 }
 
 .case-studies-container .logo img {
@@ -399,16 +434,15 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: #497bb2;
+  color: #0D4984;
   font-weight: 600;
-  font-style: italic;
   line-height: 1.1;
-  font-family: serif;
+  font-family: sans-serif;
   font-size: .95rem;
 }
 
 .case-studies-container hr {
-  border-bottom: 2px solid #89c487;
+  border-bottom: 2px solid #0D4984;
   display: flow-root;
   margin: .4em 5em -4px 2em;
 }
@@ -460,7 +494,6 @@ h2.secondary-headline, h3.trusted-by {
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 0;
 }
 
 .cncf-notice-container h3 {
@@ -473,6 +506,20 @@ h2.secondary-headline, h3.trusted-by {
   width: 40%;
   max-width: 500px;
   margin: 1rem;
+}
+
+.md-top {
+  border-radius: 0.4rem;
+  border: 1px solid #333;
+  box-shadow: none;
+}
+
+.md-tabs__item{
+  font-weight: 600;
+}
+
+.md-tabs__item--active {
+  font-weight: 700;
 }
 
 @media only screen and (max-width: 1219px) {

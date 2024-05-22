@@ -1,6 +1,6 @@
 :root {
   --md-primary-fg-color: #f3f1f2;
-  --home-color: #0071c7;
+  --home-color: #0D4984;
   --nav-item-color: #4d4d4d;
 }
 
@@ -99,8 +99,19 @@ a.md-header__button.md-logo img {
   font-weight: bold;
 }
 
+.md-tabs__list {
+  contain: none;
+  overflow: visible;
+}
+
 .md-tabs__list li:nth-last-child(3) {
-  margin-left: auto;
+  margin-left: 360px;
+}
+
+@media only screen and (max-width: 1630px) {
+  .md-tabs__list li:nth-last-child(3) {
+    margin-left: auto;
+  }
 }
 
 .md-tabs__list li:nth-last-child(1),
@@ -109,6 +120,13 @@ a.md-header__button.md-logo img {
   background-color: #024c93;
   color: white;
   padding: 0 2em;
+}
+
+.md-tabs__list li:nth-last-child(1){
+  border-top-right-radius: 10px;
+}
+.md-tabs__list li:nth-last-child(3){
+  border-top-left-radius: 10px;
 }
 
 .md-tabs__list li:nth-last-child(1) a,
@@ -188,6 +206,13 @@ a.md-header__button.md-logo img {
 
 .md-typeset .md-button {
   color: #024c93;
+  border-radius: 7px;
+}
+
+.md-button:hover {
+  background-color: #013464 !important;
+  color: white;
+  border: 1px solid #024c93 !important;
 }
 
 /* Giving h4 tag distinctive style because it is non-differntial with bold text */
@@ -335,23 +360,27 @@ a.md-header__button.md-logo img {
   background-color: #024c93;
 }
 
-.md-footer .md-footer-copyright {
-  font-weight: bold;
-}
-
 .md-footer-meta {
-  background-color: var(--md-footer-bg-color);
+  background-color: #081729;
 }
 
 .footer-links {
   display: flex;
-  flex-grow: 1;
   align-items: center;
 }
 
 .footer-links a {
   margin: 0.4em;
   text-decoration: underline
+}
+
+html .md-footer-meta.md-typeset a {
+  color: #fff;
+  font-weight: 500;
+}
+
+.md-social__link svg {
+  fill: #fff;
 }
 
 /* Feature State Labels */
