@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bad-word-filter
+  name: sentiment-raw
   labels:
-    app: bad-word-filter
+    app: sentiment-raw
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bad-word-filter
+      app: sentiment-raw
   template:
     metadata:
       labels:
-        app: bad-word-filter
+        app: sentiment-raw
     spec:
       containers:
-        - name: inappropriate-language-filter-raw
-          image: quay.io/xxxx/inappropriate-language-filter:latest
+        - name: sentiment-raw
+          image: quay.io/rh-ee-leoli/sentiment-analysis-app:latest
           ports:
             - containerPort: 8080
 
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bad-word-filter
+  name: sentiment-raw
 spec:
   ports:
     - port: 80
@@ -32,5 +32,5 @@ spec:
       targetPort: 8080
       name: http
   selector:
-    app: bad-word-filter
+    app: sentiment-raw
 
