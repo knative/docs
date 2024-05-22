@@ -5,7 +5,7 @@ const {Pool} = require('pg');
 const expressWs = require('express-ws');
 
 const app = express();
-const port = 8080;
+const port = 8000;
 
 
 // Middleware to parse JSON bodies
@@ -24,7 +24,7 @@ const pool = new Pool({
 
 app.ws('/comments', (ws, req) => {
     console.log('WebSocket connection established on /comments');
-
+ 
     // Function to send all comments to the connected client
     const sendComments = async () => {
         try {
