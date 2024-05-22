@@ -138,7 +138,8 @@ a.md-header__button.md-logo img {
 .md-tabs__list li:nth-last-child(1) a:hover,
 .md-tabs__list li:nth-last-child(2) a:hover,
 .md-tabs__list li:nth-last-child(3) a:hover {
-  color: var(--md-accent-fg-color);
+  color: #c6deff;
+  transition: all 0.1s ease-in;
 }
 
 .md-nav__title .md-nav__button.md-logo img,
