@@ -213,7 +213,7 @@ h2.secondary-headline, h3.trusted-by {
 
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
-  background-color: #f3f1f2;
+  background-color: white;
   color: var(--md-default-fg-color--light);
 }
 
@@ -352,7 +352,7 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
   color: black;
   display: flex;
-  background-color: white;
+  background-color: #F7F7F7;
 }
 
 .case-studies-container h1 {
@@ -360,10 +360,11 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .case-studies-container .cases-table {
-  display: flex;
-  justify-content: center;
-  max-width: 90%;
+  width: 90%;
   margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: flex;
 }
 
 .case-studies-container .logo {
@@ -375,8 +376,11 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .case-studies-container .col {
-  min-width: 38%;
-  max-width: 40%;
+  background-color: white;
+  flex-basis: 27%;
+  border-radius: 12px;
+  padding: 15px 4px 10px 4px;
+  min-height: 300px;
 }
 
 .case-studies-container .logo img {
@@ -399,18 +403,18 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: #497bb2;
+  color: #0D4984;
   font-weight: 600;
-  font-style: italic;
+  font-style: normal;
   line-height: 1.1;
-  font-family: serif;
-  font-size: .95rem;
+  font-family: inherit;
+  font-size: .8rem;
 }
 
 .case-studies-container hr {
-  border-bottom: 2px solid #89c487;
+  border-bottom: 2px solid #0D4984;
   display: flow-root;
-  margin: .4em 5em -4px 2em;
+  margin: .4em 2em -4px 1.5em;
 }
 
 /* whats next container css */
@@ -460,7 +464,6 @@ h2.secondary-headline, h3.trusted-by {
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 0;
 }
 
 .cncf-notice-container h3 {
@@ -502,12 +505,23 @@ h2.secondary-headline, h3.trusted-by {
     max-width: 100%;
   }
 
+  .case-studies-container {
+    padding: 2em 1em;
+  }
+
   .case-studies-container .col {
-    max-width: 50%;
+    flex-basis: calc(100% / 1);
+    min-width: 100%;
+    margin-bottom: 10%;
   }
 
   .case-studies-container .col .normal-text {
     padding-right: .5em;
+    font-size: 0.8rem;
+  }
+
+  .case-studies-container .md-typeset h1 {
+    font-size: 1.25rem;
   }
 }
 
