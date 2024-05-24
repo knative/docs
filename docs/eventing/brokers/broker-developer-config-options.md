@@ -30,9 +30,15 @@ spec:
     backoffPolicy: exponential
     backoffDelay: "2007-03-01T13:00:00Z/P1Y2M10DT2H30M"
 ```
-
 - You can specify any valid `name` for your broker. Using `default` will create a broker named `default`.
 - The `namespace` must be an existing namespace in your cluster. Using `default` will create the broker in the `default` namespace.
+
+###  Event Delivery Options
+- You can use `dead-letter sink`  for error handling and auditing of undelivered messages. Specify Kubernetes object reference where undelivered messages will be sent using `ref` and an optional URI to route undelivered messages using `uri`.
+- You can set the `Backoff policies` to define the delay strategy between retry attempts. It can be  `exponantial` or `linear`.
+- You can set the `Backoff delay ` to specify the initial delay before retrying, using the ISO 8601 duration format.
+- You can specify the number of retry attempts before sending the event to the dead-letter sink using the `retry` configuration.
+- `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
 
 ###  Advance broroker class options
 When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified by default in the `config-br-defaults` ConfigMap. 
@@ -70,25 +76,3 @@ In case you have multiple Broker classes installed in your cluster and want to u
     ```
 
 For further information about configuring a default Broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).
-
-
-###  Event Delivery Options
-- You can  sets up a dead-letter sink, retry policies, and a backoff delay for event delivery.
-- `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
-
-### Monitoring to Status Options
- You can use the status of Broker to monitor its status. Here is example:
-```yaml
-    status:
-  observedGeneration: 1
-  conditions:
-  - type: Ready
-    status: "True"
-    reason: "BrokerReady"
-    message: "Broker is ready"
-  address:
-    url: 
-
-```
-
-
