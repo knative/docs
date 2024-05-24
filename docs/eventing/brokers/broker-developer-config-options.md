@@ -1,6 +1,6 @@
 # Developer configuration options
 
-## Broker configuration example
+## Broker configuration 
 
 The following is a full example of a Channel based Broker object which shows the possible configuration options that you can modify:
 
@@ -33,13 +33,8 @@ spec:
 
 - You can specify any valid `name` for your broker. Using `default` will create a broker named `default`.
 - The `namespace` must be an existing namespace in your cluster. Using `default` will create the broker in the `default` namespace.
-- You can set the `eventing.knative.dev/broker.class` annotation to change the class of the broker. The default broker class is `MTChannelBasedBroker`, but Knative also supports use of the `Kafka` and `RabbitMQBroker` broker class. For more information see the [Apache Kafka Broker](../brokers/broker-types/kafka-broker/README.md) or [RabbitMQ Broker](../brokers/broker-types/rabbitmq-broker/README.md) documentation.
-- `spec.config` is used to specify the default backing channel configuration for Channel based Broker implementations. For more information on configuring the default channel type, see the documentation on [Configure Broker defaults](../configuration/broker-configuration.md).
-- `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
 
-
-## Broker class options
-
+###  Advance broroker class options
 When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified by default in the `config-br-defaults` ConfigMap. 
 
 In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
@@ -75,3 +70,25 @@ In case you have multiple Broker classes installed in your cluster and want to u
     ```
 
 For further information about configuring a default Broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).
+
+
+###  Event Delivery Options
+- You can  sets up a dead-letter sink, retry policies, and a backoff delay for event delivery.
+- `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
+
+### Monitoring to Status Options
+ You can use the status of Broker to monitor its status. Here is example:
+```yaml
+    status:
+  observedGeneration: 1
+  conditions:
+  - type: Ready
+    status: "True"
+    reason: "BrokerReady"
+    message: "Broker is ready"
+  address:
+    url: 
+
+```
+
+
