@@ -516,6 +516,44 @@ h2.secondary-headline, h3.trusted-by {
   }
 }
 
+@media only screen and (max-width: 480px) {
+  .why-serverless-container {
+    padding: 2em 1em;
+  }
+
+  .why-serverless-container h1 {
+    font-size: 1em;
+  }
+
+  .why-serverless-container .normal-text {
+    margin: 0 auto;
+    max-width: 100%;
+    font-weight: 500;
+    color: black;
+  }
+
+  .img-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 10%;
+  }
+
+  .img-col .normal-text {
+    font-weight: 600;
+    color: var(--nav-item-color);
+    font-size: 0.75rem;
+  }
+
+  .why-serverless-container .reason-text h2 {
+    font-size: 0.9em;
+    margin-bottom: 0.4rem;
+  }
+
+  .why-serverless-container .md-typeset img {
+    max-width: 100px;
+  }
+}
+
 /* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
 footer nav.md-footer__inner {
   padding: 0;
