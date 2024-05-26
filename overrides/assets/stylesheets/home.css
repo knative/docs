@@ -117,11 +117,11 @@ h2.secondary-headline, h3.trusted-by {
   color: var(--md-primary-fg-color--dark);
   margin-top: 1em;
   margin-bottom: 0;
+  padding: 0 1rem;
 }
 
 .scroller {
   max-width: 60vw;
-  
 }
 
 .scroller__inner {
@@ -189,6 +189,22 @@ h2.secondary-headline, h3.trusted-by {
   margin-top: 10px;
   color: black;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .home-container .md-button,
+  .home-container .md-button--primary {
+    width: 100%;
+    margin-bottom: 1rem; 
+  }
+}
+
+@media (max-width: 530px) {
+  .home-container .md-button,
+  .home-container .md-button--primary {
+    width: 100%;
+    margin-bottom: 1rem; 
+  }
 }
 
 /* need to know more section css */
