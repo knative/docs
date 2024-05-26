@@ -184,7 +184,6 @@ h2.secondary-headline, h3.trusted-by {
   max-height: 48;
 }
 
-
 .home-container h2 {
   margin-top: 10px;
   color: black;
@@ -194,7 +193,6 @@ h2.secondary-headline, h3.trusted-by {
 @media (max-width: 768px) {
   .home-container .md-button,
   .home-container .md-button--primary {
-    width: 100%;
     margin-bottom: 1rem; 
   }
 }
@@ -202,7 +200,6 @@ h2.secondary-headline, h3.trusted-by {
 @media (max-width: 530px) {
   .home-container .md-button,
   .home-container .md-button--primary {
-    width: 100%;
     margin-bottom: 1rem; 
   }
 }
