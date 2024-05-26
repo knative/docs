@@ -535,6 +535,99 @@ h2.secondary-headline, h3.trusted-by {
   }
 }
 
+/* Footer meta and copyright */
+.md-footer-meta {
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.md-footer-copyright {
+  margin-right: 18px;
+}
+
+.md-social {
+  margin-right: 18px;
+}
+
+@media (max-width: 1024px) {
+  .md-footer-copyright {
+    margin: auto;
+    text-align: center;
+  }
+
+  .md-social {
+    margin: auto;
+  }
+}
+
+@media (max-width: 861px) {
+  .md-footer-meta {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .md-footer__link {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .md-footer__title {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .md-footer__button {
+    display: none;
+  }
+
+  .md-footer-meta__inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .md-footer-copyright {
+    order: 2;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .md-footer-copyright a {
+    margin: 8px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .md-social {
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 530px) {
+  footer .footer-links {
+    display: block;
+    margin: 5px;
+  }
+
+  .md-footer-meta {
+    padding: 1em 0;
+  }
+
+  .md-footer-copyright {
+    margin: 5px;
+  }
+}
+
 /* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
 footer nav.md-footer__inner {
   padding: 0;
@@ -542,29 +635,4 @@ footer nav.md-footer__inner {
 
 footer .md-footer-meta .md-footer-meta__inner {
   padding: 1em 0;
-}
-
-footer .md-footer-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1em;
-  margin: 1em 0;
-}
-
-footer .md-footer-nav a {
-  text-decoration: none;
-  color: inherit;
-}
-
-@media only screen and (max-width: 530px) {
-  footer .md-footer-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  footer .md-footer-nav a {
-    margin-bottom: 0.5em;
-  }
 }
