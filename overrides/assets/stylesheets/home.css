@@ -483,10 +483,6 @@ h2.secondary-headline, h3.trusted-by {
     flex-wrap: wrap;
   }
 
-  .case-studies-container {
-    flex-direction: column;
-  }
-
   .knative-components-container .text-table .normal-text {
     width: 80%;
   }
@@ -504,17 +500,19 @@ h2.secondary-headline, h3.trusted-by {
   }
 
   .case-studies-container .col {
-    max-width: 100%;
-    margin-bottom: 20px;
+    max-width: 50%;
   }
 
   .case-studies-container .col .normal-text {
     padding-right: .5em;
   }
+}
 
-  .case-studies-container .logo img {
-    max-width: 100%; 
-    height: auto;
+
+@media only screen and (max-width: 530px) {
+  .case-studies-container .col {
+    max-width: 100%;
+    width: 100%;
   }
 }
 
