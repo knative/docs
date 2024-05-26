@@ -74,7 +74,7 @@ cd ../node-server
 kubectl apply -f config
 
 # Deploy the ML services
-cd ../ML-inappropriate-language-filter
+cd ../ML-bad-word-filter
 func deploy -b=s2i -v 
 
 cd ../ML-sentiment-analysis
