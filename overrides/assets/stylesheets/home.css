@@ -543,3 +543,28 @@ footer nav.md-footer__inner {
 footer .md-footer-meta .md-footer-meta__inner {
   padding: 1em 0;
 }
+
+footer .md-footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+footer .md-footer-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media only screen and (max-width: 530px) {
+  footer .md-footer-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  footer .md-footer-nav a {
+    margin-bottom: 0.5em;
+  }
+}
