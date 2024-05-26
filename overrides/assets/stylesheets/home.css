@@ -350,6 +350,7 @@ h2.secondary-headline, h3.trusted-by {
   color: black;
   display: flex;
   background-color: white;
+  flex-wrap: wrap;
 }
 
 .case-studies-container h1 {
@@ -361,6 +362,7 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
   max-width: 90%;
   margin: auto;
+  flex-wrap: wrap;
 }
 
 .case-studies-container .logo {
@@ -374,6 +376,7 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .col {
   min-width: 38%;
   max-width: 40%;
+  margin-bottom: 1em;
 }
 
 .case-studies-container .logo img {
@@ -521,9 +524,14 @@ h2.secondary-headline, h3.trusted-by {
 
 
 @media only screen and (max-width: 530px) {
+  .case-studies-container {
+    flex-direction: column;
+  }
+  
   .case-studies-container .col {
     max-width: 100%;
     width: 100%;
+    margin-bottom: 1em; 
   }
 }
 
