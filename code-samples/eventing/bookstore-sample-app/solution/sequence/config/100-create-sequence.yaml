@@ -10,7 +10,7 @@ spec:
     - ref: # This is the first step of the sequence, it will send the event to the inappropriate-language-filter service
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: inappropriate-language-filter
+        name: bad-word-filter
     - ref: # This is the second step of the sequence, it will send the event to the sentiment-analysis-app service
         apiVersion: serving.knative.dev/v1
         kind: Service
