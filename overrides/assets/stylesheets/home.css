@@ -267,6 +267,22 @@ h2.secondary-headline, h3.trusted-by {
   transition: transform 0.25s ease-in-out 0s;
 }
 
+@media only screen and (max-width: 530px) {
+  .img-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .img-col {
+    max-width: 100%;
+    margin: 1rem 0; 
+  }
+
+  .why-serverless-container .normal-text {
+    text-align: center;
+  }
+}
+
 .why-serverless-container .md-typeset img:hover {
   transform: scale(1.15);
 }
