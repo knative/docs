@@ -458,12 +458,17 @@ h2.secondary-headline, h3.trusted-by {
 .cncf-notice-container {
   background-color: white;
   padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .cncf-notice-container h3 {
   font-weight: bold;
   color: var(--md-primary-fg-color--light);
   margin-top: 0;
+  width: 100%;
 }
 
 .md-typeset img.cncf-logo {
@@ -475,6 +480,12 @@ h2.secondary-headline, h3.trusted-by {
 @media only screen and (max-width: 1219px) {
   .md-header__topic {
     margin: 0;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .cncf-notice-container h3 {
+    padding-top: 1em;
   }
 }
 
