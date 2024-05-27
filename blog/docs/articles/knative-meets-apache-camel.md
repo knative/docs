@@ -65,7 +65,7 @@ The `timer-source` Kamelet is referenced as the `source` of the `Pipe` and sends
 
 ## Using Kamelets as Event Consumers
 
-In order to consume message from the Knative broker, using Apache Camel K we need a different `Pipe` where the above broker acts as the source of events and a Kamelet is used as sink to receive the CloudEvents: 
+In order to consume messages from the Knative broker, using Apache Camel K, we need a different `Pipe` where the above Broker acts as the source of events and a Kamelet is used as sink to receive the CloudEvents: 
 
 ```yaml
 apiVersion: camel.apache.org/v1
