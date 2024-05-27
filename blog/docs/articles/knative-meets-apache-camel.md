@@ -37,7 +37,7 @@ Now event producers can send events to it and event consumers can receive events
 
 In order to bind a Kamelet to a Knative component, like the above broker, we are using the `Pipe` API. A Pipe allows to declaratively move data from a system described by a Kamelet _towards_ a Knative destination **or** _from_ a Knative destination to another (external) system described by a Kamelet.
 
-Below is a `Pipe` that uses a ready-to-use `Kamelet`, the `timer-source`
+Below is a `Pipe` that uses a ready-to-use `Kamelet`, a `timer-source`
 
 ```yaml
 apiVersion: camel.apache.org/v1
