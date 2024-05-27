@@ -43,7 +43,7 @@ Below is a `Pipe` that uses a ready-to-use `Kamelet`, a `timer-source`
 apiVersion: camel.apache.org/v1
 kind: Pipe
 metadata:
-  name: beer-source-pipe
+  name: timer-source-pipe
 spec:
   source:
     ref:
