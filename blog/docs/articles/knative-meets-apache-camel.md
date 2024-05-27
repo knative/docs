@@ -96,4 +96,4 @@ The `demo-broker` is referenced as the `source` of the `Pipe` and within the `pr
 
 ## Conclusion
 
-With Apache Camel K the Knative Eventing ecosystem benefits from a huge number of predefined `Kamelet`s for integration with a lot of services and products. Sending events from Google Cloud to AWS is possible. Knative Eventing acts as the heart of the routing, with the Knative Broker and Trigger APIs as the Event Mesh for your Kubernetes cluster!
+With Apache Camel K the Knative Eventing ecosystem benefits from a huge number of predefined Kamelets for integration with a lot of services and products. Sending events from Google Cloud to AWS is possible. Knative Eventing acts as the heart of the routing, with the Knative Broker and Trigger APIs as the Event Mesh for your Kubernetes cluster!
