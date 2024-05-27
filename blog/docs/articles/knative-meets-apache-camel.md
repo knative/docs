@@ -6,11 +6,11 @@
 
 The [Apache Camel](https://camel.apache.org/){:target="_blank"} is a popular Open Source integration framework that empowers you to quickly and easily integrate various systems consuming or producing data. With [Apache Camel K](https://camel.apache.org/camel-k/latest){:target="_blank"} the project provides a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
 
-The Camel K framework does also support Knative, allowing developers to [bind](https://camel.apache.org/camel-k/latest/kamelets/kamelets-user.html#kamelets-usage-binding){:target="_blank"} any Kamelet to a Knative component. A Kamelet can act as "source" of data or alternatively as "sink". There are several Kamelets available for integrating and connecting to 3rd party services or products, such as Amazon Web Services (AWS), Google Cloud or even tradition message systems like AMQP 1.0 or JMS brokers like Apache Artemis. The full list of Kamelets can be found in the [documentation](https://camel.apache.org/camel-kamelets/latest/index.html){:target="_blank"}.
+The Camel K framework also supports Knative, allowing developers to [bind](https://camel.apache.org/camel-k/latest/kamelets/kamelets-user.html#kamelets-usage-binding){:target="_blank"} any Kamelet to a Knative component. A Kamelet can act as "source" of data or alternatively as "sink". There are several Kamelets available for integrating and connecting to 3rd party services or products, such as Amazon Web Services (AWS), Google Cloud or even tradition message systems like AMQP 1.0 or JMS brokers like Apache Artemis. The full list of Kamelets can be found in the [documentation](https://camel.apache.org/camel-kamelets/latest/index.html){:target="_blank"}.
 
 ## Installation
 
-The [Installation](https://camel.apache.org/camel-k/next/installation/installation.html) from Apache Camel K offers a few choices, such as CLI, Kustomize, OLM or Helm, like:
+The [Installation](https://camel.apache.org/camel-k/next/installation/installation.html) from Apache Camel K offers a few choices, such as CLI, Kustomize, OLM or Helm. Example of Helm installation:
 
 ```
 $ helm repo add camel-k https://apache.github.io/camel-k/charts/
@@ -89,8 +89,11 @@ spec:
 
 The `demo-broker` is referenced as the `source` of the `Pipe` and within the `properties` we define which CloudEvent `type` we are interested in. On a matching CloudEvent, the event is routed to the referenced `sink`. In this example we are using a simple `log-sink` Kamelet, which will just print the received data on its standard out log.
 
-> NOTE: In order for the above to work, the Apache Camel K operator will indeed create a Knative `Trigger` from the `Pipe` data, where the `spec.broker` will match our `demo-broker` and the `spec.filter.attributes.types` field will be set to `com.corp.my.timer.source` to ensure only matching CloudEvent types are being forwarded.
+
+!!! note
+
+    In order for the above to work, the Apache Camel K operator will indeed create a Knative `Trigger` from the `Pipe` data, where the `spec.broker` will match our `demo-broker` and the `spec.filter.attributes.types` field will be set to `com.corp.my.timer.source` to ensure only matching CloudEvent types are being forwarded.
 
 ## Conclusion
 
-With Apache Camel K the Knative Eventing ecosystem benefits from a huge number of predefined `Kamelet`s for integration with a lot of services and products. Sending events from Google Cloud to AWS is possible. Knative Eventing acts as the heart of the routing, with the Knative `Broker` and `Trigger` APIs as the Event Mesh for your Kubernetes cluster!
+With Apache Camel K the Knative Eventing ecosystem benefits from a huge number of predefined `Kamelet`s for integration with a lot of services and products. Sending events from Google Cloud to AWS is possible. Knative Eventing acts as the heart of the routing, with the Knative Broker and Trigger APIs as the Event Mesh for your Kubernetes cluster!
