@@ -17,7 +17,7 @@ $ helm repo add camel-k https://apache.github.io/camel-k/charts/
 $ helm install my-camel-k camel-k/camel-k
 ```
 
-Beside Camel K we also need to have Knative Eventing installed, as discussed [here](https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/){:target="_blank"}.
+Besides Camel K we also need to have Knative Eventing installed, as described in the [documentation](https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/){:target="_blank"}.
 
 ## Creating a Knative Broker instance
 
