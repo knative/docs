@@ -453,6 +453,12 @@ h2.secondary-headline, h3.trusted-by {
   color: #7cc57c;
 }
 
+.whats-next-logo{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
 .md-typeset .md-button.white {
   color: white;
 }
