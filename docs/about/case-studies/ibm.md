@@ -10,7 +10,7 @@ hide:
       <img src="../../../images/case-studies/ibm.png" alt="IBM logo" draggable="false" />
 </div>
 <div>
-<em style="color:#0071c7;font-size: 1em;">“We were looking for a solution that would be simple enough to maintain while providing 100% ownership to the service team in all aspects. We prototyped a system in early 2022 using Knative Eventing (backed by Knative Kafka Broker) for our watsonx Assistant use-case. Our initial results exceeded our existing benchmarks at various levels. After investing enough time to make it production ready, we rolled it out across all production IBM cloud clusters in six geographical regions. After successfully handling hundreds of thousands of ML model trainings in this initial rollout period and monitoring the system’s resiliency and impact, we also upgraded our watsonx Assistant on CloudPak for Data and watsonx Orchestrate on AWS Marketplace offerings to utilize Knative Eventing for machine learning training via RedHat Openshift Serverless offering.”
+<em style="color:#0071c7;font-size: 1em;">“We were looking for a solution that would be simple enough to maintain while providing 100% ownership to the service team in all aspects. We prototyped a system in early 2022 using Knative Eventing (backed by Knative Kafka Broker) for our watsonx Assistant use-case. Our initial results exceeded our existing benchmarks at various levels. After investing enough time to make it production ready, we rolled it out across all production IBM cloud clusters in six geographical regions.”
 </em>
 </div>
 <div>
