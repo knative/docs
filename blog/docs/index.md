@@ -27,6 +27,11 @@ Details on the 1.14 release of the Knative project.
 
 [Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-14-release.md){ .md-button }
 
+### Enhancing the Knative Experience!
+Reflecting on My LFX Mentorship Journey with Knative. ([Final Report](https://github.com/knative/ux/tree/main/user-research/contributor-research))
+
+[Read more :octicons-arrow-right-24:](articles/enhancing-the-knative-experience.md){ .md-button }
+
 ### Knative meets Apache Camel K!
 Event Sourcing with Apache Camel K and Knative Eventing.
 
