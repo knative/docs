@@ -11,7 +11,7 @@ The research included participation from both contributors and maintainers of Kn
 
 During the early weeks of my mentorship, I dedicated significant time to planning the research process. This involved [setting goals, defining objectives, framing key questions, hypotheses, and selecting appropriate methodologies](https://github.com/knative/ux/blob/main/user-research/contributor-research/Introduction.md). To commence the research phase, I sifted through contributor data spanning from January 1, 2023, to February 29, 2024, in order to identify potential interview candidates. 
 
-We conducted a total of twelve interviews, targeting a diverse range of contributors, including 2 newcomers, 3 active contributors, 3 inactive contributors, and 4 maintainers. (For detailed demographics please click [here](https://github.com/knative/ux/blob/main/user-research/contributor-research/README.md#demographics)) The objective of these interviews was to address key questions and unearth insightful experiences from contributors and maintainers within the Knative community.
+We conducted a total of 12 interviews, targeting a diverse range of contributors, including 2 newcomers, 3 active contributors, 3 inactive contributors, and 4 maintainers. (For detailed demographics please click [here](https://github.com/knative/ux/blob/main/user-research/contributor-research/README.md#demographics)) The objective of these interviews was to address key questions and unearth insightful experiences from contributors and maintainers within the Knative community.
 It was particularly tough to get interviews with inactive contributors because many weren't using CNCF Slack anymore. However, during the latter half of the project, we did manage to interview three of them, which provided significant insights.
 
 The qualitative data gathered from each interview was analyzed using the affinity mapping technique to identify recurring themes. Additionally, tree diagrams were employed for root cause analysis to gain deeper insights into some underlying issues.
@@ -44,13 +44,13 @@ Building upon the key findings and suggestions collected through the interviews,
 7. **Conducting Personalized One-on-One Meetings for New Contributors**
 8. **Introducing an Anonymous Feedback Mechanism**
 
-These recommendations are presented in descending order of implementation priority, with each recommendation accompanied by a suggested implementation plan. For detailed insights into each recommendation, please refer to [Recommendations.md](https://github.com/knative/ux/blob/main/user-research/contributor-research/Recommendations.md).
+These recommendations are presented in descending order of implementation priority from most important at the top, with each recommendation accompanied by a suggested implementation plan. For detailed insights into each recommendation, please refer to [Recommendations.md](https://github.com/knative/ux/blob/main/user-research/contributor-research/Recommendations.md).
 
 ### Presentation and Feedback
 
 Upon concluding the interview analysis, I distilled the key findings and preliminary recommendations and presented them to the UX Working Group on May 16, 2024. Subsequently, after receiving feedback during the presentation and on the pull request, I iterated on my findings and recommendations for refinement.
 
-You can find the final report [here](https://github.com/knative/ux/tree/main/user-research/contributor-research).
+The final report is available [here](https://github.com/knative/ux/tree/main/user-research/contributor-research).
 Any feedback or suggestions on the final report would be greatly appreciated!
 
 
@@ -58,15 +58,14 @@ Any feedback or suggestions on the final report would be greatly appreciated!
 
 ## A Retrospective & Future Directions
 
-Reflecting on this project and the mentorship opportunity it provided, I've gained invaluable insights into open-source collaboration, community dynamics, and the significance of prioritizing developer experience. The rich engagement with the community throughout this mentorship has been particularly rewarding, and I'm really grateful to my mentors for their support. Despite some limitations, our interviews yielded diverse and substantial data. Notably, engaging with three inactive contributors provided unique perspectives that deepened our understanding.
+The project provides invaluable insights into open-source collaboration, contributor motivations, community dynamics, and the significance of prioritizing developer experience. The engagement with the community throughout this mentorship has been rewarding, and I'm really grateful to my mentors for their support. 
+Despite some limitations, the interviews yielded diverse and substantial data. Notably, engaging with three inactive contributors provided unique perspectives that deepened our understanding of the disengagement factors.
 
-Our project began with clear goals outlined in the [Introduction.md](Introduction.md), focusing on understanding the contributor journey, identifying retention factors, and uncovering areas for improvement. Through thorough research, we achieved all of these goals, and our objectives, including exploring the onboarding process, understanding contributors' experiences, identifying pain points, etc. were also successfully met. The key questions guiding our research were effectively addressed through the identified key findings.
+The project began with clear goals outlined in the [Introduction.md](https://github.com/knative/ux/blob/main/user-research/contributor-research/Introduction.md), focusing on understanding the contributor journey, identifying retention factors, and uncovering areas for improvement. Through thorough research, all these goals were achieved, and the objectives, including exploring the onboarding process, understanding contributors' experiences, identifying pain points, etc., were successfully met. The key questions guiding the research were effectively addressed through the identified key findings.
 
-Looking forward, the next steps involve implementing and evaluating the recommendations. This iterative process may require experimentation to find the most effective solutions. Additionally, conducting follow-up research post-implementation will allow us to assess the recommendations' impact on the developer experience in the longer term.
+Looking forward, the next steps involve implementing and evaluating the recommendations. This iterative process may require experimentation to find the most effective solutions. Additionally, conducting follow-up research post-implementation will allow assessing the recommendations' impact on the developer experience in the longer term.
 
 
 ## Conclusion
 
-Overall, my journey with Knative has been incredibly rewarding. I had the opportunity to interact with numerous remarkable individuals from the community, and I am sincerely thankful to all who contributed to this research.
-I am excited to witness how these recommendations will be implemented within our existing ecosystem. I firmly believe that by executing these actionable recommendations, we can not only enhance the developer experience for everyone involved in Knative but also strengthen the bonds that unite us as a community!
-This experience has definitely deepened my passion for open-source development and community engagement, and I eagerly anticipate continuing my contributions to Knative!
+Overall, this project has been rewarding and some signicant insights have emerged from it. Sincere thanks are extended to all who contributed to this research. Implementing these recommendations within the existing ecosystem is an exciting prospect. It is firmly believed that by executing these actionable recommendations, the developer experience for everyone involved in Knative can be enhanced, and the bonds that unite the community can be strengthened!
