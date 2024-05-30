@@ -4,7 +4,8 @@
 
 By providing the reference to an existing _TLS Certificate_ you can instruct a `DomainMapping` to use that
 certificate to secure the mapped service. 
-Please note that for Services using this feature, the automatic certificate creation using [external-domain-tls](../encryption/enabling-automatic-tls-certificate-provisioning.md) is skipped.
+Please note that for Services using this feature, the automatic certificate creation using 
+[external-domain-tls](../encryption/external-domain-tls.md) is skipped.
 
 ## Prerequisites
 

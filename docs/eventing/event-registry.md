@@ -152,7 +152,7 @@ two topics.
 Using the registry, you can discover the different types of events that [Broker event meshes](../event-mesh) can consume.
 
 !!! note
-    With the experimental feature for EventType auto creation you can see more event types in the registry. Learn [here](../experimental-features/eventtype-auto-creation) how to enable this feature.
+    With the feature for EventType auto creation you can see more event types in the registry. Learn [here](../features/eventtype-auto-creation) how to enable this feature.
 
 ### View all event types you can subscribe to
 

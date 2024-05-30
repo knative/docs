@@ -15,6 +15,7 @@ nav:
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-14-release.md
           - releases/announcing-knative-v1-13-release.md
           - releases/announcing-knative-v1-12-release.md
           - releases/announcing-knative-v1-11-release.md
@@ -46,6 +47,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/knative-meets-apache-camel.md
           - articles/knative-backstage-plugins.md
           - articles/demystifying-activator-on-path.md
           - articles/knative-eventing-vision.md

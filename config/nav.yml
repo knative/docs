@@ -159,8 +159,11 @@ nav:
           - Feature and extension flags: serving/configuration/feature-flags.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
         - Serving encryption configuration:
-          - Using custom TLS certificates in the networking layer: serving/encryption/using-certificates-in-networking-layer.md
-          - Enabling automatic TLS certificate provisioning: serving/encryption/enabling-automatic-tls-certificate-provisioning.md
+          - Overview: serving/encryption/encryption-overview.md
+          - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
+          - Configure external domain encryption: serving/encryption/external-domain-tls.md
+          - Configure cluster-local domain encryption: serving/encryption/cluster-local-domain-tls.md
+          - Configure Knative system-internal encryption: serving/encryption/system-internal-tls.md
       # Serving - Application Security
       - Application security:
         - About Security-Guard: serving/app-security/security-guard-about.md
@@ -274,16 +277,18 @@ nav:
         - Configuring logging: eventing/observability/logging/config-logging.md
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
         - Knative Eventing metrics: eventing/observability/metrics/eventing-metrics.md
-      - Experimental Features:
-        - About Eventing experimental features: eventing/experimental-features/README.md
-        - DeliverySpec.Timeout field: eventing/experimental-features/delivery-timeout.md
-        - DeliverySpec.RetryAfterMax field: eventing/experimental-features/delivery-retryafter.md
-        - New Trigger Filters: eventing/experimental-features/new-trigger-filters.md
-        - KReference.Group field: eventing/experimental-features/kreference-group.md
-        - Knative reference mapping: eventing/experimental-features/kreference-mapping.md
-        - EventType auto creation: eventing/experimental-features/eventtype-auto-creation.md
-        - Transport Encryption: eventing/experimental-features/transport-encryption.md
-        - Sender Identity: eventing/experimental-features/sender-identity.md
+      - Features:
+        - About Eventing features: eventing/features/README.md
+        - DeliverySpec.Timeout field: eventing/features/delivery-timeout.md
+        - DeliverySpec.RetryAfterMax field: eventing/features/delivery-retryafter.md
+        - New Trigger Filters: eventing/features/new-trigger-filters.md
+        - New APIServerSource Filters: eventing/features/new-apiserversource-filters.md
+        - KReference.Group field: eventing/features/kreference-group.md
+        - Knative reference mapping: eventing/features/kreference-mapping.md
+        - EventType auto creation: eventing/features/eventtype-auto-creation.md
+        - Transport Encryption: eventing/features/transport-encryption.md
+        - Sender Identity: eventing/features/sender-identity.md
+        - Eventing with Istio: eventing/features/istio-integration.md
       - FAQ: eventing/faq/README.md
     # Eventing reference docs
       - Reference:

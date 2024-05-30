@@ -22,15 +22,20 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### Knative 1.14 is out!
+Details on the 1.14 release of the Knative project.
+
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-14-release.md){ .md-button }
+
+### Knative meets Apache Camel K!
+Event Sourcing with Apache Camel K and Knative Eventing.
+
+[Read more :octicons-arrow-right-24:](articles/knative-meets-apache-camel.md){ .md-button }
+
 ### Knative Completes Third-Party Security Audit
 A third-party audit by Ada Logics found a small number of issues, including [one CVE](https://github.com/knative/serving/security/advisories/GHSA-qmvj-4qr9-v547).
 
 [Read more :octicons-arrow-right-24:](events/security-audit-2023.md){ .md-button }
-
-### Knative 1.13 is out!
-Details on the 1.13 release of the Knative project.
-
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-13-release.md){ .md-button }
 
 ### Knative at KubeCon + CloudNativeCon Europe 2023
 

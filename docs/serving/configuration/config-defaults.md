@@ -20,6 +20,8 @@ metadata:
 data:
   revision-timeout-seconds: "300"
   max-revision-timeout-seconds: "600"
+  revision-response-start-timeout-seconds: "300"
+  revision-idle-timeout-seconds: "0"  # infinite
   revision-cpu-request: "400m"
   revision-memory-request: "100M"
   revision-ephemeral-storage-request: "500M"
@@ -98,6 +100,83 @@ If this value is increased, the activator's `terminationGracePeriodSeconds` shou
       namespace:  knative-serving
     data:
       max-revision-timeout-seconds: "600"
+    ```
+
+### Revision response start timeout seconds
+{% raw %}
+The revision response start timeout value determines the maximum duration in seconds that the request routing layer will wait for a request delivered to a container to begin sending any network traffic. If omitted, the system default is used (300 seconds).
+{% endraw %}
+
+* **Global key:** `revision-response-start-timeout-seconds`
+* **Per-revision spec key:** `responseStartTimeoutSeconds`
+* **Possible values:** integer
+* **Default:** `"300"` (5 minutes)
+
+**Example:**
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion:  v1
+    kind:  ConfigMap
+    metadata:
+      name:  config-defaults
+      namespace:  knative-serving
+    data:
+      revision-response-start-timeout-seconds: "300"
+    ```
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
+      spec:
+        template:
+          spec:
+            responseStartTimeoutSeconds: 300
+            containers:
+            - image: ghcr.io/knative/helloworld-go:latest
+    ```
+
+
+### Revision idle timeout seconds
+{% raw %}
+The revision idle timeout value determines the maximum duration in seconds a request will be allowed to stay open while not receiving any bytes from the user's application. If omitted, the system default is used (infinite).
+{% endraw %}
+
+* **Global key:** `revision-idle-timeout-seconds`
+* **Per-revision spec key:** `idleTimeoutSeconds`
+* **Possible values:** integer
+* **Default:** `"0"` (infinite)
+
+**Example:**
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion:  v1
+    kind:  ConfigMap
+    metadata:
+      name:  config-defaults
+      namespace:  knative-serving
+    data:
+      revision-idle-timeout-seconds: "0"
+    ```
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: helloworld-go
+      namespace: default
+      spec:
+        template:
+          spec:
+            idleTimeoutSeconds: 0
+            containers:
+            - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 ### Revision CPU request
