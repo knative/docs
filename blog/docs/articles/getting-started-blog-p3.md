@@ -19,10 +19,20 @@ Once Kubernetes is aware of the CRD (for example, by kubectl apply -f mycrd.yaml
 ## How can we change an API?
 
 ![](/blog/images/getting-started-blog-series/post3/004.png)
-Now that we know what APIs are (generally, and in the context of Knative), we are ready to explore how we can make changes to them. When we want to update an API there are two, maybe three steps that you need to take.
+Now that we know what APIs are (generally, and in the context of Knative), we are ready to explore how we can make changes to them. When we want to update an API there are three steps that you need to take.
+
+![](/blog/images/getting-started-blog-series/post3/006.png)
 Update the struct for the object. In our case, we want to update the SampleSource struct. In Knative, these are often found in `pkg/apis/<groupname>/<version>/<resourcename>_types.go`. Looking at this struct, we can see that there is a structure to it that all resources generally follow:
 
-![](/blog/images/getting-started-blog-series/post3/005.png)
+
+```
+v1/
+├── apiserver_conversion.go
+├── apiserver_conversion_test.go
+├── apiserver_defaults.go
+├── apiserver_defaults_test.go
+├── apiserver_lifecycle.go
+```
 
 ```shell
 // +genclient
@@ -46,7 +56,7 @@ Looking at this code, we can see that there is a `metav1.TypeMeta` embedded stru
 
 Now that we have an understanding of how the struct works, let’s make our actual changes. Try to add a message template field into the sample source so that users can configure that message in each event. Once you’ve given this a try yourself, continue reading to see how we did it! In general, try to attempt each coding step yourself before reading the “solutions”. We will remind you about this as you continue through the blog posts.
 
-![](/blog/images/getting-started-blog-series/post3/006.png)
+
 
 ```go
 // SampleSourceSpec holds the desired state of the SampleSource (from the client).
@@ -82,7 +92,7 @@ type SampleSourceSpec struct {
 
 ```
 
-All we added was the MessageTemplate string to the spec. Note the JSON tag - this is very important! Without a JSON tag, this field will not be read out of a JSON object when the controller receives info about it from the API Server, and the value will not be written to the JSON we send back to the API Server, so it would not be stored in etcd.
+All we added was the MessageTemplate string to the `Spec`. Note the JSON tag - this is very important! Without a JSON tag, this field will not be read out of a JSON object when the controller receives info about it from the API Server, and the value will not be written to the JSON we send back to the API Server, so it would not be stored in etcd.
 
 ![](/blog/images/getting-started-blog-series/post3/007.png)
 After updating the struct, we normally want to update the [codegen](https://www.redhat.com/en/blog/kubernetes-deep-dive-code-generation-customresources){:target="_blank"}. Knative uses custom code generators to automatically implement parts of the reconciler (more on that in coming blog posts), as well as [deep copy](https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy){:target="_blank"} functions for the structs and auto-generated API documentation. In our case, we want to update the DeepCopy function for the SampleSourceSpec struct. To update the generated code in Knative, you just need to run ./hack/update-codegen.sh. There may be specific versions of dependencies you need to run this in a given repository, so always check the DEVELOPMENT.md file when setting up your repository for development.
