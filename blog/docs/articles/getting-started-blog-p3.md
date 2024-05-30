@@ -157,6 +157,10 @@ spec:
                   type: string
 ```
 
-Now you know everything you need to know to make some API changes! In our next blog we will continue along with our project and learn how to modify the controller for our sample source. This way, when users use our new API option, it will actually change something. We look forward to seeing you in the next blog post! In the meantime, if you have any questions, reach out in #knative-contributors and we will be happy to help.
+By following these steps, you have successfully modified the SampleSource API to support a new feature: text templates. This change allows users to create a text template populated with variables for each event sent by the source. This demonstrates the power and flexibility of Knative's API system and how you can extend it to meet your specific needs.
+
+In the next blog post, we will continue with our project and learn how to modify the controller for our sample source. This way, when users use our new API option, it will actually change something in the system!
+
+We look forward to seeing you in the next blog post! In the meantime, if you have any questions, reach out in #knative-contributors, and we will be happy to help.
 
 ![](/blog/images/getting-started-blog-series/post3/009.png)
