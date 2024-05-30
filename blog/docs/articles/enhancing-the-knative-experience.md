@@ -1,4 +1,4 @@
-# Enhancing the Knative Experience!
+# Enhancing the Knative Contributor Experience!
 
 **Author: [Prajjwal Yadav](https://www.linkedin.com/in/prajjwalyd/), LFX'24 @ Knative**
 
