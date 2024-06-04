@@ -47,6 +47,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/How-IBM-watsonx-Assistant-uses-Knative-Eventing-to-train-machine-learning-models.md
           - articles/enhancing-the-knative-experience.md
           - articles/knative-meets-apache-camel.md
           - articles/knative-backstage-plugins.md
