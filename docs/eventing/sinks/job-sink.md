@@ -21,7 +21,7 @@ with [Knative Eventing installed](../../install/yaml-install/eventing/install-ev
 
 ## Usage
 
-When an event is sent to a `JobSink`, Eventing creates a `Job` and mount the received event as
+When an event is sent to a `JobSink`, Eventing creates a `Job` and mounts the received event as
 JSON file at `/etc/jobsink-event/event`.
 
 1. Create a `JobSink`
