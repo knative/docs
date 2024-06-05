@@ -275,7 +275,8 @@ metadata:
 spec:
   job:
     metadata:
-      labels: my-label
+      labels:
+        my-label: my-value
     spec:
       completions: 12
       parallelism: 3
