@@ -373,5 +373,6 @@ Data,
 
 ![Image](images/image13.png)
 
-Deploy ML workflow: Sentiment Analysis. Please make sure you pass the Validate test before proceeding. [Copy of 2 - Create Sentiment Analysis Service](https://docs.google.com/document/d/1PTGyeY-4kZHqagjhhCNspX6Xk8Erv4-mLaoUBWOiQtM/edit#heading=h.i4o4yil4sueh)
-```
+Please make sure you pass the Validate test before proceeding. 
+
+[Go to Deploy ML workflow: Sentiment Analysis :fontawesome-solid-paper-plane:](../../bookstore/page-2/pg2-sentiment-svc.md){ .md-button .md-button--primary }

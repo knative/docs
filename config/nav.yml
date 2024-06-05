@@ -19,32 +19,35 @@ nav:
 ###############################################################################
     # BookStore
 ###############################################################################
-    - BookStore:
-      - Overview: bookstore/page-0/page-0-intro.md
-      - Environment Setup: bookstore/page-0.5/pg0.5-env-setup.md
-      - 1 - Send Review Comment to Broker: bookstore/page-1/pg1-review-svc-1.md
+
 ###############################################################################
     # Getting started
 ###############################################################################
     - Tutorial:
-        - Tutorial introduction: getting-started/README.md
-        - Install Knative using quickstart: getting-started/quickstart-install.md
-        - Knative Functions:
-          - About Knative Functions: getting-started/about-knative-functions.md
-          - Installing Knative Functions: getting-started/install-func.md
-          - Creating a function: getting-started/create-a-function.md
-          - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
-        - Knative Serving:
-          - Deploying a Knative Service: getting-started/first-service.md
-          - Autoscaling: getting-started/first-autoscale.md
-          - Traffic splitting: getting-started/first-traffic-split.md
-        - Knative Eventing:
-          - About Knative Eventing: getting-started/getting-started-eventing.md
-          - Sources, Brokers, and Triggers: getting-started/first-broker.md
-          - Using a Knative Service as a source: getting-started/first-source.md
-          - Using Triggers and sinks: getting-started/first-trigger.md
-        - What's Next?: getting-started/next-steps.md
-        - Clean Up: getting-started/clean-up.md
+        - Quickstart:
+          - Tutorial introduction: getting-started/README.md
+          - Install Knative using quickstart: getting-started/quickstart-install.md
+          - Knative Functions:
+            - About Knative Functions: getting-started/about-knative-functions.md
+            - Installing Knative Functions: getting-started/install-func.md
+            - Creating a function: getting-started/create-a-function.md
+            - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
+          - Knative Serving:
+            - Deploying a Knative Service: getting-started/first-service.md
+            - Autoscaling: getting-started/first-autoscale.md
+            - Traffic splitting: getting-started/first-traffic-split.md
+          - Knative Eventing:
+            - About Knative Eventing: getting-started/getting-started-eventing.md
+            - Sources, Brokers, and Triggers: getting-started/first-broker.md
+            - Using a Knative Service as a source: getting-started/first-source.md
+            - Using Triggers and sinks: getting-started/first-trigger.md
+          - What's Next?: getting-started/next-steps.md
+          - Clean Up: getting-started/clean-up.md
+        - "E2E tutorial: Knative Bookstore":
+            - Overview: bookstore/page-0/page-0-intro.md
+            - Environment Setup: bookstore/page-0.5/pg0.5-env-setup.md
+            - 1 - Send Review Comment to Broker: bookstore/page-1/pg1-review-svc-1.md
+            - 2 - Create Sentiment Analysis Service: bookstore/page-2/pg2-sentiment-svc.md
 ###############################################################################
     # Installing
 ###############################################################################
