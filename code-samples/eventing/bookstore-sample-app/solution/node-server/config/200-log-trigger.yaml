@@ -1,0 +1,12 @@
+# This Trigger subscribes to the Broker and will forward all the events that it received to event-display.
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: log-trigger
+spec:
+  broker: bookstore-broker
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: event-display

@@ -3,7 +3,7 @@ name: sentiment-analysis-app
 runtime: python
 registry: quay.io/rh-ee-leoli
 image: quay.io/rh-ee-leoli/sentiment-analysis-app:latest
-imageDigest: sha256:3565ee0591557eca83f19bafbd5a614c66ff5d863d2521ad7d176c76e8294c93
+imageDigest: sha256:a0cfa54adf48369af58c8c3354a2826573d18c67cfcf81f55053d6bf6aa9f610
 created: 2024-02-01T00:18:00.06485162-04:00
 build:
   builder: s2i
