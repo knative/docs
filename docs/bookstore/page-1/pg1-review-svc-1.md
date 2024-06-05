@@ -375,5 +375,3 @@ Data,
 
 Deploy ML workflow: Sentiment Analysis. Please make sure you pass the Validate test before proceeding. [Copy of 2 - Create Sentiment Analysis Service](https://docs.google.com/document/d/1PTGyeY-4kZHqagjhhCNspX6Xk8Erv4-mLaoUBWOiQtM/edit#heading=h.i4o4yil4sueh)
 ```
-
-This should now accurately reflect the content from Step 5 onward as per the provided HTML file. If there are any additional corrections or specific areas that need attention, please let me know.

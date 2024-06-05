@@ -97,7 +97,7 @@ We will be building the sample app in this order:
 
 4. **Use Sequence to Run ML Workflows**: Learn how to utilize Knative Sequence to ensure your machine learning workflows execute in order.
 
-5. **Database Deployment**: Understand the deployment of an in-memory PostgreSQL instance using Knative Serving.
+5. **Database Deployment**: Understand the deployment of an in-memory PostgreSQL instance using k8s deployment.
 
 6. **Glue Everything Together**: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers, Filters, and Dead Letter Sinks (DLS).
 
@@ -113,7 +113,7 @@ To help you visualize what you'll be creating, we've prepared a brief demo video
 
 [EditedV2 - Knative Bookstore Demo.mp4](https://drive.google.com/open?id=1nJGQOM9X1Wb5eKjdq-Iv-cQK97LYTscD&usp=drive_copy), Music used under [license](https://docs.google.com/document/d/125Wok7L5lzf1XnsM5HIM8SuZ1ty2NCbddKrEtM_Xebs/edit#heading=h.79x5qqa9u7gd)
 
-
+<iframe src="https://drive.google.com/open?id=1nJGQOM9X1Wb5eKjdq-Iv-cQK97LYTscD&usp=drive_copy" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 ### Getting Started with the Setup Script
 
