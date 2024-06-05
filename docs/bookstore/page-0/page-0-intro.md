@@ -53,7 +53,7 @@ The bookstore application consists of a few components.
 
 ### User Interface
 
-A simple frontend Next.js application that interacts with these services. It could be a web page where users can select a book to view its details, ratings, and reviews.
+A frontend Next.js application that interacts with these services. It is a web page where users can select a book to view its details, ratings, and reviews.
 
 ### Database Service
 
@@ -91,7 +91,7 @@ We will be building the sample app in this order:
 
 1. **Implement Book Review v1**: Pass reviews from the frontend to event-display via broker. This involves learning about Broker, SinkBinding, and CloudEvents event types.
    
-2. **Deploy Sentiment Analysis Service**: Gain knowledge on deploying a sentiment analysis service using Knative Func.
+2. **Deploy Sentiment Analysis Service**: Gain knowledge on deploying a sentiment analysis service using Knative Function.
 
 3. **Deploy Bad Word Filter Service**: Learn how to deploy a bad word filter service using Knative Service and Sink.
 

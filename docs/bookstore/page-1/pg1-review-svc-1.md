@@ -38,7 +38,7 @@ The book review service is our Node.js API server, playing a crucial role in our
 
 Before we dive into the code, let's clarify two important concepts: Broker and SinkBinding. It’s okay if you don’t fully understand it yet! You will get a deeper understanding along the way.
 
-- **Broker**: Acts as the central point in the event-driven architecture, routing events to the correct destinations. The broker's address is not fixed and can change dynamically.
+- **Broker**: Acts as the central point in the event-driven architecture, routing events to the correct destinations. The broker's address is not fixed and can vary.
 - **SinkBinding**: This Knative Eventing component automatically injects the broker's address into the environment variable `K_SINK`, ensuring that the Node.js server always has the correct address without manual updates.
 
 ![Image](images/image12.png)
