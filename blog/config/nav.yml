@@ -1,6 +1,7 @@
 nav:
     - Home: /docs/
     - Tutorial: /docs/getting-started/
+    - E2E-Tutorial: /docs/bookstore/
     - Concepts: /docs/concepts/
     - Installing: /docs/install/
     - Functions: /docs/functions/

@@ -17,6 +17,13 @@ nav:
           - Brokers: concepts/eventing-resources/brokers.md
       - Duck types: concepts/duck-typing.md
 ###############################################################################
+    # BookStore
+###############################################################################
+    - BookStore:
+      - Overview: bookstore/page-0/page-0-intro.md
+      - Environment Setup: bookstore/page-0.5/pg0.5-env-setup.md
+      - 1 - Send Review Comment to Broker: bookstore/page-1/pg1-review-svc-1.md
+###############################################################################
     # Getting started
 ###############################################################################
     - Tutorial:
