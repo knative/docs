@@ -43,8 +43,11 @@ In order to do so, you need to install the func CLI. You can follow the [officia
 ![Image3](images/image3.png)
 
 The process is straightforward:
+
 1. Begin by utilizing the `func create` command to generate your code template.
+
 2. Next, incorporate your unique code into this template.
+
 3. Finally, execute `func deploy` to deploy your application seamlessly to the Kubernetes cluster.
 
 This workflow ensures a smooth transition from development to deployment within the Knative Functions ecosystem.
@@ -100,81 +103,82 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 `func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
 
-_sentiment-analysis-app/func.py_
-```python
-from parliament import Context
-from flask import Request, request, jsonify
-import json
-from textblob import TextBlob
-from time import sleep
-from cloudevents.http import CloudEvent, to_structured
+???+ abstract "_sentiment-analysis-app/func.py_"
 
-# The function to convert the sentiment analysis result into a CloudEvent
-def create_cloud_event(inputText, badWordResult, data):
-    attributes = {
-        "type": "moderated-comment",
-        "source": "sentiment-analysis",
-        "datacontenttype": "application/json",
-        "sentimentResult": data,
-        "badwordfilter": badWordResult,
-    }
+    ```python
+    from parliament import Context
+    from flask import Request, request, jsonify
+    import json
+    from textblob import TextBlob
+    from time import sleep
+    from cloudevents.http import CloudEvent, to_structured
 
-    # Put the sentiment analysis result into a dictionary
-    data = {
-        "reviewText": inputText,
-        "badWordResult": badWordResult,
-        "sentimentResult": data,
-    }
+    # The function to convert the sentiment analysis result into a CloudEvent
+    def create_cloud_event(inputText, badWordResult, data):
+        attributes = {
+            "type": "moderated-comment",
+            "source": "sentiment-analysis",
+            "datacontenttype": "application/json",
+            "sentimentResult": data,
+            "badwordfilter": badWordResult,
+        }
 
-    # Create a CloudEvent object
-    event = CloudEvent(attributes, data)
-    return event
+        # Put the sentiment analysis result into a dictionary
+        data = {
+            "reviewText": inputText,
+            "badWordResult": badWordResult,
+            "sentimentResult": data,
+        }
 
-def analyze_sentiment(text):
-    analysis = TextBlob(text["reviewText"])
-    sentiment = "neutral"
+        # Create a CloudEvent object
+        event = CloudEvent(attributes, data)
+        return event
 
-    if analysis.sentiment.polarity > 0:
-        sentiment = "positive"
-    elif analysis.sentiment.polarity < 0:
-        sentiment = "negative"
+    def analyze_sentiment(text):
+        analysis = TextBlob(text["reviewText"])
+        sentiment = "neutral"
 
-    badWordResult = ""
-    try:
-        badWordResult = text["badWordResult"]
-    except:
-        pass
+        if analysis.sentiment.polarity > 0:
+            sentiment = "positive"
+        elif analysis.sentiment.polarity < 0:
+            sentiment = "negative"
 
-    # Convert the sentiment into a CloudEvent
-    sentiment = create_cloud_event(text["reviewText"], badWordResult, sentiment)
-    return sentiment
+        badWordResult = ""
+        try:
+            badWordResult = text["badWordResult"]
+        except:
+            pass
 
-def main(context: Context):
-    """
-    Function template
-    The context parameter contains the Flask request object and any
-    CloudEvent received with the request.
-    """
+        # Convert the sentiment into a CloudEvent
+        sentiment = create_cloud_event(text["reviewText"], badWordResult, sentiment)
+        return sentiment
 
-    print("Sentiment Analysis Received CloudEvent: ", context.cloud_event)
+    def main(context: Context):
+        """
+        Function template
+        The context parameter contains the Flask request object and any
+        CloudEvent received with the request.
+        """
 
-    # Add your business logic here
-    return analyze_sentiment(context.cloud_event.data)
-```
+        print("Sentiment Analysis Received CloudEvent: ", context.cloud_event)
+
+        # Add your business logic here
+        return analyze_sentiment(context.cloud_event.data)
+    ```
 
 ### **Step 3: Configure the dependencies**
 
 ![Image9](images/image9.png)
 
 The `requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
+???+ abstract "_sentiment-analysis-app/requirements.txt_"
 
-_sentiment-analysis-app/requirements.txt_
-```
-Flask==3.0.2
-textblob==0.18.0.post0
-parliament-functions==0.1.0
-cloudevents==1.10.1
-```
+    ```
+    Flask==3.0.2
+    textblob==0.18.0.post0
+    parliament-functions==0.1.0
+    cloudevents==1.10.1
+    ```
 
 Knative function will automatically install the dependencies listed here when you build the function.
 
@@ -185,35 +189,35 @@ Knative function will automatically install the dependencies listed here when yo
 In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, knative function will ensure that the `setup.py` file is executed after the dependencies have been installed.
 
 The `setup.py` file should contain the following code for your bookstore:
+ 
+???+ abstract "_sentiment-analysis-app/setup.py_"
+    ```python
+    from setuptools import setup, find_packages
+    from setuptools.command.install import install
+    import subprocess
 
-_sentiment-analysis-app/setup.py_
-```python
-from setuptools import setup, find_packages
-from setuptools.command.install import install
-import subprocess
+    class PostInstallCommand(install):
+        """Post-installation for installation mode."""
+        def run(self):
+            # Call the superclass run method
+            install.run(self)
+            # Run the command to download the TextBlob corpora
+            subprocess.call(['python', '-m', 'textblob.download_corpora', 'lite'])
 
-class PostInstallCommand(install):
-    """Post-installation for installation mode."""
-    def run(self):
-        # Call the superclass run method
-        install.run(self)
-        # Run the command to download the TextBlob corpora
-        subprocess.call(['python', '-m', 'textblob.download_corpora', 'lite'])
-
-setup(
-    name="download_corpora",
-    version="1.0",
-    packages=find_packages(),
-    cmdclass={
-        'install': PostInstallCommand,
-    }
-)
-```
+    setup(
+        name="download_corpora",
+        version="1.0",
+        packages=find_packages(),
+        cmdclass={
+            'install': PostInstallCommand,
+        }
+    )
+    ```
 
 
 
 ### **Step 5: Try to build and run your Knative Function locally (Optional)**
-??? abstract "Click here to expand"
+??? info "Click here to expand"
     
     
     ![Image4](images/image4.png)
@@ -244,7 +248,7 @@ setup(
     
     ---
     
-    **An alert box Issue you may experience:**
+    **Troubleshooting**
     
     `❗Error: '/home/Kuack/Documents/knative/docs/code-samples' does not contain an initialized function`
     
@@ -365,27 +369,29 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 - `--data` flag is the input text
 - `-t` flag is the URI to the Knative Function.
 
-If you see the response, it means that the function is running successfully.
 
-```
-Context Attributes,
-  specversion: 1.0
-  type: new-review-comment
-  source: book-review-broker
-  id: ebbcd761-3a78-4c44-92e3-de575d1f2d38
-  time: 2024-05-27T04:44:07.549303Z
-  datacontenttype: application/json
-Extensions,
-  badwordfilter: good
-Data,
-  {
-    "reviewText": "I love Knative so much",
-    "badWordResult": "",
-    "sentimentResult": "positive"
-  }
-```
+???+ success "Verify"
 
----
+    If you see the response, it means that the function is running successfully.
+
+    ```
+    Context Attributes,
+    specversion: 1.0
+    type: new-review-comment
+    source: book-review-broker
+    id: ebbcd761-3a78-4c44-92e3-de575d1f2d38
+    time: 2024-05-27T04:44:07.549303Z
+    datacontenttype: application/json
+    Extensions,
+    badwordfilter: good
+    Data,
+    {
+        "reviewText": "I love Knative so much",
+        "badWordResult": "",
+        "sentimentResult": "positive"
+    }
+    ```
+
 
 ## **Next Step**
 

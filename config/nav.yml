@@ -24,6 +24,7 @@ nav:
     # Getting started
 ###############################################################################
     - Tutorial:
+        - Overview: getting-started/tutorial.md
         - Quickstart:
           - Tutorial introduction: getting-started/README.md
           - Install Knative using quickstart: getting-started/quickstart-install.md
@@ -48,6 +49,9 @@ nav:
             - Environment Setup: bookstore/page-0.5/pg0.5-env-setup.md
             - 1 - Send Review Comment to Broker: bookstore/page-1/pg1-review-svc-1.md
             - 2 - Create Sentiment Analysis Service: bookstore/page-2/pg2-sentiment-svc.md
+            - 3 - Create Bad Word Service: bookstore/page-3/pg3-badword-svc.md
+            - 4 - Create Sequence: bookstore/page-4/pg4-sequence.md
+            - 5 - Create DB service: bookstore/page-5/pg5-db-svc.md
 ###############################################################################
     # Installing
 ###############################################################################
