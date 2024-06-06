@@ -7,13 +7,13 @@
 
 ###  Event Delivery Options
 - You can use `dead-letter sink`  for error handling and auditing of undelivered messages. Specify Kubernetes object reference where undelivered messages will be sent using `ref` and an optional URI to route undelivered messages using `uri`.
-- You can set the `Backoff policies` to define the delay strategy between retry attempts. It can be  `exponantial` or `linear`.
-- You can set the `Backoff delay ` to specify the initial delay before retrying, using the ISO 8601 duration format.
+- You can set the `Backoff policies` to define the delay strategy between retry attempts. It can be `exponential` or `linear`.
+- You can set the `Backoff delay` to specify the initial delay before retrying, using the ISO 8601 duration format.
 - You can specify the number of retry attempts before sending the event to the dead-letter sink using the `retry` configuration.
 - `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
 
-###  Advance broroker class options
-When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, the default `MTChannelBasedBroker` Broker class is used, as specified by default in the `config-br-defaults` ConfigMap. 
+###  Advanced broker class options
+When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, by default the `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.
 
 In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
 
