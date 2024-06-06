@@ -6,10 +6,10 @@
   <!-- Link to previous and/or next page -->
   {% if page.meta and page.meta.hide_prev and page.meta.hide_next %}
   {% elif page.previous_page or page.next_page %}
-  <nav 
-    class="md-footer__inner md-grid" 
-    aria-label="{{ lang.t('footer.title') }}"
-  >
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="{{ lang.t('footer.title') }}"
+    >
 
       <!-- Link to previous page -->
       {% if page.meta and page.meta.hide_prev %}
@@ -32,7 +32,7 @@
           </div>
         </a>
       {% endif %}
-      
+
       <!-- Link to next page -->
       {% if page.meta and page.meta.hide_next %}
       {% elif page.next_page %}
@@ -64,9 +64,9 @@
       <!-- Copyright and theme information -->
       <div class="md-footer-copyright">
         {% if config.copyright %}
-        <div class="md-footer-copyright__highlight">
-          {{ config.copyright }}
-        </div>
+          <div class="md-footer-copyright__highlight">
+            {{ config.copyright }}
+          </div>
         {% endif %}
         {{ extracopyright }}
         Documentation Distributed under CC BY 4.0
