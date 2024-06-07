@@ -81,27 +81,24 @@ It acts as the bridge between the book store broker and the slack sink, so we ca
 
 ## **Tutorial Page Structure**
 
-![Flow Chart](images/6.png)
-
-From this flow chart, you can see what will be happening after the user clicks on the “Submit” button on the book store comment form.
 
 We will be building the sample app in this order:
 
-0. **Environment Setup**: Set up the environment for the tutorial. This includes installing the necessary tools and creating a Kubernetes cluster.
+0. [**Environment Setup**](../page-0.5/pg0.5-env-setup.md){:target="_blank"}: Set up the environment for the tutorial. This includes installing cluster, frontend, and backend.
 
-1. **Implement Book Review v1**: Pass reviews from the frontend to event-display via broker. This involves learning about Broker, SinkBinding, and CloudEvents event types.
+1. [**Send comments to broker**](../page-1/pg1-review-svc-1.md){:target="_blank"}: Pass reviews from the frontend to event-display via broker. This involves learning about Broker, SinkBinding, and CloudEvents event types.
    
-2. **Deploy Sentiment Analysis Service**: Gain knowledge on deploying a sentiment analysis service using Knative Function.
+2. [**Deploy Sentiment Analysis Service**](../page-2/pg2-sentiment-svc.md){:target="_blank"}: Gain knowledge on deploying a sentiment analysis service using Knative Function.
 
-3. **Deploy Bad Word Filter Service**: Learn how to deploy a bad word filter service using Knative Service and Sink.
+3. [**Deploy Bad Word Filter Service**](../page-3/pg3-badword-svc.md){:target="_blank"}: Implement a bad word filter service using Knative Function yourself.
 
-4. **Use Sequence to Run ML Workflows**: Learn how to utilize Knative Sequence to ensure your machine learning workflows execute in order.
+4. [**Use Sequence to Run ML Workflows in order**](../page-4/pg4-sequence.md){:target="_blank"}: Learn how to utilize Knative Sequence to ensure your ML workflows execute in order.
 
-5. **Database Deployment**: Understand the deployment of an in-memory PostgreSQL instance using k8s deployment.
+5. [**Database Deployment**](../page-5/pg5-db-svc.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using k8s deployment.
 
-6. **Glue Everything Together**: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers, Filters, and Dead Letter Sinks (DLS).
+6. [**Advanced event filtering**](../page-6/pg6-review-svc-2.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers, Filters.
 
-7. **Connect with External Services/API**: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integration.
+7. [**Connect with External Services/API**](../page-7/pg7-slack-camel.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integration.
 
 ## **How to properly learn?**
 
@@ -136,7 +133,7 @@ If you find the tutorial too basic, or if it covers familiar territory, feel fre
 
 ![Help Image](images/11.png)
 
-Join the supportive Knative community via the Cloud Native Computing Foundation (CNCF) Slack, particularly the #knative channel. Before posting your questions, please search to see if they've already been answered. Your feedback on this tutorial is invaluable, so don't hesitate to reach out with suggestions or questions.
+Join the supportive Knative community via the Cloud Native Computing Foundation (CNCF) Slack, particularly the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} channel. Before posting your questions, please search to see if they've already been answered. Your feedback on this tutorial is invaluable, so don't hesitate to reach out with suggestions or questions.
 
 ## **Next Step**
 

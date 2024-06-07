@@ -1,5 +1,5 @@
 
-# **3 - Solution - Create Bad Word Filter Service**
+# 3 - Solution - Create Bad Word Filter Service
 
 ![image](images/image4.png)
 

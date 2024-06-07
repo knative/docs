@@ -58,17 +58,42 @@ If you are using other container registries, you may need to read more [here](ht
 
 Follow the instructions [here](../create-slack-workspace/README.md){:target="_blank"} on how to create the Slack workspace and generate an incoming webhook URL for your designated channel where notifications will be sent.
 
+???+ success "Verify"
+
+    You should have a webhook URL that looks like this:
+
+    ```sh
+    https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+    ```
+
+    Save this URL as you will need it later.
+
 ### **Prerequisite 4: Create a Secret that stores your slack credentials**
 
 ![image](images/image22.png)
 
-We are storing the webhook URL as a secret. Copy and paste your webhook URL into the file `application.properties` and then run the following command to create the secret:
+We are storing the webhook URL as a secret. Copy and paste your webhook URL into the file `application.properties`
+
+???+ abstract "_/slack-sink/application.properties_"
+
+    ```
+    slack.channel=#bookstore-owner
+    slack.webhook.url=https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+    ```
+
+Then run the following command to create the secret in the `/slack-sink` directory:
 
 ```sh
 kubectl create secret generic slack-credentials --from-file=application.properties
 ```
 
-And make sure you create a secret in your cluster to store the value of the webhook URI.
+???+ success "Verify"
+
+    You should see this message if the secret is created successfully:
+
+    ```sh
+    secret/slack-credentials created
+    ```
 
 ## **Implementation**
 
@@ -76,7 +101,7 @@ And make sure you create a secret in your cluster to store the value of the webh
 
 ![image](images/image14.png)
 
-We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/camel-k.html#_camel_apache_org_v1_Pipe&sa=D&source=editors&ust=1717684414714310&usg=AOvVaw3f5rvgKOHyBJtWKngf4goO){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625&sa=D&source=editors&ust=1717684414714482&usg=AOvVaw2RO7o2ynykKuu6sTPwCPDO){:target="_blank"}) in Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.3.x/kamelets/kamelets.html&sa=D&source=editors&ust=1717684414714656&usg=AOvVaw1vk5No9foZ4o3B6Mu7vCiJ){:target="_blank"}, our destination.
+We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.3.x/kamelets/kamelets.html){:target="_blank"}, our destination.
 
 ![image](images/image10.png)
 
@@ -100,7 +125,7 @@ spec:
     ...
 ```
 
-If you hope to learn more about it, check out the article [here](https://knative.dev/blog/articles/knative-meets-apache-camel/&sa=D&source=editors&ust=1717684414716125&usg=AOvVaw3SQJgoo52ZLCUpYLHnmeNC){:target="_blank"}!
+If you hope to learn more about it, check out the article [Event Sourcing with Apache Camel K and Knative Eventing by Matthias Weßendorf](https://knative.dev/blog/articles/knative-meets-apache-camel){:target="_blank"}!
 
 ### **Step 1: Create the Broker that can route “bad word” comments to Slack**
 
@@ -132,7 +157,7 @@ Here, we will be connecting `book-review-broker` with a new broker called `badwo
 
 ![image](images/image5.png)
 
-Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn) to create the broker:
+Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:target="_blank"} to create the broker:
 
 ```sh
 kn broker create badword-broker

@@ -6,7 +6,7 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 
 ## **What Knative features will we learn about?**
 
-- The ease to use Knative Function to deploy your service, and make it be managed by Knative Serving, which gives you the ability to auto-scale your service to zero, and scale up to handle the demand.
+- The ease to use **Knative Function** to deploy your service, and make it be managed by Knative Serving, which gives you the ability to **auto-scale your service to zero**, and scale up to handle the demand.
 
 ## **What does the final deliverable look like?**
 
@@ -36,7 +36,7 @@ In order to do so, you need to install the func CLI. You can follow the [officia
     Running `func version` in your terminal to verify the installation, and you should see the version of the func CLI you installed.
 
 ???+ bug "Troubleshooting"
-    If you see `command not found`, you may need to add the func CLI to your PATH.)
+    If you see `command not found`, you may need to add the func CLI to your PATH.
 
 ## **Implementation**
 

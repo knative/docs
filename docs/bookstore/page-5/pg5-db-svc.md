@@ -58,7 +58,7 @@ kubectl apply -f db-service
 
 ![image3](images/image3.png)
 
-Open the UI page at [http://localhost:3000](http://localhost:3000), you should see some new comments popping up at the bottom of the page.
+Open the UI page at [http://localhost:3000](http://localhost:3000){:target="_blank"}, you should see some new comments popping up at the bottom of the page.
 
 ![image2](images/image2.png)
 

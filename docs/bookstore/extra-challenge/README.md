@@ -6,7 +6,36 @@ Congratulations on completing the bookstore tutorial! Kubernetes and Knative hav
 
 Now it's time to test your mastery of the skills you've learned with Kuack. We've prepared a few extra challenges for you to explore. Take a look and have fun!
 
-## **Challenge 1: Implement Comment Deletion**
+## **Challenge 1: Integrate with Another Notification Service as Sink (Telegram)**
+
+![image](images/image6.png)
+
+**Description**
+
+Add Telegram notifications for new comments using Apache Camel.
+
+**Objective**
+
+Send Telegram notifications for new comments.
+
+**Steps**
+
+1. Create a new event type or filter attribute for Telegram notifications.
+2. Set up a trigger to route these events to a Camel-K integration service.
+3. Use Apache Camel to send messages to a Telegram chat by setting up the telegram-sink.
+
+**What You Will Learn**
+
+- Integrating with external notification services using Apache Camel.
+- Using triggers to route specific events.
+- Working with the Telegram API.
+
+**Estimated Time**
+
+0.5-1 hours
+
+
+## **Challenge 2: Implement Comment Deletion**
 
 ![image](images/image1.png)
 
@@ -34,35 +63,6 @@ Allow users to delete the selected comment.
 
 1-2 hours
 
-## **Challenge 2: Submit Comments via Telegram**
-
-![image](images/image3.png)
-
-**Description**
-
-Enable users to submit new comments through a Telegram bot using Apache Camel.
-
-**Objective**
-
-Allow users to send comments via Telegram.
-
-**Steps**
-
-1. Create a Telegram bot and obtain the bot token.
-2. Set up an [Apache Camel Telegram source](https://camel.apache.org/camel-kamelets/4.4.x/telegram-source.html) to listen for messages from the Telegram bot.
-3. Create a new event type for comments received via Telegram.
-4. Set up a trigger to process these events and route them to the comment handling service.
-5. Implement a function in the node-server to handle the new comments and update the database.
-
-**What You Will Learn**
-
-- Creating and configuring a Telegram bot.
-- Using Apache Camel to integrate Telegram as an event source with your application.
-- Handling new event types and processing user input from external sources.
-
-**Estimated Time**
-
-2-3 hours
 
 ## **Challenge 3: Format the Output for the Sink**
 
@@ -95,33 +95,36 @@ Transform event data and send it to the appropriate sink.
 
 1-2 hours
 
-## **Challenge 4: Integrate with Another Notification Service as Sink (Telegram)**
+## **Challenge 4: Submit Comments via Telegram**
 
-![image](images/image6.png)
+![image](images/image3.png)
 
 **Description**
 
-Add Telegram notifications for new comments using Apache Camel.
+Enable users to submit new comments through a Telegram bot using Apache Camel.
 
 **Objective**
 
-Send Telegram notifications for new comments.
+Allow users to send comments via Telegram.
 
 **Steps**
 
-1. Create a new event type or filter attribute for Telegram notifications.
-2. Set up a trigger to route these events to a Camel-K integration service.
-3. Use Apache Camel to send messages to a Telegram chat by setting up the telegram-sink.
+1. Create a Telegram bot and obtain the bot token.
+2. Set up an [Apache Camel Telegram source](https://camel.apache.org/camel-kamelets/4.4.x/telegram-source.html) to listen for messages from the Telegram bot.
+3. Create a new event type for comments received via Telegram.
+4. Set up a trigger to process these events and route them to the comment handling service.
+5. Implement a function in the node-server to handle the new comments and update the database.
 
 **What You Will Learn**
 
-- Integrating with external notification services using Apache Camel.
-- Using triggers to route specific events.
-- Working with the Telegram API.
+- Creating and configuring a Telegram bot.
+- Using Apache Camel to integrate Telegram as an event source with your application.
+- Handling new event types and processing user input from external sources.
 
 **Estimated Time**
 
-0.5-1 hours
+2-3 hours
+
 
 ## **Help**
 

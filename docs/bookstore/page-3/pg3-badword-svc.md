@@ -5,6 +5,10 @@
 
 As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple bad word filter service to tell whether the text contains any hateful/insultive speech.
 
+If you ever get stuck, check the solution here.
+
+[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-solution-badword-svc.md){ .md-button .md-button--primary }
+
 ## **What Knative features will we learn about?**
 
 - The easiness to use Knative Function to deploy your service, and make it be managed by Knative Serving, which gives you the ability to auto-scale your service to zero, and scale up to handle the demand.

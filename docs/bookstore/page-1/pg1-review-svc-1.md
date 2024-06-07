@@ -302,7 +302,7 @@ There is also a concept called [Channel](https://knative.dev/docs/eventing/chann
 
 Learn more about Broker + Trigger [here](https://knative.dev/docs/eventing/brokers/)!
 
-#### **Create a Trigger:**
+**Create a Trigger:**
 
 ![Image](images/image20.png)
 
