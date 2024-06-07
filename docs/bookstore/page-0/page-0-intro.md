@@ -111,11 +111,11 @@ To help you visualize what you'll be creating, we've prepared a brief demo video
 ???+ bug "Video not working above?"
     If the video is not working, you can watch it [here](https://www.youtube.com/watch?v=5D8pTcQSacw&ab_channel=Knative){:target="_blank"}.
 
-### Getting Started with the Setup Script
+<!-- ### Getting Started with the Setup Script
 
 ![Setup Script](images/8.png)
 
-We recommend beginning by using our setup script to launch the bookstore application. This allows you to see what the final product will look like and gives you a chance to explore its features firsthand. Familiarizing yourself with the application upfront will make the learning process smoother and more intuitive. It is located at `solution/setup.sh`.
+We recommend beginning by using our setup script to launch the bookstore application. This allows you to see what the final product will look like and gives you a chance to explore its features firsthand. Familiarizing yourself with the application upfront will make the learning process smoother and more intuitive. It is located at `solution/setup.sh`. -->
 
 ### Step-by-Step Guidance for Beginners
 
