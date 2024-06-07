@@ -28,7 +28,7 @@ spec:
       uri: example-uri
     retry: 5
     backoffPolicy: exponential
-    backoffDelay: "2007-03-01T13:00:00Z/P1Y2M10DT2H30M"
+    backoffDelay: "PT1S"
 ```
 
 - You can specify any valid `name` for your broker. Using `default` will create a broker named `default`.

@@ -226,6 +226,7 @@ nav:
         - Subscriptions: eventing/channels/subscriptions.md
         - Event sinks:
           - About sinks: eventing/sinks/README.md
+          - JobSink: eventing/sinks/job-sink.md
           - Apache Kafka Sink: eventing/sinks/kafka-sink.md
         - Flows:
           - About flows: eventing/flows/README.md

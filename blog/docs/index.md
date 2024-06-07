@@ -22,6 +22,12 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### How IBM Watsonx Assistant uses Knative Eventing to train machine learning models!
+
+![How IBM Watsonx Assistant uses Knative Eventing to train machine learning models](./articles/images/How-IBM-watsonx-Assistant-uses-Knative-Eventing-to-train-machine-learning-models.png)
+
+[Read more :octicons-arrow-right-24:](https://www.cncf.io/case-studies/ibmwatsonxassistant/){ .md-button }
+
 ### Knative 1.14 is out!
 Details on the 1.14 release of the Knative project.
 
