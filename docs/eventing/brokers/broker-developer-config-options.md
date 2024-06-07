@@ -23,6 +23,8 @@ In case you have multiple Broker classes installed in your cluster and want to u
 
 For further information about configuring a default Broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).
 
+## Broker configuration example
+
 The following is a full example of a Channel based Broker object which shows the possible configuration options that you can modify:
 
 ```yaml
