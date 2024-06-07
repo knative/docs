@@ -109,9 +109,7 @@ We will be building the sample app in this order:
 
 To help you visualize what you'll be creating, we've prepared a brief demo video. This two-minute preview showcases the final bookstore application, providing a clearer understanding of what you can expect to build.
 
-![Demo Video](images/7.png)
-
-<iframe src="https://www.youtube.com/watch?v=5D8pTcQSacw&ab_channel=Knative" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<iframe width="1924" height="500" src="https://www.youtube.com/embed/5D8pTcQSacw" title="Knative E2E Bookstore Tutorial  - 1-min Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ???+ bug "Video not working above?"
     If the video is not working, you can watch it [here](https://www.youtube.com/watch?v=5D8pTcQSacw&ab_channel=Knative){:target="_blank"}.
