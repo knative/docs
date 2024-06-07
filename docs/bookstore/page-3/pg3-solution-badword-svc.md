@@ -1,17 +1,17 @@
 
-# **3 - Simplified - Create Bad Word Filter Service**
+# **3 - Solution - Create Bad Word Filter Service**
 
-![Image 4](images/image4.png)
+![image](images/image4.png)
 
 As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple bad word filter service to tell whether the text contains any hateful/insultive speech.
 
 ## **What Knative features will we learn about?**
 
-- The easiness to use Knative Function to deploy your service, and make it be managed by Knative Serving, which gives you the ability to auto-scale your service to zero, and scale up to handle the demand.
+- The easiness to use Knative Function to deploy your service, and make it be managed by Knative Serving, which give you the ability to auto-scale your service to zero, and scale up to handle the demand.
 
 ## **What does the final deliverable look like?**
 
-![Image 2](images/image2.png)
+![image](images/image2.png)
 
 A running serverless Knative function that contains a python application that receives the new review comments as CloudEvent and returns the result that tells your input text contains any inappropriate languages or not. The result is sent back as CloudEvent.
 
@@ -25,7 +25,7 @@ The function's output will be only from:
 
 ## **Implementation**
 
-![Image 10](images/image10.png)
+![image](images/image10.png)
 
 The process is straightforward:
 
@@ -35,14 +35,31 @@ The process is straightforward:
 
 This workflow ensures a smooth transition from development to deployment within the Knative Functions ecosystem.
 
----
+???+ bug "Troubleshooting"
+    If you see `command not found`, you may need to add the func CLI to your PATH.)
 
 ### **Step 1: Create a Knative Function template**
 
-![Image 6](images/image6.png)
+![image](images/image6.png)
+
+Create a new function using the `func` CLI:
+
+```shell
+func create -l <language> <function-name>
+```
+
+In this case, we are creating a python function, so the command will be:
+
+```shell
+func create -l python ML-bad-word-filter
+```
+
+This command will create a new directory with the name `ML-bad-word-filter` and a bunch of files in it. The `func` CLI will generate a basic function template for you to start with.
+
+You can find all the supported language templates [here](https://knative.dev/docs/functions/).
+'
 
 ???+ success "Verify"
-
     The file tree will look like this:
 
     ```
@@ -54,15 +71,17 @@ This workflow ensures a smooth transition from development to deployment within 
     ├── app.sh
     ├── test_func.py
     ├── README.md
-    └── Procfile
+    ├── Procfile
     └── func.py
     ```
 
 ### **Step 2: Replace the generated code with the sentiment analysis logic**
 
-![Image 5](images/image5.png)
+![image](images/image5.png)
 
 `func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+
+
 
 ???+ abstract "_bad-word-filter/func.py_"
     ```python
@@ -109,7 +128,9 @@ This workflow ensures a smooth transition from development to deployment within 
 
 ### **Step 3: Configure the dependencies**
 
-![Image 8](images/image8.png)
+![image](images/image8.png)
+
+The `requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
 
 ???+ abstract "_sentiment-analysis-app/requirements.txt_"
     ```plaintext
@@ -118,28 +139,42 @@ This workflow ensures a smooth transition from development to deployment within 
     cloudevents==1.10.1
     ```
 
+Knative function will automatically install the dependencies listed here when you build the function.
+
 ### **Step 4: Deploy the function to the cluster**
 
-![Image 1](images/image1.png)
+![image](images/image1.png)
 
-```plaintext
+After you have finished the code, you can deploy the function to the cluster using the following command:
+
+```shell
 func deploy -b=s2i -v
 ```
+
 ???+ success "Verify"
+    When the deployment is complete, you will see the following output:
     ![Image 3](images/image3.png)
 
 ## **Verify**
 
-![Image 7](images/image7.png)
+![image](images/image7.png)
 
-```plaintext
+After deployment, the `func` CLI provides a URL to access your function. You can verify the function's operation by sending a request with a sample review comment.
+
+Simply use Knative function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
+
+```shell
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 ```
 
-???+ success "Verify"
-    Expect to receive a CloudEvent response:
+- `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`
+- `--data` flag is the input text
+- You can use `-t` flag to specify the URI to the Knative Function.
 
-    ```plaintext
+???+ success "Verify"
+    If the function is running successfully, you will see the following output:
+
+    ```
     Context Attributes,
     specversion: 1.0
     type: new-review-comment
@@ -151,20 +186,19 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
     badwordfilter: good
     Data,
     {
-    "reviewText": "I love Knative so much",
-    "badWordResult": "good"
+        "reviewText": "I love Knative so much",
+        "badWordResult": "good"
     }
     ```
 
-If you see the response, it means that the function is running successfully.
 
 ## **Next Step**
 
-![Image 9](images/image9.png)
+![image](images/image9.png)
 
-In this tutorial, you learned how to create a serverless function for a simple service that can detect inappropriate languages in text with Knative. 
+In this tutorial, you learned how to create a serverless function for a simple service that can detect the inappropriate languages in text with Knative.
 
-Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflow and make sure they are executed in the order you want. 
+Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflow and make sure they are executed in the order you want.
 
 [Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/pg4-sequence.md){ .md-button .md-button--primary }
 

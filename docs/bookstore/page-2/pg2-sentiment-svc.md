@@ -392,15 +392,22 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
     }
     ```
 
-
-## **Next Step**
-
 ![Image16](images/image16.png)
 
 In this tutorial, you learned how to create a serverless function for a simple sentiment analysis service with Knative.
 
+## **Next Step**
+
 ![Image5](images/image5.png)
 
-Next, we'll deploy another ML service following the same procedure. We encourage you to try it yourself! If you encounter any issues, don't worry—we have a detailed tutorial ready for you. Click [here](https://www.google.com/url?q=https://docs.google.com/document/d/1uKwRkXI4lD3iOqgHWxSrrWE3jb2AgM2p5vSpvDnyIXk/edit%23heading%3Dh.mdybtjop5sw5&sa=D&source=editors&ust=1717617594644378&usg=AOvVaw3wOq93q42YMAkOBwWOCFNF) to proceed.
+Next, we'll deploy another ML service following the same procedure. We encourage you to try it yourself! 
 
-If you feel comfortable deploying the other ML service yourself, click [here](https://www.google.com/url?q=https://docs.google.com/document/d/1a3tFVi8DcghZ_3tQlzIgEM2QwgGGkJzv7zG9JXw7lqU/edit%23heading%3Dh.mdybtjop5sw5&sa=D&source=editors&ust=1717617594644923&usg=AOvVaw3RsOnlqZcvjxDbqUQGcQwS) to get simplified instructions.
+
+If you feel comfortable deploying the other ML service yourself, follow this **simplified guide**:
+
+[Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-badword-svc.md){ .md-button .md-button--primary }
+
+
+If you encounter any issues, don't worry—we have a detailed tutorial ready for you. 
+
+[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-solution-badword-svc.md){ .md-button .md-button--primary }

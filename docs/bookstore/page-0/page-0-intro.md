@@ -145,14 +145,14 @@ Join the supportive Knative community via the Cloud Native Computing Foundation 
 
 Clone the repo first
 ```sh
-git clone git@github.com:knative/docs.git
+git clone https://github.com/knative/docs.git
 ```
 
 
 
 !!! warning
 
-    **IMPORTANT**: Please take some time to read the [Disclaimer](https://docs.google.com/document/d/125Wok7L5lzf1XnsM5HIM8SuZ1ty2NCbddKrEtM_Xebs/edit?usp=sharing) before moving to the next page.
+    **IMPORTANT**: Please take some time to read the [Disclaimer](../disclaimer/README.md){:target="_blank"} before moving to the next page.
 
 ![Environment Setup](images/13.png)
 

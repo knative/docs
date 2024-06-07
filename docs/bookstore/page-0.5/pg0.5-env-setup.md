@@ -46,7 +46,7 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ## **Instructions**
 
-### Task 1: Set Up a Running Kubernetes Cluster with Knative Installed
+### **Task 1: Set Up a Running Kubernetes Cluster with Knative Installed**
 
 ![Image](images/image13.png)
 
@@ -60,7 +60,7 @@ Please follow the instructions here [https://knative.dev/docs/install/](https://
 
     ![Image](images/image2.png)
 
-#### Extra Step for Minikube Users:
+#### **Extra Step for Minikube Users:**
 
 ![Image](images/image3.png)
 
@@ -72,9 +72,10 @@ Run the following command and keep the terminal open:
 minikube tunnel
 ```
 
-If there aren't any error messages, it means you have set up the tunnel successfully.
+???+ success "Verify"
+    If there aren't any error messages, it means you have set up the tunnel successfully.
 
-### Task 2: Running the Bookstore Web App
+### **Task 2: Running the Bookstore Web App**
 
 ![Image](images/image12.png)
 
@@ -82,7 +83,7 @@ The Next.js frontend app is located in the `docs/code-samples/eventing/bookstore
 
 Ensure that port 3000 on your local machine is not being used by another application.
 
-#### Deploy the Frontend App
+#### **Deploy the Frontend App**
 
 You can either [build the image locally](https://docs.docker.com/get-started/02_our_app/) or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.
 
@@ -104,7 +105,7 @@ You will see that your front end pod is running.
 
 ![Image](images/image4.png)
 
-#### Port Forwarding (Optional under condition)
+#### **Port Forwarding (Optional under condition)**
 
 ![Image](images/image9.png)
 
@@ -140,7 +141,7 @@ Don’t close the terminal when port-forwarding is established.
 
 
 
-### Task 3: Running the Book Review Service
+### **Task 3: Running the Book Review Service**
 
 ![Image](images/image6.png)
 
@@ -148,7 +149,7 @@ The Node.js server is located in the `docs/code-samples/eventing/bookstore-sampl
 
 Ensure that port 8080 on your local machine is not being used by another application.
 
-#### Deploy the Book Review Service: Node.js Server
+#### **Deploy the Book Review Service: Node.js Server**
 
 You can either [build the image locally](https://docs.docker.com/get-started/02_our_app/) or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.
 
@@ -170,7 +171,7 @@ You will see that your node-server pod is running.
 
 ![Image](images/image14.png)
 
-#### Port Forwarding (Optional under condition)
+#### **Port Forwarding (Optional under condition)**
 
 ![Image](images/image9.png)
 

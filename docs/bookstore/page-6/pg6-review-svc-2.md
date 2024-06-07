@@ -1,5 +1,5 @@
 
-# **6 - Implement Book review v2 - receives "analyzed reviews" via Broker (using a trigger) and stores them into database**
+# **6 - Advanced Event Filtering**
 
 ![Image](images/image4.png)
 
@@ -23,26 +23,28 @@
 
 Append the following Trigger configuration to the existing `200-broker.yaml` file in `node-server/config/200-broker.yaml` and then apply:
 
-```yaml
----
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: db-insert-trigger
-spec:
-  broker: bookstore-broker
-  filter:
-    # The Trigger will send events with the type `moderated-comment` and badwordfilter `good`
-    attributes:
-      type: moderated-comment
-      badwordfilter: good
-  subscriber:
-    ref:
-      apiVersion: v1
-      kind: Service
-      name: node-server-svc
-    uri: /insert
-```
+???+ abstract "Append to _node-server/config/200-broker.yaml_"
+    ```yaml
+    ---
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: db-insert-trigger
+    spec:
+      broker: bookstore-broker
+      filter:
+        # The Trigger will send events with the type `moderated-comment` and badwordfilter `good`
+        attributes:
+          type: moderated-comment
+          badwordfilter: good
+      subscriber:
+        ref:
+          apiVersion: v1
+          kind: Service
+          name: node-server-svc
+        uri: /insert
+    ```
+After applying the configuration, you should see
 
 ![Image](images/image7.png)
 
@@ -50,15 +52,16 @@ So far, the triggers in your cluster should look like the following:
 
 ![Image](images/image5.png)
 
-**Verify:**
+???+ success "Verify"
+    Run the following command to check if the trigger is created successfully:
 
-```shell
-kubectl get triggers
-```
+    ```shell
+    kubectl get triggers
+    ```
 
-![Image](images/image2.png)
+    You should see the trigger with the ready state as `True`.
+    ![Image](images/image2.png)
 
-You should see the trigger with the ready state as `True`.
 
 ## **Verification**
 
@@ -77,5 +80,5 @@ Simple, isn't it? That's why Knative Eventing is so helpful! You only need to fo
 
 You've built your event-driven architecture. Now it's time to connect it to external services to further enhance your bookstore application. In the next section, we will enable the bookstore to send notifications to your Slack workspace!
 
-[Copy of 7 - Slack sink - Learning Knative Eventing & camel-K integration](https://www.google.com/url?q=https://docs.google.com/document/d/1gBcX52SxwMupgC_KVQtc5eoIxH6LPP9WR6MXWxja_6c/edit%23heading%3Dh.c3ftz2uxlpje&sa=D&source=editors&ust=1717684295813269&usg=AOvVaw0341k6mvymQyQ9uvKKXDl5)
-```
+[Go to Connect Slack with Camel-K :fontawesome-solid-paper-plane:](../page-7/pg7-slack-camel.md){ .md-button .md-button--primary }
+

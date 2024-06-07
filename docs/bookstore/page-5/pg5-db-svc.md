@@ -32,7 +32,7 @@
 
 ![image6](images/image6.png)
 
-… More? Try to ask in the Knative Slack community [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7) whether it is the best use case or not.
+… More? Try to ask in the Knative Slack community [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} whether it is the best use case or not.
 
 ## **Implementation**
 
@@ -73,4 +73,5 @@ You have successfully set up the database services, and it is ready to receive r
 
 Next, we'll complete our event-driven architecture by connecting all the components you created. This is where the magic happens.
 
-[Copy of 6 - Implement Book review v2 - receives "analyzed reviews" via Broker (using a trigger) and stores them into database](https://www.google.com/url?q=https://docs.google.com/document/d/1gYDi2sycWkgdFXpdglIGhh4XZruLJVJRJoFa4B-VnGI/edit%23heading%3Dh.c3ftz2uxlpje&sa=D&source=editors&ust=1717647663562112&usg=AOvVaw0EVw-mtIPgjCVVs9CzbemB)
+[Go to Implement Advanced Event Filtering :fontawesome-solid-paper-plane:](../page-6/pg6-review-svc-2.md){ .md-button .md-button--primary }
+

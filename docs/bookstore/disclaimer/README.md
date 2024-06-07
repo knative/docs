@@ -5,7 +5,7 @@
 
 Hello dear Knative Learners,
 
-Before you begin this tutorial, please take note of the following disclaimer. In the spirit of open source, we strive for transparency. This tutorial incorporates many other open source projects, and we are grateful to all the incredible contributors. Your amazing work has made this tutorial possible.
+Before you begin this tutorial, **please take note of the following disclaimer**. In the spirit of open source, we strive for transparency. This tutorial incorporates many other open source projects, and we are grateful to all the incredible contributors. Your amazing work has made this tutorial possible.
 
 If you’re interested in getting started with open source, check out our guide: Get Started with Open Source at Knative.
 
@@ -55,4 +55,4 @@ By using this tutorial, you acknowledge that:
 
 ![image](images/image1.png)
 
-If you have any questions or concerns regarding this disclaimer or the tutorial, please feel free to reach out to the Knative community via the Cloud Native Computing Foundation (CNCF) Slack, particularly the #knative channel.
+If you have any questions or concerns regarding this disclaimer or the tutorial, please feel free to reach out to the Knative community via the Cloud Native Computing Foundation (CNCF) Slack, particularly the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} channel.

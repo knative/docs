@@ -189,4 +189,5 @@ In this tutorial, you learned how to create a sequence to build a ML pipeline.
 
 Next, we'll be learning how to spin up book store’s database services, while learning what will be the best case to use Knative Serving.
 
-[Copy of 5 - Deploy database service](https://www.google.com/url?q=https://docs.google.com/document/d/1So0wmBQImRo6Eq2SQit9fXs_AC_Lt8Pwdkht-pQPi6Q/edit%23heading%3Dh.c3ftz2uxlpje&sa=D&source=editors&ust=1717646720174763&usg=AOvVaw0Nlgq42ml46PcA5Zq6kMPQ)
+[Go to Deploy Database Service :fontawesome-solid-paper-plane:](../page-5/pg5-db-svc.md){ .md-button .md-button--primary }
+
