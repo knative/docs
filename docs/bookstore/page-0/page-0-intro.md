@@ -111,9 +111,10 @@ To help you visualize what you'll be creating, we've prepared a brief demo video
 
 ![Demo Video](images/7.png)
 
-[EditedV2 - Knative Bookstore Demo.mp4](https://drive.google.com/open?id=1nJGQOM9X1Wb5eKjdq-Iv-cQK97LYTscD&usp=drive_copy), Music used under [license](https://docs.google.com/document/d/125Wok7L5lzf1XnsM5HIM8SuZ1ty2NCbddKrEtM_Xebs/edit#heading=h.79x5qqa9u7gd)
+<iframe src="https://www.youtube.com/watch?v=5D8pTcQSacw&ab_channel=Knative" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
-<iframe src="https://drive.google.com/open?id=1nJGQOM9X1Wb5eKjdq-Iv-cQK97LYTscD&usp=drive_copy" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+???+ bug "Video not working above?"
+    If the video is not working, you can watch it [here](https://www.youtube.com/watch?v=5D8pTcQSacw&ab_channel=Knative){:target="_blank"}.
 
 ### Getting Started with the Setup Script
 
