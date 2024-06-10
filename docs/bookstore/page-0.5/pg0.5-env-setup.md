@@ -7,8 +7,8 @@ In this page, we will be discussing how to set up your environment, and make sur
 
 ## **What does the final deliverable for this section look like?**
 
-- You have a running kubernetes (k8s) cluster on your local laptop, with Knative Installed.
-- You have your front end application deployed as kubernetes deployment with port-forwarding to localhost:3000
+- You have a running Kubernetes (k8s) cluster on your local machine, with Knative installed.
+- You have your front end application deployed as Kubernetes deployment with port-forwarding to localhost:3000
 - You have your Node.js application deployed as kubernetes deployment with port-forwarding to localhost:8080
 
 We will be fulfilling each requirement with the order above.
@@ -19,7 +19,7 @@ We will be fulfilling each requirement with the order above.
 
 The code for the sample app is in `docs/code-samples/eventing/bookstore-sample-app`
 
-Under bookstore-sample-app folder, there are 2 folders:
+Under `bookstore-sample-app` folder, there are 2 folders:
 
 **/solution**: this folder contains all the yaml files, and the code you needed. Check it when you get stuck.
 
@@ -50,13 +50,13 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ![Image](images/image13.png)
 
-Please follow the instructions here [https://knative.dev/docs/install/](https://knative.dev/docs/install/) to spin up your cluster!
+Please follow the instructions [here](https://knative.dev/docs/install/) to spin up your cluster with Knative installed!
 
 
 
 ???+ success "Verify"
 
-    You should see the pods in knative-eventing and knative-serving are running before proceeding forward.
+    You should see the pods in the `knative-eventing` and `knative-serving` namespaces running before proceeding.
 
     ![Image](images/image2.png)
 
@@ -64,7 +64,7 @@ Please follow the instructions here [https://knative.dev/docs/install/](https://
 
 ![Image](images/image3.png)
 
-Attention! People always forget this! If you're not using the Knative Quick Start, manually set up the tunnel to connect to LoadBalancer services.
+Attention! In case you're not using the Knative Quick Start, set up the tunnel manually to connect to services of type `LoadBalancer`:
 
 Run the following command and keep the terminal open:
 
@@ -93,9 +93,9 @@ When ready, run the following command to deploy the frontend app:
 kubectl apply -f config/100-front-end-deployment.yaml
 ```
 
-![Image](images/image11.png)
+This will create the Deployment and expose it with a Service of type LoadBalancer to receive external traffic:
 
-This command will pull the image and deploy it to your cluster as a Deployment. It will also expose it as a LoadBalancer to receive external traffic.
+![Image](images/image11.png)
 
 ```shell
 kubectl get pods
@@ -119,7 +119,7 @@ kubectl get services -A
 
 ![Image](images/image1.png)
 
-If the `EXTERNAL_IP` for your frontend service is `127.0.0.1`, port forwarding is not needed.
+If the `EXTERNAL-IP` for your frontend service is `127.0.0.1`, port forwarding is not needed.
 
 If port forwarding is required, open a new terminal and run:
 
@@ -171,7 +171,7 @@ You will see that your node-server pod is running.
 
 ![Image](images/image14.png)
 
-#### **Port Forwarding (Optional under condition)**
+#### **Port Forwarding (optional under condition)**
 
 ![Image](images/image9.png)
 
@@ -185,7 +185,7 @@ kubectl get services -A
 
 ![Image](images/image7.png)
 
-If the `EXTERNAL_IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed.
+If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed.
 
 If port forwarding is required, open a new terminal and run:
 

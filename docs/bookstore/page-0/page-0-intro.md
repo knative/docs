@@ -10,7 +10,7 @@
 - Are you new to the cloud computing world and looking to get started with open source?
 
 
-!!! success "You find the right place"
+!!! success "You found the right place"
 
     If any of these resonate with you, you've found the perfect starting point.
 
@@ -23,7 +23,7 @@ In this tutorial, we will construct an online bookstore application. This intera
 
 Our App is an online bookstore that sells a single book. Customers can post comments about the book anonymously, with each comment displayed alongside an emoji reflecting the sentiment of the comment. Comments with inappropriate content are automatically filtered out, discarded, and logged in the backend.
 
-As the bookstore owner, you'll receive notifications via Slack each time if a comment containing “bad word” is submitted.
+As the bookstore owner, you'll receive notifications via Slack each time if a comment containing a "bad word" is submitted.
 
 ## **Learning Goal**
 
@@ -49,11 +49,11 @@ By the end of this tutorial, you will not only understand these concepts but als
 
 ![Bookstore Architecture](images/5.png)
 
-The bookstore application consists of a few components.
+The bookstore application consists of the following components:
 
 ### User Interface
 
-A frontend Next.js application that interacts with these services. It is a web page where users can select a book to view its details, ratings, and reviews.
+A frontend Next.js application that interacts with these services. It is a web page where users can select a book to view its details, ratings and reviews.
 
 ### Database Service
 
@@ -61,7 +61,7 @@ An in-memory PostgreSQL instance on Kubernetes, storing all user comments.
 
 ### Book Reviews Service
 
-A node.js web server that will perform the event forwarding, database operation, and handling the websocket connection.
+A Node.js web server that will perform the event forwarding, database operation, and handling the websocket connection.
 
 ### Notification Service
 
@@ -69,7 +69,7 @@ An Apache Camel-K pipe that connects our event-driven architecture with a third-
 
 ### ML Models Service
 
-There are 2 Machine learning workflows that can conduct sentiment analysis on user’s review comment and hateful word sanity check. You will be using Knative Sequence to make sure they are executed in order.
+There are 2 Machine learning workflows that can conduct sentiment analysis on user’s review comment and hateful word sanity check. You will be using a [Knative Sequence](https://knative.dev/docs/eventing/flows/sequence/) to make sure they are executed in order.
 
 ### Book Store Broker
 
@@ -84,21 +84,21 @@ It acts as the bridge between the book store broker and the slack sink, so we ca
 
 We will be building the sample app in this order:
 
-0. [**Environment Setup**](../page-0.5/pg0.5-env-setup.md){:target="_blank"}: Set up the environment for the tutorial. This includes installing cluster, frontend, and backend.
+0. [**Environment Setup**](../page-0.5/pg0.5-env-setup.md){:target="_blank"}: Set up the environment for the tutorial. This includes installing the cluster, the frontend and the backend.
 
-1. [**Send comments to broker**](../page-1/pg1-review-svc-1.md){:target="_blank"}: Pass reviews from the frontend to event-display via broker. This involves learning about Broker, SinkBinding, and CloudEvents event types.
+1. [**Send comments to the Broker**](../page-1/pg1-review-svc-1.md){:target="_blank"}: Pass reviews from the frontend to event-display via the Broker. This involves learning about Broker, SinkBinding and CloudEvents event types.
    
 2. [**Deploy Sentiment Analysis Service**](../page-2/pg2-sentiment-svc.md){:target="_blank"}: Gain knowledge on deploying a sentiment analysis service using Knative Function.
 
 3. [**Deploy Bad Word Filter Service**](../page-3/pg3-badword-svc.md){:target="_blank"}: Implement a bad word filter service using Knative Function yourself.
 
-4. [**Use Sequence to Run ML Workflows in order**](../page-4/pg4-sequence.md){:target="_blank"}: Learn how to utilize Knative Sequence to ensure your ML workflows execute in order.
+4. [**Use a Sequence to Run the ML Workflows in order**](../page-4/pg4-sequence.md){:target="_blank"}: Learn how to utilize a Knative Sequence to ensure your ML workflows executes in order.
 
-5. [**Database Deployment**](../page-5/pg5-db-svc.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using k8s deployment.
+5. [**Database Deployment**](../page-5/pg5-db-svc.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using a plain Kubernetes deployment.
 
-6. [**Advanced event filtering**](../page-6/pg6-review-svc-2.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers, Filters.
+6. [**Advanced event filtering**](../page-6/pg6-review-svc-2.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers and Filters.
 
-7. [**Connect with External Services/API**](../page-7/pg7-slack-camel.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integration.
+7. [**Connect with External Services/API**](../page-7/pg7-slack-camel.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integrations.
 
 ## **How to properly learn?**
 
