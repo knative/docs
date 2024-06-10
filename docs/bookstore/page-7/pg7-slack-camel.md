@@ -1,4 +1,3 @@
-
 # **7 - Slack sink - Learning Knative Eventing & camel-K integration**
 
 ![image](images/image2.png)
@@ -106,7 +105,6 @@ We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/cam
 ![image](images/image10.png)
 
 From the sample YAML below, you can see we are telling the pipe to filter on the events that have type “moderated-comment”. Pipe will create a trigger under the hood and route your event to slack-sink.
-
 
 ```yaml
 apiVersion: camel.apache.org/v1
@@ -231,8 +229,6 @@ We are creating the trigger to process the events that have type moderated-comme
     The trigger `badword-noti-trigger` should have `READY` status as `True`.
 
     ![image](images/image8.png)
-
-
 
 ### **Step 3: Build the Pipe**
 
@@ -370,4 +366,3 @@ We've prepared additional challenges that build on top of the existing bookstore
 
 
 [Go to Extra Challenges :fontawesome-solid-paper-plane:](../extra-challenge/README.md){ .md-button .md-button--primary }
-

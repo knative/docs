@@ -1,4 +1,3 @@
-
 # **Disclaimer**
 
 ![image](images/image2.png)

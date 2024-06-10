@@ -1,4 +1,3 @@
-
 # **3 - Simplified - Create Bad Word Filter Service**
 
 ![Image 4](images/image4.png)
@@ -171,4 +170,3 @@ In this tutorial, you learned how to create a serverless function for a simple s
 Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflow and make sure they are executed in the order you want. 
 
 [Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/pg4-sequence.md){ .md-button .md-button--primary }
-

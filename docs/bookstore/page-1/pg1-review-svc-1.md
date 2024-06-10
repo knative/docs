@@ -169,8 +169,6 @@ kn broker create bookstore-broker
     kubectl describe broker bookstore-broker
     ```
 
-
-
 ### **Step 3: Create SinkBinding between Node.js server and broker**
 
 ![Image](images/image15.png)
@@ -219,8 +217,6 @@ kubectl apply -f node-server/config/300-sinkbinding.yaml
     ```
 
     ![Image](images/image10.png)
-
-
 
 ### **Step 4: Create event-display service**
 
@@ -276,8 +272,6 @@ kubectl apply -f node-server/config/100-event-display.yaml
 ```
 
 ![Image](images/image5.png)
-
-
 
 ???+ success "Verify"
 
@@ -337,17 +331,14 @@ kubectl apply -f 200-log-trigger.yaml
 
 ![Image](images/image7.png)
 
-
 ???+ success "Verify"
 
     ```bash
     kubectl get triggers
     ```
-
     The trigger `log-trigger` should have `READY` status as `True`.
 
     ![Image](images/image24.png)
-
 
 ### **Validate**
 

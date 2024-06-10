@@ -1,4 +1,3 @@
-
 # **6 - Advanced Event Filtering**
 
 ![Image](images/image4.png)
@@ -62,7 +61,6 @@ So far, the triggers in your cluster should look like the following:
     You should see the trigger with the ready state as `True`.
     ![Image](images/image2.png)
 
-
 ## **Verification**
 
 ![Image](images/image1.png)
@@ -81,4 +79,3 @@ Simple, isn't it? That's why Knative Eventing is so helpful! You only need to fo
 You've built your event-driven architecture. Now it's time to connect it to external services to further enhance your bookstore application. In the next section, we will enable the bookstore to send notifications to your Slack workspace!
 
 [Go to Connect Slack with Camel-K :fontawesome-solid-paper-plane:](../page-7/pg7-slack-camel.md){ .md-button .md-button--primary }
-

@@ -1,4 +1,3 @@
-
 # Environment Setup
 
 ![Image](images/image20.png)
@@ -28,9 +27,7 @@ Under `bookstore-sample-app` folder, there are 2 folders:
 ![Image](images/image16.png)
 
 !!! tip
-
     Kuack suggests you to start from **/start**, write all the configuration files as you go over the tutorial, and check solutions when you get stuck.
-
 
 ## **Shortcut**
 
@@ -42,8 +39,6 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
     However, if you are not familiar with the process, we recommend reviewing the steps below.
 
-
-
 ## **Instructions**
 
 ### **Task 1: Set Up a Running Kubernetes Cluster with Knative Installed**
@@ -51,8 +46,6 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 ![Image](images/image13.png)
 
 Please follow the instructions [here](https://knative.dev/docs/install/) to spin up your cluster with Knative installed!
-
-
 
 ???+ success "Verify"
 
@@ -137,10 +130,6 @@ Don’t close the terminal when port-forwarding is established.
 
     ![Image](images/image19.png)
 
-
-
-
-
 ### **Task 3: Running the Book Review Service**
 
 ![Image](images/image6.png)
@@ -205,9 +194,6 @@ Don’t close the terminal when port-forwarding is established.
 
     ![Image](images/image18.png)
 
-
-
-
 ## **Troubleshooting**
 If you encounter any issues during the setup process, refer to the troubleshooting section in the documentation or check the logs of your Kubernetes pods for more details.
 ???+ bug "Troubleshooting"
@@ -219,7 +205,6 @@ If you encounter any issues during the setup process, refer to the troubleshooti
     ```
 
     Replace `<pod-name>` with the name of the pod you want to check.
-
 
 ## **Next Step**
 ![Image](images/image5.png)

@@ -1,4 +1,3 @@
-
 # **4 - Create Knative sequence with both ML service and send final result to broker and to event-display**
 
 ![image](images/image8.png)
@@ -96,11 +95,8 @@ Create the sequence yaml file and apply it to your cluster.
 
 
     ![image](images/image6.png)
-    
 
 ### **Step 2: Create the trigger that pass the event to Sequence**
-
-
 
 ![image](images/image7.png)
 
@@ -190,4 +186,3 @@ In this tutorial, you learned how to create a sequence to build a ML pipeline.
 Next, we'll be learning how to spin up book store’s database services, while learning what will be the best case to use Knative Serving.
 
 [Go to Deploy Database Service :fontawesome-solid-paper-plane:](../page-5/pg5-db-svc.md){ .md-button .md-button--primary }
-

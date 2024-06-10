@@ -1,4 +1,3 @@
-
 # **Creating a Slack Workspace**
 
 ![Image](images/image5.png)

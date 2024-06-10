@@ -34,7 +34,6 @@ Send Telegram notifications for new comments.
 
 0.5-1 hours
 
-
 ## **Challenge 2: Implement Comment Deletion**
 
 ![image](images/image1.png)
@@ -62,7 +61,6 @@ Allow users to delete the selected comment.
 **Estimated Time**
 
 1-2 hours
-
 
 ## **Challenge 3: Format the Output for the Sink**
 
@@ -124,7 +122,6 @@ Allow users to send comments via Telegram.
 **Estimated Time**
 
 2-3 hours
-
 
 ## **Help**
 

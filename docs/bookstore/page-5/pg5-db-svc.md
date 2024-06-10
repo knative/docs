@@ -14,7 +14,6 @@
 ## **Concept Learning**
 ![image4](images/image4.png)
 
-
 **Knative Services** are a powerful feature within the Knative ecosystem, designed to handle a wide range of use cases, especially in modern cloud-native applications, it can be controlled by Knative Serving, and achieve scale to 0 feature. Here’s an expanded explanation of when and why you should consider using Knative Services:
 
 ???+ danger "Stateless Workloads"
@@ -26,9 +25,6 @@
     - **Definition:** Event-driven architectures respond to events or triggers, such as HTTP requests, messages in a queue, or changes in a database.
     - **Use Case:** Use Knative Services to deploy functions that react to events, such as processing incoming data, triggering workflows, or integrating with third-party APIs.
     - **Benefits:** Efficient resource utilization, as services can scale down to zero when not handling events, reducing costs and improving performance.
-
-
-
 
 ![image6](images/image6.png)
 
@@ -74,4 +70,3 @@ You have successfully set up the database services, and it is ready to receive r
 Next, we'll complete our event-driven architecture by connecting all the components you created. This is where the magic happens.
 
 [Go to Implement Advanced Event Filtering :fontawesome-solid-paper-plane:](../page-6/pg6-review-svc-2.md){ .md-button .md-button--primary }
-

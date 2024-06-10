@@ -52,9 +52,6 @@ The process is straightforward:
 
 This workflow ensures a smooth transition from development to deployment within the Knative Functions ecosystem.
 
-
-
-
 ### **Step 1: Create a Knative Function template**
 
 ![Image17](images/image17.png)
@@ -75,7 +72,6 @@ This command will create a new directory with the name `sentiment-analysis-app` 
 
 You can find all the supported language templates [here](https://knative.dev/docs/functions/).
 
-
 ???+ success "Verify"
 
     The file tree will look like this:
@@ -92,10 +88,6 @@ You can find all the supported language templates [here](https://knative.dev/doc
     ├── Procfile
     └── func.py
     ```
-
-
-
-
 
 ### **Step 2: Replace the generated code with the sentiment analysis logic**
 
@@ -213,8 +205,6 @@ The `setup.py` file should contain the following code for your bookstore:
         }
     )
     ```
-
-
 
 ### **Step 5: Try to build and run your Knative Function locally (Optional)**
 ??? info "Click here to expand"
@@ -369,7 +359,6 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 - `--data` flag is the input text
 - `-t` flag is the URI to the Knative Function.
 
-
 ???+ success "Verify"
 
     If you see the response, it means that the function is running successfully.
@@ -406,7 +395,6 @@ Next, we'll deploy another ML service following the same procedure. We encourage
 If you feel comfortable deploying the other ML service yourself, follow this **simplified guide**:
 
 [Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-badword-svc.md){ .md-button .md-button--primary }
-
 
 If you encounter any issues, don't worry—we have a detailed tutorial ready for you. 
 

@@ -9,11 +9,9 @@
 - Are you curious to see what Knative can do in real life?
 - Are you new to the cloud computing world and looking to get started with open source?
 
-
 !!! success "You found the right place"
 
     If any of these resonate with you, you've found the perfect starting point.
-
 
 In this tutorial, we will construct an online bookstore application. This interactive guide, suitable for beginners and experienced engineers alike, will take you through the steps of building, deploying, and monitoring an application using Knative's powerful features. For those familiar with the process, concise graphics are available to streamline your learning experience.
 
@@ -149,5 +147,3 @@ git clone https://github.com/knative/docs.git
 Let’s set up the environment first.
 
 [Go to Environment Setup :fontawesome-solid-paper-plane:](../../bookstore/page-0.5/pg0.5-env-setup.md){ .md-button .md-button--primary }
-
-
