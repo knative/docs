@@ -20,9 +20,9 @@ The code for the sample app is in `docs/code-samples/eventing/bookstore-sample-a
 
 Under `bookstore-sample-app` folder, there are 2 folders:
 
-**/solution**: this folder contains all the yaml files, and the code you needed. Check it when you get stuck.
+* **/solution**: this folder contains all the yaml files, and the code you needed. Check it when you get stuck.
 
-**/start**: this folder contains the necessary files for you to get started. Write all the configuration files yourself following the tutorial!
+* **/start**: this folder contains the necessary files for you to get started. Write all the configuration files yourself following the tutorial!
 
 ![Image](images/image16.png)
 
