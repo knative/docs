@@ -45,7 +45,7 @@ Knative is a powerful framework that operates on top of Kubernetes. This tutoria
 
 By the end of this tutorial, you will not only understand these concepts but also feel comfortable implementing them, empowering you to build robust, scalable event-driven applications with Knative.
 
-## **BookStore Architecture**
+## **Bookstore Architecture**
 
 ![Bookstore Architecture](images/5.png)
 
