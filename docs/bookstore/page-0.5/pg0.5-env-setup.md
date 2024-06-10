@@ -8,7 +8,7 @@ In this page, we will be discussing how to set up your environment, and make sur
 
 - You have a running Kubernetes (k8s) cluster on your local machine, with Knative installed.
 - You have your front end application deployed as Kubernetes deployment with port-forwarding to localhost:3000
-- You have your Node.js application deployed as kubernetes deployment with port-forwarding to localhost:8080
+- You have your Node.js application deployed as Kubernetes deployment with port-forwarding to localhost:8080
 
 We will be fulfilling each requirement with the order above.
 
