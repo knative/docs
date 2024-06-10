@@ -111,17 +111,11 @@ To help you visualize what you'll be creating, we've prepared a brief demo video
 ???+ bug "Video not working above?"
     If the video is not working, you can watch it [here](https://www.youtube.com/watch?v=5D8pTcQSacw&ab_channel=Knative){:target="_blank"}.
 
-<!-- ### Getting Started with the Setup Script
-
-![Setup Script](images/8.png)
-
-We recommend beginning by using our setup script to launch the bookstore application. This allows you to see what the final product will look like and gives you a chance to explore its features firsthand. Familiarizing yourself with the application upfront will make the learning process smoother and more intuitive. It is located at `solution/setup.sh`. -->
-
 ### Step-by-Step Guidance for Beginners
 
 ![Beginner Guide](images/9.png)
 
-This tutorial is meticulously structured to be beginner-friendly, featuring detailed, step-by-step instructions for building the sample app. Simply follow the sequence we've laid out: each section builds upon the last, guiding you through the construction of the application. Should you encounter any hurdles, the Knative community is a fantastic resource for support. Don't hesitate to ask questions and seek advice there.
+This tutorial is meticulously structured to be beginner-friendly, featuring detailed, step-by-step instructions for building the sample app. Simply follow the sequence we've laid out: each section builds upon the previous, guiding you through the construction of the application. Should you encounter any hurdles, the Knative community is a fantastic resource for support. Don't hesitate to ask questions and seek advice. Check the [Help](#help) section below!
 
 ### Accelerated Learning Path for Advanced Users
 
@@ -143,8 +137,8 @@ Clone the repo first
 ```sh
 git clone https://github.com/knative/docs.git
 ```
-
-
+???+ bug "Troubleshooting"
+    Having issue with cloning your repo? Check [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors){:target="_blank"} for help.
 
 !!! warning
 

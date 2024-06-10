@@ -167,7 +167,7 @@ This command will pull the image and deploy it to your cluster as a Deployment. 
 kubectl get pods
 ```
 
-You will see that your node-server pod is running.
+You will see that your Node.js server (node-server) pod is running.
 
 ![Image](images/image14.png)
 
