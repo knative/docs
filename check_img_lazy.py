@@ -3,14 +3,6 @@ import sys
 import subprocess
 from bs4 import BeautifulSoup
 
-def build_website():
-    """Build the website using the specified command."""
-    try:
-        subprocess.check_call(['./hack/docker/test.sh'])  
-    except subprocess.CalledProcessError as e:
-        print(f"Website build failed: {e}")
-        sys.exit(1)
-
 def check_img_tags(base_dir):
     """Recursively check HTML files for <img> tags without the lazy loading attribute."""
     issues_found = False
@@ -46,9 +38,6 @@ def find_line_number(content, tag):
 
 if __name__ == "__main__":
 
-    build_website()
-
-
     base_dir = 'site'  
     issues_found = check_img_tags(base_dir)
 
@@ -58,4 +47,3 @@ if __name__ == "__main__":
     else:
         print("All img tags have lazy loading attribute.")
         sys.exit(0)
-

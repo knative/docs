@@ -1,0 +1,28 @@
+name: Image LazyLoad Check 
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+       - name: Set GITHUB_TOKEN environment variable
+        run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Run Build
+        run: ./hack/docker/test.sh
+
+      - name: Run Python script
+        run: python check_img_lazy.py
