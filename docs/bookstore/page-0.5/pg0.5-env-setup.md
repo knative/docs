@@ -12,6 +12,20 @@ In this page, we will be discussing how to set up your environment, and make sur
 
 We will be fulfilling each requirement with the order above.
 
+## **Clone the Repository**
+![Next Step Image](images/image22.png)
+
+```sh
+git clone https://github.com/knative/docs.git
+```
+???+ bug "Troubleshooting"
+    Having issue with cloning your repo? Check [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors){:target="_blank"} for help.
+
+!!! warning
+
+    **IMPORTANT**: Please take some time to read the [Disclaimer](../disclaimer/README.md){:target="_blank"} before moving to the next page.
+
+
 ## **File Structure**
 
 ![Image](images/image21.png)
@@ -107,7 +121,7 @@ You might need to set up port forwarding to access the app from your local machi
 Check if port forwarding is necessary by running:
 
 ```shell
-kubectl get services -A
+kubectl get services
 ```
 
 ![Image](images/image1.png)
@@ -126,7 +140,7 @@ Don’t close the terminal when port-forwarding is established.
 
 ???+ success "Verify"
 
-    Visit [http://localhost:3000](http://localhost:3000) in your browser. The UI page should appear!
+    Visit [http://localhost:3000](http://localhost:3000){:target="_blank"} in your browser. The UI page should appear!
 
     ![Image](images/image19.png)
 
@@ -169,7 +183,7 @@ You might need to set up port forwarding to access the app from your local machi
 Check if port forwarding is necessary by running:
 
 ```shell
-kubectl get services -A
+kubectl get services
 ```
 
 ![Image](images/image7.png)
@@ -188,7 +202,7 @@ Don’t close the terminal when port-forwarding is established.
 
 ???+ success "Verify"
 
-    Visit [http://localhost:8080](http://localhost:8080) in your browser. The Node.js service should be up and running.
+    Visit [http://localhost:8080](http://localhost:8080){:target="_blank"} in your browser. The Node.js service should be up and running.
 
     And in your front end page, you should see the status turns green and say “Connected to node server”.
 

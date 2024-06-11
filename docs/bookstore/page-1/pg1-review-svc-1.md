@@ -10,7 +10,6 @@ The main dashboard of our bookstore features a comment section where readers can
 - Knative Eventing Broker
 - Knative Eventing Sink
 - Knative SinkBinding
-- Use Event Display to help with debugging
 
 ## **What does the deliverable look like?**
 

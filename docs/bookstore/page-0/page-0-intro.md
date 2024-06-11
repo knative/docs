@@ -129,18 +129,6 @@ Join the supportive Knative community via the Cloud Native Computing Foundation 
 
 ## **Next Step**
 
-![Next Step Image](images/12.png)
-
-Clone the repo first
-```sh
-git clone https://github.com/knative/docs.git
-```
-???+ bug "Troubleshooting"
-    Having issue with cloning your repo? Check [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors){:target="_blank"} for help.
-
-!!! warning
-
-    **IMPORTANT**: Please take some time to read the [Disclaimer](../disclaimer/README.md){:target="_blank"} before moving to the next page.
 
 ![Environment Setup](images/13.png)
 
