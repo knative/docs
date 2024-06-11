@@ -23,7 +23,7 @@
 Append the following Trigger configuration to the existing `200-broker.yaml` file in `node-server/config/200-broker.yaml` and then apply:
 
 ???+ abstract "Append to _node-server/config/200-broker.yaml_"
-    ```yaml
+    ```yaml 
     ---
     apiVersion: eventing.knative.dev/v1
     kind: Trigger
@@ -32,17 +32,21 @@ Append the following Trigger configuration to the existing `200-broker.yaml` fil
     spec:
       broker: bookstore-broker
       filter:
-        # The Trigger will send events with the type `moderated-comment` and badwordfilter `good`
-        attributes:
-          type: moderated-comment
-          badwordfilter: good
+        attributes: # Trigger will filter events based on BOTH the type and badwordfilter attribute
+          type: moderated-comment # This is the filter that will be applied to the event, only events with the ce-type moderated-comment will be processed
+          badwordfilter: good # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: good will be processed
       subscriber:
         ref:
           apiVersion: v1
           kind: Service
           name: node-server-svc
-        uri: /insert
+        uri: /insert # This is the path where the event will be sent to the subscriber, see /insert in node-server code: index.js
     ```
+
+```shell
+kubectl apply -f node-server/config/200-broker.yaml
+```
+
 After applying the configuration, you should see
 
 ![Image](images/image7.png)

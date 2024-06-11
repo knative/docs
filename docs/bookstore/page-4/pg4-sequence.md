@@ -54,16 +54,16 @@ spec:
 ![image](images/image9.png)
 
 ???+ abstract "sequence/config/100-create-sequence.yaml"
-    ```yaml
+    ```yaml 
     apiVersion: flows.knative.dev/v1
     kind: Sequence
     metadata:
-    name: sequence
+      name: sequence
     spec:
-    channelTemplate: # Under the hood, the Sequence will create a Channel for each step in the sequence
+      channelTemplate: # Under the hood, the Sequence will create a Channel for each step in the sequence
         apiVersion: messaging.knative.dev/v1
         kind: InMemoryChannel
-    steps:
+      steps:
         - ref: # This is the first step of the sequence, it will send the event to the bad-word-filter service
             apiVersion: serving.knative.dev/v1
             kind: Service
@@ -72,11 +72,11 @@ spec:
             apiVersion: serving.knative.dev/v1
             kind: Service
             name: sentiment-analysis-app
-    reply: # This is the last step of the sequence, it will send the event back to the broker as reply
+      reply: # This is the last step of the sequence, it will send the event back to the broker as reply
         ref:
-        kind: Broker
-        apiVersion: eventing.knative.dev/v1
-        name: bookstore-broker
+          kind: Broker
+          apiVersion: eventing.knative.dev/v1
+          name: bookstore-broker
     ```
 
 Create the sequence yaml file and apply it to your cluster.
@@ -103,23 +103,23 @@ Create the sequence yaml file and apply it to your cluster.
 As the Sequence is ready to accept the request now, we need to tell the Broker to forward the events to the Sequence, so that new comments will go through our ML workflows.
 
 
-???+ abstract "sequence/200-create-trigger.yaml"
+???+ abstract "sequence/config/200-create-trigger.yaml"
 
     ```yaml
     apiVersion: eventing.knative.dev/v1
     kind: Trigger
     metadata:
-    name: sequence-trigger
+      name: sequence-trigger
     spec:
-    broker: bookstore-broker
-    filter:
+      broker: bookstore-broker
+      filter:
         attributes:
-        type: new-review-comment # This is the filter that will be applied to the event, only events with the ce-type new-review-comment will be processed
-    subscriber:
+          type: new-review-comment # This is the filter that will be applied to the event, only events with the ce-type new-review-comment will be processed
+      subscriber:
         ref:
-        apiVersion: flows.knative.dev/v1
-        kind: Sequence
-        name: sequence
+          apiVersion: flows.knative.dev/v1
+          kind: Sequence
+          name: sequence
     ```
 
 Create the trigger yaml file and apply it to your cluster.

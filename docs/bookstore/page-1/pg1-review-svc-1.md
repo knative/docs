@@ -132,7 +132,7 @@ The Broker acts as a router in your event-driven application, receiving events a
     apiVersion: eventing.knative.dev/v1
     kind: Broker
     metadata:
-    name: bookstore-broker
+        name: bookstore-broker
     ```
 
 - 2: Apply the YAML file:
@@ -184,22 +184,23 @@ Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-eve
 ???+ abstract "_node-server/config/300-sinkbinding.yaml_"
     ```yaml
     apiVersion: sources.knative.dev/v1
-    kind: SinkBinding # SinkBinding is a Knative Eventing custom resource
+    kind: SinkBinding
     metadata:
-    name: node-sinkbinding
-    namespace: default
+      name: node-sinkbinding
+      namespace: default
     spec:
-    subject: # The subject is where we hope to inject the Sink URI
+      subject:
         apiVersion: apps/v1
         kind: Deployment
         selector:
-        matchLabels:
+          matchLabels:
             app: node-server
-    sink: # The Sink is the URI of the Broker
+      sink: # In this case, the sink is our broker, which is the eventing service that will receive the events
         ref:
-        apiVersion: eventing.knative.dev/v1
-        kind: Broker
-        name: bookstore-broker
+          apiVersion: eventing.knative.dev/v1
+          kind: Broker
+          name: bookstore-broker
+
     ```
 
 - 2: Apply the YAML file:
@@ -234,35 +235,37 @@ Event display is a debugging tool in Knative Eventing that allows you to use it 
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: event-display
+      name: event-display
     spec:
-    replicas: 1
-    selector:
+      replicas: 1
+      selector:
         matchLabels:
-        app: event-display
-    template:
+          app: event-display
+      template:
         metadata:
-        labels:
+          labels:
             app: event-display
         spec:
-        containers: # Using the pre-built image from Knative
-        - name: event-display
-            image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-            ports:
-            - containerPort: 8080
+          containers:
+            - name: event-display
+              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+              ports:
+                - containerPort: 8080
+    
     ---
     apiVersion: v1
     kind: Service
     metadata:
-    name: event-display
+      name: event-display
     spec:
-    selector:
+      selector:
         app: event-display
-    ports:
-    - protocol: TCP
-        port: 80
-        targetPort: 8080
-    type: ClusterIP
+      ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 8080
+      type: ClusterIP
+
     ```
 
 - 2: Apply the YAML file:
@@ -307,20 +310,19 @@ Here we are creating a trigger that will send all the events to event-display.
 - 1: Create a new YAML file named `200-log-trigger.yaml` and add the following content:
 
 ???+ abstract "_node-server/config/200-log-trigger.yaml_"
-    ```yaml
-    # This Trigger subscribes to the Broker and filters events based on the type and badwordfilter attribute.
-    # Those comments that contain insults are filtered out by the badwordfilter attribute and they will be redirected to the event-display Service.
+    ```yaml 
+    # This Trigger subscribes to the Broker and will forward all the events that it received to event-display.
     apiVersion: eventing.knative.dev/v1
     kind: Trigger
     metadata:
-    name: log-trigger
+      name: log-trigger
     spec:
-    broker: bookstore-broker
-    subscriber:
+      broker: bookstore-broker
+      subscriber:
         ref:
-        apiVersion: v1
-        kind: Service
-        name: event-display
+          apiVersion: v1
+          kind: Service
+          name: event-display
     ```
 
 - 2: Apply the YAML file:

@@ -365,20 +365,21 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 
     ```
     Context Attributes,
-    specversion: 1.0
-    type: new-review-comment
-    source: book-review-broker
-    id: ebbcd761-3a78-4c44-92e3-de575d1f2d38
-    time: 2024-05-27T04:44:07.549303Z
-    datacontenttype: application/json
+      specversion: 1.0
+      type: moderated-comment
+      source: sentiment-analysis
+      id: 0c2d0659-a30e-4efd-bcce-803f15ff5cc5
+      time: 2024-06-11T15:12:43.795405Z
+      datacontenttype: application/json
     Extensions,
-    badwordfilter: good
+      badwordfilter: 
+      sentimentresult: positive
     Data,
-    {
+      {
         "reviewText": "I love Knative so much",
         "badWordResult": "",
         "sentimentResult": "positive"
-    }
+      }
     ```
 
 ![Image16](images/image16.png)
