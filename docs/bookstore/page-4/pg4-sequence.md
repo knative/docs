@@ -1,4 +1,4 @@
-# **4 - Create Knative sequence with both ML service and send final result to broker and to event-display**
+# **Create the Knative Sequence with both ML services and send the final result to the Broker and event-display**
 
 ![image](images/image8.png)
 
@@ -10,7 +10,7 @@
 
 ![image](images/image1.png)
 
-- Create a Knative sequence with bad word filter service as step 1 and sentiment analysis service as step 2
+- Create a Knative Sequence with bad word filter service as step 1 and sentiment analysis service as step 2
 - The final result is sent back to broker as reply of the sequence
 
 ## **Implementation**
@@ -100,7 +100,7 @@ Create the sequence yaml file and apply it to your cluster.
 
 ![image](images/image7.png)
 
-Sequence now is ready to accept the request, then we need to tell broker to forward the event to sequence, so that the new comments will go through our ML workflows.
+As the Sequence is ready to accept the request now, we need to tell the Broker to forward the events to the Sequence, so that new comments will go through our ML workflows.
 
 
 ???+ abstract "sequence/200-create-trigger.yaml"
@@ -133,7 +133,7 @@ Create the trigger yaml file and apply it to your cluster.
     kubectl get triggers
     ```
 
-    You should see the trigger has the ready state as True.
+    You should see the Trigger in ready state.
     And until this point, **your cluster should have the following triggers**.
     ![image](images/image12.png)
 

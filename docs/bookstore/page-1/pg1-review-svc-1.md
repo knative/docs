@@ -3,7 +3,7 @@
 
 ![Image](images/image25.png)
 
-The main dashboard of our bookstore features a comment section where readers can view comments from others and submit their own through a text input area. While the process appears straightforward—click a button, and the comment is posted—the underlying mechanism is powered by a robust event-driven architecture.
+The main dashboard of our bookstore features a comment section where readers can view comments from others and submit their own through a text input area. While the process appears straightforward - click a button, and the comment is posted - the underlying mechanism is powered by a robust event-driven architecture.
 
 ## **What Knative features will we learn about?**
 
@@ -169,11 +169,11 @@ kn broker create bookstore-broker
     kubectl describe broker bookstore-broker
     ```
 
-### **Step 3: Create SinkBinding between Node.js server and broker**
+### **Step 3: Create a SinkBinding between the Node.js server and Broker**
 
 ![Image](images/image15.png)
 
-Hardcoding URLs to connect with Kubernetes services in your application can be limiting and inflexible. SinkBinding dynamically injects the URL of the Kubernetes service into your application.
+Hardcoding URLs to connect with Kubernetes services in your application can be limiting and inflexible. A SinkBinding dynamically injects the URL of the Kubernetes service into your application.
 
 Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/) and the [spec schema](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/reference/)!
 
@@ -282,19 +282,19 @@ kubectl apply -f node-server/config/100-event-display.yaml
     You should see the pod `event-display-XXXXXXX-XXXXX` in "Running" status.
     ![Image](images/image23.png)
 
-### **Step 5: Create trigger that connects the broker and event display**
+### **Step 5: Create a Trigger that connects the Broker and event display**
 
 ![Image](images/image9.png)
 
-Trigger is able to forward the event to the correct destination based on the [CloudEvent’s attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications,%20which%20enables%20creating,%20parsing,%20sending,%20and%20receiving%20events%20in%20any%20programming%20language.). It is the connector between the broker and the event destination.
+A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications,%20which%20enables%20creating,%20parsing,%20sending,%20and%20receiving%20events%20in%20any%20programming%20language.). It is the connector between the broker and the event destination.
 
-Filter in the trigger will **filter the events based on the filter condition**. You will specify your filter condition in the trigger’s YAML file. **If no filter is specified, the trigger will forward all the events that the broker received.**
+A Filter in the Trigger will **filter the events based on the filter condition**. You will specify your filter condition in the Trigger’s YAML file. **If no filter is specified, the Trigger will forward all the events that the Broker received.**
 
 ![Image](images/image18.png)
 
-There is also a concept called [Channel](https://knative.dev/docs/eventing/channels/) in Knative, and generally speaking, you can treat Broker + Triggers without filter the same as Channel + Subscription.
+There is also a concept called [Channel](https://knative.dev/docs/eventing/channels/) in Knative, and generally speaking, you can treat Broker & Trigger without filter the same as Channel & Subscription.
 
-Learn more about Broker + Trigger [here](https://knative.dev/docs/eventing/brokers/)!
+Learn more about Broker & Trigger [here](https://knative.dev/docs/eventing/brokers/)!
 
 **Create a Trigger:**
 
@@ -344,7 +344,7 @@ kubectl apply -f 200-log-trigger.yaml
 
 ![Image](images/image8.png)
 
-Open the log for event-display with the following command:
+Open the logs of the event-display with the following command:
 
 ```bash
 kubectl logs event-display-XXXXX -f

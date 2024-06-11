@@ -1,11 +1,10 @@
-
-# **5 - Deploy database service**
+# **Deploy the Database Service**
 
 ![image1](images/image1.png)
 
 ## **What Knative features will we learn about?**
 
-- When is the best time to use Knative Service
+- What is a good usecase to use Knative Service
 
 ## **What does the final deliverable look like?**
 
@@ -14,7 +13,7 @@
 ## **Concept Learning**
 ![image4](images/image4.png)
 
-**Knative Services** are a powerful feature within the Knative ecosystem, designed to handle a wide range of use cases, especially in modern cloud-native applications, it can be controlled by Knative Serving, and achieve scale to 0 feature. Here’s an expanded explanation of when and why you should consider using Knative Services:
+**Knative Services** are a powerful feature within the Knative ecosystem, designed to handle a wide range of use cases, especially in modern cloud-native applications, it can be controlled by Knative Serving, and achieve scale to 0. Here’s an expanded explanation of when and why you should consider using Knative Services:
 
 ???+ danger "Stateless Workloads"
     - **Definition:** Stateless applications do not store any data locally between requests. Each request is independent and does not rely on any previous interaction.
@@ -28,7 +27,7 @@
 
 ![image6](images/image6.png)
 
-… More? Try to ask in the Knative Slack community [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} whether it is the best use case or not.
+Try to ask in the Knative Slack community [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} whether it is the best use case or not.
 
 ## **Implementation**
 
@@ -59,7 +58,7 @@ Open the UI page at [http://localhost:3000](http://localhost:3000){:target="_bla
 ![image2](images/image2.png)
 
 ???+ bug "Troubleshoot"
-    If you see “No comments available”, that means your database is not initialized yet. Try to see the health of database service pods and figure out what happened.
+    If you see “No comments available”, that means your database is not initialized yet. Check the health of the database service pods and figure out what happened.
 
 ## **Next Step**
 

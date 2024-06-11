@@ -83,7 +83,7 @@ You can either [build the image locally](https://docs.docker.com/get-started/02_
 When ready, run the following command to deploy the frontend app:
 
 ```shell
-kubectl apply -f config/100-front-end-deployment.yaml
+kubectl apply -f code-samples/eventing/bookstore-sample-app/start/frontend/config/100-front-end-deployment.yaml
 ```
 
 This will create the Deployment and expose it with a Service of type LoadBalancer to receive external traffic:

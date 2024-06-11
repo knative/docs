@@ -1,4 +1,4 @@
-# **6 - Advanced Event Filtering**
+# **Advanced Event Filtering**
 
 ![Image](images/image4.png)
 
@@ -58,7 +58,7 @@ So far, the triggers in your cluster should look like the following:
     kubectl get triggers
     ```
 
-    You should see the trigger with the ready state as `True`.
+    You should see the Trigger in ready state:
     ![Image](images/image2.png)
 
 ## **Verification**

@@ -1,4 +1,4 @@
-# **7 - Slack sink - Learning Knative Eventing & camel-K integration**
+# **Slack sink - Learning Knative Eventing and the Apache Camel K integration**
 
 ![image](images/image2.png)
 
@@ -10,7 +10,7 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 
 ## **What does the final deliverable look like?**
 
-When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter` set to “bad” is sent, it triggers a message to be sent in a designated Slack channel.
+When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter` set to `bad` is sent, it triggers a message to be sent in a designated Slack channel.
 
 ## **Install prerequisites**
 
@@ -40,7 +40,7 @@ $ kamel install --registry docker.io --organization <your-organization> --regist
 
 Replace the placeholders with your actual Docker registry information.
 
-If you are using other container registries, you may need to read more [here](https://www.google.com/url?q=https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html&sa=D&source=editors&ust=1717684414712113&usg=AOvVaw1PCILfYDdduhvghZDOvWTE) for the installation.
+If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html) for the installation.
 
 ???+ success "Verify"
 
@@ -125,7 +125,7 @@ spec:
 
 If you hope to learn more about it, check out the article [Event Sourcing with Apache Camel K and Knative Eventing by Matthias Weßendorf](https://knative.dev/blog/articles/knative-meets-apache-camel){:target="_blank"}!
 
-### **Step 1: Create the Broker that can route “bad word” comments to Slack**
+### **Step 1: Create the Broker that can route "bad word" comments to Slack**
 
 ![image](images/image19.png)
 
@@ -232,7 +232,7 @@ We are creating the trigger to process the events that have type moderated-comme
 
 ### **Step 3: Build the Pipe**
 
-This setup automatically sends notifications to Slack whenever a new comment that contains “bad word” occur, streamlining the flow of information.
+This setup automatically sends notifications to Slack whenever a new comment that contains "bad word" occur, streamlining the flow of information.
 
 - 1: Create a Slack app and generate an incoming webhook URL for your designated channel where notifications will be sent. Refer to Slack documentation for how to do this.
 

@@ -1,4 +1,4 @@
-# **3 - Simplified - Create Bad Word Filter Service**
+# **Simplified - Create Bad Word Filter Service**
 
 ![Image 4](images/image4.png)
 
@@ -167,6 +167,6 @@ If you see the response, it means that the function is running successfully.
 
 In this tutorial, you learned how to create a serverless function for a simple service that can detect inappropriate languages in text with Knative. 
 
-Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflow and make sure they are executed in the order you want. 
+Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflows and make sure they are executed in the order you want. 
 
 [Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/pg4-sequence.md){ .md-button .md-button--primary }
