@@ -1,4 +1,4 @@
-# 2- Sentiment Analysis Service for Bookstore Reviews
+# Sentiment Analysis Service for Bookstore Reviews
 
 ![Image1](images/image1.png)
 
