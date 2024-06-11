@@ -65,7 +65,29 @@ Please follow the instructions [here](https://knative.dev/docs/install/) to spin
 
     You should see the pods in the `knative-eventing` and `knative-serving` namespaces running before proceeding.
 
-    ![Image](images/image2.png)
+    ```
+    NAMESPACE          NAME                                      READY   STATUS    RESTARTS   AGE
+    knative-eventing   eventing-controller-7576f555d5-7c2p2      1/1     Running   0          4m50s
+    knative-eventing   eventing-webhook-5874bb8445-cqcn9         1/1     Running   0          4m50s
+    knative-eventing   imc-controller-8c5d5ddb5-m249l            1/1     Running   0          4m49s
+    knative-eventing   imc-dispatcher-76d9f7464b-dphd6           1/1     Running   0          4m49s
+    knative-eventing   mt-broker-controller-8d8f8d48f-rvlcv      1/1     Running   0          4m48s
+    knative-eventing   mt-broker-filter-85c457f879-dvhnj         1/1     Running   0          4m48s
+    knative-eventing   mt-broker-ingress-5688f4cd68-nm8cc        1/1     Running   0          4m48s
+    knative-serving    activator-55d856fccd-g5qpw                1/1     Running   0          4m53s
+    knative-serving    autoscaler-5fb49c64c7-hrjng               1/1     Running   0          4m53s
+    knative-serving    controller-ddbb9d4f-khttq                 1/1     Running   0          4m53s
+    knative-serving    net-kourier-controller-68d89f78d5-hw8r6   1/1     Running   0          4m52s
+    knative-serving    webhook-85b9744fc5-6w9sg                  1/1     Running   0          4m53s
+    kourier-system     3scale-kourier-gateway-dbc5b88f5-7g29n    1/1     Running   0          4m52s
+    kube-system        coredns-5dd5756b68-49xsj                  1/1     Running   0          12m
+    kube-system        etcd-minikube                             1/1     Running   0          12m
+    kube-system        kube-apiserver-minikube                   1/1     Running   0          12m
+    kube-system        kube-controller-manager-minikube          1/1     Running   0          12m
+    kube-system        kube-proxy-tqcvx                          1/1     Running   0          12m
+    kube-system        kube-scheduler-minikube                   1/1     Running   0          12m
+    kube-system        storage-provisioner                       1/1     Running   0          12m
+    ```
 
 #### **Extra Step for Minikube Users:**
 
@@ -102,15 +124,26 @@ kubectl apply -f code-samples/eventing/bookstore-sample-app/start/frontend/confi
 
 This will create the Deployment and expose it with a Service of type LoadBalancer to receive external traffic:
 
-![Image](images/image11.png)
-
-```shell
-kubectl get pods
+```
+deployment.apps/bookstore-frontend created
+service/bookstore-frontend-svc created
 ```
 
-You will see that your front end pod is running.
+???+ success "Verify"
+    Run the following command to check if the pod is running:
+    
+    ```shell
+    kubectl get pods
+    ```
 
-![Image](images/image4.png)
+    You will see that your front end pod is running.
+
+    ```
+    NAME                                  READY   STATUS    RESTARTS   AGE
+    bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          4m37s
+    ```
+
+
 
 #### **Port Forwarding (Optional under condition)**
 
@@ -124,19 +157,33 @@ Check if port forwarding is necessary by running:
 kubectl get services
 ```
 
-![Image](images/image1.png)
+And you will see the following console output:
+```
+NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   <pending>     3000:31600/TCP   27m
+kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          39m
+```
 
-If the `EXTERNAL-IP` for your frontend service is `127.0.0.1`, port forwarding is not needed.
 
-If port forwarding is required, open a new terminal and run:
+
+!!! note
+    If the `EXTERNAL-IP` for your frontend service is `127.0.0.1`, port forwarding is not needed.
+
+If port forwarding is required, run the following command:
 
 ```shell
 kubectl port-forward svc/bookstore-frontend-svc 3000:3000
 ```
 
-![Image](images/image8.png)
+You should see the following output:
 
-Don’t close the terminal when port-forwarding is established.
+```
+Forwarding from 127.0.0.1:3000 -> 3000
+Forwarding from [::1]:3000 -> 3000
+```
+
+
+**Don’t close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
 
 ???+ success "Verify"
 
@@ -150,7 +197,9 @@ Don’t close the terminal when port-forwarding is established.
 
 The Node.js server is located in the `docs/code-samples/eventing/bookstore-sample-app/start/node-server` folder.
 
-Ensure that port 8080 on your local machine is not being used by another application.
+!!! warning
+
+    Ensure that port 8080 on your local machine is not being used by another application.
 
 #### **Deploy the Book Review Service: Node.js Server**
 
@@ -164,15 +213,26 @@ kubectl apply -f config/100-deployment.yaml
 
 This command will pull the image and deploy it to your cluster as a Deployment. It will also expose it as a LoadBalancer to receive external traffic.
 
-![Image](images/image15.png)
-
-```shell
-kubectl get pods
+```
+deployment.apps/node-server created
+service/node-server-svc created
 ```
 
-You will see that your Node.js server (node-server) pod is running.
+???+ success "Verify"
 
-![Image](images/image14.png)
+    Run the following command to check if the pod is running:
+
+    ```shell
+    kubectl get pods
+    ```
+
+    You will see that your Node.js server (node-server) pod is running.
+    ```
+    NAME                                  READY   STATUS    RESTARTS   AGE
+    bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          39m
+    node-server-68bf98cdf4-skjmh          1/1     Running   0          38m
+    ```
+
 
 #### **Port Forwarding (optional under condition)**
 
@@ -185,20 +245,31 @@ Check if port forwarding is necessary by running:
 ```shell
 kubectl get services
 ```
+And you will see the following console output:
+```
+NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   <pending>     3000:31600/TCP   73m
+kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          85m
+node-server-svc          LoadBalancer   10.101.90.35    <pending>     80:31792/TCP     73m
+```
 
-![Image](images/image7.png)
-
-If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed.
+!!! note
+    If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed.
 
 If port forwarding is required, open a new terminal and run:
 
 ```shell
 kubectl port-forward svc/node-server-svc 8080:80
 ```
+You should see the following output:
 
-![Image](images/image17.png)
+```
+Forwarding from 127.0.0.1:8080 > 8000
+Forwarding from [::1]:8080 > 8000
+```
 
-Don’t close the terminal when port-forwarding is established.
+**Don’t close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
+
 
 ???+ success "Verify"
 
