@@ -9,6 +9,9 @@ extra_css:
 repo_url: https://github.com/knative/docs
 edit_uri: edit/main/docs
 
+watch:
+  - ./
+
 theme:
   name: material
   logo: images/logo/rgb/knative-logo-rgb.png
