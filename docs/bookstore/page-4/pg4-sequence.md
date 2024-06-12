@@ -92,9 +92,10 @@ Create the sequence yaml file and apply it to your cluster.
     ```
 
     You should expect the Ready state for `sequence` to be True.
-
-
-    ![image](images/image6.png)
+    ```
+    NAME       URL                                                                  AGE    READY   REASON
+    sequence   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   159m   True    
+    ```
 
 ### **Step 2: Create the trigger that pass the event to Sequence**
 
@@ -124,7 +125,16 @@ As the Sequence is ready to accept the request now, we need to tell the Broker t
 
 Create the trigger yaml file and apply it to your cluster.
 
-![image](images/image2.png)
+```
+kubectl apply -f sequence/config/200-create-trigger.yaml
+```
+
+And you should see the following output:
+
+```
+trigger.eventing.knative.dev/sequence-trigger created
+```
+
 
 ???+ success "Verify"
     You can verify the status of the trigger very easily
@@ -134,7 +144,17 @@ Create the trigger yaml file and apply it to your cluster.
     ```
 
     You should see the Trigger in ready state.
-    And until this point, **your cluster should have the following triggers**.
+
+    ```
+    NAME                BROKER             SUBSCRIBER_URI                                                       AGE    READY   REASON
+    seq-reply-trigger   bookstore-broker   http://event-display.default.svc.cluster.local                       162m   True    
+    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   162m   True    
+    log-trigger        bookstore-broker    http://event-display.default.svc.cluster.local                       164m   True    
+    ```
+
+    You will find out that there is an extra trigger called `seq-reply-trigger`. It is automatically created by sequence, used to send the reply back to broker.
+
+    And until this point, **your cluster should have the following triggers** that are created by you manually.
     ![image](images/image12.png)
 
 
