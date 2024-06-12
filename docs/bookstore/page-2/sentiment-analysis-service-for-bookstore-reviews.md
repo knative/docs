@@ -348,7 +348,7 @@ default     sentiment-analysis-app-00002-deployment   2/2     Running   0       
 
 But if you wait for a while without sending any CloudEvent to your function, and query the pods again, you will find that the pod that has your sentiment analysis app **disappeared**!
 
-This is because Knative Serving's autoscaler will **automatically scale down to zero** if there is no request to the function!
+This is because Knative Serving's autoscaler will **automatically scale down to zero** if there is no request to the function! Learn more at [Knative Autoscaling](https://knative.dev/docs/serving/autoscaling/){:target="_blank"}.
 
 ---
 
@@ -407,8 +407,8 @@ Next, we'll deploy another ML service following the same procedure. We encourage
 
 If you feel comfortable deploying the other ML service yourself, follow this **simplified guide**:
 
-[Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-badword-svc.md){ .md-button .md-button--primary }
+[Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/create-bad-word-filter-service.md){ .md-button .md-button--primary }
 
 If you encounter any issues, don't worry—we have a detailed tutorial ready for you. 
 
-[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-solution-badword-svc.md){ .md-button .md-button--primary }
+[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/solution-create-bad-word-filter-service.md){ .md-button .md-button--primary }

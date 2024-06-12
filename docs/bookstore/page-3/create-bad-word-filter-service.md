@@ -1,4 +1,4 @@
-# **Simplified - Create Bad Word Filter Service**
+# Create Bad Word Filter Service
 
 ![Image 4](images/image4.png)
 
@@ -6,7 +6,7 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 
 If you ever get stuck, check the solution here.
 
-[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/pg3-solution-badword-svc.md){ .md-button .md-button--primary }
+[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/solution-create-bad-word-filter-service.md){ .md-button .md-button--primary }
 
 ## **What Knative features will we learn about?**
 
@@ -175,4 +175,4 @@ In this tutorial, you learned how to create a serverless function for a simple s
 
 Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflows and make sure they are executed in the order you want. 
 
-[Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/pg4-sequence.md){ .md-button .md-button--primary }
+[Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/create-sequence-to-streamline-ML-workflows.md){ .md-button .md-button--primary }

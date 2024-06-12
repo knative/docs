@@ -1,4 +1,4 @@
-# **Create the Knative Sequence with both ML services and send the final result to the Broker and event-display**
+# **Create Knative Sequence to Streamline ML Workflows**
 
 ![image](images/image8.png)
 
@@ -211,4 +211,4 @@ In this tutorial, you learned how to create a sequence to build a ML pipeline.
 
 Next, we'll be learning how to spin up book store’s database services, while learning what will be the best case to use Knative Serving.
 
-[Go to Deploy Database Service :fontawesome-solid-paper-plane:](../page-5/pg5-db-svc.md){ .md-button .md-button--primary }
+[Go to Deploy Database Service :fontawesome-solid-paper-plane:](../page-5/deploy-database-service.md){ .md-button .md-button--primary }

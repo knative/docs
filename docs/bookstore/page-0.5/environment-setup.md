@@ -303,4 +303,4 @@ If you encounter any issues during the setup process, refer to the troubleshooti
 
 You have successfully set up the cluster with Knative installed, and running your front end app and node server. You are all set to start learning. Your journey begins from here.
 
-[Go to Lesson 1 - Send Review Comment to Broker :fontawesome-solid-paper-plane:](../../bookstore/page-1/pg1-review-svc-1.md){ .md-button .md-button--primary }
+[Go to Lesson 1 - Send Review Comment to Broker :fontawesome-solid-paper-plane:](../page-1/send-review-comment-to-broker.md){ .md-button .md-button--primary }

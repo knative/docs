@@ -91,4 +91,4 @@ Simple, isn't it? That's why Knative Eventing is so helpful! You only need to fo
 
 You've built your event-driven architecture. Now it's time to connect it to external services to further enhance your bookstore application. In the next section, we will enable the bookstore to send notifications to your Slack workspace!
 
-[Go to Connect Slack with Camel-K :fontawesome-solid-paper-plane:](../page-7/pg7-slack-camel.md){ .md-button .md-button--primary }
+[Go to Connect Slack with Camel-K :fontawesome-solid-paper-plane:](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md){ .md-button .md-button--primary }

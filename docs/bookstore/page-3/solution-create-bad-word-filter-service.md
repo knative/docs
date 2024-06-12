@@ -1,4 +1,4 @@
-# 3 - Solution - Create Bad Word Filter Service
+# Solution - Create Bad Word Filter Service
 
 ![image](images/image4.png)
 
@@ -56,7 +56,6 @@ func create -l python bad-word-filter
 This command will create a new directory with the name `bad-word-filter` and a bunch of files in it. The `func` CLI will generate a basic function template for you to start with.
 
 You can find all the supported language templates [here](https://knative.dev/docs/functions/){:target="_blank"}.
-'
 
 ???+ success "Verify"
     The file tree will look like this:
@@ -205,4 +204,4 @@ In this tutorial, you learned how to create a serverless function for a simple s
 
 Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflow and make sure they are executed in the order you want.
 
-[Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/pg4-sequence.md){ .md-button .md-button--primary }
+[Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/create-sequence-to-streamline-ML-workflows.md){ .md-button .md-button--primary }

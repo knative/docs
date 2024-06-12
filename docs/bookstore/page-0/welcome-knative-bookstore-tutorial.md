@@ -1,4 +1,4 @@
-# Welcome: Knative Book Store Tutorial
+# Welcome: Knative Bookstore Tutorial
 
 ![Welcome Image](images/1.png)
 
@@ -67,7 +67,7 @@ An Apache Camel-K pipe that connects our event-driven architecture with a third-
 
 ### ML Models Service
 
-There are 2 Machine learning workflows that can conduct sentiment analysis on user’s review comment and hateful word sanity check. You will be using a [Knative Sequence](https://knative.dev/docs/eventing/flows/sequence/) to make sure they are executed in order.
+There are 2 Machine learning workflows that can conduct sentiment analysis on user’s review comment and hateful word sanity check. You will be using a [Knative Sequence](https://knative.dev/docs/eventing/flows/sequence/){:target="_blank"} to make sure they are executed in order.
 
 ### Book Store Broker
 
@@ -82,21 +82,23 @@ It acts as the bridge between the book store broker and the slack sink, so we ca
 
 We will be building the sample app in this order:
 
-0. [**Environment Setup**](../page-0.5/pg0.5-env-setup.md){:target="_blank"}: Set up the environment for the tutorial. This includes installing the cluster, the frontend and the backend.
+0. [**Environment Setup**](../page-0.5/environment-setup.md){:target="_blank"}: Set up the environment for the tutorial. This includes installing the cluster, the frontend and the backend.
 
-1. [**Send comments to the Broker**](../page-1/pg1-review-svc-1.md){:target="_blank"}: Pass reviews from the frontend to event-display via the Broker. This involves learning about Broker, SinkBinding and CloudEvents event types.
+1. [**Send comments to the Broker**](../page-1/send-review-comment-to-broker.md){:target="_blank"}: Pass reviews from the frontend to event-display via the Broker. This involves learning about Broker, SinkBinding and CloudEvents event types.
    
-2. [**Deploy Sentiment Analysis Service**](../page-2/pg2-sentiment-svc.md){:target="_blank"}: Gain knowledge on deploying a sentiment analysis service using Knative Function.
+2. [**Deploy Sentiment Analysis Service**](../page-2/sentiment-analysis-service-for-bookstore-reviews.md){:target="_blank"}: Gain knowledge on deploying a sentiment analysis service using Knative Function.
 
-3. [**Deploy Bad Word Filter Service**](../page-3/pg3-badword-svc.md){:target="_blank"}: Implement a bad word filter service using Knative Function yourself.
+3. [**Deploy Bad Word Filter Service**](../page-3/create-bad-word-filter-service.md){:target="_blank"}: Implement a bad word filter service using Knative Function yourself.
 
-4. [**Use a Sequence to Run the ML Workflows in order**](../page-4/pg4-sequence.md){:target="_blank"}: Learn how to utilize a Knative Sequence to ensure your ML workflows executes in order.
+4. [**Use a Sequence to Run the ML Workflows in order**](../page-4/create-sequence-to-streamline-ML-workflows.md){:target="_blank"}: Learn how to utilize a Knative Sequence to ensure your ML workflows executes in order.
 
-5. [**Database Deployment**](../page-5/pg5-db-svc.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using a plain Kubernetes deployment.
+5. [**Database Deployment**](../page-5//deploy-database-service.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using a plain Kubernetes deployment.
 
-6. [**Advanced event filtering**](../page-6/pg6-review-svc-2.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers and Filters.
+6. [**Advanced event filtering**](../page-6/advanced-event-filtering.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers and Filters.
 
-7. [**Connect with External Services/API**](../page-7/pg7-slack-camel.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integrations.
+7. [**Connect with External Services/API**](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integrations.
+
+8. [**Extra Challenges**](../extra-challenge/README.md){:target="_blank"}: Additional challenges to test your understanding of the concepts learned in the tutorial.
 
 ## **How to properly learn?**
 
@@ -134,4 +136,4 @@ Join the supportive Knative community via the Cloud Native Computing Foundation 
 
 Let’s set up the environment first.
 
-[Go to Environment Setup :fontawesome-solid-paper-plane:](../../bookstore/page-0.5/pg0.5-env-setup.md){ .md-button .md-button--primary }
+[Go to Environment Setup :fontawesome-solid-paper-plane:](../page-0.5/environment-setup.md){ .md-button .md-button--primary }

@@ -14,27 +14,27 @@ Thank you, and happy learning!
 
 This tutorial makes use of several open source libraries to build the bookstore application. Below are the libraries used along with their respective documentation and project links:
 
-- [Profanity Check](https://www.google.com/url?q=https://pypi.org/project/profanity-check/&sa=D&source=editors&ust=1717686553211182&usg=AOvVaw1SXvDgAma3AB-t2vSbGKhd)
-- [Flask](https://www.google.com/url?q=https://flask.palletsprojects.com/en/3.0.x/&sa=D&source=editors&ust=1717686553211525&usg=AOvVaw1kBc-AdpHJhfRbLHEuNhik)
-- [CloudEvents](https://www.google.com/url?q=https://cloudevents.io/&sa=D&source=editors&ust=1717686553211775&usg=AOvVaw210cwmn-fVQwgtWRCsUm1M)
-- [TextBlob](https://www.google.com/url?q=https://textblob.readthedocs.io/en/dev/&sa=D&source=editors&ust=1717686553211991&usg=AOvVaw1qocqHLpX3AWFqn62pFlF3)
-- [Node.js](https://www.google.com/url?q=https://nodejs.org/en&sa=D&source=editors&ust=1717686553212185&usg=AOvVaw1OtVy9COtbK-iKWOR_WA0b)
-- [Next.js](https://www.google.com/url?q=https://nextjs.org/&sa=D&source=editors&ust=1717686553212371&usg=AOvVaw2vWOGoyVo74Hxo4mLx43I_)
-- [PostgreSQL](https://www.google.com/url?q=https://www.postgresql.org/&sa=D&source=editors&ust=1717686553212556&usg=AOvVaw1AKpz85L0ggnntTdCdnXbd)
-- [Apache Camel](https://www.google.com/url?q=https://camel.apache.org/&sa=D&source=editors&ust=1717686553212742&usg=AOvVaw2UkXoKQZtjG-pr1k9J12fG)
+- [Profanity Check](https://pypi.org/project/profanity-check/)
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+- [CloudEvents](https://cloudevents.io/)
+- [TextBlob](https://textblob.readthedocs.io/en/dev/)
+- [Node.js](https://nodejs.org/en)
+- [Next.js](https://nextjs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Apache Camel](https://camel.apache.org/)
 
 ### **Music Used in the Demo Video**
 
 The music used in the demo video is sourced from Uppbeat, which provides free music for creators:
 
-- Music: [Trendsetter](https://www.google.com/url?q=https://uppbeat.io/t/mood-maze/trendsetter&sa=D&source=editors&ust=1717686553213182&usg=AOvVaw3lAUhSAxvklhZVuJkVI08t) by Mood Maze
+- Music: [Trendsetter](https://uppbeat.io/t/mood-maze/trendsetter) by Mood Maze
 - License Code: JHDMCOJT3ZC4EVUB
 
 ### **Graphic Creation License**
 
 Graphics used in this tutorial were created using Canva:
 
-- Canva License: [Content License Agreement](https://www.google.com/url?q=https://www.canva.com/policies/content-license-agreement/&sa=D&source=editors&ust=1717686553213676&usg=AOvVaw2KTvt1XUqxktEcWxzNaQkY)
+- Canva License: [Content License Agreement](https://www.canva.com/policies/content-license-agreement)
 
 ### **Results of ML Services in This Tutorial**
 

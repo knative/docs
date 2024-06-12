@@ -1,4 +1,3 @@
-
 # Send Review Comment to Broker
 
 ![Image](images/image25.png)
@@ -324,7 +323,7 @@ service/event-display created
 
 ![Image](images/image9.png)
 
-A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications,%20which%20enables%20creating,%20parsing,%20sending,%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}. It is the connector between the broker and the event destination.
+A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications%2C%20which%20enables%20creating%2C%20parsing%2C%20sending%2C%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}. It is the connector between the broker and the event destination.
 
 A Filter in the Trigger will **filter the events based on the filter condition**. You will specify your filter condition in the Trigger’s YAML file. **If no filter is specified, the Trigger will forward all the events that the Broker received.**
 
@@ -421,4 +420,4 @@ kubectl logs event-display-XXXXX -f
 
 Please make sure you pass the Validate test before proceeding. 
 
-[Go to Deploy ML workflow: Sentiment Analysis :fontawesome-solid-paper-plane:](../../bookstore/page-2/pg2-sentiment-svc.md){ .md-button .md-button--primary }
+[Go to Deploy ML workflow: Sentiment Analysis :fontawesome-solid-paper-plane:](../page-2/sentiment-analysis-service-for-bookstore-reviews.md){ .md-button .md-button--primary }

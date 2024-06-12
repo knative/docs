@@ -85,4 +85,4 @@ You have successfully set up the database services, and it is ready to receive r
 
 Next, we'll complete our event-driven architecture by connecting all the components you created. This is where the magic happens.
 
-[Go to Implement Advanced Event Filtering :fontawesome-solid-paper-plane:](../page-6/pg6-review-svc-2.md){ .md-button .md-button--primary }
+[Go to Implement Advanced Event Filtering :fontawesome-solid-paper-plane:](../page-6/advanced-event-filtering.md){ .md-button .md-button--primary }

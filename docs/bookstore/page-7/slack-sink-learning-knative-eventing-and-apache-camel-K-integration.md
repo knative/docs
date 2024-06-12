@@ -324,7 +324,7 @@ $ kubectl apply -f slack-sink/slack-sink.yaml
 
 ![image](images/image6.png)
 
-In this step, we'll configure the notification delivery service to prevent it from scaling down to zero, ensuring timely notifications.
+In this step, we'll configure the notification delivery service to prevent it from [scaling down to zero](https://knative.dev/docs/serving/autoscaling/scale-to-zero/){:target="_blank"}, ensuring timely notifications.
 
 !!! note
     `ksvc` stands for [Knative Service](https://knative.dev/docs/serving/services/){:target="_blank"}.
