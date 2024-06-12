@@ -4,12 +4,12 @@
 
 To create a Slack workspace, follow these steps:
 
-- Visit [https://slack.com/get-started#/createnew](https://slack.com/get-started#/createnew).
+- Visit [https://slack.com/get-started#/createnew](https://slack.com/get-started#/createnew){:target="_blank"}.
 - Enter your email address and click Continue, or continue with Apple or Google.
 - Check your email for a confirmation code.
 - Enter the code on the Slack website.
 - Click "Create a Workspace" and follow the prompts.
-- For detailed instructions for androids and , refer to [Create a workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace).
+- For detailed instructions for androids and , refer to [Create a workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace){:target="_blank"}.
 
 ## Adding Channels to Your Workspace
 
@@ -17,13 +17,13 @@ After creating your Slack workspace, you can add channels by following these ste
 
 - Click the '+' icon next to 'Channels' on the sidebar of your Slack workspace.
 - Choose "Create a channel" and specify the channel name and purpose.
-- For enterprise grid organizations, refer to [Slack's help article](https://slack.com/help/articles/115001399587-Add-a-channel-to-multiple-workspaces-in-your-Enterprise-Grid-organization) for instructions.
+- For enterprise grid organizations, refer to [Slack's help article](https://slack.com/help/articles/115001399587-Add-a-channel-to-multiple-workspaces-in-your-Enterprise-Grid-organization){:target="_blank"} for instructions.
 
 ## Setting Up a Webhook for Notifications
 
 To set up a webhook for sending notifications to your Slack workspace:
 
-- Create a [Slack app](https://api.slack.com/apps/new), following the instructions by signing in, adding name and workspace to put the app in.
+- Create a [Slack app](https://api.slack.com/apps/new){:target="_blank"}, following the instructions by signing in, adding name and workspace to put the app in.
 - After this, you'll be redirected to the setting pages of your new app. Choose **Incoming Webhook** and toggle **Activate Webhook**.
 - Scroll down to click the option **Add New Webhook to Workspace**.
   ![Alt text](./screenshots/select-channel.png)

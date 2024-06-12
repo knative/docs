@@ -55,7 +55,7 @@ If you are using other container registries, you may need to read more [here](ht
 
 ![image](images/image21.png)
 
-Follow the instructions [here](../create-slack-workspace/README.md){:target="_blank"} on how to create the Slack workspace and generate an incoming webhook URL for your designated channel where notifications will be sent.
+Follow the instructions [here](../create-slack-workspace/README.md){:target="_blank"} on how to create the Slack workspace and generate an incoming webhook URL for your designated channel where notifications will be sent to.
 
 ???+ success "Verify"
 
@@ -259,7 +259,7 @@ We are creating the trigger to process the events that have type moderated-comme
 
 This setup automatically sends notifications to Slack whenever a new comment that contains "bad word" occur, streamlining the flow of information.
 
-- 1: Create a Slack app and generate an incoming webhook URL for your designated channel where notifications will be sent. Refer to Slack documentation for how to do this.
+- 1: Make sure you have your k8s secret that contains your slack webhook Url ready. If not, refer to the [Prerequisite 3](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url) section.
 
 - 2: Prepare the YAML configuration for the Slack sink, which will forward events to your Slack channel:
 
@@ -330,7 +330,7 @@ In this step, we'll configure the notification delivery service to prevent it fr
 1. **Check Existing Knative Services:**
 
 ```sh
-$ kubectl get ksvcs
+$ kubectl get ksvc
 ```
 
 You should see a service named `pipe` listed:
@@ -382,7 +382,7 @@ In this tutorial, you learned how to set up an event-driven service that automat
 
 ![image](images/image9.png)
 
-Congratulations on successfully completing the bookstore sample app tutorial! If you want to deepen your understanding of Knative, open your bookstore front end, the demo book we used is a great starting point! Check the book "Building Serverless Applications on Knative" by Evan Anderson.
+Congratulations on successfully completing the bookstore sample app tutorial! If you want to deepen your understanding of Knative, open your bookstore front end, the demo book we used is a great starting point! Check the book ["Building Serverless Applications on Knative" by Evan Anderson.](https://www.oreilly.com/library/view/building-serverless-applications/9781098142063/){:target="_blank"}
 
 ![image](images/image20.png)
 
