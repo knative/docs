@@ -49,7 +49,7 @@ This workflow ensures a smooth transition from development to deployment within 
     The file tree will look like this:
 
     ```
-    bad-word-filter
+    /start/bad-word-filter
     ├── func.yaml
     ├── .funcignore
     ├── .gitignore
@@ -61,11 +61,11 @@ This workflow ensures a smooth transition from development to deployment within 
     └── func.py
     ```
 
-### **Step 2: Replace the generated code with the sentiment analysis logic**
+### **Step 2: Replace the generated code with the bad word filter logic**
 
 ![Image 5](images/image5.png)
 
-`func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+`func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
 
 ???+ abstract "_bad-word-filter/func.py_"
     ```python
@@ -114,7 +114,7 @@ This workflow ensures a smooth transition from development to deployment within 
 
 ![Image 8](images/image8.png)
 
-???+ abstract "_sentiment-analysis-app/requirements.txt_"
+???+ abstract "_bad-word-filter/requirements.txt_"
     ```plaintext
     parliament-functions==0.1.0
     alt-profanity-check==1.4.1.post1

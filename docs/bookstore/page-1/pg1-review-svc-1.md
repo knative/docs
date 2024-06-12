@@ -362,7 +362,7 @@ Here we are creating a trigger that will send all the events to event-display.
 - 2: Apply the YAML file:
 
 ```bash
-kubectl apply -f 200-log-trigger.yaml
+kubectl apply -f node-server/config/200-log-trigger.yaml
 ```
 
 You will see the following output:

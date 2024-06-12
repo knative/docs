@@ -77,7 +77,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
     The file tree will look like this:
 
     ```
-    sentiment-analysis-app
+    start/sentiment-analysis-app
     ├── func.yaml
     ├── .funcignore
     ├── .gitignore

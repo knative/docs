@@ -22,7 +22,7 @@
 
 Append the following Trigger configuration to the existing `200-broker.yaml` file in `node-server/config/200-broker.yaml` and then apply:
 
-???+ abstract "Append to _node-server/config/200-broker.yaml_"
+???+ abstract "**Append** to _node-server/config/200-broker.yaml_"
     ```yaml 
     ---
     apiVersion: eventing.knative.dev/v1

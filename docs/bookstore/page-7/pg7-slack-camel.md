@@ -231,7 +231,7 @@ We are creating the trigger to process the events that have type moderated-comme
 - 2: Apply the YAML file:
 
     ```sh
-    kubectl apply -f badword-noti-trigger.yaml
+    kubectl apply -f node-server/config/badword-noti-trigger.yaml
     ```
 
 ![image](images/image3.png)
@@ -267,7 +267,7 @@ This setup automatically sends notifications to Slack whenever a new comment tha
 
 Create a new file named `slack-sink.yaml` and add the following content:
 
-???+ abstract "_slack-sink.yaml_"
+???+ abstract "_slack-sink/config/slack-sink.yaml_"
 
     ```yaml
     apiVersion: camel.apache.org/v1
@@ -297,7 +297,7 @@ Create a new file named `slack-sink.yaml` and add the following content:
 3. Apply the configuration to your Kubernetes cluster:
 
 ```sh
-$ kubectl apply -f slack-sink.yaml
+$ kubectl apply -f slack-sink/slack-sink.yaml
 ```
 
 ???+ success "Verify"

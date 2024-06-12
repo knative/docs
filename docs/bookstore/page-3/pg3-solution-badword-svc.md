@@ -55,14 +55,14 @@ func create -l python ML-bad-word-filter
 
 This command will create a new directory with the name `ML-bad-word-filter` and a bunch of files in it. The `func` CLI will generate a basic function template for you to start with.
 
-You can find all the supported language templates [here](https://knative.dev/docs/functions/).
+You can find all the supported language templates [here](https://knative.dev/docs/functions/){:target="_blank"}.
 '
 
 ???+ success "Verify"
     The file tree will look like this:
 
     ```
-    bad-word-filter
+    /start/bad-word-filter
     ├── func.yaml
     ├── .funcignore
     ├── .gitignore
@@ -74,11 +74,11 @@ You can find all the supported language templates [here](https://knative.dev/doc
     └── func.py
     ```
 
-### **Step 2: Replace the generated code with the sentiment analysis logic**
+### **Step 2: Replace the generated code with the bad word filter logic**
 
 ![image](images/image5.png)
 
-`func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+`func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
 
 
 
@@ -131,7 +131,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 The `requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
 
-???+ abstract "_sentiment-analysis-app/requirements.txt_"
+???+ abstract "bad-word-filter/requirements.txt_"
     ```plaintext
     parliament-functions==0.1.0
     alt-profanity-check==1.4.1.post1

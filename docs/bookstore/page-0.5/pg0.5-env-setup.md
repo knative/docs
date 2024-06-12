@@ -43,6 +43,13 @@ Under `bookstore-sample-app` folder, there are 2 folders:
 !!! tip
     Kuack suggests you to start from **/start**, write all the configuration files as you go over the tutorial, and check solutions when you get stuck.
 
+![Image](images/image1.png)
+
+Always `cd` back to the root directory, which is `/start`, before running any commands.
+
+All the commands in the tutorial are written **assuming you are in the `/start` directory**.
+
+
 ## **Shortcut**
 
 ![Image](images/image10.png)
@@ -119,7 +126,7 @@ You can either [build the image locally](https://docs.docker.com/get-started/02_
 When ready, run the following command to deploy the frontend app:
 
 ```shell
-kubectl apply -f code-samples/eventing/bookstore-sample-app/start/frontend/config/100-front-end-deployment.yaml
+kubectl apply -f frontend/config/100-front-end-deployment.yaml
 ```
 
 This will create the Deployment and expose it with a Service of type LoadBalancer to receive external traffic:
@@ -195,7 +202,7 @@ Forwarding from [::1]:3000 -> 3000
 
 ![Image](images/image6.png)
 
-The Node.js server is located in the `docs/code-samples/eventing/bookstore-sample-app/start/node-server` folder.
+The Node.js server is located in the `node-server` folder.
 
 !!! warning
 
@@ -208,7 +215,7 @@ You can either [build the image locally](https://docs.docker.com/get-started/02_
 When ready, run the following command to deploy the Node.js server:
 
 ```shell
-kubectl apply -f config/100-deployment.yaml
+kubectl apply -f node-server/config/100-deployment.yaml
 ```
 
 This command will pull the image and deploy it to your cluster as a Deployment. It will also expose it as a LoadBalancer to receive external traffic.
