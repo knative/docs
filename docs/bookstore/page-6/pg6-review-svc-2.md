@@ -49,9 +49,12 @@ kubectl apply -f node-server/config/200-broker.yaml
 
 After applying the configuration, you should see
 
-![Image](images/image7.png)
+```
+broker.eventing.knative.dev/bookstore-broker unchanged
+trigger.eventing.knative.dev/db-insert-trigger created
+```
 
-So far, the triggers in your cluster should look like the following:
+So far, the triggers **you manually created** in your cluster should look like the following:
 
 ![Image](images/image5.png)
 
@@ -63,7 +66,17 @@ So far, the triggers in your cluster should look like the following:
     ```
 
     You should see the Trigger in ready state:
-    ![Image](images/image2.png)
+    ```
+    NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
+    db-insert-trigger   bookstore-broker   http://node-server-svc.default.svc.cluster.local/insert              5h32m   True    
+    seq-reply-trigger   bookstore-broker   http://event-display.default.svc.cluster.local                       5h30m   True    
+    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   5h30m   True    
+    log-trigger        bookstore-broker   http://event-display.default.svc.cluster.local                       5h32m   True    
+    ```
+
+!!! note
+    The `seq-reply-trigger` is automatically created by the Knative Eventing system when you create a Sequence with reply.
+
 
 ## **Verification**
 
