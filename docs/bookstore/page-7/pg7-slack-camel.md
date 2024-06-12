@@ -153,7 +153,11 @@ Here, we will be connecting `book-review-broker` with a new broker called `badwo
     kubectl apply -f 200-broker.yaml
     ```
 
-![image](images/image5.png)
+You should see this message if the broker is created successfully:
+
+```
+broker.eventing.knative.dev/badword-broker created
+```
 
 Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:target="_blank"} to create the broker:
 
@@ -161,15 +165,27 @@ Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:
 kn broker create badword-broker
 ```
 
-![image](images/image7.png)
+You should see this message if the broker is created successfully:
+
+```
+Broker 'badword-broker' successfully created in namespace 'default'.
+```
 
 ???+ success "Verify"
 
+    Run the following command to list the brokers:
     ```sh
     kubectl get brokers
     ```
 
-    ![image](images/image18.png)
+    You should see the `badword-broker` listed.
+    ```
+    NAME               URL                                                                                 AGE     READY   REASON
+    badword-broker     http://broker-ingress.knative-eventing.svc.cluster.local/default/badword-broker     3s      True    
+    bookstore-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/bookstore-broker   5h38m   True   
+    ``` 
+
+
 
 ???+ bug "Troubleshooting"
 
@@ -229,6 +245,15 @@ We are creating the trigger to process the events that have type moderated-comme
     The trigger `badword-noti-trigger` should have `READY` status as `True`.
 
     ![image](images/image8.png)
+
+    ```
+    NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
+    db-insert-trigger   bookstore-broker   http://node-server-svc.default.svc.cluster.local/insert              5h41m   True    
+    seq-reply-trigger   bookstore-broker   http://event-display.default.svc.cluster.local                       5h39m   True    
+    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   5h39m   True    
+    log-trigger         bookstore-broker   http://event-display.default.svc.cluster.local                       5h41m   True   
+    badword-noti-triggerbookstore-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/badword-broker                       5h41m   True   
+    ```
 
 ### **Step 3: Build the Pipe**
 
