@@ -62,7 +62,7 @@ Create a new function using the func CLI:
 func create -l <language> <function-name>
 ```
 
-In this case, we are creating a python function, so the command will be:
+In this case, we are creating a Python function, so the command will be:
 
 ```
 func create -l python sentiment-analysis-app
@@ -178,7 +178,7 @@ Knative function will automatically install the dependencies listed here when yo
 
 ![Image11](images/image11.png)
 
-In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, knative function will ensure that the `setup.py` file is executed after the dependencies have been installed.
+In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, Knative function will ensure that the `setup.py` file is executed after the dependencies have been installed.
 
 The `setup.py` file should contain the following code for your bookstore:
  
@@ -206,7 +206,7 @@ The `setup.py` file should contain the following code for your bookstore:
     )
     ```
 
-### **Step 5: Try to build and run your Knative Function locally (Optional)**
+### **Step 5: Build and run your Knative Function locally (Optional)**
 ??? info "Click here to expand"
     
     
@@ -214,7 +214,7 @@ The `setup.py` file should contain the following code for your bookstore:
     
     In knative function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
     
-    Currently. only the s2i build is supported if you need to run setup.py. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
+    Currently only the s2i build is supported if you need to run `setup.py`. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
     
     Before we get started, configure the container registry to push the image to the container registry. You can use the following command to configure the container registry:
     
@@ -242,7 +242,7 @@ The `setup.py` file should contain the following code for your bookstore:
     
     `❗Error: '/home/Kuack/Documents/knative/docs/code-samples' does not contain an initialized function`
     
-    **Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory. If you are in the right directory, and the error still occurs, try to check your func.yaml, as it has to contain the field `created` and the right time stamp to be treated as a valid knative function.**
+    **Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory. If you are in the right directory, and the error still occurs, try to check your `func.yaml`, as it has to contain the field `created` and the right timestamp to be treated as a valid Knative Function.**
     
     ---
     
@@ -250,7 +250,7 @@ The `setup.py` file should contain the following code for your bookstore:
     func run -b=s2i -v
     ```
     
-    In the future, you can skip the step of `func build`, because func run will automatically build the function for you.
+    In the future, you can skip the step of `func build`, because `func run` will automatically build the function for you.
     
     You will see the following output if the function is running successfully:
     
