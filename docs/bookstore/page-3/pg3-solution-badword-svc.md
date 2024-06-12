@@ -50,10 +50,10 @@ func create -l <language> <function-name>
 In this case, we are creating a python function, so the command will be:
 
 ```shell
-func create -l python ML-bad-word-filter
+func create -l python bad-word-filter
 ```
 
-This command will create a new directory with the name `ML-bad-word-filter` and a bunch of files in it. The `func` CLI will generate a basic function template for you to start with.
+This command will create a new directory with the name `bad-word-filter` and a bunch of files in it. The `func` CLI will generate a basic function template for you to start with.
 
 You can find all the supported language templates [here](https://knative.dev/docs/functions/){:target="_blank"}.
 '
@@ -143,6 +143,9 @@ Knative function will automatically install the dependencies listed here when yo
 ### **Step 4: Deploy the function to the cluster**
 
 ![image](images/image1.png)
+
+!!! note
+    Please enter `/bad-word-filter` when you are executing the following commands.
 
 After you have finished the code, you can deploy the function to the cluster using the following command:
 

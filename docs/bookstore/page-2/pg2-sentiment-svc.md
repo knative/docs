@@ -294,6 +294,9 @@ The `setup.py` file should contain the following code for your bookstore:
 
 ![Image10](images/image10.png)
 
+!!! note
+    Please enter `/sentiment-analysis-app` when you are executing the following commands.
+
 After you have finished the code, you can deploy the function to the cluster using the following command:
 
 ```bash
@@ -312,7 +315,7 @@ func deploy -b=s2i -v
     You can find the URL of the Knative Function (Knative Service) by running the following command:
     
     ```bash
-    kubectl get kservice -A
+    kubectl get kservice
     ```
     
     You will see the URL in the output:
@@ -331,7 +334,7 @@ func deploy -b=s2i -v
 If you use the following command to query all the pods in the cluster, you will see that the pod is running:
 
 ```bash
-kubectl get pods -A
+kubectl get pods
 ```
 
 where `-A` is the flag to query all the pods in all namespaces.
@@ -397,6 +400,9 @@ In this tutorial, you learned how to create a serverless function for a simple s
 ![Image5](images/image5.png)
 
 Next, we'll deploy another ML service following the same procedure. We encourage you to try it yourself! 
+
+!!! tip
+    Don't forget to `cd` into the root directory `/start` before proceeding.
 
 
 If you feel comfortable deploying the other ML service yourself, follow this **simplified guide**:

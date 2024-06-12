@@ -124,6 +124,8 @@ This workflow ensures a smooth transition from development to deployment within 
 ### **Step 4: Deploy the function to the cluster**
 
 ![Image 1](images/image1.png)
+!!! note
+    Please enter `/bad-word-filter` when you are executing the following commands.
 
 ```plaintext
 func deploy -b=s2i -v

@@ -11,7 +11,7 @@
 ![image](images/image1.png)
 
 - Create a Knative Sequence with bad word filter service as step 1 and sentiment analysis service as step 2
-- The final result is sent back to broker as reply of the sequence
+- The final result is sent back to Broker as reply of the sequence
 
 ## **Implementation**
 
@@ -72,16 +72,25 @@ spec:
             apiVersion: serving.knative.dev/v1
             kind: Service
             name: sentiment-analysis-app
-      reply: # This is the last step of the sequence, it will send the event back to the broker as reply
+      reply: # This is the last step of the sequence, it will send the event back to the Broker as reply
         ref:
           kind: Broker
           apiVersion: eventing.knative.dev/v1
           name: bookstore-broker
     ```
 
-Create the sequence yaml file and apply it to your cluster.
+Create the sequence yaml file and apply it to your cluster. 
 
-![image](images/image10.png)
+```
+kubectl apply -f sequence/config/100-create-sequence.yaml
+```
+
+After applying the configuration, you should see the following output:
+
+```
+sequence.flows.knative.dev/sequence created
+```
+
 
 ???+ success "Verify"
 
@@ -147,14 +156,11 @@ trigger.eventing.knative.dev/sequence-trigger created
 
     ```
     NAME                BROKER             SUBSCRIBER_URI                                                       AGE    READY   REASON
-    seq-reply-trigger   bookstore-broker   http://event-display.default.svc.cluster.local                       162m   True    
     sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   162m   True    
     log-trigger        bookstore-broker    http://event-display.default.svc.cluster.local                       164m   True    
     ```
 
-    You will find out that there is an extra trigger called `seq-reply-trigger`. It is automatically created by sequence, used to send the reply back to broker.
-
-    And until this point, **your cluster should have the following triggers** that are created by you manually.
+    And until this point, **your cluster should have the following triggers** that are created by you.
     ![image](images/image12.png)
 
 

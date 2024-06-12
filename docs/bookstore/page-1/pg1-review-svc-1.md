@@ -380,7 +380,7 @@ trigger.eventing.knative.dev/log-trigger created
     
     ```
     NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
-    log-trigger        bookstore-broker   http://event-display.default.svc.cluster.local                       6m2s    True    
+    log-trigger         bookstore-broker   http://event-display.default.svc.cluster.local                       6m2s    True    
     ```
 
 
