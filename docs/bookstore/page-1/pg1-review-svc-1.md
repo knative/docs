@@ -140,7 +140,10 @@ The Broker acts as a router in your event-driven application, receiving events a
 kubectl apply -f node-server/config/200-broker.yaml
 ```
 
-![Image](images/image16.png)
+You will see the following output:
+```
+broker.eventing.knative.dev/bookstore-broker created
+```
 
 Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn) to create the broker:
 
@@ -148,15 +151,25 @@ Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn) t
 kn broker create bookstore-broker
 ```
 
-![Image](images/image19.png)
+You will see the following output:
+```
+Broker 'bookstore-broker' successfully created in namespace 'default'.
+```
 
 ???+ success "Verify"
-
+    Running the following command to list the brokers:
     ```bash
     kubectl get brokers
     ```
 
-    ![Image](images/image14.png)
+    
+    You should see the broker `bookstore-broker` with `READY` status as `True`.
+
+    ```
+    NAME               URL                                                                                 AGE     READY   REASON
+    bookstore-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/bookstore-broker   7m30s   True    
+    ```
+
 
 
 
@@ -208,15 +221,25 @@ Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-eve
 kubectl apply -f node-server/config/300-sinkbinding.yaml
 ```
 
-![Image](images/image22.png)
+You will see the following output:
+```
+sinkbinding.sources.knative.dev/node-sinkbinding created
+```
 
 ???+ success "Verify"
-
+    Running the following command to list the sinkbindings:
     ```bash
     kubectl get sinkbindings
-    ```
 
-    ![Image](images/image10.png)
+    ```
+    You should see the sinkbinding `node-sinkbinding` with `READY` status as `True`.
+
+    ```
+    NAME               SINK                                                                                AGE     READY   REASON
+    node-sinkbinding   http://broker-ingress.knative-eventing.svc.cluster.local/default/bookstore-broker   2m43s   True    
+
+    ```
+    
 
 ### **Step 4: Create event-display service**
 
@@ -273,16 +296,28 @@ Event display is a debugging tool in Knative Eventing that allows you to use it 
 kubectl apply -f node-server/config/100-event-display.yaml
 ```
 
-![Image](images/image5.png)
+You will see the following output:
+```
+deployment.apps/event-display created
+service/event-display created
+```
 
 ???+ success "Verify"
-
+    Running the following command to list the pods:
     ```bash
     kubectl get pods
     ```
 
     You should see the pod `event-display-XXXXXXX-XXXXX` in "Running" status.
-    ![Image](images/image23.png)
+    
+    ```
+    NAME                                  READY   STATUS    RESTARTS   AGE
+    bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          91m
+    event-display-55967c745d-bxrgh        1/1     Running   0          4m44s
+    node-server-644795d698-r9zlr          1/1     Running   0          4m43s
+    ```
+
+
 
 ### **Step 5: Create a Trigger that connects the Broker and event display**
 
@@ -330,16 +365,24 @@ Here we are creating a trigger that will send all the events to event-display.
 kubectl apply -f 200-log-trigger.yaml
 ```
 
-![Image](images/image7.png)
+You will see the following output:
+```
+trigger.eventing.knative.dev/log-trigger created
+```
 
 ???+ success "Verify"
-
+    Running the following command to list the triggers:
     ```bash
     kubectl get triggers
     ```
     The trigger `log-trigger` should have `READY` status as `True`.
 
-    ![Image](images/image24.png)
+    
+    ```
+    NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
+    log-trigger        bookstore-broker   http://event-display.default.svc.cluster.local                       6m2s    True    
+    ```
+
 
 ### **Validate**
 
