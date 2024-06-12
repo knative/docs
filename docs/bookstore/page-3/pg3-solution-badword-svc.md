@@ -12,7 +12,7 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 
 ![image](images/image2.png)
 
-A running serverless Knative function that contains a python application that receives the new review comments as CloudEvent and returns the result that tells your input text contains any inappropriate languages or not. The result is sent back as CloudEvent.
+A running serverless Knative Function that contains a python application that receives the new review comments as CloudEvent and returns the result that tells your input text contains any inappropriate languages or not. The result is sent back as CloudEvent.
 
 !!! info
     We are using the `profanity_check` library to detect the bad words in the text. It is a open source library. Please see the disclaimer here. The result may not be 100% accurate.
@@ -138,7 +138,7 @@ The `requirements.txt` file contains the dependencies for the function. You can 
     cloudevents==1.10.1
     ```
 
-Knative function will automatically install the dependencies listed here when you build the function.
+Knative Function will automatically install the dependencies listed here when you build the function.
 
 ### **Step 4: Deploy the function to the cluster**
 
@@ -167,7 +167,7 @@ func deploy -b=s2i -v
 
 After deployment, the `func` CLI provides a URL to access your function. You can verify the function's operation by sending a request with a sample review comment.
 
-Simply use Knative function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
+Simply use Knative Function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
 ```shell
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v

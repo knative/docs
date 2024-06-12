@@ -12,7 +12,7 @@ The ease to use **Knative Function** to deploy your service, and make it be mana
 
 ![Image8](images/image8.png)
 
-A running serverless Knative function that contains a python application that receives the new review comments as CloudEvent and returns the sentiment classification of the input text as CloudEvent.
+A running serverless Knative Function that contains a python application that receives the new review comments as CloudEvent and returns the sentiment classification of the input text as CloudEvent.
 
 The function's output will be only from:
 
@@ -172,13 +172,13 @@ The `requirements.txt` file contains the dependencies for the function. You can 
     cloudevents==1.10.1
     ```
 
-Knative function will automatically install the dependencies listed here when you build the function.
+Knative Function will automatically install the dependencies listed here when you build the function.
 
 ### **Step 4: Configure the pre-built environment**
 
 ![Image11](images/image11.png)
 
-In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, Knative function will ensure that the `setup.py` file is executed after the dependencies have been installed.
+In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, Knative Function will ensure that the `setup.py` file is executed after the dependencies have been installed.
 
 The `setup.py` file should contain the following code for your bookstore:
  
@@ -212,7 +212,7 @@ The `setup.py` file should contain the following code for your bookstore:
     
     ![Image4](images/image4.png)
     
-    In Knative function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
+    In Knative Function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
     
     Currently only the s2i build is supported if you need to run `setup.py`. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
     
@@ -262,7 +262,7 @@ The `setup.py` file should contain the following code for your bookstore:
     ---> Running application from script (app.sh) ...
     ```
     
-    Knative function has an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent and test your function out:
+    Knative Function has an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent and test your function out:
     
     ```
     func invoke -f=cloudevent --data='{"reviewText": "I love Knative so much"}' --content-type=application/json --type="new-review-comment" -v
@@ -358,7 +358,7 @@ This is because Knative Serving's autoscaler will **automatically scale down to 
 
 After deployment, the `func` CLI provides a URL to access your function. You can verify the function's operation by sending a request with a sample review comment.
 
-Simply use Knative function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
+Simply use Knative Function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
 ```bash
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v

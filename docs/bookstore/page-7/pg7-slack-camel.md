@@ -327,7 +327,7 @@ $ kubectl apply -f slack-sink/slack-sink.yaml
 In this step, we'll configure the notification delivery service to prevent it from scaling down to zero, ensuring timely notifications.
 
 !!! note
-    `ksvc` stands for Knative services.
+    `ksvc` stands for [Knative Service](https://knative.dev/docs/serving/services/){:target="_blank"}.
 
 1. **Check Existing Knative Services:**
 
