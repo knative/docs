@@ -43,11 +43,28 @@ kubectl apply -f db-service
 
 ???+ success "Verify"
 
-    ![image8](images/image8.png)
+    You should see the following output:
+    ```
+    configmap/sql-configmap created
+    secret/postgresql-secret created
+    persistentvolumeclaim/postgresql-pvc created
+    statefulset.apps/postgresql created
+    service/postgresql created
+    job.batch/postgresql-job created
+    ```
 
     Wait a moment until all the pods become available and the database migration job is completed. If you see some job pods are failing and **having errors, don’t worry**, please wait until at least one job becomes “**Completed**”.
 
-    ![image5](images/image5.png)
+    ```
+    NAME                                  READY   STATUS    RESTARTS   AGE
+    bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          6h53m
+    camel-k-operator-7989475884-7wk6z     1/1     Running   0          5h26m
+    event-display-55967c745d-bxrgh        1/1     Running   0          5h26m
+    node-server-644795d698-r9zlr          1/1     Running   0          5h26m
+    postgresql-0                          1/1     Running   0          5h23m
+    postgresql-job-55dlv                  0/1     Completed 0          10s
+    postgresql-job-fnv8m                  0/1     Error     0          73s
+    ```
 
 ## **Verification**
 
