@@ -14,11 +14,11 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ## **Install prerequisites**
 
-### **Prerequisite 1: Install Camel CLI**
+### **Prerequisite 1: Install Apache Camel CLI**
 
 ![image](images/image16.png)
 
-Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://www.google.com/url?q=https://camel.apache.org/camel-k/2.2.x/cli/cli.html&sa=D&source=editors&ust=1717684414711115&usg=AOvVaw2z9c0xz6C8MOQMvTaCPoyi).
+Install the Apache Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://www.google.com/url?q=https://camel.apache.org/camel-k/2.2.x/cli/cli.html&sa=D&source=editors&ust=1717684414711115&usg=AOvVaw2z9c0xz6C8MOQMvTaCPoyi).
 
 ???+ bug "Troubleshooting"
  
@@ -32,7 +32,7 @@ Install the Camel K CLI (`kamel`) on your local machine. You can find the instal
 
 ![image](images/image13.png)
 
-Next, install Camel K on your cluster using the Camel K CLI:
+Next, install Apache Camel K on your cluster using the Apache Camel K CLI:
 
 ```sh
 $ kamel install --registry docker.io --organization <your-organization> --registry-auth-username <your-username> --registry-auth-password <your-password>
@@ -100,7 +100,7 @@ kubectl create secret generic slack-credentials --from-file=application.properti
 
 ![image](images/image14.png)
 
-We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.3.x/kamelets/kamelets.html){:target="_blank"}, our destination.
+We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Apache Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.3.x/kamelets/kamelets.html){:target="_blank"}, our destination.
 
 ![image](images/image10.png)
 

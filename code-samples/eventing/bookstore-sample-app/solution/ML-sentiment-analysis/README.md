@@ -340,8 +340,8 @@ Recall note box: you can get the URL to the function by running the following co
 kubectl get kservice -A 
 ```
 ---
-Another option is to use curl to send a CloudEvent to the function.
-Using curl command to send a CloudEvent to the broker:
+Another option is to use curl to send a CloudEvents to the function.
+Using curl command to send a CloudEvents to the Broker:
 ```bash
 [root@curler:/]$ curl -v "http://sentiment-analysis-app.default.10.99.46.8.sslip.io" \
 -X POST \

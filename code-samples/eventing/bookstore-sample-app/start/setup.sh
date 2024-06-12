@@ -21,10 +21,10 @@ kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v
 kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.14.0/eventing-core.yaml
 echo "Knative Eventing installed successfully."
 
-# Install Knative imc broker
+# Install Knative imc Broker
 kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.14.0/in-memory-channel.yaml
 kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.14.0/mt-channel-broker.yaml
-echo "Knative in-memory channel and broker installed successfully."
+echo "Knative in-memory Channel and Broker installed successfully."
 
 # Detect whether the user has knative function "func" installed
 if ! command -v func &> /dev/null
