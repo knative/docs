@@ -108,7 +108,7 @@ Allow users to send comments via Telegram.
 **Steps**
 
 1. Create a Telegram bot and obtain the bot token.
-2. Set up an [Apache Camel Telegram source](https://camel.apache.org/camel-kamelets/4.4.x/telegram-source.html) to listen for messages from the Telegram bot.
+2. Set up an [Apache Camel Telegram source](https://camel.apache.org/camel-kamelets/4.4.x/telegram-source.html){:target="_blank"} to listen for messages from the Telegram bot.
 3. Create a new event type for comments received via Telegram.
 4. Set up a trigger to process these events and route them to the comment handling service.
 5. Implement a function in the node-server to handle the new comments and update the database.

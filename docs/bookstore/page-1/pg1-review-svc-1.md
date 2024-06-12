@@ -145,7 +145,7 @@ You will see the following output:
 broker.eventing.knative.dev/bookstore-broker created
 ```
 
-Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn) to create the broker:
+Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:target="_blank"} to create the broker:
 
 ```bash
 kn broker create bookstore-broker
@@ -187,7 +187,7 @@ Broker 'bookstore-broker' successfully created in namespace 'default'.
 
 Hardcoding URLs to connect with Kubernetes services in your application can be limiting and inflexible. A SinkBinding dynamically injects the URL of the Kubernetes service into your application.
 
-Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/) and the [spec schema](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/reference/)!
+Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/){:target="_blank"} and the [spec schema](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/reference/){:target="_blank"}!
 
 **Create a SinkBinding:**
 
@@ -323,15 +323,15 @@ service/event-display created
 
 ![Image](images/image9.png)
 
-A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications,%20which%20enables%20creating,%20parsing,%20sending,%20and%20receiving%20events%20in%20any%20programming%20language.). It is the connector between the broker and the event destination.
+A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications,%20which%20enables%20creating,%20parsing,%20sending,%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}. It is the connector between the broker and the event destination.
 
 A Filter in the Trigger will **filter the events based on the filter condition**. You will specify your filter condition in the Trigger’s YAML file. **If no filter is specified, the Trigger will forward all the events that the Broker received.**
 
 ![Image](images/image18.png)
 
-There is also a concept called [Channel](https://knative.dev/docs/eventing/channels/) in Knative, and generally speaking, you can treat Broker & Trigger without filter the same as Channel & Subscription.
+There is also a concept called [Channel](https://knative.dev/docs/eventing/channels/){:target="_blank"} in Knative, and generally speaking, you can treat Broker & Trigger without filter the same as Channel & Subscription.
 
-Learn more about Broker & Trigger [here](https://knative.dev/docs/eventing/brokers/)!
+Learn more about Broker & Trigger [here](https://knative.dev/docs/eventing/brokers/){:target="_blank"}!
 
 **Create a Trigger:**
 

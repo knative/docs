@@ -66,7 +66,7 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ![Image](images/image13.png)
 
-Please follow the instructions [here](https://knative.dev/docs/install/) to spin up your cluster with Knative installed!
+Please follow the instructions [here](https://knative.dev/docs/install/){:target="_blank"} to spin up your cluster with Knative installed!
 
 ???+ success "Verify"
 
@@ -121,7 +121,7 @@ Ensure that port 3000 on your local machine is not being used by another applica
 
 #### **Deploy the Frontend App**
 
-You can either [build the image locally](https://docs.docker.com/get-started/02_our_app/) or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.
+You can either [build the image locally](https://docs.docker.com/get-started/02_our_app/){:target="_blank"} or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.
 
 When ready, run the following command to deploy the frontend app:
 
@@ -210,7 +210,7 @@ The Node.js server is located in the `node-server` folder.
 
 #### **Deploy the Book Review Service: Node.js Server**
 
-You can either [build the image locally](https://docs.docker.com/get-started/02_our_app/) or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.
+You can either [build the image locally](https://docs.docker.com/get-started/02_our_app/){:target="_blank"} or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.
 
 When ready, run the following command to deploy the Node.js server:
 
@@ -261,7 +261,7 @@ node-server-svc          LoadBalancer   10.101.90.35    <pending>     80:31792/T
 ```
 
 !!! note
-    If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed.
+    If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed. If you failed to visit the page `localhost:8080`, you can try to set up port forwarding.
 
 If port forwarding is required, open a new terminal and run:
 

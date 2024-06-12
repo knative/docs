@@ -18,7 +18,7 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ![image](images/image16.png)
 
-Install the Apache Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://www.google.com/url?q=https://camel.apache.org/camel-k/2.2.x/cli/cli.html&sa=D&source=editors&ust=1717684414711115&usg=AOvVaw2z9c0xz6C8MOQMvTaCPoyi).
+Install the Apache Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://www.google.com/url?q=https://camel.apache.org/camel-k/2.2.x/cli/cli.html&sa=D&source=editors&ust=1717684414711115&usg=AOvVaw2z9c0xz6C8MOQMvTaCPoyi){:target="_blank"}.
 
 ???+ bug "Troubleshooting"
  
@@ -40,7 +40,7 @@ $ kamel install --registry docker.io --organization <your-organization> --regist
 
 Replace the placeholders with your actual Docker registry information.
 
-If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html) for the installation.
+If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html){:target="_blank"} for the installation.
 
 ???+ success "Verify"
 

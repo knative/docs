@@ -28,9 +28,9 @@ The function's output will be only from:
 
 ![Image12](images/image12.png)
 
-Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured) by using the func CLI.
+Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured){:target="_blank"} by using the func CLI.
 
-In order to do so, you need to install the func CLI. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/) to install the func CLI.
+In order to do so, you need to install the func CLI. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/){:target="_blank"} to install the func CLI.
 
 ???+ success "Verify"
     Running `func version` in your terminal to verify the installation, and you should see the version of the func CLI you installed.
@@ -70,7 +70,7 @@ func create -l python sentiment-analysis-app
 
 This command will create a new directory with the name `sentiment-analysis-app` and a bunch of files in it. The func CLI will generate a basic function template for you to start with.
 
-You can find all the supported language templates [here](https://knative.dev/docs/functions/).
+You can find all the supported language templates [here](https://knative.dev/docs/functions/){:target="_blank"}.
 
 ???+ success "Verify"
 
@@ -212,7 +212,7 @@ The `setup.py` file should contain the following code for your bookstore:
     
     ![Image4](images/image4.png)
     
-    In knative function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46) or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43).
+    In knative function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
     
     Currently. only the s2i build is supported if you need to run setup.py. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
     
@@ -268,7 +268,7 @@ The `setup.py` file should contain the following code for your bookstore:
     func invoke -f=cloudevent --data='{"reviewText": "I love Knative so much"}' --content-type=application/json --type="new-review-comment" -v
     ```
     
-    where the `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`, and the `--data` flag is the input text. You can read more about `func invoke` [here](https://github.com/knative/func/blob/main/docs/reference/func_invoke.md).
+    where the `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`, and the `--data` flag is the input text. You can read more about `func invoke` [here](https://github.com/knative/func/blob/main/docs/reference/func_invoke.md){:target="_blank"}.
     
     In this case, you will get the full CloudEvent response:
     
