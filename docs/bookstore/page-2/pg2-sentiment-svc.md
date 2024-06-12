@@ -4,9 +4,9 @@
 
 As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple sentiment analysis service to categorize review comments by sentiment.
 
-## **What Knative features will we learn about?**
+## **Which Knative features will we learn about?**
 
-- The ease to use **Knative Function** to deploy your service, and make it be managed by Knative Serving, which gives you the ability to **auto-scale your service to zero**, and scale up to handle the demand.
+The ease to use **Knative Function** to deploy your service, and make it be managed by Knative Serving, which gives you the ability to **auto-scale your service to zero**, and scale up to handle the demand.
 
 ## **What does the final deliverable look like?**
 
