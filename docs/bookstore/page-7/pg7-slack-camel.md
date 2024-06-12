@@ -234,7 +234,11 @@ We are creating the trigger to process the events that have type moderated-comme
     kubectl apply -f node-server/config/badword-noti-trigger.yaml
     ```
 
-![image](images/image3.png)
+    You should see this message if the trigger is created successfully:
+      
+    ```
+    trigger.eventing.knative.dev/badword-noti-trigger created
+    ```
 
 ???+ success "Verify"
 
@@ -243,8 +247,6 @@ We are creating the trigger to process the events that have type moderated-comme
     ```
 
     The trigger `badword-noti-trigger` should have `READY` status as `True`.
-
-    ![image](images/image8.png)
 
     ```
     NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON

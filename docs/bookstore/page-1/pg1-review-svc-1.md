@@ -199,7 +199,6 @@ Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-eve
     kind: SinkBinding
     metadata:
       name: node-sinkbinding
-      namespace: default
     spec:
       subject:
         apiVersion: apps/v1
