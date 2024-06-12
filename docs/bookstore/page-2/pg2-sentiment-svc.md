@@ -303,7 +303,10 @@ func deploy -b=s2i -v
 
     When the deployment is complete, you will see the following output:
     
-    ![Image7](images/image7.png)
+    ```
+    Function deployed in namespace "default" and exposed at URL:
+    http://sentiment-analysis-app.default.svc.cluster.local
+    ```
  
 !!! tip  
     You can find the URL of the Knative Function (Knative Service) by running the following command:
@@ -314,7 +317,10 @@ func deploy -b=s2i -v
     
     You will see the URL in the output:
     
-    ![Image15](images/image15.png)
+    ```
+    NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
+    sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00001   sentiment-analysis-app-00001   True    
+    ```
 
 
 

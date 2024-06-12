@@ -151,9 +151,13 @@ func deploy -b=s2i -v
 ```
 
 ???+ success "Verify"
-    When the deployment is complete, you will see the following output:
-    ![Image 3](images/image3.png)
 
+    When the deployment is complete, you will see the following output:
+    
+    ```
+    Function deployed in namespace "default" and exposed at URL:
+    http://bad-word-filter.default.svc.cluster.local
+    ```
 ## **Verify**
 
 ![image](images/image7.png)

@@ -129,7 +129,11 @@ This workflow ensures a smooth transition from development to deployment within 
 func deploy -b=s2i -v
 ```
 ???+ success "Verify"
-    ![Image 3](images/image3.png)
+    Expect to see the following message:
+    ```
+    Function deployed in namespace "default" and exposed at URL:
+    http://bad-word-filter.default.svc.cluster.local
+    ```
 
 ## **Verify**
 
