@@ -8,7 +8,7 @@
 
 ## **What does the final deliverable look like?**
 
-- Running postgreSQL StatefulSet that contains the valid table and some sample data
+- Running a PostgreSQL StatefulSet that contains the valid table and some sample data
 
 ## **Concept Learning**
 ![image4](images/image4.png)
