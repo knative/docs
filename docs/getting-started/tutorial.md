@@ -8,7 +8,7 @@ Quickstart tutorial provides a simplified local installation to explore Knative 
 ### **New: Knative's End-to-End Sample Application Tutorial**
 Good starting point to learn Knative from scratch. Build an online bookstore application with Knative's powerful features.
 
-[Get Started :octicons-arrow-right-24:](../bookstore/page-0/page-0-intro.md){ .md-button }
+[Get Started :octicons-arrow-right-24:](../bookstore/page-0/welcome-knative-bookstore-tutorial.md){ .md-button }
 
 
 ![image1](../bookstore/page-0/images/1.png)
