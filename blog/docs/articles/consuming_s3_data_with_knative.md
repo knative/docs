@@ -5,7 +5,7 @@
 _In this blog post you will learn how to easily consume events from an AWS S3 bucker in a Knative Function with Knative Eventing and Functions. The blog post builds up on the first post of the series on Apache Camel K and Knative_
 
 
-One of the typical use-cases for a Serverless Function is to react to events delivered by an external source of events. A common example of this is to receive notifications from an AWS S3 bucket in a Serverless Function. But how to receive those events in an on premise environment, where the function does not run on AWS, but in a custom Kubernetes setup? 
+One of the typical use-cases for a Serverless Function is to react to events delivered by an external source of events. A common example of this is to receive notifications from an AWS S3 bucket in a Serverless Function. But how can you receive those events in an on premise environment, where instead of running on AWS the function runs on a custom Kubernetes setup? 
 
 ## Installation
 
