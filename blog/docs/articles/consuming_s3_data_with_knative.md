@@ -9,7 +9,7 @@ One of the typical use-cases for a Serverless Function is to react to events del
 
 ## Installation
 
-The [Installation](https://camel.apache.org/camel-k/next/installation/installation.html) from Apache Camel K offers a few choices, such as CLI, Kustomize, OLM or Helm. Example of Helm installation:
+The [Installation](https://camel.apache.org/camel-k/next/installation/installation.html){:target="_blank"} from Apache Camel K offers a few choices, such as CLI, Kustomize, OLM or Helm. For example, the Helm installation is:
 
 ```
 $ helm repo add camel-k https://apache.github.io/camel-k/charts/
