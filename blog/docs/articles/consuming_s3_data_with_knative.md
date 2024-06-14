@@ -34,7 +34,7 @@ Now event producers can send events to it and event consumers can receive events
 
 ## Using Kamelets as Event Sources for AWS S3
 
-In order to bind a Kamelet to a Knative component, like the above broker, we are using the `Pipe` API. A Pipe allows to declaratively move data from a system described by a Kamelet _towards_ a Knative destination **or** _from_ a Knative destination to another (external) system described by a Kamelet.
+In order to bind a Kamelet to a Knative component, like the broker we created above, we are using the `Pipe` API. A Pipe allows to declaratively move data from a system described by a Kamelet _towards_ a Knative destination **or** _from_ a Knative destination to another (external) system described by a Kamelet.
 
 Below is a `Pipe` that uses a ready-to-use `Kamelet`, a `aws-s3-source`
 
