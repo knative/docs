@@ -18,7 +18,7 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ![image](images/image16.png)
 
-Install the Apache Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://www.google.com/url?q=https://camel.apache.org/camel-k/2.2.x/cli/cli.html&sa=D&source=editors&ust=1717684414711115&usg=AOvVaw2z9c0xz6C8MOQMvTaCPoyi){:target="_blank"}.
+Install the Apache Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html){:target="_blank"}.
 
 ???+ bug "Troubleshooting"
  
@@ -67,7 +67,7 @@ Follow the instructions [here](../create-slack-workspace/README.md){:target="_bl
 
     Save this URL as you will need it later.
 
-### **Prerequisite 4: Create a Secret that stores your slack credentials**
+### **Prerequisite 4: Create a Secret that stores your Slack Credentials**
 
 ![image](images/image22.png)
 
@@ -104,7 +104,7 @@ We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/cam
 
 ![image](images/image10.png)
 
-From the sample YAML below, you can see we are telling the pipe to filter on the events that have type “moderated-comment”. Pipe will create a trigger under the hood and route your event to slack-sink.
+From the sample YAML below, you can see we are telling the pipe to filter on the events that have type "moderated-comment". Pipe will create a Trigger under the hood and route your event to slack-sink.
 
 ```yaml
 apiVersion: camel.apache.org/v1
@@ -133,7 +133,7 @@ In the current implementation using Apache Camel K, we **can only filter based o
 
 ![image](images/image11.png)
 
-Here, we will be connecting `book-review-broker` with a new broker called `badword-broker`. And we will be creating a trigger that helps us perform the filtering with the extension `badwordfilter: good`.
+Here, we will be connecting `book-review-broker` with a new Broker called `badword-broker`. And we will be creating a Trigger that helps us perform the filtering with the extension `badwordfilter: good`.
 
 - 1: Append the following content to your `node-server/config/200-broker.yaml`:
 
@@ -153,7 +153,7 @@ Here, we will be connecting `book-review-broker` with a new broker called `badwo
     kubectl apply -f 200-broker.yaml
     ```
 
-You should see this message if the broker is created successfully:
+You should see this message if the Broker is created successfully:
 
 ```
 broker.eventing.knative.dev/badword-broker created
@@ -165,7 +165,7 @@ Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:
 kn broker create badword-broker
 ```
 
-You should see this message if the broker is created successfully:
+You should see this message if the Broker is created successfully:
 
 ```
 Broker 'badword-broker' successfully created in namespace 'default'.
@@ -173,7 +173,7 @@ Broker 'badword-broker' successfully created in namespace 'default'.
 
 ???+ success "Verify"
 
-    Run the following command to list the brokers:
+    Run the following command to list the Brokers:
     ```sh
     kubectl get brokers
     ```
@@ -195,11 +195,11 @@ Broker 'badword-broker' successfully created in namespace 'default'.
     kubectl describe broker badword-broker
     ```
 
-### **Step 2: Create trigger that filters for bad word comments to badword-broker**
+### **Step 2: Create Trigger that filters for bad word comments to badword-broker**
 
 ![image](images/image12.png)
 
-We are creating the trigger to process the events that have type moderated-comment, and the extension `badwordfilter: bad` and route them to badword-broker.
+We are creating the Trigger to process the events that have type moderated-comment, and the extension `badwordfilter: bad` and route them to badword-broker.
 
 **Create a Trigger:**
 
@@ -234,7 +234,7 @@ We are creating the trigger to process the events that have type moderated-comme
     kubectl apply -f node-server/config/badword-noti-trigger.yaml
     ```
 
-    You should see this message if the trigger is created successfully:
+    You should see this message if the Trigger is created successfully:
       
     ```
     trigger.eventing.knative.dev/badword-noti-trigger created
@@ -246,7 +246,7 @@ We are creating the trigger to process the events that have type moderated-comme
     kubectl get triggers
     ```
 
-    The trigger `badword-noti-trigger` should have `READY` status as `True`.
+    The Trigger `badword-noti-trigger` should have `READY` status as `True`.
 
     ```
     NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
@@ -261,7 +261,7 @@ We are creating the trigger to process the events that have type moderated-comme
 
 This setup automatically sends notifications to Slack whenever a new comment that contains "bad word" occur, streamlining the flow of information.
 
-- 1: Make sure you have your k8s secret that contains your slack webhook Url ready. If not, refer to the [Prerequisite 3](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url) section.
+- 1: Make sure you have your k8s secret that contains your Slack webhook Url ready. If not, refer to the [Prerequisite 3](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url) section.
 
 - 2: Prepare the YAML configuration for the Slack sink, which will forward events to your Slack channel:
 

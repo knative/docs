@@ -11,7 +11,7 @@
 ![image](images/image1.png)
 
 - Create a Knative Sequence with bad word filter service as step 1 and sentiment analysis service as step 2
-- The final result is sent back to Broker as reply of the sequence
+- The final result is sent back to Broker as reply of the Sequence
 
 ## **Implementation**
 
@@ -49,7 +49,7 @@ spec:
       name: event-display
 ```
 
-### **Step 1: Create the sequence**
+### **Step 1: Create the Sequence**
 
 ![image](images/image9.png)
 
@@ -60,26 +60,26 @@ spec:
     metadata:
       name: sequence
     spec:
-      channelTemplate: # Under the hood, the Sequence will create a Channel for each step in the sequence
+      channelTemplate: # Under the hood, the Sequence will create a Channel for each step in the Sequence
         apiVersion: messaging.knative.dev/v1
         kind: InMemoryChannel
       steps:
-        - ref: # This is the first step of the sequence, it will send the event to the bad-word-filter service
+        - ref: # This is the first step of the Sequence, it will send the event to the bad-word-filter service
             apiVersion: serving.knative.dev/v1
             kind: Service
             name: bad-word-filter
-        - ref: # This is the second step of the sequence, it will send the event to the sentiment-analysis-app service
+        - ref: # This is the second step of the Sequence, it will send the event to the sentiment-analysis-app service
             apiVersion: serving.knative.dev/v1
             kind: Service
             name: sentiment-analysis-app
-      reply: # This is the last step of the sequence, it will send the event back to the Broker as reply
+      reply: # This is the last step of the Sequence, it will send the event back to the Broker as reply
         ref:
           kind: Broker
           apiVersion: eventing.knative.dev/v1
           name: bookstore-broker
     ```
 
-Create the sequence yaml file and apply it to your cluster. 
+Create the Sequence yaml file and apply it to your cluster. 
 
 ```
 kubectl apply -f sequence/config/100-create-sequence.yaml
@@ -94,7 +94,7 @@ sequence.flows.knative.dev/sequence created
 
 ???+ success "Verify"
 
-    You can verify the status of the sequence very easily
+    You can verify the status of the Sequence very easily
 
     ```bash
     kubectl get sequences
@@ -106,7 +106,7 @@ sequence.flows.knative.dev/sequence created
     sequence   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   159m   True    
     ```
 
-### **Step 2: Create the trigger that pass the event to Sequence**
+### **Step 2: Create the Trigger that pass the event to Sequence**
 
 ![image](images/image7.png)
 
@@ -132,7 +132,7 @@ As the Sequence is ready to accept the request now, we need to tell the Broker t
           name: sequence
     ```
 
-Create the trigger yaml file and apply it to your cluster.
+Create the Trigger yaml file and apply it to your cluster.
 
 ```
 kubectl apply -f sequence/config/200-create-trigger.yaml
@@ -146,7 +146,7 @@ trigger.eventing.knative.dev/sequence-trigger created
 
 
 ???+ success "Verify"
-    You can verify the status of the trigger very easily
+    You can verify the status of the Trigger very easily
 
     ```bash
     kubectl get triggers
@@ -160,7 +160,7 @@ trigger.eventing.knative.dev/sequence-trigger created
     log-trigger        bookstore-broker    http://event-display.default.svc.cluster.local                       164m   True    
     ```
 
-    And until this point, **your cluster should have the following triggers** that are created by you.
+    And until this point, **your cluster should have the following Triggers** that are created by you.
     ![image](images/image12.png)
 
 
@@ -207,7 +207,7 @@ Type something in the comment box in the UI and click the submit button. All the
 
 ![image](images/image4.png)
 
-In this tutorial, you learned how to create a sequence to build a ML pipeline.
+In this tutorial, you learned how to create a Sequence to build a ML pipeline.
 
 Next, we'll be learning how to spin up book store’s database services, while learning what will be the best case to use Knative Serving.
 

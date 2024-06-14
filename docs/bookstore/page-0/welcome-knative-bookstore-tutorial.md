@@ -63,7 +63,7 @@ A Node.js web server that will perform the event forwarding, database operation,
 
 ### Notification Service
 
-An Apache Camel-K pipe that connects our event-driven architecture with a third-party webhook: Slack. It receives the CloudEvent and sends it as a message to a Slack Workspace.
+An Apache Camel K pipe that connects our event-driven architecture with a third-party webhook: Slack. It receives the CloudEvent and sends it as a message to a Slack Workspace.
 
 ### ML Models Service
 
@@ -75,7 +75,7 @@ It acts as the central brain of our event-driven architecture. It connects all t
 
 ### Bad Word Broker
 
-It acts as the bridge between the book store broker and the slack sink, so we can send notification to your slack when a comment containing “bad word” is submitted.
+It acts as the bridge between the book store Broker and the Slack Sink, so we can send notification to your Slack when a comment containing "bad word" is submitted.
 
 ## **Tutorial Page Structure**
 
@@ -94,9 +94,9 @@ We will be building the sample app in this order:
 
 5. [**Database Deployment**](../page-5//deploy-database-service.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using a plain Kubernetes deployment.
 
-6. [**Advanced event filtering**](../page-6/advanced-event-filtering.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a trigger) and storing them into the database. This includes learning about Triggers and Filters.
+6. [**Advanced event filtering**](../page-6/advanced-event-filtering.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a Trigger) and storing them into the database. This includes learning about Triggers and Filters.
 
-7. [**Connect with External Services/API**](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel-K integrations.
+7. [**Connect with External Services/API**](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel K integrations.
 
 8. [**Extra Challenges**](../extra-challenge/README.md){:target="_blank"}: Additional challenges to test your understanding of the concepts learned in the tutorial.
 

@@ -12,7 +12,7 @@ Now it's time to test your mastery of the skills you've learned with Kuack. We'v
 
 **Description**
 
-Add Telegram notifications for new comments using Apache Camel.
+Add Telegram notifications for new comments using Apache Camel K.
 
 **Objective**
 
@@ -21,13 +21,13 @@ Send Telegram notifications for new comments.
 **Steps**
 
 1. Create a new event type or filter attribute for Telegram notifications.
-2. Set up a trigger to route these events to a Camel-K integration service.
-3. Use Apache Camel to send messages to a Telegram chat by setting up the telegram-sink.
+2. Set up a Trigger to route these events to a Camel K integration service.
+3. Use Apache Camel K to send messages to a Telegram chat by setting up the telegram-sink.
 
 **What You Will Learn**
 
-- Integrating with external notification services using Apache Camel.
-- Using triggers to route specific events.
+- Integrating with external notification services using Apache Camel K.
+- Using Triggers to route specific events.
 - Working with the Telegram API.
 
 **Estimated Time**
@@ -49,13 +49,13 @@ Allow users to delete the selected comment.
 **Steps**
 
 1. Create a new event type for comment deletion.
-2. Set up a trigger to listen for deletion events.
+2. Set up a Trigger to listen for deletion events.
 3. Implement a function in the node-server to handle the deletion and update the database.
 
-**What You Will Learn:**
+**What You will Learn:**
 
 - Creating and handling new event types.
-- Setting up triggers for specific events.
+- Setting up Triggers for specific events.
 - Performing database operations based on events.
 
 **Estimated Time**
@@ -77,7 +77,7 @@ Transform event data and send it to the appropriate sink.
 **Steps**
 
 1. Create a new function in node-server to consume and transform events.
-2. Set up a trigger to route events (Event X - unformatted) to this transformation service.
+2. Set up a Trigger to route events (Event X - unformatted) to this transformation service.
 3. Implement the transformation logic to convert Event X into Event Y - formatted.
 4. Configure the service to send the transformed event (Event Y) to the Slack sink.
 5. Ensure the function replies with the transformed event.
@@ -85,9 +85,9 @@ Transform event data and send it to the appropriate sink.
 **What You Will Learn**
 
 - Creating an event consumer app.
-- Adding a new step in a sequence to process events.
+- Adding a new step in a Sequence to process events.
 - Transforming events within a service and routing the transformed events to a sink.
-- Using triggers and functions with replies in an event-driven architecture.
+- Using Triggers and functions with replies in an event-driven architecture.
 
 **Estimated Time**
 
@@ -99,7 +99,7 @@ Transform event data and send it to the appropriate sink.
 
 **Description**
 
-Enable users to submit new comments through a Telegram bot using Apache Camel.
+Enable users to submit new comments through a Telegram bot using Apache Camel K.
 
 **Objective**
 
@@ -108,15 +108,15 @@ Allow users to send comments via Telegram.
 **Steps**
 
 1. Create a Telegram bot and obtain the bot token.
-2. Set up an [Apache Camel Telegram source](https://camel.apache.org/camel-kamelets/4.4.x/telegram-source.html){:target="_blank"} to listen for messages from the Telegram bot.
+2. Set up an [Apache Camel K Telegram source](https://camel.apache.org/camel-kamelets/4.4.x/telegram-source.html){:target="_blank"} to listen for messages from the Telegram bot.
 3. Create a new event type for comments received via Telegram.
-4. Set up a trigger to process these events and route them to the comment handling service.
+4. Set up a Trigger to process these events and route them to the comment handling service.
 5. Implement a function in the node-server to handle the new comments and update the database.
 
 **What You Will Learn**
 
 - Creating and configuring a Telegram bot.
-- Using Apache Camel to integrate Telegram as an event source with your application.
+- Using Apache Camel K to integrate Telegram as an event source with your application.
 - Handling new event types and processing user input from external sources.
 
 **Estimated Time**

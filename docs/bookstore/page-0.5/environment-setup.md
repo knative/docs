@@ -282,7 +282,7 @@ Forwarding from [::1]:8080 > 8000
 
     Visit [http://localhost:8080](http://localhost:8080){:target="_blank"} in your browser. The Node.js service should be up and running.
 
-    And in your front end page, you should see the status turns green and say “Connected to node server”.
+    And in your front end page, you should see the status turns green and say "Connected to node server".
 
     ![Image](images/image18.png)
 

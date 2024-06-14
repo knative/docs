@@ -37,7 +37,7 @@ The book review service is our Node.js API server, playing a crucial role in our
 Before we dive into the code, let's clarify two important concepts:
 
 - **Broker**: Acts as the central point in the event-driven architecture, routing events to the correct destinations.
-- **SinkBinding**: This Knative Eventing component automatically injects the broker's address into the environment variable `K_SINK`, ensuring that the Node.js server always has the correct address without manual updates.
+- **SinkBinding**: This Knative Eventing component automatically injects the Broker's address into the environment variable `K_SINK`, ensuring that the Node.js server always has the correct address without manual updates.
 
 You will get a deeper understanding along the way.
 
@@ -76,7 +76,7 @@ app.post('/add', async (req, res) => {
 const receivedEvent = HTTP.toEvent({headers: req.headers, body: req.body});
 ```
 
-**Determining Broker Address**: The broker's address is dynamically assigned in the cluster. The Node.js server retrieves this address from the environment variable `K_SINK`:
+**Determining Broker Address**: The Broker's address is dynamically assigned in the cluster. The Node.js server retrieves this address from the environment variable `K_SINK`:
 
 ```javascript
 const brokerURI = process.env.K_SINK;
@@ -84,7 +84,7 @@ const brokerURI = process.env.K_SINK;
 
 You may wonder who told the environment variable about the address? That’s Knative SinkBinding.
 
-**Event Filtering**: The service checks the event type. If it's a `new-review-comment`, it forwards the event to the broker:
+**Event Filtering**: The service checks the event type. If it's a `new-review-comment`, it forwards the event to the Broker:
 
 ```javascript
 if (receivedEvent.type === 'new-review-comment') {
@@ -92,7 +92,7 @@ if (receivedEvent.type === 'new-review-comment') {
 }
 ```
 
-**Forwarding Events Logic**: The event is forwarded to the broker with the appropriate CloudEvent headers:
+**Forwarding Events Logic**: The event is forwarded to the Broker with the appropriate CloudEvent headers:
 
 ```javascript
 const response = await fetch(brokerURI, {
@@ -146,7 +146,7 @@ You will see the following output:
 broker.eventing.knative.dev/bookstore-broker created
 ```
 
-Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:target="_blank"} to create the broker:
+Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:target="_blank"} to create the Broker:
 
 ```bash
 kn broker create bookstore-broker
@@ -158,13 +158,13 @@ Broker 'bookstore-broker' successfully created in namespace 'default'.
 ```
 
 ???+ success "Verify"
-    Running the following command to list the brokers:
+    Running the following command to list the Brokers:
     ```bash
     kubectl get brokers
     ```
 
     
-    You should see the broker `bookstore-broker` with `READY` status as `True`.
+    You should see the Broker `bookstore-broker` with `READY` status as `True`.
 
     ```
     NAME               URL                                                                                 AGE     READY   REASON
@@ -207,7 +207,7 @@ Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-eve
         selector:
           matchLabels:
             app: node-server
-      sink: # In this case, the sink is our broker, which is the eventing service that will receive the events
+      sink: # In this case, the sink is our Broker, which is the eventing service that will receive the events
         ref:
           apiVersion: eventing.knative.dev/v1
           kind: Broker
@@ -323,7 +323,7 @@ service/event-display created
 
 ![Image](images/image9.png)
 
-A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications%2C%20which%20enables%20creating%2C%20parsing%2C%20sending%2C%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}. It is the connector between the broker and the event destination.
+A Trigger is able to forward the event to the correct destination based on the [CloudEvent's attributes](https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications%2C%20which%20enables%20creating%2C%20parsing%2C%20sending%2C%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}. It is the connector between the Broker and the event destination.
 
 A Filter in the Trigger will **filter the events based on the filter condition**. You will specify your filter condition in the Trigger’s YAML file. **If no filter is specified, the Trigger will forward all the events that the Broker received.**
 
@@ -337,7 +337,7 @@ Learn more about Broker & Trigger [here](https://knative.dev/docs/eventing/broke
 
 ![Image](images/image20.png)
 
-Here we are creating a trigger that will send all the events to event-display.
+Here we are creating a Trigger that will send all the events to event-display.
 
 ![Image](images/image4.png)
 
@@ -371,11 +371,11 @@ trigger.eventing.knative.dev/log-trigger created
 ```
 
 ???+ success "Verify"
-    Running the following command to list the triggers:
+    Running the following command to list the Triggers:
     ```bash
     kubectl get triggers
     ```
-    The trigger `log-trigger` should have `READY` status as `True`.
+    The Trigger `log-trigger` should have `READY` status as `True`.
 
     
     ```

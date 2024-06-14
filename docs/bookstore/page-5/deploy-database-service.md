@@ -21,7 +21,7 @@
     - **Benefits:** Simplifies scaling and failover because any instance can handle any request without requiring session persistence.
 
 ???+ example "Event-Driven Workloads"
-    - **Definition:** Event-driven architectures respond to events or triggers, such as HTTP requests, messages in a queue, or changes in a database.
+    - **Definition:** Event-driven architectures respond to events or Triggers, such as HTTP requests, messages in a queue, or changes in a database.
     - **Use Case:** Use Knative Services to deploy functions that react to events, such as processing incoming data, triggering workflows, or integrating with third-party APIs.
     - **Benefits:** Efficient resource utilization, as services can scale down to zero when not handling events, reducing costs and improving performance.
 
@@ -53,7 +53,7 @@ kubectl apply -f db-service
     job.batch/postgresql-job created
     ```
 
-    Wait a moment until all the pods become available and the database migration job is completed. If you see some job pods are failing and **having errors, don’t worry**, please wait until at least one job becomes “**Completed**”.
+    Wait a moment until all the pods become available and the database migration job is completed. If you see some job pods are failing and **having errors, don’t worry**, please wait until at least one job becomes "**Completed**".
 
     ```
     NAME                                  READY   STATUS    RESTARTS   AGE
@@ -75,7 +75,7 @@ Open the UI page at [http://localhost:3000](http://localhost:3000){:target="_bla
 ![image2](images/image2.png)
 
 ???+ bug "Troubleshoot"
-    If you see “No comments available”, that means your database is not initialized yet. Check the health of the database service pods and figure out what happened.
+    If you see "No comments available", that means your database is not initialized yet. Check the health of the database service pods and figure out what happened.
 
 ## **Next Step**
 
