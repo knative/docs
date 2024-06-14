@@ -2,8 +2,7 @@
 
 **Author: Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-_In this blog post you will learn how to easily consume events from an AWS S3 bucker in a Knative Function with Knative Eventing and Functions. The blog post builds up on the first post of the series on Apache Camel K and Knative_
-
+_In this blog post you will learn how to easily consume events from an AWS S3 bucker in a Knative Function with Knative Eventing and Functions. The blog post builds up on the [first post](/blog/articles/knative-meets-apache-came){:target="_blank"} of the series on Apache Camel K and Knative_
 
 One of the typical use-cases for a Serverless Function is to react to events delivered by an external source of events. A common example of this is to receive notifications from an AWS S3 bucket in a Serverless Function. But how can you receive those events in an on premise environment, where instead of running on AWS the function runs on a custom Kubernetes setup? 
 
@@ -84,7 +83,7 @@ The `aws-s3-source` Kamelet is referenced as the `source` of the `Pipe` and send
 
 ## Creating a Knative Function as a consumer
 
-In order to consume messages from the Knative broker, using Knative Function, we need will create a simple Golang function with the following command:
+In order to consume messages from the Knative broker, using Knative Function, we need will create a simple Golang function. Since the payload is sent as CloudEvents to the function we use the buildin `cloudevents` template, by executing the the following command:
 
 ```
 $ func create -l go -t cloudevents s3-logger
