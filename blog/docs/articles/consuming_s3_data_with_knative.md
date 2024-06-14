@@ -172,4 +172,4 @@ CloudEvent Source attribute:  aws.s3.bucket.<bucketname>
 
 ## Conclusion
 
-With Knative Eventing, Functions and Apache Camel K it is possible to trigger notifications from 3rd party cloud services, such as AWS S3 to your own on-premise Kubernetes cluster. 
+With Knative Eventing, Functions and Apache Camel K it is possible to trigger notifications from 3rd party cloud services, such as AWS S3, to functions running on your own on-premise Kubernetes cluster. 
