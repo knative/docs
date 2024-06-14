@@ -372,16 +372,28 @@ h2.secondary-headline, h3.trusted-by {
   max-width: 90%;
   margin: auto;
   transition: transform 0.5s ease-in-out;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
+.case-studies-container .cases-table::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.case-studies-container .col {
+  width: 400px; 
+  margin-right: 20px;
+  flex: 0 0 auto;
+}
 .case-studies-container .card {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   background-color: white;
-  margin: 8px;
-}
+/*   margin: 8px; */
+} 
 
 .case-studies-container .logo {
   display: flex;
@@ -425,8 +437,8 @@ h2.secondary-headline, h3.trusted-by {
 
 .case-studies-container .prev,
 .case-studies-container .next {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: transparent;
+  color: var(--md-primary-fg-color--dark);
   border: none;
   cursor: pointer;
   padding: 10px;
