@@ -109,12 +109,16 @@ read -p '🛑 Can you see "Hello World!"? If yes, press ENTER to continue...'
 
 # Deploy the ML services
 echo ""
-echo "📦 Deploying the ML services..."
+echo "📦 Deploying the ML service: bad-word-filter..."
 cd ../ML-bad-word-filter
 func deploy -b=s2i -v
+echo "✅ ML service bad-word-filter deployed."
+
+echo ""
+echo "📦 Deploying the ML services: sentiment-analysis..."
 cd ../ML-sentiment-analysis
 func deploy -b=s2i -v
-echo "✅ ML services deployed."
+echo "✅ ML service sentiment-analysis deployed."
 
 # Install the database
 echo ""
