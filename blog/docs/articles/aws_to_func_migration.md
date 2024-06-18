@@ -100,4 +100,4 @@ $ curl -v -X POST \
 
 ## Conclusion
 
-With Knative Functions it is pretty straightforward to build vendor-neutral function for consuming event notifications from 3rd party cloud services, such as AWS S3. Deploying those functions as Linux containers to your own on-premise Kubernetes cluster is supported by the Knative CLI as well as testing the function locally.
+With Knative Functions it is pretty straightforward to build cloud vendor-neutral function for consuming event notifications from 3rd party cloud services, such as AWS S3. Deploying those functions as Linux containers to your own on-premise Kubernetes cluster is supported by the Knative CLI as well as testing the function locally.
