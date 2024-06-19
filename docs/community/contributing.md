@@ -65,6 +65,10 @@ Share your samples with the community.
 - [Link existing code samples](../samples/README.md#external-code-samples):
 Link to your Knative samples that live on another site.
 
+## Contributor Roles
+
+To learn more about the roles individuals can assume within the Knative community such as member, approver, or working group lead, see the [community roles documentation](https://github.com/knative/community/blob/main/ROLES.md).
+
 ## Learn and connect
 
 Using or want to use Knative? Have any questions? Find out more here:
