@@ -391,7 +391,7 @@ trigger.eventing.knative.dev/log-trigger created
 Open the logs of the event-display with the following command:
 
 ```bash
-kubectl logs event-display-XXXXX -f
+kubectl logs -l=app=event-display -f
 ```
 
 ???+ success "Verify"
