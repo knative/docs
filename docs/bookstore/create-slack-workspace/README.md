@@ -9,7 +9,7 @@ To create a Slack workspace, follow these steps:
 3. Check your email for a confirmation code.
 4. Enter the code on the Slack website.
 5. Click "Create a Workspace" and follow the prompts.
-6. For detailed instructions for androids and , refer to [Create a workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace){:target="_blank"}.
+6. For detailed instructions how to create a workspace via the Desktop App, Android or iOS, refer to [Create a Slack workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace){:target="_blank"}.
 
 ## **Adding Channels to Your Workspace**
 
@@ -35,11 +35,11 @@ To set up a webhook for sending notifications to your Slack workspace:
 
 ![Image](images/image2.png)
 
-- 5: To test if the webhook works as needed, you can try sending an API request to this link to see if the message goes through. I used Postman to test this. Remember that this is an application/json file.
+- 5: To test if the webhook works as needed, you can try sending an API request to this link to see if the message goes through. I used Postman to test this. Remember that this is an `application/json` file.
 
 ![Image](images/image4.png)
 
-- 6: Afterwards, the text channel should have a new message
+- 6: Afterwards, the text channel should have a new message.
 
 ![Image](images/image1.png)
 

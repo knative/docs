@@ -53,7 +53,7 @@ $ kn broker create book-review-broker
 You will see this message if the Broker is created successfully:
 
 ```
-Broker ‘book-review-broker’ successfully created in namespace ‘default’.
+Broker 'book-review-broker' successfully created in namespace 'default'.
 ```
 **Method 2**: You can create a new YAML file to create the Broker:
 

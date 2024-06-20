@@ -67,7 +67,7 @@ An Apache Camel K pipe that connects our event-driven architecture with a third-
 
 ### ML Models Service
 
-There are 2 Machine learning workflows that can conduct sentiment analysis on user’s review comment and hateful word sanity check. You will be using a [Knative Sequence](https://knative.dev/docs/eventing/flows/sequence/){:target="_blank"} to make sure they are executed in order.
+There are 2 Machine learning workflows that can conduct sentiment analysis on user's review comment and hateful word sanity check. You will be using a [Knative Sequence](https://knative.dev/docs/eventing/flows/sequence/){:target="_blank"} to make sure they are executed in order.
 
 ### Book Store Broker
 
@@ -134,6 +134,6 @@ Join the supportive Knative community via the Cloud Native Computing Foundation 
 
 ![Environment Setup](images/13.png)
 
-Let’s set up the environment first.
+Let's set up the environment first.
 
 [Go to Environment Setup :fontawesome-solid-paper-plane:](../page-0.5/environment-setup.md){ .md-button .md-button--primary }

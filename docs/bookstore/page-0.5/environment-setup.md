@@ -34,14 +34,14 @@ The code for the sample app is in `docs/code-samples/eventing/bookstore-sample-a
 
 Under `bookstore-sample-app` folder, there are 2 folders:
 
-* **/solution**: this folder contains all the yaml files, and the code you needed. Check it when you get stuck.
+* **/solution**: this folder contains all the yaml files, and the code you needed. Check it when you got stuck.
 
-* **/start**: this folder contains the necessary files for you to get started. Write all the configuration files yourself following the tutorial!
+* **/start**: this folder contains the necessary files for you to get started. Save there all the configuration files yourself following the tutorial!
 
 ![Image](images/image16.png)
 
 !!! tip
-    Kuack suggests you to start from **/start**, write all the configuration files as you go over the tutorial, and check solutions when you get stuck.
+    Kuack suggests you to start from **/start**, write all the configuration files as you go over the tutorial, and check solutions when you got stuck.
 
 ![Image](images/image1.png)
 
@@ -190,7 +190,7 @@ Forwarding from [::1]:3000 -> 3000
 ```
 
 
-**Don’t close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
+**Don't close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
 
 ???+ success "Verify"
 
@@ -275,7 +275,7 @@ Forwarding from 127.0.0.1:8080 > 8000
 Forwarding from [::1]:8080 > 8000
 ```
 
-**Don’t close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
+**Don't close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
 
 
 ???+ success "Verify"

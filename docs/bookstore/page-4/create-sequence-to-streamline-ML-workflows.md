@@ -209,6 +209,6 @@ Type something in the comment box in the UI and click the submit button. All the
 
 In this tutorial, you learned how to create a Sequence to build a ML pipeline.
 
-Next, we'll be learning how to spin up book store’s database services, while learning what will be the best case to use Knative Serving.
+Next, we'll be learning how to spin up book store's database services, while learning what will be the best case to use Knative Serving.
 
 [Go to Deploy Database Service :fontawesome-solid-paper-plane:](../page-5/deploy-database-service.md){ .md-button .md-button--primary }

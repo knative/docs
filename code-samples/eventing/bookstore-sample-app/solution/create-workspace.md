@@ -9,7 +9,7 @@ To create a Slack workspace, follow these steps:
 - Check your email for a confirmation code.
 - Enter the code on the Slack website.
 - Click "Create a Workspace" and follow the prompts.
-- For detailed instructions for androids and , refer to [Create a workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace){:target="_blank"}.
+- For detailed instructions how to create a workspace via the Desktop App, on Android or iOS, refer to [Create a Slack workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace){:target="_blank"}.
 
 ## Adding Channels to Your Workspace
 

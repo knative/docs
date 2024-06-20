@@ -13,7 +13,7 @@
 ## **Concept Learning**
 ![image4](images/image4.png)
 
-**Knative Services** are a powerful feature within the Knative ecosystem, designed to handle a wide range of use cases, especially in modern cloud-native applications, it can be controlled by Knative Serving, and achieve scale to 0. Here’s an expanded explanation of when and why you should consider using Knative Services:
+**Knative Services** are a powerful feature within the Knative ecosystem, designed to handle a wide range of use cases, especially in modern cloud-native applications, it can be controlled by Knative Serving, and achieve scale to 0. Here's an expanded explanation of when and why you should consider using Knative Services:
 
 ???+ danger "Stateless Workloads"
     - **Definition:** Stateless applications do not store any data locally between requests. Each request is independent and does not rely on any previous interaction.
@@ -53,7 +53,7 @@ kubectl apply -f db-service
     job.batch/postgresql-job created
     ```
 
-    Wait a moment until all the pods become available and the database migration job is completed. If you see some job pods are failing and **having errors, don’t worry**, please wait until at least one job becomes "**Completed**".
+    Wait a moment until all the pods become available and the database migration job is completed. If you see some job pods are failing and **having errors, don't worry**, please wait until at least one job becomes "**Completed**".
 
     ```
     NAME                                  READY   STATUS    RESTARTS   AGE

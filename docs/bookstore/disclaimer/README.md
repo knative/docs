@@ -6,7 +6,7 @@ Hello dear Knative Learners,
 
 Before you begin this tutorial, **please take note of the following disclaimer**. In the spirit of open source, we strive for transparency. This tutorial incorporates many other open source projects, and we are grateful to all the incredible contributors. Your amazing work has made this tutorial possible.
 
-If you’re interested in getting started with open source, check out our guide: Get Started with Open Source at Knative.
+If you're interested in getting started with open source, check out our guide: Get Started with Open Source at Knative.
 
 Thank you, and happy learning!
 

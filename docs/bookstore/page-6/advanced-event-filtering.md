@@ -12,7 +12,7 @@
 ![Image](images/image6.png)
 
 - The "analyzed reviews" will be sent back to Broker (using a Trigger) and they will be stored into a database.
-- The comments that don’t contain bad words will show up in the UI, and the sentiment will be displayed as emoji.
+- The comments that don't contain bad words will show up in the UI, and the sentiment will be displayed as emoji.
 
 ## **Implementation**
 
