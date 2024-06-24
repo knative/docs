@@ -64,7 +64,9 @@ func Handle(ctx context.Context, ce event.Event) (*event.Event, error) {
 }
 ```
 
-You will notice that this complete program contains only one function which is focused on the processing of the incoming events. You will notice that we do not need to write a `main` function to register our event handler with some middleware. Knative Functions does this all for you, behind the scenes. Looking closer at the signature of the `Handle` function you also notice the standard `Context` API and an `Event` type. This is no vendor specific import. It references to the Golang SDK for [CNCF CloudEvents](https://www.cncf.io/projects/cloudevents/){:target="_blank"}, which is a specification for describing event data in a common way.
+Note that this complete program contains only one function, which is focused on the processing of the incoming events.  There is no need for `main`, or to register our event handler with middleware.  Therefore, there is also no need for imports. Knative Functions handles creating the process boundary and applying middleware automatically.
+
+Looking closer at the signature of the `Handle` function, we see the standard `Context` API and an `Event` type. This is no vendor specific import. It references the Golang SDK for [CNCF CloudEvents](https://www.cncf.io/projects/cloudevents/){:target="_blank"}, which is a specification for describing event data in a common way.
 
 ## Knative CLI for smooth development and deployment
 
