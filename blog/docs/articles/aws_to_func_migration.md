@@ -38,7 +38,7 @@ func main() {
 You see two functions here: `handler` for the custom application logic and `main` which calls some AWS Lambda APIs which register the custom handler. The signature of `handler` references the standard `Context` and an `S3Event` from the AWS Lambda SDK. In order to be able to run the function one needs two vendor-specific dependencies and a `main` function.  These are not directly related to the actual program, but are necessary technical plumbing in order start the custom `handler` and register it to receive events.
 
 
-## A much simpler Knative Function for AWS S3
+## A Simpler Knative Function for AWS S3
 
 In the [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we already discussed how to consume notifications from AWS Lambda in an on-premise cluster using Knative Eventing, but lets take a look at the code again:
 
