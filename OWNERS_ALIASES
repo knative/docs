@@ -14,10 +14,8 @@ aliases:
   - vyasgun
   docs-reviewers:
   - nainaz
-  - pmbanugo
   - retocode
   - skonto
-  - snneji
   docs-writers:
   - csantanapr
   - retocode
@@ -35,7 +33,6 @@ aliases:
   - creydr
   - lionelvillard
   - matzew
-  - odacremolbap
   - pierDipi
   func-reviewers:
   - jrangelramos
@@ -63,7 +60,6 @@ aliases:
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
-  - krsna-m
   - nainaz
   - psschwei
   - salaboy
@@ -98,7 +94,6 @@ aliases:
   - upodroid
   productivity-writers:
   - cardil
-  - krsna-m
   - upodroid
   security-wg-leads:
   - davidhadas
@@ -132,7 +127,6 @@ aliases:
   - davidhadas
   - dprotaso
   - dsimansk
-  - krsna-m
   - psschwei
   ux-wg-leads:
   - cali0707

@@ -84,10 +84,7 @@ section.home-container {
 
 body {
   color: white;
-  background: var(--md-primary-fg-color);
-  background: #5063d0;
-  background: #0071c7;
-  background: var(--home-color);
+  background: var(--md-primary-fg-color--dark);
 }
 
 .home-container .md-button,
@@ -101,14 +98,14 @@ body {
 
 .home-container .md-button,
 .need-to-know-more-container .md-button {
-  background-color: #52b3dd;
-  border-color: #52b3dd;
+  background-color: var(--md-primary-fg-color--light);
+  border-color: var(--md-primary-fg-color--light);
 }
 
 .home-container .md-button--primary {
   margin-top: 0.5rem;
-  background-color: #024c93;
-  border-color: #024c93;
+  background-color: var(--md-primary-fg-color--dark);
+  border-color: var(--md-primary-fg-color--dark);
 }
 
 h2.secondary-headline, h3.trusted-by {
@@ -117,7 +114,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .home-container h1 {
-  color: #024c93;
+  color: var(--md-primary-fg-color--dark);
   margin-top: 1em;
   margin-bottom: 0;
 }
@@ -197,7 +194,7 @@ h2.secondary-headline, h3.trusted-by {
 /* need to know more section css */
 .need-to-know-more-container, .knative-components-container,
 .whats-next-container {
-  background-color: #024c93;
+  background-color: var(--md-primary-fg-color--dark);
 }
 
 .need-to-know-more-container h1, .whats-next-container h1 {
@@ -214,12 +211,12 @@ h2.secondary-headline, h3.trusted-by {
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
   background-color: #f3f1f2;
-  color: var(--md-default-fg-color--light);
+  color: var(--md-primary-fg-color--light);
 }
 
 .why-serverless-container h1, .trying-it-all-container h1,
 .case-studies-container h1 {
-  color: #024c93;
+  color: var(--md-primary-fg-color--dark);
 }
 
 .why-serverless-container .normal-text,
@@ -311,7 +308,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trying-it-all-container .md-typeset h2 {
-  color: #024c93;
+  color: var(--md-primary-fg-color--dark);
   line-height: 1;
   margin-bottom: 1rem;
 }
@@ -337,7 +334,7 @@ h2.secondary-headline, h3.trusted-by {
 .trying-it-all-container .md-typeset .md-button.call-to-action {
   font-size: x-large;
   padding: 0.5rem 2em;
-  background-color: #024c93;
+  background-color: var(--md-primary-fg-color--dark);
   color: white;
   margin-top: 1em;
 }
@@ -383,23 +380,14 @@ h2.secondary-headline, h3.trusted-by {
   max-width: 110px
 }
 
-.case-studies-container .logo .deepc {
-  width: 108px;
-}
-
-.case-studies-container .logo .outfit7 {
-  max-height: 18px;
-  max-width: 98px;
-}
-
-.case-studies-container .logo .puppet {
-  width: 94px;
+.case-studies-container .logo .sva {
+  width: 60px;
 }
 
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: #497bb2;
+  color: var(--md-primary-fg-color--light);
   font-weight: 600;
   font-style: italic;
   line-height: 1.1;
@@ -451,6 +439,12 @@ h2.secondary-headline, h3.trusted-by {
 
 .whats-next-container .twemoji svg:hover {
   color: #7cc57c;
+}
+
+.whats-next-logo{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
 }
 
 .md-typeset .md-button.white {

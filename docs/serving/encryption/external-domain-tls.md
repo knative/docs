@@ -14,11 +14,6 @@ You must meet the following requirements to enable secure HTTPS connections:
 - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
 
-!!! warning
-    Istio only supports a single certificate per Kubernetes cluster.
-    To serve multiple domains using your Knative cluster, you must ensure that your new or existing certificate is signed for each of the domains that you want to serve.
-
-
 ## Automatically obtain and renew certificates
 
 ### Installing and configuring cert-manager and integration

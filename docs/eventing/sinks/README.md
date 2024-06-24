@@ -130,10 +130,11 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 
 ## Supported third-party sink types
 
-| Name | Maintainer | Description |
-| -- | -- | -- |
-| [KafkaSink](kafka-sink.md)  | Knative  | Send events to a Kafka topic |
-| [RedisSink](https://github.com/knative-extensions/eventing-redis/tree/main/sink)  | Knative  | Send events to a Redis Stream |
+| Name                                                                             | Maintainer | Description                          |
+|----------------------------------------------------------------------------------| -- |--------------------------------------|
+| [JobSink](job-sink.md)                                                           | Knative  | Trigger long-running background jobs |
+| [KafkaSink](kafka-sink.md)                                                       | Knative  | Send events to a Kafka topic         |
+| [RedisSink](https://github.com/knative-extensions/eventing-redis/tree/main/sink) | Knative  | Send events to a Redis Stream        |
 
 
 [kubernetes-kinds]:

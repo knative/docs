@@ -22,10 +22,26 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### How IBM Watsonx Assistant uses Knative Eventing to train machine learning models!
+
+![How IBM Watsonx Assistant uses Knative Eventing to train machine learning models](./articles/images/How-IBM-watsonx-Assistant-uses-Knative-Eventing-to-train-machine-learning-models.png)
+
+[Read more :octicons-arrow-right-24:](https://www.cncf.io/case-studies/ibmwatsonxassistant/){ .md-button }
+
 ### Knative 1.14 is out!
 Details on the 1.14 release of the Knative project.
 
 [Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-14-release.md){ .md-button }
+
+### Enhancing the Knative Contributor Experience!
+Actionable Recommendations for Improving the Knative Contributor Experience!
+
+[Read more :octicons-arrow-right-24:](articles/enhancing-the-knative-experience.md){ .md-button }
+
+### Knative meets Apache Camel K!
+Event Sourcing with Apache Camel K and Knative Eventing.
+
+[Read more :octicons-arrow-right-24:](articles/knative-meets-apache-camel.md){ .md-button }
 
 ### Knative Completes Third-Party Security Audit
 A third-party audit by Ada Logics found a small number of issues, including [one CVE](https://github.com/knative/serving/security/advisories/GHSA-qmvj-4qr9-v547).
