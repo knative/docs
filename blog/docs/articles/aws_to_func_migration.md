@@ -6,7 +6,7 @@ _In a [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_b
 
 With Serverless Functions one of the common use-cases is to execute custom code based on an event trigger, like a notification from the AWS S3 service. With AWS Lambda you can run those programs on Amazon's cloud offerings, but running the code on your own data-center is much harder.
 
-## A simple AWS Lambda function for AWS S3
+## A Lambda Function for AWS S3
 
 Taking a look at a Lambda [sample repository](https://github.com/aws/aws-lambda-go/blob/main/events/README_S3.md){:target="_blank"} shows a minimal, yet complete function for receiving AWS S3 event notifications. Lets take a look at the code:
 
