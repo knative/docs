@@ -70,7 +70,7 @@ Looking closer at the signature of the `Handle` function, we see the standard `C
 
 ## Knative CLI for Smooth Development and Deployment
 
-The Knative Function project does not only shine with its vendor-neutral approach for programming Serverless Functions, it also comes with a handy CLI that assists developers with the creation of the Linux container image and the deployment to a Kubernetes cluster, as already discussed in the [previous blog post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"}, it also allows you to test and run the function locally, by just invoking:
+The Knative Function project does not only offer a vendor-neutral approach for creating Serverless Functions, it also comes with a handy CLI that assists with the creation of the Linux container image and the deployment to a Kubernetes cluster.  This is covered in the [previous blog post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"}. It also allows you to test and run the function locally by  invoking:
 
 ```
 $ func run
