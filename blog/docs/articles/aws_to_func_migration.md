@@ -8,7 +8,7 @@ With Serverless Functions one of the common use-cases is to execute custom code 
 
 ## A simple AWS Lambda function for AWS S3
 
-Taking a look at their [sample repository](https://github.com/aws/aws-lambda-go/blob/main/events/README_S3.md){:target="_blank"} shows a minimal, yet complete function for receiving AWS S3 event notifications. Lets take a look at their code:
+Taking a look at a Lambda [sample repository](https://github.com/aws/aws-lambda-go/blob/main/events/README_S3.md){:target="_blank"} shows a minimal, yet complete function for receiving AWS S3 event notifications. Lets take a look at the code:
 
 ```go
 // main.go
