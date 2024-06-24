@@ -40,7 +40,7 @@ You see two functions here: `handler` for the custom application logic and `main
 
 ## A Simpler Knative Function for AWS S3
 
-In the [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we already discussed how to consume notifications from AWS Lambda in an on-premise cluster using Knative Eventing, but lets take a look at the code again:
+In the [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we discuss how to consume notifications from AWS Lambda in an on-premise cluster using Knative Eventing.  Lets take a look at the code again:
 
 ```go
 package function
