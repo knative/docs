@@ -167,6 +167,11 @@ echo "✅ Slack secret created."
 echo ""
 echo "📦 Installing the Slack Sink..."
 kubectl apply -f slack-sink/config
+
+# Wait for the slack-sink to be ready
+echo ""
+echo "⏳ Waiting for the slack-sink to be ready..."
+kubectl wait --for=condition=ready pod -l app=pipe-00001 --timeout=300s
 echo "✅ Slack Sink installed."
 
 # Ask user to open a new terminal to set the minikube tunnel
