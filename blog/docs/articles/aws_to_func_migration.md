@@ -73,6 +73,13 @@ Note that this complete program contains only one function, which is focused on 
 
 Looking closer at the signature of the `Handle` function, we see the standard `Context` API and an `Event` type. This is no vendor specific import. It references the Golang SDK for [CNCF CloudEvents](https://www.cncf.io/projects/cloudevents/){:target="_blank"}, which is a specification for describing event data in a common way.
 
+In this example the `subject` is mapped to the name of the file, or the S3 Object Key, while the `source` attribute is containing the bucket name. In case the entire file is desired for processing, it can be accessed via the `data` attribute.
+
+!!! note
+
+    The CNCF CloudEvents specification allows a generic and independent approach for receiving events from 3rd party systems, while providing a common, standardized API.
+
+
 ## Knative CLI for Smooth Development and Deployment
 
 The Knative Function project does not only offer a vendor-neutral approach for creating serverless functions, it also comes with a handy CLI that assists with the creation of the Linux container image and the deployment to a Kubernetes cluster.  This is covered in the [previous blog post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"}. It also allows you to test and run the function locally by  invoking:
