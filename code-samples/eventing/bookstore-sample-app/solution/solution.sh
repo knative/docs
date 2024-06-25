@@ -37,6 +37,13 @@ kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v
 kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.14.0/mt-channel-broker.yaml
 echo "✅ Knative In-Memory Channel and Broker installed successfully."
 
+# Wait until all pods in knative-serving and knative-eventing become ready
+echo ""
+echo "⏳ Waiting for Knative Serving and Eventing pods to be ready..."
+kubectl wait --for=condition=ready pod --all -n knative-serving --timeout=300s
+kubectl wait --for=condition=ready pod --all -n knative-eventing --timeout=300s
+echo "✅ All Knative pods are ready."
+
 # Detect whether the user has knative function "func" installed
 if ! command -v func &> /dev/null
 then
@@ -86,7 +93,13 @@ echo ""
 echo "📦 Installing the Sample Bookstore Frontend..."
 cd frontend
 kubectl apply -f config
+
+# Wait for the frontend to be ready
+echo ""
+echo "⏳ Waiting for the frontend to be ready..."
+kubectl wait --for=condition=ready pod -l app=bookstore-frontend --timeout=300s
 echo "✅ Bookstore Frontend installed."
+
 
 # Prompt the user to check the frontend
 echo ""
@@ -99,6 +112,12 @@ echo ""
 echo "📦 Installing the Sample Bookstore Backend (node-server)..."
 cd ../node-server
 kubectl apply -f config
+
+# Wait for the backend to be ready
+echo ""
+echo "⏳ Waiting for the backend to be ready..."
+kubectl wait --for=condition=ready pod -l app=node-server --timeout=300s
+
 echo "✅ Bookstore Backend (node-server) installed."
 
 # Prompt the user to check the backend
