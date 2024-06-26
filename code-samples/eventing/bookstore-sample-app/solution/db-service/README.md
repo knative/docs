@@ -89,20 +89,20 @@ If the output lists the `BookReviews` table as follows, your database has been c
 ## Question & Discussion
 1. Why did we choose to deploy our PostgreSQL database using a StatefulSet instead of a Knative Service?
 
-We use [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) for databases instead of Knative Service mainly because databases need to remember data (like a notebook that keeps your notes). StatefulSets are good at remembering things because they can save data and have a special name and place where they live. This is very important for databases.
+We use [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/){:target="_blank"} for databases instead of Knative Service mainly because databases need to remember data (like a notebook that keeps your notes). StatefulSets are good at remembering things because they can save data and have a special name and place where they live. This is very important for databases.
 
 Knative Services are more like notebooks that you use and then throw away when you're done. They're great for tasks that don't need to keep data for a long time. You can make them go away when you don't need them and come back when you do. But databases need to always remember information, so they can't just disappear and come back.
 
 Also, databases often talk in their own special language, not the usual web language (HTTP) that Knative Services are really good at understanding. Because of this, Knative Services aren't the best choice for databases. That's why we choose StatefulSet for databases in Kubernetes.
 
 ---
-Note box: However, Knative Service supports Volumes and Persistent Volumes, which can be used to store data. You can read more [here](https://knative.dev/docs/serving/services/storage/) about how to use Volumes and Persistent Volumes with Knative Services specially for your use case.
+Note box: However, Knative Service supports Volumes and Persistent Volumes, which can be used to store data. You can read more [here](https://knative.dev/docs/serving/services/storage/){:target="_blank"} about how to use Volumes and Persistent Volumes with Knative Services specially for your use case.
 
 ---
 
 2. When should I use Knative Service, and what would be the best use case for it?
 
-You can read more about the best use cases for Knative Service [here](https://knative.dev/docs/serving/samples/)!
+You can read more about the best use cases for Knative Service [here](https://knative.dev/docs/serving/samples/){:target="_blank"}!
 
 ## Conclusion
 By following this guide, you have successfully deployed a PostgreSQL server on a Kubernetes cluster, set up persistent storage, and initialized your database using a Kubernetes job. Congratulations! Your bookstore now has the database service.

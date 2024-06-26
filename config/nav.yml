@@ -20,24 +20,38 @@ nav:
     # Getting started
 ###############################################################################
     - Tutorial:
-        - Tutorial introduction: getting-started/README.md
-        - Install Knative using quickstart: getting-started/quickstart-install.md
-        - Knative Functions:
-          - About Knative Functions: getting-started/about-knative-functions.md
-          - Installing Knative Functions: getting-started/install-func.md
-          - Creating a function: getting-started/create-a-function.md
-          - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
-        - Knative Serving:
-          - Deploying a Knative Service: getting-started/first-service.md
-          - Autoscaling: getting-started/first-autoscale.md
-          - Traffic splitting: getting-started/first-traffic-split.md
-        - Knative Eventing:
-          - About Knative Eventing: getting-started/getting-started-eventing.md
-          - Sources, Brokers, and Triggers: getting-started/first-broker.md
-          - Using a Knative Service as a source: getting-started/first-source.md
-          - Using Triggers and sinks: getting-started/first-trigger.md
-        - What's Next?: getting-started/next-steps.md
-        - Clean Up: getting-started/clean-up.md
+        - Overview: getting-started/tutorial.md
+        - Quickstart:
+          - Tutorial introduction: getting-started/README.md
+          - Install Knative using quickstart: getting-started/quickstart-install.md
+          - Knative Functions:
+            - About Knative Functions: getting-started/about-knative-functions.md
+            - Installing Knative Functions: getting-started/install-func.md
+            - Creating a function: getting-started/create-a-function.md
+            - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
+          - Knative Serving:
+            - Deploying a Knative Service: getting-started/first-service.md
+            - Autoscaling: getting-started/first-autoscale.md
+            - Traffic splitting: getting-started/first-traffic-split.md
+          - Knative Eventing:
+            - About Knative Eventing: getting-started/getting-started-eventing.md
+            - Sources, Brokers, and Triggers: getting-started/first-broker.md
+            - Using a Knative Service as a source: getting-started/first-source.md
+            - Using Triggers and sinks: getting-started/first-trigger.md
+          - What's Next?: getting-started/next-steps.md
+          - Clean Up: getting-started/clean-up.md
+        - "E2E tutorial: Knative Bookstore":
+            - Overview: bookstore/page-0/welcome-knative-bookstore-tutorial.md
+            - Disclaimer: bookstore/disclaimer/README.md
+            - Environment Setup: bookstore/page-0.5/environment-setup.md
+            - 1 - Send Comments to Broker: bookstore/page-1/send-review-comment-to-broker.md
+            - 2 - Create Sentiment Service: bookstore/page-2/sentiment-analysis-service-for-bookstore-reviews.md
+            - 3 - Create Bad Word Service: bookstore/page-3/create-bad-word-filter-service.md
+            - 4 - Create Sequence: bookstore/page-4/create-sequence-to-streamline-ML-workflows.md
+            - 5 - Create DB service: bookstore/page-5/deploy-database-service.md
+            - 6 - Advanced event filtering: bookstore/page-6/advanced-event-filtering.md
+            - 7 - Connect Slack via Camel-K: bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
+            - 8 - Extra Challenges: bookstore/extra-challenge/README.md
 ###############################################################################
     # Installing
 ###############################################################################
