@@ -349,7 +349,7 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
   color: black;
   display: flex;
-  background-color: white;
+  background-color: #f3f1f2;
 }
 
 .case-studies-container h1 {
@@ -459,8 +459,8 @@ h2.secondary-headline, h3.trusted-by {
 
 .cncf-notice-container h3 {
   font-weight: bold;
-  color: var(--md-primary-fg-color--light);
-  margin-top: 0;
+  color: var(--md-default-fg-color--light);
+  margin-top: 1rem;
 }
 
 .md-typeset img.cncf-logo {
@@ -510,6 +510,61 @@ footer nav.md-footer__inner {
   padding: 0;
 }
 
-footer .md-footer-meta .md-footer-meta__inner {
+.md-footer-meta{
   padding: 1em 0;
+}
+.md-footer-copyright{
+  margin-right: 18px;
+}
+@media (max-width: 1024px){
+.md-footer-copyright{
+  margin: auto;
+  text-align: center;
+}
+.md-social{
+  margin: auto;
+}
+}
+@media (max-width: 861px) {
+  .md-footer-meta{
+    flex-direction: column;
+  }
+
+  .md-footer__link {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .md-footer__title {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .md-footer__button {
+    display: none;
+  }
+
+  .md-footer-meta__inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .md-footer-copyright {
+    order: 2;
+    margin: 2rem;
+    flex-wrap: wrap;
+  }
+  .md-footer-copyright a{
+    margin: 8px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+  
+  }
+
+  .md-social {
+    margin-top: 1rem;
+  }
 }
