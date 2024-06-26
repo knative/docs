@@ -18,7 +18,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000){:target="_blank"} with your browser to see the result.
 
 # Project Structures
 
@@ -33,7 +33,7 @@ This repository contains a Next.js application that utilizes next-themes and Tai
 
 ## Prerequisites
 
-- Docker installed on your machine. You can download and install Docker from [here](https://www.docker.com/get-started).
+- Docker installed on your machine. You can download and install Docker from [here](https://www.docker.com/get-started){:target="_blank"}.
 
 ## Dockerization Steps
 

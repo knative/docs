@@ -10,7 +10,7 @@ spec:
     selector:
       matchLabels:
         app: node-server
-  sink: # In this case, the sink is our broker, which is the eventing service that will receive the events
+  sink: # In this case, the sink is our Broker, which is the eventing service that will receive the events
     ref:
       apiVersion: eventing.knative.dev/v1
       kind: Broker

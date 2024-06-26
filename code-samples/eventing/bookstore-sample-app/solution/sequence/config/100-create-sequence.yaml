@@ -15,7 +15,7 @@ spec:
         apiVersion: serving.knative.dev/v1
         kind: Service
         name: sentiment-analysis-app
-  reply: # This is the last step of the sequence, it will send the event back to the broker as reply
+  reply: # This is the last step of the sequence, it will send the event back to the Broker as reply
     ref:
       kind: Broker
       apiVersion: eventing.knative.dev/v1
