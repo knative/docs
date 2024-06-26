@@ -114,7 +114,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .home-container h1 {
-  color: var(--md-primary-fg-color--dark);
+  color: black;
   margin-top: 1em;
   margin-bottom: 0;
 }
@@ -224,6 +224,7 @@ h2.secondary-headline, h3.trusted-by {
   font-weight: 600;
   margin: 0 auto 2rem;
   max-width: 75%;
+  color:var(--nav-item-color);
 }
 
 .why-serverless-container .md-typeset h1,
@@ -273,7 +274,7 @@ h2.secondary-headline, h3.trusted-by {
 
 /* knative components container css */
 .knative-components-container h1 {
-  color: #7dc47e;
+  color: white;
 }
 
 .knative-components-container .text-table .normal-text {
@@ -308,7 +309,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .trying-it-all-container .md-typeset h2 {
-  color: var(--md-primary-fg-color--dark);
+  color: black;
   line-height: 1;
   margin-bottom: 1rem;
 }
@@ -387,7 +388,7 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: var(--md-primary-fg-color--light);
+  color: var(--nav-item-color);
   font-weight: 600;
   font-style: italic;
   line-height: 1.1;
@@ -459,7 +460,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .cncf-notice-container h3 {
   font-weight: bold;
-  color: var(--md-primary-fg-color--light);
+  color: var(--nav-item-color);
   margin-top: 0;
 }
 
