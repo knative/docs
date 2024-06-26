@@ -69,7 +69,6 @@ plugins:
     match_path: "(articles|steering|events|releases)/.*"
     date_from_meta:
       as_creation: "date"
-      as_update: false
       datetime_format: "%Y-%m-%d"
   git-revision-date-localized:
       type: iso_date
