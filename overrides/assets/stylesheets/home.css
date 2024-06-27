@@ -94,12 +94,15 @@ body {
   font-size: large;
   padding: 0.525em 1em;
   min-width: fit-content;
+  border-radius:0.7rem;
+  margin-left: 0.5rem;
 }
 
 .home-container .md-button,
 .need-to-know-more-container .md-button {
   background-color: var(--md-primary-fg-color--light);
   border-color: var(--md-primary-fg-color--light);
+  border-radius: 0.7rem;
 }
 
 .home-container .md-button--primary {
@@ -338,6 +341,7 @@ h2.secondary-headline, h3.trusted-by {
   background-color: var(--md-primary-fg-color--dark);
   color: white;
   margin-top: 1em;
+  border-radius: 0.7rem;
 }
 
 .trying-it-all-container .md-button.call-to-action:hover {
