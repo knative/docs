@@ -9,7 +9,7 @@ spec:
     ref:
       kind: Broker  # Specifies the kind of source, in this case, a Knative Eventing Broker.
       apiVersion: eventing.knative.dev/v1  # The API version of the Knative Eventing Broker.
-      name: bookstore-broker  # The name of the Broker, "book-review-broker" in this case
+      name: badword-broker  # The name of the Broker, "book-review-broker" in this case
     properties:
       type: moderated-comment  # A filter that specifies the type of events this Pipe will listen for, here it's listening for events of type "bad-comment". You have to have this type specified.
   sink:  # Defines the destination for events processed by this Pipe.

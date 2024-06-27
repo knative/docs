@@ -1,22 +1,21 @@
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
-  name: bookstore-broker
+  name: badword-broker
 
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: db-insert-trigger
+  name: badword-noti-trigger
 spec:
   broker: bookstore-broker
   filter:
     attributes: # Trigger will filter events based on BOTH the type and badwordfilter attribute
       type: moderated-comment # This is the filter that will be applied to the event, only events with the ce-type moderated-comment will be processed
-      badwordfilter: good # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: good will be processed
+      badwordfilter: bad # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: bad will be processed
   subscriber:
     ref:
-      apiVersion: v1
-      kind: Service
-      name: node-server-svc
-    uri: /insert # This is the path where the event will be sent to the subscriber, see /insert in node-server code: index.js
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: badword-broker
