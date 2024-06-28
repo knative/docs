@@ -25,6 +25,21 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine
-WORKDIR /app
+
+ARG USER=appuser
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
+# Create and change to the app directory.
+WORKDIR "/home/${USER}/app"
+
+# Add a user so the server will run as a non-root user.
+RUN addgroup -g $USER_GID $USER && \
+    adduser -u $USER_UID -G $USER -D $USER
+
 COPY --from=build-env /app/out .
+
+# Set the non-root user as current.
+USER $USER
+
 ENTRYPOINT ["dotnet", "CloudEventsSample.dll"]

@@ -41,10 +41,20 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-php
 1. Create a file named `Dockerfile` and copy the following code block into it. See
    [official PHP docker image](https://hub.docker.com/_/php/) for more details.
 
-   ```docker
+   ```Dockerfile
    # Use the official PHP 7.3 image.
    # https://hub.docker.com/_/php
    FROM php:7.3-apache
+
+   ARG USER=appuser
+   ARG USER_UID=1001
+   ARG USER_GID=$USER_UID
+
+   ENV PORT=8080
+
+   # Add a user so the server will run as a non-root user.
+   RUN addgroup --gid $USER_GID $USER && \
+      adduser -u $USER_UID --ingroup $USER --disabled-password $USER
 
    # Copy local code to the container image.
    COPY index.php /var/www/html/
@@ -52,11 +62,16 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-php
    # Use the PORT environment variable in Apache configuration files.
    RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
+   RUN chown $USER: $PHP_INI_DIR
+
+   # Set the non-root user as current.
+   USER $USER
+
    # Configure PHP for development.
    # Switch to the production php.ini for production operations.
    # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
    # https://hub.docker.com/_/php#configuration
-   RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+   RUN mv "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"
    ```
 
 1. Create a `.dockerignore` file to ensure that any files related to a local
@@ -93,6 +108,7 @@ Once you have recreated the sample code files (or used the files in the sample f
 Choose one of the following methods:
 
 ### yaml
+
  1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
     ```bash
@@ -107,6 +123,7 @@ Choose one of the following methods:
  ```
 
 ### kn
+
  1. With `kn` you can deploy the service with
 
      ```bash
@@ -116,7 +133,8 @@ Choose one of the following methods:
      This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
      The output will look like:
-     ```
+
+     ```text
     Creating service 'helloworld-php' in namespace 'default':
     0.035s The Configuration is still working to reflect the latest desired specification.
     0.139s The Route is still working to reflect the latest desired specification.
@@ -130,27 +148,32 @@ Choose one of the following methods:
 
 Now that your service is created, Knative will perform the following steps:
 
-  - Create a new immutable revision for this version of the app.
-  - Network programming to create a route, ingress, service, and a load balancer for your app.
-  - Automatically scale your pods up and down (including to zero active pods).
+- Create a new immutable revision for this version of the app.
+- Network programming to create a route, ingress, service, and a load balancer for your app.
+- Automatically scale your pods up and down (including to zero active pods).
 
 1. To find the URL for your service, use
 
- ### kubectl
- ```
+### kubectl
+
+ ```bash
  kubectl get ksvc helloworld-php  --output=custom columns=NAME:.metadata.name,URL:.status.url
  NAME                URL
  helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
  ```
 
- ### kn
- ```bash
+### kn
+
+```bash
 kn service describe helloworld-php -o url
 ```
+
 Example:
- ```bash
+
+```bash
 http://helloworld-php.default.1.2.3.4.xip.io
- ```
+```
+
 1. Now you can make a request to your app and see the result. Replace
    the following URL with the URL returned in the previous command.
 
@@ -164,6 +187,7 @@ Hello PHP Sample v1!
 To remove the sample app from your cluster, delete the service record:
 
 ### kubectl
+
 ```bash
 kubectl delete --filename service.yaml
 ```

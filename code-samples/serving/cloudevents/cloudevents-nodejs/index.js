@@ -50,7 +50,7 @@ const receiveAndSend = (cloudEvent, res) => {
     console.log(`Sent event: ${JSON.stringify(ce, null, 2)}`)
     console.log(`K_SINK responded: ${JSON.stringify({ status: responseSink.status, headers: responseSink.headers, data: responseSink.data }, null, 2)}`)
   })
-  .catch(console.error)
+    .catch(console.error)
 }
 
 // receiveAndReply responds with new event

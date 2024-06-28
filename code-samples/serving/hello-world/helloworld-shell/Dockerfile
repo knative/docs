@@ -2,9 +2,6 @@
 # https://git.busybox.net/busybox/tree/networking/httpd.c
 FROM busybox
 
-# Serve from this directory
-WORKDIR /var/www
-
 # Prepare httpd command for being started via init
 # This indirection is required for proper SIGTERM handling
 RUN echo "::sysinit:httpd -vv -p 8080 -u daemon -h /var/www" > /etc/inittab

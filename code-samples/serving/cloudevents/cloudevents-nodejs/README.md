@@ -60,11 +60,11 @@ You can build and push this to your registry of choice via:
 
 ### yaml
 
- To deploy the Knative service, edit the `service.yaml` file and replace `<registry/repository/image:tag>` with the image you have just created.
+To deploy the Knative service, edit the `service.yaml` file and replace `<registry/repository/image:tag>` with the image you have just created.
 
- ```bash
- kubectl apply -f service.yaml
- ```
+```bash
+kubectl apply -f service.yaml
+```
 
 ### kn
 
