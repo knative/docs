@@ -210,7 +210,7 @@ h2.secondary-headline, h3.trusted-by {
 
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
-  background-color: #f3f1f2;
+  background-color: white;
   color: var(--md-primary-fg-color--light);
 }
 
@@ -359,10 +359,21 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .cases-table {
   display: flex;
   justify-content: center;
-  max-width: 90%;
-  margin: auto;
+  max-width: 100%;
+  margin:1rem;
+  align-items: center;
 }
-
+.case-studies-container .cases-table .col{
+  background-color: white;
+  padding:1.5rem;
+  margin:1rem 0.5rem;
+  border-radius: 0.7rem;
+  width:25vw;
+  height:250px;
+}
+.case-studies-container .cases-table .col:hover{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 .case-studies-container .logo {
   display: flex;
   height: 26px;
@@ -387,16 +398,14 @@ h2.secondary-headline, h3.trusted-by {
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-fg-color--dark);
   font-weight: 600;
-  font-style: italic;
-  line-height: 1.1;
-  font-family: serif;
+  line-height: 1.2;
   font-size: .95rem;
 }
 
 .case-studies-container hr {
-  border-bottom: 2px solid #89c487;
+  border-bottom: 2px solid black;
   display: flow-root;
   margin: .4em 5em -4px 2em;
 }
