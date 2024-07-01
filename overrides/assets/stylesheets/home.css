@@ -454,7 +454,7 @@ h2.secondary-headline, h3.trusted-by {
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 0;
+  padding-top: 1rem;
 }
 
 .cncf-notice-container h3 {
