@@ -1,7 +1,8 @@
+import joblib
 from sklearn import svm
 from sklearn import datasets
 
-from iris_classifier import IrisClassifier
+import bentoml
 
 if __name__ == "__main__":
     # Load training data
@@ -12,11 +13,6 @@ if __name__ == "__main__":
     clf = svm.SVC(gamma='scale')
     clf.fit(X, y)
 
-    # Create a iris classifier service instance
-    iris_classifier_service = IrisClassifier()
-
-    # Pack the newly trained model artifact
-    iris_classifier_service.pack('model', clf)
-
-    # Save the prediction service to disk for model serving
-    saved_path = iris_classifier_service.save()
+    with bentoml.models.create("iris_classifier") as bento_model:
+        joblib.dump(clf, bento_model.path_of("model.pkl"))
+    print(f"Model saved: {bento_model}")
