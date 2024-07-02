@@ -58,6 +58,9 @@ Follow the procedure for the networking layer of your choice:
         !!! tip
             Save this to use in the following [Configure DNS](#configure-dns) section.
 
+!!! note
+    IBM Z and IBM Power supports only kourier as a networking layer for knative. Please [use this documentation](./install-serving-with-yaml-on-IBM-Z-and-P.md) for customizing 3-scale-kourier-gateway image needed to run knative on IBM Z and IBM Power platofrms.
+
 
 === "Istio"
 
