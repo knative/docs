@@ -135,7 +135,7 @@ border-radius: 20% 0 0 0 ;
 .md-tabs__list li:nth-last-child(1) a:hover,
 .md-tabs__list li:nth-last-child(2) a:hover,
 .md-tabs__list li:nth-last-child(3) a:hover {
-  color: var(--md-accent-fg-color);
+  color: #f3f1f2;
 }
 
 .md-nav__title .md-nav__button.md-logo img,
