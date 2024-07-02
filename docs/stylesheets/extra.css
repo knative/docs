@@ -3,7 +3,7 @@
   --md-primary-fg-color--dark: #0865AD;
   --md-primary-fg-color--light: #6695CA;
   --nav-item-color: #4d4d4d;
-  --md-footer-bg-color:#081729;
+  --md-footer-bg-color: #081729;
 }
 
 .md-clipboard {
@@ -360,9 +360,9 @@ border-radius: 20% 0 0 0 ;
 }
 
 .md-footer-meta__inner{
-  display:flex;
+  display: flex;
   flex-direction: row;
-  margin:0.5rem 1.5rem;
+  margin: 0.5rem 1.5rem;
 }
 
 .footer-links {
