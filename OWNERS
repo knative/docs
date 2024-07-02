@@ -6,6 +6,12 @@ approvers:
 - steering-committee
 - knative-release-leads
 - ux-wg-leads
+# WG leads
+- client-wg-leads
+- eventing-wg-leads
+- functions-wg-leads
+- operations-wg-leads
+- serving-wg-leads
 reviewers:
 - docs-writers
 - docs-reviewers
