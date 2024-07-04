@@ -286,6 +286,7 @@ h2.secondary-headline, h3.trusted-by {
   margin-left: 1%;
   font-size: .8rem;
   margin-top: -1rem;
+  text-align: center;
 }
 
 .knative-components-container .text-table .normal-text:last-child {
@@ -303,6 +304,8 @@ h2.secondary-headline, h3.trusted-by {
   max-width: 80%;
   margin: auto;
   padding: 0 2.5em;
+  align-items: center;
+  justify-content: center;
 }
 
 /* trying it all container css */
@@ -487,6 +490,8 @@ h2.secondary-headline, h3.trusted-by {
 
   .knative-components-container .text-table .normal-text {
     width: 80%;
+    text-align: center;
+
   }
 
   .knative-components-container .text-table .normal-text:first-child {
