@@ -93,7 +93,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![Image14](images/image14.png)
 
-`func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+`sentiment-analysis-app/func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
 
 ???+ abstract "_sentiment-analysis-app/func.py_"
 
@@ -162,7 +162,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![Image9](images/image9.png)
 
-The `requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
+The `sentiment-analysis-app/requirements.txt` file contains the dependencies for the function. Add the following dependencies to the file:
 ???+ abstract "_sentiment-analysis-app/requirements.txt_"
 
     ```
@@ -180,7 +180,7 @@ Knative Function will automatically install the dependencies listed here when yo
 
 In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, Knative Function will ensure that the `setup.py` file is executed after the dependencies have been installed.
 
-The `setup.py` file should contain the following code for your bookstore:
+The `sentiment-analysis-app/setup.py` file should contain the following code for your bookstore:
  
 ???+ abstract "_sentiment-analysis-app/setup.py_"
     ```python

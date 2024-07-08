@@ -52,6 +52,7 @@ spec:
 ### **Step 1: Create the Sequence**
 
 ![image](images/image9.png)
+Create a new yaml file named `sequence/config/100-create-sequence.yaml` to create Sequence resource in your cluster:
 
 ???+ abstract "sequence/config/100-create-sequence.yaml"
     ```yaml 
@@ -112,7 +113,7 @@ sequence.flows.knative.dev/sequence created
 
 As the Sequence is ready to accept the request now, we need to tell the Broker to forward the events to the Sequence, so that new comments will go through our ML workflows.
 
-
+Create the Trigger yaml file named `sequence/config/200-create-trigger.yaml`
 ???+ abstract "sequence/config/200-create-trigger.yaml"
 
     ```yaml
@@ -132,7 +133,7 @@ As the Sequence is ready to accept the request now, we need to tell the Broker t
           name: sequence
     ```
 
-Create the Trigger yaml file and apply it to your cluster.
+Apply it to your cluster.
 
 ```
 kubectl apply -f sequence/config/200-create-trigger.yaml

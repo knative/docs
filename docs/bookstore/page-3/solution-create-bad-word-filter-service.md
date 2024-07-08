@@ -77,7 +77,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![image](images/image5.png)
 
-`func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
+`bad-word-filter/func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
 
 
 
@@ -128,9 +128,9 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![image](images/image8.png)
 
-The `requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
+The `bad-word-filter/requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
 
-???+ abstract "bad-word-filter/requirements.txt_"
+???+ abstract "bad-word-filter/requirements.txt"
     ```plaintext
     parliament-functions==0.1.0
     alt-profanity-check==1.4.1.post1

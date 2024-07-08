@@ -65,7 +65,7 @@ This workflow ensures a smooth transition from development to deployment within 
 
 ![Image 5](images/image5.png)
 
-`func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
+`bad-word-filter/func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
 
 ???+ abstract "_bad-word-filter/func.py_"
     ```python
@@ -113,6 +113,7 @@ This workflow ensures a smooth transition from development to deployment within 
 ### **Step 3: Configure the dependencies**
 
 ![Image 8](images/image8.png)
+The content of `bad-word-filter/requirements.txt`:
 
 ???+ abstract "_bad-word-filter/requirements.txt_"
     ```plaintext
