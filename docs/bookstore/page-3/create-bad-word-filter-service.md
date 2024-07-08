@@ -43,6 +43,9 @@ This workflow ensures a smooth transition from development to deployment within 
 ### **Step 1: Create a Knative Function template**
 
 ![Image 6](images/image6.png)
+```shell
+func deploy -b=s2i -v
+```
 
 ???+ success "Verify"
 
