@@ -70,12 +70,14 @@ kubectl apply -f db-service
 
 ![image3](images/image3.png)
 
-Open the UI page at [http://localhost:3000](http://localhost:3000){:target="_blank"}, you should see some new comments popping up at the bottom of the page.
 
-![image2](images/image2.png)
+Open the UI page at [http://localhost:3000](http://localhost:3000){:target="_blank"}, you should see some new comments popping up at the bottom of the page.
 
 ???+ bug "Troubleshoot"
     If you see "No comments available", that means your database is not initialized yet. Check the health of the database service pods and figure out what happened.
+
+![image2](images/image2.png)
+
 
 ## **Next Step**
 
