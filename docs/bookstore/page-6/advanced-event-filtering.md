@@ -20,7 +20,7 @@
 
 ![Image](images/image3.png)
 
-Append the following Trigger configuration to the existing `200-broker.yaml` file in `node-server/config/200-broker.yaml` and then apply:
+Append the following Trigger configuration to the existing `node-server/config/200-broker.yaml` file and then apply:
 
 ???+ abstract "**Append** to _node-server/config/200-broker.yaml_"
     ```yaml 

@@ -71,7 +71,7 @@ Follow the instructions [here](../create-slack-workspace/README.md){:target="_bl
 
 ![image](images/image22.png)
 
-We are storing the webhook URL as a secret. Copy and paste your webhook URL into the file `application.properties`
+We are storing the webhook URL as a secret. Copy and paste your webhook URL into the file `slack-sink/application.properties`
 
 ???+ abstract "_/slack-sink/application.properties_"
 
@@ -267,7 +267,7 @@ This setup automatically sends notifications to Slack whenever a new comment tha
 
 ![image](images/image15.png)
 
-Create a new file named `slack-sink.yaml` and add the following content:
+Create a new file named `slack-sink/config/slack-sink.yaml` and add the following content:
 
 ???+ abstract "_slack-sink/config/slack-sink.yaml_"
 

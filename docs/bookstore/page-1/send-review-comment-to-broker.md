@@ -192,7 +192,7 @@ Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-eve
 
 **Create a SinkBinding:**
 
-- 1: Create a new YAML file named `300-sinkbinding.yaml` in the `node-server/config` folder and add the following content:
+- 1: Create a new YAML file named `node-server/config/300-sinkbinding.yaml` and add the following content:
 
 ???+ abstract "_node-server/config/300-sinkbinding.yaml_"
     ```yaml
@@ -249,7 +249,7 @@ Event display is a debugging tool in Knative Eventing that allows you to use it 
 
 **Create an Event Display Service:**
 
-- 1: Create a new YAML file named `100-event-display.yaml` in the `node-server/config` folder and add the following content:
+- 1: Create a new YAML file named `node-server/config/100-event-display.yaml` and add the following content:
 
 ???+ abstract "_node-server/config/100-event-display.yaml_"
 
@@ -341,7 +341,7 @@ Here we are creating a Trigger that will send all the events to event-display.
 
 ![Image](images/image4.png)
 
-- 1: Create a new YAML file named `200-log-trigger.yaml` and add the following content:
+- 1: Create a new YAML file named `node-server/config/200-log-trigger.yaml` and add the following content:
 
 ???+ abstract "_node-server/config/200-log-trigger.yaml_"
     ```yaml 
