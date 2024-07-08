@@ -10,8 +10,8 @@ The general probing architecture looks like this:
 
 ![probing-overview](./probes-overview.drawio.svg)
 
-* Users can optionally define Readiness and/or Liveness probes in the `KnativeService` CR.
-* The Liveness probes are directly executed by the Kubelet against the according container.
+* Users can optionally define Readiness/Liveness and/or Startup probes in the `KnativeService` CR.
+* The Liveness and Startup probes are directly executed by the Kubelet against the according container.
 * Readiness probes, on the other hand, are rewritten by Knative to be executed by the Queue-Proxy container.
 * Knative does probing from in places (e.g. Activator, net-* controller, and from Queue-Proxy), to make sure the whole network stack is configured and ready. Compared to vanilla Kubernetes, Knative uses faster (called aggressive probing) probing interval to shorten the cold-start times when a Pod is already up and running while Kubernetes itself has not yet reflected that readiness.
 * Knative will define a default Readiness probe for the primary user container when no probe is defined by the user. It will check for a TCP socket on the traffic port of the Knative Service.
@@ -54,6 +54,10 @@ spec:
         livenessProbe:
           tcpSocket:
             port: 8080
+        startupProbe:
+          httpGet:
+            port: 8080
+            path: "/"
             
       - name: second-container
         image: <your-image>
@@ -64,6 +68,10 @@ spec:
         livenessProbe:
           tcpSocket:
             port: 8089
+        startupProbe:
+          httpGet:
+            port: 8080
+            path: "/"
 ```
 
 Supported probe types are:
@@ -79,4 +87,34 @@ Supported probe types are:
 
 !!! warning
     As the Queue-Proxy container does not rewrite or check defined Liveness probes, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, you may see, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.
+
+## Progress Deadline and Startup Probes
+
+It is important to know that Knative has a deadline until a Knative Service should initially start up (or rollout). This is called [progress deadline](../configuration/deployment.md#configuring-progress-deadlines). When using Startup probes, it is important that the progress deadline is set to a value that is higher than the maximal Startup probe timeout (e.g. `success/failureThreshold` * `periodSeconds` * `timeoutSeconds`). Otherwise, it the Startup probe might never pass before the progress deadline is reached, and the Service will never successfully start up. The Knative Service will then mark this in the status of the Service object:
+
+```json
+[
+  {
+    "lastTransitionTime": "2024-06-06T09:28:01Z",
+    "message": "Revision \"runtime-00001\" failed with message: Initial scale was never achieved.",
+    "reason": "RevisionFailed",
+    "status": "False",
+    "type": "ConfigurationsReady"
+  },
+  {
+    "lastTransitionTime": "2024-06-06T09:27:21Z",
+    "message": "Configuration \"runtime\" does not have any ready Revision.",
+    "reason": "RevisionMissing",
+    "status": "False",
+    "type": "Ready"
+  },
+  {
+    "lastTransitionTime": "2024-06-06T09:27:21Z",
+    "message": "Configuration \"runtime\" does not have any ready Revision.",
+    "reason": "RevisionMissing",
+    "status": "False",
+    "type": "RoutesReady"
+  }
+]
+```
 
