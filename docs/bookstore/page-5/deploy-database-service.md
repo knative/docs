@@ -41,6 +41,9 @@ In this section, we will just be simply running a PostgreSQL service. We have al
 kubectl apply -f db-service
 ```
 
+!!! warning
+    Please wait few minutes until everything become ready.  If you see some job pods are failing and having errors, that's okay. Just continue waiting.
+
 ???+ success "Verify"
 
     You should see the following output:
