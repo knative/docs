@@ -66,6 +66,10 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ![Image](images/image13.png)
 
+!!! tip
+
+    We recommend you using `kn quickstart` plugin to install Knative.
+
 Please follow the instructions [here](https://knative.dev/docs/install/){:target="_blank"} to spin up your cluster with Knative installed!
 
 ???+ success "Verify"
