@@ -30,7 +30,8 @@ The following tabs expand to show instructions for installing a networking layer
 Follow the procedure for the networking layer of your choice:
 
 !!! note
-    IBM Z and IBM Power supports only kourier as a networking layer for knative. Please [use this documentation](./install-serving-with-yaml-on-IBM-Z-and-IBM-P.md) for customizing 3-scale-kourier-gateway image needed to run knative on IBM Z and IBM Power platofrms.
+    **Only Kourier network plugin supported for IBM Z and IBM Power platform.** 
+    Follow the below steps to install kourier. Post installation, [Use this alternative documentation](./install-serving-with-yaml-on-IBM-Z-and-IBM-P.md) to patch envoy image since we do not have envoy image support on IBM Z and IBM Power platforms, we will patch the envoy image based on RedHat Maistra.
 
 <!-- TODO: Link to document/diagram describing what is a networking layer.  -->
 <!-- This indentation is important for things to render properly. -->
