@@ -119,10 +119,10 @@ a.md-header__button.md-logo img {
   padding: 0 2em;
 }
 .md-tabs__list li:nth-last-child(3){
-border-radius: 20% 0 0 0 ;
+border-radius: 0.7rem 0 0 0 ;
 }
 .md-tabs__list li:nth-last-child(1){
-  border-radius:0 18% 0 0 ;
+  border-radius:0 0.7rem 0 0 ;
   }
 
 
