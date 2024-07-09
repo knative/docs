@@ -226,8 +226,15 @@ h2.secondary-headline, h3.trusted-by {
 .trying-it-all-container .normal-text {
   font-weight: 600;
   margin: 0 auto 2rem;
-  max-width: 75%;
   color:var(--nav-item-color);
+}
+
+.why-serverless-container .normal-text-head{
+  color:var(--nav-item-color);
+  width:85%;
+  font-weight: 600;
+  text-align: center;
+  margin: auto;
 }
 
 .why-serverless-container .md-typeset h1,
@@ -244,6 +251,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .why-serverless-container .normal-text {
   font-size: .8rem;
+  margin: 10px;
 }
 
 .img-table {
@@ -260,18 +268,31 @@ h2.secondary-headline, h3.trusted-by {
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 200px;
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-.why-serverless-container .md-typeset img {
-  max-width: 120px;
+.img-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.reason-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   transform: scale(1);
   transition: transform 0.25s ease-in-out 0s;
 }
 
-.why-serverless-container .md-typeset img:hover {
+.reason-img img:hover {
   transform: scale(1.15);
 }
 
@@ -309,6 +330,10 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 /* trying it all container css */
+.trying-it-all-container .reason-img img{
+position: relative;
+}
+
 .trying-it-all-container .reason-img {
   margin: auto;
   height: 130px;
@@ -331,6 +356,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .trying-it-all-container .img-col img {
   height: 130px;
+  width: 100%;
 }
 
 .trying-it-all-container .img-col:last-child img {
@@ -343,7 +369,7 @@ h2.secondary-headline, h3.trusted-by {
   padding: 0.5rem 2em;
   background-color: var(--md-primary-fg-color--dark);
   color: white;
-  margin-top: 1em;
+  margin-top: 5rem;
   border-radius: 0.7rem;
 }
 
