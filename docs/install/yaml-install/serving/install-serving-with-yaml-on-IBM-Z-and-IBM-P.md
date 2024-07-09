@@ -7,6 +7,6 @@
     '{"spec":{"template":{"spec":{"containers":[{"name":"kourier-gateway" "image":"<replace the proxyv2 image here>"}]}}}}'
   ```
 
-        !!! tip
-            1. If there are authentication issues, create [redhat developer account](developers.redhat.com/register) to pull images from redhat catalog.
-            2. Please refer to the page to [configure pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account)
+!!! note
+    1. If there are authentication issues, create [redhat developer account](developers.redhat.com/register) to pull images from redhat catalog. 
+    2. Please refer to the page to [configure pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account)
