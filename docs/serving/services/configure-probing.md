@@ -90,7 +90,7 @@ Supported probe types are:
 
 ## Progress Deadline and Startup Probes
 
-It is important to know that Knative has a deadline until a Knative Service should initially start up (or rollout). This is called [progress deadline](../configuration/deployment.md#configuring-progress-deadlines). When using Startup probes, it is important that the progress deadline is set to a value that is higher than the maximal Startup probe timeout (e.g. `success/failureThreshold` * `periodSeconds` * `timeoutSeconds`). Otherwise, it the Startup probe might never pass before the progress deadline is reached, and the Service will never successfully start up. The Knative Service will then mark this in the status of the Service object:
+It is important to know that Knative has a deadline until a Knative Service should initially start up (or rollout). This is called [progress deadline](../configuration/deployment.md#configuring-progress-deadlines). When using Startup probes, the progress deadline is set to a value that is higher than the maximal Startup probe timeout (e.g. `initialDelaySeconds + success/failureThreshold` * `periodSeconds` * `timeoutSeconds`). Otherwise, the Startup probe might never pass before the progress deadline is reached, and the Service will never successfully start up. The Knative Service will then mark this in the status of the Service object:
 
 ```json
 [
@@ -100,20 +100,6 @@ It is important to know that Knative has a deadline until a Knative Service shou
     "reason": "RevisionFailed",
     "status": "False",
     "type": "ConfigurationsReady"
-  },
-  {
-    "lastTransitionTime": "2024-06-06T09:27:21Z",
-    "message": "Configuration \"runtime\" does not have any ready Revision.",
-    "reason": "RevisionMissing",
-    "status": "False",
-    "type": "Ready"
-  },
-  {
-    "lastTransitionTime": "2024-06-06T09:27:21Z",
-    "message": "Configuration \"runtime\" does not have any ready Revision.",
-    "reason": "RevisionMissing",
-    "status": "False",
-    "type": "RoutesReady"
   }
 ]
 ```
