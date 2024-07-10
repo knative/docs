@@ -48,7 +48,7 @@ metadata:
   namespace: source-namespace
 ```
 
-**Create a Role in the Target Namespace:** Define a role that grants the necessary permissions for the event source to interact with resources, using the verb “knsubscribe”.
+**Create a Role in the Target Namespace:** Define a role that grants the necessary permissions for the event source to interact with resources, using the verb `knsubscribe`.
 ```
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
