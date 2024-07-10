@@ -18,7 +18,7 @@ This feature is planned to come out in the 1.15 release as an alpha feature. Her
 
 ### Enabling the Feature Flag
 
-All the implementation is placed behind a feature flag, cross-namespace-event-links. To enable a feature, you can add it to the `config-features` ConfigMap under the `data` spec and set the value of the feature flag to be `enabled`. For example, you can enable the feature by adding the following ConfigMap entry: 
+All the implementation is placed behind a feature flag, `cross-namespace-event-links`. To enable a feature, you can add it to the `config-features` ConfigMap under the `data` spec and set the value of the feature flag to be `enabled`. For example, you can enable the feature by adding the following ConfigMap entry: 
 
 ```
 apiVersion: v1
