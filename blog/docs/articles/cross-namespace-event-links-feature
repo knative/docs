@@ -81,6 +81,7 @@ roleRef:
 ```
 
 ### Creating Cross Namespace References
+
 <p>With RBAC configured, you can now create event sources and sinks that reference resources across namespaces. Here’s an example of how to reference a broker in a different namespace for a trigger:</p>
 
 **Trigger Subscribing to a Broker in Another Namespace:** Since the feature flag is enabled, the broker can be added to the `brokerRef` field in the Trigger spec, along with its own separate namespace.
@@ -102,10 +103,13 @@ spec:
          kind: Service 
          name: my-service
 ```
+
 ### Validating Cross Namespace Events
+
 <p>By following these steps, you can enable cross namespace referencing in Knative Eventing, set up the necessary RBAC permissions, and create triggers that reference brokers in another namespace. This setup enhances the flexibility of your event-driven applications, enabling communication across different namespaces. </p>
 
 ## Program Experience
+
 <p>I still remember skimming over the feature track document for the first time before applying to the program and barely understanding any of it. Now with the feature almost complete, this mentorship experience has been very insightful. </p>
 
 <p>One of the standout aspects of this program was the ample opportunities I had to engage with the Knative Eventing community. Initially, I was hesitant to ask questions, fearing it would expose my inexperience. However, as I started to participate in discussions more and noticed how helpful the community members were, I gained much more confidence. In addition, this allowed me to develop a deeper appreciation for the collaborative nature of open source and I’m glad to be a part of the community.</p>
