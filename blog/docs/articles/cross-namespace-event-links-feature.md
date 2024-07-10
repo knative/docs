@@ -6,19 +6,19 @@ Over the past three months, I’ve had the incredible opportunity to participate
 
 ## Feature Description
 
-<p>In a multi-tenant scenario, some use cases might require separating brokers and channels in different namespaces than the services they send events to. While this setup would work if the team consuming the events has access to the namespaces where brokers and channels are in, this is not always the case. To address this issue, a new feature was proposed for triggers and subscriptions (event links) to exist in a different namespace from the broker or channel they reference.​​ The LFX Mentorship Program gave me the chance to bring this novel and highly requested feature into reality. </p>
+In a multi-tenant scenario, some use cases might require separating brokers and channels in different namespaces than the services they send events to. While this setup would work if the team consuming the events has access to the namespaces where brokers and channels are in, this is not always the case. To address this issue, a new feature was proposed for triggers and subscriptions (event links) to exist in a different namespace from the broker or channel they reference.​​ The LFX Mentorship Program gave me the chance to bring this novel and highly requested feature into reality. 
 
-<p>For the specific implementation, I used Role-Based Access Control (RBAC) to manage permissions securely. A new RBAC verb, “knsubscribe”, was created to allow users to subscribe to a particular broker/channel. In addition, I used Subject Access Reviews to ensure only authorized users could create and manage these cross-namespace event links, further enhancing security within the Knative Eventing framework. </p>
+For the specific implementation, I used Role-Based Access Control (RBAC) to manage permissions securely. A new RBAC verb, “knsubscribe”, was created to allow users to subscribe to a particular broker/channel. In addition, I used Subject Access Reviews to ensure only authorized users could create and manage these cross-namespace event links, further enhancing security within the Knative Eventing framework. 
 
-<p>Following the new changes, the control plane and data plane were adjusted accordingly to enable the smooth execution of the feature. Unit tests were created to ensure the feature works as expected and an E2E test is currently in progress to confirm event delivery between the resources. All the changes were placed behind a feature flag, allowing users to enable/disable this feature as desired. </p>
+Following the new changes, the control plane and data plane were adjusted accordingly to enable the smooth execution of the feature. Unit tests were created to ensure the feature works as expected and an E2E test is currently in progress to confirm event delivery between the resources. All the changes were placed behind a feature flag, allowing users to enable/disable this feature as desired. 
 
 ## Using the Cross Namespace Event Links Feature
 
-<p>This feature is planned to come out in the 1.15 release as an alpha feature. Here’s how end users can use cross namespace referencing in Knative Eventing: </p>
+This feature is planned to come out in the 1.15 release as an alpha feature. Here’s how end users can use cross namespace referencing in Knative Eventing: 
 
 ### Enabling the Feature Flag
 
-<p>All the implementation is placed behind a feature flag, cross-namespace-event-links. To enable a feature, you can add it to the `config-features` ConfigMap under the `data` spec and set the value of the feature flag to be `enabled`. For example, you can enable the feature by adding the following ConfigMap entry: </p>
+All the implementation is placed behind a feature flag, cross-namespace-event-links. To enable a feature, you can add it to the `config-features` ConfigMap under the `data` spec and set the value of the feature flag to be `enabled`. For example, you can enable the feature by adding the following ConfigMap entry: 
 
 ```
 apiVersion: v1
@@ -36,7 +36,7 @@ data:
 
 ### Setting Up Role-Based Access Control (RBAC)
 
-<p>RBAC policies define the permissions required for different resources to interact across namespaces. Here’s how you can set it up: </p>
+RBAC policies define the permissions required for different resources to interact across namespaces. Here’s how you can set it up: 
 
 **Create a Service Account:** In the namespace where the event source resides, create a service account that will be used to access resources in the target namespace.
 
@@ -82,7 +82,7 @@ roleRef:
 
 ### Creating Cross Namespace References
 
-<p>With RBAC configured, you can now create event sources and sinks that reference resources across namespaces. Here’s an example of how to reference a broker in a different namespace for a trigger:</p>
+ With RBAC configured, you can now create event sources and sinks that reference resources across namespaces. Here’s an example of how to reference a broker in a different namespace for a trigger:
 
 **Trigger Subscribing to a Broker in Another Namespace:** Since the feature flag is enabled, the broker can be added to the `brokerRef` field in the Trigger spec, along with its own separate namespace.
 ```
@@ -106,18 +106,18 @@ spec:
 
 ### Validating Cross Namespace Events
 
-<p>By following these steps, you can enable cross namespace referencing in Knative Eventing, set up the necessary RBAC permissions, and create triggers that reference brokers in another namespace. This setup enhances the flexibility of your event-driven applications, enabling communication across different namespaces. </p>
+By following these steps, you can enable cross namespace referencing in Knative Eventing, set up the necessary RBAC permissions, and create triggers that reference brokers in another namespace. This setup enhances the flexibility of your event-driven applications, enabling communication across different namespaces. 
 
 ## Program Experience
 
-<p>I still remember skimming over the feature track document for the first time before applying to the program and barely understanding any of it. Now with the feature almost complete, this mentorship experience has been very insightful. </p>
+I still remember skimming over the feature track document for the first time before applying to the program and barely understanding any of it. Now with the feature almost complete, this mentorship experience has been very insightful. 
 
-<p>One of the standout aspects of this program was the ample opportunities I had to engage with the Knative Eventing community. Initially, I was hesitant to ask questions, fearing it would expose my inexperience. However, as I started to participate in discussions more and noticed how helpful the community members were, I gained much more confidence. In addition, this allowed me to develop a deeper appreciation for the collaborative nature of open source and I’m glad to be a part of the community.</p>
+One of the standout aspects of this program was the ample opportunities I had to engage with the Knative Eventing community. Initially, I was hesitant to ask questions, fearing it would expose my inexperience. However, as I started to participate in discussions more and noticed how helpful the community members were, I gained much more confidence. In addition, this allowed me to develop a deeper appreciation for the collaborative nature of open source and I’m glad to be a part of the community.
 
-<p>By the end of the program, I had achieved significant milestones: I opened 7 issues and merged 11 PRs. For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. </p>
+By the end of the program, I had achieved significant milestones: I opened 7 issues and merged 11 PRs. For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. 
 
 ## Final Comments
 
-<p>Finally, I would like to extend my gratitude to [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/) and [Pierangelo Di Pilato](https://www.linkedin.com/in/pierdipi/) for giving me this opportunity, entrusting me in implementing this feature, and for the guidance and mentorship along the journey. It truly would not be possible without your help and support.</p>
+Finally, I would like to extend my gratitude to [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/) and [Pierangelo Di Pilato](https://www.linkedin.com/in/pierdipi/) for giving me this opportunity, entrusting me in implementing this feature, and for the guidance and mentorship along the journey. It truly would not be possible without your help and support.
 
-<p>In a few years, I might not remember the exact lines of code that I wrote, but I will always recall the exhilarating feeling when my unit test first passed and the satisfaction of seeing this feature come to life step-by-step. This experience has broadened my career prospects and I’m looking forward to making more contributions to the open-source community in the future. </p>
+In a few years, I might not remember the exact lines of code that I wrote, but I will always recall the exhilarating feeling when my unit test first passed and the satisfaction of seeing this feature come to life step-by-step. This experience has broadened my career prospects and I’m looking forward to making more contributions to the open-source community in the future. 
