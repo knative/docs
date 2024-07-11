@@ -5,8 +5,7 @@ on:
     branches: ['main']
     paths:
     - "code-samples/serving/hello-world/helloworld-go/**"
-    - "code-samples/eventing/bookstore-sample-app/solution/frontend/**"
-    - "code-samples/eventing/bookstore-sample-app/solution/node-server/**"
+    - "code-samples/eventing/bookstore-sample-app/**"
     - "docs/serving/autoscaling/autoscale-go/**"
     - "hack/docker/**"
     - ".github/workflows/knative-docs-image.yaml"
