@@ -53,6 +53,7 @@ metadata:
 Alternatively, you can use a user with the necessary credentials. In addition, using a user with fewer permissions may be easier to verify.
 
 **Create a Role in the Target Namespace:** Define a role that grants the necessary permissions for the event source to interact with resources, using the verb `knsubscribe`.
+
 ```
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -67,7 +68,9 @@ rules:
    - knsubscribe
 ```
 
-**Binding the Role to the Service Account:** Create a role binding in the target namespace to bind the role to the service account from the source namespace. 
+**Binding the Role to the Service Account or User:** Create a role binding in the target namespace to bind the role to the service account or the user from the source namespace. 
+
+This example uses the service account created from before:
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1
