@@ -114,7 +114,7 @@ I still remember skimming over the feature track document for the first time bef
 
 One of the standout aspects of this program was the ample opportunities I had to engage with the Knative Eventing community. Initially, I was hesitant to ask questions, fearing it would expose my inexperience. However, as I started to participate in discussions more and noticed how helpful the community members were, I gained much more confidence. In addition, this allowed me to develop a deeper appreciation for the collaborative nature of open source and I’m glad to be a part of the community.
 
-By the end of the program, I had achieved significant milestones: I opened 7 issues and merged 11 PRs. For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. 
+By the end of the program, I had achieved significant milestones: I opened [7 issues](https://github.com/knative/eventing/issues?q=is%3Aissue+CrossNamespace) and merged [11 PRs](https://github.com/knative/eventing/pulls?q=is%3Apr+CrossNamespace+). For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. 
 
 ## Final Comments
 
