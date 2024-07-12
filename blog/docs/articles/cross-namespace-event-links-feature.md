@@ -14,7 +14,7 @@ Following the new changes, the control plane and data plane were adjusted accord
 
 ## Using the Cross Namespace Event Links Feature
 
-This feature is planned to come out in the 1.15 release as an alpha feature. Here’s how end users can use cross namespace referencing in Knative Eventing: 
+This feature is planned to come out in the 1.15 release as an alpha feature and it's currently only supported for the InMemoryChannel and MTChannelBasedBroker using InMemoryChannels. Here’s how end users can use cross namespace referencing in Knative Eventing: 
 
 ### Enabling the Feature Flag
 
