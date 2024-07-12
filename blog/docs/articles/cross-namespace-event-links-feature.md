@@ -2,7 +2,7 @@
 
 **Author: [Yijie Wang](https://www.linkedin.com/in/yijie-wang0806/), LFX'24 Mentee**
 
-Over the past three months, I’ve had the incredible opportunity to participate in the LFX Mentorship Program. My specific project was titled CNCF - Knative Eventing: Cross Namespace Event Links. As the term wraps up, I want to take a moment to reflect on my journey and share it with you.
+Over the past three months, I’ve had the incredible opportunity to participate in the LFX Mentorship Program. My specific project was titled [CNCF - Knative Eventing: Cross Namespace Event Links](https://github.com/knative/eventing/issues/7530). As the term wraps up, I want to take a moment to reflect on my journey and share it with you.
 
 ## Feature Description
 
