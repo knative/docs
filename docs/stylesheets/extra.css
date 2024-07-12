@@ -357,6 +357,7 @@ border-radius: 20% 0 0 0 ;
 
 .md-footer-meta {
   background-color: var(--md-footer-bg-color);
+  width: 100%;
 }
 
 .md-footer-meta__inner{
@@ -369,6 +370,7 @@ border-radius: 20% 0 0 0 ;
   display: flex;
   flex-grow: 1;
   align-items: center;
+  justify-content: center;
 }
 
 .footer-links a {
@@ -495,3 +497,10 @@ border-radius: 20% 0 0 0 ;
     color: var(--nav-item-color);
   }
 }
+/* @media screen and (max-width:2600px){
+.md-footer-meta {
+  justify-content: space-between;
+}
+} */
+
+  
