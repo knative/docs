@@ -38,7 +38,9 @@ data:
 
 RBAC policies define the permissions required for different resources to interact across namespaces. Here’s how you can set it up: 
 
-**Create a Service Account:** In the namespace where the event source resides, create a service account that will be used to access resources in the target namespace.
+**Create a Service Account or Specify a User:** In the namespace where the event source resides, create a service account or specify a user that will be used to access resources in the target namespace.
+
+For example, to create a service account:
 
 ```
 apiVersion: v1
@@ -47,6 +49,8 @@ metadata:
   name: eventing-controller
   namespace: source-namespace
 ```
+
+Alternatively, you can use a user with the necessary credentials. In addition, using a user with fewer permissions may be easier to verify.
 
 **Create a Role in the Target Namespace:** Define a role that grants the necessary permissions for the event source to interact with resources, using the verb `knsubscribe`.
 ```
