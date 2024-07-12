@@ -221,8 +221,8 @@
         <a href="{{ 'about/case-studies/' | url }}">Case Studies</a>
       </h1>
       <div class="cases-table">
-        <div class="col">
-          <a href="{{ 'about/case-studies/sva/' | url }}">
+        <a href="{{ 'about/case-studies/sva/' | url }}">
+          <div class="col">
             <div class="logo">
               <img class="sva" src="images/case-studies/sva.png" alt="" draggable="false" />
             </div>
@@ -231,10 +231,10 @@
               "Knative allowed the team to centralize their system, scale, audit, and 
               even select events while enforcing policies and simplifying the architecture"<br>
             </p>
-          </a>
-        </div>
-        <div class="col">
-          <a href="{{ 'about/case-studies/ibm/' | url }}">
+          </div>
+        </a>
+        <a href="{{ 'about/case-studies/ibm/' | url }}">
+          <div class="col">
             <div class="logo">
               <img class="ibm" src="images/case-studies/ibm.png" alt="IBM logo" draggable="false" width="75" />
             </div>
@@ -243,10 +243,10 @@
               "The introduction of the ML training infrastructure using Knative Eventing 
               has enabled us to establish a well-defined operational boundary for the service teams."<br>
             </p>
-          </a>
-        </div>
-        <div class="col">
-          <a href="{{ 'about/case-studies/pnc/' | url }}">
+          </div>
+        </a>
+        <a href="{{ 'about/case-studies/pnc/' | url }}">
+          <div class="col">
             <div class="logo">
               <img class="pnc" src="images/case-studies/pnc_bank.png" alt="" draggable="false" />
             </div>
@@ -255,17 +255,18 @@
               "The power of Knative’s eventing and serverless features allows PNC to bridge processes 
               between Apache Kafka and CI/CD toolchain events and achieve this automated state."<br>
             </p>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
+  
 
   <section class="cncf-notice-container">
     <h3>Knative is a <a href="https://www.cncf.io/">Cloud Native Computing Foundation</a> incubation project</h3>
     <img class="cncf-logo" src="images/home-images/cncf-color.png" alt="" draggable="false" />
   </section>
-
+  
   <section class="whats-next-container">
     <div class="md-grid md-typeset">
       <h1>What's Next?</h1>
@@ -308,7 +309,7 @@
       </div>
     </div>
   </section>
-</div>
+</div>  
 {% endblock %}
 
 {% block scripts %}

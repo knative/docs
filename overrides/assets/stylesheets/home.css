@@ -355,6 +355,8 @@ h2.secondary-headline, h3.trusted-by {
   color: black;
   display: flex;
   background-color: #f3f1f2;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .case-studies-container h1 {
@@ -365,35 +367,42 @@ h2.secondary-headline, h3.trusted-by {
   display: flex;
   justify-content: center;
   max-width: 100%;
-  margin:1rem;
+  margin: 1rem;
   align-items: center;
 }
-.case-studies-container .cases-table .col{
+
+.case-studies-container .cases-table a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.case-studies-container .cases-table .col {
   background-color: white;
-  padding:1.5rem;
-  margin:1rem 0.5rem;
+  padding: 1.5rem;
+  margin: 1rem 0.5rem;
   border-radius: 0.7rem;
-  width:25vw;
-  height:250px;
+  width: 25vw;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.case-studies-container .cases-table .col:hover{
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+.case-studies-container .cases-table .col:hover {
+  border: 2px solid gray;
 }
+
 .case-studies-container .logo {
   display: flex;
   height: 26px;
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 2em;
-}
-
-.case-studies-container .col {
-  min-width: 38%;
-  max-width: 40%;
+  padding-top: 2rem;
 }
 
 .case-studies-container .logo img {
-  max-width: 110px
+  max-width: 110px;
 }
 
 .case-studies-container .logo .sva {
