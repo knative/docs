@@ -50,7 +50,7 @@ metadata:
   namespace: source-namespace
 ```
 
-Alternatively, you can use a user with the necessary credentials. In addition, using a user with fewer permissions may be easier to verify.
+Alternatively, you can use a user with the necessary credentials. It may be easier to verify if you have the credentials to a different user in the cluster with fewer permissions and make the RoleBinding to that user.
 
 **Create a Role in the Target Namespace:** Define a role that grants the necessary permissions for the event source to interact with resources, using the verb `knsubscribe`.
 
