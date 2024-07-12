@@ -121,6 +121,8 @@ I still remember skimming over the feature track document for the first time bef
 
 One of the standout aspects of this program was the ample opportunities I had to engage with the Knative Eventing community. Initially, I was hesitant to ask questions, fearing it would expose my inexperience. However, as I started to participate in discussions more and noticed how helpful the community members were, I gained much more confidence. In addition, this allowed me to develop a deeper appreciation for the collaborative nature of open source and I’m glad to be a part of the community.
 
+During the program, I encountered several technical challenges that contributed to my learning experience. One major challenge was integrating this new feature with existing infrastructure, which led to unforeseen issues. For example, modifying a function required ensuring that all parts of the code calling this function still operated correctly. Additionally, navigating the large Knative Eventing codebase was initially overwhelming. Understanding the architectural design, such as how the end-to-end (e2e) tests ran, took some time, but it was an invaluable learning process that enhanced my problem-solving skills and technical knowledge.
+
 By the end of the program, I had achieved significant milestones: I opened [7 issues](https://github.com/knative/eventing/issues?q=is%3Aissue+CrossNamespace) and merged [11 PRs](https://github.com/knative/eventing/pulls?q=is%3Apr+CrossNamespace+). For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. 
 
 ## Final Comments
