@@ -5,8 +5,7 @@ on:
     branches: ['main']
     paths:
     - "code-samples/serving/hello-world/helloworld-go/**"
-    - "code-samples/eventing/bookstore-sample-app/solution/frontend/**"
-    - "code-samples/eventing/bookstore-sample-app/solution/node-server/**"
+    - "code-samples/eventing/bookstore-sample-app/**"
     - "docs/serving/autoscaling/autoscale-go/**"
     - "hack/docker/**"
     - ".github/workflows/knative-docs-image.yaml"
@@ -60,7 +59,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x, windows/amd64, windows/arm64, darwin/amd64, darwin/arm64
+          platforms: linux/amd64,linux/arm64
           context: ./code-samples/eventing/bookstore-sample-app/solution/frontend
           tags: ghcr.io/knative/bookstore-frontend:latest
 
@@ -68,6 +67,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x, windows/amd64, windows/arm64, darwin/amd64, darwin/arm64
+          platforms: linux/amd64,linux/arm64
           context: ./code-samples/eventing/bookstore-sample-app/solution/node-server
           tags: ghcr.io/knative/node-server:latest
