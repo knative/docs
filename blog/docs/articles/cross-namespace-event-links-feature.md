@@ -8,9 +8,9 @@ Over the past three months, I’ve had the incredible opportunity to participate
 
 In a multi-tenant scenario, some use cases might require separating brokers and channels in different namespaces than the services they send events to. While this setup would work if the team consuming the events has access to the namespaces where brokers and channels are in, this is not always the case. To address this issue, a new feature was proposed for triggers and subscriptions (event links) to exist in a different namespace from the broker or channel they reference.​​ The LFX Mentorship Program gave me the chance to bring this novel and highly requested feature into reality. 
 
-For the specific implementation, I used Role-Based Access Control (RBAC) to manage permissions securely. A new RBAC verb, “knsubscribe”, was created to allow users to subscribe to a particular broker/channel. In addition, I used Subject Access Reviews to ensure only authorized users could create and manage these cross-namespace event links, further enhancing security within the Knative Eventing framework. 
+For the specific implementation, I used Role-Based Access Control (RBAC) to manage permissions securely. A new RBAC verb, `knsubscribe`, was created to allow users to subscribe to a particular broker/channel. In addition, I used Subject Access Reviews to ensure only authorized users could create and manage these cross-namespace event links. 
 
-Following the new changes, the control plane and data plane were adjusted accordingly to enable the smooth execution of the feature. Unit tests were created to ensure the feature works as expected and an E2E test was written to confirm event delivery between the resources. All the changes were placed behind a feature flag, allowing users to enable/disable this feature as desired. 
+Following the new changes, the control plane and data plane were adjusted accordingly to enable the smooth execution of the feature. Unit tests were created to ensure the feature works as expected and an E2E test was added to confirm event delivery between the resources. All the changes were placed behind a feature flag, allowing users to enable/disable this feature as desired. 
 
 ## Using the Cross Namespace Event Links Feature
 
