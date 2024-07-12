@@ -113,7 +113,7 @@ spec:
 
 ### Validating Cross Namespace Events
 
-By following these steps, you can enable cross namespace referencing in Knative Eventing, set up the necessary RBAC permissions, and create triggers that reference brokers in another namespace. This setup enhances the flexibility of your event-driven applications, enabling communication across different namespaces. 
+By following these steps, you can enable cross namespace referencing in Knative Eventing, set up the necessary RBAC permissions, and create triggers that reference brokers in another namespace. This setup enhances the flexibility of your event-driven applications, enabling event links across different namespaces. 
 
 ## Program Experience
 
