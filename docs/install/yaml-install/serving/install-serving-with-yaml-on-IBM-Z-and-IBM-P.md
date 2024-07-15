@@ -5,10 +5,10 @@ This additional step is required for installing the Kourier networking layer on 
 Once you completed installing Kourier,  patch the envoy image as described below. Use the envoy image included as part of the (RedHat Maistra)[https://maistra.io/] distribution. Maistra is an opinionated distribution of Istio designed to work with OpenShift and is supported on IBM Z and IBM Power platforms.
 
 1. Find the image name to use:  
-1a. Access the [redhat catalog](https://catalog.redhat.com/software/containers/openshift-service-mesh/proxyv2-rhel8/5d2cda455a134672890f640a) 
-1b. Choose the appropriate architecture (ppc64le/s390x) from the architecture drop down. 
-1c. Choose the latest tag from the list of available tags at the tag dropdown
-1d. Click on the "get this image" tab and copy the image name. For example: `registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:ced904...`
+   1. Access the [redhat catalog](https://catalog.redhat.com/software/containers/openshift-service-mesh/proxyv2-rhel8/5d2cda455a134672890f640a) 
+   1.  Choose the appropriate architecture (ppc64le/s390x) from the architecture drop down. 
+   1. Choose the latest tag from the list of available tags at the tag dropdown
+   1. Click on the "get this image" tab and copy the image name. For example: `registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:ced904...`
 
 2. Patch the **3scale-kourier-gateway**  deployment in **kourier-system** namespace with latest available image using **kubectl** as shown below.
 
