@@ -1,8 +1,8 @@
 # My LFX Mentorship Experience: Cross Namespace Event Links Feature 
 
-**Author: [Yijie Wang](https://www.linkedin.com/in/yijie-wang0806/), LFX'24 Mentee**
+**Author: [Yijie Wang](https://www.linkedin.com/in/yijie-wang0806/){:target="_blank"}, LFX'24 Mentee**
 
-Over the past three months, I’ve had the incredible opportunity to participate in the LFX Mentorship Program. My specific project was titled [CNCF - Knative Eventing: Cross Namespace Event Links](https://github.com/knative/eventing/issues/7530), with my proposed feature track [here](https://docs.google.com/document/d/1rtDW446cldTrZaqeiOUdZuVC4u6SFHUneT3r4j2izaU/edit?usp=sharing&resourcekey=0-MNvWVD8pm_xnPfyCMMXHDA). As the term wraps up, I want to take a moment to reflect on my journey and share it with you.
+Over the past three months, I’ve had the incredible opportunity to participate in the LFX Mentorship Program. My specific project was titled [CNCF - Knative Eventing: Cross Namespace Event Links](https://github.com/knative/eventing/issues/7530){:target="_blank"}, with my proposed feature track [here](https://docs.google.com/document/d/1rtDW446cldTrZaqeiOUdZuVC4u6SFHUneT3r4j2izaU/edit?usp=sharing&resourcekey=0-MNvWVD8pm_xnPfyCMMXHDA){:target="_blank"}. As the term wraps up, I want to take a moment to reflect on my journey and share it with you.
 
 ## Feature Description
 
@@ -123,10 +123,10 @@ One of the standout aspects of this program was the ample opportunities I had to
 
 The experience was not without technical challenges. One major challenge was integrating this new feature with existing infrastructure, which led to unforeseen issues. For example, modifying a function required ensuring that all parts of the code calling this function still operated correctly. Additionally, navigating the large Knative Eventing codebase was initially overwhelming. Understanding the architectural design, such as how the end-to-end (e2e) tests ran, took some time, but it was an invaluable learning process that enhanced my problem-solving skills and technical knowledge.
 
-By the end of the program, I had achieved significant milestones: I opened [7 issues](https://github.com/knative/eventing/issues?q=is%3Aissue+CrossNamespace) and merged [11 PRs](https://github.com/knative/eventing/pulls?q=is%3Apr+CrossNamespace+). For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. 
+By the end of the program, I had achieved significant milestones: I opened [7 issues](https://github.com/knative/eventing/issues?q=is%3Aissue+CrossNamespace){:target="_blank"} and merged [11 PRs](https://github.com/knative/eventing/pulls?q=is%3Apr+CrossNamespace+){:target="_blank"}. For someone who entered the program with limited software experience, these accomplishments are particularly meaningful for me. 
 
 ## Final Comments
 
-Finally, I would like to extend my gratitude to [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/) and [Pierangelo Di Pilato](https://www.linkedin.com/in/pierdipi/) for giving me this opportunity, entrusting me in implementing this feature, and for the guidance and mentorship along the journey. It truly would not be possible without your help and support.
+Finally, I would like to extend my gratitude to [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/){:target="_blank"} and [Pierangelo Di Pilato](https://www.linkedin.com/in/pierdipi/){:target="_blank"} for giving me this opportunity, entrusting me in implementing this feature, and for the guidance and mentorship along the journey. It truly would not be possible without your help and support.
 
 In a few years, I might not remember the exact lines of code that I wrote, but I will always recall the exhilarating feeling when my unit test first passed and the satisfaction of seeing this feature come to life step-by-step. This experience has broadened my career prospects and I’m looking forward to making more contributions to the open-source community in the future. 
