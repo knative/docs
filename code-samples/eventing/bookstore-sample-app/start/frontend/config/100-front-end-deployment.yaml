@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bookstore-frontend
-          image: quay.io/rh-ee-leoli/bookstore-frontend:latest
+          image: ghcr.io/knative/bookstore-frontend:latest
           ports:
             - containerPort: 3000
 
