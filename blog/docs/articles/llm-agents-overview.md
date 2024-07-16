@@ -166,4 +166,4 @@ In this blog post, we have covered what LLM agents are, how LLMs can call tools,
 tool calling using metadata. If you are interested in how to build an LLM agent system that uses Knative to simplify
 tool calling and discovery, as well as our vision for how this technology should evolve going forwards, keep your eyes
 out for our next blog on this topic which is coming soon! If you have any questions on this topic, we invite you to engage
-with us on the Knative channels in the CNCF slack instance.
+with us on the Knative channels in the [CNCF slack instance](https://slack.cncf.io).
