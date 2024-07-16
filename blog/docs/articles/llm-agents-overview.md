@@ -25,7 +25,9 @@ the user. Generally speaking, an LLM agent will also have a system prompt explai
 giving it some rules over when to call tools and/or reply to the user. For most Agents, the control flow
 can be shown as follows:
 
-![](./images/llm-agent-flow.webp)
+<figure markdown="1">
+![image](./images/llm-agent-flow.webp)
+</figure>
 
 One of the key properties of an LLM Agent over some other form of agent is that the decisions on whether
 to call more tools, to call the LLM again, to call another agent, or to finish processing is made by the LLM
