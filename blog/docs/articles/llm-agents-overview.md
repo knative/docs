@@ -97,6 +97,7 @@ could very easily be turned into one (for example by placing the logic for the t
 which builds as a Linux Container, deploying it as a Knative Service). But why is this important?
 
 When all the tools are an API wrapper, all that is needed to define any tool in the system is:
+
 1. The name of the tool
 2. A description of the tool
 3. The parameters the tool accepts
@@ -142,6 +143,7 @@ As we saw above, the EventType resource contains all the information to tell the
 tool with the message from the LLM containing the tool call, all we need to do is use the `schemaData` as well as the `type`
 field in the EventType to construct a CloudEvent with the correct data which will get sent to the correct service. To send
 it to the service we can either:
+
 1. Resolve the reference from the spec to a URI and call that directly
 2. Use a Knative Broker to handle the dispatch of all tool calls to the correct Knative Service
 
@@ -153,6 +155,7 @@ deployment through a new CustomResource - check out the [issue here](https://git
 for more information as well as for how it works.
 
 In this way, all you need to do for your LLM Agent to learn how to call one of your services is to:
+
 1. Create a trigger from your broker to your service using a filter selecting a specific type of event
 2. Create an EventType with the same `type` that uses the `schemaData` to describe the API of your service
 
