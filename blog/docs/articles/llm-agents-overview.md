@@ -21,7 +21,7 @@ that information to make decisions and take actions to accomplish a goal. In the
 is a system with an LLM at its core that is able to make decisions on what actions to take as it works to
 answer the prompt it received. The most common actions LLM agents can be built to take are: sending text
 or other media to the user, calling a tool to help answer the user, and calling another agent to help answer
-the user. Generally speaking, an LLM agent will also have a system prompt explaining what it’s role is and
+the user. Generally speaking, an LLM agent will also have a system prompt explaining what its role is and
 giving it some rules over when to call tools and/or reply to the user. For most Agents, the control flow
 can be shown as follows:
 
@@ -40,7 +40,7 @@ text to the user before continuing to call other agents or tools.
 All that is needed for an LLM to call a tool is some way for the LLM to communicate which tool it wants to call,
 as well as what arguments (if any) it wants to provide to the tool. As the LLM output is just a sequence of tokens
 there needs to be some kind of external system that can parse this information from the output, so the LLM needs
-to output structured or semi structured data in a consistent way to call a tool. There are multiple different APIs
+to output structured or semi-structured data in a consistent way to call a tool. There are multiple different APIs
 on how to do this, and it currently somewhat depends on the exact model you are using (as they have been trained
 to handle this in different ways). For the purposes of this blog, we are going to be specifically looking at the
 [OpenAI Chat API](https://platform.openai.com/docs/api-reference/chat/create) for doing this, however the concepts
@@ -97,7 +97,7 @@ only knows about the name of the tool and what parameters it can accept, any too
 could very easily be turned into one (for example by placing the logic for the tool into a Knative Function
 which builds as a Linux Container, deploying it as a Knative Service). But why is this important?
 
-When all the tools are an API wrapper, all that is needed to define any tool in the system is:
+When all the tools just are an API wrapper, all that is needed to define any tool in the system is:
 
 1. The name of the tool
 2. A description of the tool
