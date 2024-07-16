@@ -25,9 +25,7 @@ the user. Generally speaking, an LLM agent will also have a system prompt explai
 giving it some rules over when to call tools and/or reply to the user. For most Agents, the control flow
 can be shown as follows:
 
-<figure markdown="1">
-![image](./images/llm-agent-flow.webp)
-</figure>
+![](./images/llm-agent-flow.webp)
 
 One of the key properties of an LLM Agent over some other form of agent is that the decisions on whether
 to call more tools, to call the LLM again, to call another agent, or to finish processing is made by the LLM
@@ -45,7 +43,8 @@ there needs to be some kind of external system that can parse this information f
 to output structured or semi structured data in a consistent way to call a tool. There are multiple different APIs
 on how to do this, and it currently somewhat depends on the exact model you are using (as they have been trained
 to handle this in different ways). For the purposes of this blog, we are going to be specifically looking at the
-OpenAI Chat API for doing this, however the concepts are generally the same for other models.
+[OpenAI Chat API](https://platform.openai.com/docs/api-reference/chat/create) for doing this, however the concepts
+are generally the same for other models.
 
 In the OpenAI Chat API, you are asked to pass in a list of tools that the LLM is able to use. The key information
 you have to provide is the `name` of the tool, as well as any `parameters` that the tool might accept. For each
