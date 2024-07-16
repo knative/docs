@@ -3,27 +3,6 @@ kind: Broker
 metadata:
   name: bookstore-broker
 
-
----
-# This Trigger subscribes to the Broker and filters events based on the type and badwordfilter attribute.
-# Those comments that contain insults are filtered out by the badwordfilter attribute and they will be redirected to the event-display Service.
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: temp-trigger
-spec:
-  broker: bookstore-broker
-  filter:
-    attributes:
-      type: new-review-comment # This is the filter that will be applied to the event, only events with the ce-type new-review-comment will be processed
-  subscriber:
-    ref:
-      apiVersion: v1
-      kind: Service
-      name: event-display
-
-
-
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger

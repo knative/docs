@@ -1,9 +1,6 @@
 specVersion: 0.36.0
 name: bad-word-filter
 runtime: python
-registry: quay.io/rh-ee-leoli
-image: quay.io/rh-ee-leoli/bad-word-filter:latest
-imageDigest: sha256:b6bec398e44dc20630856f39ef29195db9a3ee5b43cec0372207c89ad633aeb2
 created: 2024-03-27T23:12:06.178272+08:00
 build:
   builder: s2i

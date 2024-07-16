@@ -12,22 +12,3 @@ spec:
       apiVersion: flows.knative.dev/v1
       kind: Sequence
       name: sequence
-
----
-# This Trigger subscribes to the Broker and filters events based on the type and badwordfilter attribute.
-# Those comments that contain insults are filtered out by the badwordfilter attribute and they will be redirected to the event-display Service.
-apiVersion: eventing.knative.dev/v1
-kind: Trigger
-metadata:
-  name: seq-reply-trigger
-spec:
-  broker: bookstore-broker
-  filter:
-    attributes:
-      type: moderated-comment # This is the filter that will be applied to the event, only events with the ce-type moderated-comment will be processed
-      badwordfilter: bad # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: bad will be processed
-  subscriber:
-    ref:
-      apiVersion: v1
-      kind: Service
-      name: event-display

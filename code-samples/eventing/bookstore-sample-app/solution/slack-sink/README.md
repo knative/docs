@@ -11,7 +11,7 @@ When a CloudEvent with the type `new-review-comment` is sent to the Knative Even
 ## Install prerequisites
 
 ### Prerequisite 1: Install Camel CLI
-Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html).
+Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html){:target="_blank"}.
 
 **Troubleshot**: If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
 
@@ -29,7 +29,7 @@ $ kamel install --registry docker.io --organization <your-organization> --regist
 
 Replace the placeholders with your actual Docker registry information.
 
-If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html) for the installation. 
+If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html){:target="_blank"} for the installation. 
 
 You will see this message if the installation is successful:
 
@@ -43,19 +43,19 @@ Follow the instruction here on how to create the slack workspace and generate an
 ## Implementation
 ### Step 1: Create the Broker
 
-This broker is created solely for testing purposes and is intended for temporary use during this part of the tutorial only. 
+This Broker is created solely for testing purposes and is intended for temporary use during this part of the tutorial only. 
 
-**Method 1**: Initialize a broker within your Kubernetes cluster using the Knative CLI:
+**Method 1**: Initialize a Broker within your Kubernetes cluster using the Knative CLI:
 
 ```bash
 $ kn broker create book-review-broker
 ```
-You will see this message if the broker is created successfully:
+You will see this message if the Broker is created successfully:
 
 ```
-Broker ‘book-review-broker’ successfully created in namespace ‘default’.
+Broker 'book-review-broker' successfully created in namespace 'default'.
 ```
-**Method 2**: You can create a new YAML file to create the broker:
+**Method 2**: You can create a new YAML file to create the Broker:
 
 *new-knative-broker.yaml*
 ```yaml
@@ -70,7 +70,7 @@ After you saved the file, you can apply the configuration to your Kubernetes clu
 ```bash
 $ kubectl apply -f new-knative-broker.yaml
 ```
-You will see this message if the broker is created successfully:
+You will see this message if the Broker is created successfully:
 
 ```
 broker.eventing.knative.dev/book-review-broker created
@@ -139,9 +139,9 @@ slack-sink-pipe   Ready      1
 
 To trigger notifications, you'll need to simulate an event that matches the criteria set in your Slack sink configuration. For example, submitting a book review could be an event of type `new-review-comment`.
 
-Directly sending CloudEvents to a broker using curl from an external machine (like your local computer) is typically **constrained** due to the networking and security configurations of Kubernetes clusters.
+Directly sending CloudEvents to a Broker using curl from an external machine (like your local computer) is typically **constrained** due to the networking and security configurations of Kubernetes clusters.
 
-Therefore, you need to create a new pod in your Kubernetes cluster to send a CloudEvent to the broker. You can use the following command to create a new pod:
+Therefore, you need to create a new pod in your Kubernetes cluster to send a CloudEvent to the Broker. You can use the following command to create a new pod:
 
 ```bash
 $ kubectl run curler --image=radial/busyboxplus:curl -it --restart=Never
@@ -154,9 +154,9 @@ If you don't see a command prompt, try pressing enter.
 ```
 
 
-Using curl command to send a CloudEvent to the broker:
+Using curl command to send a CloudEvent to the Broker:
 ```bash
-[root@curler:/]$ curl -v "<The URI to your broker>" \
+[root@curler:/]$ curl -v "<The URI to your Broker>" \
 -X POST \
 -H "Ce-Id: review1" \
 -H "Ce-Specversion: 1.0" \
@@ -166,7 +166,7 @@ Using curl command to send a CloudEvent to the broker:
 -d 'Hello from Knative!'
 ```
 
-You can find the URI to your broker by running the following command:
+You can find the URI to your Broker by running the following command:
 
 ```bash
 $ kubectl get broker book-review-broker
