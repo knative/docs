@@ -2,7 +2,8 @@
   --md-primary-fg-color: #f3f1f2;
   --md-primary-fg-color--dark: #0D4984;
   --md-primary-fg-color--light: #6593C8;
-  --nav-item-color: #494848;
+  --nav-item-color: #4d4d4d;
+  --md-footer-bg-color: #081729;
 }
 
 .md-clipboard {
@@ -356,12 +357,20 @@ border-radius: 0.7rem 0 0 0 ;
 
 .md-footer-meta {
   background-color: var(--md-footer-bg-color);
+  width: 100%;
+}
+
+.md-footer-meta__inner{
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem 1.5rem;
 }
 
 .footer-links {
   display: flex;
   flex-grow: 1;
   align-items: center;
+  justify-content: center;
 }
 
 .footer-links a {
@@ -488,3 +497,5 @@ border-radius: 0.7rem 0 0 0 ;
     color: var(--nav-item-color);
   }
 }
+
+  

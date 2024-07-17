@@ -488,7 +488,7 @@ position: relative;
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 0;
+  padding-top: 1rem;
 }
 
 .cncf-notice-container h3 {
