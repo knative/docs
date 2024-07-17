@@ -11,7 +11,7 @@
             solution to build Serverless and Event Driven Applications
           </h1>
           <p style="display: block">
-            <a href="{{ 'getting-started/' | url }}" class="md-button white md-button--primary">Try the tutorial</a>
+            <a href="{{ 'getting-started/tutorial' | url }}" class="md-button white md-button--primary">Try the tutorial</a>
             <a href="{{ 'install/' | url }}" class="md-button white">Install Knative on your cluster</a>
           </p>
           <div class="trusted-by-container">
@@ -48,7 +48,7 @@
   <section class="why-serverless-container">
     <div class="md-grid md-typeset">
       <h1>Why serverless containers?</h1>
-      <p class="normal-text">
+      <p class="normal-text-head">
         Serverless refers to running back-end programs and processes in the cloud. Serverless works on an as-used basis,
         meaning that companies only use what they pay for. Knative is a platform-agnostic
         solution for running serverless deployments.
@@ -57,9 +57,11 @@
         <div class="img-row">
           <div class="img-col">
             <div class="reason-img">
-              <img src="images/home-images/blue_simple_abstractions_icon.svg"
-                onmouseover="this.src='images/home-images/dkblue_simple_abstractions_icon.svg'"
-                onmouseout="this.src='images/home-images/blue_simple_abstractions_icon.svg'" alt="" draggable="false">
+              <div class="img-wrapper">
+                <img src="images/home-images/blue_simple_abstractions_icon.svg"
+                  onmouseover="this.src='images/home-images/dkblue_simple_abstractions_icon.svg'"
+                  onmouseout="this.src='images/home-images/blue_simple_abstractions_icon.svg'" alt="" draggable="false">
+              </div>
             </div>
             <div class="reason-text">
               <h2>Simpler Abstractions</h2>
@@ -70,9 +72,11 @@
           </div>
           <div class="img-col">
             <div class="reason-img">
-              <img src="images/home-images/blue_autoscaling_icon.svg"
-                onmouseover="this.src='images/home-images/dkblue_autoscaling_icon.svg'"
-                onmouseout="this.src='images/home-images/blue_autoscaling_icon.svg'" alt="" draggable="false">
+              <div class="img-wrapper">
+                <img src="images/home-images/blue_autoscaling_icon.svg"
+                  onmouseover="this.src='images/home-images/dkblue_autoscaling_icon.svg'"
+                  onmouseout="this.src='images/home-images/blue_autoscaling_icon.svg'" alt="" draggable="false">
+              </div>
             </div>
             <div class="reason-text">
               <h2>Autoscaling</h2>
@@ -83,9 +87,11 @@
           </div>
           <div class="img-col">
             <div class="reason-img">
-              <img src="images/home-images/blue_progressive_rollouts_icon.svg"
-                onmouseover="this.src='images/home-images/dkblue_progressive_rollouts_icon.svg'"
-                onmouseout="this.src='images/home-images/blue_progressive_rollouts_icon.svg'" alt="" draggable="false">
+              <div class="img-wrapper">
+                <img src="images/home-images/blue_progressive_rollouts_icon.svg"
+                  onmouseover="this.src='images/home-images/dkblue_progressive_rollouts_icon.svg'"
+                  onmouseout="this.src='images/home-images/blue_progressive_rollouts_icon.svg'" alt="" draggable="false">
+              </div>
             </div>
             <div class="reason-text">
               <h2>Progressive Rollouts</h2>
@@ -98,9 +104,11 @@
         <div class="img-row">
           <div class="img-col">
             <div class="reason-img">
-              <img src="images/home-images/blue_event_intergrations_icon.svg"
-                onmouseover="this.src='images/home-images/dkblue_event_intergrations_icon.svg'"
-                onmouseout="this.src='images/home-images/blue_event_intergrations_icon.svg'" alt="" draggable="false">
+              <div class="img-wrapper">
+                <img src="images/home-images/blue_event_intergrations_icon.svg"
+                  onmouseover="this.src='images/home-images/dkblue_event_intergrations_icon.svg'"
+                  onmouseout="this.src='images/home-images/blue_event_intergrations_icon.svg'" alt="" draggable="false">
+              </div>
             </div>
             <div class="reason-text">
               <h2>Event Integrations</h2>
@@ -111,9 +119,11 @@
           </div>
           <div class="img-col">
             <div class="reason-img">
-              <img src="images/home-images/blue_handle_events_icon.svg"
-                onmouseover="this.src='images/home-images/dkblue_handle_events_icon.svg'"
-                onmouseout="this.src='images/home-images/blue_handle_events_icon.svg'" alt="" draggable="false">
+              <div class="img-wrapper">
+                <img src="images/home-images/blue_handle_events_icon.svg"
+                  onmouseover="this.src='images/home-images/dkblue_handle_events_icon.svg'"
+                  onmouseout="this.src='images/home-images/blue_handle_events_icon.svg'" alt="" draggable="false">
+              </div>
             </div>
             <div class="reason-text">
               <h2>Handle Events</h2>
@@ -124,9 +134,11 @@
           </div>
           <div class="img-col">
             <div class="reason-img">
-              <img src="images/home-images/blue_plugable_icon.svg"
-                onmouseover="this.src='images/home-images/dkblue_plugable_icon.svg'"
-                onmouseout="this.src='images/home-images/blue_plugable_icon.svg'" alt="" draggable="false">
+              <div class="img-wrapper">
+                <img src="images/home-images/blue_plugable_icon.svg"
+                  onmouseover="this.src='images/home-images/dkblue_plugable_icon.svg'"
+                  onmouseout="this.src='images/home-images/blue_plugable_icon.svg'" alt="" draggable="false">
+              </div>
             </div>
             <div class="reason-text">
               <h2>Plugable</h2>
@@ -139,7 +151,7 @@
       </div>
     </div>
   </section>
-
+  
   <section class="knative-components-container">
     <div class="md-grid md-typeset">
       <h1>Knative Components</h1>
@@ -222,58 +234,38 @@
       </h1>
       <div class="cases-table">
         <div class="col">
-          <a href="{{ 'about/case-studies/deepc/' | url }}">
+          <a href="{{ 'about/case-studies/sva/' | url }}">
             <div class="logo">
-              <img class="deepc" src="images/case-studies/deepc.png" alt="" draggable="false" />
+              <img class="sva" src="images/case-studies/sva.png" alt="" draggable="false" />
             </div>
             <hr>
             <p class="normal-text">
-              "It should be possible for
-              somebody with an algorithm to have it on the platform in an hour"<br><br>
-
-              —Andrew Webber,<br>
-              Senior Software Engineer for deepc
+              "Knative allowed the team to centralize their system, scale, audit, and 
+              even select events while enforcing policies and simplifying the architecture"<br>
             </p>
           </a>
         </div>
         <div class="col">
-          <a href="{{ 'about/case-studies/outfit7/' | url }}">
+          <a href="{{ 'about/case-studies/ibm/' | url }}">
             <div class="logo">
-              <img class="outfit7" src="images/case-studies/outfit7.png" alt="" draggable="false" />
+              <img class="ibm" src="images/case-studies/ibm.png" alt="IBM logo" draggable="false" width="75" />
             </div>
             <hr>
             <p class="normal-text">
-              "The community support is
-              really great. The hands-on
-              experience with Knative was
-              so impressive. On the Slack
-              channel, we got actual
-              engineers to answer our questions"<br><br>
-
-              —Tilen Kavcic,<br>
-              Software Engineer for Outfit7
+              "The introduction of the ML training infrastructure using Knative Eventing 
+              has enabled us to establish a well-defined operational boundary for the service teams."<br>
             </p>
           </a>
         </div>
         <div class="col">
-          <a href="{{ 'about/case-studies/puppet/' | url }}">
+          <a href="{{ 'about/case-studies/pnc/' | url }}">
             <div class="logo">
-              <img class="puppet" src="images/case-studies/puppet.png" alt="" draggable="false" />
+              <img class="pnc" src="images/case-studies/pnc_bank.png" alt="" draggable="false" />
             </div>
             <hr>
             <p class="normal-text">
-              "I'm a strong believer in
-              working with open-source
-              vendors. We've made
-              contributions to numerous
-              projects, including Tekton,
-              Knative, Ambassador, and
-              gVisor --All of which we depend
-              on to make our product
-              functional."<br><br>
-
-              —Noah Fontes,<br>
-              Senior Principal Software Engineer for<br>Puppet
+              "The power of Knative’s eventing and serverless features allows PNC to bridge processes 
+              between Apache Kafka and CI/CD toolchain events and achieve this automated state."<br>
             </p>
           </a>
         </div>
@@ -309,13 +301,21 @@
           </a>
         </div>
         <div class="pane">
-          <a href="https://twitter.com/KnativeProject" title="Twitter Link">
-            <div class="twemoji">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
-            </div>
-            <h2>Follow us on Twitter / X</h2>
-            <p class="normal-text">For feature announcements, interesting Knative news, and other great things.</p>
-          </a>
+          <div class="whats-next-logo">
+            <a href="https://twitter.com/KnativeProject" title="Twitter Link">
+              <div class="twemoji">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" /></svg>
+              </div>
+            </a>
+            <h1 style="font-size: 50px;">|</h1>
+            <a href="https://www.linkedin.com/company/knative" title="Linkedin Link">
+              <div class="twemoji">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -15 448 512"><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" /></svg>
+              </div>
+            </a>
+          </div>
+          <h2>Follow us</h2>
+          <p class="normal-text">For feature announcements, interesting Knative news, and other great things.</p>
         </div>
       </div>
     </div>
@@ -352,7 +352,12 @@
       { logoPath: "images/corporate-logos/spider.svg", url: "https://www.spider.com/" },
       { logoPath: "images/corporate-logos/tata_comm.svg", url: "https://www.tatacommunications.com/solutions/cloud/platforms" },
       { logoPath: "images/corporate-logos/vmware.svg", url: "https://network.tanzu.vmware.com/products/serverless" },
-      { logoPath: "images/corporate-logos/y_meadows.svg", url: "https://www.ymeadows.com/" }
+      { logoPath: "images/corporate-logos/y_meadows.svg", url: "https://www.ymeadows.com/" },
+      { logoPath: "images/corporate-logos/grerook.svg", url: "https://www.greyrook.com/" },
+      { logoPath: "images/corporate-logos/high_cohesion.svg", url: "https://www.highcohesion.com/" },
+      { logoPath: "images/corporate-logos/vhive.svg", url: "https://vhive-serverless.github.io/" },
+      { logoPath: "images/corporate-logos/sva.svg", url: "https://sva.de/en" },
+      { logoPath: "images/corporate-logos/vorteil-direktiv.svg", url: "https://www.direktiv.io/" }
     ];
 
     function shuffle(array) {

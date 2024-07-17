@@ -32,6 +32,10 @@ hide:
         <td style="text-align: center; vertical-align: middle;"><img src="../../images/case-studies/deepc.png" alt="" draggable="false" style="max-width:300px;" /></td>
         <td style="text-align: center; vertical-align: middle;">AI Startup deepc Connects Researchers to Radiologists with Knative Eventing</td>
     </tr>
+    <tr onclick="window.location='./ibm/';" style="cursor: pointer;">
+        <td style="text-align: center; vertical-align: middle;"><img src="../../images/case-studies/ibm.png" alt="IBM logo" draggable="false" style="max-width:300px;" /></td>
+        <td style="text-align: center; vertical-align: middle;">IBM watsonx Assistant uses Knative Eventing to train machine learning models</td>
+    </tr>
     <tr onclick="window.location='./outfit7/';" style="cursor: pointer;">
         <td style="text-align: center; vertical-align: middle;"><img src="../../images/case-studies/outfit7.png" alt="" draggable="false" style="max-width:300px;" /></td>
         <td style="text-align: center; vertical-align: middle;">Game maker Outfit7 automates high performance ad bidding with Knative Serving</td>

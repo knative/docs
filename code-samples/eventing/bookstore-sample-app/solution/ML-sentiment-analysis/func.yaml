@@ -1,0 +1,8 @@
+specVersion: 0.36.0
+name: sentiment-analysis-app
+runtime: python
+created: 2024-02-01T00:18:00.06485162-04:00
+build:
+  builder: s2i
+deploy:
+  namespace: default

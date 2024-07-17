@@ -1,0 +1,8 @@
+specVersion: 0.36.0
+name: bad-word-filter
+runtime: python
+created: 2024-03-27T23:12:06.178272+08:00
+build:
+  builder: s2i
+deploy:
+  namespace: default

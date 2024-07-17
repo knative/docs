@@ -1,0 +1,14 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: sequence-trigger
+spec:
+  broker: bookstore-broker
+  filter:
+    attributes:
+      type: new-review-comment # This is the filter that will be applied to the event, only events with the ce-type new-review-comment will be processed
+  subscriber:
+    ref:
+      apiVersion: flows.knative.dev/v1
+      kind: Sequence
+      name: sequence
