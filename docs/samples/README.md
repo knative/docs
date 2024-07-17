@@ -9,6 +9,7 @@ Knative code samples that are actively tested and maintained by Knative working 
 
 - [Eventing and Eventing Sources code samples](eventing.md)
 - [Serving code samples](serving.md)
+- [E2E Sample Application - Knative Bookstore](../../code-samples/eventing/bookstore-sample-app/README.md)
 
 ## Community owned samples
 
