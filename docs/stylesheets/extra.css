@@ -427,6 +427,7 @@ border-radius: 0.7rem 0 0 0 ;
 
 .testimonials .testimonial .img {
   margin: auto 30px auto 60px;
+  max-width: 130px;
 }
 
 .testimonials .quote {
@@ -439,10 +440,6 @@ border-radius: 0.7rem 0 0 0 ;
   font-family: inherit;
   font-size: .85rem;
   border-left: var(--md-default-fg-color--light) 4.5px solid;
-}
-
-.testimonials .testimonial img {
-  max-width: 130px;
 }
 
 .testimonials .testimonial.blue img {
@@ -488,6 +485,15 @@ border-radius: 0.7rem 0 0 0 ;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.testimonials .quote {
+  padding: 1rem;
+  margin-top: 1rem;
+  border-left: none;
+  border-top: var(--md-default-fg-color--light) 4.5px solid;
+}
+.testimonials .testimonial .img {
+  margin: auto 30px auto 30px;
 }
 }
 @media screen and (max-width: 76.1875em) {
