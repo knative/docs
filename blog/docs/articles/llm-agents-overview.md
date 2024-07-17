@@ -1,4 +1,4 @@
-# LLM Agents with Knative
+# LLM Agents with Knative: An Overview
 
 **Author: [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/), Software Engineering Intern @ Red Hat**
 
