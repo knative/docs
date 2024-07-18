@@ -415,6 +415,9 @@ position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
+  transition: border 0.3s ease-in-out;
+  border: 2px solid transparent;
 }
 
 .case-studies-container .cases-table .col:hover {
