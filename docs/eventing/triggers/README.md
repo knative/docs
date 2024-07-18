@@ -68,8 +68,8 @@ in order for the event to be passed to the subscriber of the trigger. Note that 
 do not support filtering on the `data` field of CloudEvents.
 
 !!! important
-  The filters described in this section are currently only supported in the Apache Kafka Broker
-  and the MTChannelBasedBroker. For other brokers, please refer to the [Legacy attribute filter](#legacy-attributes-filter).
+    The filters described in this section are currently only supported in the Apache Kafka Broker
+    and the MTChannelBasedBroker. For other brokers, please refer to the [Legacy attribute filter](#legacy-attributes-filter).
 
 
 ### Example
@@ -221,8 +221,8 @@ spec:
 The provided [CloudEvents SQL Expression](https://github.com/cloudevents/spec/blob/cesql/v1.0.0/cesql/spec.md) must evaluate to true.
 
 !!! important
-  Knative 1.15+ only supports the CloudEvents SQL v1.0 specification. Any CESQL expressions written prior to Knative v1.15 should
-  be verified, as there were some changes in the CESQL specification.
+    Knative 1.15+ only supports the CloudEvents SQL v1.0 specification. Any CESQL expressions written prior to Knative v1.15 should
+    be verified, as there were some changes in the CESQL specification.
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
