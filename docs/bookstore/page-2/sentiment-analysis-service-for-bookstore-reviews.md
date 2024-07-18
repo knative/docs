@@ -93,7 +93,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![Image14](images/image14.png)
 
-`func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+`sentiment-analysis-app/func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
 
 ???+ abstract "_sentiment-analysis-app/func.py_"
 
@@ -162,7 +162,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![Image9](images/image9.png)
 
-The `requirements.txt` file contains the dependencies for the function. You can add the following dependencies to the `requirements.txt` file:
+The `sentiment-analysis-app/requirements.txt` file contains the dependencies for the function. Add the following dependencies to the file:
 ???+ abstract "_sentiment-analysis-app/requirements.txt_"
 
     ```
@@ -180,7 +180,7 @@ Knative Function will automatically install the dependencies listed here when yo
 
 In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, Knative Function will ensure that the `setup.py` file is executed after the dependencies have been installed.
 
-The `setup.py` file should contain the following code for your bookstore:
+The `sentiment-analysis-app/setup.py` file should contain the following code for your bookstore:
  
 ???+ abstract "_sentiment-analysis-app/setup.py_"
     ```python
@@ -297,11 +297,19 @@ The `setup.py` file should contain the following code for your bookstore:
 !!! note
     Please enter `/sentiment-analysis-app` when you are executing the following commands.
 
+In Knative Function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
+
+Currently **only** the `s2i` build is supported if you need to run `setup.py`. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
+
 After you have finished the code, you can deploy the function to the cluster using the following command:
+!!! note
+    Using `-b=s2i` to specify how the function should be built.
 
 ```bash
 func deploy -b=s2i -v
 ```
+
+
 ???+ success "Verify"
 
     When the deployment is complete, you will see the following output:

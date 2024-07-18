@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: node-server
-        image: quay.io/rh-ee-leoli/node-server:latest
+        image: ghcr.io/knative/node-server:latest
         ports:
         - containerPort: 8000
 ---
