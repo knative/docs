@@ -2,7 +2,7 @@
 
 This additional step is required for installing the Kourier networking layer on IBM Z and IBM Power platforms.
 
-Once you completed installing Kourier,  patch the envoy image as described below. Use the envoy image included as part of the (RedHat Maistra)[https://maistra.io/] distribution. Maistra is an opinionated distribution of Istio designed to work with OpenShift and is supported on IBM Z and IBM Power platforms.
+Once you completed installing Kourier,  patch the envoy image as described below. Use the envoy image included as part of the [RedHat Maistra](https://maistra.io/) distribution. Maistra is an opinionated distribution of Istio designed to work with OpenShift and is supported on IBM Z and IBM Power platforms.
 
 1. Find the image name to use:  
     1. Access the [redhat catalog](https://catalog.redhat.com/software/containers/openshift-service-mesh/proxyv2-rhel8/5d2cda455a134672890f640a) 
