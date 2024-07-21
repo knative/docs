@@ -49,3 +49,12 @@ There are a number of third-party sources that can be found [here](https://knati
 Knative Eventing isn't used for applications but rather to bind event producers with event consumers in a declarative way. You wouldn't use Knative Eventing to host a [Python Flask](https://flask.palletsprojects.com/en/3.0.x/) application for example. 
 
 If you are wanting to declaratively bind an event source to your application, you will use Knative Eventing. In particular, if you are using any of the aforementioned applications as a messaging queue or database then you will use Eventing.
+
+## Knative Functions
+A new addition to Knative are [Knative Functions](https://knative.dev/docs/functions/). This is meant for developers who are more familiar/comfortable with [Functions-as-a-Service (FaaS)](https://en.wikipedia.org/wiki/Function_as_a_service). 
+
+Learning containerization does provide a learning curve for some and Knative Functions enables developers to focus purely on code. It is still Kubernetes under the hood so platform engineers still have the flexibility to design their platform. 
+
+Since this is still Kubernetes under the hood, an [Open Container Initiative (OCI) format](https://opencontainers.org/about/overview/) container is still created and deployed. The key here is that the Knative Functions abstraction automates the creation and deployment of the container. 
+
+This option is best for those whose developers may not be as familiar with OCI containers or if you want your developers to focus primarily on their code and not other primitives related to Knative or Kubernetes. 
