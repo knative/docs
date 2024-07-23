@@ -388,8 +388,8 @@ position: relative;
   cursor: pointer;
 }
 
-.case-studies-container h1 {
-  margin-bottom: 0.45em;
+.md-typeset>h1:first-of-type {
+  margin:0;
 }
 
 .case-studies-container .cases-table {
@@ -397,6 +397,7 @@ position: relative;
   justify-content: center;
   max-width: 100%;
   margin: 1rem;
+  margin-top: 0;
   align-items: center;
 }
 
@@ -509,7 +510,6 @@ position: relative;
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 1rem;
 }
 
 .cncf-notice-container h3 {
