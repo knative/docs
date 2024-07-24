@@ -285,6 +285,7 @@ nav:
           - Configure Apache Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
+          - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/keda-configuration.md
       # Eventing - observability
       - Observability:
         - Accessing CloudEvent traces: eventing/accessing-traces.md
@@ -303,6 +304,7 @@ nav:
         - Transport Encryption: eventing/features/transport-encryption.md
         - Sender Identity: eventing/features/sender-identity.md
         - Eventing with Istio: eventing/features/istio-integration.md
+        - Cross Namespace Event Links: eventing/features/cross-namespace-event-links.md
       - FAQ: eventing/faq/README.md
     # Eventing reference docs
       - Reference:

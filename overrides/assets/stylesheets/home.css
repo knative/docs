@@ -213,7 +213,7 @@ h2.secondary-headline, h3.trusted-by {
 
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
-  background-color: #f3f1f2;
+  background-color: white;
   color: var(--md-primary-fg-color--light);
 }
 
@@ -384,6 +384,8 @@ position: relative;
   color: black;
   display: flex;
   background-color: #f3f1f2;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .case-studies-container h1 {
@@ -393,8 +395,33 @@ position: relative;
 .case-studies-container .cases-table {
   display: flex;
   justify-content: center;
-  max-width: 90%;
-  margin: auto;
+  max-width: 100%;
+  margin: 1rem;
+  align-items: center;
+}
+
+.case-studies-container .cases-table a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.case-studies-container .cases-table .col {
+  background-color: white;
+  padding: 1.5rem;
+  margin: 1rem 0.5rem;
+  border-radius: 0.7rem;
+  width: 25vw;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transition: border 0.3s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.case-studies-container .cases-table .col:hover {
+  border: 2px solid gray;
 }
 
 .case-studies-container .logo {
@@ -403,15 +430,11 @@ position: relative;
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 2em;
-}
-
-.case-studies-container .col {
-  min-width: 38%;
-  max-width: 40%;
+  padding-top: 2rem;
 }
 
 .case-studies-container .logo img {
-  max-width: 110px
+  max-width: 110px;
 }
 
 .case-studies-container .logo .sva {
@@ -421,16 +444,14 @@ position: relative;
 .case-studies-container .normal-text {
   text-align: start;
   padding: 0 2em;
-  color: var(--nav-item-color);
+  color: var(--md-primary-fg-color--dark);
   font-weight: 600;
-  font-style: italic;
-  line-height: 1.1;
-  font-family: serif;
+  line-height: 1.2;
   font-size: .95rem;
 }
 
 .case-studies-container hr {
-  border-bottom: 2px solid #89c487;
+  border-bottom: 2px solid black;
   display: flow-root;
   margin: .4em 5em -4px 2em;
 }
@@ -488,7 +509,7 @@ position: relative;
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 0;
+  padding-top: 1rem;
 }
 
 .cncf-notice-container h3 {

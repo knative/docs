@@ -52,9 +52,10 @@ The `brokers.topic.template` values determines the template used to generate the
 
 The `channels.topic.template` value determines the template used to generate the kafka topic names used by your channels.
 
-* **Global Key:** `channels.topic.template`
-* **Possible values:** Any valid [go text/template](https://pkg.go.dev/text/template)
-* **Default:** `{% raw %}messaging-kafka.{{ .Namespace }}.{{ .Name }}{% endraw %}`
+* **Global Key:** `controller-autoscaler-keda`
+* **Possible values:** One of: `enabled`, `disabled`
+* **Default:** `disabled`
+* **Stability**: Alpha
 
 **Example:**
 
@@ -66,5 +67,10 @@ The `channels.topic.template` value determines the template used to generate the
       name: config-kafka-features
       namespace: knative-eventing
     data:
-      channels.topic.template: {% raw %}"messaging-kafka.{{ .Namespace }}.{{ .Name }}"{% endraw %}
+      controller-autoscaler-keda: enabled
     ```
+
+## Dispatcher autoscaling with KEDA
+
+The `controller-autoscaler-keda` value determines whether Knative Kafka dispatcher components will autoscale with KEDA.
+For more information on this feature, please read [the documentation here](../../../configuration/keda-configuration.md)
