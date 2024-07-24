@@ -1,0 +1,10 @@
+# This is a ConfigMap that disables the scale-to-zero feature in Knative Serving.
+# The scale-to-zero feature scales down the number of pods to zero when there are no requests.
+# You can learn more about the scale-to-zero feature at https://knative.dev/docs/serving/autoscaling/scale-to-zero/#enable-scale-to-zero
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  enable-scale-to-zero: "false"

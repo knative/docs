@@ -14,10 +14,8 @@ aliases:
   - vyasgun
   docs-reviewers:
   - nainaz
-  - pmbanugo
   - retocode
   - skonto
-  - snneji
   docs-writers:
   - csantanapr
   - retocode
@@ -35,7 +33,6 @@ aliases:
   - creydr
   - lionelvillard
   - matzew
-  - odacremolbap
   - pierDipi
   func-reviewers:
   - jrangelramos
@@ -52,6 +49,9 @@ aliases:
   - lkingland
   - salaboy
   knative-admin:
+  - Cali0707
+  - Leo6Leo
+  - ReToCode
   - aliok
   - cardil
   - davidhadas
@@ -63,12 +63,17 @@ aliases:
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
-  - krsna-m
   - nainaz
   - psschwei
   - salaboy
+  - skonto
   - upodroid
-  knative-release-leads: []
+  knative-release-leads:
+  - Cali0707
+  - Leo6Leo
+  - ReToCode
+  - dsimansk
+  - skonto
   knative-robots:
   - knative-automation
   - knative-prow-releaser-robot
@@ -98,7 +103,6 @@ aliases:
   - upodroid
   productivity-writers:
   - cardil
-  - krsna-m
   - upodroid
   security-wg-leads:
   - davidhadas
@@ -132,7 +136,6 @@ aliases:
   - davidhadas
   - dprotaso
   - dsimansk
-  - krsna-m
   - psschwei
   ux-wg-leads:
   - cali0707

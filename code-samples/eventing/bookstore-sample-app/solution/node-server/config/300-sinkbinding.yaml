@@ -1,0 +1,17 @@
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: node-sinkbinding
+  namespace: default
+spec:
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app: node-server
+  sink: # In this case, the sink is our Broker, which is the eventing service that will receive the events
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: bookstore-broker

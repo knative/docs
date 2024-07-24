@@ -20,7 +20,7 @@ hack/__pycache__
 !/blog/overrides/partials/source-file.html
 !/blog/overrides/partials/content.html
 /blog/docs/stylesheets/
-/node_modules/
+node_modules
 venv/
 
 # TODO clean up images copied between blog/ and docs/
@@ -36,4 +36,3 @@ maven-wrapper.jar
 
 # Ignore Python virtual environments
 .venv
-/code-samples/eventing/bookstore-sample-app/db/bookstore-eda/node_modules/*

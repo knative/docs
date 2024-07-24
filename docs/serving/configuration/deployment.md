@@ -133,3 +133,47 @@ data:
   # List of repositories for which tag to digest resolving should be skipped
   registries-skipping-tag-resolving: registry.example.com
 ```
+
+## Configuring selectable RuntimeClassName
+
+You can configure Knative Serving to configure deployments with a specified RuntimeClassName (`Pod.Spec.RuntimeClassName`) by modifying the `runtime-class-name` setting.
+
+The setting works with Service labels and will configure either a default or one where the most labels match.
+
+**Example:**
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-deployment
+      namespace: knative-serving
+    data:
+      runtime-class-name: |
+        kata: {}
+        gvisor:
+          selector:
+            my-label: selector
+    ```
+
+=== "Operator"
+    ```yaml
+    apiVersion: operator.knative.dev/v1beta1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+      namespace: knative-serving
+    spec:
+      config:
+        deployment:
+          runtime-class-name: |
+            kata: {}
+            gvisor:
+              selector:
+                my-label: selector
+    ```
+
+See [Kubernetes RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/) docs for more information.
+
+Separately, there is a feature flag to allow [manual configuration of RuntimeClassName](/docs/serving/configuration/feature-flags/#kubernetes-runtime-class).
