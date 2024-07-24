@@ -465,6 +465,10 @@ All the configuration mechanisms that are available for the `Kafka` Broker class
 * A few more configmaps are propagated: `config-tracing` and `kafka-config-logging`. This means, tracing and logging are also not configurable per namespace.
 * Similarly, the data plane deployments are propagated from the `knative-eventing` namespace to the user namespace. This means that the data plane deployments are not configurable per namespace and will be identical to the ones in the `knative-eventing` namespace.
 
+### Enabling and configuring autoscaling of triggers with KEDA
+
+To enable and configreu autoscaling of triggers referencing Kafka Brokers with KEDA, follow [the instructions here](../../../configuration/keda-configuration.md).
+
 ## Additional information
 
 - To report a bug or request a feature, open an issue in the [eventing-kafka-broker repository](https://github.com/knative-extensions/eventing-kafka-broker).

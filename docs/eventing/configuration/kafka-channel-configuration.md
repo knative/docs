@@ -62,3 +62,7 @@ To use Kafka Channels, you must:
     kubectl apply -f <filename>.yaml
     ```
     Where `<filename>` is the name of the file you created in the previous step.
+
+## Enable/configure autoscaling of KafkaChannel dispatchers
+
+To enable autoscaling of the KafkaChannel dispatcher you can read [the instructions here](./keda-configuration.md)
