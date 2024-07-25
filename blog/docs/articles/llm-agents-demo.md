@@ -86,7 +86,7 @@ spec:
   type: "resource.cost.calculator"
 ```
 
-Both of these eventtypes refer to functions which were deployed in the install
+Both of these EventTypes refer to functions which were deployed in the install
 script we ran earlier. One function returns some mock usage data for the past
 few months, and the other is able to calculate the cost due to the usage of a
 specific resource type for a specific month.
