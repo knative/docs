@@ -2,12 +2,13 @@
 
 **Author: [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/), Software Engineering Intern @ Red Hat**
 
-In the previous blog post on LLM Agents, we discussed what LLM Agents are,
-how LLMs call tools, and how Knative can be used to automate the tool calling
-process for LLM Agents. In this blog post we will be looking at a concrete
-example of how you can build an LLM Agent application with Knative handling
-the tool calling and discovery, and explaining what differentiates this
-approach from the other common approaches for building LLM Agents.
+In the [previous blog post on LLM Agents](/blog/docs/articles/llm-agents-overview.md)
+we discussed what LLM Agents are, how LLMs call tools, and how Knative can
+be used to automate the tool calling process for LLM Agents. In this blog post
+we will be looking at a concrete example of how you can build an LLM Agent
+application with Knative handling the tool calling and discovery, and explaining
+what differentiates this approach from the other common approaches for building
+LLM Agents.
 
 ## An example LLM Agent using Knative
 
@@ -23,14 +24,14 @@ will this have on my costs?
 
 To begin, we will be deploying the Knative LLM Tool Provider demo into
 a cluster we have access to following the instructions in the README in
-https://github.com/keventmesh/llm-tool-provider. Once we have deployed
-the chat app from this repository, we are able to access it by running:
+[https://github.com/keventmesh/llm-tool-provider](https://github.com/keventmesh/llm-tool-provider). 
+Once we have deployed the chat app from this repository, we are able to access it by running:
 
 ```sh
 kubectl port-forward svc/chat-app-service 8080:8080
 ```
 
-If you access http://localhost:8080 in your browser you will now be able
+If you access `http://localhost:8080` in your browser you will now be able
 to see the chat application running, and ask it our simple question. When
 I tried this while writing the blog post, the interaction was:
 
@@ -54,7 +55,7 @@ question yet: it has no information about the resource consumption or about
 what the costs associated with that resource consumption are. To give the LLM
 these capabilities we need to tell it about the two Knative Functions we
 deployed into our cluster in the setup of the sample app:
-i`average-resource-consumption` and `resource-cost-calculator`. To do this
+`average-resource-consumption` and `resource-cost-calculator`. To do this
 we will need to apply two EventTypes into our cluster which describe the
 contracts expected by these Functions:
 
@@ -88,8 +89,12 @@ spec:
 Both of these eventtypes refer to functions which were deployed in the install
 script we ran earlier. One function returns some mock usage data for the past
 few months, and the other is able to calculate the cost due to the usage of a
-specific resource type for a specific month. After applying both eventtypes,
-we can try asking our original question again:
+specific resource type for a specific month.
+
+The LLM Agents we built is programmed to fetch all the EventTypes in the cluster
+whenever a new user session starts, and map those into tools it can use. After
+applying both EventTypes and refreshing our brower, we can try asking our original
+question again:
 
 Calum:
 > How has the trend in the average resource consumption (CPU, memory) changed
@@ -124,13 +129,19 @@ What is truly powerful about what we just did was not that the LLM was able to
 use tools to more accurately reply to the user, it was that the LLM was able to
 use tools to more accurately reply to the user _without us re-deploying the LLM
 application_. We have decoupled the development and deployment of the tools from
-the development and deployment of the LLM agent! Now, we are able to declaratively
-bind these two components together through a glue of EventTypes, but the people
-building our LLM agent do not need to worry about what tools it will have access
-to or how it will call them, and the teams making tools can give it access to
-their tools without learning the codebase for the LLM agent. Furthermore, since
-all we did was provide metadata about a service to the LLM we can now create
-EventTypes to describe existing services we have already built, and the LLM
-agent will be able to successfully interact with those systems with _no code
-changes_.
+the development and deployment of the LLM agent! 
 
+Now, we are able to declaratively bind these two components together through a
+glue of EventTypes, but the people building our LLM agent do not need to worry
+about what tools it will have access to or how it will call them, and the teams
+making tools can give it access to their tools without learning the codebase for
+the LLM agent. Furthermore, since all we did was provide metadata about a service
+to the LLM we can now create EventTypes to describe existing services we have
+already built, and the LLM agent will be able to successfully interact with those
+systems with _no code changes_.
+
+This concept of automatic tool discovery by an LLM Agent through the use of
+metadata is the central concept to what we are working to build. In the next
+blog post we will discuss our vision for how this will evolve. If you are
+interested in helping us build the future of LLM Agents in the cloud, message
+us on Slack!
