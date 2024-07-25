@@ -144,4 +144,4 @@ This concept of automatic tool discovery by an LLM Agent through the use of
 metadata is the central concept to what we are working to build. In the next
 blog post we will discuss our vision for how this will evolve. If you are
 interested in helping us build the future of LLM Agents in the cloud, message
-us on Slack!
+us on the [CNCF slack instance](https://slack.cncf.io)!
