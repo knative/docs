@@ -2,7 +2,7 @@
 
 **Author: [Calum Murray](https://www.linkedin.com/in/calum-ra-murray/), Software Engineering Intern @ Red Hat**
 
-In the [previous blog post on LLM Agents](/blog/docs/articles/llm-agents-overview.md)
+In the [previous blog post on LLM Agents](/blog/articles/llm-agents-overview)
 we discussed what LLM Agents are, how LLMs call tools, and how Knative can
 be used to automate the tool calling process for LLM Agents. In this blog post
 we will be looking at a concrete example of how you can build an LLM Agent
