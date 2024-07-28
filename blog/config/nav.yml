@@ -47,6 +47,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/introduce-mqtt-source.md
           - articles/llm-agents-overview.md
           - articles/cross-namespace-event-links-feature.md
           - articles/aws_to_func_migration.md
@@ -81,7 +82,6 @@ nav:
           - articles/knative-v0-3-autoscaling-a-love-story.md
           - articles/ko-fast-kubernetes-microservice-development-in-go.md
           - articles/build-deploy-manage-modern-serverless-workloads-using-knative-on-kubernetes.md
-          - articles/introduce-mqtt-source.md
       - Steering Committee:
           - steering/2024-02-14-trademark-committee-dissolved.md
           - steering/toc-2022-election-announcement.md

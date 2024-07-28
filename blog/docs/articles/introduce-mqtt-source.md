@@ -1,6 +1,6 @@
 # Introducing MQTT Source with ContainerSource CRD
 
-**Author: Phuong Cao...**
+**Author: [Phuong Cao](https://www.linkedin.com/in/phuong-cao-pc/)**
 
 Knative Eventing is taking a step forward in IoT integration with the introduction of an MQTT Source. This new feature contributes to addressing a growing need in the IoT space, allowing developers to seamlessly transform MQTT messages into CloudEvents and ingest them into the Knative Eventing system.
 
@@ -11,16 +11,6 @@ With the proliferation of IoT devices and edge computing, there's an increasing 
 ## Feature Description:
 
 Instead of developing a full-fledged controller from scratch, we've taken a simpler and more efficient approach. The MQTT Source is implemented as a container image that can be used with the existing ContainerSource CRD. This approach is similar to what we've done for the WebSocket protocol, allowing us to transform MQTT messages received into CloudEvents and send them to specified brokers.
-
-## Installations:
-
-This feature uses mqtt_paho to receive and send MQTT messages as CloudEvents. The Mosquitto Eclipse package is used to send test MQTT messages, so it can be disregarded when the feature is complete and MQTT messages are sent from another source.
-
-```shell
-go get github.com/eclipse/paho.golang/paho
-go get github.com/cloudevents/sdk-go/v2
-go get github.com/cloudevents/sdk-go/protocol/mqtt_paho/v2
-```
 
 ## Using the feature:
 
