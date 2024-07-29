@@ -16,10 +16,11 @@ A new version of Knative is now available across multiple components. Follow the
 This release brings significant improvements and new features to the core Knative Serving and Eventing components, as well as enhancements to the Client, Functions, and Operator components.
 
 ## Table of Contents
+- [Learning](#learning)
 - [Serving](#serving)
 - [Eventing](#eventing)
-- [kn CLI](#kn-cli)
 - [Functions](#functions)
+- [kn CLI](#client)
 - [Knative Operator](#knative-operator)
 
 ### Learning
@@ -121,6 +122,7 @@ This release brings significant improvements and new features to the core Knativ
 ## Learn more
 - [Knative docs](https://knative.dev/docs/)
 - [Quickstart tutorial](https://knative.dev/docs/getting-started/)
+- [Bookstore E2E tutorial](https://knative.dev/docs/bookstore/page-0/welcome-knative-bookstore-tutorial/)
 - [Samples](https://knative.dev/docs/samples/)
 - [Knative Working Groups](https://knative.dev/community/contributing/working-groups/)
 - [Knative User Mailing List](https://groups.google.com/g/knative-users)
