@@ -21,7 +21,7 @@ This release brings significant improvements and new features to the core Knativ
 - [Eventing](#eventing)
 - [Functions](#functions)
 - [kn CLI](#client)
-- [Knative Operator](#knative-operator)
+- [Knative Operator](#operator)
 
 ### Learning
 
