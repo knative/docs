@@ -22,14 +22,19 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### Announcing Knative v1.15 Release
+![Announcing Knative v1.15 Release](./releases/images/release1.15-1.png)
+
+Details on the 1.15 release of the Knative project.
+
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-15-release.md){ .md-button }
+
 ### How IBM Watsonx Assistant uses Knative Eventing to train machine learning models!
 
 ![How IBM Watsonx Assistant uses Knative Eventing to train machine learning models](./articles/images/How-IBM-watsonx-Assistant-uses-Knative-Eventing-to-train-machine-learning-models.png)
 
 [Read more :octicons-arrow-right-24:](https://www.cncf.io/case-studies/ibmwatsonxassistant/){ .md-button }
 
-### Knative 1.14 is out!
-Details on the 1.14 release of the Knative project.
 
 [Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-14-release.md){ .md-button }
 
