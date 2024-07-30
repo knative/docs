@@ -77,7 +77,7 @@ metadata:
   namespace: default
 spec:
   template:
-    spec:
+    metadata:
       annotations:
         features.knative.dev/http-full-duplex: "Enabled"
 ...
