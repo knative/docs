@@ -383,7 +383,7 @@ position: relative;
   justify-content: center;
   color: black;
   display: flex;
-  background-color: #f3f1f2;
+  background-color: var(--md-primary-fg-color);
   padding: 1rem;
   cursor: pointer;
 }
