@@ -407,7 +407,7 @@ border-radius: 0.7rem 0 0 0 ;
 }
 
 .testimonials h1 {
-  color: var(--md-primary-fg-color--dark);
+  color:black;
   margin-bottom: -26px;
 }
 
@@ -434,12 +434,12 @@ border-radius: 0.7rem 0 0 0 ;
   margin: auto 0;
   text-align: start;
   padding: 0 2em;
-  color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-fg-color--dark);
   font-weight: 500;
   line-height: 1.1;
-  font-family: inherit;
+  font-family: serif;
   font-size: .85rem;
-  border-left: var(--md-default-fg-color--light) 4.5px solid;
+  border-left: var(--md-primary-fg-color--dark) 4.5px solid;
 }
 
 .testimonials .testimonial.blue img {
@@ -448,20 +448,21 @@ border-radius: 0.7rem 0 0 0 ;
 }
 
 .testimonials .testimonial.blue {
-  border-top: var(--md-primary-fg-color--light) 2.5px solid;
+  border-top: var(--md-primary-fg-color--dark) 2.5px solid;
   padding-top: 60px;
 }
 
 .testimonials .testimonial.blue .quote {
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--md-primary-fg-color--light);
+  font-family: serif;
+  color: var(--md-primary-fg-color--dark);
   border: none;
 }
 
 .testimonials .quote .phrase {
   font-size: 1.15rem;
-  font-style: italic;
+  font-style: serif;
   font-weight: bold;
   font-family: serif;
 }
@@ -490,7 +491,7 @@ border-radius: 0.7rem 0 0 0 ;
   padding: 1rem;
   margin-top: 1rem;
   border-left: none;
-  border-top: var(--md-default-fg-color--light) 4.5px solid;
+  border-top: var(--md-primary-fg-color--dark) 4.5px solid;
 }
 .testimonials .testimonial .img {
   margin: auto 30px auto 30px;

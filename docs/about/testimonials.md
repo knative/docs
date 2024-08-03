@@ -1,6 +1,6 @@
 <div class="testimonials">
-  <h1 align="center">Enterprise-grade Serverless on your own terms.</h1>
-  <h3 align="center"><b>Understanding Knative</b></h3>
+  <h1>Testimonials</h1>
+  <h3><b>Enterprise-grade Serverless on your own terms</b></h3>
 
   <div class="testimonial">
     <div class="img">
