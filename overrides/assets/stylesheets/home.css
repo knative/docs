@@ -272,6 +272,11 @@ h2.secondary-headline, h3.trusted-by {
     font-size: 1em;
     line-height: 1.5em;
   }
+
+  .br{
+    display: none;
+  }
+
 }
 
 @media screen and (max-width: 480px) {
@@ -300,10 +305,6 @@ h2.secondary-headline, h3.trusted-by {
   color: var(--md-primary-fg-color--light);
   padding: 2em 1em;
   text-align: center;
-}
-
-.why-serverless-container{
-  padding-bottom: 0;
 }
 
 .why-serverless-container h1, .trying-it-all-container h1,
@@ -371,10 +372,14 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .reason-text h2{
-  font-size:34px;
+  font-size:24px;
   color:black;
-  margin:0;
+  margin:4px;
   font-weight: bold;
+}
+
+.normal-text{
+  font-size: 18px;
 }
 
 @media screen and (max-width: 768px) {
@@ -384,6 +389,7 @@ h2.secondary-headline, h3.trusted-by {
 
   .why-serverless-container .normal-text-head {
     font-size: 0.9rem;
+    margin-bottom: 4rem;
   }
 
   .img-row {
@@ -394,6 +400,7 @@ h2.secondary-headline, h3.trusted-by {
   .img-col {
     flex: 1 1 45%;
     max-width: 45%;
+    margin:0;
   }
 
   .img-wrapper {
