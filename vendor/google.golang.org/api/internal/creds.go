@@ -6,15 +6,23 @@ package internal
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
+	"net"
+	"net/http"
+	"os"
+	"time"
 
 	"golang.org/x/oauth2"
 	"google.golang.org/api/internal/impersonate"
 
 	"golang.org/x/oauth2/google"
 )
+
+const quotaProjectEnvVar = "GOOGLE_CLOUD_QUOTA_PROJECT"
 
 // Creds returns credential information obtained from DialSettings, or if none, then
 // it returns default credential information.
@@ -30,6 +38,9 @@ func Creds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
 }
 
 func baseCreds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
+	if ds.InternalCredentials != nil {
+		return ds.InternalCredentials, nil
+	}
 	if ds.Credentials != nil {
 		return ds.Credentials, nil
 	}
@@ -62,54 +73,104 @@ const (
 	serviceAccountKey = "service_account"
 )
 
-// credentialsFromJSON returns a google.Credentials based on the input.
+// credentialsFromJSON returns a google.Credentials from the JSON data
 //
-// - If the JSON is a service account and no scopes provided, returns self-signed JWT auth flow
-// - Otherwise, returns OAuth 2.0 flow.
+// - A self-signed JWT flow will be executed if the following conditions are
+// met:
+//
+//	(1) At least one of the following is true:
+//	    (a) No scope is provided
+//	    (b) Scope for self-signed JWT flow is enabled
+//	    (c) Audiences are explicitly provided by users
+//	(2) No service account impersontation
+//
+// - Otherwise, executes standard OAuth 2.0 flow
+// More details: google.aip.dev/auth/4111
 func credentialsFromJSON(ctx context.Context, data []byte, ds *DialSettings) (*google.Credentials, error) {
-	cred, err := google.CredentialsFromJSON(ctx, data, ds.GetScopes()...)
+	var params google.CredentialsParams
+	params.Scopes = ds.GetScopes()
+
+	// Determine configurations for the OAuth2 transport, which is separate from the API transport.
+	// The OAuth2 transport and endpoint will be configured for mTLS if applicable.
+	clientCertSource, oauth2Endpoint, err := GetClientCertificateSourceAndEndpoint(oauth2DialSettings(ds))
 	if err != nil {
 		return nil, err
 	}
-	if len(data) > 0 && len(ds.Scopes) == 0 && (ds.DefaultAudience != "" || len(ds.Audiences) > 0) {
+	params.TokenURL = oauth2Endpoint
+	if clientCertSource != nil {
+		tlsConfig := &tls.Config{
+			GetClientCertificate: clientCertSource,
+		}
+		ctx = context.WithValue(ctx, oauth2.HTTPClient, customHTTPClient(tlsConfig))
+	}
+
+	// By default, a standard OAuth 2.0 token source is created
+	cred, err := google.CredentialsFromJSONWithParams(ctx, data, params)
+	if err != nil {
+		return nil, err
+	}
+
+	// Override the token source to use self-signed JWT if conditions are met
+	isJWTFlow, err := isSelfSignedJWTFlow(data, ds)
+	if err != nil {
+		return nil, err
+	}
+	if isJWTFlow {
+		ts, err := selfSignedJWTTokenSource(data, ds)
+		if err != nil {
+			return nil, err
+		}
+		cred.TokenSource = ts
+	}
+
+	return cred, err
+}
+
+func isSelfSignedJWTFlow(data []byte, ds *DialSettings) (bool, error) {
+	if (ds.EnableJwtWithScope || ds.HasCustomAudience()) &&
+		ds.ImpersonationConfig == nil {
+		// Check if JSON is a service account and if so create a self-signed JWT.
 		var f struct {
 			Type string `json:"type"`
 			// The rest JSON fields are omitted because they are not used.
 		}
-		if err := json.Unmarshal(cred.JSON, &f); err != nil {
-			return nil, err
+		if err := json.Unmarshal(data, &f); err != nil {
+			return false, err
 		}
-		if f.Type == serviceAccountKey {
-			ts, err := selfSignedJWTTokenSource(data, ds.DefaultAudience, ds.Audiences)
-			if err != nil {
-				return nil, err
-			}
-			cred.TokenSource = ts
-		}
+		return f.Type == serviceAccountKey, nil
 	}
-	return cred, err
+	return false, nil
 }
 
-func selfSignedJWTTokenSource(data []byte, defaultAudience string, audiences []string) (oauth2.TokenSource, error) {
-	audience := defaultAudience
-	if len(audiences) > 0 {
-		// TODO(shinfan): Update golang oauth to support multiple audiences.
-		if len(audiences) > 1 {
-			return nil, fmt.Errorf("multiple audiences support is not implemented")
-		}
-		audience = audiences[0]
+func selfSignedJWTTokenSource(data []byte, ds *DialSettings) (oauth2.TokenSource, error) {
+	if len(ds.GetScopes()) > 0 && !ds.HasCustomAudience() {
+		// Scopes are preferred in self-signed JWT unless the scope is not available
+		// or a custom audience is used.
+		return google.JWTAccessTokenSourceWithScope(data, ds.GetScopes()...)
+	} else if ds.GetAudience() != "" {
+		// Fallback to audience if scope is not provided
+		return google.JWTAccessTokenSourceFromJSON(data, ds.GetAudience())
+	} else {
+		return nil, errors.New("neither scopes or audience are available for the self-signed JWT")
 	}
-	return google.JWTAccessTokenSourceFromJSON(data, audience)
 }
 
-// QuotaProjectFromCreds returns the quota project from the JSON blob in the provided credentials.
-//
-// NOTE(cbro): consider promoting this to a field on google.Credentials.
-func QuotaProjectFromCreds(cred *google.Credentials) string {
+// GetQuotaProject retrieves quota project with precedence being: client option,
+// environment variable, creds file.
+func GetQuotaProject(creds *google.Credentials, clientOpt string) string {
+	if clientOpt != "" {
+		return clientOpt
+	}
+	if env := os.Getenv(quotaProjectEnvVar); env != "" {
+		return env
+	}
+	if creds == nil {
+		return ""
+	}
 	var v struct {
 		QuotaProject string `json:"quota_project_id"`
 	}
-	if err := json.Unmarshal(cred.JSON, &v); err != nil {
+	if err := json.Unmarshal(creds.JSON, &v); err != nil {
 		return ""
 	}
 	return v.QuotaProject
@@ -127,4 +188,36 @@ func impersonateCredentials(ctx context.Context, creds *google.Credentials, ds *
 		TokenSource: ts,
 		ProjectID:   creds.ProjectID,
 	}, nil
+}
+
+// oauth2DialSettings returns the settings to be used by the OAuth2 transport, which is separate from the API transport.
+func oauth2DialSettings(ds *DialSettings) *DialSettings {
+	var ods DialSettings
+	ods.DefaultEndpoint = google.Endpoint.TokenURL
+	ods.DefaultMTLSEndpoint = google.MTLSTokenURL
+	ods.ClientCertSource = ds.ClientCertSource
+	return &ods
+}
+
+// customHTTPClient constructs an HTTPClient using the provided tlsConfig, to support mTLS.
+func customHTTPClient(tlsConfig *tls.Config) *http.Client {
+	trans := baseTransport()
+	trans.TLSClientConfig = tlsConfig
+	return &http.Client{Transport: trans}
+}
+
+func baseTransport() *http.Transport {
+	return &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:          100,
+		MaxIdleConnsPerHost:   100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
 }
