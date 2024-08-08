@@ -241,5 +241,5 @@ honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod h1:rf3lG4BRIbNafJWh
 honnef.co/go/tools v0.0.1-2019.2.3/go.mod h1:a3bituU0lyd329TUQxRnasdCoJDkEUEAqEt0JzvZhAg=
 honnef.co/go/tools v0.0.1-2020.1.5 h1:nI5egYTGJakVyOryqLs1cQO5dO0ksin5XXs2pspk75k=
 honnef.co/go/tools v0.0.1-2020.1.5/go.mod h1:X/FiERA/W4tHapMX5mGpAtMSVEeEUOyHaw9vFzvIQ3k=
-knative.dev/hack v0.0.0-20240801232131-441a19fc9ead h1:ViH1OEO0LViKa6W61YKUpLzOp7CJCFL9yLyIojHIuQ8=
-knative.dev/hack v0.0.0-20240801232131-441a19fc9ead/go.mod h1:R0ritgYtjLDO9527h5vb5X6gfvt5LCrJ55BNbVDsWiY=
+knative.dev/hack v0.0.0-20240808014239-452e340cbb4b h1:pDzlX6d8cCbp5PDU9BdEIPJVI/4HLTM4mV2gMN1bKlk=
+knative.dev/hack v0.0.0-20240808014239-452e340cbb4b/go.mod h1:R0ritgYtjLDO9527h5vb5X6gfvt5LCrJ55BNbVDsWiY=
