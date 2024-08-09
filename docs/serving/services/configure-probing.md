@@ -90,7 +90,7 @@ Supported probe types are:
 
 ## Progress Deadline and Startup Probes
 
-It is important to know that Knative has a deadline until a Knative Service should initially start up (or rollout). This is called [progress deadline](../configuration/deployment.md#configuring-progress-deadlines). When using Startup probes, the progress deadline is set to a value that is higher than the maximal Startup probe timeout (e.g. `initialDelaySeconds + success/failureThreshold` * `periodSeconds` * `timeoutSeconds`). Otherwise, the Startup probe might never pass before the progress deadline is reached, and the Service will never successfully start up. The Knative Service will then mark this in the status of the Service object:
+It is important to know that Knative has a deadline until a Knative Service should initially start up (or rollout). This is called [progress deadline](../configuration/deployment.md#configuring-progress-deadlines). When using Startup probes, the user has to ensure that the progress deadline is set to a value that is higher than the maximum time the Startup probe can take. Consider your configuration of `initialDelaySeconds`, `success/failureThreshold`,  `periodSeconds` and `timeoutSeconds` for this. Otherwise, the Startup probe might never pass before the progress deadline is reached, and the Service will never successfully start up. The Knative Service will then mark this in the status of the Service object:
 
 ```json
 [
