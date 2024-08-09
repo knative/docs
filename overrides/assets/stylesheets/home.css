@@ -124,7 +124,7 @@ h2.secondary-headline, h3.trusted-by {
 
 .scroller {
   max-width: 60vw;
-  
+  margin: auto;
 }
 
 .scroller__inner {
