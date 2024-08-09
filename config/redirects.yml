@@ -5,12 +5,13 @@ plugins:
       eventing/experimental-features/README.md: eventing/features/README.md
       eventing/experimental-features/delivery-timeout.md: eventing/features/delivery-timeout.md
       eventing/experimental-features/delivery-retryafter.md: eventing/features/delivery-retryafter.md
-      eventing/experimental-features/new-trigger-filters.md: eventing/features/new-trigger-filters.md
+      eventing/experimental-features/new-trigger-filters.md: eventing/triggers/README.md
       eventing/experimental-features/kreference-group.md: eventing/features/kreference-group.md
       eventing/experimental-features/kreference-mapping.md: eventing/features/kreference-mapping.md
       eventing/experimental-features/eventtype-auto-creation.md: eventing/features/eventtype-auto-creation.md
       eventing/experimental-features/transport-encryption.md: eventing/features/transport-encryption.md
       eventing/experimental-features/sender-identity.md: eventing/features/sender-identity.md
+      eventing/features/new-trigger-filters.md: eventing/triggers/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/broker/create-mtbroker.md: eventing/brokers/create-broker.md
       eventing/broker/example-mtbroker.md: eventing/brokers/broker-developer-config-options.md
