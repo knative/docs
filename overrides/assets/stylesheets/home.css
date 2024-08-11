@@ -389,7 +389,7 @@ position: relative;
 }
 
 .md-typeset>h1:first-of-type {
-  margin:0;
+  margin: 0;
 }
 
 .case-studies-container .cases-table {
@@ -411,7 +411,8 @@ position: relative;
   padding: 1.5rem;
   margin: 1rem 0.5rem;
   border-radius: 0.7rem;
-  width: 25vw;
+  flex-basis: 25%;
+  min-width: 200px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -448,13 +449,24 @@ position: relative;
   color: var(--md-primary-fg-color--dark);
   font-weight: 600;
   line-height: 1.2;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .case-studies-container hr {
   border-bottom: 2px solid black;
   display: flow-root;
-  margin: .4em 5em -4px 2em;
+  margin: 0.4em 5em -4px 2em;
+}
+
+@media (max-width: 768px) {
+  .case-studies-container .cases-table .col {
+    flex-basis: 100%;
+    min-width: 100%;
+  }
+
+  .case-studies-container hr {
+    margin: 0.4em 1em -4px 1em;
+  }
 }
 
 /* whats next container css */
