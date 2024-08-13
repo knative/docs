@@ -52,9 +52,6 @@ data:
   # for the queue proxy sidecar container.
   # If omitted, no value is specified and the system default is used.
   queue-sidecar-ephemeral-storage-limit: "1024Mi"
-  # concurrency-state-endpoint is the endpoint that queue-proxy calls when its traffic drops to zero or
-  # scales up from zero.
-  concurrency-state-endpoint: ""
 ```
 
 ## Configuring progress deadlines
