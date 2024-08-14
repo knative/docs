@@ -216,6 +216,7 @@ h2.secondary-headline, h3.trusted-by {
 @media screen and (max-width: 480px) {
   .home-container h1 {
     font-size: 1.5em;
+    padding: 0.5rem;
   }
 
   .home-container .md-button,
@@ -243,7 +244,7 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .need-to-know-more-container .md-button {
-  margin-top: 1em;
+  margin: 1em 0;
   color: white;
   border-radius: 0.5rem;
   background-color: var(--md-primary-fg-color--light);
