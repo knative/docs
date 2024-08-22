@@ -20,5 +20,5 @@ import (
 	"embed"
 )
 
-//go:embed *.sh
+//go:embed *.sh *.go.txt
 var Scripts embed.FS

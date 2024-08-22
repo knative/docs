@@ -204,6 +204,7 @@ border-radius: 0.7rem 0 0 0 ;
 
 .md-typeset .md-button {
   color: #024c93;
+  border-radius: 0.7rem;
 }
 
 /* Giving h4 tag distinctive style because it is non-differntial with bold text */
@@ -416,7 +417,7 @@ border-radius: 0.7rem 0 0 0 ;
 }
 
 .testimonials h1 {
-  color: var(--md-primary-fg-color--dark);
+  color:black;
   margin-bottom: -26px;
 }
 
@@ -436,22 +437,19 @@ border-radius: 0.7rem 0 0 0 ;
 
 .testimonials .testimonial .img {
   margin: auto 30px auto 60px;
+  max-width: 130px;
 }
 
 .testimonials .quote {
   margin: auto 0;
   text-align: start;
   padding: 0 2em;
-  color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-fg-color--dark);
   font-weight: 500;
   line-height: 1.1;
-  font-family: inherit;
+  font-family: serif;
   font-size: .85rem;
-  border-left: var(--md-default-fg-color--light) 4.5px solid;
-}
-
-.testimonials .testimonial img {
-  max-width: 130px;
+  border-left: var(--md-primary-fg-color--dark) 4.5px solid;
 }
 
 .testimonials .testimonial.blue img {
@@ -460,20 +458,21 @@ border-radius: 0.7rem 0 0 0 ;
 }
 
 .testimonials .testimonial.blue {
-  border-top: var(--md-primary-fg-color--light) 2.5px solid;
+  border-top: var(--md-primary-fg-color--dark) 2.5px solid;
   padding-top: 60px;
 }
 
 .testimonials .testimonial.blue .quote {
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--md-primary-fg-color--light);
+  font-family: serif;
+  color: var(--md-primary-fg-color--dark);
   border: none;
 }
 
 .testimonials .quote .phrase {
   font-size: 1.15rem;
-  font-style: italic;
+  font-style: serif;
   font-weight: bold;
   font-family: serif;
 }
@@ -491,7 +490,23 @@ border-radius: 0.7rem 0 0 0 ;
 .testimonials .find-links {
   padding-top: 16px;
 }
-
+@media screen and (max-width: 530px){
+.testimonial{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.testimonials .quote {
+  padding: 1rem;
+  margin-top: 1rem;
+  border-left: none;
+  border-top: var(--md-primary-fg-color--dark) 4.5px solid;
+}
+.testimonials .testimonial .img {
+  margin: auto 30px auto 30px;
+}
+}
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active>.md-nav__link {
     color: var(--nav-item-color);

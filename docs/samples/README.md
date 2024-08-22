@@ -9,6 +9,10 @@ Knative code samples that are actively tested and maintained by Knative working 
 
 - [Eventing and Eventing Sources code samples](eventing.md)
 - [Serving code samples](serving.md)
+- [E2E Sample Application - Knative Bookstore](https://github.com/knative/docs/tree/main/code-samples/eventing/bookstore-sample-app)
+
+!!! tip
+    E2E Sample Application - Knative Bookstore is a sample application that demonstrates how to use all part of Knative: **Eventing, Serving, and Function**, to build a simple bookstore application.
 
 ## Community owned samples
 

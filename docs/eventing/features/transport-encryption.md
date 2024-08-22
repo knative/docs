@@ -122,7 +122,7 @@ necessary.
 2. [Optional] If you're using Eventing Kafka components, install certificates for Kafka components
    by running the following command:
     ```shell
-    kubectl apply -f {{ artifact(repo="eventing-kafka-broker",file="eventing-kafka-tls-networking.yaml")}}
+    kubectl apply -f {{ artifact(org="knative-extensions",repo="eventing-kafka-broker",file="eventing-kafka-tls-networking.yaml")}}
     ```
 3. Verify issuers and certificates are ready
     ```shell

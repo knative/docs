@@ -15,6 +15,7 @@ nav:
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-15-release.md
           - releases/announcing-knative-v1-14-release.md
           - releases/announcing-knative-v1-13-release.md
           - releases/announcing-knative-v1-12-release.md
@@ -47,6 +48,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/llm-agents-demo.md
           - articles/llm-agents-overview.md
           - articles/cross-namespace-event-links-feature.md
           - articles/aws_to_func_migration.md

@@ -383,16 +383,15 @@ position: relative;
   justify-content: center;
   color: black;
   display: flex;
-  background-color: #f3f1f2;
+  background-color: var(--md-primary-fg-color);
   padding: 1rem;
   cursor: pointer;
   flex-wrap: wrap;
-  padding-bottom: 4rem;
+  padding-bottom: 0;
 }
 
-.case-studies-container h1 {
-  margin-bottom: 0.45em;
-  width: 100%;
+.md-typeset>h1:first-of-type {
+  margin:0;
 }
 
 .case-studies-container .cases-table {
@@ -400,6 +399,9 @@ position: relative;
   justify-content: center;
   max-width: 100%;
   align-items: stretch; 
+  margin: 1rem;
+  margin-top: 0;
+  align-items: center;
 }
 
 .case-studies-container .cases-table a {
@@ -597,7 +599,6 @@ position: relative;
 /* cncf notice container css */
 .cncf-notice-container {
   background-color: white;
-  padding-top: 1rem;
 }
 
 .cncf-notice-container h3 {
@@ -612,12 +613,6 @@ position: relative;
   margin: 1rem;
 }
 
-@media only screen and (max-width: 1219px) {
-  .md-header__topic {
-    margin: 0;
-  }
-}
-
 @media only screen and (max-width: 800px) {
   .component-flex, .case-studies-container .cases-table {
     flex-wrap: wrap;
@@ -625,8 +620,7 @@ position: relative;
 
   .knative-components-container .text-table .normal-text {
     width: 80%;
-    text-align: center;
-
+    text-align: center; 
   }
 
   .knative-components-container .text-table .normal-text:first-child {
@@ -650,18 +644,26 @@ footer nav.md-footer__inner {
 .md-footer-meta{
   padding: 1em 0;
 }
+
 .md-footer-copyright{
   margin-right: 18px;
 }
+
 @media (max-width: 1024px){
-.md-footer-copyright{
-  margin: auto;
-  text-align: center;
+  .md-header__topic {
+    margin: 0;
+  }
+
+  .md-footer-copyright{
+    margin: auto;
+    text-align: center;
+  }
+
+  .md-social{
+    margin: auto;
+  }
 }
-.md-social{
-  margin: auto;
-}
-}
+
 @media (max-width: 861px) {
   .md-footer-meta{
     flex-direction: column;
@@ -676,6 +678,7 @@ footer nav.md-footer__inner {
     display: block;
     margin-bottom: 0.5rem;
   }
+
   .md-footer__button {
     display: none;
   }
@@ -690,6 +693,7 @@ footer nav.md-footer__inner {
     margin: 2rem;
     flex-wrap: wrap;
   }
+
   .md-footer-copyright a{
     margin: 8px;
   }
@@ -698,10 +702,13 @@ footer nav.md-footer__inner {
     display: flex;
     flex-direction: column;
     order: 1;
-  
   }
 
   .md-social {
     margin-top: 1rem;
+  }
+
+  .pipe{
+    display:none;
   }
 }

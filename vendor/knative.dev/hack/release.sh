@@ -17,7 +17,7 @@
 # This is a helper script for Knative release scripts.
 # See README.md for instructions on how to use it.
 
-source $(dirname "${BASH_SOURCE[0]}")/library.sh
+source "$(dirname "${BASH_SOURCE[0]}")/library.sh"
 
 # Organization name in GitHub; defaults to Knative.
 readonly ORG_NAME="${ORG_NAME:-knative}"
@@ -33,34 +33,10 @@ readonly RELEASE_GCR="gcr.io/knative-releases/github.com/${ORG_NAME}/${REPO_NAME
 readonly NIGHTLY_SIGNING_IDENTITY="signer@knative-nightly.iam.gserviceaccount.com"
 readonly RELEASE_SIGNING_IDENTITY="signer@knative-releases.iam.gserviceaccount.com"
 
-# Georeplicate images to {us,eu,asia}.gcr.io
-readonly GEO_REPLICATION=(us eu asia)
-
 # Simple banner for logging purposes.
-# Parameters: $1 - message to display.
+# Parameters: $* - message to display.
 function banner() {
-    make_banner "@" "$1"
-}
-
-# Tag images in the yaml files if $TAG is not empty.
-# $KO_DOCKER_REPO is the registry containing the images to tag with $TAG.
-# Parameters: $1..$n - files to parse for images (non .yaml files are ignored).
-function tag_images_in_yamls() {
-  [[ -z ${TAG} ]] && return 0
-  local SRC_DIR="${GOPATH}/src/"
-  local DOCKER_BASE="${KO_DOCKER_REPO}/${REPO_ROOT_DIR/$SRC_DIR}"
-  local GEO_REGIONS="${GEO_REPLICATION[@]} "
-  echo "Tagging any images under '${DOCKER_BASE}' with ${TAG}"
-  # shellcheck disable=SC2068
-  for file in $@; do
-    [[ "${file##*.}" != "yaml" ]] && continue
-    echo "Inspecting ${file}"
-    for image in $(grep -o "${DOCKER_BASE}/[a-z\./-]\+@sha256:[0-9a-f]\+" "${file}"); do
-      for region in "" ${GEO_REGIONS// /. }; do
-        gcloud -q container images add-tag "${image}" "${region}${image%%@*}:${TAG}"
-      done
-    done
-  done
+  subheader "$*"
 }
 
 # Copy the given files to the $RELEASE_GCS_BUCKET bucket's "latest" directory.
@@ -646,7 +622,6 @@ function run_validation_tests() {
 # Parameters: $1..$n - files to add to the release.
 function publish_artifacts() {
   (( ! PUBLISH_RELEASE )) && return
-  tag_images_in_yamls "${ARTIFACTS_TO_PUBLISH}"
   if [[ -n "${RELEASE_DIR}" ]]; then
     cp "${ARTIFACTS_TO_PUBLISH}" "${RELEASE_DIR}" || abort "cannot copy release to '${RELEASE_DIR}'"
   fi
@@ -719,6 +694,8 @@ function main() {
   (( SKIP_TESTS )) && echo "- Tests will NOT be run" || echo "- Tests will be run"
   if (( TAG_RELEASE )); then
     echo "- Artifacts will be tagged '${TAG}'"
+    # We want to add git tags to the container images built by ko
+    KO_FLAGS+=" --tags=latest,${TAG}"
   else
     echo "- Artifacts WILL NOT be tagged"
   fi
