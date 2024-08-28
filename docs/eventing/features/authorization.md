@@ -185,6 +185,265 @@ When no `EventPolicy` applies to a resource, Knative Eventing falls back to the 
 
 If a request does not pass any applicable `EventPolicy`, it will be rejected with a `403 Forbidden` HTTP status code, ensuring that unauthorized event deliveries are blocked.
 
+## Example
+
+In the following, we give a full example how to configure authorization for resources. In this example, we want to protect a Broker (`broker`) in `namespace-1` by only allowing requests from a PingSource (`pingsource-2`) which is in a different namespace (`namespace-2`).
+
+First we create the Namespaces, Broker and PingSources:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-1
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-2
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker
+  namespace: namespace-1
+---
+apiVersion: sources.knative.dev/v1
+kind: PingSource
+metadata:
+  name: pingsource-1
+  namespace: namespace-1
+spec:
+  data: '{"message": "Hi from pingsource-1 from namespace-1"}'
+  schedule: '*/1 * * * *'
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: broker
+      namespace: namespace-1
+---
+apiVersion: sources.knative.dev/v1
+kind: PingSource
+metadata:
+  name: pingsource-2
+  namespace: namespace-2
+spec:
+  data: '{"message": "Hi from pingsource-2 from namespace-2"}'
+  schedule: '*/1 * * * *'
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: broker
+      namespace: namespace-1
+```
+
+For debugging we also create an event-display service and Trigger:
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: namespace-1
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: trigger
+  namespace: namespace-1
+spec:
+  broker: broker
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
+```
+
+As long as OIDC is disabled and no EventPolicy is in place, we should see the events from both PingSources in the event-display kservice:
+
+```
+$ kubectl -n namespace-1 logs event-display-00001-deployment-56cd8dd644-64xl2
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/namespace-1/pingsources/pingsource-1
+  id: 79d7a363-798d-40e2-b95c-6e007c81b05b
+  time: 2024-08-28T11:33:00.168602384Z
+Extensions,
+  knativearrivaltime: 2024-08-28T11:33:00.194124454Z
+Data,
+  {"message": "Hi from pingsource-1 from namespace-1"}
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/namespace-2/pingsources/pingsource-2
+  id: 94cfefc6-57aa-471c-9ce5-1d8c61370c7e
+  time: 2024-08-28T11:33:00.287533878Z
+Extensions,
+  knativearrivaltime: 2024-08-28T11:33:00.296630315Z
+Data,
+  {"message": "Hi from pingsource-2 from namespace-2"}
+```
+
+Now enable OIDC
+
+```
+$ kubectl -n knative-eventing patch cm config-features --type merge --patch '{"data":{"authentication-oidc":"enabled"}}'
+```
+
+and create the following EventPolicy
+
+```yaml
+apiVersion: eventing.knative.dev/v1alpha1
+kind: EventPolicy
+metadata:
+  name: event-policy
+  namespace: namespace-1
+spec:
+  to:
+    - ref:
+        apiVersion: eventing.knative.dev/v1
+        kind: Broker
+        name: broker
+  from:
+    - ref:
+        apiVersion: sources.knative.dev/v1
+        kind: PingSource
+        name: pingsource-2
+        namespace: namespace-2
+```
+
+Afterwards you can see in the Brokers status, that this EventPolicy got applied to it:
+
+```
+$ kubectl -n namespace-1 get broker broker -o yaml                                                                      
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker
+  namespace: namespace-1
+  ...
+spec:
+  ...
+status:
+  ...
+  conditions:
+  ...
+  - lastTransitionTime: "2024-08-28T11:53:48Z"
+    status: "True"
+    type: EventPoliciesReady
+  - lastTransitionTime: "2024-08-28T11:26:16Z"
+    status: "True"
+    type: Ready
+
+  policies:
+  - apiVersion: eventing.knative.dev/v1alpha1
+    name: event-policy
+```
+
+And in the event-display, you should see only events from `pingsource-2` anymore:
+
+```
+$ kubectl -n namespace-1 logs event-display-00001-deployment-56cd8dd644-64xl2
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/namespace-2/pingsources/pingsource-2
+  id: c0b4f5f2-5f95-4c0b-a3c6-6f61b6581a4b
+  time: 2024-08-28T11:56:00.200782358Z
+Extensions,
+  knativearrivaltime: 2024-08-28T11:56:00.20834826Z
+Data,
+  {"message": "Hi from pingsource-2 from namespace-2"}
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/namespace-2/pingsources/pingsource-2
+  id: 6ab79fb0-2cf6-42a0-a43e-6bcd172558e5
+  time: 2024-08-28T11:57:00.075390777Z
+Extensions,
+  knativearrivaltime: 2024-08-28T11:57:00.096497595Z
+Data,
+  {"message": "Hi from pingsource-2 from namespace-2"}
+```
+
+When we remove now the EventPolicy again and keep OIDC disabled, the Broker will fall back to the default authorization mode, which is `allow-same-namespace`:
+
+```
+$ kubectl -n namespace-1 delete eventpolicy event-policy
+```
+
+This should be reflected in the Brokers status too:
+
+```
+$ kubectl -n namespace-1 get broker broker -o yaml           
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker
+  namespace: namespace-1
+  ...
+spec:
+  ...
+status:
+  ...
+  conditions:
+  ...
+  - lastTransitionTime: "2024-08-28T12:00:00Z"
+    message: Default authz mode is "Allow-Same-Namespace
+    reason: DefaultAuthorizationMode
+    status: "True"
+    type: EventPoliciesReady
+
+  - lastTransitionTime: "2024-08-28T11:26:16Z"
+    status: "True"
+    type: Ready
+```
+
+And we should see only events from `pingsource-1` in the event-display (as `pingsource-1` is in the same namespace as `broker`):
+
+```
+$ kubectl -n namespace-1 logs event-display-00001-deployment-56cd8dd644-64xl2
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/namespace-1/pingsources/pingsource-1
+  id: cd173aef-373a-4f2b-915e-43c138ac0602
+  time: 2024-08-28T12:01:00.2504715Z
+Extensions,
+  knativearrivaltime: 2024-08-28T12:01:00.276151088Z
+Data,
+  {"message": "Hi from pingsource-1 from namespace-1"}
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.sources.ping
+  source: /apis/v1/namespaces/namespace-1/pingsources/pingsource-1
+  id: 22665003-fe81-4203-8896-89594077ae6b
+  time: 2024-08-28T12:02:00.121025501Z
+Extensions,
+  knativearrivaltime: 2024-08-28T12:02:00.13378992Z
+Data,
+  {"message": "Hi from pingsource-1 from namespace-1"}
+
+```
+
 ## Summary
 
 The `EventPolicy` resource in Knative Eventing offers a powerful way to control event delivery securely. By defining which sources can send events to specific consumers, users can ensure that only authorized entities interact within their event-driven architecture.
