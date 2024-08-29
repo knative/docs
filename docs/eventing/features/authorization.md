@@ -45,7 +45,7 @@ spec:
         name: my-broker
     - selector:
         apiVersion: eventing.knative.dev/v1
-        kind: Trigger
+        kind: Broker
         matchLabels:
           app: special-app
   from:
@@ -81,14 +81,14 @@ There are two ways to define these targets:
     ```
 2. `to.selector`:
     * **Definition**: Uses a label selector to match multiple resources of a specific type.
-    * **Example**: The `EventPolicy` includes a `Trigger` with labels matching `app: special-app`. This means the `EventPolicy` applies to all `Triggers` with these labels.
+    * **Example**: The `EventPolicy` includes a `Broker` with labels matching `app: special-app`. This means the `EventPolicy` applies to all `Brokers` with these labels.
     * **Use Case**: Use `to.selector` when you want the `EventPolicy` to apply to a group of resources that share common labels.
 
     ```yaml
     to:
       - selector:
           apiVersion: eventing.knative.dev/v1
-          kind: Trigger
+          kind: Broker
           matchLabels:
             app: special-app
     ```
