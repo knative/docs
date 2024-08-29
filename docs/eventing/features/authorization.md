@@ -209,6 +209,8 @@ If a request does not pass any applicable `EventPolicy`, it will be rejected wit
 
 In the following, we give a full example how to configure authorization for resources. In this example, we want to protect a Broker (`broker`) in `namespace-1` by only allowing requests from a PingSource (`pingsource-2`) which is in a different namespace (`namespace-2`).
 
+![Example Overview](./images/authz-example.png)
+
 First we create the Namespaces, Broker and PingSources:
 
 ```yaml
