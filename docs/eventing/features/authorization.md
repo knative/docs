@@ -11,6 +11,9 @@ Securing event delivery in Knative Eventing is essential to prevent unauthorized
 - [Eventing installation](./../../../install)
 - [`authentication-oidc`](./sender-identity.md) feature to be enabled.
 
+!!! note
+    As described on the [`authentication-oidc`](./sender-identity.md), `transport-encryption` should be enabled as well for a secure authentication. Take a look at [Transport-Encryption](./transport-encryption.md), which explains how to enable the transport encryption feature flag.
+
 ## Compatibility
 
 Authorization is currently supported for the following components:
