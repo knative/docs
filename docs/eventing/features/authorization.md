@@ -30,6 +30,14 @@ Authorization is currently supported for the following components:
 - Others:
     - [KafkaSink](./../sinks/kafka-sink.md)
 
+## Default Authorization Mode
+
+Administrators can set a default authorization mode using the `defaultAuthorizationMode` feature flag, which Knative Eventing will use whenever no `EventPolicy` applies to a resource. The available modes are:
+
+* `allow-all`: All requests are allowed.
+* `deny-all`: All requests are denied, enforcing the creation of EventPolicies.
+* `allow-same-namespace`: Only requests from subjects within the same namespace are allowed. (Default)
+
 ## Defining an EventPolicy
 
 An `EventPolicy` defines rules for event delivery by specifying which subjects (service accounts or event sources) are allowed to send events to designated event consumers.
@@ -193,13 +201,7 @@ status:
 
 The `EventPoliciesReady` condition indicates whether all applicable EventPolicies for a resource are ready and have been successfully applied.
 
-## Default Authorization Mode and Rejection Behavior
-
-When no `EventPolicy` applies to a resource, Knative Eventing falls back to the default authorization mode, configurable via the `defaultAuthorizationMode` feature flag. The available modes are:
-
-* `allow-all`: All requests are allowed.
-* `deny-all`: All requests are denied, enforcing the creation of EventPolicies.
-* `allow-same-namespace`: Only requests from subjects within the same namespace are allowed. (Default)
+## Rejection Behavior
 
 If a request does not pass any applicable `EventPolicy`, it will be rejected with a `403 Forbidden` HTTP status code, ensuring that unauthorized event deliveries are blocked.
 
