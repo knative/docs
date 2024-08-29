@@ -102,7 +102,7 @@ The `.spec.from` section specifies **who** is allowed to send events to the targ
 
 1. `from.ref`:
     * **Definition**: Directly references a specific event source resource.
-    * **Example**: The `my-source` `PingSource` in another namespace is referenced, meaning this specific source is allowed to send events.
+    * **Example**: The `my-source` `PingSource` in `another-namespace` is referenced, meaning this specific source is allowed to send events.
     * **Use Case**: Use `from.ref` when you want to authorize a specific event source.
     ```yaml
     from:
@@ -126,7 +126,22 @@ The `.spec.from` section specifies **who** is allowed to send events to the targ
 
 ### Advanced CloudEvent filtering criterias
 
-The `.spec.filters` section is optional and specifies additional criteria that the event itself must meet to be allowed. If the filters are specified, an event must match at least one of them to be accepted. `.spec.filters` accepts the same filter dialects as [Triggers](../triggers/README.md#supported-filter-dialects).
+The `.spec.filters` section is optional and specifies additional criteria that the event itself must meet to be allowed. 
+
+* **Example:** Only CloudEvents with the `type` equals to `com.github.push` or matching a CESQL expression are allowed.
+* **Use Case:** Use `filters` when you want to have more fine grained criterias on allowed CloudEvents.
+  ```yaml
+  from:
+    filters:
+      - cesql: "type IN ('order.created', 'order.updated', 'order.canceled')"
+      - exact:
+          type: com.github.push
+  ```
+
+If the filters are specified, an event must match **at least one of them** to be accepted. `.spec.filters` accepts the same filter dialects as [Triggers](../triggers/README.md#supported-filter-dialects).
+
+!!! note
+    Filters apply in addition to `.spec.from`. This means, soon as an `EventPolicy` specifies `.spec.filters`, they must match the request, as well as the `.spec.from` (*AND* operand). Only then the `EventPolicy` allows the request.
 
 ### Summary of `.spec` fields:
 
