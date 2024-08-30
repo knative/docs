@@ -136,7 +136,7 @@ The `.spec.from` section specifies **who** is allowed to send events to the targ
 
 The `.spec.filters` section is optional and specifies additional criteria that the event itself must meet to be allowed. 
 
-* **Example:** Only CloudEvents with the `type` equals to `com.github.push` or matching a CESQL expression are allowed.
+* **Example:** Only CloudEvents with the `type` equals to `com.github.push` and matching a certain CESQL expression are allowed.
 * **Use Case:** Use `filters` when you want to have more fine grained criterias on allowed CloudEvents.
   ```yaml
   from:
@@ -146,7 +146,7 @@ The `.spec.filters` section is optional and specifies additional criteria that t
           type: com.github.push
   ```
 
-If the filters are specified, an event must match **at least one of them** to be accepted. `.spec.filters` accepts the same filter dialects as [Triggers](../triggers/README.md#supported-filter-dialects).
+If the filters are specified, an event must match **all** the specified filters of an `EventPolicy` (in addition to its `.spec.from`) to be accepted. `.spec.filters` accepts the same filter dialects as [Triggers](../triggers/README.md#supported-filter-dialects).
 
 !!! note
     Filters apply in addition to `.spec.from`. This means, soon as an `EventPolicy` specifies `.spec.filters`, they must match the request, as well as the `.spec.from` (*AND* operand). Only then the `EventPolicy` allows the request.
