@@ -75,7 +75,7 @@ spec:
 
 ### Specify for who the `EventPolicy` applies
 
-The `.spec.to` section specifies **where** the events are allowed to be sent. This field is optional; if left empty, the policy applies to all resources within the namespace.
+The `.spec.to` section specifies **where** the events are allowed to be sent. This field is optional; if left empty, the policy applies to all resources within the namespace. By specifying multiple targets in `.spec.to`, the `EventPolicies` scope gets widened by applying the same rules to multiple targets.
 
 There are two ways to define these targets:
 
@@ -123,7 +123,7 @@ The `.spec.from` section specifies **who** is allowed to send events to the targ
 
 2. `from.sub`:
 
-    * **Definition**: Specifies a subject, such as a service account, that is allowed to send events. It can include wildcard patterns as a postfix (`*`) for broader matching.
+    * **Definition**: Specifies a subject (a service account name), that is allowed to send events. It can include wildcard patterns as a postfix (`*`) for broader matching.
     * **Example**: The `EventPolicy` allows events from the `trusted-app` service account in the default namespace and any service account in `default` namespace that starts with `other-`.
     * **Use Case**: Use `from.sub` to allow specific users or service accounts, or to apply wildcard patterns for more flexibility.
     ```yaml
@@ -261,7 +261,7 @@ spec:
       namespace: namespace-1
 ```
 
-For debugging we also create an event-display service and Trigger:
+For debugging we also create an event-display Kservice and Trigger:
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -376,7 +376,7 @@ status:
     name: event-policy
 ```
 
-And in the event-display, you should see only events from `pingsource-2` anymore:
+And in the event-display, you should see only events from `pingsource-2` anymore, as we referenced this in our EventPolicy `event-policy` to be allowed to send events to Broker `broker`:
 
 ```
 $ kubectl -n namespace-1 logs event-display-00001-deployment-56cd8dd644-64xl2
@@ -437,7 +437,7 @@ status:
     type: Ready
 ```
 
-And we should see only events from `pingsource-1` in the event-display (as `pingsource-1` is in the same namespace as `broker`):
+And we should see only events from `pingsource-1` in the event-display, as `pingsource-1` is in the same namespace as `broker`:
 
 ```
 $ kubectl -n namespace-1 logs event-display-00001-deployment-56cd8dd644-64xl2
