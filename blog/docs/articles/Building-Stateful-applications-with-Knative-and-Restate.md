@@ -123,7 +123,7 @@ We're now ready to implement the signup service.
 The signup service has a single handler that orchestrates the signup:
 
 ```golang
-func (t *signupService) Signup(ctx restate.ObjectSharedContext, newUser NewUser) (string, error) {
+func (t *signupService) Signup(ctx restate.Context, newUser NewUser) (string, error) {
 	// Initialize the newUser first
 	user := User{
 		Name:     newUser.Name,
