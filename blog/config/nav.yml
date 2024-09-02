@@ -48,6 +48,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/Building-Stateful-applications-with-Knative-and-Restate.md
           - articles/llm-agents-demo.md
           - articles/llm-agents-overview.md
           - articles/cross-namespace-event-links-feature.md
