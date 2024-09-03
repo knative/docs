@@ -203,7 +203,7 @@ The `EventPoliciesReady` condition indicates whether all applicable EventPolicie
 
 ## Rejection Behavior
 
-If a request does not pass any applicable `EventPolicy`, it will be rejected with a `403 Forbidden` HTTP status code, ensuring that unauthorized event deliveries are blocked.
+If a request does not pass any applicable `EventPolicy`, it will be rejected with a `403 Forbidden` HTTP status code, ensuring that unauthorized event deliveries are blocked. If multiple policies apply to the same resource, the event will be delivered as long as it matches **at least one** of the applicable `EventPolicies`. This ensures that even if strict policies are in place, valid events that meet the criteria of any policy can still be processed.
 
 ## Example
 
