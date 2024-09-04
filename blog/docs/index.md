@@ -23,6 +23,8 @@ Follow this blog to keep up-to-date with Knative.
 ## Featured Posts
 
 ### Building Stateful applications with Knative and Restate
+![Building Stateful applications with Knative and Restate](./articles/images/Building-stateful-serverless-apps-with-knative-and-restate.png)
+
 Combine Knative with Restate's Durable Execution model to easily build serverless stateful applications
 
 [Read more :octicons-arrow-right-24:](articles/Building-Stateful-applications-with-Knative-and-Restate.md){ .md-button }
