@@ -1,5 +1,7 @@
 # Building Stateful applications with Knative and Restate
 
+![Building Stateful applications with Knative and Restate](./images/Building-stateful-serverless-apps-with-knative-and-restate.png)
+
 **Author: [Francesco Guardiani](https://github.com/slinkydeveloper/), Senior Software Engineer @ Restate, [Giselle van Dongen](https://www.linkedin.com/in/giselle-van-dongen/), Developer Advocate @ Restate**
 
 Knative revolutionized developing and operating serverless applications on Kubernetes, but it is still quite challenging to build stateful applications on top of it.
