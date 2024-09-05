@@ -11,6 +11,7 @@ plugins:
       eventing/experimental-features/eventtype-auto-creation.md: eventing/features/eventtype-auto-creation.md
       eventing/experimental-features/transport-encryption.md: eventing/features/transport-encryption.md
       eventing/experimental-features/sender-identity.md: eventing/features/sender-identity.md
+      eventing/experimental-features/authorization.md: eventing/features/authorization.md
       eventing/features/new-trigger-filters.md: eventing/triggers/README.md
       eventing/broker/kafka-broker/kafka-configmap.md: eventing/configuration/kafka-channel-configuration.md
       eventing/broker/create-mtbroker.md: eventing/brokers/create-broker.md
