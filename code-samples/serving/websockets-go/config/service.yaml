@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: websockets-go
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: ko://github.com/knative/docs/code-samples/serving/websockets-go/cmd/server

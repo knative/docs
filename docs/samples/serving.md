@@ -19,3 +19,4 @@ See [all Knative code samples](https://github.com/knative/docs/tree/main/code-sa
 | Kong Routing     | An example of mapping multiple Knative services to different paths under a single domain name using the Kong API gateway. | [Go](https://github.com/knative/docs/tree/main/code-samples/serving/kong-routing-go) |
 | Knative Secrets     | A simple app that demonstrates how to use a Kubernetes secret as a Volume in Knative.   | [Go](https://github.com/knative/docs/tree/main/code-samples/serving/secrets-go) |
 | Multi Container     | A quick introduction that highlights how to build and deploy an app using Knative Serving for multiple containers. | [Go](https://github.com/knative/docs/tree/main/code-samples/serving/multi-container) |
+| WebSocket Server    | A simple WebSocket server.  | [Go](https://github.com/knative/docs/tree/main/code-samples/serving/websocket-go)  |
