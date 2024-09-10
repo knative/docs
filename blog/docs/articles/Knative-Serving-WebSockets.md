@@ -6,7 +6,7 @@ Knative Serving supports multiple protocols for running serverless workloads, su
 
 !!! note
 
-    A sample application can be found in the [Knative docs repository](https://github.com/knative/docs/tree/main/code-samples/serving/websockets-go).
+    The sample application discussed here can be found in the [Knative docs repository](https://github.com/knative/docs/tree/main/code-samples/serving/websockets-go).
 
 ## HTTP Upgrade
 
