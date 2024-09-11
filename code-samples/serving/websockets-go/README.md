@@ -112,15 +112,15 @@ Get the URL for your Service with:
 
    ```bash
    kubectl get ksvc
-   NAME               URL                                                 LATESTCREATED            LATESTREADY              READY   REASON
-   websocket-server   http://websocket-server.default.svc.cluster.local   websocket-server-00001   websocket-server-00001   True
+   NAME               URL                                                  LATESTCREATED             LATESTREADY              READY   REASON
+   websocket-server   http://websockets-server.default.svc.cluster.local   websockets-server-00001   websocket-server-00001   True
    ```
 
 Now run a container with the [wscat](https://github.com/websockets/wscat) CLI and point it to the WebSocket application `ws://websocket-server.default.svc.cluster.local/ws`, like:
 
 
    ```bash
-   kubectl run --rm -i --tty wscat --image=monotykamary/wscat --restart=Never -- -c ws://websocket-server.default.svc.cluster.local/ws
+   kubectl run --rm -i --tty wscat --image=monotykamary/wscat --restart=Never -- -c ws://websockets-server.default.svc.cluster.local/ws
    ```
 
 Afterward you can chat with the WebSocket server like:

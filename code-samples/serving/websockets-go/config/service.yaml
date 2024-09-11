@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: websockets-go
+  name: websockets-server
   namespace: default
 spec:
   template:
