@@ -78,7 +78,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-nodejs
      "author": "",
      "license": "Apache-2.0",
      "dependencies": {
-       "express": "^4.19.2"
+       "express": "^4.20.0"
      }
    }
    ```
