@@ -92,7 +92,7 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-kotlin
    ```docker
    # Use the official gradle image to create a build artifact.
    # https://hub.docker.com/_/gradle
-   FROM gradle:6.7 as builder
+   FROM gradle:6.7 AS builder
 
    # Copy local code to the container image.
    COPY build.gradle .
