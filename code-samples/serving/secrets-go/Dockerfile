@@ -1,14 +1,19 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang as builder
+FROM golang:latest AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
 
+# Create and change to the app directory.
+WORKDIR /app
+
 # Copy local code to the container image.
-WORKDIR /go/src/github.com/knative/docs/hellosecrets
-COPY . .
+COPY . ./
+
+# Install dependencies and tidy up the go.mod and go.sum files.
+RUN go mod tidy
 
 # Build the output command inside the container.
 RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o hellosecrets
@@ -21,7 +26,7 @@ FROM alpine
 RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /go/src/github.com/knative/docs/hellosecrets/hellosecrets /hellosecrets
+COPY --from=builder /app/hellosecrets /hellosecrets
 
 # Run the web service on container startup.
 CMD ["/hellosecrets"]

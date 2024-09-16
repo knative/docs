@@ -1,15 +1,12 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
-FROM golang:latest as builder
+FROM golang:latest AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
 
 # Create and change to the app directory.
 WORKDIR /app
-
-# Initialize the Go module inside the Dockerfile.
-RUN go mod init mymodule
 
 # Copy local code to the container image.
 COPY . ./
