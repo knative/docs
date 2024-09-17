@@ -1,6 +1,8 @@
 .md-main__inner {
   margin: 0;
   max-width: 100%;
+  overflow: hidden; 
+  position: relative;
 }
 
 .md-main__inner .md-content__inner,
@@ -194,64 +196,139 @@ h2.secondary-headline, h3.trusted-by {
   font-weight: bold;
 }
 
+@media screen and (max-width: 768px) {
+  .home-container {
+    padding: 1rem;
+  }
+
+  .home-container .md-button,
+  .home-container .md-button--primary {
+    width: 70%;
+    font-size: medium;
+    margin: 0.5em 0;
+  }
+
+  .scroller {
+    max-width: 90vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-container h1 {
+    font-size: 1.5em;
+    padding: 0.5rem;
+  }
+
+  .home-container .md-button,
+  .home-container .md-button--primary {
+    font-size: small;
+  }
+
+  .scroller {
+    max-width: 100vw;
+  }
+}
+
+
 /* need to know more section css */
 .need-to-know-more-container, .knative-components-container,
 .whats-next-container {
   background-color: var(--md-primary-fg-color--dark);
+  padding: 2rem 1rem;
+  text-align: center;
 }
 
 .need-to-know-more-container h1, .whats-next-container h1 {
   color: white;
+  font-size: 2em;
 }
 
 .need-to-know-more-container .md-button {
-  font-size: x-large;
-  margin-top: 1em;
-  padding: 4px 3em;
+  margin: 1em 0;
   color: white;
+  border-radius: 0.5rem;
+  background-color: var(--md-primary-fg-color--light);
+  border: none;
+  width: 28%;
+  font-size: large;
+  padding: 0.525em 1em;
+  min-width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+  .need-to-know-more-container {
+    padding: 1.5em 0.5em;
+  }
+
+  .need-to-know-more-container h1 {
+    font-size: 1.5em;
+  }
+
+  .need-to-know-more-container .md-button {
+    width: 70%;
+    font-size: large;
+  }
+
+  .normal-text {
+    font-size: 1em;
+    line-height: 1.5em;
+  }
+
+  .br{
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .need-to-know-more-container {
+    padding: 1em 0.5em;
+  }
+
+  .need-to-know-more-container h1 {
+    font-size: 1.2em;
+  }
+
+  .need-to-know-more-container .md-button {
+    font-size: medium;
+    padding: 4px 1.5em;
+  }
+
+  .normal-text {
+    font-size: 0.9em;
+    line-height: 1.4em;
+  }
 }
 
 /* why serverless container css */
 .why-serverless-container, .trying-it-all-container {
   background-color: white;
   color: var(--md-primary-fg-color--light);
+  padding: 2em 1em;
+  text-align: center;
 }
 
 .why-serverless-container h1, .trying-it-all-container h1,
 .case-studies-container h1 {
   color: var(--md-primary-fg-color--dark);
+  font-size: 2em;
+  margin-bottom: 1rem;
 }
 
 .why-serverless-container .normal-text,
 .trying-it-all-container .normal-text {
   font-weight: 600;
   margin: 0 auto 2rem;
-  color:var(--nav-item-color);
+  color: var(--nav-item-color);
 }
 
-.why-serverless-container .normal-text-head{
-  color:var(--nav-item-color);
-  width:85%;
+.why-serverless-container .normal-text-head {
+  color: var(--nav-item-color);
+  width: 85%;
   font-weight: 600;
   text-align: center;
   margin: auto;
-}
-
-.why-serverless-container .md-typeset h1,
-.trying-it-all-container .md-typeset h1 {
-  margin-bottom: 1rem;
-}
-
-.why-serverless-container .md-typeset h2,
-.trying-it-all-container .md-typeset h2 {
-  font-weight: bold;
-  color: black;
-  margin: 0;
-}
-
-.why-serverless-container .normal-text {
-  font-size: .8rem;
-  margin: 10px;
+  font-size: 1rem;
 }
 
 .img-table {
@@ -262,18 +339,17 @@ h2.secondary-headline, h3.trusted-by {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .img-col {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  height: 200px;
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  flex: 1 1 30%;
+  max-width: 30%;
+  margin: 1rem auto;
   align-items: center;
-  margin-top: 1rem;
 }
 
 .img-wrapper {
@@ -294,6 +370,68 @@ h2.secondary-headline, h3.trusted-by {
 
 .reason-img img:hover {
   transform: scale(1.15);
+}
+
+.reason-text h2{
+  font-size:24px;
+  color:black;
+  margin:4px;
+  font-weight: bold;
+}
+
+.normal-text{
+  font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .why-serverless-container h1 {
+    font-size: 1.5em;
+  }
+
+  .why-serverless-container .normal-text-head {
+    font-size: 0.9rem;
+    margin-bottom: 4rem;
+  }
+
+  .img-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .img-col {
+    flex: 1 1 45%;
+    max-width: 45%;
+    margin:0;
+  }
+
+  .img-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .why-serverless-container h1 {
+    font-size: 1.2em;
+  }
+
+  .why-serverless-container .normal-text-head {
+    font-size: 0.8rem;
+  }
+
+  .img-row {
+    flex-direction: column;
+  }
+
+  .img-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .img-wrapper {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 /* knative components container css */
@@ -441,16 +579,24 @@ position: relative;
 }
 
 .trying-it-all-container .md-typeset .md-button.call-to-action {
-  font-size: x-large;
-  padding: 0.5rem 2em;
   background-color: var(--md-primary-fg-color--dark);
   color: white;
-  margin-top: 5rem;
+  margin-top: 3rem;
   border-radius: 0.7rem;
+  width: 28%;
+  font-size: large;
+  padding: 0.525em 1em;
+  min-width: fit-content;
 }
 
 .trying-it-all-container .md-button.call-to-action:hover {
   background-color: var(--md-accent-fg-color);
+}
+
+@media screen and (max-width: 768px){
+  .trying-it-all-container .md-typeset .md-button.call-to-action{
+    width:70%;
+  }
 }
 
 /* case studies container css */
