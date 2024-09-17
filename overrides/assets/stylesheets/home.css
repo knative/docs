@@ -329,6 +329,82 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
 }
 
+.knative-components-container-mobile , .text-upper-right , .text-lower-left , .svg-diagram{
+  display: none;
+}
+
+@media only screen and (max-width: 425px){
+
+  .knative-components-container-mobile , .text-upper-right , .text-lower-left , .svg-diagram{
+    display: block;
+  }
+
+  .text-table {
+    display: none;
+  }
+  
+  .components-img {
+    display: none;
+  }
+
+.knative-components-container-mobile {
+  position: relative;
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.text-upper-right {
+  position: absolute;
+  top: 20px;
+  right: -75px;
+  width: 180px;
+  font-size: 12px;
+}
+
+.text-lower-left {
+  position: absolute;
+  bottom: 50px;
+  width: 165px;
+  left: -10px;
+  font-size: 12px;
+}
+
+.svg-diagram img {
+  width: 120%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+}
+
+@media only screen and (max-width: 375px){
+
+.text-upper-right {
+  position: absolute;
+  top: 20px;
+  right: -75px;
+  width: 165px;
+  font-size: 10px;
+}
+
+.text-lower-left {
+  position: absolute;
+  bottom: 50px;
+  width: 150px;
+  left: -10px;
+  font-size: 10px;
+}
+
+.svg-diagram img {
+  width: 120%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+}
 /* trying it all container css */
 .trying-it-all-container .reason-img img{
 position: relative;
