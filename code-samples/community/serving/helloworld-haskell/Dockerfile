@@ -1,6 +1,6 @@
 # Use the official Haskell image to create a build artifact.
 # https://hub.docker.com/_/haskell/
-FROM haskell:8.2.2 as builder
+FROM haskell:8.2.2 AS builder
 
 # Copy local code to the container image.
 WORKDIR /app

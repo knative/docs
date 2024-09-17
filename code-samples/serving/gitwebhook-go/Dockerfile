@@ -12,27 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang AS builder
+FROM golang:latest AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
 
-# copy the source
-ADD .   /go/src/github.com/knative/docs/code-samples/serving/gitwebhook-go
-WORKDIR /go/src/github.com/knative/docs/code-samples/serving/gitwebhook-go
+# Create and change to the app directory.
+WORKDIR /app
 
-# install dependencies
-RUN go get github.com/google/go-github/github
-RUN go get golang.org/x/oauth2
-RUN go get gopkg.in/go-playground/webhooks.v3
-RUN go get gopkg.in/go-playground/webhooks.v3/github
+# Copy local code to the container image.
+COPY . ./
 
-# build the sample
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /go/bin/webhook-sample .
+# Install dependencies and tidy up the go.mod and go.sum files.
+RUN go mod tidy
+
+# Build the binary.
+# -mod=readonly ensures immutable go.mod and go.sum in container builds.
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o webhook-sample
 
 FROM golang:alpine
 
 EXPOSE 8080
-COPY --from=builder /go/bin/webhook-sample /app/webhook-sample
+COPY --from=builder /app/webhook-sample /webhook-sample
 
-ENTRYPOINT ["/app/webhook-sample"]
+ENTRYPOINT ["/webhook-sample"]

@@ -1,7 +1,7 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang:1.13 as builder
+FROM golang:latest AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -12,14 +12,12 @@ WORKDIR /app
 # Copy local code to the container image.
 COPY . ./
 
-# Ensure Go modules are on and create the go.mod and go.sum files.
-# Also builds the binary
-ENV GO111MODULE=on
-RUN go mod init cloudevents.go \
-    && CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o server
+# Install dependencies and tidy up the go.mod and go.sum files.
+RUN go mod tidy
 
-# Allows the container builds to reuse downloaded dependencies.
-RUN go mod download
+# Build the binary.
+# -mod=readonly ensures immutable go.mod and go.sum in container builds.
+RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o server
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine

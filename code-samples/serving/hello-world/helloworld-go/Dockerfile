@@ -1,6 +1,6 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
-FROM golang:latest as builder
+FROM golang:latest AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -8,13 +8,11 @@ ARG TARGETARCH
 # Create and change to the app directory.
 WORKDIR /app
 
-# Retrieve application dependencies using go modules.
-# Allows container builds to reuse downloaded dependencies.
-COPY go.* ./
-RUN go mod download
-
 # Copy local code to the container image.
 COPY . ./
+
+# Install dependencies and tidy up the go.mod and go.sum files.
+RUN go mod tidy
 
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
