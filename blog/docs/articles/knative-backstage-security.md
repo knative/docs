@@ -29,7 +29,7 @@ catalog:
   providers:
     knativeEventMesh:
       dev:
-        token: "eyJhb.........NHA"
+        token: '${KNATIVE_EVENT_MESH_TOKEN}'
         baseUrl: "http://eventmesh-backend.knative-eventing.svc:8080"
         schedule: # optional; same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
@@ -37,6 +37,8 @@ catalog:
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 1 }
 ```
+
+The `token` is taken from the `KNATIVE_EVENT_MESH_TOKEN` environment variable. Backstage supports environment variables in the configuration files, so you can set the token as an environment variable before starting the Backstage instance. Actually, Backstage has other mechanisms, including configuration files, file includes and others. You can check the [Backstage documentation](https://backstage.io/docs/conf/writing/){:target="_blank"} for more information.  
 
 How to create the `ServiceAccount`, `ClusterRole`, `ClusterRoleBinding`, `Secret` and the token for that `Secret` is documented in the [plugin's readme file](https://github.com/knative-extensions/backstage-plugins/blob/main/backstage/plugins/knative-event-mesh-backend/README.md).
 
