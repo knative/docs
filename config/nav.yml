@@ -81,6 +81,8 @@ nav:
         - Install Istio for Knative: install/installing-istio.md
         # Cert-manager Installation
         - Install cert-manager: install/installing-cert-manager.md
+      # Backstage plugin
+      - Install Knative Backstage plugin: install/installing-backstage-plugins.md
       # Vendor docs
       - Using a Knative-based offering: install/knative-offerings.md
       # Upgrading Knative
