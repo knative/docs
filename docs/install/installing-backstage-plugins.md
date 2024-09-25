@@ -267,10 +267,4 @@ When you start your Backstage application, you can see some log lines as follows
 
 ### Usage
 
-The plugin will register a few entities in the Backstage catalog.
-
-Screenshots:
-
-![Event Mesh plugin](./images/event-mesh-plugin-components-view.png)
-
-![Event Mesh plugin](./images/event-mesh-plugin-apis-view.png)
+See the [plugin documentation](../../eventing/event-registry/eventmesh-backstage-plugin/) for more information about using the plugin.
