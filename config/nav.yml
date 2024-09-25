@@ -278,6 +278,7 @@ nav:
         - Handling delivery failure: eventing/event-delivery.md
         - Event registry:
           - Using the Event registry: eventing/event-registry/README.md
+          - Knative EventMesh Backstage Plugin: eventing/event-registry/eventmesh-backstage-plugin.md
         - Sugar controller: eventing/sugar/README.md
         - Debugging: eventing/troubleshooting/README.md
       - Administrator topics:
