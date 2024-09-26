@@ -81,6 +81,8 @@ nav:
         - Install Istio for Knative: install/installing-istio.md
         # Cert-manager Installation
         - Install cert-manager: install/installing-cert-manager.md
+      # Backstage plugin
+      - Install Knative Backstage plugin: install/installing-backstage-plugins.md
       # Vendor docs
       - Using a Knative-based offering: install/knative-offerings.md
       # Upgrading Knative
@@ -274,7 +276,9 @@ nav:
             - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
             - ContainerSource Reference: eventing/custom-event-source/containersource/reference.md
         - Handling delivery failure: eventing/event-delivery.md
-        - Event registry: eventing/event-registry.md
+        - Event registry:
+          - Using the Event registry: eventing/event-registry/README.md
+          - Knative EventMesh Backstage Plugin: eventing/event-registry/eventmesh-backstage-plugin.md
         - Sugar controller: eventing/sugar/README.md
         - Debugging: eventing/troubleshooting/README.md
       - Administrator topics:
