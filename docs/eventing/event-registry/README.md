@@ -44,7 +44,7 @@ status:
 ```
 
 For the full specification for an EventType object, see the
-[EventType API reference](../eventing/reference/eventing-api.md#eventing.knative.dev/v1beta2.EventType).
+[EventType API reference](../../eventing/reference/eventing-api.md#eventing.knative.dev/v1beta2.EventType).
 
 The `metadata.name` field is advisory, that is, non-authoritative.
 It is typically generated using `generateName` to avoid naming collisions.
@@ -295,6 +295,6 @@ Here are a some example Triggers that subscribe to events using exact matching o
 
 ## Next steps
 
-[Knative code samples](../samples/eventing.md) is a useful resource to better understand
+[Knative code samples](../../samples/eventing.md) is a useful resource to better understand
 some of the event sources. Remember, you must point the sources to a Broker if you want
 automatic registration of EventTypes in the registry.
