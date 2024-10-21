@@ -23,9 +23,11 @@
             {% include ".icons/material/arrow-left.svg" %}
           </div>
           <div class="md-footer__title">
-            <span class="md-footer__direction">
-              {{ lang.t("footer.previous") }}
-            </span>
+            {% if "blog" not in config.config_file_path %}
+              <span class="md-footer__direction">
+                {{ lang.t("footer.previous") }}
+              </span>
+            {% endif %}
             <div class="md-ellipsis">
               {{ page.previous_page.title }}
             </div>
@@ -42,9 +44,11 @@
           rel="next"
         >
           <div class="md-footer__title">
-            <span class="md-footer__direction">
-              {{ lang.t("footer.next") }}
-            </span>
+            {% if "blog" not in config.config_file_path %}
+              <span class="md-footer__direction">
+                {{ lang.t("footer.next") }}
+              </span>
+            {% endif %}
             <div class="md-ellipsis">
               {{ page.next_page.title }}
             </div>
