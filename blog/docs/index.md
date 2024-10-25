@@ -22,19 +22,17 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### Announcing Knative v1.16 Release
+Details on the 1.16 release of the Knative project.
+
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-16-release.md){ .md-button }
+
 ### Building Stateful applications with Knative and Restate
 ![Building Stateful applications with Knative and Restate](./articles/images/Building-stateful-serverless-apps-with-knative-and-restate.png)
 
 Combine Knative with Restate's Durable Execution model to easily build serverless stateful applications
 
 [Read more :octicons-arrow-right-24:](articles/Building-Stateful-applications-with-Knative-and-Restate.md){ .md-button }
-
-### Announcing Knative v1.15 Release
-![Announcing Knative v1.15 Release](./releases/images/release1.15-1.png)
-
-Details on the 1.15 release of the Knative project.
-
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-15-release.md){ .md-button }
 
 ### How IBM Watsonx Assistant uses Knative Eventing to train machine learning models!
 

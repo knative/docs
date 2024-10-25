@@ -15,6 +15,7 @@ nav:
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-16-release.md
           - releases/announcing-knative-v1-15-release.md
           - releases/announcing-knative-v1-14-release.md
           - releases/announcing-knative-v1-13-release.md
