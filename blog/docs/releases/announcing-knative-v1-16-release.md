@@ -11,6 +11,7 @@ type: "blog"
 
 # Announcing Knative 1.16 Release
 
+![Release 1.16](./images/release1.16-1.png)
 A new version of Knative is now available across multiple components. Follow the instructions in [Installing Knative](https://knative.dev/docs/install/) to install the components you require.
 
 This release brings a number of smaller improvements to the core Knative Serving and Eventing components, and several improvements to specific plugins.
@@ -23,6 +24,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 - [Knative Operator](#knative-operator)
 
 ### Serving
+![Serving Release Banner](./images/release1.16-serving.png)
 **Release Notes:** [Knative Serving 1.16](https://github.com/knative/serving/releases/tag/knative-v1.16.0)
 
 #### 💫 New Features & Changes
@@ -33,6 +35,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 - Fixes Bug preventing the correct configuration of cert manager ([#15434](https://github.com/knative/serving/pull/15434), @mstein11)
 
 ### Eventing
+![Eventing Release Banner](./images/release1.16-eventing.png)
 **Release Notes:** [Knative Eventing 1.16](https://github.com/knative/eventing/releases/tag/knative-v1.16.0)
 
 #### 💫 New Features & Changes
@@ -48,6 +51,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 - Make auth package indepent from eventpolicy informer ([#8195](https://github.com/knative/eventing/pull/8195), @creydr)
 
 ### Client
+![Client Release Banner](./images/release1.16-function.png)
 **Release Notes:** [Knative Client 1.16](https://github.com/knative/client/releases/tag/knative-v1.16.0)
 
 #### 💫 New Features & Changes
