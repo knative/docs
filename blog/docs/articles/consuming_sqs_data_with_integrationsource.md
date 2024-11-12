@@ -141,6 +141,6 @@ Data,
 
 ## Conclusion and Outlook
 
-With the new `IntegrationSource` we will have a good way to integrate services from public cloud providers like AWS, by leveraging Apache Camel Kamelets behind the scenese. The initial set of services is on AWS, like `s3`, `sqs` or `ddb-streams`. However we are planning to add support for different services and providers. 
+With the new `IntegrationSource` we will have a good way to integrate services from public cloud providers like AWS, by leveraging Apache Camel Kamelets behind the scenes. The initial set of services is on AWS, like `s3`, `sqs` or `ddb-streams`. However we are planning to add support for different services and providers. 
 
 Since Apache Camel Kamelets can also act as `Sink`s, the team is working on providing a `IntegrationSink`, following same principles. 
