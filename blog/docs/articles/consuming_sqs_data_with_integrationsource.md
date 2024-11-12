@@ -28,7 +28,7 @@ Now event producers can send events to it and event consumers can receive events
 
 ## Using IntegrationSource for AWS SQS
 
-In order to send data from AWS SQS to a Knative component, like the broker we created above, we are using the new `IntegrationSource` CRD. It basically allows to declaratively move data from a system, like AWS SQS, _towards_ a Knative resource, like our above Broker:
+In order to send data from AWS SQS to a Knative component, like `my-broker` we created above, we are using the new `IntegrationSource` CRD. It basically allows to declaratively move data from a system, like AWS SQS, _towards_ a Knative resource, like our above Broker:
 
 ```yaml
 apiVersion: sources.knative.dev/v1alpha1
