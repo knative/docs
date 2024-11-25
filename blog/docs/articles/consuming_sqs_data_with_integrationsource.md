@@ -38,8 +38,8 @@ metadata:
 spec:
   aws:
     sqs:
-      queueNameOrArn: "my-queue"
-      region: "my-queue"
+      arn: "my-queue"
+      region: "my-region"
       visibilityTimeout: 20
     auth:
       secret:
@@ -52,7 +52,7 @@ spec:
       name: my-broker
 ```
 
-The `IntegrationSource` has an `aws` field, for defining different Amazon Web Services, such as `s3`, `ddb-streams` or like in this case `sqs`. Underneath the `aws` property is also a reference to a _Kubernetes Secret_, which contains the credentials for connecting to AWS. All SQS notifications are processed by the source and being forwarded as CloudEvents to the provided `sink`
+The `IntegrationSource` has an `aws` field, for defining different Amazon Web Services, such as `s3`, `ddbStreams` or like in this case `sqs`. Underneath the `aws` property is also a reference to a _Kubernetes Secret_, which contains the credentials for connecting to AWS. All SQS notifications are processed by the source and being forwarded as CloudEvents to the provided `sink`
 
 !!! note
 
