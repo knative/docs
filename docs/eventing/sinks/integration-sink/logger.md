@@ -7,7 +7,7 @@ The `IntegrationSink` supports the _Log Sink Kamelet_ that logs all data that it
 Below is an `IntegrationSink` that logs all data that it receives:
 
   ```yaml
-  apiVersion: Sinks.knative.dev/v1alpha1
+  apiVersion: sinks.knative.dev/v1alpha1
   kind: IntegrationSink
   metadata:
     name: integration-log-sink
