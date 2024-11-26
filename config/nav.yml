@@ -230,6 +230,12 @@ nav:
           - PingSource:
             - Creating a PingSource object: eventing/sources/ping-source/README.md
             - PingSource reference: eventing/sources/ping-source/reference.md
+          - IntegrationSource:
+            - About IntegrationSource: eventing/sources/integration-source/README.md
+            - AWS DDB Streams: eventing/sources/integration-source/aws_ddbstreams.md
+            - AWS S3: eventing/sources/integration-source/aws_s3.md
+            - AWS SQS: eventing/sources/integration-source/aws_sqs.md
+            - Generic Timer: eventing/sources/integration-source/timer.md
           - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
           - RedisStreamSource:
             - About RedisStreamSource: eventing/sources/redis/README.md
