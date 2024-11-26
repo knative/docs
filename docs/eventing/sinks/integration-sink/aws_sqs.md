@@ -15,7 +15,7 @@ For connecting to AWS the `IntegrationSink` uses Kubernetes `Secret`, present in
 Below is an `IntegrationSink` to send data to AWS SQS:
 
   ```yaml
-  apiVersion: Sinks.knative.dev/v1alpha1
+  apiVersion: sinks.knative.dev/v1alpha1
   kind: IntegrationSink
   metadata:
     name: integration-sink-aws-sqs
