@@ -132,7 +132,7 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 
 | Name                                                                             | Maintainer | Description                          |
 |----------------------------------------------------------------------------------| -- |--------------------------------------|
-| [IntegrationSink](./integration-sink/README.md)                                  | Knative  | Send events to generic event sink    |
+| [IntegrationSink](./integration-sink/README.md)                                  | Knative  | Send events to a generic event sink    |
 | [JobSink](job-sink.md)                                                           | Knative  | Trigger long-running background jobs |
 | [KafkaSink](kafka-sink.md)                                                       | Knative  | Send events to a Kafka topic         |
 | [RedisSink](https://github.com/knative-extensions/eventing-redis/tree/main/sink) | Knative  | Send events to a Redis Stream        |
