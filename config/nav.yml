@@ -250,6 +250,11 @@ nav:
           - About sinks: eventing/sinks/README.md
           - JobSink: eventing/sinks/job-sink.md
           - Apache Kafka Sink: eventing/sinks/kafka-sink.md
+          - IntegrationSink: 
+            - About IntegrationSink: eventing/sinks/integration-sink/README.md
+            - AWS S3 Sink: eventing/sinks/integration-sink/aws_s3.md
+            - AWS SQS Sink: eventing/sinks/integration-sink/aws_sqs.md
+            - Generic Logger Sink: eventing/sinks/integration-sink/logger.md
         - Flows:
           - About flows: eventing/flows/README.md
           - Parallel: eventing/flows/parallel.md
