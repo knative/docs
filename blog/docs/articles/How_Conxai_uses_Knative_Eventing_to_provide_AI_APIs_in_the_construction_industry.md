@@ -1,10 +1,5 @@
 # How CONXAI uses Knative Eventing to provide AI APIs in the construction industry
 
-
-Could we have a little sub-header above this blog as well?
-
-Saying something about KServe / AI ?
-
 **Author: Tim Krause, Lead MLOps Architect @ CONXAI**
 
 [CONXAI Technologies GmbH](https://www.conxai.com/) is an AI startup in the construction industry. Our fine-tuned model with thousands of labeled images from construction sites achieves significantly greater accuracy than other MaaS (Model-as-a-Service) offerings. In this blog post, we highlight a use case where our solution blurs people's bodies in CCTV camera images, ensuring GDPR compliance.
@@ -15,7 +10,7 @@ On the one hand, at CONXAI we decided very early to use primarily Kubernetes for
 
 On the other hand, our AI team has limited experience with cloud, infrastructure and Kubernetes. So we looked into proper abstractions to make it easy for everyone to adopt the cloud and its scalability. Knative provides a declarative, yet standardized approach by offering Custom Resource Definitions for the main building blocks.
 
-## Why we use KServe for our model
+## Why we use KServe for our AI model
 
 KServe is a standard Model Inference Platform on Kubernetes that leverages Knative Serving as its foundation and is fully compatible with Knative Eventing. It also pulls models from a model repository into the container before the model server starts, eliminating the need to build a new container image for each model version. The next section explains how we use Knative Eventing and KServe for our blurring product.
 
