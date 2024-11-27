@@ -96,7 +96,7 @@ body {
   font-size: large;
   padding: 0.525em 1em;
   min-width: fit-content;
-  border-radius:0.7rem;
+  border-radius:8px;
   margin-left: 0.5rem;
 }
 
@@ -104,13 +104,14 @@ body {
 .need-to-know-more-container .md-button {
   background-color: var(--md-primary-fg-color--light);
   border-color: var(--md-primary-fg-color--light);
-  border-radius: 0.7rem;
+  border-radius: 8px;
 }
 
 .home-container .md-button--primary {
   margin-top: 0.5rem;
   background-color: var(--md-primary-fg-color--dark);
   border-color: var(--md-primary-fg-color--dark);
+  border-radius: 8px;
 }
 
 h2.secondary-headline, h3.trusted-by {
@@ -582,7 +583,7 @@ position: relative;
   background-color: var(--md-primary-fg-color--dark);
   color: white;
   margin-top: 3rem;
-  border-radius: 0.7rem;
+  border-radius: 8px;
   width: 28%;
   font-size: large;
   padding: 0.525em 1em;
