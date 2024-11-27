@@ -49,6 +49,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/How_Conxai_uses_Knative_Eventing_to_provide_AI_APIs_in_the_construction_industry.md
           - articles/consuming_sqs_data_with_integrationsource.md
           - articles/knative-backstage-security.md
           - articles/Knative-Serving-WebSockets.md
