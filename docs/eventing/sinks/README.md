@@ -133,6 +133,7 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 | Name                                                                             | Maintainer | Description                          |
 |----------------------------------------------------------------------------------| -- |--------------------------------------|
 | [Amazon S3 Sink](./integration-sink/aws_s3.md)                                   | Knative  | Send events to AWS S3 bucket                  |
+| [Amazon SNS Sink](./integration-sink/aws_sns.md)                                 | Knative  | Send events to AWS SNS topic                  |
 | [Amazon SQS Sink](./integration-sink/aws_sqs.md)                                 | Knative  | Send events to AWS SQS queue                  |
 | [JobSink](job-sink.md)                                                           | Knative  | Trigger long-running background jobs          |
 | [KafkaSink](kafka-sink.md)                                                       | Knative  | Send events to a Kafka topic                  |
