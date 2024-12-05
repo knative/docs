@@ -4,7 +4,7 @@ The `IntegrationSink` supports the Amazon Web Services (AWS) Simple Queue Servic
 
 ## Amazon credentials
 
-For connecting to AWS the `IntegrationSink` uses Kubernetes `Secret`, present in the namespace of the reSink. The `Secret` can be created like:
+For connecting to AWS the `IntegrationSink` uses Kubernetes `Secret`, present in the namespace of the resource. The `Secret` can be created like:
 
     ```bash
     kubectl -n <namespace> create secret generic my-secret --from-literal=aws.accessKey=<accessKey> --from-literal=aws.secretKey=<secretKey>

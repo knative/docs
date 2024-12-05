@@ -8,5 +8,6 @@ The `IntegrationSink` is a Knative Eventing custom resource supporting selected 
 ## Supported Kamelet sinks
 
 * [AWS S3](./aws_s3.md)
+* [AWS SNS](./aws_sns.md)
 * [AWS SQS](./aws_sqs.md)
 * [Generic logger](./logger.md)

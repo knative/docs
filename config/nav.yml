@@ -253,6 +253,7 @@ nav:
           - IntegrationSink: 
             - About IntegrationSink: eventing/sinks/integration-sink/README.md
             - AWS S3 Sink: eventing/sinks/integration-sink/aws_s3.md
+            - AWS SNS Sink: eventing/sinks/integration-sink/aws_sns.md
             - AWS SQS Sink: eventing/sinks/integration-sink/aws_sqs.md
             - Generic Logger Sink: eventing/sinks/integration-sink/logger.md
         - Flows:
