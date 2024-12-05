@@ -10,7 +10,7 @@ For connecting to AWS the `IntegrationSink` uses Kubernetes `Secret`, present in
     kubectl -n <namespace> create secret generic my-secret --from-literal=aws.accessKey=<accessKey> --from-literal=aws.secretKey=<secretKey>
     ```
 
-## AWS SQS Sink Example
+## AWS SNS Sink Example
 
 Below is an `IntegrationSink` to send data to AWS SNS:
 
