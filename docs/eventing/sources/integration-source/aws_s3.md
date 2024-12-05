@@ -6,9 +6,9 @@ The `IntegrationSource` supports the Amazon Web Services (AWS) S3 service, throu
 
 For connecting to AWS the `IntegrationSource` uses Kubernetes `Secret`, present in the namespace of the resource. The `Secret` can be created like:
 
-    ```bash
-    kubectl -n <namespace> create secret generic my-secret --from-literal=aws.accessKey=<accessKey> --from-literal=aws.secretKey=<secretKey>
-    ```
+  ```bash
+  kubectl -n <namespace> create secret generic my-secret --from-literal=aws.accessKey=<accessKey> --from-literal=aws.secretKey=<secretKey>
+  ```
 
 ## AWS S3 Source Example
 
