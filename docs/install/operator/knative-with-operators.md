@@ -14,7 +14,9 @@ The following table describes the supported versions of Serving and Eventing for
 
 ## Install the Knative Operator
 
-Before you install the Knative Serving and Eventing components, first install the Knative Operator.
+Before you install the Knative Serving and Eventing components, first install the Knative Operator from the provided K8S Manifests, or via Helm.
+
+### Install K8S Manifests (Option 1)
 
 !!! warning
     Knative Operator 1.5 is the last version that supports CRDs with both `v1alpha1` and `v1beta1`. If you are upgrading an existing Operator install from v1.2 or earlier to v1.3 or later, run the following command to upgrade the existing custom resources to `v1beta1` before installing the current version:
@@ -30,6 +32,21 @@ kubectl apply -f {{artifact(org="knative",repo="operator",file="operator.yaml" )
 ```
 
 You can find information about the released versions of the Knative Operator on the [releases page](https://github.com/knative/operator/releases).
+
+### Install via Helm (Option 2)
+
+You can install the Knative Operator with our helm chart:
+
+```
+helm repo add knative-operator https://knative.github.io/operator
+helm install knative-operator knative-operator/knative-operator
+```
+
+To see available values, run:
+
+```
+helm show values knative-operator/knative-operator
+```
 
 ### Verify your Knative Operator installation
 
