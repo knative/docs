@@ -100,7 +100,7 @@ EventTypes are created automatically when an event source is instantiated.
 
 Knative supports automatic registration of EventTypes for the following event sources:
 
-- CronJobSource
+- PingSource
 - ApiServerSource
 - GithubSource
 - GcpPubSubSource
