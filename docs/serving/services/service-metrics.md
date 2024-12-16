@@ -19,6 +19,9 @@ Requests endpoint.
 !!! note
     The `revision_queue_depth` metric will be exported only if the revision concurrency hard limit is set to a value greater than 1.
 
+!!! note
+    To exclude request from metrics (e.g. health check requests), set the `K-Ignore-Metrics` header to non-empty value.
+
 ## Exposing Queue proxy metrics
 
 Queue proxy exports metrics for the requests endpoint on port 9091. The metrics can be scraped by Prometheus when `metrics.request-metrics-backend-destination` is set to `prometheus` (default) in the configmap `observability`. The backend can be changed to `opencensus` which uses a push model and requires a destination
