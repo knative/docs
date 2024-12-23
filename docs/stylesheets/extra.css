@@ -423,7 +423,7 @@ border-radius: 0.7rem 0 0 0 ;
 
 .testimonials h2 {
   font-size: 2em;
-  color: var(--md-primary-fg-color--dark);
+  color: black;
   margin-bottom: -12px;
 }
 
@@ -478,13 +478,13 @@ border-radius: 0.7rem 0 0 0 ;
 }
 
 .testimonials .normal-text {
-  font-weight: 600;
+  font-weight: 500;
   font-size: .86rem;
-  color: #6e6e6e;
+  color: black;
 }
 
 .testimonials a {
-  color: var(--md-primary-fg-color--dark);
+  color: black;
 }
 
 .testimonials .find-links {
