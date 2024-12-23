@@ -1,8 +1,8 @@
 ## Verifying image signatures
 
-Knative releases from 1.9 onwards are signed with [cosign](https://docs.sigstore.dev/cosign/overview).
+Knative releases from 1.9 onwards are signed with [cosign](https://docs.sigstore.dev/quickstart/quickstart-cosign/).
 
-1. Install [cosign](https://docs.sigstore.dev/cosign/installation/) and [jq](https://stedolan.github.io/jq/).
+1. Install [cosign](https://docs.sigstore.dev/cosign/system_config/installation/) and [jq](https://stedolan.github.io/jq/).
 
 1. Extract the images from a manifeset and verify the signatures.
 
