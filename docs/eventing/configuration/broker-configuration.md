@@ -1,52 +1,12 @@
-# Configure Broker defaults
+# Configuring Broker Defaults
 
-If you have cluster administrator permissions for your Knative installation, you can modify ConfigMaps to change the global default configuration options for Brokers on the cluster.
+## Overview
 
-Knative Eventing provides a `config-br-defaults` ConfigMap that contains the configuration settings that govern default Broker creation.
+Knative Eventing allows you to configure default Broker classes at both the cluster and namespace levels. This feature provides flexibility in managing Broker configurations across your Knative installation. This document explains how to set up and use default Broker classes using the `config-br-defaults` ConfigMap.
 
-The default `config-br-defaults` ConfigMap is as follows:
+## The `config-br-defaults` ConfigMap
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-data:
-  # Configures the default for any Broker that does not specify a spec.config or Broker class.
-  default-br-config: |
-    clusterDefault:
-      brokerClass: MTChannelBasedBroker
-      apiVersion: v1
-      kind: ConfigMap
-      name: config-br-default-channel
-      namespace: knative-eventing
-```
-
-In this case, each new Broker created in the cluster would use by default the `MTChannelBasedBroker` Broker class and the `config-br-default-channel` ConfigMap from the `knative-eventing` namespace for its configuration if not other specified in the Brokers `eventing.knative.dev/broker.class` annotation and/or `.spec.config` (see [Developer configuration options](../brokers/broker-developer-config-options.md)).
-
-However, if you would like like for example a Kafka Channel to be used as the default Channel implementation for any Broker that is created, you can change the `config-br-defaults` ConfigMap to look as follows:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-data:
-  # Configures the default for any Broker that does not specify a spec.config or Broker class.
-  default-br-config: |
-    clusterDefault:
-      brokerClass: MTChannelBasedBroker
-      apiVersion: v1
-      kind: ConfigMap
-      name: kafka-channel
-      namespace: knative-eventing
-```
-
-Now every Broker created in the cluster that does not have a `spec.config` will be configured to use the `kafka-channel` ConfigMap. For more information about creating a `kafka-channel` ConfigMap to use with your Broker, see the [Kafka Channel ConfigMap](./kafka-channel-configuration.md#create-a-kafka-channel-configmap) documentation.
-
-You can also modify the default Broker configuration for one or more dedicated namespaces, by defining it in the `namespaceDefaults` section. For example, if you want to use the `config-br-default-channel` ConfigMap for all Brokers by default, but want to use `kafka-channel` ConfigMap for `namespace-1` and `namespace-2`, you would use the following ConfigMap:
+The `config-br-defaults` ConfigMap in the `knative-eventing` namespace contains the configuration settings that govern default Broker creation. Here's an example of its structure:
 
 ```yaml
 apiVersion: v1
@@ -62,67 +22,98 @@ data:
       kind: ConfigMap
       name: config-br-default-channel
       namespace: knative-eventing
+      brokerClasses:
+        MTChannelBasedBroker:
+          # Configuration for MTChannelBasedBroker
+        KafkaBroker:
+          # Configuration for KafkaBroker
     namespaceDefaults:
       namespace-1:
-        apiVersion: v1
-        kind: ConfigMap
-        name: kafka-channel
-        namespace: knative-eventing
+        brokerClass: KafkaBroker
+        brokerClasses:
+          KafkaBroker:
+            # Configuration for KafkaBroker in namespace-1
       namespace-2:
-        apiVersion: v1
-        kind: ConfigMap
-        name: kafka-channel
-        namespace: knative-eventing
+        brokerClass: MTChannelBasedBroker
+        brokerClasses:
+          MTChannelBasedBroker:
+            # Configuration for MTChannelBasedBroker in namespace-2
 ```
 
 
-## Configuring the Broker class
 
-Besides configuring the Broker class for each broker [individually](../brokers/create-broker.md#broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
+## Configuration Decision Flow
 
-### Configuring the default Broker class for the cluster
+The following flow chart illustrates the decision-making process for determining the broker class and configuration:
 
-You can configure the `clusterDefault` Broker class so that any Broker created in the cluster that does not have a `eventing.knative.dev/broker.class` annotation uses this default Broker class:
+![Configuration Decision Flow](images/default-hierarchy-flowchart.png)
+
+This flow chart demonstrates the priority and fallback mechanisms in place when determining the broker class and configuration. It visually represents the process described in the Configuration Hierarchy section.
+
+
+## Configuration Hierarchy
+
+The system uses the following priority order to determine the Broker class and configuration:
+
+If a specific Broker class **is provided** for a Broker:
+
+   1. Check namespace-specific configuration for the given Broker class
+   2. If not found, check cluster-wide configuration for the given Broker class
+   3. If still not found, use the cluster-wide default configuration
+
+---
+If **no specific Broker class** is provided:
+
+   1. Check namespace-specific default Broker class
+   2. If found, use its configuration
+   3. If not found, use cluster-wide default Broker class and configuration
+
+## Configuring Cluster-wide Defaults
+
+To set a cluster-wide default Broker class and its configuration:
 
 ```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-data:
-  # Configures the default for any Broker that does not specify a spec.config or Broker class.
-  default-br-config: |
-    clusterDefault:
-      brokerClass: MTChannelBasedBroker
+clusterDefault:
+  brokerClass: MTChannelBasedBroker
+  brokerClasses:
+    MTChannelBasedBroker:
+      apiVersion: v1
+      kind: ConfigMap
+      name: config-br-default-channel
+      namespace: knative-eventing
 ```
 
-### Configuring the default Broker class for namespaces
-
-You can modify the default Broker class for one or more namespaces.
-
-For example, if you want to use a `KafkaBroker` Broker class for all other Brokers created on the cluster, but you want to use the `MTChannelBasedBroker` Broker class for Brokers created in `namespace-1` and `namespace-2`, you would use the following ConfigMap settings:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-data:
-  # Configures the default for any Broker that does not specify a spec.config or Broker class.
-  default-br-config: |
-    clusterDefault:
-      brokerClass: KafkaBroker
-    namespaceDefaults:
-      namespace1:
-        brokerClass: MTChannelBasedBroker
-      namespace2:
-        brokerClass: MTChannelBasedBroker
-```
+This configuration sets `MTChannelBasedBroker` as the default Broker class for the entire cluster and specifies its configuration.
 
 !!! note
     Be aware that different Broker classes usually require different configuration ConfigMaps. See the configuration options of the different [Broker implementations](../brokers/broker-types/README.md) on how their referenced ConfigMaps have to look like (e.g. for [MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/README.md#configuration-configmap) or [Knative Broker for Apache Kafka](../brokers/broker-types/kafka-broker/README.md#configure-a-kafka-broker)).
+
+## Configuring Namespace-specific Defaults
+
+To set default Broker classes and configurations for specific namespaces:
+
+```yaml
+namespaceDefaults:
+  namespace-1:
+    brokerClass: KafkaBroker
+    brokerClasses:
+      KafkaBroker:
+        apiVersion: v1
+        kind: ConfigMap
+        name: kafka-broker-config
+        namespace: knative-eventing
+  namespace-2:
+    brokerClass: MTChannelBasedBroker
+    brokerClasses:
+      MTChannelBasedBroker:
+        apiVersion: v1
+        kind: ConfigMap
+        name: mt-channel-broker-config
+        namespace: knative-eventing
+```
+
+This configuration sets different default Broker classes and configurations for `namespace-1` and `namespace-2`.
+
 
 ## Configuring delivery spec defaults
 
@@ -139,31 +130,36 @@ data:
   default-br-config: |
     clusterDefault:
       brokerClass: MTChannelBasedBroker
-      apiVersion: v1
-      kind: ConfigMap
-      name: kafka-channel
-      namespace: knative-eventing
-      delivery:
-        retry: 10
-        backoffDelay: PT0.2S
-        backoffPolicy: exponential
+      brokerClasses:
+        MTChannelBasedBroker:
+          apiVersion: v1
+          kind: ConfigMap
+          name: kafka-channel
+          namespace: knative-eventing
+          delivery:
+            retry: 10
+            backoffDelay: PT0.2S
+            backoffPolicy: exponential
     namespaceDefaults:
       namespace-1:
-        apiVersion: v1
-        kind: ConfigMap
-        name: config-br-default-channel
-        namespace: knative-eventing
-        delivery:
-          deadLetterSink:
-            ref:
-              kind: Service
-              namespace: example-namespace
-              name: example-service
-              apiVersion: v1
-            uri: example-uri
-          retry: 10
-          backoffPolicy: exponential
-          backoffDelay: "PT0.2S"
+        brokerClass: MTChannelBasedBroker
+        brokerClasses:
+          MTChannelBasedBroker:
+            apiVersion: v1
+            kind: ConfigMap
+            name: config-br-default-channel
+            namespace: knative-eventing
+            delivery:
+              deadLetterSink:
+                ref:
+                  kind: Service
+                  namespace: example-namespace
+                  name: example-service
+                  apiVersion: v1
+                uri: example-uri
+              retry: 10
+              backoffPolicy: exponential
+              backoffDelay: "PT0.2S"
 ```
 
 ### Dead letter sink
@@ -205,9 +201,9 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     kubectl delete pod <broker-ingress-pod-name> -n knative-eventing
     ```
 
-    Where `<broker-ingress-pod-name>` is the name of your Broker ingress pod.
+   Where `<broker-ingress-pod-name>` is the name of your Broker ingress pod.
 
-    The pod now has two containers:
+   The pod now has two containers:
 
     ```{ .bash .no-copy }
     knative-eventing     <broker-ingress-pod-name>           2/2     Running   1              175m
@@ -219,9 +215,9 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     kubectl get broker <broker-name>
     ```
 
-    Where `<broker-name>` is the name of your Broker.
+   Where `<broker-name>` is the name of your Broker.
 
-    Example output:
+   Example output:
 
     ```{ .bash .no-copy }
     NAMESPACE   NAME        URL                                                                          AGE   READY   REASON
@@ -247,7 +243,7 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     <broker-URL>
     ```
 
-    Where `<broker-URL>` is the URL of your Broker. For example:
+   Where `<broker-URL>` is the URL of your Broker. For example:
 
     ```{ .bash .no-copy }
     curl -X POST -v \
@@ -338,7 +334,7 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     <broker-URL>
     ```
 
-    The server now responds with a `202` response code, indicating that it has accepted the HTTP request:
+   The server now responds with a `202` response code, indicating that it has accepted the HTTP request:
 
     ```{ .bash .no-copy }
     * Mark bundle as not supporting multiuse
@@ -350,3 +346,20 @@ The `backoffPolicy` delivery parameter can be used to specify the retry back off
     < server: istio-envoy
     < x-envoy-decorator-operation: broker-ingress.knative-eventing.svc.cluster.local:80/*
     ```
+
+
+## Best Practices and Considerations
+
+1. **Consistency**: Ensure that the `brokerClass` specified matches a key in the `brokerClasses` map to maintain consistency.
+
+2. **Namespace Isolation**: Use namespace-specific defaults to isolate Broker configurations between different namespaces.
+
+3. **Fallback Mechanism**: The system will fall back to cluster-wide defaults if namespace-specific configurations are not found.
+
+4. **Configuration Updates**: When updating the ConfigMap, be aware that changes may affect newly created Brokers but will not automatically update existing ones.
+
+5. **Validation**: Always validate your ConfigMap changes before applying them to avoid potential misconfigurations.
+
+## Conclusion
+
+The default Broker classes feature in Knative Eventing offers a flexible way to manage Broker configurations across your cluster and individual namespaces. By properly configuring the `config-br-defaults` ConfigMap, you can ensure that your Brokers are created with the desired settings, promoting consistency and reducing manual configuration efforts.
