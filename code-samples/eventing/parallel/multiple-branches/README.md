@@ -73,7 +73,6 @@ spec:
         - name: TRANSFORMER
           value: |
             ({"message": "this is odd!"})
-.
 ```
 
 ```bash
