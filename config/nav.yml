@@ -331,7 +331,9 @@ nav:
       - Eventing code samples: samples/eventing.md
     # Reference docs
     - Reference:
-      - Security: reference/security/README.md
+      - Security:
+        - Security Model and Disclosure: reference/security/README.md
+        - Verifying Knative Images: reference/security/verifying-images.md 
       - Release notes: reference/relnotes/README.md
     - Blog: /blog/
     - About:
