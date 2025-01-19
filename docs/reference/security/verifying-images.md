@@ -25,7 +25,12 @@ cosign verify-attestation \
   $IMAGE
 ```
 
-Note that the in-toto document is base64 encoded in the `.payload` attribute
+!!! note
+    Knative images are signed in `KEYLESS` mode. To learn more about keyless signing, please refer to
+    [Keyless Signatures](https://github.com/sigstore/cosign/blob/main/KEYLESS.md#keyless-signatures)
+    Our signing identity(Subject) for our releases is `signer@knative-releases.iam.gserviceaccount.com` and the Issuer is `https://accounts.google.com`
+
+The in-toto document is base64 encoded in the `.payload` attribute
 of the attestation; you can use `jq` to extract this with the following
 invocation:
 
