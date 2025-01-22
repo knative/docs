@@ -131,7 +131,7 @@ For example, you can trigger a `Job` when a Kafka record is sent to a Kafka topi
 a [`KafkaSource`](./../sources/kafka-source):
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: KafkaSource
 metadata:
   name: kafka-source

@@ -133,7 +133,7 @@ If you are using Strimzi:
 1. Modify `source/event-source.yaml` accordingly with bootstrap servers, topics, and so on:
 
     ```yaml
-    apiVersion: sources.knative.dev/v1beta1
+    apiVersion: sources.knative.dev/v1
     kind: KafkaSource
     metadata:
       name: kafka-source
@@ -187,7 +187,7 @@ Alternatively, if you are using a GitOps approach, you can add the `consumers` k
 
 ```yaml
 
-    apiVersion: sources.knative.dev/v1beta1
+    apiVersion: sources.knative.dev/v1
     kind: KafkaSource
     metadata:
       name: kafka-source
@@ -253,7 +253,7 @@ The `KafkaSource` implements the `Delivery` Specificiation, allowing you to conf
 
 ```yaml
 
-    apiVersion: sources.knative.dev/v1beta1
+    apiVersion: sources.knative.dev/v1
     kind: KafkaSource
     metadata:
       name: kafka-source
@@ -298,7 +298,7 @@ To specify the key deserializer, add the label `kafkasources.sources.knative.dev
 `KafkaSource` definition, as shown in the following example:
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: KafkaSource
 metadata:
 name: kafka-source
@@ -323,7 +323,7 @@ By default the `KafkaSource` starts consuming from the latest offset in each par
 to consume from the earliest offset, set the initialOffset field to `earliest`, for example:
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: KafkaSource
 metadata:
   name: kafka-source
@@ -368,7 +368,7 @@ KafkaSource expects these files to be in PEM format. If they are in another form
 2. Apply the KafkaSource. Modify the `bootstrapServers` and `topics` fields accordingly.
 
     ```yaml
-    apiVersion: sources.knative.dev/v1beta1
+    apiVersion: sources.knative.dev/v1
     kind: KafkaSource
     metadata:
      name: kafka-source-with-tls
@@ -431,7 +431,7 @@ Simple Authentication and Security Layer (SASL) is used by Apache Kafka for auth
 1. Create or modify a KafkaSource so that it contains the following spec options:
 
     ```yaml
-    apiVersion: sources.knative.dev/v1beta1
+    apiVersion: sources.knative.dev/v1
     kind: KafkaSource
     metadata:
       name: example-source

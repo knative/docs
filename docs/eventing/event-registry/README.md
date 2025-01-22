@@ -124,7 +124,7 @@ After your event source is instantiated, EventTypes are added to the registry.
 Given the following KafkaSource sample to populate the registry:
 
 ```yaml
-apiVersion: sources.knative.dev/v1beta1
+apiVersion: sources.knative.dev/v1
 kind: KafkaSource
 metadata:
   name: kafka-sample
