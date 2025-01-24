@@ -278,7 +278,7 @@ node-server-svc          LoadBalancer   10.101.90.35    <pending>     80:31792/T
 If port forwarding is required, open a new terminal and run:
 
 ```shell
-kubectl port-forward svc/node-server-svc 8080:80
+kubectl port-forward svc/node-server-svc 8080:8080
 ```
 You should see the following output:
 
