@@ -43,11 +43,7 @@ Append the following Trigger configuration to the existing `node-server/config/2
           type: moderated-comment # This is the filter that will be applied to the event, only events with the ce-type moderated-comment will be processed
           badwordfilter: good # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: good will be processed
       subscriber:
-        ref:
-          apiVersion: v1
-          kind: Service
-          name: node-server-svc
-        uri: /insert # This is the path where the event will be sent to the subscriber, see /insert in node-server code: index.js
+        uri: http://node-server-svc.default.svc.cluster.local:8080/insert # This is the path where the event will be sent to the subscriber, see /insert in node-server code: index.js
     ```
 
 ```shell
