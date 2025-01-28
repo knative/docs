@@ -43,8 +43,8 @@ This release brings a number of smaller improvements to the core Knative Serving
 **Release Notes:** [Knative Eventing 1.17](https://github.com/knative/eventing/releases/tag/knative-v1.17.0)
 
 ### 🚨 Breaking or Notable Changes
-- [Action required] for the callers of the `knative.dev/eventing/pkg/graph` package. The constructor that has previously accepted a `rest.RestConfig` is now accepting clients (Kubernetes clients) directly instead of creating them in the package. (#8399, @aliok)
-- The event lineage package does not swallow the 400 and 401 errors anymore. Callers should handle those errors themselves. (#8401, @aliok)
+- [Action required] for the callers of the `knative.dev/eventing/pkg/graph` package. The constructor that has previously accepted a `rest.RestConfig` is now accepting clients (Kubernetes clients) directly instead of creating them in the package. ([#8399}(https://github.com/knative/eventing/pull/8399), @aliok)
+- The event lineage package does not swallow the 400 and 401 errors anymore. Callers should handle those errors themselves. ([#8401](https://github.com/knative/eventing/pull/8401), @aliok)
 
 #### 💫 New Features & Changes
 - Add IntegrationSink for supporting generic event sinks based on Apache Camel Kamelets. ([#8304](https://github.com/knative/eventing/pull/8304), @matzew)
