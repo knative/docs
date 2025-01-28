@@ -22,9 +22,9 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
-### Announcing Knative v1.16 Release
-![Release 1.16](./releases/images/release1.16-1.png)
-Details on the 1.16 release of the Knative project.
+### Announcing Knative v1.17 Release
+![Release 1.17](./releases/images/release1.17-1.png)
+Details on the 1.17 release of the Knative project.
 
 [Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-16-release.md){ .md-button }
 
