@@ -28,12 +28,12 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 #### 💫 New Features & Changes
 - Adding support for the "hostPath" volume type. This feature is behind the flag `kubernetes.podspec-volumes-hostpath`. ([#15648](https://github.com/knative/serving/pull/15648), @amarflybot)
-- A revision is now set to ContainerHealthy=True when it has ready replicas ([#15503](https://github.com/knative/serving/pull/15503), @SaschaSchwarze0)
 - Add default container annotation to Pods created by the reconciler ([#15694](https://github.com/knative/serving/pull/15694), @konstfish)
 - Allow explicitly setting `containers.securityContext.privileged` to `false` ([#15643](https://github.com/knative/serving/pull/15643), @KapilSareen)
 - Kubernetes Deployments created for a Knative Revision are not configured with revisionHistoryLimit=0 to save storage space. ([#15698](https://github.com/knative/serving/pull/15698), @SaschaSchwarze0)
 
 #### 🐞 Bug Fixes
+- A revision is now set to ContainerHealthy=True when it has ready replicas ([#15503](https://github.com/knative/serving/pull/15503), @SaschaSchwarze0)
 - Fixes previously supported probe syntax without a leading slash. ([#15681](https://github.com/knative/serving/pull/15681), @skonto)
 - Fixes revision timeout defaulting when identical values are present in timeout settings. ([#15617](https://github.com/knative/serving/pull/15617), @skonto)
 - Fixes a problem in configuration reconciliation where labeler creates a different order of the route names listed via the annotation `serving.knative.dev/routes` compared to the configuration reconciler. ([#15601](https://github.com/knative/serving/pull/15601), @skonto)
