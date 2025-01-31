@@ -30,7 +30,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 - Adding support for the "hostPath" volume type. This feature is behind the flag `kubernetes.podspec-volumes-hostpath`. ([#15648](https://github.com/knative/serving/pull/15648), @amarflybot)
 - Add default container annotation to Pods created by the reconciler ([#15694](https://github.com/knative/serving/pull/15694), @konstfish)
 - Allow explicitly setting `containers.securityContext.privileged` to `false` ([#15643](https://github.com/knative/serving/pull/15643), @KapilSareen)
-- Kubernetes Deployments created for a Knative Revision are not configured with revisionHistoryLimit=0 to save storage space. ([#15698](https://github.com/knative/serving/pull/15698), @SaschaSchwarze0)
+- Kubernetes Deployments created for a Knative Revision are now configured with revisionHistoryLimit=0 to save storage space. ([#15698](https://github.com/knative/serving/pull/15698), @SaschaSchwarze0)
 
 #### 🐞 Bug Fixes
 - A revision is now set to ContainerHealthy=True when it has ready replicas ([#15503](https://github.com/knative/serving/pull/15503), @SaschaSchwarze0)
@@ -66,11 +66,11 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 #### 💫 New Features & Changes
 - Add target `--platform` flag to build script ([#1981](https://github.com/knative/client/pull/1981), @dsimansk)
-- Refactor PingSourve to v1 API version ([#1991](https://github.com/knative/client/pull/1991), @dsimansk)
+- Refactor PingSource to v1 API version ([#1991](https://github.com/knative/client/pull/1991), @dsimansk)
 - Remove dependency on deprecated client-pkg ([#1990](https://github.com/knative/client/pull/1990), @dsimansk)
 
 #### 🐞 Bug Fixes
-- Fix `version` command to dispaly proper version string ([#1978](https://github.com/knative/client/pull/1978), @dsimansk)
+- Fix `version` command to display proper version string ([#1978](https://github.com/knative/client/pull/1978), @dsimansk)
 
 ### Functions
 **Release Notes:** [Knative func 1.17](https://github.com/knative/func/releases/tag/knative-v1.17.0)
