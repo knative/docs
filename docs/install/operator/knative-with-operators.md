@@ -50,10 +50,10 @@ helm show values knative-operator/knative-operator
 
 ### Verify your Knative Operator installation
 
-1. Because the Operator is installed to the `default` namespace, ensure you set the current namespace to `default` by running the command:
+1. Because the Operator is installed to the `knative-operator` namespace, ensure you set the current namespace to `default` by running the command:
 
     ```bash
-    kubectl config set-context --current --namespace=default
+    kubectl config set-context --current --namespace=knative-operator
     ```
 
 1. Check the Operator deployment status by running the command:
