@@ -40,7 +40,7 @@ echo "✅ Knative In-Memory Channel and Broker installed successfully."
 if ! command -v func &> /dev/null
 then
     echo ""
-    echo "⚠️ Knative CLI 'func' not found. Please install the Knative CLI by following the instructions at https://knative.dev/docs/admin/install/kn-cli/."
+    echo "⚠️ Knative CLI 'func' not found. Please install the Knative CLI by following the instructions at https://knative.dev/docs/functions/install-func"
     exit
 fi
 
