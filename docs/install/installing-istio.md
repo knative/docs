@@ -145,16 +145,6 @@ If there is a change in service ports (compared to that of
 `knative-local-gateway`), update the port info in the gateway accordingly.
 
 
-## Verifying your Istio installation
-
-View the status of your Istio installation to make sure the installation was
-successful. You can use `istioctl` to verify the installation:
-
-```bash
-istioctl verify-install
-```
-
-
 ## Istio resources
 
 - For the official Istio installation guide, see the
