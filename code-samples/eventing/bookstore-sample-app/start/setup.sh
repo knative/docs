@@ -1,14 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Prompt the user to start the installation process
 echo "🚀 Shortcut: This script will install Knative, and deploy the bookstore's frontend and backend on your cluster"
 
-# Validate that the user is in the correct directory /start
-if [ "${PWD##*/}" != "start" ]; then
-    echo "⚠️ Please run this script in the /start directory. Exiting..."
-    exit
-fi
-echo "✅ You are in the correct directory: /start"
 read -p "🛑 Press ENTER to continue or Ctrl+C to abort..."
 
 # Install Knative Serving
@@ -40,7 +36,7 @@ echo "✅ Knative In-Memory Channel and Broker installed successfully."
 if ! command -v func &> /dev/null
 then
     echo ""
-    echo "⚠️ Knative CLI 'func' not found. Please install the Knative CLI by following the instructions at https://knative.dev/docs/admin/install/kn-cli/."
+    echo "⚠️ Knative CLI 'func' not found. Please install the Knative CLI by following the instructions at https://knative.dev/docs/functions/install-func"
     exit
 fi
 
@@ -57,8 +53,7 @@ echo "📚 Installing the Sample Bookstore Frontend"
 read -p "🛑 Press ENTER to continue..."
 
 # Install the front end first
-cd frontend
-kubectl apply -f config
+kubectl apply -f "${SCRIPT_DIR}/frontend/config"
 
 # Wait for the frontend to be ready
 echo ""
@@ -76,8 +71,7 @@ echo ""
 echo "📚 Installing the Sample Bookstore Backend (node-server)"
 
 # Install the node-server
-cd ../node-server
-kubectl apply -f config/100-deployment.yaml
+kubectl apply -f "${SCRIPT_DIR}/node-server/config/100-deployment.yaml"
 
 # Wait for the backend to be ready
 echo ""
