@@ -3,7 +3,7 @@
 
 Welcome to the solution directory of the Knative Bookstore tutorial. This directory contains the fully implemented version of the event-driven bookstore application using Knative.
 
-You can find the tutorial for this solution [here](https://knative.dev/bookstore/page-0/welcome-knative-bookstore-tutorial/).
+You can find the tutorial for this solution [here](https://knative.dev/docs/bookstore/page-0/welcome-knative-bookstore-tutorial/).
 
 ## Directory Structure
 

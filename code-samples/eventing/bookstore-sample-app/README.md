@@ -4,7 +4,7 @@ This folder contains code samples for the Knative Bookstore tutorial, an end-to-
 
 ## Tutorial
 
-For a comprehensive guide on building this application and learning about Knative, please visit the [Knative Bookstore Tutorial](https://knative.dev/bookstore/page-0/welcome-knative-bookstore-tutorial/).
+For a comprehensive guide on building this application and learning about Knative, please visit the [Knative Bookstore Tutorial](https://knative.dev/docs/bookstore/page-0/welcome-knative-bookstore-tutorial/).
 
 This tutorial covers:
 - Setting up your environment

@@ -11,7 +11,7 @@ When a CloudEvent with the type `new-review-comment` is sent to the Knative Even
 ## Install prerequisites
 
 ### Prerequisite 1: Install Camel CLI
-Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html){:target="_blank"}.
+Install the Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.4.x/cli/cli.html){:target="_blank"}.
 
 **Troubleshot**: If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
 
@@ -29,7 +29,7 @@ $ kamel install --registry docker.io --organization <your-organization> --regist
 
 Replace the placeholders with your actual Docker registry information.
 
-If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html){:target="_blank"} for the installation. 
+If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.4.x/installation/registry/registry.html){:target="_blank"} for the installation. 
 
 You will see this message if the installation is successful:
 
