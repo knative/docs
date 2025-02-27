@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/google/go-github/v32 v32.1.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/hack v0.0.0-20250114120502-30344aeba756
+	knative.dev/hack v0.0.0-20250220110655-b5e4ff820460
 )
 
 require (
