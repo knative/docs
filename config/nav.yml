@@ -265,6 +265,9 @@ nav:
             - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
             - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
             - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
+        - Event Transformations:
+            - About Event Transformations: eventing/transforms/README.md
+            - Event Transformations for JSON with JSONata: eventing/transforms/event-transform-jsonata.md
           # about triggers docs
         #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
         #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
