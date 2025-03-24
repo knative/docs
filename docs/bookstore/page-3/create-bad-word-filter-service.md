@@ -44,7 +44,7 @@ This workflow ensures a smooth transition from development to deployment within 
 
 ![Image 6](images/image6.png)
 ```shell
-func deploy -b=s2i -v
+func create -l python bad-word-filter
 ```
 
 ???+ success "Verify"
