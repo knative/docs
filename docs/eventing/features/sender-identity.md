@@ -26,15 +26,15 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 OIDC authentication is currently supported for the following components:
 
 - Brokers:
-    - [MTChannelBasedBroker](./../brokers/broker-types/channel-based-broker/)
-    - [Knative Broker for Apache Kafka](./../brokers/broker-types/kafka-broker/)
+    - [MTChannelBasedBroker](./../../brokers/broker-types/channel-based-broker/)
+    - [Knative Broker for Apache Kafka](./../../brokers/broker-types/kafka-broker/)
 - Channels:
     - InMemoryChannel
     - KafkaChannel
 - Sources:
-    - [ApiServerSource](./../sources/apiserversource/)
-    - [PingSource](./../sources/ping-source/)
-    - [KafkaSource](./../sources/kafka-source/)
+    - [ApiServerSource](./../../sources/apiserversource/)
+    - [PingSource](./../../sources/ping-source/)
+    - [KafkaSource](./../../sources/kafka-source/)
 
 ## Sender Identity Configuration
 
