@@ -5,7 +5,7 @@ GEM
     logger (1.6.1)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
-    rack (3.1.11)
+    rack (3.1.12)
     rack-protection (4.1.0)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
