@@ -431,7 +431,7 @@ spec:
 
 By default, Kourier contains envoy bootstrap configuration in the ConfigMap `kourier-bootstrap`. The `spec.ingress.kourier.bootstrap-configmap` field allows you to specify your customized bootstrap ConfigMap.
 
-This example shows that Kourier Gateawy uses `my-configmap` for the envoy bootstrap config.
+This example shows that Kourier Gateway uses `my-configmap` for the envoy bootstrap config.
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
