@@ -6,5 +6,5 @@ publish = false
 
 [dependencies]
 hyper = { version = "0.14.27", features = ["full"]}
-tokio = { version = "1.33.0", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.38.2", features = ["macros", "rt-multi-thread"] }
 pretty_env_logger = "0.5.0"
