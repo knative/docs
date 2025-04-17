@@ -66,7 +66,7 @@ plugins:
     module_name: hack/macros
     include_dir: docs/snippets
 
-copyright: "Copyright © 2024 The Knative Authors"
+copyright: "Copyright © 2025 The Knative Authors"
 
 extra:
   # social:
