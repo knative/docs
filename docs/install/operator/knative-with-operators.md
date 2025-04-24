@@ -39,13 +39,13 @@ You can install the Knative Operator with our helm chart:
 
 ```
 helm repo add knative-operator https://knative.github.io/operator
-helm install knative-operator knative-operator/knative-operator
+helm install knative-operator --create-namespace --namespace knative-operator knative-operator/knative-operator
 ```
 
 To see available values, run:
 
 ```
-helm show values knative-operator/knative-operator
+helm show values -n knative-operator knative-operator/knative-operator
 ```
 
 ### Verify your Knative Operator installation
