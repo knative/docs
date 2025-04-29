@@ -112,7 +112,7 @@ Contributors:
 - [lkingland](https://github.com/lkingland)
 - [matejvasek](https://github.com/matejvasek)
 - [matzew](https://github.com/matzew)
-- [mwritescod](https://github.com/mwritescode)
+- [mwritescode](https://github.com/mwritescode)
 - [pierDip](https://github.com/pierDipi)
 - [PinotNoir0](https://github.com/PinotNoir04)
 - [scottjmaddo](https://github.com/scottjmaddox)
