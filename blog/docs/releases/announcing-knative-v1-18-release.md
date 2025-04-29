@@ -35,7 +35,7 @@ fixes and improvements.
 
 ## Serving
 
-**Original notes**: https://github.com/knative/serving/releases/tag/knative-v1.18.0
+**Original notes**: [Knative Serving 1.18](https://github.com/knative/serving/releases/tag/knative-v1.18.0)
 
 ### 🚨 Breaking or Notable Changes
 
@@ -54,7 +54,7 @@ fixes and improvements.
 
 ## Eventing
 
-**Original notes**: https://github.com/knative/eventing/releases/tag/knative-v1.18.0
+**Original notes**: [Knative Eventing 1.18](https://github.com/knative/eventing/releases/tag/knative-v1.18.0)
 
 ### 💫 New Features & Changes
 
@@ -70,7 +70,7 @@ fixes and improvements.
 Update k8s version in e2e tests ([#8503](https://github.com/knative/eventing/pull/8503), [@dsimansk](https://github.com/dsimansk))
 
 ## Functions
-**Original notes**: https://github.com/knative/functions/releases/tag/knative-v1.18.0
+**Original notes**: [Knative Functions 1.18](https://github.com/knative/functions/releases/tag/knative-v1.18.0)
 
 ### 🐞 Bug Fixes
 
@@ -87,7 +87,7 @@ The Host builder now can build and run Python functions locally without a contai
 
 ## Operator
 
-**Original notes**: https://github.com/knative/operator/releases/tag/knative-v1.18.0
+**Original notes**: [Knative Operator 1.18](https://github.com/knative/operator/releases/tag/knative-v1.18.0)
 
 ### 💫 New Features & Changes
 
