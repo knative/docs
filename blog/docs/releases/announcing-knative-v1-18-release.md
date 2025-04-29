@@ -1,7 +1,7 @@
 ---
 title: "v1.18 release"
 linkTitle: "v1.18 release"
-author: "[David Simansky (Red Hat)](https://github.com/dsimansk) [David Fridrich (Red Hat)](https://github.com/gauron99)"
+author: "[David Simansky (Red Hat)](https://github.com/dsimansk) and [David Fridrich (Red Hat)](https://github.com/gauron99)"
 author handle: https://github.com/dsimansk
 date: 2025-04-29
 description: "Knative v1.18 release announcement"
@@ -18,6 +18,7 @@ Follow the instructions in
 - [Highlights](#highlights)
 - [Serving](#serving)
 - [Eventing](#eventing)
+- [Functions](#functions)
 - [Knative Operator](#operator)
 - [Thank you contributors](#thank-you-contributors)
 
@@ -34,7 +35,7 @@ fixes and improvements.
 
 ## Serving
 
-<!-- Original notes are here: https://github.com/knative/serving/releases/tag/knative-v1.18.0 -->
+**Original notes**: https://github.com/knative/serving/releases/tag/knative-v1.18.0
 
 ### 🚨 Breaking or Notable Changes
 
@@ -53,7 +54,7 @@ fixes and improvements.
 
 ## Eventing
 
-<!-- Original notes are here: https://github.com/knative/eventing/releases/tag/knative-v1.18.0 -->
+**Original notes**: https://github.com/knative/eventing/releases/tag/knative-v1.18.0
 
 ### 💫 New Features & Changes
 
@@ -68,17 +69,31 @@ fixes and improvements.
 - TLS / Cert Manager integration for IntegrationSink ([#8509](https://github.com/knative/eventing/pull/8509), [@matzew](https://github.com/matzew))
 Update k8s version in e2e tests ([#8503](https://github.com/knative/eventing/pull/8503), [@dsimansk](https://github.com/dsimansk))
 
+## Functions
+**Original notes**: https://github.com/knative/functions/releases/tag/knative-v1.18.0
+
+### 🐞 Bug Fixes
+
+- Fix: Go s2i build issue with user added dependencies ([#2765](https://github.com/knative/func/pull/2765), [@matejvasek](https://github.com/matejvasek))
+
+### 💫 New Features & Changes
+
+
+- Removes redundant default labels and annotations ([#2746](https://github.com/knative/func/pull/2746), [@KapilSareenp](https://github.com/KapilSareen))
+- Adds the ability to specify a storage class for remote build volumes with --remote-storage-class ([#2693](https://github.com/knative/func/pull/2693), [@lkingland](https://github.com/lkingland))
+- Python Functions now use the ASGI specification for method signature;
+Python Functions now support instances and lifecycle events. See the new templates for details.
+The Host builder now can build and run Python functions locally without a container. ([#2685](https://github.com/knative/func/pull/2685), [@lkingland](https://github.com/lkingland))
 
 ## Operator
 
-<!-- Original notes are here: https://github.com/knative/operator/releases/tag/knative-v1.18.0   -->
+**Original notes**: https://github.com/knative/operator/releases/tag/knative-v1.18.0
 
 ### 💫 New Features & Changes
 
 - Added support to specify tolerations for Operator deployments. ([#2031](https://github.com/knative/operator/pull/2031), [@bacek](https://github.com/bacek))
 - Proper order is enforced now during manifest installation. ([#2010](https://github.com/knative/operator/pull/2010), [@skonto](https://github.com/skonto))
-- Watch and reconcile operator-controller ConfigMaps.
-    - Reduce memory usage by only watching Knative specific deployments and configmaps. ([#2062](https://github.com/knative/operator/pull/2062), [@pierDipi](https://github.com/pierDipi))
+- Watch and reconcile operator-controller ConfigMaps and reduce memory usage by only watching Knative specific deployments and configmaps. ([#2062](https://github.com/knative/operator/pull/2062), [@pierDipi](https://github.com/pierDipi))
 
 ## Thank you, contributors
 
@@ -94,6 +109,8 @@ Contributors:
 - [dsimansk](https://github.com/dsimansk)
 - [elijah-ro](https://github.com/elijah-rou)
 - [flomedj](https://github.com/flomedja)
+- [lkingland](https://github.com/lkingland)
+- [matejvasek](https://github.com/matejvasek)
 - [matzew](https://github.com/matzew)
 - [mwritescod](https://github.com/mwritescode)
 - [pierDip](https://github.com/pierDipi)
