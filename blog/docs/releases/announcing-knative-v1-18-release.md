@@ -107,16 +107,17 @@ Contributors:
 - [bacek](https://github.com/bacek)
 - [dprotaso](https://github.com/dprotaso)
 - [dsimansk](https://github.com/dsimansk)
-- [elijah-ro](https://github.com/elijah-rou)
-- [flomedj](https://github.com/flomedja)
+- [elijah-rou](https://github.com/elijah-rou)
+- [flomedja](https://github.com/flomedja)
 - [lkingland](https://github.com/lkingland)
 - [matejvasek](https://github.com/matejvasek)
 - [matzew](https://github.com/matzew)
 - [mwritescode](https://github.com/mwritescode)
-- [pierDip](https://github.com/pierDipi)
-- [PinotNoir0](https://github.com/PinotNoir04)
+- [pierDipi](https://github.com/pierDipi)
+- [PinotNoir04](https://github.com/PinotNoir04)
 - [scottjmaddo](https://github.com/scottjmaddox)
 - [skonto](https://github.com/skonto)
+
 ## Learn more
 
 Knative is an open source project that anyone in the [community](https://knative.dev/docs/community/) can use, improve, and enjoy. We'd love you to join us!
