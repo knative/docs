@@ -359,3 +359,15 @@ if they apply, and will provide a warning if submitted pods use default (empty)
 values which would be incompatible with the `restricted` profile.
 
 **Mitigates**: user code execution, system code execution
+
+### SLSA builds and provenance
+
+Knative signs both the [container images](verifying-images.md) and the
+[command-line binaries](verifying-cli.md) produced the project, along with an
+SBOM and a SLSA provenance statement describing how the contents were built.
+This reduces the risk of supply chain attacks by allowing administrators and
+users to validate that their artifacts are the same ones built by Knative, and
+validating the SLSA security guarantees with respect to ephemeral and
+reproducible builds.
+
+**Mitigates**: system code execution
