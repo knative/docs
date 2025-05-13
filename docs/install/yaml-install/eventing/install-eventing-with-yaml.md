@@ -90,7 +90,7 @@ Follow the procedure for the Channel of your choice:
     1. Install the NATS Streaming Channel by running the command:
 
         ```bash
-        kubectl apply -f {{ artifact(org="knative-extensions",repo="eventing-natss",file="eventing-natss.yaml")}}
+        kubectl apply -f {{ artifact(org="knative-extensions",repo="eventing-natss",file="eventing-jsm.yaml")}}
         ```
 
         <!-- TODO(https://github.com/knative/docs/issues/2153): Add more Channels here -->
