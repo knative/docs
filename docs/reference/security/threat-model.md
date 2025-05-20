@@ -1,15 +1,18 @@
 # Knative Threat Model
 
-This document describes the Knative threat model. When vulnerabilities are
-reported to the project, we consult this document to determine whether the
-report describes a potential exploit, and if so to determine the severity of the
-exploit. As we develop new features, we consult this document to consider their
-impact on the threat model. Note that this threat model covers Serving,
-Eventing; some sections and threats may only apply to certain components of the
-project. As Knative Functions largely executes at build time on the application
-developer's infrastructure, it needs a different threat model more focused on
-supply chain security threats (which it largely inherits from
-[CNCF Buildpacks](https://buildpacks.io/)).
+Knative aims to support application teams from a single organization working in
+shared clusters under the
+[Namespace-as-a-Service multi-tenancy model](https://kubernetes.io/blog/2021/04/15/three-tenancy-models-for-kubernetes/),
+as well as the Cluster-as-a-Service model. The Namespace-as-a-Service model
+means that multiple teams (tenants) may each be operating Knative custom
+resources within a common cluster, sharing control plane and node resources.
+Each team (users in a namespace) should be isolated from affecting the
+configuration, availability, or integrity of applications in other namespaces.
+Knative is not specifically designed for use in a multi-cluster or cross-cluster
+scenario; there may be additional risks when attempting to span a _single_
+Knative installation across multiple clusters, but this threat model should be
+sufficient if each cluster in such a scenario is running an _independent_
+installation of Knative components (either some or all components).
 
 Knative builds on the capabilities of the Kubernetes cluster, and exposes both
 Kubernetes control-plane resources (CRDs managed by Kubernetes RBAC) as well as
@@ -26,17 +29,7 @@ workloads. Cases where additional care is required in security workloads (for
 example, Knative Serving routes and Kubernetes NetworkPolicy) will be called
 out.
 
-Knative aims to support application teams from a single organization working in
-shared clusters under the
-[Namespace-as-a-Service multi-tenancy model](https://kubernetes.io/blog/2021/04/15/three-tenancy-models-for-kubernetes/),
-as well as the Cluster-as-a-Service model. The Namespace-as-a-Service model
-means that multiple teams (tenants) may each be operating Knative custom
-resources within a common cluster, sharing control plane and node resources.
-Knative is not specifically designed for use in a multi-cluster or cross-cluster
-scenario; there may be additional risks when attempting to span a _single_
-Knative installation across multiple clusters, but this threat model should be
-sufficient if each cluster in such a scenario is running an _independent_
-installation of Knative components (either some or all components).
+
 
 ## Terminology
 
@@ -61,7 +54,7 @@ installation of Knative components (either some or all components).
 | External Event Source Admins                       | Users with the ability to configure and manage an external resource which is used as an event source, but without direct authenticated access to the cluster.   |
 | Malicious Container / Supply Chain Attack          | Users with the ability to tamper with a container image which is run by an internal user, but without authenticated access to the cluster.                      |
 
-## Component Archicture
+## Component Architecture
 
 ### Eventing
 
@@ -115,7 +108,7 @@ underlying software. The ingress gateway implementation is generally
 multi-tenant in nature and shared across the cluster, though the Knative
 architecture does not require this.
 
-### Activator
+#### Activator
 
 The activator component is a shared (multi-tenant) data-plane component used by
 Knative to handle HTTP requests when there is no current user pod available to
@@ -126,7 +119,7 @@ activator -- when a particular revision has sufficent replicas to handle bursty
 traffic, the ingress gateway is programmed with the direct backend addresses of
 the application pods.
 
-### Autoscaler
+#### Autoscaler
 
 The autoscaler is a control-plane component which tracks the current number of
 requests and requests / second for each Knative revision, and adjusts the
@@ -136,7 +129,7 @@ measurements from the activator and queue proxies, computes desired number of
 pods for each revision, and then updates the desired number of deployment
 replicas on the Kubernetes apiserver.
 
-### Queue-Proxy
+#### Queue-Proxy
 
 The queue-proxy runs as a sidecar alongside each user container (in the same
 Pod). The queue-proxy is responsible for measuring request load on the specific
@@ -371,3 +364,15 @@ validating the SLSA security guarantees with respect to ephemeral and
 reproducible builds.
 
 **Mitigates**: system code execution
+
+## Usage of this document
+
+When vulnerabilities are reported to the project, we consult this document to
+determine whether the report describes a potential exploit, and if so to
+determine the severity of the exploit. As we develop new features, we consult
+this document to consider their impact on the threat model. Note that this
+threat model covers Serving andEventing; some sections and threats may only
+apply to certain components of the project. As Knative Functions largely
+executes at build time on the application developer's infrastructure, it
+needs a different threat model more focused on supply chain security threats
+(which it largely inherits from [CNCF Buildpacks](https://buildpacks.io/)).
