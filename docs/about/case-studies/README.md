@@ -1,6 +1,11 @@
 ---
 hide:
   - toc
+audience: buyer
+components:
+  - eventing
+  - serving
+function: marketing
 ---
 
 # Knative Case Studies

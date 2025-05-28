@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - eventing
+  - functions
+  - serving
+function: tutorial
+---
+
 # Welcome: Knative Bookstore Tutorial
 
 ![Welcome Image](images/1.png)

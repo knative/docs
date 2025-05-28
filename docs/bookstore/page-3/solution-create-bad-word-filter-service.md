@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+function: tutorial
+---
+
 # Solution - Create Bad Word Filter Service
 
 ![image](images/image4.png)
