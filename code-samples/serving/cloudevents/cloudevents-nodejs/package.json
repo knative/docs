@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cloudevents": "^6.0.1",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
