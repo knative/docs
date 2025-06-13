@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # **Create Knative Sequence to Streamline ML Workflows**
 
 ![image](images/image8.png)

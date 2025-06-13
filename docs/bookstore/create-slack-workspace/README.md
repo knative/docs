@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Creating a Slack Workspace
 
 ![Image](images/image5.png)

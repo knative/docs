@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+  - functions
+function: tutorial
+---
+
 # **Extra Challenges**
 
 ![image](images/image5.png)

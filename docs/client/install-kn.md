@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - eventing
+  - functions
+  - serving
+function: how-to
+---
+
 # Installing the Knative CLI
 
 This guide provides details about how you can install the Knative `kn` CLI.
