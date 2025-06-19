@@ -16,8 +16,6 @@ NAME                                      READY   STATUS    RESTARTS   AGE
 activator-6b9dc4c9db-cl56b                1/1     Running   0          2m
 autoscaler-77f9b75856-f88qw               1/1     Running   0          2m
 controller-7dcb56fdb6-dbzrp               1/1     Running   0          2m
-domain-mapping-6bb8f95654-c575d           1/1     Running   0          2m
-domainmapping-webhook-c77dcfcfb-hg2wv     1/1     Running   0          2m
 webhook-78dc6ddddb-6868n                  1/1     Running   0          2m
 ```
 
