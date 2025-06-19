@@ -24,7 +24,6 @@ If you just want to install knative serving in k0s, you can directly skip to [Kn
     * [Say Hello Edge!](#say-hello-edge)
 
 
-
 ## Resource Requirment Analysis
 
 In this section we will determine the default Installation resource requirement needed for knative-serving and k0s.
@@ -42,8 +41,6 @@ autoscaler-568989dd8c-qzrhc               100m          1           100Mi       
 autoscaler-hpa-854dcfbd44-8vcj8           30m           300m        40Mi          400Mi
 controller-76c798ffcb-k96sz               100m          1           100Mi         1000Mi
 default-domain-nwbhr                      100m          1           100Mi         1000Mi
-domain-mapping-7748ff49d4-29mg4           30m           300m        40Mi          400Mi
-domainmapping-webhook-755d864f5c-dsc7j    100m          500m        100Mi         500Mi
 net-kourier-controller-79c998474f-svzcm   <none>        <none>      <none>        <none>
 webhook-8466d59795-d8zd8                  100m          500m        100Mi         500Mi
 ```
@@ -70,8 +67,6 @@ NAME                                      CPU-REQUEST   CPU-LIMIT   MEM-REQUEST 
 | autoscaler-hpa         | 30m             | 300m          | 40Mi               | 400Mi            |
 | controller             | 100m            | 1             | 100Mi              | 1000Mi           |
 | default-domain*        | 100m            | 1             | 100Mi              | 1000Mi           |
-| domain-mapping         | 30m             | 300m          | 40Mi               | 400Mi            |
-| domainmapping-webhook  | 100m            | 500m          | 100Mi              | 500Mi            |
 | net-kourier-controller | \<none\>        | \<none\>      | \<none\>           | \<none\>         |
 | webhook                | 100m            | 500m          | 100Mi              | 500Mi            |
 | **Total**              | **860m**        | **5600m**     | **640Mi**          | **5400Mi**       |
@@ -170,8 +165,6 @@ NAME                                      READY   STATUS    RESTARTS   AGE
 autoscaler-86796dfc97-2q6b2               1/1     Running   0          19m
 controller-7cd4659488-sqz5q               1/1     Running   0          19m
 activator-6f78547bf7-xp5jh                1/1     Running   0          19m
-domain-mapping-856cc965f5-jv4g9           1/1     Running   0          19m
-domainmapping-webhook-6dc8d86dbf-mg8j8    1/1     Running   0          19m
 webhook-d9c8c747d-fwhst                   1/1     Running   0          19m
 net-kourier-controller-54999fc897-st6tn   1/1     Running   0          12m
 default-domain-qpvfp                      1/1     Running   0          9m48s
@@ -207,8 +200,6 @@ knative-serving   activator-6f78547bf7-xp5jh                2m           21Mi
 knative-serving   autoscaler-86796dfc97-2q6b2               5m           19Mi            
 knative-serving   controller-7cd4659488-sqz5q               5m           27Mi            
 knative-serving   default-domain-6mknr                      1m           7Mi             
-knative-serving   domain-mapping-856cc965f5-jv4g9           2m           13Mi            
-knative-serving   domainmapping-webhook-6dc8d86dbf-mg8j8    7m           15Mi            
 knative-serving   net-kourier-controller-54999fc897-st6tn   6m           37Mi            
 knative-serving   webhook-d9c8c747d-fwhst                   9m           16Mi            
 kourier-system    3scale-kourier-gateway-9b477c667-2hdt2    4m           17Mi            
@@ -379,8 +370,6 @@ NAME                                      READY   STATUS      RESTARTS   AGE
 autoscaler-84445c7b8f-f8nwq               1/1     Running     0          37m
 activator-5f59946cc4-dsx6w                1/1     Running     0          37m
 controller-67cc995548-ncvtw               1/1     Running     0          37m
-domainmapping-webhook-57946bc655-vrl68    1/1     Running     0          37m
-domain-mapping-5b485cdb5-fqt89            1/1     Running     0          37m
 webhook-5c8c986896-f5z8w                  1/1     Running     0          37m
 net-kourier-controller-6c89f976bf-4w579   1/1     Running     0          7m25s
 default-domain-nghzp                      0/1     Completed   0          17s

@@ -143,8 +143,6 @@ Follow the procedure for the networking layer of your choice:
     activator-67656dcbbb-8mftq                1/1     Running   0          97s
     autoscaler-df6856b64-5h4lc                1/1     Running   0          97s
     controller-788796f49d-4x6pm               1/1     Running   0          97s
-    domain-mapping-65f58c79dc-9cw6d           1/1     Running   0          97s
-    domainmapping-webhook-cc646465c-jnwbz     1/1     Running   0          97s
     webhook-859796bc7-8n5g2                   1/1     Running   0          96s
     ```
 
