@@ -250,8 +250,6 @@ Knative Serving with different ingresses:
     autoscaler             1/1     1            1           18s
     autoscaler-hpa         1/1     1            1           14s
     controller             1/1     1            1           18s
-    domain-mapping         1/1     1            1           12s
-    domainmapping-webhook  1/1     1            1           12s
     webhook                1/1     1            1           17s
     ```
 
