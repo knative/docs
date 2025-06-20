@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # **Advanced Event Filtering**
 
 ![Image](images/image4.png)
