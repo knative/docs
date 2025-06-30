@@ -1,6 +1,6 @@
 # Orchestrating CloudEvents with Knative and Zeebe
 
-**Author: [Mauricio Salatino (Salaboy)](https://twitter.com/salaboy), Principal Software Engineer @ [Camunda](http://camunda.com) and [LearnK8s](http://learnk8s.io) Instructor**
+**Author: [Mauricio Salatino (Salaboy)](https://twitter.com/salaboy), Principal Software Engineer @ [Camunda](http://camunda.com) and [LearnKube](http://learnkube.com) Instructor**
 
 A couple of weeks ago, I presented at the **Knative Meetup** ([Video](https://www.youtube.com/watch?v=msDDdqmyEFA&list=PLQjzPfIiEQLIEpoCPxBYAVrjqy6LxLtQ8), [Slides](https://www.slideshare.net/salaboy/orchestrating-cloud-events-knative-meetup-2020)) about how you can leverage the Cloud Native workflow engine [Zeebe](http://zeebe.io) to understand, enhance and orchestrate your applications that are already using [CloudEvents](https://cloudevents.io).
 
