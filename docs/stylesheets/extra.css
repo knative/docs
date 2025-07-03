@@ -1,9 +1,71 @@
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Light.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-LightItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 500;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-MediumItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-BoldItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Black.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 900;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-BlackItalic.woff') format('woff');
+}
+
 :root {
   --md-primary-fg-color: #f3f1f2;
   --md-primary-fg-color--dark: #0D4984;
   --md-primary-fg-color--light: #6593C8;
   --nav-item-color: #4d4d4d;
   --md-footer-bg-color: #081729;
+  --md-text-font: 'Satoshi';
 }
 
 .md-clipboard {
