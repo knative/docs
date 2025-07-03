@@ -1,3 +1,13 @@
+.hero {
+  background-image: url("../../images/home-images/hero-bg.svg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  background-color: #fff;
+  height: 25rem;
+  margin-top: -50px;
+}
+
 .md-main__inner {
   margin: 0;
   max-width: 100%;
@@ -117,6 +127,7 @@ body {
 h2.secondary-headline, h3.trusted-by {
   color: black;
   font-weight: 700;
+  text-align: center;
 }
 
 .home-container h1 {
