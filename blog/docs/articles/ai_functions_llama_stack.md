@@ -203,7 +203,7 @@ class Function:
 
 _**NOTE:** the docstrings were remove to keep the program compact._
 
-#### First contact
+### First contact
 
 We can now run our function locally by issuing `func run` on the command line. Once it is running there will a system log like below:
 
