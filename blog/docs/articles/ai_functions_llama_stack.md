@@ -100,7 +100,7 @@ The `LLSD_HOST` is pointing to the address of the Llama Stack instance. If the e
 func config envs add --name=LLSD_HOST --value=http://llamastackdistribution-sample-service.default.svc.cluster.local:8321
 ```
 
-#### Inference request with Knative Functions
+### Inference request with Knative Functions
 
 The main interaction for the actual inference is done in the `handle` function, which is executed on every request:
 
