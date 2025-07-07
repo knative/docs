@@ -81,7 +81,7 @@ dependencies = [
 
 ### Accessing the Llama Stack Server
 
-Inside the `init` we get access to the URL of the _Llama Stack_ and fetch the available models:
+Inside the `init` function we get access to the URL of the _Llama Stack_ and fetch the available models:
 
 ```python
 ...
