@@ -258,7 +258,7 @@ _Note: The container registry is configurable via the `$FUNC_REGISTRY` environme
 
 ## Conclusion
 
-We have seen that the new Python runtime for Knative Functions is handling AI integrations very nicely. The functions have a well defined lifecycle for various aspects of AI applications. The Llama Stack libries could be used to access a standardized AI stack: Llama Stack.
+We have seen that the new Python runtime for Knative Functions is handling AI integrations very nicely. The functions have a well defined lifecycle for various aspects of AI applications. The Llama Stack libraries could be used to access a standardized AI stack: Llama Stack.
 
 To learn more about Knative Functions visit the [documentation](docs/functions){:target="_blank"} on our website or join our CNCF Slack channel [#knative-functions](https://cloud-native.slack.com/archives/C04LKEZUXEE)!
 
