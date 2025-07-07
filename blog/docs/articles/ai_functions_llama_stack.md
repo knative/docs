@@ -235,7 +235,7 @@ Data,
 
 We see that the function was returning a different CloudEvent, which contains the `chat` object in its body, which is a joke that we got from the LLama model.
 
-#### Kubernetes
+### Kubernetes
 
 To deploy the function to our `kind` cluster you need to install Knative Serving. The [Llama Stack Stack repo](https://github.com/matzew/llama-stack-stack){:target="_blank"} has a script for this as well. Once it is installed simply run:
 
