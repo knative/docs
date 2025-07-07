@@ -25,7 +25,7 @@ For Llama Stack an easy way to get started is using [Ollama](https://github.com/
 * [Ollama](https://github.com/ollama/ollama){:target="_blank"}
 * [Llama Stack Operator for Kubernetes](https://github.com/llamastack/llama-stack-k8s-operator){:target="_blank"}
 
-For convenience I have created a Github repository, that contains scripts for an easy setup. See the [Llama Stack Stack repo](https://github.com/matzew/llama-stack-stack){:target="_blank"} for more details.
+For convenience I have created a Github repository that contains scripts for an easy setup. See the [Llama Stack Stack repo](https://github.com/matzew/llama-stack-stack){:target="_blank"} for more details.
 
 #### Portforwarding for local access to the Llama Stack
 
