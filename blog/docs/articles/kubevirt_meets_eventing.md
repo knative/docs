@@ -221,7 +221,7 @@ Once this is implemented and a new virtual machine was created, the event payloa
 
 Example custom event payload:
 
-```json
+```code
 Context Attributes,
   specversion: 1.0
   type: dev.knative.apiserver.resource.add
