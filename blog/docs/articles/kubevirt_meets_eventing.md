@@ -258,7 +258,7 @@ Remember, we want our CMDB database automatically and event-driven updated based
 
 The following output shows a yet empty PostgreSQL DB. Notce that the columns are matching the jsonata expressions from the configured `EventTransform` CR.
 
-```code
+```shell
 psql -U postgres -h 10.32.98.110 -p 5432 -d vmdb -c 'SELECT * FROM "virtual_machines"'
 Password for user postgres:
  type | id | kind | name | namespace | time | cpucores | cpusockets | memory | storageclass | network
@@ -287,19 +287,19 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 
 Deploying the function as well as the associated triggers:
 
-```code
+```shell
 kubectl create -f https://raw.githubusercontent.com/rguske/knative-functions/refs/heads/main/kn-py-vmdata-psql-fn/function.yaml
 ```
 
 Validating the successful creation of the function using `kubectl` or `kn`:
 
-```code
+```shell
 kubectl get ksvc
 NAME                                   URL                                                                                                      LATESTCREATED                                LATESTREADY                                  READY   REASON
 kn-py-psql-vmdata-fn                   https://kn-py-psql-vmdata-fn-kubevirt-eventing.apps.ocp1.stormshift.coe.muc.redhat.com                   kn-py-psql-vmdata-fn-00001                   kn-py-psql-vmdata-fn-00001                   True
 ```
 
-```code
+```shell
 kn service list
 NAME                                   URL                                                                                                      LATEST                                       AGE     CONDITIONS   READY   REASON
 kn-py-psql-vmdata-fn                   https://kn-py-psql-vmdata-fn-kubevirt-eventing.apps.ocp1.stormshift.coe.muc.redhat.com                   kn-py-psql-vmdata-fn-00001                   5h3m    3 OK / 3     True
@@ -307,14 +307,14 @@ kn-py-psql-vmdata-fn                   https://kn-py-psql-vmdata-fn-kubevirt-eve
 
 Also validate the conditions of the Triggers:
 
-```code
+```shell
 kubectl get triggers
 NAME                                           BROKER                   SUBSCRIBER_URI                                                                    AGE     READY   REASON
 trigger-kn-py-psql-vmdata-fn-add               broker-transformer       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
 trigger-kn-py-psql-vmdata-fn-delete            broker-transformer       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
 ```
 
-```code
+```shell
 kn trigger list
 NAME                                           BROKER                   SINK                                                             AGE     CONDITIONS   READY   REASON
 trigger-kn-py-psql-vmdata-fn-add               broker-transformer       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
