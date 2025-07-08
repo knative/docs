@@ -167,7 +167,7 @@ The original event can be seen here: [rhel9-vm-creation-event](https://raw.githu
 
 The following recording is visualizing the non-customized incoming `dev.knative.apiserver.resource.add` event after a virtual machine creation operation happened.
 
-[![asciicast-kubevirt-eventing-origin](https://asciinema.org/a/cobVdXjIgSjnzjFKLJanZPpsU.svg)](https://asciinema.org/a/cobVdXjIgSjnzjFKLJanZPpsU)
+[![asciicast-kubevirt-eventing-origin](https://asciinema.org/a/726712.svg)](https://asciinema.org/a/726712)
 
 ### Event Transformation with a low-code Approach
 
@@ -245,7 +245,7 @@ This tailored event will perfectly serve our use case and makes the processing f
 
 The following recording is visualizing the customized event using the `EventTransform` CR.
 
-[![asciicast-kubevirt-eventing-transform](https://asciinema.org/a/i0xJb2CKaeXAzfzMebLBooILE.svg)](https://asciinema.org/a/i0xJb2CKaeXAzfzMebLBooILE)
+[![asciicast-kubevirt-eventing-transform](https://asciinema.org/a/726713.svg)](https://asciinema.org/a/726713)
 
 ## Bringing It All (Event-Driven) Together
 
@@ -324,15 +324,17 @@ Fasten your seatbelt 🚀 The complete event-flow is in-place:
 
 ## Watch the Show
 
-The orchestra is complete and our function is waiting for the starting signal.
+The orchestra is complete and our function is waiting for the starting signal to kick-off.
+
+Illustration of the overall use case:
+
+![kubevirt-meets-eventing-flow](./images/kubevirt-meets-eventing-flow.png)
 
 Watch the show via the following recording:
 
-[![asciicast-kubevirt-eventing-final](https://asciinema.org/a/y2lVKQX289CiEwBukC4HbLoTa.svg)](https://asciinema.org/a/y2lVKQX289CiEwBukC4HbLoTa)
+[![asciicast-kubevirt-eventing-final](https://asciinema.org/a/726717.svg)](https://asciinema.org/a/726717)
 
 ## Conclusion
-
-![kubevirt-meets-eventing-flow](./images/kubevirt-meets-eventing-flow.png)
 
 Monitoring virtual machines in a modern, cloud-native environment becomes significantly more efficient and responsive when leveraging Knative Eventing. By tapping into Kubernetes-generated events and using Knative as the event-processing backbone, we can trigger lightweight, event-driven functions that update a database in real-time. This architecture not only decouples components and improves scalability but also ensures that your VM metadata stays current without the need for constant polling or heavy integration logic. With this approach, you lay the foundation for a reactive, extensible system that can easily adapt to new event types or downstream consumers as your infrastructure grows.
 
