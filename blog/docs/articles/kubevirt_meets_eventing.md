@@ -6,19 +6,23 @@ _In this blog post you will learn how to easily monitor state of KubeVirt VMs wi
 
 Event-Driven Architecture (EDA) and the use of event sources fundamentally transform how applications interact, fostering a highly decoupled and scalable environment where services react dynamically to changes. By abstracting the origin of information, event sources empower systems to integrate seamlessly and respond in real-time to a vast array of occurrences across diverse platforms.
 
-## The Knative ApiServerSource
+This article shows the usage of the `ApiServerSource` from Knative in order to monitor state of other Kubernetes resources, like KubeVirt's `VirtualMachine`. In combination with the other Knative Eventing's powerful building blocks, like the `Broker`, it helps to implement use cases such as updating a _Configuration Management Database (CMDB)_ with the state of all virtual machines in the Cluster. 
 
-Knative `ApiServerSource` is a Knative Eventing Kubernetes custom resource that acts as an event source. Its primary function is to listen for events emitted by the Kubernetes API server and forward them as [CloudEvents](https://cloudevents.io/) to a designated [sink](https://knative.dev/docs/eventing/sinks/). CloudEvents is a specification for describing event data in common formats to provide interoperability across services, platforms and systems.
+Knative Eventing is heavily based on [CNCF CloudEvents](https://cloudevents.io/){:target="_blank"}, which is a specification for describing event data in common formats to provide interoperability across services, platforms and systems.
 
-Some common use cases include:
+But lets dive in!
+
+## The Knative `ApiServerSource`
+
+The `ApiServerSource` is a [Knative Eventing Kubernetes custom resource](https://knative.dev/docs/eventing/sources/apiserversource/){:target="_blank"} that listens for events emitted by the Kubernetes API server (eg. pod creation, deployment updates, etc...) and forward them as CloudEvents to a designated sink or any http addressable URL.
+
+Some common use cases for the `ApiServerSource` include:
 
 * Auditing and monitoring: Triggering actions or notifications when specific custom Kubernetes resources are _created_, _updated_, or _deleted_.
 * Automating workflows: Initiating a serverless function when a new Pod is _deployed_, a Deployment _scales_, or a ConfigMap is _modified_.
 * Integrating with external systems: Sending Kubernetes events to data warehouses or databases, AI applications or even logging systems for analysis.
 
-In order to quickly create a `ApiServerSource`, follow the official guidance here: [Creating an ApiServerSource object](https://knative.dev/docs/eventing/sources/apiserversource/getting-started/).
-
-The following is an example of an `ApiServerSource` configuration which only sends emitted events of the Kubernetes API server related to `kind: VirtualMachine` to the default [Channel based Broker](https://knative.dev/docs/eventing/brokers/broker-types/channel-based-broker/).
+The following is an example of an `ApiServerSource` which only sends emitted events of the Kubernetes API server related to `kind: VirtualMachine`:
 
 ```yaml
 kubectl create -f - <<EOF
@@ -42,11 +46,12 @@ spec:
 EOF
 ```
 
+!!! note
+    The source uses a service account which has proper RBAC setup for monitoring the referenced resources from KubeVirt.
+
 ### Event Routing
 
-The Channel based Broker (`MTChannelBasedBroker`) facilitates the routing and delivery of events within a Kubernetes cluster and is shipped by default with Knative Eventing. However, users should prefer Broker implementations like e.g. Apache Kafka or RabbitMQ Broker over the `MTChannelBasedBroker` and Channel combination because it is usually more efficient and reliable.
-
-The following configuration is used for the use case described in this blog post:
+For the event routing itself we need to create an instance of a `Broker`:
 
 ```yaml
 kubectl create -f - <<EOF
@@ -54,18 +59,15 @@ apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: broker-apiserversource
-spec:
-  config:
-    apiVersion: v1
-    kind: ConfigMap
-    name: config-br-default-channel
-    namespace: knative-eventing
-  delivery:
-    backoffDelay: PT0.2S
-    backoffPolicy: exponential
-    retry: 10
+spec: {}
 EOF
 ```
+
+This creates a memory-back `Broker` instance, which is perfectly fine for getting started. The `Broker` is an [`Addressable`](https://knative.dev/docs/eventing/sinks/) type, which can receive incoming CloudEvents over HTTP.
+
+!!! note
+    For a production-ready configuration of the Knative Broker for Apache Kafka see [this blog](https://developers.redhat.com/articles/2023/03/08/configuring-knative-broker-apache-kafka).
+
 
 At this stage, the event flow is like:
 
@@ -89,11 +91,11 @@ Picturing: _VM Operation_ --> _Event Creation_ --> _Event Processing_ --> _Autom
 
 ### Trimmimg the fat from the Event-Payload
 
-As mentioned in the beginning, the `ApiServerSource` CR is listening for events and forwards them as CloudEvents to an addressable or a callable resource. In Knative this is called a `sink` which can be e.g. `Brokers`, `Channels` or `Knative Services` (applications). The challenge though is, that the produced events are data-heavy and making downstream processing tricky. "Downstream processing" != the further processing of the received data.
+As mentioned above, the `ApiServerSource` is listening for events and forwards them as CloudEvents to an addressable or a callable resource. The challenge though is, that the produced events are data-heavy and making downstream processing tricky. "Downstream processing" != the further processing of the received data.
 
-Example of a virtual machine creation event (event type: `dev.knative.apiserver.resource.add`):
+Below is a complete example of a _virtual machine creation_ event, which the `ApiServerSource` wraps into its `dev.knative.apiserver.resource.add` CloudEvent:
 
-```code
+```shell
 Context Attributes,
   specversion: 1.0
   type: dev.knative.apiserver.resource.add
@@ -163,7 +165,10 @@ Data,
 /// output omitted
 ```
 
-The original event can be seen here: [rhel9-vm-creation-event](https://raw.githubusercontent.com/rguske/knative-functions/refs/heads/main/kn-py-vmdata-psql-fn/test/vm-creation-event-origin.json)
+As you can see the event is pretty verbose and would need some help in order to extract the relevant data for processing it further, in a meaningful way
+
+!!! note
+    The original event can be seen here: [rhel9-vm-creation-event](https://raw.githubusercontent.com/rguske/knative-functions/refs/heads/main/kn-py-vmdata-psql-fn/test/vm-creation-event-origin.json){:target="_blank"}
 
 The following recording is visualizing the non-customized incoming `dev.knative.apiserver.resource.add` event after a virtual machine creation operation happened.
 
@@ -171,11 +176,9 @@ The following recording is visualizing the non-customized incoming `dev.knative.
 
 ### Event Transformation with a low-code Approach
 
-In Knative Eventing version 1.18.0, the new `EventTransform` API CRD [got introduced](https://knative.dev/blog/releases/announcing-knative-v1-18-release/) which will be the needed scalpel in your toolbox to trimm the "data-heavy" data playload to your tailored requirements. It allows you to modify event attributes, extract data from event payloads, and reshape events to fit different systems requirements. `EventTransform` is designed to be a flexible component in your event-driven architecture that can be placed at various points in your event flow to facilitate seamless integration between diverse systems.
+In Knative Eventing version 1.18, the new `EventTransform` API CRD [got introduced](https://knative.dev/docs/eventing/transforms/){:target="_blank"} which will be the needed scalpel in your toolbox to trimm the "data-heavy" data playload to your tailored requirements. It allows you to modify event attributes, extract data from event payloads, and reshape events to fit different systems requirements. `EventTransform` is designed to be a flexible component in your event-driven architecture that can be placed at various points in your event flow to facilitate seamless integration between diverse systems.
 
-Coming back to our use case - the new functionality will support us with extracting exactly the data in which we are interested in to feet our CMDB with proper data.
-
-Create the `EventTransform` CR:
+This new functionality will support us with extracting exactly the data in which we are interested in to feet our CMDB with proper data:
 
 ```yaml
 kubectl create -f - <<EOF
@@ -211,17 +214,17 @@ spec:
 EOF
 ```
 
-As the example shows, it'll extract values from the original event data and creates a new one. [JSONata](https://jsonata.org/), a lightweight query and transformation language is used for that. Give it a try!
+The above `EventTransform` extracts values from the original event data and creates a new one. More details about the `EventTransform` API and the [JSONata](https://jsonata.org/){:target="_blank"} expression language can be found here [here](https://knative.dev/docs/eventing/transforms/){:target="_blank"}.
 
 Having this in-place, the order of the event-flow got extended:
 
 `Kubernetes API server` <-- `ApiServerSource` --> `Broker` --> `EventTransform`
 
-Once this is implemented and a new virtual machine was created, the event payload will be much more simplified.
+Once this is implemented and a new virtual machine was created, the _new_ event payload will be much more simplified.
 
 Example custom event payload:
 
-```code
+```shell
 Context Attributes,
   specversion: 1.0
   type: dev.knative.apiserver.resource.add
@@ -267,7 +270,7 @@ Password for user postgres:
 
 The business-logic in this example is written in Python. It'll process the incoming tailored event, establish a connection to the PostgreSQL DB and will write the desired data into the columns of the DB `vmdb`. Keep in mind, that you have the freedom of deciding in which programming language you write your business-logic.
 
-The code for the used function can be found on Github here: [KubeVirt PostgreSQL Knative Function Example](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn)
+The code for the used function can be found on Github here: [KubeVirt PostgreSQL Knative Function Example](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn){:target="_blank"}
 
 A `secret` needs to be created beforehand to store the database related sensible data which will be picked up by the function during its execution.
 
