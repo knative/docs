@@ -344,6 +344,15 @@ h2.secondary-headline {
 }
 
 /* why serverless container css */
+.serverless-outer {
+  background-color: #fff;
+}
+
+.why-serverless-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .why-serverless-container, .trying-it-all-container {
   margin-top: -2px;
   background-color: white;
@@ -375,6 +384,28 @@ h2.secondary-headline {
   font-size: 1rem;
 }
 
+.serverless-content-block {
+  flex: 1;
+  justify-content: space-between;
+}
+
+.serverless-feature-block {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 40px;
+}
+
+.card {
+  width: 400px;
+  min-width: 40%;
+  max-width: 100%;
+  height: 300px;
+  background-color: #F3F3F3;
+  border-radius: 30px;
+}
+
 .img-table {
   margin: 1rem auto -1rem;
 }
@@ -397,9 +428,8 @@ h2.secondary-headline {
 }
 
 .img-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
+  display: flex;
+  justify-content: end;
 }
 
 .reason-img img {
@@ -428,6 +458,10 @@ h2.secondary-headline {
 }
 
 @media screen and (max-width: 768px) {
+  .why-serverless-container {
+    flex-direction: column;
+  }
+
   .why-serverless-container h1 {
     font-size: 1.5em;
   }
@@ -455,6 +489,10 @@ h2.secondary-headline {
 }
 
 @media screen and (max-width: 480px) {
+  .why-serverless-container {
+    flex-direction: column;
+  }
+
   .why-serverless-container h1 {
     font-size: 1.2em;
   }
