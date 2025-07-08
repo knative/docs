@@ -71,7 +71,19 @@ This creates a memory-back `Broker` instance, which is perfectly fine for gettin
 
 At this stage, the event flow is like:
 
-`Kubernetes API server` <-- `ApiServerSource` --> `Broker`
+```bash
+                        Kubernetes Cluster
+┌───────────────────────────────────────────────────────────┐
+│                                                           │
+│ ┌────────────┐    ┌────────────┐       ┌────────────┐     │
+│ │ K8s        ◄─── │ ApiServer  │───────►  Broker    │     │
+│ │ API Server │    │ Source     │       │            │     │
+│ └────────────┘    └────────────┘       └────────────┘     │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+
+```
+
 
 ## Entering KubeVirt
 
