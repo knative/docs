@@ -93,7 +93,7 @@ As mentioned in the beginning, the `ApiServerSource` CR is listening for events 
 
 Example of a virtual machine creation event (event type: `dev.knative.apiserver.resource.add`):
 
-```json
+```code
 Context Attributes,
   specversion: 1.0
   type: dev.knative.apiserver.resource.add
