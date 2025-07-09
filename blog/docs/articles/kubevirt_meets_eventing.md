@@ -228,6 +228,7 @@ The above `EventTransform` extracts values from the original event data and crea
 
 Having this in-place, the order of the event-flow got extended:
 
+```bash
                           Kubernetes Cluster
 ┌────────────────────────────────────────────────────────────────────┐
 │                                                                    │
@@ -239,7 +240,6 @@ Having this in-place, the order of the event-flow got extended:
 └────────────────────────────────────────────────────────────────────┘
 
 ```
-
 
 Once this is implemented and a new virtual machine was created, the _new_ event payload will be much more simplified.
 
