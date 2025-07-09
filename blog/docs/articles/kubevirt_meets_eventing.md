@@ -273,7 +273,7 @@ With almost all our necessary components ready-to-go it is time to bring the use
 
 Remember, we want our CMDB database automatically and event-driven updated based on virtuial machine creation or deletion operations. Important is, that we are only interested in specific data which should be feet into the DB.
 
-The following output shows a yet empty PostgreSQL DB. Notce that the columns are matching the jsonata expressions from the configured `EventTransform` CR.
+The following output shows a so-far empty PostgreSQL DB. Notce that the columns are matching the jsonata expressions from the configured `EventTransform` CR.
 
 ```shell
 psql -U postgres -h 10.32.98.110 -p 5432 -d vmdb -c 'SELECT * FROM "virtual_machines"'
