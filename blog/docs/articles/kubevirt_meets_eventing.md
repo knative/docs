@@ -269,7 +269,7 @@ This tailored event will perfectly serve our use case and makes the processing f
 
 ## Bringing It All (Event-Driven) Together
 
-With having almost all necessary components ready-to-go it is time to bring the use case "Monitoring Virtual Machines with Knative Eventing" into live. The final missing pieces are the function, deployed as a Knative Service (`ksvc`), itself with the corresponding `triggers`. The `triggers` will do the routing of events from a Broker to a Sink. Think of it like: "When an event matching this filter arrives in the broker, send it to this service (e.g. a function)."
+With almost all our necessary components ready-to-go it is time to bring the use case "Monitoring Virtual Machines with Knative Eventing" to life. The final missing pieces are the function, deployed as a Knative Service (`ksvc`), and the corresponding `triggers`. The `triggers` will do the routing of events from the Broker to a Sink (in our case, the deployed function). Think of it like: "When an event matching this filter arrives in the broker, send it to this service (e.g. a function)."
 
 Remember, we want our CMDB database automatically and event-driven updated based on virtuial machine creation or deletion operations. Important is, that we are only interested in specific data which should be feet into the DB.
 
