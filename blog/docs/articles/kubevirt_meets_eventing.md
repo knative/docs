@@ -300,7 +300,7 @@ func subscribe --filter type=dev.knative.apiserver.resource.delete --source brok
 func deploy
 ```
 
-Validating the successful creation of the function using `kubectl` or `kn`:
+We can validate the successful creation of the function using `kubectl` or `kn`:
 
 ```shell
 kubectl get ksvc
