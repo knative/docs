@@ -6,9 +6,7 @@ _In this blog post you will learn how to easily monitor state of KubeVirt VMs wi
 
 Event-Driven Architecture (EDA) and the use of event sources fundamentally transform how applications interact, fostering a highly decoupled and scalable environment where services react dynamically to changes. By abstracting the origin of information, event sources empower systems to integrate seamlessly and respond in real-time to a vast array of occurrences across diverse platforms.
 
-This article shows the usage of the `ApiServerSource` from Knative in order to monitor state of other Kubernetes resources, like KubeVirt's `VirtualMachine`. In combination with the other Knative Eventing's powerful building blocks, like the `Broker`, it helps to implement use cases such as updating a _Configuration Management Database (CMDB)_ with the state of all virtual machines in the Cluster.
-
-Such as illustrated in this graphic:
+This article shows the usage of the `ApiServerSource` from Knative in order to monitor state of other Kubernetes resources, like KubeVirt's `VirtualMachine`. In combination with the other Knative Eventing's powerful building blocks, like the `Broker`, it helps to implement use cases such as updating a _Configuration Management Database (CMDB)_ with the state of all virtual machines in the Cluster, such as illustrated in this graphic:
 
 ![kubevirt-meets-eventing-flow](./images/kubevirt-meets-eventing-flow.png)
 
@@ -76,15 +74,15 @@ This creates a memory-back `Broker` instance, which is perfectly fine for gettin
 At this stage, the event flow is like:
 
 ```bash
-                        Kubernetes Cluster
-┌───────────────────────────────────────────────────────────┐
-│                                                           │
-│ ┌────────────┐    ┌────────────┐       ┌────────────┐     │
-│ │ K8s        ◄─── │ ApiServer  │───────►  Broker    │     │
-│ │ API Server │    │ Source     │       │            │     │
-│ └────────────┘    └────────────┘       └────────────┘     │
-│                                                           │
-└───────────────────────────────────────────────────────────┘
+                  Kubernetes Cluster
+┌───────────────────────────────────────────────────┐
+│                                                   │
+│ ┌────────────┐    ┌────────────┐    ┌──────────┐  │
+│ │ K8s        ◄────│ ApiServer  │────► Broker   │  │
+│ │ API Server │    │ Source     │    │          │  │
+│ └────────────┘    └────────────┘    └──────────┘  │
+│                                                   │
+└───────────────────────────────────────────────────┘
 
 ```
 
@@ -230,7 +228,18 @@ The above `EventTransform` extracts values from the original event data and crea
 
 Having this in-place, the order of the event-flow got extended:
 
-`Kubernetes API server` <-- `ApiServerSource` --> `Broker` --> `EventTransform`
+                          Kubernetes Cluster
+┌────────────────────────────────────────────────────────────────────┐
+│                                                                    │
+│ ┌────────────┐    ┌────────────┐    ┌──────────┐    ┌────────────┐ │
+│ │ K8s        ◄────│ ApiServer  │────► Broker   │────► Event      │ │
+│ │ API Server │    │ Source     │    │          │    │ Transform  │ │
+│ └────────────┘    └────────────┘    └──────────┘    └────────────┘ │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+
+```
+
 
 Once this is implemented and a new virtual machine was created, the _new_ event payload will be much more simplified.
 
@@ -283,10 +292,12 @@ The code for the used function can be found on Github here: [KubeVirt PostgreSQL
 !!! note
     A `secret` needs to be created beforehand to store the database related sensible data which will be picked up by the function during its execution.
 
-Deploying the function as well as the associated triggers:
+Next we create our `Trigger`s for our function and deploy it to the Kubernetes Cluster:
 
 ```shell
-kubectl create -f https://raw.githubusercontent.com/rguske/knative-functions/refs/heads/main/kn-py-vmdata-psql-fn/function.yaml
+func subscribe --filter type=dev.knative.apiserver.resource.add --source broker-apiserversource
+func subscribe --filter type=dev.knative.apiserver.resource.delete --source broker-apiserversource
+func deploy
 ```
 
 Validating the successful creation of the function using `kubectl` or `kn`:
@@ -319,9 +330,7 @@ trigger-kn-py-psql-vmdata-fn-add               broker-transformer       ksvc:kn-
 trigger-kn-py-psql-vmdata-fn-delete            broker-transformer       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
 ```
 
-Fasten your seatbelt 🚀 The complete event-flow is in-place:
-
-`Kubernetes API server` <-- `ApiServerSource` --> `Broker` --> `EventTransform` --> `Broker` --> `Trigger` --> `Function`
+Fasten your seatbelt 🚀 The complete event-flow is in-place!
 
 ## Watch the Show
 
