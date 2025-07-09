@@ -87,7 +87,7 @@ At this stage, the event flow is like:
 ```
 
 
-## Entering KubeVirt
+## Enter KubeVirt
 
 As organizations continue to adopt microservices and containers, there’s still a need for legacy workloads that require virtual machines (VM). Enter [KubeVirt](https://kubevirt.io/) — the fast evolving open-source solution that integrates virtual machine management directly into Kubernetes.
 
