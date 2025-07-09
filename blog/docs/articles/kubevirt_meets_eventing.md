@@ -12,7 +12,7 @@ This article shows how to use the `ApiServerSource` from Knative to monitor stat
 
 Knative Eventing is heavily based on [CNCF CloudEvents](https://cloudevents.io/){:target="_blank"}, which is a specification for describing event data in common formats to provide interoperability across services, platforms and systems. This allows Eventing to communicate natively with any system that understands HTTP or CloudEvents.
 
-But lets dive in!
+Lets dive in!
 
 ## The Knative `ApiServerSource`
 
