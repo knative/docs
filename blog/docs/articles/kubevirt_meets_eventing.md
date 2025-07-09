@@ -6,7 +6,11 @@ _In this blog post you will learn how to easily monitor state of KubeVirt VMs wi
 
 Event-Driven Architecture (EDA) and the use of event sources fundamentally transform how applications interact, fostering a highly decoupled and scalable environment where services react dynamically to changes. By abstracting the origin of information, event sources empower systems to integrate seamlessly and respond in real-time to a vast array of occurrences across diverse platforms.
 
-This article shows the usage of the `ApiServerSource` from Knative in order to monitor state of other Kubernetes resources, like KubeVirt's `VirtualMachine`. In combination with the other Knative Eventing's powerful building blocks, like the `Broker`, it helps to implement use cases such as updating a _Configuration Management Database (CMDB)_ with the state of all virtual machines in the Cluster. 
+This article shows the usage of the `ApiServerSource` from Knative in order to monitor state of other Kubernetes resources, like KubeVirt's `VirtualMachine`. In combination with the other Knative Eventing's powerful building blocks, like the `Broker`, it helps to implement use cases such as updating a _Configuration Management Database (CMDB)_ with the state of all virtual machines in the Cluster.
+
+Such as illustrated in this graphic:
+
+![kubevirt-meets-eventing-flow](./images/kubevirt-meets-eventing-flow.png)
 
 Knative Eventing is heavily based on [CNCF CloudEvents](https://cloudevents.io/){:target="_blank"}, which is a specification for describing event data in common formats to provide interoperability across services, platforms and systems.
 
@@ -182,10 +186,6 @@ As you can see the event is pretty verbose and would need some help in order to 
 !!! note
     The original event can be seen here: [rhel9-vm-creation-event](https://raw.githubusercontent.com/rguske/knative-functions/refs/heads/main/kn-py-vmdata-psql-fn/test/vm-creation-event-origin.json){:target="_blank"}
 
-The following recording is visualizing the non-customized incoming `dev.knative.apiserver.resource.add` event after a virtual machine creation operation happened.
-
-[![asciicast-kubevirt-eventing-origin](https://asciinema.org/a/726712.svg)](https://asciinema.org/a/726712)
-
 ### Event Transformation with a low-code Approach
 
 In Knative Eventing version 1.18, the new `EventTransform` API CRD [got introduced](https://knative.dev/docs/eventing/transforms/){:target="_blank"} which will be the needed scalpel in your toolbox to trimm the "data-heavy" data playload to your tailored requirements. It allows you to modify event attributes, extract data from event payloads, and reshape events to fit different systems requirements. `EventTransform` is designed to be a flexible component in your event-driven architecture that can be placed at various points in your event flow to facilitate seamless integration between diverse systems.
@@ -258,10 +258,6 @@ Extensions,
 
 This tailored event will perfectly serve our use case and makes the processing for functions much easier.
 
-The following recording is visualizing the customized event using the `EventTransform` CR.
-
-[![asciicast-kubevirt-eventing-transform](https://asciinema.org/a/726713.svg)](https://asciinema.org/a/726713)
-
 ## Bringing It All (Event-Driven) Together
 
 With having almost all necessary components ready-to-go it is time to bring the use case "Monitoring Virtual Machines with Knative Eventing" into live. The final missing pieces are the function, deployed as a Knative Service (`ksvc`), itself with the corresponding `triggers`. The `triggers` will do the routing of events from a Broker to a Sink. Think of it like: "When an event matching this filter arrives in the broker, send it to this service (e.g. a function)."
@@ -284,18 +280,8 @@ The business-logic in this example is written in Python. It'll process the incom
 
 The code for the used function can be found on Github here: [KubeVirt PostgreSQL Knative Function Example](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn){:target="_blank"}
 
-A `secret` needs to be created beforehand to store the database related sensible data which will be picked up by the function during its execution.
-
-```python
-## snipped handler.py
-DB_HOST = os.getenv('DB_HOST')
-DB_PORT = int(os.getenv('DB_PORT', 5432))
-DB_NAME = os.getenv('DB_NAME')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-
-[...]
-```
+!!! note
+    A `secret` needs to be created beforehand to store the database related sensible data which will be picked up by the function during its execution.
 
 Deploying the function as well as the associated triggers:
 
@@ -340,10 +326,6 @@ Fasten your seatbelt 🚀 The complete event-flow is in-place:
 ## Watch the Show
 
 The orchestra is complete and our function is waiting for the starting signal to kick-off.
-
-Illustration of the overall use case:
-
-![kubevirt-meets-eventing-flow](./images/kubevirt-meets-eventing-flow.png)
 
 Watch the show via the following recording:
 
