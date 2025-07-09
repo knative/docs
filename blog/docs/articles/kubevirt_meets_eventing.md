@@ -65,7 +65,7 @@ spec: {}
 EOF
 ```
 
-This creates a memory-back `Broker` instance, which is perfectly fine for getting started. The `Broker` is an [`Addressable`](https://knative.dev/docs/eventing/sinks/) type, which can receive incoming CloudEvents over HTTP.
+This creates a memory-backed `Broker` instance, which is perfectly fine for getting started. The `Broker` is an [`Addressable`](https://knative.dev/docs/eventing/sinks/) type, which can receive incoming CloudEvents over HTTP.
 
 !!! note
     For a production-ready configuration of the Knative Broker for Apache Kafka see [this blog](https://developers.redhat.com/articles/2023/03/08/configuring-knative-broker-apache-kafka).
