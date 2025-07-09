@@ -179,7 +179,7 @@ Data,
 /// output omitted
 ```
 
-As you can see the event is pretty verbose and would need some help in order to extract the relevant data for processing it further, in a meaningful way
+As you can see this event is pretty verbose and needs some help to extract the relevant data to enable processing it further, in a meaningful way.
 
 !!! note
     The original event can be seen here: [rhel9-vm-creation-event](https://raw.githubusercontent.com/rguske/knative-functions/refs/heads/main/kn-py-vmdata-psql-fn/test/vm-creation-event-origin.json){:target="_blank"}
