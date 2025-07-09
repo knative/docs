@@ -226,7 +226,7 @@ EOF
 
 The above `EventTransform` extracts values from the original event data and creates a new one. More details about the `EventTransform` API and the [JSONata](https://jsonata.org/){:target="_blank"} expression language can be found here [here](https://knative.dev/docs/eventing/transforms/){:target="_blank"}.
 
-Having this in-place, the order of the event-flow got extended:
+With this in-place, the order of the event-flow is extended:
 
 ```bash
                           Kubernetes Cluster
