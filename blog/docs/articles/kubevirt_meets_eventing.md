@@ -99,7 +99,7 @@ It’s a game-changer for teams looking to modernize their infrastructure withou
 
 Now that KubeVirt allows you to run virtual machine workloads on your Kubernetes environment, imagine how your operational efficiency can be increased significantly leveraging the power of eventing. Envision a scenario where virtual machines are created, updated or deleted and every time this occurs, a Configuration Management Database (CMDB) will be updated to reflect the changes.
 
-This use case can be elegantly handled with Knative Eventing and Functions-as-a-Service (FaaS). Whenever one of the aforementioned operations happened, an event will be created by the Kubernetes API Server, will be processed through Knative, including triggering and invoking a function (business logic) and will ultimtaley update the CMDB in real-time.
+This use case can be elegantly handled with Knative Eventing and Functions-as-a-Service (FaaS). Whenever one of the aforementioned operations occurs, an event will be created by the Kubernetes API Server, processed through Knative, including triggering and invoking a function (business logic), and ultimately update the CMDB in real-time.
 
 Data flow: _VM Operation_ --> _Event Creation_ --> _Event Processing_ --> _Automation_
 
