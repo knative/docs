@@ -243,7 +243,7 @@ With this in-place, the order of the event-flow is extended:
 
 Once this is deployed and a new virtual machine is created, the _new_ event payload will be much more simplified.
 
-Example custom event payload:
+Example custom (transformed) event payload:
 
 ```shell
 Context Attributes,
