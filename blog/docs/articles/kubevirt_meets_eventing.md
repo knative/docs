@@ -4,7 +4,7 @@
 
 _In this blog post you will learn how to easily monitor the state of KubeVirt VMs with Knative Eventing's powerful building blocks._
 
-Event-Driven Architecture (EDA) and the use of event sources fundamentally transform how applications interact, fostering a highly decoupled and scalable environment where services react dynamically to changes. By abstracting the origin of information, event sources empower systems to integrate seamlessly and respond in real-time to a vast array of occurrences across diverse platforms.
+Event-Driven Architecture (EDA) and the use of event sources fundamentally transforms how applications interact, fostering a highly decoupled and scalable environment where services react dynamically to changes. By abstracting the origin of information, event sources empower systems to integrate seamlessly and respond in real-time to a vast array of occurrences from diverse platforms.
 
 This article shows the usage of the `ApiServerSource` from Knative in order to monitor state of other Kubernetes resources, like KubeVirt's `VirtualMachine`. In combination with the other Knative Eventing's powerful building blocks, like the `Broker`, it helps to implement use cases such as updating a _Configuration Management Database (CMDB)_ with the state of all virtual machines in the Cluster, such as illustrated in this graphic:
 
