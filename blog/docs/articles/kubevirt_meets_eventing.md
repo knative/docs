@@ -241,7 +241,7 @@ With this in-place, the order of the event-flow is extended:
 
 ```
 
-Once this is implemented and a new virtual machine was created, the _new_ event payload will be much more simplified.
+Once this is deployed and a new virtual machine is created, the _new_ event payload will be much more simplified.
 
 Example custom event payload:
 
