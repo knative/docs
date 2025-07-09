@@ -107,7 +107,7 @@ Data flow: _VM Operation_ --> _Event Creation_ --> _Event Processing_ --> _Autom
 
 As mentioned above, the `ApiServerSource` is listening for events and forwards them as CloudEvents to an addressable or a callable resource. However, the challenge is that the produced events are data-heavy, making downstream processing tricky. "Downstream processing" != the further processing of the received data.
 
-Below is a complete example of a _virtual machine creation_ event, which the `ApiServerSource` wraps into its `dev.knative.apiserver.resource.add` CloudEvent:
+Below is a complete example of a _virtual machine creation_ event, which the `ApiServerSource` wraps into its `dev.knative.apiserver.resource.add` CloudEvent (with some sections ommited for brevity):
 
 ```shell
 Context Attributes,
