@@ -319,18 +319,30 @@ Also validate the conditions of the Triggers:
 ```shell
 kubectl get triggers
 NAME                                           BROKER                   SUBSCRIBER_URI                                                                    AGE     READY   REASON
-trigger-kn-py-psql-vmdata-fn-add               broker-transformer       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
-trigger-kn-py-psql-vmdata-fn-delete            broker-transformer       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
+trigger-kn-py-psql-vmdata-fn-add               broker-apiserversource       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
+trigger-kn-py-psql-vmdata-fn-delete            broker-apiserversource       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
 ```
 
 ```shell
 kn trigger list
 NAME                                           BROKER                   SINK                                                             AGE     CONDITIONS   READY   REASON
-trigger-kn-py-psql-vmdata-fn-add               broker-transformer       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
-trigger-kn-py-psql-vmdata-fn-delete            broker-transformer       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
+trigger-kn-py-psql-vmdata-fn-add               broker-apiserversource       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
+trigger-kn-py-psql-vmdata-fn-delete            broker-apiserversource       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
 ```
 
-Fasten your seatbelt 🚀 The complete event-flow is in-place!
+Fasten your seatbelt 🚀 The complete event-flow is in-place and the function will feet the desired data into the DB.
+
+Example output:
+
+```shell
+psql -U postgres -h 10.32.98.110 -p 5432 -d vmdb -c 'SELECT * FROM "virtual_machines"'
+Password for user postgres:
+                 type                  |                  id                  |      kind      |   name    |     namespace     |           time           | cpucores | cpusockets | memory |  storageclass  | network
+---------------------------------------+--------------------------------------+----------------+-----------+-------------------+--------------------------+----------+------------+--------+----------------+---------
+ dev.knative.apiserver.resource.add    | eb49fb88-48d3-4c3b-b94e-34208010109b | VirtualMachine | rhel-vm-2 | kubevirt-eventing | 2025-07-08T10:34:52.027Z | 4        | 2          | 8Gi    | coe-netapp-san | default
+ dev.knative.apiserver.resource.delete | 0e9924cd-cd1a-4a4a-a3bf-717fd1caef50 | VirtualMachine | rhel-vm-2 | kubevirt-eventing | 2025-07-08T10:36:07.348Z | 4        | 2          | 8Gi    | coe-netapp-san | default
+(2 rows)
+```
 
 ## Watch the Show
 
