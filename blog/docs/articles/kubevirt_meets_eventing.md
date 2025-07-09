@@ -356,4 +356,4 @@ Watch the show via the following recording:
 
 Monitoring virtual machines in a modern, cloud-native environment becomes significantly more efficient and responsive when leveraging Knative Eventing. By tapping into Kubernetes-generated events and using Knative as the event-processing backbone, we can trigger lightweight, event-driven functions that update a database in real-time. This architecture not only decouples components and improves scalability but also ensures that your VM metadata stays up-to-date without the need for constant polling or heavy integration logic. With this approach, you lay the foundation for a reactive, extensible system that easily adapts to new event types and downstream consumers as your infrastructure grows.
 
-To learn more about Knative Eventing visit the documentation on our website or join our CNCF Slack channel #knative-eventing!
+To learn more about Knative Eventing visit the [documentation](docs/eventing){:target="_blank"} on our website or join our CNCF Slack channel [#knative-eventing](https://cloud-native.slack.com/archives/C04LMU33V1S)!
