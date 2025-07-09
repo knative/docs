@@ -101,7 +101,7 @@ Now that KubeVirt allows you to run virtual machine workloads on your Kubernetes
 
 This use case can be elegantly handled with Knative Eventing and Functions-as-a-Service (FaaS). Whenever one of the aforementioned operations happened, an event will be created by the Kubernetes API Server, will be processed through Knative, including triggering and invoking a function (business logic) and will ultimtaley update the CMDB in real-time.
 
-Picturing: _VM Operation_ --> _Event Creation_ --> _Event Processing_ --> _Automation_
+Data flow: _VM Operation_ --> _Event Creation_ --> _Event Processing_ --> _Automation_
 
 ### Trimmimg the fat from the Event-Payload
 
