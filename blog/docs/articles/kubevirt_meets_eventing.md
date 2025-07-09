@@ -290,7 +290,7 @@ The business-logic in this example is written in Python. It'll process the incom
 The code for the function can be found on Github here: [KubeVirt PostgreSQL Knative Function Example](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn){:target="_blank"}
 
 !!! note
-    A `secret` needs to be created beforehand to store the database related sensible data which will be picked up by the function during its execution.
+    A `secret` needs to be created beforehand to store the database related sensitive data which will be picked up by the function during its execution.
 
 Next we create our `Trigger`s for our function and deploy it to the Kubernetes Cluster:
 
