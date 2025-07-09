@@ -24,7 +24,7 @@ Some common use cases for the `ApiServerSource` include:
 * **Automating workflows**: Initiating a serverless function when a new Pod is _deployed_, a Deployment _scales_, or a ConfigMap is _modified_.
 * **Integrating with external systems**: Sending Kubernetes events to data warehouses or databases, AI applications or even logging systems for analysis.
 
-The following is an example of an `ApiServerSource` which only sends emitted events of the Kubernetes API server related to `kind: VirtualMachine`:
+The following is an example of an `ApiServerSource` which only sends events emitted from the Kubernetes API server related to `kind: VirtualMachine`:
 
 ```yaml
 kubectl create -f - <<EOF
