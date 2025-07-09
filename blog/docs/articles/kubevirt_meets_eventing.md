@@ -2,7 +2,7 @@
 
 **Authors: Robert Guske, Senior Specialist Solution Architect OpenShift @ Red Hat, Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-_In this blog post you will learn how to easily monitor state of KubeVirt VMs with Knative Eventing's powerful building blocks._
+_In this blog post you will learn how to easily monitor the state of KubeVirt VMs with Knative Eventing's powerful building blocks._
 
 Event-Driven Architecture (EDA) and the use of event sources fundamentally transform how applications interact, fostering a highly decoupled and scalable environment where services react dynamically to changes. By abstracting the origin of information, event sources empower systems to integrate seamlessly and respond in real-time to a vast array of occurrences across diverse platforms.
 
