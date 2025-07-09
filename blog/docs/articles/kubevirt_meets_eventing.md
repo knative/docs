@@ -285,7 +285,7 @@ Password for user postgres:
 
 ### Deploy the Function
 
-The business-logic in this example is written in Python. It'll process the incoming tailored event, establish a connection to the PostgreSQL DB and will write the desired data into the columns of the DB `vmdb`. Keep in mind, that you have the freedom of deciding in which programming language you write your business-logic.
+The business-logic in this example is written in Python. It'll process the incoming tailored event, establish a connection to the PostgreSQL DB and will write the desired data into the columns of the DB `vmdb`. Keep in mind that you have the freedom of deciding in which programming language you write your business-logic.
 
 The code for the function can be found on Github here: [KubeVirt PostgreSQL Knative Function Example](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn){:target="_blank"}
 
