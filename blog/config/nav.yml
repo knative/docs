@@ -51,6 +51,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/kubevirt_meets_eventing.md
           - articles/ai_functions_llama_stack.md
           - articles/configurable-runtimeclassnames.md
           - articles/CONXAIs_AI_inference_on_Amazon_EKS.md
