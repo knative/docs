@@ -188,7 +188,7 @@ As you can see this event is pretty verbose and needs some help to extract the r
 
 In Knative Eventing version 1.18, the new `EventTransform` API CRD [was introduced](https://knative.dev/docs/eventing/transforms/){:target="_blank"} acting as the scalpel in your toolbox to trim the "data-heavy" data payload to your tailored requirements. It allows you to modify event attributes, extract data from event payloads, and reshape events to fit different systems requirements. `EventTransform` is designed to be a flexible component in your event-driven architecture that can be placed at various points in your event flow, facilitating seamless integration between diverse systems.
 
-This new functionality will support us with extracting exactly the data in which we are interested in to feet our CMDB with proper data:
+This new functionality will allow us to extract exactly the data we are interested in, enabling us to feed our CMDB with proper data:
 
 ```yaml
 kubectl create -f - <<EOF
