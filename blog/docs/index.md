@@ -22,15 +22,15 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
-### Knative meets KubeVirt!
-Monitoring Virtual Machines with Knative Eventing
-
-[Read more :octicons-arrow-right-24:](articles/kubevirt_meets_eventing.md){ .md-button }
-
 ### AI powered Knative Functions for Llama Stack
 Learn how to implement Knative functions for model inference.
 
 [Read more :octicons-arrow-right-24:](articles/ai_functions_llama_stack.md){ .md-button }
+
+### Knative meets KubeVirt!
+Monitoring Virtual Machines with Knative Eventing
+
+[Read more :octicons-arrow-right-24:](articles/kubevirt_meets_eventing.md){ .md-button }
 
 ### Announcing Knative v1.18 Release
 Details on the 1.18 release of the Knative project.
