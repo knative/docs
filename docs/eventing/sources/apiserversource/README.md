@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # About ApiServerSource
 
 ![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)

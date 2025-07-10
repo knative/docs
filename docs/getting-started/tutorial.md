@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+  - eventing
+function: tutorial
+---
+
 # Welcome to the Knative Tutorial
 
 ### **Quick Start Tutorial**

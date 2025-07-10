@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # Knative Source for Apache Camel Kamelet integrations
 
 ![stage](https://img.shields.io/badge/Stage-alpah-red?style=flat-square)

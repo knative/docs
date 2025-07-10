@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Configure KEDA Autoscaling of Knative Kafka Resources
 
 All of the Knative Kafka components which dispatch events (source, channel broker) support scaling the dispatcher data plane with KEDA.

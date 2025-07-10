@@ -1,6 +1,12 @@
 ---
+audience: developer
+components:
+  - serving
+  - eventing
+function: tutorial
 hide_next: true
 ---
+
 # Clean Up
 
 We recommend that you delete the cluster used for this tutorial to free up resources

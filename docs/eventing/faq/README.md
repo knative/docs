@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Eventing FAQs
 
 ## What is a Sugar Controller?

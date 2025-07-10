@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # Event Mesh
 
 An Event Mesh is dynamic, interconnected infrastructure which is designed to simplify distributing events from senders to recipients.  Similar to traditional message-channel architectures like Apache Kafka or RabbitMQ, an Event Mesh provides asynchronous (store-and-forward) delivery of messages which allows decoupling senders and recipients in time.  Unlike traditional message-channel based integration patterns, Event Meshes also simplify the routing concerns of senders and recipients by decoupling them from the underlying event transport infrastructure (which may be a federated set of solutions like Kafka, RabbitMQ, or cloud provider infrastructure).  The mesh transports events from producers to consumers via a network of interconnected _event brokers_ across any environment, and even between clouds in a seamless and loosely coupled way.

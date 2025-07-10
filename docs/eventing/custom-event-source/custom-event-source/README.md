@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Create a custom event source
 
 If you want to create a custom event source for a specific event producer type, you must create the components that enable forwarding events from that producer type to a Knative sink.

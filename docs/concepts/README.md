@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - eventing
+  - functions
+  - serving
+function: explanation
+---
+
 # Concepts
 
 The documentation in this section explains commonly referenced Knative concepts and abstractions, and helps to provide you with a better understanding of how Knative works.

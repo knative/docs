@@ -1,3 +1,12 @@
+---
+audience: contributor
+components:
+  - eventing
+  - functions
+  - serving
+function: community
+---
+
 # How to Get Involved
 
 <!-- TODO: what is community, what are the touchpoints -->

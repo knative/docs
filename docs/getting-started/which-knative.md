@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+  - eventing
+function: explanation
+---
+
 # Which Knative Component Should I Use?
 
 Knative is a project that simplifies the deployment of applications onto Kubernetes. Knative, as a project, contains a few different components. The purpose of this document is to explain them and advise on when you would use a specific component. 
