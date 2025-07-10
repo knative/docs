@@ -649,11 +649,22 @@ position: relative;
   justify-content: center;
   color: black;
   display: flex;
-  background-color: var(--md-primary-fg-color);
+  background-color: white;
   padding: 1rem;
   cursor: pointer;
   flex-wrap: wrap;
   padding-bottom: 0;
+  margin-top: 4rem;
+}
+
+.kelsey-testimonial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 30px;
+  margin-top: 2rem;
 }
 
 .md-typeset>h1:first-of-type {
@@ -680,7 +691,7 @@ position: relative;
 }
 
 .case-studies-container .cases-table .col {
-  background-color: white;
+  background-color: var(--md-primary-fg-color);
   padding: 1.5rem;
   margin: 1rem 0.5rem;
   border-radius: 0.7rem;
@@ -797,6 +808,10 @@ position: relative;
 
   .case-studies-container .normal-text {
     padding: 0 1em;
+  }
+
+  .kelsey-testimonial {
+    flex-direction: column;
   }
 }
 
