@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: reference
+---
+
 # Configuring scale bounds
 
 You can configure upper and lower bounds to control autoscaling behavior.

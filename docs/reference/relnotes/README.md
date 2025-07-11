@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+  - eventing
+function: reference
+---
+
 # Knative release notes
 
 For details about the Knative releases, see the following pages:

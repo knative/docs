@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: reference
+---
+
 # Knative Serving metrics
 
 Administrators can monitor Serving control plane based on the metrics exposed by each Serving component.

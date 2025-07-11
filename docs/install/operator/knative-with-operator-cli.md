@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Install by using the Knative Operator CLI Plugin
 
 Knative provides a CLI Plugin to install, configure and manage Knative via the command lines. This CLI plugin facilitates

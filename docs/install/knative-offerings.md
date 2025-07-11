@@ -1,3 +1,11 @@
+---
+audience: buyer
+components:
+  - serving
+  - eventing
+function: reference
+---
+
 # Knative Offerings
 
 Knative has a rich community with many vendors participating, and many of those

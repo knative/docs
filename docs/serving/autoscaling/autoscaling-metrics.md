@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: reference
+---
+
 # Metrics
 
 The metric configuration defines which metric type is watched by the Autoscaler.

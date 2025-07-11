@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # Configuring target burst capacity
 
 _Target burst capacity_ is a [global and per-revision](../autoscaling/autoscaler-types.md#global-versus-per-revision-settings) integer setting that determines the size of traffic burst a Knative application can handle without buffering.

@@ -2,6 +2,9 @@
 title: "Learn about Google Analytics cookies"
 linkTitle: "Learn about cookies"
 type: "docs"
+audience: developer
+components: []
+function: community
 ---
 
 By using this website, you are confirming that you accept our use of cookies for

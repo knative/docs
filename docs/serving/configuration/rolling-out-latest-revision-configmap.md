@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 {% include "gradual-rollout-intro.md" %}
 
 ## Procedure

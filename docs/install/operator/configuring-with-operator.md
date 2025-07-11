@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Configuring Knative by using the Operator
 
 The Operator manages the configuration of a Knative installation, including propagating values from the `KnativeServing` and `KnativeEventing` custom resources to system [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/).

@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: reference
+---
+
 # Knative code samples
 
 You can use Knative code samples to help you get up and running with common use

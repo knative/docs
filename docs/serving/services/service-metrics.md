@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: reference
+---
+
 # Service metrics
 
 Every Knative Service has a proxy container that proxies the connections to the application container. A number of metrics are reported for the queue proxy performance.

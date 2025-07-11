@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Accessing request traces
 
 Depending on the request tracing tool that you have installed on your Knative

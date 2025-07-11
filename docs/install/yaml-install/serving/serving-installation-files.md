@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: reference
+---
+
 # Knative Serving installation files
 
 This guide provides reference information about the core Knative Serving YAML files, including:

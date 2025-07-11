@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Configuring a custom certificate class for a Service
 
 When `external-domain-tls` is enabled and Knative Services are created, a certificate class (`certificate-class`) is automatically chosen based on the value in the `config-network` ConfigMap located inside the `knative-serving` namespace. This ConfigMap is part of Knative Serving installation. If the certificate class is not specified, this defaults to `cert-manager.certificate.networking.knative.dev`. After `certificate-class` is configured, it is used for all Knative Services unless it is overridden with a `certificate-class` annotation.

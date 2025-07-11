@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Installing Knative Eventing using YAML files
 
 This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
