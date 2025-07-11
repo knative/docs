@@ -654,7 +654,7 @@ position: relative;
   cursor: pointer;
   flex-wrap: wrap;
   padding-bottom: 0;
-  margin-top: 4rem;
+  padding-top: 4rem;
 }
 
 .kelsey-testimonial {
@@ -732,12 +732,6 @@ position: relative;
   font-weight: 600;
   line-height: 1.2;
   font-size: .95rem;
-}
-
-.case-studies-container hr {
-  border-bottom: 2px solid black;
-  display: flow-root;
-  margin: .4em 5em -4px 2em;
 }
 
 /* Responsive Styles */
