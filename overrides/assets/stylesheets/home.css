@@ -1,3 +1,13 @@
+.hero {
+  background-image: url("../../images/home-images/hero-bg.svg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  background-color: #fff;
+  height: 25rem;
+  margin-top: -50px;
+}
+
 .md-main__inner {
   margin: 0;
   max-width: 100%;
@@ -50,8 +60,16 @@
   text-align: center;
 }
 
+.main-headline {
+  padding-top: 2rem;
+}
+
+.headline-section p {
+  margin-top: 2rem;
+}
+
 .why-serverless-container, .need-to-know-more-container,
-.knative-components-container, .trying-it-all-container,
+.trying-it-all-container,
 .whats-next-container, .whats-next-container,
 .case-studies-container, .cncf-notice-container {
   text-align: center;
@@ -100,6 +118,11 @@ body {
   margin-left: 0.5rem;
 }
 
+.md-button--secondary {
+  background-color: var(--md-primary-fg-color--dark);
+  border: none !important;
+}
+
 .home-container .md-button,
 .need-to-know-more-container .md-button {
   background-color: var(--md-primary-fg-color--light);
@@ -114,9 +137,20 @@ body {
   border-radius: 8px;
 }
 
-h2.secondary-headline, h3.trusted-by {
-  color: black;
+h3.trusted-by {
+  color: white;
   font-weight: 700;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+h2.secondary-headline {
+  color: var(--nav-item-color);
+  font-weight: 500;
+  font-size: 1rem;
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .home-container h1 {
@@ -169,6 +203,10 @@ h2.secondary-headline, h3.trusted-by {
   to {
     transform: translate(calc(-50% - 0.5rem));
   }
+}
+
+.trusted-by-container {
+  margin-bottom: 40px;
 }
 
 .trusted-by-container #usedby {
@@ -234,17 +272,21 @@ h2.secondary-headline, h3.trusted-by {
 /* need to know more section css */
 .need-to-know-more-container, .knative-components-container,
 .whats-next-container {
-  background-color: var(--md-primary-fg-color--dark);
-  padding: 2rem 1rem;
+  background-color: white;
+  color: var(--nav-item-color);
   text-align: center;
 }
 
+.need-to-know-more-container {
+  padding: 5em 1em 0em 1em;
+}
+
 .need-to-know-more-container h1, .whats-next-container h1 {
-  color: white;
+  color: var(--md-primary-fg-color--dark);
   font-size: 2em;
 }
 
-.need-to-know-more-container .md-button {
+/* .need-to-know-more-container .md-button {
   margin: 1em 0;
   color: white;
   border-radius: 0.5rem;
@@ -254,7 +296,7 @@ h2.secondary-headline, h3.trusted-by {
   font-size: large;
   padding: 0.525em 1em;
   min-width: fit-content;
-}
+} */
 
 @media screen and (max-width: 768px) {
   .need-to-know-more-container {
@@ -302,10 +344,20 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 /* why serverless container css */
+.serverless-outer {
+  background-color: #fff;
+}
+
+.why-serverless-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .why-serverless-container, .trying-it-all-container {
+  margin-top: -2px;
   background-color: white;
   color: var(--md-primary-fg-color--light);
-  padding: 2em 1em;
+  padding: 8em 1em;
   text-align: center;
 }
 
@@ -332,6 +384,29 @@ h2.secondary-headline, h3.trusted-by {
   font-size: 1rem;
 }
 
+.serverless-content-block {
+  flex: 1;
+  justify-content: space-between;
+}
+
+.serverless-feature-block {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 40px;
+}
+
+.card {
+  width: 400px;
+  min-width: 40%;
+  max-width: 100%;
+  height: 200px;
+  background-color: #F3F3F3;
+  border-radius: 30px;
+  padding: 0px 20px;
+}
+
 .img-table {
   margin: 1rem auto -1rem;
 }
@@ -354,9 +429,9 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 .img-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
+  display: flex;
+  justify-content: end;
+  margin-top: 15px;
 }
 
 .reason-img img {
@@ -385,6 +460,10 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 @media screen and (max-width: 768px) {
+  .why-serverless-container {
+    flex-direction: column;
+  }
+
   .why-serverless-container h1 {
     font-size: 1.5em;
   }
@@ -412,6 +491,10 @@ h2.secondary-headline, h3.trusted-by {
 }
 
 @media screen and (max-width: 480px) {
+  .why-serverless-container {
+    flex-direction: column;
+  }
+
   .why-serverless-container h1 {
     font-size: 1.2em;
   }
@@ -437,7 +520,7 @@ h2.secondary-headline, h3.trusted-by {
 
 /* knative components container css */
 .knative-components-container h1 {
-  color: white;
+  color: var(--md-primary-fg-color--dark);
 }
 
 .knative-components-container .text-table .normal-text {
@@ -468,53 +551,13 @@ h2.secondary-headline, h3.trusted-by {
   justify-content: center;
 }
 
-.knative-components-container-mobile , .text-upper-right , .text-lower-left , .svg-diagram{
-  display: none;
-}
-
 @media only screen and (max-width: 425px){
-
-  .knative-components-container-mobile , .text-upper-right , .text-lower-left , .svg-diagram{
-    display: block;
-  }
-
-  .text-table {
-    display: none;
-  }
-  
-  .components-img {
-    display: none;
-  }
 
 .knative-components-container-mobile {
   position: relative;
   width: 80%;
   max-width: 1200px;
   padding: 20px;
-}
-
-.text-upper-right {
-  position: absolute;
-  top: 20px;
-  right: -75px;
-  width: 180px;
-  font-size: 12px;
-}
-
-.text-lower-left {
-  position: absolute;
-  bottom: 50px;
-  width: 165px;
-  left: -10px;
-  font-size: 12px;
-}
-
-.svg-diagram img {
-  width: 120%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 }
 
@@ -606,11 +649,22 @@ position: relative;
   justify-content: center;
   color: black;
   display: flex;
-  background-color: var(--md-primary-fg-color);
+  background-color: white;
   padding: 1rem;
   cursor: pointer;
   flex-wrap: wrap;
   padding-bottom: 0;
+  padding-top: 4rem;
+}
+
+.kelsey-testimonial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 30px;
+  margin-top: 2rem;
 }
 
 .md-typeset>h1:first-of-type {
@@ -637,7 +691,7 @@ position: relative;
 }
 
 .case-studies-container .cases-table .col {
-  background-color: white;
+  background-color: var(--md-primary-fg-color);
   padding: 1.5rem;
   margin: 1rem 0.5rem;
   border-radius: 0.7rem;
@@ -678,12 +732,6 @@ position: relative;
   font-weight: 600;
   line-height: 1.2;
   font-size: .95rem;
-}
-
-.case-studies-container hr {
-  border-bottom: 2px solid black;
-  display: flow-root;
-  margin: .4em 5em -4px 2em;
 }
 
 /* Responsive Styles */
@@ -755,6 +803,10 @@ position: relative;
   .case-studies-container .normal-text {
     padding: 0 1em;
   }
+
+  .kelsey-testimonial {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 375px){
@@ -813,6 +865,10 @@ position: relative;
   display: flex;
   justify-content: center;
   gap: 50px;
+}
+
+.md-typeset .md-button.black {
+  color: black;
 }
 
 .md-typeset .md-button.white {
