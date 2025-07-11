@@ -1,3 +1,12 @@
+---
+audience: contributor
+components:
+  - eventing
+  - functions
+  - serving
+function: community
+---
+
 # Contribute to Knative
 
 This is the starting point for becoming a contributor - improving code, improving docs, giving talks, etc.

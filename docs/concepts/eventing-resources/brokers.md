@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # Brokers
 
 --8<-- "about-brokers.md"

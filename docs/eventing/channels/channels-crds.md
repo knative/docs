@@ -1,3 +1,9 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
 <!--
 This is a generated file and should not be changed manually. All changes should follow the
 procedure:

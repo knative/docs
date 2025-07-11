@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # AWS S3 Sink
 
 The `IntegrationSink` supports the Amazon Web Services (AWS) S3 service, through its `aws.s3` property.

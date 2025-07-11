@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: reference
+---
+
 # Targets
 
 Configuring a target provide the Autoscaler with a value that it tries to maintain for the configured metric for a revision.

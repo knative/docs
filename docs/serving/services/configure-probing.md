@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Configuring Probing
 
 ## General understanding of Knative Probing

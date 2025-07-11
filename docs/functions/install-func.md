@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: how-to
+---
+
 # Installing Knative Functions
 
 --8<-- "install-functions-intro.md"

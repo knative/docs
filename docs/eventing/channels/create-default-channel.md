@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Creating a Channel using cluster or namespace defaults
 
 Developers can create Channels of any supported implementation type by creating an instance of a

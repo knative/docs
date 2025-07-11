@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Debugging application issues
 
 If you have deployed an application but are having issues, you can use the following steps to troubleshoot the application.

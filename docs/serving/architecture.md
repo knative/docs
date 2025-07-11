@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # Knative Serving Architecture
 
 Knative Serving consists of several components forming the backbone of the Serverless Platform.

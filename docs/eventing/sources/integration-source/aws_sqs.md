@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # AWS Simple Queue Service Source
 
 The `IntegrationSource` supports the Amazon Web Services (AWS) Simple Queue Service (SQS) service, through its `aws.sqs` property.

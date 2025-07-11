@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Knative Eventing Authorization
 
 **Tracking issue**: [#7256](https://github.com/knative/eventing/issues/7256)

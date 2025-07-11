@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Configure Channels for Apache Kafka
 
 !!! note

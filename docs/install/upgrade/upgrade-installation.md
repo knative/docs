@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Upgrading with kubectl
 
 If you installed Knative using YAML, you can use the `kubectl apply` command in

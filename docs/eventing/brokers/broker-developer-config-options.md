@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Developer configuration options
 
 ## Broker configuration 

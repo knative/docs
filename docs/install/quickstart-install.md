@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: tutorial
+---
+
 # Install Knative using quickstart
 
 Following this quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.

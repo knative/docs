@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # Sequence
 
 Sequence CRD provides a way to define an in-order list of functions that will be

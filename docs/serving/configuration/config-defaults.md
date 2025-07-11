@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: reference
+---
+
 # Configuring the Defaults ConfigMap
 
 The `config-defaults` ConfigMap, known as the Defaults ConfigMap, contains settings that determine how Knative sets default values for resources.

@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+  - eventing
+function: how-to
+---
+
 # Knative Security and Disclosure Information
 
 This page describes Knative security and disclosure information.

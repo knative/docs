@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Using the Knative sample repository
 
 The Knative project provides a [sample repository](https://github.com/knative-extensions/sample-source) that contains a template for a basic event source controller and a receive adapter.

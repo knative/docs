@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+function: how-to
+---
+
 # Sequence wired to another Sequence
 
 We are going to create the following logical configuration. We create a

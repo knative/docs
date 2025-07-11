@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # Using extensions enabled by QPOptions
 
 QPOptions is a Queue Proxy feature that enables extending Queue Proxy with additional Go packages. For example, the [security-guard](https://knative.dev/security-guard#section-readme) repository extends Queue Proxy by adding runtime security features to protect user services.

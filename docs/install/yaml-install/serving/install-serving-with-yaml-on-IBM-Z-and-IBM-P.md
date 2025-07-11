@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Install a networking layer on IBM Z and IBM Power platforms
 
 This additional step is required for installing the Kourier networking layer on IBM Z and IBM Power platforms.

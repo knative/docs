@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - eventing
+  - functions
+  - serving
+function: explanation
+---
+
 # CLI tools
 
 The following CLI tools are supported for use with Knative.

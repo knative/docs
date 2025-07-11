@@ -1,3 +1,11 @@
+---
+audience: administrator
+# And audience: developer for accessing traces
+components:
+  - eventing
+function: how-to
+---
+
 # Accessing CloudEvent traces
 
 Depending on the request tracing tool that you have installed on your Knative

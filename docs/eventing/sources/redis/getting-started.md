@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Creating a RedisStreamSource
 
 ![version](https://img.shields.io/badge/API_Version-v1alpha1-red?style=flat-square)

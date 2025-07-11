@@ -1,3 +1,11 @@
+---
+audience: developer
+# And audience: administrator for install
+components:
+  - eventing
+function: explanation
+---
+
 # Creating a RabbitMQ Broker
 
 This topic describes how to create a RabbitMQ Broker.

@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Checking your Knative version
 
 To check the version of your Knative installation, use one of the following commands,

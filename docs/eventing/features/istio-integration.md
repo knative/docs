@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Eventing integration with Istio service mesh
 
 **Flag name**: `istio`

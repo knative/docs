@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Sender Identity for Knative Eventing
 
 **Flag name**: `authentication-oidc`

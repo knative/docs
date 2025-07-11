@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: reference
+---
+
 # About YAML-based installation
 
 You can install the Serving component, Eventing component, or both on your cluster

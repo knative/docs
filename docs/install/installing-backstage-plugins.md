@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Installing Knative Backstage Plugins
 
 Knative community is planning to provide a set of Backstage plugins for Knative and their respective backends.

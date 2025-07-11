@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Publish an event source to your cluster
 
 1. Start a minikube cluster:

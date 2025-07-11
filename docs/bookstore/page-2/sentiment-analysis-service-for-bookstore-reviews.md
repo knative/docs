@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+function: tutorial
+---
+
 # Sentiment Analysis Service for Bookstore Reviews
 
 ![Image1](images/image1.png)

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Creating a PingSource object
 
 ![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # AWS Simple Queue Service Sink
 
 The `IntegrationSink` supports the Amazon Web Services (AWS) Simple Queue Service (SQS) service, through its `aws.sqs` property.

@@ -1,3 +1,11 @@
+---
+audience: developer
+# And audience: administrator for install
+components:
+  - eventing
+function: how-to
+---
+
 # Creating a RabbitMQSource
 
 ![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)

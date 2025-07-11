@@ -1,3 +1,9 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
 {{ "" }}
 
 {{- /* This will be interpreted given a yamlChannels object. */ -}}

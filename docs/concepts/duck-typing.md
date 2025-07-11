@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+function: explanation
+---
+
 # Duck typing
 
 Knative enables [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) of its components by using [duck typing](https://en.wikipedia.org/wiki/Duck_typing).
