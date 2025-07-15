@@ -87,27 +87,27 @@
     <!-- Top Nav -->
     <ul class="md-tabs__list">
       <li class="md-tabs__item">
-        <a href="" class="md-tabs__link">
+        <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" class="md-tabs__link">
           Home
         </a>
       </li>
       <li class="md-tabs__item">
-        <a href="/docs" class="md-tabs__link">
+        <a href="/docs/concepts/" class="md-tabs__link">
           Read Docs
         </a>
       </li>
       <li class="md-tabs__item">
-        <a href="/about" class="md-tabs__link">
+        <a href="/about/testimonials/" class="md-tabs__link">
           About
         </a>
       </li>
       <li class="md-tabs__item">
-        <a href="/blog" class="md-tabs__link">
+        <a href="/blog/" class="md-tabs__link">
           Blog
         </a>
       </li>
       <li class="md-tabs__item">
-        <a href="/community" class="md-tabs__link">
+        <a href="/docs/community/" class="md-tabs__link">
           Community
         </a>
       </li>
