@@ -665,6 +665,8 @@ position: relative;
   background-color: var(--md-primary-fg-color);
   border-radius: 30px;
   margin-top: 2rem;
+  margin-right: 50px;
+  margin-left: 50px;
 }
 
 .md-typeset>h1:first-of-type {
