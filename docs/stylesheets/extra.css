@@ -68,6 +68,11 @@
   --md-text-font: 'Satoshi';
 }
 
+header > nav > ul > li {
+  color: black;
+  font-weight: bold;
+}
+
 .md-clipboard {
   color: var(--md-primary-fg-color--dark);
 }
@@ -168,37 +173,6 @@ a.md-header__button.md-logo img {
 
 .md-source__icon+.md-source__repository {
   font-weight: bold;
-}
-
-.md-tabs__list li:nth-last-child(3) {
-  margin-left: auto;
-}
-
-.md-tabs__list li:nth-last-child(1),
-.md-tabs__list li:nth-last-child(2),
-.md-tabs__list li:nth-last-child(3) {
-  background-color: var(--md-primary-fg-color--dark);
-  color: white;
-  padding: 0 2em;
-}
-.md-tabs__list li:nth-last-child(3){
-border-radius: 0.7rem 0 0 0 ;
-}
-.md-tabs__list li:nth-last-child(1){
-  border-radius:0 0.7rem 0 0 ;
-  }
-
-
-.md-tabs__list li:nth-last-child(1) a,
-.md-tabs__list li:nth-last-child(2) a,
-.md-tabs__list li:nth-last-child(3) a {
-  opacity: 1;
-}
-
-.md-tabs__list li:nth-last-child(1) a:hover,
-.md-tabs__list li:nth-last-child(2) a:hover,
-.md-tabs__list li:nth-last-child(3) a:hover {
-  color: var(--md-accent-fg-color);
 }
 
 .md-nav__title .md-nav__button.md-logo img,
