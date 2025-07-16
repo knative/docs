@@ -8,6 +8,10 @@
   margin-top: -50px;
 }
 
+.mr-30 {
+  margin-right: 30px;
+}
+
 .md-main__inner {
   margin: 0;
   max-width: 100%;
