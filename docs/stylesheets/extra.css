@@ -73,6 +73,10 @@ header > nav > ul > li {
   font-weight: bold;
 }
 
+.mr-30 {
+  margin-right: 30px;
+}
+
 .md-clipboard {
   color: var(--md-primary-fg-color--dark);
 }
