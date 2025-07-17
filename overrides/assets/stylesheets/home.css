@@ -12,6 +12,10 @@
   margin-right: 30px;
 }
 
+.font-bold {
+  font-weight: bold;
+}
+
 .md-main__inner {
   margin: 0;
   max-width: 100%;
@@ -72,7 +76,7 @@
   margin-top: 2rem;
 }
 
-.why-serverless-container, .need-to-know-more-container,
+.need-to-know-more-container,
 .trying-it-all-container,
 .whats-next-container, .whats-next-container,
 .case-studies-container, .cncf-notice-container {
@@ -362,7 +366,6 @@ h2.secondary-headline {
   background-color: white;
   color: var(--md-primary-fg-color--light);
   padding: 8em 1em;
-  text-align: center;
 }
 
 .why-serverless-container h1, .trying-it-all-container h1,
@@ -671,6 +674,8 @@ position: relative;
   margin-top: 2rem;
   margin-right: 50px;
   margin-left: 50px;
+  text-align: left;
+  gap: 30px;
 }
 
 .md-typeset>h1:first-of-type {
