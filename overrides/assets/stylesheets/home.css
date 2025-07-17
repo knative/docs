@@ -877,6 +877,10 @@ position: relative;
   color: black;
 }
 
+.md-typeset .md-button.black:hover {
+  color: white;
+}
+
 .md-typeset .md-button.white {
   color: white;
 }
