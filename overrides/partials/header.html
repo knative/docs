@@ -142,8 +142,8 @@
     {% endif %}
   </nav>
 
-  <!-- Navigation tabs (sticky) -->
-  {% if page.toc %}
+  <!-- Sub Navigation tabs (sticky) -->
+  {% if not page.is_homepage %}
     {% if "navigation.tabs.sticky" in features %}
         {% if "navigation.tabs" in features %}
         {% include "partials/tabs.html" %}
