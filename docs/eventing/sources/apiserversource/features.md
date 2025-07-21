@@ -16,7 +16,7 @@ metadata:
   name: <apiserversource>
   namespace: <namespace>
   annotations:
-    features.knative.dev/apiserversource-skip-permissions: "true"
+    features.knative.dev/apiserversource-skip-permissions-check: "true"
 spec:
   ...
 ```
