@@ -15,6 +15,7 @@ An ApiServerSource definition supports the following fields:
 | [`apiVersion`][kubernetes-overview] | Specifies the API version, for example `sources.knative.dev/v1`. | Required |
 | [`kind`][kubernetes-overview] | Identifies this resource object as an ApiServerSource object. | Required |
 | [`metadata`][kubernetes-overview] | Specifies metadata that uniquely identifies the ApiServerSource object. For example, a `name`. | Required |
+| [`metadata.annotations`][#features] | Specifies metadata that enables certain features. See the related section. | Optional |
 | [`spec`][kubernetes-overview] | Specifies the configuration information for this ApiServerSource object. | Required |
 | [`spec.resources`](#resources-parameter) | The resources that the source tracks so it can send related lifecycle events from the Kubernetes ApiServer. Includes an optional label selector to help filter. | Required |
 | `spec.mode` | EventMode controls the format of the event. Set to `Reference` to send a `dataref` event type for the resource being watched. Only a reference to the resource is included in the event payload. Set to `Resource` to have the full resource lifecycle event in the payload. Defaults to `Reference`. | Optional |
@@ -313,6 +314,35 @@ spec:
 
 ```json
 { "extensions": { "extra": "this is an extra attribute", "additional": "42" } }
+```
+
+### Features
+
+The ApiServerSource uses annotations to the enable certain features.
+
+#### Skipping Permissions Check
+
+This feature disables the RBAC permissions check done before creating
+the Deployment. By default three SubjectAccessReview requests are
+created per combination of resource and namespace tracked.
+
+When enabled, this feature removes the creation of SubjectAccessReview,
+reducing the pressure to the Kubernetes API when a large number of
+resources or namespaces are tracked by the ApiServerSource. In this
+case the ApiServerSource Deployment does not retry watch connections.
+
+To enable it, set it to `"true"`:
+
+```yaml
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+  name: <apiserversource>
+  namespace: <namespace>
+  annotations:
+    features.knative.dev/apiserversource-skip-permissions-check: "true"
+spec:
+  ...
 ```
 
 [kubernetes-overview]:
