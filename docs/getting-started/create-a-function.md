@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: tutorial
+---
+
 # Creating a function
 
 --8<-- "create-a-function.md"

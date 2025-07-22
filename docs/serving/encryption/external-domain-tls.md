@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configure external domain encryption
 
 Knative allows to use either use custom TLS certificates or to use automatically generated TLS certificates 

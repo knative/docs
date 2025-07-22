@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Sources, Brokers, and Triggers
 
 As part of the `kn quickstart` install, an InMemoryChannel-backed Broker is installed on your kind cluster.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: how-to
+---
+
 # Language packs
 
 Language packs can be used to extend Knative Functions to support additional runtimes, function signatures, operating systems, and installed tooling for functions. Language Packs are distributed through Git repositories or as a directory on a disc.

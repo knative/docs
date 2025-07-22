@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+# And function: how-to
+---
+
 # Event registry
 
 Knative Eventing defines an `EventType` object to make it easier for consumers to discover the types of events they can consume from Brokers or Channels.

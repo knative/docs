@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Configuring custom domains
 
 {{ feature(beta="0.24") }}

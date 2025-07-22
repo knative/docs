@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how to
+---
+
 # Creating an ApiServerSource object
 
 ![version](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)

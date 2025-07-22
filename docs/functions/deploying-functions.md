@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: how-to
+---
+
 # Deploying functions
 
 --8<-- "deploy-func-intro.md"

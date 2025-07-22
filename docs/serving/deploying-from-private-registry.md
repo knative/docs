@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Deploying images from a private container registry
 
 You can configure your Knative cluster to deploy images from a private registry across multiple Services and Revisions. To do this, you must create a list of Kubernetes secrets ([`imagePullSecrets`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#pod-v1-core)) by using your registry credentials. You must then add those secrets to the default [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) for all Services, or the Revision template for a single Service.

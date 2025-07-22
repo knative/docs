@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Installing Security-Guard
 
 Here we show how to install Security-Guard in Knative. Security-Guard is an enhancement to knative-Serving and needs to be installed after the Knative-Serving is successfully installed.

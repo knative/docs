@@ -1,3 +1,11 @@
+---
+audience: developer
+# And audience: administrator for install
+components:
+  - eventing
+function: how-to
+---
+
 # Knative Source for Apache Kafka
 
 ![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)

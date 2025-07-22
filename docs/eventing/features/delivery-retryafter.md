@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # DeliverySpec.RetryAfterMax field
 
 **Flag name**: `delivery-retryafter`

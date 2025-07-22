@@ -1,3 +1,9 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
 
 # Security-Guard example alerts
 

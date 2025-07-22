@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+function: tutorial
+---
+
 # Using a Knative Service as a source
 
 In this tutorial, you will use the [CloudEvents Player](https://github.com/ruromero/cloudevents-player){target=blank} app to showcase the core concepts of Knative Eventing. By the end of this tutorial, you should have an architecture that looks like this:

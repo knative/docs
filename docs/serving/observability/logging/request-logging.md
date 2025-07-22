@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configuring Request Log Settings
 
 The request logging for knative serving is managed through the `config-observability` ConfigMap in `knative-serving` namespace. The request logs will be printed by the queue-proxy sidecar.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # DeliverySpec.Timeout field
 
 **Flag name**: `delivery-timeout`

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Using Triggers and sinks
 
 In the last topic we used the CloudEvents Player as an event source to send events to the Broker.

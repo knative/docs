@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+function: how-to
+---
+
 # Using Sequence with Broker and Trigger
 
 We are going to create the following logical configuration. We create a

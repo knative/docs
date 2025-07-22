@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # Knative Eventing - The Event-driven application platform for Kubernetes
 
 --8<-- "about-eventing.md"

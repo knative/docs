@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Configure resource requests and limits
 
 You can configure resource limits and requests, specifically for CPU and memory, for individual Knative services.

@@ -1,3 +1,11 @@
+---
+audience: developer
+# And audience: administrator for install
+components:
+  - eventing
+function: how-to
+---
+
 # Channel based Broker
 
 The Channel based Broker (`MTChannelBasedBroker`) uses [Channels](../../../channels) for event routing. It is shipped by default with Knative Eventing.

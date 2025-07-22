@@ -1,3 +1,10 @@
+---
+audience: contributor
+components:
+  - serving
+function: how-to
+---
+
 # Extending Queue Proxy image with QPOptions
 
 Knative service pods include two containers:

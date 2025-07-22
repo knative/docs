@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Volume Support for Knative services
 
 You can provide data storage for Knative Services by configuring different volumes types.

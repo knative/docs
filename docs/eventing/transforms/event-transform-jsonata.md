@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Event Transformations for JSON with JSONata
 
 ## Introduction to JSONata

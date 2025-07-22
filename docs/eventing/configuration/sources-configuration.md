@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Configure event source defaults
 
 This topic describes how to configure defaults for Knative event sources. You can configure event sources depending on how they generate events.

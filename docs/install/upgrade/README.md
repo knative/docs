@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Upgrading Knative
 
 Knative supports upgrading by a single [minor](https://semver.org/) version number. For example, if you have v0.21.0 installed, you must upgrade to v0.22.0 before attempting to upgrade to v0.23.0.

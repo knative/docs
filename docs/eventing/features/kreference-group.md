@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # KReference.Group field
 
 **Flag name**: `kreference-group`

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: tutorial
+---
+
 # Deploying a Knative Service
 
 In this tutorial, you will deploy a "Hello world" Knative Service that accepts the environment variable `TARGET` and prints `Hello ${TARGET}!`.

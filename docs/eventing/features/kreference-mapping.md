@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Knative reference mapping
 
 **Flag name**: `kreference-mapping`

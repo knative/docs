@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: how-to
+---
+
 # Building functions
 
 --8<-- "build-func-intro.md"

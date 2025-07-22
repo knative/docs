@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: tutorial
+---
+
 # Traffic splitting
 
 Traffic splitting is useful for [blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html){target=blank_} and [canary deployments](https://martinfowler.com/bliki/CanaryRelease.html){target=blank_}.

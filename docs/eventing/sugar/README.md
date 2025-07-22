@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Knative Eventing Sugar Controller
 
 Knative Eventing Sugar Controller will react to configured labels

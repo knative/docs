@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # HTTP Request Flows
 
 While [the overview](/docs/serving) describes the logical components and

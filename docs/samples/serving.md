@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: reference
+---
+
 # Knative Serving code samples
 
 Use the following code samples to help you understand the various Knative

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # EventType auto creation for improved discoverability
 
 **Flag name**: `eventtype-auto-create`

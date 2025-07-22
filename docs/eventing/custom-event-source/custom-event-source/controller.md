@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Create a controller
 
 You can use the sample repository [`update-codegen.sh`](https://github.com/knative-extensions/sample-source/blob/main/hack/update-codegen.sh) script to generate and inject the required components (the `clientset`, `cache`, `informers`, and `listers`) into your custom controller.

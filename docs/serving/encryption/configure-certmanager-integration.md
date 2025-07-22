@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configuring Knative cert-manager integration
 
 Knative Serving relies on a bridging component to use cert-manager for automated certificate provisioning. 

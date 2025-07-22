@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # Parallel
 
 Parallel CRD provides a way to easily define a list of branches, each receiving

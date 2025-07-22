@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Troubleshooting a Knative Installation
 
 This page describes how you can troubleshoot a Knative installation. Please try these instructions before filing a bug report.

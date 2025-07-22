@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Timer Source
 
 The `IntegrationSource` supports the _Timer Kamelet_ for producing periodic messages with a custom payload, through its `timer` property.

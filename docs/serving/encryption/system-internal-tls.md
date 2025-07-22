@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configure Knative system-internal encryption
 
 {% include "encryption-notice.md" %}

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Traffic management
 
 You can manage traffic routing to different Revisions of a Knative Service by modifying the `traffic` spec of the Service resource.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # AWS Simple Notification Service Sink
 
 The `IntegrationSink` supports the Amazon Web Services (AWS) Simple Notification Service (SNS) service, through its `aws.sns` property.

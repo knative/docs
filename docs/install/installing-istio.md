@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Installing Istio for Knative
 
 This guide walks you through manually installing and customizing Istio for use

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # AWS DynamoDB Streams
 
 The `IntegrationSource` supports the Amazon Web Services (AWS) DynamoDB Streams service, through its `aws.ddbStreams` property.

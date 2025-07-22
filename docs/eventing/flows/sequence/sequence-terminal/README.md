@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+function: how-to
+---
+
 # Sequence terminal
 
 We are going to create the following logical configuration. We create a
