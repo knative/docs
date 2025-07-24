@@ -73,12 +73,9 @@
   color: black !important;
 }
 
-.headline-section p {
-  margin-top: 2rem;
-}
-
 .call-to-action {
   display: inline-flex;
+  margin-top: 2rem;
   gap: 5px;
 }
 
@@ -277,6 +274,7 @@ h2.secondary-headline {
 
   .call-to-action {
     flex-direction: column-reverse;
+    margin-top: 1rem;
   }
 
   .home-container h1 {
