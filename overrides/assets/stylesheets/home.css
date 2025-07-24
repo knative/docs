@@ -815,7 +815,7 @@ position: relative;
 
 @media (max-width: 600px) {
   .case-studies-container {
-    padding-top: 2rem;
+    padding-top: 2.5rem;
   }
 
   .case-studies-container .cases-table a {
