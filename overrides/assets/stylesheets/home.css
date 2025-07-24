@@ -520,6 +520,7 @@ h2.secondary-headline {
 @media screen and (max-width: 480px) {
   .why-serverless-container {
     flex-direction: column;
+    padding: 3em 1em;
   }
 
   .why-serverless-container h1 {
@@ -813,6 +814,10 @@ position: relative;
 }
 
 @media (max-width: 600px) {
+  .case-studies-container {
+    padding-top: 2rem;
+  }
+
   .case-studies-container .cases-table a {
     flex: 1 1 90vw;
     min-width: 650px;
@@ -942,7 +947,7 @@ position: relative;
   }
 
   .knative-components-container {
-    padding: 3em 1em;
+    padding: 2em 1em;
   }
 
   .knative-components-container .components-content .components-img {
