@@ -77,6 +77,11 @@
   margin-top: 2rem;
 }
 
+.call-to-action {
+  display: inline-flex;
+  gap: 5px;
+}
+
 .need-to-know-more-container,
 .trying-it-all-container,
 .whats-next-container, .whats-next-container,
@@ -262,6 +267,18 @@ h2.secondary-headline {
 }
 
 @media screen and (max-width: 480px) {
+  .main-headline {
+    font-size: 1.5rem !important;
+  }
+
+  .h2.secondary-headline {
+    font-size: 0.7rem;
+  }
+
+  .call-to-action {
+    flex-direction: column-reverse;
+  }
+
   .home-container h1 {
     font-size: 1.5em;
     padding: 0.5rem;
