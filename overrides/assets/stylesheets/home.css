@@ -411,7 +411,7 @@ h2.secondary-headline {
   max-width: 100%;
   height: 200px;
   background-color: #F3F3F3;
-  border-radius: 30px;
+  border-radius: 0.7rem;
   padding: 0px 20px;
 }
 
@@ -675,7 +675,7 @@ position: relative;
   align-items: center;
   padding: 3rem 1rem;
   background-color: var(--md-primary-fg-color);
-  border-radius: 30px;
+  border-radius: 0.7rem;
   margin-top: 2rem;
   margin-right: 50px;
   margin-left: 50px;
