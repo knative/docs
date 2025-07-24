@@ -935,6 +935,12 @@ position: relative;
   }
 }
 
+@media (max-width: 600px) {
+  .knative-components-container .components-content .components-img {
+    padding: 10px 5px;
+  }
+}
+
 /* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
 footer nav.md-footer__inner {
   padding: 0;
