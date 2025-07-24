@@ -658,13 +658,10 @@ position: relative;
 /* case studies container css */
 .case-studies-container {
   text-align: center;
-  justify-content: center;
   color: black;
-  display: flex;
   background-color: white;
   padding: 1rem;
   cursor: pointer;
-  flex-wrap: wrap;
   padding-bottom: 0;
   padding-top: 4rem;
 }
@@ -822,6 +819,9 @@ position: relative;
 
   .kelsey-testimonial {
     flex-direction: column;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
   }
 }
 
