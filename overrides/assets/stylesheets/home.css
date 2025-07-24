@@ -468,6 +468,10 @@ h2.secondary-headline {
 }
 
 @media screen and (max-width: 768px) {
+  .serverless-content-block {
+    text-align: center;
+  }
+
   .why-serverless-container {
     flex-direction: column;
   }
