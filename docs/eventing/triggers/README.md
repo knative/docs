@@ -88,10 +88,10 @@ with `-extensions.
     spec:
       broker: default
       filters:
-        exact:
-          type: dev.knative.foo.bar
-        suffix:
-          myextension: -value
+        - exact:
+            type: dev.knative.foo.bar
+          suffix:
+            myextension: -value
       subscriber:
         ref:
           apiVersion: serving.knative.dev/v1
