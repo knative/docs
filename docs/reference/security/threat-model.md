@@ -1,18 +1,21 @@
 # Knative Threat Model
 
+Knative extends Kubernetes by offering developer-focused serverless abstractions
+to users. As such, the Knative threat model require protecting Knative specific
+services as well as the underlying Kubernetes infrastructure.
+
 Knative aims to support application teams from a single organization working in
-shared clusters under the
-[Namespace-as-a-Service multi-tenancy model](https://kubernetes.io/blog/2021/04/15/three-tenancy-models-for-kubernetes/),
-as well as the Cluster-as-a-Service model. The Namespace-as-a-Service model
-means that multiple teams (tenants) may each be operating Knative custom
-resources within a common cluster, sharing control plane and node resources.
-Each team (users in a namespace) should be isolated from affecting the
-configuration, availability, or integrity of applications in other namespaces.
-Knative is not specifically designed for use in a multi-cluster or cross-cluster
-scenario; there may be additional risks when attempting to span a _single_
-Knative installation across multiple clusters, but this threat model should be
-sufficient if each cluster in such a scenario is running an _independent_
-installation of Knative components (either some or all components).
+resources within a common cluster.  These teams share control plane, cluster,
+and node resources managed by Knative as well as the control plane, cluster, and
+node resources managed by Kubernetes.  This is described as the
+[Namespace-as-a-Service multi-tenancy model](https://kubernetes.io/blog/2021/04/15/three-tenancy-models-for-kubernetes/).
+Each team (users in a namespace) should be isolated and protected from
+intentional or unintentional misconduct by other teams operating in a different
+namespace, as well as protected from any third-party operating outside the
+cluster.  Knative users and users of other Kubernetes resources in same cluster
+should not be able to affect the configuration, availability, or integrity of
+applications in namespaces outside their control, including obtaining or
+deleting private information from another namespace.
 
 Knative builds on the capabilities of the Kubernetes cluster, and exposes both
 Kubernetes control-plane resources (CRDs managed by Kubernetes RBAC) as well as
@@ -28,8 +31,6 @@ component, and routing-level protections **may** be used to protect Knative user
 workloads. Cases where additional care is required in security workloads (for
 example, Knative Serving routes and Kubernetes NetworkPolicy) will be called
 out.
-
-
 
 ## Terminology
 
@@ -50,11 +51,41 @@ out.
 | Actor                                              | Description                                                                                                                                                     |
 | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | External Attackers                                 | Unauthenticated attackers with no access to the Kubernetes control plane, and access only to **public** network resources on the cluster.                       |
-| Malicious or Compromised Developer (internal user) | Authenticated users with the ability to create pods and other resources in a specific namespace (roughly, Kubernetes `edit`), but without cluster-level access. |
+| Malicious or Compromised Developer (internal user) | Authenticated users with the ability to create pods and other resources in a specific namespace (roughly, Kubernetes `edit`), but without cluster-level access.  Note that "malicious or compromised developer" could also include accidental effects, such as running a delete command against a namespace the user does not have access to. |
 | External Event Source Admins                       | Users with the ability to configure and manage an external resource which is used as an event source, but without direct authenticated access to the cluster.   |
 | Malicious Container / Supply Chain Attack          | Users with the ability to tamper with a container image which is run by an internal user, but without authenticated access to the cluster.                      |
 
 ## Component Architecture
+
+### Common
+
+#### Control Plane
+
+Knative runs a number of [controllers](https://kubernetes.io/docs/concepts/architecture/controller/)
+which implement the management of Knative custom resources.  Some of these
+controllers provide operating instructions for other software (such as
+provisioning a message queue), while others directly create resources in
+system or user namespaces, such as Kubernetes deployments, pods, or services.
+Controllers whose intended purpose is to deploy user-controlled or configured
+pods to system- or user-selected namespaces within the cluster (for example,
+Knative Revisions, or job event sinks) will necessarily have permissions which
+would allow an attacker to cross namespace boundaries and potentially
+compromise system components.  These controllers must be designed to avoid
+operations which would allow a user to create user-controlled pods outside the
+user's namespace.
+
+#### Webhooks
+
+For several custom resources, Knative implements
+[validating and mutating admission control webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).
+These webhooks allow Knative to prevent the creation of invalid resources, and
+provide immediate feedback to users about the nature of the invalid resource.
+While validating and mutating webhooks provide better user experience than
+delayed reporting of user errors, their ability to block or change requests to
+the Kubernetes apiserver potentially allows them to affect resources in all
+namespaces.  An attacker with control of admission webhooks for a configmap
+could add or remove configuration clauses each time the webhook is stored, for
+example.
 
 ### Eventing
 
@@ -171,7 +202,7 @@ application which causes it to perform undesired behavior. Examples might
 include a request to delete application data, or an event (such as a financial
 transaction) to be recorded which was not authorized.
 
-**Components**: sources, broker sinks, triggers, gateways, activator
+**Components**: controllers, webhooks, sources, broker sinks, triggers, gateways, activator
 
 **Attackers**: external, developer, event source
 
@@ -179,9 +210,11 @@ transaction) to be recorded which was not authorized.
 
 In this scenario, attackers prevent _all_ execution of the application -- unlike
 the "block requests" scenario where attackers may be able to selectively block
-requests, this attack prevents all execution of the application.
+requests, this attack prevents all execution of the application.  This includes
+both volume-based resource exhaustion or denial of service attacks as well as
+logical attacks such as blocking access to the container registry.
 
-**Components**: broker sinks, triggers, gateways, activator, autoscaler
+**Components**: controllers, webhooks, broker sinks, triggers, gateways, activator, autoscaler
 
 **Attackers**: external, developer, event source
 
@@ -197,7 +230,7 @@ responsibility of the application author. An example of a valid attack through
 the Knative surface area would be using shared node networking to trigger code
 execution in the queue-proxy container.
 
-**Components**: event sources, broker sinks, triggers, queue-proxy
+**Components**: controllers, webhooks, event sources, broker sinks, triggers, queue-proxy
 
 **Attackers**: external, developer, event source, supply chain
 
@@ -211,7 +244,7 @@ namespaces will likely grant the attacker the ability to perform many of the
 previous attacks, as the system namespaces are generally considered trusted in
 their implementation of security features.
 
-**Components**: event sources, broker sinks, triggers, gateways, activator,
+**Components**: controllers, webhooks, event sources, broker sinks, triggers, gateways, activator,
 autoscaler
 
 **Attackers**: external, developer, event source, supply chain
@@ -219,14 +252,15 @@ autoscaler
 ## Security Boundaries
 
 Knative relies on underlying cluster security (control plane, container, and
-network isolation) for much of the application security. In particular, it is
+network isolation) for many application security functions. In particular, it is
 assumed that user namespaces are configured to prevent escalation from the
 application container to the node-level software (kubelet, linux host, etc)
 using Kubernetes security mechanisms. Similarly, network isolation between
 Kubernetes namespaces should generally use NetworkPolicy where possible to limit
 the ability of one application to talk to backing services belonging to another
 application. Additionally, it is assumed that Kubernetes authentication and RBAC
-is properly configured to
+is properly configured to block cross-namespace or clusterwide resource requests
+from ordinary users or service accounts.
 
 ### Network Isolation and Layer 7 Routing
 
@@ -376,3 +410,11 @@ apply to certain components of the project. As Knative Functions largely
 executes at build time on the application developer's infrastructure, it
 needs a different threat model more focused on supply chain security threats
 (which it largely inherits from [CNCF Buildpacks](https://buildpacks.io/)).
+
+## Multi-Cluster usage
+
+Knative is not specifically designed for use in a multi-cluster or cross-cluster
+scenario; there may be additional risks when attempting to span a _single_
+Knative installation across multiple clusters, but this threat model should be
+sufficient if each cluster in such a scenario is running an _independent_
+installation of Knative components (either some or all components).
