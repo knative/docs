@@ -380,7 +380,7 @@ h2.secondary-headline {
 .why-serverless-container, .trying-it-all-container {
   margin-top: -2px;
   background-color: white;
-  color: var(--md-primary-fg-color--light);
+  color: var(--nav-item-color);
   padding: 8em 1em;
 }
 
@@ -674,7 +674,7 @@ position: relative;
 /* case studies container css */
 .case-studies-container {
   text-align: center;
-  color: black;
+  color: var(--nav-item-color);;
   background-color: white;
   padding: 1rem;
   cursor: pointer;
