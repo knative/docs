@@ -210,7 +210,7 @@ a.md-header__button.md-logo img {
   color: gray;
 }
 
-#md-tabs__list li:nth-last-child(3), #md-tabs__list li:nth-last-child(2), #md-tabs__list li:nth-last-child(1) {
+#sub-nav li:nth-last-child(3), #sub-nav li:nth-last-child(2), #sub-nav li:nth-last-child(1) {
   display: none;
 }
 
