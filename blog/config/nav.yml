@@ -15,6 +15,7 @@ nav:
     - Blog:
       - index.md
       - Releases:
+          - releases/announcing-knative-v1-19-release.md
           - releases/announcing-knative-v1-18-release.md
           - releases/announcing-knative-v1-17-release.md
           - releases/announcing-knative-v1-16-release.md
@@ -123,7 +124,7 @@ nav:
           - events/install-fest-04-2022.md
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
-    #####################################################          
+    #####################################################
     # keep the same order as on the main page
     - About: /docs/about/testimonials/
     - Community: /docs/community/

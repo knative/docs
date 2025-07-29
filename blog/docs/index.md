@@ -32,10 +32,10 @@ Monitoring Virtual Machines with Knative Eventing
 
 [Read more :octicons-arrow-right-24:](articles/kubevirt_meets_eventing.md){ .md-button }
 
-### Announcing Knative v1.18 Release
-Details on the 1.18 release of the Knative project.
+### Announcing Knative v1.19 Release
+Details on the 1.19 release of the Knative project.
 
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-18-release.md){ .md-button }
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-19-release.md){ .md-button }
 
 ### Building Stateful applications with Knative and Restate
 ![Building Stateful applications with Knative and Restate](./articles/images/Building-stateful-serverless-apps-with-knative-and-restate.png)
