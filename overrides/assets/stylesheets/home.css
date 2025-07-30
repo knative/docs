@@ -571,6 +571,19 @@ footer nav.md-footer__inner {
 
 /* Media queries (Responsive Styles) */
 
+/* hero */
+@media screen and (max-width: 334px) {
+  .hero {
+    height: 30rem;
+  }
+}
+
+@media screen and (max-width: 254px) {
+  .hero {
+    height: 35rem;
+  }
+}
+
 /* sidebar styles  */
 @media screen and (min-width: 60em) {
   .md-sidebar--secondary {
