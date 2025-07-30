@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Configuring Services custom ingress class
 
 When a Knative Service is created an ingress class (`ingress-class`) is automatically assigned to it, based on the value in the `config-network` ConfigMap located inside the `knative-serving` namespace. This ConfigMap is part of Knative Serving installation. If the ingress class is not specified, this defaults to `istio.ingress.networking.knative.dev`. Once configured the `ingress-class` is used for all Knative Services unless it is overridden with an `ingress-class` annotation.

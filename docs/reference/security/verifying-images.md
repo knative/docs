@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Verifying Knative Images
 
 Knative publishes SBOMs and SLSA provenance documents for each image in the

@@ -1,3 +1,11 @@
+---
+audience: administrator
+# And audience: developer for accessing traces
+components:
+  - eventing
+function: how-to
+---
+
 # Accessing CloudEvent traces
 
 Traces give us the big picture of how events traverse through the system and applications.

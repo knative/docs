@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configuring the ingress gateway
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within

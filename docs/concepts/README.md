@@ -7,7 +7,7 @@ components:
 function: explanation
 ---
 
-# Knative Technical Overview
+# Concepts
 
 This comprehensive overview explains what Knative is, what problems it solves, and how its components work together. Whether you're evaluating Knative for your use case or need background information to understand the rest of the documentation, this section provides the conceptual foundation you need.
 

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: explanation
+---
+
 # Knative Functions overview
 
 --8<-- "about-functions.md"

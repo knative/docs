@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Eventing Features
 
 To keep Knative innovative, the maintainers of this project have developed an

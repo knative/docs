@@ -1,6 +1,10 @@
 ---
 hide:
   - toc
+audience: buyer
+components:
+  - serving
+function: marketing
 ---
 <h1 style="color:#0071c7;font-size: 3em;">Outfit7 Case Study</h1>
 <table style="border: 0;">

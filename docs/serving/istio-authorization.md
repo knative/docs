@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Enabling requests to Knative services when additional authorization policies are enabled
 
 Knative Serving system pods, such as the activator and autoscaler components, require access to your deployed Knative services.

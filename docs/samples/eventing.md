@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Knative Eventing code samples
 
 Use the following code samples to help you understand the various use cases for

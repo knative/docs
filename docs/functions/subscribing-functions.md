@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: how-to
+---
+
 # Subscribe functions to CloudEvents
 
 ### Prerequisites

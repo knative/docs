@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Configuring private Services
 
 By default, Services deployed through Knative use the `.svc.cluster.local` domain, meaning

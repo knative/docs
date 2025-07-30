@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # About Revisions
 
 --8<-- "about-revisions.md"

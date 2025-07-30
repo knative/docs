@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Configure Sugar Controller
 
 This topic describes how to configure the Sugar Controller. You can configure the Sugar controller to create a Broker when a Namespace or Trigger is created with configured labels. See [Knative Eventing Sugar Controller](../sugar/README.md) for an example.

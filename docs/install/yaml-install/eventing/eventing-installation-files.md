@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: reference
+---
+
 # Knative Eventing installation files
 
 This guide provides reference information about the core Knative Eventing YAML files, including:

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Converting a Kubernetes Deployment to a Knative Service
 
 This topic shows how to convert a Kubernetes Deployment to a Knative Service.

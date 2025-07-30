@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: reference
+---
+
 # Feature and extension flags
 
 The Knative API is designed to be portable, and abstracts away specific implementation details for user deployments. The intention of the API is to empower users to surface extra features and extensions that are possible within their platform of choice.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: reference
+---
+
 # Configuring concurrency
 
 Concurrency determines the number of simultaneous requests that can be processed by each replica of an application at any given time.

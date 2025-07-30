@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # Knative Serving
 
 --8<-- "about-serving.md"

@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Installing cert-manager for TLS certificates
 
 Knative leverages [cert-manager](https://github.com/jetstack/cert-manager) to request TLS certificates

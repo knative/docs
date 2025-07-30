@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # **Slack sink - Learning Knative Eventing and the Apache Camel K integration**
 
 ![image](images/image2.png)

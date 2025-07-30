@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configure cluster-local domain encryption
 
 {% include "encryption-notice.md" %}

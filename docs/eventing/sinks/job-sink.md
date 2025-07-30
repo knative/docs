@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # JobSink, triggering long-running background jobs when events occurs
 
 Usually event processing combined with a Knative Service is expected to complete in a relative short

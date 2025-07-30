@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
 # Kubernetes services
 
 This guide describes the

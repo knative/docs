@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Custom event sources
 
 If you need to ingress events from an event producer that is not included in Knative, or from a producer that emits events which are not in the CloudEvent format that is used by Knative, you can do this by using one of the following methods:

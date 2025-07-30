@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Log Sink
 
 The `IntegrationSink` supports the _Log Sink Kamelet_ that logs all data that it receives, through its `log` property. This sink useful for debugging purposes.

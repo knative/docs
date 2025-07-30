@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Transport Encryption for Knative Eventing
 
 **Flag name**: `transport-encryption`
