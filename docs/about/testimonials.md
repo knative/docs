@@ -1,3 +1,11 @@
+---
+audience: buyer
+components:
+  - eventing
+  - serving
+function: marketing
+---
+
 <div class="testimonials">
   <h1>Testimonials</h1>
   <h3><b>Enterprise-grade Serverless on your own terms</b></h3>

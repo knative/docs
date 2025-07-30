@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Send Review Comment to Broker
 
 ![Image](images/image25.png)

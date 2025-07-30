@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: tutorial
+---
+
 # Create a receive adapter
 
 As part of the source reconciliation process, you must create and deploy the underlying receive adapter.

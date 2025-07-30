@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Using Triggers
 
 A trigger represents a desire to subscribe to events from a specific broker.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: reference
+---
+
 # Additional autoscaling configuration for Knative Pod Autoscaler
 
 The following settings are specific to the Knative Pod Autoscaler (KPA).

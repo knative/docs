@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: tutorial
+---
+
 # Autoscaling
 
 Knative Serving provides automatic scaling, also known as **autoscaling**. This means that a Knative Service by default scales down to zero running pods when it is not in use.

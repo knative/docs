@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: tutorial
+---
+
 # Security-Guard monitoring quickstart
 
 This tutorial shows how you can use Security-Guard to protect a deployed Knative Service.

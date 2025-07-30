@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: explanation
+---
+
 # Serving Encryption Overview
 
 {% include "encryption-notice.md" %}

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Using a custom TLS certificate for DomainMapping
 
 {{ feature(beta="0.24") }}

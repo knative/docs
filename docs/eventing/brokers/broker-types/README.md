@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Available Broker types
 
 The following broker types are available for use with Knative Eventing.

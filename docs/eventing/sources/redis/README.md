@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: explanation
+---
+
 # About RedisStreamSource
 
 ![stage](https://img.shields.io/badge/Stage-alpha-green?style=flat-square)

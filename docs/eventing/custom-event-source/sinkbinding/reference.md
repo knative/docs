@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # SinkBinding reference
 
 ![API version v1](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)

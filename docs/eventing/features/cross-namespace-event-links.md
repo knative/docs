@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Cross Namespace Event Links
 
 **Flag name**: `cross-namespace-event-links`

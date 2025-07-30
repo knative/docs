@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Tag resolution
 
 Knative Serving resolves image tags to a digest when you create a Revision. This

@@ -1,6 +1,10 @@
 ---
 hide:
   - toc
+audience: buyer
+components:
+  - eventing
+function: marketing
 ---
 <h1 style="color:#0071c7;font-size: 3em;">deepc Case Study</h1>
 <table style="border: 0;">

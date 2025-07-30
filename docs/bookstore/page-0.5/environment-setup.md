@@ -1,3 +1,11 @@
+---
+audience: developer
+components:
+  - eventing
+  - serving
+function: tutorial
+---
+
 # Environment Setup
 
 ![Image](images/image20.png)

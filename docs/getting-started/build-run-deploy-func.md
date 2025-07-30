@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: tutorial
+---
+
 # Building, running, or deploying functions
 
 After you have created a function project, you can build, run, or deploy your function, depending on your use case.

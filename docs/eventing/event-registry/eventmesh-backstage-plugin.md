@@ -1,3 +1,11 @@
+---
+audience: developer
+# And audience: administrator for install
+components:
+  - eventing
+function: how-to
+---
+
 # Knative Event Mesh Backstage Plugin
 
 !!! info

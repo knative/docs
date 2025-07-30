@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Exclude namespaces from the Knative webhook
 
 The Knative webhook examines resources that are created, read, updated, or deleted. This includes system namespaces, which can cause issues during an upgrade if the webhook becomes non-responsive. Cluster administrators may want to disable the Knative webhook on system namespaces to prevent issues during upgrades.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # New trigger filters
 
 **Flag name**: `new-apiserversource-filters`

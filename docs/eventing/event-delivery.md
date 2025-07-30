@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Handling Delivery Failure
 
 You can configure event delivery parameters for Knative Eventing components that are applied in cases where an event fails to be delivered

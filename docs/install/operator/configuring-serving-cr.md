@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - serving
+function: how-to
+---
+
 # Configuring the Knative Serving Operator custom resource
 
 You can modify the KnativeServing CR to configure different options for Knative Serving.

@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+  - eventing
+function: tutorial
+---
+
 # Welcome to the Knative Quickstart tutorial
 
 Following this Quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - functions
+function: how-to
+---
+
 # Invoking functions
 
 You can use the `func invoke` command to send a test request to invoke a

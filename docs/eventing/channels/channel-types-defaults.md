@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Channel types and defaults
 
 Knative uses two types of Channels:

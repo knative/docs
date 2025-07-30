@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Creating a Broker
 
 Once you have installed Knative Eventing and a Broker implementation, you can create an instance of a Broker.

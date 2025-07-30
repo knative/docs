@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: how-to
+---
+
 # Upgrading using the Knative Operator
 
 This topic describes how to upgrade Knative if you installed using the Operator.

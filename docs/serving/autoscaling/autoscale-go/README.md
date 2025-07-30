@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - serving
+function: how-to
+---
+
 # Autoscale Sample App - Go
 
 A demonstration of the autoscaling capabilities of a Knative Serving Revision.

@@ -1,3 +1,11 @@
+---
+audience: developer
+# And audience: administrator for install
+components:
+  - eventing
+function: how-to
+---
+
 # Knative Sink for Apache Kafka
 
 The `KafkaSink` is an Apache Kafka-native [Sink implementation](https://knative.dev/docs/eventing/sinks/) persisting the incoming CloudEvent to a configurable Apache Kafka Topic. This page shows how to install and configure the Knative `KafkaSink`.

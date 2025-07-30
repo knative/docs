@@ -1,3 +1,12 @@
+---
+audience: developer
+components:
+  - functions
+  - serving
+  - eventing
+function: tutorial
+---
+
 # Next Steps
 
 This topic provides a list of resources to help you continue your Knative journey.

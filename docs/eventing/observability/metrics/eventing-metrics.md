@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: reference
+---
+
 # Knative Eventing metrics
 
 Administrators can view metrics for Knative Eventing components.

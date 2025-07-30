@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Configuring Kafka Features
 
 There are many different configuration options for how Knative Eventing and the Knaitve Broker for Apache Kafka interact with the Apache Kafka clusters.

@@ -1,3 +1,11 @@
+---
+audience: administrator
+components:
+  - serving
+  - eventing
+function: reference
+---
+
 # Installing Knative
 
 !!! note

@@ -1,3 +1,10 @@
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
+
 # Configure Channel defaults
 
 Knative Eventing provides a `default-ch-webhook` ConfigMap that contains the configuration settings that govern default Channel creation.

@@ -1,3 +1,10 @@
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
+
 # Subscriptions
 
 After you have created a Channel and a Sink, you can create a Subscription to enable event delivery.
