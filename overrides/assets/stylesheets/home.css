@@ -17,6 +17,10 @@ body {
   font-size: 18px;
 }
 
+.italize {
+  font-style: italic;
+}
+
 .card {
   width: 400px;
   min-width: 40%;
@@ -26,6 +30,12 @@ body {
   border: 1px solid #dadce0;
   border-radius: 0.7rem;
   padding: 0px 20px;
+}
+
+.quote {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #2270ab;
 }
 
 /* Homepage-specific styles */
