@@ -33,9 +33,13 @@ body {
 }
 
 .quote {
-  font-size: 1.2rem;
-  line-height: 1.5;
+  font-size: 1.5rem;
   color: #2270ab;
+}
+
+.quote-author {
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 /* Homepage-specific styles */
@@ -401,16 +405,6 @@ h2.secondary-headline {
 }
 
 /* case studies container css */
-.case-studies-container {
-  text-align: center;
-  color: var(--nav-item-color);
-  background-color: white;
-  padding: 1rem;
-  cursor: pointer;
-  padding-bottom: 0;
-  padding-top: 4rem;
-}
-
 .kelsey-testimonial {
   display: flex;
   justify-content: center;
@@ -421,12 +415,30 @@ h2.secondary-headline {
   margin-top: 2rem;
   margin-right: 50px;
   margin-left: 50px;
-  text-align: left;
   gap: 30px;
+  text-align: start;
+  color: var(--md-primary-fg-color--dark);
+  font-weight: 600;
+  line-height: 1.2;
+  font-size: 0.95rem;
 }
 
 .md-typeset > h1:first-of-type {
   margin: 0;
+}
+
+.case-studies-container {
+  text-align: center;
+  color: var(--nav-item-color);
+  background-color: white;
+  padding: 1rem;
+  padding-bottom: 0;
+  padding-top: 4rem;
+}
+
+.case-studies-container > a:first-of-type {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .case-studies-container .cases-table {
@@ -462,7 +474,7 @@ h2.secondary-headline {
   height: 100%;
 }
 
-.case-studies-container .cases-table .col:hover {
+.case-studies-container .cases-table .col:hover, .kelsey-testimonial:hover {
   border: 2px solid gray;
 }
 
