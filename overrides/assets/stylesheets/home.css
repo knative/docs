@@ -22,14 +22,17 @@ body {
 }
 
 .card {
-  width: 400px;
-  min-width: 40%;
-  max-width: 100%;
-  height: 200px;
   background-color: transparent;
   border: 1px solid #dadce0;
   border-radius: 0.7rem;
   padding: 0px 20px;
+}
+
+.feature {
+  width: 400px;
+  min-width: 40%;
+  max-width: 100%;
+  height: 200px;
 }
 
 .quote {
@@ -394,8 +397,6 @@ div.components-content {
   justify-content: center;
   align-items: center;
   padding: 3rem 1rem;
-  background-color: var(--md-primary-fg-color);
-  border-radius: 0.7rem;
   margin-top: 2rem;
   margin-right: 50px;
   margin-left: 50px;
@@ -445,16 +446,13 @@ div.components-content {
 }
 
 .case-studies-container .cases-table .col {
-  background-color: var(--md-primary-fg-color);
   padding: 1.5rem;
   margin: 1rem 0.5rem;
-  border-radius: 0.7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
   transition: border 0.3s ease-in-out;
-  border: 2px solid transparent;
   height: 100%;
 }
 
