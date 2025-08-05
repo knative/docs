@@ -376,32 +376,16 @@ h2.secondary-headline {
   color: var(--md-primary-fg-color--dark);
 }
 
-.knative-components-container .text-table .normal-text {
-  width: 30%;
-  text-align: start;
-  margin-left: 1%;
-  font-size: 0.8rem;
-  margin-top: -1rem;
-  text-align: center;
-}
-
-.knative-components-container .text-table .normal-text:last-child {
-  padding-left: 2em;
-  margin-left: 32%;
-}
-
 .knative-components-container .components-content .components-img {
   max-width: 80%;
   padding: 2em;
 }
 
-.text-table {
-  display: flex;
-  max-width: 80%;
-  margin: auto;
-  padding: 0 2.5em;
-  align-items: center;
-  justify-content: center;
+div.components-content {
+  border: 1px solid #dadce0;
+  border-radius: 0.7rem;
+  padding: 0px 20px;
+  margin: 0 50px;
 }
 
 /* case studies container css */
@@ -502,52 +486,6 @@ h2.secondary-headline {
   font-weight: 600;
   line-height: 1.2;
   font-size: 0.95rem;
-}
-
-/* whats next container css */
-.whats-next-container .component-flex {
-  display: flex;
-  gap: 2em;
-  padding-top: 1em;
-}
-
-.whats-next-container h1 {
-  margin: 0;
-}
-
-.whats-next-container h2 {
-  color: white;
-  font-size: 1.3rem;
-  margin: 0.6em 0 0;
-  font-weight: bold;
-}
-
-.whats-next-container .normal-text {
-  font-weight: 500;
-  font-size: 0.8em;
-  padding-top: 0;
-  color: white;
-}
-
-.whats-next-container .twemoji {
-  color: white;
-  justify-content: center;
-}
-
-.whats-next-container .twemoji,
-.whats-next-container .twemoji svg {
-  height: 3.5em;
-  width: 3.5em;
-}
-
-.whats-next-container .twemoji svg:hover {
-  color: #7cc57c;
-}
-
-.whats-next-logo {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
 }
 
 .md-typeset .md-button.black {
@@ -890,20 +828,6 @@ footer nav.md-footer__inner {
 }
 
 @media only screen and (max-width: 800px) {
-  .component-flex,
-  .case-studies-container .cases-table {
-    flex-wrap: wrap;
-  }
-
-  .knative-components-container .text-table .normal-text {
-    width: 80%;
-    text-align: center;
-  }
-
-  .knative-components-container .text-table .normal-text:first-child {
-    margin-left: -15%;
-  }
-
   .knative-components-container {
     padding: 2em 1em;
   }
