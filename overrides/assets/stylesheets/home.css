@@ -491,6 +491,10 @@ div.components-content {
   font-size: 0.95rem;
 }
 
+#pnc-testimonial {
+  padding: 1rem 1.5rem;
+}
+
 .md-typeset .md-button.black {
   color: black;
 }
