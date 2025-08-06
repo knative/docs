@@ -462,7 +462,7 @@ div.components-content {
 }
 
 .case-studies-container .cases-table .col:hover, .kelsey-testimonial:hover {
-  border: 2px solid gray;
+  border: 1.2px solid gray;
 }
 
 .case-studies-container .logo {
