@@ -370,7 +370,7 @@ h2.secondary-headline {
 .reason-text h2 {
   font-size: 24px;
   color: black;
-  margin: 4px;
+  margin: 4px 0px;
   font-weight: bold;
 }
 
