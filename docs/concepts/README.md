@@ -19,19 +19,19 @@ Knative is a Kubernetes-based platform that provides a complete set of middlewar
 
 Knative addresses several key challenges in modern application development and deployment:
 
-**Application Deployment Complexity**: Traditional Kubernetes requires deep knowledge of pods, services, deployments, and ingress resources. Knative provides simpler abstractions that handle these details automatically.
+**Application Deployment Complexity**: Traditional Kubernetes requires deep knowledge of pods, services, deployments, and ingress resources. These constructs provide a lot of flexibility and complexity that most applications don't need. Knative provides simpler abstractions that handle these details automatically.
 
 **Serverless Operations**: Manual scaling, cold starts, and traffic routing are complex to implement. Knative provides automatic scaling from zero to thousands of instances, intelligent traffic routing, and efficient resource utilization.
 
-**Event-Driven Architecture**: Building reliable event-driven systems requires complex infrastructure for event ingestion, routing, and delivery. Knative provides standardized event processing capabilities using CloudEvents.
+**Event-Driven Architecture**: Building reliable event-driven systems requires complex infrastructure for event ingestion, routing, and delivery. Building event routing and delivery into your application limits your choice of event delivery and architecture; Knative provides standardized event processing capabilities across multiple event implementations using CloudEvents for delivery and Kubernetes for configuration.
 
-**Developer Experience**: Moving from code to running applications involves multiple steps and tools. Knative Functions provide a streamlined developer experience for building and deploying stateless functions.
+**Developer Experience**: Moving from code to running applications involves multiple steps and tools. Knative Functions provide a streamlined and standardized developer experience for building and deploying stateless functions as standard containers. Build and test locally without Kubernetes, and avoid managing build details like Dockerfiles and Kubernetes resources until you need them.
 
 **Platform Lock-in**: Cloud-specific serverless solutions create vendor lock-in. Knative runs on any Kubernetes cluster, providing portability across cloud providers and on-premises environments.
 
 ## Background Knowledge
 
-To effectively work with Knative, you should have:
+While you didn't need any specific programming experience to get started with Knative, you'll pick up the following concepts along the way.  Knative will manage a lot of these in the background, so you can dive in deep when you're ready to learn.
 
 - **Basic Kubernetes knowledge**: Understanding of pods, services, and deployments
 - **Container concepts**: How to build and manage container images
@@ -46,7 +46,7 @@ For event-driven features, familiarity with:
 
 Knative consists of three main components that work together to provide a complete serverless platform:
 
-![Knative Components](https://github.com/knative/community/raw/main/docs/images/knative-audience.svg)
+<!-- TODO: Add Knative components architecture diagram -->
 
 **Knative Serving**: An HTTP-triggered autoscaling container runtime that manages the complete lifecycle of stateless HTTP services, including deployment, routing, and automatic scaling.
 
@@ -71,6 +71,8 @@ These components can be used independently or together, allowing you to adopt Kn
 **Configuration Management**: Clean separation between application code and configuration, following twelve-factor app principles.
 
 ### Request Flow in Serving
+
+<!-- TODO: Add request flow diagram -->
 
 When a request is made to a Knative Service:
 
@@ -99,6 +101,8 @@ For detailed information, see the [request flow documentation](../serving/reques
 **Channels**: Lower-level primitives for point-to-point event delivery between producers and consumers.
 
 ### Event Flow in Eventing
+
+<!-- TODO: Add event flow diagram -->
 
 A typical event flow involves:
 
@@ -141,7 +145,11 @@ Functions support multiple programming languages through language packs:
 - **Java**: Using Spring Boot and Quarkus
 - **TypeScript**: Full TypeScript support with Node.js
 
+You can also build your own language packs to customize the output container to your own specifications.
+
 ### Function Deployment and Lifecycle
+
+<!-- TODO: Add function lifecycle diagram -->
 
 1. **Development**: Write your function using language-specific templates
 2. **Building**: The `func` CLI creates an optimized container image
@@ -164,6 +172,8 @@ While each Knative component can be used independently, they're designed to work
 ### Integration with Kubernetes Ecosystem
 
 Knative integrates with standard Kubernetes resources and third-party tools:
+
+**Kubernetes-native resources**: Serving and Eventing are implemented as Kubernetes custom resources, meaning that you can use the same policy and IAM tools you use for Kubernetes.
 
 **Networking**: Works with Istio, Envoy, and other service mesh technologies for advanced traffic management and security.
 
