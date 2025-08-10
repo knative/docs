@@ -84,6 +84,28 @@ When a request is made to a Knative Service:
 
 For detailed information, see the [request flow documentation](../serving/request-flow.md).
 
+### GPU Resources and LLM Inference
+
+Knative Serving can leverage Kubernetes pod capabilities to access specialized hardware resources like GPUs, making it an excellent platform for AI/ML inference workloads:
+
+**GPU Resource Access**: Since Knative Services are implemented as Kubernetes pods, you can request GPU resources using standard Kubernetes resource specifications. This enables running inference models that require GPU acceleration while benefiting from Knative's automatic scaling and traffic management.
+
+**LLM Inference Support**: Knative Serving provides an ideal foundation for Large Language Model (LLM) inference services, offering:
+
+- **Automatic scaling** from zero to multiple GPU-enabled pods based on request demand
+- **Traffic splitting** for A/B testing different model versions or configurations  
+- **Resource efficiency** by scaling down expensive GPU resources when not in use
+- **Standard HTTP interfaces** for model serving and inference endpoints
+
+**KServe Integration**: For production LLM deployments, consider using [KServe](https://kserve.github.io/website/latest/), a Kubernetes-native model serving platform built on Knative Serving. KServe provides:
+
+- Standardized inference protocols and multi-framework support
+- Advanced features like model ensembling, explainability, and drift detection
+- Optimized serving runtimes for popular ML frameworks (TensorFlow, PyTorch, ONNX, etc.)
+- Built-in support for autoscaling GPU workloads and batching requests
+
+Whether using Knative Serving directly for custom inference services or through KServe for standardized model serving, you get the benefits of Kubernetes-native resource management combined with serverless operational characteristics.
+
 ## Knative Eventing
 
 --8<-- "about-eventing.md"
