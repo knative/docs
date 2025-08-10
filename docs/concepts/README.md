@@ -46,7 +46,7 @@ For event-driven features, familiarity with:
 
 Knative consists of three main components that work together to provide a complete serverless platform:
 
-<!-- TODO: Add Knative components architecture diagram -->
+![Knative High-Level Architecture: Functions, Serving, and Eventing.  Functions creates containers and defines event triggers, Serving runs containers, and Eventing routes events based on triggers.](../images/home-images/knative_flowchart_graphic.svg){draggable=false}
 
 **Knative Serving**: An HTTP-triggered autoscaling container runtime that manages the complete lifecycle of stateless HTTP services, including deployment, routing, and automatic scaling.
 
@@ -72,7 +72,7 @@ These components can be used independently or together, allowing you to adopt Kn
 
 ### Request Flow in Serving
 
-<!-- TODO: Add request flow diagram -->
+![Knative Serving data flow: requests arrive at an HTTP router, then travel to either the activator or a pod with a queue-proxy and the user application. The Knative autoscaler collects metrics from the activator and the queue-proxy to determine how many pods to run.](../serving/images/request-flow.png){draggable=false}
 
 When a request is made to a Knative Service:
 
@@ -102,7 +102,7 @@ For detailed information, see the [request flow documentation](../serving/reques
 
 ### Event Flow in Eventing
 
-<!-- TODO: Add event flow diagram -->
+![Two event sources named 1 and 2 deliver events to a broker. One trigger attached to the broker delivers type 1 events to one sink (endpoint), and another trigger selects type 2 events to deliver to a different sink.](https://user-images.githubusercontent.com/16281246/116248768-1fe56080-a73a-11eb-9a85-8bdccb82d16c.png){draggable=false}
 
 A typical event flow involves:
 
@@ -129,11 +129,13 @@ Knative Functions provide a simplified programming model that abstracts away inf
 
 **Function Signature**: Functions follow a simple signature pattern, receiving CloudEvents or HTTP requests and optionally returning responses.
 
-**Automatic Containerization**: The `func` CLI automatically builds container images from your function code without requiring Dockerfile expertise.
-
 **Built-in Templates**: Language-specific templates provide starting points for common function patterns and integrate with popular frameworks.
 
 **Local Development**: Functions can be built, run, and tested locally before deployment to Kubernetes.
+
+**Automatic Containerization**: The `func` CLI automatically builds container images from your function code without requiring Dockerfile expertise.
+
+**Easy Deployment**: Function containers can be run anywhere you can run an HTTP application. `func` can also deploy your container to Knative Serving, where you can manage it with the `kn` CLI or standard Kubernetes YAML.
 
 ### Supported Languages and Runtimes
 
@@ -173,67 +175,31 @@ While each Knative component can be used independently, they're designed to work
 
 Knative integrates with standard Kubernetes resources and third-party tools:
 
-**Kubernetes-native resources**: Serving and Eventing are implemented as Kubernetes custom resources, meaning that you can use the same policy and IAM tools you use for Kubernetes.
+**Builds on Kubernetes**: Serving creates Pods (so you can use GPUs, service accounts, and other Kubernetes features), and Eventing can easily delivery events to Kubernetes services as well as Serving functions.
 
-**Networking**: Works with Istio, Envoy, and other service mesh technologies for advanced traffic management and security.
+**Networking**: Integrates with cert-manager for certificate management. Optionally works with Istio, Envoy, and other service mesh technologies for advanced traffic management and security.
 
-**Monitoring**: Integrates with Prometheus, Grafana, and other observability tools for metrics and monitoring.
+**Monitoring**: Integrates with Prometheus, Grafana, Jaeger, and other observability tools for metrics and monitoring.
 
 **CI/CD**: Compatible with GitOps workflows, Tekton Pipelines, and other continuous deployment tools.
-
-**Storage**: Functions and services can integrate with persistent volumes, databases, and external storage systems.
-
-## Essential Concepts
-
-### Authentication and Authorization
-
-Knative supports multiple authentication and authorization patterns:
-
-**Service-to-Service Authentication**: Leverage Kubernetes ServiceAccounts and RBAC for secure inter-service communication.
-
-**External Authentication**: Integrate with OAuth, OIDC, and other identity providers through ingress gateways or service mesh configurations.
-
-**Network Policies**: Use Kubernetes NetworkPolicies to control traffic flow between services and external systems.
-
-### Networking and Connectivity
-
-**Custom Domains**: Configure custom domain names for your services with automatic TLS certificate management.
-
-**Private Services**: Deploy cluster-internal services that are not exposed to external traffic.
-
-**Cross-Cluster Communication**: Connect services across multiple Kubernetes clusters using networking solutions like Submariner or Istio multi-cluster.
-
-### Configuration and Secrets Management
-
-**Environment Variables**: Configure services using Kubernetes ConfigMaps and environment variables.
-
-**Secret Management**: Securely manage sensitive data using Kubernetes Secrets or external secret management systems.
-
-**Feature Flags**: Use configuration to enable/disable features without code changes.
-
-### Observability and Monitoring
-
-**Metrics Collection**: Automatic collection of HTTP metrics, custom metrics, and resource utilization data.
-
-**Distributed Tracing**: Integration with Jaeger, Zipkin, and other tracing systems for request flow analysis.
-
-**Logging**: Structured logging with integration to centralized logging systems like Fluentd and Elasticsearch.
 
 ## Use Cases and When to Choose Knative
 
 ### Ideal Use Cases
 
-**Microservices Architecture**: Build and deploy loosely coupled services with automatic scaling and service discovery.
+**API Development**: Rapidly develop and deploy REST APIs with built-in scaling and traffic management.
 
 **Event-Driven Applications**: Process events from various sources with reliable delivery and error handling.
 
-**Batch Processing**: Run periodic or triggered batch jobs with automatic resource provisioning.
+**Inference Services**: Use Knative directly, or integrate with [KServe](https://kserve.github.io/website/latest/) to easily manage AI inference models.
 
-**API Development**: Rapidly develop and deploy REST APIs with built-in scaling and traffic management.
+**Microservices Architecture**: Build and deploy loosely coupled services with automatic scaling and service discovery.
 
 **Integration Workflows**: Connect legacy systems and SaaS applications using event-driven patterns.
 
 **Edge Computing**: Deploy lightweight functions and services closer to users or data sources.
+
+**Development Environments**: Automatically scale down development environments when not in use; start them up again when requests arrive.
 
 ### Evaluation Criteria
 
@@ -248,10 +214,8 @@ Choose Knative when you need:
 
 Consider alternatives when:
 
-- You need extremely low cold-start latency (sub-10ms)
+- You need extremely low cold-start latency (sub-100ms)
 - Your workloads require persistent state or long-running processes
-- You're working in environments without Kubernetes expertise
-- Your use case requires specialized serverless features only available in cloud-specific solutions
 
 ## Next Steps
 
