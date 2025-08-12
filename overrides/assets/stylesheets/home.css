@@ -822,6 +822,12 @@ footer nav.md-footer__inner {
   }
 }
 
+@media (max-width: 630px) {
+  [dir=ltr] .md-tabs__list {
+    margin-left: 7.2rem;
+  }
+}
+
 @media (max-width: 375px) {
   .case-studies-container .cases-table a {
     flex: 1 1 90vw;
