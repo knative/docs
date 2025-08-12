@@ -30,7 +30,11 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - attr_list
   - meta
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.details
@@ -54,10 +58,11 @@ plugins:
     separator: '[\/\s\-\.]+'
   exclude:
     glob:
-      # Exclude files that contain hugo specific shortcodes
-      # (either the include shortcode or not-converted-yet tabs).
+      # Exclude files that are built into other parts of the documentation
       - snippets/*
       - smoketest.md
+  # This could be used to generate nav from the directory structure.
+  # It is currently disabled by the `nav` field in `config/nav.yml`.
   awesome-pages:
     filename: ".index"
     collapse_single_pages: true
