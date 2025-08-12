@@ -68,6 +68,8 @@ These components can be used independently or together, allowing you to adopt Kn
 
 **Networking**: Automatic ingress configuration with support for custom domains, TLS termination, and integration with service mesh technologies.
 
+**Kubernetes Native**: Knative builds on the Kubernetes Pod abstraction, making it easy to access functionality like service accounts, accelerator access, and container sandboxing.
+
 **Configuration Management**: Clean separation between application code and configuration, following twelve-factor app principles.
 
 ### Request Flow in Serving
