@@ -554,6 +554,13 @@ a.md-header__button.md-logo img {
   margin: auto 30px auto 30px;
 }
 }
+
+@media (max-width: 630px) {
+  [dir=ltr] .md-tabs__list {
+    margin-left: 7.2rem;
+  }
+}
+
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active>.md-nav__link {
     color: var(--nav-item-color);
