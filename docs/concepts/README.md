@@ -199,7 +199,7 @@ While each Knative component can be used independently, they're designed to work
 
 Knative integrates with standard Kubernetes resources and third-party tools:
 
-**Builds on Kubernetes**: Serving creates Pods (so you can use GPUs, service accounts, and other Kubernetes features), and Eventing can easily delivery events to Kubernetes services as well as Serving functions.
+**Builds on Kubernetes**: Serving creates Pods (so you can use GPUs, service accounts, and other Kubernetes features), and Eventing can easily deliver events to Kubernetes services as well as Serving functions.
 
 **Networking**: Integrates with cert-manager for certificate management. Optionally works with Istio, Envoy, and other service mesh technologies for advanced traffic management and security.
 
