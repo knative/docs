@@ -2,332 +2,395 @@
 <link rel="stylesheet" href="{{ 'assets/stylesheets/home.css' | url }}" />
 
 <div class="md-container home-page">
-  <section class="home-container">
-    <div class="md-grid md-typeset">
-      <div class="mdx-hero">
+  <section>
+    <div class="hero">
+      <div class="md-grid md-typeset">
         <div class="headline-section">
           <h1 class="main-headline">
-            Knative is an Open-Source Enterprise-level<br>
-            solution to build Serverless and Event Driven Applications
+            Providing the building blocks for <br />
+            creating modern, cloud-based applications
           </h1>
-          <p style="display: block">
-            <a href="{{ 'getting-started/tutorial' | url }}" class="md-button white md-button--primary">Try the tutorial</a>
-            <a href="{{ 'install/' | url }}" class="md-button white">Install Knative on your cluster</a>
+          <h2 class="secondary-headline">
+            The easiest way to build and run serverless workloads on Kubernetes.
+            Built by the community, for modern cloud-native teams
+          </h2>
+          <p class="call-to-action">
+            <a
+              href="{{ 'getting-started/tutorial' | url }}"
+              class="md-button black md-button--primary"
+              >Try the tutorial</a
+            >
+            <a
+              href="{{ 'install/' | url }}"
+              class="md-button white md-button--secondary"
+              >Install Knative on your cluster</a
+            >
           </p>
-          <div class="trusted-by-container">
-            <h3 class="trusted-by">Trusted by</h3>
-            <div class="scroller">
-              <div class="scroller__inner">
-                  <!-- First row of adopters will be populated dynamically -->
-              </div>
-            </div>
-            <div class="scroller" data-direction="right">
-              <div class="scroller__inner">
-                  <!-- Second row of adopters will be populated dynamically -->
-              </div>
-            </div>
-          </div>
         </div>
+      </div>
+    </div>
+    <div class="trusted-by-container">
+      <h3 class="trusted-by">Trusted by</h3>
+      <div class="scroller">
+        <div class="scroller__inner"></div>
+      </div>
+      <div class="scroller" data-direction="right">
+        <div class="scroller__inner"></div>
       </div>
     </div>
   </section>
 
   <section class="need-to-know-more-container">
     <div class="md-grid md-typeset">
-      <h1>Need to know more?</h1>
+      <h1>What is Knative?</h1>
       <p class="normal-text">
-        Learn about how Knative works with Kubernetes and the underlying ideas behind containers <br class="br">
+        Learn about how Knative works with Kubernetes and the underlying ideas
+        behind containers <br class="br" />
         and serverless infrastructure.
       </p>
-      <a href="{{ 'getting-started/' | url }}" class="md-button call-to-action">
-        Explore Knative
-      </a>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/69OfdJ5BIzs?si=3rM6m3LfA-OMCmCO"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
     </div>
   </section>
-
-  <section class="why-serverless-container">
-    <div class="md-grid md-typeset">
-      <h1>Why serverless containers?</h1>
-      <p class="normal-text-head">
-        Serverless refers to running back-end programs and processes in the cloud. Serverless works on an as-used basis,
-        meaning that companies only pay for what they use. Knative is a platform-agnostic
-        solution for running serverless deployments.
-      </p>
-      <div class="img-table">
-        <div class="img-row">
-          <div class="img-col">
-            <div class="reason-img">
-              <div class="img-wrapper">
-                <img src="images/home-images/blue_simple_abstractions_icon.svg"
-                  onmouseover="this.src='images/home-images/dkblue_simple_abstractions_icon.svg'"
-                  onmouseout="this.src='images/home-images/blue_simple_abstractions_icon.svg'" alt="" draggable="false">
-              </div>
-            </div>
-            <div class="reason-text">
-              <h2>Simpler Abstractions</h2>
-              <p class="normal-text">
-                Simplify your YAML with our custom CRDs
-              </p>
-            </div>
+  <section class="serverless-outer">
+    <div class="why-serverless-container md-grid">
+      <div class="serverless-content-block">
+        <h1>Why serverless containers?</h1>
+        <p>
+          Express scalable application architecture without distractions.
+          Serverless gives you a vocabulary for expressing web and event-based
+          applications without getting mired in the details of scaling and
+          infrastructure libraries. Behind the scenes, Knative optimizes your
+          deployment to match demand.
+        </p>
+      </div>
+      <div class="serverless-feature-block">
+        <div class="card feature">
+          <div class="img-wrapper">
+            <img
+              src="images/home-images/blue_functions_icon.svg"
+              alt=""
+              draggable="false"
+            />
           </div>
-          <div class="img-col">
-            <div class="reason-img">
-              <div class="img-wrapper">
-                <img src="images/home-images/blue_autoscaling_icon.svg"
-                  onmouseover="this.src='images/home-images/dkblue_autoscaling_icon.svg'"
-                  onmouseout="this.src='images/home-images/blue_autoscaling_icon.svg'" alt="" draggable="false">
-              </div>
-            </div>
-            <div class="reason-text">
-              <h2>Autoscaling</h2>
-              <p class="normal-text">
-                Scale down to zero and up from zero
-              </p>
-            </div>
-          </div>
-          <div class="img-col">
-            <div class="reason-img">
-              <div class="img-wrapper">
-                <img src="images/home-images/blue_progressive_rollouts_icon.svg"
-                  onmouseover="this.src='images/home-images/dkblue_progressive_rollouts_icon.svg'"
-                  onmouseout="this.src='images/home-images/blue_progressive_rollouts_icon.svg'" alt="" draggable="false">
-              </div>
-            </div>
-            <div class="reason-text">
-              <h2>Progressive Rollouts</h2>
-              <p class="normal-text">
-                Choose your rollout strategy depending on your needs
-              </p>
-            </div>
+          <div class="reason-text">
+            <h2>Functions</h2>
+            <p class="normal-text">
+              Application template patterns you can version and update
+            </p>
           </div>
         </div>
-        <div class="img-row">
-          <div class="img-col">
-            <div class="reason-img">
-              <div class="img-wrapper">
-                <img src="images/home-images/blue_event_intergrations_icon.svg"
-                  onmouseover="this.src='images/home-images/dkblue_event_intergrations_icon.svg'"
-                  onmouseout="this.src='images/home-images/blue_event_intergrations_icon.svg'" alt="" draggable="false">
-              </div>
-            </div>
-            <div class="reason-text">
-              <h2>Event Integrations</h2>
-              <p class="normal-text">
-                Handle events from many sources
-              </p>
-            </div>
+        <div class="card feature">
+          <div class="img-wrapper">
+            <img
+              src="images/home-images/blue_http_first_icon.svg"
+              alt=""
+              draggable="false"
+            />
           </div>
-          <div class="img-col">
-            <div class="reason-img">
-              <div class="img-wrapper">
-                <img src="images/home-images/blue_handle_events_icon.svg"
-                  onmouseover="this.src='images/home-images/dkblue_handle_events_icon.svg'"
-                  onmouseout="this.src='images/home-images/blue_handle_events_icon.svg'" alt="" draggable="false">
-              </div>
-            </div>
-            <div class="reason-text">
-              <h2>Handle Events</h2>
-              <p class="normal-text">
-                Trigger handlers from the event broker
-              </p>
-            </div>
+          <div class="reason-text">
+            <h2>HTTP-first</h2>
+            <p class="normal-text">Serve and scale HTTP/2, gRPC, and MCP</p>
           </div>
-          <div class="img-col">
-            <div class="reason-img">
-              <div class="img-wrapper">
-                <img src="images/home-images/blue_plugable_icon.svg"
-                  onmouseover="this.src='images/home-images/dkblue_plugable_icon.svg'"
-                  onmouseout="this.src='images/home-images/blue_plugable_icon.svg'" alt="" draggable="false">
-              </div>
-            </div>
-            <div class="reason-text">
-              <h2>Plugable</h2>
-              <p class="normal-text">
-                Kubernetes native to be integrated and extended
-              </p>
-            </div>
+        </div>
+        <div class="card feature">
+          <div class="img-wrapper">
+            <img
+              src="images/home-images/blue_event_based_icon.svg"
+              alt=""
+              draggable="false"
+            />
+          </div>
+          <div class="reason-text">
+            <h2>Event-based</h2>
+            <p class="normal-text">
+              Route and handle asynchronous events just like HTTP
+            </p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="img-wrapper">
+            <img
+              src="images/home-images/blue_event_intergrations_icon.svg"
+              alt=""
+              draggable="false"
+            />
+          </div>
+          <div class="reason-text">
+            <h2>Event Integrations</h2>
+            <p class="normal-text">
+              Extract events from existing services or define your own
+            </p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="img-wrapper">
+            <img
+              src="images/home-images/blue_kubernetes_integrated_icon.svg"
+              alt=""
+              draggable="false"
+            />
+          </div>
+          <div class="reason-text">
+            <h2>Kubernetes-integrated</h2>
+            <p class="normal-text">Trigger handlers from the event broker</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="img-wrapper">
+            <img
+              src="images/home-images/blue_plugable_icon.svg"
+              alt=""
+              draggable="false"
+            />
+          </div>
+          <div class="reason-text">
+            <h2>Plugable</h2>
+            <p class="normal-text">
+              Kubernetes native to be integrated and extended
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
+
   <section class="knative-components-container">
     <div class="md-grid md-typeset">
       <h1>Knative Components</h1>
       <p class="normal-text">
-        Knative has two main components that empower teams working with Kubernetes. Serving and<br>
+        Knative has two main components that empower teams working with
+        Kubernetes. Serving and<br />
         Eventing work together to automate and manage tasks and applications.
       </p>
       <div class="components-content">
-        <img class="components-img" src="images/home-images/knative_flowchart_graphic.svg" alt="" draggable="false" />
-        <div class="text-table">
-          <p class="normal-text">
-            Run serverless containers in Kubernetes with ease. Knative takes care of the details of networking,
-            autoscaling (even to zero), and revision tracking. Teams can focus on core logic using any programming
-            language.
-          </p>
-          <p class="normal-text">
-            Universal subscription, delivery and management of events. Build modern apps by attaching compute to a data
-            stream with declarative event connectivity and developer friendly object models.
-          </p>
-        </div>
+        <img
+          class="components-img"
+          src="images/home-images/knative_flowchart_graphic.svg"
+          alt=""
+          draggable="false"
+        />
       </div>
-    </div>
-    <div class="knative-components-container-mobile">
-      <div class="text-upper-right">
-          <p>Run serverless containers in Kubernetes with ease. Knative takes care of the details of networking, autoscaling (even to zero), and revision tracking.</p>
-      </div>
-      <div class="svg-diagram">
-        <img class="components-img" src="images/home-images/knative_flowchart_graphic_mobile.svg" alt="" draggable="false" />
-      </div>
-      <div class="text-lower-left">
-          <p>Universal subscription, delivery and management of events. Build modern apps by attaching compute to a data stream with declarative event connectivity and developer-friendly object models.</p>
-      </div>
-  </div>
-  </section>
-
-  <section class="trying-it-all-container">
-    <div class="md-grid md-typeset">
-      <h1>Trying it all together</h1>
-      <div class="img-table">
-        <div class="img-row">
-          <div class="img-col">
-            <div class="reason-img">
-              <img src="images/home-images/dev_focus_code_icon.svg" alt="" draggable="false">
-            </div>
-            <div class="reason-text">
-              <h2>Developers focus on code</h2>
-              <p class="normal-text">
-                From container to URL<br>
-                with less YAML config
-              </p>
-            </div>
-          </div>
-
-          <div class="img-col">
-            <div class="reason-img">
-              <img src="images/home-images/dkblue_scale_icon.svg" alt="" draggable="false">
-            </div>
-            <div class="reason-text">
-              <h2>Scale up and down</h2>
-              <p class="normal-text">
-                Scale down to zero<br>
-                based on traffic patterns
-              </p>
-            </div>
-          </div>
-
-          <div class="img-col">
-            <div class="reason-img">
-              <img src="images/home-images/cloud_agnostic_icon.svg" alt="" draggable="false">
-            </div>
-            <div class="reason-text">
-              <h2>Cloud agnostic</h2>
-              <p class="normal-text">
-                Control traffic shifting<br>
-                for smoother rollouts
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a href="{{ 'install/' | url }}" class="md-button call-to-action">
-        Deploy Knative Today
-      </a>
     </div>
   </section>
 
   <section class="case-studies-container">
     <div class="md-grid md-typeset">
-      <h1>
-        <a href="{{ 'about/case-studies/' | url }}">Case Studies</a>
-      </h1>
+      <h1>Case Studies & Testimonies</h1>
+      <a href="{{ 'about/testimonials/' | url }}">
+        <div class="card kelsey-testimonial">
+          <img src="images/home-images/Kelsey.png" alt="Kelsey Hightower" />
+          <div>
+            <p class="italize">
+              <span class="quote">"</span>If you want to build a
+              function-as-a-service, then you can build on top of Knative, which
+              has a serving framework, meaning when a request comes in you can
+              scale a workload up and down on demand.<span class="quote"
+                >"</span
+              >
+            </p>
+            <p class="quote-author">— Kelsey Hightower</p>
+          </div>
+        </div>
+      </a>
       <div class="cases-table">
         <a href="{{ 'about/case-studies/sva/' | url }}">
-          <div class="col">
+          <div class="card col">
             <div class="logo">
-              <img class="sva" src="images/case-studies/sva.png" alt="" draggable="false" />
+              <img
+                class="sva"
+                src="images/case-studies/sva.png"
+                alt=""
+                draggable="false"
+              />
             </div>
-            <hr>
             <p class="normal-text">
-              "Knative allowed the team to centralize their system, scale, audit, and 
-              even select events while enforcing policies and simplifying the architecture"<br>
+              "Knative allowed the team to centralize their system, scale,
+              audit, and even select events while enforcing policies and
+              simplifying the architecture"<br />
             </p>
           </div>
         </a>
         <a href="{{ 'about/case-studies/ibm/' | url }}">
-          <div class="col">
+          <div class="card col">
             <div class="logo">
-              <img class="ibm" src="images/case-studies/ibm.png" alt="IBM logo" draggable="false" width="75" />
+              <img
+                class="ibm"
+                src="images/case-studies/ibm.png"
+                alt="IBM logo"
+                draggable="false"
+                width="75"
+              />
             </div>
-            <hr>
             <p class="normal-text">
-              "The introduction of the ML training infrastructure using Knative Eventing 
-              has enabled us to establish a well-defined operational boundary for the service teams."<br>
+              "The introduction of the ML training infrastructure using Knative
+              Eventing has enabled us to establish a well-defined operational
+              boundary for the service teams."<br />
             </p>
           </div>
         </a>
         <a href="{{ 'about/case-studies/pnc/' | url }}">
-          <div class="col">
+          <div class="card col" id="pnc-testimonial">
             <div class="logo">
-              <img class="pnc" src="images/case-studies/pnc_bank.png" alt="" draggable="false" />
+              <img
+                class="pnc"
+                src="images/case-studies/pnc_bank.png"
+                alt=""
+                draggable="false"
+              />
             </div>
-            <hr>
             <p class="normal-text">
-              "The power of Knative’s eventing and serverless features allows PNC to bridge processes 
-              between Apache Kafka and CI/CD toolchain events and achieve this automated state."<br>
+              "The power of Knative’s eventing and serverless features allows
+              PNC to bridge processes between Apache Kafka and CI/CD toolchain
+              events and achieve this automated state."<br />
             </p>
           </div>
         </a>
       </div>
     </div>
   </section>
-  
 
   <section class="cncf-notice-container">
-    <h3>Knative is a <a href="https://www.cncf.io/">Cloud Native Computing Foundation</a> incubation project</h3>
-    <img class="cncf-logo" src="images/home-images/cncf-color.png" alt="" draggable="false" />
+    <h3>
+      Knative is a
+      <a href="https://www.cncf.io/">Cloud Native Computing Foundation</a>
+      incubation project
+    </h3>
+    <img
+      class="cncf-logo"
+      src="images/home-images/cncf-color.png"
+      alt=""
+      draggable="false"
+    />
   </section>
 </div>
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
+{% endblock %} {% block scripts %} {{ super() }}
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // Suggested size for the logo images = 320x96
     const adopters = [
-      { logoPath: "images/corporate-logos/alauda.svg", url: "https://www.alauda.io/" },
-      { logoPath: "images/corporate-logos/alibaba_cloud.svg", url: "https://cs.console.aliyun.com/" },
-      { logoPath: "images/corporate-logos/bloomberg.svg", url: "https://www.bloomberg.net/" },
-      { logoPath: "images/corporate-logos/blue_origin.svg", url: "https://www.blueorigin.com/" },
+      {
+        logoPath: "images/corporate-logos/alauda.svg",
+        url: "https://www.alauda.io/",
+      },
+      {
+        logoPath: "images/corporate-logos/alibaba_cloud.svg",
+        url: "https://cs.console.aliyun.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/bloomberg.svg",
+        url: "https://www.bloomberg.net/",
+      },
+      {
+        logoPath: "images/corporate-logos/blue_origin.svg",
+        url: "https://www.blueorigin.com/",
+      },
       { logoPath: "images/corporate-logos/box.svg", url: "https://box.com/" },
-      { logoPath: "images/corporate-logos/chainguard.svg", url: "https://chainguard.dev/" },
-      { logoPath: "images/corporate-logos/control_plane.svg", url: "https://www.controlplane.com/" },
-      { logoPath: "images/corporate-logos/deepc.svg", url: "https://www.deepc.ai/" },
-      { logoPath: "images/corporate-logos/fulcrum.svg", url: "https://www.fulcrumapp.com/" },
-      { logoPath: "images/corporate-logos/gojek.svg", url: "https://www.gojek.com/" },
-      { logoPath: "images/corporate-logos/google.svg", url: "https://cloud.google.com/anthos/run" },
-      { logoPath: "images/corporate-logos/ibm.svg", url: "https://cloud.ibm.com/codeengine" },
-      { logoPath: "images/corporate-logos/ka-nabell_japan.svg", url: "https://www.ka-nabell.com/" },
-      { logoPath: "images/corporate-logos/kubesphere.svg", url: "https://kubesphere.io/" },
-      { logoPath: "images/corporate-logos/liquidx.svg", url: "https://www.liquidx.com/" },
-      { logoPath: "images/corporate-logos/manomano.svg", url: "https://www.manomano.es/" },
-      { logoPath: "images/corporate-logos/optum.svg", url: "https://optum.com/" },
-      { logoPath: "images/corporate-logos/property_xyz.svg", url: "https://property.xyz/" },
-      { logoPath: "images/corporate-logos/redhat.svg", url: "https://www.openshift.com/learn/topics/serverless" },
-      { logoPath: "images/corporate-logos/scaleway.svg", url: "https://www.scaleway.com/en" },
-      { logoPath: "images/corporate-logos/sonavi_labs.svg", url: "https://www.sonavilabs.com/" },
-      { logoPath: "images/corporate-logos/spider.svg", url: "https://www.spider.com/" },
-      { logoPath: "images/corporate-logos/tata_comm.svg", url: "https://www.tatacommunications.com/solutions/cloud/platforms" },
-      { logoPath: "images/corporate-logos/vmware.svg", url: "https://network.tanzu.vmware.com/products/serverless" },
-      { logoPath: "images/corporate-logos/y_meadows.svg", url: "https://www.ymeadows.com/" },
-      { logoPath: "images/corporate-logos/grerook.svg", url: "https://www.greyrook.com/" },
-      { logoPath: "images/corporate-logos/high_cohesion.svg", url: "https://www.highcohesion.com/" },
-      { logoPath: "images/corporate-logos/vhive.svg", url: "https://vhive-serverless.github.io/" },
+      {
+        logoPath: "images/corporate-logos/chainguard.svg",
+        url: "https://chainguard.dev/",
+      },
+      {
+        logoPath: "images/corporate-logos/control_plane.svg",
+        url: "https://www.controlplane.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/deepc.svg",
+        url: "https://www.deepc.ai/",
+      },
+      {
+        logoPath: "images/corporate-logos/fulcrum.svg",
+        url: "https://www.fulcrumapp.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/gojek.svg",
+        url: "https://www.gojek.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/google.svg",
+        url: "https://cloud.google.com/anthos/run",
+      },
+      {
+        logoPath: "images/corporate-logos/ibm.svg",
+        url: "https://cloud.ibm.com/codeengine",
+      },
+      {
+        logoPath: "images/corporate-logos/ka-nabell_japan.svg",
+        url: "https://www.ka-nabell.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/kubesphere.svg",
+        url: "https://kubesphere.io/",
+      },
+      {
+        logoPath: "images/corporate-logos/liquidx.svg",
+        url: "https://www.liquidx.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/manomano.svg",
+        url: "https://www.manomano.es/",
+      },
+      {
+        logoPath: "images/corporate-logos/optum.svg",
+        url: "https://optum.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/property_xyz.svg",
+        url: "https://property.xyz/",
+      },
+      {
+        logoPath: "images/corporate-logos/redhat.svg",
+        url: "https://www.openshift.com/learn/topics/serverless",
+      },
+      {
+        logoPath: "images/corporate-logos/scaleway.svg",
+        url: "https://www.scaleway.com/en",
+      },
+      {
+        logoPath: "images/corporate-logos/sonavi_labs.svg",
+        url: "https://www.sonavilabs.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/spider.svg",
+        url: "https://www.spider.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/tata_comm.svg",
+        url: "https://www.tatacommunications.com/solutions/cloud/platforms",
+      },
+      {
+        logoPath: "images/corporate-logos/vmware.svg",
+        url: "https://network.tanzu.vmware.com/products/serverless",
+      },
+      {
+        logoPath: "images/corporate-logos/y_meadows.svg",
+        url: "https://www.ymeadows.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/grerook.svg",
+        url: "https://www.greyrook.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/high_cohesion.svg",
+        url: "https://www.highcohesion.com/",
+      },
+      {
+        logoPath: "images/corporate-logos/vhive.svg",
+        url: "https://vhive-serverless.github.io/",
+      },
       { logoPath: "images/corporate-logos/sva.svg", url: "https://sva.de/en" },
-      { logoPath: "images/corporate-logos/vorteil-direktiv.svg", url: "https://www.direktiv.io/" }
+      {
+        logoPath: "images/corporate-logos/vorteil-direktiv.svg",
+        url: "https://www.direktiv.io/",
+      },
     ];
 
     function shuffle(array) {
@@ -340,10 +403,12 @@
     // Shuffle the adopters array
     shuffle(adopters);
 
-    const trustedByContainers = document.querySelectorAll(".trusted-by-container .scroller__inner");
+    const trustedByContainers = document.querySelectorAll(
+      ".trusted-by-container .scroller__inner"
+    );
 
     function populateAdopters(container, adopters) {
-      adopters.forEach(adopter => {
+      adopters.forEach((adopter) => {
         const adopterLink = document.createElement("a");
         adopterLink.href = adopter.url;
         adopterLink.target = "_blank";
@@ -395,6 +460,4 @@
 {% endblock %}
 
 <!-- Application footer -->
-{% block footer %}
-{% include "partials/footer.html" %}
-{% endblock %}
+{% block footer %} {% include "partials/footer.html" %} {% endblock %}
