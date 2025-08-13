@@ -1,9 +1,81 @@
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Light.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-LightItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 500;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-MediumItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-BoldItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Black.woff') format('woff');
+}
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 900;
+  src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-BlackItalic.woff') format('woff');
+}
+
 :root {
   --md-primary-fg-color: #f3f1f2;
   --md-primary-fg-color--dark: #0D4984;
   --md-primary-fg-color--light: #6593C8;
+  --md-primary-bg-color: #ffffff;
   --nav-item-color: #4d4d4d;
   --md-footer-bg-color: #081729;
+  --md-text-font: 'Satoshi';
+}
+
+header > nav > ul > li {
+  color: black;
+  font-weight: bold;
+}
+
+.mr-30 {
+  margin-right: 30px;
 }
 
 .md-clipboard {
@@ -108,37 +180,6 @@ a.md-header__button.md-logo img {
   font-weight: bold;
 }
 
-.md-tabs__list li:nth-last-child(3) {
-  margin-left: auto;
-}
-
-.md-tabs__list li:nth-last-child(1),
-.md-tabs__list li:nth-last-child(2),
-.md-tabs__list li:nth-last-child(3) {
-  background-color: var(--md-primary-fg-color--dark);
-  color: white;
-  padding: 0 2em;
-}
-.md-tabs__list li:nth-last-child(3){
-border-radius: 0.7rem 0 0 0 ;
-}
-.md-tabs__list li:nth-last-child(1){
-  border-radius:0 0.7rem 0 0 ;
-  }
-
-
-.md-tabs__list li:nth-last-child(1) a,
-.md-tabs__list li:nth-last-child(2) a,
-.md-tabs__list li:nth-last-child(3) a {
-  opacity: 1;
-}
-
-.md-tabs__list li:nth-last-child(1) a:hover,
-.md-tabs__list li:nth-last-child(2) a:hover,
-.md-tabs__list li:nth-last-child(3) a:hover {
-  color: var(--md-accent-fg-color);
-}
-
 .md-nav__title .md-nav__button.md-logo img,
 .md-nav__title .md-nav__button.md-logo svg {
   width: auto;
@@ -170,6 +211,11 @@ border-radius: 0.7rem 0 0 0 ;
   color: gray;
 }
 
+#sub-nav li:nth-last-child(3), #sub-nav li:nth-last-child(2), #sub-nav li:nth-last-child(1) {
+  display: none;
+}
+
+
 /* bit of a hack to stop the banner taking space when empty */
 .md-banner .md-banner__inner {
   margin: 0 auto;
@@ -182,6 +228,7 @@ border-radius: 0.7rem 0 0 0 ;
 
 .md-banner .versionwarning h1 {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .md-banner .versionwarning p {
@@ -507,10 +554,71 @@ border-radius: 0.7rem 0 0 0 ;
   margin: auto 30px auto 30px;
 }
 }
+
+@media (max-width: 630px) {
+  [dir=ltr] .md-tabs__list {
+    margin-left: 7.2rem;
+  }
+}
+
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active>.md-nav__link {
     color: var(--nav-item-color);
   }
 }
 
+@media (max-width: 1024px) {
+  .md-header__topic {
+    margin: 0;
+  }
+
+  .md-footer-copyright {
+    margin: auto;
+    text-align: center;
+  }
+
+  .md-social {
+    margin: auto;
+  }
+}
+
+@media (max-width: 861px) {
+  .md-footer-meta {
+    flex-direction: column;
+  }
+
+  .md-footer__title {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .md-footer-meta__inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .md-footer-copyright {
+    order: 2;
+    margin: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .md-footer-copyright a {
+    margin: 8px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+  }
+
+  .md-social {
+    margin-top: 1rem;
+  }
+
+  .pipe {
+    display: none;
+  }
+}
   
