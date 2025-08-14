@@ -59,8 +59,8 @@ To edit and then immediately deploy changes to your ConfigMap, run the following
 kubectl -n knative-eventing edit configmap config-observability
 ```
 
-### Backends
+## Backends
 
-## Jaeger V2
+### Jaeger V2
 
 Following [these instructions](https://github.com/jaegertracing/jaeger-operator?tab=readme-ov-file#jaeger-v2-operator) to setup Jaeger V2 on Kubernetes and access your traces.
