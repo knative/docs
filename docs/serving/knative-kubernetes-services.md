@@ -44,7 +44,6 @@ that are active when running Knative Serving.
      activator                    1         1         1            1           1h
      autoscaler                   1         1         1            1           1h
      controller                   1         1         1            1           1h
-     net-certmanager-controller   1         1         1            1           1h
      net-istio-controller         1         1         1            1           1h
      webhook                      1         1         1            1           1h
      ```
@@ -77,10 +76,6 @@ and the revisions into deployments and Knative Pod Autoscalers (KPAs).
 The webhook intercepts all Kubernetes API calls as well as all CRD insertions
 and updates. It sets default values, rejects inconsistent and invalid objects,
 and validates and mutates Kubernetes API calls.
-
-### Deployment: net-certmanager-controller
-
-The certmanager reconciles cluster ingresses into cert manager objects.
 
 ### Deployment: net-istio-controller
 
