@@ -1,5 +1,8 @@
 # Distributed tracing with Knative, OpenTelemetry and Jaeger
 
+!!! note
+    Knative Release 1.19 and higher supports emitting OpenTelemetry traces. So the contents of this post are out of date.
+
 **Author: [Ben Moss](https://twitter.com/mossity), Software Engineer @ [VMware](http://vmware.com)**
 
 When trying to understand and diagnose our systems, one of the most basic tools
