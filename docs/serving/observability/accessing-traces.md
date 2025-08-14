@@ -26,7 +26,7 @@ metadata:
   namespace: knative-serving
 data:
   tracing-protocol: "grpc"
-  tracing-endpoint: "http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans"
+  tracing-endpoint: "http://jaeger-collector.observability:4318/v1/traces"
   tracing-sampling: "0.1"
 ```
 
