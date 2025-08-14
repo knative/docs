@@ -10,7 +10,13 @@ function: how-to
 Traces give us the big picture of what happens when a request is made to an application. 
 Knative Serving is instrumented with [OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) which can emit traces to a multitude of different backends.
 
-## Configuring tracing
+## Backends
+
+### Jaeger V2
+
+Following [these instructions](https://github.com/jaegertracing/jaeger-operator?tab=readme-ov-file#jaeger-v2-operator) to setup Jaeger V2 on Kubernetes and access your traces.
+
+## Configuring Serving Tracing
 
 You can update the configuration for tracing in using the [`config-observability` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/observability.yaml).
 
@@ -58,9 +64,3 @@ To edit and then immediately deploy changes to your ConfigMap, run the following
 ```bash
 kubectl -n knative-eventing edit configmap config-observability
 ```
-
-## Backends
-
-### Jaeger V2
-
-Following [these instructions](https://github.com/jaegertracing/jaeger-operator?tab=readme-ov-file#jaeger-v2-operator) to setup Jaeger V2 on Kubernetes and access your traces.
