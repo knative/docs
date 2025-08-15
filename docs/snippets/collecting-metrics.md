@@ -1,5 +1,8 @@
 # Collecting Metrics in Knative
 
+!!! warning
+   Knative (in release 1.19) has switched to OpenTelemetry instrumentation - with this we have changed our metric names. Please consult the latest documentation
+
 Knative supports different popular tools for collecting metrics:
 
 - [Prometheus](https://prometheus.io/)
@@ -8,6 +11,7 @@ Knative supports different popular tools for collecting metrics:
 [Grafana](https://grafana.com/oss/) dashboards are available for metrics collected directly with Prometheus.
 
 You can also set up the OpenTelemetry Collector to receive metrics from Knative components and distribute them to other metrics providers that support OpenTelemetry.
+
 
 !!! warning
     You can't use OpenTelemetry Collector and Prometheus at the same time. The default metrics backend is Prometheus. You will need to remove `metrics.backend-destination` and `metrics.request-metrics-backend-destination` keys from the config-observability Configmap to enable Prometheus metrics.
@@ -47,7 +51,7 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative.
 
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/servicemonitor.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/refs/heads/opencensus/servicemonitor.yaml
     ```
 
 ### Access the Prometheus instance locally
@@ -87,12 +91,12 @@ To access the dashboards in your web browser:
 
 ### Import Grafana dashboards
 
-1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring/tree/main/grafana).
+1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring/tree/opencensus/grafana).
 
 1. If you are using the Grafana Helm Chart with the Dashboard Sidecar enabled, you can load the dashboards by applying the following configmaps.
 
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/grafana/dashboards.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/refs/heads/opencensus/grafana/dashboards.yaml
     ```
 
     !!! caution
@@ -124,7 +128,7 @@ In the following example, you can configure a single collector instance using a 
     For more complex deployments, you can automate some of these steps by using the [OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator).
 
 !!! caution
-    The Grafana dashboards at https://github.com/knative-extensions/monitoring/tree/main/grafana don't work with metrics scraped from OpenTelemetry Collector.
+    The Grafana dashboards at https://github.com/knative-extensions/monitoring/tree/opencensus/grafana don't work with metrics scraped from OpenTelemetry Collector.
 
 ![Diagram of components reporting to collector, which is scraped by Prometheus](system-diagram.svg)
 
