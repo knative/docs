@@ -1,7 +1,7 @@
 # Collecting Metrics in Knative
 
 !!! warning
-   Knative (in release 1.19) has switched to OpenTelemetry instrumentation - with this we have changed our metric names. Please consult the latest documentation
+    Knative (in release 1.19) has switched to OpenTelemetry instrumentation - with this we have changed our metric names. Please consult the latest documentation
 
 Knative supports different popular tools for collecting metrics:
 
