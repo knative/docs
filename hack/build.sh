@@ -27,7 +27,7 @@ set -x
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.19" "1.18" "1.17") # Docs version, results in the url e.g. knative.dev/docs-1.9/..
+VERSIONS=("1.19" "1.18" "1.17") # Docs version, results in the url e.g. knative.dev/v1.9-docs/..
 # 4) PR the result to main.
 # 5) Party.
 
@@ -41,8 +41,8 @@ readonly SITE=$PWD/site
 rm -rf site/
 
 if [ "$BUILD_VERSIONS" == "no" ]; then
-  # HEAD to /docs if we're not doing versioning.
-  mkdocs build -f mkdocs.yml -d site/docs
+  # HEAD to root if we're not doing versioning.
+  mkdocs build -f mkdocs.yml -d site
 else
   # Versioning: pre-release (HEAD): docs => development/
   cp -r . $TEMP/docs-main
@@ -50,7 +50,7 @@ else
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/docs-main/docs/eventing/reference/eventing-api.md"
   pushd "$TEMP/docs-main"; mkdocs build -f mkdocs.yml -d $SITE/development; popd
 
-  # Latest release branch to /docs
+  # Latest release branch to root
   git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${GIT_SLUG} "$TEMP/docs-$latest"
 
   if [ ${latest#*1.} -gt 6 ]; then
@@ -61,7 +61,7 @@ else
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
   fi
 
-  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION="${VERSIONS[0]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE/docs; popd
+  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION="${VERSIONS[0]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE; popd
 
   # Previous release branches release-$version to /v$version-docs
   versionjson=""
@@ -107,25 +107,7 @@ cp golang/*.html site/golang/
 cat golang/_redirects >> site/_redirects
 
 
-# Home page is served from docs, so add a redirect.
-cat << EOF > site/index.html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Redirecting</title>
-  <noscript>
-    <meta http-equiv="refresh" content="1; url=docs/" />
-  </noscript>
-  <script>
-   window.location.replace("docs/");
-  </script>
-</head>
-<body>
-  Redirecting to <a href="docs/">docs/</a>...
-</body>
-</html>
-EOF
+# Home page is now served directly from root, no redirect needed
 
 # Clean up
 rm -rf $TEMP

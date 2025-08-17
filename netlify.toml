@@ -38,8 +38,8 @@
   to = "/:splat"
   status = 301
 
-# Ensure the root path serves the docs
+# Redirect old /docs path to root
 [[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
+  from = "/docs"
+  to = "/"
+  status = 301
