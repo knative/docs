@@ -157,7 +157,6 @@ nav:
       # Serving - admin docs
       - Administrator Topics:
         - Kubernetes services: serving/knative-kubernetes-services.md
-        - Accessing request traces: serving/accessing-traces.md
         - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
         - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
         - Configuring high-availability components: serving/config-ha.md
@@ -184,6 +183,7 @@ nav:
         - Security-Guard example alerts: serving/app-security/security-guard-example-alerts.md
       # Serving - observability
       - Observability:
+        - Request traces: serving/observability/accessing-traces.md
         - Collecting logs: serving/observability/logging/collecting-logs.md
         - Configuring logging: serving/observability/logging/config-logging.md
         - Configuring Request logging: serving/observability/logging/request-logging.md
@@ -303,7 +303,7 @@ nav:
           - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/keda-configuration.md
       # Eventing - observability
       - Observability:
-        - Accessing CloudEvent traces: eventing/accessing-traces.md
+        - Accessing CloudEvent traces: eventing/observability/accessing-traces.md
         - Collecting logs: eventing/observability/logging/collecting-logs.md
         - Configuring logging: eventing/observability/logging/config-logging.md
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md

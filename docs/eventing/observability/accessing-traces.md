@@ -1,21 +1,24 @@
 # Accessing CloudEvent traces
 
-Depending on the request tracing tool that you have installed on your Knative
-Eventing cluster, see the corresponding section for details about how to
-visualize and trace your requests.
+Traces give us the big picture of how events traverse through the system and applications.
+Knative Eventing is instrumented with [OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) which can emit traces to a multitude of different backends.
 
-## Before you begin
+## Backends
 
-You must have a Knative cluster running with the Eventing component installed. [Learn more](../install/README.md).
+### Jaeger V2
 
-## Configuring tracing
+Following [these instructions](https://github.com/jaegertracing/jaeger-operator?tab=readme-ov-file#jaeger-v2-operator) to setup Jaeger V2 on Kubernetes and access your traces.
+
+## Configuring Eventing Tracing
+
+You can update the configuration for tracing in using the [`config-observability` ConfigMap](https://github.com/knative/eventing/blob/main/config/core/configmaps/observability.yaml).
 
 With the exception of importers, the Knative Eventing tracing is configured through the
-`config-tracing` ConfigMap in the `knative-eventing` namespace.
+`config-observability` ConfigMap in the `knative-eventing` namespace.
 
 Most importers do _not_ use the ConfigMap and instead, use a static 1% sampling rate.
 
-You can use the `config-tracing` ConfigMap to configure the following Eventing components:
+You can use the `config-observability` ConfigMap to configure the following Eventing components:
 
  - Brokers
  - Triggers
@@ -28,59 +31,61 @@ You can use the `config-tracing` ConfigMap to configure the following Eventing c
 
 **Example:**
 
-The following example `config-tracing` ConfigMap samples 10% of all CloudEvents:
+The following example `config-observability` ConfigMap samples 10% of all CloudEvents:
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: config-tracing
+  name: config-observability
   namespace: knative-eventing
 data:
-  backend: "zipkin"
-  zipkin-endpoint: "http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans"
-  sample-rate: "0.1"
+  tracing-protocol: "grpc"
+  tracing-endpoint: "http://jaeger-collector.observability:4318/v1/traces"
+  tracing-sampling: "0.1"
 ```
 
 ### Configuration options
 
-You can configure your `config-tracing` with following options:
+You can configure your `config-observability` with following options:
 
- * `backend`: Valid values are `zipkin` or `none`. The default is `none`.
+ * `tracing-protocol`: Valid values are `grpc` or `http/protobuf`. The default is `none`.
 
- * `zipkin-endpoint`: Specifies the URL to the zipkin collector where you want to send the traces.
-   Must be set if backend is set to `zipkin`.
+ * `tracing-endpoint`: Specifies the URL to the backend where you want to send the traces.
+   Must be set if backend is set to `grpc` or `http/protobuf`.
 
- * `sample-rate`: Specifies the sampling rate. Valid values are decimals from `0` to `1`
+ * `tracing-sampling`: Specifies the sampling rate. Valid values are decimals from `0` to `1`
    (interpreted as a float64), which indicate the probability that any given request is sampled.
    An example value is `0.5`, which gives each request a 50% sampling probablity.
 
- * `debug`: Enables debugging. Valid values are `true` or `false`. Defaults to `false` when not specified.
-   Set to `true` to enable debug mode, which forces the `sample-rate` to `1.0` and sends all spans to
-   the server.
-
-### Viewing your `config-tracing` ConfigMap
+### Viewing your `config-observability` ConfigMap
 
 To view your current configuration:
 
 ```bash
-kubectl -n knative-eventing get configmap config-tracing -oyaml
+kubectl -n knative-eventing get configmap config-observability -oyaml
 ```
 
-### Editing and deploying your `config-tracing` ConfigMap
+### Editing and deploying your `config-observability` ConfigMap
 
 To edit and then immediately deploy changes to your ConfigMap, run the following command:
 
 ```bash
-kubectl -n knative-eventing edit configmap config-tracing
+kubectl -n knative-eventing edit configmap config-observability
 ```
 
-## Accessing traces in Eventing
 
-To access the traces, you use either the Zipkin or Jaeger tool. Details about using these tools to access traces are provided in the Knative Serving observability section:
+<!--
+TODO - Renable and redo the images when the following test is enabled again
+       https://github.com/knative/eventing/blob/main/test/conformance/broker_tracing_test.go#L31
 
- - [Zipkin](../serving/accessing-traces.md#zipkin)
- - [Jaeger](../serving/accessing-traces.md#jaeger)
+	t.Skip("needs to be reworked for OTel (eventing#8637)")
+
+## Accessing traces 
+
+To access the traces, you use either the Zipkin or Jaeger tool.
+
+ - [Zipkin](../serving/observability/accessing-traces.md)
 
 ### Example
 
@@ -124,3 +129,5 @@ This is the same screenshot without the annotations.
 ![Raw Trace](images/RawTrace.png)
 
 If you are interested, here is the [raw JSON](data/2e571e6948ff981283825bb2bf51c87d.json) of the trace.
+
+-->
