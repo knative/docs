@@ -11,7 +11,7 @@ type: "blog"
 ## Announcing Knative v1.19 Release
 
 !!! note
-    We've discovered severse issues with the OpenTelemetry Prometheus Exporter (see: https://github.com/knative/pkg/issues/3224). We advise users to hold off upgrading until we have new patch releases out.
+    We've discovered severe issues with the OpenTelemetry Prometheus Exporter (see: https://github.com/knative/pkg/issues/3224). We advise users to hold off upgrading until we have new patch releases out.
 
 A new version of Knative is now available across multiple components.
 
