@@ -190,7 +190,7 @@ spec:
 ### Kubernetes Volume Mount Propagation
 
 - **Type**: Extension
-- **ConfigMap keys:** `kubernetes.podspec-mount-propagation`
+- **ConfigMap keys:** `kubernetes.podspec-volumes-mount-propagation`
 
 This extension controls whether [`MountPropagation`](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation/) can be specified
 for a Volume Mount.
