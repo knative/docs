@@ -33,7 +33,7 @@ metadata:
 data:
   tracing-protocol: "grpc"
   tracing-endpoint: "http://jaeger-collector.observability:4318/v1/traces"
-  tracing-sampling: "0.1"
+  tracing-sampling-rate: "0.1"
 ```
 
 ### Configuration options
@@ -45,7 +45,7 @@ You can configure your `config-observability` with following options:
  * `tracing-endpoint`: Specifies the URL to the backend where you want to send the traces.
    Must be set if backend is set to `grpc` or `http/protobuf`.
 
- * `tracing-sampling`: Specifies the sampling rate. Valid values are decimals from `0` to `1`
+ * `tracing-sampling-rate`: Specifies the sampling rate. Valid values are decimals from `0` to `1`
    (interpreted as a float64), which indicate the probability that any given request is sampled.
    An example value is `0.5`, which gives each request a 50% sampling probablity.
 
