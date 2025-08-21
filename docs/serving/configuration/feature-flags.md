@@ -72,7 +72,7 @@ GA stage
 An extension surfaces details of a specific Knative implementation, or features of the underlying environment.
 
 !!! note
-    Extensions are never included in the core Knative API due to their lack of portability.
+Extensions are never included in the core Knative API due to their lack of portability.
 
 Each extension is always controlled by a flag and is never enabled by default.
 
@@ -89,8 +89,8 @@ GA stage
 
 ### Multiple containers
 
-* **Type**: Feature
-* **ConfigMap key:** `multi-container`
+- **Type**: Feature
+- **ConfigMap key:** `multi-container`
 
 This flag allows specifying multiple user containers in a Knative Service spec.
 
@@ -99,7 +99,7 @@ Only one container can handle requests, so exactly one container must have a `po
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
@@ -114,8 +114,8 @@ spec:
 
 ### Multiple Container Probing
 
-* **Type**: Feature
-* **ConfigMap key:** `multi-container-probing`
+- **Type**: Feature
+- **ConfigMap key:** `multi-container-probing`
 
 This flag allows specifying probes (readiness/liveness) for multiple containers in a Knative Service spec.
 Please use this feature flag in combination with [multiple containers](#multiple-containers) above.
@@ -123,7 +123,7 @@ Please use this feature flag in combination with [multiple containers](#multiple
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
@@ -144,8 +144,8 @@ spec:
 
 ### Kubernetes EmptyDir Volume
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-volumes-emptydir`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-volumes-emptydir`
 
 This extension controls whether [`emptyDir`](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) volumes can be specified.
 
@@ -168,8 +168,8 @@ spec:
 
 ### Kubernetes PersistentVolumeClaim (PVC)
 
-* **Type**: Extension
-* **ConfigMap keys:** `kubernetes.podspec-persistent-volume-claim` <br/> `kubernetes.podspec-persistent-volume-write`
+- **Type**: Extension
+- **ConfigMap keys:** `kubernetes.podspec-persistent-volume-claim` <br/> `kubernetes.podspec-persistent-volume-write`
 
 This extension controls whether [`PersistentVolumeClaim (PVC)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) can be specified
 and whether write access is allowed for the corresponding volume.
@@ -194,17 +194,44 @@ spec:
            readOnly: true
 ```
 
+### Kubernetes Volume Mount Propagation
+
+- **Type**: Extension
+- **ConfigMap keys:** `kubernetes.podspec-volumes-mount-propagation`
+
+This extension controls whether [`MountPropagation`](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation/) can be specified
+for a Volume Mount.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+ template:
+   spec:
+     containers:
+         ...
+         volumeMounts:
+           - mountPath: /data
+             name: mydata
+              mountPropagation: HostToContainer
+     volumes:
+       - name: mydata
+         persistentVolumeClaim:
+           claimName: pv-claim
+```
+
 ### Kubernetes node affinity
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-affinity`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-affinity`
 
 This extension controls whether [node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
@@ -212,46 +239,46 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/e2e-az-name
-                operator: In
-                values:
-                - e2e-az1
-                - e2e-az2
+              - matchExpressions:
+                  - key: kubernetes.io/e2e-az-name
+                    operator: In
+                    values:
+                      - e2e-az1
+                      - e2e-az2
 ```
 
 ### Kubernetes host aliases
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-hostaliases`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-hostaliases`
 
 This flag controls whether [host aliases](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
       hostAliases:
-      - ip: "127.0.0.1"
-        hostnames:
-        - "foo.local"
-        - "bar.local"
+        - ip: "127.0.0.1"
+          hostnames:
+            - "foo.local"
+            - "bar.local"
 ```
 
 ### Kubernetes node selector
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-nodeselector`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-nodeselector`
 
 This flag controls whether [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
@@ -261,35 +288,35 @@ spec:
 
 ### Kubernetes toleration
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-tolerations`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-tolerations`
 
 This flag controls whether [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
       tolerations:
-      - key: "example-key"
-        operator: "Exists"
-        effect: "NoSchedule"
+        - key: "example-key"
+          operator: "Exists"
+          effect: "NoSchedule"
 ```
 
 ### Kubernetes Downward API
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-fieldref`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-fieldref`
 
 This flag controls whether the [Downward API (environment variable based)](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
@@ -313,18 +340,17 @@ This flag controls whether the [`priorityClassName`](https://kubernetes.io/docs/
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
       priorityClassName: high-priority
-...
 ```
 
 ### Kubernetes dry run
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-dryrun`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-dryrun`
 
 This flag controls whether Knative attempts to validate the Pod spec derived from a Knative Service spec, by using the Kubernetes API server before accepting the object.
 
@@ -344,26 +370,25 @@ metadata:
 
 ### Kubernetes runtime class
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-runtimeclassname`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-runtimeclassname`
 
 This flag controls whether the [runtime class](https://kubernetes.io/docs/concepts/containers/runtime-class/) can be used.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
       runtimeClassName: myclass
-...
 ```
 
 ### Kubernetes security context
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-securitycontext`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-securitycontext`
 
 This flag controls whether a subset of the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) can be used.
 
@@ -382,24 +407,23 @@ When set to `enabled` or `allowed`, the following container `SecurityContext` pr
 - `RunAsUser` (already allowed without this flag)
 
 !!! warning
-    Use this flag with caution. `PodSecurityContext` properties can affect non-user sidecar containers that come from Knative or your service mesh.
+Use this flag with caution. `PodSecurityContext` properties can affect non-user sidecar containers that come from Knative or your service mesh.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
       securityContext:
         runAsUser: 1000
-...
 ```
 
 ### Kubernetes security context capabilities
 
-* **Type**: Extension
-* **ConfigMap key**: `kubernetes.containerspec-addcapabilities`
+- **Type**: Extension
+- **ConfigMap key**: `kubernetes.containerspec-addcapabilities`
 
 This flag controls whether users can add capabilities on the `securityContext` of the container.
 
@@ -411,30 +435,30 @@ kind: Service
 metadata:
   name: helloworld-go
 spec:
- template:
-  spec:
-   containers:
-     - image: ghcr.io/knative/helloworld-go:latest
-       env:
-         - name: TARGET
-           value: "Go Sample v1"
-       securityContext:
-         capabilities:
-           add:
-             - NET_BIND_SERVICE
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/knative/helloworld-go:latest
+          env:
+            - name: TARGET
+              value: "Go Sample v1"
+          securityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
 ```
 
 ### Tag header based routing
 
-* **Type**: Extension
-* **ConfigMap key:** `tag-header-based-routing`
+- **Type**: Extension
+- **ConfigMap key:** `tag-header-based-routing`
 
 This flags controls whether [tag header based routing](https://github.com/knative/docs/tree/main/code-samples/serving/tag-header-based-routing) is enabled.
 
 ### Kubernetes init containers
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-init-containers`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-init-containers`
 
 This flag controls whether [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) can be used.
 
@@ -455,8 +479,8 @@ spec:
 
 ### Queue Proxy Pod Info
 
-* **Type**: Extension
-* **ConfigMap key:** `queueproxy.mount-podinfo`
+- **Type**: Extension
+- **ConfigMap key:** `queueproxy.mount-podinfo`
 
 You must set this feature to either "enabled or "allowed" when using QPOptions. The flag controls whether Knative mounts the `pod-info` volume to the `queue-proxy` container.
 
@@ -476,8 +500,8 @@ metadata:
 
 ### Kubernetes Topology Spread Constraints
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-topologyspreadconstraints`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-topologyspreadconstraints`
 
 This flag controls whether [`topology spread constraints`](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) can be specified.
 
@@ -501,26 +525,25 @@ spec:
 
 ### Kubernetes DNS Policy
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-dnspolicy`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-dnspolicy`
 
 This flag controls whether a [`DNS policy`](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) can be specified.
 
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
-...
+---
 spec:
   template:
     spec:
       dnsPolicy: ClusterFirstWithHostNet
-...
 ```
 
 ### Kubernetes Scheduler Name
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-schedulername`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-schedulername`
 
 This flag controls whether a [`scheduler name`](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) can be specified.
 
@@ -538,8 +561,8 @@ spec:
 
 ### Kubernetes Share Process Namespace
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-shareprocessnamespace`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-shareprocessnamespace`
 
 This flag controls whether the [share process namespace](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/) can be used.
 
@@ -561,8 +584,8 @@ spec:
 
 ### Kubernetes Host IPC
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-hostipc`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-hostipc`
 
 This flag controls whether the host's ipc namespace can be used.
 
@@ -580,8 +603,8 @@ spec:
 
 ### Kubernetes Host PID
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-hostpid`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-hostpid`
 
 This flag controls whether the host's pid can be used.
 
@@ -599,8 +622,8 @@ spec:
 
 ### Kubernetes Host Network
 
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-hostnetwork`
+- **Type**: Extension
+- **ConfigMap key:** `kubernetes.podspec-hostnetwork`
 
 This flag controls whether the host's network namespace can be used.
 
