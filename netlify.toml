@@ -31,3 +31,15 @@
   from = "/docs/help/contributor/*"
   to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
   status = 301
+
+# Redirect from /docs/* to root to handle the base URL change
+[[redirects]]
+  from = "/docs/*"
+  to = "/:splat"
+  status = 301
+
+# Redirect old /docs path to root
+[[redirects]]
+  from = "/docs"
+  to = "/"
+  status = 301
