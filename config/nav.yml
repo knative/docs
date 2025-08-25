@@ -342,8 +342,10 @@ nav:
     # Reference docs
     - Reference:
       - Security:
-        - Security Model and Disclosure: reference/security/README.md
-        - Verifying Knative Images: reference/security/verifying-images.md 
+        - Security Disclosure: reference/security/README.md
+        - Threat Model: reference/security/threat-model.md
+        - Verifying Knative Images: reference/security/verifying-images.md
+        - Verifying Knative Binaries: reference/security/verifying-cli.md
       - Release notes: reference/relnotes/README.md
     - Blog: /blog/
     - About:
