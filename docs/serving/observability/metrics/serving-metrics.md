@@ -61,14 +61,4 @@ reconciliation requests are enqueued.
 | ```workqueue_unfinished_work_seconds``` | How long in seconds the outstanding workqueue items have been in flight (total). | Histogram | ```name``` | Seconds | Stable |
 | ```workqueue_longest_running_processor_seconds``` | How long in seconds the longest outstanding workqueue item has been in flight | Histogram | ```name``` | Seconds | Stable |
 
-## Webhook
-
-Webhook metrics report useful info about operations. For example, if a large number of operations fail, this could indicate an issue with a user-created resource.
-
-| Metric Name | Description | Type | Tags | Unit | Status |
-|:-|:-|:-|:-|:-|:-|
-| ```request_count``` | The number of requests that are routed to webhook | Counter |  ```admission_allowed```<br>```kind_group```<br>```kind_kind```<br>```kind_version```<br>```request_operation```<br>```resource_group```<br>```resource_namespace```<br>```resource_resource```<br>```resource_version``` | Dimensionless | Stable |
-| ```request_latencies``` | The response time in milliseconds | Histogram |  ```admission_allowed```<br>```kind_group```<br>```kind_kind```<br>```kind_version```<br>```request_operation```<br>```resource_group```<br>```resource_namespace```<br>```resource_resource```<br>```resource_version``` | Milliseconds | Stable |
-
-
 --8<-- "observability-shared-metrics.md"
