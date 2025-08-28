@@ -9,11 +9,9 @@ We currently support the following export protocols:
 You can also set up the OpenTelemetry Collector to receive metrics from Knative components and distribute them to other metrics providers that support OpenTelemetry.
 
 !!! note
-    By default metrics are exporting is off. 
-
-!!! note
     The following monitoring setup is for illustrative purposes. Support is best-effort and changes
     are welcome in the [Knative Monitoring repository](https://github.com/knative-extensions/monitoring)
+    By default metrics are exporting is off.
 
 ## About the Prometheus Stack
 
