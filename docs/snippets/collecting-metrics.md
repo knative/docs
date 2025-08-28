@@ -33,7 +33,7 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
        helm install knative prometheus-community/kube-prometheus-stack \
           --create-namespace \
           --namespace observability \
-          -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/config/promstack-values.yaml
+          -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/promstack-values.yaml
 
 
 ### Access the Prometheus instance locally

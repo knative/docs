@@ -5,7 +5,7 @@ components:
 function: reference
 ---
 
-# Knative Serving metrics
+# Knative Serving Metrics
 
 Administrators can monitor Serving control plane based on the metrics exposed by each Serving component.
 Metrics are listed next.
@@ -70,40 +70,5 @@ Webhook metrics report useful info about operations. For example, if a large num
 | ```request_count``` | The number of requests that are routed to webhook | Counter |  ```admission_allowed```<br>```kind_group```<br>```kind_kind```<br>```kind_version```<br>```request_operation```<br>```resource_group```<br>```resource_namespace```<br>```resource_resource```<br>```resource_version``` | Dimensionless | Stable |
 | ```request_latencies``` | The response time in milliseconds | Histogram |  ```admission_allowed```<br>```kind_group```<br>```kind_kind```<br>```kind_version```<br>```request_operation```<br>```resource_group```<br>```resource_namespace```<br>```resource_resource```<br>```resource_version``` | Milliseconds | Stable |
 
-## Go Runtime - memstats
 
-Each Knative Serving control plane process emits a number of Go runtime [memory statistics](https://golang.org/pkg/runtime/#MemStats) (shown next).
-As a baseline for monitoring purposes, user could start with a subset of the metrics: current allocations (go_alloc), total allocations (go_total_alloc), system memory (go_sys), mallocs (go_mallocs), frees (go_frees) and garbage collection total pause time (total_gc_pause_ns), next gc target heap size (go_next_gc) and number of garbage collection cycles (num_gc).
-
-| Metric Name | Description | Type | Tags | Unit | Status |
-|:-|:-|:-|:-|:-|:-|
-| ```go_alloc``` | The number of bytes of allocated heap objects (same as heap_alloc) | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_total_alloc``` | The cumulative bytes allocated for heap objects | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_sys``` | The total bytes of memory obtained from the OS | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_lookups``` | The number of pointer lookups performed by the runtime | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_mallocs``` | The cumulative count of heap objects allocated | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_frees``` | The cumulative count of heap objects freed | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_heap_alloc``` | The number of bytes of allocated heap objects | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_heap_sys``` | The number of bytes of heap memory obtained from the OS | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_heap_idle``` | The number of bytes in idle (unused) spans | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_heap_in_use``` | The number of bytes in in-use spans | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_heap_released``` | The number of bytes of physical memory returned to the OS | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_heap_objects``` | The number of allocated heap objects | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_stack_in_use``` | The number of bytes in stack spans | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_stack_sys``` | The number of bytes of stack memory obtained from the OS | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_mspan_in_use``` | The number of bytes of allocated mspan structures | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_mspan_sys``` | The number of bytes of memory obtained from the OS for mspan structures | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_mcache_in_use``` | The number of bytes of allocated mcache structures | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_mcache_sys``` | The number of bytes of memory obtained from the OS for mcache structures | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_bucket_hash_sys``` | The number of bytes of memory in profiling bucket hash tables. | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_gc_sys``` | The number of bytes of memory in garbage collection metadata | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_other_sys``` | The number of bytes of memory in miscellaneous off-heap runtime allocations | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_next_gc``` | The target heap size of the next GC cycle | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_last_gc``` | The time the last garbage collection finished, as nanoseconds since 1970 (the UNIX epoch) | Gauge | ```name``` | Nanoseconds | Stable |
-| ```go_total_gc_pause_ns``` | The cumulative nanoseconds in GC stop-the-world pauses since the program started | Gauge | ```name``` | Nanoseconds | Stable |
-| ```go_num_gc``` | The number of completed GC cycles. | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_num_forced_gc``` | The number of GC cycles that were forced by the application calling the GC function. | Gauge | ```name``` | Dimensionless | Stable |
-| ```go_gc_cpu_fraction``` | The fraction of this program's available CPU time used by the GC since the program started | Gauge | ```name``` | Dimensionless | Stable |
-
-!!! note
-    The name tag is empty.
+--8<-- "observability-shared-metrics.md"
