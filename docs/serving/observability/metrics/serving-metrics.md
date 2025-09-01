@@ -8,57 +8,162 @@ function: reference
 # Knative Serving Metrics
 
 Administrators can monitor Serving control plane based on the metrics exposed by each Serving component.
-Metrics are listed next.
+
+!!! note
+
+    These metrics may chance as we have just switch Knative from OpenCensus 
+    to OpenTelemetry
+
+## Queue Proxy
+
+The queue proxy is the per-pod sidecar that enforces container concurrency and provides metrics to the autoscaler. The following metrics provide you insights into queued
+requests and user-container behavior.
+
+###  `kn.queueproxy.depth`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {item}
+
+**Description:** Number of current items in the queue proxy queue
+
+### `kn.queueproxy.app.duration`
+
+**Instrument Type:** Float64Histogram
+
+**Unit (UCUM):** s
+
+**Description:** The duration of the task execution
 
 ## Activator
 
 The following metrics can help you to understand how an application responds when traffic passes through the activator. For example, when scaling from zero, high request latency might mean that requests are taking too much time to be fulfilled.
 
-| Metric Name | Description | Type | Tags | Unit | Status |
-|:-|:-|:-|:-|:-|:-|
-| ```request_concurrency``` | Concurrent requests that are routed to Activator<br>These are requests reported by the concurrency reporter which may not be done yet.<br> This is the average concurrency over a reporting period | Gauge | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```request_count``` | The number of requests that are routed to Activator.<br>These are requests that have been fulfilled from the activator handler. | Counter | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```response_code```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```request_latencies``` | The response time in millisecond for the fulfilled routed requests | Histogram | ```configuration_name```<br>```container_name```<br>```namespace_name```<br>```pod_name```<br>```response_code```<br>```response_code_class```<br>```revision_name```<br>```service_name``` | Milliseconds | Stable |
+
+### `kn.revision.request.concurrency`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {request}
+
+**Description:** Concurrent requests that are routed to the Activator
+
+The following attributes are included with the metrics below
+
+Name | Type | Description
+-|-|-
+`k8s.namespace.name` | string | Namespace of the Revision
+`kn.service.name` | string | Knative Service name associated with this Revision
+`kn.configuration.name` | string | Knative Configuration name associated with this Revision
+`kn.revision.name` | string | The name of the Revision
 
 ## Autoscaler
 
 Autoscaler component exposes a number of metrics related to its decisions per revision. For example, at any given time, you can monitor the desired pods the Autoscaler wants to allocate for a Service, the average number of requests per second during the stable window, or whether autoscaler is in panic mode (KPA).
 
-| Metric Name | Description | Type | Tags | Unit | Status |
-|:-|:-|:-|:-|:-|:-|
-| ```desired_pods``` | Number of pods autoscaler wants to allocate | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```excess_burst_capacity``` | Excess burst capacity overserved over the stable window | Gauge |  ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```stable_request_concurrency``` | Average of requests count per observed pod over the stable window | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```panic_request_concurrency``` | Average of requests count per observed pod over the panic window | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```target_concurrency_per_pod``` | The desired number of concurrent requests for each pod | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```stable_requests_per_second``` | Average requests-per-second per observed pod over the stable window | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```panic_requests_per_second``` | Average requests-per-second per observed pod over the panic window | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```target_requests_per_second``` | The desired requests-per-second for each pod | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```panic_mode``` | 1 if autoscaler is in panic mode, 0 otherwise | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```requested_pods``` | Number of pods autoscaler requested from Kubernetes | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```actual_pods``` | Number of pods that are allocated currently in ready state | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` |  Dimensionless | Stable |
-| ```not_ready_pods``` | Number of pods that are not ready currently | Gauge | ```configuration_name=```<br>```namespace_name=```<br>```revision_name```<br>```service_name``` |  Dimensionless | Stable |
-| ```pending_pods``` | Number of pods that are pending currently | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name``` | Dimensionless | Stable |
-| ```terminating_pods``` | Number of pods that are terminating currently | Gauge | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name<br>``` | Dimensionless | Stable |
-| ```scrape_time``` | Time autoscaler takes to scrape metrics from the service pods in milliseconds | Histogram | ```configuration_name```<br>```namespace_name```<br>```revision_name```<br>```service_name```<br> | Milliseconds | Stable |
+### `kn.autoscaler.scrape.duration`
 
-## Controller
+**Instrument Type:** Float64Histogram
 
-The following metrics are emitted by any component that implements a controller logic.
-The metrics show details about the reconciliation operations and the workqueue behavior on which
-reconciliation requests are enqueued.
+**Unit (UCUM):** s
 
-| Metric Name | Description | Type | Tags | Unit | Status |
-|:-|:-|:-|:-|:-|:-|
-| ```work_queue_depth``` | Depth of the work queue | Gauge | ```reconciler``` | Dimensionless | Stable |
-| ```reconcile_count``` | Number of reconcile operations | Counter | ```reconciler```<br>```success```<br> | Dimensionless | Stable |
-| ```reconcile_latency``` | Latency of reconcile operations | Histogram | ```reconciler```<br>```success```<br> | Milliseconds | Stable |
-| ```workqueue_adds_total``` | Total number of adds handled by workqueue | Counter | ```name``` | Dimensionless | Stable |
-| ```workqueue_depth``` | Current depth of workqueue | Gauge | ```reconciler``` | Dimensionless | Stable |
-| ```workqueue_queue_latency_seconds``` | How long in seconds an item stays in workqueue before being requested | Histogram | ```name``` | Seconds | Stable |
-| ```workqueue_retries_total``` | Total number of retries handled by workqueue | Counter | ```name``` | Dimensionless | Stable |
-| ```workqueue_work_duration_seconds``` | How long in seconds processing an item from a workqueue takes. | Histogram | ```name``` | Seconds| Stable |
-| ```workqueue_unfinished_work_seconds``` | How long in seconds the outstanding workqueue items have been in flight (total). | Histogram | ```name``` | Seconds | Stable |
-| ```workqueue_longest_running_processor_seconds``` | How long in seconds the longest outstanding workqueue item has been in flight | Histogram | ```name``` | Seconds | Stable |
+**Description:** The duration of scraping the revision
+
+### `kn.revision.pods.desired`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {item}
+
+**Description:** Number of pods the autoscaler wants to allocate
+
+### `kn.revision.capacity.excess`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {concurrency}
+
+**Description:** Excess burst capacity observed over the stable window
+
+### `kn.revision.concurrency.stable`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {concurrency}
+
+**Description:** Average of request count per observed pod over the stable window
+
+### `kn.revision.concurrency.panic`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {concurrency}
+
+**Description:** Average of request count per observed pod over the panic window
+
+### `kn.revision.concurrency.target`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {concurrency}
+
+**Description:** The desired concurrent requests for each pod
+
+### `kn.revision.rps.stable`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {request}/s
+
+**Description:** Average of requests-per-second per observed pod over the stable window
+
+### `kn.revision.rps.panic`
+
+**Instrument Type:** Float64Gauge
+
+**Unit (UCUM):** {request}/s
+
+**Description:** Average of requests-per-second per observed pod over the panic window
+
+
+### `kn.revision.pods.requested`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {pod}
+
+**Description:** Number of pods autoscaler requested from Kubernetes
+
+### `kn.revision.pods.count`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {pod}
+
+**Description:** Number of pods that are allocated currently
+
+### `kn.revision.pods.not_ready.count`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {pod}
+
+**Description:** Number of pods that are not ready currently
+
+### `kn.revision.pods.pending.count`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {pod}
+
+**Description:** Number of pods that are pending currently
+
+### `kn.revision.pods.terminating.count`
+
+**Instrument Type:** Int64Gauge
+
+**Unit (UCUM):** {pod}
+
+**Description:** Number of pods that are terminating currently
 
 --8<-- "observability-shared-metrics.md"
