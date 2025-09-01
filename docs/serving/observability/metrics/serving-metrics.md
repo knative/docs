@@ -11,8 +11,7 @@ Administrators can monitor Serving control plane based on the metrics exposed by
 
 !!! note
 
-    These metrics may change we flush out our migration from OpenCensus 
-    to OpenTelemetry
+    These metrics may change as we flush out our migration from OpenCensus to OpenTelemetry
 
 ## Queue Proxy
 
