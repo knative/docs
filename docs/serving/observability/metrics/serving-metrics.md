@@ -11,7 +11,7 @@ Administrators can monitor Serving control plane based on the metrics exposed by
 
 !!! note
 
-    These metrics may chance as we have just switch Knative from OpenCensus 
+    These metrics may change we flush out our migration from OpenCensus 
     to OpenTelemetry
 
 ## Queue Proxy

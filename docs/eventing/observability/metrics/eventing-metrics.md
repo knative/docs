@@ -7,6 +7,16 @@ function: reference
 
 # Knative Eventing Metrics
 
+
+
+!!! warning
+
+    The metrics below have not been updated to reflect our migration from 
+    OpenCensus to OpenTelemetry. We are in the process of updating them.
+
+    These metrics may change we flush out our migration from OpenCensus 
+    to OpenTelemetry.
+
 Administrators can view metrics for Knative Eventing components.
 
 ## Broker - Ingress
