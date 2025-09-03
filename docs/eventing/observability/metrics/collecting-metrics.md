@@ -27,7 +27,7 @@ data:
     tracing-sampling-rate: "1"
 ```
 
-### Apply the Serving Service/Pod Monitors
+### Apply the Eventing Service/Pod Monitors
 
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative Eventing Control Plane
 
