@@ -22,7 +22,7 @@ requests and user-container behavior.
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {item}
+**Unit ([UCUM](https://ucum.org)):** {request}
 
 **Description:** Number of current items in the queue proxy queue
 
@@ -30,7 +30,7 @@ requests and user-container behavior.
 
 **Instrument Type:** Float64Histogram
 
-**Unit (UCUM):** s
+**Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** The duration of the task execution
 
@@ -43,11 +43,11 @@ The following metrics can help you to understand how an application responds whe
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {request}
+**Unit ([UCUM](https://ucum.org)):** {request}
 
 **Description:** Concurrent requests that are routed to the Activator
 
-The following attributes are included with the metrics below
+The following attributes are included with the metric
 
 Name | Type | Description
 -|-|-
@@ -60,11 +60,21 @@ Name | Type | Description
 
 Autoscaler component exposes a number of metrics related to its decisions per revision. For example, at any given time, you can monitor the desired pods the Autoscaler wants to allocate for a Service, the average number of requests per second during the stable window, or whether autoscaler is in panic mode (KPA).
 
+The following attributes are included with the autoscaling metrics below
+
+Name | Type | Description
+-|-|-
+`k8s.namespace.name` | string | Namespace of the Revision
+`kn.service.name` | string | Knative Service name associated with this Revision
+`kn.configuration.name` | string | Knative Configuration name associated with this Revision
+`kn.revision.name` | string | The name of the Revision
+
+
 ### `kn.autoscaler.scrape.duration`
 
 **Instrument Type:** Float64Histogram
 
-**Unit (UCUM):** s
+**Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** The duration of scraping the revision
 
@@ -72,7 +82,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {item}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods the autoscaler wants to allocate
 
@@ -80,7 +90,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {concurrency}
+**Unit ([UCUM](https://ucum.org)):** {concurrency}
 
 **Description:** Excess burst capacity observed over the stable window
 
@@ -88,7 +98,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {concurrency}
+**Unit ([UCUM](https://ucum.org)):** {concurrency}
 
 **Description:** Average of request count per observed pod over the stable window
 
@@ -96,7 +106,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {concurrency}
+**Unit ([UCUM](https://ucum.org)):** {concurrency}
 
 **Description:** Average of request count per observed pod over the panic window
 
@@ -104,7 +114,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {concurrency}
+**Unit ([UCUM](https://ucum.org)):** {concurrency}
 
 **Description:** The desired concurrent requests for each pod
 
@@ -112,7 +122,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {request}/s
+**Unit ([UCUM](https://ucum.org)):** {request}/s
 
 **Description:** Average of requests-per-second per observed pod over the stable window
 
@@ -120,16 +130,15 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** {request}/s
+**Unit ([UCUM](https://ucum.org)):** {request}/s
 
 **Description:** Average of requests-per-second per observed pod over the panic window
-
 
 ### `kn.revision.pods.requested`
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {pod}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods autoscaler requested from Kubernetes
 
@@ -137,7 +146,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {pod}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods that are allocated currently
 
@@ -145,7 +154,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {pod}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods that are not ready currently
 
@@ -153,7 +162,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {pod}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods that are pending currently
 
@@ -161,7 +170,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Int64Gauge
 
-**Unit (UCUM):** {pod}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods that are terminating currently
 

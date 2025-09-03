@@ -25,7 +25,7 @@ Name | Type | Description | Examples
 
 **Instrument Type:** Histogram
 
-**Unit (UCUM):** s
+**Unit ([[UCUM](https://ucum.org)):** s
 
 **Description:** The duration of task execution.
 
@@ -55,7 +55,7 @@ Name | Type | Description |
 
 **Instrument Type:** Int64UpDownCounter
 
-**Unit (UCUM):** {item}
+**Unit ([UCUM](https://ucum.org)):** {item}
 
 **Description:** Number of current items in the queue
 
@@ -63,7 +63,7 @@ Name | Type | Description |
 
 **Instrument Type:**  Int64Counter
 
-**Unit (UCUM):**  {item}
+**Unit ([UCUM](https://ucum.org)):**  {item}
 
 **Description:**  Number of items added to the queue
 
@@ -71,7 +71,7 @@ Name | Type | Description |
 
 **Instrument Type:**
 
-**Unit (UCUM):** s
+**Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** How long an item stays in workqueue
 
@@ -79,7 +79,7 @@ Name | Type | Description |
 
 **Instrument Type:** Float64Histogram
 
-**Unit (UCUM):** s
+**Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** How long in seconds processing an item from workqueue takes
 
@@ -87,7 +87,7 @@ Name | Type | Description |
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** s
+**Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** How many seconds of work the reconciler has done that is in progress and hasn't been observed by duration. Large values indicate stuck threads. One can deduce the number of stuck threads by observing the rate at which this increases.
 
@@ -95,7 +95,7 @@ Name | Type | Description |
 
 **Instrument Type:** Float64Gauge
 
-**Unit (UCUM):** s
+**Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** How long the longest worker thread has been running
 
@@ -103,7 +103,7 @@ Name | Type | Description |
 
 **Instrument Type:** Int64Counter
 
-**Unit (UCUM):** {item}
+**Unit ([UCUM](https://ucum.org)):** {item}
 
 **Description:** Number of items re-added to the queue
 
