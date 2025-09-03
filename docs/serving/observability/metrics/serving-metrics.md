@@ -22,7 +22,7 @@ requests and user-container behavior.
 
 **Instrument Type:** Int64Gauge
 
-**Unit ([UCUM](https://ucum.org)):** {item}
+**Unit ([UCUM](https://ucum.org)):** {request}
 
 **Description:** Number of current items in the queue proxy queue
 
@@ -47,7 +47,7 @@ The following metrics can help you to understand how an application responds whe
 
 **Description:** Concurrent requests that are routed to the Activator
 
-The following attributes are included with the metrics below
+The following attributes are included with the metric
 
 Name | Type | Description
 -|-|-
@@ -72,7 +72,7 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 
 **Instrument Type:** Int64Gauge
 
-**Unit ([UCUM](https://ucum.org)):** {item}
+**Unit ([UCUM](https://ucum.org)):** {pod}
 
 **Description:** Number of pods the autoscaler wants to allocate
 
