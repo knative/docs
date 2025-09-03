@@ -5,7 +5,15 @@ components:
 function: reference
 ---
 
-# Knative Eventing metrics
+# Knative Eventing Metrics
+
+!!! warning
+
+    The metrics below have not been updated to reflect our migration from 
+    OpenCensus to OpenTelemetry. We are in the process of updating them.
+
+    These metrics may change as we flush out our migration from OpenCensus 
+    to OpenTelemetry.
 
 Administrators can view metrics for Knative Eventing components.
 
@@ -42,11 +50,6 @@ By aggregating the metrics over the http code, events can be separated into two 
 | event_count | Number of events dispatched by the in-memory channel | Counter | container_name<br>event_type=<br>namespace_name=<br>response_code<br>response_code_class<br>unique_name | Dimensionless | Stable
 | event_dispatch_latencies | The time spent dispatching an event from a in-memory Channel | Histogram | container_name<br>event_type<br>namespace_name=<br>response_code<br>response_code_class<br>unique_name | Milliseconds | Stable
 
-!!! note
-    A number of metrics eg. controller, Go runtime and others are omitted here as they are common
-    across most components. For more about these metrics check the
-    [Serving metrics API section](../../../serving/observability/metrics/serving-metrics.md).
-
 ## Eventing sources
 
 Eventing sources are created by users who own the related system, so they can trigger applications with events.
@@ -57,3 +60,5 @@ to verify that events have been delivered from the source side, thus verifying t
 |:-|:-|:-|:-|:-|:-|
 | event_count | Number of events sent by the source | Counter | event_source<br>event_type<br>name<br>namespace_name<br>resource_group<br>response_code<br>response_code_class<br>response_error<br>response_timeout | Dimensionless  | Stable |
 | retry_event_count | Number of events sent by the source in retries | Counter | event_source<br>event_type<br>name<br>namespace_name<br>resource_group<br>response_code<br>response_code_class<br>response_error<br>response_timeout | Dimensionless | Stable
+
+--8<-- "observability-shared-metrics.md"

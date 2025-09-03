@@ -188,7 +188,7 @@ nav:
         - Configuring logging: serving/observability/logging/config-logging.md
         - Configuring Request logging: serving/observability/logging/request-logging.md
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
-        - Knative Serving metrics: serving/observability/metrics/serving-metrics.md
+        - Metrics Reference: serving/observability/metrics/serving-metrics.md
       # Serving - troubleshooting
       - Troubleshooting:
         - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
@@ -307,7 +307,7 @@ nav:
         - Collecting logs: eventing/observability/logging/collecting-logs.md
         - Configuring logging: eventing/observability/logging/config-logging.md
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
-        - Knative Eventing metrics: eventing/observability/metrics/eventing-metrics.md
+        - Metrics Reference: eventing/observability/metrics/eventing-metrics.md
       - Features:
         - About Eventing features: eventing/features/README.md
         - DeliverySpec.Timeout field: eventing/features/delivery-timeout.md
