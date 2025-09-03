@@ -60,6 +60,16 @@ Name | Type | Description
 
 Autoscaler component exposes a number of metrics related to its decisions per revision. For example, at any given time, you can monitor the desired pods the Autoscaler wants to allocate for a Service, the average number of requests per second during the stable window, or whether autoscaler is in panic mode (KPA).
 
+The following attributes are included with the autoscaling metrics below
+
+Name | Type | Description
+-|-|-
+`k8s.namespace.name` | string | Namespace of the Revision
+`kn.service.name` | string | Knative Service name associated with this Revision
+`kn.configuration.name` | string | Knative Configuration name associated with this Revision
+`kn.revision.name` | string | The name of the Revision
+
+
 ### `kn.autoscaler.scrape.duration`
 
 **Instrument Type:** Float64Histogram
@@ -123,7 +133,6 @@ Autoscaler component exposes a number of metrics related to its decisions per re
 **Unit ([UCUM](https://ucum.org)):** {request}/s
 
 **Description:** Average of requests-per-second per observed pod over the panic window
-
 
 ### `kn.revision.pods.requested`
 
