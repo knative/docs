@@ -22,7 +22,52 @@ Instead of a rigid, centrally-managed process, our system uses a "choreography,"
 
 Here is the high-level business process for our triage system:
 
-![knative-eventing-eda-agents.svg](/blog/articles/images/knative-eventing-eda-agents.svg)
+```mermaid
+graph TD
+%% Styling Definitions
+    classDef service fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
+    classDef decision fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#000
+    classDef endpoint fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px,color:#000
+    classDef start fill:#ffccbc,stroke:#d84315,stroke-width:2px,color:#000
+
+    subgraph "Entry Point"
+        Start[Customer Sends a Message]:::start
+    end
+
+    subgraph "Automated Triage Pipeline"
+        S1[Intake Service]:::service
+        S2[Structure Processor]:::service
+        S3[Guardian Processor]:::service
+        S4[Customer Lookup]:::service
+        S5[Router Service]:::service
+    end
+
+    subgraph "Final Destinations"
+        E1[Finance Inbox]:::endpoint
+        E2[Manual Review Queue]:::endpoint
+        E3[Support System]:::endpoint
+        E4[Website Ops Team]:::endpoint
+    end
+
+%% Main Flow with Explanatory Text
+    Start -- "Accepts raw text" --> S1
+    S1 -- "Creates a new task" --> S2
+    S2 -- "Extracts key data (name, email, etc.)" --> S3
+
+    S3 --> D1{Is content safe?}:::decision
+    D1 -- Yes, content is clean --> S4
+    D1 -- No, harmful content detected --> E2
+
+    S4 --> D2{Is this a known customer?}:::decision
+    D2 -- Yes, customer record found --> S5
+    D2 -- No, customer not in DB --> E2
+
+    S5 --> D3{What is the message about?}:::decision
+    D3 -- "It's a billing question" --> E1
+    D3 -- "It's a technical problem" --> E3
+    D3 -- "It's a website issue" --> E4
+    D3 -- "Unsure / Other" --> E2
+```
 *High-Level Business Process Flowchart*
 
 A customer message kicks off the pipeline. Each step is handled by a dedicated agent:
