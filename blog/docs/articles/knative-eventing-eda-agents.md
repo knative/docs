@@ -22,7 +22,7 @@ Instead of a rigid, centrally-managed process, our system uses a "choreography,"
 
 Here is the high-level business process for our triage system:
 
-```mermaid
+``` mermaid
 graph TD
 %% Styling Definitions
     classDef service fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
