@@ -178,18 +178,19 @@ You can also build your own language packs to customize the output container to 
 <!-- TODO: use img: shapes for these icons -->
 ``` mermaid
 flowchart TD
-  init>"``func init` to create a function`"]
-  git@{ shape: lin-cyl, label: "Git Repo" }
-  laptop@{ shape: win-pane, label: "Local Development" }
+  init>"`<code>func init</code>
+  to create a function`"]
+  git@{ shape: lin-cyl, label: "fa:fa-git-alt local repo" }
+  laptop@{ shape: win-pane, label: "Local Development fa:fa-docker" }
   oci@{ shape: procs, label: "Container Registry" }
-  cluster@{ shape: cloud, label: "Knative Serving" }
+  cluster@{ label: "fa:fa-dharmachakra Knative Serving" }
 
 init --> git
 git --  develop and test locally--> laptop
 laptop --> git
-git -- push container to registry --> oci
+git -- "`<code>func push</code>
+push container to registry`" --> oci -.-> cluster
 git -- deploy container and triggers --> cluster
-oci -.-> cluster
 ```
 
 1. **Development**: Write your function using language-specific templates
