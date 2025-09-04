@@ -51,6 +51,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/knative-eventing-eda-agents.md
           - articles/kubevirt_meets_eventing.md
           - articles/ai_functions_llama_stack.md
           - articles/configurable-runtimeclassnames.md
