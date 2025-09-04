@@ -176,7 +176,7 @@ You can also build your own language packs to customize the output container to 
 ### Function Deployment and Lifecycle
 
 <!-- TODO: use img: shapes for these icons -->
-```mermaid
+``` mermaid
 flowchart TD
   init>"``func init` to create a function`"]
   git@{ shape: lin-cyl, label: "Git Repo" }
