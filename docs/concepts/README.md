@@ -151,7 +151,7 @@ A typical event flow involves:
 
 Knative Functions provide a simplified programming model that abstracts away infrastructure concerns:
 
-**Function Signature**: Functions follow a simple signature pattern, receiving CloudEvents or HTTP requests and optionally returning responses.
+**Function Signature**: Functions follow a simple signature pattern leveraging standard libraries (such as HTTP and CloudEvents) to prevent lock-in.
 
 **Built-in Templates**: Language-specific templates provide starting points for common function patterns and integrate with popular frameworks.
 
@@ -204,7 +204,7 @@ oci -.-> cluster
 
 While each Knative component can be used independently, they're designed to work seamlessly together:
 
-**Functions + Serving**: Functions are implemented as Knative Services, inheriting all serving capabilities like autoscaling and traffic management.
+**Functions + Serving**: Functions are deployed as Knative Services, inheriting all serving capabilities like autoscaling and traffic management.
 
 **Functions + Eventing**: Functions can be triggered by CloudEvents, enabling event-driven function execution and microservice orchestration.
 
@@ -214,13 +214,13 @@ While each Knative component can be used independently, they're designed to work
 
 Knative integrates with standard Kubernetes resources and third-party tools:
 
-**Kubernetes-native resources**: Serving and Eventing are implemented as Kubernetes custom resources, meaning that you an use the same policy and IAM tools you use for Kubernetes.
+**Kubernetes-native resources**: Serving and Eventing are implemented as Kubernetes custom resources, meaning that you can use the same policy and IAM tools you use for Kubernetes.
 
 **Builds on Kubernetes**: Serving creates Pods (so you can use GPUs, service accounts, and other Kubernetes features), and Eventing can easily deliver events to Kubernetes services as well as Serving functions.
 
-**Networking**: Integrates with cert-manager for certificate management. Optionally works with Istio, Envoy, and other service mesh technologies for advanced traffic management and security.
+**Networking**: Integrates with cert-manager for certificate management, and with Gateway API for ingress. Integrates with Istio, Envoy, and other service mesh technologies for advanced traffic management and security.
 
-**Monitoring**: Integrates with Prometheus, Grafana, Jaeger, and other observability tools for metrics and monitoring.
+**Monitoring**: Using [OpenTelemetry](https://opentelemetry.io/), integrates with Prometheus, Grafana, Jaeger, and many other observability tools for metrics and monitoring.
 
 **CI/CD**: Compatible with GitOps workflows, Tekton Pipelines, and other continuous deployment tools.
 
