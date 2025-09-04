@@ -1,9 +1,9 @@
 # Collecting Metrics in Knative
 
 Knative leverages [OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) for exporting metrics.
-
 We currently support the following export protocols:
-- [OTel (OTLP) over HTTP or gRPC](https://opentelemetry.io/docs/languages/go/exporters/#prometheus-experimental)
+
+- [OTel (OTLP) over HTTP or gRPC](https://opentelemetry.io/docs/languages/go/exporters/#otlp)
 - [Prometheus](https://opentelemetry.io/docs/languages/go/exporters/#prometheus-experimental)
 
 You can also set up the OpenTelemetry Collector to receive metrics from Knative components and distribute them to other metrics providers that support OpenTelemetry.
