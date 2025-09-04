@@ -8,7 +8,7 @@ The answer lies in a robust Event-Driven Architecture (EDA). And the key to impl
 
 In this post, we'll explore an AI-powered message triage system I built to demonstrate this exact pattern. This system ingests unstructured customer messages, uses a series of AI agents to process and enrich them, and routes them to the correct destination, all managed through a flexible event-driven choreography.
 
-You can find the full source code for the project on [GitHub]([https://github.com/keventmesh/agentic-ai-demo]) and a complete video walkthrough [here]([https://www.youtube.com/watch?v=bfWvvdQmAe8]).
+You can find the full source code for the project on [GitHub](https://github.com/keventmesh/agentic-ai-demo) and a complete video walkthrough [here](https://www.youtube.com/watch?v=bfWvvdQmAe8).
 
 ### The Pitfalls of Tightly Coupled Systems
 
@@ -117,8 +117,8 @@ The event-driven agent pattern is a powerful blueprint for building the next gen
 
 I encourage you to explore the project and see it for yourself. While the demo video shows OpenShift console, the demo can be run on any Kubernetes cluster with Knative installed.
 
-*   **Watch the full demo on YouTube:** [https://www.youtube.com/watch?v=bfWvvdQmAe8]
-*   **Get the code on GitHub:** [https://github.com/keventmesh/agentic-ai-demo]
+*   **Watch the full demo on YouTube:** [https://www.youtube.com/watch?v=bfWvvdQmAe8](https://www.youtube.com/watch?v=bfWvvdQmAe8)
+*   **Get the code on GitHub:** [https://github.com/keventmesh/agentic-ai-demo](https://github.com/keventmesh/agentic-ai-demo)
 
 If you have any questions or feedback, please feel free to reach out to us. You can find us in the [CNCF Slack](https://communityinviter.com/apps/cloud-native/cncf){:target="_blank"} in the [#knative](https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"} channel.
 
