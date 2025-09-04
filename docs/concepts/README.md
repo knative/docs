@@ -175,7 +175,22 @@ You can also build your own language packs to customize the output container to 
 
 ### Function Deployment and Lifecycle
 
-<!-- TODO: Add function lifecycle diagram -->
+<!-- TODO: use img: shapes for these icons -->
+```mermaid
+flowchart TD
+  init>"``func init` to create a function`"]
+  git@{ shape: lin-cyl, label: "Git Repo" }
+  laptop@{ shape: win-pane, label: "Local Development" }
+  oci@{ shape: procs, label: "Container Registry" }
+  cluster@{ shape: cloud, label: "Knative Serving" }
+
+init --> git
+git --  develop and test locally--> laptop
+laptop --> git
+git -- push container to registry --> oci
+git -- deploy container and triggers --> cluster
+oci -.-> cluster
+```
 
 1. **Development**: Write your function using language-specific templates
 2. **Building**: The `func` CLI creates an optimized container image
