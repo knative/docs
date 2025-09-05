@@ -218,6 +218,7 @@ Knative supports the following SASL mechanisms:
 - `PLAIN`
 - `SCRAM-SHA-256`
 - `SCRAM-SHA-512`
+- `OAUTHBEARER` for AWS MSK IAM
 
 To use a specific SASL mechanism replace `<sasl_mechanism>` with the mechanism of your choice.
 
@@ -251,6 +252,9 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
   --from-literal=user.skip=true
 ```
 
+!!! note
+    `ca.crt` can be omitted to fallback to use system's root CA set.
+
 ### Authentication and encryption using SSL
 
 ```bash
@@ -261,8 +265,46 @@ kubectl create secret --namespace <namespace> generic <my_secret> \
   --from-file=user.key=<my_key.pem_file_path>
 ```
 
-!!! note
-    `ca.crt` can be omitted to fallback to use system's root CA set.
+### Authentication for AWS MSK IAM
+AWS MSK IAM authentication requires creation of a secret and java properties configuration.
+
+In the following ConfigMaps append the following to the listed property values. If using an assumed IAM role, add `awsRoleArn="<role_arn>"` to the `sasl.jaas.config` value.
+
+- config-kafka-broker-data-plane
+  - config-kafka-broker-producer.properties
+  - config-kafka-broker-consumer.properties
+- config-kafka-channel-data-plane
+  - config-kafka-channel-producer.properties
+  - config-kafka-channel-consumer.properties
+
+```
+security.protocol=SASL_SSL
+sasl.mechanism=OAUTHBEARER
+sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required awsStsRegion="<region>";
+sasl.login.callback.handler.class=software.amazon.msk.auth.iam.IAMOAuthBearerLoginCallbackHandler
+sasl.client.callback.handler.class=software.amazon.msk.auth.iam.IAMOAuthBearerLoginCallbackHandler
+```
+
+Create a secret for using the default AWS credentials:
+
+```bash
+kubectl create secret --namespace <namespace> generic <my_secret> \
+  --from-literal=protocol=SASL_SSL \
+  --from-literal=sasl.mechanism=OAUTHBEARER \
+  --from-literal=type=OAUTHBEARER \
+  --from-literal=tokenProvider=MSKAccessTokenProvider
+```
+
+Or create a secret for using an assumed role:
+
+```bash
+kubectl create secret --namespace <namespace> generic <my_secret> \
+  --from-literal=protocol=SASL_SSL \
+  --from-literal=sasl.mechanism=OAUTHBEARER \
+  --from-literal=type=OAUTHBEARER \
+  --from-literal=tokenProvider=MSKRoleAccessTokenProvider \
+  --from-literal=roleARN=<role_arn>
+```
 
 ## Bring your own topic
 
