@@ -41,55 +41,45 @@ readonly SITE=$PWD/site
 rm -rf site/
 
 if [ "$BUILD_VERSIONS" == "no" ]; then
-  # HEAD to root if we're not doing versioning.
+  # Build to root if we're not doing versioning
   mkdocs build -f mkdocs.yml -d site
 else
-  # Versioning: pre-release (HEAD): docs => development/
-  cp -r . $TEMP/docs-main
+  # Build latest version to /docs
+  cp -r . "$TEMP/docs-main"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/docs-main/docs/serving/reference/serving-api.md"
   curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/docs-main/docs/eventing/reference/eventing-api.md"
-  pushd "$TEMP/docs-main"; mkdocs build -f mkdocs.yml -d $SITE/development; popd
+  
+  # Create docs directory structure
+  mkdir -p "$SITE/docs"
+  
+  # Build latest docs to /docs
+  pushd "$TEMP/docs-main"
+  KNATIVE_VERSION="${VERSIONS[0]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d "$SITE/docs"
+  popd
 
-  # Latest release branch to root
-  git clone --depth 1 -b ${DOCS_BRANCHES[0]} https://github.com/${GIT_SLUG} "$TEMP/docs-$latest"
-
-  if [ ${latest#*1.} -gt 6 ]; then
-      curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/serving/reference/serving-api.md"
-      curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/eventing/reference/eventing-api.md"
-  else
-      curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/docs-$latest/docs/reference/api/serving-api.md"
-  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/docs-$latest/docs/reference/api/eventing-api.md"
-  fi
-
-  pushd "$TEMP/docs-$latest"; KNATIVE_VERSION="${VERSIONS[0]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -d $SITE; popd
-
-  # Previous release branches release-$version to /v$version-docs
-  versionjson=""
+  # Build versioned docs to /vX.Y-docs/
   for i in "${!previous[@]}"; do
-    version=${previous[$i]}
-    versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
-
-    echo "Building for previous version $version"
-    git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
-    if [ ${version#*1.} -gt 6 ]; then
-        curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
-        curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
-    else
-        curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/reference/api/serving-api.md"
-        curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/reference/api/eventing-api.md"
-    fi
-    pushd "$TEMP/docs-$version"; KNATIVE_VERSION="${VERSIONS[i+1]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[i+1]}" VERSION_WARNING=true mkdocs build -d "$SITE/v$version-docs"; popd
-
+    version="${previous[$i]}"
+    branch="${DOCS_BRANCHES[$((i+1))]}"
+    
+    git clone --depth 1 -b "$branch" "https://github.com/$GIT_SLUG" "$TEMP/docs-$version"
+    
+    # Copy non-versioned content from main branch
+    mkdir -p "$TEMP/docs-$version/docs/about"
+    cp -r "$TEMP/docs-main/docs/about" "$TEMP/docs-$version/docs/"
+    mkdir -p "$TEMP/docs-$version/docs/community"
+    cp -r "$TEMP/docs-main/docs/community" "$TEMP/docs-$version/docs/"
+    
+    pushd "$TEMP/docs-$version"
+    KNATIVE_VERSION="$version.0" SAMPLES_BRANCH="$branch" mkdocs build -d "$SITE/v$version-docs"
+    popd
   done
-
-  # Set up the version file to point to the built docs.
-  cat << EOF > $SITE/versions.json
-  [
-    {"version": "docs", "title": "v$latest", "aliases": [""]},
-    $versionjson
-    {"version": "development", "title": "(Pre-release)", "aliases": [""]}
-  ]
-EOF
+  
+  # Move non-versioned content to /docs
+  mkdir -p "$SITE/docs/about"
+  cp -r "$TEMP/docs-main/docs/about" "$SITE/docs/"
+  mkdir -p "$SITE/docs/community"
+  cp -r "$TEMP/docs-main/docs/community" "$SITE/docs/"
 fi
 
 # Create the blog

@@ -1,12 +1,13 @@
 # Settings in the [build] context are global and are applied to all contexts
 # unless otherwise overridden by more specific contexts.
 [build]
-  command = "./hack/build.sh"
+  command = "hack/build.sh"
   publish = "site"
 
 [build.environment]
-  NODE_VERSION= "14"
-  PYTHON_VERSION = "3.8"
+  PYTHON_VERSION = "3.9"
+  NODE_VERSION = "16"
+  NPM_VERSION = "8.5.5"
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
@@ -17,29 +18,97 @@
 [context.deploy-preview.environment]
   BUILD_VERSIONS="no"
 
+# Handle versioned docs
+[[redirects]]
+  from = "/v:version-docs/*"
+  to = "/v:version-docs/:splat"
+  status = 200
+
+# Redirect old versioned docs to new paths
+[[redirects]]
+  from = "/docs-:version/*"
+  to = "/v:version-docs/:splat"
+  status = 301
+
+# Redirect root to /docs for the latest version
+[[redirects]]
+  from = "/"
+  to = "/docs"
+  status = 200
+
+# Handle /docs paths
+[[redirects]]
+  from = "/docs"
+  to = "/docs/"
+  status = 301
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/docs/:splat"
+  status = 200
+
+# Handle old about and community URLs (root level to /docs/)
+[[redirects]]
+  from = "/about"
+  to = "/docs/about/"
+  status = 301
+
+[[redirects]]
+  from = "/about/*"
+  to = "/docs/about/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/community"
+  to = "/docs/community/"
+  status = 301
+
+[[redirects]]
+  from = "/community/*"
+  to = "/docs/community/:splat"
+  status = 301
+
+# Handle blog URLs
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog/:splat"
+  status = 200
+
+# Handle old development URLs
+[[redirects]]
+  from = "/development/*"
+  to = "/docs/:splat"
+  status = 301
+
+# Handle old API reference URLs
+[[redirects]]
+  from = "/reference/api/*"
+  to = "/docs/reference/api/:splat"
+  status = 301
+
+# Handle old serving and eventing reference URLs
+[[redirects]]
+  from = "/serving/reference/*"
+  to = "/docs/serving/reference/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/eventing/reference/*"
+  to = "/docs/eventing/reference/:splat"
+  status = 301
+
+# Keep existing contributor redirects
 [[redirects]]
   from = "/contributing/"
   to = "/docs/community/"
   status = 301
 
 [[redirects]]
-  from = "/community/*"
-  to = "/docs/community/"
+  from = "/help/contributing/"
+  to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
   status = 301
 
 [[redirects]]
   from = "/docs/help/contributor/*"
   to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
-  status = 301
-
-# Redirect from /docs/* to root to handle the base URL change
-[[redirects]]
-  from = "/docs/*"
-  to = "/:splat"
-  status = 301
-
-# Redirect old /docs path to root
-[[redirects]]
-  from = "/docs"
-  to = "/"
   status = 301
