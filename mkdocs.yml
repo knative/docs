@@ -1,13 +1,13 @@
 INHERIT: config/nav.yml
 
 site_name: Knative
-site_url: https://knative.dev/docs
+site_url: https://knative.dev
 site_description: Knative Documentation
 extra_css:
   - stylesheets/extra.css
 
 repo_url: https://github.com/knative/docs
-edit_uri: edit/main/docs
+edit_uri: edit/main
 
 theme:
   name: material
