@@ -64,22 +64,38 @@ else
     
     git clone --depth 1 -b "$branch" "https://github.com/$GIT_SLUG" "$TEMP/docs-$version"
     
-    # Copy non-versioned content from main branch
-    mkdir -p "$TEMP/docs-$version/docs/about"
-    cp -r "$TEMP/docs-main/docs/about" "$TEMP/docs-$version/docs/"
-    mkdir -p "$TEMP/docs-$version/docs/community"
-    cp -r "$TEMP/docs-main/docs/community" "$TEMP/docs-$version/docs/"
+    # Fetch API reference docs for versioned builds
+    curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/$branch/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
+    curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/$branch/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
     
     pushd "$TEMP/docs-$version"
     KNATIVE_VERSION="$version.0" SAMPLES_BRANCH="$branch" mkdocs build -d "$SITE/v$version-docs"
     popd
   done
   
-  # Move non-versioned content to /docs
-  mkdir -p "$SITE/docs/about"
-  cp -r "$TEMP/docs-main/docs/about" "$SITE/docs/"
-  mkdir -p "$SITE/docs/community"
-  cp -r "$TEMP/docs-main/docs/community" "$SITE/docs/"
+  # Build development site
+  pushd "$TEMP/docs-main"
+  KNATIVE_VERSION="${VERSIONS[0]}.0" SAMPLES_BRANCH="${DOCS_BRANCHES[0]}" mkdocs build -f mkdocs.yml -d "$SITE/development"
+  popd
+  
+  # Move non-versioned content to root level
+  mkdir -p "$SITE/about"
+  cp -r "$TEMP/docs-main/docs/about" "$SITE/"
+  mkdir -p "$SITE/community"
+  cp -r "$TEMP/docs-main/docs/community" "$SITE/"
+  
+  # Copy index.html and sitemap.xml to root
+  cp "$SITE/docs/index.html" "$SITE/"
+  cp "$SITE/docs/sitemap.xml" "$SITE/"
+  
+  # Create version JSON for version picker
+  versionjson=""
+  for i in "${!previous[@]}"; do
+    version=${previous[$i]}
+    versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
+  done
+  versionjson="[{\"version\": \"docs\", \"title\": \"latest\", \"aliases\": [\"\"]},$versionjson]"
+  echo "$versionjson" > "$SITE/versions.json"
 fi
 
 # Create the blog
