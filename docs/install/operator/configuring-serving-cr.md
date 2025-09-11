@@ -257,6 +257,33 @@ spec:
       ...
 ```
 
+### Connect to AWS ECR using Pod Identity
+
+The use of AWS ECR as source of images for deployment using knative-serving requires access to digests for images. This can be obtained via a managed role and this role can
+be attached to the controller ServiceAccount. This will allow the controller pods to retrieve relevant digests for containers from ECR.
+
+```terraform
+module "pod_identity_knative" {
+  source  = "terraform-aws-modules/eks-pod-identity/aws"
+  version = "~> 1.6"
+
+  name = "knative-serving-controller"
+
+  additional_policy_arns = {
+    AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  }
+
+  # Pod Identity Associations
+  associations = {
+    knative-serving-controller = {
+      cluster_name    = "some-cluster-name"
+      namespace       = "knative-serving"
+      service_account = "controller"
+    }
+  }
+}
+```
+
 ## SSL certificate for controller
 
 To [enable tag to digest resolution](../../serving/tag-resolution.md), the Knative Serving controller needs to access the container registry.
