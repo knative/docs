@@ -16,7 +16,7 @@ The `run` command builds an image for your function if required, and runs this i
     func run [--registry <registry>]
     ```
 
-!!! note
+    !!! note
     The coordinates for the **image registry** can be configured through an environment variable (`FUNC_REGISTRY`) as well.
 
     Using this command also builds the function if necessary.
@@ -67,13 +67,7 @@ You can verify that your function has been successfully run by using the `invoke
     func invoke
     ```
 
-=== "kn func"
-
-    ```bash
-    kn func invoke
-    ```
-
-!!! Success "Expected output"
+    !!! Success "Expected output"
     ```{ .bash .no-copy }
     Received response
     POST / HTTP/1.1 hello.default.127.0.0.1.sslip.io
@@ -87,4 +81,16 @@ You can verify that your function has been successfully run by using the `invoke
       X-Forwarded-For: 10.244.0.15, 10.244.0.9
       X-Forwarded-Proto: http
     Body:
+    ```
+
+
+=== "kn func"
+
+    ```bash
+    kn func invoke
+    ```
+
+    !!! Success "Expected output"
+    ```{ .bash .no-copy }
+    INFO:root:OK: Request Received
     ```
