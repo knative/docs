@@ -5,8 +5,8 @@
   publish = "site"
 
 [build.environment]
-  NODE_VERSION= "14"
-  PYTHON_VERSION = "3.8"
+  NODE_VERSION= "22"
+  PYTHON_VERSION = "3.9"
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
