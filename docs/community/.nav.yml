@@ -1,0 +1,5 @@
+nav:
+  - Community:
+    - How To Get Involved: community/README.md
+    - Contribute to Knative: community/contributing.md
+    - Community Rules and Practices: community/governance.md

@@ -28,11 +28,20 @@
   aria-label="{{ lang.t('tabs') }}"
   data-md-component="tabs"
 >
-  <div class="md-grid">
-    <ul class="md-tabs__list" id="sub-nav">
-      {% for nav_item in nav %}
-        {{ item.render(nav_item) }}
-      {% endfor %}
-    </ul>
-  </div>
+  {# Create tabs from the "section" of docs that we are in.
+     Some sections (about, community) are not versioned, while docs is. #}
+  {% set section = nav | selectattr("active") | first %}
+  {% if section %}
+    {% set nav = section.children %}
+  {% endif %}
+
+  {% if nav | length > 1 %}
+    <div class="md-grid">
+      <ul class="md-tabs__list" id="sub-nav">
+        {% for nav_item in nav %}
+          {{ item.render(nav_item) }}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 </nav>

@@ -1,0 +1,11 @@
+nav:
+  - About:
+    - Testimonials: about/testimonials.md
+    - Case studies:
+      - List of Case Studies: about/case-studies/README.md
+      - deepc: about/case-studies/deepc.md
+      - IBM: about/case-studies/ibm.md
+      - Outfit7: about/case-studies/outfit7.md
+      - Puppet: about/case-studies/puppet.md
+      - PNC Bank: about/case-studies/pnc.md
+      - SVA: about/case-studies/sva.md

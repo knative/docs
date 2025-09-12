@@ -1,7 +1,7 @@
 mkdocs-material<10.0
 mkdocs-exclude>=1.0
 mkdocs-macros-plugin>=0.5.12
-mkdocs-awesome-pages-plugin>=2.5
+mkdocs-awesome-nav>=3.0
 mkdocs-git-revision-date-localized-plugin>=1.2
 mkdocs-redirects>=1.0.3
 mkdocs-rss-plugin>=0.18.0

@@ -97,7 +97,7 @@
         </a>
       </li>
       <li class="md-tabs__item">
-        <a href="/docs/about/testimonials/" class="md-tabs__link">
+        <a href="/about/testimonials/" class="md-tabs__link">
           About
         </a>
       </li>
@@ -107,7 +107,7 @@
         </a>
       </li>
       <li class="md-tabs__item">
-        <a href="/docs/community/" class="md-tabs__link">
+        <a href="/community/" class="md-tabs__link">
           Community
         </a>
       </li>
@@ -145,9 +145,9 @@
   <!-- Sub Navigation tabs (sticky) -->
   {% if not page.is_homepage %}
     {% if "navigation.tabs.sticky" in features %}
-        {% if "navigation.tabs" in features %}
+      {% if "navigation.tabs" in features %}
         {% include "partials/tabs.html" %}
-        {% endif %}
+      {% endif %}
     {% endif %}
   {% endif %}
 </header>
