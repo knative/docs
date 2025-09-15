@@ -190,7 +190,7 @@ Please refer to issue [#1144](https://github.com/knative/client/issues/1144) (an
 
 **ACTION REQUIRED**
 
-If you rely on client-side revision naming, you have to add `--revision-name {{.Service}}-{{.Random 5}}-{{.Generation}}` to `kn service create` to get back the previous default behaviour. However, in most of all cases, you shound not worry about whether the revision names are created by `kn` or by the Knative serving controller
+If you rely on client-side revision naming, you have to add `{{ '--revision-name {{.Service}}-{{.Random 5}}-{{.Generation}}' }}` to `kn service create` to get back the previous default behaviour. However, in most of all cases, you shound not worry about whether the revision names are created by `kn` or by the Knative serving controller
 
 In case of issues with this change, please let us know and we will fix it asap. We are committed to supporting you with any issues caused by this change.
 

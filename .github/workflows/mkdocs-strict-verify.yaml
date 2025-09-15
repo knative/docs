@@ -25,12 +25,8 @@ jobs:
 
   verify:
     name: Verify mkdocs strict
-    strategy:
-      matrix:
-        go-version: [1.16.x]
-        platform: [ubuntu-latest]
 
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
 
     env:
       GOPATH: ${{ github.workspace }}
@@ -47,4 +43,4 @@ jobs:
       run: python3 -m pip install -r requirements.txt
 
     - name: Verify MkDocs
-      run: mkdocs build --strict
+      run: ./hack/build.sh --strict

@@ -5,6 +5,16 @@ site_url: https://knative.dev/docs
 site_description: Knative Documentation
 extra_css:
   - stylesheets/extra.css
+# Don't try to make snippets into regular docs (e.g. link-checking, nav, etc)
+exclude_docs: |
+  *docs/snippets/
+
+# TODO: make these stricter (move to "warn" to flag new link breakages)
+# validation:
+  # omitted_files: warn
+  # absolute_links: relative_to_docs
+  # anchors: warn
+  # unrecognized_links: warn
 
 repo_url: https://github.com/knative/docs
 edit_uri: edit/main/docs

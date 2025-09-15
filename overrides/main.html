@@ -31,7 +31,8 @@
   {% set _.tags = config.extra.tags %}
 
   <!-- Versioning -->
-  {%- if config.extra.version -%}
+  {# This is changed from upstream to only show version picker on versioned pages #}
+  {%- if page and (page.meta.samples_branch) -%}
     {%- set mike = config.plugins.mike -%}
     {%- if not mike or mike.config.version_selector -%}
       {%- set _.version = config.extra.version -%}

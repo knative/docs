@@ -53,6 +53,8 @@ cp -r "$TEMP/content/docs/images" "$TEMP/content/docs/docs/images"
 
 # Point top-level nav to docs directory.
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
+# We use samples_branch to flag that the documentation is versioned
+echo -e "\n\nsamples_branch: main" >> "$TEMP/content/docs/docs/.meta.yml"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/docs/serving/reference/serving-api.md"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/content/docs/docs/eventing/reference/eventing-api.md"
 versionjson="{\"version\": \"docs\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
@@ -77,6 +79,8 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   if [ ! -f "$TEMP/content/docs/docs/.nav.yml" ]; then
     sed '/- Blog:/,$d' "$TEMP/current-release/config/nav.yml" >> "$TEMP/content/docs/docs/.nav.yml"
   fi
+  # Smoketests were written for Hugo, not mkdocs, so remove
+  rm "$TEMP/content/docs/docs/smoketest.md"
   # Fill in meta content for macros.py
   echo -e "\n\nknative_version: ${VERSIONS[0]}.0\nsamples_branch: ${DOCS_BRANCHES[0]}" >> "$TEMP/content/docs/docs/.meta.yml"
 
@@ -92,6 +96,8 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
     cp -r "$TEMP/docs-$version/docs" "$TEMP/content/docs/v$version-docs"
     echo "- Docs: v${version}-docs" >> "$TEMP/content/docs/.nav.yml"
     echo "      v${version}-docs/README.md: v${version}-docs/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
+    # Smoketests were written for Hugo, not mkdocs, so remove
+    rm "$TEMP/content/docs/v$version-docs/smoketest.md"
     # Copy the nav, but strip out non-versioned content, starting with blog
     # This can be retired after we stop supporting v1.19.
     if [ ! -f "$TEMP/content/docs/v$version-docs/.nav.yml" ]; then
@@ -108,7 +114,8 @@ fi
 
 # Only build the site _once_ -- we used to build sub-components, and it
 # introduced a bunch of navigation / base-url problems.
-(cd "$TEMP/content"; mkdocs build -f mkdocs.yml -d "$SITE")
+# We pass through the command-line arguments to this script to enable --strict checks in CI.
+(cd "$TEMP/content"; mkdocs build -f mkdocs.yml -d "$SITE" "$@")
 
 # Set up the version file to point to the set of built docs.
 cat << EOF > $SITE/versions.json

@@ -82,7 +82,7 @@ plugins:
       docs/community/contributing/steering-committee.md: https://github.com/knative/community/blob/main/STEERING-COMMITTEE.md
       docs/community/contributing/tech-oversight-committee.md: https://github.com/knative/community/blob/main/TECH-OVERSIGHT-COMMITTEE.md
       docs/community/contributing/trademark-committee.md: https://github.com/knative/community/blob/main/TRADEMARK-COMMITTEE.md
-      docs/community/contributing/values.md: docs/https://github.com/knative/community/blob/main/VALUES.md
+      docs/community/contributing/values.md: https://github.com/knative/community/blob/main/VALUES.md
       docs/community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
       docs/community/meetup.md: community/README.md
       docs/community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
@@ -147,7 +147,7 @@ plugins:
       docs/eventing/samples/helloworld/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-python
       docs/eventing/samples/kafka/binding/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/binding
       docs/eventing/samples/kafka/channel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/channel
-      docs/eventing/samples/kubernetes-event-source/index.md: eventing/sources/apiserversource/README.md
+      docs/eventing/samples/kubernetes-event-source/index.md: docs/eventing/sources/apiserversource/README.md
       docs/eventing/samples/parallel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel
       docs/eventing/samples/parallel/multiple-branches/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/multiple-branches
       docs/eventing/samples/parallel/mutual-exclusivity/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/mutual-exclusivity
@@ -207,7 +207,7 @@ plugins:
       docs/serving/samples/hello-world/helloworld-nodejs/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-nodejs
       docs/serving/samples/hello-world/helloworld-php/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-php
       docs/serving/samples/hello-world/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-python
-      docs/serving/samples/hello-world/helloworld-ruby/README.md: docs/https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-ruby
+      docs/serving/samples/hello-world/helloworld-ruby/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-ruby
       docs/serving/samples/hello-world/helloworld-scala/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-scala
       docs/serving/samples/hello-world/helloworld-shell/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-shell
       docs/serving/samples/knative-routing-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/knative-routing-go
