@@ -144,6 +144,7 @@ nav:
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
           - Configuring probes: serving/services/configure-probing.md
           - Configuring HTTP: serving/services/http-protocol.md
+          - Performing Dry Run: serving/dryrun.md
           - Volume Support: serving/services/storage.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
