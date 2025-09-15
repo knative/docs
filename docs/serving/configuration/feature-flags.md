@@ -321,27 +321,6 @@ spec:
 ...
 ```
 
-### Kubernetes dry run
-
-* **Type**: Extension
-* **ConfigMap key:** `kubernetes.podspec-dryrun`
-
-This flag controls whether Knative attempts to validate the Pod spec derived from a Knative Service spec, by using the Kubernetes API server before accepting the object.
-
-When this extension is `enabled`, the server always runs this validation.
-
-When this extension is `allowed`, the server does not run this validation by default.
-
-When this extension is `allowed`, you can run this validation for individual Services, by adding the `features.knative.dev/podspec-dryrun: enabled` annotation:
-
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  annotations: features.knative.dev/podspec-dryrun: enabled
-...
-```
-
 ### Kubernetes runtime class
 
 * **Type**: Extension
