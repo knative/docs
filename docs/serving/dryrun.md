@@ -13,8 +13,3 @@ Example:
   ```bash
   kubectl apply -f <service-or-config-spec>.yaml --dry-run=server
   ```
-
-
-**Note:** This feature used to be enabled using the feature flags `kubernetes.podspec-dryrun` in a configuration and `features.knative.dev/podspec-dryrun` annotation on a service. These have been removed.
-
-
