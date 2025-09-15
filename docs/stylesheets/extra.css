@@ -211,11 +211,6 @@ a.md-header__button.md-logo img {
   color: gray;
 }
 
-#sub-nav li:nth-last-child(3), #sub-nav li:nth-last-child(2), #sub-nav li:nth-last-child(1) {
-  display: none;
-}
-
-
 /* bit of a hack to stop the banner taking space when empty */
 .md-banner .md-banner__inner {
   margin: 0 auto;

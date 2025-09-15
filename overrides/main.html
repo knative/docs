@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block announce %}
-{% if config.extra.version_warning %}
+{% if page and page.meta.version_warning %}
 <div class="versionwarning" style="margin: .6rem auto; padding: 0 .8rem">
-  <h1>⚠ You are viewing an archived snapshot of the documentation for Knative version: {{ config.extra.knative_version }}</h1>
+  <h1>⚠ You are viewing an archived snapshot of the documentation for Knative version: {{ page.meta.knative_version }}</h1>
   <p>
-  Knative {{ config.extra.knative_version }} documentation is no longer actively maintained. The documentation you are currently viewing is a static snapshot. For up-to-date documentation, see <a href="{{ base_url }}/../docs/">the latest version</a>.
+  Knative {{ page.meta.knative_version }} documentation is no longer actively maintained. The documentation you are currently viewing is a static snapshot. For up-to-date documentation, see <a href="{{ base_url }}/../docs/">the latest version</a>.
   </p>
 </div>
 {% endif %}
@@ -21,4 +21,44 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="/js/cookie-consent.js"></script>
+{% endblock %}
+
+  {# This overrides config.base in javascript to help it find the versions correctly. #}
+{% block config %}
+  {% set _ = namespace() %}
+
+  <!-- Extra configuration -->
+  {% set _.tags = config.extra.tags %}
+
+  <!-- Versioning -->
+  {# This is changed from upstream to only show version picker on versioned pages #}
+  {%- if page and (page.meta.samples_branch) -%}
+    {%- set mike = config.plugins.mike -%}
+    {%- if not mike or mike.config.version_selector -%}
+      {%- set _.version = config.extra.version -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  <!-- Configuration -->
+  <script id="__config" type="application/json">
+    {{- {
+      "base": base_url | replace("../", "", 1),
+      "features": features,
+      "translations": {
+        "clipboard.copy": lang.t("clipboard.copy"),
+        "clipboard.copied": lang.t("clipboard.copied"),
+        "search.result.placeholder": lang.t("search.result.placeholder"),
+        "search.result.none": lang.t("search.result.none"),
+        "search.result.one": lang.t("search.result.one"),
+        "search.result.other": lang.t("search.result.other"),
+        "search.result.more.one": lang.t("search.result.more.one"),
+        "search.result.more.other": lang.t("search.result.more.other"),
+        "search.result.term.missing": lang.t("search.result.term.missing"),
+        "select.version": lang.t("select.version")
+      },
+      "search": "assets/javascripts/workers/search.js" | url,
+      "tags": _.tags or none,
+      "version": _.version or none
+    } | tojson -}}
+  </script>
 {% endblock %}

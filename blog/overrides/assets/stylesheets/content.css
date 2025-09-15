@@ -1,5 +1,0 @@
-/* hack to hide blog posts title */
-.md-typeset h1:nth-of-type(2),
-.md-content__button:nth-of-type(2) {
-    display: none;
-}
