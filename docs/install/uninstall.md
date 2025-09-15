@@ -48,13 +48,13 @@ Follow the relevant procedure to uninstall the networking layer you installed:
     1. Uninstall the Knative Contour controller by running:
 
         ```bash
-        kubectl delete -f {{ artifact( repo="net-contour", file="net-contour.yaml") }}
+        kubectl delete -f {{ artifact( repo="net-contour", org="knative-extensions", file="net-contour.yaml") }}
         ```
 
     1. Uninstall Contour:
 
         ```bash
-        kubectl delete -f {{ artifact( repo="net-contour", file="contour.yaml") }}
+        kubectl delete -f {{ artifact( repo="net-contour", org="knative-extensions", file="contour.yaml") }}
         ```
 
 
@@ -84,7 +84,7 @@ Follow the relevant procedure to uninstall the networking layer you installed:
     Uninstall the Knative Kourier controller by running:
 
        ```bash
-       kubectl delete -f {{ artifact( repo="net-kourier", file="kourier.yaml") }}
+       kubectl delete -f {{ artifact( repo="net-kourier", org="knative-extensions", file="kourier.yaml") }}
        ```
 
 

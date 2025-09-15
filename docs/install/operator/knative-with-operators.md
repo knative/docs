@@ -220,7 +220,7 @@ Knative Serving with different ingresses:
     1. Install a properly configured Contour:
 
         ```bash
-        kubectl apply --filename {{artifact(repo="net-contour",file="contour.yaml")}}
+        kubectl apply --filename {{artifact(repo="net-contour",org="knative-extensions",file="contour.yaml")}}
         ```
 
     1. To configure Knative Serving to use Contour, add `spec.ingress.contour`
