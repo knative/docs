@@ -424,7 +424,7 @@ The `revision-ephemeral-storage-limit` value determines the default ephemeral st
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
               resources:
-                requests:
+                limits:
                   ephemeral-storage: "750M"
     ```
 
