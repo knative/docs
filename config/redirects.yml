@@ -123,7 +123,7 @@ plugins:
       developer/serving/services/http-option.md: serving/services/http-protocol.md
       developer/serving/services/ingress-class.md: serving/services/ingress-class.md
       developer/serving/services/private-services.md: serving/services/private-services.md
-      developer/serving/services/service-metrics.md: serving/services/service-metrics.md
+      developer/serving/services/service-metrics.md: serving/observability/metrics/serving-metrics.md
       developer/serving/tag-resolution.md: serving/tag-resolution.md
       developer/serving/traffic-management.md: serving/traffic-management.md
       developer/serving/troubleshooting/debugging-application-issues.md: serving/troubleshooting/debugging-application-issues.md
@@ -218,6 +218,7 @@ plugins:
       serving/samples/traffic-splitting/README.md: serving/traffic-management.md
       serving/services/deployment.md: serving/configuration/deployment.md
       serving/services/http-option.md: serving/services/http-protocol.md
+      serving/services/service-metrics.md: serving/observability/metrics/serving-metrics.md
       serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       serving/using-an-ssl-cert/index.md: serving/encryption/encryption-overview.md
       serving/encryption/enabling-automatic-tls-certificate-provisioning.md: serving/encryption/encryption-overview.md

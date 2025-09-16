@@ -134,7 +134,6 @@ nav:
         - Services:
           - About Knative Services: serving/services/README.md
           - Creating a Service: serving/services/creating-services.md
-          - Service metrics: serving/services/service-metrics.md
           - Configuring private Services: serving/services/private-services.md
           - Configuring ingress class: serving/services/ingress-class.md
           - Configuring certificate class: serving/services/certificate-class.md
