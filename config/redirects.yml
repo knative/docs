@@ -123,7 +123,7 @@ plugins:
       docs/developer/serving/services/http-option.md: docs/serving/services/http-protocol.md
       docs/developer/serving/services/ingress-class.md: docs/serving/services/ingress-class.md
       docs/developer/serving/services/private-services.md: docs/serving/services/private-services.md
-      docs/developer/serving/services/service-metrics.md: docs/serving/services/service-metrics.md
+      docs/developer/serving/services/service-metrics.md: docs/serving/observability/metrics/serving-metrics.md
       docs/developer/serving/tag-resolution.md: docs/serving/tag-resolution.md
       docs/developer/serving/traffic-management.md: docs/serving/traffic-management.md
       docs/developer/serving/troubleshooting/debugging-application-issues.md: docs/serving/troubleshooting/debugging-application-issues.md
@@ -218,6 +218,7 @@ plugins:
       docs/serving/samples/traffic-splitting/README.md: docs/serving/traffic-management.md
       docs/serving/services/deployment.md: docs/serving/configuration/deployment.md
       docs/serving/services/http-option.md: docs/serving/services/http-protocol.md
+      docs/serving/services/service-metrics.md: docs/serving/observability/metrics/serving-metrics.md
       docs/serving/spec/knative-api-specification-1.0.md: https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md
       docs/serving/using-an-ssl-cert/index.md: docs/serving/encryption/encryption-overview.md
       docs/serving/encryption/enabling-automatic-tls-certificate-provisioning.md: docs/serving/encryption/encryption-overview.md
