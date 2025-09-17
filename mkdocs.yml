@@ -1,7 +1,7 @@
 INHERIT: config/redirects.yml
 
 site_name: Knative
-site_url: https://knative.dev/docs
+site_url: https://knative.dev/
 site_description: Knative Documentation
 extra_css:
   - stylesheets/extra.css
