@@ -411,7 +411,7 @@ Data,
   {"message": "Hi from pingsource-2 from namespace-2"}
 ```
 
-When we remove now the EventPolicy again and keep OIDC disabled, the Broker will fall back to the default authorization mode, which is `allow-same-namespace`:
+When we remove now the EventPolicy again and keep OIDC enabled, the Broker will fall back to the default authorization mode, which is `allow-same-namespace`:
 
 ```
 $ kubectl -n namespace-1 delete eventpolicy event-policy
