@@ -32,7 +32,7 @@ Other installation resources:
 - [Ugrading Knative](install/upgrade/README.md)
 - [Uninstall Knative](uninstall.md)
 - [Check Knative version](upgrade/check-install-version.md)
-- [Troubleshoot Knative installations](troublehoot.md)
+- [Troubleshoot Knative installations](troublehooting.md)
 
 
 See the [Serving Architecture](../serving/architecture.md) for an explanation of Knative components and the general networking.
