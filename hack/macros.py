@@ -110,11 +110,17 @@ def define_env(env):
         """
 
         version = os.environ.get("KNATIVE_VERSION")
+        if env.page.meta.get("knative_version", False):
+            version = env.page.meta.get("knative_version")
 
         if version == None:
             return f'https://storage.googleapis.com/knative-nightly/{repo}/latest/{file}'
 
         version = drop_prefix(version)
+
+        # Don't try to version-match outside Knative-managed repos
+        if org not in ("knative", "knative-extensions"):
+            return f'https://github.com/{org}/{repo}/releases/latest/download/{file}'
 
         try:
             v = semver.VersionInfo.parse(version)
@@ -140,6 +146,8 @@ def define_env(env):
         matching release in Github.
         """
         version = os.environ.get("SAMPLES_BRANCH")
+        if env.page.meta.get("samples_branch", False):
+            version = env.page.meta.get("samples_branch")
         if version is None:
             return 'https://github.com/knative/client/blob/main/docs/cmd/kn.md'
         return 'https://github.com/knative/client/blob/{version}/docs/cmd/kn.md'.format(version=version)
@@ -152,6 +160,8 @@ def define_env(env):
         matching release in Github.
         """
         version = os.environ.get("SAMPLES_BRANCH")
+        if env.page.meta.get("samples_branch", False):
+            version = env.page.meta.get("samples_branch")
         if version is None:
             return 'https://github.com/knative/func/blob/main/docs/reference/func.md'
         return 'https://github.com/knative/func/blob/{version}/docs/reference/func.md'.format(version=version)

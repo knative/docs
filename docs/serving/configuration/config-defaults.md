@@ -344,7 +344,7 @@ The `revision-cpu-limit` value determines the default CPU allocation limit for r
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
               resources:
-                requests:
+                limits:
                   cpu: "1000m"
     ```
 
@@ -384,7 +384,7 @@ The `revision-memory-limit` value determines the default memory allocation limit
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
               resources:
-                requests:
+                limits:
                   memory: "200M"
     ```
 
@@ -424,7 +424,7 @@ The `revision-ephemeral-storage-limit` value determines the default ephemeral st
           containers:
             - image: ghcr.io/knative/helloworld-go:latest
               resources:
-                requests:
+                limits:
                   ephemeral-storage: "750M"
     ```
 
