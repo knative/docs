@@ -259,13 +259,16 @@ spec:
 
 ### Connect to AWS ECR using Pod Identity
 
-The use of AWS ECR as source of images for deployment using knative-serving requires access to digests for images. This can be obtained via a managed role and this role can
-be attached to the controller ServiceAccount. This will allow the controller pods to retrieve relevant digests for containers from ECR.
+The use of AWS ECR as source of images for deployment using knative-serving requires access to digests for images. This can be obtained via a managed policy - `AmazonEC2ContainerRegistryReadOnly` which is attached to an IAM Role - `knative-serving-controller`. This role is then attached to the `controller` ServiceAccount in the `knative-serving` namespace. This will allow the controller pods to retrieve relevant digests for containers from ECR. Samples are provided below as AWS-CLI commands and Terraform module to perform the setup. Please adapt to the relevant IaC tooling your team uses.
 
+
+{{<tabs name="pod_identity_tabs" default="Terraform Example">}}
+
+{{<tab name="Terraform Example">}}
 ```terraform
 module "pod_identity_knative" {
   source  = "terraform-aws-modules/eks-pod-identity/aws"
-  version = "~> 1.6"
+  version = "~>"2.0.0"
 
   name = "knative-serving-controller"
 
@@ -283,6 +286,95 @@ module "pod_identity_knative" {
   }
 }
 ```
+{{</tab>}}
+
+{{<tab name="AWS CLI Example">}}
+```bash
+# Set variables
+REGION="<region>"
+CLUSTER_NAME="<some-cluster-name>"
+ROLE_NAME="knative-serving-controller"
+NAMESPACE="knative-serving"
+SERVICE_ACCOUNT="controller"
+
+ACCOUNT_ID="$(aws sts get-caller-identity --query 'Account' --output text)"
+PARTITION="$(aws sts get-caller-identity --query 'Arn' --output text | cut -d: -f2)"
+
+# Create trust policy for EKS Pod Identity
+cat > trust-policy.json <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EKSPodIdentityTrust",
+      "Effect": "Allow",
+      "Principal": { "Service": "pods.eks.amazonaws.com" },
+      "Action": [ "sts:AssumeRole", "sts:TagSession" ],
+      "Condition": {
+        "StringEquals": { "aws:SourceAccount": "${ACCOUNT_ID}" },
+        "StringLike": {
+          "aws:SourceArn": "arn:${PARTITION}:eks:${REGION}:${ACCOUNT_ID}:cluster/${CLUSTER_NAME}"
+        }
+      }
+    }
+  ]
+}
+EOF
+
+# Create IAM role and attach ECR read-only policy
+aws iam create-role \
+  --role-name "${ROLE_NAME}" \
+  --assume-role-policy-document file://trust-policy.json
+
+aws iam attach-role-policy \
+  --role-name "${ROLE_NAME}" \
+  --policy-arn "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+
+ROLE_ARN="$(aws iam get-role --role-name "${ROLE_NAME}" --query 'Role.Arn' --output text)"
+echo "Created role: ${ROLE_ARN}"
+
+# Ensure the EKS Pod Identity Agent add-on is installed
+aws eks create-addon \
+  --region "${REGION}" \
+  --cluster-name "${CLUSTER_NAME}" \
+  --addon-name eks-pod-identity-agent \
+  --resolve-conflicts OVERWRITE || true
+
+# Associate the role with the Knative Serving controller ServiceAccount
+aws eks create-pod-identity-association \
+  --region "${REGION}" \
+  --cluster-name "${CLUSTER_NAME}" \
+  --namespace "${NAMESPACE}" \
+  --service-account "${SERVICE_ACCOUNT}" \
+  --role-arn "${ROLE_ARN}"
+
+# Optional: verify association
+aws eks list-pod-identity-associations \
+  --region "${REGION}" \
+  --cluster-name "${CLUSTER_NAME}" \
+  --query "associations[?namespace=='${NAMESPACE}' && serviceAccount=='${SERVICE_ACCOUNT}']"
+
+# Cleanup local file
+rm -f trust-policy.json
+```
+
+Expected output is something like :
+```json
+{
+    "associations": [
+        {
+            "clusterName": "<some-cluster-name>",
+            "namespace": "knative-serving",
+            "serviceAccount": "controller",
+            "associationArn": "<ROLE-ARN>",
+            "associationId": "<SOME-RANDOM-STRING>"
+        },
+        ...
+}
+```
+{{</tab>}}
+
+{{</tabs>}}
 
 ## SSL certificate for controller
 
