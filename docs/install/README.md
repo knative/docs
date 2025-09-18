@@ -29,7 +29,7 @@ For all installations, you need the Knative CLI and other CLI tools. See [Instal
 
 Other installation resources:
 
-- [Ugrading Knative](install/upgrade/README.md)
+- [Upgrading Knative](upgrade/README.md)
 - [Uninstall Knative](uninstall.md)
 - [Check Knative version](upgrade/check-install-version.md)
 - [Troubleshoot Knative installations](troublehooting.md)
