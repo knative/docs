@@ -261,7 +261,7 @@ spec:
 
 The use of AWS ECR as source of images for deployment using knative-serving requires access to digests for images. This can be obtained via a managed policy - `AmazonEC2ContainerRegistryReadOnly` which is attached to an IAM Role - `knative-serving-controller`. This role is then attached to the `controller` ServiceAccount in the `knative-serving` namespace. This will allow the controller pods to retrieve relevant digests for containers from ECR. Samples are provided below as AWS-CLI commands and Terraform module to perform the setup. Please adapt to the relevant IaC tooling your team uses.
 
-== "Terraform Example"
+=== "Terraform Example"
 
     The terraform sample uses AWS Provider Terraform module to put all the pieces together.
 
@@ -287,7 +287,7 @@ The use of AWS ECR as source of images for deployment using knative-serving requ
     }
     ```
 
-== "AWS CLI Example"
+=== "AWS CLI Example"
 
     The AWS CLI sample uses a bash script to setup the relevant infrastructure
 

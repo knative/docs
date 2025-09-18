@@ -112,7 +112,7 @@ within tabs. Indent the tab content by four spaces to make the tabs display prop
 
 For example:
 
-    == "tab1 name"
+    === "tab1 name"
 
         This is a stem:
 
@@ -124,7 +124,7 @@ For example:
 
         1. This is another step.
 
-    == "tab2 name"
+    === "tab2 name"
 
         This is a stem:
 
