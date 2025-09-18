@@ -8,26 +8,33 @@ function: reference
 
 # Installing Knative
 
-!!! note
-    Please also take a look at the [Serving Architecture](../serving/architecture.md), which explains the Knative components and the general networking concept.
+You can install Knative in two ways:
 
-You can install the Serving component, Eventing component, or both on your
-cluster by using one of the following deployment options:
+- A full implementation for production on an existing Kubernetes deployment.
+- A quickstart implementation with a Minikube option. Use this implementation for a preconfigured, local distribution for prototyping purposes.
 
-- Use the [Knative Quickstart plugin](quickstart-install.md) to install a
-preconfigured, local distribution of Knative for development purposes.
+Installations assume are running MacOS or Linux.
 
-- Use a YAML-based installation to install a production ready deployment:
-    - [Install Knative Serving by using YAML](yaml-install/serving/install-serving-with-yaml.md)
-    - [Install Knative Eventing by using YAML](yaml-install/eventing/install-eventing-with-yaml.md)
+## Installation roadmap
 
-- Use the [Knative Operator](operator/knative-with-operators.md) to install and
-configure a production-ready deployment.
+Use the following table to get you started with your Knative installations.
 
-- Follow the documentation for vendor-managed [Knative offerings](knative-offerings.md).
+| Task | Quickstart installation | Production installation |
+| -- | -- | -- |
+| Kubernetes check | kind, minikube | Existing local deployment of Kubernetes 1.28 or newer. |
+| Verify Hardware | 3 CPU, 3 GB RAM | One node: 6 CPUs, 6 GB memory, 30 GB disk storage.<br>Multiple nodes: 2 CPUs each, 4 GB memory, 20 GB disk storage. |
+| Next steps | Install the [Knative Quickstart plugin](quickstart-install.md). | Use a YAML-based installation for either or both of these components:<br>- Install [Knative Serving](yaml-install/serving/install-serving-with-yaml.md)<br>- Install [Knative Eventing](yaml-install/eventing/install-eventing-with-yaml.md)<br>Use the [Knative Operator](operator/knative-with-operators.md) to install and configure a production-ready deployment. |
 
-You can also [upgrade an existing Knative installation](upgrade/README.md).
+For all installations, you need the Knative CLI and other CLI tools. See [Install Knative CLI](../client/install-kn.md).
 
-!!! note
-    Knative installation instructions assume you are running Mac or Linux with a Bash shell.
-<!-- TODO: Link to provisioning guide for advanced installation -->
+Other installation resources:
+- [Ugrading Knative](install/upgrade/README.md)
+- [Uninstall Knative](uninstall.md)
+- [Check Knative version](upgrade/check-install-version.md)
+- [Troubleshoot Knative installations](troublehoot.md)
+
+See the [Serving Architecture](../serving/architecture.md) for an explanation of Knative components and the general networking.
+
+For a list of commercial Knative products, see [Knative offerings](knative-offerings.md).
+
+
