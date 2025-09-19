@@ -108,4 +108,4 @@ extra:
     provider: google
     property: G-YRMNFYE32R
   version:
-    provider: mike
+    provider: directory

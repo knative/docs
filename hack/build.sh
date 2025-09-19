@@ -47,6 +47,7 @@ mkdir "$TEMP/content/docs/docs"
 for path in  .nav.yml bookstore client concepts eventing functions getting-started install reference samples serving; do
   mv "$TEMP/content/docs/$path" "$TEMP/content/docs/docs/$path"
 done
+echo "" >> "$TEMP/content/docs/docs/README.md"  # Placeholder to ensure sitemap entry (for versioning)
 echo "      docs/README.md: docs/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
 # Copy images for now, until we clean up the above:
 cp -r "$TEMP/content/docs/images" "$TEMP/content/docs/docs/images"
@@ -54,7 +55,7 @@ cp -r "$TEMP/content/docs/images" "$TEMP/content/docs/docs/images"
 # Point top-level nav to docs directory.
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
 # We use samples_branch to flag that the documentation is versioned
-echo -e "\n\nsamples_branch: main" >> "$TEMP/content/docs/docs/.meta.yml"
+echo -e "\n\nsamples_branch: main\nversion: development" >> "$TEMP/content/docs/docs/.meta.yml"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/docs/serving/reference/serving-api.md"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/content/docs/docs/eventing/reference/eventing-api.md"
 versionjson="{\"version\": \"docs\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
@@ -64,9 +65,15 @@ BUILD_VERSIONS="yes"
 
 if [ "$BUILD_VERSIONS" != "no" ]; then
   mv $TEMP/content/docs/docs $TEMP/content/docs/development
+  # Remove pre-release documents from search.  This has to be applied to each markdown, unfortunately.
+  # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
+  # and the seconds inserts commands into the front-matter.
+  find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '1s/^\([^-]\)/---\n---\n\1/'
+  find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '2isearch:\n exclude: true'
+
   echo "- Docs: development" >> "$TEMP/content/docs/.nav.yml"
   echo "      development/README.md: development/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
-  versionjson="{\"version\": \"docs\", \"title\": \"v$latest\", \"aliases\": [\"\"]},"  # Clear existing content, we'll add development at the _end_.
+  versionjson="{\"version\": \"docs\", \"title\": \"v$latest\", \"aliases\": [\"v$latest\"]},"  # Clear existing content, we'll add development at the _end_.
 
   # Handle current release specially, as we don't include a version slug
   # TODO: can we make one clone and reuse it, possibly with git worktrees?
@@ -82,12 +89,12 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   # Smoketests were written for Hugo, not mkdocs, so remove
   rm "$TEMP/content/docs/docs/smoketest.md"
   # Fill in meta content for macros.py
-  echo -e "\n\nknative_version: ${VERSIONS[0]}.0\nsamples_branch: ${DOCS_BRANCHES[0]}" >> "$TEMP/content/docs/docs/.meta.yml"
+  echo -e "\n\nknative_version: ${latest}.0\nsamples_branch: ${DOCS_BRANCHES[0]}\nversion: v${latest}" >> "$TEMP/content/docs/docs/.meta.yml"
 
 
   for i in "${!previous[@]}"; do
     version=${previous[$i]}
-    versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"\"]},"
+    versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"v$version\"]},"
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
@@ -104,7 +111,12 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
       sed '/- Blog:/,$d' "$TEMP/docs-$version/config/nav.yml" >> "$TEMP/content/docs/v$version-docs/.nav.yml"
     fi
     # Fill in meta content for macros.py
-    echo -e "\n\nknative_version: ${VERSIONS[i+1]}.0\nsamples_branch: ${DOCS_BRANCHES[i+1]}\nversion_warning: true" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+    echo -e "\n\nknative_version: ${version}.0\nsamples_branch: ${DOCS_BRANCHES[i+1]}\nversion_warning: true\nversion: v${version}" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+    # Remove older-version documents from search.  This has to be applied to each markdown, unfortunately.
+    # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
+    # and the seconds inserts commands into the front-matter.
+    find "$TEMP/content/docs/v$version-docs" -type f -name '*.md' | xargs sed -i '1s/^\([^-]\)/---\n---\n\1/'
+    find "$TEMP/content/docs/v$version-docs" -type f -name '*.md' | xargs sed -i '2isearch:\n exclude: true'
   done
 
   # Put the development version at the end of the JSON list of documentation,
