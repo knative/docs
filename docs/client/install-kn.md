@@ -14,8 +14,6 @@ You will need two CLI tools for Knative:
 - Knative CLI - kn
 - Kubernetes CLI - kubectl
 
-## Install Knative CLI
-
 --8<-- "install-kn.md"
 
 ## Install Kubernetes CLI

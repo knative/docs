@@ -6,12 +6,10 @@ components:
 function: tutorial
 ---
 
-# Install Knative using quickstart
+# Install the Knative quickstart
 
-Following this quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.
+This quickstart tutorial provides a simplified, local Knative installation by using the Knative `quickstart` plugin. This implementation is limited to a local deploymnet suited for experimentaion. For information on production implmentations, see the [Implementation Roadmap](readme.md#installation-roadmap).
 
---8<-- "quickstart-prereqs.md"
---8<-- "install-kn.md"
 --8<-- "quickstart-install.md"
 
 ## Next steps
