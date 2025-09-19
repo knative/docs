@@ -42,22 +42,20 @@ rm -rf site/
 
 mkdir "$TEMP/content"
 cp -r . "$TEMP/content/"
-mkdir "$TEMP/content/docs/docs"
 
-for path in  .nav.yml bookstore client concepts eventing functions getting-started install reference samples serving; do
-  mv "$TEMP/content/docs/$path" "$TEMP/content/docs/docs/$path"
-done
-echo "" >> "$TEMP/content/docs/docs/README.md"  # Placeholder to ensure sitemap entry (for versioning)
-echo "      docs/README.md: docs/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
+# mkdir "$TEMP/content/docs/docs"
+# for path in  .nav.yml bookstore client concepts eventing functions getting-started install reference samples serving; do
+#   mv "$TEMP/content/docs/$path" "$TEMP/content/docs/docs/$path"
+# done
 # Copy images for now, until we clean up the above:
 cp -r "$TEMP/content/docs/images" "$TEMP/content/docs/docs/images"
 
 # Point top-level nav to docs directory.
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
-# We use samples_branch to flag that the documentation is versioned
-echo -e "\n\nsamples_branch: main\nversion: development" >> "$TEMP/content/docs/docs/.meta.yml"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/docs/serving/reference/serving-api.md"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/content/docs/docs/eventing/reference/eventing-api.md"
+# We use samples_branch to flag that the documentation is versioned
+echo -e "\nsamples_branch: main\nversion: development\ndoc_base: /docs/docs/" >> "$TEMP/content/docs/docs/.meta.yml"
 versionjson="{\"version\": \"docs\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 
 # Temporarily force BUILD_VERSIONS (for previews), while this rewrite is testing.
@@ -70,48 +68,65 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   # and the seconds inserts commands into the front-matter.
   find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '1s/^\([^-]\)/---\n---\n\1/'
   find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '2isearch:\n exclude: true'
-
   echo "- Docs: development" >> "$TEMP/content/docs/.nav.yml"
-  echo "      development/README.md: development/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
-  versionjson="{\"version\": \"docs\", \"title\": \"v$latest\", \"aliases\": [\"v$latest\"]},"  # Clear existing content, we'll add development at the _end_.
 
   # Handle current release specially, as we don't include a version slug
   # TODO: can we make one clone and reuse it, possibly with git worktrees?
   git clone --depth 1 -b "${DOCS_BRANCHES[0]}" "https://github.com/${GIT_SLUG}" "$TEMP/current-release"
-  curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/current-release/docs/serving/reference/serving-api.md"
-  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/current-release/docs/eventing/reference/eventing-api.md"
-  cp -r "$TEMP/current-release/docs" "$TEMP/content/docs/docs"
-  # Copy the nav, but strip out non-versioned content, starting with blog
-  # This can be retired after we stop supporting v1.19.
-  if [ ! -f "$TEMP/content/docs/docs/.nav.yml" ]; then
-    sed '/- Blog:/,$d' "$TEMP/current-release/config/nav.yml" >> "$TEMP/content/docs/docs/.nav.yml"
+  if [ -d "$TEMP/content/docs/docs" ]; then
+    cp -r "$TEMP/current-release/docs/docs" "$TEMP/content/docs/docs"
+    echo -e "\ndoc_base: /docs/docs/" >> "$TEMP/content/docs/docs/.meta.yml"
+  else
+    cp -r "$TEMP/current-release/docs" "$TEMP/content/docs/docs"
+    echo -e "\ndoc_base: /docs/" >> "$TEMP/content/docs/docs/.meta.yml"
+    # Copy the nav, but strip out non-versioned content, starting with blog
+    # This can be retired after we stop supporting v1.19.
+    if [ ! -f "$TEMP/content/docs/docs/.nav.yml" ]; then
+      sed '/- Blog:/,$d' "$TEMP/current-release/config/nav.yml" >> "$TEMP/content/docs/docs/.nav.yml"
+    fi
+    # Redirect from old homepage to concepts documentation, if it exists (pre-1.20)
+    if [ -f "$TEMP/content/docs/docs/concepts/README.md" ]; then
+      echo "      docs/README.md: docs/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
+    fi
+    # Smoketests were written for Hugo, not mkdocs, so remove
+    rm "$TEMP/content/docs/docs/smoketest.md"
   fi
-  # Smoketests were written for Hugo, not mkdocs, so remove
-  rm "$TEMP/content/docs/docs/smoketest.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[0]}/docs/serving-api.md -s > "$TEMP/content/docs/docs/serving/reference/serving-api.md"
+  curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[0]}/docs/eventing-api.md -s > "$TEMP/content/docs/docs/eventing/reference/eventing-api.md"
   # Fill in meta content for macros.py
-  echo -e "\n\nknative_version: ${latest}.0\nsamples_branch: ${DOCS_BRANCHES[0]}\nversion: v${latest}" >> "$TEMP/content/docs/docs/.meta.yml"
-
+  echo -e "\nknative_version: ${latest}.0\nsamples_branch: ${DOCS_BRANCHES[0]}\nversion: v${latest}" >> "$TEMP/content/docs/docs/.meta.yml"
+  versionjson="{\"version\": \"docs\", \"title\": \"v$latest\", \"aliases\": [\"v$latest\"]},"  # Clear existing content, we'll add development at the _end_.
 
   for i in "${!previous[@]}"; do
     version=${previous[$i]}
-    versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"v$version\"]},"
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
-    curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/docs-$version/docs/serving/reference/serving-api.md"
-    curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/docs-$version/docs/eventing/reference/eventing-api.md"
-    cp -r "$TEMP/docs-$version/docs" "$TEMP/content/docs/v$version-docs"
-    echo "- Docs: v${version}-docs" >> "$TEMP/content/docs/.nav.yml"
-    echo "      v${version}-docs/README.md: v${version}-docs/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
-    # Smoketests were written for Hugo, not mkdocs, so remove
-    rm "$TEMP/content/docs/v$version-docs/smoketest.md"
-    # Copy the nav, but strip out non-versioned content, starting with blog
-    # This can be retired after we stop supporting v1.19.
-    if [ ! -f "$TEMP/content/docs/v$version-docs/.nav.yml" ]; then
-      sed '/- Blog:/,$d' "$TEMP/docs-$version/config/nav.yml" >> "$TEMP/content/docs/v$version-docs/.nav.yml"
+    if [ -d "$TEMP/docs-$version/docs/docs" ]; then
+      cp -r "$TEMP/docs-$version/docs/docs" "$TEMP/content/docs/v$version-docs"
+      echo -e "\ndoc_base: /docs/docs/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+    else
+      cp -r "$TEMP/docs-$version/docs" "$TEMP/content/docs/v$version-docs"
+      echo -e "\ndoc_base: /docs/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+      # Copy the nav, but strip out non-versioned content, starting with blog
+      # This can be retired after we stop supporting v1.19.
+      if [ ! -f "$TEMP/content/docs/v$version-docs/.nav.yml" ]; then
+        sed '/- Blog:/,$d' "$TEMP/docs-$version/config/nav.yml" >> "$TEMP/content/docs/v$version-docs/.nav.yml"
+      fi
+      # Redirect from old homepage to concepts documentation, if it exists (pre-1.20)
+      if [ -f "$TEMP/content/docs/v${version}-docs/concepts/README.md" ]; then
+        echo "      v${version}-docs/README.md: v${version}-docs/concepts/README.md" >> "$TEMP/content/config/redirects.yml"
+      fi
+      # Smoketests were written for Hugo, not mkdocs, so remove
+      rm "$TEMP/content/docs/v$version-docs/smoketest.md"
     fi
+    curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/${DOCS_BRANCHES[i+1]}/docs/serving-api.md -s > "$TEMP/content/docs/v$version-docs/serving/reference/serving-api.md"
+    curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/${DOCS_BRANCHES[i+1]}/docs/eventing-api.md -s > "$TEMP/content/docs/v$version-docs/eventing/reference/eventing-api.md"
+    echo "- Docs: v${version}-docs" >> "$TEMP/content/docs/.nav.yml"
     # Fill in meta content for macros.py
-    echo -e "\n\nknative_version: ${version}.0\nsamples_branch: ${DOCS_BRANCHES[i+1]}\nversion_warning: true\nversion: v${version}" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+    echo -e "\nknative_version: ${version}.0\nsamples_branch: ${DOCS_BRANCHES[i+1]}\nversion_warning: true\nversion: v${version}" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+    versionjson+="{\"version\": \"v$version-docs\", \"title\": \"v$version\", \"aliases\": [\"v$version\"]},"
+
     # Remove older-version documents from search.  This has to be applied to each markdown, unfortunately.
     # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
     # and the seconds inserts commands into the front-matter.

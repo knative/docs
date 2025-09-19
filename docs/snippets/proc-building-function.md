@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- /docs/getting-started/build-run-deploy-func.md
-- /docs/functions/building-functions.md
+- docs/getting-started/build-run-deploy-func.md
+- docs/functions/building-functions.md
 -->
 The `build` command uses the project name and the image registry name to construct a fully qualified container image name for the function. If the function project has not previously been built, you are prompted to provide an **image registry**.
 
