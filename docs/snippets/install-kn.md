@@ -20,14 +20,13 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
         brew install knative/client/kn
         ```
 
-            [!IMPORTANT]
-            If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
+        If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
 
-            ```bash
-            brew uninstall kn
-            brew untap knative/client --force
-            brew install knative/client/kn
-            ```
+        ```bash
+        brew uninstall kn
+        brew untap knative/client --force
+        brew install knative/client/kn
+        ```
 
 === "Using a binary"
 
