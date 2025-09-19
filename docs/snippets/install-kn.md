@@ -20,8 +20,7 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
         brew install knative/client/kn
         ```
 
-        ??? bug "Having issues upgrading `kn` using Homebrew?"
-
+            [!IMPORTANT]
             If you are having issues upgrading using Homebrew, it might be due to a change to a CLI repository where the `master` branch was renamed to `main`. Resolve this issue by running the command:
 
             ```bash
