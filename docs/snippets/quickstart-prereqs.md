@@ -1,7 +1,7 @@
 <!-- Snippet used in the following topics:
-- /docs/getting-started/README.md
-- /docs/install/quickstart-install.md
-- /docs/getting-started/quickstart-install.md
+- docs/getting-started/README.md
+- docs/install/quickstart-install.md
+- docs/getting-started/quickstart-install.md
 -->
 ## Before you begin
 

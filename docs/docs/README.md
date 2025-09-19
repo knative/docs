@@ -74,7 +74,7 @@ These components can be used independently or together, allowing you to adopt Kn
 
 ### Request Flow in Serving
 
-![Knative Serving data flow: requests arrive at an HTTP router, then travel to either the activator or a pod with a queue-proxy and the user application. The Knative autoscaler collects metrics from the activator and the queue-proxy to determine how many pods to run.](../serving/images/request-flow.png){draggable=false}
+![Knative Serving data flow: requests arrive at an HTTP router, then travel to either the activator or a pod with a queue-proxy and the user application. The Knative autoscaler collects metrics from the activator and the queue-proxy to determine how many pods to run.](./serving/images/request-flow.png){draggable=false}
 
 When a request is made to a Knative Service:
 
