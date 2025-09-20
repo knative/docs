@@ -74,7 +74,7 @@ These components can be used independently or together, allowing you to adopt Kn
 
 ### Request Flow in Serving
 
-![Knative Serving data flow: requests arrive at an HTTP router, then travel to either the activator or a pod with a queue-proxy and the user application. The Knative autoscaler collects metrics from the activator and the queue-proxy to determine how many pods to run.](../serving/images/request-flow.png){draggable=false}
+![Knative Serving data flow: requests arrive at an HTTP router, then travel to either the activator or a pod with a queue-proxy and the user application. The Knative autoscaler collects metrics from the activator and the queue-proxy to determine how many pods to run.](./serving/images/request-flow.png){draggable=false}
 
 When a request is made to a Knative Service:
 
@@ -84,7 +84,7 @@ When a request is made to a Knative Service:
 4. **Queue-Proxy**: All requests pass through the Queue-Proxy sidecar, which enforces concurrency limits and collects metrics
 5. **Application**: The request reaches your application container
 
-For detailed information, see the [request flow documentation](../serving/request-flow.md).
+For detailed information, see the [request flow documentation](serving/request-flow.md).
 
 ### GPU Resources and LLM Inference
 
@@ -261,9 +261,9 @@ Consider alternatives when:
 
 ## Next Steps
 
-- **Installation**: Get started with [Knative installation](../install/README.md)
-- **Quick Start**: Try the [Knative Quickstart](../getting-started/README.md) for hands-on experience
-- **Serving Guide**: Learn more about [Knative Serving](../serving/README.md)
-- **Eventing Guide**: Explore [Knative Eventing](../eventing/README.md) capabilities
-- **Functions Guide**: Build your first [Knative Function](../functions/README.md)
-- **Examples**: Browse [sample applications](../samples/README.md) and use cases
+- **Installation**: Get started with [Knative installation](install/README.md)
+- **Quick Start**: Try the [Knative Quickstart](getting-started/README.md) for hands-on experience
+- **Serving Guide**: Learn more about [Knative Serving](serving/README.md)
+- **Eventing Guide**: Explore [Knative Eventing](eventing/README.md) capabilities
+- **Functions Guide**: Build your first [Knative Function](functions/README.md)
+- **Examples**: Browse [sample applications](samples/README.md) and use cases

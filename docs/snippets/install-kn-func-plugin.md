@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- /docs/functions/install-func.md
-- /docs/getting-started/install-func.md
+- docs/functions/install-func.md
+- docs/getting-started/install-func.md
 -->
 === "kn plugin"
 

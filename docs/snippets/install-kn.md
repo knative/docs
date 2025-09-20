@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- /docs/client/install-kn.md
-- /docs/getting-started/quickstart-install.md
+- docs/client/install-kn.md
+- docs/getting-started/quickstart-install.md
 - docs/install/quickstart-install.md
 -->
 
