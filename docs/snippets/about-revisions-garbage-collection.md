@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- docs/serving/revisions/revision-admin-config-options.md
-- docs/serving/revisions/revision-developer-config-options.md
+- versioned/serving/revisions/revision-admin-config-options.md
+- versioned/serving/revisions/revision-developer-config-options.md
 -->
 When Revisions of a Knative Service are inactive, they are automatically cleaned up and cluster resources are reclaimed after a set time period. This is known as *[garbage collection](https://kubernetes.io/docs/concepts/architecture/garbage-collection/){target=_blank}*.
 

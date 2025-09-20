@@ -1,7 +1,7 @@
 <!-- Snippet used in the following topics:
-- docs/client/install-kn.md
-- docs/getting-started/quickstart-install.md
-- docs/install/quickstart-install.md
+- versioned/client/install-kn.md
+- versioned/getting-started/quickstart-install.md
+- versioned/install/quickstart-install.md
 -->
 
 ## Install the Knative CLI

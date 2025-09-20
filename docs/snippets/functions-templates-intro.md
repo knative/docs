@@ -1,5 +1,5 @@
 <!-- Snippet used in the following topics:
-- docs/functions/README.md
+- versioned/functions/README.md
 -->
 Knative Functions provides templates that can be used to create basic functions, by initiating a function project boilerplate when you run a `create` command.
 

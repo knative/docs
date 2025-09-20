@@ -207,7 +207,7 @@ nav:
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
-        - Duck types: concepts/duck-typing.md
+        - Duck types: eventing/concepts/duck-typing.md
         - Event sources:
           - About event sources: eventing/sources/README.md
           - ApiServerSource:

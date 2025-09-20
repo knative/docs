@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- docs/functions/README.md
-- docs/README.md
+- versioned/functions/README.md
+- versioned/README.md
 -->
 Knative Functions provides a simple programming model for using functions on Knative, without requiring in-depth knowledge of Knative, Kubernetes, containers, or dockerfiles.
 

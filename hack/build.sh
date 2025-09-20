@@ -43,42 +43,40 @@ rm -rf site/
 mkdir "$TEMP/content"
 cp -r . "$TEMP/content/"
 
-# mkdir "$TEMP/content/docs/docs"
-# for path in  .nav.yml bookstore client concepts eventing functions getting-started install reference samples serving; do
-#   mv "$TEMP/content/docs/$path" "$TEMP/content/docs/docs/$path"
-# done
-# Copy images for now, until we clean up the above:
-cp -r "$TEMP/content/docs/images" "$TEMP/content/docs/docs/images"
-
 # Point top-level nav to docs directory.
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
-curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/docs/serving/reference/serving-api.md"
-curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/content/docs/docs/eventing/reference/eventing-api.md"
-# We use samples_branch to flag that the documentation is versioned
-echo -e "\nsamples_branch: main\nversion: development\ndoc_base: /docs/docs/" >> "$TEMP/content/docs/docs/.meta.yml"
-versionjson="{\"version\": \"docs\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
+curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/versioned/serving/reference/serving-api.md"
+curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/content/docs/versioned/eventing/reference/eventing-api.md"
+echo -e "\nsamples_branch: main\nversion: development\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/versioned/.meta.yml"
+versionjson="{\"version\": \"versioned\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 
 # Temporarily force BUILD_VERSIONS (for previews), while this rewrite is testing.
 BUILD_VERSIONS="yes"
 
 if [ "$BUILD_VERSIONS" != "no" ]; then
-  mv $TEMP/content/docs/docs $TEMP/content/docs/development
+  mv $TEMP/content/docs/versioned $TEMP/content/docs/development
   # Remove pre-release documents from search.  This has to be applied to each markdown, unfortunately.
   # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
   # and the seconds inserts commands into the front-matter.
   find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '1s/^\([^-]\)/---\n---\n\1/'
   find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '2isearch:\n exclude: true'
   echo "- Docs: development" >> "$TEMP/content/docs/.nav.yml"
+  sed -i 's| versioned/| development/|g' "$TEMP/content/config/redirects.yml"
 
   # Handle current release specially, as we don't include a version slug
   # TODO: can we make one clone and reuse it, possibly with git worktrees?
   git clone --depth 1 -b "${DOCS_BRANCHES[0]}" "https://github.com/${GIT_SLUG}" "$TEMP/current-release"
-  if [ -d "$TEMP/content/docs/docs" ]; then
-    cp -r "$TEMP/current-release/docs/docs" "$TEMP/content/docs/docs"
-    echo -e "\ndoc_base: /docs/docs/" >> "$TEMP/content/docs/docs/.meta.yml"
+  if [ -d "$TEMP/current-release/docs/versioned" ]; then
+    cp -r "$TEMP/current-release/docs/versioned" "$TEMP/content/docs/docs"
+    echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/docs/.meta.yml"
+    # Fix up redirects from old versioned/ path to docs/ and append them to redirects.
+    # We only do this for development (so we can see effects) and docs (current)
+    grep '^    ' "$TEMP/current-release/config/redirects.yml" | sed 's| versioned/| docs/|g' >> "$TEMP/content/config/redirects.yml"
   else
     cp -r "$TEMP/current-release/docs" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/" >> "$TEMP/content/docs/docs/.meta.yml"
+    # Older redirects were already for /docs/, but did not have the right destination path.
+    grep '^    ' "$TEMP/current-release/config/redirects.yml" | sed '/:  *http/! s|: |: docs/|' >> "$TEMP/content/config/redirects.yml"
     # Copy the nav, but strip out non-versioned content, starting with blog
     # This can be retired after we stop supporting v1.19.
     if [ ! -f "$TEMP/content/docs/docs/.nav.yml" ]; then
@@ -102,9 +100,9 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
 
     echo "Building for previous version $version"
     git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
-    if [ -d "$TEMP/docs-$version/docs/docs" ]; then
-      cp -r "$TEMP/docs-$version/docs/docs" "$TEMP/content/docs/v$version-docs"
-      echo -e "\ndoc_base: /docs/docs/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
+    if [ -d "$TEMP/docs-$version/docs/versioned" ]; then
+      cp -r "$TEMP/docs-$version/docs/versioned" "$TEMP/content/docs/v$version-docs"
+      echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
     else
       cp -r "$TEMP/docs-$version/docs" "$TEMP/content/docs/v$version-docs"
       echo -e "\ndoc_base: /docs/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
