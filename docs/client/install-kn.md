@@ -7,14 +7,23 @@ components:
 function: how-to
 ---
 
-# Installing the Knative CLI
+# Installing CLI Tools
 
-This guide provides details about how you can install the Knative `kn` CLI.
+You can use two CLI tools sets for Knative:
 
---8<-- "security-prereqs-binaries.md"
+- Knative CLI - `kn`
+- Kubernetes CLI - `kubectl`
+
+The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` wh.  if you want to handle more YAML.
+
 --8<-- "install-kn.md"
 
+## Install Kubernetes CLI
+
+Install the [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank} to run commands against Kubernetes clusters. You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
+
 ## Install kn using the nightly-built binary
+
 !!! warning
     Nightly container images include features which may not be included in the latest Knative release and are not considered to be stable.
 
