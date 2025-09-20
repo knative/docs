@@ -8,7 +8,7 @@ function: tutorial
 
 # Install the Knative quickstart
 
-This quickstart tutorial provides a simplified, local Knative installation by using the Knative `quickstart` plugin. This implementation is limited to a local deploymnet suited for experimentaion. For information on production implmentations, see the [Implementation Roadmap](readme.md#installation-roadmap).
+This quickstart tutorial provides a simplified, local Knative installation by using the Knative `quickstart` plugin. This implementation is limited to a local deployment suited for experimentation. For information on production implementations, see the [Implementation Roadmap](readme.md#installation-roadmap).
 
 --8<-- "quickstart-install.md"
 
