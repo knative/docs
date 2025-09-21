@@ -7,14 +7,21 @@ function: how-to
 
 # Installing Knative Eventing using YAML files
 
-This topic describes how to install Knative Eventing by applying YAML files using the `kubectl` CLI.
+his topic describes how to install Knative Eventing by applying YAML files. This installation requires the following prerequisites.
 
---8<-- "prerequisites.md"
-{% include "security-prereqs-images.md" %}
+- The [CLI Tools](../client/install-kn.md) are installed.
+- Sufficient hardware:
 
-## Install Knative Eventing
+  - One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+  - Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
 
-To install Knative Eventing:
+- The existing Kubernetes is running a supported version.
+
+For information on other Knative installs, see the [Installation Roadmap](README.md#installation-roadmap).
+
+## Install the Knative Eventing component
+
+To install the Knative Eventing component:
 
 1. Install the required custom resource definitions (CRDs) by running the command:
 

@@ -14,11 +14,13 @@ There are three installation methods to install Knative:
 - A YAML installation suitable for production use.
 - A Knative Operator installation suitable for production use.
 
-Installations assume are running MacOS or Linux.
+A Knative installation is composed of the Serving and Eventing components. The quickstart implements both. The YAML and Knative Operator installations provide options to install either or both.
+
+Supported platforms are Linux, MacOS, and Windows.
 
 ## Installation roadmap
 
-Use the following table to evaluate the installation methods for Knative installations.
+Use the following table to evaluate your installation options.
 
 |  | Quickstart | YAML | Knative Operator |
 | --- | --- | --- | --- |
@@ -29,7 +31,21 @@ Use the following table to evaluate the installation methods for Knative install
 
 For all installations, you need the Knative CLI and other CLI tools. All installations require a supported Kubernetes version.
 
-Other installation resources:
+System requirements provided are recommendations only. The requirements for your installation might vary, depending on whether you use optional components, such as a networking layer.
+
+## Install optional components
+
+You can extend Knative capabilities with the following components.
+
+| Extension or component | Description |
+| --- | -- |
+| [Istio](installing-istio.md) | A service mesh platform for microservices. |
+| [Cert Manager](installing-cert-manager.md) | Implement TLS certificates for secure HTTPS connections in Knative. |
+| [Backstage plugins](installing-backstage-plugins.md) |  Plugins for Knative users and their respective backends. |
+
+## Installation resources
+
+Use the following links to maintain your installations.
 
 - [Upgrading Knative](upgrade/README.md)
 - [Uninstall Knative](uninstall.md)
@@ -37,3 +53,4 @@ Other installation resources:
 - [Troubleshoot Knative installations](troubleshooting.md)
 
 For a list of commercial Knative products, see [Knative offerings](knative-offerings.md).
+
