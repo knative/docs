@@ -7,7 +7,7 @@ function: how-to
 
 # Installing Knative Eventing using YAML files
 
-his topic describes how to install Knative Eventing by applying YAML files. This installation requires the following prerequisites.
+This topic describes how to install Knative Eventing by applying YAML files. This installation requires the following prerequisites.
 
 - The [CLI Tools](../../../client/install-kn.md) are installed.
 - Sufficient hardware:

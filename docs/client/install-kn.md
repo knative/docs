@@ -14,7 +14,7 @@ You can use two CLI tools sets for Knative:
 - Knative CLI - `kn`
 - Kubernetes CLI - `kubectl`
 
-The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` wh.  if you want to handle more YAML.
+The `kn` CLI makes Knative operations easier, but all functionality is available via `kubectl` if you want to primarily use YAML representations of resources.
 
 --8<-- "install-kn.md"
 

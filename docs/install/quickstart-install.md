@@ -8,7 +8,7 @@ function: tutorial
 
 # Install the Knative quickstart plugin
 
-This quickstart plugin provides a simplified Knative installation on a Minikube or a Kubernetes running locally on a single computer. This installation is well suited for experimentation. For information on production installs, see the [Installation Roadmap](README.md#installation-roadmap).
+This quickstart plugin provides a simplified Knative installation on a kind or Minikube Kubernetes cluster running locally on a single computer. This installation is well suited for experimentation. For information on production installs, see the [Installation Roadmap](README.md#installation-roadmap).
 
 --8<-- "quickstart-install.md"
 

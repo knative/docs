@@ -33,24 +33,5 @@ For all installations, you need the Knative CLI and other CLI tools. All install
 
 System requirements provided are recommendations only. The requirements for your installation might vary, depending on whether you use optional components, such as a networking layer.
 
-## Install optional components
-
-You can extend Knative capabilities with the following components.
-
-| Extension or component | Description |
-| --- | -- |
-| [Istio](installing-istio.md) | A service mesh platform for microservices. |
-| [Cert Manager](installing-cert-manager.md) | Implement TLS certificates for secure HTTPS connections in Knative. |
-| [Backstage plugins](installing-backstage-plugins.md) |  Plugins for Knative users and their respective backends. |
-
-## Installation resources
-
-Use the following links to maintain your installations.
-
-- [Upgrading Knative](upgrade/README.md)
-- [Uninstall Knative](uninstall.md)
-- [Check Knative version](upgrade/check-install-version.md)
-- [Troubleshoot Knative installations](troubleshooting.md)
-
 For a list of commercial Knative products, see [Knative offerings](knative-offerings.md).
 
