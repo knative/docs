@@ -6,12 +6,19 @@ components:
 function: tutorial
 ---
 
-# Install Knative using quickstart
+# Install the Knative quickstart plugin
 
-Following this quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.
+This quickstart plugin provides a simplified Knative installation on a kind or Minikube Kubernetes cluster running locally on a single computer. This installation is well suited for experimentation.
 
---8<-- "quickstart-prereqs.md"
---8<-- "install-kn.md"
+This installation requires the following prerequisites:
+
+- The [CLI Tools](../client/install-kn.md) are installed.
+- Sufficient hardware:
+
+  6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+
+For information on production installs, see the [Installation Roadmap](README.md#installation-roadmap).
+
 --8<-- "quickstart-install.md"
 
 ## Next steps

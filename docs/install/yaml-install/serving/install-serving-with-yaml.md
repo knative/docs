@@ -7,10 +7,18 @@ function: how-to
 
 # Installing Knative Serving using YAML files
 
-This topic describes how to install Knative Serving by applying YAML files using the `kubectl` CLI.
+This topic describes how to install Knative Serving by applying YAML files. This installation requires the following prerequisites:
 
---8<-- "prerequisites.md"
-{% include "security-prereqs-images.md" %}
+- The [CLI Tools](../../../client/install-kn.md) are installed.
+- Sufficient hardware:
+
+  One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+
+  Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
+
+- The existing Kubernetes is running a supported version.
+
+For information on other Knative installs, see the [Installation Roadmap](../../README.md#installation-roadmap).
 
 ## Install the Knative Serving component
 
