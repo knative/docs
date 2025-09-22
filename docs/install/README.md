@@ -30,15 +30,20 @@ Use the following table to evaluate your installation method.
 
 Use the following steps to install Knative depending on your installation method.
 
-- Quickstart:
+**Quickstart**:
+
   1. Install the [CLI Tools](../client/install-kn.md).
   1. Install the [Knative Quickstart plugin](quickstart-install.md).
-- YAML:
+
+**YAML**:
+
   1. Install the [CLI Tools](../client/install-kn.md).
   1. Install either or both:
-     - Install [Knative Serving](yaml-install/serving/install-serving-with-yaml.md).
-     - Install [Knative Eventing](yaml-install/eventing/install-eventing-with-yaml.md).
-- Operator:
+       - Install [Knative Serving](yaml-install/serving/install-serving-with-yaml.md).
+       - Install [Knative Eventing](yaml-install/eventing/install-eventing-with-yaml.md).
+
+**Operator**:
+
   1. Install the [CLI Tools](../client/install-kn.md) including the Knative Operator CLI plugin.
   1. Install using the Knative Operator, and with it the Serving and Eventing components, by either of the following:
        - The [Knative Operator](./operator/knative-with-operators.md) using K8S Manifests or via Helm.
