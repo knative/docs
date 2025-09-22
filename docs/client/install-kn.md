@@ -15,7 +15,7 @@ There are three CLI tools available for managing Knative:
 - Knative CLI - `kn`
 - Knative Operator CLI - `kn`
 
-The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` CLI provided you want to primarily use YAML representations of resources. The Knative Operator CLI facilitates installing the Knative Operator and the Serving and Eventing components.
+The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` CLI provided you want to primarily use YAML representations of resources.
 
 ## Install Kubernetes CLI
 
