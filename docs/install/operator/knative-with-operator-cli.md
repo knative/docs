@@ -8,64 +8,21 @@ function: how-to
 
 # Install by using the Knative Operator CLI Plugin
 
-Knative provides a CLI Plugin to install, configure and manage Knative via the command lines. This CLI plugin facilitates
-you with a parameter-driven way to configure the Knative cluster, without interacting with the complexities of the custom
-resources.
+Knative provides the Operator CLI Plugin to install, configure and manage Knative on the command line. This plugin helps you configure the Knative cluster, without interacting with the complexities of the custom resources.
 
---8<-- "prerequisites.md"
---8<-- "security-prereqs-binaries.md"
+This topic describes how to install the Knative Operator and the Serving and Eventing components using a CLI. To install the manifests and other resources, see [Knative Operator](knative-with-operators.md).
 
-## Install the Knative Operator CLI Plugin
+This installation requires the following prerequisites:
 
-Before you install the Knative Operator CLI Plugin, first install the [Knative CLI](../../client/install-kn.md).
+- The [CLI Tools](../../client/install-kn.md) are installed.
+- Sufficient hardware:
 
-=== "MacOS"
+  - One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+  - Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
 
-    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-extensions/kn-plugin-operator/releases/tag/knative-v1.7.1).
+- The existing Kubernetes is running a supported version.
 
-    1. Rename the binary to `kn-operator`:
-
-        ```bash
-        mv kn-operator-darwin-amd64 kn-operator
-        ```
-
-=== "Linux"
-
-    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-extensions/kn-plugin-operator/releases/tag/knative-v1.7.1).
-
-    1. Rename the binary to `kn-operator`:
-
-        ```bash
-        mv kn-operator-linux-amd64 kn-operator
-        ```
-
-Make the plugin executable by running the command:
-
-```bash
-chmod +x kn-operator
-```
-
-Create the directory for the `kn` plugin:
-
-```bash
-mkdir -p ~/.config/kn/plugins
-```
-
-Move the file to a plugin directory for `kn`:
-
-```bash
-cp kn-operator ~/.config/kn/plugins
-```
-
-## Verify the installation of the Knative Operator CLI Plugin
-
-You can run the following command to verify the installation:
-
-```bash
-kn operator -h
-```
-
-You should see more information about how to use this CLI plugin.
+For information on other Knative installs, see the [Installation Roadmap](../README.md#installation-roadmap).
 
 ## Install the Knative Operator
 
@@ -90,7 +47,7 @@ To install Knative Operator of a specific version, e.g. 1.7.1, run:
 kn operator install -v 1.7.1
 ```
 
-## Installing the Knative Serving component
+## Install the Knative Serving component
 
 You can install Knative Serving of any specific version under any specific namespace. By default, the namespace is `knative-serving`,
 and the version is the latest.
@@ -165,7 +122,7 @@ you can configure Knative Serving with different ingresses:
         kn operator enable ingress --contour -n knative-serving
         ```
 
-## Installing the Knative Eventing component
+## Install the Knative Eventing component
 
 You can install Knative Eventing of any specific version under any specific namespace. By default, the namespace is `knative-eventing`,
 and the version is the latest.
@@ -188,7 +145,7 @@ To install Knative Operator of a specific version, e.g. 1.7, run:
 kn operator install --component eventing -n knative-eventing -v "1.7"
 ```
 
-### Installing Knative Eventing with event sources
+### Install Knative Eventing with event sources
 
 Knative Operator can configure the Knative Eventing component with different event sources.
 Click on each of the following tabs to

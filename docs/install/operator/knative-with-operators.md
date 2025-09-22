@@ -8,17 +8,21 @@ function: how-to
 
 # Install by using the Knative Operator
 
-Knative provides a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative.
-You can install the Serving component, Eventing component, or both on your cluster.
+Knative provides the [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) to install, configure and manage Knative. You can install the Serving component, Eventing component, or both on your cluster.
 
-The following table describes the supported versions of Serving and Eventing for the Knative Operator:
+This topic describes how to install the Knative Operator and the Serving and Eventing components using manifests and other resources. To install the Operator and the components using a CLI, see [Knative Operator CLI](knative-with-operator-cli.md).
 
-| Operator | Serving                                                                                                    | Eventing                                                                                                                                                                                    |
-|----------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| v1.19    | v1.19.0<br/>v1.18.0 and v1.18.1<br/>v1.17.0, v1.17.1 and v1.17.2<br/>v1.16.0, v1.16.1, v1.16.2 and v1.16.3 | v1.19.0<br/>v1.18.0, v1.18.1 and v1.18.2<br/>v1.17.0, v1.17.1, v1.17.2, v1.17.3, v1.17.4, v1.17.5 and v1.17.6<br/>v1.16.0, v1.16.1, v1.16.2, v1.16.3, v1.16.4, v1.16.5, v1.16.6 and v1.16.7 |
+This installation requires the following prerequisites:
 
---8<-- "prerequisites.md"
-{% include "security-prereqs-images.md" %}
+- The [CLI Tools](../../client/install-kn.md) are installed.
+- Sufficient hardware:
+
+  - One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
+  - Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
+
+- The existing Kubernetes is running a supported version.
+
+For information on other Knative installs, see the [Installation Roadmap](../README.md#installation-roadmap).
 
 ## Install the Knative Operator
 
@@ -676,6 +680,14 @@ for the source:
 ```bash
 ko delete -f config/
 ```
+
+## Supported versions
+
+The following table describes the supported versions of Serving and Eventing for the Knative Operator:
+
+| Operator | Serving                                                                                                    | Eventing                                                                                                                                                                                    |
+|----------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| v1.19    | v1.19.0<br/>v1.18.0 and v1.18.1<br/>v1.17.0, v1.17.1 and v1.17.2<br/>v1.16.0, v1.16.1, v1.16.2 and v1.16.3 | v1.19.0<br/>v1.18.0, v1.18.1 and v1.18.2<br/>v1.17.0, v1.17.1, v1.17.2, v1.17.3, v1.17.4, v1.17.5 and v1.17.6<br/>v1.16.0, v1.16.1, v1.16.2, v1.16.3, v1.16.4, v1.16.5, v1.16.6 and v1.16.7 |
 
 ## What's next
 
