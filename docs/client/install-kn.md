@@ -17,7 +17,7 @@ There are three CLI tools available for managing Knative.
 
 The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` provided you want to primarily use YAML representations of resources. The Knative Operator CLI facilitates the of installing of the Knative Operator and the Serving and Eventing components.
 
-## Install Kubernetes CLIn
+## Install Kubernetes CLI
 
 Install the [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/install-kubectl){target=_blank} to run commands against Kubernetes clusters. You can use `kubectl` to deploy applications, inspect and manage cluster resources, and view logs.
 
@@ -42,7 +42,7 @@ See the [Tekton documentation](http://hub.tekton.dev/tekton/task/kn){target=_bla
 
 ## Install the Knative Operator CLI Plugin
 
-Before you install the Knative Operator CLI Plugin, first install the [Knative CLI](../../client/install-kn.md).
+Before you install the Knative Operator CLI Plugin, first install the Knative CLI described earlier.
 
 === "MacOS"
 
