@@ -10,7 +10,7 @@ function: how-to
 
 Knative provides the Operator CLI Plugin to install, configure and manage Knative on the command line. This plugin helps you configure the Knative cluster, without interacting with the complexities of the custom resources.
 
-This topic describes how to install the Knative Operator and the Serving and Eventing components using a CLI. To install the manifests and other resources, see [Knative Operator](knative-with-operators.md).
+This topic describes how to install the Knative Operator and the Serving and Eventing components using a CLI.
 
 This installation requires the following prerequisites:
 
