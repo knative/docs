@@ -146,7 +146,7 @@ Knative to handle HTTP requests when there is no current user pod available to
 handle the request. The activator works in concert with the autoscaler to manage
 the number of Pods for a particular Revision based on traffic routing decisions
 made by the ingress gateway. Not all incoming requests are handled by the
-activator -- when a particular revision has sufficent replicas to handle bursty
+activator -- when a particular revision has sufficient replicas to handle bursty
 traffic, the ingress gateway is programmed with the direct backend addresses of
 the application pods.
 
@@ -179,7 +179,7 @@ configuration of the application, and can presumably run arbitrary code and
 access all the resources which the application can.)
 
 Because not all components are involved in processing a request, we declare in
-each situation which Knative components may be targeted by an attacker to achive
+each situation which Knative components may be targeted by an attacker to achieve
 these goals. See [migitations](#threat-mitigations) for implemented defenses and
 additional cluster-specific configuration which may be considered.
 
@@ -272,7 +272,7 @@ traffic between application namespaces. Knative recommends one or more of the
 following technologies which can limit cross-namespace access:
 
 - [Knative Eventing EventPolicy](https://knative.dev/docs/eventing/features/authorization/#defining-an-eventpolicy)
-  in conjuction with
+  in conjunction with
   [Sender Identity](https://knative.dev/docs/eventing/features/sender-identity/).
 - Use of a service mesh, like Istio. This may require
   [specific configuration](https://knative.dev/docs/serving/istio-authorization/#before-you-begin)
