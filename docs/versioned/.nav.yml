@@ -2,14 +2,7 @@ nav:
 ###############################################################################
     # Concepts
 ###############################################################################
-    - Concepts:
-      - Overview: concepts/README.md
-      - Resources:
-        - Serving resources:
-          - Revisions: concepts/serving-resources/revisions.md
-        - Eventing resources:
-          - Brokers: concepts/eventing-resources/brokers.md
-      - Duck types: concepts/duck-typing.md
+    - Overview: README.md
 ###############################################################################
     # Getting started
 ###############################################################################
@@ -214,6 +207,7 @@ nav:
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
+        - Duck types: eventing/concepts/duck-typing.md
         - Event sources:
           - About event sources: eventing/sources/README.md
           - ApiServerSource:

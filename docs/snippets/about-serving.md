@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- /docs/serving/README.md
-- /docs/concepts/README.md
+- versioned/serving/README.md
+- versioned/README.md
 -->
 Knative Serving defines a set of objects as Kubernetes Custom Resource
 Definitions (CRDs). These resources are used to define and control how your
