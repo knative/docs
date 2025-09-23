@@ -1,5 +1,6 @@
 <!-- Snippet used in the following topics:
-- /docs/concepts/eventing-resources/brokers.md
+- versioned/functions/creating-functions.md
+- versioned/getting-started/create-a-function.md
 -->
 After you have installed Knative Functions, you can create a function project by using the `func` CLI or the `kn func` plugin:
 
