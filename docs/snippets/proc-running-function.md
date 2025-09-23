@@ -1,6 +1,6 @@
 <!-- Snippet used in the following topics:
-- /docs/getting-started/build-run-deploy-func.md
-- /docs/functions/running-functions.md
+- versioned/getting-started/build-run-deploy-func.md
+- versioned/functions/running-functions.md
 -->
 The `run` command builds an image for your function if required, and runs this image locally, instead of deploying it on a cluster.
 

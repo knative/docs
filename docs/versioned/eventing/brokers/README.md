@@ -21,5 +21,4 @@ control rules.
 
 ## Additional resources
 
-- [Brokers concept documentation](../../concepts/eventing-resources/brokers.md)
 - [Broker specifications](https://github.com/knative/specs/blob/main/specs/eventing/overview.md#broker){target=_blank}
