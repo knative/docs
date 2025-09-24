@@ -1,6 +1,5 @@
 <!-- Snippet used in the following topics:
 - versioned/getting-started/README.md
-- versioned/install/quickstart-install.md
 - versioned/getting-started/quickstart-install.md
 -->
 ## Before you begin

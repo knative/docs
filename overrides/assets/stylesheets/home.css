@@ -108,11 +108,6 @@ section.home-container {
   margin-left: 0.5rem;
 }
 
-.md-button--secondary {
-  background-color: var(--md-primary-fg-color--dark);
-  border: none !important;
-}
-
 .home-container .md-button,
 .need-to-know-more-container .md-button {
   background-color: var(--md-primary-fg-color--light);
@@ -120,11 +115,25 @@ section.home-container {
   border-radius: 8px;
 }
 
-.home-container .md-button--primary {
+.md-typeset .call-to-action .md-button {
   margin-top: 0.5rem;
+  border-radius: 8px;
+  color: var(--md-primary-fg-color--dark);
+  background-color: var(--md-primary-fg-color);
+  border-color: var(--md-primary-fg-color);
+}
+
+.md-typeset .call-to-action .md-button.md-button--primary {
+  color: var(--md-primary-fg-color);
   background-color: var(--md-primary-fg-color--dark);
   border-color: var(--md-primary-fg-color--dark);
-  border-radius: 8px;
+}
+
+.md-typeset .call-to-action .md-button:focus,
+.md-typeset .call-to-action .md-button:hover {
+  background-color: var(--md-accent-fg-color) !important;
+  border-color: var(--md-accent-fg-color) !important;
+  color: white !important;
 }
 
 h3.trusted-by {
@@ -493,18 +502,6 @@ div.components-content {
 
 #pnc-testimonial {
   padding: 1rem 1.5rem;
-}
-
-.md-typeset .md-button.black {
-  color: black;
-}
-
-.md-typeset .md-button.black:hover {
-  color: white;
-}
-
-.md-typeset .md-button.white {
-  color: white;
 }
 
 /* cncf notice container css */

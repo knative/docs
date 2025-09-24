@@ -164,6 +164,7 @@ plugins:
       versioned/eventing/sink/kafka-sink.md: versioned/eventing/sinks/kafka-sink.md
       versioned/eventing/sources/containersource.md: versioned/eventing/custom-event-source/containersource/README.md
       versioned/eventing/sources/pingsource/index.md: versioned/eventing/sources/ping-source/README.md
+      versioned/install/quickstart-install.md: versioned/getting-started/quickstart-install.md
       versioned/install/collecting-logs/index.md: versioned/serving/observability/logging/collecting-logs.md
       versioned/install/collecting-metrics/index.md: versioned/serving/observability/metrics/collecting-metrics.md
       versioned/install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/eventing-installation-files.md

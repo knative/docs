@@ -33,7 +33,7 @@ Use the following steps to install Knative depending on your installation method
 **Quickstart**:
 
   1. Install the [CLI Tools](../client/install-kn.md).
-  1. Install the [Knative Quickstart plugin](quickstart-install.md).
+  1. Install the [Knative Quickstart plugin](../getting-started/quickstart-install.md).
 
 **YAML**:
 
