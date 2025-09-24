@@ -301,6 +301,39 @@ spec:
   defaultBrokerClass: MTChannelBasedBroker
 ```
 
+## High availability
+
+By default, Knative Eventing runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for all deployments managed by the operator.
+
+The following configuration specifies a replica count of 3 for the workloads:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+spec:
+  high-availability:
+    replicas: 3
+```
+
+The `replicas` field also configures the `HorizontalPodAutoscaler` resources based on the `spec.high-availability`. Let's say the operator includes the following HorizontalPodAutoscaler:
+
+```yaml
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  ...
+spec:
+  minReplicas: 3
+  maxReplicas: 5
+```
+
+If you configure `replicas: 2`, which is less than `minReplicas`, the operator transforms `minReplicas` to `1`.
+
+If you configure `replicas: 6`, which is more than `maxReplicas`, the operator transforms `maxReplicas` to `maxReplicas + (replicas - minReplicas)` which is `8`.
+
 ## Override system deployments
 
 If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in the CR.
