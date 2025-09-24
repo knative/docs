@@ -67,30 +67,24 @@ You can verify that your function has been successfully run by using the `invoke
     func invoke
     ```
 
-    !!! Success "Expected output"
-    ```{ .bash .no-copy }
-    Received response
-    POST / HTTP/1.1 hello.default.127.0.0.1.sslip.io
-      User-Agent: Go-http-client/1.1
-      Content-Length: 25
-      Accept-Encoding: gzip
-      Content-Type: application/json
-      K-Proxy-Request: activator
-      X-Request-Id: 9e351834-0542-4f32-9928-3a5d6aece30c
-      Forwarded: for=10.244.0.15;proto=http
-      X-Forwarded-For: 10.244.0.15, 10.244.0.9
-      X-Forwarded-Proto: http
-    Body:
-    ```
-
-
 === "kn func"
 
     ```bash
     kn func invoke
     ```
 
-    !!! Success "Expected output"
-    ```{ .bash .no-copy }
-    INFO:root:OK: Request Received
-    ```
+!!! Success "Expected output"
+```{ .bash .no-copy }
+Received response
+POST / HTTP/1.1 hello.default.127.0.0.1.sslip.io
+    User-Agent: Go-http-client/1.1
+    Content-Length: 25
+    Accept-Encoding: gzip
+    Content-Type: application/json
+    K-Proxy-Request: activator
+    X-Request-Id: 9e351834-0542-4f32-9928-3a5d6aece30c
+    Forwarded: for=10.244.0.15;proto=http
+    X-Forwarded-For: 10.244.0.15, 10.244.0.9
+    X-Forwarded-Proto: http
+Body:
+```
