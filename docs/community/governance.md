@@ -1,3 +1,9 @@
+---
+audience: contributor
+components: []
+function: community
+---
+
 # Community Rules and Practices
 
 This page provides links to documents for common Knative community practices and

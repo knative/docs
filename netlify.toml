@@ -5,8 +5,16 @@
   publish = "site"
 
 [build.environment]
-  NODE_VERSION= "14"
-  PYTHON_VERSION = "3.8"
+  NODE_VERSION= "22"
+  PYTHON_VERSION = "3.13"
+
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+
+  [plugins.inputs]
+  prettyURLs = true
+  # The trailing slash is needed for MkDocs navigation
+  trailingSlash = true
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
@@ -31,3 +39,4 @@
   from = "/docs/help/contributor/*"
   to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
   status = 301
+
