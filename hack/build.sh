@@ -40,6 +40,12 @@ readonly TEMP="$(mktemp -d)"
 readonly SITE=$PWD/site
 rm -rf site/
 
+# If we're running on Netlify, update git branches
+if [ "$CI" == "true" ]; then
+  git fetch --prune origin
+fi
+
+
 mkdir "$TEMP/content"
 cp -r . "$TEMP/content/"
 
@@ -64,8 +70,8 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   sed -i 's| versioned/| development/|g' "$TEMP/content/config/redirects.yml"
 
   # Handle current release specially, as we don't include a version slug
-  # TODO: can we make one clone and reuse it, possibly with git worktrees?
-  git clone --depth 1 -b "${DOCS_BRANCHES[0]}" "https://github.com/${GIT_SLUG}" "$TEMP/current-release"
+  # Note that git worktree reuses the same git clone, so we don't need to clone 50+MB each time.
+  git worktree add --detach "$TEMP/current-release" "origin/${DOCS_BRANCHES[0]}"
   if [ -d "$TEMP/current-release/docs/versioned" ]; then
     cp -r "$TEMP/current-release/docs/versioned" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/docs/.meta.yml"
@@ -99,7 +105,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
     version=${previous[$i]}
 
     echo "Building for previous version $version"
-    git clone --depth 1 -b ${DOCS_BRANCHES[$i+1]} https://github.com/${GIT_SLUG} "$TEMP/docs-$version"
+    git worktree add --detach "$TEMP/docs-$version" "origin/${DOCS_BRANCHES[i+1]}"
     if [ -d "$TEMP/docs-$version/docs/versioned" ]; then
       cp -r "$TEMP/docs-$version/docs/versioned" "$TEMP/content/docs/v$version-docs"
       echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
@@ -159,6 +165,7 @@ cat golang/_redirects >> site/_redirects
 
 # Clean up
 # rm -rf $TEMP
+# git worktree prune
 echo "Temp dir was: $TEMP"
 
 if [ "$1" = "serve" ]; then
