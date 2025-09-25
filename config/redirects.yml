@@ -19,10 +19,10 @@ plugins:
       versioned/eventing/broker/kafka-broker/README.md: versioned/eventing/brokers/broker-types/kafka-broker/README.md
       versioned/eventing/broker/rabbitmq-broker/README.md: versioned/eventing/brokers/broker-types/rabbitmq-broker/README.md
       versioned/eventing/broker/README.md: versioned/eventing/brokers/README.md
-      versioned/concepts/resources/revisions.md: versioned/concepts/serving-resources/revisions.md
+      versioned/concepts/resources/revisions.md: versioned/serving/revisions/README.md
       versioned/serving/revision-gc.md: versioned/serving/revisions/revision-developer-config-options.md
       versioned/serving/configuration/revision-gc.md: versioned/serving/revisions/revision-admin-config-options.md
-      versioned/reference/concepts/duck-typing.md: versioned/concepts/duck-typing.md
+      versioned/reference/concepts/duck-typing.md: versioned/eventing/concepts/duck-typing.md
       versioned/reference/client/README.md: versioned/client/README.md
       versioned/reference/api/eventing-api.md: versioned/eventing/reference/eventing-api.md
       versioned/reference/api/serving-api.md: versioned/serving/reference/serving-api.md
@@ -86,8 +86,8 @@ plugins:
       versioned/community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
       versioned/community/meetup.md: community/README.md
       versioned/community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
-      versioned/concepts/overview.md: versioned/index.md
-      versioned/developer/concepts/duck-typing.md: versioned/concepts/duck-typing.md
+      versioned/concepts/overview.md: versioned/README.md
+      versioned/developer/concepts/duck-typing.md: versioned/eventing/concepts/duck-typing.md
       versioned/developer/eventing/event-delivery.md: versioned/eventing/event-delivery.md
       versioned/developer/eventing/sinks/README.md: versioned/eventing/sinks/README.md
       versioned/developer/eventing/sinks/kafka-sink.md: versioned/eventing/sinks/kafka-sink.md
