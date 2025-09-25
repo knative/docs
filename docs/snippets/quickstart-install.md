@@ -1,6 +1,5 @@
 <!-- Snippet used in the following topics:
 - versioned/getting-started/quickstart-install.md
-- versioned/install/quickstart-install.md
 -->
 ## Install the Knative quickstart plugin
 
