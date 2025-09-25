@@ -66,6 +66,9 @@ Follow the procedure for the Channel of your choice:
 
 === "Apache Kafka Channel"
 
+    !!! note
+        Access to an Apache Kafka cluster is required to use the Kafka Channel. You can do this for example by following the instructions on the [Strimzi Quickstart page](https://strimzi.io/quickstarts/).
+
     The following commands install the KafkaChannel and run event routing in a system
     namespace. The `knative-eventing` namespace is used by default.
 
@@ -119,6 +122,9 @@ Follow the procedure for the Broker of your choice:
 
 <!-- This indentation is important for things to render properly. -->
 === "Apache Kafka Broker"
+
+    !!! note
+        Access to an Apache Kafka cluster is required to use the Kafka Broker. You can do this for example by following the instructions on the [Strimzi Quickstart page](https://strimzi.io/quickstarts/).
 
     The following commands install the Apache Kafka Broker and run event routing in a system
     namespace. The `knative-eventing` namespace is used by default.
