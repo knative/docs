@@ -40,49 +40,6 @@ nav:
             - 7 - Connect Slack via Camel-K: bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
             - 8 - Extra Challenges: bookstore/extra-challenge/README.md
 ###############################################################################
-    # Installing
-###############################################################################
-    - Installing:
-      - About installing Knative: install/README.md
-      - Install CLI Tools: client/install-kn.md
-      - Install quickstart: install/quickstart-install.md
-      # YAML Installation
-      - Install Knative with YAML:
-        - About YAML-based installation: install/yaml-install/README.md
-        - Install Knative Serving:
-          - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
-          - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
-        - Install Knative Eventing:
-          - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
-          - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
-      # Operator Installation
-      - Install with Knative Operator:
-        - Install by using the Knative Operator: install/operator/knative-with-operators.md
-        - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
-        - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
-        - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
-        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
-      # Advanced options for Serving
-      - Install advanced options:
-        # Istio Installation
-        - Install Istio for Knative: install/installing-istio.md
-        # Cert-manager Installation
-        - Install cert-manager: install/installing-cert-manager.md
-      # Backstage plugin
-      - Install Knative Backstage plugin: install/installing-backstage-plugins.md
-      # Vendor docs
-      - Using a Knative-based offering: install/knative-offerings.md
-      # Upgrading Knative
-      - Upgrading your installation:
-        - About upgrading Knative: install/upgrade/README.md
-        - Checking your Knative version: install/upgrade/check-install-version.md
-        - Upgrading with kubectl: install/upgrade/upgrade-installation.md
-        - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
-      # Uninstall
-      - Uninstalling Knative: install/uninstall.md
-      # Troubleshooting
-      - Troubleshooting Knative: install/troubleshooting.md
-###############################################################################
     # Functions
 ###############################################################################
     - Functions:
@@ -108,7 +65,7 @@ nav:
           - About Revisions: serving/revisions/README.md
           - Administrator configuration options: serving/revisions/revision-admin-config-options.md
           - Developer configuration options: serving/revisions/revision-developer-config-options.md
-# add other resource types
+        # add other resource types
       - Autoscaling:
         - About autoscaling: serving/autoscaling/README.md
         - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
@@ -325,6 +282,48 @@ nav:
       - Installing the Knative CLI: client/install-kn.md
       - Customizing kn: client/configure-kn.md
       - kn plugins: client/kn-plugins.md
+###############################################################################
+    # Administration
+###############################################################################
+    - Administration:
+      # TODO: add a general overview of Knative for administrators
+      - Installing Knative: install/README.md
+      # YAML Installation
+      - Install Knative with YAML:
+        - About YAML-based installation: install/yaml-install/README.md
+        - Install Knative Serving:
+          - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
+          - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
+        - Install Knative Eventing:
+          - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
+          - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
+      # Operator Installation
+      - Install with Knative Operator:
+        - Install by using the Knative Operator: install/operator/knative-with-operators.md
+        - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
+        - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
+        - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
+        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+      # Advanced options for Serving
+      - Install advanced options:
+        # Istio Installation
+        - Install Istio for Knative: install/installing-istio.md
+        # Cert-manager Installation
+        - Install cert-manager: install/installing-cert-manager.md
+      # Backstage plugin
+      - Install Knative Backstage plugin: install/installing-backstage-plugins.md
+      # Vendor docs
+      - Using a Knative-based offering: install/knative-offerings.md
+      # Upgrading Knative
+      - Upgrading your installation:
+        - About upgrading Knative: install/upgrade/README.md
+        - Checking your Knative version: install/upgrade/check-install-version.md
+        - Upgrading with kubectl: install/upgrade/upgrade-installation.md
+        - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
+      # Uninstall
+      - Uninstalling Knative: install/uninstall.md
+      # Troubleshooting
+      - Troubleshooting Knative: install/troubleshooting.md
 ###############################################################################
     # Code samples
 ###############################################################################
