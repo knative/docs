@@ -286,7 +286,7 @@ nav:
     # Administration
 ###############################################################################
     - Administration:
-      # TODO: add a general overview of Knative for administrators
+      - Administration overview: admin/admin-overview.md
       - Installing Knative: install/README.md
       # YAML Installation
       - Install Knative with YAML:
