@@ -5,7 +5,7 @@ components:
   - eventing
 function: reference
 ---
-# Adminisration overview
+# Administration overview
 
 Knative has a comprehensive set of tools and capabilities to administer the serving and eventing of your container functions, apps, and microservices and for overall maintenance and optimization of your clusters and Kubernetes deployment.
 
