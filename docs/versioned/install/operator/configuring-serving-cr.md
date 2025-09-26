@@ -259,7 +259,7 @@ spec:
 
 ### Connect to AWS ECR using Pod Identity
 
-The use of AWS ECR as source of images for deployment using knative-serving requires access to digests for images. This can be obtained via a managed policy - `AmazonEC2ContainerRegistryReadOnly` which is attached to an IAM Role - `knative-serving-controller`. This role is then attached to the `controller` ServiceAccount in the `knative-serving` namespace. This will allow the controller pods to retrieve relevant digests for containers from ECR. Samples are provided below as AWS-CLI commands and Terraform module to perform the setup. Please adapt to the relevant IaC tooling your team uses.
+The use of AWS ECR as source of images for deployment using knative-serving requires access to digests for images. This can be obtained via a managed policy - `AmazonEC2ContainerRegistryReadOnly` which is attached to an IAM Role - `knative-serving-controller`. This role is then attached to the `controller` ServiceAccount in the `knative-serving` namespace. This will allow the controller pods to retrieve relevant digests for containers from ECR. Samples are provided below as AWS-CLI commands and Terraform module to perform the setup. Please adapt to the relevant IaC tooling your team uses. Details can be found in the [AWS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
 
 === "Terraform Example"
 
