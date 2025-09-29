@@ -5,7 +5,7 @@ components:
   - eventing
 function: reference
 ---
-# Administration overview
+# Knative administration overview
 
 Knative has a comprehensive set of tools and capabilities to administer your Kubernetes clusters. This article provides a overview of Knative features, capabilities, and resources of interest to Kubernetes Administrators, and is organized by the following areas:
 
