@@ -19,7 +19,7 @@ Knative has a set of tools and capabilities to administer your Kubernetes cluste
 
 Use the Installation Roadmap for guidance on installing Knative using the resources and tool choices that best fit your needs. You can install using YAML resources, manifests, or CLI tools that include the Knative Operator.
 
-The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. You can [Install by using the Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md), or you can install it using manifest resources.
+The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components.
 
 You can install Knative components in three ways:
 
@@ -61,4 +61,3 @@ Knative integrates with existing security and access control measures with the c
 ## Updates and Maintenance
 
 In addition to updates, Knative provides integration with existing components for resource limits and volumes.
-
