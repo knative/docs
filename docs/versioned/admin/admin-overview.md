@@ -24,22 +24,21 @@ The Knative Operator is a custom controller that extends the Kubernetes API to i
 You can install Knative components in three ways:
 
 - Use a [YAML-based installation](/install/yaml-install/README.md)
-- [Install by using the Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md)
-- [Install by using the Knative Operator](/install/operator/knative-with-operators.md) using YAML resource files:
+- Use the [Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md)
+- Use the [Knative Operator](/install/operator/knative-with-operators.md) with YAML resource files:
 
     - [Knative Serving installation files](/install/yaml-install/serving/serving-installation-files.md)
     - [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md)
 
-With the Knative Operator, you can implement custom resource definitions:
+You can [Configuring Knative using the Operator](/install/operator/configuring-with-operator.md) and define custom resource definitions:
 
-- [Configuring Knative using the Operator](/install/operator/configuring-with-operator.md)
-- [Configuring Knative Serving CRDs](/install/operator/configuring-serving-cr.md)
-- [Configuring Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md)
+- [Knative Serving CRDs](/install/operator/configuring-serving-cr.md)
+- [Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md)
 
 You can also install service and event mesh plugins:
 
-- [Install Istio for Knative](/install/installing-istio.md).
-- [Install Knative Backstage plugin](/install/installing-backstage-plugins.md)
+- [Istio for Knative](/install/installing-istio.md)
+- [Knative Backstage plugin](/install/installing-backstage-plugins.md)
 
 For un-installations, see [Uninstalling Knative](/install/uninstall.md).
 
