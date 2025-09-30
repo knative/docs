@@ -27,8 +27,8 @@ You can install Knative components in three ways:
 - [Install by using the Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md)
 - [Install by using the Knative Operator](/install/operator/knative-with-operators.md) using YAML resource files:
 
-  - [Knative Serving installation files](/install/yaml-install/serving/serving-installation-files.md)
-  - [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md)
+    - [Knative Serving installation files](/install/yaml-install/serving/serving-installation-files.md)
+    - [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md)
 
 With the Knative Operator, you can implement custom resource definitions:
 
