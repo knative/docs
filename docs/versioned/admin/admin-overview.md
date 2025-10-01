@@ -30,10 +30,11 @@ You can install Knative components in three ways:
     - [Knative Serving installation files](/install/yaml-install/serving/serving-installation-files.md)
     - [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md)
 
-You can also install service and event mesh plugins:
+You can also install these plugins service to extend Knative capabilities for service meshes and application security:
 
 - [Istio for Knative](/install/installing-istio.md)
 - [Knative Backstage plugin](/install/installing-backstage-plugins.md)
+- [Installing Security-Guard](/serving/app-security/security-guard-install.md)
 
 For un-installations, see [Uninstalling Knative](/install/uninstall.md).
 
@@ -92,10 +93,12 @@ For logging Serving activity, see [Collecting logs](/serving/observability/loggi
 
 For logging Eventing activity, see [Collecting logs](/eventing/observability/logging/collecting-logs.md) and [Configuring logging](/eventing/observability/logging/config-logging.md).
 
-## Security
+## Security and Access Control
 
-Knative integrates with existing security and access control measures with the certificate manager, networking TLS certificates, domain and cluster encryption, and application security.
+[Security-Guard](/serving/app-security/security-guard-about.md) provides visibility into the security status of applications deployed by Knative Services. See [Verifying Knative Images](/reference/security/verifying-images.md) for verifying binaries for authenticity before deploying.
+
+For access control, see [Transport Encryption](/eventing/features/transport-encryption.md), [Sender Identity](/eventing/features/sender-identity.md), and [cert-manager](/install/installing-cert-manager.md).
 
 ## Updates and Maintenance
 
-In addition to updates, Knative provides integration with existing components for resource limits and volumes.
+For Knative updates, see [About upgrading Knative](/install/upgrade/README.md) and [Checking your Knative version](/install/upgrade/check-install-version.md). The current Knative version is the shown in the version drop-down in the upper-left corner of this page. Refer to  [Upgrading with the Knative Operator](/install/upgrade/upgrade-installation-with-operator.md) or [Upgrading with kubectl](/install/upgrade/upgrade-installation.md).
