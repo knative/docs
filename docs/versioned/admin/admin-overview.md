@@ -30,6 +30,8 @@ You can install Knative components in three ways:
     - [Knative Serving installation files](/install/yaml-install/serving/serving-installation-files.md)
     - [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md)
 
+### Recommended plugins
+
 You can also install these plugins service to extend Knative capabilities for service meshes and application security:
 
 - [Istio for Knative](/install/installing-istio.md)
@@ -85,6 +87,12 @@ The configuration options for eventing comprise the following areas:
 - Istio, a programmable, application-aware network. See [Eventing with Istio](/eventing/features/istio-integration.md).
 - Channels. See [Configure Channel defaults](/eventing/configuration/channel-configuration.md).
 
+### Blog articles
+
+| Article | Description |
+| --- | --- |
+| [Configurable RuntimeClassNames](../../blog/articles/kubevirt_meets_eventing.md) | Configure the default the RuntimeClassName field for deployments as selected from the Knative Service label selector. |
+
 ## Monitoring and Observability
 
 Knative is instrumented with OpenTelemetry. For metrics, see the [Metrics Reference](/serving/observability/metrics/serving-metrics.md) and [Collecting metrics](/serving/observability/metrics/collecting-metrics.md). You can access [CloudEvents traces](/serving/observability/accessing-traces.md).
@@ -93,11 +101,24 @@ For logging Serving activity, see [Collecting logs](/serving/observability/loggi
 
 For logging Eventing activity, see [Collecting logs](/eventing/observability/logging/collecting-logs.md) and [Configuring logging](/eventing/observability/logging/config-logging.md).
 
+### Blog articles
+
+| Article | Description |
+| --- | --- |
+| [Monitoring Virtual Machines with Knative Eventing](../../blog/articles/kubevirt_meets_eventing.md) | Monitor KubeVirt VMs with Knative Eventing building blocks. |
+| [Distributed tracing with Knative, OpenTelemetry and Jaeger](../../blog/articles/distributed-tracing.md) | Describes using Jaeger through a mix of OpenCensus and OpenTelemetry. |
+
 ## Security and Access Control
 
 [Security-Guard](/serving/app-security/security-guard-about.md) provides visibility into the security status of applications deployed by Knative Services. See [Verifying Knative Images](/reference/security/verifying-images.md) for verifying binaries for authenticity before deploying.
-
 For access control, see [Transport Encryption](/eventing/features/transport-encryption.md), [Sender Identity](/eventing/features/sender-identity.md), and [cert-manager](/install/installing-cert-manager.md).
+
+### Blog articles
+
+| Article | Description |
+| --- | --- |
+| [Knative and Backstage](../../blog/articles/knative-backstage-plugins.md) | A platform for building developer portals.|
+| [Knative Backstage Security](../../blog/articles/knative-backstage-security.md) | How to secure the communication between the Knative Event Mesh plugin and the backend. |
 
 ## Updates and Maintenance
 
