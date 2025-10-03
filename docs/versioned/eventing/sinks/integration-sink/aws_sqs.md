@@ -30,12 +30,12 @@ Below is an `IntegrationSink` to send data to AWS SQS:
   spec:
     aws:
       sqs:
-        arn: "arn:aws:s3:::my-queue"
+        arn: "my-queue"
         region: "eu-north-1"
       auth:
         secret:
           ref:
-          name: "my-secret"
+            name: "my-secret"
   ```
 Inside of the `aws.sqs` object we define the name of the queue (or _arn_) and its region. The credentials for the AWS service are referenced from the `my-secret` Kubernetes `Secret` 
 
