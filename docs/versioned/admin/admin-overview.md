@@ -34,7 +34,7 @@ This article outlines major Knative functionality and provides links to detailed
 
 ## Installing
 
-Use the [Installation Roadmap](../install/README.md) for guidance on installing Knative using the resources and tool choices that best fit your needs. You can install using YAML manifests or a Kubernetes operator; the operator supports management via the `kn` CLI.
+Use the [Installation Roadmap](../install/README.md#installation-roadmap) for guidance on installing Knative using the resources and tool choices that best fit your needs. You can install using YAML manifests or a Kubernetes operator; the operator supports management via the `kn` CLI.
 
 The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components.
 
@@ -45,6 +45,17 @@ You can install Knative components in three ways:
 - Use the [Knative Operator](/install/operator/knative-with-operators.md) with YAML resource files and the `kubectl` CLI.
 
 Knative supports subsequent installs after the initial installation, you so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
+
+### YAML and CLI installations compared
+
+The YAML-based installation provides opportunities to achieve customizable outcomes and define the desired state of the system, along with the following capabilities:
+
+- Version and audit control. YAML files are typically stored in a GitHub repository.
+- Infrastructure as Code (IaC).
+- Collaboration and roll back to previous configurations.
+- Complex configurations.
+
+THe CLI-based installation provides a great quick start for basic operations and tasks and understanding and testing the capabilities of Knative. However, it can be harder to track the current state and to maintain version control for components.
 
 ### Recommended plugins
 
