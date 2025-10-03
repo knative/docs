@@ -7,17 +7,34 @@ function: reference
 ---
 # Overview
 
-Knative has a set of tools and capabilities to administer your Kubernetes clusters. This article provides a overview of Knative features, capabilities, and resources of interest to Kubernetes Administrators, and is organized by the following areas:
+This page explains to administrators how to install and manage Knative on an existing Kubernetes cluster, and assumes you have familiarity the following:
 
-- Installation
-- Configuration
-- Monitoring and Observability
-- Security and Access Control
-- Updates and Maintenance
+- Kubernetes and Kubernetes administration.
+- The `kubectl`CLI tool. You will also be using the Knative CLI tools, `kn` and `func`. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
+- The Cloud Native Computing Foundation (CNCF) for which Knative is one of its projects, along with Kubernetes, Prometheus, and Istio.
 
-## Installation
+Additionally, you should have cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace.  
 
-Use the Installation Roadmap for guidance on installing Knative using the resources and tool choices that best fit your needs. You can install using YAML resources, manifests, or CLI tools that include the Knative Operator.
+The objective of this overview is to provide an understanding of the different Knative components, their roles, the Knative philosophy, and how to enable your cluster's users to develop using Knative.
+
+Essentially, Knative aims to extend Kubernetes, and build on existing capabilities where feasible. It has two main underlying components that support plugging in multiple underlying transports within the same cluster:
+
+- Serving. Pods and pluggable network ingress routes.
+- Eventing: Pods and pluggable message transports (e.g. Kafka, RabbitMQ)
+
+Knative has default lightweight implementations if you don't already have a solution.
+
+This article outlines major Knative functionality and provides links to detailed procedures as applicable for administrators. It covers the following processes:
+
+- Installing
+- Configuring
+- Monitoring
+- Enforcing security
+- Updating and maintaining
+
+## Installing
+
+Use the [Installation Roadmap](../install/README.md) for guidance on installing Knative using the resources and tool choices that best fit your needs. You can install using YAML manifests or a Kubernetes operator; the operator supports management via the `kn` CLI.
 
 The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components.
 
@@ -27,22 +44,21 @@ You can install Knative components in three ways:
 - Use the [Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md)
 - Use the [Knative Operator](/install/operator/knative-with-operators.md) with YAML resource files and the `kubectl` CLI.
 
-    - [Knative Serving installation files](/install/yaml-install/serving/serving-installation-files.md)
-    - [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md)
+Knative supports subsequent installs after the initial installation, you so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
 
 ### Recommended plugins
 
-You can also install these plugins service to extend Knative capabilities for service meshes and application security:
+You can also install these plugins service to extend Knative capabilities for service meshes:
 
 - [Istio for Knative](/install/installing-istio.md)
 - [Knative Backstage plugin](/install/installing-backstage-plugins.md)
-- [Installing Security-Guard](/serving/app-security/security-guard-install.md)
+- [cert-manager](/install/installing-cert-manager.md)
 
 For un-installations, see [Uninstalling Knative](/install/uninstall.md).
 
-## Configurations
+## Configuring
 
-Knative provides optimization capabilities for the Serving and Eventing components and settings for administering your clusters.
+Knative enables you to  optimize Serving and Eventing components and configure administration settings for your clusters.
 
 ### ConfigMaps
 
@@ -71,7 +87,7 @@ Networking administrative tasks include [Exclude namespaces from the Knative web
 
 ### Encryption
 
-You can have apply encryption as needed to your domain and clusters:
+You can apply encryption as needed to your domain and clusters:
 
 - [Configure external domain encryption](/serving/encryption/external-domain-tls.md)
 - [Configure cluster-local domain encryption](/serving/encryption/cluster-local-domain-tls.md)
@@ -87,13 +103,7 @@ The configuration options for eventing comprise the following areas:
 - Istio, a programmable, application-aware network. See [Eventing with Istio](/eventing/features/istio-integration.md).
 - Channels. See [Configure Channel defaults](/eventing/configuration/channel-configuration.md).
 
-### Blog articles
-
-| Article | Description |
-| --- | --- |
-| [Configurable RuntimeClassNames](../../blog/articles/kubevirt_meets_eventing.md) | Configure the default the RuntimeClassName field for deployments as selected from the Knative Service label selector. |
-
-## Monitoring and Observability
+## Monitoring
 
 Knative is instrumented with OpenTelemetry. For metrics, see the [Metrics Reference](/serving/observability/metrics/serving-metrics.md) and [Collecting metrics](/serving/observability/metrics/collecting-metrics.md). You can access [CloudEvents traces](/serving/observability/accessing-traces.md).
 
@@ -101,24 +111,9 @@ For logging Serving activity, see [Collecting logs](/serving/observability/loggi
 
 For logging Eventing activity, see [Collecting logs](/eventing/observability/logging/collecting-logs.md) and [Configuring logging](/eventing/observability/logging/config-logging.md).
 
-### Blog articles
+## Enforcing security
 
-| Article | Description |
-| --- | --- |
-| [Monitoring Virtual Machines with Knative Eventing](../../blog/articles/kubevirt_meets_eventing.md) | Monitor KubeVirt VMs with Knative Eventing building blocks. |
-| [Distributed tracing with Knative, OpenTelemetry and Jaeger](../../blog/articles/distributed-tracing.md) | Describes using Jaeger through a mix of OpenCensus and OpenTelemetry. |
-
-## Security and Access Control
-
-[Security-Guard](/serving/app-security/security-guard-about.md) provides visibility into the security status of applications deployed by Knative Services. See [Verifying Knative Images](/reference/security/verifying-images.md) for verifying binaries for authenticity before deploying.
 For access control, see [Transport Encryption](/eventing/features/transport-encryption.md), [Sender Identity](/eventing/features/sender-identity.md), and [cert-manager](/install/installing-cert-manager.md).
-
-### Blog articles
-
-| Article | Description |
-| --- | --- |
-| [Knative and Backstage](../../blog/articles/knative-backstage-plugins.md) | A platform for building developer portals.|
-| [Knative Backstage Security](../../blog/articles/knative-backstage-security.md) | How to secure the communication between the Knative Event Mesh plugin and the backend. |
 
 ## Updates and Maintenance
 
