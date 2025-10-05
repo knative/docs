@@ -7,13 +7,15 @@ function: reference
 ---
 # Overview
 
-This page explains to administrators how to install and manage Knative on an existing Kubernetes cluster, and assumes you have familiarity the following:
+This page provides guidance for administrators on how to install and manage Knative on an existing Kubernetes cluster, and assumes you have familiarity the following:
 
 - Kubernetes and Kubernetes administration.
-- The `kubectl`CLI tool. You will also be using the Knative CLI tools, `kn` and `func`. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
+- The `kubectl`CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
 - The Cloud Native Computing Foundation (CNCF) for which Knative is one of its projects, along with Kubernetes, Prometheus, and Istio.
 
-Additionally, you should have cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace.  
+Additionally, you should have cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace.
+
+To simplify Knative intallation and adminisration, you can use the Knative operator and the Knative CLI tool, but they are not required.
 
 The objective of this overview is to provide an understanding of the different Knative components, their roles, the Knative philosophy, and how to enable your cluster's users to develop using Knative.
 
@@ -24,40 +26,32 @@ Essentially, Knative aims to extend Kubernetes, and build on existing capabiliti
 
 Knative has default lightweight implementations if you don't already have a solution.
 
-This article outlines major Knative functionality and provides links to detailed procedures as applicable for administrators. It covers the following processes:
-
-- Installing
-- Configuring
-- Monitoring
-- Enforcing security
-- Updating and maintaining
-
 ## Installing
 
 You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying the content, along with patching the contents to customize them. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Yelm.
 
-Here are the considerations for installing using either YAML-based or with the Knative Operator:
+Here are the considerations for installing using YAML or the Knative Operator:
 
 | YAML-based install | Knative Operator install|
 | --- | --- |
 | You can see exactly what you get. | You specify choices at a higher level. |
 | You can adjust any parameters by editing them directly. | Not every setting is exposed. |
 | If you make changes, you have to keep track of what you changed when you want to upgrade. | It's easy to separate your customizations from the base installation. |
-| Version and audit control. YAML files are typically stored in a GitHub repository.|  |
+| Version and audit control as YAML files are stored in a GitHub repository.| No version or audit control. |
 
 You can install Knative in the following ways:
 
 - Use a [YAML-based installation](/install/yaml-install/README.md) with `kubectl`.
 
-  This option is the most useful if you're using delivery solutions such as Flux or ArgoCD to apply manifests checked into a Git repository. This is the lowest common denominator approach, giving you granular control of the process and resource definitions.
+    This option is the most useful if you're using delivery solutions such as Flux or ArgoCD to apply manifests checked into a Git repository. This is the lowest common denominator approach, giving you granular control of the process and resource definitions.
 
-- Install the [Knative Operator](/install/operator/knative-with-operators.md) using Manifests of Yelm, and then use `kubectl` to install Knative components.
+- Install the [Knative Operator](/install/operator/knative-with-operators.md) using Manifests or Yelm, and then use `kubectl` to install Knative components.
 
-  This option alleviates the complexity with the Knative Operator, while still enabling purpose-built manageability using popular tools. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make.
+    This option alleviates complexity by using the Knative Operator, while still enabling purpose-built manageability using popular tools. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make.
 
-- Install the [Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md) and install the Operator, and the use `kn` to install  Knative components.
+- Install the [Knative Operator CLI plugin](/install/operator/knative-with-operator-cli.md) and install the Knative Operator and the Knative CLI `kn` to  Knative components.
 
-  This is the easiest install option and suitable for using Knative if customization is not a concern.
+    This is the easiest install option and suitable for using Knative if customization is not a concern.
 
 The following table summarizes the options.
 
@@ -68,6 +62,18 @@ The following table summarizes the options.
 | Knative Operator | Install Knative Operator CLI plugin | not used | Install components |
 
 Knative supports subsequent installs after the initial installation, you so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
+
+### Create and modify custom resources
+
+Either before or after the installing Knative Eventing and Serving components, you can create and modify custom resources and reinstall components as needed. You do so by creating or modifying a ConfigMap using a custom resource definition (CRD). See [ConfigMaps](#configmaps).
+
+You customize resources using `kubectl` using the Knative Operator using `kn`. See [Knative Serving CRDs](/install/operator/configuring-serving-cr.md) and [Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md).
+
+The following table lists the names of CRDs (metadata name) for the Serving and Eventing components. They are defined by `eventing-crds.yaml` and `serving-crds.yaml` in the [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md) and [Knative Serving installation Files](/install/yaml-install/serving/serving-installation-files.md), respectively.
+
+| Eventing CRDs | Serving CRDs |
+| --- | --- |
+| brokers.eventing.knative.dev<br>channels.messaging.knative.dev<br>eventpolicies.eventing.knative.dev<br>eventtransforms.eventing.knative.dev<br>eventtypes.eventing.knative.dev<br>integrationsinks.sinks.knative.dev<br>jobsinks.sinks.knative.dev<br>parallels.flows.knative.dev<br>requestreplies.eventing.knative.dev<br>sequences.flows.knative.dev<br>subscriptions.messaging.knative.dev<br>triggers.eventing.knative.dev | certificates.networking.internal.knative.dev<br>configurations.serving.knative.dev<br>clusterdomainclaims.networking.internal.knative.dev<br>domainmappings.serving.knative.dev<br>ingresses.networking.internal.knative.dev<br>metrics.autoscaling.internal.knative.dev<br>podautoscalers.autoscaling.internal.knative.dev<br>revisions.serving.knative.dev<br>routes.serving.knative.dev<br>serverlessservices.networking.internal.knative.dev<br>services.serving.knative.dev<br>images.caching.internal.knative.dev |
 
 ### Recommended plugins
 
@@ -85,10 +91,32 @@ Knative enables you to  optimize Serving and Eventing components and configure a
 
 ### ConfigMaps
 
-The Knative Operator propagates values from custom resources to the ConfigMaps object, a storage object of non-confidential values in key-value pairs. You can [Configuring Knative using the Operator](/install/operator/configuring-with-operator.md) and define custom resource definitions:
+Kubernetes Administrators use the ConfigMaps object to store non-confidential data in key-value pairs. ConfigMaps are namespace-scoped, meaning they are available to all Pods within the same namespace. To create a ConfigMap, use the `kubectl create configmap` command. To modify a ConfigMap use the `kubectl apply` command with YAML manifest 
 
-- [Knative Serving CRDs](/install/operator/configuring-serving-cr.md)
-- [Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md)
+> [!IMPORTANT]
+> Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will cause a system warning.
+
+
+
+
+
+
+Kubernetes Administrators add ConfigMaps using `kubectl create configmap` (imperative) or `kubectl apply` with YAML manifests (declarative). 
+
+
+
+
+, enabling your applications to use configuration settings to manage configuration data in a decoupled and flexible way, allowing applications running in Kubernetes to consume configuration settings without hardcoding them into the application code or container images.
+
+
+
+
+
+The Knative Operator propagates values from custom resources to the ConfigMaps object, a storage object of non-confidential values in key-value pairs. 
+
+You can [Configuring Knative using the Operator](/install/operator/configuring-with-operator.md) and define custom resource definitions:
+
+
 
 See [Configure the Defaults ConfigMap](/serving/configuration/config-defaults.md).
 
