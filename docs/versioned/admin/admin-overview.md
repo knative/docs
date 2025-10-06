@@ -79,11 +79,11 @@ You can also install these plugins service to extend Knative capabilities for se
 
 - [Istio for Knative](/install/installing-istio.md) - Extends Kubernetes with a programmable, application-aware network.
 - [Knative Backstage plugin](/install/installing-backstage-plugins.md) - An Event Mesh that allows you to view and manage Knative Eventing resources.
-- [cert-manager](/install/installing-cert-manager.md) - Provision and manage TLS certificates in Kubernetes
+- [cert-manager](/install/installing-cert-manager.md) - Provision and manage TLS certificates in Kubernetes.
 
 ## Administration tasks
 
-The following table lists configuration, extensibility, conversions, and other actions for Administrators organized by technical area.
+The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by technical area.
 
 Several of the tasks use the ConfigMaps object to store new data or update existing resources. ConfigMaps are namespace-scoped, meaning they are available to all Pods within the same namespace. To create a ConfigMap, use the `kubectl create configmap` command. To modify a ConfigMap use the `kubectl apply` command with the supplied YAML manifest.
 
