@@ -83,7 +83,7 @@ You can also install these plugins service to extend Knative capabilities for se
 
 ## Administration tasks
 
-The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by technical area.
+The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by technical area. Tasks are linked to their topics in the documentation for procedures and other guidance.
 
 Several of the tasks use the ConfigMaps object to store new data or update existing resources. ConfigMaps are namespace-scoped, meaning they are available to all Pods within the same namespace. To create a ConfigMap, use the `kubectl create configmap` command. To modify a ConfigMap use the `kubectl apply` command with the supplied YAML manifest.
 
@@ -93,7 +93,7 @@ Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will
 | --- | --- | --- |
 | Access control | [cert-manager integration](/serving/encryption/configure-certmanager-integration.md) | Enable cert-manager for automated certificate provisioning. |
 |  | [Request authorization for Knative services](/serving/istio-authorization.md) | Grant access to deployed services to system pods, such as the activator and autoscaler components. |
-|  | [Sender identity for delivering events.](/eventing/features/sender-identity.md) | Enable sender's identity to be obtained on event deliveries. |
+|  | [Sender identity for delivering events](/eventing/features/sender-identity.md) | Enable sender's identity to be obtained on event deliveries. |
 | Autoscaling and High Availability | [Autoscaler supported types](/serving/autoscaling/autoscaler-types.md) | Lists the features and limitations of each of the autoscalers. |
 |  | [Autoscaling of Knative Kafka Resources](/eventing/configuration/keda-configuration.md) | Enable autoscaling of Kafka components. |
 |  | [Concurrency](/serving/autoscaling/concurrency.md) | Sets the number of simultaneous requests that can be processed by each replica of an application. |
