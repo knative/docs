@@ -35,7 +35,7 @@ Below is an `IntegrationSink` to send data to AWS SNS:
       auth:
         secret:
           ref:
-          name: "my-secret"
+            name: "my-secret"
   ```
 Inside of the `aws.sns` object we define the name of the topic (or _arn_) and its region. The credentials for the AWS service are referenced from the `my-secret` Kubernetes `Secret` 
 
