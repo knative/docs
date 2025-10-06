@@ -87,44 +87,44 @@ The following table lists configuration, extensibility, conversions, and other a
 
 Several of the tasks use the ConfigMaps object to store new data or update existing resources. ConfigMaps are namespace-scoped, meaning they are available to all Pods within the same namespace. To create a ConfigMap, use the `kubectl create configmap` command. To modify a ConfigMap use the `kubectl apply` command with the supplied YAML manifest.
 
-> [!IMPORTANT]
+> [!NOTE]
 > Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will cause a system warning.
 
-| Area | Knative component | Task | Description |
-| --- | --- | --- | --- |
-| Access control | Serving | [cert-manager integration](/serving/encryption/configure-certmanager-integration.md) | Enable cert-manager for automated certificate provisioning. |
-| Access control | Serving | [Request authorization for Knative services](/serving/istio-authorization.md) | Grant access to deployed services to system pods, such as the activator and autoscaler components. |
-| Access control | Eventing | [Sender identity for delivering events.](/eventing/features/sender-identity.md) | Enable sender's identity to be obtained on event deliveries. |
-| Autoscaling and High Availability | Serving | [Autoscaler supported types](/serving/autoscaling/autoscaler-types.md) | Lists the features and limitations of each of the autoscalers. |
-| Autoscaling and High Availability | Eventing | [Autoscaling of Knative Kafka Resources](/eventing/configuration/keda-configuration.md) | Enable autoscaling of Kafka components. |
-| Autoscaling and High Availability | Serving | [Concurrency](/serving/autoscaling/concurrency.md) | Sets the number of simultaneous requests that can be processed by each replica of an application. |
-| Autoscaling and High Availability | Serving | [High-availability](/serving/config-ha.md) | Configure and scale high availability so that components stay operational if a disruption occurs. |
-| Autoscaling and High Availability | Serving | [Metrics configuration](/serving/autoscaling/autoscaling-metrics.md) | Define which metric type are watched by the Autoscaler. |
-| Autoscaling and High Availability | Serving | [Requests per second](/serving/autoscaling/rps-target.md) | Sets a target for requests-per-second per replica of an application. |
-| Autoscaling and High Availability | Serving | [Scale bounds configuration](/serving/autoscaling/scale-bounds.md) | Configure upper and lower bounds to control autoscaling behavior. |
-| Autoscaling and High Availability | Serving | [Scale to zero       ](/serving/autoscaling/scale-to-zero.md ) | Enable replicas to scale down to zero. |
-| Autoscaling and High Availability | Serving | [Targets configuration](/serving/autoscaling/autoscaling-targets.md) | Configure values for the autoscaler to maintain for a revision. |
-| Events | Eventing | [Broker defaults](/eventing/configuration/broker-configuration.md) | Modify CofigMaps to change options for Brokers on the cluster. |
-| Events | Eventing | [Channel defaults](/eventing/configuration/channel-configuration.md) | Configure default ConfigMap values for creating channel instances. |
-| Events | Eventing | [Channel defaults Apache Kafka ](/eventing/configuration/kafka-channel-configuration.md) | Configure default ConfigMap values for creating Apache Kafka channel instances. |
-| Events | Eventing | [Event source defaults](/eventing/configuration/sources-configuration.md) | Configure defaults for Knative event sources according to how they generate events. |
-| Events | Eventing | [Istio integration](/eventing/features/istio-integration.md) | Enable Istio to encrypt, authenticate and authorize requests. |
-| Events | Eventing | [Knative reference mapping](/eventing/features/kreference-mapping.md) | allows you to provide mappings from a Knative reference to a templated URI. |
-| Events | Eventing | [Sugar Controller](/eventing/configuration/sugar-configuration.md) | Configure the Sugar Controller, which reacts to configured labels to create and control eventing resources in a cluster or namespace. |
-| Knative upgrades and maintenance | (all) | [Check Knative version](/install/upgrade/check-install-version.md) | Determine the current installed version of Knative. |
-| Knative upgrades and maintenance | (all) | [Uninstall Knative](/install/uninstall) | Uninstall YAML-based installations or Knative Operator installations. |
-| Knative upgrades and maintenance| (all) | [Upgrade using Knative Operator](/install/upgrade/upgrade-installation-with-operator.md) | Upgrade Knative using YAML manifests. |
-| Knative upgrades and maintenance | (all) | [Upgrade using kubectl](/install/upgrade/upgrade-installation.md) | Upgrade Knative using the kubectl CLI. |
-| Networking | Serving | [Domain names](/serving/using-a-custom-domain.md) | Set the domain names of an individual Knative Service, or set a global default domain for all services created on a cluster.  |
-| Networking | Serving | [Ingress gateway](/serving/setting-up-custom-ingress-gateway.md) | Shows how to replace the default gateway for incoming traffic. |
-| Networking | Serving | [Webhook bypass on system namespaces](/serving/webhook-customizations.md) | Disable the Knative webhook on system namespaces to avoid issues during upgrades. |
-| Observability | Serving | [Metrics](/serving/observability/metrics/serving-metrics.md) | Monitor metrics exposed by each Serving component. |
-| Security | Serving | [Cluster-local domain encryption](/serving/encryption/cluster-local-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the cluster-local domain. (Experimental) |
-| Security | Serving | [External domain encryption](/serving/encryption/external-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the external domain. |
-| Security | Serving | [System-internal encryption](/serving/encryption/system-internal-tls.md) | Enable or disable HTTPS connections to your Knative Services for the internal system. (Experimental) |
-| Security | Eventing | [Transport encryption](/eventing/features/transport-encryption.md) | Enable a service mesh or encrypted CNI to encrypt the traffic. |
-| Services | Serving | [Deployment resources](/serving/configuration/deployment.md) | Configure the ConfigMap for how Kubernetes deploys resources. |
-| Services | Serving | [Feature and extension flags](/serving/configuration/feature-flags.md) | A reference for extending the Knative API for deployments. |
-| Services | Serving | [Kubernetes to Knative conversions](/serving/convert-deployment-to-knative-service.md) | Convert a Kubernetes deployment to a Knative service. |
-| Services | Serving | [Queue Proxy image with QPOptions](/serving/queue-extensions.md) | Allows additional runtime packages to extend Queue Proxy capabilities. |
-| Services  | Serving | [Defaults ConfigMap](/serving/configuration/config-defaults.md) | Configure the Defaults ConfigMap, for default values for resources. |
+| Area | Task | Description |
+| --- | --- | --- |
+| Access control | [cert-manager integration](/serving/encryption/configure-certmanager-integration.md) | Enable cert-manager for automated certificate provisioning. |
+| Access control | [Request authorization for Knative services](/serving/istio-authorization.md) | Grant access to deployed services to system pods, such as the activator and autoscaler components. |
+| Access control | [Sender identity for delivering events.](/eventing/features/sender-identity.md) | Enable sender's identity to be obtained on event deliveries. |
+| Autoscaling and High Availability | [Autoscaler supported types](/serving/autoscaling/autoscaler-types.md) | Lists the features and limitations of each of the autoscalers. |
+| Autoscaling and High Availability | [Autoscaling of Knative Kafka Resources](/eventing/configuration/keda-configuration.md) | Enable autoscaling of Kafka components. |
+| Autoscaling and High Availability | [Concurrency](/serving/autoscaling/concurrency.md) | Sets the number of simultaneous requests that can be processed by each replica of an application. |
+| Autoscaling and High Availability | [High-availability](/serving/config-ha.md) | Configure and scale high availability so that components stay operational if a disruption occurs. |
+| Autoscaling and High Availability | [Metrics configuration](/serving/autoscaling/autoscaling-metrics.md) | Define which metric type are watched by the Autoscaler. |
+| Autoscaling and High Availability | [Requests per second](/serving/autoscaling/rps-target.md) | Sets a target for requests-per-second per replica of an application. |
+| Autoscaling and High Availability | [Scale bounds configuration](/serving/autoscaling/scale-bounds.md) | Configure upper and lower bounds to control autoscaling behavior. |
+| Autoscaling and High Availability | [Scale to zero       ](/serving/autoscaling/scale-to-zero.md ) | Enable replicas to scale down to zero. |
+| Autoscaling and High Availability | [Targets configuration](/serving/autoscaling/autoscaling-targets.md) | Configure values for the autoscaler to maintain for a revision. |
+| Events | [Broker defaults](/eventing/configuration/broker-configuration.md) | Modify CofigMaps to change options for Brokers on the cluster. |
+| Events | [Channel defaults](/eventing/configuration/channel-configuration.md) | Configure default ConfigMap values for creating channel instances. |
+| Events | [Channel defaults Apache Kafka ](/eventing/configuration/kafka-channel-configuration.md) | Configure default ConfigMap values for creating Apache Kafka channel instances. |
+| Events | [Event source defaults](/eventing/configuration/sources-configuration.md) | Configure defaults for Knative event sources according to how they generate events. |
+| Events | [Istio integration](/eventing/features/istio-integration.md) | Enable Istio to encrypt, authenticate and authorize requests. |
+| Events | [Knative reference mapping](/eventing/features/kreference-mapping.md) | allows you to provide mappings from a Knative reference to a templated URI. |
+| Events | [Sugar Controller](/eventing/configuration/sugar-configuration.md) | Configure the Sugar Controller, which reacts to configured labels to create and control eventing resources in a cluster or namespace. |
+| Knative upgrades and maintenance | [Check Knative version](/install/upgrade/check-install-version.md) | Determine the current installed version of Knative. |
+| Knative upgrades and maintenance | [Uninstall Knative](/install/uninstall) | Uninstall YAML-based installations or Knative Operator installations. |
+| Knative upgrades and maintenance| [Upgrade using Knative Operator](/install/upgrade/upgrade-installation-with-operator.md) | Upgrade Knative using YAML manifests. |
+| Knative upgrades and maintenance | [Upgrade using kubectl](/install/upgrade/upgrade-installation.md) | Upgrade Knative using the kubectl CLI. |
+| Networking | [Domain names](/serving/using-a-custom-domain.md) | Set the domain names of an individual Knative Service, or set a global default domain for all services created on a cluster.  |
+| Networking | [Ingress gateway](/serving/setting-up-custom-ingress-gateway.md) | Shows how to replace the default gateway for incoming traffic. |
+| Networking | [Webhook bypass on system namespaces](/serving/webhook-customizations.md) | Disable the Knative webhook on system namespaces to avoid issues during upgrades. |
+| Observability | [Metrics](/serving/observability/metrics/serving-metrics.md) | Monitor metrics exposed by each Serving component. |
+| Security | [Cluster-local domain encryption](/serving/encryption/cluster-local-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the cluster-local domain. (Experimental) |
+| Security | [External domain encryption](/serving/encryption/external-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the external domain. |
+| Security | [System-internal encryption](/serving/encryption/system-internal-tls.md) | Enable or disable HTTPS connections to your Knative Services for the internal system. (Experimental) |
+| Security | [Transport encryption](/eventing/features/transport-encryption.md) | Enable a service mesh or encrypted CNI to encrypt the traffic. |
+| Services | [Deployment resources](/serving/configuration/deployment.md) | Configure the ConfigMap for how Kubernetes deploys resources. |
+| Services | [Feature and extension flags](/serving/configuration/feature-flags.md) | A reference for extending the Knative API for deployments. |
+| Services | [Kubernetes to Knative conversions](/serving/convert-deployment-to-knative-service.md) | Convert a Kubernetes deployment to a Knative service. |
+| Services | [Queue Proxy image with QPOptions](/serving/queue-extensions.md) | Allows additional runtime packages to extend Queue Proxy capabilities. |
+| Services  | [Defaults ConfigMap](/serving/configuration/config-defaults.md) | Configure the Defaults ConfigMap, for default values for resources. |
