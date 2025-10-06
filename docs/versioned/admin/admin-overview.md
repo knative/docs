@@ -83,7 +83,7 @@ You can also install these plugins service to extend Knative capabilities for se
 
 ## Administration tasks
 
-The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by technical area. Tasks are linked to their topics in the documentation for procedures and other guidance.
+The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by technical area. Tasks are linked to procedures and other guidance.
 
 Several of the tasks use the ConfigMaps object to store new data or update existing resources. ConfigMaps are namespace-scoped, meaning they are available to all Pods within the same namespace. To create a ConfigMap, use the `kubectl create configmap` command. To modify a ConfigMap use the `kubectl apply` command with the supplied YAML manifest.
 
@@ -103,12 +103,12 @@ Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will
 |  | [Scale bounds configuration](/serving/autoscaling/scale-bounds.md) | Configure upper and lower bounds to control autoscaling behavior. |
 |  | [Scale to zero](/serving/autoscaling/scale-to-zero.md ) | Enable replicas to scale down to zero. |
 |  | [Targets configuration](/serving/autoscaling/autoscaling-targets.md) | Configure values for the autoscaler to maintain for a revision. |
-| Events | [Broker defaults](/eventing/configuration/broker-configuration.md) | Modify CofigMaps to change options for Brokers on the cluster. |
+| Events | [Broker defaults](/eventing/configuration/broker-configuration.md) | Modify ConfigMaps to change options for Brokers on the cluster. |
 |  | [Channel defaults](/eventing/configuration/channel-configuration.md) | Configure default ConfigMap values for creating channel instances. |
 |  | [Channel defaults Apache Kafka ](/eventing/configuration/kafka-channel-configuration.md) | Configure default ConfigMap values for creating Apache Kafka channel instances. |
-|  | [Event source defaults](/eventing/configuration/sources-configuration.md) | Configure defaults for Knative event sources according to how they generate events. |
+|  | [Event source defaults](/eventing/configuration/sources-configuration.md) | Configure defaults for Knative event sources for generating events. |
 |  | [Istio integration](/eventing/features/istio-integration.md) | Enable Istio to encrypt, authenticate and authorize requests. |
-|  | [Knative reference mapping](/eventing/features/kreference-mapping.md) | allows you to provide mappings from a Knative reference to a templated URI. |
+|  | [Knative reference mapping](/eventing/features/kreference-mapping.md) | Allows you to provide mappings from a Knative reference to a templated URI. |
 |  | [Sugar Controller](/eventing/configuration/sugar-configuration.md) | Configure the Sugar Controller, which reacts to configured labels to create and control eventing resources in a cluster or namespace. |
 | Knative upgrades and maintenance | [Check Knative version](/install/upgrade/check-install-version.md) | Determine the current installed version of Knative. |
 |  | [Uninstall Knative](/install/uninstall) | Uninstall YAML-based installations or Knative Operator installations. |
@@ -117,6 +117,7 @@ Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will
 | Networking | [Domain names](/serving/using-a-custom-domain.md) | Set the domain names of an individual Knative Service, or set a global default domain for all services created on a cluster.  |
 |  | [Ingress gateway](/serving/setting-up-custom-ingress-gateway.md) | Shows how to replace the default gateway for incoming traffic. |
 |  | [Webhook bypass on system namespaces](/serving/webhook-customizations.md) | Disable the Knative webhook on system namespaces to avoid issues during upgrades. |
+| Observability | [Metrics](/eventing/observability/metrics/eventing-metrics.md) | Monitor metrics exposed by each Eventing component. |
 | Observability | [Metrics](/serving/observability/metrics/serving-metrics.md) | Monitor metrics exposed by each Serving component. |
 | Security | [Cluster-local domain encryption](/serving/encryption/cluster-local-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the cluster-local domain. (Experimental) |
 |  | [External domain encryption](/serving/encryption/external-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the external domain. |
