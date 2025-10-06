@@ -35,7 +35,7 @@ Below is an `IntegrationSink` to send data to an Amazon S3 Bucket:
       auth:
         secret:
           ref:
-          name: "my-secret"
+            name: "my-secret"
   ```
 
 Inside of the `aws.s3` object we define the name of the bucket (or _arn_) and its region. The credentials for the AWS service are referenced from the `my-secret` Kubernetes `Secret`
