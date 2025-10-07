@@ -7,20 +7,18 @@ function: reference
 ---
 # Overview
 
-This page provides guidance for administrators on how to install and manage Knative on an existing Kubernetes cluster, and assumes you have familiarity the following:
+This page provides guidance for administrators on how to install and manage Knative on an existing Kubernetes cluster. It assumes you are familiar with the following:
 
 - Kubernetes and Kubernetes administration.
-- The `kubectl`CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
-- The Cloud Native Computing Foundation (CNCF) for which Knative is one of its projects, along with Kubernetes, Prometheus, and Istio.
+- The `kubectl` CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
+- Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative.
+- You should have cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC)
 
-Additionally, you should have cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace.
+To simplify Knative installation and administration, you can use the Knative operator and the Knative CLI tool, but they are not required. Essentially, Knative aims to extend Kubernetes, and build on existing capabilities where feasible.
 
-To simplify Knative installation and administration, you can use the Knative operator and the Knative CLI tool, but they are not required.
+Knative has three components, Eventing, Serving, and Functions. Severing and Eventing are installed into clusters, but not Functions. Functions does not require installation.
 
-Essentially, Knative aims to extend Kubernetes, and build on existing capabilities where feasible. It has two main underlying components that support plugging in multiple underlying transports within the same cluster:
-
-- Serving: Pods and pluggable network ingress routes.
-- Eventing: Pods and pluggable message transports (e.g. Kafka, RabbitMQ)
+Serving and Eventing support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes, and Eventing supports pods with pluggable message transports (e.g. Kafka, RabbitMQ).
 
 Knative has default lightweight implementations if you don't already have a solution.
 
@@ -63,33 +61,51 @@ Knative supports subsequent installs after the initial installation, you so your
 
 ## Defining and modifying custom resources
 
-Either before or after the installing Knative Eventing and Serving components, you can create and modify custom resources and reinstall components as needed. You do so by creating or modifying a ConfigMap using a custom resource definition (CRD).
-
-You customize resources using `kubectl` using the Knative Operator using `kn`. See [Knative Serving CRDs](/install/operator/configuring-serving-cr.md) and [Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md).
-
-The following table lists the names of CRDs (metadata name) for the Serving and Eventing components. They are defined by `eventing-crds.yaml` and `serving-crds.yaml` in the [Knative Eventing installation files](/install/yaml-install/eventing/eventing-installation-files.md) and [Knative Serving installation Files](/install/yaml-install/serving/serving-installation-files.md), respectively.
-
-| Eventing CRDs | Serving CRDs |
-| --- | --- |
-| brokers.eventing.knative.dev<br>channels.messaging.knative.dev<br>eventpolicies.eventing.knative.dev<br>eventtransforms.eventing.knative.dev<br>eventtypes.eventing.knative.dev<br>integrationsinks.sinks.knative.dev<br>jobsinks.sinks.knative.dev<br>parallels.flows.knative.dev<br>requestreplies.eventing.knative.dev<br>sequences.flows.knative.dev<br>subscriptions.messaging.knative.dev<br>triggers.eventing.knative.dev | certificates.networking.internal.knative.dev<br>configurations.serving.knative.dev<br>clusterdomainclaims.networking.internal.knative.dev<br>domainmappings.serving.knative.dev<br>ingresses.networking.internal.knative.dev<br>metrics.autoscaling.internal.knative.dev<br>podautoscalers.autoscaling.internal.knative.dev<br>revisions.serving.knative.dev<br>routes.serving.knative.dev<br>serverlessservices.networking.internal.knative.dev<br>services.serving.knative.dev<br>images.caching.internal.knative.dev |
+Either before or after the installing Knative Eventing and Serving components, you can create and modify custom resources and reinstall components as needed. You do so by creating or modifying a ConfigMap using a custom resource definition (CRD). For more information, see [Knative Serving CRDs](/install/operator/configuring-serving-cr.md) and [Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md).
 
 ### Recommended plugins
 
 You can also install these plugins service to extend Knative capabilities for service meshes:
 
-- [Istio for Knative](/install/installing-istio.md) - Extends Kubernetes with a programmable, application-aware network.
+- [Istio for Knative](/install/installing-istio.md)
+    Extends Kubernetes with a programmable, application-aware network.
 - [Knative Backstage plugin](/install/installing-backstage-plugins.md) - An Event Mesh that allows you to view and manage Knative Eventing resources.
 - [cert-manager](/install/installing-cert-manager.md) - Provision and manage TLS certificates in Kubernetes.
 
-## Administration tasks
+## Configuring Knative ConfigMaps
 
-The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by technical area. Tasks are linked to procedures and other guidance.
+A Knative installation consists of several custom resources in the knative.dev API namespace. Knative controllers, running on the cluster, manage these custom resources by reading configuration values from ConfigMaps in the cluster.
+
+During installation and while operating the cluster, you can customize the behavior of the controller. Knative controllers read their configuration from ConfigMaps in the cluster, and can generally respond to changes in the ConfigMaps live, without needing a reload. In some cases, it may be necessary to restart the controller after updating a ConfigMap but this should be well-documented in the ConfigMap.
+
+Knative installs ConfigMaps for each tracked configuration file, along with validation of the values in the configuration. The ConfigMaps installed by Knative set leave all the controller settings at their default values, but include an `_example` key that documents all the known keys and their operation as an entry within the ConfigMap. 
+
+Note that if you perform an upgrade of a YAML installation, this will include new ConfigMaps which may overwrite your existing settings unless you preserve them.
+
+Knative uses this configuration pattern (existing ConfigMaps with empty defaults and an `_example` key) to balance several different needs:
+
+- Deploying all the ConfigMaps to the cluster during the installation makes it easy for new administrators to find the relevant ConfigMaps.
+- Not setting configuration keys in the ConfigMaps by default makes it easy for clusters to pick up new behavior and features during upgrade unless the feature is specifically intended to be held back.
+- The `_example key` allows the documentation of the configuration keys to be persisted on the Kubernetes API server, rather being lost (as YAML comments are) when applying the configuration to the server.
+- There is a webhook which will error if the _example key content is changed -- we have found that people often edit the example text, rather than setting a configuration key.
+
+## Logging and monitoring metrics
+
+(Possible section.)
+
+## Maintaining access control and security
+
+(Possible section.)
+
+## Administrative Tasks
+
+The following table lists configurations, extensibility, conversions, and other actions for Knative Administrators organized by functional area. Tasks are linked to procedures.
 
 Several of the tasks use the ConfigMaps object to store new data or update existing resources. ConfigMaps are namespace-scoped, meaning they are available to all Pods within the same namespace. To create a ConfigMap, use the `kubectl create configmap` command. To modify a ConfigMap use the `kubectl apply` command with the supplied YAML manifest.
 
-Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will cause a system warning.
+Do not remove or modify the `_example` data entries in ConfigMaps. Doing so causes a system warning.
 
-| Area | Task | Description |
+| Function | Task | Description |
 | --- | --- | --- |
 | Access control | [cert-manager integration](/serving/encryption/configure-certmanager-integration.md) | Enable cert-manager for automated certificate provisioning. |
 |  | [Request authorization for Knative services](/serving/istio-authorization.md) | Grant access to deployed services to system pods, such as the activator and autoscaler components. |
@@ -118,7 +134,7 @@ Do not remove or modify the `_example` data entries in ConfigMaps. Doing so will
 |  | [Ingress gateway](/serving/setting-up-custom-ingress-gateway.md) | Shows how to replace the default gateway for incoming traffic. |
 |  | [Webhook bypass on system namespaces](/serving/webhook-customizations.md) | Disable the Knative webhook on system namespaces to avoid issues during upgrades. |
 | Observability | [Metrics](/eventing/observability/metrics/eventing-metrics.md) | Monitor metrics exposed by each Eventing component. |
-| Observability | [Metrics](/serving/observability/metrics/serving-metrics.md) | Monitor metrics exposed by each Serving component. |
+|  | [Metrics](/serving/observability/metrics/serving-metrics.md) | Monitor metrics exposed by each Serving component. |
 | Security | [Cluster-local domain encryption](/serving/encryption/cluster-local-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the cluster-local domain. (Experimental) |
 |  | [External domain encryption](/serving/encryption/external-domain-tls.md) | Enable or disable HTTPS connections to your Knative Services for the external domain. |
 |  | [System-internal encryption](/serving/encryption/system-internal-tls.md) | Enable or disable HTTPS connections to your Knative Services for the internal system. (Experimental) |
