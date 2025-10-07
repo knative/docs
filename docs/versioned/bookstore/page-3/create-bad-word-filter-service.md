@@ -10,11 +10,7 @@ function: tutorial
 
 ![Image 4](images/image4.png)
 
-As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple bad word filter service to tell whether the text contains any hateful/insultive speech.
-
-If you ever get stuck, check the solution here.
-
-[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/solution-create-bad-word-filter-service.md){ .md-button .md-button--primary }
+As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple bad word filter service to tell whether the text contains any hateful/insulting speech.
 
 ## **What Knative features will we learn about?**
 
@@ -59,78 +55,106 @@ func create -l python bad-word-filter
 
     The file tree will look like this:
 
-    ```
-    /start/bad-word-filter
-    ├── func.yaml
+    ```txt
+    start/bad-word-filter
     ├── .funcignore
+    ├── function
+    │   ├── func.py
+    │   └── __init__.py
+    ├── func.yaml
     ├── .gitignore
-    ├── requirements.txt
-    ├── app.sh
-    ├── test_func.py
+    ├── pyproject.toml
     ├── README.md
-    └── Procfile
-    └── func.py
+    └── tests
+        └── test_func.py
     ```
 
 ### **Step 2: Replace the generated code with the bad word filter logic**
 
 ![Image 5](images/image5.png)
 
-`bad-word-filter/func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
+`bad-word-filter/function/func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
 
-???+ abstract "_bad-word-filter/func.py_"
+???+ abstract "_bad-word-filter/function/func.py_"
+
     ```python
-    from parliament import Context
-    from profanity_check import predict
+    import logging
     from cloudevents.http import CloudEvent
+    from profanity_check import predict
 
-    # The function to convert the bad word filter result into a CloudEvent
-    def create_cloud_event(inputText, data):
-        attributes = {
-            "type": "new-review-comment",
-            "source": "book-review-broker",
-            "datacontenttype": "application/json",
-            "badwordfilter": data,
-        }
+    def new():
+        return Function()
 
-        # Put the bad word filter result into a dictionary
-        data = {"reviewText": inputText, "badWordResult": data}
+    class Function:
+        async def handle(self, scope, receive, send):
+            """ Handle all HTTP requests to this Function. The incoming CloudEvent is in scope["event"]. """
+            logging.info("Request Received")
 
-        # Create a CloudEvent object
-        event = CloudEvent(attributes, data)
-        return event
+            # 1. Extract the CloudEvent from the scope
+            request_event = scope["event"]
 
-    def inappropriate_language_filter(text):
-        profanity_result = predict([text["reviewText"]])
-        result = "good"
-        if profanity_result[0] == 1:
-            result = "bad"
-        
-        profanity_event = create_cloud_event(text["reviewText"], result)
-        return profanity_event
+            # 2. Extract the data payload from the event, analyze and create CloudEvent
+            response_event = self.inappropriate_language_filter(request_event.data)
 
-    def main(context: Context):
-        """
-        Function template
-        The context parameter contains the Flask request object and any
-        CloudEvent received with the request.
-        """
-        print("Received CloudEvent: ", context.cloud_event)
+            # 3. Send the response
+            logging.info(f"Sending response: {response_event.data}")
+            await send(response_event)
 
-        # Add your business logic here
-        return inappropriate_language_filter(context.cloud_event.data)
+        def create_cloud_event(self, inputText, data):
+            attributes = {
+                "type": "new-review-comment",
+                "source": "book-review-broker",
+                "datacontenttype": "application/json",
+                "badwordfilter": data,
+            }
+
+            data = {"reviewText": inputText, "badWordResult": data}
+
+            return CloudEvent(attributes, data)
+
+        def inappropriate_language_filter(self, text):
+            review_text = text.get("reviewText", "")
+            profanity_result = predict([review_text])
+            result = "good"
+            if profanity_result[0] == 1:
+                result = "bad"
+
+            return self.create_cloud_event(review_text, result)
     ```
 
 ### **Step 3: Configure the dependencies**
 
 ![Image 8](images/image8.png)
-The content of `bad-word-filter/requirements.txt`:
+The content of `bad-word-filter/pyproject.toml`:
 
-???+ abstract "_bad-word-filter/requirements.txt_"
-    ```plaintext
-    parliament-functions==0.1.0
-    alt-profanity-check==1.4.1.post1
-    cloudevents==1.10.1
+???+ abstract "_bad-word-filter/pyproject.toml_"
+
+    ```toml
+    [project]
+    name = "function"
+    description = ""
+    version = "0.1.0"
+    requires-python = ">=3.9"
+    readme = "README.md"
+    license = "MIT"
+    dependencies = [
+        "httpx",
+        "cloudevents",
+        "pytest",
+        "pytest-asyncio",
+        "alt-profanity-check==1.4.1.post1" # <-- add this dependency
+    ]
+    authors = [
+        { name="Your Name", email="you@example.com"},
+    ]
+
+    [build-system]
+    requires = ["hatchling"]
+    build-backend = "hatchling.build"
+
+    [tool.pytest.ini_options]
+    asyncio_mode = "strict"
+    asyncio_default_fixture_loop_scope = "function"
     ```
 
 ### **Step 4: Deploy the function to the cluster**
@@ -139,12 +163,14 @@ The content of `bad-word-filter/requirements.txt`:
 !!! note
     Please enter `/bad-word-filter` when you are executing the following commands.
 
-```plaintext
+```sh
 func deploy -b=s2i -v
 ```
+
 ???+ success "Verify"
     Expect to see the following message:
-    ```
+
+    ```sh
     Function deployed in namespace "default" and exposed at URL:
     http://bad-word-filter.default.svc.cluster.local
     ```
@@ -153,14 +179,14 @@ func deploy -b=s2i -v
 
 ![Image 7](images/image7.png)
 
-```plaintext
+```sh
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 ```
 
 ???+ success "Verify"
     Expect to receive a CloudEvent response:
 
-    ```plaintext
+    ```sh
     Context Attributes,
     specversion: 1.0
     type: new-review-comment
@@ -183,8 +209,8 @@ If you see the response, it means that the function is running successfully.
 
 ![Image 9](images/image9.png)
 
-In this tutorial, you learned how to create a serverless function for a simple service that can detect inappropriate languages in text with Knative. 
+In this tutorial, you learned how to create a serverless function for a simple service that can detect inappropriate languages in text with Knative.
 
-Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflows and make sure they are executed in the order you want. 
+Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflows and make sure they are executed in the order you want.
 
 [Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/create-sequence-to-streamline-ML-workflows.md){ .md-button .md-button--primary }
