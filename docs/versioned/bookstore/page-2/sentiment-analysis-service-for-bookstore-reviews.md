@@ -38,10 +38,14 @@ The function's output will be only from:
 
 Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured){:target="_blank"} by using the func CLI.
 
-In order to do so, you need to install the func CLI. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/){:target="_blank"} to install the func CLI.
+In order to do so, you need to install the func CLI `v0.46.0`. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/){:target="_blank"} to install the func CLI with the appropriate version. If the latest version is above `v0.46.0` use the [GitHub func repository tag](https://github.com/knative/func/tags) page to get the correct version.
 
 ???+ success "Verify"
     Running `func version` in your terminal to verify the installation, and you should see the version of the func CLI you installed.
+
+    ```sh
+    v0.46.0
+    ```
 
 ???+ bug "Troubleshooting"
     If you see `command not found`, you may need to add the func CLI to your PATH.
@@ -206,9 +210,9 @@ The `sentiment-analysis-app/pyproject.toml` file contains the project configurat
 Knative Function will automatically install the dependencies listed here when you build the function.
 
 ### **Step 4: Build and run your Knative Function locally (Optional)**
+
 ??? info "Click here to expand"
-    
-    
+
     ![Image4](images/image4.png)
     
     In Knative Function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
@@ -276,7 +280,7 @@ Knative Function will automatically install the dependencies listed here when yo
     
     In this case, you will get the full CloudEvent response:
     
-    ```
+    ```sh
     Context Attributes,
       specversion: 1.0
       type: new-review-comment
@@ -319,7 +323,7 @@ func deploy -b=s2i -v
     Function deployed in namespace "default" and exposed at URL:
     http://sentiment-analysis-app.default.svc.cluster.local
     ```
- 
+
 !!! tip  
     You can find the URL of the Knative Function (Knative Service) by running the following command:
     
@@ -333,7 +337,6 @@ func deploy -b=s2i -v
     NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
     sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00001   sentiment-analysis-app-00001   True    
     ```
-
 
 ## **Knative Serving: scale down to zero**
 
@@ -368,7 +371,7 @@ After deployment, the `func` CLI provides a URL to access your function. You can
 
 Simply use Knative Function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
-```bash
+```sh
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 ```
 
@@ -380,7 +383,7 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 
     If you see the response, it means that the function is running successfully.
 
-    ```
+    ```sh
     Context Attributes,
       specversion: 1.0
       type: moderated-comment
@@ -399,23 +402,15 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
       }
     ```
 
+## **Next Step**
+
 ![Image16](images/image16.png)
 
 In this tutorial, you learned how to create a serverless function for a simple sentiment analysis service with Knative.
 
-## **Next Step**
-
-![Image5](images/image5.png)
-
-Next, we'll deploy another ML service following the same procedure. We encourage you to try it yourself!
+Next, we'll deploy another ML service following the same procedure.
 
 !!! tip
     Don't forget to `cd` into the root directory `/start` before proceeding.
 
-If you feel comfortable deploying the other ML service yourself, follow this **simplified guide**:
-
 [Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/create-bad-word-filter-service.md){ .md-button .md-button--primary }
-
-If you encounter any issues, don't worry—we have a detailed tutorial ready for you.
-
-[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/solution-create-bad-word-filter-service.md){ .md-button .md-button--primary }
