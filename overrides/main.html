@@ -15,8 +15,9 @@
 {% endif %}
 {% endblock %}
 
+{# TEMPORARY HACK: replace {{ super() }} with the asset link, to use custom JSON build. #}
 {% block scripts %}
-  {{ super() }}
+  <script src="{{ 'assets/javascripts/bundle.0af37618.min.js' | url }}"></script>
   <!-- For now, load Jquery and Bootstrap because the cookie warning (built from the hugo-based website) uses them -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -32,17 +33,23 @@
 
   <!-- Versioning -->
   {# This is changed from upstream to only show version picker on versioned pages #}
-  {%- if page and (page.meta.samples_branch) -%}
+  {%- if config.extra.version -%}
+    {%- if config.extra.version.provider == "mike" -%}
     {%- set mike = config.plugins.mike -%}
-    {%- if not mike or mike.config.version_selector -%}
-      {%- set _.version = config.extra.version -%}
+      {%- if not mike or mike.config.version_selector -%}
+        {%- set _.version = config.extra.version -%}
+      {%- endif -%}
+    {%- elif config.extra.version.provider == "directory" -%}
+      {%- if page and (page.meta.version) -%}
+        {%- set _.version = {"provider":"directory", "declared_version": page.meta.version | string} -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endif -%}
 
   <!-- Configuration -->
   <script id="__config" type="application/json">
     {{- {
-      "base": base_url | replace("../", "", 1),
+      "base": base_url,
       "features": features,
       "translations": {
         "clipboard.copy": lang.t("clipboard.copy"),
@@ -56,7 +63,7 @@
         "search.result.term.missing": lang.t("search.result.term.missing"),
         "select.version": lang.t("select.version")
       },
-      "search": "assets/javascripts/workers/search.js" | url,
+      "search": "assets/javascripts/workers/search.973d3a69.min.js" | url,
       "tags": _.tags or none,
       "version": _.version or none
     } | tojson -}}

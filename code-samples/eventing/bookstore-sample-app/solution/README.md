@@ -19,18 +19,21 @@ Here's an overview of the components in the solution:
 
 ## Additional Files
 
-- `setup.sh`: Script for setting up the required services including installing Knative, frontend, and backend node-server
-- `solution.sh`: Script for installing everything, deploying the entire solution. **It includes the setup script as well.**
+- `solution.sh`: Script for installing everything, deploying the entire solution.
 
 ## Running the Solution
 
-1. Have a running Kubernetes cluster.
-2. Install all the prerequisites and deploy the entire solution using the `solution.sh` script:
-   ```
+1. Have a locally running Kubernetes cluster e.g. [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) or [Minikube](https://minikube.sigs.k8s.io/docs/start).
+1. Have a locally running container registry, e.g. [Kind registry setup](https://kind.sigs.k8s.io/docs/user/local-registry/) or [Minikube registry setup](https://minikube.sigs.k8s.io/docs/handbook/registry/#enabling-insecure-registries).
+1. Install all the prerequisites and deploy the entire solution using the `solution.sh` script:
+
+   ```sh
    ./solution.sh
    ```
+
 If you encountered any permission issues, run the following command:
-   ```
+
+   ```sh
    chmod +x solution.sh
    ```
 
