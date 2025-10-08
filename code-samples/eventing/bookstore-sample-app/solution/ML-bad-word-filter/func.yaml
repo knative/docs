@@ -1,8 +1,14 @@
+# $schema: https://raw.githubusercontent.com/knative/func/d04ff0a3/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/d04ff0a3/schema/func_yaml-schema.json
 specVersion: 0.36.0
 name: bad-word-filter
 runtime: python
-created: 2024-03-27T23:12:06.178272+08:00
+registry: localhost:5000
+namespace: default
+created: 2025-09-20T18:38:53.634514281+02:00
+invoke: cloudevent
 build:
   builder: s2i
 deploy:
   namespace: default
+  image: localhost:5000/bad-word-filter@sha256:690a4eb5aaae56dfbfabcb8a3f0943a48b97851e2b90ce40397091bb0866655c
