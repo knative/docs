@@ -1,3 +1,0 @@
-parliament-functions==0.1.0
-alt-profanity-check==1.4.1.post1
-cloudevents==1.10.1
