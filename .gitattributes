@@ -7,6 +7,8 @@
 *.ai binary
 *.pdf binary
 *.png binary
+# We are vendoring this fork of material-mkdocs typescript for now -- don't lint, etc.
+/overrides/assets/javascripts/bundle.*.min.js linguist-vendored
 
 # coverage-excluded is an attribute used to explicitly exclude a path from being
 # included in code coverage. If a path is marked as linguist-generated already,

@@ -1,8 +1,14 @@
+# $schema: https://raw.githubusercontent.com/knative/func/d04ff0a3/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/d04ff0a3/schema/func_yaml-schema.json
 specVersion: 0.36.0
 name: sentiment-analysis-app
 runtime: python
-created: 2024-02-01T00:18:00.06485162-04:00
+registry: localhost:5000
+namespace: default
+created: 2025-09-20T16:25:54.767714524+02:00
+invoke: cloudevent
 build:
   builder: s2i
 deploy:
   namespace: default
+  image: localhost:5000/sentiment-analysis-app@sha256:fa2335ff00b780ae12a8d01e1512db874803e16ccba8ce0893223e023417b79a
