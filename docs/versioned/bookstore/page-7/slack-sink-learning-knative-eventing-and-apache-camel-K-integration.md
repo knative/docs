@@ -25,7 +25,7 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ![image](images/image13.png)
 
-Install Apache Camel K `v2.8.x` operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
+Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
 
 ```sh
 kubectl create ns camel-k && \
@@ -179,9 +179,9 @@ In the current implementation using Apache Camel K, we **can only filter based o
 
 Here, we will be connecting `bookstore-broker` with a new Broker called `badword-broker`. And we will be creating a Trigger that helps us perform the filtering with the extension `badwordfilter: good`.
 
-- 1: Create a new file named `slack-sink/config/200-broker.yaml` and add the following content:
+- 1: Create a new file named `slack-sink/config/100-broker.yaml` and add the following content:
 
-???+ abstract "_slack-sink/config/200-broker.yaml_"
+???+ abstract "_slack-sink/config/100-broker.yaml_"
 
     ```yaml
     ---
@@ -194,7 +194,7 @@ Here, we will be connecting `bookstore-broker` with a new Broker called `badword
 - 2: Apply the YAML file:
 
     ```sh
-    kubectl apply -f slack-sink/config/200-broker.yaml
+    kubectl apply -f slack-sink/config/100-broker.yaml
     ```
 
 You should see this message if the Broker is created successfully:
@@ -248,9 +248,9 @@ We are creating the Trigger to process the events that have type `moderated-comm
 
 ![image](images/image17.png)
 
-- 1: Append the following content to your `slack-sink/config/200-broker.yaml`:
+- 1: Append the following content to your `slack-sink/config/100-broker.yaml`:
 
-???+ abstract "_slack-sink/config/200-broker.yaml_"
+???+ abstract "_slack-sink/config/100-broker.yaml_"
 
     ```yaml
     ---
@@ -274,7 +274,7 @@ We are creating the Trigger to process the events that have type `moderated-comm
 - 2: Apply the YAML file:
 
     ```sh
-    kubectl apply -f slack-sink/config/200-broker.yaml
+    kubectl apply -f slack-sink/config/100-broker.yaml
     ```
 
     You should see this message if the Trigger is created successfully:
@@ -311,9 +311,9 @@ This setup automatically sends notifications to Slack whenever a new comment tha
 
 ![image](images/image15.png)
 
-Create a new file named `slack-sink/config/300-slack-sink.yaml` and add the following content:
+Create a new file named `slack-sink/config/100-slack-sink.yaml` and add the following content:
 
-???+ abstract "_slack-sink/config/300-slack-sink.yaml_"
+???+ abstract "_slack-sink/config/100-slack-sink.yaml_"
 
     ```yaml
     apiVersion: camel.apache.org/v1
@@ -343,7 +343,7 @@ Create a new file named `slack-sink/config/300-slack-sink.yaml` and add the foll
 3. Apply the configuration to your Kubernetes cluster:
 
 ```sh
-kubectl apply -f slack-sink/config/300-slack-sink.yaml
+kubectl apply -f slack-sink/config/100-slack-sink.yaml
 ```
 
 ???+ success "Verify"
