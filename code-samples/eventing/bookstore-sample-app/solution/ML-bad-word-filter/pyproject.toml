@@ -1,0 +1,27 @@
+[project]
+name = "function"
+description = ""
+version = "0.1.0"
+requires-python = ">=3.9"
+readme = "README.md"
+license = "MIT"
+dependencies = [
+  "httpx",
+  "cloudevents",
+  "pytest",
+  "pytest-asyncio",
+  "alt-profanity-check==1.4.1.post1"
+]
+authors = [
+  { name="Your Name", email="you@example.com"},
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+
+
