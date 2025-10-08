@@ -11,11 +11,30 @@ The `IntegrationSink` supports the Amazon Web Services (AWS) S3 service, through
 
 ## Amazon credentials
 
-For connecting to AWS the `IntegrationSink` uses Kubernetes `Secret`, present in the namespace of the resource. The `Secret` can be created like:
+There are two options for authenticating to AWS.
+
+### Access key and secret
+
+To use an IAM User access key and secret, create a Kubernetes `Secret` in the namespace of the resource. The `Secret` can be created like:
 
   ```bash
   kubectl -n <namespace> create secret generic my-secret --from-literal=aws.accessKey=<accessKey> --from-literal=aws.secretKey=<secretKey>
   ```
+Then in the `IntegrationSink` `.spec.aws.auth` section reference the `Secret` like this:
+```yaml
+      auth:
+        secret:
+          ref:
+            name: "my-secret"
+```
+
+### Pod Default Credentials
+
+If you are using [IAM Role for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) or [Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html), you can create a Kubernetes `ServiceAccount` and associate it with an AWS IAM role. Then in the `IntegrationSink` `.spec.aws.auth` section specify the name of the `ServiceAccount`. This will assign the `ServiceAccount` to the `Deployment` resource created for the `IntegrationSink`.
+```yaml
+      auth:
+        serviceAccountName: "my-service-account"
+```
 
 ## AWS S3 Sink Example
 
