@@ -1,6 +1,5 @@
 ---
 audience: developer
-# And audience: administrator for install
 components:
   - eventing
 function: how-to
@@ -23,43 +22,7 @@ The Knative Kafka Broker stores incoming CloudEvents as Kafka records, using the
 
 ## Prerequisites
 
-1. You have installed Knative Eventing.
-2. You have access to an Apache Kafka cluster.
-
-!!! tip
-    If you need to set up a Kafka cluster, you can do this by following the instructions on the [Strimzi Quickstart page](https://strimzi.io/quickstarts/).
-
-## Installation
-
-1. Install the Kafka controller by entering the following command:
-
-    ```bash
-    kubectl apply --filename {{ artifact(org="knative-extensions", repo="eventing-kafka-broker", file="eventing-kafka-controller.yaml") }}
-    ```
-
-1. Install the Kafka Broker data plane by entering the following command:
-
-    ```bash
-    kubectl apply --filename {{ artifact(org="knative-extensions", repo="eventing-kafka-broker", file="eventing-kafka-broker.yaml") }}
-    ```
-
-1. Verify that `kafka-controller`, `kafka-broker-receiver` and `kafka-broker-dispatcher` are running,
-by entering the following command:
-
-    ```bash
-    kubectl get deployments.apps -n knative-eventing
-    ```
-
-    Example output:
-
-    ```{ .bash .no-copy }
-    NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
-    eventing-controller            1/1     1            1           10s
-    eventing-webhook               1/1     1            1           9s
-    kafka-controller               1/1     1            1           3s
-    kafka-broker-dispatcher        1/1     1            1           4s
-    kafka-broker-receiver          1/1     1            1           5s
-    ```
+These directions assume your cluster administrator has [installed the Knative Kafka broker](../../../../install/eventing/kafka-install.md).
 
 ## Create a Kafka Broker
 
@@ -103,7 +66,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kafka-broker-config
-  namespace: knative-eventing
+  namespace: your-namespace
 data:
   # Number of topic partitions
   default.topic.partitions: "10"
@@ -139,45 +102,6 @@ data:
   bootstrap.servers: "my-cluster-kafka-bootstrap.kafka:9092"
   # Here is our retention.ms config
   default.topic.config.retention.ms: "3600"
-```
-
-## Set as default broker implementation
-
-To set the Kafka broker as the default implementation for all brokers in the Knative deployment,
-you can apply global settings by modifying the `config-br-defaults` ConfigMap in the `knative-eventing` namespace.
-
-This allows you to avoid configuring individual or per-namespace settings for each broker,
-such as `metadata.annotations.eventing.knative.dev/broker.class` or `spec.config`.
-
-The following YAML is an example of a `config-br-defaults` ConfigMap using Kafka broker as the default implementation.
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-br-defaults
-  namespace: knative-eventing
-data:
-  default-br-config: |
-    clusterDefault:
-      brokerClass: Kafka
-      apiVersion: v1
-      kind: ConfigMap
-      name: kafka-broker-config
-      namespace: knative-eventing
-    namespaceDefaults:
-      namespace1:
-        brokerClass: Kafka
-        apiVersion: v1
-        kind: ConfigMap
-        name: kafka-broker-config
-        namespace: knative-eventing
-      namespace2:
-        brokerClass: Kafka
-        apiVersion: v1
-        kind: ConfigMap
-        name: kafka-broker-config
-        namespace: knative-eventing
 ```
 
 ## Security
@@ -284,106 +208,6 @@ spec:
 
 !!! note
     When using an external topic, the Knative Kafka Broker does not own the topic and is not responsible for managing the topic. This includes the topic lifecycle or its general validity. Other restrictions for general access to the topic may apply. See the documentation about using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
-
-## Consumer Offsets Commit Interval
-
-Kafka consumers keep track of the last successfully sent events by committing offsets.
-
-Knative Kafka Broker commits the offset every `auto.commit.interval.ms` milliseconds.
-
-!!! note
-    To prevent negative impacts to performance, it is not recommended committing
-    offsets every time an event is successfully sent to a subscriber.
-
-The interval can be changed by changing the `config-kafka-broker-data-plane` `ConfigMap`
-in the `knative-eventing` namespace by modifying the parameter `auto.commit.interval.ms` as follows:
-
-```yaml
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-kafka-broker-data-plane
-  namespace: knative-eventing
-data:
-  # Some configurations omitted ...
-  config-kafka-broker-consumer.properties: |
-    # Some configurations omitted ...
-
-    # Commit the offset every 5000 millisecods (5 seconds)
-    auto.commit.interval.ms=5000
-```
-
-!!! note
-    Knative Kafka Broker guarantees at least once delivery, which means that your applications may
-    receive duplicate events. A higher commit interval means that there is a higher probability of
-    receiving duplicate events, because when a Consumer restarts, it restarts from the last
-    committed offset.
-
-## Kafka Producer and Consumer configurations
-
-Knative exposes all available Kafka producer and consumer configurations that can be modified to suit your workloads.
-
-You can change these configurations by modifying the `config-kafka-broker-data-plane` `ConfigMap` in
-the `knative-eventing` namespace.
-
-Documentation for the settings available in this `ConfigMap` is available on the
-[Apache Kafka website](https://kafka.apache.org/documentation/),
-in particular, [Producer configurations](https://kafka.apache.org/documentation/#producerconfigs)
-and [Consumer configurations](https://kafka.apache.org/documentation/#consumerconfigs).
-
-## Enable debug logging for data plane components
-
-The following YAML shows the default logging configuration for data plane components, that is created during the
-installation step:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: kafka-config-logging
-  namespace: knative-eventing
-data:
-  config.xml: |
-    <configuration>
-      <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
-      </appender>
-      <root level="INFO">
-        <appender-ref ref="jsonConsoleAppender"/>
-      </root>
-    </configuration>
-```
-
-To change the logging level to `DEBUG`, you must:
-
-1. Apply the following `kafka-config-logging` `ConfigMap` or replace `level="INFO"` with `level="DEBUG"` to the
-`ConfigMap` `kafka-config-logging`:
-
-    ```yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: kafka-config-logging
-      namespace: knative-eventing
-    data:
-      config.xml: |
-        <configuration>
-          <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
-          </appender>
-          <root level="DEBUG">
-            <appender-ref ref="jsonConsoleAppender"/>
-          </root>
-        </configuration>
-    ```
-
-2. Restart the `kafka-broker-receiver` and the `kafka-broker-dispatcher`, by entering the following commands:
-
-    ```bash
-    kubectl rollout restart deployment -n knative-eventing kafka-broker-receiver
-    kubectl rollout restart deployment -n knative-eventing kafka-broker-dispatcher
-    ```
 
 ## Configuring the order of delivered events
 
