@@ -195,11 +195,11 @@ AWS MSK IAM authentication requires creation of a secret and java properties con
 In the following ConfigMaps append the following to the listed property values. If using an assumed IAM role, add `awsRoleArn="<role_arn>"` to the `sasl.jaas.config` value.
 
 - config-kafka-broker-data-plane
-  - config-kafka-broker-producer.properties
-  - config-kafka-broker-consumer.properties
+    - config-kafka-broker-producer.properties
+    - config-kafka-broker-consumer.properties
 - config-kafka-channel-data-plane
-  - config-kafka-channel-producer.properties
-  - config-kafka-channel-consumer.properties
+    - config-kafka-channel-producer.properties
+    - config-kafka-channel-consumer.properties
 
 ```
 security.protocol=SASL_SSL
