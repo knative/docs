@@ -30,7 +30,7 @@ Then in the `IntegrationSource` `.spec.aws.auth` section reference the `Secret` 
 
 ### Pod Default Credentials
 
-If you are using IRSA or Pod Identity, you can create a Kubernetes `ServiceAccount` and associate it with an AWS IAM role. Then in the `IntegrationSource` `.spec.aws.auth` section specify the name of the `ServiceAccount`. This will assign the `ServiceAccount` to the `Deployment` resource created for the `IntegrationSource`.
+If you are using [IAM Role for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) or [Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html), you can create a Kubernetes `ServiceAccount` and associate it with an AWS IAM role. Then in the `IntegrationSource` `.spec.aws.auth` section specify the name of the `ServiceAccount`. This will assign the `ServiceAccount` to the `Deployment` resource created for the `IntegrationSource`.
 ```yaml
       auth:
         serviceAccountName: "my-service-account"
