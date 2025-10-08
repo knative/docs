@@ -24,7 +24,7 @@ const pool = new Pool({
 
 app.ws('/comments', (ws, req) => {
     console.log('WebSocket connection established on /comments');
- 
+
     // Function to send all comments to the connected client
     const sendComments = async () => {
         try {
@@ -44,7 +44,7 @@ app.ws('/comments', (ws, req) => {
     // Optionally, you can trigger this function based on certain conditions
     // Here, we just send data immediately after connection and on an interval
     sendComments();
-    const interval = setInterval(sendComments, 1000); // Send comments every 10 seconds
+    const interval = setInterval(sendComments, 1000); // Send comments every second
 
     ws.on('close', () => {
         console.log('WebSocket connection on /comments closed');

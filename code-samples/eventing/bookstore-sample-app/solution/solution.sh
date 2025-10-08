@@ -52,35 +52,39 @@ then
     exit
 fi
 
-# Detect whether the user has kamel CLI installed
-if ! command -v kamel &> /dev/null
-then
-    echo ""
-    echo "⚠️ Kamel CLI not found. Please install the Kamel CLI by following the instructions at https://camel.apache.org/camel-k/latest/installation/installation.html."
-    exit
-fi
-
 # Prompt for the Docker registry details
 echo ""
-echo "📝 Please provide the details of your Container registry to install the Camel-K."
-read -p "🔑 Enter the registry hostname (e.g., docker.io or quay.io): " REGISTRY_HOST
-read -p "🔑 Enter the registry username: " REGISTRY_USER
-read -s -p "🔑 Enter the registry password: " REGISTRY_PASSWORD
+echo "📝 Please provide the details of your local running Container registry to install the Camel-K."
+read -p "🔑 Enter the registry host (e.g. kind-registry): " REGISTRY_HOST
+read -p "🔑 Enter the registry port: " REGISTRY_PORT
 echo ""
 echo "✅ All the required details have been captured and saved locally."
 
 # Set the registry details as environment variables
 export REGISTRY_HOST=$REGISTRY_HOST
-export REGISTRY_USER=$REGISTRY_USER
-export REGISTRY_PASSWORD=$REGISTRY_PASSWORD
+export REGISTRY_PORT=$REGISTRY_PORT
 
 # Set the KO_DOCKER_REPO environment variable
-export KO_DOCKER_REPO=$REGISTRY_HOST/$REGISTRY_USER
+export KO_DOCKER_REPO=$REGISTRY_HOST/$REGISTRY_PORT
 
 # Install Camel-K
 echo ""
 echo "📦 Installing Camel-K..."
-kamel install --registry $REGISTRY_HOST --organization $REGISTRY_USER --registry-auth-username $REGISTRY_USER --registry-auth-password $REGISTRY_PASSWORD
+kubectl create ns camel-k && \
+kubectl apply -k github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0 --server-side
+
+cat <<EOF | kubectl apply -f -
+apiVersion: camel.apache.org/v1
+kind: IntegrationPlatform
+metadata:
+  name: camel-k
+  namespace: camel-k
+spec:
+  build:
+    registry:
+      address: ${REGISTRY_HOST}:${REGISTRY_PORT}
+      insecure: true
+EOF
 echo "✅ Camel-K installed successfully."
 
 # Install the Sample Bookstore App
