@@ -21,44 +21,81 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ## **Install prerequisites**
 
-### **Prerequisite 1: Install Apache Camel CLI**
-
-![image](images/image16.png)
-
-Install the Apache Camel K CLI (`kamel`) on your local machine. You can find the installation instructions [here](https://camel.apache.org/camel-k/2.2.x/cli/cli.html){:target="_blank"}.
-
-???+ bug "Troubleshooting"
- 
-      If after installation you run `kamel version` and you get an error message, you may need to add the `kamel` binary to your system's PATH. You can do this by moving the `kamel` binary to a directory that is already in your PATH, or by adding the directory where `kamel` is located to your PATH.
-
-      ```sh
-      $ export PATH=$PATH:<path-to-kamel-binary>
-      ```
-
-### **Prerequisite 2: Install Apache Camel-Kamelets**
+### **Prerequisite 1: Install Apache Camel-Kamelets**
 
 ![image](images/image13.png)
 
-Next, install Apache Camel K on your cluster using the Apache Camel K CLI:
+Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
 
 ```sh
-$ kamel install --registry docker.io --organization <your-organization> --registry-auth-username <your-username> --registry-auth-password <your-password>
+kubectl create ns camel-k && \
+kubectl apply -k github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0 --server-side
 ```
 
-Replace the placeholders with your actual Docker registry information.
+Now you need to setup an `IntegrationPlatform` with a container registry. You can read more about it in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html#integration-platform). For all our needs we only need to create the `IntegrationPlatform` CR with a container registry entry. For example let's say we're using a Kind cluster with a local registry named `kind-registry` on port `5000`. Then your `IntegrationPlatform` CR will look like the following:
 
-If you are using other container registries, you may need to read more [here](https://camel.apache.org/camel-k/2.2.x/installation/registry/registry.html){:target="_blank"} for the installation.
+```yaml
+apiVersion: camel.apache.org/v1
+kind: IntegrationPlatform
+metadata:
+  name: camel-k
+  namespace: camel-k # Make sure this is the namespace where your operator is running
+spec:
+  build:
+    registry:
+      address: kind-registry:5000
+      insecure: true
+```
+
+Install it with one command:
+
+```sh
+cat <<EOF | kubectl apply -f -
+apiVersion: camel.apache.org/v1
+kind: IntegrationPlatform
+metadata:
+  name: camel-k
+  namespace: camel-k
+spec:
+  build:
+    registry:
+      address: kind-registry:5000
+      insecure: true
+EOF
+```
+
+If you are using other container registries, you may need to read more in the [container registry configuration docs](https://camel.apache.org/camel-k/2.8.x/installation/registry/registry.html#how-to-configure){:target="_blank"} for Apache Camel K.
 
 ???+ success "Verify"
 
-    You will see this message if the installation is successful:
+    Check the installation status of the operator:
 
     ```sh
-    📦 OLM is not available in the cluster. Fallback to regular installation.
-    🐪 Camel K installed in namespace default
+    kubectl get deploy -n camel-k
     ```
 
-### **Prerequisite 3: Create a Slack App and Generate an Incoming Webhook URL**
+    You will see the output:
+
+    ```
+    NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+    camel-k-operator   1/1     1            1           47h
+    ```
+
+    And the IntegrationPlatform:
+
+    ```sh
+    kubectl get integrationplatforms -n camel-k
+    ```
+
+    You will see the output with the registry address:
+
+    ```sh
+    kubectl get integrationplatforms -n camel-k
+    NAME      PHASE   BUILD STRATEGY   PUBLISH STRATEGY   REGISTRY ADDRESS     DEFAULT RUNTIME   CAMEL VERSION
+    camel-k   Ready   routine          Jib                kind-registry:5000   3.15.3            4.8.5
+    ```
+
+### **Prerequisite 2: Create a Slack App and Generate an Incoming Webhook URL**
 
 ![image](images/image21.png)
 
@@ -74,23 +111,23 @@ Follow the instructions [here](../create-slack-workspace/README.md){:target="_bl
 
     Save this URL as you will need it later.
 
-### **Prerequisite 4: Create a Secret that stores your Slack Credentials**
+### **Prerequisite 3: Create a Secret that stores your Slack Credentials**
 
 ![image](images/image22.png)
 
 We are storing the webhook URL as a secret. Copy and paste your webhook URL into the file `slack-sink/application.properties`
 
-???+ abstract "_/slack-sink/application.properties_"
+???+ abstract "_slack-sink/application.properties_"
 
     ```
     slack.channel=#bookstore-owner
     slack.webhook.url=https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
     ```
 
-Then run the following command to create the secret in the `/slack-sink` directory:
+Then run the following command from the `start` directory:
 
 ```sh
-kubectl create secret generic slack-credentials --from-file=application.properties
+kubectl create secret generic slack-credentials --from-file=slack-sink/application.properties
 ```
 
 ???+ success "Verify"
@@ -107,7 +144,7 @@ kubectl create secret generic slack-credentials --from-file=application.properti
 
 ![image](images/image14.png)
 
-We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.3.x/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Apache Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.3.x/kamelets/kamelets.html){:target="_blank"}, our destination.
+We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.8.x/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Apache Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.8.x/apis/camel-k.html#_camel_apache_org_v1_Kamelet){:target="_blank"}, our destination.
 
 ![image](images/image10.png)
 
@@ -140,11 +177,11 @@ In the current implementation using Apache Camel K, we **can only filter based o
 
 ![image](images/image11.png)
 
-Here, we will be connecting `book-review-broker` with a new Broker called `badword-broker`. And we will be creating a Trigger that helps us perform the filtering with the extension `badwordfilter: good`.
+Here, we will be connecting `bookstore-broker` with a new Broker called `badword-broker`. And we will be creating a Trigger that helps us perform the filtering with the extension `badwordfilter: good`.
 
-- 1: Append the following content to your `node-server/config/200-broker.yaml`:
+- 1: Create a new file named `slack-sink/config/100-broker.yaml` and add the following content:
 
-???+ abstract "_node-server/config/200-broker.yaml_"
+???+ abstract "_slack-sink/config/100-broker.yaml_"
 
     ```yaml
     ---
@@ -157,7 +194,7 @@ Here, we will be connecting `book-review-broker` with a new Broker called `badwo
 - 2: Apply the YAML file:
 
     ```sh
-    kubectl apply -f 200-broker.yaml
+    kubectl apply -f slack-sink/config/100-broker.yaml
     ```
 
 You should see this message if the Broker is created successfully:
@@ -193,7 +230,6 @@ Broker 'badword-broker' successfully created in namespace 'default'.
     ``` 
 
 
-
 ???+ bug "Troubleshooting"
 
     If there are issues, use the following command to diagnose:
@@ -206,15 +242,15 @@ Broker 'badword-broker' successfully created in namespace 'default'.
 
 ![image](images/image12.png)
 
-We are creating the Trigger to process the events that have type moderated-comment, and the extension `badwordfilter: bad` and route them to badword-broker.
+We are creating the Trigger to process the events that have type `moderated-comment`, and the extension `badwordfilter: bad` and route them to `badword-broker`.
 
 **Create a Trigger:**
 
 ![image](images/image17.png)
 
-- 1: Create a new YAML file named `node-server/config/badword-noti-trigger.yaml` and add the following content:
+- 1: Append the following content to your `slack-sink/config/100-broker.yaml`:
 
-???+ abstract "_node-server/config/badword-noti-trigger.yaml_"
+???+ abstract "_slack-sink/config/100-broker.yaml_"
 
     ```yaml
     ---
@@ -238,12 +274,13 @@ We are creating the Trigger to process the events that have type moderated-comme
 - 2: Apply the YAML file:
 
     ```sh
-    kubectl apply -f node-server/config/badword-noti-trigger.yaml
+    kubectl apply -f slack-sink/config/100-broker.yaml
     ```
 
     You should see this message if the Trigger is created successfully:
       
-    ```
+    ```sh
+    broker.eventing.knative.dev/badword-broker unchanged
     trigger.eventing.knative.dev/badword-noti-trigger created
     ```
 
@@ -274,9 +311,9 @@ This setup automatically sends notifications to Slack whenever a new comment tha
 
 ![image](images/image15.png)
 
-Create a new file named `slack-sink/config/slack-sink.yaml` and add the following content:
+Create a new file named `slack-sink/config/100-slack-sink.yaml` and add the following content:
 
-???+ abstract "_slack-sink/config/slack-sink.yaml_"
+???+ abstract "_slack-sink/config/100-slack-sink.yaml_"
 
     ```yaml
     apiVersion: camel.apache.org/v1
@@ -290,7 +327,7 @@ Create a new file named `slack-sink/config/slack-sink.yaml` and add the followin
         ref:
           kind: Broker
           apiVersion: eventing.knative.dev/v1
-          name: bad-word-broker
+          name: badword-broker
         properties:
           type: moderated-comment
       sink:
@@ -306,25 +343,25 @@ Create a new file named `slack-sink/config/slack-sink.yaml` and add the followin
 3. Apply the configuration to your Kubernetes cluster:
 
 ```sh
-$ kubectl apply -f slack-sink/slack-sink.yaml
+kubectl apply -f slack-sink/config/100-slack-sink.yaml
 ```
 
 ???+ success "Verify"
       You will see this message if the configuration is created successfully:
 
       ```sh
-      pipe.camel.apache.org/slack-sink-pipe created
+      pipe.camel.apache.org/pipe created
       ```
 
       But this process will take a few seconds to complete. You can check the status of the pipe by running the following command:
 
       ```sh
-      $ kubectl get pipe slack-sink-pipe
+      kubectl get pipe pipe
       ```
 
       ```sh
       NAME              PHASE     REPLICAS
-      slack-sink-pipe   Ready     1
+      pipe              Ready     1
       ```
 
 ### **Step 4: Modify the Knative Services to disable scale to zero**
@@ -339,7 +376,7 @@ In this step, we'll configure the notification delivery service to prevent it fr
 1. **Check Existing Knative Services:**
 
 ```sh
-$ kubectl get ksvc
+kubectl get ksvc
 ```
 
 You should see a service named `pipe` listed:
@@ -354,7 +391,13 @@ pipe     http://pipe.default.svc.cluster.local       pipe-00002      pipe-00002 
 To prevent the notification service from scaling down to zero, set the minimum number of pods to keep running.
 
 ```sh
-$ kubectl edit ksvc pipe
+kubectl patch ksvc pipe --type merge -p '{"spec":{"template":{"metadata":{"annotations":{"autoscaling.knative.dev/min-scale":"1"}}}}}'
+```
+
+Or use the edit command:
+
+```sh
+kubectl edit ksvc pipe
 ```
 
 Add the following annotation:
@@ -372,7 +415,7 @@ This configuration ensures that Knative will always maintain at least one instan
 ???+ success "Verify"
 
     ```sh
-    $ kubectl get pods
+    kubectl get pods
     ```
 
     Periodically check the status of the pipe-deployment pods, and see whether they will disappear! If they stay there, then we are good!
@@ -381,7 +424,7 @@ This configuration ensures that Knative will always maintain at least one instan
 
 ![image](images/image4.png)
 
-Now, you have completed building the sample app. When you submit a comment, you should always receive a notification in your test Slack workspace, achieving the same result as shown in the demo video.
+Now, you have completed building the sample app. When you submit a "bad" comment, you should receive a notification in your test Slack workspace, achieving the same result as shown in the demo video.
 
 ## **Conclusion**
 
@@ -396,7 +439,5 @@ Congratulations on successfully completing the bookstore sample app tutorial! If
 ![image](images/image20.png)
 
 We've prepared additional challenges that build on top of the existing bookstore app for you to tackle. Some solutions are provided, while others are left open to encourage you to explore your own solutions.
-
-
 
 [Go to Extra Challenges :fontawesome-solid-paper-plane:](../extra-challenge/README.md){ .md-button .md-button--primary }
