@@ -38,14 +38,11 @@ The function's output will be only from:
 
 Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured){:target="_blank"} by using the func CLI.
 
-In order to do so, you need to install the func CLI `v0.46.0`. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/){:target="_blank"} to install the func CLI with the appropriate version. If the latest version is above `v0.46.0` use the [GitHub func repository tag](https://github.com/knative/func/tags) page to get the correct version.
+In order to do so, you need to install the func CLI. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/){:target="_blank"} to install the func CLI.
 
 ???+ success "Verify"
     Running `func version` in your terminal to verify the installation, and you should see the version of the func CLI you installed.
 
-    ```sh
-    v0.46.0
-    ```
 
 ???+ bug "Troubleshooting"
     If you see `command not found`, you may need to add the func CLI to your PATH.
