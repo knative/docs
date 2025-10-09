@@ -60,12 +60,7 @@ nav:
         - Overview: serving/README.md
         - Architecture: serving/architecture.md
         - Request Flow: serving/request-flow.md
-      - Resources:
-        - Revisions:
-          - About Revisions: serving/revisions/README.md
-          - Administrator configuration options: serving/revisions/revision-admin-config-options.md
-          - Developer configuration options: serving/revisions/revision-developer-config-options.md
-        # add other resource types
+        - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
       - Autoscaling:
         - About autoscaling: serving/autoscaling/README.md
         - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
@@ -94,6 +89,9 @@ nav:
           - Configuring HTTP: serving/services/http-protocol.md
           - Performing Dry Run: serving/dryrun.md
           - Volume Support: serving/services/storage.md
+        - Revisions:
+          - About Revisions: serving/revisions/README.md
+          - Garbage Collection: serving/revisions/revision-developer-config-options.md
         - Traffic management: serving/traffic-management.md
         - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
         - Tag resolution: serving/tag-resolution.md
@@ -102,27 +100,6 @@ nav:
           - About load balancing: serving/load-balancing/README.md
           - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
           - Configuring Activator capacity: serving/load-balancing/activator-capacity.md
-      # Serving - admin docs
-      - Administrator Topics:
-        - Kubernetes services: serving/knative-kubernetes-services.md
-        - Enabling requests to Knative services when additional authorization policies are enabled: serving/istio-authorization.md
-        - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
-        - Configuring high-availability components: serving/config-ha.md
-        - Configuring the ingress gateway: serving/setting-up-custom-ingress-gateway.md
-        - Configuring domain names: serving/using-a-custom-domain.md
-        - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
-        - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
-        - Serving configuration:
-          - Configure Deployment resources: serving/configuration/deployment.md
-          - Configuring gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
-          - Feature and extension flags: serving/configuration/feature-flags.md
-          - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
-        - Serving encryption configuration:
-          - Overview: serving/encryption/encryption-overview.md
-          - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
-          - Configure external domain encryption: serving/encryption/external-domain-tls.md
-          - Configure cluster-local domain encryption: serving/encryption/cluster-local-domain-tls.md
-          - Configure Knative system-internal encryption: serving/encryption/system-internal-tls.md
       # Serving - Application Security
       - Application security:
         - About Security-Guard: serving/app-security/security-guard-about.md
@@ -131,10 +108,6 @@ nav:
         - Security-Guard example alerts: serving/app-security/security-guard-example-alerts.md
       # Serving - observability
       - Observability:
-        - Request traces: serving/observability/accessing-traces.md
-        - Collecting logs: serving/observability/logging/collecting-logs.md
-        - Configuring logging: serving/observability/logging/config-logging.md
-        - Configuring Request logging: serving/observability/logging/request-logging.md
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
         - Metrics Reference: serving/observability/metrics/serving-metrics.md
       # Serving - troubleshooting
@@ -158,7 +131,6 @@ nav:
             - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
             - Apache Kafka:
               - About Apache Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
-              - Configuring Kafka features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
@@ -241,35 +213,10 @@ nav:
           - Knative EventMesh Backstage Plugin: eventing/event-registry/eventmesh-backstage-plugin.md
         - Sugar controller: eventing/sugar/README.md
         - Debugging: eventing/troubleshooting/README.md
-      - Administrator topics:
-        # Eventing config
-        - Eventing configuration:
-          - Configure Broker defaults: eventing/configuration/broker-configuration.md
-          - Configure Channel defaults: eventing/configuration/channel-configuration.md
-          - Configure Apache Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
-          - Configure event source defaults: eventing/configuration/sources-configuration.md
-          - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
-          - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/keda-configuration.md
       # Eventing - observability
       - Observability:
-        - Accessing CloudEvent traces: eventing/observability/accessing-traces.md
-        - Collecting logs: eventing/observability/logging/collecting-logs.md
-        - Configuring logging: eventing/observability/logging/config-logging.md
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
         - Metrics Reference: eventing/observability/metrics/eventing-metrics.md
-      - Features:
-        - About Eventing features: eventing/features/README.md
-        - DeliverySpec.Timeout field: eventing/features/delivery-timeout.md
-        - DeliverySpec.RetryAfterMax field: eventing/features/delivery-retryafter.md
-        - New APIServerSource Filters: eventing/features/new-apiserversource-filters.md
-        - KReference.Group field: eventing/features/kreference-group.md
-        - Knative reference mapping: eventing/features/kreference-mapping.md
-        - EventType auto creation: eventing/features/eventtype-auto-creation.md
-        - Transport Encryption: eventing/features/transport-encryption.md
-        - Sender Identity: eventing/features/sender-identity.md
-        - Authorization: eventing/features/authorization.md
-        - Eventing with Istio: eventing/features/istio-integration.md
-        - Cross Namespace Event Links: eventing/features/cross-namespace-event-links.md
       - FAQ: eventing/faq/README.md
     # Eventing reference docs
       - Reference:
@@ -286,42 +233,101 @@ nav:
     # Administration
 ###############################################################################
     - Administration:
-      - Administration overview: admin/admin-overview.md
-      - Installing Knative: install/README.md
-      # YAML Installation
-      - Install Knative with YAML:
-        - About YAML-based installation: install/yaml-install/README.md
-        - Install Knative Serving:
-          - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
-          - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
-        - Install Knative Eventing:
-          - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
-          - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
-      # Operator Installation
-      - Install with Knative Operator:
-        - Install by using the Knative Operator: install/operator/knative-with-operators.md
-        - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
-        - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
-        - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
-        - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
-      # Advanced options for Serving
-      - Install advanced options:
-        # Istio Installation
-        - Install Istio for Knative: install/installing-istio.md
-        # Cert-manager Installation
-        - Install cert-manager: install/installing-cert-manager.md
-      # Backstage plugin
-      - Install Knative Backstage plugin: install/installing-backstage-plugins.md
-      # Vendor docs
-      - Using a Knative-based offering: install/knative-offerings.md
+      - Overview: administer/README.md
+      - Installing Knative:
+        - Overview: install/README.md
+        # YAML Installation
+        - Install Knative with YAML:
+          - About YAML-based installation: install/yaml-install/README.md
+          - Install Knative Serving:
+            - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
+            - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
+          - Install Knative Eventing:
+            - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
+            - Knative Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
+        # Operator Installation
+        - Install with Knative Operator:
+          - Install by using the Knative Operator: install/operator/knative-with-operators.md
+          - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
+          - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
+          - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
+          - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+        - Installing plugins:
+          - Install Istio for Knative: install/installing-istio.md
+          # TODO: docs for kourier, contour, gateway-api
+          - Install Kafka for Knative: install/eventing/kafka-install.md
+          - Install RabbitMQ for Knative: install/eventing/rabbitmq-install.md
+          # N.B. this duplicates an "eventing" topic above, cross-referenced here.
+          - Eventing Channels: eventing/channels/channels-crds.md
+        - Integrations:
+          - Install cert-manager: install/installing-cert-manager.md
+          - Install Knative Backstage plugin: install/installing-backstage-plugins.md
+        # Vendor list
+        - Using a Knative-based offering: install/knative-offerings.md
+      - Configuring Knative:
+        # TODO: add a doc on editing ConfigMaps
+        - Configure high-availability components: serving/config-ha.md
+        - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
+        - Networking Options:
+          - Configure the ingress gateway: serving/setting-up-custom-ingress-gateway.md
+          - Configure domain names: serving/using-a-custom-domain.md
+          - Istio Authorization: serving/istio-authorization.md
+          - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
+        - Serving configuration:
+          - Configure Deployment resources: serving/configuration/deployment.md
+          - Configure gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
+          - Config Revision Garbage Collection: serving/revisions/revision-admin-config-options.md
+          - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
+          - Serving encryption configuration:
+            - Overview: serving/encryption/encryption-overview.md
+            - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
+            - Configure external domain encryption: serving/encryption/external-domain-tls.md
+            - Configure cluster-local domain encryption: serving/encryption/cluster-local-domain-tls.md
+            - Configure Knative system-internal encryption: serving/encryption/system-internal-tls.md
+        - Eventing configuration:
+          - Configure Broker defaults: eventing/configuration/broker-configuration.md
+          - Configure Channel defaults: eventing/configuration/channel-configuration.md
+          - Configure Apache Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
+          - Configure Kafka Broker features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
+          - Configure event source defaults: eventing/configuration/sources-configuration.md
+          - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
+          - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/keda-configuration.md
+        - Flagged features:
+          - Serving Features: serving/configuration/feature-flags.md
+          - Eventing Features:
+            - Configuring Features: eventing/features/README.md
+            - DeliverySpec.Timeout field: eventing/features/delivery-timeout.md
+            - DeliverySpec.RetryAfterMax field: eventing/features/delivery-retryafter.md
+            - New APIServerSource Filters: eventing/features/new-apiserversource-filters.md
+            - KReference.Group field: eventing/features/kreference-group.md
+            - Knative reference mapping: eventing/features/kreference-mapping.md
+            - EventType auto creation: eventing/features/eventtype-auto-creation.md
+            - Transport Encryption: eventing/features/transport-encryption.md
+            - Sender Identity: eventing/features/sender-identity.md
+            - Authorization: eventing/features/authorization.md
+            - Eventing with Istio: eventing/features/istio-integration.md
+            - Cross Namespace Event Links: eventing/features/cross-namespace-event-links.md
+      - Securing Knative:
+        - Security Disclosure: reference/security/README.md
+        - Threat Model: reference/security/threat-model.md
+        - Verifying Knative Images: reference/security/verifying-images.md
+        - Verifying Knative Binaries: reference/security/verifying-cli.md
+      # TODO: add some observability documentation
+      - Observability:
+        - Serving Request traces: serving/observability/accessing-traces.md
+        - Collecting Serving logs: serving/observability/logging/collecting-logs.md
+        - Collecting Eventing logs: eventing/observability/logging/collecting-logs.md
+        - Configuring Serving logging: serving/observability/logging/config-logging.md
+        - Configuring Serving Request logging: serving/observability/logging/request-logging.md
+        - Configuring Eventing logging: eventing/observability/logging/config-logging.md
+        - Accessing CloudEvent traces: eventing/observability/accessing-traces.md
       # Upgrading Knative
-      - Upgrading your installation:
+      - Upgrading and removing:
         - About upgrading Knative: install/upgrade/README.md
         - Checking your Knative version: install/upgrade/check-install-version.md
         - Upgrading with kubectl: install/upgrade/upgrade-installation.md
         - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
-      # Uninstall
-      - Uninstalling Knative: install/uninstall.md
+        - Uninstalling Knative: install/uninstall.md
       # Troubleshooting
       - Troubleshooting Knative: install/troubleshooting.md
 ###############################################################################
@@ -331,11 +337,4 @@ nav:
       - Code sample overview: samples/README.md
       - Serving code samples: samples/serving.md
       - Eventing code samples: samples/eventing.md
-    # Reference docs
-    - Reference:
-      - Security:
-        - Security Disclosure: reference/security/README.md
-        - Threat Model: reference/security/threat-model.md
-        - Verifying Knative Images: reference/security/verifying-images.md
-        - Verifying Knative Binaries: reference/security/verifying-cli.md
-      - Release notes: reference/relnotes/README.md
+

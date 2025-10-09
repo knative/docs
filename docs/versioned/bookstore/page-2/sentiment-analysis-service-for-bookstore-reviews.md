@@ -43,6 +43,7 @@ In order to do so, you need to install the func CLI. You can follow the [officia
 ???+ success "Verify"
     Running `func version` in your terminal to verify the installation, and you should see the version of the func CLI you installed.
 
+
 ???+ bug "Troubleshooting"
     If you see `command not found`, you may need to add the func CLI to your PATH.
 
@@ -66,13 +67,13 @@ This workflow ensures a smooth transition from development to deployment within 
 
 Create a new function using the func CLI:
 
-```
+```sh
 func create -l <language> <function-name>
 ```
 
 In this case, we are creating a Python function, so the command will be:
 
-```
+```sh
 func create -l python sentiment-analysis-app
 ```
 
@@ -84,185 +85,181 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
     The file tree will look like this:
 
-    ```
+    ```txt
     start/sentiment-analysis-app
-    ├── func.yaml
     ├── .funcignore
+    ├── function
+    │   ├── func.py
+    │   └── __init__.py
+    ├── func.yaml
     ├── .gitignore
-    ├── requirements.txt
-    ├── app.sh
-    ├── test_func.py
+    ├── pyproject.toml
     ├── README.md
-    ├── Procfile
-    └── func.py
+    └── tests
+        └── test_func.py
     ```
 
 ### **Step 2: Replace the generated code with the sentiment analysis logic**
 
 ![Image14](images/image14.png)
 
-`sentiment-analysis-app/func.py` is the file that contains the code for the function. You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+`sentiment-analysis-app/function/func.py` is the file that contains the code for the function. 
 
-???+ abstract "_sentiment-analysis-app/func.py_"
+You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
+
+???+ abstract "_sentiment-analysis-app/function/func.py_"
 
     ```python
-    from parliament import Context
-    from flask import Request, request, jsonify
-    import json
+    import logging
+    from cloudevents.http import CloudEvent
     from textblob import TextBlob
-    from time import sleep
-    from cloudevents.http import CloudEvent, to_structured
+    import textblob
 
-    # The function to convert the sentiment analysis result into a CloudEvent
-    def create_cloud_event(inputText, badWordResult, data):
-        attributes = {
-            "type": "moderated-comment",
-            "source": "sentiment-analysis",
-            "datacontenttype": "application/json",
-            "sentimentResult": data,
-            "badwordfilter": badWordResult,
-        }
+    def new():
+        return Function()
 
-        # Put the sentiment analysis result into a dictionary
-        data = {
-            "reviewText": inputText,
-            "badWordResult": badWordResult,
-            "sentimentResult": data,
-        }
+    class Function:
+        async def handle(self, scope, receive, send):
+            """ Handle all HTTP requests to this Function. The incoming CloudEvent is in scope["event"]. """
+            logging.info("Request Received")
 
-        # Create a CloudEvent object
-        event = CloudEvent(attributes, data)
-        return event
+            # 1. Get the incoming CloudEvent
+            request_event = scope["event"]
 
-    def analyze_sentiment(text):
-        analysis = TextBlob(text["reviewText"])
-        sentiment = "neutral"
+            # 2. Extract the data payload from the event, analyze and create CloudEvent
+            response_event = self.analyze_sentiment(request_event.data)
 
-        if analysis.sentiment.polarity > 0:
-            sentiment = "positive"
-        elif analysis.sentiment.polarity < 0:
-            sentiment = "negative"
+            # 3. Send the response
+            logging.info(f"Sending response: {response_event.data}")
+            await send(response_event)
 
-        badWordResult = ""
-        try:
-            badWordResult = text["badWordResult"]
-        except:
-            pass
+        def create_cloud_event(self, inputText, badWordResult, data):
+            attributes = {
+                "type": "moderated-comment",
+                "source": "sentiment-analysis",
+                "datacontenttype": "application/json",
+                "sentimentResult": data,
+                "badwordfilter": badWordResult,
+            }
 
-        # Convert the sentiment into a CloudEvent
-        sentiment = create_cloud_event(text["reviewText"], badWordResult, sentiment)
-        return sentiment
+            data = {
+                "reviewText": inputText,
+                "badWordResult": badWordResult,
+                "sentimentResult": data,
+            }
 
-    def main(context: Context):
-        """
-        Function template
-        The context parameter contains the Flask request object and any
-        CloudEvent received with the request.
-        """
+            return CloudEvent(attributes, data)
 
-        print("Sentiment Analysis Received CloudEvent: ", context.cloud_event)
+        def analyze_sentiment(self, text):
+            review_text = text.get("reviewText", "")
+            analysis = TextBlob(review_text)
+            sentiment = "neutral"
 
-        # Add your business logic here
-        return analyze_sentiment(context.cloud_event.data)
+            if analysis.sentiment.polarity > 0:
+                sentiment = "positive"
+            elif analysis.sentiment.polarity < 0:
+                sentiment = "negative"
+
+            badWordResult = ""
+            try:
+                badWordResult = text["badWordResult"]
+            except KeyError:
+                pass
+
+            return self.create_cloud_event(review_text, badWordResult, sentiment)
     ```
 
 ### **Step 3: Configure the dependencies**
 
 ![Image9](images/image9.png)
 
-The `sentiment-analysis-app/requirements.txt` file contains the dependencies for the function. Add the following dependencies to the file:
-???+ abstract "_sentiment-analysis-app/requirements.txt_"
+The `sentiment-analysis-app/pyproject.toml` file contains the project configuration with the dependencies for the function. Add the `textblob` dependency to the dependencies array :
+???+ abstract "_sentiment-analysis-app/pyproject.toml_"
 
-    ```
-    Flask==3.0.2
-    textblob==0.18.0.post0
-    parliament-functions==0.1.0
-    cloudevents==1.10.1
+    ```toml
+    [project]
+    name = "function"
+    description = ""
+    version = "0.1.0"
+    requires-python = ">=3.9"
+    readme = "README.md"
+    license = "MIT"
+    dependencies = [
+        "httpx",
+        "cloudevents",
+        "pytest",
+        "pytest-asyncio",
+        "textblob", # <-- add this dependency
+    ]
+    authors = [
+        { name="Your Name", email="you@example.com"},
+    ]
+
+    [build-system]
+    requires = ["hatchling"]
+    build-backend = "hatchling.build"
+
+    [tool.pytest.ini_options]
+    asyncio_mode = "strict"
+    asyncio_default_fixture_loop_scope = "function"
     ```
 
 Knative Function will automatically install the dependencies listed here when you build the function.
 
-### **Step 4: Configure the pre-built environment**
+### **Step 4: Build and run your Knative Function locally (Optional)**
 
-![Image11](images/image11.png)
-
-In order to properly use the `textblob` library, you need to download the corpora, which is a large collection of text data that is used to train the sentiment analysis model. You can do this by creating a new file called `setup.py`, Knative Function will ensure that the `setup.py` file is executed after the dependencies have been installed.
-
-The `sentiment-analysis-app/setup.py` file should contain the following code for your bookstore:
- 
-???+ abstract "_sentiment-analysis-app/setup.py_"
-    ```python
-    from setuptools import setup, find_packages
-    from setuptools.command.install import install
-    import subprocess
-
-    class PostInstallCommand(install):
-        """Post-installation for installation mode."""
-        def run(self):
-            # Call the superclass run method
-            install.run(self)
-            # Run the command to download the TextBlob corpora
-            subprocess.call(['python', '-m', 'textblob.download_corpora', 'lite'])
-
-    setup(
-        name="download_corpora",
-        version="1.0",
-        packages=find_packages(),
-        cmdclass={
-            'install': PostInstallCommand,
-        }
-    )
-    ```
-
-### **Step 5: Build and run your Knative Function locally (Optional)**
 ??? info "Click here to expand"
-    
-    
+
     ![Image4](images/image4.png)
     
     In Knative Function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
     
-    Currently only the s2i build is supported if you need to run `setup.py`. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
-    
     Before we get started, configure the container registry to push the image to the container registry. You can use the following command to configure the container registry:
     
-    ```
+    ```sh
     export FUNC_REGISTRY=<your-container-registry>
     ```
     
     In this case, we will use the s2i build by adding the flag `-b=s2i`, and `-v` to see the verbose output.
     
-    ```
+    ```sh
     func build -b=s2i -v
     ```
     
     When the build is complete, you will see the following output:
     
     ```
-    🙌 Function built: <Your container registry username>/sentiment-analysis-app:latest
+    🙌 Function built: <Your container registry>/sentiment-analysis-app:latest
     ```
     
     This command will build the function and push the image to the container registry. After the build is complete, you can run the function using the following command:
     
+    
+    ```sh
+    func run -b=s2i -v
+    ```
+
     ---
     
     **Troubleshooting**
     
     `❗Error: '/home/Kuack/Documents/knative/docs/code-samples' does not contain an initialized function`
     
-    **Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory. If you are in the right directory, and the error still occurs, try to check your `func.yaml`, as it has to contain the field `created` and the right timestamp to be treated as a valid Knative Function.**
+    **Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory.**
+    
+    ```sh
+    pwd
+    ```
+    
+    **If you are in the right directory, and the error still occurs, try to check your `func.yaml`, as it has to contain the field `created` and the right timestamp to be treated as a valid Knative Function.**
     
     ---
-    
-    ```
-    func run -b=s2i -v
-    ```
     
     In the future, you can skip the step of `func build`, because `func run` will automatically build the function for you.
     
     You will see the following output if the function is running successfully:
     
-    ```
+    ```sh
     ❗function up-to-date. Force rebuild with --build
     Running
     
@@ -272,7 +269,7 @@ The `sentiment-analysis-app/setup.py` file should contain the following code for
     
     Knative Function has an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent and test your function out:
     
-    ```
+    ```sh
     func invoke -f=cloudevent --data='{"reviewText": "I love Knative so much"}' --content-type=application/json --type="new-review-comment" -v
     ```
     
@@ -280,7 +277,7 @@ The `sentiment-analysis-app/setup.py` file should contain the following code for
     
     In this case, you will get the full CloudEvent response:
     
-    ```
+    ```sh
     Context Attributes,
       specversion: 1.0
       type: new-review-comment
@@ -298,7 +295,7 @@ The `sentiment-analysis-app/setup.py` file should contain the following code for
       }
     ```
     
-### **Step 6: Deploy the function to the cluster**
+### **Step 5: Deploy the function to the cluster**
 
 ![Image10](images/image10.png)
 
@@ -307,41 +304,36 @@ The `sentiment-analysis-app/setup.py` file should contain the following code for
 
 In Knative Function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
 
-Currently **only** the `s2i` build is supported if you need to run `setup.py`. When building with s2i, the `setup.py` file will be executed automatically after the dependencies have been installed.
-
 After you have finished the code, you can deploy the function to the cluster using the following command:
 !!! note
     Using `-b=s2i` to specify how the function should be built.
 
-```bash
+```sh
 func deploy -b=s2i -v
 ```
-
 
 ???+ success "Verify"
 
     When the deployment is complete, you will see the following output:
     
-    ```
+    ```sh
     Function deployed in namespace "default" and exposed at URL:
     http://sentiment-analysis-app.default.svc.cluster.local
     ```
- 
+
 !!! tip  
     You can find the URL of the Knative Function (Knative Service) by running the following command:
     
-    ```bash
+    ```sh
     kubectl get kservice
     ```
     
     You will see the URL in the output:
     
-    ```
+    ```sh
     NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
     sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00001   sentiment-analysis-app-00001   True    
     ```
-
-
 
 ## **Knative Serving: scale down to zero**
 
@@ -349,7 +341,7 @@ func deploy -b=s2i -v
 
 If you use the following command to query all the pods in the cluster, you will see that the pod is running:
 
-```bash
+```sh
 kubectl get pods
 ```
 
@@ -357,7 +349,7 @@ where `-A` is the flag to query all the pods in all namespaces.
 
 And you will find that your sentiment analysis app is running:
 
-```
+```sh
 NAMESPACE   NAME                                      READY   STATUS    RESTARTS   AGE
 default     sentiment-analysis-app-00002-deployment   2/2     Running   0          2m
 ```
@@ -376,7 +368,7 @@ After deployment, the `func` CLI provides a URL to access your function. You can
 
 Simply use Knative Function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
-```bash
+```sh
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 ```
 
@@ -388,7 +380,7 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 
     If you see the response, it means that the function is running successfully.
 
-    ```
+    ```sh
     Context Attributes,
       specversion: 1.0
       type: moderated-comment
@@ -407,24 +399,15 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
       }
     ```
 
+## **Next Step**
+
 ![Image16](images/image16.png)
 
 In this tutorial, you learned how to create a serverless function for a simple sentiment analysis service with Knative.
 
-## **Next Step**
-
-![Image5](images/image5.png)
-
-Next, we'll deploy another ML service following the same procedure. We encourage you to try it yourself! 
+Next, we'll deploy another ML service following the same procedure.
 
 !!! tip
     Don't forget to `cd` into the root directory `/start` before proceeding.
 
-
-If you feel comfortable deploying the other ML service yourself, follow this **simplified guide**:
-
 [Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/create-bad-word-filter-service.md){ .md-button .md-button--primary }
-
-If you encounter any issues, don't worry—we have a detailed tutorial ready for you. 
-
-[Solution - Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/solution-create-bad-word-filter-service.md){ .md-button .md-button--primary }

@@ -46,7 +46,7 @@ Zeebe comes with Camunda Operate, which allows you to see all this information i
 
 ## Decorate / Enhance
 
-Now that you have the power of a workflow engine, you can leverage some of its features to decorate or enhance your applications. An ehnchanced version of the workflow model could look like this:
+Now that you have the power of a workflow engine, you can leverage some of its features to decorate or enhance your applications. An enhanced version of the workflow model could look like this:
 
 ![Workflow model v2](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v2.png?raw=true)
 
@@ -80,7 +80,7 @@ Version 3 of the Workflow Model shows a more complex diagram, where a subprocess
 
 ![Workflow Model V3](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v3.png?raw=true)
 
-The worfklow can react on the CloudEvent **Customer Abandoned Queue** at any given time inside the **Customer Buying Tickets** stage. This will trigger the Customer **Clean Up** event to garbage collect all the data related with the Customer Session from all the services caching data.
+The workflow can react on the CloudEvent **Customer Abandoned Queue** at any given time inside the **Customer Buying Tickets** stage. This will trigger the Customer **Clean Up** event to garbage collect all the data related with the Customer Session from all the services caching data.
 
 In the following screenshot, inside Camunda Operate, you can quickly visualize how many instances of the workflows are at a given stage as well as how many workflows have finished, and in which state they finished:
 
@@ -88,7 +88,7 @@ In the following screenshot, inside Camunda Operate, you can quickly visualize h
 
 Another advantage of using a workflow engine is flow control. By using flow control elements such as Exclusive Gateways, you can delegate some high-level decisions (usually encoding business logic) to the workflow engine:
 
-![Workfloe Model V4](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v4.png?raw=true)
+![Workflow Model V4](https://github.com/salaboy/orchestrating-cloud-events/blob/master/imgs/tickets-v4.png?raw=true)
 
 As you can see in the above model, the exclusive gateway is being used to choose between two different paths based on a condition. In this case, the condition is evaluating how many tickets are being reserved by the customer and, based on that, the model is choosing between a normal credit card payment or a more complex money transfer.
 

@@ -102,7 +102,7 @@ When all the tools just are an API wrapper, all that is needed to define any too
 1. The name of the tool
 2. A description of the tool
 3. The parameters the tool accepts
-4. How to mape the parameters into the API of the tool
+4. How to map the parameters into the API of the tool
 
 Notice that everything in the above list is just _metadata_ about the tool, and that using these four pieces
 of metadata we are able to define _any_ tool we want the LLM to be able to call. This is an extremely important

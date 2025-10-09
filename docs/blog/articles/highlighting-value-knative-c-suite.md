@@ -96,8 +96,8 @@ Knative Eventing expands the possibilities for event-driven architecture. Applic
 
 <p>Every business unit is now developing code, and developer productivity is key to keeping pace with demand. We need to support the productivity of experts throughout the organization that are now deploying code using Python, Rust, and other development environments in their work as researchers, analysts, and data scientists. Knative accelerates their productivity immensely.
 
-<p><i>“It should be possible for somebody with an algorithm to have it on the platform in an hour.”</i>
-<br>- Andrew Webber Senior Software Engineer of deepc, a medtech company that simplifies and improves the workflow in medical imaging diagnostics with pioneering AI and software technologys
+<p><i>”It should be possible for somebody with an algorithm to have it on the platform in an hour.”</i>
+<br>- Andrew Webber Senior Software Engineer of deepc, a medtech company that simplifies and improves the workflow in medical imaging diagnostics with pioneering AI and software technologies
 
 <h3 style="font-weight: bold;">Create flexibility when choosing cloud vendors and pursuing future opportunities.</h3>
 

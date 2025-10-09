@@ -4,54 +4,63 @@
   font-weight: 400;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Regular.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: italic;
   font-weight: 400;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Italic.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: normal;
   font-weight: 300;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Light.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: italic;
   font-weight: 300;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-LightItalic.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: normal;
   font-weight: 500;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Medium.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: italic;
   font-weight: 500;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-MediumItalic.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: normal;
   font-weight: 700;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Bold.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: italic;
   font-weight: 700;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-BoldItalic.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: normal;
   font-weight: 900;
   src: local('Satoshi'), url('https://fonts.cdnfonts.com/s/85546/Satoshi-Black.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Satoshi';
   font-style: italic;
@@ -69,7 +78,7 @@
   --md-text-font: 'Satoshi';
 }
 
-header > nav > ul > li {
+header>nav>ul>li {
   color: black;
   font-weight: bold;
 }
@@ -108,7 +117,8 @@ a.md-header__button.md-logo img {
   margin: 5px -14px;
 }
 
-.md-nav__item--nested>.md-nav__link, .md-nav__item a {
+.md-nav__item--nested>.md-nav__link,
+.md-nav__item a {
   color: var(--nav-item-color);
 }
 
@@ -126,7 +136,8 @@ a.md-header__button.md-logo img {
   color: black
 }
 
-.md-header[data-md-state=shadow], .md-tabs {
+.md-header[data-md-state=shadow],
+.md-tabs {
   background-color: #f3f1f2;
 }
 
@@ -138,9 +149,11 @@ a.md-header__button.md-logo img {
 .md-header__source {
   color: var(--md-primary-fg-color--dark);
 }
-.md-search__form{
+
+.md-search__form {
   border-radius: 10px;
 }
+
 .md-search__input {
   background-color: white;
   border: black 1px solid;
@@ -172,8 +185,9 @@ a.md-header__button.md-logo img {
 .md-search__icon[for=__search] {
   color: var(--md-default-fg-color--light);
 }
-.md-source{
-  margin-left:-1.4rem;
+
+.md-source {
+  margin-left: -1.4rem;
 }
 
 .md-source__icon+.md-source__repository {
@@ -191,7 +205,8 @@ a.md-header__button.md-logo img {
   font-weight: 600;
 }
 
-.md-typeset .admonition, .md-typeset details {
+.md-typeset .admonition,
+.md-typeset details {
   font-size: .7rem;
 }
 
@@ -236,7 +251,8 @@ a.md-header__button.md-logo img {
 }
 
 /* text sizing of tables, Alert, Warnings, Notes*/
-.md-typeset table, .md-typeset table:not([class]) {
+.md-typeset table,
+.md-typeset table:not([class]) {
   font-size: 100%;
 }
 
@@ -403,7 +419,7 @@ a.md-header__button.md-logo img {
   width: 100%;
 }
 
-.md-footer-meta__inner{
+.md-footer-meta__inner {
   display: flex;
   flex-direction: row;
   margin: 0.5rem 1.5rem;
@@ -422,7 +438,9 @@ a.md-header__button.md-logo img {
 }
 
 /* Feature State Labels */
-.feature-alpha, .feature-beta, .feature-stable {
+.feature-alpha,
+.feature-beta,
+.feature-stable {
   font-variant: small-caps;
   padding: 0.1em;
   border-bottom: 1px dotted #999;
@@ -447,19 +465,22 @@ a.md-header__button.md-logo img {
 }
 
 /* Testimonials */
-.testimonials h1, .testimonials h2,
-.testimonials h3, .testimonials .normal-text,
+.testimonials h1,
+.testimonials h2,
+.testimonials h3,
+.testimonials .normal-text,
 .testimonials .quote {
   font-family: inherit;
 }
 
-.testimonials h1, .testimonials h2,
+.testimonials h1,
+.testimonials h2,
 .testimonials h3 {
   font-weight: bold;
 }
 
 .testimonials h1 {
-  color:black;
+  color: black;
   margin-bottom: -26px;
 }
 
@@ -532,27 +553,51 @@ a.md-header__button.md-logo img {
 .testimonials .find-links {
   padding-top: 16px;
 }
-@media screen and (max-width: 530px){
-.testimonial{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.testimonials .quote {
-  padding: 1rem;
-  margin-top: 1rem;
-  border-left: none;
-  border-top: var(--md-primary-fg-color--dark) 4.5px solid;
-}
-.testimonials .testimonial .img {
-  margin: auto 30px auto 30px;
-}
+
+@media screen and (max-width: 530px) {
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .testimonials .quote {
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: none;
+    border-top: var(--md-primary-fg-color--dark) 4.5px solid;
+  }
+
+  .testimonials .testimonial .img {
+    margin: auto 30px auto 30px;
+  }
 }
 
 @media (max-width: 630px) {
-  [dir=ltr] .md-tabs__list {
-    margin-left: 7.2rem;
+  [dir=ltr] ul.md-tabs__list {
+    margin-left: 3rem;
+  }
+
+  [dir=ltr] button.md-version__current {
+    margin-left: .4rem;
+  }
+
+  .md-tabs__item {
+    padding-left: .3rem;
+    padding-right: .3rem;
+  }
+
+  [dir=ltr] div.md-header__title {
+    margin-left: .4rem;
+  }
+
+  .md-header__topic + .md-header__topic {
+    max-width: 0;
+  }
+
+  [dir=ltr] .mr-30 {
+    margin-right: 0;
   }
 }
 
@@ -563,6 +608,10 @@ a.md-header__button.md-logo img {
 }
 
 @media (max-width: 1024px) {
+  [dir=ltr] .md-tabs__list {
+    margin-left: 5rem;
+  }
+
   .md-header__topic {
     margin: 0;
   }
@@ -616,4 +665,3 @@ a.md-header__button.md-logo img {
     display: none;
   }
 }
-  

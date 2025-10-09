@@ -23,8 +23,8 @@ concepts of Knative work, we hope that you will also learn something from these 
 ## Why are we writing this blog series?
 
 In the month prior to writing this blog post, we started our internship at Red Hat and began working on Knative. As such, we have just spent the past month
-learning all about how Knative works and making our first contributions to the project. We understand many of the pain points that new contributors face because 
-we just faced them ourselves. Our hope is that by creating this blog series we can alleviate some of these pain points for the contibutors who come after 
+learning all about how Knative works and making our first contributions to the project. We understand many of the pain points that new contributors face because
+we just faced them ourselves. Our hope is that by creating this blog series we can alleviate some of these pain points for the contributors who come after 
 us.
 
 ![Person reading a book](../images/getting-started-blog-series/post0/reading-side-doodle.png)

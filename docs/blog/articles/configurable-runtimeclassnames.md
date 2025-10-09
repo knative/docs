@@ -21,7 +21,7 @@ RuntimeClasses enable several things, including:
 - functionality
     - such as enabling GPU (e.g NVIDIA) or WASM (e.g Spinkube) support
     
-For example, a cluster administrator or cloud provider may wish to configure Knative Serving to specificly not use `runc` to run untrusted workloads that would be deployed by users on their platform.
+For example, a cluster administrator or cloud provider may wish to configure Knative Serving to specifically not use `runc` to run untrusted workloads that would be deployed by users on their platform.
 
 By default, Kubernetes does not have a default RuntimeClass feature/annotation (like StorageClass does) and it must be altered at a container runtime level as it is also inherited therein. This feature along with the ease of Knative Service config, it elevates the abilities of Knative Serving above standard Kubernetes.
 

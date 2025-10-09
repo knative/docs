@@ -1,4 +1,0 @@
-Flask==3.0.2
-textblob==0.18.0.post0
-parliament-functions==0.1.0
-cloudevents==1.10.1

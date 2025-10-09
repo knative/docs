@@ -103,11 +103,11 @@ This use case can be elegantly handled with Knative Eventing and Functions-as-a-
 
 Data flow: _VM Operation_ --> _Event Creation_ --> _Event Processing_ --> _Automation_
 
-### Trimmimg the fat from the Event-Payload
+### Trimming the fat from the Event-Payload
 
 As mentioned above, the `ApiServerSource` is listening for events and forwards them as CloudEvents to an addressable or a callable resource. However, the challenge is that the produced events are data-heavy, making downstream processing tricky. "Downstream processing" != the further processing of the received data.
 
-Below is a complete example of a _virtual machine creation_ event, which the `ApiServerSource` wraps into its `dev.knative.apiserver.resource.add` CloudEvent (with some sections ommited for brevity):
+Below is a complete example of a _virtual machine creation_ event, which the `ApiServerSource` wraps into its `dev.knative.apiserver.resource.add` CloudEvent (with some sections omitted for brevity):
 
 ```shell
 Context Attributes,
@@ -330,7 +330,7 @@ trigger-kn-py-psql-vmdata-fn-add               broker-apiserversource       ksvc
 trigger-kn-py-psql-vmdata-fn-delete            broker-apiserversource       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
 ```
 
-Fasten your seatbelt 🚀 The complete event-flow is in-place and the function will feet the desired data into the DB.
+Fasten your seatbelt 🚀 The complete event-flow is in-place and the function will feed the desired data into the DB.
 
 Example output:
 

@@ -24,7 +24,7 @@ If you just want to install knative serving in k0s, you can directly skip to [Kn
     * [Say Hello Edge!](#say-hello-edge)
 
 
-## Resource Requirment Analysis
+## Resource Requirement Analysis
 
 In this section we will determine the default Installation resource requirement needed for knative-serving and k0s.
 
@@ -137,7 +137,7 @@ MiB Swap:   1942.0 total,   1942.0 free,      0.0 used.    670.7 avail Mem
 ```
 CPU used by BaseOS in idle state 0.7%
 
-The results obtained are comporable to experiments by Neil [[1](#resources)]
+The results obtained are comparable to experiments by Neil [[1](#resources)]
 
 ### Knative + k0s Default resource requirement
 

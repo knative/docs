@@ -13,7 +13,7 @@ instructions, as part of my [Knative Tutorial](https://github.com/meteatamel/kna
 ## Knative components used
 
 When creating these example pipelines, I relied on a few Knative components that greatly simplified
-my development. More specifially:
+my development. More specifically:
 
 1. [Event sources](https://knative.dev/docs/developer/eventing/sources/) allow you to
    read external events in your cluster. [Knative-GCP
@@ -135,7 +135,7 @@ Trigger the jobs:
 gcloud scheduler jobs run cre-scheduler-2bcb33d8-3165-4eca-9428-feb99bc320e2
 ```
 
-You should get an email with with a chart similar to this in a few minutes:
+You should get an email with a chart similar to this in a few minutes:
 
 ![Chart - United Kingdom](https://atamel.dev/img/2020/chart-unitedkingdom.png)
 

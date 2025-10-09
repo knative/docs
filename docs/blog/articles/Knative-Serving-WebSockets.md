@@ -128,7 +128,7 @@ func OnError(conn *websocket.Conn, err error) {
 }
 ```
 
-In each of the handlers we log the remote address of the connected peer and of any incomming message through the `OnMessage` handler we echo it back to the sender.
+In each of the handlers we log the remote address of the connected peer and of any incoming message through the `OnMessage` handler we echo it back to the sender.
 
 ## Testing the WebSocket server
 
@@ -136,7 +136,7 @@ In each of the handlers we log the remote address of the connected peer and of a
 
     The easiest way to build and deploy Golang applications is using [ko](https://github.com/ko-build/ko), as described on the actual [sample application](https://github.com/knative/docs/tree/main/code-samples/serving/websockets-go).
 
-Once the Knative Serving application was deployed the the Kubernetes cluster, you can test it. For that you need to receive the actual URL for the service of the WebSocket application:
+Once the Knative Serving application was deployed to the Kubernetes cluster, you can test it. For that you need to receive the actual URL for the service of the WebSocket application:
 
 ```bash
 kubectl get ksvc
@@ -160,7 +160,7 @@ Afterward you can chat with the WebSocket server like:
 ```>
 ```
 
-The above is scaling to exactly one pod, since only one client was connected. Since Knative Serving allows you a dynamic scalling, a certain number of concurrent connections lead to a number of pods.
+The above is scaling to exactly one pod, since only one client was connected. Since Knative Serving allows you a dynamic scaling, a certain number of concurrent connections lead to a number of pods.
 
 Below is an example of a scaled out application when running a larger number of concurrent requests against it:
 
