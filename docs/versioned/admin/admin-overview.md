@@ -61,10 +61,6 @@ The following table summarizes the options.
 
 Knative supports subsequent installs after the initial installation, you so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
 
-## Defining and modifying custom resources
-
-Either before or after the installing Knative Eventing and Serving components, you can create and modify custom resources and reinstall components as needed. You do so by creating or modifying a ConfigMap using a custom resource definition (CRD). For more information, see [Knative Serving CRDs](/install/operator/configuring-serving-cr.md) and [Knative Eventing CRDs](/install/operator/configuring-eventing-cr.md).
-
 ## Plugins
 
 A Knative installation includes the following plugins:
