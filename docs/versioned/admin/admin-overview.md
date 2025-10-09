@@ -20,7 +20,7 @@ Knative has three components, Eventing, Serving, and Functions. Severing and Eve
 
 Serving and Eventing support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes, and Eventing supports pods with pluggable message transports (e.g. Kafka, RabbitMQ).
 
-Knative has default lightweight implementations if you don't already have a solution.
+Knative has default lightweight messaging implementation if you don't already have a solution.
 
 ## Installing Knative
 
