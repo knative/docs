@@ -38,7 +38,7 @@ git clone https://github.com/knative/docs.git
 
 ![Image](images/image21.png)
 
-The code for the sample app is in `docs/versioned/code-samples/eventing/bookstore-sample-app`
+The code for the sample app is in `docs/code-samples/eventing/bookstore-sample-app`
 
 Under `bookstore-sample-app` folder, there are 2 folders:
 
@@ -62,7 +62,7 @@ All the commands in the tutorial are written **assuming you are in the `/start` 
 
 ![Image](images/image10.png)
 
-Running `docs/versioned/code-samples/eventing/bookstore-sample-app/start/setup.sh` will automatically complete all tasks in this section.
+Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will automatically complete all tasks in this section.
 
 !!! warning
 
@@ -127,7 +127,7 @@ minikube tunnel
 
 ![Image](images/image12.png)
 
-The Next.js frontend app is located in the `docs/versioned/code-samples/eventing/bookstore-sample-app/start/frontend` folder.
+The Next.js frontend app is located in the `docs/code-samples/eventing/bookstore-sample-app/start/frontend` folder.
 
 Ensure that port 3000 on your local machine is not being used by another application.
 
