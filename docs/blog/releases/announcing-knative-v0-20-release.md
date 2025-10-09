@@ -118,7 +118,7 @@ kn service create myservice --image gcr.io/myproject/myservice:latest --target s
 
 The `--scale` option for `kn service create` and `kn service update` allows now also ranges as values:
 - `--scale 1..5` : Scale down to a minimal 1 replica and up to 5 replicas
-- `--scale 1.. ` : Set scale-min to to 1 but leave scale-max untouched (when used for a service update)
+- `--scale 1.. ` : Set scale-min to 1 but leave scale-max untouched (when used for a service update)
 - `--scale ..5 ` : Set scale-max to 5 but leave scale-min untouched (when used for a service update)
 - `--scale 5..5` : Set scale-min and scale-max both to 5 (same as `--scale 5`)
 

@@ -24,7 +24,7 @@ The Route reconciler will create the `Ingress` resource that will be picked up b
 
 Now, the creation of the PA triggers the KPA reconciler, which goes through certain steps to set up an autoscaling configuration for the revision:
 
-- creates an internal Decider resource that holds the initial desired scale in `decider.Status.DesiredScale`and
+- creates an internal Decider resource that holds the initial desired scale in `decider.Status.DesiredScale` and
   sets up a pod scaler via the multi-scaler component. The pod scaler calculates a new Scale result every two seconds and makes a decision based on the condition whether the desired scale isn't equal to the pod count. If it is not, it will trigger a new reconciliation for the KPA reconciler. The goal is the KPA to get the latest scale result.
 
 - creates a Metric resource that triggers the metrics collector controller to set up a scraper for the revision pods.

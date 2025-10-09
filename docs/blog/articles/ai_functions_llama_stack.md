@@ -35,7 +35,7 @@ For local development it is recommended to enable port-forwarding for the Llama 
 kubectl port-forward service/llamastackdistribution-sample-service 8321:8321 
 ```
 
-Now your scripts can access it via `locahost:8321`:
+Now your scripts can access it via `localhost:8321`:
 
 ```shell
 http localhost:8321/v1/version

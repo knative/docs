@@ -51,7 +51,7 @@ Regardless of why you choose to participate in an open source project or communi
 
 2. The opportunity to get to know different technologies and be on the bleeding edge of innovation. Many innovations start in open source projects.
 
-3. You will be able to see your contributions impactins a large project with potentially very many users (for example one of the Knative repos has around 10M downloads), which can
+3. You will be able to see your contributions impacting a large project with potentially very many users (for example one of the Knative repos has around 10M downloads), which can
 feel very rewarding.
 
 With that being said, the fact that you are reading this means that you likely already want to participate in an open source project (hopefully **Knative**!), so let's dive into some
@@ -121,7 +121,7 @@ use them). This flow can be seen in the diagram below.
 
 ![Flowchart of opening an issue or a PR to contribute](../images/getting-started-blog-series/post1/open-source-workflow.png)
 
-Now, if you are not familiar with this process, it probably feels very confusing. So, to demistify it further, let's break down each part and discuss them in detail.
+Now, if you are not familiar with this process, it probably feels very confusing. So, to demystify it further, let's break down each part and discuss them in detail.
 
 ### Propose a Change
 
@@ -218,7 +218,7 @@ In both cases, you will want to go through the basic flow to create a PR or MR. 
 If you are using GitLab and are unsure of how to do this, you can follow the instructions [here](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#merge-changes-back-upstream){:target="_blank"}.
 
 When creating your PR/MR it is important to provide the context of why you are making the changes, what you changes, and how people can test your changes. It is good practice to 
-include a link to the issue the PR/MR is addressing, and to give a bried description of the changes you made. Additionally, your PR/MR should have a brief and descriptive title
+include a link to the issue the PR/MR is addressing, and to give a brief description of the changes you made. Additionally, your PR/MR should have a brief and descriptive title
 to make it clearer to reviewers what it contains.
 
 If your changes are incomplete, you will want to mark the PR/MR as a __draft__, to indicate to reviewers that your work is not complete. Instructions for GitHub are 

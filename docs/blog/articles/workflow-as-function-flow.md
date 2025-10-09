@@ -10,7 +10,7 @@ and various broker implementations that provide different characteristics from e
 
 At the same time, workflows in various formats have been seen as a good way to express business logic that enables understanding of the big picture. Combining both workflows and Knative Eventing is the main topic of this article.
 
-## Worfklow as a function flow
+## Workflow as a function flow
 
 Workflows date from the Service Oriented Architecture (SOA) times, when standards such as BPEL and then BPMN were introduced. Various vendors started to build platforms that were built around the workflow concepts, often called Process Management Suites or Business Process Management (BPM).
 
