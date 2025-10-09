@@ -111,4 +111,4 @@ It is important to note that the `KafkaSink` stores incoming CloudEvents as Kafk
 
 ### Outlook
 
-The messages stored in the Kafka topic backed by the Knative `KafkaSink` component can be easily consunmed by any consumer application in the larger ecosystem of the Apache Kafka community. The next post in this article will show how to use the Knative Broker implementation for Apache Kafka to store incoming events and make use of the Knative Eventing tools for routing based on CloudEvents metadata as this filtering feature is not directly build into Apache Kafka itself.
+The messages stored in the Kafka topic backed by the Knative `KafkaSink` component can be easily consumed by any consumer application in the larger ecosystem of the Apache Kafka community. The next post in this article will show how to use the Knative Broker implementation for Apache Kafka to store incoming events and make use of the Knative Eventing tools for routing based on CloudEvents metadata as this filtering feature is not directly build into Apache Kafka itself.

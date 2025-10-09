@@ -99,7 +99,7 @@ Based on this generated service, you can build [an image](https://docs.jboss.org
 
 The Kogito Operator creates a Knative [Trigger](https://knative.dev/docs/eventing/triggers/) resource, that links the service and the broker together. In this example, it will filter events of type `new.patients.events`. This means that every time a new event of this type comes to the broker, it will be redirected to the Kogito service.
 
-The same concept also applies to [events produced by the workflow engine](https://docs.jboss.org/kogito/release/latest/html_single/#con-knative-eventing_kogito-developing-process-services). In this case, the operator will create a Knative [SinkBinding](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/) resource, and will bind it to the Knative broker. Each time an event is produced by the service, a CloudEvent representing it will be sent to the broker. The image below ilustrates the implementation detail of a Kogito service emitting events to the Knative broker via SinkBinding.
+The same concept also applies to [events produced by the workflow engine](https://docs.jboss.org/kogito/release/latest/html_single/#con-knative-eventing_kogito-developing-process-services). In this case, the operator will create a Knative [SinkBinding](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/) resource, and will bind it to the Knative broker. Each time an event is produced by the service, a CloudEvent representing it will be sent to the broker. The image below illustrates the implementation detail of a Kogito service emitting events to the Knative broker via SinkBinding.
 
 ![Knative and Kogito integration](images/kogito-knative-impl-producing-event.png)
 *Knative Eventing and Kogito service event producers*
@@ -120,6 +120,6 @@ To understand more about Knative Eventing and how the platform can help you crea
 
 ## About the Authors
 
-Ricardo Zanini is a Software Engineer currently working on Kogito Community project. Has has been working in the field of software engineering since 2000. He is a maintainer of the CNCF Serverless Workflow Specification.
+Ricardo Zanini is a Software Engineer currently working on Kogito Community project. He has been working in the field of software engineering since 2000. He is a maintainer of the CNCF Serverless Workflow Specification.
 
 Tihomir Surdilovic is a Software Developer at Red Hat working on business automation. He has been involved in business automation and open source since 2008. He also serves as an active lead of the CNCF Serverless Workflow Specification.

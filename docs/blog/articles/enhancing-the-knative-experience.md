@@ -68,4 +68,4 @@ Looking forward, the next steps involve implementing and evaluating the recommen
 
 ## Conclusion
 
-Overall, this project has been rewarding and some signicant insights have emerged from it. Sincere thanks are extended to all who contributed to this research. Implementing these recommendations within the existing ecosystem is an exciting prospect. It is firmly believed that by executing these actionable recommendations, the developer experience for everyone involved in Knative can be enhanced, and the bonds that unite the community can be strengthened!
+Overall, this project has been rewarding and some significant insights have emerged from it. Sincere thanks are extended to all who contributed to this research. Implementing these recommendations within the existing ecosystem is an exciting prospect. It is firmly believed that by executing these actionable recommendations, the developer experience for everyone involved in Knative can be enhanced, and the bonds that unite the community can be strengthened!

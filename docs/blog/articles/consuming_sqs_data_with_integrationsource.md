@@ -2,11 +2,11 @@
 
 **Author: Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-_In a [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we discussed the consumption of notifications from an AWS S3 bucket using Apache Camel K. While this is a good approach for getting data from cloud providers, like AWS, into Knative, the Knative Eventing team is aiming to integrate this at the core of its offering with a new CRD, the `IntegrationSource`. This post will describe howto receive SQS notifications and forward them to a regular Knative Broker for further processing._
+_In a [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we discussed the consumption of notifications from an AWS S3 bucket using Apache Camel K. While this is a good approach for getting data from cloud providers, like AWS, into Knative, the Knative Eventing team is aiming to integrate this at the core of its offering with a new CRD, the `IntegrationSource`. This post will describe how to receive SQS notifications and forward them to a regular Knative Broker for further processing._
 
 ## Installation
 
-The `IntegrationSource` will be part of Knative Eventing in a future release. Currently it is under development but already included in the `main` branch. For installing Knative Eventing from the sources you can follow the [develpoment guide](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md){:target="_blank"}.
+The `IntegrationSource` will be part of Knative Eventing in a future release. Currently it is under development but already included in the `main` branch. For installing Knative Eventing from the sources you can follow the [development guide](https://github.com/knative/eventing/blob/main/DEVELOPMENT.md){:target="_blank"}.
 
 !!! note
 
