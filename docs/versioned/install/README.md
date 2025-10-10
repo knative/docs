@@ -8,19 +8,34 @@ function: reference
 
 # Installing Knative
 
+This page provides guidance for administrators on how to install Knative on an existing Kubernetes cluster. Knative consists of the Serving and Eventing components and the CLI client tools `kn` and `func`. The installation assumes you are familiar with the following:
+
+- Kubernetes and Kubernetes administration.
+- The `kubectl` CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
+- Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative.
+- Using cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC)
+
+To simplify Knative installation and administration, you can use the Knative Operator and the Knative CLI tool, but they are not required. Essentially, Knative aims to extend Kubernetes, and build on existing capabilities where feasible.
+
+Knative has three components, Eventing, Serving, and Functions. Serving and Eventing are installed into clusters, but not Functions. Functions does not require installation as it is operated by using the client `func` CLI tool.
+
+Serving and Eventing support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes, and Eventing supports pods with pluggable message transports (e.g. Kafka, RabbitMQ).
+
+Knative has default lightweight messaging implementation if you don't already have a solution. Knative also has a default lightweight HTTP routing implementation (kourier) if you don't already have an ingress that meets the requirements.
+
 There are three installation methods to install Knative:
 
 - A quickstart experience on a local computer only by using a preconfigured extension.
 - A YAML installation suitable for production use.
 - A Knative Operator installation suitable for production use. For details, see [Installing with the Knative Operator](#installing-with-the-knative-operator)
 
-Along with core components, a Knative installation is composed of the Serving and Eventing components. The quickstart implements both. The YAML and Knative Operator installations provide options to install either or both.
+Knative provides two CLI tools: `kn` for installing and administering Knative, and `func` for developing functions for Knative apps and services.
 
 Supported platforms are Linux, MacOS, and Windows.
 
 ## Installation roadmap
 
-Use the following table to evaluate your installation method.
+Use the following table to evaluate your installation method. If you just want to get an understanding of Knative functionality at this time, install the quickstart.
 
 |  | Quickstart | YAML | Knative Operator |
 | --- | --- | --- | --- |
@@ -57,7 +72,7 @@ For a list of commercial Knative products, see [Knative offerings](knative-offer
 
 ## Installing with the Knative Operator
 
-You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying the content, along with patching the contents to customize them. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Yelm.
+You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying the content, along with patching the contents to customize them. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Helm.
 
 Here are the considerations for installing using YAML or the Knative Operator:
 
@@ -74,7 +89,7 @@ You can install Knative in the following ways:
 
     This option is the most useful if you're using delivery solutions such as Flux or ArgoCD to apply manifests checked into a Git repository. This is the lowest common denominator approach, giving you granular control of the process and resource definitions.
 
-- Install the [Knative Operator](/install/operator/knative-with-operators.md) using Manifests or Yelm, and then use `kubectl` to install Knative components.
+- Install the [Knative Operator](/install/operator/knative-with-operators.md) using Manifests or Helm, and then use `kubectl` to install Knative components.
 
     This option alleviates complexity by using the Knative Operator, while still enabling purpose-built manageability using popular tools. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make.
 
@@ -87,28 +102,36 @@ The following table summarizes the options.
 | Install option | Resources | kubectl CLI | kn CLI |
 | --- | --- | --- | --- |
 | YAML-based | All YAML prepared | Install components | not used |
-| Knative Operator | Install Knative Operator using Manifests or Yelm |Install components | not used |
+| Knative Operator | Install Knative Operator using Manifests or Helm |Install components | not used |
 | Knative Operator | Install Knative Operator CLI plugin | not used | Install components |
 
 Knative supports subsequent installs after the initial installation, you so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
 
-## Plugins
+## Plugins and extensions
 
-A Knative installation includes the following plugins:
+Knative utilizes existing infrastructure already have installed on your cluster, while standardizing the developer-facing interface between similar components. A Knative installation includes the following resources to accommodate the cluster infrastructure. They are installed internally either with the Serving or Eventing components.
 
 Networking plugins
 
-- Kourier (internal no-dependency option)
-- Istio (service mesh)
-- Courier (general-purpose ingress)
-- Gateway API (beta)
+- Kourier
+    Data management from [Kore Technologies](https://koretech.com) with has a internal no-dependency option.
+- Istio
+    Service mesh from [Istio](https://istio.io).
+- Courier
+    General-purpose ingress.
+- Gateway API
+    Kubernetes [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) (beta)
 
 Messaging plugins
 
-- In-memory (internal no-dependency option)
-- Kafka (in-order, high-thoughput but moderate complexity)
-- RabbitMQ (configurable order, moderate throughput and complexity)
-- NATS (low complexity)
+- In-memory
+    Internal no-dependency option.
+- Kafka
+    Distributed event streaming platform from [Apache Kafka](https://kafka.apache.org). In-order, high-thoughput but moderate complexity.
+- RabbitMQ
+    A messaging and streaming broker from [RabbitMQ](https://www.rabbitmq.com). In-order, moderate throughput and complexity.
+- NATS
+    An event streaming platform from [NATS](https://nats.io). Low complexity.
 
 ## Installation resources
 

@@ -7,17 +7,13 @@ function: reference
 ---
 # Overview
 
-This page provides guidance for administrators on how to install and manage Knative on an existing Kubernetes cluster. It assumes you are familiar with the following:
+This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster.
 
-- Kubernetes and Kubernetes administration.
-- The `kubectl` CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
-- Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative.
-- You should have cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC)
+## The Knative model
 
-To simplify Knative installation and administration, you can use the Knative operator and the Knative CLI tool, but they are not required. Essentially, Knative aims to extend Kubernetes, and build on existing capabilities where feasible.
+Each application or developer team is assigned a namespace. Developers generally have the ability to create / edit resources within that namespace.
 
-Knative has three components, Eventing, Serving, and Functions. Severing and Eventing are installed into clusters, but not Functions. Functions does not require installation.
+Namespaces should generally act as independent units. This can be enforced with tools like RBAC, quota, and policy.
+Without substantial Kubernetes planning, namespaces are a soft isolation boundary between teams. See the threat model for more details about security between users on the same cluster.
 
-Serving and Eventing support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes, and Eventing supports pods with pluggable message transports (e.g. Kafka, RabbitMQ).
-
-Knative has default lightweight messaging implementation if you don't already have a solution.
+Developers often need access to additional resources related to their namespace in other services, such as observability (logs, metrics, tracing) and dashboards (e.g. Grafana / Backstage). It's expected that the administrator will provision this access alongside creating the namespace and assigning permissions.
