@@ -123,9 +123,9 @@ Networking plugins:
 Messaging plugins:
 
 - Kafka
-    Distributed event streaming platform from [Apache Kafka](https://kafka.apache.org). In-order, high-thoughput but moderate complexity. See [Install Kafka for Knative]("kafka-install.md").
+    Distributed event streaming platform from [Apache Kafka](https://kafka.apache.org). In-order, high-thoughput but moderate complexity. See [Install Kafka for Knative](/install/eventing/kafka-install.md).
 - RabbitMQ
-    A messaging and streaming broker from [RabbitMQ](https://www.rabbitmq.com). In-order, moderate throughput and complexity. See [Install RabbitMQ for Knative](rabbitmq.install.md)
+    A messaging and streaming broker from [RabbitMQ](https://www.rabbitmq.com). In-order, moderate throughput and complexity. See [Install RabbitMQ for Knative](/install/eventing/rabbitmq-install.md)
 - NATS
     An event streaming platform from [NATS](https://nats.io). Low complexity.
 
@@ -136,9 +136,9 @@ Knative has an in-memory and internal no-dependency messaging option.
 These plugins facilitate Knative operations.
 
 - cert-manager
-    For requesting TLS certificates in secure HTTPS connections, [Install cert-manager](installing-cert-manager.md).
+    For requesting TLS certificates in secure HTTPS connections, see [Install cert-manager](/install/installing-cert-manager.md).
 - Backstage
-    Plugins for handling Knative backends. [See Installing backstage plugins](installing-backstage-plugins.md)
+    Plugins for handling Knative backends. See [Installing backstage plugins](/install/installing-backstage-plugins.md).
 
 ## Installation resources
 
