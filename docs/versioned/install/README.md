@@ -35,8 +35,8 @@ Install using all YAML files. This option is the most useful if you're using Git
 
   1. Install the [CLI Tools](../client/install-kn.md).
   1. Install either or both:
-       - Install [Knative Serving](yaml-install/serving/install-serving-with-yaml.md).
-       - Install [Knative Eventing](yaml-install/eventing/install-eventing-with-yaml.md).
+       - Install [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md).
+       - Install [Knative Eventing](../install/yaml-install/eventing/install-eventing-with-yaml.md).
 
 **Knative Operator**:
 
@@ -44,12 +44,12 @@ Install using the Knative Operator as installed with Manifests or Helm, or insta
 
   1. Install the [CLI Tools](../client/install-kn.md) including the Knative Operator CLI plugin.
   1. Install using the Knative Operator, and with it the Serving and Eventing components, by either of the following:
-       - The [Knative Operator](./operator/knative-with-operators.md) using K8S Manifests or via Helm.
-       - The [Knative Operator CLI](./operator/knative-with-operator-cli.md).
+       - The [Knative Operator](../install/operator/knative-with-operators.md) using K8S Manifests or via Helm.
+       - The [Knative Operator CLI](../install/operator/knative-with-operator-cli.md).
 
 All installations require a supported Kubernetes version. System requirements provided are recommendations only. The requirements for your installation m may, depending on whether you use optional components, such as a networking layer.
 
-For a list of commercial Knative products, see [Knative offerings](knative-offerings.md).
+For a list of commercial Knative products, see [Knative offerings](../install/knative-offerings.md).
 
 ## Installation assumptions and options
 
@@ -105,9 +105,9 @@ Networking plugins:
 Messaging plugins:
 
 - Kafka
-    Distributed event streaming platform from [Apache Kafka](https://kafka.apache.org). In-order, high-thoughput but moderate complexity. See [Install Kafka for Knative](../eventing/kafka-install.md).
+    Distributed event streaming platform from [Apache Kafka](https://kafka.apache.org). In-order, high-thoughput but moderate complexity. See [Install Kafka for Knative](../install/eventing/kafka-install.md).
 - RabbitMQ
-    A messaging and streaming broker from [RabbitMQ](https://www.rabbitmq.com). In-order, moderate throughput and complexity. See [Install RabbitMQ for Knative](../eventing/rabbitmq-install.md)
+    A messaging and streaming broker from [RabbitMQ](https://www.rabbitmq.com). In-order, moderate throughput and complexity. See [Install RabbitMQ for Knative](../install/eventing/rabbitmq-install.md)
 - NATS
     An event streaming platform from [NATS](https://nats.io). Low complexity.
 
@@ -120,13 +120,13 @@ These plugins facilitate Knative operations.
 - cert-manager
     For requesting TLS certificates in secure HTTPS connections, see [Install cert-manager](../install/installing-cert-manager.md).
 - Backstage
-    Plugins for handling Knative backends. See [Installing backstage plugins](installing-backstage-plugins.md).
+    Plugins for handling Knative backends. See [Installing backstage plugins](../install/installing-backstage-plugins.md).
 
 ## Installation resources
 
 Use the following links to maintain your installations.
 
-- [Upgrading Knative](upgrade/README.md)
-- [Uninstall Knative](uninstall.md)
-- [Check Knative version](upgrade/check-install-version.md)
-- [Troubleshoot Knative installations](troubleshooting.md)
+- [Upgrading Knative](../install/upgrade/README.md)
+- [Uninstall Knative](../install/uninstall.md)
+- [Check Knative version](../install/upgrade/upgrade/check-install-version.md)
+- [Troubleshoot Knative installations](../install/troubleshooting.md)
