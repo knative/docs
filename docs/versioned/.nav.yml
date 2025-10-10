@@ -233,7 +233,7 @@ nav:
     # Administration
 ###############################################################################
     - Administration:
-      - Overview: README.md
+      - Overview: administer/README.md
       - Installing Knative:
         - Overview: install/README.md
         # YAML Installation
