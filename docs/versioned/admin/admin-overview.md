@@ -11,13 +11,13 @@ This page provides guidance for administrators on how to manage Knative on an ex
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
 
-Knative includes a plugin system to interoperate with existing cluster infrastructure, enabling Knative resources (such as Routes and Brokers) to be implemented using multiple underlying suppliers. For example, Knative Eventing applications can deliver events to a broker and then trigger a function based on the received event. If the broker type is not explicitly specified, a testing cluster could use an in-memory option while a staging or production environment might used a cloud-provided Kafka service.
+Knative includes a plugin system to interoperate with existing cluster infrastructure, enabling Knative resources, such as Routes and Brokers, to be implemented using multiple underlying suppliers. For example, Knative Eventing applications can deliver events to a broker and then trigger a function based on the received event. If the broker type is not explicitly specified, a testing cluster could use an in-memory option while a staging or production environment might use a cloud-provided Kafka service.
 
-Of particular interest to cluster administrators is that Knative supports customizable _default values_ on resource parameter values. These configurations reduce the amount of environment configuration tasks developers needs to consider.
+Of particular interest to cluster administrators is that Knative supports customizable _default values_ on the parameters defined in resource YAML files. These configurations reduce the amount of environment configuration tasks developers needs to consider.
 
 ## Knative installations
 
-See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative operator. If you just need to get acquainted with Knative at this time, you can install the quickstart.
+See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. If you just need to get acquainted with Knative at this time, you can install the quickstart.
 
 ## Configuring Knative
 
@@ -27,11 +27,9 @@ Knative uses Kubernetes-style YAML manifests to define and configure system comp
 
 Knative resources are associated with namespaces. Knative adheres to the Kubernetes model of namespace-based isolation, enabling you to control the following:
 
-- Development teams by assigning developers to teams defined by namespaces.
-- The capabilities applications have by referencing the a namespace.
-- Exclude specific actions in a namespace.
-
-therefore you should define namespaces to enable development teams to work independently and manage resources autonomously within their assigned and dedicated namespaces. Namespaces provide this control in the following ways:
+- Development teams and resources by assigning developers to teams defined by namespaces.
+- The capabilities applications have by referencing a namespace.
+- Exclude webhooks from using a namespace, useful for apps in development.
 
 Namespaces can also isolate boundaries for tooling such as logs, metrics, tracing, CI/CD integrations, and dashboards. The extent of this isolation depends on both the enforcement strategy and how consistently teams adhere to namespace boundaries.
 
@@ -60,10 +58,6 @@ Knative configurations are performed by the following methods:
 - Using the Knative Operator
 
     Some platform-wide settings can be managed declaratively using the Knative Operator.
-
-- Programmatic configuration
-
-    For advanced use cases, Knative resources and configurations are managed programmatically such as by using the Go programming language.
 
 > [!NOTE]
 > Ensure consistency in configuration management by version-controlling your YAML files and aligning with GitOps best practices where possible.
