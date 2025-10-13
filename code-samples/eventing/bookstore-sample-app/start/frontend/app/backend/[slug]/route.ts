@@ -1,11 +1,58 @@
 import {WebSocket, WebSocketServer} from 'ws';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export function GET() {
-  const headers = new Headers();
-  headers.set('Connection', 'Upgrade');
-  headers.set('Upgrade', 'websocket');
-  return new Response('Upgrade Required', { status: 426, headers });
+
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params // 'a', 'b', or 'c'
+  return proxyRequest(req, slug);
+}
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params // 'a', 'b', or 'c'
+  return proxyRequest(req, slug);
+}
+
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params // 'a', 'b', or 'c'
+  return proxyRequest(req, slug);
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params // 'a', 'b', or 'c'
+  return proxyRequest(req, slug);
+}
+
+async function proxyRequest(req: NextRequest, slug: string) {
+  const BACKEND_URL = (process.env.BACKEND_URL || `http://node-server-svc.${process.env.POD_NAMESPACE}.svc.cluster.local`) + '/' + slug;
+
+  const backendResponse = await fetch(BACKEND_URL, {
+    method: req.method,
+    headers: {
+      ...Object.fromEntries(req.headers),
+      host: new URL(BACKEND_URL).host,
+    },
+    body: req.body ? req.body : undefined,
+    duplex: "half",
+  } as any);
+
+  // Clone the response and return it
+  const data = await backendResponse.arrayBuffer();
+  return new NextResponse(data, {
+    status: backendResponse.status,
+    headers: backendResponse.headers,
+  });
 }
 
 export function UPGRADE(

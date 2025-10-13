@@ -23,7 +23,7 @@ FROM node:lts-alpine AS runner
 WORKDIR /app
 
 # Set environment variables for production
-ENV NODE_ENV production
+ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Automatically leverage output traces to reduce image size
