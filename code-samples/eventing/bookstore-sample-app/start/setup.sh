@@ -70,7 +70,7 @@ fi
 
 # Prompt the user to check the frontend
 echo ""
-echo "✅ The frontend is now installed. Please visit http://$FRONTEND_IP:3000 to view the bookstore frontend."
+echo "✅ The frontend is now installed. Please visit http://$FRONTEND_IP to view the bookstore frontend."
 read -p '🛑 Can you see the front end page? If yes, press ENTER to continue...'
 
 # Install the backend
@@ -95,7 +95,7 @@ fi
 
 # Prompt the user to check the backend
 echo ""
-echo "✅ The node-server is now installed. Please visit http://$NODE_SERVER_IP:80 to view the bookstore node-server."
+echo "✅ The node-server is now installed. Please visit http://$NODE_SERVER_IP to view the bookstore node-server."
 read -p '🛑 Can you see "Hello World!"? If yes, press ENTER to continue...'
 
 # The setup is now complete

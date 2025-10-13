@@ -19,7 +19,7 @@ spec:
           image: dprotaso/bookstore-frontend:latest
           # image: ghcr.io/knative/bookstore-frontend:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
           env:
           - name: POD_NAMESPACE
             valueFrom:
@@ -33,7 +33,8 @@ metadata:
   name: bookstore-frontend-svc
 spec:
   ports:
-    - port: 3000
+    - port: 80
+      targetPort: 8080
   selector:
     app: bookstore-frontend
   type: LoadBalancer
