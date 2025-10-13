@@ -24,14 +24,6 @@ A Knative installation assumes you, as a Kubernetes administrator, are familiar 
 - Using cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC).
 - Familiarity with Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative, is recommended.
 
-The following table summarizes installation options in regard to the CLI tools.
-
-| Install option | Resources | kubectl CLI | kn CLI |
-| --- | --- | --- | --- |
-| YAML-based | All YAML prepared | Install components | not used |
-| Knative Operator |  |Install components | not used |
-| Knative Operator | Install Knative Operator CLI plugin | not used | Install components |
-
 ### YAML and Knative Operator installations compared
 
 You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying the content, along with patching the contents to customize them. This option alleviates complexity by using the Knative Operator and is compatible with a GitOps approach. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Helm.
