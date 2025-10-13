@@ -15,8 +15,8 @@ In this page, we will be discussing how to set up your environment, and make sur
 ## **What does the final deliverable for this section look like?**
 
 - You have a running Kubernetes (k8s) cluster on your local machine, with Knative installed.
-- You have your front end application deployed as Kubernetes deployment with port-forwarding to localhost:3000
-- You have your Node.js application deployed as Kubernetes deployment with port-forwarding to localhost:8080
+- You have your front end application deployed as Kubernetes deployment
+- You have your Node.js application deployed as Kubernetes deployment
 
 We will be fulfilling each requirement with the order above.
 
@@ -74,6 +74,8 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ![Image](images/image13.png)
 
+Install [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/docs/user/quick-start/) or [minikube](https://minikube.sigs.k8s.io/docs/) to enable you to run a Kubernetes cluster locally.
+
 !!! tip
 
     We recommend you using `kn quickstart` plugin to install Knative.
@@ -123,13 +125,17 @@ minikube tunnel
 ???+ success "Verify"
     If there aren't any error messages, it means you have set up the tunnel successfully.
 
+#### **Extra Step for KinD Users:**
+
+Cloud Provider KinD runs as a standalone binary in your host and connects to your KIND cluster and provisions new Load Balancer containers for your Services. It requires privileges to open ports on the system and to connect to the container runtime.
+
+See instructions here: https://kind.sigs.k8s.io/docs/user/loadbalancer/
+
 ### **Task 2: Running the Bookstore Web App**
 
 ![Image](images/image12.png)
 
 The Next.js frontend app is located in the `docs/code-samples/eventing/bookstore-sample-app/start/frontend` folder.
-
-Ensure that port 3000 on your local machine is not being used by another application.
 
 #### **Deploy the Frontend App**
 
@@ -162,15 +168,12 @@ service/bookstore-frontend-svc created
     bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          4m37s
     ```
 
+#### Access the frontend workload
+
+Follow the respective `minikube` or `kind` instructions to access Kubernetes Services locally from your machine.
 
 
-#### **Port Forwarding (Optional under condition)**
-
-![Image](images/image9.png)
-
-You might need to set up port forwarding to access the app from your local machine.
-
-Check if port forwarding is necessary by running:
+Check the running Kubernetes Services:
 
 ```shell
 kubectl get services
@@ -179,34 +182,16 @@ kubectl get services
 And you will see the following console output:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-bookstore-frontend-svc   LoadBalancer   10.99.187.173   <pending>     3000:31600/TCP   27m
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    3000:31600/TCP   27m
 kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          39m
 ```
 
-
-
 !!! note
-    If the `EXTERNAL-IP` for your frontend service is `127.0.0.1`, port forwarding is not needed.
-
-If port forwarding is required, run the following command:
-
-```shell
-kubectl port-forward svc/bookstore-frontend-svc 3000:3000
-```
-
-You should see the following output:
-
-```
-Forwarding from 127.0.0.1:3000 -> 3000
-Forwarding from [::1]:3000 -> 3000
-```
-
-
-**Don't close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
+    If the `EXTERNAL-IP` for your frontend service is `<pending>`, then there you'll need to check that
+    your `minikube tunnel` or KinD `cloud-provider-kind` is working properly.
 
 ???+ success "Verify"
-
-    Visit [http://localhost:3000](http://localhost:3000){:target="_blank"} in your browser. The UI page should appear!
+    Access the UI page using the `bookstore-frontend-svc` `EXTERNAL-IP` address. The UI page should appear!
 
     ![Image](images/image19.png)
 
@@ -253,13 +238,11 @@ service/node-server-svc created
     ```
 
 
-#### **Port Forwarding (optional under condition)**
+#### Access the node server backend
 
-![Image](images/image9.png)
+Follow the respective `minikube` or `kind` instructions to access Kubernetes Services locally from your machine.
 
-You might need to set up port forwarding to access the app from your local machine.
-
-Check if port forwarding is necessary by running:
+Check the running Kubernetes Services:
 
 ```shell
 kubectl get services
@@ -267,30 +250,17 @@ kubectl get services
 And you will see the following console output:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-bookstore-frontend-svc   LoadBalancer   10.99.187.173   <pending>     3000:31600/TCP   73m
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    3000:31600/TCP   73m
 kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          85m
-node-server-svc          LoadBalancer   10.101.90.35    <pending>     80:31792/TCP     73m
+node-server-svc          LoadBalancer   10.101.90.35    172.18.0.8    80:31792/TCP     73m
 ```
 
 !!! note
-    If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed. If you failed to visit the page `localhost:8080`, you can try to set up port forwarding.
-
-If port forwarding is required, open a new terminal and run:
-
-```shell
-kubectl port-forward svc/node-server-svc 8080:80
-```
-You should see the following output:
-
-```
-Forwarding from 127.0.0.1:8080 > 8000
-Forwarding from [::1]:8080 > 8000
-```
-
-**Don't close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
-
+    If the `EXTERNAL-IP` for your frontend service is `<pending>`, then there you'll need to check that
+    your `minikube tunnel` or KinD `cloud-provider-kind` is working properly.
 
 ???+ success "Verify"
+    Access the node server page using the `node-server-svc` `EXTERNAL-IP` address. The UI page should appear!
 
     Visit [http://localhost:8080](http://localhost:8080){:target="_blank"} in your browser. The Node.js service should be up and running.
 
