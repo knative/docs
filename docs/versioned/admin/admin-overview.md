@@ -17,23 +17,25 @@ Of particular interest to cluster administrators is that Knative supports custom
 
 ## Knative installations
 
-See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative operator. 
+See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative operator. If you just need to get acquainted with Knative at this time, you can install the quickstart.
 
 ## Configuring Knative
 
-Knative uses Kubernetes-style YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and managed through `kubectl`.
+Knative uses Kubernetes-style YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and managed using the `kubectl` CLI tool.
 
 ### Resource scoping and namespaces
 
-Knative resources are associated with namespaces. Knative adheres to the Kubernetes model of namespace-based isolation, therefore you should define namespaces to enable development teams to work independently and manage resources autonomously within their assigned and dedicated namespaces. Namespaces provide this control in the following ways:
+Knative resources are associated with namespaces. Knative adheres to the Kubernetes model of namespace-based isolation, enabling you to control the following:
 
-- Monitor and manage development by assigning developers to teams defined by namespaces.
-- Configure applications and resources to be built or operate referencing specified namespaces.
-- Managing Knative behavior by applying access control on namespaces.
+- Development teams by assigning developers to teams defined by namespaces.
+- The capabilities applications have by referencing the a namespace.
+- Exclude specific actions in a namespace.
+
+therefore you should define namespaces to enable development teams to work independently and manage resources autonomously within their assigned and dedicated namespaces. Namespaces provide this control in the following ways:
 
 Namespaces can also isolate boundaries for tooling such as logs, metrics, tracing, CI/CD integrations, and dashboards. The extent of this isolation depends on both the enforcement strategy and how consistently teams adhere to namespace boundaries.
 
-You can optimize and enforce isolation using standard Kubernetes mechanisms, including:
+You can optimize and enforce isolation involving namespaces using standard Kubernetes mechanisms, including:
 
 - Role-Based Access Control (RBAC)
 - Resource quotas
@@ -44,19 +46,24 @@ You can optimize and enforce isolation using standard Kubernetes mechanisms, inc
 Knative configurations are performed by the following methods:
 
 - Editing YAML manifests
-  Modify resource definitions directly, including labels, annotations, and field values.
+
+    Modify resource definitions directly, including labels, annotations, and field values.
 
 - Using ConfigMaps
-  Store and manage configuration data as key-value pairs. ConfigMaps are frequently used to tune platform-wide behavior. Most of the Knative ConfigMaps are in the `knative-serving` or `knative-eventing` namespace, and apply their settings to all the relevant Knative components in all namespaces.
+
+    Store and manage configuration data as key-value pairs. ConfigMaps are frequently used to tune platform-wide behavior. Most of the Knative ConfigMaps are in the `knative-serving` or `knative-eventing` namespace, and apply their settings to all the relevant Knative components in all namespaces.
 
 - Applying resources with `kubectl`
-  Apply updated manifests to the cluster using standard Kubernetes workflows.
+
+    Apply updated manifests to the cluster using standard Kubernetes workflows.
 
 - Using the Knative Operator
-  Some platform-wide settings can be managed declaratively using the Knative Operator.
+
+    Some platform-wide settings can be managed declaratively using the Knative Operator.
 
 - Programmatic configuration
-  For advanced use cases, Knative resources and configurations are managed programmatically such as by using the Go programming language.
+
+    For advanced use cases, Knative resources and configurations are managed programmatically such as by using the Go programming language.
 
 > [!NOTE]
 > Ensure consistency in configuration management by version-controlling your YAML files and aligning with GitOps best practices where possible.
@@ -100,14 +107,14 @@ Configurations for extensions:
 - [Kafka Broker features](../serving/encryption/system-internal-tls.md)
 - [Sugar Controller](../eventing/configuration/sugar-configuration.md)
 
-Configurations for flag features:
+Configurations for flagging features:
 
 - [Serving features](../serving/configuration/feature-flags.md)
 - [Eventing features](../eventing/features/README.md)
 
 ## Authorizations
 
-You will need to grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
+You can grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
 
 ## Upgrades
 
