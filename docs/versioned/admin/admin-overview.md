@@ -60,11 +60,12 @@ You make configurations by editing label values in resource definition YAML file
 Upon installing Knative, you can adjust default configurations as needed.
 
 - [Broker defaults](../eventing/configuration/broker-configuration.md)
-- [Defaults ConfigMap](../serving/configuration/config-defaults.md)
-- [Domain names](../serving/using-a-custom-domain.md)
+- [ConfigMap defaults](../serving/configuration/config-defaults.md)
 - [Event source defaults](../eventing/configuration/sources-configuration.md)
-- [Channels for Apache Kafka](../eventing/configuration/kafka-channel-configuration.md)
-[- Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)
+- [Channel defaults](../eventing/configuration/channel-configuration.md)
+- [Kafka channel defaults](../eventing/configuration/kafka-channel-configuration.md)
+- [Domain names](../serving/using-a-custom-domain.md)
+- [Ingress gateway replacement](../serving/setting-up-custom-ingress-gateway.md)
 
 Configurations to accommodate new development:
 
@@ -77,16 +78,16 @@ Configurations for maintenance:
 - [Garbage collection](../serving/revisions/revision-admin-config-options.md)
 - [High availability](../serving/config-ha.md)
 - [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md)
-- [Keda autoscaling of Kafka features](../eventing/configuration/keda-configuration.md)
+- [Autoscaling of Kafka features](../eventing/configuration/keda-configuration.md)
 
-Configurations of encryptions for security:
+Configurations of security encryptions:
 
 - [cert-manager](../serving/encryption/configure-certmanager-integration.md)
 - [External domains](../serving/encryption/external-domain-tls.md)
 - [Local domains](../serving/encryption/cluster-local-domain-tls.md)
 - [system-internal](../serving/encryption/system-internal-tls.md)
 
-Configurations for Extensions:
+Configurations for extensions:
 
 - [Kafka Broker features](../serving/encryption/system-internal-tls.md)
 - [Queue proxy extensions](../serving/queue-extensions.md)
