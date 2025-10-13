@@ -64,7 +64,7 @@ Upon installing Knative, you can adjust default configurations as needed.
 [Domain names](../serving/using-a-custom-domain.md)
 [Event source defaults](../eventing/configuration/sources-configuration.md)
 [Channels for Apache Kafka](../eventing/configuration/kafka-channel-configuration.md)
-[Ingress gateway](../https://knative.dev/development/serving/setting-up-custom-ingress-gateway.md)
+[Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)
 
 Use these configurations for new apps and development:
 
@@ -92,9 +92,16 @@ Configurations for Extensions:
 [Queue proxy extensions](../serving/queue-extensions.md)
 [Sugar Controller](../eventing/configuration/sugar-configuration.md)
 
+Flagging features:
+
+[Serving features](../serving/configuration/feature-flags.md)
+[Eventing features](../eventing/features/README.md)
+
 ## Authorizations
 
-Developers often need access to additional resources related to their namespace in other services, such as observability (logs, metrics, tracing) and dashboards (e.g. Grafana / Backstage). It's expected that the administrator will provision this access alongside creating the namespace and assigning permissions.
+You will need to grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
 
 ## Upgrades
+
+More often than not, you will be performing upgrades to your cluster's infrastructure and apps and services.
 

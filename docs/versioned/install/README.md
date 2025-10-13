@@ -98,5 +98,5 @@ Use the following links to maintain your installations.
 
 - [Upgrading Knative](../install/upgrade/README.md)
 - [Uninstall Knative](../install/uninstall.md)
-- [Check Knative version](../install/upgrade/upgrade/check-install-version.md)
+- [Check Knative version](../install/upgrade/check-install-version.md)
 - [Troubleshoot Knative installations](../install/troubleshooting.md)
