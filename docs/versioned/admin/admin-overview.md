@@ -3,53 +3,69 @@ audience: administrator
 components:
   - serving
   - eventing
-function: reference
+function: explanation
 ---
 # Overview
 
 This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster.
 
-As a Kubernetes Administrator, your responsibilities comprise keeping the Kubernetes ecosystem running optimally and enabling your developers to create apps with seamless access to resources, networking, and all parts of the ecosystem. Knative aims to make your tasks easier by providing a Kubernetes ConfigMap for every resource. You can implement version control and strategically set default values so that installations of plugins are seamless.
+As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
 
-For example, in Knative Eventing you can deliver events to the broker to route to your function using an in-memory option or a third party plugin for messages and streaming. You can change from one plugin to another seamlessly by your ConfigMap configurations.
+Knative includes a plugin system to interoperate with existing cluster infrastructure, enabling Knative resources (such as Routes and Brokers) to be implemented using multiple underlying suppliers. For example, Knative Eventing applications can deliver events to a broker and then trigger a function based on the received event. If the broker type is not explicitly specified, a testing cluster could use an in-memory option while a staging or production environment might used a cloud-provided Kafka service.
+
+Of particular interest to cluster administrators is that Knative supports customizable _default values_ on resource parameter values. These configurations reduce the amount of environment configuration tasks developers needs to consider.
 
 ## Knative installations
 
-See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative operator. This section describes those differences.
-
-A Knative installation assumes you, as a Kubernetes administrator, are familiar with the following:
-
-- Kubernetes and Kubernetes administration.
-- The `kubectl` CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
-- Using cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC).
-- Familiarity with Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative, is recommended.
-
-### YAML and Knative Operator installations compared
-
-You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying the content, along with patching the contents to customize them. This option alleviates complexity by using the Knative Operator and is compatible with a GitOps approach. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Helm.
-
-Here are the considerations for installing using YAML or the Knative Operator:
-
-| YAML-based install | Knative Operator install|
-| --- | --- |
-| You can see exactly what you get. | You specify choices at a higher level. |
-| You can adjust any parameters by editing them directly. | Not every setting is exposed. |
-| If you make changes, you have to keep track of what you changed when you want to upgrade. | It's easy to separate your customizations from the base installation. |
-| Version and audit control as YAML files are stored in a GitHub repository.| Manage custom resources using command-line tools or manifests. |
+See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative operator. 
 
 ## Configuring Knative
 
-Like Kubernetes, Knative uses YAML to express the different components that can operate in the system, including extensions to the system. Configurations are made throughout the ecosystem, and comprise core objects (such as pods), core objects with custom resource definitions (CRD), and extension resources for administrators and developers.
+Knative uses Kubernetes-style YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and managed through `kubectl`.
 
-Configurations are scoped by namespace. Knative follows the Kubernetes development of model namespaces. Each development team is assigned a namespace for developers to create and edit resources in that namespace. Namespaces should generally act as independent units. This can be enforced with tools like RBAC, quota, and policy.
+### Resource scoping and namespaces
 
-Namespaces can be isolation boundary between teams, the degree to which depends panning and adherence to the namespace strategy. As an administrator, you can enforce that strategy and also provide access to additional resources related to their namespace in other services, such as observability (logs, metrics, tracing) and dashboards.
+Knative resources are associated with namespaces. Knative adheres to the Kubernetes model of namespace-based isolation, therefore you should define namespaces to enable development teams to work independently and manage resources autonomously within their assigned and dedicated namespaces. Namespaces provide this control in the following ways:
 
-You make configurations by editing label values in resource definition YAML files, setting key values pairs in ConfigMaps, and often using `kubectl` to apply the changed. Some configurations can be made with the Knative Operator and also the programming language go.
+- Monitor and manage development by assigning developers to teams defined by namespaces.
+- Configure applications and resources to be built or operate referencing specified namespaces.
+- Managing Knative behavior by applying access control on namespaces.
+
+Namespaces can also isolate boundaries for tooling such as logs, metrics, tracing, CI/CD integrations, and dashboards. The extent of this isolation depends on both the enforcement strategy and how consistently teams adhere to namespace boundaries.
+
+You can optimize and enforce isolation using standard Kubernetes mechanisms, including:
+
+- Role-Based Access Control (RBAC)
+- Resource quotas
+- Network and security policies
+
+### Configuring Knative components
+
+Knative configurations are performed by the following methods:
+
+- Editing YAML manifests
+  Modify resource definitions directly, including labels, annotations, and field values.
+
+- Using ConfigMaps
+  Store and manage configuration data as key-value pairs. ConfigMaps are frequently used to tune platform-wide behavior. Most of the Knative ConfigMaps are in the `knative-serving` or `knative-eventing` namespace, and apply their settings to all the relevant Knative components in all namespaces.
+
+- Applying resources with `kubectl`
+  Apply updated manifests to the cluster using standard Kubernetes workflows.
+
+- Using the Knative Operator
+  Some platform-wide settings can be managed declaratively using the Knative Operator.
+
+- Programmatic configuration
+  For advanced use cases, Knative resources and configurations are managed programmatically such as by using the Go programming language.
+
+> [!NOTE]
+> Ensure consistency in configuration management by version-controlling your YAML files and aligning with GitOps best practices where possible.
 
 ### Configuration tasks
 
-Upon installing Knative, you can adjust default configurations as needed.
+Knative documentation provides the following configuration procedures. This list is subject subject to change.
+
+Configurations for default settings:
 
 - [Broker defaults](../eventing/configuration/broker-configuration.md)
 - [ConfigMap defaults](../serving/configuration/config-defaults.md)
@@ -59,7 +75,7 @@ Upon installing Knative, you can adjust default configurations as needed.
 - [Domain names](../serving/using-a-custom-domain.md)
 - [Ingress gateway replacement](../serving/setting-up-custom-ingress-gateway.md)
 
-Configurations to accommodate new development:
+Configurations for new development:
 
 - [Deployment resources](../serving/configuration/deployment.md)
 - [Istio access to deployed services](../serving/istio-authorization.md)
@@ -72,7 +88,7 @@ Configurations for maintenance:
 - [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md)
 - [Autoscaling of Kafka features](../eventing/configuration/keda-configuration.md)
 
-Configurations of security encryptions:
+Configurations for security encryptions:
 
 - [cert-manager](../serving/encryption/configure-certmanager-integration.md)
 - [External domains](../serving/encryption/external-domain-tls.md)
@@ -82,10 +98,9 @@ Configurations of security encryptions:
 Configurations for extensions:
 
 - [Kafka Broker features](../serving/encryption/system-internal-tls.md)
-- [Queue proxy extensions](../serving/queue-extensions.md)
 - [Sugar Controller](../eventing/configuration/sugar-configuration.md)
 
-Configurations to flag features:
+Configurations for flag features:
 
 - [Serving features](../serving/configuration/feature-flags.md)
 - [Eventing features](../eventing/features/README.md)
@@ -96,5 +111,7 @@ You will need to grant developers access to additional resources related to thei
 
 ## Upgrades
 
-More often than not, you will be performing upgrades to your cluster's infrastructure and apps and services.
+More often than not, you will be performing upgrades to your cluster's infrastructure and apps and services. Knative is designed and tested for continuous operation during upgrades and rollbacks, allowing you to:
 
+- Upgrade or revert a Knative cluster while it is serving traffic, rather than needing a maintenance window.
+- Downgrade. Downgrades work provided that no applications have used the new features since the upgrade.

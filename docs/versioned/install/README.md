@@ -10,7 +10,14 @@ function: reference
 
 This page provides guidance for Kubernetes administrators on how to install Knative on an existing Kubernetes cluster. Knative has three components: Eventing, Serving, and Functions and the CLI client tools `kn` and `func`. Serving and Eventing are installed into clusters. Functions is not installed into clusters given that the client `func` CLI tool builds and deploys stateless functions as standard containers.
 
-Supported platforms are Linux, MacOS, and Windows.
+A Knative installation assumes you are familiar with the following:
+
+- Kubernetes and Kubernetes administration.
+- The `kubectl` CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
+- Using cluster-admin permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC).
+- Familiarity with Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative, is recommended.
+
+You can install the Serving and Eventing components independently of one another. You can also add and remove plugins at any time, as well as optional integration tools that span observability, security, and testing. Recommended tools include open source Prometheus and Jaeger for observability, and cert-manager for access authentication. Backstage tools are available to help you monitor and manage resources, and there are tools for vendor management.
 
 ## Installation roadmap
 
@@ -22,9 +29,11 @@ Use the following table to determine your installation method. If you just want 
 | Kubernetes deployment | local, either `kind` or `Minikube` | existing  | existing  |
 | Hardware | 3 CPU, 3 GB RAM | One node:<br>6 CPUs, 6 GB memory, 30 GB disk storage.<br>Multiple nodes:<br>2 CPUs each, 4 GB memory, 20 GB disk storage.   | same as YAML-based |
 
-For more information about YAML-based and installations with the Knative Operator, see [Knative installations](../install/README.md).
+Supported platforms are Linux, MacOS, and Windows.
 
-Use the following steps to install Knative depending on your installation method.
+For more information about YAML-based and installations with the Knative Operator, see [YAML and Knative Operator installations compared](#yaml-and-knative-operator-installations-compared).
+
+Use the following steps to install Knative depending on your installation method:
 
 **Quickstart**:
 
@@ -53,6 +62,19 @@ All installations require a supported Kubernetes version. System requirements pr
 
 For a list of commercial Knative products, see [Knative offerings](../install/knative-offerings.md).
 
+## YAML and Knative Operator installations compared
+
+You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying the content, along with patching the contents to customize them. This option alleviates complexity by using the Knative Operator and is compatible with a GitOps approach. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Helm.
+
+Here are the considerations for installing using YAML or the Knative Operator:
+
+| YAML-based install | Knative Operator install|
+| --- | --- |
+| You can see exactly what you get. | You specify choices at a higher level. |
+| You can adjust any parameters by editing them directly. | Not every setting is exposed. |
+| If you make changes, you have to keep track of what you changed when you want to upgrade. | It's easy to separate your customizations from the base installation. |
+| Version and audit control as YAML files are stored in a GitHub repository.| Manage custom resources using command-line tools or manifests. |
+
 ## Extensibility plugins
 
 Knative utilizes existing infrastructure already have installed on your cluster, while standardizing the developer-facing interface between similar components. Serving and Eventing support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes, and Eventing supports pods with pluggable message transports (e.g. Kafka, RabbitMQ).
@@ -80,8 +102,6 @@ Knative has default lightweight in-memory messaging implementation if you don't 
     A messaging and streaming broker from [RabbitMQ](https://www.rabbitmq.com). In-order, moderate throughput and complexity. See [Install RabbitMQ for Knative](../install/eventing/rabbitmq-install.md)
 - NATS
     An event streaming platform from [NATS](https://nats.io). Low complexity.
-
-
 
 ## Integration plugins
 
