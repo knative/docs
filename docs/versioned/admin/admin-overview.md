@@ -59,43 +59,43 @@ You make configurations by editing label values in resource definition YAML file
 
 Upon installing Knative, you can adjust default configurations as needed.
 
-[Broker defaults](../eventing/configuration/broker-configuration.md)
-[Defaults ConfigMap](../serving/configuration/config-defaults.md)
-[Domain names](../serving/using-a-custom-domain.md)
-[Event source defaults](../eventing/configuration/sources-configuration.md)
-[Channels for Apache Kafka](../eventing/configuration/kafka-channel-configuration.md)
-[Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)
+- [Broker defaults](../eventing/configuration/broker-configuration.md)
+- [Defaults ConfigMap](../serving/configuration/config-defaults.md)
+- [Domain names](../serving/using-a-custom-domain.md)
+- [Event source defaults](../eventing/configuration/sources-configuration.md)
+- [Channels for Apache Kafka](../eventing/configuration/kafka-channel-configuration.md)
+[- Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)
 
-Use these configurations for new apps and development:
+Configurations to accommodate new development:
 
-[Deployment resources](../serving/configuration/deployment.md)
-[Istio access to deployed services](../serving/istio-authorization.md)
-[Namespace exclusion from webhooks](../serving/istio-authorization.md)
+- [Deployment resources](../serving/configuration/deployment.md)
+- [Istio access to deployed services](../serving/istio-authorization.md)
+- [Namespace exclusion from webhooks](../serving/istio-authorization.md)
 
 Configurations for maintenance:
 
-[Garbage collection](../serving/revisions/revision-admin-config-options.md)
-[High availability](../serving/config-ha.md)
-[Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md)
-[Keda autoscaling of Kafka features](../eventing/configuration/keda-configuration.md)
+- [Garbage collection](../serving/revisions/revision-admin-config-options.md)
+- [High availability](../serving/config-ha.md)
+- [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md)
+- [Keda autoscaling of Kafka features](../eventing/configuration/keda-configuration.md)
 
-Encryptions for Security:
+Configurations of encryptions for security:
 
-[cert-manager](../serving/encryption/configure-certmanager-integration.md)
-[External domains](../serving/encryption/external-domain-tls.md)
-[Local domains](../serving/encryption/cluster-local-domain-tls.md)
-[system-internal](../serving/encryption/system-internal-tls.md)
+- [cert-manager](../serving/encryption/configure-certmanager-integration.md)
+- [External domains](../serving/encryption/external-domain-tls.md)
+- [Local domains](../serving/encryption/cluster-local-domain-tls.md)
+- [system-internal](../serving/encryption/system-internal-tls.md)
 
 Configurations for Extensions:
 
-[Kafka Broker features](../serving/encryption/system-internal-tls.md)
-[Queue proxy extensions](../serving/queue-extensions.md)
-[Sugar Controller](../eventing/configuration/sugar-configuration.md)
+- [Kafka Broker features](../serving/encryption/system-internal-tls.md)
+- [Queue proxy extensions](../serving/queue-extensions.md)
+- [Sugar Controller](../eventing/configuration/sugar-configuration.md)
 
-Flagging features:
+Configurations to flag features:
 
-[Serving features](../serving/configuration/feature-flags.md)
-[Eventing features](../eventing/features/README.md)
+- [Serving features](../serving/configuration/feature-flags.md)
+- [Eventing features](../eventing/features/README.md)
 
 ## Authorizations
 
