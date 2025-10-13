@@ -280,6 +280,8 @@ If you encounter any issues during the setup process, refer to the troubleshooti
 
     Replace `<pod-name>` with the name of the pod you want to check.
 
+Secondly, ensure your KinD & minikube tunnels are running in order to access the websites.
+
 ## **Next Step**
 ![Image](images/image5.png)
 
