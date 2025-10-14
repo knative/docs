@@ -79,8 +79,9 @@ kubectl apply -f db-service
 
 ![image3](images/image3.png)
 
+Get the IP address of the front end service as follows: `kubectl get svc -o=jsonpath='{.status.loadBalancer.ingress[0].ip}' bookstore-frontend-svc`
 
-Open the UI page at [http://localhost:3000](http://localhost:3000){:target="_blank"}, you should see some new comments popping up at the bottom of the page.
+Open the UI page at `http://${IP}`, you should see some new comments popping up at the bottom of the page.
 
 ???+ bug "Troubleshoot"
     If you see "No comments available", that means your database is not initialized yet. Check the health of the database service pods and figure out what happened.
