@@ -11,7 +11,7 @@ This page provides guidance for administrators on how to manage Knative on an ex
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
 
-Knative includes a plugin system to interoperate with existing cluster infrastructure, enabling Knative resources, such as Routes and Brokers, to be implemented using multiple underlying suppliers. For example, Knative Eventing applications can deliver events to a broker and then trigger a function based on the received event. If the broker type is not explicitly specified, a testing cluster could use an in-memory option while a staging or production environment might use a cloud-provided Kafka service.
+Knative includes a plugin system to interoperate with existing cluster infrastructure, enabling Knative resources such as Routes and Brokers to be implemented using multiple underlying suppliers. For example, Knative Eventing applications can deliver events to a broker and then trigger a function based on the received event. A testing cluster could use an in-memory option while a staging or production environment might use a cloud-provided Kafka service.
 
 Of particular interest to cluster administrators is that Knative supports customizable _default values_ on the parameters defined in resource YAML files. These configurations reduce the amount of environment configuration tasks developers needs to consider.
 
