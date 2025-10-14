@@ -51,7 +51,7 @@ Use the following steps to install Knative depending on your installation method
 
 All installations require a supported Kubernetes version.
 
-System requirements provided are recommendations only. The requirements for your installation m may, depending on whether you use optional components, such as a networking layer.
+System requirements provided are recommendations only. The requirements for your installation  may vary depending on whether you use optional components, such as a networking layer.
 
 For a list of commercial Knative products, see [Knative offerings](knative-offerings.md).
 
