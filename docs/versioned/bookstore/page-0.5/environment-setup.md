@@ -172,7 +172,6 @@ service/bookstore-frontend-svc created
 
 Follow the respective `minikube` or `kind` instructions to access Kubernetes Services locally from your machine.
 
-
 Check the running Kubernetes Services:
 
 ```shell
@@ -182,7 +181,7 @@ kubectl get services
 And you will see the following console output:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    3000:31600/TCP   27m
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    80:31600/TCP   27m
 kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          39m
 ```
 
@@ -200,10 +199,6 @@ kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP   
 ![Image](images/image6.png)
 
 The Node.js server is located in the `node-server` folder.
-
-!!! warning
-
-    Ensure that port 8080 on your local machine is not being used by another application.
 
 #### **Deploy the Book Review Service: Node.js Server**
 
@@ -250,7 +245,7 @@ kubectl get services
 And you will see the following console output:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    3000:31600/TCP   73m
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    80:31600/TCP   73m
 kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          85m
 node-server-svc          LoadBalancer   10.101.90.35    172.18.0.8    80:31792/TCP     73m
 ```
@@ -261,8 +256,6 @@ node-server-svc          LoadBalancer   10.101.90.35    172.18.0.8    80:31792/T
 
 ???+ success "Verify"
     Access the node server page using the `node-server-svc` `EXTERNAL-IP` address. The UI page should appear!
-
-    Visit [http://localhost:8080](http://localhost:8080){:target="_blank"} in your browser. The Node.js service should be up and running.
 
     And in your front end page, you should see the status turns green and say "Connected to node server".
 
