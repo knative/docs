@@ -88,7 +88,7 @@ kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' svc/node-server-svc
 
 NODE_SERVER_IP=$(kubectl get svc -o=jsonpath='{.status.loadBalancer.ingress[0].ip}' node-server-svc)
 
-if [[ -z "$node-server-svc" ]]; then
+if [[ -z "${NODE_SERVER_IP}" ]]; then
     echo "Unable to get LoadBalancer IP for node-server-svc"
     exit 1
 fi
