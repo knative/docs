@@ -45,7 +45,7 @@ Knative configurations are performed by the following methods:
 
 - Editing YAML manifests
 
-    Modify resource definitions directly, including labels, annotations, and field values.
+    Modify resource definitions directly, including labels, annotations, and field values. You can use Kubernetes features such as OPA and Kyverno to enforce specific values for fields on a resource type, or use ConfigMaps in plugin installation to set values at the cluster level through Knative.
 
 - Using ConfigMaps
 
@@ -53,14 +53,11 @@ Knative configurations are performed by the following methods:
 
 - Applying resources with `kubectl`
 
-    Apply updated manifests to the cluster using standard Kubernetes workflows.
+    Apply updated YAML manifests, as opposed to ConfigMaps, to the cluster using standard Kubernetes workflows.
 
 - Using the Knative Operator
 
     Some platform-wide settings can be managed declaratively using the Knative Operator.
-
-> [!NOTE]
-> Ensure consistency in configuration management by version-controlling your YAML files and aligning with GitOps best practices where possible.
 
 ### Configuration tasks
 
