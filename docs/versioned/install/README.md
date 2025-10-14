@@ -17,7 +17,7 @@ A Knative installation assumes you are familiar with the following:
 - Using `cluster-admin` permissions or equivalent to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC).
 - Familiarity is recommended with Cloud Native Computing Foundation (CNCF) projects such as [Prometheus](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/), [Istio](https://istio.io), and [Strimzi](https://strimzi.io), many of which can be used alongside Knative.
 
-You can install the Serving and Eventing components independently of one another. You can also add and remove plugins at any time, as well as optional integration tools that span observability, security, and testing. Recommended tools include open source Prometheus, and [Jaeger](https://www.cncf.io/projects/jaeger/) for observability, and cert-manager for access authentication. Backstage tools are available to help you monitor and manage resources, as well as tools for vendor management.
+You can install the Serving and Eventing components independently of one another. You can also add and remove plugins at any time, as well as optional integration tools that span observability, security, and testing. Recommended open source tools include [cert-manager](https://cert-manager.io/) for managing TLS certificates, and [Prometheus](https://prometheus.io/), and [Jaeger](https://www.jaegertracing.io/) for observability. Knative also provides a dashboard plugin for [Backstage](https://backstage.io/).
 
 ## Installation roadmap
 
