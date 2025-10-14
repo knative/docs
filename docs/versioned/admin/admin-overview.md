@@ -109,7 +109,7 @@ You can grant developers access to additional resources related to their namespa
 
 ## Upgrades
 
-More often than not, you will be performing upgrades to your cluster's infrastructure and apps and services. Knative is designed and tested for continuous operation during upgrades and rollbacks, allowing you to:
+Administrators are generally responsible for performing upgrades to your cluster's infrastructure and apps and services. Knative is designed and tested for continuous operation during upgrades and rollbacks, allowing you to:
 
 - Upgrade or revert a Knative cluster while it is serving traffic, rather than needing a maintenance window.
 - Downgrade. Downgrades work provided that no applications have used the new features since the upgrade.
