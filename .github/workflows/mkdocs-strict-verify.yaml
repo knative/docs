@@ -44,3 +44,5 @@ jobs:
 
     - name: Verify MkDocs
       run: ./hack/build.sh --strict
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
