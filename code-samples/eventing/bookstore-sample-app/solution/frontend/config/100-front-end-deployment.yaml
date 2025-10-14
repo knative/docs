@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
         - name: bookstore-frontend
-          image: dprotaso/bookstore-frontend:latest
-          # image: ghcr.io/knative/bookstore-frontend:latest
+          image: ghcr.io/knative/bookstore-frontend:latest
           ports:
             - containerPort: 8080
           env:
