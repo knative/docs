@@ -51,11 +51,11 @@ Install using all YAML files. This option is the most useful if you're using Git
 
 **Knative Operator**:
 
-Install using the Knative Operator as installed with Manifests or Helm, or install using the Knative Operator as installed with the Knative Operator CLI plugin.
+Install using the Knative Operator as installed with manifests or [Helm](https://helm.sh), or install using the Knative Operator as installed with the Knative Operator CLI plugin.
 
   1. Install the [CLI Tools](../client/install-kn.md) including the Knative Operator CLI plugin.
   1. Install using the Knative Operator, and with it the Serving and Eventing components, by either of the following:
-       - The [Knative Operator](../install/operator/knative-with-operators.md) using Kubernetes manifests or by using [Helm](https://helm.sh).
+       - The [Knative Operator](../install/operator/knative-with-operators.md) using Kubernetes manifests or by using Helm.
        - The [Knative Operator CLI](../install/operator/knative-with-operator-cli.md).
 
 All installations require a supported Kubernetes version. System requirements provided are recommendations only. The requirements for your installation may vary depending on whether you use optional components, such as a networking layer.
@@ -66,7 +66,7 @@ For a list of commercial Knative products, see [Knative offerings](../install/kn
 
 You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. It allows you to automate applying, patching, and customizing the content. 
 
-The Knative Operator alleviates installation complexities and is compatible with a GitOps approach. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using KS8 Manifests or by Helm.
+The Knative Operator alleviates installation complexities and is compatible with a GitOps approach. It also gives you a separation of the core Knative application definition and the ConfigMap and other changes you make. You install the Knative Operator either by using the Knative CLI Operator Plugin or by using Kubernetes Manifests or by Helm.
 
 Here are the considerations for installing using YAML or the Knative Operator:
 
