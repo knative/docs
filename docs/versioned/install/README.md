@@ -14,10 +14,10 @@ A Knative installation assumes you are familiar with the following:
 
 - Kubernetes and Kubernetes administration.
 - The `kubectl` CLI tool. You can use existing Kubernetes management tools (policy, quota, etc) to manage Knative workloads.
-- Using `cluster-admin` permissions or equivalent to to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC).
-- Recommended familiarity with Cloud Native Computing Foundation (CNCF) projects such as Prometheus, Istio, and Strimzi, many of which can be used alongside Knative.
+- Using `cluster-admin` permissions or equivalent to install software and manage resources in all clusters in the namespace. For information about permissions, see [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/AC).
+- Familiarity is recommended with Cloud Native Computing Foundation (CNCF) projects such as [Prometheus](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/), [Istio](https://istio.io), and [Strimzi](https://strimzi.io), many of which can be used alongside Knative.
 
-You can install the Serving and Eventing components independently of one another. You can also add and remove plugins at any time, as well as optional integration tools that span observability, security, and testing. Recommended tools include open source Prometheus and Jaeger for observability, and cert-manager for access authentication. Backstage tools are available to help you monitor and manage resources, as well as tools for vendor management.
+You can install the Serving and Eventing components independently of one another. You can also add and remove plugins at any time, as well as optional integration tools that span observability, security, and testing. Recommended tools include open source Prometheus, and [Jaeger](https://www.cncf.io/projects/jaeger/) for observability, and cert-manager for access authentication. Backstage tools are available to help you monitor and manage resources, as well as tools for vendor management.
 
 ## Installation roadmap
 
@@ -42,7 +42,7 @@ Use the following steps to install Knative depending on your installation method
 
 **YAML-based**:
 
-Install using all YAML files. This option is the most useful if you're using GitOps tools such as Flux or ArgoCD to apply manifests checked into a Git repository. This is the lowest common denominator approach, giving you granular control of the process and resource definitions.
+Install using all YAML files. This option is the most useful if you're using GitOps tools such as [Flux](https://fluxcd.io) or [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) to apply manifests checked into a Git repository. This is the lowest common denominator approach, giving you granular control of the process and resource definitions.
 
   1. Install the [CLI Tools](../client/install-kn.md).
   1. Install either or both:
@@ -55,10 +55,10 @@ Install using the Knative Operator as installed with Manifests or Helm, or insta
 
   1. Install the [CLI Tools](../client/install-kn.md) including the Knative Operator CLI plugin.
   1. Install using the Knative Operator, and with it the Serving and Eventing components, by either of the following:
-       - The [Knative Operator](../install/operator/knative-with-operators.md) using K8S Manifests or via Helm.
+       - The [Knative Operator](../install/operator/knative-with-operators.md) using Kubernetes manifests or by using [Helm](https://helm.sh).
        - The [Knative Operator CLI](../install/operator/knative-with-operator-cli.md).
 
-All installations require a supported Kubernetes version. System requirements provided are recommendations only. The requirements for your installation m may, depending on whether you use optional components, such as a networking layer.
+All installations require a supported Kubernetes version. System requirements provided are recommendations only. The requirements for your installation may vary depending on whether you use optional components, such as a networking layer.
 
 For a list of commercial Knative products, see [Knative offerings](../install/knative-offerings.md).
 
@@ -79,7 +79,7 @@ Here are the considerations for installing using YAML or the Knative Operator:
 
 ## Extensibility plugins
 
-Knative utilizes the existing infrastructure installed on your cluster and provides a developer-facing interface between similar components. The Serving and Eventing components support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes, and Eventing supports pods with pluggable message transports (e.g. Kafka, RabbitMQ).
+Knative utilizes the existing infrastructure installed on your cluster and provides a developer-facing interface between similar components. The Serving and Eventing components support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes; and Eventing supports pods with pluggable message transports such as Kafka and RabbitMQ.
 
 Knative supports installing additional plugins after the initial installation, so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
 
