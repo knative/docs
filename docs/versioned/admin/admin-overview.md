@@ -25,11 +25,7 @@ Knative uses Kubernetes-style YAML manifests to define and configure system comp
 
 ### Resource scoping and namespaces
 
-Knative resources are associated with namespaces. Knative adheres to the Kubernetes model of namespace-based isolation, enabling you to manage the following:
-
-- Development teams and resources by assigning developers to teams defined by namespaces.
-- The capabilities applications have by referencing a namespace.
-- Exclude webhooks from using a namespace, useful for apps in development.
+Knative resources are associated with namespaces. Knative adheres to the Kubernetes model of namespace-based isolation, enabling you to manage development teams and resources by assigning developers to teams defined by namespaces. There is also management of functionality by the applications that reference a namespace.
 
 Namespaces can also isolate boundaries for tooling such as logs, metrics, tracing, CI/CD integrations, and dashboards. The extent of this isolation depends on both the enforcement strategy and how consistently teams adhere to namespace boundaries.
 

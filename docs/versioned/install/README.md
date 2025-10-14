@@ -77,15 +77,17 @@ Here are the considerations for installing using YAML or the Knative Operator:
 | If you make changes, you have to keep track of what you changed when you want to upgrade. | It's easy to separate your customizations from the base installation. |
 | Version and audit control as YAML files are stored in a GitHub repository.| Manage custom resources using command-line tools or manifests. |
 
-## Extensibility plugins
+## Extensibility
 
 Knative utilizes the existing infrastructure installed on your cluster and provides a developer-facing interface between similar components. The Serving and Eventing components support multiple underlying transports plugins within the same cluster. Serving supports pods with pluggable network ingress routes; and Eventing supports pods with pluggable message transports such as Kafka and RabbitMQ.
+
+For LLM deployments, consider the [KServe] platform. KServe is a Kubernetes-native model serving platform built on Knative Serving designed for production LLM deployments.
 
 Knative supports installing additional plugins after the initial installation, so your initial choices don't lock you in. For example, you can migrate from one message transport or network ingress to another without losing messages.
 
 ### Networking plugins
 
-If you don't have an ingress that meets the requirements, Knative provides Kourier from [Kore Technologies](https://github.com/knative-extensions/net-kourier), a default lightweight HTTP routing implementation. Plugins include:
+If you don't have an ingress that meets the requirements, Knative provides [net-kourier](https://github.com/knative-extensions/net-kourier), a default lightweight HTTP routing implementation. Plugins include:
 
 - Istio
 
