@@ -42,5 +42,5 @@ function: how-to
 1. If you are using the Grafana Helm Chart with the dashboard sidecar enabled (the default), you can load the dashboards by applying the following configmaps.
 
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/config/configmap-eventing-dashboard.yaml
+    kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/config/configmap-eventing-dashboard.json
     ```
