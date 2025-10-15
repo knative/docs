@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
+set -o pipefail
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 
 # Prompt the user to start the installation process
 echo "🚀 Shortcut: This script will install Knative, and deploy the bookstore's frontend and backend on your cluster"

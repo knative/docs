@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Prompt the user to start the installation process
 echo "🚀 Solution Script: This script will install everything required to run the Bookstore Sample App, and the Bookstore itself."
@@ -71,7 +76,7 @@ export KO_DOCKER_REPO=$REGISTRY_HOST/$REGISTRY_PORT
 echo ""
 echo "📦 Installing Camel-K..."
 kubectl create ns camel-k && \
-kubectl apply -k github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0 --server-side
+kubectl apply -k 'github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0' --server-side
 
 cat <<EOF | kubectl apply -f -
 apiVersion: camel.apache.org/v1
@@ -95,7 +100,7 @@ read -p "🛑 Press ENTER to continue..."
 # Install the front end first
 echo ""
 echo "📦 Installing the Sample Bookstore Frontend..."
-cd frontend
+cd "${SCRIPT_DIR}/frontend"
 kubectl apply -f config
 
 # Wait for the frontend to be ready
@@ -120,7 +125,7 @@ read -p '🛑 Can you see the front end page? If yes, press ENTER to continue...
 # Install the node-server
 echo ""
 echo "📦 Installing the Sample Bookstore Backend (node-server)..."
-cd ../node-server
+cd "${SCRIPT_DIR}/node-server"
 kubectl apply -f config
 
 # Wait for the backend to be ready
@@ -146,20 +151,20 @@ read -p '🛑 Can you see "Hello World!"? If yes, press ENTER to continue...'
 # Deploy the ML services
 echo ""
 echo "📦 Deploying the ML service: bad-word-filter..."
-cd ../ML-bad-word-filter
+cd "${SCRIPT_DIR}/ML-bad-word-filter"
 func deploy -b=s2i -v
 echo "✅ ML service bad-word-filter deployed."
 
 echo ""
 echo "📦 Deploying the ML services: sentiment-analysis..."
-cd ../ML-sentiment-analysis
+cd "${SCRIPT_DIR}/ML-sentiment-analysis"
 func deploy -b=s2i -v
 echo "✅ ML service sentiment-analysis deployed."
 
 # Install the database
 echo ""
 echo "📦 Installing the database..."
-cd ..
+cd "${SCRIPT_DIR}"
 kubectl apply -f db-service
 echo "✅ Database installed."
 
