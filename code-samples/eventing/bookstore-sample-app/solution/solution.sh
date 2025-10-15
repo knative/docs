@@ -107,6 +107,7 @@ kubectl apply -f config
 echo ""
 echo "⏳ Waiting for the frontend to be ready..."
 kubectl wait --for=condition=ready pod -l app=bookstore-frontend --timeout=300s
+echo "⏳ Waiting for the frontend load balancer to be ready... ensure kind/minikube tunnel is active"
 kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' svc/bookstore-frontend-svc --timeout=300s
 echo "✅ Bookstore Frontend installed."
 
@@ -132,6 +133,7 @@ kubectl apply -f config
 echo ""
 echo "⏳ Waiting for the backend to be ready..."
 kubectl wait --for=condition=ready pod -l app=node-server --timeout=300s
+echo "⏳ Waiting for the backend load balancer to be ready... ensure kind/minikube tunnel is active"
 kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' svc/node-server-svc --timeout=300s
 
 NODE_SERVER_IP=$(kubectl get svc -o=jsonpath='{.status.loadBalancer.ingress[0].ip}' node-server-svc)
