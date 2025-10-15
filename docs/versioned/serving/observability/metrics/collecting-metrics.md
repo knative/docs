@@ -13,26 +13,25 @@ function: how-to
 1. To enable prometheus metrics collection you will want to update `config-observability` ConfigMap and set the `metrics-protocol` to `prometheus`. For request-metrics we recommend setting up pushing metrics to prometheus. This requires enabling the Prometheus OLTP receiver. This is already configured in our monitoring example.
 
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-observability
-  namespace: knative-serving
-data:
-    # metrics-protocol field specifies the protocol used when exporting metrics
-    # It supports either 'none' (the default), 'prometheus', 'http/protobuf' (OTLP HTTP), 'grpc' (OTLP gRPC)
-    metrics-protocol: prometheus
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-observability
+      namespace: knative-serving
+    data:
+      # metrics-protocol field specifies the protocol used when exporting metrics
+      # It supports either 'none' (the default), 'prometheus', 'http/protobuf' (OTLP HTTP), 'grpc' (OTLP gRPC)
+      metrics-protocol: prometheus
 
-    # request-metrics-protocol
-    request-metrics-protocol: http/protobuf
-    request-metrics-endpoint: http://knative-kube-prometheus-st-prometheus.observability.svc:9090/api/v1/otlp/v1/metrics
+      # request-metrics-protocol
+      request-metrics-protocol: http/protobuf
+      request-metrics-endpoint: http://knative-kube-prometheus-st-prometheus.observability.svc:9090/api/v1/otlp/v1/metrics
 
-    tracing-protocol:      http/protobuf
-    tracing-endpoint:      http://jaeger-collector.observability.svc:4318/v1/traces
-    tracing-sampling-rate: "1"
-
-```
+      tracing-protocol:      http/protobuf
+      tracing-endpoint:      http://jaeger-collector.observability.svc:4318/v1/traces
+      tracing-sampling-rate: "1"
+    ```
 
 1. Apply the ServiceMonitors/PodMonitors to collect metrics from Knative Serving Control Plane.
 
