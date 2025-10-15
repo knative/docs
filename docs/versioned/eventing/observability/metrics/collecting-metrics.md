@@ -11,21 +11,21 @@ function: how-to
 
 1. To enable prometheus metrics collection you will want to update `config-observability` ConfigMap and set the `metrics-protocol` to `prometheus`.
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-observability
-  namespace: knative-eventing
-data:
-    # metrics-protocol field specifies the protocol used when exporting metrics
-    # It supports either 'none' (the default), 'prometheus', 'http/protobuf' (OTLP HTTP), 'grpc' (OTLP gRPC)
-    metrics-protocol: prometheus
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-observability
+      namespace: knative-eventing
+    data:
+      # metrics-protocol field specifies the protocol used when exporting metrics
+      # It supports either 'none' (the default), 'prometheus', 'http/protobuf' (OTLP HTTP), 'grpc' (OTLP gRPC)
+      metrics-protocol: prometheus
 
-    tracing-protocol:      http/protobuf
-    tracing-endpoint:      http://jaeger-collector.observability.svc:4318/v1/traces
-    tracing-sampling-rate: "1"
-```
+      tracing-protocol:      http/protobuf
+      tracing-endpoint:      http://jaeger-collector.observability.svc:4318/v1/traces
+      tracing-sampling-rate: "1"
+    ```
 
 ### Apply the Eventing Service/Pod Monitors
 
@@ -34,6 +34,7 @@ data:
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/config/eventing-monitors.yaml
     ```
+
 ### Import Grafana dashboards
 
 1. Grafana dashboards can be imported from the [`monitoring` repository](https://github.com/knative-extensions/monitoring).
