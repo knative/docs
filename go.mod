@@ -1,11 +1,11 @@
 module github.com/knative/docs
 
-go 1.23.0
+go 1.24
 
 require (
 	github.com/google/go-github/v32 v32.1.0
 	gopkg.in/yaml.v2 v2.3.0
-	knative.dev/hack v0.0.0-20251013111017-49bc1be5f373
+	knative.dev/hack v0.0.0-20251015104416-f3f2ddfc1eac
 )
 
 require (
