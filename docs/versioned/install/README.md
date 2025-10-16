@@ -46,8 +46,8 @@ Install using all YAML files. This option is the most useful if you're using Git
 
   1. Install the [CLI Tools](../client/install-kn.md).
   1. Install either or both components:
-       - Install [Knative Serving](../install/yaml-install/serving/install-serving-with-yaml.md).
-       - Install [Knative Eventing](../install/yaml-install/eventing/install-eventing-with-yaml.md).
+       - Install [Knative Serving](yaml-install/serving/install-serving-with-yaml.md).
+       - Install [Knative Eventing](yaml-install/eventing/install-eventing-with-yaml.md).
 
 **Knative Operator**:
 
