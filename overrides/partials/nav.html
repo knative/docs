@@ -69,10 +69,12 @@
 
   <ul class="md-nav__list" data-md-scrollfix>
     <!-- All NAVS: {{ nav.children }} -->
-    {% for nav_item in nav.children %}
-      <!-- nav item: {{ nav_item }} -->
-      {% set path = "__nav_" ~ loop.index %}
-      {{ item.render(nav_item, path, 1) }}
-    {% endfor %}
+    {% if nav.children %}
+      {% for nav_item in nav.children %}
+        <!-- nav item: {{ nav_item }} -->
+        {% set path = "__nav_" ~ loop.index %}
+        {{ item.render(nav_item, path, 1) }}
+      {% endfor %}
+    {% endif %}
   </ul>
 </nav>

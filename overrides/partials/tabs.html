@@ -35,7 +35,7 @@
     {% set nav = section.children %}
   {% endif %}
 
-  {% if nav | length > 1 %}
+  {% if nav and nav | length > 1 %}
     <div class="md-grid">
       <ul class="md-tabs__list" id="sub-nav">
         {% for nav_item in nav %}
