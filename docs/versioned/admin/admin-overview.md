@@ -21,7 +21,7 @@ See the [Installation roadmap](../install/README.md#installation-roadmap) for pr
 
 ## Configuring Knative
 
-Knative uses Kubernetes-style YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and managed using the `kubectl` CLI tool.
+Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
 ### Resource scoping and namespaces
 
