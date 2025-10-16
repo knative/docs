@@ -8,7 +8,7 @@ function: reference
 
 # Installing Knative
 
-This page provides guidance for Kubernetes administrators on how to install Knative on an existing Kubernetes cluster. Knative has three components: Eventing, Serving, and Functions along with the CLI client tools `kn` and `func`. Serving and Eventing are installed into clusters. Functions is not installed into clusters given that the client `func` CLI tool builds and deploys stateless functions as standard containers.
+This page provides guidance for Kubernetes administrators on how to install Knative on an existing Kubernetes cluster. Knative has three components: Eventing, Serving, and Functions. Serving and Eventing are installed into clusters. Functions is not installed into clusters given that the client `func` CLI tool builds and deploys stateless functions as standard containers.
 
 A Knative installation assumes you are familiar with the following:
 
