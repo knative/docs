@@ -58,7 +58,7 @@ Install using the Knative Operator as using manifests or [Helm](https://helm.sh)
        - The [Knative Operator](../install/operator/knative-with-operators.md) using Kubernetes manifests or by using Helm.
        - The [Knative Operator CLI](../install/operator/knative-with-operator-cli.md).
 
-All installations require a supported Kubernetes version. System requirements provided are recommendations only. The requirements for your installation may vary depending on whether you use optional components, such as a networking layer.
+All installations require a supported Kubernetes version. System requirements provided are recommendations only. The requirements for your installation may vary depending on which plugin components you use.
 
 For a list of commercial Knative products, see [Knative offerings](../install/knative-offerings.md).
 
