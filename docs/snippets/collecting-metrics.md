@@ -25,14 +25,14 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 
 1. Install the [Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
 
-       ```bash
-       helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-       helm repo update
-       helm install knative prometheus-community/kube-prometheus-stack \
-          --create-namespace \
-          --namespace observability \
-          -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/promstack-values.yaml
-
+    ```bash
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo update
+    helm install knative prometheus-community/kube-prometheus-stack \
+      --create-namespace \
+      --namespace observability \
+      -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/promstack-values.yaml
+    ```
 
 ### Access the Prometheus instance locally
 
@@ -63,7 +63,7 @@ To access the dashboards in your web browser:
 1. Access the dashboards in your browser via `http://localhost:3000`.
 
 1. Use the default credentials to login:
-   
+
     ```text
     username: admin
     password: prom-operator
