@@ -91,27 +91,30 @@ Please follow the instructions [here](https://knative.dev/docs/install/){:target
     You should see the pods in the `knative-eventing` and `knative-serving` namespaces running before proceeding.
 
     ```
-    NAMESPACE          NAME                                      READY   STATUS    RESTARTS   AGE
-    knative-eventing   eventing-controller-7576f555d5-7c2p2      1/1     Running   0          4m50s
-    knative-eventing   eventing-webhook-5874bb8445-cqcn9         1/1     Running   0          4m50s
-    knative-eventing   imc-controller-8c5d5ddb5-m249l            1/1     Running   0          4m49s
-    knative-eventing   imc-dispatcher-76d9f7464b-dphd6           1/1     Running   0          4m49s
-    knative-eventing   mt-broker-controller-8d8f8d48f-rvlcv      1/1     Running   0          4m48s
-    knative-eventing   mt-broker-filter-85c457f879-dvhnj         1/1     Running   0          4m48s
-    knative-eventing   mt-broker-ingress-5688f4cd68-nm8cc        1/1     Running   0          4m48s
-    knative-serving    activator-55d856fccd-g5qpw                1/1     Running   0          4m53s
-    knative-serving    autoscaler-5fb49c64c7-hrjng               1/1     Running   0          4m53s
-    knative-serving    controller-ddbb9d4f-khttq                 1/1     Running   0          4m53s
-    knative-serving    net-kourier-controller-68d89f78d5-hw8r6   1/1     Running   0          4m52s
-    knative-serving    webhook-85b9744fc5-6w9sg                  1/1     Running   0          4m53s
-    kourier-system     3scale-kourier-gateway-dbc5b88f5-7g29n    1/1     Running   0          4m52s
-    kube-system        coredns-5dd5756b68-49xsj                  1/1     Running   0          12m
-    kube-system        etcd-minikube                             1/1     Running   0          12m
-    kube-system        kube-apiserver-minikube                   1/1     Running   0          12m
-    kube-system        kube-controller-manager-minikube          1/1     Running   0          12m
-    kube-system        kube-proxy-tqcvx                          1/1     Running   0          12m
-    kube-system        kube-scheduler-minikube                   1/1     Running   0          12m
-    kube-system        storage-provisioner                       1/1     Running   0          12m
+    NAMESPACE            NAME                                         READY   STATUS    RESTARTS   AGE
+    knative-eventing     eventing-controller-645c4bcd55-fln6l         1/1     Running   0          17m
+    knative-eventing     eventing-webhook-7fd9cb958f-ft9vj            1/1     Running   0          17m
+    knative-eventing     imc-controller-6b9fbb6487-kwvbz              1/1     Running   0          17m
+    knative-eventing     imc-dispatcher-6c4b5856d-hh7wq               1/1     Running   0          17m
+    knative-eventing     job-sink-5cc89b5d95-fhlt5                    1/1     Running   0          17m
+    knative-eventing     mt-broker-controller-568d6b9c59-qk8dj        1/1     Running   0          17m
+    knative-eventing     mt-broker-filter-db66554c4-sxxzr             1/1     Running   0          17m
+    knative-eventing     mt-broker-ingress-774547844d-bbbdw           1/1     Running   0          17m
+    knative-serving      activator-7bcd47489b-ljmt6                   1/1     Running   0          17m
+    knative-serving      autoscaler-65cf6767c4-v7rfn                  1/1     Running   0          17m
+    knative-serving      controller-964dcf97b-9qwsv                   1/1     Running   0          17m
+    knative-serving      net-kourier-controller-854b568d4f-6xhl5      1/1     Running   0          17m
+    knative-serving      webhook-658b566b8-sxbdz                      1/1     Running   0          17m
+    kourier-system       3scale-kourier-gateway-54fb555bd7-v2l8q      1/1     Running   0          17m
+    kube-system          coredns-66bc5c9577-fhnxr                     1/1     Running   0          18m
+    kube-system          coredns-66bc5c9577-x299f                     1/1     Running   0          18m
+    kube-system          etcd-kind-control-plane                      1/1     Running   0          18m
+    kube-system          kindnet-gpq75                                1/1     Running   0          18m
+    kube-system          kube-apiserver-kind-control-plane            1/1     Running   0          18m
+    kube-system          kube-controller-manager-kind-control-plane   1/1     Running   0          18m
+    kube-system          kube-proxy-v2kdx                             1/1     Running   0          18m
+    kube-system          kube-scheduler-kind-control-plane            1/1     Running   0          18m
+    local-path-storage   local-path-provisioner-7b8c8ddbd6-m5n2m      1/1     Running   0          18m
     ```
 
 ### **Task 2: Running the Bookstore Web App**
