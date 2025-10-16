@@ -5,7 +5,7 @@ const CommentList = ({setStatus}) => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        const ws = new WebSocket("ws://localhost:8080/comments");
+        const ws = new WebSocket(`ws://${window.location.host}/backend/comments`);
 
         ws.onmessage = (event) => {
             const newComments = JSON.parse(event.data);
