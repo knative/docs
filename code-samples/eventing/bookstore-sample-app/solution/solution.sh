@@ -107,7 +107,7 @@ kubectl apply -f config
 echo ""
 echo "⏳ Waiting for the frontend to be ready..."
 kubectl wait --for=condition=ready pod -l app=bookstore-frontend --timeout=300s
-echo "⏳ Waiting for the frontend load balancer to be ready... ensure kind/minikube tunnel is active"
+echo "⏳ Waiting for the frontend load balancer to be ready... ensure kind cloud-provider-kind is active"
 kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' svc/bookstore-frontend-svc --timeout=300s
 echo "✅ Bookstore Frontend installed."
 
@@ -133,7 +133,7 @@ kubectl apply -f config
 echo ""
 echo "⏳ Waiting for the backend to be ready..."
 kubectl wait --for=condition=ready pod -l app=node-server --timeout=300s
-echo "⏳ Waiting for the backend load balancer to be ready... ensure kind/minikube tunnel is active"
+echo "⏳ Waiting for the backend load balancer to be ready... ensure kind cloud-provider-kind is active"
 kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' svc/node-server-svc --timeout=300s
 
 NODE_SERVER_IP=$(kubectl get svc -o=jsonpath='{.status.loadBalancer.ingress[0].ip}' node-server-svc)
@@ -198,9 +198,9 @@ echo "⏳ Waiting for the slack-sink to be ready..."
 kubectl wait --for=condition=ready pod -l app=pipe-00001 --timeout=300s
 echo "✅ Slack Sink installed."
 
-# Ask user to open a new terminal to set the minikube tunnel
+# Ask user to open a new terminal to run cloud-provider-kind
 echo ""
-echo "🌐 If you are using minikube: Please open a new terminal and run 'minikube tunnel' to expose the services to the outside world."
+echo "🌐 Ensure cloud-provider-kind is running to setup networking to your host machine"
 read -p "🛑 Press ENTER to continue..."
 
 echo ""

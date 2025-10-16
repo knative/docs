@@ -74,7 +74,11 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ![Image](images/image13.png)
 
-Install [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/docs/user/quick-start/) or [minikube](https://minikube.sigs.k8s.io/docs/) to enable you to run a Kubernetes cluster locally.
+We recommend using [KinD (Kubernetes in Docker)](https://kind.sigs.k8s.io/docs/user/quick-start/) to run a Kubernetes cluster locally.
+
+In order to access Kubernetes services KinD provides a standalone binary in your host and connects to your cluster and provisions new Load Balancer containers for your Services. It requires privileges to open ports on the system and to connect to the container runtime.
+
+See instructions here: https://kind.sigs.k8s.io/docs/user/loadbalancer/
 
 !!! tip
 
@@ -109,27 +113,6 @@ Please follow the instructions [here](https://knative.dev/docs/install/){:target
     kube-system        kube-scheduler-minikube                   1/1     Running   0          12m
     kube-system        storage-provisioner                       1/1     Running   0          12m
     ```
-
-#### **Extra Step for Minikube Users:**
-
-![Image](images/image3.png)
-
-Attention! In case you're not using the Knative Quick Start, set up the tunnel manually to connect to services of type `LoadBalancer`:
-
-Run the following command and keep the terminal open:
-
-```shell
-minikube tunnel
-```
-
-???+ success "Verify"
-    If there aren't any error messages, it means you have set up the tunnel successfully.
-
-#### **Extra Step for KinD Users:**
-
-Cloud Provider KinD runs as a standalone binary in your host and connects to your KIND cluster and provisions new Load Balancer containers for your Services. It requires privileges to open ports on the system and to connect to the container runtime.
-
-See instructions here: https://kind.sigs.k8s.io/docs/user/loadbalancer/
 
 ### **Task 2: Running the Bookstore Web App**
 
