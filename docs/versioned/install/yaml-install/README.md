@@ -6,7 +6,7 @@ components:
 function: reference
 ---
 
-# About YAML-based installation
+# YAML-based installation
 
 You can install the Serving component, Eventing component, or both on your cluster
 by applying YAML files.
