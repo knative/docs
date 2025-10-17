@@ -238,7 +238,7 @@ nav:
         - Overview: install/README.md
         # YAML Installation
         - Install Knative with YAML:
-          - About YAML-based installation: install/yaml-install/README.md
+          - YAML-based installation: install/yaml-install/README.md
           - Install Knative Serving:
             - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
             - Knative Serving installation files: install/yaml-install/serving/serving-installation-files.md
