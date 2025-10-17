@@ -5,7 +5,7 @@ components:
 function: how-to
 ---
 
-# Installing Kourier on Knative
+# Installing Kourier for Knative
 
 This guide walks you through manually installing and customizing Kourier for use with Knative.
 

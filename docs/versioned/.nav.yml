@@ -254,7 +254,8 @@ nav:
           - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
         - Installing plugins:
           - Install Istio for Knative: install/installing-istio.md
-          # TODO: docs for kourier, contour, gateway-api
+          - Install Kourier for Knative: install/installing-kourier.md
+          # TODO: docs for contour, gateway-api
           - Install Kafka for Knative: install/eventing/kafka-install.md
           - Install RabbitMQ for Knative: install/eventing/rabbitmq-install.md
           # N.B. this duplicates an "eventing" topic above, cross-referenced here.
