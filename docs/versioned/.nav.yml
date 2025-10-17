@@ -6,13 +6,13 @@ nav:
 ###############################################################################
     # Getting started
 ###############################################################################
-    - Tutorial:
+    - Tutorials:
         - Overview: getting-started/tutorial.md
         - Quickstart:
           - Tutorial introduction: getting-started/README.md
           - Install Knative using quickstart: getting-started/quickstart-install.md
           - Knative Functions:
-            - About Knative Functions: getting-started/about-knative-functions.md
+            - Knative Functions: getting-started/about-knative-functions.md
             - Installing Knative Functions: getting-started/install-func.md
             - Creating a function: getting-started/create-a-function.md
             - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
@@ -21,7 +21,7 @@ nav:
             - Autoscaling: getting-started/first-autoscale.md
             - Traffic splitting: getting-started/first-traffic-split.md
           - Knative Eventing:
-            - About Knative Eventing: getting-started/getting-started-eventing.md
+            - Knative Eventing: getting-started/getting-started-eventing.md
             - Sources, Brokers, and Triggers: getting-started/first-broker.md
             - Using a Knative Service as a source: getting-started/first-source.md
             - Using Triggers and sinks: getting-started/first-trigger.md
@@ -73,9 +73,9 @@ nav:
         - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
         - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
       # Serving - developer docs
-      - Developer Topics:
+      - Developer Tasks:
         - Services:
-          - About Knative Services: serving/services/README.md
+          - Knative Services: serving/services/README.md
           - Creating a Service: serving/services/creating-services.md
           - Configuring private Services: serving/services/private-services.md
           - Configuring ingress class: serving/services/ingress-class.md
@@ -130,7 +130,7 @@ nav:
             # add default IMC broker page, page explaining broker types
             - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
             - Apache Kafka:
-              - About Apache Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
+              - Knative Broker for Apache Kafka: eventing/brokers/broker-types/kafka-broker/README.md
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
@@ -189,7 +189,7 @@ nav:
         #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
         #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
       # Eventing - developer docs
-      - Developer topics:
+      - Developer Tasks:
         # BYO event source
         - Custom event sources:
           - Custom event sources overview: eventing/custom-event-source/README.md
@@ -224,7 +224,7 @@ nav:
 ###############################################################################
     # CLI
 ###############################################################################
-    - Knative CLI:
+    - CLI tools:
       - CLI tools: client/README.md
       - Installing the Knative CLI: client/install-kn.md
       - Customizing kn: client/configure-kn.md

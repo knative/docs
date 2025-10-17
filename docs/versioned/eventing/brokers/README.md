@@ -5,7 +5,7 @@ components:
 function: explanation
 ---
 
-# About Brokers
+# Brokers
 
 --8<-- "about-brokers.md"
 
