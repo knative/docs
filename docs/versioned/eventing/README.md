@@ -5,7 +5,7 @@ components:
 function: explanation
 ---
 
-# Knative Eventing - The Event-driven application platform for Kubernetes
+# Eventing
 
 --8<-- "about-eventing.md"
 
