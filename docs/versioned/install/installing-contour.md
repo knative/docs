@@ -21,7 +21,7 @@ This guide uses all default settings. No additional configuration is required.
 
 This installation requires the following prerequisites:
 
-- A Kubernetes cluster with Knative Serving component installed.
+- A Kubernetes cluster with the Knative Serving component installed.
 - Knative [load balancing](../serving/load-balancing/README.md) is activated.
 
 ## Supported Contour versions
@@ -42,7 +42,7 @@ For information about Contour versions, see the Contour [Compatibility Matrix](h
     kubectl get pods -n projectcontour -o wide
     ```
 
-You should see the following:
+You should see the following results:
 
 - Two Contour pods each with status Running and 1/1 Ready.
 - One or more Envoy pods, each with the status Running and 2/2 Ready.
@@ -69,7 +69,7 @@ This option requires Helm to be installed locally.
     kubectl -n projectcontour get po,svc
     ```
 
-You should see the following:
+You should see the following results:
 
 - One instance of pod/my-release-contour-contour with status Running and 1/1 Ready.
 - One or more instances of pod/my-release-contour-envoy with each status Running and 2/2 Ready.
@@ -78,9 +78,11 @@ You should see the following:
 
 ## Option 3: Contour Gateway Provisioner
 
-The Gateway provisioner watches for the creation of Gateway API Gateway resources, and dynamically provisions Contour+Envoy instances based on the Gateway's spec. Note that although the provisioning request itself is made via a Gateway API resource (Gateway), this method of installation still allows you to use any of the supported APIs for defining virtual hosts and routes: Ingress, HTTPProxy, or Gateway API’s HTTPRoute and TLSRoute. In fact, this guide will use an Ingress resource to define routing rules, even when using the Gateway provisioner for installation.
+The Gateway provisioner watches for the creation of Gateway API Gateway resources, and dynamically provisions Contour+Envoy instances based on the Gateway's specification.
 
-1. Use the following commmand to deploy the Gateway provisioner:
+Although the provisioning request itself is made using a Gateway API resource (Gateway), this method of installation still allows you to use any of the supported APIs for defining virtual hosts and routes: Ingress, HTTPProxy, or Gateway API’s HTTPRoute and TLSRoute.
+
+1. Use the following command to deploy the Gateway provisioner:
 
     ```bash
     kubectl apply -f https://projectcontour.io/quickstart/contour-gateway-provisioner.yaml
@@ -136,18 +138,18 @@ The Gateway provisioner watches for the creation of Gateway API Gateway resource
     contour     contour                   True    27s
     ```
 
-1. Verify the Contour pods are ready by running the following:
+1. Verify the Contour pods are ready:
 
     ```bash
     kubectl -n projectcontour get pods
     ```
 
-You should see the following:
+You should see the following results:
 
 - Two Contour pods each with status Running and 1/1 Ready.
 - One or move Envoy pods, each with the status Running and 2/2 Ready.
 
-## Test with a web application
+## Test application
 
 Install a web application workload and get some traffic flowing to the backend.
 
@@ -157,7 +159,7 @@ Install a web application workload and get some traffic flowing to the backend.
     kubectl apply -f https://projectcontour.io/examples/httpbin.yaml
     ```
 
-1. Verify the pods and service are ready by running:
+1. Verify the pods and service are ready:
 
     ```bash
     kubectl get po,svc,ing -l app=httpbin
@@ -175,9 +177,9 @@ Install a web application workload and get some traffic flowing to the backend.
     kubectl patch ingress httpbin -p '{"spec":{"ingressClassName": "contour"}}'
     ```
 
-    Now we’re ready to send some traffic to our sample application, via Contour & Envoy.
+    You you can send some traffic to the sample application, via Contour & Envoy.
 
-    For simplicity and compatibility across all platforms we’ll use kubectl port-forward to get traffic to Envoy, but in a production environment you would typically use the Envoy service’s address.
+    For simplicity and compatibility across all platforms use `kubectl port-forward` to get traffic to Envoy, but in a production environment you would typically use the Envoy service’s address.
 
 1. Port-forward from your local machine to the Envoy service:
 
