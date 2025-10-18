@@ -21,7 +21,8 @@ This guide uses all default settings. No additional configuration is required.
 
 This installation requires the following prerequisites:
 
-- A Kubernetes cluster with Knative installed and [load balancing](../serving/load-balancing/README.md) activated.
+- A Kubernetes cluster with Knative Serving component installed.
+- Knative [load balancing](../serving/load-balancing/README.md) is activated.
 
 ## Supported Contour versions
 
@@ -56,13 +57,13 @@ This option requires Helm to be installed locally.
     helm repo add bitnami https://charts.bitnami.com/bitnami
     ```
 
-Install the Contour chart:
+1. Install the Contour chart:
 
     ```bash
     helm install my-release bitnami/contour --namespace projectcontour --create-namespace
     ```
 
-Verify Contour is ready:
+1. Verify Contour is ready:
 
     ```bash
     kubectl -n projectcontour get po,svc
