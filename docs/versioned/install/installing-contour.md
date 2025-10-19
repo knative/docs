@@ -78,7 +78,7 @@ You should see the following results:
 
 ## Option 3: Contour Gateway Provisioner
 
-The Gateway provisioner watches for the creation of Gateway API Gateway resources, and dynamically provisions Contour+Envoy instances based on the Gateway's specification.
+The Gateway provisioner watches for the creation of Gateway API Gateway resources, and dynamically provisions Contour+Envoy instances based on the Gateway's spec.
 
 Although the provisioning request itself is made using a Gateway API resource (Gateway), this method of installation still allows you to use any of the supported APIs for defining virtual hosts and routes: Ingress, HTTPProxy, or Gateway API’s HTTPRoute and TLSRoute.
 
