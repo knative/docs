@@ -255,6 +255,7 @@ nav:
         - Installing plugins:
           - Install Istio for Knative: install/installing-istio.md
           # TODO: docs for kourier, contour, gateway-api
+          - Install Gateway API for Knative: install/installing-gateway-api.md
           - Install Kafka for Knative: install/eventing/kafka-install.md
           - Install RabbitMQ for Knative: install/eventing/rabbitmq-install.md
           # N.B. this duplicates an "eventing" topic above, cross-referenced here.
