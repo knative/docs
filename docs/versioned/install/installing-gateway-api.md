@@ -7,7 +7,7 @@ function: how-to
 
 # Installing Gateway API for Knative
 
-This guide shows how to install the Kubernetes Gateway API. There are multiple projects that support Gateway API. 
+This guide shows how to install the Kubernetes Gateway API. There are multiple projects that support the Gateway API. You can install either the standard or experimental Gateway API channel.
 
 ## Before you begin
 
@@ -28,9 +28,9 @@ This installation requires the following prerequisites:
 
 Some Gateway controller setups include the installation of the Gateway API bundle.
 
-## Install standard channel
+## Install the standard Gateway API channel
 
-The standard release channel includes all resources that have graduated to GA or beta, including GatewayClass, Gateway, HTTPRoute, and ReferenceGrant.
+The standard release channel includes all resources that have graduated to general availability or beta, including [GatewayClass](https://gateway-api.sigs.k8s.io/api-types/gatewayclass/), [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/), [HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute/), and [ReferenceGrant](https://gateway-api.sigs.k8s.io/api-types/referencegrant/).
 
 - Use the following command to install the standard channel:
 
@@ -38,13 +38,13 @@ The standard release channel includes all resources that have graduated to GA or
     kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
     ```
 
-    Refer to the server-side apply documentation to learn more about this kubectl command option.
+    For more information about the `kubectl --server-side` command, see [Server-Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/).
 
-## Install Experimental Channel
+## Install the experimental Gateway API Channel
 
 The experimental release channel includes everything in the standard release channel plus some experimental resources and fields. This includes TCPRoute, TLSRoute, and UDPRoute.
 
-Future releases of the API could include breaking changes to experimental resources and fields. For example, any experimental resource or field could be removed in a future release. For more information on the experimental channel, refer to our versioning documentation.
+Future releases of the API could include breaking changes to experimental resources and fields. For example, any experimental resource or field could be removed in a future release.
 
 - Use the following command to install the experimental channel:
 
@@ -54,13 +54,13 @@ Future releases of the API could include breaking changes to experimental resour
 
 Refer to the server-side apply documentation to learn more about this kubectl command option.
 
-## Uninstall Gateway API
+## Uninstall the Gateway API
 
-To uninstall the Gateway API, replace `apply` with `delete` in the `kubectl` commands above.
+To uninstall the Gateway API, replace `kubectl apply --server-side -f` with `kubectl delete --server-side -f` in the commands above.
 
-If these resources are in use or if they were installed by a Gateway controller, then do not uninstall them. This will uninstall the Gateway API resources for the entire cluster.
+Do not uninstall if the resources are in use or if they were installed by a Gateway controller. This command uninstalls the Gateway API resources for the entire cluster.
 
 ## See also
 
-[Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
-[Getting started with Gateway API](https://gateway-api.sigs.k8s.io/guides/)
+- [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
+- [Getting started with Gateway API](https://gateway-api.sigs.k8s.io/guides/)
