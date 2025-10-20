@@ -7,7 +7,7 @@ function: how-to
 
 # Installing Contour for Knative
 
-This guide shows how to install Contour in three ways:
+This page shows how to install Contour in three ways:
 
 - By using Contour’s example YAML.
 - By using the Helm chart for Contour.
@@ -15,7 +15,7 @@ This guide shows how to install Contour in three ways:
 
 It then shows how to deploy a sample workload and route traffic to it through Contour.
 
-This guide uses all default settings. No additional configuration is required.
+This guidance uses all default settings. No additional configuration is required.
 
 ## Before you begin
 
@@ -23,6 +23,7 @@ This installation requires the following prerequisites:
 
 - A Kubernetes cluster with the Knative Serving component installed.
 - Knative [load balancing](../serving/load-balancing/README.md) is activated.
+- HELM installed locally, if selected as the installation method.
 
 ## Supported Contour versions
 
@@ -78,7 +79,7 @@ You should see the following results:
 
 ## Option 3: Contour Gateway Provisioner
 
-The Gateway provisioner watches for the creation of Gateway API Gateway resources, and dynamically provisions Contour+Envoy instances based on the Gateway's spec.
+The Gateway provisioner watches for the creation of Gateway API Gateway resources, and dynamically provisions Contour and Envoy instances based on the Gateway's spec.
 
 Although the provisioning request itself is made using a Gateway API resource (Gateway), this method of installation still allows you to use any of the supported APIs for defining virtual hosts and routes: Ingress, HTTPProxy, or Gateway API’s HTTPRoute and TLSRoute.
 
@@ -151,7 +152,7 @@ You should see the following results:
 
 ## Test application
 
-Install a web application workload and get some traffic flowing to the backend.
+Install a web application workload and activate traffic flowing to the backend.
 
 1. Use the following command to install httpbin:
 
@@ -202,8 +203,6 @@ Install a web application workload and get some traffic flowing to the backend.
     ```
 
 In a browser or via curl, make a request to `http://local.projectcontour.io:8888`. The `local.projectcontour.io` URL is a public DNS record resolving to `127.0.0.1` to make use of the forwarded port. You should see the httpbin home page.
-
-Congratulations, you have installed Contour, deployed a backend application, created an Ingress to route traffic to the application, and successfully accessed the app with Contour.
 
 ## See also
 
