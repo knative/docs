@@ -7,7 +7,7 @@ function: how-to
 
 # Installing Gateway API for Knative
 
-This guide shows how to install the Kubernetes Gateway API. You can install either the standard or experimental Gateway API channel.
+This page shows how to install the Kubernetes Gateway API. You can install either the standard or experimental Gateway API channel.
 
 ## Before you begin
 
