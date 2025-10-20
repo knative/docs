@@ -7,7 +7,7 @@ function: how-to
 
 # Installing Kourier for Knative
 
-This guide walks you through manually installing and customizing Kourier for use with Knative. Kourier is an ingress for Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane for it.
+This page walks you through manually installing and customizing Kourier for use with Knative. Kourier is an ingress for Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane for it.
 
 ## Before you begin
 
@@ -15,7 +15,7 @@ This installation is recommended for Knative installations without Istio install
 
 You need:
 
-- A Kubernetes cluster created.
+- A Kubernetes cluster with the Knative Serving component installed.
 
 ## Supported Kourier versions
 
@@ -45,7 +45,7 @@ You can view the latest tested Kourier version on the [Kourier releases page](ht
       -p '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
     ```
 
-1. Optional - Set your desired domain (replace 127.0.0.1.nip.io to your preferred domain):
+1. Optional - Set your desired domain (replace `127.0.0.1.nip.io` to your preferred domain):
 
     ```bash
     kubectl patch configmap/config-domain \
@@ -135,11 +135,11 @@ The default uses the default cipher suites of the envoy version.
 
 ## External Authorization Configuration
 
-If you want to enable the external authorization support you can set these ENV vars in the net-kourier-controller deployment:
+If you want to enable the external authorization support you can set these environment variables in the `net-kourier-controller` deployment:
 
 | Environment Variable | Description |
 |---| --- |
-| `KOURIER_EXTAUTHZ_HOST` | Required. The external authorization service and port: my-auth:2222 |
+| `KOURIER_EXTAUTHZ_HOST` | Required. The external authorization service and port: `my-auth:2222` |
 | `KOURIER_EXTAUTHZ_FAILUREMODEALLOW` | Required. Allow traffic to go through if the ext auth service is down. Accepts true/false |
 | `KOURIER_EXTAUTHZ_PROTOCOL` | The protocol used to query the ext auth service. Can be one of: GRPC, HTTP, or HTTPS. Defaults to GRPC |
 | `KOURIER_EXTAUTHZ_MAXREQUESTBYTES` | Max request bytes defaults to 8192 bytes. For more information, see [BufferSettings](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html#extensions-filters-http-ext-authz-v3-buffersettings) in Envoy documentation.|
@@ -168,9 +168,9 @@ kubectl get configmap config-kourier --namespace knative-serving --output yaml
 
 ### LoadBalancer configuration
 
-Use your LB provider annotation to enable proxy-protocol.
+Use your load balancer provider annotation to enable proxy-protocol.
 
-- If you are planning to enable external-domain-tls, use your LB provider annotation to specify a custom name to use for the Load balancer, This is used to work around the issue of kube-proxy adding external LB address to node local iptables rule, which will break requests to an LB from in-cluster if the LB is expected to terminate SSL or proxy protocol.
+- If you are planning to enable external-domain-tls, use your load balancer (LB) provider annotation to specify a custom name to use for the load balancer. This is used to work around the issue of kube-proxy adding external LB address to node local iptables rule, which will break requests to an LB from in-cluster if the LB is expected to terminate SSL or proxy protocol.
 
 - Change the external Traffic Policy to local so the LB we'll preserve the client source IP and avoids a second hop for LoadBalancer.
 
@@ -213,7 +213,7 @@ kubectl annotate domainmapping <domain_mapping_name> kourier.knative.dev/disable
 
 A good use case for this configuration is DomainMapping with Websocket
 
-This annotation is an experimental/alpha feature. The annotation name my change in the future.
+This annotation is an experimental feature. The annotation name my change in the future.
 
 ## What's next
 
