@@ -19,7 +19,7 @@ You can change the default domain for all Knative Services on a cluster by modif
 
 ### Procedure
 
-1. Open the `config-domain` ConfigMap in your default text editor:
+1. Open the `config-domain` ConfigMap in a text editor:
 
     ```bash
     kubectl edit configmap config-domain -n knative-serving
