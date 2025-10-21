@@ -31,6 +31,7 @@ You can change the default domain for all Knative Services on a cluster by modif
     apiVersion: v1
     data:
       knative.dev: ""
+      _example: | ...
     kind: ConfigMap
     [...]
     ```
