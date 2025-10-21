@@ -25,7 +25,7 @@ You can change the default domain for all Knative Services on a cluster by modif
     kubectl edit configmap config-domain -n knative-serving
     ```
 
-1. Edit the file to replace `svc.cluster.local` with the domain you want to use, then remove the `_example` key and save your changes. In this example, `knative.dev` is configured as the domain for all routes:
+1. Edit the file to replace `svc.cluster.local` with the domain you want to use  and save your changes. In this example, `knative.dev` is configured as the domain for all routes:
 
     ```yaml
     apiVersion: v1
