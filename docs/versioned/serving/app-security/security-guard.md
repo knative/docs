@@ -106,10 +106,6 @@ Auto-learning requires you to deploy a `guard-service` on your kubernetes cluste
 
 In production you would typically also wish to enable TLS and Token support to protect the queue-proxy communication with the `guard-service` as described below.
 
-### Before you begin
-
-Before installing Security-Guard, learn [about Security-Guard](./security-guard-about.md)
-
 ### Install steps
 
 To start this tutorial, after installing Knative Serving, run the following procedure to replace your queue-proxy image and deploy a `guard-service`.
@@ -339,10 +335,6 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
 This tutorial shows how you can use Security-Guard to protect a deployed Knative Service.
 
-### Before you begin
-
-Before starting the tutorial, make sure to [install Security-Guard](./security-guard-install.md)
-
 ### Creating and deploying a service
 
 !!! tip
@@ -415,10 +407,6 @@ Create a sample securedService:
     ```
 
 After the Service has been created, Guard starts monitoring the Service Pods and all Events sent to the Service.
-
-Continue to [Security-Guard alert example](./security-guard-example-alerts.md) to test your installation
-
-See the [Using Security-Guard section](./security-guard-about.md) to learn about managing the security of the service
 
 ### Cleanup
 
