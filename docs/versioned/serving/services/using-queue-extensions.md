@@ -5,6 +5,12 @@ components:
 function: explanation
 ---
 
+!!! note
+
+    This integration is current [Alpha](https://github.com/knative/community/blob/main/mechanics/MATURITY-LEVELS.md#alpha-stage).
+    We're trying to guage usage of this so if you're using or interested please reach out to us in
+    [#knative-serving](https://cloud-native.slack.com/archives/C04LMU0AX60) slack.
+
 # Using extensions enabled by QPOptions
 
 QPOptions is a Queue Proxy feature that enables extending Queue Proxy with additional Go packages. For example, the [security-guard](https://knative.dev/security-guard#section-readme) repository extends Queue Proxy by adding runtime security features to protect user services.
