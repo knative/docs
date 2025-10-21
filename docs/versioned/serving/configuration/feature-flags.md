@@ -166,6 +166,33 @@ spec:
           emptyDir: {}
 ```
 
+### Kubernetes Volume Mount Propagation
+
+* **Type**: Extension
+* **ConfigMap keys:** `kubernetes.podspec-volumes-mount-propagation`
+
+This extension controls whether [`MountPropagation`](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation/) can be specified
+for a Volume Mount.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+ template:
+   spec:
+     containers:
+         ...
+         volumeMounts:
+           - mountPath: /data
+             name: mydata
+             mountPropagation: HostToContainer
+     volumes:
+       - name: mydata
+         persistentVolumeClaim:
+           claimName: pv-claim
+```
+
 ### Kubernetes PersistentVolumeClaim (PVC)
 
 * **Type**: Extension
