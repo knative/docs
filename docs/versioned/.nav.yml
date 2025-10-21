@@ -106,6 +106,7 @@ nav:
         - Installing Security-Guard: serving/app-security/security-guard-install.md
         - Security-guard quickstart: serving/app-security/security-guard-quickstart.md
         - Security-Guard example alerts: serving/app-security/security-guard-example-alerts.md
+        - SecurePodDefaults: serving/app-security/secure-pod-defaults.md
       # Serving - observability
       - Observability:
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
