@@ -5,40 +5,37 @@ components:
 function: how-to
 ---
 
+!!! important
+    The default setting of `diabled` will be changed in the upcoming release of knative 1.21 to be more secure.
 
-## SecurePodDefaults
-
-Knative Serving provides a `secure-pod-defaults` configuration option that gives operators granular control over pod security defaults, enabling progressive adoption of more secure pod configurations while maintaining backward compatibility with existing workloads. This feature offers three security levels—`disabled`, `root-allowed`, and `enabled` allowing organizations to gradually adopt security best practices without breaking container images that require specific permissions. The default is `disabled` to ensure existing deployments continue to work without modification.
+Knative Serving provides a `secure-pod-defaults` configuration option that  allows the default Service configuration to run in the Kubernetes [restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted) Pod Security Standard profile without requiring application developers to explicitly set security properties. This feature offers three security levels: `disabled`, `root-allowed`, and `enabled` allowing organizations to gradually adopt security best practices without breaking container images that require specific permissions. The default is `disabled` to ensure existing deployments continue to work without modification.
 
 
-### Security Levels
+## Security Levels
 
 | Level | Description | Use Case |
 |-------|-------------|----------|
 | **disabled** | No security defaults applied | Legacy workloads, maximum compatibility |
-| **root-allowed** | Applies security defaults (blocks privilege escalation, runtime-default seccomp, drops capabilities) but allows root containers if not already set | Transition period, balanced security |
-| **enabled** | Applies all `root-allowed` defaults plus enforces non-root execution if not already set | Maximum security for production |
-
+| <span style="white-space:nowrap;">**root-allowed**</span> | Implements most of the Kubernetes [restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted) Pod Security Standard profile requirements, with the exception of `runAsNonRoot`, allowing containers to run as root when needed. | Transition period, balanced security |
+| **enabled** | Aligns with the Kubernetes [restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted) Pod Security Standard in addition to enforcing non-root execution if not already set | Maximum security for production |
 
 ## Key Features
 
-### 1. **Backward Compatible Default**
-- Default remains `disabled` to prevent breaking existing deployments
-- Only affects newly created Revisions (admission webhook behavior)
-
-### 2. **Progressive Security Hardening**
+### **Progressive Security Hardening**
 When `root-allowed` is configured:
-- Sets `allowPrivilegeEscalation` to `false` if not specified
-- Sets `seccompProfile` to `RuntimeDefault` if not specified
-- Drops all capabilities if not specified
-- Conditionally adds `NET_BIND_SERVICE` capability if a container port below 1024 is detected and capabilities are not already configured
+security settings only apply if the field is not set -- if it is explicitly set to any value, it's assumed to be intentional, and not modified.
+- Sets `allowPrivilegeEscalation` to `false`
+- Sets `seccompProfile` to `RuntimeDefault`, see [Seccomp and Kubernetes](https://kubernetes.io/docs/reference/node/seccomp/) for more details
+- Drops all capabilities
+  - Conditionally adds `NET_BIND_SERVICE` capability if a container port below 1024 is detected and capabilities are not already configured
 - **Does NOT** enforce `runAsNonRoot` (allows root containers)
 
 When `enabled` is configured:
+
 - All of the above, PLUS
 - Sets `runAsNonRoot` to `true` if not already specified
 
-### 3. **Respects User Intent**
+### **Respects User Intent**
 - Only applies defaults when values are not explicitly set by users
 - Never overrides user-specified security contexts
 
@@ -52,9 +49,11 @@ When `enabled` is configured:
     - `RunAsUser`
     - `SeccompProfile`
     
-    By default, this flag is set to `disabled`. For more information, see [Kubernetes security context](https://knative.dev/docs/serving/feature-flags/#kubernetes-security-context).
+    By default, this flag is set to `disabled`. For more information, see [Kubernetes security context](../configuration/feature-flags/#kubernetes-security-context).
 
 ## Configuration
+
+See [Configuring the Defaults](../configuration/config-defaults/) ConfigMap
 
 Update the `config-features` ConfigMap in `knative-serving` namespace:
 
