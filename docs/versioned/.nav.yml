@@ -278,6 +278,7 @@ nav:
           - Configure gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
           - Config Revision Garbage Collection: serving/revisions/revision-admin-config-options.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
+          - Secure Pod Defaults: serving/app-security/secure-pod-defaults.md
           - Serving encryption configuration:
             - Overview: serving/encryption/encryption-overview.md
             - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
