@@ -7,7 +7,7 @@ components:
 function: tutorial
 ---
 
-# Welcome to the Knative Tutorial
+# Welcome to the Knative Tutorials
 
 ### **Quick Start Tutorial**
 Quickstart tutorial provides a simplified local installation to explore Knative Serving and Eventing features.

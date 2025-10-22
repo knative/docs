@@ -5,7 +5,7 @@ components:
 function: explanation
 ---
 
-# About RedisStreamSource
+# RedisStreamSource
 
 ![stage](https://img.shields.io/badge/Stage-alpha-green?style=flat-square)
 ![version](https://img.shields.io/badge/API_Version-v1alpha1-red?style=flat-square)
