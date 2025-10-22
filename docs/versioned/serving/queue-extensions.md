@@ -5,6 +5,12 @@ components:
 function: how-to
 ---
 
+!!! note
+
+    This integration is current [Alpha](https://github.com/knative/community/blob/main/mechanics/MATURITY-LEVELS.md#alpha-stage).
+    We're trying to guage usage of this so if you're using or interested please reach out to us in
+    [#knative-serving](https://cloud-native.slack.com/archives/C04LMU0AX60) slack.
+
 # Extending Queue Proxy image with QPOptions
 
 Knative service pods include two containers:
