@@ -12,7 +12,7 @@ nav:
           - Tutorial introduction: getting-started/README.md
           - Install Knative using quickstart: getting-started/quickstart-install.md
           - Knative Functions:
-            - Knative Functions: getting-started/about-knative-functions.md
+            - Getting Started: getting-started/about-knative-functions.md
             - Installing Knative Functions: getting-started/install-func.md
             - Creating a function: getting-started/create-a-function.md
             - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
@@ -21,7 +21,7 @@ nav:
             - Autoscaling: getting-started/first-autoscale.md
             - Traffic splitting: getting-started/first-traffic-split.md
           - Knative Eventing:
-            - Knative Eventing: getting-started/getting-started-eventing.md
+            - Getting Started: getting-started/getting-started-eventing.md
             - Sources, Brokers, and Triggers: getting-started/first-broker.md
             - Using a Knative Service as a source: getting-started/first-source.md
             - Using Triggers and sinks: getting-started/first-trigger.md
