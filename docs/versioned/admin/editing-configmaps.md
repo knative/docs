@@ -25,20 +25,11 @@ annotations:
 
 To accurately create a ConfigMap using an existing file, use the Kubernetes[Define the key to use when creating a configmap from a file](https://kubernetes.io/dos/tasks/configure-pod-container/configure-pod-configmap/#define-the-key-to-use-when-creating-a-configmap-from-a-file)
 
-## Value propagation
-
-The ConfigMap change is immediate in the Kubernetes API, but its effect on Pods or applications depends on how the ConfigMap is consumed (volume, environment variables, or API) and whether the application or Pod is designed to pick up the change dynamically or requires a restart. For volumes, updates propagate within seconds, but for environment variables, a Pod restart is needed.
-
-When a ConfigMap currently consumed in a volume is updated, projected keys are eventually updated as well. The `kubelet` checks whether the mounted ConfigMap is fresh on every periodic sync.
-
-Kubernetes does not automatically restart Pods when a ConfigMap changes, even if the ConfigMap is referenced. You may need to trigger a rolling update (e.g., via `kubectl rollout restart`) to ensure the changes are applied to running Pods.
-
-A ConfigMap can be either propagated by watch (default), ttl-based, or by redirecting all requests directly to the API server. Because the `kubelet` uses its local cache for getting the current value of the ConfigMap, there is a delay from the moment when the ConfigMap is updated to the moment when new keys are projected to the Pod. The total delay can be as long as the `kubelet` sync period added to the cache propagation delay. The type of the cache is configurable using the `configMapAndSecretChangeDetectionStrategy` field in the [KubeletConfiguration struct](https://kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1/).
+## Monitoring values
 
 When a field in a ConfigMap is changed, the effect of the change depends on how the ConfigMap is used by the application or resource uses it. Here's a breakdown:
 
 - Immediate Update in Kubernetes API - When you modify a ConfigMap (e.g., using `kubectl edit`, `kubectl apply`, or an API call), the change is immediately reflected in the Kubernetes API and stored in etcd clusters - a consistent and highly-available key value store used as Kubernetes' backing store for all cluster data. The updated ConfigMap is available for querying instantly.
-
 - Mounted as Volumes - If the ConfigMap is mounted as a volume in a Pod, Kubernetes automatically propagates changes to the ConfigMap to the Pod's filesystem. This process typically takes a few seconds to up to 60 seconds because of the kubelet sync interval. Applications should detect or reload these changes (e.g., by watching the file or restarting).
 - Environment Variables - If the ConfigMap is used to set environment variables in a Pod, changes to the ConfigMap do not automatically propagate to the Pod. Pods must be restarted (e.g., by deleting and recreating them) for the updated ConfigMap values to take effect, as environment variables are set at container startup.
 - Direct API Access - If an application directly queries the ConfigMap via the Kubernetes API, it will see the updated values immediately after the change is applied.
