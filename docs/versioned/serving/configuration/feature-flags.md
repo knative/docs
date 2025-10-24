@@ -523,6 +523,34 @@ spec:
 ...
 ```
 
+### Kubernetes DNS Config
+
+* **Type**: Extension
+* **ConfigMap key:** `kubernetes.podspec-dnsconfig`
+
+This flag controls whether a [`DNS config`](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config) can be specified.
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+...
+spec:
+  template:
+    spec:
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - 1.2.3.4
+        searches:
+          - ns1.svc.cluster-domain.example
+          - my.dns.search.suffix
+        options:
+          - name: ndots
+            value: "2"
+          - name: edns0
+...
+```
+
 ### Kubernetes Scheduler Name
 
 * **Type**: Extension
