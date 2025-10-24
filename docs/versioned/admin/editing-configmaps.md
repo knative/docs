@@ -7,17 +7,11 @@ function: explanation
 ---
 # Editing ConfigMaps
 
-This page provides information and best practices for editing ConfigMaps. While there is no technical difference in how Knative uses ConfigMaps in Kubernetes, you should be aware of the following points and tips while working with ConfigMaps:
-
-- The _example key. Don't modify.
-- Value propagation. Know when changes to default settings take affect.
-- Version control. Use ConfigMaps for version control.
-
-The most common way to use ConfigMaps is to configure settings for containers running in a Pod, or in multiple pods, that use a specified namespace. There are a number of other ways to use ConfigMaps as described in [Kubernetes ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) documentation.
+This page provides information and best practices for editing ConfigMaps. Knative usually uses ConfigMaps to manage most system-level configuration, including default values, minimum and maximum values, and names and addresses of connecting services. Because Knative is implemented as a set of controllers, Knative watches the ConfigMaps and should update behavior live shortly after the ConfigMap is updated.
 
 ## The _example key
 
-ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of a configuration key. The key itself is not a key, but a long comment.
+ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of a configuration key. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
 
 In case a user edits the `_example` key by mistakenly thinking their edits would have an affect, the administrator needs to be alerted. The Knative webhook server determines if the `_example key` has been altered. The edit is caught when the value of the checksum for the `_example` key is different when compared with the pod's template annotations. If the checksum is null however, it does not create the warning.
 
@@ -128,18 +122,7 @@ Define ConfigMaps in YAML or JSON files and store them in a version control syst
 
 ### Track Changes in Kubernetes
 
-- Use Kubernetes resource versioning (e.g., `resourceVersion` in metadata) to track changes to the ConfigMap object itself within the cluster. However, this is managed by Kubernetes and not suitable for application-level versioning.
-- Enable audit logging in Kubernetes to track who modified ConfigMaps and when.
-
-### Use Helm for Versioned Configurations
-
-- If using Helm, store ConfigMaps in Helm chart templates or values files and version the chart itself (e.g., `Chart.yaml` with `version: 1.2.3`).
-- Helm’s release history can track which ConfigMap versions were deployed.
-
-### Automate Version Updates
-
-- Use CI/CD pipelines (e.g., GitHub Actions, Jenkins) to automate updates to the version field in ConfigMaps when the application version changes.
-- Example: A pipeline updates `app.properties` with `version=1.2.4` and commits the change to Git.
+Enable audit logging in Kubernetes to track who modified ConfigMaps and when.
 
 ### Validate and Test Changes
 
