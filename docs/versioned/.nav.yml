@@ -265,7 +265,7 @@ nav:
         # Vendor list
         - Using a Knative-based offering: install/knative-offerings.md
       - Configuring Knative:
-        # TODO: add a doc on editing ConfigMaps
+        - Editing ConfigMaps: admin/editing-configmaps.md
         - Configure high-availability components: serving/config-ha.md
         - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
         - Networking Options:
