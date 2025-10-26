@@ -10,7 +10,8 @@ function: how-to
 # Knative Security and Disclosure Information
 
 This page describes how to validate code and report security vulnerabilities in Knative.For a complete description of the Knative threat model, see the following resource:
-* [Knative Security Working Group repository – Threat Model](https://github.com/knative/community/tree/main/working-groups/security)
+
+* [Knative Security Working Group repository-Threat Model](https://github.com/knative/community/tree/main/working-groups/security)
 
 ## Reporting a Vulnerability
 
