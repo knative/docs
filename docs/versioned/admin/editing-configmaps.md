@@ -7,7 +7,49 @@ function: explanation
 ---
 # Editing ConfigMaps
 
-This page provides information and best practices for editing ConfigMaps. Knative usually uses ConfigMaps to manage most system-level configuration, including default values, minimum and maximum values, and names and addresses of connecting services. Because Knative is implemented as a set of controllers, Knative watches the ConfigMaps and should update behavior live shortly after the ConfigMap is updated.
+This page provides information and best practices for editing ConfigMaps. Knative uses ConfigMaps to manage most system-level configuration, including default values, minimum and maximum values, and names and addresses of connecting services. Because Knative is implemented as a set of controllers, Knative watches the ConfigMaps and updates behavior live shortly after the ConfigMap is updated.
+
+## Configurations overview
+
+### Knative Operator and YAML installations
+
+To be written.
+
+### Brokers
+
+When creating a Broker class, you can define default values and settings on different levels of scope. You can specify a ConfigMap that defines the implementation of the Broker, and apply it in different ways.
+
+Knative uses `MTChannelBasedBroker` as the default class for creating Brokers. On the more wider level of scope, you can specify which Broker class to use for a particular namespace.
+
+To create a customized Broker class, you can do either or both of the following:
+
+- For a scope on a cluster wide or on a per namespace basis, use the `config-br-defaults` ConfigMap or the `kafka-channel` ConfigMap to define default values for the Broker. These ConfigMaps are used when a  `spec.config` is *not* the class. For example, use this method if you want to use a `KafkaBroker` Broker class for all other Brokers created on the cluster, but a particular Broker class for Brokers created in `namespace-1`. In the `config-br-defaults` ConfigMap, set the default Broker configuration for one or more dedicated namespaces by including them in the `namespaceDefaults` section.
+
+- Specify a ConfigMap to use in the `spec.config` keys in the Broker class you're defining. That ConfigMap must have a `channel-template-spec` that defines the channel implementation for the Broker.
+
+Set other default configurations for Brokers with these ConfigMaps:
+
+- `config-features` - Defines defaults for features including integration, sender identity, and transport encryption.
+- `default-ch-webhook` - Defines default channel implementation settings.
+- `config-kafka-sink-data-plane` - Used for sending events to the Apache Kafka cluster.
+- `config-ping-defaults` - Defines event resources, such as the the maximum amount of data PingSource can add to cloud events.
+- `sugar-controller` - Manages eventing resources in a cluster or namespace. Disable Sugar Controller by setting `namespace-selector` and `trigger-selector` to an empty string.
+
+### Observability and logging
+
+To be written.
+
+### Deployments and resources
+
+To be written.
+
+### Networking and domains
+
+To be written.
+
+### Security
+
+To be written.
 
 ## The _example key
 
@@ -123,7 +165,9 @@ Enable audit logging in Kubernetes to track who modified ConfigMaps and when.
 ### Best Practices
 
 - Centralize ConfigMaps: Store all ConfigMaps in a dedicated directory in your Git repository (e.g., `k8s/configmaps/`).
-- Use Descriptive Naming: Name ConfigMaps clearly (e.g., `app-name-environment-config`) to avoid confusion.
+- Use Descriptive Naming: Name ConfigMaps cn
+ 
+- learly (e.g., `app-name-environment-config`) to avoid confusion.
 - Document Changes: Include a `CHANGELOG.md` in your repository to document ConfigMap updates alongside application changes.
 - Backup ConfigMaps: Periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes.
 
