@@ -21,19 +21,22 @@ When creating a Broker class, you can define default values and settings on diff
 
 Knative uses `MTChannelBasedBroker` as the default class for creating Brokers. On the more wider level of scope, you can specify which Broker class to use for a particular namespace.
 
+For details, see [Broker Configuration Options](../eventing/brokers/broker-developer-config-options.md), [Configure broker defaults](../eventing/configuration/broker-configuration.md) and [Channel based broker](../eventing/brokers/broker-types/channel-based-broker/README.md).
+
 To create a customized Broker class, you can do either or both of the following:
 
-- For a scope on a cluster wide or on a per namespace basis, use the `config-br-defaults` ConfigMap or the `kafka-channel` ConfigMap to define default values for the Broker. These ConfigMaps are used when a  `spec.config` is *not* the class. For example, use this method if you want to use a `KafkaBroker` Broker class for all other Brokers created on the cluster, but a particular Broker class for Brokers created in `namespace-1`. In the `config-br-defaults` ConfigMap, set the default Broker configuration for one or more dedicated namespaces by including them in the `namespaceDefaults` section.
+- For a scope on a cluster wide or on a per namespace basis, use the `config-br-defaults` ConfigMap or the `kafka-channel` ConfigMap to define default values for the Broker. These ConfigMaps are used when a  `spec.config` is *not* the class. For example, use this method if you want to use a [Kafka Broker](../eventing/brokers/broker-types/kafka-broker/README.md) for all other Brokers created on the cluster, but a particular Broker class for Brokers created in `namespace-1`. In the `config-br-defaults` ConfigMap, set the default Broker configuration for one or more dedicated namespaces by including them in the `namespaceDefaults` section.
 
 - Specify a ConfigMap to use in the `spec.config` keys in the Broker class you're defining. That ConfigMap must have a `channel-template-spec` that defines the channel implementation for the Broker.
 
 Set other default configurations for Brokers with these ConfigMaps:
 
-- `config-features` - Defines defaults for features including integration, sender identity, and transport encryption.
-- `default-ch-webhook` - Defines default channel implementation settings.
-- `config-kafka-sink-data-plane` - Used for sending events to the Apache Kafka cluster.
-- `config-ping-defaults` - Defines event resources, such as the the maximum amount of data PingSource can add to cloud events.
-- `sugar-controller` - Manages eventing resources in a cluster or namespace. Disable Sugar Controller by setting `namespace-selector` and `trigger-selector` to an empty string.
+- `config-features` - Defines defaults for features including integration, sender identity, and transport encryption. See [Eventing integration with Istio service mesh](../eventing/features/istio-integration.md).
+- `default-ch-webhook` - Defines default channel implementation settings. See [Channel types and defaults](../eventing/channels/channel-types-defaults.md).
+- `config-kafka-features` - Enable KEDA autoscaling. See [Configure KEDA Autoscaling of Knative Kafka Resources](../eventing/configuration/keda-configuration.md).
+- `config-kafka-sink-data-plane` - Used for sending events to the Apache Kafka cluster. See [Kafka Broker](../eventing/brokers/broker-types/kafka-broker/README.md)
+- `config-ping-defaults` - Defines event resources, such as the the maximum amount of data PingSource can add to cloud events. See [Configure event source defaults](../eventing/configuration/sources-configuration.md).
+- `sugar-controller` - The default controller that manages eventing resources in a cluster or namespace. Disable Sugar Controller by setting `namespace-selector` and `trigger-selector` to an empty string. See [Configure Sugar Controller](../eventing/configuration/sugar-configuration.md)
 
 ### Observability and logging
 
