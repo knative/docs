@@ -13,7 +13,7 @@ This page describes how to validate code and report security vulnerabilities in 
 
 For a complete description of the Knative threat model, see the following resource:
 
-* [Knative Security Working Group repository-Threat Model](https://github.com/knative/community/blob/main/working-groups/security/threat-model.md)
+* [Knative Threat Model](./threat-model.md)
 
 ## Reporting a Vulnerability
 
