@@ -5,6 +5,6 @@ components:
 function: tutorial
 ---
 
-# About Knative Functions
+# Knative Functions
 
 --8<-- "about-functions.md"
