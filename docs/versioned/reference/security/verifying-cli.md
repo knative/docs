@@ -6,7 +6,7 @@ match those of a Knative release.  While many of these steps may be handled by p
 installers like `brew`, you can always perform these steps by hand if you are unsure
 about the provenance of those binaries.
 
-## Verifying a Code Signature
+## Verifying a Binary Signature
 
 ### All platforms
 
