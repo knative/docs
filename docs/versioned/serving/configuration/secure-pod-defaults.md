@@ -21,7 +21,7 @@ Knative Serving provides a `secure-pod-defaults` configuration option that  allo
 
 ## Key Features
 
-### **Progressive Security Hardening**
+### Progressive Security Hardening
 When `root-allowed` is configured:
 security settings only apply if the field is not set -- if it is explicitly set to any value, it's assumed to be intentional, and not modified.
 - Sets `allowPrivilegeEscalation` to `false`
@@ -35,7 +35,7 @@ When `enabled` is configured:
 - All of the above, PLUS
 - Sets `runAsNonRoot` to `true` if not already specified
 
-### **Respects User Intent**
+### Respects User Intent
 - Only applies defaults when values are not explicitly set by users
 - Never overrides user-specified security contexts
 
