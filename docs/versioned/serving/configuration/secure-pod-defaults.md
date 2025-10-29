@@ -49,11 +49,11 @@ When `enabled` is configured:
     - `RunAsUser`
     - `SeccompProfile`
     
-    By default, this flag is set to `disabled`. For more information, see [Kubernetes security context](../configuration/feature-flags/#kubernetes-security-context).
+    By default, this flag is set to `disabled`. For more information, see [Kubernetes security context](feature-flags.md/#kubernetes-security-context).
 
 ## Configuration
 
-See [Configuring the Defaults](../configuration/config-defaults/) ConfigMap
+See [Configuring the Defaults](config-defaults.md) ConfigMap
 
 Update the `config-features` ConfigMap in `knative-serving` namespace:
 
