@@ -53,7 +53,7 @@ For more information or for troubleshooting help, see the [#knative-security](ht
 
 ## Security-Guard Use Cases
 
-Security-Guard support four different stages in the life of a knative service from a security standpoint.
+Security-Guard support four different stages in the life of a Knative Service from a security standpoint.
 
 * Zero-Day
 * Vulnerable

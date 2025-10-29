@@ -6,7 +6,7 @@ function: how-to
 ---
 
 !!! important
-    The default setting of `diabled` will be changed in the upcoming release of knative 1.21 to be more secure.
+    The default setting of `disabled` will be changed in the upcoming release of Knative 1.21 to be more secure.
 
 Knative Serving provides a `secure-pod-defaults` configuration option that  allows the default Service configuration to run in the Kubernetes [restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted) Pod Security Standard profile without requiring application developers to explicitly set security properties. This feature offers three security levels: `disabled`, `root-allowed`, and `enabled` allowing organizations to gradually adopt security best practices without breaking container images that require specific permissions. The default is `disabled` to ensure existing deployments continue to work without modification.
 
