@@ -1,9 +1,14 @@
+<!-- Referenced by:
+  - eventing/observability/logging/collecting-logs.md
+  - serving/observability/logging/collecting-logs.md
+-->
+
 # Logging
 
 You can use [Fluent Bit](https://docs.fluentbit.io/), a log processor and forwarder, to collect
 Kubernetes logs in a central directory.
 This is not required to run Knative, but can be helpful with
-[Knative Serving](/docs/serving/), which automatically deletes pods and associated logs when they are no longer needed.
+[Knative Serving](../../../serving/README.md), which automatically deletes pods and associated logs when they are no longer needed.
 
 Fluent Bit supports exporting to a number of other log providers. If you already have an existing log provider, for example, Splunk, Datadog, ElasticSearch, or Stackdriver, you can follow the [FluentBit documentation](https://docs.fluentbit.io/manual/pipeline/outputs) to configure log forwarders.
 

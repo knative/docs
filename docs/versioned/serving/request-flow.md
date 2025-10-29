@@ -7,7 +7,7 @@ function: explanation
 
 # HTTP Request Flows
 
-While [the overview](/docs/serving) describes the logical components and
+While [the overview](./README.md) describes the logical components and
 [the architecture](./architecture.md) describes the over all architecture of Knative
 Serving, this page explains the behavior and flow of HTTP requests to an
 application which is running on Knative Serving.
