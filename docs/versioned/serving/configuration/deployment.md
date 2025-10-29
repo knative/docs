@@ -180,4 +180,4 @@ The setting works with Service labels and will configure either a default or one
 
 See [Kubernetes RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/) docs for more information.
 
-Separately, there is a feature flag to allow [manual configuration of RuntimeClassName](/docs/serving/configuration/feature-flags/#kubernetes-runtime-class).
+Separately, there is a feature flag to allow [manual configuration of RuntimeClassName](./feature-flags.md#kubernetes-runtime-class).

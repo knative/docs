@@ -1,3 +1,8 @@
+<!-- Referenced by:
+- eventing/observability/metrics/collecting-metrics.md
+- serving/observability/metrics/collecting-metrics.md
+-->
+
 # Collecting Metrics in Knative
 
 Knative leverages [OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) for exporting metrics.
