@@ -5,54 +5,10 @@ components:
   - eventing
 function: explanation
 ---
-# Editing ConfigMaps
 
-This page provides information and best practices for editing ConfigMaps. Knative uses ConfigMaps to manage most system-level configuration, including default values, minimum and maximum values, and names and addresses of connecting services. Because Knative is implemented as a set of controllers, Knative watches the ConfigMaps and updates behavior live shortly after the ConfigMap is updated.
+# Working with ConfigMaps
 
-## Configurations overview
-
-### Knative Operator and YAML installations
-
-To be written.
-
-### Brokers
-
-When creating a Broker class, you can define default values and settings on different levels of scope. You can specify a ConfigMap that defines the implementation of the Broker, and apply it in different ways.
-
-Knative uses `MTChannelBasedBroker` as the default class for creating Brokers. For scopes at the namespace level, you can specify which Broker class to use for a particular namespace.
-
-For details, see [Broker Configuration Options](../eventing/brokers/broker-developer-config-options.md), [Configure broker defaults](../eventing/configuration/broker-configuration.md) and [Channel based broker](../eventing/brokers/broker-types/channel-based-broker/README.md).
-
-To create a customized Broker class, you can do either or both of the following:
-
-- Specify a ConfigMap to use in the `spec.config` keys in the Broker class you're defining. That ConfigMap must have a `channel-template-spec` that defines the channel implementation for the Broker.
-
-- For a scope on a cluster wide or on a per namespace basis, use the `config-br-defaults` ConfigMap or the `kafka-channel` ConfigMap to define default values for the Broker. Knative refers to these ConfigMaps are used when a  `spec.config` is *not* present. For example, use this method if you want to use a [Kafka Broker](../eventing/brokers/broker-types/kafka-broker/README.md) for all Brokers created on the cluster, except for a particular Broker created in `namespace-1`. In the `config-br-defaults` ConfigMap, set the default Broker configuration for one or more dedicated namespaces by including them in the `namespaceDefaults` section.
-
-Set other default configurations for Brokers with these ConfigMaps:
-
-- `config-features` - Defines defaults for features including integration, sender identity, and transport encryption. See [Eventing integration with Istio service mesh](../eventing/features/istio-integration.md).
-- `default-ch-webhook` - Defines default channel implementation settings. See [Channel types and defaults](../eventing/channels/channel-types-defaults.md).
-- `config-kafka-features` - Enables KEDA autoscaling. See [Configure KEDA Autoscaling of Knative Kafka Resources](../eventing/configuration/keda-configuration.md).
-- `config-kafka-sink-data-plane` - Sends events to the Apache Kafka cluster. See [Kafka Broker](../eventing/brokers/broker-types/kafka-broker/README.md)
-- `config-ping-defaults` - Defines event resources, such as the the maximum amount of data PingSource can add to cloud events. See [Configure event source defaults](../eventing/configuration/sources-configuration.md).
-- `sugar-controller` - Defines the default controller that manages eventing resources in a cluster or namespace. Disable the Sugar Controller by setting `namespace-selector` and `trigger-selector` to an empty string. See [Configure Sugar Controller](../eventing/configuration/sugar-configuration.md)
-
-### Observability and logging
-
-To be written.
-
-### Deployments and resources
-
-To be written.
-
-### Networking and domains
-
-To be written.
-
-### Security
-
-To be written.
+This page provides important information and best practices for working with Kubernetes ConfigMaps. 
 
 ## The _example key
 
@@ -81,13 +37,20 @@ When a field in a ConfigMap is changed, the effect of the change depends on how 
 - Special Cases - Some applications or operators (e.g., those using tools like `reloader`) can watch for ConfigMap changes and automatically trigger Pod restarts or reloads.
 - If the ConfigMap is used by a controller (e.g., a Deployment), changes might not affect running Pods unless the controller reconciles the change, which depends on its implementation.
 
-## Version control
+## Best practices
 
-To maintain version control of Kubernetes ConfigMap settings and the version of the object they represent, you can follow these practices.
+This section provides recommended procedures for storage, monitoring, and version control of ConfigMaps.
 
-### Store ConfigMaps as code
+### Validate and Test Changes
 
-Define ConfigMaps in YAML or JSON files and store them in a version control system (VCS) like Git. For example:
+- Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or `kubectl apply --dry-run=client`.
+- Test ConfigMap changes in a staging environment to ensure compatibility with the application version.
+
+### Storage and versioning
+
+Periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
+
+You can also define ConfigMaps in YAML or JSON files and store them in a version control system (VCS) like Git. For example:
 
     ```yml
     apiVersion: v1
@@ -103,40 +66,18 @@ Define ConfigMaps in YAML or JSON files and store them in a version control syst
         db.port=5432
     ```
 
-- Commit these files to a Git repository to track changes over time.
+### Git recommendations
 
-### Versioning ConfigMaps in Git
+In addition to diligent usage of commit messages, here are some suggestions for ConfigMaps in GitHub:
 
-- Use meaningful commit messages to describe changes to ConfigMap data (e.g., "Updated app.properties to version 1.2.4").
+- Centralize ConfigMaps: Store all ConfigMaps in a dedicated directory in your Git repository (e.g., `k8s/configmaps/`).
 - Tag commits in Git with version numbers (e.g., `git tag config-v1.2.3`) to mark specific ConfigMap versions.
-- Use branches for different environments (e.g., `dev`, `staging`, `prod`) or feature-specific ConfigMap changes.
-
-### Track Object Version in ConfigMap
-
-- Include a version field in the ConfigMap’s data to explicitly track the version of the application or configuration it represents.
-
-    ```yaml
-    data:
-    app.properties: |
-      version=1.2.3
-      # other settings
-    ```
-
-- Alternatively, use annotations in the ConfigMap’s metadata:
-
-    ```yaml
-    metadata:
-      name: my-app-config
-      annotations:
-        app-version: "1.2.3"
-    ```
-
-### Use GitOps for Deployment
-
 - Implement a GitOps workflow with tools like ArgoCD or Flux to synchronize ConfigMaps from Git to your Kubernetes cluster.
 - These tools detect changes in the Git repository and automatically apply them to the cluster, ensuring the deployed ConfigMap matches the versioned configuration in Git.
 
-### Immutable ConfigMaps with Versioned Names
+### Immutable ConfigMaps
+
+If you have services processing information that must not change, such as for finances and payment processing, consider using immutable ConfigMaps. This approach ensures ConfigMaps are not modified in-place, preserving historical versions.
 
 - Create immutable ConfigMaps by appending a version or hash to the ConfigMap name (e.g., `my-app-config-v1.2.3` or `my-app-config-abc123`).
 - Update the application’s Deployment or Pod to reference the new ConfigMap version when rolling out changes.
@@ -153,24 +94,3 @@ Define ConfigMaps in YAML or JSON files and store them in a version control syst
             - configMapRef:
                 name: my-app-config-v1.2.3
     ```
-
-- This approach ensures ConfigMaps are not modified in-place, preserving historical versions.
-
-### Track Changes in Kubernetes
-
-Enable audit logging in Kubernetes to track who modified ConfigMaps and when.
-
-### Validate and Test Changes
-
-- Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or `kubectl apply --dry-run=client`.
-- Test ConfigMap changes in a staging environment to ensure compatibility with the application version.
-
-### Best Practices
-
-- Centralize ConfigMaps: Store all ConfigMaps in a dedicated directory in your Git repository (e.g., `k8s/configmaps/`).
-- Use Descriptive Naming: Name ConfigMaps cn
- 
-- learly (e.g., `app-name-environment-config`) to avoid confusion.
-- Document Changes: Include a `CHANGELOG.md` in your repository to document ConfigMap updates alongside application changes.
-- Backup ConfigMaps: Periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes.
-
