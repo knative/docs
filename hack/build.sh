@@ -40,9 +40,28 @@ readonly TEMP="$(mktemp -d)"
 readonly SITE=$PWD/site
 rm -rf site/
 
+if [[ -z "${GITHUB_TOKEN}" ]]; then
+  echo "❌ Error: GITHUB_TOKEN environment variable is not set." >&2
+  exit 1
+fi
+
+REMOTE_BRANCH=$(git remote | grep -q upstream && echo upstream || echo origin)
+
 # If we're running on Netlify, update git branches
 if [ "$CI" == "true" ]; then
-  git fetch --prune origin
+  git fetch --prune $REMOTE_BRANCH
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Require gnu-sed.
+  if ! [ -x "$(command -v gsed)" ]; then
+    echo "Error: 'gsed' is not istalled." >&2
+    echo "If you are using Homebrew, install with 'brew install gnu-sed'." >&2
+    exit 1
+  fi
+  SED_CMD=gsed
+else
+  SED_CMD=sed
 fi
 
 
@@ -64,29 +83,29 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   # Remove pre-release documents from search.  This has to be applied to each markdown, unfortunately.
   # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
   # and the seconds inserts commands into the front-matter.
-  find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '1s/^\([^-]\)/---\n---\n\1/'
-  find "$TEMP/content/docs/development" -type f -name '*.md' | xargs sed -i '2isearch:\n exclude: true'
+  find "$TEMP/content/docs/development" -type f -name '*.md' | xargs ${SED_CMD} -i '1s/^\([^-]\)/---\n---\n\1/'
+  find "$TEMP/content/docs/development" -type f -name '*.md' | xargs ${SED_CMD} -i '2isearch:\n exclude: true'
   echo "- Docs: development" >> "$TEMP/content/docs/.nav.yml"
-  sed -i 's| versioned/| development/|g' "$TEMP/content/config/redirects.yml"
+  ${SED_CMD} -i 's| versioned/| development/|g' "$TEMP/content/config/redirects.yml"
 
   # Handle current release specially, as we don't include a version slug
   # Note that git worktree reuses the same git clone, so we don't need to clone 50+MB each time.
-  git worktree add --detach "$TEMP/current-release" "origin/${DOCS_BRANCHES[0]}"
+  git worktree add --detach "$TEMP/current-release" "${REMOTE_BRANCH}/${DOCS_BRANCHES[0]}"
   if [ -d "$TEMP/current-release/docs/versioned" ]; then
     cp -r "$TEMP/current-release/docs/versioned" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/docs/.meta.yml"
     # Fix up redirects from old versioned/ path to docs/ and append them to redirects.
     # We only do this for development (so we can see effects) and docs (current)
-    grep '^    ' "$TEMP/current-release/config/redirects.yml" | sed 's| versioned/| docs/|g' >> "$TEMP/content/config/redirects.yml"
+    grep '^    ' "$TEMP/current-release/config/redirects.yml" | ${SED_CMD} 's| versioned/| docs/|g' >> "$TEMP/content/config/redirects.yml"
   else
     cp -r "$TEMP/current-release/docs" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/" >> "$TEMP/content/docs/docs/.meta.yml"
     # Older redirects were already for /docs/, but did not have the right destination path.
-    grep '^    ' "$TEMP/current-release/config/redirects.yml" | sed '/:  *http/! s|: |: docs/|' >> "$TEMP/content/config/redirects.yml"
+    grep '^    ' "$TEMP/current-release/config/redirects.yml" | ${SED_CMD} '/:  *http/! s|: |: docs/|' >> "$TEMP/content/config/redirects.yml"
     # Copy the nav, but strip out non-versioned content, starting with blog
     # This can be retired after we stop supporting v1.19.
     if [ ! -f "$TEMP/content/docs/docs/.nav.yml" ]; then
-      sed '/- Blog:/,$d' "$TEMP/current-release/config/nav.yml" >> "$TEMP/content/docs/docs/.nav.yml"
+      ${SED_CMD} '/- Blog:/,$d' "$TEMP/current-release/config/nav.yml" >> "$TEMP/content/docs/docs/.nav.yml"
     fi
     # Redirect from old homepage to concepts documentation, if it exists (pre-1.20)
     if [ -f "$TEMP/content/docs/docs/concepts/README.md" ]; then
@@ -105,7 +124,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
     version=${previous[$i]}
 
     echo "Building for previous version $version"
-    git worktree add --detach "$TEMP/docs-$version" "origin/${DOCS_BRANCHES[i+1]}"
+    git worktree add --detach "$TEMP/docs-$version" "${REMOTE_BRANCH}/${DOCS_BRANCHES[i+1]}"
     if [ -d "$TEMP/docs-$version/docs/versioned" ]; then
       cp -r "$TEMP/docs-$version/docs/versioned" "$TEMP/content/docs/v$version-docs"
       echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
@@ -115,7 +134,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
       # Copy the nav, but strip out non-versioned content, starting with blog
       # This can be retired after we stop supporting v1.19.
       if [ ! -f "$TEMP/content/docs/v$version-docs/.nav.yml" ]; then
-        sed '/- Blog:/,$d' "$TEMP/docs-$version/config/nav.yml" >> "$TEMP/content/docs/v$version-docs/.nav.yml"
+        ${SED_CMD} '/- Blog:/,$d' "$TEMP/docs-$version/config/nav.yml" >> "$TEMP/content/docs/v$version-docs/.nav.yml"
       fi
       # Redirect from old homepage to concepts documentation, if it exists (pre-1.20)
       if [ -f "$TEMP/content/docs/v${version}-docs/concepts/README.md" ]; then
@@ -134,8 +153,8 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
     # Remove older-version documents from search.  This has to be applied to each markdown, unfortunately.
     # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
     # and the seconds inserts commands into the front-matter.
-    find "$TEMP/content/docs/v$version-docs" -type f -name '*.md' | xargs sed -i '1s/^\([^-]\)/---\n---\n\1/'
-    find "$TEMP/content/docs/v$version-docs" -type f -name '*.md' | xargs sed -i '2isearch:\n exclude: true'
+    find "$TEMP/content/docs/v$version-docs" -type f -name '*.md' | xargs ${SED_CMD} -i '1s/^\([^-]\)/---\n---\n\1/'
+    find "$TEMP/content/docs/v$version-docs" -type f -name '*.md' | xargs ${SED_CMD} -i '2isearch:\n exclude: true'
   done
 
   # Put the development version at the end of the JSON list of documentation,
