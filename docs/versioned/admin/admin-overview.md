@@ -37,11 +37,9 @@ This section provides an overview of the current configurations procedures in th
 
 ### Network options
 
-| Configuration | Frequency | Tool | ConfigMap |
-| --- | --- | --- | --- |
-| [Configure the ingress gateway](../serving/setting-up-custom-ingress-gateway.md) | Infrequent | kubectl | config-istio |
-| [Configure Domain names](../serving/using-a-custom-domain.md) | Infrequent | kubectl | config-domain |
-| [Istio Authorization](../serving/istio-authorization.md) | Infrequent | kubectl | |
+Reconfigure the default gateway, [Configure the ingress gateway](../serving/setting-up-custom-ingress-gateway.md), with the `config-istio` ConfigMap. Grant accesses [Istio Authorization](../serving/istio-authorization.md), and [Configure Domain names](../serving/using-a-custom-domain.md) using the `config-domain` ConfigMap.
+
+Make these configurations using `kubectl` when creating clusters and as needed.
 
 ### Serving configuration
 
