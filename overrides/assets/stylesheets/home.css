@@ -524,13 +524,18 @@ div.components-content {
 /* No next/prev links on home page so make sure next/prev area of footer collapses nicely */
 footer nav.md-footer__inner {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .md-footer-meta {
-  padding: 1em 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .md-footer-copyright {
+  margin: 0;
   margin-right: 18px;
 }
 
