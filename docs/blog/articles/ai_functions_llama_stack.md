@@ -15,7 +15,7 @@ Llama Stack is an open-source framework for building generative AI applications.
 
 * Standalone applications as examples for how to build production-grade AI applications with Llama Stack
 
-<img alt="Llama Stack" src="https://llama-stack.readthedocs.io/en/latest/_images/llama-stack.png" style="width: 400px;" />
+<img alt="Llama Stack" src="https://llamastack.github.io/img/llama-stack.png" style="width: 400px;" />
 
 ### Llama Stack setup for Kubernetes
 
