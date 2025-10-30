@@ -9,6 +9,16 @@ function: explanation
 
 This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster.
 
+```mermaid
+---
+config:
+  theme: redux
+---
+flowchart TD
+    A(["Administrator"]) --> B{"Knative"}
+    B --> C["Knative Serving"] & D["Knative Eventing"]
+```
+
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
 
 Knative includes a plugin system to integrate with existing infrastructure in the cluster, enabling Knative resources such as Routes and Brokers to be implemented using one of multiple underlying suppliers. For example, a Knative Eventing app can deliver events to a Broker that triggers a function based on the received event. In a testing cluster, the delivery might use an in-memory option, while a staging or production environment might use a cloud-provided Kafka service.
@@ -23,7 +33,29 @@ See the [Installation roadmap](../install/README.md#installation-roadmap) for pr
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
-### Resource scoping and namespaces
+This section provides an overview of the current configurations procedures in the Knative documentation of interest to Administrators.
+
+### Network options
+
+| Configuration | Frequency | Tool | ConfigMap |
+| --- | --- | --- | --- |
+| [Configure the ingress gateway](../serving/setting-up-custom-ingress-gateway.md) | Infrequent | kubectl | config-istio |
+| [Configure Domain names](../serving/using-a-custom-domain.md) | Infrequent | kubectl | config-domain |
+| [Istio Authorization](../serving/istio-authorization.md) | Infrequent | kubectl | |
+
+### Serving configuration
+
+TBW
+
+#### Encryption
+
+TBW
+
+### Eventing configurations
+
+TBW
+
+## Resource scoping and namespaces
 
 Knative resources are namespaced. Knative adheres to the Kubernetes model of namespace-based isolation that lets you manage development teams and resources by assigning them to namespaces.
 
@@ -36,7 +68,7 @@ You can optimize and enforce isolation involving namespaces using standard Kuber
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 
-### Configuring Knative components
+## Configuring Knative components
 
 Knative configurations are performed by the following methods:
 
@@ -52,49 +84,6 @@ Knative configurations are performed by the following methods:
 
     Some platform-wide settings can be managed declaratively using the Knative Operator.
 
-### Configuration tasks
-
-Knative documentation provides the following configuration procedures. This list is subject subject to change.
-
-Configurations for default settings:
-
-- [Broker defaults](../eventing/configuration/broker-configuration.md)
-- [ConfigMap defaults](../serving/configuration/config-defaults.md)
-- [Event source defaults](../eventing/configuration/sources-configuration.md)
-- [Channel defaults](../eventing/configuration/channel-configuration.md)
-- [Kafka channel defaults](../eventing/configuration/kafka-channel-configuration.md)
-- [Domain names](../serving/using-a-custom-domain.md)
-- [Ingress gateway replacement](../serving/setting-up-custom-ingress-gateway.md)
-
-Configurations for new development:
-
-- [Deployment resources](../serving/configuration/deployment.md)
-- [Istio access to deployed services](../serving/istio-authorization.md)
-- [Namespace exclusion from webhooks](../serving/istio-authorization.md)
-
-Configurations for maintenance:
-
-- [Garbage collection](../serving/revisions/revision-admin-config-options.md)
-- [High availability](../serving/config-ha.md)
-- [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md)
-- [Autoscaling of Kafka features](../eventing/configuration/keda-configuration.md)
-
-Configurations for security encryptions:
-
-- [cert-manager](../serving/encryption/configure-certmanager-integration.md)
-- [External domains](../serving/encryption/external-domain-tls.md)
-- [Local domains](../serving/encryption/cluster-local-domain-tls.md)
-- [system-internal](../serving/encryption/system-internal-tls.md)
-
-Configurations for extensions:
-
-- [Kafka Broker features](../serving/encryption/system-internal-tls.md)
-- [Sugar Controller](../eventing/configuration/sugar-configuration.md)
-
-Configurations for flagging features:
-
-- [Serving features](../serving/configuration/feature-flags.md)
-- [Eventing features](../eventing/features/README.md)
 
 ## Authorizations
 
