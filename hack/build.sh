@@ -40,16 +40,16 @@ readonly TEMP="$(mktemp -d)"
 readonly SITE=$PWD/site
 rm -rf site/
 
-if [[ -z "${GITHUB_TOKEN}" ]]; then
-  echo "❌ Error: GITHUB_TOKEN environment variable is not set." >&2
-  exit 1
-fi
 
 REMOTE_BRANCH=$(git remote | grep -q upstream && echo upstream || echo origin)
 
 # If we're running on Netlify, update git branches
 if [ "$CI" == "true" ]; then
   git fetch --prune $REMOTE_BRANCH
+elif [[ -z "${GITHUB_TOKEN}" ]]; then
+  # Don't require GITHUB_TOKEN in CI since netlify prunes it
+  echo "❌ Error: GITHUB_TOKEN environment variable is not set." >&2
+  exit 1
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
