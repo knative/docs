@@ -8,7 +8,7 @@ function: explanation
 
 # Working with ConfigMaps
 
-This page provides important information and best practices for working with Kubernetes ConfigMaps. 
+This page provides important information and best practices for working with Kubernetes ConfigMaps.
 
 ## The _example key
 
@@ -43,7 +43,7 @@ This section provides recommended procedures for storage, monitoring, and versio
 
 ### Validate and Test Changes
 
-- Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or `kubectl apply --dry-run=client`.
+- Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or `kubectl apply --dry-run=server`.
 - Test ConfigMap changes in a staging environment to ensure compatibility with the application version.
 
 ### Storage and versioning
@@ -75,22 +75,3 @@ In addition to diligent usage of commit messages, here are some suggestions for 
 - Implement a GitOps workflow with tools like ArgoCD or Flux to synchronize ConfigMaps from Git to your Kubernetes cluster.
 - These tools detect changes in the Git repository and automatically apply them to the cluster, ensuring the deployed ConfigMap matches the versioned configuration in Git.
 
-### Immutable ConfigMaps
-
-If you have services processing information that must not change, such as for finances and payment processing, consider using immutable ConfigMaps. This approach ensures ConfigMaps are not modified in-place, preserving historical versions.
-
-- Create immutable ConfigMaps by appending a version or hash to the ConfigMap name (e.g., `my-app-config-v1.2.3` or `my-app-config-abc123`).
-- Update the application’s Deployment or Pod to reference the new ConfigMap version when rolling out changes.
-
-    ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
-    spec:
-      template:
-        spec:
-          containers:
-          - name: my-app
-            envFrom:
-            - configMapRef:
-                name: my-app-config-v1.2.3
-    ```
