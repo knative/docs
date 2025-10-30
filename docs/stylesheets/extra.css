@@ -408,6 +408,9 @@ a.md-header__button.md-logo img {
 .md-footer {
   color: var(--md-typeset-a-color);
   background-color: var(--md-primary-fg-color--dark);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .md-footer .md-footer-copyright {
@@ -417,12 +420,16 @@ a.md-header__button.md-logo img {
 .md-footer-meta {
   background-color: var(--md-footer-bg-color);
   width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
 }
 
 .md-footer-meta__inner {
   display: flex;
   flex-direction: row;
-  margin: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0.5rem 1.5rem;
 }
 
 .footer-links {
