@@ -19,7 +19,7 @@ Llama Stack is an open-source framework for building generative AI applications.
 
 ### Llama Stack setup for Kubernetes
 
-For Llama Stack an easy way to get started is using [Ollama](https://github.com/ollama/ollama){:target="_blank"} as the inference provider for a Llama Model. The [Llama Stack Quickstart](https://llama-stack.readthedocs.io/en/latest/getting_started/index.html){:target="_blank"} shows how to do this for a local environment. But we are using Kubernetes! For k8s, you need:
+For Llama Stack an easy way to get started is using [Ollama](https://github.com/ollama/ollama){:target="_blank"} as the inference provider for a Llama Model. The [Llama Stack Quickstart](https://llamastack.github.io/docs/getting_started/quickstart){:target="_blank"} shows how to do this for a local environment. But we are using Kubernetes! For k8s, you need:
 
 * [Kind](https://kind.sigs.k8s.io/){:target="_blank"}
 * [Ollama](https://github.com/ollama/ollama){:target="_blank"}
