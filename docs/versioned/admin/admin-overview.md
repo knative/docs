@@ -58,13 +58,29 @@ Of particular interest to cluster administrators is that Knative supports custom
 
 See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
 
+## Configuring Knative components
+
+Knative configurations are performed by the following methods:
+
+- Editing YAML manifests and applying with the `kubectl` tool
+
+    Modify resource definitions directly, including labels, annotations, and field values. You can use Kubernetes features such as [OPA](https://kubernetes.io/blog/2019/08/06/opa-gatekeeper-policy-and-governance-for-kubernetes/) and [Kyverno](https://kyverno.io) to enforce specific values on a resource type, or use ConfigMaps in plugin installations to set values at the cluster level.
+
+- Using ConfigMaps
+
+    Store and manage configuration data as key-value pairs. ConfigMaps are frequently used to tune platform-wide behavior. Most of the Knative ConfigMaps are in the `knative-serving` and `knative-eventing` namespaces. Their settings apply to all the relevant Knative components in all namespaces.
+
+- Using the Knative Operator
+
+    Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. For more information, see [Installing CLI tools](../client/README.md)
+
 ## Configuration summaries
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
 The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, some by applying YAML files you create.
 
-### Network
+### Network configuration summaries
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -72,7 +88,7 @@ The following sections provide an overview of the current configurations procedu
 | [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
 | [Domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
 
-### Serving
+### Serving configuration summaries
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -85,7 +101,7 @@ The following sections provide an overview of the current configurations procedu
 | [High-availability components](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
 | [Namespace exclusion from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 
-### Eventing
+### Eventing configuration summaries
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -109,23 +125,6 @@ You can optimize and enforce isolation involving namespaces using standard Kuber
 - [Resource Quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-
-## Configuring Knative components
-
-Knative configurations are performed by the following methods:
-
-- Editing YAML manifests
-
-    Modify resource definitions directly, including labels, annotations, and field values. You can use Kubernetes features such as [OPA](https://kubernetes.io/blog/2019/08/06/opa-gatekeeper-policy-and-governance-for-kubernetes/) and [Kyverno](https://kyverno.io) to enforce specific values on a resource type, or use ConfigMaps in plugin installations to set values at the cluster level.
-
-- Using ConfigMaps
-
-    Store and manage configuration data as key-value pairs. ConfigMaps are frequently used to tune platform-wide behavior. Most of the Knative ConfigMaps are in the `knative-serving` and `knative-eventing` namespaces. Their settings apply to all the relevant Knative components in all namespaces.
-
-- Using the Knative Operator
-
-    Some platform-wide settings can be managed declaratively using the Knative Operator.
-
 
 ## Authorizations
 
