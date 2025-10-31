@@ -78,7 +78,7 @@ Knative uses Kubernetes YAML manifests to define and configure system components
 
 ## Configuration summaries
 
-The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, some by applying YAML files you create.
+The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, with some procedures applying YAML files.
 
 ### Networking
 
