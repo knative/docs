@@ -58,7 +58,7 @@ Of particular interest to cluster administrators is that Knative supports custom
 
 See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
 
-## Configuring Knative components
+## Knative configurations
 
 Knative configurations are performed by the following methods:
 
@@ -74,9 +74,9 @@ Knative configurations are performed by the following methods:
 
     Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. For more information, see [Installing CLI tools](../client/README.md)
 
-## Configuration summaries
-
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
+
+## Configuration summaries
 
 The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, some by applying YAML files you create.
 
