@@ -101,6 +101,14 @@ The following sections provide an overview of the current configurations procedu
 | [High-availability components](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
 | [Namespace exclusion from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 
+### Compressed view test - Serving
+
+| Configuration and ConfigMap (if applicable) |
+| --  |
+| [Deployment resources](../serving/configuration/deployment.md) - `config-deployment` <br> [Defaults ConfigMap](../serving/configuration/config-defaults.md) - `config-defaults` <br> [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) - `config-network` <br> [Garbage collection](../serving/revisions/revision-admin-config-options.md) - `config-gc` <br> [Encryption Overview](../serving/encryption/encryption-overview.md)- `config-network` <br> [Cert-manager integration](../serving/encryption/configure-certmanager-integration.md) <br>  [High-availability components](../serving/config-ha.md) <br> [Namespace exclusion from the Knative webhook](../serving/webhook-customizations.md) |
+
+
+
 ### Eventing configuration summaries
 
 | Configuration | ConfigMap | Description |
