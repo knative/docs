@@ -92,23 +92,23 @@ The following sections provide an overview of the current configurations procedu
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
+| [Default configurations](../serving/configuration/config-defaults.md) | `config-defaults` | Default resource values such as performance, hardware, and storage settings. |
 | [Deployment resources](../serving/configuration/deployment.md) | `config-deployment` | Kubernetes deployment resources that back Knative services. |
-| [Defaults ConfigMap](../serving/configuration/config-defaults.md) | `config-defaults` | Default resource values such as performance, hardware, and storage settings. |
-| [High-availability components](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
+| [High-availability](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
 | [Garbage collection](../serving/revisions/revision-admin-config-options.md) | `config-gc` | Disable and enable collection and set retention time values. |
-| [Namespace exclusion from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
+| [Namespace exclusion from webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 | [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) | `config-network` | Adjust rollout durations to accommodate longer request queues. |
-| [Security - Encryption Overview](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
-| [Security - Cert-manager integration](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
+| [Security - Certificates](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
+| [Security - Encryptions](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
 
 ### Eventing
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
 | [Broker defaults](../eventing/configuration/broker-configuration.md) | `config-br-defaults` | Specify your own broker class and channel, or use the default `MTChannelBasedBroker` Broker class and  the ConfigMap of channel defaults. |
-| [Broker features - Kafka](../eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md) | `config-kafka-features` | Configure options for Broker interactions with Apache Kafka clusters. |
+| [Broker features (Kafka)](../eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md) | `config-kafka-features` | Configure options for Broker interactions with Apache Kafka clusters. |
 | [Channel defaults](../eventing/configuration/channel-configuration.md) | `default-ch-webhook` | Default configurations and labels to use for the channel. |
-| [Channel defaults - Kafka](../eventing/configuration/kafka-channel-configuration.md) | `kafka-channel` | Defines how KafkaChannel instances are created. Requires that KafkaChannel custom resource definitions (CRD) are installed.|
+| [Channel defaults (Kafka)](../eventing/configuration/kafka-channel-configuration.md) | `kafka-channel` | Defines how KafkaChannel instances are created. Requires that KafkaChannel custom resource definitions (CRD) are installed.|
 | [Event source defaults](../eventing/configuration/sources-configuration.md) |`config-ping-defaults` | Configure the PingSource default resources and the maximum data size for CloudEvents it produces. |
 | [KEDA Autoscaling of Kafka Resources](../eventing/configuration/keda-configuration.md) |`config-kafka-features` | Configure how KEDA scales a KafkaSource, trigger, or subscription. Note: This feature is is Alpha pre-release. |
 | [Sugar Controller](../eventing/sugar/README.md) |`config-sugar` | Configure the Sugar controller, which reacts to label configurations to produce or control eventing resources. See also [Knative Eventing Sugar Controller](../eventing/sugar/README.md). |
