@@ -51,9 +51,9 @@ When traffic concerns occur such as request queue lengths, you can alleviate con
 
 You can [configure garbage collection](../serving/revisions/revision-admin-config-options.md), including disabling it on a cluster, elapsed time settings, and minimum and maximum number of revisions to retain. These settings are made with the `config-gc` ConfigMap.
 
-Knative provides three layers of encryption, as described in the [Serving Encryption Overview](../serving/encryption/encryption-overview.md), for external domains, local cluster, and system internal with the `config-network` ConfigMap. See also [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md.)
+Knative provides three layers of encryption, as described in the [Serving Encryption Overview](../serving/encryption/encryption-overview.md), for external domains, local cluster, and system internal with the `config-network` ConfigMap. See also [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md).
 
-For performance you can [Configure high-availability components](../serving/config-ha.md) and [exclude namespaces from the Knative webhook](..serving/webhook-customizations.md) to alleviate issues during an upgrade.
+For performance you can [Configure high-availability components](../serving/config-ha.md) and [exclude namespaces from the Knative webhook](../serving/webhook-customizations.md) to alleviate issues during an upgrade.
 
 You make these configurations using `kubectl`.
 
