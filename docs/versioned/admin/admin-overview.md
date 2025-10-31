@@ -54,11 +54,11 @@ Knative includes a plugin system to integrate with existing infrastructure in th
 
 Of particular interest to cluster administrators is that Knative supports customizable _default values_ on the parameters defined in resource YAML files. These configurations reduce the amount of environment configuration tasks developers needs to consider.
 
-## Knative installations
+## Installations
 
 See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
 
-## Knative configurations
+## Configurations
 
 Knative configurations are performed by the following methods:
 
@@ -80,7 +80,7 @@ Knative uses Kubernetes YAML manifests to define and configure system components
 
 The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, some by applying YAML files you create.
 
-### Network configuration summaries
+### Networking
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -88,7 +88,7 @@ The following sections provide an overview of the current configurations procedu
 | [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
 | [Domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
 
-### Serving configuration summaries
+### Serving
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -101,7 +101,7 @@ The following sections provide an overview of the current configurations procedu
 | [High-availability components](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
 | [Namespace exclusion from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 
-### Eventing configuration summaries
+### Eventing
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
