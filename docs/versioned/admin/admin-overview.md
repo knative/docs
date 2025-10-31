@@ -58,23 +58,21 @@ Of particular interest to cluster administrators is that Knative supports custom
 
 See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
 
-## Configuring Summaries
+## Configuration summaries
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
-The following sections provide an overview of the current configurations procedures of interest to Administrators.
+The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, some by applying YAML files you create.
 
-### Network option summaries
+### Network
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
 | [Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)| `config-istio` | For new clusters, you can configure your own gateway and underlying service. |
 | [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
-| [Configure domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
+| [Domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
 
-You make these configurations using `kubectl`.
-
-### Serving configuration summaries
+### Serving
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -82,14 +80,12 @@ You make these configurations using `kubectl`.
 | [Defaults ConfigMap](../serving/configuration/config-defaults.md) | `config-defaults` | Default resource values such as performance, hardware, and storage settings. |
 | [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) | `config-network` | Adjust rollout durations to accommodate longer request queues. |
 | [Garbage collection](../serving/revisions/revision-admin-config-options.md) | `config-gc` | Disable and enable collection and set retention time values. |
-| [Serving Encryption Overview](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
-| [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
+| [Encryption Overview](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
+| [Cert-manager integration](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
 | [High-availability components](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
-| [Exclude namespaces from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
+| [Namespace exclusion from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 
-You make these configurations using `kubectl`.
-
-### Eventing configuration summaries
+### Eventing
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -100,8 +96,6 @@ You make these configurations using `kubectl`.
 | [Event source defaults](../eventing/configuration/sources-configuration.md) |`config-ping-defaults` | Configure the PingSource default resources and the maximum data size for CloudEvents it produces. |
 | [Sugar Controller](../eventing/sugar/README.md) |`config-sugar` | Configure the Sugar controller, which reacts to label configurations to produce or control eventing resources. See also [Knative Eventing Sugar Controller](../eventing/sugar/README.md). |
 | [KEDA Autoscaling of Knative Kafka Resources](../eventing/configuration/keda-configuration.md) |`config-kafka-features` | Configure how KEDA scales a KafkaSource, trigger, or subscription. Note: This feature is is Alpha pre-release. |
-
-You make these configurations using `kubectl`, some by applying YAML files you create.
 
 ## Resource scoping and namespaces
 
