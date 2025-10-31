@@ -66,23 +66,26 @@ The following sections provide an overview of the current configurations procedu
 
 ### Network options
 
-For new clusters, you can [configure the ingress gateway](../serving/setting-up-custom-ingress-gateway.md) with your own gateway and underlying service with the `config-istio` ConfigMap. You also need to grant [Istio authorization](../serving/istio-authorization.md) to your deployed Knative services.
-
-As needed, [configure domain names](../serving/using-a-custom-domain.md) with the `config-domain` ConfigMap.
+| Configuration | ConfigMap | Description |
+| -- | --- | --- |
+| [Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)| `config-istio` | For new clusters, you can configure your own gateway and underlying service. |
+| [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
+| [Configure domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
 
 You make these configurations using `kubectl`.
 
 ### Serving configurations
 
-As needed for deployments, configure Kubernetes [deployment resources](../serving/configuration/deployment.md), which back Knative services, with the `config-deployment`ConfigMap. Also [configure the defaults ConfigMap](../serving/configuration/config-defaults.md), `config-defaults`, for default resource values such as performance, hardware, and storage settings.
-
-When a traffic issue in the request queue occurs, you can alleviate congestion with [rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) with the `config-network` ConfigMap.
-
-You can [configure garbage collection](../serving/revisions/revision-admin-config-options.md), including disabling it on a cluster, elapsed time settings, and minimum and maximum number of revisions to retain. These settings are made with the `config-gc` ConfigMap.
-
-Knative provides three layers of encryption, as described in the [Serving Encryption Overview](../serving/encryption/encryption-overview.md), for external domains, local cluster, and system internal. These settings are made with the `config-network` ConfigMap. See also [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md).
-
-For performance concerns during an upgrade, you can [configure high-availability components](../serving/config-ha.md) and [exclude namespaces from the Knative webhook](../serving/webhook-customizations.md).
+| Configuration | ConfigMap | Description |
+| -- | --- | --- |
+| [Deployment resources](../serving/configuration/deployment.md) | `config-deployment` | Kubernetes deployment resources that back Knative services. |
+| [Defaults ConfigMap](../serving/configuration/config-defaults.md) | `config-defaults` | Default resource values such as performance, hardware, and storage settings. |
+| [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) | `config-network` | Adjust rollout durations to accommodate longer request queues. |
+| [Garbage collection](../serving/revisions/revision-admin-config-options.md) | `config-gc` | Disable and enable collection and set retention time values. |
+| [Serving Encryption Overview](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
+| [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
+| [High-availability components](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
+| [Exclude namespaces from the Knative webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 
 You make these configurations using `kubectl`.
 
