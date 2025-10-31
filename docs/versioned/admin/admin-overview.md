@@ -15,8 +15,37 @@ config:
   theme: redux
 ---
 flowchart TD
-    A(["Administrator"]) --> B{"Knative"}
-    B --> C["Knative Serving"] & D["Knative Eventing"]
+    Dev(["Application Developers"])
+    dev-acts@{ shape: text, label: "Manages k8s objects defined by" }
+    subgraph Knative
+        Serving
+        Eventing
+    end
+    subgraph Plugins
+        net-istio["Istio"]
+        net-contour["Contour"]
+        net-gateway-api["Gateway API"]
+        event-kafka["Kafka"]
+        event-rabbitmq["RabbitMQ"]
+        event-nats["NATS"]
+    end
+    event-impl@{ shape: text, label: "implements" }
+    net-impl@{ shape: text, label: "implements" }
+    admin-acts@{ shape: text, label: "Installs and configures" }
+    Admin(["Cluster Administrators"])
+
+    Dev --- dev-acts
+    dev-acts --> Serving & Eventing
+    
+    admin-acts --- Admin
+    Plugins & Knative --- admin-acts
+    %% The ~~~ ... --> syntax is used to force backwards arrows;
+    %% See https://github.com/mermaid-js/mermaid/issues/2629 for details.
+    Serving ~~~ net-impl --> Serving
+    Eventing ~~~ event-impl --> Eventing
+
+    net-impl --- net-istio & net-contour & net-gateway-api
+    event-impl --- event-kafka & event-rabbitmq & event-nats
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
