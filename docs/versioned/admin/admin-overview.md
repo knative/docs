@@ -33,7 +33,7 @@ See the [Installation roadmap](../install/README.md#installation-roadmap) for pr
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
-This section provides an overview of the current configurations procedures in the Knative documentation of interest to Administrators.
+The following sections provide an overview of the current configurations procedures of interest to Administrators.
 
 ### Network options
 
@@ -43,17 +43,17 @@ As needed, [configure domain names](../serving/using-a-custom-domain.md) with th
 
 You make these configurations using `kubectl`.
 
-### Serving configuration
+### Serving configurations
 
-As needed for deployments, configure Kubernetes [deployment resources](../serving/configuration/deployment.md), which back Knative services, with the `config-deployment`ConfigMap. Also [configure the Defaults ConfigMap](../serving/configuration/config-defaults.md), `config-defaults`, for default resource values such as performance, hardware, and storage settings.
+As needed for deployments, configure Kubernetes [deployment resources](../serving/configuration/deployment.md), which back Knative services, with the `config-deployment`ConfigMap. Also [configure the defaults ConfigMap](../serving/configuration/config-defaults.md), `config-defaults`, for default resource values such as performance, hardware, and storage settings.
 
-When traffic concerns occur such as request queue lengths, you can alleviate congestion with [rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) with the `config-network` ConfigMap.
+When a traffic issue in the request queue occurs, you can alleviate congestion with [rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) with the `config-network` ConfigMap.
 
 You can [configure garbage collection](../serving/revisions/revision-admin-config-options.md), including disabling it on a cluster, elapsed time settings, and minimum and maximum number of revisions to retain. These settings are made with the `config-gc` ConfigMap.
 
-Knative provides three layers of encryption, as described in the [Serving Encryption Overview](../serving/encryption/encryption-overview.md), for external domains, local cluster, and system internal with the `config-network` ConfigMap. See also [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md).
+Knative provides three layers of encryption, as described in the [Serving Encryption Overview](../serving/encryption/encryption-overview.md), for external domains, local cluster, and system internal. These settings are made with the `config-network` ConfigMap. See also [Configure cert-manager integration](../serving/encryption/configure-certmanager-integration.md).
 
-For performance you can [Configure high-availability components](../serving/config-ha.md) and [exclude namespaces from the Knative webhook](../serving/webhook-customizations.md) to alleviate issues during an upgrade.
+For performance concerns during an upgrade, you can [configure high-availability components](../serving/config-ha.md) and [exclude namespaces from the Knative webhook](../serving/webhook-customizations.md).
 
 You make these configurations using `kubectl`.
 
