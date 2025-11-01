@@ -62,7 +62,10 @@ Knative Eventing Object Model
 
 <li name="a9ca" id="a9ca" class="graf graf--li graf-after--li"> <a href="https://knative.dev/docs/samples/" target="_blank" >Samples and demos</a > </li>
 
-<li name="fe75" id="fe75" class="graf graf--li graf-after--li"> <a href="https://knative.dev/contributing/" target="_blank" >Knative meetings and work groups</a > </li>
+<li name="fe75" id="fe75" class="graf graf--li graf-after--li">
+  <a href="https://knative.dev/community/contributing/" target="_blank">Knative meetings and work groups</a>
+</li>
+
 
 <li name="cf03" id="cf03" class="graf graf--li graf-after--li"> <a href="https://knative.dev/docs/community/" target="_blank" >Questions and issues</a > </li>
 

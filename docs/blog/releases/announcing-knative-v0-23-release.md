@@ -192,7 +192,7 @@ Knative is an open source project that anyone in the [community](https://knative
 - [Welcome to Knative](https://knative.dev/docs#welcome-to-knative)
 - [Getting started documentation](https://knative.dev/docs/#getting-started)
 - [Samples and demos](https://knative.dev/docs#samples-and-demos)
-- [Knative meetings and work groups](https://knative.dev/contributing/#working-group)
+- [Knative meetings and work groups](https://knative.dev/community/contributing/)
 - [Questions and issues](https://knative.dev/contributing/#questions-and-issues)
 - [Knative User Mailing List](https://groups.google.com/forum/#!forum/knative-users)
 - [Knative Development Mailing List](https://groups.google.com/forum/#!forum/knative-dev)
