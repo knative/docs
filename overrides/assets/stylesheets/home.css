@@ -921,3 +921,11 @@ footer nav.md-footer__inner {
     display: none;
   }
 }
+
+/* Truncate MkDocs search result preview to 3 lines */
+.md-search-result .md-typeset {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
