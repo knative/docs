@@ -61,7 +61,7 @@ fi
 echo ""
 echo "📝 Please provide the details of your local running Container registry to install the Camel-K."
 read -p "🔑 Enter the registry host (e.g. kind-registry): " REGISTRY_HOST
-read -p "🔑 Enter the registry port: " REGISTRY_PORT
+read -p "🔑 Enter the registry port (e.g. 5001 for KinD local registry): " REGISTRY_PORT
 echo ""
 echo "✅ All the required details have been captured and saved locally."
 
