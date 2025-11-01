@@ -5,6 +5,7 @@ site_url: https://knative.dev/
 site_description: Knative Documentation
 extra_css:
   - stylesheets/extra.css
+  - overrides/assets/stylesheets/home.css
 # Don't try to make snippets into regular docs (e.g. link-checking, nav, etc)
 exclude_docs: |
   *docs/snippets/
