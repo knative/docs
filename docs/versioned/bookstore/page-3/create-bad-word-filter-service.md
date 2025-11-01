@@ -48,21 +48,24 @@ This workflow ensures a smooth transition from development to deployment within 
 
 ![Image 6](images/image6.png)
 ```shell
-func create -l python bad-word-filter
+func create -l python bad-word-filter -t cloudevents
 ```
 
 ???+ success "Verify"
 
-    The file tree will look like this:
+    The file `tree -a` will look like this:
 
     ```txt
     start/bad-word-filter
+    .
+    ├── .func
+    │   └── local.yaml
     ├── .funcignore
-    ├── function
-    │   ├── func.py
-    │   └── __init__.py
-    ├── func.yaml
     ├── .gitignore
+    ├── func.yaml
+    ├── function
+    │   ├── __init__.py
+    │   └── func.py
     ├── pyproject.toml
     ├── README.md
     └── tests

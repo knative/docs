@@ -29,7 +29,7 @@ Install Apache Camel K operator on your cluster using any of the methods listed 
 
 ```sh
 kubectl create ns camel-k && \
-kubectl apply -k github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0 --server-side
+kubectl apply -k 'github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0' --server-side
 ```
 
 Now you need to setup an `IntegrationPlatform` with a container registry. You can read more about it in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html#integration-platform). For all our needs we only need to create the `IntegrationPlatform` CR with a container registry entry. For example let's say we're using a Kind cluster with a local registry named `kind-registry` on port `5000`. Then your `IntegrationPlatform` CR will look like the following:
@@ -90,7 +90,6 @@ If you are using other container registries, you may need to read more in the [c
     You will see the output with the registry address:
 
     ```sh
-    kubectl get integrationplatforms -n camel-k
     NAME      PHASE   BUILD STRATEGY   PUBLISH STRATEGY   REGISTRY ADDRESS     DEFAULT RUNTIME   CAMEL VERSION
     camel-k   Ready   routine          Jib                kind-registry:5000   3.15.3            4.8.5
     ```
