@@ -13,39 +13,35 @@ This page provides guidance for administrators on how to manage Knative on an ex
 ---
 config:
   theme: redux
+  layout: elk
 ---
-flowchart TD
-    Dev(["Application Developers"])
-    dev-acts@{ shape: text, label: "Manages k8s objects defined by" }
-    subgraph Knative
-        Serving
-        Eventing
-    end
-    subgraph Plugins
+flowchart LR
+ subgraph Knative["Knative"]
+    direction LR
+        Serving["Serving"]
+        Eventing["Eventing"]
+  end
+ subgraph Plugins["Plugins"]
+    direction LR
         net-istio["Istio"]
         net-contour["Contour"]
         net-gateway-api["Gateway API"]
         event-kafka["Kafka"]
         event-rabbitmq["RabbitMQ"]
         event-nats["NATS"]
-    end
-    event-impl@{ shape: text, label: "implements" }
-    net-impl@{ shape: text, label: "implements" }
-    admin-acts@{ shape: text, label: "Installs and configures" }
-    Admin(["Cluster Administrators"])
-
-    Dev --- dev-acts
+  end
+    Dev(["Application Developers"]) --> dev-acts["Manages k8s objects defined by"]
     dev-acts --> Serving & Eventing
-    
-    admin-acts --- Admin
-    Plugins & Knative --- admin-acts
-    %% The ~~~ ... --> syntax is used to force backwards arrows;
-    %% See https://github.com/mermaid-js/mermaid/issues/2629 for details.
-    Serving ~~~ net-impl --> Serving
-    Eventing ~~~ event-impl --> Eventing
-
-    net-impl --- net-istio & net-contour & net-gateway-api
-    event-impl --- event-kafka & event-rabbitmq & event-nats
+    Admin(["Cluster Administrators"]) --> admin-acts["Installs and configures"]
+    admin-acts --> Knative & Plugins
+    Serving --> net-impl["implements"]
+    net-impl --> net-istio & net-contour & net-gateway-api
+    Eventing --> event-impl["implements"]
+    event-impl --> event-kafka & event-rabbitmq & event-nats
+    dev-acts@{ shape: text}
+    admin-acts@{ shape: text}
+    net-impl@{ shape: text}
+    event-impl@{ shape: text}
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
@@ -54,9 +50,18 @@ Knative includes a plugin system to integrate with existing infrastructure in th
 
 Of particular interest to cluster administrators is that Knative supports customizable _default values_ on the parameters defined in resource YAML files. These configurations reduce the amount of environment configuration tasks developers needs to consider.
 
-## Installations
+## Installation decisions
 
 See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
+
+Knative installations are not permanent and you can install clusters differently depending on the situation. Although switching services and applications in real time may be possible, a best practice is to start with a new cluster.
+
+### Upgrades
+
+Administrators are generally responsible for performing upgrades to cluster infrastructure, apps, and services. Knative is designed and tested for continuous operation during upgrades and rollbacks, allowing you to:
+
+- Upgrade or revert the Knative components while it is serving traffic, rather than needing a maintenance window.
+- Downgrade by one Knative version. Downgrades work provided that no applications have used new features since the last upgrade.
 
 ## Configurations
 
@@ -72,7 +77,10 @@ Knative configurations are performed by the following methods:
 
 - Using the Knative Operator
 
-    Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. For more information, see [Installing CLI tools](../client/README.md)
+    Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. You can manage the operator without using the `kn` CLI. The `kn` CLI manages only operator installations.
+
+
+For more information, see [Installing CLI tools](../client/README.md)
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
@@ -113,7 +121,9 @@ The following sections provide an overview of the current configurations procedu
 | [KEDA Autoscaling of Kafka Resources](../eventing/configuration/keda-configuration.md) |`config-kafka-features` | Configure how KEDA scales a KafkaSource, trigger, or subscription. Note: This feature is is Alpha pre-release. |
 | [Sugar Controller](../eventing/sugar/README.md) |`config-sugar` | Configure the Sugar controller, which reacts to label configurations to produce or control eventing resources. See also [Knative Eventing Sugar Controller](../eventing/sugar/README.md). |
 
-## Resource scoping and namespaces
+## Securing Knative
+
+You can grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
 
 Knative resources are namespaced. Knative adheres to the Kubernetes model of namespace-based isolation that lets you manage development teams and resources by assigning them to namespaces.
 
@@ -125,14 +135,3 @@ You can optimize and enforce isolation involving namespaces using standard Kuber
 - [Resource Quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-
-## Authorizations
-
-You can grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
-
-## Upgrades
-
-Administrators are generally responsible for performing upgrades cluster infrastructure and apps and services. Knative is designed and tested for continuous operation during upgrades and rollbacks, allowing you to:
-
-- Upgrade or revert the Knative components while it is serving traffic, rather than needing a maintenance window.
-- Downgrade one Knative version. Downgrades work provided that no applications have used new features since the last upgrade.
