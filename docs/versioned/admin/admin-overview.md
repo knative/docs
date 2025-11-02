@@ -9,6 +9,11 @@ function: explanation
 
 This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster.
 
+<style>
+.mermaid .dev text { fill: #FFFFFF !important; }
+.mermaid .admin text { fill: #FFFFFF !important; }
+</style>
+
 ```mermaid
 ---
 config:
