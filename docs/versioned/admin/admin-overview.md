@@ -9,11 +9,6 @@ function: explanation
 
 This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster.
 
-<style>
-.mermaid .dev text { fill: #FFFFFF !important; }
-.mermaid .admin text { fill: #FFFFFF !important; }
-</style>
-
 ```mermaid
 ---
 config:
@@ -52,10 +47,8 @@ flowchart LR
     style net-istio fill:#757575,color:#FFFFFF
     style net-contour fill:#757575,color:#FFFFFF
     style net-gateway-api fill:#757575,color:#FFFFFF
-    style Dev fill:#FF6D00,color:#FFFFFF
-    style Admin fill:#2962FF,color:#FFFFFF
-
-
+    style Dev fill:#EFB769,color:#000000
+    style Admin fill:#94C6C1,color:#000000
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
