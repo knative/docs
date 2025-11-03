@@ -60,6 +60,7 @@ flowchart LR
     style net-impl fill:transparent
     style event-impl fill:transparent
 
+
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
@@ -126,20 +127,15 @@ The following sections provide an overview of the current configurations procedu
 | -- | --- | --- |
 | [Default configurations](../serving/configuration/config-defaults.md) | `config-defaults` | Default resource values such as performance, hardware, and storage settings. |
 | [Deployment resources](../serving/configuration/deployment.md) | `config-deployment` | Kubernetes deployment resources that back Knative services. |
+| [Domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
 | [High-availability](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
 | [Garbage collection](../serving/revisions/revision-admin-config-options.md) | `config-gc` | Disable and enable collection and set retention time values. |
+| [Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)| `config-istio` | For new clusters, you can configure your own gateway and underlying service. |
+| [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
 | [Namespace exclusion from webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 | [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) | `config-network` | Adjust rollout durations to accommodate longer request queues. |
 | [Security - Certificates](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
 | [Security - Encryptions](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
-
-#### Networking
-
-| Configuration | ConfigMap | Description |
-| -- | --- | --- |
-| [Domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
-| [Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)| `config-istio` | For new clusters, you can configure your own gateway and underlying service. |
-| [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
 
 ### Eventing
 
