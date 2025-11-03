@@ -6,21 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "next-ws patch"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",
     "@nextui-org/react": "^2.2.10",
     "framer-motion": "^11.0.22",
-    "next": "14.2.32",
+    "next": "15.4.7",
     "next-themes": "^0.3.0",
+    "next-ws": "^2.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/ws": "^8.18.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",

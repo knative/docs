@@ -68,13 +68,13 @@ This workflow ensures a smooth transition from development to deployment within 
 Create a new function using the func CLI:
 
 ```sh
-func create -l <language> <function-name>
+func create -l <language> <function-name> -t cloudevents
 ```
 
-In this case, we are creating a Python function, so the command will be:
+In this case, we are creating a Python function that handles CloudEvents, so the command will be:
 
 ```sh
-func create -l python sentiment-analysis-app
+func create -l python sentiment-analysis-app -t cloudevents
 ```
 
 This command will create a new directory with the name `sentiment-analysis-app` and a bunch of files in it. The func CLI will generate a basic function template for you to start with.
@@ -83,16 +83,19 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ???+ success "Verify"
 
-    The file tree will look like this:
+    The file `tree -a` will look like this:
 
     ```txt
     start/sentiment-analysis-app
+    .
+    ├── .func
+    │   └── local.yaml
     ├── .funcignore
-    ├── function
-    │   ├── func.py
-    │   └── __init__.py
-    ├── func.yaml
     ├── .gitignore
+    ├── func.yaml
+    ├── function
+    │   ├── __init__.py
+    │   └── func.py
     ├── pyproject.toml
     ├── README.md
     └── tests
@@ -113,7 +116,6 @@ You can replace the generated code with the sentiment analysis logic. You can us
     import logging
     from cloudevents.http import CloudEvent
     from textblob import TextBlob
-    import textblob
 
     def new():
         return Function()
@@ -261,9 +263,7 @@ Knative Function will automatically install the dependencies listed here when yo
     
     ```sh
     ❗function up-to-date. Force rebuild with --build
-    Running
-    
-     on host port 8080
+    Running on host port 8080
     ---> Running application from script (app.sh) ...
     ```
     
@@ -291,7 +291,7 @@ Knative Function will automatically install the dependencies listed here when yo
       {
         "reviewText": "I love Knative so much",
         "badWordResult": "",
-         "sentimentResult": "positive"
+        "sentimentResult": "positive"
       }
     ```
     

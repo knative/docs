@@ -75,9 +75,9 @@ So far, the Triggers you created in your cluster should look like the following:
     You should see the Trigger in ready state:
     ```
     NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
-    db-insert-trigger   bookstore-broker   http://node-server-svc.default.svc.cluster.local/insert              5h32m   True      
-    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   5h30m   True    
-    log-trigger        bookstore-broker   http://event-display.default.svc.cluster.local                       5h32m   True    
+    db-insert-trigger   bookstore-broker   http://node-server-svc.default.svc.cluster.local/insert              5h32m   True
+    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   5h30m   True
+    log-trigger         bookstore-broker   http://event-display.default.svc.cluster.local                       5h32m   True
     ```
 
 
