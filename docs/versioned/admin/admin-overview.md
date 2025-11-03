@@ -19,12 +19,12 @@ config:
   look: classic
 ---
 flowchart LR
- subgraph Knative["**Knative**"]
+ subgraph Knative["**Knative**&nbsp;&nbsp;"]
     direction LR
         Serving["Serving"]
         Eventing["Eventing"]
   end
- subgraph Plugins["**Plugins**"]
+ subgraph Plugins["**Plugins**&nbsp;&nbsp;"]
     direction LR
         net-istio["Istio"]
         net-contour["Contour"]
@@ -61,6 +61,7 @@ flowchart LR
     style Plugins text-align: left
     style net-impl fill:transparent
     style event-impl fill:transparent
+
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
