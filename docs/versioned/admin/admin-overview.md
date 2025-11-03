@@ -7,12 +7,17 @@ function: explanation
 ---
 # Overview
 
-This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster.
+This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster. Essentially, Knative administrators install and configure Knative on a cluster, the Knative Serving and Eventing components, and the default or preferred plugins.
+
+Knative developers primarily manage defined Kubernetes objects, including apps, containers, and pods, and implement services through the Knative and Eventing components while utilizing plugins as needed.
+
+Through optimizing configurations and best practices, administrators can provide Knative developers a seamless experience for their testing and production needs. The following diagram depicts these workflows and processes.
+
 
 ```mermaid
 ---
 config:
-  theme: forest
+  theme: redux
   layout: dagre
   look: classic
 ---
@@ -53,6 +58,7 @@ flowchart LR
     style event-nats fill:#F0DBDB
     style Dev fill:#EFB769,color:#000000
     style Admin fill:#94C6C1,color:#000000
+
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
