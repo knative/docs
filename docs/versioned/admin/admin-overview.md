@@ -7,11 +7,11 @@ function: explanation
 ---
 # Overview
 
-This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster. Essentially, Knative administrators install and configure Knative on a cluster, the Knative Serving and Eventing components, and the default or preferred plugins.
+This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster. Knative administrators install and configure both or either of the Serving and Eventing components along with default or preferred plugins.
 
-Knative developers primarily manage the objects defined by administrators, including apps, containers, and pods, and implement services through the Knative and Eventing components while utilizing plugins as needed.
+Knative developers primarily manage the core Kubernetes objects defined by administrators. The list is many, but include containers and pods, services, networking, identity, and storage. Developers also define functions with the Knative Functions programming model.
 
-Through optimizing configurations and best practices, administrators can provide Knative developers a seamless experience for their testing and production needs. The following diagram depicts these workflows and processes.
+Administrators can use Knative to provide developers with a seamless experience for interacting with clusters and backend services. The following illustration depicts these processes.
 
 ```mermaid
 ---
@@ -35,13 +35,13 @@ flowchart LR
         event-rabbitmq["RabbitMQ"]
         event-nats["NATS"]
   end
-    Dev(["Developers"]) --> dev-acts["Manages defined objects"]
+    Dev(["Developers"]) --> dev-acts["Develops and manages"]
     dev-acts --> Serving & Eventing
     Admin(["Administrators"]) --> admin-acts["Installs and configures"]
     admin-acts --> Knative & Plugins
-    Serving --> net-impl["implements"]
+    Serving --> net-impl["Implements"]
     net-impl --> net-istio & net-contour & net-gateway-api
-    Eventing --> event-impl["implements"]
+    Eventing --> event-impl["Implements"]
     event-impl --> event-kafka & event-rabbitmq & event-nats
     dev-acts@{ shape: text}
     admin-acts@{ shape: text}
@@ -56,8 +56,11 @@ flowchart LR
     style event-rabbitmq fill:#F0DBDB
     style event-nats fill:#F0DBDB
     style Dev fill:#EFB769,color:#000000
+    style dev-acts fill:transparent
     style Admin fill:#94C6C1,color:#000000
-
+    style admin-acts fill:transparent
+    style net-impl fill:transparent
+    style event-impl fill:transparent
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
