@@ -12,7 +12,7 @@ This page provides guidance for administrators on how to manage Knative on an ex
 ```mermaid
 ---
 config:
-  theme: base
+  theme: neo
   layout: dagre
   look: classic
 ---
