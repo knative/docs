@@ -12,8 +12,8 @@ This page provides guidance for administrators on how to manage Knative on an ex
 ```mermaid
 ---
 config:
-  theme: mc
-  layout: elk
+  theme: redux
+  layout: dagre
   look: classic
 ---
 flowchart LR
@@ -43,12 +43,17 @@ flowchart LR
     admin-acts@{ shape: text}
     net-impl@{ shape: text}
     event-impl@{ shape: text}
-    style Serving fill:#757575,color:#FFFFFF
-    style net-istio fill:#757575,color:#FFFFFF
-    style net-contour fill:#757575,color:#FFFFFF
-    style net-gateway-api fill:#757575,color:#FFFFFF
+    style Serving fill:#D5D5D5,color:#000000
+    style Eventing fill:#F0DBDB,color:#000000
+    style net-istio fill:#D5D5D5,color:#000000
+    style net-contour fill:#D5D5D5,color:#000000
+    style net-gateway-api fill:#D5D5D5,color:#000000
+    style event-kafka fill:#F0DBDB
+    style event-rabbitmq fill:#F0DBDB
+    style event-nats fill:#F0DBDB
     style Dev fill:#EFB769,color:#000000
     style Admin fill:#94C6C1,color:#000000
+
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
