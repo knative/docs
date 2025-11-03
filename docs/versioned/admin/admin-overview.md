@@ -57,6 +57,8 @@ flowchart LR
     style dev-acts fill:transparent
     style Admin fill:#94C6C1,color:#000000
     style admin-acts fill:transparent
+    style Knative text-align: left
+    style Plugins text-align: left
     style net-impl fill:transparent
     style event-impl fill:transparent
 ```
