@@ -19,12 +19,12 @@ config:
   look: classic
 ---
 flowchart LR
- subgraph Knative["Knative"]
+ subgraph Knative[" Knative "]
     direction LR
         Serving["Serving"]
         Eventing["Eventing"]
   end
- subgraph Plugins["Plugins"]
+ subgraph Plugins[" Plugins "]
     direction LR
         net-istio["Istio"]
         net-contour["Contour"]
@@ -59,6 +59,7 @@ flowchart LR
     style admin-acts fill:transparent
     style net-impl fill:transparent
     style event-impl fill:transparent
+
 
 
 ```
@@ -117,11 +118,9 @@ For more information, see [Installing CLI tools](../client/README.md)
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
-### Configuration summaries
-
 The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, with some procedures applying YAML files.
 
-### Serving
+### Serving configurations
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
@@ -137,7 +136,7 @@ The following sections provide an overview of the current configurations procedu
 | [Security - Certificates](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
 | [Security - Encryptions](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
 
-### Eventing
+### Eventing configurations
 
 | Configuration | ConfigMap | Description |
 | -- | --- | --- |
