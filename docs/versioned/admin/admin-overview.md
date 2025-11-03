@@ -9,10 +9,9 @@ function: explanation
 
 This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster. Essentially, Knative administrators install and configure Knative on a cluster, the Knative Serving and Eventing components, and the default or preferred plugins.
 
-Knative developers primarily manage defined Kubernetes objects, including apps, containers, and pods, and implement services through the Knative and Eventing components while utilizing plugins as needed.
+Knative developers primarily manage the objects defined by administrators, including apps, containers, and pods, and implement services through the Knative and Eventing components while utilizing plugins as needed.
 
 Through optimizing configurations and best practices, administrators can provide Knative developers a seamless experience for their testing and production needs. The following diagram depicts these workflows and processes.
-
 
 ```mermaid
 ---
@@ -36,7 +35,7 @@ flowchart LR
         event-rabbitmq["RabbitMQ"]
         event-nats["NATS"]
   end
-    Dev(["Developers"]) --> dev-acts["Manages defined Kubernetes objects"]
+    Dev(["Developers"]) --> dev-acts["Manages defined objects"]
     dev-acts --> Serving & Eventing
     Admin(["Administrators"]) --> admin-acts["Installs and configures"]
     admin-acts --> Knative & Plugins
