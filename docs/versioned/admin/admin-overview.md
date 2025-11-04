@@ -33,7 +33,7 @@ flowchart LR
         event-rabbitmq["RabbitMQ"]
         event-nats["NATS"]
   end
-    Dev(["**Developers**"]) --> dev-acts["Develops and manages"]
+    Dev(["**Developers**"]) --> dev-acts["Develops and deploys"]
     dev-acts --> Serving & Eventing
     Admin(["**Administrators**"]) --> admin-acts["Installs and configures"]
     admin-acts --> Knative & Plugins
