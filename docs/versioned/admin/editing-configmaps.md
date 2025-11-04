@@ -8,7 +8,7 @@ function: explanation
 
 # Using ConfigMaps
 
-This page provides important information and best practices for working with Kubernetes ConfigMaps.
+This page provides important information and best practices for working with Kubernetes ConfigMaps. ConfigMaps and YAML resource files are the primary means for storing configuration values in Knative.
 
 ## The _example key
 
@@ -23,7 +23,11 @@ You can run `kubectl replace -f /var/folders/9t/yzwp6zrx765clbvl1c_dqc2r0000gn/T
 
 More specifically, the edit is caught when the value of the checksum for the `_example` key is different when compared with the pod's template annotations. If the checksum is null or missing, the webhook server does not create the warning.
 
-Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation. The following example shows the abbreviated content of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
+Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation. 
+
+### Example
+
+The following example shows the abbreviated content of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
 ```yml
 apiVersion: v1
@@ -79,21 +83,7 @@ When a field in a ConfigMap is changed, the effect of the change depends on how 
 
 - Periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
 
-- You can also define ConfigMaps in YAML or JSON files and store them in a version control system (VCS) like Git. For example:
-
-    ```yml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: my-app-config
-      namespace: default
-    data:
-      _example | ...
-      app.properties: |
-        version=1.2.3
-        db.host=localhost
-        db.port=5432
-    ```
+- You can also define ConfigMaps in YAML or JSON files and store them in a repository like GitHub.
 
 ### Git recommendations
 
