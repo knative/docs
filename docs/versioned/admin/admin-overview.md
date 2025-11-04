@@ -116,7 +116,7 @@ Knative configurations are performed by the following methods:
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
-The following sections provide an overview of the current configurations procedures of interest to Administrators. You make these configurations using `kubectl`, with some procedures applying YAML files.
+The following sections provide an overview of the current configuration resources of interest to Administrators. You can edit these configurations using `kubectl`; Knative installs empty ConfigMaps with these names onto the cluster.
 
 ### Serving configurations
 
