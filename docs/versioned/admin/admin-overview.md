@@ -131,7 +131,7 @@ The following sections provide an overview of the current configuration resource
 | [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
 | [Namespace exclusion from webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 | [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) | `config-network` | Adjust rollout durations to accommodate longer request queues. |
-| [Security - Certificates](../serving/encryption/configure-certmanager-integration.md) | NA | Describes how to manage automatic certificate provisioning. |
+| [Security - Certificates](../serving/encryption/configure-certmanager-integration.md) | `config-certmanager` | Describes how to manage automatic certificate provisioning. |
 | [Security - Encryptions](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
 
 ### Eventing configurations
