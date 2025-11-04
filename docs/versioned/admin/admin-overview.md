@@ -85,9 +85,7 @@ Administrators are generally responsible for performing upgrades to cluster infr
 
 ## Securing Knative
 
-You can grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
-
-Knative resources are namespaced. Knative adheres to the Kubernetes model of namespace-based isolation that lets you manage development teams and resources by assigning them to namespaces.
+Knative resources are namespaced. Knative adheres to the Kubernetes model of namespace-based isolation that lets you manage development teams and resources by assigning them to namespaces. You may also grant developers access to additional resources related to their namespace in other services, such as observability, logs, metrics, tracing, and dashboards.
 
 Namespaces can also isolate boundaries for tooling such as logs, metrics, tracing, CI/CD integrations, and dashboards. The extent of this isolation depends on both the enforcement strategy and how consistently teams adhere to namespace boundaries.
 
