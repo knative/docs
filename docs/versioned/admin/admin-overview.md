@@ -37,10 +37,10 @@ flowchart TB
     dev-acts --> Serving & Eventing
     Admin(["**Administrators**"]) --> admin-acts["Installs and configures&nbsp;&nbsp;"]
     admin-acts --> Knative & Plugins
-    evn-kafka ---> evn-acts["Implements&nbsp;&nbsp;"]
+    evn-kafka ---> evn-acts["Controls&nbsp;&nbsp;"]
     evn-rabbitmq ---> evn-acts
     evn-nats ---> evn-acts
-    srv-istio --> srv-acts["Implements&nbsp;&nbsp;"]
+    srv-istio --> srv-acts["Controls&nbsp;&nbsp;"]
     srv-contour --> srv-acts
     srv-gateway-api --> srv-acts
     srv-acts <--> Serving
