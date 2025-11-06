@@ -15,7 +15,7 @@ Administrators can use Knative to provide developers with a simple experience fo
 ---
 config:
   theme: redux
-  layout: fixed
+  layout: dagre
   look: classic
 ---
 flowchart LR
@@ -33,18 +33,14 @@ flowchart LR
         event-rabbitmq["RabbitMQ"]
         event-nats["NATS"]
   end
-    Dev(["**Developers**"]) --> dev-acts["Develops and deploys"]
+    Dev(["**Developers**"]) --> dev-acts["Develops and manages"]
     dev-acts --> Serving & Eventing
     Admin(["**Administrators**"]) --> admin-acts["Installs and configures"]
     admin-acts --> Knative & Plugins
     Serving --> net-impl["Controls"]
-    net-istio --> net-impl
-    net-contour --> net-impl
-    net-gateway-api --> net-impl
+    net-impl --- net-istio & net-contour & net-gateway-api
     Eventing --> event-impl["Controls"]
-    event-kafka --> event-impl
-    event-rabbitmq --> event-impl
-    event-nats --> event-impl
+    event-impl --- event-kafka & event-rabbitmq & event-nats
     dev-acts@{ shape: text}
     admin-acts@{ shape: text}
     net-impl@{ shape: text}
