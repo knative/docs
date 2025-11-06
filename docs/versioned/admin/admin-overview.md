@@ -37,9 +37,9 @@ flowchart LR
     dev-acts --> Serving & Eventing
     Admin(["**Administrators**"]) --> admin-acts["Installs and configures"]
     admin-acts --> Knative & Plugins
-    Serving --> net-impl["Implements"]
+    Serving --> net-impl["Controls"]
     net-impl --> net-istio & net-contour & net-gateway-api
-    Eventing --> event-impl["Implements"]
+    Eventing --> event-impl["Controls"]
     event-impl --> event-kafka & event-rabbitmq & event-nats
     dev-acts@{ shape: text}
     admin-acts@{ shape: text}
