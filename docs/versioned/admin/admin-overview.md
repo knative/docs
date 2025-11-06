@@ -18,7 +18,7 @@ config:
   layout: dagre
   look: classic
 ---
-flowchart LR
+flowchart TB
  subgraph Knative["**Knative**&nbsp;&nbsp;"]
     direction LR
         Serving["Serving"]
@@ -26,41 +26,43 @@ flowchart LR
   end
  subgraph Plugins["**Plugins**&nbsp;&nbsp;"]
     direction LR
-        net-istio["Istio"]
-        net-contour["Contour"]
-        net-gateway-api["Gateway API"]
-        event-kafka["Kafka"]
-        event-rabbitmq["RabbitMQ"]
-        event-nats["NATS"]
+        srv-istio["Istio"]
+        srv-contour["Contour"]
+        srv-gateway-api["Gateway API"]
+        evn-kafka["Kafka"]
+        evn-rabbitmq["RabbitMQ"]
+        evn-nats["NATS"]
   end
-    Dev(["**Developers**"]) --> dev-acts["Develops and manages"]
+    Dev(["**Developers**"]) --> dev-acts["Develops and deploys&nbsp;&nbsp;"]
     dev-acts --> Serving & Eventing
-    Admin(["**Administrators**"]) --> admin-acts["Installs and configures"]
+    Admin(["**Administrators**"]) --> admin-acts["Installs and configures&nbsp;&nbsp;"]
     admin-acts --> Knative & Plugins
-    Serving --> net-impl["Controls"]
-    net-impl --- net-istio & net-contour & net-gateway-api
-    Eventing --> event-impl["Controls"]
-    event-impl --- event-kafka & event-rabbitmq & event-nats
+    evn-kafka ---> evn-acts["Implements&nbsp;&nbsp;"]
+    evn-rabbitmq ---> evn-acts
+    evn-nats ---> evn-acts
+    srv-istio --> srv-acts["Implements&nbsp;&nbsp;"]
+    srv-contour --> srv-acts
+    srv-gateway-api --> srv-acts
+    srv-acts <--> Serving
+    evn-acts <--> Eventing
     dev-acts@{ shape: text}
     admin-acts@{ shape: text}
-    net-impl@{ shape: text}
-    event-impl@{ shape: text}
+    evn-acts@{ shape: text}
+    srv-acts@{ shape: text}
     style Serving fill:#D5D5D5,color:#000000
     style Eventing fill:#F0DBDB,color:#000000
-    style net-istio fill:#D5D5D5,color:#000000
-    style net-contour fill:#D5D5D5,color:#000000
-    style net-gateway-api fill:#D5D5D5,color:#000000
-    style event-kafka fill:#F0DBDB
-    style event-rabbitmq fill:#F0DBDB
-    style event-nats fill:#F0DBDB
+    style srv-istio fill:#D5D5D5,color:#000000
+    style srv-contour fill:#D5D5D5,color:#000000
+    style srv-gateway-api fill:#D5D5D5,color:#000000
+    style evn-kafka fill:#F0DBDB
+    style evn-rabbitmq fill:#F0DBDB
+    style evn-nats fill:#F0DBDB
     style Dev fill:#EFB769,color:#000000
     style dev-acts fill:transparent
     style Admin fill:#94C6C1,color:#000000
     style admin-acts fill:transparent
-    style Knative text-align: left
-    style Plugins text-align: left
-    style net-impl fill:transparent
-    style event-impl fill:transparent
+    style evn-acts fill:transparent
+    style srv-acts fill:transparent
 
 ```
 
