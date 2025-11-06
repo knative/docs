@@ -15,7 +15,7 @@ Administrators can use Knative to provide developers with a simple experience fo
 ---
 config:
   theme: redux
-  layout: dagre
+  layout: fixed
   look: classic
 ---
 flowchart LR
@@ -37,10 +37,14 @@ flowchart LR
     dev-acts --> Serving & Eventing
     Admin(["**Administrators**"]) --> admin-acts["Installs and configures"]
     admin-acts --> Knative & Plugins
-    Serving <--> net-impl["Processing"]
-    net-impl <--> net-istio & net-contour & net-gateway-api
-    Eventing <--> event-impl["Processing"]
-    event-impl <--> event-kafka & event-nats & event-rabbitmq
+    Serving --> net-impl["Controls"]
+    net-istio --> net-impl
+    net-contour --> net-impl
+    net-gateway-api --> net-impl
+    Eventing --> event-impl["Controls"]
+    event-kafka --> event-impl
+    event-rabbitmq --> event-impl
+    event-nats --> event-impl
     dev-acts@{ shape: text}
     admin-acts@{ shape: text}
     net-impl@{ shape: text}
@@ -61,6 +65,7 @@ flowchart LR
     style Plugins text-align: left
     style net-impl fill:transparent
     style event-impl fill:transparent
+
 ```
 
 As a cluster administrator, your responsibilities include managing the Kubernetes environment, installing cluster-wide components, and enabling developers to deploy applications on the cluster. Knative aims to simplify developer tasks, while aligning with existing management tools and processes.
