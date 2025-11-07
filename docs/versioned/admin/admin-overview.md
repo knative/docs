@@ -112,7 +112,7 @@ Knative configurations are performed by the following methods:
 
     Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. You can manage the operator without using the `kn` CLI. The `kn` CLI manages only operator installations.
 
-    For more information, see [Installing CLI tools](../client/README.md)
+    For more information, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) and [Installing CLI tools](../client/README.md).
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
@@ -125,11 +125,9 @@ The following sections provide an overview of the current configuration resource
 | [Default configurations](../serving/configuration/config-defaults.md) | `config-defaults` | Default resource values such as performance, hardware, and storage settings. |
 | [Deployment resources](../serving/configuration/deployment.md) | `config-deployment` | Kubernetes deployment resources that back Knative services. |
 | [Domain names](../serving/using-a-custom-domain.md) | `config-domain` | Configure and publish domains. |
-| [High-availability](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
 | [Garbage collection](../serving/revisions/revision-admin-config-options.md) | `config-gc` | Disable and enable collection and set retention time values. |
 | [Ingress gateway](../serving/setting-up-custom-ingress-gateway.md)| `config-istio` | For new clusters, you can configure your own gateway and underlying service. |
 | [Istio authorization](../serving/istio-authorization.md) | NA | Grant authorization to your deployed Knative services. |
-| [Namespace exclusion from webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
 | [Rollout duration for revisions](../serving/configuration/rolling-out-latest-revision-configmap.md) | `config-network` | Adjust rollout durations to accommodate longer request queues. |
 | [Security - Certificates](../serving/encryption/configure-certmanager-integration.md) | `config-certmanager` | Describes how to manage automatic certificate provisioning. |
 | [Security - Encryptions](../serving/encryption/encryption-overview.md) | `config-network` | Provides links to procedures for encrypting external domains, the local cluster, and system internal. |
@@ -146,4 +144,9 @@ The following sections provide an overview of the current configuration resource
 | [KEDA Autoscaling of Kafka Resources](../eventing/configuration/keda-configuration.md) |`config-kafka-features` | Configure how KEDA scales a KafkaSource, trigger, or subscription. Note: This feature is is Alpha pre-release. |
 | [Sugar Controller](../eventing/sugar/README.md) |`config-sugar` | Configure the Sugar controller, which reacts to label configurations to produce or control eventing resources. See also [Knative Eventing Sugar Controller](../eventing/sugar/README.md). |
 
+### Common configurations
 
+| Configuration | ConfigMap | Description |
+| -- | --- | --- |
+| [High-availability](../serving/config-ha.md) | NA | Configure ensure that APIs stay operational if a disruption occurs. |
+| [Namespace exclusion from webhook](../serving/webhook-customizations.md) | NA | For performance concerns during an upgrade. |
