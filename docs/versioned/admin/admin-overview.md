@@ -112,7 +112,7 @@ Knative configurations are performed by the following methods:
 
     Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. You can manage the operator without using the `kn` CLI. The `kn` CLI manages only operator installations.
 
-    For more information, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) and [Installing CLI tools](../client/README.md).
+    For more information, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) and [CLI tools](../client/README.md).
 
 Knative uses Kubernetes YAML manifests to define and configure system components. These manifests include core resources, custom resource definitions (CRDs), and extensibility features. As with Kubernetes, these configuration resources are declarative and can be managed using the `kubectl` CLI tool or with continuous delivery tools.
 
