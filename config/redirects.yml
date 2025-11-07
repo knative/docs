@@ -1,7 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
-      versioned/contributing/about.md: community/README.md
+      versioned/contributing/about.md: community/contributing/README.md
       versioned/eventing/experimental-features/README.md: versioned/eventing/features/README.md
       versioned/eventing/experimental-features/delivery-timeout.md: versioned/eventing/features/delivery-timeout.md
       versioned/eventing/experimental-features/delivery-retryafter.md: versioned/eventing/features/delivery-retryafter.md
@@ -28,7 +28,7 @@ plugins:
       versioned/reference/api/serving-api.md: versioned/serving/reference/serving-api.md
       versioned/community/about.md: community/governance.md
       versioned/contributing/contributing.md: community/contributing.md
-      versioned/contributing/README.md: community/README.md
+      versioned/contributing/README.md: community/contributing.md
       versioned/eventing/getting-started.md: versioned/getting-started/getting-started-eventing.md
       versioned/admin/collecting-logs/README.md: versioned/serving/observability/logging/collecting-logs.md
       versioned/admin/collecting-metrics/README.md: versioned/serving/observability/metrics/collecting-metrics.md
