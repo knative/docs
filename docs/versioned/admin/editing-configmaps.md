@@ -14,7 +14,7 @@ This page provides important information and best practices for working with Kub
 
 ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of a configuration key. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
 
-If a user edits the `_example` key by mistakenly thinking their edits will have an affect, the Knative webhook server catches the error with the following alert text (using the `config-defaults` ConfigMap as a example):
+If a user edits the `_example` key by mistakenly thinking their edits will have an affect, the Knative webhook catches the error with the following alert text (using the `config-defaults` ConfigMap as a example):
 
 ```bash
 error: configmaps "config-defaults" could not be patched: admission webhook "config.webhook.serving.knative.dev" denied the request: validation failed: the update modifies a key in "_example" which is probably not what you want. Instead, copy the respective setting to the top-level of the ConfigMap, directly below "data"
