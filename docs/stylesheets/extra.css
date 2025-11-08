@@ -672,3 +672,25 @@ a.md-header__button.md-logo img {
     display: none;
   }
 }
+
+.md-search-result__article {
+  max-height: none;
+}
+
+.md-search-result__teaser,
+article.md-search-result__article p:not(.md-search-result__meta) {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  max-height: 4.5em;
+}
+
+.md-search-result__article > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
