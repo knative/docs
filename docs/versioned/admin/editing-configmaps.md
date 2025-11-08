@@ -16,10 +16,11 @@ ConfigMap files installed by Knative contain an `_example` key that shows the us
 
 If a user edits the `_example` key by mistakenly thinking their edits will have an affect, the Knative webhook catches the error with the following alert text (using the `config-defaults` ConfigMap as a example):
 
-```bash
+<!-- use code here to wrap long command-line output -->
+<code style="white-space: pre-wrap">
 error: configmaps "config-defaults" could not be patched: admission webhook "config.webhook.serving.knative.dev" denied the request: validation failed: the update modifies a key in "_example" which is probably not what you want. Instead, copy the respective setting to the top-level of the ConfigMap, directly below "data"
 You can run `kubectl replace -f /var/folders/9t/yzwp6zrx765clbvl1c_dqc2r0000gn/T/kubectl-edit-2068368769.yaml` to try this update again.
-```
+</code>
 
 More specifically, the edit is caught when the value of the checksum for the `_example` key is different when compared with the pod's template annotations. If the checksum is null or missing, the webhook server does not create the warning.
 
