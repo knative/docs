@@ -8,7 +8,7 @@ function: explanation
 
 # Using ConfigMaps
 
-This page provides important information and best practices for working with Kubernetes ConfigMaps. ConfigMaps and YAML resource files are the primary means for storing configuration values in Knative.
+This page provides important information and best practices for working with Kubernetes ConfigMaps. ConfigMaps and YAML resource files are the primary means for managing configuration values for Knative controllers.
 
 ## The _example key
 
