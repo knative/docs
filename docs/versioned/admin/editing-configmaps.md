@@ -30,8 +30,8 @@ Accordingly, you cannot alter the contents of the `_example` key, but you can de
 
 The following example shows the abbreviated content of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
-```yml hl_lines="11"
-apiVersion: v1
+```yml linenums="1" hl_lines="11"
+piVersion: v1
 kind: ConfigMap
 metadata:
   name: config-defaults
@@ -44,12 +44,12 @@ metadata:
     knative.dev/example-checksum: "5b64ff5c"
 data:
   _example: |
-    #######!####
-    #
-    #    EXAMPLE!
-    #             
-    #########!####
-# (1)!
+    ################################
+    #                              #
+    #    EXAMPLE CONFIGURATION     #
+    #                              #
+    ################################
+
     # This block is not actually functional configuration,
     # but serves to illustrate the available configuration
     # options and document them in a way that is accessible
