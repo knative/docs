@@ -14,19 +14,11 @@ This page provides important information and best practices for working with Kub
 
 ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of a configuration key. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
 
-If a user edits the `_example` key by mistakenly thinking their edits will have an affect, the Knative webhook catches the error with the following alert text (using the `config-defaults` ConfigMap as a example):
-
-<!-- use code here to wrap long command-line output -->
-<code style="white-space: pre-wrap">
-error: configmaps "config-defaults" could not be patched: admission webhook "config.webhook.serving.knative.dev" denied the request: validation failed: the update modifies a key in "_example" which is probably not what you want. Instead, copy the respective setting to the top-level of the ConfigMap, directly below "data"
-You can run `kubectl replace -f /var/folders/9t/yzwp6zrx765clbvl1c_dqc2r0000gn/T/kubectl-edit-2068368769.yaml` to try this update again.
-</code>
+If a user edits the `_example` key by mistakenly thinking their edits will have an affect, the Knative webhook catches the error and alerts the user that their update could not be patched.
 
 More specifically, the edit is caught when the value of the checksum for the `_example` key is different when compared with the pod's template annotations. If the checksum is null or missing, the webhook server does not create the warning.
 
-Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation. 
-
-### Example
+Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation.
 
 The following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
