@@ -58,9 +58,12 @@ data:
   . . . 
     # In environments with large number of services it is suggested
     # to set this value to `false`.
-    # See https://github.com/knative/serving/issues/8498.
+    # See https://github.com/knative/serving/issues/8498. # (1)
     enable-service-links: "false"
 ```
+
+1. :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
+    text__, images, ... basically anything that can be written in Markdown.
 
 ## Best practices
 
