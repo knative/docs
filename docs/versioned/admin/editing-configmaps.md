@@ -30,7 +30,7 @@ Accordingly, you cannot alter the contents of the `_example` key, but you can de
 
 The following example shows the abbreviated content of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
-```yml
+```yml hl_lines="26 28"
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -58,12 +58,9 @@ data:
   . . . 
     # In environments with large number of services it is suggested
     # to set this value to `false`.
-    # See https://github.com/knative/serving/issues/8498. # (1)
+    # See https://github.com/knative/serving/issues/8498.
     enable-service-links: "false"
 ```
-
-1. :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
-    text__, images, ... basically anything that can be written in Markdown.
 
 ## Best practices
 
