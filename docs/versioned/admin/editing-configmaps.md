@@ -28,7 +28,7 @@ Accordingly, you cannot alter the contents of the `_example` key, but you can de
 
 ### Example
 
-The following example shows the abbreviated content of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
+The following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
 ```yml linenums="1" hl_lines="11"
 piVersion: v1
@@ -55,14 +55,7 @@ data:
     # options and document them in a way that is accessible
     # to users that `kubectl edit` this config map.
     #
-  . . . 
-    # In environments with large number of services it is suggested
-    # to set this value to `false`.
-    # See https://github.com/knative/serving/issues/8498.
-    enable-service-links: "false"
 ```
-
-(1) Testing
 
 ## Best practices
 
@@ -73,8 +66,8 @@ data:
 
 ### Storage and versioning
 
-- Periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
-
+- If you manage the ConfigMap by using `kubectl edit`, periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
+- If you manage the ConfigMap by keeping the definition in Git and automatically applying it to the cluster (GitOps), remember to include applicable version numbers in `app.properties` as needed.
 - You can also define ConfigMaps in YAML or JSON files and store them in a repository like GitHub.
 
 ### Git recommendations
