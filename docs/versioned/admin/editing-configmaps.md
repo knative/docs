@@ -6,7 +6,7 @@ components:
 function: explanation
 ---
 
-# Using ConfigMaps
+# Working with ConfigMaps
 
 This page provides important information and best practices for working with Kubernetes ConfigMaps. ConfigMaps and YAML resource files are the primary means for managing configuration values for Knative controllers.
 
@@ -30,7 +30,7 @@ Accordingly, you cannot alter the contents of the `_example` key, but you can de
 
 The following example shows the abbreviated content of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
-```yml hl_lines="26 28"
+```yml hl_lines="11"
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -44,12 +44,12 @@ metadata:
     knative.dev/example-checksum: "5b64ff5c"
 data:
   _example: |
-    ################################
-    #                              #
-    #    EXAMPLE CONFIGURATION     #
-    #                              #
-    ################################
-
+    #######!####
+    #
+    #    EXAMPLE!
+    #             
+    #########!####
+# (1)!
     # This block is not actually functional configuration,
     # but serves to illustrate the available configuration
     # options and document them in a way that is accessible
@@ -61,6 +61,8 @@ data:
     # See https://github.com/knative/serving/issues/8498.
     enable-service-links: "false"
 ```
+
+(1) Testing
 
 ## Best practices
 
