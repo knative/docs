@@ -16,7 +16,7 @@ If you are using the Knative Operator to install and manage your Knative cluster
 
 ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of all the known configuration keys in that ConfigMap. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
 
-If a user edits the `_example` key by mistakenly thinking their edits don't effect on the cluster operation, the Knative webhook catches the error and alerts the user that their update could not be patched. More specifically, the edit is caught when the value of the checksum for the `_example` key is different when compared with the `knative.dev/example-checksum` annotation on the ConfigMap. If the checksum is null or missing, the webhook server does not create the warning.
+If a user edits the `_example` key rather than creating a new key in the ConfigMap, the changes won't affect the cluster cluster configuration, which can be confusing. The Knative webhook flags this error and alerts the user that their update could not be patched. More specifically, the edit is caught when the checksum for the `_example` key differs from the `knative.dev/example-checksum` annotation on the ConfigMap. If the checksum is null or missing, the webhook does not create the warning.
 
 Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation.
 
