@@ -58,9 +58,11 @@ Knative controllers process new values, including roll-backs to previous values,
 
 ### Storage and versioning
 
-- If you manage the ConfigMap by using `kubectl edit`, periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
-- If you manage the ConfigMap by keeping the definition in Git and automatically applying it to the cluster (GitOps), remember to include applicable version numbers in `app.properties` as needed.
-- You can also define ConfigMaps in YAML or JSON files and store them in a repository like GitHub.
+How you manage storage relates the canonical locations of both the cluster and Git. If your cluster is canonical, then you're exporting or backing up the configuration to Git. If Git is canonical, then you're practicing GitOps, and you should make changes in Git and then apply the files from Git to your cluster.
+
+If you manage the ConfigMap by using `kubectl edit`, periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
+
+If you manage the ConfigMap by keeping the definition in Git and automatically applying it to the cluster (GitOps), you can apply the changes manually  sor use automation (for example Flux or ArgoCD) to apply the changes once they are committed.
 
 ### Git recommendations
 
