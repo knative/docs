@@ -20,12 +20,31 @@ The `deploy` command uses the function project name as the Knative Service name.
     kn func deploy --registry <registry>
     ```
 
+!!! note
+    In case you want to deploy your function as a raw Kubernetes Deployment and Service instead of a Knative Service, you can use the `raw` deployer:
+    === "func"
+    
+        Deploy the function by running the command inside the project directory:
+    
+        ```bash
+        func deploy --registry <registry> --deployer raw
+        ```
+    
+    === "kn func"
+    
+        Deploy the function by running the command inside the project directory:
+    
+        ```bash
+        kn func deploy --registry <registry> --deployer raw
+        ```
+
+
 !!! Success "Expected output"
-    ```{ .bash .no-copy }
-        🙌 Function image built: <registry>/hello:latest
-        ✅ Function deployed in namespace "default" and exposed at URL:
-        http://hello.default.127.0.0.1.sslip.io
-    ```
+```{ .bash .no-copy }
+    🙌 Function image built: <registry>/hello:latest
+    ✅ Function deployed in namespace "default" and exposed at URL:
+    http://hello.default.127.0.0.1.sslip.io
+```
 
 You can verify that your function has been successfully deployed by using the `invoke` command and observing the output:
 
