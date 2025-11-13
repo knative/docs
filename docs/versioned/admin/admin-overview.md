@@ -108,6 +108,8 @@ Knative configurations are performed by the following methods:
 
     Store and manage configuration data as key-value pairs. ConfigMaps are frequently used to tune platform-wide behavior. Most of the Knative ConfigMaps are in the `knative-serving` and `knative-eventing` namespaces. Their settings apply to all the relevant Knative components in all namespaces.
 
+    See [Working with ConfigMaps](editing-configmaps.md) for important usage information and best practices.
+
 - Using the Knative Operator
 
     Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. You can manage the operator without using the `kn` CLI. The `kn` CLI manages only operator installations.
