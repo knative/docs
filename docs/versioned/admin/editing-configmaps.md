@@ -8,7 +8,9 @@ function: explanation
 
 # Working with ConfigMaps
 
-This page provides important information and best practices for working with Kubernetes ConfigMaps. If you are using the operator to install and manage your Knative cluster, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) for information on how to manage ConfigMaps using the operator. ConfigMaps are the primary means for managing configuration values for Knative controllers.
+This page provides important information and best practices for working with Kubernetes ConfigMaps. ConfigMaps are the primary means for managing configuration values for Knative controllers.
+
+If you are using the Knative Operator to install and manage your Knative cluster, you should not edit the ConfigMaps directly as the Operator will overwrite the changes. See [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) for information on how to manage ConfigMaps using the operator.
 
 ## The _example key
 
