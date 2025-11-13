@@ -20,7 +20,7 @@ If a user edits the `_example` key rather than creating a new key in the ConfigM
 
 Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation.
 
-For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checkum highlighted.
+For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checksum highlighted.
 
 ```yml linenums="1" hl_lines="11"
 piVersion: v1
