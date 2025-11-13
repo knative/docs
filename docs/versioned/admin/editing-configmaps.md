@@ -8,19 +8,17 @@ function: explanation
 
 # Working with ConfigMaps
 
-This page provides important information and best practices for working with Kubernetes ConfigMaps. ConfigMaps and YAML resource files are the primary means for managing configuration values for Knative controllers.
+This page provides important information and best practices for working with Kubernetes ConfigMaps. If you are using the operator to install and manage your Knative cluster, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) for information on how to manage ConfigMaps using the operator. ConfigMaps are the primary means for managing configuration values for Knative controllers.
 
 ## The _example key
 
-ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of a configuration key. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
+ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of all the known configuration keys in that ConfigMap. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
 
-If a user edits the `_example` key by mistakenly thinking their edits will have an affect, the Knative webhook catches the error and alerts the user that their update could not be patched.
-
-More specifically, the edit is caught when the value of the checksum for the `_example` key is different when compared with the pod's template annotations. If the checksum is null or missing, the webhook server does not create the warning.
+If a user edits the `_example` key by mistakenly thinking their edits don't effect on the cluster operation, the Knative webhook catches the error and alerts the user that their update could not be patched. More specifically, the edit is caught when the value of the checksum for the `_example` key is different when compared with the `knative.dev/example-checksum` annotation on the ConfigMap. If the checksum is null or missing, the webhook server does not create the warning.
 
 Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation.
 
-The following YAML code shows the first 24 lines of the `config-defaults` ConfigMap. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
+For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checkum highlighted.
 
 ```yml linenums="1" hl_lines="11"
 piVersion: v1
@@ -35,7 +33,7 @@ metadata:
   annotations:
     knative.dev/example-checksum: "5b64ff5c"
 data:
-  _example: | # (1)
+  _example: |
     ################################
     #                              #
     #    EXAMPLE CONFIGURATION     #
@@ -49,11 +47,11 @@ data:
     #
 ```
 
-1.  :man_raising_hand: Do not change.
-
 ## Best practices
 
 ### Validate and Test Changes
+
+Knative controllers process new values, including roll-backs to previous values, within a few seconds after being applied. 
 
 - Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or `kubectl apply --dry-run=server`.
 - Test ConfigMap changes in a staging environment to ensure compatibility with the application version.
