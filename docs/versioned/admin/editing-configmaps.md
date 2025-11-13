@@ -14,13 +14,13 @@ If you are using the Knative Operator to install and manage your Knative cluster
 
 ## The _example key
 
-ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of all the known configuration keys in that ConfigMap. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
+ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of all the known configuration keys in that ConfigMap. This key does not affect Knative behavior, but does contains a value which acts as a documentation comment.
 
 If a user edits the `_example` key rather than creating a new key in the ConfigMap, the changes won't affect the cluster cluster configuration, which can be confusing. The Knative webhook flags this error and alerts the user that their update could not be patched. More specifically, the edit is caught when the checksum for the `_example` key differs from the `knative.dev/example-checksum` annotation on the ConfigMap. If the checksum is null or missing, the webhook does not create the warning.
 
-Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation.
+Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the `example-checksum` annotation.
 
-For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checksum highlighted.
+For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checksum highlighted on line 11.
 
 ```yml linenums="1" hl_lines="11"
 piVersion: v1
@@ -53,16 +53,16 @@ data:
 
 ### Validate and Test Changes
 
-Knative controllers process new values, including roll-backs to previous values, within a few seconds after being applied. 
+Knative controllers process new values, including roll-backs to previous values, within a few seconds after being applied.
 
-- Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or `kubectl apply --dry-run=server`.
+- Before applying ConfigMaps, validate their syntax and content using tools like `kubeval` or use `kubectl apply --dry-run=server`.
 - Test ConfigMap changes in a staging environment to ensure compatibility with the application version.
 
 ### Storage and versioning
 
 How you manage storage relates the canonical locations of both the cluster and Git. If your cluster is canonical, then you're exporting or backing up the configuration to Git. If Git is canonical, then you're practicing GitOps, and you should make changes in Git and then apply the files from Git to your cluster.
 
-If you manage the ConfigMap by using `kubectl edit`, periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
+If you manage the ConfigMap by using `kubectl edit`, periodically export ConfigMaps from the cluster with `kubectl get configmap -o yaml` and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
 
 If you manage the ConfigMap by keeping the definition in Git and automatically applying it to the cluster (GitOps), you can apply the changes manually or use automation (for example Flux or ArgoCD) to apply the changes after they are committed.
 
@@ -70,6 +70,6 @@ If you manage the ConfigMap by keeping the definition in Git and automatically a
 
 In addition to diligent usage of commit messages, here are some suggestions for ConfigMaps in GitHub:
 
-- Centralize ConfigMaps: Store all ConfigMaps in a dedicated directory in your Git repository (e.g., `k8s/configmaps/`).
-- Tag commits in Git with version numbers (e.g., `git tag config-v1.2.3`) to mark specific ConfigMap versions.
+- Centralize ConfigMaps: Store all ConfigMaps in a dedicated directory in your Git repository, such as `k8s/configmaps/`.
+- Tag commits in Git with version numbers, such as `git tag config-v1.2.3` to mark specific ConfigMap versions.
 - Implement a GitOps workflow with tools like ArgoCD or Flux to synchronize ConfigMaps from Git to your Kubernetes cluster.
