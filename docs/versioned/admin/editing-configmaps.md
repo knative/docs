@@ -64,7 +64,7 @@ How you manage storage relates the canonical locations of both the cluster and G
 
 If you manage the ConfigMap by using `kubectl edit`, periodically export ConfigMaps from the cluster (`kubectl get configmap -o yaml`) and commit them to Git for recovery purposes. Include applicable version numbers in `app.properties` as needed.
 
-If you manage the ConfigMap by keeping the definition in Git and automatically applying it to the cluster (GitOps), you can apply the changes manually  sor use automation (for example Flux or ArgoCD) to apply the changes once they are committed.
+If you manage the ConfigMap by keeping the definition in Git and automatically applying it to the cluster (GitOps), you can apply the changes manually or use automation (for example Flux or ArgoCD) to apply the changes after they are committed.
 
 ### Git recommendations
 
