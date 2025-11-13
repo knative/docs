@@ -20,7 +20,7 @@ More specifically, the edit is caught when the value of the checksum for the `_e
 
 Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the annotation.
 
-The following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with most of the file removed except for the last four lines. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
+The following YAML code shows the first 24 lines of the `config-defaults` ConfigMap. The checksum is in the annotations as `Knative.dev/example-checksum: "5b64ff5c"`
 
 ```yml linenums="1" hl_lines="11"
 piVersion: v1
@@ -35,7 +35,7 @@ metadata:
   annotations:
     knative.dev/example-checksum: "5b64ff5c"
 data:
-  _example: |
+  _example: | # (1)
     ################################
     #                              #
     #    EXAMPLE CONFIGURATION     #
@@ -48,6 +48,8 @@ data:
     # to users that `kubectl edit` this config map.
     #
 ```
+
+1.  :man_raising_hand: Do not change.
 
 ## Best practices
 
