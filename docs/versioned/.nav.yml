@@ -254,8 +254,6 @@ nav:
           - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
         - Installing plugins:
           - Install Istio for Knative: install/installing-istio.md
-          - Install Kourier for Knative: install/installing-kourier.md
-          # TODO: docs for contour, gateway-api
           - Install Kafka for Knative: install/eventing/kafka-install.md
           - Install RabbitMQ for Knative: install/eventing/rabbitmq-install.md
           # N.B. this duplicates an "eventing" topic above, cross-referenced here.
@@ -274,6 +272,7 @@ nav:
           - Configure domain names: serving/using-a-custom-domain.md
           - Istio Authorization: serving/istio-authorization.md
           - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
+          - Plugin Kourier: install/installing-kourier.md
         - Serving configuration:
           - Configure Deployment resources: serving/configuration/deployment.md
           - Configure gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md

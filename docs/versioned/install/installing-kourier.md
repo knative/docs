@@ -5,7 +5,7 @@ components:
 function: how-to
 ---
 
-# Installing Kourier for Knative
+# Plugin: Kourier
 
 This page walks you through manually installing and customizing Kourier for use with Knative. Kourier is an ingress for Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane for it.
 
