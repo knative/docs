@@ -13,7 +13,7 @@ Choose your learning path based on your goals and experience level.
 
 ---
 
-## Getting Started with Knative
+### Getting Started with Knative
 
 **Perfect for:** First-time users, developers evaluating Knative, and those wanting hands-on experience
 
@@ -29,7 +29,7 @@ Comprehensive guide with multiple learning paths:
 
 ---
 
-## Knative Bookstore: End-to-End Sample Application
+### Knative Bookstore: End-to-End Sample Application
 
 **Perfect for:** Learning Knative through a real-world application
 
@@ -43,7 +43,7 @@ Build a complete online bookstore application from scratch and explore Knative's
 
 ---
 
-## Quick Links
+### Quick Links
 
 Not sure where to start? Here are common paths:
 
@@ -55,7 +55,7 @@ Not sure where to start? Here are common paths:
 
 ---
 
-## Prerequisites
+### Prerequisites
 
 **For Quick Start Tutorial:**
 - Docker
