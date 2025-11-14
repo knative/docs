@@ -85,7 +85,7 @@ You can view the latest tested Kourier version on the [Kourier releases page](ht
 
 By default, the deployment of the Kourier components is split between two different namespaces:
 
-- `knative-serving` - Namespace where Kourier control is deployed.
+- `knative-serving` - Namespace where Kourier controlle is deployed.
 - `kourier-system` - Namespace where gateways are deployed.
 
 To change the Kourier gateway namespace, you will need to:
