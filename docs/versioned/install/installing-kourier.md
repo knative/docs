@@ -33,7 +33,7 @@ You can view the latest tested Kourier version on the [Kourier releases page](ht
 1. Install Kourier:
 
     ```bash
-    kubectl apply -f https://github.com/knative/net-kourier/releases/latest/download/kourier.yaml
+    kubectl apply -f {{ artifact(repo="net-kourier",org="knative-extensions",file="kourier.yaml" }}
     ```
 
 1. Configure Knative Serving to use the proper `ingress.class`:
