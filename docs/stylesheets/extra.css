@@ -673,10 +673,9 @@ a.md-header__button.md-logo img {
   }
 }
 
-/* Mobile viewport: up to 76.1875em (1220px) */
+/* Mobile and Tablet: up to 76.1875em (1220px) */
 @media screen and (max-width: 76.1875em) {
   
-  /* Keep the site name visible on mobile at all times */
   .md-header__topic:first-child {
     display: flex !important;
     opacity: 1 !important;
@@ -709,19 +708,6 @@ a.md-header__button.md-logo img {
     display: flex;
     align-items: center;
   }
-  
-  .md-tabs {
-    width: 100%;
-  }
-  
-  .md-nav--primary .md-nav__title {
-    background-color: var(--md-primary-fg-color);
-    color: var(--md-primary-bg-color);
-  }
-  
-  .md-nav--primary .md-nav__item {
-    border-top: 0.05rem solid var(--md-default-fg-color--lightest);
-  }
 }
 
 /* Tablet adjustments: 60em to 76.1875em (960px to 1220px) */
@@ -730,15 +716,6 @@ a.md-header__button.md-logo img {
   .md-header__title {
     max-width: 40%;
     flex-shrink: 1;
-  }
-  
-  .md-tabs {
-    margin-top: 0;
-  }
-  
-  .md-header__topic:last-child {
-    display: flex !important;
-    max-width: 100%;
   }
 }
 
@@ -762,34 +739,6 @@ a.md-header__button.md-logo img {
   .md-header__ellipsis {
     margin-left: 0.2rem;
     margin-right: 0.2rem;
-  }
-  
-  .md-header__button[for="__drawer"] {
-    margin-right: 0.2rem;
-  }
-}
-
-/* Desktop: Restore default Material behavior above 76.1875em (1220px) */
-@media screen and (min-width: 76.25em) {
-  
-  .md-header__topic:first-child {
-    display: block;
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  .md-header__topic:last-child {
-    display: block;
-  }
-  
-  /* Remove any forced visibility */
-  .md-header__title {
-    max-width: 100%;
-  }
-  
-  .md-header__topic {
-    transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1), 
-                opacity 0.15s;
   }
 }
 
