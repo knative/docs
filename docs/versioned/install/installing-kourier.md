@@ -7,28 +7,31 @@ function: how-to
 
 # Plugin: Kourier
 
-This page walks you through manually installing and customizing Kourier for use with Knative. Kourier is an ingress for Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane for it.
+This page walks you through manually installing and customizing Kourier for use with Knative.
+Kourier is an ingress for Knative Serving and a lightweight alternative for the Istio ingress.
+Its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane.
+Kourier provides the following features:
+
+- Traffic splitting between Knative revisions.
+- Automatic update of endpoints as they are scaled.
+- Support for gRPC services.
+- Timeouts and retries.
+- TLS
+- Cipher Suite
+- External Authorization support.
 
 ## Before you begin
 
 This installation is recommended for Knative installations without Istio installed.
 
-You need:
-
-- A Kubernetes cluster with the Knative Serving component installed.
+You will need a Kubernetes cluster with the Knative Serving component installed.
+To install Knative Serving, see [Installing Knative Serving using YAML files](./yaml-install/serving/install-serving-with-yaml.md) or [Install by using the Knative Operator CLI Plugin](./operator/knative-with-operator-cli.md).
 
 ## Supported Kourier versions
 
 You can view the latest tested Kourier version on the [Kourier releases page](https://github.com/knative-extensions/net-kourier/releases).
 
 ## Installing Kourier
-
-1. Install Knative Serving if not already installed:
-
-    ``` bash
-    kubectl apply -f https://github.com/knative/serving/releases/latest/download/serving-crds.yaml
-    kubectl apply -f https://github.com/knative/serving/releases/latest/download/serving-core.yaml
-    ```
 
 1. Install Kourier:
 
@@ -45,7 +48,11 @@ You can view the latest tested Kourier version on the [Kourier releases page](ht
       -p '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
     ```
 
-1. Optional - Set your desired domain (replace `127.0.0.1.nip.io` to your preferred domain):
+## Configuration
+
+### DNS configuration
+
+Set your desired domain. Replace `127.0.0.1.nip.io` with your preferred domain's IP address:
 
     ```bash
     kubectl patch configmap/config-domain \
@@ -54,61 +61,28 @@ You can view the latest tested Kourier version on the [Kourier releases page](ht
       -p '{"data":{"127.0.0.1.nip.io":""}}'
     ```
 
-1. Optional - Deploy a sample hello world app:
-
-    ```bash
-    cat <<-EOF | kubectl apply -f -
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: helloworld-go
-    spec:
-      template:
-        spec:
-          containers:
-          - image: gcr.io/knative-samples/helloworld-go
-            env:
-            - name: TARGET
-              value: Go Sample v1
-    EOF
-    ```
-
-1. Optional - For testing purposes, you can use port-forwarding to make requests to Kourier from your machine:
-
-    ```bash
-    kubectl port-forward --namespace kourier-system $(kubectl get pod -n kourier-system -l "app=3scale-kourier-gateway" --output=jsonpath="{.items[0].metadata.name}") 8080:8080 19000:9000 8443:8443
-
-    curl -v -H "Host: helloworld-go.default.127.0.0.1.nip.io" http://localhost:8080
-    ```
-
-## Deployment
-
 By default, the deployment of the Kourier components is split between two different namespaces:
 
 - `knative-serving` - Namespace where Kourier controlle is deployed.
 - `kourier-system` - Namespace where gateways are deployed.
 
-To change the Kourier gateway namespace, you will need to:
+To change the Kourier gateway namespace, do the following steps:
 
-- Modify the files in `config/` and replace all the namespaces fields that have `kourier-system` with the desired namespace.
-- Set the `KOURIER_GATEWAY_NAMESPACE` environmental variable in the `kourier-control` deployment to the new namespace.
+1. Modify the files in `config/` and replace all the namespaces fields that have `kourier-system` with the desired namespace.
+1. Set the `KOURIER_GATEWAY_NAMESPACE` environmental variable in the `kourier-control` deployment to the new namespace.
 
-## Features
+Domain Mapping is configured to explicitly onluy use the http2 protocol. You can disable this behavior by adding the following annotation to the Domain Mapping resource.
 
-Kourier provides the following features:
+```bash
+kubectl annotate domainmapping <domain_mapping_name> kourier.knative.dev/disable-http2=true --namespace <namespace>
+```
 
-- Traffic splitting between Knative revisions.
-- Automatic update of endpoints as they are scaled.
-- Support for gRPC services.
-- Timeouts and retries.
-- TLS
-- Cipher Suite
-- External Authorization support.
-- Proxy Protocol (AN EXPERIMENTAL / ALPHA FEATURE)
+A good use case for this configuration is DomainMapping with Websocket.
+This annotation is an experimental feature and its name is subject to change.
 
-## Setup TLS certificate
+### TLS certificates
 
-Create a secret containing your TLS certificate and Private key:
+To set up a TLS certificate, create a secret containing your TLS certificate and Private key:
 
 ```bash
 kubectl create secret tls ${CERT_NAME} --key ${KEY_FILE} --cert ${CERT_FILE}
@@ -133,21 +107,21 @@ kubectl -n "knative-serving" patch configmap/config-kourier \
 
 The default uses the default cipher suites of the envoy version.
 
-## External Authorization Configuration
+### External Authorization
 
-If you want to enable the external authorization support you can set these environment variables in the `net-kourier-controller` deployment:
+If you want to enable the external authorization support, you can set the following environment variables in the `net-kourier-controller` deployment:
 
 | Environment Variable | Description |
 |---| --- |
 | `KOURIER_EXTAUTHZ_HOST` | Required. The external authorization service and port: `my-auth:2222` |
 | `KOURIER_EXTAUTHZ_FAILUREMODEALLOW` | Required. Allow traffic to go through if the ext auth service is down. Accepts true/false |
-| `KOURIER_EXTAUTHZ_PROTOCOL` | The protocol used to query the ext auth service. Can be one of: GRPC, HTTP, or HTTPS. Defaults to GRPC |
+| `KOURIER_EXTAUTHZ_PROTOCOL` | Use this protocol to query the ext auth service. Can be one of: GRPC, HTTP, or HTTPS. Defaults to GRPC |
 | `KOURIER_EXTAUTHZ_MAXREQUESTBYTES` | Max request bytes defaults to 8192 bytes. For more information, see [BufferSettings](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html#extensions-filters-http-ext-authz-v3-buffersettings) in Envoy documentation.|
-| `KOURIER_EXTAUTHZ_TIMEOUT` | Max time in ms to wait for the ext authz service. Defaults to 2s |
-| `KOURIER_EXTAUTHZ_PATHPREFIX` | If `KOURIER_EXTAUTHZ_PROTOCOL` is equal to HTTP or HTTPS path to query the ext auth service. For example, if set to `/verify` it will query `/verify/` (notice the trailing `/`). If not set it will query `/` |
-| `KOURIER_EXTAUTHZ_PACKASBYTES` | If `KOURIER_EXTAUTHZ_PROTOCOL` is equal to grpc sends the body as raw bytes instead of a UTF-8 string. Accepts only true/false t/f or 1/0. Attempting to set another value will throw an error. Defaults to false. For more information, see [BufferSettings](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html#extensions-filters-http-ext-authz-v3-buffersettings) in Envoy documentation. |
+| `KOURIER_EXTAUTHZ_TIMEOUT` | Maximum time in ms to wait for the `EXTAUTHZ` service. Defaults to 2s |
+| `KOURIER_EXTAUTHZ_PATHPREFIX` | If `KOURIER_EXTAUTHZ_PROTOCOL` is equal to HTTP or HTTPS path to query the ext auth service. For example, if set to `/verify` it will query `/verify/` (notice the trailing `/`). If not set it will query `/`. |
+| `KOURIER_EXTAUTHZ_PACKASBYTES` | If `KOURIER_EXTAUTHZ_PROTOCOL` is equal to GRPC sends the body as raw bytes instead of a UTF-8 string. Accepts only true/false t/f or 1/0. Attempting to set another value will throw an error. Defaults to false. For more information, see [BufferSettings](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html#extensions-filters-http-ext-authz-v3-buffersettings) in Envoy documentation. |
 
-## Proxy Protocol Configuration
+### Proxy Protocol Configuration
 
 Note: this is an experimental/alpha feature.
 
@@ -203,18 +177,3 @@ spec:
   type: LoadBalancer
 ```
 
-## Tips
-
-Domain Mapping is configured to explicitly use http2 protocol only. This behaviour can be disabled by adding the following annotation to the Domain Mapping resource
-
-```bash
-kubectl annotate domainmapping <domain_mapping_name> kourier.knative.dev/disable-http2=true --namespace <namespace>
-```
-
-A good use case for this configuration is DomainMapping with Websocket
-
-This annotation is an experimental feature. The annotation name my change in the future.
-
-## What's next
-
-- View the [Knative Serving documentation](../serving/README.md).
