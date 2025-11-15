@@ -84,35 +84,6 @@
       {% include "partials/javascripts/palette.html" %}
     {% endif %}
 
-    <!-- Top Nav -->
-    <ul class="md-tabs__list mr-30">
-      <li class="md-tabs__item">
-        <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" class="md-tabs__link">
-          Home
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/docs/" class="md-tabs__link">
-          Docs
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/about/testimonials/" class="md-tabs__link">
-          About
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/blog/" class="md-tabs__link">
-          Blog
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/community/" class="md-tabs__link">
-          Community
-        </a>
-      </li>
-    </ul>
-
     <!-- Site language selector -->
     {% if config.extra.alternate %}
       {% include "partials/alternate.html" %}
