@@ -23,8 +23,8 @@ Here's an overview of the components in the solution:
 
 ## Running the Solution
 
-1. Have a locally running Kubernetes cluster e.g. [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) or [Minikube](https://minikube.sigs.k8s.io/docs/start).
-1. Have a locally running container registry, e.g. [Kind registry setup](https://kind.sigs.k8s.io/docs/user/local-registry/) or [Minikube registry setup](https://minikube.sigs.k8s.io/docs/handbook/registry/#enabling-insecure-registries).
+1. Have a locally running Kubernetes cluster e.g. [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).
+1. Have a locally running container registry, e.g. [Kind registry setup](https://kind.sigs.k8s.io/docs/user/local-registry/).
 1. Install all the prerequisites and deploy the entire solution using the `solution.sh` script:
 
    ```sh

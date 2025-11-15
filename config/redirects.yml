@@ -1,7 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
-      versioned/contributing/about.md: community/README.md
+      versioned/contributing/about.md: community/contributing/README.md
       versioned/eventing/experimental-features/README.md: versioned/eventing/features/README.md
       versioned/eventing/experimental-features/delivery-timeout.md: versioned/eventing/features/delivery-timeout.md
       versioned/eventing/experimental-features/delivery-retryafter.md: versioned/eventing/features/delivery-retryafter.md
@@ -19,16 +19,16 @@ plugins:
       versioned/eventing/broker/kafka-broker/README.md: versioned/eventing/brokers/broker-types/kafka-broker/README.md
       versioned/eventing/broker/rabbitmq-broker/README.md: versioned/eventing/brokers/broker-types/rabbitmq-broker/README.md
       versioned/eventing/broker/README.md: versioned/eventing/brokers/README.md
-      versioned/concepts/resources/revisions.md: versioned/concepts/serving-resources/revisions.md
+      versioned/concepts/resources/revisions.md: versioned/serving/revisions/README.md
       versioned/serving/revision-gc.md: versioned/serving/revisions/revision-developer-config-options.md
       versioned/serving/configuration/revision-gc.md: versioned/serving/revisions/revision-admin-config-options.md
-      versioned/reference/concepts/duck-typing.md: versioned/concepts/duck-typing.md
+      versioned/reference/concepts/duck-typing.md: versioned/eventing/concepts/duck-typing.md
       versioned/reference/client/README.md: versioned/client/README.md
       versioned/reference/api/eventing-api.md: versioned/eventing/reference/eventing-api.md
       versioned/reference/api/serving-api.md: versioned/serving/reference/serving-api.md
       versioned/community/about.md: community/governance.md
       versioned/contributing/contributing.md: community/contributing.md
-      versioned/contributing/README.md: community/README.md
+      versioned/contributing/README.md: community/contributing.md
       versioned/eventing/getting-started.md: versioned/getting-started/getting-started-eventing.md
       versioned/admin/collecting-logs/README.md: versioned/serving/observability/logging/collecting-logs.md
       versioned/admin/collecting-metrics/README.md: versioned/serving/observability/metrics/collecting-metrics.md
@@ -86,8 +86,8 @@ plugins:
       versioned/community/contributing/working-groups/working-groups.md: https://github.com/knative/community/blob/main/working-groups
       versioned/community/meetup.md: community/README.md
       versioned/community/samples.md: https://github.com/knative/docs/tree/main/code-samples/community
-      versioned/concepts/overview.md: versioned/index.md
-      versioned/developer/concepts/duck-typing.md: versioned/concepts/duck-typing.md
+      versioned/concepts/overview.md: versioned/README.md
+      versioned/developer/concepts/duck-typing.md: versioned/eventing/concepts/duck-typing.md
       versioned/developer/eventing/event-delivery.md: versioned/eventing/event-delivery.md
       versioned/developer/eventing/sinks/README.md: versioned/eventing/sinks/README.md
       versioned/developer/eventing/sinks/kafka-sink.md: versioned/eventing/sinks/kafka-sink.md

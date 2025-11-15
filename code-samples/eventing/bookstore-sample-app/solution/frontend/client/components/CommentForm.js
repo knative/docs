@@ -164,7 +164,7 @@ const CommentForm = () => {
         setEverSubmit(true);
         setResponseSuccess("unknown");
 
-        fetch("http://localhost:8080/add", {
+        fetch(`http://${window.location.host}/backend/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

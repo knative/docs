@@ -13,7 +13,7 @@ You can modify the KnativeServing CR to configure different options for Knative 
 
 Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field.
 
-For example, if you want to install Knative Serving v1.5, you can apply the following `KnativeServing` custom resource:
+For example, if you want to install Knative Serving v1.20, you can apply the following `KnativeServing` custom resource:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -22,25 +22,25 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: "1.5"
+  version: "1.20"
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator install --component serving -v 1.5 -n knative-serving
+kn operator install --component serving -v 1.20 -n knative-serving
 ```
 
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving.
 
 If users specify an invalid or unavailable version, the Knative Operator does nothing.
 
-The Knative Operator always includes the latest 3 release versions. For example, if the current version of the Knative Operator is v1.5, the earliest version of Knative Serving available through the Operator is v1.2.
+The Knative Operator always includes the latest 3 release versions. For example, if the current version of the Knative Operator is v1.20, the earliest version of Knative Serving available through the Operator is v1.17.
 
 If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
 
 !!! important
-    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.3, you must upgrade to v1.4 before upgrading to v1.5.
+    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.18, you must upgrade to v1.19 before upgrading to v1.20.
 
 ## Install customized Knative Serving
 

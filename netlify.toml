@@ -27,7 +27,7 @@ package = "@netlify/plugin-sitemap"
 
 [[redirects]]
   from = "/contributing/"
-  to = "/docs/community/"
+  to = "/community/contributing/"
   status = 301
 
 [[redirects]]

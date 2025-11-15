@@ -164,8 +164,8 @@ trigger.eventing.knative.dev/sequence-trigger created
 
     ```
     NAME                BROKER             SUBSCRIBER_URI                                                       AGE    READY   REASON
-    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   162m   True    
-    log-trigger        bookstore-broker    http://event-display.default.svc.cluster.local                       164m   True    
+    sequence-trigger    bookstore-broker   http://sequence-kn-sequence-0-kn-channel.default.svc.cluster.local   162m   True
+    log-trigger         bookstore-broker   http://event-display.default.svc.cluster.local                       164m   True
     ```
 
     And until this point, **your cluster should have the following Triggers** that are created by you.
@@ -180,7 +180,7 @@ trigger.eventing.knative.dev/sequence-trigger created
 Open the log for event-display with the following command:
 
 ```bash
-kubectl logs event-display-XXXXX -f
+kubectl logs -l app=event-display -f
 ```
 
 Type something in the comment box in the UI and click the submit button. All the events that the bookstore-broker received will be displayed in the event-display.
