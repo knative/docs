@@ -673,24 +673,97 @@ a.md-header__button.md-logo img {
   }
 }
 
-.md-search-result__article {
-  max-height: none;
+/* Mobile and Tablet: up to 76.1875em (1220px) */
+@media screen and (max-width: 76.1875em) {
+  
+  .md-header__topic:first-child {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    transition: none !important;
+    pointer-events: auto !important;
+  }
+  
+  .md-header__topic:last-child {
+    display: none !important;
+  }
+  
+  .md-header__title {
+    display: flex !important;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  
+  .md-header__title[data-md-component="header-title"] {
+    visibility: visible !important;
+  }
+  
+  [data-md-component="header"][data-md-state="shadow"] .md-header__topic:first-child {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    z-index: 1;
+  }
+  
+  .md-header__inner {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.md-search-result__teaser,
-article.md-search-result__article p:not(.md-search-result__meta) {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.5;
-  max-height: 4.5em;
+/* Tablet adjustments: 60em to 76.1875em (960px to 1220px) */
+@media screen and (min-width: 60em) and (max-width: 76.1875em) {
+  
+  .md-header__title {
+    max-width: 40%;
+    flex-shrink: 1;
+  }
 }
 
-.md-search-result__article > p {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Small mobile: up to 30em (480px) */
+@media screen and (max-width: 30em) {
+  
+  .md-header__button.md-logo {
+    padding: 0.2rem;
+  }
+  
+  .md-header__button.md-logo img,
+  .md-header__button.md-logo svg {
+    width: 2.5rem;
+    height: 2rem;
+  }
+  
+  .md-header__title {
+    font-size: 0.9rem;
+  }
+  
+  .md-header__ellipsis {
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
+}
+
+/* Fix: Update existing 1024px media query for removed hardcoded navigation */
+@media (max-width: 1024px) {
+  [dir=ltr] .md-tabs__list {
+    margin-left: 0 !important;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .md-header__topic {
+    transition: none !important;
+  }
+}
+
+/* Print styles - ensure title is visible */
+@media print {
+  .md-header__topic:first-child {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  .md-header__topic:last-child {
+    display: none !important;
+  }
 }
