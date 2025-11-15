@@ -676,6 +676,7 @@ a.md-header__button.md-logo img {
 /* Mobile viewport: up to 76.1875em (1220px) */
 @media screen and (max-width: 76.1875em) {
   
+  /* Keep the site name visible on mobile at all times */
   .md-header__topic:first-child {
     display: flex !important;
     opacity: 1 !important;
@@ -768,28 +769,34 @@ a.md-header__button.md-logo img {
   }
 }
 
-/* Desktop: Maintain existing behavior above 76.1875em (1220px) */
+/* Desktop: Restore default Material behavior above 76.1875em (1220px) */
 @media screen and (min-width: 76.25em) {
   
-  /* Restore default Material behavior for desktop */
   .md-header__topic:first-child {
-    display: flex;
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
   }
   
   .md-header__topic:last-child {
-    display: flex;
+    display: block;
   }
   
-  /* Desktop title gets full width */
+  /* Remove any forced visibility */
   .md-header__title {
     max-width: 100%;
   }
+  
+  .md-header__topic {
+    transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1), 
+                opacity 0.15s;
+  }
 }
 
-/* Update existing 1024px media query for removed hardcoded navigation */
+/* Fix: Update existing 1024px media query for removed hardcoded navigation */
 @media (max-width: 1024px) {
   [dir=ltr] .md-tabs__list {
-    margin-left: 0 !important; /* Override existing 5rem to 0 */
+    margin-left: 0 !important;
   }
 }
 
