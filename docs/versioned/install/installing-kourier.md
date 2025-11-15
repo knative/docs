@@ -10,22 +10,17 @@ function: how-to
 This page walks you through manually installing and customizing Kourier for use with Knative.
 Kourier is an ingress for Knative Serving and a lightweight alternative for the Istio ingress.
 Its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane.
-Kourier provides the following features:
-
-- Traffic splitting between Knative revisions.
-- Automatic update of endpoints as they are scaled.
-- Support for gRPC services.
-- Timeouts and retries.
-- TLS
-- Cipher Suite
-- External Authorization support.
 
 ## Before you begin
 
 This installation is recommended for Knative installations without Istio installed.
 
-You will need a Kubernetes cluster with the Knative Serving component installed.
-To install Knative Serving, see [Installing Knative Serving using YAML files](./yaml-install/serving/install-serving-with-yaml.md) or [Install by using the Knative Operator CLI Plugin](./operator/knative-with-operator-cli.md).
+You will need a Kubernetes cluster with the Knative Serving component installed. To install Knative Serving, use either of the following installation methods:
+
+- [Installing Knative Serving using YAML files](./yaml-install/serving/install-serving-with-yaml.md)
+- [Install by using the Knative Operator CLI Plugin](./operator/knative-with-operator-cli.md)
+
+See also [Installing Knative](README.md).
 
 ## Supported Kourier versions
 
