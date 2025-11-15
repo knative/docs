@@ -90,7 +90,7 @@ CERTS_SECRET_NAMESPACE: ${NAMESPACES_WHERE_THE_SECRET_HAS_BEEN_CREATED}
 CERTS_SECRET_NAME: ${CERT_NAME}
 ```
 
-### Cipher Suites
+### Cipher suites
 
 You can specify the cipher suites for TLS external listener. To specify the cipher suites you want to allow, run the following command to patch config-kourier ConfigMap:
 
@@ -102,7 +102,7 @@ kubectl -n "knative-serving" patch configmap/config-kourier \
 
 The default uses the default cipher suites of the envoy version.
 
-### External Authorization
+### External authorization
 
 If you want to enable the external authorization support, you can set the following environment variables in the `net-kourier-controller` deployment:
 
@@ -116,7 +116,7 @@ If you want to enable the external authorization support, you can set the follow
 | `KOURIER_EXTAUTHZ_PATHPREFIX` | If `KOURIER_EXTAUTHZ_PROTOCOL` is equal to HTTP or HTTPS path to query the ext auth service. For example, if set to `/verify` it will query `/verify/` (notice the trailing `/`). If not set it will query `/`. |
 | `KOURIER_EXTAUTHZ_PACKASBYTES` | If `KOURIER_EXTAUTHZ_PROTOCOL` is equal to GRPC sends the body as raw bytes instead of a UTF-8 string. Accepts only true/false t/f or 1/0. Attempting to set another value will throw an error. Defaults to false. For more information, see [BufferSettings](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html#extensions-filters-http-ext-authz-v3-buffersettings) in Envoy documentation. |
 
-### Proxy Protocol Configuration
+### Proxy protocol configuration
 
 Note: this is an experimental/alpha feature.
 
