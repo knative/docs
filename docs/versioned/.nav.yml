@@ -119,7 +119,6 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
-      - Event Mesh: eventing/event-mesh.md
       - Concepts:
         - Brokers:
           - About Brokers: eventing/brokers/README.md
@@ -132,6 +131,7 @@ nav:
             - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
           - Creating a Broker: eventing/brokers/create-broker.md
           - Developer configuration options: eventing/brokers/broker-developer-config-options.md
+        - Event Mesh: eventing/concepts/event-mesh.md
         - Triggers:
           - Using Triggers: eventing/triggers/README.md
         - Duck types: eventing/concepts/duck-typing.md
