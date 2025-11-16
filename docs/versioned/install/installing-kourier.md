@@ -5,9 +5,9 @@ components:
 function: how-to
 ---
 
-# Plugin: Kourier
+# Configure Kourier plugin
 
-This page walks you through manually installing and customizing Kourier for use with Knative.
+This page describes installing and customizing Kourier for use with Knative.
 Kourier is an ingress for Knative Serving and a lightweight alternative for the Istio ingress.
 Its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and a control plane.
 
@@ -15,7 +15,7 @@ Its deployment consists only of an [Envoy proxy](https://www.envoyproxy.io) and 
 
 This installation is recommended for Knative installations without Istio installed.
 
-You will need a Kubernetes cluster with the Knative Serving component installed. To install Knative Serving, use either of the following installation methods:
+You will need a Kubernetes cluster with the Knative Serving component installed. To install Knative Serving, use either of these installation methods:
 
 - [Installing Knative Serving using YAML files](./yaml-install/serving/install-serving-with-yaml.md)
 - [Install by using the Knative Operator CLI Plugin](./operator/knative-with-operator-cli.md)
@@ -24,7 +24,7 @@ See also [Installing Knative](README.md).
 
 ## Supported Kourier versions
 
-You can view the latest tested Kourier version on the [Kourier releases page](https://github.com/knative-extensions/net-kourier/releases).
+You can access the latest tested Kourier version on the [Kourier releases page](https://github.com/knative-extensions/net-kourier/releases).
 
 ## Installing Kourier
 
@@ -58,15 +58,15 @@ Set your desired domain. Replace `127.0.0.1.nip.io` with your preferred domain's
 
 By default, the deployment of the Kourier components is split between two different namespaces:
 
-- `knative-serving` - Namespace where Kourier controlle is deployed.
-- `kourier-system` - Namespace where gateways are deployed.
+- `knative-serving` - Where Kourier controlle is deployed.
+- `kourier-system` - Where gateways are deployed.
 
 To change the Kourier gateway namespace, do the following steps:
 
 1. Modify the files in `config/` and replace all the namespaces fields that have `kourier-system` with the desired namespace.
 1. Set the `KOURIER_GATEWAY_NAMESPACE` environmental variable in the `kourier-control` deployment to the new namespace.
 
-Domain Mapping is configured to explicitly onluy use the http2 protocol. You can disable this behavior by adding the following annotation to the Domain Mapping resource.
+Domain Mapping is configured to explicitly only use the HTTP2 protocol. You can disable this behavior by adding the following annotation to the Domain Mapping resource.
 
 ```bash
 kubectl annotate domainmapping <domain_mapping_name> kourier.knative.dev/disable-http2=true --namespace <namespace>
@@ -83,7 +83,7 @@ To set up a TLS certificate, create a secret containing your TLS certificate and
 kubectl create secret tls ${CERT_NAME} --key ${KEY_FILE} --cert ${CERT_FILE}
 ```
 
-Add the following env vars to net-kourier-controller in the "kourier" container:
+Add the following environment variables to `net-kourier-controller` in the `kourier` container:
 
 ```bash
 CERTS_SECRET_NAMESPACE: ${NAMESPACES_WHERE_THE_SECRET_HAS_BEEN_CREATED}
@@ -92,7 +92,7 @@ CERTS_SECRET_NAME: ${CERT_NAME}
 
 ### Cipher suites
 
-You can specify the cipher suites for TLS external listener. To specify the cipher suites you want to allow, run the following command to patch config-kourier ConfigMap:
+You can specify the cipher suites for TLS external listener. To specify the cipher suites you want to allow, run the following command to patch the `config-kourier` ConfigMap:
 
 ```bash
 kubectl -n "knative-serving" patch configmap/config-kourier \
@@ -120,7 +120,7 @@ If you want to enable the external authorization support, you can set the follow
 
 Note: this is an experimental/alpha feature.
 
-To enable proxy protocol feature, run the following command to patch config-kourier ConfigMap:
+To enable proxy protocol feature, run the following command to patch the `config-kourier` ConfigMap:
 
 ```bash
 kubectl patch configmap/config-kourier \
@@ -135,13 +135,13 @@ Ensure that the file was updated successfully:
 kubectl get configmap config-kourier --namespace knative-serving --output yaml
 ```
 
-### LoadBalancer configuration
+### Load balancer configuration
 
 Use your load balancer provider annotation to enable proxy-protocol.
 
-- If you are planning to enable external-domain-tls, use your load balancer (LB) provider annotation to specify a custom name to use for the load balancer. This is used to work around the issue of kube-proxy adding external LB address to node local iptables rule, which will break requests to an LB from in-cluster if the LB is expected to terminate SSL or proxy protocol.
-
-- Change the external Traffic Policy to local so the LB we'll preserve the client source IP and avoids a second hop for LoadBalancer.
+- If you plan to enable TLS termination for external domains (external-domain-tls), use your load balancer provider’s annotation to specify a custom hostname for the load balancer.
+ This option is needed to fix a problem caused by kube-proxy. By default, kube-proxy adds the external load balancer’s IP to the node’s local iptables rules. When pods inside the cluster then try to contact the service via its external load balancer address, traffic is mistakenly routed to localhost instead of going out to the real load balancer. As a result, TLS termination and PROXY protocol handling fail entirely when the load balancer is intended to provide those features.
+- Change the external Traffic Policy to local so the load balancer will preserve the client source IP and avoid a second hop for the load balancer.
 
 Example (Scaleway provider):
 
@@ -171,4 +171,3 @@ spec:
   externalTrafficPolicy: Local
   type: LoadBalancer
 ```
-

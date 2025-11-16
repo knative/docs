@@ -272,7 +272,7 @@ nav:
           - Configure domain names: serving/using-a-custom-domain.md
           - Istio Authorization: serving/istio-authorization.md
           - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
-          - Plugin - Kourier: install/installing-kourier.md
+          - Configure Kourier plugin: install/installing-kourier.md
         - Serving configuration:
           - Configure Deployment resources: serving/configuration/deployment.md
           - Configure gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
