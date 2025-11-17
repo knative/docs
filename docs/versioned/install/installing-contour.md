@@ -7,7 +7,7 @@ function: how-to
 
 # Configure Contour adapter
 
-This page describes how to install the Contour adapter for Knative.
+This page describes how to install and configure the Contour adapter for Knative: `net-contour`.
 
 ## Before you begin
 
@@ -15,7 +15,7 @@ This installation requires a Kubernetes cluster with [Contour](https://projectco
 
 For information about Contour versions, see the Contour [Compatibility Matrix](https://projectcontour.io/resources/compatibility-matrix/).
 
-## Install and Contour adapter for Knative
+## Install and configure the adapter
 
 1. Install the Knative Contour controller:
 
@@ -32,7 +32,7 @@ For information about Contour versions, see the Contour [Compatibility Matrix](h
     --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
     ```
 
-1. Fetch the External IP address or CNAME:
+1. Get the External IP address or CNAME:
 
     ```bash
     kubectl --namespace contour-external get service envoy
@@ -42,7 +42,7 @@ The adapter's configurations are performed natively through Contour. For more in
 
 ## Visibility
 
-The following table shows the classes and services configurations for how to expose services.
+The following table shows the classes and services that expose Contour services.
 
 | ExternalIP | ClusterLocal |
 | --- | --- |
