@@ -15,8 +15,8 @@ In this page, we will be discussing how to set up your environment, and make sur
 ## **What does the final deliverable for this section look like?**
 
 - You have a running Kubernetes (k8s) cluster on your local machine, with Knative installed.
-- You have your front end application deployed as Kubernetes deployment with port-forwarding to localhost:3000
-- You have your Node.js application deployed as Kubernetes deployment with port-forwarding to localhost:8080
+- You have your front end application deployed as Kubernetes deployment
+- You have your Node.js application deployed as Kubernetes deployment
 
 We will be fulfilling each requirement with the order above.
 
@@ -74,6 +74,12 @@ Running `docs/code-samples/eventing/bookstore-sample-app/start/setup.sh` will au
 
 ![Image](images/image13.png)
 
+We recommend using [KinD (Kubernetes in Docker)](https://kind.sigs.k8s.io/docs/user/quick-start/) to run a Kubernetes cluster locally.
+
+In order to access Kubernetes services KinD provides a standalone binary in your host and connects to your cluster and provisions new Load Balancer containers for your Services. It requires privileges to open ports on the system and to connect to the container runtime.
+
+See instructions here: https://kind.sigs.k8s.io/docs/user/loadbalancer/
+
 !!! tip
 
     We recommend you using `kn quickstart` plugin to install Knative.
@@ -85,51 +91,37 @@ Please follow the instructions [here](https://knative.dev/docs/install/){:target
     You should see the pods in the `knative-eventing` and `knative-serving` namespaces running before proceeding.
 
     ```
-    NAMESPACE          NAME                                      READY   STATUS    RESTARTS   AGE
-    knative-eventing   eventing-controller-7576f555d5-7c2p2      1/1     Running   0          4m50s
-    knative-eventing   eventing-webhook-5874bb8445-cqcn9         1/1     Running   0          4m50s
-    knative-eventing   imc-controller-8c5d5ddb5-m249l            1/1     Running   0          4m49s
-    knative-eventing   imc-dispatcher-76d9f7464b-dphd6           1/1     Running   0          4m49s
-    knative-eventing   mt-broker-controller-8d8f8d48f-rvlcv      1/1     Running   0          4m48s
-    knative-eventing   mt-broker-filter-85c457f879-dvhnj         1/1     Running   0          4m48s
-    knative-eventing   mt-broker-ingress-5688f4cd68-nm8cc        1/1     Running   0          4m48s
-    knative-serving    activator-55d856fccd-g5qpw                1/1     Running   0          4m53s
-    knative-serving    autoscaler-5fb49c64c7-hrjng               1/1     Running   0          4m53s
-    knative-serving    controller-ddbb9d4f-khttq                 1/1     Running   0          4m53s
-    knative-serving    net-kourier-controller-68d89f78d5-hw8r6   1/1     Running   0          4m52s
-    knative-serving    webhook-85b9744fc5-6w9sg                  1/1     Running   0          4m53s
-    kourier-system     3scale-kourier-gateway-dbc5b88f5-7g29n    1/1     Running   0          4m52s
-    kube-system        coredns-5dd5756b68-49xsj                  1/1     Running   0          12m
-    kube-system        etcd-minikube                             1/1     Running   0          12m
-    kube-system        kube-apiserver-minikube                   1/1     Running   0          12m
-    kube-system        kube-controller-manager-minikube          1/1     Running   0          12m
-    kube-system        kube-proxy-tqcvx                          1/1     Running   0          12m
-    kube-system        kube-scheduler-minikube                   1/1     Running   0          12m
-    kube-system        storage-provisioner                       1/1     Running   0          12m
+    NAMESPACE            NAME                                         READY   STATUS    RESTARTS   AGE
+    knative-eventing     eventing-controller-645c4bcd55-fln6l         1/1     Running   0          17m
+    knative-eventing     eventing-webhook-7fd9cb958f-ft9vj            1/1     Running   0          17m
+    knative-eventing     imc-controller-6b9fbb6487-kwvbz              1/1     Running   0          17m
+    knative-eventing     imc-dispatcher-6c4b5856d-hh7wq               1/1     Running   0          17m
+    knative-eventing     job-sink-5cc89b5d95-fhlt5                    1/1     Running   0          17m
+    knative-eventing     mt-broker-controller-568d6b9c59-qk8dj        1/1     Running   0          17m
+    knative-eventing     mt-broker-filter-db66554c4-sxxzr             1/1     Running   0          17m
+    knative-eventing     mt-broker-ingress-774547844d-bbbdw           1/1     Running   0          17m
+    knative-serving      activator-7bcd47489b-ljmt6                   1/1     Running   0          17m
+    knative-serving      autoscaler-65cf6767c4-v7rfn                  1/1     Running   0          17m
+    knative-serving      controller-964dcf97b-9qwsv                   1/1     Running   0          17m
+    knative-serving      net-kourier-controller-854b568d4f-6xhl5      1/1     Running   0          17m
+    knative-serving      webhook-658b566b8-sxbdz                      1/1     Running   0          17m
+    kourier-system       3scale-kourier-gateway-54fb555bd7-v2l8q      1/1     Running   0          17m
+    kube-system          coredns-66bc5c9577-fhnxr                     1/1     Running   0          18m
+    kube-system          coredns-66bc5c9577-x299f                     1/1     Running   0          18m
+    kube-system          etcd-kind-control-plane                      1/1     Running   0          18m
+    kube-system          kindnet-gpq75                                1/1     Running   0          18m
+    kube-system          kube-apiserver-kind-control-plane            1/1     Running   0          18m
+    kube-system          kube-controller-manager-kind-control-plane   1/1     Running   0          18m
+    kube-system          kube-proxy-v2kdx                             1/1     Running   0          18m
+    kube-system          kube-scheduler-kind-control-plane            1/1     Running   0          18m
+    local-path-storage   local-path-provisioner-7b8c8ddbd6-m5n2m      1/1     Running   0          18m
     ```
-
-#### **Extra Step for Minikube Users:**
-
-![Image](images/image3.png)
-
-Attention! In case you're not using the Knative Quick Start, set up the tunnel manually to connect to services of type `LoadBalancer`:
-
-Run the following command and keep the terminal open:
-
-```shell
-minikube tunnel
-```
-
-???+ success "Verify"
-    If there aren't any error messages, it means you have set up the tunnel successfully.
 
 ### **Task 2: Running the Bookstore Web App**
 
 ![Image](images/image12.png)
 
 The Next.js frontend app is located in the `docs/code-samples/eventing/bookstore-sample-app/start/frontend` folder.
-
-Ensure that port 3000 on your local machine is not being used by another application.
 
 #### **Deploy the Frontend App**
 
@@ -162,15 +154,11 @@ service/bookstore-frontend-svc created
     bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          4m37s
     ```
 
+#### Access the frontend workload
 
+Follow the respective `minikube` or `kind` instructions to access Kubernetes Services locally from your machine.
 
-#### **Port Forwarding (Optional under condition)**
-
-![Image](images/image9.png)
-
-You might need to set up port forwarding to access the app from your local machine.
-
-Check if port forwarding is necessary by running:
+Check the running Kubernetes Services:
 
 ```shell
 kubectl get services
@@ -179,34 +167,16 @@ kubectl get services
 And you will see the following console output:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-bookstore-frontend-svc   LoadBalancer   10.99.187.173   <pending>     3000:31600/TCP   27m
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    80:31600/TCP   27m
 kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          39m
 ```
 
-
-
 !!! note
-    If the `EXTERNAL-IP` for your frontend service is `127.0.0.1`, port forwarding is not needed.
-
-If port forwarding is required, run the following command:
-
-```shell
-kubectl port-forward svc/bookstore-frontend-svc 3000:3000
-```
-
-You should see the following output:
-
-```
-Forwarding from 127.0.0.1:3000 -> 3000
-Forwarding from [::1]:3000 -> 3000
-```
-
-
-**Don't close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
+    If the `EXTERNAL-IP` for your frontend service is `<pending>`, then there you'll need to check that
+    your `minikube tunnel` or KinD `cloud-provider-kind` is working properly.
 
 ???+ success "Verify"
-
-    Visit [http://localhost:3000](http://localhost:3000){:target="_blank"} in your browser. The UI page should appear!
+    Access the UI page using the `bookstore-frontend-svc` `EXTERNAL-IP` address. The UI page should appear!
 
     ![Image](images/image19.png)
 
@@ -215,10 +185,6 @@ Forwarding from [::1]:3000 -> 3000
 ![Image](images/image6.png)
 
 The Node.js server is located in the `node-server` folder.
-
-!!! warning
-
-    Ensure that port 8080 on your local machine is not being used by another application.
 
 #### **Deploy the Book Review Service: Node.js Server**
 
@@ -253,13 +219,11 @@ service/node-server-svc created
     ```
 
 
-#### **Port Forwarding (optional under condition)**
+#### Access the node server backend
 
-![Image](images/image9.png)
+Follow the respective `minikube` or `kind` instructions to access Kubernetes Services locally from your machine.
 
-You might need to set up port forwarding to access the app from your local machine.
-
-Check if port forwarding is necessary by running:
+Check the running Kubernetes Services:
 
 ```shell
 kubectl get services
@@ -267,32 +231,17 @@ kubectl get services
 And you will see the following console output:
 ```
 NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-bookstore-frontend-svc   LoadBalancer   10.99.187.173   <pending>     3000:31600/TCP   73m
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   172.18.0.6    80:31600/TCP   73m
 kubernetes               ClusterIP      10.96.0.1       <none>        443/TCP          85m
-node-server-svc          LoadBalancer   10.101.90.35    <pending>     80:31792/TCP     73m
+node-server-svc          LoadBalancer   10.101.90.35    172.18.0.8    80:31792/TCP     73m
 ```
 
 !!! note
-    If the `EXTERNAL-IP` for your Node.js service is `127.0.0.1`, port forwarding is not needed. If you failed to visit the page `localhost:8080`, you can try to set up port forwarding.
-
-If port forwarding is required, open a new terminal and run:
-
-```shell
-kubectl port-forward svc/node-server-svc 8080:80
-```
-You should see the following output:
-
-```
-Forwarding from 127.0.0.1:8080 > 8000
-Forwarding from [::1]:8080 > 8000
-```
-
-**Don't close the terminal when port-forwarding is established.** Start a new terminal to run the next command.
-
+    If the `EXTERNAL-IP` for your frontend service is `<pending>`, then there you'll need to check that
+    your `minikube tunnel` or KinD `cloud-provider-kind` is working properly.
 
 ???+ success "Verify"
-
-    Visit [http://localhost:8080](http://localhost:8080){:target="_blank"} in your browser. The Node.js service should be up and running.
+    Access the node server page using the `node-server-svc` `EXTERNAL-IP` address. The UI page should appear!
 
     And in your front end page, you should see the status turns green and say "Connected to node server".
 
@@ -309,6 +258,8 @@ If you encounter any issues during the setup process, refer to the troubleshooti
     ```
 
     Replace `<pod-name>` with the name of the pod you want to check.
+
+Secondly, ensure your KinD & minikube tunnels are running in order to access the websites.
 
 ## **Next Step**
 ![Image](images/image5.png)
