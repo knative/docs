@@ -672,3 +672,61 @@ a.md-header__button.md-logo img {
     display: none;
   }
 }
+
+/* Mobile and Tablet: up to 76.1875em (1220px) */
+@media screen and (max-width: 76.1875em) {
+  
+  .md-header__inner .md-tabs__list {
+    display: none !important;
+  }
+  
+  .md-header__topic:first-child {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    transition: none !important;
+  }
+  
+  .md-header__topic:last-child {
+    display: none !important;
+  }
+  
+  .md-header__title[data-md-component="header-title"] {
+    visibility: visible !important;
+  }
+  
+  [data-md-component="header"][data-md-state="shadow"] .md-header__topic:first-child {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+}
+
+/* Small mobile: up to 30em (480px) */
+@media screen and (max-width: 30em) {
+  
+  .md-header__button.md-logo img,
+  .md-header__button.md-logo svg {
+    width: 2.5rem;
+    height: 2rem;
+  }
+  
+  /* Compact title */
+  .md-header__title {
+    font-size: 0.9rem;
+  }
+}
+
+@media print {
+  .md-header__topic:first-child {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  .md-header__topic:last-child {
+    display: none !important;
+  }
+  
+  .md-header__inner .md-tabs__list {
+    display: none !important;
+  }
+}
