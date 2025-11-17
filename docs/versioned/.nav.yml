@@ -274,6 +274,7 @@ nav:
           - Configure domain names: serving/using-a-custom-domain.md
           - Istio Authorization: serving/istio-authorization.md
           - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
+          - Configure Contour adapter: ./install/installing-contour.md
         - Serving configuration:
           - Configure Deployment resources: serving/configuration/deployment.md
           - Configure gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
@@ -292,7 +293,7 @@ nav:
           - Configure Kafka Broker features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
           - Configure event source defaults: eventing/configuration/sources-configuration.md
           - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
-          - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/keda-configuration.md
+          - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/
         - Flagged features:
           - Serving Features: serving/configuration/feature-flags.md
           - Eventing Features:
