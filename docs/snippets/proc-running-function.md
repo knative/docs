@@ -35,14 +35,15 @@ The `run` command builds an image for your function if required, and runs this i
 
 === "kn func"
 
-    Run the function locally, by running the command inside the project directory:
+    Run the function locally, by running the command inside the project directory. If you have not yet built the function you will need to provide the `--registry` flag:
+
 
     ```bash
     cd hello
     ```
 
     ```bash
-    kn func run
+    kn func run [--registry <registry>]
     ```
 
     Using this command also builds the function if necessary.
