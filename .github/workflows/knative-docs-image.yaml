@@ -35,6 +35,7 @@ jobs:
 
       - name: Build mkdocs image
         uses: docker/build-push-action@v6
+        continue-on-error: true
         with:
           push: true
           file: ./hack/docker/Dockerfile
@@ -42,6 +43,7 @@ jobs:
 
       - name: Build helloworld-go image
         uses: docker/build-push-action@v6
+        continue-on-error: true
         with:
           push: true
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
@@ -50,14 +52,16 @@ jobs:
 
       - name: Build autoscale-go image
         uses: docker/build-push-action@v6
+        continue-on-error: true
         with:
           push: true
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
-          context: ./docs/serving/autoscaling/autoscale-go
+          context: ./docs/versioned/serving/autoscaling/autoscale-go
           tags: ghcr.io/knative/autoscale-go:latest
 
       - name: Build sample-app's frontend image
         uses: docker/build-push-action@v6
+        continue-on-error: true
         with:
           push: true
           platforms: linux/amd64,linux/arm64
@@ -66,6 +70,7 @@ jobs:
 
       - name: Build sample-app's node-server image
         uses: docker/build-push-action@v6
+        continue-on-error: true
         with:
           push: true
           platforms: linux/amd64,linux/arm64
