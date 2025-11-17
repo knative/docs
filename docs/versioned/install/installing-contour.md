@@ -32,17 +32,19 @@ For information about Contour versions, see the Contour [Compatibility Matrix](h
     --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
     ```
 
-1. Get the External IP address or CNAME:
+1. Get the External IP address or full qualified domain name (CNAME):
 
     ```bash
     kubectl --namespace contour-external get service envoy
     ```
 
+    Use this value to configure your external DNS records.
+
 The adapter's configurations are performed natively through Contour. For more information and resources see [Contour](https://projectcontour.io/) home page.
 
 ## Visibility
 
-The following table shows the classes and services that expose Contour services.
+The following table shows the classes and services that expose Contour networking.
 
 | ExternalIP | ClusterLocal |
 | --- | --- |
