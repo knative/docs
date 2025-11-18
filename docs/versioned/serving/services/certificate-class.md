@@ -17,7 +17,7 @@ You can configure each Service to use a different certificate class by specifyin
 
 To add a certificate class annotation to a Service, run the following command:
 ```bash
-kubectl annotate kservice <service-name> networking.knative.dev/certifcate-class=<certificate-provider>
+kubectl annotate kservice <service-name> networking.knative.dev/certificate-class=<certificate-provider>
 ```
 Where:
 
