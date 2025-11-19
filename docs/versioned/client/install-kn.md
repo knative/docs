@@ -46,7 +46,7 @@ Before you install the Knative Operator CLI Plugin, first install the Knative CL
 
 === "MacOS"
 
-    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-extensions/kn-plugin-operator/releases/tag/knative-v1.7.1).
+    1. Download the binary `kn-operator-darwin-amd64` for your system from the [release page](https://github.com/knative-extensions/kn-plugin-operator/releases/latest).
 
     1. Rename the binary to `kn-operator`:
 
