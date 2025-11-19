@@ -226,3 +226,4 @@ plugins:
       versioned/serving/using-subroutes.md: versioned/serving/traffic-management.md
       versioned/eventing/brokers/create-mtbroker.md: versioned/eventing/brokers/create-broker.md
       versioned/eventing/brokers/broker-admin-config-options.md: versioned/eventing/configuration/broker-configuration.md
+      versioned/eventing/concepts/event-mesh.md: versioned/eventing/concepts/event-mesh.md

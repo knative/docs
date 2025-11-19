@@ -2,12 +2,12 @@ nav:
 ###############################################################################
     # Concepts
 ###############################################################################
-    - Quick Start: README.md
+    - Overview: README.md
 ###############################################################################
     # Getting started
 ###############################################################################
     - Tutorials:
-        - Overview: getting-started/tutorial.md
+        - Explore Knative: getting-started/tutorial.md
         - Quickstart:
           - Tutorial introduction: getting-started/README.md
           - Install Knative using quickstart: getting-started/quickstart-install.md
