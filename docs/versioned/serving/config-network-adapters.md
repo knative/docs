@@ -5,7 +5,7 @@ components:
 function: how-to
 ---
 
-# Configuring network adapters
+# Configure network adapters
 
 | Adapter | Description | Pros | Cons | Case usage |
 | --- | --- | --- | --- | --- |
