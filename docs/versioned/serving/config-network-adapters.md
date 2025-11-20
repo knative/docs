@@ -29,18 +29,18 @@ This page describes and provides installation and configuration guidance for the
 
     Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
 
-    ```mermaid
-    flowchart TB
-      subgraph s1["Gateway API"]
-        HR[HTTPRoute]
-        GW[Gateway listener]
-      end
-      KSvc["Knative Service"] -- owns --> Route
-      Route -- creates --> HR
-      Route -- creates --> GW
-      ```
+```mermaid
+flowchart TB
+  subgraph s1["Gateway API"]
+    HR[HTTPRoute]
+    GW[Gateway listener]
+  end
+  KSvc["Knative Service"] -- owns --> Route
+  Route -- creates --> HR
+  Route -- creates --> GW
+  ```
 
-## Setup and configurations
+## Setup and configuration
 
 ### Kourier
 
