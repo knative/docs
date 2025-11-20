@@ -49,6 +49,8 @@ flowchart TB
 
 ## Setup and configuration
 
+This section provides installation and configuration steps for the adapters.
+
 ### Kourier
 
 --8<-- "netadapter-kourier.md"
