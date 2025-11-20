@@ -215,6 +215,7 @@ nav:
       - Observability:
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
         - Metrics Reference: eventing/observability/metrics/eventing-metrics.md
+      - FAQ: eventing/faq/README.md
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
