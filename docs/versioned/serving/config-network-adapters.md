@@ -29,6 +29,8 @@ This page describes and provides installation and configuration guidance for the
 
     Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
 
+## Architectures
+
 ```mermaid
 ---
 config:
