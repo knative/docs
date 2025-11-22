@@ -55,7 +55,14 @@ This section provides installation and configuration steps for the adapters.
 
 --8<-- "netadapter-kourier.md"
 
-## Contour
+### Contour
 
 --8<-- "netadapter-contour.md"
 
+### Istio
+
+--8<-- "netadapter-istio.md"
+
+### Gateway API
+
+--8<-- "netadapter-gatewaypapi.md"
