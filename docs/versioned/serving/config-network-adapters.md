@@ -57,5 +57,5 @@ This section provides installation and configuration steps for the adapters.
 
 ## Contour
 
---8<-- "netadapter-countour.md"
+--8<-- "netadapter-contour.md"
 
