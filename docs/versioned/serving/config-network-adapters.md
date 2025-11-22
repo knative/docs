@@ -55,4 +55,7 @@ This section provides installation and configuration steps for the adapters.
 
 --8<-- "netadapter-kourier.md"
 
+## Contour
+
+--8<-- "netadapter-countour.md"
 
