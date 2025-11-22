@@ -1,0 +1,16 @@
+The following commands install Istio and enable its Knative integration.
+
+1. Install a properly configured Istio by following the
+[Advanced Istio installation](../../installing-istio.md) instructions or by running the command:
+
+    ```bash
+    kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",org="knative-extensions",file="istio.yaml")}}
+    kubectl apply -f {{ artifact(repo="net-istio",org="knative-extensions",file="istio.yaml")}}
+    ```
+
+1. Install the Knative Istio controller by running the command:
+
+    ```bash
+    kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
+    ```
+
