@@ -11,7 +11,7 @@ This page describes and provides installation and configuration guidance for the
 
 - Kourier
 
-    Designed for Knative Serving with efficient serverless function deployment is the goal. Has a simple setup. The default choice for most users when a service mesh is not required. Has a simple setup.
+    Designed for Knative Serving with efficient serverless function deployment is the goal. Has a simple setup. Kourier is the default choice for most users, when a service mesh is not required, as it has a simple setup.
 
 - Contour
 
