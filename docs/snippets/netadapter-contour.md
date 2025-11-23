@@ -9,9 +9,9 @@ Use the following steps to install Contour and enable its Knative integration.
 
 1. Install the Knative Contour controller:
 
-  ```bash
-  kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="net-contour.yaml")}}
-  ```
+    ```bash
+    kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="net-contour.yaml")}}
+    ```
 
 1. Configure Knative Serving to use Contour by default:
 
