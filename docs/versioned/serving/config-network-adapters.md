@@ -53,19 +53,21 @@ flowchart TB
 
 This section provides installation and configuration steps.
 
-### Kourier controller
+=== "Kourier controller (default choice)"
 
 --8<-- "netadapter-kourier.md"
 
-### Contour controller
+=== "Contour controller"
 
 --8<-- "netadapter-contour.md"
 
-### Istio service mesh
+=== "Istio service mesh"
+
+For detailed instructions, see [Install Istio for Knative](../install/installing-istio.md).
 
 --8<-- "netadapter-istio.md"
 
-### Gateway API
+=== "Gateway API"
 
 --8<-- "netadapter-gatewayapi.md"
 
