@@ -67,7 +67,7 @@ This section provides installation and configuration steps.
 
 ### Gateway API
 
---8<-- "netadapter-gatewaypapi.md"
+--8<-- "netadapter-gatewayapi.md"
 
 ## Configure DNS
 
