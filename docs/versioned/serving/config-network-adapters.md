@@ -55,21 +55,21 @@ This section provides installation and configuration steps.
 
 === "Kourier controller (default choice)"
 
---8<-- "netadapter-kourier.md"
+    --8<-- "netadapter-kourier.md"
 
 === "Contour controller"
 
---8<-- "netadapter-contour.md"
+    --8<-- "netadapter-contour.md"
 
 === "Istio service mesh"
 
-For detailed instructions, see [Install Istio for Knative](../install/installing-istio.md).
+    For detailed instructions, see [Install Istio for Knative](../install/installing-istio.md).
 
---8<-- "netadapter-istio.md"
+    --8<-- "netadapter-istio.md"
 
 === "Gateway API"
 
---8<-- "netadapter-gatewayapi.md"
+    --8<-- "netadapter-gatewayapi.md"
 
 ## Configure DNS
 
