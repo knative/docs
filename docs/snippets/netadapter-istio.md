@@ -19,4 +19,3 @@ Use the following steps to install Istio and enable its Knative integration.
     ```bash
     kubectl --namespace istio-system get service istio-ingressgateway
     ```
-        
