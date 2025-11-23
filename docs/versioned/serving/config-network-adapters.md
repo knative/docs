@@ -5,9 +5,9 @@ components:
 function: how-to
 ---
 
-# Configure network adapters
+# Configure network layers
 
-This page describes and provides installation and configuration guidance for the following network adapters for Knative.
+This page describes and provides installation and configuration guidance for the following networking plugins.
 
 - Kourier
 
@@ -26,6 +26,8 @@ This page describes and provides installation and configuration guidance for the
 - Gateway API
 
     Emerging Kubernetes-native networking API (replacing Ingress)extensible than traditional Ingress APIs. It is a specification, not an implementation itself.
+
+    The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested though other Gateway API implementations should work. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
     Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
 
@@ -47,22 +49,28 @@ flowchart TB
     Route -- creates --> HR & GW
 ```
 
-## Setup and configuration
+## Network Layer setup
 
-This section provides installation and configuration steps for the adapters.
+This section provides installation and configuration steps.
 
-### Kourier
+### Kourier controller
 
 --8<-- "netadapter-kourier.md"
 
-### Contour
+### Contour controller
 
 --8<-- "netadapter-contour.md"
 
-### Istio
+### Istio service mesh
 
 --8<-- "netadapter-istio.md"
 
 ### Gateway API
 
 --8<-- "netadapter-gatewaypapi.md"
+
+## Configure DNS
+
+--8<-- "dns.md"
+--8<-- "real-dns-yaml.md"
+--8<-- "no-dns.md"

@@ -1,7 +1,3 @@
-<!-- Referenced by:
-- install/operator/knative-with-operators.md
-- install/yaml-install/serving/install-serving-with-yaml.md
--->
 === "No DNS"
 
     If you are using `curl` to access [the sample applications](/docs/getting-started/first-service/), or your own Knative app, and are unable to use the "Magic DNS (sslip.io)" or "Real DNS" methods, there is a temporary approach. This is useful for those who wish to evaluate Knative without altering their DNS configuration, as per the "Real DNS" method, or cannot use the "Magic DNS" method due to using,
