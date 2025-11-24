@@ -23,6 +23,8 @@ This page describes and provides installation and configuration guidance for the
 
     A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
 
+    Note that Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying 1istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
+
 - Gateway API
 
     Emerging Kubernetes-native networking API (replacing Ingress)extensible than traditional Ingress APIs. It is a specification, not an implementation itself.
@@ -33,21 +35,29 @@ This page describes and provides installation and configuration guidance for the
 
 ## Architectures
 
-```mermaid
----
-config:
-  theme: base
-  layout: elk
-  look: classic
----
-flowchart TB
- subgraph s1["Gateway API"]
-        HR["HTTPRoute"]
-        GW["Gateway listener"]
-  end
-    KSvc["Knative Service"] -- owns --> Route["Route"]
-    Route -- creates --> HR & GW
-```
+=== "Kourier"
+
+=== "Contour"
+
+=== "Istio"
+
+=== "Gateway API"
+
+    ```mermaid
+    ---
+    config:
+      theme: base
+      layout: elk
+      look: classic
+    ---
+    flowchart TB
+     subgraph s1["Gateway API"]
+            HR["HTTPRoute"]
+            GW["Gateway listener"]
+      end
+        KSvc["Knative Service"] -- owns --> Route["Route"]
+        Route -- creates --> HR & GW
+    ```
 
 ## Network Layer setup
 
