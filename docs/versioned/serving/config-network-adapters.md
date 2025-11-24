@@ -35,21 +35,40 @@ This page describes and provides installation and configuration guidance for the
 
 ## Architecture
 
-```mermaid
----
-config:
-  theme: base
-  layout: elk
-  look: classic
----
-flowchart TB
- subgraph s1["Gateway API"]
+=== "Test A"
+
+    ```mermaid
+    ---
+    config:
+      theme: base
+      layout: elk
+      look: classic
+    ---
+    flowchart TB
+     subgraph s1["Gateway API"]
         HR["HTTPRoute"]
         GW["Gateway listener"]
-  end
-    KSvc["Knative Service"] -- owns --> Route["Route"]
-    Route -- creates --> HR & GW
-```
+      end
+        KSvc["Knative Service"] -- owns --> Route["Route"]
+        Route -- creates --> HR & GW
+    ```
+=== "Test B"
+
+    ```mermaid
+    ---
+    config:
+      theme: base
+      layout: elk
+      look: classic
+    ---
+    flowchart TB
+     subgraph s1["Gateway API"]
+        HR["HTTPRoute"]
+        GW["Gateway listener"]
+      end
+        KSvc["Knative Service"] -- owns --> Route["Route"]
+        Route -- creates --> HR & GW
+    ```
 
 ## Network Layer setup
 
