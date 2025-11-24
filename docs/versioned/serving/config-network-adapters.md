@@ -35,31 +35,64 @@ This page describes and provides installation and configuration guidance for the
 
 ## Architecture
 
-=== "Test A"
+=== "Kourier"
 
     ```mermaid
     ---
     config:
-      theme: base
+      theme: default
       layout: elk
-      look: classic
     ---
-    flowchart TB
-     subgraph s1["Gateway API"]
-        HR["HTTPRoute"]
-        GW["Gateway listener"]
+    flowchart LR
+     subgraph Kourier["Kourier for Knative"]
+            K2["Creates Ingress objects"]
+            K1["Kourier"]
+            K3["Class: kourier.ingress.networking.knative.dev"]
       end
-        KSvc["Knative Service"] -- owns --> Route["Route"]
-        Route -- creates --> HR & GW
+        K1 --> K2
+        K2 --> K3
+        style Kourier fill:#e3f2fd
     ```
-=== "Test B"
+=== "Courier"
 
     ```mermaid
     ---
     config:
-      theme: base
+      theme: default
       layout: elk
-      look: classic
+    ---
+    flowchart LR
+    subgraph Contour
+          C1[Contour] --> C2[Creates Ingress objects]
+          C2 --> C3[Class: contour.ingress.networking.knative.dev]
+    end
+    style Contour fill:#fff3e0
+    ```
+
+=== "Istio"
+
+    ```mermaid
+    ---
+    config:
+      theme: default
+      layout: elk
+    ---
+    flowchart LR
+    subgraph Contour
+          I1[Istio] --> I2[Creates VirtualService + Gateway]
+          I2 --> I3[Class: istio.ingress.networking.knative.dev]
+          I3 --> I4[No native Ingress objects]
+    end
+    style Contour fill:#fff3e0
+    ```
+
+=== "Gateway API"
+
+    ```mermaid
+    ---
+    config:
+      theme: default
+      layout: elk
     ---
     flowchart TB
      subgraph s1["Gateway API"]
@@ -74,15 +107,15 @@ This page describes and provides installation and configuration guidance for the
 
 This section provides installation and configuration steps.
 
-=== "Kourier controller (default choice)"
+=== "Kourier"
 
     --8<-- "netadapter-kourier.md"
 
-=== "Contour controller"
+=== "Contour"
 
     --8<-- "netadapter-contour.md"
 
-=== "Istio service mesh"
+=== "Istio"
 
     For detailed instructions, see [Install Istio for Knative](../install/installing-istio.md).
 
