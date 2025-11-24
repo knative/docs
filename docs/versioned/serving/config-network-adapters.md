@@ -5,7 +5,7 @@ components:
 function: how-to
 ---
 
-# Configure network layers
+# Configure Knative networking
 
 This page describes and provides installation and configuration guidance for the following networking plugins.
 
@@ -33,31 +33,23 @@ This page describes and provides installation and configuration guidance for the
 
     Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
 
-## Architectures
+## Architecture
 
-=== "Kourier"
-
-=== "Contour"
-
-=== "Istio"
-
-=== "Gateway API"
-
-    ```mermaid
-    ---
-    config:
-      theme: base
-      layout: elk
-      look: classic
-    ---
-    flowchart TB
-     subgraph s1["Gateway API"]
-            HR["HTTPRoute"]
-            GW["Gateway listener"]
-      end
-        KSvc["Knative Service"] -- owns --> Route["Route"]
-        Route -- creates --> HR & GW
-    ```
+```mermaid
+---
+config:
+    theme: base
+    layout: elk
+    look: classic
+---
+flowchart TB
+    subgraph s1["Gateway API"]
+        HR["HTTPRoute"]
+        GW["Gateway listener"]
+    end
+    KSvc["Knative Service"] -- owns --> Route["Route"]
+    Route -- creates --> HR & GW
+```
 
 ## Network Layer setup
 
