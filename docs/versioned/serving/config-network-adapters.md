@@ -35,58 +35,6 @@ This page describes and provides installation and configuration guidance for the
 
 ## Architecture
 
-=== "Kourier"
-    ```mermaid
-    ---
-    config:
-        theme: base
-        layout: elk
-        look: classic
-    ---
-    flowchart TB
-        subgraph s1["Gateway API"]
-            HR["HTTPRoute"]
-            GW["Gateway listener"]
-        end
-        KSvc["Knative Service"] -- owns --> Route["Route"]
-        Route -- creates --> HR & GW
-   ```
-
-=== "Contour"
-    ```mermaid
-    ---
-    config:
-        theme: base
-        layout: elk
-        look: classic
-    ---
-    flowchart TB
-        subgraph s1["Gateway API"]
-            HR["HTTPRoute"]
-            GW["Gateway listener"]
-        end
-        KSvc["Knative Service"] -- owns --> Route["Route"]
-        Route -- creates --> HR & GW
-   ```
-
-=== "Istio"
-    ```mermaid
-    ---
-    config:
-        theme: base
-        layout: elk
-        look: classic
-    ---
-    flowchart TB
-        subgraph s1["Gateway API"]
-            HR["HTTPRoute"]
-            GW["Gateway listener"]
-        end
-        KSvc["Knative Service"] -- owns --> Route["Route"]
-        Route -- creates --> HR & GW
-   ```
-
-=== "Gateway API"
     ```mermaid
     ---
     config:
