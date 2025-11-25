@@ -9,23 +9,25 @@ function: how-to
 
 This page describes and provides installation and configuration guidance for the following networking plugins.
 
-- Kourier
+## Network layers
+
+### Kourier controller
 
     Designed for Knative Serving with efficient serverless function deployment is the goal. Has a simple setup. Kourier is the default choice for most users, when a service mesh is not required, as it has a simple setup.
 
-- Contour
+### Contour controller
 
     General-purpose Envoy-based ingress controller with full Kubernetes Ingress support. A Knative ingress controller that integrates with Project Contour, translating Knative Ingress into Contour’s HTTPProxy resources.
 
     A good choice for clusters that already run non-Knative apps and want to reuse a single Ingress controller as well as teams who are already using Contour/Envoy and wanting Knative integration with advanced routing but not full service mesh.
 
-- Istio
+### Istio full-feature service mesh
 
     A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
 
     Note that Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying 1istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
-- Gateway API
+### Gateway API
 
     Emerging Kubernetes-native networking API (replacing Ingress)extensible than traditional Ingress APIs. It is a specification, not an implementation itself.
 
@@ -64,7 +66,7 @@ This page describes and provides installation and configuration guidance for the
       look: neo
     ---
     flowchart LR
-    subgraph Contour
+    subgraph Contour["Contour for Knative"]
           C1[Contour] --> C2[Creates Ingress objects]
           C2 --> C3[Class: contour.ingress.networking.knative.dev]
     end
@@ -81,7 +83,7 @@ This page describes and provides installation and configuration guidance for the
       look: neo
     ---
     flowchart LR
-    subgraph Istio
+    subgraph Istio["Istio full-feature service mesh for Knative"]
           I1[Istio] --> I2[Creates VirtualService + Gateway]
           I2 --> I3[Class: istio.ingress.networking.knative.dev]
           I3 --> I4[No native Ingress objects]
@@ -99,7 +101,7 @@ This page describes and provides installation and configuration guidance for the
       look: neo
     ---
     flowchart TB
-     subgraph s1["Gateway API"]
+     subgraph s1["Gateway API for Knative"]
         HR["HTTPRoute"]
         GW["Gateway listener"]
       end
