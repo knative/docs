@@ -42,6 +42,7 @@ This page describes and provides installation and configuration guidance for the
     config:
       theme: default
       layout: elk
+      look: neo
     ---
     flowchart LR
      subgraph Kourier["Kourier for Knative"]
@@ -60,6 +61,7 @@ This page describes and provides installation and configuration guidance for the
     config:
       theme: default
       layout: elk
+      look: neo
     ---
     flowchart LR
     subgraph Contour
@@ -76,14 +78,15 @@ This page describes and provides installation and configuration guidance for the
     config:
       theme: default
       layout: elk
+      look: neo
     ---
     flowchart LR
-    subgraph Contour
+    subgraph Istio
           I1[Istio] --> I2[Creates VirtualService + Gateway]
           I2 --> I3[Class: istio.ingress.networking.knative.dev]
           I3 --> I4[No native Ingress objects]
     end
-    style Contour fill:#fff3e0
+    style Istio fill:#f3e5f5
     ```
 
 === "Gateway API"
@@ -93,6 +96,7 @@ This page describes and provides installation and configuration guidance for the
     config:
       theme: default
       layout: elk
+      look: neo
     ---
     flowchart TB
      subgraph s1["Gateway API"]
