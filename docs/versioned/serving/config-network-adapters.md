@@ -13,23 +13,23 @@ This page describes and provides installation and configuration guidance for the
 
 For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more Ingress, full-feature service mesh, and the Kubernetes Gateway API.
 
-### Kourier controller
+#### Kourier controller
 
 Designed for Knative Serving with efficient serverless function deployment is the goal. Has a simple setup. Kourier is the default ingress choice for most users, when a service mesh is not required, as it has a simple setup.
 
-### Contour controller
+#### Contour controller
 
 General-purpose Envoy-based ingress controller with full Kubernetes Ingress support. A Knative ingress controller that integrates with Project Contour, translating Knative Ingress into Contour’s HTTPProxy resources.
 
 A good choice for clusters that already run non-Knative apps and want to reuse a single Ingress controller as well as teams who are already using Contour/Envoy and wanting Knative integration with advanced routing but not full service mesh.
 
-### Istio full-feature service mesh
+#### Istio full-feature service mesh
 
 A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
 
 Note that Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying 1istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
-### Gateway API
+#### Gateway API
 
 Emerging Kubernetes-native networking API (replacing Ingress)extensible than traditional Ingress APIs. It is a specification, not an implementation itself.
 
@@ -133,7 +133,7 @@ This section provides installation and configuration steps.
 
     --8<-- "netadapter-gatewayapi.md"
 
-### Verify installations
+#### Verify installations
 
     Monitor the Knative components until all of the components show a `STATUS` of `Running` or `Completed`. Use the `get-pods` command to determine network components and their status.
 
@@ -141,7 +141,7 @@ This section provides installation and configuration steps.
     kubectl get pods -n knative-serving
     ```
 
-### Configure DNS
+#### Configure DNS
 
 --8<-- "dns.md"
 --8<-- "real-dns-yaml.md"
