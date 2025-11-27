@@ -109,17 +109,13 @@ Review these tabs for the optimal networking layer for your cluster. For most us
 
     Monitor the pod status of the Kourier, Contour, or Istio controller components for Knative until all of the components show a STATUS of Running or Completed. 
 
-    ```bash
-    kubectl get pods -n knative-serving
-    ```
+    Here are the typical base pod names you’ll see in the knative-serving namespace for each of the supported Knative networking layers:
 
-    Here are the typical base pod names you’ll see in the `knative-serving` namespace for each of the supported Knative networking layers:
+    - Kourier: kourier-control-*, and kourier-gateway-*.
+    - Contour: contour-*
+    - Istio: istio-webhook-*
 
-    - Kourier: `kourier-control-*`, and `kourier-gateway-*`.
-    - Contour: `contour-*`
-    - Istio: `istio-webhook-*`
-
-    The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace, but Knative adds this webhook pod in `knative-serving` when Istio is the chosen networking layer.
+    The main Istio control plane pods such as istiod-* are in the istio-system namespace, but Knative adds this webhook pod in knative-serving when Istio is the chosen networking layer.
 
 ## Configure DNS
 
