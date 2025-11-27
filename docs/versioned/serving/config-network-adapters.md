@@ -109,9 +109,9 @@ Review these tabs for the optimal networking layer for your cluster. For most us
 
 Use the following command to verify and monitor the pod status of the Kourier, Contour, or Istio controllers. All of the components should show a `STATUS` of `Running` or `Completed`.
 
-    ```bash   
-    kubectl get pods -n knative-serving
-    ```
+```bash   
+kubectl get pods -n knative-serving
+```
   
 Here are the typical base pod names you’ll see in the `knative-serving` namespace for each of the supported Knative networking layers:
 
