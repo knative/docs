@@ -64,15 +64,10 @@ For most users, the Kourier ingress controller is sufficient with the already in
     config:
       theme: default
       layout: elk
-      look: neo
     ---
     flowchart LR
-    I2["VirtualService + Gateway"]
-    I1["Knative<br>net-istio"]
-    I3["Class: istio.ingress.networking.knative.dev<br>"No native Ingress objects"]
-    I1 -- creates --> I2
-    I2 --> I3 
-    I3 --> I4
+        I1["Knative&nbsp;net-istio"] -- creates --> I2["Service + Gateway"]
+        I2 --> I3["Class: istio.ingress.networking.knative.dev<br>No native Ingress objects"]
     ```
 
     The Knative `net-istio` defines a KIngress controller for Istio. A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
@@ -88,17 +83,16 @@ For most users, the Kourier ingress controller is sufficient with the already in
     ```mermaid
     ---
     config:
-      theme: default
       layout: elk
-      look: neo
+      theme: default
     ---
-    flowchart TB
-     subgraph s1["Gateway API for Knative"]
-        HR["HTTPRoute"]
-        GW["Gateway listener"]
+    flowchart LR
+      subgraph s1["Gateway API for Knative"]
+            HR["HTTPRoute"]
+            GW["Gateway listener"]
       end
         KSvc["Knative Service"] -- owns --> Route["Route"]
-        Route -- creates --> HR & GW
+                Route -- creates --> HR & GW
     ```
 
     The Knative `net-gateway-api` is a KIngress implementation and testing for Knative integration with the Kubernetes Gateway API.
@@ -114,6 +108,7 @@ For most users, the Kourier ingress controller is sufficient with the already in
 ## Verify controller installations
 
     Use the `get pods` command to monitor the Kourier, Contour, or Istio controller components for Knative until all of the components show a `STATUS` of `Running` or `Completed`. 
+
     ```bash
     kubectl get pods -n knative-serving
     ```
