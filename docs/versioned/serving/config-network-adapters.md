@@ -11,7 +11,7 @@ This page describes and provides installation and configuration guidance for Ing
 
 ## Network layer options
 
-For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more Ingress, full-feature service mesh, and the Kubernetes Gateway API.
+Review these tabs for the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more Ingress, full-feature service mesh, and the Kubernetes Gateway API.
 
 === "Kourier"
 
