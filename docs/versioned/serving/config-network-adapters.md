@@ -13,32 +13,6 @@ This page describes and provides installation and configuration guidance for Ing
 
 For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more Ingress, full-feature service mesh, and the Kubernetes Gateway API.
 
-#### Kourier
-
-Designed for Knative Serving with efficient serverless function deployment is the goal. Has a simple setup. Kourier is the default ingress choice for most users, when a service mesh is not required, as it has a simple setup.
-
-#### Contour
-
-General-purpose Envoy-based ingress controller with full Kubernetes Ingress support. A Knative ingress controller that integrates with Project Contour, translating Knative Ingress into Contour’s HTTPProxy resources.
-
-A good choice for clusters that already run non-Knative apps and want to reuse a single Ingress controller as well as teams who are already using Contour/Envoy and wanting Knative integration with advanced routing but not full service mesh.
-
-#### Istio
-
-A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
-
-Note that Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying 1istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
-
-#### Gateway API
-
-Emerging Kubernetes-native networking API (replacing Ingress)extensible than traditional Ingress APIs. It is a specification, not an implementation itself.
-
-The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested though other Gateway API implementations should work. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
-
-Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
-
-## Architectures
-
 === "Kourier"
 
     ```mermaid
@@ -49,12 +23,13 @@ Best for forward-looking teams adopting Gateway API to unify ingress across Kube
       look: neo
     ---
     flowchart LR
-    K2["Creates Ingress objects"]
-    K3["Class: kourier.ingress.networking.knative.dev"]
-    K1 --> K2
-    K2 --> K3
+    K1["Knative<br>net-kourier"] -- creates --> K2["Ingress&nbsp;objects"]
+    K2 --> K3["Class: kourier.ingress.networking.knative.dev"]
     ```
-=== "Courier"
+
+    Designed for Knative Serving with efficient serverless function deployment is the goal. Has a simple setup. Kourier is the default ingress choice for most users, when a service mesh is not required, as it has a simple setup.
+
+=== "Contour"
 
     ```mermaid
     ---
@@ -64,9 +39,13 @@ Best for forward-looking teams adopting Gateway API to unify ingress across Kube
       look: neo
     ---
     flowchart LR
-    C1["Contour"] --> C2["Creates Ingress objects"]
+    C1["Knative<br>net-contour"] -- creates --> C2["Ingress&nbsp;objects"]
     C2 --> C3["Class: contour.ingress.networking.knative.dev"]
     ```
+
+    General-purpose Envoy-based ingress controller with full Kubernetes Ingress support. A Knative ingress controller that integrates with Project Contour, translating Knative Ingress into Contour’s HTTPProxy resources.
+
+    A good choice for clusters that already run non-Knative apps and want to reuse a single Ingress controller as well as teams who are already using Contour/Envoy and wanting Knative integration with advanced routing but not full service mesh.
 
 === "Istio"
 
@@ -78,15 +57,19 @@ Best for forward-looking teams adopting Gateway API to unify ingress across Kube
       look: neo
     ---
     flowchart LR
-    I2["Creates VirtualService + Gateway"]
+    I2["VirtualService + Gateway"]
     I1["Istio"]
     I3["Class: istio.ingress.networking.knative.dev"]
     I4["No native Ingress objects"]
-    I1 --> I2
+    I1 -- creates --> I2
     I2 --> I3 
     I3 --> I4
     style I1 fill:#f3e5f5
     ```
+
+    A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
+
+    Note that Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying 1istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
 === "Gateway API"
 
@@ -106,6 +89,12 @@ Best for forward-looking teams adopting Gateway API to unify ingress across Kube
         Route -- creates --> HR & GW
     ```
 
+    Emerging Kubernetes-native networking API (replacing Ingress)extensible than traditional Ingress APIs. It is a specification, not an implementation itself.
+
+    The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested though other Gateway API implementations should work. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
+
+    Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
+
 ## Network Layer setup
 
 This section provides installation and configuration steps.
@@ -113,6 +102,8 @@ This section provides installation and configuration steps.
 === "Kourier"
 
     --8<-- "netadapter-kourier.md"
+
+    These instructions use the latest release of [net-kourier](https://github.com/knative-extensions/net-kourier/releases) on the Knative extensions.
 
 === "Contour"
 
