@@ -20,3 +20,5 @@ Use the following steps to install the Knative Gateway API controller.
     ```bash
     kubectl get gateway --all-namespaces
     ```
+
+Next, verify the installation.
