@@ -3,7 +3,7 @@ Use the following steps to install and enable Contour and enable its Knative int
 1. Install the Knative Contour controller:
 
     ```bash
-    kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="net-contour.yaml")}}
+    kubectl apply -f https://storage.googleapis.com/knative-nightly/net-contour/latest/contour.yaml
     ```
 
 1. Configure Knative Serving to use Contour by default:
