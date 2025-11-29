@@ -7,11 +7,27 @@ function: how-to
 
 # Configure Knative networking
 
-This page describes and provides installation and configuration guidance for Ingress controls, service-meshes and gateways for handling networking for Knative services.
+This page provides installation and configuration guidance for configuring Knative networking. These options include Ingress controls,  service-meshes, and gateways.
 
 ## Network layer options
 
-Review these tabs for the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more Ingress, full-feature service mesh, and the Kubernetes Gateway API.
+Use the following command to determine which controllers are installed and their status.
+
+```bash
+kubectl get pods -n knative-serving
+```
+
+The controllers have the following base names:
+
+- Kourier: `kourier-control-*`, and `kourier-gateway-*`.
+- Contour: `contour-*`
+- Istio: `istio-webhook-*`
+
+The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace, but Knative adds the `istio-webhook-*` pod in `knative-serving` when Istio is the chosen networking layer.
+
+Review the following tabs to determine the optimal networking layer for your cluster. Knative installs the Kourier controller as the default ingress. For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more ingress using Contour, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+
+The `network-config` ConfigMap specifies the controller to be used with the ingress controller key. This key is patched with the name of the new controller when you configure a new one, as described in these instructions. See [Changing the controller](#change-the-controller) for more information about the ingress controller key.
 
 === "Kourier"
 
@@ -78,6 +94,24 @@ Review these tabs for the optimal networking layer for your cluster. For most us
 
     --8<-- "netadapter-istio.md"
 
+=== "Ingress Gateway"
+
+```mermaid
+    ---
+    config:
+      layout: elk
+      theme: default
+      look: neo
+    ---
+    flowchart LR
+        Client["External&nbsp;Client"] --> CGW["Custom&nbsp;Ingress&nbsp;Gateway"]
+        CGW --> KIGW["Knative&nbsp;Ingress&nbsp;Gateway"] & Client
+        KIGW --> Revision["Knative&nbsp;Revision"] & CGW
+        Revision --> KIGW
+    ```
+
+    Knative uses a shared ingress gateway to serve all incoming traffic within Knative service mesh. For information on customizing the gateway, see [Configure the Ingress Gateway](/versioned/serving/setting-up-custom-ingress-gateway.md).
+
 === "Gateway API"
 
     ```mermaid
@@ -105,24 +139,11 @@ Review these tabs for the optimal networking layer for your cluster. For most us
 
     --8<-- "netadapter-gatewayapi.md"
 
-## Verify controller installations
-
-Use the following command to verify and monitor the pod status of the Kourier, Contour, or Istio controllers. All of the components should show a `STATUS` of `Running` or `Completed`.
-
-```bash
-kubectl get pods -n knative-serving
-```
-
-Here are the typical base pod names you’ll see in the `knative-serving` namespace for each of the supported Knative networking layers:
-
-- Kourier: `kourier-control-*`, and `kourier-gateway-*`.
-- Contour: `contour-*`
-- Istio: `istio-webhook-*`
-
-The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace, but Knative adds the `istio-webhook-*` pod in `knative-serving` when Istio is the chosen networking layer.
-
 ## Configure DNS
 
 --8<-- "dns.md"
 --8<-- "real-dns-yaml.md"
 --8<-- "no-dns.md"
+
+## Change the controller
+
