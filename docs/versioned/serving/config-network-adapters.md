@@ -96,7 +96,7 @@ The `network-config` ConfigMap specifies the controller to be used with the ingr
 
 === "Ingress Gateway"
 
-```mermaid
+    ```mermaid
     ---
     config:
       layout: elk
