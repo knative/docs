@@ -9,13 +9,15 @@ function: how-to
 
 This page provides installation and configuration guidance for configuring Knative networking. These options include Ingress controls,  service-meshes, and gateways.
 
+### Determine current state
+
 Use the following command to determine which controllers are installed and their status.
 
 ```bash
 kubectl get pods -n knative-serving
 ```
 
-The controllers tested for Knative have the following base names:
+The ingress controllers tested for Knative have the following base names:
 
 - Kourier: `kourier-control-*`, and `kourier-gateway-*`.
 
@@ -25,7 +27,7 @@ The controllers tested for Knative have the following base names:
 
     The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. In addition, Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
 
-The `network-config` ConfigMap specifies the controller to be used in the ingress controller key. This key is patched with the name of the new controller when you configure a new one. See [Changing the controller](#change-the-controller) for important information about using this key.
+The `network-config` ConfigMap specifies the controller to be used in the ingress controller key. This key is patched with the name of the new controller when you configure a new one. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
 ## Network layer options
 
@@ -47,6 +49,8 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Knative `net-kourier` ingress is installed with Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an Envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
 
+    *Install and configure*
+
     --8<-- "netadapter-kourier.md"
 
 === "Contour"
@@ -62,6 +66,7 @@ Review the following tabs to determine the optimal networking layer for your clu
     C1["Knative<br>net-contour"] -- creates --> C2["Ingress&nbsp;objects"]
     C2 --> C3["Class: contour.ingress.networking.knative.dev"]
     ```
+    *Install and configure*
 
     The Knative `net-contour` controller enables Contour to satisfy the networking needs by bridging Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, want to reuse a single Ingress controller, and for teams who are already using Contour envoy but don't need a full-feature service mesh.
 
@@ -81,6 +86,8 @@ Review the following tabs to determine the optimal networking layer for your clu
     ```
 
     The Knative `net-istio` defines a KIngress controller for Istio. It's a full-feature service mesh integrated with Knative that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
+
+    *Install and configure*
 
     --8<-- "netadapter-istio.md"
 
@@ -136,6 +143,8 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The controller that Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
 
+    *Configure*
+
     --8<-- "netadapter-gatewayapi.md"
 
 ## Configure DNS
@@ -144,5 +153,5 @@ Review the following tabs to determine the optimal networking layer for your clu
 --8<-- "real-dns-yaml.md"
 --8<-- "no-dns.md"
 
-## Change the controller
+## Changing the ingress controller
 
