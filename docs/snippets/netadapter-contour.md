@@ -3,17 +3,23 @@ Use the following steps to install and enable Contour and enable its Knative int
 1. Install the Knative Contour controller:
 
     ```bash
-    kubectl apply -f https://storage.googleapis.com/knative-nightly/net-contour/latest/contour.yaml
+    kubectl apply -f https://github.com/knative/net-kourier/releases/latest/download/kourier.yaml
     ```
 
-1. Configure Knative Serving to use Contour by default:
+1. Configure Knative Serving to use Contour:
 
   ```bash
-  kubectl patch configmap/config-network \
+    kubectl patch configmap/config-network \
     --namespace knative-serving \
     --type merge \
     --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
   ```
+
+1. Verify the installation by having a pod with the base name of `contour` in the results.
+
+    ```bash
+    kubectl get pods -n knative-serving
+    ```
 
 1. Get the external IP address (FQDN) to configure DNS records:
 

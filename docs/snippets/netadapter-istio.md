@@ -13,6 +13,12 @@ Use the following steps to install Istio and enable its Knative integration.
     kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
     ```
 
+1. Verify the installation by having pods with the base name of `istio` and `istio-webhook` in the results.
+
+    ```bash
+    kubectl get pods -n knative-serving
+    ```
+
 1. Get the external IP address (FQDN) to configure DNS records:
 
     ```bash
