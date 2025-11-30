@@ -9,26 +9,24 @@ function: how-to
 
 This page provides installation and configuration guidance for configuring Knative networking. These options include Ingress controls,  service-meshes, and gateways.
 
-## Network layer options
-
 Use the following command to determine which controllers are installed and their status.
-
 
 ```bash
 kubectl get pods -n knative-serving
 ```
 
-The controllers have the following base names:
+The controllers tested for Knative have the following base names:
 
 - Kourier: `kourier-control-*`, and `kourier-gateway-*`.
 - Contour: `contour-*`
 - Istio: `istio-webhook-*`
-
-The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace, but Knative adds the `istio-webhook-*` pod in `knative-serving` when Istio is the chosen networking layer.
-
-Review the following tabs to determine the optimal networking layer for your cluster. Knative installs the Kourier controller as the default ingress. For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more ingress using Contour, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+    - The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace, but Knative adds the `istio-webhook-*` pod in `knative-serving` when Istio is the chosen networking layer.
 
 The `network-config` ConfigMap specifies the controller to be used with the ingress controller key. This key is patched with the name of the new controller when you configure a new one, as described in these instructions. See [Changing the controller](#change-the-controller) for more information about the ingress controller key.
+
+## Network layer options
+
+Review the following tabs to determine the optimal networking layer for your cluster. Knative installs the Kourier controller as the default ingress. For most users, the Kourier ingress controller is sufficient with the already installed default Istio gateway resource. You can expand your capabilities with more ingress using Contour, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
 
 === "Kourier"
 
