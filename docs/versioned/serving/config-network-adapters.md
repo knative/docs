@@ -13,6 +13,7 @@ This page provides installation and configuration guidance for configuring Knati
 
 Use the following command to determine which controllers are installed and their status.
 
+
 ```bash
 kubectl get pods -n knative-serving
 ```
@@ -47,8 +48,6 @@ The `network-config` ConfigMap specifies the controller to be used with the ingr
 
     Designed for Knative Serving with efficient serverless function deployment is the goal. Kourier is the default ingress choice for most users, when a service mesh is not required, as it has a simple setup.
 
-    The following setup procedure automatically obtains the latest release of [net-kourier](https://github.com/knative-extensions/net-kourier/releases) on the Knative extensions.
-
     --8<-- "netadapter-kourier.md"
 
 === "Contour"
@@ -69,8 +68,6 @@ The `network-config` ConfigMap specifies the controller to be used with the ingr
 
     A good choice for clusters that already run non-Knative apps and want to reuse a single Ingress controller as well as teams who are already using Contour/Envoy and wanting Knative integration with advanced routing but not full service mesh.
 
-    The following setup procedure automatically obtains the latest release of [net-contour](https://github.com/knative-extensions/net-contour/releases) on the Knative extensions.
-
     --8<-- "netadapter-contour.md"
 
 === "Istio"
@@ -89,8 +86,6 @@ The `network-config` ConfigMap specifies the controller to be used with the ingr
     The Knative `net-istio` defines a KIngress controller for Istio. A full-feature service mesh integrated with Knative that can also function as a Knative ingress. Best for enterprises already running Istio or needing advanced service mesh features alongside Knative.
 
     Note that Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying 1istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
-
-    The following setup procedure automatically obtains the latest release of [net-istio](https://github.com/knative-extensions/net-istio/releases) on the Knative extensions.
 
     --8<-- "netadapter-istio.md"
 
@@ -121,21 +116,31 @@ The `network-config` ConfigMap specifies the controller to be used with the ingr
       theme: default
     ---
     flowchart LR
-      subgraph s1["Gateway API for Knative"]
+     subgraph net-gateway-api["net-gateway-api&nbsp;controller"]
+            GW["Gateway"]
+            Route["Knative&nbsp;Route"]
             HR["HTTPRoute"]
-            GW["Gateway listener"]
       end
-        KSvc["Knative Service"] -- owns --> Route["Route"]
-                Route -- creates --> HR & GW
+     subgraph underlying["Underlying&nbsp;Controller<br>(Contour │ Istio │ Envoy Gateway │ …)"]
+        Controller["GatewayClass&nbsp;Controller"]
+      end
+        KSvc["Knative&nbsp;Service"] --> Route
+        Route -- translates&nbsp;to --> GW & HR
+        GW --> Controller
+        HR --> Controller
+        Controller -- routes&nbsp;traffic&nbsp;to --> Pods["Your&nbsp;Pods"]
+
+    style net-gateway-api fill:#e3f2fd,stroke:#1976d2
+    style underlying fill:#fff3e0,stroke:#ef6c00
     ```
 
-    The Knative `net-gateway-api` is a KIngress implementation and testing for Knative integration with the Kubernetes Gateway API.
+    The Knative `net-gateway-api` is a KIngress implementation and testing for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/).
 
-    The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested though other Gateway API implementations should work. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
+    Best for forward-looking teams adopting the Gateway API to unify ingress across Kubernetes, with Knative leveraging to the same standard.
 
-    Best for forward-looking teams adopting Gateway API to unify ingress across Kubernetes, with Knative leveraging the same standard.
+    The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested though other Gateway API implementations should work. Currently, there is no native Gateway API support for Kourier. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
-    The following setup procedure automatically obtains the latest release of [net-gateway-api](https://github.com/knative-extensions/net-gateway-api/releases) on the Knative extensions.
+    The controller Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
 
     --8<-- "netadapter-gatewayapi.md"
 
