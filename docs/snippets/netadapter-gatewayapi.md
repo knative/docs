@@ -1,4 +1,4 @@
-Use the following steps to install the Knative Gateway API controller.
+Use the following steps to configure the Knative Gateway API controller.
 
 1. Configure Knative Serving to use `net-gateway-api` controller:
 
