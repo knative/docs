@@ -19,13 +19,9 @@ kubectl get pods -n knative-serving
 
 The ingress controllers tested for Knative have the following base names:
 
-- Kourier: `kourier-control-*`, and `kourier-gateway-*`.
-
-    Kourier is included in the Knative Serving installation should appear in the results.
+- Kourier: `kourier-control-*`, and `kourier-gateway-*`. Kourier is included in the Knative Serving installation should appear in the results.
 - Contour: `contour-*`
-- Istio: `istio-webhook-*`
-
-    The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. In addition, Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
+- Istio: `istio-webhook-*`. The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. In addition, Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
 
 The `network-config` ConfigMap specifies the controller to be used in the ingress controller key. This key is patched with the name of the new controller when you configure a new one. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
@@ -154,4 +150,3 @@ Review the following tabs to determine the optimal networking layer for your clu
 --8<-- "no-dns.md"
 
 ## Changing the ingress controller
-
