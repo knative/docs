@@ -7,7 +7,7 @@ function: how-to
 
 # Configure Knative networking
 
-This page provides installation and configuration guidance for configuring Knative networking. These options include Ingress controls,  service-meshes, and gateways.
+This page provides installation and configuration guidance for configuring Knative networking. You can configure Ingress controls,  service-meshes, and gateways.
 
 ### Determine current state
 
@@ -17,13 +17,13 @@ Use the following command to determine which controllers are installed and their
 kubectl get pods -n knative-serving
 ```
 
-The ingress controllers tested for Knative have the following base names:
+The ingress controllers, that have been tested for Knative, have the following base names:
 
 - Kourier: `kourier-control-*`, and `kourier-gateway-*`. Kourier is included in the Knative Serving installation should appear in the results.
 - Contour: `contour-*`
 - Istio: `istio-webhook-*`. The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. In addition, Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
 
-The `network-config` ConfigMap specifies the controller to be used in the ingress controller key. This key is patched with the name of the new controller when you configure a new one. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
+The `network-config` ConfigMap sets which controller to use in the ingress controller key. This key is patched with the name of any new controller. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
 ## Network layer options
 
@@ -45,7 +45,7 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Knative `net-kourier` ingress is installed with Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an Envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
 
-    *Install and configure*
+    **Install and configure**
 
     --8<-- "netadapter-kourier.md"
 
@@ -62,7 +62,7 @@ Review the following tabs to determine the optimal networking layer for your clu
     C1["Knative<br>net-contour"] -- creates --> C2["Ingress&nbsp;objects"]
     C2 --> C3["Class: contour.ingress.networking.knative.dev"]
     ```
-    *Install and configure*
+    **Install and configure**
 
     The Knative `net-contour` controller enables Contour to satisfy the networking needs by bridging Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, want to reuse a single Ingress controller, and for teams who are already using Contour envoy but don't need a full-feature service mesh.
 
@@ -83,7 +83,7 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Knative `net-istio` defines a KIngress controller for Istio. It's a full-feature service mesh integrated with Knative that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
 
-    *Install and configure*
+    **Install and configure**
 
     --8<-- "netadapter-istio.md"
 
@@ -139,7 +139,7 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The controller that Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
 
-    *Configure*
+    ***Configure**
 
     --8<-- "netadapter-gatewayapi.md"
 
@@ -150,3 +150,32 @@ Review the following tabs to determine the optimal networking layer for your clu
 --8<-- "no-dns.md"
 
 ## Changing the ingress controller
+
+If you want to change the ingress controllers, simply install and configure the new controller as shown in the [Network layer options](#network-layer-options) instructions. There is no explicit need to remove ingress controllers that are not in use. 
+
+You can verify the controller in use by examining the `config-network.yaml`:
+
+```bash
+kubectl get cm config-network -n knative-serving -o yaml
+```
+
+Look for the `ingress-class` key. It could also be the `ingress.class` key with a dot. The dash usage is more current and supersedes any key with the dot. In the following example, the `ingress.class` key was initially set for the Kourier controller, but is now set to Contour because the ingress key with a dash takes precedence.
+
+```yml
+ingress-class: contour.ingress.networking.knative.dev
+ingress.class: kourier.ingress.networking.knative.dev
+```
+
+If you want to switch back to a previously installed controller, patch the `config-network` ConfigMap with the new controller, as shown in the following example to switch back to Kourier but this with using the dash in `ingress-class`.
+
+```bash
+kubectl patch cm config-network -n knative-serving \
+  --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
+```
+
+You can remove an unused key with a dot with the following command:
+
+```bash
+ubectl patch configmap config-network -n knative-serving \                                                    
+  --type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
+```
