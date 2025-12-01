@@ -1,4 +1,4 @@
-Use the following steps to install Kourier and enable its Knative integration.
+Use the following steps to install Kourier and set it as the ingress controller.
 
 1. Install the Knative Kourier controller:
 
