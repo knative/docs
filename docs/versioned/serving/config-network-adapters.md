@@ -151,9 +151,9 @@ Review the following tabs to determine the optimal networking layer for your clu
 
 ## Changing the ingress controller
 
-If you want to change the ingress controllers, simply install and configure the new controller as shown in the [Network layer options](#network-layer-options) instructions. There is no explicit need to remove ingress controllers that are not in use. 
+If you want to change the ingress controllers, install and configure the new controller as shown in the [Network layer options](#network-layer-options) instructions. There is no explicit need to remove ingress controllers that are not in use.
 
-You can verify the controller in use by examining the `config-network.yaml`:
+You can determine the controller in use by examining the `config-network.yaml`:
 
 ```bash
 kubectl get cm config-network -n knative-serving -o yaml
