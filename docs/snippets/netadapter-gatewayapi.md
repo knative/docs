@@ -1,6 +1,12 @@
-Use the following steps to configure the Knative Gateway API controller.
+Use the following steps to install and configure the Knative Gateway API.
 
-1. Configure Knative Serving to use `net-gateway-api` controller:
+1. Install the Knative Gateway API channel:
+
+    ```bash
+      kubectl apply -f {{ artifact(repo="net-gateway-api",org="knative-extensions",file="net-gateawy-api.yaml")}}
+    ```
+
+1. Configure Knative Serving to use Knative Gateway API channel:
 
     ```bash
     kubectl patch configmap/config-network \
