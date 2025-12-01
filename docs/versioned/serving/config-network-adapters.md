@@ -45,6 +45,10 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Knative `net-kourier` ingress is installed with Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
 
+    Kourier is the only supported ingress controller for the IBM Z and IBM Power platforms, and requires additional steps to patch the envoy image as described [here](./install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+
+Follow the below steps to install Kourier. Post installation, patch the envoy image based on RedHat Maistra as described in this link.
+
     **Install and configure**
 
     --8<-- "netadapter-kourier.md"
