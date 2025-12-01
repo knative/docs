@@ -1,4 +1,4 @@
-Use the following steps to install and enable Contour and enable its Knative integration.
+Use the following steps to install and enable Contour and set it as the ingress conroller.
 
 1. Install the Knative Contour controller:
 
