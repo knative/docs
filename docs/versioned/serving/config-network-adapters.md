@@ -64,9 +64,10 @@ Review the following tabs to determine the optimal networking layer for your clu
     C1["Knative<br>net-contour"] -- creates --> C2["Ingress&nbsp;objects"]
     C2 --> C3["Class: contour.ingress.networking.knative.dev"]
     ```
-    **Install and configure Contour**
 
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy but don't need a full-feature service mesh.
+
+    **Install and configure Contour**
 
     --8<-- "netadapter-contour.md"
 
@@ -85,7 +86,7 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
 
-    **Install and configure**
+    **Install and configure Istio**
 
     --8<-- "netadapter-istio.md"
 
@@ -105,7 +106,11 @@ Review the following tabs to determine the optimal networking layer for your clu
         Revision --> KIGW
     ```
 
-    Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own, see [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
+    Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own.
+
+    **Install and configure Ingress Gateway**
+
+    See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
 === "Gateway API"
 
