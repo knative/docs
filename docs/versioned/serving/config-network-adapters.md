@@ -11,7 +11,7 @@ This page provides installation and configuration guidance for Knative networkin
 
 ### Determine current state
 
-Use the following command to determine which controllers are installed and their status.
+Use the following command to determine which ingress controllers are installed and their status.
 
 ```bash
 kubectl get pods -n knative-serving
@@ -45,7 +45,7 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Kourier ingress controller, `net-kourier`, is installed with Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
 
-    Kourier is the only supported ingress controller for the IBM Z and IBM Power platforms, and requires additional steps as described in [Install Serving with YAML on IBM-Z and IBM-P](/versioned/install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+    Kourier is the only supported ingress controller for the IBM Z and IBM Power platforms, and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](/versioned/install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
     **Install and configure Kourier**
 
