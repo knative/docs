@@ -13,10 +13,24 @@ Administrators can monitor Serving control plane based on the metrics exposed by
 
     These metrics may change as we flush out our migration from OpenCensus to OpenTelemetry
 
-## Queue Proxy
+## Workload Metrics
 
-The queue proxy is the per-pod sidecar that enforces container concurrency and provides metrics to the autoscaler. The following metrics provide you insights into queued
+Each workload pod has a sidecar that enforces container concurrency and provides metrics to the autoscaler. The following OTel metrics provide you insights into queued
 requests and user-container behavior.
+
+The following attributes are included with workload metrics
+
+Name | Type | Description
+-|-|-
+`container.name` | string | Name of the container emit metrics. This is hardcoded to `queue-proxy`.
+`k8s.namespace.name` | string | Namespace of the workload
+`k8s.pod.name` | string | Name of the workload pod
+`service.version` | string | Version of the sidecar emitting metrics
+`service.name` | string | Either the name of the Knative Service, Configuration or Revision.
+`service.instance.id` | string | Identifier of the instance which is the same as the `k8s.pod.name`
+`kn.service.name` | string | Knative Service name associated with this Revision
+`kn.configuration.name` | string | Knative Configuration name associated with this Revision
+`kn.revision.name` | string | The name of the Revision
 
 ###  `kn.serving.queue.depth`
 
@@ -33,6 +47,28 @@ requests and user-container behavior.
 **Unit ([UCUM](https://ucum.org)):** s
 
 **Description:** The duration of the task execution
+
+The following attributes are included with the metric
+
+Name | Type | Description
+-|-|-
+`http.response.status_code` | int | Status code of the duration
+
+### HTTP metrics
+
+Since the sidecar receives and forwards requests to the user container it has both HTTP server and client metrics.
+
+#### HTTP Server Metrics
+
+Knative implements the [semantic conventions for HTTP Servers](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/#http-server) using the OpenTelemetry [otel-go/otelhttp](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) package.
+
+Please refer to the [OpenTelemetry docs](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) for details about the HTTP Server metrics it exports.
+
+#### HTTP Client Metrics
+
+Knative implements the [semantic conventions for HTTP Clients](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/#http-client) using the OpenTelemetry [otel-go/otelhttp](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) package.
+
+Please refer to the [OpenTelemetry docs](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) for details about the HTTP Client metrics it exports.
 
 ## Activator
 
@@ -51,10 +87,35 @@ The following attributes are included with the metric
 
 Name | Type | Description
 -|-|-
-`k8s.namespace.name` | string | Namespace of the Revision
+`k8s.namespace.name` | string | Namespace of the resource
 `kn.service.name` | string | Knative Service name associated with this Revision
 `kn.configuration.name` | string | Knative Configuration name associated with this Revision
 `kn.revision.name` | string | The name of the Revision
+
+### HTTP metrics
+
+Since the activator receives and forwards requests to the user workload it has both HTTP server and client metrics.
+
+#### HTTP Server Metrics
+
+Knative implements the [semantic conventions for HTTP Servers](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/#http-server) using the OpenTelemetry [otel-go/otelhttp](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) package.
+
+Please refer to the [OpenTelemetry docs](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) for details about the HTTP Server metrics it exports.
+
+The following attributes are included in the server metrics
+
+Name | Type | Description
+-|-|-
+`kn.service.name` | string | Knative Service name associated with this Revision
+`kn.configuration.name` | string | Knative Configuration name associated with this Revision
+`kn.revision.name` | string | The name of the Revision
+`k8s.namespace.name` | string | Namespace of the resource
+
+#### HTTP Client Metrics
+
+Knative implements the [semantic conventions for HTTP Clients](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/#http-client) using the OpenTelemetry [otel-go/otelhttp](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) package.
+
+Please refer to the [OpenTelemetry docs](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp) for details about the HTTP Client metrics it exports.
 
 ## Autoscaler
 
