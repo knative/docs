@@ -18,7 +18,7 @@ Administrators can monitor Serving control plane based on the metrics exposed by
 The queue proxy is the per-pod sidecar that enforces container concurrency and provides metrics to the autoscaler. The following metrics provide you insights into queued
 requests and user-container behavior.
 
-###  `kn.queueproxy.depth`
+###  `kn.serving.queue.depth`
 
 **Instrument Type:** Int64Gauge
 
@@ -26,7 +26,7 @@ requests and user-container behavior.
 
 **Description:** Number of current items in the queue proxy queue
 
-### `kn.queueproxy.app.duration`
+### `kn.serving.invocation.duration`
 
 **Instrument Type:** Float64Histogram
 
