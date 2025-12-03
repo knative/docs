@@ -8,7 +8,7 @@ Over the past three months, I've had the incredible opportunity to participate i
 
 Knative Functions enables developers to easily create, build, and deploy stateless, event driven functions as Knative Services by using the `func` CLI. The goal of this LFX project was to conduct a comprehensive UX evaluation of the func CLI, focusing on identifying usability issues, understanding developer workflows, and gathering structured feedback on CLI interactions to improve its intuitiveness, efficiency, and user satisfaction.
 
-The project covered several areas: assessing command organization and discoverability for both new and experienced users, reviewing help text quality across all commands, mapping common developer workflows to identify pain points, and evaluating error handling and user guidance during failures. But rather than just producing a report with recommendations, I worked on actively fixing the issues I discovered.
+While the project covered several areas like assessing command organization and discoverability, my main focus was specifically on improving error handling and help text quality throughout the codebase. The core philosophy behind my work was simple: error messages should not just state what went wrong, but guide users toward the solution with clear, actionable steps. To gather comprehensive error reports, I tested all the commands with valid inputs to verify expected behavior, invalid inputs to test error handling, and edge cases like empty strings, special characters, and boundary values. I also tested flag combinations, environment variable interactions, and intentionally violated validation rules to see how the CLI responded. This approach helped me understand the error quality and identify where users would struggle the most. Rather than just producing a report with recommendations, I also worked on actively fixing the issues I discovered.
 
 ## Understanding the User Perspective
 
@@ -26,7 +26,7 @@ Technically correct, but not very helpful if you're just starting out. What shou
 
 My initial weeks focused on improving the help text for all commands when run outside a function directory. I wanted to make those cryptic error messages actually helpful. 
 
-Here's how that same error looks now:
+Here's how that same error I mentioned above looks now with the new help text:
 
 ```
 Error: no function found in current directory.
@@ -89,6 +89,6 @@ In a few years, I might not remember every line of code I wrote or every error m
 
 If you've read this far, I'd like to share something that might help you with your own LFX journey. The key to my acceptance was starting early and engaging with the community before even applying. I reached out to my mentors as soon as the projects were announced and asked how I could better prepare myself. Their advice was invaluable: play around with the func CLI to get familiar with it, write the research proposal myself without relying on AI tools, think deeply about the research objectives and questions I wanted to answer, plan out how I would approach answering those questions, and create a realistic timeline for the project.
 
-So I did exactly that. I explored all the func commands, experimented with different scenarios, and even got two PRs merged before submitting my proposal. When it came time to write the proposal, I documented this pre-engagement experience in detail, including the issues I discovered and improvements I suggested. I went a step further and created a demo showing how the func CLI could have colorful output following industry best practices from tools like kubectl, git, and aws cli.
+So I did exactly that. I explored all the func commands, experimented with different scenarios, and even got two PRs merged before submitting my proposal. When it came time to write the proposal, I documented this pre-engagement experience in detail, including the issues I discovered and improvements I suggested. I went a step further and created a demo showing how the func CLI could have colorful output following industry best practices from tools like `kubectl`, `git`, and `aws` cli.
 
 The lesson I learned is that both pre-community engagement and a well-prepared proposal are equally important. Show genuine interest, contribute early, and then document your journey and approach thoroughly in your proposal. If you're curious about how I structured all of this, you can check out my [proposal here](https://www.canva.com/design/DAGk0QzPceA/TuwOj83JbUnd_b-nnTh9MQ/view?utm_content=DAGk0QzPceA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3c4ce65cb5){:target="_blank"}, which also includes the demo I created. Good luck with your open source journey!
