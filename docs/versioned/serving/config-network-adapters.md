@@ -17,17 +17,17 @@ Use the following command to determine which ingress controllers are installed a
 kubectl get pods -n knative-serving
 ```
 
-The ingress controllers, that have been tested for Knative, have the following base names:
+The Knative team tests the following ingress controllers:
 
 - Kourier: `kourier-control-*`, and `kourier-gateway-*`. Kourier is included in the Knative Serving installation should appear in the results when your cluster is first created.
 - Contour: `contour-*`
 - Istio: `istio-webhook-*`. The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
 
-The `network-config` ConfigMap sets which controller to use with the ingress controller key. This key is patched with the name of any new controller. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
+Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses a default value of the key based on the `network-config` ConfigMap. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
 ## Network layer options
 
-Review the following tabs to determine the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient in conjunction the default Istio gateway, which is also included in the Knative Serving installation. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+Review the following tabs to determine the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
 
 === "Kourier"
 
@@ -45,7 +45,7 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     The Kourier ingress controller, `net-kourier`, is installed with Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
 
-    Kourier is the only supported ingress controller for the IBM Z and IBM Power platforms, and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+    Kourier is a fine choice for all platforms, but for these IBM platforms it's the only option and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
     **Install and configure Kourier**
 
