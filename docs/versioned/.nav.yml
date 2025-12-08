@@ -266,8 +266,8 @@ nav:
         # TODO: add a doc on editing ConfigMaps
         - Configure high-availability components: serving/config-ha.md
         - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
+        - Configure Knative networking: serving/config-network-adapters.md
         - Networking Options:
-          - Configure Knative networking: serving/config-network-adapters.md
           - Configure the ingress gateway: serving/setting-up-custom-ingress-gateway.md
           - Configure domain names: serving/using-a-custom-domain.md
           - Istio Authorization: serving/istio-authorization.md

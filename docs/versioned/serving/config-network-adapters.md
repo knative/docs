@@ -9,25 +9,11 @@ function: how-to
 
 This page provides installation and configuration guidance for Knative networking. You can configure Ingress controls, service-meshes, and gateways.
 
-### Determine current state
-
-Use the following command to determine which ingress controllers are installed and their status.
-
-```bash
-kubectl get pods -n knative-serving
-```
-
-The Knative team tests the following ingress controllers:
-
-- Kourier: `kourier-control-*`, and `kourier-gateway-*`. Kourier is included in the Knative Serving installation should appear in the results when your cluster is first created.
-- Contour: `contour-*`
-- Istio: `istio-webhook-*`. The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
-
-Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses a default value of the key based on the `network-config` ConfigMap. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
-
 ## Network layer options
 
 Review the following tabs to determine the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+
+The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
 === "Kourier"
 
@@ -39,7 +25,7 @@ Review the following tabs to determine the optimal networking layer for your clu
       look: neo
     ---
     flowchart LR
-    K1["Knative<br>net-kourier"] -- creates --> K2["Ingress&nbsp;objects"]
+    K1["Knative<br>net-kourier"] -- creates --> K2["KIngress&nbsp;objects"]
     K2 --> K3["Class: kourier.ingress.networking.knative.dev"]
     ```
 
@@ -61,7 +47,7 @@ Review the following tabs to determine the optimal networking layer for your clu
       look: neo
     ---
     flowchart LR
-    C1["Knative<br>net-contour"] -- creates --> C2["Ingress&nbsp;objects"]
+    C1["Knative<br>net-contour"] -- creates --> C2["KIngress&nbsp;objects"]
     C2 --> C3["Class: contour.ingress.networking.knative.dev"]
     ```
 
@@ -149,15 +135,31 @@ Review the following tabs to determine the optimal networking layer for your clu
 
     --8<-- "netadapter-gatewayapi.md"
 
+### Determine current state
+
+Use the following command to determine which ingress controllers are installed and their status.
+
+```bash
+kubectl get pods -n knative-serving
+```
+
+The Knative team tests the following ingress controllers:
+
+- Kourier: `kourier-control-*`, and `kourier-gateway-*`. Kourier is included in the Knative Serving installation should appear in the results when your cluster is first created.
+- Contour: `contour-*`
+- Istio: `istio-webhook-*`. The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
+
+Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses a default value of the key based on the `network-config` ConfigMap. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
+
 ## Configure DNS
 
 --8<-- "dns.md"
 --8<-- "real-dns-yaml.md"
 --8<-- "no-dns.md"
 
-## Changing the ingress controller
+## Changing the controller
 
-If you want to change the ingress controllers, install and configure the new controller as instructed in the [Network layer options](#network-layer-options). There is no requirement to remove ingress controllers that are not in use.
+If you want to change the controller, install and configure the new controller as instructed in the [Network layer options](#network-layer-options). There is no requirement to remove ingress controllers that are not in use.
 
 You can determine the controller in use by examining the `config-network.yaml`:
 
