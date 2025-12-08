@@ -135,7 +135,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     --8<-- "netadapter-gatewayapi.md"
 
-### Determine current state
+## Determine current state
 
 Use the following command to determine which ingress controllers are installed and their status.
 
