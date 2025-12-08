@@ -15,12 +15,12 @@ Use the following steps to install Istio and set it as the ingress conroller.
 
 1. Set the `config-network` ConfigMap to use Istio:
 
-  ```bash
-    kubectl patch configmap/config-network \
-    --namespace knative-serving \
-    --type merge \
-    --patch '{"data":{"ingress-class":"istio.ingress.networking.knative.dev"}}'
-  ```
+    ```bash
+      kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"ingress-class":"istio.ingress.networking.knative.dev"}}'
+    ```
 
 1. Verify the installation by having pods with the base name of `istio` and `istio-webhook` in the results.
 
