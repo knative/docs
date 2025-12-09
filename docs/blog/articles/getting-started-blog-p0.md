@@ -32,7 +32,7 @@ us.
 With that in mind, let's discuss what pain points we have been experiencing. The first is that Knative is a very large project, with many massive repositories.
 As a new contributor, it can be very difficult to know how to navigate the codebase to find where to make your change. There is also a lot of "magic" in the 
 Knative codebase, where you have to name functions in certain ways and/or there is code generation. This makes it really hard to understand where you should 
-make your changes until you have spent enough time making changes to understand it. There are also some pretty intensive test suites, which can be very confusing
+make your changes until you have spent enough time making changes to understand it. There are also some pretty intensive test suites which can be very confusing
 to new contributors, so even if you manage to make your change, it can still be a struggle to test it.
 
 We want to alleviate these pain points for new contributors like you so that it is easier for any new developers to join us. We want to speed up your learning
