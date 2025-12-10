@@ -39,6 +39,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     style flow    background:transparent, border:none
     ```
 
+
     ```mermaid
     ---
     config:
