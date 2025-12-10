@@ -25,17 +25,24 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       look: neo
     ---
     flowchart LR
-    K1["Knative<br>net-kourier"] -- creates --> K2["KIngress&nbsp;objects"]
-    K2 --> K3["Class: kourier.ingress.networking.knative.dev"]
+
+    route["Route object"] -- "read by" --> serving-core("Serving<br>controller") -- creates --> KIngress["Ingress object<br>networking.internal.knative.dev<br>(KIngress)"]
     ```
 
-    The Kourier ingress controller, `net-kourier`, is installed with Knative Serving. Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
+    ```mermaid
+    ---
+    config:
+      theme: default
+      layout: elk
+      look: neo
+    ---
+    flowchart LR
+    KIngress["KIngress<br>Class:kourier.ingress.networking.knative.dev"] -- "read by" --> controller("net-kourier<br>controller") -- programs --> envoy("Envoy deployment<br>kourier-system namespace")
+    ```
+
+    Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
 
     Kourier is a fine choice for all platforms, but for IBM-Z and IBM-P platforms it's the only supported option and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
-
-    **Install and configure Kourier**
-
-    --8<-- "netadapter-kourier.md"
 
 === "Contour"
 
@@ -53,10 +60,6 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy but don't need a full-feature service mesh.
 
-    **Install and configure Contour**
-
-    --8<-- "netadapter-contour.md"
-
 === "Istio"
 
     ```mermaid
@@ -71,10 +74,6 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     ```
 
     The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
-
-    **Install and configure Istio**
-
-    --8<-- "netadapter-istio.md"
 
 === "Ingress Gateway"
 
@@ -94,7 +93,6 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own.
 
-    **Install and configure Ingress Gateway**
 
     See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
@@ -131,17 +129,13 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The controller that Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
 
-    **Install and configure Gateway API**
-
-    --8<-- "netadapter-gatewayapi.md"
-
 ## Determine current state
 
 Use the following command to determine which ingress controllers are installed and their status.
 
-```bash
-kubectl get pods -n knative-serving
-```
+    ``` bash
+    kubectl get pods -n knative-serving
+    ```
 
 The Knative team tests the following ingress controllers:
 
@@ -151,11 +145,6 @@ The Knative team tests the following ingress controllers:
 
 Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses a default value of the key based on the `network-config` ConfigMap. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
-## Configure DNS
-
---8<-- "dns.md"
---8<-- "real-dns-yaml.md"
---8<-- "no-dns.md"
 
 ## Changing the controller
 
@@ -163,27 +152,27 @@ If you want to change the controller, install and configure the new controller a
 
 You can determine the controller in use by examining the `config-network.yaml`:
 
-```bash
-kubectl get cm config-network -n knative-serving -o yaml
-```
+    ```bash
+    kubectl get cm config-network -n knative-serving -o yaml
+    ```
 
 Look for the `ingress-class` key. It could also be the `ingress.class` key with a dot. The dash usage is more current and supersedes any key with the dot. In the following example, the `ingress.class` key was initially set for the Kourier controller, but is now set to Contour because the ingress key with a dash takes precedence.
 
-```yml
-ingress-class: contour.ingress.networking.knative.dev
-ingress.class: kourier.ingress.networking.knative.dev
-```
+    ```yml
+    ingress-class: contour.ingress.networking.knative.dev
+    ingress.class: kourier.ingress.networking.knative.dev
+    ```
 
 If you want to switch back to a previously installed controller, patch the `config-network` ConfigMap with the new controller. In the following example Kourier is used because of the dash in `ingress-class`.
 
-```bash
-kubectl patch cm config-network -n knative-serving \
-  --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
+    ```bash
+    kubectl patch cm config-network -n knative-serving \
+      --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
 ```
 
 You can remove an unused key with a dot with the following command:
 
-```bash
-ubectl patch configmap config-network -n knative-serving \                                                    
-  --type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
-```
+    ```bash
+    kubectl patch configmap config-network -n knative-serving \                                                    
+    --type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
+    ```
