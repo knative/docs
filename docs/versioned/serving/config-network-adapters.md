@@ -145,7 +145,6 @@ The Knative team tests the following ingress controllers:
 
 Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses a default value of the key based on the `network-config` ConfigMap. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
-
 ## Changing the controller
 
 If you want to change the controller, install and configure the new controller as instructed in the [Network layer options](#network-layer-options). There is no requirement to remove ingress controllers that are not in use.
@@ -168,7 +167,7 @@ If you want to switch back to a previously installed controller, patch the `conf
     ```bash
     kubectl patch cm config-network -n knative-serving \
       --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
-```
+    ```
 
 You can remove an unused key with a dot with the following command:
 
