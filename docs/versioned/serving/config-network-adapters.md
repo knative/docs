@@ -22,26 +22,38 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     ```mermaid
     ---
     config:
-      theme: default
       layout: elk
-      look: neo
+      theme: default
     ---
     flowchart LR
-
-    route["Route object"] -- "read by" --> serving-core("Serving<br>controller") -- creates --> KIngress["Ingress object<br>networking.internal.knative.dev<br>(KIngress)"]
+      subgraph flow[" "]
+        direction LR
+            kingress1["Ingress object<br>networking.internal.knative.dev<br>(KIngress)"]
+            serving["Serving<br>controller"]
+            route["Route object"]
+      end
+        route -- read by --> serving
+        serving -- creates --> kingress1
+        class kingress1 highlight
+    classDef highlight fill:#fff3cd,stroke:#f39c12,stroke-width:3px
+    style flow    background:transparent, border:none
     ```
-
-    The following diagram depicts the flow of KIngress objects by Kourier.
 
     ```mermaid
     ---
     config:
-      theme: default
       layout: elk
-      look: neo
+      theme: default
     ---
     flowchart LR
-    KIngress["KIngress<br>Class:kourier.ingress.networking.knative.dev"] -- "read by" --> controller("net-kourier<br>controller") -- programs --> envoy("Envoy deployment<br>kourier-system namespace")
+     subgraph bottom[" "]
+        direction LR
+            envoy["Envoy deployment<br>kourier-system namespace"]
+            kourier["net-kourier<br>controller"]
+            kingress2["KIngress<br>Class: kourier.ingress.networking.knative.dev"]
+      end
+        kingress2 -- read by --> kourier
+        kourier -- programs --> envoy
     ```
 
     Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
