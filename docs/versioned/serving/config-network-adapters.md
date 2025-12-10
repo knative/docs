@@ -17,6 +17,8 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
 === "Kourier"
 
+    The following diagram depicts the flow of KIngress objects, as read by Knative serving.
+
     ```mermaid
     ---
     config:
@@ -28,6 +30,8 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     route["Route object"] -- "read by" --> serving-core("Serving<br>controller") -- creates --> KIngress["Ingress object<br>networking.internal.knative.dev<br>(KIngress)"]
     ```
+
+    The following diagram depicts the flow of KIngress objects by Kourier.
 
     ```mermaid
     ---
