@@ -39,7 +39,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style flow    background:transparent, border:none,fill:transparent,stroke:#000000
     ```
 
-<!-- Two paras needed between charts -->
+
     ```mermaid
     ---
     config:
@@ -47,7 +47,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       theme: default
     ---
     flowchart LR
-      subgraph bottom[" "]
+     subgraph bottom[" "]
         direction LR
             envoy["Envoy deployment<br>kourier-system namespace"]
             kourier["net-kourier<br>controller"]
