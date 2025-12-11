@@ -34,12 +34,12 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       end
         route -- read by --> serving
         serving -- creates --> kingress1
-        class kingress1 highlight
-    classDef highlight fill:#fff3cd,stroke:#f39c12,stroke-width:3px
-    style flow    background:transparent, border:none
+        style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
+        style serving fill:#FFE0B2
+        style flow    background:transparent, border:none,fill:transparent,stroke:#000000
     ```
 
-
+<!-- Two paras needed between charts -->
     ```mermaid
     ---
     config:
@@ -55,6 +55,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       end
         kingress2 -- read by --> kourier
         kourier -- programs --> envoy
+        style envoy fill:#BBDEFB
+        style kourier fill:#FFE0B2
+        style bottom fill:transparent
     ```
 
     Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
