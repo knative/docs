@@ -47,7 +47,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       theme: default
     ---
     flowchart LR
-     subgraph bottom[" "]
+      subgraph bottom[" "]
         direction LR
             envoy["Envoy deployment<br>kourier-system namespace"]
             kourier["net-kourier<br>controller"]
@@ -55,6 +55,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       end
         kingress2 -- read by --> kourier
         kourier -- programs --> envoy
+    
         style envoy fill:#BBDEFB
         style kourier fill:#FFE0B2
         style bottom fill:transparent
