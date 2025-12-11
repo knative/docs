@@ -17,7 +17,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
 === "Kourier"
 
-    Knative Serving network layer
+    Knative Serving network layer architecture:
 
     ```mermaid
     ---
@@ -39,7 +39,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style top fill:transparent
     ```
 
-    Kourier network layer
+    Kourier network layer:
 
     ```mermaid
     ---
@@ -62,13 +62,13 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style bottom fill:transparent
     ```
 
-    Kourier is a lightweight alternative for the Istio ingress as its deployment consists only of an envoy proxy and a control plane. If Kourier is satisfactory, no further configurations are required.
+    Kourier is a lightweight implementation of the KIngress resource for clusters which don't need other ingress features. The Knative [Quickstart](../getting-started/README.md) installs Kourier for the network layer.
 
     Kourier is a fine choice for all platforms, but for IBM-Z and IBM-P platforms it's the only supported option and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
 === "Contour"
 
-    Knative Serving network layer
+    Knative Serving network layer architecture:
 
     ```mermaid
     ---
@@ -90,7 +90,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style top fill:transparent
     ```
 
-    Contour network layer
+    Contour network layer:
 
     ```mermaid
     ---
@@ -101,15 +101,18 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     flowchart LR
      subgraph bottom[" "]
         direction LR
-            envoy["Envoy deployment<br>contour-system namespace"]
-            kourier["net-contour<br>controller"]
-            kingress2["KIngress class:<br>contour.ingress.networking.knative.dev"]
+        C1["KIngress objects"]
+        C2("Knative<br>net-contour")
+        C3["HTTPProxy<br>projectcontour.io"]
+        C4("Contour")
       end
-        kingress2 -- read by --> kourier
-        kourier -- programs --> envoy
+        C1 -- "read by" --> C2
+        C2 -- "creates" --> C3
+        C3 -- "read by" --> C4
     
         style envoy fill:#BBDEFB
-        style kourier fill:#FFE0B2
+        style C2 fill:#FFE0B2
+        style C3 fill:#FFE0B2
         style bottom fill:transparent
     ```
 
@@ -117,7 +120,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
 === "Istio"
 
-    Knative Serving network layer
+    Knative Serving network layer architecture:
 
     ```mermaid
     ---
@@ -139,7 +142,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style top fill:transparent
     ```
 
-    Istio network layer
+    Istio network layer:
 
     ```mermaid
     ---
