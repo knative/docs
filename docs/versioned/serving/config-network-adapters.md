@@ -99,24 +99,24 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       theme: default
     ---
     flowchart LR
-     subgraph bottom[" "]
-        direction LR
-        C1["KIngress objects"]
-        C2("Knative<br>net-contour")
-        C3["HTTPProxy<br>projectcontour.io"]
-        C4("Contour")
-      end
-        C1 -- "read by" --> C2
-        C2 -- "creates" --> C3
-        C3 -- "read by" --> C4
-    
-        style envoy fill:#BBDEFB
-        style C2 fill:#FFE0B2
-        style C3 fill:#FFE0B2
-        style bottom fill:transparent
+         subgraph bottom[" "]
+            direction LR
+            C1["KIngress objects"]
+            C2("Knative<br>net-contour")
+            C3["HTTPProxy<br>projectcontour.io"]
+            C4("Contour")
+          end
+            C1 -- "read by" --> C2
+            C2 -- "creates" --> C3
+            C3 -- "read by" --> C4
+        
+            style C2 fill:#FFE0B2
+            style C3 fill:#BBDEFB
+            style C4 fill:#BBDEFB
+            style bottom fill:transparent
     ```
 
-    The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy but don't need a full-feature service mesh.
+    The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy or don't need a full-feature service mesh.
 
 === "Istio"
 
@@ -167,24 +167,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
 
-=== "Ingress Gateway"
-
-    ```mermaid
-    ---
-    config:
-      layout: elk
-      theme: default
-      look: neo
-    ---
-    flowchart LR
-        Client["External&nbsp;Client"] --> CGW["Custom&nbsp;Ingress&nbsp;Gateway"]
-        CGW --> KIGW["Knative&nbsp;Ingress&nbsp;Gateway"] & Client
-        KIGW --> Revision["Knative&nbsp;Revision"] & CGW
-        Revision --> KIGW
-    ```
-
     Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own.
-
 
     See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
@@ -217,7 +200,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The Knative `net-gateway-api` is a KIngress implementation and testing for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). Good for teams adopting the Gateway API to unify ingress across Kubernetes.
 
-    The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested though other Gateway API implementations should work. Currently, there is no native Gateway API support for Kourier. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
+    The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
     The controller that Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
 

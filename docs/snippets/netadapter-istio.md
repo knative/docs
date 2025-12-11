@@ -13,7 +13,7 @@ Use the following steps to install Istio and set it as the ingress conroller.
     kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml") }}
     ```
 
-1. Set the `config-network` ConfigMap to use Istio:
+1. Configure the `config-network` ConfigMap to use Istio:
 
     ```bash
       kubectl patch configmap/config-network \
