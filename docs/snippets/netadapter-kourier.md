@@ -3,7 +3,7 @@ Use the following steps to install Kourier and set it as the ingress controller.
 1. Install the Knative Kourier controller:
 
     ```bash
-    kubectl apply -f https://github.com/knative/net-kourier/releases/latest/download/kourier.yaml
+     kubectl apply -f {{ artifact(repo="net-kourier",file="kourier.yaml") }}
     ```
 
 1. Configure Knative Serving to use Kourier by default:
