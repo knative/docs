@@ -26,9 +26,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
       theme: default
     ---
     flowchart LR
-      subgraph flow[" "]
+      subgraph top[" "]
         direction LR
-            kingress1["Ingress object<br>networking.internal.knative.dev<br>(KIngress)"]
+            kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
             serving["Serving<br>controller"]
             route["Route object"]
       end
@@ -36,7 +36,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         serving -- creates --> kingress1
         style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
         style serving fill:#FFE0B2
-        style flow    background:transparent, border:none,fill:transparent,stroke:#000000
+        style top fill:transparent
     ```
 
 
@@ -51,7 +51,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         direction LR
             envoy["Envoy deployment<br>kourier-system namespace"]
             kourier["net-kourier<br>controller"]
-            kingress2["KIngress<br>Class: kourier.ingress.networking.knative.dev"]
+            kingress2["KIngress class:<br>kourier.ingress.networking.knative.dev"]
       end
         kingress2 -- read by --> kourier
         kourier -- programs --> envoy
