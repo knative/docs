@@ -17,7 +17,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
 === "Kourier"
 
-    The following diagram depicts the flow of KIngress objects, as read by Knative serving.
+    Knative Serving network layer
 
     ```mermaid
     ---
@@ -39,6 +39,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style top fill:transparent
     ```
 
+    Kourier network layer
 
     ```mermaid
     ---
@@ -67,31 +68,98 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
 === "Contour"
 
+    Knative Serving network layer
+
     ```mermaid
     ---
     config:
-      theme: default
       layout: elk
-      look: neo
+      theme: default
     ---
     flowchart LR
-    C1["Knative<br>net-contour"] -- creates --> C2["KIngress&nbsp;objects"]
-    C2 --> C3["Class: contour.ingress.networking.knative.dev"]
+      subgraph top[" "]
+        direction LR
+            kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
+            serving["Serving<br>controller"]
+            route["Route object"]
+      end
+        route -- read by --> serving
+        serving -- creates --> kingress1
+        style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
+        style serving fill:#FFE0B2
+        style top fill:transparent
+    ```
+
+    Contour network layer
+
+    ```mermaid
+    ---
+    config:
+      layout: elk
+      theme: default
+    ---
+    flowchart LR
+     subgraph bottom[" "]
+        direction LR
+            envoy["Envoy deployment<br>contour-system namespace"]
+            kourier["net-contour<br>controller"]
+            kingress2["KIngress class:<br>contour.ingress.networking.knative.dev"]
+      end
+        kingress2 -- read by --> kourier
+        kourier -- programs --> envoy
+    
+        style envoy fill:#BBDEFB
+        style kourier fill:#FFE0B2
+        style bottom fill:transparent
     ```
 
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy but don't need a full-feature service mesh.
 
 === "Istio"
 
+    Knative Serving network layer
+
     ```mermaid
     ---
     config:
-      theme: default
       layout: elk
+      theme: default
     ---
     flowchart LR
-        I1["Knative&nbsp;net-istio"] -- creates --> I2["Service + Gateway"]
-        I2 --> I3["Class: istio.ingress.networking.knative.dev<br>No native Ingress objects"]
+      subgraph top[" "]
+        direction LR
+            kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
+            serving["Serving<br>controller"]
+            route["Route object"]
+      end
+        route -- read by --> serving
+        serving -- creates --> kingress1
+        style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
+        style serving fill:#FFE0B2
+        style top fill:transparent
+    ```
+
+    Istio network layer
+
+    ```mermaid
+    ---
+    config:
+      layout: elk
+      theme: default
+    ---
+    flowchart LR
+     subgraph bottom[" "]
+        direction LR
+            envoy["Envoy deployment<br>istio-system namespace"]
+            kourier["net-istio<br>controller"]
+            kingress2["KIngress class:<br>istio.ingress.networking.knative.dev"]
+      end
+        kingress2 -- read by --> kourier
+        kourier -- programs --> envoy
+    
+        style envoy fill:#BBDEFB
+        style kourier fill:#FFE0B2
+        style bottom fill:transparent
     ```
 
     The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
