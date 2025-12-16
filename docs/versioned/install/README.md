@@ -101,6 +101,13 @@ If you don't have an ingress that meets the requirements, Knative provides [net-
 
     The Kubernetes [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) (beta).
 
+- Higress (Third-party integration)
+
+     [Higress](https://higress.cn/en/) provides enhanced traffic governance, authentication, WAF protection, and observability for Knative services with WASM plugin extensibility. See [Higress: A Best Practice for Knative Ingress Gateway](https://www.alibabacloud.com/blog/higress-a-best-practice-for-knative-ingress-gateway_600549).
+    
+    !!! note
+        This integration is not managed by the Knative community.
+
 ### Messaging plugins
 
 Knative has default lightweight in-memory messaging implementation if you don't already have a solution.
