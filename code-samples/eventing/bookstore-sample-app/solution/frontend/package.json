@@ -13,7 +13,7 @@
     "@heroicons/react": "^2.1.3",
     "@nextui-org/react": "^2.2.10",
     "framer-motion": "^11.0.22",
-    "next": "15.5.7",
+    "next": "15.5.9",
     "next-themes": "^0.3.0",
     "next-ws": "^2.1.4",
     "react": "^18",
