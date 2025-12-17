@@ -15,7 +15,7 @@ vendors for what is or is not supported.
 <!-- TODO: Talk about criteria for inclusion here?  a la Conformance -->
 
 Here is a list of commercial Knative products (alphabetically):
-
+- [Knative on Alibaba Cloud](https://www.alibabacloud.com/help/en/ack/ack-managed-and-ack-dedicated/user-guide/knative-overview): Alibaba Cloud provides users with the ability to deploy Serverless containers through standardized Serverless frameworks like Knative. Users using the key capabilities include autoscaling (including scaling to zero), routing and traffic splitting, and easy rollouts and rollbacks. We help users in multiple industries implement the Knative production environment, including AI, medical, automobile and finance, etc. We also help users accelerate iterations of AI inference models through Knative, and solve Pod cold start problems through reserved instance solutions
 - [Cloud Native Runtimes for VMware Tanzu](https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/1.0/tanzu-cloud-native-runtimes-1-0/GUID-cnr-overview.html): A serverless application runtime for Kubernetes that is based on Knative, and runs on a single Kubernetes cluster
 - [Control Plane Corporation](https://controlplane.com/): A hybrid platform that combines the services, regions and computing power of AWS, GCP, Azure and any other public or private cloud to provide developers with a flexible yet unbreakable global environment for building backend applications and services. 
 - [Gardener](https://gardener.cloud/docs/guides/applications/knative-install/): Install Knative in Gardener's vanilla Kubernetes clusters to add an extra layer of serverless runtime.
