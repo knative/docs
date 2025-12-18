@@ -60,6 +60,15 @@ The `run` command builds an image for your function if required, and runs this i
     kn func run --build=false
     ```
 
+!!! tip "Private Registry Authentication"
+    For private registries that require authentication, you can set credentials using environment variables:
+    
+    - `FUNC_USERNAME`: The username for registry authentication
+    - `FUNC_PASSWORD`: The password for registry authentication
+    
+    These variables work with all builders: `host`, `s2i`, and `pack`.
+    
+    **Note:** Using environment variables is more secure than the `--password` flag because command-line arguments are visible to all users on the system via `ps`.
 You can verify that your function has been successfully run by using the `invoke` command and observing the output:
 
 === "func"
