@@ -66,6 +66,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     Kourier is a fine choice for all platforms, but for IBM-Z and IBM-P platforms it's the only supported option and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
+    **Configuration options**
+
+
 === "Contour"
 
     Knative Serving network layer architecture:
@@ -117,6 +120,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     ```
 
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy or don't need a full-feature service mesh.
+
+    **Configuration options**
+
 
 === "Istio"
 
@@ -171,6 +177,8 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
+    **Configuration options**
+
 === "Gateway API"
 
     ```mermaid
@@ -203,6 +211,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
     The controller that Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
+
+    **Configuration options**
+
 
 ## Determine current state
 
