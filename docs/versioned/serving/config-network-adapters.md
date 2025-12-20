@@ -68,7 +68,6 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     **Configuration options**
 
-
 === "Contour"
 
     Knative Serving network layer architecture:
@@ -122,7 +121,6 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy or don't need a full-feature service mesh.
 
     **Configuration options**
-
 
 === "Istio"
 
@@ -214,14 +212,13 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     **Configuration options**
 
-
 ## Determine current state
 
 Use the following command to determine which ingress controllers are installed and their status.
 
-    ``` bash
-    kubectl get pods -n knative-serving
-    ```
+``` bash
+kubectl get pods -n knative-serving
+```
 
 The Knative team tests the following ingress controllers:
 
@@ -237,27 +234,27 @@ If you want to change the controller, install and configure the new controller a
 
 You can determine the controller in use by examining the `config-network.yaml`:
 
-    ```bash
-    kubectl get cm config-network -n knative-serving -o yaml
-    ```
+```bash
+kubectl get cm config-network -n knative-serving -o yaml
+```
 
 Look for the `ingress-class` key. It could also be the `ingress.class` key with a dot. The dash usage is more current and supersedes any key with the dot. In the following example, the `ingress.class` key was initially set for the Kourier controller, but is now set to Contour because the ingress key with a dash takes precedence.
 
-    ```yml
-    ingress-class: contour.ingress.networking.knative.dev
-    ingress.class: kourier.ingress.networking.knative.dev
-    ```
+```yml
+ingress-class: contour.ingress.networking.knative.dev
+ingress.class: kourier.ingress.networking.knative.dev
+```
 
 If you want to switch back to a previously installed controller, patch the `config-network` ConfigMap with the new controller. In the following example Kourier is used because of the dash in `ingress-class`.
 
-    ```bash
-    kubectl patch cm config-network -n knative-serving \
-      --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
-    ```
+```bash
+kubectl patch cm config-network -n knative-serving \
+  --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
+```
 
 You can remove an unused key with a dot with the following command:
 
-    ```bash
-    kubectl patch configmap config-network -n knative-serving \                                                    
-    --type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
-    ```
+```bash
+kubectl patch configmap config-network -n knative-serving \                                                    
+--type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
+```
