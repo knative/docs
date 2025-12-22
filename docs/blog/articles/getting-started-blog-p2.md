@@ -254,9 +254,9 @@ which your PR needs in order to get merged are "lgtm" and "approved". Anyone can
 Additionally, if you have a "do-not-merge/hold" (which you add by commenting "/hold"), or a "do-not-merge/work-in-progess" label (which you get by making a draft PR), the bot
 will not merge your changes. 
 
-In order for tests to pass on your PR, they will need to be run. By default, however, they are not run! In order for them to run, a member of the knative or knative-sandbox organization
+In order for tests to pass on your PR, they will need to be run. By default, however, they are not run! In order for them to run, a member of the knative or knative-extensions organization
 will have to comment "/ok-to-test" (which organization they must be a member of depends on which organization your repository is under). The "/ok-to-test" command adds the "ok-to-test"
-label to your PR. Generally speaking, whoever reviews your PR will do this, but if they haven't you can always ask them why they haven't. If you join the knative or knative-sandbox
+label to your PR. Generally speaking, whoever reviews your PR will do this, but if they haven't you can always ask them why they haven't. If you join the knative or knative-extensions
 organizations, you will no longer need to have the ok-to-test label applied to your PRs - prow will run the tests automatically! So, once you have made a few contributions,
 join the organizations!
 
