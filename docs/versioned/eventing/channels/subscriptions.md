@@ -178,15 +178,14 @@ kn subscription describe mysubscription
 You can update an existing Subscription by using the `kn` CLI tool or by applying an updated YAML file.
 
 === "kn"
-    The `kn subscription create` command can be used to update an existing Subscription. If a Subscription with the specified name already exists, the command updates it with the new configuration.
+    Use the `kn subscription update` command to modify an existing Subscription.
 
     **Example 1: Update the Sink of a Subscription**
 
     To change the Subscriber (Sink) of an existing Subscription named `mysubscription` to a different Knative Service:
 
     ```bash
-    kn subscription create mysubscription \
-      --channel mychannel \
+    kn subscription update mysubscription \
       --sink ksvc:new-service
     ```
 
@@ -195,8 +194,7 @@ You can update an existing Subscription by using the `kn` CLI tool or by applyin
     To add or update the dead letter sink for event delivery failures:
 
     ```bash
-    kn subscription create mysubscription \
-      --channel mychannel \
+    kn subscription update mysubscription \
       --sink ksvc:myservice \
       --sink-dead-letter ksvc:error-handler
     ```
@@ -206,8 +204,7 @@ You can update an existing Subscription by using the `kn` CLI tool or by applyin
     To change where reply events are sent:
 
     ```bash
-    kn subscription create mysubscription \
-      --channel mychannel \
+    kn subscription update mysubscription \
       --sink ksvc:myservice \
       --sink-reply channel:reply-channel
     ```
@@ -242,7 +239,7 @@ You can delete a Subscription by using the `kn` or `kubectl` CLI tools.
 
 === "kubectl"
     ```bash
-    kubectl subscription delete <subscription-name>
+    kubectl delete subscription <subscription-name>
     ```
 
 ## Next steps
