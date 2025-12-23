@@ -140,8 +140,77 @@ You can print details about a Subscription by using the `kn` CLI tool:
 ```bash
 kn subscription describe <subscription-name>
 ```
-<!--TODO: Add an example command and output-->
-<!--TODO: Add details for kn Subscription update - existing generated docs weren't clear enough, need better explained examples-->
+
+**Example:**
+
+```bash
+kn subscription describe mysubscription
+```
+
+!!! Success "Expected output"
+    ```{ .bash .no-copy }
+    Name:            mysubscription
+    Namespace:       default
+    Annotations:     messaging.knative.dev/creator=user@example.com
+                     messaging.knative.dev/lastModifier=user@example.com
+    Age:             1h
+    Channel:         Channel:mychannel (messaging.knative.dev/v1)
+    Subscriber:
+      URI:           http://myservice.default.svc.cluster.local
+    Reply:
+      Name:          myreply
+      Kind:          InMemoryChannel
+      API Version:   messaging.knative.dev/v1
+    DeadLetterSink:
+      Name:          mydlq
+      Kind:          Service
+      API Version:   serving.knative.dev/v1
+
+    Conditions:
+      OK TYPE                  AGE REASON
+      ++ Ready                  1h
+      ++ AddedToChannel         1h
+      ++ ChannelReady           1h
+    ```
+
+## Updating a Subscription
+
+You can update an existing Subscription by using the `kn` CLI tool or by applying an updated YAML file.
+
+=== "kn"
+    Use the `kn subscription update` command to modify an existing Subscription.
+
+    **Example:**
+
+    ```bash
+    kn subscription update mysubscription \
+      --sink ksvc:myservice \
+      --sink-dead-letter ksvc:error-handler \
+      --sink-reply channel:reply-channel
+    ```
+
+    You can update individual parameters as needed:
+    - `--sink`: Change the subscriber (destination for events)
+    - `--sink-dead-letter`: Add or update the dead letter sink for failed deliveries
+    - `--sink-reply`: Update where reply events are sent
+
+    !!! note
+        When updating a Subscription, you must provide all the configuration parameters you want to keep. Any parameters not specified in the update command will use default values.
+
+=== "kubectl"
+    1. Get the current Subscription configuration:
+
+        ```bash
+        kubectl get subscription <subscription-name> -o yaml > subscription.yaml
+        ```
+
+    1. Edit the YAML file to make your desired changes to the `spec` section.
+
+    1. Apply the updated YAML file:
+
+        ```bash
+        kubectl apply -f subscription.yaml
+        ```
 
 ## Deleting Subscriptions
 
