@@ -224,7 +224,7 @@ You can delete a Subscription by using the `kn` or `kubectl` CLI tools.
 
 === "kubectl"
     ```bash
-    kubectl delete subscription <subscription-name>
+    kubectl subscription delete <subscription-name>
     ```
 
 ## Next steps
