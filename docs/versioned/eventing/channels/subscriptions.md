@@ -140,8 +140,95 @@ You can print details about a Subscription by using the `kn` CLI tool:
 ```bash
 kn subscription describe <subscription-name>
 ```
-<!--TODO: Add an example command and output-->
-<!--TODO: Add details for kn Subscription update - existing generated docs weren't clear enough, need better explained examples-->
+
+**Example:**
+
+```bash
+kn subscription describe mysubscription
+```
+
+!!! Success "Expected output"
+    ```{ .bash .no-copy }
+    Name:            mysubscription
+    Namespace:       default
+    Annotations:     messaging.knative.dev/creator=user@example.com
+                     messaging.knative.dev/lastModifier=user@example.com
+    Age:             1h
+    Channel:         Channel:mychannel (messaging.knative.dev/v1)
+    Subscriber:
+      URI:           http://myservice.default.svc.cluster.local
+    Reply:
+      Name:          myreply
+      Kind:          InMemoryChannel
+      API Version:   messaging.knative.dev/v1
+    DeadLetterSink:
+      Name:          mydlq
+      Kind:          Service
+      API Version:   serving.knative.dev/v1
+
+    Conditions:
+      OK TYPE                  AGE REASON
+      ++ Ready                  1h
+      ++ AddedToChannel         1h
+      ++ ChannelReady           1h
+    ```
+
+## Updating a Subscription
+
+You can update an existing Subscription by using the `kn` CLI tool or by applying an updated YAML file.
+
+=== "kn"
+    The `kn subscription create` command can be used to update an existing Subscription. If a Subscription with the specified name already exists, the command updates it with the new configuration.
+
+    **Example 1: Update the Sink of a Subscription**
+
+    To change the Subscriber (Sink) of an existing Subscription named `mysubscription` to a different Knative Service:
+
+    ```bash
+    kn subscription create mysubscription \
+      --channel mychannel \
+      --sink ksvc:new-service
+    ```
+
+    **Example 2: Add a Dead Letter Sink**
+
+    To add or update the dead letter sink for event delivery failures:
+
+    ```bash
+    kn subscription create mysubscription \
+      --channel mychannel \
+      --sink ksvc:myservice \
+      --sink-dead-letter ksvc:error-handler
+    ```
+
+    **Example 3: Update the Reply Sink**
+
+    To change where reply events are sent:
+
+    ```bash
+    kn subscription create mysubscription \
+      --channel mychannel \
+      --sink ksvc:myservice \
+      --sink-reply channel:reply-channel
+    ```
+
+    !!! note
+        When updating a Subscription, you must provide all the configuration parameters you want to keep. Any parameters not specified in the update command will use default values.
+
+=== "kubectl"
+    1. Get the current Subscription configuration:
+
+        ```bash
+        kubectl get subscription <subscription-name> -o yaml > subscription.yaml
+        ```
+
+    1. Edit the YAML file to make your desired changes to the `spec` section.
+
+    1. Apply the updated YAML file:
+
+        ```bash
+        kubectl apply -f subscription.yaml
+        ```
 
 ## Deleting Subscriptions
 
