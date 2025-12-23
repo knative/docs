@@ -180,34 +180,19 @@ You can update an existing Subscription by using the `kn` CLI tool or by applyin
 === "kn"
     Use the `kn subscription update` command to modify an existing Subscription.
 
-    **Example 1: Update the Sink of a Subscription**
-
-    To change the Subscriber (Sink) of an existing Subscription named `mysubscription` to a different Knative Service:
-
-    ```bash
-    kn subscription update mysubscription \
-      --sink ksvc:new-service
-    ```
-
-    **Example 2: Add a Dead Letter Sink**
-
-    To add or update the dead letter sink for event delivery failures:
+    **Example:**
 
     ```bash
     kn subscription update mysubscription \
       --sink ksvc:myservice \
-      --sink-dead-letter ksvc:error-handler
-    ```
-
-    **Example 3: Update the Reply Sink**
-
-    To change where reply events are sent:
-
-    ```bash
-    kn subscription update mysubscription \
-      --sink ksvc:myservice \
+      --sink-dead-letter ksvc:error-handler \
       --sink-reply channel:reply-channel
     ```
+
+    You can update individual parameters as needed:
+    - `--sink`: Change the subscriber (destination for events)
+    - `--sink-dead-letter`: Add or update the dead letter sink for failed deliveries
+    - `--sink-reply`: Update where reply events are sent
 
     !!! note
         When updating a Subscription, you must provide all the configuration parameters you want to keep. Any parameters not specified in the update command will use default values.
