@@ -227,7 +227,7 @@ And this is it! You're now ready to send requests:
 $ curl http://localhost:8080/Signup/Signup --json '{"username": "slinkydeveloper", "name": "Francesco", "surname": "Guardiani", "password": "Pizza-without-pineapple"}'
 ```
 
-Please note: some parts of the code example are omitted for brevity, check the [full example](https://github.com/restatedev/examples/blob/main/tutorials/knative-go/README.md) for more details and how to run this locally with `kind`.
+Please note: some parts of the code example are omitted for brevity, check the [full example](https://github.com/restatedev/examples/blob/main/go/integrations/knative-go/README.md) for more details and how to run this locally with `kind`.
 
 ### We got your back
 
