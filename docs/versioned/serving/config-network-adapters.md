@@ -11,12 +11,6 @@ This page provides configuration guidance for Knative networking. You can config
 
 For installation instructions, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md)
 
-## Network layer options
-
-Review the following tabs to determine the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
-
-The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
-
 ### Common ingress configurations
 
 All three ingress network layers, Contour, Istio, and Kourier, have the following common capabilities:
@@ -25,7 +19,11 @@ All three ingress network layers, Contour, Istio, and Kourier, have the followin
 - Timeout policies: Controls for idle, and response stream timeouts.
 - Traffic visibility: Mechanisms to expose services externally or cluster-locally.
 
-Review the tabs to learn about their unique configurations.
+## Network layer options
+
+Review the following tabs to determine the optimal networking layer for your cluster and their unique configurations. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+
+The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
 === "Kourier"
 
@@ -142,7 +140,7 @@ Review the tabs to learn about their unique configurations.
     - CORS policy configuration.
     - Direct visibility classes for external and internal traffic.
 
- === "Istio"
+=== "Istio"
 
     Knative Serving network layer architecture:
 
@@ -199,7 +197,6 @@ Review the tabs to learn about their unique configurations.
 
     - Advanced gateway selection with label selectors for fine-grained routing.
     - Support for mesh-aware and cluster-local access.
-
 
 === "Gateway API"
 
