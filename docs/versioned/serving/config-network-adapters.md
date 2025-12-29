@@ -9,7 +9,7 @@ function: how-to
 
 This page provides configuration guidance for Knative networking. You can configure Ingress controls, service-meshes, and gateways.
 
-For installation instructions, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md)
+For installation instructions, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md).
 
 ### Common ingress configurations
 
