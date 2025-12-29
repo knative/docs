@@ -23,6 +23,8 @@ All three ingress network layers, Contour, Istio, and Kourier, have the followin
 - Timeout policies: Controls for idle, and response stream timeouts.
 - Traffic visibility: Mechanisms to expose services externally or cluster-locally.
 
+Review the tabs to learn about their unique configurations.
+
 === "Kourier"
 
     Knative Serving network layer architecture:
