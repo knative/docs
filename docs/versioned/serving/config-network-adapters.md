@@ -15,6 +15,14 @@ Review the following tabs to determine the optimal networking layer for your clu
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
+### Common ingress configurations
+
+All three ingress network layers, Contour, Istio, and Kourier, have the following common capabilities:
+
+- TLS and certificate management: Configurable secrets for encrypted traffic.
+- Timeout policies: Controls for idle, and response stream timeouts.
+- Traffic visibility: Mechanisms to expose services externally or cluster-locally.
+
 === "Kourier"
 
     Knative Serving network layer architecture:
@@ -66,7 +74,12 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     Kourier is a fine choice for all platforms, but for IBM-Z and IBM-P platforms it's the only supported option and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
-    **Configuration options**
+    In addition to the [common configurations](#common-configurations), Kourier provides the following configuration options:
+
+    - Access logging.
+    - Deep Envoy tuning including proxy-protocol, cipher suites, trusted hops, and remote address.
+    - External authorization, `extauthz`.
+    - Experimental features: CryptoMB, internal TLS.
 
 === "Contour"
 
@@ -120,9 +133,12 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy or don't need a full-feature service mesh.
 
-    **Configuration options**
+    In addition to the [common configurations](#common-configurations), Contour provides the following configuration options:
 
-=== "Istio"
+    - CORS policy configuration.
+    - Direct visibility classes for external and internal traffic.
+
+ === "Istio"
 
     Knative Serving network layer architecture:
 
@@ -175,7 +191,11 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
-    **Configuration options**
+    In addition to the [common configurations](#common-configurations), Istio provides the following configuration options:
+
+    - Advanced gateway selection with label selectors for fine-grained routing.
+    - Support for mesh-aware and cluster-local access.
+
 
 === "Gateway API"
 
@@ -204,15 +224,51 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
     style underlying fill:#fff3e0,stroke:#ef6c00
     ```
 
-    The Knative `net-gateway-api` is a KIngress implementation and testing for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). Good for teams adopting the Gateway API to unify ingress across Kubernetes.
+    The Knative `net-gateway-api` is a KIngress implementation for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). A good choice for teams adopting the Gateway API to unify ingress across Kubernetes.
 
     The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
-    The controller that Knative uses is determined by which Gateway API-compatible controller you install and configure in your cluster. 
+    Knative assumes two gateways in the cluster: 
 
-    **Configuration options**
+    - Externally exposed - Defines the Gateway to be used for external traffic.
+    - Internally-only exposed - Defines the Gateway to be used for cluster local traffic.
+    
+    When gateways are installed and configures, the `config-gateway` ConfigMap is updated to track these two gateways. These values can be set using the following environment variables:
 
-## Determine current state
+    - class: `$GATEWAY_CLASS_NAME`
+    - gateway: `$NAMESPACE/$GATEWAY_NAME`
+    - service: `$NAMESPACE/$SERVICE_NAME`
+    
+    The variable `$SERVICE_NAME` is the Kubernetes Service name that points to the pods in the Gateway implementation.
+
+    Use the following command to determine the current configuration:
+
+    ```bash
+    kubectl describe configmaps config-gateway -n knative-serving
+    ```
+
+    The following result shows an example of an Istio gateway implementation:
+
+    ```bash
+    # external-gateways defines the Gateway to be used for external traffic
+    external-gateways: |
+    - class: istio
+      gateway: istio-system/knative-gateway
+      service: istio-system/istio-ingressgateway
+      supported-features:
+      - HTTPRouteRequestTimeout
+
+    # local-gateways defines the Gateway to be used for cluster local traffic
+    local-gateways: |
+      - class: istio
+        gateway: istio-system/knative-local-gateway
+        service: istio-system/knative-local-gateway
+        supported-features:
+        - HTTPRouteRequestTimeout
+    ```
+    
+
+## Determine current ingress
 
 Use the following command to determine which ingress controllers are installed and their status.
 
@@ -230,12 +286,14 @@ Each ingress controller manages only those ingress objects that are annotated wi
 
 ## Changing the controller
 
-If you want to change the controller, install and configure the new controller as instructed in the [Network layer options](#network-layer-options). There is no requirement to remove ingress controllers that are not in use.
+If you want to change the controller, install and configure the new controller as instructed in the [Network layer options](#network-layer-options).
+
+Be aware that changing the Ingress class of an existing Route can result in undefined behavior.
 
 You can determine the controller in use by examining the `config-network.yaml`:
 
 ```bash
-kubectl get cm config-network -n knative-serving -o yaml
+kubectl describe configmaps config-network -n knative-serving
 ```
 
 Look for the `ingress-class` key. It could also be the `ingress.class` key with a dot. The dash usage is more current and supersedes any key with the dot. In the following example, the `ingress.class` key was initially set for the Kourier controller, but is now set to Contour because the ingress key with a dash takes precedence.
