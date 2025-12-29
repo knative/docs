@@ -92,6 +92,20 @@ Name | Type | Description
 `kn.configuration.name` | string | Knative Configuration name associated with this Revision
 `kn.revision.name` | string | The name of the Revision
 
+### `activator_autoscaler_reachable`
+
+**Instrument Type:** Int64Gauge
+
+**Unit ([UCUM](https://ucum.org)):** {reachable}
+
+**Description:** Whether the autoscaler is reachable from the activator (1 = reachable, 0 = not reachable)
+
+This metric helps operators identify connectivity issues between the activator and autoscaler components. The metric is recorded:
+
+- When stats are successfully sent to the autoscaler (value = 1)
+- When stats fail to send to the autoscaler (value = 0)
+- Periodically every 5 seconds based on connection status check
+
 ### HTTP metrics
 
 Since the activator receives and forwards requests to the user workload it has both HTTP server and client metrics.
