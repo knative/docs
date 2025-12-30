@@ -11,17 +11,15 @@ This page provides configuration guidance for Knative networking. You can config
 
 For installation instructions, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md).
 
-### Common ingress configurations
-
-All three ingress network layers, Contour, Istio, and Kourier, have the following common capabilities:
-
-- TLS and certificate management: Configurable secrets for encrypted traffic.
-- Timeout policies: Controls for idle, and response stream timeouts.
-- Traffic visibility: Mechanisms to expose services externally or cluster-locally.
-
 ## Network layer options
 
-Review the following tabs to determine the optimal networking layer for your cluster and their unique configurations. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+Review the tabbed content in this section to determine the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+
+The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
+
+- Certificate management: Configurable secrets for TLS encrypted traffic.
+- Timeout policies: Controls for idle, and response stream timeouts.
+- Traffic visibility: Mechanisms to expose services externally or cluster-locally.
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
@@ -72,11 +70,11 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style bottom fill:transparent
     ```
 
-    Kourier is a lightweight implementation of the KIngress resource for clusters which don't need other ingress features. The Knative [Quickstart](../getting-started/README.md) installs Kourier for the network layer.
+    Kourier is a lightweight implementation of the KIngress resource for clusters that don't need other ingress features and is optimal for learning and prototyping. The Knative [Quickstart](../getting-started/README.md) installs Kourier for the network layer.
 
-    Kourier is a fine choice for all platforms, but for IBM-Z and IBM-P platforms it's the only supported option and requires additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+    Kourier is a fine choice for all platforms. It is the only supported option for IBM-Z and IBM-P platforms. These platforms require additional steps as documented in [Install Serving th YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
-    In addition to the [common configurations](#common-configurations), Kourier provides the following configuration options:
+    Kourier provides the following additional configuration options:
 
     - Access logging.
     - Deep Envoy tuning including proxy-protocol, cipher suites, trusted hops, and remote address.
@@ -133,9 +131,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
             style bottom fill:transparent
     ```
 
-    The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, teams who want to use a single Ingress controller, and are already using Contour envoy or don't need a full-feature service mesh.
+    The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, are already using Contour envoy, or don't need a full-feature service mesh.
 
-    In addition to the [common configurations](#common-configurations), Contour provides the following configuration options:
+    Contour provides the following additional configuration options:
 
     - CORS policy configuration.
     - Direct visibility classes for external and internal traffic.
@@ -189,11 +187,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Good for enterprises already running Istio or needing advanced service mesh features.
 
-    Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own.
+    Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own. See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
-    See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
-
-    In addition to the [common configurations](#common-configurations), Istio provides the following configuration options:
+    Istio provides the following additional configuration options:
 
     - Advanced gateway selection with label selectors for fine-grained routing.
     - Support for mesh-aware and cluster-local access.
@@ -229,47 +225,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
 
     The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
-    Knative assumes two gateways in the cluster: 
-
-    - Externally exposed - Defines the Gateway to be used for external traffic.
-    - Internally-only exposed - Defines the Gateway to be used for cluster local traffic.
-    
-    When gateways are installed and configures, the `config-gateway` ConfigMap is updated to track these two gateways. These values can be set using the following environment variables:
-
-    - class: `$GATEWAY_CLASS_NAME`
-    - gateway: `$NAMESPACE/$GATEWAY_NAME`
-    - service: `$NAMESPACE/$SERVICE_NAME`
-    
-    The variable `$SERVICE_NAME` is the Kubernetes Service name that points to the pods in the Gateway implementation.
-
-    Use the following command to determine the current configuration:
-
-    ```bash
-    kubectl describe configmaps config-gateway -n knative-serving
-    ```
-
-    The following result shows an example of an Istio gateway implementation:
-
-    ```bash
-    # external-gateways defines the Gateway to be used for external traffic
-    external-gateways: |
-    - class: istio
-      gateway: istio-system/knative-gateway
-      service: istio-system/istio-ingressgateway
-      supported-features:
-      - HTTPRouteRequestTimeout
-
-    # local-gateways defines the Gateway to be used for cluster local traffic
-    local-gateways: |
-      - class: istio
-        gateway: istio-system/knative-local-gateway
-        service: istio-system/knative-local-gateway
-        supported-features:
-        - HTTPRouteRequestTimeout
-    ```
-    
-
-## Determine current ingress
+## Ingress configurations
 
 Use the following command to determine which ingress controllers are installed and their status.
 
@@ -285,9 +241,7 @@ The Knative team tests the following ingress controllers:
 
 Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses a default value of the key based on the `network-config` ConfigMap. See [Changing the ingress controller](#change-the-controller) for important information about using this key.
 
-## Changing the controller
-
-If you want to change the controller, install and configure the new controller as instructed in the [Network layer options](#network-layer-options).
+If you want to change the controller, install [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md).
 
 Be aware that changing the Ingress class of an existing Route can result in undefined behavior.
 
@@ -317,3 +271,44 @@ You can remove an unused key with a dot with the following command:
 kubectl patch configmap config-network -n knative-serving \                                                    
 --type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
 ```
+## Gateway configurations
+
+Knative assumes two gateways in the cluster:
+
+- Externally exposed - Defines the Gateway to be used for external traffic.
+- Internally-only exposed - Defines the Gateway to be used for cluster local traffic.
+
+When gateways are installed and configures, the `config-gateway` ConfigMap is updated to track these two gateways. These values can be set using the following environment variables:
+
+- class: `$GATEWAY_CLASS_NAME`
+- gateway: `$NAMESPACE/$GATEWAY_NAME`
+- service: `$NAMESPACE/$SERVICE_NAME`
+
+The variable `$SERVICE_NAME` is the Kubernetes Service name that points to the pods in the Gateway implementation.
+
+Use the following command to determine the current configuration:
+
+```bash
+kubectl describe configmaps config-gateway -n knative-serving
+```
+
+The following `config-gateway` keys shows an example of an Istio gateway implementation:
+
+```bash
+# external-gateways defines the Gateway to be used for external traffic
+external-gateways: |
+- class: istio
+  gateway: istio-system/knative-gateway
+  service: istio-system/istio-ingressgateway
+  supported-features:
+  - HTTPRouteRequestTimeout
+
+# local-gateways defines the Gateway to be used for cluster local traffic
+local-gateways: |
+  - class: istio
+    gateway: istio-system/knative-local-gateway
+    service: istio-system/knative-local-gateway
+    supported-features:
+    - HTTPRouteRequestTimeout
+```
+
