@@ -92,7 +92,7 @@ Name | Type | Description
 `kn.configuration.name` | string | Knative Configuration name associated with this Revision
 `kn.revision.name` | string | The name of the Revision
 
-### `activator_autoscaler_reachable`
+### `kn.activator.autoscaler.reachable`
 
 **Instrument Type:** Int64Gauge
 
