@@ -23,6 +23,8 @@ The Knative tested ingress controllers (Contour, Istio, and Kourier) have the fo
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
+There are also third-party Knative networking options and Knative products available but are not tested or managed by the Knative community. For more information, see [Knative offerings](../install/knative-offerings.md).
+
 === "Kourier"
 
     Knative Serving network layer architecture:
@@ -70,9 +72,9 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style bottom fill:transparent
     ```
 
-    Kourier is a lightweight implementation of the KIngress resource and is suitable for clusters that don't need other ingress features. Kourier is optimal for learning and prototyping, and the Knative [Quickstart](../getting-started/README.md) installs it for the network layer.
+    Kourier is a lightweight implementation of the KIngress resource and is suitable for clusters that don't need other ingress features. Kourier is optimal for learning and prototyping, and is installed by the Knative [Quickstart](../getting-started/README.md).
 
-    Kourier is is the only supported option for IBM-Z and IBM-P platforms. These platforms require additional steps as documented in [Install Serving th YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+    Kourier is is the only supported option for IBM-Z and IBM-P platforms. These IBM platforms require additional steps as documented in [Install Serving th YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
     Kourier provides the following additional configuration options:
 
@@ -185,7 +187,7 @@ The Knative `networking.internal.knative.dev` Ingress type is generally referred
         style bottom fill:transparent
     ```
 
-    The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Good for enterprises already running Istio or who need advanced service mesh features.
+    The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Well suited for enterprises already running Istio or who need advanced service mesh features.
 
     Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own. See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
 
@@ -233,7 +235,7 @@ Use the following command to determine which ingress controllers are installed a
 kubectl get pods -n knative-serving
 ```
 
-The Knative team tests the following ingress controllers:
+The ingress controllers have the following names:
 
 - Kourier: `kourier-control-*`, and `kourier-gateway-*`. Kourier is included in the Knative Serving installation should appear in the results when your cluster is first created.
 - Contour: `contour-*`
@@ -254,7 +256,7 @@ ingress-class: contour.ingress.networking.knative.dev
 ingress.class: kourier.ingress.networking.knative.dev
 ```
 
-If you want to switch to a controller that is already installed, patch the `config-network` ConfigMap with the new controller. In the following example Kourier is used because of the dash in `ingress-class`.
+If you want to switch to a controller that is already installed, patch the `config-network` ConfigMap with the new controller as shown in the following example using Kourier.
 
 ```bash
 kubectl patch cm config-network -n knative-serving \
@@ -268,16 +270,16 @@ kubectl patch configmap config-network -n knative-serving \
 --type=json -p='[{"op": "remove", "path": "/data/ingress.class"}]'
 ```
 
-If you want to change the controller, install it by following [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md). Be aware that changing the Ingress class of an existing Route can result in undefined behavior.
+If you want to install a new controller, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md). Be aware that changing the Ingress class of an existing Route may result in undefined behavior.
 
 ## Gateway configurations
 
 Knative assumes two gateways in the cluster:
 
 - Externally exposed - defines the gateway for external traffic.
-- Internally-only exposed - defines the gateway for cluster local traffic.
+- Internally-only exposed - defines the gateway for local traffic.
 
-When gateways are installed, the `config-gateway` ConfigMap is updated to track these two gateways. These values can be set using the following environment variables:
+When gateways are installed, the `config-gateway` ConfigMap is updated to track these two gateways set to the following environment variables:
 
 - class: `$GATEWAY_CLASS_NAME`
 - gateway: `$NAMESPACE/$GATEWAY_NAME`
@@ -291,7 +293,7 @@ Use the following command to determine the current configuration:
 kubectl describe configmaps config-gateway -n knative-serving
 ```
 
-The following `config-gateway` keys shows an example of an Istio gateway implementation:
+The following `config-gateway` example shows an Istio implementation:
 
 ```bash
 # external-gateways defines the Gateway to be used for external traffic
