@@ -42,41 +42,10 @@ To install the Knative Serving component:
 ## Install a networking layer
 
 The following tabs expand to show instructions for installing a networking layer.
-Follow the procedure for the networking layer of your choice:
 
-!!! note
-    **Only Kourier network plugin supported for IBM Z and IBM Power platform.** 
-    Follow the below steps to install Kourier. Post installation, patch the envoy image based on RedHat Maistra as described in [this link](./install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+=== "Kourier"
 
-<!-- TODO: Link to document/diagram describing what is a networking layer.  -->
-<!-- This indentation is important for things to render properly. -->
-
-=== "Kourier (Choose this if you are not sure)"
-
-    The following commands install Kourier and enable its Knative integration.
-
-    1. Install the Knative Kourier controller by running the command:
-    ```bash
-    kubectl apply -f {{ artifact(repo="net-kourier",org="knative-extensions",file="kourier.yaml")}}
-    ```
-
-    1. Configure Knative Serving to use Kourier by default by running the command:
-      ```bash
-      kubectl patch configmap/config-network \
-        --namespace knative-serving \
-        --type merge \
-        --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
-      ```
-
-    1. Fetch the External IP address or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace kourier-system get service kourier
-        ```
-
-        !!! tip
-            Save this to use in the following [Configure DNS](#configure-dns) section.
-
+    --8<-- "netadapter-kourier.md"
 
 === "Istio"
 
