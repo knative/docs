@@ -31,13 +31,7 @@ Use the following steps to install Istio and set it as the ingress conroller.
       --patch '{"data":{"ingress-class":"istio.ingress.networking.knative.dev"}}'
     ```
 
-1. Verify the installation by having pods with the base name of `istio` and `istio-webhook` in the results.
-
-    ```bash
-    kubectl get pods -n knative-serving
-    ```
-
-1. Get the external IP address (FQDN) to configure DNS records:
+1. Get the external IP address (FQDN) to later configure DNS:
 
     ```bash
     kubectl --namespace istio-system get service istio-ingressgateway
