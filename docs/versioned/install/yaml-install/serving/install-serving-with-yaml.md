@@ -41,7 +41,7 @@ To install the Knative Serving component:
 
 ## Install a networking layer
 
-The following tabs expand to show instructions for installing a networking layer. For an overview of network layer options, architecture, and configurations see [Configuring Knative networking](../../../serving/config-network-adapters.md)
+Expand the following tabs expand to show instructions for installing a networking layer. For an overview of network layer options, architecture, and configurations see [Configuring Knative networking](../../../serving/config-network-adapters.md)
 
 === "Kourier"
 
