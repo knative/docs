@@ -15,7 +15,7 @@ Use the following steps to install Istio and set it as the ingress conroller.
 1. Install the Knative Istio controller:
 
     ```bash
-    kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml") }}
+    kubectl apply -f {{ artifact(repo="net-istio",org="knative-extensions", file="net-istio.yaml") }}
     ```
 
     <!-- ```bash
