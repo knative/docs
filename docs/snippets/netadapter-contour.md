@@ -3,7 +3,7 @@ Use the following steps to install and enable Contour and set it as the ingress 
 1. Install the Knative Contour configuration:
 
     ```bash
-    kubectl apply -f {{ artifact(org="knative-extensions", repo="net-contour", file="contour.yaml" }}
+    kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="contour.yaml")}}
     ```
 
     <!-- ```bash
@@ -13,7 +13,7 @@ Use the following steps to install and enable Contour and set it as the ingress 
 1. Install the Knative Contour integration controller:
 
     ```bash
-    kubectl apply -f https://github.com/knative-extensions/net-contour/releases/download/knative-v1.20.0/net-contour.yaml
+    kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="net-contour.yaml")}}
     ```
 
 1. Configure Knative Serving to use Contour:
