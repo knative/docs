@@ -19,13 +19,7 @@ Use the following steps to install Kourier and set it as the ingress controller.
     --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
     ```
 
-1. Verify the installation by having pods with the base name of `kourier-controller` and `kourier-gateway` in the results.
-
-    ```bash
-    kubectl get pods -n knative-serving
-    ```
-
-1. Get the external IP address (FQDN) to configure DNS records:
+1. Get the external IP address (FQDN) to later configure DNS:
 
     ```bash
     kubectl --namespace kourier-system get service kourier
