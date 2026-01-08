@@ -284,28 +284,24 @@ Both gateways route traffic to the Knative services inside the cluster.
 config:
   look: neo
   theme: redux
+  layout: dagre
 ---
-%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '12px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
-flowchart TD
-    subgraph Cluster[Knative Cluster]
-        direction TB
-        
-        ExtGateway[External Gateway<br/><small>Exposed to external traffic</small>] 
-        IntGateway[Internal Gateway<br/><small>Only for local/cluster-internal traffic</small>]
-        
-        KServe[Knative Services<br/>(e.g., Serving, Eventing, etc.)]
-        
-        ExtGateway -->|Routes external HTTP/HTTPS traffic| KServe
-        IntGateway -->|Routes internal traffic| KServe
-    end
-    
-    ExternalClient[External Client<br/><small>Internet / Outside cluster</small>] -->|Ingress| ExtGateway
-    InternalClient[Internal Client<br/><small>Pod / Service inside cluster</small>] -->|Cluster-internal| IntGateway
-    
-    style ExternalClient fill:#f0f8ff,stroke:#333
-    style InternalClient fill:#f0fff0,stroke:#333
+flowchart TB
+ subgraph Cluster["Knative Cluster"]
+    direction TB
+        ExtGateway["External Gateway\nExposed to external traffic"]
+        IntGateway["Internal Gateway\nOnly for local/cluster-internal traffic"]
+        KServe["Knative Services\nExamples include Serving and Eventing"]
+  end
+    ExtGateway -- Routes external HTTP/HTTPS traffic --> KServe
+    IntGateway -- Routes internal traffic --> KServe
+    ExternalClient["External Client\nInternet / Outside cluster"] -- Ingress --> ExtGateway
+    InternalClient["Internal Client\nPod / Service inside cluster"] -- "Cluster-internal" --> IntGateway
+
     style ExtGateway fill:#ffe4e1,stroke:#ff0000,stroke-width:2px
     style IntGateway fill:#e6ffe6,stroke:#008000,stroke-width:2px
+    style ExternalClient fill:#f0f8ff,stroke:#333
+    style InternalClient fill:#f0fff0,stroke:#333
     style Cluster stroke:#333,stroke-width:3px,stroke-dasharray: 5 5
 ```    
 
