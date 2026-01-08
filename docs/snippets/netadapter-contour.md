@@ -1,8 +1,8 @@
 <!-- Referenced by:
 - install/yaml-install/serving/install-serving-with-yaml.md
 -->
-    Use the following steps to install and enable Contour and set it as the ingress controller.
-    
+Use the following steps to install and enable Contour and set it as the ingress controller.
+
     1. Install the Knative Contour configuration:
     
         ```bash
@@ -29,4 +29,3 @@
         ```bash
         kubectl --namespace contour-external get service envoy
         ```
-    <!-- Must end with tab -->
