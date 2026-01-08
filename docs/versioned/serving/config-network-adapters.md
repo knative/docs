@@ -13,7 +13,7 @@ For installation instructions, see [Install serving with YAML](../install/yaml-i
 
 ## Network layer options
 
-Review the tabbed content in this section to determine the optimal networking layer for your cluster. For most users, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
+Review the tabbed content in this section to determine the optimal networking layer for your cluster. If you already have one of the ingress controllers installed in your cluster, we recommend using your existing installation. For most users without a supported ingress, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
 
 The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
 
