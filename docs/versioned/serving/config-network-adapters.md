@@ -132,12 +132,14 @@ There are also third-party Knative networking options and Knative products avail
             style bottom fill:transparent
     ```
 
-    The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. A good choice for clusters that already run non-Knative apps, are already using a Contour envoy, or don't need a full-feature service mesh.
+    The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. Contour is a good choice for clusters that already run non-Knative apps, are already using a Contour envoy, or don't need a full-feature service mesh.
 
     Contour provides the following additional configuration options:
 
     - CORS policy configuration.
     - Direct visibility classes for external and internal traffic.
+
+    Contour also supports several cluster-wide configuration options. For more information see the [Contour Configuration Reference](https://projectcontour.io/docs/1.33/configuration/).
 
 === "Istio"
 
@@ -170,25 +172,33 @@ There are also third-party Knative networking options and Knative products avail
       theme: default
     ---
     flowchart LR
-     subgraph bottom[" "]
-        direction LR
-            envoy["Envoy deployment<br>istio-system namespace"]
-            kourier["net-istio<br>controller"]
-            kingress2["KIngress class:<br>istio.ingress.networking.knative.dev"]
-      end
-        kingress2 -- read by --> kourier
-        kourier -- programs --> envoy
-    
-        style envoy fill:#BBDEFB
-        style kourier fill:#FFE0B2
-        style bottom fill:transparent
+    subgraph bottom[" "]
+      direction LR
+          VirtualService["Istio<br>VirtualService"]
+          istiod("Istio")
+          net-istio("net-istio<br>controller")
+          kingress["KIngress class:<br>istio.ingress.networking.knative.dev"]
+    end
+      kingress -- read by --> net-istio
+      net-istio -- creates --> VirtualService
+      VirtualService -- read by --> istiod
+  
+      style VirtualService fill:#BBDEFB
+      style istiod fill:#BBDEFB
+      style net-istio fill:#FFE0B2
+      style bottom fill:transparent
     ```
 
-    The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Well suited for enterprises already running Istio or who need advanced service mesh features.
+    The Knative `net-istio` is a KIngress controller for Istio. Istio is a full-feature service mesh that also functions as a Knative ingress. `net-istio` is well suited for enterprises already running Istio or who need advanced service mesh features.
 
     Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own. See [Configure Istio's ingress gateway](setting-up-custom-ingress-gateway.md).
 
     Istio provides the following additional configuration options:
+
+    - Advanced gateway selection with label selectors for fine-grained routing.
+    - Support for mesh-aware and cluster-local access.
+    
+    In addition to [Istio's configuration options](https://istio.io/latest/docs/reference/config/), `net-istio` provides the following additional configuration options for mapping Knative Routes to Istio VirtualServices:
 
     - Advanced gateway selection with label selectors for fine-grained routing.
     - Support for mesh-aware and cluster-local access.
@@ -201,27 +211,27 @@ There are also third-party Knative networking options and Knative products avail
       layout: elk
       theme: default
     ---
-    %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '13px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
     flowchart LR
-     subgraph net-gateway-api["net-gateway-api&nbsp;controller"]
-            GW["Gateway"]
-            Route["Knative&nbsp;Route"]
-            HR["HTTPRoute"]
+     net-gateway["net-gateway-api controller"]
+     GW["Gateway"]
+     KIngress["KIngress objects"]
+     HR["HTTPRoute"]
+     subgraph underlying["Gateway-API Implementation<br>(Contour, Istio, Envoy Gateway, …)"]
+        Controller("GatewayClass&nbsp;Controller")
       end
-     subgraph underlying["Underlying&nbsp;Controller<br>(Contour │ Istio │ Envoy Gateway │ …)"]
-        Controller["GatewayClass&nbsp;Controller"]
-      end
-        KSvc["Knative&nbsp;Service"] --> Route
-        Route -- translates&nbsp;to --> GW & HR
-        GW --> Controller
-        HR --> Controller
-        Controller -- routes&nbsp;traffic&nbsp;to --> Pods["Your&nbsp;Pods"]
-
-    style net-gateway-api fill:#e3f2fd,stroke:#1976d2
+        KIngress -- read by --> net-gateway
+        net-gateway -- updates --> GW
+        net-gateway -- creates --> HR
+        GW -- read by --> Controller
+        HR -- read by --> Controller
+    style net-gateway fill:#FFE0B2
+    style GW fill:#BBDEFB
+    style HR fill:#BBDEFB
+    style Controller fill:#BBDEFB
     style underlying fill:#fff3e0,stroke:#ef6c00
     ```
 
-    The Knative `net-gateway-api` is a KIngress implementation for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). A good choice for teams adopting the Gateway API to unify ingress across Kubernetes.
+    The Knative `net-gateway-api` is a KIngress implementation for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). A recommended choice for many teams adopting the Gateway API to unify ingress across Kubernetes. Clusters with large numbers of Knative Services however, may experience limitations.
 
     The Kubernetes Gateway API requires a controller or service mesh. Istio and Contour implementations are tested. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
