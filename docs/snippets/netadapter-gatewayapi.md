@@ -4,14 +4,14 @@
 === "Gateway API"
 
     Use the following steps to install and configure the Knative Gateway API adapter.  Note that you need to have a [Gateway API implementation](https://gateway-api.sigs.k8s.io/implementations/) installed in your cluster.  The Knative team currently tests the Istio, Contour, and Envoy-Gateway implementations of Gateway API.
-    
+  
     1. Install the Knative Gateway API:
     
         ```bash
           kubectl apply -f {{ artifact(repo="net-gateway-api",org="knative-extensions",file="net-gateway-api.yaml") }}
         ```
-
-       Alternatively, you can also install a preconfigured Gateways for either Contour or Istio. Replace the filename in this step with either `contour-gateway.yaml` or `istio-gateway.yaml`. If you do this, you can skip step 3.
+    
+        Alternatively, you can also install a preconfigured Gateways for either Contour or Istio. Replace the filename in this step with either `contour-gateway.yaml` or `istio-gateway.yaml`. If you do this, you can skip step 3.
     
     1. Configure Knative Serving to use the Knative Gateway API ingress class:
     

@@ -20,10 +20,10 @@
     1. Configure Knative Serving to use Contour:
     
         ```bash
-          kubectl patch configmap/config-network \
-          --namespace knative-serving \
-          --type merge \
-          --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
+            kubectl patch configmap/config-network \
+            --namespace knative-serving \
+            --type merge \
+            --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
         ```
     
     1. Get the external IP address (FQDN) to later configure DNS:
