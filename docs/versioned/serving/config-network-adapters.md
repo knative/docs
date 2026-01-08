@@ -301,12 +301,12 @@ flowchart LR
     direction TB
         ExtGateway["External Gateway<br>Exposed to external traffic"]
         IntGateway["Internal Gateway<br>Only for local internal traffic"]
-        KServe["Knative Services<br>Serving and Eventing"]
+        KServe["Knative Services"]
+        InternalClient["Internal Client<br>Pod / Service inside cluster"] -- "Cluster-internal" --> IntGateway
   end
     ExtGateway -- Routes external HTTP/HTTPS traffic --> KServe
     IntGateway -- Routes internal traffic --> KServe
     ExternalClient["External Client<br>Internet / Outside cluster"] -- Ingress --> ExtGateway
-    InternalClient["Internal Client<br>Pod / Service inside cluster"] -- "Cluster-internal" --> IntGateway
 
     style ExtGateway fill:#ffe4e1,stroke:#ff0000,stroke-width:2px
     style IntGateway fill:#e6ffe6,stroke:#008000,stroke-width:2px
@@ -315,19 +315,7 @@ flowchart LR
     style Cluster stroke:#333,stroke-width:3px,stroke-dasharray: 5 5
 ```    
 
-Use the following command to list Kubernetes GatewayClass resources cluster-wide.
-
-```bash
-kubectl get gatewayclass
-```
-
-Example results:
-
-```bash
-NAME           CONTROLLER                    ACCEPTED   AGE
-istio          istio.io/gateway-controller   True       11d
-istio-remote   istio.io/unmanaged-gateway    True       11d
-```
+To install the Gateway API and configure the gateways, see the Gateway API tab in [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
 When gateways are installed, the `config-gateway` ConfigMap is updated to track the `class`, `gateway`, and `service`. The service is the Kubernetes Service name that points to the pods in the Gateway implementation.
 
