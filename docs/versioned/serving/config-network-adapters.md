@@ -7,7 +7,7 @@ function: how-to
 
 # Configure Knative networking
 
-This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring, .
+This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring.
 
 For installation instructions, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md).
 
@@ -17,11 +17,13 @@ Review the tabbed content in this section to determine the optimal networking la
 
 The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
 
-- Certificate management: Configurable secrets for TLS encrypted traffic.
-- Timeout policies: Controls for idle, and response stream timeouts.
-- Traffic visibility: Mechanisms to expose services externally or cluster-locally.
+- Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md)
+- Timeout policies: Controls for idle, and response stream timeouts. See [Configuring the Defaults ConfigMap](./configuration/config-defaults.md) to review timeout settings.
+- Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
+
+In scenarios where there are multiple networking implementations, you can create a custom ingress class to specify different ingress class annotations for each service. For more information, see [Configuring Services custom ingress class](./services/ingress-class.md)
 
 There are also third-party Knative networking options and Knative products available but are not tested or managed by the Knative community. For more information, see [Knative offerings](../install/knative-offerings.md).
 
@@ -277,15 +279,54 @@ If you want to install a new controller, see [Install serving with YAML](../inst
 Knative assumes two gateways in the cluster:
 
 - Externally exposed - defines the gateway for external traffic.
-- Internally-only exposed - defines the gateway for local traffic.
+- Internally exposed - defines the gateway for local traffic.
 
-When gateways are installed, the `config-gateway` ConfigMap is updated to track these two gateways set to the following environment variables:
+Both gateways route traffic to the Knative services inside the cluster.
 
-- class: `$GATEWAY_CLASS_NAME`
-- gateway: `$NAMESPACE/$GATEWAY_NAME`
-- service: `$NAMESPACE/$SERVICE_NAME`
+```mermaid
+---
+config:
+  look: neo
+  theme: redux
+---
+flowchart TD
+    subgraph Cluster[Knative Cluster]
+        direction TB
+        
+        ExtGateway[External Gateway\nExposed to external traffic] 
+        IntGateway[Internal Gateway\nOnly for local/cluster-internal traffic]
+        
+        KServe[Knative Services\nExamples include Serving and Eventing]
+        
+        ExtGateway -->|Routes external HTTP/HTTPS traffic| KServe
+        IntGateway -->|Routes internal traffic| KServe
+    end
+    
+    ExternalClient[External Client\nInternet / Outside cluster] -->|Ingress| ExtGateway
+    InternalClient[Internal Client\nPod / Service inside cluster] -->|Cluster-internal| IntGateway
+    
+    style ExternalClient fill:#f0f8ff,stroke:#333
+    style InternalClient fill:#f0fff0,stroke:#333
+    style ExtGateway fill:#ffe4e1,stroke:#ff0000,stroke-width:2px
+    style IntGateway fill:#e6ffe6,stroke:#008000,stroke-width:2px
+    style Cluster stroke:#333,stroke-width:3px,stroke-dasharray: 5 5
+```    
 
-The variable `$SERVICE_NAME` is the Kubernetes Service name that points to the pods in the Gateway implementation.
+Use the following command to list Kubernetes GatewayClass resources cluster-wide.
+
+```bash
+kubectl get gatewayclass
+```
+
+Example results:
+
+```bash
+NAME           CONTROLLER                    ACCEPTED   AGE
+istio          istio.io/gateway-controller   True       11d
+istio-remote   istio.io/unmanaged-gateway    True       11d
+```
+
+When gateways are installed, the `config-gateway` ConfigMap is updated to track the `class`, `gateway`, and `service`. The service is the Kubernetes Service name that points to the pods in the Gateway implementation.
 
 Use the following command to determine the current configuration:
 
@@ -312,4 +353,3 @@ local-gateways: |
     supported-features:
     - HTTPRouteRequestTimeout
 ```
-
