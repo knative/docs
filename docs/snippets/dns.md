@@ -1,3 +1,7 @@
+<!-- Referenced by:
+- install/operator/knative-with-operators.md
+- install/yaml-install/serving/install-serving-with-yaml.md
+-->
 You can configure DNS to avoid specifying the host header in curl commands, or to access the content with a web browser.
 
 The following tabs show instructions for configuring DNS. Follow the procedure for the DNS of your choice:
