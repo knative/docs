@@ -1,8 +1,6 @@
 <!-- Referenced by:
 - install/yaml-install/serving/install-serving-with-yaml.md
 -->
-    === "Contour"
-
     Use the following steps to install and enable Contour and set it as the ingress controller.
     
     1. Install the Knative Contour configuration:
