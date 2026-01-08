@@ -201,7 +201,7 @@ There are also third-party Knative networking options and Knative products avail
       layout: elk
       theme: default
     ---
-    %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '12px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
+    %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '13px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
     flowchart LR
      subgraph net-gateway-api["net-gateway-api&nbsp;controller"]
             GW["Gateway"]
@@ -286,8 +286,7 @@ config:
   theme: redux
 ---
 %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '12px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
-
-graph TD
+flowchart TD
     subgraph Cluster[Knative Cluster]
         direction TB
         
