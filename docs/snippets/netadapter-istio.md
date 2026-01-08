@@ -1,8 +1,6 @@
 <!-- Referenced by:
 - install/yaml-install/serving/install-serving-with-yaml.md
 -->
-    === "Istio"
-
     Use the following steps to install Istio and set it as the ingress controller.
     
     1. Install a properly configured Istio:

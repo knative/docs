@@ -1,8 +1,6 @@
 <!-- Referenced by:
 - install/yaml-install/serving/install-serving-with-yaml.md
 -->
-    === "Gateway API"
-
     Use the following steps to install and configure the Knative Gateway API adapter.  Note that you need to have a [Gateway API implementation](https://gateway-api.sigs.k8s.io/implementations/) installed in your cluster.  The Knative team currently tests the Istio, Contour, and Envoy-Gateway implementations of Gateway API.
   
     1. Install the Knative Gateway API:
