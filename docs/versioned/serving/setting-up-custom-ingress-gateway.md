@@ -5,7 +5,7 @@ components:
 function: how-to
 ---
 
-# Configuring the ingress gateway
+# Configure Istio's ingress gateway
 
 Knative uses a shared ingress Gateway to serve all incoming traffic within
 Knative service mesh, which is the `knative-ingress-gateway` Gateway under

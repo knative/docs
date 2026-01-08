@@ -268,7 +268,7 @@ nav:
         - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
         - Networking Options:
           - Configure Knative networking: serving/config-network-adapters.md
-          - Configure the ingress gateway: serving/setting-up-custom-ingress-gateway.md
+          - Configure Istio's ingress gateway: serving/setting-up-custom-ingress-gateway.md
           - Configure domain names: serving/using-a-custom-domain.md
           - Istio Authorization: serving/istio-authorization.md
           - Extending Queue Proxy image with QPOptions: serving/queue-extensions.md
