@@ -45,7 +45,7 @@ Expand the following tabs for instructions on installing network layers. For an 
 
 === "Kourier"
 
-    --8<-- "netadapter.kourier.md"
+    {% include "netadapter-kourier.md" %}
 
 === "Contour"
 
@@ -53,7 +53,7 @@ Expand the following tabs for instructions on installing network layers. For an 
 
 === "Istio"
 
-    --8<-- "netadapter-istio.md"
+    {% include "netadapter-istio.md" %}
 
 === "Gateway API"
 
