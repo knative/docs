@@ -241,7 +241,7 @@ The ingress controllers have the following names:
 - Contour: `contour-*`
 - Istio: `istio-webhook-*`. The main Istio control plane pods such as `istiod-*` are in the `istio-system` namespace. Knative adds the `istio-webhook-*` pod in the `knative-serving` namespace when Istio is the chosen networking layer.
 
-Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving uses the controller based on the `network-config` ConfigMap.
+Each ingress controller manages only those ingress objects that are annotated with its key. Knative Serving selects the controller based on the rules in the `network-config` ConfigMap.
 
 You can determine the controller in use by examining the `config-network.yaml`:
 
