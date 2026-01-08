@@ -53,7 +53,7 @@ Expand the following tabs for instructions on installing network layers. For an 
 
 === "Istio"
 
-    {% include "netadapter-istio.md" %}
+    --8<-- "netadapter-istio.md"
 
 === "Gateway API"
 
