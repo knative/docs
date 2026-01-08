@@ -1,3 +1,6 @@
+<!-- Referenced by:
+- install/yaml-install/serving/install-serving-with-yaml.md
+-->
 === "Real DNS"
 
     To configure DNS for Knative, take the External IP
@@ -28,3 +31,4 @@
           --type merge \
           --patch '{"data":{"knative.example.com":""}}'
         ```
+    <!-- Must end with tab -->

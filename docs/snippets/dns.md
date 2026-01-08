@@ -15,4 +15,4 @@ The following tabs show instructions for configuring DNS. Follow the procedure f
     ```
 
     This configuration works only if the cluster `LoadBalancer` Service exposes an IPv4 address or hostname. It does not work with IPv6 clusters or local setups such as minikube unless the [`minikube tunnel`](https://minikube.sigs.k8s.io/docs/commands/tunnel/) is running.
-
+    <!-- must end with tab -->

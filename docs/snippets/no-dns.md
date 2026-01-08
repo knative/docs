@@ -39,3 +39,4 @@
        Hello Go Sample v1!
        ```
        Refer to the "Real DNS" method for a permanent solution.
+    <!-- Must end with tab -->
