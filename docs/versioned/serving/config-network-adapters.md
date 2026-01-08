@@ -18,13 +18,13 @@ Review the tabbed content in this section to determine the optimal networking la
 The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
 
 - Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md).
-- Timeout policies: Controls for idle, and response stream timeouts. See [Configuring the Defaults ConfigMap](./configuration/config-defaults.md) to review timeout settings.
+- Timeout policies: Controls for idle, and response stream timeouts. To review timeout settings, see [Configuring the Defaults ConfigMap](./configuration/config-defaults.md).
 - Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
-- The mapping of Route objects to `networking.internal.knative.dev` objects.
+- The mapping of Route objects to `networking.internal.knative.dev` objects is common to these controllers.
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
-In scenarios where there are multiple networking implementations, you can create a custom ingress class to specify different ingress class annotations for each service. For more information, see [Configuring Services custom ingress class](./services/ingress-class.md)
+In scenarios where there are multiple networking implementations, you can create a custom ingress class to specify different ingress class annotations for each service. For more information, see [Configuring Services custom ingress class](./services/ingress-class.md).
 
 There are also third-party Knative networking options and Knative products available but are not tested or managed by the Knative community. For more information, see [Knative offerings](../install/knative-offerings.md).
 
@@ -186,7 +186,7 @@ There are also third-party Knative networking options and Knative products avail
 
     The Knative `net-istio` is a KIngress controller for Istio. It's a full-feature service mesh that also functions as a Knative ingress. Well suited for enterprises already running Istio or who need advanced service mesh features.
 
-    Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own. See [Configuring the Ingress gateway](setting-up-custom-ingress-gateway.md).
+    Knative has a default Istio integration without the full-feature service mesh. The `knative-ingress-gateway` in the `knative-serving` namespace is a shared Istio gateway resource that handles all incoming (north-south) traffic to Knative services. This gateway points to the underlying `istio-ingressgateway` service in the `istio-system` namespace. You can replace this gateway with one of your own. See [Configure Istio's ingress gateway](setting-up-custom-ingress-gateway.md).
 
     Istio provides the following additional configuration options:
 

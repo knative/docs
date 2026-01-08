@@ -6,10 +6,6 @@ Use the following steps to install and enable Contour and set it as the ingress 
     kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="contour.yaml")}}
     ```
 
-    <!-- ```bash
-    kubectl apply -f https://github.com/knative-extensions/net-contour/releases/download/knative-v1.20.0/contour.yaml
-    ```   -->
-
 1. Install the Knative Contour integration controller:
 
     ```bash
