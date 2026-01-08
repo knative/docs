@@ -284,19 +284,19 @@ Both gateways route traffic to the Knative services inside the cluster.
 config:
   look: neo
   theme: redux
-  layout: dagre
+  layout: elk
 ---
-flowchart TB
+flowchart LR
  subgraph Cluster["Knative Cluster"]
     direction TB
-        ExtGateway["External Gateway\nExposed to external traffic"]
-        IntGateway["Internal Gateway\nOnly for local/cluster-internal traffic"]
-        KServe["Knative Services\nExamples include Serving and Eventing"]
+        ExtGateway["External Gateway<br>Exposed to external traffic"]
+        IntGateway["Internal Gateway<br>Only for local internal traffic"]
+        KServe["Knative Services<br>Serving and Eventing"]
   end
     ExtGateway -- Routes external HTTP/HTTPS traffic --> KServe
     IntGateway -- Routes internal traffic --> KServe
-    ExternalClient["External Client\nInternet / Outside cluster"] -- Ingress --> ExtGateway
-    InternalClient["Internal Client\nPod / Service inside cluster"] -- "Cluster-internal" --> IntGateway
+    ExternalClient["External Client<br>Internet / Outside cluster"] -- Ingress --> ExtGateway
+    InternalClient["Internal Client<br>Pod / Service inside cluster"] -- "Cluster-internal" --> IntGateway
 
     style ExtGateway fill:#ffe4e1,stroke:#ff0000,stroke-width:2px
     style IntGateway fill:#e6ffe6,stroke:#008000,stroke-width:2px
