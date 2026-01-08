@@ -7,7 +7,7 @@ function: how-to
 
 # Configure Knative networking
 
-This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring.
+This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring features and capabilities.
 
 For installation instructions, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md).
 
@@ -17,9 +17,10 @@ Review the tabbed content in this section to determine the optimal networking la
 
 The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
 
-- Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md)
+- Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md).
 - Timeout policies: Controls for idle, and response stream timeouts. See [Configuring the Defaults ConfigMap](./configuration/config-defaults.md) to review timeout settings.
 - Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
+- The mapping of Route objects to `networking.internal.knative.dev` objects.
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
 
@@ -42,9 +43,7 @@ There are also third-party Knative networking options and Knative products avail
         direction LR
             kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
             serving["Serving<br>controller"]
-            route["Route object"]
       end
-        route -- read by --> serving
         serving -- creates --> kingress1
         style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
         style serving fill:#FFE0B2
@@ -100,9 +99,7 @@ There are also third-party Knative networking options and Knative products avail
         direction LR
             kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
             serving["Serving<br>controller"]
-            route["Route object"]
       end
-        route -- read by --> serving
         serving -- creates --> kingress1
         style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
         style serving fill:#FFE0B2
@@ -157,9 +154,7 @@ There are also third-party Knative networking options and Knative products avail
         direction LR
             kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
             serving["Serving<br>controller"]
-            route["Route object"]
       end
-        route -- read by --> serving
         serving -- creates --> kingress1
         style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
         style serving fill:#FFE0B2
@@ -206,6 +201,7 @@ There are also third-party Knative networking options and Knative products avail
       layout: elk
       theme: default
     ---
+    %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '12px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
     flowchart LR
      subgraph net-gateway-api["net-gateway-api&nbsp;controller"]
             GW["Gateway"]
@@ -289,21 +285,23 @@ config:
   look: neo
   theme: redux
 ---
-flowchart TD
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '12px' }, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40} }}%%
+
+graph TD
     subgraph Cluster[Knative Cluster]
         direction TB
         
-        ExtGateway[External Gateway\nExposed to external traffic] 
-        IntGateway[Internal Gateway\nOnly for local/cluster-internal traffic]
+        ExtGateway[External Gateway<br/><small>Exposed to external traffic</small>] 
+        IntGateway[Internal Gateway<br/><small>Only for local/cluster-internal traffic</small>]
         
-        KServe[Knative Services\nExamples include Serving and Eventing]
+        KServe[Knative Services<br/>(e.g., Serving, Eventing, etc.)]
         
         ExtGateway -->|Routes external HTTP/HTTPS traffic| KServe
         IntGateway -->|Routes internal traffic| KServe
     end
     
-    ExternalClient[External Client\nInternet / Outside cluster] -->|Ingress| ExtGateway
-    InternalClient[Internal Client\nPod / Service inside cluster] -->|Cluster-internal| IntGateway
+    ExternalClient[External Client<br/><small>Internet / Outside cluster</small>] -->|Ingress| ExtGateway
+    InternalClient[Internal Client<br/><small>Pod / Service inside cluster</small>] -->|Cluster-internal| IntGateway
     
     style ExternalClient fill:#f0f8ff,stroke:#333
     style InternalClient fill:#f0fff0,stroke:#333
