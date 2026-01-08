@@ -5,31 +5,13 @@
 
     Use the following steps to install and configure the Knative Gateway API adapter.  Note that you need to have a [Gateway API implementation](https://gateway-api.sigs.k8s.io/implementations/) installed in your cluster.  The Knative team currently tests the Istio, Contour, and Envoy-Gateway implementations of Gateway API.
     
-    1. Clone the Gateway API repo:
-    
-        ```bash
-        git clone https://github.com/knative-extensions/net-gateway-api.git
-        cd net-gateway-api
-        ```
-    
-    1. Set environment variables:
-    
-        ```bash
-        export KO_DOCKER_REPO=kind.local
-        export KIND_CLUSTER_NAME=knative  # (keep this if your cluster is named "knative")
-        ```
-    
-    1. Deploy Gateway API resources:
-    
-        ```bash
-        ko apply -f config/
-        ```
-    
     1. Install the Knative Gateway API:
     
         ```bash
           kubectl apply -f {{ artifact(repo="net-gateway-api",org="knative-extensions",file="net-gateway-api.yaml") }}
         ```
+
+       Alternatively, you can also install a preconfigured Gateways for either Contour or Istio. Replace the filename in this step with either `contour-gateway.yaml` or `istio-gateway.yaml`. If you do this, you can skip step 3.
     
     1. Configure Knative Serving to use the Knative Gateway API ingress class:
     
@@ -40,7 +22,9 @@
           --patch '{"data":{"ingress-class":"gateway-api.ingress.networking.knative.dev"}}'
         ```
     
-    1. Edit the `config-gateway` ConfigMap in the knative-serving namespace to specify gateway resources for external and local traffic. For the `external-gateways` key, specify the value for `name` and for `service` as needed. Do the same for the `local gateways`. The `namespace` should be kept at `knative-serving`.
+    1. Create Gateway resources for use by external ("north-south") Knative traffic, and local ("east-west") traffic. If you do not need separate routing for local traffic (or [private Knative services](../../../serving/services/private-services.md)), you can use the external Gateway for both. 
+    
+        Knative verifies traffic settings according to the Kubernetes namespace, the name of the Gateways, and an underlying DNS name such as a Kubernetes service DNS name that corresponds to the Gateway.
     
         ```bash
         cat <<EOF | kubectl apply -f -
@@ -49,9 +33,6 @@
         metadata:
           name: config-gateway
           namespace: knative-serving
-          labels:
-            app.kubernetes.io/component: net-gateway-api
-            app.kubernetes.io/name: knative-serving
         data:
           external-gateways: |
             - name: knative-ingress-gateway  # Name of the external Gateway resource
