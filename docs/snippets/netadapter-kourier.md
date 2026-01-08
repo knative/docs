@@ -1,7 +1,7 @@
 <!-- Referenced by:
 - install/yaml-install/serving/install-serving-with-yaml.md
 -->
-=== "Kourier"
+    === "Kourier"
 
     Use the following steps to install Kourier and set it as the ingress controller.
     
