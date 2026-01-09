@@ -15,19 +15,6 @@ For installation instructions, see [Install serving with YAML](../install/yaml-i
 
 Review the tabbed content in this section to determine the optimal networking layer for your cluster. If you already have one of the ingress controllers installed in your cluster, we recommend using your existing installation. For most users without a supported ingress, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
 
-The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
-
-- Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md).
-- Timeout policies: Controls for idle, and response stream timeouts. To review timeout settings, see [Configuring the Defaults ConfigMap](./configuration/config-defaults.md).
-- Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
-- The mapping of Route objects to `networking.internal.knative.dev` objects is common to these controllers.
-
-The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
-
-In scenarios where there are multiple networking implementations, you can create a custom ingress class to specify different ingress class annotations for each service. For more information, see [Configuring Services custom ingress class](./services/ingress-class.md).
-
-There are also third-party Knative networking options and Knative products available but are not tested or managed by the Knative community. For more information, see [Knative offerings](../install/knative-offerings.md).
-
 === "Kourier"
 
     Knative Serving network layer architecture:
@@ -134,12 +121,7 @@ There are also third-party Knative networking options and Knative products avail
 
     The Contour ingress controller, `net-contour`, bridges Knative's KIngress resources to Contour's HTTPProxy resources. Contour is a good choice for clusters that already run non-Knative apps, are already using a Contour envoy, or don't need a full-feature service mesh.
 
-    Contour provides the following additional configuration options:
-
-    - CORS policy configuration.
-    - Direct visibility classes for external and internal traffic.
-
-    Contour also supports several cluster-wide configuration options. For more information see the [Contour Configuration Reference](https://projectcontour.io/docs/1.33/configuration/).
+    You can include the full native Contour configuration as described in the [Contour Configuration Reference](https://projectcontour.io/docs/1.33/configuration/). Capabilities include CORS policy configuration, direct visibility classes for external and internal traffic, and several cluster-wide configuration options.
 
 === "Istio"
 
@@ -237,6 +219,15 @@ There are also third-party Knative networking options and Knative products avail
 
 ## Ingress configurations
 
+The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
+
+- Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md).
+- Timeout policies: Controls for idle, and response stream timeouts. To review timeout settings, see [Configuring the Defaults ConfigMap](./configuration/config-defaults.md).
+- Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
+- The mapping of Route objects to `networking.internal.knative.dev` objects is common to these controllers.
+
+The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects.
+
 Use the following command to determine which ingress controllers are installed and their status.
 
 ``` bash
@@ -279,6 +270,10 @@ kubectl patch configmap config-network -n knative-serving \
 ```
 
 If you want to install a new controller, see [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md). Be aware that changing the Ingress class of an existing Route may result in undefined behavior.
+
+In scenarios where there are multiple networking implementations, you can create a custom ingress class to specify different ingress class annotations for each service. For more information, see [Configuring Services custom ingress class](./services/ingress-class.md).
+
+There are also third-party Knative networking options and Knative products available but are not tested or managed by the Knative community. For more information, see [Knative offerings](../install/knative-offerings.md).
 
 ## Gateway configurations
 
