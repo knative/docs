@@ -101,7 +101,6 @@ The following tabs show instructions for configuring DNS. Follow the procedure f
 {% include "nodns.md" %}
 {% endfilter %}
 
-
 ## Install optional Serving extensions
 
 The following tabs expand to show instructions for installing each Serving extension.
