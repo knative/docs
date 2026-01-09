@@ -84,9 +84,23 @@ Expand the following tabs for instructions on installing network layers. For an 
 
 ## Configure DNS
 <!-- These are snippets from the docs/snippets directory -->
+You can configure DNS to avoid specifying the host header in curl commands, or to access the content with a web browser.
+
+The following tabs show instructions for configuring DNS. Follow the procedure for the DNS of your choice.
+
+=== "Magic DNS (sslip.io)"
+{% filter indent(width=4) %}
 {% include "dns.md" %}
+{% endfilter %}
+=== "Real DNS"
+{% filter indent(width=4) %}
 {% include "real-dns-yaml.md" %}
-{% include "no-dns.md" %}
+{% endfilter %}
+=== "No DNS"
+{% filter indent(width=4) %}
+{% include "nodns.md" %}
+{% endfilter %}
+
 
 ## Install optional Serving extensions
 
