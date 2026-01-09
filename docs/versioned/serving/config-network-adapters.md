@@ -308,7 +308,7 @@ flowchart LR
     style ExternalClient fill:#f0f8ff,stroke:#333
     style InternalClient fill:#f0fff0,stroke:#333
     style Cluster stroke:#333,stroke-width:3px,stroke-dasharray: 5 5
-```    
+```
 
 To install the Gateway API and configure the gateways, see the Gateway API tab in [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
