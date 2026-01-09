@@ -98,7 +98,7 @@ The following tabs show instructions for configuring DNS. Follow the procedure f
 {% endfilter %}
 === "No DNS"
 {% filter indent(width=4) %}
-{% include "nodns.md" %}
+{% include "no-dns.md" %}
 {% endfilter %}
 
 ## Install optional Serving extensions
