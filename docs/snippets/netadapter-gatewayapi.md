@@ -9,18 +9,9 @@ Use the following steps to install and configure the Knative Gateway API adapter
       kubectl apply -f {{ artifact(repo="net-gateway-api",org="knative-extensions",file="net-gateway-api.yaml") }}
     ```
 
-    Alternatively, you can also install a preconfigured Gateways for either Contour or Istio. Replace the filename in this step with either `contour-gateway.yaml` or `istio-gateway.yaml`. If you do this, you can skip step 3.
+    Alternatively, you can also install a preconfigured Gateways for either Contour or Istio. Replace the filename in this step with either `contour-gateway.yaml` or `istio-gateway.yaml`. If you use either file  you can skip the next step to configure gateway resources.
 
-1. Configure Knative Serving to use the Knative Gateway API ingress class:
-
-    ```bash
-    kubectl patch configmap/config-network \
-      --namespace knative-serving \
-      --type merge \
-      --patch '{"data":{"ingress-class":"gateway-api.ingress.networking.knative.dev"}}'
-    ```
-
-1. Create Gateway resources for use by external ("north-south") Knative traffic, and local ("east-west") traffic. If you do not need separate routing for local traffic (or [private Knative services](../../../serving/services/private-services.md)), you can use the external Gateway for both. 
+1. Configure Gateway resources for use by external ("north-south") Knative traffic, and local ("east-west") traffic. If you do not need separate routing for local traffic (or [private Knative services](../../../serving/services/private-services.md)), you can use the external Gateway for both.
 
     Knative verifies traffic settings according to the Kubernetes namespace, the name of the Gateways, and an underlying DNS name such as a Kubernetes service DNS name that corresponds to the Gateway.
 
@@ -41,6 +32,15 @@ Use the following steps to install and configure the Knative Gateway API adapter
           namespace: knative-serving     # Namespace where the Gateway is deployed
           service: knative-local-service.knative-serving.svc.cluster.local    # backing Service FQDN
     EOF
+    ```
+
+1. Configure Knative Serving to use the Knative Gateway API ingress class:
+
+    ```bash
+    kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"ingress-class":"gateway-api.ingress.networking.knative.dev"}}'
     ```
 
 1. Verify the `config-gateway` ConfigMap:
