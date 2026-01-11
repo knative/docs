@@ -1,6 +1,8 @@
 <!-- Referenced by:
 - install/yaml-install/serving/install-serving-with-yaml.md
 -->
+This component in beta. For the latest information including supported implementations, see the [Knative net-gateway-api](https://github.com/knative-extensions/net-gateway-api).
+
 Use the following steps to install and configure the Knative Gateway API adapter.  Note that you need to have a [Gateway API implementation](https://gateway-api.sigs.k8s.io/implementations/) installed in your cluster.  The Knative team currently tests the Istio, Contour, and Envoy-Gateway implementations of Gateway API.
 
 1. Install the Knative Gateway API:
@@ -9,7 +11,7 @@ Use the following steps to install and configure the Knative Gateway API adapter
       kubectl apply -f {{ artifact(repo="net-gateway-api",org="knative-extensions",file="net-gateway-api.yaml") }}
     ```
 
-    Alternatively, you can also install a preconfigured Gateways for either Contour or Istio. Replace the filename in this step with either `contour-gateway.yaml` or `istio-gateway.yaml`. If you use either file  you can skip the next step to configure gateway resources.
+    <!-- TODO: Alternatively, you can use `contour-gateway.yaml` or `istio-gateway.yaml`.  -->
 
 1. Configure Gateway resources for use by external ("north-south") Knative traffic, and local ("east-west") traffic. If you do not need separate routing for local traffic (or [private Knative services](../../../serving/services/private-services.md)), you can use the external Gateway for both.
 
@@ -46,8 +48,10 @@ Use the following steps to install and configure the Knative Gateway API adapter
 1. Verify the `config-gateway` ConfigMap:
 
     ```bash
-    kubectl get configmap config-gateway -n knative-serving -o yaml
+    kubectl describe configmaps config-gateway -n knative-serving
     ```
+
+    Examine the values for the `externals-gateways` and `local-gateways` keys.
 
 1. Get the external IP address (FQDN) to configure DNS records:
 
