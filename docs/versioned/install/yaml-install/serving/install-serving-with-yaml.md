@@ -41,104 +41,24 @@ To install the Knative Serving component:
 
 ## Install a networking layer
 
-The following tabs expand to show instructions for installing a networking layer.
-Follow the procedure for the networking layer of your choice:
+Expand the following tabs for instructions on installing network layers. For an overview of network layer options, architecture, and configurations see the [ingress providers](../../../serving/config-network-adapters.md#ingress-providers) on the [Configure Knative Networking](../../../serving/config-network-adapters.md) page.
 
-!!! note
-    **Only Kourier network plugin supported for IBM Z and IBM Power platform.** 
-    Follow the below steps to install Kourier. Post installation, patch the envoy image based on RedHat Maistra as described in [this link](./install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
-
-<!-- TODO: Link to document/diagram describing what is a networking layer.  -->
-<!-- This indentation is important for things to render properly. -->
-
-=== "Kourier (Choose this if you are not sure)"
-
-    The following commands install Kourier and enable its Knative integration.
-
-    1. Install the Knative Kourier controller by running the command:
-    ```bash
-    kubectl apply -f {{ artifact(repo="net-kourier",org="knative-extensions",file="kourier.yaml")}}
-    ```
-
-    1. Configure Knative Serving to use Kourier by default by running the command:
-      ```bash
-      kubectl patch configmap/config-network \
-        --namespace knative-serving \
-        --type merge \
-        --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
-      ```
-
-    1. Fetch the External IP address or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace kourier-system get service kourier
-        ```
-
-        !!! tip
-            Save this to use in the following [Configure DNS](#configure-dns) section.
-
-
-=== "Istio"
-
-    The following commands install Istio and enable its Knative integration.
-
-    1. Install a properly configured Istio by following the
-    [Advanced Istio installation](../../installing-istio.md) instructions or by running the command:
-
-        ```bash
-        kubectl apply -l knative.dev/crd-install=true -f {{ artifact(repo="net-istio",org="knative-extensions",file="istio.yaml")}}
-        kubectl apply -f {{ artifact(repo="net-istio",org="knative-extensions",file="istio.yaml")}}
-        ```
-
-    1. Install the Knative Istio controller by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(repo="net-istio",file="net-istio.yaml")}}
-        ```
-
-    1. Fetch the External IP address or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace istio-system get service istio-ingressgateway
-        ```
-
-        !!! tip
-            Save this to use in the following [Configure DNS](#configure-dns) section.
-
-
+=== "Kourier"
+{% filter indent(width=4) %}
+{% include "netadapter-kourier.md" %}
+{% endfilter %}
 === "Contour"
-
-    The following commands install Contour and enable its Knative integration.
-
-    1. Install a properly configured Contour by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="contour.yaml")}}
-        ```
-        <!-- TODO(https://github.com/knative-extensions/net-contour/issues/11): We need a guide on how to use/modify a pre-existing install. -->
-
-    1. Install the Knative Contour controller by running the command:
-      ```bash
-      kubectl apply -f {{ artifact(repo="net-contour",org="knative-extensions",file="net-contour.yaml")}}
-      ```
-
-    1. Configure Knative Serving to use Contour by default by running the command:
-      ```bash
-      kubectl patch configmap/config-network \
-        --namespace knative-serving \
-        --type merge \
-        --patch '{"data":{"ingress-class":"contour.ingress.networking.knative.dev"}}'
-      ```
-
-    1. Fetch the External IP address or CNAME by running the command:
-
-        ```bash
-        kubectl --namespace contour-external get service envoy
-        ```
-
-        !!! tip
-            Save this to use in the following [Configure DNS](#configure-dns) section.
-
+{% filter indent(width=4) %}
+{% include "netadapter-contour.md" %}
+{% endfilter %}
+=== "Istio"
+{% filter indent(width=4) %}
+{% include "netadapter-istio.md" %}
+{% endfilter %}
+=== "Gateway API"
+{% filter indent(width=4) %}
+{% include "netadapter-gatewayapi.md" %}
+{% endfilter %}
 
 ## Verify the installation
 
@@ -163,9 +83,22 @@ Follow the procedure for the networking layer of your choice:
 
 ## Configure DNS
 <!-- These are snippets from the docs/snippets directory -->
+You can configure DNS to avoid specifying the host header in curl commands, or to access the content with a web browser.
+
+The following tabs show instructions for configuring DNS. Follow the procedure for the DNS of your choice.
+
+=== "Magic DNS (sslip.io)"
+{% filter indent(width=4) %}
 {% include "dns.md" %}
+{% endfilter %}
+=== "Real DNS"
+{% filter indent(width=4) %}
 {% include "real-dns-yaml.md" %}
+{% endfilter %}
+=== "No DNS"
+{% filter indent(width=4) %}
 {% include "no-dns.md" %}
+{% endfilter %}
 
 ## Install optional Serving extensions
 
