@@ -1,3 +1,6 @@
+<!-- Referenced by:
+- install/operator/knative-with-operators.md
+-->
 === "Real DNS"
 
     To configure DNS for Knative, take the External IP
