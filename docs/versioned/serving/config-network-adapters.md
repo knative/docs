@@ -7,7 +7,7 @@ function: how-to
 
 # Configure Knative networking
 
-This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring features and capabilities.
+This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers and gateway implementations. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring features and capabilities.
 
 For installation instructions, see the network layer install instructions in [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
