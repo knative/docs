@@ -69,7 +69,7 @@ Review the tabbed content in this section to determine the optimal networking la
 
     [Kourier](https://github.com/knative-extensions/net-kourier/blob/main/README.md#deployment), a Knative extension, is a lightweight implementation of the KIngress resource and is suitable for clusters that don't need other ingress features. Kourier is optimal for learning and prototyping, and is installed by the Knative [Quickstart](../getting-started/README.md).
 
-    Kourier is is the only supported option for IBM-Z and IBM-P platforms. These IBM platforms require additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
+    Kourier is the only supported option for IBM-Z and IBM-P platforms. These IBM platforms require additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
 
     Kourier provides the following additional configuration options:
 
@@ -190,12 +190,14 @@ Review the tabbed content in this section to determine the optimal networking la
 
 ## Ingress configurations
 
-The Knative tested ingress controllers (Contour, Istio, and Kourier) have the following common configurations:
+The Knative tested ingress controllers (Kourier, Contour, and Istio) have the following common configurations:
 
 - Certificate management: Configurable secrets for TLS encrypted traffic. See [Using a custom TLS certificate for DomainMapping](./services/custom-tls-certificate-domain-mapping.md).
 - Timeout policies: Controls for idle, and response stream timeouts. To review timeout settings, see [Configuring the Defaults ConfigMap](./configuration/config-defaults.md).
 - Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
 - The mapping of Route objects to `networking.internal.knative.dev` objects is common to these controllers.
+
+#### Ascertain status and settings
 
 Use the following command to determine which ingress controllers are installed and their status.
 
@@ -224,6 +226,8 @@ Look for the `ingress-class` key. It could also be the `ingress.class` key with 
 ingress-class: contour.ingress.networking.knative.dev
 ingress.class: kourier.ingress.networking.knative.dev
 ```
+
+### Changing the controller
 
 If you want to switch to a controller that is already installed, patch the `config-network` ConfigMap with the new controller as shown in the following example using Kourier.
 
@@ -255,6 +259,8 @@ Knative assumes two gateways in the cluster:
 - Internally exposed - defines the gateway for local traffic.
 
 Both gateways route traffic to the Knative services inside the cluster.
+
+Knative Gateway API architecture:
 
 ```mermaid
 ---
