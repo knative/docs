@@ -11,7 +11,7 @@ This page provides configuration guidance for Knative Serving's integration with
 
 For installation instructions, see the network layer install instructions in [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
-The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support all the different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`.
+The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`.
 
 Knative Ingress architecture:
 
