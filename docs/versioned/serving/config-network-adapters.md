@@ -290,8 +290,6 @@ flowchart LR
 
 To install the Gateway API and configure the gateways, see the Gateway API tab in [Install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
-When gateways are installed, the `config-gateway` ConfigMap is updated to track the `class`, `gateway`, and `service`. The service is the Kubernetes Service name that points to the pods in the Gateway implementation.
-
 Use the following command to determine the current configuration:
 
 ```bash
