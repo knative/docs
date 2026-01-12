@@ -11,36 +11,36 @@ This page provides configuration guidance for Knative Serving's integration with
 
 For installation instructions, see the network layer install instructions in [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
-The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support all the different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`.
+The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support all the different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`. This architecture is shown in following diagram.
 
+```mermaid
+---
+config:
+  layout: elk
+  theme: default
+---
+flowchart LR
+ subgraph top[" "]
+    direction LR
+        kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
+        serving("Serving<br>controller")
+        route["Route object<br>serving.knative.dev"]
+  end
+    route -- read by --> serving
+    serving -- creates --> kingress1
 
-## Network layer options
+    style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
+    style serving fill:#FFE0B2
+    style top fill:transparent
+```
+
+Although Knative uses the same interface for different ingress providers, they behave differently according to their native configurations and additional Knative options specific to the ingress provider.
+
+## Ingress providers
 
 Review the tabbed content in this section to determine the optimal networking layer for your cluster. If you already have one of the ingress controllers installed in your cluster, we recommend using your existing installation. For most users without a supported ingress, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
 
 === "Kourier"
-
-    Knative Serving network layer architecture:
-
-    ```mermaid
-    ---
-    config:
-      layout: elk
-      theme: default
-    ---
-    flowchart LR
-      subgraph top[" "]
-        direction LR
-            kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
-            serving["Serving<br>controller"]
-      end
-        serving -- creates --> kingress1
-        style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
-        style serving fill:#FFE0B2
-        style top fill:transparent
-    ```
-
-    Kourier network layer:
 
     ```mermaid
     ---
@@ -76,28 +76,6 @@ Review the tabbed content in this section to determine the optimal networking la
 
 === "Contour"
 
-    Knative Serving network layer architecture:
-
-    ```mermaid
-    ---
-    config:
-      layout: elk
-      theme: default
-    ---
-    flowchart LR
-      subgraph top[" "]
-        direction LR
-            kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
-            serving["Serving<br>controller"]
-      end
-        serving -- creates --> kingress1
-        style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
-        style serving fill:#FFE0B2
-        style top fill:transparent
-    ```
-
-    Contour network layer:
-
     ```mermaid
     ---
     config:
@@ -127,28 +105,6 @@ Review the tabbed content in this section to determine the optimal networking la
     You can include the full native Contour configuration as described in the [Contour Configuration Reference](https://projectcontour.io/docs/1.33/configuration/). Capabilities include CORS policy configuration, direct visibility classes for external and internal traffic, and several cluster-wide configuration options.
 
 === "Istio"
-
-    Knative Serving network layer architecture:
-
-    ```mermaid
-    ---
-    config:
-      layout: elk
-      theme: default
-    ---
-    flowchart LR
-      subgraph top[" "]
-        direction LR
-            kingress1["Ingress object (KIngress)<br>networking.internal.knative.dev"]
-            serving["Serving<br>controller"]
-      end
-        serving -- creates --> kingress1
-        style kingress1 fill:#BBDEFB,stroke-width:1px,stroke-dasharray: 0
-        style serving fill:#FFE0B2
-        style top fill:transparent
-    ```
-
-    Istio network layer:
 
     ```mermaid
     ---
@@ -230,8 +186,6 @@ The Knative tested ingress controllers (Contour, Istio, and Kourier) have the fo
 - Timeout policies: Controls for idle, and response stream timeouts. To review timeout settings, see [Configuring the Defaults ConfigMap](./configuration/config-defaults.md).
 - Traffic visibility: Mechanisms to expose services externally or cluster-locally. See [Traffic management](./traffic-management.md).
 - The mapping of Route objects to `networking.internal.knative.dev` objects is common to these controllers.
-
-
 
 Use the following command to determine which ingress controllers are installed and their status.
 
