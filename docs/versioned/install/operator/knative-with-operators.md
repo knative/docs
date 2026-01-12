@@ -298,9 +298,22 @@ Knative Serving with different ingresses:
 
 ### Configure DNS
 <!-- These are snippets from the docs/snippets directory -->
+You can configure DNS to avoid specifying the host header in curl commands, or to access the content with a web browser.
+
+The following tabs show instructions for configuring DNS. Follow the procedure for the DNS of your choice.
+
+=== "Magic DNS (sslip.io)"
+{% filter indent(width=4) %}
 {% include "dns.md" %}
+{% endfilter %}
+=== "Real DNS"
+{% filter indent(width=4) %}
 {% include "real-dns-operator.md" %}
+{% endfilter %}
+=== "No DNS"
+{% filter indent(width=4) %}
 {% include "no-dns.md" %}
+{% endfilter %}
 
 ## Install Knative Eventing
 
