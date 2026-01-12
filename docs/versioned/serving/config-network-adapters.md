@@ -9,7 +9,7 @@ function: how-to
 
 This page provides configuration guidance for Knative Serving's integration with Kubernetes ingress controllers and gateway implementations. Knative leverages existing ingress controls in your Kubernetes cluster, allowing you to use the same monitoring features and capabilities.
 
-For installation instructions, see [install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) on the Install Serving with YAML page.
+For installation instructions, see [install a networking layer](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer) on the [Install Serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md) page.
 
 The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`.
 
