@@ -11,7 +11,9 @@ This page provides configuration guidance for Knative Serving's integration with
 
 For installation instructions, see the network layer install instructions in [Install serving with YAML](../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
-The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support all the different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`. This architecture is shown in following diagram.
+The Knative `networking.internal.knative.dev` Ingress type is generally referred to as KIngress objects. KIngress is a common abstraction used to support all the different ingress implementations. It is a custom resource with the name ingresses and apiGroup `networking.internal.knative.dev`.
+
+Knative Ingress architecture:
 
 ```mermaid
 ---
@@ -41,6 +43,8 @@ Although Knative uses the same interface for different ingress providers, they b
 Review the tabbed content in this section to determine the optimal networking layer for your cluster. If you already have one of the ingress controllers installed in your cluster, we recommend using your existing installation. For most users without a supported ingress, the Kourier ingress controller is sufficient. You can expand your capabilities with the Contour ingress, a full-feature service mesh with Istio, and the Kubernetes Gateway API.
 
 === "Kourier"
+
+    Kourier ingress provider architecture:
 
     ```mermaid
     ---
@@ -76,6 +80,8 @@ Review the tabbed content in this section to determine the optimal networking la
 
 === "Contour"
 
+    Courier ingress provider architecture:
+
     ```mermaid
     ---
     config:
@@ -105,6 +111,8 @@ Review the tabbed content in this section to determine the optimal networking la
     You can include the full native Contour configuration as described in the [Contour Configuration Reference](https://projectcontour.io/docs/1.33/configuration/). Capabilities include CORS policy configuration, direct visibility classes for external and internal traffic, and several cluster-wide configuration options.
 
 === "Istio"
+
+    Istio ingress provider architecture:
 
     ```mermaid
     ---
@@ -146,6 +154,8 @@ Review the tabbed content in this section to determine the optimal networking la
 
 === "Gateway API"
 
+    Knative Gateway APU architecture:
+
     ```mermaid
     ---
     config:
@@ -172,7 +182,7 @@ Review the tabbed content in this section to determine the optimal networking la
     style underlying fill:#fff3e0,stroke:#ef6c00
     ```
 
-    The Knative `net-gateway-api` is a KIngress implementation for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). A recommended choice for many teams adopting the Gateway API to unify ingress across Kubernetes. Clusters with large numbers of Knative Services however, may experience limitations.
+    The [Knative net-gateway-api](https://github.com/knative-extensions/net-gateway-api) is a KIngress implementation for Knative integration with the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/). A recommended choice for many teams adopting the Gateway API to unify ingress across Kubernetes. Clusters with large numbers of Knative Services however, may experience limitations.
 
     The Kubernetes Gateway API supports a number of implementations. Istio, Contour, and Envoy-Gateway implementations are tested. For more information see [Tested Gateway API version and Ingress](https://github.com/knative-extensions/net-gateway-api/blob/main/docs/test-version.md).
 
