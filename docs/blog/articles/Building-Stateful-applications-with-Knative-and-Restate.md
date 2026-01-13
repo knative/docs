@@ -203,13 +203,13 @@ func main() {
 
 You can now build the container image using your tools, e.g. with `ko`:
 
-```shell
+```bash
 $ ko build main.go -B
 ```
 
 And deploy it with `kn`:
 
-```shell
+```bash
 $ kn service create signup \
   --image $MY_IMAGE_REGISTRY/main.go \
   --port h2c:8080
@@ -217,13 +217,13 @@ $ kn service create signup \
 
 Before sending requests, you need to tell Restate about your new service deployment:
 
-```shell
+```bash
 $ restate deployments register http://signup.default.svc
 ```
 
 And this is it! You're now ready to send requests:
 
-```shell
+```bash
 $ curl http://localhost:8080/Signup/Signup --json '{"username": "slinkydeveloper", "name": "Francesco", "surname": "Guardiani", "password": "Pizza-without-pineapple"}'
 ```
 

@@ -95,7 +95,7 @@ For more information about configuring the `RabbitmqCluster` CRD, see the [Rabbi
 Check the event-display Service to see if it is receiving events.
 It might take a while for the Source to start sending events to the Sink.
 
-```sh
+```bash
   kubectl -l='serving.knative.dev/service=event-display' logs -c user-container
   ☁️  cloudevents.Event
   Context Attributes,
@@ -118,19 +118,19 @@ It might take a while for the Source to start sending events to the Sink.
 
 1. Delete the RabbitMQSource:
 
-    ```sh
+    ```bash
     kubectl delete -f <source-yaml-filename>
     ```
 
 1. Delete the RabbitMQ credentials secret:
 
-    ```sh
+    ```bash
     kubectl delete -f <secret-yaml-filename>
     ```
 
 1. Delete the event display Service:
 
-    ```sh
+    ```bash
     kubectl delete -f <service-yaml-filename>
     ```
 

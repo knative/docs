@@ -47,7 +47,7 @@ This workflow ensures a smooth transition from development to deployment within 
 ### **Step 1: Create a Knative Function template**
 
 ![Image 6](images/image6.png)
-```shell
+```bash
 func create -l python bad-word-filter -t cloudevents
 ```
 
@@ -166,14 +166,14 @@ The content of `bad-word-filter/pyproject.toml`:
 !!! note
     Please enter `/bad-word-filter` when you are executing the following commands.
 
-```sh
+```bash
 func deploy -b=s2i -v
 ```
 
 ???+ success "Verify"
     Expect to see the following message:
 
-    ```sh
+    ```bash
     Function deployed in namespace "default" and exposed at URL:
     http://bad-word-filter.default.svc.cluster.local
     ```
@@ -182,14 +182,14 @@ func deploy -b=s2i -v
 
 ![Image 7](images/image7.png)
 
-```sh
+```bash
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 ```
 
 ???+ success "Verify"
     Expect to receive a CloudEvent response:
 
-    ```sh
+    ```bash
     Context Attributes,
     specversion: 1.0
     type: new-review-comment

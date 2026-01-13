@@ -11,7 +11,7 @@ The Knative webhook examines resources that are created, read, updated, or delet
 
 You can configure the label `webhooks.knative.dev/exclude` to allow namespaces to bypass the Knative webhook.
 
-``` yaml
+```yaml
 apiVersion: v1
 kind: Namespace
 metadata:

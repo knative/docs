@@ -23,7 +23,7 @@ We will be fulfilling each requirement with the order above.
 ## **Clone the Repository**
 ![Next Step Image](images/image22.png)
 
-```sh
+```bash
 git clone https://github.com/knative/docs.git
 ```
 ???+ bug "Troubleshooting"
@@ -129,7 +129,7 @@ You can either [build the image locally](https://docs.docker.com/get-started/02_
 
 When ready, run the following command to deploy the frontend app:
 
-```shell
+```bash
 kubectl apply -f frontend/config/100-front-end-deployment.yaml
 ```
 
@@ -143,7 +143,7 @@ service/bookstore-frontend-svc created
 ???+ success "Verify"
     Run the following command to check if the pod is running:
     
-    ```shell
+    ```bash
     kubectl get pods
     ```
 
@@ -160,7 +160,7 @@ Follow the respective `minikube` or `kind` instructions to access Kubernetes Ser
 
 Check the running Kubernetes Services:
 
-```shell
+```bash
 kubectl get services
 ```
 
@@ -192,7 +192,7 @@ You can either [build the image locally](https://docs.docker.com/get-started/02_
 
 When ready, run the following command to deploy the Node.js server:
 
-```shell
+```bash
 kubectl apply -f node-server/config/100-deployment.yaml
 ```
 
@@ -207,7 +207,7 @@ service/node-server-svc created
 
     Run the following command to check if the pod is running:
 
-    ```shell
+    ```bash
     kubectl get pods
     ```
 
@@ -225,7 +225,7 @@ Follow the respective `minikube` or `kind` instructions to access Kubernetes Ser
 
 Check the running Kubernetes Services:
 
-```shell
+```bash
 kubectl get services
 ```
 And you will see the following console output:
@@ -253,7 +253,7 @@ If you encounter any issues during the setup process, refer to the troubleshooti
 
     To check the logs, use the following command:
 
-    ```shell
+    ```bash
     kubectl logs <pod-name>
     ```
 

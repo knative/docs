@@ -34,7 +34,7 @@ v1/
 ├── apiserver_lifecycle.go
 ```
 
-```shell
+```bash
 // +genclient
 // +genreconciler
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

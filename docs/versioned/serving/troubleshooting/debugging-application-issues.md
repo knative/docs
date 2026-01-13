@@ -19,7 +19,7 @@ This kind of failure is most likely due to either a misconfigured manifest or
 wrong command. For example, the following output says that you must configure
 route traffic percent to sum to 100:
 
-```
+```text
 Error from server (InternalError): error when applying patch:
 {"metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"serving.knative.dev/v1\",\"kind\":\"Route\",\"metadata\":{\"annotations\":{},\"name\":\"route-example\",\"namespace\":\"default\"},\"spec\":{\"traffic\":[{\"configurationName\":\"configuration-example\",\"percent\":50}]}}\n"}},"spec":{"traffic":[{"configurationName":"configuration-example","percent":50}]}}
 to:
@@ -60,7 +60,7 @@ ready. Please proceed to later sections to diagnose Revision readiness status.
 Otherwise, run the following command to look at the ClusterIngress created for
 your Route
 
-```
+```bash
 kubectl get ingresses.networking.internal.knative.dev <INGRESS_NAME> --output yaml
 ```
 

@@ -63,7 +63,7 @@ Event producers are be able to connect to HTTPS endpoints with cluster-internal 
       selfSigned: {}
     ```
 2. Apply the `ClusterIssuer` resource:
-    ```shell
+    ```bash
     $ kubectl apply -f <filename>
     ```
 3. Create a root certificate using the previously created `SelfSigned` `ClusterIssuer`:
@@ -123,20 +123,20 @@ the release assets, we release the certificates for Eventing servers that can be
 necessary.
 
 1. Install certificates, run the following command:
-    ```shell
+    ```bash
     kubectl apply -f {{ artifact(repo="eventing",file="eventing-tls-networking.yaml")}}
     ```
 2. [Optional] If you're using Eventing Kafka components, install certificates for Kafka components
    by running the following command:
-    ```shell
+    ```bash
     kubectl apply -f {{ artifact(org="knative-extensions",repo="eventing-kafka-broker",file="eventing-kafka-tls-networking.yaml")}}
     ```
 3. Verify issuers and certificates are ready
-    ```shell
+    ```bash
     kubectl get certificates.cert-manager.io -n knative-eventing
     ```
    Example output:
-    ```shell
+    ```bash
     NAME                           READY   SECRET                         AGE
     imc-dispatcher-server-tls      True    imc-dispatcher-server-tls      14s
     mt-broker-filter-server-tls    True    mt-broker-filter-server-tls    14s
@@ -342,15 +342,15 @@ ClusterIssuer section](#setup-selfsigned-clusterissuer), you can add the CA to t
 bundles by running the following commands:
 
 1. Export the CA from the knative-eventing-ca secret in the OpenShift Cert-Manager Operator namespace, cert-manager by default:
-    ```shell
+    ```bash
     $ kubectl get secret -n cert-manager knative-eventing-ca -o=jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt
     ```
 2. Create a CA trust bundle in the `knative-eventing` namespace:
-    ```shell
+    ```bash
     $ kubectl create configmap -n knative-eventing my-org-selfsigned-ca-bundle --from-file=ca.crt
     ```
 3. Label the ConfigMap with networking.knative.dev/trust-bundle: "true" label:
-    ```shell
+    ```bash
     $ kubectl label configmap -n knative-eventing my-org-selfsigned-ca-bundle networking.knative.dev/trust-bundle=true
     ```
 
@@ -408,7 +408,7 @@ spec:
 
 Apply the `default-broker-example.yaml` file into a test namespace  `transport-encryption-test`:
 
-```shell
+```bash
 kubectl create namespace transport-encryption-test
 
 kubectl apply -n transport-encryption-test -f defautl-broker-example.yaml
@@ -416,13 +416,13 @@ kubectl apply -n transport-encryption-test -f defautl-broker-example.yaml
 
 Verify that addresses are all `HTTPS`:
 
-```shell
+```bash
 kubectl get brokers.eventing.knative.dev -n transport-encryption-test br -oyaml
 ```
 
 Example output:
 
-```shell
+```bash
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
@@ -481,14 +481,14 @@ status:
 
 Sending events to the Broker using HTTPS endpoints:
 
-```shell
+```bash
 kubectl run curl -n transport-encryption-test --image=curlimages/curl -i --tty -- sh
 
 ```
 
 Save the CA certs from the Broker's `.status.address.CACerts` field into `/tmp/cacerts.pem`
 
-```shell
+```bash
 cat <<EOF >> /tmp/cacerts.pem
 -----BEGIN CERTIFICATE-----
 MIIBbzCCARagAwIBAgIQAur7vdEcreEWSEQatCYlNjAKBggqhkjOPQQDAjAYMRYw
@@ -505,14 +505,14 @@ EOF
 
 Send the event by running the following command:
 
-```shell
+```bash
 curl -v -X POST -H "content-type: application/json" -H "ce-specversion: 1.0" -H "ce-source: my/curl/command" -H "ce-type: my.demo.event" -H "ce-id: 6cf17c7b-30b1-45a6-80b0-4cf58c92b947" -d '{"name":"Knative Demo"}' --cacert /tmp/cacert
 s.pem https://broker-ingress.knative-eventing.svc.cluster.local/transport-encryption-test/br
 ```
 
 Example output:
 
-```shell
+```bash
 * processing: https://broker-ingress.knative-eventing.svc.cluster.local/transport-encryption-test/br
 *   Trying 10.96.174.249:443...
 * Connected to broker-ingress.knative-eventing.svc.cluster.local (10.96.174.249) port 443

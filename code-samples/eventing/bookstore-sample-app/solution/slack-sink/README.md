@@ -16,7 +16,7 @@ When a CloudEvent with the type `new-review-comment` is sent to the Knative Even
 
 Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
 
-```sh
+```bash
 kubectl create ns camel-k && \
 kubectl apply -k github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0 --server-side
 ```
@@ -38,7 +38,7 @@ spec:
 
 Install it with one command:
 
-```sh
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: camel.apache.org/v1
 kind: IntegrationPlatform
@@ -63,13 +63,13 @@ This Broker is created solely for testing purposes and is intended for temporary
 
 **Method 1**: Initialize a Broker within your Kubernetes cluster using the Knative CLI:
 
-```sh
+```bash
 kn broker create book-review-broker
 ```
 
 You will see this message if the Broker is created successfully:
 
-```sh
+```bash
 Broker 'book-review-broker' successfully created in namespace 'default'.
 ```
 
@@ -87,13 +87,13 @@ metadata:
 
 After you saved the file, you can apply the configuration to your Kubernetes cluster:
 
-```sh
+```bash
  kubectl apply -f book-review-broker.yaml
 ```
 
 You will see this message if the Broker is created successfully:
 
-```sh
+```bash
 broker.eventing.knative.dev/book-review-broker created
 ```
 
@@ -136,13 +136,13 @@ Make sure to replace the `webhookUrl` with your actual Slack channel name and we
 
 3. Apply the configuration to your Kubernetes cluster:
 
-```sh
+```bash
 kubectl apply -f slack-sink.yaml
 ```
 
 You will see this message if the configuration is created successfully:
 
-```sh
+```bash
 pipe.camel.apache.org/bookstore-notification-service created
 ```
 
@@ -163,13 +163,13 @@ Directly sending CloudEvents to a Broker using curl from an external machine (li
 
 Therefore, you need to create a new pod in your Kubernetes cluster to send a CloudEvent to the Broker. You can use the following command to create a new pod:
 
-```sh
+```bash
 kubectl run curler --image=radial/busyboxplus:curl -it --restart=Never
 ```
 
 You will see this message if you successfully entered the pod's shell
 
-```sh
+```bash
 [root@curler:/]$ 
 ```
 
@@ -177,7 +177,7 @@ If you don't see a command prompt, try pressing enter.
 
 Using curl command to send a CloudEvent to the Broker:
 
-```sh
+```bash
 [root@curler:/]$ curl -v "<The URI to your Broker>" \
 -X POST \
 -H "Ce-Id: review1" \
