@@ -42,6 +42,8 @@ OIDC authentication is currently supported for the following components:
     - [ApiServerSource](./../../sources/apiserversource/)
     - [PingSource](./../../sources/ping-source/)
     - [KafkaSource](./../../sources/kafka-source/)
+    - [SinkBinding](./../../custom-event-source/sinkbinding/)
+    - [ContainerSource](./../../custom-event-source/containersource/)
 
 ## Sender Identity Configuration
 
@@ -65,6 +67,40 @@ metadata:
 data:
   authentication-oidc: "enabled"
 ```
+
+## OIDC Token for SinkBinding and ContainerSource
+
+When the `authentication-oidc` feature is enabled and a SinkBinding or ContainerSource has a sink with an OIDC audience, Knative Eventing automatically mounts the OIDC token to the container.
+
+The token is available at the following path:
+
+```
+/oidc/token
+```
+
+This file contains a valid OIDC access token for the sink's audience. Your application can read this file and include the token in the `Authorization` header when sending events to the sink.
+
+### Example: Sending authenticated events
+
+The following example shows how to read the OIDC token and send an authenticated event to the sink in a container:
+
+```bash
+# Read the OIDC token and sink URL
+TOKEN=$(cat /oidc/token)
+
+# Send an authenticated CloudEvent to the sink
+curl -X POST "$K_SINK" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Ce-Id: 1" \
+  -H "Ce-Source: my-container-source" \
+  -H "Ce-Type: my.event.type" \
+  -H "Ce-Specversion: 1.0" \
+  -d '{"message": "Hello from ContainerSource"}'
+```
+
+!!! note
+    The token is automatically refreshed by Knative Eventing before it expires. Your application should read the token from the file for each request, or implement token refresh logic.
 
 ## Verifying that the feature is working
 
