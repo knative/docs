@@ -106,6 +106,20 @@ This metric helps operators identify connectivity issues between the activator a
 - When stats fail to send to the autoscaler (value = 0)
 - Periodically every 5 seconds based on connection status check
 
+### `kn.activator.autoscaler.connection_errors_total`
+
+**Instrument Type:** Int64Counter
+
+**Unit ([UCUM](https://ucum.org)):** {error}
+
+**Description:** Total number of autoscaler connection errors from the activator
+
+This counter increments each time the activator fails to communicate with the autoscaler. It complements the `kn.activator.autoscaler.reachable` gauge by providing a cumulative count of errors, which is useful for:
+
+- Detecting flaky connections that might be missed by point-in-time gauge sampling
+- Creating rate-based alerts (e.g., alert if error rate exceeds threshold over 5 minutes)
+- Tracking connection stability trends over time
+
 ### HTTP metrics
 
 Since the activator receives and forwards requests to the user workload it has both HTTP server and client metrics.
