@@ -92,29 +92,40 @@ Name | Type | Description
 `kn.configuration.name` | string | Knative Configuration name associated with this Revision
 `kn.revision.name` | string | The name of the Revision
 
-### `kn.activator.autoscaler.reachable`
+### `kn.activator.reachable`
 
 **Instrument Type:** Int64Gauge
 
 **Unit ([UCUM](https://ucum.org)):** {reachable}
 
-**Description:** Whether the autoscaler is reachable from the activator (1 = reachable, 0 = not reachable)
+**Description:** Whether a peer is reachable from the activator (1 = reachable, 0 = not reachable)
 
-This metric helps operators identify connectivity issues between the activator and autoscaler components. The metric is recorded:
+The following attributes are included with the metric
 
-- When stats are successfully sent to the autoscaler (value = 1)
-- When stats fail to send to the autoscaler (value = 0)
-- Periodically every 5 seconds based on connection status check
+Name | Type | Description
+-|-|-
+`peer` | string | The peer service the activator is connecting to (e.g., `autoscaler`)
 
-### `kn.activator.autoscaler.connection_errors_total`
+This metric helps operators identify connectivity issues between the activator and its peer components. The metric is recorded:
+
+- When a connection is established (value = 1)
+- When a connection is lost (value = 0)
+
+### `kn.activator.connection_errors`
 
 **Instrument Type:** Int64Counter
 
 **Unit ([UCUM](https://ucum.org)):** {error}
 
-**Description:** Total number of autoscaler connection errors from the activator
+**Description:** Number of connection errors from the activator
 
-This counter increments each time the activator fails to communicate with the autoscaler. It complements the `kn.activator.autoscaler.reachable` gauge by providing a cumulative count of errors, which is useful for:
+The following attributes are included with the metric
+
+Name | Type | Description
+-|-|-
+`peer` | string | The peer service the activator is connecting to (e.g., `autoscaler`)
+
+This counter increments each time the activator fails to communicate with a peer. It complements the `kn.activator.reachable` gauge by providing a cumulative count of errors, which is useful for:
 
 - Detecting flaky connections that might be missed by point-in-time gauge sampling
 - Creating rate-based alerts (e.g., alert if error rate exceeds threshold over 5 minutes)
