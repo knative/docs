@@ -125,7 +125,7 @@ Name | Type | Description
 -|-|-
 `peer` | string | The peer service the activator is connecting to (e.g., `autoscaler`)
 
-This counter increments each time the activator fails to communicate with a peer. It complements the `kn.activator.reachable` gauge by providing a cumulative count of errors, which is useful for:
+This counter increments each time the activator fails to communicate with a peer. It complements the `kn.activator.stats.conn.reachable` gauge by providing a cumulative count of errors, which is useful for:
 
 - Detecting flaky connections that might be missed by point-in-time gauge sampling
 - Creating rate-based alerts (e.g., alert if error rate exceeds threshold over 5 minutes)
