@@ -111,7 +111,7 @@ This metric helps operators identify connectivity issues between the activator a
 - When a connection is established (value = 1)
 - When a connection is lost (value = 0)
 
-### `kn.activator.connection_errors`
+### `kn.activator.stats.conn.errors`
 
 **Instrument Type:** Int64Counter
 
