@@ -67,13 +67,13 @@ This workflow ensures a smooth transition from development to deployment within 
 
 Create a new function using the func CLI:
 
-```sh
+```bash
 func create -l <language> <function-name> -t cloudevents
 ```
 
 In this case, we are creating a Python function that handles CloudEvents, so the command will be:
 
-```sh
+```bash
 func create -l python sentiment-analysis-app -t cloudevents
 ```
 
@@ -218,13 +218,13 @@ Knative Function will automatically install the dependencies listed here when yo
     
     Before we get started, configure the container registry to push the image to the container registry. You can use the following command to configure the container registry:
     
-    ```sh
+    ```bash
     export FUNC_REGISTRY=<your-container-registry>
     ```
     
     In this case, we will use the s2i build by adding the flag `-b=s2i`, and `-v` to see the verbose output.
     
-    ```sh
+    ```bash
     func build -b=s2i -v
     ```
     
@@ -237,7 +237,7 @@ Knative Function will automatically install the dependencies listed here when yo
     This command will build the function and push the image to the container registry. After the build is complete, you can run the function using the following command:
     
     
-    ```sh
+    ```bash
     func run -b=s2i -v
     ```
 
@@ -249,7 +249,7 @@ Knative Function will automatically install the dependencies listed here when yo
     
     **Solution: You may want to check whether you are in the correct directory. You can use the following command to check the current directory.**
     
-    ```sh
+    ```bash
     pwd
     ```
     
@@ -261,7 +261,7 @@ Knative Function will automatically install the dependencies listed here when yo
     
     You will see the following output if the function is running successfully:
     
-    ```sh
+    ```bash
     ❗function up-to-date. Force rebuild with --build
     Running on host port 8080
     ---> Running application from script (app.sh) ...
@@ -269,7 +269,7 @@ Knative Function will automatically install the dependencies listed here when yo
     
     Knative Function has an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent and test your function out:
     
-    ```sh
+    ```bash
     func invoke -f=cloudevent --data='{"reviewText": "I love Knative so much"}' --content-type=application/json --type="new-review-comment" -v
     ```
     
@@ -277,7 +277,7 @@ Knative Function will automatically install the dependencies listed here when yo
     
     In this case, you will get the full CloudEvent response:
     
-    ```sh
+    ```bash
     Context Attributes,
       specversion: 1.0
       type: new-review-comment
@@ -308,7 +308,7 @@ After you have finished the code, you can deploy the function to the cluster usi
 !!! note
     Using `-b=s2i` to specify how the function should be built.
 
-```sh
+```bash
 func deploy -b=s2i -v
 ```
 
@@ -316,7 +316,7 @@ func deploy -b=s2i -v
 
     When the deployment is complete, you will see the following output:
     
-    ```sh
+    ```bash
     Function deployed in namespace "default" and exposed at URL:
     http://sentiment-analysis-app.default.svc.cluster.local
     ```
@@ -324,13 +324,13 @@ func deploy -b=s2i -v
 !!! tip  
     You can find the URL of the Knative Function (Knative Service) by running the following command:
     
-    ```sh
+    ```bash
     kubectl get kservice
     ```
     
     You will see the URL in the output:
     
-    ```sh
+    ```bash
     NAME                     URL                                                       LATESTCREATED                  LATESTREADY                    READY   REASON
     sentiment-analysis-app   http://sentiment-analysis-app.default.svc.cluster.local   sentiment-analysis-app-00001   sentiment-analysis-app-00001   True    
     ```
@@ -341,7 +341,7 @@ func deploy -b=s2i -v
 
 If you use the following command to query all the pods in the cluster, you will see that the pod is running:
 
-```sh
+```bash
 kubectl get pods
 ```
 
@@ -349,7 +349,7 @@ where `-A` is the flag to query all the pods in all namespaces.
 
 And you will find that your sentiment analysis app is running:
 
-```sh
+```bash
 NAMESPACE   NAME                                      READY   STATUS    RESTARTS   AGE
 default     sentiment-analysis-app-00002-deployment   2/2     Running   0          2m
 ```
@@ -368,7 +368,7 @@ After deployment, the `func` CLI provides a URL to access your function. You can
 
 Simply use Knative Function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
-```sh
+```bash
 func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 ```
 
@@ -380,7 +380,7 @@ func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
 
     If you see the response, it means that the function is running successfully.
 
-    ```sh
+    ```bash
     Context Attributes,
       specversion: 1.0
       type: moderated-comment
