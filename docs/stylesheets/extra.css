@@ -144,6 +144,11 @@ a.md-header__button.md-logo img {
 .md-tabs {
   color: black;
   font-weight: bold;
+  flex-shrink: 0;
+}
+
+.md-tabs__list {
+  flex-shrink: 0;
 }
 
 .md-header__source {
