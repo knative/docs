@@ -158,14 +158,14 @@ spec:
 
 Apply the `default-broker-example.yaml` file into a test namespace `authentication-oidc-test`:
 
-```shell
+```bash
 kubectl create namespace authentication-oidc-test
 
 kubectl apply -n authentication-oidc-test -f default-broker-example.yaml
 ```
 
 Verify that the Broker announces its audience:
-```shell
+```bash
 kubectl -n authentication-oidc-test get broker br -o yaml
 ```
 
@@ -194,18 +194,18 @@ status:
 Send events to the Broker using OIDC authentication:
 
 1. Create an OIDC token (access token):
-    ```shell
+    ```bash
     kubectl -n authentication-oidc-test create serviceaccount oidc-test-user; kubectl -n authentication-oidc-test create token oidc-test-user --audience eventing.knative.dev/broker/authentication-oidc-test/br
     ```
 
     Example output:
-    ```shell
+    ```bash
     serviceaccount/oidc-test-user created
     eyJhbGciOiJSUzI1NiIsImtpZCI6IlZBWmppNEVJZkVSVDZoYTA4dU1xTWJxSHFYQTgtbE00VU1tMmpFZUNuakUifQ.eyJhdWQiOlsiZXZlbnRpbmcua25hdGl2ZS5kZXYvYnJva2VyL2F1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdC9iciJdLCJleHAiOjE3MDU5MzQyMTQsImlhdCI6MTcwNTkzMDYxNCwiaXNzIjoiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJhdXRoZW50aWNhdGlvbi1vaWRjLXRlc3QiLCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoib2lkYy10ZXN0LXVzZXIiLCJ1aWQiOiJkNGM5MjkzMy1kZThlLTRhNDYtYjkxYS04NjRjNTZkZDU4YzIifX0sIm5iZiI6MTcwNTkzMDYxNCwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmF1dGhlbnRpY2F0aW9uLW9pZGMtdGVzdDpvaWRjLXRlc3QtdXNlciJ9.Taqk11LRC7FKMbt_1VvmRjMolJL54CFGbRT85ZgNdG8YT6MXiw_S2rMHxLyC9RyX0hb720szHhiVIPj15jbz597egSBbcuk-f_MCsUFMyK1Nb95blo6UNDFKIQxC5_aleoT-qaGtXlt4OEE6RjA28mFeeSCjcJUCRdLGLuSiQT47lxLqNK5OfKjd4wGMiUsbBzOcXor9ouJc1lr4gFlCzzIMJNLfXU0O_AB8J--yh6wP07Q-2AWwwv7J1CtZCrIqaPBFjWnplLqtBgo33ZNbqomXyYVdO_0HlEN9XtlK_y_2veEvKOkINzpic_ipf5ZhTxEpXWaztZzdkWd-e2mHMg
     ```
 
 2. Send a curl request to the Broker
-    ```shell
+    ```bash
     kubectl -n authentication-oidc-test run curl --image=curlimages/curl -i --tty -- sh
 
     # Send unauthenticated request (should result in a 401)
@@ -216,7 +216,7 @@ Send events to the Broker using OIDC authentication:
     ```
 
     Example output: 
-    ```shell
+    ```bash
     $ curl -v http://broker-ingress.knative-eventing.svc.cluster.local/authentication-oidc-test/br -H "Content-Type:application/json" -H "Ce-Id:1" -H "Ce-Source:cloud-event-example" -H "Ce-Type:myCloudEventGreeting" -H "Ce-Specversion:1.0" -d "{\"name\": \"unauthenticated\"}"
 
     * Host broker-ingress.knative-eventing.svc.cluster.local:80 was resolved.
@@ -272,12 +272,12 @@ Send events to the Broker using OIDC authentication:
     ~ $
     ```
 3. Verify the 2nd event reached the event-display pod
-    ```shell
+    ```bash
     kubectl -n authentication-oidc-test logs event-display
     ```
 
     Example output:
-    ```shell
+    ```bash
     ☁️  cloudevents.Event
     Context Attributes,
       specversion: 1.0
