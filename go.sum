@@ -23,5 +23,5 @@ gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f h1:BLraFXnmrev5lT+xlilqcH8X
 gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.3.0 h1:clyUAQHOM3G0M3f5vQj7LuJrETvjVot3Z5el9nffUtU=
 gopkg.in/yaml.v2 v2.3.0/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
-knative.dev/hack v0.0.0-20251117013754-67a5b048bc27 h1:yPzDTKOFtSYHxgXB2N7+nWT/3doNqPNCbCf7Bf9PeAE=
-knative.dev/hack v0.0.0-20251117013754-67a5b048bc27/go.mod h1:L5RzHgbvam0u8QFHfzCX6MKxu/a/gIGEdaRBqNiVbl0=
+knative.dev/hack v0.0.0-20260120115810-bf6758cba446 h1:Y8raYHIuAL9/gUKGYD9/dD+EqUTmrpqVDowzfUVSlGs=
+knative.dev/hack v0.0.0-20260120115810-bf6758cba446/go.mod h1:L5RzHgbvam0u8QFHfzCX6MKxu/a/gIGEdaRBqNiVbl0=
