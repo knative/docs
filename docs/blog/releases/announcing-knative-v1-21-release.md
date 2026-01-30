@@ -25,6 +25,8 @@ Follow the instructions in [Installing Knative](https://knative.dev/docs/install
 
 ## Highlights
 
+Minimal supported version of k8s is now bumped to 1.33.
+
 Serving prepares for the upcoming `secure-pod-defaults` change in v1.22 where `AllowRootBounded` will become the default. Request logging now supports OpenTelemetry W3C Trace Context while maintaining Zipkin B3 compatibility. A new `pod-is-always-schedulable` feature helps clusters with autoscaling skip the transient Unschedulable state.
 
 Eventing had a light release focused on stability improvements and dependency updates.
