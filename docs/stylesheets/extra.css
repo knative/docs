@@ -694,3 +694,51 @@ article.md-search-result__article p:not(.md-search-result__meta) {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Search overlay fix - makes search bar overlay navigation instead of pushing it */
+.md-search {
+  position: relative;
+}
+
+.md-search__form {
+  border-radius: 10px;
+  position: relative;
+}
+
+.md-search__output {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+/* When search is active, make the overlay appear over navigation */
+.md-search[data-md-state="active"] .md-search__form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: white;
+  border: black 1px solid;
+  border-radius: 10px;
+}
+
+/* Make sure the search input maintains its styling when active */
+.md-search[data-md-state="active"] .md-search__input {
+  background-color: white;
+  border: black 1px solid;
+  border-radius: 10px;
+}
+
+/* Ensure the search overlay sits above navigation items */
+@media screen and (min-width: 60em) {
+  .md-search__form {
+    position: relative;
+  }
+  
+  .md-search[data-md-state="active"] {
+    position: relative;
+    z-index: 100;
+  }
+}
