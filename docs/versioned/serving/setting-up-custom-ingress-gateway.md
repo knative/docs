@@ -45,13 +45,13 @@ kubectl edit gateway knative-ingress-gateway -n knative-serving
 
 Replace the label selector with the label of your service:
 
-```
+```yaml
 istio: ingressgateway
 ```
 
 For the example `custom-ingressgateway` service mentioned earlier, it should be updated to:
 
-```
+```yaml
 istio: custom-gateway
 ```
 
@@ -180,7 +180,7 @@ For the example `knative-custom-gateway` mentioned earlier, it should be updated
      ```
 
 The configuration format should be
-```
+```yaml
   external-gateways: |
     - name: <gateway-name>
       namespace: <gateway-namespace>
