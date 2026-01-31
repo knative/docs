@@ -158,6 +158,8 @@ a.md-header__button.md-logo img {
   background-color: white;
   border: black 1px solid;
   border-radius: 10px;
+  width: 100%;
+
 }
 
 .md-search__input::placeholder {
@@ -694,3 +696,9 @@ article.md-search-result__article p:not(.md-search-result__meta) {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+
+.md-search__inner {
+  max-width: 30rem;
+}
+
