@@ -702,3 +702,6 @@ article.md-search-result__article p:not(.md-search-result__meta) {
   max-width: 30rem;
 }
 
+.md-header[data-md-state="search"] .md-version {
+  display: none;
+}
