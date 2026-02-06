@@ -22,3 +22,13 @@ The `build` command uses the project name and the image registry name to constru
 
 !!! note
     The coordinates for the **image registry** can be configured through an environment variable (`FUNC_REGISTRY`) as well.
+
+!!! tip "Private Registry Authentication"
+    For private registries that require authentication, you can set credentials using environment variables:
+    
+    - `FUNC_USERNAME`: The username for registry authentication
+    - `FUNC_PASSWORD`: The password for registry authentication
+    
+    These variables work with all builders: `host`, `s2i`, and `pack`.
+    
+    **Note:** Using environment variables is more secure than the `--password` flag because command-line arguments are visible to all users on the system via `ps`.

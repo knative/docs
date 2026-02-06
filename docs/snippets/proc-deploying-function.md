@@ -46,6 +46,16 @@ The `deploy` command uses the function project name as the Knative Service name.
     http://hello.default.127.0.0.1.sslip.io
 ```
 
+!!! tip "Private Registry Authentication"
+    For private registries that require authentication, you can set credentials using environment variables:
+    
+    - `FUNC_USERNAME`: The username for registry authentication
+    - `FUNC_PASSWORD`: The password for registry authentication
+    
+    These variables work with all builders: `host`, `s2i`, and `pack`.
+    
+    **Note:** Using environment variables is more secure than the `--password` flag because command-line arguments are visible to all users on the system via `ps`.
+
 You can verify that your function has been successfully deployed by using the `invoke` command and observing the output:
 
 === "func"
