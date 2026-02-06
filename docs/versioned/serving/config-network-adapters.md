@@ -69,8 +69,6 @@ Review the tabbed content in this section to determine the optimal provider for 
 
     [Kourier](https://github.com/knative-extensions/net-kourier/blob/main/README.md#deployment), a Knative extension, is a lightweight implementation of the KIngress resource and is suitable for clusters that don't need other ingress features. Kourier is optimal for learning and prototyping, and is installed by the Knative [Quickstart](../getting-started/README.md).
 
-    Kourier is the only supported option for IBM-Z and IBM-P platforms. These IBM platforms require additional steps as documented in [Install Serving with YAML on IBM-Z and IBM-P](../install/yaml-install/serving/install-serving-with-yaml-on-IBM-Z-and-IBM-P.md).
-
     Kourier provides the following additional configuration options:
 
     - Access logging.
