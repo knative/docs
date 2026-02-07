@@ -154,6 +154,10 @@ a.md-header__button.md-logo img {
   border-radius: 10px;
 }
 
+.md-search__inner {
+  max-width: 30rem;
+}
+
 .md-search__input {
   background-color: white;
   border: black 1px solid;
@@ -583,6 +587,13 @@ a.md-header__button.md-logo img {
   }
 }
 
+@media screen and (min-width: 60em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-version {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 630px) {
   [dir=ltr] ul.md-tabs__list {
     margin-left: 3rem;
@@ -698,10 +709,8 @@ article.md-search-result__article p:not(.md-search-result__meta) {
 }
 
 
-.md-search__inner {
-  max-width: 30rem;
-}
 
-.md-header[data-md-state="search"] .md-version {
-  display: none;
-}
+
+
+
+
