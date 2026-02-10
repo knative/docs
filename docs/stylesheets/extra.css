@@ -155,7 +155,7 @@ a.md-header__button.md-logo img {
 }
 
 .md-search__inner {
-  max-width: 30rem;
+  max-width: 20rem;
 }
 
 .md-search__input {
@@ -477,6 +477,34 @@ a.md-header__button.md-logo img {
   color: black;
 }
 
+
+/* Give title (Knative + version) a minimum readable width */
+.md-header__title {
+  flex: 0 0 auto !important;
+  min-width: 11rem;            
+  max-width: 16rem;             
+  margin-right: 0.75rem;
+}
+
+/* Let ellipsis container actually size to content */
+.md-header__ellipsis {
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* Cap search so it doesn't steal too much space */
+.md-search {
+  flex: 1 1 auto !important;     
+  max-width: 28rem;             
+  min-width: 18rem;             
+  margin-left: auto;            
+}
+
+/* tighten nav just a hair more if needed */
+.md-header__list {
+  gap: 0.75rem;
+}
+
 /* Testimonials */
 .testimonials h1,
 .testimonials h2,
@@ -707,10 +735,5 @@ article.md-search-result__article p:not(.md-search-result__meta) {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-
-
-
-
 
 
