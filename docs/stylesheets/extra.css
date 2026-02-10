@@ -615,12 +615,6 @@ a.md-header__button.md-logo img {
   }
 }
 
-@media screen and (min-width: 60em) {
-  [data-md-toggle="search"]:checked ~ .md-header .md-version {
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
 
 @media (max-width: 630px) {
   [dir=ltr] ul.md-tabs__list {
