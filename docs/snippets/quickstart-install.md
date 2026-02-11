@@ -87,15 +87,38 @@ To get a local deployment of Knative, run the `quickstart` plugin:
             ```bash
             netstat -tnlp | grep 80
             ```
-
-        Troubleshooting: Kind requestthat the client and server version match. To check that, run `$ kubectl version`. If Client Version and Server Version don't match check this [kind Known issues](https://kind.sigs.k8s.io/docs/user/known-issues/) and run `$ kn-quickstart kind --kubernetes-version X.YY.0` with the right version.
-        
-
     1. After the plugin is finished, verify you have a cluster called `knative`:
 
         ```bash
         kind get clusters
         ```
+
+        Here is the polished Markdown, ready to copy and paste directly into a GitHub issue or PR description:
+
+
+        ### Troubleshooting: Kubernetes Version Mismatch
+        
+        If the installation times out or pods fail to start, your Kind cluster (Server) version might be incompatible with your local `kubectl` (Client) version.
+        
+        1. Check your current versions:
+           ```bash
+           kubectl version
+        
+        ```
+        
+        2. If the **Server Version** is significantly older than your **Client Version** (or you see a version skew warning), you should recreate the cluster using a matching version:
+        ```bash
+        # Replace 1.XX.Y with your Client Version (e.g., 1.35.0)
+        kn-quickstart kind --kubernetes-version 1.XX.Y
+        
+        ```
+        
+        
+        For more details on version compatibility, see the [Kind Known Issues](https://kind.sigs.k8s.io/docs/user/known-issues/).
+
+
+
+
 
 === "Using minikube"
 
