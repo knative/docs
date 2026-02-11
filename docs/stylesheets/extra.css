@@ -148,6 +148,13 @@ a.md-header__button.md-logo img {
 
 .md-header__source {
   color: var(--md-primary-fg-color--dark);
+  flex: 0 0 auto !important;   
+  margin-left: 1rem;          
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-header__source {
+  transform: none !important;
+  margin-left: 1rem !important;
 }
 
 .md-search__form {
@@ -729,5 +736,7 @@ article.md-search-result__article p:not(.md-search-result__meta) {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+
 
 
