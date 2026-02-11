@@ -88,6 +88,9 @@ To get a local deployment of Knative, run the `quickstart` plugin:
             netstat -tnlp | grep 80
             ```
 
+        Troubleshooting: Kind requestthat the client and server version match. To check that, run `$ kubectl version`. If Client Version and Server Version don't match check this [kind Known issues](https://kind.sigs.k8s.io/docs/user/known-issues/) and run `$ kn-quickstart kind --kubernetes-version X.YY.0` with the right version.
+        
+
     1. After the plugin is finished, verify you have a cluster called `knative`:
 
         ```bash
