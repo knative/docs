@@ -93,7 +93,6 @@ To get a local deployment of Knative, run the `quickstart` plugin:
         kind get clusters
         ```
 
-        Here is the polished Markdown, ready to copy and paste directly into a GitHub issue or PR description:
 
 
         ### Troubleshooting: Kubernetes Version Mismatch
