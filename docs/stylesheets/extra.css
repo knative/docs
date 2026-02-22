@@ -148,29 +148,16 @@ a.md-header__button.md-logo img {
 
 .md-header__source {
   color: var(--md-primary-fg-color--dark);
-  flex: 0 0 auto !important;   
-  margin-left: 1rem;          
-}
-
-[data-md-toggle="search"]:checked ~ .md-header .md-header__source {
-  transform: none !important;
-  margin-left: 1rem !important;
 }
 
 .md-search__form {
   border-radius: 10px;
 }
 
-.md-search__inner {
-  max-width: 19rem;
-}
-
 .md-search__input {
   background-color: white;
   border: black 1px solid;
   border-radius: 10px;
-  width: 100%;
-
 }
 
 .md-search__input::placeholder {
@@ -484,34 +471,6 @@ a.md-header__button.md-logo img {
   color: black;
 }
 
-
-/* Give title (Knative + version) a minimum readable width */
-.md-header__title {
-  flex: 0 0 auto !important;
-  min-width: 11rem;            
-  max-width: 16rem;             
-  margin-right: 0.75rem;
-}
-
-/* Let ellipsis container actually size to content */
-.md-header__ellipsis {
-  width: auto !important;
-  max-width: 100% !important;
-}
-
-/* Cap search so it doesn't steal too much space */
-.md-search {
-  flex: 1 1 auto !important;     
-  max-width: 28rem;             
-  min-width: 18rem;             
-  margin-left: auto;            
-}
-
-/* tighten nav just a hair more if needed */
-.md-header__list {
-  gap: 0.75rem;
-}
-
 /* Testimonials */
 .testimonials h1,
 .testimonials h2,
@@ -622,7 +581,6 @@ a.md-header__button.md-logo img {
   }
 }
 
-
 @media (max-width: 630px) {
   [dir=ltr] ul.md-tabs__list {
     margin-left: 3rem;
@@ -715,6 +673,57 @@ a.md-header__button.md-logo img {
   }
 }
 
+@media (min-width: 1025px) {
+  .md-header__source {
+    color: var(--md-primary-fg-color--dark);
+    flex: 0 0 auto !important;   
+    margin-left: 1rem;          
+  }
+  
+  [data-md-toggle="search"]:checked ~ .md-header .md-header__source {
+    transform: none !important;
+    margin-left: 1rem !important;
+  }
+  
+  .md-search__form {
+    border-radius: 10px;
+  }
+  
+  .md-search__inner {
+    max-width: 19rem;
+  }
+  
+  .md-search__input {
+    background-color: white;
+    border: black 1px solid;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .md-header__title {
+    flex: 0 0 auto !important;
+    min-width: 11rem;            
+    max-width: 16rem;             
+    margin-right: 0.75rem;
+  }
+  
+  .md-header__ellipsis {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  
+  .md-search {
+    flex: 1 1 auto !important;     
+    max-width: 28rem;             
+    min-width: 18rem;             
+    margin-left: auto;            
+  }
+  
+  .md-header__list {
+    gap: 0.75rem;
+  }
+}
+
 .md-search-result__article {
   max-height: none;
 }
@@ -736,7 +745,3 @@ article.md-search-result__article p:not(.md-search-result__meta) {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-
-
-
