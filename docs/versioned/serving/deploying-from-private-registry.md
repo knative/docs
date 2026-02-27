@@ -89,4 +89,19 @@ You can configure your Knative cluster to deploy images from a private registry 
               env:
                 - name: TARGET
                   value: "World"
-    ```
+       ```           
+## Air-gapped environments
+
+In air-gapped environments, the Kubernetes cluster does not have outbound
+internet access. Before deploying Knative Serving workloads, ensure that all
+required container images are available in an internal or private registry.
+
+When operating in an air-gapped setup:
+
+- Mirror all required Knative Serving and application images to a private registry.
+- Ensure Kubernetes nodes can authenticate to and pull images from the private registry.
+- Make sure installation manifests and YAML files are available locally.
+
+After completing these steps, follow the same procedure described above to
+configure imagePullSecrets so that Knative Services and Revisions can pull
+images from the private registry.
