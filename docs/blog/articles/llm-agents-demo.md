@@ -27,7 +27,7 @@ a cluster we have access to following the instructions in the README in
 [https://github.com/keventmesh/llm-tool-provider](https://github.com/keventmesh/llm-tool-provider). 
 Once we have deployed the chat app from this repository, we are able to access it by running:
 
-```sh
+```bash
 kubectl port-forward svc/chat-app-service 8080:8080
 ```
 

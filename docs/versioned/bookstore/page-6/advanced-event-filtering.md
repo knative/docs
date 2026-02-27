@@ -50,7 +50,7 @@ Append the following Trigger configuration to the existing `node-server/config/2
         uri: /insert # This is the path where the event will be sent to the subscriber, see /insert in node-server code: index.js
     ```
 
-```shell
+```bash
 kubectl apply -f node-server/config/200-broker.yaml
 ```
 

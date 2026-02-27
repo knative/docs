@@ -27,7 +27,7 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
 
-```sh
+```bash
 kubectl create ns camel-k && \
 kubectl apply -k 'github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0' --server-side
 ```
@@ -49,7 +49,7 @@ spec:
 
 Install it with one command:
 
-```sh
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: camel.apache.org/v1
 kind: IntegrationPlatform
@@ -70,7 +70,7 @@ If you are using other container registries, you may need to read more in the [c
 
     Check the installation status of the operator:
 
-    ```sh
+    ```bash
     kubectl get deploy -n camel-k
     ```
 
@@ -83,13 +83,13 @@ If you are using other container registries, you may need to read more in the [c
 
     And the IntegrationPlatform:
 
-    ```sh
+    ```bash
     kubectl get integrationplatforms -n camel-k
     ```
 
     You will see the output with the registry address:
 
-    ```sh
+    ```bash
     NAME      PHASE   BUILD STRATEGY   PUBLISH STRATEGY   REGISTRY ADDRESS     DEFAULT RUNTIME   CAMEL VERSION
     camel-k   Ready   routine          Jib                kind-registry:5000   3.15.3            4.8.5
     ```
@@ -104,7 +104,7 @@ Follow the instructions [here](../create-slack-workspace/README.md){:target="_bl
 
     You should have a webhook URL that looks like this:
 
-    ```sh
+    ```bash
     https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
     ```
 
@@ -125,7 +125,7 @@ We are storing the webhook URL as a secret. Copy and paste your webhook URL into
 
 Then run the following command from the `start` directory:
 
-```sh
+```bash
 kubectl create secret generic slack-credentials --from-file=slack-sink/application.properties
 ```
 
@@ -133,7 +133,7 @@ kubectl create secret generic slack-credentials --from-file=slack-sink/applicati
 
     You should see this message if the secret is created successfully:
 
-    ```sh
+    ```bash
     secret/slack-credentials created
     ```
 
@@ -192,7 +192,7 @@ Here, we will be connecting `bookstore-broker` with a new Broker called `badword
 
 - 2: Apply the YAML file:
 
-    ```sh
+    ```bash
     kubectl apply -f slack-sink/config/100-broker.yaml
     ```
 
@@ -204,7 +204,7 @@ broker.eventing.knative.dev/badword-broker created
 
 Alternatively, use the [Knative CLI `kn`](https://knative.dev/docs/client/#kn){:target="_blank"} to create the broker:
 
-```sh
+```bash
 kn broker create badword-broker
 ```
 
@@ -217,7 +217,7 @@ Broker 'badword-broker' successfully created in namespace 'default'.
 ???+ success "Verify"
 
     Run the following command to list the Brokers:
-    ```sh
+    ```bash
     kubectl get brokers
     ```
 
@@ -233,7 +233,7 @@ Broker 'badword-broker' successfully created in namespace 'default'.
 
     If there are issues, use the following command to diagnose:
 
-    ```sh
+    ```bash
     kubectl describe broker badword-broker
     ```
 
@@ -272,20 +272,20 @@ We are creating the Trigger to process the events that have type `moderated-comm
 
 - 2: Apply the YAML file:
 
-    ```sh
+    ```bash
     kubectl apply -f slack-sink/config/100-broker.yaml
     ```
 
     You should see this message if the Trigger is created successfully:
       
-    ```sh
+    ```bash
     broker.eventing.knative.dev/badword-broker unchanged
     trigger.eventing.knative.dev/badword-noti-trigger created
     ```
 
 ???+ success "Verify"
 
-    ```sh
+    ```bash
     kubectl get triggers
     ```
 
@@ -341,24 +341,24 @@ Create a new file named `slack-sink/config/100-slack-sink.yaml` and add the foll
 
 3. Apply the configuration to your Kubernetes cluster:
 
-```sh
+```bash
 kubectl apply -f slack-sink/config/100-slack-sink.yaml
 ```
 
 ???+ success "Verify"
       You will see this message if the configuration is created successfully:
 
-      ```sh
+      ```bash
       pipe.camel.apache.org/pipe created
       ```
 
       But this process will take a few seconds to complete. You can check the status of the pipe by running the following command:
 
-      ```sh
+      ```bash
       kubectl get pipe pipe
       ```
 
-      ```sh
+      ```bash
       NAME              PHASE     REPLICAS
       pipe              Ready     1
       ```
@@ -374,13 +374,13 @@ In this step, we'll configure the notification delivery service to prevent it fr
 
 1. **Check Existing Knative Services:**
 
-```sh
+```bash
 kubectl get ksvc
 ```
 
 You should see a service named `pipe` listed:
 
-```sh
+```bash
 NAME     URL                                         LATESTCREATED   LATESTREADY    READY   REASON
 pipe     http://pipe.default.svc.cluster.local       pipe-00002      pipe-00002     True
 ```
@@ -389,13 +389,13 @@ pipe     http://pipe.default.svc.cluster.local       pipe-00002      pipe-00002 
 
 To prevent the notification service from scaling down to zero, set the minimum number of pods to keep running.
 
-```sh
+```bash
 kubectl patch ksvc pipe --type merge -p '{"spec":{"template":{"metadata":{"annotations":{"autoscaling.knative.dev/min-scale":"1"}}}}}'
 ```
 
 Or use the edit command:
 
-```sh
+```bash
 kubectl edit ksvc pipe
 ```
 
@@ -413,7 +413,7 @@ This configuration ensures that Knative will always maintain at least one instan
 
 ???+ success "Verify"
 
-    ```sh
+    ```bash
     kubectl get pods
     ```
 

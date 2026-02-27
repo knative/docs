@@ -199,7 +199,7 @@ The Knative tested ingress controllers (Kourier, Contour, and Istio) have the fo
 
 Use the following command to determine which ingress controllers are installed and their status.
 
-``` bash
+```bash
 kubectl get pods -n knative-serving
 ```
 

@@ -43,7 +43,7 @@ Try to ask in the Knative Slack community [#knative](https://cloud-native.slack.
 
 In this section, we will just be simply running a PostgreSQL service. We have all config files ready. Simply run the following command to apply all yamls at once.
 
-```sh
+```bash
 kubectl apply -f db-service
 ```
 

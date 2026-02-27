@@ -37,7 +37,7 @@ Iter8 introduces the notion of an [experiment](https://iter8.tools/0.11/getting-
 
 Install the Iter8 CLI using `brew` as follows. You can also install using pre-built binaries as described [here](https://iter8.tools/0.11/getting-started/install/).
 
-```shell
+```bash
 brew tap iter8-tools/iter8
 brew install iter8@0.11
 ```
@@ -51,7 +51,7 @@ Install Knative in your Kubernetes cluster, and deploy your Knative HTTP Service
 
 Launch the Iter8 experiment as follows.
 
-```shell
+```bash
 iter8 k launch \
 --set "tasks={ready,http,assess}" \
 --set ready.ksvc=hello \
@@ -79,12 +79,12 @@ iter8 k launch \
 Once the experiment completes (~5 secs), view the experiment report as follows.
 
 === "Text"
-    ```shell
+    ```bash
     iter8 k report
     ```
 
     ??? note "The text report looks like this"
-        ```shell
+        ```bash
         Experiment summary:
         *******************
 
@@ -114,7 +114,7 @@ Once the experiment completes (~5 secs), view the experiment report as follows.
         ```
 
 === "HTML"
-    ```shell
+    ```bash
     iter8 k report -o html > report.html # view in a browser
     ```
 
@@ -128,7 +128,7 @@ In this tutorial, we will launch an Iter8 experiment that generates load for a K
 
 Use the [Knative (`kn`) CLI](https://knative.dev/docs/client/install-kn/) to update the Knative service deployed in the [above tutorial](#tutorial-performance-test-for-knative-http-service) to a gRPC service as follows.
 
-```shell
+```bash
 kn service update hello \
 --image docker.io/grpc/java-example-hostname:latest \
 --port h2c:50051 \
@@ -137,7 +137,7 @@ kn service update hello \
 
 Launch the Iter8 experiment as follows.
 
-```shell
+```bash
 iter8 k launch \
 --set "tasks={ready,grpc,assess}" \
 --set ready.ksvc=hello \
