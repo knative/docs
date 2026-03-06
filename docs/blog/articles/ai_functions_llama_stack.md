@@ -31,13 +31,13 @@ For convenience I have created a Github repository that contains scripts for an 
 
 For local development it is recommended to enable port-forwarding for the Llama Stack server:
 
-```shell
+```bash
 kubectl port-forward service/llamastackdistribution-sample-service 8321:8321 
 ```
 
 Now your scripts can access it via `localhost:8321`:
 
-```shell
+```bash
 http localhost:8321/v1/version
 
 HTTP/1.1 200 OK
@@ -58,7 +58,7 @@ _**Note:** The APIs of Llama Stack are fast evolving, but it supports a docs end
 
 Once all of the above is running you need to create your [Knative Functions](https://knative.dev/docs/functions/){:target="_blank"} project. We are using the CloudEvent template for the new [functions runtime for Python](https://github.com/knative-extensions/func-python){:target="_blank"}.
 
-```shell
+```bash
 func create -l python -t cloudevents inference-func
 ```
 
@@ -207,7 +207,7 @@ _**NOTE:** the docstrings were remove to keep the program compact._
 
 We can now run our function locally by issuing `func run` on the command line. Once it is running there will a system log like below:
 
-```shell
+```bash
 INFO:root:Functions middleware invoking user function
 INFO:root:Connecting to LLama Stack
 INFO:httpx:HTTP Request: GET http://localhost:8321/v1/models "HTTP/1.1 200 OK"
@@ -221,7 +221,7 @@ Running on host port 8080
 
 Now we can send a CloudEvent to the function, which contains our query for the AI model inference. In a new terminal of the function project we use `func invoke` for this:
 
-```shell
+```bash
 func invoke -f=cloudevent --data='{"query":"Tell me a dad joke!"}'   
 Context Attributes,
   specversion: 1.0
@@ -239,13 +239,13 @@ We see that the function was returning a different CloudEvent, which contains th
 
 To deploy the function to our `kind` cluster you need to install Knative Serving. The [Llama Stack Stack repo](https://github.com/matzew/llama-stack-stack){:target="_blank"} has a script for this as well. Once it is installed simply run:
 
-```shell
+```bash
 func deploy --builder=host --build
 ```
 
 This builds the function, using the `host` builder, pushes it to the container registry and eventually deploys it as a Knative Serving Service on Kubernetes:
 
-```shell
+```bash
 🙌 Function built: quay.io/<my-func-org>/inference-func:latest
 pushing 100% |████████████████████████████████████████| (175/121 MB, 24 MB/s) [7s]
 ✅ Function deployed in namespace "default" and exposed at URL: 

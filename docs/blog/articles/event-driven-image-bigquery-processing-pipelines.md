@@ -76,7 +76,7 @@ Ipanema in Rio de Janeiro, to the bucket:
 
 After a few seconds, I saw 3 files in my output bucket:
 
-```sh
+```bash
 gsutil ls gs://knative-atamel-images-output
 
 gs://knative-atamel-images-output/beach-400x400-watermark.jpeg

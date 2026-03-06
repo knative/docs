@@ -25,7 +25,7 @@ with Knative v0.16 and later.
 
 This feature is disabled by default. To enable this feature, run the following command:
 
-```
+```bash
 kubectl patch cm config-features -n knative-serving -p '{"data":{"tag-header-based-routing":"Enabled"}}'
 ```
 
@@ -48,14 +48,14 @@ routed to the second Revision.
 
 Run the following command to set up the Knative Service and Revisions.
 
-```
+```bash
 kubectl apply -f code-samples/serving/tag-header-based-routing/sample.yaml
 ```
 
 ## Check the created resources
 
 Check the two created Revisions using the following command
-```
+```bash
 kubectl get revisions
 ```
 
@@ -65,13 +65,13 @@ for the Revisions to become ready.
 
 Check the Knative Service using the following command
 
-```
+```bash
 kubectl get ksvc tag-header -oyaml
 ```
 
 You should see the following block which indicates the tag `rev1` is successfully added to the first Revision.
 
-```
+```yaml
   - revisionName: tag-header-revision-1
     percent: 0
     tag: rev1
@@ -84,37 +84,37 @@ You should see the following block which indicates the tag `rev1` is successfull
 
 1.  Run the following command to send a request to the first Revision.
 
-    ```
+    ```bash
     curl ${INGRESS_IP} -H "Host:tag-header.default.example.com" -H "Knative-Serving-Tag:rev1"
     ```
     where `${INGRESS_IP}` is the IP of your ingress.
 
     You should get the following response:
 
-    ```
+    ```text
     Hello First Revision!
     ```
 
 1.  Run the following command to send requests without the `Knative-Serving-Tag` header:
 
-    ```
+    ```bash
     curl ${INGRESS_IP} -H "Host:tag-header.default.example.com"
     ```
 
     You should get the response from the second Revision:
 
-    ```
+    ```text
     Hello Second Revision!
     ```
 
 1.  Run the following command to send requests with an incorrect `Knative-Serving-Tag` header:
 
-    ```
+    ```bash
     curl ${INGRESS_IP} -H "Host:tag-header.default.example.com" -H "Knative-Serving-Tag:wrongHeader"
     ```
 
     You should get the response from the second Revision:
 
-    ```
+    ```text
     Hello Second Revision!
     ```
