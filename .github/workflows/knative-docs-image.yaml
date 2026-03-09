@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build mkdocs image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         continue-on-error: true
         with:
           push: true
@@ -42,7 +42,7 @@ jobs:
           tags: ghcr.io/knative/knative-docs:latest
 
       - name: Build helloworld-go image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         continue-on-error: true
         with:
           push: true
@@ -51,7 +51,7 @@ jobs:
           tags: ghcr.io/knative/helloworld-go:latest
 
       - name: Build autoscale-go image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         continue-on-error: true
         with:
           push: true
@@ -60,7 +60,7 @@ jobs:
           tags: ghcr.io/knative/autoscale-go:latest
 
       - name: Build sample-app's frontend image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         continue-on-error: true
         with:
           push: true
@@ -69,7 +69,7 @@ jobs:
           tags: ghcr.io/knative/bookstore-frontend:latest
 
       - name: Build sample-app's node-server image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         continue-on-error: true
         with:
           push: true
