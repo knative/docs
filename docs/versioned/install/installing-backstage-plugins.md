@@ -31,7 +31,7 @@ Kubernetes cluster.
 
 #### Plugin backend controller installation
 
-```shell
+```bash
 VERSION="latest" # or a specific version like knative-v1.15.0
 kubectl apply -f https://github.com/knative-extensions/backstage-plugins/releases/${VERSION}/download/eventmesh.yaml
 ```
