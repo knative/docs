@@ -263,6 +263,83 @@ Knative Serving with different ingresses:
 
         Save this for configuring DNS later.
 
+=== "Gateway API"
+
+    !!! warning
+        Gateway API support in Knative is currently in **Beta**. The API and configuration may change in future releases.
+        The Knative team currently tests with Istio, Contour, and Envoy Gateway implementations. For more details, see the
+        [net-gateway-api repository](https://github.com/knative-extensions/net-gateway-api).
+
+    The following steps configure Knative Serving to use Gateway API as the networking layer:
+
+    1. You must have a Gateway API implementation installed in your cluster (for example, Istio, Contour,
+    or Envoy Gateway). Refer to your chosen implementation's documentation for installation instructions.
+
+    1. Install the Gateway API CRDs if they are not already installed on your cluster:
+
+        ```bash
+        kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
+        ```
+
+    1. Ensure that a `Gateway` resource exists in your cluster for Knative to use. If your Gateway API
+    implementation does not create one automatically, create it according to your implementation's documentation.
+    For more information on configuring gateway references, see
+    [Configure the Gateway API ingress](configuring-serving-cr.md#configure-the-gateway-api-ingress).
+
+    1. To configure Knative Serving to use Gateway API, add `spec.ingress.gateway-api`
+    and `spec.config.network` to your Serving CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          # ...
+          ingress:
+            gateway-api:
+              enabled: true
+          config:
+            network:
+              ingress-class: "gateway-api.ingress.networking.knative.dev"
+        ```
+
+    !!! note
+        By default, the net-gateway-api controller uses Istio's Gateway resources
+        (`istio-system/knative-gateway` for external traffic and `istio-system/knative-local-gateway`
+        for cluster-local traffic). If you are using Istio as your Gateway API implementation,
+        no additional gateway configuration is needed.
+
+        If you are using a different Gateway API implementation such as Contour or Envoy Gateway,
+        you must configure `spec.config.gateway` in the KnativeServing CR to specify the correct
+        gateway references. For details, see
+        [Configure the Gateway API ingress](configuring-serving-cr.md#configure-the-gateway-api-ingress).
+
+    1. Apply the YAML file for your Serving CR by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of your Serving CR file.
+
+    1. Verify that the Knative Gateway API components are deployed:
+
+        ```bash
+        kubectl get deployment -n knative-serving
+        ```
+
+        You should see the `net-gateway-api-controller` deployment in the list of deployments.
+
+    1. Fetch the External IP or CNAME by checking your Gateway status:
+
+        ```bash
+        kubectl get gateway --all-namespaces
+        ```
+
+        The `ADDRESS` column shows the external IP or hostname. Save this for configuring DNS later.
+
 ### Verify the Knative Serving deployment
 
 1. Monitor the Knative deployments:
