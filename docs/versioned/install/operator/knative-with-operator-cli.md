@@ -123,6 +123,39 @@ you can configure Knative Serving with different ingresses:
         kn operator enable ingress --contour -n knative-serving
         ```
 
+=== "Gateway API"
+
+    !!! important
+        Gateway API support in Knative is currently in beta. The API and configuration may change in future releases.
+        The Knative team currently tests the Istio, Contour, and Envoy Gateway implementations of Gateway API. For more information, see the
+        [net-gateway-api repository](https://github.com/knative-extensions/net-gateway-api).
+
+    The following steps install Gateway API and enable its Knative integration:
+
+    1. Install a [Gateway API implementation](https://gateway-api.sigs.k8s.io/implementations/)
+    in your cluster (for example, [Istio](../installing-istio.md), Contour, or Envoy Gateway).
+
+    1. Install the Gateway API CRDs if they are not already installed on your cluster:
+
+        ```bash
+        kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
+        ```
+
+    1. Ensure that the `Gateway` resources Knative will use exist in your cluster.
+
+    1. To configure Knative Serving to use Gateway API, run the command as follows:
+
+        ```bash
+        kn operator enable ingress --gateway-api -n knative-serving
+        ```
+
+    !!! note
+        The default gateway references are `istio-system/knative-gateway` for external traffic and
+        `istio-system/knative-local-gateway` for cluster-local traffic. If your Gateway API
+        implementation does not provide those resources, configure `spec.config.gateway` in the
+        KnativeServing CR to reference your external and local Gateways and their Services. See
+        [Configure Gateway API gateways](configuring-serving-cr.md#configure-gateway-api-gateways).
+
 ## Install the Knative Eventing component
 
 You can install Knative Eventing of any specific version under any specific namespace. By default, the namespace is `knative-eventing`,
