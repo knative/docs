@@ -3,7 +3,6 @@
 specVersion: 0.36.0
 name: sentiment-analysis-app
 runtime: python
-registry: localhost:5000
 namespace: default
 created: 2025-09-20T16:25:54.767714524+02:00
 invoke: cloudevent
@@ -11,4 +10,3 @@ build:
   builder: s2i
 deploy:
   namespace: default
-  image: localhost:5000/sentiment-analysis-app@sha256:fa2335ff00b780ae12a8d01e1512db874803e16ccba8ce0893223e023417b79a

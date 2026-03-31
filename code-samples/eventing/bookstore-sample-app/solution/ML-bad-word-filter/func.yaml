@@ -3,7 +3,6 @@
 specVersion: 0.36.0
 name: bad-word-filter
 runtime: python
-registry: localhost:5000
 namespace: default
 created: 2025-09-20T18:38:53.634514281+02:00
 invoke: cloudevent
@@ -11,4 +10,3 @@ build:
   builder: s2i
 deploy:
   namespace: default
-  image: localhost:5000/bad-word-filter@sha256:690a4eb5aaae56dfbfabcb8a3f0943a48b97851e2b90ce40397091bb0866655c
