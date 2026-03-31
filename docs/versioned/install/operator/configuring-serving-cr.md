@@ -552,6 +552,124 @@ spec:
           service: custom-local-gateway.istio-system.svc.cluster.local
 ```
 
+## Configure the Gateway API ingress
+
+!!! important
+    Gateway API support in Knative is currently in beta. The API and configuration may change in future releases.
+    The Knative team currently tests the Istio, Contour, and Envoy Gateway implementations of Gateway API. For more information, see the
+    [net-gateway-api repository](https://github.com/knative-extensions/net-gateway-api).
+
+### Enable Gateway API
+
+To configure Knative Serving to use Gateway API, add `spec.ingress.gateway-api` and `spec.config.network` to
+your Serving CR YAML file as follows:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    gateway-api:
+      enabled: true
+  config:
+    network:
+      ingress-class: "gateway-api.ingress.networking.knative.dev"
+```
+
+### Configure Gateway API gateways
+
+You must configure external and local gateways by using the `spec.config.gateway` field
+in the KnativeServing CR.
+
+The key in `spec.config.gateway` is in the format of
+```
+external-gateways: |
+  - class: <gateway-class>
+    gateway: <namespace>/<gateway-name>
+    service: <namespace>/<service-name>
+    supported-features:
+    - <feature-name>
+local-gateways: |
+  - class: <gateway-class>
+    gateway: <namespace>/<gateway-name>
+    service: <namespace>/<service-name>
+    supported-features:
+    - <feature-name>
+```
+
+The following example configures gateways for Istio:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    gateway-api:
+      enabled: true
+  config:
+    network:
+      ingress-class: "gateway-api.ingress.networking.knative.dev"
+    gateway:
+      external-gateways: |
+        - class: istio
+          gateway: istio-system/knative-gateway
+          service: istio-system/knative-gateway-istio
+          supported-features:
+          - HTTPRouteRequestTimeout
+      local-gateways: |
+        - class: istio
+          gateway: istio-system/knative-local-gateway
+          service: istio-system/knative-local-gateway-istio
+          supported-features:
+          - HTTPRouteRequestTimeout
+```
+
+!!! note
+    Istio's Gateway API implementation creates Service resources with the naming convention
+    `<gateway-name>-istio`. Make sure the `service` value matches the actual Service name
+    in your cluster.
+
+The following example configures gateways for
+[Envoy Gateway](https://gateway.envoyproxy.io/):
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    gateway-api:
+      enabled: true
+  config:
+    network:
+      ingress-class: "gateway-api.ingress.networking.knative.dev"
+    gateway:
+      external-gateways: |
+        - class: eg-external
+          gateway: eg-external/eg-external
+          service: eg-external/knative-external
+          supported-features:
+          - HTTPRouteRequestTimeout
+      local-gateways: |
+        - class: eg-internal
+          gateway: eg-internal/eg-internal
+          service: eg-internal/knative-internal
+          supported-features:
+          - HTTPRouteRequestTimeout
+```
+
+!!! note
+    The `class`, `gateway`, and `service` values must match your
+    `GatewayClass`, `Gateway`, and Service resource names.
+
 ## Customize kourier-bootstrap for Kourier gateways:
 
 By default, Kourier contains envoy bootstrap configuration in the ConfigMap `kourier-bootstrap`. The `spec.ingress.kourier.bootstrap-configmap` field allows you to specify your customized bootstrap ConfigMap.
