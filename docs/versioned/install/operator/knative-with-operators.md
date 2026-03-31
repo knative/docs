@@ -229,7 +229,7 @@ Knative Serving with different ingresses:
         ```
 
     1. To configure Knative Serving to use Contour, add `spec.ingress.contour`
-    `spec.config.network` to your Serving CR YAML file as follows:
+    and `spec.config.network` to your Serving CR YAML file as follows:
 
         ```yaml
         apiVersion: operator.knative.dev/v1beta1
