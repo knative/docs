@@ -263,6 +263,58 @@ Knative Serving with different ingresses:
 
         Save this for configuring DNS later.
 
+=== "Gateway API"
+
+    The following steps install Gateway API and enable its Knative integration:
+
+    1. Install a [Gateway API implementation](https://gateway-api.sigs.k8s.io/implementations/)
+    in your cluster (for example, [Istio](../installing-istio.md), Contour, or Envoy Gateway).
+
+    1. Install the Gateway API CRDs if they are not already installed on your cluster:
+
+        ```bash
+        kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
+        ```
+
+    1. Create `Gateway` resources in your cluster for Knative to use and configure the gateway
+    settings in your Serving CR. For more information, see
+    [Configure Gateway API gateways](configuring-serving-cr.md#configure-gateway-api-gateways).
+
+    1. To configure Knative Serving to use Gateway API, add `spec.ingress.gateway-api`
+    and `spec.config.network` to your Serving CR YAML file as follows:
+
+        ```yaml
+        apiVersion: operator.knative.dev/v1beta1
+        kind: KnativeServing
+        metadata:
+          name: knative-serving
+          namespace: knative-serving
+        spec:
+          # ...
+          ingress:
+            gateway-api:
+              enabled: true
+          config:
+            network:
+              ingress-class: "gateway-api.ingress.networking.knative.dev"
+        ```
+
+    1. Apply the YAML file for your Serving CR by running the command:
+
+        ```bash
+        kubectl apply -f <filename>.yaml
+        ```
+
+        Where `<filename>` is the name of your Serving CR file.
+
+    1. Fetch the External IP or CNAME by running the command:
+
+        ```bash
+        kubectl get gateway --all-namespaces
+        ```
+
+        Save this for configuring DNS later.
+
 ### Verify the Knative Serving deployment
 
 1. Monitor the Knative deployments:
