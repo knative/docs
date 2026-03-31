@@ -552,6 +552,75 @@ spec:
           service: custom-local-gateway.istio-system.svc.cluster.local
 ```
 
+## Configure the Gateway API ingress
+
+!!! warning
+    Gateway API support in Knative is currently in **Beta**. The API and configuration may change in future releases.
+    The Knative team currently tests with Istio, Contour, and Envoy Gateway implementations. For more details, see the
+    [net-gateway-api repository](https://github.com/knative-extensions/net-gateway-api).
+
+To use Gateway API as the networking layer, you need to configure the `spec.ingress.gateway-api` and `spec.config.network` fields in the KnativeServing CR.
+
+### Enable Gateway API
+
+To enable Gateway API as the ingress, apply the following KnativeServing CR:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    gateway-api:
+      enabled: true
+  config:
+    network:
+      ingress-class: "gateway-api.ingress.networking.knative.dev"
+```
+
+### Configure Gateway API gateways
+
+You can configure external and local gateways for Gateway API by using the `spec.config.gateway` field. For example:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    gateway-api:
+      enabled: true
+  config:
+    network:
+      ingress-class: "gateway-api.ingress.networking.knative.dev"
+    gateway:
+      external-gateways: |
+        - class: istio
+          gateway: istio-system/knative-gateway
+          service: istio-system/istio-ingressgateway
+      local-gateways: |
+        - class: istio
+          gateway: istio-system/knative-local-gateway
+          service: istio-system/knative-local-gateway
+```
+
+The key in `spec.config.gateway` is in the format of:
+
+```
+external-gateways: |
+  - class: <gateway-class>
+    gateway: <namespace>/<gateway-name>
+    service: <namespace>/<service-name>
+local-gateways: |
+  - class: <gateway-class>
+    gateway: <namespace>/<gateway-name>
+    service: <namespace>/<service-name>
+```
+
 ## Customize kourier-bootstrap for Kourier gateways:
 
 By default, Kourier contains envoy bootstrap configuration in the ConfigMap `kourier-bootstrap`. The `spec.ingress.kourier.bootstrap-configmap` field allows you to specify your customized bootstrap ConfigMap.
