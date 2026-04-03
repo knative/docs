@@ -33,7 +33,7 @@ kubectl get guardians.guard.security.knative.dev
 
 Example Output:
 
-```sh
+```bash
 NAME            AGE
 helloworld-go   10h
 ```
