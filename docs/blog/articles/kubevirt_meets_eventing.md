@@ -109,7 +109,7 @@ As mentioned above, the `ApiServerSource` is listening for events and forwards t
 
 Below is a complete example of a _virtual machine creation_ event, which the `ApiServerSource` wraps into its `dev.knative.apiserver.resource.add` CloudEvent (with some sections omitted for brevity):
 
-```shell
+```bash
 Context Attributes,
   specversion: 1.0
   type: dev.knative.apiserver.resource.add
@@ -245,7 +245,7 @@ Once this is deployed and a new virtual machine is created, the _new_ event payl
 
 Example custom (transformed) event payload:
 
-```shell
+```bash
 Context Attributes,
   specversion: 1.0
   type: dev.knative.apiserver.resource.add
@@ -275,7 +275,7 @@ Remember, we want our CMDB database automatically updated based on virtual machi
 
 The following output shows a so-far empty PostgreSQL DB. Notce that the columns are matching the jsonata expressions from the configured `EventTransform` CR.
 
-```shell
+```bash
 psql -U postgres -h 10.32.98.110 -p 5432 -d vmdb -c 'SELECT * FROM "virtual_machines"'
 Password for user postgres:
  type | id | kind | name | namespace | time | cpucores | cpusockets | memory | storageclass | network
@@ -294,7 +294,7 @@ The code for the function can be found on Github here: [KubeVirt PostgreSQL Knat
 
 Next we create our `Trigger`s for our function and deploy it to the Kubernetes Cluster:
 
-```shell
+```bash
 func subscribe --filter type=dev.knative.apiserver.resource.add --source broker-apiserversource
 func subscribe --filter type=dev.knative.apiserver.resource.delete --source broker-apiserversource
 func deploy
@@ -302,13 +302,13 @@ func deploy
 
 We can validate the successful creation of the function using `kubectl` or `kn`:
 
-```shell
+```bash
 kubectl get ksvc
 NAME                                   URL                                                                                                      LATESTCREATED                                LATESTREADY                                  READY   REASON
 kn-py-psql-vmdata-fn                   https://kn-py-psql-vmdata-fn-kubevirt-eventing.apps.ocp1.stormshift.coe.muc.redhat.com                   kn-py-psql-vmdata-fn-00001                   kn-py-psql-vmdata-fn-00001                   True
 ```
 
-```shell
+```bash
 kn service list
 NAME                                   URL                                                                                                      LATEST                                       AGE     CONDITIONS   READY   REASON
 kn-py-psql-vmdata-fn                   https://kn-py-psql-vmdata-fn-kubevirt-eventing.apps.ocp1.stormshift.coe.muc.redhat.com                   kn-py-psql-vmdata-fn-00001                   5h3m    3 OK / 3     True
@@ -316,14 +316,14 @@ kn-py-psql-vmdata-fn                   https://kn-py-psql-vmdata-fn-kubevirt-eve
 
 Also validate the conditions of the Triggers:
 
-```shell
+```bash
 kubectl get triggers
 NAME                                           BROKER                   SUBSCRIBER_URI                                                                    AGE     READY   REASON
 trigger-kn-py-psql-vmdata-fn-add               broker-apiserversource       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
 trigger-kn-py-psql-vmdata-fn-delete            broker-apiserversource       http://kn-py-psql-vmdata-fn.kubevirt-eventing.svc.cluster.local                   5h36m   True
 ```
 
-```shell
+```bash
 kn trigger list
 NAME                                           BROKER                   SINK                                                             AGE     CONDITIONS   READY   REASON
 trigger-kn-py-psql-vmdata-fn-add               broker-apiserversource       ksvc:kn-py-psql-vmdata-fn                                        5h38m   7 OK / 7     True
@@ -334,7 +334,7 @@ Fasten your seatbelt 🚀 The complete event-flow is in-place and the function w
 
 Example output:
 
-```shell
+```bash
 psql -U postgres -h 10.32.98.110 -p 5432 -d vmdb -c 'SELECT * FROM "virtual_machines"'
 Password for user postgres:
                  type                  |                  id                  |      kind      |   name    |     namespace     |           time           | cpucores | cpusockets | memory |  storageclass  | network
