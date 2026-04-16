@@ -22,7 +22,7 @@ golang.org/x/crypto/openpgp/s2k
 # gopkg.in/yaml.v2 v2.3.0
 ## explicit
 gopkg.in/yaml.v2
-# knative.dev/hack v0.0.0-20260415132636-9909d690ab4d
+# knative.dev/hack v0.0.0-20260415233235-54d1312ccc91
 ## explicit; go 1.24
 knative.dev/hack
 # go.opencensus.io => go.opencensus.io v0.20.2
