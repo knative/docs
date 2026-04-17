@@ -143,7 +143,7 @@
   </nav>
 
   <!-- Sub Navigation tabs (sticky) -->
-  {% if not page.is_homepage %}
+  {% if not page.is_homepage and not (is_404_page | default(false)) %}
     {% if "navigation.tabs.sticky" in features %}
       {% if "navigation.tabs" in features %}
         {% include "partials/tabs.html" %}
