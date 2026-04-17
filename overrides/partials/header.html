@@ -143,9 +143,7 @@
   </nav>
 
   <!-- Sub Navigation tabs (sticky) -->
-  {% set page_url = page.url | default("") %}
-  {% set is_404_page = page_url in ["404/", "404.html"] %}
-  {% if not page.is_homepage and not is_404_page %}
+  {% if not page.is_homepage and not (is_404_page | default(false)) %}
     {% if "navigation.tabs.sticky" in features %}
       {% if "navigation.tabs" in features %}
         {% include "partials/tabs.html" %}
