@@ -574,6 +574,38 @@ spec:
       enabled: true
 ```
 
+## Deploy Knative Serving to a remote cluster
+
+Starting with Knative Operator v1.22, you can target a remote cluster by
+setting `spec.clusterProfileRef` on the `KnativeServing` CR. The Operator
+resolves the referenced `ClusterProfile`, deploys Knative Serving components
+on that cluster, and manages their lifecycle through the same CR on the hub.
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  clusterProfileRef:
+    name: spoke-cluster-1
+    namespace: fleet-system
+  ingress:
+    kourier:
+      enabled: true
+```
+
+Before applying this CR, enable multi-cluster support on the Operator and
+register the spoke as a `ClusterProfile`. See
+[Deploy Knative to a remote cluster](multi-cluster-deployment.md) for the
+complete procedure.
+
+!!! important
+    `spec.clusterProfileRef` is immutable. To move a `KnativeServing`
+    resource between clusters, delete it and re-create it with the new
+    reference.
+
 ## High availability
 
 By default, Knative Serving runs a single instance of each deployment. The `spec.high-availability` field allows you to configure the number of replicas for all deployments managed by the operator.
