@@ -19,6 +19,11 @@ All Knative ConfigMaps are created in the same namespace as the custom resource 
 
 The `spec.config` in the Knative custom resources have one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which is be used for the ConfigMap `data`.
 
+To deploy Knative components to a remote Kubernetes cluster from this
+Operator, set `spec.clusterProfileRef` on the CR. For configuration details,
+prerequisites, and operational guidance, see
+[Deploy Knative to a remote cluster](multi-cluster-deployment.md).
+
 ## Examples
 
 You can specify that the `KnativeServing` custom resource uses the `config-domain` ConfigMap  as follows:
