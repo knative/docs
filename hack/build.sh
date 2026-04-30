@@ -96,7 +96,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
     echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/docs/.meta.yml"
     # Fix up redirects from old versioned/ path to docs/ and append them to redirects.
     # We only do this for development (so we can see effects) and docs (current)
-    grep '^    ' "$TEMP/current-release/config/redirects.yml" | ${SED_CMD} 's| versioned/| docs/|g' >> "$TEMP/content/config/redirects.yml"
+    grep '^    ' "$TEMP/current-release/config/redirects.yml" | ${SED_CMD} -e 's| versioned/| docs/|g' -e 's| community/contributing/README.md$| community/contributing.md|' >> "$TEMP/content/config/redirects.yml"
   else
     cp -r "$TEMP/current-release/docs" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/" >> "$TEMP/content/docs/docs/.meta.yml"
