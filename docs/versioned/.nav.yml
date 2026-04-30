@@ -250,6 +250,7 @@ nav:
           - Configuring Knative using the Operator: install/operator/configuring-with-operator.md
           - Configuring Knative Serving CRDs: install/operator/configuring-serving-cr.md
           - Configuring Knative Eventing CRDs: install/operator/configuring-eventing-cr.md
+          - Deploy Knative to a remote cluster: install/operator/multi-cluster-deployment.md
         - Installing plugins:
           - Install Istio for Knative: install/installing-istio.md
           - Install Kafka for Knative: install/eventing/kafka-install.md

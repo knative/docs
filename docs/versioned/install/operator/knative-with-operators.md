@@ -61,6 +61,12 @@ To see available values, run:
 helm show values -n knative-operator knative-operator/knative-operator
 ```
 
+!!! note
+    To deploy Knative components to remote clusters from this Operator,
+    enable multi-cluster support through the `knative_operator.multicluster.*`
+    Helm values. For prerequisites and configuration details, see
+    [Deploy Knative to a remote cluster](multi-cluster-deployment.md).
+
 ### Verify your Knative Operator installation
 
 1. Because the Operator is installed to the `knative-operator` namespace, ensure you set the current namespace to `default` by running the command:
