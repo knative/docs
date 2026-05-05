@@ -48,6 +48,72 @@ WebSocket connections in the queue-proxy now shut down gracefully ([#16362](http
 
 The serving reconciler will now only update a Deployment when labels, annotations, or the spec actually change ([#16554](https://github.com/knative/serving/pull/16554) by [@dprotaso](https://github.com/dprotaso)), reducing unnecessary resource churn.
 
+---
+
+### Serving Networking Extensions
+
+#### net-contour
+
+**Release notes**: [net-contour 1.22](https://github.com/knative-extensions/net-contour/releases/tag/knative-v1.22.0)
+
+A focused release with a notable networking improvement and a Contour version bump.
+
+**KIngress Annotation Propagation**
+
+KIngress annotations are now propagated to generated HTTPProxy resources ([#1265](https://github.com/knative-extensions/net-contour/pull/1265) by [@Legion2](https://github.com/Legion2)), giving you more control over Contour-level configuration from your Knative ingress resources.
+
+**Contour Updated to v1.33.3**
+
+Contour has been bumped to v1.33.3 ([#1267](https://github.com/knative-extensions/net-contour/pull/1267) by [@dprotaso](https://github.com/dprotaso)), picking up the latest bug fixes and patches.
+
+
+#### net-gateway-api
+
+**Release notes**: [net-gateway-api 1.22](https://github.com/knative-extensions/net-gateway-api/releases/tag/knative-v1.22.0)
+
+This release adds tag-to-host routing support and fixes several reliability issues. Tested against Gateway API v1.4.1 with Istio v1.28.2, Contour v1.33.1, and Envoy Gateway v1.6.2.
+
+**Tag-to-Host Support**
+
+Traffic tags can now be mapped to hostnames ([#944](https://github.com/knative-extensions/net-gateway-api/pull/944) by [@kahirokunn](https://github.com/kahirokunn)), bringing net-gateway-api in line with the tag-to-host behavior available in other Knative networking layers.
+
+**Label and Annotation Propagation Fix**
+
+A bug was fixed where labels and annotations were not being propagated from the ingress to HTTPRoute resources on updates ([#950](https://github.com/knative-extensions/net-gateway-api/pull/950) by [@kahirokunn](https://github.com/kahirokunn)).
+
+**Controller Probes and Webhook Security**
+
+The controller now has probes and the webhook has improved security settings ([#932](https://github.com/knative-extensions/net-gateway-api/pull/932) by [@kahirokunn](https://github.com/kahirokunn)).
+
+**`ingress.class` Config Key Renamed**
+
+The `ingress.class` config key has been superseded by `ingress-class` ([#917](https://github.com/knative-extensions/net-gateway-api/pull/917) by [@controlol](https://github.com/controlol)). If you have this set in your config, you will need to update it.
+
+
+#### net-istio
+
+**Release notes**: [net-istio 1.22](https://github.com/knative-extensions/net-istio/releases/tag/knative-v1.22.0)
+
+**Mesh-Only Mode**
+
+Gateways can now be disabled via config, enabling a mesh-only deployment mode ([#1524](https://github.com/knative-extensions/net-istio/pull/1524) by [@prashanthjos](https://github.com/prashanthjos)). This is useful for clusters where traffic is handled entirely through the service mesh without needing dedicated ingress gateways.
+
+**Istio Updated to v1.29.2**
+
+Istio has been bumped to v1.29.2 ([#1540](https://github.com/knative-extensions/net-istio/pull/1540) by [@dprotaso](https://github.com/dprotaso)), picking up the latest patches across the v1.29 line.
+
+
+#### net-kourier
+
+**Release notes**: [net-kourier 1.22](https://github.com/knative-extensions/net-kourier/releases/tag/knative-v1.22.0)
+
+**Informer Cache for Initial Ingress Reconciliation**
+
+The reconciler now uses the informer cache when processing the initial set of ready ingresses at startup ([#1441](https://github.com/knative-extensions/net-kourier/pull/1441) by [@dprotaso](https://github.com/dprotaso)), improving reliability and reducing unnecessary API server calls during startup.
+
+**Envoy Updated to v1.37**
+
+Envoy has been bumped to v1.37 ([#1444](https://github.com/knative-extensions/net-kourier/pull/1444) by [@dprotaso](https://github.com/dprotaso)).
 
 ---
 
@@ -134,74 +200,6 @@ These releases contains dependency updates:
 - [eventing-gitlab](https://github.com/knative-extensions/eventing-gitlab/releases/tag/knative-v1.22.0)
 - [eventing-istio](https://github.com/knative-extensions/eventing-istio/releases/tag/knative-v1.22.0)
 - [eventing-autoscaler-keda](https://github.com/knative-extensions/eventing-autoscaler-keda/releases/tag/knative-v1.22.0)
-
----
-
-## Networking
-
-### net-contour
-
-**Release notes**: [net-contour 1.22](https://github.com/knative-extensions/net-contour/releases/tag/knative-v1.22.0)
-
-A focused release with a notable networking improvement and a Contour version bump.
-
-**KIngress Annotation Propagation**
-
-KIngress annotations are now propagated to generated HTTPProxy resources ([#1265](https://github.com/knative-extensions/net-contour/pull/1265) by [@Legion2](https://github.com/Legion2)), giving you more control over Contour-level configuration from your Knative ingress resources.
-
-**Contour Updated to v1.33.3**
-
-Contour has been bumped to v1.33.3 ([#1267](https://github.com/knative-extensions/net-contour/pull/1267) by [@dprotaso](https://github.com/dprotaso)), picking up the latest bug fixes and patches.
-
-
-### net-gateway-api
-
-**Release notes**: [net-gateway-api 1.22](https://github.com/knative-extensions/net-gateway-api/releases/tag/knative-v1.22.0)
-
-This release adds tag-to-host routing support and fixes several reliability issues. Tested against Gateway API v1.4.1 with Istio v1.28.2, Contour v1.33.1, and Envoy Gateway v1.6.2.
-
-**Tag-to-Host Support**
-
-Traffic tags can now be mapped to hostnames ([#944](https://github.com/knative-extensions/net-gateway-api/pull/944) by [@kahirokunn](https://github.com/kahirokunn)), bringing net-gateway-api in line with the tag-to-host behavior available in other Knative networking layers.
-
-**Label and Annotation Propagation Fix**
-
-A bug was fixed where labels and annotations were not being propagated from the ingress to HTTPRoute resources on updates ([#950](https://github.com/knative-extensions/net-gateway-api/pull/950) by [@kahirokunn](https://github.com/kahirokunn)).
-
-**Controller Probes and Webhook Security**
-
-The controller now has probes and the webhook has improved security settings ([#932](https://github.com/knative-extensions/net-gateway-api/pull/932) by [@kahirokunn](https://github.com/kahirokunn)).
-
-**`ingress.class` Config Key Renamed**
-
-The `ingress.class` config key has been superseded by `ingress-class` ([#917](https://github.com/knative-extensions/net-gateway-api/pull/917) by [@controlol](https://github.com/controlol)). If you have this set in your config, you will need to update it.
-
-
-### net-istio
-
-**Release notes**: [net-istio 1.22](https://github.com/knative-extensions/net-istio/releases/tag/knative-v1.22.0)
-
-**Mesh-Only Mode**
-
-Gateways can now be disabled via config, enabling a mesh-only deployment mode ([#1524](https://github.com/knative-extensions/net-istio/pull/1524) by [@prashanthjos](https://github.com/prashanthjos)). This is useful for clusters where traffic is handled entirely through the service mesh without needing dedicated ingress gateways.
-
-**Istio Updated to v1.29.2**
-
-Istio has been bumped to v1.29.2 ([#1540](https://github.com/knative-extensions/net-istio/pull/1540) by [@dprotaso](https://github.com/dprotaso)), picking up the latest patches across the v1.29 line.
-
-
-### net-kourier
-
-**Release notes**: [net-kourier 1.22](https://github.com/knative-extensions/net-kourier/releases/tag/knative-v1.22.0)
-
-**Informer Cache for Initial Ingress Reconciliation**
-
-The reconciler now uses the informer cache when processing the initial set of ready ingresses at startup ([#1441](https://github.com/knative-extensions/net-kourier/pull/1441) by [@dprotaso](https://github.com/dprotaso)), improving reliability and reducing unnecessary API server calls during startup.
-
-**Envoy Updated to v1.37**
-
-Envoy has been bumped to v1.37 ([#1444](https://github.com/knative-extensions/net-kourier/pull/1444) by [@dprotaso](https://github.com/dprotaso)).
-
 
 ---
 
