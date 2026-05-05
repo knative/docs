@@ -213,7 +213,7 @@ Error reporting for Kafka topic validation failures has been improved ([#4641](h
 
 #### Other Integrations
 
-These releases contains dependency updates:
+These releases contain dependency updates:
 
 - [eventing-ceph](https://github.com/knative-extensions/eventing-ceph/releases/tag/knative-v1.22.0)
 - [eventing-rabbitmq](https://github.com/knative-extensions/eventing-rabbitmq/releases/tag/knative-v1.22.0)
@@ -283,7 +283,7 @@ The Kubernetes version used in quickstart environments is no longer hardcoded ([
 
 ### Other Client Plugins
 
-These releases contains dependency updates:
+These releases contain dependency updates:
 
 - [kn-plugin-admin](https://github.com/knative-extensions/kn-plugin-admin/releases/tag/knative-v1.22.0)
 - [kn-plugin-event](https://github.com/knative-extensions/kn-plugin-event/releases/tag/knative-v1.22.0)
@@ -307,7 +307,6 @@ New Contributors 🎉:
 - [@folliehiyuki](https://github.com/folliehiyuki)
 - [@gaganhr94](https://github.com/gaganhr94)
 - [@khushiiagrawal](https://github.com/khushiiagrawal)
-- [@lepeli](https://github.com/lepeli)
 - [@lepeli](https://github.com/lepeli)
 - [@prashanthjos](https://github.com/prashanthjos)
 - [@sonikaarora](https://github.com/sonikaarora)
