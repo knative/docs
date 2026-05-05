@@ -14,23 +14,6 @@ A new version of Knative is now available across multiple components.
 
 Follow the instructions in [Installing Knative](https://knative.dev/docs/install/) to install the components you require.
 
-## Table of Contents
-
-- [Highlights](#highlights)
-- [Serving](#serving)
-- [Eventing](#eventing)
-- [Eventing Extensions](#eventing-extensions)
-    - [Apache Kafka Broker](#apache-kafka-broker)
-    - [RabbitMQ Broker and Source](#rabbitmq-broker-and-source)
-- [Networking](#networking)
-    - [net-istio](#net-istio)
-    - [net-kourier](#net-kourier)
-    - [net-contour](#net-contour)
-- [Functions](#functions)
-- [Operator](#operator)
-- [Client](#client)
-- [Thank you contributors](#thank-you-contributors)
-
 ## Highlights
 
 Minimal supported version of Kubernetes is now 1.34. See our [release schedule](https://github.com/knative/community/blob/main/mechanics/RELEASE-SCHEDULE.md) for details.
@@ -59,7 +42,9 @@ Two new metrics have been added: `kn.revision.request.queued` and `kn.revision.r
 
 **Security and Reliability**
 
-TLS configuration for the reconciler, activator, and queue-proxy has been consolidated under the `knative.dev/pkg/tls` package ([#16431](https://github.com/knative/serving/pull/16431), [#16424](https://github.com/knative/serving/pull/16424), [#16425](https://github.com/knative/serving/pull/16425) by [@Fedosin](https://github.com/Fedosin)). WebSocket connections in the queue-proxy now shut down gracefully ([#16362](https://github.com/knative/serving/pull/16362) by [@dprotaso](https://github.com/dprotaso)).
+TLS configuration for the reconciler, activator, and queue-proxy has been consolidated under the `knative.dev/pkg/tls` package ([#16431](https://github.com/knative/serving/pull/16431), [#16424](https://github.com/knative/serving/pull/16424), [#16425](https://github.com/knative/serving/pull/16425) by [@Fedosin](https://github.com/Fedosin)). 
+
+WebSocket connections in the queue-proxy now shut down gracefully ([#16362](https://github.com/knative/serving/pull/16362) by [@dprotaso](https://github.com/dprotaso)).
 
 **Smarter Deployment Updates**
 
@@ -76,19 +61,27 @@ This release focuses on security hardening, observability improvements, and expa
 
 **EventTransformer Gets Auth and EventPolicy Support**
 
-The EventTransformer now supports the auth-proxy sidecar and EventPolicy ([#8883](https://github.com/knative/eventing/pull/8883) by [@Arpit529Srivastava](https://github.com/Arpit529Srivastava)), bringing it in line with the rest of the eventing components. EventPolicies are also now queried dynamically by the auth-proxy ([#8870](https://github.com/knative/eventing/pull/8870) by [@creydr](https://github.com/creydr)).
+The EventTransformer now supports the auth-proxy sidecar and EventPolicy ([#8883](https://github.com/knative/eventing/pull/8883) by [@Arpit529Srivastava](https://github.com/Arpit529Srivastava)), bringing it in line with the rest of the eventing components. 
+
+EventPolicies are also now queried dynamically by the auth-proxy ([#8870](https://github.com/knative/eventing/pull/8870) by [@creydr](https://github.com/creydr)).
 
 **TLS Hardening**
 
-TLS configuration has been centralized under `knative.dev/pkg/tls` ([#8901](https://github.com/knative/eventing/pull/8901) by [@Fedosin](https://github.com/Fedosin)), and the default minimum TLS version has been bumped to 1.3 ([#8916](https://github.com/knative/eventing/pull/8916) by [@Fedosin](https://github.com/Fedosin)). A bug was also fixed where the broker TLS config was using a hardcoded namespace instead of `system.Namespace()` ([#8905](https://github.com/knative/eventing/pull/8905)).
+TLS configuration has been centralized under `knative.dev/pkg/tls` ([#8901](https://github.com/knative/eventing/pull/8901) by [@Fedosin](https://github.com/Fedosin)), and the default minimum TLS version has been bumped to 1.3 ([#8916](https://github.com/knative/eventing/pull/8916) by [@Fedosin](https://github.com/Fedosin)). 
 
 **Observability Fixes and Improvements**
 
-Several metrics fixes landed this release: `http.response.status_code` is now included in mt-broker-ingress and imc-dispatcher metrics ([#8891](https://github.com/knative/eventing/pull/8891)), namespace labels have been added to source metrics ([#8892](https://github.com/knative/eventing/pull/8892)), and the ApiServerSource metrics port has been corrected to 9092 ([#8895](https://github.com/knative/eventing/pull/8895)) — all by [@creydr](https://github.com/creydr). A duplicate OTEL setup in imc-dispatcher was also removed ([#8885](https://github.com/knative/eventing/pull/8885)).
+Several metrics fixes landed this release: `http.response.status_code` is now included in mt-broker-ingress and imc-dispatcher metrics ([#8891](https://github.com/knative/eventing/pull/8891)), namespace labels have been added to source metrics ([#8892](https://github.com/knative/eventing/pull/8892)).
+
+ApiServerSource metrics port has been corrected to 9092 ([#8895](https://github.com/knative/eventing/pull/8895)) — all by [@creydr](https://github.com/creydr). 
+
+A duplicate OTEL setup in imc-dispatcher was also removed ([#8885](https://github.com/knative/eventing/pull/8885)).
 
 **Source Reliability**
 
-The source Ready condition now correctly waits for zero unavailable replicas before reporting ready ([#8896](https://github.com/knative/eventing/pull/8896) by [@creydr](https://github.com/creydr)), and probes have been added to IntegrationSource and IntegrationSink deployments ([#8867](https://github.com/knative/eventing/pull/8867) by [@creydr](https://github.com/creydr)).
+The source Ready condition now correctly waits for zero unavailable replicas before reporting ready ([#8896](https://github.com/knative/eventing/pull/8896) by [@creydr](https://github.com/creydr)).
+
+Probes have been added to IntegrationSource and IntegrationSink deployments ([#8867](https://github.com/knative/eventing/pull/8867) by [@creydr](https://github.com/creydr)).
 
 
 ---
