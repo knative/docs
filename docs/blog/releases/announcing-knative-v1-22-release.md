@@ -18,6 +18,28 @@ Follow the instructions in [Installing Knative](https://knative.dev/docs/install
 
 Minimal supported version of Kubernetes is now 1.34. See our [release schedule](https://github.com/knative/community/blob/main/mechanics/RELEASE-SCHEDULE.md) for details.
 
+## Operator
+
+**Release notes**: [Operator 1.22](https://github.com/knative/operator/releases/tag/knative-v1.22.0)
+
+A significant release adding multi-cluster deployment support and net-gateway-api ingress, alongside several Helm fixes.
+
+**Multi-Cluster Deployment via Cluster Inventory API**
+
+The operator now supports deploying Knative across multiple clusters using the [Kubernetes Cluster Inventory API](https://kubernetes.io/docs/concepts/cluster-administration/cluster-inventory/) ([#2267](https://github.com/knative/operator/pull/2267) by [@kahirokunn](https://github.com/kahirokunn)). This means you can manage Knative installations on remote clusters from a single operator, without needing to run an operator instance on each cluster individually.
+
+**net-gateway-api Ingress Support**
+
+The operator now supports net-gateway-api as an ingress option ([#2251](https://github.com/knative/operator/pull/2251) by [@kahirokunn](https://github.com/kahirokunn)), giving you a declarative way to configure Gateway API-based ingress through the operator.
+
+**Helm Reliability Fixes**
+
+A conflict on aggregated ClusterRoles during Helm upgrades has been fixed ([#2286](https://github.com/knative/operator/pull/2286) by [@kahirokunn](https://github.com/kahirokunn)), Helm chart publishing has been fixed by skipping plugin verification ([#2243](https://github.com/knative/operator/pull/2243) by [@lepeli](https://github.com/lepeli)), and CRD generation has been migrated to controller-gen with automated Helm RBAC sync ([#2269](https://github.com/knative/operator/pull/2269) by [@kahirokunn](https://github.com/kahirokunn)).
+
+**KUBERNETES_MIN_VERSION Propagation Fix**
+
+`KUBERNETES_MIN_VERSION` is now correctly propagated to operand workloads ([#2245](https://github.com/knative/operator/pull/2245) by [@eXist-FraGGer](https://github.com/eXist-FraGGer)).
+
 ---
 
 ## Serving
@@ -234,30 +256,6 @@ Workflow files are now protected from accidental overwrites ([#3407](https://git
 **Notable Bug Fixes**
 
 Podman-docker detection in container engine resolution has been fixed ([#3620](https://github.com/knative/func/pull/3620) by [@cardil](https://github.com/cardil)), the registry is now preserved correctly when changing namespaces on OpenShift ([#3445](https://github.com/knative/func/pull/3445) by [@gauron99](https://github.com/gauron99)), and eventing errors are now ignored gracefully when eventing is not installed ([#3428](https://github.com/knative/func/pull/3428) by [@creydr](https://github.com/creydr)).
-
----
-
-## Knative Operator
-
-**Release notes**: [Operator 1.22](https://github.com/knative/operator/releases/tag/knative-v1.22.0)
-
-A significant release adding multi-cluster deployment support and net-gateway-api ingress, alongside several Helm fixes.
-
-**Multi-Cluster Deployment via Cluster Inventory API**
-
-The operator now supports deploying Knative across multiple clusters using the [Kubernetes Cluster Inventory API](https://kubernetes.io/docs/concepts/cluster-administration/cluster-inventory/) ([#2267](https://github.com/knative/operator/pull/2267) by [@kahirokunn](https://github.com/kahirokunn)). This means you can manage Knative installations on remote clusters from a single operator, without needing to run an operator instance on each cluster individually.
-
-**net-gateway-api Ingress Support**
-
-The operator now supports net-gateway-api as an ingress option ([#2251](https://github.com/knative/operator/pull/2251) by [@kahirokunn](https://github.com/kahirokunn)), giving you a declarative way to configure Gateway API-based ingress through the operator.
-
-**Helm Reliability Fixes**
-
-A conflict on aggregated ClusterRoles during Helm upgrades has been fixed ([#2286](https://github.com/knative/operator/pull/2286) by [@kahirokunn](https://github.com/kahirokunn)), Helm chart publishing has been fixed by skipping plugin verification ([#2243](https://github.com/knative/operator/pull/2243) by [@lepeli](https://github.com/lepeli)), and CRD generation has been migrated to controller-gen with automated Helm RBAC sync ([#2269](https://github.com/knative/operator/pull/2269) by [@kahirokunn](https://github.com/kahirokunn)).
-
-**KUBERNETES_MIN_VERSION Propagation Fix**
-
-`KUBERNETES_MIN_VERSION` is now correctly propagated to operand workloads ([#2245](https://github.com/knative/operator/pull/2245) by [@eXist-FraGGer](https://github.com/eXist-FraGGer)).
 
 ---
 
