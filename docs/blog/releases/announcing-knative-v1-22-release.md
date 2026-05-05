@@ -24,8 +24,6 @@ Minimal supported version of Kubernetes is now 1.34. See our [release schedule](
 
 **Release notes**: [Knative Serving 1.22](https://github.com/knative/serving/releases/tag/knative-v1.22.0)
 
-## Knative Serving Release Highlights
-
 This release brings meaningful improvements to scaling, networking, and security.
 
 **Scale Subresource Switch (400-500ms Cold Start Improvement)**
@@ -86,9 +84,9 @@ Probes have been added to IntegrationSource and IntegrationSink deployments ([#8
 
 ---
 
-## Eventing Extensions
+### Eventing Extensions
 
-### NATS Broker
+#### NATS Broker
 
 This is a significant release introducing alpha support for a native NATS broker, making NATS simpler to deploy and use with Knative Eventing.
 
@@ -103,7 +101,7 @@ Note this feature is alpha and the API may change in future releases.
 A panic caused by a nil pointer dereference when no retry config was defined has been fixed ([#734](https://github.com/knative-extensions/eventing-natss/pull/734) by [@lepeli](https://github.com/lepeli)).
 
 
-### Apache Kafka Broker
+#### Apache Kafka Broker
 
 **Release notes**: [Kafka Broker 1.22](https://github.com/knative-extensions/eventing-kafka-broker/releases/tag/knative-v1.22.0)
 
@@ -125,7 +123,7 @@ The deprecated `DefaultPartition` configuration option has been removed ([#4327]
 
 Error reporting for Kafka topic validation failures has been improved ([#4641](https://github.com/knative-extensions/eventing-kafka-broker/pull/4641) by [@creydr](https://github.com/creydr)), making it easier to diagnose misconfigured topics.
 
-### Other Integrations 
+#### Other Integrations
 
 These releases contains dependency updates:
 
