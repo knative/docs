@@ -45,6 +45,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/gateway-api-ingress-with-knative-operator.md
           - articles/Enhancing-func-cli-ux.md
           - articles/knative-eventing-eda-agents.md
           - articles/kubevirt_meets_eventing.md
@@ -119,4 +120,3 @@ nav:
           - events/install-fest-04-2022.md
           - events/knative-at-kubecon-eu-2019.md
           - events/knative-at-kubecon-seattle.md
-
