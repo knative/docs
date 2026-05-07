@@ -45,6 +45,7 @@ nav:
           - releases/announcing-knative-v0-3-release.md
           - releases/announcing-knative-v0-2-release.md
       - Articles:
+          - articles/deploying-knative-to-remote-clusters-with-operator.md
           - articles/gateway-api-ingress-with-knative-operator.md
           - articles/Enhancing-func-cli-ux.md
           - articles/knative-eventing-eda-agents.md

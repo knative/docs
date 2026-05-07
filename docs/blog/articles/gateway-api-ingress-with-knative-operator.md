@@ -1,12 +1,22 @@
+---
+title: "Managing Gateway API ingress with the Knative Operator"
+linkTitle: "Managing Gateway API ingress with the Knative Operator"
+author: "kahirokunn"
+author handle: https://github.com/kahirokunn
+date: 2026-05-07
+description: "How to use the Knative Operator to manage Knative Serving with Gateway API ingress"
+type: "blog"
+---
+
 # Managing Gateway API ingress with the Knative Operator
 
-**Author: kahirokunn**
+**Author: [kahirokunn](https://github.com/kahirokunn)**
 
 _In this blog post you will learn how to use the Knative Operator to manage Knative Serving with Gateway API ingress._
 
 Starting with Knative v1.22, the Knative Operator supports `net-gateway-api` as an ingress option for Knative Serving. If your platform already standardizes on Kubernetes Gateway API resources such as `GatewayClass`, `Gateway`, and `HTTPRoute`, you can now keep the Knative ingress choice and gateway configuration together in the Operator-managed `KnativeServing` custom resource.
 
-Gateway API support in Knative is currently in beta. You must install a Gateway API implementation in your cluster before using `net-gateway-api`. Knative currently tests `net-gateway-api` against the Istio, Contour, and Envoy Gateway implementations. For tested versions, see the [`net-gateway-api` test version documentation](https://github.com/knative-extensions/net-gateway-api/blob/release-1.22/docs/test-version.md).
+Gateway API support in Knative is currently in beta. You must install a Gateway API implementation in your cluster before using `net-gateway-api`. Knative currently tests `net-gateway-api` against the Istio, Contour, and Envoy Gateway implementations. For tested versions, see the `net-gateway-api` [test version documentation](https://github.com/knative-extensions/net-gateway-api/blob/release-1.22/docs/test-version.md).
 
 ## What the Operator manages
 

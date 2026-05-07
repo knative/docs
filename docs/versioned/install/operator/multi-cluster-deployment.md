@@ -33,12 +33,12 @@ The Operator continues to manage the lifecycle of the CR from the hub. To delete
 Before you deploy Knative to a remote cluster, you must have:
 
 - Knative Operator v1.22 or later.
-- A hub cluster running Kubernetes v1.35 or later. The Operator loads credential plugin binaries through an image volume, a Kubernetes feature that became generally available in v1.35. No other delivery method for credential plugins is supported.
+- A hub cluster running Kubernetes v1.35 or later. Knative v1.22 supports Kubernetes v1.34 for standard installations, but multi-cluster support uses Kubernetes image volumes to mount credential plugin binaries on the hub. That volume type is enabled by default starting in Kubernetes v1.35. No other delivery method for credential plugins is supported.
 - The Cluster Inventory API `ClusterProfile` CRD installed on the hub cluster. See the installation instructions in the [kubernetes-sigs/cluster-inventory-api](https://github.com/kubernetes-sigs/cluster-inventory-api) repository.
 - Network connectivity from the hub cluster to each spoke cluster's API server. If the hub cannot reach a spoke directly, use a reverse tunnel such as the OCM cluster-proxy.
 - A credential plugin that implements the Cluster Inventory API access provider interface. The upstream `kubernetes-sigs/cluster-inventory-api` project publishes two plugins:
-    - `registry.k8s.io/cluster-inventory-api/secretreader:v0.1.0` reads a bearer token from a `Secret`'s `data.token` field.
-    - `registry.k8s.io/cluster-inventory-api/kubeconfig-secretreader:v0.1.0` reads a complete kubeconfig from a `Secret`.
+    - `registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1` reads a bearer token from a `Secret`'s `data.token` field.
+    - `registry.k8s.io/cluster-inventory-api/kubeconfig-secretreader:v0.1.1` reads a complete kubeconfig from a `Secret`.
 
     Pick whichever matches the credential format you intend to use, or use a plugin from another source.
 - RBAC permissions on each spoke cluster that let the credential returned by the plugin create and manage Knative resources. See [Spoke RBAC requirements](#spoke-rbac-requirements).
@@ -76,11 +76,11 @@ knative_operator:
         - name: secretreader
           execConfig:
             apiVersion: client.authentication.k8s.io/v1
-            command: /credential-plugin/plugin-binary
+            command: /credential-plugin/secretreader-plugin
             provideClusterInfo: true
     plugins:
       - name: secretreader
-        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.0
+        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1
         mountPath: /credential-plugin
     remoteDeploymentsPollInterval: 10s
 ```
@@ -120,7 +120,7 @@ If you do not use Helm, add multi-cluster support to an Operator that is already
           "name": "secretreader",
           "execConfig": {
             "apiVersion": "client.authentication.k8s.io/v1",
-            "command": "/credential-plugin/plugin-binary",
+            "command": "/credential-plugin/secretreader-plugin",
             "provideClusterInfo": true
           }
         }
@@ -175,7 +175,7 @@ A `ClusterProfile` resource on the hub describes one spoke. Register it in one o
 
 ### Register a ClusterProfile manually
 
-Manual registration prepares the spoke first, then publishes its endpoint and credentials on the hub. The examples below use the `secretreader` plugin (`registry.k8s.io/cluster-inventory-api/secretreader:v0.1.0`); replace image references and configuration fields with those required by the plugin you choose.
+Manual registration prepares the spoke first, then publishes its endpoint and credentials on the hub. The examples below use the `secretreader` plugin (`registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1`); replace image references and configuration fields with those required by the plugin you choose.
 
 1. On the spoke cluster, create a `ServiceAccount`, the required permissions, and a token `Secret`:
 
