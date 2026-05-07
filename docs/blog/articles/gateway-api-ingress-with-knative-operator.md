@@ -1,6 +1,16 @@
+---
+title: "Managing Gateway API ingress with the Knative Operator"
+linkTitle: "Managing Gateway API ingress with the Knative Operator"
+author: "kahirokunn"
+author handle: https://github.com/kahirokunn
+date: 2026-05-07
+description: "How to use the Knative Operator to manage Knative Serving with Gateway API ingress"
+type: "blog"
+---
+
 # Managing Gateway API ingress with the Knative Operator
 
-**Author: kahirokunn**
+**Author: [kahirokunn](https://github.com/kahirokunn)**
 
 _In this blog post you will learn how to use the Knative Operator to manage Knative Serving with Gateway API ingress._
 
