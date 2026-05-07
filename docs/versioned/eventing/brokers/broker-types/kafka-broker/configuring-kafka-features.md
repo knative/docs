@@ -7,7 +7,7 @@ function: how-to
 
 # Configuring Kafka Features
 
-There are many different configuration options for how Knative Eventing and the Knaitve Broker for Apache Kafka interact with the Apache Kafka clusters.
+There are many different configuration options for how Knative Eventing and the Knative Broker for Apache Kafka interact with the Apache Kafka clusters.
 
 ## Configure Knative Eventing Kafka features
 
