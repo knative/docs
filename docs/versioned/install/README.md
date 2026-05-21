@@ -21,6 +21,33 @@ You can install the Serving and Eventing components independently of one another
 
 ## Installation roadmap
 
+Knative can be installed in different ways depending on your environment, components, and preferred installation method. The following guidance helps you choose the appropriate path.
+
+### Environment
+
+- **Local development (testing / learning)**
+  - Use Quickstart with `kind` or `Minikube`
+- **Server / production environments**
+  - Use YAML-based installation or the Knative Operator on a managed or on-prem Kubernetes cluster
+
+### Installation methods
+
+- **Quickstart** – for local development and evaluation  
+- **YAML manifests** – for manual, fine-grained control  
+- **Knative Operator** – for simplified installation and lifecycle management  
+
+### Components
+
+- **Serving** – deploy and manage serverless workloads  
+- **Eventing** – build event-driven architectures  
+
+### Platform considerations
+
+- Supported platforms include Kubernetes clusters on Linux, macOS, and Windows  
+- Local setups are intended for development and testing only  
+
+---
+
 Use the following table to determine your installation method. If you just want to get an understanding of Knative functionality at this time, install the quickstart.
 
 |  | Quickstart | YAML-based | Knative Operator |
