@@ -77,16 +77,17 @@ knative_operator:
         - name: secretreader
           execConfig:
             apiVersion: client.authentication.k8s.io/v1
-            command: /credential-plugin/secretreader-plugin
+            command: /access-plugins/secretreader/bin/secretreader-plugin
+            interactiveMode: Never
             provideClusterInfo: true
     plugins:
       - name: secretreader
-        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1
-        mountPath: /credential-plugin
+        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
+        mountPath: /access-plugins/secretreader
     remoteDeploymentsPollInterval: 10s
 ```
 
-The provider name in `accessProvidersConfig.providers[].name` must match the plugin name in `plugins[].name`. The Operator uses that name to connect the `ClusterProfile` access provider entry to the credential plugin configuration.
+The provider name in `accessProvidersConfig.providers[].name` must match the access provider name in `ClusterProfile` status. The `execConfig.command` points to the plugin binary mounted from the image volume.
 
 If you do not use Helm, you can patch an existing Operator Deployment. The important pieces are the same: mount the access provider configuration, mount the credential plugin binary, and start the Operator with `--clusterprofile-provider-file`.
 
