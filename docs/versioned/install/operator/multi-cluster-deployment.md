@@ -37,8 +37,8 @@ Before you deploy Knative to a remote cluster, you must have:
 - The Cluster Inventory API `ClusterProfile` CRD installed on the hub cluster. See the installation instructions in the [kubernetes-sigs/cluster-inventory-api](https://github.com/kubernetes-sigs/cluster-inventory-api) repository.
 - Network connectivity from the hub cluster to each spoke cluster's API server. If the hub cannot reach a spoke directly, use a reverse tunnel such as the OCM cluster-proxy.
 - A credential plugin that implements the Cluster Inventory API access provider interface. The upstream `kubernetes-sigs/cluster-inventory-api` project publishes two plugins:
-    - `registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1` reads a bearer token from a `Secret`'s `data.token` field.
-    - `registry.k8s.io/cluster-inventory-api/kubeconfig-secretreader:v0.1.1` reads a complete kubeconfig from a `Secret`.
+    - `registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2` reads a bearer token from a `Secret`'s `data.token` field.
+    - `registry.k8s.io/cluster-inventory-api/kubeconfig-secretreader:v0.1.2` reads a complete kubeconfig from a `Secret`.
 
     Pick whichever matches the credential format you intend to use, or use a plugin from another source.
 - RBAC permissions on each spoke cluster that let the credential returned by the plugin create and manage Knative resources. See [Spoke RBAC requirements](#spoke-rbac-requirements).
@@ -76,16 +76,17 @@ knative_operator:
         - name: secretreader
           execConfig:
             apiVersion: client.authentication.k8s.io/v1
-            command: /credential-plugin/secretreader-plugin
+            command: /access-plugins/secretreader/bin/secretreader-plugin
+            interactiveMode: Never
             provideClusterInfo: true
     plugins:
       - name: secretreader
-        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1
-        mountPath: /credential-plugin
+        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
+        mountPath: /access-plugins/secretreader
     remoteDeploymentsPollInterval: 10s
 ```
 
-The value of `accessProvidersConfig.providers[].name` must match the value of `plugins[].name`; the Operator uses the name to bind a plugin binary to its exec configuration.
+The value of `accessProvidersConfig.providers[].name` must match the `ClusterProfile` status provider name. The `execConfig.command` must point to a binary under one of the configured `plugins[].mountPath` values.
 
 Apply the values with `helm upgrade --install`:
 
@@ -120,7 +121,8 @@ If you do not use Helm, add multi-cluster support to an Operator that is already
           "name": "secretreader",
           "execConfig": {
             "apiVersion": "client.authentication.k8s.io/v1",
-            "command": "/credential-plugin/secretreader-plugin",
+            "command": "/access-plugins/secretreader/bin/secretreader-plugin",
+            "interactiveMode": "Never",
             "provideClusterInfo": true
           }
         }
@@ -148,12 +150,19 @@ If you do not use Helm, add multi-cluster support to an Operator that is already
               args:
                 - --clusterprofile-provider-file=/etc/cluster-inventory/config.json
               volumeMounts:
-                - name: credential-plugin
-                  mountPath: /credential-plugin
+                - name: access-config
+                  mountPath: /etc/cluster-inventory
+                  readOnly: true
+                - name: secretreader
+                  mountPath: /access-plugins/secretreader
+                  readOnly: true
           volumes:
-            - name: credential-plugin
+            - name: access-config
+              configMap:
+                name: clusterprofile-provider-file
+            - name: secretreader
               image:
-                reference: <your-registry>/<plugin-image>:<tag>
+                reference: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
                 pullPolicy: IfNotPresent
     ```
 
@@ -175,7 +184,7 @@ A `ClusterProfile` resource on the hub describes one spoke. Register it in one o
 
 ### Register a ClusterProfile manually
 
-Manual registration prepares the spoke first, then publishes its endpoint and credentials on the hub. The examples below use the `secretreader` plugin (`registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1`); replace image references and configuration fields with those required by the plugin you choose.
+Manual registration prepares the spoke first, then publishes its endpoint and credentials on the hub. The examples below use the `secretreader` plugin (`registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2`); replace image references and configuration fields with those required by the plugin you choose.
 
 1. On the spoke cluster, create a `ServiceAccount`, the required permissions, and a token `Secret`:
 
@@ -214,17 +223,17 @@ Manual registration prepares the spoke first, then publishes its endpoint and cr
     - For GKE, run `gcloud container clusters describe <name> --zone <zone> --format='value(endpoint)'`.
     {% endraw %}
 
-    The `kubectl get ... -o jsonpath='{.data.ca\.crt}'` output is already base64-encoded. Paste this string as-is into the `ClusterProfile` status `certificateAuthorityData` field shown in Step 5.
+    The `kubectl get ... -o jsonpath='{.data.ca\.crt}'` output is already base64-encoded. Paste this string as-is into the `ClusterProfile` status `certificate-authority-data` field shown in Step 5.
 
 3. On the hub cluster, create a `Secret` that the credential plugin reads:
 
     ```bash
-    kubectl create secret generic spoke-cluster-1-credentials \
-      --namespace fleet-system \
+    kubectl create secret generic spoke-cluster-1 \
+      --namespace knative-operator \
       --from-literal=token=<spoke-token>
     ```
 
-    The `secretreader` plugin reads the bearer token from the `data.token` field of this `Secret`. The CA certificate is provided separately through the `ClusterProfile` status in Step 5. If you use `kubeconfig-secretreader` or another plugin, store the credentials in the `Secret` according to that plugin's documentation.
+    The `secretreader` plugin reads the bearer token from the `data.token` field of a `Secret` in the Operator namespace. The Secret name must match the `clusterName` value in the `ClusterProfile` status extension shown in Step 5. The CA certificate is provided separately through the `ClusterProfile` status. If you use `kubeconfig-secretreader` or another plugin, store the credentials in the `Secret` according to that plugin's documentation.
 
 4. On the hub cluster, apply the `ClusterProfile` spec:
 
@@ -266,7 +275,11 @@ Manual registration prepares the spoke first, then publishes its endpoint and cr
         - name: secretreader
           cluster:
             server: https://<spoke-api-server>:6443
-            certificateAuthorityData: <spoke-ca-base64>
+            certificate-authority-data: <spoke-ca-base64>
+            extensions:
+              - name: client.authentication.k8s.io/exec
+                extension:
+                  clusterName: spoke-cluster-1
     ```
 
     !!! important

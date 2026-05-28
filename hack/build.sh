@@ -75,8 +75,8 @@ curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/
 echo -e "\nsamples_branch: main\nversion: development\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/versioned/.meta.yml"
 versionjson="{\"version\": \"versioned\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 
-# Temporarily force BUILD_VERSIONS (for previews), while this rewrite is testing.
-BUILD_VERSIONS="yes"
+# Build all versions by default, but allow deploy previews to opt out.
+: "${BUILD_VERSIONS:=yes}"
 
 if [ "$BUILD_VERSIONS" != "no" ]; then
   mv $TEMP/content/docs/versioned $TEMP/content/docs/development
