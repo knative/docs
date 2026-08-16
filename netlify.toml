@@ -40,3 +40,7 @@ package = "@netlify/plugin-sitemap"
   to = "https://github.com/knative/docs/blob/main/contribute-to-docs/README.md"
   status = 301
 
+[[redirects]]
+  from = "/docs/images/*"
+  to = "/images/:splat"
+  status = 301
