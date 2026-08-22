@@ -304,20 +304,23 @@ spec:
 ## Deploy Knative Eventing to a remote cluster
 
 Starting with Knative Operator v1.22, you can target a remote cluster by
-setting `spec.clusterProfileRef` on the `KnativeEventing` CR. The Operator
-resolves the referenced `ClusterProfile`, deploys Knative Eventing components
-on that cluster, and manages their lifecycle through the same CR on the hub.
+setting `spec.destination` on the `KnativeEventing` CR. The Operator resolves
+the referenced `ClusterProfile`, deploys Knative Eventing components into the
+selected namespace on that cluster, and manages their lifecycle through the
+same CR on the hub.
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
-  namespace: knative-eventing
+  namespace: knative-operator
 spec:
-  clusterProfileRef:
-    name: spoke-cluster-1
-    namespace: fleet-system
+  destination:
+    clusterProfileRef:
+      name: spoke-cluster-1
+      namespace: fleet-system
+    namespace: knative-eventing
 ```
 
 Before applying this CR, enable multi-cluster support on the Operator and
@@ -326,9 +329,9 @@ register the spoke as a `ClusterProfile`. See
 complete procedure.
 
 !!! important
-    `spec.clusterProfileRef` is immutable. To move a `KnativeEventing`
-    resource between clusters, delete it and re-create it with the new
-    reference.
+    `spec.destination` is immutable. To move a `KnativeEventing` resource to a
+    different cluster or installation namespace, delete it and re-create it
+    with the new destination.
 
 ## High availability
 

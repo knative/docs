@@ -15,13 +15,13 @@ Any updates to ConfigMaps which are applied manually are overwritten by the Oper
 Knative has multiple ConfigMaps that are named with the prefix `config-`.
 
 
-All Knative ConfigMaps are created in the same namespace as the custom resource that they apply to. For example, if the `KnativeServing` custom resource is created in the `knative-serving` namespace, all Knative Serving ConfigMaps are also created in this namespace.
+For a local installation, Knative ConfigMaps are created in the same namespace as the custom resource that they apply to. For a remote installation, they are created in `spec.destination.namespace` on the spoke.
 
 The `spec.config` in the Knative custom resources have one `<name>` entry for each ConfigMap, named `config-<name>`, with a value which is be used for the ConfigMap `data`.
 
 To deploy Knative components to a remote Kubernetes cluster from this
-Operator, set `spec.clusterProfileRef` on the CR. For configuration details,
-prerequisites, and operational guidance, see
+Operator, set `spec.destination` on the CR to select the spoke and installation
+namespace. For configuration details, prerequisites, and operational guidance, see
 [Deploy Knative to a remote cluster](multi-cluster-deployment.md).
 
 ## Examples

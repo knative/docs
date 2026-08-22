@@ -8,23 +8,23 @@ function: how-to
 
 # Deploy Knative to a remote cluster
 
-Starting with Knative Operator v1.22, a single Operator can deploy Knative Serving or Knative Eventing to a different Kubernetes cluster. The cluster that runs the Operator is the **hub cluster**, and the cluster that receives the Knative components is a **spoke cluster**. You set the field `spec.clusterProfileRef` on the `KnativeServing` or `KnativeEventing` CR to point to a `ClusterProfile` resource that describes a spoke cluster.
+Starting with Knative Operator v1.22, a single Operator can deploy Knative Serving or Knative Eventing to a different Kubernetes cluster. The cluster that runs the Operator is the **hub cluster**, and the cluster that receives the Knative components is a **spoke cluster**. Set `spec.destination` on a `KnativeServing` or `KnativeEventing` CR to select both the `ClusterProfile` that describes the spoke and the namespace where Knative is installed on that spoke.
 
 The Operator resolves the referenced `ClusterProfile` through the SIG-Multicluster Cluster Inventory API ([KEP-5339](https://github.com/kubernetes/enhancements/issues/5339)), so the feature works with any fleet manager that publishes `ClusterProfile` resources, such as Open Cluster Management or MultiKueue. You can also register `ClusterProfile` resources manually for proof-of-concept work.
 
-If `spec.clusterProfileRef` is not set on a CR, the Operator deploys components to the local cluster, exactly as in earlier releases.
+If `spec.destination` is not set on a CR, the Operator deploys components to the local cluster, exactly as in earlier releases.
 
 !!! important
     Multi-cluster deployment is a beta feature in Knative Operator v1.22 and later. This feature depends on the SIG-Multicluster Cluster Inventory API, which is still in alpha; its schema and recommended access provider plugins might change between releases.
 
 ## Overview
 
-A multi-cluster deployment runs the reconciliation loop on the hub and applies resources on a spoke. When you create or update a CR with `spec.clusterProfileRef`, the Operator performs the following steps:
+A multi-cluster deployment runs the reconciliation loop on the hub and applies resources on a spoke. When you create or update a CR with `spec.destination`, the Operator performs the following steps:
 
 1. Read the referenced `ClusterProfile` and confirm that the spoke is healthy and that an access provider is available.
 2. Build a Kubernetes client for the spoke by invoking the configured access provider plugin.
-3. Create a helper resource on the spoke that anchors ownership of namespace-scoped Knative resources for garbage collection.
-4. Run the standard Knative install pipeline against the spoke client, so Deployments, Services, ConfigMaps, and component CRDs land on the spoke.
+3. Create a helper resource in `spec.destination.namespace` on the spoke that anchors ownership of namespace-scoped Knative resources for garbage collection.
+4. Run the standard Knative install pipeline against the spoke client, so namespaced resources land in the selected destination namespace and cluster-scoped resources land on the spoke.
 
 The Operator continues to manage the lifecycle of the CR from the hub. To delete the deployment, delete the CR on the hub; finalizers clean up the spoke.
 
@@ -37,8 +37,8 @@ Before you deploy Knative to a remote cluster, you must have:
 - The Cluster Inventory API `ClusterProfile` CRD installed on the hub cluster. See the installation instructions in the [kubernetes-sigs/cluster-inventory-api](https://github.com/kubernetes-sigs/cluster-inventory-api) repository.
 - Network connectivity from the hub cluster to each spoke cluster's API server. If the hub cannot reach a spoke directly, use a reverse tunnel such as the OCM cluster-proxy.
 - A credential plugin that implements the Cluster Inventory API access provider interface. The upstream `kubernetes-sigs/cluster-inventory-api` project publishes two plugins:
-    - `registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2` reads a bearer token from a `Secret`'s `data.token` field.
-    - `registry.k8s.io/cluster-inventory-api/kubeconfig-secretreader:v0.1.2` reads a complete kubeconfig from a `Secret`.
+    - `registry.k8s.io/cluster-inventory-api/secretreader:v0.1.3` reads a bearer token from a `Secret`'s `data.token` field.
+    - `registry.k8s.io/cluster-inventory-api/kubeconfig-secretreader:v0.1.3` reads a complete kubeconfig from a `Secret`.
 
     Pick whichever matches the credential format you intend to use, or use a plugin from another source.
 - RBAC permissions on each spoke cluster that let the credential returned by the plugin create and manage Knative resources. See [Spoke RBAC requirements](#spoke-rbac-requirements).
@@ -81,7 +81,7 @@ knative_operator:
             provideClusterInfo: true
     plugins:
       - name: secretreader
-        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
+        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.3
         mountPath: /access-plugins/secretreader
     remoteDeploymentsPollInterval: 10s
 ```
@@ -162,7 +162,7 @@ If you do not use Helm, add multi-cluster support to an Operator that is already
                 name: clusterprofile-provider-file
             - name: secretreader
               image:
-                reference: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
+                reference: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.3
                 pullPolicy: IfNotPresent
     ```
 
@@ -173,7 +173,7 @@ If you do not use Helm, add multi-cluster support to an Operator that is already
     ```
 
 !!! important
-    If the Operator is started without `--clusterprofile-provider-file`, any CR with `spec.clusterProfileRef` stops reconciling with `TargetClusterResolved=False` and `reason=MulticlusterDisabled`. CRs without `clusterProfileRef` continue to reconcile unchanged.
+    If the Operator is started without `--clusterprofile-provider-file`, any CR with `spec.destination` stops reconciling with `TargetClusterResolved=False` and `reason=MulticlusterDisabled`. CRs without `spec.destination` continue to reconcile unchanged.
 
 ## Register a remote cluster as a ClusterProfile
 
@@ -184,7 +184,7 @@ A `ClusterProfile` resource on the hub describes one spoke. Register it in one o
 
 ### Register a ClusterProfile manually
 
-Manual registration prepares the spoke first, then publishes its endpoint and credentials on the hub. The examples below use the `secretreader` plugin (`registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2`); replace image references and configuration fields with those required by the plugin you choose.
+Manual registration prepares the spoke first, then publishes its endpoint and credentials on the hub. The examples below use the `secretreader` plugin (`registry.k8s.io/cluster-inventory-api/secretreader:v0.1.3`); replace image references and configuration fields with those required by the plugin you choose.
 
 1. On the spoke cluster, create a `ServiceAccount`, the required permissions, and a token `Secret`:
 
@@ -294,7 +294,7 @@ Manual registration prepares the spoke first, then publishes its endpoint and cr
 
 ## Deploy Knative Serving to a remote cluster
 
-After you enable multi-cluster on the Operator and register a `ClusterProfile`, set `spec.clusterProfileRef` on the `KnativeServing` CR.
+After you enable multi-cluster on the Operator and register a `ClusterProfile`, set `spec.destination` on the `KnativeServing` CR. The destination selects both the spoke and the installation namespace on that spoke.
 
 Pick the ingress before you apply the CR:
 
@@ -308,11 +308,13 @@ apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving
-  namespace: knative-serving
+  namespace: knative-operator
 spec:
-  clusterProfileRef:
-    name: spoke-cluster-1
-    namespace: fleet-system
+  destination:
+    clusterProfileRef:
+      name: spoke-cluster-1
+      namespace: fleet-system
+    namespace: knative-serving
   ingress:
     kourier:
       enabled: true
@@ -324,61 +326,65 @@ Apply the CR on the hub:
 kubectl apply -f knative-serving.yaml
 ```
 
-Check that the Operator resolved the spoke. The `Target Cluster` column reports the `ClusterProfile` reference:
+Check that the Operator resolved the spoke. The `Target Cluster` and `Target Namespace` columns report the selected destination:
 
 ```bash
-kubectl get knativeserving -n knative-serving
+kubectl get knativeserving -n knative-operator
 ```
 
 ## Deploy Knative Eventing to a remote cluster
 
-Knative Eventing requires no ingress-specific preparation on the spoke. Set `spec.clusterProfileRef` on the `KnativeEventing` CR and apply it on the hub:
+Knative Eventing requires no ingress-specific preparation on the spoke. Set `spec.destination` on the `KnativeEventing` CR and apply it on the hub:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
-  namespace: knative-eventing
+  namespace: knative-operator
 spec:
-  clusterProfileRef:
-    name: spoke-cluster-1
-    namespace: fleet-system
+  destination:
+    clusterProfileRef:
+      name: spoke-cluster-1
+      namespace: fleet-system
+    namespace: knative-eventing
 ```
 
 ```bash
 kubectl apply -f knative-eventing.yaml
-kubectl get knativeeventing -n knative-eventing
+kubectl get knativeeventing -n knative-operator
 ```
 
 ## Configure remote namespace settings
 
-You can pre-configure labels and annotations for the namespace that hosts Knative components on the spoke through `spec.namespaceConfiguration`:
+You can configure labels and annotations for `spec.destination.namespace` through `spec.namespace`:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving
-  namespace: knative-serving
+  namespace: knative-operator
 spec:
-  clusterProfileRef:
-    name: spoke-cluster-1
-    namespace: fleet-system
-  namespaceConfiguration:
+  destination:
+    clusterProfileRef:
+      name: spoke-cluster-1
+      namespace: fleet-system
+    namespace: knative-serving
+  namespace:
     labels:
       pod-security.kubernetes.io/enforce: privileged
     annotations:
       example.com/owner: platform-team
 ```
 
-The Operator applies these labels and annotations only when it creates the namespace on the spoke; it does not modify an existing namespace. To change settings on an existing spoke namespace, edit the namespace directly with `kubectl label` or `kubectl annotate`.
+The Operator merges these labels and annotations into the destination namespace metadata, whether the namespace is new or already exists. It adds or updates the specified keys and preserves labels and annotations with other keys.
 
 For the field reference, see [Configuring Knative Serving CRDs](configuring-serving-cr.md) and [Configuring Knative Eventing CRDs](configuring-eventing-cr.md).
 
 ## Understand remote resource garbage collection
 
-The Operator creates a helper resource on the spoke that anchors ownership of namespace-scoped Knative resources. The helper carries the annotation `operator.knative.dev/protected: "true"` as a warning for human operators. The annotation is informational; the Operator does not enforce it through an admission webhook. If the helper is deleted, the next reconciliation recreates it.
+The Operator creates a helper resource in `spec.destination.namespace` on the spoke that anchors ownership of namespace-scoped Knative resources in that namespace. The helper carries the annotation `operator.knative.dev/protected: "true"` as a warning for human operators. The annotation is informational; the Operator does not enforce it through an admission webhook. If the helper is deleted, the next reconciliation recreates it.
 
 - Namespace-scoped resources, such as Deployments, Services, and ConfigMaps, set an `ownerReference` to the helper. Standard Kubernetes garbage collection cascades their deletion when the helper is removed.
 - Cluster-scoped resources, such as ClusterRoles, webhook configurations, and CRDs, do not carry an `ownerReference`. The hub-side finalizer deletes them explicitly when the CR is deleted.
@@ -418,11 +424,11 @@ kubectl patch deployment knative-operator \
 
 ## Upgrade and downgrade
 
-Upgrading the Operator to v1.22 does not enable multi-cluster on its own; the Helm value `multicluster.enabled` defaults to `false`. Existing CRs that do not set `clusterProfileRef` keep their behavior across the upgrade.
+Upgrading the Operator to v1.22 does not enable multi-cluster on its own; the Helm value `multicluster.enabled` defaults to `false`. Existing CRs that do not set `spec.destination` keep their behavior across the upgrade.
 
-The field `spec.clusterProfileRef` is immutable once the resource is created. To move a `KnativeServing` or `KnativeEventing` resource to a different spoke, delete it and create a new one that points to a different `ClusterProfile`.
+The entire `spec.destination` field is immutable: it cannot be added, removed, or changed after the resource is created. To move a `KnativeServing` or `KnativeEventing` resource to a different spoke or destination namespace, delete it and create a new one with the new destination.
 
-If you downgrade the Operator to a version earlier than v1.22, the older Operator does not recognize the `clusterProfileRef` field. Delete every CR that uses `clusterProfileRef` before you downgrade. Running such a CR against an Operator that does not recognize the field is unsupported, and the resulting behavior is undefined.
+If you downgrade the Operator to a version earlier than v1.22, the older Operator does not recognize the `destination` field. Delete every CR that uses `spec.destination` before you downgrade. Running such a CR against an Operator that does not recognize the field is unsupported, and the resulting behavior is undefined.
 
 ## Troubleshoot multi-cluster deployments
 
@@ -447,11 +453,12 @@ Use the following table to map the most common `TargetClusterResolved=False` rea
 
 | Reason | Meaning | Remediation |
 | ------ | ------- | ----------- |
-| `ClusterProfileNotFound` | The `ClusterProfile` named in `spec.clusterProfileRef` does not exist in the referenced namespace. | Verify `spec.clusterProfileRef.name` and `spec.clusterProfileRef.namespace`, and confirm where the `ClusterProfile` is published. |
+| `ClusterProfileNotFound` | The `ClusterProfile` named in `spec.destination.clusterProfileRef` does not exist in the referenced namespace. | Verify `spec.destination.clusterProfileRef.name` and `spec.destination.clusterProfileRef.namespace`, and confirm where the `ClusterProfile` is published. |
 | `ClusterProfileNotReady` | The `ClusterProfile` exists but its status does not include `ControlPlaneHealthy=True`. | Wait for the fleet manager to update the status, or update the status manually as shown in [Register a ClusterProfile manually](#register-a-clusterprofile-manually). |
-| `ClusterProfileUnavailable` | The `ClusterProfile` reports no access providers, or it advertises a provider name that the Operator does not know. | Confirm that `status.accessProviders[].name` matches a provider name in the Operator access provider configuration. |
+| `ClusterProfileUnavailable` | The Operator failed to read the `ClusterProfile` from the hub API for a reason other than it not existing. | Check hub API availability and the Operator logs, then retry. |
 | `MulticlusterDisabled` | The Operator was started without `--clusterprofile-provider-file`, so multi-cluster support is inactive. | If you installed the Operator with Helm, set `multicluster.enabled: true` and provide `multicluster.accessProvidersConfig` in your values file. If you applied the Operator manifests manually, add `--clusterprofile-provider-file` to the Operator Deployment. See [Enable multi-cluster on the Knative Operator](#enable-multi-cluster-on-the-knative-operator). |
-| `AccessProviderFailed` | The credential plugin returned an error when the Operator invoked it. | Check the Operator logs for the plugin's stderr. Confirm that the plugin binary matches the node architecture and that any `Secret` the plugin reads exists in the Operator namespace. |
+| `AccessProviderNotConfigured` | The Operator could not configure a cluster provider for the reconciliation. | Confirm that the Operator started successfully with a valid access provider configuration, then inspect its logs. |
+| `AccessProviderFailed` | The access provider configuration did not match the `ClusterProfile`, or the credential plugin returned an error. | Confirm that `status.accessProviders[].name` matches a configured provider. Check the Operator logs for the plugin's stderr, confirm that the plugin binary matches the node architecture, and verify that any `Secret` the plugin reads exists in the Operator namespace. |
 | `RemoteClientCreationFailed` | The Operator built a `rest.Config` from the plugin output, but client creation failed. | Confirm that the spoke API server is reachable, that the CA certificate is valid, and that the bearer token has not expired. |
 
 ### Transient reasons
@@ -468,7 +475,7 @@ If one of these reasons persists, inspect the Operator Deployment logs and the P
 To uninstall Knative cleanly, delete the CR on the hub and let the finalizer remove resources on the spoke:
 
 ```bash
-kubectl delete knativeserving knative-serving -n knative-serving
+kubectl delete knativeserving knative-serving -n knative-operator
 ```
 
 The finalizer waits until the spoke is reachable and then removes the Operator-managed resources from it.
@@ -483,14 +490,14 @@ The finalizer waits until the spoke is reachable and then removes the Operator-m
 
 ## Limitations
 
-- `spec.clusterProfileRef` is immutable. To move a `KnativeServing` or `KnativeEventing` resource between clusters, delete and re-create it.
+- `spec.destination` is immutable. To move a `KnativeServing` or `KnativeEventing` resource between clusters or installation namespaces, delete and re-create it.
 - Each CR targets exactly one `ClusterProfile`. To deploy to several spokes, create one CR per spoke.
 - The Operator does not export a dedicated Prometheus metric for the `TargetClusterResolved` condition. Collect the CR status through `kube-state-metrics` CRD configuration or through the existing condition metrics.
 - A permanently unreachable spoke leaves the CR in `TargetClusterResolved=False` until you delete the CR or restore connectivity.
 
 ## FAQ
 
-- **`MulticlusterDisabled` persists on a CR with `clusterProfileRef`.** The Operator was started without `--clusterprofile-provider-file`. With Helm, set `multicluster.enabled: true` and provide `accessProvidersConfig`, then confirm that the new Operator Pod has rolled out. With manual deployment, add the flag to the Operator Deployment.
+- **`MulticlusterDisabled` persists on a CR with `spec.destination`.** The Operator was started without `--clusterprofile-provider-file`. With Helm, set `multicluster.enabled: true` and provide `accessProvidersConfig`, then confirm that the new Operator Pod has rolled out. With manual deployment, add the flag to the Operator Deployment.
 - **`AccessProviderFailed: exec format error`.** The credential plugin binary architecture does not match the Operator node architecture. Rebuild the plugin image for the right architecture, or schedule the Operator on nodes that match the existing plugin.
 - **One hub deploys to many spokes.** Create one `KnativeServing` or `KnativeEventing` CR per spoke. Use a naming convention such as `knative-serving-<region>` to keep CRs distinct, and raise `--remote-deployments-poll-interval` to `60s` for fleets larger than 100 spokes.
 - **Spoke credential rotation.** Update the `ClusterProfile` status or the `Secret` that the credential plugin reads. The CR briefly reports `RemoteClusterStale` while the cached client refreshes, then returns to `True` on the next reconcile.

@@ -16,11 +16,11 @@ _In this blog post you will learn how to use Knative Operator v1.22 to deploy Kn
 
 Platform teams often manage more than one Kubernetes cluster. Some clusters are split by region, some by environment, and some by tenant or business unit. Until now, installing Knative across those clusters usually meant running a separate Operator in every cluster, or building extra automation around the installation manifests.
 
-Starting with Knative Operator v1.22, a single Operator can deploy Knative components to a different Kubernetes cluster. The cluster that runs the Operator acts as the **hub cluster**. The cluster that receives Knative Serving or Knative Eventing acts as a **spoke cluster**. You select the spoke by setting `spec.clusterProfileRef` on the `KnativeServing` or `KnativeEventing` custom resource.
+Starting with Knative Operator v1.22, a single Operator can deploy Knative components to a different Kubernetes cluster. The cluster that runs the Operator acts as the **hub cluster**. The cluster that receives Knative Serving or Knative Eventing acts as a **spoke cluster**. You select the spoke and its installation namespace by setting `spec.destination` on the `KnativeServing` or `KnativeEventing` custom resource.
 
 This feature uses the SIG-Multicluster Cluster Inventory API, introduced through [KEP-5339](https://github.com/kubernetes/enhancements/issues/5339). The Operator reads a `ClusterProfile` resource to discover the remote cluster endpoint and access provider, then runs the normal Knative installation pipeline against that remote cluster.
 
-If `spec.clusterProfileRef` is not set, nothing changes. The Operator keeps deploying Knative to the local cluster exactly as it did before.
+If `spec.destination` is not set, nothing changes. The Operator keeps deploying Knative to the local cluster exactly as it did before.
 
 ## Why this matters
 
@@ -41,11 +41,11 @@ The feature is intentionally based on the Cluster Inventory API instead of a spe
 
 ## How the Operator targets a remote cluster
 
-The Operator resolves the target cluster at the start of reconciliation. When `spec.clusterProfileRef` is present, it reads the referenced `ClusterProfile`, invokes the configured access provider plugin, and builds a Kubernetes client for the spoke cluster.
+The Operator resolves the target cluster at the start of reconciliation. When `spec.destination` is present, it reads `spec.destination.clusterProfileRef`, invokes the configured access provider plugin, and builds a Kubernetes client for the spoke cluster.
 
-After that, the existing install stages continue to run as usual, but they use the spoke client. This means the Operator still applies the standard Knative manifests, CRDs, ConfigMaps, Deployments, Services, and RBAC resources. The difference is where those resources land.
+After that, the existing install stages continue to run as usual, but they use the spoke client. The Operator applies namespaced resources in `spec.destination.namespace` and cluster-scoped resources on the spoke.
 
-For cleanup, the Operator uses a helper resource on the spoke cluster to anchor ownership of namespace-scoped Knative resources. Namespace-scoped resources are garbage collected through Kubernetes owner references. Cluster-scoped resources, such as ClusterRoles and CRDs, are removed explicitly by the hub-side finalizer.
+For cleanup, the Operator uses a helper resource in the destination namespace on the spoke to anchor ownership of namespace-scoped Knative resources. Namespace-scoped resources are garbage collected through Kubernetes owner references. Cluster-scoped resources, such as ClusterRoles and CRDs, are removed explicitly by the hub-side finalizer.
 
 Always uninstall a remote Knative deployment by deleting the `KnativeServing` or `KnativeEventing` CR on the hub. If the spoke cluster is temporarily unreachable, the finalizer retries until the spoke can be reached again.
 
@@ -82,7 +82,7 @@ knative_operator:
             provideClusterInfo: true
     plugins:
       - name: secretreader
-        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
+        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.3
         mountPath: /access-plugins/secretreader
     remoteDeploymentsPollInterval: 10s
 ```
@@ -99,7 +99,7 @@ A `ClusterProfile` includes the cluster manager identity in `spec`, and the remo
 
 The important relationship is:
 
-- `KnativeServing` or `KnativeEventing` points to a `ClusterProfile` by name and namespace.
+- `KnativeServing` or `KnativeEventing` uses `spec.destination` to point to a `ClusterProfile` by name and namespace and to select an installation namespace on the spoke.
 - The `ClusterProfile` advertises an access provider by name.
 - The Operator has a provider configuration with the same name.
 - The credential plugin returns credentials for the spoke cluster.
@@ -108,18 +108,20 @@ After those pieces line up, the Operator can build a client for the spoke and re
 
 ## Deploy Knative Serving to a spoke
 
-After enabling multi-cluster support and registering a `ClusterProfile`, set `spec.clusterProfileRef` on the `KnativeServing` CR:
+After enabling multi-cluster support and registering a `ClusterProfile`, set `spec.destination` on the `KnativeServing` CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving
-  namespace: knative-serving
+  namespace: knative-operator
 spec:
-  clusterProfileRef:
-    name: spoke-cluster-1
-    namespace: fleet-system
+  destination:
+    clusterProfileRef:
+      name: spoke-cluster-1
+      namespace: fleet-system
+    namespace: knative-serving
   ingress:
     kourier:
       enabled: true
@@ -128,7 +130,7 @@ spec:
       ingress-class: kourier.ingress.networking.knative.dev
 ```
 
-Apply this CR on the hub cluster. The Operator runs on the hub, but the Serving resources are created on the spoke cluster described by `spoke-cluster-1`.
+Apply this CR on the hub cluster. The Operator runs on the hub, but the Serving resources are created in the `knative-serving` namespace on the spoke cluster described by `spoke-cluster-1`.
 
 For ingress, choose the implementation that fits the spoke. Kourier is the simplest path because the Operator can deploy it as part of the Serving installation. If you use Istio or Gateway API ingress, prepare the ingress implementation and gateway resources on the spoke before applying the `KnativeServing` CR.
 
@@ -141,11 +143,13 @@ apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
 metadata:
   name: knative-eventing
-  namespace: knative-eventing
+  namespace: knative-operator
 spec:
-  clusterProfileRef:
-    name: spoke-cluster-1
-    namespace: fleet-system
+  destination:
+    clusterProfileRef:
+      name: spoke-cluster-1
+      namespace: fleet-system
+    namespace: knative-eventing
 ```
 
 Apply this CR on the hub, then check the spoke cluster for the Eventing components.
@@ -154,15 +158,15 @@ Apply this CR on the hub, then check the spoke cluster for the Eventing componen
 
 Each `KnativeServing` or `KnativeEventing` CR targets exactly one `ClusterProfile`. To deploy to several spokes, create one CR per spoke and use a naming convention that makes the target clear, such as `knative-serving-us-east` or `knative-eventing-prod-eu`.
 
-The `spec.clusterProfileRef` field is immutable after the CR is created. To move an installation to a different spoke, delete the existing CR and create a new one with the new `clusterProfileRef`.
+The entire `spec.destination` field is immutable after the CR is created. To move an installation to a different spoke or namespace, delete the existing CR and create a new one with the new destination.
 
-The Operator reports remote targeting through the `TargetClusterResolved` condition. If targeting fails, the condition reason points to the next action. For example, `ClusterProfileNotFound` means the referenced profile does not exist, `MulticlusterDisabled` means the Operator was not started with a provider file, and `AccessProviderFailed` means the credential plugin returned an error.
+The Operator reports remote targeting through the `TargetClusterResolved` condition. If targeting fails, the condition reason points to the next action. For example, `ClusterProfileNotFound` means the referenced profile does not exist, `MulticlusterDisabled` means the Operator was not started with a provider file, and `AccessProviderFailed` means the access provider configuration did not match or the credential plugin returned an error.
 
 For larger fleets, tune the remote readiness polling interval. The default is `10s`, but you can increase it with `--remote-deployments-poll-interval` or the Helm value `knative_operator.multicluster.remoteDeploymentsPollInterval`.
 
 ## Conclusion
 
-Knative Operator v1.22 adds a new way to run Knative across a fleet: keep the Operator and installation API on a hub cluster, and deploy Serving or Eventing components to remote spoke clusters through `spec.clusterProfileRef`.
+Knative Operator v1.22 adds a new way to run Knative across a fleet: keep the Operator and installation API on a hub cluster, and deploy Serving or Eventing components to a selected cluster and namespace through `spec.destination`.
 
 This keeps the single-cluster path unchanged while giving platform teams a declarative API for remote installations, cleanup, and fleet integration through the Cluster Inventory API.
 
