@@ -236,6 +236,23 @@ a.md-header__button.md-logo img {
   background: #fff5b5;
 }
 
+.md-banner:has(.site-announcement) {
+  background: #0d4984;
+}
+
+.site-announcement {
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 0.8rem;
+  text-align: center;
+}
+
+.md-banner .site-announcement a {
+  color: #fff;
+  margin-left: 0.5rem;
+  text-decoration: underline;
+}
+
 .md-banner .versionwarning h1 {
   font-weight: bold;
   font-size: 20px;

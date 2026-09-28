@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block announce %}
+{% if page and page.is_homepage and config.extra.announcement %}
+<div class="site-announcement">
+  <span>{{ config.extra.announcement.text }}</span>
+  <a href="{{ config.extra.announcement.href }}">{{ config.extra.announcement.link_text }}</a>
+</div>
+{% endif %}
 {% if page and page.meta.version_warning %}
 <div class="versionwarning" style="margin: .6rem auto; padding: 0 .8rem">
   <h1>⚠ You are viewing an archived snapshot of the documentation for Knative version: {{ page.meta.knative_version }}</h1>
