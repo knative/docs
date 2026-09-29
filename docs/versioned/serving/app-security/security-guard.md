@@ -207,7 +207,7 @@ It is recommended to secure the communication between queue-proxy with the `guar
 
     1. Set the `queue-sidecar-rootca` parameter of the `config-deployment` configmap in the `knative-serving` namespace to the public key defined under `ca-cert.pem` key in the `knative-serving-certs` secret of the `knative-serving` namespace. This will inform queue-proxy to use TLS and approve the guard-service certificates.
 
-    1. Set `queue-sidecar-token-audiences = "guard-service"` at the `config-deployment` configmap in the `knative-serving` namespace. This will produce a a token with audience `guard-service` for every queue-proxy instance.
+    1. Set `queue-sidecar-token-audiences = "guard-service"` at the `config-deployment` configmap in the `knative-serving` namespace. This will produce a token with audience `guard-service` for every queue-proxy instance.
 
 === "Using scripts"
 
