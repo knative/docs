@@ -64,6 +64,16 @@ markdown_extensions:
   - def_list
 
 plugins:
+  i18n:
+    docs_structure: folder
+    languages:
+      - locale: en
+        default: true
+        name: English
+        build: true
+      - locale: ko
+        name: 한국어
+        build: true
   search:
     # Spaces, dashes, periods and forward-slash (so serving.knative.dev/blibble can be searched as blibble).
     separator: '[\/\s\-\.]+'
