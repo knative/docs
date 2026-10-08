@@ -8,14 +8,13 @@ function: how-to
 
 # Deploy Knative to a remote cluster
 
+**Stage**: Alpha, disabled by default
+
 Starting with Knative Operator v1.22, a single Operator can deploy Knative Serving or Knative Eventing to a different Kubernetes cluster. The cluster that runs the Operator is the **hub cluster**, and the cluster that receives the Knative components is a **spoke cluster**. You set the field `spec.clusterProfileRef` on the `KnativeServing` or `KnativeEventing` CR to point to a `ClusterProfile` resource that describes a spoke cluster.
 
-The Operator resolves the referenced `ClusterProfile` through the SIG-Multicluster Cluster Inventory API ([KEP-5339](https://github.com/kubernetes/enhancements/issues/5339)), so the feature works with any fleet manager that publishes `ClusterProfile` resources, such as Open Cluster Management or MultiKueue. You can also register `ClusterProfile` resources manually for proof-of-concept work.
+The Operator resolves the referenced `ClusterProfile` through the SIG-Multicluster Cluster Inventory API `v1alpha1` ([KEP-5339](https://github.com/kubernetes/enhancements/issues/5339)), so the feature works with any fleet manager that publishes `ClusterProfile` resources, such as Open Cluster Management or MultiKueue. You can also register `ClusterProfile` resources manually for proof-of-concept work. The Cluster Inventory API schema and recommended access provider plugins might change between releases.
 
 If `spec.clusterProfileRef` is not set on a CR, the Operator deploys components to the local cluster, exactly as in earlier releases.
-
-!!! important
-    Multi-cluster deployment is a beta feature in Knative Operator v1.22 and later. This feature depends on the SIG-Multicluster Cluster Inventory API, which is still in alpha; its schema and recommended access provider plugins might change between releases.
 
 ## Overview
 
