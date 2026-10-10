@@ -82,7 +82,7 @@ func create -l python bad-word-filter -t cloudevents
 
     ```python
     import logging
-    from cloudevents.http import CloudEvent
+    from cloudevents.core.v1.event import CloudEvent
     from profanity_check import predict
 
     def new():
