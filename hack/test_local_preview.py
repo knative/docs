@@ -1,4 +1,4 @@
-"""Run with: .venv/bin/python -m unittest discover -s hack -p 'test_local_preview.py'."""
+"""Run with: uv run --locked python -m unittest discover -s hack -p 'test_local_preview.py'."""
 
 import tempfile
 import unittest

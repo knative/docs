@@ -5,19 +5,20 @@ For everyday edits, preview just your checkout instead of assembling every
 published release. You don't need a Kubernetes cluster, Node.js, a GitHub token,
 or release branches.
 
-## Quick start: Python
+## Quick start: uv
 
-You need Python 3 with `venv` and `pip` installed. On Debian/Ubuntu, you may need
-the `python3-venv` package. Run these commands from a clone of this repository:
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run
+this command from a clone of this repository:
 
 ```bash
 ./hack/mkdocs.sh
 ```
 
-The first run creates `.venv/` and installs `requirements.txt` (internet access is
-required). Later runs reuse that environment, installing dependencies again only
-when `requirements.txt` changes. You don't need to activate the virtual environment
-or install packages globally.
+uv selects Python 3.13 (from `.python-version`), downloads it if necessary,
+creates `.venv/`, and installs the exact dependencies from `uv.lock`. The first
+run requires internet access. Later runs reuse the environment and check that it
+matches the lockfile. You don't need to install Python manually, activate the
+environment, or install packages globally.
 
 Open <http://127.0.0.1:8000/docs/>. Edit Markdown under `docs/`, save, and the
 browser reloads automatically. Press **Ctrl+C** to stop.
@@ -49,49 +50,89 @@ directly; there is no copy step between editing and previewing.
 # Treat build warnings as errors
 ./hack/mkdocs.sh build --strict
 
-# Refresh Python dependencies explicitly
+# Sync the environment to the committed lockfile
 ./hack/mkdocs.sh setup
 ```
 
 Use normal reloads when adding/deleting pages or changing navigation, snippets,
 or templates: `--dirtyreload` can leave other pages stale.
 
-To use an existing Python environment instead of the helper:
+The helper is just a shortcut for uv. You can also run commands directly:
 
 ```bash
-python -m pip install -r requirements.txt
-python -m mkdocs serve --livereload --config-file mkdocs.local.yml
+uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml
+uv run --locked python -m unittest discover -s hack -p 'test_local_preview.py'
 ```
+
+### Updating dependencies
+
+`pyproject.toml` declares dependencies; `uv.lock` pins the resolved versions.
+`requirements.txt` is a generated compatibility export for Netlify and existing
+pip-based CI. Don't edit it by hand. Docker installs directly from `uv.lock`.
+
+After changing dependencies in `pyproject.toml`, run:
+
+```bash
+uv lock
+uv export --locked --format requirements-txt --no-hashes --no-dev --no-emit-project --output-file requirements.txt
+./hack/mkdocs.sh build --strict
+```
+
+To update all packages within their declared constraints, use `uv lock --upgrade`
+instead of `uv lock`, then regenerate `requirements.txt`. Commit all three files
+together. Normal preview commands use `--locked` so a stale lockfile fails rather
+than silently choosing new versions.
 
 ### Troubleshooting
 
 - **Port already in use:** choose another port with `--dev-addr` as shown above.
 - **Python environment no longer works after a Python upgrade:** remove the
   generated `.venv/` directory and rerun `./hack/mkdocs.sh`.
-- **Dependency installation fails:** ensure your Python has `venv` and `pip`.
-  Set `PYTHON=/path/to/python3` when first running the helper to select a different
-  interpreter.
+- **uv is missing:** follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+- **The lockfile is stale:** if you changed `pyproject.toml`, follow the dependency
+  update steps above. Otherwise, make sure you checked out the matching `uv.lock`.
+- **Python download fails:** check network access, or install Python 3.13 yourself;
+  uv can use a compatible interpreter already on your machine.
 - **Unexpected versioned artifact links or GitHub API errors:** unset
   `KNATIVE_VERSION` for the normal development preview. By default, artifact
   macros link to nightly downloads without querying GitHub releases.
 
 ## Alternative: Docker
 
-If you prefer not to install Python, use a Docker-compatible engine such as
+If you prefer not to install uv or manage a host environment, use a
+Docker-compatible engine such as
 [Docker Desktop](https://www.docker.com/products/docker-desktop) or
-[colima](https://github.com/abiosoft/colima):
+[colima](https://github.com/abiosoft/colima). Only the Docker CLI is required.
+
+From the repository root:
 
 ```bash
 ./hack/docker/run.sh
-
-# Optional: choose a different host port
-./hack/docker/run.sh 8001
 ```
 
-Open <http://127.0.0.1:8000/docs/> (or the port you selected). Your checkout is
-mounted into the container and changes reload automatically. Press **Ctrl+C** to
-stop. The script uses the same `mkdocs.local.yml` configuration as the Python
-preview. The published container uses amd64, so ARM machines require emulation.
+Open <http://127.0.0.1:8000/docs/>. Your checkout is mounted into the container
+and changes reload automatically. Press **Ctrl+C** to stop; the container is
+removed automatically.
+
+The script builds locally for your machine's architecture and installs dependencies
+directly from `uv.lock`. It doesn't depend on a published Knative image, host
+Python, or host uv. Container dependencies live in `/opt/venv`, separate from your
+host's `.venv/`. Source edits reload immediately. Each launch checks the image
+build, reusing Docker's cached layers when dependencies haven't changed.
+
+```bash
+# Choose another host port
+PORT=8001 ./hack/docker/run.sh
+
+# Faster reloads for a single existing page
+./hack/docker/run.sh serve --dirtyreload
+
+# Check the checkout without starting a server (output: site/)
+./hack/docker/run.sh build --strict
+```
+
+The default local image tag is `knative-docs:local`. Set `IMAGE` to choose a
+different local build tag; the script never pushes it.
 
 ## Local preview versus a full release build
 
@@ -105,7 +146,8 @@ Production configuration is still `mkdocs.yml`. To test release assembly, includ
 older versions and freshly downloaded API references, use:
 
 ```bash
-./hack/docker/test.sh
+# First export GITHUB_TOKEN in your shell, then:
+./hack/docker/run.sh release
 ```
 
 That separate workflow requires Docker, network access, and a `GITHUB_TOKEN`

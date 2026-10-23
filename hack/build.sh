@@ -17,6 +17,9 @@
 set -e
 set -x
 
+# Hide Material's MkDocs 2 banner without suppressing build diagnostics.
+export NO_MKDOCS_2_WARNING=1
+
 # Builds blog and community into the site by cloning the website repo, copying blog/community dirs in, running hugo.
 # Also builds previous versions unless BUILD_VERSIONS=no.
 # - Results are written to site/ as normal.
