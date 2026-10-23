@@ -202,7 +202,7 @@ plugins:
       versioned/serving/samples/grpc-ping-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/grpc-ping-go
       versioned/serving/samples/hello-world/helloworld-csharp/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-csharp
       versioned/serving/samples/hello-world/helloworld-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-go
-      versioned/serving/samples/hello-world/helloworld-java-spark/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-java-spark
+      versioned/serving/samples/hello-world/helloworld-java-spark/README.md: versioned/samples/serving.md
       versioned/serving/samples/hello-world/helloworld-java-spring/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-java-spring
       versioned/serving/samples/hello-world/helloworld-kotlin/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-kotlin
       versioned/serving/samples/hello-world/helloworld-nodejs/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-nodejs
