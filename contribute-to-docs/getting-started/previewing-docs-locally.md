@@ -25,8 +25,8 @@ browser reloads automatically. Press **Ctrl+C** to stop.
 
 ### Where to edit
 
-- Product documentation: `docs/versioned/`
-- Product navigation: `docs/versioned/.nav.yml`
+- Knative documentation: `docs/versioned/`
+- Documentation navigation: `docs/versioned/.nav.yml`
 - Shared snippets: `docs/snippets/`
 - Blog, community, and about pages: their respective directories under `docs/`
 - Website templates and styles: `overrides/` and `docs/stylesheets/`
