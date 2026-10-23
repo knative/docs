@@ -10,7 +10,10 @@ on:
     - "docs/serving/autoscaling/autoscale-go/**"
     - "hack/docker/**"
     - ".github/workflows/knative-docs-image.yaml"
-    - "requirements.txt"
+    - "pyproject.toml"
+    - "uv.lock"
+    - ".python-version"
+    - ".dockerignore"
 
 jobs:
   build-and-push-image:
