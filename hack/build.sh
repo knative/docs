@@ -30,7 +30,7 @@ export NO_MKDOCS_2_WARNING=1
 # 1) Make a release-NN branch as normal.
 # 2) Update VERSIONS below (on main) to include the new version, and remove the oldest
 #    Order matters :-), Most recent first.
-VERSIONS=("1.22" "1.21" "1.10") # Docs version, results in the url e.g. knative.dev/docs-1.9/..
+VERSIONS=("1.23" "1.22" "1.21") # Docs version, results in the url e.g. knative.dev/docs-1.9/..
 # 4) PR the result to main.
 # 5) Party.
 
@@ -78,8 +78,8 @@ curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/
 echo -e "\nsamples_branch: main\nversion: development\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/versioned/.meta.yml"
 versionjson="{\"version\": \"versioned\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 
-# Temporarily force BUILD_VERSIONS (for previews), while this rewrite is testing.
-BUILD_VERSIONS="yes"
+# Build all versions by default, but allow deploy previews to opt out.
+: "${BUILD_VERSIONS:=yes}"
 
 if [ "$BUILD_VERSIONS" != "no" ]; then
   mv $TEMP/content/docs/versioned $TEMP/content/docs/development

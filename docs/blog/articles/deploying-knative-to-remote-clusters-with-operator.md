@@ -18,7 +18,7 @@ Platform teams often manage more than one Kubernetes cluster. Some clusters are 
 
 Starting with Knative Operator v1.22, a single Operator can deploy Knative components to a different Kubernetes cluster. The cluster that runs the Operator acts as the **hub cluster**. The cluster that receives Knative Serving or Knative Eventing acts as a **spoke cluster**. You select the spoke by setting `spec.clusterProfileRef` on the `KnativeServing` or `KnativeEventing` custom resource.
 
-This feature uses the SIG-Multicluster Cluster Inventory API, introduced through [KEP-5339](https://github.com/kubernetes/enhancements/issues/5339). The Operator reads a `ClusterProfile` resource to discover the remote cluster endpoint and access provider, then runs the normal Knative installation pipeline against that remote cluster.
+This feature uses the SIG-Multicluster Cluster Inventory API `v1alpha1`, introduced through [KEP-5339](https://github.com/kubernetes/enhancements/issues/5339). The Operator reads a `ClusterProfile` resource to discover the remote cluster endpoint and access provider, then runs the normal Knative installation pipeline against that remote cluster.
 
 If `spec.clusterProfileRef` is not set, nothing changes. The Operator keeps deploying Knative to the local cluster exactly as it did before.
 
@@ -37,7 +37,7 @@ This is useful when you want to:
 The feature is intentionally based on the Cluster Inventory API instead of a specific fleet manager. A fleet system such as Open Cluster Management can publish the `ClusterProfile` resources, and proof-of-concept environments can register them manually.
 
 !!! important
-    Multi-cluster deployment is a beta feature in Knative Operator v1.22 and later. It depends on the SIG-Multicluster Cluster Inventory API, which is still in alpha. The API schema and recommended access provider plugins might change between releases.
+    Multi-cluster deployment is an alpha feature in Knative Operator v1.22 and later and is disabled by default. The Cluster Inventory API schema and recommended access provider plugins might change between releases.
 
 ## How the Operator targets a remote cluster
 
@@ -77,16 +77,17 @@ knative_operator:
         - name: secretreader
           execConfig:
             apiVersion: client.authentication.k8s.io/v1
-            command: /credential-plugin/secretreader-plugin
+            command: /access-plugins/secretreader/bin/secretreader-plugin
+            interactiveMode: Never
             provideClusterInfo: true
     plugins:
       - name: secretreader
-        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.1
-        mountPath: /credential-plugin
+        image: registry.k8s.io/cluster-inventory-api/secretreader:v0.1.2
+        mountPath: /access-plugins/secretreader
     remoteDeploymentsPollInterval: 10s
 ```
 
-The provider name in `accessProvidersConfig.providers[].name` must match the plugin name in `plugins[].name`. The Operator uses that name to connect the `ClusterProfile` access provider entry to the credential plugin configuration.
+The provider name in `accessProvidersConfig.providers[].name` must match the access provider name in `ClusterProfile` status. The `execConfig.command` points to the plugin binary mounted from the image volume.
 
 If you do not use Helm, you can patch an existing Operator Deployment. The important pieces are the same: mount the access provider configuration, mount the credential plugin binary, and start the Operator with `--clusterprofile-provider-file`.
 

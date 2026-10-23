@@ -88,6 +88,13 @@ To get a local deployment of Knative, run the `quickstart` plugin:
             netstat -tnlp | grep 80
             ```
 
+        !!! note
+            Quickstart connects to the Docker daemon at `/var/run/docker.sock` and does not honor the socket selected by your current `docker context` (for example, when using Colima, Rancher Desktop, or Lima). If you see an error like `Cannot connect to the Docker daemon at unix:///var/run/docker.sock`, set the `DOCKER_HOST` environment variable to your active socket before running the command. For example:
+            ```bash
+            export DOCKER_HOST=unix://$HOME/.lima/docker/sock/docker.sock
+            ```
+            You can find the endpoint for your active context by running `docker context ls`.
+
     1. After the plugin is finished, verify you have a cluster called `knative`:
 
         ```bash

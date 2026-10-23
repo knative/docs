@@ -316,7 +316,7 @@ New Contributors 🎉:
 
 ## Learn more
 
-Knative is an open source project that anyone in the [community](https://knative.dev/docs/community/) can use, improve, and enjoy. We'd love you to join us!
+Knative is an open source project that anyone in the [community](https://knative.dev/community/) can use, improve, and enjoy. We'd love you to join us!
 
 - [Knative docs](https://knative.dev/docs)
 - [Quickstart tutorial](https://knative.dev/docs/getting-started)
