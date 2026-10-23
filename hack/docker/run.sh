@@ -1,11 +1,15 @@
 #!/usr/bin/env sh
 
-SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
-PORT=${2:-8000}
-IMAGE=${3:-ghcr.io/knative/knative-docs:latest}
+set -eu
 
-set -x
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+PORT=${1:-8000}
+IMAGE=${2:-ghcr.io/knative/knative-docs:latest}
 
-docker pull ${IMAGE} --platform linux/amd64
-docker run --rm -p "${PORT}:8000" -v "${SCRIPT_DIR}/../../:/site" ${IMAGE} serve --dirtyreload --dev-addr=0.0.0.0:8000
+# The published docs image is amd64; Docker Desktop can emulate it on ARM.
+docker pull --platform linux/amd64 "$IMAGE"
+docker run --rm --platform linux/amd64 \
+  -p "127.0.0.1:${PORT}:8000" -v "${SCRIPT_DIR}/../../:/site" \
+  --entrypoint mkdocs "$IMAGE" \
+  serve --livereload --config-file mkdocs.local.yml --dev-addr=0.0.0.0:8000
 

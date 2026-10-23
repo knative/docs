@@ -1,0 +1,10 @@
+# Fast, single-checkout preview. Production builds still use mkdocs.yml.
+INHERIT: mkdocs.yml
+
+site_url: http://127.0.0.1:8000/
+hooks:
+  - hack/local_preview.py
+watch:
+  - docs
+  - overrides
+  - hack/macros.py

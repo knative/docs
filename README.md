@@ -26,7 +26,18 @@ contributor guidelines.
 
 ### Run the website locally
 
-For instructions, refer to Knative's [docs contributor guide](contribute-to-docs/getting-started/previewing-docs-locally.md).
+With Python 3 installed, run this from your clone:
+
+```bash
+./hack/mkdocs.sh
+```
+
+Open <http://127.0.0.1:8000/docs/>, edit files under `docs/`, and save to see
+changes reload automatically. The first run installs dependencies into `.venv/`;
+no GitHub token, release branches, or Docker are needed.
+
+For Docker, other ports, and build checks, see the
+[local preview guide](contribute-to-docs/getting-started/previewing-docs-locally.md).
 
 ### Website source files
 
