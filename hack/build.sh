@@ -20,8 +20,8 @@ set -x
 # Hide Material's MkDocs 2 banner without suppressing build diagnostics.
 export NO_MKDOCS_2_WARNING=1
 
-# Builds blog and community into the site by cloning the website repo, copying blog/community dirs in, running hugo.
-# Also builds previous versions unless BUILD_VERSIONS=no.
+# Assemble the MkDocs site, including blog and community pages.
+# BUILD_VERSIONS=no publishes this checkout at /docs/ without release snapshots.
 # - Results are written to site/ as normal.
 # - Run as "./hack/build.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
 
@@ -163,6 +163,13 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   # Put the development version at the end of the JSON list of documentation,
   # even though we put it in the directory first.
   versionjson+="{\"version\": \"development\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
+else
+  # Deploy previews use the same /docs/ URLs as the homepage and site navigation.
+  # Keep doc_base pointing at the source tree for GitHub edit links.
+  mv "$TEMP/content/docs/versioned" "$TEMP/content/docs/docs"
+  ${SED_CMD} -i 's| versioned/| docs/|g' "$TEMP/content/config/redirects.yml"
+  ${SED_CMD} -i 's/^version: development$/version: docs/' "$TEMP/content/docs/docs/.meta.yml"
+  versionjson="{\"version\": \"docs\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 fi
 
 # Only build the site _once_ -- we used to build sub-components, and it
