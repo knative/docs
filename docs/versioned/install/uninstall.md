@@ -9,7 +9,7 @@ function: how-to
 # Uninstalling Knative
 
 To uninstall an Operator-based Knative installation, see the following [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation) procedure.
-To uninstall a YAML-based Knative installation, see the following [Uninstall a YAML-based Knative Installation](#uninstall-a-yaml-based-knative-installation) procedure.
+To uninstall a YAML-based Knative installation, see the following [Uninstall a YAML-based Knative Installation](#uninstalling-a-yaml-based-knative-installation) procedure.
 
 
 ## Uninstalling a YAML-based Knative installation

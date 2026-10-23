@@ -14,6 +14,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PORT=${2:-8000}
+# uv manages Python and the locked environment; no activation needed.
+set -eu
 
-mkdocs serve --config-file "./mkdocs.yml" --livereload -a 0.0.0.0:${PORT}
+# Hide Material's MkDocs 2 banner without suppressing build diagnostics.
+export NO_MKDOCS_2_WARNING=1
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$ROOT"
+
+usage() {
+    printf '%s\n' \
+        'Usage: ./hack/mkdocs.sh [serve|build|setup] [MkDocs options]' \
+        '' \
+        '  serve  Live preview at http://127.0.0.1:8000 (default)' \
+        '  build  Build this checkout only into site/' \
+        '  setup  Sync the local environment with uv.lock' \
+        '' \
+        'Examples:' \
+        '  ./hack/mkdocs.sh serve --dev-addr 127.0.0.1:8001' \
+        '  ./hack/mkdocs.sh serve --dirtyreload' \
+        '  ./hack/mkdocs.sh build --strict' \
+        '' \
+        'Requires uv: https://docs.astral.sh/uv/getting-started/installation/' \
+        'No manual Python setup, GitHub token, or Docker needed.'
+}
+
+COMMAND=${1:-serve}
+if [ "$#" -gt 0 ]; then shift; fi
+case "$COMMAND" in
+    -h|--help|help) usage; exit 0 ;;
+    serve|build|setup) ;;
+    *) usage >&2; exit 2 ;;
+esac
+
+if ! command -v uv >/dev/null 2>&1; then
+    printf '%s\n' 'Install uv: https://docs.astral.sh/uv/getting-started/installation/' >&2
+    exit 1
+fi
+
+if [ "$COMMAND" = setup ]; then exec uv sync --locked; fi
+if [ "$COMMAND" = serve ]; then
+    exec uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml "$@"
+fi
+exec uv run --locked mkdocs build --config-file mkdocs.local.yml "$@"

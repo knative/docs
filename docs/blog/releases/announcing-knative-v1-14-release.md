@@ -18,9 +18,9 @@ This release brings a number of smaller improvements to the core Knative Serving
 ## Table of Contents
 - [Serving](#serving)
 - [Eventing](#eventing)
-- [kn CLI](#kn-cli)
+- [kn CLI](#client)
 - [Functions](#functions)
-- [Knative Operator](#knative-operator)
+- [Knative Operator](#operator)
 
 ### Serving
 **Release Notes:** [Knative Serving 1.14](https://github.com/knative/serving/releases/tag/knative-v1.14.0)

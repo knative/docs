@@ -15,7 +15,7 @@ Securing event delivery in Knative Eventing is essential to prevent unauthorized
 
 ## Prerequisites
 
-- [Eventing installation](./../../../install)
+- [Eventing installation](../../install/README.md)
 - [`authentication-oidc`](./sender-identity.md) feature to be enabled.
 
 !!! note
@@ -26,8 +26,8 @@ Securing event delivery in Knative Eventing is essential to prevent unauthorized
 Authorization is currently supported for the following components:
 
 - Brokers:
-    - [MTChannelBasedBroker](./../brokers/broker-types/channel-based-broker/)
-    - [Knative Broker for Apache Kafka](./../brokers/broker-types/kafka-broker/)
+    - [MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/README.md)
+    - [Knative Broker for Apache Kafka](../brokers/broker-types/kafka-broker/README.md)
 - Channels:
     - [InMemoryChannel](./../channels/channels-crds.md)
     - [KafkaChannel](./../channels/channels-crds.md)

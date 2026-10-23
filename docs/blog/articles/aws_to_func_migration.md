@@ -2,7 +2,7 @@
 
 **Author: Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-_In a [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we discussed the consumption of notifications from an AWS S3 bucket inside a Knative Function. This post will describe the migration from a AWS Lambda Function, receiving S3 notifications, to [Knative Functions](docs/functions){:target="_blank"}._
+_In a [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we discussed the consumption of notifications from an AWS S3 bucket inside a Knative Function. This post will describe the migration from a AWS Lambda Function, receiving S3 notifications, to [Knative Functions](/docs/functions/){:target="_blank"}._
 
 With Serverless Functions one of the common use-cases is to execute custom code based on an event trigger, like a notification from the AWS S3 service. With AWS Lambda you can run those programs on Amazon's cloud offerings, but running the code on your own data-center is much harder.
 
@@ -42,7 +42,7 @@ You see two functions here: `handler` for the custom application logic and `main
 
 !!! note
 
-    To learn more about Knative Functions and how to create, build and deploy a project using the `func` CLI, check out the [documentation](docs/functions){:target="_blank"}.
+    To learn more about Knative Functions and how to create, build and deploy a project using the `func` CLI, check out the [documentation](/docs/functions/){:target="_blank"}.
 
 
 In the [previous post](/blog/articles/consuming_s3_data_with_knative){:target="_blank"} we discuss how to consume notifications from AWS Lambda in an on-premise cluster using Knative Eventing. Lets take a look at the `main.go` file from the S3 project again:
@@ -116,4 +116,4 @@ $ curl -v -X POST \
 
 With Knative Functions it is straightforward to build cloud vendor-neutral functions for consuming event notifications from 3rd party cloud services such as AWS S3. Deploying those functions as Linux containers to your own on-premise Kubernetes cluster is also supported by the Knative CLI, as well as testing the function locally.
 
-To learn more about Knative Functions visit the [documentation](docs/functions){:target="_blank"} on our website or join our CNCF Slack channel [#knative-functions](https://cloud-native.slack.com/archives/C04LKEZUXEE)!
+To learn more about Knative Functions visit the [documentation](/docs/functions/){:target="_blank"} on our website or join our CNCF Slack channel [#knative-functions](https://cloud-native.slack.com/archives/C04LKEZUXEE)!

@@ -23,7 +23,7 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 
 ## Prerequisites
 
-- [Eventing installation](./../../../install)
+- [Eventing installation](../../install/README.md)
 
 !!! note
     To not provide the access token in cleartext over the wire, transport-encryption should be enabled as well. Take a look at [Transport-Encryption](./transport-encryption.md), which explains how to enable the transport encryption feature flag.
@@ -33,17 +33,17 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 OIDC authentication is currently supported for the following components:
 
 - Brokers:
-    - [MTChannelBasedBroker](./../../brokers/broker-types/channel-based-broker/)
-    - [Knative Broker for Apache Kafka](./../../brokers/broker-types/kafka-broker/)
+    - [MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/README.md)
+    - [Knative Broker for Apache Kafka](../brokers/broker-types/kafka-broker/README.md)
 - Channels:
-    - [InMemoryChannel](./../../channels/channels-crds/)
-    - [KafkaChannel](./../../channels/channels-crds/)
+    - [InMemoryChannel](../channels/channels-crds.md)
+    - [KafkaChannel](../channels/channels-crds.md)
 - Sources:
-    - [ApiServerSource](./../../sources/apiserversource/)
-    - [PingSource](./../../sources/ping-source/)
-    - [KafkaSource](./../../sources/kafka-source/)
-    - [SinkBinding](./../../custom-event-source/sinkbinding/)
-    - [ContainerSource](./../../custom-event-source/containersource/)
+    - [ApiServerSource](../sources/apiserversource/README.md)
+    - [PingSource](../sources/ping-source/README.md)
+    - [KafkaSource](../sources/kafka-source/README.md)
+    - [SinkBinding](../custom-event-source/sinkbinding/README.md)
+    - [ContainerSource](../custom-event-source/containersource/README.md)
 
 ## Sender Identity Configuration
 

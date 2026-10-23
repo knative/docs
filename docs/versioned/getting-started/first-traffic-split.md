@@ -9,7 +9,7 @@ function: tutorial
 
 Traffic splitting is useful for [blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html){target=blank_} and [canary deployments](https://martinfowler.com/bliki/CanaryRelease.html){target=blank_}.
 
-A [Revision](../serving/README.md#serving-resources){target=_blank} is a snapshot-in-time of application code and configuration. A new Revision is created every time you make changes to the configuration of a Knative Service. When splitting traffic, Knative splits traffic between different Revisions of your Knative Service.
+A [Revision](../serving/revisions/README.md){target=_blank} is a snapshot-in-time of application code and configuration. A new Revision is created every time you make changes to the configuration of a Knative Service. When splitting traffic, Knative splits traffic between different Revisions of your Knative Service.
 
 ## Creating a new Revision
 

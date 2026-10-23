@@ -9,7 +9,7 @@ function: how-to
 # Knative Event Mesh Backstage Plugin
 
 !!! info
-    For installation instructions, see the [plugin installation documentation](../../../install/installing-backstage-plugins).
+    For installation instructions, see the [plugin installation documentation](../../install/installing-backstage-plugins.md).
 
 The Knative Event Mesh plugin is a Backstage plugin that allows you to view and manage Knative Eventing resources. The 
 plugin talks to a special backend that runs in the Kubernetes cluster and communicates with the Kubernetes API server.
@@ -93,7 +93,7 @@ Actually, Backstage has other mechanisms, including configuration files, file in
 You can check the [Backstage documentation](https://backstage.io/docs/conf/writing/){:target="_blank"} for more information.
 
 How to create the `ServiceAccount`, `ClusterRole`, `ClusterRoleBinding`, `Secret` and the token for that `Secret` is documented in 
-the [plugin installation documentation](../../../install/installing-backstage-plugins).
+the [plugin installation documentation](../../install/installing-backstage-plugins.md).
 
 ## Usage
 
