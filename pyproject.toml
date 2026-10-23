@@ -1,0 +1,24 @@
+[project]
+name = "knative-docs"
+version = "0.0.0"
+description = "Development tools for the Knative documentation website"
+requires-python = ">=3.11"
+dependencies = [
+    # Local preview hooks use File.generated, introduced in MkDocs 1.6.
+    "mkdocs>=1.6,<2.0",
+    "mkdocs-material<10.0",
+    "mkdocs-exclude>=1.0",
+    "mkdocs-macros-plugin>=0.5.12",
+    "mkdocs-awesome-nav>=3.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2",
+    # Newer releases pull in ProperDocs, which shares MkDocs' module/CLI paths.
+    # Keep the existing MkDocs stack until that migration is evaluated separately.
+    "mkdocs-redirects>=1.0.3,<1.2.3",
+    "mkdocs-rss-plugin>=0.18.0,<1.18",
+    "pygithub==1.55",
+    "semver==2.13.0",
+]
+
+[tool.uv]
+# This repository is a website, not an installable Python package.
+package = false

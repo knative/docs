@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Use an isolated Python environment; no activation or global pip install needed.
+# uv manages Python and the locked environment; no activation needed.
 set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
@@ -26,14 +26,15 @@ usage() {
         '' \
         '  serve  Live preview at http://127.0.0.1:8000 (default)' \
         '  build  Build this checkout only into site/' \
-        '  setup  Install or refresh the local Python environment' \
+        '  setup  Sync the local environment with uv.lock' \
         '' \
         'Examples:' \
         '  ./hack/mkdocs.sh serve --dev-addr 127.0.0.1:8001' \
         '  ./hack/mkdocs.sh serve --dirtyreload' \
         '  ./hack/mkdocs.sh build --strict' \
         '' \
-        'Requires Python 3 with venv and pip. No GitHub token or Docker needed.'
+        'Requires uv: https://docs.astral.sh/uv/getting-started/installation/' \
+        'No manual Python setup, GitHub token, or Docker needed.'
 }
 
 COMMAND=${1:-serve}
@@ -44,20 +45,13 @@ case "$COMMAND" in
     *) usage >&2; exit 2 ;;
 esac
 
-if [ ! -x .venv/bin/python ]; then
-    "${PYTHON:-python3}" -m venv .venv
-fi
-if [ "$COMMAND" = setup ] || ! cmp -s requirements.txt .venv/.docs-requirements.txt; then
-    # Existing environments created by tools such as uv may not include pip.
-    if ! .venv/bin/python -m pip --version >/dev/null 2>&1; then
-        .venv/bin/python -m ensurepip --upgrade
-    fi
-    .venv/bin/python -m pip install -r requirements.txt
-    cp requirements.txt .venv/.docs-requirements.txt
+if ! command -v uv >/dev/null 2>&1; then
+    printf '%s\n' 'Install uv: https://docs.astral.sh/uv/getting-started/installation/' >&2
+    exit 1
 fi
 
-if [ "$COMMAND" = setup ]; then exit 0; fi
+if [ "$COMMAND" = setup ]; then exec uv sync --locked; fi
 if [ "$COMMAND" = serve ]; then
-    exec .venv/bin/python -m mkdocs serve --livereload --config-file mkdocs.local.yml "$@"
+    exec uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml "$@"
 fi
-exec .venv/bin/python -m mkdocs build --config-file mkdocs.local.yml "$@"
+exec uv run --locked mkdocs build --config-file mkdocs.local.yml "$@"
