@@ -7,7 +7,7 @@ on:
     paths:
     - "code-samples/serving/hello-world/helloworld-go/**"
     - "code-samples/eventing/bookstore-sample-app/**"
-    - "docs/serving/autoscaling/autoscale-go/**"
+    - "docs/versioned/serving/autoscaling/autoscale-go/**"
     - "hack/docker/**"
     - ".github/workflows/knative-docs-image.yaml"
     - "pyproject.toml"
