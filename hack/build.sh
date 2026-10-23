@@ -177,9 +177,6 @@ cat << EOF > $SITE/versions.json
 ]
 EOF
 
-# Handle Cookie consent
-cp -r cookie-consent/js site/
-
 # Copy go mod files so knative.dev/blahblah vanity URLs work
 mkdir site/golang
 cp golang/*.html site/golang/
