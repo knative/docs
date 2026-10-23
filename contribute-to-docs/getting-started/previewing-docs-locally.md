@@ -61,7 +61,6 @@ The helper is just a shortcut for uv. You can also run commands directly:
 
 ```bash
 uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml
-uv run --locked python -m unittest discover -s hack -p 'test_local_preview.py'
 ```
 
 ### Updating dependencies

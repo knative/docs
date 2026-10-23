@@ -15,7 +15,7 @@ dependencies = [
     # Keep the existing MkDocs stack until that migration is evaluated separately.
     "mkdocs-redirects>=1.0.3,<1.2.3",
     "mkdocs-rss-plugin>=0.18.0,<1.18",
-    "pygithub==1.55",
+    "pygithub>=2.8,<3",
     "semver==2.13.0",
 ]
 
