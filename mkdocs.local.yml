@@ -2,6 +2,13 @@
 INHERIT: mkdocs.yml
 
 site_url: http://127.0.0.1:8000/
+# Validate this checkout without imposing new checks on archived release branches.
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    unrecognized_links: warn
+    anchors: warn
 hooks:
   - hack/local_preview.py
 watch:

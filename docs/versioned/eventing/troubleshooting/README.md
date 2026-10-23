@@ -303,7 +303,7 @@ Pay particular attention to any lines that have a logging level of `warning` or
 
 ### Data Plane
 
-The entire [Control Plane](#control-plane) looks healthy, but we're still not
+The entire [Control Plane](#controllers) looks healthy, but we're still not
 getting any events. Now we need to investigate the data plane.
 
 The Knative event takes the following path:

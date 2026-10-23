@@ -19,14 +19,14 @@ Follow the instructions in the documentation
 
 #### Table of Contents
 - [Highlights](#highlights)
-- [Serving v0.24](#Serving-v024)
-- [Eventing v0.24](#Eventing-v024)
-- [Eventing Extensions](#Eventing-Extensions)
-    - [Apache Kafka Broker v0.24](#Apache-Kafka-Broker-v024)
-    - [RabbitMQ Eventing v0.24](#RabbitMQ-Eventing-v024)
-- `kn` [CLI v0.24](#Client-v024)
-- [Operator v0.24](#Operator-v024)
-- [Thank you contributors](#Thank-you-contributors)
+- [Serving v0.24](#serving-v024)
+- [Eventing v0.24](#eventing-v024)
+- [Eventing Extensions](#eventing-extensions)
+    - [Apache Kafka Broker v0.24](#apache-kafka-broker-v024)
+    - [RabbitMQ Eventing v0.24](#rabbitmq-eventing-v024)
+- `kn` [CLI v0.24](#client-v024)
+- [Operator v0.24](#operator-v024)
+- [Thank you contributors](#thank-you-contributors)
 
 
 ### Highlights
@@ -34,7 +34,7 @@ Follow the instructions in the documentation
 - A brand new [Getting Started Tutorial](https://knative.dev/docs/getting-started/) has been added to the Knative site.
 - We've done some reorganization of the Docs and we now have a [Developer guide](https://knative.dev/docs/developer/) and [Administrator's guide](https://knative.dev/docs/admin/).
 - The DomainMapping feature is now BETA.
-- In preparation for GA, some net-* components have been renamed. See [Breaking Changes](#Serving-v024) in the Serving section.
+- In preparation for GA, some net-* components have been renamed. See [Breaking Changes](#serving-v024) in the Serving section.
 - Eventing has a new [Experimental features](https://knative.dev/docs/eventing/experimental-features/) process and two new experimental features for you to try.
 - The Minimum Kubernetes version is now 1.19.
 

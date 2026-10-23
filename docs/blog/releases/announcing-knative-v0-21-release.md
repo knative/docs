@@ -25,7 +25,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
 - `kn` [CLI v0.21](#client-v021)
     - `kn` [CLI Plugins](#cli-plugins)
 - [Operator v0.21](#operator-v021)
-- [Thank you contributors v0.21](#thank-you-contributors-v0.21)
+- [Thank you contributors v0.21](#thank-you-contributors-v021)
 
 
 

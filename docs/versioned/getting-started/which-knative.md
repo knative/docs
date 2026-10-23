@@ -66,4 +66,4 @@ Learning containerization does provide a learning curve for some and Knative Fun
 
 Since this is still Kubernetes under the hood, an [Open Container Initiative (OCI) format](https://opencontainers.org/about/overview/) container is still created and deployed. The key here is that the Knative Functions abstraction automates the creation and deployment of the container. 
 
-This option is best for those whose developers may not be as familiar with OCI containers or if you want your developers to focus primarily on their code and not other primitives related to Knative or Kubernetes. 
+This option is best for those whose developers may not be as familiar with OCI containers or if you want your developers to focus primarily on their code and not other primitives related to Knative or Kubernetes.

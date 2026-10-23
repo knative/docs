@@ -20,7 +20,7 @@ Follow the instructions in [Installing Knative](https://knative.dev/docs/install
 - [Serving](#serving)
 - [Eventing](#eventing)
 - [Functions](#functions)
-- [Operator](#operator)
+- [Operator](#knative-operator)
 - [Thank you contributors](#thank-you-contributors)
 
 ## Highlights

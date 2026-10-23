@@ -132,10 +132,10 @@ func handleEvent() error {
 
 ### Trigger a Job from different event sources
 
-A `JobSink` can be triggered by any [event source](./../sources) or [trigger](./../triggers).
+A `JobSink` can be triggered by any [event source](../sources/README.md) or [trigger](../triggers/README.md).
 
 For example, you can trigger a `Job` when a Kafka record is sent to a Kafka topic using
-a [`KafkaSource`](./../sources/kafka-source):
+a [`KafkaSource`](../sources/kafka-source/README.md):
 
 ```yaml
 apiVersion: sources.knative.dev/v1
@@ -154,7 +154,7 @@ spec:
       name: job-sink-logger
 ```
 
-or when Knative Broker receives an event using a [`Trigger`](./../triggers):
+or when Knative Broker receives an event using a [`Trigger`](../triggers/README.md):
 
 ```yaml
 apiVersion: eventing.knative.dev/v1

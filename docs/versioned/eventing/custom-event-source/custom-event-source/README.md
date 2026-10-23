@@ -12,7 +12,7 @@ If you want to create a custom event source for a specific event producer type, 
 This type of integration requires more effort than using some simpler integration types, such as [SinkBinding](../sinkbinding/README.md) or [ContainerSource](../containersource/README.md); however, this provides the most polished result and is the easiest integration type for users to consume. By providing a custom resource definition (CRD) for your source rather than a general container definition, it is easier to expose meaningful configuration options and documentation to users and hide implementation details.
 
 !!! note
-    If you have created a new event source type that is not a part of the core Knative project, you can open a pull request to add it to the list of [Third-Party Sources](../../sources/#third-party-sources), and announce the new source in the [#knative-eventing Slack channel](https://cloud-native.slack.com/archives/C04LMU33V1S).
+    If you have created a new event source type that is not a part of the core Knative project, you can open a pull request to add it to the list of [Third-Party Sources](../../sources/README.md#third-party-sources), and announce the new source in the [#knative-eventing Slack channel](https://cloud-native.slack.com/archives/C04LMU33V1S).
 
     You can also add your event source to the [`knative-extensions`](https://github.com/knative-extensions) organization, by following the instructions to [create a extensions repository](https://github.com/knative/community/blob/main/mechanics/CREATING-AN-EXTENSIONS-REPO.md).
 
