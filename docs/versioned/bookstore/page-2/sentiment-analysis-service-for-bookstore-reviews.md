@@ -114,7 +114,7 @@ You can replace the generated code with the sentiment analysis logic. You can us
 
     ```python
     import logging
-    from cloudevents.http import CloudEvent
+    from cloudevents.core.v1.event import CloudEvent
     from textblob import TextBlob
 
     def new():

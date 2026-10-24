@@ -1,5 +1,5 @@
 import logging
-from cloudevents.http import CloudEvent
+from cloudevents.core.v1.event import CloudEvent
 from textblob import TextBlob
 import textblob
 

@@ -141,7 +141,7 @@ See the entire code:
 # Function
 import logging
 import os
-from cloudevents.http import CloudEvent
+from cloudevents.core.v1.event import CloudEvent
 from llama_stack_client import LlamaStackClient
 
 def new():
