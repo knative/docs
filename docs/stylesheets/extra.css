@@ -246,13 +246,15 @@ a.md-header__button.md-logo img {
 
 /* Use Material's original version-picker styles with native details behavior. */
 .knative-version-selector {
+  --knative-version-gap: 1rem;
+  --knative-version-padding: .4rem;
   position: relative;
   line-height: 2.4rem;
   font-weight: 400;
 }
 
 .knative-version-selector .md-version__current {
-  margin-inline: .6rem .4rem;
+  margin-inline: var(--knative-version-gap) .4rem;
   list-style: none;
   white-space: nowrap;
 }
@@ -261,11 +263,13 @@ a.md-header__button.md-logo img {
   display: none;
 }
 
-/* Match the control's text inset to the links' padding, not the popup edge. */
+/* Keep text aligned while leaving a gap between the popup and the site name. */
 .knative-version-selector > .md-version__list {
-  inset-inline-start: 0;
+  inset-inline-start: calc(var(--knative-version-gap) - var(--knative-version-padding));
   margin-inline: 0;
-  min-width: calc(100% - .4rem);
+  /* Include the control's caret and its end margin, even for (Pre-release). */
+  min-width: calc(100% - var(--knative-version-gap) + var(--knative-version-padding));
+  width: max-content;
 }
 
 .knative-version-selector[open] > .md-version__list {
@@ -278,16 +282,25 @@ a.md-header__button.md-logo img {
 }
 
 .knative-version-selector .md-version__link {
-  padding-inline: .6rem;
+  padding-inline: var(--knative-version-padding);
+}
+
+.knative-version-selector .md-version__item {
+  line-height: 1.6rem;
 }
 
 .knative-version-selector .md-version__item:last-child a {
   color: gray;
 }
 
-.knative-version-selector summary:focus-visible {
+.knative-version-selector summary:focus-visible,
+.knative-version-selector[open]:has(> summary:focus-visible) > .md-version__list {
   outline: 2px solid currentColor;
   outline-offset: 2px;
+}
+
+.knative-version-selector[open] > summary:focus-visible {
+  outline: none;
 }
 
 /* bit of a hack to stop the banner taking space when empty */
