@@ -9,8 +9,6 @@ def local_path(path):
 
 
 def on_config(config):
-    # Only the production build writes versions.json. Don't show a broken picker.
-    config.extra.pop("version", None)
     # Keep historical redirects useful with the local /docs/ output layout.
     redirects = config.plugins["redirects"].config
     redirects["redirect_maps"] = {
