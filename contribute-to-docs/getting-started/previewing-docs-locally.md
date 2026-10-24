@@ -81,12 +81,22 @@ instead of `uv lock`. Commit `pyproject.toml` and `uv.lock` together when changi
 dependency declarations. Preview and hosted build commands use `--locked` so a
 stale lockfile fails rather than silently choosing new versions.
 
+### Updating uv
+
+The `tools` dependency group in `pyproject.toml` pins the uv used by CI, Netlify,
+and Docker; each reads the locked version from `uv.lock`. Dependabot updates it
+like any other dependency. To upgrade manually, change the pin and run `uv lock`.
+
+`required-version` sets the minimum uv for local builds. Newer versions work.
+
 ### Troubleshooting
 
 - **Port already in use:** choose another port with `--dev-addr` as shown above.
 - **Python environment no longer works after a Python upgrade:** remove the
   generated `.venv/` directory and rerun `./hack/mkdocs.sh`.
-- **uv is missing:** follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+- **uv is missing or too old:** follow the
+  [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/)
+  and install at least the version in `required-version` in `pyproject.toml`.
 - **The lockfile is stale:** if you changed `pyproject.toml`, follow the dependency
   update steps above. Otherwise, make sure you checked out the matching `uv.lock`.
 - **Python download fails:** check network access, or install Python 3.13 yourself;

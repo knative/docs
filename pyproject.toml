@@ -19,6 +19,13 @@ dependencies = [
     "semver==3.1.0",
 ]
 
+[dependency-groups]
+# Pins the uv used by CI, Netlify, and Docker (read from uv.lock).
+# Not installed by default; Dependabot keeps it up to date.
+tools = ["uv==0.13.5"]
+
 [tool.uv]
+# Minimum uv for local builds. Raise only when we need newer uv features.
+required-version = ">=0.13.5"
 # This repository is a website, not an installable Python package.
 package = false
