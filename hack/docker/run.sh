@@ -29,7 +29,7 @@ usage() {
         'Examples:' \
         '  ./hack/docker/run.sh --all-versions' \
         '  PORT=8001 ./hack/docker/run.sh' \
-        '  ./hack/docker/run.sh serve --dirtyreload' \
+        '  ./hack/docker/run.sh serve --strict' \
         '  ./hack/docker/run.sh build --strict'
 }
 
@@ -54,10 +54,7 @@ docker build -t "$IMAGE" -f "$ROOT/hack/docker/Dockerfile" "$ROOT"
 case "$COMMAND" in
     serve)
         exec docker run --rm --init -p "127.0.0.1:${PORT}:8000" -v "$ROOT:/site" \
-            --entrypoint python "$IMAGE" -m watchdog.watchmedo auto-restart \
-            --directory hack --patterns '*.py' --recursive --debug-force-polling \
-            --debounce-interval 0.5 --no-restart-on-command-exit \
-            -- python -m mkdocs serve --livereload -f "$CONFIG" -a 0.0.0.0:8000 "$@"
+            --entrypoint python "$IMAGE" hack/dev_server.py -f "$CONFIG" -a 0.0.0.0:8000 "$@"
         ;;
     build)
         exec docker run --rm --init -v "$ROOT:/site" \

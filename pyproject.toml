@@ -17,7 +17,7 @@ dependencies = [
     "mkdocs-rss-plugin>=0.18.0,<1.20",
     "pygithub>=2.8,<3",
     "semver==3.1.0",
-    # Restart the preview process when Python hooks change.
+    # Watch source dependencies for the development build graph.
     "watchdog>=6,<7",
 ]
 

@@ -6,9 +6,11 @@ from mkdocs.plugins import event_priority
 from mkdocs.structure.files import File, Files
 
 from preview_releases import releases
+from preview_cache import load_plan, restore_page
 
 _all_versions = False
 _releases = []
+_cached_pages = {}
 
 
 def local_path(path):
@@ -17,7 +19,8 @@ def local_path(path):
 
 
 def on_config(config):
-    global _all_versions, _releases
+    global _all_versions, _releases, _cached_pages
+    _, _cached_pages = load_plan(config)
     _all_versions = config.extra.get("preview_all_versions", False)
     _releases = releases() if _all_versions else []
     redirects = config.plugins["redirects"].config
@@ -52,6 +55,8 @@ def on_files(files, config):
                     file = File.generated(config, f"{directory}/{relative}", abs_src_path=str(path))
                     source = release["source"].removeprefix("docs/")
                     file.edit_uri = f"{source}/{relative}" if source != "docs" else relative
+                    if file.is_documentation_page() and file.src_uri in _cached_pages:
+                        file = restore_page(file, config, _cached_pages[file.src_uri])
                     files.append(file)
             manifest.append({"version": directory, "title": release["title"]})
             if directory != "docs":

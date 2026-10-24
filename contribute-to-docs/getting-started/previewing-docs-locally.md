@@ -24,8 +24,9 @@ environment, or install packages globally.
 
 Open <http://127.0.0.1:8000/docs/>. Edit Markdown under `docs/`, save, and
 the browser reloads automatically. Templates, CSS, and JavaScript also reload.
-Changing a Python hook or macro automatically restarts MkDocs; the browser
-reconnects and reloads after the build completes. Press **Ctrl+C** to stop.
+Changing a Python hook or macro automatically runs a fresh renderer process.
+The server keeps serving the last successful build until new output is ready,
+then reloads the browser. Press **Ctrl+C** to stop.
 
 ### Where to edit
 
@@ -53,19 +54,40 @@ otherwise public GitHub archives. The first run can need internet access; later
 runs use `.cache/docs-preview/`. Remove that cache and restart to refresh release
 snapshots. Edit the working copy, not the cached files.
 
-With `--all-versions`, every rebuild renders all versions so template and
-selector changes appear consistently. Historical snapshots can emit pre-existing
-link/anchor warnings. Without the flag, `./hack/mkdocs.sh build --strict` checks
-only the editable checkout.
+The initial build renders every version. During live reload, complete release
+HTML is reused for ordinary working-copy edits. Historical snapshots can emit
+pre-existing link/anchor warnings when they are rendered. Without the flag,
+`./hack/mkdocs.sh build --strict` checks only the editable checkout.
+
+### Incremental live reload
+
+The development runner uses a coarse dependency graph rather than MkDocs'
+`--dirtyreload` timestamp shortcut:
+
+- Existing CSS/JavaScript/image edits update assets without rendering pages.
+- Markdown body edits rebuild the working documentation and unversioned pages,
+  reusing release HTML and its complete navigation/anchor metadata.
+- Page additions/deletions, navigation, snippets, templates, configuration,
+  release-list changes, and Python hooks invalidate dependent versions.
+- If a working build changes page URLs, metadata, titles, or anchors, all versions
+  are rebuilt before publication so cached version-selector links cannot go stale.
+
+Each render runs in a fresh MkDocs process. Completed output is published as one
+site generation; failed builds keep the previous site available and show an
+error overlay in the browser. Rendered release HTML is cached for the running
+session; source snapshots remain cached on disk between sessions.
+
+Changes made during a build are retried before publishing. Live reload does not
+prune or otherwise change the sidebar. No incremental mode needs enabling.
+Dynamic macro inputs outside the repository need an explicit `--watch /path`;
+network inputs are not automatically tracked. This is a development server, not
+a production server; keep it bound to localhost unless deliberately sharing it.
 
 ### Useful commands
 
 ```bash
 # Use another port
 ./hack/mkdocs.sh serve --dev-addr 127.0.0.1:8001
-
-# Faster reloads for edits to a single existing page
-./hack/mkdocs.sh serve --dirtyreload
 
 # Build this checkout without starting a server (output: site/)
 ./hack/mkdocs.sh build
@@ -77,10 +99,9 @@ only the editable checkout.
 ./hack/mkdocs.sh setup
 ```
 
-Use normal reloads when adding/deleting pages or changing navigation, snippets,
-or templates: `--dirtyreload` can leave other pages stale.
-
-For direct MkDocs invocation (restart manually after changing Python hooks):
+The legacy `--dirtyreload` flag is accepted for compatibility but is unnecessary.
+To bypass the development runner and use MkDocs' normal full-rebuild server
+(restart manually after changing Python hooks):
 
 ```bash
 uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml
@@ -120,10 +141,15 @@ like any other dependency. To upgrade manually, change the pin and run `uv lock`
 - **uv is missing or too old:** follow the
   [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/)
   and install at least the version in `required-version` in `pyproject.toml`.
+- **Dependencies changed:** run `./hack/mkdocs.sh setup` and restart the preview
+  after updating Python dependencies. Installed package directories are not watched.
 - **The lockfile is stale:** if you changed `pyproject.toml`, follow the dependency
   update steps above. Otherwise, make sure you checked out the matching `uv.lock`.
 - **Python download fails:** check network access, or install Python 3.13 yourself;
   uv can use a compatible interpreter already on your machine.
+- **Editing the runner itself:** restart after changing `hack/dev_server.py`,
+  `hack/preview_graph.py`, or `hack/preview_cache.py`. Documentation hooks and
+  macros are loaded afresh automatically.
 - **A release snapshot is outdated:** remove `.cache/docs-preview/` and restart
   the preview. Releases are intentionally cached rather than fetched on every
   rebuild. Your working checkout is always read live.
@@ -157,9 +183,6 @@ build, reusing Docker's cached layers when dependencies haven't changed.
 
 # Choose another host port
 PORT=8001 ./hack/docker/run.sh
-
-# Faster reloads for a single existing page
-./hack/docker/run.sh serve --dirtyreload
 
 # Check the checkout without starting a server (output: site/)
 ./hack/docker/run.sh build --strict

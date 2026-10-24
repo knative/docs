@@ -25,7 +25,7 @@ cd "$ROOT"
 
 usage() {
     printf '%s\n' \
-        'Usage: ./hack/mkdocs.sh [serve|build|setup] [--all-versions] [MkDocs options]' \
+        'Usage: ./hack/mkdocs.sh [serve|build|setup] [--all-versions] [options]' \
         '' \
         '  serve  Live working copy at http://127.0.0.1:8000/docs/ (default)' \
         '  build  Build into site/ (working copy by default)' \
@@ -36,7 +36,7 @@ usage() {
         'Examples:' \
         '  ./hack/mkdocs.sh --all-versions' \
         '  ./hack/mkdocs.sh serve --dev-addr 127.0.0.1:8001' \
-        '  ./hack/mkdocs.sh serve --dirtyreload' \
+        '  ./hack/mkdocs.sh serve --strict' \
         '  ./hack/mkdocs.sh build --strict' \
         '' \
         'Requires uv: https://docs.astral.sh/uv/getting-started/installation/' \
@@ -68,9 +68,6 @@ fi
 
 if [ "$COMMAND" = setup ]; then exec uv sync --locked; fi
 if [ "$COMMAND" = serve ]; then
-    exec uv run --locked python -m watchdog.watchmedo auto-restart \
-        --directory hack --patterns '*.py' --recursive --debug-force-polling \
-        --debounce-interval 0.5 --no-restart-on-command-exit \
-        -- python -m mkdocs serve --livereload --config-file "$CONFIG" "$@"
+    exec uv run --locked python hack/dev_server.py --config-file "$CONFIG" "$@"
 fi
 exec uv run --locked mkdocs build --config-file "$CONFIG" "$@"
