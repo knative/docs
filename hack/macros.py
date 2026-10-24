@@ -113,6 +113,8 @@ def define_env(env):
         version = os.environ.get("KNATIVE_VERSION")
         if env.page.meta.get("knative_version", False):
             version = env.page.meta.get("knative_version")
+        if env.page.meta.get("local_preview", False):
+            version = None  # Keep live preview rebuilds independent of GitHub API calls.
 
         if version == None:
             return f'https://storage.googleapis.com/knative-nightly/{repo}/latest/{file}'

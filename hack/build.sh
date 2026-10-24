@@ -28,13 +28,14 @@ export NO_MKDOCS_2_WARNING=1
 
 # Releasing a new version:
 # 1) Make a release-NN branch as normal.
-# 2) Update VERSIONS below (on main) to include the new version, and remove the oldest
-#    Order matters :-), Most recent first.
-VERSIONS=("1.23" "1.22" "1.21") # Docs version, results in the url e.g. knative.dev/docs-1.9/..
-# 4) PR the result to main.
-# 5) Party.
+# 2) Update config/versions.txt (on main), newest first, removing the oldest.
+# 3) PR the result to main.
 
-DOCS_BRANCHES=("release-${VERSIONS[0]}" "release-${VERSIONS[1]}" "release-${VERSIONS[2]}" "release-${VERSIONS[3]}")
+VERSIONS=()
+while IFS= read -r version; do
+  VERSIONS+=("$version")
+done < "$(dirname "$0")/../config/versions.txt"
+DOCS_BRANCHES=("${VERSIONS[@]/#/release-}")
 latest=${VERSIONS[0]}
 previous=("${VERSIONS[@]:1}")
 : "${BUILD_VERSIONS:=yes}"

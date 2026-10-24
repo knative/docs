@@ -25,13 +25,16 @@ cd "$ROOT"
 
 usage() {
     printf '%s\n' \
-        'Usage: ./hack/mkdocs.sh [serve|build|setup] [MkDocs options]' \
+        'Usage: ./hack/mkdocs.sh [serve|build|setup] [--all-versions] [MkDocs options]' \
         '' \
-        '  serve  Live preview at http://127.0.0.1:8000 (default)' \
-        '  build  Build this checkout only into site/' \
+        '  serve  Live working copy at http://127.0.0.1:8000/docs/ (default)' \
+        '  build  Build into site/ (working copy by default)' \
         '  setup  Sync the local environment with uv.lock' \
         '' \
+        '  --all-versions  Add cached releases; edit the working copy at /development/' \
+        '' \
         'Examples:' \
+        '  ./hack/mkdocs.sh --all-versions' \
         '  ./hack/mkdocs.sh serve --dev-addr 127.0.0.1:8001' \
         '  ./hack/mkdocs.sh serve --dirtyreload' \
         '  ./hack/mkdocs.sh build --strict' \
@@ -40,11 +43,21 @@ usage() {
         'No manual Python setup, GitHub token, or Docker needed.'
 }
 
-COMMAND=${1:-serve}
-if [ "$#" -gt 0 ]; then shift; fi
-case "$COMMAND" in
+CONFIG=mkdocs.local.yml
+for argument in "$@"; do
+    shift
+    if [ "$argument" = --all-versions ]; then
+        CONFIG=mkdocs.versions.yml
+    else
+        set -- "$@" "$argument"
+    fi
+done
+
+COMMAND=serve
+case "${1:-}" in
     -h|--help|help) usage; exit 0 ;;
-    serve|build|setup) ;;
+    serve|build|setup) COMMAND=$1; shift ;;
+    ""|-*) ;; # MkDocs options without a subcommand default to live preview.
     *) usage >&2; exit 2 ;;
 esac
 
@@ -55,6 +68,9 @@ fi
 
 if [ "$COMMAND" = setup ]; then exec uv sync --locked; fi
 if [ "$COMMAND" = serve ]; then
-    exec uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml "$@"
+    exec uv run --locked python -m watchdog.watchmedo auto-restart \
+        --directory hack --patterns '*.py' --recursive --debug-force-polling \
+        --debounce-interval 0.5 --no-restart-on-command-exit \
+        -- python -m mkdocs serve --livereload --config-file "$CONFIG" "$@"
 fi
-exec uv run --locked mkdocs build --config-file mkdocs.local.yml "$@"
+exec uv run --locked mkdocs build --config-file "$CONFIG" "$@"

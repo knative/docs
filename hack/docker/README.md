@@ -7,10 +7,16 @@ From the repository root:
 ```
 
 Open <http://127.0.0.1:8000/docs/>, edit files, and save for live reload.
+By default, only the working copy is built. Python hook changes restart the server
+automatically. Add `--all-versions` to include cached releases from
+`config/versions.txt`; the working copy then lives at `/development/`.
 Press Ctrl+C to stop; the container is removed automatically. Only Docker is
 required—no host Python or uv installation.
 
 ```bash
+# Test the version selector with all configured releases
+./hack/docker/run.sh --all-versions
+
 # Another host port
 PORT=8001 ./hack/docker/run.sh
 

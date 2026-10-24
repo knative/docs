@@ -34,8 +34,11 @@ this from your clone:
 ```
 
 Open <http://127.0.0.1:8000/docs/>, edit files under `docs/`, and save to see
-changes reload automatically. uv manages Python and installs the locked
-dependencies into `.venv/`; no manual Python setup, GitHub token, release
+changes reload automatically. To test the version selector, run
+`./hack/mkdocs.sh --all-versions` and open `/development/`. That mode includes
+the releases listed in `config/versions.txt`, cached after the first run.
+
+uv manages Python and installs the locked dependencies into `.venv/`; no manual Python setup, GitHub token, release
 branches, or Docker are needed.
 
 For Docker, other ports, and build checks, see the
