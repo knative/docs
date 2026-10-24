@@ -1,7 +1,9 @@
 # Settings in the [build] context are global and are applied to all contexts
 # unless otherwise overridden by more specific contexts.
 [build]
-  command = "./hack/build.sh"
+  # Bootstrap uv, then sync and build using the committed lockfile.
+  # Keep the uv version aligned with CI and hack/docker/Dockerfile.
+  command = "python3 -m pip install uv==0.9.5 && python3 -m uv run --locked --no-dev ./hack/build.sh"
   publish = "site"
 
 [build.environment]

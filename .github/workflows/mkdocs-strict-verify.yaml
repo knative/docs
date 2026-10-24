@@ -32,17 +32,20 @@ jobs:
       GOPATH: ${{ github.workspace }}
 
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         fetch-depth: 0
 
-    - name: Set up Python
-      uses: actions/setup-python@v7
+    - name: Set up uv
+      uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      with:
+        version: "0.9.5"
+        enable-cache: true
 
-    - name: Install requirements
-      run: python3 -m pip install -r requirements.txt
+    - name: Install dependencies
+      run: uv sync --locked --no-dev
 
     - name: Verify MkDocs
-      run: ./hack/build.sh --strict
+      run: uv run --locked --no-dev ./hack/build.sh --strict
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

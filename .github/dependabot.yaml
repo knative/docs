@@ -22,8 +22,6 @@ updates:
   schedule:
     interval: "monthly"
   exclude-paths:
-    # Generated from uv.lock; update the lockfile instead of individual pins.
-    - "requirements.txt"
     # Sample applications should have their own update configuration.
     - "code-samples/**"
   groups:
