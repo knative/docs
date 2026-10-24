@@ -66,21 +66,20 @@ uv run --locked mkdocs serve --livereload --config-file mkdocs.local.yml
 ### Updating dependencies
 
 `pyproject.toml` declares dependencies; `uv.lock` pins the resolved versions.
-`requirements.txt` is a generated compatibility export for Netlify and existing
-pip-based CI. Don't edit it by hand. Docker installs directly from `uv.lock`.
+Local previews, Docker, CI, and Netlify install directly from `uv.lock`; no
+`requirements.txt` export is needed.
 
 After changing dependencies in `pyproject.toml`, run:
 
 ```bash
 uv lock
-uv export --locked --format requirements-txt --no-hashes --no-dev --no-emit-project --output-file requirements.txt
 ./hack/mkdocs.sh build --strict
 ```
 
 To update all packages within their declared constraints, use `uv lock --upgrade`
-instead of `uv lock`, then regenerate `requirements.txt`. Commit all three files
-together. Normal preview commands use `--locked` so a stale lockfile fails rather
-than silently choosing new versions.
+instead of `uv lock`. Commit `pyproject.toml` and `uv.lock` together when changing
+dependency declarations. Preview and hosted build commands use `--locked` so a
+stale lockfile fails rather than silently choosing new versions.
 
 ### Troubleshooting
 
