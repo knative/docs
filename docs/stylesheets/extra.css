@@ -252,7 +252,7 @@ a.md-header__button.md-logo img {
 }
 
 .knative-version-selector .md-version__current {
-  margin-inline-start: .4rem;
+  margin-inline: .6rem .4rem;
   list-style: none;
   white-space: nowrap;
 }
@@ -261,11 +261,11 @@ a.md-header__button.md-logo img {
   display: none;
 }
 
-/* Align the popup with the control so its label cannot peek out underneath. */
+/* Match the control's text inset to the links' padding, not the popup edge. */
 .knative-version-selector > .md-version__list {
-  inset-inline-start: .4rem;
+  inset-inline-start: 0;
   margin-inline: 0;
-  min-width: calc(100% - .8rem);
+  min-width: calc(100% - .4rem);
 }
 
 .knative-version-selector[open] > .md-version__list {
