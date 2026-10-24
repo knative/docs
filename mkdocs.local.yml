@@ -10,6 +10,7 @@ validation:
     unrecognized_links: warn
     anchors: warn
 hooks:
+  - hack/versioning.py
   - hack/local_preview.py
 watch:
   - docs
