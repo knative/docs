@@ -41,7 +41,7 @@ def on_env(env, *, config, files):
 
 def on_page_context(context, *, page, config, nav):
     context["version_selector"] = None
-    if len(_versions) < 2:
+    if not _versions:
         return context
     current = next((version for version in _versions
                     if page.url.startswith(version["version"] + "/")), None)
