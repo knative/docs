@@ -39,7 +39,7 @@ jobs:
     - name: Set up uv
       uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
       with:
-        version: "0.9.5"
+        version-file: "uv.lock"
         enable-cache: true
 
     - name: Install dependencies
