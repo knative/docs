@@ -168,17 +168,18 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   versionjson+="{\"version\": \"development\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 fi
 
-# Only build the site _once_ -- we used to build sub-components, and it
-# introduced a bunch of navigation / base-url problems.
-# We pass through the command-line arguments to this script to enable --strict checks in CI.
-(cd "$TEMP/content"; mkdocs build -f mkdocs.yml -d "$SITE" "$@")
-
-# Set up the version file to point to the set of built docs.
-cat << EOF > $SITE/versions.json
+# Make the version manifest available to the selector hook during rendering.
+# MkDocs also copies it into the output site as a normal static asset.
+cat << EOF > "$TEMP/content/docs/versions.json"
 [
   $versionjson
 ]
 EOF
+
+# Only build the site _once_ -- we used to build sub-components, and it
+# introduced a bunch of navigation / base-url problems.
+# We pass through the command-line arguments to this script to enable --strict checks in CI.
+(cd "$TEMP/content"; mkdocs build -f mkdocs.yml -d "$SITE" "$@")
 
 # Copy go mod files so knative.dev/blahblah vanity URLs work
 mkdir site/golang

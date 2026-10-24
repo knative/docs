@@ -53,12 +53,13 @@
     </label>
 
     <!-- Header title -->
-    <div class="md-header__title" data-md-component="header-title">
+    <div class="md-header__title{% if version_selector %} knative-header__title--versioned{% endif %}" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
             {{ config.site_name }}
           </span>
+          {% include "partials/version-selector.html" %}
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
