@@ -13,10 +13,10 @@ dependencies = [
     "mkdocs-git-revision-date-localized-plugin>=1.2",
     # Newer releases pull in ProperDocs, which shares MkDocs' module/CLI paths.
     # Keep the existing MkDocs stack until that migration is evaluated separately.
-    "mkdocs-redirects>=1.0.3,<1.2.3",
-    "mkdocs-rss-plugin>=0.18.0,<1.18",
+    "mkdocs-redirects>=1.0.3,<1.2.4",
+    "mkdocs-rss-plugin>=0.18.0,<1.20",
     "pygithub>=2.8,<3",
-    "semver==2.13.0",
+    "semver==3.1.0",
 ]
 
 [tool.uv]
