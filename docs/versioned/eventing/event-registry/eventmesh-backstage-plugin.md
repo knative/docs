@@ -44,7 +44,7 @@ excluded, some are combined for clarity, and others are transformed to be easier
 
 ## What is shown
 
-Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/concepts/duck-typing/#addressable){:target="_blank"} or at even a URL directly. Since Backstage
+Knative Triggers can be pointing at any [Addressable](https://knative.dev/docs/eventing/concepts/duck-typing/#addressable){:target="_blank"} or at even a URL directly. Since Backstage
 side won't know how to handle these, the plugin will only show the trigger's subscriber if it is already registered in 
 Backstage. For this relation, we use the [`backstage.io/kubernetes-id`](https://backstage.io/docs/features/kubernetes/configuration#surfacing-your-kubernetes-components-as-part-of-an-entity){:target="_blank"} 
 annotation in the Backstage entity and in the Kubernetes resource.
