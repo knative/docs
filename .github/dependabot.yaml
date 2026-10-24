@@ -1,4 +1,4 @@
-# Set update schedule for GitHub Actions
+# Set update schedules for repository dependencies
 version: 2
 updates:
 - package-ecosystem: "github-actions"
@@ -15,5 +15,18 @@ updates:
     interval: "monthly"
   groups:
     gomod:
+      patterns:
+        - "*"
+- package-ecosystem: "uv"
+  directory: "/"
+  schedule:
+    interval: "monthly"
+  exclude-paths:
+    # Generated from uv.lock; update the lockfile instead of individual pins.
+    - "requirements.txt"
+    # Sample applications should have their own update configuration.
+    - "code-samples/**"
+  groups:
+    docs-python:
       patterns:
         - "*"
