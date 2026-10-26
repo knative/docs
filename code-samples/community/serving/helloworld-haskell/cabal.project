@@ -1,0 +1,5 @@
+packages: .
+with-compiler: ghc-9.10.3
+index-state: 2026-10-23T00:00:00Z
+optimization: False
+jobs: 2
