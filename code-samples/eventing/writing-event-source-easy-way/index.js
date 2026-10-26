@@ -1,7 +1,7 @@
 const { CloudEvent, Emitter, emitterFor, httpTransport } = require('cloudevents');
 
 const K_SINK = process.env['K_SINK'];
-K_SINK || logExit('Error: K_SINK Environment variable is not defined');
+K_SINK || logExit('Error: K_SINK Environment variable is not defined', 1);
 console.log(`Sink URL is ${K_SINK}`);
 
 const source = 'urn:event:from:heartbeat/example';
@@ -27,17 +27,14 @@ Emitter.on('cloudevent', emit);
 registerGracefulExit();
 
 function registerGracefulExit() {
-  process.on('exit', logExit);
-  //catches ctrl+c event
-  process.on('SIGINT', logExit);
-  process.on('SIGTERM', logExit);
-  // catches 'kill pid' (for example: nodemon restart)
-  process.on('SIGUSR1', logExit);
-  process.on('SIGUSR2', logExit);
+  // Catch termination signals without passing their names to logExit.
+  for (const signal of ['SIGINT', 'SIGTERM', 'SIGUSR1', 'SIGUSR2']) {
+    process.on(signal, () => logExit());
+  }
 }
 
-function logExit(message = 'Exiting...') {
+function logExit(message = 'Exiting...', code = 0) {
   // Handle graceful exit
   process.stdout.write(`${message}\n`);
-  process.exit();
+  process.exit(code);
 }

@@ -1,104 +1,56 @@
 # Writing an event source using JavaScript
 
-This tutorial provides instructions to build an event source in JavaScript and implement it with a ContainerSource or SinkBinding.
+This tutorial builds an event source in JavaScript and implements it with a
+ContainerSource or SinkBinding. Both inject environment variables into an
+application, including the URL of a sink that receives events.
 
-ContainerSource and SinkBinding both work by injecting environment variables to an application. Injected environment variables at minimum contain the URL of a sink that receives events.
+## Prerequisites
 
-## Bootstrapping
+For the cluster procedures, install Knative Eventing and Knative Serving and
+configure `kubectl` to use that cluster. Use a container registry the cluster can
+pull from. For SinkBinding in inclusion mode, label your namespace with
+`bindings.knative.dev/include=true` before creating the Deployment.
 
-Create the project and add the dependencies:
+## Get the sample
+
+Use the checked-in files rather than recreating the application from this guide:
 
 ```bash
-npm init -y
-npm install cloudevents got --save
+git clone https://github.com/knative/docs.git
+cd docs/code-samples/eventing/writing-event-source-easy-way
 ```
+
+- [index.js](index.js) is the complete event source. It uses the SDK version in
+  [package.json](package.json) to emit a new CloudEvent every second, with type
+  `heartbeat.example`, source `urn:event:from:heartbeat/example`, a unique ID,
+  and data such as `{"hello":"World # 1"}`.
+- [Dockerfile](Dockerfile) builds the source image and starts Node directly so it
+  can handle termination signals.
+
+`K_SINK` is required; an unset or empty value exits with status 1. This minimal
+source does not implement `K_CE_OVERRIDES` and does not retry failed deliveries.
 
 ## Using ContainerSource
 
-A ContainerSource creates a container for your event source image and manages this container.
-
-The sink URL where events are posted will be made available to the application through the `K_SINK` environment variable by the ContainerSource.
-
-### Example
-
-The following example event source emits an event to the sink every second:
-
-```javascript
-// File - index.js
-const { CloudEvent, Emitter, emitterFor, httpTransport } = require('cloudevents');
-
-const K_SINK = process.env['K_SINK'];
-K_SINK || logExit('Error: K_SINK Environment variable is not defined');
-console.log(`Sink URL is ${K_SINK}`);
-
-const source = 'urn:event:from:heartbeat/example';
-const type = 'heartbeat.example';
-
-let eventIndex = 0;
-setInterval(() => {
-  console.log(`Emitting event # ${++eventIndex}`);
-
-  // Create a new CloudEvent each second
-  const event = new CloudEvent({ source, type, data: {'hello': `World # ${eventIndex}`} });
-
-  // Emits the 'cloudevent' Node.js event application-wide
-  event.emit();
-}, 1000);
-
-// Create a function that can post an event
-const emit = emitterFor(httpTransport(K_SINK));
-
-// Send the CloudEvent any time a Node.js 'cloudevent' event is emitted
-Emitter.on('cloudevent', emit);
-
-registerGracefulExit();
-
-function registerGracefulExit() {
-  process.on('exit', logExit);
-  //catches ctrl+c event
-  process.on('SIGINT', logExit);
-  process.on('SIGTERM', logExit);
-  // catches 'kill pid' (for example: nodemon restart)
-  process.on('SIGUSR1', logExit);
-  process.on('SIGUSR2', logExit);
-}
-
-function logExit(message = 'Exiting...') {
-  // Handle graceful exit
-  process.stdout.write(`${message}\n`);
-  process.exit();
-}
-```
-
-```dockerfile
-# File - Dockerfile
-
-FROM node:16
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 8080
-CMD [ "node", "index.js" ]
-```
+A ContainerSource creates and manages a container for your event source image.
+It makes the sink URL available through `K_SINK`.
 
 ### Procedure
 
-Before publishing the ContainerSource, you must build the application
-image, and push it to a container registry that your cluster can access.
-
-1. Build and push the image:
+1. Build the application image and push it to a registry your cluster can access:
 
     ```bash
     export REGISTRY=docker.io/myregistry
-
-    # Build and push the container on your local machine.
     docker buildx build --platform linux/arm64,linux/amd64 -t "$REGISTRY/node-heartbeat-source:v1" --push .
     ```
 
-1. Create the event display service which logs any CloudEvents posted to it:
+    Use the image you published in the ContainerSource and Deployment manifests
+    below.
 
-    ```yaml
+1. Create the event-display Service, which logs any CloudEvents posted to it:
+
+    ```bash
+    kubectl apply -f - <<'EOF'
     apiVersion: serving.knative.dev/v1
     kind: Service
     metadata:
@@ -108,11 +60,14 @@ image, and push it to a container registry that your cluster can access.
         spec:
           containers:
             - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+    EOF
+    kubectl wait --for=condition=Ready service.serving.knative.dev/event-display --timeout=180s
     ```
 
-1. Create the ContainerSource object:
+1. Create the ContainerSource:
 
-    ```yaml
+    ```bash
+    kubectl apply -f - <<'EOF'
     apiVersion: sources.knative.dev/v1
     kind: ContainerSource
     metadata:
@@ -128,15 +83,19 @@ image, and push it to a container registry that your cluster can access.
           apiVersion: serving.knative.dev/v1
           kind: Service
           name: event-display
+    EOF
+    kubectl wait --for=condition=Ready containersource/heartbeat-source --timeout=180s
     ```
 
-1. Check the logs of the `event-display` Service. You can observe that a new message is pushed every second:
+1. Check the logs of the `event-display` Service:
 
     ```bash
-    $ kubectl logs -l serving.knative.dev/service=event-display -c user-container
+    kubectl logs -l serving.knative.dev/service=event-display -c user-container --tail=100
     ```
 
-    ```bash
+    A new event arrives every second, for example:
+
+    ```text
     ☁️  cloudevents.Event
     Validation: valid
     Context Attributes,
@@ -147,47 +106,39 @@ image, and push it to a container registry that your cluster can access.
       datacontenttype: application/json
     Data,
       {
-        "hello": "World 1"
+        "hello": "World # 1"
       }
     ```
 
-1. Optional: If you are interested in seeing what is injected into the event source as a `K_SINK`, you can check the logs:
+1. Optional: inspect the generated Deployment's source logs to see `K_SINK`:
 
     ```bash
-    $ kubectl logs heartbeat-source-7575c888c7-85w5t
+    kubectl get deployments
+    # Replace <source-deployment> with the Deployment owned by heartbeat-source.
+    kubectl logs deployment/<source-deployment>
     ```
 
-    ```bash
+    ```text
     Sink URL is http://event-display.default.svc.cluster.local
-    Emitting event #1
-    Emitting event #2
-    Event posted successfully
-    Event posted successfully
+    Emitting event # 1
+    Emitting event # 2
     ```
 
 ## Using SinkBinding
 
-SinkBinding does not create any containers. It injects the sink information to an already existing Kubernetes resources. This is a flexible approach as you can use any Kubernetes PodSpecable object as an event source, such as Deployment, Job, or Knative services.
+SinkBinding does not create containers. It injects sink information into an
+existing Kubernetes PodSpecable resource, such as a Deployment, Job, or Knative
+Service.
 
 ### Procedure
 
-1. Create the `event-display` service:
+1. If the event-display Service does not already exist, run its creation and
+   readiness commands from the [ContainerSource procedure](#using-containersource).
 
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: event-display
-    spec:
-      template:
-        spec:
-          containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
-    ```
+1. Create the two-replica Deployment, using your published source image:
 
-1. Create a Kubernetes Deployment that runs the event source:
-
-    ```yaml
+    ```bash
+    kubectl apply -f - <<'EOF'
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -205,28 +156,28 @@ SinkBinding does not create any containers. It injects the sink information to a
             app: node-heartbeats
         spec:
           containers:
-          - name: node-heartbeats
-            image: docker.io/myregistry/node-heartbeat-source:v1
-            ports:
-            - containerPort: 8080
+            - name: node-heartbeats
+              image: docker.io/myregistry/node-heartbeat-source:v1
+              ports:
+                - containerPort: 8080
+    EOF
     ```
 
-1. Because the SinkBinding has not yet been created, you will see an error message, because the `K_SINK` environment variable is not yet injected:
+1. Before creating the binding, the Pods exit because `K_SINK` is not injected:
 
     ```bash
-    $ kubectl logs node-heartbeats-deployment-9ffbb644b-llkzk
+    kubectl logs -l app=node-heartbeats --tail=20
     ```
+
+    ```text
+    Error: K_SINK Environment variable is not defined
+    ```
+
+1. Create the SinkBinding, which selects the Deployment by its
+   `app: node-heartbeats` label:
 
     ```bash
-    Sink URL is undefined
-    Emitting event #1
-    Error during event post
-    TypeError [ERR_INVALID_ARG_TYPE]: The "url" argument must be of type string. Received type undefined
-    ```
-
-1. Create the SinkBinding object:
-
-    ```yaml
+    kubectl apply -f - <<'EOF'
     apiVersion: sources.knative.dev/v1
     kind: SinkBinding
     metadata:
@@ -243,40 +194,26 @@ SinkBinding does not create any containers. It injects the sink information to a
           apiVersion: serving.knative.dev/v1
           kind: Service
           name: event-display
+    EOF
+    kubectl wait --for=condition=Ready sinkbinding/bind-node-heartbeat --timeout=180s
+    kubectl rollout status deployment/node-heartbeats-deployment --timeout=180s
     ```
 
-    Observe that the Pods are recreated and this time the `K_SINK` environment variable is injected.
-
-    Since the `replicas` is set to 2, there are 2 pods that are posting events to the sink:
+    The Pods are recreated with `K_SINK` injected. Both replicas post events to
+    the sink; the display logs contain two independent heartbeat sequences with
+    distinct event IDs:
 
     ```bash
-    $ kubectl logs event-display-dpplv-deployment-67c9949cf9-bvjvk -c user-container
+    kubectl logs -l serving.knative.dev/service=event-display -c user-container --tail=100
     ```
 
-    ```bash
-    ☁️  cloudevents.Event
-    Validation: valid
-    Context Attributes,
-      specversion: 1.0
-      type: heartbeat.example
-      source: urn:event:from:heartbeat/example
-      id: 47e69d34-def7-449b-8382-3652495f9163
-      datacontenttype: application/json
-    Data,
-      {
-        "hello": "World 1"
-      }
+### Cleanup
 
-    ☁️  cloudevents.Event
-    Validation: valid
-    Context Attributes,
-      specversion: 1.0
-      type: heartbeat.example
-      source: urn:event:from:heartbeat/example
-      id: 47e69d34-def7-449b-8382-3652495f9163
-      datacontenttype: application/json
-    Data,
-      {
-        "hello": "World 1"
-      }
-    ```
+Delete only the resources you created for this tutorial:
+
+```bash
+kubectl delete containersource heartbeat-source --ignore-not-found
+kubectl delete sinkbinding bind-node-heartbeat --ignore-not-found
+kubectl delete deployment node-heartbeats-deployment --ignore-not-found
+kubectl delete kservice event-display --ignore-not-found
+```
