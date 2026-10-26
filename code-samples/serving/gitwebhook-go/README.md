@@ -44,11 +44,8 @@ You must meet the following requirements to run this sample:
    - A
      [personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
      that you will use to make API requests to GitHub.
-   - Ensure that you grant `read/write` permission in the repo for that personal
-     access token.
-
-   1. Follow the GitHub instructions to
-
+     For a fine-grained token, select the target repository and grant
+     **Pull requests: Read and write** permission.
    - A webhook secret that you will use to validate requests.
 
    1. Base64 encode the access token:
@@ -75,33 +72,10 @@ You must meet the following requirements to run this sample:
       kubectl apply --filename github-secret.yaml
       ```
 
-1. Next, update the `service.yaml` file in the project to reference the tagged
-   image from step 1.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: gitwebhook
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-             image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go:latest
-             env:
-               - name: GITHUB_PERSONAL_TOKEN
-                 valueFrom:
-                   secretKeyRef:
-                     name: githubsecret
-                     key: personalAccessToken
-               - name: WEBHOOK_SECRET
-                 valueFrom:
-                   secretKeyRef:
-                     name: githubsecret
-                     key: webhookSecret
-   ```
+1. Next, update the image in the checked-in [Service manifest](service.yaml)
+   to reference the tag you built. The manifest reads `GITHUB_PERSONAL_TOKEN` and
+   `WEBHOOK_SECRET` from the keys in [the Secret manifest](github-secret.yaml);
+   keep those references when changing the image.
 
 1. Use `kubectl` to apply the `service.yaml` file.
 
@@ -118,18 +92,18 @@ You must meet the following requirements to run this sample:
 1. Create a webhook in your GitHub repo using the URL for your `gitwebhook`
    service:
 
-   1. Retrieve the hostname for this service, using the following command:
+   1. Retrieve the URL for this service, using the following command:
 
       ```bash
       $ kubectl get ksvc gitwebhook \
-         --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
+         --output=custom-columns=NAME:.metadata.name,URL:.status.url
       ```
 
       Example response:
 
       ```bash
-      NAME                DOMAIN
-      gitwebhook          gitwebhook.default.MYCUSTOMDOMAIN.com
+      NAME                URL
+      gitwebhook          http://gitwebhook.default.MYCUSTOMDOMAIN.com
       ```
 
       where `MYCUSTOMDOMAIN` is the domain that you set as your
@@ -141,9 +115,10 @@ You must meet the following requirements to run this sample:
    1. Click **Settings** > **Webhooks** > **Add webhook** to open the Webhooks
       page.
 
-   1. Enter the **Payload URL** as `http://{DOMAIN}`, where `{DOMAIN}` is the
-      address from the `kubectl get ksvc gitwebhook` command. For example:
-      `http://gitwebhook.default.MYCUSTOMDOMAIN.com`
+   1. Enter the URL from the `kubectl get ksvc gitwebhook` command as the
+      **Payload URL**, including its scheme. For example:
+      `https://gitwebhook.default.MYCUSTOMDOMAIN.com/`.
+      Use HTTPS with a valid certificate for a publicly accessible webhook.
 
    1. Set the **Content type** to `application/json`.
 
@@ -151,8 +126,11 @@ You must meet the following requirements to run this sample:
       you set in `webhookSecret` (not the base64 encoded value). For example:
       `mygithubwebhooksecret`
 
-   1. If you did not [enabled TLS certificates](https://knative.dev/docs/serving/using-a-tls-cert),
-      click **Disable** under **SSL Validation**.
+   1. Select **Let me select individual events**, then select **Pull requests**.
+      The default **Just the push event** does not invoke this sample's handler.
+
+   1. When using HTTPS, keep **SSL Validation** enabled. See
+      [enabling TLS certificates](https://knative.dev/docs/serving/using-a-tls-cert).
 
    1. Click **Add webhook** to create the webhook.
 
@@ -176,6 +154,17 @@ kubectl get revisions --output yaml
 
 ## Testing the service
 
+The server listens on `PORT` (default `8080`). `WEBHOOK_SECRET` validates the
+incoming GitHub `X-Hub-Signature` HMAC-SHA1 header; if it is unset or empty,
+signature verification is disabled. Always configure it for a public endpoint.
+`GITHUB_PERSONAL_TOKEN` authenticates outbound GitHub API requests.
+`GITHUB_API_URL` optionally sets an absolute HTTP(S) API base URL (for example,
+`https://github.example.com/api/v3/` for GitHub Enterprise); when unset, the
+standard GitHub API is used. Configure this only for a trusted endpoint, since
+API requests include the token. The webhook
+endpoint is `/` and accepts only POST requests. Only pull request events trigger
+an update; other events, including GitHub's initial ping, are ignored.
+
 Now that you have the service running and the webhook created, send a Pull
 Request to the same GitHub repo where you added the webhook. If all is working
 right, you'll see the title of the PR will be modified, with the text
@@ -187,4 +176,5 @@ To clean up the sample service:
 
 ```bash
 kubectl delete --filename service.yaml
+kubectl delete --filename github-secret.yaml
 ```
