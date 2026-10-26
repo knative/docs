@@ -1,3 +1,3 @@
 module github.com/knative/docs/code-samples/serving/hello-world/helloworld-go
 
-go 1.14
+go 1.27.0

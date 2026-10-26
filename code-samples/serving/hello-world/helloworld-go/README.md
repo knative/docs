@@ -1,6 +1,6 @@
 # Hello World - Go
 
-This guide describes the steps required to to create the `helloworld-go` sample app
+This guide describes the steps required to create the `helloworld-go` sample app
 and deploy it to your cluster.
 The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`.
 If `TARGET` is not specified, `World` is used as the default value.
@@ -16,43 +16,11 @@ You will need:
 
 ## Building
 
-Create a basic web server which listens on port 8080, by copying the following code into a new file named `helloworld.go`:
+The web server in [`helloworld.go`](helloworld.go) listens on all interfaces on
+port 8080 by default. Set `PORT` to use a different port. Each request returns the
+greeting with a trailing newline; an unset or empty `TARGET` defaults to `World`.
 
-```go
-package main
-
-import (
-  "fmt"
-  "log"
-  "net/http"
-  "os"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-  log.Print("helloworld: received a request")
-  target := os.Getenv("TARGET")
-  if target == "" {
-    target = "World"
-  }
-  fmt.Fprintf(w, "Hello %s!\n", target)
-}
-
-func main() {
-  log.Print("helloworld: starting server...")
-
-  http.HandleFunc("/", handler)
-
-  port := os.Getenv("PORT")
-  if port == "" {
-    port = "8080"
-  }
-
-  log.Printf("helloworld: listening on port %s", port)
-  log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-}
-```
-
-You can also download a working copy of the sample, by running the following commands:
+Clone the repository to use the checked-in source, build recipe and service manifest:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -60,47 +28,11 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-go
 ```
 
 
-Navigate to your project directory and copy the following code into a new file named `Dockerfile`:
+The checked-in [`Dockerfile`](Dockerfile) compiles a static Go binary and copies
+it into a small Alpine runtime image with CA certificates. The module manifest
+[`go.mod`](go.mod) is already included; do not run `go mod init` in the cloned sample.
 
-```dockerfile
-# Use the official Golang image to create a build artifact.
-# This is based on Debian and sets the GOPATH to /go.
-FROM golang:latest AS builder
-
-ARG TARGETOS
-ARG TARGETARCH
-
-# Create and change to the app directory.
-WORKDIR /app
-
-# Copy local code to the container image.
-COPY . ./
-
-# Install dependencies and tidy up the go.mod and go.sum files.
-RUN go mod tidy
-
-# Build the binary.
-# -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o server
-
-# Use the official Alpine image for a lean production container.
-# https://hub.docker.com/_/alpine
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM alpine:3
-RUN apk add --no-cache ca-certificates
-
-# Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/server /server
-
-# Run the web service on container startup.
-CMD ["/server"]
-```
-
-Use the Go tool to create a [`go.mod`](https://github.com/golang/go/wiki/Modules#gomod) manifest.
-
-```bash
-go mod init github.com/knative/docs/code-samples/serving/hello-world/helloworld-go
-```
+## Testing
 
 ## Deploying
 
@@ -109,8 +41,8 @@ go mod init github.com/knative/docs/code-samples/serving/hello-world/helloworld-
 To build the sample code into a container, and push using Docker Hub, enter the following commands and replace `{username}` with your Docker Hub username:
 
 ```bash
-# Build and push the container on your local machine.
-docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-go" --push .
+# Refresh base images, build and push the container on your local machine.
+docker buildx build --pull --platform linux/arm64,linux/amd64 -t "{username}/helloworld-go" --push .
 ```
 
 ### Deploying to knative
@@ -118,25 +50,11 @@ After the build has completed and the container is pushed to docker hub, you can
 
 ### yaml
 
-1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
+1. Open the checked-in [`service.yaml`](service.yaml) and replace `{username}`
+   with your Docker Hub username. It creates a Knative Service in the `default`
+   namespace with `TARGET="Go Sample v1"`.
 
- ```yaml
- apiVersion: serving.knative.dev/v1
- kind: Service
- metadata:
-   name: helloworld-go
-   namespace: default
- spec:
-   template:
-     spec:
-       containers:
-         - image: docker.io/{username}/helloworld-go
-           env:
-             - name: TARGET
-               value: "Go Sample v1"
- ```
-
-1. Check that the container image value in the `service.yaml` file matches the container you built in the previous step.
+1. Check that the image in `service.yaml` matches the image you built and pushed.
 
 1. Apply the configuration using `kubectl`:
 
@@ -156,7 +74,7 @@ After your service is created, Knative will perform the following steps:
  Example:
  ```bash
  NAME                URL
- helloworld-go       http://helloworld-go.default.1.2.3.4.xip.io
+ helloworld-go       http://helloworld-go.default.1.2.3.4.sslip.io
  ```
 
 
@@ -180,7 +98,7 @@ After your service is created, Knative will perform the following steps:
   16.066s Waiting for load balancer to be ready
   16.237s Ready to serve.
 
-  Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL: http://helloworld-go.default.1.2.3.4.xip.io
+  Service 'helloworld-go' created to latest revision 'helloworld-go-jjzgd-1' is available at URL: http://helloworld-go.default.1.2.3.4.sslip.io
   ```
 
 1. You can then access your service through the resulting URL.
