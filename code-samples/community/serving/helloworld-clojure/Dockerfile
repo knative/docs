@@ -1,17 +1,11 @@
-# Use the official Clojure image.
-# https://hub.docker.com/_/clojure
-FROM clojure
-
-# Create the project and download dependencies.
-WORKDIR /usr/src/app
+FROM clojure:temurin-25-lein-2.13.0-noble AS builder
+WORKDIR /app
 COPY project.clj .
 RUN lein deps
+COPY src ./src
+RUN lein uberjar
 
-# Copy local code to the container image.
-COPY . .
-
-# Build an uberjar release artifact.
-RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
-
-# Run the web service on container startup.
-CMD ["java", "-jar", "app-standalone.jar"]
+FROM eclipse-temurin:25-jre-noble
+WORKDIR /app
+COPY --from=builder /app/target/helloworld.jar .
+CMD ["java", "-jar", "helloworld.jar"]
