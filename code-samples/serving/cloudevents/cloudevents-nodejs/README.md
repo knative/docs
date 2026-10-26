@@ -12,12 +12,14 @@ can use for testing. It supports running in two modes:
    send to a Service or Broker when not initiated by a Broker invocation (e.g.
    implementing an event source)
 
-The application will use `$K_SINK`-mode whenever the environment variable is
-specified.
+The application uses `$K_SINK`-mode when the environment variable is nonempty;
+when it is absent or empty, the application replies with the event. `PORT` defaults to `8080` and can be overridden when running locally.
+On Knative, set the container's `ports[].containerPort` to change the listening
+port (for example, `8081`); Knative injects `PORT`, so do not set it explicitly.
+Events without a `name` in their data produce `{"message":"Hello, nameless"}`;
+the event's `data` is optional.
 
-Do the following steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+Clone the sample's checked-in source, then build and deploy it to your cluster:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -26,6 +28,7 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-nodejs
 
 ## Before you begin
 
+- Node.js 24 LTS for local development (the Dockerfile uses Node.js 24.22.1).
 - A Kubernetes cluster with Knative installed and DNS configured.  See
   [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
@@ -33,7 +36,7 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-nodejs
 
 ## The Sample Code
 
-In the `index.js` file, you will see two key functions for the different modes
+In [index.js](index.js), you will see two key functions for the different modes
 of operation:
 
    ```js
@@ -48,9 +51,19 @@ of operation:
    }
    ```
 
+## Development checks
+
+Install the locked dependencies with `npm ci`, then run `npm run lint`.
+Development-only tools are excluded from the production image.
+
+This sample uses CloudEvents SDK 10 and Express 5. The lockfile overrides the SDK's
+transitive `uuid` dependency to the compatible CommonJS 11.x line to avoid
+[GHSA-w5hq-g745-h8pq](https://github.com/advisories/GHSA-w5hq-g745-h8pq).
+The production container runs Node directly as the non-root `node` user.
+
 ## Build and Deploy the Application
 
-In the `Dockerfile`, you can see how the dependencies are installed using npm.
+The checked-in [Dockerfile](Dockerfile) installs the dependencies using npm.
 You can build and push this to your registry of choice via:
 
  ```bash
@@ -60,7 +73,7 @@ You can build and push this to your registry of choice via:
 
 ### yaml
 
- To deploy the Knative service, edit the `service.yaml` file and replace `<registry/repository/image:tag>` with the image you have just created.
+ To deploy the Knative service, edit [service.yaml](service.yaml) and replace `<registry/repository/image:tag>` with the image you have just created.
 
  ```bash
  kubectl apply -f service.yaml
@@ -102,6 +115,30 @@ You will get back:
 ```bash
 {"message":"Hello, Dave"}
 ```
+
+The HTTP 200 response is a binary-mode CloudEvent: the body above contains the
+event data, and the `ce-specversion`, `ce-id`, `ce-source`, and `ce-type` response
+headers contain its attributes. The response type is `dev.knative.docs.sample`.
+The app also accepts structured-mode requests with
+`Content-Type: application/cloudevents+json`. Invalid events receive HTTP 415.
+
+### Send to a sink
+
+To forward the generated event instead of returning it, uncomment the `K_SINK`
+environment variable in `service.yaml`, set its value to your destination URL,
+and apply the manifest again. With `kn`, use:
+
+```bash
+kn service update cloudevents-nodejs --env K_SINK=http://your-sink.default.svc.cluster.local
+```
+
+Send the same request above. In this mode the app returns HTTP 202 with an empty
+body, and sends the greeting as a binary-mode CloudEvent to `K_SINK`. Check the
+sink's received events and the app logs to confirm delivery. The acknowledgment
+is sent before delivery completes; delivery errors are logged, not retried.
+HTTP non-2xx responses, network errors, and the 10-second outbound request timeout
+are reported as delivery failures. A 202 acknowledgment does not guarantee that
+the sink accepted the event.
 
 ## Removing the sample app deployment
 

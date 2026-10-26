@@ -12,27 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM registry.access.redhat.com/ubi8/nodejs-12
+FROM node:24.22.1-alpine
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
-# Copying this separately prevents re-running npm install on every code change.
+WORKDIR /app
+
+# Install only the locked runtime dependencies; keep development tools out of the image.
 COPY package*.json ./
+RUN npm ci --omit=dev --cache=/tmp/npm-cache && rm -rf /tmp/npm-cache
 
-# Use ci is faster and more reliable following package-lock.json
-RUN npm ci --only=production
+ENV PORT=8080 NODE_ENV=production
+EXPOSE 8080
 
-# Doc port listening port
-ENV PORT 8080
+COPY --chown=node:node . ./
+USER node
 
-EXPOSE $PORT
-
-ARG ENV=production
-
-ENV NODE_ENV $ENV
-
-# Run the web service on container startup.
-CMD npm run $NODE_ENV
-
-# Copy local code to the container image.
-COPY . ./
+# Run Node directly so the application receives container lifecycle signals.
+CMD ["node", "index.js"]

@@ -8,16 +8,24 @@
     "start": "node index.js",
     "production": "npm start",
     "dev": "nodemon index.js",
-    "lint": "standard --fix"
+    "lint": "eslint index.js eslint.config.js"
   },
   "author": "",
   "license": "Apache-2.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "dependencies": {
-    "cloudevents": "^6.0.1",
-    "express": "^4.22.3",
-    "nodemon": "^2.0.20"
+    "cloudevents": "^10.0.0",
+    "express": "^5.3.0"
   },
   "devDependencies": {
-    "standard": "^17.1.2"
+    "nodemon": "^3.1.14",
+    "eslint": "^10.13.0"
+  },
+  "overrides": {
+    "cloudevents": {
+      "uuid": "^11.1.1"
+    }
   }
 }
