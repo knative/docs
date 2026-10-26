@@ -1,28 +1,38 @@
 apiVersion: flows.knative.dev/v1
 kind: Parallel
 metadata:
-  name: me-odd-even-parallel
+  name: odd-even-parallel
 spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
   branches:
   - filter:
-      uri: "http://me-even-odd-switcher.default.svc.cluster.local/0"
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: parallel-helpers
+      uri: /switch/0
     subscriber:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: me-even-transformer
+        name: parallel-helpers
+      uri: /transform/even
   - filter:
-      uri: "http://me-even-odd-switcher.default.svc.cluster.local/1"
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: parallel-helpers
+      uri: /switch/1
     subscriber:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: me-odd-transformer
+        name: parallel-helpers
+      uri: /transform/odd
   reply:
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service
-      name: me-event-display
+      name: event-display
