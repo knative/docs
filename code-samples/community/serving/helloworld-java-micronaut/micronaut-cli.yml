@@ -1,5 +1,4 @@
 profile: service
 defaultPackage: com.example.helloworld
 ---
-testFramework: junit
 sourceLanguage: java

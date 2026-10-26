@@ -1,281 +1,92 @@
-# Hello World - Java (Micronaut)
+# Hello World — Java (Micronaut)
 
-Learn how to deploy a simple web app that is written in Java and uses Micronaut.
+Deploy a plain-text HTTP service using Micronaut Platform **5.2.3** and
+**Java 25 LTS**. GET `/` returns `Hello World: ${TARGET}` without a trailing
+newline. An unset `TARGET` defaults to `NOT SPECIFIED`; an explicitly empty
+`TARGET` stays empty. The listening port is `${PORT:8080}`.
 
-This samples uses Docker to build locally. The app reads in a `TARGET` env
-variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET` is
-not specified, the "NOT SPECIFIED" default value is used.
+## Requirements
 
-Use this sample to walk you through the steps of creating and modifying the
-sample app, building and pushing your container image to a registry, and then
-deploying your app to your Knative cluster.
+- Docker with BuildKit for builds and optional multi-platform publication.
+- curl for HTTP checks.
+- A Knative Serving cluster and kubectl for deployment.
+- A container registry account if publishing to a remote cluster.
 
-## Before you begin
+Java, Maven and the Micronaut CLI do not need to be installed on the host.
+Clone [knative/docs](https://github.com/knative/docs) and work in
+`code-samples/community/serving/helloworld-java-micronaut`.
 
-You must meet the following requirements to complete this sample:
+## Configuration
 
-- A version of the Knative Serving component installed and DNS configured. Follow the
-  [Knative installation instructions](https://knative.dev/docs/install/) if you need
-  to create a Knative cluster.
-- The following software downloaded and install on your loacal machine:
-  - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
-  - [Micronaut 1.1](https://micronaut.io/).
-  - [Docker](https://www.docker.com) for building and pushing your container
-    image.
-  - [curl](https://curl.haxx.se/) to test the sample app after deployment.
-- A [Docker Hub](https://hub.docker.com/) account where you can push your
-  container image.
+[`pom.xml`](pom.xml) uses the Micronaut parent and Java 25 to build an executable
+JAR. [`application.yml`](src/main/resources/application.yml) configures the
+application name and `${PORT:8080}` listening port.
 
-**Tip**: You can clone the [Knatve/docs repo](https://github.com/knative/docs)
-and then modify the source files. Alternatively, learn more by manually creating
-the files yourself.
+## Build and run locally
 
-## Creating and configuring the sample code
+The checked-in [Dockerfile](Dockerfile) builds the executable JAR.
+Its production stage contains only the Java runtime and application and runs as a
+non-root UID.
 
-To create and configure the source files in the root of your working directory:
+```sh
+docker build -t helloworld-java-micronaut:local .
+```
 
-1. Create the `pom.xml` file:
+Start the actual production image, then request it from another terminal:
 
-    ```xml
-    <modelVersion>4.0.0</modelVersion>
-        <groupId>com.example.micronaut</groupId>
-        <artifactId>helloworld</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <properties>
-            <micronaut.version>1.1.0</micronaut.version>
-            <jdk.version>1.8</jdk.version>
-            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            <exec.mainClass>com.example.helloworld.Application</exec.mainClass>
-        </properties>
-        <dependencyManagement>
-            <dependencies>
-            <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-bom</artifactId>
-                <version>${micronaut.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            </dependencies>
-        </dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-inject</artifactId>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-validation</artifactId>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-runtime</artifactId>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-http-client</artifactId>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-http-server-netty</artifactId>
-                <scope>compile</scope>
-            </dependency>
-                <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
-                <scope>runtime</scope>
-            </dependency>
-        </dependencies>
+```sh
+docker run --rm --name helloworld-java-micronaut-local -p 8080:8080 helloworld-java-micronaut:local
+curl -fsS http://localhost:8080/
+# Hello World: NOT SPECIFIED
+```
 
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.1.0</version>
-                    <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                        <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>${exec.mainClass}</mainClass>
-                            </transformer>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                        </transformers>
-                        </configuration>
-                    </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
-    </project>
-    ```
+Stop that container before starting the custom configuration:
 
-1. Create the `HelloWorldController.java` file in the
-   `src/main/java/com/example/helloworld` directory. The
-   `[ROOT]/src/main/java/com/example/helloworld/HelloWorldController.java` file
-   handles requests to the root URI `/`.
+```sh
+docker run --rm --name helloworld-java-micronaut-local -p 8081:8081 \
+  -e PORT=8081 -e TARGET="Micronaut Sample v1" helloworld-java-micronaut:local
+curl -fsS http://localhost:8081/
+# Hello World: Micronaut Sample v1
+```
 
-   ```java
-    package com.example.helloworld;
+## Publish and deploy to Knative
 
-    import io.micronaut.http.MediaType;
-    import io.micronaut.http.annotation.Controller;
-    import io.micronaut.http.annotation.Get;
+Replace `{username}` in [`service.yaml`](service.yaml) and the image tag below with your registry
+namespace. Publication requires credentials and is separate from local validation.
 
-    @Controller("/")
-    public class HelloWorldController {
+```sh
+docker buildx build --platform linux/arm64,linux/amd64 \
+  -t "{username}/helloworld-java-micronaut" --push .
+kubectl apply --filename service.yaml
+kubectl wait --for=condition=Ready ksvc/helloworld-java-micronaut --timeout=180s
+kubectl get ksvc helloworld-java-micronaut -o jsonpath='{.status.url}'
+```
 
-        @Get(value = "/", produces = MediaType.TEXT_PLAIN)
-        public String index() {
-            String target = System.getenv("TARGET");
-            if (target == null) {
-                target = "NOT SPECIFIED";
-            }
-            return "Hello World: " + target;
-        }
-    }
-   ```
+The checked-in [Knative Service manifest](service.yaml) sets
+`TARGET="Micronaut Sample v1"` and leaves the namespace selectable by kubectl.
 
-1. The Micronaut application is configured via
-   `src/main/resources/application.yml`:
+Request the actual URL returned by kubectl:
 
-   ```yaml
-   micronaut:
-     application:
-       name: helloworld-java-micronaut
-     server:
-       port: ${PORT:8080}
-   ```
+```sh
+curl -fsS http://helloworld-java-micronaut.default.1.2.3.4.sslip.io/
+# Hello World: Micronaut Sample v1
+```
 
-1. Create the `Dockerfile` file:
+For a different Knative container port, add `ports: [{containerPort: 8081}]`
+to the container. Knative injects `PORT` automatically; do not explicitly set
+that reserved environment variable or use reserved port 9090. To check the
+default greeting, remove the `TARGET` entry, apply again, wait for the new revision
+to become Ready and request the same route. It should return
+`Hello World: NOT SPECIFIED`.
 
-   ```docker
-   # Use the official maven/Java 8 image to create a build artifact.
-   # https://hub.docker.com/_/maven
-   FROM maven:3.5-jdk-8-alpine as builder
+For an isolated kind cluster, use the same production image loaded into its node,
+a non-latest local tag such as `dev.local/helloworld-java-micronaut:validation`,
+and `imagePullPolicy: IfNotPresent`. The local registry prefix must already be
+excluded from Knative tag resolution. This adaptation does not verify remote
+publication, public DNS or TLS.
 
-   # Copy local code to the container image.
-   WORKDIR /app
-   COPY pom.xml .
-   COPY src ./src
+## Cleanup
 
-   # Build a release artifact.
-   RUN mvn package -DskipTests
-
-   # Use AdoptOpenJDK for base image.
-   # It's important to use OpenJDK 8u191 or above that has container support enabled.
-   # https://hub.docker.com/r/adoptopenjdk/openjdk8
-   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
-
-   # Copy the jar to the production image from the builder stage.
-   COPY --from=builder /app/target/helloworld-1.0.0-SNAPSHOT.jar /helloworld.jar
-
-   # Run the web service on container startup.
-   CMD ["java","-jar","/helloworld.jar"]
-   ```
-
-1. Create the `service.yaml` file. You must specify your Docker Hub username in
-   `{username}`. You can also configure the `TARGET`, for example you can modify
-   the `Micronaut Sample v1` value.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-java-micronaut
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-java-micronaut
-             env:
-               - name: TARGET
-                 value: "Micronaut Sample v1"
-   ```
-
-## Building and deploying the sample
-
-To build a container image, push your image to the registry, and then deploy
-your sample app to your cluster:
-
-1. Use Docker to build your container image and then push that image to your
-   Docker Hub registry. You must replace the `{username}` variables in the
-   following commands with your Docker Hub username.
-
-   ```bash
-   # Build and push the container on your local machine.
-   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-java-micronaut" --push .
-   ```
-
-1. Now that your container image is in the registry, you can deploy it to your
-   Knative cluster by running the `kubectl apply` command:
-
-   ```bash
-   kubectl apply --filename service.yaml
-   ```
-
-   Result: A service name `helloworld-java-micronaut` is created in your cluster
-   along with the following resources:
-
-   - A new immutable revision for the version of the app that you just deployed.
-   - The following networking resources are created for your app:
-     - route
-     - ingress
-     - service
-     - load balancer
-   - Auto scaling is enable to allow your pods to scale up to meet traffic, and
-     also back down to zero when there is no traffic.
-
-## Testing the sample app
-
-To verify that your sample app has been successfully deployed:
-
-1. Retrieve the URL for your service, by running the following `kubectl get`
-   command:
-
-   ```bash
-   kubectl get ksvc helloworld-java-micronaut  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   ```
-
-   Example result:
-
-   ```bash
-   NAME                          URL
-   helloworld-java-micronaut     http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
-   ```
-
-1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
-
-   ```bash
-   curl http://helloworld-java-micronaut.default.1.2.3.4.sslip.io
-   ```
-
-   Example result:
-
-   ```bash
-    Hello World: Micronaut Sample v1
-   ```
-
-Congratulations on deploying your sample Java app to Knative!
-
-## Removing the sample app deployment
-
-To remove the sample app from your cluster, run the following `kubectl delete`
-command:
-
-```bash
+```sh
 kubectl delete --filename service.yaml
 ```
