@@ -4,11 +4,15 @@
   "description": "Simple hello world sample in Node",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "check": "node --check index.js"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "express": "^4.22.1"
+    "express": "^5.3.0"
   }
 }
