@@ -2,11 +2,14 @@
 
 A simple web app written in Node.js that you can use for testing. It reads in an
 env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
-specified, it will use "World" as the TARGET.
+specified or is empty, it will use "World" as the TARGET. The app listens on
+`0.0.0.0` and uses `PORT`, defaulting to `8080` when unset or empty.
 
-Do the following steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+This sample uses [Node.js 24 LTS](https://github.com/nodejs/Release#release-schedule)
+and [Express 5](https://expressjs.com/en/5x/api.html). The Docker image tracks
+Node 24 patch updates; `package-lock.json` pins application dependencies.
+
+Clone the working sample, then build and deploy it using the instructions below:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -19,132 +22,26 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-nodejs
   [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- [Node.js](https://nodejs.org/en/) installed and configured.
+Building and testing the checked-in sample requires only Docker, not a host
+Node.js installation.
 
-## Recreating the sample code
+## Understanding the sample
 
-1. Create a new directory and initialize `npm`:
+Use the checked-in files from the clone rather than recreating them:
 
-   ```bash
-   npm init
-
-   package name: (helloworld-nodejs)
-   version: (1.0.0)
-   description:
-   entry point: (index.js)
-   test command:
-   git repository:
-   keywords:
-   author:
-   license: (ISC) Apache-2.0
-   ```
-
-1. Install the `express` package:
-
-   ```bash
-   npm install express
-   ```
-
-1. Create a new file named `index.js` and paste the following code:
-
-   ```js
-   const express = require('express');
-   const app = express();
-
-   app.get('/', (req, res) => {
-     console.log('Hello world received a request.');
-
-     const target = process.env.TARGET || 'World';
-     res.send(`Hello ${target}!\n`);
-   });
-
-   const port = process.env.PORT || 8080;
-   app.listen(port, () => {
-     console.log('Hello world listening on port', port);
-   });
-   ```
-
-1. Modify the `package.json` file to add a start command to the scripts section:
-
-   ```json
-   {
-     "name": "knative-serving-helloworld",
-     "version": "1.0.0",
-     "description": "Simple hello world sample in Node",
-     "main": "index.js",
-     "scripts": {
-       "start": "node index.js"
-     },
-     "author": "",
-     "license": "Apache-2.0",
-     "dependencies": {
-       "express": "^4.22.1"
-     }
-   }
-   ```
-
-1. In your project directory, create a file named `Dockerfile` and copy the following code
-   block into it. For detailed instructions on dockerizing a Node.js app,
-   see
-   [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
-
-   ```Dockerfile
-   # Use the official lightweight Node.js 12 image.
-   # https://hub.docker.com/_/node
-   FROM node:12-slim
-
-   # Create and change to the app directory.
-   WORKDIR /usr/src/app
-
-   # Copy application dependency manifests to the container image.
-   # A wildcard is used to ensure both package.json AND package-lock.json are copied.
-   # Copying this separately prevents re-running npm install on every code change.
-   COPY package*.json ./
-
-   # Install production dependencies.
-   RUN npm install --only=production
-
-   # Copy local code to the container image.
-   COPY . ./
-
-   # Run the web service on container startup.
-   CMD [ "npm", "start" ]
-   ```
-
-1. Create a `.dockerignore` file to ensure that any files related to a local
-   build do not affect the container that you build for deployment.
-
-   ```ignore
-   Dockerfile
-   README.md
-   node_modules
-   npm-debug.log
-   ```
-
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-nodejs
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-nodejs
-             env:
-               - name: TARGET
-                 value: "Node.js Sample v1"
-   ```
+- [index.js](index.js) defines the Express `GET /` route, greeting and environment
+  defaults. It binds to `0.0.0.0` so requests can reach it outside the container.
+- [package.json](package.json) declares Express 5 and the start/check commands;
+  [package-lock.json](package-lock.json) pins the dependency graph.
+- [Dockerfile](Dockerfile) uses the Node 24 LTS image, installs production
+  dependencies with `npm ci --omit=dev`, and starts Node directly.
+- [service.yaml](service.yaml) defines the Knative Service and sets
+  `TARGET="Node.js Sample v1"`. Replace `{username}` in its image reference with
+  your Docker Hub username before deployment.
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+From the cloned sample directory, build and deploy the sample app:
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
@@ -186,6 +83,20 @@ folder) you're ready to build and deploy the sample app.
    curl http://helloworld-nodejs.default.1.2.3.4.sslip.io
    Hello Node.js Sample v1!
    ```
+
+## Local build
+
+From the sample directory, build and run without installing Node.js locally:
+
+```bash
+docker build -t helloworld-nodejs:local .
+docker run --rm helloworld-nodejs:local npm run check
+docker run --rm -p 127.0.0.1:8080:8080 -e TARGET="Node.js Sample v1" helloworld-nodejs:local
+```
+
+In another terminal, `curl http://127.0.0.1:8080` returns
+`Hello Node.js Sample v1!`. Stop the container with Ctrl-C. To select a different
+container port, pass `-e PORT=9090` and publish `127.0.0.1:9090:9090` instead.
 
 ## Removing the sample app deployment
 
