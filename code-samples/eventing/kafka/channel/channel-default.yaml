@@ -1,0 +1,4 @@
+apiVersion: messaging.knative.dev/v1
+kind: Channel
+metadata:
+  name: testchannel-one
