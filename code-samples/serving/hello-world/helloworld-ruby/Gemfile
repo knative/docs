@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'rack', '>= 2.0.6'
+gem 'sinatra', '~> 4.2.1'
+gem 'rack', '~> 3.2.7'
+gem 'rackup', '~> 2.3'
+gem 'webrick', '~> 1.9'
