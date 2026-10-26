@@ -1,59 +1,29 @@
-# Namespace for sample application with eventing enabled
 apiVersion: v1
 kind: Namespace
 metadata:
   name: knative-samples
-  labels:
-    eventing.knative.dev/injection: enabled
 ---
-# A default broker
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: default
   namespace: knative-samples
   annotations:
-    # Note: you can set the eventing.knative.dev/broker.class annotation to change the class of the broker.
-    # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
     eventing.knative.dev/broker.class: MTChannelBasedBroker
 spec: {}
 ---
-# helloworld-python app deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: helloworld-python
-  namespace: knative-samples
-spec:
-  replicas: 1
-  selector:
-    matchLabels: &labels
-      app: helloworld-python
-  template:
-    metadata:
-      labels: *labels
-    spec:
-      containers:
-        - name: helloworld-python
-          image: docker.io/{username}/helloworld-python
-          imagePullPolicy: IfNotPresent
----
-# Service that exposes helloworld-python app.
-# This will be the subscriber for the Trigger
-apiVersion: v1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-python
   namespace: knative-samples
 spec:
-  selector:
-    app: helloworld-python
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
+  template:
+    spec:
+      containers:
+        - image: docker.io/{username}/helloworld-python
+          imagePullPolicy: IfNotPresent
 ---
-# Knative Eventing Trigger to trigger the helloworld-python service
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
@@ -67,7 +37,34 @@ spec:
       source: dev.knative.samples/helloworldsource
   subscriber:
     ref:
-      apiVersion: v1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: helloworld-python
-
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: knative-samples
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: event-display
+  namespace: knative-samples
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.samples.hifromknative
+      source: knative/eventing/samples/hello-world
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: event-display
