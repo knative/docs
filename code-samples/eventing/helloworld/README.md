@@ -4,6 +4,9 @@ Following examples include a simple web app written in the language of your choi
 use to test knative eventing. It shows how to consume a [CloudEvent](https://cloudevents.io/)
 in Knative eventing, and optionally how to respond back with another CloudEvent in the HTTP response.
 
+- [Go CloudEvents with a Broker and Triggers](../../serving/cloudevents/cloudevents-go/eventing/README.md).
+- [Python Hello World](helloworld-python/README.md).
+
 We will deploy the app as a
 [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 along with a

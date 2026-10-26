@@ -1,0 +1,39 @@
+# Source-backed local event logger, built from ../.ci/fixtures.
+# It is only an output sink; it does not replace the receiver application.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-display
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-display
+  template:
+    metadata:
+      labels:
+        app: event-display
+    spec:
+      containers:
+      - name: event-display
+        image: example.invalid/cloudevents-go-event-display:replace-me
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+  - port: 80
+    targetPort: 8080

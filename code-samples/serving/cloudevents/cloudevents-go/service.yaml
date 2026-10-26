@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - image: ko://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go
+      - image: docker.io/{username}/cloudevents-go
         # Uncomment this to send events somewhere.
         # env:
         # - name: K_SINK

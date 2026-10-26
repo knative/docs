@@ -1,0 +1,62 @@
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+  annotations:
+    eventing.knative.dev/broker.class: MTChannelBasedBroker
+spec: {}
+---
+# The SAME receiver image as ../service.yaml, deployed without Serving.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudevents-go-eventing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudevents-go-eventing
+  template:
+    metadata:
+      labels:
+        app: cloudevents-go-eventing
+    spec:
+      containers:
+      - name: receiver
+        image: docker.io/{username}/cloudevents-go
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 25m
+            memory: 32Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudevents-go-eventing
+spec:
+  selector:
+    app: cloudevents-go-eventing
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: input-to-sample
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: curl.demo
+      source: curl-command
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: cloudevents-go-eventing
