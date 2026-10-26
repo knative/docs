@@ -1,49 +1,41 @@
 package main
 
 import (
-	"context"
+	"bytes"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-
-	"cloud.google.com/go/storage"
 )
 
-func main() {
-	log.Print("Secrets sample started.")
-
-	// This sets up the standard GCS storage client, which will pull
-	// credentials from GOOGLE_APPLICATION_DEFAULT if specified.
-	ctx := context.Background()
-	client, err := storage.NewClient(ctx)
-	if err != nil {
-		log.Fatalf("Unable to initialize storage client: %v", err)
+func envOrDefault(name, fallback string) string {
+	if value := os.Getenv(name); value != "" {
+		return value
 	}
+	return fallback
+}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// This GCS bucket has been configured so that any authenticated
-		// user can access it (Read Only), so any Service Account can
-		// run this sample.
-		bkt := client.Bucket("knative-secrets-sample")
-
-		// Access the attributes of this GCS bucket, and write it back to the
-		// user.  On failure, return a 500 and the error message.
-		attrs, err := bkt.Attrs(ctx)
+func secretHandler(path string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// Reopen the file on every request so projected Secret updates are seen.
+		// Never include file contents, paths or underlying errors in the response.
+		value, err := os.ReadFile(path)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, "Secret file unavailable.", http.StatusServiceUnavailable)
 			return
 		}
-		fmt.Fprintln(w,
-			fmt.Sprintf("bucket %s, created at %s, is located in %s with storage class %s\n",
-				attrs.Name, attrs.Created, attrs.Location, attrs.StorageClass))
-
-	})
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
+		if len(bytes.TrimSpace(value)) == 0 {
+			http.Error(w, "Secret file is empty.", http.StatusServiceUnavailable)
+			return
+		}
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		fmt.Fprintln(w, "Secret file loaded.")
 	}
+}
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+func main() {
+	path := envOrDefault("SECRET_FILE", "/var/secret/message")
+	port := envOrDefault("PORT", "8080")
+	log.Print("Mounted Secret sample started.")
+	log.Fatal(http.ListenAndServe(":"+port, secretHandler(path)))
 }
