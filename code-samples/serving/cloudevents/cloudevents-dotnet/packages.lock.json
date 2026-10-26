@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "CloudNative.CloudEvents.AspNetCore": {
+        "type": "Direct",
+        "requested": "[2.9.0, )",
+        "resolved": "2.9.0",
+        "contentHash": "EhXZtGGTgpqHbY40H1N9MWreIiejTBPqSDDOeHz54PI8IffDNbWeUP/27o5uSH692zCWenWVQd5mu1qD9e5gfQ==",
+        "dependencies": {
+          "CloudNative.CloudEvents": "2.9.0"
+        }
+      },
+      "CloudNative.CloudEvents.SystemTextJson": {
+        "type": "Direct",
+        "requested": "[2.9.0, )",
+        "resolved": "2.9.0",
+        "contentHash": "gkf4+RRR8W4VmB7hZr0Wie5VYz+oRKJnuj5CLtyKANa+Yq+eynMqVBnmnjWf8hvgCVDAzyvM2iq6THZageO8jA==",
+        "dependencies": {
+          "CloudNative.CloudEvents": "2.9.0"
+        }
+      },
+      "CloudNative.CloudEvents": {
+        "type": "Transitive",
+        "resolved": "2.9.0",
+        "contentHash": "Qh8/MS3YBI78Q5+AVXN/hNQZkhFW5OyDHdn4Wi05ZzlylKOsTypBiQQ1u0U8iOZ24HMe8Hc0VH2CIwnY4YTGEA=="
+      }
+    }
+  }
+}
