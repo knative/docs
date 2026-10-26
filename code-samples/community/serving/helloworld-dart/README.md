@@ -21,38 +21,28 @@ While you can clone all of the code from this directory, we recommend you create
 your hello world Dart application by using the `dart` developer tool. This takes
 just a few steps:
 
-1. Create a new Dart app using the `server_shelf` template:
+1. Create a new Dart app using the `server-shelf` template:
 
    ```shell
-   > dart create -t server-shelf helloworld-dart
+   dart create -t server-shelf helloworld-dart
+   cd helloworld-dart
    ```
+
+1. Replace the generated `bin/server.dart` with the [sample server](bin/server.dart)
+   and use the [sample Dockerfile](Dockerfile). The generated server does not
+   read `TARGET`, so this step is required for the greeting shown below.
 
 1. If you want to run locally, install dependencies. If you only want to run in
    Docker or Knative, you can skip this step.
 
    ```shell
-   > dart pub get
+   dart pub get
    ```
 
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-dart
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-dart
-             env:
-               - name: TARGET
-                 value: "Dart Sample v1"
-   ```
+1. Use the checked-in [Knative Service manifest](service.yaml). If you created
+   a new application directory, copy that file into it as `service.yaml`.
+   Replace `{username}` in its image reference with your Docker Hub username.
+   The manifest sets `TARGET` to `Dart Sample v1` for the greeting shown below.
 
 ## Building and deploying the sample
 
