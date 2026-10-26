@@ -1,179 +1,79 @@
 # Hello World - Haskell
 
-A simple web app written in Haskell that you can use for testing. It reads in an
-env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
-specified, it will use "World" as the TARGET.
+A small Knative Serving application. `GET /` returns `Hello ${TARGET}` as UTF-8
+plain text, without punctuation or a trailing newline. Unset `TARGET` defaults
+to `World`; an explicitly empty `TARGET` returns `Hello `. `PORT` defaults to
+`8080`. The server accepts connections from outside the container.
 
 ## Prerequisites
 
-- A Kubernetes cluster with Knative installed and DNS configured. Follow the
-  [Knative installation instructions](https://knative.dev/docs/install/) if you need to create
-  one.
-- [Docker](https://www.docker.com) installed and running on your local machine,
-  and a Docker Hub account configured (we'll use it for a container registry).
+- Docker with BuildKit, and a Kubernetes cluster with
+  [Knative Serving](https://knative.dev/docs/install/) and ingress configured.
+- A container registry account if pushing the image for a remote cluster.
+  A local kind cluster can instead load a locally built image.
+- No local Haskell installation is needed; the Dockerfile includes the toolchain.
 
-## Recreating the sample code
+## Sample files
 
-While you can clone all of the code from this directory, hello world apps are
-generally more useful if you build them step-by-step. The following instructions
-recreate the source files from this folder.
+[`Dockerfile`](Dockerfile) builds [`app/Main.hs`](app/Main.hs) using Cabal and
+[`cabal.project.freeze`](cabal.project.freeze). The runtime image runs as non-root.
+The sample is licensed under [Apache 2.0](LICENSE).
+Invalid, zero, or out-of-range `PORT` values fail at startup.
 
-1. Create a new file named `stack.yaml` and paste the following code:
+## Build and run locally
 
-   ```yaml
-   flags: {}
-   packages:
-     - .
-   extra-deps: []
-   resolver: lts-10.7
-   ```
+Run these commands from the sample directory. Use your cluster node's platform
+(`linux/arm64` below; substitute `linux/amd64` for x86-64 nodes).
 
-1. Create a new file named `package.yaml` and paste the following code
+```bash
+docker build --platform linux/arm64 -t helloworld-haskell:local .
+docker run --rm -p 127.0.0.1:8080:8080 --memory 128m --cpus 1 helloworld-haskell:local
+# In another terminal:
+curl -fsS http://127.0.0.1:8080/
+```
 
-   ```yaml
-   name: helloworld-haskell
-   version: 0.1.0.0
-   dependencies:
-     - base >= 4.7 && < 5
-     - scotty
-     - text
+The build runs `cabal check` and compiles with warnings as errors. To use another
+environment, start the image with `-e TARGET='Haskell Sample v1' -e PORT=8081`
+and publish `127.0.0.1:8081:8081`, then request that port with curl.
 
-   executables:
-     helloworld-haskell-exe:
-       main: Main.hs
-       source-dirs: app
-       ghc-options:
-         - -threaded
-         - -rtsopts
-         - -with-rtsopts=-N
-   ```
+## Deploy to Knative
 
-1. Create a `app` folder, then create a new file named `Main.hs` in that folder
-   and paste the following code. This code creates a basic web server which
-   listens on port 8080:
+Set your Docker Hub username in the image tag and in `service.yaml`. Build and
+push only when you intend to publish:
 
-   ```haskell
-   {-# LANGUAGE OverloadedStrings #-}
+```bash
+IMAGE=docker.io/{username}/helloworld-haskell
+docker build --platform linux/arm64 -t "$IMAGE" .
+docker push "$IMAGE"
+```
 
-   import           Data.Maybe
-   import           Data.Monoid        ((<>))
-   import           Data.Text.Lazy     (Text)
-   import           Data.Text.Lazy
-   import           System.Environment (lookupEnv)
-   import           Web.Scotty         (ActionM, ScottyM, scotty)
-   import           Web.Scotty.Trans
+Use the checked-in [`service.yaml`](service.yaml). Its `TARGET` value is
+`Haskell Sample v1`; replace only the image username/tag and, if needed, namespace
+before applying it.
 
-   main :: IO ()
-   main = do
-     t <- fromMaybe "World" <$> lookupEnv "TARGET"
-     pStr <- fromMaybe "8080" <$> lookupEnv "PORT"
-     let p = read pStr :: Int
-     scotty p (route t)
+For a local kind cluster, use a non-latest local reference (for example,
+`dev.local/helloworld-haskell:local`), load it with `kind load docker-image`,
+and set `imagePullPolicy: IfNotPresent`. Knative must be configured to skip remote
+tag resolution for that local registry prefix. Adapt `metadata.namespace` when
+using an isolated namespace.
 
-   route :: String -> ScottyM()
-   route t = get "/" $ hello t
+Knative injects `PORT`. To select another port, set
+`spec.template.spec.containers[0].ports[0].containerPort`, for example `8081`.
 
-   hello :: String -> ActionM()
-   hello t = text $ pack ("Hello " ++ t)
-   ```
+```bash
+kubectl apply --filename service.yaml
+kubectl wait --for=condition=Ready ksvc/helloworld-haskell --timeout=180s
+kubectl get ksvc helloworld-haskell -o jsonpath='{.status.url}'
+```
 
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it.
+Request the returned URL through your cluster ingress:
 
-   ```docker
-   # Use the official Haskell image to create a build artifact.
-   # https://hub.docker.com/_/haskell/
-   FROM haskell:8.2.2 as builder
+```bash
+curl http://helloworld-haskell.default.1.2.3.4.sslip.io
+# Exact body: Hello Haskell Sample v1 (no trailing newline)
+```
 
-   # Copy local code to the container image.
-   WORKDIR /app
-   COPY . .
-
-   # Build and test our code, then build the “helloworld-haskell-exe” executable.
-   RUN stack setup
-   RUN stack build --copy-bins
-
-   # Use a Docker multi-stage build to create a lean production image.
-   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM fpco/haskell-scratch:integer-gmp
-
-   # Copy the "helloworld-haskell-exe" executable from the builder stage to the production image.
-   WORKDIR /root/
-   COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
-
-   # Run the web service on container startup.
-   CMD ["./helloworld-haskell-exe"]
-   ```
-
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-haskell
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-haskell
-             env:
-               - name: TARGET
-                 value: "Haskell Sample v1"
-   ```
-
-## Build and deploy this sample
-
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
-
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, enter these commands replacing `{username}` with your Docker Hub
-   username:
-
-   ```bash
-   # Build and push the container on your local machine.
-   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-haskell" --push .
-   ```
-
-1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in `service.yaml` matches the container you built in the previous step. Apply
-   the configuration using `kubectl`:
-
-   ```bash
-   kubectl apply --filename service.yaml
-   ```
-
-1. Now that your service is created, Knative will perform the following steps:
-
-   - Create a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balance
-     for your app.
-   - Automatically scale your pods up and down (including to zero active pods).
-
-1. To find the URL for your service, enter:
-
-   ```
-   kubectl get ksvc helloworld-haskell  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   NAME                   URL
-   helloworld-haskell     http://helloworld-haskell.default.1.2.3.4.sslip.io
-   ```
-
-1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
-
-   ```bash
-   curl http://helloworld-haskell.default.1.2.3.4.sslip.io
-   Hello world: Haskell Sample v1
-   ```
-
-## Removing the sample app deployment
-
-To remove the sample app from your cluster, delete the service record:
+To remove the deployment:
 
 ```bash
 kubectl delete --filename service.yaml
