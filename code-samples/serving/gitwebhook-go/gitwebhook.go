@@ -21,6 +21,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/url"
 	"os"
 	"strings"
 
@@ -31,10 +32,9 @@ import (
 )
 
 const (
-	// Secret given to github. Used for verifying the incoming objects.
+	// Personal Access Token created in GitHub that allows API calls.
 	personalAccessTokenKey = "GITHUB_PERSONAL_TOKEN"
-	// Personal Access Token created in github that allows us to make
-	// calls into github.
+	// Secret given to GitHub for verifying incoming webhook requests.
 	webhookSecretKey = "WEBHOOK_SECRET"
 	// this is what we tack onto each PR title if not there already
 	titleSuffix = "looks pretty legit"
@@ -94,6 +94,13 @@ func main() {
 	tc := oauth2.NewClient(ctx, ts)
 
 	client := ghclient.NewClient(tc)
+	if baseURL := os.Getenv("GITHUB_API_URL"); baseURL != "" {
+		apiURL, err := url.Parse(strings.TrimRight(baseURL, "/") + "/")
+		if err != nil || apiURL.Host == "" || (apiURL.Scheme != "http" && apiURL.Scheme != "https") {
+			log.Fatal("GITHUB_API_URL must be an absolute HTTP(S) API base URL")
+		}
+		client.BaseURL = apiURL
+	}
 
 	h := &GithubHandler{
 		client: client,
@@ -103,8 +110,11 @@ func main() {
 	hook := github.New(&github.Config{Secret: secretToken})
 	hook.RegisterEvents(h.HandlePullRequest, github.PullRequestEvent)
 
-	err := webhooks.Run(hook, ":8080", "/")
-	if err != nil {
-		fmt.Println("Failed to run the webhook")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	if err := webhooks.Run(hook, ":"+port, "/"); err != nil {
+		log.Fatalf("Failed to run the webhook: %v", err)
 	}
 }
