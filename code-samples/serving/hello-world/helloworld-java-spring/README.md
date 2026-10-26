@@ -2,7 +2,7 @@
 
 This guide describes the steps required to create the `helloworld-java-spring` sample app and deploy it to your cluster.
 
-The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default value.
+The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default value. An explicitly empty `TARGET` produces `Hello !`.
 
 You can also download a working copy of the sample, by running the following commands:
 
@@ -20,92 +20,52 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-java-spring
 
 ## Building the sample app
 
-1. From the console, create a new, empty web project by using the `curl` and `unzip`
-   commands:
+Use the working copy downloaded above, including its `pom.xml`. This sample uses
+Java 25 LTS, Spring Boot 4.1.2 and Maven 3.9.16. Local builds require a Java 25 JDK
+and Maven 3.9.16 installed. The included Dockerfile supplies both tools, so Docker
+builds do not require a local Java or Maven installation.
 
-    ```bash
-    curl https://start.spring.io/starter.zip \
-       -d dependencies=web \
-       -d name=helloworld \
-       -d artifactId=helloworld \
-       -o helloworld.zip
-    unzip helloworld.zip
+Version and support information: [Spring Boot requirements](https://docs.spring.io/spring-boot/4.1/system-requirements.html),
+[Spring support policy](https://spring.io/support-policy),
+[Temurin support](https://adoptium.net/support), and
+[Maven release history](https://maven.apache.org/docs/history.html).
+
+The source and configuration are already checked in. Continue with **Run the
+application locally**, or build the included Dockerfile directly.
+
+1. The [application](src/main/java/com/example/helloworld/HelloworldApplication.java)
+   uses a `@RestController` to handle the "/" mapping and a `@Value` field to
+   read the `TARGET` environment variable.
+
+1. The HTTP port is configured in
+   [application.properties](src/main/resources/application.properties):
+
+    ```properties
+    server.port = ${PORT:8080}
     ```
 
-   If you don't have `curl` installed, you can accomplish the same by visiting the
-   [Spring Initializr](https://start.spring.io/) page. Specify Artifact as
-   `helloworld` and add the `Web` dependency. Then click **Generate Project**,
-   download and unzip the sample archive.
+   Knative supplies `PORT` at runtime. When running locally without `PORT`, the
+   application listens on port 8080.
 
-1. Update the `SpringBootApplication` class in
-   `src/main/java/com/example/helloworld/HelloworldApplication.java` by adding a
-   `@RestController` to handle the "/" mapping and also add a `@Value` field to
-   provide the `TARGET` environment variable:
-
-    ```java
-    package com.example.helloworld;
-
-    import org.springframework.beans.factory.annotation.Value;
-    import org.springframework.boot.SpringApplication;
-    import org.springframework.boot.autoconfigure.SpringBootApplication;
-    import org.springframework.web.bind.annotation.GetMapping;
-    import org.springframework.web.bind.annotation.RestController;
-
-    @SpringBootApplication
-    public class HelloworldApplication {
-
-     @Value("${TARGET:World}")
-     String target;
-
-     @RestController
-     class HelloworldController {
-       @GetMapping("/")
-       String hello() {
-         return "Hello " + target + "!";
-       }
-     }
-
-     public static void main(String[] args) {
-       SpringApplication.run(HelloworldApplication.class, args);
-     }
-    }
-    ```
-
-1. Run the application locally:
+1. **Run the application locally**:
 
     ```bash
-    mvn wrapper:wrapper
-    ./mvnw package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
+    mvn package && java -jar target/helloworld-0.0.1-SNAPSHOT.jar
     ```
 
    Go to `http://localhost:8080/` to see your `Hello World!` message.
 
-1. In your project directory, create a file named `Dockerfile` and copy the following code block into it:
+   To try a custom greeting and port, stop the application and run:
 
-    ```docker
-    # Use the official maven/Java 8 image to create a build artifact: https://hub.docker.com/_/maven
-    FROM maven:3.5-jdk-8-alpine AS builder
-
-    # Copy local code to the container image.
-    WORKDIR /app
-    COPY pom.xml .
-    COPY src ./src
-
-    # Build a release artifact.
-    RUN mvn package -DskipTests
-
-    # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-    # https://hub.docker.com/_/openjdk
-    # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-    FROM openjdk:8-jre-alpine
-
-    # Copy the jar to the production image from the builder stage.
-    COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
-
-    # Run the web service on container startup.
-    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
-
+    ```bash
+    TARGET="Spring Boot Sample v1" PORT=8085 java -jar target/helloworld-0.0.1-SNAPSHOT.jar
     ```
+
+   In another terminal, `curl http://localhost:8085/` returns
+   `Hello Spring Boot Sample v1!`.
+
+1. The included [Dockerfile](Dockerfile) builds the executable JAR in
+   a Maven/Java 25 stage, then runs it in a Temurin Java 25 JRE image.
    For detailed instructions on dockerizing a Spring Boot app, see [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/).
 
    For additional information on multi-stage docker builds for Java see [Creating Smaller Java Image using Docker Multi-stage Build](http://blog.arungupta.me/smaller-java-image-docker-multi-stage-build/).
@@ -133,25 +93,9 @@ Choose one of the following methods to deploy the app:
 
 ### yaml
 
-1. Create a new file named `service.yaml` and copy the following service definition
-   into the file:
-
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: helloworld-java-spring
-      namespace: default
-    spec:
-      template:
-        spec:
-          containers:
-            - image: docker.io/{username}/helloworld-java-spring
-              env:
-                - name: TARGET
-                  value: "Spring Boot Sample v1"
-    ```
-    Where `{username}` is your Docker Hub username.
+1. Edit the included [service.yaml](service.yaml), replacing `{username}` in
+   the container image with your Docker Hub username. The manifest sets
+   `TARGET` to `Spring Boot Sample v1`.
 
     **Note:** Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
 
@@ -185,7 +129,7 @@ Choose one of the following methods to deploy the app:
 
     ```bash
     NAME                      URL
-    helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.xip.io
+    helloworld-java-spring    http://helloworld-java-spring.default.1.2.3.4.sslip.io
     ```
 
     - For kn, run:
@@ -197,7 +141,7 @@ Choose one of the following methods to deploy the app:
     Example:
 
     ```bash
-    http://helloworld-java-spring.default.1.2.3.4.xip.io
+    http://helloworld-java-spring.default.1.2.3.4.sslip.io
     ```
 
 1. Make a request to your app and observe the result. Replace
