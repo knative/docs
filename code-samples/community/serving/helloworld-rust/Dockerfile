@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install production dependencies and build a release artifact.
-RUN cargo install --path .
+RUN cargo install --locked --path .
 
 # Run the web service on container startup.
 CMD ["hellorust"]
