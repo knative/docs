@@ -15,18 +15,21 @@ type Receiver struct {
 	// If the K_SINK environment variable is set, then events are sent there,
 	// otherwise we simply reply to the inbound request.
 	Target string `envconfig:"K_SINK"`
+
+	Port int `envconfig:"PORT" default:"8080"`
 }
 
 func main() {
-	client, err := cloudevents.NewDefaultClient()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	r := Receiver{client: client}
+	r := Receiver{}
 	if err := envconfig.Process("", &r); err != nil {
 		log.Fatal(err.Error())
 	}
+
+	client, err := cloudevents.NewClientHTTP(cloudevents.WithPort(r.Port))
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	r.client = client
 
 	// Depending on whether targeting data has been supplied,
 	// we will either reply with our response or send it on to
