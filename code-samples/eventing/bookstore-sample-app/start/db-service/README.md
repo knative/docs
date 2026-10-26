@@ -30,24 +30,24 @@ The sample rows inserted for the BookReviews table are shown below:
 ## Implementation
 
 ### Step 1: Acquire Necessary Files from the Repository
-The essential files for setting up your database are located within the `db` directory of our repository. Please download these files to proceed.
+The essential files for setting up your database are located within the `db-service` directory of our repository. Please download these files to proceed.
 
 ### Step 2: Deploying the PostgreSQL Database
-To deploy the PostgreSQL database and populate it with the provided sample data, you'll apply a series of Kubernetes deployment files. Ensure you're positioned in the `code-sample` directory and not within the `db` subdirectory for this operation.
+To deploy the PostgreSQL database and populate it with the provided sample data, you'll apply a series of Kubernetes deployment files. Run this command from the `start` directory, which contains `db-service/`.
 
 Within this directory, you will find 6 YAML files, each serving a distinct purpose in the setup process:
 - `100-create-configmap.yaml`: Generates a ConfigMap including the SQL file for database initialization.
 - `100-create-secret.yaml`: Produces a Secret holding the PostgreSQL database password.
-- `100-create-volume.yaml`: Creates both a PersistentVolume and a PersistentVolumeClaim for database storage.
+- `100-create-volume.yaml`: Creates a PersistentVolumeClaim; the cluster must provide a default StorageClass for dynamic provisioning.
 - `200-create-postgre.yaml`: Establishes the StatefulSet for the PostgreSQL database.
-- `300-expose-service.yaml`: Launches a Service to expose the PostgreSQL database externally.
+- `300-expose-service.yaml`: Launches a headless Service for PostgreSQL inside the cluster.
 - `400-create-job.yaml`: Executes a Job that populates the database with the sample data.
 
-Execute the command below to apply all configuration files located in the `db` directory:
+Execute the command below to apply all configuration files located in the `db-service` directory:
 ```bash
-kubectl apply -f db
+kubectl apply -f db-service
 ```
-The filenames prefixed with numbers dictate the application order, ensuring Kubernetes orchestrates the resource setup accordingly.
+Applying the files does not wait for database readiness. The initialization Job may retry while PostgreSQL starts. Wait for the Job to complete before checking the data.
 
 ### Step 3: Confirming the Deployment
 Following the application of the deployment files, initialization of the database may require some time. Monitor the deployment's progress by executing:

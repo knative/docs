@@ -76,7 +76,7 @@ func create -l python bad-word-filter -t cloudevents
 
 ![Image 5](images/image5.png)
 
-`bad-word-filter/function/func.py` is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
+[`bad-word-filter/function/func.py`](https://github.com/knative/docs/blob/main/code-samples/eventing/bookstore-sample-app/solution/bad-word-filter/function/func.py) is the file that contains the code for the function. You can replace the generated code with the bad word filter logic. You can use the following code as a starting point:
 
 ???+ abstract "_bad-word-filter/function/func.py_"
 
@@ -128,7 +128,7 @@ func create -l python bad-word-filter -t cloudevents
 ### **Step 3: Configure the dependencies**
 
 ![Image 8](images/image8.png)
-The content of `bad-word-filter/pyproject.toml`:
+The content of [`bad-word-filter/pyproject.toml`](https://github.com/knative/docs/blob/main/code-samples/eventing/bookstore-sample-app/solution/bad-word-filter/pyproject.toml):
 
 ???+ abstract "_bad-word-filter/pyproject.toml_"
 
