@@ -1,16 +1,10 @@
 defmodule HelloWeb.ErrorView do
   use HelloWeb, :view
 
-  # If you want to customize a particular status code
-  # for a certain format, you may uncomment below.
-  # def render("500.html", _assigns) do
-  #   "Internal Server Error"
-  # end
-
-  # By default, Phoenix returns the status message from
-  # the template name. For example, "404.html" becomes
-  # "Not Found".
-  def template_not_found(template, _assigns) do
-    Phoenix.Controller.status_message_from_template(template)
+  def render(template, _assigns) do
+    case Integer.parse(template) do
+      {status, _format} -> Plug.Conn.Status.reason_phrase(status)
+      :error -> "Internal Server Error"
+    end
   end
 end
