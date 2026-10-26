@@ -23,9 +23,9 @@ spec:
       containers:
       - # This is the Go import path for the binary to containerize
         # and substitute here.
-        image: github.com/knative/docs/code-samples/serving/knative-routing-go
+        image: github.com/knative/docs/code-samples/serving/hello-world/helloworld-go
         env:
-          - name: SERVICE_NAME
+          - name: TARGET
             value: Search Service
         readinessProbe:
           httpGet:
@@ -43,9 +43,9 @@ spec:
       containers:
       - # This is the Go import path for the binary to containerize
         # and substitute here.
-        image: github.com/knative/docs/code-samples/serving/knative-routing-go
+        image: github.com/knative/docs/code-samples/serving/hello-world/helloworld-go
         env:
-          - name: SERVICE_NAME
+          - name: TARGET
             value: Login Service
         readinessProbe:
           httpGet:
