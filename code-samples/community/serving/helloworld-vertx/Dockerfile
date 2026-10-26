@@ -1,7 +1,12 @@
-# Use fabric8's s2i Builder image.
-# https://hub.docker.com/r/fabric8/s2i-java
-FROM fabric8/s2i-java:2.0
+# Build the application without requiring Maven or Java on the host.
+FROM maven:3.9.16-eclipse-temurin-25 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn --batch-mode clean package
 
-# Copy the JAR file to the deployment directory.
-ENV JAVA_APP_DIR=/deployments
-COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
+FROM eclipse-temurin:25-jre
+WORKDIR /app
+COPY --from=build /app/target/helloworld-1.0.0-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

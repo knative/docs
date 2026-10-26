@@ -1,249 +1,124 @@
-# Hello World - Eclipse Vert.x
+# Hello World — Eclipse Vert.x
 
-Learn how to deploy a simple web app that is written in Java and uses Eclipse
-Vert.x. This samples uses Docker to build locally. The app reads in a `TARGET`
-env variable and then prints "Hello World: \${TARGET}!". If a value for `TARGET`
-is not specified, the "NOT SPECIFIED" default value is used.
+Deploy a minimal Java HTTP application to Knative Serving using Eclipse Vert.x
+5.2.2 and Eclipse Temurin Java 21 LTS. Docker supplies Maven 3.9.16, the JDK, and
+all dependencies; no host Java, Maven, or Vert.x installation is required.
 
-Use this sample to walk you through the steps of creating and modifying the
-sample app, building and pushing your container image to a registry, and then
-deploying your app to your Knative cluster.
+## Application behavior
 
-## Before you begin
+- `TARGET` defaults to `NOT SPECIFIED` when unset. An explicitly empty value stays
+  empty.
+- `PORT` defaults to `8080`; Knative supplies it automatically. A custom port must
+  be an integer from 1 to 65535. Invalid or empty values fail at startup.
+- Requests on any path return HTTP 200 and `Content-Type: text/plain`. The exact
+  body is `Hello World: ${TARGET}`, without an exclamation mark or trailing
+  newline. HTTP/1.1 GET and POST responses are chunked; HEAD has no body.
 
-You must meet the following requirements to complete this sample:
+The [Java source](src/main/java/com/example/helloworld/HelloWorld.java) uses the
+Vert.x core asynchronous HTTP API directly. The [POM](pom.xml) builds an
+executable shaded JAR. The
+[Dockerfile](Dockerfile) builds in a JDK stage, then copies only the
+application JAR into a public Temurin JRE image.
 
-- A version of the Knative Serving component installed and running on your
-  Kubernetes cluster. Follow the
-  [Knative installation instructions](https://knative.dev/docs/install/) if you need to
-  create a Knative cluster.
-- The following software downloaded and install on your loacal machine:
-  - [Java SE 8 or later JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
-  - [Eclipse Vert.x v3.5.4](https://vertx.io/).
-  - [Docker](https://www.docker.com) for building and pushing your container
-    image.
-  - [curl](https://curl.haxx.se/) to test the sample app after deployment.
-- A [Docker Hub](https://hub.docker.com/) account where you can push your
-  container image.
+## Prerequisites
 
-**Tip**: You can clone the [Knative/docs repo](https://github.com/knative/docs)
-and then modify the source files. Alternatively, learn more by manually creating
-the files yourself.
+- Docker for building and running the container.
+- curl for HTTP checks.
+- For cluster deployment: a working Kubernetes cluster with
+  [Knative Serving installed](https://knative.dev/docs/install/), kubectl, and
+  permission to push an image to a registry your cluster can access.
 
-## Creating and configuring the sample code
+Clone the [Knative docs repository](https://github.com/knative/docs), then run all
+commands below from `code-samples/community/serving/helloworld-vertx`.
 
-To create and configure the source files in the root of your working directory:
+## Build and run locally
 
-1. Create the `pom.xml` file:
+Build the final image:
 
-   ```xml
-   <project xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                     http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>com.example.vertx</groupId>
-   <artifactId>helloworld</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
+```bash
+docker build -t helloworld-vertx:local .
+```
 
-   <dependencies>
-       <dependency>
-           <groupId>io.vertx</groupId>
-           <artifactId>vertx-core</artifactId>
-           <version>${version.vertx}</version>
-       </dependency>
-       <dependency>
-           <groupId>io.vertx</groupId>
-           <artifactId>vertx-rx-java2</artifactId>
-           <version>${version.vertx}</version>
-       </dependency>
-   </dependencies>
+Start the image with default settings:
 
-   <build>
-       <plugins>
-           <plugin>
-               <artifactId>maven-compiler-plugin</artifactId>
-               <version>3.8.0</version>
-               <configuration>
-                   <source>1.8</source>
-                   <target>1.8</target>
-               </configuration>
-           </plugin>
-           <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-shade-plugin</artifactId>
-               <version>3.2.0</version>
-               <executions>
-                   <execution>
-                       <phase>package</phase>
-                       <goals>
-                           <goal>shade</goal>
-                       </goals>
-                       <configuration>
-                           <transformers>
-                               <transformer
-                                       implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                   <manifestEntries>
-                                       <Main-Class>io.vertx.core.Launcher</Main-Class>
-                                       <Main-Verticle>com.example.helloworld.HelloWorld</Main-Verticle>
-                                   </manifestEntries>
-                               </transformer>
-                           </transformers>
-                           <artifactSet/>
-                       </configuration>
-                   </execution>
-               </executions>
-           </plugin>
+```bash
+docker run --rm --name helloworld-vertx -p 8080:8080 helloworld-vertx:local
+```
 
-       </plugins>
-   </build>
-   <properties>
-       <version.vertx>3.5.4</version.vertx>
-   </properties>
-   </project>
-   ```
+In another terminal:
 
-1. Create the `HelloWorld.java` file in the
-   `src/main/java/com/example/helloworld` directory. The
-   `[ROOT]/src/main/java/com/example/helloworld/HelloWorld.java` file creates a
-   basic web server that listens on port `8080`.
+```bash
+curl --fail --include http://localhost:8080/
+# HTTP 200, Content-Type: text/plain
+# Body: Hello World: NOT SPECIFIED
 
-   ```java
-    package com.example.helloworld;
+docker stop helloworld-vertx
+```
 
-    import io.reactivex.Flowable;
-    import io.vertx.reactivex.core.AbstractVerticle;
-    import io.vertx.reactivex.core.http.HttpServer;
-    import io.vertx.reactivex.core.http.HttpServerRequest;
+Test both a custom port and a custom greeting:
 
-    public class HelloWorld extends AbstractVerticle {
+```bash
+docker run --rm --name helloworld-vertx -p 9090:9090 \
+  -e PORT=9090 -e 'TARGET=Eclipse Vert.x Sample v1' helloworld-vertx:local
+```
 
-        public void start() {
+In another terminal:
 
-            final HttpServer server = vertx.createHttpServer();
-            final Flowable<HttpServerRequest> requestFlowable = server.requestStream().toFlowable();
+```bash
+curl --fail http://localhost:9090/
+# Exact body: Hello World: Eclipse Vert.x Sample v1
 
-            requestFlowable.subscribe(httpServerRequest -> {
+docker stop helloworld-vertx
+```
 
-                String target = System.getenv("TARGET");
-                if (target == null) {
-                    target = "NOT SPECIFIED";
-                }
+## Publish and deploy to Knative
 
-                httpServerRequest.response().setChunked(true)
-                        .putHeader("content-type", "text/plain")
-                        .setStatusCode(200) // OK
-                        .end("Hello World: " + target);
-            });
+Replace `{username}` in these commands and in [service.yaml](service.yaml) with
+your registry username. Build for your cluster's CPU architecture; Docker builds
+for the local architecture by default. Use an explicit image tag in both places.
 
-            server.listen(8080);
-        }
-    }
-   ```
+```bash
+docker build -t docker.io/{username}/helloworld-vertx .
+docker push docker.io/{username}/helloworld-vertx
+```
 
-1. Create the `Dockerfile` file:
+The checked-in Service uses `TARGET=Eclipse Vert.x Sample v1`. Do not override
+`PORT` in its environment unless you also configure the corresponding container
+port in the Knative Service. Knative's default is 8080. For a custom Knative
+port, use a non-reserved port such as 8081; 9090 and 9091 are reserved by
+Knative even though they work for standalone Docker containers.
 
-   ```docker
-   # Use fabric8's s2i Builder image.
-   # https://hub.docker.com/r/fabric8/s2i-java
-   FROM fabric8/s2i-java:2.0
+```bash
+kubectl apply --filename service.yaml
+kubectl wait --for=condition=Ready ksvc/helloworld-vertx --timeout=180s
+kubectl get ksvc helloworld-vertx \
+  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+```
 
-   # Copy the JAR file to the deployment directory.
-   ENV JAVA_APP_DIR=/deployments
-   COPY target/helloworld-1.0.0-SNAPSHOT.jar /deployments/
-   ```
+Request the returned URL:
 
-1. Create the `service.yaml` file. You must specify your Docker Hub username in
-   `{username}`. You can also configure the `TARGET`, for example you can modify
-   the `Eclipse Vert.x Sample v1` value.
+```bash
+curl --fail "$(kubectl get ksvc helloworld-vertx -o jsonpath='{.status.url}')"
+# Exact body: Hello World: Eclipse Vert.x Sample v1
+```
 
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-vertx
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-vertx
-             env:
-               - name: TARGET
-                 value: "Eclipse Vert.x Sample v1"
-   ```
+To change the greeting, edit `TARGET` in `service.yaml` and apply it again. Knative
+creates an immutable revision and routes traffic to it when ready. Serving also
+supports scaling this application down to zero and reactivating it on demand.
 
-## Building and deploying the sample
-
-To build a container image, push your image to the registry, and then deploy
-your sample app to your cluster:
-
-1. Use Docker to build your container image and then push that image to your
-   Docker Hub registry. You must replace the `{username}` variables in the
-   following commands with your Docker Hub username.
-
-   ```bash
-   # Build and push the container on your local machine.
-   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-vertx" --push .
-   ```
-
-1. Now that your container image is in the registry, you can deploy it to your
-   Knative cluster by running the `kubectl apply` command:
-
-   ```bash
-   kubectl apply --filename service.yaml
-   ```
-
-   Result: A service name `helloworld-vertx` is created in your cluster along
-   with the following resources:
-
-   - A new immutable revision for the version of the app that you just deployed.
-   - The following networking resources are created for your app:
-     - route
-     - ingress
-     - service
-     - load balancer
-   - Auto scaling is enable to allow your pods to scale up to meet traffic, and
-     also back down to zero when there is no traffic.
-
-## Testing the sample app
-
-To verify that your sample app has been successfully deployed:
-
-1. Retrieve the URL for your service, by running the following `kubectl get`
-   command:
-
-   ```bash
-   kubectl get ksvc helloworld-vertx  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   ```
-
-   Example result:
-
-   ```bash
-   NAME                URL
-   helloworld-vertx    http://helloworld-vertx.default.1.2.3.4.sslip.io
-   ```
-
-1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
-
-   ```bash
-   curl http://helloworld-vertx.default.1.2.3.4.sslip.io
-   ```
-
-   Example result:
-
-   ```bash
-    Hello World: Eclipse Vert.x Sample v1
-   ```
-
-Congratulations on deploying your sample Java app to Knative!
-
-## Removing the sample app deployment
-
-To remove the sample app from your cluster, run the following `kubectl delete`
-command:
+## Clean up
 
 ```bash
 kubectl delete --filename service.yaml
 ```
+
+## Version and support references
+
+- [Vert.x 5.2.2 source and release](https://github.com/eclipse-vertx/vert.x/tree/5.2.2)
+  and [published versions](https://repo.maven.apache.org/maven2/io/vertx/vertx-core/maven-metadata.xml).
+- [OpenJDK 21 LTS](https://openjdk.org/projects/jdk/21/) and public
+  [Eclipse Temurin container images](https://github.com/adoptium/containers).
+- [Apache Maven release/support history](https://maven.apache.org/docs/history.html).
+
+These are public open-source toolchains; no commercial JDK subscription is
+required. Java 21 is used consistently for compilation, testing, and runtime.
