@@ -12,19 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build-env
 WORKDIR /app
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and build
+COPY CloudEventsSample.csproj packages.lock.json ./
+RUN dotnet restore CloudEventsSample.csproj --locked-mode
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish CloudEventsSample.csproj --no-restore -c Release -o /out
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build-env /out .
+ENV ASPNETCORE_HTTP_PORTS=8080
+EXPOSE 8080
+USER $APP_UID
 ENTRYPOINT ["dotnet", "CloudEventsSample.dll"]

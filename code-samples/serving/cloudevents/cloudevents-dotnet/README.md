@@ -1,4 +1,4 @@
-# Cloud Events - .NET Core
+# Cloud Events - .NET
 
 A simple web app written in ASP.NET and C# that can receive and send Cloud Events that you
 can use for testing. It supports running in two modes:
@@ -12,12 +12,16 @@ can use for testing. It supports running in two modes:
    send to a Service or Broker when not initiated by a Broker invocation (e.g.
    implementing an event source)
 
-The application will use `$K_SINK`-mode whenever the environment variable is
-specified.
+The application uses `$K_SINK` mode when the environment variable is nonempty.
+An absent or empty `K_SINK` selects reply mode.
 
-Do the following the steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+This sample targets **.NET 10 LTS** and **CloudNative.CloudEvents 2.9.0**, using
+the SDK's System.Text.Json formatter for both binary and structured CloudEvents
+v1.0. See the [.NET support policy](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)
+and [CloudEvents .NET SDK](https://github.com/cloudevents/sdk-csharp).
+
+Clone the checked-in sample and use its existing source and deployment files:
+
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -33,23 +37,23 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-dotnet
 
 ## The sample code
 
-1. If you look in `controllers\CloudEventsController.cs`, you will see two key functions for the
+1. In [`Controllers/CloudEventsController.cs`](Controllers/CloudEventsController.cs), you will see two key functions for the
    different modes of operation:
 
    ```csharp
-   private async Task<IActionResult> ReceiveAndSend(CloudEvent receivedEvent) {
+   private async Task<IActionResult> ReceiveAndSend(CloudEvent response) {
      // This is called whenever an event is received if $K_SINK is set, and sends a new event
      // to the url in $K_SINK.
    }
 
-   private IActionResult ReceiveAndReply(CloudEvent receivedEvent) {
+   private IActionResult ReceiveAndReply(CloudEvent response) {
      // This is called whenever an event is received if $K_SINK is NOT set, and it replies with
      // the new event instead.
    }
    ```
 
-1. If you look in `Dockerfile`, you will see a method for pulling in the
-   dependencies and building an ASP.NET container based on Alpine. You can build
+1. The [`Dockerfile`](Dockerfile) pulls in the
+   dependencies and builds an ASP.NET container based on Alpine. You can build
    and push this to your registry of choice via:
 
    ```bash
@@ -57,12 +61,47 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-dotnet
    docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
    ```
 
-1. If you look in `service.yaml`, take the `<image>` name and insert it
+1. In the checked-in [`service.yaml`](service.yaml), take the `<image>` name and insert it
    into the `image:` field.
 
    ```bash
    kubectl apply -f service.yaml
    ```
+
+The official .NET 10 Alpine images support both arm64 and amd64. The runtime
+image runs as the built-in non-root application user.
+
+## Testing locally with Docker
+
+Build and run without pushing an image or using a cluster:
+
+```bash
+docker buildx build --load -t cloudevents-dotnet .
+docker run --rm -p 8080:8080 cloudevents-dotnet
+```
+
+Send the request below to `http://localhost:8080`. The response is a structured
+CloudEvent whose `data.message` is `Hello, Dave`. Structured JSON requests using
+`Content-Type: application/cloudevents+json` are also supported.
+
+The image listens on port **8080** by default. Set `ASPNETCORE_URLS` to change
+the listening address (for example `-e ASPNETCORE_URLS=http://+:8091` with
+`-p 8091:8091`); this app does not read `PORT`. The service manifest explicitly
+sets `ASPNETCORE_URLS=http://*:8080`.
+
+To test forwarding, additionally set `-e K_SINK=http://<reachable-host>:<port>`
+to a receiver reachable from the container. The receiver gets a structured
+CloudEvent; the app returns the receiver's status and body rather than the event,
+including non-success statuses. Connection failures return HTTP 502; a sink
+request exceeding the 10-second timeout returns HTTP 504.
+
+Requests to `/` must be valid CloudEvents with JSON object data and a nonempty
+string `name`. Malformed JSON, missing required event attributes, or missing or
+invalid `name` return HTTP 400. `POST /echo` returns the original event as a
+structured CloudEvent, retaining its ID, type, source, and data.
+
+Dependency versions are recorded in the application's
+[`packages.lock.json`](packages.lock.json); production builds restore in locked mode.
 
 ## Testing the sample
 
