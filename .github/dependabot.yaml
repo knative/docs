@@ -9,6 +9,11 @@ updates:
     github-actions:
       patterns:
         - "*"
+- package-ecosystem: "docker"
+  directories:
+    - "/code-samples/**/*"
+  schedule:
+    interval: "monthly"
 - package-ecosystem: "gomod"
   directory: "/"
   schedule:

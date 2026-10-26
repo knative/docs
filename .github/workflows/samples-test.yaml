@@ -1,0 +1,90 @@
+name: samples-test
+on:
+  pull_request:
+    paths: ['code-samples/**', '.github/workflows/samples-test.yaml']
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      directories: ${{ steps.samples.outputs.directories }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - id: samples
+        name: Find changed sample directories
+        run: |
+          git diff --name-only --no-renames -z "${{ github.event.pull_request.base.sha }}"...HEAD -- code-samples/ > "$RUNNER_TEMP/changed-samples"
+          directories=()
+          while IFS= read -r -d '' path; do
+            directory=${path%/*}
+            while [[ "$directory" == code-samples/* && ! -f "$directory/ci.sh" ]]; do
+              directory=${directory%/*}
+            done
+            if [[ "$directory" == code-samples/* && -f "$directory/ci.sh" ]]; then
+              directories+=("$directory")
+            else
+              printf '%s\n' "NOT TESTED (no ci.sh): $path" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done < "$RUNNER_TEMP/changed-samples"
+          collisions=$(find code-samples -type f -name ci.sh -print0 |
+            jq -Rs 'split("\u0000")[:-1] | map(split("/")[-2]) | group_by(.) | map(select(length > 1) | .[0])')
+          echo "directories=$(jq -cn --argjson collisions "$collisions" --args '
+            $ARGS.positional | unique | map(split("/") as $path |
+              {directory: ., name: (if $collisions | index($path[-1])
+                then $path[1] + "/" + $path[-1] else $path[-1] end)})' "${directories[@]}")" >> "$GITHUB_OUTPUT"
+
+  test:
+    name: ${{ matrix.name }}
+    needs: discover
+    if: needs.discover.outputs.directories != '[]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.discover.outputs.directories) }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: chainguard-dev/actions/setup-kind@8f31e9482b447ff2c69eca944a09b4b31a4a85d0
+        with:
+          k8s-version: 1.36.x
+      - name: Install latest Knative Serving YAMLs
+        run: |
+          kubectl apply -f https://github.com/knative/serving/releases/latest/download/serving-crds.yaml
+          kubectl apply -f https://github.com/knative/serving/releases/latest/download/serving-core.yaml
+          kubectl apply -f https://github.com/knative-extensions/net-kourier/releases/latest/download/kourier.yaml
+          kubectl patch cm config-network -n knative-serving --type merge -p '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
+          kubectl patch cm config-domain -n knative-serving --type merge -p '{"data":{"example.test":""}}'
+          kubectl wait deployment --all -n knative-serving --for=condition=Available --timeout=300s
+          kubectl wait deployment --all -n kourier-system --for=condition=Available --timeout=300s
+      - name: Test
+        working-directory: ${{ matrix.directory }}
+        run: |
+          kubectl -n kourier-system port-forward service/kourier 18080:80 &
+          forward=$!
+          trap 'kill "$forward" 2>/dev/null || true' EXIT
+          for _attempt in {1..30}; do
+            (true > /dev/tcp/127.0.0.1/18080) 2>/dev/null && break
+            sleep 1
+          done
+          (true > /dev/tcp/127.0.0.1/18080) 2>/dev/null
+          source ./ci.sh
+          main
+      - name: Failure diagnostics
+        if: failure()
+        run: |
+          kubectl get ksvc,revisions,pods -A -o wide || true
+          kubectl get events -A --sort-by=.metadata.creationTimestamp || true
+          kubectl -n default logs --all-containers -l serving.knative.dev/service --tail=100 || true
+      - name: Delete disposable cluster
+        if: always()
+        run: kind delete cluster
