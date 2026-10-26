@@ -11,8 +11,8 @@ You will need:
 
 1. An internet-accessible Kubernetes cluster with [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml) installed.
 1. Ensure Knative Serving is [configured with a domain name](https://knative.dev/docs/serving/using-a-custom-domain).
-1. You must ensure that your Knative cluster uses a static IP address refer to your provider's documentation.
-   that allows GitLab to call into the cluster.
+1. Ensure that your Knative cluster has a stable, externally reachable address
+   that allows GitLab to call into the cluster. Refer to your provider's documentation.
 1. Install [Knative Eventing](https://knative.dev/docs/install/eventing/install-eventing-with-yaml).
 
 ### Install GitLab Event Source
@@ -24,10 +24,11 @@ artifact and replace the `<RELEASE>` with version tag:
 kubectl apply -f https://github.com/knative-extensions/eventing-gitlab/releases/download/<RELEASE>/gitlab.yaml
 ```
 
-Check that the manager is running:
+Wait for the controller and webhook to be ready:
 
 ```bash
-kubectl -n knative-sources get pods --selector control-plane=gitlab-controller-manager
+kubectl -n knative-sources rollout status deployment/gitlab-controller-manager
+kubectl -n knative-sources rollout status deployment/gitlab-webhook
 ```
 
 With the controller running you can now move on to a user persona and setup a
@@ -50,10 +51,14 @@ We will:
 
 ### Create a Knative Service
 
-The `event-display.yaml` file defines the basic service which will
-receive events from the GitLab source:
+Clone this repository and run the commands below from
+`code-samples/eventing/gitlab-source`.
 
-```yaml
+Create a Knative Service which receives events from the GitLab source and
+prints them to stdout:
+
+```bash
+kubectl -n default apply -f - <<'EOF'
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -63,12 +68,8 @@ spec:
     spec:
       containers:
         - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-```
-
-Create the service:
-
-```bash
-kubectl -n default apply -f event-display.yaml
+EOF
+kubectl -n default wait --for=condition=Ready kservice/gitlab-event-display --timeout=120s
 ```
 
 ### Create GitLab Tokens
@@ -80,9 +81,10 @@ kubectl -n default apply -f event-display.yaml
    webhooks. Also decide on a secret token that your source will use to
    authenticate the incoming webhooks from GitLab.
 
-1. Update the secret values in `secret.yaml` as follows:
+1. Replace the placeholder values in the Secret below.
+   Keep real tokens out of version control:
 
-   `accessToken` is the personal access token created in step 1 and
+   `accessToken` is the project access token created in step 1 and
    `secretToken` is any token of your choosing.
 
    Tip: you can generate a random _secretToken_ by running the command:
@@ -91,35 +93,35 @@ kubectl -n default apply -f event-display.yaml
    head -c 8 /dev/urandom | base64
    ```
 
-   `secret.yaml`:
+1. Create the secret using `kubectl`.
 
-   ```yaml
+   ```bash
+   kubectl -n default apply -f - <<'EOF'
    apiVersion: v1
    kind: Secret
    metadata:
      name: gitlabsecret
    type: Opaque
    stringData:
-     accessToken: <personal_access_token_value>
+     accessToken: <project_access_token_value>
      secretToken: <random_string>
-   ```
-
-1. Create the secret using `kubectl`.
-
-   ```bash
-   kubectl -n default apply -f secret.yaml
+   EOF
    ```
 
 ### Create Event Source for GitLab Events
 
 1. In order to receive GitLab events, you have to create a concrete Event Source
    for a specific namespace. Replace the `projectUrl` value in the
-   `gitlabsource.yaml` file with your GitLab project URL, for example
+   following manifest with your GitLab project URL, for example
    `https://gitlab.com/knative-examples/functions`.
 
-   `gitlabsource.yaml`:
+   The manifest subscribes to push and issue events, reads both tokens from
+   `gitlabsecret`, and sends CloudEvents to `gitlab-event-display`.
 
-   ```yaml
+1. Apply the edited manifest using `kubectl`:
+
+   ```bash
+   kubectl -n default apply -f - <<'EOF'
    apiVersion: sources.knative.dev/v1alpha1
    kind: GitLabSource
    metadata:
@@ -142,12 +144,8 @@ kubectl -n default apply -f event-display.yaml
          apiVersion: serving.knative.dev/v1
          kind: Service
          name: gitlab-event-display
-   ```
-
-1. Apply the yaml file using `kubectl`:
-
-   ```bash
-   kubectl -n default apply -f gitlabsource.yaml
+   EOF
+   kubectl -n default wait --for=condition=Ready gitlabsource/gitlabsource-sample --timeout=120s
    ```
 
 ### Verify
@@ -157,14 +155,21 @@ Verify that GitLab webhook was created by looking at the list of webhooks under
 that points to your Knative cluster.
 
 Create a push event and check the logs of the Pod backing the
-`gitlab-event-display` knative service. You will see the event:
+`gitlab-event-display` Knative service:
+
+```bash
+kubectl -n default logs -l serving.knative.dev/service=gitlab-event-display -c user-container --tail=100
+```
+
+With current GitLab source releases, you will see a CloudEvent similar to the
+following (the ID, timestamp, source, and payload will vary). Older releases may
+emit CloudEvents 0.3 with type `dev.knative.sources.gitlabsource.Push Hook`.
 
 ```
 ☁️  cloudevents.Event
-Validation: valid
 Context Attributes,
-  specversion: 0.3
-  type: dev.knative.sources.gitlabsource.Push Hook
+  specversion: 1.0
+  type: dev.knative.sources.gitlab.push
   source: https://gitlab.com/<user>/<project>
   id: f83c080f-c2af-48ff-8d8b-fd5b21c5938e
   time: 2020-03-12T11:08:41.414572482Z
@@ -180,13 +185,13 @@ Data,
 You can remove the GitLab webhook by deleting the GitLab source:
 
 ```bash
-kubectl --namespace default delete --filename gitlabsource.yaml
+kubectl --namespace default delete gitlabsource gitlabsource-sample
 ```
 
 Similarly, you can remove the Service and Secret via:
 
 ```bash
-kubectl --namespace default delete --filename event-display.yaml
-kubectl --namespace default delete --filename secret.yaml
+kubectl --namespace default delete kservice gitlab-event-display
+kubectl --namespace default delete secret gitlabsecret
 
 ```
