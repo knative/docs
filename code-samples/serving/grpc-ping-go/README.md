@@ -3,7 +3,9 @@
 A [gRPC](https://grpc.io) server written in Go.
 
 This sample can be used to try out gRPC, HTTP/2, and custom port configuration
-in a knative service.
+in a Knative Service. The server listens on `PORT` (default `8080`) and uses
+plaintext HTTP/2 (h2c). Knative sets `PORT` from the configured `containerPort`;
+keep the port name `h2c` when choosing a custom port.
 
 The container image is built with two binaries: the server and the client.
 This is done for ease of testing and is not a recommended practice
@@ -36,26 +38,9 @@ for production containers.
   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/grpc-ping-go" --push .
   ```
 
-3. Update the `service.yaml` file in the project to reference the published image from step 1.
-
-   Replace `{username}` in `service.yaml` with your Docker Hub user name:
-
-
-  ```yaml
-  apiVersion: serving.knative.dev/v1
-  kind: Service
-  metadata:
-    name: grpc-ping
-    namespace: default
-  spec:
-    template:
-      spec:
-        containers:
-        - image: docker.io/{username}/grpc-ping-go
-          ports:
-            - name: h2c
-              containerPort: 8080
-  ```
+3. Update the checked-in [service.yaml](service.yaml) to reference the published
+   image from step 2 by replacing `{username}` with your Docker Hub user name.
+   Keep its `h2c` port name so Knative forwards plaintext HTTP/2 to the server.
 
 4. Use `kubectl` to deploy the service.
 
@@ -96,7 +81,12 @@ The Dockerfile builds the client binary. To run the client you will use the
 same container image deployed for the server with an override to the
 entrypoint command to use the client binary instead of the server binary.
 
-Replace `{username}` with your Docker Hub user name and run the command:
+Get the service URL with `kubectl get ksvc grpc-ping -o jsonpath='{.status.url}'`.
+Replace the example hostname below with that URL's hostname and `{username}`
+with your Docker Hub user name. For an HTTP endpoint, use port `80` and
+`-insecure` (plaintext HTTP/2, not disabled certificate verification). For an
+HTTPS endpoint, use port `443` and omit `-insecure` to enable TLS with certificate
+verification.
 
 ```bash
 docker run --rm {username}/grpc-ping-go \
@@ -106,4 +96,25 @@ docker run --rm {username}/grpc-ping-go \
 ```
 
 The arguments after the container tag `{username}/grpc-ping-go` are used
-instead of the entrypoint command defined in the Dockerfile `CMD` statement.
+instead of the default command defined in the Dockerfile `CMD` statement.
+
+A successful run logs `Ping got hello - pong`, followed by 20 `Got pong ...`
+responses from the bidirectional streaming RPC.
+
+### Local build
+
+No cluster or registry push is needed for a local smoke test:
+
+```bash
+docker build -t grpc-ping-go:local .
+docker run -d --name grpc-ping-local grpc-ping-go:local
+docker run --rm --network container:grpc-ping-local grpc-ping-go:local /client -insecure
+docker rm -f grpc-ping-local
+```
+
+To test a custom port locally, add `-e PORT=8081` to the server's `docker run`
+command and `-server_addr=127.0.0.1:8081` to the client command.
+For a Knative deployment, set `containerPort: 8081` in `service.yaml` instead;
+Knative supplies `PORT` automatically.
+
+The source files use the `grpcping` build tag, which the Dockerfile supplies.
