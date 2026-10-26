@@ -11,22 +11,26 @@ spec:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: even-filter
+        name: parallel-helpers
+      uri: /filter/even
     subscriber:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: even-transformer
+        name: parallel-helpers
+      uri: /transform/even
   - filter:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: odd-filter
+        name: parallel-helpers
+      uri: /filter/odd
     subscriber:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: odd-transformer
+        name: parallel-helpers
+      uri: /transform/odd
   reply:
     ref:
       apiVersion: serving.knative.dev/v1
