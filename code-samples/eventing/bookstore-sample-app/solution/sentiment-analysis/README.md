@@ -28,7 +28,7 @@ For development environments where Python is installed, it's suggested to use
 the `host` builder as follows:
 
 ```bash
-# Run function on the host (outsdie of a container)
+# Run function on the host (outside of a container)
 func run --builder=host
 ```
 

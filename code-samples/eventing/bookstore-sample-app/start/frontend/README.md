@@ -38,7 +38,7 @@ This repository contains a Next.js application that utilizes next-themes and Tai
 ## Dockerization Steps
 
 1. Clone this repository to your local machine.
-2. Navigate to the root directory of the cloned repository.
+2. Navigate to this `frontend` directory (the Docker build context).
 
 ### Building the Docker Image
 
@@ -50,8 +50,8 @@ docker build -t frontend .
 
 ## Running the Docker Container
 
-Once the image is built, you can run a container using the following command:
+Run the container and open http://localhost:3000:
 
 ```bash
-docker run -d -p 3000:3000 frontend
+docker run -d -p 3000:8080 frontend
 ```

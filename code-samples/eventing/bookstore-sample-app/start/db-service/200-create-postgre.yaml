@@ -13,6 +13,8 @@ spec:
       labels:
         app: postgresql
     spec:
+      securityContext:
+        fsGroup: 26 # The image runs as the non-root postgres user (UID/GID 26).
       containers:
         - name: postgresql
           image: quay.io/enterprisedb/postgresql

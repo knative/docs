@@ -1,5 +1,5 @@
 import logging
-from cloudevents.http import CloudEvent
+from cloudevents.core.v1.event import CloudEvent
 from textblob import TextBlob
 import textblob
 
@@ -16,10 +16,10 @@ class Function:
         request_event = scope["event"]
 
         # 2. Extract the data payload from the event, analyze and create CloudEvent
-        response_event = self.analyze_sentiment(request_event.data)
+        response_event = self.analyze_sentiment(request_event.get_data())
 
         # 3. Send the response
-        logging.info(f"Sending response: {response_event.data}")
+        logging.info(f"Sending response: {response_event.get_data()}")
         await send(response_event)
 
     def create_cloud_event(self, inputText, badWordResult, data):
@@ -27,7 +27,6 @@ class Function:
             "type": "moderated-comment",
             "source": "sentiment-analysis",
             "datacontenttype": "application/json",
-            "sentimentResult": data,
             "badwordfilter": badWordResult,
         }
 

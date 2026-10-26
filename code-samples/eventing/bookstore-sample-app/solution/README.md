@@ -13,7 +13,7 @@ Here's an overview of the components in the solution:
 - `db-service/`: Database service for storing book reviews and comments
 - `frontend/`: User interface for the bookstore application built with Next.js
 - `node-server/`: Node.js server for handling backend operations
-- `sentiment-analysis-app/`: Knative Function for analyzing the sentiment of book reviews
+- `sentiment-analysis/`: Knative Function for analyzing the sentiment of book reviews
 - `sequence/`: Knative Sequence setup for orchestrating workflows
 - `slack-sink/`: Integration with Slack for notifications with Apache Camel
 

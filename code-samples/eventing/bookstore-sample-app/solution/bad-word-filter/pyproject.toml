@@ -6,11 +6,8 @@ requires-python = ">=3.9"
 readme = "README.md"
 license = "MIT"
 dependencies = [
-  "httpx",
-  "cloudevents",
-  "pytest",
-  "pytest-asyncio",
-  "textblob",
+  "cloudevents>=2.2,<3",
+  "alt-profanity-check==1.4.1.post1"
 ]
 authors = [
   { name="Your Name", email="you@example.com"},
@@ -19,9 +16,5 @@ authors = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.pytest.ini_options]
-asyncio_mode = "strict"
-asyncio_default_fixture_loop_scope = "function"
 
 
