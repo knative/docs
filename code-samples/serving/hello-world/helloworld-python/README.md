@@ -5,7 +5,11 @@ app and deploy it to your cluster.
 
 The sample app reads a `TARGET` environment variable, and prints
 `Hello ${TARGET}!`. If `TARGET` is not specified, `World` is used as the default
-value.
+value. The production container uses Gunicorn and listens on `0.0.0.0:$PORT`;
+`PORT` defaults to `8080` locally and is supplied by Knative in the cluster.
+An explicitly empty `TARGET` produces `Hello !`.
+
+This sample uses Python 3.14, Flask and Gunicorn.
 
 You can also download a working copy of the sample, by running the following
 commands:
@@ -28,82 +32,43 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
 
 ## Build
 
-1. Create a new directory and cd into it:
+1. Use the cloned sample directory from the commands above. The checked-in
+   files provide the application and build:
 
-   ```bash
-   mkdir app
-   cd app
-   ```
+   - [app.py](app.py) defines the greeting and the development entrypoint.
+   - [requirements.txt](requirements.txt) pins the dependencies used by the image build.
+   - [Dockerfile](Dockerfile) uses the official supported Python image and starts
+     Gunicorn with one worker and eight threads, listening on `0.0.0.0:$PORT`.
 
-2. Create a file named `app.py` and copy the following code block into it:
-
-   ```python
-   import os
-
-   from flask import Flask
-
-   app = Flask(__name__)
-
-   @app.route('/')
-   def hello_world():
-      target = os.environ.get('TARGET', 'World')
-      return 'Hello {}!\n'.format(target)
-
-   if __name__ == "__main__":
-      app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
-
-   ```
-
-3. In your project directory, create a file named `Dockerfile` and copy the following code
-   block into it. See
-   [official Python docker image](https://hub.docker.com/_/python/) for more
-   details.
-
-    ```dockerfile
-    # Use the official lightweight Python image.
-    # https://hub.docker.com/_/python
-    FROM python:3.7-slim
-
-    # Allow statements and log messages to immediately appear in the Knative logs
-    ENV PYTHONUNBUFFERED True
-
-    # Copy local code to the container image.
-    ENV APP_HOME /app
-    WORKDIR $APP_HOME
-    COPY . ./
-
-    # Install production dependencies.
-    RUN pip install Flask gunicorn
-
-    # Run the web service on container startup. Here we use the gunicorn
-    # webserver, with one worker process and 8 threads.
-    # For environments with multiple CPU cores, increase the number of workers
-    # to be equal to the cores available.
-    CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
-    ```
-
-4. Create a `.dockerignore` file to ensure that any files related to a local
-   build do not affect the container that you build for deployment.
-
-   ```ignore
-   Dockerfile
-   README.md
-   *.pyc
-   *.pyo
-   *.pyd
-   __pycache__
-   ```
-
-  **NOTE:** Use Docker to build the sample code into a container. To build and
-  push to Docker Hub or container registry of your choice, run these commands replacing `{username}` with your Docker Hub username or the URL of the container registry.
-
-5. Use Docker to build the sample code into a container, then push the container
-   to the Docker registry:
+2. Build and push the container to Docker Hub or your registry of choice.
+   Replace `{username}` with your Docker Hub username or registry URL:
 
    ```bash
    # Build and push the container on your local machine.
    docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-python" --push .
    ```
+
+## Local testing
+
+Build a local single-platform image (no registry push needed):
+
+```bash
+docker build -t helloworld-python:local .
+docker run --rm -p 127.0.0.1:8080:8080 helloworld-python:local
+```
+
+In another terminal, `curl http://localhost:8080/` should print `Hello World!`.
+Stop the container with Ctrl+C. To test a custom port and greeting:
+
+```bash
+docker run --rm -e PORT=9090 -e TARGET="Python Sample v1" \
+  -p 127.0.0.1:9090:9090 helloworld-python:local
+```
+
+`curl http://localhost:9090/` should print `Hello Python Sample v1!`.
+Stop this container with Ctrl+C before continuing. The container always uses
+Gunicorn; running `python app.py` directly is only for local development and does
+not enable Flask's debugger by default.
 
 ## Deploying the app
 
@@ -113,28 +78,11 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-python
 
 ### yaml
 
- 1. Create a new file, `service.yaml` and copy the following service
-    definition into the file. Make sure to replace `{username}` with your
-    Docker Hub username or with the URL provided by your container registry
+ 1. Open the checked-in [service.yaml](service.yaml). It defines a Knative
+    Service in the `default` namespace with `TARGET="Python Sample v1"`.
+    Replace the placeholder image with the image you built and pushed above.
 
-  ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: helloworld-python
-      namespace: default
-    spec:
-      template:
-        spec:
-          containers:
-            - image: docker.io/{username}/helloworld-python
-              env:
-                - name: TARGET
-                  value: "Python Sample v1"
-  ```
-
- 1. Ensure that the container image value in `service.yaml` matches the container
- you built in the previous step. Apply the configuration using `kubectl`:
+ 2. Apply that configuration using `kubectl`:
 
  ```bash
  kubectl apply --filename service.yaml
