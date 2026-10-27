@@ -1,4 +1,4 @@
-"""Fresh-process MkDocs worker for the development build graph (not dirty reload)."""
+"""Render a preview in a fresh process, optionally reusing complete release pages."""
 
 import json
 import logging

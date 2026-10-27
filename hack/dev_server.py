@@ -1,4 +1,4 @@
-"""Development-only build DAG and live server; MkDocs remains the renderer."""
+"""Incremental preview server; render in a worker, then publish completed output."""
 
 import argparse
 from functools import partial
@@ -24,7 +24,7 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers.polling import PollingObserver
 
 from preview_cache import signature
-from preview_graph import BuildGraph
+from preview_inputs import PreviewInputs
 
 ROOT = Path(__file__).resolve().parent.parent
 log = logging.getLogger("preview")
@@ -187,8 +187,9 @@ def link_or_copy(source, destination):
 
 
 class Builder:
-    def __init__(self, state, graph, config_file, url, strict=False, log_level=logging.INFO):
-        self.state, self.graph = state, graph
+    def __init__(self, state, sources, config_file, url, strict=False, log_level=logging.INFO):
+        self.state = state
+        self.sources = sources
         self.config_file, self.url = str(config_file), url
         self.strict, self.log_level = strict, log_level
         self.index = None
@@ -208,13 +209,14 @@ class Builder:
         except (OSError, ValueError):
             return False
 
-    def worker(self, generation, cached=False):
+    def render_pages(self, generation, reuse_releases=False):
+        """Run MkDocs in a fresh process, optionally seeding it with release HTML."""
         request = {
             "config": self.config_file, "site": str(generation / "site"),
             "url": self.url, "index_out": str(generation / "pages.json"),
             "strict": self.strict, "log_level": self.log_level,
         }
-        if cached:
+        if reuse_releases:
             request["cache_index"] = str(self.state.generation / "pages.json")
             # Only HTML whose CachedFile explicitly skips rendering is hard-linked.
             # Static assets are copied normally by MkDocs into this fresh generation.
@@ -247,12 +249,13 @@ class Builder:
             raise
         return json.loads((generation / "pages.json").read_text())
 
-    def assets(self, generation, changed):
+    def copy_assets(self, generation, changed):
+        """Copy the published site and replace only changed assets, without MkDocs."""
         shutil.copytree(self.state.generation / "site", generation / "site",
                         copy_function=link_or_copy)
         shutil.copy2(self.state.generation / "pages.json", generation / "pages.json")
         for source in changed:
-            destination = generation / "site" / self.graph.asset_path(source)
+            destination = generation / "site" / self.sources.asset_path(source)
             destination.parent.mkdir(parents=True, exist_ok=True)
             # Break the hard link before writing; never mutate published output.
             with tempfile.NamedTemporaryFile(dir=destination.parent, delete=False) as output:
@@ -261,54 +264,73 @@ class Builder:
             os.replace(temporary, destination)
         return self.index
 
+    def inputs_changed_during_build(self, before, after):
+        """Ignore release sources first downloaded by the worker itself."""
+        cache = self.sources.root / ".cache/docs-preview"
+        for path in before.keys() | after.keys():
+            if before.get(path) == after.get(path):
+                continue
+            if path not in before and Path(path).is_relative_to(cache):
+                continue
+            return True
+        return False
+
     def build(self, revision):
-        before = self.graph.snapshot()
-        kind, changed, affected = self.graph.plan(before)
+        """Plan, render, validate, then publish. Never publish changed inputs.
+
+        Only a successful publication advances the input snapshot and page index.
+        A failed or superseded build leaves the last successful site untouched.
+        """
+        before = self.sources.snapshot()
+        kind, changed = self.sources.plan(before)
         if kind == "none":
             if self.index is not None and not self.cache_valid(all_pages=True):
-                kind, affected = "all", set(self.graph.dependencies)
+                kind = "all"
                 log.info("Output cache is incomplete; rebuilding all versions.")
             else:
                 if self.state.error:
                     self.state.publish()  # Restored inputs already match the last good output.
                     log.info("Inputs restored; the last successful build is current again.")
                 return "none"
-        log.info("Building %s: %s", kind, ", ".join(sorted(affected)))
+        log.info("Building %s (%d changed inputs).", kind, len(changed))
         started = time.perf_counter()
         generation = Path(tempfile.mkdtemp(prefix="build-", dir=self.state.workspace))
         published = False
         try:
-            cached = (kind == "working" and self.index is not None
-                      and len(self.index["versions"]) > 1)
-            if kind in {"working", "assets"} and not self.cache_valid(kind == "assets"):
+            if kind in {"working", "assets"} and not self.cache_valid(all_pages=kind == "assets"):
                 log.info("Output cache is incomplete; rebuilding all versions.")
-                cached, kind = False, "all (cache missing)"
-            index = self.assets(generation, changed) if kind == "assets" else self.worker(generation, cached)
+                kind = "all"
+
+            reuse_releases = (kind == "working" and self.index is not None
+                              and len(self.index["versions"]) > 1)
+            if kind == "assets":
+                index = self.copy_assets(generation, changed)
+            else:
+                index = self.render_pages(generation, reuse_releases=reuse_releases)
             with self.state.condition:
                 if revision != self.state.source_revision:
                     log.info("Inputs changed during the build; retrying without publishing.")
                     return "retry"
-            if cached and signature(index) != signature(self.index):
+            if reuse_releases and signature(index) != signature(self.index):
                 log.info("Page/anchor index changed; rebuilding all versions before publishing.")
                 shutil.rmtree(generation)
                 generation.mkdir()
-                index = self.worker(generation)
-                kind = "all (index changed)"
-            rendered = (sum(not page["cached"] for page in index["pages"].values())
-                        if kind != "assets" else 0)
-            after = self.graph.snapshot()
-            unstable = {path for path in before.keys() | after.keys()
-                        if before.get(path) != after.get(path)
-                        # A worker may populate a missing release source cache itself.
-                        and not (path not in before and Path(path).is_relative_to(
-                            self.graph.root / ".cache/docs-preview"))}
+                index = self.render_pages(generation)
+                kind = "all"
+
+            rendered = 0
+            if kind != "assets":
+                rendered = sum(not page["cached"] for page in index["pages"].values())
+            after = self.sources.snapshot()
+            unstable = self.inputs_changed_during_build(before, after)
             with self.state.condition:
                 if revision != self.state.source_revision or unstable:
                     log.info("Inputs changed during the build; retrying without publishing.")
                     return "retry"
                 self.state.publish(generation)
                 published = True
-                self.graph.inputs, self.index = after, index
+                self.sources.inputs = after
+                self.index = index
             log.info("Published %s in %.2fs (%d pages rendered).", kind,
                      time.perf_counter() - started, rendered)
             return "published"
@@ -326,15 +348,17 @@ class Builder:
 
 
 class Changes(FileSystemEventHandler):
-    def __init__(self, state, graph):
-        self.state, self.graph = state, graph
+    def __init__(self, state, sources):
+        self.state = state
+        self.sources = sources
 
     def on_any_event(self, event):
         if event.event_type not in {"modified", "created", "deleted", "moved"}:
             return
         if event.is_directory and event.event_type == "modified":
             return
-        if any(self.graph.accepts(path) for path in (event.src_path, getattr(event, "dest_path", "")) if path):
+        paths = (event.src_path, getattr(event, "dest_path", ""))
+        if any(self.sources.accepts(path) for path in paths if path):
             self.state.changed()
 
 
@@ -365,17 +389,19 @@ def main():
     address = f"[{host}]" if ":" in host else host
     url = f"http://{address}:{port}/"
     extra = [Path(path).absolute() for path in args.watch]
-    graph = BuildGraph(ROOT, [*config.watch, *extra, config_file, Path(config.docs_dir)],
-                       include_releases=config.extra.get("preview_all_versions", False))
+    sources = PreviewInputs(
+        ROOT, [*config.watch, *extra, config_file, Path(config.docs_dir)],
+        include_releases=config.extra.get("preview_all_versions", False),
+    )
     if args.dirtyreload:
         log.info("Incremental reload is automatic; --dirtyreload is no longer needed.")
     with tempfile.TemporaryDirectory(prefix="knative-live-") as temporary:
         state = State(Path(temporary))
-        graph.exclude_roots.append(state.workspace)
-        builder = Builder(state, graph, config_file, url, args.strict, level)
+        sources.exclude_roots.append(state.workspace)
+        builder = Builder(state, sources, config_file, url, args.strict, level)
         observer = PollingObserver(timeout=.3)
-        for path, recursive in graph.watched():
-            observer.schedule(Changes(state, graph), str(path), recursive=recursive)
+        for path, recursive in sources.watched():
+            observer.schedule(Changes(state, sources), str(path), recursive=recursive)
         observer.start()
         server = thread = None
         try:

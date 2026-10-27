@@ -61,8 +61,8 @@ pre-existing link/anchor warnings when they are rendered. Without the flag,
 
 ### Incremental live reload
 
-The development runner uses a coarse dependency graph rather than MkDocs'
-`--dirtyreload` timestamp shortcut:
+The development runner chooses a rebuild based on which files changed, rather
+than using MkDocs' `--dirtyreload` timestamp shortcut:
 
 - Existing CSS/JavaScript/image edits update assets without rendering pages.
 - Markdown body edits rebuild the working documentation and unversioned pages,
@@ -148,7 +148,7 @@ like any other dependency. To upgrade manually, change the pin and run `uv lock`
 - **Python download fails:** check network access, or install Python 3.13 yourself;
   uv can use a compatible interpreter already on your machine.
 - **Editing the runner itself:** restart after changing `hack/dev_server.py`,
-  `hack/preview_graph.py`, or `hack/preview_cache.py`. Documentation hooks and
+  `hack/preview_inputs.py`, or `hack/preview_cache.py`. Documentation hooks and
   macros are loaded afresh automatically.
 - **A release snapshot is outdated:** remove `.cache/docs-preview/` and restart
   the preview. Releases are intentionally cached rather than fetched on every

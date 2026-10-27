@@ -1,6 +1,5 @@
-"""Conservative, output-aware dependencies for the development preview."""
+"""Track preview inputs and choose the smallest safe rebuild."""
 
-from graphlib import TopologicalSorter
 import hashlib
 from pathlib import Path
 
@@ -9,23 +8,11 @@ ASSET_TYPES = {".js", ".css", ".map", ".png", ".jpg", ".jpeg", ".gif", ".svg",
                ".webp", ".ico", ".woff", ".woff2", ".ttf", ".otf"}
 
 
-class BuildGraph:
-    dependencies = {
-        "working-source": set(), "release-source": set(), "shared": set(),
-        "templates": set(), "assets": set(),
-        "working-pages": {"working-source", "shared"},
-        "release-pages": {"release-source", "shared"},
-        "page-index": {"working-pages", "release-pages"},
-        "working-html": {"working-pages", "page-index", "templates"},
-        "release-html": {"release-pages", "page-index", "templates"},
-        "site": {"working-html", "release-html", "assets"},
-    }
-
+class PreviewInputs:
     def __init__(self, root, extra_paths=(), include_releases=False):
         self.root = Path(root)
         self.include_releases = include_releases
         self.extra_paths = [Path(path) for path in extra_paths]
-        self.order = tuple(TopologicalSorter(self.dependencies).static_order())
         self.inputs = None
         self._digests = {}
         self.exclude_roots = []
@@ -95,38 +82,38 @@ class BuildGraph:
             return destination
         return None
 
+    def change_kind(self, path, current):
+        """Existing assets and Markdown are fast paths; everything else rebuilds all."""
+        try:
+            relative = Path(path).relative_to(self.root).as_posix()
+        except ValueError:
+            return "all"  # An explicitly watched external dependency.
+
+        # New/deleted files can change navigation or output paths. Snippets can
+        # affect any version, even though they are Markdown under docs/.
+        if path not in self.inputs or path not in current:
+            return "all"
+        if relative.startswith("docs/snippets/"):
+            return "all"
+        if self.asset_path(path) is not None:
+            return "assets"
+        if relative.startswith("docs/") and Path(path).suffix == ".md":
+            return "working"
+        return "all"
+
     def plan(self, current):
+        """Return a rebuild kind and paths changed since the last successful build.
+
+        Mixed changes use the broadest rebuild: all > working > assets > none.
+        Working builds also compare the rendered page index before publication;
+        changed titles, metadata, URLs or anchors force a full rebuild there.
+        """
         if self.inputs is None:
-            return "all", set(), set(self.dependencies)
+            return "all", set()
         changed = {path for path in self.inputs.keys() | current.keys()
                    if self.inputs.get(path) != current.get(path)}
-        leaves = set()
-        for path in changed:
-            try:
-                relative = Path(path).relative_to(self.root).as_posix()
-            except ValueError:
-                leaves.add("shared")
-                continue
-            if relative.startswith(".cache/docs-preview/"):
-                leaves.add("release-source")
-            elif relative.startswith("docs/snippets/"):
-                leaves.add("shared")
-            elif self.asset_path(path) is not None and path in self.inputs and path in current:
-                leaves.add("assets")
-            elif relative.startswith("docs/") and Path(path).suffix == ".md":
-                leaves.add("working-source")
-                if path not in self.inputs or path not in current:
-                    leaves.add("page-index")
-            elif relative.startswith("overrides/"):
-                leaves.add("templates")
-            else:
-                leaves.add("shared")
-        affected = set(leaves)
-        for node in self.order:
-            # An index is a semantic boundary: body edits need not change its output.
-            if any(dep in affected and (dep != "page-index" or dep in leaves)
-                   for dep in self.dependencies[node]):
-                affected.add(node)
-        kind = ("all" if "release-html" in affected else "working"
-                if "working-html" in affected else "assets" if changed else "none")
-        return kind, changed, affected
+        kinds = {self.change_kind(path, current) for path in changed}
+        for kind in ("all", "working", "assets"):
+            if kind in kinds:
+                return kind, changed
+        return "none", changed
