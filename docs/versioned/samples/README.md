@@ -34,7 +34,6 @@ contributed and maintained by members of the Knative community. [View code sampl
 | Sample Name | Description | Language(s) |
 | ----------- | ----------- | ----------- |
 | Hello World | A quick introduction to Knative Serving that highlights how to deploy an app. | [Clojure](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-clojure), [Dart](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-dart), [Elixir](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-elixir), [Haskell](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-haskell), [Java - Micronaut](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-java-micronaut), [Java - Quarkus](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-java-quarkus), [R](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-rserver), [Rust](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-rust), [Swift](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-swift), [Vertx](https://github.com/knative/docs/tree/main/code-samples/community/serving/helloworld-vertx) |
-| Machine Learning | A quick introduction to using Knative Serving to serve machine learning models | [Python - BentoML](https://github.com/knative/docs/tree/main/code-samples/community/serving/machinelearning-python-bentoml)
 
 ## External code samples
 
