@@ -1,0 +1,4 @@
+# Local multi-version preview; selected by the launchers' --all-versions flag.
+INHERIT: mkdocs.local.yml
+extra:
+  preview_all_versions: true

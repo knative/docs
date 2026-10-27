@@ -34,5 +34,6 @@ blog/docs/images/case-studies/
 # Don't include maven wrapper jar
 maven-wrapper.jar
 
-# Ignore Python virtual environments
+# Ignore Python virtual environments and cached local release snapshots
 .venv
+/.cache/docs-preview/

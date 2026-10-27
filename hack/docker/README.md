@@ -7,10 +7,20 @@ From the repository root:
 ```
 
 Open <http://127.0.0.1:8000/docs/>, edit files, and save for live reload.
+By default, only the working copy is built. Add `--all-versions` to include cached
+releases from `config/versions.txt`; the working copy then lives at `/development/`.
+During live reload, working edits reuse rendered release HTML and CSS/JS edits
+only update assets. Shared dependencies and page-index changes trigger full
+rebuilds. Python hooks are loaded in fresh renderer processes. MkDocs' standard
+live-reload server handles serving and browser reloads. Page requests wait during
+rebuilds; after a failure, fix the errors shown in the terminal to resume serving.
 Press Ctrl+C to stop; the container is removed automatically. Only Docker is
 required—no host Python or uv installation.
 
 ```bash
+# Test the version selector with all configured releases
+./hack/docker/run.sh --all-versions
+
 # Another host port
 PORT=8001 ./hack/docker/run.sh
 

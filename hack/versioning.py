@@ -1,18 +1,24 @@
 """Build version-selector links without depending on Material's versioning JS."""
 
 import json
+from pathlib import Path
 
 from mkdocs.exceptions import PluginError
 
+from preview_cache import index_pages
+
 _versions = []
 _pages = {}
+_index = {}
 
 
 def on_env(env, *, config, files):
-    # All pages have been rendered by this event. Reset on every live rebuild.
-    global _versions, _pages
+    # Every page is populated here, either rendered now or restored from the
+    # explicit release cache. Never infer anchors from uninitialized dirty pages.
+    global _versions, _pages, _index
     _versions = []
     _pages = {file.url: file.page for file in files.documentation_pages()}
+    _index = index_pages(files) if config.extra.get("preview_build", {}).get("index_out") else {}
     manifest = files.get_file_from_path("versions.json")
     if manifest is None:
         return env
@@ -37,6 +43,13 @@ def on_env(env, *, config, files):
             raise PluginError(f"Duplicate version directory: {directory}")
         _versions.append({"version": directory, "title": title})
     return env
+
+
+def on_post_build(*, config):
+    output = config.extra.get("preview_build", {}).get("index_out")
+    if output:
+        Path(output).write_text(json.dumps({"pages": _index, "versions": _versions},
+                                         sort_keys=True, default=str))
 
 
 def on_page_context(context, *, page, config, nav):

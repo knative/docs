@@ -1,4 +1,4 @@
-# Fast, single-checkout preview. Production builds still use mkdocs.yml.
+# Single-working-copy preview. Production uses mkdocs.yml.
 INHERIT: mkdocs.yml
 
 site_url: http://127.0.0.1:8000/
@@ -15,4 +15,6 @@ hooks:
 watch:
   - docs
   - overrides
-  - hack/macros.py
+  - mkdocs.yml
+  - mkdocs.local.yml
+  - config/versions.txt
