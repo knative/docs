@@ -32,12 +32,20 @@ jobs:
               printf '%s\n' "NOT TESTED (no ci.sh): $path" >> "$GITHUB_STEP_SUMMARY"
             fi
           done < "$RUNNER_TEMP/changed-samples"
-          collisions=$(find code-samples -type f -name ci.sh -print0 |
-            jq -Rs 'split("\u0000")[:-1] | map(split("/")[-2]) | group_by(.) | map(select(length > 1) | .[0])')
-          echo "directories=$(jq -cn --argjson collisions "$collisions" --args '
-            $ARGS.positional | unique | map(split("/") as $path |
-              {directory: ., name: (if $collisions | index($path[-1])
-                then $path[1] + "/" + $path[-1] else $path[-1] end)})' "${directories[@]}")" >> "$GITHUB_OUTPUT"
+          # Use consistent section/sample names without collision detection.
+          matrix=$(
+            for directory in "${directories[@]}"; do
+              relative=${directory#code-samples/}
+              section=${relative%%/*}
+              name="$section/${directory##*/}"
+
+              jq -cn \
+                --arg directory "$directory" \
+                --arg name "$name" \
+                '{directory: $directory, name: $name}'
+            done | jq -sc 'unique_by(.directory)'
+          )
+          echo "directories=$matrix" >> "$GITHUB_OUTPUT"
 
   test:
     name: ${{ matrix.name }}
