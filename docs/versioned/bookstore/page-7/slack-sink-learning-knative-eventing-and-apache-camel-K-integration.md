@@ -304,7 +304,7 @@ We are creating the Trigger to process the events that have type `moderated-comm
 
 This setup automatically sends notifications to Slack whenever a new comment that contains "bad word" occur, streamlining the flow of information.
 
-- 1: Make sure you have your k8s secret that contains your Slack webhook Url ready. If not, refer to the [Prerequisite 3](#prerequisite-3-create-a-slack-app-and-generate-an-incoming-webhook-url) section.
+- 1: Make sure you have your k8s secret that contains your Slack webhook Url ready. If not, refer to the [Prerequisite 3](#prerequisite-3-create-a-secret-that-stores-your-slack-credentials) section.
 
 - 2: Prepare the YAML configuration for the Slack sink, which will forward events to your Slack channel:
 

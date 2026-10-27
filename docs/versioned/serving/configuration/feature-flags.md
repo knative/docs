@@ -142,6 +142,16 @@ spec:
               port: 8090
 ```
 
+### DomainMapping direct Route traffic
+
+* **Type**: Feature
+* **ConfigMap key:** `domainmapping-direct-route-traffic`
+
+This flag controls whether a [DomainMapping](../services/custom-domains.md) sends requests directly to the revisions of the target Route, without rewriting the `Host` header.
+
+!!! note
+    When enabled, anything that matches on the `Host` header, such as service mesh authorization policies, sees the host of the DomainMapping.
+
 ### Kubernetes EmptyDir Volume
 
 * **Type**: Extension

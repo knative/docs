@@ -22,7 +22,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
     - [Eventing Kafka Broker v0.20](#eventing-kafka-broker-v020)
 - [CLI v0.20](#client-v020)
 - [Operator v0.20](#operator-v020)
-- [Thank you contributors v0.20](#thank-you-contributors-v0.20)
+- [Thank you contributors v0.20](#thank-you-contributors-v020)
 
 
 ### Highlights

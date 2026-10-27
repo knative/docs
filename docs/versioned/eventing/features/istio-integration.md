@@ -36,7 +36,7 @@ an Istio mesh can communicate with Eventing components that are also part of the
     kubectl create namespace knative-eventing --dry-run=client -oyaml | kubectl apply -f -
     kubectl label namespace knative-eventing istio-injection=enabled
     ```
-2. [Follow Eventing installation](./../../install)
+2. [Follow Eventing installation](../../install/README.md)
 
 3. Install `eventing-istio-controller`:
     ```shell

@@ -4,7 +4,7 @@
 
 ## What's new?
 
-In a previous [blog post](../knative-backstage-plugins/), we talked about how to integrate Knative with Backstage. In this blog post, we will talk about how to secure the communication between the Knative Event Mesh plugin and the backend.
+In a previous [blog post](knative-backstage-plugins.md), we talked about how to integrate Knative with Backstage. In this blog post, we will talk about how to secure the communication between the Knative Event Mesh plugin and the backend.
 
 Previously, the backend was running with a service account that had full access to the Kubernetes cluster. This was not secure, as the backend could access any resource in the cluster. Also, the backend didn't have any authentication mechanism, so anyone who could access the backend could access the Kubernetes resources, although they were only read-only.
 

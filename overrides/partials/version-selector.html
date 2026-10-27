@@ -1,0 +1,19 @@
+{% if version_selector %}
+  <details class="md-version knative-version-selector" data-version-selector>
+    <summary class="md-version__current" aria-label="Documentation version: {{ version_selector.title | e }}">
+      {{ version_selector.title | e }}
+    </summary>
+    <ul class="md-version__list" aria-label="Documentation versions">
+      {% for version in version_selector.options %}
+        <li class="md-version__item">
+          <a class="md-version__link" href="{{ version.url | url }}"
+             {% if version.current %}aria-current="true"{% endif %}
+             data-same-page="{{ 'true' if version.same_page else 'false' }}"
+             data-anchors="{{ version.anchors | tojson | forceescape }}">
+            {{ version.title | e }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </details>
+{% endif %}

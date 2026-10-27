@@ -17,7 +17,7 @@ import semver
 import sys
 import traceback
 
-from github import Github
+from github import Auth, Github
 
 # By default mkdocs swallows print() messages from macros
 def print_to_stdout(*vargs):
@@ -49,7 +49,8 @@ def safe_semver_parse(tag):
 class GithubReleases:
     def __init__(self):
         self.tags_for_repo = {}
-        self.client = Github(os.getenv("GITHUB_TOKEN"))
+        token = os.getenv("GITHUB_TOKEN")
+        self.client = Github(auth=Auth.Token(token)) if token else Github()
 
     def __get_latest(self, version, org, repo):
         key = f'{org}/{repo}'

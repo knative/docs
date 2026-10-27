@@ -92,7 +92,7 @@ At this point, we can formally define the condition based on which activator is 
 Now with the above defaults and given the fact that a request needs to stay around for some time in order for concurrency metrics to show enough load for the counted period, it means you can't get EBC>=0 with a hello-world example where requests finish pretty quickly.
 The latter is often confusing for the newcomer as it seems that the Knative service never enters the serve mode. 
 In the next example, we will show the lifecycle of a Knative service that also moves to the serve mode and how EBC is calculated in practice.
-Also, the example uses a sample app that controls how long a request stays around via a sleep operation, see section [Autoscale Sample App - Go](../../../../../docs/serving/autoscaling/autoscale-go/).
+Also, the example uses a sample app that controls how long a request stays around via a sleep operation, see section [Autoscale Sample App - Go](/docs/serving/autoscaling/autoscale-go/).
 Thus, here is the service for the example that has a target concurrency value of 10 and tbc=10:
 
 ```

@@ -19,19 +19,19 @@ Follow the instructions in the documentation
 
 #### Table of Contents
 - [Highlights](#highlights)
-- [Serving v0.25](#Serving-v025)
-- [Eventing v0.25](#Eventing-v025)
-- [Eventing Extensions](#Eventing-Extensions)
-    - [Apache Kafka Broker v0.25](#Apache-Kafka-Broker-v025)
+- [Serving v0.25](#serving-v025)
+- [Eventing v0.25](#eventing-v025)
+- [Eventing Extensions](#eventing-extensions)
+    - [Apache Kafka Broker v0.25](#apache-kafka-broker-v025)
     - [Apache Kafka Source and Channels v0.25](#apache-kafka-source-and-channels-v025)
-- `kn` [CLI v0.25](#Client-v025)
-- [Operator v0.25](#Operator-v025)
-- [Thank you contributors](#Thank-you-contributors)
+- `kn` [CLI v0.25](#client-v025)
+- [Operator v0.25](#operator-v025)
+- [Thank you contributors](#thank-you-contributors)
 
 
 ### Highlights
-- In preparation for GA, the **net-kourier** components have been renamed. See [Breaking Changes](#-breaking-or-notable-changes) in the Serving section.
-- The depecreated namespace label `networking.internal.knative.dev/disableWildcardCert` is now removed. See [Breaking Changes](#-breaking-or-notable-changes) in the Serving section.
+- In preparation for GA, the **net-kourier** components have been renamed. See [Breaking Changes](#breaking-or-notable-changes) in the Serving section.
+- The depecreated namespace label `networking.internal.knative.dev/disableWildcardCert` is now removed. See [Breaking Changes](#breaking-or-notable-changes) in the Serving section.
 - Trigger ready status now takes into account the `DeadLetterURI`
 - The `kn` CLI now looks for plugin in the `$PATH` allowing for easy installation of plugins like `kn-quickstart`
 
@@ -169,16 +169,16 @@ Follow the instructions in the documentation
 - [@lionelvillard](https://github.com/lionelvillard)
 - [@matzew](https://github.com/matzew)
 - [@nak3](https://github.com/nak3)
-- [@nealhu](@https://github.com/nealhu)
+- [@nealhu](https://github.com/nealhu)
 - [@pierDipi](https://github.com/pierDipi)
-- [@psschwei](@https://github.com/psschwei)
+- [@psschwei](https://github.com/psschwei)
 - [@psschwei](https://github.com/psschwei)
 - [@rhuss](https://github.com/rhuss)
-- [@senthilnathan](@https://github.com/senthilnathan)
+- [@senthilnathan](https://github.com/senthilnathan)
 - [@travis-minke-sap](https://github.com/travis-minke-sap)
-- [@upodroid](@https://github.com/upodroid)
+- [@upodroid](https://github.com/upodroid)
 - [@vyasgun](https://github.com/vyasgun)
-- [@zhaojizhuang](@https://github.com/zhaojizhuang)
+- [@zhaojizhuang](https://github.com/zhaojizhuang)
 
 
 
