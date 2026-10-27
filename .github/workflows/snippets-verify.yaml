@@ -1,0 +1,32 @@
+name: Verify versioned snippets
+
+on:
+  pull_request:
+    branches: [ 'main', 'release-*' ]
+    paths:
+      - '.github/workflows/snippets-verify.yaml'
+      - 'hack/build.sh'
+      - 'hack/snippets.py'
+      - 'hack/local_preview.py'
+      - 'hack/macros.py'
+      - 'mkdocs*.yml'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'test/test_snippets.py'
+
+permissions:
+  contents: read
+
+jobs:
+  snippets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version-file: 'uv.lock'
+          enable-cache: true
+      - name: Install dependencies
+        run: uv sync --locked --no-dev
+      - name: Test snippet version isolation
+        run: uv run --locked --no-dev python -m unittest discover -s test -p 'test_*.py' -v

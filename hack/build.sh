@@ -76,6 +76,13 @@ fi
 mkdir "$TEMP/content"
 cp -r . "$TEMP/content/"
 
+# Keep snippet snapshots outside docs_dir: they are build inputs, not pages or
+# downloadable assets. Each published documentation tree gets its own root.
+# Remove any snapshots left in the checkout by a previous build first.
+rm -rf "$TEMP/content/.snippets"
+mkdir -p "$TEMP/content/.snippets/$CHECKOUT_DIR"
+cp -R docs/snippets/. "$TEMP/content/.snippets/$CHECKOUT_DIR/"
+
 # Point top-level nav to docs directory.
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/versioned/serving/reference/serving-api.md"
@@ -97,6 +104,8 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   # Handle current release specially, as we don't include a version slug
   # Note that git worktree reuses the same git clone, so we don't need to clone 50+MB each time.
   git worktree add --detach "$TEMP/current-release" "${REMOTE_BRANCH}/${DOCS_BRANCHES[0]}"
+  mkdir -p "$TEMP/content/.snippets/docs"
+  cp -R "$TEMP/current-release/docs/snippets/." "$TEMP/content/.snippets/docs/"
   if [ -d "$TEMP/current-release/docs/versioned" ]; then
     cp -r "$TEMP/current-release/docs/versioned" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/docs/.meta.yml"
@@ -131,6 +140,8 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
 
     echo "Building for previous version $version"
     git worktree add --detach "$TEMP/docs-$version" "${REMOTE_BRANCH}/${DOCS_BRANCHES[i+1]}"
+    mkdir -p "$TEMP/content/.snippets/v$version-docs"
+    cp -R "$TEMP/docs-$version/docs/snippets/." "$TEMP/content/.snippets/v$version-docs/"
     if [ -d "$TEMP/docs-$version/docs/versioned" ]; then
       cp -r "$TEMP/docs-$version/docs/versioned" "$TEMP/content/docs/v$version-docs"
       echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
