@@ -18,7 +18,7 @@ use actix_web::{post, web, App, HttpRequest, HttpResponse, HttpServer};
 use cloudevents::binding::actix::{HttpRequestExt, HttpResponseBuilderExt};
 use cloudevents::binding::reqwest::RequestBuilderExt;
 use cloudevents::{EventBuilder, EventBuilderV10};
-use std::time::Duration;
+use std::{num::NonZeroU16, time::Duration};
 
 const SOURCE: &str =
     "https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust";
@@ -39,10 +39,6 @@ impl AppState {
                 .build()?,
         })
     }
-}
-
-fn port(value: Option<String>) -> u16 {
-    value.and_then(|value| value.parse().ok()).unwrap_or(8080)
 }
 
 #[post("/")]
@@ -88,7 +84,12 @@ async fn handle_event(
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
-    let port = port(std::env::var("PORT").ok());
+    let port = std::env::var_os("PORT")
+        .unwrap_or_else(|| "8080".into())
+        .to_string_lossy()
+        .parse::<NonZeroU16>()
+        .expect("PORT must be an integer from 1 to 65535")
+        .get();
     let state =
         web::Data::new(AppState::new(std::env::var("K_SINK").ok()).map_err(std::io::Error::other)?);
 
