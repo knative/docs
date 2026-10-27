@@ -19,19 +19,16 @@ jobs:
       - id: samples
         name: Find changed sample directories
         run: |
-          git diff --name-only --no-renames -z "${{ github.event.pull_request.base.sha }}"...HEAD -- code-samples/ > "$RUNNER_TEMP/changed-samples"
+          diff_range="${{ github.event.pull_request.base.sha }}...HEAD"
           directories=()
-          while IFS= read -r -d '' path; do
-            directory=${path%/*}
-            while [[ "$directory" == code-samples/* && ! -f "$directory/ci.sh" ]]; do
-              directory=${directory%/*}
-            done
-            if [[ "$directory" == code-samples/* && -f "$directory/ci.sh" ]]; then
+          while IFS= read -r -d '' script; do
+            directory=${script%/ci.sh}
+            changed=$(git diff --name-only --no-renames "$diff_range" -- "$directory/")
+            if [[ -n "$changed" ]]; then
               directories+=("$directory")
-            else
-              printf '%s\n' "NOT TESTED (no ci.sh): $path" >> "$GITHUB_STEP_SUMMARY"
             fi
-          done < "$RUNNER_TEMP/changed-samples"
+          done < <(git ls-files -z -- 'code-samples/**/ci.sh')
+          echo 'Directories without ci.sh are NOT TESTED.' >> "$GITHUB_STEP_SUMMARY"
           # Use consistent section/sample names without collision detection.
           matrix=$(
             for directory in "${directories[@]}"; do
