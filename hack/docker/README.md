@@ -11,8 +11,9 @@ By default, only the working copy is built. Add `--all-versions` to include cach
 releases from `config/versions.txt`; the working copy then lives at `/development/`.
 During live reload, working edits reuse rendered release HTML and CSS/JS edits
 only update assets. Shared dependencies and page-index changes trigger full
-rebuilds. Python hooks are loaded in fresh renderer processes; failed builds keep
-the last successful site available.
+rebuilds. Python hooks are loaded in fresh renderer processes. MkDocs' standard
+live-reload server handles serving and browser reloads. Page requests wait during
+rebuilds; after a failure, fix the errors shown in the terminal to resume serving.
 Press Ctrl+C to stop; the container is removed automatically. Only Docker is
 required—no host Python or uv installation.
 

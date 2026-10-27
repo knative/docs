@@ -497,7 +497,6 @@ dependencies = [
     { name = "mkdocs-rss-plugin" },
     { name = "pygithub" },
     { name = "semver" },
-    { name = "watchdog" },
 ]
 
 [package.dev-dependencies]
@@ -517,7 +516,6 @@ requires-dist = [
     { name = "mkdocs-rss-plugin", specifier = ">=0.18.0,<1.20" },
     { name = "pygithub", specifier = ">=2.8,<3" },
     { name = "semver", specifier = "==3.1.0" },
-    { name = "watchdog", specifier = ">=6,<7" },
 ]
 
 [package.metadata.requires-dev]

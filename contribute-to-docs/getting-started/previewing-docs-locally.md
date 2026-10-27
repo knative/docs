@@ -25,8 +25,8 @@ environment, or install packages globally.
 Open <http://127.0.0.1:8000/docs/>. Edit Markdown under `docs/`, save, and
 the browser reloads automatically. Templates, CSS, and JavaScript also reload.
 Changing a Python hook or macro automatically runs a fresh renderer process.
-The server keeps serving the last successful build until new output is ready,
-then reloads the browser. Press **Ctrl+C** to stop.
+MkDocs serves the preview and reloads the browser after each successful rebuild.
+Press **Ctrl+C** to stop.
 
 ### Where to edit
 
@@ -72,10 +72,12 @@ than using MkDocs' `--dirtyreload` timestamp shortcut:
 - If a working build changes page URLs, metadata, titles, or anchors, all versions
   are rebuilt before publication so cached version-selector links cannot go stale.
 
-Each render runs in a fresh MkDocs process. Completed output is published as one
-site generation; failed builds keep the previous site available and show an
-error overlay in the browser. Rendered release HTML is cached for the running
-session; source snapshots remain cached on disk between sessions.
+Each render runs in a fresh MkDocs process. MkDocs' standard live-reload server
+handles file watching, serving, and browser reloads. Page requests wait during
+rebuilds. If a build fails, check the terminal for errors; requests wait until
+you fix the problem and a rebuild succeeds. There is no browser error overlay.
+Rendered release HTML is cached for the running session; source snapshots
+remain cached on disk between sessions.
 
 Changes made during a build are retried before publishing. Live reload does not
 prune or otherwise change the sidebar. No incremental mode needs enabling.
