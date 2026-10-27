@@ -274,4 +274,4 @@ When you start your Backstage application, you can see some log lines as follows
 
 ### Usage
 
-See the [plugin documentation](../../eventing/event-registry/eventmesh-backstage-plugin/) for more information about using the plugin.
+See the [plugin documentation](../eventing/event-registry/eventmesh-backstage-plugin.md) for more information about using the plugin.

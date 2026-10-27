@@ -1,7 +1,11 @@
 # Settings in the [build] context are global and are applied to all contexts
 # unless otherwise overridden by more specific contexts.
 [build]
-  command = "./hack/build.sh"
+  # Bootstrap the uv version locked in uv.lock, then build from uv.lock.
+  command = '''
+    python3 -m pip install "uv==$(python3 hack/uv_version.py)" &&
+    python3 -m uv run --locked --no-dev ./hack/build.sh
+  '''
   publish = "site"
 
 [build.environment]

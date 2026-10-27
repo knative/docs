@@ -222,8 +222,85 @@ a.md-header__button.md-logo img {
   margin: 0 0 0.75em;
 }
 
-.md-version__list li:nth-last-child(1) a {
+/* Keep the version selector next to the site name, including after scrolling. */
+.knative-header__title--versioned {
+  min-width: 11rem;
+}
+
+.knative-header__title--versioned .md-header__topic:first-child {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  z-index: 0;
+}
+
+.knative-header__title--versioned .md-header__topic + .md-header__topic {
+  display: none;
+}
+
+/* The toolbar must stack above the second navigation row while the menu is open. */
+.md-header__inner:has(.knative-version-selector[open]) {
+  position: relative;
+  z-index: 10;
+}
+
+/* Use Material's original version-picker styles with native details behavior. */
+.knative-version-selector {
+  --knative-version-gap: 1rem;
+  --knative-version-padding: .4rem;
+  position: relative;
+  line-height: 2.4rem;
+  font-weight: 400;
+}
+
+.knative-version-selector .md-version__current {
+  margin-inline: var(--knative-version-gap) .4rem;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.knative-version-selector summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Keep text aligned while leaving a gap between the popup and the site name. */
+.knative-version-selector > .md-version__list {
+  inset-inline-start: calc(var(--knative-version-gap) - var(--knative-version-padding));
+  margin-inline: 0;
+  /* Include the control's caret and its end margin, even for (Pre-release). */
+  min-width: calc(100% - var(--knative-version-gap) + var(--knative-version-padding));
+  width: max-content;
+}
+
+.knative-version-selector[open] > .md-version__list {
+  z-index: 10;
+  background-color: var(--md-default-bg-color, #fff);
+  max-height: 10rem;
+  opacity: 1;
+  animation: none;
+  transition: max-height 0ms, opacity .25s;
+}
+
+.knative-version-selector .md-version__link {
+  padding-inline: var(--knative-version-padding);
+}
+
+.knative-version-selector .md-version__item {
+  line-height: 1.6rem;
+}
+
+.knative-version-selector .md-version__item:last-child a {
   color: gray;
+}
+
+.knative-version-selector summary:focus-visible,
+.knative-version-selector[open]:has(> summary:focus-visible) > .md-version__list {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.knative-version-selector[open] > summary:focus-visible {
+  outline: none;
 }
 
 /* bit of a hack to stop the banner taking space when empty */
@@ -599,12 +676,16 @@ a.md-header__button.md-logo img {
 }
 
 @media (max-width: 630px) {
-  [dir=ltr] ul.md-tabs__list {
-    margin-left: 3rem;
+  .knative-header__title--versioned {
+    min-width: 8rem;
   }
 
-  [dir=ltr] button.md-version__current {
-    margin-left: .4rem;
+  .knative-header__title--versioned .md-header__topic:first-child > .md-ellipsis {
+    display: none;
+  }
+
+  [dir=ltr] ul.md-tabs__list {
+    margin-left: 3rem;
   }
 
   .md-tabs__item {

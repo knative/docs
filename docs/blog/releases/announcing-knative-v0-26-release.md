@@ -19,15 +19,15 @@ Follow the instructions in the documentation
 
 #### Table of Contents
 - [Highlights](#highlights)
-- [Serving v0.26](#Serving-v026)
-- [Eventing v0.26](#Eventing-v026)
-- [Eventing Extensions](#Eventing-Extensions)
-    - [Apache Kafka Broker v0.26](#Apache-Kafka-Broker-v026)
+- [Serving v0.26](#serving-v026)
+- [Eventing v0.26](#eventing-v026)
+- [Eventing Extensions](#eventing-extensions)
+    - [Apache Kafka Broker v0.26](#apache-kafka-broker-v026)
     - [Apache Kafka Source and Channels v0.26](#apache-kafka-source-and-channels-v026)
     - [Eventing Kogito v0.26](#eventing-kogito-v026)
-- `kn` [CLI v0.26](#Client-v026)
-- [Operator v0.26](#Operator-v026)
-- [Thank you contributors](#Thank-you-contributors)
+- `kn` [CLI v0.26](#client-v026)
+- [Operator v0.26](#operator-v026)
+- [Thank you contributors](#thank-you-contributors)
 
 
 ### Highlights

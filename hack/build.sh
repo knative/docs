@@ -17,8 +17,11 @@
 set -e
 set -x
 
-# Builds blog and community into the site by cloning the website repo, copying blog/community dirs in, running hugo.
-# Also builds previous versions unless BUILD_VERSIONS=no.
+# Hide Material's MkDocs 2 banner without suppressing build diagnostics.
+export NO_MKDOCS_2_WARNING=1
+
+# Assemble the MkDocs site, including blog and community pages.
+# BUILD_VERSIONS=no publishes this checkout at /docs/ without release snapshots.
 # - Results are written to site/ as normal.
 # - Run as "./hack/build.sh serve" to run a local preview server on site/ afterwards (requires `npm install -g http-server`).
 
@@ -34,7 +37,7 @@ VERSIONS=("1.23" "1.22" "1.21") # Docs version, results in the url e.g. knative.
 DOCS_BRANCHES=("release-${VERSIONS[0]}" "release-${VERSIONS[1]}" "release-${VERSIONS[2]}" "release-${VERSIONS[3]}")
 latest=${VERSIONS[0]}
 previous=("${VERSIONS[@]:1}")
-GIT_SLUG="knative/docs"
+: "${BUILD_VERSIONS:=yes}"
 
 readonly TEMP="$(mktemp -d)"
 readonly SITE=$PWD/site
@@ -43,13 +46,18 @@ rm -rf site/
 
 REMOTE_BRANCH=$(git remote | grep -q upstream && echo upstream || echo origin)
 
-# If we're running on Netlify, update git branches
-if [ "$CI" == "true" ]; then
-  git fetch --prune $REMOTE_BRANCH
-elif [[ -z "${GITHUB_TOKEN}" ]]; then
-  # Don't require GITHUB_TOKEN in CI since netlify prunes it
-  echo "❌ Error: GITHUB_TOKEN environment variable is not set." >&2
-  exit 1
+# Previews publish this checkout at /docs/ without release branches or a token.
+# Full builds use /development/ alongside the current release at /docs/.
+CHECKOUT_DIR=docs
+if [ "$BUILD_VERSIONS" != "no" ]; then
+  CHECKOUT_DIR=development
+  if [ "${CI:-}" == "true" ]; then
+    git fetch --prune "$REMOTE_BRANCH"
+  elif [[ -z "${GITHUB_TOKEN:-}" ]]; then
+    # Netlify strips tokens from deploy previews; CI can build without one.
+    echo "❌ Error: GITHUB_TOKEN environment variable is not set." >&2
+    exit 1
+  fi
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -72,21 +80,19 @@ cp -r . "$TEMP/content/"
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/versioned/serving/reference/serving-api.md"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/eventing/main/docs/eventing-api.md -s > "$TEMP/content/docs/versioned/eventing/reference/eventing-api.md"
-echo -e "\nsamples_branch: main\nversion: development\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/versioned/.meta.yml"
-versionjson="{\"version\": \"versioned\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
-
-# Build all versions by default, but allow deploy previews to opt out.
-: "${BUILD_VERSIONS:=yes}"
+mv "$TEMP/content/docs/versioned" "$TEMP/content/docs/$CHECKOUT_DIR"
+${SED_CMD} -i "s| versioned/| $CHECKOUT_DIR/|g" "$TEMP/content/config/redirects.yml"
+# doc_base stays tied to the source tree so GitHub edit links remain correct.
+echo -e "\nsamples_branch: main\nversion: $CHECKOUT_DIR\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/$CHECKOUT_DIR/.meta.yml"
+versionjson="{\"version\": \"$CHECKOUT_DIR\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 
 if [ "$BUILD_VERSIONS" != "no" ]; then
-  mv $TEMP/content/docs/versioned $TEMP/content/docs/development
   # Remove pre-release documents from search.  This has to be applied to each markdown, unfortunately.
   # This needs to be done as two commands: the first ensures front-matter in files that don't have it,
   # and the seconds inserts commands into the front-matter.
   find "$TEMP/content/docs/development" -type f -name '*.md' | xargs ${SED_CMD} -i '1s/^\([^-]\)/---\n---\n\1/'
   find "$TEMP/content/docs/development" -type f -name '*.md' | xargs ${SED_CMD} -i '2isearch:\n exclude: true'
   echo "- Docs: development" >> "$TEMP/content/docs/.nav.yml"
-  ${SED_CMD} -i 's| versioned/| development/|g' "$TEMP/content/config/redirects.yml"
 
   # Handle current release specially, as we don't include a version slug
   # Note that git worktree reuses the same git clone, so we don't need to clone 50+MB each time.
@@ -162,20 +168,18 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   versionjson+="{\"version\": \"development\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 fi
 
-# Only build the site _once_ -- we used to build sub-components, and it
-# introduced a bunch of navigation / base-url problems.
-# We pass through the command-line arguments to this script to enable --strict checks in CI.
-(cd "$TEMP/content"; mkdocs build -f mkdocs.yml -d "$SITE" "$@")
-
-# Set up the version file to point to the set of built docs.
-cat << EOF > $SITE/versions.json
+# Make the version manifest available to the selector hook during rendering.
+# MkDocs also copies it into the output site as a normal static asset.
+cat << EOF > "$TEMP/content/docs/versions.json"
 [
   $versionjson
 ]
 EOF
 
-# Handle Cookie consent
-cp -r cookie-consent/js site/
+# Only build the site _once_ -- we used to build sub-components, and it
+# introduced a bunch of navigation / base-url problems.
+# We pass through the command-line arguments to this script to enable --strict checks in CI.
+(cd "$TEMP/content"; mkdocs build -f mkdocs.yml -d "$SITE" "$@")
 
 # Copy go mod files so knative.dev/blahblah vanity URLs work
 mkdir site/golang

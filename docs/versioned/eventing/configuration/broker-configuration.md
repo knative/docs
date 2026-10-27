@@ -85,7 +85,7 @@ data:
 
 ## Configuring the Broker class
 
-Besides configuring the Broker class for each broker [individually](../brokers/create-broker.md#broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
+Besides configuring the Broker class for each broker [individually](../brokers/broker-developer-config-options.md#advanced-broker-class-options), it is possible to define the default Broker class cluster wide or on a per namespace basis:
 
 ### Configuring the default Broker class for the cluster
 

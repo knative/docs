@@ -24,7 +24,7 @@ Follow the instructions in the documentation [Installing Knative](https://knativ
     - [Eventing RabbitMQ v0.19](#eventing-rabbitmq-v019)
 - [CLI v0.19](#client-v019)
 - [Operator v0.19](#operator-v019)
-- [Thank you contributors v0.19](#thank-you-contributors-v0.19)
+- [Thank you contributors v0.19](#thank-you-contributors-v019)
 
 
 ### Highlights

@@ -8,7 +8,7 @@ This document has three sections. In first section we capture the resource requi
 
 If you just want to install knative serving in k0s, you can directly skip to [Knative in k0s ](#knative-in-k0s) Installation section.
 
-* [Resource Requirement Analysis](#resource-requirment-analysis)  
+* [Resource Requirement Analysis](#resource-requirement-analysis)
     * [Knative Serving Default Resource Requirement](#knative-serving-default-resource-requirement)
     * [k0s Default Resource Requirement](#k0s-default-resource-requirement)
     * [Knative + k0s Default resource requirement](#knative-k0s-default-resource-requirement)

@@ -288,7 +288,7 @@ The `KafkaSource` implements the `Delivery` Specificiation, allowing you to conf
 
 ```
 
-The `delivery` API is discussed in the [Handling Delivery Failure](../../event-delivery) chapter.
+The `delivery` API is discussed in the [Handling Delivery Failure](../../event-delivery.md) chapter.
 
 ## Optional: Specify the key deserializer
 

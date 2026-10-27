@@ -209,7 +209,7 @@ plugins:
       versioned/serving/samples/hello-world/helloworld-php/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-php
       versioned/serving/samples/hello-world/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-python
       versioned/serving/samples/hello-world/helloworld-ruby/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-ruby
-      versioned/serving/samples/hello-world/helloworld-scala/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-scala
+      versioned/serving/samples/hello-world/helloworld-scala/README.md: versioned/samples/serving.md
       versioned/serving/samples/hello-world/helloworld-shell/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/hello-world/helloworld-shell
       versioned/serving/samples/knative-routing-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/knative-routing-go
       versioned/serving/samples/multi-container/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/multicontainer
