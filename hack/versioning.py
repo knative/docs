@@ -4,6 +4,9 @@ import json
 
 from mkdocs.exceptions import PluginError
 
+# MkDocs adds this hook's directory to sys.path while loading it.
+from docs_versions import is_version_directory
+
 _versions = []
 _pages = {}
 
@@ -27,8 +30,7 @@ def on_env(env, *, config, files):
         if not isinstance(version, dict):
             raise PluginError("Each versions.json entry must be an object")
         directory = version.get("version")
-        if (not isinstance(directory, str) or not directory
-                or directory in (".", "..") or "/" in directory or "\\" in directory):
+        if not is_version_directory(directory):
             raise PluginError("Each version must name a documentation directory")
         title = version.get("title", directory)
         if not isinstance(title, str):

@@ -32,4 +32,10 @@ To fix a snippet in an already published release, backport the change to that
 release's `docs/snippets/` directory, just as you would for a documentation page.
 A change on `main` alone will not update released documentation.
 
+To check a backport before it merges, preview the release branch on its own
+(for example, run `./hack/mkdocs.sh` from a checkout of that branch); a
+single-branch preview always uses its own snippets. The full multi-version build
+(`./hack/build.sh`) fetches release branches from the Git remote, so it only
+shows a backport after it has merged.
+
 For more info, see the [PyMdown Extensions Documentation](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/)
