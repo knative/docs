@@ -11,6 +11,7 @@ validation:
     anchors: warn
 hooks:
   - hack/versioning.py
+  - hack/snippets.py
   - hack/local_preview.py
 watch:
   - docs

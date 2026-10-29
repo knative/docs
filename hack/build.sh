@@ -76,6 +76,20 @@ fi
 mkdir "$TEMP/content"
 cp -r . "$TEMP/content/"
 
+# Keep snippet snapshots outside docs_dir: they are build inputs, not pages or
+# downloadable assets. Each published documentation tree gets its own root,
+# named after its versions.json "version" directory (hack/snippets.py checks this).
+snapshot_snippets() {
+  local checkout=$1 version_dir=$2
+  mkdir -p "$TEMP/content/.snippets/$version_dir"
+  cp -R "$checkout/docs/snippets/." "$TEMP/content/.snippets/$version_dir/"
+}
+
+# The checkout copy above only contains .snippets if one was created by hand;
+# start from a clean set of snapshots.
+rm -rf "$TEMP/content/.snippets"
+snapshot_snippets . "$CHECKOUT_DIR"
+
 # Point top-level nav to docs directory.
 echo -e "nav:\n- docs\n- about\n- blog\n- community" > "$TEMP/content/docs/.nav.yml"
 curl -f -L --show-error https://raw.githubusercontent.com/knative/serving/main/docs/serving-api.md -s > "$TEMP/content/docs/versioned/serving/reference/serving-api.md"
@@ -97,6 +111,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
   # Handle current release specially, as we don't include a version slug
   # Note that git worktree reuses the same git clone, so we don't need to clone 50+MB each time.
   git worktree add --detach "$TEMP/current-release" "${REMOTE_BRANCH}/${DOCS_BRANCHES[0]}"
+  snapshot_snippets "$TEMP/current-release" docs
   if [ -d "$TEMP/current-release/docs/versioned" ]; then
     cp -r "$TEMP/current-release/docs/versioned" "$TEMP/content/docs/docs"
     echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/docs/.meta.yml"
@@ -131,6 +146,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
 
     echo "Building for previous version $version"
     git worktree add --detach "$TEMP/docs-$version" "${REMOTE_BRANCH}/${DOCS_BRANCHES[i+1]}"
+    snapshot_snippets "$TEMP/docs-$version" "v$version-docs"
     if [ -d "$TEMP/docs-$version/docs/versioned" ]; then
       cp -r "$TEMP/docs-$version/docs/versioned" "$TEMP/content/docs/v$version-docs"
       echo -e "\ndoc_base: /docs/versioned/" >> "$TEMP/content/docs/v$version-docs/.meta.yml"
@@ -165,7 +181,7 @@ if [ "$BUILD_VERSIONS" != "no" ]; then
 
   # Put the development version at the end of the JSON list of documentation,
   # even though we put it in the directory first.
-  versionjson+="{\"version\": \"development\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
+  versionjson+="{\"version\": \"$CHECKOUT_DIR\", \"title\": \"(Pre-release)\", \"aliases\": [\"\"]}"
 fi
 
 # Make the version manifest available to the selector hook during rendering.

@@ -5,6 +5,7 @@ site_url: https://knative.dev/
 site_description: Knative Documentation
 hooks:
   - hack/versioning.py
+  - hack/snippets.py
 extra_javascript:
   - js/version-selector.js
 extra_css:
@@ -65,7 +66,9 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.details
   - pymdownx.snippets:
+      # snippets.py selects the page's release-specific root before rendering.
       base_path: docs/snippets
+      check_paths: true
   - pymdownx.keys
   - pymdownx.caret
   - pymdownx.mark
@@ -106,6 +109,7 @@ plugins:
   macros:
     module_name: hack/macros
     include_dir: docs/snippets
+    on_error_fail: true
 
 copyright: "Copyright © 2025 The Knative Authors"
 
