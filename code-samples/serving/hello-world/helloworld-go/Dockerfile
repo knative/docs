@@ -1,6 +1,6 @@
 # Use the official Golang image to create a build artifact.
-# This is based on Debian and sets the GOPATH to /go.
-FROM golang:latest AS builder
+# Use the supported Go 1.27 release track.
+FROM golang:1.27 AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -21,7 +21,7 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM alpine:3
+FROM alpine:3.24
 RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.

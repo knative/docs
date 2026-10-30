@@ -1,0 +1,4 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { margin: 2rem auto; max-width: 60rem; padding: 0 1rem; }
+main { line-height: 1.5; }
+li { overflow-wrap: anywhere; }

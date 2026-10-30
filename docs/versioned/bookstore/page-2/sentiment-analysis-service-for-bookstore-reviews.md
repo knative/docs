@@ -106,7 +106,7 @@ You can find all the supported language templates [here](https://knative.dev/doc
 
 ![Image14](images/image14.png)
 
-`sentiment-analysis-app/function/func.py` is the file that contains the code for the function. 
+[`sentiment-analysis-app/function/func.py`](https://github.com/knative/docs/blob/main/code-samples/eventing/bookstore-sample-app/solution/sentiment-analysis/function/func.py) is the file that contains the code for the function.
 
 You can replace the generated code with the sentiment analysis logic. You can use the following code as a starting point:
 
@@ -175,7 +175,7 @@ You can replace the generated code with the sentiment analysis logic. You can us
 
 ![Image9](images/image9.png)
 
-The `sentiment-analysis-app/pyproject.toml` file contains the project configuration with the dependencies for the function. Add the `textblob` dependency to the dependencies array :
+The [`sentiment-analysis-app/pyproject.toml`](https://github.com/knative/docs/blob/main/code-samples/eventing/bookstore-sample-app/solution/sentiment-analysis/pyproject.toml) file contains the project configuration with the dependencies for the function. Add the `textblob` dependency to the dependencies array :
 ???+ abstract "_sentiment-analysis-app/pyproject.toml_"
 
     ```toml

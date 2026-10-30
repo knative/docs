@@ -143,14 +143,14 @@ plugins:
       versioned/eventing/samples/github-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/github-source
       versioned/eventing/samples/gitlab-source/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/gitlab-source
       versioned/eventing/samples/helloworld/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld
-      versioned/eventing/samples/helloworld/helloworld-go/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-go
+      versioned/eventing/samples/helloworld/helloworld-go/README.md: https://github.com/knative/docs/tree/main/code-samples/serving/cloudevents/cloudevents-go/eventing
       versioned/eventing/samples/helloworld/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-python
       versioned/eventing/samples/kafka/binding/README.md: versioned/eventing/sources/kafka-source/README.md
       versioned/eventing/samples/kafka/channel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/channel
       versioned/eventing/samples/kubernetes-event-source/index.md: versioned/eventing/sources/apiserversource/README.md
       versioned/eventing/samples/parallel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel
-      versioned/eventing/samples/parallel/multiple-branches/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/multiple-branches
-      versioned/eventing/samples/parallel/mutual-exclusivity/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel/mutual-exclusivity
+      versioned/eventing/samples/parallel/multiple-branches/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel#filter-routing
+      versioned/eventing/samples/parallel/mutual-exclusivity/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel#switch-routing
       versioned/eventing/samples/ping-source/index.md: versioned/eventing/sources/ping-source/README.md
       versioned/eventing/samples/sequence/index.md: versioned/eventing/flows/sequence/README.md
       versioned/eventing/samples/sequence/sequence-replay-to-event-display/index.md: versioned/eventing/flows/sequence/sequence-reply-to-event-display/README.md

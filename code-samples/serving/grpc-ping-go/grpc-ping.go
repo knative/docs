@@ -8,6 +8,7 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
 	"time"
 
 	ping "github.com/knative/docs/code-samples/serving/grpc-ping-go/proto"
@@ -15,8 +16,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
-
-var port = 8080
 
 type pingServer struct {
 }
@@ -53,7 +52,11 @@ func (p *pingServer) PingStream(stream ping.PingService_PingStreamServer) error 
 }
 
 func main() {
-	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", port))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	lis, err := net.Listen("tcp", net.JoinHostPort("0.0.0.0", port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

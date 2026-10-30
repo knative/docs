@@ -2,16 +2,19 @@
 
 A simple web app created with R package, [plumber](https://www.rplumber.io).
 plumber creates a REST API by adding annotations to your R code. The R script
-reads an environment variable `TARGET` and prints `Hello ${TARGET}!`. If the
-`TARGET` environment variable is not specified, the script uses `World`.
+reads an environment variable `TARGET` and returns `Hello ${TARGET}!` as HTML.
+If `TARGET` is not specified, the script uses `World`; an explicitly empty value
+produces `Hello !`. `PORT` defaults to `8080` and must be an integer from 1 to
+65535; invalid or empty values fail startup.
 
-Follow the steps below to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+The Dockerfile uses R 4.6.1 and installs plumber from CRAN.
+
+Clone the sample, then follow the steps below to test
+and deploy the app to your cluster:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
-cd knative-docs/code-samples/community/serving/hello-world/helloworld-r
+cd knative-docs/code-samples/community/serving/helloworld-rserver
 ```
 
 ## Before you begin
@@ -22,80 +25,48 @@ cd knative-docs/code-samples/community/serving/hello-world/helloworld-r
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Recreating the sample code
+## Understanding the sample files
 
-1. Create a new file named `HelloWorld.R` and paste the following script:
+Use the files from the cloned directory rather than recreating copies:
 
-   ```R
-   #' HelloWorld function
-   #' @get /
-   #' @html
-   function() {
-     TARGET <- Sys.getenv("TARGET", "World")
+- [`HelloWorld.R`](HelloWorld.R) defines `GET /` using plumber annotations and
+  returns the greeting with the HTML serializer.
+- [`server.R`](server.R) validates `PORT`, loads the API, and listens on
+  `0.0.0.0` so Docker and Knative can reach it.
+- [`Dockerfile`](Dockerfile) installs plumber with `install.packages("plumber", repos="https://cloud.r-project.org")`
+  and starts the server.
+- [`service.yaml`](service.yaml) is the Knative Service manifest. Replace
+  `{username}` in its image reference with your Docker Hub username before
+  deploying; its `TARGET` setting produces `Hello R Server Sample v1!`.
 
-     message = paste("Hello ", TARGET, "!", sep = "")
-     print(message)
-   }
-   ```
+## Testing locally
 
-   This file defines the endpoint `/`, using plumber annotations.
+Build the image and exercise the actual HTTP listener with Docker:
 
-1. Create a new file named `server.R` and paste the following code:
+```bash
+docker build -t helloworld-rserver .
+docker run --rm -p 127.0.0.1:8080:8080 helloworld-rserver
+# In another terminal: curl -i http://127.0.0.1:8080/
+# Expected: HTTP 200, text/html; charset=UTF-8, body Hello World!
+```
 
-  ```R
-  library(plumber) # https://www.rplumber.io/
+Stop the container before testing an override:
 
-  # Translate the HelloWorld file into a Plumber API
-  r <- plumb("HelloWorld.R")
-  # Get the PORT env var
-  PORT <- strtoi(Sys.getenv("PORT", 8080))
-  # Run the API
-  r$run(port=PORT, host="0.0.0.0")
-  ```
+```bash
+docker run --rm -p 127.0.0.1:9090:9090 -e PORT=9090 -e TARGET='R Server Sample v1' helloworld-rserver
+# In another terminal: curl -i http://127.0.0.1:9090/
+# Expected body: Hello R Server Sample v1!
+```
 
-1. Create a new file named `Dockerfile` and paste the following code:
-
-  ```docker
-  # The official R base image
-  # https://hub.docker.com/_/r-base
-  FROM r-base:3.6.0
-
-  # Copy local code to the container image.
-  WORKDIR /usr/src/app
-  COPY . .
-
-  # Install R packages
-  RUN Rscript -e "install.packages('plumber', repos='http://cran.us.r-project.org/')"
-
-  # Run the web service on container startup.
-  CMD ["Rscript", "server.R"]
-  ```
-
-
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-rserver
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-         - image: docker.io/{username}/helloworld-rserver
-           env:
-           - name: TARGET
-             value: "R Server Sample v1"
-   ```
+An unknown path returns HTTP 404; unsupported methods such as `POST /` return
+HTTP 405. Stop the local container when finished. For a custom port on Knative,
+set `containers[].ports[].containerPort` to an allowed port (for example, `18081`);
+Knative injects the matching `PORT`. Port `9090` in the standalone Docker example
+is reserved by Knative and cannot be used as a Knative container port.
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+From the cloned sample directory, build and deploy the sample app.
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
@@ -125,14 +96,14 @@ folder) you're ready to build and deploy the sample app.
 1. Run the following command to find the domain URL for your service:
 
    ```bash
-   kubectl get ksvc helloworld-r  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   kubectl get ksvc helloworld-rserver --output=custom-columns=NAME:.metadata.name,URL:.status.url
    ```
 
    Example:
 
    ```bash
-   NAME                URL
-   helloworld-r    http://helloworld-r.default.1.2.3.4.sslip.io
+   NAME                 URL
+   helloworld-rserver   http://helloworld-rserver.default.1.2.3.4.sslip.io
    ```
 
 1. Now you can make a request to your app and see the result. Replace
@@ -146,7 +117,7 @@ folder) you're ready to build and deploy the sample app.
 
    ```bash
    curl http://helloworld-rserver.default.1.2.3.4.sslip.io
-   [1] "Hello R Sample v1!"
+   Hello R Server Sample v1!
    ```
 
    > Note: Add `-v` option to get more detail if the `curl` command failed.

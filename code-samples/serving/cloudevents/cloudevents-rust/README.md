@@ -14,12 +14,13 @@ that can receive CloudEvents. It supports running in two modes:
    implementing an event source).
    The input event is modified assigning a new source and type attribute.
 
-The application will use `$K_SINK`-mode whenever the environment variable is
-specified.
+The application uses `$K_SINK` mode when the environment variable is nonempty.
+An unset or empty `K_SINK` selects reply mode. Both binary and structured
+CloudEvents v1.0 HTTP requests are supported; reply events use binary encoding.
 
-Do the following steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample by running the
-following commands:
+Use the checked-in [application](src/main.rs), [Dockerfile](Dockerfile), and
+[Service manifest](service.yaml) rather than recreating them from this guide.
+Clone the repository to build and deploy the sample:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -32,27 +33,41 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-rust
   [Install Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
-- This guide uses Rust `musl` toolchain to build the image in order to create
-  really small docker images. To install the Rust toolchain: [`rustup`](https://rustup.rs/).
-  To install musl support: [MUSL support for fully static binaries](https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html).
+- No host Rust installation is required. The multi-stage Dockerfile uses stable
+  Rust **1.99.1**, Actix Web **4.17**, and the official CloudEvents SDK **0.9**.
+  It builds a static musl binary from source for the selected target platform,
+  runs formatting and Clippy, then copies the binary and CA
+  certificates into a non-root `scratch` image.
 
 ## Build and deploy the sample
 
-To build the binary, run:
+Build and push an image for your cluster's architecture:
 
 ```bash
-cargo build --target x86_64-unknown-linux-musl --release
+# Choose linux/amd64 instead for an x86-64 cluster.
+docker buildx build --platform linux/arm64 -t "<image>" --push .
 ```
 
-This will build a statically linked binary, in order to create an image from scratch. Now build the docker image:
+If your builder supports both platforms, publish a multi-architecture image:
 
 ```bash
-# Build and push the container on your local machine.
 docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
 ```
+
+Each platform is compiled from source; no prebuilt host binary is copied. To
+build locally without publishing, run `docker build -t cloudevents-rust .`.
+The build uses `Cargo.lock` with `--locked`. To run the language checks directly
+with a local Rust 1.99.1 toolchain, use:
+
+```bash
+cargo fmt --check
+cargo clippy --locked --release --all-targets -- -D warnings
+```
+
 ### yaml
 
-To deploy the Knative Service, look in the `service.yaml` and replace `<image>` with the deployed image name. Then run:
+To deploy the Knative Service, edit [service.yaml](service.yaml) and replace
+`docker.io/slinkydeveloper/cloudevents-rust` with your deployed image name. Then run:
 
 ```bash
 kubectl apply -f service.yaml
@@ -131,6 +146,24 @@ You'll get as result:
 <
 {"name":"Dave"}
  ```
+
+### Forwarding events with `K_SINK`
+
+To forward events rather than return them, configure `K_SINK` with the HTTP URL
+of a receiving Service or Broker (see the commented environment configuration in
+`service.yaml`). The receiver gets the same event ID and data with the source
+and type shown above. A successful delivery returns HTTP `202 Accepted` with an
+empty body to the caller, not a reply CloudEvent. A failed delivery returns HTTP
+`500 Internal Server Error`. Sink requests have a 30-second timeout. An empty
+`K_SINK` behaves like an unset variable and returns the reply event instead.
+
+The server listens on all interfaces on `PORT` (default `8080`; invalid values
+fall back to the default). On Knative, configure the container's
+`ports[].containerPort` (for example `8081`); Knative injects `PORT` automatically.
+Do not set the reserved `PORT` environment variable yourself or use Knative's
+reserved port `9090`. Outside Knative, you can set `PORT` directly. `RUST_LOG` can
+override the default `info` logging level. Missing or malformed CloudEvents
+return HTTP `400 Bad Request`.
 
 ## Removing the sample app deployment
 

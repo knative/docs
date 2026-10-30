@@ -7,28 +7,15 @@ spec:
   template:
     spec:
       containers:
-      - image: github.com/knative/docs/code-samples/serving/secrets-go
-        env:
-        # This directs the Google Cloud SDK to use the identity and project
-        # defined by the Service Account (aka robot) in the JSON file at
-        # this path.
-        #  - `/var/secret` is determined by the `volumeMounts[0].mountPath`
-        #   below. This can be changed if both places are changed.
-        #  - `robot.json` is determined by the "key" that is used to hold the
-        #   secret content in the Kubernetes secret.  This can be changed
-        #   if both places are changed.
-        - name: GOOGLE_APPLICATION_DEFAULT
-          value: /var/secret/robot.json
-
-        # This section specified where in the container we want the
-        # volume containing our secret to be mounted.
+      # Replace {username} with your container registry username.
+      - image: docker.io/{username}/secrets-go
+        # SECRET_FILE defaults to /var/secret/message. If you change the mount
+        # path or projected filename, set SECRET_FILE to the matching file path.
         volumeMounts:
-        - name: robot-secret
+        - name: demo-secret
           mountPath: /var/secret
-
-      # This section attaches the secret "google-robot-secret" to
-      # the Pod holding the user container.
+          readOnly: true
       volumes:
-      - name: robot-secret
+      - name: demo-secret
         secret:
-          secretName: google-robot-secret
+          secretName: mounted-secret

@@ -9,13 +9,13 @@ const port = 8000;
 
 
 // Middleware to parse JSON bodies
-app.use(express.json());
+app.use(express.json({type: ['application/json', 'application/cloudevents+json']}));
 app.use(cors());
 expressWs(app);  // Apply WebSocket functionality to Express
 
 // Configure the PostgreSQL connection pool
 const pool = new Pool({
-    host: 'postgresql.default.svc.cluster.local',
+    host: process.env.PGHOST || 'postgresql',
     port: 5432,
     database: 'mydatabase',
     user: 'myuser',
@@ -84,7 +84,7 @@ app.post('/insert', async (req, res) => {
 
         // Set headers and send the CloudEvent
         res.writeHead(200, serializedEvent.headers);
-        res.end(JSON.stringify(serializedEvent.body));
+        res.end(serializedEvent.body);
 
     } catch (error) {
         console.error('Error processing request:', error);

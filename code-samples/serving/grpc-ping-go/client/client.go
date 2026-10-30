@@ -20,7 +20,7 @@ import (
 var (
 	serverAddr         = flag.String("server_addr", "127.0.0.1:8080", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "", "")
-	insecure           = flag.Bool("insecure", false, "Set to true to skip SSL validation")
+	insecure           = flag.Bool("insecure", false, "Set to true to use plaintext HTTP/2 instead of TLS")
 	skipVerify         = flag.Bool("skip_verify", false, "Set to true to skip server hostname verification in SSL validation")
 )
 

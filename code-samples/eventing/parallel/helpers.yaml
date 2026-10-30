@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: parallel-helpers
+spec:
+  template:
+    spec:
+      containers:
+      - image: dev.local/parallel-helpers:go-v1
+        imagePullPolicy: IfNotPresent

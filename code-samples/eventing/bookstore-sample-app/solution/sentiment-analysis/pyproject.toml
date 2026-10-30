@@ -1,0 +1,20 @@
+[project]
+name = "function"
+description = ""
+version = "0.1.0"
+requires-python = ">=3.9"
+readme = "README.md"
+license = "MIT"
+dependencies = [
+  "cloudevents>=2.2,<3",
+  "textblob",
+]
+authors = [
+  { name="Your Name", email="you@example.com"},
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+

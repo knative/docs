@@ -2,11 +2,17 @@
 
 A simple web app written in Kotlin using [Ktor](https://ktor.io/) that you can
 use for testing. It reads in an env variable `TARGET` and prints "Hello
-\${TARGET}". If TARGET is not specified, it will use "World" as the TARGET.
+\${TARGET}!". If TARGET is not specified, it will use "World" as the TARGET.
+An empty TARGET stays empty. The server listens on `0.0.0.0` and uses `PORT`
+(default `8080`). GET `/` returns an HTML greeting followed by a newline;
+unknown routes return 404 and unsupported methods return 405.
 
-Do the following steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+The sample uses Java 21 LTS (Eclipse Temurin), Gradle 9.8.2, Kotlin 2.4.21,
+and Ktor 3.6.0. Docker supplies all build tools; no host Java or Gradle install
+is needed.
+
+Clone the repository and use the checked-in sample files to build and deploy the
+app:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -20,123 +26,46 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-kotlin
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Recreating the sample code
+## Sample files
 
-1. Create a new directory and cd into it:
+The sample files are:
 
-   ```bash
-   mkdir hello
-   cd hello
-   ```
-
-2. Create a file named `Main.kt` at `src/main/kotlin/com/example/hello` and copy
-   the following code block into it:
-
-   ```bash
-   mkdir -p src/main/kotlin/com/example/hello
-   ```
-
-   ```kotlin
-   package com.example.hello
-
-   import io.ktor.application.*
-   import io.ktor.http.*
-   import io.ktor.response.*
-   import io.ktor.routing.*
-   import io.ktor.server.engine.*
-   import io.ktor.server.netty.*
-
-   fun main(args: Array<String>) {
-      val target = System.getenv("TARGET") ?: "World"
-      val port = System.getenv("PORT") ?: "8080"
-      embeddedServer(Netty, port.toInt()) {
-          routing {
-              get("/") {
-                  call.respondText("Hello $target!\n", ContentType.Text.Html)
-              }
-          }
-      }.start(wait = true)
-   }
-   ```
-
-3. Switch back to `hello` directory
-
-4. Create a new file, `build.gradle` and copy the following setting
-
-   ```groovy
-   plugins {
-       id "org.jetbrains.kotlin.jvm" version "1.4.10"
-   }
-   apply plugin: 'application'
-
-   mainClassName = 'com.example.hello.MainKt'
-
-   jar {
-       manifest {
-           attributes 'Main-Class': mainClassName
-       }
-       from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-   }
-
-   repositories {
-       mavenCentral()
-   }
-
-   dependencies {
-       compile "io.ktor:ktor-server-netty:1.3.1"
-   }
-   ```
-
-5. Create a file named `Dockerfile` and copy the following code block into it.
-
-   ```docker
-   # Use the official gradle image to create a build artifact.
-   # https://hub.docker.com/_/gradle
-   FROM gradle:6.7 AS builder
-
-   # Copy local code to the container image.
-   COPY build.gradle .
-   COPY src ./src
-
-   # Build a release artifact.
-   RUN gradle clean build --no-daemon
-
-   # Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-   # https://hub.docker.com/_/openjdk
-   # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-   FROM openjdk:8-jre-alpine
-
-   # Copy the jar to the production image from the builder stage.
-   COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
-
-   # Run the web service on container startup.
-   CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/helloworld.jar" ]
-   ```
-
-6. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-kotlin
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-kotlin
-             env:
-               - name: TARGET
-                 value: "Kotlin Sample v1"
-   ```
+- [Main.kt](src/main/kotlin/com/example/hello/Main.kt) starts the externally
+  accessible Ktor server and defines the greeting route.
+- [build.gradle](build.gradle) declares the Java toolchain, Kotlin/Ktor
+  dependencies, application entrypoint, and lint checks.
+- [Dockerfile](Dockerfile) builds the application, then runs the
+  production distribution on a Java 21 JRE as a non-root user.
+- [service.yaml](service.yaml) deploys the Knative Service with
+  `TARGET="Kotlin Sample v1"`. Before deploying, replace `{username}` in its image
+  reference with your Docker Hub username.
 
 ## Build and deploy this sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+From the cloned sample directory, build and deploy the app using the checked-in
+files. The Docker build runs `ktlintCheck` before
+assembling the production distribution.
+
+For a local build and smoke test without publishing to a registry:
+
+```bash
+docker build -t helloworld-kotlin:local .
+docker run --rm -p 127.0.0.1:8080:8080 helloworld-kotlin:local
+# In another terminal:
+curl --fail http://127.0.0.1:8080/
+# Hello World!
+```
+
+To use a custom target and port, run instead:
+
+```bash
+docker run --rm -e TARGET='Kotlin Sample v1' -e PORT=8081 \
+  -p 127.0.0.1:8081:8081 helloworld-kotlin:local
+```
+
+When deploying a custom port to Knative, set the container's `ports.containerPort`
+(e.g. `8081`) in `service.yaml`; Knative injects `PORT` automatically. Do not use
+Knative-reserved ports such as 9090 or 9091.
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub

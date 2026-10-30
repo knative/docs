@@ -14,12 +14,15 @@ limitations under the License.
 using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CloudEventsSample.Models;
-using Microsoft.AspNetCore.Mvc;
 using CloudNative.CloudEvents;
+using CloudNative.CloudEvents.AspNetCore;
+using CloudNative.CloudEvents.Http;
+using CloudNative.CloudEvents.SystemTextJson;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace CloudEventsSample.Controllers
@@ -32,89 +35,105 @@ namespace CloudEventsSample.Controllers
         private const string CloudEventResponseUri =
             "https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-dotnet";
 
-        private static readonly Lazy<string> SinkUri =
-            new Lazy<string>(() => Environment.GetEnvironmentVariable("K_SINK"));
-
+        private readonly string sinkUri;
+        private readonly IHttpClientFactory clients;
         private readonly ILogger<CloudEventsController> logger;
 
-        public CloudEventsController(ILogger<CloudEventsController> logger)
+        public CloudEventsController(ILogger<CloudEventsController> logger,
+            IHttpClientFactory clients, IConfiguration configuration)
         {
             this.logger = logger;
+            this.clients = clients;
+            this.sinkUri = configuration["K_SINK"];
         }
 
-        /// <summary>
-        /// Responds to the post request by calling ReceiveAndReply if K_SINK is not set,
-        /// or by calling ReceiveAndSend if K_SINK is set.
-        /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CloudEvent receivedEvent)
+        public async Task<IActionResult> Post()
+        {
+            CloudEvent receivedEvent;
+            SampleInput input;
+            try
+            {
+                receivedEvent = await this.ReadEvent();
+                if (receivedEvent.Data is not JsonElement data || data.ValueKind != JsonValueKind.Object)
+                {
+                    return this.BadRequest("Event data must be a JSON object containing a name.");
+                }
+                input = data.Deserialize<SampleInput>();
+                if (input == null || string.IsNullOrWhiteSpace(input.Name))
+                {
+                    return this.BadRequest("Event data must contain a nonempty name.");
+                }
+            }
+            catch (Exception ex) when (IsInvalidEvent(ex))
+            {
+                return this.BadRequest("Expected a valid CloudEvent with JSON data.");
+            }
+
+            // Log attributes rather than serializing SDK implementation details.
+            this.logger.LogInformation("Received event {Id} of type {Type}", receivedEvent.Id, receivedEvent.Type);
+            var response = GetResponseForInput(input);
+            return string.IsNullOrEmpty(this.sinkUri)
+                ? this.ReceiveAndReply(response)
+                : await this.ReceiveAndSend(response);
+        }
+
+        private IActionResult ReceiveAndReply(CloudEvent response)
+        {
+            return new CloudEventActionResult(HttpStatusCode.OK, response);
+        }
+
+        private async Task<IActionResult> ReceiveAndSend(CloudEvent response)
         {
             try
             {
-                if (string.IsNullOrEmpty(SinkUri.Value))
-                {
-                    return this.ReceiveAndReply(receivedEvent);
-                }
-                else
-                {
-                    return await this.ReceiveAndSend(receivedEvent);
-                }
+                using var content = response.ToHttpContent(ContentMode.Structured, new JsonEventFormatter());
+                using var result = await this.clients.CreateClient("sink").PostAsync(this.sinkUri, content);
+                return this.StatusCode((int)result.StatusCode, await result.Content.ReadAsStringAsync());
             }
-            catch (JsonException)
+            catch (HttpRequestException ex)
             {
-                return this.BadRequest("Failed to read the JSON data.");
+                this.logger.LogWarning(ex, "Failed to send event to K_SINK");
+                return this.StatusCode(502, "Failed to send event to K_SINK.");
+            }
+            catch (TaskCanceledException)
+            {
+                return this.StatusCode(504, "K_SINK request timed out.");
             }
         }
 
-        /// <summary>
-        /// This is called whenever an event is received if K_SINK environment variable is NOT set.
-        /// Replies with a new event.
-        /// </summary>
-        private IActionResult ReceiveAndReply(CloudEvent receivedEvent)
+        // Echo the original event using the SDK formatter, not its internal object representation.
+        [HttpPost("echo")]
+        public async Task<IActionResult> Echo()
         {
-            this.logger?.LogInformation($"Received event {JsonSerializer.Serialize(receivedEvent)}");
-            var content = GetResponseForEvent(receivedEvent);
-            this.HttpContext.Response.RegisterForDispose(content);
-            return new CloudEventActionResult(HttpStatusCode.OK, content);
+            try
+            {
+                return new CloudEventActionResult(HttpStatusCode.OK, await this.ReadEvent());
+            }
+            catch (Exception ex) when (IsInvalidEvent(ex))
+            {
+                return this.BadRequest("Expected a valid CloudEvent with JSON data.");
+            }
         }
 
-        /// <summary>
-        /// This is called whenever an event is received if K_SINK environment variable is set.
-        /// Sends a new event to the url in K_SINK.
-        /// </summary>
-        private async Task<IActionResult> ReceiveAndSend(CloudEvent receivedEvent)
+        private async Task<CloudEvent> ReadEvent()
         {
-            this.logger?.LogInformation($"Received event {JsonSerializer.Serialize(receivedEvent)}");
-            using var content = GetResponseForEvent(receivedEvent);
-            using var client = new HttpClient();
-            using var result = await client.PostAsync(SinkUri.Value, content);
-            return this.StatusCode((int)result.StatusCode, await result.Content.ReadAsStringAsync());
+            var receivedEvent = await this.Request.ToCloudEventAsync(new JsonEventFormatter());
+            receivedEvent.Validate();
+            return receivedEvent;
         }
 
-        /// <summary>
-        /// Respond back with the JSON serialized request.
-        /// </summary>
-        [HttpPost, Route("echo")]
-        public ActionResult Echo([FromBody] CloudEvent receivedEvent)
-        {
-            this.logger.LogInformation($"Echo: {JsonSerializer.Serialize(receivedEvent)}");
-            return this.Ok(JsonSerializer.Serialize(receivedEvent));
-        }
+        private static bool IsInvalidEvent(Exception ex) =>
+            ex is JsonException or ArgumentException or InvalidOperationException or FormatException;
 
-        private static CloudEventContent GetResponseForEvent(CloudEvent receivedEvent)
+        private static CloudEvent GetResponseForInput(SampleInput input) => new CloudEvent
         {
-            var input = JsonSerializer.Deserialize<SampleInput>(receivedEvent.Data.ToString());
-            var content = new CloudEventContent
-            (
-                new CloudEvent(CloudEventResponseType, new Uri(CloudEventResponseUri))
-                {
-                    DataContentType = new ContentType(MediaTypeNames.Application.Json),
-                    Data = new SampleOutput {Message = $"Hello, {input.Name}"},
-                },
-                ContentMode.Structured,
-                new JsonEventFormatter()
-            );
-            return content;
-        }
+            Id = Guid.NewGuid().ToString(),
+            Time = DateTimeOffset.UtcNow,
+            Type = CloudEventResponseType,
+            Source = new Uri(CloudEventResponseUri),
+            DataContentType = "application/json",
+            Data = new SampleOutput { Message = $"Hello, {input.Name}" }
+        };
     }
 }

@@ -1,0 +1,15 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: output-to-capture
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.docs.sample
+      source: https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: event-display

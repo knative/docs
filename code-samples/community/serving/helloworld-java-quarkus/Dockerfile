@@ -1,18 +1,15 @@
-FROM quay.io/rhdevelopers/quarkus-java-builder as builder
-COPY . /project
-WORKDIR /project
-# uncomment this to set the MAVEN_MIRROR_URL of your choice, to make faster builds
-# ARG MAVEN_MIRROR_URL=<your-maven-mirror-url>
-# e.g.
-#ARG MAVEN_MIRROR_URL=http://192.168.64.1:8081/nexus/content/groups/public
+# Build with a supported Java LTS and Maven release.
+FROM maven:3.9.16-eclipse-temurin-25 AS build
+WORKDIR /workspace
+ENV MAVEN_OPTS="-Xmx768m -XX:ActiveProcessorCount=2"
+COPY pom.xml ./
+COPY src ./src
+RUN mvn -B -ntp clean verify
 
-RUN /usr/local/bin/entrypoint-run.sh mvn -DskipTests clean package
-
-FROM fabric8/java-jboss-openjdk8-jdk:1.5.4
-USER jboss
-ENV JAVA_APP_DIR=/deployments
-
-COPY --from=builder /project/target/lib/* /deployments/lib/
-COPY --from=builder /project/target/*-runner.jar /deployments/app.jar
-
-ENTRYPOINT [ "/deployments/run-java.sh" ]
+# Quarkus fast-jar: copy the entire directory, not only quarkus-run.jar.
+FROM eclipse-temurin:25-jre
+WORKDIR /app
+COPY --from=build --chown=1001:0 /workspace/target/quarkus-app/ ./
+USER 1001
+EXPOSE 8080
+ENTRYPOINT ["/bin/sh", "-c", "export PORT=\"${PORT:-8080}\"; exec java -XX:MaxRAMPercentage=75.0 -XX:ActiveProcessorCount=2 -jar /app/quarkus-run.jar"]

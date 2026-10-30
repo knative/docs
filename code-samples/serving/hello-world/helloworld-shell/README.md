@@ -4,7 +4,11 @@ This guide describes the steps required to create the `helloworld-shell` sample 
 cluster.
 
 The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`.
-If `TARGET` is not specified, `World` is used as the default value.
+If `TARGET` is not specified or is empty, `World` is used as the default value.
+The server listens on all interfaces on `PORT`, defaulting to `8080` when unset or empty.
+
+The image uses BusyBox 1.38 and its `httpd` server; no language runtime or
+additional application dependencies are needed.
 
 You can also download a working copy of the sample, by running the
 following commands:
@@ -24,47 +28,14 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-shell
 
 ## Building
 
-1. Create a new file named `script.sh` and paste the following script. This will run BusyBox' `http` returning a friendly welcome message as `plain/text` plus some extra information:
+Use the files in the cloned sample directory:
 
-  ```bash
-  #!/bin/sh
+- [`script.sh`](script.sh) is the CGI application served by BusyBox's `httpd`.
+  It returns the greeting as `text/plain`, using `World` when `TARGET` is unset or empty.
+- [`Dockerfile`](Dockerfile) copies the CGI script into the BusyBox image and
+  configures the listener from `PORT` at startup.
 
-  # Print out CGI header
-  # See https://tools.ietf.org/html/draft-robinson-www-interface-00
-  # for the full CGI specification
-  echo -e "Content-Type: text/plain\n"
-
-  # Use environment variable TARGET or "World" if not set
-  echo "Hello ${TARGET:=World}!"
-
-  # In this script you can perform more dynamic actions, too.
-  # Like printing the date, checking CGI environment variables, ...
-  ```
-
-1. Create a new file named `Dockerfile` and copy the following code block into it.
-
-   ```docker
-   # Busybox image that contains the simple 'httpd'
-   # https://git.busybox.net/busybox/tree/networking/httpd.c
-   FROM busybox
-
-   # Serve from this directory
-   WORKDIR /var/www
-
-   # Prepare httpd command for being started via init
-   # This indirection is required for proper SIGTERM handling
-   RUN echo "::sysinit:httpd -vv -p 8080 -u daemon -h /var/www" > /etc/inittab
-
-   # Copy over our CGI script and make it executable
-   COPY --chown=daemon:daemon script.sh cgi-bin/index.cgi
-   RUN chmod 755 cgi-bin/index.cgi
-
-   # Startup init which in turn starts httpd
-   CMD init
-   ```
-
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
+Build from this directory so Docker can find the CGI script:
 
 1. Use Docker to build the sample code into a container. To build and push with
    Docker Hub, run these commands replacing `{username}` with your Docker Hub
@@ -72,8 +43,24 @@ folder) you're ready to build and deploy the sample app.
 
    ```bash
    # Build and push the container on your local machine.
-   docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-shell" --push .
+   docker buildx build --pull --platform linux/arm64,linux/amd64 -t "{username}/helloworld-shell" --push .
    ```
+
+## Testing locally
+
+Build a single-platform image without pushing, then run it on a custom port:
+
+```bash
+docker build --pull -t helloworld-shell:local .
+docker run --rm -d --name helloworld-shell-local -p 127.0.0.1:8081:9090 \
+  -e PORT=9090 -e TARGET="Shell Sample v1" helloworld-shell:local
+curl --fail http://127.0.0.1:8081/
+# Hello Shell Sample v1!
+docker stop helloworld-shell-local
+```
+
+Omit `TARGET` or pass `-e TARGET=` to use the `World` fallback.
+Omit `PORT` to listen on 8080.
 
 ## Deploying
 
@@ -82,23 +69,10 @@ After the build has completed and the container is pushed to Docker Hub, you can
 Choose one of the following methods to deploy the app:
 
 ### yaml
-1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-shell
-  namespace: default
-spec:
-  template:
-    spec:
-      containers:
-        - image: docker.io/{username}/helloworld-shell
-          env:
-            - name: TARGET
-              value: "Shell Sample v1"
-```
-Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
+1. Open the checked-in [`service.yaml`](service.yaml) and replace `{username}` in its
+   image reference with your Docker Hub username. The manifest configures
+   `TARGET="Shell Sample v1"`. Ensure that its image reference matches the image
+   built and pushed in the previous step.
 1. Apply the configuration using `kubectl`:
 ```bash
 kubectl apply --filename service.yaml

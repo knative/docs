@@ -3,32 +3,35 @@ GEM
   specs:
     base64 (0.3.0)
     logger (1.7.0)
-    mustermann (3.0.4)
-      ruby2_keywords (~> 0.0.1)
-    rack (3.1.21)
-    rack-protection (4.2.0)
+    mustermann (3.1.1)
+    rack (3.2.7)
+    rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
       rack (>= 3.0.0, < 4)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
-    ruby2_keywords (0.0.5)
-    sinatra (4.2.0)
+    rackup (2.3.1)
+      rack (>= 3)
+    sinatra (4.2.1)
       logger (>= 1.6.0)
       mustermann (~> 3.0)
       rack (>= 3.0.0, < 4)
-      rack-protection (= 4.2.0)
+      rack-protection (= 4.2.1)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
-    tilt (2.6.1)
+    tilt (2.9.0)
+    webrick (1.9.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  rack (>= 2.0.6)
-  sinatra
+  rack (~> 3.2.7)
+  rackup (~> 2.3)
+  sinatra (~> 4.2.1)
+  webrick (~> 1.9)
 
 BUNDLED WITH
-   2.1.4
+  4.0.23

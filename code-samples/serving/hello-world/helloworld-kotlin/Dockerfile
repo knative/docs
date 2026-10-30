@@ -1,21 +1,16 @@
-# Use the official gradle image to create a build artifact.
-# https://hub.docker.com/_/gradle
-FROM gradle:6.7 AS builder
+# Build with a maintained Gradle release and Java 25 LTS.
+FROM gradle:9.8.2-jdk25 AS builder
+WORKDIR /workspace
 
-# Copy local code to the container image.
-COPY build.gradle .
+COPY build.gradle ./
 COPY src ./src
+RUN gradle clean build installDist --no-daemon --max-workers=2
 
-# Build a release artifact.
-RUN gradle clean build --no-daemon
+# Keep the supported Eclipse Temurin runtime separate from the build tools.
+FROM eclipse-temurin:25-jre
+WORKDIR /app
+COPY --from=builder /workspace/build/install/helloworld-kotlin/ ./
 
-# Use the Official OpenJDK image for a lean production stage of our multi-stage build.
-# https://hub.docker.com/_/openjdk
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM openjdk:8-jre-alpine
-
-# Copy the jar to the production image from the builder stage.
-COPY --from=builder /home/gradle/build/libs/gradle.jar /helloworld.jar
-
-# Run the web service on container startup.
-CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/helloworld.jar" ]
+USER 10001:10001
+EXPOSE 8080
+ENTRYPOINT ["/app/bin/helloworld-kotlin"]

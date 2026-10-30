@@ -128,7 +128,7 @@ spec:
       apiVersion: camel.apache.org/v1  # The API version for Kamelet.
       name: slack-sink  # The name of the Kamelet to use as the sink, in this case, a predefined "slack-sink" Kamelet.
     properties:
-      channel: “#bookstore-owner”  # The Slack channel where notifications will be sent.
+      channel: "#bookstore-owner"  # The Slack channel where notifications will be sent.
       webhookUrl: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"  # The Webhook URL provided by Slack for posting messages to a specific channel.
 ```
 
@@ -185,7 +185,7 @@ Using curl command to send a CloudEvent to the Broker:
 -H "Ce-Type: new-review-comment" \
 -H "Ce-Source: bookstore-web-app" \
 -H "Content-Type: application/json" \
--d 'Hello from Knative!'
+-d '{"reviewText":"Hello from Knative!"}'
 ```
 
 You can find the URI to your Broker by running the following command:
