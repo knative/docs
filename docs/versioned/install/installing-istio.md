@@ -22,6 +22,13 @@ You need:
 - [`istioctl`](https://istio.io/docs/setup/install/istioctl/) installed.
 - [Knative Serving](../install/README.md) installed (can also be installed after the Istio).
 
+!!! note "Installing with the Knative Operator"
+    The [Knative Operator](operator/knative-with-operators.md) installs and manages
+    the Knative Istio controller (`net-istio`) when Istio is the configured ingress
+    provider. You still need to install Istio itself, but skip the
+    `kubectl apply` command for `net-istio.yaml` below to avoid conflicts with the
+    Operator-managed resources.
+
 ## Supported Istio versions
 
 You can view the latest tested Istio version on the [Knative Net Istio releases page](https://github.com/knative-extensions/net-istio/releases).
