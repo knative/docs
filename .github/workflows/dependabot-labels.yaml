@@ -1,0 +1,23 @@
+name: Label Dependabot PRs
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  label:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      # Use the base-branch workflow without checking out or running PR code.
+      - name: Allow Prow to merge Dependabot updates after checks pass
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api --method POST "repos/${GH_REPO}/issues/${PR_NUMBER}/labels" \
+            -f 'labels[]=skip-review' --silent
