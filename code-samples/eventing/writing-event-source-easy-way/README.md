@@ -107,7 +107,7 @@ image, and push it to a container registry that your cluster can access.
       template:
         spec:
           containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+            - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 
 1. Create the ContainerSource object:
@@ -182,7 +182,7 @@ SinkBinding does not create any containers. It injects the sink information to a
       template:
         spec:
           containers:
-            - image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+            - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
     ```
 
 1. Create a Kubernetes Deployment that runs the event source:
