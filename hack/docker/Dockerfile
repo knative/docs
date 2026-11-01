@@ -8,7 +8,8 @@ RUN apt-get update \
 ENV UV_PROJECT_ENVIRONMENT=/opt/venv \
     UV_PYTHON_DOWNLOADS=never \
     PATH="/opt/venv/bin:$PATH" \
-    NO_MKDOCS_2_WARNING=1
+    NO_MKDOCS_2_WARNING=1 \
+    DISABLE_MKDOCS_2_WARNING=true
 
 WORKDIR /site
 COPY pyproject.toml uv.lock .python-version ./

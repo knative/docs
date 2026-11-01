@@ -17,8 +17,9 @@
 # uv manages Python and the locked environment; no activation needed.
 set -eu
 
-# Hide Material's MkDocs 2 banner without suppressing build diagnostics.
+# Hide Material and ProperDocs migration banners, not build diagnostics.
 export NO_MKDOCS_2_WARNING=1
+export DISABLE_MKDOCS_2_WARNING=true
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$ROOT"
