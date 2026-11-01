@@ -1,460 +1,76 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="801"
-   height="464"
-   viewBox="0 0 801 464"
-   fill="none"
-   version="1.1"
-   id="svg109"
-   sodipodi:docname="knative_flowchart_graphic.svg"
-   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
-  <style>
-    @import url('https://fonts.cdnfonts.com/css/satoshi');
-  </style>
-  <metadata
-     id="metadata113">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="2781"
-     inkscape:window-height="1602"
-     id="namedview111"
-     showgrid="false"
-     inkscape:zoom="2.7758933"
-     inkscape:cx="327.84124"
-     inkscape:cy="232"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg109" />
-  <rect
-     x="0.113255"
-     y="44.3423"
-     width="91.6487"
-     height="35.0203"
-     rx="7.01014"
-     fill="#6A92C5"
-     id="rect2" />
-  <rect
-     x="660.27631"
-     y="47.796398"
-     width="138.10001"
-     height="35.020302"
-     rx="7.0101399"
-     fill="#ffffff"
-     id="rect6"
-     style="opacity:0.99" />
-  <rect
-     x="662.798"
-     y="97.5381"
-     width="138.1"
-     height="35.0203"
-     rx="7.01014"
-     fill="white"
-     id="rect10" />
-  <rect
-     x="662.798"
-     y="147.28"
-     width="138.1"
-     height="35.0203"
-     rx="7.01014"
-     fill="white"
-     id="rect14"
-     style="opacity:0.99" />
-  <rect
-     x="662.798"
-     y="197.021"
-     width="138.1"
-     height="35.0203"
-     rx="7.01014"
-     fill="white"
-     id="rect18" />
-  <g
-     clip-path="url(#clip0_2323_45)"
-     id="g36">
-    <path
-       d="M23.8699 211.67C28.3727 212.789 32.9749 213.461 37.6097 213.677C38.0707 212.556 38.7532 211.54 39.6162 210.689C34.2998 210.585 29.0144 209.853 23.8699 208.508V211.67Z"
-       fill="#737373"
-       id="path22" />
-    <path
-       d="M19.508 234.396V191.191C20.2495 189.534 28.9078 186.59 43.4983 186.59C58.0887 186.59 66.7688 189.534 67.4885 190.951V191.606C65.7002 193.329 57.4998 196.077 43.2583 196.077C36.728 196.227 30.207 195.501 23.8699 193.918V197.058C30.2153 198.597 36.7295 199.33 43.2583 199.239C52.6146 199.239 62.4506 197.974 67.4885 195.27V206.327C66.3074 207.213 64.9674 207.864 63.541 208.246H71.8504V191.039C71.8504 184.081 54.0322 182.315 43.4983 182.315C32.9643 182.315 15.1461 184.169 15.1461 191.039V234.396C15.1461 240.131 26.9013 242.421 36.9555 243.119V238.757C26.3343 238.016 20.1186 235.748 19.508 234.396Z"
-       fill="#737373"
-       id="path24" />
-    <path
-       d="M23.8699 226.282C28.1586 227.351 32.541 228.001 36.9555 228.223V225.17C32.5345 224.955 28.1485 224.275 23.8699 223.142V226.282Z"
-       fill="#737373"
-       id="path26" />
-    <path
-       d="M76.2122 212.585H45.6792C44.5223 212.585 43.4129 213.045 42.5949 213.863C41.7769 214.681 41.3173 215.79 41.3173 216.947V243.119C41.3173 244.275 41.7769 245.385 42.5949 246.203C43.4129 247.021 44.5223 247.48 45.6792 247.48H76.2122C77.3691 247.48 78.4785 247.021 79.2966 246.203C80.1146 245.385 80.5741 244.275 80.5741 243.119V216.947C80.5741 215.79 80.1146 214.681 79.2966 213.863C78.4785 213.045 77.3691 212.585 76.2122 212.585ZM45.6792 243.119V216.947H76.2122V243.119H45.6792Z"
-       fill="#737373"
-       id="path28" />
-    <path
-       d="M52.222 220.656C51.8171 220.656 51.4288 220.817 51.1425 221.103C50.8562 221.389 50.6953 221.778 50.6953 222.182V238.518C50.6953 238.922 50.8562 239.311 51.1425 239.597C51.4288 239.883 51.8171 240.044 52.222 240.044C52.6269 240.044 53.0152 239.883 53.3015 239.597C53.5878 239.311 53.7486 238.922 53.7486 238.518V222.182C53.7486 221.778 53.5878 221.389 53.3015 221.103C53.0152 220.817 52.6269 220.656 52.222 220.656Z"
-       fill="#737373"
-       id="path30" />
-    <path
-       d="M60.9457 220.917C60.5408 220.917 60.1525 221.078 59.8662 221.364C59.5799 221.65 59.4191 222.039 59.4191 222.444V238.757C59.4191 239.162 59.5799 239.55 59.8662 239.837C60.1525 240.123 60.5408 240.284 60.9457 240.284C61.3506 240.284 61.7389 240.123 62.0252 239.837C62.3115 239.55 62.4724 239.162 62.4724 238.757V222.444C62.4724 222.039 62.3115 221.65 62.0252 221.364C61.7389 221.078 61.3506 220.917 60.9457 220.917Z"
-       fill="#737373"
-       id="path32" />
-    <path
-       d="M69.6694 220.656C69.2645 220.656 68.8762 220.817 68.5899 221.103C68.3036 221.389 68.1428 221.778 68.1428 222.182V238.518C68.1428 238.922 68.3036 239.311 68.5899 239.597C68.8762 239.883 69.2645 240.044 69.6694 240.044C70.0743 240.044 70.4626 239.883 70.7489 239.597C71.0352 239.311 71.1961 238.922 71.1961 238.518V222.182C71.1961 221.778 71.0352 221.389 70.7489 221.103C70.4626 220.817 70.0743 220.656 69.6694 220.656Z"
-       fill="#737373"
-       id="path34" />
-  </g>
-  <path
-     d="M45.6792 118.65L45.6792 171.226"
-     stroke="#737373"
-     stroke-width="2.80406"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     id="path42" />
-  <path
-     d="M485.763 77.2062C481.406 77.2062 477.05 76.3612 472.91 74.6712C466.171 71.923 460.923 66.7545 458.133 60.1259C455.342 53.489 455.342 46.1794 458.133 39.5425C460.407 34.1361 464.68 29.9194 470.178 27.6797C475.667 25.4401 481.723 25.4401 487.212 27.6797C496.492 31.4617 500.923 41.979 497.075 51.1263C493.909 58.6492 485.13 62.2424 477.483 59.125C471.161 56.549 468.145 49.3789 470.761 43.1521C472.943 37.9591 479.007 35.4816 484.28 37.6392C485.346 38.074 485.846 39.2717 485.405 40.3218C484.963 41.3719 483.747 41.8641 482.681 41.4293C479.532 40.1495 475.909 41.6262 474.609 44.7273C472.868 48.862 474.876 53.6284 479.074 55.3348C484.588 57.5827 490.936 54.9903 493.218 49.5593C496.183 42.504 492.768 34.3905 485.605 31.4699C481.14 29.6487 476.225 29.6487 471.76 31.4699C467.296 33.2911 463.822 36.7203 461.973 41.1176C459.607 46.7372 459.607 52.9311 461.973 58.5589C464.339 64.1786 468.787 68.5594 474.493 70.8893C481.756 73.8509 489.761 73.8509 497.025 70.8811C504.288 67.9195 509.944 62.3409 512.951 55.1872C513.393 54.1371 514.609 53.6448 515.675 54.0796C516.741 54.5144 517.241 55.7122 516.8 56.7623C513.368 64.9333 506.912 71.2913 498.616 74.6794C494.484 76.3612 490.119 77.2062 485.763 77.2062Z"
-     fill="#6A92C5"
-     id="path44" />
-  <path
-     fill-rule="evenodd"
-     clip-rule="evenodd"
-     d="M463.514 242.029C457.434 242.029 450.164 231.303 450.164 215.215C450.164 199.127 457.434 188.401 463.514 188.401H511.685C517.765 188.401 525.035 199.127 525.035 215.215C525.035 231.303 517.765 242.029 511.685 242.029C508.684 242.029 466.515 242.029 463.514 242.029Z"
-     stroke="#737373"
-     stroke-width="4.9071"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     id="path48" />
-  <path
-     d="M464.202 242.029C470.663 242.029 478.241 231.303 478.241 215.215C478.241 199.127 470.663 188.401 464.202 188.401M479.472 242.029C485.933 242.029 493.51 231.303 493.51 215.215C493.51 199.127 485.933 188.401 479.472 188.401M495.604 242.029C502.065 242.029 509.642 231.303 509.642 215.215C509.642 199.127 502.065 188.401 495.604 188.401"
-     stroke="#737373"
-     stroke-width="4.9071"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     id="path50" />
-  <path
-     d="M253.496 190.919C260.048 189.453 267.313 189.965 273.432 193.025C279.148 195.883 283.744 200.918 285.726 208.291C293.953 209.855 299.875 215.316 302.22 221.865C304.77 228.987 303.02 237.291 295.723 242.71L295.722 242.709C291.442 246.036 285.915 247.815 280.242 247.783V247.784H238.17C238.114 247.784 238.058 247.782 238.002 247.779C227.79 247.166 222.051 240.308 222.051 232.918C222.051 226.401 226.516 220.296 234.578 218.526C232.728 211.897 233.891 205.988 237.119 201.275C240.805 195.894 246.958 192.383 253.496 190.919ZM270.924 198.041C266.135 195.646 260.219 195.162 254.721 196.392C249.21 197.625 244.444 200.504 241.746 204.444C239.356 207.933 238.405 212.509 240.336 218.17C242.232 218.378 244.085 218.859 245.811 219.608C247.231 220.224 247.884 221.875 247.268 223.295C246.652 224.716 245.001 225.368 243.58 224.752C241.963 224.051 240.138 223.672 238.26 223.661C230.775 224.141 227.658 228.793 227.658 232.918C227.658 237.047 230.78 241.702 238.276 242.176H280.26C284.799 242.205 289.104 240.77 292.323 238.25L292.379 238.208C297.562 234.358 298.715 228.711 296.94 223.755C295.18 218.838 290.47 214.509 283.525 213.617C283.467 213.621 283.408 213.629 283.349 213.63C281.667 213.662 280.004 214.098 278.474 214.922C277.11 215.656 275.41 215.146 274.676 213.783C273.942 212.419 274.452 210.718 275.815 209.984C277.117 209.283 278.494 208.762 279.914 208.434C278.206 203.386 274.909 200.033 270.924 198.041Z"
-     fill="#6A92C5"
-     id="path54" />
-  <path
-     d="M275.569 384.011L276.143 384.027C279.001 384.176 281.712 385.378 283.745 387.412C285.779 389.445 286.98 392.156 287.129 395.014L287.145 395.587V404.202C287.141 404.982 286.83 405.729 286.279 406.281C285.725 406.834 284.975 407.146 284.193 407.148H241.094C240.311 407.146 239.561 406.834 239.008 406.281C238.455 405.727 238.143 404.977 238.141 404.195V395.587C238.149 392.52 239.372 389.581 241.541 387.412C243.575 385.378 246.285 384.176 249.144 384.027L249.717 384.011H275.569ZM258.099 351.232C260.27 350.333 262.659 350.099 264.963 350.558C267.268 351.017 269.385 352.148 271.046 353.81C272.707 355.472 273.838 357.589 274.296 359.894C274.754 362.199 274.519 364.588 273.619 366.758C272.72 368.929 271.197 370.784 269.243 372.089C267.29 373.395 264.992 374.091 262.643 374.091C259.492 374.091 256.469 372.84 254.241 370.612C252.014 368.384 250.762 365.358 250.762 362.207C250.763 359.857 251.46 357.56 252.766 355.607C254.072 353.654 255.928 352.131 258.099 351.232Z"
-     stroke="#737373"
-     stroke-width="5.60811"
-     id="path60" />
-  <path
-     d="M111.575 60.4661C110.8 60.4661 110.172 61.0938 110.172 61.8682C110.172 62.6425 110.8 63.2702 111.575 63.2702V61.8682V60.4661ZM423.115 62.8595C423.663 62.312 423.663 61.4243 423.115 60.8768L414.193 51.9543C413.645 51.4068 412.758 51.4068 412.21 51.9543C411.662 52.5019 411.662 53.3896 412.21 53.9371L420.141 61.8682L412.21 69.7992C411.662 70.3468 411.662 71.2345 412.21 71.782C412.758 72.3295 413.645 72.3295 414.193 71.782L423.115 62.8595ZM123.076 63.2702C123.851 63.2702 124.478 62.6425 124.478 61.8682C124.478 61.0938 123.851 60.4661 123.076 60.4661V61.8682V63.2702ZM134.578 60.4661C133.804 60.4661 133.176 61.0938 133.176 61.8682C133.176 62.6425 133.804 63.2702 134.578 63.2702V61.8682V60.4661ZM157.582 63.2702C158.356 63.2702 158.984 62.6425 158.984 61.8682C158.984 61.0938 158.356 60.4661 157.582 60.4661V61.8682V63.2702ZM169.084 60.4661C168.309 60.4661 167.682 61.0938 167.682 61.8682C167.682 62.6425 168.309 63.2702 169.084 63.2702V61.8682V60.4661ZM192.087 63.2702C192.862 63.2702 193.489 62.6425 193.489 61.8682C193.489 61.0938 192.862 60.4661 192.087 60.4661V61.8682V63.2702ZM203.589 60.4661C202.815 60.4661 202.187 61.0938 202.187 61.8682C202.187 62.6425 202.815 63.2702 203.589 63.2702V61.8682V60.4661ZM226.593 63.2702C227.367 63.2702 227.995 62.6425 227.995 61.8682C227.995 61.0938 227.367 60.4661 226.593 60.4661V61.8682V63.2702ZM238.095 60.4661C237.32 60.4661 236.693 61.0938 236.693 61.8682C236.693 62.6425 237.32 63.2702 238.095 63.2702V61.8682V60.4661ZM261.098 63.2702C261.873 63.2702 262.5 62.6425 262.5 61.8682C262.5 61.0938 261.873 60.4661 261.098 60.4661V61.8682V63.2702ZM272.6 60.4661C271.826 60.4661 271.198 61.0938 271.198 61.8682C271.198 62.6425 271.826 63.2702 272.6 63.2702V61.8682V60.4661ZM295.604 63.2702C296.378 63.2702 297.006 62.6425 297.006 61.8682C297.006 61.0938 296.378 60.4661 295.604 60.4661V61.8682V63.2702ZM307.106 60.4661C306.331 60.4661 305.704 61.0938 305.704 61.8682C305.704 62.6425 306.331 63.2702 307.106 63.2702V61.8682V60.4661ZM330.109 63.2702C330.884 63.2702 331.511 62.6425 331.511 61.8682C331.511 61.0938 330.884 60.4661 330.109 60.4661V61.8682V63.2702ZM341.611 60.4661C340.837 60.4661 340.209 61.0938 340.209 61.8682C340.209 62.6425 340.837 63.2702 341.611 63.2702V61.8682V60.4661ZM364.615 63.2702C365.389 63.2702 366.017 62.6425 366.017 61.8682C366.017 61.0938 365.389 60.4661 364.615 60.4661V61.8682V63.2702ZM376.117 60.4661C375.342 60.4661 374.715 61.0938 374.715 61.8682C374.715 62.6425 375.342 63.2702 376.117 63.2702V61.8682V60.4661ZM399.12 63.2702C399.895 63.2702 400.522 62.6425 400.522 61.8682C400.522 61.0938 399.895 60.4661 399.12 60.4661V61.8682V63.2702ZM410.622 60.4661C409.848 60.4661 409.22 61.0938 409.22 61.8682C409.22 62.6425 409.848 63.2702 410.622 63.2702V61.8682V60.4661ZM111.575 61.8682V63.2702H123.076V61.8682V60.4661H111.575V61.8682ZM134.578 61.8682V63.2702H157.582V61.8682V60.4661H134.578V61.8682ZM169.084 61.8682V63.2702H192.087V61.8682V60.4661H169.084V61.8682ZM203.589 61.8682V63.2702H226.593V61.8682V60.4661H203.589V61.8682ZM238.095 61.8682V63.2702H261.098V61.8682V60.4661H238.095V61.8682ZM272.6 61.8682V63.2702H295.604V61.8682V60.4661H272.6V61.8682ZM307.106 61.8682V63.2702H330.109V61.8682V60.4661H307.106V61.8682ZM341.611 61.8682V63.2702H364.615V61.8682V60.4661H341.611V61.8682ZM376.117 61.8682V63.2702H399.12V61.8682V60.4661H376.117V61.8682ZM410.622 61.8682V63.2702H422.124V61.8682V60.4661H410.622V61.8682Z"
-     fill="#737373"
-     id="path62" />
-  <path
-     d="M103.162 214.689C102.388 214.689 101.76 215.317 101.76 216.091C101.76 216.866 102.388 217.493 103.162 217.493L103.162 216.091L103.162 214.689ZM195.286 217.083C195.833 216.535 195.833 215.647 195.286 215.1L186.363 206.177C185.816 205.63 184.928 205.63 184.38 206.177C183.833 206.725 183.833 207.613 184.38 208.16L192.311 216.091L184.38 224.022C183.833 224.57 183.833 225.458 184.38 226.005C184.928 226.553 185.816 226.553 186.363 226.005L195.286 217.083ZM103.162 216.091L103.162 217.493L194.294 217.493L194.294 216.091L194.294 214.689L103.162 214.689L103.162 216.091Z"
-     fill="#737373"
-     id="path64" />
-  <path
-     d="M421.423 217.493C422.197 217.493 422.825 216.866 422.825 216.091C422.825 215.317 422.197 214.689 421.423 214.689L421.423 216.091L421.423 217.493ZM330.001 215.1C329.453 215.647 329.453 216.535 330.001 217.083L338.923 226.005C339.471 226.553 340.358 226.553 340.906 226.005C341.453 225.458 341.453 224.57 340.906 224.022L332.975 216.091L340.906 208.16C341.453 207.613 341.453 206.725 340.906 206.177C340.358 205.63 339.471 205.63 338.923 206.177L330.001 215.1ZM421.423 216.091L421.423 214.689L330.992 214.689L330.992 216.091L330.992 217.493L421.423 217.493L421.423 216.091Z"
-     fill="#737373"
-     id="path66" />
-  <path
-     d="M652.27 213.674C652.755 214.077 653.475 214.011 653.878 213.526C654.281 213.042 654.215 212.322 653.73 211.919L653 212.796L652.27 213.674ZM548.202 124.597C547.574 124.655 547.112 125.211 547.17 125.838L548.11 136.068C548.168 136.696 548.724 137.158 549.351 137.101C549.979 137.043 550.441 136.487 550.384 135.859L549.548 126.766L558.641 125.93C559.269 125.872 559.731 125.317 559.673 124.689C559.615 124.061 559.06 123.599 558.432 123.657L548.202 124.597ZM653 212.796L653.73 211.919L549.036 124.856L548.306 125.734L547.577 126.612L652.27 213.674L653 212.796Z"
-     fill="#B7B7B7"
-     id="path68" />
-  <path
-     d="M648.339 58.9867C648.97 58.9867 649.481 58.4756 649.481 57.8452C649.481 57.2148 648.97 56.7038 648.339 56.7038L648.339 57.8452L648.339 58.9867ZM547.845 57.0381C547.399 57.4839 547.399 58.2066 547.845 58.6524L555.109 65.9165C555.555 66.3623 556.278 66.3623 556.724 65.9165C557.169 65.4708 557.169 64.748 556.724 64.3023L550.266 57.8452L556.724 51.3882C557.169 50.9424 557.169 50.2197 556.724 49.7739C556.278 49.3282 555.555 49.3282 555.109 49.7739L547.845 57.0381ZM648.339 57.8452L648.339 56.7038L548.652 56.7038L548.652 57.8452L548.652 58.9867L648.339 58.9867L648.339 57.8452Z"
-     fill="#B7B7B7"
-     id="path70" />
-  <path
-     d="M647.929 110.416C648.528 110.614 649.197 110.296 649.423 109.708C649.65 109.12 649.348 108.483 648.749 108.286L648.339 109.351L647.929 110.416ZM547.83 75.3977C547.246 75.6742 546.987 76.3487 547.25 76.9042L551.54 85.956C551.803 86.5114 552.49 86.7375 553.073 86.461C553.657 86.1844 553.916 85.5099 553.653 84.9544L549.84 76.9084L558.292 72.9024C558.876 72.6258 559.135 71.9513 558.872 71.3958C558.609 70.8404 557.922 70.6143 557.339 70.8909L547.83 75.3977ZM648.339 109.351L648.749 108.286L548.716 75.3381L548.306 76.4034L547.896 77.4687L647.929 110.416L648.339 109.351Z"
-     fill="#B7B7B7"
-     id="path72" />
-  <path
-     d="M647.708 155.868C648.256 156.179 648.983 156.006 649.332 155.48C649.68 154.955 649.518 154.277 648.97 153.966L648.339 154.917L647.708 155.868ZM548.051 97.0638C547.417 97.2152 547.017 97.8175 547.158 98.409L549.46 108.048C549.601 108.64 550.23 108.997 550.864 108.845C551.498 108.694 551.898 108.092 551.756 107.5L549.71 98.9317L558.895 96.7385C559.529 96.5871 559.929 95.9848 559.787 95.3933C559.646 94.8018 559.018 94.445 558.384 94.5964L548.051 97.0638ZM648.339 154.917L648.97 153.966L548.937 97.1836L548.306 98.1348L547.675 99.086L647.708 155.868L648.339 154.917Z"
-     fill="#B7B7B7"
-     id="path74" />
-  <path
-     d="M261.126 328.205C261.126 328.979 261.753 329.607 262.528 329.607C263.302 329.607 263.93 328.979 263.93 328.205L262.528 328.205L261.126 328.205ZM263.519 289.926C262.972 289.379 262.084 289.379 261.536 289.926L252.614 298.849C252.066 299.396 252.066 300.284 252.614 300.831C253.161 301.379 254.049 301.379 254.597 300.831L262.528 292.9L270.459 300.831C271.006 301.379 271.894 301.379 272.442 300.831C272.989 300.284 272.989 299.396 272.442 298.849L263.519 289.926ZM262.528 328.205L263.93 328.205L263.93 290.918L262.528 290.918L261.126 290.918L261.126 328.205L262.528 328.205Z"
-     fill="#737373"
-     id="path76" />
-  <rect
-     width="133.649"
-     height="61"
-     fill="white"
-     id="rect78"
-     transform="translate(194.294 31.0234)"
-     style="opacity:1" />
-  <path
-     d="M496.145 301.373C496.145 295.178 501.167 290.157 507.362 290.157H788.557C794.752 290.157 799.774 295.178 799.774 301.373V431.439C799.774 437.634 794.752 442.655 788.557 442.655H507.362C501.167 442.655 496.145 437.634 496.145 431.439V301.373Z"
-     fill="white"
-     id="path82"
-     style="opacity:1" />
-  <rect
-     x="518.578"
-     y="337.523"
-     width="37.9438"
-     height="14.8099"
-     rx="2.90495"
-     fill="#6A92C5"
-     id="rect86" />
-  <path
-     d="M530.001 378.14C529.273 377.834 528.463 377.675 527.639 377.675C521.211 378.049 521.211 385.767 527.639 386.141H542.87C544.725 386.152 546.51 385.585 547.87 384.554C552.389 381.302 549.971 374.763 544.024 374.139C541.882 363.521 523.298 367.555 527.707 377.675"
-     stroke="#6A92C5"
-     stroke-width="2.07517"
-     stroke-miterlimit="10"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     id="path92" />
-  <path
-     d="M541.749 374.726C542.443 374.364 543.203 374.169 543.976 374.155"
-     stroke="#6A92C5"
-     stroke-width="2.07517"
-     stroke-miterlimit="10"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     id="path94" />
-  <path
-     d="M537.564 418.895C535.896 418.895 534.228 418.572 532.642 417.924C530.061 416.872 528.052 414.893 526.983 412.354C525.914 409.812 525.914 407.013 526.983 404.471C527.854 402.401 529.49 400.786 531.596 399.928C533.698 399.071 536.017 399.071 538.119 399.928C541.673 401.377 543.37 405.404 541.896 408.908C540.684 411.789 537.322 413.165 534.393 411.971C531.972 410.984 530.817 408.238 531.819 405.854C532.655 403.865 534.977 402.916 536.996 403.743C537.405 403.909 537.596 404.368 537.427 404.77C537.258 405.172 536.792 405.361 536.384 405.194C535.178 404.704 533.791 405.269 533.293 406.457C532.626 408.04 533.395 409.866 535.003 410.519C537.115 411.38 539.545 410.387 540.419 408.307C541.555 405.606 540.247 402.498 537.504 401.38C535.794 400.682 533.912 400.682 532.202 401.38C530.492 402.077 529.162 403.391 528.454 405.075C527.548 407.227 527.548 409.599 528.454 411.754C529.36 413.906 531.063 415.584 533.248 416.476C536.03 417.61 539.095 417.61 541.877 416.473C544.659 415.339 546.825 413.202 547.976 410.463C548.145 410.061 548.611 409.872 549.02 410.039C549.428 410.205 549.619 410.664 549.45 411.066C548.136 414.195 545.664 416.63 542.486 417.927C540.904 418.572 539.233 418.895 537.564 418.895Z"
-     fill="#6A92C5"
-     id="path98" />
-  <path
-     d="M487.318 120.052V171.226"
-     stroke="#737373"
-     stroke-width="2.80406"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     id="path102" />
-  <defs
-     id="defs107">
-    <clipPath
-       id="clip0_2323_45">
-      <rect
-         width="78.5136"
-         height="78.5136"
-         fill="white"
-         transform="translate(6.42238 173.329)"
-         id="rect104" />
-    </clipPath>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title description">
+  <title id="title">Knative components</title>
+  <desc id="description">Functions connects to a container and a trigger definition. The trigger connects to Eventing. Slack, Kubernetes, row changes, and S3 upload feed Eventing. Eventing connects to Events. The container and Events point to Serving. A User points to Serving. Solid and dashed connections, including connections without arrowheads, retain the relationships in the original illustration.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 9 5 1 9" fill="none" stroke="#647b95" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #344054; font-size: 26px; }
+      .connector { fill: none; stroke: #647b95; stroke-width: 2; stroke-linejoin: round; }
+      .flow { marker-end: url(#arrow); }
+      .definition { stroke-dasharray: 10 8; }
+      .resource { fill: #f6f8fa; stroke: #7d91aa; stroke-width: 2; }
+      .component { fill: #eaf3fc; stroke: #1261bd; stroke-width: 2; }
+      .label, .label text { text-anchor: middle; dominant-baseline: central; font-weight: 500; }
+      .code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 20px; }
+      .note { font-size: 20px; }
+      .note-key { font-weight: 600; }
+    </style>
   </defs>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="15.490511"
-     y="268.32397"
-     id="text940"><tspan
-       sodipodi:role="line"
-       id="tspan938"
-       x="15.490511"
-       y="268.32397"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">Container</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="713.34528"
-     y="71.614014"
-     id="text944"><tspan
-       sodipodi:role="line"
-       id="tspan942"
-       x="713.34528"
-       y="71.614014">Slack</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="694.39209"
-     y="122.25624"
-     id="text944-3"><tspan
-       sodipodi:role="line"
-       id="tspan942-1"
-       x="694.39209"
-       y="122.25624">Kubernetes</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="688.45209"
-     y="171.36514"
-     id="text944-3-5"><tspan
-       sodipodi:role="line"
-       id="tspan942-1-1"
-       x="688.45209"
-       y="171.36514">Row changes</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="699.27203"
-     y="222.10069"
-     id="text944-3-8"><tspan
-       sodipodi:role="line"
-       id="tspan942-1-3"
-       x="699.27203"
-       y="222.10069">S3 upload</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="460.27225"
-     y="101.06721"
-     id="text940-6"><tspan
-       sodipodi:role="line"
-       id="tspan938-7"
-       x="460.27225"
-       y="101.06721"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">Eventing</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="239.78716"
-     y="268.33731"
-     id="text940-6-3"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-2"
-       x="239.78716"
-       y="268.33731"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">Serving</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="467.10138"
-     y="268.16397"
-     id="text940-6-2"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-3"
-       x="467.10138"
-       y="268.16397"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">Events</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="17.531908"
-     y="101.06721"
-     id="text940-8"><tspan
-       sodipodi:role="line"
-       id="tspan938-8"
-       x="17.531908"
-       y="101.06721"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">Functions</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="212.99863"
-     y="49.433399"
-     id="text940-8-4"><tspan
-       sodipodi:role="line"
-       id="tspan938-8-7"
-       x="212.99863"
-       y="49.433399"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1">on:</tspan><tspan
-       sodipodi:role="line"
-       x="212.99863"
-       y="64.433403"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1"
-       id="tspan1116">  type: row-update</tspan><tspan
-       sodipodi:role="line"
-       x="212.99863"
-       y="79.433403"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1"
-       id="tspan1118">  table: orders</tspan><tspan
-       sodipodi:role="line"
-       x="212.99863"
-       y="94.433403"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1"
-       id="tspan1114" /></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="239.78526"
-     y="101.06721"
-     id="text940-6-0"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-0"
-       x="239.78526"
-       y="101.06721"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">Trigger</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1;stroke:none"
-     x="248.48306"
-     y="428.44839"
-     id="text940-6-3-4"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-2-6"
-       x="248.48306"
-       y="428.44839"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#737373;fill-opacity:1">User</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="566.91821"
-     y="347.95197"
-     id="text940-6-2-5"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-3-1"
-       x="566.91821"
-       y="347.95197"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1">Functions: build, configure, and deploy</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="567.54224"
-     y="380.03198"
-     id="text940-6-2-5-0"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-3-1-6"
-       x="567.54224"
-       y="380.03198"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1">Serving: run your application</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="566.91821"
-     y="412.11414"
-     id="text940-6-2-5-0-9"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-3-1-6-8"
-       x="566.91821"
-       y="412.11414"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1">Eventing: trigger your application</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1;stroke:none"
-     x="629.89441"
-     y="319.95868"
-     id="text940-6-2-6"><tspan
-       sodipodi:role="line"
-       id="tspan938-7-3-6"
-       x="629.89441"
-       y="319.95868"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#494848;fill-opacity:1">Notes</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;"
-     x="17.325834"
-     y="66.94384"
-     id="text1266"><tspan
-       sodipodi:role="line"
-       id="tspan1264"
-       x="17.325834"
-       y="66.94384">$ kn func</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.33333px;line-height:1.25;font-family:Satoshi;-inkscape-font-specification:'Satoshi, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;"
-     x="525.69934"
-     y="346.51468"
-     id="text1270"><tspan
-       sodipodi:role="line"
-       id="tspan1268"
-       x="525.69934"
-       y="346.51468">$ kn func</tspan></text>
+  <path fill="#fff" d="M0 0h1280v720H0z"/>
+
+  <!-- The original unheaded vertical connections are intentionally not arrows. -->
+  <path class="connector" d="M135 196v134"/>
+  <path class="connector" d="M870 196v134"/>
+  <path class="connector definition" d="M230 148h110"/>
+  <path class="connector definition flow" d="M610 148h162"/>
+  <path class="connector flow" d="M230 375h102"/>
+  <path class="connector flow" d="M780 375H618"/>
+  <path class="connector flow" d="M475 550V428"/>
+
+  <!-- Each source retains its inbound arrow to Eventing. -->
+  <path class="connector flow" d="M1060 90h-60l-32 26"/>
+  <path class="connector flow" d="M1060 170h-60l-32-34"/>
+  <path class="connector flow" d="M1060 250h-60l-32-94"/>
+  <path class="connector flow" d="M1060 330h-60l-32-154"/>
+
+  <rect class="component" x="40" y="100" width="190" height="96" rx="6"/>
+  <text class="label" x="135" y="128">Functions</text>
+  <text class="label code" x="135" y="164">$ kn func</text>
+
+  <rect class="resource" x="340" y="80" width="270" height="130" rx="6"/>
+  <text class="label" x="475" y="107">Trigger</text>
+  <text class="code" x="358" y="138">on:</text>
+  <text class="code" x="374" y="163">type: row-update</text>
+  <text class="code" x="374" y="188">table: orders</text>
+
+  <rect class="component" x="780" y="100" width="180" height="96" rx="6"/>
+  <text class="label" x="870" y="148">Eventing</text>
+  <rect class="resource" x="40" y="330" width="190" height="90" rx="6"/>
+  <text class="label" x="135" y="375">Container</text>
+  <rect class="component" x="340" y="330" width="270" height="90" rx="6"/>
+  <text class="label" x="475" y="375">Serving</text>
+  <rect class="resource" x="780" y="330" width="180" height="90" rx="6"/>
+  <text class="label" x="870" y="375">Events</text>
+  <rect class="resource" x="340" y="550" width="270" height="70" rx="6"/>
+  <text class="label" x="475" y="585">User</text>
+
+  <g class="resource">
+    <rect x="1060" y="60" width="180" height="60" rx="6"/>
+    <rect x="1060" y="140" width="180" height="60" rx="6"/>
+    <rect x="1060" y="220" width="180" height="60" rx="6"/>
+    <rect x="1060" y="300" width="180" height="60" rx="6"/>
+  </g>
+  <g class="label">
+    <text x="1150" y="90">Slack</text>
+    <text x="1150" y="170">Kubernetes</text>
+    <text x="1150" y="250">Row changes</text>
+    <text x="1150" y="330">S3 upload</text>
+  </g>
+
+  <text x="690" y="515" font-weight="600">Notes</text>
+  <text class="note" x="690" y="555"><tspan class="note-key">Functions:</tspan> build, configure, and deploy</text>
+  <text class="note" x="690" y="599"><tspan class="note-key">Serving:</tspan> run your application</text>
+  <text class="note" x="690" y="643"><tspan class="note-key">Eventing:</tspan> trigger your application</text>
 </svg>

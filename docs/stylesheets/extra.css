@@ -11,8 +11,8 @@
   --md-default-fg-color: #182230;
   --md-default-fg-color--light: #667085;
   --md-typeset-a-color: #1d67da;
-  --md-text-font: "Inter";
-  --md-code-font: "JetBrains Mono";
+  --md-text-font: 'Inter';
+  --md-code-font: 'JetBrains Mono';
 }
 
 .md-clipboard {
@@ -183,6 +183,11 @@ body:not(:has(.home-page)) .md-tabs__link { font-weight: 550; }
   font-size: .9em;
   line-height: 1.65;
 }
+
+/* Wide technical diagrams remain inspectable at their native size. */
+.md-typeset .diagram-link { display: block; margin-block: 1.5em; background: #fff; cursor: zoom-in; }
+.md-typeset .diagram-link img { display: block; width: 100%; height: auto; }
+.md-typeset .diagram-link:focus-visible { outline: 2px solid #1261bd; outline-offset: 4px; }
 
 /* Keep the homepage brand and versioned site titles visible after scrolling. */
 .knative-header__title--versioned {
@@ -443,9 +448,6 @@ body.modal-open { overflow: hidden; }
   #cookieModal .md-button { width: 100%; }
   .cookienotice__inner { grid-template-columns: 1fr; gap: .5rem; }
   .cookienotice .buttons { justify-self: end; }
-}
-
-@media (max-width: 530px) {
   .testimonials .testimonial { grid-template-columns: 1fr; gap: 1rem; }
   .testimonials .testimonial .img { width: 4rem; }
 }
@@ -459,6 +461,7 @@ body.modal-open { overflow: hidden; }
   .knative-header__title--versioned .md-header__topic:first-child > .md-ellipsis {
     display: none;
   }
+
 }
 
 .md-search-result__article {
