@@ -37,6 +37,8 @@ edit_uri: edit/main/docs
 
 theme:
   name: material
+  # main.html loads the Google variable fonts; skip Material's default font requests.
+  font: false
   logo: images/logo/rgb/knative-logo-rgb.png
   favicon: images/favicon.ico
   custom_dir: overrides
