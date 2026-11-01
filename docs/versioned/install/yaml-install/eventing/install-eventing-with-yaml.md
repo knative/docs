@@ -286,16 +286,6 @@ The following tabs expand to show instructions for installing each Eventing exte
 
     To learn more, try the [Apache Kafka source sample](../../../eventing/sources/kafka-source/README.md).
 
-=== "Apache CouchDB Source"
-
-    * Install the Apache CouchDB Source by running the command:
-
-        ```bash
-        kubectl apply -f {{ artifact(org="knative-extensions",repo="eventing-couchdb",file="couchdb.yaml")}}
-        ```
-
-    To learn more, read the [Apache CouchDB source](https://github.com/knative-extensions/eventing-couchdb/blob/main/source/README.md) documentation.
-
 === "VMware Sources and Bindings"
 
     * Install VMware Sources and Bindings by running the command:
