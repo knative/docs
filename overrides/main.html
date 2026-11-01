@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" />
-<meta name="theme-color" content="#1a7dc9" />
+<meta name="theme-color" content="{{ '#14385d' if page and page.is_homepage else '#1a7dc9' }}" />
 {% endblock %}
 
 {% block announce %}

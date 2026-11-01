@@ -1,0 +1,12 @@
+Original panoramic raster landscape made for the Knative website.
+The user's Hockney references inform the long view and broad field composition;
+no pixels, outlines, or painted details from an existing artwork are reproduced.
+The artwork uses Knative-family blues, cyan, deep ink, and cool white.
+A continuous, layered blue-teal forest covers the full rear hillside from edge
+to edge. Overlapping tree silhouettes replace the narrow tree strip and isolated
+foreground trees. Dark, restrained colors preserve contrast behind the headline;
+the river and open foreground remain visible.
+No Knative logo or watermark is included in the painting.
+The upper sky is cropped to lift the landscape while retaining its bottom edge.
+Kuack is rendered alongside the text as a separate responsive image layer from
+../mascot/kuack.png; see ../mascot/SOURCE.txt for its provenance.
