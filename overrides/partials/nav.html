@@ -21,6 +21,7 @@
 -->
 
 {% import "partials/nav-item.html" as item with context %}
+{% import "partials/site-links.html" as site with context %}
 
 <!-- Determine classes -->
 {% set class = "md-nav md-nav--primary" %}
@@ -52,12 +53,10 @@
     {{ config.site_name }}
   </label>
 
-  <!-- Repository information -->
-  {% if config.repo_url %}
-    <div class="md-nav__source">
-      {% include "partials/source.html" %}
-    </div>
-  {% endif %}
+  <ul class="site-links site-links--drawer" aria-label="Site navigation">
+    {{ site.render() }}
+    {% if config.repo_url %}<li><a href="{{ config.repo_url }}">GitHub</a></li>{% endif %}
+  </ul>
 
   <!-- Navigation list -->
   {# Create nav from the "section" of docs that we are in.
@@ -67,14 +66,12 @@
     {% set nav = section %}
   {% endif %}
 
-  <ul class="md-nav__list" data-md-scrollfix>
-    <!-- All NAVS: {{ nav.children }} -->
-    {% if nav.children %}
+  {% if nav.children %}
+    <ul class="md-nav__list" data-md-scrollfix>
       {% for nav_item in nav.children %}
-        <!-- nav item: {{ nav_item }} -->
         {% set path = "__nav_" ~ loop.index %}
         {{ item.render(nav_item, path, 1) }}
       {% endfor %}
-    {% endif %}
-  </ul>
+    </ul>
+  {% endif %}
 </nav>

@@ -20,6 +20,8 @@
   IN THE SOFTWARE.
 -->
 
+{% import "partials/site-links.html" as site with context %}
+
 <!-- Determine classes -->
 {% set class = "md-header" %}
 {% if "navigation.tabs.sticky" in features %}
@@ -35,6 +37,12 @@
     aria-label="{{ lang.t('header') }}"
   >
 
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Open navigation">
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+
     <!-- Link to home -->
     <a
       href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
@@ -46,19 +54,14 @@
       {% include "partials/logo.html" %}
     </a>
 
-    <!-- Button to open drawer -->
-    <label class="md-header__button md-icon" for="__drawer">
-      {% set icon = config.theme.icon.menu or "material/menu" %}
-      {% include ".icons/" ~ icon ~ ".svg" %}
-    </label>
-
     <!-- Header title -->
-    <div class="md-header__title{% if version_selector %} knative-header__title--versioned{% endif %}" data-md-component="header-title">
+    {% set keep_site_title = version_selector or (page and page.is_homepage) %}
+    <div class="md-header__title{% if keep_site_title %} knative-header__title--static{% endif %}{% if version_selector %} knative-header__title--versioned{% endif %}" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
-          <span class="md-ellipsis">
+          <a class="md-ellipsis site-brand" href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" aria-label="{{ config.site_name }} homepage">
             {{ config.site_name }}
-          </span>
+          </a>
           {% include "partials/version-selector.html" %}
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -86,33 +89,7 @@
     {% endif %}
 
     <!-- Top Nav -->
-    <ul class="md-tabs__list mr-30">
-      <li class="md-tabs__item">
-        <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" class="md-tabs__link">
-          Home
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/docs/" class="md-tabs__link">
-          Docs
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/about/testimonials/" class="md-tabs__link">
-          About
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/blog/" class="md-tabs__link">
-          Blog
-        </a>
-      </li>
-      <li class="md-tabs__item">
-        <a href="/community/" class="md-tabs__link">
-          Community
-        </a>
-      </li>
-    </ul>
+    <ul class="site-links" aria-label="Site navigation">{{ site.render() }}</ul>
 
     <!-- Site language selector -->
     {% if config.extra.alternate %}
@@ -137,9 +114,12 @@
 
     <!-- Repository information -->
     {% if config.repo_url %}
-      <div class="md-header__source">
-        {% include "partials/source.html" %}
-      </div>
+      <a class="site-github" href="{{ config.repo_url }}" title="Knative docs on GitHub" data-md-component="source">
+        {% include ".icons/fontawesome/brands/github.svg" %}
+        <div class="site-github-info">
+          <span>GitHub</span>
+        </div>
+      </a>
     {% endif %}
   </nav>
 
