@@ -7,6 +7,9 @@ function: how-to
 
 # Installing Knative Backstage Plugins
 
+!!! warning "Deprecated"
+    The Knative Backstage plugins are deprecated and their repository will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 Knative community is planning to provide a set of Backstage plugins for Knative and their respective backends.
 Currently there is one plugin available, the Event Mesh plugin.
 

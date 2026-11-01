@@ -24,6 +24,9 @@ An event source plugin has the following characteristics:
 
 ## List of Knative plugins
 
+!!! warning "Deprecated plugins"
+    `kn-plugin-service-log` and `kn-plugin-source-kamelet` are deprecated and their repositories will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 You can view all available `kn` plugins in the [Knative Extensions repository](https://github.com/orgs/knative-extensions/repositories?q=kn+plugin&type=all&language=&sort=).
 
 <!--TODO: If we're including the following table, the Client WG must be responsible for ensuring that the table is kept up to date, otherwise it should be removed from the docs and just the link to the extensions repo should be provided-->

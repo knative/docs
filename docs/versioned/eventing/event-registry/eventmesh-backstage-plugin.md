@@ -8,6 +8,9 @@ function: how-to
 
 # Knative Event Mesh Backstage Plugin
 
+!!! warning "Deprecated"
+    The Knative Event Mesh Backstage plugin is deprecated and its repository will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 !!! info
     For installation instructions, see the [plugin installation documentation](../../install/installing-backstage-plugins.md).
 

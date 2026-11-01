@@ -7,6 +7,9 @@ function: explanation
 
 ## Security-Guard
 
+!!! warning "Deprecated"
+    Security Guard is deprecated and its repository will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 !!! note
 
     This integration is current [Alpha](https://github.com/knative/community/blob/main/mechanics/MATURITY-LEVELS.md#alpha-stage).
