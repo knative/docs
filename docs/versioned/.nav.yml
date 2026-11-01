@@ -82,7 +82,6 @@ nav:
           - Configuring certificate class: serving/services/certificate-class.md
           - Configuring custom domains: serving/services/custom-domains.md
           - Using a custom TLS certificate for DomainMapping: serving/services/custom-tls-certificate-domain-mapping.md
-          - Using extensions enabled by QPOptions: serving/services/using-queue-extensions.md
           # TODO: Add security section to docs?
           - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
           - Configuring probes: serving/services/configure-probing.md
@@ -103,7 +102,6 @@ nav:
       # Serving - Application Security
       - Application security:
         - Secure Pod Defaults: serving/app-security/secure-pod-defaults.md
-        - Security Guard: serving/app-security/security-guard.md
       # Serving - observability
       - Observability:
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
@@ -208,7 +206,6 @@ nav:
         - Handling delivery failure: eventing/event-delivery.md
         - Event registry:
           - Using the Event registry: eventing/event-registry/README.md
-          - Knative EventMesh Backstage Plugin: eventing/event-registry/eventmesh-backstage-plugin.md
         - Sugar controller: eventing/sugar/README.md
         - Debugging: eventing/troubleshooting/README.md
       # Eventing - observability
@@ -259,7 +256,6 @@ nav:
           - Eventing Channels: eventing/channels/channels-crds.md
         - Integrations:
           - Install cert-manager: install/installing-cert-manager.md
-          - Install Knative Backstage plugin: install/installing-backstage-plugins.md
         # Vendor list
         - Using a Knative-based offering: install/knative-offerings.md
       - Configuring Knative:

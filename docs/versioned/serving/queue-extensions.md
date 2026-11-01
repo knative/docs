@@ -23,34 +23,14 @@ Knative service pods include two containers:
 
 You can extend Queue Proxy to offer additional features. The QPOptions feature of Queue Proxy allows additional runtime packages to extend Queue Proxy capabilities.
 
-For example, the [security-guard](https://knative.dev/security-guard#section-readme) repository provides an extension that uses the QPOptions feature. The [QPOption](https://knative.dev/security-guard/pkg/qpoption#section-readme) package enables users to add additional security features to Queue Proxy.
-
 The runtime features available are determined when the Queue Proxy image is built. Queue Proxy defines an orderly manner to activate and to configure extensions.
 
 ## Additional information
 
 - [Enabling Queue Proxy Pod Info](./configuration/feature-flags.md#queue-proxy-pod-info) - discussing a necessary step to enable the use of extensions.
-- [Using extensions enabled by QPOptions](./services/using-queue-extensions.md) - discussing how to configure a service to use features implemented in extensions.
 
 ## Adding extensions
 
-You can add extensions by replacing the `cmd/queue/main.go` file before the Queue Proxy image is built. The following example shows a `cmd/queue/main.go` file that adds the `test-gate` extension:
+You can add extensions by replacing the `cmd/queue/main.go` file before the Queue Proxy image is built. Implement your extension as a [`sharedmain.Option`](https://pkg.go.dev/knative.dev/serving/pkg/queue/sharedmain#Option) and pass it to `sharedmain.Main`.
 
-```go
-  package main
-
-  import "os"
-
-  import "knative.dev/serving/pkg/queue/sharedmain"
-  import "knative.dev/security-guard/pkg/qpoption"
-  import _ "knative.dev/security-guard/pkg/test-gate"
-
-  func main() {
-      qOpt := qpoption.NewQPSecurityPlugs()
-      defer qOpt.Shutdown()
-
-        if sharedmain.Main(qOpt.Setup) != nil {
-          os.Exit(1)
-      }
-  }
-```
+An option receives the Queue Proxy's [`sharedmain.Defaults`](https://pkg.go.dev/knative.dev/serving/pkg/queue/sharedmain#Defaults), which provides access to its context, transport, and proxy handler. Consult that API documentation when implementing your extension. Configuration and activation depend on the extension's implementation.
