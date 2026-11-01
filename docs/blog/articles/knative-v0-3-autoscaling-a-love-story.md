@@ -90,7 +90,7 @@ Scaling in the Knative v0.3 release includes new options for customizing the aut
 
 </div>
 
-<img class="graf-image" data-width="1578" data-height="958" src="../../../../articles/images/1_BkMXQfMrRERP_n04_C7geQ.png">
+<img class="graf-image" data-width="1578" data-height="958" src="/blog/articles/images/1_BkMXQfMrRERP_n04_C7geQ.png">
 
 </div>
 
