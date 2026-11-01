@@ -13,7 +13,14 @@
   --md-typeset-a-color: #1d67da;
   --md-text-font: 'Inter';
   --md-code-font: 'JetBrains Mono';
+  --site-nav-bg: #14385d;
+  --site-nav-text: #d4e3f4;
+  --site-nav-focus: #9bd5ff;
 }
+
+/* Deep-navy canvas for elastic overscroll; regular page content stays white. */
+html, body { background-color: var(--md-footer-bg-color); }
+.md-container { background-color: var(--md-default-bg-color, #fff); }
 
 .md-clipboard {
   color: var(--md-primary-fg-color--dark);
@@ -46,11 +53,14 @@
   color: var(--md-accent-fg-color);
 }
 
+/* Let navigation scroll freely, including the site links above the first section. */
+.md-nav--primary .md-nav__title ~ .md-nav__list { scroll-snap-type: none; }
+
 /* Quiet navigation chrome; Material still owns search and drawer behavior. */
 .md-header {
-  color: #182230;
-  background: #fff;
-  border-bottom: 1px solid #e4e7ec;
+  color: #f4f8ff;
+  background: var(--site-nav-bg);
+  border-bottom: 0;
   box-shadow: none;
 }
 
@@ -77,25 +87,41 @@
   line-height: 1.5;
 }
 
-.site-links a { color: #475467; }
+.site-links a { color: var(--site-nav-text); }
 body:not(:has(.home-page)) .md-header .site-links a,
 body:not(:has(.home-page)) .md-tabs__link { font-weight: 550; }
-.site-links a:hover, .site-links a[aria-current] { color: #1261bd; }
-.site-links--drawer { display: none; }
-.site-github { display: flex; flex-shrink: 0; align-items: center; gap: .4rem; min-height: 2.2rem; margin-inline-start: .8rem; color: #475467; font-size: .7rem; }
+.site-links a:hover, .site-links a[aria-current] { color: #fff; }
+.site-links--drawer, .knative-site-navigation { display: none; }
+.drawer-github { gap: .4rem; }
+.drawer-github svg { width: .9rem; height: .9rem; fill: currentColor; }
+.site-github { display: flex; flex-shrink: 0; align-items: center; gap: .4rem; min-height: 2.2rem; margin-inline-start: .8rem; color: var(--site-nav-text); font-size: .7rem; }
 .site-github svg { width: 1rem; height: 1rem; fill: currentColor; }
 .site-github-info { width: 5.2rem; line-height: 1.3; }
 .site-github .md-source__facts { gap: .5rem; margin-top: .1rem; font-size: .55rem; opacity: .85; }
 .site-github .md-source__fact--version { display: none; }
-.site-github:hover { color: #1261bd; }
-.md-header a:focus-visible { outline: 2px solid #1261bd; outline-offset: 4px; }
+.site-github:hover { color: #fff; }
+.md-header a:focus-visible { outline: 2px solid var(--site-nav-focus); outline-offset: 4px; }
+.md-header__button:focus-visible { outline-color: var(--site-nav-focus); }
 
 @media (max-width: 76.234375em) {
   .md-header__inner .site-links { display: none; }
   .site-github { padding-inline: .4rem; }
   .site-github-info { display: none; }
-  .site-links--drawer { display: grid; grid-template-columns: 1fr 1fr; gap: 0 .7rem; margin: 0 .8rem 1rem; padding-block: .5rem; }
-  .site-links--drawer a { display: flex; align-items: center; min-height: 2.2rem; }
+  .md-nav--primary > .md-nav__title[for=__drawer],
+  .md-nav--primary .md-nav .md-nav__title { display: flex; align-items: center; gap: .6rem; height: auto; padding: .6rem .8rem; background: var(--site-nav-bg); color: #fff; }
+  .md-nav--primary > .md-nav__title[for=__drawer] { flex-shrink: 0; min-height: 3.6rem; }
+  .md-nav--primary > .md-nav__title .md-logo { position: static; flex: 0 0 2.4rem; margin: 0; padding: 0; }
+  .md-nav--primary > .md-nav__title .md-nav__button.md-logo :is(img, svg) { display: block; width: 2.4rem; height: 2.4rem; object-fit: contain; }
+  .md-nav--primary { background-color: var(--site-nav-bg); }
+  .md-nav--primary .md-nav .md-nav__title { min-height: 2.8rem; line-height: 1.5; }
+  .md-nav--primary .md-nav .md-nav__title .md-nav__icon { position: static; flex: 0 0 1rem; width: 1rem; height: 1rem; margin: 0; }
+  .md-nav--primary > .md-nav__list { overflow-x: hidden; }
+  .md-nav--primary > .md-nav__list > .knative-site-navigation { display: block; }
+  .md-nav--primary .md-nav__list > .md-nav__item { background-color: var(--md-default-bg-color, #fff); }
+  .site-links--drawer { display: block; margin: 0; padding: 0; background: var(--site-nav-bg); font-size: .8rem; }
+  .site-links--drawer a { display: flex; align-items: center; min-height: 2.4rem; padding: .6rem .8rem; }
+  .site-links--drawer a[aria-current] { font-weight: 600; }
+  .site-links--drawer a:focus-visible { outline: 2px solid var(--site-nav-focus); outline-offset: -4px; }
 }
 
 /* Expand desktop search over the header without reflowing the navigation. */
@@ -118,6 +144,12 @@ body:not(:has(.home-page)) .md-tabs__link { font-weight: 550; }
 .md-search__icon[for=__search] {
   color: var(--md-default-fg-color--light);
 }
+
+/* Match the blue header when closed; the expanded search panel stays white. */
+body:not(:has(#__search:checked)) .md-header .md-search__form { background: #214d76; border-color: #6c8cab; color: #edf3fc; }
+body:not(:has(#__search:checked)) .md-header .md-search__input { color: #edf3fc; }
+body:not(:has(#__search:checked)) .md-header .md-search__input::placeholder,
+body:not(:has(#__search:checked)) .md-header .md-search__icon[for=__search] { color: #c6d8ed; }
 
 .md-nav__title .md-nav__button.md-logo img,
 .md-nav__title .md-nav__button.md-logo svg {
@@ -404,10 +436,6 @@ body.modal-open { overflow: hidden; }
 
 .feature-stable {
   background: rgb(228, 255, 218);
-}
-
-.md-nav--primary .md-nav__title[for=__drawer] {
-  color: black;
 }
 
 /* Case studies share a real layout, not a two-column data table. */

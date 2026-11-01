@@ -12,25 +12,9 @@
 .home-page .normal-text { color: #475467; }
 .home-page a:focus-visible { outline: 2px solid #1261bd; outline-offset: 5px; }
 
-/* Blue canvas for elastic overscroll; homepage content keeps its white surface. */
-html:has(.home-page), body:has(.home-page) { background-color: #081729; }
-
 /* The painted splash sits above white homepage content. */
 body:has(.home-page) .md-banner { background: #102c50; color: #fff; }
 body:has(.home-page) .site-announcement { padding: .45rem .8rem; font-size: .65rem; font-weight: 500; line-height: 1.5; }
-body:has(.home-page) .md-header { background: #14385d; color: #f4f8ff; border-bottom: 0; }
-body:has(.home-page) .md-header .site-links a,
-body:has(.home-page) .md-header .site-github { color: #d4e3f4; }
-body:has(.home-page) .md-header .site-links a:hover,
-body:has(.home-page) .md-header .site-links a[aria-current],
-body:has(.home-page) .md-header .site-github:hover { color: #fff; }
-body:has(.home-page) .md-header__button:focus-visible,
-body:has(.home-page) .md-header .site-links a:focus-visible,
-body:has(.home-page) .md-header .site-github:focus-visible { outline-color: #9bd5ff; }
-body:has(.home-page):not(:has(#__search:checked)) .md-search__form { background: #214d76; border-color: #6c8cab; color: #edf3fc; }
-body:has(.home-page):not(:has(#__search:checked)) .md-search__input { color: #edf3fc; }
-body:has(.home-page):not(:has(#__search:checked)) .md-search__input::placeholder,
-body:has(.home-page):not(:has(#__search:checked)) .md-search__icon[for=__search] { color: #c6d8ed; }
 .hero { position: relative; min-height: 28rem; padding-block: 2rem 3.5rem; overflow: hidden; color: #fff; background: #1e4382; }
 .hero .md-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 44rem) minmax(5rem, 1fr); gap: 2.5rem; align-items: start; }
 .hero .hero-mascot { display: block; width: clamp(7rem, 13vw, 11rem); max-width: 100%; height: auto; margin-top: .3rem; pointer-events: none; }
