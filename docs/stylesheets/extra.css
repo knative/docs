@@ -103,8 +103,8 @@ body:not(:has(.home-page)) .md-tabs__link { font-weight: 550; }
 .md-header a:focus-visible { outline: 2px solid var(--site-nav-focus); outline-offset: 4px; }
 .md-header__button:focus-visible { outline-color: var(--site-nav-focus); }
 
+/* Keep Material's drawer styling, but move site links there only below 48em. */
 @media (max-width: 76.234375em) {
-  .md-header__inner .site-links { display: none; }
   .site-github { padding-inline: .4rem; }
   .site-github-info { display: none; }
   .md-nav--primary > .md-nav__title[for=__drawer],
@@ -116,12 +116,32 @@ body:not(:has(.home-page)) .md-tabs__link { font-weight: 550; }
   .md-nav--primary .md-nav .md-nav__title { min-height: 2.8rem; line-height: 1.5; }
   .md-nav--primary .md-nav .md-nav__title .md-nav__icon { position: static; flex: 0 0 1rem; width: 1rem; height: 1rem; margin: 0; }
   .md-nav--primary > .md-nav__list { overflow-x: hidden; }
-  .md-nav--primary > .md-nav__list > .knative-site-navigation { display: block; }
   .md-nav--primary .md-nav__list > .md-nav__item { background-color: var(--md-default-bg-color, #fff); }
-  .site-links--drawer { display: block; margin: 0; padding: 0; background: var(--site-nav-bg); font-size: .8rem; }
+  .site-links--drawer { margin: 0; padding: 0; background: var(--site-nav-bg); font-size: .8rem; }
   .site-links--drawer a { display: flex; align-items: center; min-height: 2.4rem; padding: .6rem .8rem; }
   .site-links--drawer a[aria-current] { font-weight: 600; }
   .site-links--drawer a:focus-visible { outline: 2px solid var(--site-nav-focus); outline-offset: -4px; }
+}
+
+/* First collapse search to its icon, retaining site links at tablet widths. */
+@media (min-width: 60em) and (max-width: 76.234375em) {
+  .md-header__inner { position: relative; }
+  .md-header__button[for=__search] { display: block; }
+  .md-header__inner > .md-search { position: absolute; inset-inline-end: 0; top: calc(50% - .9rem); height: 1.8rem; padding: 0; }
+  .md-header__inner > .md-search .md-search__inner { position: absolute; inset-inline-end: 0; top: 0; }
+  body:not(:has(#__search:checked)) .md-header .md-search { display: none; }
+}
+
+/* The homepage does not need an empty drawer while its site links are visible. */
+@media (min-width: 48em) and (max-width: 76.234375em) {
+  body:has(.home-page) .md-header__button[for=__drawer] { display: none; }
+}
+
+/* Once site links no longer fit, show them in the drawer instead. */
+@media (max-width: 47.984375em) {
+  .md-header__inner .site-links { display: none; }
+  .md-nav--primary > .md-nav__list > .knative-site-navigation,
+  .site-links--drawer { display: block; }
 }
 
 /* Expand desktop search over the header without reflowing the navigation. */

@@ -73,7 +73,7 @@
         {% endif %}
       </ul>
     </li>
-    {% for nav_item in nav.children | default([]) %}
+    {% for nav_item in nav.children | default([], true) %}
       {% set path = "__nav_" ~ loop.index %}
       {{ item.render(nav_item, path, 1) }}
     {% endfor %}
