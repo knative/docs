@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% block content %}
+  {% include "partials/actions.html" %}
+  {% set study = page.meta.case_study %}
+  <h1>{{ page.meta.title }}</h1>
+  <div class="case-study">
+    <aside class="case-study__summary" aria-label="{{ study.company | e }} testimonial">
+      <img src="{{ study.logo | url }}" alt="{{ study.company | e }}" class="case-study__logo" />
+      <blockquote>{{ study.quote | e }}</blockquote>
+      {% if study.attribution %}<p class="case-study__attribution">{{ study.attribution | e }}</p>{% endif %}
+    </aside>
+    <div class="case-study__body">{{ page.content }}</div>
+  </div>
+{% endblock %}
