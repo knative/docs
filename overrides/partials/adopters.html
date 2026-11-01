@@ -1,0 +1,26 @@
+{# Curated adopters from slide 13 of the Knative kiosk deck; links from community/ADOPTERS.MD. #}
+{% set adopters = [
+  ('Cerebrium', 'cerebrium', 'https://www.cerebrium.ai/', 160, 26),
+  ('deepc', 'deepc', 'https://www.deepc.ai/', 160, 39),
+  ('Scaleway', 'scaleway', 'https://www.scaleway.com/en', 160, 39),
+  ('Cisco', 'cisco', 'https://www.cisco.com/', 121, 64),
+  ('Gojek', 'gojek', 'https://www.gojek.com', 160, 42),
+  ('Cloudera', 'cloudera', 'https://www.cloudera.com/products/machine-learning/ai-inference-service.html', 160, 20),
+  ('Alibaba Cloud', 'alibaba-cloud', 'https://cs.console.aliyun.com/', 160, 21),
+  ('Hadrian', 'hadrian', 'https://hadrian.io/platform', 160, 27),
+  ('CoreWeave', 'coreweave', 'https://coreweave.com/', 97, 64),
+  ('Grey Rook', 'greyrook', 'https://www.greyrook.com', 160, 32),
+  ('IBM', 'ibm', 'https://cloud.ibm.com/codeengine', 160, 60),
+  ('Run:ai', 'run-ai', 'https://www.run.ai', 94, 64),
+  ('Optum', 'optum', 'https://optum.com/', 160, 46),
+  ('KA-NABELL', 'ka-nabell', 'https://www.ka-nabell.com', 160, 36)
+] %}
+<div class="adopter-logos" aria-label="Organizations using Knative">
+  {% for name, file, destination, width, height in adopters | sort(attribute=0, case_sensitive=false) %}
+    <a href="{{ destination }}">
+      <img src="{{ ('images/adopters/' ~ file ~ '.webp') | url }}"
+        {% if file != 'greyrook' %}srcset="{{ ('images/adopters/' ~ file ~ '.webp') | url }} 1x, {{ ('images/adopters/' ~ file ~ '@2x.webp') | url }} 2x"{% endif %}
+        alt="{{ name }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async" />
+    </a>
+  {% endfor %}
+</div>
