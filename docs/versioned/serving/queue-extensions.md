@@ -13,8 +13,8 @@ function: how-to
 
 # Extending Queue Proxy image with QPOptions
 
-!!! warning "Deprecated example"
-    The Security Guard extension used in this example is deprecated and its repository will be archived. QPOptions itself is not deprecated. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+!!! warning "Deprecated"
+    QPOptions and the Security Guard extension shown here are deprecated. See [knative/community#1802](https://github.com/knative/community/issues/1802).
 
 Knative service pods include two containers:
 

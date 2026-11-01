@@ -13,8 +13,8 @@ function: explanation
 
 # Using extensions enabled by QPOptions
 
-!!! warning "Deprecated example"
-    The Security Guard `test-gate` extension used in this example is deprecated and its repository will be archived. QPOptions itself is not deprecated. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+!!! warning "Deprecated"
+    QPOptions and the Security Guard extension shown here are deprecated. See [knative/community#1802](https://github.com/knative/community/issues/1802).
 
 QPOptions is a Queue Proxy feature that enables extending Queue Proxy with additional Go packages. For example, the [security-guard](https://knative.dev/security-guard#section-readme) repository extends Queue Proxy by adding runtime security features to protect user services.
 
