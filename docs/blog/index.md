@@ -22,6 +22,11 @@ Follow this blog to keep up-to-date with Knative.
 
 ## Featured Posts
 
+### Announcing Knative v1.24 Release
+Details on the 1.24 release of the Knative project.
+
+[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-24-release.md){ .md-button }
+
 ### AI powered Knative Functions for Llama Stack
 Learn how to implement Knative functions for model inference.
 
@@ -31,16 +36,6 @@ Learn how to implement Knative functions for model inference.
 Monitoring Virtual Machines with Knative Eventing
 
 [Read more :octicons-arrow-right-24:](articles/kubevirt_meets_eventing.md){ .md-button }
-
-### Announcing Knative v1.24 Release
-Details on the 1.24 release of the Knative project.
-
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-24-release.md){ .md-button }
-
-### Announcing Knative v1.23 Release
-Details on the 1.23 release of the Knative project.
-
-[Read more :octicons-arrow-right-24:](releases/announcing-knative-v1-23-release.md){ .md-button }
 
 ### Building Stateful applications with Knative and Restate
 ![Building Stateful applications with Knative and Restate](./articles/images/Building-stateful-serverless-apps-with-knative-and-restate.png)
