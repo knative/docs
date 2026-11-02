@@ -24,6 +24,9 @@ An event source plugin has the following characteristics:
 
 ## List of Knative plugins
 
+!!! warning "Deprecated plugins"
+    `kn-plugin-service-log` and `kn-plugin-source-kamelet` are deprecated and their repositories will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 You can view all available `kn` plugins in the [Knative Extensions repository](https://github.com/orgs/knative-extensions/repositories?q=kn+plugin&type=all&language=&sort=).
 
 <!--TODO: If we're including the following table, the Client WG must be responsible for ensuring that the table is kept up to date, otherwise it should be removed from the docs and just the link to the extensions repo should be provided-->
@@ -31,10 +34,8 @@ You can view all available `kn` plugins in the [Knative Extensions repository](h
 | Plugin | Description | Available via Homebrew? |
 | --- | --- | :---: |
 | [kn-plugin-admin](https://github.com/knative-extensions/kn-plugin-admin) | `kn` plugin for managing a Kubernetes based Knative installation | Y |
-| [kn-plugin-diag](https://github.com/knative-extensions/kn-plugin-diag) | `kn` plugin for diagnosing issues by exposing detailed information for different layers of Knative objects | N |
 | [kn-plugin-event](https://github.com/knative-extensions/kn-plugin-event) | `kn` plugin for sending events to Knative sinks | Y |
 | [kn-plugin-func](https://github.com/knative/func) | `kn` plugin for functions | Y |
-| [kn-plugin-migration](https://github.com/knative-extensions/kn-plugin-migration) | `kn` plugin for migrating Knative Services from one cluster to another | N |
 | [kn-plugin-operator](https://github.com/knative-extensions/kn-plugin-operator) | `kn` plugin for managing Knative with Knative Operator | N |
 | [kn-plugin-quickstart](https://github.com/knative-extensions/kn-plugin-quickstart) | `kn` plugin for developers to install a quickstart Knative cluster for experimentation purposes | Y |
 | [kn-plugin-service-log](https://github.com/knative-extensions/kn-plugin-service-log) | `kn` plugin for showing the standard output of Knative Services | N |

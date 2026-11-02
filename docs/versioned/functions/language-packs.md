@@ -13,6 +13,9 @@ For more information see the [language pack](https://github.com/knative/func/blo
 
 ## Using external Git repositories
 
+!!! warning "Deprecated template repository"
+    The `func-tastic` repository used in these examples is deprecated and will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 When creating a new function, a Git repository can be specified as the source
 for the template files. The Knative Extensions maintains a set of [example templates](https://github.com/knative-extensions/func-tastic){target=_blank} which can be used during project creation.
 

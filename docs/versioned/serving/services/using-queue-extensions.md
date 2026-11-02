@@ -13,6 +13,9 @@ function: explanation
 
 # Using extensions enabled by QPOptions
 
+!!! warning "Deprecated"
+    QPOptions and the Security Guard extension shown here are deprecated. See [knative/community#1802](https://github.com/knative/community/issues/1802).
+
 QPOptions is a Queue Proxy feature that enables extending Queue Proxy with additional Go packages. For example, the [security-guard](https://knative.dev/security-guard#section-readme) repository extends Queue Proxy by adding runtime security features to protect user services.
 
 Once your cluster is setup with extensions enabled by QPOptions, a Service can decide which extensions it wish to use and how to configure such extensions. Activating and configuring extensions is described here.

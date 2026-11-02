@@ -277,7 +277,7 @@ Event display is a debugging tool in Knative Eventing that allows you to use it 
         spec:
           containers:
             - name: event-display
-              image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+              image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
               ports:
                 - containerPort: 8080
     

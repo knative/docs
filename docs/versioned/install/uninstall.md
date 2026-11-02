@@ -164,16 +164,6 @@ Uninstall any Eventing extensions you have installed by following the relevant p
 
 
 
-=== "Apache CouchDB Source"
-
-    Uninstall the Apache CouchDB source by running:
-
-    ```bash
-    kubectl delete -f {{ artifact(org="knative-extensions", repo="eventing-couchdb", file="couchdb.yaml") }}
-    ```
-
-
-
 === "VMware Sources and Bindings"
 
     Uninstall the VMware sources and bindings by running:
