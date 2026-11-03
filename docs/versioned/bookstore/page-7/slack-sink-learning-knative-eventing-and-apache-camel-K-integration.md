@@ -25,14 +25,14 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ![image](images/image13.png)
 
-Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
+Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/latest/installation/installation.html). We will use the installation via Kustomize:
 
 ```sh
 kubectl create ns camel-k && \
 kubectl apply -k 'github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0' --server-side
 ```
 
-Now you need to setup an `IntegrationPlatform` with a container registry. You can read more about it in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html#integration-platform). For all our needs we only need to create the `IntegrationPlatform` CR with a container registry entry. For example let's say we're using a Kind cluster with a local registry named `kind-registry` on port `5000`. Then your `IntegrationPlatform` CR will look like the following:
+Now you need to setup an `IntegrationPlatform` with a container registry. You can read more about it in [the official installation docs](https://camel.apache.org/camel-k/latest/installation/installation.html#integration-platform). For all our needs we only need to create the `IntegrationPlatform` CR with a container registry entry. For example let's say we're using a Kind cluster with a local registry named `kind-registry` on port `5000`. Then your `IntegrationPlatform` CR will look like the following:
 
 ```yaml
 apiVersion: camel.apache.org/v1
@@ -64,7 +64,7 @@ spec:
 EOF
 ```
 
-If you are using other container registries, you may need to read more in the [container registry configuration docs](https://camel.apache.org/camel-k/2.8.x/installation/registry/registry.html#how-to-configure){:target="_blank"} for Apache Camel K.
+If you are using other container registries, you may need to read more in the [container registry configuration docs](https://camel.apache.org/camel-k/latest/installation/registry/registry.html#how-to-configure){:target="_blank"} for Apache Camel K.
 
 ???+ success "Verify"
 
@@ -143,7 +143,7 @@ kubectl create secret generic slack-credentials --from-file=slack-sink/applicati
 
 ![image](images/image14.png)
 
-We use a feature called ["Pipe"](https://camel.apache.org/camel-k/2.8.x/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Apache Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/2.8.x/apis/camel-k.html#_camel_apache_org_v1_Kamelet){:target="_blank"}, our destination.
+We use a feature called ["Pipe"](https://camel.apache.org/camel-k/latest/apis/camel-k.html#_camel_apache_org_v1_Pipe){:target="_blank"} (a.k.a [KameletBinding](https://github.com/apache/camel-k/issues/2625){:target="_blank"}) in Apache Camel K to link event sources and destinations. Specifically, the Pipe connects events from our Broker, our source, to the Slack channel through a Slack sink [Kamelet](https://camel.apache.org/camel-k/latest/apis/camel-k.html#_camel_apache_org_v1_Kamelet){:target="_blank"}, our destination.
 
 ![image](images/image10.png)
 

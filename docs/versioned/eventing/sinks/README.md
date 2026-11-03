@@ -145,7 +145,7 @@ The `svc` in `http://event-display.svc.cluster.local` determines that the sink i
 | [JobSink](job-sink.md)                                                           | Knative  | Trigger long-running background jobs          |
 | [KafkaSink](kafka-sink.md)                                                       | Knative  | Send events to a Kafka topic                  |
 | [Logger Sink](./integration-sink/logger.md)                                      | Knative  | Send events to a logger, useful for debugging |
-| [RedisSink](https://github.com/knative-extensions/eventing-redis/tree/main/sink) | Knative  | Send events to a Redis Stream                 |
+| [RedisSink](https://github.com/knative-extensions/eventing-redis/tree/main/config/sink) | Knative  | Send events to a Redis Stream                 |
 
 
 [kubernetes-kinds]:
