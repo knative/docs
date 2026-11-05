@@ -132,10 +132,6 @@ These plugins facilitate Knative operations.
 
     For requesting TLS certificates in secure HTTPS connections. See [Install cert-manager](../install/installing-cert-manager.md).
 
-- Backstage
-
-    Plugins for handling Knative backends. See [Installing backstage plugins](../install/installing-backstage-plugins.md).
-
 ## Installation resources
 
 Use the following links to maintain your installations.

@@ -24,10 +24,7 @@ An event source plugin has the following characteristics:
 
 ## List of Knative plugins
 
-!!! warning "Deprecated plugins"
-    `kn-plugin-service-log` and `kn-plugin-source-kamelet` are deprecated and their repositories will be archived. See [knative/community#1802](https://github.com/knative/community/issues/1802).
-
-You can view all available `kn` plugins in the [Knative Extensions repository](https://github.com/orgs/knative-extensions/repositories?q=kn+plugin&type=all&language=&sort=).
+You can view all available `kn` plugins in the [Knative Extensions repository](https://github.com/orgs/knative-extensions/repositories?q=kn+plugin+archived%3Afalse&type=all&language=&sort=).
 
 <!--TODO: If we're including the following table, the Client WG must be responsible for ensuring that the table is kept up to date, otherwise it should be removed from the docs and just the link to the extensions repo should be provided-->
 
@@ -38,9 +35,7 @@ You can view all available `kn` plugins in the [Knative Extensions repository](h
 | [kn-plugin-func](https://github.com/knative/func) | `kn` plugin for functions | Y |
 | [kn-plugin-operator](https://github.com/knative-extensions/kn-plugin-operator) | `kn` plugin for managing Knative with Knative Operator | N |
 | [kn-plugin-quickstart](https://github.com/knative-extensions/kn-plugin-quickstart) | `kn` plugin for developers to install a quickstart Knative cluster for experimentation purposes | Y |
-| [kn-plugin-service-log](https://github.com/knative-extensions/kn-plugin-service-log) | `kn` plugin for showing the standard output of Knative Services | N |
 | [kn-plugin-source-kafka](https://github.com/knative-extensions/kn-plugin-source-kafka) | `kn` plugin for managing Kafka event sources | Y |
-| [kn-plugin-source-kamelet](https://github.com/knative-extensions/kn-plugin-source-kamelet) | `kn` plugin for managing Kamelets and KameletBindings | Y |
 
 ## Manually install a plugin
 
