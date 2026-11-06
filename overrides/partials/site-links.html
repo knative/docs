@@ -1,0 +1,15 @@
+{% macro render() %}
+  {% set section = 'docs' if version_selector else (page.url.split('/')[0] if page else '') %}
+  {% set items = [
+    ('Docs', 'docs/', 'docs'),
+    ('About', 'about/testimonials/', 'about'),
+    ('Blog', 'blog/', 'blog'),
+    ('Community', 'community/', 'community')
+  ] %}
+  {% for title, path, key in items %}
+    {% set active = page and section == key %}
+    <li>
+      <a href="{{ path | url }}"{% if active %} aria-current="true"{% endif %}>{{ title }}</a>
+    </li>
+  {% endfor %}
+{% endmacro %}

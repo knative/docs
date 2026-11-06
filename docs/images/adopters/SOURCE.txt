@@ -1,0 +1,19 @@
+Adopter logos supplied in the Knative Kiosk presentation, slide 13:
+https://docs.google.com/presentation/d/1hWaz8r4D3Vrv2gRjNnoAvXNyEOKKvK3u5q2_-sNI87o/
+
+The selected organizations and artwork follow that slide. Destinations were
+checked against the Knative community adopter register linked from the slide:
+https://github.com/knative/community/blob/main/ADOPTERS.MD
+
+Artwork was extracted from the provided PDF. Empty canvas was cropped and
+white-matted backgrounds, letter counters, and antialiased fringes were made
+transparent. Intentional white artwork inside the Scaleway and Grey Rook
+badges was retained. No logos were redrawn or intentionally recolored.
+
+These files are sized specifically for the homepage's 160 by 64 CSS-pixel
+logo slots. Default lossless WebP images fit within 160 by 64 pixels; @2x
+variants fit within 320 by 128 pixels and are selected through srcset.
+Grey Rook's supplied raster is only 165 by 33 pixels, so it has no artificially
+upscaled @2x variant. Intrinsic aspect ratios are preserved throughout.
+
+Logos remain the trademarks and artwork of their respective owners.

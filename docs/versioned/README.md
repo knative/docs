@@ -46,7 +46,7 @@ For event-driven features, familiarity with:
 
 Knative consists of three main components that work together to provide a complete serverless platform:
 
-![Knative High-Level Architecture: Functions, Serving, and Eventing.  Functions creates containers and defines event triggers, Serving runs containers, and Eventing routes events based on triggers.](../images/home-images/knative_flowchart_graphic.svg){draggable=false}
+[![Knative High-Level Architecture: Functions, Serving, and Eventing.  Functions creates containers and defines event triggers, Serving runs containers, and Eventing routes events based on triggers.](../images/home-images/knative_flowchart_graphic.svg){draggable=false}](../images/home-images/knative_flowchart_graphic.svg){.diagram-link}
 
 **Knative Serving**: An HTTP-triggered autoscaling container runtime that manages the complete lifecycle of stateless HTTP services, including deployment, routing, and automatic scaling.
 

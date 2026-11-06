@@ -1,0 +1,3 @@
+Kuack, the Knative mascot. Original artwork, unmodified.
+Source: https://github.com/knative/community/blob/75f45a483d0f385aa77f97074fb2217a5a450e02/mascot/kuack.png
+Brand guidelines: https://github.com/knative/community/blob/75f45a483d0f385aa77f97074fb2217a5a450e02/BRANDING.MD

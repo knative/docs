@@ -5,26 +5,17 @@ audience: buyer
 components:
   - serving
 function: marketing
+title: Outfit7 Case Study
+template: case-study.html
+case_study:
+  company: Outfit7
+  logo: images/case-studies/outfit7.png
+  quote: >-
+    "The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"
+  attribution: -- Tilen Kavčič, Software Engineer for Outfit7
 ---
-<h1 style="color:#0071c7;font-size: 3em;">Outfit7 Case Study</h1>
-<table style="border: 0;">
-<tr style="background-color: var(--md-default-bg-color);">
-<td style="border: 0;">
-<div style="min-width: 20mm;">
-      <img src="../../../images/case-studies/outfit7.png" alt="" draggable="false" />
-</div>
-<div>
-<em style="color:#0071c7;font-size: 1em;">"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em>
-</div>
-<div>
-<p style="color:#0071c7;font-size: 1em;">-- Tilen Kavčič, Software Engineer for Outfit7</p>
-</div>
 
-</td>
-
-<td style="border: 0;">
-
-<h2 style="font-weight: bold;">Game maker Outfit7 automates high performance ad bidding with Knative Serving</h2>
+## Game maker Outfit7 automates high performance ad bidding with Knative Serving
 
 
 Since its founding in 2009, the mobile gaming company Outfit7 has seen astronomical growth—garnering over 17 billion downloads and over 85 billion video views last year.
@@ -35,7 +26,7 @@ The success of the well-known game developer behind massive hits like the Talkin
 
 With up to 470 million monthly active users, 20 thousand server requests per second, and terabytes of data generated daily, they needed a stable, high performance solution. They turned to a Knative and Kubernetes solution to optimize real-time bidding ad sales in a way that can automatically scale up and down as needed.  They were able to develop a system so easy to maintain that it freed up two software engineers who are now able to work on more important tasks, like optimizing backend costs and adding new game features.
 
-<h2 style="color:#0071c7;">High performance in-app bidding</h2>
+## High performance in-app bidding
 
 Ad sales are an important revenue stream of Outfit7. The team needed to walk a careful balance: sell the space for the highest bid, use technical resources efficiently, and make sure ads are served to players quickly. To achieve this they decided to adopt an in-app bidding approach.
 
@@ -45,7 +36,7 @@ To manage the process in-house, the team needed to be able to test and deploy ve
 
 The team decided to adopt Knative Serving as the backbone of their solution. Knative allowed Outfit7 to streamline deployments and cut down on development time. After being surprised at how easily they generated an internal proof of concept, the team saw that it could craft custom solutions tuned for their internal workflows—without consuming valuable developer time. In addition, they could quickly configure A/B testing and deploy multiple versions of code simultaneously.
 
-<h2 style="color:#0071c7;">Serverless solution</h2>
+## Serverless solution
 
 Knative Serving gave Outfit7 access to a robust set of tools and features that allows their team to automate and monitor the deployment of applications to handle ad requests. When more requests are coming in, their system automatically spins up more containers that house the workers and tools. When these requests drop, unneeded containers shut down. Outfit7 only pays for the resources they require for the current load.
 
@@ -53,28 +44,22 @@ Knative works as a layer installed on top of Kubernetes. It brings the power of 
 
 Knative also simplifies project deployments to Kubernetes. Mitja Bezenšek, the Lead Developer on Outfit7's backend team, estimated that the traditional development that Knative replaced would have required three full-time engineers to maintain. Their new platform operates with minimal work and allows the developers to deploy updates at will.
 
-<h2 style="color:#0071c7;">The open source community</h2>
+## The open source community
 
 Outfit7's team was blown away by the supportive and helpful community around Knative. After discovering a problem with network scaling, the team was surprised by how easy it was to find answers and solutions.
 
-<h2 style="color:#0071c7;"><em>"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em> -- Tilen Kavčič, Software Engineer for Outfit7</h2>
+## <em>"The community support is really great. The hands-on experience with Knative was so impressive. On the Slack channel, we got actual engineers to answer our questions"</em> -- Tilen Kavčič, Software Engineer for Outfit7
 
-<h2 style="color:#0071c7;">Sharing their story</h2>
+## Sharing their story
 
 The great experience with Knative encouraged their team to share their experience with fellow companies and engineers at a local meetup. The presentation which included several live demos was a success, helping spawn another meet-up focused on the technology. "Tilen showed them the demo and what it's all about," said Bezenšek. "I hope we got them engaged going forward."
 
-<h2 style="color:#0071c7;">Looking forward</h2>
+## Looking forward
 
 Outfit7 shows no signs of slowing down. “As we want to support our vision in expanding our games portfolio, we are always looking for new strategic partners who can accompany us on this path,” added Helder Lopes, Head of R&D in Cyprus headquarters. The company plans to incorporate and adopt Knative into other back-end systems – taking advantage of the easier workflows that Knative offers.
 
-<h2 style="color:#0071c7;">Find out more</h2>
+## Find out more
 
-<ul>
-<li><a href="../../../getting-started/">Getting started with Knative</a></li>
-<li><a href="../../../serving/">Knative Serving</a></li>
-<li><a href="../../../eventing/">Knative Eventing</a></li>
-</ul>
-
-    </td>
-  </tr>
-</table>
+- [Getting started with Knative](/docs/getting-started/)
+- [Knative Serving](/docs/serving/)
+- [Knative Eventing](/docs/eventing/)

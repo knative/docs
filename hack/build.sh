@@ -17,8 +17,9 @@
 set -e
 set -x
 
-# Hide Material's MkDocs 2 banner without suppressing build diagnostics.
+# Hide Material and ProperDocs migration banners, not build diagnostics.
 export NO_MKDOCS_2_WARNING=1
+export DISABLE_MKDOCS_2_WARNING=true
 
 # Assemble the MkDocs site, including blog and community pages.
 # BUILD_VERSIONS=no publishes this checkout at /docs/ without release snapshots.

@@ -21,6 +21,7 @@
 -->
 
 {% import "partials/nav-item.html" as item with context %}
+{% import "partials/site-links.html" as site with context %}
 
 <!-- Determine classes -->
 {% set class = "md-nav md-nav--primary" %}
@@ -52,29 +53,29 @@
     {{ config.site_name }}
   </label>
 
-  <!-- Repository information -->
-  {% if config.repo_url %}
-    <div class="md-nav__source">
-      {% include "partials/source.html" %}
-    </div>
-  {% endif %}
-
-  <!-- Navigation list -->
-  {# Create nav from the "section" of docs that we are in.
-     Some sections (about, community) are not versioned, while docs is. #}
+  {# Keep Material's direct nav > list > item structure for the desktop sidebar. #}
   {% set section = nav | selectattr("active") | first %}
   {% if section %}
     {% set nav = section %}
   {% endif %}
 
   <ul class="md-nav__list" data-md-scrollfix>
-    <!-- All NAVS: {{ nav.children }} -->
-    {% if nav.children %}
-      {% for nav_item in nav.children %}
-        <!-- nav item: {{ nav_item }} -->
-        {% set path = "__nav_" ~ loop.index %}
-        {{ item.render(nav_item, path, 1) }}
-      {% endfor %}
-    {% endif %}
+    <li class="knative-site-navigation">
+      <ul class="site-links site-links--drawer" aria-label="Site navigation">
+        {{ site.render() }}
+        {% if config.repo_url %}
+          <li>
+            <a class="drawer-github" href="{{ config.repo_url }}">
+              {% include ".icons/fontawesome/brands/github.svg" %}
+              <span>GitHub</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </li>
+    {% for nav_item in nav.children | default([], true) %}
+      {% set path = "__nav_" ~ loop.index %}
+      {{ item.render(nav_item, path, 1) }}
+    {% endfor %}
   </ul>
 </nav>
