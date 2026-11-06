@@ -92,8 +92,6 @@ aliases:
   - skonto
   serving-reviewers:
   - skonto
-  serving-triage:
-  - skonto
   serving-wg-leads:
   - dprotaso
   serving-writers:
