@@ -15,11 +15,25 @@ limitations under the License.
 */
 
 const express = require('express')
-const { CloudEvent, HTTP, emitterFor, httpTransport } = require('cloudevents')
+const { CloudEvent, HTTP, emitterFor } = require('cloudevents')
 const PORT = process.env.PORT || 8080
 const target = process.env.K_SINK
 const app = express()
-const emit = target ? emitterFor(httpTransport(target)) : null
+// The SDK's HTTP transport does not expose response status codes. Use Node's
+// built-in fetch transport so rejected deliveries are logged as failures.
+const emit = target
+  ? emitterFor(async message => {
+    const response = await fetch(target, {
+      method: 'POST',
+      headers: message.headers,
+      body: message.body,
+      signal: AbortSignal.timeout(10000)
+    })
+    const data = await response.text()
+    if (!response.ok) throw new Error(`K_SINK returned HTTP ${response.status}`)
+    return { status: response.status, headers: Object.fromEntries(response.headers), data }
+  })
+  : null
 
 const main = () => {
   app.listen(PORT, function () {
@@ -31,7 +45,7 @@ const main = () => {
 
 // handle shared the logic for producing the Response event from the Request.
 const handle = (data) => {
-  return { message: `Hello, ${data.name ? data.name : 'nameless'}` }
+  return { message: `Hello, ${data && data.name ? data.name : 'nameless'}` }
 }
 
 // receiveAndSend responds with ack, and send a new event forward
@@ -50,7 +64,7 @@ const receiveAndSend = (cloudEvent, res) => {
     console.log(`Sent event: ${JSON.stringify(ce, null, 2)}`)
     console.log(`K_SINK responded: ${JSON.stringify({ status: responseSink.status, headers: responseSink.headers, data: responseSink.data }, null, 2)}`)
   })
-  .catch(console.error)
+    .catch(err => console.error('Failed to send event to K_SINK:', err))
 }
 
 // receiveAndReply responds with new event

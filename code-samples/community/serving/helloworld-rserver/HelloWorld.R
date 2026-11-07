@@ -1,9 +1,8 @@
 #' HelloWorld function
 #' @get /
-#' @html
+#' @serializer html
 function() {
   TARGET <- Sys.getenv("TARGET", "World")
 
-  message = paste("Hello ", TARGET, "!", sep = "")
-  print(message)
+  paste0("Hello ", TARGET, "!")
 }

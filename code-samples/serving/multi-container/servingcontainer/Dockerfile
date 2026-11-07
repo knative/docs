@@ -1,7 +1,7 @@
 # Use the official Golang image to create a build artifact.
 # This is based on Debian and sets the GOPATH to /go.
 # https://hub.docker.com/_/golang
-FROM golang:latest AS builder
+FROM golang:1.27 AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -17,7 +17,7 @@ RUN go mod tidy
 
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o servingcontainer
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o servingcontainer
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine

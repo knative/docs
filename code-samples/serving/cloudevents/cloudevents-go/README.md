@@ -12,17 +12,21 @@ can use for testing. It supports running in two modes:
    send to a Service or Broker when not initiated by a Broker invocation (e.g.
    implementing an event source)
 
-The application will use `$K_SINK`-mode whenever the environment variable is
-specified.
+The application will use `$K_SINK`-mode whenever the environment variable has a
+non-empty value. An unset or empty `K_SINK` selects reply mode.
 
-Do the following steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+Use the checked-in [application source](cloudevents.go), [Dockerfile](Dockerfile),
+and [Service manifest](service.yaml) to build and deploy the app. Download a
+working copy of the sample with:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
 cd knative-docs/code-samples/serving/cloudevents/cloudevents-go
 ```
+
+For the Eventing Hello World learning scenario, use the
+[Broker/Trigger tutorial](eventing/README.md), which demonstrates filtered input
+and routed replies.
 
 ## Before you begin
 
@@ -31,66 +35,26 @@ cd knative-docs/code-samples/serving/cloudevents/cloudevents-go
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## The sample code.
+## Build and deploy
 
-1. If you look in `cloudevents.go`, you will see two key functions for the different modes of operation:
+Replace `{username}` below and in [service.yaml](service.yaml) with your registry
+namespace. From the sample directory, build and push with Docker:
 
-   ```go
-   func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Event) cloudevents.Result {
-     // This is called whenever an event is received if $K_SINK is set, and sends a new event
-     // to the url in $K_SINK.
-   }
-
-   func (recv *Receiver) ReceiveAndReply(ctx context.Context, event cloudevents.Event)  (*cloudevents.Event, cloudevents.Result) {
-     // This is called whenever an event is received if $K_SINK is NOT set, and it replies with
-     // the new event instead.
-   }
-   ```
-
-2. Choose how you would like to build the application:
-
- ### Dockerfile
-
- * If you look in `Dockerfile`, you will see a method for pulling in the dependencies and building a small Go container based on Alpine. You can build and push this to your registry of choice via:
 ```bash
-# Build and push the container on your local machine.
-docker buildx build --platform linux/arm64,linux/amd64 -t "<image>" --push .
-```
-
- ### ko
-
- * You can use [`ko`](https://github.com/google/ko) to build and push just the image with:
-```bash
-ko publish github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go
-```
- However, if you use `ko` for the next step, this is not necessary.
-
-
-3. Choose how you would like to deploy the application:
-
- ### yaml (with Dockerfile)
- * If you look in `service.yaml`, take the `<image>` name you used earlier and insert it into the `image:` field, then run:
-```bash
+docker buildx build --platform linux/arm64,linux/amd64 \
+  -t "docker.io/{username}/cloudevents-go" --push .
 kubectl apply -f service.yaml
+kubectl wait --for=condition=Ready ksvc/cloudevents-go --timeout=180s
 ```
 
- ### yaml (with ko)
- * If using `ko` to build and push:
+For a local run without publishing:
+
 ```bash
-ko apply -f service.yaml
+docker build -t cloudevents-go:local .
+docker run --rm -p 8080:8080 cloudevents-go:local
 ```
 
- ### kn (with Dockerfile)
- * If using `kn` to deploy:
-```bash
-kn service create cloudevents-go --image=<IMAGE>
-```
-
- ### kn (with ko)
- * You can compose `kn` and `ko` to build and deploy with a single step using:
-```bash
-kn service create cloudevents-go --image=$(ko publish github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-go)
-```
+Send the example event below to `http://localhost:8080/` instead of the Service URL.
 
 ## Testing the sample
 
@@ -119,6 +83,33 @@ You will get back:
 
 ```bash
 {"message":"Hello, Dave"}
+```
+
+The response is a CloudEvent in binary HTTP mode: the JSON above is its data,
+and the `ce-*` response headers contain its context attributes. Use `curl -i` to
+inspect these headers. The application listens on port `8080` by default; set
+`PORT` to use a different port when running locally.
+
+### Sending the response to a sink
+
+To send the generated event to another service instead of returning it in the
+HTTP response, set `K_SINK` to the destination URL. For example:
+
+Using the `kn` CLI:
+
+```bash
+kn service update cloudevents-go --env K_SINK=http://your-sink.example.com
+```
+
+Send the same input event again. On successful delivery, the application returns
+an empty successful HTTP response, and the sink receives a CloudEvent with type
+`dev.knative.docs.sample` and data `{"message":"Hello, Dave"}`. Delivery failures
+are returned to the caller as unsuccessful HTTP responses.
+
+To restore reply mode:
+
+```bash
+kn service update cloudevents-go --env K_SINK-
 ```
 
 ## Removing the sample app deployment

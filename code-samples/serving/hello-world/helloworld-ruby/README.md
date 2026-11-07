@@ -3,7 +3,11 @@
 This guide describes the steps required to create the `helloworld-ruby` sample app and deploy it to your cluster.
 
 The sample app reads a `TARGET` environment variable, and prints `Hello ${TARGET}!`.
-If `TARGET` is not specified, `World` is used as the default value.
+If `TARGET` is not specified, `World` is used as the default value. An explicitly
+empty `TARGET` produces `Hello !`.
+
+The Dockerfile uses `ruby:4.0-slim-trixie` and installs the gems pinned in
+[Gemfile.lock](Gemfile.lock).
 
 You can also download a working copy of the sample, by running the
 following commands:
@@ -21,85 +25,56 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-ruby
   and a Docker Hub account configured.
 - (optional) The Knative CLI client [kn](https://github.com/knative/client/releases) that simplifies the deployment. Alternative you can also use [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and apply resource files directly.
 
-## Recreating the sample code
+## Using the sample code
 
-1. Create a new directory and cd into it:
+After cloning and entering the sample directory above, use the checked-in files:
 
-   ```bash
-   mkdir app
-   cd app
-   ```
+- [app.rb](app.rb) defines the greeting route, binds to `0.0.0.0`, and reads
+  `PORT` (default `8080`).
+- [Dockerfile](Dockerfile) builds the production image from the
+  [official Ruby image](https://hub.docker.com/_/ruby/) and starts the app with
+  the locked dependencies.
+- [Gemfile](Gemfile) and [Gemfile.lock](Gemfile.lock) define the server and its
+  resolved dependencies. Docker installs them; no local Ruby installation is required.
+- [service.yaml](service.yaml) defines the Knative Service and configures
+  `TARGET="Ruby Sample v1"`.
 
-1. Create a file named `app.rb` and copy the following code block into it:
+## Building and testing locally
 
-   ```ruby
-   require 'sinatra'
+Build the image, replacing `{username}` with your Docker Hub username:
 
-   set :bind, '0.0.0.0'
+```bash
+docker build --pull -t docker.io/{username}/helloworld-ruby .
+```
 
-   get '/' do
-    target = ENV['TARGET'] || 'World'
-    "Hello #{target}!\n"
-   end
-   ```
+Run it locally and request the default greeting from another terminal:
 
-1. Create a file named `Dockerfile` and copy the following code block into it. See
-   [official Ruby docker image](https://hub.docker.com/_/ruby/) for more
-   details.
+```bash
+docker run --rm -p 127.0.0.1:8080:8080 docker.io/{username}/helloworld-ruby
+# In another terminal:
+curl http://localhost:8080
+# Hello World!
+```
 
-   ```docker
-   # Use the official lightweight Ruby image.
-   # https://hub.docker.com/_/ruby
-   FROM ruby:2.6-slim
+Stop the container with Ctrl-C. To test a custom greeting and port, run:
 
-   # Install production dependencies.
-   WORKDIR /usr/src/app
-   COPY Gemfile Gemfile.lock ./
-   ENV BUNDLE_FROZEN=true
-   RUN gem install bundler && bundle install
+```bash
+docker run --rm -p 127.0.0.1:8081:8081 -e PORT=8081 -e TARGET="Ruby Sample v1" docker.io/{username}/helloworld-ruby
+# In another terminal:
+curl http://localhost:8081
+# Hello Ruby Sample v1!
+```
 
-   # Copy local code to the container image.
-   COPY . ./
-
-   # Run the web service on container startup.
-   CMD ["ruby", "./app.rb"]
-   ```
-
-1. Create a file named `Gemfile` and copy the following text block into it.
-
-   ```gem
-   source 'https://rubygems.org'
-
-   gem 'sinatra'
-   gem 'rack', '>= 2.0.6'
-   ```
-
-1. Run bundle. If you don't have bundler installed, copy the
-   [Gemfile.lock](Gemfile.lock) to your working directory.
-
-   ```bash
-   bundle install
-   ```
-
-1. Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
-
- ```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: helloworld-ruby
-  namespace: default
-spec:
-  template:
-    spec:
-      containers:
-        - image: docker.io/{username}/helloworld-ruby
-          env:
-            - name: TARGET
-              value: "Ruby Sample v1"
- ```
+The app listens on `0.0.0.0` and uses `PORT` (default `8080`). The image sets
+`APP_ENV=production` so Sinatra accepts requests for the service's external hostname.
 
 ## Deploying
+
+Stop the local container and push the image before deploying:
+
+```bash
+docker push docker.io/{username}/helloworld-ruby
+```
 
 After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster.
 
@@ -107,23 +82,9 @@ Choose one of the following methods to deploy the app:
 
  ### yaml
 
- * Create a new file, `service.yaml` and copy the following service definition into the file. Make sure to replace `{username}` with your Docker Hub username.
-```yaml
-       apiVersion: serving.knative.dev/v1
-       kind: Service
-       metadata:
-         name: helloworld-ruby
-         namespace: default
-       spec:
-         template:
-           spec:
-             containers:
-               - image: docker.io/{username}/helloworld-ruby
-                 env:
-                   - name: TARGET
-                     value: "Ruby Sample v1"
-```
-Ensure that the container image value in `service.yaml` matches the container you built in the previous step.
+Edit the checked-in [service.yaml](service.yaml), replacing `{username}` in
+its image reference with your Docker Hub username. Ensure that the image matches
+the one you built and pushed in the previous steps.
 Apply the configuration using `kubectl`:
 ```bash
 kubectl apply --filename service.yaml

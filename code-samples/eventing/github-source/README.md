@@ -3,6 +3,15 @@
 GitHub Source example shows how to wire GitHub events for consumption
 by a Knative Service.
 
+## Get the sample files
+
+Clone the repository and run the commands below from this sample directory:
+
+```bash
+git clone https://github.com/knative/docs.git knative-docs
+cd knative-docs/code-samples/eventing/github-source
+```
+
 ## Before you begin
 
 1. Set up [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml).
@@ -29,20 +38,9 @@ kubectl -n knative-sources get pods --selector control-plane=github-controller-m
 ### Create a Knative Service
 
 To verify the GitHub source is working, create a simple Knative
-Service that dumps incoming messages to its log. The `service.yaml` file
-defines this basic Service.
-
-```yaml
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: github-message-dumper
-spec:
-  template:
-    spec:
-      containers:
-      - image: gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
-```
+Service that dumps incoming messages to its log.
+[service.yaml](service.yaml) defines this Service using the Eventing
+`event_display` receiver image.
 
 Enter the following command to create the service from `service.yaml`:
 
@@ -68,20 +66,10 @@ recommended scopes:
 
 ![GitHub UI](personal_access_token.png "GitHub personal access token screenshot")
 
-Update `githubsecret.yaml` with those values. If your generated access
-token is `'personal_access_token_value'` and you choose your _secretToken_
-as `'asdfasfdsaf'`, you'd modify `githubsecret.yaml` like so:
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: githubsecret
-type: Opaque
-stringData:
-  accessToken: personal_access_token_value
-  secretToken: asdfasfdsaf
-```
+Update [githubsecret.yaml](githubsecret.yaml) with those values: set
+`stringData.accessToken` to your generated access token and
+`stringData.secretToken` to your chosen webhook secret. Keep the secret name
+and keys unchanged because the source references them. Do not commit real tokens.
 
 Hint: you can makeup a random _secretToken_ with:
 
@@ -102,34 +90,14 @@ Source for a specific namespace. Be sure to replace the
 `ownerAndRepository` value with a valid GitHub public repository owned
 by your GitHub user.
 
-If using GitHub enterprise you will need to add an additional githubAPIURL
-field to the spec specifying your GitHub enterprise API endpoint.
+Edit [github-source.yaml](github-source.yaml), which subscribes to
+`pull_request` events, references the token Secret, and sends events to
+`github-message-dumper`.
 
-```yaml
-apiVersion: sources.knative.dev/v1alpha1
-kind: GitHubSource
-metadata:
-  name: githubsourcesample
-spec:
-  eventTypes:
-    - pull_request
-  ownerAndRepository: <YOUR USER>/<YOUR REPO>
-  accessToken:
-    secretKeyRef:
-      name: githubsecret
-      key: accessToken
-  secretToken:
-    secretKeyRef:
-      name: githubsecret
-      key: secretToken
-  sink:
-    ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: github-message-dumper
-```
+If using GitHub Enterprise, add `spec.githubAPIURL` with your enterprise API
+endpoint, for example `https://github.mycompany.com/api/v3/`.
 
-Then, apply that yaml using `kubectl`:
+Then, apply the file using `kubectl`:
 
 ```bash
 kubectl --namespace default apply --filename github-source.yaml
@@ -151,35 +119,27 @@ that the GitHub events were sent into the Knative eventing system
 by looking at our message dumper function logs.
 
 ```bash
-kubectl --namespace default get pods
-kubectl --namespace default logs github-event-display-XXXX user-container
+kubectl --namespace default get pods -l serving.knative.dev/service=github-message-dumper
+kubectl --namespace default logs -l serving.knative.dev/service=github-message-dumper -c user-container --tail=50
 ```
 
-You should log lines similar to:
+You should see a CloudEvent similar to the following (IDs, source, and payload
+will depend on your repository and pull request):
 
-```
-2018/11/08 18:25:34 Message Dumper received a message: POST / HTTP/1.1
-Host: github-event-display.knative-demo.svc.cluster.local
-Accept-Encoding: gzip
-Ce-Cloudeventsversion: 0.1
-Ce-Eventid: a8d4cf20-e383-11e8-8069-46e3c8ad2b4d
-Ce-Eventtime: 2018-11-08T18:25:32.819548012Z
-Ce-Eventtype: dev.knative.source.github.pull_request
-Ce-Source: https://github.com/someuser/somerepo/pull/1
-Content-Length: 21060
-Content-Type: application/json
-User-Agent: Go-http-client/1.1
-X-B3-Parentspanid: b2e514c3dbe94c03
-X-B3-Sampled: 1
-X-B3-Spanid: c85e346d89c8be4e
-X-B3-Traceid: abf6292d458fb8e7
-X-Envoy-Expected-Rq-Timeout-Ms: 60000
-X-Envoy-Internal: true
-X-Forwarded-For: 127.0.0.1, 127.0.0.1
-X-Forwarded-Proto: http
-X-Request-Id: 8a2201af-5075-9447-b593-ec3a243aff52
-
-{"action":"opened","number":1,"pull_request": ...}
+```text
+☁️  cloudevents.Event
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.source.github.pull_request
+  source: https://github.com/someuser/somerepo
+  id: a8d4cf20-e383-11e8-8069-46e3c8ad2b4d
+  datacontenttype: application/json
+Data,
+  {
+    "action": "opened",
+    "number": 1,
+    "pull_request": { ... }
+  }
 ```
 
 ### Cleanup

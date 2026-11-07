@@ -21,7 +21,7 @@ spec:
   template:
     spec:
       containers:
-      - image: docker.io/savita3020/servingcontainer
+      - image: docker.io/{username}/servingcontainer
         ports:
           - containerPort: 8881
-      - image: docker.io/savita3020/sidecarcontainer
+      - image: docker.io/{username}/sidecarcontainer

@@ -1,6 +1,7 @@
 package org.knative.examples.cloudevents.spring;
 
 import java.net.URI;
+import java.time.Duration;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -9,70 +10,57 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.function.cloudevent.CloudEventAttributesProvider;
+import org.springframework.cloud.function.cloudevent.CloudEventMessageBuilder;
+import org.springframework.cloud.function.cloudevent.CloudEventsFunctionExtensionConfiguration;
 import org.springframework.cloud.function.cloudevent.CloudEventMessageUtils;
-import org.springframework.cloud.function.web.util.HeaderUtils;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.RequestEntity;
+import org.springframework.context.annotation.Import;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 @SpringBootApplication(proxyBeanMethods = false)
+@Import(CloudEventsFunctionExtensionConfiguration.class)
 public class CloudEventSampleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CloudEventSampleApplication.class, args);
 	}
 
-	@Bean
-	public CloudEventAttributesProvider cloudEventAttributesProvider() {
-		return attrs -> attrs.setType("org.knative.examples.cloudevents.spring.Response")
-				.setSource("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-spring");
+	private static <T> Message<T> response(T data) {
+		return CloudEventMessageBuilder.withData(data)
+			.setType("org.knative.examples.cloudevents.spring.Response")
+			.setSource("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-spring")
+			.setHeader(MessageHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+			.build();
 	}
 
 	@Bean
 	@ConditionalOnExpression("'${K_SINK:}'==''")
-	public Function<Foo, Foo> echo() {
-		return message -> message;
+	public Function<Map<String, Object>, Message<Map<String, Object>>> echo() {
+		return CloudEventSampleApplication::response;
 	}
 
 	@Bean
 	@ConditionalOnExpression("'${K_SINK:}'!=''")
-	public Consumer<Message<Map<String, Object>>> sink(CloudEventAttributesProvider provider,
-			RestTemplateBuilder builder, @Value("${K_SINK}") String url) {
-		RestTemplate client = builder.build();
-		return message -> client.exchange(RequestEntity.post(URI.create(url))
-				.headers(HeaderUtils
-						.fromMessage(new MessageHeaders(CloudEventMessageUtils.generateAttributes(message, provider))))
-				.body(message.getPayload()), byte[].class);
-	}
-
-}
-
-class Foo {
-
-	private String name;
-
-	public Foo() {
-	}
-
-	public Foo(String value) {
-		this.name = value;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return "Foo [name=" + this.name + "]";
+	public Consumer<Message<Map<String, Object>>> sink(@Value("${K_SINK}") String url) {
+		SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+		factory.setConnectTimeout(Duration.ofSeconds(5));
+		factory.setReadTimeout(Duration.ofSeconds(10));
+		RestClient client = RestClient.builder().requestFactory(factory).build();
+		return message -> {
+			Message<Map<String, Object>> event = response(message.getPayload());
+			client.post()
+				.uri(URI.create(url))
+				.contentType(MediaType.APPLICATION_JSON)
+				.headers(headers -> CloudEventMessageUtils.getAttributes(event)
+					.forEach((name, value) -> headers.set(name, value.toString())))
+				.body(event.getPayload())
+				.retrieve()
+				.toBodilessEntity();
+		};
 	}
 
 }

@@ -1,22 +1,27 @@
-# Use the official Haskell image to create a build artifact.
-# https://hub.docker.com/_/haskell/
-FROM haskell:8.2.2 AS builder
+# syntax=docker/dockerfile:1
+# GHCup-recommended / Stackage LTS compiler; pin the multi-architecture image.
+FROM haskell:9.10.3-slim-bookworm@sha256:3c9f47467dbd6cb62c6ec6b768270c627bc33565e209bece103b7484075b27e3 AS builder
+ENV CABAL_DIR=/root/.cabal
+WORKDIR /src
+COPY helloworld-haskell.cabal cabal.project cabal.project.freeze LICENSE ./
+RUN --mount=type=cache,id=docs-audit-community-helloworld-haskell-cabal,target=/root/.cabal \
+    cabal update && cabal build --only-dependencies all
+COPY app ./app
+RUN --mount=type=cache,id=docs-audit-community-helloworld-haskell-cabal,target=/root/.cabal \
+    cabal check \
+    && cabal build all --ghc-options=-Werror \
+    && mkdir /out \
+    && cp "$(cabal list-bin exe:helloworld-haskell-exe)" /out/helloworld-haskell-exe \
+    && strip /out/helloworld-haskell-exe \
+    && ldd /out/helloworld-haskell-exe
 
-# Copy local code to the container image.
+# Same Debian ABI, without GHC/Cabal or build dependencies in the final image.
+FROM debian:bookworm-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgmp10 zlib1g \
+    && rm -rf /var/lib/apt/lists/*
+ENV LANG=C.UTF-8
 WORKDIR /app
-COPY . .
-
-# Build and test our code, then build the “helloworld-haskell-exe” executable.
-RUN stack setup
-RUN stack build --copy-bins
-
-# Use a Docker multi-stage build to create a lean production image.
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM fpco/haskell-scratch:integer-gmp
-
-# Copy the "helloworld-haskell-exe" executable from the builder stage to the production image.
-WORKDIR /root/
-COPY --from=builder /root/.local/bin/helloworld-haskell-exe .
-
-# Run the web service on container startup.
+COPY --from=builder /out/helloworld-haskell-exe .
+USER 65532:65532
 CMD ["./helloworld-haskell-exe"]

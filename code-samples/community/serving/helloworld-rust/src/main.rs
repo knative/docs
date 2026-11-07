@@ -33,6 +33,7 @@ async fn main() {
                 }
                 Err(_e) => hello.push_str("World"),
             };
+            hello.push('!');
             Ok::<_, Infallible>(Response::new(Body::from(hello)))
         }))
     });

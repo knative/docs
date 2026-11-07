@@ -10,7 +10,8 @@ final _router = Router()
   ..get('/echo/<message>', _echoHandler);
 
 Response _rootHandler(Request req) {
-  return Response.ok('Hello, World!\n');
+  final target = Platform.environment['TARGET'] ?? 'World';
+  return Response.ok('Hello $target\n');
 }
 
 Response _echoHandler(Request request) {

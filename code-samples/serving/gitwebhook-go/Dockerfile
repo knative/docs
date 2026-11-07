@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang:latest AS builder
+FROM golang:1.27 AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -30,7 +30,7 @@ RUN go mod tidy
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o webhook-sample
 
-FROM golang:alpine
+FROM golang:1.27
 
 EXPOSE 8080
 COPY --from=builder /app/webhook-sample /webhook-sample

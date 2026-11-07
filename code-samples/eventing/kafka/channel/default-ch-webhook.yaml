@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: default-ch-webhook
+  namespace: knative-eventing
+data:
+  # Configuration for defaulting channels without an explicit implementation.
+  default-ch-config: |
+    clusterDefault:
+      apiVersion: messaging.knative.dev/v1beta1
+      kind: KafkaChannel
+      spec:
+        numPartitions: 3
+        replicationFactor: 1

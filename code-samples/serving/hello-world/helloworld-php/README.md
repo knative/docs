@@ -2,11 +2,19 @@
 
 A simple web app written in PHP that you can use for testing. It reads in an env
 variable `TARGET` and prints `Hello ${TARGET}!`. If `TARGET` is not specified,
-it will use `World` as the `TARGET`.
+it will use `World` as the `TARGET`. PHP also treats an empty `TARGET` or the
+string `0` as false, so these values use `World` as well. Responses are UTF-8
+plain text: characters in `TARGET` are preserved, not interpreted as HTML.
 
-Do the following steps to create the sample code and then deploy the app to your
-cluster. You can also download a working copy of the sample, by running the
-following commands:
+The sample uses the official `php:8.5-apache-trixie` image (PHP 8.5 with Apache
+on Debian Trixie) and PHP's production configuration. PHP 8.5 is actively
+supported through December 2027 and receives security fixes through December
+2029; see [PHP supported versions](https://www.php.net/supported-versions.php).
+The minor-version image tag receives patch updates; rebuild with `--pull` to
+pick them up.
+
+Clone the repository and use the checked-in sample files to build and deploy
+the app to your cluster:
 
 ```bash
 git clone https://github.com/knative/docs.git knative-docs
@@ -20,87 +28,36 @@ cd knative-docs/code-samples/serving/hello-world/helloworld-php
 - [Docker](https://www.docker.com) installed and running on your local machine,
   and a Docker Hub account configured (we'll use it for a container registry).
 
-## Recreating the sample code
+## Sample files
 
-1. Create a new directory and cd into it:
+Use the files from the directory selected above; there is no need to
+recreate them by copying code from this guide:
 
-   ```bash
-   mkdir app
-   cd app
-   ```
-
-1. Create a file named `index.php` and copy the following code block into it:
-
-   ```php
-   <?php
-   $target = getenv('TARGET', true) ?: 'World';
-   echo sprintf("Hello %s!\n", $target);
-   ?>
-   ```
-
-1. Create a file named `Dockerfile` and copy the following code block into it. See
-   [official PHP docker image](https://hub.docker.com/_/php/) for more details.
-
-   ```docker
-   # Use the official PHP 7.3 image.
-   # https://hub.docker.com/_/php
-   FROM php:7.3-apache
-
-   # Copy local code to the container image.
-   COPY index.php /var/www/html/
-
-   # Use the PORT environment variable in Apache configuration files.
-   RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-
-   # Configure PHP for development.
-   # Switch to the production php.ini for production operations.
-   # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-   # https://hub.docker.com/_/php#configuration
-   RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-   ```
-
-1. Create a `.dockerignore` file to ensure that any files related to a local
-   build do not affect the container that you build for deployment.
-
-   ```ignore
-   README.md
-   ```
-
-1. Create a new file, `service.yaml` and copy the following service definition
-   into the file. Make sure to replace `{username}` with your Docker Hub
-   username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-php
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - image: docker.io/{username}/helloworld-php
-             env:
-               - name: TARGET
-                 value: "PHP Sample v1"
-   ```
+- [index.php](index.php) reads `TARGET` and returns the UTF-8 plain-text greeting.
+- [Dockerfile](Dockerfile) packages the app with the
+  [official PHP Apache image](https://hub.docker.com/_/php/), uses PHP's production
+  configuration, and configures Apache to listen on `PORT` (default `8080`).
+- [service.yaml](service.yaml) defines the Knative Service and sets
+  `TARGET="PHP Sample v1"`. Replace `{username}` in its image reference with
+  your Docker Hub username before deployment.
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample folder) you're ready to build and deploy the sample app.
+Run the following commands from the sample directory cloned above.
 
-Choose one of the following methods:
+First, build and push the image for either deployment method. Replace
+`{username}` with your Docker Hub username:
+
+```bash
+# Build and push the container on your local machine.
+docker buildx build --pull --platform linux/arm64,linux/amd64 -t "{username}/helloworld-php" --push .
+```
+
+Choose one of the following deployment methods:
 
 ### yaml
- 1. Use Docker to build the sample code into a container. To build and push with Docker Hub, run these commands replacing `{username}` with your Docker Hub username:
 
-    ```bash
-    # Build and push the container on your local machine.
-    docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-php" --push .
-    ```
-
- 1. After the build has completed and the container is pushed to docker hub, you can deploy the app into your cluster. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
+After the build has completed and the container is pushed to Docker Hub, you can deploy the app into your cluster. Ensure that the container image value in `service.yaml` matches the container you built in the previous step. Apply the configuration using `kubectl`:
 
  ```bash
  kubectl apply --filename service.yaml
@@ -138,7 +95,7 @@ Now that your service is created, Knative will perform the following steps:
 
  ### kubectl
  ```
- kubectl get ksvc helloworld-php  --output=custom columns=NAME:.metadata.name,URL:.status.url
+ kubectl get ksvc helloworld-php --output=custom-columns=NAME:.metadata.name,URL:.status.url
  NAME                URL
  helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
  ```
@@ -158,6 +115,25 @@ http://helloworld-php.default.1.2.3.4.xip.io
 curl http://helloworld-php.default.1.2.3.4.sslip.io
 Hello PHP Sample v1!
  ```
+
+## Testing locally
+
+To test without a cluster or registry, build a local image and run it:
+
+```bash
+docker build --pull -t helloworld-php:local .
+docker run --rm -p 127.0.0.1:8080:8080 helloworld-php:local
+```
+
+In another terminal, `curl http://localhost:8080` should return `Hello World!`.
+Stop the container with Ctrl-C. To test a custom target and listening port, run:
+
+```bash
+docker run --rm -p 127.0.0.1:9090:9090 -e PORT=9090 -e TARGET="PHP Sample v1" helloworld-php:local
+```
+
+Then `curl http://localhost:9090` should return `Hello PHP Sample v1!`.
+Port 9090 is for this Docker-only check; Knative reserves it for its queue proxy.
 
 ## Removing the sample app deployment
 

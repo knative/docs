@@ -1,17 +1,12 @@
 (ns helloworld.core
-  (:use ring.adapter.jetty)
+  (:require [ring.adapter.jetty :as jetty])
   (:gen-class))
 
-(defn handler [request]
+(defn handler [_request]
   {:status 200
    :headers {"Content-Type" "text/html"}
-   :body (str "Hello "
-              (if-let [target (System/getenv "TARGET")]
-                target
-                "World")
-              "!\n")})
+   :body (str "Hello " (or (System/getenv "TARGET") "World") "!\n")})
 
-(defn -main [& args]
-  (run-jetty handler {:port (if-let [port (System/getenv "PORT")]
-                              (Integer/parseInt port)
-                              8080)}))
+(defn -main [& _args]
+  (jetty/run-jetty handler
+                   {:port (Integer/parseInt (or (System/getenv "PORT") "8080"))}))

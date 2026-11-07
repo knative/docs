@@ -15,10 +15,10 @@ Currently Istio, Contour and Kourier ingress support this feature.
 1. A Knative cluster that has an ingress controller installed
 with Knative v0.16 and later.
 
-1. Move into the docs directory:
+1. Move into the root of your clone of the docs repository:
 
     ```bash
-    cd $GOPATH/src/github.com/knative/docs
+    cd /path/to/docs
     ```
 
 ## Enabling tag header based routing
@@ -34,7 +34,7 @@ kubectl patch cm config-features -n knative-serving -p '{"data":{"tag-header-bas
 Follow the instructions in [helloworld-go](../hello-world/helloworld-go/README.md) to build the `helloworld` image and upload it
 to your container repository.
 
-Replace `{username}` in the [sample.yaml](sample.yaml) with your Docker Hub username.
+Replace `{username}` in [sample.yaml](sample.yaml) with your Docker Hub username.
 
 ## Setting up the revisions with tag
 
@@ -46,11 +46,25 @@ The Knative Service is configured to route all of the traffic to the second Revi
 provide the `Knative-Serving-Tag` or they provide an incorrect value for `Knative-Serving-Tag`, the requests will be
 routed to the second Revision.
 
-Run the following command to set up the Knative Service and Revisions.
+The two YAML documents in `sample.yaml` update the same Service. First, apply
+only the first document and wait for its Revision to be ready:
 
+```bash
+sed '/^---$/q' code-samples/serving/tag-header-based-routing/sample.yaml | kubectl apply -f -
+kubectl wait --for=condition=Ready ksvc/tag-header --timeout=180s
 ```
+
+Then update the Service to create the second Revision and tag the first:
+
+```bash
 kubectl apply -f code-samples/serving/tag-header-based-routing/sample.yaml
+kubectl wait --for=create revision/tag-header-revision-2 --timeout=180s
+kubectl wait --for=condition=Ready revision/tag-header-revision-2 --timeout=180s
+kubectl wait --for=condition=Ready ksvc/tag-header --timeout=180s
 ```
+
+Waiting before applying the complete manifest ensures the first Revision exists
+before the second definition replaces the configuration and traffic refers to it.
 
 ## Check the created resources
 
@@ -82,12 +96,23 @@ You should see the following block which indicates the tag `rev1` is successfull
 
 ## Sending request with tag header
 
+Set `INGRESS_IP` to the reachable address of your ingress (including a port if
+needed). Obtain the Host header from the Service URL instead of assuming a
+particular cluster domain:
+
+```bash
+SERVICE_URL=$(kubectl get ksvc tag-header -o jsonpath='{.status.url}')
+SERVICE_HOST=${SERVICE_URL#*://}
+```
+
+The following examples use an HTTP ingress endpoint.
+
 1.  Run the following command to send a request to the first Revision.
 
     ```
-    curl ${INGRESS_IP} -H "Host:tag-header.default.example.com" -H "Knative-Serving-Tag:rev1"
+    curl "http://${INGRESS_IP}" -H "Host:${SERVICE_HOST}" -H "Knative-Serving-Tag:rev1"
     ```
-    where `${INGRESS_IP}` is the IP of your ingress.
+    where `${INGRESS_IP}` is the address of your ingress.
 
     You should get the following response:
 
@@ -98,7 +123,7 @@ You should see the following block which indicates the tag `rev1` is successfull
 1.  Run the following command to send requests without the `Knative-Serving-Tag` header:
 
     ```
-    curl ${INGRESS_IP} -H "Host:tag-header.default.example.com"
+    curl "http://${INGRESS_IP}" -H "Host:${SERVICE_HOST}"
     ```
 
     You should get the response from the second Revision:
@@ -110,7 +135,7 @@ You should see the following block which indicates the tag `rev1` is successfull
 1.  Run the following command to send requests with an incorrect `Knative-Serving-Tag` header:
 
     ```
-    curl ${INGRESS_IP} -H "Host:tag-header.default.example.com" -H "Knative-Serving-Tag:wrongHeader"
+    curl "http://${INGRESS_IP}" -H "Host:${SERVICE_HOST}" -H "Knative-Serving-Tag:wrongHeader"
     ```
 
     You should get the response from the second Revision:
@@ -118,3 +143,11 @@ You should see the following block which indicates the tag `rev1` is successfull
     ```
     Hello Second Revision!
     ```
+
+## Cleanup
+
+Delete the Service and its Revisions when finished:
+
+```bash
+kubectl delete ksvc tag-header
+```

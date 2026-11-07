@@ -7,16 +7,25 @@ configure routing based on other request data such as headers, or even to map
 Knative and external resources under the same domain name.
 
 In this sample, we set up two web services: `Search` service and `Login`
-service, which simply read in an env variable `SERVICE_NAME` and prints
-`"${SERVICE_NAME} is called"`. We'll then create a VirtualService with host
-`example.com`, and define routing rules in the VirtualService so that
+service, which reuse the [Go Hello World application](../hello-world/helloworld-go/helloworld.go)
+with different `TARGET` environment variables and print `Hello ${TARGET}!`.
+If `TARGET` is unset or empty, the greeting is `Hello World!`. The application
+listens on port 8080 by default (`PORT` overrides it). We'll then create a
+VirtualService with host `example.com`, and define routing rules so that
 `example.com/search` maps to the Search service, and `example.com/login` maps to
 the Login service.
+
+The sample uses the [Go Hello World application](../hello-world/helloworld-go/helloworld.go),
+[Dockerfile](../hello-world/helloworld-go/Dockerfile),
+[Service definitions](sample.yaml), [public routing rules](routing.yaml), and
+[internal routing rules](routing-internal.yaml). Use these checked-in files after
+cloning the repository; there is no need to recreate them from documentation.
 
 ## Prerequisites
 
 1. A Kubernetes cluster with [Knative Serving](https://knative.dev/docs/install/serving/install-serving-with-yaml)
-   installed.
+   installed with the Istio networking layer. This sample uses Istio Gateway and
+   VirtualService resources; it does not work with Kourier or Contour alone.
 2. Install
    [Docker](https://docs.docker.com/get-started/#prepare-your-docker-environment).
 3. Acquire a domain name.
@@ -28,7 +37,7 @@ the Login service.
 4. Check out the code:
 
 ```
-go get -d github.com/knative/docs/code-samples/serving/knative-routing-go
+git clone https://github.com/knative/docs.git knative-docs
 ```
 
 ## Setup
@@ -44,10 +53,10 @@ Then, check the value for `data`. The domain name should be in the format of
 
 Build the application container and publish it to a container registry:
 
-1. Move into the sample directory:
+1. Move into the repository root:
 
 ```bash
-cd $GOPATH/src/github.com/knative/docs
+cd knative-docs
 ```
 
 2. Set your preferred container registry:
@@ -71,15 +80,19 @@ export REPO="docker.io/<username>"
 
 ```
 # Build and push the container on your local machine.
-docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/knative-routing-go" --push . -f code-samples/serving/knative-routing-go/Dockerfile
+docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/helloworld-go" --push code-samples/serving/hello-world/helloworld-go
 ```
+
+Both Services use this single image; `TARGET="Search Service"` and
+`TARGET="Login Service"` distinguish their responses. No separate routing backend
+source or image is needed.
 
 4. Replace the image reference path with our published image path in the
    configuration file `code-samples/serving/knative-routing-go/sample.yaml`:
 
    - Manually replace:
-     `image: github.com/knative/docs/code-samples/serving/knative-routing-go`
-     with `image: ${REPO}/knative-routing-go` If you manually changed the .yaml
+     `image: github.com/knative/docs/code-samples/serving/hello-world/helloworld-go`
+     with `image: ${REPO}/helloworld-go` If you manually changed the .yaml
      file, you must replace \${REPO} with the correct path on your local
      machine.
 
@@ -88,7 +101,7 @@ docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/knative-routi
    - Run this command:
 
    ```
-   perl -pi -e "s@github.com/knative/docs/code-samples/serving@${REPO}@g" code-samples/serving/knative-routing-go/sample.yaml
+   perl -pi -e "s@github.com/knative/docs/code-samples/serving/hello-world@${REPO}@g" code-samples/serving/knative-routing-go/sample.yaml
    ```
 
 ## Deploy the Service
@@ -152,7 +165,7 @@ search-service    http://search-service.default.example.com
 curl http://${GATEWAY_IP} --header "Host:search-service.default.example.com"
 ```
 
-You should see: `Search Service is called !`
+You should see: `Hello Search Service!`
 
 4. Similarly, you can also directly access "Login" service with:
 
@@ -160,7 +173,7 @@ You should see: `Search Service is called !`
 curl http://${GATEWAY_IP} --header "Host:login-service.default.example.com"
 ```
 
-You should see: `Login Service is called !`
+You should see: `Hello Login Service!`
 
 ## Apply Custom Routing Rule
 
@@ -283,7 +296,7 @@ kubectl apply --filename code-samples/serving/knative-routing-go/routing-interna
 will replace the custom routing rule with one that uses the `knative-local-gateway`, enabling access
 via `example.com/search` and `example.com/login` again.
 
-With these changes, you can also use [the `auto-tls` feature](https://knative.dev/docs/serving/using-auto-tls) in combination with the global setting
+With these changes, you can also use [external domain TLS](https://knative.dev/docs/serving/encryption/external-domain-tls/) in combination with the global setting
 `"http-protocol": "Redirected"`, which would otherwise try to redirect the `entry-route`
 VirtualService requests from HTTP to HTTPS, failing the request.
 

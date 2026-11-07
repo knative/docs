@@ -1,160 +1,100 @@
 # Hello World - Swift
 
-A simple web app written in Swift that you can use for testing. The app reads in
-an env variable `TARGET` and prints "Hello \${TARGET}!". If TARGET is not
-specified, the app uses "World" as the TARGET.
+A small HTTP app built with [Swift 6.4.1](https://www.swift.org/install/) and
+[Hummingbird 2.28.0](https://github.com/hummingbird-project/hummingbird/releases/tag/2.28.0).
+It returns an HTML page containing "Hello ${TARGET}". `TARGET` defaults to
+`World`; an explicitly empty `TARGET` produces an empty name. `PORT` defaults to
+`8080` and must be an integer from 1 through 65535. The server binds to
+`0.0.0.0`, so Knative can reach it.
+
+GET and POST `/` return `Content-Type: text/html` and this exact response when
+`TARGET=Swift`:
+
+```html
+<html><meta charset="UTF-8"><body>Hello Swift</body></html>
+```
 
 ## Prerequisites
 
-- You must have a Kubernetes cluster with Knative installed and DNS configured.
-  If you need to create a cluster, follow the
+- A Kubernetes cluster with Knative Serving and DNS configured. See the
   [Knative installation instructions](https://knative.dev/docs/install/).
-- You must have [Docker](https://www.docker.com) installed and running on your
-  local machine, and a Docker Hub account configured (used for container
-  registry).
+- Docker and a container registry account for publishing your image.
 
-## Recreating the sample code
+The official `swift:6.4.1-noble` builder and `swift:6.4.1-noble-slim` runtime
+images support both `linux/arm64` and `linux/amd64`. They use Ubuntu 24.04 LTS.
+The runtime image contains the matching Swift runtime without the compiler;
+the application runs as an unprivileged numeric user. Use a platform matching
+your cluster nodes, or publish both architectures with buildx.
 
-While you can clone all of the code from this directory, it might be more useful
-if you build this app step-by-step. The following instructions recreate the
-source files from this folder.
+## Using the sample code
 
-1. Create a the `Package.swift` to declare your package and its dependencies.
-   This app uses [Swifter](https://github.com/httpswift/swifter), a tiny http
-   server engine for Swift.
+Clone the repository and work in `code-samples/community/serving/helloworld-swift`.
 
-   ```swift
-    // swift-tools-version:4.0
+- [Package.swift](Package.swift) declares the executable and HTTP dependency. [Package.resolved](Package.resolved) locks dependency revisions.
+- [Greeting.swift](Sources/HelloSwift/Greeting.swift) reads and validates the
+  environment and constructs the HTML response.
+- [main.swift](Sources/HelloSwift/main.swift) registers GET/POST routes and
+  starts Hummingbird on `0.0.0.0` with the configured port.
+- [Dockerfile](Dockerfile) builds the app and its unprivileged runtime image.
+- [service.yaml](service.yaml) deploys the application with `TARGET=Swift`.
+  Replace its `{username}` image placeholder before deploying.
 
-    import PackageDescription
+## Testing locally
 
-    let package = Package(
-        name: "HelloSwift",
-        dependencies: [
-            .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.4.5"))
-        ],
-        targets: [
-            .target(
-            name: "HelloSwift",
-            dependencies: ["Swifter"],
-            path: "./Sources")
-        ]
-    )
-   ```
+Build the final runtime image with the locked Swift toolchain:
 
-1. Add the web server code to a file named `main.swift` in a
-   `Sources/HelloSwift/` folder:
+```bash
+docker build -t helloworld-swift .
+docker run --rm -p 127.0.0.1:8080:8080 -e TARGET=Swift helloworld-swift
+```
 
-   ```swift
-    import Swifter
-    import Dispatch
-    import Foundation
+In another terminal:
 
-    let server = HttpServer()
-    server["/"] = { r in
-        let target = ProcessInfo.processInfo.environment["TARGET"] ?? "World"
-        return HttpResponse.ok(.html("Hello \(target)"))
-    }
+```bash
+curl http://127.0.0.1:8080/
+# <html><meta charset="UTF-8"><body>Hello Swift</body></html>
+```
 
-    let semaphore = DispatchSemaphore(value: 0)
-    do {
-        let port = UInt16(ProcessInfo.processInfo.environment["PORT"] ?? "8080")
-        try server.start(port!, forceIPv4: true)
-        print("Server has started ( port = \(try server.port()) ). Try to connect now...")
-        semaphore.wait()
-    } catch {
-        print("Server start error: \(error)")
-        semaphore.signal()
-    }
-   ```
-
-1. In your project directory, create a file named `Dockerfile` and copy the code
-   block below into it.
-
-   ```Dockerfile
-    # Use the official Swift image.
-    # https://hub.docker.com/_/swift
-    FROM swift:4.2
-
-    # Copy local code to the container image.
-    WORKDIR /app
-    COPY . .
-
-    # Install dependencies and build.
-    RUN swift build -c release
-
-    # Run the web service on container startup.
-    CMD [ ".build/release/HelloSwift"]
-   ```
-
-1. Create a new file, `service.yaml`, and copy the following service definition
-   into the file. Replace `{username}` with your Docker Hub username.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: helloworld-swift
-     namespace: default
-   spec:
-     template:
-       spec:
-       containers:
-         - image: docker.io/{username}/helloworld-swift
-           env:
-             - name: TARGET
-           value: "Swift"
-   ```
+To exercise a custom port, use `-e PORT=9090 -p 127.0.0.1:9090:9090`. Omit
+`TARGET` to get `Hello World`; use `-e TARGET=` to test an empty name. Invalid
+`PORT` values cause startup to fail instead of silently listening elsewhere.
+Missing paths return HTTP 404 using Hummingbird's default error response.
 
 ## Building and deploying the sample
 
-Once you have recreated the sample code files (or used the files in the sample
-folder) you're ready to build and deploy the sample app.
-
-1. Use Docker to build the sample code into a container. To build and push with
-   Docker Hub, run these commands, replacing `{username}` with your Docker Hub
-   username:
+1. Build and push for your cluster's architecture. For a registry image that
+   supports both native platforms, use:
 
    ```bash
-   # Build and push the container on your local machine.
    docker buildx build --platform linux/arm64,linux/amd64 -t "{username}/helloworld-swift" --push .
    ```
 
-1. After the build has completed and the container is pushed to Docker Hub, you
-   can deploy the app into your cluster. Ensure that the container image value
-   in the `service.yaml` file matches the container you built in the previous
-   step. Apply the configuration using the `kubectl` command:
+1. Ensure `service.yaml` references the image you published, then deploy:
 
    ```bash
    kubectl apply --filename service.yaml
+   kubectl wait --for=condition=Ready ksvc/helloworld-swift --timeout=180s
    ```
 
-1. Now that your service is created, Knative performs the following steps:
+   Knative creates an immutable Revision, programs the route and ingress, and
+   automatically scales the application (including to zero).
 
-   - Creates a new immutable revision for this version of the app.
-   - Network programming to create a route, ingress, service, and load balancing
-     for your app.
-   - Automatically scales your pods up and down (including to zero active pods).
+1. Find the actual URL:
 
-1. To find the URL for your service, use the following command:
-
-   ```
-   kubectl get ksvc helloworld-swift  --output=custom-columns=NAME:.metadata.name,URL:.status.url
-   NAME               URL
-   helloworld-swift   http://helloworld-swift.default.1.2.3.4.sslip.io
+   ```bash
+   kubectl get ksvc helloworld-swift --output=custom-columns=NAME:.metadata.name,URL:.status.url
+   # NAME               URL
+   # helloworld-swift   http://helloworld-swift.default.1.2.3.4.sslip.io
    ```
 
-1. Now you can make a request to your app and see the result. Replace
-   the URL below with the URL returned in the previous command.
+1. Request the returned URL (replace the example URL with yours):
 
    ```bash
    curl http://helloworld-swift.default.1.2.3.4.sslip.io
-   Hello Swift
+   # <html><meta charset="UTF-8"><body>Hello Swift</body></html>
    ```
 
 ## Removing the sample app deployment
-
-To remove the sample app from your cluster, delete the service record:
 
 ```bash
 kubectl delete --filename service.yaml

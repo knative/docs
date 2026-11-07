@@ -14,106 +14,92 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#[macro_use]
-extern crate log;
-
-use actix_web::dev::HttpResponseBuilder;
-use actix_web::http::StatusCode;
 use actix_web::{post, web, App, HttpRequest, HttpResponse, HttpServer};
+use cloudevents::binding::actix::{HttpRequestExt, HttpResponseBuilderExt};
+use cloudevents::binding::reqwest::RequestBuilderExt;
 use cloudevents::{EventBuilder, EventBuilderV10};
-use cloudevents_sdk_actix_web::{HttpRequestExt, HttpResponseBuilderExt};
-use cloudevents_sdk_reqwest::RequestBuilderExt;
+use std::{num::NonZeroU16, time::Duration};
 
-#[post("/")]
-async fn reply_event(
-    req: HttpRequest,
-    payload: web::Payload,
-) -> Result<HttpResponse, actix_web::Error> {
-    let request_event = req.to_event(payload).await?;
-    info!("{}", request_event);
+const SOURCE: &str =
+    "https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust";
+const EVENT_TYPE: &str = "dev.knative.docs.sample";
 
-    // Build response event cloning the original event and setting the new type and source
-    let response_event = EventBuilderV10::from(request_event)
-        .source("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust")
-        .ty("dev.knative.docs.sample")
-        .build()
-        // If i can't build the event, fail with internal server error
-        .map_err(actix_web::error::ErrorInternalServerError)?;
-
-    HttpResponseBuilder::new(StatusCode::OK)
-        .event(response_event)
-        .await
+struct AppState {
+    sink: Option<String>,
+    client: reqwest::Client,
 }
 
-#[post("/")]
-async fn forward_event(
-    req: HttpRequest,
-    payload: web::Payload,
-    sink_url: web::Data<String>,
-) -> Result<HttpResponse, actix_web::Error> {
-    let sink_url: &str = &sink_url;
-
-    let request_event = req.to_event(payload).await?;
-    info!("{}", request_event);
-
-    // Build response event cloning the original event and setting the new type and source
-    let forward_event = EventBuilderV10::from(request_event)
-        .source("https://github.com/knative/docs/code-samples/serving/cloudevents/cloudevents-rust")
-        .ty("dev.knative.docs.sample")
-        .build()
-        // If i can't build the event, fail with internal server error
-        .map_err(actix_web::error::ErrorInternalServerError)?;
-
-    let client = reqwest::Client::new();
-    let response = client.post(sink_url)
-        .event(forward_event)
-        .map_err(actix_web::error::ErrorInternalServerError)?
-        .send()
-        .await
-        // If something went wrong when sending the event, fail with internal server error
-        .map_err(actix_web::error::ErrorInternalServerError)?;
-
-    if response.status().is_success() {
-        Ok(HttpResponseBuilder::new(StatusCode::ACCEPTED).finish())
-    } else {
-        Ok(
-            HttpResponseBuilder::new(StatusCode::INTERNAL_SERVER_ERROR).body(format!(
-                "Received from {} status code {}",
-                sink_url,
-                response.status().as_str()
-            )),
-        )
+impl AppState {
+    fn new(sink: Option<String>) -> Result<Self, reqwest::Error> {
+        Ok(Self {
+            // An explicitly empty K_SINK is equivalent to an unset K_SINK.
+            sink: sink.filter(|url| !url.is_empty()),
+            client: reqwest::Client::builder()
+                .timeout(Duration::from_secs(30))
+                .build()?,
+        })
     }
 }
 
-#[actix_rt::main]
-async fn main() -> std::io::Result<()> {
-    // Setup logger
-    std::env::set_var("RUST_LOG", "info");
-    env_logger::init();
+#[post("/")]
+async fn handle_event(
+    req: HttpRequest,
+    payload: web::Payload,
+    state: web::Data<AppState>,
+) -> Result<HttpResponse, actix_web::Error> {
+    let request_event = req.to_event(payload).await?;
+    log::info!("{}", request_event);
 
-    // Get port from envs
-    let port: u16 = std::env::var("PORT")
-        .ok()
-        .map(|e| e.parse().ok())
-        .flatten()
-        .unwrap_or(8080);
+    // Preserve the original event's ID, data, and extensions; change only source and type.
+    let response_event = EventBuilderV10::from(request_event)
+        .source(SOURCE)
+        .ty(EVENT_TYPE)
+        .build()
+        .map_err(actix_web::error::ErrorInternalServerError)?;
 
-    // Create the HTTP server
-    HttpServer::new(|| {
-        let app_base = App::new().wrap(actix_web::middleware::Logger::default());
+    if let Some(sink) = &state.sink {
+        let response = state
+            .client
+            .post(sink)
+            .event(response_event)
+            .map_err(actix_web::error::ErrorInternalServerError)?
+            .send()
+            .await
+            .map_err(actix_web::error::ErrorInternalServerError)?;
 
-        // Get k_sink env
-        let k_sink = std::env::var("K_SINK").ok();
-
-        // If k_sink is configured, then we start the app in forward mode
-        // Otherwise, we set it in reply mode
-        match k_sink {
-            Some(sink) => app_base.data(sink).service(forward_event),
-            None => app_base.service(reply_event),
+        if response.status().is_success() {
+            Ok(HttpResponse::Accepted().finish())
+        } else {
+            Ok(HttpResponse::InternalServerError().body(format!(
+                "Received from {} status code {}",
+                sink,
+                response.status().as_str()
+            )))
         }
+    } else {
+        HttpResponse::Ok().event(response_event)
+    }
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    let port = std::env::var_os("PORT")
+        .unwrap_or_else(|| "8080".into())
+        .to_string_lossy()
+        .parse::<NonZeroU16>()
+        .expect("PORT must be an integer from 1 to 65535")
+        .get();
+    let state =
+        web::Data::new(AppState::new(std::env::var("K_SINK").ok()).map_err(std::io::Error::other)?);
+
+    HttpServer::new(move || {
+        App::new()
+            .app_data(state.clone())
+            .wrap(actix_web::middleware::Logger::default())
+            .service(handle_event)
     })
-    .bind(("127.0.0.1", port))?
+    .bind(("0.0.0.0", port))?
     .workers(1)
     .run()
     .await
