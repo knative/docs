@@ -1,6 +1,6 @@
 # Public multi-architecture Maven / Java 25 LTS build image.
 # https://hub.docker.com/_/maven
-FROM maven:3.10.0-eclipse-temurin-25-noble AS builder
+FROM maven:3-eclipse-temurin-26-noble AS builder
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
