@@ -14,7 +14,7 @@ dependencies = [
     # Newer releases pull in ProperDocs, which shares MkDocs' module/CLI paths.
     # Keep the existing MkDocs stack until that migration is evaluated separately.
     "mkdocs-redirects>=1.0.3,<1.2.4",
-    "mkdocs-rss-plugin>=0.18.0,<1.20",
+    "mkdocs-rss-plugin>=0.18.0,<1.21",
     "pygithub>=2.8,<3",
     "semver==3.1.0",
 ]
@@ -22,7 +22,7 @@ dependencies = [
 [dependency-groups]
 # Pins the uv used by CI, Netlify, and Docker (read from uv.lock).
 # Not installed by default; Dependabot keeps it up to date.
-tools = ["uv==0.13.6"]
+tools = ["uv==0.13.7"]
 
 [tool.uv]
 # Minimum uv for local builds. Raise only when we need newer uv features.
