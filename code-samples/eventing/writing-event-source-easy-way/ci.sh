@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "$(git rev-parse --show-toplevel)/code-samples/ci/lib.sh"
+source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
 main() (
   set -euo pipefail

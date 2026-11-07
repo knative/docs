@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One integration test covers changes to either component and the shared manifest.
-source "$(git rev-parse --show-toplevel)/code-samples/ci/lib.sh"
+source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
 main() (
   set -euo pipefail

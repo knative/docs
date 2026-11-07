@@ -1,5 +1,8 @@
 # Sample smoke tests
 
+Shared CI tooling and test fixtures live in `hack/sample-ci/`, not in the
+application samples. This change adds tests to existing samples only.
+
 `.github/workflows/samples-test.yaml` finds tracked `code-samples/**/ci.sh`
 files and runs each selected script in its own disposable kind cluster with
 Knative Serving and Kourier installed. Scripts are sourced from their sample
@@ -46,7 +49,7 @@ own Eventing components; the shared harness only installs Serving.
 The discovery tests do not require Docker or Kubernetes:
 
 ```sh
-python3 code-samples/ci/test_discover.py -v
+python3 hack/sample-ci/test_discover.py -v
 ```
 
 To run a runtime test, create a **separate disposable cluster**, install Serving

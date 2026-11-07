@@ -124,7 +124,7 @@ ci_websocket() {
   CI_TEMP+=("$venv")
   python3 -m venv "$venv"
   "$venv/bin/pip" --disable-pip-version-check install --quiet websocket-client==1.9.0
-  "$venv/bin/python" "$CI_ROOT/code-samples/ci/websocket_client.py" "$@"
+  "$venv/bin/python" "$CI_ROOT/hack/sample-ci/websocket_client.py" "$@"
 }
 
 ci_function_build() {

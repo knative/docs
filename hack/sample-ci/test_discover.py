@@ -28,7 +28,7 @@ class DiscoveryTest(unittest.TestCase):
         for sample in self.samples:
             self.write(f"code-samples/{sample}/ci.sh", "#!/bin/bash\n")
         self.write(".github/workflows/samples-test.yaml", "name: samples-test\n")
-        self.write("code-samples/ci/lib.sh", "# helpers\n")
+        self.write("hack/sample-ci/lib.sh", "# helpers\n")
         self.git("add", ".")
         self.git("commit", "-qm", "base")
         self.base = self.git("rev-parse", "HEAD").strip()
@@ -77,7 +77,7 @@ class DiscoveryTest(unittest.TestCase):
         ]), ["eventing/bookstore-sample-app/solution/node-server"])
 
     def test_shared_helper_selects_all(self):
-        self.assertEqual(set(self.selected(["code-samples/ci/lib.sh"])), set(self.samples))
+        self.assertEqual(set(self.selected(["hack/sample-ci/lib.sh"])), set(self.samples))
 
     def test_workflow_selects_all(self):
         self.assertEqual(set(self.selected([

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-source "$(git rev-parse --show-toplevel)/code-samples/ci/lib.sh"
+source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
 main() (
   set -euo pipefail
   local image=dev.local/gitwebhook-go:ci payload signature logs
   docker build -t "$image" .
-  kubectl -n default create configmap ci-github-api --from-file=server.py=ci-github-api.py
+  kubectl -n default create configmap ci-github-api --from-file="server.py=$CI_ROOT/hack/sample-ci/github-api.py"
   kubectl -n default run ci-github-api --image=python:3.14-slim --restart=Never \
     --overrides='{"spec":{"volumes":[{"name":"code","configMap":{"name":"ci-github-api"}}],"containers":[{"name":"ci-github-api","image":"python:3.14-slim","command":["python","/test/server.py"],"volumeMounts":[{"name":"code","mountPath":"/test"}]}]}}'
   kubectl -n default expose pod ci-github-api --port=8080

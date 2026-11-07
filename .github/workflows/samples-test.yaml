@@ -1,7 +1,7 @@
 name: samples-test
 on:
   pull_request:
-    paths: ['code-samples/**', '.github/workflows/samples-test.yaml']
+    paths: ['code-samples/**', 'hack/sample-ci/**', '.github/workflows/samples-test.yaml']
 permissions:
   contents: read
 jobs:
@@ -19,8 +19,8 @@ jobs:
       - id: samples
         name: Find changed sample directories
         run: |
-          python3 code-samples/ci/test_discover.py
-          matrix=$(bash code-samples/ci/discover.sh "$BASE_SHA")
+          python3 hack/sample-ci/test_discover.py
+          matrix=$(bash hack/sample-ci/discover.sh "$BASE_SHA")
           echo 'Directories without a ci.sh ancestor are NOT TESTED.' >> "$GITHUB_STEP_SUMMARY"
           echo "$matrix" | jq -r '.[] | "- " + .name' >> "$GITHUB_STEP_SUMMARY"
           echo "directories=$matrix" >> "$GITHUB_OUTPUT"

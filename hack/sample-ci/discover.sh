@@ -5,7 +5,7 @@ base=$1
 diff_range="$base...HEAD"
 directories=()
 shared=$(git diff --name-only --no-renames "$diff_range" -- \
-  .github/workflows/samples-test.yaml code-samples/ci/ \
+  .github/workflows/samples-test.yaml hack/sample-ci/ \
   code-samples/serving/cloudevents/cloudevents-go/eventing/logger/)
 while IFS= read -r -d '' script; do
   directory=${script%/ci.sh}
