@@ -2,8 +2,7 @@
 # One integration test covers changes to either component and the shared manifest.
 source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
-main() (
-  set -euo pipefail
+sample_test() {
   local serving=dev.local/multi-serving:ci sidecar=dev.local/multi-sidecar:ci body
   docker build -t "$serving" servingcontainer
   docker build -t "$sidecar" sidecarcontainer
@@ -20,4 +19,4 @@ main() (
   kubectl -n default wait --for=condition=Ready ksvc/multi-container --timeout=300s
   body=$(ci_request multi-container /)
   [[ "$body" == 'Yay!! multi-container works' ]]
-)
+}

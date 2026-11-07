@@ -6,7 +6,9 @@ application samples. This change adds tests to existing samples only.
 `.github/workflows/samples-test.yaml` finds tracked `code-samples/**/ci.sh`
 files and runs each selected script in its own disposable kind cluster with
 Knative Serving and Kourier installed. Scripts are sourced from their sample
-directory, then `main` is invoked. Sourcing alone does not build or deploy.
+directory, then the shared `main` runner is invoked. Each sample implements
+`sample_test`; the runner owns strict error handling and temporary-resource
+cleanup. Sourcing alone does not build or deploy.
 
 Changes below a directory containing `ci.sh` select that directory's test.
 For example, either multi-container component selects the parent integration
@@ -20,7 +22,10 @@ readiness waits, capture-sink assertions, and test-client setup. It does not
 create or delete clusters. The workflow owns cluster lifecycle, so scripts
 must only be run against a disposable cluster. They create resources in the
 `default` namespace and are intended for a clean cluster, not repeated runs
-against an existing application deployment.
+against an existing application deployment. Common hello-world, CloudEvent,
+and bookstore checks are shared; sample payloads and assertions remain in the
+sample scripts. Failure diagnostics collect all pods in the disposable cluster,
+without application names or label selectors in the workflow.
 
 ## Coverage added for previously untested components
 
@@ -46,10 +51,11 @@ own Eventing components; the shared harness only installs Serving.
 
 ## Local validation
 
-The discovery tests do not require Docker or Kubernetes:
+The discovery and shared-runner regression tests do not require Docker or
+Kubernetes:
 
 ```sh
-python3 hack/sample-ci/test_discover.py -v
+python3 -m unittest discover -s hack/sample-ci -p 'test_*.py' -v
 ```
 
 To run a runtime test, create a **separate disposable cluster**, install Serving
@@ -66,8 +72,9 @@ main
 
 Prerequisites are Bash, Docker, kind, kubectl, jq, curl, and Python 3 with venv
 support. WebSocket tests install a pinned test client into a temporary venv.
-The Python function samples require the checksum-verified Functions CLI
-release pinned in the workflow (`knative-v1.24.0`). Function builds use a
+The Python function tests install their own checksum-verified Functions CLI
+release pinned in `lib.sh` (`knative-v1.24.0`); the workflow has no
+runtime-specific installation steps. Function builds use a
 temporary copy so `func` does not persist CI image names or migrate the
 sample's `func.yaml`. Maven runs inside a container and Jib exports a tar;
 no host Maven installation or registry push is required.

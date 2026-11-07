@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
-# Source from this directory; the workflow owns the disposable cluster.
 source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
-main() (
-  set -euo pipefail
-  trap ci_cleanup EXIT
-  local image=dev.local/bookstore-solution-node:ci
-  docker build -t "$image" .
-  ci_bookstore_node "$image"
-)
+sample_test() {
+  ci_bookstore_node dev.local/bookstore-solution-node:ci
+}

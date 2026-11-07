@@ -6,6 +6,26 @@ CI_CLUSTER=${CLUSTER_NAME:-kind}
 CI_PIDS=()
 CI_TEMP=()
 
+# All shared-library samples provide sample_test; the workflow only invokes main.
+main() (
+  set -euo pipefail
+  trap ci_cleanup EXIT
+  sample_test
+)
+
+ci_docker_service() {
+  local image=$1 manifest=${2:-service.yaml}
+  docker build -t "$image" .
+  ci_manifest "$manifest" "$image"
+}
+
+ci_hello() {
+  local image=$1 expected=$2 body
+  ci_docker_service "$image"
+  body=$(ci_request service.yaml /)
+  [[ "$body" == "$expected" ]]
+}
+
 ci_cleanup() {
   local pid directory
   for pid in "${CI_PIDS[@]}"; do kill "$pid" 2>/dev/null || true; done
@@ -64,7 +84,11 @@ ci_ready() {
 
 ci_host() {
   local url host
-  url=$(kubectl -n default get "ksvc/$1" -o jsonpath='{.status.url}')
+  if [[ -f "$1" ]]; then
+    url=$(kubectl -n default get -f "$1" -o jsonpath='{.status.url}')
+  else
+    url=$(kubectl -n default get "ksvc/$1" -o jsonpath='{.status.url}')
+  fi
   host=${url#*://}
   [[ "$host" =~ ^[a-zA-Z0-9.-]+$ ]]
   printf '%s\n' "$host"
@@ -83,6 +107,30 @@ ci_event() {
     -H 'Ce-Specversion: 1.0' -H 'Ce-Id: smoke-test' \
     -H 'Ce-Type: dev.knative.samples.test' -H 'Ce-Source: /smoke-test' \
     --data "$data" "$@"
+}
+
+ci_event_check() {
+  local name=$1 path=$2 data=$3 filter=$4 body
+  shift 4
+  body=$(ci_event "$name" "$path" "$data" "$@")
+  jq -e "$filter" <<< "$body"
+}
+
+ci_event_response() {
+  local name=$1 data=$2 filter=$3 header=$4 expected=$5 directory
+  directory=$(mktemp -d)
+  CI_TEMP+=("$directory")
+  ci_event_check "$name" / "$data" "$filter" -D "$directory/headers"
+  grep -iq '^ce-specversion: 1.0' "$directory/headers"
+  grep -iFxq "$header: $expected" < <(tr -d '\r' < "$directory/headers")
+}
+
+ci_event_delivery() {
+  local name=$1 data=$2 filter=$3
+  ci_sink
+  ci_env "$name" K_SINK http://ci-sink.default.svc.cluster.local
+  ci_event "$name" / "$data" -o /dev/null
+  ci_wait_json_log ci-sink "$filter"
 }
 
 ci_forward() {
@@ -127,13 +175,49 @@ ci_websocket() {
   "$venv/bin/python" "$CI_ROOT/hack/sample-ci/websocket_client.py" "$@"
 }
 
+ci_function_cli() {
+  # Only function tests need this tool. Never depend on an arbitrary host version.
+  if [[ -n "${CI_FUNC_BINARY:-}" ]]; then return; fi
+  local directory asset checksum actual
+  directory=$(mktemp -d)
+  CI_TEMP+=("$directory")
+  case "$(uname -s)/$(uname -m)" in
+    Linux/x86_64)
+      asset=func_linux_amd64
+      checksum=33d8dbfbbb9a67ffb6f9296d142132faa2ab20af89b314ca1a2cf986b543b1d2 ;;
+    Linux/aarch64)
+      asset=func_linux_arm64
+      checksum=b0abf7a0cfd7b84f8b15aa5410776f3f229a1d30d96318be3df2d6f482ab111d ;;
+    Darwin/arm64)
+      asset=func_darwin_arm64
+      checksum=30ea5fa7c113cd3d013f0b00f67626116b71ef6d677c0324d232560b37d979b9 ;;
+    Darwin/x86_64)
+      asset=func_darwin_amd64
+      checksum=344b1d25dd407737b49953e694170132a5136e4bdd6f23e8820bf53e6a83dcc5 ;;
+    *) echo 'Unsupported platform for the pinned Functions CLI' >&2; return 1 ;;
+  esac
+  CI_FUNC_BINARY="$directory/func"
+  curl -fsSL "https://github.com/knative/func/releases/download/knative-v1.24.0/$asset" -o "$CI_FUNC_BINARY"
+  if command -v sha256sum >/dev/null; then
+    actual=$(sha256sum "$CI_FUNC_BINARY")
+  else
+    actual=$(shasum -a 256 "$CI_FUNC_BINARY")
+  fi
+  if [[ "${actual%% *}" != "$checksum" ]]; then
+    echo 'Functions CLI checksum mismatch' >&2
+    return 1
+  fi
+  chmod +x "$CI_FUNC_BINARY"
+}
+
 ci_function_build() {
+  ci_function_cli
   # func persists build settings in func.yaml; keep the sample checkout unchanged.
   local image=$1 directory
   directory=$(mktemp -d)
   CI_TEMP+=("$directory")
   tar --exclude=.func --exclude=.git -cf - . | tar -xf - -C "$directory"
-  func build --path "$directory" --image "$image" --builder=s2i --confirm=false
+  "$CI_FUNC_BINARY" build --path "$directory" --image "$image" --builder=s2i --confirm=false
 }
 
 ci_maven_image() {
@@ -165,8 +249,21 @@ ci_bookstore_deploy() {
     ' | kubectl -n default apply -f -
 }
 
+ci_bookstore_frontend() {
+  local image=$1 body
+  docker build -t "$image" .
+  ci_bookstore_deploy config/100-front-end-deployment.yaml "$image"
+  kubectl -n default rollout status deployment/bookstore-frontend --timeout=300s
+  ci_forward service/bookstore-frontend-svc 18081 80
+  body=$(curl -fsS --max-time 30 http://127.0.0.1:18081/)
+  grep -Fq 'Building serverless applications on Knative' <<< "$body"
+  grep -Fq 'Comments' <<< "$body"
+  curl -fsS --max-time 30 http://127.0.0.1:18081/images/knative-logo.png -o /dev/null
+}
+
 ci_bookstore_node() {
   local image=$1
+  docker build -t "$image" .
   ci_sink
   kubectl -n default run postgresql --image=postgres:15 --restart=Never \
     --env=POSTGRES_DB=mydatabase --env=POSTGRES_USER=myuser --env=POSTGRES_PASSWORD=mypassword

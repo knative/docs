@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
-main() (
-  set -euo pipefail
+sample_test() {
   local image=dev.local/parallel-functions:ci path body
   docker build -t "$image" .
   ci_deploy parallel-functions "$image"
@@ -25,4 +24,4 @@ main() (
   status=$(ci_request parallel-functions /filter/even -H 'Content-Type: application/json' \
     --data '{}' -o /dev/null -w '%{http_code}' || true)
   [[ "$status" == 400 ]]
-)
+}

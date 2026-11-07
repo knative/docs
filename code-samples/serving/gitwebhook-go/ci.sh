@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 
-main() (
-  set -euo pipefail
+sample_test() {
   local image=dev.local/gitwebhook-go:ci payload signature logs
   docker build -t "$image" .
   kubectl -n default create configmap ci-github-api --from-file="server.py=$CI_ROOT/hack/sample-ci/github-api.py"
@@ -35,4 +34,4 @@ main() (
     -H 'X-GitHub-Event: pull_request' -H 'X-Hub-Signature: sha1=invalid' \
     --data "$payload" -o /dev/null -w '%{http_code}' || true)
   [[ "$status" == 4* ]]
-)
+}

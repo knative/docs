@@ -19,7 +19,7 @@ jobs:
       - id: samples
         name: Find changed sample directories
         run: |
-          python3 hack/sample-ci/test_discover.py
+          python3 -m unittest discover -s hack/sample-ci -p 'test_*.py'
           matrix=$(bash hack/sample-ci/discover.sh "$BASE_SHA")
           echo 'Directories without a ci.sh ancestor are NOT TESTED.' >> "$GITHUB_STEP_SUMMARY"
           echo "$matrix" | jq -r '.[] | "- " + .name' >> "$GITHUB_STEP_SUMMARY"
@@ -42,16 +42,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Install Knative Functions CLI for function samples
-        working-directory: ${{ matrix.directory }}
-        run: |
-          if [[ ! -f func.yaml ]]; then exit 0; fi
-          # Match the real sample builder rather than substituting a test runtime.
-          binary="$RUNNER_TEMP/func"
-          curl -fsSL https://github.com/knative/func/releases/download/knative-v1.24.0/func_linux_amd64 -o "$binary"
-          echo "33d8dbfbbb9a67ffb6f9296d142132faa2ab20af89b314ca1a2cf986b543b1d2  $binary" | sha256sum --check
-          chmod +x "$binary"
-          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
       - uses: chainguard-dev/actions/setup-kind@794a2c44abbbd7b3a186db97b359270e4105448f
         with:
           k8s-version: 1.36.x
@@ -79,16 +69,7 @@ jobs:
           main
       - name: Failure diagnostics
         if: failure()
-        run: |
-          kubectl get ksvc,revisions,pods -A -o wide || true
-          kubectl get events -A --sort-by=.metadata.creationTimestamp || true
-          kubectl -n default logs --all-containers -l serving.knative.dev/service --tail=100 || true
-          kubectl -n default logs --all-containers -l app=node-server --tail=100 || true
-          kubectl -n default logs --all-containers -l app=bookstore-frontend --tail=100 || true
-          kubectl -n default logs --all-containers -l app=heartbeat-source --tail=100 || true
-          kubectl -n default logs postgresql --tail=100 || true
-          kubectl -n default logs ci-github-api --tail=100 || true
-          kubectl -n default logs grpc-client --tail=100 || true
+        run: bash hack/sample-ci/diagnostics.sh
       - name: Delete disposable cluster
         if: always()
         run: kind delete cluster
