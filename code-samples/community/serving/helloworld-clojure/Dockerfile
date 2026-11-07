@@ -1,4 +1,4 @@
-FROM clojure:temurin-25-lein-2.13.0-noble AS builder
+FROM clojure:temurin-26-lein-2.13.0-noble AS builder
 WORKDIR /app
 COPY project.clj .
 RUN lein deps
