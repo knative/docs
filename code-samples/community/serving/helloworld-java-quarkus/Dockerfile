@@ -1,5 +1,5 @@
 # Build with a supported Java LTS and Maven release.
-FROM maven:3.9.16-eclipse-temurin-25 AS build
+FROM maven:3.9-eclipse-temurin-26 AS build
 WORKDIR /workspace
 ENV MAVEN_OPTS="-Xmx768m -XX:ActiveProcessorCount=2"
 COPY pom.xml ./
