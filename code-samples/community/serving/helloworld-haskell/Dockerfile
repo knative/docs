@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # GHCup-recommended / Stackage LTS compiler; pin the multi-architecture image.
-FROM haskell:9.10.3-slim-bookworm@sha256:3c9f47467dbd6cb62c6ec6b768270c627bc33565e209bece103b7484075b27e3 AS builder
+FROM haskell:9.12.2-slim-bookworm@sha256:c83dcb092fff03ab85a6febf903f7ac378983ddadda53bb6da31ea74d70546f4 AS builder
 ENV CABAL_DIR=/root/.cabal
 WORKDIR /src
 COPY helloworld-haskell.cabal cabal.project cabal.project.freeze LICENSE ./
