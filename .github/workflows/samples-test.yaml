@@ -11,7 +11,7 @@ jobs:
     outputs:
       directories: ${{ steps.samples.outputs.directories }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
@@ -55,11 +55,11 @@ jobs:
       matrix:
         include: ${{ fromJSON(needs.discover.outputs.directories) }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - uses: chainguard-dev/actions/setup-kind@8f31e9482b447ff2c69eca944a09b4b31a4a85d0
+      - uses: chainguard-dev/actions/setup-kind@794a2c44abbbd7b3a186db97b359270e4105448f
         with:
           k8s-version: 1.36.x
       - name: Install latest Knative Serving YAMLs
