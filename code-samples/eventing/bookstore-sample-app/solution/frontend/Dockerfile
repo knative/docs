@@ -36,6 +36,8 @@ COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 8080
 
 ENV PORT=8080
+# Next.js standalone must accept traffic on all interfaces, including probes.
+ENV HOSTNAME=0.0.0.0
 
 
 # Define the command to run your app
