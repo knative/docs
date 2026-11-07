@@ -1,5 +1,5 @@
 # Use the official Maven/Java 25 LTS image to build: https://hub.docker.com/_/maven
-FROM maven:3.9.16-eclipse-temurin-25 AS builder
+FROM maven:3.9-eclipse-temurin-26 AS builder
 
 # Copy local code to the container image.
 WORKDIR /app
