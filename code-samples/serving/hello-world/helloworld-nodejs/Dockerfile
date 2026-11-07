@@ -1,6 +1,6 @@
 # Use the official lightweight Node.js 24 LTS image.
 # https://hub.docker.com/_/node
-FROM node:24-bookworm-slim
+FROM node:25-bookworm-slim
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app
