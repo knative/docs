@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
-# Source from this sample directory; main runs only when the caller invokes it.
+source "$(git rev-parse --show-toplevel)/hack/sample-ci/lib.sh"
 IMAGE=dev.local/eventing-helloworld-python:ci
 
-main() (
-  set -euo pipefail
-  build
+sample_test() {
+  docker build -t "$IMAGE" .
   deploy
   test
-)
-
-build() (
-  set -euo pipefail
-  docker build -t "$IMAGE" .
-)
+}
 
 deploy() (
   set -euo pipefail
@@ -25,7 +19,7 @@ deploy() (
   kubectl apply -f https://github.com/knative/eventing/releases/latest/download/mt-channel-broker.yaml
   kubectl -n knative-eventing wait deployment --all --for=condition=Available --timeout=300s
 
-  kind load docker-image "$IMAGE" --name "${CLUSTER_NAME:-kind}"
+  ci_load "$IMAGE"
   sed "s|docker.io/{username}/helloworld-python|$IMAGE|" sample-app.yaml | kubectl apply -f -
   kubectl -n knative-samples wait --for=condition=Ready --timeout=300s \
     ksvc/helloworld-python ksvc/event-display broker/default \

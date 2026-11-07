@@ -1,7 +1,7 @@
 name: samples-test
 on:
   pull_request:
-    paths: ['code-samples/**', '.github/workflows/samples-test.yaml']
+    paths: ['code-samples/**', 'hack/sample-ci/**', '.github/workflows/samples-test.yaml']
 permissions:
   contents: read
 jobs:
@@ -19,30 +19,13 @@ jobs:
       - id: samples
         name: Find changed sample directories
         run: |
-          diff_range="${{ github.event.pull_request.base.sha }}...HEAD"
-          directories=()
-          while IFS= read -r -d '' script; do
-            directory=${script%/ci.sh}
-            changed=$(git diff --name-only --no-renames "$diff_range" -- "$directory/")
-            if [[ -n "$changed" ]]; then
-              directories+=("$directory")
-            fi
-          done < <(git ls-files -z -- 'code-samples/**/ci.sh')
-          echo 'Directories without ci.sh are NOT TESTED.' >> "$GITHUB_STEP_SUMMARY"
-          # Use consistent section/sample names without collision detection.
-          matrix=$(
-            for directory in "${directories[@]}"; do
-              relative=${directory#code-samples/}
-              section=${relative%%/*}
-              name="$section/${directory##*/}"
-
-              jq -cn \
-                --arg directory "$directory" \
-                --arg name "$name" \
-                '{directory: $directory, name: $name}'
-            done | jq -sc 'unique_by(.directory)'
-          )
+          python3 -m unittest discover -s hack/sample-ci -p 'test_*.py'
+          matrix=$(bash hack/sample-ci/discover.sh "$BASE_SHA")
+          echo 'Directories without a ci.sh ancestor are NOT TESTED.' >> "$GITHUB_STEP_SUMMARY"
+          echo "$matrix" | jq -r '.[] | "- " + .name' >> "$GITHUB_STEP_SUMMARY"
           echo "directories=$matrix" >> "$GITHUB_OUTPUT"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
 
   test:
     name: ${{ matrix.name }}
@@ -86,10 +69,7 @@ jobs:
           main
       - name: Failure diagnostics
         if: failure()
-        run: |
-          kubectl get ksvc,revisions,pods -A -o wide || true
-          kubectl get events -A --sort-by=.metadata.creationTimestamp || true
-          kubectl -n default logs --all-containers -l serving.knative.dev/service --tail=100 || true
+        run: bash hack/sample-ci/diagnostics.sh
       - name: Delete disposable cluster
         if: always()
         run: kind delete cluster
