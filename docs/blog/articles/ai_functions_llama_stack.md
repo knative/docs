@@ -72,7 +72,7 @@ Our generated function code was updated to use the `llama_stack_client` python l
 ```toml
 dependencies = [
   "httpx",
-  "cloudevents",
+  "cloudevents>=2.2,<3",
   "pytest",
   "pytest-asyncio",
   "llama-stack-client"
@@ -109,23 +109,21 @@ The main interaction for the actual inference is done in the `handle` function, 
 # 1) Extract the CloudEvent from the scope
 request = scope["event"]
 
-# 2) Create a new CloudEvent as response
-response = CloudEvent({
-	"type": "dev.knative.function.response",
-	"source": "my/ai/knative/function",
-	"id": f"response-{request.get('id', 'unknown')}"
-})
-
+# 2) Run inference using the query from the request event's data
 chat_response = self.client.inference.chat_completion(
 	model_id=self.model_id,
 	messages=[
 		{"role": "system", "content": "You are a helpful assistant."},
-		{"role": "user", "content": request.data["query"]},
+		{"role": "user", "content": request.get_data()["query"]},
 	],
 )
 
-# 3) Set the response's data field to the request event's data field
-response.data = {"chat": chat_response.completion_message.content}
+# 3) Create a response CloudEvent with the inference result as its data
+response = CloudEvent({
+	"type": "dev.knative.function.response",
+	"source": "my/ai/knative/function",
+	"id": f"response-{request.get_id()}"
+}, {"chat": chat_response.completion_message.content})
 
 # 4) Send the response CloudEvent
 # The 'send' method is already decorated with CloudEvent middleware
@@ -166,23 +164,21 @@ class Function:
         # 1) Extract the CloudEvent from the scope
         request = scope["event"]
 
-        # 2) Create a new CloudEvent as response
-        response = CloudEvent({
-            "type": "dev.knative.function.response",
-            "source": "my/ai/knative/function",
-            "id": f"response-{request.get('id', 'unknown')}"
-        })
-
+        # 2) Run inference using the query from the request event's data
         chat_response = self.client.inference.chat_completion(
             model_id=self.model_id,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": request.data["query"]},
+                {"role": "user", "content": request.get_data()["query"]},
             ],
         )
-        
-        # 3) Set the response's data field to the request event's data field
-        response.data = {"chat": chat_response.completion_message.content}
+
+        # 3) Create a response CloudEvent with the inference result as its data
+        response = CloudEvent({
+            "type": "dev.knative.function.response",
+            "source": "my/ai/knative/function",
+            "id": f"response-{request.get_id()}"
+        }, {"chat": chat_response.completion_message.content})
 
         # 4) Send the response CloudEvent
         # The 'send' method is already decorated with CloudEvent middleware

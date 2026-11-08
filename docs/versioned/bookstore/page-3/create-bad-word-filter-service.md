@@ -97,10 +97,10 @@ func create -l python bad-word-filter -t cloudevents
             request_event = scope["event"]
 
             # 2. Extract the data payload from the event, analyze and create CloudEvent
-            response_event = self.inappropriate_language_filter(request_event.data)
+            response_event = self.inappropriate_language_filter(request_event.get_data())
 
             # 3. Send the response
-            logging.info(f"Sending response: {response_event.data}")
+            logging.info(f"Sending response: {response_event.get_data()}")
             await send(response_event)
 
         def create_cloud_event(self, inputText, data):
@@ -142,7 +142,7 @@ The content of [`bad-word-filter/pyproject.toml`](https://github.com/knative/doc
     license = "MIT"
     dependencies = [
         "httpx",
-        "cloudevents",
+        "cloudevents>=2.2,<3",
         "pytest",
         "pytest-asyncio",
         "alt-profanity-check==1.4.1.post1" # <-- add this dependency
