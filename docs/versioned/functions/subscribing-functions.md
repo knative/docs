@@ -13,7 +13,7 @@ Configure which Broker events should reach a function, then deploy that configur
 
 - You have [installed the CLI](install-func.md) and opened the initialized function project directory.
 - The handler accepts CloudEvents; use an appropriate [CloudEvents template](creating-functions.md#choose-a-language-and-template) or implement the corresponding handler contract.
-- The handler satisfies the event response contract, not merely accepts an event POST. Return a successful HTTP response with an **empty body**—for example, `204 No Content`—or a valid reply CloudEvent with a successful status. A generic HTTP greeting body is not automatically a valid event-sink response. The [MTChannelBasedBroker v1.23 response handler](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/broker/filter/filter_handler.go#L551-L583){target=_blank} rejects non-empty responses that are not recognized as CloudEvents and rejects malformed reply events.
+- The handler satisfies the event response contract, not merely accepts an event POST. Return a successful HTTP response with an **empty body**—for example, `204 No Content`—or a valid reply CloudEvent with a successful status. A generic HTTP greeting body is not automatically a valid event-sink response. The [MTChannelBasedBroker v1.24 response handler](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/broker/filter/filter_handler.go#L551-L583){target=_blank} rejects non-empty responses that are not recognized as CloudEvents and rejects malformed reply events.
 - Knative Serving and Eventing are installed on the intended cluster. You can deploy the function and create Triggers in the intended namespace.
 - A [Broker](../eventing/brokers/create-broker.md) exists and is Ready in that namespace. The name `default` is a convention, not a guarantee that a Broker exists.
 - You know the attributes of the events the producer sends **to that Broker**, and can send a matching test event using the producer's documented procedure.
@@ -32,7 +32,7 @@ Before any deployment, select the intended cluster and the Broker's namespace in
 --8<-- "func-cluster-context.md"
 
 !!! warning "Existing generated-name Triggers, including first deployment"
-    In Functions from Knative v1.23.0, the [Knative deployer](https://github.com/knative/func/blob/knative-v1.23.0/pkg/knative/deployer.go#L369-L417){target=_blank} ignores an already-existing generated Trigger rather than updating it. This can hide a **first-deployment name collision**, not just stale filters after redeployment. Inspect any existing `<function-name>-function-trigger-<index>` resources before deploying; the index corresponds to the entry in `deploy.subscriptions`.
+    In Functions from Knative v1.24.0, the [Knative deployer](https://github.com/knative/func/blob/knative-v1.24.0/pkg/knative/deployer.go#L389-L440){target=_blank} ignores an already-existing generated Trigger rather than updating it. This can hide a **first-deployment name collision**, not just stale filters after redeployment. Inspect any existing `<function-name>-function-trigger-<index>` resources before deploying; the index corresponds to the entry in `deploy.subscriptions`.
 
     Compare the Trigger owner reference's **apiVersion, kind, name, and UID** with the live Knative Service you are authorized to manage (`serving.knative.dev/v1`, `Service`, its name, and its current `metadata.uid`). Also compare `spec.subscriber.ref`, `spec.broker`, and `spec.filter.attributes` with that Service and the intended subscription. A matching generated-looking name is not evidence of ownership.
 
@@ -86,7 +86,7 @@ check_func_context && kubectl --context "$EXPECTED_CONTEXT" get kservice "$FUNCT
 check_func_context && kubectl --context "$EXPECTED_CONTEXT" get triggers --namespace "$NAMESPACE"
 ```
 
-Repeat the full owner apiVersion/kind/name/UID and subscriber/Broker/filter comparisons from preflight, using the live Service's current UID. Stop on a foreign/stale owner or configuration mismatch; an existing name does not make a Trigger automatically safe to update. For Functions from Knative v1.23.0, the first generated name is typically `hello-function-trigger-0`; use the actual name in your namespace:
+Repeat the full owner apiVersion/kind/name/UID and subscriber/Broker/filter comparisons from preflight, using the live Service's current UID. Stop on a foreign/stale owner or configuration mismatch; an existing name does not make a Trigger automatically safe to update. For Functions from Knative v1.24.0, the first generated name is typically `hello-function-trigger-0`; use the actual name in your namespace:
 
 ```bash
 check_func_context && kubectl --context "$EXPECTED_CONTEXT" get trigger hello-function-trigger-0 --namespace "$NAMESPACE" -o yaml

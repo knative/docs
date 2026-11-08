@@ -3,7 +3,7 @@
 -->
 From the function project directory, use `subscribe` to save Broker subscriptions and exact-match CloudEvents attribute filters in `func.yaml`. Deploy afterward to create the corresponding Triggers. Here, `--source` is the **Broker name**, not the event's CloudEvents `source` attribute.
 
-Choose **one Broker** for this procedure. Replace `my-broker` and the example filter values with your Broker and producer's event attributes. To use a Ready Broker named `default`, substitute `--source default` in the same command rather than running another subscription command. Both example filters must match. Repeating `subscribe` for the same Broker merges filter keys into that local subscription, replacing values for matching keys; it does not clear other keys. Inspect the saved configuration before deploying.
+Choose **one Broker** for this procedure. Replace `my-broker` and the example filter values with your Broker and producer's event attributes. To use a Ready Broker named `default`, substitute `--source default` in the same command rather than running another subscription command. Both example filters must match. Functions from Knative v1.24.0 rejects malformed `--filter` entries (missing `=` or an empty key); values may contain `=`. Repeating `subscribe` for the same Broker merges filter keys into that local subscription, replacing values for matching keys; it does not clear other keys. Inspect the saved configuration before deploying.
 
 === "func"
 

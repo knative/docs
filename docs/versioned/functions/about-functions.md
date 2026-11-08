@@ -25,7 +25,7 @@ Functions can be written in any language supported by the available [language pa
 
 ## Local and on-cluster builds
 
-Local requirements depend on the builder. `pack` and `s2i` use a Docker-compatible daemon; the experimental `host` builder in Functions from Knative v1.23.0 uses the local Go or Python toolchain and assembles an OCI image without a Docker daemon. Host-based local run is different again: it starts a process rather than testing the container image. Availability depends on the CLI version and project layout, not just the language name.
+Local requirements depend on the builder. `pack` and `s2i` use a Docker-compatible daemon; the experimental `host` builder in Functions from Knative v1.24.0 uses the local Go or Python toolchain and assembles an OCI image without a Docker daemon. Host-based local run is different again: it starts a process rather than testing the container image. Availability depends on the CLI version and project layout, not just the language name.
 
 An on-cluster build shifts that work to the cluster and requires build infrastructure such as Tekton Pipelines. It can be useful when you do not have a local Docker daemon or when building in a CI/CD workflow. See [Building functions](building-functions.md) for the supported paths and their prerequisites; consult its upstream setup link for the detailed on-cluster build configuration.
 

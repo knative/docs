@@ -3,7 +3,7 @@
 -->
 Knative Functions provides templates that can be used to create basic functions, by initiating a function project boilerplate when you run a `create` command.
 
-Templates allow you to choose the language and invocation format for your function. The built-in templates in Functions from Knative v1.23.0 provide both `cloudevents` and `http` formats for the languages below. Run `func languages` and `func templates` (or `kn func languages` and `kn func templates`) to check what your installed version and registered repositories actually provide:
+Templates allow you to choose the language and invocation format for your function. The [built-in templates](https://github.com/knative/func/tree/knative-v1.24.0/templates){target=_blank} in Functions from Knative v1.24.0 provide both `cloudevents` and `http` formats for the languages below. Run `func languages` and `func templates` (or `kn func languages` and `kn func templates`) to check what your installed version and registered repositories actually provide:
 
 - [Node.js](https://github.com/knative/func/blob/main/docs/function-templates/nodejs.md){target=_blank}
 - [Python](https://github.com/knative/func/blob/main/docs/function-templates/python.md){target=_blank}

@@ -22,9 +22,9 @@ You do not need a Knative cluster to run locally. If you want the experimental G
 
 ## Run without a container
 
-In Functions from Knative v1.23.0, the experimental `host` builder can run supported Go and Python projects as local processes, without first creating a container image or using a Docker daemon. Install the language toolchain and dependencies required by your generated project. Older Python layouts are not all supported; consult the matching [Python template guide](about-functions.md#function-templates) before using this route.
+In Functions from Knative v1.24.0, the experimental `host` builder can run supported Go and Python projects as local processes, without first creating a container image or using a Docker daemon. Install the language toolchain and dependencies required by your generated project. Older Python layouts are not all supported; consult the matching [Python template guide](about-functions.md#function-templates) before using this route.
 
-The [run reference for Functions from Knative v1.23.0](https://github.com/knative/func/blob/knative-v1.23.0/docs/reference/func_run.md){target=_blank} describes this experimental path. Check the corresponding release reference for another installed CLI version. From the project directory, choose the host builder explicitly:
+The [run reference for Functions from Knative v1.24.0](https://github.com/knative/func/blob/knative-v1.24.0/docs/reference/func_run.md){target=_blank} describes this experimental path. Check the corresponding release reference for another installed CLI version. From the project directory, choose the host builder explicitly:
 
 === "func"
 
