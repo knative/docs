@@ -158,7 +158,7 @@ To define your image links:
     kn operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/broker-eventing-controller:latest -n knative-eventing
     ```
 
-    - In Operator v1.23, `${NAME}` resolves to the image name parsed from the existing image reference, falling back to the container name when no image name is available. Check those names against your private registry; use explicit overrides where they differ.
+    - In Operator v1.24, `${NAME}` resolves to the image name parsed from the existing image reference, falling back to the container name when no image name is available. Check those names against your private registry; use explicit overrides where they differ.
     - `default` is used to define the image format for all containers, except the container `eventing-controller` in the deployment `broker-controller`. To replace the image for this container, use the `override`
     field to specify individually, by using `broker-controller/eventing-controller` as the key.
 <!-- TODO: check that this is still relevant, I don't see default in this example?-->
@@ -307,9 +307,9 @@ spec:
 
 Knative Eventing allows you to define a default Broker class when the user does not specify one. Setting a default class does not install a Broker implementation; select a class supported by an implementation installed in your cluster. See [Broker types](../../eventing/brokers/broker-types/README.md).
 
-In Operator v1.23, `spec.defaultBrokerClass` supplies the cluster default unless `default-br-config` under `spec.config.br-defaults` or `spec.config.config-br-defaults` defines `brokerClass`. Such ConfigMap configuration takes precedence over `spec.defaultBrokerClass`. If neither ConfigMap entry defines a class and `spec.defaultBrokerClass` is empty, the Operator uses `MTChannelBasedBroker`.
+In Operator v1.24, the default Broker transform skips applying `spec.defaultBrokerClass` when `default-br-config` under either `spec.config.br-defaults` or `spec.config.config-br-defaults` contains `brokerClass:`. Otherwise, `spec.defaultBrokerClass` supplies the cluster default; if it is empty, the Operator uses `MTChannelBasedBroker`.
 
-This behavior is implemented by the [v1.23 default Broker transform](https://github.com/knative/operator/blob/knative-v1.23.0/pkg/reconciler/knativeeventing/common/defaultbroker.go). Use one ConfigMap naming form, as described in the [mapping reference](configuration-reference.md#configmap-mapping), to avoid conflicting entries.
+This behavior is implemented by the [v1.24 default Broker transform](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/knativeeventing/common/defaultbroker.go). Class detection checks both naming forms, while the separate [ConfigMap mapping transform](configuration-reference.md#configmap-mapping) selects the full-name entry first without merging them. Use one naming form to avoid conflicting entries.
 
 The following example CR explicitly specifies `MTChannelBasedBroker`, which is also the fallback when no class is configured:
 

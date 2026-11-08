@@ -30,7 +30,7 @@ After selecting an example below, follow [Apply and verify a configuration chang
 
 Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field.
 
-For example, if you want to install Knative Serving v1.20, you can apply the following `KnativeServing` custom resource:
+For example, if you want to install Knative Serving v1.24, which is bundled with Operator v1.24, you can apply the following `KnativeServing` custom resource:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -39,13 +39,13 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: "1.20"
+  version: "1.24"
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator install --component serving -v 1.20 -n knative-serving
+kn operator install --component serving -v 1.24 -n knative-serving
 ```
 
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving.
@@ -57,7 +57,7 @@ The component releases available to install depend on the Operator release. Chec
 If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
 
 !!! important
-    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.18, you must upgrade to v1.19 before upgrading to v1.20.
+    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.22, you must upgrade to v1.23 before upgrading to v1.24.
 
 ## Install customized Knative Serving
 
@@ -121,10 +121,9 @@ This example installs the default Knative Serving manifests, and then installs t
 You can use the `spec.registry` section of the Operator CR to change the image references to point to a private registry or [specify imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod):
 
 - `default`: this field defines a image reference template for all Knative images. The format
-is `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. In Operator v1.23, `${NAME}` is replaced with the image name parsed from the existing image reference, falling back to the container name when no image name is available. Use the `default` template when your private image names match that resolution; otherwise use explicit `override` entries. See the [v1.23 image transform](https://github.com/knative/operator/blob/knative-v1.23.0/pkg/reconciler/common/images.go).
+is `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. In Operator v1.24, `${NAME}` is replaced with the image name parsed from the existing image reference, falling back to the container name when no image name is available. Use the `default` template when your private image names match that resolution; otherwise use explicit `override` entries. See the [v1.24 image transform](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/images.go).
 
-- `override`: a map from container name to the full registry
-location. This section is only needed when the registry images do not match the common naming format. For containers whose name matches a key, the value is used in preference to the image name calculated by `default`. If a container's name does not match a key in `override`, the template in `default` is used.
+- `override`: a map of image references for system workloads. A `<workload-name>/<container-name>` match takes precedence over a container-name match, and either match takes precedence over `default`. If neither override matches, the Operator uses the `default` template when set. Image references held in environment variables can also be replaced by matching the environment-variable name, as shown in the Eventing examples.
 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See
@@ -229,7 +228,7 @@ kn operator configure images --component serving --imageKey queue-proxy --imageU
 ```
 
 !!! note
-    If the container name is not unique across all Deployments, DaemonSets and Jobs, you can prefix the container name with the parent container name and a slash. For example, `istio-webhook/webhook`.
+    If the container name is not unique across all Deployments, DaemonSets and Jobs, you can prefix the container name with the workload name and a slash. For example, `istio-webhook/webhook`.
 
 ### Download images with secrets
 

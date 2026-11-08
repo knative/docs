@@ -11,7 +11,7 @@ function: how-to
 This topic describes how to upgrade Knative if you installed using the Operator.
 If you installed using YAML, see [Upgrading with kubectl](upgrade-installation.md).
 
-Change `spec.version` in the existing component custom resource; preserve its other settings. For bundled manifests, `major.minor` selects the latest patch available to that Operator for the selected minor release. An exact `major.minor.patch` selects that bundled release. These rules are implemented by the [v1.23 version-resolution code](https://github.com/knative/operator/blob/knative-v1.23.0/pkg/reconciler/common/releases.go). Custom manifests need their own version/compatibility checks; do not assume the same patch resolution or discard those customizations.
+Change `spec.version` in the existing component custom resource; preserve its other settings. For bundled manifests, `major.minor` selects the latest patch available to that Operator for the selected minor release. An exact `major.minor.patch` selects that bundled release. These rules are implemented by the [v1.24 version-resolution code](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/releases.go). Custom manifests need their own version/compatibility checks; do not assume the same patch resolution or discard those customizations.
 
 ## Before changing versions
 
@@ -29,8 +29,8 @@ CONTEXT=my-cluster-context
 RESOURCE=knativeserving.operator.knative.dev
 NAME=knative-serving
 NAMESPACE=knative-serving
-TARGET_VERSION=1.23
-EXPECTED_VERSION=1.23.0
+TARGET_VERSION=1.24
+EXPECTED_VERSION=1.24.0
 ```
 
 Replace the context, name, namespace, and versions with your planned values. For Eventing, use `RESOURCE=knativeeventing.operator.knative.dev` and its actual name/namespace. `EXPECTED_VERSION` is the resolved patch release from the installed Operator's bundle, not merely the minor-version prefix. Check the current context details with `kubectl config get-contexts "$CONTEXT"`; the commands below explicitly target it without changing the default context.
@@ -130,12 +130,12 @@ kubectl --context "$CONTEXT" get "$RESOURCE" "$NAME" -n "$NAMESPACE" -o jsonpath
 For the example target, expected fields are:
 
 ```text
-desired=1.23
-installed=1.23.0
+desired=1.24
+installed=1.24.0
 ready=True
 ```
 
-Confirm `spec.version` matches `TARGET_VERSION`, `status.version` matches the resolved `EXPECTED_VERSION`, and `READY` is `True`. A Ready resource still reporting the old version is not confirmation of this upgrade. The status field records the [installed release](https://github.com/knative/operator/blob/knative-v1.23.0/pkg/apis/operator/v1beta1/knativeserving_types.go).
+Confirm `spec.version` matches `TARGET_VERSION`, `status.version` matches the resolved `EXPECTED_VERSION`, and `READY` is `True`. A Ready resource still reporting the old version is not confirmation of this upgrade. The status field records the [installed release](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/apis/operator/v1beta1/knativeserving_types.go).
 
 If the target version or readiness does not match, inspect the resource's status conditions with the same context/name/namespace and use [installation troubleshooting](../troubleshooting.md) before making another change. Then test the existing application request or event paths affected by the upgrade. Matching version and readiness do not establish application compatibility.
 
@@ -144,7 +144,7 @@ If the target version or readiness does not match, inspect the resource's status
 A previous version may be a recovery option, but changing `spec.version` does not guarantee recovery from a failed or partially applied upgrade.
 
 !!! warning
-    Before attempting a rollback, confirm that the previous release is available to the installed Operator, the version transition is supported, and your resources and applications do not depend on features or data formats unavailable in that release. Review release-specific downgrade guidance. The Operator's [v1.23 migration check](https://github.com/knative/operator/blob/knative-v1.23.0/pkg/reconciler/common/releases.go) limits ordinary transitions to the same major version and at most one minor version; passing that check does not establish workload compatibility or undo every effect of an upgrade.
+    Before attempting a rollback, confirm that the previous release is available to the installed Operator, the version transition is supported, and your resources and applications do not depend on features or data formats unavailable in that release. Review release-specific downgrade guidance. The Operator's [v1.24 migration check](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/releases.go) limits ordinary transitions to the same major version and at most one minor version; passing that check does not establish workload compatibility or undo every effect of an upgrade.
 
 If rollback compatibility is uncertain, stop and collect status conditions and diagnostics through [installation troubleshooting](../troubleshooting.md) rather than applying an unsupported target or deleting component resources.
 

@@ -405,7 +405,7 @@ Where `<filename>` is the name of the file you created in the previous step.
 
 ### Installing a specific version of Eventing
 
-Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. Select a release from the [Operator-supported component versions](supported-versions.md). For example, the documented v1.23 Operator includes Knative Eventing v1.23, which you can select with the following KnativeEventing CR:
+Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. Select a release from the [Operator-supported component versions](supported-versions.md). For example, the documented v1.24 Operator includes Knative Eventing v1.24, which you can select with the following KnativeEventing CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -414,13 +414,13 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: "1.23"
+  version: "1.24"
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator install --component eventing -v 1.23 -n knative-eventing
+kn operator install --component eventing -v 1.24 -n knative-eventing
 ```
 
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Eventing.

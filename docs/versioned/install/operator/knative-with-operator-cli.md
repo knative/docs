@@ -10,18 +10,13 @@ function: how-to
 
 Knative provides the Operator CLI Plugin to install, configure and manage Knative on the command line. This plugin helps you configure the Knative cluster, without interacting with the complexities of the custom resources.
 
-This topic describes how to install the Knative Operator and the Serving and Eventing components using a CLI.
+This topic describes how to install the Knative Operator and the Serving and Eventing components using a CLI. The version flag selects the Operator release or component release, not the CLI plugin's release. The plugin is independently versioned: its [v1.21.0 install implementation](https://github.com/knative-extensions/kn-plugin-operator/blob/knative-v1.21.0/pkg/command/install/install.go) accepts these version arguments and uses the `v1beta1` Operator API. The v1.24 examples below match the verified Operator bundle; they are not a claim that a `knative-v1.24.0` plugin release exists or that this CLI route has been runtime-tested.
 
 This installation requires the following prerequisites:
 
 - The [CLI Tools](../../client/install-kn.md) are installed.
-- Sufficient hardware:
-
-  One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
-
-  Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
-
-- The existing Kubernetes is running a supported version.
+- An existing cluster meeting the [installation capacity recommendations and component Kubernetes requirements](../requirements.md).
+- Administrator permissions for the target cluster and component namespaces.
 
 For information on other Knative installs, see the [Installation Roadmap](../README.md#installation-roadmap).
 
@@ -42,15 +37,15 @@ To install Knative Operator under a certain namespace, e.g. knative-operator, ru
 kn operator install -n knative-operator
 ```
 
-To install Knative Operator of a specific version, e.g. 1.7.1, run:
+To install Knative Operator of a specific version, e.g. 1.24.0, run:
 
 ```bash
-kn operator install -v 1.7.1
+kn operator install -v 1.24.0
 ```
 
 ## Install the Knative Serving component
 
-You can install Knative Serving of any specific version under any specific namespace. By default, the namespace is `knative-serving`,
+Select a Knative Serving version from the installed Operator's [supported bundle](supported-versions.md) and use the intended component namespace. By default, the namespace is `knative-serving`,
 and the version is the latest.
 
 To install the latest version of Knative Serving, run:
@@ -65,16 +60,16 @@ To install Knative Serving under a certain namespace, e.g. knative-serving, run:
 kn operator install --component serving -n knative-serving
 ```
 
-To install Knative Operator of a specific version, e.g. 1.7, run:
+To install Knative Serving of a specific version, e.g. 1.24, run:
 
 ```bash
-kn operator install --component serving -n knative-serving -v "1.7"
+kn operator install --component serving -n knative-serving -v "1.24"
 ```
 
 To install the ingress plugin, e.g Kourier, together with the install command, run:
 
 ```bash
-kn operator install --component serving -n knative-serving -v "1.7" --kourier
+kn operator install --component serving -n knative-serving -v "1.24" --kourier
 ```
 
 If you do not specify the ingress plugin, istio is used as the default. However, you need to make sure you install
@@ -125,7 +120,7 @@ you can configure Knative Serving with different ingresses:
 
 ## Install the Knative Eventing component
 
-You can install Knative Eventing of any specific version under any specific namespace. By default, the namespace is `knative-eventing`,
+Select a Knative Eventing version from the installed Operator's [supported bundle](supported-versions.md) and use the intended component namespace. By default, the namespace is `knative-eventing`,
 and the version is the latest.
 
 To install the latest version of Knative Eventing, run:
@@ -140,10 +135,10 @@ To install Knative Eventing under a certain namespace, e.g. knative-eventing, ru
 kn operator install --component eventing -n knative-eventing
 ```
 
-To install Knative Operator of a specific version, e.g. 1.7, run:
+To install Knative Eventing of a specific version, e.g. 1.24, run:
 
 ```bash
-kn operator install --component eventing -n knative-eventing -v "1.7"
+kn operator install --component eventing -n knative-eventing -v "1.24"
 ```
 
 ### Install Knative Eventing with event sources

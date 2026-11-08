@@ -29,6 +29,14 @@ For an existing-cluster installation, you need:
 - A supported Kubernetes version for the Knative release you are installing.
 - The prerequisites for your selected networking or messaging implementation. See the [extensions catalog](extensions.md) and the component installation guide.
 
+## Kubernetes minimum for Knative v1.24
+
+Serving v1.24.0 and Eventing v1.24.0 both declare a default minimum Kubernetes server version of **v1.35.0**. This was checked independently in the tagged [Serving version check](https://github.com/knative/serving/blob/knative-v1.24.0/vendor/knative.dev/pkg/version/version.go) and [Eventing version check](https://github.com/knative/eventing/blob/knative-v1.24.0/vendor/knative.dev/pkg/version/version.go), not inferred from Quickstart's client-tool requirement.
+
+Their shared startup version check compares the API server version with that minimum. `KUBERNETES_MIN_VERSION` can override the check, and the [Operator v1.24 transform](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/kubernetes_min_version.go) propagates an Operator override to managed workloads. Bypassing the default gate does not establish that an older Kubernetes version is supported or validated.
+
+The server minimum is separate from the installed `kubectl` version and its Kubernetes version-skew requirements. Check each component release and extension you deploy; a bundled older Knative release does not inherit v1.24's minimum automatically.
+
 ## Release compatibility
 
 Use release-specific compatibility information, not the capacity table, to select versions:
@@ -37,4 +45,4 @@ Use release-specific compatibility information, not the capacity table, to selec
 - [Operator-supported component versions](operator/supported-versions.md) lists the versions bundled with the documented Operator release. The Operator's bundled versions constrain what it can install.
 - [Check the installed version](upgrade/check-install-version.md) before choosing an upgrade path.
 
-This page does not provide a Kubernetes-to-Knative compatibility matrix. Consult the selected release's requirements before installing or upgrading; a cluster that satisfies the hardware recommendations is not necessarily version-compatible.
+This page records the v1.24 component minimum, not a complete Kubernetes-to-Knative compatibility matrix. Consult the selected release's requirements before installing or upgrading; a cluster that satisfies the hardware recommendations is not necessarily version-compatible.
