@@ -15,7 +15,8 @@ The user authorizes substantial experimental changes in this isolated worktree. 
 | `dx-serving` | w27 | `docs/versioned/serving/**`, `docs/versioned/client/**` (core `kn` and generic CLI guidance; coordinate Functions references with `dx-functions`) |
 | `dx-functions` | w2A | `docs/versioned/functions/**`, Functions-specific shared snippets `docs/snippets/*func*.md`; review Functions tutorials with `dx-learning`, but do not edit Learning-owned paths |
 | `dx-eventing` | w28 | `docs/versioned/eventing/**` |
-| `dx-operations` | w29 | `docs/versioned/install/**`, `docs/versioned/admin/**`, `docs/versioned/reference/security/**`, `contribute-to-docs/**` |
+| `dx-operations` | w29 | `docs/versioned/install/**`, `docs/versioned/admin/**`, `docs/versioned/reference/security/**` |
+| `dx-editorial` | w2B | `contribute-to-docs/**`: authoring guidance, templates, style, metadata policy, and editorial/reviewer checklists; cross-component editorial review is read-only, with changes requested from each page's owner |
 | Coordinator | w23 | Integration, coordination artifacts, remaining shared snippets, `mkdocs*`, build/test configuration, redirects, presentation overrides if necessary; commits |
 
 All agents share the same working directory. Do not git commit, stage, reset, stash, switch branches, or revert another agent's changes. Use narrow edits within ownership. Request cross-owner changes in your reply rather than editing their files. Do not add per-subtree `.nav.yml` files: architecture owns all navigation. New pages must be reported with path, title, and intended mode for navigation integration.
@@ -50,12 +51,13 @@ Keep component context and make modes visible. Documentation home should route r
 - Serving: separate concurrency explanation/how-to/reference, improve autoscaling entry paths, and clarify core `kn` workflows.
 - Functions: independently own the function developer experience, local and remote build/run/deploy workflows, language/template contracts, `func`/`kn func` guidance, and Functions-specific snippets. Coordinate tutorial changes with Learning and review deployment handoffs with Serving; link maintained upstream command reference rather than duplicating it.
 - Eventing: separate Trigger filtering and delivery reference from task guides; improve concept/task handoffs and symptom-led troubleshooting as feasible.
-- Operations/editorial: installation routing versus comparison/reference, bounded operator entry points, align contributor templates with Diátaxis and provide author/reviewer contracts.
+- Operations: installation routing versus comparison/reference, bounded Operator entry points, administration, security, configuration authority, and operational verification.
+- Editorial: independently maintain Diátaxis authoring guidance, templates, style, metadata policy, and author/reviewer contracts. Review consistency across component pages without taking their edit ownership. Coordinate information architecture with Architecture and technical claims with component owners.
 - Architecture: review current structure, devise readable populated mode/component navigation using existing files, then integrate peers' manifests. Conduct independent convergence review.
 
 ## Space count rationale
 
-The initial pass used five specialist spaces, combining Serving and Functions for workload balance. The user subsequently requested separate ownership. There are now **six specialist spaces**: Learning, Serving, Functions, Eventing, Operations/Editorial, and independent Architecture/Review; the coordinator remains in the existing seventh space. Functions is an independent documentation domain, not subordinate to Serving. Keep the review/consultation loop and explicit file boundaries; do not recombine these teams.
+The initial pass used five specialist spaces, combining Serving/Functions and Operations/Editorial for workload balance. The user subsequently requested both pairs be separated. There are now **seven specialist spaces**: Learning, Serving, Functions, Eventing, Operations, Editorial, and independent Architecture/Review; the coordinator remains in the existing eighth space. Functions is not subordinate to Serving, and Editorial is not subordinate to Operations. Keep the review/consultation loop and explicit file boundaries; do not recombine these teams.
 
 ## Results
 

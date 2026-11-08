@@ -4,17 +4,18 @@
 
 All implementation is isolated in `/Users/dave/work/knative/docs-diataxis`, branch `docs/diataxis-experiment`, based on `c250e7f7` from `typography-refresh`. The original checkout's existing untracked review files are not changed.
 
-Six specialist Herdr workspaces now share the experimental worktree, with exclusive file ownership documented in `DIATAXIS-PLAN.md`. The initial reviewed pass used five; Functions was subsequently separated at the user's request:
+Seven specialist Herdr workspaces now share the experimental worktree, with exclusive file ownership documented in `DIATAXIS-PLAN.md`. The initial reviewed pass used five; Functions and then Editorial were subsequently separated at the user's request:
 
 - `w25` / `dx-architecture`: global navigation, reader-goal indexes, independent architecture review. Its second tab hosts the local preview.
 - `w26` / `dx-learning`: Quickstart, Functions follow-on, Bookstore learning routes.
 - `w27` / `dx-serving`: Serving and core/generic CLI entry paths.
 - `w2A` / `dx-functions`: independent Functions documentation and Functions-specific shared snippets; tutorial consultation with Learning and deployment cross-review with Serving.
 - `w28` / `dx-eventing`: Eventing task/reference separation and troubleshooting.
-- `w29` / `dx-operations`: install/operator/admin/security entry points and contributor templates.
+- `w29` / `dx-operations`: install/operator/admin/security entry points and operational verification.
+- `w2B` / `dx-editorial`: independent contributor guidance, templates, style, metadata policy, author/reviewer contracts, and read-only cross-component editorial review.
 - Existing `w23`: coordinator, integration checks, shared snippet correction, commits.
 
-The original five-space split balanced workloads by combining Serving and Functions. At the user's request, `w27` was renamed **Docs · Serving** and a sixth specialist space **Docs · Functions** (`w2A`) was created in the same worktree. Existing reviewed content and commit history remain intact; this change separates team ownership, not the repository or established documentation URLs. Independent review and the consultation loop remain unchanged. Herdr also created parent repository workspace `w24` solely for linked-worktree grouping. No unrelated pre-existing Herdr spaces were controlled.
+The original five-space split balanced workloads by combining Serving and Functions. At the user's request, `w27` was renamed **Docs · Serving** and a sixth specialist space **Docs · Functions** (`w2A`) was created in the same worktree. Existing reviewed content and commit history remain intact; this change separates team ownership, not the repository or established documentation URLs. The user then requested Operations/Editorial separation: `w29` was renamed **Docs · Operations**, and **Docs · Editorial** (`w2B`) was created as the seventh specialist space. Contributor/editorial ownership transfers to `dx-editorial`; operational documentation remains with `dx-operations`. Editorial proposes cross-component changes to page owners rather than acquiring global edit authority. Independent Architecture review and the consultation loop remain unchanged. Herdr also created parent repository workspace `w24` solely for linked-worktree grouping. No unrelated pre-existing Herdr spaces were controlled.
 
 ## Implemented direction
 
