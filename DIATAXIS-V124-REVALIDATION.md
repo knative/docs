@@ -140,6 +140,14 @@ Docs home is a concise gateway of about 210 words and three headings. The long t
 
 Architecture and Editorial reviewed only this navigation/home revision. Strict build and rendered preservation checks passed: 469 → 470 pages (one moved-overview destination added), no missing previous page URLs, no lost content anchors, and no broken internal links. Inherited SVG duplicate IDs remain unchanged. The overview's body was preserved with heading-level/relative-link repairs; this documentation-only revision did not rerun runtime tests.
 
+## Get Started consolidation
+
+The earlier navigation revision still had separate Docs home and Get started entries; the consolidation discussed with the user had not been implemented. It is now a single Get Started section whose index is `/docs/`, with Knative Technical Overview as a direct child. The separate `learn/README.md` hub was merged into the root gateway and removed; `/docs/learn/` redirects to `/docs/`, forwarding fragments. Internal incoming links use the canonical root. All old root and learning-hub IDs remain on the consolidated page, with useful destinations rather than duplicated content.
+
+Quickstart and a local-first function exercise are the primary choices; Bookstore is secondary and technical background optional. Returning users have a small shortcut section. Automatic Next is hidden on this choice-based gateway so it does not prescribe reading the overview before trying a tutorial.
+
+Editorial consolidation review and strict/rendered checks passed: exactly five sidebar sections, one root Get Started index, no Docs home or separate learning hub, overview child, no missing old page URLs or broken internal links. The old hub's anchors are deliberately forwarded to preserved root anchors by its redirect rather than retained on duplicate content. This was a documentation-only change, not another runtime test.
+
 ## Commits
 
 Current-version corrections follow historical prototype checkpoint `f09d6954`:

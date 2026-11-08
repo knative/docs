@@ -1,6 +1,7 @@
 plugins:
   redirects:
     redirect_maps:
+      versioned/learn/README.md: versioned/README.md
       versioned/contributing/about.md: community/contributing.md
       versioned/eventing/experimental-features/README.md: versioned/eventing/features/README.md
       versioned/eventing/experimental-features/delivery-timeout.md: versioned/eventing/features/delivery-timeout.md

@@ -32,7 +32,6 @@ not_in_nav: |
   **/how-to/README.md
   **/explanation/README.md
   **/reference/README.md
-  **/explanation/overview.md
 
 # The single-checkout preview enables stricter validation in mkdocs.local.yml.
 # Older published release snapshots retain the default validation levels.

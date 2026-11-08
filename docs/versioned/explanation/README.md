@@ -78,6 +78,6 @@ and `func` so you can choose the tool that fits your work.
 - [Serving encryption overview](../serving/encryption/encryption-overview.md):
   the communication paths that encryption configuration addresses.
 
-Continue with [a guided learning experience](../learn/README.md),
+Continue with [a guided learning experience](../README.md),
 [a specific task](../how-to/README.md), or
 [technical reference](../reference/README.md), according to what you need next.

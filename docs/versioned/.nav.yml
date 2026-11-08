@@ -1,8 +1,7 @@
 nav:
-  - Docs home: README.md
-
-  - Get started:
-      - learn/README.md
+  - Get Started:
+      - README.md
+      - Knative Technical Overview: explanation/overview.md
       - Quickstart:
           - Introduction: getting-started/README.md
           - Install Quickstart: getting-started/quickstart-install.md

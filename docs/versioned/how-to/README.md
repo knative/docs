@@ -13,7 +13,7 @@ components:
 Find directions for a concrete goal in your application or cluster. These guides
 assume you know what you want to do; check each guide's prerequisites, permissions,
 and required components. If you are trying Knative for the first time, choose a
-[guided learning route](../learn/README.md) instead.
+[guided learning route](../README.md) instead.
 
 ## Develop and deploy functions
 
