@@ -14,9 +14,9 @@ COPY . ./
 # Install dependencies and tidy up the go.mod and go.sum files.
 RUN go mod tidy
 
-# Build the binary.
-# -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o server ./cmd/server
+# Build the server by default, or another main package when requested.
+ARG APP_PATH=./cmd/server
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o app "$APP_PATH"
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
@@ -25,7 +25,7 @@ FROM alpine:3
 RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/server /server
+COPY --from=builder /app/app /app
 
-# Run the web service on container startup.
-CMD ["/server"]
+# Run the selected application on container startup.
+CMD ["/app"]
