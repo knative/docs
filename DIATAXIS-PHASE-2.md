@@ -37,7 +37,7 @@ No agent other than the coordinator may create clusters, mutate Kubernetes resou
 
 ## Status
 
-**Historical v1.23 checkpoint only — v1.24 revalidation required.** Architecture and Editorial accepted the bounded changes against the v1.23 evidence recorded below. The user corrected the current target to Knative v1.24; that acceptance does not establish current-version correctness. Source assumptions, references, template contracts, CLI behavior, and runtime checks must be reverified against `knative-v1.24.0`. See [the v1.24 revalidation ledger](DIATAXIS-V124-REVALIDATION.md). All seven specialist teams participated in the preceding pass; its results are preserved as historical evidence, not an exhaustive audit or production certification.
+**Historical v1.23 checkpoint only.** Architecture and Editorial accepted the bounded changes against the v1.23 evidence recorded below. The user corrected the target to Knative v1.24; that earlier acceptance is not current-version evidence. Subsequent newly tagged source checks, current runtime reruns, corrections, peer sign-off, and the remaining online release-build rate-limit blocker are recorded in [the v1.24 revalidation ledger](DIATAXIS-V124-REVALIDATION.md). All seven specialist teams participated; this preceding pass remains historical, not an exhaustive audit or production certification.
 
 The first checkpoint remains preserved at `a5a54001`. Changes are committed separately by domain below. No changes were pushed.
 

@@ -63,4 +63,4 @@ The initial pass used five specialist spaces, combining Serving/Functions and Op
 
 ## Results
 
-See [the first-pass convergence log](DIATAXIS-CONVERGENCE.md) and [the second-pass results](DIATAXIS-PHASE-2.md) for review exchanges, validation, accepted experimental limitations, and checkpoint commits. The local preview runs in architecture workspace `w25`, tab `w25:t2`, at `http://127.0.0.1:8014/docs/`.
+See [the first-pass convergence log](DIATAXIS-CONVERGENCE.md), [historical second-pass results](DIATAXIS-PHASE-2.md), and [current v1.24 revalidation results](DIATAXIS-V124-REVALIDATION.md) for review exchanges, validation, remaining limitations, and checkpoint commits. The local preview runs in architecture workspace `w25`, tab `w25:t2`, at `http://127.0.0.1:8014/docs/`.
