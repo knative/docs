@@ -14,16 +14,16 @@ If you are using the Knative Operator to install and manage your Knative cluster
 
 ## The _example key
 
-ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of all the known configuration keys in that ConfigMap. This key does not affect Knative behavior, but does contains a value which acts as a documentation comment.
+ConfigMap files installed by Knative contain an `_example` key that shows the usage and purpose of all the known configuration keys in that ConfigMap. This key does not affect Knative behavior, but contains a value which acts as a documentation comment.
 
-If a user edits the `_example` key rather than creating a new key in the ConfigMap, the changes won't affect the cluster cluster configuration, which can be confusing. The Knative webhook flags this error and alerts the user that their update could not be patched. More specifically, the edit is caught when the checksum for the `_example` key differs from the `knative.dev/example-checksum` annotation on the ConfigMap. If the checksum is null or missing, the webhook does not create the warning.
+If a user edits the `_example` key rather than creating a new key in the ConfigMap, the changes won't affect the cluster configuration, which can be confusing. The Knative webhook flags this error and alerts the user that their update could not be patched. More specifically, the edit is caught when the checksum for the `_example` key differs from the `knative.dev/example-checksum` annotation on the ConfigMap. If the checksum is null or missing, the webhook does not create the warning.
 
 Accordingly, you cannot alter the contents of the `_example` key, but you can delete the `_example` key altogether or delete the `example-checksum` annotation.
 
 For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checksum highlighted on line 11.
 
 ```yml linenums="1" hl_lines="11"
-piVersion: v1
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-defaults

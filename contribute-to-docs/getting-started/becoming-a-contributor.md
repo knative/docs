@@ -71,9 +71,7 @@ Knative documentation:
 We expect most new content to be written by the subject matter expert (SME)
 which would be the contributor who actually worked on the feature or example.
 
-When writing new content, focus mostly on technical correctness and thoroughness
-(it must include all the steps that are required by the target audience).
-Language should be roughly correct, but don't need heavy review in this phase.
+When writing new content, focus on technical correctness and the [reader contract for its mode](../what-to-contribute/creating-new-docs.md#content-types). A tutorial or how-to must include all steps needed from its stated starting state; reference and explanation have different contracts. Language can be rough in an early draft, but the scope and technical assumptions should be clear.
 
 The goal of adding new content is to get technically correct documentation into
 the repo before it is lost. Tech Writers may provide some quick guidance on
@@ -92,7 +90,7 @@ the original author to ensure that the content is technically correct; they may
 also ask a few clarifying questions, or add details such as diagrams or notes if
 needed. It's not necessarily expected that tech writers will actually execute
 the steps of a tutorial — it's expected that the SME is responsible for a
-working tutorial or how-to.
+working tutorial or how-to. The author should record the tested release and environment, what was executed, and any unverified steps in the PR. Reviewers should use the [author and reviewer checklists](../what-to-contribute/creating-new-docs.md#author-and-reviewer-checklists), consult the SME about uncertain behavior, and verify revisions before approval. A documentation build is not evidence that a cluster procedure works.
 
 ## Further resources
 

@@ -1,105 +1,71 @@
-# Procedure template
+<a id="procedure-template"></a>
 
-Use this template when writing procedural (how-to) topics. Procedural topics include detailed steps
-to perform a task as well as some context about the task.
+# How-to guide template
+
+Use this template for a reader who has a specific goal, not for a first learning experience or a settings catalog. The legacy Procedure filename is retained for existing links.
+
+Contract: one bounded goal, sufficient prerequisites, necessary actions, and verification. Include recovery for risky changes; link to detailed explanation and reference. Review with the [page checklists](../what-to-contribute/creating-new-docs.md#author-and-reviewer-checklists).
 
 
 ## Template
 
-The following template includes the standard sections that should appear in procedural topics, including
-a topic sentence, an overview section, and sections for each task within the procedure.
-Copy and paste the markdown from the template to use it in your topic.
+Copy the following scaffold and replace the author prompts. Metadata applies to versioned technical pages; use the appropriate audience and only the components involved. Omit inapplicable recovery or cleanup sections, not verification.
 
 ```
-This topic describes...
-Write a sentence or two that describes the topic itself, not the subject of the topic.
-The goal of the topic sentence is to help readers understand if this topic is for them.
-For example, "This topic instructs how to set up a broker."
+---
+audience: developer
+components:
+  - eventing
+function: how-to
+---
 
+# Accomplish a specific goal
 
-## Overview
-
-Write a few sentences to describe the subject of the topic, if useful.
-For example, if the topic is about configuring a broker, you might provide some useful context about
-brokers.
-
-If there are multiple tasks in the procedure and they must be completed in order, create an ordered
-list that contains each task in the topic. Use bullets for sub-tasks. Include anchor links to the
-headings for each task.
-
-To [task]:
-
-1. [Name of Task 1 (for example, Apply default configuration)](#task-1)
-1. [Optional: Name of Task 2](#task-2)
-
-!!! note
-    Unless the number of tasks in the procedure is particularly high, do not use numbered lead-ins in the task headings.
-    For example, instead of "Task 1: Apply default configuration", use "Apply default configuration".
+State the goal, scope, and resulting state. Say when this guide applies and link
+to background knowledge instead of requiring a conceptual detour.
 
 
 ## Prerequisites
 
-Use one of the following formats for the Prerequisites section.
+List the starting resources, components, tools, permissions, and version or
+feature requirements. Link to their setup rather than embedding a new setup
+catalog. Explain placeholders and namespace assumptions before using them.
+
+For example, configuring an Apache Kafka Broker needs an installed Eventing
+component and access to a Kafka cluster, plus the implementation-specific
+prerequisites. State those requirements precisely for the guide's scope.
+
+For risky changes, require a recoverable copy of the authoritative configuration.
+
+## Perform the task
+
+Use a goal-oriented heading instead of a generic "Task 1" in the finished page.
+Give a numbered sequence and complete commands with consistent resource names.
+If necessary steps form several phases of the same goal, add descriptive
+headings. Do not invent extra steps just to make a single-step task longer.
+
+1. Step 1: inspect or prepare the existing resource.
+1. Step 2: make and apply the intended change.
+
+Keep only short context needed to choose or execute the steps. Move a distinct
+optional goal to its own guide rather than extending this page indefinitely.
 
 
-### Formatting for two or more prerequisites
+## Verify the result
 
-If there are two or more prerequisites, use the following format.
-Include links for more information, if necessary.
+Give the command or observation that proves the intended result, with expected
+output or status. Distinguish resource readiness from end-to-end behavior.
+If the check fails, link to a relevant symptom-led troubleshooting path.
 
-Before you [task], you must have/do:
+## Recover or clean up
 
-* Prerequisite. See [Link]().
-* Prerequisite. See [Link]().
+For risky changes, explain how to restore the previous configuration. Identify
+which resources are safe to delete, and warn before destructive actions.
 
-For example:
+## Related information
 
-Before you implement Apache Kafka Broker, you must have:
-
-* Knative Eventing. See [Installing the Eventing component](link-to-that-topic).
-* An Apache Kafka cluster. See [Link to Instructions to Download](link-to-that-topic).
-
-
-### Format for one prerequisite
-
-If there is one prerequisite, use the following format.
-Include a link for more information, if necessary.
-
-Before you [task], you must have/do [prerequisite]. See [Link](link).
-
-For example:
-
-Before you create the `helloworld-java` sample app, you must have a Kubernetes cluster with Knative
-installed and DNS configured.
-See the [installation instructions](../../../install/README.md) if you need to create one.
-
-
-## Task 1
-
-Write a few sentences to describe the task and provide additional context on the task.
-
-!!! note
-    When writing a single-step procedure, write the step in one sentence and make it a bullet.
-    The signposting is important given readers are strongly inclined to look for numbered steps and
-    bullet points when searching for instructions.
-    If possible, expand the procedure to include at least one more step.
-    Few procedures truly require a single step.
-
-[Task]:
-
-1. Step 1
-1. Step 2
-
-
-## Optional: Task 2
-
-If the task is optional, put "Optional:" in the heading.
-Write a few sentences to describe the task and provide additional context on the task.
-
-[Task]:
-
-1. Step 1
-2. Step 2
+Link to the authoritative settings reference and supporting explanation.
+Keep optional goals in separate guides when they change the page's purpose.
 ```
 
 ## Procedure content samples
@@ -270,10 +236,9 @@ If the note regards an issue that could lead to data loss, the note should be a 
 
 ### Tabs
 
-Place multiple versions of the same procedure (such as a kn CLI procedure vs a YAML procedure)
-within tabs. Indent the tab content four spaces to make the tabs display properly.
+A how-to may offer complete equivalent workflows (such as `kn` CLI and YAML) in tabs. A tutorial should choose one main route and move alternatives out of its required path. Indent tab content four spaces and keep commands consistent throughout each workflow.
 
-    == "tab1 name"
+    === "tab1 name"
 
         This is a stem:
 
@@ -285,7 +250,7 @@ within tabs. Indent the tab content four spaces to make the tabs display properl
 
         1. This is another step.
 
-    == "tab2 name"
+    === "tab2 name"
 
         This is a stem:
 

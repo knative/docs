@@ -1,8 +1,10 @@
-# Concept Template
+<a id="concept-template"></a>
 
-Use this template when writing conceptual topics.
-Conceptual topics explain how things work or what things mean.
-They provide helpful context to readers. They do not include procedures.
+# Explanation template
+
+Use this template to explain how Knative works, why it behaves that way, or how to reason about trade-offs. The legacy Concept filename is retained for existing links.
+
+Contract: connect concepts, causes, and consequences for a stated audience. Do not use explanation as a container for procedures or an exhaustive settings catalog. Small examples can illustrate a relationship; link to the how-to and reference for doing and lookup. Review with the [page checklists](../what-to-contribute/creating-new-docs.md#author-and-reviewer-checklists).
 
 ## Template
 
@@ -10,6 +12,15 @@ The following template includes the standard sections that should appear in conc
 Copy and paste the markdown from the template to use it in your topic.
 
 ```
+---
+audience: developer
+components:
+  - serving
+function: explanation
+---
+
+# A concept or relationship to understand
+
 This topic describes...
 Write a sentence or two that describes the topic itself, not the subject of the topic.
 The goal of the topic sentence is to help readers understand if this topic is for them.
@@ -18,6 +29,16 @@ For example, "This topic describes what Knative Serving is and how it works."
 ## Overview
 
 Write a few sentences describing the subject of the topic.
+
+## How the parts interact
+
+Explain the causal relationships and behavior, using a diagram or small example
+where useful. Identify assumptions and implementation-specific limits.
+
+## Trade-offs and consequences
+
+Describe why someone would choose an approach and what it costs or constrains.
+Ground capability claims in the documented release, not speculation.
 
 ## Section Title
 
@@ -32,6 +53,11 @@ Write a sentence or two to describe the content in this section.
 ### Subsection Title
 
 Write a sentence or two to describe the content in this section.
+
+## Related information
+
+Link to a bounded task and authoritative reference for readers ready to act or
+look up details. Remove unused scaffold sections before submitting.
 ```
 
 ## Conceptual content samples
