@@ -9,7 +9,24 @@ function: explanation
 
 # CLI tools
 
-The following CLI tools are supported for use with Knative.
+Choose a tool for your goal, then follow a task guide or use its command reference. The descriptions below explain the tools' roles; this page is not a command catalog.
+
+## Accomplish a task
+
+- [Install CLI tools](install-kn.md) or [install the Functions CLI/plugin](../functions/install-func.md).
+- [Connect CLI tools to a cluster](connect-to-cluster.md) and verify read access before changing resources.
+- Follow the [Serving Quickstart](../getting-started/first-service.md) for a guided first Service, or [choose a Functions task](../functions/README.md#accomplish-a-task) for an existing project.
+
+## Understand the tools
+
+Use `kubectl` when working with Kubernetes manifests, `kn` for Knative resource workflows, and `func` for function-project workflows. The tool-specific sections below describe these boundaries. For the Functions model, read [How Knative Functions fits together](../functions/about-functions.md).
+
+## Look up details
+
+- [`kn` command reference]({{ clientdocs() }}){target=_blank} and [`func` command reference]({{ funcdocs() }}){target=_blank} — maintained in their respective repositories; the links follow the documentation release branch when configured, otherwise `main`. Check a reference matching your installed binary when looking up flags.
+- [kn configuration-file reference](configure-kn.md) — configuration locations and mappings.
+- [kn plugins](kn-plugins.md) — plugin catalog and installation options.
+- [Kubernetes kubectl reference](https://kubernetes.io/docs/reference/kubectl/){target=_blank} — Kubernetes-maintained command documentation.
 
 ## kubectl
 
@@ -22,12 +39,12 @@ See [Install and Set Up `kubectl`](https://kubernetes.io/docs/tasks/tools/instal
 `kn` provides a quick and easy interface for creating Knative resources such as services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 !!! note
-    `kn` cannot be used to install Knative components such as Serving or Eventing.
+    The core `kn` resource commands do not install Knative components such as Serving or Eventing. Separately installed plugins can add installation workflows: the [Knative Operator plugin](install-kn.md#install-the-knative-operator-cli-plugin) provides commands such as `kn operator install`. Follow the [Operator CLI installation guide](../install/operator/knative-with-operator-cli.md) for that administrator workflow.
 
 ### Additional resources
 
 - See [Installing `kn`](install-kn.md).
-- See the [`kn` documentation]({{ clientdocs() }}){target=_blank} in Github.
+- See the upstream [`kn` command reference]({{ clientdocs() }}){target=_blank} for subcommands and flags.
 
 ## func
 
@@ -36,36 +53,15 @@ The `func` CLI enables you to create, build, and deploy Knative Functions withou
 ### Additional resources
 
 - See [Installing Knative Functions](../functions/install-func.md).
-- See the [`func` documentation]({{ funcdocs() }}){target=_blank} in Github.
+- See the upstream [`func` command reference]({{ funcdocs() }}){target=_blank} for subcommands and flags.
+- Choose a workflow from the [Functions task guides](../functions/README.md#accomplish-a-task).
 
 ## Connecting CLI tools to your cluster
 
-After you have installed `kubectl` or `kn`, these tools will search for the `kubeconfig` file of your cluster in the default location of `$HOME/.kube/config`, and will use this file to connect to the cluster. A `kubeconfig` file is usually automatically created when you create a Kubernetes cluster.
+Follow [Connect CLI tools to a cluster](connect-to-cluster.md) to select a kubeconfig/context and verify access with `kubectl` and `kn`.
 
-You can also set the environment variable `$KUBECONFIG`, and point it to the kubeconfig file.
-
-Using the `kn` CLI, you can specify the following options to connect to the cluster:
-
-- `--kubeconfig`: use this option to point to the `kubeconfig` file. This is equivalent to setting the `$KUBECONFIG` environment variable.
-- `--context`: use this option to specify the name of a context from the existing `kubeconfig` file. Use one of the contexts from the output of `kubectl config get-contexts`.
-
-
-You can also specify a config file in the following ways:
-
-- Setting the environment variable `$KUBECONFIG`, and point it to the kubeconfig file.
-
-- Using the `kn` CLI `--config` option, for example, `kn service list --config path/to/config.yaml`. The default config is at `~/.config/kn/config.yaml`.
-
-For more information about `kubeconfig` files, see
-[Organizing Cluster Access Using kubeconfig Files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/){target=_blank}.
+A kubeconfig defines cluster connections and credentials; `kn`'s separate configuration file defines CLI preferences. `KUBECONFIG` and `--kubeconfig` concern cluster access, while `kn --config` selects the [kn preferences file](configure-kn.md). They are not interchangeable.
 
 ### Using kubeconfig files with your platform
 
-Instructions for using `kubeconfig` files are available for the following platforms:
-
-- [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html){target=_blank}
-- [Google GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl){target=_blank}
-- [IBM IKS](https://cloud.ibm.com/docs/containers?topic=containers-getting-started){target=_blank}
-- [Red Hat OpenShift Cloud Platform](https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/administrator-cli-commands.html#create-kubeconfig){target=_blank}
-- Starting [minikube](https://minikube.sigs.k8s.io/docs/start/){target=_blank} writes this file
-automatically, or provides an appropriate context in an existing configuration file.
+Provider-specific links are retained in the cluster-access guide's [Using kubeconfig files with your platform](connect-to-cluster.md#using-kubeconfig-files-with-your-platform) section.

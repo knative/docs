@@ -7,17 +7,18 @@ function: reference
 
 # Targets
 
-Configuring a target provide the Autoscaler with a value that it tries to maintain for the configured metric for a revision.
-See the [metrics](autoscaling-metrics.md) documentation for more information about configurable metric types.
+A target is the value the Autoscaler tries to maintain for the configured metric on a Revision. The `autoscaling.knative.dev/target` annotation is shared by the metric types; its meaning and units depend on the selected [metric](autoscaling-metrics.md).
 
-The `target` annotation, used to configure per-revision targets,  is _metric agnostic_. This means the target is simply an integer value, which can be applied for any metric type.
+For a configuration procedure, use [Set a concurrency target for a service](configure-concurrency.md). For concurrency-specific defaults and interactions with hard limits and utilization, use the [concurrency settings reference](concurrency.md).
 
 ## Configuring targets
 
-* **Global settings key:** `container-concurrency-target-default`. For more information, see the documentation on [metrics](autoscaling-metrics.md).
 * **Per-revision annotation key:** `autoscaling.knative.dev/target`
-* **Possible values:** An integer (metric agnostic).
-* **Default:** `"100"` for `container-concurrency-target-default`. There is no default value set for the `target` annotation.
+* **Location:** `spec.template.metadata.annotations` on a Service or Configuration
+* **Possible values:** A number encoded as a string, at least `0.01`; interpretation depends on the metric. See the [annotation validation source](https://github.com/knative/serving/blob/main/pkg/apis/autoscaling/annotation_validation.go){target=_blank} (on `main`; check the corresponding release branch for an older installation).
+* **Default:** The annotation is unset. For KPA concurrency, a nonzero `containerConcurrency` supplies the target; otherwise the cluster concurrency default supplies it. An explicit target annotation overrides that selection but is capped by a nonzero `containerConcurrency`. Target utilization is applied afterward; see the [three concurrency target-resolution cases](concurrency.md#soft-limit). For KPA requests per second, the cluster RPS default supplies the target when the annotation is absent.
+
+Global defaults are metric-specific, not a global version of the `target` annotation. See [concurrency settings](concurrency.md#soft-limit) for `container-concurrency-target-default`, and [requests-per-second settings](rps-target.md) for the RPS default. The example below is a revision-template fragment.
 
 
 === "Target annotation - Per-revision"
@@ -34,25 +35,4 @@ The `target` annotation, used to configure per-revision targets,  is _metric agn
             autoscaling.knative.dev/target: "50"
     ```
 
-=== "Concurrency target - Global (ConfigMap)"
-    ```yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-     name: config-autoscaler
-     namespace: knative-serving
-    data:
-     container-concurrency-target-default: "200"
-    ```
-
-=== "Concurrency target - Container Global (Operator)"
-    ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
-    kind: KnativeServing
-    metadata:
-      name: knative-serving
-    spec:
-      config:
-        autoscaler:
-          container-concurrency-target-default: "200"
-    ```
+Cluster-default configuration fragments are maintained in the [concurrency settings reference](concurrency.md#soft-limit).

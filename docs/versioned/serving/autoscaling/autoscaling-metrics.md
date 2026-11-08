@@ -42,7 +42,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/target-utilization-percentage: "70" 
     ```
     !!! note
-        The `autoscaling.knative.dev/target-utilization-percentage` annotation for "Concurrency" specifies a percentage value. See [Configuring targets](autoscaling-targets.md) for more details.
+        The `autoscaling.knative.dev/target-utilization-percentage` annotation for "Concurrency" specifies a percentage value. See [target utilization](concurrency.md#target-utilization) for its key, default, and interaction with concurrency limits.
 
 === "Requests per second"
 
@@ -126,5 +126,5 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
 
 ## Next steps
 
-* Configure [concurrency targets](concurrency.md) for applications
+* [Set and verify a concurrency target for a service](configure-concurrency.md)
 * Configure [requests per second targets](rps-target.md) for replicas of an application
