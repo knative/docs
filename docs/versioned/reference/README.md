@@ -18,6 +18,9 @@ procedures; use the linked page for its exact scope and requirements.
 ## Serving
 
 - [Serving API](../serving/reference/serving-api.md): resource fields and types.
+- [Deployment-to-Service mapping](../serving/convert-deployment-to-knative-service.md):
+  illustrative manifest correspondence and workload-fit constraints, not a
+  migration or endpoint-cutover procedure.
 - [Concurrency settings](../serving/autoscaling/concurrency.md) and
   [scale bounds](../serving/autoscaling/scale-bounds.md): autoscaling annotations
   and cluster-level settings.
@@ -45,6 +48,10 @@ settings for metrics, targets, and scale-to-zero.
   and [SinkBinding](../eventing/custom-event-source/sinkbinding/reference.md).
 - [Eventing metrics](../eventing/observability/metrics/eventing-metrics.md) and
   [feature configuration](../eventing/features/README.md).
+- Security configuration details: [transport encryption modes](../eventing/features/transport-encryption.md#transport-encryption-configuration)
+  and [authorization policies and modes](../eventing/features/authorization.md).
+  These pages also contain procedures. Check their feature prerequisites and
+  implementation compatibility; this index does not promise universal support.
 
 For other integrations, start with the [source catalog](../eventing/sources/README.md)
 or [sink catalog](../eventing/sinks/README.md), then consult the relevant

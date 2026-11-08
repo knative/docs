@@ -8,18 +8,63 @@ function: how-to
 
 # Configuring Knative by using the Operator
 
-Use this guide to change an Operator-managed ConfigMap through the component custom resource and confirm that reconciliation propagated the value. Choose the [domain configuration example](#change-the-custom-resource) or the [cluster-default concurrency task](#set-the-cluster-default-concurrency-target); they are independent routes, not steps to perform together. For other fields, choose a goal in the [Serving configuration collection](configuring-serving-cr.md) or [Eventing configuration collection](configuring-eventing-cr.md).
+Use the [managed ConfigMap workflow](#managed-configmap-workflow) to apply the settings from a component guide through the Operator and verify the intended result. The [domain configuration example](#change-the-custom-resource) and [cluster-default concurrency task](#set-the-cluster-default-concurrency-target) are separate, bounded routes—not additional steps in that generic workflow. For other fields, choose a goal in the [Serving configuration collection](configuring-serving-cr.md) or [Eventing configuration collection](configuring-eventing-cr.md).
 
 Do not edit the managed ConfigMap directly: the Operator overwrites manual changes. The [configuration field map](configuration-reference.md) describes how `spec.config` maps to ConfigMaps.
 
 ## Prerequisites
 
-- A local-cluster Knative installation managed by the Operator, with the relevant `KnativeServing` or `KnativeEventing` resource already present.
+- A Knative installation on the same cluster as its managing Operator, with the relevant `KnativeServing` or `KnativeEventing` resource already present.
 - `kubectl` access to read that resource and its ConfigMaps, and permission to update the resource.
 - Your existing custom resource manifest and a recoverable copy of its previous configuration. If GitOps manages it, update the source in Git through your normal workflow rather than creating competing changes in the cluster.
 - The valid keys and values for the intended change. For the domain example, review [domain verification](../../serving/using-a-custom-domain.md#verification-steps) and [DNS publication](../../serving/using-a-custom-domain.md#publish-your-domain). Configuring domain values does not create DNS records. Skip the linked page's direct ConfigMap-edit procedure: Operator users change the custom resource using this guide instead.
 
-This guide uses the resource name and namespace `knative-serving`. Substitute your actual values. For remote targets, follow [multi-cluster deployment](multi-cluster-deployment.md) instead; configuration resources are not all on the hub cluster.
+The generic workflow selects the resource and ConfigMap explicitly. The domain and concurrency examples use the resource name and namespace `knative-serving`; substitute your actual values. For remote targets, follow [multi-cluster deployment](multi-cluster-deployment.md) instead; configuration resources are not all on the hub cluster.
+
+## Managed ConfigMap workflow
+
+Use these steps with the component guide that supplies your intended keys, valid values, scope, and outcome check—for example, metrics collection or TLS configuration. Do not run the domain/concurrency examples or their topic-specific stop checks unless that is your goal. Domain and DNS prerequisites apply only to domain changes.
+
+1. **Select the target and scope.** Confirm the component, affected workloads, required permissions, and expected outcome in the component guide. Set the actual context, custom resource, component namespace, generated ConfigMap name, and authoritative manifest path. These example identifiers are for Serving observability, not a request to change its settings:
+
+    ```bash
+    CONTEXT=my-cluster-context
+    RESOURCE=knativeserving.operator.knative.dev
+    NAME=knative-serving
+    NAMESPACE=knative-serving
+    CONFIGMAP=config-observability
+    MANIFEST=knative-serving.yaml
+    ```
+
+    For Eventing, select `knativeeventing.operator.knative.dev` and its actual resource identity. These commands cover a same-cluster installation; do not use the hub namespace to inspect remote-cluster ConfigMaps.
+
+1. **Inspect and record the current state.** Read the selected resource and ConfigMap with the same explicit context and namespace:
+
+    ```bash
+    kubectl --context "$CONTEXT" get "$RESOURCE" "$NAME" -n "$NAMESPACE" -o yaml
+    kubectl --context "$CONTEXT" get configmap "$CONFIGMAP" -n "$NAMESPACE" -o yaml
+    ```
+
+    Retain a recoverable copy of the authoritative manifest and the previous active values for comparison. Confirm the live resource identity matches that manifest. Resolve unexplained live/source differences before applying another change; a live export is an inspection record, not a replacement manifest to apply wholesale.
+
+1. **Map the name and select the winning entry.** Inspect `spec.config` in both the live resource and authoritative manifest using the [ConfigMap mapping reference](configuration-reference.md#configmap-mapping). The full ConfigMap name wins whenever its entry is present, even if empty or missing the key you want to change. Only when it is absent can a `config-`-prefixed ConfigMap use its shortened entry. If neither entry exists, use the full name; names without that prefix also use the full name. Record the selected entry and whether it and the intended keys previously existed. Do not create a shadow shortened entry, merge the two naming forms, or delete the full entry to bypass precedence. If the sources disagree about the winning entry, stop and resolve their authority first.
+
+1. **Edit the authoritative custom resource.** Put only the intended ConfigMap `data` keys and values under the selected `spec.config` entry. The component guide's ConfigMap example is not a whole resource to paste there. Preserve the resource's API version, identity, other spec fields, and unrelated configuration values. Do not edit `_example` documentation as active configuration. If GitOps manages the resource, make the change in its source.
+
+1. **Validate and apply through that authority.** For a manifest you apply directly:
+
+    ```bash
+    kubectl --context "$CONTEXT" apply --dry-run=server -n "$NAMESPACE" -f "$MANIFEST"
+    kubectl --context "$CONTEXT" apply -n "$NAMESPACE" -f "$MANIFEST"
+    ```
+
+    Ensure the manifest namespace matches the selected namespace. For GitOps, validate through its normal process and synchronize that source instead of issuing a competing live apply. Server validation does not establish component-specific behavior.
+
+1. **Verify propagation.** Repeat the resource and ConfigMap reads from step 2 after reconciliation. Confirm the custom resource reports Ready and the generated ConfigMap's active `data` contains the intended values—not merely an `_example` description. For an absent key, consult the component reference rather than inferring its effective default. If the change does not persist or readiness fails, inspect status conditions and use [installation troubleshooting](../troubleshooting.md); do not keep patching generated resources.
+
+1. **Verify the actual outcome.** Return to the component guide's outcome check using this same target: for example, fresh samples in the intended metrics backend or a successful HTTPS request with certificate validation. Matching ConfigMap values and readiness prove neither metric receipt nor application reachability.
+
+1. **Recover through the same authority if needed.** Reinspect both naming forms before recovery. If the winning entry or authority has changed, stop and reconcile that change rather than restoring a shadow setting. Otherwise, restore the changed keys and their original presence in the recorded authoritative entry, preserving unrelated changes. Remove a newly created entry only if it contains no other settings that must remain. Apply/synchronize through the same workflow and repeat propagation and outcome checks. Do not restore values by editing the generated ConfigMap or applying a saved live resource wholesale. Follow the component guide for any separate DNS, certificate, or other recovery actions; configuration recovery alone may not undo those effects.
 
 ## Examples
 
@@ -29,13 +74,17 @@ This guide uses the resource name and namespace `knative-serving`. Substitute yo
 
 ## Change the custom resource
 
-1. Confirm the resource you will change:
+1. Save the resource for inspection before changing domain configuration:
 
     ```bash
-    kubectl get knativeserving knative-serving -n knative-serving -o yaml
+    kubectl get knativeserving knative-serving -n knative-serving -o yaml > knative-serving-before-domain.yaml
     ```
 
-1. In your existing manifest, add or update `spec.config.domain`. Preserve other fields and existing domain entries you still need. The following example assigns `example.org` to resources matching `app: prod` and uses `example.com` as the other domain:
+    Inspect `spec.config` in both the saved YAML and your authoritative manifest. **If either contains a `config-domain` entry, stop before editing or applying the shortened-key example below.** The full-name entry wins even when it is empty (`config-domain: {}`) or lacks the domain entries you want to set; it is not merged with `domain`. Do not create a shadow `domain` entry or delete the full-name entry to bypass the check. Consult the [ConfigMap mapping reference](configuration-reference.md#configmap-mapping) to plan a change to the winning entry through your authoritative workflow instead.
+
+    Proceed only when `config-domain` is absent from both sources. Record the previous authoritative `spec.config.domain` structure, including whether the entry or individual domain keys were absent. The saved live YAML is an inspection record, not a manifest to apply wholesale.
+
+1. After the preflight confirms that no full-name `config-domain` entry is present, add or update `spec.config.domain` in your existing manifest. Preserve other fields and existing domain entries you still need. The following example assigns `example.org` to resources matching `app: prod` and uses `example.com` as the other domain:
 
     ```yaml
     apiVersion: operator.knative.dev/v1beta1
@@ -85,7 +134,7 @@ This guide uses the resource name and namespace `knative-serving`. Substitute yo
 
 ## Recover a previous configuration
 
-Restore the changed values in the authoritative custom resource manifest and apply it through the same workflow. Repeat the status, ConfigMap, and application checks. Do not attempt recovery by editing the generated ConfigMap.
+For the domain example, repeat the `spec.config` inspection against the current resource and authoritative manifest before recovery. If a full-name `config-domain` entry has appeared, stop: restoring shortened-key settings would be shadowed. Resolve the winning-entry configuration through your authoritative workflow instead. Otherwise, restore the recorded `spec.config.domain` structure, preserving whether the entry or changed keys were originally absent, and apply through the same workflow. Repeat the status, ConfigMap, and application checks, including DNS checks if DNS was changed separately. Do not apply the saved live resource wholesale or attempt recovery by editing the generated ConfigMap.
 
 ## Set the cluster-default concurrency target
 

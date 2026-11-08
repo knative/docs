@@ -4,6 +4,8 @@ Worktree: `/Users/dave/work/knative/docs-diataxis`
 Branch: `docs/diataxis-experiment`
 Baseline: `c250e7f7` from `typography-refresh`.
 
+**Current verification target: Knative v1.24 (`knative-v1.24.0`).** Earlier v1.23 source checks/runtime results are historical, not current-version sign-off. Reverify version-dependent behavior and references using the newer tag; do not mechanically rename citations or infer unchanged behavior. Track evidence and consultation in `DIATAXIS-V124-REVALIDATION.md`.
+
 The user authorizes substantial experimental changes in this isolated worktree. The original checkout must remain untouched. Read `DIATAXIS-REVIEW.md` for the initial assessment and consult https://diataxis.fr/ as necessary. This is implementation, not merely another report.
 
 ## Team and exclusive edit ownership
@@ -61,4 +63,4 @@ The initial pass used five specialist spaces, combining Serving/Functions and Op
 
 ## Results
 
-See [the convergence log](DIATAXIS-CONVERGENCE.md) for review exchanges, validation, accepted experimental limitations, and checkpoint commits. The local preview runs in architecture workspace `w25`, tab `w25:t2`, at `http://127.0.0.1:8014/docs/`.
+See [the first-pass convergence log](DIATAXIS-CONVERGENCE.md) and [the second-pass results](DIATAXIS-PHASE-2.md) for review exchanges, validation, accepted experimental limitations, and checkpoint commits. The local preview runs in architecture workspace `w25`, tab `w25:t2`, at `http://127.0.0.1:8014/docs/`.

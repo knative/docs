@@ -8,8 +8,7 @@ Contract: connect concepts, causes, and consequences for a stated audience. Do n
 
 ## Template
 
-The following template includes the standard sections that should appear in conceptual topics, including a topic introduction sentence, an overview, and placeholders for additional sections and subsections.
-Copy and paste the markdown from the template to use it in your topic.
+Copy the scaffold, choose the appropriate audience and components, and replace author prompts. Use only sections that help explain the subject; the headings are not a mandatory outline.
 
 ```
 ---
@@ -21,10 +20,9 @@ function: explanation
 
 # A concept or relationship to understand
 
-This topic describes...
-Write a sentence or two that describes the topic itself, not the subject of the topic.
-The goal of the topic sentence is to help readers understand if this topic is for them.
-For example, "This topic describes what Knative Serving is and how it works."
+Introduce the subject and the question this explanation answers. State the
+assumed knowledge and scope so readers can tell whether it is for them.
+Prefer a concrete relationship or consequence over "This topic describes...".
 
 ## Overview
 

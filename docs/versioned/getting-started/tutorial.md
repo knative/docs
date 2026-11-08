@@ -30,13 +30,15 @@ Bookstore adds Kubernetes Deployments, a PostgreSQL StatefulSet, LoadBalancer ac
 
 [Continue to Bookstore :octicons-arrow-right-24:](../bookstore/page-0/welcome-knative-bookstore-tutorial.md){ .md-button }
 
-## A smaller follow-on: Functions
+<span id="a-smaller-follow-on-functions"></span>
 
-To create a function project rather than a multi-service sample, follow the [Functions introduction and exercise](about-knative-functions.md). Running locally requires Docker; deploying also requires a container registry you can push to.
+## A smaller local-first exercise: Functions
+
+To write a Go HTTP function rather than a multi-service sample, follow the [Functions introduction and exercise](about-knative-functions.md). Edit its handler and recognize the response from a local containerized run. You can start without Quickstart, Kubernetes, or a registry account; have a Docker-compatible daemon and a text editor available. Deployment is optional and adds registry and cluster prerequisites.
 
 ## Not sure where to start?
 
-Choose [Quickstart](README.md) for your first hands-on encounter, [Functions](about-knative-functions.md) for a smaller follow-on, or [Bookstore](../bookstore/page-0/welcome-knative-bookstore-tutorial.md) after the Serving and Eventing basics. For managing a real installation rather than learning on a disposable cluster, use the [installation guides](../install/README.md).
+Choose [Quickstart](README.md) for your first hands-on encounter, [Functions](about-knative-functions.md) for a smaller local-first exercise, or [Bookstore](../bookstore/page-0/welcome-knative-bookstore-tutorial.md) after the Serving and Eventing basics. For managing a real installation rather than learning on a disposable cluster, use the [installation guides](../install/README.md).
 
 ## Prerequisites
 

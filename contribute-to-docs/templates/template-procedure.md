@@ -244,9 +244,9 @@ A how-to may offer complete equivalent workflows (such as `kn` CLI and YAML) in 
 
         1. This is a step.
 
-          ```
-          This is some code.
-          ```
+            ```
+            This is some code.
+            ```
 
         1. This is another step.
 
@@ -256,9 +256,9 @@ A how-to may offer complete equivalent workflows (such as `kn` CLI and YAML) in 
 
         1. This is a step.
 
-          ```
-          This is some code.
-          ```
+            ```
+            This is some code.
+            ```
 
         1. This is another step.
 

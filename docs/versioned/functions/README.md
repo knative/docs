@@ -11,7 +11,9 @@ Knative Functions lets you create, build, and deploy function projects as Knativ
 
 ## Getting started with functions
 
-For a guided first function, follow the [Functions Quickstart](../getting-started/about-knative-functions.md). Start with the [Knative Quickstart environment](../getting-started/README.md) if you do not yet have a development cluster. The Functions lessons take you through installation, creation, building, running, and deployment.
+For a guided first function, follow the [Functions learning route](../getting-started/about-knative-functions.md): install the CLI, create a project, edit the handler, and test it locally. The local exercise does not require a Knative cluster or permission to publish an image.
+
+Deployment is optional and has additional registry and cluster prerequisites. If you choose that next step and need a disposable development cluster, start with the [Knative Quickstart environment](../getting-started/README.md).
 
 If you already have an environment and know your goal, use the task guides below instead of restarting the tutorial.
 
@@ -21,12 +23,17 @@ If you already have an environment and know your goal, use the task guides below
 | --- | --- |
 | Install the CLI or plugin | [Installing Knative Functions](install-func.md) |
 | Start a function project | [Creating functions](creating-functions.md) |
-| Build a container image locally or on the cluster | [Building functions](building-functions.md) |
+| Build an image locally, or build and deploy on the cluster | [Building functions](building-functions.md) |
+| Publish an image without deploying | [Publish without deploying](building-functions.md#publish-without-deploying) |
 | Test a function on your machine | [Running functions](running-functions.md) |
 | Make a function available on Knative | [Deploying functions](deploying-functions.md) |
 | Send a request to a function | [Invoking functions](invoking-functions.md) |
 | Receive CloudEvents from a Broker | [Subscribe functions to CloudEvents](subscribing-functions.md) |
 | Use an additional language pack | [Language packs](language-packs.md) |
+
+For a new project, the task journey is [create](creating-functions.md) → [run and test locally](running-functions.md) → [deploy](deploying-functions.md) → [invoke remotely](invoking-functions.md) → [subscribe to Broker events](subscribing-functions.md), if needed. Separate build and publish steps are optional: local containerized run builds as needed, and deployment normally builds and publishes. Local-only development does not require a Knative cluster.
+
+If you already have an application container rather than a Functions project, use [Serving's service deployment guide](../serving/services/creating-services.md).
 
 ## Understand Functions
 

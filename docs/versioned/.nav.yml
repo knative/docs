@@ -23,10 +23,10 @@ nav:
             - Using Triggers and sinks: getting-started/first-trigger.md
           - What's Next?: getting-started/next-steps.md
           - Clean Up: getting-started/clean-up.md
-        - Functions follow-on exercise:
+        - Functions local-first exercise:
           - Functions learning route: getting-started/about-knative-functions.md
           - Install func: getting-started/install-func.md
-          - Create a function: getting-started/create-a-function.md
+          - Create and edit a Go HTTP function: getting-started/create-a-function.md
           - Run locally and optionally deploy: getting-started/build-run-deploy-func.md
         - Bookstore after the basics:
           - Bookstore learning route: bookstore/page-0/welcome-knative-bookstore-tutorial.md
@@ -46,7 +46,7 @@ nav:
         - Supporting YAML examples: getting-started/yaml-examples.md
 ###############################################################################
     # Reader-goal indexes link canonical pages; component trees retain context.
-    # Confirmed splits integrated; final peer responses and manifests still pending.
+    # Accepted destinations retained; phase-2 Functions/Editorial manifests pending.
 ###############################################################################
     - Accomplish a task: how-to/README.md
     - Understand Knative: explanation/README.md
@@ -62,16 +62,19 @@ nav:
         - Installing Knative Functions: functions/install-func.md
         - Creating functions: functions/creating-functions.md
         - Building functions: functions/building-functions.md
-        - Running functions: functions/running-functions.md
-        - Subscribing functions: functions/subscribing-functions.md
+        - Running functions locally: functions/running-functions.md
         - Deploying functions: functions/deploying-functions.md
         - Invoking functions: functions/invoking-functions.md
+        - Optional event subscription:
+          - Subscribe to CloudEvents (optional): functions/subscribing-functions.md
         - Using language packs: functions/language-packs.md
 ###############################################################################
     # Serving
 ###############################################################################
     - Serving:
       - serving/README.md
+      - Troubleshooting:
+        - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
       - Explanation:
         - Architecture: serving/architecture.md
         - Request flow: serving/request-flow.md
@@ -96,9 +99,8 @@ nav:
         - Go autoscaling load experiment: serving/autoscaling/autoscale-go/README.md
       # Serving - developer docs
       - How-to guides:
-        - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
         - Services:
-          - Creating a Service: serving/services/creating-services.md
+          - Deploy an HTTP container as a Knative Service: serving/services/creating-services.md
           - Configuring private Services: serving/services/private-services.md
           - Configuring ingress class: serving/services/ingress-class.md
           - Configuring certificate class: serving/services/certificate-class.md
@@ -125,18 +127,23 @@ nav:
       # Serving - observability
       - Observability:
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
-      # Serving - troubleshooting
-      - Troubleshooting:
-        - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
     # Serving reference docs
       - Reference:
         - Serving API: serving/reference/serving-api.md
+        - Deployment-to-Service mapping: serving/convert-deployment-to-knative-service.md
         - Serving metrics: serving/observability/metrics/serving-metrics.md
 ###############################################################################
     # Eventing
 ###############################################################################
     - Eventing:
       - eventing/README.md
+      - Troubleshooting:
+        - Events do not reach a subscriber: eventing/troubleshooting/events-not-delivered.md
+        - Events repeatedly fail delivery: eventing/troubleshooting/delivery-failures.md
+        - Overview and Channel debugging demonstration: eventing/troubleshooting/README.md
+      - Feature-dependent security:
+        - Transport encryption: eventing/features/transport-encryption.md
+        - Authorization: eventing/features/authorization.md
       - Explanation:
         - Event Mesh: eventing/concepts/event-mesh.md
         - Duck types: eventing/concepts/duck-typing.md
@@ -224,10 +231,6 @@ nav:
         - Event registry:
           - Using the Event registry: eventing/event-registry/README.md
         - Sugar controller: eventing/sugar/README.md
-      - Troubleshooting:
-        - Events do not reach a subscriber: eventing/troubleshooting/events-not-delivered.md
-        - Events repeatedly fail delivery: eventing/troubleshooting/delivery-failures.md
-        - Overview and Channel debugging demonstration: eventing/troubleshooting/README.md
       # Eventing - observability
       - Observability:
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
@@ -328,9 +331,7 @@ nav:
             - KReference.Group field: eventing/features/kreference-group.md
             - Knative reference mapping: eventing/features/kreference-mapping.md
             - EventType auto creation: eventing/features/eventtype-auto-creation.md
-            - Transport Encryption: eventing/features/transport-encryption.md
             - Sender Identity: eventing/features/sender-identity.md
-            - Authorization: eventing/features/authorization.md
             - Eventing with Istio: eventing/features/istio-integration.md
             - Cross Namespace Event Links: eventing/features/cross-namespace-event-links.md
       - Securing Knative:
@@ -339,13 +340,9 @@ nav:
         - Verifying Knative Images: reference/security/verifying-images.md
         - Verifying Knative Binaries: reference/security/verifying-cli.md
       # TODO: add some observability documentation
-      - Observe and troubleshoot:
-        - Debug Serving applications: serving/troubleshooting/debugging-application-issues.md
-        - Events do not reach a subscriber: eventing/troubleshooting/events-not-delivered.md
-        - Events repeatedly fail delivery: eventing/troubleshooting/delivery-failures.md
-        - Eventing debugging overview: eventing/troubleshooting/README.md
-        - Collect Serving metrics: serving/observability/metrics/collecting-metrics.md
-        - Collect Eventing metrics: eventing/observability/metrics/collecting-metrics.md
+      # Component symptom guides and metrics have one canonical nav location.
+      # Operator shortcuts to them remain on the global task index and home.
+      - Observe:
         - Serving Request traces: serving/observability/accessing-traces.md
         - Collecting Serving logs: serving/observability/logging/collecting-logs.md
         - Collecting Eventing logs: eventing/observability/logging/collecting-logs.md

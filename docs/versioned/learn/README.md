@@ -8,10 +8,10 @@ components:
 
 # Learn Knative
 
-Try Knative through guided exercises with visible results. Start with the
-Quickstart; use the Bookstore tutorial after you are comfortable deploying a
-Service and routing events. These are learning environments, not production
-installation recipes.
+Try Knative through guided exercises with visible results. You can write and run
+a function locally without Kubernetes, or use Quickstart to try Services and
+event routing on a local cluster. Use the Bookstore tutorial after those cluster
+basics. These are learning environments, not production installation recipes.
 
 ## Start with the Quickstart
 
@@ -30,13 +30,21 @@ Along the way, you will:
 These links identify lessons within the Quickstart, not independent starting
 points: each lesson relies on the environment and resources established earlier.
 
-## Try Functions as a separate follow-on
+<span id="try-functions-as-a-separate-follow-on"></span>
+
+## Write and run a function locally
 
 The [Functions learning route](../getting-started/about-knative-functions.md)
-guides you through installing `func`, creating a Go function project, and running
-it locally. Deployment is optional and requires a registry you can push to and
-a cluster that can pull the image. This exercise is not a prerequisite for the
-Quickstart's Serving and Eventing lessons.
+can be your first encounter with Knative, without completing Quickstart or
+installing Kubernetes. Follow its selected `func` release and `pack` builder to
+create a Go HTTP project, edit one response line, and confirm the new response
+locally. The local steps need a Docker-compatible daemon and dependency downloads,
+but not a registry account or running image registry.
+
+You can stop at that local result. Publishing and deployment are optional and
+introduce separate registry, cluster, context, and ownership prerequisites.
+Functions is also an independent next exercise after Quickstart; it is not a
+prerequisite for the Serving and Eventing lessons.
 
 ## Build an event-driven Bookstore after the basics
 

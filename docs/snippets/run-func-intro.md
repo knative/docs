@@ -2,4 +2,4 @@
 - versioned/getting-started/build-run-deploy-func.md
 - versioned/functions/running-functions.md
 -->
-Running a function creates an OCI container image for your function before running the function in your local environment, but does not deploy the function to a cluster. This can be useful if you want to run your function locally for a testing scenario.
+Running a function starts it in your local environment without deploying it to a cluster. Containerized runs build an OCI image if needed; supported host-based runs use the local language toolchain instead. Neither path publishes an image by default. Local testing lets you exercise the handler before deployment.

@@ -16,7 +16,7 @@ your component context.
 
 | Your goal | Start here |
 | --- | --- |
-| Try Knative with guidance | [Learn Knative](learn/README.md): Quickstart lessons and an event-driven Bookstore application. |
+| Try Knative with guidance | [Learn Knative](learn/README.md): a local Functions exercise, Quickstart Services and events, or Bookstore after the basics. |
 | Get something done | [Accomplish a task](how-to/README.md): develop applications, route events, and operate a cluster. |
 | Understand how it works | [Understand Knative](explanation/README.md): architecture, behavior, and platform responsibilities. |
 | Check a field, setting, or constraint | [Look up details](reference/README.md): API, configuration, metrics, and CLI reference. |
@@ -25,14 +25,23 @@ your component context.
 
 - [Functions](functions/README.md): create, build, and deploy function projects.
 - [Serving](serving/README.md): run HTTP services and manage scaling and traffic.
+  Have a container image already? [Deploy an HTTP container as a Knative Service](serving/services/creating-services.md).
 - [Eventing](eventing/README.md): connect event producers and consumers.
 - [Operate Knative](how-to/README.md#operate-a-knative-cluster): install, configure,
   secure, observe, and upgrade; see the [administrator overview](admin/admin-overview.md)
   for responsibilities and cluster configuration.
+- [Troubleshoot an existing workload](how-to/README.md#investigate-a-problem):
+  [HTTP service issues](serving/troubleshooting/debugging-application-issues.md),
+  [missing events](eventing/troubleshooting/events-not-delivered.md), or
+  [repeated delivery failures](eventing/troubleshooting/delivery-failures.md).
+- [Security guidance and vulnerability reporting](reference/security/README.md).
+  For configuration goals, use the [security task shortcuts](how-to/README.md#secure-a-knative-installation).
 - [CLI tools](client/README.md) and [code samples](samples/README.md).
 
-New to Knative? Start with the [Quickstart](getting-started/README.md).
-Evaluating the platform? Continue with the technical overview below.
+New to Knative? [Write and run a Go HTTP function locally](getting-started/about-knative-functions.md)
+without Kubernetes, or use [Quickstart](getting-started/README.md) to try Services
+and event routing on a local cluster. Evaluating the platform? Continue with the
+technical overview below.
 
 ## Knative Technical Overview
 
@@ -190,15 +199,11 @@ Knative Functions provide a simplified programming model that abstracts away inf
 
 ### Supported Languages and Runtimes
 
-Functions support multiple programming languages through language packs:
-
-- **Node.js**: Using popular frameworks like Express
-- **Python**: With Flask and FastAPI support
-- **Go**: Native Go HTTP handlers
-- **Java**: Using Spring Boot and Quarkus
-- **TypeScript**: Full TypeScript support with Node.js
-
-You can also build your own language packs to customize the output container to your own specifications.
+Available runtime identifiers, templates, and handler contracts depend on the
+installed CLI and language packs. Use the [Functions language and template lookup](functions/creating-functions.md#choose-a-language-and-template)
+and [maintained template contracts](functions/about-functions.md#function-templates)
+rather than assuming a framework is included in every release. To use additional
+templates or customize the generated project, follow the [language-pack guide](functions/language-packs.md).
 
 ### Function Deployment and Lifecycle
 

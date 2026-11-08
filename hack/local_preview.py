@@ -1,5 +1,7 @@
 """Preview this checkout at production-like URLs without assembling releases."""
 
+import os
+
 from mkdocs.plugins import event_priority
 from mkdocs.structure.files import File, Files
 
@@ -9,6 +11,9 @@ def local_path(path):
 
 
 def on_config(config):
+    # The checkout is not an assembled release snapshot. Expose the artifact
+    # context so readers do not mistake default nightly install links for a release.
+    config.extra["local_preview"] = {"version": os.environ.get("KNATIVE_VERSION")}
     # Keep historical redirects useful with the local /docs/ output layout.
     redirects = config.plugins["redirects"].config
     redirects["redirect_maps"] = {

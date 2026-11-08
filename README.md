@@ -3,8 +3,7 @@ _build:
   render: never
   list: never
 ---
-(This guide only appears on GitHub, not the website, because it
-**intentionally** does not include YAML front-matter.)
+This repository guide is intended for GitHub, not the documentation website.
 
 # Knative documentation
 
@@ -82,11 +81,13 @@ To help you get started, see the following resources:
 - [Knative docs contributor's guide](contribute-to-docs/README.md) -- Contains information about how
   to contribute.
 
-- New content templates:
-  - [Concept](contribute-to-docs/templates/template-concept.md)
-  - [Procedure](contribute-to-docs/templates/template-procedure.md)
-  - [Troubleshooting](contribute-to-docs/templates/template-troubleshooting.md)
-  - [Blog](contribute-to-docs/templates/template-blog-entry.md)
+- New technical content templates:
+  - [Tutorial](contribute-to-docs/templates/template-tutorial.md) — guide a learning experience.
+  - [How-to](contribute-to-docs/templates/template-procedure.md) — accomplish a specific task.
+  - [Reference](contribute-to-docs/templates/template-reference.md) — describe exact settings and constraints.
+  - [Explanation](contribute-to-docs/templates/template-concept.md) — explain behavior, relationships, and trade-offs.
+  - [Troubleshooting how-to](contribute-to-docs/templates/template-troubleshooting.md) — investigate an observed symptom.
+- [Blog template](contribute-to-docs/templates/template-blog-entry.md) — dated project content outside the four technical modes.
 
 ### Getting help
 

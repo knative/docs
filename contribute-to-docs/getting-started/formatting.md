@@ -106,9 +106,12 @@ For instructions on how to format code and code snippets, see the
 
 ## Content Tabs
 
-Content tabs are handy way to organize lots of information in a visually pleasing way.
-Place multiple versions of the same procedure (such as a kn CLI procedure vs a YAML procedure)
-within tabs. Indent the tab content by four spaces to make the tabs display properly.
+Use tabs for complete equivalent how-to workflows, such as `kn` CLI and YAML.
+Keep prerequisites and verification available for each route; do not make readers
+switch tabs midway through a task. A tutorial should choose one main route and
+keep alternatives outside its required path. Tabs are not a way to hide required
+steps or warnings. Indent tab content by four spaces, and code blocks within a
+numbered step by another four spaces.
 
 For example:
 
@@ -118,9 +121,9 @@ For example:
 
         1. This is a step.
 
-          ```
-          This is some code.
-          ```
+            ```
+            This is some code.
+            ```
 
         1. This is another step.
 
@@ -130,9 +133,9 @@ For example:
 
         1. This is a step.
 
-          ```
-          This is some code.
-          ```
+            ```
+            This is some code.
+            ```
 
         1. This is another step.
 

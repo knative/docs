@@ -26,6 +26,50 @@ all senders or implementations.
 | `backoffPolicy` | `linear` or `exponential` | Selects the retry-delay policy. Other values are rejected. See the API and shared-sender scope below. |
 | `backoffDelay` | ISO 8601 duration string | Delay parameter used by the retry policy; for example, `PT1S` represents one second. Validation parses the duration. It is not an overall delivery deadline. |
 
+## Effective delivery settings lookup
+
+For an existing route, the presence or absence of a field in an example is not
+its effective value. Read the live Broker and Trigger and compare their
+`spec.delivery` with the owner's authoritative manifests. A stored field may
+have been defaulted; an omitted field does not by itself establish zero retries,
+a particular backoff policy, or which resource's policy applies.
+
+Use the identified Broker class and installed release to choose the lookup scope:
+
+| Scope | Configuration destination and evidence to inspect |
+| --- | --- |
+| Broker creation defaults | [DeliverySpec creation defaults](../configuration/broker-configuration.md#configuring-delivery-spec-defaults) documents `config-br-defaults`, including cluster and namespace entries. Ask the platform owner for the applicable configuration and, where available, the configuration used when this Broker was created. Today's ConfigMap alone is not proof of the values used by an existing route. |
+| MTChannelBasedBroker | [Broker-specific configuration](../brokers/broker-types/channel-based-broker/README.md#broker-specific-configuration) identifies the ConfigMap referenced by `spec.config` and its Channel template. Obtain the actual backing Channel implementation/version and relevant generated resource delivery settings from the owner; then consult that Channel's matching-release documentation. Do not substitute the Broker class name for the backing Channel's delivery behavior. |
+| Knative Broker for Apache Kafka | [Kafka Broker configuration](../brokers/broker-types/kafka-broker/README.md#configure-a-kafka-broker) identifies the referenced ConfigMap; [data-plane modes](../brokers/broker-types/kafka-broker/README.md#data-plane-isolation-vs-shared-data-plane) identifies shared versus namespace-isolated scope. These sections locate configuration, not a complete delivery-default reference. Request the installed Kafka Eventing release's delivery-default/Trigger-override documentation or source and the relevant dispatcher configuration from the platform owner. |
+| RabbitMQBroker | [RabbitmqBrokerConfig reference usage](../brokers/broker-types/rabbitmq-broker/README.md#create-a-rabbitmqbroker-object) identifies the configuration resource referenced by `spec.config`; it is not a ConfigMap in that example. Request the matching extension release's configuration and delivery-default/override rules from its owner. |
+| Another implementation, or unresolved class/configuration | Ask the platform owner to identify the implementation/version and configuration resources before interpreting delivery fields. The [historical support tables](#broker-support) cannot establish effective defaults. |
+
+These destinations explain where configuration is recorded; they do not
+establish universal Broker/Trigger override precedence or fallback values. For a
+specific omitted or conflicting field, request this evidence from the owner:
+
+- the field and affected Broker/Trigger names and namespace;
+- installed Knative and extension versions, actual Broker class/backing Channel,
+  and the explicit versus defaulted delivery blocks in live resources/manifests;
+- the referenced configuration resource's kind, name, namespace, and relevant
+  redacted contents, plus applicable creation/default and data-plane settings;
+- the matching-release documentation or source rule for defaulting/override
+  behavior, identifying which resource or sender uses it;
+- observed receiver or dispatcher evidence for the same event/time window, if
+  available, without treating observations as a universal default.
+
+If that evidence is unavailable, record the effective field value or precedence
+as **unknown** and escalate rather than filling in a guessed default. Kubernetes
+read access may not include platform configuration or logs; ask for redacted
+owner evidence instead of changing access or configuration. The linked
+configuration sections are lookup destinations, not instructions to edit a
+managed ConfigMap during diagnosis. For Knative Operator-managed defaults, ask
+the owner for the authoritative `KnativeEventing` configuration using the
+[Operator mapping reference](../../install/operator/configuration-reference.md#configmap-mapping);
+do not add competing configuration entries or directly edit generated ConfigMaps.
+Any change belongs in the responsible owner's deployment workflow. To investigate observations,
+return to [Retries do not match expectations](../troubleshooting/delivery-failures.md#retries-do-not-match-expectations).
+
 ## Retry and backoff semantics
 
 The v1.23 DeliverySpec comments describe linear backoff as

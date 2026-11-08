@@ -28,12 +28,17 @@ You can also set up the OpenTelemetry Collector to receive metrics from Knative 
 
 ## Setting up the Prometheus Stack
 
+This is optional platform setup, not a prerequisite for inspecting a monitoring provider that already serves your cluster. If one exists, use its access and query instructions and continue to the component-specific configuration below.
+
+The component guide establishes the intended `CONTEXT` before this section. Confirm that it names the cluster you administer before running these commands. Review the `observability` namespace, Helm release name, and linked values file; do not install this demonstration stack over an existing monitoring installation.
+
 1. Install the [Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) by using [Helm](https://helm.sh/docs/intro/using_helm/):
 
     ```bash
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
     helm repo update
     helm install knative prometheus-community/kube-prometheus-stack \
+      --kube-context "$CONTEXT" \
       --create-namespace \
       --namespace observability \
       -f https://raw.githubusercontent.com/knative-extensions/monitoring/main/promstack-values.yaml
@@ -48,7 +53,7 @@ To access the console in your web browser:
 1. Enter the command:
 
     ```bash
-    kubectl port-forward -n observability svc/prometheus-operated 9090:9090
+    kubectl --context "$CONTEXT" port-forward -n observability svc/prometheus-operated 9090:9090
     ```
 
 1. Access the console in your browser via `http://localhost:9090`.
@@ -62,7 +67,7 @@ To access the dashboards in your web browser:
 1. Enter the command:
 
     ```bash
-    kubectl port-forward -n observability svc/knative-grafana 3000:80
+    kubectl --context "$CONTEXT" port-forward -n observability svc/knative-grafana 3000:80
     ```
 
 1. Access the dashboards in your browser via `http://localhost:3000`.

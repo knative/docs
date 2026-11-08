@@ -10,7 +10,7 @@ Start with the reader's question, not a list of everything known about a feature
 1. [Choose a title and filename](#choosing-titles-and-filenames) and a reader-facing location. Check related pages and plan links between the task, its explanation, and its reference.
 1. Write the content using the [style guide](../style-guide/README.md). Ask the [DUX working group](https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md#documentation--user-experience) if the scope or placement is unclear.
 1. Check the draft against the [author and reviewer checklists](#author-and-reviewer-checklists). Record technical validation and unresolved questions.
-1. [Preview the documentation](../getting-started/previewing-docs-locally.md) and open a PR in [knative/docs](https://github.com/knative/docs). See the [GitHub workflow](../getting-started/github-workflow.md).
+1. [Preview the documentation in its publishing context](../getting-started/previewing-docs-locally.md), check the reader's route into and out of the page, and open a PR in [knative/docs](https://github.com/knative/docs). Contributor guidance is read on GitHub, not in the MkDocs preview. See the [GitHub workflow](../getting-started/github-workflow.md).
 
 ## Identify the audience and intended use
 
@@ -52,6 +52,8 @@ For authored versioned technical pages, set `function` to exactly one of `tutori
 
 A routing-only landing page may omit `function`; an explanatory overview is not a routing-only page just because its filename is `README.md`. Do not introduce new `function` values such as `landing` or `how to`. Contributor guides, blog entries, and generated/build-replaced pages need not inherit metadata from the technical-page templates. Keep generated reference behavior intact rather than adding content to placeholders that the build replaces.
 
+Metadata describes the page's main reader purpose, not its quality, testing status, or every kind of paragraph it contains. A reference can include a brief example, and a how-to can explain a necessary decision. Check the rendered title, opening promise, navigation label, and entry-link descriptions before changing a classification. Fix a misleading promise or a missing handoff rather than splitting useful content just to satisfy a label. Consult the navigation/build maintainer on ambiguous exceptions or inherited metadata; do not relabel generated output or whole catalogs from filenames alone.
+
 ## Choosing titles and filenames
 
 Use sentence-style capitalization and words readers would search for. Prefer a concrete goal for a how-to, a learning outcome for a tutorial, a subject or relationship for explanation, and the object being described for reference. Titles need not begin with the mode name.
@@ -75,7 +77,8 @@ New files are not necessarily integrated into the curated navigation simply by e
 - [ ] Existing URLs, anchors, warnings, licensing, and acknowledgments are retained or deliberately handled.
 - [ ] Technical facts have an authoritative source; defaults and capability claims were not inferred from an example.
 - [ ] Related tasks, explanations, and references have specific links, without duplicating authoritative content.
-- [ ] Code, indentation, tabs, release macros, and includes render correctly; local links and anchors resolve.
+- [ ] From a plausible entry point, the rendered navigation label, page title, opening promise, and main content agree. The reader can find the prerequisites and an appropriate finish or next destination without restarting an unrelated tutorial.
+- [ ] Code, indentation, tabs, release macros, and includes render correctly; local links and anchors resolve in the page's publishing context.
 - [ ] The PR records what was tested, the environment/release, results, and remaining uncertainties. Do not call a page cluster-tested merely because it builds.
 
 ### Mode-specific review
@@ -93,6 +96,14 @@ New files are not necessarily integrated into the curated navigation simply by e
 Keep the existing testing expectations for procedures, setup, and maintained samples: include or update automated tests as applicable to the project. Also execute tutorial and how-to routes in the stated environment when possible. If execution or automation is not available, say so explicitly in the PR and request technical validation; editorial review and server-side YAML validation do not replace behavioral tests.
 
 Authors and subject matter experts are responsible for technical correctness. Reviewers check both the reader contract and the evidence, consult the author on uncertain behavior, and request revisions rather than silently inventing missing steps or defaults. A rough but scoped draft is welcome; it should still disclose unverified claims. See [the contributor review workflow](../getting-started/becoming-a-contributor.md#workflow-overview).
+
+Keep the review handoff concise and distinguish evidence:
+
+- **Reader route and rendering:** entry link, destination, intended result, publishing context checked, and any obstacle. A reviewer following links is a simulated traversal, not an observed-user usability study.
+- **Technical sources:** component/release and authoritative references checked, with uncertain defaults or capability claims assigned to the subject matter expert.
+- **Execution and automation:** exact route or tests run, environment/release, observed results, and unexecuted branches or blockers. Syntax checks, API validation, and end-to-end execution establish different things; do not report one as another.
+
+Prioritize findings that prevent the promised result or send readers to the wrong destination. Give the owner a concrete path/section, reader consequence, and proposed correction or question. The author and reviewer should consult on substantive findings; the reviewer checks the revised page and route before approval. Disclosure of an unexecuted route does not waive maintained-sample testing requirements or establish runtime correctness.
 
 ## Branches
 

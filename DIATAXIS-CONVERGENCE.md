@@ -17,6 +17,10 @@ Seven specialist Herdr workspaces now share the experimental worktree, with excl
 
 The original five-space split balanced workloads by combining Serving and Functions. At the user's request, `w27` was renamed **Docs · Serving** and a sixth specialist space **Docs · Functions** (`w2A`) was created in the same worktree. Existing reviewed content and commit history remain intact; this change separates team ownership, not the repository or established documentation URLs. The user then requested Operations/Editorial separation: `w29` was renamed **Docs · Operations**, and **Docs · Editorial** (`w2B`) was created as the seventh specialist space. Contributor/editorial ownership transfers to `dx-editorial`; operational documentation remains with `dx-operations`. Editorial proposes cross-component changes to page owners rather than acquiring global edit authority. Independent Architecture review and the consultation loop remain unchanged. Herdr also created parent repository workspace `w24` solely for linked-worktree grouping. No unrelated pre-existing Herdr spaces were controlled.
 
+## Subsequent independent pass
+
+After separating Functions and Editorial, the user approved a second independent authoring/reader-journey pass. [Phase 2 results](DIATAXIS-PHASE-2.md) record its review/revision exchanges, final preservation checks, selected actual runtime validation, failures/recovery, and cleanup. The no-runtime-validation statements below describe the original first checkpoint; the second pass supplies separate, explicitly scoped evidence rather than retroactively changing that sign-off.
+
 ## Implemented direction
 
 - Reader-goal invitations: Learn Knative / Accomplish a task / Understand Knative / Look up details, retaining component and operator collections.

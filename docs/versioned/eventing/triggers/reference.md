@@ -27,9 +27,18 @@ nest them under `all`. These constraints follow the v1.23
 and [`ValidateOneOf` validation](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/apis/eventing/v1/trigger_validation.go).
 The abbreviated dialect snippets below illustrate fields, not complete manifests.
 
-!!! important
-    The filters described in this section are currently only supported in the Apache Kafka Broker
-    and the MTChannelBasedBroker. For other brokers, please refer to the [Legacy attribute filter](#legacy-attributes-filter).
+!!! important "Implementation support: retained claim, release scope unverified"
+    The original Trigger filtering page at the experiment baseline `c250e7f7`
+    listed support for `spec.filters` only in the Apache Kafka Broker and
+    MTChannelBasedBroker. It did not record the implementation versions for
+    that claim. The v1.23 API citations above validate expression shape and
+    validation rules, **not** a Broker capability matrix; the support claim has
+    not been revalidated for current extension releases. Identify your installed
+    [Broker implementation](../brokers/broker-types/README.md) and release, and
+    ask its platform owner for release-specific dialect support evidence before
+    changing filters. API acceptance alone does not prove implementation support.
+    Keep a working [legacy attributes filter](#legacy-attributes-filter) rather
+    than migrating to a dialect whose support has not been established.
 
 ### Example
 

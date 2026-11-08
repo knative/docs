@@ -140,7 +140,9 @@ time window, producer response, effective filters, resolved destination, and
 relevant controller/data-plane/subscriber logs. Redact credentials and event
 payloads containing sensitive data before sharing.
 
-- [Collecting Eventing logs](../observability/logging/collecting-logs.md)
+- [Read existing workload logs](../observability/logging/collecting-logs.md#read-existing-workload-logs):
+  use an existing provider or an owner-identified Pod/container. Collector
+  installation is separate platform-owner work, not the next diagnostic step.
 - [Eventing metrics reference](../observability/metrics/eventing-metrics.md)
 - [Accessing traces](../observability/accessing-traces.md), if tracing is available
 - [Channel/Subscription debugging demonstration](README.md#example), for learning

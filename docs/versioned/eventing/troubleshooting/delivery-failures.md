@@ -49,14 +49,17 @@ Do not use the Channel demonstration's Pod selectors for a different implementat
 | Symptom in receiver or implementation evidence | Next action |
 | --- | --- |
 | HTTP error response | Correlate the event ID with subscriber logs. Check the path and whether the receiver accepts the event. Hand the confirmed application error or access mismatch to its owner for correction before considering retry changes. |
+| Subscriber records receipt, but MTChannelBasedBroker v1.23 reports a non-empty response not recognized as CloudEvent | Inspect the subscriber's response status, headers, and body. In this pinned path, successful acknowledgment requires a 2xx response with an empty body or a valid CloudEvent reply; the [v1.23 Broker filter rejects unrecognized non-empty or malformed replies](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/broker/filter/filter_handler.go#L551-L583). Receipt alone does not prove acknowledgment success. Have the application owner correct the response contract, then correlate a fresh event's receipt with successful delivery evidence; do not merely increase retries. |
 | Connection failure, name resolution failure, or timeout | Check the resolved destination, Kubernetes Service endpoints/ports or Knative Service status, and applicable network/security policy. Determine whether the request reached the receiver before treating it as an application error. |
 | HTTP 429 or 503 with Retry-After | Check the configured retries and the [`retryAfterMax` feature requirements and implementation caveats](../features/delivery-retryafter.md). Header presence alone does not establish that the implementation honors it. |
 | Receiver takes longer than a configured timeout | Inspect the configured [`timeout`](../features/delivery-timeout.md) and receiver latency. This field is per HTTP request; do not assume it bounds the entire retry sequence. |
 | No receiver evidence and no dispatch error | Return to [ingress and filter checks](events-not-delivered.md#resources-are-ready-but-no-event-arrives). |
 
-Collect logs from the identified implementation and subscriber, using
-[Collecting Eventing logs](../observability/logging/collecting-logs.md). Keep the
-same event ID and time window across these checks. An error seen by the sender
+Retrieve logs already available from the identified implementation and
+subscriber using [Read existing workload logs](../observability/logging/collecting-logs.md#read-existing-workload-logs).
+Use an existing provider or an owner-identified Pod/container; installing a
+collector is separate platform-owner work, not a prerequisite for this check.
+Keep the same event ID and time window across these checks. An error seen by the sender
 does not always establish whether the receiver processed the event; preserve
 receiver evidence before deciding to resend it.
 
@@ -66,9 +69,10 @@ Inspect `spec.delivery` on the Broker and any Trigger-level delivery settings.
 Use the historical [Broker support](../reference/event-delivery.md#broker-support)
 and [Channel support](../reference/event-delivery.md#channel-support) tables as
 starting points only. Confirm field support with your installed implementation's
-release-specific documentation. Consult that documentation for override/default
-behavior too; this
-guide does not establish Trigger/Broker precedence or implementation defaults.
+release-specific documentation. For omitted fields or override/default behavior,
+use [Effective delivery settings lookup](../reference/event-delivery.md#effective-delivery-settings-lookup)
+to locate configuration references and request the responsible owner's evidence.
+This guide does not establish universal Trigger/Broker precedence or defaults.
 
 Compare the explicit retry settings with observed attempts. The API describes
 `retry` as a minimum, while v1.23's shared HTTP sender uses it as `RetryMax` and

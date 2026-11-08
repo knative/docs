@@ -4,16 +4,18 @@ components:
   - functions
   - serving
   - eventing
+hide_prev: true
+hide_next: true
 ---
 
 # Next Steps
 
-You have requested a Service, observed autoscaling, split traffic, and routed an event to a subscriber. Choose a next step based on what you want to do now.
+Choose a next step based on the exercise you completed. Quickstart introduces Services, autoscaling, traffic splitting, and event routing; the local-first Functions exercise introduces editing and invoking a Go HTTP handler. You do not need to complete both before choosing what to do next.
 
 ## Continue with a guided exercise
 
 - [Build the Bookstore after the basics](../bookstore/page-0/welcome-knative-bookstore-tutorial.md): process review events with functions and a Sequence, then store accepted reviews. The core route does not require Slack or Camel K. Read its setup requirements before reusing your cluster.
-- [Create a function project](about-knative-functions.md): install `func`, run a function locally, then deploy it if you have a suitable container registry.
+- [Write and run a Go HTTP function locally](about-knative-functions.md): install `func`, edit the generated handler, and recognize its response. No cluster or registry account is required for local execution; deployment is optional.
 
 ## Apply or understand what you tried
 
@@ -32,9 +34,11 @@ You have requested a Service, observed autoscaling, split traffic, and routed an
 - **No events arrive:** [Events do not reach a subscriber](../eventing/troubleshooting/events-not-delivered.md).
 - **Dispatch errors or dead-letter events:** [Events repeatedly fail delivery](../eventing/troubleshooting/delivery-failures.md).
 
-Keep your cluster only if you plan to continue experimenting. Otherwise, [clean it up](clean-up.md).
+If you created a disposable cluster for Quickstart or optional Functions deployment, keep it only while experimenting; otherwise [clean it up](clean-up.md). A local-only function exercise has no cluster to delete.
 
-**Previous:** [Receive an event](first-trigger.md) · **Next:** [Clean up](clean-up.md)
+**Return to your exercise:** [Quickstart event completion](first-trigger.md) · [Functions local/deployment completion](build-run-deploy-func.md)
+
+**Cleanup, if you created a cluster:** [Clean up the disposable environment](clean-up.md)
 
 [![Knative Slack Link](images/slack-button.svg)](https://slack.cncf.io/){target=_blank}
 

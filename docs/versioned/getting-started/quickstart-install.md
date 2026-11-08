@@ -21,15 +21,23 @@ When you reach **Run the Knative quickstart plugin**, use **Using kind** (`kn qu
 
 ## Next steps
 
-Check which Kubernetes context you will use before creating application resources:
+First, **inspect** the selected Kubernetes context. This block does not change it:
 
 ```bash
 kubectl config current-context
+kubectl config get-contexts
+```
+
+Confirm that the selected context is the **newly created disposable Quickstart cluster**, normally `kind-knative`, and that it is the cluster you intend to use for the lessons. If another context is selected, stop before running the next block. After identifying the correct context from your installation output, select it with `kubectl config use-context <quickstart-context>` and repeat the inspection. Do not select a shared or production cluster. See [CLI cluster-access guidance](../client/connect-to-cluster.md) if you cannot identify the intended context.
+
+**Only after approving the context**, set its default namespace and inspect the installed components:
+
+```bash
 kubectl config set-context --current --namespace=default
 kubectl get pods -n knative-serving
 kubectl get pods -n knative-eventing
 ```
 
-The context should be the newly created kind Quickstart cluster, normally `kind-knative`. If it points to another cluster, switch to the Quickstart context before continuing. Wait for the Serving and Eventing pods to become Ready; pod names vary by release.
+Wait for the Serving and Eventing pods to become Ready before continuing; pod names vary by release.
 
 **Previous:** [Quickstart route](README.md) · **Next:** [Deploy your first Service](first-service.md)

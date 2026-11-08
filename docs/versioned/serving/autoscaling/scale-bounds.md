@@ -7,7 +7,9 @@ function: reference
 
 # Configuring scale bounds
 
-You can configure upper and lower bounds to control autoscaling behavior.
+This reference lists scale bounds and related autoscaling settings. Examples illustrate the settings; they are not an installation or configuration workflow.
+
+Operator fragments use `operator.knative.dev/v1beta1`, the served API in the [Operator v1.23.0 KnativeServing CRD](https://github.com/knative/operator/blob/knative-v1.23.0/config/crd/bases/operator.knative.dev_knativeservings.yaml){target=_blank}. Merge the intended fields into your existing resource in its actual namespace, using the [ConfigMap mapping reference](../../install/operator/configuration-reference.md#configmap-mapping) to select the entry and the [generic Serving Operator apply/verify workflow](../../install/operator/configuring-serving-cr.md#apply-and-verify-a-configuration-change) to apply it and inspect `config-autoscaler`, not the separate domain example. Check the installed CRD for other Operator releases.
 
 You can also specify the initial scale that a Revision is scaled to immediately after creation.
 This can be a default configuration for all Revisions, or for a specific Revision using an annotation.
@@ -57,7 +59,7 @@ Knative will attempt to never have less than this number of replicas at any one 
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -118,7 +120,7 @@ When `max-scale-limit` is set to a positive value, a revision with a max scale a
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -178,7 +180,7 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -269,7 +271,7 @@ delay period.
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -322,7 +324,7 @@ The stable window defines the sliding time window over which metrics are average
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
