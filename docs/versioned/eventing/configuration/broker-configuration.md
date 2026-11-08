@@ -179,7 +179,10 @@ You can configure the `deadLetterSink` delivery parameter so that if an event fa
 
 ### Retries
 
-You can set a minimum number of times that the delivery must be retried before the event is sent to the dead letter sink, by configuring the `retry` delivery parameter with an integer value.
+Set `retry` to a nonnegative integer. The DeliverySpec API describes it as the
+minimum number of retries the sender should attempt before moving an event to
+the dead-letter sink, not a universal guarantee of an exact attempt count. See
+[API and implementation retry semantics](../reference/event-delivery.md#retry-and-backoff-semantics).
 
 ### Back off delay
 
@@ -187,7 +190,10 @@ You can set the `backoffDelay` delivery parameter to specify the time delay befo
 
 ### Back off policy
 
-The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either linear or exponential. When using the linear back off policy, the back off delay is the time interval specified between retries. When using the exponential backoff policy, the back off delay is equal to `backoffDelay*2^<numberOfRetries>`.
+Set `backoffPolicy` to `linear` or `exponential`. The
+[Event delivery reference](../reference/event-delivery.md#retry-and-backoff-semantics)
+describes the v1.23 API formulas and shared HTTP sender's behavior. Do not assume
+a fixed interval for linear backoff or a cluster-tested timing guarantee.
 
 ## Integrating Istio with Knative Brokers
 

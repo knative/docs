@@ -2,7 +2,7 @@
 audience: developer
 components:
   - eventing
-function: how to
+function: how-to
 ---
 
 # Creating an ApiServerSource object

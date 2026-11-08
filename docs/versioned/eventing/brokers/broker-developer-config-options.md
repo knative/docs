@@ -17,7 +17,7 @@ function: reference
 - You can set the `Backoff policies` to define the delay strategy between retry attempts. It can be `exponential` or `linear`.
 - You can set the `Backoff delay` to specify the initial delay before retrying, using the ISO 8601 duration format.
 - You can specify the number of retry attempts before sending the event to the dead-letter sink using the `retry` configuration.
-- `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
+- `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For field definitions and implementation support, see the [Event delivery reference](../reference/event-delivery.md). To configure and verify a dead-letter route, use [Handling Delivery Failure](../event-delivery.md).
 
 ###  Advanced broker class options
 When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, by default the `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.

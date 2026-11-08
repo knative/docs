@@ -2,13 +2,32 @@
 audience: developer
 components:
   - eventing
-function: how-to
+function: tutorial
 ---
 
 # Debugging Knative Eventing
 
-This is an evolving document on how to debug a non-working Knative Eventing
-setup.
+## Start with your symptom
+
+For an **existing Broker/Trigger workload**, use the symptom-led guides. You do
+not need to deploy the example below:
+
+- [Events do not reach a subscriber](events-not-delivered.md): check readiness,
+  ingress, effective filters, and the resolved subscriber.
+- [Events repeatedly fail delivery](delivery-failures.md): investigate dispatch
+  errors, retries, and the dead-letter path.
+
+## Learn with a Channel/Subscription demonstration
+
+The rest of this page is a debugging tutorial using a demonstration topology,
+not a generic repair procedure for every Broker implementation. It retains the
+original commands and URLs for readers learning resource-by-resource inspection.
+
+!!! warning "Legacy demonstration awaiting revalidation"
+    The example includes implementation-specific selectors, historical log
+    output, and an Istio-specific Service claim. These are retained rather than
+    generalized to current clusters. Validate them against your installed
+    version; no cluster execution has been performed for this editorial split.
 
 ## Audience
 
@@ -18,7 +37,10 @@ know roughly how things fit together.
 
 ## Prerequisites
 
-1. Setup [Knative Eventing and an Eventing-contrib resource](../README.md).
+1. Set up [Knative Eventing](../README.md) with ApiServerSource and
+   InMemoryChannel support for the example below.
+1. Use a disposable environment and inspect [example.yaml](example.yaml) before
+   applying it. This demonstration creates resources in `knative-debug`.
 
 ## Example
 

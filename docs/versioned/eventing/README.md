@@ -30,4 +30,16 @@ Examples of supported Knative Eventing use cases:
 
 ## Next steps
 
-- You can install Knative Eventing by using the methods listed on the [installation page](../install/README.md).
+Choose a route based on what you need now:
+
+- **Set up Eventing:** use the [installation page](../install/README.md).
+- **Understand routing:** read [Brokers and Trigger routing](brokers/README.md).
+- **Route events:** [create a Broker](brokers/create-broker.md), then
+  [route matching events to a subscriber](triggers/README.md).
+- **Handle failed delivery:** [configure and test retries and a dead-letter sink](event-delivery.md).
+- **Look up details:** use the [Trigger filtering reference](triggers/reference.md),
+  [Event delivery reference](reference/event-delivery.md), or
+  [Eventing API reference](reference/eventing-api.md).
+- **Repair an existing workload:** start with
+  [events not reaching a subscriber](troubleshooting/events-not-delivered.md) or
+  [events repeatedly failing delivery](troubleshooting/delivery-failures.md).
