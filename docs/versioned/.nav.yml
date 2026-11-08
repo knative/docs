@@ -1,376 +1,276 @@
 nav:
-###############################################################################
-    # Concepts
-###############################################################################
-    - Documentation home: README.md
-###############################################################################
-    # Getting started
-###############################################################################
-    - Learn Knative:
-        - learn/README.md
-        - Tutorial catalog: getting-started/tutorial.md
-        - Quickstart:
-          - Tutorial introduction: getting-started/README.md
-          - Install Knative using quickstart: getting-started/quickstart-install.md
-          - Knative Serving:
-            - Deploying a Knative Service: getting-started/first-service.md
-            - Autoscaling: getting-started/first-autoscale.md
-            - Traffic splitting: getting-started/first-traffic-split.md
-          - Knative Eventing:
-            - Getting Started: getting-started/getting-started-eventing.md
-            - Inspect the Quickstart Broker: getting-started/first-broker.md
-            - Using a Knative Service as a source: getting-started/first-source.md
-            - Using Triggers and sinks: getting-started/first-trigger.md
-          - What's Next?: getting-started/next-steps.md
-          - Clean Up: getting-started/clean-up.md
-        - Functions local-first exercise:
-          - Functions learning route: getting-started/about-knative-functions.md
-          - Install func: getting-started/install-func.md
-          - Create and edit a Go HTTP function: getting-started/create-a-function.md
-          - Run locally and optionally deploy: getting-started/build-run-deploy-func.md
-        - Bookstore after the basics:
-          - Bookstore learning route: bookstore/page-0/welcome-knative-bookstore-tutorial.md
-          - Core tutorial:
-            - Environment setup: bookstore/page-0.5/environment-setup.md
-            - 1 - Send a review to the Broker: bookstore/page-1/send-review-comment-to-broker.md
-            - 2 - Deploy sentiment analysis: bookstore/page-2/sentiment-analysis-service-for-bookstore-reviews.md
-            - 3 - Deploy the inappropriate-language filter: bookstore/page-3/create-bad-word-filter-service.md
-            - 4 - Connect functions with a Sequence: bookstore/page-4/create-sequence-to-streamline-ML-workflows.md
-            - 5 - Deploy the database: bookstore/page-5/deploy-database-service.md
-            - 6 - Route accepted reviews to the database: bookstore/page-6/advanced-event-filtering.md
-          - Optional extensions:
-            - "Slack/Camel K integration recipe (pending runtime validation)": bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
-            - Extra challenges: bookstore/extra-challenge/README.md
-          - Setup alternatives: bookstore/page-0.5/setup-options.md
-          - Disclaimer, acknowledgments, and licenses: bookstore/disclaimer/README.md
-        - Supporting YAML examples: getting-started/yaml-examples.md
-###############################################################################
-    # Reader-goal indexes link canonical pages; component trees retain context.
-    # Accepted destinations retained; phase-2 Functions/Editorial manifests pending.
-###############################################################################
-    - Accomplish a task: how-to/README.md
-    - Understand Knative: explanation/README.md
-    - Look up details: reference/README.md
-###############################################################################
-    # Functions
-###############################################################################
-    - Functions:
-      - functions/README.md
-      - Explanation:
-        - How Knative Functions fits together: functions/about-functions.md
-      - How-to guides:
-        - Installing Knative Functions: functions/install-func.md
-        - Creating functions: functions/creating-functions.md
-        - Building functions: functions/building-functions.md
-        - Running functions locally: functions/running-functions.md
-        - Deploying functions: functions/deploying-functions.md
-        - Invoking functions: functions/invoking-functions.md
-        - Optional event subscription:
-          - Subscribe to CloudEvents (optional): functions/subscribing-functions.md
-        - Using language packs: functions/language-packs.md
-###############################################################################
-    # Serving
-###############################################################################
-    - Serving:
-      - serving/README.md
-      - Troubleshooting:
-        - Debugging application issues: serving/troubleshooting/debugging-application-issues.md
-      - Explanation:
-        - Architecture: serving/architecture.md
-        - Request flow: serving/request-flow.md
-        - Services and configuration: serving/services/README.md
-        - About Revisions: serving/revisions/README.md
-        - About load balancing: serving/load-balancing/README.md
-      - Autoscaling:
-        - serving/autoscaling/README.md
-        - How-to guides:
-          - Set a concurrency target for a service: serving/autoscaling/configure-concurrency.md
-        - Explanation:
-          - How concurrency affects autoscaling: serving/autoscaling/concurrency-behavior.md
-        - Reference:
-          - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
-          - Autoscaling metrics: serving/autoscaling/autoscaling-metrics.md
-          - Target annotations: serving/autoscaling/autoscaling-targets.md
-          - Scale-to-zero settings: serving/autoscaling/scale-to-zero.md
-          - Concurrency settings: serving/autoscaling/concurrency.md
-          - Requests-per-second targets: serving/autoscaling/rps-target.md
-          - Scale bounds: serving/autoscaling/scale-bounds.md
-          - KPA-specific settings: serving/autoscaling/kpa-specific.md
-        - Go autoscaling load experiment: serving/autoscaling/autoscale-go/README.md
-      # Serving - developer docs
-      - How-to guides:
-        - Services:
-          - Deploy an HTTP container as a Knative Service: serving/services/creating-services.md
-          - Configuring private Services: serving/services/private-services.md
-          - Configuring ingress class: serving/services/ingress-class.md
-          - Configuring certificate class: serving/services/certificate-class.md
-          - Configuring custom domains: serving/services/custom-domains.md
-          - Using a custom TLS certificate for DomainMapping: serving/services/custom-tls-certificate-domain-mapping.md
-          # TODO: Add security section to docs?
-          - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
-          - Configuring probes: serving/services/configure-probing.md
-          - Configuring HTTP: serving/services/http-protocol.md
-          - Performing Dry Run: serving/dryrun.md
-          - Volume Support: serving/services/storage.md
-        - Revisions:
-          - Garbage Collection: serving/revisions/revision-developer-config-options.md
-        - Traffic management: serving/traffic-management.md
-        - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
-        - Tag resolution: serving/tag-resolution.md
-        - Deploying from private registries: serving/deploying-from-private-registry.md
-        - Load balancing:
-          - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
-          - Configuring Activator capacity: serving/load-balancing/activator-capacity.md
-      # Serving - Application Security
-      - Application security:
-        - Secure Pod Defaults: serving/app-security/secure-pod-defaults.md
-      # Serving - observability
-      - Observability:
-        - Collecting metrics: serving/observability/metrics/collecting-metrics.md
-    # Serving reference docs
-      - Reference:
-        - Serving API: serving/reference/serving-api.md
-        - Deployment-to-Service mapping: serving/convert-deployment-to-knative-service.md
-        - Serving metrics: serving/observability/metrics/serving-metrics.md
-###############################################################################
-    # Eventing
-###############################################################################
-    - Eventing:
-      - eventing/README.md
-      - Troubleshooting:
-        - Events do not reach a subscriber: eventing/troubleshooting/events-not-delivered.md
-        - Events repeatedly fail delivery: eventing/troubleshooting/delivery-failures.md
-        - Overview and Channel debugging demonstration: eventing/troubleshooting/README.md
-      - Feature-dependent security:
-        - Transport encryption: eventing/features/transport-encryption.md
-        - Authorization: eventing/features/authorization.md
-      - Explanation:
-        - Event Mesh: eventing/concepts/event-mesh.md
-        - Duck types: eventing/concepts/duck-typing.md
-      # Source/sink/flow pages mix modes; do not relabel the whole catalog as explanation.
-      - Resources and integrations:
-        - Brokers:
-          - About Brokers: eventing/brokers/README.md
-          - Broker types:
-            - Available Broker types: eventing/brokers/broker-types/README.md
-            # add default IMC broker page, page explaining broker types
-            - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
-            - Apache Kafka:
-              - Knative Broker for Apache Kafka: eventing/brokers/broker-types/kafka-broker/README.md
-            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
-          - Developer configuration options: eventing/brokers/broker-developer-config-options.md
-        - Event sources:
-          - About event sources: eventing/sources/README.md
-          - ApiServerSource:
-            - About ApiServerSource: eventing/sources/apiserversource/README.md
-            - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
-          - Apache Kafka Source: eventing/sources/kafka-source/README.md
-          - PingSource:
-            - Creating a PingSource object: eventing/sources/ping-source/README.md
-          - IntegrationSource:
-            - About IntegrationSource: eventing/sources/integration-source/README.md
-            - AWS DDB Streams: eventing/sources/integration-source/aws_ddbstreams.md
-            - AWS S3: eventing/sources/integration-source/aws_s3.md
-            - AWS SQS: eventing/sources/integration-source/aws_sqs.md
-            - Generic Timer: eventing/sources/integration-source/timer.md
-          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
-          - RedisStreamSource:
-            - About RedisStreamSource: eventing/sources/redis/README.md
-            - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
-        - Channels:
-          - About Channels: eventing/channels/README.md
-          - Channel types and defaults: eventing/channels/channel-types-defaults.md
-          - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
-          - Available Channels: eventing/channels/channels-crds.md
-        - Subscriptions: eventing/channels/subscriptions.md
-        - Event sinks:
-          - About sinks: eventing/sinks/README.md
-          - JobSink: eventing/sinks/job-sink.md
-          - Apache Kafka Sink: eventing/sinks/kafka-sink.md
-          - IntegrationSink: 
-            - About IntegrationSink: eventing/sinks/integration-sink/README.md
-            - AWS S3 Sink: eventing/sinks/integration-sink/aws_s3.md
-            - AWS SNS Sink: eventing/sinks/integration-sink/aws_sns.md
-            - AWS SQS Sink: eventing/sinks/integration-sink/aws_sqs.md
-            - Generic Logger Sink: eventing/sinks/integration-sink/logger.md
-        - Flows:
-          - About flows: eventing/flows/README.md
-          - Parallel: eventing/flows/parallel.md
-          - Sequence:
-            - About Sequences: eventing/flows/sequence/README.md
-            - Displaying Sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
-            - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
-            - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
-            - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
-        - Event Transformations:
-            - About Event Transformations: eventing/transforms/README.md
-            - Event Transformations for JSON with JSONata: eventing/transforms/event-transform-jsonata.md
-          # about triggers docs
-        #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
-        #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
-      # Eventing - developer docs
-      - How-to guides:
-        - Creating a Broker: eventing/brokers/create-broker.md
-        - Route events with a Trigger: eventing/triggers/README.md
-        - Configure retries and a dead-letter sink: eventing/event-delivery.md
-        # BYO event source
-        - Custom event sources:
-          - Custom event sources overview: eventing/custom-event-source/README.md
-          - Create a custom event source:
-            - Creating an event source overview: eventing/custom-event-source/custom-event-source/README.md
-            - Using the Knative sample repository:
-              - Configure the sample: eventing/custom-event-source/custom-event-source/sample-repo.md
-              - Create a controller: eventing/custom-event-source/custom-event-source/controller.md
-              - Create a receive adapter: eventing/custom-event-source/custom-event-source/receive-adapter.md
-            - Publishing an event source to your cluster: eventing/custom-event-source/custom-event-source/publish-event-source.md
-          - SinkBinding:
-            - About SinkBinding: eventing/custom-event-source/sinkbinding/README.md
-            - Create a SinkBinding: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
-          - ContainerSource:
-            - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
-        - Event registry:
-          - Using the Event registry: eventing/event-registry/README.md
-        - Sugar controller: eventing/sugar/README.md
-      # Eventing - observability
-      - Observability:
-        - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
-      - FAQ: eventing/faq/README.md
-    # Eventing reference docs
-      - Reference:
-        - Eventing API: eventing/reference/eventing-api.md
-        - Trigger filtering and annotations: eventing/triggers/reference.md
-        - Event delivery fields and support: eventing/reference/event-delivery.md
-        - Eventing metrics: eventing/observability/metrics/eventing-metrics.md
-        - Source and binding reference:
-          - ApiServerSource: eventing/sources/apiserversource/reference.md
-          - PingSource: eventing/sources/ping-source/reference.md
-          - ContainerSource: eventing/custom-event-source/containersource/reference.md
-          - SinkBinding: eventing/custom-event-source/sinkbinding/reference.md
-###############################################################################
-    # CLI
-###############################################################################
-    - CLI tools:
-      - client/README.md
-      - How-to guides:
-        - Installing the Knative CLI: client/install-kn.md
-        - Connect CLI tools to a cluster: client/connect-to-cluster.md
-      - Configuration and plugins:
-        - Customizing kn: client/configure-kn.md
-        - kn plugins: client/kn-plugins.md
-###############################################################################
-    # Administration
-###############################################################################
-    - Operate Knative:
-      - Administrator overview: admin/admin-overview.md
-      - Explanation:
-        - Choosing an installation method: install/installation-methods.md
-      - Install and integrate:
-        - Overview: install/README.md
-        # YAML Installation
-        - Install Knative with YAML:
-          - YAML-based installation: install/yaml-install/README.md
-          - Install Knative Serving:
-            - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
-          - Install Knative Eventing:
-            - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
-        # Operator Installation
-        - Install with Knative Operator:
-          - Install by using the Knative Operator: install/operator/knative-with-operators.md
-          - Install by using the Knative Operator CLI plugin: install/operator/knative-with-operator-cli.md
-          - Deploy Knative to a remote cluster: install/operator/multi-cluster-deployment.md
-        - Installing plugins:
-          - Install Istio for Knative: install/installing-istio.md
-          - Install Kafka for Knative: install/eventing/kafka-install.md
-          - Install RabbitMQ for Knative: install/eventing/rabbitmq-install.md
-          # N.B. this duplicates an "eventing" topic above, cross-referenced here.
-          - Eventing Channels: eventing/channels/channels-crds.md
-        - Integrations:
-          - Install cert-manager: install/installing-cert-manager.md
-        # Vendor list
-        - Using a Knative-based offering: install/knative-offerings.md
-      - Configure:
-        - Operator-managed installation:
-          - Change and verify a ConfigMap value: install/operator/configuring-with-operator.md
-          - Serving configuration goals: install/operator/configuring-serving-cr.md
-          - Eventing configuration goals: install/operator/configuring-eventing-cr.md
-        - Working with ConfigMaps: admin/editing-configmaps.md
-        - Configure high-availability components: serving/config-ha.md
-        - Exclude namespaces from the Knative webhook: serving/webhook-customizations.md
-        - Networking Options:
-          - Configure Knative networking: serving/config-network-adapters.md
-          - Configure Istio's ingress gateway: serving/setting-up-custom-ingress-gateway.md
-          - Configure domain names: serving/using-a-custom-domain.md
-          - Istio Authorization: serving/istio-authorization.md
-        - Serving configuration:
-          - Configure Deployment resources: serving/configuration/deployment.md
-          - Configure gradual rollout of traffic to Revisions: serving/configuration/rolling-out-latest-revision-configmap.md
-          - Config Revision Garbage Collection: serving/revisions/revision-admin-config-options.md
-          - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
-          - Secure Pod Defaults: serving/configuration/secure-pod-defaults.md
-          - Serving encryption configuration:
-            - Overview: serving/encryption/encryption-overview.md
-            - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
-            - Configure external domain encryption: serving/encryption/external-domain-tls.md
-            - Configure cluster-local domain encryption: serving/encryption/cluster-local-domain-tls.md
-            - Configure Knative system-internal encryption: serving/encryption/system-internal-tls.md
-        - Eventing configuration:
-          - Configure Broker defaults: eventing/configuration/broker-configuration.md
-          - Configure Channel defaults: eventing/configuration/channel-configuration.md
-          - Configure Apache Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
-          - Configure Kafka Broker features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
-          - Configure event source defaults: eventing/configuration/sources-configuration.md
-          - Configure Sugar Controller: eventing/configuration/sugar-configuration.md
-          - Configure KEDA Autoscaling of Knative Kafka Resources: eventing/configuration/keda-configuration.md
-        - Flagged features:
-          - Serving Features: serving/configuration/feature-flags.md
-          - Eventing Features:
-            - Configuring Features: eventing/features/README.md
-            - DeliverySpec.Timeout field: eventing/features/delivery-timeout.md
-            - DeliverySpec.RetryAfterMax field: eventing/features/delivery-retryafter.md
-            - New APIServerSource Filters: eventing/features/new-apiserversource-filters.md
-            - KReference.Group field: eventing/features/kreference-group.md
-            - Knative reference mapping: eventing/features/kreference-mapping.md
-            - EventType auto creation: eventing/features/eventtype-auto-creation.md
-            - Sender Identity: eventing/features/sender-identity.md
-            - Eventing with Istio: eventing/features/istio-integration.md
-            - Cross Namespace Event Links: eventing/features/cross-namespace-event-links.md
-      - Securing Knative:
-        - Security Disclosure: reference/security/README.md
-        - Threat Model: reference/security/threat-model.md
-        - Verifying Knative Images: reference/security/verifying-images.md
-        - Verifying Knative Binaries: reference/security/verifying-cli.md
-      # TODO: add some observability documentation
-      # Component symptom guides and metrics have one canonical nav location.
-      # Operator shortcuts to them remain on the global task index and home.
-      - Observe:
-        - Serving Request traces: serving/observability/accessing-traces.md
-        - Collecting Serving logs: serving/observability/logging/collecting-logs.md
-        - Collecting Eventing logs: eventing/observability/logging/collecting-logs.md
-        - Configuring Serving logging: serving/observability/logging/config-logging.md
-        - Configuring Serving Request logging: serving/observability/logging/request-logging.md
-        - Configuring Eventing logging: eventing/observability/logging/config-logging.md
-        - Accessing CloudEvent traces: eventing/observability/accessing-traces.md
-      # Upgrading Knative
-      - Upgrading and removing:
-        - About upgrading Knative: install/upgrade/README.md
-        - Checking your Knative version: install/upgrade/check-install-version.md
-        - Upgrading with kubectl: install/upgrade/upgrade-installation.md
-        - Upgrading with the Knative Operator: install/upgrade/upgrade-installation-with-operator.md
-        - Uninstalling Knative: install/uninstall.md
-      # Troubleshooting
-      - Troubleshooting Knative: install/troubleshooting.md
-      - Installation and Operator reference:
-        - Installation requirements: install/requirements.md
-        - Installation extensions catalog: install/extensions.md
-        - Operator configuration field map: install/operator/configuration-reference.md
-        - Operator-supported component versions: install/operator/supported-versions.md
-        - Serving installation files: install/yaml-install/serving/serving-installation-files.md
-        - Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
-###############################################################################
-    # Code samples
-###############################################################################
-    - Code samples:
-      - Code sample overview: samples/README.md
-      - Serving code samples: samples/serving.md
-      - Eventing code samples: samples/eventing.md
+  - Docs home: README.md
 
+  - Get started:
+      - learn/README.md
+      - Quickstart:
+          - Introduction: getting-started/README.md
+          - Install Quickstart: getting-started/quickstart-install.md
+          - Deploy a Service: getting-started/first-service.md
+          - Autoscaling: getting-started/first-autoscale.md
+          - Split traffic: getting-started/first-traffic-split.md
+          - Try Eventing: getting-started/getting-started-eventing.md
+          - Inspect the Broker: getting-started/first-broker.md
+          - Send an event: getting-started/first-source.md
+          - Receive an event: getting-started/first-trigger.md
+          - Next steps: getting-started/next-steps.md
+          - Clean up: getting-started/clean-up.md
+      - Functions tutorial:
+          - Introduction: getting-started/about-knative-functions.md
+          - Install func: getting-started/install-func.md
+          - Create and edit a function: getting-started/create-a-function.md
+          - Run and optionally deploy: getting-started/build-run-deploy-func.md
+      - Bookstore core:
+          - Introduction: bookstore/page-0/welcome-knative-bookstore-tutorial.md
+          - Environment setup: bookstore/page-0.5/environment-setup.md
+          - 1 - Send a review: bookstore/page-1/send-review-comment-to-broker.md
+          - 2 - Sentiment analysis: bookstore/page-2/sentiment-analysis-service-for-bookstore-reviews.md
+          - 3 - Filter reviews: bookstore/page-3/create-bad-word-filter-service.md
+          - 4 - Connect a Sequence: bookstore/page-4/create-sequence-to-streamline-ML-workflows.md
+          - 5 - Deploy the database: bookstore/page-5/deploy-database-service.md
+          - 6 - Store accepted reviews: bookstore/page-6/advanced-event-filtering.md
+      - Bookstore optional:
+          - Slack/Camel K recipe: bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
+          - Extra challenges: bookstore/extra-challenge/README.md
+      - Support:
+          - Tutorial catalog: getting-started/tutorial.md
+          - Quickstart YAML examples: getting-started/yaml-examples.md
+          - Bookstore setup alternatives: bookstore/page-0.5/setup-options.md
+          - Bookstore disclaimer and licenses: bookstore/disclaimer/README.md
+          - CLI tools: client/README.md
+          - Install kn: client/install-kn.md
+          - Connect CLI tools: client/connect-to-cluster.md
+          - Customize kn: client/configure-kn.md
+          - kn plugins: client/kn-plugins.md
+          - Code samples: samples/README.md
+          - Serving samples: samples/serving.md
+          - Eventing samples: samples/eventing.md
+
+  - Functions:
+      - functions/README.md
+      - Functions model: functions/about-functions.md
+      - Install func: functions/install-func.md
+      - Create a project: functions/creating-functions.md
+      - Build and publish: functions/building-functions.md
+      - Run locally: functions/running-functions.md
+      - Deploy: functions/deploying-functions.md
+      - Invoke: functions/invoking-functions.md
+      - Subscribe to events (optional): functions/subscribing-functions.md
+      - Language packs: functions/language-packs.md
+
+  - Serving:
+      - serving/README.md
+      - Architecture: serving/architecture.md
+      - Serving API: serving/reference/serving-api.md
+      - Services:
+          - Services and configuration: serving/services/README.md
+          - Deploy a container: serving/services/creating-services.md
+          - Deployment mapping: serving/convert-deployment-to-knative-service.md
+          - Private services: serving/services/private-services.md
+          - Private image registries: serving/deploying-from-private-registry.md
+          - Ingress class: serving/services/ingress-class.md
+          - Certificate class: serving/services/certificate-class.md
+          - Custom domains: serving/services/custom-domains.md
+          - DomainMapping certificates: serving/services/custom-tls-certificate-domain-mapping.md
+          - Requests and limits: serving/services/configure-requests-limits-services.md
+          - Probes: serving/services/configure-probing.md
+          - HTTP protocols: serving/services/http-protocol.md
+          - Dry run: serving/dryrun.md
+          - Volumes: serving/services/storage.md
+          - Secure pod defaults: serving/app-security/secure-pod-defaults.md
+      - Autoscaling:
+          - Overview: serving/autoscaling/README.md
+          - Set a concurrency target: serving/autoscaling/configure-concurrency.md
+          - Concurrency behavior: serving/autoscaling/concurrency-behavior.md
+          - Concurrency settings: serving/autoscaling/concurrency.md
+          - Metrics: serving/autoscaling/autoscaling-metrics.md
+          - Target annotations: serving/autoscaling/autoscaling-targets.md
+          - Scale to zero: serving/autoscaling/scale-to-zero.md
+          - Scale bounds: serving/autoscaling/scale-bounds.md
+          - Autoscaler types: serving/autoscaling/autoscaler-types.md
+          - RPS targets: serving/autoscaling/rps-target.md
+          - KPA settings: serving/autoscaling/kpa-specific.md
+          - Go load experiment: serving/autoscaling/autoscale-go/README.md
+      - Revisions and traffic:
+          - Revisions: serving/revisions/README.md
+          - Revision retention: serving/revisions/revision-developer-config-options.md
+          - Traffic management: serving/traffic-management.md
+          - Gradual rollout: serving/rolling-out-latest-revision.md
+          - Tag resolution: serving/tag-resolution.md
+      - Request routing:
+          - Request flow: serving/request-flow.md
+          - Load balancing: serving/load-balancing/README.md
+          - Target burst capacity: serving/load-balancing/target-burst-capacity.md
+          - Activator capacity: serving/load-balancing/activator-capacity.md
+      - Observe and troubleshoot:
+          - Application issues: serving/troubleshooting/debugging-application-issues.md
+          - Collect metrics: serving/observability/metrics/collecting-metrics.md
+          - Metrics catalog: serving/observability/metrics/serving-metrics.md
+          - Collect logs: serving/observability/logging/collecting-logs.md
+          - Configure logging: serving/observability/logging/config-logging.md
+          - Request logging: serving/observability/logging/request-logging.md
+          - Request traces: serving/observability/accessing-traces.md
+
+  - Eventing:
+      - eventing/README.md
+      - Eventing API: eventing/reference/eventing-api.md
+      - Event Mesh: eventing/concepts/event-mesh.md
+      - Duck types: eventing/concepts/duck-typing.md
+      - Brokers and Triggers:
+          - Brokers: eventing/brokers/README.md
+          - Create a Broker: eventing/brokers/create-broker.md
+          - Broker implementations: eventing/brokers/broker-types/README.md
+          - Channel-based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
+          - Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
+          - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
+          - Broker configuration: eventing/brokers/broker-developer-config-options.md
+          - Route events: eventing/triggers/README.md
+          - Trigger filters: eventing/triggers/reference.md
+          - Configure delivery failure handling: eventing/event-delivery.md
+          - Delivery settings: eventing/reference/event-delivery.md
+      - Sources:
+          - Source catalog: eventing/sources/README.md
+          - ApiServerSource: eventing/sources/apiserversource/README.md
+          - Create an ApiServerSource: eventing/sources/apiserversource/getting-started.md
+          - ApiServerSource fields: eventing/sources/apiserversource/reference.md
+          - Kafka source: eventing/sources/kafka-source/README.md
+          - Create a PingSource: eventing/sources/ping-source/README.md
+          - PingSource fields: eventing/sources/ping-source/reference.md
+          - IntegrationSource: eventing/sources/integration-source/README.md
+          - DynamoDB streams: eventing/sources/integration-source/aws_ddbstreams.md
+          - S3 source: eventing/sources/integration-source/aws_s3.md
+          - SQS source: eventing/sources/integration-source/aws_sqs.md
+          - Timer source: eventing/sources/integration-source/timer.md
+          - RabbitMQ source: eventing/sources/rabbitmq-source/README.md
+          - RedisStreamSource: eventing/sources/redis/README.md
+          - Create a RedisStreamSource: eventing/sources/redis/getting-started.md
+          - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
+          - ContainerSource fields: eventing/custom-event-source/containersource/reference.md
+          - SinkBinding: eventing/custom-event-source/sinkbinding/README.md
+          - Create a SinkBinding: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
+          - SinkBinding fields: eventing/custom-event-source/sinkbinding/reference.md
+      - Custom sources:
+          - Overview: eventing/custom-event-source/README.md
+          - Create a custom source: eventing/custom-event-source/custom-event-source/README.md
+          - Configure the sample: eventing/custom-event-source/custom-event-source/sample-repo.md
+          - Create a controller: eventing/custom-event-source/custom-event-source/controller.md
+          - Create a receive adapter: eventing/custom-event-source/custom-event-source/receive-adapter.md
+          - Publish the source: eventing/custom-event-source/custom-event-source/publish-event-source.md
+      - Sinks:
+          - Sink catalog: eventing/sinks/README.md
+          - JobSink: eventing/sinks/job-sink.md
+          - Kafka sink: eventing/sinks/kafka-sink.md
+          - IntegrationSink: eventing/sinks/integration-sink/README.md
+          - S3 sink: eventing/sinks/integration-sink/aws_s3.md
+          - SNS sink: eventing/sinks/integration-sink/aws_sns.md
+          - SQS sink: eventing/sinks/integration-sink/aws_sqs.md
+          - Logger sink: eventing/sinks/integration-sink/logger.md
+      - Channels and subscriptions:
+          - Channels: eventing/channels/README.md
+          - Channel defaults: eventing/channels/channel-types-defaults.md
+          - Create a default Channel: eventing/channels/create-default-channel.md
+          - Channel implementations: eventing/channels/channels-crds.md
+          - Subscriptions: eventing/channels/subscriptions.md
+      - Flows and transformations:
+          - Flows: eventing/flows/README.md
+          - Parallel: eventing/flows/parallel.md
+          - Sequences: eventing/flows/sequence/README.md
+          - Sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+          - Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+          - Produce additional events: eventing/flows/sequence/sequence-terminal/README.md
+          - Sequence with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
+          - Transformations: eventing/transforms/README.md
+          - JSONata: eventing/transforms/event-transform-jsonata.md
+      - Security and features:
+          - Feature configuration: eventing/features/README.md
+          - Transport encryption: eventing/features/transport-encryption.md
+          - Sender identity: eventing/features/sender-identity.md
+          - Authorization: eventing/features/authorization.md
+          - Delivery timeout: eventing/features/delivery-timeout.md
+          - Retry-After: eventing/features/delivery-retryafter.md
+          - ApiServerSource filters: eventing/features/new-apiserversource-filters.md
+          - Reference groups: eventing/features/kreference-group.md
+          - Reference mapping: eventing/features/kreference-mapping.md
+          - EventType creation: eventing/features/eventtype-auto-creation.md
+          - Istio integration: eventing/features/istio-integration.md
+          - Cross-namespace links: eventing/features/cross-namespace-event-links.md
+      - Observe and troubleshoot:
+          - Events not arriving: eventing/troubleshooting/events-not-delivered.md
+          - Delivery failures: eventing/troubleshooting/delivery-failures.md
+          - Channel debugging example: eventing/troubleshooting/README.md
+          - Collect metrics: eventing/observability/metrics/collecting-metrics.md
+          - Metrics catalog: eventing/observability/metrics/eventing-metrics.md
+          - Collect logs: eventing/observability/logging/collecting-logs.md
+          - Configure logging: eventing/observability/logging/config-logging.md
+          - Event traces: eventing/observability/accessing-traces.md
+      - Event registry: eventing/event-registry/README.md
+      - Sugar controller: eventing/sugar/README.md
+      - FAQ: eventing/faq/README.md
+
+  - Install & operate:
+      - install/README.md
+      - Administrator overview: admin/admin-overview.md
+      - Installation:
+          - Requirements: install/requirements.md
+          - Installation methods: install/installation-methods.md
+          - YAML installation: install/yaml-install/README.md
+          - Install Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
+          - Install Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
+          - Serving installation files: install/yaml-install/serving/serving-installation-files.md
+          - Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
+          - Install the Operator: install/operator/knative-with-operators.md
+          - Install with the Operator CLI: install/operator/knative-with-operator-cli.md
+          - Remote clusters: install/operator/multi-cluster-deployment.md
+      - Operator:
+          - Managed configuration: install/operator/configuring-with-operator.md
+          - Serving custom resource: install/operator/configuring-serving-cr.md
+          - Eventing custom resource: install/operator/configuring-eventing-cr.md
+          - Configuration field map: install/operator/configuration-reference.md
+          - Bundled versions: install/operator/supported-versions.md
+      - Integrations:
+          - Extension catalog: install/extensions.md
+          - Install Istio: install/installing-istio.md
+          - Install Kafka: install/eventing/kafka-install.md
+          - Install RabbitMQ: install/eventing/rabbitmq-install.md
+          - Install cert-manager: install/installing-cert-manager.md
+          - Knative offerings: install/knative-offerings.md
+      - Serving configuration:
+          - Work with ConfigMaps: admin/editing-configmaps.md
+          - High availability: serving/config-ha.md
+          - Webhook namespace exclusions: serving/webhook-customizations.md
+          - Deployment resources: serving/configuration/deployment.md
+          - Cluster rollout duration: serving/configuration/rolling-out-latest-revision-configmap.md
+          - Revision retention defaults: serving/revisions/revision-admin-config-options.md
+          - Resource defaults: serving/configuration/config-defaults.md
+          - Secure pod defaults: serving/configuration/secure-pod-defaults.md
+          - Feature flags: serving/configuration/feature-flags.md
+      - Networking and TLS:
+          - Network adapters: serving/config-network-adapters.md
+          - Istio ingress gateway: serving/setting-up-custom-ingress-gateway.md
+          - Cluster domains: serving/using-a-custom-domain.md
+          - Istio authorization: serving/istio-authorization.md
+          - Encryption overview: serving/encryption/encryption-overview.md
+          - cert-manager integration: serving/encryption/configure-certmanager-integration.md
+          - External domain TLS: serving/encryption/external-domain-tls.md
+          - Cluster-local TLS: serving/encryption/cluster-local-domain-tls.md
+          - System-internal TLS: serving/encryption/system-internal-tls.md
+      - Eventing configuration:
+          - Broker defaults: eventing/configuration/broker-configuration.md
+          - Channel defaults: eventing/configuration/channel-configuration.md
+          - Kafka Channel defaults: eventing/configuration/kafka-channel-configuration.md
+          - Kafka Broker features: eventing/brokers/broker-types/kafka-broker/configuring-kafka-features.md
+          - Source defaults: eventing/configuration/sources-configuration.md
+          - Sugar configuration: eventing/configuration/sugar-configuration.md
+          - KEDA autoscaling: eventing/configuration/keda-configuration.md
+      - Security:
+          - Vulnerability reporting: reference/security/README.md
+          - Threat model: reference/security/threat-model.md
+          - Verify images: reference/security/verifying-images.md
+          - Verify binaries: reference/security/verifying-cli.md
+      - Upgrade and troubleshoot:
+          - Upgrade overview: install/upgrade/README.md
+          - Check installed versions: install/upgrade/check-install-version.md
+          - Upgrade with kubectl: install/upgrade/upgrade-installation.md
+          - Upgrade with the Operator: install/upgrade/upgrade-installation-with-operator.md
+          - Uninstall: install/uninstall.md
+          - Installation issues: install/troubleshooting.md

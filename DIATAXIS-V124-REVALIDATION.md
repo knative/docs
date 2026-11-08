@@ -130,6 +130,16 @@ Conflict resolution retained upstream's removal of retired Backstage/Security Gu
 
 After syncing the rebased lockfile, the strict local MkDocs build passed with upstream's newer dependencies. Rendered comparison: **474 → 469** docs pages; the five missing pages are exactly the retired upstream Backstage/Queue Proxy/Security Guard pages. The removed `queue-proxy-pod-info` anchor is also an upstream retirement. No other old page/anchor loss and no broken internal links were found; inherited SVG duplicate IDs remain unchanged. No runtime test was repeated for these documentation-only conflict resolutions.
 
+## Navigation feedback revision
+
+The user rejected the expanded sidebar and suggested Kubernetes' documentation home as light inspiration, not a taxonomy to copy. The revision uses its gateway restraint: short orientation and concrete starting links, with detailed background elsewhere.
+
+The sidebar now has Docs home plus five sections: Get started, Functions, Serving, Eventing, and Install & operate. Top entries decreased 11 → 6; intermediate groups 80 → 31; maximum displayed page depth 6 → 3; duplicate destinations 1 → 0. Repeated Diátaxis-mode wrappers and the three competing global sidebar indexes were removed; CLI tools and samples moved under support. Existing guides remain browsable; this does not claim an exhaustive catalog was reduced to a handful of pages.
+
+Docs home is a concise gateway of about 210 words and three headings. The long technical overview is preserved at `explanation/overview.md`; the existing task/explanation/reference indexes remain linked from home and searchable, not extra sidebar trees. All 27 prior home anchors remain as compact gateway aliases with visible overview handoffs. Only four narrow `not_in_nav` patterns were added, rather than suppressing omitted-navigation validation broadly.
+
+Architecture and Editorial reviewed only this navigation/home revision. Strict build and rendered preservation checks passed: 469 → 470 pages (one moved-overview destination added), no missing previous page URLs, no lost content anchors, and no broken internal links. Inherited SVG duplicate IDs remain unchanged. The overview's body was preserved with heading-level/relative-link repairs; this documentation-only revision did not rerun runtime tests.
+
 ## Commits
 
 Current-version corrections follow historical prototype checkpoint `f09d6954`:

@@ -16,10 +16,10 @@ required detour before every task.
 
 ## See the whole system
 
-Start with the [Knative technical overview](../README.md#knative-technical-overview)
+Start with the [Knative technical overview](overview.md)
 for the problems Knative addresses and the relationship between Functions,
 Serving, Eventing, and Kubernetes. The
-[component integration section](../README.md#how-components-work-together)
+[component integration section](overview.md#how-components-work-together)
 connects application development, HTTP services, and event routing.
 
 ## Understand Serving behavior
