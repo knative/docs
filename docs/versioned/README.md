@@ -4,10 +4,37 @@ components:
   - eventing
   - functions
   - serving
-function: explanation
 ---
 
-# Knative Technical Overview
+# Knative documentation
+
+Choose a starting point for what you need now. You can move between learning,
+working on a task, understanding behavior, and checking details without losing
+your component context.
+
+## What would you like to do?
+
+| Your goal | Start here |
+| --- | --- |
+| Try Knative with guidance | [Learn Knative](learn/README.md): Quickstart lessons and an event-driven Bookstore application. |
+| Get something done | [Accomplish a task](how-to/README.md): develop applications, route events, and operate a cluster. |
+| Understand how it works | [Understand Knative](explanation/README.md): architecture, behavior, and platform responsibilities. |
+| Check a field, setting, or constraint | [Look up details](reference/README.md): API, configuration, metrics, and CLI reference. |
+
+## Go directly to your component or role
+
+- [Functions](functions/README.md): create, build, and deploy function projects.
+- [Serving](serving/README.md): run HTTP services and manage scaling and traffic.
+- [Eventing](eventing/README.md): connect event producers and consumers.
+- [Operate Knative](how-to/README.md#operate-a-knative-cluster): install, configure,
+  secure, observe, and upgrade; see the [administrator overview](admin/admin-overview.md)
+  for responsibilities and cluster configuration.
+- [CLI tools](client/README.md) and [code samples](samples/README.md).
+
+New to Knative? Start with the [Quickstart](getting-started/README.md).
+Evaluating the platform? Continue with the technical overview below.
+
+## Knative Technical Overview
 
 This comprehensive overview explains what Knative is, what problems it solves, and how its components work together. Whether you're evaluating Knative for your use case or need background information to understand the rest of the documentation, this section provides the conceptual foundation you need.
 
@@ -21,7 +48,7 @@ Knative addresses several key challenges in modern application development and d
 
 **Application Deployment Complexity**: Traditional Kubernetes requires deep knowledge of pods, services, deployments, and ingress resources. These constructs provide a lot of flexibility and complexity that most applications don't need. Knative provides simpler abstractions that handle these details automatically.
 
-**Serverless Operations**: Manual scaling, cold starts, and traffic routing are complex to implement. Knative provides automatic scaling from zero to thousands of instances, intelligent traffic routing, and efficient resource utilization.
+**Serverless Operations**: Manual scaling, cold starts, and traffic routing are complex to implement. Knative provides demand-driven autoscaling, intelligent traffic routing, and efficient resource utilization. Scaling behavior depends on the configured autoscaler and scale bounds; see the [autoscaling overview](serving/autoscaling/README.md).
 
 **Event-Driven Architecture**: Building reliable event-driven systems requires complex infrastructure for event ingestion, routing, and delivery. Building event routing and delivery into your application limits your choice of event delivery and architecture; Knative provides standardized event processing capabilities across multiple event implementations using CloudEvents for delivery and Kubernetes for configuration.
 
@@ -62,7 +89,7 @@ These components can be used independently or together, allowing you to adopt Kn
 
 ### Key Serving Features
 
-**Automatic Scaling**: Services automatically scale from zero to handle incoming traffic and scale back down when idle, optimizing resource usage and costs.
+**Automatic Scaling**: With the Knative Pod Autoscaler (KPA), scale to zero enabled, and no positive minimum scale, idle Revisions can scale to zero and start replicas again when traffic arrives. A positive minimum scale retains replicas during idle periods. See the [autoscaling overview](serving/autoscaling/README.md) for the related behavior and settings.
 
 **Traffic Management**: Built-in support for blue-green deployments, canary releases, and traffic splitting between different revisions of your application.
 
@@ -94,7 +121,7 @@ Knative Serving can leverage Kubernetes pod capabilities to access specialized h
 
 **LLM Inference Support**: Knative Serving provides an ideal foundation for Large Language Model (LLM) inference services, offering:
 
-- **Automatic scaling** from zero to multiple GPU-enabled pods based on request demand
+- **Demand-driven scaling** of GPU-enabled pods, including scale-to-zero when the Serving configuration allows it
 - **Traffic splitting** for A/B testing different model versions or configurations  
 - **Resource efficiency** by scaling down expensive GPU resources when not in use
 - **Standard HTTP interfaces** for model serving and inference endpoints
@@ -178,26 +205,32 @@ You can also build your own language packs to customize the output container to 
 <!-- TODO: use img: shapes for these icons -->
 ``` mermaid
 flowchart TD
-  init>"`<code>func init</code>
-  to create a function`"]
+  create>"Create a function project"]
   git@{ shape: lin-cyl, label: "fa:fa-git-alt local repo" }
   laptop@{ shape: win-pane, label: "Local Development fa:fa-docker" }
   oci@{ shape: procs, label: "Container Registry" }
   cluster@{ label: "fa:fa-dharmachakra Knative Serving" }
+  broker@{ label: "Knative Eventing Broker" }
 
-init --> git
-git --  develop and test locally--> laptop
+create --> git
+git -- Develop and test locally --> laptop
 laptop --> git
-git -- "`<code>func push</code>
-push container to registry`" --> oci -.-> cluster
-git -- deploy container and triggers --> cluster
+laptop -- Build and publish image --> oci
+oci -. Image used by deployment .-> cluster
+git -- Deploy function --> cluster
+git -- Configure event subscription --> broker
+broker -- Deliver matching events --> cluster
 ```
 
-1. **Development**: Write your function using language-specific templates
-2. **Building**: The `func` CLI creates an optimized container image
-3. **Deployment**: Functions are deployed as Knative Services with automatic scaling
-4. **Invocation**: Functions can be triggered by HTTP requests or CloudEvents
-5. **Management**: Update, delete, and monitor functions using familiar Kubernetes tools
+Publishing an image does not by itself deploy a Service or subscribe it to events.
+These are distinct goals; a deployment workflow can also apply configured Triggers.
+Use the maintained task guides for exact commands and prerequisites:
+
+1. **Development**: [Create a function project](functions/creating-functions.md) using a language-specific template.
+2. **Building and publishing**: [Build a container image](functions/building-functions.md) and publish it to a registry when needed for deployment.
+3. **Deployment**: [Deploy the function](functions/deploying-functions.md) as a Knative Service, whose scaling follows its Serving configuration.
+4. **Event subscription**: [Subscribe the function to CloudEvents](functions/subscribing-functions.md) to route matching Broker events to it.
+5. **Invocation and management**: [Invoke the function](functions/invoking-functions.md); manage its deployed Service with `kn` or Kubernetes tools.
 
 ## System Integration and Interoperability
 
