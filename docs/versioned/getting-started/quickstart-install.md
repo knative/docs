@@ -11,7 +11,9 @@ function: tutorial
 
 This lesson creates the local environment used by all the [Quickstart lessons](README.md).
 
-**Chosen route:** Start Docker, install `kind` and `kubectl`, then install the `kn` and `quickstart` binaries for your operating system using the **Using a binary** instructions below. If you already have these tools installed, verify them rather than reinstalling. Homebrew and source-build instructions remain available as alternatives.
+**Chosen route for Knative v1.24:** Start Docker, install `kind` and `kubectl`, then use the **Using a binary** instructions below to install the [`kn` v1.24 release](https://github.com/knative/client/releases/tag/knative-v1.24.0) and [`quickstart` v1.24 release](https://github.com/knative-extensions/kn-plugin-quickstart/releases/tag/knative-v1.24.0) for your operating system and architecture. Do not assume an existing v1.23 binary matches this lesson. Homebrew and source-build instructions remain as alternatives, not additional steps.
+
+The selected Quickstart source recommends **kind 0.30 or newer** and **kubectl 1.35 or newer**, and defaults to `kindest/node:v1.35.0`. For this route, use a **kubectl 1.35.x client** to match that default cluster version. The plugin warns and offers a not-recommended continuation with an older client; this tutorial does not choose that override. These are the selected plugin's source-checked prerequisites, not a general Knative compatibility matrix. See the [version checks](https://github.com/knative-extensions/kn-plugin-quickstart/blob/knative-v1.24.0/pkg/install/install.go) and [kind defaults](https://github.com/knative-extensions/kn-plugin-quickstart/blob/knative-v1.24.0/pkg/kind/kind.go).
 
 When you reach **Run the Knative quickstart plugin**, use **Using kind** (`kn quickstart kind`). Do not run both cluster options. Port 80 must be available, and the plugin needs access to your Docker daemon as described below. Use a disposable environment; this is not an installation procedure for an existing shared cluster.
 
@@ -21,7 +23,18 @@ When you reach **Run the Knative quickstart plugin**, use **Using kind** (`kn qu
 
 ## Next steps
 
-First, **inspect** the selected Kubernetes context. This block does not change it:
+Check the versions of the tools used for this installation:
+
+```bash
+kn version
+kn quickstart version
+kubectl version --client -o json
+kind version
+```
+
+The selected `kn` and Quickstart release versions are `1.24.0`; check the kubectl client's `gitVersion` for `v1.35.x` and the kind version against the prerequisites above. Also check the installer's reported Serving, Kourier, and Eventing versions: a plugin's version label alone is not proof of which components were installed. Historical v1.23 runtime results do not validate this new installation.
+
+Next, **inspect** the selected Kubernetes context. This block does not change it:
 
 ```bash
 kubectl config current-context

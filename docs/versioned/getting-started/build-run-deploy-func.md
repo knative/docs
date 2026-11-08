@@ -81,6 +81,10 @@ kubectl get kservice hello-function --namespace default
 
 `NotFound` permits creating the tutorial Service. A permission or connection error does not. If a Service exists, continue only if it is your own tutorial deployment and updating it is intended; otherwise stop and use the [deployment task's ownership guidance](../functions/deploying-functions.md#prerequisites).
 
+Use the fresh local project created in this exercise. If `func.yaml` already records a different `deploy.namespace` or `deploy.deployer`, stop before building or publishing: a namespace change can remove the previous deployment, and v1.24 refuses in-place changes of an active deployer. This lesson is not a namespace/deployer migration procedure.
+
+For the local-name → publication-name transition below, do not configure an explicit `image` in `func.yaml` or an image override through `FUNC_IMAGE`. An explicit image takes precedence over `--registry`; it would no longer be the registry-derived naming route taught here. Use the [deployment task](../functions/deploying-functions.md) if you need that separate image-based workflow.
+
 Authenticate with your registry using its instructions, without putting credentials in source files or shared logs. Choose an actual writable registry prefix, **not** the local-only `localhost:5001` name. For example, replace `your-username` below with your authorized namespace (or replace the whole prefix for another registry):
 
 ```bash
@@ -94,7 +98,7 @@ func deploy --builder=pack --remote=false --deployer=knative \
   --registry "$PUBLISH_REGISTRY" --namespace default
 ```
 
-This selects a local `pack` build, publishes the resulting image to your chosen registry, and creates or updates the Knative Service `hello-function` in `default`. It is not a build-only or push-only command.
+This selects a local `pack` build from the edited project, publishes the resulting image to your chosen registry, and creates or updates the Knative Service `hello-function` in `default`. It is not a build-only or push-only command. It does not use repository-source deployment or an already-published `--image` alternative; those have their own source/namespace prerequisites in the [deployment task](../functions/deploying-functions.md).
 
 !!! success "Expected result"
     `func` reports deployment in `default` and the function URL. Use the reported URL rather than an example address.

@@ -7,7 +7,7 @@ function: tutorial
 
 # Installing Knative Functions
 
-For the [local-first Functions exercise](about-knative-functions.md), use standalone `func`. Follow **Executable binary** below, selecting the [`knative-v1.23.0` release](https://github.com/knative/func/releases/tag/knative-v1.23.0) for your operating system and architecture rather than a different release. Its binary reports CLI version `v0.50.0`; the release tag and CLI version use different numbering. This keeps the generated Go HTTP handler aligned with the next lesson.
+For the [local-first Functions exercise](about-knative-functions.md), use standalone `func`. Follow **Executable binary** below, selecting the [`knative-v1.24.0` release](https://github.com/knative/func/releases/tag/knative-v1.24.0) for your operating system and architecture rather than a different release. Its CLI version is `0.51.0`; the release tag and CLI version use different numbering. Do not use the historical v1.23 binary (`0.50.0`) for this selected release. This keeps the generated Go HTTP handler aligned with the next lesson.
 
 Verify `func version` before proceeding. If you already have another CLI version installed, do not assume its generated template matches this exercise; use the selected release or consult the [template documentation](../functions/about-functions.md#function-templates) for your version. Other installation methods below are retained as alternatives, not additional steps.
 

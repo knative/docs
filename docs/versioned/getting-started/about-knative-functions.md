@@ -16,7 +16,7 @@ Write and run a small **Go HTTP function locally**, then optionally deploy it as
 
 Use standalone **`func`** and the **`pack` builder** throughout this exercise. Have a running Docker-compatible daemon, a text editor, and network access to download the CLI, builder images, and Go dependencies. No registry account, running image registry, or Kubernetes credentials are needed for the local steps. The example image prefix is only a local name; nothing is published.
 
-The handler example uses the Go HTTP template from the `knative-v1.23.0` release of `func`; that release's binary reports CLI version `v0.50.0`. The installation lesson selects that release so the generated code matches the edit below.
+The handler example uses the Go HTTP template from Functions' `knative-v1.24.0` release; its CLI version is `0.51.0`. The installation lesson selects that release so the generated code matches the edit below. The template and taught command options have been checked against this release's source; historical v1.23 tests do not establish that this v1.24 walkthrough has run end to end.
 
 1. [Install func](install-func.md).
 2. [Create the project and edit its Go handler](create-a-function.md).
