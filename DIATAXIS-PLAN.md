@@ -54,3 +54,7 @@ Keep component context and make modes visible. Documentation home should route r
 ## Space count rationale
 
 Five new spaces: four implementation domains balance content size and ownership boundaries; a fifth independent architecture/review space catches inconsistencies that local authoring misses. Coordinator remains in the existing sixth space. More teams would create cross-file contention and excessive review overhead; fewer would overload Eventing/operations or compromise independent review.
+
+## Results
+
+See [the convergence log](DIATAXIS-CONVERGENCE.md) for review exchanges, validation, accepted experimental limitations, and checkpoint commits. The local preview runs in architecture workspace `w25`, tab `w25:t2`, at `http://127.0.0.1:8014/docs/`.
