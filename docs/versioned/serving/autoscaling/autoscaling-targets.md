@@ -15,7 +15,7 @@ For a configuration procedure, use [Set a concurrency target for a service](conf
 
 * **Per-revision annotation key:** `autoscaling.knative.dev/target`
 * **Location:** `spec.template.metadata.annotations` on a Service or Configuration
-* **Possible values:** A number encoded as a string, at least `0.01`; interpretation depends on the metric. See the [annotation validation source](https://github.com/knative/serving/blob/main/pkg/apis/autoscaling/annotation_validation.go){target=_blank} (on `main`; check the corresponding release branch for an older installation).
+* **Possible values:** A number encoded as a string, at least `0.01`; interpretation depends on the metric. See the [v1.24 annotation validation source](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank}; check the matching release for another installation.
 * **Default:** The annotation is unset. For KPA concurrency, a nonzero `containerConcurrency` supplies the target; otherwise the cluster concurrency default supplies it. An explicit target annotation overrides that selection but is capped by a nonzero `containerConcurrency`. Target utilization is applied afterward; see the [three concurrency target-resolution cases](concurrency.md#soft-limit). For KPA requests per second, the cluster RPS default supplies the target when the annotation is absent.
 
 Global defaults are metric-specific, not a global version of the `target` annotation. See [concurrency settings](concurrency.md#soft-limit) for `container-concurrency-target-default`, and [requests-per-second settings](rps-target.md) for the RPS default. The example below is a revision-template fragment.

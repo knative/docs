@@ -23,7 +23,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
 
 * **Per-revision annotation key:** `autoscaling.knative.dev/metric`
 * **Possible values:** `"concurrency"`, `"rps"`, `"cpu"`, `"memory"` or any custom metric name, depending on your Autoscaler type. The `"cpu"`, `"memory"`, and custom metrics are supported on revisions that use the HPA class.
-* **Default:** `"concurrency"`
+* **Default:** `"concurrency"` for KPA, `"cpu"` for HPA, as selected by [v1.24 metric defaulting](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/v1alpha1/pa_defaults.go){target=_blank}.
 
 
 === "Concurrency"
@@ -79,7 +79,7 @@ For more information about KPA and HPA, see the documentation on [Supported Auto
             autoscaling.knative.dev/target: "100"
     ```
     !!! note
-        The `autoscaling.knative.dev/target` annotation for "CPU" specifies the integer value in millicore. See [Configuring targets](autoscaling-targets.md) for more details.
+        For HPA CPU scaling, `autoscaling.knative.dev/target` specifies the target utilization percentage of requested CPU, not millicores. See [v1.24 HPA construction](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/autoscaling/hpa/resources/hpa.go#L62-L77){target=_blank}. See [Configuring targets](autoscaling-targets.md) for more details.
 
 === "Memory"
 

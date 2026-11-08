@@ -66,7 +66,7 @@ The type of Autoscaler implementation (KPA or HPA) can be configured by using th
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -89,6 +89,8 @@ Global settings for autoscaling are configured using the `config-autoscaler` Con
 
 ##### Example of the default autoscaling ConfigMap
 
+The defaults below are defined in [v1.24 autoscaler configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}. Operator fragments use the served `v1beta1` API; see the [v1.24 KnativeServing CRD](https://github.com/knative/operator/blob/knative-v1.24.0/config/crd/bases/operator.knative.dev_knativeservings.yaml){target=_blank}. Existing cluster configuration can override these defaults.
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -106,7 +108,7 @@ data:
  scale-to-zero-grace-period: "30s"
  scale-to-zero-pod-retention-period: "0s"
  stable-window: "60s"
- target-burst-capacity: "200"
+ target-burst-capacity: "211"
  requests-per-second-target-default: "200"
 ```
 

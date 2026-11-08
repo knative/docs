@@ -31,7 +31,7 @@ If a soft target and a nonzero hard limit are both set, the smaller value is use
 
 * **Global key:** `container-concurrency-target-default`
 * **Per-revision annotation key:** `autoscaling.knative.dev/target`, with `autoscaling.knative.dev/metric: "concurrency"` (the default metric)
-* **Possible values:** The per-revision annotation accepts a number encoded as a string, at least `0.01`.
+* **Possible values:** The per-revision annotation accepts a number encoded as a string, at least `0.01`. The global key also accepts a number; its product with the global utilization fraction must be at least `0.01`.
 * **Default:** `"100"` for the global key. The per-revision annotation is unset by default; the target is resolved using the cases below.
 
 For the KPA concurrency metric, resolve the concurrency target in this order:
@@ -42,7 +42,7 @@ For the KPA concurrency metric, resolve the concurrency target in this order:
 
 Then apply [target utilization](#target-utilization) to the resolved target. The effective autoscaling target is the resolved target multiplied by the utilization fraction, with a minimum of `0.01`. Utilization does not change the hard limit.
 
-This resolution is implemented by [`ResolveMetricTarget` in Serving v1.23.0](https://github.com/knative/serving/blob/knative-v1.23.0/pkg/reconciler/autoscaling/resources/target.go#L31-L63){target=_blank}.
+This resolution is implemented by [`ResolveMetricTarget` in Serving v1.24.0](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/autoscaling/resources/target.go#L31-L63){target=_blank}.
 
 **Example:**
 
@@ -97,8 +97,10 @@ A value greater than `0` specifies the maximum number of concurrent requests adm
 
 * **Global key:** `container-concurrency` (in `config-defaults.yaml`)
 * **Per-revision spec key:** `containerConcurrency`
-* **Possible values:** Nonnegative integer, subject to cluster validation limits.
-* **Default:** `0`, meaning no limit
+* **Possible values:** Integer from `0` to the cluster's `container-concurrency-max-limit` (default `1000`). If `allow-container-concurrency-zero` is `false`, the minimum is `1` instead.
+* **Default:** `0`, meaning no limit, unless the cluster sets another `container-concurrency` default.
+
+These defaults and constraints are defined by [v1.24 default configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/config/defaults.go){target=_blank} and [`ValidateContainerConcurrency`](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/metadata_validation.go#L91-L107){target=_blank}.
 
 
 **Example:**
@@ -150,9 +152,9 @@ Target utilization specifies the percentage of the concurrency target used by th
 * **Possible values:** The per-revision annotation accepts a percentage from `1` to `100`, encoded as a string; fractional percentages are supported.
 * **Default:** `70` percent for the global setting. The annotation is unset by default and uses the cluster setting.
 
-The global setting also accepts fractional notation such as `"0.7"` for 70 percent; the examples below use percentage notation. The per-revision annotation uses percentage notation, not a fraction.
+The global setting accepts either a fraction in `(0, 1]` or a percentage greater than `1` and at most `100`. For example, `"0.7"` and `"70"` both mean 70 percent; `"1"` means 100 percent globally, so use `"0.01"` for 1 percent. The per-revision annotation always uses percentage notation: `"1"` means 1 percent there.
 
-Annotation constraints are defined in the Serving [autoscaling annotation validation](https://github.com/knative/serving/blob/main/pkg/apis/autoscaling/annotation_validation.go){target=_blank} and [annotation constants](https://github.com/knative/serving/blob/main/pkg/apis/autoscaling/register.go){target=_blank}. These source links point to `main`; check the corresponding release branch when validating an older installation.
+Annotation constraints are defined in v1.24 [autoscaling annotation validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank} and [annotation constants](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/register.go){target=_blank}. Global defaults, fraction conversion, and validation are defined in the [autoscaler configuration parser](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}. These citations describe v1.24.0 source behavior; check the matching release for another installation.
 
 **Example:**
 

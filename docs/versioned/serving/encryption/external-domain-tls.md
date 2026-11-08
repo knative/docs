@@ -50,11 +50,11 @@ Automatic certificate provisioning allows to request certificates in two ways:
 * One certificate for each individual Knative Service
 * One wildcard certificate per namespace
 
-Only one of them can be active at the same time!
+These are not globally exclusive modes. With external-domain TLS enabled, the v1.24 [Route reconciler](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/route/route.go#L203-L265) looks for a matching wildcard certificate first and provisions an individual certificate when none matches. Different Routes can therefore use different certificate strategies.
 
 #### Using a certificate for each Knative Service
 
-Set `external-domain-tls: Enabled` in the configuration corresponding to [`config-network`](https://github.com/knative/serving/blob/knative-v1.23.0/vendor/knative.dev/networking/config/config-network.yaml), using the authority selected above:
+Set `external-domain-tls: Enabled` in the configuration corresponding to [`config-network`](https://github.com/knative/serving/blob/knative-v1.24.0/vendor/knative.dev/networking/config/config-network.yaml), using the authority selected above:
 
 === "Operator-managed Serving"
 
@@ -187,6 +187,8 @@ Knative expects a wildcard certificate signed for the DNS domain of your cluster
 
 > `*.yourdomain.com`
 
+Choose certificate names that cover the actual Service hostname. With the default `{service}.{namespace}.{domain}` hostname shape, a single-level wildcard for `*.yourdomain.com` does not cover `service.namespace.yourdomain.com`; a namespace-specific wildcard or exact hostname may be needed. Check the [v1.24 domain template](https://github.com/knative/serving/blob/knative-v1.24.0/vendor/knative.dev/networking/config/config-network.yaml) and perform the hostname/trust check in [Verification](#verification).
+
 Once you have obtained the certificate and the private key, [create a Kubernetes Secret](#create-a-kubernetes-secret) 
 for the certificate and key to be used by Knative.
 
@@ -237,7 +239,7 @@ Use the following steps in the relevant tab to add your certificate to your Knat
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
-    1. Configure `default-tls-secret: "contour-external/default-cert"` for the Knative Contour plugin as a fallback when `external-domain-tls` is disabled:
+    1. Configure `default-tls-secret: "contour-external/default-cert"` for the Knative Contour plugin as a fallback when `external-domain-tls` is disabled. The [v1.24 Contour configuration parser](https://github.com/knative-extensions/net-contour/blob/knative-v1.24.0/pkg/reconciler/contour/config/contour.go) accepts this key as a namespace/name Secret reference:
 
         - **Operator-managed:** merge the value into the winning `config-contour`/`contour` entry under `spec.config`, after the precedence check above. Apply and verify through the [generic Serving Operator workflow](../../install/operator/configuring-serving-cr.md#apply-and-verify-a-configuration-change), inspecting `config-contour` as the affected resource; do not patch the generated ConfigMap.
         - **YAML-managed:** update your authoritative `config-contour` manifest. Only for a directly managed installation with no GitOps controller, use:
@@ -381,7 +383,7 @@ Use the configuration authority selected above: Operator users update `http-prot
     Supported `http-protocol` values:
 
     - `Enabled`: Serve HTTP traffic.
-    - `Redirected`: Responds to HTTP requests with a `301` redirect to ask clients to use HTTPS, as specified in the [v1.23 network configuration](https://github.com/knative/serving/blob/knative-v1.23.0/vendor/knative.dev/networking/config/config-network.yaml).
+    - `Redirected`: Requests an HTTP-to-HTTPS redirect, documented as `301` in the [v1.24 network configuration](https://github.com/knative/serving/blob/knative-v1.24.0/vendor/knative.dev/networking/config/config-network.yaml). The selected ingress implementation performs the redirect; verify its actual status and `Location` below.
 
     ```yaml
     data:

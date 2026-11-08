@@ -18,6 +18,10 @@ kubectl get configmap -n knative-serving config-defaults -oyaml
 ```
 ## Example config-defaults ConfigMap
 
+This is an example configuration policy, not a dump of Knative's shipped defaults. In v1.24, the CPU, memory, and ephemeral-storage quantities below are illustrative overrides; those defaults are unset unless configured. Values stored inside the shipped ConfigMap's `_example` block are documentation, not active configuration.
+
+See the [v1.24 Defaults ConfigMap](https://github.com/knative/serving/blob/knative-v1.24.0/config/core/configmaps/defaults.yaml), [`NewDefaultsConfigFromMap`](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/config/defaults.go), and [Revision resource defaulting](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/v1/revision_defaults.go). Cluster admission policy can affect the effective Pod resources; an unset Knative resource default is not a universal statement about the final Pod's allocation.
+
 ```yaml
 apiVersion:  v1
 kind:  ConfigMap
@@ -76,12 +80,12 @@ The revision timeout value determines the default number of seconds to use for t
     metadata:
       name: helloworld-go
       namespace: default
-      spec:
-        template:
-          spec:
-            timeoutSeconds: 300
-            containers:
-            - image: ghcr.io/knative/helloworld-go:latest
+    spec:
+      template:
+        spec:
+          timeoutSeconds: 300
+          containers:
+          - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 ### Max revision timeout seconds
@@ -111,13 +115,15 @@ If this value is increased, the activator's `terminationGracePeriodSeconds` shou
 
 ### Revision response start timeout seconds
 {% raw %}
-The revision response start timeout value determines the maximum duration in seconds that the request routing layer will wait for a request delivered to a container to begin sending any network traffic. If omitted, the system default is used (300 seconds).
+The revision response start timeout value supplies a default duration in seconds for waiting for the container to start sending a response. If the global key is omitted, `NewDefaultsConfigFromMap` derives it from the configured `revision-timeout-seconds`, rather than always using 300 seconds.
 {% endraw %}
 
 * **Global key:** `revision-response-start-timeout-seconds`
 * **Per-revision spec key:** `responseStartTimeoutSeconds`
 * **Possible values:** integer
-* **Default:** `"300"` (5 minutes)
+* **Default:** The configured `revision-timeout-seconds` value (`300` with upstream defaults).
+
+This is the global fallback, not a guarantee that every Revision contains an explicit `responseStartTimeoutSeconds`. [v1.24 Revision defaulting](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/v1/revision_defaults.go) applies the nonzero fallback to an omitted field only when it is less than that Revision's `timeoutSeconds`.
 
 **Example:**
 
@@ -139,12 +145,12 @@ The revision response start timeout value determines the maximum duration in sec
     metadata:
       name: helloworld-go
       namespace: default
-      spec:
-        template:
-          spec:
-            responseStartTimeoutSeconds: 300
-            containers:
-            - image: ghcr.io/knative/helloworld-go:latest
+    spec:
+      template:
+        spec:
+          responseStartTimeoutSeconds: 300
+          containers:
+          - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 
@@ -178,23 +184,24 @@ The revision idle timeout value determines the maximum duration in seconds a req
     metadata:
       name: helloworld-go
       namespace: default
-      spec:
-        template:
-          spec:
-            idleTimeoutSeconds: 0
-            containers:
-            - image: ghcr.io/knative/helloworld-go:latest
+    spec:
+      template:
+        spec:
+          idleTimeoutSeconds: 0
+          containers:
+          - image: ghcr.io/knative/helloworld-go:latest
     ```
 
 ### Revision CPU request
 {% raw %}
-The `revision-cpu-request` value determines the CPU allocation assigned to revisions by default. If this value is omitted, the system default is used. This key is not enabled by default for Knative.
+The `revision-cpu-request` value supplies a CPU request for containers that do not specify their own request. If the key is omitted, Knative does not supply a CPU request through this setting.
 {% endraw %}
 
 * **Global key:** `revision-cpu-request`
-* **Per-revision annotation key:** `cpu`
-* **Possible values:** integer
-* **Default:** `"400m"` (0.4 of a CPU, or 400 milli-CPU)
+* **Per-revision spec field:** `spec.template.spec.containers[].resources.requests.cpu`
+* **Possible values:** Kubernetes resource quantity
+* **Default:** Unset
+* **Example value:** `"400m"` (0.4 of a CPU, or 400 milli-CPU)
 
 **Example:**
 
@@ -228,14 +235,14 @@ The `revision-cpu-request` value determines the CPU allocation assigned to revis
 
 ### Revision memory request
 {% raw %}
-The `revision-memory-request` value determines the memory allocation assigned
-to revisions by default. If this value is omitted, the system default is used. This key is not enabled by default for Knative.
+The `revision-memory-request` value supplies a memory request for containers that do not specify their own request. If the key is omitted, Knative does not supply a memory request through this setting.
 {% endraw %}
 
 * **Global key:** `revision-memory-request`
-* **Per-revision annotation key:** `memory`
-* **Possible values:** integer
-* **Default:** `"100M"` (100 megabytes of memory)
+* **Per-revision spec field:** `spec.template.spec.containers[].resources.requests.memory`
+* **Possible values:** Kubernetes resource quantity
+* **Default:** Unset
+* **Example value:** `"100M"` (100 megabytes of memory)
 
 **Example:**
 
@@ -269,14 +276,14 @@ to revisions by default. If this value is omitted, the system default is used. T
 
 ### Revision Ephemeral Storage Request
 {% raw %}
-The `revision-ephemeral-storage-request` value determines the ephemeral storage
-allocation assigned to revisions by default. If this value is omitted, the system default is used. This key is not enabled by default for Knative.
+The `revision-ephemeral-storage-request` value supplies an ephemeral-storage request for containers that do not specify their own request. If the key is omitted, Knative does not supply a request through this setting.
 {% endraw %}
 
 * **Global key:** `revision-ephemeral-storage-request`
-* **Per-revision annotation key:** `ephemeral-storage`
-* **Possible values:** integer
-* **Default:** `"500M"` (500 megabytes of storage)
+* **Per-revision spec field:** `spec.template.spec.containers[].resources.requests.ephemeral-storage`
+* **Possible values:** Kubernetes resource quantity
+* **Default:** Unset
+* **Example value:** `"500M"` (500 megabytes of storage)
 
 **Example:**
 
@@ -310,13 +317,14 @@ allocation assigned to revisions by default. If this value is omitted, the syste
 
 ### Revision CPU limit
 {% raw %}
-The `revision-cpu-limit` value determines the default CPU allocation limit for revisions. If this value is omitted, the system default is used. This key is not enabled by default for Knative.
+The `revision-cpu-limit` value supplies a CPU limit for containers that do not specify their own limit. If the key is omitted, Knative does not supply a CPU limit through this setting.
 {% endraw %}
 
 * **Global key:** `revision-cpu-limit`
-* **Per-revision annotation key:** `cpu`
-* **Possible values:** integer
-* **Default:** `"1000m"` (1 CPU, or 1000 milli-CPU)
+* **Per-revision spec field:** `spec.template.spec.containers[].resources.limits.cpu`
+* **Possible values:** Kubernetes resource quantity
+* **Default:** Unset
+* **Example value:** `"1000m"` (1 CPU, or 1000 milli-CPU)
 
 **Example:**
 
@@ -350,13 +358,14 @@ The `revision-cpu-limit` value determines the default CPU allocation limit for r
 
 ### Revision memory limit
 {% raw %}
-The `revision-memory-limit` value determines the default memory allocation limit for revisions. If this value is omitted, the system default is used. This key is not enabled by default for Knative.
+The `revision-memory-limit` value supplies a memory limit for containers that do not specify their own limit. If the key is omitted, Knative does not supply a memory limit through this setting.
 {% endraw %}
 
 * **Global key:** `revision-memory-limit`
-* **Per-revision annotation key:** `memory`
-* **Possible values:** integer
-* **Default:** `"200M"` (200 megabytes of memory)
+* **Per-revision spec field:** `spec.template.spec.containers[].resources.limits.memory`
+* **Possible values:** Kubernetes resource quantity
+* **Default:** Unset
+* **Example value:** `"200M"` (200 megabytes of memory)
 
 **Example:**
 
@@ -390,13 +399,14 @@ The `revision-memory-limit` value determines the default memory allocation limit
 
 ### Revision Ephemeral Storage Limit
 {% raw %}
-The `revision-ephemeral-storage-limit` value determines the default ephemeral storage limit allocated to revisions. If this value is omitted, the system default is used. This key is not enabled by default for Knative.
+The `revision-ephemeral-storage-limit` value supplies an ephemeral-storage limit for containers that do not specify their own limit. If the key is omitted, Knative does not supply a limit through this setting.
 {% endraw %}
 
 * **Global key:** `revision-ephemeral-storage-limit`
-* **Per-revision annotation key:** `ephemeral-storage`
-* **Possible values:** integer
-* **Default:** `"750M"` (750 megabytes of storage)
+* **Per-revision spec field:** `spec.template.spec.containers[].resources.limits.ephemeral-storage`
+* **Possible values:** Kubernetes resource quantity
+* **Default:** Unset
+* **Example value:** `"750M"` (750 megabytes of storage)
 
 **Example:**
 

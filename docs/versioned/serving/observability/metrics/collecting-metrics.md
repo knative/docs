@@ -52,7 +52,7 @@ data:
   tracing-sampling-rate: "1"
 ```
 
-For protocol identifiers and other settings, consult the [Serving observability ConfigMap](https://github.com/knative/serving/blob/knative-v1.23.0/config/core/configmaps/observability.yaml){target=_blank}, checking the corresponding release for your installation.
+For protocol identifiers and other settings, consult the [v1.24 Serving observability ConfigMap](https://github.com/knative/serving/blob/knative-v1.24.0/config/core/configmaps/observability.yaml){target=_blank} and [configuration parser](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/observability/config.go){target=_blank}. In v1.24, `metrics-protocol` and `request-metrics-protocol` default to `none`; OTLP HTTP/gRPC require an endpoint, while Prometheus scraping does not. The [metrics configuration validator](https://github.com/knative/serving/blob/knative-v1.24.0/vendor/knative.dev/pkg/observability/metrics/config.go){target=_blank} defines these constraints. The YAML above is an explicit example policy, not the defaults. Check the matching release for another installation.
 
 === "Operator-managed Serving"
 

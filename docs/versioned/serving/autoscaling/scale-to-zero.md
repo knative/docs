@@ -10,6 +10,8 @@ function: reference
 !!! warning
     Scale to zero can only be enabled if you are using the KnativePodAutoscaler (KPA), and can only be configured globally. For more information about using KPA or global configuration, see the documentation on [Supported Autoscaler types](autoscaler-types.md).
 
+Global defaults and constraints below are defined in [v1.24 autoscaler configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}; per-revision retention constraints are defined in [annotation validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank}.
+
 ## Enable scale to zero
 
 The scale to zero value controls whether Knative allows replicas to scale down to zero (if set to `true`), or stop at 1 replica if set to `false`.
@@ -37,7 +39,7 @@ The scale to zero value controls whether Knative allows replicas to scale down t
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -61,7 +63,7 @@ This setting does not adjust how long the last replica will be kept after traffi
 
 * **Global key:** `scale-to-zero-grace-period`
 * **Per-revision annotation key:** n/a
-* **Possible values:** Duration
+* **Possible values:** Positive duration
 * **Default:** `30s`
 
 **Example:**
@@ -79,7 +81,7 @@ This setting does not adjust how long the last replica will be kept after traffi
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -97,11 +99,11 @@ This setting does not adjust how long the last replica will be kept after traffi
 
 The `scale-to-zero-pod-retention-period` flag determines the minimum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
 
-This contrasts with the `scale-to-zero-grace-period` flag, which determines the maximum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
+Unlike this minimum retention interval, `scale-to-zero-grace-period` bounds the wait for network programming. It is not a promise about how long the last pod remains active after traffic ends.
 
 * **Global key:** `scale-to-zero-pod-retention-period`
 * **Per-revision annotation key:** `autoscaling.knative.dev/scale-to-zero-pod-retention-period`
-* **Possible values:** Non-negative duration string
+* **Possible values:** Nonnegative duration. The per-revision annotation is limited to `1h`; the global parser does not impose that maximum.
 * **Default:** `0s`
 
 **Example:**
@@ -136,7 +138,7 @@ This contrasts with the `scale-to-zero-grace-period` flag, which determines the 
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

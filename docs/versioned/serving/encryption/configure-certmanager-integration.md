@@ -132,7 +132,7 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
     ```
     Result: The `Status.Conditions` should include `Ready=True`.
 
-Set the intended issuer references through the selected configuration authority. The example below retains the self-signed issuer for all three features; change only references appropriate to your intended encryption features and preserve unrelated configuration. The references are serialized YAML strings in [Serving's `config-certmanager`](https://github.com/knative/serving/blob/knative-v1.23.0/config/core/configmaps/certmanager.yaml){target=_blank}.
+Set the intended issuer references through the selected configuration authority. The example below retains the self-signed issuer for all three features; change only references appropriate to your intended encryption features and preserve unrelated configuration. The references are serialized YAML strings in [v1.24 Serving's `config-certmanager`](https://github.com/knative/serving/blob/knative-v1.24.0/config/core/configmaps/certmanager.yaml){target=_blank}. [`NewCertManagerConfigFromConfigMap`](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/certificate/config/cert_manager.go){target=_blank} parses all three keys and defaults each absent reference to the `knative-selfsigned-issuer` ClusterIssuer. Parsing a reference does not verify that its issuer is present, Ready, or suitable for the requested domains.
 
 === "Operator-managed Serving"
 

@@ -7,7 +7,7 @@ function: reference
 
 # Additional autoscaling configuration for Knative Pod Autoscaler
 
-The following settings are specific to the Knative Pod Autoscaler (KPA).
+The following settings are specific to the Knative Pod Autoscaler (KPA). Defaults and global parsing are defined in [v1.24 autoscaler configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}; annotation ranges are defined in [v1.24 annotation validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank}.
 
 ## Modes
 
@@ -27,7 +27,7 @@ Stable mode is used for general operation, while panic mode by default has a muc
 
 * **Global key:** `stable-window`
 * **Per-revision annotation key:** `autoscaling.knative.dev/window`
-* **Possible values:** Duration, `6s` <= value <= `1h`
+* **Possible values:** Duration, `6s` <= value <= `1h`, in whole seconds
 * **Default:** `60s`
 
 !!! note
@@ -65,7 +65,7 @@ Stable mode is used for general operation, while panic mode by default has a muc
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -121,7 +121,7 @@ This value indicates how the window over which historical data is evaluated will
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -147,7 +147,7 @@ The default setting of `200.0` means that panic mode will be started if traffic 
 
 * **Global key:** `panic-threshold-percentage`
 * **Per-revision annotation key:** `autoscaling.knative.dev/panic-threshold-percentage`
-* **Possible values:** float, `110.0` <= value <= `1000.0`
+* **Possible values:** The per-revision annotation accepts a percentage from `110.0` to `1000.0`. The global key is parsed as a floating-point percentage; v1.24's global parser does not enforce the annotation's range.
 * **Default:** `200.0`
 
 **Example:**
@@ -182,7 +182,7 @@ The default setting of `200.0` means that panic mode will be started if traffic 
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -207,7 +207,7 @@ This setting determines the maximum ratio of desired to existing pods. For examp
 
 * **Global key:** `max-scale-up-rate`
 * **Per-revision annotation key:** n/a
-* **Possible values:** float
+* **Possible values:** Floating-point value greater than `1.0`
 * **Default:** `1000.0`
 
 **Example:**
@@ -225,7 +225,7 @@ This setting determines the maximum ratio of desired to existing pods. For examp
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -244,7 +244,7 @@ This setting determines the maximum ratio of existing to desired pods. For examp
 
 * **Global key:** `max-scale-down-rate`
 * **Per-revision annotation key:** n/a
-* **Possible values:** float
+* **Possible values:** Floating-point value greater than `1.0`
 * **Default:** `2.0`
 
 **Example:**
@@ -262,7 +262,7 @@ This setting determines the maximum ratio of existing to desired pods. For examp
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

@@ -46,7 +46,7 @@ If a GitOps controller or another deployment system manages this Service, make t
     kubectl get service.serving.knative.dev "$SERVICE" -n "$NAMESPACE" -o jsonpath='{.spec.template.metadata.name}{"\n"}'
     ```
 
-    Expected output is a blank line. If a name is printed, **stop before applying the patch**: choose a Service with generated Revision names, or use your deployment workflow to supply a new, valid Revision name together with the template change. Do not retain the existing explicit name while changing the template. Serving's [`VerifyNameChange` validation](https://github.com/knative/serving/blob/knative-v1.23.0/pkg/apis/serving/v1/revision_validation.go#L80-L108){target=_blank} rejects that update.
+    Expected output is a blank line. If a name is printed, **stop before applying the patch**: choose a Service with generated Revision names, or use your deployment workflow to supply a new, valid Revision name together with the template change. Do not retain the existing explicit name while changing the template. Serving's [`VerifyNameChange` validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/v1/revision_validation.go#L80-L108){target=_blank} rejects that update.
 
     This check reads the template name, not `status.latestCreatedRevisionName`; generated Revisions still have names in status.
 
