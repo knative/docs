@@ -14,8 +14,9 @@ behavior, see [Brokers](../brokers/README.md#event-delivery).
 
 ## Delivery fields
 
-The following field definitions are checked against the v1.23
-[`DeliverySpec` type and validation](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/apis/duck/v1/delivery_types.go).
+The following field definitions were rechecked against the v1.24
+[`DeliverySpec` type and validation](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/duck/v1/delivery_types.go).
+Historical v1.23 source/runtime checks are not current-version sign-off.
 The examples below set fields explicitly; they do not establish defaults for
 all senders or implementations.
 
@@ -25,6 +26,7 @@ all senders or implementations.
 | `retry` | Nonnegative integer (`int32`) | The API describes the minimum number of retries the sender should attempt before moving an event to the dead-letter sink. Negative values are rejected. Retries are distinct from the initial send; this field is not a universal guarantee of exactly `retry + 1` attempts. |
 | `backoffPolicy` | `linear` or `exponential` | Selects the retry-delay policy. Other values are rejected. See the API and shared-sender scope below. |
 | `backoffDelay` | ISO 8601 duration string | Delay parameter used by the retry policy; for example, `PT1S` represents one second. Validation parses the duration. It is not an overall delivery deadline. |
+| `backoffMax` | Positive ISO 8601 duration string | In v1.24, caps normal backoff calculated from `backoffDelay` and `backoffPolicy`, not delays requested by Retry-After. Requires `delivery-backoff-max`; validation rejects zero, negative, malformed, or feature-disallowed values. The [v1.24 feature configuration](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/features.yaml) marks this Alpha and disabled by default. API acceptance does not establish support in every implementation. |
 
 ## Effective delivery settings lookup
 
@@ -72,27 +74,45 @@ return to [Retries do not match expectations](../troubleshooting/delivery-failur
 
 ## Retry and backoff semantics
 
-The v1.23 DeliverySpec comments describe linear backoff as
-`backoffDelay * <numberOfRetries>` and exponential backoff as
-`backoffDelay * 2^<numberOfRetries>`, not linear backoff as a fixed interval.
+The v1.24 DeliverySpec comments describe linear backoff as
+`backoffDelay * r` and exponential backoff as `backoffDelay * 2^(r - 1)`, where
+`r` is the retry ordinal starting at 1. For the rechecked v1.24 shared sender,
+[`RetryConfigFromDeliverySpec`, `linearBackoff`, and `exponentialBackoff`](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/kncloudevents/retries.go)
+use the callback's zero-based index `n`: for a positive delay, linear is
+`backoffDelay * (n + 1)` and exponential is `backoffDelay * 2^n`, subject to
+overflow saturation and an optional `backoffMax`. For nonpositive delays, these
+shared helpers return zero; parsing a `backoffDelay` duration alone does not
+establish a positive interval. This is not fixed-interval linear backoff.
 
-For senders using v1.23's shared HTTP retry code,
-[`RetryConfigFromDeliverySpec`](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/kncloudevents/retries.go)
-sets `RetryMax` from `retry` and implements those formulas using the retry
-callback's `attemptNum`. The
-[shared dispatch client](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/kncloudevents/event_dispatcher.go)
-passes this configuration to
-[`retryablehttp`](https://github.com/knative/eventing/blob/knative-v1.23.0/vendor/github.com/hashicorp/go-retryablehttp/client.go),
-whose backoff callback index starts at zero. That retry loop treats `RetryMax`
-as a limit and can stop early; the shared `SelectiveRetry` policy does not retry
-every response. Thus the API's minimum-retry description is not evidence of an
-exact attempt count for every outcome or implementation.
+!!! note "Changed since the historical v1.23 check"
+    v1.24's shared linear helper waits one `backoffDelay` before the first retry;
+    the historical v1.23 helper multiplied directly by the zero-based callback
+    index. v1.24 adds `backoffMax` and overflow-safe helpers. The exponential API
+    comment now uses a one-based retry ordinal consistently with the shared
+    sender. These changes were checked in the new source, not inferred by
+    changing a citation's version.
 
-These are source-level facts for v1.23's shared sender, not cluster-tested timing
-or behavior guarantees for every Broker or Channel. Request duration,
-cancellation, Retry-After handling, implementation defaults, and implementations
-using other senders can affect observations. Check your installed implementation
-and correlate receiver records before relying on a schedule or attempt count.
+`backoffMax` caps normal calculated delay but not Retry-After. When applicable,
+`generateBackoffFn` returns the larger of normal backoff and the Retry-After
+value after its separate `retryAfterMax` handling. Feature defaults and
+validation are recorded in the
+[v1.24 feature configuration](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/features.yaml);
+this is not an implementation-wide support claim.
+
+The [shared v1.24 dispatch client](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/kncloudevents/event_dispatcher.go)
+passes `RetryMax` from `retry` to
+[`retryablehttp` v0.7.8](https://github.com/hashicorp/go-retryablehttp/blob/v0.7.8/client.go),
+the dependency pinned by [Eventing v1.24's go.mod](https://github.com/knative/eventing/blob/knative-v1.24.0/go.mod).
+That loop's callback index starts at zero; it treats `RetryMax` as a limit and
+can stop early. The shared `SelectiveRetry` policy does not retry every response.
+The API still describes `retry` as a minimum and rejects negative values; that
+is not evidence of exactly `retry + 1` attempts for every outcome or implementation.
+
+These are v1.24 source-level facts, not cluster-tested timing or behavior
+guarantees for every Broker or Channel. Request duration, cancellation,
+Retry-After handling, configuration defaults, and different senders can affect
+observations. Correlate receiver records before relying on a schedule or attempt
+count; no exactly-once or no-retry guarantee is established here.
 
 ## Configuring Subscription event delivery
 
@@ -156,8 +176,9 @@ promise an exact number of attempts.
     The Broker and Channel tables below were extracted from this repository's
     existing `event-delivery.md` at the experiment baseline `c250e7f7`. Their
     implementation/version provenance was not recorded there. They have not
-    been revalidated against v1.23 or current extension releases; the v1.23 API
-    source checks above do **not** validate these capability claims. Treat the
+    been revalidated across v1.24 Broker/Channel extension releases. The earlier
+    v1.23 check is historical only, and the v1.24 API/shared-sender source checks
+    above do **not** validate these capability claims. Treat the
     tables and the `googlecloud` destination note as historical starting points,
     not a current compatibility guarantee. Confirm each needed field and
     destination with your installed implementation's release-specific
@@ -194,8 +215,8 @@ These extension attributes are as follows:
       which operation encountered the failed event.
     - **Constraints:** When emitted, identifies the destination of the failed
       delivery or reply, not the dead-letter sink merely because the event is
-      forwarded there. See the v1.23 shared dispatcher's
-      [failure-destination handling](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/kncloudevents/event_dispatcher.go).
+      forwarded there. See the rechecked v1.24 shared dispatcher's
+      [failure-destination handling](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/kncloudevents/event_dispatcher.go).
       Presence depends on the implementation.
     - **Examples:**
         - "http://myservice.mynamespace.svc.cluster.local:3000/mypath"
@@ -205,32 +226,53 @@ These extension attributes are as follows:
     - **Type:** Int
     - **Description:** The HTTP Response **StatusCode** from the final event
       dispatch attempt.
-    - **Constraints:** For implementations emitting this extension, an actual
-      HTTP response from the final attempt provides the **StatusCode** described
-      here. This page does not establish the field's presence or value for a
-      connection failure or timeout with no HTTP response; consult that
-      implementation's failure-metadata behavior. No fallback value is specified
-      here.
+    - **Constraints:** An actual HTTP response supplies the status code in the
+      shared sender's final-response branch. The scoped shared-sender behavior
+      below also records a synthetic dispatch-error code; do not interpret
+      every value as a response actually returned by the subscriber. Presence
+      and no-response behavior are not universal across implementations.
     - **Examples:**
         - "500"
         - ...any HTTP StatusCode...
 
 - **knativeerrordata**
     - **Type:** String
-    - **Description:** The HTTP Response **Body** from the final event dispatch
-      attempt.
-    - **Constraints:** Empty if the HTTP Response **Body** is empty,
-      and may be truncated if the length is excessive.
-    - **Examples:**
-        - 'Internal Server Error: Failed to process event.'
-        - '{"key": "value"}'
-        - ...any HTTP Response Body...
+    - **Description:** Failure-response/error data supplied by the sender.
+      The v1.24 shared dispatcher encodes this data as Base64 rather than
+      exposing the response body directly as an unencoded string.
+    - **Constraints:** Empty for empty supplied data. Encoding and length
+      handling depend on the implementation; the long-body caveat below applies
+      to the shared path.
+    - **Examples for the shared dispatcher's encoding:**
+        - `SW50ZXJuYWwgU2VydmVyIEVycm9y` encodes `Internal Server Error`.
+        - `eyJrZXkiOiJ2YWx1ZSJ9` encodes `{"key":"value"}`.
 
-!!! note "Implementation-dependent failure metadata"
-    Do not require these extensions from every Broker or Channel when diagnosing
-    failures. In particular, the `knativeerrorcode` definition above is scoped
-    to an actual HTTP response; no-response failure metadata remains outside
-    this page's validated scope.
+### Shared-sender failure metadata scope
+
+Rechecked in v1.24's
+[`executeRequest` and `dispatchExecutionInfoTransformers`](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/kncloudevents/event_dispatcher.go)
+and [`KnativeErrorTransformers`](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/kncloudevents/attributes/knative_error.go):
+
+- Failed destination/reply sends with a configured dead-letter sink use these
+  transformers to attach destination, code, and data extensions to the event.
+- When `client.DoWithRetries` returns an error, `executeRequest` records code
+  `500` and `dispatch error: ...` data. This is synthetic dispatch metadata, not
+  proof that a subscriber returned HTTP 500. It does not define all failures
+  occurring before the client call or other implementations' fallback values.
+- For the shared `broker-filter` path, the transformer can unwrap the error
+  destination/body supplied by the filter instead of reporting only that
+  intermediate URL. It Base64-encodes the selected body/error data.
+
+!!! warning "Long-body handling not validated"
+    The shared helper declares a 1024-character data-extension limit, but the
+    dispatcher allocates a capped output buffer before encoding the full body.
+    This source review does not establish safe encoding/truncation for oversized
+    bodies. Do not rely on a complete body or a guaranteed safe truncation result;
+    retain receiver logs and request implementation validation.
+
+Do not require these extensions from every Broker or Channel. The scoped
+source behavior above does not validate the historical support matrix or
+universal no-response metadata.
 
 ### Channel support
 

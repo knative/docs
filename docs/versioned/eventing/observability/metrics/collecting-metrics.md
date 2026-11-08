@@ -51,6 +51,16 @@ monitoring operator is separate from the Knative Operator managing Eventing.
 
 ### Enabling Metric Collection
 
+**v1.24 source scope:** [Eventing's observability parser](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/observability/config.go)
+delegates metric parsing to the
+[`knative.dev/pkg` revision pinned by Eventing v1.24](https://github.com/knative/pkg/blob/cfa0ac991c5a/observability/metrics/config.go).
+It recognizes `metrics-protocol`, `metrics-endpoint`, and
+`metrics-export-interval`, with protocols `none`, `prometheus`, `http/protobuf`,
+and `grpc`. The parser default is `none`; the sample `http/protobuf` value in
+[the release ConfigMap's `_example` block](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/observability.yaml)
+is not active configuration. This check does not validate monitoring repository
+manifests, historic metric names, or successful collection on a cluster.
+
 1. Using the approved context and Eventing namespace established above, inspect
    the current ConfigMap:
 

@@ -192,7 +192,8 @@ You can set the `backoffDelay` delivery parameter to specify the time delay befo
 
 Set `backoffPolicy` to `linear` or `exponential`. The
 [Event delivery reference](../reference/event-delivery.md#retry-and-backoff-semantics)
-describes the v1.23 API formulas and shared HTTP sender's behavior. Do not assume
+describes the rechecked v1.24 API formulas and shared HTTP sender's behavior,
+including the changed first linear retry delay and optional `backoffMax`. Do not assume
 a fixed interval for linear backoff or a cluster-tested timing guarantee.
 
 ## Integrating Istio with Knative Brokers

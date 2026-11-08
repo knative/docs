@@ -23,7 +23,13 @@ Securing event delivery in Knative Eventing is essential to prevent unauthorized
 
 ## Compatibility
 
-Authorization is currently supported for the following components:
+!!! note "Retained compatibility list; not v1.24 matrix validation"
+    The component list below is retained from the existing guide. Checking the
+    v1.24 authorization configuration key/default does not establish support
+    across all listed Broker/Channel/extension implementations. Confirm the
+    installed implementation and release with the platform owner.
+
+The retained guide lists authorization support for the following components:
 
 - Brokers:
     - [MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/README.md)
@@ -39,7 +45,16 @@ Authorization is currently supported for the following components:
 
 ## Default Authorization Mode
 
-Administrators can set a default authorization mode using the `defaultAuthorizationMode` feature flag, which Knative Eventing will use whenever no `EventPolicy` applies to a resource. The available modes are:
+The v1.24 ConfigMap key is `default-authorization-mode`, not
+`defaultAuthorizationMode`. Its name, parsed values, and default were rechecked
+in [the release feature configuration](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/features.yaml)
+and [flag parser/defaults](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/feature/features.go).
+The key is used when `authentication-oidc` is enabled and no `EventPolicy`
+applies to the resource. This is a source-level configuration check, not a
+runtime authorization test. Change it through the platform owner's authoritative
+workflow; for an Operator-managed `config-features`, use the
+[configuration-authority branch](transport-encryption.md#apply-through-the-configuration-authority)
+rather than directly editing the generated ConfigMap. The available modes are:
 
 * `allow-all`: All requests are allowed.
 * `deny-all`: All requests are denied, enforcing the creation of EventPolicies.

@@ -13,6 +13,14 @@ function: how-to
 
 **Tracking issue**: [#5957](https://github.com/knative/eventing/issues/5957)
 
+**v1.24 source scope:** the flag name, Beta/disabled release configuration,
+and `strict`/`permissive` values were rechecked in the
+[v1.24 feature configuration](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/features.yaml)
+and [flag parser](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/feature/features.go).
+The shared server behavior below is implementation-scoped, not a revalidated
+Broker/Channel capability matrix. Earlier v1.23 runtime results are historical
+only; the certificate/producer examples have not been executed here on v1.24.
+
 ## Overview
 
 By default, event delivery within the cluster is unencrypted. This limits the types of events which
@@ -164,9 +172,11 @@ Broker, Channel, Sink) should accept events.
 
 The possible values for `transport-encryption` are:
 
-- `disabled` (this is equivalent to the current behavior)
-    - Addressables may accept events to HTTPS endpoints
-    - Producers may send events to HTTPS endpoints
+- `disabled`
+    - For v1.24 components using the shared `ServerManager`, HTTP requests reach
+      the handler while HTTPS requests receive 404. This is a source-scoped
+      receiver behavior, not a claim about every implementation.
+    - Producers may send events to separately configured HTTPS destinations.
 - `permissive`
     - Addressables should accept events on both HTTP and HTTPS endpoints
     - Addressables should advertise both HTTP and HTTPS endpoints
@@ -179,6 +189,16 @@ The possible values for `transport-encryption` are:
     The `strict` is only enforced on the Broker and Channel receiver/ingress. 
     When a broker or channel sends events to a subscriber, if that subscriber only has an HTTP
     address, the broker or channel can still send events over HTTP instead of HTTPS
+
+The rechecked v1.24 [shared server manager](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/eventingtls/servermanager.go)
+returns 404 on HTTP in strict mode and on HTTPS in disabled mode; permissive
+mode allows both handlers. This receiver gating does not require an HTTP-only
+subscriber to become an HTTPS endpoint. The release's
+[Broker certificate manifest](https://github.com/knative/eventing/blob/knative-v1.24.0/config/brokers/mt-channel-broker-tls/broker-ingress-tls-certificate.yaml)
+references `knative-eventing-ca-issuer`; the
+[trust-bundle code](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/eventingtls/trust_bundle.go)
+defines `networking.knative.dev/trust-bundle=true` and `/knative-custom-certs`.
+These source checks do not establish certificate readiness or end-to-end trust.
 
 For example, the resulting `config-features` data for `strict` transport
 encryption is shown below. This illustrates the intended ConfigMap value,
@@ -205,9 +225,10 @@ approved `--context` when adapting the linked apply/verify commands; do not run
 their examples against an unrelated default context.
 
 - **Knative Operator-managed:** inspect `spec.config` in both the live
-  `KnativeEventing` resource and its authoritative manifest. The v1.23
-  [Operator mapping reference](../../install/operator/configuration-reference.md#configmap-mapping)
-  defines `config-features` as the full-name entry and `features` as its shortened
+  `KnativeEventing` resource and its authoritative manifest. The rechecked
+  [v1.24 Operator `ConfigMapTransform`](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/config_maps.go)
+  and [mapping reference](../../install/operator/configuration-reference.md#configmap-mapping)
+  define `config-features` as the full-name entry and `features` as its shortened
   form. A present `config-features` entry wins, including an empty entry or one
   without `transport-encryption`; its data is not merged with `features`.
   Update the winning existing entry rather than adding a shadow entry. If neither

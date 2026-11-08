@@ -22,18 +22,21 @@ do not support filtering on the `data` field of CloudEvents.
 
 `spec.filters` is a list of expressions. Each expression can set only one
 nonempty dialect; combine different predicates as separate list entries or
-nest them under `all`. These constraints follow the v1.23
-[`TriggerSpec` type](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/apis/eventing/v1/trigger_types.go)
-and [`ValidateOneOf` validation](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/apis/eventing/v1/trigger_validation.go).
+nest them under `all`. These constraints were rechecked in the v1.24
+[`TriggerSpec` type](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/eventing/v1/trigger_types.go)
+and [`ValidateOneOf` validation](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/eventing/v1/trigger_validation.go).
+The list shape, top-level subscriber, and validation of nested dialects are
+unchanged from the historical v1.23 check; that earlier check alone is not
+v1.24 validation.
 The abbreviated dialect snippets below illustrate fields, not complete manifests.
 
 !!! important "Implementation support: retained claim, release scope unverified"
     The original Trigger filtering page at the experiment baseline `c250e7f7`
     listed support for `spec.filters` only in the Apache Kafka Broker and
     MTChannelBasedBroker. It did not record the implementation versions for
-    that claim. The v1.23 API citations above validate expression shape and
-    validation rules, **not** a Broker capability matrix; the support claim has
-    not been revalidated for current extension releases. Identify your installed
+    that claim. The v1.24 API citations above validate expression shape and
+    validation rules, **not** a Broker capability matrix; the historical support
+    claim has not been revalidated across v1.24 Broker/extension implementations. Identify your installed
     [Broker implementation](../brokers/broker-types/README.md) and release, and
     ask its platform owner for release-specific dialect support evidence before
     changing filters. API acceptance alone does not prove implementation support.
@@ -253,12 +256,12 @@ spec:
 
 You can modify a Trigger's behavior by setting the following two annotations:
 
-- `eventing.knative.dev/injection`: the v1.23 [annotation validator](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/apis/eventing/v1/trigger_validation.go) accepts only `enabled` or `disabled`, and only when `spec.broker` is `default`. Do not treat this annotation alone as an automatic Broker-creation switch: the v1.23 [Sugar Trigger reconciler](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/reconciler/sugar/trigger/trigger.go) selects Triggers using `config-sugar`'s `trigger-selector` labels, not this annotation. The optional [Sugar Controller](../sugar/README.md) must be installed and [configured](../configuration/sugar-configuration.md); it is not enabled by default. For selected Triggers it can create a missing Broker in the Trigger's namespace. An annotation value of `disabled` does not override that label selection in v1.23.
+- `eventing.knative.dev/injection`: the rechecked v1.24 [annotation validator](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/eventing/v1/trigger_validation.go) accepts only `enabled` or `disabled`, and only when `spec.broker` is `default`. Do not treat this annotation alone as an automatic Broker-creation switch: the v1.24 [Sugar Trigger reconciler](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/reconciler/sugar/trigger/trigger.go) selects Triggers using `config-sugar`'s `trigger-selector` labels, not this annotation. The optional [Sugar Controller](../sugar/README.md) must be installed and [configured](../configuration/sugar-configuration.md); it is not enabled by default. For selected Triggers it can create a missing Broker in the Trigger's namespace. An annotation value of `disabled` does not override that label selection in v1.24. These validator/reconciler behaviors are unchanged from the historical v1.23 source.
 - `knative.dev/dependency`: this annotation is used to mark the sources that the Trigger depends on. If one of the dependencies is not ready, the Trigger will not be ready.
 
 The following YAML is an example of a Trigger with a dependency. `subscriber`
 is required directly under `spec`, as defined by
-[`TriggerSpec`](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/apis/eventing/v1/trigger_types.go),
+[`TriggerSpec`](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/eventing/v1/trigger_types.go),
 not nested under `filter`. The referenced PingSource and subscriber must exist
 for this example to become Ready.
 

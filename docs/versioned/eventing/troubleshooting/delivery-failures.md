@@ -49,7 +49,7 @@ Do not use the Channel demonstration's Pod selectors for a different implementat
 | Symptom in receiver or implementation evidence | Next action |
 | --- | --- |
 | HTTP error response | Correlate the event ID with subscriber logs. Check the path and whether the receiver accepts the event. Hand the confirmed application error or access mismatch to its owner for correction before considering retry changes. |
-| Subscriber records receipt, but MTChannelBasedBroker v1.23 reports a non-empty response not recognized as CloudEvent | Inspect the subscriber's response status, headers, and body. In this pinned path, successful acknowledgment requires a 2xx response with an empty body or a valid CloudEvent reply; the [v1.23 Broker filter rejects unrecognized non-empty or malformed replies](https://github.com/knative/eventing/blob/knative-v1.23.0/pkg/broker/filter/filter_handler.go#L551-L583). Receipt alone does not prove acknowledgment success. Have the application owner correct the response contract, then correlate a fresh event's receipt with successful delivery evidence; do not merely increase retries. |
+| Subscriber records receipt, but MTChannelBasedBroker v1.24 reports a non-empty response not recognized as CloudEvent | Inspect the subscriber's response status, headers, and body. The rechecked v1.24 path requires a 2xx response with an empty body or a valid CloudEvent reply; the [Broker filter returns 502 for unrecognized non-empty or malformed replies](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/broker/filter/filter_handler.go#L551-L583). Receipt alone does not prove acknowledgment success. Have the application owner correct the response contract, then correlate a fresh event's receipt with successful delivery evidence; do not merely increase retries. |
 | Connection failure, name resolution failure, or timeout | Check the resolved destination, Kubernetes Service endpoints/ports or Knative Service status, and applicable network/security policy. Determine whether the request reached the receiver before treating it as an application error. |
 | HTTP 429 or 503 with Retry-After | Check the configured retries and the [`retryAfterMax` feature requirements and implementation caveats](../features/delivery-retryafter.md). Header presence alone does not establish that the implementation honors it. |
 | Receiver takes longer than a configured timeout | Inspect the configured [`timeout`](../features/delivery-timeout.md) and receiver latency. This field is per HTTP request; do not assume it bounds the entire retry sequence. |
@@ -75,11 +75,13 @@ to locate configuration references and request the responsible owner's evidence.
 This guide does not establish universal Trigger/Broker precedence or defaults.
 
 Compare the explicit retry settings with observed attempts. The API describes
-`retry` as a minimum, while v1.23's shared HTTP sender uses it as `RetryMax` and
+`retry` as a minimum, while the rechecked v1.24 shared HTTP sender uses it as `RetryMax` and
 can stop early based on the outcome or cancellation. See the
 [API and shared-sender scope](../reference/event-delivery.md#retry-and-backoff-semantics);
-this is not a universal exact-attempt guarantee. Do not confuse the producer
-retrying ingress with the Broker retrying delivery to the subscriber. Feature
+this is not a universal exact-attempt guarantee. v1.24 changed the shared linear
+backoff's first retry delay and added `backoffMax`; historical v1.23 timing checks
+cannot validate the new behavior. Do not confuse the producer retrying ingress
+with the Broker retrying delivery to the subscriber. Feature
 validation accepting a field does not necessarily prove an extension
 implementation supports it.
 
