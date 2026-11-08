@@ -103,6 +103,8 @@ Keep the review handoff concise and distinguish evidence:
 - **Technical sources:** component/release and authoritative references checked, with uncertain defaults or capability claims assigned to the subject matter expert.
 - **Execution and automation:** exact route or tests run, environment/release, observed results, and unexecuted branches or blockers. Syntax checks, API validation, and end-to-end execution establish different things; do not report one as another.
 
+When the target release changes, preserve earlier source and runtime evidence with its original version and scope. Recheck material assumptions at the new source tag, record what changed or remained unchanged, and rerun the selected behavioral checks before claiming runtime validation for that release. Updating citation URLs or retaining the same expected output is not revalidation. Distinguish the release tag, actual reported CLI version, and component versions; keep unresolved current-release claims assigned to their technical owners.
+
 Prioritize findings that prevent the promised result or send readers to the wrong destination. Give the owner a concrete path/section, reader consequence, and proposed correction or question. The author and reviewer should consult on substantive findings; the reviewer checks the revised page and route before approval. Disclosure of an unexecuted route does not waive maintained-sample testing requirements or establish runtime correctness.
 
 ## Branches

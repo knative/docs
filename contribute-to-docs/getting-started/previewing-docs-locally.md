@@ -181,8 +181,8 @@ To request a release context instead, choose versions appropriate to the artifac
 and installed CLIs you are checking. For example:
 
 ```bash
-export KNATIVE_VERSION=1.23.0
-export SAMPLES_BRANCH=knative-v1.23.0
+export KNATIVE_VERSION=1.24.0
+export SAMPLES_BRANCH=knative-v1.24.0
 ./hack/mkdocs.sh serve
 ```
 
@@ -193,6 +193,14 @@ latest release. Inspect the rendered download URLs and build diagnostics before
 using them. `SAMPLES_BRANCH` separately selects the upstream branch or tag for
 CLI-reference links; setting `KNATIVE_VERSION` alone does not change those links.
 Literal upstream links in prose or snippets may still point to `main`.
+
+The example selects the Knative v1.24 release context and the confirmed
+`knative-v1.24.0` reference tags; it is not a claim that these instructions or
+component workflows have been runtime-tested with that release. Record the
+installed artifact and its actual reported CLI version separately—do not infer a
+`func` version number from the Knative tag or reuse an older release's result.
+Recheck version-dependent commands and handler contracts against the selected
+source before transferring a tutorial or test result to a newer release.
 
 Stop your existing preview with **Ctrl+C**, then restart it from the shell with
 the intended variables; browser reload alone does not update the process's
