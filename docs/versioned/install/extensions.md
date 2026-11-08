@@ -47,6 +47,5 @@ Ordering, throughput, persistence, and migration behavior depend on the Knative 
 | Option | Purpose and installation guide |
 | --- | --- |
 | cert-manager | Request TLS certificates for HTTPS connections. See [Install cert-manager](installing-cert-manager.md). |
-| Backstage | Plugins for handling Knative backends. See [Installing Backstage plugins](installing-backstage-plugins.md). |
 
 Return to [Installing Knative](README.md) to choose a component installation route.

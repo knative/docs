@@ -120,6 +120,16 @@ Selected logs/records in the private directory: `quickstart-registry.log`, `quic
 
 The coordinator verified the registry/node containers were created by this new experiment, then removed only `knative-diataxis-v124` and its local registry. The original three clusters and current `kind-serving-headless` context remained; original five running Docker containers remained. No blanket image/cache cleanup or installed-tool upgrade was performed.
 
+## Rebase onto current upstream main
+
+The draft PR branch was rebased onto upstream `main` at `8d334650d35e03b990f24676c7e8653bc9d4d98a`. The starting typography work had already landed as PR #6757 (`c66bc723`), so the rebase replayed the 17 experiment commits after `c250e7f7` rather than duplicating those merged styling commits.
+
+The previous tested head is preserved locally as `docs/diataxis-pre-rebase-20261107-233942` (`c0a18ba43e9a3c9ee11c30dd142d65c14c2ea2ce`). Earlier commit IDs and runtime evidence below are historical pre-rebase references; rebasing does not constitute another runtime execution.
+
+Conflict resolution retained upstream's removal of retired Backstage/Security Guard/Queue Proxy extension content. The new extension catalog no longer links to the deleted Backstage installer, and external language-pack examples are provider-neutral rather than resurrecting retired `func-tastic` examples. The upstream v1.24 release announcement was added to blog navigation to satisfy strict omitted-page validation.
+
+After syncing the rebased lockfile, the strict local MkDocs build passed with upstream's newer dependencies. Rendered comparison: **474 → 469** docs pages; the five missing pages are exactly the retired upstream Backstage/Queue Proxy/Security Guard pages. The removed `queue-proxy-pod-info` anchor is also an upstream retirement. No other old page/anchor loss and no broken internal links were found; inherited SVG duplicate IDs remain unchanged. No runtime test was repeated for these documentation-only conflict resolutions.
+
 ## Commits
 
 Current-version corrections follow historical prototype checkpoint `f09d6954`:
