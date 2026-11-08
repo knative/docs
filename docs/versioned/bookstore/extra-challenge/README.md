@@ -4,14 +4,15 @@ components:
   - eventing
   - serving
   - functions
-function: tutorial
 ---
 
 # **Extra Challenges**
 
 ![image](images/image5.png)
 
-Congratulations on completing the bookstore tutorial! Kubernetes and Knative have a high learning curve due to their complexity, but you did it! You should be proud of your accomplishment.
+**Optional, open-ended practice after [the core Bookstore outcome](../page-6/advanced-event-filtering.md).** These are challenge ideas, not a tested step-by-step tutorial. The Telegram and Slack-based exercises add external credentials and Camel K setup; arrange a validated Camel K/notification environment first. The [notification recipe](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md) is pending runtime validation, not a verified prerequisite-installation lesson.
+
+For the comment-deletion exercise, the core sample is sufficient as a starting point. Decide how you will verify each new feature before implementing it.
 
 Now it's time to test your mastery of the skills you've learned with Kuack. We've prepared a few extra challenges for you to explore. Take a look and have fun!
 
@@ -131,6 +132,8 @@ Allow users to send comments via Telegram.
 **Estimated Time**
 
 2-3 hours
+
+**Return to:** [Bookstore learning route](../page-0/welcome-knative-bookstore-tutorial.md) · [Core verification](../page-6/advanced-event-filtering.md) · [Clean up](../../getting-started/clean-up.md)
 
 ## **Help**
 

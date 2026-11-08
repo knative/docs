@@ -7,32 +7,23 @@ function: tutorial
 
 # Autoscaling
 
+**Starting state:** You have [deployed `hello`](first-service.md) and received `Hello World!`. Keep the same cluster and `default` namespace.
+
 Knative Serving provides automatic scaling, also known as **autoscaling**. This means that a Knative Service by default scales down to zero running pods when it is not in use.
 
 ## List your Knative Service
 
 Use the Knative (`kn`) CLI to view the URL where your Knative Service is hosted:
 
-=== "kn"
-    View a list of Knative Services by running the command:
-    ```bash
-    kn service list
-    ```
-    !!! Success "Expected output"
-        ```bash
-        NAME    URL                                                LATEST        AGE   CONDITIONS   READY
-        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001   13s   3 OK / 3     True
-        ```
-=== "kubectl"
-    View a list of Knative Services by running the command:
-    ```bash
-    kubectl get ksvc
-    ```
-    !!! Success "Expected output"
-        ```bash
-        NAME    URL                                                LATESTCREATED   LATESTREADY   READY   REASON
-        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001     hello-00001   True
-        ```
+```bash
+kn service list
+```
+
+!!! success "Expected result"
+    `hello` is listed with `READY` set to `True` and a URL. Use the reported URL rather than copying an example address.
+
+??? info "Inspecting with kubectl instead"
+    `kubectl get ksvc` also lists the Service. This tutorial still uses `kn` for requests and updates; the [YAML examples](yaml-examples.md) are supporting reference, not a separate CLI-free route.
 
 ## Access your Knative Service
 
@@ -86,7 +77,13 @@ kubectl get pod -l serving.knative.dev/service=hello -w
 
 ## Scale up your Knative Service
 
-Rerun the Knative Service in your browser. You can see a new pod running again:
+Leave the watch running. In a **second terminal** using the same cluster and namespace, request the Service again:
+
+```bash
+curl "$(kn service describe hello -o url)"
+```
+
+You should receive `Hello World!`. In the first terminal, you can see a new pod running again:
 
 !!! Success "Expected output"
     ```{ .bash .no-copy }
@@ -97,4 +94,16 @@ Rerun the Knative Service in your browser. You can see a new pod running again:
     hello-world                              2/2     Running
     ```
 
-Exit the `kubectl watch` command with `Ctrl+c`.
+Pod names and intermediate status lines vary; the important observations are that no `hello` pod remains after idle time and a new pod appears when you request the Service again.
+
+Exit the watch with `Ctrl+C`.
+
+Continue to traffic splitting below to finish the chosen tutorial route. After the exercise, use these direct handoffs for your own Service:
+
+- **Task:** [Set a concurrency target](../serving/autoscaling/configure-concurrency.md).
+- **Explanation:** [How concurrency affects autoscaling](../serving/autoscaling/concurrency-behavior.md).
+- **Reference:** [Concurrency settings](../serving/autoscaling/concurrency.md) and [scale bounds](../serving/autoscaling/scale-bounds.md).
+
+The [Serving autoscaling overview](../serving/autoscaling/README.md) routes to other scaling topics.
+
+**Previous:** [Deploy a Service](first-service.md) · **Next:** [Split traffic between Revisions](first-traffic-split.md)

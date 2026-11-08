@@ -2,14 +2,19 @@
 audience: developer
 components:
   - eventing
-function: tutorial
+function: reference
 ---
 
 # **Slack sink - Learning Knative Eventing and the Apache Camel K integration**
 
 ![image](images/image2.png)
 
-As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new review comment. By leveraging Knative Eventing and Apache Camel K, you can set up an event-driven service that automates these notifications, ensuring you're always informed.
+**Optional integration recipe — the [core Bookstore tutorial](../page-6/advanced-event-filtering.md) is already complete.** The retained examples assume its resources remain in `default` and sample commands run from `start`.
+
+!!! warning "Pending runtime validation — not an executable follow-on lesson"
+    The examples install the operator and `IntegrationPlatform` in `camel-k`, but create the Pipe, credentials Secret, and Brokers in `default`. This page has **not** established that the shown operator watches `default`, has the required permissions there, or uses the `camel-k` platform for builds in that namespace. An operator/platform showing Ready in `camel-k` does not validate that route. Do not run this recipe expecting an end-to-end result until the namespace, scope, platform, registry, and credential path have been validated together on a disposable cluster.
+
+The intended outcome is Slack notification of reviews classified as inappropriate. The recipe adds Apache Camel K, a Camel build registry, and a Slack webhook; it does not establish delivery timing or availability. The registry `kind-registry:5000` is an example, **not** something Quickstart creates for you. Commands and examples below are retained for technical review, not evidence that this integration has been executed.
 
 ## **What Knative features will we learn about?**
 
@@ -17,7 +22,7 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 
 ## **What does the final deliverable look like?**
 
-When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter` set to `bad` is sent, it triggers a message to be sent in a designated Slack channel.
+The proposed route selects CloudEvents with type `moderated-comment` and the `badwordfilter` extension set to `bad` (binary HTTP header `ce-badwordfilter`) for notification in the designated Slack channel. Demonstrating that receipt is part of the pending runtime validation.
 
 ## **Install prerequisites**
 
@@ -25,14 +30,14 @@ When a CloudEvent with the type `moderated-comment` and with `ce-bad-word-filter
 
 ![image](images/image13.png)
 
-Install Apache Camel K operator on your cluster using any of the methods listed in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html). We will use the installation via Kustomize:
+Consult the [official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html) to establish the namespace and operator scope. The retained operator-installation example uses Kustomize; it does not by itself establish reconciliation of the default-namespace Pipe:
 
 ```sh
 kubectl create ns camel-k && \
 kubectl apply -k 'github.com/apache/camel-k/install/overlays/kubernetes/descoped?ref=v2.8.0' --server-side
 ```
 
-Now you need to setup an `IntegrationPlatform` with a container registry. You can read more about it in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html#integration-platform). For all our needs we only need to create the `IntegrationPlatform` CR with a container registry entry. For example let's say we're using a Kind cluster with a local registry named `kind-registry` on port `5000`. Then your `IntegrationPlatform` CR will look like the following:
+Now you need to setup an `IntegrationPlatform` with a container registry. You can read more about it in [the official installation docs](https://camel.apache.org/camel-k/2.8.x/installation/installation.html#integration-platform). A registry entry is only one prerequisite; platform selection for the Pipe's namespace and access to that registry still need validation. For example let's say we're using a Kind cluster with a local registry named `kind-registry` on port `5000`. Then your `IntegrationPlatform` CR will look like the following:
 
 ```yaml
 apiVersion: camel.apache.org/v1
@@ -108,7 +113,7 @@ Follow the instructions [here](../create-slack-workspace/README.md){:target="_bl
     https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
     ```
 
-    Save this URL as you will need it later.
+    Save this URL as you will need it later. Treat it as a credential: do not commit it, paste it into public logs, or share it in support requests. Revoke it if exposed.
 
 ### **Prerequisite 3: Create a Secret that stores your Slack Credentials**
 
@@ -172,11 +177,15 @@ If you hope to learn more about it, check out the article [Event Sourcing with A
 
 ![image](images/image19.png)
 
-In the current implementation using Apache Camel K, we **can only filter based on the CloudEvent's type**, such as moderated-comment. Filtering based on event extensions, such as `badwordfilter: good`, is not yet supported. This feature will be available in a future update of Apache Camel K. But we can still use an alternative way to achieve this!
+This sample's Pipe source configuration selects the CloudEvent type `moderated-comment`. To select the `badwordfilter` extension as well, the sample uses a Knative Trigger before a second Broker. This demonstrates extension filtering without relying on additional Camel K source-filtering behavior; consult the Camel K version's documentation for supported options.
 
 ![image](images/image11.png)
 
-Here, we will be connecting `bookstore-broker` with a new Broker called `badword-broker`. And we will be creating a Trigger that helps us perform the filtering with the extension `badwordfilter: good`.
+Here, we will be connecting `bookstore-broker` with a new Broker called `badword-broker`. A Trigger selects `badwordfilter: bad` and sends only those processed events to the second Broker. Create the missing sample configuration directory first:
+
+```sh
+mkdir -p slack-sink/config
+```
 
 - 1: Create a new file named `slack-sink/config/100-broker.yaml` and add the following content:
 
@@ -302,7 +311,7 @@ We are creating the Trigger to process the events that have type `moderated-comm
 
 ### **Step 3: Build the Pipe**
 
-This setup automatically sends notifications to Slack whenever a new comment that contains "bad word" occur, streamlining the flow of information.
+The proposed Pipe consumes selected events from `badword-broker` and sends them to Slack. Before applying it, the reviewer must establish the operator/platform/Secret namespace path described in the warning above.
 
 - 1: Make sure you have your k8s secret that contains your Slack webhook Url ready. If not, refer to the [Prerequisite 3](#prerequisite-3-create-a-secret-that-stores-your-slack-credentials) section.
 
@@ -352,7 +361,7 @@ kubectl apply -f slack-sink/config/100-slack-sink.yaml
       pipe.camel.apache.org/pipe created
       ```
 
-      But this process will take a few seconds to complete. You can check the status of the pipe by running the following command:
+      Creation only confirms API acceptance. Inspect the Pipe's conditions and generated resources; the following is a status check, not evidence of successful build or Slack receipt:
 
       ```sh
       kubectl get pipe pipe
@@ -367,73 +376,57 @@ kubectl apply -f slack-sink/config/100-slack-sink.yaml
 
 ![image](images/image6.png)
 
-In this step, we'll configure the notification delivery service to prevent it from [scaling down to zero](https://knative.dev/docs/serving/autoscaling/scale-to-zero/){:target="_blank"}, ensuring timely notifications.
+**Optional scale-floor experiment, not a prerequisite for proving webhook receipt.** A [minimum scale](../../serving/autoscaling/scale-bounds.md#lower-bound) requests a lower replica bound for the applicable autoscaler; it is not a guarantee of ready capacity, timely delivery, or uptime.
 
-!!! note
-    `ksvc` stands for [Knative Service](https://knative.dev/docs/serving/services/){:target="_blank"}.
+!!! warning "Camel-managed configuration must persist through reconciliation"
+    A direct patch or edit of a generated Knative Service is not an established persistent configuration path for this integration. Camel K may reconcile the generated resource. Configure a scale floor through the owning Camel resource's supported configuration after validating the version-specific mechanism; this page does not invent a trait setting. Do not rely on a one-time live patch or a pod staying present briefly as proof of persistent configuration.
 
-1. **Check Existing Knative Services:**
-
-```sh
-kubectl get ksvc
-```
-
-You should see a service named `pipe` listed:
+Inspect the actual generated resources before considering this experiment:
 
 ```sh
-NAME     URL                                         LATESTCREATED   LATESTREADY    READY   REASON
-pipe     http://pipe.default.svc.cluster.local       pipe-00002      pipe-00002     True
+kubectl -n default get ksvc
 ```
 
-2. **Edit the Knative Service:**
+`ksvc` means [Knative Service](../../serving/services/README.md). The original example assumed a generated Service named `pipe`. Verify its name and ownership rather than assuming it exists.
 
-To prevent the notification service from scaling down to zero, set the minimum number of pods to keep running.
-
-```sh
-kubectl patch ksvc pipe --type merge -p '{"spec":{"template":{"metadata":{"annotations":{"autoscaling.knative.dev/min-scale":"1"}}}}}'
-```
-
-Or use the edit command:
-
-```sh
-kubectl edit ksvc pipe
-```
-
-Add the following annotation:
-
-```yaml
-spec:
-  template:
-    metadata:
-      annotations:
-        autoscaling.knative.dev/min-scale: "1"
-```
-
-This configuration ensures that Knative will always maintain at least one instance of the service running.
-
-???+ success "Verify"
+??? info "Retained direct-patch example — disposable experiment only"
+    If the generated Service is named `pipe`, the original patch was:
 
     ```sh
-    kubectl get pods
+    kubectl -n default patch ksvc pipe --type merge -p '{"spec":{"template":{"metadata":{"annotations":{"autoscaling.knative.dev/min-scale":"1"}}}}}'
     ```
 
-    Periodically check the status of the pipe-deployment pods, and see whether they will disappear! If they stay there, then we are good!
+    The equivalent live edit was `kubectl -n default edit ksvc pipe`, adding this fragment:
+
+    ```yaml
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/min-scale: "1"
+    ```
+
+    Inspect the Service template, ownership, Ready conditions, and pods after reconciliation. If the annotation does not persist, resolve configuration through the owner rather than repeatedly patching its output. Even a persistent annotation does not prove that a replica is available or that Slack delivery succeeds.
 
 ### **Verification**
 
 ![image](images/image4.png)
 
-Now, you have completed building the sample app. When you submit a "bad" comment, you should receive a notification in your test Slack workspace, achieving the same result as shown in the demo video.
+Runtime validation must first establish that the operator reconciles the Pipe in `default`, selects a usable platform/registry, mounts the intended Secret, and produces a Ready receiver. Then submit a distinctive test review, confirm its `moderated-comment` event has `badwordfilter: bad`, and correlate the event/receiver evidence with a message in the intended test Slack channel. A Ready Pipe, Service, or pod alone does not demonstrate webhook receipt. This validation has not been performed for the retained recipe.
 
 ## **Conclusion**
 
-In this tutorial, you learned how to set up an event-driven service that automates notifications to a Slack channel using Knative Eventing and Apache Camel K. By leveraging these technologies, you can seamlessly connect your applications to third-party services and facilitate real-time information exchange between them.
+This reference retains the proposed Broker → Trigger → Broker → Camel K Pipe → Slack design and its example configuration. It remains a pending integration experiment, not a completed or validated tutorial.
 
 ## **Next Step**
 
 ![image](images/image9.png)
 
-Congratulations on successfully completing the bookstore sample app tutorial! If you want to deepen your understanding of Knative, open your bookstore front end, the demo book we used is a great starting point! Check the book ["Building Serverless Applications on Knative" by Evan Anderson.](https://www.oreilly.com/library/view/building-serverless-applications/9781098142063/){:target="_blank"}
+Return to the completed [Bookstore core outcome](../page-6/advanced-event-filtering.md). If you performed any disposable experiments, [clean up the cluster](../../getting-started/clean-up.md) and revoke the test Slack webhook when finished.
+
+**Previous:** [Complete the core Bookstore route](../page-6/advanced-event-filtering.md) · **Optional next:** [Extra challenges](../extra-challenge/README.md)
+
+If you want to deepen your understanding of Knative, open your bookstore front end, the demo book we used is a great starting point! Check the book ["Building Serverless Applications on Knative" by Evan Anderson.](https://www.oreilly.com/library/view/building-serverless-applications/9781098142063/){:target="_blank"}
 
 ![image](images/image20.png)
 

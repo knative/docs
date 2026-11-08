@@ -1,12 +1,13 @@
 ---
 audience: developer
 components: []
-function: tutorial
 ---
 
 # **Disclaimer**
 
 ![image](images/image2.png)
+
+**Supporting information, not a required lesson step.** [Return to the Bookstore overview](../page-0/welcome-knative-bookstore-tutorial.md) or [environment setup](../page-0.5/environment-setup.md).
 
 Hello dear Knative Learners,
 

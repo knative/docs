@@ -10,7 +10,9 @@ function: tutorial
 
 ![Image1](images/image1.png)
 
-As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple sentiment analysis service to categorize review comments by sentiment.
+**Starting state:** You have [observed a review event in event-display](../page-1/send-review-comment-to-broker.md#validate), and are in `start` on the same cluster in `default`.
+
+Create a Python function that labels a review as positive, neutral, or negative and returns a `moderated-comment` CloudEvent. You will connect it to the review pipeline in the Sequence lesson; Slack is not part of this lesson.
 
 ## **Which Knative features will we learn about?**
 
@@ -38,7 +40,7 @@ The function's output will be only from:
 
 Knative Function enables you to easily create, build, and deploy stateless, event-driven functions as [Knative Services](https://knative.dev/docs/serving/services/#:~:text=Knative%20Services%20are%20used%20to,the%20Service%20to%20be%20configured){:target="_blank"} by using the func CLI.
 
-In order to do so, you need to install the func CLI. You can follow the [official documentation](https://knative.dev/docs/getting-started/install-func/){:target="_blank"} to install the func CLI.
+In order to do so, you need to install the func CLI. You can follow the [Functions CLI installation instructions](../../getting-started/install-func.md) to install the func CLI.
 
 ???+ success "Verify"
     Running `func version` in your terminal to verify the installation, and you should see the version of the func CLI you installed.
@@ -46,6 +48,16 @@ In order to do so, you need to install the func CLI. You can follow the [officia
 
 ???+ bug "Troubleshooting"
     If you see `command not found`, you may need to add the func CLI to your PATH.
+
+### Prerequisite 2: A usable image registry
+
+You need a running Docker daemon and a registry namespace that you can push images to. The cluster must be able to pull the resulting images; for this exercise, use public images rather than adding private-pull configuration. Authenticate with your registry using its instructions, then set the image prefix in this terminal:
+
+```sh
+export FUNC_REGISTRY=<your-registry-host/your-namespace>
+```
+
+Replace the placeholder, for example with your registry host and user/organization namespace. Reuse this prefix in the next function lesson. For build and registry details, see [building functions](../../functions/building-functions.md) and [deploying functions](../../functions/deploying-functions.md).
 
 ## **Implementation**
 
@@ -224,6 +236,7 @@ Knative Function will automatically install the dependencies listed here when yo
     In this case, we will use the s2i build by adding the flag `-b=s2i`, and `-v` to see the verbose output.
     
     ```sh
+    cd sentiment-analysis-app
     func build -b=s2i -v
     ```
     
@@ -233,7 +246,7 @@ Knative Function will automatically install the dependencies listed here when yo
     🙌 Function built: <Your container registry>/sentiment-analysis-app:latest
     ```
     
-    This command will build the function and push the image to the container registry. After the build is complete, you can run the function using the following command:
+    This builds the function image locally; publishing is part of deployment. Run these commands from `sentiment-analysis-app` (enter it with `cd sentiment-analysis-app` from `start`). After the build is complete, run the function:
     
     
     ```sh
@@ -266,26 +279,27 @@ Knative Function will automatically install the dependencies listed here when yo
     ---> Running application from script (app.sh) ...
     ```
     
-    Knative Function has an easy way to simulate the CloudEvent, you can use the following command to simulate the CloudEvent and test your function out:
+    Leave `func run` running and open a second terminal in `sentiment-analysis-app`. Send a CloudEvent to the local function (use the listening port from `func run` if it differs):
     
     ```sh
-    func invoke -f=cloudevent --data='{"reviewText": "I love Knative so much"}' --content-type=application/json --type="new-review-comment" -v
+    func invoke -t http://localhost:8080 -f=cloudevent --data='{"reviewText": "I love Knative so much"}' --content-type=application/json --type="new-review-comment" -v
     ```
     
     where the `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`, and the `--data` flag is the input text. You can read more about `func invoke` [here](https://github.com/knative/func/blob/main/docs/reference/func_invoke.md){:target="_blank"}.
     
-    In this case, you will get the full CloudEvent response:
+    Expect a `moderated-comment` response with `sentimentResult: positive`. IDs and timestamps vary:
     
     ```sh
     Context Attributes,
       specversion: 1.0
-      type: new-review-comment
-      source: book-review-broker
+      type: moderated-comment
+      source: sentiment-analysis
       id: ebbcd761-3a78-4c44-92e3-de575d1f2d38
       time: 2024-05-27T04:44:07.549303Z
       datacontenttype: application/json
     Extensions,
-      badwordfilter: good
+      badwordfilter:
+      sentimentresult: positive
     Data,
       {
         "reviewText": "I love Knative so much",
@@ -298,8 +312,14 @@ Knative Function will automatically install the dependencies listed here when yo
 
 ![Image10](images/image10.png)
 
-!!! note
-    Please enter `/sentiment-analysis-app` when you are executing the following commands.
+Enter the function project from `start`. If you ran the optional local test, stop `func run` with `Ctrl+C` and return to `start` first:
+
+```sh
+cd "$BOOKSTORE_START"
+cd sentiment-analysis-app
+```
+
+Keep `FUNC_REGISTRY` set to your registry prefix. The commands below run from this function directory, not `start`.
 
 In Knative Function, there are two ways to build: using the [pack build](https://github.com/knative/func/blob/8f3f718a5a036aa6b6eaa9f70c03aeea740015b9/docs/reference/func_build.md?plain=1#L46){:target="_blank"} or using the [source-to-image (s2i) build](https://github.com/knative/func/blob/4f48549c8ad4dad34bf750db243d81d503f0090f/docs/reference/func_build.md?plain=1#L43){:target="_blank"}.
 
@@ -319,6 +339,8 @@ func deploy -b=s2i -v
     Function deployed in namespace "default" and exposed at URL:
     http://sentiment-analysis-app.default.svc.cluster.local
     ```
+
+    This URL is illustrative; Quickstart normally reports an externally reachable sslip.io address. Use the actual Service URL for the invocation below.
 
 !!! tip  
     You can find the URL of the Knative Function (Knative Service) by running the following command:
@@ -344,7 +366,7 @@ If you use the following command to query all the pods in the cluster, you will 
 kubectl get pods
 ```
 
-where `-A` is the flag to query all the pods in all namespaces.
+This lists pods in the current namespace; use `-A` only if you want all namespaces.
 
 And you will find that your sentiment analysis app is running:
 
@@ -368,7 +390,9 @@ After deployment, the `func` CLI provides a URL to access your function. You can
 Simply use Knative Function's command `func invoke` to directly send a CloudEvent to the function on your cluster:
 
 ```sh
-func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
+func invoke -t "$(kn service describe sentiment-analysis-app -o url)" \
+  -f=cloudevent --data='{"reviewText":"I love Knative so much"}' \
+  --content-type=application/json -v
 ```
 
 - `-f` flag indicates the type of the data, is either `HTTP` or `cloudevent`
@@ -407,6 +431,8 @@ In this tutorial, you learned how to create a serverless function for a simple s
 Next, we'll deploy another ML service following the same procedure.
 
 !!! tip
-    Don't forget to `cd` into the root directory `/start` before proceeding.
+    Return to the tutorial working directory before proceeding: `cd "$BOOKSTORE_START"`.
+
+**Previous:** [Send a review to the Broker](../page-1/send-review-comment-to-broker.md) · **Next:** [Deploy the inappropriate-language filter](../page-3/create-bad-word-filter-service.md)
 
 [Go to Deploy ML workflow: Bad word filter :fontawesome-solid-paper-plane:](../page-3/create-bad-word-filter-service.md){ .md-button .md-button--primary }

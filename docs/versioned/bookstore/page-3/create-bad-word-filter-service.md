@@ -10,7 +10,9 @@ function: tutorial
 
 ![Image 4](images/image4.png)
 
-As a bookstore owner, you aim to receive instant notifications in a Slack channel whenever a customer submits a new negative review comment. By leveraging Knative Function, you can set up a serverless function that contains a simple bad word filter service to tell whether the text contains any hateful/insulting speech.
+**Starting state:** You have [deployed and invoked sentiment analysis](../page-2/sentiment-analysis-service-for-bookstore-reviews.md#verify). Return to `start` with `cd "$BOOKSTORE_START"`, and keep the same cluster, `default` namespace, Docker daemon, and `FUNC_REGISTRY` setting.
+
+Create a second Python function that classifies review text as `good` or `bad` and returns that result as a CloudEvent extension and data field. It is not connected to the Broker until the next lesson. Notifications remain an optional extension.
 
 ## **What Knative features will we learn about?**
 
@@ -23,7 +25,7 @@ As a bookstore owner, you aim to receive instant notifications in a Slack channe
 A running serverless Knative Function that contains a python application that receives the new review comments as CloudEvent and returns the result that tells your input text contains any inappropriate languages or not. The result is sent back as CloudEvent.
 
 !!! info
-    We are using the `profanity_check` library to detect the bad words in the text. It is a open source library. Please see the disclaimer here. The result may not be 100% accurate.
+    We are using the `profanity_check` library to detect the bad words in the text. It is a third-party library supplied by the `alt-profanity-check` dependency below. See the [ML accuracy disclaimer and library acknowledgments](../disclaimer/README.md#results-of-ml-services-in-this-tutorial). Do not use this sample classifier as a guarantee of moderation accuracy.
 
 The function's output will be only from:
 
@@ -163,8 +165,13 @@ The content of [`bad-word-filter/pyproject.toml`](https://github.com/knative/doc
 ### **Step 4: Deploy the function to the cluster**
 
 ![Image 1](images/image1.png)
-!!! note
-    Please enter `/bad-word-filter` when you are executing the following commands.
+Enter the newly created project from `start`:
+
+```sh
+cd bad-word-filter
+```
+
+Run deployment and invocation from this directory. Ensure `FUNC_REGISTRY` still points to your writable registry namespace and that the cluster can pull the image.
 
 ```sh
 func deploy -b=s2i -v
@@ -183,7 +190,9 @@ func deploy -b=s2i -v
 ![Image 7](images/image7.png)
 
 ```sh
-func invoke -f=cloudevent --data='{"reviewText":"I love Knative so much"}' -v
+func invoke -t "$(kn service describe bad-word-filter -o url)" \
+  -f=cloudevent --data='{"reviewText":"I love Knative so much"}' \
+  --content-type=application/json -v
 ```
 
 ???+ success "Verify"
@@ -214,6 +223,8 @@ If you see the response, it means that the function is running successfully.
 
 In this tutorial, you learned how to create a serverless function for a simple service that can detect inappropriate languages in text with Knative.
 
-Next, we'll be learning how to use Knative Sequence to connect the 2 ML workflows and make sure they are executed in the order you want.
+Return to `start` with `cd "$BOOKSTORE_START"`. Next, connect the two functions in a Sequence: the inappropriate-language filter runs first, followed by sentiment analysis.
+
+**Previous:** [Deploy sentiment analysis](../page-2/sentiment-analysis-service-for-bookstore-reviews.md) · **Next:** [Create the Sequence](../page-4/create-sequence-to-streamline-ML-workflows.md)
 
 [Go to Create Knative Sequence :fontawesome-solid-paper-plane:](../page-4/create-sequence-to-streamline-ML-workflows.md){ .md-button .md-button--primary }

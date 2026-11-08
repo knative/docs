@@ -7,51 +7,38 @@ function: tutorial
 
 # Deploying a Knative Service
 
-In this tutorial, you will deploy a "Hello world" Knative Service that accepts the environment variable `TARGET` and prints `Hello ${TARGET}!`.
+**Start here after [installing Quickstart](quickstart-install.md).** Use the `kn` CLI throughout this tutorial; `kubectl` is used to inspect Kubernetes pods. Keep the same cluster and the `default` namespace for every lesson. There should not already be a Service named `hello` in that namespace.
 
-=== "kn"
+You will deploy a "Hello world" Knative Service that accepts the environment variable `TARGET` and prints `Hello ${TARGET}!`.
 
-    Deploy the Service by running the command:
+## Deploy the Service
 
-    ```bash
-    kn service create hello \
-    --image ghcr.io/knative/helloworld-go:latest \
-    --port 8080 \
-    --env TARGET=World
+```bash
+kn service create hello \
+  --image ghcr.io/knative/helloworld-go:latest \
+  --port 8080 \
+  --env TARGET=World
+```
+
+!!! success "Expected result"
+    `kn` reports that `hello` is available and prints its URL. On the kind Quickstart cluster, the URL resembles `http://hello.default.127.0.0.1.sslip.io`. Generated Revision names and addresses can vary; use the values from your output.
+
+## Send your first request
+
+```bash
+curl "$(kn service describe hello -o url)"
+```
+
+!!! success "Expected output"
+    ```{ .text .no-copy }
+    Hello World!
     ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Service hello created to latest revision 'hello-0001' is available at URL:
-        http://hello.default.${LOADBALANCER_IP}.sslip.io
-        ```
-        The value of `${LOADBALANCER_IP}` above depends on your type of cluster,
-        for `kind` it will be `127.0.0.1` for `minikube` depends on the local tunnel.
 
-=== "YAML"
-    1. Copy the following YAML into a file named `hello.yaml`:
+You now have an HTTP endpoint managed by Knative Serving. The next lesson uses this same Service to observe scale-to-zero.
 
-        ```yaml
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        metadata:
-          name: hello
-        spec:
-          template:
-            spec:
-              containers:
-                - image: ghcr.io/knative/helloworld-go:latest
-                  ports:
-                    - containerPort: 8080
-                  env:
-                    - name: TARGET
-                      value: "World"
-        ```
-    1. Deploy the Knative Service by running the command:
+If the request fails to resolve the hostname, see the [DNS check in Autoscaling](first-autoscale.md#access-your-knative-service). If the Service is not Ready, start with [debugging application issues](../serving/troubleshooting/debugging-application-issues.md).
 
-        ```bash
-        kubectl apply -f hello.yaml
-        ```
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            service.serving.knative.dev/hello created
-            ```
+??? info "YAML equivalent (not needed for this route)"
+    The [Quickstart YAML examples](yaml-examples.md#deploy-hello) show the same resource. Do not create it a second time; continue with `kn` for the remaining lessons.
+
+**Previous:** [Install Quickstart](quickstart-install.md) · **Next:** [Observe autoscaling](first-autoscale.md)

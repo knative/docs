@@ -9,7 +9,9 @@ function: tutorial
 
 ![Image](images/image25.png)
 
-The main dashboard of our bookstore features a comment section where readers can view comments from others and submit their own through a text input area. While the process appears straightforward - click a button, and the comment is posted - the underlying mechanism is powered by a robust event-driven architecture.
+**Starting state:** You have [completed environment setup](../page-0.5/environment-setup.md), the frontend connects to the backend, and your terminal is in `start` on the disposable cluster in `default`.
+
+In this lesson, submit a review and observe its `new-review-comment` CloudEvent in event-display. It will not be inserted into the database yet. Use the YAML steps below; the CLI Broker command is an alternative, not an additional step.
 
 ## **What Knative features will we learn about?**
 
@@ -29,7 +31,7 @@ In simple words: after the user clicks on the submit button in the frontend, the
 
 ![Image](images/image6.png)
 
-In the world of microservices and REST APIs, we often refer to requests as the primary method of communication between services. However, in an event-driven architecture, the smallest unit is an event. Knative Eventing adheres to the CloudEvents specification, making it essential to understand this concept before moving forward. Learn more about CloudEvents [here](https://cloudevents.io/){:target="_blank"} before proceeding!
+In the world of microservices and REST APIs, we often refer to requests as the primary method of communication between services. However, in an event-driven architecture, the smallest unit is an event. Knative Eventing adheres to the CloudEvents specification, making it essential to understand this concept before moving forward. The review is carried in the event's `data.reviewText`; its `type` is `new-review-comment`. The examples below show both attributes and data. Keep the [CloudEvents specification](https://cloudevents.io/) as supporting reference rather than a prerequisite detour.
 
 ### **Step 1: Understand Book Review Service**
 
@@ -62,7 +64,7 @@ app.post('/add', async (req, res) => {
       const response = await fetch(brokerURI, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/cloudevents+json',
+          'Content-Type': 'application/json',
           'ce-specversion': receivedEvent.specversion,
           'ce-type': receivedEvent.type,
           'ce-source': receivedEvent.source,
@@ -105,7 +107,7 @@ if (receivedEvent.type === 'new-review-comment') {
 const response = await fetch(brokerURI, {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/cloudevents+json',
+    'Content-Type': 'application/json',
     'ce-specversion': receivedEvent.specversion,
     'ce-type': receivedEvent.type,
     'ce-source': receivedEvent.source,
@@ -122,7 +124,9 @@ const response = await fetch(brokerURI, {
 The Node.js server contains other functions that follow a similar pattern, with detailed comments explaining their functionality:
 
 - `/insert`: Receives CloudEvents and inserts the payload into the PostgreSQL database.
-- `/comment`: Creates a WebSocket connection with the frontend to transport comments from the database.
+- `/comments`: Creates a WebSocket connection with the frontend to transport comments from the database.
+
+The excerpts above focus on event forwarding. The checked-in `node-server/index.js` also acknowledges successful forwarding with an HTTP 200 response and returns errors for failed forwarding or unexpected event types. Its binary-mode CloudEvent uses `application/json` for the data body and `ce-*` headers for attributes; do not label that data-only body as a structured CloudEvent.
 
 ### **Step 2: Create Broker**
 
@@ -193,7 +197,7 @@ Broker 'bookstore-broker' successfully created in namespace 'default'.
 
 ![Image](images/image15.png)
 
-Hardcoding URLs to connect with Kubernetes services in your application can be limiting and inflexible. A SinkBinding dynamically injects the URL of the Kubernetes service into your application.
+Hardcoding URLs to connect with Kubernetes services in your application can be limiting and inflexible. For this sample, the SinkBinding injects the Broker destination as `K_SINK` into the selected Deployment's pod template.
 
 Learn more about SinkBinding [here](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/){:target="_blank"} and the [spec schema](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/reference/){:target="_blank"}!
 
@@ -336,7 +340,7 @@ A Filter in the Trigger will **filter the events based on the filter condition**
 
 ![Image](images/image18.png)
 
-There is also a concept called [Channel](https://knative.dev/docs/eventing/channels/){:target="_blank"} in Knative, and generally speaking, you can treat Broker & Trigger without filter the same as Channel & Subscription.
+[Channels and Subscriptions](../../eventing/channels/README.md) provide another event-routing abstraction. They are not interchangeable with Brokers and Triggers; this tutorial uses a Broker throughout.
 
 Learn more about Broker & Trigger [here](https://knative.dev/docs/eventing/brokers/){:target="_blank"}!
 
@@ -425,6 +429,8 @@ kubectl logs -l=app=event-display -f
 
 ![Image](images/image13.png)
 
-Please make sure you pass the Validate test before proceeding. 
+Stop the log watch with `Ctrl+C`. Proceed only after seeing your submitted review in a `new-review-comment` event. This is the first observable result of the core route.
+
+**Previous:** [Environment setup](../page-0.5/environment-setup.md) · **Route:** [Bookstore core lessons](../page-0/welcome-knative-bookstore-tutorial.md#tutorial-page-structure)
 
 [Go to Deploy ML workflow: Sentiment Analysis :fontawesome-solid-paper-plane:](../page-2/sentiment-analysis-service-for-bookstore-reviews.md){ .md-button .md-button--primary }
