@@ -207,7 +207,7 @@ nav:
       - Sugar controller: eventing/sugar/README.md
       - FAQ: eventing/faq/README.md
 
-  - Install & operate:
+  - Install and Manage:
       - install/README.md
       - Administrator overview: admin/admin-overview.md
       - Installation:

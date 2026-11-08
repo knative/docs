@@ -25,7 +25,7 @@ for local testing or deployment as a Knative Service.
   Use the [Serving guide](serving/README.md) for scaling, domains, and traffic.
 - **Connect events:** [route matching events to a subscriber](eventing/triggers/README.md).
   Use the [Eventing guide](eventing/README.md) for sources, delivery, and troubleshooting.
-- **Install and operate:** [choose an installation route](install/README.md),
+- **Install and Manage:** [choose an installation route](install/README.md),
   then use the [operator task shortcuts](how-to/README.md#operate-a-knative-cluster)
   for configuration, security, observation, and upgrades.
 
