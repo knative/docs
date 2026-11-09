@@ -26,13 +26,14 @@ COPY . ./
 # Install dependencies and tidy up the go.mod and go.sum files.
 RUN go mod tidy
 
-# Build the binary.
-# -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o webhook-sample
+# Build the app by default, or another main package when requested.
+ARG APP_PATH=.
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o app "$APP_PATH"
 
-FROM golang:1.27
+FROM alpine:3.24
+RUN apk add --no-cache ca-certificates
 
 EXPOSE 8080
-COPY --from=builder /app/webhook-sample /webhook-sample
+COPY --from=builder /app/app /app
 
-ENTRYPOINT ["/webhook-sample"]
+ENTRYPOINT ["/app"]
