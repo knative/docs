@@ -4,7 +4,7 @@ GEM
     base64 (0.3.0)
     logger (1.7.0)
     mustermann (3.1.1)
-    rack (3.2.7)
+    rack (3.2.8)
     rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -28,7 +28,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rack (~> 3.2.7)
+  rack (~> 3.2.8)
   rackup (~> 2.3)
   sinatra (~> 4.2.1)
   webrick (~> 1.9)
