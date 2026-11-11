@@ -18,45 +18,19 @@ We will use a Trigger to listen for events in the Broker to send to the sink.
 
 Create a Trigger that listens for CloudEvents from the event source and places them into the sink, which is also the CloudEvents Player app.
 
-=== "kn"
+Use the same Quickstart cluster and `default` namespace as in [the source lesson](first-source.md).
 
-    To create the Trigger, run the command:
-    ```bash
-    kn trigger create cloudevents-trigger --sink cloudevents-player  --broker example-broker
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Trigger 'cloudevents-trigger' successfully created in namespace 'default'.
-        ```
+```bash
+kn trigger create cloudevents-trigger \
+  --sink cloudevents-player --broker example-broker
+kubectl get trigger cloudevents-trigger
+```
 
-=== "YAML"
+!!! success "Expected result"
+    The Trigger is created in `default`. Wait for `READY` to be `True` before sending another event.
 
-    1. Copy the following YAML into a file named `ce-trigger.yaml`:
-        ```bash
-        apiVersion: eventing.knative.dev/v1
-        kind: Trigger
-        metadata:
-          name: cloudevents-trigger
-          annotations:
-            knative-eventing-injection: enabled
-        spec:
-          broker: example-broker
-          subscriber:
-            ref:
-              apiVersion: serving.knative.dev/v1
-              kind: Service
-              name: cloudevents-player
-        ```
-
-    1. Create the Trigger by running the command:
-        ```bash
-        kubectl apply -f ce-trigger.yaml
-        ```
-
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            trigger.eventing.knative.dev/cloudevents-trigger created
-            ```
+??? info "YAML equivalent (not needed for this route)"
+    See [route Broker events back to the Player](yaml-examples.md#route-broker-events-back-to-the-player).
 
 ??? question "What CloudEvents is my Trigger listening for?"
     Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
@@ -81,7 +55,13 @@ You may need to refresh the page to see your changes.
 
     If you send a CloudEvent with type `some-type`, it is reflected in the CloudEvents Player UI.  The Trigger ignores any other types.
 
-    You can filter on any aspect of the CloudEvent you would like to.
+    This example matches the CloudEvent `type` attribute, not fields inside its data payload. See the [Trigger filtering reference](../eventing/triggers/reference.md) for filtering details.
 
 
-Some people call this **"Event-Driven Architecture"** which can be used to create your own **"Functions as a Service"** on Kubernetes :tada: :taco: :fire:
+You have now observed a complete event path: Player → Broker → Trigger → Player. The sent and received entries show the two sides of that path.
+
+For your own workloads, [route matching events with a Trigger](../eventing/triggers/README.md), or [configure retries and a dead-letter sink in an isolated test](../eventing/event-delivery.md). If delivery is not working, start with [events not reaching a subscriber](../eventing/troubleshooting/events-not-delivered.md) or [repeated delivery failures](../eventing/troubleshooting/delivery-failures.md), according to the evidence you have.
+
+**Previous:** [Send an event](first-source.md) · **Next:** [Choose your next step](next-steps.md)
+
+Finished experimenting? [Clean up the disposable cluster](clean-up.md).

@@ -20,10 +20,14 @@
 
 ## Templates
 
+Choose by reader purpose; see [page contracts and review checklists](what-to-contribute/creating-new-docs.md#content-types).
+
+- [Tutorial template](templates/template-tutorial.md)
+- [How-to guide template](templates/template-procedure.md)
+- [Reference template](templates/template-reference.md)
+- [Explanation template](templates/template-concept.md)
+- [Troubleshooting how-to template](templates/template-troubleshooting.md)
 - [Blog entry template](templates/template-blog-entry.md)
-- [Concept template](templates/template-concept.md)
-- [Procedure template](templates/template-procedure.md)
-- [Troubleshooting template](templates/template-troubleshooting.md)
 
 
 ## Style

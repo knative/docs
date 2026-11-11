@@ -7,20 +7,23 @@ function: reference
 
 # Configuring scale bounds
 
-You can configure upper and lower bounds to control autoscaling behavior.
+This reference lists scale bounds and related autoscaling settings. Examples illustrate the settings; they are not an installation or configuration workflow.
+
+Operator fragments use `operator.knative.dev/v1beta1`, the served API in the [Operator v1.24.0 KnativeServing CRD](https://github.com/knative/operator/blob/knative-v1.24.0/config/crd/bases/operator.knative.dev_knativeservings.yaml){target=_blank}. Merge the intended fields into your existing resource in its actual namespace, using the [ConfigMap mapping reference](../../install/operator/configuration-reference.md#configmap-mapping) to select the entry and the [generic Serving Operator apply/verify workflow](../../install/operator/configuring-serving-cr.md#apply-and-verify-a-configuration-change) to apply it and inspect `config-autoscaler`, not the separate domain example. Check the installed CRD for other Operator releases.
 
 You can also specify the initial scale that a Revision is scaled to immediately after creation.
 This can be a default configuration for all Revisions, or for a specific Revision using an annotation.
 
+Defaults below are upstream defaults, not a measurement of your cluster's active configuration. Global parsing is defined in [v1.24 autoscaler configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}; per-revision constraints are defined in [annotation validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank}.
+
 ## Lower bound
 
-This value controls the minimum number of replicas that each Revision should have.
-Knative will attempt to never have less than this number of replicas at any one point in time.
+This value controls the minimum replica count for a reachable Revision. The Autoscaler ignores the lower bound for a Revision marked unreachable; it is not a guarantee that every historical Revision retains replicas. See [`ScaleBounds` in v1.24](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/v1alpha1/pa_lifecycle.go#L86-L105){target=_blank}.
 
 * **Global key:** `min-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/min-scale`
-* **Possible values:** integer
-* **Default:** `0` if scale-to-zero is enabled and class KPA is used, `1` otherwise
+* **Possible values:** Nonnegative integer. Per-revision bounds use 32-bit integers; a nonzero upper bound must be at least the lower bound.
+* **Default:** The cluster `min-scale` default is `0`; an absent annotation uses that setting. With upstream defaults, KPA can scale to zero. Disabling scale to zero prevents KPA from applying a zero scale; HPA defaults to a minimum of one replica. Explicit lower bounds and cluster overrides still apply.
 
 !!! note
     For more information about scale-to-zero configuration, see the documentation on [Configuring scale to zero](scale-to-zero.md).
@@ -57,7 +60,7 @@ Knative will attempt to never have less than this number of replicas at any one 
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -81,8 +84,8 @@ When `max-scale-limit` is set to a positive value, a revision with a max scale a
 
 * **Global key:** `max-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/max-scale`
-* **Possible values:** integer
-* **Default:** `0` which means unlimited
+* **Possible values:** Nonnegative integer. Per-revision bounds use 32-bit integers; `0` means no upper bound. A positive global `max-scale-limit` requires a positive `max-scale` no greater than that limit and rejects per-revision unlimited or over-limit values.
+* **Default:** `0`, meaning no upper bound
 
 **Example:**
 
@@ -118,7 +121,7 @@ When `max-scale-limit` is set to a positive value, a revision with a max scale a
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -142,7 +145,7 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 
 * **Global key:** `initial-scale` in combination with `allow-zero-initial-scale`
 * **Per-revision annotation key:** `autoscaling.knative.dev/initial-scale`
-* **Possible values:** integer
+* **Possible values:** Nonnegative integer; `0` requires global `allow-zero-initial-scale: "true"`.
 * **Default:** `1`
 
 **Example:**
@@ -178,7 +181,7 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -191,18 +194,12 @@ When the Revision is created, the larger of initial scale and lower bound is aut
 
 ## Scale Up Minimum
 
-This value controls the minimum number of replicas that will be created when the Revision scales up from zero.
-After the Revision has reached this scale one time, this value is ignored. This means that the Revision will scale down after the activation scale is reached if the actual traffic received needs a smaller scale.
-
-When the Revision is created, the larger of activation scale and lower bound is automatically chosen as the initial target scale.
+This value sets a floor on positive desired replica counts in KPA, while preserving the ability to scale to zero when demand disappears. It is not a one-time initial scale: v1.24 applies it on scaling evaluations with a positive computed count. Lower and upper scale bounds are applied afterward. See the [activation-scale logic](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/scaling/autoscaler.go#L209-L219){target=_blank} and [bounds application](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/autoscaling/kpa/scaler.go#L341-L363){target=_blank}.
 
 * **Global key:** n/a
 * **Per-revision annotation key:** `autoscaling.knative.dev/activation-scale`
-* **Possible values:** integer
-* **Default:** `1`
-
-
-**Example:**
+* **Possible values:** An explicitly set value must be at least `2`, no smaller than the annotated lower bound, and no larger than a nonzero annotated upper bound.
+* **Default:** The annotation is unset, so no extra activation floor is applied; positive computed demand normally yields at least one replica before other bounds.
 
 === "Per Revision"
     ```yaml
@@ -234,7 +231,7 @@ delay period.
 
 * **Global key:** `scale-down-delay`
 * **Per-revision annotation key:** `autoscaling.knative.dev/scale-down-delay`
-* **Possible values:** Duration, `0s` <= value <= `1h`
+* **Possible values:** Per-revision duration from `0s` to `1h`, in whole seconds. The global duration must be nonnegative and in whole seconds; the v1.24 global parser does not impose the annotation's one-hour maximum.
 * **Default:** `0s` (no delay)
 
 **Example:**
@@ -269,7 +266,7 @@ delay period.
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -284,7 +281,7 @@ The stable window defines the sliding time window over which metrics are average
 
 * **Global key:** `stable-window`
 * **Per-revision annotation key:** `autoscaling.knative.dev/window`
-* **Possible values:** Duration, `6s` <= value <= `1h`
+* **Possible values:** Duration from `6s` to `1h`, in whole seconds, for both the global setting and per-revision annotation.
 * **Default:** `60s`
 
 !!! note
@@ -322,7 +319,7 @@ The stable window defines the sliding time window over which metrics are average
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

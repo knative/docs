@@ -1,26 +1,59 @@
-# Troubleshooting template
+<a id="troubleshooting-template"></a>
 
-When writing guidance to help to troubleshoot specific errors, the error must include:
+# Troubleshooting how-to template
 
-* **Error Description:** To describe the error very briefly so that users can search for it easily.
+Troubleshooting is a task context, not a fifth technical documentation mode. Start with the reader's observed symptom in their existing environment, not with a demonstration topology they must install first.
 
-* **Symptom:** To describe the error in a way that helps users to diagnose their issue.
-Include error messages or anything else users might see if they encounter this error.
+Contract: establish scope, inspect evidence, choose a remedy based on confirmed conditions, and verify recovery. Avoid presenting a guess as the only cause. Review with the [page checklists](../what-to-contribute/creating-new-docs.md#author-and-reviewer-checklists).
 
-* **Explanation (or cause):** To inform users about why they are seeing this error.
-This can be omitted if the cause of the error is unknown.
+````markdown
+---
+audience: administrator
+components:
+  - eventing
+function: how-to
+---
 
-* **Solution:** To inform the user about how to fix the error.
+# Resolve a searchable symptom
 
+Describe the symptom, including the exact error text or status when useful.
+State which resources and implementations this guide covers.
 
-## Example Troubleshooting Table
+## Before you begin
 
+Identify the affected resource, namespace, installed implementation, and version.
+State required access to status, events, and logs. Warn about sensitive log data.
+
+## Check the affected resource
+
+1. Give a non-destructive inspection command with explained placeholders.
+1. Show what evidence to look for and distinguish expected from abnormal output.
+
+## If the evidence shows a specific condition
+
+Explain the confirmed cause briefly, if known, then give the remedy.
+Label ingress-, transport-, and version-specific branches explicitly.
+Warn before destructive changes and describe how to recover previous values.
+
+## Verify recovery
+
+Repeat the failing operation and state the expected result. Readiness alone
+may not prove that requests or events reach their destination.
+
+## If the symptom remains
+
+Give a next diagnostic step or escalation route and the useful evidence to
+collect. Do not ask readers to publish secrets or security vulnerability details.
+````
+
+## Compact error reference
+
+For a collection of brief, known errors, this lookup table can accompany links to full how-tos. Do not put long numbered procedures inside table cells.
+
+```markdown
+| Error or symptom | Confirming evidence | Cause, if known | Remedy |
+| --- | --- | --- | --- |
+| Exact message or observed behavior | Status or log evidence | Confirmed condition, not a guess | Link to the scoped repair guide |
 ```
-##  Troubleshooting item
 
-| **Error Description** |
-|----------|------------|
-| Symptom  | During the event something breaks. |
-| Cause    | The thing is broken. |
-| Solution | To solve this issue, do the following:<br><br>1. This.<br>2. That. |
-```
+A reproducible debugging exercise belongs in a tutorial with its own chosen setup, not in the mandatory path for someone diagnosing an existing installation.

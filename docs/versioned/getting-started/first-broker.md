@@ -7,7 +7,7 @@ function: tutorial
 
 # Sources, Brokers, and Triggers
 
-As part of the `kn quickstart` install, an InMemoryChannel-backed Broker is installed on your kind cluster.
+**Starting state:** You have completed [Quickstart installation](quickstart-install.md) and are using its kind cluster in `default`. The plugin installs an InMemoryChannel-backed Broker implementation and provides an example Broker for this exercise.
 
 Verify that the Broker is installed by running the following command:
 
@@ -23,4 +23,6 @@ kn broker list
 !!! warning
     InMemoryChannel-backed Brokers are for development use only and must not be used in a production deployment.
 
-**Next, you'll take a look at a simple implementation** of Sources, Brokers, Triggers and Sinks using an app called the CloudEvents Player.
+If `example-broker` is absent, create it on this Quickstart cluster with `kn broker create example-broker`, then run `kn broker list` again. If it is present but not Ready, inspect `kubectl describe broker example-broker` and resolve its status before continuing. The cluster must have the Broker implementation installed; creating a Broker alone does not install it.
+
+**Previous:** [Eventing learning route](getting-started-eventing.md) · **Next:** [Send an event with the CloudEvents Player](first-source.md)

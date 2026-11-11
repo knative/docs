@@ -1,7 +1,6 @@
 <!-- Snippet used in the following topics:
 - versioned/client/install-kn.md
 - versioned/getting-started/quickstart-install.md
-- versioned/install/quickstart-install.md
 -->
 
 ## Install the Knative CLI
@@ -35,11 +34,15 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
 
         Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `kn-darwin-amd64` or `kn-linux-amd64`.
 
-    1. Move the executable binary file to a directory on your `PATH` by running the command:
+    1. Move the executable to a writable directory on your `PATH`. For example:
 
         ```bash
-        mv kn /usr/local/bin
+        mkdir -p "$HOME/.local/bin"
+        mv kn "$HOME/.local/bin/kn"
+        export PATH="$HOME/.local/bin:$PATH"
         ```
+
+        If this directory is not already on your `PATH`, add the same `export` to your shell's startup configuration for future terminals.
 
     1. Verify that `kn` commands are working properly. For example:
 
@@ -62,11 +65,7 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
         hack/build.sh -f
         ```
 
-    1. Move the executable binary file to a directory on your `PATH` by running the command:
-
-        ```bash
-        mv kn /usr/local/bin
-        ```
+    1. Move the executable to a writable directory on your `PATH`, as described in the binary installation option above.
 
     1. Verify that `kn` commands are working properly. For example:
 

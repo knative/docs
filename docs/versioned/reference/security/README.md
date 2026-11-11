@@ -4,16 +4,19 @@ components:
   - functions
   - serving
   - eventing
-function: how-to
+# Landing page: security tasks, threat model, and disclosure policy.
 ---
 
 # Knative Security and Disclosure Information
 
-This page describes how to validate code and report security vulnerabilities in Knative.
+Use this page to choose security guidance or find the private vulnerability reporting process. Installing Knative or verifying an artifact does not by itself establish a secure deployment.
 
-For a complete description of the Knative threat model, see the following resource:
+## Choose security guidance
 
-* [Knative Threat Model](./threat-model.md)
+- **Understand the trust boundaries:** [Knative threat model](threat-model.md), including infrastructure assumptions and mitigations.
+- **Verify release artifacts:** [verify client binaries](verifying-cli.md) or [verify images and provenance](verifying-images.md).
+- **Configure an installation:** [administrator isolation guidance](../../admin/admin-overview.md#securing-knative) and [Serving encryption guidance](../../serving/encryption/encryption-overview.md).
+- **Report a suspected vulnerability:** use the private process below, not a public issue containing security details.
 
 ## Reporting a Vulnerability
 

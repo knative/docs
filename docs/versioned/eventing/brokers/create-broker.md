@@ -83,3 +83,13 @@ You can create a Broker by using the `kn` CLI or by applying YAML files using `k
         ```
  
         If the `READY` status is `False`, wait a few moments and then run the command again.
+        If it remains not Ready, inspect its conditions using the
+        [Broker/Trigger readiness checks](../troubleshooting/events-not-delivered.md#broker-or-trigger-is-not-ready).
+
+## Next steps
+
+A Ready Broker provides an ingress destination; it does not by itself configure
+an event subscription. [Use a Trigger](../triggers/README.md) to route events to a
+subscriber and verify receipt. For routing behavior, read [Brokers](README.md).
+For failure policy, [configure and test delivery settings](../event-delivery.md)
+and consult the [Event delivery reference](../reference/event-delivery.md).

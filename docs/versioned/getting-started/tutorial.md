@@ -4,66 +4,42 @@ components:
   - functions
   - serving
   - eventing
-function: tutorial
 ---
 
-# Welcome to the Knative Tutorials
+<span id="welcome-to-the-knative-tutorials"></span>
 
-Choose your learning path based on your goals and experience level.
+# Learn Knative with tutorials
 
----
+<span id="getting-started-with-knative"></span>
 
-## Getting Started with Knative
+## First encounter: Quickstart
 
-**Perfect for:** First-time users and developers wanting hands-on experience
+Start with the [Knative Quickstart](README.md). On a disposable local kind cluster, deploy a Service, observe autoscaling, split traffic, and send and receive events. Follow one CLI-based route; the tutorial provides explicit Previous and Next links.
 
-Comprehensive guide with multiple learning paths:
+You need Docker, kind, kubectl, curl, and at least 3 CPUs and 3 GB of RAM available for the cluster. The [installation lesson](quickstart-install.md) includes `kn` and plugin setup.
 
-  - Quick local installation (10 minutes with kind/minikube)
-  - Step-by-step tutorials for Serving, Eventing, and Functions
+[Start Quickstart :octicons-arrow-right-24:](README.md){ .md-button .md-button--primary }
 
-**What you'll learn:** Deploy your first service, explore autoscaling, build event-driven applications, and create serverless functions.
+<span id="knative-bookstore-end-to-end-sample-application"></span>
 
-[Explore Getting Started Paths :octicons-arrow-right-24:](../getting-started/README.md){ .md-button }
+## After the basics: Bookstore
 
----
+Once you have completed Quickstart's Serving and Eventing lessons, try the [Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md). Submit a review, observe its CloudEvent, run two processing functions in a Sequence, and display accepted reviews with sentiment labels.
 
-## Knative Bookstore: End-to-End Sample Application
+Bookstore adds Kubernetes Deployments, a PostgreSQL StatefulSet, LoadBalancer access, and function builds with a container registry. Slack and Apache Camel K are **optional extensions**, not prerequisites for the core outcome. This is an educational sample, not production-application guidance; see its [disclaimer and acknowledgments](../bookstore/disclaimer/README.md).
 
-**Perfect for:** Learning Knative through a real-world application
+[Continue to Bookstore :octicons-arrow-right-24:](../bookstore/page-0/welcome-knative-bookstore-tutorial.md){ .md-button }
 
-Build a complete online bookstore application from scratch and explore Knative's powerful features in action.
+<span id="a-smaller-follow-on-functions"></span>
 
-**What you'll learn:** Integration of Serving and Eventing, real-world architecture patterns, and best practices for production applications.
+## A smaller local-first exercise: Functions
 
-[Start Bookstore Tutorial :octicons-arrow-right-24:](../bookstore/page-0/welcome-knative-bookstore-tutorial.md){ .md-button }
-
-![Knative Bookstore Application](../bookstore/page-0/images/1.png)
-
----
+To write a Go HTTP function rather than a multi-service sample, follow the [Functions introduction and exercise](about-knative-functions.md). Edit its handler and recognize the response from a local containerized run. You can start without Quickstart, Kubernetes, or a registry account; have a Docker-compatible daemon and a text editor available. Deployment is optional and adds registry and cluster prerequisites.
 
 ## Not sure where to start?
 
-Here are common paths:
-
-  - **Want to try Knative in 10 minutes?** → [Quick Start Tutorial](quickstart-install.md)
-  - **Need to understand Knative first?** → [Technical Overview](../README.md)
-  - **Building event-driven apps?** → [Eventing Tutorial](getting-started-eventing.md)
-  - **Creating serverless functions?** → [Functions Tutorial](about-knative-functions.md)
-  - **Ready for production?** → [Installation Guide](../install/README.md)
-
----
+Choose [Quickstart](README.md) for your first hands-on encounter, [Functions](about-knative-functions.md) for a smaller local-first exercise, or [Bookstore](../bookstore/page-0/welcome-knative-bookstore-tutorial.md) after the Serving and Eventing basics. For managing a real installation rather than learning on a disposable cluster, use the [installation guides](../install/README.md).
 
 ## Prerequisites
 
-**For Quick Start Tutorial:**
-
-  - Docker
-  - kubectl
-  - 3 CPUs, 3 GB RAM
-
-**For Bookstore Tutorial:**
-
-  - Kubernetes cluster (local or cloud)
-  - Basic familiarity with Kubernetes concepts
-  
+Check [Quickstart's installation prerequisites](quickstart-install.md#before-you-begin) or [Bookstore's additional prerequisites](../bookstore/page-0/welcome-knative-bookstore-tutorial.md#before-you-begin) before starting. For Functions, the [local-run lesson](build-run-deploy-func.md#running-a-function) separates local requirements from [optional registry deployment](build-run-deploy-func.md#deploying-a-function).

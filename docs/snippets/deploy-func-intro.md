@@ -2,4 +2,4 @@
 - versioned/getting-started/build-run-deploy-func.md
 - versioned/functions/deploying-functions.md
 -->
-Deploying a function creates an OCI container image for your function, and pushes this container image to your image registry. The function is deployed to the cluster as a Knative Service. Redeploying a function updates the container image and resulting Service that is running on your cluster. Functions that have been deployed to a cluster are accessible on the cluster just like any other Knative Service.
+Deploying a function normally builds an OCI image when needed, publishes it to your configured registry, and creates or updates a Knative Service on the selected cluster. Build and push can be disabled when using an already published image. A deployed function uses the same routing and access configuration as other Knative Services; publishing an image alone does not deploy it.

@@ -5,7 +5,18 @@ components:
   - eventing
 function: explanation
 ---
-# Overview
+<a id="overview"></a>
+
+# Administering Knative: roles and configuration
+
+This page explains administrator responsibilities and the cluster configuration model. For a task, choose an entry point:
+
+- **Install or maintain:** [installation routes](../install/README.md), [version checks](../install/upgrade/check-install-version.md), [upgrades](../install/upgrade/README.md), and [installation troubleshooting](../install/troubleshooting.md).
+- **Configure:** [change and verify an Operator-managed ConfigMap](../install/operator/configuring-with-operator.md), [set the Operator-managed cluster-default concurrency target](../install/operator/configuring-with-operator.md#set-the-cluster-default-concurrency-target), [Serving Operator configuration goals](../install/operator/configuring-serving-cr.md), or [Eventing Operator configuration goals](../install/operator/configuring-eventing-cr.md). For a non-Operator installation, read [Working with ConfigMaps](editing-configmaps.md).
+- **Secure:** [security guidance and disclosure](../reference/security/README.md) and [Serving encryption guidance](../serving/encryption/encryption-overview.md).
+- **Observe:** [collect Serving metrics](../serving/observability/metrics/collecting-metrics.md) or [collect Eventing metrics](../eventing/observability/metrics/collecting-metrics.md).
+
+## Administrator and developer responsibilities
 
 This page provides guidance for administrators on how to manage Knative on an existing Kubernetes cluster. Knative administrators install and configure both or either of the Serving and Eventing components along with default or preferred plugins.
 
@@ -72,7 +83,7 @@ Of particular interest to cluster administrators is that Knative supports custom
 
 ## Installation decisions
 
-See the [Installation roadmap](../install/README.md#installation-roadmap) for prerequisites and installation steps. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
+See the [installation roadmap](../install/README.md#installation-roadmap) for routes, [installation requirements](../install/requirements.md) for prerequisites, and [Choosing an installation method](../install/installation-methods.md) for the YAML/Operator comparison. Your first installation decision is whether to use a YAML-based installation or use the Knative Operator. The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. If you just need to get acquainted with Knative at this time, you can install the [quickstart](../getting-started/quickstart-install.md).
 
 The method you use to install Knative is not permanent and you can install clusters differently depending on the situation. Although transitioning between installation methods on one cluster is possible, new installations on separate clusters is the better-tested and officially supported approach.
 
@@ -112,7 +123,7 @@ Knative configurations are performed by the following methods:
 
 - Using the Knative Operator
 
-    Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. You can manage the operator without using the `kn` CLI. The `kn` CLI manages only operator installations.
+    Platform-wide settings can be managed declaratively using the Knative Operator custom resources. Install and manage the Operator with manifests, Helm, or the `kn` Operator plugin. The plugin's commands manage Operator installations; the broader `kn` CLI also supports developer workflows.
 
     For more information, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) and [CLI tools](../client/README.md).
 

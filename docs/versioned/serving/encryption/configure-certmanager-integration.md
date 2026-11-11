@@ -20,6 +20,22 @@ The following must be installed on your Knative cluster:
 !!! warning
     Make sure you have installed cert-manager. Otherwise, the Serving controller will not start up correctly.
 
+You also need permission to read component configuration and update its authoritative source, plus the issuer/certificate resources required by the chosen example. Retain prior issuer-reference values for recovery. If GitOps manages the installation, update and synchronize that source rather than competing with live edits.
+
+### Configuration authority and destination
+
+Identify whether Serving is Operator-managed or directly managed through YAML before changing `config-certmanager`. Operator users change the `KnativeServing` resource under `spec.config`; they must not directly edit the generated ConfigMap. The issuer and Certificate resources are separate cert-manager resources, not ConfigMap values to place under `spec.config`.
+
+Select the intended context and component namespace for the commands below:
+
+```bash
+CONTEXT=my-cluster-context
+SERVING_NAMESPACE=knative-serving
+SERVING_RESOURCE=knative-serving
+kubectl config get-contexts
+```
+
+Replace the example values and confirm the named context is the intended cluster. `SERVING_RESOURCE` is needed only for the Operator route. These examples address a same-cluster installation; use the [multi-cluster Operator guide](../../install/operator/multi-cluster-deployment.md) for remote targets.
 
 ## Issuer configuration
 
@@ -111,44 +127,68 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
 1. Ensure that the `ClusterIssuer` is ready:
 
     ```bash
-    kubectl get clusterissuer cluster-selfsigned-issuer -o yaml
-    kubectl get clusterissuer knative-selfsigned-issuer -o yaml
+    kubectl --context "$CONTEXT" get clusterissuer cluster-selfsigned-issuer -o yaml
+    kubectl --context "$CONTEXT" get clusterissuer knative-selfsigned-issuer -o yaml
     ```
     Result: The `Status.Conditions` should include `Ready=True`.
 
-1. Then reference the `ClusterIssuer` in the `config-certmanager` ConfigMap:
+Set the intended issuer references through the selected configuration authority. The example below retains the self-signed issuer for all three features; change only references appropriate to your intended encryption features and preserve unrelated configuration. The references are serialized YAML strings in [v1.24 Serving's `config-certmanager`](https://github.com/knative/serving/blob/knative-v1.24.0/config/core/configmaps/certmanager.yaml){target=_blank}. [`NewCertManagerConfigFromConfigMap`](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/certificate/config/cert_manager.go){target=_blank} parses all three keys and defaults each absent reference to the `knative-selfsigned-issuer` ClusterIssuer. Parsing a reference does not verify that its issuer is present, Ready, or suitable for the requested domains.
+
+=== "Operator-managed Serving"
+
+    Inspect both the live resource and its authoritative source manifest before choosing the entry to change:
 
     ```bash
-    kubectl edit configmap config-certmanager -n knative-serving
+    kubectl --context "$CONTEXT" get knativeserving "$SERVING_RESOURCE" -n "$SERVING_NAMESPACE" -o yaml
     ```
 
-    Add the fields within the `data` section:
+    Check `spec.config` for `config-certmanager` and `certmanager`. A full-name entry wins even if it is empty or does not contain the issuer key you want; it is not merged with the shortened entry. Do not create a shadow entry or remove the full-name entry to bypass its precedence. Use the existing winning entry, or choose one form if neither exists, according to the [ConfigMap mapping reference](../../install/operator/configuration-reference.md#configmap-mapping).
 
-    ```yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: config-certmanager
-      namespace: knative-serving
-      labels:
-        networking.knative.dev/certificate-provider: cert-manager
-    data:
-      issuerRef: |
-        kind: ClusterIssuer
-        name: knative-selfsigned-issuer
-      clusterLocalIssuerRef: |
-        kind: ClusterIssuer
-        name: knative-selfsigned-issuer
-      systemInternalIssuerRef: |
-        kind: ClusterIssuer
-        name: knative-selfsigned-issuer
-    ```
+    Merge the intended `data` values from the example into that entry under `spec.config`, preserving their serialized string form and unrelated values. Do not put the complete ConfigMap, ClusterIssuer, or Certificate resource under `spec.config`.
 
-    Ensure that the file was updated successfully:
+    Follow the [generic Serving Operator apply/verify workflow](../../install/operator/configuring-serving-cr.md#apply-and-verify-a-configuration-change) for authoritative application, resource status, and recovery. Inspect `config-certmanager` as the affected resource and continue with the propagation check below. Do not substitute these values into the separate domain example or follow its `config-domain` guards. Do not run the direct-edit command in the next tab.
+
+=== "YAML-managed Serving"
+
+    Merge the intended issuer references into your authoritative `config-certmanager` manifest and apply it through your existing workflow, targeting the selected context and actual component namespace.
+
+    Only for a directly managed installation with no Operator or GitOps controller, edit the ConfigMap:
 
     ```bash
-    kubectl get configmap config-certmanager -n knative-serving -o yaml
+    kubectl --context "$CONTEXT" edit configmap config-certmanager -n "$SERVING_NAMESPACE"
     ```
+
+Example ConfigMap values:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-certmanager
+  namespace: knative-serving
+  labels:
+    networking.knative.dev/certificate-provider: cert-manager
+data:
+  issuerRef: |
+    kind: ClusterIssuer
+    name: knative-selfsigned-issuer
+  clusterLocalIssuerRef: |
+    kind: ClusterIssuer
+    name: knative-selfsigned-issuer
+  systemInternalIssuerRef: |
+    kind: ClusterIssuer
+    name: knative-selfsigned-issuer
+```
+
+For the Operator route, this illustrates the values to merge, not a ConfigMap to apply directly. After the chosen workflow has propagated the change, read the active configuration:
+
+```bash
+kubectl --context "$CONTEXT" get configmap config-certmanager -n "$SERVING_NAMESPACE" -o yaml
+```
+
+Confirm that active `data` contains the intended issuer references. For the Operator route, also check custom-resource status using the generic apply/verify workflow. These checks establish propagation, not certificate issuance or client trust. Return to the [external-domain TLS guide](external-domain-tls.md) to configure and verify that feature, or the corresponding encryption guide for another feature.
+
+To recover, inspect the current winning entry again, then restore the recorded values through the same authoritative workflow and repeat the propagation check. Do not restore Operator-managed issuer settings by directly editing the generated ConfigMap.
 
 
 ## Managing trust and rotation without downtime

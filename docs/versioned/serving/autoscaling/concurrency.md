@@ -5,35 +5,44 @@ components:
 function: reference
 ---
 
-# Configuring concurrency
+<span id="configuring-concurrency"></span>
 
-Concurrency determines the number of simultaneous requests that can be processed by each replica of an application at any given time.
-<!-- this is where including files would be useful. We could create a concurrency global config module and insert it here, in the docs for metrics, and in the docs for targets. Showing the correct information each time instead of having it in one place with the per revision config jumbled in with it makes it easier to understand IMHO, and would mean users don't need to visit different pages or hunt for the same information for similar user stories @abrennan89.-->
-For per-revision concurrency, you must configure both `autoscaling.knative.dev/metric`and `autoscaling.knative.dev/target` for a [soft limit](#soft-limit), or `containerConcurrency` for a [hard limit](#hard-limit).
+# Concurrency settings
 
-For global concurrency, you can set the `container-concurrency-target-default` value.
+This reference lists concurrency settings for Knative Serving. Autoscaling targets described here apply to the Knative Pod Autoscaler (KPA) with the `concurrency` metric. The `containerConcurrency` field also controls request admission independently of the autoscaling metric.
+
+- To change a service, use [Set a concurrency target for a service](configure-concurrency.md).
+- For behavior and trade-offs, read [How concurrency affects autoscaling](concurrency-behavior.md).
+- For other metrics, see the [metrics reference](autoscaling-metrics.md).
+
+Per-revision annotations belong in `spec.template.metadata.annotations` of a Service or Configuration; `containerConcurrency` belongs in `spec.template.spec`. Updating a Service's revision template creates a new Revision. Examples below are configuration fragments, not complete deployable Services.
+
+Global autoscaling keys belong in the `config-autoscaler` ConfigMap in `knative-serving`. For Operator-managed installations, use `spec.config.autoscaler` in the `KnativeServing` resource instead. The hard-limit default uses `config-defaults` or `spec.config.defaults`.
+
+Operator examples below use `operator.knative.dev/v1beta1`, matching the [documented Operator configuration API](../../install/operator/configuration-reference.md). Check the CRD installed by your Operator release before applying configuration.
 
 ## Soft versus hard concurrency limits
 
-It is possible to set either a _soft_ or _hard_ concurrency limit.
+A soft limit is an autoscaling target, not an enforced maximum. A hard limit caps concurrent requests admitted to each replica.
 
-!!! note
-    If both a soft and a hard limit are specified, the smaller of the two values will be used. This prevents the Autoscaler from having a target value that is not permitted by the hard limit value.
-
-The soft limit is a targeted limit rather than a strictly enforced bound. In some situations, particularly if there is a sudden _burst_ of requests, this value can be exceeded.
-
-The hard limit is an enforced upper bound.
-If concurrency reaches the hard limit, surplus requests will be buffered and must wait until enough capacity is free to execute the requests.
-
-!!! warning
-    Using a hard limit configuration is only recommended if there is a clear use case for it with your application. Having a low hard limit specified may have a negative impact on the throughput and latency of an application, and may cause additional cold starts.
+If a soft target and a nonzero hard limit are both set, the smaller value is used as the concurrency target before applying [target utilization](#target-utilization).
 
 ### Soft limit
 
 * **Global key:** `container-concurrency-target-default`
-* **Per-revision annotation key:** `autoscaling.knative.dev/target`
-* **Possible values:** An integer.
-* **Default:** `"100"`
+* **Per-revision annotation key:** `autoscaling.knative.dev/target`, with `autoscaling.knative.dev/metric: "concurrency"` (the default metric)
+* **Possible values:** The per-revision annotation accepts a number encoded as a string, at least `0.01`. The global key also accepts a number; its product with the global utilization fraction must be at least `0.01`.
+* **Default:** `"100"` for the global key. The per-revision annotation is unset by default; the target is resolved using the cases below.
+
+For the KPA concurrency metric, resolve the concurrency target in this order:
+
+1. **Target annotation absent, `containerConcurrency` greater than `0`:** use `containerConcurrency` as the target, even if it exceeds the cluster's `container-concurrency-target-default`.
+2. **Target annotation absent, `containerConcurrency` equal to `0`:** use the cluster's `container-concurrency-target-default`.
+3. **Target annotation present:** use the annotation value, capped by `containerConcurrency` if that hard limit is greater than `0`. A hard limit of `0` does not cap the annotation value.
+
+Then apply [target utilization](#target-utilization) to the resolved target. The effective autoscaling target is the resolved target multiplied by the utilization fraction, with a minimum of `0.01`. Utilization does not change the hard limit.
+
+This resolution is implemented by [`ResolveMetricTarget` in Serving v1.24.0](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/autoscaling/resources/target.go#L31-L63){target=_blank}.
 
 **Example:**
 
@@ -64,7 +73,7 @@ If concurrency reaches the hard limit, surplus requests will be buffered and mus
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -83,13 +92,15 @@ The hard limit is specified [per Revision](autoscaler-types.md#global-versus-per
 
 There is no global setting for the hard limit in the autoscaling ConfigMap, because `containerConcurrency` has implications outside of autoscaling, such as on buffering and queuing of requests. However, a default value can be set for the Revision's `containerConcurrency` field in `config-defaults.yaml`.
 
-The default value is `0`, meaning that there is no limit on the number of requests that are allowed to flow into the revision.
-A value greater than `0` specifies the exact number of requests that are allowed to flow to the replica at any one time.
+The default value is `0`, meaning that this field imposes no limit on concurrent requests admitted to each replica.
+A value greater than `0` specifies the maximum number of concurrent requests admitted to each replica.
 
 * **Global key:** `container-concurrency` (in `config-defaults.yaml`)
 * **Per-revision spec key:** `containerConcurrency`
-* **Possible values:** integer
-* **Default:** `0`, meaning no limit
+* **Possible values:** Integer from `0` to the cluster's `container-concurrency-max-limit` (default `1000`). If `allow-container-concurrency-zero` is `false`, the minimum is `1` instead.
+* **Default:** `0`, meaning no limit, unless the cluster sets another `container-concurrency` default.
+
+These defaults and constraints are defined by [v1.24 default configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/config/defaults.go){target=_blank} and [`ValidateContainerConcurrency`](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/metadata_validation.go#L91-L107){target=_blank}.
 
 
 **Example:**
@@ -119,7 +130,7 @@ A value greater than `0` specifies the exact number of requests that are allowed
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving
@@ -134,18 +145,16 @@ A value greater than `0` specifies the exact number of requests that are allowed
 
 ## Target utilization
 
-In addition to the literal settings explained previously, concurrency values can be further adjusted by using a _target utilization value_.
-
-This value specifies what percentage of the previously specified target should actually be targeted by the Autoscaler.
-This is also known as specifying the _hotness_ at which a replica runs, which causes the Autoscaler to scale up before the defined hard limit is reached.
-
-For example, if `containerConcurrency` is set to 10, and the target utilization value is set to 70 (percent), the Autoscaler will create a new replica when the average number of concurrent requests across all existing replicas reaches 7.
-Requests numbered 7 to 10 will still be sent to the existing replicas, but this allows for additional replicas to be started in anticipation of being needed when the `containerConcurrency` limit is reached.
+Target utilization specifies the percentage of the concurrency target used by the Autoscaler. It does not change the hard limit. See [target utilization and spare capacity](concurrency-behavior.md#target-utilization-and-spare-capacity) for an example and its implications.
 
 * **Global key:** `container-concurrency-target-percentage`
 * **Per-revision annotation key:** `autoscaling.knative.dev/target-utilization-percentage`
-* **Possible values:** float
-* **Default:** `70`
+* **Possible values:** The per-revision annotation accepts a percentage from `1` to `100`, encoded as a string; fractional percentages are supported.
+* **Default:** `70` percent for the global setting. The annotation is unset by default and uses the cluster setting.
+
+The global setting accepts either a fraction in `(0, 1]` or a percentage greater than `1` and at most `100`. For example, `"0.7"` and `"70"` both mean 70 percent; `"1"` means 100 percent globally, so use `"0.01"` for 1 percent. The per-revision annotation always uses percentage notation: `"1"` means 1 percent there.
+
+Annotation constraints are defined in v1.24 [autoscaling annotation validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank} and [annotation constants](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/register.go){target=_blank}. Global defaults, fraction conversion, and validation are defined in the [autoscaler configuration parser](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}. These citations describe v1.24.0 source behavior; check the matching release for another installation.
 
 **Example:**
 
@@ -179,7 +188,7 @@ Requests numbered 7 to 10 will still be sent to the existing replicas, but this 
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

@@ -51,7 +51,7 @@ You can override the default behavior for each Service or global configuration.
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

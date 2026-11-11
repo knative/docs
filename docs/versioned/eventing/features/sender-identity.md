@@ -13,6 +13,13 @@ function: how-to
 
 **Tracking issue**: [#6806](https://github.com/knative/eventing/issues/6806)
 
+**v1.24 configuration source:** `authentication-oidc` and its Alpha/disabled
+release configuration were rechecked in
+[the feature ConfigMap](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/features.yaml)
+and [flag parser/defaults](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/feature/features.go).
+This validates the key/configuration, not the compatibility list or every token,
+producer, and runtime example below. Earlier v1.23 tests are historical only.
+
 ## Overview
 
 Currently, event delivery within the cluster is unauthenticated, and an addressable event consumer cannot determine the identity of any sender.
@@ -30,7 +37,8 @@ Knative Eventing Souces request an OIDC access token for the targets audience an
 
 ## Compatibility
 
-OIDC authentication is currently supported for the following components:
+The following compatibility claims are retained from the existing guide; they
+have not been revalidated across v1.24 extension implementations:
 
 - Brokers:
     - [MTChannelBasedBroker](../brokers/broker-types/channel-based-broker/README.md)
@@ -55,8 +63,11 @@ The possible values for `authentication-oidc` are:
     - Addressables announce their audience in their status
     - Sources add an Authorization Header to their request containing an access token for their target
 
-For example, to enable sender identity, the `config-features` ConfigMap will look like
-the following:
+For example, the resulting `config-features` value for sender identity is shown
+below. Apply it through the platform owner's authoritative workflow. For Knative
+Operator- or GitOps-managed configuration, follow the
+[configuration-authority branch](transport-encryption.md#apply-through-the-configuration-authority);
+do not replace or directly edit a generated ConfigMap with this example.
 
 ```yaml
 apiVersion: v1

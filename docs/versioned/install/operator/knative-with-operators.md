@@ -15,13 +15,8 @@ This topic describes how to install the Knative Operator and the Serving and Eve
 This installation requires the following prerequisites:
 
 - The [CLI Tools](../../client/install-kn.md) are installed.
-- Sufficient hardware:
-
-  One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
-
-  Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
-
-- The existing Kubernetes is running a supported version.
+- An existing cluster meeting the [installation capacity recommendations and release compatibility requirements](../requirements.md).
+- Permission to install cluster-scoped and namespaced resources, as described in the requirements.
 
 For information on other Knative installs, see the [Installation Roadmap](../README.md#installation-roadmap).
 
@@ -69,7 +64,7 @@ helm show values -n knative-operator knative-operator/knative-operator
 
 ### Verify your Knative Operator installation
 
-1. Because the Operator is installed to the `knative-operator` namespace, ensure you set the current namespace to `default` by running the command:
+1. Set the current context's namespace to `knative-operator` for the status and log commands below. This changes the namespace used by subsequent commands that do not specify one:
 
     ```bash
     kubectl config set-context --current --namespace=knative-operator
@@ -410,7 +405,7 @@ Where `<filename>` is the name of the file you created in the previous step.
 
 ### Installing a specific version of Eventing
 
-Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. For example, if you want to install Knative Eventing v1.7, you can apply the following KnativeEventing CR:
+Cluster administrators can install a specific version of Knative Eventing by using the `spec.version` field. Select a release from the [Operator-supported component versions](supported-versions.md). For example, the documented v1.24 Operator includes Knative Eventing v1.24, which you can select with the following KnativeEventing CR:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -419,18 +414,17 @@ metadata:
   name: knative-eventing
   namespace: knative-eventing
 spec:
-  version: "1.7"
+  version: "1.24"
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator install --component eventing -v 1.7 -n knative-eventing
+kn operator install --component eventing -v 1.24 -n knative-eventing
 ```
 
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Eventing.
-If users specify an invalid or unavailable version, the Knative Operator will do nothing. The Knative Operator always
-includes the latest 3 minor release versions.
+If users specify an invalid or unavailable version, the Knative Operator will do nothing. Check the [Operator-supported component versions](supported-versions.md) for the releases bundled with your Operator.
 
 If Knative Eventing is already managed by the Operator, updating the `spec.version` field in the KnativeEventing CR enables upgrading or downgrading the Knative Eventing version, without requiring modifications to the Operator.
 
@@ -757,11 +751,11 @@ ko delete -f config/
 
 The following table describes the supported versions of Serving and Eventing for the Knative Operator:
 
-| Operator | Serving                                                                                                                                                                   | Eventing                                                                                                                                                                  |
-|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| v1.24  | v1.24.0<br/>v1.23.0<br/>v1.22.0 and v1.22.1<br/>v1.21.0, v1.21.1, v1.21.2 and v1.21.3 | v1.24.0<br/>v1.23.0 and v1.23.1<br/>v1.22.0, v1.22.1 and v1.22.2<br/>v1.21.0, v1.21.1, v1.21.2, v1.21.3 and v1.21.4 |
+See the [Operator-supported component versions reference](supported-versions.md) for the release table. Check it before choosing `spec.version`.
 
 ## What's next
 
-- [Configure Knative Serving using Operator](configuring-serving-cr.md)
-- [Configure Knative Eventing using Operator](configuring-eventing-cr.md)
+- [Change and verify an Operator-managed ConfigMap](configuring-with-operator.md).
+- [Choose a Serving configuration goal](configuring-serving-cr.md).
+- [Choose an Eventing configuration goal](configuring-eventing-cr.md).
+- [Look up Operator configuration fields](configuration-reference.md).

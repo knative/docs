@@ -10,13 +10,8 @@ function: how-to
 This topic describes how to install Knative Eventing by applying YAML files. This installation requires the following prerequisites:
 
 - The [CLI Tools](../../../client/install-kn.md) are installed.
-- Sufficient hardware:
-
-  One node requires at least 6 CPUs, 6 GB of memory, and 30 GB of disk storage.
-
-  Multiple nodes require 2 CPUs, 4 GB of memory, and 20 GB of disk storage.
-
-- The existing Kubernetes is running a supported version.
+- An existing cluster meeting the [installation capacity recommendations and release compatibility requirements](../../requirements.md).
+- Permission to install the required cluster-scoped and namespaced resources.
 
 For information on other Knative installs, see the [Installation Roadmap](../../README.md#installation-roadmap).
 

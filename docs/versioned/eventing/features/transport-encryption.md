@@ -13,6 +13,14 @@ function: how-to
 
 **Tracking issue**: [#5957](https://github.com/knative/eventing/issues/5957)
 
+**v1.24 source scope:** the flag name, Beta/disabled release configuration,
+and `strict`/`permissive` values were rechecked in the
+[v1.24 feature configuration](https://github.com/knative/eventing/blob/knative-v1.24.0/config/core/configmaps/features.yaml)
+and [flag parser](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/apis/feature/features.go).
+The shared server behavior below is implementation-scoped, not a revalidated
+Broker/Channel capability matrix. Earlier v1.23 runtime results are historical
+only; the certificate/producer examples have not been executed here on v1.24.
+
 ## Overview
 
 By default, event delivery within the cluster is unencrypted. This limits the types of events which
@@ -28,6 +36,18 @@ Event producers are be able to connect to HTTPS endpoints with cluster-internal 
 
 ## Prerequisites
 
+- Identify the approved cluster/context, Eventing component namespace, and
+  configuration authority before installing certificates or changing feature
+  settings. You need the responsible platform owner's approval and permissions,
+  plus an authoritative manifest and recoverable record of the previous flag
+  value or absence. The installation examples use specific namespaces; check
+  them against your deployment before running their commands.
+- If the Knative Operator manages Eventing, use the existing `KnativeEventing`
+  resource for feature configuration rather than editing its generated
+  `config-features` ConfigMap. If GitOps manages that resource or a YAML-managed
+  ConfigMap, change the authoritative source through that workflow. Unknown
+  authority or read-only access is a handoff to the platform owner, not a reason
+  to edit a live ConfigMap. See [Apply through the configuration authority](#apply-through-the-configuration-authority).
 - In order to enable the transport encryption feature, you will need to install cert-manager
   operator by
   following [the cert-manager operator installation instructions](https://cert-manager.io/docs/installation/).
@@ -152,9 +172,11 @@ Broker, Channel, Sink) should accept events.
 
 The possible values for `transport-encryption` are:
 
-- `disabled` (this is equivalent to the current behavior)
-    - Addressables may accept events to HTTPS endpoints
-    - Producers may send events to HTTPS endpoints
+- `disabled`
+    - For v1.24 components using the shared `ServerManager`, HTTP requests reach
+      the handler while HTTPS requests receive 404. This is a source-scoped
+      receiver behavior, not a claim about every implementation.
+    - Producers may send events to separately configured HTTPS destinations.
 - `permissive`
     - Addressables should accept events on both HTTP and HTTPS endpoints
     - Addressables should advertise both HTTP and HTTPS endpoints
@@ -168,8 +190,21 @@ The possible values for `transport-encryption` are:
     When a broker or channel sends events to a subscriber, if that subscriber only has an HTTP
     address, the broker or channel can still send events over HTTP instead of HTTPS
 
-For example, to enable `strict` transport encryption, the `config-features` ConfigMap will look like
-the following:
+The rechecked v1.24 [shared server manager](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/eventingtls/servermanager.go)
+returns 404 on HTTP in strict mode and on HTTPS in disabled mode; permissive
+mode allows both handlers. This receiver gating does not require an HTTP-only
+subscriber to become an HTTPS endpoint. The release's
+[Broker certificate manifest](https://github.com/knative/eventing/blob/knative-v1.24.0/config/brokers/mt-channel-broker-tls/broker-ingress-tls-certificate.yaml)
+references `knative-eventing-ca-issuer`; the
+[trust-bundle code](https://github.com/knative/eventing/blob/knative-v1.24.0/pkg/eventingtls/trust_bundle.go)
+defines `networking.knative.dev/trust-bundle=true` and `/knative-custom-certs`.
+These source checks do not establish certificate readiness or end-to-end trust.
+
+For example, the resulting `config-features` data for `strict` transport
+encryption is shown below. This illustrates the intended ConfigMap value,
+**not** permission to replace an existing ConfigMap or directly edit an
+Operator-managed one. Preserve unrelated feature settings and follow the
+[configuration-authority branch](#apply-through-the-configuration-authority).
 
 ```yaml
 apiVersion: v1
@@ -180,6 +215,60 @@ metadata:
 data:
   transport-encryption: "strict"
 ```
+
+### Apply through the configuration authority
+
+Choose one authority path for the `transport-encryption` flag after satisfying
+the certificate/trust prerequisites and reviewing the receiver-only `strict`
+constraint above. Use the actual resource names/namespaces and the explicitly
+approved `--context` when adapting the linked apply/verify commands; do not run
+their examples against an unrelated default context.
+
+- **Knative Operator-managed:** inspect `spec.config` in both the live
+  `KnativeEventing` resource and its authoritative manifest. The rechecked
+  [v1.24 Operator `ConfigMapTransform`](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/config_maps.go)
+  and [mapping reference](../../install/operator/configuration-reference.md#configmap-mapping)
+  define `config-features` as the full-name entry and `features` as its shortened
+  form. A present `config-features` entry wins, including an empty entry or one
+  without `transport-encryption`; its data is not merged with `features`.
+  Update the winning existing entry rather than adding a shadow entry. If neither
+  exists, have the owner choose one naming form through that mapping guidance.
+  Change only the intended flag, preserving other settings, and follow
+  [Apply and verify an Eventing configuration change](../../install/operator/configuring-eventing-cr.md#apply-and-verify-a-configuration-change)
+  through the authoritative workflow. Do not apply the ConfigMap example above
+  or the linked collection's unrelated example fields over your installation.
+- **YAML-managed:** update `data.transport-encryption` in the authoritative
+  `config-features` manifest, retaining the existing namespace and other data,
+  then apply through its approved workflow. Direct live editing is appropriate
+  only if the platform owner identifies it as the configuration authority;
+  do not use it for Operator- or GitOps-managed configuration.
+- **Unknown authority or insufficient permissions:** request the change and
+  redacted resulting configuration from the platform owner. Do not create a
+  competing ConfigMap or custom resource.
+
+After reconciliation, inspect the actual component namespace in the approved
+context, replacing the placeholders:
+
+```bash
+kubectl --context <approved-context-name> -n <eventing-component-namespace> get configmap config-features -o jsonpath='{.data.transport-encryption}{"\n"}'
+```
+
+For the illustrated change, the active key should print `strict`. A blank result
+means the key is absent, not proof of the effective encryption mode. For an
+Operator-managed installation, also inspect `KnativeEventing` readiness and
+conditions using the linked procedure. If the flag does not persist, resolve the
+winning entry and configuration authority rather than repeatedly patching the
+managed ConfigMap.
+
+These checks establish configuration propagation, not TLS trust, rejection of
+plaintext ingress, or subscriber receipt. Retain the feature-stage and
+receiver-only enforcement caveats above. The [verification example](#verifying-that-the-feature-is-working)
+illustrates a separate test path; validate its commands, certificates, addresses,
+and release artifacts before execution in an approved disposable environment.
+This authority handoff does not revalidate implementation capabilities or claim
+runtime verification. To recover, restore the recorded flag value or absence
+through the same authoritative workflow, repeat the configuration checks, and
+have the platform owner recheck the affected event path.
 
 ## Configure additional CA trust bundles
 

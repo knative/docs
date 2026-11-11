@@ -8,6 +8,18 @@
 {% endblock %}
 
 {% block announce %}
+{% if page and page.url.startswith('docs/') and config.extra.local_preview %}
+<div class="local-preview-notice" role="note">
+  <strong>Local checkout preview — not a released documentation snapshot.</strong>
+  {% if config.extra.local_preview.version %}
+  Generated artifact lookup requests Knative {{ config.extra.local_preview.version }}; individual integrations may fall back to their latest release. This checkout may differ from that release.
+  {% else %}
+  Generated artifact links default to moving nightly builds. Choose an artifact release context before using them to install Knative.
+  {% endif %}
+  Generated CLI reference links use <code>SAMPLES_BRANCH</code> separately.
+  See the <a href="{{ config.repo_url }}/blob/main/contribute-to-docs/getting-started/previewing-docs-locally.md">local preview guide</a> for configuration instructions.
+</div>
+{% endif %}
 {% if page and page.is_homepage and config.extra.announcement %}
 <div class="site-announcement">
   <span>{{ config.extra.announcement.text }}</span>

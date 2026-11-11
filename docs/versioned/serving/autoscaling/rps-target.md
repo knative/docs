@@ -11,8 +11,10 @@ This setting specifies a target for requests-per-second per replica of an applic
 
 * **Global key:** `requests-per-second-target-default`
 * **Per-revision annotation key:** `autoscaling.knative.dev/target`
-* **Possible values:** An integer.
-* **Default:** `"200"`
+* **Possible values:** Number at least `0.01`, encoded as a string, for both the global key and target annotation.
+* **Default:** `"200"` for the global key. The annotation is unset by default. KPA applies target utilization after selecting the RPS target; `containerConcurrency` does not cap an RPS target.
+
+See the [v1.24 configuration parser](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank}, [annotation validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/autoscaling/annotation_validation.go){target=_blank}, and [target resolution](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/autoscaling/resources/target.go){target=_blank} for these constraints and interactions.
 
 **Example:**
 
@@ -47,7 +49,7 @@ This setting specifies a target for requests-per-second per replica of an applic
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

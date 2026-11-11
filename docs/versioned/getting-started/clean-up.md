@@ -9,8 +9,9 @@ hide_next: true
 
 # Clean Up
 
-We recommend that you delete the cluster used for this tutorial to free up resources
-on your local machine.
+Delete the disposable cluster when you have finished experimenting. This removes **all workloads and data in that cluster**, including any Bookstore resources you added. Check `kubectl config current-context` first; do not delete a cluster you need to keep.
+
+The chosen Quickstart route uses **kind**. The minikube instructions are retained for readers who selected that installation alternative.
 
 If you want to continue experimenting with Knative after deleting the cluster,
 you can reinstall Knative on a new cluster using the [`quickstart` plugin](quickstart-install.md#run-the-knative-quickstart-plugin) again.
@@ -41,3 +42,7 @@ you can reinstall Knative on a new cluster using the [`quickstart` plugin](quick
         🔥  Deleting "knative" in hyperkit ...
         💀  Removed all traces of the "knative" cluster.
         ```
+
+If you used minikube, stop the `minikube tunnel` process with `Ctrl+C` as well.
+
+**Previous:** [Next steps](next-steps.md) · **Return to:** [Tutorials](tutorial.md)

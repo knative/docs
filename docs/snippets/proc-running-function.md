@@ -2,99 +2,48 @@
 - versioned/getting-started/build-run-deploy-func.md
 - versioned/functions/running-functions.md
 -->
-The `run` command builds an image for your function if required, and runs this image locally, instead of deploying it on a cluster.
+For a containerized local test, explicitly select the `pack` builder. It builds the image if needed and runs it locally; it does not publish the image or deploy a Service.
 
-=== "func"
-
-    Run the function locally by running the command inside the project directory. If you have not yet built the function you will need to provide the `--registry` flag:
+1. Open a terminal in the function project directory, for example `hello`:
 
     ```bash
     cd hello
     ```
 
-    ```bash
-    func run [--registry <registry>]
-    ```
+1. Start the function. Replace the registry prefix with your image-naming prefix. If the project already has a registry or image configured, you can omit `--registry`.
 
-    !!! note
-    The coordinates for the **image registry** can be configured through an environment variable (`FUNC_REGISTRY`) as well.
+    === "func"
 
-    Using this command also builds the function if necessary.
+        ```bash
+        func run --builder=pack --registry ghcr.io/your-username
+        ```
 
-    You can force a rebuild of the image by running the command:
+    === "kn func"
 
-    ```bash
-    func run --build
-    ```
+        ```bash
+        kn func run --builder=pack --registry ghcr.io/your-username
+        ```
 
-    It is also possible to disable the build, by running the command:
+    `FUNC_REGISTRY` can also provide the registry prefix. This is an image name, not a request to push it. Access to private builder images and dependencies is separate from publishing credentials.
 
-    ```bash
-    func run --build=false
-    ```
+    For containerized runs, add `--build` to force a rebuild, or `--build=false` to skip building only when a usable image already exists.
 
-=== "kn func"
+1. Wait for the command to report the local listening address. Leave this terminal running. In a **second terminal**, open the same project directory and explicitly invoke the local instance:
 
-    Run the function locally, by running the command inside the project directory. If you have not yet built the function you will need to provide the `--registry` flag:
+    === "func"
 
+        ```bash
+        func invoke --target=local
+        ```
 
-    ```bash
-    cd hello
-    ```
+    === "kn func"
 
-    ```bash
-    kn func run [--registry <registry>]
-    ```
+        ```bash
+        kn func invoke --target=local
+        ```
 
-    Using this command also builds the function if necessary.
+    Check the response and the running function's logs against your handler's expected behavior. Response bodies differ by language, template, and application code; cluster proxy headers are not expected for this local check.
 
-    You can force a rebuild of the image by running the command:
+1. When you finish testing, press **Ctrl+C** in the terminal running the function. This stops the local process; it does not delete a deployed Service.
 
-    ```bash
-    kn func run --build
-    ```
-
-    It is also possible to disable the build, by running the command:
-
-    ```bash
-    kn func run --build=false
-    ```
-
-!!! tip "Private Registry Authentication"
-    For private registries that require authentication, you can set credentials using environment variables:
-    
-    - `FUNC_USERNAME`: The username for registry authentication
-    - `FUNC_PASSWORD`: The password for registry authentication
-    
-    These variables work with all builders: `host`, `s2i`, and `pack`.
-    
-    **Note:** Using environment variables is more secure than the `--password` flag because command-line arguments are visible to all users on the system via `ps`.
-You can verify that your function has been successfully run by using the `invoke` command and observing the output:
-
-=== "func"
-
-    ```bash
-    func invoke
-    ```
-
-=== "kn func"
-
-    ```bash
-    kn func invoke
-    ```
-
-!!! Success "Expected output"
-```{ .bash .no-copy }
-Received response
-POST / HTTP/1.1 hello.default.127.0.0.1.sslip.io
-    User-Agent: Go-http-client/1.1
-    Content-Length: 25
-    Accept-Encoding: gzip
-    Content-Type: application/json
-    K-Proxy-Request: activator
-    X-Request-Id: 9e351834-0542-4f32-9928-3a5d6aece30c
-    Forwarded: for=10.244.0.15;proto=http
-    X-Forwarded-For: 10.244.0.15, 10.244.0.9
-    X-Forwarded-Proto: http
-Body:
-```
+For request formats, test payloads, and alternate targets, consult the `invoke` section of the [upstream command reference](https://github.com/knative/func/blob/main/docs/reference/func.md){target=_blank}.

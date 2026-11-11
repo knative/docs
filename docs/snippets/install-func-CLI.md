@@ -37,11 +37,15 @@
 
         Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `func_darwin_amd64` or `func_linux_amd64`.
 
-    1. Move the executable binary file to a directory on your PATH by running the command:
+    1. Move the binary to a writable directory on your `PATH`. For example, use a directory owned by your user:
 
         ```bash
-        mv func /usr/local/bin
+        mkdir -p "$HOME/.local/bin"
+        mv func "$HOME/.local/bin/func"
+        export PATH="$HOME/.local/bin:$PATH"
         ```
+
+        If this directory is not already on your `PATH`, add the same `export` to your shell's startup configuration for future terminals.
 
     1. Verify that the CLI is working by running the command:
 
@@ -78,12 +82,13 @@
     Run `func` from a container image. For example:
 
     ```bash
-    docker run --rm -it ghcr.io/knative/func/func create -l node -t http myfunc
+    docker run --rm -it -v "$PWD:/workspace" -w /workspace \
+      ghcr.io/knative/func/func create -l node -t http myfunc
     ```
 
-    Links to images are available here:
+    The bind mount preserves the created `myfunc` project in your current host directory after the container exits. This example creates a project; building or deploying from a container requires additional runtime, registry, and cluster configuration.
 
-    - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}
+    For release information, see the [`func` releases](https://github.com/knative/func/releases){target=_blank}. The image above uses an unpinned tag; select a tested version for reproducible use.
 
     !!! note
         Running `func` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `func`.

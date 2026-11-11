@@ -9,13 +9,15 @@ function: how-to
 
 # Installing CLI Tools
 
-There are three CLI tools available for managing Knative:
+This page covers two CLI tools and an optional plugin:
 
-- Kubernetes CLI - `kubectl`
-- Knative CLI - `kn`
-- Knative Operator CLI - `kn`
+- Kubernetes CLI — `kubectl`, for Kubernetes resources and YAML manifests.
+- Knative CLI — `kn`, for Knative resource workflows.
+- Knative Operator plugin — the separate `kn-operator` executable, which extends `kn` with the `kn operator` command group for installing and managing Operator-based Knative installations. It is not another core CLI named `kn`.
 
-The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` CLI provided you want to primarily use YAML representations of resources.
+Use core `kn` commands for Knative resources, or `kubectl` to apply their YAML manifests. Installation workflows such as `kn operator install` require the separately installed Operator plugin and administrator permissions; see the [Operator CLI installation guide](../install/operator/knative-with-operator-cli.md).
+
+For function-project workflows, [install `func` or the `kn func` plugin](../functions/install-func.md) separately.
 
 ## Install Kubernetes CLI
 
@@ -42,7 +44,7 @@ See the [Tekton documentation](http://hub.tekton.dev/tekton/task/kn){target=_bla
 
 ## Install the Knative Operator CLI Plugin
 
-Before you install the Knative Operator CLI Plugin, first install the Knative CLI described earlier.
+Before you install the Knative Operator CLI Plugin, first install the Knative CLI described earlier. The executable installed below is named `kn-operator`; `kn` discovers it as a plugin and exposes its commands as `kn operator`.
 
 === "MacOS"
 

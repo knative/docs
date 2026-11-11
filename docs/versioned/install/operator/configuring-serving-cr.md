@@ -7,13 +7,30 @@ function: how-to
 
 # Configuring the Knative Serving Operator custom resource
 
-You can modify the KnativeServing CR to configure different options for Knative Serving.
+Use this collection to find the configuration change you need in an existing Operator-managed Serving installation. You do not need to read it in sequence. The examples below remain together so related fields and constraints are available in one place.
+
+## Choose a configuration goal
+
+| Goal | Start here |
+| --- | --- |
+| Select a release or customize installation inputs | [Version](#configure-the-knative-serving-version), [custom manifests](#install-customized-knative-serving), or the [upgrade procedure](../upgrade/upgrade-installation-with-operator.md) for an existing installation |
+| Use another registry or trust its certificate | [Image references and pull secrets](#private-repository-and-private-secrets), [AWS ECR Pod Identity](#connect-to-aws-ecr-using-pod-identity), or [controller certificate](#ssl-certificate-for-controller) |
+| Configure ingress | [Networking entry points](#networking-entry-points) |
+| Tune system availability and placement | [Replica counts](#high-availability), [workload overrides](#override-system-deployments), [system Services](#override-system-services), or [PodDisruptionBudgets](#override-system-poddisruptionbudgets) |
+
+For ConfigMap values, use [Configure Knative by using the Operator](configuring-with-operator.md), including the bounded task to [set the cluster-default concurrency target](configuring-with-operator.md#set-the-cluster-default-concurrency-target). For a field lookup, use the [Operator configuration field map](configuration-reference.md). For remote-cluster prerequisites and verification, use [Deploy Knative to a remote cluster](multi-cluster-deployment.md).
+
+## Before changing configuration
+
+You need an Operator-managed `KnativeServing` resource, permission to update it, and a recoverable copy of its current manifest. Examples use the name and namespace `knative-serving`; substitute your actual values. Merge the illustrated fields into your authoritative manifest rather than replacing unrelated settings. If GitOps manages the resource, make changes in that source.
+
+After selecting an example below, follow [Apply and verify a configuration change](#apply-and-verify-a-configuration-change). For version changes, use the upgrade procedure instead of the generic configuration workflow.
 
 ## Configure the Knative Serving version
 
 Cluster administrators can install a specific version of Knative Serving by using the `spec.version` field.
 
-For example, if you want to install Knative Serving v1.20, you can apply the following `KnativeServing` custom resource:
+For example, if you want to install Knative Serving v1.24, which is bundled with Operator v1.24, you can apply the following `KnativeServing` custom resource:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -22,25 +39,25 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  version: "1.20"
+  version: "1.24"
 ```
 
 You can also run the following command to make the equivalent change:
 
 ```bash
-kn operator install --component serving -v 1.20 -n knative-serving
+kn operator install --component serving -v 1.24 -n knative-serving
 ```
 
 If `spec.version` is not specified, the Knative Operator installs the latest available version of Knative Serving.
 
 If users specify an invalid or unavailable version, the Knative Operator does nothing.
 
-The Knative Operator always includes the latest 3 release versions. For example, if the current version of the Knative Operator is v1.20, the earliest version of Knative Serving available through the Operator is v1.17.
+The component releases available to install depend on the Operator release. Check the [Operator-supported component versions](supported-versions.md) instead of assuming a fixed number of bundled versions.
 
 If Knative Serving is already managed by the Operator, updating the `spec.version` field in the `KnativeServing` resource enables upgrading or downgrading the Knative Serving version, without needing to change the Operator.
 
 !!! important
-    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.18, you must upgrade to v1.19 before upgrading to v1.20.
+    The Knative Operator only permits upgrades or downgrades by one minor release version at a time. For example, if the current Knative Serving deployment is version v1.22, you must upgrade to v1.23 before upgrading to v1.24.
 
 ## Install customized Knative Serving
 
@@ -104,12 +121,9 @@ This example installs the default Knative Serving manifests, and then installs t
 You can use the `spec.registry` section of the Operator CR to change the image references to point to a private registry or [specify imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod):
 
 - `default`: this field defines a image reference template for all Knative images. The format
-is `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. If you use the same tag for all your images, the only difference is the image name. `${NAME}` is
-a pre-defined variable in the operator corresponding to the container name. If you name the images in your private repo to align with the container names (
-`activator`, `autoscaler`, `controller`, `webhook`, `autoscaler-hpa`, `net-istio-controller`, and `queue-proxy`), the `default` argument should be sufficient.
+is `example-registry.io/custom/path/${NAME}:{CUSTOM-TAG}`. In Operator v1.24, `${NAME}` is replaced with the image name parsed from the existing image reference, falling back to the container name when no image name is available. Use the `default` template when your private image names match that resolution; otherwise use explicit `override` entries. See the [v1.24 image transform](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/common/images.go).
 
-- `override`: a map from container name to the full registry
-location. This section is only needed when the registry images do not match the common naming format. For containers whose name matches a key, the value is used in preference to the image name calculated by `default`. If a container's name does not match a key in `override`, the template in `default` is used.
+- `override`: a map of image references for system workloads. A `<workload-name>/<container-name>` match takes precedence over a container-name match, and either match takes precedence over `default`. If neither override matches, the Operator uses the `default` template when set. Image references held in environment variables can also be replaced by matching the environment-variable name, as shown in the Eventing examples.
 
 - `imagePullSecrets`: a list of Secret names used when pulling Knative container images. The Secrets
 must be created in the same namespace as the Knative Serving Deployments. See
@@ -156,8 +170,10 @@ To define your image links:
    You can also run the following command to make the equivalent change:
 
     ```bash
-    kn operator configure images --component serving --imageKey default --imageURL docker.io/knative-images/${NAME}:latest -n knative-serving
+    kn operator configure images --component serving --imageKey default --imageURL 'docker.io/knative-images/${NAME}:latest' -n knative-serving
     ```
+
+The single quotes in the CLI example preserve `${NAME}` as a literal Operator template variable rather than expanding a variable in your shell. They are not part of the stored image reference.
 
 ### Download images individually without secrets
 
@@ -212,7 +228,7 @@ kn operator configure images --component serving --imageKey queue-proxy --imageU
 ```
 
 !!! note
-    If the container name is not unique across all Deployments, DaemonSets and Jobs, you can prefix the container name with the parent container name and a slash. For example, `istio-webhook/webhook`.
+    If the container name is not unique across all Deployments, DaemonSets and Jobs, you can prefix the container name with the workload name and a slash. For example, `istio-webhook/webhook`.
 
 ### Download images with secrets
 
@@ -235,7 +251,7 @@ metadata:
   namespace: knative-serving
 spec:
   registry:
-    ...
+    # Retain any existing image template and overrides here.
     imagePullSecrets:
       - name: regcred
 ```
@@ -250,11 +266,11 @@ metadata:
   namespace: knative-serving
 spec:
   registry:
-    ...
+    # Retain any existing image template and overrides here.
     imagePullSecrets:
       - name: regcred
       - name: regcred-2
-      ...
+      # Add further Secret names as list entries if needed.
 ```
 
 ### Connect to AWS ECR using Pod Identity
@@ -398,6 +414,16 @@ spec:
     name: testCert
     type: ConfigMap
 ```
+
+## Networking entry points
+
+Choose the branch for your installed networking implementation:
+
+- **Istio:** [replace its ingress gateway Service](#replace-the-default-istio-ingress-gateway-service), [replace the gateway](#replace-the-ingress-gateway), [configure a cluster-local gateway](#configuration-of-cluster-local-gateway), or [configure gateway servers](#servers-configuration-for-istio-gateways).
+- **Gateway API:** [enable and configure Gateway API ingress](#configure-the-gateway-api-ingress), including its beta warning and implementation-specific resource names.
+- **Kourier:** [supply an Envoy bootstrap ConfigMap](#customize-kourier-bootstrap-for-kourier-gateways).
+
+These examples configure an implementation; they do not constitute a tested migration between ingress implementations. See [Operator installation networking steps](knative-with-operators.md#install-the-networking-layer) if the required networking layer is not installed yet.
 
 ## Replace the default Istio ingress gateway service
 
@@ -753,7 +779,8 @@ The `replicas` field also configures the `HorizontalPodAutoscaler` resources bas
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  ...
+  # Other metadata omitted from this illustrative fragment.
+  name: example-hpa
 spec:
   minReplicas: 3
   maxReplicas: 5
@@ -765,7 +792,7 @@ If you configure `replicas: 6`, which is more than `maxReplicas`, the operator t
 
 ## Override system deployments
 
-If you would like to override some configurations for a specific deployment, you can override the configuration by modifying the `deployments` spec in the `KnativeServing` CR. Currently `resources`, `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+To override a system workload, use `spec.workloads` in the `KnativeServing` CR, as shown below. The following sections cover resources, replicas, labels, annotations, scheduling, and environment variables. Check the CRD installed by your Operator release for supported fields.
 
 ### Override the resources
 
@@ -1016,3 +1043,26 @@ spec:
   - name: activator-pdb
     minAvailable: 70%
 ```
+
+## Apply and verify a configuration change
+
+1. Merge the selected fields into your existing custom resource manifest. Save its previous values so you can restore them if necessary.
+1. Validate and apply the manifest, substituting its filename:
+
+    ```bash
+    kubectl apply --dry-run=server -f <filename>.yaml
+    kubectl apply -f <filename>.yaml
+    ```
+
+1. Inspect component readiness and status conditions:
+
+    ```bash
+    kubectl get knativeserving knative-serving -n knative-serving
+    kubectl get knativeserving knative-serving -n knative-serving -o yaml
+    ```
+
+    Confirm `READY` is `True`; if not, use [installation troubleshooting](../troubleshooting.md). Server validation and readiness alone do not prove the behavior of an ingress or workload configuration.
+
+1. Inspect the affected resource: the generated ConfigMap for `spec.config`, workload Pod specifications for image and scheduling changes, or Deployments, Services, and PDBs for their corresponding overrides. For local-cluster installations, these are in the component namespace. Then verify the intended behavior using the linked component guide—for example, Service reachability after ingress changes.
+
+To recover, restore the previous values in the authoritative custom resource manifest, apply it through the same workflow, and repeat the checks. Do not patch Operator-managed resources directly. Remote deployments require the [multi-cluster verification steps](multi-cluster-deployment.md).

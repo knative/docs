@@ -22,12 +22,16 @@ validation:
     absolute_links: ignore
 
 # These pages remain published but intentionally stay out of the main navigation:
-# the homepage, footer legal page, superseded article, and linked tutorial helper.
+# the homepage, legal/helper pages, and linked indexes/overview. The latter
+# remain available from landing-page links and search, not as extra sidebar trees.
 not_in_nav: |
   /index.md
   /about-analytics-cookies.md
   /blog/articles/set-up-a-local-knative-environment-with-kind.md
   **/bookstore/create-slack-workspace/README.md
+  **/how-to/README.md
+  **/explanation/README.md
+  **/reference/README.md
 
 # The single-checkout preview enables stricter validation in mkdocs.local.yml.
 # Older published release snapshots retain the default validation levels.

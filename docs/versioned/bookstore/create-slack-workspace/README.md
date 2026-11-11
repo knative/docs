@@ -2,12 +2,14 @@
 audience: developer
 components:
   - eventing
-function: tutorial
+function: how-to
 ---
 
 # Creating a Slack Workspace
 
 ![Image](images/image5.png)
+
+This helper is only needed for the [optional Bookstore Slack extension](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md). You need a Slack account and permission to create an app and incoming webhook in the target workspace. If you already have a workspace, skip directly to [webhook setup](#setting-up-a-webhook-for-notifications).
 
 To create a Slack workspace, follow these steps:
 
@@ -42,7 +44,7 @@ To set up a webhook for sending notifications to your Slack workspace:
 
 ![Image](images/image2.png)
 
-- 5: To test if the webhook works as needed, you can try sending an API request to this link to see if the message goes through. I used Postman to test this. Remember that this is an `application/json` file.
+- 5: To test if the webhook works as needed, you can try sending an API request to this link to see if the message goes through. I used Postman to test this. Send a JSON request body with the `Content-Type: application/json` header; use the example in [Slack's webhook documentation](https://api.slack.com/messaging/webhooks).
 
 ![Image](images/image4.png)
 
@@ -51,3 +53,5 @@ To set up a webhook for sending notifications to your Slack workspace:
 ![Image](images/image1.png)
 
 - 7: Go to [Slack's webhook documentation](https://api.slack.com/messaging/webhooks){:target="_blank"} to learn more about setting up webhooks.
+
+Treat the webhook URL as a credential. Do not commit it or share it in logs or support requests. After the test message appears in the intended channel, [return to the extension's credential setup](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md#prerequisite-3-create-a-secret-that-stores-your-slack-credentials).

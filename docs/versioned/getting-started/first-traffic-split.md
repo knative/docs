@@ -7,179 +7,77 @@ function: tutorial
 
 # Traffic splitting
 
-Traffic splitting is useful for [blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html){target=blank_} and [canary deployments](https://martinfowler.com/bliki/CanaryRelease.html){target=blank_}.
+**Starting state:** You have completed [Autoscaling](first-autoscale.md), and `hello` still returns `Hello World!`. Stay in the same cluster and `default` namespace.
 
-A [Revision](../serving/revisions/README.md){target=_blank} is a snapshot-in-time of application code and configuration. A new Revision is created every time you make changes to the configuration of a Knative Service. When splitting traffic, Knative splits traffic between different Revisions of your Knative Service.
+You will create a second Revision, then route half the traffic to each Revision. A [Revision](../serving/revisions/README.md) is a snapshot of a Service's application code and configuration. Traffic splitting can support [blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html) and [canary deployments](https://martinfowler.com/bliki/CanaryRelease.html).
 
 ## Creating a new Revision
 
-Instead of `TARGET=World`, update the environment variable `TARGET` on your Knative Service to greet "Knative" instead.
+Before updating the Service, save the name of the current Revision. This avoids assuming a generated name such as `hello-00001`.
 
-=== "kn"
+```bash
+ORIGINAL_REVISION=$(kubectl get ksvc hello -o jsonpath='{.status.latestReadyRevisionName}')
+printf 'Original Revision: %s\n' "$ORIGINAL_REVISION"
+kn service update hello --env TARGET=Knative
+```
 
-    Deploy the updated version of your Knative Service by running the command:
+Run the following commands in this same terminal so that `ORIGINAL_REVISION` remains available.
 
-    ``` bash
-    kn service update hello \
-    --env TARGET=Knative
-    ```
-
-    As before, `kn` prints out some helpful information to the CLI.
-
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Service 'hello' created to latest revision 'hello-00002' is available at URL:
-        http://hello.default.${LOADBALANCER_IP}.sslip.io
-        ```
-
-=== "YAML"
-    1. Edit your existing `hello.yaml` file to contain the following:
-        ``` yaml
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        metadata:
-          name: hello
-        spec:
-          template:
-            spec:
-              containers:
-                - image: ghcr.io/knative/helloworld-go:latest
-                  ports:
-                    - containerPort: 8080
-                  env:
-                    - name: TARGET
-                      value: "Knative"
-        ```
-    1. Deploy the updated version of your Knative Service by running the command:
-        ``` bash
-        kubectl apply -f hello.yaml
-        ```
-
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            service.serving.knative.dev/hello configured
-            ```
-
-Because you are updating an existing Knative Service, the URL won't change, but the new Revision has the new name `hello-00002`.
+!!! success "Expected result"
+    The update completes and reports a new Revision. The Service URL stays the same.
 
 ## Accessing the new Revision
 
-To see the change, access the Knative Service again on your browser or use `curl` in your terminal:
-
 ```bash
-echo "Accessing URL $(kn service describe hello -o url)"
 curl "$(kn service describe hello -o url)"
 ```
 
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
+!!! success "Expected output"
+    ```{ .text .no-copy }
     Hello Knative!
     ```
 
 ## View existing Revisions
 
-You can view a list of existing Revisions by using the Knative (`kn`) or `kubectl` CLI:
+```bash
+kn revision list
+```
 
-=== "kn"
-    View a list of revisions by running the command:
-    ```bash
-    kn revisions list
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
-        hello-00002     hello     100%             2            30s   3 OK / 4     True
-        hello-00001     hello                      1            5m    3 OK / 4     True
-        ```
-
-=== "kubectl"
-    View a list of Revisions by running the command:
-    ```bash
-    kubectl get revisions
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        NAME          CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON   ACTUAL REPLICAS   DESIRED REPLICAS
-        hello-00001   hello                            1            True             0                 0
-        hello-00002   hello                            2            True             0                 0
-        ```
-
-When running the `kn` command, the relevant column is `TRAFFIC`. You can see that 100% of traffic is going to the latest Revision, `hello-00002`, which is on the row with the highest `GENERATION`. 0% of traffic is going to the Revision `hello-00001`.
-
-When you create a new Revision of a Knative Service, Knative defaults to directing 100% of traffic to this latest Revision. You can change this default behavior by specifying how much traffic you want each Revision to receive.
+Find the two Revisions for `hello`. The `TRAFFIC` column shows that the new Revision receives 100% of traffic and the original receives none. In this exercise, no traffic configuration was specified before the update, so traffic follows the latest Revision.
 
 ## Splitting traffic between Revisions
 
-Split the traffic between the two Revisions:
+```bash
+kn service update hello \
+  --traffic "$ORIGINAL_REVISION=50" \
+  --traffic @latest=50
+```
 
-=== "kn"
-    Run the command:
-    ```bash
-    kn service update hello \
-    --traffic hello-00001=50 \
-    --traffic @latest=50
-    ```
+`@latest` points to the latest Revision, which in this exercise is the one greeting `Knative`.
 
-=== "YAML"
-    1. Add the `traffic` section to the bottom of your existing `hello.yaml` file:
-        ``` yaml
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        metadata:
-          name: hello
-        spec:
-          template:
-            spec:
-              containers:
-                - image: ghcr.io/knative/helloworld-go:latest
-                  ports:
-                    - containerPort: 8080
-                  env:
-                    - name: TARGET
-                      value: "Knative"
-          traffic:
-          - latestRevision: true
-            percent: 50
-          - latestRevision: false
-            percent: 50
-            revisionName: hello-00001
-        ```
-    1. Apply the YAML by running the command:
-        ``` bash
-        kubectl apply -f hello.yaml
-        ```
-
-!!! info
-    `@latest` always points to the "latest" Revision, which in this case is `hello-00002`.
+??? info "YAML equivalent (not needed for this route)"
+    See [update hello and split traffic](yaml-examples.md#update-hello-and-split-traffic) for the declarative form. Continue using the CLI in this lesson.
 
 ## Verify the traffic split
 
-To verify that the traffic split has configured correctly, list the Revisions again by running the command:
-
 ```bash
-kn revisions list
+kn revision list
 ```
 
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
-    NAME            SERVICE   TRAFFIC   TAGS   GENERATION   AGE   CONDITIONS   READY   REASON
-    hello-00002     hello     50%              2            10m   3 OK / 4     True
-    hello-00001     hello     50%              1            36m   3 OK / 4     True
-    ```
+!!! success "Expected result"
+    Both Revisions for `hello` show `50%` in the `TRAFFIC` column.
 
-Access your Knative Service multiple times in your browser to see the different output being served by each Revision.
-
-Similarly, you can access the Service URL from the terminal multiple times to see the traffic being split between the Revisions.
+Send several requests:
 
 ```bash
-echo "Accessing URL $(kn service describe hello -o url)"
-curl "$(kn service describe hello -o url)"
+SERVICE_URL=$(kn service describe hello -o url)
+for i in $(seq 1 10); do
+  curl "$SERVICE_URL"
+done
 ```
 
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
-    Hello Knative!
-    Hello World!
-    Hello Knative!
-    Hello World!
-    ```
+You should see both `Hello World!` and `Hello Knative!`. A 50/50 configuration does not promise strict alternation or exactly five responses of each kind in ten requests. The Revision listing verifies the configured split.
+
+You have deployed, scaled, and updated a Service. Next, use another Service to send and receive events.
+
+**Previous:** [Observe autoscaling](first-autoscale.md) · **Next:** [Try Eventing](getting-started-eventing.md)

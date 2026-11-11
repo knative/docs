@@ -2,7 +2,7 @@
 - versioned/getting-started/build-run-deploy-func.md
 - versioned/functions/building-functions.md
 -->
-The `build` command uses the project name and the image registry name to construct a fully qualified container image name for the function. If the function project has not previously been built, you are prompted to provide an **image registry**.
+From the function project directory, `build` uses the project name and registry prefix to construct the image name, unless you supply an explicit `--image`. For the first build, provide `--registry` or `--image`, or answer the registry prompt when running interactively. Later builds can reuse the saved values.
 
 === "func"
 
@@ -29,6 +29,6 @@ The `build` command uses the project name and the image registry name to constru
     - `FUNC_USERNAME`: The username for registry authentication
     - `FUNC_PASSWORD`: The password for registry authentication
     
-    These variables work with all builders: `host`, `s2i`, and `pack`.
-    
-    **Note:** Using environment variables is more secure than the `--password` flag because command-line arguments are visible to all users on the system via `ps`.
+    These credentials apply to publishing the function image with `build --push`; an ordinary local build does not publish it. Authentication for fetching private builder/base images may use the selected builder's own configuration. Consult the `build` options in the [upstream command reference](https://github.com/knative/func/blob/main/docs/reference/func.md){target=_blank}.
+
+    Avoid putting passwords in command-line arguments, which may be visible in process listings or shell history. Environment variables also require care; do not include secrets in diagnostic output.

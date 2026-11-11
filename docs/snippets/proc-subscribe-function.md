@@ -1,8 +1,9 @@
 <!-- Snippet used in the following topics:
-- /docs/functions/subscribing-functions.md
+- versioned/functions/subscribing-functions.md
 -->
-The `subscribe` command will connect the function to a set of events, matching a series of filters for Cloud Event metadata
-and a Knative Broker as the source of events, from where they are consumed.
+From the function project directory, use `subscribe` to save Broker subscriptions and exact-match CloudEvents attribute filters in `func.yaml`. Deploy afterward to create the corresponding Triggers. Here, `--source` is the **Broker name**, not the event's CloudEvents `source` attribute.
+
+Choose **one Broker** for this procedure. Replace `my-broker` and the example filter values with your Broker and producer's event attributes. To use a Ready Broker named `default`, substitute `--source default` in the same command rather than running another subscription command. Both example filters must match. Functions from Knative v1.24.0 rejects malformed `--filter` entries (missing `=` or an empty key); values may contain `=`. Repeating `subscribe` for the same Broker merges filter keys into that local subscription, replacing values for matching keys; it does not clear other keys. Inspect the saved configuration before deploying.
 
 === "func"
 
@@ -12,22 +13,10 @@ and a Knative Broker as the source of events, from where they are consumed.
     func subscribe --filter type=com.example --filter extension=my-extension-value --source my-broker
     ```
 
-    To subscribe the function to events for the default broker, run the following command:
-
-    ```bash
-    func subscribe --filter type=com.example --filter extension=my-extension-value
-    ```
-
 === "kn func"
 
     To subscribe the function to events for a given broker, run the following command:
 
     ```bash
     kn func subscribe --filter type=com.example --filter extension=my-extension-value --source my-broker
-    ```
-
-    To subscribe the function to events for the default broker, run the following command:
-
-    ```bash
-    kn func subscribe --filter type=com.example --filter extension=my-extension-value
     ```

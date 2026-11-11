@@ -14,7 +14,7 @@ Knative uses at least two Activators to enable high availability if possible. Th
 ## Setting the Activator capacity
 
 - **Global key:** `activator-capacity`
-- **Possible values:** int (at least 1)
+- **Possible values:** Number at least `1`; [v1.24 autoscaler configuration](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/autoscaler/config/config.go){target=_blank} parses this key as a floating-point value.
 - **Default:** `100`
 
 **Example:**
@@ -32,7 +32,7 @@ Knative uses at least two Activators to enable high availability if possible. Th
 
 === "Global (Operator)"
     ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
+    apiVersion: operator.knative.dev/v1beta1
     kind: KnativeServing
     metadata:
       name: knative-serving

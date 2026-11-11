@@ -20,11 +20,15 @@
 
         Where `<path-to-binary-file>` is the path to the binary file you downloaded in the previous step, for example, `func_darwin_amd64` or `func_linux_amd64`.
 
-    1. Move the executable binary file to a directory on your PATH by running the command:
+    1. Move the executable to a writable directory on your `PATH`. For example:
 
         ```bash
-        mv kn-func /usr/local/bin
+        mkdir -p "$HOME/.local/bin"
+        mv kn-func "$HOME/.local/bin/kn-func"
+        export PATH="$HOME/.local/bin:$PATH"
         ```
+
+        If this directory is not already on your `PATH`, add the same `export` to your shell's startup configuration for future terminals.
 
     1. Verify that the CLI is working by running the command:
 

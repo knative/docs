@@ -2,8 +2,8 @@
 
 The Knative website uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 For everyday edits, preview just your checkout instead of assembling every
-published release. You don't need a Kubernetes cluster, Node.js, a GitHub token,
-or release branches.
+published release. The default preview does not need a Kubernetes cluster,
+Node.js, a GitHub token, or release branches.
 
 ## Quick start: uv
 
@@ -34,6 +34,22 @@ browser reloads automatically. Press **Ctrl+C** to stop.
 The preview serves `docs/versioned/` at `/docs/`, so the homepage and Docs header
 links work as they do on the published website. It reads your working files
 directly; there is no copy step between editing and previewing.
+
+### Contributor guidance is a separate context
+
+Files under `contribute-to-docs/` are repository guidance read on GitHub, outside
+the MkDocs `docs/` source tree. Neither this preview nor the release build
+publishes them automatically. Check the rendered Markdown on your branch or PR
+on GitHub, including relative links, explicit anchors, images, and copyable
+template fences. Confirm that new guidance is discoverable from the
+[contributor guide](../README.md) or [template index](../templates/README.md).
+
+Template scaffolds demonstrate versioned-page metadata and MkDocs syntax.
+GitHub does not render MkDocs tabs, admonitions, macros, or includes as the website
+does. To check a page created from a template, preview that actual page under
+`docs/`; a readable scaffold on GitHub is not a website rendering check.
+Record which context you checked in the PR. Neither rendering context proves
+that the documented commands work.
 
 ### Useful commands
 
@@ -145,10 +161,62 @@ different local build tag; the script never pushes it.
 ## Local preview versus a full release build
 
 The local preview builds the current checkout only, with no version selector.
-It uses the API reference files already in the repository and development/nightly
-artifact links. It does not fetch API references or published release branches.
-After dependencies are installed, the preview build needs no network access;
-external links and browser-loaded resources may still require internet access.
+It uses the API reference files already in the repository and does not fetch API
+references or published release branches. Selecting a link context below does
+**not** turn the checkout into a released documentation snapshot.
+
+### Choose a release context
+
+These examples use the host-based uv helper. With `KNATIVE_VERSION` **unset**,
+installation artifact macros link to moving nightly builds. With `SAMPLES_BRANCH`
+unset, the `kn` and `func` command-reference macros link to upstream `main`.
+To use those defaults:
+
+```bash
+unset KNATIVE_VERSION SAMPLES_BRANCH
+./hack/mkdocs.sh serve
+```
+
+To request a release context instead, choose versions appropriate to the artifacts
+and installed CLIs you are checking. For example:
+
+```bash
+export KNATIVE_VERSION=1.24.0
+export SAMPLES_BRANCH=knative-v1.24.0
+./hack/mkdocs.sh serve
+```
+
+`KNATIVE_VERSION` requests a matching component artifact release; it does not
+guarantee an exact patch version or that every component has a matching release.
+If no matching tag is found, the artifact macro falls back to that repository's
+latest release. Inspect the rendered download URLs and build diagnostics before
+using them. `SAMPLES_BRANCH` separately selects the upstream branch or tag for
+CLI-reference links; setting `KNATIVE_VERSION` alone does not change those links.
+Literal upstream links in prose or snippets may still point to `main`.
+
+The example selects the Knative v1.24 release context and the confirmed
+`knative-v1.24.0` reference tags; it is not a claim that these instructions or
+component workflows have been runtime-tested with that release. Record the
+installed artifact and its actual reported CLI version separately—do not infer a
+`func` version number from the Knative tag or reuse an older release's result.
+Recheck version-dependent commands and handler contracts against the selected
+source before transferring a tutorial or test result to a newer release.
+
+Stop your existing preview with **Ctrl+C**, then restart it from the shell with
+the intended variables; browser reload alone does not update the process's
+environment. For a shared preview, ask its owner to restart it. On a `/docs/` page,
+verify that the local-checkout notice describes nightly artifacts or the requested
+release context, as appropriate. Check an artifact URL and both CLI-reference
+URLs too: the notice is not proof that all links resolved to the requested version.
+If the notice is missing or stale, ask the preview owner to check/restart it before
+using installation links.
+
+After dependencies are installed, the default local build with `KNATIVE_VERSION`
+unset does not need release-lookup network access. An explicit artifact release
+context queries the GitHub API during rendering; network access is required and
+API authentication or rate limits may affect the build. External destinations,
+artifact downloads, and browser-loaded resources can also require internet access.
+The full release-assembly workflow below is separate and requires network access.
 
 Production configuration is still `mkdocs.yml`. To test release assembly, including
 older versions and freshly downloaded API references, use:

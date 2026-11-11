@@ -2,7 +2,11 @@
 
 ## Navigation
 
-Navigation in the Knative website is defined in the [`/config/nav.yml`](../../config/nav.yml) file.
+Edit [`docs/versioned/.nav.yml`](../../docs/versioned/.nav.yml) for the current technical documentation. Other published collections have their own `.nav.yml` files under `docs/`. The local preview and release build assemble the top-level navigation; `config/nav.yml` is a legacy location, not the current source.
+
+When adding a destination, include its source path, page title, reader purpose, and proposed entry links in the PR. Navigation labels and link descriptions should promise what the destination actually provides. Keep component context; do not add empty mode collections or copy a page to make it appear in several routes.
+
+These screenshots illustrate the navigation format and appearance; their paths and labels may reflect an older layout.
 
 The backend looks as follows:
 
@@ -25,12 +29,15 @@ to redirect users from a page that may no longer exist (or has been moved) to th
 
 Adding redirects to the Knative site is done in one centralized place,
 [`/config/redirects.yml`](../../config/redirects.yml).
-The format is shown here:
+Use source paths relative to `docs/`, including the `.md` extension. For example:
 
-```
+```yaml
 plugins:
   redirects:
     redirect_maps:
-        ...
-        path_to_old_or_moved_URL : path_to_new_URL
+      versioned/old-guide.md: versioned/new-guide.md
 ```
+
+Retain an existing URL when the page can remain a useful entry point. If you move a page, update navigation and incoming links as well as the redirect. A page redirect alone does not restore a removed fragment: preserve old heading IDs or add explicit anchors in the destination, then check old URLs and fragments in the rendered preview. The local preview maps `versioned/` source paths to `/docs/`; release assembly also supplies version-specific routes.
+
+Contributor guidance under `contribute-to-docs/` is read on GitHub, not automatically published by MkDocs. Link new contributor pages from the [contributor guide](../README.md) or [template index](../templates/README.md) and check them in that context.

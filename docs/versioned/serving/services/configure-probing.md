@@ -19,7 +19,7 @@ The general probing architecture looks like this:
 
 * Users can optionally define Readiness/Liveness and/or Startup probes in the `KnativeService` CR.
 * The Liveness and Startup probes are directly executed by the Kubelet against the according container.
-* Readiness probes, on the other hand, are rewritten by Knative to be executed by the Queue-Proxy container.
+* HTTP, TCP, and gRPC readiness probes are rewritten for execution by Queue-Proxy. Exec readiness probes remain on the user container for Kubelet execution; Queue-Proxy uses a TCP check for that path. See the [v1.24 probe construction](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/revision/resources/queue.go){target=_blank} and [user-container construction](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/reconciler/revision/resources/deploy.go#L268-L301){target=_blank}.
 * Knative does probing from in places (e.g. Activator, net-* controller, and from Queue-Proxy), to make sure the whole network stack is configured and ready. Compared to vanilla Kubernetes, Knative uses faster (called aggressive probing) probing interval to shorten the cold-start times when a Pod is already up and running while Kubernetes itself has not yet reflected that readiness.
 * Knative will define a default Readiness probe for the primary user container when no probe is defined by the user. It will check for a TCP socket on the traffic port of the Knative Service.
 * Knative will also define a Readiness probe for the Queue-Proxy container itself. Queue-Proxy's health endpoint aggregates all results from it's rewritten Readiness probes for all user containers (primary + sidecars). For the aggregated status, Queue-Proxy will call each container's Readiness probe in parallel, wait for their response (or timeout) and report an aggregated result back to Kubernetes. 
@@ -90,10 +90,10 @@ Supported probe types are:
 
 
 !!! note
-    Be aware that Knative also does some defaulting (checking readiness on the traffic port using an HTTP check) and additional validation to make aggressive probing work.
+    With no user readiness handler, v1.24 defaults the primary container to a TCP socket probe on its traffic port. Queue-Proxy itself has an HTTP health endpoint; that is not an HTTP application-response probe. See [readiness defaulting](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/v1/revision_defaults.go#L153-L166){target=_blank} and [probe validation](https://github.com/knative/serving/blob/knative-v1.24.0/pkg/apis/serving/k8s_validation.go#L828-L930){target=_blank} for aggressive-probing constraints.
 
 !!! warning
-    As the Queue-Proxy container does not rewrite or check defined Liveness probes, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, you may see, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.
+    Queue-Proxy does not execute liveness probes; Kubelet does. Serving can adjust the serving container's probe port while constructing its Deployment. Therefore, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, you may see, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.
 
 ## Progress Deadline and Startup Probes
 

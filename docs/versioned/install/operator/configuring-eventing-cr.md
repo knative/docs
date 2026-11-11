@@ -7,7 +7,24 @@ function: how-to
 
 # Configuring the Eventing Operator custom resource
 
-You can configure the Knative Eventing operator by modifying settings in the `KnativeEventing` custom resource (CR).
+Use this collection to select a configuration change for an existing Operator-managed Eventing installation. The examples are independent entry points, not a required sequence.
+
+## Choose a configuration goal
+
+| Goal | Start here |
+| --- | --- |
+| Set defaults for newly created routing resources | [Default Channel](#setting-a-default-channel), [Channel for a Channel-based Broker](#setting-the-default-channel-for-the-broker), or [default Broker class](#configuring-the-default-broker-class) |
+| Use other system images or registry credentials | [Image references and pull secrets](#private-repository-and-private-secrets), including Eventing-specific container identifiers |
+| Tune system availability and placement | [Replica counts](#high-availability), [workload overrides](#override-system-deployments), [system Services](#override-system-services), or [PodDisruptionBudgets](#override-system-poddisruptionbudgets) |
+| Deploy to another cluster | [Remote-cluster deployment](multi-cluster-deployment.md) for prerequisites, steps, and verification |
+
+For ConfigMap mapping and field destinations, see the [Operator configuration field map](configuration-reference.md). For release changes, use [Operator upgrades](../upgrade/upgrade-installation-with-operator.md).
+
+## Before changing configuration
+
+You need an Operator-managed `KnativeEventing` resource, permission to update it, and a recoverable copy of its current manifest. Examples use the name and namespace `knative-eventing`; substitute your actual values. Merge the selected fields into your authoritative manifest and preserve other settings. If GitOps manages the resource, make the change in that source.
+
+Before selecting a Channel or Broker default, install the chosen implementation and check its supported API version. Changing defaults is not a migration of existing Channels or Brokers. After selecting an example, follow [Apply and verify a configuration change](#apply-and-verify-a-configuration-change).
 
 ## Setting a default channel
 
@@ -48,6 +65,8 @@ spec:
 ## Setting the default channel for the broker
 
 If you are using a Channel based Broker, you can change the default Channel type for the Broker from InMemoryChannel to KafkaChannel, by updating the `config-br-default-channel` ConfigMap.
+
+The example uses the full ConfigMap name in `spec.config`. The shortened key `br-default-channel` is also accepted. If both entries are present, the full-name entry takes precedence; their data is not merged. See the [ConfigMap mapping reference](configuration-reference.md#configmap-mapping).
 
 You can do this by modifying the KnativeEventing CR:
 
@@ -135,14 +154,16 @@ To define your image links:
    You can also run the following commands to make the equivalent change:
 
     ```bash
-    kn operator configure images --component eventing --imageKey default --imageURL docker.io/knative-images/${NAME}:latest -n knative-eventing
+    kn operator configure images --component eventing --imageKey default --imageURL 'docker.io/knative-images/${NAME}:latest' -n knative-eventing
     kn operator configure images --component eventing --deployName broker-controller --imageKey eventing-controller --imageURL docker.io/knative-images-repo1/broker-eventing-controller:latest -n knative-eventing
     ```
 
-    - `${NAME}` maps to the container name in each `Deployment` resource.
+    - In Operator v1.24, `${NAME}` resolves to the image name parsed from the existing image reference, falling back to the container name when no image name is available. Check those names against your private registry; use explicit overrides where they differ.
     - `default` is used to define the image format for all containers, except the container `eventing-controller` in the deployment `broker-controller`. To replace the image for this container, use the `override`
     field to specify individually, by using `broker-controller/eventing-controller` as the key.
 <!-- TODO: check that this is still relevant, I don't see default in this example?-->
+
+The single quotes in the CLI example preserve `${NAME}` as a literal Operator template variable rather than expanding a variable in your shell. They are not part of the stored image reference.
 
 ### Download images from different repositories without secrets
 
@@ -241,7 +262,7 @@ kn operator configure images --component eventing --deployName broker-controller
 ```
 
 ```bash
-kn operator configure images --component eventing --imageKey DISPATCHER_IMAGE -controller --imageURL docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest -n knative-eventing
+kn operator configure images --component eventing --imageKey DISPATCHER_IMAGE --imageURL docker.io/knative-images-repo5/DISPATCHER_IMAGE:latest -n knative-eventing
 ```
 
 ### Download images with secrets
@@ -260,7 +281,7 @@ metadata:
   namespace: knative-eventing
 spec:
   registry:
-    ...
+    # Retain any existing image template and overrides here.
     imagePullSecrets:
       - name: regcred
 ```
@@ -275,21 +296,22 @@ metadata:
   namespace: knative-eventing
 spec:
   registry:
-    ...
+    # Retain any existing image template and overrides here.
     imagePullSecrets:
       - name: regcred
       - name: regcred-2
-      ...
+      # Add further Secret names as list entries if needed.
 ```
 
 ## Configuring the default broker class
 
-Knative Eventing allows you to define a default broker class when the user does not specify one.
-The Operator provides two broker classes by default: ChannelBasedBroker and MTChannelBasedBroker.
+Knative Eventing allows you to define a default Broker class when the user does not specify one. Setting a default class does not install a Broker implementation; select a class supported by an implementation installed in your cluster. See [Broker types](../../eventing/brokers/broker-types/README.md).
 
-The field `defaultBrokerClass` indicates which class to use; if empty, the ChannelBasedBroker is used.
+In Operator v1.24, the default Broker transform skips applying `spec.defaultBrokerClass` when `default-br-config` under either `spec.config.br-defaults` or `spec.config.config-br-defaults` contains `brokerClass:`. Otherwise, `spec.defaultBrokerClass` supplies the cluster default; if it is empty, the Operator uses `MTChannelBasedBroker`.
 
-The following example CR specifies MTChannelBasedBroker as the default:
+This behavior is implemented by the [v1.24 default Broker transform](https://github.com/knative/operator/blob/knative-v1.24.0/pkg/reconciler/knativeeventing/common/defaultbroker.go). Class detection checks both naming forms, while the separate [ConfigMap mapping transform](configuration-reference.md#configmap-mapping) selects the full-name entry first without merging them. Use one naming form to avoid conflicting entries.
+
+The following example CR explicitly specifies `MTChannelBasedBroker`, which is also the fallback when no class is configured:
 
 ```yaml
 apiVersion: operator.knative.dev/v1beta1
@@ -353,7 +375,8 @@ The `replicas` field also configures the `HorizontalPodAutoscaler` resources bas
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  ...
+  # Other metadata omitted from this illustrative fragment.
+  name: example-hpa
 spec:
   minReplicas: 3
   maxReplicas: 5
@@ -365,8 +388,7 @@ If you configure `replicas: 6`, which is more than `maxReplicas`, the operator t
 
 ## Override system deployments
 
-If you would like to override some configurations for a specific deployment, you can override the configuration by using `spec.deployments` in the CR.
-Currently `resources`, `replicas`, `labels`, `annotations` and `nodeSelector` are supported.
+To override a system workload, use `spec.workloads` in the `KnativeEventing` CR, as shown below. The following sections cover resources and scheduling. Check the CRD installed by your Operator release for supported fields.
 
 ### Override the resources
 
@@ -594,3 +616,26 @@ spec:
   - name: eventing-webhook
     minAvailable: 70%
 ```
+
+## Apply and verify a configuration change
+
+1. Merge the selected fields into your existing custom resource manifest. Retain the previous values for recovery.
+1. Validate and apply it, substituting your filename:
+
+    ```bash
+    kubectl apply --dry-run=server -f <filename>.yaml
+    kubectl apply -f <filename>.yaml
+    ```
+
+1. Check readiness and status conditions:
+
+    ```bash
+    kubectl get knativeeventing knative-eventing -n knative-eventing
+    kubectl get knativeeventing knative-eventing -n knative-eventing -o yaml
+    ```
+
+    Confirm `READY` is `True`; otherwise, use [installation troubleshooting](../troubleshooting.md).
+
+1. Inspect the affected ConfigMap, workload, Service, or PDB in the component namespace. For routing defaults, verify a newly created Channel or Broker uses the intended implementation using [Channel configuration](../../eventing/configuration/channel-configuration.md) or [Broker configuration](../../eventing/configuration/broker-configuration.md). Readiness and matching configuration do not prove end-to-end event delivery; test the intended event path separately.
+
+To recover, restore previous values in the authoritative manifest and apply through the same workflow, then repeat the checks. Do not edit generated resources directly. For remote targets, follow [multi-cluster verification](multi-cluster-deployment.md).

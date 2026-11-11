@@ -20,6 +20,14 @@ function: tutorial
 - Create a Knative Sequence with bad word filter service as step 1 and sentiment analysis service as step 2
 - The final result is sent back to Broker as reply of the Sequence
 
+**Starting state:** Both functions from [lesson 2](../page-2/sentiment-analysis-service-for-bookstore-reviews.md) and [lesson 3](../page-3/create-bad-word-filter-service.md) have been deployed and individually invoked successfully. Your Broker and `log-trigger` from lesson 1 remain Ready. Return to `start` with `cd "$BOOKSTORE_START"` and use `default`.
+
+The `start` tree does not include the Sequence configuration directory. Create it before saving the YAML below:
+
+```sh
+mkdir -p sequence/config
+```
+
 ## **Implementation**
 
 ### **Step 0: Learn Sequence**
@@ -217,6 +225,10 @@ Type something in the comment box in the UI and click the submit button. All the
 
 In this tutorial, you learned how to create a Sequence to build a ML pipeline.
 
-Next, we'll be learning how to spin up book store's database services, while learning what will be the best case to use Knative Serving.
+Verify that the event-display logs contain a `moderated-comment` event with both `badWordResult` and `sentimentResult`. The original `new-review-comment` event can also appear because `log-trigger` has no filter. The Sequence input Trigger matches only `new-review-comment`, so the processed `moderated-comment` reply does not enter this Sequence again.
+
+Stop the log watch with `Ctrl+C`. Next, deploy the PostgreSQL database as a Kubernetes StatefulSet.
+
+**Previous:** [Deploy the inappropriate-language filter](../page-3/create-bad-word-filter-service.md) · **Next:** [Deploy the database](../page-5/deploy-database-service.md)
 
 [Go to Deploy Database Service :fontawesome-solid-paper-plane:](../page-5/deploy-database-service.md){ .md-button .md-button--primary }

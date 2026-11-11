@@ -25,13 +25,18 @@ You can install Knative Serving via the methods listed on the [installation page
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](../samples/serving.md)
-sample projects. These projects use the `Service` resource, which manages all
-the details for you.
+For a guided first deployment, follow the [Knative Quickstart](../getting-started/README.md), then [deploy your first Service](../getting-started/first-service.md) and [observe autoscaling](../getting-started/first-autoscale.md). For language-specific examples after the basics, choose a [hello world sample](../samples/serving.md).
 
 With the `Service` resource, a deployed service will automatically have a
 matching route and configuration created. Each time the `Service` is updated, a
 new revision is created.
+
+## Choose your next goal
+
+- **Accomplish a task:** [Set and verify a concurrency target](autoscaling/configure-concurrency.md) or [manage traffic between Revisions](traffic-management.md).
+- **Understand behavior:** Read the [Serving architecture](architecture.md), [request flow](request-flow.md), or [concurrency and autoscaling explanation](autoscaling/concurrency-behavior.md).
+- **Look up details:** Consult the [concurrency settings](autoscaling/concurrency.md), [scale bounds](autoscaling/scale-bounds.md), or [Serving API reference](reference/serving-api.md).
+- **Explore autoscaling:** Use the [autoscaling landing page](autoscaling/README.md) to choose a tutorial, task, explanation, or settings reference.
 
 ## More samples and demos
 

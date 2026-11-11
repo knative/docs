@@ -22,8 +22,10 @@ either internal contributor content, or external-facing user content.
 
 - _Documentation_: Content for developers or administrators using Knative. This
   documentation belongs in the
-  [`knative/docs` repo](https://github.com/knative/docs). All content in
-  `knative/docs` is published to the [Knative website](https://knative.dev).
+  [`knative/docs` repo](https://github.com/knative/docs), normally under
+  `docs/versioned/`. Website pages are built from `docs/`; contributor guidance
+  under `contribute-to-docs/` and sample source code are read in the repository,
+  not automatically published as website pages.
 
 - _Code samples_: Includes user-facing code samples and their accompanying
   step-by-step instructions. Code samples add a particular burden because they
@@ -47,11 +49,19 @@ either internal contributor content, or external-facing user content.
       set of samples.
 
   - **Community owned and maintained samples**: For sample code which doesn't
-    meet the mentioned criteria, put the code in a separate repository and link to it [from this page](../../docs/samples/README.md). These samples might not receive regular maintenance. It is possible that a
+    meet the mentioned criteria, put the code in a separate repository and link to it [from the sample overview](../../docs/versioned/samples/README.md). These samples might not receive regular maintenance. It is possible that a
     sample is no longer current and is not actively maintained by its original
     author. While we encourage a contributor to maintain their content, we
     acknowledge that it's not always possible for certain reasons, for example
     other commitments and time constraints.
+
+In a sample PR, identify the maintainer, applicable component release, environment,
+and tests executed with their results. State unexecuted steps and blockers, and
+request technical validation where needed. A documentation build or syntax check
+is not an e2e test; disclosure alone does not satisfy the testing requirement for
+Knative-owned and maintained samples. Use the
+[technical validation handoff](creating-new-docs.md#technical-validation-and-review-handoff)
+for accompanying tutorials and how-tos.
 
 While a sample might be out of date, it could still provide assistance and help
 you get up-and-running with certain use-cases. If you find that something is not

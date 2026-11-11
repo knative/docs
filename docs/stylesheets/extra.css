@@ -1095,6 +1095,14 @@ body.modal-open {
   }
 }
 
+.local-preview-notice {
+  padding: 0.55rem 1rem;
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color);
+  font-size: 0.65rem;
+  line-height: 1.5;
+}
+
 .md-search-result__article {
   max-height: none;
 }
