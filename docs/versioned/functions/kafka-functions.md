@@ -12,4 +12,4 @@ A function can consume messages from an Apache Kafka topic. When a function decl
 The full guide lives in the `func` repository, covering concepts, a getting-started walkthrough, delivery and retries, deployment and scaling, idempotency, local development, and troubleshooting:
 
 - [Kafka functions guide](https://github.com/knative/func/blob/main/docs/kafka-functions/README.md){target=_blank}
-- [`run.kafka` configuration reference](https://github.com/knative/func/blob/main/docs/reference/func_yaml.md#runkafka){target=_blank}
+- [run.kafka configuration reference](https://github.com/knative/func/blob/main/docs/reference/func_yaml.md#runkafka){target=_blank}
