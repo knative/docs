@@ -51,6 +51,7 @@ nav:
       - Subscribing functions: functions/subscribing-functions.md
       - Deploying functions: functions/deploying-functions.md
       - Invoking functions: functions/invoking-functions.md
+      - Kafka functions: functions/kafka-functions.md
       - Language packs: functions/language-packs.md
 ###############################################################################
     # Serving
