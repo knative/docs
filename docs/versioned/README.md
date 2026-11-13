@@ -99,7 +99,7 @@ Knative Serving can leverage Kubernetes pod capabilities to access specialized h
 - **Resource efficiency** by scaling down expensive GPU resources when not in use
 - **Standard HTTP interfaces** for model serving and inference endpoints
 
-**KServe Integration**: For production LLM deployments, consider using [KServe](https://kserve.github.io/website/latest/), a Kubernetes-native model serving platform built on Knative Serving. KServe provides:
+**KServe Integration**: For production LLM deployments, consider using [KServe](https://kserve.github.io), a Kubernetes-native model serving platform built on Knative Serving. KServe provides:
 
 - Standardized inference protocols and multi-framework support
 - Advanced features like model ensembling, explainability, and drift detection
@@ -233,7 +233,7 @@ Knative integrates with standard Kubernetes resources and third-party tools:
 
 **Event-Driven Applications**: Process events from various sources with reliable delivery and error handling.
 
-**Inference Services**: Use Knative directly, or integrate with [KServe](https://kserve.github.io/website/latest/) to easily manage AI inference models.
+**Inference Services**: Use Knative directly, or integrate with [KServe](https://kserve.github.io) to easily manage AI inference models.
 
 **Microservices Architecture**: Build and deploy loosely coupled services with automatic scaling and service discovery.
 
