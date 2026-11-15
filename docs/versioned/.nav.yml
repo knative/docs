@@ -1,13 +1,9 @@
 nav:
 ###############################################################################
-    # Concepts
-###############################################################################
-    - Overview: README.md
-###############################################################################
     # Getting started
 ###############################################################################
-    - Tutorials:
-        - Explore Knative: getting-started/tutorial.md
+    - Get Started:
+        - README.md
         - Quickstart:
           - Tutorial introduction: getting-started/README.md
           - Install Knative using quickstart: getting-started/quickstart-install.md
@@ -39,6 +35,14 @@ nav:
             - 6 - Advanced event filtering: bookstore/page-6/advanced-event-filtering.md
             - 7 - Connect Slack via Camel-K: bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
             - 8 - Extra Challenges: bookstore/extra-challenge/README.md
+        - More tutorials: getting-started/tutorial.md
+        - Technical overview: overview.md
+        - CLI tools:
+          - CLI tools: client/README.md
+          - Installing the Knative CLI: client/install-kn.md
+          - Customizing kn: client/configure-kn.md
+          - kn plugins: client/kn-plugins.md
+        - Code sample overview: samples/README.md
 ###############################################################################
     # Functions
 ###############################################################################
@@ -113,6 +117,7 @@ nav:
     # Serving reference docs
       - Reference:
         - Serving API: serving/reference/serving-api.md
+      - Code samples: samples/serving.md
 ###############################################################################
     # Eventing
 ###############################################################################
@@ -217,18 +222,11 @@ nav:
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
+      - Code samples: samples/eventing.md
 ###############################################################################
-    # CLI
+    # Install and Manage
 ###############################################################################
-    - CLI tools:
-      - CLI tools: client/README.md
-      - Installing the Knative CLI: client/install-kn.md
-      - Customizing kn: client/configure-kn.md
-      - kn plugins: client/kn-plugins.md
-###############################################################################
-    # Administration
-###############################################################################
-    - Administration:
+    - Install and Manage:
       - Overview: admin/admin-overview.md
       - Installing Knative:
         - Overview: install/README.md
@@ -327,11 +325,4 @@ nav:
         - Uninstalling Knative: install/uninstall.md
       # Troubleshooting
       - Troubleshooting Knative: install/troubleshooting.md
-###############################################################################
-    # Code samples
-###############################################################################
-    - Code samples:
-      - Code sample overview: samples/README.md
-      - Serving code samples: samples/serving.md
-      - Eventing code samples: samples/eventing.md
 
