@@ -11,22 +11,17 @@ function: tutorial
 
 # Quickstart
 
-Try Serving and Eventing on a local learning cluster. Follow these lessons in
-order; they share the same environment:
+The introductory walkthrough now starts at [Get Started](../README.md).
+It takes you through deploying a service, autoscaling, and traffic splitting
+on a local learning cluster.
 
-1. [Set up your cluster](quickstart-install.md) using the `quickstart` plugin.
-2. [Deploy a service](first-service.md), [explore autoscaling](first-autoscale.md),
-   and [split traffic](first-traffic-split.md) between revisions.
-3. [Explore Eventing](getting-started-eventing.md), then send and receive events
-   using a Broker and Triggers.
-4. [Clean up your cluster](clean-up.md) and choose your [next steps](next-steps.md).
+[Go to Get Started](../README.md){ .md-button .md-button--primary }
 
-Writing code with Functions is covered in a [separate tutorial](about-knative-functions.md);
-you do not need it to complete this Quickstart.
+<span id="before-you-begin"></span>
 
---8<-- "quickstart-prereqs.md"
+For prerequisites and installation, go directly to
+[Set up your cluster](quickstart-install.md#before-you-begin).
 
-!!! tip
-    Hit ++"."++ (period) on your keyboard to move forward in the tutorial. Use ++","++ (comma) to go back at any time.
-
-<!--TODO: This tip only applies for users using a keyboard, i.e. not great for responsive design, since it doesn't work for users on mobile devices. Should we remove it or have it only appear on certain devices? Is responsive design really possible using mkdocs?-->
+If you are looking for a component tutorial, try
+[Your first function](about-knative-functions.md) or
+[Your first event](getting-started-eventing.md).

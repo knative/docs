@@ -17,4 +17,8 @@ Following this quickstart tutorial provides you with a simplified, local Knative
 
 ## Next steps
 
-Now that you have installed Knative, you can learn how to deploy your first Knative Service in the next topic in this tutorial.
+If you are following Get Started, [deploy your first service](first-service.md).
+
+If you came here to prepare for [Your first function](about-knative-functions.md)
+or [Your first event](getting-started-eventing.md), your cluster is ready;
+return to that tutorial.

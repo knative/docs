@@ -20,4 +20,8 @@ Functions can be written in any language supported by the available [language pa
 
 ## Getting started with functions
 
-Before you can use Knative Functions, you must have access to a Knative development environment. To set up a development environment, you can follow the [Knative Quickstart tutorial](../getting-started/README.md){target=_blank}.
+Start with [Your first function](../getting-started/about-knative-functions.md)
+to create a project and build or run it locally. You only need a Knative cluster
+when you are ready to deploy; the tutorial links to the shared setup guide.
+
+For an existing project, use the how-to guides in this section.

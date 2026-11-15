@@ -10,11 +10,18 @@ hide_next: true
 
 # Next Steps
 
-You have finished the Quickstart. To keep learning, try the
-[Functions tutorial](about-knative-functions.md) or build the
-[event-driven Bookstore application](../bookstore/page-0/welcome-knative-bookstore-tutorial.md).
-Each tutorial describes its own setup; if you deleted your Quickstart cluster,
-create a new environment where needed.
+You have deployed a service, explored autoscaling, and split traffic between
+revisions. Choose what you want to learn next:
+
+- [Your first function](about-knative-functions.md): create a project from code,
+  then build and run it.
+- [Your first event](getting-started-eventing.md): send an event through a Broker
+  and deliver it to a consumer using a Trigger.
+- [Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md):
+  combine Functions, Serving, and Eventing in a larger application.
+
+Each tutorial describes its own setup. You do not need to keep the cluster from
+this walkthrough; create a new environment where needed.
 
 The resources below can help you explore further.
 

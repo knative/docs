@@ -3,15 +3,33 @@ audience: developer
 components:
   - eventing
 function: tutorial
+hide_prev: true
 ---
 
-# Knative Eventing
+<span id="knative-eventing"></span>
 
-Knative Eventing provides you with helpful tools that can be used to create event-driven applications, by easily attaching event sources, triggers, and other options to your Knative Services.
+# Your first event
 
-Event-driven applications are designed to detect events as they occur, and process these events by using user-defined, event-handling procedures.
+Send an event through a Broker, then use a Trigger to deliver it to a consumer.
+The CloudEvents Player application acts as both the sender and the consumer,
+so you can see the result without writing application code.
 
-!!! tip
-    To find out more about event-driven architecture and Knative Eventing, check out this CNCF Session about [event-driven architecture with Knative events](https://www.cncf.io/online-programs/event-driven-architecture-with-knative-events/){target=blank}
+## Before you begin
 
-After you install Knative Eventing, you can create, send, and verify events. This tutorial shows how you can use a basic workflow for managing events that uses **Event Sources**, **Brokers**, **Triggers**, and **Sinks**.
+These lessons use a local Quickstart cluster with Serving, Eventing, and the
+`example-broker` Broker in the `default` namespace. Have `kn` and `kubectl`
+configured to use that cluster and namespace.
+
+If you do not have that environment, [set up a learning cluster](quickstart-install.md)
+and return here. If you still have the cluster from Get Started, you can reuse
+it. You do not need to complete the service or Functions lessons first.
+
+## Follow the tutorial
+
+1. [Explore the Broker](first-broker.md) created by Quickstart.
+2. [Send events](first-source.md) from the CloudEvents Player to the Broker.
+3. [Receive events](first-trigger.md) by creating a Trigger that routes them
+   back to the player.
+
+When you finish, [clean up your disposable cluster](clean-up.md) if you no longer
+need it. For background on the components, see the [Eventing overview](../eventing/README.md).

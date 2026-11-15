@@ -3,6 +3,7 @@ audience: developer
 components:
   - eventing
 function: tutorial
+hide_next: true
 ---
 
 # Using Triggers and sinks
@@ -85,3 +86,13 @@ You may need to refresh the page to see your changes.
 
 
 Some people call this **"Event-Driven Architecture"** which can be used to create your own **"Functions as a Service"** on Kubernetes :tada: :taco: :fire:
+
+## Next steps
+
+You have sent an event to a Broker and used a Trigger to deliver it to a consumer.
+If you used a disposable Quickstart cluster, [clean it up](clean-up.md) when
+you finish.
+
+Continue with the [Eventing guides](../eventing/README.md), or try the
+[Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md)
+to combine these ideas in a larger application.

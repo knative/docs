@@ -14,14 +14,23 @@ HTTP services, and **Eventing** routes events between applications.
 
 ## Try Knative
 
-**New to Knative? Start with the Quickstart tutorial.** Set up a local learning
-cluster, deploy a service, explore autoscaling and traffic splitting, and route
-events. Check the prerequisites first, then follow the lessons in order.
+**New to Knative? Start by running a container with Serving.** You will see how
+Knative deploys an HTTP service, scales it to zero, and splits traffic between
+revisions. You do not need to write code or complete another tutorial first.
 
-[Start the Quickstart tutorial](getting-started/README.md){ .md-button .md-button--primary }
+Follow these steps in order; they share a local learning cluster:
 
-The Quickstart environment is for learning. To install Knative on a cluster you
-manage, use the [installation guide](install/README.md) instead.
+1. [Set up your cluster](getting-started/quickstart-install.md). Check the
+   prerequisites, then install Knative using the Quickstart plugin.
+2. [Deploy a service](getting-started/first-service.md) from a sample container.
+3. [Explore autoscaling](getting-started/first-autoscale.md), including scaling to zero.
+4. [Split traffic](getting-started/first-traffic-split.md) between two revisions.
+5. [Clean up](getting-started/clean-up.md) and choose your [next steps](getting-started/next-steps.md).
+
+[Set up your cluster](getting-started/quickstart-install.md){ .md-button .md-button--primary }
+
+This environment is for learning. To install Knative on a cluster you manage,
+use the [installation guide](install/README.md) instead.
 
 ## Already have a goal?
 
@@ -33,7 +42,7 @@ manage, use the [installation guide](install/README.md) instead.
 | Install and operate Knative | [Install and Manage](admin/admin-overview.md) |
 
 These guides describe their own prerequisites; they do not require completing
-the Quickstart first.
+the walkthrough above first.
 
 <!-- Keep previous documentation-home fragments useful after moving the overview. -->
 <span id="knative-technical-overview"></span><span id="what-is-knative"></span><span id="problems-knative-solves"></span><span id="background-knowledge"></span><span id="architecture-overview"></span>
@@ -56,7 +65,8 @@ not required reading before the tutorial.
 
 ## Keep exploring
 
-- [Functions tutorial](getting-started/about-knative-functions.md): create, build, and run a function.
-- [Bookstore tutorial](bookstore/page-0/welcome-knative-bookstore-tutorial.md): build an event-driven application.
+- [Your first function](getting-started/about-knative-functions.md): start from code instead of a container.
+- [Your first event](getting-started/getting-started-eventing.md): send an event through a Broker to a consumer.
+- [Bookstore tutorial](bookstore/page-0/welcome-knative-bookstore-tutorial.md): combine the components in a larger application.
 - [CLI tools](client/README.md) for working with Knative from your terminal.
 - [Code samples](samples/README.md) for examples to explore and adapt.

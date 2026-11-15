@@ -8,10 +8,13 @@ hide_prev: true
 
 <span id="knative-functions"></span>
 
-# Functions tutorial
+<span id="functions-tutorial"></span>
 
-Create a function project, then build, run, or deploy it. This tutorial is
-separate from the Serving and Eventing Quickstart.
+# Your first function
+
+Start from code: create a function project, then build, run, or deploy it.
+You do not need to complete the Get Started walkthrough or the Eventing tutorial
+first.
 
 --8<-- "about-functions.md"
 
