@@ -6,51 +6,63 @@ function: tutorial
 hide_next: true
 ---
 
-# Building, running, or deploying functions
+<span id="building-running-or-deploying-functions"></span><span id="running-a-function"></span>
 
-After you have created a function project, you can build, run, or deploy your function, depending on your use case.
+# Run and test locally
 
-## Running a function
+Use the `hello-function` project from the previous lesson. Make sure Docker is
+running, then run this command **inside the project directory**:
 
---8<-- "run-func-intro.md"
+```bash
+func run --builder pack --image localhost/hello-function:latest
+```
 
-### Prerequisites
+This selects the container-based buildpacks builder, builds your function, and
+runs it locally. The first build downloads builder images and dependencies and
+can take several minutes. Wait until the function reports that it is listening.
 
-- You have a Docker daemon on your local machine. This is already provided if you have used the Quickstart installation.
+`localhost/hello-function:latest` is a **local image name**, not a registry you
+must set up. This command does not push an image or deploy anything to Kubernetes.
 
-### Procedure
+Keep this terminal open while testing the function.
 
---8<-- "proc-running-function.md"
+<span id="prerequisites"></span><span id="procedure"></span>
 
-## Deploying a function
+## Call your function
 
---8<-- "deploy-func-intro.md"
+Open a **second terminal**, change to the same `hello-function` directory, and run:
 
-### Prerequisites
+```bash
+func invoke --target local
+```
 
-- You have a Docker daemon on your local machine. This is already provided if you have used the Quickstart installation.
+The response includes your message:
 
-- You have access to a container registry and are able to push images to this registry. Note that some image registries set newly pushed images to private by default. If you are deploying a function for the first time, you may need to ensure that your images are set to public.
+```text
+Hello from my function!
+```
 
-### Procedure
+Additional response information may surround the body. The important result is
+that the message you wrote in `function.go` came back from your local function.
 
---8<-- "proc-deploying-function.md"
+## Try another change
 
-## Building a function
+Stop `func run` with **Ctrl+C** in the first terminal. Change the message in
+`function.go`, save the file, and run the same `func run` command again. When it
+is ready, invoke it from the second terminal and confirm the new message.
 
---8<-- "build-func-intro.md"
-
-### Prerequisites
-
-- You have a Docker daemon on your local machine. This is already provided if you have used the Quickstart installation.
-
-### Procedure
-
---8<-- "proc-building-function.md"
+<span id="deploying-a-function"></span><span id="building-a-function"></span><span id="prerequisites_1"></span><span id="procedure_1"></span><span id="prerequisites_2"></span><span id="procedure_2"></span>
 
 ## Next steps
 
-Continue with the [Functions guide](../functions/README.md) for your own projects,
-or [choose another tutorial](../README.md#keep-exploring).
-If you created a disposable Quickstart cluster, [clean it up](clean-up.md) when
-you finish.
+You have created, changed, and tested a function without Kubernetes or a registry
+account. Stop the local process with **Ctrl+C** when you are done.
+
+Choose one next step:
+
+- [Deploy this function to Knative](deploy-a-function.md) — optional; requires a
+  learning cluster and an image registry.
+- [Continue learning](next-steps.md) with another component or your own project.
+
+The [Functions guides](../functions/README.md) cover other builders, languages,
+and deployment workflows. They are not required to complete this local track.

@@ -3,96 +3,56 @@ audience: developer
 components:
   - eventing
 function: tutorial
+hide_prev: true
 hide_next: true
 ---
 
-# Using Triggers and sinks
+<span id="using-triggers-and-sinks"></span><span id="creating-your-first-trigger"></span>
 
-In the last topic we used the CloudEvents Player as an event source to send events to the Broker.
-We now want the event to go from the Broker to an event sink.
+# Filter events by type
 
-In this topic, we will use the CloudEvents Player as the sink as well as a source.
-This means we will be using the CloudEvents Player to both send and receive events.
-We will use a Trigger to listen for events in the Broker to send to the sink.
+This lesson is optional. Start with the working CloudEvents Player, Broker, and
+`cloudevents-trigger` from [Send and receive an event](first-source.md).
+You will change which events the existing Trigger delivers.
 
-## Creating your first Trigger
+## Add a type filter
 
-Create a Trigger that listens for CloudEvents from the event source and places them into the sink, which is also the CloudEvents Player app.
+```bash
+kn trigger update cloudevents-trigger --filter type=dev.knative.tutorial
+kn trigger list
+```
 
-=== "kn"
+Wait for the Trigger to be ready. It now matches only events whose `type`
+attribute is exactly `dev.knative.tutorial`.
 
-    To create the Trigger, run the command:
-    ```bash
-    kn trigger create cloudevents-trigger --sink cloudevents-player  --broker example-broker
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Trigger 'cloudevents-trigger' successfully created in namespace 'default'.
-        ```
+## Send matching and non-matching events
 
-=== "YAML"
+In the player's browser form:
 
-    1. Copy the following YAML into a file named `ce-trigger.yaml`:
-        ```bash
-        apiVersion: eventing.knative.dev/v1
-        kind: Trigger
-        metadata:
-          name: cloudevents-trigger
-          annotations:
-            knative-eventing-injection: enabled
-        spec:
-          broker: example-broker
-          subscriber:
-            ref:
-              apiVersion: serving.knative.dev/v1
-              kind: Service
-              name: cloudevents-player
-        ```
+1. Send an event with type `dev.knative.tutorial` and a new Event ID.
+2. Confirm that the event appears as both sent and received.
+3. Send another event with type `dev.knative.other` and a different Event ID.
+4. Check that the second event appears as sent, but is not delivered back through
+   this Trigger. Check new Event IDs rather than mistaking earlier received events
+   for this test.
 
-    1. Create the Trigger by running the command:
-        ```bash
-        kubectl apply -f ce-trigger.yaml
-        ```
+The filter selects events; it does not change their contents. Other Triggers on
+the Broker, if present, make their own independent selections.
 
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            trigger.eventing.knative.dev/cloudevents-trigger created
-            ```
+## Remove the filter
 
-??? question "What CloudEvents is my Trigger listening for?"
-    Because we didn't specify a `--filter` in our `kn` command, the Trigger is listening for any CloudEvents coming into the Broker.
+Restore the original behavior before continuing with other experiments:
 
-    Expand the next note to see how to use Filters.
+```bash
+kn trigger update cloudevents-trigger --filter type-
+```
 
-Now, when we go back to the CloudEvents Player and send an event, we see that CloudEvents are both sent and received by the CloudEvents Player:
+This removes the `type` filter, allowing the Trigger to match all events again.
 
-![CloudEvents Player user interface](images/event_received.png){draggable=false}
+<span id="next-steps"></span>
 
-You may need to refresh the page to see your changes.
+## Finish the track
 
-??? question "What if I want to filter on CloudEvent attributes?"
-    First, delete your existing Trigger:
-    ```bash
-      kn trigger delete cloudevents-trigger
-    ```
-    Now let's add a Trigger that listens for a certain CloudEvent Type
-    ```bash
-      kn trigger create cloudevents-player-filter --sink cloudevents-player  --broker example-broker --filter type=some-type
-    ```
-
-    If you send a CloudEvent with type `some-type`, it is reflected in the CloudEvents Player UI.  The Trigger ignores any other types.
-
-    You can filter on any aspect of the CloudEvent you would like to.
-
-
-Some people call this **"Event-Driven Architecture"** which can be used to create your own **"Functions as a Service"** on Kubernetes :tada: :taco: :fire:
-
-## Next steps
-
-You have sent an event to a Broker and used a Trigger to deliver it to a consumer.
-If you used a disposable Quickstart cluster, [clean it up](clean-up.md) when
-you finish.
-
-Continue with the [Eventing guides](../eventing/README.md), or try the
-[Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md)
-to combine these ideas in a larger application.
+You have routed events and selected them by type. [Continue learning](next-steps.md)
+with another track, or use the [Eventing guides](../eventing/README.md) for your
+own application. Delete the learning cluster only when you no longer need it.

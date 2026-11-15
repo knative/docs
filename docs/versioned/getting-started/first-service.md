@@ -3,55 +3,59 @@ audience: developer
 components:
   - serving
 function: tutorial
+hide_prev: true
 ---
 
-# Deploying a Knative Service
+<span id="deploying-a-knative-service"></span>
 
-In this tutorial, you will deploy a "Hello world" Knative Service that accepts the environment variable `TARGET` and prints `Hello ${TARGET}!`.
+# Deploy and call a service
 
-=== "kn"
+Run a sample HTTP container, then send it a request. You do not need to build an
+image or write code for this track.
 
-    Deploy the Service by running the command:
+## Before you begin
 
-    ```bash
-    kn service create hello \
-    --image ghcr.io/knative/helloworld-go:latest \
-    --port 8080 \
-    --env TARGET=World
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Service hello created to latest revision 'hello-0001' is available at URL:
-        http://hello.default.${LOADBALANCER_IP}.sslip.io
-        ```
-        The value of `${LOADBALANCER_IP}` above depends on your type of cluster,
-        for `kind` it will be `127.0.0.1` for `minikube` depends on the local tunnel.
+[Set up a learning cluster](quickstart-install.md) if you have not already done so,
+then return here. Use the `kind-knative` context and the `default` namespace from
+that setup. You do not need to complete the Functions or Eventing tracks.
 
-=== "YAML"
-    1. Copy the following YAML into a file named `hello.yaml`:
+Use the same terminal for these lessons. The examples create a Service named
+`hello`; start with no Service of that name in your learning namespace.
 
-        ```yaml
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        metadata:
-          name: hello
-        spec:
-          template:
-            spec:
-              containers:
-                - image: ghcr.io/knative/helloworld-go:latest
-                  ports:
-                    - containerPort: 8080
-                  env:
-                    - name: TARGET
-                      value: "World"
-        ```
-    1. Deploy the Knative Service by running the command:
+## Deploy the container
 
-        ```bash
-        kubectl apply -f hello.yaml
-        ```
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            service.serving.knative.dev/hello created
-            ```
+```bash
+kn service create hello \
+  --image ghcr.io/knative/helloworld-go:latest \
+  --port 8080 \
+  --env TARGET=World
+```
+
+Wait for `kn` to report that the Service is ready. Knative creates the resources
+needed to run the container and give it an HTTP URL.
+
+## Send a request
+
+Read the URL from the Service rather than copying an example hostname:
+
+```bash
+SERVICE_URL=$(kn service describe hello -o url)
+curl "$SERVICE_URL"
+```
+
+The response is:
+
+```text
+Hello World!
+```
+
+You have deployed a container and reached it over HTTP. Keep the Service running
+for the next lesson: [watch it scale to zero](first-autoscale.md).
+
+If the request cannot connect, check that Docker and the learning cluster are
+running. Your network also needs to resolve the `sslip.io` hostname printed by
+`kn`; if DNS policy blocks it, ask your network administrator before changing
+system-wide DNS settings. The [Serving troubleshooting guide](../serving/troubleshooting/debugging-application-issues.md)
+can help diagnose other application issues.
+For YAML-based deployment and your own images, use the
+[Service creation guide](../serving/services/creating-services.md) after the tutorial.

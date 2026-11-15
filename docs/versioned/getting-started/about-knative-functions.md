@@ -6,36 +6,32 @@ function: tutorial
 hide_prev: true
 ---
 
-<span id="knative-functions"></span>
+<span id="knative-functions"></span><span id="functions-tutorial"></span><span id="your-first-function"></span>
 
-<span id="functions-tutorial"></span>
+# Get started with Functions
 
-# Your first function
-
-Start from code: create a function project, then build, run, or deploy it.
-You do not need to complete the Get Started walkthrough or the Eventing tutorial
-first.
-
---8<-- "about-functions.md"
+Write a small Go function, change its response, and run it locally. You will
+use the standalone `func` CLI and its Go HTTP template. The tool builds a
+container image for you; you do not need to write a Dockerfile.
 
 ## Before you begin
 
-- Have a Docker-compatible daemon running on your machine.
-- Choose a language and install its development tools. The creation example uses Go.
-- Choose a container registry name for the build and run commands. To publish
-  or deploy the image, you need permission to push to that registry.
-- To deploy, you also need a Kubernetes cluster with Knative Serving and
-  `kubectl` configured to use it. If you need a learning cluster,
-  [create a fresh Quickstart environment](quickstart-install.md), then return here.
-  The examples name the function `hello`, so use a namespace without an existing
-  Service of that name.
+- Install and start [Docker](https://docs.docker.com/get-started/get-docker/).
+- Use a Bash-compatible terminal and have internet access for the CLI, builder
+  images, and dependencies.
 
-## Follow the tutorial
+**You do not need Kubernetes, `kn`, or a registry account for the local lessons.**
+The selected container builder supplies the Go toolchain.
 
-1. [Install func](install-func.md), either as a standalone CLI or a `kn` plugin.
-2. [Create a function](create-a-function.md).
-3. [Build, run, or deploy it](build-run-deploy-func.md).
+## Follow the track
 
-You do not need a Kubernetes cluster to build or run the function locally.
-If you created a disposable Quickstart cluster for deployment,
-[delete it when you finish](clean-up.md).
+1. [Install func](install-func.md).
+2. [Create and change a function](create-a-function.md).
+3. [Run and test it locally](build-run-deploy-func.md).
+
+That completes the local track. If you want to run the same function on Knative,
+continue with [Deploy to Knative](deploy-a-function.md). That optional lesson
+introduces cluster setup and publishing an image.
+
+For other languages and workflows, use the [Functions guides](../functions/README.md)
+after completing this example.
