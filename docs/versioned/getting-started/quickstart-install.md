@@ -29,9 +29,9 @@ For other installation methods, see the [installation guide](../install/README.m
 - Have internet access to download tools and container images, and `curl` to test services.
 - Ensure port 80 is available; Quickstart uses it for local HTTP traffic.
 
-The tutorial creates a kind cluster named `knative`. If that cluster already
-exists, reuse it only if it is your disposable Knative learning environment.
-Do not replace an existing cluster that you need for other work.
+The tutorial creates a kind cluster named `knative`. If you already have that
+cluster ready for these tutorials, skip to [Select your learning context](#select-your-learning-context).
+Do not rerun setup or replace a cluster you need for other work.
 
 <span id="install-the-knative-cli"></span><span id="install-the-knative-quickstart-plugin"></span>
 
@@ -49,8 +49,8 @@ Install `kind`, `kubectl`, the Knative CLI (`kn`), and its `quickstart` plugin l
 
 === "Release binaries"
 
-    Download the executable for your operating system and CPU architecture from
-    each project's releases:
+    Download the executable for your terminal's operating system and CPU architecture
+    from each project's releases. If you are using WSL 2, choose **Linux** binaries:
 
     | Tool | Download | Executable name |
     | --- | --- | --- |
@@ -88,6 +88,8 @@ kn quickstart kind
 Wait for the command to finish. It creates the `knative` kind cluster, installs
 Serving and Eventing, and creates an `example-broker` for the Eventing track.
 
+## Select your learning context
+
 Verify the cluster context before running any tutorial commands:
 
 ```bash
@@ -95,7 +97,8 @@ kubectl config current-context
 ```
 
 The context should be `kind-knative`. If it is not, switch to your learning cluster
-with `kubectl config use-context kind-knative`. Set its default namespace:
+with `kubectl config use-context kind-knative`. Once you have confirmed that context,
+set its default namespace:
 
 ```bash
 kubectl config set-context --current --namespace=default

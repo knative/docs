@@ -87,8 +87,7 @@ already supplied one:
 | Message | `{"message":"Hello Eventing!"}` |
 
 The Message field expects valid JSON. Click **SEND EVENT**. The player sends the
-event to the Broker, which delivers it
-through your Trigger back to the player.
+event to the Broker, which delivers it through your Trigger back to the player.
 
 ## Check the result
 
@@ -98,10 +97,12 @@ is not proof of delivery; the received entry is the result you are looking for.
 
 ![CloudEvents Player showing sent and received events](images/event_received.png)
 
-If you do not see a received event, check `kn broker list`, `kn trigger list`, and
-`kn service list` for readiness. Refresh the browser view if needed. The
-[Eventing troubleshooting guide](../eventing/troubleshooting/README.md) provides
-further diagnostics.
+??? help "If you do not see a received event"
+
+    Check `kn broker list`, `kn trigger list`, and `kn service list` for readiness.
+    Refresh the browser view if needed. The
+    [Eventing troubleshooting guide](../eventing/troubleshooting/README.md) provides
+    further diagnostics.
 
 ## Choose your next step
 
@@ -109,6 +110,3 @@ You have routed an event from a producer to a consumer. You can now:
 
 - [Filter events by type](first-trigger.md) — an optional extension to this lesson.
 - [Continue learning](next-steps.md) with another component or your own application.
-
-Keep the learning cluster until you finish experimenting; you do not need to
-recreate it between tracks.

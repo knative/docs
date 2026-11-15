@@ -11,7 +11,7 @@ hide_next: true
 # Deploy your function to Knative
 
 This lesson is optional. Start with the `hello-function` project you changed and
-tested in the [local Functions track](about-knative-functions.md).
+tested in [Run and test locally](build-run-deploy-func.md).
 
 ## Before you begin
 
@@ -25,8 +25,9 @@ tested in the [local Functions track](about-knative-functions.md).
   repository lets the learning cluster pull the image without extra credentials.
   Never include secrets in your project or image.
 
-If a Service named `hello-function` already exists in this namespace, use a fresh
-learning environment rather than replacing someone else's application.
+`func deploy` creates a Service named `hello-function`, or updates it if it
+already exists. Proceed only if that name is unused or belongs to your own
+function from this tutorial; do not replace someone else's application.
 
 ## Publish and deploy
 
@@ -60,9 +61,6 @@ The response body contains the same message you tested locally. The explicit
 
 ## Finish up
 
-Your function now runs as a Knative Service. You can [continue learning](next-steps.md)
-using the same cluster, or [clean up your environment](clean-up.md) when you are done.
-Deleting the cluster does not delete the image from your registry.
-
-The [deployment guide](../functions/deploying-functions.md) covers other registries
-and deployment options when you are ready to use your own project.
+Your function now runs as a Knative Service. [Continue learning](next-steps.md)
+to try another component, find guides for your own project, or clean up when you
+are done.

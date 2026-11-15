@@ -49,13 +49,13 @@ The response is:
 Hello World!
 ```
 
+??? help "If the request fails"
+
+    Check that Docker and the learning cluster are running. Your network also
+    needs to resolve the `sslip.io` hostname printed by `kn`. If DNS policy blocks
+    it, ask your network administrator before changing system-wide DNS settings.
+    The [Serving troubleshooting guide](../serving/troubleshooting/debugging-application-issues.md)
+    can help diagnose other application issues.
+
 You have deployed a container and reached it over HTTP. Keep the Service running
 for the next lesson: [watch it scale to zero](first-autoscale.md).
-
-If the request cannot connect, check that Docker and the learning cluster are
-running. Your network also needs to resolve the `sslip.io` hostname printed by
-`kn`; if DNS policy blocks it, ask your network administrator before changing
-system-wide DNS settings. The [Serving troubleshooting guide](../serving/troubleshooting/debugging-application-issues.md)
-can help diagnose other application issues.
-For YAML-based deployment and your own images, use the
-[Service creation guide](../serving/services/creating-services.md) after the tutorial.

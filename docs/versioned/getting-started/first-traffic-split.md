@@ -17,7 +17,9 @@ A **Revision** is an immutable snapshot of a Service's application configuration
 Changing the container's environment creates a new Revision. We will record the
 original Revision's name so that you do not need to guess it.
 
-## Creating a new Revision
+<span id="creating-a-new-revision"></span>
+
+## Save the original Revision
 
 First, save the current Revision's name in your terminal:
 
@@ -28,7 +30,9 @@ echo "$ORIGINAL_REVISION"
 
 Keep using this terminal for the rest of the lesson.
 
-Now change the `TARGET` environment variable and send all traffic to the new Revision:
+## Create a new Revision
+
+Change the `TARGET` environment variable and send all traffic to the new Revision:
 
 ```bash
 kn service update hello --env TARGET=Knative --traffic @latest=100
@@ -36,7 +40,9 @@ kn service update hello --env TARGET=Knative --traffic @latest=100
 
 Wait for the update to finish.
 
-## Accessing the new Revision
+<span id="accessing-the-new-revision"></span>
+
+## Call the updated service
 
 ```bash
 curl "$(kn service describe hello -o url)"
@@ -60,7 +66,9 @@ kn revision list --service hello
 You should see the original and updated Revisions. Their names are generated;
 `ORIGINAL_REVISION` holds the earlier one's name.
 
-## Splitting traffic between Revisions
+<span id="splitting-traffic-between-revisions"></span>
+
+## Split traffic between Revisions
 
 Send half the traffic to the saved original Revision and half to the latest:
 
@@ -92,6 +100,5 @@ one response, run the loop again and check the configured traffic split.
 ## Finish the track
 
 You have deployed a container, observed autoscaling, and routed traffic between
-Revisions. [Continue learning](next-steps.md) to choose another track or use the
-Serving guides for your own application. Keep the cluster if you want to try
-Eventing or deploy a function; [clean it up](clean-up.md) only when you are done.
+Revisions. [Continue learning](next-steps.md) to choose another track, find guides
+for your own application, or finish experimenting.

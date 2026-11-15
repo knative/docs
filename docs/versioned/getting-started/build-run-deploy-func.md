@@ -63,6 +63,3 @@ Choose one next step:
 - [Deploy this function to Knative](deploy-a-function.md) — optional; requires a
   learning cluster and an image registry.
 - [Continue learning](next-steps.md) with another component or your own project.
-
-The [Functions guides](../functions/README.md) cover other builders, languages,
-and deployment workflows. They are not required to complete this local track.

@@ -4,6 +4,7 @@ components:
   - eventing
   - functions
   - serving
+hide_next: true
 ---
 
 # Get started with Knative

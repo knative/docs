@@ -21,7 +21,8 @@ container image for you; you do not need to write a Dockerfile.
   images, and dependencies.
 
 **You do not need Kubernetes, `kn`, or a registry account for the local lessons.**
-The selected container builder supplies the Go toolchain.
+The local run command builds the image using Docker and supplies the Go toolchain;
+you do not need to install Go separately.
 
 ## Follow the track
 
@@ -29,9 +30,6 @@ The selected container builder supplies the Go toolchain.
 2. [Create and change a function](create-a-function.md).
 3. [Run and test it locally](build-run-deploy-func.md).
 
-That completes the local track. If you want to run the same function on Knative,
-continue with [Deploy to Knative](deploy-a-function.md). That optional lesson
-introduces cluster setup and publishing an image.
-
-For other languages and workflows, use the [Functions guides](../functions/README.md)
-after completing this example.
+These three lessons complete the local track. After testing the function, you
+can optionally [deploy it to Knative](deploy-a-function.md). You will set up a
+cluster and publish an image only if you choose that lesson.

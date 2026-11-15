@@ -48,11 +48,12 @@ kn trigger update cloudevents-trigger --filter type-
 ```
 
 This removes the `type` filter, allowing the Trigger to match all events again.
+Wait for the Trigger to be ready, then send an event with type `dev.knative.other`
+and a new Event ID. Confirm that it now appears as both sent and received.
 
 <span id="next-steps"></span>
 
 ## Finish the track
 
 You have routed events and selected them by type. [Continue learning](next-steps.md)
-with another track, or use the [Eventing guides](../eventing/README.md) for your
-own application. Delete the learning cluster only when you no longer need it.
+to try another track, find guides for your own application, or finish experimenting.
