@@ -2,6 +2,14 @@
 INHERIT: mkdocs.yml
 
 site_url: http://127.0.0.1:8000/
+# Retain the shared exemptions and omit this checkout's legacy tutorial chooser.
+# Keep this local: published releases still include the chooser in their nav.
+not_in_nav: |
+  /index.md
+  /about-analytics-cookies.md
+  /blog/articles/set-up-a-local-knative-environment-with-kind.md
+  **/bookstore/create-slack-workspace/README.md
+  /docs/getting-started/tutorial.md
 # Validate this checkout without imposing new checks on archived release branches.
 validation:
   nav:
