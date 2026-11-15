@@ -4,30 +4,28 @@ nav:
 ###############################################################################
     - Get Started:
         - README.md
-        - Set up your cluster: getting-started/quickstart-install.md
-        - Deploy a service: getting-started/first-service.md
-        - Explore autoscaling: getting-started/first-autoscale.md
-        - Split traffic: getting-started/first-traffic-split.md
-        - Clean up: getting-started/clean-up.md
-        - Next steps: getting-started/next-steps.md
-        - Background and tools:
-          - Technical overview: overview.md
-          - CLI tools:
-            - CLI tools: client/README.md
-            - Installing the Knative CLI: client/install-kn.md
-            - Customizing kn: client/configure-kn.md
-            - kn plugins: client/kn-plugins.md
-          - Code sample overview: samples/README.md
+        - Set up a learning cluster: getting-started/quickstart-install.md
+        - Serving:
+          - Deploy and call a service: getting-started/first-service.md
+          - Watch it scale to zero: getting-started/first-autoscale.md
+          - Update and split traffic: getting-started/first-traffic-split.md
+        - Functions:
+          - Start here: getting-started/about-knative-functions.md
+          - Install func: getting-started/install-func.md
+          - Create and change a function: getting-started/create-a-function.md
+          - Run and test locally: getting-started/build-run-deploy-func.md
+          - Deploy to Knative (optional): getting-started/deploy-a-function.md
+        - Eventing:
+          - Explore the Broker: getting-started/getting-started-eventing.md
+          - Send and receive an event: getting-started/first-source.md
+          - Filter events (optional): getting-started/first-trigger.md
+        - Continue learning: getting-started/next-steps.md
+        - Clean up your environment: getting-started/clean-up.md
 ###############################################################################
     # Functions
 ###############################################################################
     - Functions:
       - Knative Functions overview: functions/README.md
-      - Your first function:
-        - getting-started/about-knative-functions.md
-        - Install func: getting-started/install-func.md
-        - Create a function: getting-started/create-a-function.md
-        - Build, run, and deploy: getting-started/build-run-deploy-func.md
       - How-to guides:
         - Installing Knative Functions: functions/install-func.md
         - Creating functions: functions/creating-functions.md
@@ -104,13 +102,8 @@ nav:
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
-      - Your first event:
-        - getting-started/getting-started-eventing.md
-        - Explore the Broker: getting-started/first-broker.md
-        - Send events: getting-started/first-source.md
-        - Receive events: getting-started/first-trigger.md
       - Bookstore tutorial:
-        - bookstore/page-0/welcome-knative-bookstore-tutorial.md
+        - Overview: bookstore/page-0/welcome-knative-bookstore-tutorial.md
         - Disclaimer: bookstore/disclaimer/README.md
         - Set up your environment: bookstore/page-0.5/environment-setup.md
         - 1 - Send review comments: bookstore/page-1/send-review-comment-to-broker.md
@@ -226,6 +219,11 @@ nav:
 ###############################################################################
     - Install and Manage:
       - Overview: admin/admin-overview.md
+      - CLI tools:
+        - CLI tools: client/README.md
+        - Installing the Knative CLI: client/install-kn.md
+        - Customizing kn: client/configure-kn.md
+        - kn plugins: client/kn-plugins.md
       - Installing Knative:
         - Overview: install/README.md
         # YAML Installation

@@ -8,65 +8,49 @@ components:
 
 # Get started with Knative
 
-Knative provides building blocks for serverless applications on Kubernetes:
-**Functions** helps you turn code into containers, **Serving** runs and scales
-HTTP services, and **Eventing** routes events between applications.
+Knative helps you build and run serverless applications on Kubernetes.
+**Serving** runs HTTP containers, **Functions** turns your code into an application,
+and **Eventing** routes events between applications. Use them separately or together.
 
-## Try Knative
+## Choose a starting point
 
-**New to Knative? Start by running a container with Serving.** You will see how
-Knative deploys an HTTP service, scales it to zero, and splits traffic between
-revisions. You do not need to write code or complete another tutorial first.
+Choose one track. You do not need to complete the others first.
+**Not sure? Start with Serving** to see Knative run a container without writing code.
 
-Follow these steps in order; they share a local learning cluster:
+- **[Serving](getting-started/first-service.md): run an HTTP container.**
+  Deploy a service, watch it scale to zero, and split traffic between revisions.
+  Uses a local learning cluster.
+- **[Functions](getting-started/about-knative-functions.md): start from code.**
+  Create and change a Go function, then run and test it locally.
+  Needs Docker and the Functions CLI, but no cluster or registry account.
+- **[Eventing](getting-started/getting-started-eventing.md): connect applications with events.**
+  Send an event through a Broker and deliver it using a Trigger.
+  Uses a local learning cluster.
 
-1. [Set up your cluster](getting-started/quickstart-install.md). Check the
-   prerequisites, then install Knative using the Quickstart plugin.
-2. [Deploy a service](getting-started/first-service.md) from a sample container.
-3. [Explore autoscaling](getting-started/first-autoscale.md), including scaling to zero.
-4. [Split traffic](getting-started/first-traffic-split.md) between two revisions.
-5. [Clean up](getting-started/clean-up.md) and choose your [next steps](getting-started/next-steps.md).
+For Serving and Eventing, [set up a learning cluster](getting-started/quickstart-install.md)
+first. Both tracks use the same environment, so set it up only once. Functions
+needs a cluster only if you choose its optional deployment lesson.
 
-[Set up your cluster](getting-started/quickstart-install.md){ .md-button .md-button--primary }
+The setup is for experimentation, not production. To install Knative on a cluster
+you manage, use [Install and Manage](admin/admin-overview.md).
 
-This environment is for learning. To install Knative on a cluster you manage,
-use the [installation guide](install/README.md) instead.
-
-## Already have a goal?
-
-| I want to… | Start here |
-| --- | --- |
-| Write a function | [Create a function project](functions/creating-functions.md) |
-| Deploy an existing container | [Create a Knative Service](serving/services/creating-services.md) |
-| Connect applications with events | [Explore Knative Eventing](eventing/README.md) |
-| Install and operate Knative | [Install and Manage](admin/admin-overview.md) |
-
-These guides describe their own prerequisites; they do not require completing
-the walkthrough above first.
-
-<!-- Keep previous documentation-home fragments useful after moving the overview. -->
+<!-- Preserve fragments from the previous documentation home. -->
 <span id="knative-technical-overview"></span><span id="what-is-knative"></span><span id="problems-knative-solves"></span><span id="background-knowledge"></span><span id="architecture-overview"></span>
 <span id="system-integration-and-interoperability"></span><span id="how-components-work-together"></span><span id="integration-with-kubernetes-ecosystem"></span><span id="use-cases-and-when-to-choose-knative"></span><span id="ideal-use-cases"></span><span id="evaluation-criteria"></span>
+<span id="knative-functions"></span><span id="functions-development-model"></span><span id="supported-languages-and-runtimes"></span><span id="function-deployment-and-lifecycle"></span>
+<span id="knative-serving"></span><span id="key-serving-features"></span><span id="request-flow-in-serving"></span><span id="gpu-resources-and-llm-inference"></span>
+<span id="knative-eventing"></span><span id="key-eventing-concepts"></span><span id="event-flow-in-eventing"></span><span id="eventing-use-cases"></span>
+<span id="try-knative"></span><span id="already-have-a-goal"></span>
 
 ## Understand Knative
 
-The [technical overview](overview.md) explains the problems Knative addresses,
-how its components work together, and when to use it. It is optional background,
-not required reading before the tutorial.
+The [technical overview](overview.md) explains the components and how they fit
+together. It is optional background, not required reading before the tutorials.
 
-- <span id="knative-functions"></span><span id="functions-development-model"></span><span id="supported-languages-and-runtimes"></span><span id="function-deployment-and-lifecycle"></span>
-  [Functions](overview.md#knative-functions): the development model and function lifecycle.
-- <span id="knative-serving"></span><span id="key-serving-features"></span><span id="request-flow-in-serving"></span><span id="gpu-resources-and-llm-inference"></span>
-  [Serving](overview.md#knative-serving): HTTP services, request flow, and scaling.
-- <span id="knative-eventing"></span><span id="key-eventing-concepts"></span><span id="event-flow-in-eventing"></span><span id="eventing-use-cases"></span>
-  [Eventing](overview.md#knative-eventing): event sources, routing, and consumers.
+<span id="next-steps"></span><span id="keep-exploring"></span>
 
-<span id="next-steps"></span>
+## After your first track
 
-## Keep exploring
-
-- [Your first function](getting-started/about-knative-functions.md): start from code instead of a container.
-- [Your first event](getting-started/getting-started-eventing.md): send an event through a Broker to a consumer.
-- [Bookstore tutorial](bookstore/page-0/welcome-knative-bookstore-tutorial.md): combine the components in a larger application.
-- [CLI tools](client/README.md) for working with Knative from your terminal.
-- [Code samples](samples/README.md) for examples to explore and adapt.
+[Continue learning](getting-started/next-steps.md) to try another component, find
+guides for your own projects, or clean up your environment when you are done.
+Keep your learning cluster if you want to use it for another track.

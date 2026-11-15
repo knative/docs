@@ -12,9 +12,9 @@ function: tutorial
 # Tutorials
 
 The tutorial starting point is now [Get Started](../README.md). Follow the
-introductory walkthrough there, or use its links to the component tutorials.
-Functions owns the function tutorial; Eventing owns the first-event and Bookstore
-tutorials.
+Serving, Functions, or Eventing track there. All three introductory tracks live
+together in Get Started; the component sections link to these same tutorials.
+The larger Bookstore tutorial lives under Eventing.
 
 <!-- Preserve links to sections of the former tutorial chooser. -->
 <span id="getting-started-with-knative"></span>

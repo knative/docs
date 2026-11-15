@@ -11,9 +11,9 @@ function: tutorial
 
 # Quickstart
 
-The introductory walkthrough now starts at [Get Started](../README.md).
-It takes you through deploying a service, autoscaling, and traffic splitting
-on a local learning cluster.
+The introductory tutorials now start at [Get Started](../README.md).
+Choose an independent Serving, Functions, or Eventing track there. Serving is
+the recommended first track if you are not sure where to begin.
 
 [Go to Get Started](../README.md){ .md-button .md-button--primary }
 

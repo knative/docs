@@ -20,8 +20,9 @@ Functions can be written in any language supported by the available [language pa
 
 ## Getting started with functions
 
-Start with [Your first function](../getting-started/about-knative-functions.md)
-to create a project and build or run it locally. You only need a Knative cluster
-when you are ready to deploy; the tutorial links to the shared setup guide.
+Follow [Get started with Functions](../getting-started/about-knative-functions.md)
+to create, change, and test a Go function locally. This is the same Functions
+track linked from Get Started. Cluster deployment is optional and links to the
+shared learning-cluster setup.
 
 For an existing project, use the how-to guides in this section.

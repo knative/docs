@@ -5,60 +5,52 @@ components:
   - serving
   - eventing
 function: tutorial
+hide_prev: true
 hide_next: true
 ---
 
-# Next Steps
+<span id="next-steps"></span>
 
-You have deployed a service, explored autoscaling, and split traffic between
-revisions. Choose what you want to learn next:
+# Continue learning
 
-- [Your first function](about-knative-functions.md): create a project from code,
-  then build and run it.
-- [Your first event](getting-started-eventing.md): send an event through a Broker
-  and deliver it to a consumer using a Trigger.
-- [Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md):
-  combine Functions, Serving, and Eventing in a larger application.
+You have completed a first experience with one of Knative's components. Choose
+what you want to do next; you do not have to work through every track.
 
-Each tutorial describes its own setup. You do not need to keep the cluster from
-this walkthrough; create a new environment where needed.
+## Try another component
 
-The resources below can help you explore further.
+- [Serving](first-service.md): deploy an HTTP service, observe scale-to-zero,
+  and split traffic between revisions.
+- [Functions](about-knative-functions.md): create, change, and run a Go function locally.
+- [Eventing](getting-started-eventing.md): send an event through a Broker to a consumer.
 
-[![Knative Slack Link](images/slack-button.svg)](https://slack.cncf.io/){target=_blank}
+Keep your learning cluster if you want to try another cluster-based track.
+If you have not created a cluster yet, each track links to the shared setup guide.
+The local Functions lessons do not need a cluster.
 
-## :test_tube: Knative samples
+<span id="explore-the-knative-docs"></span>
 
-Try out some of the following Knative samples:
+## Work on your own project
 
-- [Converting a Kubernetes Service to a Knative Service](../serving/convert-deployment-to-knative-service.md)
-- [Knative Serving code samples](../samples/serving.md)
-- [Knative Eventing and Event source code samples](../samples/eventing.md)
+The component guides cover tasks beyond the tutorials:
 
-## :page_with_curl: Explore the Knative docs
+- [Functions guides](../functions/README.md).
+- [Serving guides](../serving/README.md).
+- [Eventing guides](../eventing/README.md).
+- [Install and Manage](../admin/admin-overview.md) for installing and operating Knative.
 
-See the following guides for documentation specific to your use case:
+<span id="knative-samples"></span>
 
-- [Serving Guide](../serving/README.md)
-- [Eventing Guide](../eventing/README.md)
+## Build a larger application
 
-## :book: Knative books
+After the basics, try the [Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md).
+It combines Functions, Serving, and Eventing and has its own environment setup.
+You can also explore the [code samples](../samples/README.md).
 
-Books to help you understand Knative concepts and get additional examples:
+## Finished experimenting?
 
-- [Knative in Action](https://www.manning.com/books/knative-in-action)
+[Clean up your environment](clean-up.md) when you no longer need it. You do not
+need to delete and recreate the cluster between tracks.
 
-    ??? question "Want a free digital copy of Knative in Action?"
-        VMWare has generously donated access to a free copy of the Knative in Action eBook, [get your copy here!](https://tanzu.vmware.com/content/ebooks/knative-in-action){target=_blank}
+<span id="knative-books"></span><span id="other-knative-links"></span><span id="are-we-missing-something"></span>
 
-- [Knative Cookbook](https://www.oreilly.com/library/view/knative-cookbook/9781492061182/)
-
-## :globe_with_meridians: Other Knative links
-
-Other links to help you get started with Knative:
-
-- [Knative YouTube Channel](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)
-
-## :question: Are we missing something?
-
-We'd love to help you along the next step of your Knative journey. If we're missing something on this page that you feel should be here, please [give us feedback](https://forms.gle/Ab44BUBowmnnJsdW9)!
+For help or to share what you built, [join the Knative community](https://knative.dev/community/).

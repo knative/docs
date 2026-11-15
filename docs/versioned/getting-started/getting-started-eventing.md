@@ -6,30 +6,41 @@ function: tutorial
 hide_prev: true
 ---
 
-<span id="knative-eventing"></span>
+<span id="knative-eventing"></span><span id="your-first-event"></span>
 
-# Your first event
+# Get started with Eventing
 
-Send an event through a Broker, then use a Trigger to deliver it to a consumer.
-The CloudEvents Player application acts as both the sender and the consumer,
-so you can see the result without writing application code.
+Send an event through a **Broker** and use a **Trigger** to deliver it to a consumer.
+The CloudEvents Player application will send and display the event, so you can
+observe the result without writing application code.
 
 ## Before you begin
 
-These lessons use a local Quickstart cluster with Serving, Eventing, and the
-`example-broker` Broker in the `default` namespace. Have `kn` and `kubectl`
-configured to use that cluster and namespace.
+[Set up a learning cluster](quickstart-install.md) if you have not already done so,
+then return here. Use its `kind-knative` context and the `default` namespace.
+You can reuse the same environment as the Serving track; completing Serving
+or Functions is not a prerequisite.
 
-If you do not have that environment, [set up a learning cluster](quickstart-install.md)
-and return here. If you still have the cluster from Get Started, you can reuse
-it. You do not need to complete the service or Functions lessons first.
+## Explore the Broker
 
-## Follow the tutorial
+Quickstart creates a Broker named `example-broker`. Verify that it is ready:
 
-1. [Explore the Broker](first-broker.md) created by Quickstart.
-2. [Send events](first-source.md) from the CloudEvents Player to the Broker.
-3. [Receive events](first-trigger.md) by creating a Trigger that routes them
-   back to the player.
+```bash
+kn broker list
+```
 
-When you finish, [clean up your disposable cluster](clean-up.md) if you no longer
-need it. For background on the components, see the [Eventing overview](../eventing/README.md).
+Find `example-broker` and check that its `READY` column is `True`. If it is not
+ready or is missing, resolve the cluster setup before continuing.
+
+A Broker receives events. A Trigger selects events from that Broker and identifies
+where to deliver them. The destination is called a **sink**, or event consumer.
+The Broker created here uses an in-memory implementation for learning, not for
+production workloads that require durable delivery.
+
+## Follow the track
+
+1. [Send and receive an event](first-source.md) using the CloudEvents Player.
+2. Optionally, [filter events](first-trigger.md) by their type.
+
+For broader background, see the [Eventing overview](../eventing/README.md).
+You can keep the learning cluster for another track when you finish.
