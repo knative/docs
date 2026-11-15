@@ -47,7 +47,7 @@ Build a complete online bookstore application from scratch and explore Knative's
 Here are common paths:
 
   - **Want to try Knative in 10 minutes?** → [Quick Start Tutorial](quickstart-install.md)
-  - **Need to understand Knative first?** → [Technical Overview](../README.md)
+  - **Need to understand Knative first?** → [Technical Overview](../overview.md)
   - **Building event-driven apps?** → [Eventing Tutorial](getting-started-eventing.md)
   - **Creating serverless functions?** → [Functions Tutorial](about-knative-functions.md)
   - **Ready for production?** → [Installation Guide](../install/README.md)

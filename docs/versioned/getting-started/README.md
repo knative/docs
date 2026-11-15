@@ -7,13 +7,22 @@ components:
 function: tutorial
 ---
 
-# Welcome to the Knative Quickstart tutorial
+<span id="welcome-to-the-knative-quickstart-tutorial"></span>
 
-Following this Quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.
+# Quickstart
 
-You can use this simple Knative deployment to try out commonly used features of **Knative Serving** and **Knative Eventing**.
+Try Serving and Eventing on a local learning cluster. Follow these lessons in
+order; they share the same environment:
 
-We recommend that you complete the topics in this tutorial in order.
+1. [Set up your cluster](quickstart-install.md) using the `quickstart` plugin.
+2. [Deploy a service](first-service.md), [explore autoscaling](first-autoscale.md),
+   and [split traffic](first-traffic-split.md) between revisions.
+3. [Explore Eventing](getting-started-eventing.md), then send and receive events
+   using a Broker and Triggers.
+4. [Clean up your cluster](clean-up.md) and choose your [next steps](next-steps.md).
+
+Writing code with Functions is covered in a [separate tutorial](about-knative-functions.md);
+you do not need it to complete this Quickstart.
 
 --8<-- "quickstart-prereqs.md"
 

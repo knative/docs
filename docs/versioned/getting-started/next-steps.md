@@ -5,11 +5,18 @@ components:
   - serving
   - eventing
 function: tutorial
+hide_next: true
 ---
 
 # Next Steps
 
-This topic provides a list of resources to help you continue your Knative journey.
+You have finished the Quickstart. To keep learning, try the
+[Functions tutorial](about-knative-functions.md) or build the
+[event-driven Bookstore application](../bookstore/page-0/welcome-knative-bookstore-tutorial.md).
+Each tutorial describes its own setup; if you deleted your Quickstart cluster,
+create a new environment where needed.
+
+The resources below can help you explore further.
 
 [![Knative Slack Link](images/slack-button.svg)](https://slack.cncf.io/){target=_blank}
 

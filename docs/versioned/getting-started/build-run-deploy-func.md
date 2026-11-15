@@ -3,6 +3,7 @@ audience: developer
 components:
   - functions
 function: tutorial
+hide_next: true
 ---
 
 # Building, running, or deploying functions
@@ -46,3 +47,10 @@ After you have created a function project, you can build, run, or deploy your fu
 ### Procedure
 
 --8<-- "proc-building-function.md"
+
+## Next steps
+
+Continue with the [Functions guide](../functions/README.md) for your own projects,
+or [choose another tutorial](../README.md#keep-exploring).
+If you created a disposable Quickstart cluster, [clean it up](clean-up.md) when
+you finish.

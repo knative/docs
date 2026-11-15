@@ -56,6 +56,7 @@ not required reading before the tutorial.
 
 ## Keep exploring
 
-- [More tutorials](getting-started/tutorial.md), including the event-driven Bookstore application.
+- [Functions tutorial](getting-started/about-knative-functions.md): create, build, and run a function.
+- [Bookstore tutorial](bookstore/page-0/welcome-knative-bookstore-tutorial.md): build an event-driven application.
 - [CLI tools](client/README.md) for working with Knative from your terminal.
 - [Code samples](samples/README.md) for examples to explore and adapt.

@@ -4,7 +4,6 @@ components:
   - serving
   - eventing
 function: tutorial
-hide_next: true
 ---
 
 # Clean Up
