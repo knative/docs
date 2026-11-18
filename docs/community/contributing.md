@@ -43,12 +43,12 @@ following components, look for GitHub issues marked with the good first issue la
 
 - **Knative Client (kn):**
 
-    - To get started with contributing, see the [Client development workflow](https://github.com/knative/client/blob/main/docs/DEVELOPMENT.md).
+    - To get started with contributing, see the [Client development workflow](https://github.com/knative/client/blob/main/DEVELOPMENT.md).
     - For good starter issues, see [Client issues](https://github.com/knative/client/issues?q=is%3Aissue%20is%3Aopen%20sort%3Aupdated-desc%20label%3A%22good%20first%20issue%22).
 
 - **Functions:**
 
-    - To get started with contributing, see the [Functions development workflow](https://github.com/knative/func/blob/main/docs/CONTRIBUTING.md).
+    - To get started with contributing, see the [Functions development workflow](https://github.com/knative/func/blob/main/CONTRIBUTING.md).
     - For good starter issues, see [Functions issues](https://github.com/knative/func/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fgood-first-issue).
 
 - **Documentation:**
