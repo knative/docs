@@ -5,96 +5,49 @@ components:
 function: tutorial
 ---
 
-# Autoscaling
+<span id="autoscaling"></span><span id="list-your-knative-service"></span><span id="access-your-knative-service"></span>
 
-Knative Serving provides automatic scaling, also known as **autoscaling**. This means that a Knative Service by default scales down to zero running pods when it is not in use.
+# Watch your service scale to zero
 
-## List your Knative Service
-
-Use the Knative (`kn`) CLI to view the URL where your Knative Service is hosted:
-
-=== "kn"
-    View a list of Knative Services by running the command:
-    ```bash
-    kn service list
-    ```
-    !!! Success "Expected output"
-        ```bash
-        NAME    URL                                                LATEST        AGE   CONDITIONS   READY
-        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001   13s   3 OK / 3     True
-        ```
-=== "kubectl"
-    View a list of Knative Services by running the command:
-    ```bash
-    kubectl get ksvc
-    ```
-    !!! Success "Expected output"
-        ```bash
-        NAME    URL                                                LATESTCREATED   LATESTREADY   READY   REASON
-        hello   http://hello.default.${LOADBALANCER_IP}.sslip.io   hello-00001     hello-00001   True
-        ```
-
-## Access your Knative Service
-
-Access your Knative Service by opening the previous URL in your browser or by running the command:
-
-```bash
-echo "Accessing URL $(kn service describe hello -o url)"
-curl "$(kn service describe hello -o url)"
-```
-
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
-    Hello World!
-    ```
-
-??? question "Are you seeing `curl: (6) Could not resolve host: hello.default.${LOADBALANCER_IP}.sslip.io`?"
-
-    In some cases your DNS server may be set up not to resolve `*.sslip.io` addresses. If you encounter this problem, it can be fixed by using a different nameserver to resolve these addresses.
-
-    The exact steps will differ according to your distribution. For example, with Ubuntu derived systems which use `systemd-resolved`, you can add the following entry to the `/etc/systemd/resolved.conf`:
-
-    ```ini
-    [Resolve]
-    DNS=8.8.8.8
-    Domains=~sslip.io.
-    ```
-
-    Then simply restart the service with `sudo service systemd-resolved restart`.
-
-    For MacOS users, you can add the DNS and domain using the network settings as explained [here](https://support.apple.com/en-gb/guide/mac-help/mh14127/mac).
+Use the `hello` Service from the previous lesson. When it stops receiving
+requests, Knative can remove its application pods. A new request causes the
+application to start again.
 
 ## Observe autoscaling
 
-Watch the pods and see how they scale to zero after traffic stops going to the URL:
+In your first terminal, watch only the pods belonging to this Service:
 
 ```bash
-kubectl get pod -l serving.knative.dev/service=hello -w
+kubectl get pods --selector serving.knative.dev/service=hello --watch
 ```
 
-!!! note
-    It may take up to 2 minutes for your pods to scale down. Pinging your service again resets this timer.
+Stop sending requests, including refreshing the Service in a browser. After
+an idle period, the pod changes from `Running` to `Terminating` and disappears.
+This can take a couple of minutes. If no pod is listed when you start watching,
+it may already have scaled down.
 
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
-    NAME                                     READY   STATUS
-    hello-world                              2/2     Running
-    hello-world                              2/2     Terminating
-    hello-world                              1/2     Terminating
-    hello-world                              0/2     Terminating
-    ```
+The Service and its URL still exist; you do not need to deploy it again.
 
-## Scale up your Knative Service
+<span id="scale-up-your-knative-service"></span>
 
-Rerun the Knative Service in your browser. You can see a new pod running again:
+## Send a request to wake it up
 
-!!! Success "Expected output"
-    ```{ .bash .no-copy }
-    NAME                                     READY   STATUS
-    hello-world                              0/2     Pending
-    hello-world                              0/2     ContainerCreating
-    hello-world                              1/2     Running
-    hello-world                              2/2     Running
-    ```
+Keep the watch running. In a **second terminal**, send another request:
 
-Exit the `kubectl watch` command with `Ctrl+c`.
+```bash
+curl "$(kn service describe hello -o url)"
+```
+
+The request may take longer while the application starts. It still returns:
+
+```text
+Hello World!
+```
+
+In the first terminal, a new pod appears and becomes ready. Its generated name
+may differ from the earlier pod's name. You have observed scale-to-zero and
+scale-from-zero.
+
+Press **Ctrl+C** in the first terminal to stop watching pods. This stops only the
+watch, not the Service. Keep the environment for the next lesson:
+[update the Service and split traffic](first-traffic-split.md).

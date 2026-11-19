@@ -5,6 +5,7 @@ components:
   - functions
   - serving
 function: tutorial
+hide_prev: true
 ---
 
 # Welcome: Knative Bookstore Tutorial

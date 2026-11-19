@@ -25,9 +25,10 @@ You can install Knative Serving via the methods listed on the [installation page
 
 ## Getting Started
 
-To get started with Serving, check out one of the [hello world](../samples/serving.md)
-sample projects. These projects use the `Service` resource, which manages all
-the details for you.
+Follow [Get started with Serving](../getting-started/first-service.md) to deploy
+and call a service, observe scale-to-zero, and split traffic between revisions.
+This is the same Serving track linked from Get Started, not a separate tutorial.
+It links to the shared learning-cluster setup if you need an environment.
 
 With the `Service` resource, a deployed service will automatically have a
 matching route and configuration created. Each time the `Service` is updated, a

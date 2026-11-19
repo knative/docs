@@ -7,63 +7,19 @@ components:
 function: tutorial
 ---
 
-# Welcome to the Knative Tutorials
+<span id="welcome-to-the-knative-tutorials"></span>
 
-Choose your learning path based on your goals and experience level.
+# Tutorials
 
----
+The tutorial starting point is now [Get Started](../README.md). Follow the
+Serving, Functions, or Eventing track there. All three introductory tracks live
+together in Get Started; the component sections link to these same tutorials.
+The larger Bookstore tutorial lives under Eventing.
 
-## Getting Started with Knative
+<!-- Preserve links to sections of the former tutorial chooser. -->
+<span id="getting-started-with-knative"></span>
+<span id="knative-bookstore-end-to-end-sample-application"></span>
+<span id="not-sure-where-to-start"></span>
+<span id="prerequisites"></span>
 
-**Perfect for:** First-time users and developers wanting hands-on experience
-
-Comprehensive guide with multiple learning paths:
-
-  - Quick local installation (10 minutes with kind/minikube)
-  - Step-by-step tutorials for Serving, Eventing, and Functions
-
-**What you'll learn:** Deploy your first service, explore autoscaling, build event-driven applications, and create serverless functions.
-
-[Explore Getting Started Paths :octicons-arrow-right-24:](../getting-started/README.md){ .md-button }
-
----
-
-## Knative Bookstore: End-to-End Sample Application
-
-**Perfect for:** Learning Knative through a real-world application
-
-Build a complete online bookstore application from scratch and explore Knative's powerful features in action.
-
-**What you'll learn:** Integration of Serving and Eventing, real-world architecture patterns, and best practices for production applications.
-
-[Start Bookstore Tutorial :octicons-arrow-right-24:](../bookstore/page-0/welcome-knative-bookstore-tutorial.md){ .md-button }
-
-![Knative Bookstore Application](../bookstore/page-0/images/1.png)
-
----
-
-## Not sure where to start?
-
-Here are common paths:
-
-  - **Want to try Knative in 10 minutes?** → [Quick Start Tutorial](quickstart-install.md)
-  - **Need to understand Knative first?** → [Technical Overview](../README.md)
-  - **Building event-driven apps?** → [Eventing Tutorial](getting-started-eventing.md)
-  - **Creating serverless functions?** → [Functions Tutorial](about-knative-functions.md)
-  - **Ready for production?** → [Installation Guide](../install/README.md)
-
----
-
-## Prerequisites
-
-**For Quick Start Tutorial:**
-
-  - Docker
-  - kubectl
-  - 3 CPUs, 3 GB RAM
-
-**For Bookstore Tutorial:**
-
-  - Kubernetes cluster (local or cloud)
-  - Basic familiarity with Kubernetes concepts
-  
+[Go to Get Started](../README.md){ .md-button .md-button--primary }

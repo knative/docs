@@ -4,158 +4,109 @@ components:
   - eventing
   - serving
 function: tutorial
+hide_next: true
 ---
 
-# Using a Knative Service as a source
+<span id="using-a-knative-service-as-a-source"></span>
 
-In this tutorial, you will use the [CloudEvents Player](https://github.com/ruromero/cloudevents-player){target=blank} app to showcase the core concepts of Knative Eventing. By the end of this tutorial, you should have an architecture that looks like this:
+# Send and receive an event
 
-![The CloudEvents Player acts as both a source and a sink for CloudEvents](images/event_diagram.png)
+Start with the ready `example-broker` from the [previous page](getting-started-eventing.md).
+You will use the CloudEvents Player as both an event producer and consumer:
 
-The above image is Figure 6.6 from [Knative in Action](https://www.manning.com/books/knative-in-action){target=_blank}.
+![The CloudEvents Player sends events to a Broker, which routes them through a Trigger back to the player.](images/event_diagram.png)
 
-## Creating your first source
+<span id="creating-your-first-source"></span>
 
-The CloudEvents Player acts as a Source for CloudEvents by intaking the name of the Broker as an environment variable, `BROKER_NAME`. If the Broker is
-located in a different namespace it is possible to also set the `BROKER_NAMESPACE` environment variable. Alternatively, you can just use the `BROKER_URI`.
+## Run the CloudEvents Player
 
-You will send CloudEvents to the Broker through the CloudEvents Player application.
+Create a Service named `cloudevents-player` in your learning namespace:
 
-Create the CloudEvents Player Service:
-=== "kn"
-    Run the command:
-    ```bash
-    kn service create cloudevents-player \
-    --image quay.io/ruben/cloudevents-player:latest
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Service 'cloudevents-player' created to latest revision 'cloudevents-player-00001' is available at URL:
-        http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io
-        ```
+```bash
+kn service create cloudevents-player \
+  --image quay.io/ruben/cloudevents-player:latest
+```
 
-=== "YAML"
-    1. Copy the following YAML into a file named `cloudevents-player.yaml`:
-        ```bash
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        metadata:
-          name: cloudevents-player
-        spec:
-          template:
-            metadata:
-              annotations:
-                autoscaling.knative.dev/min-scale: "1"
-            spec:
-              containers:
-                - image: quay.io/ruben/cloudevents-player:latest
-        ```
+Wait for the Service to become ready. Tell it where to send events by creating
+a **SinkBinding** pointing at the Broker:
 
-    1. Apply the YAML file by running the command:
-        ``` bash
-        kubectl apply -f cloudevents-player.yaml
-        ```
+```bash
+kn source binding create ce-player-binding \
+  --subject "Service:serving.knative.dev/v1:cloudevents-player" \
+  --sink broker:example-broker
+```
 
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            service.serving.knative.dev/cloudevents-player created
-            ```
+The binding supplies the destination to the player. Wait for it to be ready:
 
-The service is now running but it doesn't know where the broker is so let's create a
-[SinkBinding](https://knative.dev/docs/eventing/custom-event-source/sinkbinding/) between the service and the broker.
+```bash
+kubectl wait sinkbinding/ce-player-binding --for=condition=Ready --timeout=120s
+```
 
-=== "kn"
-    Run the command:
-    ```bash
-    kn source binding create ce-player-binding --subject "Service:serving.knative.dev/v1:cloudevents-player" --sink broker:example-broker
-    ```
-    !!! Success "Expected output"
-        ```{ .bash .no-copy }
-        Sink binding 'ce-player-binding' created in namespace 'default'.
-        ```
+You do not need to look up or hard-code the Broker's internal URL.
 
-=== "YAML"
-    1. Copy the following YAML into a file named `cloudevents-player-binding.yaml`:
-        ```bash
-        apiVersion: sources.knative.dev/v1
-        kind: SinkBinding
-        metadata:
-          name: ce-player-binding
-        spec:
-          sink:
-            ref:
-              apiVersion: eventing.knative.dev/v1
-              kind: Broker
-              name: example-broker
-          subject:
-            apiVersion: serving.knative.dev/v1
-            kind: Service
-            name: cloudevents-player
-        ```
+## Connect the consumer
 
-    1. Apply the YAML file by running the command:
-        ``` bash
-        kubectl apply -f cloudevents-player-binding.yaml
-        ```
+Create a Trigger that delivers events from the Broker back to the player:
 
-        !!! Success "Expected output"
-            ```{ .bash .no-copy }
-            sinkbinding.sources.knative.dev/ce-player-binding created
-            ```
+```bash
+kn trigger create cloudevents-trigger \
+  --broker example-broker \
+  --sink cloudevents-player
+kn trigger list
+```
 
-## Examining the CloudEvents Player
+Wait until `cloudevents-trigger` has `READY` set to `True`. With no filter, this
+Trigger matches all events arriving at this Broker. Set up the consumer **before**
+sending your test event; sending to a Broker alone does not establish a delivery path.
 
-**You can use the CloudEvents Player to send and receive CloudEvents.**
-If you open the Service URL in your browser, the **Create Event** form appears.
+<span id="examining-the-cloudevents-player"></span>
 
-The Service URL is `http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io`,
-for example, [http://cloudevents-player.default.127.0.0.1.sslip.io](http://cloudevents-player.default.127.0.0.1.sslip.io) for `kind`.
+## Open the player
 
-![The user interface for the CloudEvents Player](images/event_form.png)
+Print the Service URL and open it in your browser:
 
-??? question "What do these fields mean?"
-    | Field          | Description |
-    |:----------------:|:-------------|
-    | `Event ID`     | A unique ID. Click the loop icon to generate a new one.   |
-    | `Event Type`   | An event type.|
-    | `Event Source` | An event source.|
-    | `Specversion`  | Demarcates which CloudEvents spec you're using (should always be 1.0).|
-    | `Message`      | The `data` section of the CloudEvent, a payload which is carrying the data you care to be delivered.|
+```bash
+kn service describe cloudevents-player -o url
+```
 
-    For more information on the CloudEvents Specification, check out the [CloudEvents Spec](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md){target=_blank}.
+The page contains a form for creating a CloudEvent:
+
+![CloudEvents Player event form](images/event_form.png)
 
 ### Sending an event
 
-Try sending an event using the CloudEvents Player interface:
+Fill in the form with these values, generating an Event ID if the form has not
+already supplied one:
 
-1. Fill in the form with whatever data you want.
-1. Ensure your Event Source does not contain any spaces.
-1. Click **SEND EVENT**.
+| Field | Value |
+| --- | --- |
+| Event ID | A unique ID; keep it so you can recognize this event |
+| Event Type | `dev.knative.tutorial` |
+| Event Source | `/tutorial` |
+| Specversion | `1.0` |
+| Message | `{"message":"Hello Eventing!"}` |
 
-![CloudEvents Player Send](images/event_sent.png)
+The Message field expects valid JSON. Click **SEND EVENT**. The player sends the
+event to the Broker, which delivers it through your Trigger back to the player.
 
-??? tip "Clicking the :fontawesome-solid-envelope: shows you the CloudEvent as the Broker sees it."
-    ![Event Details](images/event_details.png){:width="500px"}
+## Check the result
 
-??? question "Want to send events using the command line instead?"
-    As an alternative to the Web form, events can also be sent/viewed using the command line.
+Look for the same Event ID in the player's sent and received event entries.
+Confirm that the received event contains your type and message. A sent entry alone
+is not proof of delivery; the received entry is the result you are looking for.
 
-    To post an event:
-    ```bash
-    curl -i http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io \
-        -H "Content-Type: application/json" \
-        -H "Ce-Id: 123456789" \
-        -H "Ce-Specversion: 1.0" \
-        -H "Ce-Type: some-type" \
-        -H "Ce-Source: command-line" \
-        -d '{"msg":"Hello CloudEvents!"}'
-    ```
+![CloudEvents Player showing sent and received events](images/event_received.png)
 
-    And to view events:
-    ```bash
-    curl http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io/messages
-    ```
+??? help "If you do not see a received event"
 
-The :material-send: icon in the "Status" column implies that the event has been sent to our Broker... but where has the event gone? **Well, right now, nowhere!**
+    Check `kn broker list`, `kn trigger list`, and `kn service list` for readiness.
+    Refresh the browser view if needed. The
+    [Eventing troubleshooting guide](../eventing/troubleshooting/README.md) provides
+    further diagnostics.
 
-A Broker is simply a receptacle for events. In order for your events to be sent anywhere, you must create a Trigger which listens for your events and places them somewhere. And, you're in luck; you'll create your first Trigger on the next page!
+## Choose your next step
+
+You have routed an event from a producer to a consumer. You can now:
+
+- [Filter events by type](first-trigger.md) — an optional extension to this lesson.
+- [Continue learning](next-steps.md) with another component or your own application.

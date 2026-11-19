@@ -5,6 +5,7 @@ components:
   - serving
   - functions
 function: tutorial
+hide_next: true
 ---
 
 # **Extra Challenges**

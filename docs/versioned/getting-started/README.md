@@ -7,17 +7,21 @@ components:
 function: tutorial
 ---
 
-# Welcome to the Knative Quickstart tutorial
+<span id="welcome-to-the-knative-quickstart-tutorial"></span>
 
-Following this Quickstart tutorial provides you with a simplified, local Knative installation by using the Knative `quickstart` plugin.
+# Quickstart
 
-You can use this simple Knative deployment to try out commonly used features of **Knative Serving** and **Knative Eventing**.
+The introductory tutorials now start at [Get Started](../README.md).
+Choose an independent Serving, Functions, or Eventing track there. Serving is
+the recommended first track if you are not sure where to begin.
 
-We recommend that you complete the topics in this tutorial in order.
+[Go to Get Started](../README.md){ .md-button .md-button--primary }
 
---8<-- "quickstart-prereqs.md"
+<span id="before-you-begin"></span>
 
-!!! tip
-    Hit ++"."++ (period) on your keyboard to move forward in the tutorial. Use ++","++ (comma) to go back at any time.
+For prerequisites and installation, go directly to
+[Set up your cluster](quickstart-install.md#before-you-begin).
 
-<!--TODO: This tip only applies for users using a keyboard, i.e. not great for responsive design, since it doesn't work for users on mobile devices. Should we remove it or have it only appear on certain devices? Is responsive design really possible using mkdocs?-->
+If you are looking for a component tutorial, try
+[Your first function](about-knative-functions.md) or
+[Your first event](getting-started-eventing.md).

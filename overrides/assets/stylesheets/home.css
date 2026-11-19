@@ -253,18 +253,18 @@ body:has(.home-page) .site-announcement {
 }
 
 .building-blocks-functions {
-  --block-color: #7a357d;
-  --block-background: #faf5fb;
+  --block-color: var(--knative-functions-color);
+  --block-background: var(--knative-functions-background);
 }
 
 .building-blocks-serving {
-  --block-color: #125cb3;
-  --block-background: #f2f7fd;
+  --block-color: var(--knative-serving-color);
+  --block-background: var(--knative-serving-background);
 }
 
 .building-blocks-eventing {
-  --block-color: #287867;
-  --block-background: #f1f8f6;
+  --block-color: var(--knative-eventing-color);
+  --block-background: var(--knative-eventing-background);
 }
 
 .home-page .building-blocks-capability h3 {

@@ -30,4 +30,10 @@ Examples of supported Knative Eventing use cases:
 
 ## Next steps
 
+- Follow [Get started with Eventing](../getting-started/getting-started-eventing.md)
+  to send an event through a Broker and deliver it using a Trigger. This is the
+  same Eventing track linked from Get Started; it links to shared cluster setup.
+- Once you know the basics, try the
+  [Bookstore tutorial](../bookstore/page-0/welcome-knative-bookstore-tutorial.md)
+  to combine the components in a larger application.
 - You can install Knative Eventing by using the methods listed on the [installation page](../install/README.md).

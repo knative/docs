@@ -2,6 +2,18 @@
 INHERIT: mkdocs.yml
 
 site_url: http://127.0.0.1:8000/
+# Retain shared exemptions and pages reached by links rather than lesson navigation.
+# Keep this local: published releases still include the chooser in their nav.
+not_in_nav: |
+  /index.md
+  /about-analytics-cookies.md
+  /blog/articles/set-up-a-local-knative-environment-with-kind.md
+  **/bookstore/create-slack-workspace/README.md
+  /versioned/getting-started/tutorial.md
+  /versioned/getting-started/README.md
+  /versioned/getting-started/first-broker.md
+  /versioned/overview.md
+  /versioned/samples/README.md
 # Validate this checkout without imposing new checks on archived release branches.
 validation:
   nav:

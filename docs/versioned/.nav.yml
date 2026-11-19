@@ -1,58 +1,41 @@
 nav:
 ###############################################################################
-    # Concepts
-###############################################################################
-    - Overview: README.md
-###############################################################################
     # Getting started
 ###############################################################################
-    - Tutorials:
-        - Explore Knative: getting-started/tutorial.md
-        - Quickstart:
-          - Tutorial introduction: getting-started/README.md
-          - Install Knative using quickstart: getting-started/quickstart-install.md
-          - Knative Functions:
-            - Getting Started: getting-started/about-knative-functions.md
-            - Installing Knative Functions: getting-started/install-func.md
-            - Creating a function: getting-started/create-a-function.md
-            - Building, running, or deploying a function: getting-started/build-run-deploy-func.md
-          - Knative Serving:
-            - Deploying a Knative Service: getting-started/first-service.md
-            - Autoscaling: getting-started/first-autoscale.md
-            - Traffic splitting: getting-started/first-traffic-split.md
-          - Knative Eventing:
-            - Getting Started: getting-started/getting-started-eventing.md
-            - Sources, Brokers, and Triggers: getting-started/first-broker.md
-            - Using a Knative Service as a source: getting-started/first-source.md
-            - Using Triggers and sinks: getting-started/first-trigger.md
-          - What's Next?: getting-started/next-steps.md
-          - Clean Up: getting-started/clean-up.md
-        - "E2E tutorial: Knative Bookstore":
-            - Overview: bookstore/page-0/welcome-knative-bookstore-tutorial.md
-            - Disclaimer: bookstore/disclaimer/README.md
-            - Environment Setup: bookstore/page-0.5/environment-setup.md
-            - 1 - Send Comments to Broker: bookstore/page-1/send-review-comment-to-broker.md
-            - 2 - Create Sentiment Service: bookstore/page-2/sentiment-analysis-service-for-bookstore-reviews.md
-            - 3 - Create Bad Word Service: bookstore/page-3/create-bad-word-filter-service.md
-            - 4 - Create Sequence: bookstore/page-4/create-sequence-to-streamline-ML-workflows.md
-            - 5 - Create DB service: bookstore/page-5/deploy-database-service.md
-            - 6 - Advanced event filtering: bookstore/page-6/advanced-event-filtering.md
-            - 7 - Connect Slack via Camel-K: bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
-            - 8 - Extra Challenges: bookstore/extra-challenge/README.md
+    - Get Started:
+        - README.md
+        - Set up a learning cluster: getting-started/quickstart-install.md
+        - Serving:
+          - Deploy and call a service: getting-started/first-service.md
+          - Watch it scale to zero: getting-started/first-autoscale.md
+          - Update and split traffic: getting-started/first-traffic-split.md
+        - Functions:
+          - Start here: getting-started/about-knative-functions.md
+          - Install func: getting-started/install-func.md
+          - Create and change a function: getting-started/create-a-function.md
+          - Run and test locally: getting-started/build-run-deploy-func.md
+          - Deploy to Knative (optional): getting-started/deploy-a-function.md
+        - Eventing:
+          - Explore the Broker: getting-started/getting-started-eventing.md
+          - Send and receive an event: getting-started/first-source.md
+          - Filter events (optional): getting-started/first-trigger.md
+        - Continue learning: getting-started/next-steps.md
+        - Clean up your environment: getting-started/clean-up.md
 ###############################################################################
     # Functions
 ###############################################################################
     - Functions:
       - Knative Functions overview: functions/README.md
-      - Installing Knative Functions: functions/install-func.md
-      - Creating functions: functions/creating-functions.md
-      - Building functions: functions/building-functions.md
-      - Running functions: functions/running-functions.md
-      - Subscribing functions: functions/subscribing-functions.md
-      - Deploying functions: functions/deploying-functions.md
-      - Invoking functions: functions/invoking-functions.md
-      - Kafka functions: functions/kafka-functions.md
-      - Language packs: functions/language-packs.md
+      - How-to guides:
+        - Installing Knative Functions: functions/install-func.md
+        - Creating functions: functions/creating-functions.md
+        - Building functions: functions/building-functions.md
+        - Running functions: functions/running-functions.md
+        - Subscribing functions: functions/subscribing-functions.md
+        - Deploying functions: functions/deploying-functions.md
+        - Invoking functions: functions/invoking-functions.md
+        - Kafka functions: functions/kafka-functions.md
+        - Language packs: functions/language-packs.md
 ###############################################################################
     # Serving
 ###############################################################################
@@ -113,11 +96,24 @@ nav:
     # Serving reference docs
       - Reference:
         - Serving API: serving/reference/serving-api.md
+      - Code samples: samples/serving.md
 ###############################################################################
     # Eventing
 ###############################################################################
     - Eventing:
       - Knative Eventing overview: eventing/README.md
+      - Bookstore tutorial:
+        - Overview: bookstore/page-0/welcome-knative-bookstore-tutorial.md
+        - Disclaimer: bookstore/disclaimer/README.md
+        - Set up your environment: bookstore/page-0.5/environment-setup.md
+        - 1 - Send review comments: bookstore/page-1/send-review-comment-to-broker.md
+        - 2 - Analyze sentiment: bookstore/page-2/sentiment-analysis-service-for-bookstore-reviews.md
+        - 3 - Filter bad words: bookstore/page-3/create-bad-word-filter-service.md
+        - 4 - Connect a Sequence: bookstore/page-4/create-sequence-to-streamline-ML-workflows.md
+        - 5 - Deploy the database: bookstore/page-5/deploy-database-service.md
+        - 6 - Filter events: bookstore/page-6/advanced-event-filtering.md
+        - 7 - Connect Slack: bookstore/page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md
+        - 8 - Extra challenges: bookstore/extra-challenge/README.md
       - Concepts:
         - Brokers:
           - About Brokers: eventing/brokers/README.md
@@ -217,19 +213,17 @@ nav:
     # Eventing reference docs
       - Reference:
         - Eventing API: eventing/reference/eventing-api.md
+      - Code samples: samples/eventing.md
 ###############################################################################
-    # CLI
+    # Install and Manage
 ###############################################################################
-    - CLI tools:
-      - CLI tools: client/README.md
-      - Installing the Knative CLI: client/install-kn.md
-      - Customizing kn: client/configure-kn.md
-      - kn plugins: client/kn-plugins.md
-###############################################################################
-    # Administration
-###############################################################################
-    - Administration:
+    - Install and Manage:
       - Overview: admin/admin-overview.md
+      - CLI tools:
+        - CLI tools: client/README.md
+        - Installing the Knative CLI: client/install-kn.md
+        - Customizing kn: client/configure-kn.md
+        - kn plugins: client/kn-plugins.md
       - Installing Knative:
         - Overview: install/README.md
         # YAML Installation
@@ -327,11 +321,4 @@ nav:
         - Uninstalling Knative: install/uninstall.md
       # Troubleshooting
       - Troubleshooting Knative: install/troubleshooting.md
-###############################################################################
-    # Code samples
-###############################################################################
-    - Code samples:
-      - Code sample overview: samples/README.md
-      - Serving code samples: samples/serving.md
-      - Eventing code samples: samples/eventing.md
 

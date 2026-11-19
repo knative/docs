@@ -1,43 +1,59 @@
 ---
 audience: developer
 components:
+  - functions
   - serving
   - eventing
 function: tutorial
+hide_prev: true
 hide_next: true
 ---
 
-# Clean Up
+<span id="clean-up"></span>
 
-We recommend that you delete the cluster used for this tutorial to free up resources
-on your local machine.
+# Clean up your environment
 
-If you want to continue experimenting with Knative after deleting the cluster,
-you can reinstall Knative on a new cluster using the [`quickstart` plugin](quickstart-install.md#run-the-knative-quickstart-plugin) again.
+Keep your learning environment if you want to [try another track](next-steps.md).
+When you have finished experimenting, clean up only the resources you created.
+If you followed only the local Functions lessons, there is no cluster to delete.
 
-## Delete the Cluster
+## Stop a local function
 
-=== "kind"
+If `func run` is still running, press **Ctrl+C** in its terminal. Your function's
+source files stay on your machine. Keep them if you want to continue developing.
+The local container image also remains until you remove it from Docker.
 
-    Delete your `kind` cluster by running the command:
+If you did not run a function locally, skip this step.
 
-    ```bash
-    kind delete clusters knative
-    ```
-    !!! success "Example output"
-        ```{ .bash .no-copy }
-        Deleted clusters: ["knative"]
-        ```
+## Delete the cluster
 
-=== "minikube"
+Do this only if you created a disposable cluster and no longer need it.
+The shared setup guide creates a kind cluster named `knative`. Deleting it removes
+**all applications and data in that cluster**, including work from every tutorial.
+This command does not delete the other clusters on your machine:
 
-    Delete your `minikube` cluster by running the command:
+```bash
+kind delete cluster --name knative
+```
+
+If you used a different name, substitute that name. Do not delete a cluster you
+use for other work. After deletion, switch back to your usual Kubernetes context
+before doing other cluster work.
+
+??? note "Used the older minikube Quickstart?"
+
+    If you created the disposable `knative` minikube profile instead of a kind
+    cluster, delete that profile with:
 
     ```bash
     minikube delete -p knative
     ```
-    !!! success "Example output"
-        ```{ .bash .no-copy }
-        🔥  Deleting "knative" in hyperkit ...
-        💀  Removed all traces of the "knative" cluster.
-        ```
+
+## Remove a published image
+
+If you completed the optional Functions deployment lesson, the image you pushed
+remains in your registry even after deleting the cluster. Remove that tutorial
+image using your registry's interface if you no longer need it.
+
+You can return to [Get Started](../README.md) at any time. To repeat a cluster-based
+tutorial after deleting the cluster, [create a new learning environment](quickstart-install.md).
