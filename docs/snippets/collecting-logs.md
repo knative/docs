@@ -74,7 +74,7 @@ The `fluent-bit-collector.yaml` file defines a StatefulSet, as well as a Kuberne
 
 ### Setting up the forwarders
 
-See the [Fluent Bit](https://docs.fluentbit.io/manual/installation/kubernetes) documentation to set up a Fluent Bit DaemonSet that forwards logs to ElasticSearch by default.
+See the [Fluent Bit](https://docs.fluentbit.io/manual/installation/downloads/kubernetes) documentation to set up a Fluent Bit DaemonSet that forwards logs to ElasticSearch by default.
 
 When you create a ConfigMap during the installation steps, you must:
 

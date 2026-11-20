@@ -412,6 +412,6 @@ spec:
 ## Further Resources
 
 - [EventTransform Overview and deployment patterns](./README.md)
-- [JSONata Documentation](https://jsonata.org/documentation.html)
+- [JSONata Documentation](https://docs.jsonata.org/overview.html)
 - [JSONata Exerciser](https://try.jsonata.org/)
 - [CloudEvents Specification](https://github.com/cloudevents/spec)
