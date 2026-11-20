@@ -329,9 +329,9 @@ sudo k0s kubectl apply -f l2_ad.yaml
 ### Create custom knative deployment files
 
 Edit deployment files of all knative serving components by reducing resources to 50% of the original value. 
-Ex: if 100m is the orginal value of CPU request/limit , we reduce it to 50m, same is done for memory.
+Ex: if 100m is the original value of CPU request/limit , we reduce it to 50m, same is done for memory.
 
-Though reducing by 50% might seem random, when I tried to install the default files , some pods didn't come up due to insufficient CPU. The mimimum request of 890 milli core (see [Knative + k0s Default resource requirement](#knative-k0s-default-resource-requirement)) explains why some pods didn't find  sufficient CPU , since BaseOS + k0s might be using more than 110 m of CPU (1000 - 890)
+Though reducing by 50% might seem random, when I tried to install the default files , some pods didn't come up due to insufficient CPU. The minimum request of 890 milli core (see [Knative + k0s Default resource requirement](#knative-k0s-default-resource-requirement)) explains why some pods didn't find  sufficient CPU , since BaseOS + k0s might be using more than 110 m of CPU (1000 - 890)
 
 Hence, after monitoring the resource usage (See [Knative + k0s Resource Usage](#knative-k0s-resource-usage)) and with an aim to fit everything in 1 CPU, reducing the resource request/limit by 50% was a safe option.
 

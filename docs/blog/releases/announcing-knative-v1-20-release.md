@@ -29,7 +29,7 @@ There have been various changes in core components for this release.
 - For serving we introduced new value `AllowRootBounded` for `secure-pod-defaults` option that balances security with compatibility and is planned to become the default in v1.21 (More info below!).
 - Eventing introduces a complete Request Reply data plane and adds support for Pod default credentials in AWS Integration resources.
 - Functions' CLI now provides more clearer errors and hints to users when things go wrong with build, deploy and delete commands. We also include some bug fixes.
-- Operator recieved a fix for deadlock occurring during KnativeServing creation with `system-internal-tls` enabled.
+- Operator received a fix for deadlock occurring during KnativeServing creation with `system-internal-tls` enabled.
 
 ## Serving
 

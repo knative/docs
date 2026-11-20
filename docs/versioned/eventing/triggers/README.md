@@ -246,7 +246,7 @@ spec:
 
 The legacy attributes filter provides exact match filtering on any number of CloudEvents attributes as well as extensions.
 It's semantics and behaviour are the same as the `exact` filter dialect and wherever possible users should move to the
-`exact` filter. However, for backwards compatability the attributes filter will continue to work for all users. The following
+`exact` filter. However, for backwards compatibility the attributes filter will continue to work for all users. The following
 example filters events from the `default` broker that are of type `dev.knative.foo.bar` and have the extension `myextension`
 with the value `my-extension-value`.
 
