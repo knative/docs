@@ -86,7 +86,7 @@ This release brings a number of smaller improvements to the core Knative Serving
 
 ## 💫 New Features & Changes
 
-- Adding func config git command and subcommands to handle intial support of Pipelines as Code (#1594, @zroubalik)
+- Adding func config git command and subcommands to handle initial support of Pipelines as Code (#1594, @zroubalik)
 - Adds support for Git-based deploy options to be configured using CLI flags (#1604, @zroubalik)
 - Adds support for branches and tags when adding a template repository using func repository add <uri> (#1558, @lance)
 - Commands such as envs can be referred to by their singular form env and vice-versa. Commands with well-known command synonyms were added as aliases, such aslabels delete <name> now supports labels rm <name> (#1578, @lkingland)

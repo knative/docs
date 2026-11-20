@@ -139,12 +139,12 @@ The `.spec.from` section specifies **who** is allowed to send events to the targ
       - sub: "system:serviceaccount:default:other-*"
     ```
 
-### Advanced CloudEvent filtering criterias
+### Advanced CloudEvent filtering criteria
 
 The `.spec.filters` section is optional and specifies additional criteria that the event itself must meet to be allowed. 
 
 * **Example:** Only CloudEvents with the `type` equals to `com.github.push` and matching a certain CESQL expression are allowed.
-* **Use Case:** Use `filters` when you want to have more fine grained criterias on allowed CloudEvents.
+* **Use Case:** Use `filters` when you want to have more fine grained criteria on allowed CloudEvents.
   ```yaml
   from:
     filters:
@@ -164,7 +164,7 @@ If the filters are specified, an event must match **all** the specified filters 
 * `to.selector` targets a set of resources based on labels.
 * `from.ref` authorizes a specific event source resource.
 * `from.sub` authorizes specific users, service accounts, or patterns of accounts.
-* `.spec.filters` allows to define advanced CloudEvent filtering criterias
+* `.spec.filters` allows to define advanced CloudEvent filtering criteria
 
 ## EventPolicy status
 

@@ -2,7 +2,7 @@
 
 **Author: Matthias Weßendorf, Senior Principal Software Engineer @ Red Hat**
 
-Knative Serving supports multiple protocols for running serverless workloads, such as `HTTP`, `HTTP/2`, `gRPC` or `WebSocket`. The [WebSocket protocol](https://datatracker.ietf.org/doc/html/rfc6455) allows a full-duplex communication over one single TCP connection between client applications and servers. The WebSocket protocol starts as an HTTP "Upgrade" request and then switchs the connection from HTTP over to the WebSocket protocol, allowing real-time and bidirectional communication between the peers. In this article we show how to build a scalable WebSocket server with Knative.
+Knative Serving supports multiple protocols for running serverless workloads, such as `HTTP`, `HTTP/2`, `gRPC` or `WebSocket`. The [WebSocket protocol](https://datatracker.ietf.org/doc/html/rfc6455) allows a full-duplex communication over one single TCP connection between client applications and servers. The WebSocket protocol starts as an HTTP "Upgrade" request and then switches the connection from HTTP over to the WebSocket protocol, allowing real-time and bidirectional communication between the peers. In this article we show how to build a scalable WebSocket server with Knative.
 
 !!! note
 

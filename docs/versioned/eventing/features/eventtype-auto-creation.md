@@ -75,7 +75,7 @@ container in a cluster.
 
 === "kn event"
 
-    Below is an example that sends an event with the `kn` CLI, for improved developer productivity. The `kn-plugin-event` plugin can be installed with Homebrew or downloaded directly from GitHub releases, for more details please refer to plugin [instalation steps](https://knative.dev/docs/client/kn-plugins/).
+    Below is an example that sends an event with the `kn` CLI, for improved developer productivity. The `kn-plugin-event` plugin can be installed with Homebrew or downloaded directly from GitHub releases, for more details please refer to plugin [installation steps](https://knative.dev/docs/client/kn-plugins/).
 
     1. Setup `kn event` plugin
         ```bash

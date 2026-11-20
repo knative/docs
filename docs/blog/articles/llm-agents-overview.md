@@ -131,7 +131,7 @@ spec:
     kind: Service
     name: get-current-weather
   description: "Get the current weather in a given location."
-  schemaData: '{"location":{"type":"string","description":"The city and state, e.g. San Francisco, CA"},"unit":{"type":"string","description":"One of [celsius, farenheit]"}}'
+  schemaData: '{"location":{"type":"string","description":"The city and state, e.g. San Francisco, CA"},"unit":{"type":"string","description":"One of [celsius, fahrenheit]"}}'
   type: "get.current.weather"
 ```
 
