@@ -23,6 +23,7 @@
 /eventing-couchdb/* go-get=:go-get /golang/eventing-couchdb.html 200
 /eventing-github/* go-get=:go-get /golang/eventing-github.html 200
 /eventing-gitlab/* go-get=:go-get /golang/eventing-gitlab.html 200
+/eventing-integrations/* go-get=:go-get /golang/eventing-integrations.html 200
 /eventing-istio/* go-get=:go-get /golang/eventing-istio.html 200
 /eventing-kafka/* go-get=:go-get /golang/eventing-kafka.html 200
 /eventing-kafka-broker/* go-get=:go-get /golang/eventing-kafka-broker.html 200
