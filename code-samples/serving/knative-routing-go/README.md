@@ -36,7 +36,7 @@ cloning the repository; there is no need to recreate them from documentation.
      will refer to it as <YOUR_DOMAIN_NAME> in the rest of this document
 4. Check out the code:
 
-```
+```bash
 git clone https://github.com/knative/docs.git knative-docs
 ```
 
@@ -44,7 +44,7 @@ git clone https://github.com/knative/docs.git knative-docs
 
 To check the domain name, run the following command:
 
-```
+```bash
 kubectl get cm  -n knative-serving config-domain -o yaml
 ```
 
@@ -78,7 +78,7 @@ export REPO="docker.io/<username>"
 
 3. Use Docker to build and push your application container:
 
-```
+```bash
 # Build and push the container on your local machine.
 docker buildx build --platform linux/arm64,linux/amd64 -t "${REPO}/helloworld-go" --push code-samples/serving/hello-world/helloworld-go
 ```
@@ -100,7 +100,7 @@ source or image is needed.
 
    - Run this command:
 
-   ```
+   ```bash
    perl -pi -e "s@github.com/knative/docs/code-samples/serving/hello-world@${REPO}@g" code-samples/serving/knative-routing-go/sample.yaml
    ```
 
@@ -108,7 +108,7 @@ source or image is needed.
 
 Deploy the Knative Serving sample:
 
-```
+```bash
 kubectl apply --filename code-samples/serving/knative-routing-go/sample.yaml
 ```
 
@@ -120,13 +120,13 @@ Kubernetes service with:
 
 - Check the shared Gateway:
 
-```
+```bash
 kubectl get Gateway --namespace knative-serving --output yaml
 ```
 
 - Check the corresponding Kubernetes service for the shared Gateway:
 
-```
+```bash
 INGRESSGATEWAY=istio-ingressgateway
 
 kubectl get svc $INGRESSGATEWAY --namespace istio-system --output yaml
@@ -134,7 +134,7 @@ kubectl get svc $INGRESSGATEWAY --namespace istio-system --output yaml
 
 - Inspect the deployed Knative services with:
 
-```
+```bash
 kubectl get ksvc
 ```
 
@@ -179,7 +179,7 @@ You should see: `Hello Login Service!`
 
 1. Apply the custom routing rules defined in `routing.yaml` file with:
 
-```
+```bash
 kubectl apply --filename code-samples/serving/knative-routing-go/routing.yaml
 ```
 
@@ -195,7 +195,7 @@ like {{.Name}}-{{.Namespace}}. You can find out the format by running the
 command:
 {% endraw %}
 
-```
+```bash
 kubectl get cm  -n knative-serving config-network -o yaml
 ```
 
@@ -209,7 +209,7 @@ Then look for the value for `domain-template`. If it is
 2. The `routing.yaml` file will generate a new VirtualService `entry-route` for
    domain `example.com` or your own domain name. View the VirtualService:
 
-```
+```bash
 kubectl get VirtualService entry-route --output yaml
 ```
 
@@ -281,7 +281,7 @@ with a destination address of an externally available service.
 
 Using
 
-```
+```bash
 kubectl label kservice search-service login-service networking.knative.dev/visibility=cluster-local
 ```
 
@@ -289,7 +289,7 @@ you label the services as an cluster-local services, removing access via `search
 and `login-service.default.example.com`. After doing so, your previous routing rule will not be routable anymore.
 Running
 
-```
+```bash
 kubectl apply --filename code-samples/serving/knative-routing-go/routing-internal.yaml
 ```
 

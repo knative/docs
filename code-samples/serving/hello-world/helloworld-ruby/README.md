@@ -97,7 +97,7 @@ kn service create helloworld-ruby --image=docker.io/{username}/helloworld-ruby -
 ```
 This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 The output will look like:
-```
+```bash
        Creating service 'helloworld-ruby' in namespace 'default':
 
         0.035s The Configuration is still working to reflect the latest desired specification.
