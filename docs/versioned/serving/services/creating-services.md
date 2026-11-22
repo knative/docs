@@ -53,7 +53,7 @@ Create a sample service:
 
 === "kn CLI"
 
-    ```
+    ```bash
     kn service create helloworld-go --image ghcr.io/knative/helloworld-go:latest
     ```
 

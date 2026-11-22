@@ -69,7 +69,7 @@ From the cloned sample directory, build and deploy the supplied files:
 
 1. To find the URL for your service, use
 
-   ```
+   ```bash
    kubectl get ksvc helloworld-csharp  --output=custom-columns=NAME:.metadata.name,URL:.status.url
    NAME                URL
    helloworld-csharp   http://helloworld-csharp.default.1.2.3.4.sslip.io

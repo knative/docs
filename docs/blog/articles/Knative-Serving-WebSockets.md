@@ -152,12 +152,12 @@ kubectl run --rm -i --tty wscat --image=monotykamary/wscat --restart=Never -- -c
 
 Afterward you can chat with the WebSocket server like:
 
-```bash
-```If you don't see a command prompt, try pressing enter.
-```connected (press CTRL+C to quit)
-```> Hello
-```< Hello
-```>
+```text
+If you don't see a command prompt, try pressing enter.
+connected (press CTRL+C to quit)
+> Hello
+< Hello
+>
 ```
 
 The above is scaling to exactly one pod, since only one client was connected. Since Knative Serving allows you a dynamic scaling, a certain number of concurrent connections lead to a number of pods.

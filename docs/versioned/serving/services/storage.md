@@ -22,7 +22,7 @@ Bellow there is an example of using a persistent volume claim with a Knative Ser
 
 Before you can configure PVCs for a Service, this feature must be enabled in the `config-features` ConfigMap as follows:
 
-```
+```bash
 kubectl patch --namespace knative-serving configmap/config-features \
  --type merge \
  --patch '{"data":{"kubernetes.podspec-persistent-volume-claim": "enabled", "kubernetes.podspec-persistent-volume-write": "enabled"}}'

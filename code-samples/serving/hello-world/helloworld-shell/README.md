@@ -86,7 +86,7 @@ kn service create helloworld-shell --image=docker.io/{username}/helloworld-shell
 This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 The output will look like:
 
- ```
+ ```bash
  Creating service 'helloworld-shell' in namespace 'default':
  0.035s The Configuration is still working to reflect the latest desired specification.
  0.139s The Route is still working to reflect the latest desired specification.

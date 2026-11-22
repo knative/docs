@@ -73,7 +73,7 @@ After the build has completed and the container is pushed to Docker Hub, you can
      This will wait until your service is deployed and ready, and ultimately it will print the URL through which you can access the service.
 
      The output will look like:
-     ```
+     ```bash
     Creating service 'helloworld-php' in namespace 'default':
     0.035s The Configuration is still working to reflect the latest desired specification.
     0.139s The Route is still working to reflect the latest desired specification.
@@ -94,7 +94,7 @@ Now that your service is created, Knative will perform the following steps:
 1. To find the URL for your service, use
 
  ### kubectl
- ```
+ ```bash
  kubectl get ksvc helloworld-php --output=custom-columns=NAME:.metadata.name,URL:.status.url
  NAME                URL
  helloworld-php      http://helloworld-php.default.1.2.3.4.xip.io
