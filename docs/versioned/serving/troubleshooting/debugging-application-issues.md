@@ -7,7 +7,10 @@ function: how-to
 
 # Debugging application issues
 
-If you have deployed an application but are having issues, you can use the following steps to troubleshoot the application.
+If you have deployed a Serving application but are having issues, use these checks.
+Choose the networking checks for your installed adapter: the introductory
+Quickstart uses **Kourier**, not Istio. Missing Istio resources are therefore
+expected in that environment.
 
 ## Check terminal output
 
@@ -41,7 +44,9 @@ The `conditions` in `status` provide the reason if there is any failure. For
 details, see Knative
 [Error Conditions and Reporting](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#error-signalling).
 
-### Check Ingress/Istio routing
+<span id="check-ingressistio-routing"></span>
+
+### Check Knative Ingress readiness
 
 To list all Ingress resources and their corresponding labels, run the following command:
 
@@ -68,8 +73,12 @@ particularly, look at the `status:` section. If the Ingress is working
 correctly, we should see the condition with `type=Ready` to have `status=True`.
 Otherwise, there will be error messages.
 
-Now, if Ingress shows status `Ready`, there must be a corresponding
-VirtualService. Run the following command:
+#### If using Istio
+
+Only use these VirtualService checks with the Istio networking adapter. Kourier
+users should skip them and check the [networking gateway](#check-ingress-status).
+
+With Istio, a ready Ingress should have a corresponding VirtualService. Run:
 
 ```bash
 kubectl get virtualservice -l networking.internal.knative.dev/ingress=<INGRESS_NAME> -n <INGRESS_NAMESPACE> --output yaml
@@ -84,24 +93,40 @@ If you are familiar with Istio and `istioctl`, you may try using `istioctl` to
 look deeper using Istio
 [guide](https://istio.io/help/ops/traffic-management/proxy-cmd/).
 
-### Check Ingress status
+<span id="check-ingress-status"></span>
 
-Knative uses a LoadBalancer service called `istio-ingressgateway` Service.
+### Check the networking gateway
 
-To check the IP address of your Ingress, use
+=== "Kourier"
 
-```bash
-kubectl get svc -n istio-system istio-ingressgateway
-```
+    For the standard Kourier installation, inspect its gateway resources:
 
-If there is no external IP address, use
+    ```bash
+    kubectl get services,pods -n kourier-system
+    ```
 
-```bash
-kubectl describe svc istio-ingressgateway -n istio-system
-```
+    Check that the gateway pods are ready and that its Service exposes the expected
+    ports. The kind Quickstart adds `kourier-ingress` as a NodePort Service and
+    forwards host port 80 to it. It does not need a cloud LoadBalancer address;
+    a pending address on a separate LoadBalancer Service is not by itself a
+    failure of that local route. Other installations may use a LoadBalancer or
+    different Service/namespace names.
 
-to see a reason why IP addresses weren't provisioned. Most likely it is due to a
-quota issue.
+=== "Istio"
+
+    The standard Istio installation uses the `istio-ingressgateway` Service:
+
+    ```bash
+    kubectl get svc -n istio-system istio-ingressgateway
+    ```
+
+    If it should have an external IP address but none was provisioned, inspect it:
+
+    ```bash
+    kubectl describe svc istio-ingressgateway -n istio-system
+    ```
+
+    Check the reported events and your platform's LoadBalancer provisioning.
 
 ## Check Revision status
 
@@ -134,7 +159,7 @@ conditions:
 If you see this condition, check the following to continue debugging:
 
 - [Check Pod status](#check-pod-status)
-- [Check Istio routing](#check-ingressistio-routing)
+- [Check the networking gateway](#check-ingress-status), using your installed adapter
 
 !!! tip
     If you see other conditions, you can look up the meaning of the conditions in Knative [Error Conditions and Reporting](https://github.com/knative/serving/blob/main/docs/spec/errors.md). An alternative is to [check Pod status](#check-pod-status).
@@ -147,7 +172,9 @@ To get the `Pod`s for all your deployments:
 kubectl get pods
 ```
 
-This command should list all `Pod`s with brief status. For example:
+This command lists `Pod`s with brief status. A Knative Service that has scaled to
+zero may currently have no application pods; send a request to distinguish normal
+scale-to-zero from a failure to start. For example:
 
 ```text
 NAME                                                      READY     STATUS             RESTARTS   AGE

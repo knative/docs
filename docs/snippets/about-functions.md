@@ -6,6 +6,6 @@ Knative Functions provides a simple programming model for using functions on Kna
 
 Knative Functions enables you to easily create, build, and deploy [stateless](https://www.techtarget.com/whatis/definition/stateless-app){target=_blank}, [event-driven](https://en.wikipedia.org/wiki/Event-driven_programming){target=_blank} functions as Knative Services by using the `func` CLI.
 
-When you build or run a function, an [Open Container Initiative (OCI) format](https://opencontainers.org/about/overview/){target=_blank} container image is generated automatically for you, and is stored in a container registry. Each time you update your code and then run or deploy it, the container image is also updated.
+Functions can be packaged as [Open Container Initiative (OCI) images](https://opencontainers.org/about/overview/){target=_blank} without writing a Dockerfile. A local container build does not publish an image to a registry. Deployment builds and pushes an image so the cluster can pull it. Supported host builders can also run functions locally without a container.
 
 You can create functions and manage function workflows by using the `func` CLI, or by using the `kn func` plugin for the Knative CLI.

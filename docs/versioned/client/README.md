@@ -22,7 +22,9 @@ See [Install and Set Up `kubectl`](https://kubernetes.io/docs/tasks/tools/instal
 `kn` provides a quick and easy interface for creating Knative resources such as services and event sources, without the need to create or modify YAML files directly. `kn` also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
 !!! note
-    `kn` cannot be used to install Knative components such as Serving or Eventing.
+    The core `kn` commands manage resources on an existing Knative installation.
+    The optional `quickstart` plugin creates a local learning cluster and installs
+    Serving and Eventing for you.
 
 ### Additional resources
 
@@ -50,11 +52,10 @@ Using the `kn` CLI, you can specify the following options to connect to the clus
 - `--context`: use this option to specify the name of a context from the existing `kubeconfig` file. Use one of the contexts from the output of `kubectl config get-contexts`.
 
 
-You can also specify a config file in the following ways:
-
-- Setting the environment variable `$KUBECONFIG`, and point it to the kubeconfig file.
-
-- Using the `kn` CLI `--config` option, for example, `kn service list --config path/to/config.yaml`. The default config is at `~/.config/kn/config.yaml`.
+The `kn` CLI's `--config` option is different: it selects the
+[kn configuration file](configure-kn.md), such as `~/.config/kn/config.yaml`.
+It does not select Kubernetes cluster credentials. Use `--kubeconfig` or
+`KUBECONFIG` for that.
 
 For more information about `kubeconfig` files, see
 [Organizing Cluster Access Using kubeconfig Files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/){target=_blank}.

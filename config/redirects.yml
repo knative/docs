@@ -169,7 +169,7 @@ plugins:
       versioned/install/collecting-metrics/index.md: versioned/serving/observability/metrics/collecting-metrics.md
       versioned/install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/eventing-installation-files.md
       versioned/install/eventing/install-eventing-with-yaml.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
-      versioned/install/getting-started-knative-app/index.md: versioned/getting-started/README.md
+      versioned/install/getting-started-knative-app/index.md: versioned/README.md
       versioned/install/install-extensions.md: versioned/install/README.md
       versioned/install/installation-files.md: versioned/install/README.md
       versioned/install/prerequisites.md: versioned/install/README.md
@@ -186,7 +186,7 @@ plugins:
       versioned/serving/creating-domain-mappings.md: versioned/serving/services/custom-domains.md
       versioned/serving/debugging-application-issues.md: versioned/serving/troubleshooting/debugging-application-issues.md
       versioned/serving/feature-flags.md: versioned/serving/configuration/feature-flags.md
-      versioned/serving/getting-started-knative-app.md: versioned/getting-started/README.md
+      versioned/serving/getting-started-knative-app.md: versioned/README.md
       versioned/serving/installing-cert-manager.md: versioned/install/installing-cert-manager.md
       versioned/serving/metrics.md: versioned/serving/observability/metrics/serving-metrics.md
       versioned/serving/samples/README.md: versioned/samples/serving.md
@@ -227,3 +227,16 @@ plugins:
       versioned/eventing/brokers/create-mtbroker.md: versioned/eventing/brokers/create-broker.md
       versioned/eventing/brokers/broker-admin-config-options.md: versioned/eventing/configuration/broker-configuration.md
       versioned/eventing/event-mesh.md: versioned/eventing/concepts/event-mesh.md
+      versioned/getting-started/README.md: versioned/README.md
+      versioned/getting-started/tutorial.md: versioned/README.md
+      versioned/getting-started/first-autoscale.md: versioned/getting-started/first-service.md#watch-autoscaling
+      versioned/getting-started/first-traffic-split.md: versioned/getting-started/first-service.md#split-traffic
+      versioned/getting-started/install-func.md: versioned/getting-started/about-knative-functions.md#prepare
+      versioned/getting-started/create-a-function.md: versioned/getting-started/about-knative-functions.md#create-and-change
+      versioned/getting-started/build-run-deploy-func.md: versioned/getting-started/about-knative-functions.md#run-and-test
+      versioned/getting-started/first-broker.md: versioned/getting-started/getting-started-eventing.md#prepare
+      versioned/getting-started/first-source.md: versioned/getting-started/getting-started-eventing.md#connect-the-player
+      versioned/getting-started/first-trigger.md: versioned/getting-started/getting-started-eventing.md#filter-events-optional
+      versioned/getting-started/clean-up.md: versioned/getting-started/next-steps.md#clean-up
+      versioned/bookstore/disclaimer/README.md: versioned/bookstore/disclaimer/disclaimer.md
+      versioned/bookstore/extra-challenge/README.md: versioned/bookstore/extra-challenge/extra-challenges.md

@@ -13,7 +13,10 @@ There are three CLI tools available for managing Knative:
 
 - Kubernetes CLI - `kubectl`
 - Knative CLI - `kn`
-- Knative Operator CLI - `kn`
+- Knative Functions CLI - `func`
+
+The Knative Operator CLI is an optional `kn operator` plugin for platform
+administration; it is not required for the introductory tutorials.
 
 The `kn` CLI makes Knative operations easier, but all functionality is available in `kubectl` CLI provided you want to primarily use YAML representations of resources.
 
@@ -26,7 +29,7 @@ Install the [Kubernetes CLI (`kubectl`)](https://kubernetes.io/docs/tasks/tools/
 ### Install kn using the nightly-built binary
 
 !!! warning
-    Nightly container images include features which may not be included in the latest Knative release and are not considered to be stable.
+    Nightly binaries include features which may not be included in the latest Knative release and are not considered to be stable.
 
 Nightly-built executable binaries are available for users who want to install the latest pre-release build of `kn`.
 
@@ -56,7 +59,7 @@ Before you install the Knative Operator CLI Plugin, first install the Knative CL
 
 === "Linux"
 
-    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-extensions/kn-plugin-operator/releases/tag/knative-v1.7.1).
+    1. Download the binary `kn-operator-linux-amd64` for your system from the [release page](https://github.com/knative-extensions/kn-plugin-operator/releases/latest).
 
     1. Rename the binary to `kn-operator`:
 
