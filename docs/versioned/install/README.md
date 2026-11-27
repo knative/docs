@@ -31,6 +31,10 @@ Use the following table to determine your installation method. If you just want 
 
 Supported platforms are Linux, MacOS, and Windows.
 
+The [learning-cluster tutorial](../getting-started/quickstart-install.md) uses kind.
+For Minikube, follow the [Quickstart plugin's Minikube instructions](https://github.com/knative-extensions/kn-plugin-quickstart#quickstart-with-minikube),
+including its separate tunnel step.
+
 The Knative Operator is a custom controller that extends the Kubernetes API to install Knative components. For more information about YAML-based and installations with the Knative Operator, see [YAML and Knative Operator installations compared](#yaml-and-knative-operator-installations-compared).
 
 Use the following steps to install Knative depending on your installation method:

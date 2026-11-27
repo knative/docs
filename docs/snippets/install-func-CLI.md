@@ -72,20 +72,3 @@
         ```bash
         func version
         ```
-
-=== "Container image"
-
-    Run `func` from a container image. For example:
-
-    ```bash
-    docker run --rm -it ghcr.io/knative/func/func create -l node -t http myfunc
-    ```
-
-    Links to images are available here:
-
-    - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}
-
-    !!! note
-        Running `func` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `func`.
-
-<!--TODO: Maybe needs an update when https://github.com/knative/func/issues/1308 is fixed-->
