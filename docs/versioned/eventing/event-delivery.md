@@ -9,9 +9,18 @@ function: how-to
 
 You can configure event delivery parameters for Knative Eventing components that are applied in cases where an event fails to be delivered
 
-## Configuring Subscription event delivery
+## Delivery parameters
 
-You can configure how events are delivered for each Subscription by adding a `delivery` spec to the `Subscription` object, as shown in the following example:
+Delivery parameters can be set on a `Broker` (`spec.delivery`), a `Trigger` (`spec.delivery`, which overrides the Broker's delivery spec for that Trigger), a `Channel` (`spec.delivery`), or a `Subscription` (`spec.delivery`).
+
+- `deadLetterSink`: Destination (any Addressable resource such as a Knative Service, Kubernetes Service, or URI) that receives events after all delivery attempts fail. Make sure the dead-letter sink is ready before enabling it; if delivery to the dead-letter sink also fails, the event is dropped and logged.
+- `retry`: Number of retry attempts after the initial delivery attempt fails (total attempts = `retry + 1`).
+- `backoffPolicy`: Delay strategy between retries — `linear` (increases linearly by `backoffDelay * attempt`) or `exponential` (doubles each attempt: `backoffDelay * 2^attempt`).
+- `backoffDelay`: Base delay in ISO 8601 duration format (for example, `PT1S` for 1 second).
+
+## Subscription delivery { #configuring-subscription-event-delivery }
+
+Add `spec.delivery` to a `Subscription`:
 
 ```yaml
 apiVersion: messaging.knative.dev/v1
@@ -26,21 +35,14 @@ spec:
         apiVersion: serving.knative.dev/v1
         kind: Service
         name: example-sink
-    backoffDelay: <duration>
-    backoffPolicy: <policy-type>
-    retry: <integer>
+    backoffDelay: PT1S
+    backoffPolicy: exponential
+    retry: 5
 ```
 
-Where
+## Broker delivery { #configuring-broker-event-delivery }
 
-- The `deadLetterSink` spec contains configuration settings to enable using a dead letter sink. This tells the Subscription what happens to events that cannot be delivered to the subscriber. When this is configured, events that fail to be delivered are sent to the dead letter sink destination. The destination can be a Knative Service or a URI. In the example, the destination is a `Service` object, or Knative Service, named `example-sink`.
-- The `backoffDelay` delivery parameter specifies the time delay before an event delivery retry is attempted after a failure. The duration of the `backoffDelay` parameter is specified using the ISO 8601 format. For example, `PT1S` specifies a 1 second delay.
-- The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either `linear` or `exponential`. When using the `linear` back off policy, the back off delay is the time interval specified between retries. When using the `exponential` back off policy, the back off delay is equal to `backoffDelay*2^<numberOfRetries>`.
-- `retry` specifies the number of times that event delivery is retried before the event is sent to the dead letter sink.
-
-## Configuring Broker event delivery
-
-You can configure how events are delivered for each Broker by adding a `delivery` spec, as shown in the following example:
+Add `spec.delivery` to a `Broker` (or override it per `Trigger`):
 
 ```yaml
 apiVersion: eventing.knative.dev/v1
@@ -54,17 +56,16 @@ spec:
         apiVersion: serving.knative.dev/v1
         kind: Service
         name: example-sink
-    backoffDelay: <duration>
-    backoffPolicy: <policy-type>
-    retry: <integer>
+    backoffDelay: PT1S
+    backoffPolicy: exponential
+    retry: 5
 ```
 
-Where
+### Verify delivery failure handling
 
-- The `deadLetterSink` spec contains configuration settings to enable using a dead letter sink. This tells the Subscription what happens to events that cannot be delivered to the subscriber. When this is configured, events that fail to be delivered are sent to the dead letter sink destination. The destination can be any Addressable object that conforms to the Knative Eventing sink contract, such as a Knative Service, a Kubernetes Service, or a URI. In the example, the destination is a `Service` object, or Knative Service, named `example-sink`.
-- The `backoffDelay` delivery parameter specifies the time delay before an event delivery retry is attempted after a failure. The duration of the `backoffDelay` parameter is specified using the ISO 8601 format. For example, `PT1S` specifies a 1 second delay.
-- The `backoffPolicy` delivery parameter can be used to specify the retry back off policy. The policy can be specified as either `linear` or `exponential`. When using the `linear` back off policy, the back off delay is the time interval specified between retries. This is a linearly increasing delay, which means that the back off delay increases by the given interval for each retry. When using the `exponential` back off policy, the back off delay increases by a multiplier of the given interval for each retry.
-- `retry` specifies the number of times that event delivery is retried before the event is sent to the dead letter sink. The initial delivery attempt is not included in the retry count, so the total number of delivery attempts is equal to the `retry` value +1.
+1. Apply the Broker, Trigger, Channel, or Subscription with `spec.delivery` and confirm both the delivery owner and the dead-letter sink report `READY=True` (for example, `kubectl get broker,trigger,channel,subscription,ksvc -n <namespace>`).
+
+1. Send a CloudEvent with a known `Ce-Id` **through the configured Broker or Channel** to a subscriber that returns HTTP `500`, then check the dead-letter sink logs to confirm the failed event arrived with the same `Ce-Id` (and, where the backing Channel implementation supports them, the error extension attributes `knativeerrordest`, `knativeerrorcode`, and `knativeerrordata`).
 
 ### Broker support
 
@@ -81,10 +82,10 @@ The following table summarizes which delivery parameters are supported for each 
     `deadLetterSink` must be a GCP Pub/Sub topic URI.
     `googlecloud` Broker only supports the `exponential` back off policy.
 
-## Configuring Channel event delivery
+## Dead-letter error attributes { #configuring-channel-event-delivery }
 
 Failed events may, depending on the specific Channel implementation in use, be
-enhanced with extension attributes prior to forwarding to the`deadLetterSink`.
+enhanced with extension attributes prior to forwarding to the `deadLetterSink`.
 These extension attributes are as follows:
 
 - **knativeerrordest**

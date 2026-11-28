@@ -5,13 +5,15 @@ components:
 function: how-to
 ---
 
+<span id="redisstreamsource"></span>
+
 # Creating a RedisStreamSource
 
 ![version](https://img.shields.io/badge/API_Version-v1alpha1-red?style=flat-square)
 
 This topic describes how to create a `RedisStreamSource` object.
 
-## Install the RedisStreamSource add-on
+## Install the add-on { #install-the-redisstreamsource-add-on }
 
 `RedisStreamSource` is a Knative Eventing add-on.
 
@@ -69,7 +71,7 @@ Where:
 
     Where `<filename>` is the name of the file you created in the previous step.
 
-## Verify the RedisStreamSource object
+## Verify { #verify-the-redisstreamsource-object }
 
 1. View the logs for the `event-display` event consumer by running the command:
 
@@ -98,7 +100,7 @@ Where:
       ]
     ```
 
-## Delete the RedisStreamSource object
+## Delete { #delete-the-redisstreamsource-object }
 
 * Delete the `RedisStreamSource` object:
 

@@ -5,6 +5,8 @@ components:
 function: how-to
 ---
 
+<span id="what-is-a-sugar-controller"></span>
+
 # Knative Eventing Sugar Controller
 
 Knative Eventing Sugar Controller will react to configured labels
@@ -13,65 +15,40 @@ cluster operators and developers to focus on creating fewer resources, and the
 underlying eventing infrastructure is created on-demand, and cleaned up when no
 longer needed.
 
-## Installing
+## Prerequisites { #installing }
 
-The Sugar Controller is `disabled` by default and can be enabled by configuring `config-sugar` ConfigMap.
-See below for a simple example and [Configure Sugar Controller](../configuration/sugar-configuration.md) for more details.
+The Sugar Controller is `disabled` by default. A cluster administrator must enable it by configuring the `config-sugar` ConfigMap in `knative-eventing`. See [Configure Sugar Controller](../configuration/sugar-configuration.md) for administrator setup.
 
-## Automatic Broker Creation
-
-One way to create a Broker is to manually apply a resource to a cluster using
-the default settings:
-
-1. Copy the following YAML into a file:
-
-    ```yaml
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    metadata:
-      name: default
-      namespace: default
-    ```
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl apply -f <filename>.yaml
-    ```
-    Where `<filename>` is the name of the file you created in the previous step.
-
-There might be cases where automated Broker creation is desirable, such as on
-namespace creation, or on Trigger creation. The Sugar controller enables those
-use-cases. The following sample configuration of the `sugar-config` ConfigMap
-enables Sugar Controller for select Namespaces & all Triggers.
+Example `config-sugar` ConfigMap enabling automatic Broker creation for labeled namespaces and all Triggers:
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-name: config-sugar
-namespace: knative-eventing
-labels:
+  name: config-sugar
+  namespace: knative-eventing
+  labels:
     eventing.knative.dev/release: devel
 data:
-  # Specify a label selector to selectively apply sugaring to certain namespaces
+  # Selectively apply sugaring to namespaces matching this selector
   namespace-selector: |
     matchExpressions:
     - key: "my.custom.injection.key"
       operator: "In"
       values: ["enabled"]
-  # Use an empty object to enable for all triggers
+  # Use an empty object to enable for all Triggers
   trigger-selector: |
     {}
 ```
 
-- When a Namespace is created with label `my.custom.injection.key: enabled` , the Sugar controller will create a Broker named "default" in that
-  namespace.
-- When a Trigger is created, the Sugar controller will create a Broker named "default" in the
-  Trigger's namespace.
+## Automatic Broker creation { #automatic-broker-creation }
 
-When a Broker is deleted and but the referenced label selectors are in use, the
-Sugar Controller will automatically recreate a default Broker.
+Once a cluster administrator has enabled the Sugar Controller with the selectors above:
+
+- Labeling a Namespace with `my.custom.injection.key: enabled` creates a Broker named `default` in that namespace.
+- Creating a Trigger referencing `default` creates a Broker named `default` in the Trigger's namespace.
+
+If the `default` Broker is deleted while the matching selector still applies, the Sugar Controller recreates it. If a `default` Broker already exists, the Sugar Controller leaves it untouched and does not take ownership of it.
 
 ### Namespace Examples
 
@@ -106,7 +83,7 @@ Controller will do nothing.
 
 ### Trigger Example
 
-Create a "default" Broker in the Trigger's Namespace when creating a Trigger:
+Assuming the `hello` namespace and an `event-display` Service already exist, create a Trigger to automatically provision a `default` Broker in `hello`:
 
 ```bash
 kubectl apply -f - << EOF
@@ -125,6 +102,10 @@ spec:
 EOF
 ```
 
-This will make a Broker called "default" in the Namespace "hello", and attempt to send events to the "event-display" service.
+Verify that both the automatically created `default` Broker and the Trigger report `READY=True`:
+
+```bash
+kubectl get broker,trigger -n hello
+```
 
 If the Broker named "default" already exists in the Namespace, the Sugar Controller will do nothing and the Trigger will not own the existing Broker.

@@ -19,14 +19,15 @@ function: reference
 - You can specify the number of retry attempts before sending the event to the dead-letter sink using the `retry` configuration.
 - `spec.delivery` is used to configure event delivery options. Event delivery options specify what happens to an event that fails to be delivered to an event sink. For more information, see the documentation on [Event delivery](../event-delivery.md).
 
-###  Advanced broker class options
+### Broker class options { #advanced-broker-class-options }
+
 When a Broker is created without a specified `eventing.knative.dev/broker.class` annotation, by default the `MTChannelBasedBroker` Broker class is used, as specified in the `config-br-defaults` ConfigMap.
 
-In case you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a Broker, you can modify the `eventing.knative.dev/broker.class` annotation and `spec.config` for the Broker object.
+If you have multiple Broker classes installed in your cluster and want to use a non-default Broker class for a **new** Broker, set the `eventing.knative.dev/broker.class` annotation and `spec.config` before applying the Broker:
 
-1. Set the `eventing.knative.dev/broker.class` annotation. Replace `MTChannelBasedBroker` in the following example with the class type you want to use. Be aware that the Broker class annoation is immutable and thus can't be updated after the Broker got created:
+1. Set the `eventing.knative.dev/broker.class` annotation to the class you want to use (for example, `Kafka` or `RabbitMQBroker`). This annotation is immutable and cannot be changed after the Broker is created; to switch classes for an existing Broker, create a new Broker with the desired class and migrate Triggers to it.
 
-2. Configure the `spec.config` with the details of the ConfigMap that defines the required configuration for the Broker class (e.g. with some Channel configurations in case of the `MTChannelBasedBroker`):
+1. Configure `spec.config` with the ConfigMap that defines the configuration for that Broker class (for example, Channel configuration for `MTChannelBasedBroker`).
 
 For further information about configuring a default Broker class cluster wide or on a per namespace basis, check the [Administrator configuration options](../configuration/broker-configuration.md#configuring-the-broker-class).
 
