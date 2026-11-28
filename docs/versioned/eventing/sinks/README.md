@@ -91,7 +91,7 @@ To use a Kubernetes custom resource (CR) as a sink for events, you must:
           - watch
     ```
 
-## Filtering events sent to sinks by using Triggers
+## Filter events with Triggers { #filtering-events-sent-to-sinks-by-using-triggers }
 
 You can connect a Trigger to a sink, so that events are filtered before they are sent to the sink. A sink that is connected to a Trigger is configured as a `subscriber` in the Trigger resource spec.
 
@@ -116,7 +116,7 @@ Where;
 - `<trigger-name>` is the name of the Trigger being connected to the sink.
 - `<kafka-sink-name>` is the name of a KafkaSink object.
 
-## Specifying sinks using the kn CLI --sink flag
+## Use the `kn` `--sink` flag { #specifying-sinks-using-the-kn-cli---sink-flag }
 
 When you create an event-producing CR by using the Knative (`kn`) CLI, you can specify a sink where events are sent to from that resource, by using the `--sink` flag.
 

@@ -9,63 +9,93 @@ function: how-to
 
 {{ feature(beta="0.24") }}
 
-By providing the reference to an existing _TLS Certificate_ you can instruct a `DomainMapping` to use that
-certificate to secure the mapped service. 
-Please note that for Services using this feature, the automatic certificate creation using 
-[external-domain-tls](../encryption/external-domain-tls.md) is skipped.
+Provide a certificate Secret to an existing DomainMapping to serve its mapped
+hostname over HTTPS. Supplying this certificate bypasses automatic certificate
+creation for that mapping through [external-domain TLS](../encryption/external-domain-tls.md).
 
 ## Prerequisites
 
-- You have followed the steps from [Configuring custom domains](custom-domains.md) and now have a working `DomainMapping`.
-- You must have a TLS certificate from your Certificate Authority provider or a self-signed certificate.
+- You have a working [DomainMapping](custom-domains.md). Keep its domain name and
+  **mapping namespace** for every command below.
+- You can create a TLS Secret in that namespace and update the mapping. The Secret
+  must be in the **DomainMapping's namespace**, even if its target is elsewhere.
+- You have a matching certificate and private key. The certificate must cover the
+  mapped hostname; callers must trust its issuing Certificate Authority.
+- Your networking gateway has an HTTPS endpoint reachable by your callers.
+  The default kind Quickstart's local HTTP test does not by itself expose an HTTPS
+  endpoint. Prepare HTTPS access through your [networking layer](../../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer)
+  before using this optional TLS procedure.
 
 ## Procedure
 
-1. Assuming you have obtained the `cert` and `key` files from your Certificate Authority provider or have self-signed certificate, create a plain Kubernetes [TLS Secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) by running the command:
+Replace the placeholders with the same domain and namespace used by your existing
+mapping. Replace certificate/key paths with your actual files. Do not commit or
+share the private key.
 
-    Use kubectl to create the secret:
+1. Create the [TLS Secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets)
+   in the mapping's namespace:
+
     ```bash
-    kubectl create secret tls <tls-secret-name> --cert=path/to/cert/file --key=path/to/key/file
+    kubectl create secret tls <tls-secret-name> \
+      --namespace <namespace> \
+      --cert=path/to/certificate --key=path/to/private-key
     ```
-    Where `<tls-secret-name>` is the name of the secret object being created.
 
-1. Update your `DomainMapping` YAML file to use the newly created secret as follows:
+1. Set the mapping's certificate reference. This patch changes only the TLS
+   setting and retains the existing target reference and other configuration:
+
+    ```bash
+    kubectl patch domainmapping <domain-name> \
+      --namespace <namespace> --type merge \
+      --patch '{"spec":{"tls":{"secretName":"<tls-secret-name>"}}}'
+    ```
+
+    If you maintain the mapping as a YAML manifest, use that method **instead**:
+    add this `tls` block alongside the existing `spec.ref` without replacing it:
 
     ```yaml
-    apiVersion: serving.knative.dev/v1beta1
-    kind: DomainMapping
-    metadata:
-      name: <domain-name>
-      namespace: <namespace>
     spec:
-      ref:
-        name: <service-name>
-        kind: Service
-        apiVersion: serving.knative.dev/v1
-    # tls block specifies the secret to be used
+      # Keep the existing ref and other settings here.
       tls:
         secretName: <tls-secret-name>
     ```
-    Where:
 
-    - `<tls-secret-name>` is the name of the TLS secret created in the previous step.
-    - `<domain-name>` is the domain name that you want to map a Service to.
-    - `<namespace>` is the namespace that contains both the `DomainMapping` and `Service` objects.
-    - `<service-name>` is the name of the Service that will be mapped to the domain.
+    Apply the edited manifest explicitly:
 
-1. Verify the `DomainMapping` status:
-
-    1. Check the status by running the command:
     ```bash
-    kubectl get domainmapping <domain-name>
+    kubectl apply -f <mapping-file>.yaml --namespace <namespace>
     ```
-    The `URL` column of the status should show the mapped domain with the scheme updated to `https`:
+
+1. Verify the update in the same namespace:
+
+    ```bash
+    kubectl wait domainmapping/<domain-name> \
+      --namespace <namespace> --for=condition=Ready --timeout=120s
+    kubectl get domainmapping <domain-name> --namespace <namespace>
     ```
-    NAME                      URL                               READY   REASON
-    <domain-name>             https://<domain-name>             True
-    ```
-    1. If the Service is exposed publicly, verify that it is available by running:
+
+    `READY` should be `True`, and `URL` should use `https://`. If not, inspect
+    `kubectl describe domainmapping <domain-name> --namespace <namespace>` for
+    certificate, claim, or ingress errors. Do not share Secret contents when
+    asking for help.
+
+1. From a client that can resolve the mapped hostname and reach its HTTPS gateway,
+   request your application:
+
     ```bash
     curl https://<domain-name>
     ```
-    If the certificate is self-signed skip verification by adding the `-k` flag to the curl command.
+
+    Confirm the application's expected response. Readiness alone does not prove
+    external reachability or that your client trusts the certificate.
+
+    For a private test CA or self-signed test certificate, explicitly supply the
+    trusted CA certificate rather than disabling certificate checks:
+
+    ```bash
+    curl --cacert path/to/trusted-ca-certificate https://<domain-name>
+    ```
+
+TLS protects the connection; it does not add application authorization. The
+certificate Secret and DomainMapping remain in the cluster until you remove them
+or delete the disposable cluster that contains them.

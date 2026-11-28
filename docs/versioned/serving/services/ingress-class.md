@@ -12,7 +12,7 @@ When a Knative Service is created an ingress class (`ingress-class`) is automati
 !!! warning
     Changing the ingress class in `config-network` ConfigMap will only affect newly created Services
 
-## Using the ingress class annotation
+## Ingress class annotation { #using-the-ingress-class-annotation }
 
 Generally it is recommended for Knative Services to use the default `ingress-class`. However, in scenarios where there are multiple networking implementations, you might want to specify different ingress class annotations for each Service.
 

@@ -290,7 +290,7 @@ The `KafkaSource` implements the `Delivery` Specificiation, allowing you to conf
 
 The `delivery` API is discussed in the [Handling Delivery Failure](../../event-delivery.md) chapter.
 
-## Optional: Specify the key deserializer
+## Key deserializer { #optional-specify-the-key-deserializer }
 
 When `KafkaSource` receives a message from Kafka, it dumps the key in the Event extension called
 `Key` and dumps Kafka message headers in the extensions starting with `kafkaheader`.
@@ -325,7 +325,7 @@ sink:
     name: event-display
 ```
 
-## Optional: Specify the initial offset
+## Initial offset { #optional-specify-the-initial-offset }
 
 By default the `KafkaSource` starts consuming from the latest offset in each partition. If you want
 to consume from the earliest offset, set the initialOffset field to `earliest`, for example:
@@ -354,7 +354,7 @@ sink:
     validation error. This field is honored only if there are no committed offsets for that
     consumer group.
 
-## Connecting to a TLS-enabled Kafka Broker
+## TLS-enabled Kafka Broker { #connecting-to-a-tls-enabled-kafka-broker }
 
 The KafkaSource supports TLS and SASL authentication methods. To enable TLS authentication, you must have the following files:
 

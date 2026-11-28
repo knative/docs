@@ -15,7 +15,7 @@ In order to make Knative Services public (with a public IP address and public UR
 This can be done for a single Service or for all Services on a cluster.
 
 
-## Making individual services private
+## Per-service privacy { #making-individual-services-private }
 
 To make an individual Service private, the Service or Route can be labelled with
 `networking.knative.dev/visibility=cluster-local` so that it is not published to the external gateway.

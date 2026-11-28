@@ -7,7 +7,7 @@ function: how-to
 
 # Configuring Probing
 
-## General understanding of Knative Probing
+## How Knative probing works { #general-understanding-of-knative-probing }
 
 It is important to note that Knative probing is different from Kubernetes probing. 
 One reason for this is that Knative tries to minimize cold-start time and thus is probing
@@ -90,12 +90,12 @@ Supported probe types are:
 
 
 !!! note
-    Be aware that Knative also does some defaulting (checking readiness on the traffic port using an HTTP check) and additional validation to make aggressive probing work.
+    Be aware that Knative sets a default TCP readiness probe on the traffic port when none is specified, and applies additional validation so aggressive probing works.
 
 !!! warning
     As the Queue-Proxy container does not rewrite or check defined Liveness probes, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, you may see, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.
 
-## Progress Deadline and Startup Probes
+## Progress deadline { #progress-deadline-and-startup-probes }
 
 It is important to know that Knative has a deadline until a Knative Service should initially start up (or rollout). This is called [progress deadline](../configuration/deployment.md#configuring-progress-deadlines). When using Startup probes, the user has to ensure that the progress deadline is set to a value that is higher than the maximum time the Startup probe can take. Consider your configuration of `initialDelaySeconds`, `success/failureThreshold`,  `periodSeconds` and `timeoutSeconds` for this. Otherwise, the Startup probe might never pass before the progress deadline is reached, and the Service will never successfully start up. The Knative Service will then mark this in the status of the Service object:
 

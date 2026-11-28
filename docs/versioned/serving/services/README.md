@@ -7,7 +7,10 @@ function: explanation
 
 # Knative Services
 
-Knative Services are used to deploy an application. To create an application using Knative, you must create a YAML file that defines a Service. This YAML file specifies metadata about the application, points to the hosted image of the app, and allows the Service to be configured.
+Knative Services deploy an application from a container image. You can create or
+update one using YAML with `kubectl` or the `kn` CLI. Both approaches configure
+the same Service resource, including its metadata, image, and application settings.
+See [Creating a Service](creating-services.md) for the task guide.
 
 Each Service is defined by a Route and a Configuration that have the same name as the service. The Configuration and Route are created by the service controller, and derive their configuration from the configuration of the Service.
 
@@ -15,7 +18,11 @@ Each time the configuration is updated, a new Revision is created. Revisions are
 
 ## Modifying Knative services
 
-Any changes to specifications, metadata labels, or metadata annotations for a Service must be copied to the Route and Configuration owned by that Service. The `serving.knative.dev/service` label on the Route and Configuration must also be set to the name of the Service. Any additional labels or annotations on the Route and Configuration not specified earlier must be removed.
+The **Service controller** reconciles changes to the Service into the Route and
+Configuration it owns, including propagated labels and annotations. It also sets
+`serving.knative.dev/service` to identify their owning Service. These are controller
+responsibilities, not extra manual steps: configure the Service rather than copying
+its changes into the generated Route and Configuration yourself.
 
 The Service updates its `status` fields based on the corresponding `status` value for the owned Route and Configuration.
 The Service must include conditions of `RoutesReady` and `ConfigurationsReady` in addition to the generic `Ready` condition. Other conditions can also be present.

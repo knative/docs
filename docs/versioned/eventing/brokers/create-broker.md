@@ -25,7 +25,9 @@ You can create a Broker by using the `kn` CLI or by applying YAML files using `k
         This will create a new Broker of your default Broker class and default Broker configuration (both defined in the `config-br-defaults` ConfigMap).
  
         !!! note
-            If you choose not to specify a namespace, the Broker will be created in the current namespace.
+            If you omit the namespace, the Broker is created in the current namespace.
+            Omit the namespace flag in both verification commands too, or explicitly
+            use that same namespace.
  
         !!! note
             If you have multiple Broker classes installed in your cluster, you can specify the Broker class via the `--class` parameter, e.g.:
@@ -34,21 +36,25 @@ You can create a Broker by using the `kn` CLI or by applying YAML files using `k
             kn broker create <broker-name> -n <namespace> --class MTChannelBasedBroker
             ```
 
-    1. Optional: Verify that the Broker was created by listing existing Brokers:
+    1. Verify the Broker in the same namespace used for creation:
 
         ```bash
-        kn broker list
+        kn broker list -n <namespace>
         ```
+
+        Find `<broker-name>` and check that `READY` is `True`. If it is `False`,
+        wait and repeat the check, or inspect its condition messages below.
 
     1. Optional: You can also verify the Broker exists by describing the Broker you have created:
 
         ```bash
-        kn broker describe <broker-name>
+        kn broker describe <broker-name> -n <namespace>
         ```
 
 === "kubectl"
 
-    The YAML in the following example creates a Broker named `default`.
+    Supply the Broker name and namespace in this YAML template, then use those
+    same values in the verification command.
 
     1. Create a Broker by creating a YAML file using the following template:
 

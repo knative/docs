@@ -19,13 +19,13 @@ For how to install HPA, see [Install optional Serving extensions](../../install/
 * Supports scale to zero functionality.
 * Does not support CPU-based autoscaling.
 
-## Horizontal Pod Autoscaler (HPA)
+## Horizontal Pod Autoscaler { #horizontal-pod-autoscaler-hpa }
 
 * Not part of the Knative Serving core, and you must install Knative Serving first.
 * Does not support scale to zero functionality.
 * Supports CPU-based autoscaling.
 
-## Configuring the Autoscaler implementation
+## Choose an autoscaler { #configuring-the-autoscaler-implementation }
 
 The type of Autoscaler implementation (KPA or HPA) can be configured by using the `class` annotation.
 

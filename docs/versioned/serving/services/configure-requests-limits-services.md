@@ -30,7 +30,7 @@ spec:
               cpu: 1
 ```
 
-## Configure Queue Proxy resources
+## Queue-Proxy resources { #configure-queue-proxy-resources }
 
 In order to set the Queue Proxy resource requests and limits you can either
 set them globally in the [deployment config map](../configuration/deployment.md) or you can set them at the service level using the corresponding annotations targeting cpu, memory and ephemeral-storage resource types. The above example becomes:

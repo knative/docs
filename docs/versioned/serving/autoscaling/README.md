@@ -7,18 +7,61 @@ function: explanation
 
 # Autoscaling
 
-Knative Serving provides automatic scaling, or _autoscaling_, for applications to match incoming demand. This is provided by default, by using the Knative Pod Autoscaler (KPA).
+Knative Serving automatically scales application pods to match incoming demand,
+including scaling down to zero when idle. Autoscaling works out of the box with
+the default **Knative Pod Autoscaler (KPA)** — you do not need to configure
+concurrency or scale bounds unless you want to override the defaults.
 
-For example, if an application is receiving no traffic and scale to zero is enabled, Knative Serving scales the application down to zero replicas. If scaling to zero is disabled, the application is scaled down to the minimum number of replicas specified for applications on the cluster. Replicas are scaled up to meet demand if traffic to the application increases.
+## Choose a tuning goal
 
-You can enable and disable scale to zero functionality for your cluster if you have cluster administrator permissions. See [Configuring scale to zero](scale-to-zero.md).
-<!--TODO: How can you check if you have it enabled if you're not a cluster admin?-->
-To use autoscaling for your application if it is enabled on your cluster, you must configure [concurrency](concurrency.md) and [scale bounds](scale-bounds.md).
-<!--TODO: Include this in the basic config before other settings-->
+- **Cap concurrent requests per pod (protect a database or single-threaded app):**
+  set a soft or hard [concurrency](concurrency.md) limit.
+- **Avoid cold starts or cap maximum cost:** set `min-scale` and `max-scale` in
+  [Scale bounds](scale-bounds.md).
+- **Keep the last pod warm longer before scaling to zero:** adjust
+  [Scale to zero](scale-to-zero.md) retention settings.
+- **Scale on requests per second (RPS) or CPU/memory:** choose a
+  [metric](autoscaling-metrics.md) and [target](autoscaling-targets.md), or
+  switch to the Kubernetes HPA in [Autoscaler types](autoscaler-types.md).
+- **Buffer traffic bursts through the Activator:** tune
+  [Request buffering](../load-balancing/README.md).
+
+## Tune a Service
+
+Most autoscaling settings can be applied per Revision on `spec.template.metadata.annotations`
+(cluster administrators can also set global defaults in `config-autoscaler`).
+For example, to keep at least 1 replica warm, cap scale at 5, and target 50
+concurrent requests per pod:
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+        autoscaling.knative.dev/max-scale: "5"
+        autoscaling.knative.dev/target: "50"
+    spec:
+      containers:
+        - image: ghcr.io/knative/helloworld-go:latest
+```
+
+Apply the manifest and verify the updated Revision is ready and has the
+expected pods:
+
+```bash
+kubectl apply -f service.yaml
+kubectl wait kservice/my-service --for=condition=Ready --timeout=120s
+kubectl get pods -l serving.knative.dev/service=my-service
+```
 
 ## Additional resources
 
-<!--TODO: Move KPA details, metrics to admin / advanced section; too in depth for intro)-->
-* Try out the [Go Autoscale Sample App](autoscale-go/README.md).
-* Configure your Knative deployment to use the Kubernetes Horizontal Pod Autoscaler (HPA) instead of the default KPA. For how to install HPA, see [Install optional Serving extensions](../../install/yaml-install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).
-* Configure the [types of metrics](autoscaling-metrics.md) that the Autoscaler consumes.
+- Try the [Autoscale sample app](autoscale-go/README.md) to watch KPA scale
+  under load.
+- Install the optional HPA autoscaler via
+  [Install optional Serving extensions](../../install/yaml-install/serving/install-serving-with-yaml.md#install-optional-serving-extensions).

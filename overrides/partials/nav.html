@@ -20,6 +20,8 @@
   IN THE SOFTWARE.
 -->
 
+{% set section = nav | selectattr("active") | first %}
+
 {% import "partials/nav-item.html" as item with context %}
 {% import "partials/site-links.html" as site with context %}
 
@@ -54,7 +56,6 @@
   </label>
 
   {# Keep Material's direct nav > list > item structure for the desktop sidebar. #}
-  {% set section = nav | selectattr("active") | first %}
   {% if section %}
     {% set nav = section %}
   {% endif %}
@@ -75,7 +76,12 @@
     </li>
     {% for nav_item in nav.children | default([], true) %}
       {% set path = "__nav_" ~ loop.index %}
-      {{ item.render(nav_item, path, 1) }}
+      {% if nav_item.title == "Get Started" and nav_item.active %}
+        {# Expand Component tutorials by default while keeping Bookstore tutorial collapsed. #}
+        {{ item.render(nav_item, path, 1) | replace('id="__nav_' ~ loop.index ~ '_2" >', 'id="__nav_' ~ loop.index ~ '_2" checked>') }}
+      {% else %}
+        {{ item.render(nav_item, path, 1) }}
+      {% endif %}
     {% endfor %}
   </ul>
 </nav>

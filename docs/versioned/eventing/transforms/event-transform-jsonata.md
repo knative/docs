@@ -41,13 +41,14 @@ spec:
 
 ## CloudEvent Structure
 
-The input to the JSONata expression is the entire CloudEvent, including all its attributes and data. Your expression must produce a valid CloudEvent with at least these required fields:
+The input to the JSONata expression is the entire CloudEvent, including all its attributes and `data` (if present). Your expression must produce a valid CloudEvent with these required fields:
 
-- `specversion`: Should be set to "1.0"
+- `specversion`: Set to `"1.0"`
 - `id`: A unique identifier for the event
 - `type`: The event type
 - `source`: The event source
-- `data`: The event payload
+
+`data` is optional in the CloudEvents specification and holds the event payload when present.
 
 ## Common Transformation Patterns
 
@@ -80,15 +81,15 @@ To extract fields from the data and promote them to CloudEvent attributes:
   "time": time,
   "userid": data.user.id,
   "region": data.region,
-  "data": $
+  "data": data
 }
 ```
 
-The `$` symbol in JSONata represents the entire input object, so `data: $` preserves the entire original event data.
+Use `"data": data` to preserve the original event payload, or `"data": $` if you intentionally want to embed the entire input CloudEvent envelope inside the new event's `data` field.
 
 ### Restructuring Event Data
 
-To completely reshape the event data:
+The following standalone JSONata illustration assumes a bare JSON `order` input (for an actual CloudEvent input, reference `data.order.*`):
 
 ```jsonata
 {
@@ -299,7 +300,7 @@ spec:
       name: processor-service
   jsonata:
     expression: |
-      # Request transformation
+      /* Request transformation */
       {
         "specversion": "1.0",
         "id": id,
@@ -311,7 +312,7 @@ spec:
   reply:
     jsonata:
       expression: |
-        # Reply transformation
+        /* Reply transformation */
         {
           "specversion": "1.0",
           "id": id,
