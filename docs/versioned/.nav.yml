@@ -28,15 +28,11 @@ nav:
 ###############################################################################
     - Functions:
       - Overview: functions/README.md
-      - Install: functions/install-func.md
-      - Create: functions/creating-functions.md
-      - Build: functions/building-functions.md
-      - Run locally: functions/running-functions.md
-      - Deploy: functions/deploying-functions.md
-      - Invoke: functions/invoking-functions.md
-      - Subscribe to events: functions/subscribing-functions.md
-      - Kafka: functions/kafka-functions.md
-      - Language packs: functions/language-packs.md
+      - Develop locally: functions/running-functions.md
+      - Build an image: functions/building-functions.md
+      - Deploy a function: functions/deploying-functions.md
+      - Connect events: functions/subscribing-functions.md
+      - Templates and runtimes: functions/language-packs.md
 ###############################################################################
     # Serving
 ###############################################################################

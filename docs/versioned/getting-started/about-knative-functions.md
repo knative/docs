@@ -37,7 +37,7 @@ required for the local workflow.
     `func`.
 
 Verify `func version` prints a version number. For `kn func` plugin installation,
-see [Installing Knative Functions](../functions/install-func.md).
+see [Develop locally — Prepare](../functions/running-functions.md#prepare).
 
 <span id="creating-a-function"></span><span id="change-the-response"></span>
 

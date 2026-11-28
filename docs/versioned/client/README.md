@@ -37,7 +37,7 @@ The `func` CLI enables you to create, build, and deploy Knative Functions withou
 
 ### Additional resources
 
-- See [Installing Knative Functions](../functions/install-func.md).
+- See [Develop locally — Prepare](../functions/running-functions.md#prepare).
 - See the [`func` documentation]({{ funcdocs() }}){target=_blank} in Github.
 
 ## Connecting CLI tools to your cluster

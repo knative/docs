@@ -240,3 +240,7 @@ plugins:
       versioned/getting-started/clean-up.md: versioned/getting-started/next-steps.md#clean-up
       versioned/bookstore/disclaimer/README.md: versioned/bookstore/disclaimer/disclaimer.md
       versioned/bookstore/extra-challenge/README.md: versioned/bookstore/extra-challenge/extra-challenges.md
+      versioned/functions/install-func.md: versioned/functions/running-functions.md
+      versioned/functions/creating-functions.md: versioned/functions/running-functions.md
+      versioned/functions/invoking-functions.md: versioned/functions/running-functions.md
+      versioned/functions/kafka-functions.md: versioned/functions/subscribing-functions.md
