@@ -21,9 +21,9 @@
           </p>
           <p class="call-to-action">
             <a
-              href="{{ 'docs/getting-started/tutorial/' | url }}"
+              href="{{ 'docs/' | url }}"
               class="md-button md-button--primary"
-              >Try the tutorial</a
+              >Get started</a
             >
             <a
               href="{{ 'docs/install/' | url }}"
@@ -48,13 +48,13 @@
     <div class="md-grid md-typeset">
       <h2 class="section-heading">What is Knative?</h2>
       <div class="building-blocks-capabilities">
-        {% for name, description in [
-          ('Functions', 'Start from a template, write your code, and build and deploy a container.'),
-          ('Serving', 'Run HTTP services with automatic scaling—including scaling to zero—and traffic routing.'),
-          ('Eventing', 'Connect event producers and consumers, publish events, and trigger applications.')
+        {% for name, description, tutorial in [
+          ('Serving', 'Deploy a container to Kubernetes and explore automatic scaling and traffic routing.', 'docs/getting-started/first-service/'),
+          ('Functions', 'Write and test a function locally, then deploy it when you are ready.', 'docs/getting-started/about-knative-functions/'),
+          ('Eventing', 'Send and receive events between applications in a local cluster.', 'docs/getting-started/getting-started-eventing/')
         ] %}
         <div class="building-blocks-capability building-blocks-{{ name | lower }}">
-          <h3><a href="{{ ('docs/' ~ (name | lower) ~ '/') | url }}">{{ name }}</a></h3>
+          <h3><a class="building-blocks-capability__link" href="{{ tutorial | url }}">Try {{ name }} →</a></h3>
           <p>{{ description }}</p>
         </div>
         {% endfor %}

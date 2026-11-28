@@ -56,21 +56,25 @@ The `deploy` command uses the function project name as the Knative Service name.
     
     **Note:** Using environment variables is more secure than the `--password` flag because command-line arguments are visible to all users on the system via `ps`.
 
-You can verify that your function has been successfully deployed by using the `invoke` command and observing the output:
+Verify the deployed function with an explicit `remote` target, even if a local
+function is also running. The response should contain your function's expected
+output; deployment readiness alone does not prove you called the remote instance:
 
 === "func"
 
     ```bash
-    func invoke
+    func invoke --target remote
     ```
 
 === "kn func"
 
     ```bash
-    kn func invoke
+    kn func invoke --target remote
     ```
 
-!!! Success "Expected output"
+The response format varies by template. For example:
+
+!!! Success "Example response"
     ```{ .bash .no-copy }
     Received response
     POST / HTTP/1.1 hello.default.127.0.0.1.sslip.io

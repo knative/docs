@@ -5,46 +5,80 @@ components:
   - serving
   - eventing
 function: tutorial
+hide_prev: true
+hide_next: true
 ---
 
-# Next Steps
+<span id="next-steps"></span><span id="continue-learning"></span>
 
-This topic provides a list of resources to help you continue your Knative journey.
+# Next steps and cleanup
 
-[![Knative Slack Link](images/slack-button.svg)](https://slack.cncf.io/){target=_blank}
+<span id="explore-the-knative-docs"></span><span id="work-on-your-own-project"></span>
 
-## :test_tube: Knative samples
+## Build your own application
 
-Try out some of the following Knative samples:
+- **Serving:** [deploy your own container](../serving/services/creating-services.md)
+  or [configure a custom domain](../serving/services/custom-domains.md).
+- **Functions:** [build a function image](../functions/building-functions.md)
+  or [deploy your own function](../functions/deploying-functions.md).
+- **Eventing:** [create a Broker](../eventing/brokers/create-broker.md)
+  or [route events using Triggers](../eventing/triggers/README.md).
+- **Platform operations:** [install and manage Knative](../admin/admin-overview.md),
+  or browse [CLI tools](../client/README.md) and API references ([Serving](../serving/reference/serving-api.md),
+  [Eventing](../eventing/reference/eventing-api.md)).
 
-- [Converting a Kubernetes Service to a Knative Service](../serving/convert-deployment-to-knative-service.md)
-- [Knative Serving code samples](../samples/serving.md)
-- [Knative Eventing and Event source code samples](../samples/eventing.md)
+<span id="knative-samples"></span><span id="build-a-larger-application"></span>
 
-## :page_with_curl: Explore the Knative docs
+## Try Bookstore
 
-See the following guides for documentation specific to your use case:
+Build the [Bookstore sample application](../bookstore/page-0/welcome-knative-bookstore-tutorial.md)
+to combine Functions, Serving, and Eventing. Its
+[environment setup](../bookstore/page-0.5/environment-setup.md) reuses your
+learning cluster with local port-forwarding. You can also browse
+[code samples](../samples/README.md).
 
-- [Serving Guide](../serving/README.md)
-- [Eventing Guide](../eventing/README.md)
+<span id="clean-up"></span><span id="finished-experimenting"></span>
 
-## :book: Knative books
+## Clean up
 
-Books to help you understand Knative concepts and get additional examples:
+Keep your learning cluster if you want to try another track. Clean up only the
+resources you created:
 
-- [Knative in Action](https://www.manning.com/books/knative-in-action)
+??? note "Local Functions"
 
-    ??? question "Want a free digital copy of Knative in Action?"
-        VMWare has generously donated access to a free copy of the Knative in Action eBook, [get your copy here!](https://tanzu.vmware.com/content/ebooks/knative-in-action){target=_blank}
+    Press ++ctrl+c++ in the `func run` terminal. Your source files remain on
+    disk. To remove the local tutorial image after stopping the function:
 
-- [Knative Cookbook](https://www.oreilly.com/library/view/knative-cookbook/9781492061182/)
+    ```bash
+    docker image rm localhost/hello-function:latest
+    ```
 
-## :globe_with_meridians: Other Knative links
+??? note "Disposable learning cluster"
 
-Other links to help you get started with Knative:
+    Deleting the `knative` kind cluster removes **all applications and data in
+    that cluster** across every tutorial, without touching other clusters on
+    your machine:
 
-- [Knative YouTube Channel](https://www.youtube.com/channel/UCq7cipu-A1UHOkZ9fls1N8A)
+    ```bash
+    kind delete cluster --name knative
+    ```
 
-## :question: Are we missing something?
+    Do not run this against a cluster used for other work. If you have other
+    clusters, switch back to your usual `kubectl` context afterward.
 
-We'd love to help you along the next step of your Knative journey. If we're missing something on this page that you feel should be here, please [give us feedback](https://forms.gle/Ab44BUBowmnnJsdW9)!
+    If you used the older minikube Quickstart, delete that profile with
+    `minikube delete -p knative`.
+
+??? note "Published image (optional deployment)"
+
+    Deleting the cluster does not remove images pushed to your container
+    registry. Delete the `hello-function` tutorial image from your registry if
+    you no longer need it.
+
+<span id="ask-for-help"></span><span id="knative-books"></span><span id="other-knative-links"></span><span id="are-we-missing-something"></span>
+
+## Get help
+
+[Join the Knative community](https://knative.dev/community/) and share the
+tutorial page, failing command, and error message. Never share kubeconfig,
+passwords, or access tokens.

@@ -11,7 +11,22 @@ A trigger represents a desire to subscribe to events from a specific broker.
 
 The `subscriber` value must be a [Destination](https://pkg.go.dev/knative.dev/pkg/apis/duck/v1#Destination).
 
+## Prerequisites
+
+- Knative Eventing is installed and you have a ready Broker in the namespace
+  selected by your `kubectl` context. [Create a Broker](../brokers/create-broker.md)
+  if needed.
+- An event consumer is already running and ready. Use the correct reference kind
+  and API version for a Knative Service or an ordinary Kubernetes Service.
+- Replace the example names with your resources. Here `default` is a **Broker
+  name**, not an instruction to create a Broker or select a namespace. The
+  Quickstart tutorial's Broker is named `example-broker`, so substitute that name
+  if you are reusing it. Replace `my-service` with your consumer's name too.
+
 ## Example Triggers
+
+Choose the subscriber form that matches your consumer; these are alternatives,
+not two steps to apply to the same Trigger.
 
 The following trigger receives all the events from the `default` broker and
 delivers them to the Knative Serving service `my-service`:
@@ -67,6 +82,29 @@ delivers them to the custom path `/my-custom-path` for the Kubernetes service `m
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
+## Verify the subscription
+
+After applying your chosen example, check the Trigger, substituting its name if
+it differs from `my-service-trigger`:
+
+```bash
+kubectl get trigger my-service-trigger
+```
+
+Its `READY` condition should be `True`. If not, inspect the reported conditions:
+
+```bash
+kubectl describe trigger my-service-trigger
+```
+
+Check the named Broker and consumer before changing the Trigger. To verify
+end-to-end delivery, send a known CloudEvent from your producer to that Broker
+and confirm its Event ID and data at your consumer. A ready Trigger means its
+subscription is configured; it does not prove an event has been delivered.
+
+For a guided example with a sender and observable consumer, see
+[Get started with Eventing](../../getting-started/getting-started-eventing.md).
+
 ## Trigger filtering
 
 Various forms of filtering based on any number of CloudEvents attributes and extensions
@@ -83,7 +121,7 @@ do not support filtering on the `data` field of CloudEvents.
 
 This example filters events from the `default` broker that are of type
 `dev.knative.foo.bar` and have the extension `myextension` which ends
-with `-extensions.
+with `-value`.
 
 1. Create a YAML file using the following example:
 
@@ -97,7 +135,7 @@ with `-extensions.
       filters:
         - exact:
             type: dev.knative.foo.bar
-          suffix:
+        - suffix:
             myextension: -value
       subscriber:
         ref:
@@ -279,8 +317,8 @@ metadata:
 spec:
   broker: default
   filters:
-    exact:
-      type: dev.knative.a
+    - exact:
+        type: dev.knative.a
   filter:
     attributes:
       type: dev.knative.b
@@ -312,9 +350,9 @@ spec:
     attributes:
       type: dev.knative.foo.bar
       myextension: my-extension-value
-    subscriber:
-      ref:
-        apiVersion: serving.knative.dev/v1
-        kind: Service
-        name: my-service
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: my-service
 ```

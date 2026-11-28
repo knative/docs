@@ -439,4 +439,4 @@ Congratulations on successfully completing the bookstore sample app tutorial! If
 
 We've prepared additional challenges that build on top of the existing bookstore app for you to tackle. Some solutions are provided, while others are left open to encourage you to explore your own solutions.
 
-[Go to Extra Challenges :fontawesome-solid-paper-plane:](../extra-challenge/README.md){ .md-button .md-button--primary }
+[Go to Extra Challenges :fontawesome-solid-paper-plane:](../extra-challenge/extra-challenges.md){ .md-button .md-button--primary }

@@ -10,6 +10,9 @@ The Knative CLI (`kn`) provides a quick and easy interface for creating Knative 
 
 The `kn` CLI also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.
 
+Install `kn` on your local machine so you can run it directly and use plugins
+such as `quickstart`.
+
 === "Using Homebrew"
 
     Do one of the following:
@@ -73,18 +76,3 @@ The `kn` CLI also simplifies completion of otherwise complex procedures such as 
         ```bash
         kn version
         ```
-
-=== "Using a container image"
-
-    Links to images are available here:
-
-    - [Latest release](https://gcr.io/knative-releases/knative.dev/client/cmd/kn){target=_blank}
-
-    You can run `kn` from a container image. For example:
-
-    ```bash
-    docker run --rm -v "$HOME/.kube/config:/root/.kube/config" gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list
-    ```
-
-    !!! note
-        Running `kn` from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use `kn`.
