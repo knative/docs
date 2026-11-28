@@ -11,7 +11,7 @@ You can manage traffic routing to different Revisions of a Knative Service by mo
 
 When you create a Knative Service, it does not have any default `traffic` spec settings. By setting the `traffic` spec, you can split traffic over any number of fixed Revisions, or send traffic to the latest Revision by setting `latestRevision: true` in the spec for a Service.
 
-## Using tags to create target URLs
+## Tags and target URLs { #using-tags-to-create-target-urls }
 
 In the following example, the spec defines an attribute called `tag`:
 
@@ -102,7 +102,7 @@ spec:
     percent: 0
 ```
 
-## Routing and managing traffic by using the Knative CLI
+## Traffic routing with `kn` { #routing-and-managing-traffic-by-using-the-knative-cli }
 
 You can use the following `kn` CLI command to split traffic between revisions:
 
@@ -134,7 +134,7 @@ The `@latest` tag means that `blue` resolves to the latest Revision of the Servi
 kn service update example-service --traffic @latest=80 --traffic v1=20
 ```
 
-## Routing and managing traffic with blue/green deployment
+## Blue/green deployment { #routing-and-managing-traffic-with-bluegreen-deployment }
 
 You can safely reroute traffic from a live version of an application to a new version by using a [blue/green deployment strategy](https://en.wikipedia.org/wiki/Blue-green_deployment).
 
@@ -212,9 +212,9 @@ You can safely reroute traffic from a live version of an application to a new ve
 
     Once you redeploy this Route by reapplying the YAML resource, the second Revision of the app is now staged.
 
-    No traffic is routed to the second Revision at the main URL, and Knative creates a new Route named `v2` for testing the newly deployed Revision.
+    No traffic is routed to the second Revision at the standalone Route's main URL (note that the original Knative Service keeps its own separate URL), and Knative exposes a tagged URL prefixed with `v2-` on this Route for testing the newly deployed Revision.
 
-1. Get the URL of the new Route for the second Revision, by running the command:
+1. Get the tagged URL for the second Revision, by running the command:
 
     ```bash
     kubectl get route <route-name> --output jsonpath="{.status.traffic[*].url}"

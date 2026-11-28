@@ -3,50 +3,67 @@ audience: developer
 components:
   - functions
 function: how-to
+hide_prev: true
+hide_next: true
 ---
 
-# Building functions
+# Build an image
 
---8<-- "build-func-intro.md"
+Build an OCI container image from an existing function project without running,
+pushing, or deploying it. If you want to build **and deploy** in one step
+(locally or on a cluster with Tekton), see [Deploy a function](deploying-functions.md).
 
-## Local builds
+## Requirements
 
-You can build a container image for your function locally without deploying it to a cluster, by using the `build` command.
+- An initialized function project containing `func.yaml` and source code.
+  [Create a project](running-functions.md#create-a-project) if needed.
+- A running [Docker](https://docs.docker.com/get-started/get-docker/) engine
+  for containerized builders (`pack` or `s2i`).
+- Run commands from inside the function project directory.
 
-### Prerequisites
+<span id="local-builds"></span>
 
-- You have a Docker daemon on your local machine. This is already provided if you have used the Quickstart installation.
+## Build
 
-### Procedure
-
---8<-- "proc-building-function.md"
-
-## On-cluster Builds
-
-If you do not have a local Docker daemon running, or you are using a CI/CD pipeline, you might want to build your function on the cluster instead of using a local build. You can create an on-cluster build by using the `func deploy --remote` command.
-
-!!! note
-    If you're doing a direct-upload deployment (i.e. the source code is on your local machine instead of a git repo), you can create an on-cluster build without the need of specifying the Git URL, but if you already specified a Git URL before, you'll need to specify the flag as empty, using the command `func deploy --remote --git-url=""`
-
-### Prerequisites
-
-- The function must exist in a Git repository.
-- You must configure your cluster to use Tekton Pipelines. See the [on-cluster build](https://github.com/knative/func/blob/main/docs/building-functions/on_cluster_build.md){target=_blank} documentation.
-
-### Procedure
-
-When running the command for the first time, you must specify the Git URL for the function:
+Pass an explicit local image name so the build does not prompt for a registry:
 
 === "func"
 
-    ```{ .console }
-    func deploy --remote --registry <registry> --git-url <git-url> -p hello
+    ```bash
+    func build --builder pack \
+      --image localhost/my-function:latest
     ```
 
 === "kn func"
 
-    ```{ .console }
-    kn func deploy --remote --registry <registry> --git-url <git-url> -p hello
+    ```bash
+    kn func build --builder pack \
+      --image localhost/my-function:latest
     ```
 
-After you have specified the Git URL for your function once, you can omit it in subsequent commands.
+`localhost/my-function:latest` is a local tag — nothing is pushed to a registry
+or deployed to a cluster. To prepare an image for a registry, pass
+`--registry <registry>` (for example `ghcr.io/alice` or `docker.io/alice`) or
+set `FUNC_REGISTRY`.
+
+## Verify the image
+
+Confirm the image exists in Docker:
+
+```bash
+docker image ls localhost/my-function:latest
+```
+
+A row with tag `latest` and an image ID confirms the build succeeded. This does
+not push or start the container.
+
+<span id="on-cluster-builds"></span>
+
+## Other builders
+
+`func build` supports `--builder pack` (Cloud Native Buildpacks), `--builder s2i`
+(Source-to-Image), and `--builder host` (host-native builds for supported
+languages). For remote on-cluster builds with Tekton, see
+[Deploy a function — Build and deploy remotely](deploying-functions.md#build-and-deploy-remotely).
+For all flags and builder options, see the
+[`func build` reference](https://github.com/knative/func/blob/main/docs/reference/func_build.md){target=_blank}.

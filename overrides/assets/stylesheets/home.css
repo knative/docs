@@ -246,6 +246,9 @@ body:has(.home-page) .site-announcement {
 }
 
 .building-blocks-capability {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding: 1.25rem;
   border-radius: 0.5rem;
@@ -253,37 +256,54 @@ body:has(.home-page) .site-announcement {
 }
 
 .building-blocks-functions {
-  --block-color: #7a357d;
-  --block-background: #faf5fb;
+  --block-color: var(--knative-functions-color);
+  --block-background: var(--knative-functions-background);
 }
 
 .building-blocks-serving {
-  --block-color: #125cb3;
-  --block-background: #f2f7fd;
+  --block-color: var(--knative-serving-color);
+  --block-background: var(--knative-serving-background);
 }
 
 .building-blocks-eventing {
-  --block-color: #287867;
-  --block-background: #f1f8f6;
+  --block-color: var(--knative-eventing-color);
+  --block-background: var(--knative-eventing-background);
 }
 
 .home-page .building-blocks-capability h3 {
   margin-bottom: 0.6rem;
+  color: var(--block-color);
   font-size: 1.1rem;
   line-height: 1.4;
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
-.building-blocks-capability h3 a {
+.home-page .building-blocks-capability__link {
   color: var(--block-color);
 }
 
-.building-blocks-capability h3 a:hover {
-  text-decoration: underline;
+.building-blocks-capability__link::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  content: "";
+}
+
+@media (hover: hover) {
+  .building-blocks-capability:hover {
+    outline: 2px solid var(--block-color);
+    outline-offset: 2px;
+  }
+}
+
+.building-blocks-capability:has(:focus-visible) {
+  outline: 2px solid var(--block-color);
+  outline-offset: 2px;
 }
 
 .home-page .building-blocks-capability p {
+  margin-bottom: 0;
   color: #475467;
   font-size: 0.8rem;
   line-height: 1.65;

@@ -9,11 +9,11 @@ function: how-to
 
 You can customize the domain of an individual Knative Service, or set a global default domain for all Services created on a cluster. The fully qualified domain name for a route by default is `{route}.{namespace}.svc.cluster.local`.
 
-## Configuring a domain for a single Knative Service
+## Single-service domain { #configuring-a-domain-for-a-single-knative-service }
 
 If you want to customize the domain of an individual Service, see the documentation about [`DomainMapping`](services/custom-domains.md).
 
-## Configuring the default domain for all Knative Services on a cluster
+## Default cluster domain { #configuring-the-default-domain-for-all-knative-services-on-a-cluster }
 
 You can change the default domain for all Knative Services on a cluster by modifying the [`config-domain` ConfigMap](https://github.com/knative/serving/blob/main/config/core/configmaps/domain.yaml).
 

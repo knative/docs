@@ -16,77 +16,53 @@ You can configure your Knative cluster to deploy images from a private registry 
 
 ## Procedure
 
-1. Create a `imagePullSecrets` object that contains your credentials as a list of secrets:
+1. Create a `docker-registry` Secret in your target namespace. If your local `$HOME/.docker/config.json` stores direct registry credentials (rather than a host `credsStore` helper), you can create the Secret from that file:
 
     ```bash
-    kubectl create secret docker-registry <registry-credential-secrets> \
-      --docker-server=<private-registry-url> \
-      --docker-email=<private-registry-email> \
-      --docker-username=<private-registry-user> \
-      --docker-password=<private-registry-password>
+    kubectl create secret generic <registry-credential-secret> \
+      --namespace <namespace> \
+      --from-file=.dockerconfigjson="$HOME/.docker/config.json" \
+      --type=kubernetes.io/dockerconfigjson
     ```
 
-    Where:
+    If your Docker configuration uses a credential helper (`credsStore`), follow [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) in the Kubernetes documentation to create a `docker-registry` Secret instead.
 
-    - `<registry-credential-secrets>` is the name that you want to use for your secrets (the `imagePullSecrets` object). For example, `container-registry`.
+1. Choose one of the following to attach the Secret:
 
-    - `<private-registry-url>` is the URL of the private registry where your container images are stored. Examples include [Google Container Registry](https://gcr.io/) or [DockerHub](https://docker.io/).
+    - **Single Service (recommended):** reference `imagePullSecrets` on the Service's Revision template (replace `<private-registry>/<repo>:<tag>` with your private image):
 
-    * `<private-registry-email>` is the email address that is associated with
-      the private registry.
-
-    * `<private-registry-user>` is the username that you use to access the
-      private container registry.
-
-    * `<private-registry-password>` is the password that you use to access
-      the private container registry.
-
-    Example:
-
-    ```bash
-    kubectl create secret docker-registry container-registry \
-      --docker-server=https://gcr.io/ \
-      --docker-email=my-account-email@address.com \
-      --docker-username=my-grc-username \
-      --docker-password=my-gcr-password
-    ```
-
-1. Optional. After you have created the `imagePullSecrets` object, you can view the secrets by running:
-
-    ```bash
-    kubectl get secret <registry-credential-secrets> -o=yaml
-    ```
-
-1. Optional. Add the `imagePullSecrets` object to the `default` service account in the `default` namespace.
-
-    !!! note
-        By default, the `default` service account in each of the [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of your Knative cluster are used by your Revisions, unless the [`serviceAccountName`](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision-2) is specified.
-
-    For example, if have you named your secrets `container-registry`, you can run the following command to modify the `default` service account:
-
-    ```bash
-    kubectl patch serviceaccount default -p "{\"imagePullSecrets\": [{\"name\": \"container-registry\"}]}"
-    ```
-
-    New pods that are created in the `default` namespace now include your credentials and have access to your container images in the private registry.
-
-1. Optional. Add the `imagePullSecrets` object to a Service:
-
-    ```yaml
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    metadata:
-      name: hello
-    spec:
-      template:
+        ```yaml
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        metadata:
+          name: private-app
+          namespace: <namespace>
         spec:
-          imagePullSecrets:
-          - name: <secret-name>
-          containers:
-            - image: ghcr.io/knative/helloworld-go:latest
-              ports:
-                - containerPort: 8080
-              env:
-                - name: TARGET
-                  value: "World"
+          template:
+            spec:
+              imagePullSecrets:
+                - name: <registry-credential-secret>
+              containers:
+                - image: <private-registry>/<repo>:<tag>
+                  ports:
+                    - containerPort: 8080
+        ```
+
+    - **All Services in a namespace:** patch the `default` ServiceAccount in that namespace so every Revision uses the Secret unless `serviceAccountName` is overridden:
+
+        ```bash
+        kubectl patch serviceaccount default \
+          --namespace <namespace> \
+          -p '{"imagePullSecrets": [{"name": "<registry-credential-secret>"}]}'
+        ```
+
+1. Apply the Service and verify it becomes ready and resolves the image digest on its latest Revision:
+
+    ```bash
+    kubectl apply -f private-app.yaml
+    kubectl wait kservice/private-app --namespace <namespace> --for=condition=Ready --timeout=120s
+    REVISION=$(kubectl get kservice private-app --namespace <namespace> -o jsonpath='{.status.latestReadyRevisionName}')
+    kubectl get revision "$REVISION" --namespace <namespace> -o jsonpath='{.status.containerStatuses[0].imageDigest}'; echo
     ```
+
+If your private registry uses a custom CA certificate or sits behind a corporate proxy, your cluster administrator must also configure [Registry trust and tag resolution](tag-resolution.md).

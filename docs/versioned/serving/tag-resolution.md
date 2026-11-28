@@ -19,7 +19,14 @@ If you are using a registry that has a self-signed certificate, you must configu
 
 ### Procedure
 
-1. If you are using a `custom-certs` secret that contains your CA certificates, add the following spec to the default Knative Serving `controller` Deployment:
+1. Create a secret in the `knative-serving` namespace containing your root CA certificate:
+
+    ```bash
+    kubectl -n knative-serving create secret generic custom-certs \
+      --from-file=ca.crt=/path/to/ca.crt
+    ```
+
+1. Mount that `custom-certs` secret into the `controller` Deployment in `knative-serving` and set `SSL_CERT_DIR` (Knative Serving accepts [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://pkg.go.dev/crypto/x509#SystemCertPool)):
 
     ```yaml
     apiVersion: apps/v1
@@ -34,26 +41,21 @@ If you are using a registry that has a self-signed certificate, you must configu
             - name: controller
               volumeMounts:
                 - name: custom-certs
-                  mountPath: /path/to/custom/certs
+                  mountPath: /etc/ssl/custom-certs
+                  readOnly: true
               env:
                 - name: SSL_CERT_DIR
-                  value: /path/to/custom/certs
+                  value: /etc/ssl/custom-certs
           volumes:
             - name: custom-certs
               secret:
                 secretName: custom-certs
     ```
 
-    Knative Serving accepts the [`SSL_CERT_FILE` and `SSL_CERT_DIR`](https://pkg.go.dev/crypto/x509#SystemCertPool) environment variables.
-
-1. Create a secret in the `knative-serving` namespace that points to your root CA certificate, and then save the current Knative Serving `controller` Deployment:
+1. Apply the updated Deployment and wait for the controller rollout to complete:
 
     ```bash
-    kubectl -n knative-serving create secret generic customca --from-file=ca.crt=/root/ca.crt
-    ```
-
-    ```bash
-    kubectl -n knative-serving get deploy/controller -o yaml > knative-serving-controller.yaml
+    kubectl -n knative-serving rollout status deployment/controller
     ```
 
 ## Corporate proxy

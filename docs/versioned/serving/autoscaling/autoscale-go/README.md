@@ -11,13 +11,13 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 ## Prerequisites
 
-1. A Kubernetes cluster with [Knative Serving](../../../install/yaml-install/serving/install-serving-with-yaml.md))
+1. A Kubernetes cluster with [Knative Serving](../../../install/yaml-install/serving/install-serving-with-yaml.md)
    installed.
 1. The `hey` load generator installed (`go install github.com/rakyll/hey@latest`).
 1. Clone this repository, and move into the sample directory:
 
      ```bash
-     git clone -b "{{ branch }}" https://github.com/knative/docs knative-docs
+     git clone https://github.com/knative/docs knative-docs
      cd knative-docs
      ```
 
@@ -31,10 +31,10 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
 1. Obtain the URL of the service (once `Ready`):
 
-     ```{ .bash .no-copy }
-     $ kubectl get ksvc autoscale-go
-     NAME            URL                                                LATESTCREATED         LATESTREADY           READY   REASON
-     autoscale-go    http://autoscale-go.default.1.2.3.4.sslip.io    autoscale-go-96dtk    autoscale-go-96dtk    True
+     ```bash
+     kubectl wait kservice/autoscale-go --for=condition=Ready --timeout=120s
+     SERVICE_URL=$(kubectl get kservice autoscale-go -o jsonpath='{.status.url}')
+     echo "$SERVICE_URL"
      ```
 
 ## Load the Service
@@ -42,7 +42,7 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 1. Make a request to the autoscale app to see it consume some resources.
 
      ```bash
-     curl "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5"
+     curl "${SERVICE_URL}?sleep=100&prime=10000&bloat=5"
      ```
 
      ```{ .bash .no-copy }
@@ -55,8 +55,8 @@ A demonstration of the autoscaling capabilities of a Knative Serving Revision.
 
      ```bash
      hey -z 30s -c 50 \
-       "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5" \
-       && kubectl get pods
+       "${SERVICE_URL}?sleep=100&prime=10000&bloat=5" \
+       && kubectl get pods -l serving.knative.dev/service=autoscale-go
      ```
 
      ```{ .bash .no-copy }
@@ -219,21 +219,21 @@ customization (32 minutes).
 
      ```bash
      hey -z 60s -c 100 \
-       "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=100&prime=10000&bloat=5"
+       "${SERVICE_URL}?sleep=100&prime=10000&bloat=5"
      ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with short requests (10 ms).
 
      ```bash
      hey -z 60s -q 100 \
-       "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=10"
+       "${SERVICE_URL}?sleep=10"
      ```
 
 1. Send 60 seconds of traffic maintaining 100 qps with long requests (1 sec).
 
      ```bash
      hey -z 60s -q 100 \
-       "http://autoscale-go.default.1.2.3.4.sslip.io?sleep=1000"
+       "${SERVICE_URL}?sleep=1000"
      ```
 
 1. Send 60 seconds of traffic with heavy CPU usage (~1 cpu/sec/request, total
@@ -241,7 +241,7 @@ customization (32 minutes).
 
      ```bash
      hey -z 60s -q 100 \
-       "http://autoscale-go.default.1.2.3.4.sslip.io?prime=40000000"
+       "${SERVICE_URL}?prime=40000000"
      ```
 
 1. Send 60 seconds of traffic with heavy memory usage (1 gb/request, total 5
@@ -249,7 +249,7 @@ customization (32 minutes).
 
      ```bash
      hey -z 60s -c 5 \
-       "http://autoscale-go.default.1.2.3.4.sslip.io?bloat=1000"
+       "${SERVICE_URL}?bloat=1000"
      ```
 
 ## Cleanup
