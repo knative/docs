@@ -8,7 +8,10 @@ function: how-to
 
 # Deploy Knative to a remote cluster
 
-**Stage**: Alpha, disabled by default
+{{ feature(alpha="1.22") }}
+
+!!! note
+    This feature is disabled by default. Enable it on the Knative Operator before configuring `spec.clusterProfileRef`.
 
 Starting with Knative Operator v1.22, a single Operator can deploy Knative Serving or Knative Eventing to a different Kubernetes cluster. The cluster that runs the Operator is the **hub cluster**, and the cluster that receives the Knative components is a **spoke cluster**. You set the field `spec.clusterProfileRef` on the `KnativeServing` or `KnativeEventing` CR to point to a `ClusterProfile` resource that describes a spoke cluster.
 
