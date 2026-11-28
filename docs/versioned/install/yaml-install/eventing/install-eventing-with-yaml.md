@@ -37,7 +37,7 @@ To install the Knative Eventing component:
     ```
 
     !!! info
-        For information about the YAML files in Knative Eventing, see [Description Tables for YAML Files](eventing-installation-files.md).
+        See [Installation files](#knative-eventing-installation-files) below for a reference table of all Knative Eventing YAML files.
 
 ## Verify the installation
 
@@ -295,3 +295,16 @@ The following tabs expand to show instructions for installing each Eventing exte
         ```
 
     To learn more, try the [VMware sources and bindings samples](https://github.com/vmware-tanzu/sources-for-knative/tree/master/samples/README.md).
+
+## Installation files { #knative-eventing-installation-files }
+
+The following table describes the core and optional YAML installation files for Knative Eventing:
+
+| File name | Description | Dependencies |
+| --- | --- | --- |
+| [eventing-core.yaml]({{ artifact(repo="eventing",file="eventing-core.yaml")}}) | Required: Knative Eventing core components. | [eventing-crds.yaml]({{ artifact(repo="eventing",file="eventing-crds.yaml")}}) |
+| [eventing-crds.yaml]({{ artifact(repo="eventing",file="eventing-crds.yaml")}}) | Required: Knative Eventing core CRDs. | none |
+| [eventing-post-install.yaml]({{ artifact(repo="eventing",file="eventing-post-install.yaml")}}) | Jobs required for upgrading to a new minor version. | [eventing-core.yaml]({{ artifact(repo="eventing",file="eventing-core.yaml")}}), [eventing-crds.yaml]({{ artifact(repo="eventing",file="eventing-crds.yaml")}}) |
+| [eventing.yaml]({{ artifact(repo="eventing",file="eventing.yaml")}}) | Combines `eventing-core.yaml`, `mt-channel-broker.yaml`, and `in-memory-channel.yaml`. | none |
+| [in-memory-channel.yaml]({{ artifact(repo="eventing",file="in-memory-channel.yaml")}}) | Components to configure In-Memory Channels. | [eventing-core.yaml]({{ artifact(repo="eventing",file="eventing-core.yaml")}}) |
+| [mt-channel-broker.yaml]({{ artifact(repo="eventing",file="mt-channel-broker.yaml")}}) | Components to configure Multi-Tenant (MT) Channel Broker. | [eventing-core.yaml]({{ artifact(repo="eventing",file="eventing-core.yaml")}}) |

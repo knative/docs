@@ -166,9 +166,7 @@ nav:
       - Install:
         - Installation roadmap: install/README.md
         - Serving with YAML: install/yaml-install/serving/install-serving-with-yaml.md
-        - Serving installation files: install/yaml-install/serving/serving-installation-files.md
         - Eventing with YAML: install/yaml-install/eventing/install-eventing-with-yaml.md
-        - Eventing installation files: install/yaml-install/eventing/eventing-installation-files.md
         - With Knative Operator: install/operator/knative-with-operators.md
         - With Operator CLI plugin: install/operator/knative-with-operator-cli.md
         - Remote clusters: install/operator/multi-cluster-deployment.md

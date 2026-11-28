@@ -39,7 +39,7 @@ plugins:
       versioned/admin/eventing/kafka-channel-configuration.md: versioned/eventing/configuration/kafka-channel-configuration.md
       versioned/admin/eventing/sources-configuration.md: versioned/eventing/configuration/sources-configuration.md
       versioned/admin/install/README.md: versioned/install/README.md
-      versioned/admin/install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/eventing-installation-files.md
+      versioned/admin/install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
       versioned/admin/install/eventing/install-eventing-with-yaml.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
       versioned/admin/install/install-eventing-with-yaml.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
       versioned/admin/install/install-serving-with-yaml.md: versioned/install/yaml-install/serving/install-serving-with-yaml.md
@@ -49,7 +49,7 @@ plugins:
       versioned/admin/install/operator/configuring-eventing-cr.md: versioned/install/operator/configuring-eventing-cr.md
       versioned/admin/install/operator/configuring-serving-cr.md: versioned/install/operator/configuring-serving-cr.md
       versioned/admin/install/serving/install-serving-with-yaml.md: versioned/install/yaml-install/serving/install-serving-with-yaml.md
-      versioned/admin/install/serving/serving-installation-files.md: versioned/install/yaml-install/serving/serving-installation-files.md
+      versioned/admin/install/serving/serving-installation-files.md: versioned/install/yaml-install/serving/install-serving-with-yaml.md
       versioned/admin/install/uninstall.md: versioned/install/uninstall.md
       versioned/admin/serving/config-defaults.md: versioned/serving/configuration/config-defaults.md
       versioned/admin/serving/deployment.md: versioned/serving/configuration/deployment.md
@@ -167,7 +167,7 @@ plugins:
       versioned/install/quickstart-install.md: versioned/getting-started/quickstart-install.md
       versioned/install/collecting-logs/index.md: versioned/serving/observability/logging/collecting-logs.md
       versioned/install/collecting-metrics/index.md: versioned/serving/observability/metrics/collecting-metrics.md
-      versioned/install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/eventing-installation-files.md
+      versioned/install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
       versioned/install/eventing/install-eventing-with-yaml.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
       versioned/install/getting-started-knative-app/index.md: versioned/README.md
       versioned/install/install-extensions.md: versioned/install/README.md
@@ -176,7 +176,7 @@ plugins:
       versioned/install/serving/install-serving-with-yaml.md: versioned/install/yaml-install/serving/install-serving-with-yaml.md
       versioned/install/serving/installing-cert-manager.md: versioned/install/installing-cert-manager.md
       versioned/install/serving/installing-istio.md: versioned/install/installing-istio.md
-      versioned/install/serving/serving-installation-files.md: versioned/install/yaml-install/serving/serving-installation-files.md
+      versioned/install/serving/serving-installation-files.md: versioned/install/yaml-install/serving/install-serving-with-yaml.md
       versioned/operator/configuring-eventing-cr/index.md: versioned/install/operator/configuring-eventing-cr.md
       versioned/operator/configuring-serving-cr/index.md: versioned/install/operator/configuring-serving-cr.md
       versioned/reference/resources/index.md: versioned/client/README.md
@@ -252,3 +252,5 @@ plugins:
       versioned/eventing/sources/apiserversource/README.md: versioned/eventing/sources/apiserversource/getting-started.md
       versioned/eventing/sources/redis/README.md: versioned/eventing/sources/redis/getting-started.md
       versioned/install/yaml-install/README.md: versioned/install/README.md
+      versioned/install/yaml-install/serving/serving-installation-files.md: versioned/install/yaml-install/serving/install-serving-with-yaml.md
+      versioned/install/yaml-install/eventing/eventing-installation-files.md: versioned/install/yaml-install/eventing/install-eventing-with-yaml.md
