@@ -23,7 +23,7 @@ Accordingly, you cannot alter the contents of the `_example` key, but you can de
 For example, the following YAML code shows the first 24 lines of the `config-defaults` ConfigMap with the checksum highlighted on line 11.
 
 ```yml linenums="1" hl_lines="11"
-piVersion: v1
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-defaults

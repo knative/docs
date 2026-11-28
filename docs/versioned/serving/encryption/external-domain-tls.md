@@ -21,7 +21,7 @@ You must meet the following requirements to enable secure HTTPS connections:
 - A Networking layer such as Kourier, Istio with SDS v1.3 or higher, or Contour v1.1 or higher. See [Install a networking layer](../../install/yaml-install/serving/install-serving-with-yaml.md#install-a-networking-layer).
 
 
-## Automatically obtain and renew certificates
+## Automatic certificates { #automatically-obtain-and-renew-certificates }
 
 ### Installing and configuring cert-manager and integration
 
@@ -125,7 +125,7 @@ When your TLS Certificate is issued and available on your cluster, your Knative 
 be able to handle HTTPS traffic on the external domain.
 
 
-## Manually obtain and renew certificates
+## Manual certificates { #manually-obtain-and-renew-certificates }
 
 There are various ways on how to obtain certificates manually. You can either use tools like 
 [Certbot][cb] or [cert-manager][cm] or provide the certificates manually from another source. 

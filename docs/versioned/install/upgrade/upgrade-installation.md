@@ -70,27 +70,30 @@ To upgrade, apply the YAML files for the subsequent minor versions of all your i
 
 Before upgrading, [check your Knative version](check-install-version.md).
 
-For a cluster running version 1.1 of the Knative Serving and Knative Eventing components, the following command upgrades the installation to version 1.2:
-
-```bash
-kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.2.0/serving-core.yaml \
--f https://github.com/knative/eventing/releases/download/knative-v1.2.0/eventing.yaml \
-```
-
-### Run post-install jobs when necessary
-
-When the release notes point out that a Knative custom resource is transitioned to a new version, for example like:
-
-> DomainMapping/v1alpha1 is deprecated - use v1beta1 APIs
-
-you need to run post-install jobs (see [here for details](#upgrade-existing-resources-to-the-latest-stored-version)):
+Apply the target-release CRDs and core manifests for each installed component (replacing `<target-version>` with the next minor release, for example `knative-v1.16.0`):
 
 ```bash
 # Serving
-kubectl create -f {{ artifact(repo="serving",file="serving-post-install-jobs.yaml")}}
+kubectl apply -f https://github.com/knative/serving/releases/download/<target-version>/serving-crds.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/<target-version>/serving-core.yaml
 
 # Eventing
-kubectl create -f {{ artifact(repo="eventing",file="eventing-post-install.yaml")}}
+kubectl apply -f https://github.com/knative/eventing/releases/download/<target-version>/eventing-crds.yaml
+kubectl apply -f https://github.com/knative/eventing/releases/download/<target-version>/eventing-core.yaml
+```
+
+Also apply the matching `<target-version>` manifests for any installed networking layer (Kourier, Istio, Contour) or Eventing extensions (such as `in-memory-channel.yaml` and `mt-channel-broker.yaml`).
+
+### Run post-install jobs when necessary
+
+When the release notes state that a Knative custom resource is transitioning to a new storage version, run the matching `<target-version>` post-install migration jobs:
+
+```bash
+# Serving
+kubectl create -f https://github.com/knative/serving/releases/download/<target-version>/serving-post-install-jobs.yaml
+
+# Eventing
+kubectl create -f https://github.com/knative/eventing/releases/download/<target-version>/eventing-post-install.yaml
 ```
 
 Make sure that the jobs complete successfully before continuing:
@@ -106,11 +109,9 @@ kubectl get job -n knative-eventing
 !!! caution
     You also have to transition the version in your custom resource YAML files if you store them externally, e.g. in git via GitOps.
 
-## Verifying the upgrade
+## Verify the upgrade { #verifying-the-upgrade }
 
-To confirm that your components and plugins have successfully upgraded, view the status of their pods in the relevant namespaces.
-All pods will restart during the upgrade and their age will reset.
-If you upgraded Knative Serving and Eventing, enter the following commands to get information about the pods for each namespace:
+Confirm that pods in `knative-serving` and `knative-eventing` are `Running` and `READY`, check the installed release labels with [Check Knative version](check-install-version.md), verify any post-install jobs completed, and test a real Knative Service request or CloudEvent delivery:
 
 ```bash
 kubectl get pods -n knative-serving
@@ -141,7 +142,6 @@ imc-dispatcher-f59b7c57-q9xcl          1/1     Running   0          80s
 sources-controller-8596684d7b-jxkmd    1/1     Running   0          83s
 ```
 
-If the age of all your pods has been reset and all pods are up and running, the upgrade was completed successfully.
-You might notice a status of `Terminating` for the old pods as they are cleaned up.
+You might notice a status of `Terminating` for the old pods while they are cleaned up. Once all pods are `Running` and `READY`, confirm the installed release version, completed migration jobs, and a live Service request or CloudEvent delivery.
 
-If necessary, repeat the upgrade process until you reach your desired minor version number.
+If necessary, repeat the upgrade process one minor version at a time until you reach your target release.

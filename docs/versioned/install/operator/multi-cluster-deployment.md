@@ -58,7 +58,7 @@ The credential returned by the access provider plugin must grant permissions equ
 !!! important
     Do not reuse the spoke credential for workloads other than the Knative Operator reconciliation path.
 
-## Enable multi-cluster on the Knative Operator
+## Enable multi-cluster { #enable-multi-cluster-on-the-knative-operator }
 
 The Operator ships with multi-cluster support disabled by default. Enable it through Helm values for fresh installs or by patching the existing Operator Deployment.
 
@@ -174,7 +174,7 @@ If you do not use Helm, add multi-cluster support to an Operator that is already
 !!! important
     If the Operator is started without `--clusterprofile-provider-file`, any CR with `spec.clusterProfileRef` stops reconciling with `TargetClusterResolved=False` and `reason=MulticlusterDisabled`. CRs without `clusterProfileRef` continue to reconcile unchanged.
 
-## Register a remote cluster as a ClusterProfile
+## Register a remote cluster { #register-a-remote-cluster-as-a-clusterprofile }
 
 A `ClusterProfile` resource on the hub describes one spoke. Register it in one of two ways:
 
@@ -291,7 +291,7 @@ Manual registration prepares the spoke first, then publishes its endpoint and cr
       -o jsonpath='{.status.conditions[?(@.type=="ControlPlaneHealthy")].status}'
     ```
 
-## Deploy Knative Serving to a remote cluster
+## Deploy Serving remotely { #deploy-knative-serving-to-a-remote-cluster }
 
 After you enable multi-cluster on the Operator and register a `ClusterProfile`, set `spec.clusterProfileRef` on the `KnativeServing` CR.
 
@@ -329,7 +329,7 @@ Check that the Operator resolved the spoke. The `Target Cluster` column reports 
 kubectl get knativeserving -n knative-serving
 ```
 
-## Deploy Knative Eventing to a remote cluster
+## Deploy Eventing remotely { #deploy-knative-eventing-to-a-remote-cluster }
 
 Knative Eventing requires no ingress-specific preparation on the spoke. Set `spec.clusterProfileRef` on the `KnativeEventing` CR and apply it on the hub:
 
@@ -375,7 +375,7 @@ The Operator applies these labels and annotations only when it creates the names
 
 For the field reference, see [Configuring Knative Serving CRDs](configuring-serving-cr.md) and [Configuring Knative Eventing CRDs](configuring-eventing-cr.md).
 
-## Understand remote resource garbage collection
+## Remote garbage collection { #understand-remote-resource-garbage-collection }
 
 The Operator creates a helper resource on the spoke that anchors ownership of namespace-scoped Knative resources. The helper carries the annotation `operator.knative.dev/protected: "true"` as a warning for human operators. The annotation is informational; the Operator does not enforce it through an admission webhook. If the helper is deleted, the next reconciliation recreates it.
 
@@ -386,7 +386,7 @@ The Operator creates a helper resource on the spoke that anchors ownership of na
 !!! warning
     The exact name of the helper resource is an internal implementation detail and might change between releases. Do not write scripts that target it by name.
 
-## Tune the remote readiness poll interval
+## Tune readiness polling { #tune-the-remote-readiness-poll-interval }
 
 The Operator polls Deployment readiness on the spoke after a successful apply. The flag `--remote-deployments-poll-interval` (or the Helm value `knative_operator.multicluster.remoteDeploymentsPollInterval`) sets the interval between polls. The default is `10s`. Values smaller than 1 second are ignored, and the default is used.
 
@@ -423,7 +423,7 @@ The field `spec.clusterProfileRef` is immutable once the resource is created. To
 
 If you downgrade the Operator to a version earlier than v1.22, the older Operator does not recognize the `clusterProfileRef` field. Delete every CR that uses `clusterProfileRef` before you downgrade. Running such a CR against an Operator that does not recognize the field is unsupported, and the resulting behavior is undefined.
 
-## Troubleshoot multi-cluster deployments
+## Troubleshoot { #troubleshoot-multi-cluster-deployments }
 
 The CR exposes a `TargetClusterResolved` condition that reports whether the Operator was able to bind to the spoke. Read the condition with the following command:
 
@@ -462,7 +462,7 @@ The following reasons reflect short-lived internal states. They usually clear on
 
 If one of these reasons persists, inspect the Operator Deployment logs and the Pod restart count.
 
-## Uninstall Knative from a remote cluster
+## Uninstall from remote cluster { #uninstall-knative-from-a-remote-cluster }
 
 To uninstall Knative cleanly, delete the CR on the hub and let the finalizer remove resources on the spoke:
 

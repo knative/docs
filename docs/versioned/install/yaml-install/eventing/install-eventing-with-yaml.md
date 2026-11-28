@@ -20,7 +20,7 @@ This topic describes how to install Knative Eventing by applying YAML files. Thi
 
 For information on other Knative installs, see the [Installation Roadmap](../../README.md#installation-roadmap).
 
-## Install the Knative Eventing component
+## Install Eventing { #install-the-knative-eventing-component }
 
 To install the Knative Eventing component:
 
@@ -57,7 +57,7 @@ To install the Knative Eventing component:
     eventing-webhook-fff97b47c-8hmt8       1/1     Running   0          2m17s
     ```
 
-## Optional: Install a default Channel (messaging) layer
+## Default Channel layer { #optional-install-a-default-channel-messaging-layer }
 
 The following tabs expand to show instructions for installing a default Channel layer.
 Follow the procedure for the Channel of your choice:

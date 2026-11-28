@@ -44,6 +44,8 @@ Use the following steps to install Knative depending on your installation method
   1. Install the [CLI Tools](../client/install-kn.md).
   1. Install the [Knative Quickstart plugin](../getting-started/quickstart-install.md).
 
+<span id="yaml-based-installation"></span>
+
 **YAML-based**:
 
 Install using all YAML files. This option is the most useful if you're using GitOps tools such as [Flux](https://fluxcd.io) or [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) to apply manifests checked into a Git repository. This is the lowest common denominator approach, giving you granular control of the process and resource definitions.
@@ -66,7 +68,7 @@ All installations require a supported Kubernetes version. System requirements pr
 
 For a list of commercial Knative products, see [Knative offerings](../install/knative-offerings.md).
 
-## YAML and Knative Operator installations compared
+## YAML vs Operator { #yaml-and-knative-operator-installations-compared }
 
 You install Knative using YAML files and other resources either aided or not by the Knative Operator. The Knative Operator allows you to automate applying, patching, and customizing the content.
 

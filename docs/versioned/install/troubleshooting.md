@@ -10,7 +10,7 @@ function: how-to
 
 This page describes how you can troubleshoot a Knative installation. Please try these instructions before filing a bug report.
 
-## Check if all containers are running, ready and healthy
+## Check container health { #check-if-all-containers-are-running-ready-and-healthy }
 
 !!! note
     The outputs below are just examples. The containers may vary depending on the installation and configuration. Please make sure all containers are running, ready and healthy (look for the `1/1` in the following examples) or are `Complete` (in case of jobs).
@@ -93,7 +93,7 @@ eventing-controller-bb8b689c4-lk6pq   1/1     Running   0          41s
 eventing-webhook-577bb88ccd-hcz5p     1/1     Running   0          41s
 ```
 
-## Check if there are any errors logged in the Knative components
+## Check component logs { #check-if-there-are-any-errors-logged-in-the-knative-components }
 
 ```bash
 kubectl logs -n knative-serving <pod-name>
@@ -107,7 +107,7 @@ kubectl logs -n knative-serving activator-6b9dc4c9db-cl56b
 2023/05/01 11:52:51 Registering 4 informers
 ```
 
-## Check the status of the Knative Resources
+## Check resource status { #check-the-status-of-the-knative-resources }
 
 **Knative Serving**
 ```bash

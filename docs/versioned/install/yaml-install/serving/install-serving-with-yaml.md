@@ -20,7 +20,7 @@ This topic describes how to install Knative Serving by applying YAML files. This
 
 For information on other Knative installs, see the [Installation Roadmap](../../README.md#installation-roadmap).
 
-## Install the Knative Serving component
+## Install Serving { #install-the-knative-serving-component }
 
 To install the Knative Serving component:
 
