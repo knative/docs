@@ -3,56 +3,44 @@ audience: developer
 components:
   - serving
 function: explanation
+hide_prev: true
+hide_next: true
 ---
 
 # Knative Serving
 
 --8<-- "about-serving.md"
 
-## Common use cases
+## Start here
 
-Examples of supported Knative Serving use cases:
+New to Knative Serving? Follow [Try Serving](../getting-started/first-service.md)
+to deploy a container, watch it scale to zero, and split traffic between
+Revisions on a local cluster.
 
-- Rapid deployment of serverless containers.
-- Autoscaling, including scaling pods down to zero.
-- Support for multiple networking layers, such as Contour, Kourier, and Istio, for integration into existing environments.
+## Choose a task
 
-Knative Serving supports both HTTP and [HTTPS](encryption/encryption-overview.md) networking protocols.
+- **Deploy and configure:** [create a Service](services/creating-services.md),
+  [convert a Kubernetes Deployment](convert-deployment-to-knative-service.md),
+  [deploy from a private registry](deploying-from-private-registry.md), or
+  configure [resource limits](services/configure-requests-limits-services.md),
+  [health probes](services/configure-probing.md), and [volumes](services/storage.md).
+- **Networking:** configure [private Services](services/private-services.md),
+  [custom domains](services/custom-domains.md),
+  [custom TLS certificates](services/custom-tls-certificate-domain-mapping.md),
+  or [HTTP protocols](services/http-protocol.md).
+- **Revisions and traffic:** manage [Revisions](revisions/README.md),
+  [split traffic and assign tags](traffic-management.md), or configure
+  [gradual rollouts](rolling-out-latest-revision.md).
+- **Autoscaling:** tune [autoscaling](autoscaling/README.md) defaults,
+  [concurrency](autoscaling/concurrency.md), [scale bounds](autoscaling/scale-bounds.md),
+  [scale to zero](autoscaling/scale-to-zero.md), and [request buffering](load-balancing/README.md).
+- **Observe and troubleshoot:** [collect metrics](observability/metrics/collecting-metrics.md),
+  browse the [metrics reference](observability/metrics/serving-metrics.md), or
+  [troubleshoot application issues](troubleshooting/debugging-application-issues.md).
 
-## Installation
+## Architecture and reference
 
-You can install Knative Serving via the methods listed on the [installation page](../install/README.md).
-
-## Getting Started
-
-Follow [Get started with Serving](../getting-started/first-service.md) to deploy
-and call a service, observe scale-to-zero, and split traffic between revisions.
-This is the same Serving track linked from Get Started, not a separate tutorial.
-It links to the shared learning-cluster setup if you need an environment.
-
-With the `Service` resource, a deployed service will automatically have a
-matching route and configuration created. Each time the `Service` is updated, a
-new revision is created.
-
-## More samples and demos
-
-- [Knative Serving code samples](../samples/serving.md)
-
-## Debugging Knative Serving issues
-
-- [Debugging application issues](troubleshooting/debugging-application-issues.md)
-
-## Configuration and Networking
-
-- [Configuring cluster local routes](services/private-services.md)
-- [Using a custom domain](using-a-custom-domain.md)
-- [Traffic management](traffic-management.md)
-
-## Observability
-
-- [Serving Metrics API](observability/metrics/serving-metrics.md)
-
-## Known Issues
-
-See the [Knative Serving Issues](https://github.com/knative/serving/issues) page
-for a full list of known issues.
+- [Architecture](architecture.md) and [Request flow](request-flow.md)
+- [Serving API reference](reference/serving-api.md)
+- [Serving code samples](../samples/serving.md)
+- [Install Knative Serving](../install/README.md)

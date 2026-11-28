@@ -90,7 +90,7 @@ Supported probe types are:
 
 
 !!! note
-    Be aware that Knative also does some defaulting (checking readiness on the traffic port using an HTTP check) and additional validation to make aggressive probing work.
+    Be aware that Knative sets a default TCP readiness probe on the traffic port when none is specified, and applies additional validation so aggressive probing works.
 
 !!! warning
     As the Queue-Proxy container does not rewrite or check defined Liveness probes, it is important to know that Kubernetes can and will restart specific containers once a Liveness probe fails. Make sure to also include the same check that you define as a Liveness probe as a Readiness probe to make sure Knative is aware of the failing container in the Pod. Otherwise, you may see, it is possible that you see connection errors during the restart of a container caused by the Liveness probe failure.

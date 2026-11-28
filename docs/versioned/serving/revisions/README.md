@@ -9,33 +9,43 @@ function: explanation
 
 --8<-- "about-revisions.md"
 
-## Related concepts
+Revisions are immutable snapshots of your application code and configuration:
+updating a Service's `spec.template` creates a new Revision rather than
+modifying the existing Revision's `spec`. You can still update mutable metadata
+(such as the `no-gc` annotation below) on an existing Revision.
 
-### Autoscaling
-
-Revisions can be automatically scaled up and down according to incoming traffic. For more information, see [Autoscaling](../../serving/autoscaling/README.md){target=_blank}.
-
-### Gradual rollout of traffic to Revisions
-
-Revisions enable progressive roll-out and roll-back of application changes. For more information, see [Configuring gradual rollout of traffic to Revisions](../../serving/rolling-out-latest-revision.md){target=_blank}.
-
-### Garbage collection
+## Garbage collection
 
 --8<-- "about-revisions-garbage-collection.md"
 
-For more information, see [Configuration options for Revisions](#configuration-options-for-revisions).
+### Disabling garbage collection for a Revision
 
-## Configuration options for Revisions
+To prevent a specific Revision from being garbage collected, add the
+`serving.knative.dev/no-gc: "true"` annotation to its metadata:
 
-- [Cluster administrator (global, cluster-wide) configuration options](../../serving/revisions/revision-admin-config-options.md)
-- [Developer (per Revision) configuration options](../../serving/revisions/revision-developer-config-options.md)
+```bash
+kubectl annotate revision <revision-name> serving.knative.dev/no-gc="true"
+```
 
-## Additional resources
+Or in the Revision metadata:
 
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Revision
+metadata:
+  name: <revision-name>
+  annotations:
+    serving.knative.dev/no-gc: "true"
+```
+
+For cluster-wide garbage collection thresholds, see
+[Configuring Revision garbage collection](revision-admin-config-options.md).
+
+## Related tasks
+
+- [Split traffic and tag Revisions](../traffic-management.md)
+- [Configure gradual rollouts](../rolling-out-latest-revision.md)
+- [Configure autoscaling](../autoscaling/README.md)
+- [Check Revision status](../troubleshooting/debugging-application-issues.md#check-revision-status)
+- [Manage Revisions with `kn revision`](https://github.com/knative/client/blob/main/docs/cmd/kn_revision.md){target=_blank}
 - [Revision API specification](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#revision){target=_blank}
-
-## Next steps
-
-- [Delete, describe, and list Revisions by using the Knative (`kn`) CLI](https://github.com/knative/client/blob/main/docs/cmd/kn_revision.md){target=_blank}
-- [Check the status of a Revision](../../serving/troubleshooting/debugging-application-issues.md#check-revision-status){target=_blank}
-- [Routing traffic between Revisions of a Service](../../serving/traffic-management.md#traffic-routing-examples){target=_blank}

@@ -97,7 +97,7 @@ This setting does not adjust how long the last replica will be kept after traffi
 
 The `scale-to-zero-pod-retention-period` flag determines the minimum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
 
-This contrasts with the `scale-to-zero-grace-period` flag, which determines the maximum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
+By contrast, `scale-to-zero-grace-period` (above) is an upper-bound timeout for internal network programming before removing the last pod, not a pod-retention timer.
 
 * **Global key:** `scale-to-zero-pod-retention-period`
 * **Per-revision annotation key:** `autoscaling.knative.dev/scale-to-zero-pod-retention-period`

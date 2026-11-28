@@ -22,9 +22,10 @@ In general, if your Kubernetes workload is a good fit for Knative, you can remov
 
 There are three aspects you need to consider:
 
-- All work done is triggered by HTTP.
-- The container is stateless. All state is stored elsewhere or can be re-created.
-- Your workload uses only Secret and ConfigMap volumes.
+- All work is triggered by HTTP (or gRPC/WebSockets over HTTP).
+- The container is stateless — persistent state lives outside the pod, or uses
+  a [supported volume type](services/storage.md) (such as ConfigMaps, Secrets,
+  EmptyDir, or enabled PersistentVolumeClaims).
 
 ## Example conversion
 
@@ -70,11 +71,16 @@ spec:
 
 ### Knative Service
 
+To migrate safely without disturbing the existing Deployment, deploy the
+Knative Service under a distinct name first (for example `my-nginx-knative`),
+verify it responds as expected, and cut traffic over before deleting the old
+Deployment and Service:
+
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: my-nginx
+  name: my-nginx-knative
 spec:
   template:
     spec:
@@ -82,4 +88,12 @@ spec:
       - image: nginx
         ports:
         - containerPort: 80
+```
+
+Apply and verify:
+
+```bash
+kubectl apply -f my-nginx-knative.yaml
+kubectl wait kservice/my-nginx-knative --for=condition=Ready --timeout=120s
+curl "$(kubectl get kservice my-nginx-knative -o jsonpath='{.status.url}')"
 ```

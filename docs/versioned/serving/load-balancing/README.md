@@ -5,31 +5,113 @@ components:
 function: explanation
 ---
 
-# Load balancing
+# Request buffering and Activator capacity
 
-You can turn on Knative load balancing, by placing the _Activator service_ in the request path to act as a load balancer. To do this, you must first ensure that individual pod addressability is enabled.
+Knative Serving uses the **Activator** to receive and buffer requests when a
+Revision is scaled to zero, or when incoming traffic bursts exceed what the
+Revision's pods can handle directly.
 
 ## Activator pod selection
 
-Activator pods are scaled horizontally, so there may be multiple Activators in a deployment. In general, the system will perform best if the number of revision pods is larger than the number of Activator pods, and those numbers divide equally.
-<!--TODO(#2472): Add better documentation about what the activator is; explain the components of load balancing; maybe add a diagram-->
+Activator pods scale horizontally. Knative assigns a subset of Activators to
+each Revision depending on its size — more Revision pods receive a larger
+subset of Activators.
 
-Knative assigns a subset of Activators for each revision, depending on the revision size. More revision pods will mean a greater number of Activators for that revision.
+When the Activator is in the request path, it distributes requests to Revision
+pods using:
 
-The Activator load balancing algorithm works as follows:
+- **Better of two random choices** when concurrency is unlimited.
+- **First pod with available capacity** when `containerConcurrency` is 3 or
+  less; otherwise **round-robin** respecting container concurrency.
 
-- If concurrency is unlimited, the request is sent to the better of two random choices.
-- If concurrency is set to a value less or equal than 3, the Activator will send the request to the first pod that has capacity. Otherwise, requests will be balanced in a round robin fashion, with respect to container concurrency.
+See [Concurrency](../autoscaling/concurrency.md) for concurrency settings.
 
-For more information, see the documentation on [concurrency](../autoscaling/concurrency.md).
+<span id="configuring-target-burst-capacity"></span>
 
-## Configuring target burst capacity
+## Target burst capacity
 
-Target burst capacity is mainly responsible for determining whether the Activator is in the request path outside of scale-from-zero scenarios.
+_Target burst capacity_ determines how large a traffic burst a Revision can
+absorb without putting the Activator in the request path.
 
-Target burst capacity can be configured using a combination of the following parameters:
+- **`0`** — Activator is only in the path while scaling from zero.
+- **`-1`** — Activator is always in the path, regardless of Revision scale.
+- **Positive integer** (default **`200`**) — Activator stays in the path
+  whenever spare capacity across ready pods is smaller than this threshold.
 
-- Setting the targeted concurrency limits for the revision. See [concurrency](../autoscaling/concurrency.md).
-- Setting the target utilization parameters. See [target utilization](../autoscaling/concurrency.md#target-utilization).
-- Setting the target burst capacity. You can configure target burst capacity using the `target-burst-capacity` key in the `config-autoscaler` ConfigMap. See [Setting the target burst capacity](target-burst-capacity.md#setting-the-target-burst-capacity).
-- Setting the Activator capacity by using the `config-autoscaler` ConfigMap. See [Setting the Activator capacity](activator-capacity.md#setting-the-activator-capacity).
+<span id="setting-the-target-burst-capacity"></span>
+
+- **Global key:** `target-burst-capacity` (in `config-autoscaler`)
+- **Per-revision annotation:** `autoscaling.knative.dev/target-burst-capacity`
+- **Possible values:** float (`-1`, `0`, or positive)
+- **Default:** `200`
+
+=== "Per Revision"
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      name: <service-name>
+    spec:
+      template:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/target-burst-capacity: "200"
+    ```
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
+      target-burst-capacity: "200"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          target-burst-capacity: "200"
+    ```
+
+<span id="setting-the-activator-capacity"></span>
+
+## Activator capacity
+
+When multiple Activators run in the cluster, Knative places enough Activators
+in the request path to handle `(replicas * target + target-burst-capacity) / activator-capacity`.
+
+- **Global key:** `activator-capacity` (in `config-autoscaler`)
+- **Per-revision annotation:** none (cluster-wide administrator setting)
+- **Possible values:** integer (at least `1`)
+- **Default:** `100`
+
+=== "Global (ConfigMap)"
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: config-autoscaler
+      namespace: knative-serving
+    data:
+      activator-capacity: "200"
+    ```
+
+=== "Global (Operator)"
+    ```yaml
+    apiVersion: operator.knative.dev/v1alpha1
+    kind: KnativeServing
+    metadata:
+      name: knative-serving
+    spec:
+      config:
+        autoscaler:
+          activator-capacity: "200"
+    ```

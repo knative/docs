@@ -212,9 +212,9 @@ You can safely reroute traffic from a live version of an application to a new ve
 
     Once you redeploy this Route by reapplying the YAML resource, the second Revision of the app is now staged.
 
-    No traffic is routed to the second Revision at the main URL, and Knative creates a new Route named `v2` for testing the newly deployed Revision.
+    No traffic is routed to the second Revision at the standalone Route's main URL (note that the original Knative Service keeps its own separate URL), and Knative exposes a tagged URL prefixed with `v2-` on this Route for testing the newly deployed Revision.
 
-1. Get the URL of the new Route for the second Revision, by running the command:
+1. Get the tagged URL for the second Revision, by running the command:
 
     ```bash
     kubectl get route <route-name> --output jsonpath="{.status.traffic[*].url}"
