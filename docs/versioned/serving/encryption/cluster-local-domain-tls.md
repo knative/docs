@@ -20,7 +20,7 @@ You must meet the following requirements to enable secure HTTPS connections:
     This feature is currently only supported with Kourier and Istio as a networking layer.
 
 
-## Installing and configuring cert-manager and integration
+## cert-manager setup { #installing-and-configuring-cert-manager-and-integration }
 
 First, you need to install and configure `cert-manager` and the Knative cert-manager integration.
 Please refer to [Configuring Knative cert-manager integration](./configure-certmanager-integration.md) for details.

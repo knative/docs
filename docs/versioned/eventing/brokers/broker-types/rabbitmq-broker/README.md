@@ -13,9 +13,11 @@ This topic describes how to create a RabbitMQ Broker.
 
 These directions assume your cluster administrator has [installed the Knative RabbitMQ broker](../../../../install/eventing/rabbitmq-install.md).
 
-## Create a RabbitMQBrokerConfig object
+## Create a RabbitMQBrokerConfig { #create-a-rabbitmqbrokerconfig-object }
 
-1. Create a YAML file using the following template:
+Choose either an in-cluster RabbitMQ Cluster Operator instance (`name`) or an external RabbitMQ server (`connectionSecret`). Do not set both fields in the same `RabbitmqBrokerConfig`.
+
+=== "In-cluster (RabbitMQ Cluster Operator)"
     ```yaml
     apiVersion: eventing.knative.dev/v1alpha1
     kind: RabbitmqBrokerConfig
@@ -23,27 +25,28 @@ These directions assume your cluster administrator has [installed the Knative Ra
       name: <rabbitmq-broker-config-name>
     spec:
       rabbitmqClusterReference:
-        # Configure name if a RabbitMQ Cluster Operator is being used.
         name: <cluster-name>
-        # Configure connectionSecret if an external RabbitMQ cluster is being used.
+      queueType: quorum
+    ```
+
+=== "External RabbitMQ server"
+    ```yaml
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: RabbitmqBrokerConfig
+    metadata:
+      name: <rabbitmq-broker-config-name>
+    spec:
+      rabbitmqClusterReference:
         connectionSecret:
           name: rabbitmq-secret-credentials
       queueType: quorum
     ```
-    Where:
 
-    - <rabbitmq-broker-config-name> is the name you want for your RabbitMQBrokerConfig object.
-    - <cluster-name> is the name of the RabbitMQ cluster you created earlier.
+Apply the YAML file:
 
-    !!! note
-        You cannot set `name` and `connectionSecret` at the same time, since `name` is for a RabbitMQ Cluster Operator instance running in the same cluster as the Broker, and `connectionSecret` is for an external RabbitMQ server.
-
-1. Apply the YAML file by running the command:
-
-    ```bash
-    kubectl create -f <filename>
-    ```
-   Where `<filename>` is the name of the file you created in the previous step.
+```bash
+kubectl apply -f <filename>.yaml
+```
 
 ## Create a RabbitMQBroker object
 

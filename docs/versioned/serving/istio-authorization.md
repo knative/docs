@@ -57,7 +57,7 @@ If the activator isn't injected:
 
 - In STRICT mode, requests will simply be rejected.
 
-To understand when requests are forwarded through the activator, see the [target burst capacity](load-balancing/target-burst-capacity.md) documentation.
+To understand when requests are forwarded through the activator, see the [target burst capacity](load-balancing/README.md#target-burst-capacity) documentation.
 
 This also means that many Istio AuthorizationPolicies won't work as expected. For example, if you set up a rule allowing requests from a particular source into a Knative service, you will see requests being rejected if they are forwarded by the activator.
 

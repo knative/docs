@@ -13,7 +13,7 @@ For per-revision concurrency, you must configure both `autoscaling.knative.dev/m
 
 For global concurrency, you can set the `container-concurrency-target-default` value.
 
-## Soft versus hard concurrency limits
+## Concurrency limits { #soft-versus-hard-concurrency-limits }
 
 It is possible to set either a _soft_ or _hard_ concurrency limit.
 

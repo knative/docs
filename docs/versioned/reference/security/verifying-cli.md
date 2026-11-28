@@ -12,7 +12,7 @@ about the provenance of those binaries.
 
 Our releases from 1.9 are signed with [cosign](https://docs.sigstore.dev/cosign/overview). You can use the following steps to verify our binaries.
 
-1. Download the files you want, and the `checksums.txt`, `checksum.txt.pem` and `checksums.txt.sig` files from the releases page:
+1. Download the files you want, and the `checksums.txt`, `checksums.txt.pem` and `checksums.txt.sig` files from the releases page:
     ```sh
     # this example verifies the 1.10.0 kn cli from the knative/client repository
     wget https://github.com/knative/client/releases/download/knative-v1.10.0/checksums.txt

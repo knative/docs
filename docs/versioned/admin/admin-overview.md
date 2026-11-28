@@ -112,7 +112,7 @@ Knative configurations are performed by the following methods:
 
 - Using the Knative Operator
 
-    Some platform-wide settings can be managed declaratively using the Knative Operator, installed with the `kn` Knative CLI plugin. You can manage the operator without using the `kn` CLI. The `kn` CLI manages only operator installations.
+    Platform-wide settings can be managed declaratively through the `KnativeServing` and `KnativeEventing` custom resources (applied via `kubectl` or the `kn-operator` plugin). Note that the core `kn` CLI manages developer resources across any Knative installation, while the optional `kn-operator` plugin manages Operator installations.
 
     For more information, see [Configuring Knative by using the Operator](../install/operator/configuring-with-operator.md) and [CLI tools](../client/README.md).
 

@@ -5,6 +5,8 @@ components:
 function: how-to
 ---
 
+# Secure Pod Defaults
+
 !!! important
     The default setting of `disabled` will be changed in the upcoming release of Knative 1.21 to be more secure.
 

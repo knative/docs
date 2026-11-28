@@ -251,7 +251,7 @@ spec:
 !!! note
     When using an external topic, the Knative Kafka Broker does not own the topic and is not responsible for managing the topic. This includes the topic lifecycle or its general validity. Other restrictions for general access to the topic may apply. See the documentation about using [Access Control Lists (ACLs)](https://kafka.apache.org/documentation/#security_authz).
 
-## Configuring the order of delivered events
+## Event ordering { #configuring-the-order-of-delivered-events }
 
 When dispatching events, the Kafka broker can be configured to support different delivery ordering guarantees.
 
@@ -280,7 +280,7 @@ The supported consumer delivery guarantees are:
 
 The `unordered` delivery is the default ordering guarantee.
 
-## Data plane Isolation vs Shared Data plane
+## Data plane isolation { #data-plane-isolation-vs-shared-data-plane }
 
 Knative Kafka Broker implementation has 2 planes: control plane and data plane. Control plane consists of controllers that talk to Kubernetes API, watch for custom objects and manage the data plane.
 

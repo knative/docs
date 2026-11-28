@@ -5,26 +5,23 @@ components:
 function: how to
 ---
 
-# Creating an ApiServerSource object
+# ApiServerSource
 
+![stage](https://img.shields.io/badge/Stage-stable-green?style=flat-square)
 ![version](https://img.shields.io/badge/API_Version-v1-green?style=flat-square)
 
-This topic describes how to create an ApiServerSource object.
+`ApiServerSource` is a core Knative Eventing source that watches Kubernetes API server events (such as pod creation or deployment updates) and forwards them as CloudEvents to a sink.
 
-## Before you begin
+## Prerequisites { #before-you-begin }
 
-Before you can create an ApiServerSource object:
+- [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md) installed on your cluster.
+- Optional: the [`kn` CLI](../../../client/install-kn.md) if you prefer `kn` commands.
 
-- You must have [Knative Eventing](../../../install/yaml-install/eventing/install-eventing-with-yaml.md)
-installed on your cluster.
-- You must install the [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-tool.
-- Optional: If you want to use the `kn` commands, install the [`kn`](../../../client/configure-kn.md) tool.
+## Create an ApiServerSource { #create-an-apiserversource-object }
 
-## Create an ApiServerSource object
+Use a single namespace (`<namespace>`, for example `apiserversource-example` or `default`) consistently across all steps below.
 
-1. Optional: Create a namespace for the API server source instance by running the
-command:
+1. Optional: Create a dedicated namespace:
 
     ```bash
     kubectl create namespace <namespace>
@@ -193,14 +190,14 @@ command:
               --mode "Resource" \
               --resource "Event:v1" \
               --service-account <service-account> \
-              --sink <sink-name>
+              --sink svc:event-display
             ```
             Where:
 
             - `<apiserversource>` is the name of the source that you want to create.
-            - `<namespace>` is the name of the namespace that you created in step 1 earlier.
-            - `<service-account>` is the name of the ServiceAccount that you created in step 2 earlier.
-            - `<sink-name>` is the name of your sink, for example, `http://event-display.pingsource-example.svc.cluster.local`.
+            - `<namespace>` is the namespace you chose in step 1.
+            - `<service-account>` is the name of the ServiceAccount you created in step 2.
+            - `--sink` uses `svc:event-display` to target the Kubernetes Service created above (or pass a full URI such as `http://event-display.<namespace>.svc.cluster.local`).
 
             For a list of available options, see the [Knative client documentation](https://github.com/knative/client/blob/main/docs/cmd/kn_source_apiserver_create.md#kn-source-apiserver-create).
 
@@ -323,13 +320,16 @@ command:
       }
     ```
 
-## Delete the ApiServerSource object
+## Clean up { #delete-the-apiserversource-object }
 
-To remove the ApiServerSource object and all of the related resources:
+To remove the resources you created:
 
-- Delete the namespace by running the command:
+```bash
+kubectl delete apiserversource <apiserversource-name> -n <namespace>
+kubectl delete deployment,service event-display -n <namespace>
+kubectl delete rolebinding <role-binding> -n <namespace>
+kubectl delete role <role> -n <namespace>
+kubectl delete serviceaccount <service-account> -n <namespace>
+```
 
-    ```bash
-    kubectl delete namespace <namespace>
-    ```
-    Where `<namespace>` is the name of the namespace that you created in step 1 earlier.
+If you created a dedicated disposable namespace specifically for this example, you can remove everything at once with `kubectl delete namespace <namespace>`.

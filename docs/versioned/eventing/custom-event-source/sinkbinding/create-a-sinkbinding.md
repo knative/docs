@@ -25,7 +25,7 @@ Before you can create a SinkBinding object:
 - You must have Knative Eventing installed on your cluster.
 - Optional: If you want to use `kn` commands with SinkBinding, install the `kn` CLI.
 
-## Optional: Choose SinkBinding namespace selection behavior
+## Namespace selection { #optional-choose-sinkbinding-namespace-selection-behavior }
 
 The SinkBinding object operates in one of two modes: `exclusion` or `inclusion`.
 
@@ -118,7 +118,7 @@ create a Knative service.
     1. Apply the YAML file by running the command:
 
         ```bash
-        kubectl apply -f <filename>.yaml
+        kubectl apply -f <filename>.yaml -n <namespace>
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
@@ -177,7 +177,7 @@ any extra overrides given by `CE_OVERRIDES`.
 1. Apply the YAML file by running the command:
 
     ```bash
-    kubectl apply -f <filename>.yaml
+    kubectl apply -f <filename>.yaml -n <namespace>
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
@@ -204,7 +204,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
         - `Job:batch/v1:app=heartbeat-cron` matches all jobs in namespace with label `app=heartbeat-cron`.
         - `Deployment:apps/v1:myapp` matches a deployment called `myapp` in the namespace.
         - `Service:serving.knative.dev/v1:hello` matches the service called `hello`.
-    - `<sink>` is the sink to connect. For example `http://event-display.svc.cluster.local`.
+    - `<sink>` is the sink to connect (for example `ksvc:event-display`, or a full URI such as `http://event-display.<namespace>.svc.cluster.local`).
     - Optional: `<cloudevent-overrides>` in the form `key=value`.
     Cloud Event overrides control the output format and modifications of the event
     sent to the sink and are applied before sending the event.
@@ -214,10 +214,10 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 
     For example:
     ```bash
-    $ kn source binding create bind-heartbeat \
+    kn source binding create bind-heartbeat \
       --namespace sinkbinding-example \
       --subject "Job:batch/v1:app=heartbeat-cron" \
-      --sink http://event-display.svc.cluster.local \
+      --sink ksvc:event-display \
       --ce-override "sink=bound"
     ```
 
@@ -258,7 +258,7 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
     1. Apply the YAML file by running the command:
 
         ```bash
-        kubectl apply -f <filename>.yaml
+        kubectl apply -f <filename>.yaml -n <namespace>
         ```
         Where `<filename>` is the name of the file you created in the previous step.
 
@@ -268,16 +268,12 @@ Create a `SinkBinding` object that directs events from your subject to the sink.
 service logs for your sink:
 
     ```bash
-    kubectl logs -l <sink> -c <container> --since=10m
+    kubectl logs -n <namespace> -l serving.knative.dev/service=<sink> -c user-container --since=10m
     ```
-    Where:
-
-    - `<sink>` is the name of your sink.
-    - `<container>` is the name of the container your sink is running in.
 
     For example:
     ```bash
-    $ kubectl logs -l serving.knative.dev/service=event-display -c user-container --since=10m
+    kubectl logs -n sinkbinding-example -l serving.knative.dev/service=event-display -c user-container --since=10m
     ```
 
 2. From the output, observe the lines showing the request headers and body of the event message,
@@ -304,12 +300,14 @@ sent by the source to the display function. For example:
         }
     ```
 
-## Delete a SinkBinding
+## Clean up { #delete-a-sinkbinding }
 
-To delete the SinkBinding object and all of the related resources in the namespace,
-delete the namespace by running:
+To remove the SinkBinding and example resources without affecting other workloads in the namespace:
 
 ```bash
-kubectl delete namespace <namespace>
+kubectl delete sinkbinding <name> -n <namespace>
+kubectl delete cronjob heartbeat-cron -n <namespace>
+kubectl delete kservice event-display -n <namespace>
 ```
-Where `<namespace>` is the name of the namespace that contains the SinkBinding object.
+
+If you created a dedicated disposable namespace specifically for this example, you can remove everything at once with `kubectl delete namespace <namespace>`.

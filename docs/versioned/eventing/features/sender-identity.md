@@ -39,7 +39,7 @@ OIDC authentication is currently supported for the following components:
     - [InMemoryChannel](../channels/channels-crds.md)
     - [KafkaChannel](../channels/channels-crds.md)
 - Sources:
-    - [ApiServerSource](../sources/apiserversource/README.md)
+    - [ApiServerSource](../sources/apiserversource/getting-started.md)
     - [PingSource](../sources/ping-source/README.md)
     - [KafkaSource](../sources/kafka-source/README.md)
     - [SinkBinding](../custom-event-source/sinkbinding/README.md)

@@ -198,7 +198,7 @@ in particular, [Producer configurations](https://kafka.apache.org/documentation/
 
 <!--TODO: move the configmap info to admin guide?-->
 
-## Enable debug logging for data plane components
+## Debug logging { #enable-debug-logging-for-data-plane-components }
 
 To enable debug logging for data plane components change the logging level to `DEBUG` in the `kafka-config-logging` ConfigMap.
 

@@ -139,21 +139,22 @@ metadata:
   namespace: default
 spec:
   bootstrapServers:
-   - my-cluster-kafka-bootstrap.kafka:9092
+    - my-cluster-kafka-bootstrap.kafka:9092
   topics:
-   - knative-demo
-   - news
+    - knative-demo
+    - news
   sink:
-    apiVersion: eventing.knative.dev/v1
-    kind: Broker
-    name: default
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
 ```
 
 The `topics` field in the above example is used to generate the EventType `source` field.
 
-After running `kubectl apply` using the above YAML, the KafkaSource `kafka-source-sample`
+After running `kubectl apply` using the above YAML, the KafkaSource `kafka-sample`
 is instantiated, and two EventTypes are added to the registry because there are
-two topics.
+two topics. Note that `EventType` readiness (`Ready=True`) confirms the referenced Broker or Channel exists, not that events have already been emitted.
 
 ## Discover events using the registry
 

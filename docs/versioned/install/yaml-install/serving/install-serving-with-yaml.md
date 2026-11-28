@@ -20,7 +20,7 @@ This topic describes how to install Knative Serving by applying YAML files. This
 
 For information on other Knative installs, see the [Installation Roadmap](../../README.md#installation-roadmap).
 
-## Install the Knative Serving component
+## Install Serving { #install-the-knative-serving-component }
 
 To install the Knative Serving component:
 
@@ -37,7 +37,7 @@ To install the Knative Serving component:
     ```
 
     !!! info
-        For information about the YAML files in Knative Serving, see [Knative Serving installation files](serving-installation-files.md).
+        See [Installation files](#knative-serving-installation-files) below for a reference table of all Knative Serving YAML files.
 
 ## Install a networking layer
 
@@ -122,3 +122,16 @@ The following tabs expand to show instructions for installing each Serving exten
     Knative supports encryption features through  [cert-manager](https://cert-manager.io/docs/).
     Follow the documentation in [Serving encryption](../../../serving/encryption/encryption-overview.md)
     for more information.
+
+## Installation files { #knative-serving-installation-files }
+
+The following table describes the core and optional YAML installation files for Knative Serving:
+
+| File name | Description | Dependencies |
+| --- | --- | --- |
+| [serving-core.yaml]({{ artifact(repo="serving",file="serving-core.yaml")}}) | Required: Knative Serving core components. | [serving-crds.yaml]({{ artifact(repo="serving",file="serving-crds.yaml")}}) |
+| [serving-crds.yaml]({{ artifact(repo="serving",file="serving-crds.yaml")}}) | Required: Knative Serving core CRDs. | none |
+| [serving-default-domain.yaml]({{ artifact(repo="serving",file="serving-default-domain.yaml")}}) | Configures Knative Serving to use [http://sslip.io](http://sslip.io) as the default DNS suffix. | [serving-core.yaml]({{ artifact(repo="serving",file="serving-core.yaml")}}) |
+| [serving-hpa.yaml]({{ artifact(repo="serving",file="serving-hpa.yaml")}}) | Components to autoscale Knative revisions through the Kubernetes Horizontal Pod Autoscaler. | [serving-core.yaml]({{ artifact(repo="serving",file="serving-core.yaml")}}) |
+| [serving-post-install-jobs.yaml]({{ artifact(repo="serving",file="serving-post-install-jobs.yaml")}}) | Additional jobs after installing `serving-core.yaml`. Currently it is the same as `serving-storage-version-migration.yaml`. | [serving-core.yaml]({{ artifact(repo="serving",file="serving-core.yaml")}}) |
+| [serving-storage-version-migration.yaml]({{ artifact(repo="serving",file="serving-storage-version-migration.yaml")}}) | Migrates the storage version of Knative resources, including Service, Route, Revision, and Configuration, from `v1alpha1` and `v1beta1` to `v1`. Required by upgrade from version 0.18 to 0.19. | [serving-core.yaml]({{ artifact(repo="serving",file="serving-core.yaml")}}) |

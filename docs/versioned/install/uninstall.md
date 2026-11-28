@@ -8,11 +8,13 @@ function: how-to
 
 # Uninstalling Knative
 
-To uninstall an Operator-based Knative installation, see the following [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation) procedure.
-To uninstall a YAML-based Knative installation, see the following [Uninstall a YAML-based Knative Installation](#uninstalling-a-yaml-based-knative-installation) procedure.
+!!! warning
+    Before uninstalling, inventory your Knative Services, Brokers, Triggers, and Sources, and back up any manifests or data you need. Deleting Knative CRDs removes all custom resources of those kinds across the cluster. Only remove shared infrastructure (such as Istio, Contour, Kafka, or RabbitMQ) if no other workloads in the cluster depend on it.
 
+To uninstall an Operator-based Knative installation, see [Uninstall an Operator-based Knative Installation](#uninstall-an-operator-based-knative-installation).
+To uninstall a YAML-based Knative installation, see [Uninstall a YAML-based Knative Installation](#uninstalling-a-yaml-based-knative-installation).
 
-## Uninstalling a YAML-based Knative installation
+## Uninstall YAML installation { #uninstalling-a-yaml-based-knative-installation }
 
 To uninstall a YAML-based Knative installation:
 
@@ -286,7 +288,7 @@ Uninstall each channel layer you have installed:
     ```
 
 
-## Uninstall an Operator-based Knative installation
+## Uninstall Operator installation { #uninstall-an-operator-based-knative-installation }
 
 To uninstall an Operator-based Knative installation, follow these procedures:
 
@@ -295,7 +297,7 @@ To uninstall an Operator-based Knative installation, follow these procedures:
 
 Remove the Knative Serving CR:
 
-```
+```bash
 kubectl delete KnativeServing knative-serving -n knative-serving
 ```
 
@@ -304,26 +306,30 @@ kubectl delete KnativeServing knative-serving -n knative-serving
 
 Remove the Knative Eventing CR:
 
-```
+```bash
 kubectl delete KnativeEventing knative-eventing -n knative-eventing
 ```
 
-Knative operator prevents unsafe removal of Knative resources.
-Even if the Knative Serving and Knative Eventing CRs are successfully removed, all the CRDs in
-Knative are still kept in the cluster. All your resources relying on Knative CRDs can still work.
+!!! note
+    Removing the `KnativeServing` and `KnativeEventing` CRs uninstalls the Knative controllers and data plane, while leaving the CRDs in place so existing custom resource objects are not automatically deleted. Those objects will no longer be reconciled or served once the controllers are removed.
 
 
-### Removing the Knative Operator:
+### Removing the Knative Operator
 
-If you have installed Knative using the Release page, remove the operator using the following command:
+If you installed the Operator with YAML manifests, remove it using the same release manifest version you installed:
 
-```
+```bash
 kubectl delete -f {{ artifact(org="knative", repo="operator", file="operator.yaml") }}
 ```
 
-If you have installed Knative from source, uninstall it using the following command while in the root
-directory for the source:
+If you installed the Operator with Helm:
 
+```bash
+helm uninstall knative-operator -n knative-operator
 ```
+
+If you installed the Operator from source, run the following command from the repository root:
+
+```bash
 ko delete -f config/
 ```

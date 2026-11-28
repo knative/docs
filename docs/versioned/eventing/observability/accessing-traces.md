@@ -17,7 +17,7 @@ Knative Eventing is instrumented with [OpenTelemetry](https://opentelemetry.io/d
 
 Following [these instructions](https://github.com/jaegertracing/jaeger-operator?tab=readme-ov-file#jaeger-v2-operator) to setup Jaeger V2 on Kubernetes and access your traces.
 
-## Configuring Eventing Tracing
+## Configure tracing { #configuring-eventing-tracing }
 
 You can update the configuration for tracing in using the [`config-observability` ConfigMap](https://github.com/knative/eventing/blob/main/config/core/configmaps/observability.yaml).
 
@@ -39,7 +39,7 @@ You can use the `config-observability` ConfigMap to configure the following Even
 
 **Example:**
 
-The following example `config-observability` ConfigMap samples 10% of all CloudEvents:
+The following example `config-observability` ConfigMap samples 10% of all CloudEvents over OTLP HTTP:
 
 ```yaml
 apiVersion: v1
@@ -48,10 +48,12 @@ metadata:
   name: config-observability
   namespace: knative-eventing
 data:
-  tracing-protocol: "grpc"
+  tracing-protocol: "http/protobuf"
   tracing-endpoint: "http://jaeger-collector.observability:4318/v1/traces"
   tracing-sampling-rate: "0.1"
 ```
+
+(If you use `tracing-protocol: "grpc"`, point `tracing-endpoint` at your collector's OTLP gRPC port, typically `:4317`.)
 
 ### Configuration options
 

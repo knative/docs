@@ -45,10 +45,11 @@ For more information about configuring the `RabbitmqCluster` CRD, see the [Rabbi
 
 {% include "event-display.md" %}
 
-## Create a RabbitMQSource object
+## Create a RabbitMQSource { #create-a-rabbitmqsource-object }
 
-1. Create a YAML file using the following template:
+Choose either an in-cluster RabbitMQ Cluster Operator instance (`name`) or an external RabbitMQ server (`connectionSecret`). Do not set both fields in the same `RabbitmqSource`.
 
+=== "In-cluster (RabbitMQ Cluster Operator)"
     ```yaml
     apiVersion: sources.knative.dev/v1alpha1
     kind: RabbitmqSource
@@ -56,9 +57,30 @@ For more information about configuring the `RabbitmqCluster` CRD, see the [Rabbi
       name: <source-name>
     spec:
       rabbitmqClusterReference:
-        # Configure name if a RabbitMQ Cluster Operator is being used.
         name: <cluster-name>
-        # Configure connectionSecret if an external RabbitMQ cluster is being used.
+      rabbitmqResourcesConfig:
+        parallelism: 10
+        exchangeName: "eventing-rabbitmq-source"
+        queueName: "eventing-rabbitmq-source"
+      delivery:
+        retry: 5
+        backoffPolicy: "linear"
+        backoffDelay: "PT1S"
+      sink:
+        ref:
+          apiVersion: serving.knative.dev/v1
+          kind: Service
+          name: event-display
+    ```
+
+=== "External RabbitMQ server"
+    ```yaml
+    apiVersion: sources.knative.dev/v1alpha1
+    kind: RabbitmqSource
+    metadata:
+      name: <source-name>
+    spec:
+      rabbitmqClusterReference:
         connectionSecret:
           name: rabbitmq-secret-credentials
       rabbitmqResourcesConfig:
@@ -75,6 +97,12 @@ For more information about configuring the `RabbitmqCluster` CRD, see the [Rabbi
           kind: Service
           name: event-display
     ```
+
+Apply the YAML file:
+
+```bash
+kubectl apply -f <filename>.yaml
+```
     Where:
 
     - `<source-name>` is the name you want for your RabbitMQSource object.

@@ -151,7 +151,7 @@ As this is also not possible via ACME protocol (DNS01/HTTP01), you need to confi
     ```
 
 
-## Managing trust and rotation without downtime
+## Trust and rotation { #managing-trust-and-rotation-without-downtime }
 
 As pointed out above, each client that calls a Knative Service using HTTPS needs to trust the CA and/or intermediate chain.
 If you take a look at the [encryption overview](./encryption-overview.md), you can see that there are multiple places where 

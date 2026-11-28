@@ -16,6 +16,12 @@
   --site-nav-bg: #14385d;
   --site-nav-text: #d4e3f4;
   --site-nav-focus: #9bd5ff;
+  --knative-functions-color: #7a357d;
+  --knative-functions-background: #faf5fb;
+  --knative-serving-color: #125cb3;
+  --knative-serving-background: #f2f7fd;
+  --knative-eventing-color: #287867;
+  --knative-eventing-background: #f1f8f6;
 }
 
 /* Deep-navy canvas for elastic overscroll; regular page content stays white. */
@@ -404,6 +410,154 @@ body:not(:has(#__search:checked)) .md-header .md-search__icon[for='__search'] {
 
 .md-typeset a {
   overflow-wrap: anywhere;
+}
+
+/* The docs front door reuses the splash page's component palette. */
+.md-typeset .knative-docs-home {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+
+.knative-docs-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-block: 1rem 0.25rem;
+  border-top: 1px solid #e4e7ec;
+}
+
+.knative-docs-panel--try {
+  display: block;
+  grid-column: 1 / -1;
+  padding: 0 0 0.5rem;
+  border: 0;
+}
+
+.md-typeset .knative-docs-home h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.md-typeset .knative-docs-panel--try > h2 {
+  font-size: 1.25rem;
+}
+
+.knative-docs-tracks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1.15rem 0.85rem;
+}
+
+.knative-docs-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.15rem;
+  border: 1px solid transparent;
+  border-radius: 0.6rem;
+  background: var(--component-background);
+}
+
+.knative-docs-track--serving {
+  --component-color: var(--knative-serving-color);
+  --component-background: var(--knative-serving-background);
+}
+
+.knative-docs-track--functions {
+  --component-color: var(--knative-functions-color);
+  --component-background: var(--knative-functions-background);
+}
+
+.knative-docs-track--eventing {
+  --component-color: var(--knative-eventing-color);
+  --component-background: var(--knative-eventing-background);
+}
+
+.md-typeset .knative-docs-track h3 {
+  margin: 0 0 0.55rem;
+  color: var(--component-color);
+  font-size: 1.05rem;
+}
+
+.md-typeset .knative-docs-track .headerlink {
+  display: none;
+}
+
+.md-typeset .knative-docs-track p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.md-typeset .knative-docs-track__link {
+  color: var(--component-color);
+  font-weight: 600;
+}
+
+/* A single descriptive link makes the whole track card clickable. */
+.knative-docs-track__link::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.6rem;
+  content: "";
+}
+
+@media (hover: hover) {
+  .knative-docs-track:hover {
+    border-color: var(--component-color);
+  }
+}
+
+.knative-docs-track:has(:focus-visible) {
+  outline: 2px solid var(--component-color);
+  outline-offset: 2px;
+}
+
+.md-typeset .knative-docs-panel > :last-child,
+.md-typeset .knative-docs-track > :last-child {
+  margin-bottom: 0;
+}
+
+.md-typeset .knative-docs-panel > ul {
+  margin: 0;
+  padding-top: 0.35rem;
+  list-style: none;
+}
+
+.md-typeset .knative-docs-panel > ul > li {
+  margin: 0;
+  padding-block: 0.25rem;
+}
+
+.md-typeset .knative-docs-panel > ul > li > a {
+  display: inline-block;
+}
+
+.md-typeset .knative-docs-reference {
+  margin-block: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e4e7ec;
+}
+
+.md-typeset .knative-docs-reference ul {
+  margin: 0;
+  list-style: none;
+}
+
+.md-typeset .knative-docs-reference li {
+  margin: 0;
+  padding-block: 0.25rem;
+}
+
+@media screen and (max-width: 47.5em) {
+  .md-typeset .knative-docs-home,
+  .knative-docs-tracks {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* Ink/link colors differ by over 3:1; reserve persistent underlines for utilities. */
