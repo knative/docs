@@ -82,103 +82,75 @@ nav:
     # Eventing
 ###############################################################################
     - Eventing:
-      - Knative Eventing overview: eventing/README.md
-      - Concepts:
-        - Brokers:
-          - About Brokers: eventing/brokers/README.md
-          - Broker types:
-            - Available Broker types: eventing/brokers/broker-types/README.md
-            # add default IMC broker page, page explaining broker types
-            - Channel based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
-            - Apache Kafka:
-              - Knative Broker for Apache Kafka: eventing/brokers/broker-types/kafka-broker/README.md
-            - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
-          - Creating a Broker: eventing/brokers/create-broker.md
-          - Developer configuration options: eventing/brokers/broker-developer-config-options.md
-        - Event Mesh: eventing/concepts/event-mesh.md
-        - Triggers:
-          - Using Triggers: eventing/triggers/README.md
-        - Duck types: eventing/concepts/duck-typing.md
-        - Event sources:
-          - About event sources: eventing/sources/README.md
-          - ApiServerSource:
-            - About ApiServerSource: eventing/sources/apiserversource/README.md
-            - Creating an ApiServerSource object: eventing/sources/apiserversource/getting-started.md
-            - ApiServerSource reference: eventing/sources/apiserversource/reference.md
-          - Apache Kafka Source: eventing/sources/kafka-source/README.md
-          - PingSource:
-            - Creating a PingSource object: eventing/sources/ping-source/README.md
-            - PingSource reference: eventing/sources/ping-source/reference.md
-          - IntegrationSource:
-            - About IntegrationSource: eventing/sources/integration-source/README.md
-            - AWS DDB Streams: eventing/sources/integration-source/aws_ddbstreams.md
-            - AWS S3: eventing/sources/integration-source/aws_s3.md
-            - AWS SQS: eventing/sources/integration-source/aws_sqs.md
-            - Generic Timer: eventing/sources/integration-source/timer.md
-          - RabbitMQSource: eventing/sources/rabbitmq-source/README.md
-          - RedisStreamSource:
-            - About RedisStreamSource: eventing/sources/redis/README.md
-            - Creating a RedisStreamSource object: eventing/sources/redis/getting-started.md
-        - Channels:
-          - About Channels: eventing/channels/README.md
-          - Channel types and defaults: eventing/channels/channel-types-defaults.md
-          - Creating a Channel using cluster or namespace defaults: eventing/channels/create-default-channel.md
-          - Available Channels: eventing/channels/channels-crds.md
-        - Subscriptions: eventing/channels/subscriptions.md
-        - Event sinks:
-          - About sinks: eventing/sinks/README.md
-          - JobSink: eventing/sinks/job-sink.md
-          - Apache Kafka Sink: eventing/sinks/kafka-sink.md
-          - IntegrationSink: 
-            - About IntegrationSink: eventing/sinks/integration-sink/README.md
-            - AWS S3 Sink: eventing/sinks/integration-sink/aws_s3.md
-            - AWS SNS Sink: eventing/sinks/integration-sink/aws_sns.md
-            - AWS SQS Sink: eventing/sinks/integration-sink/aws_sqs.md
-            - Generic Logger Sink: eventing/sinks/integration-sink/logger.md
-        - Flows:
-          - About flows: eventing/flows/README.md
-          - Parallel: eventing/flows/parallel.md
-          - Sequence:
-            - About Sequences: eventing/flows/sequence/README.md
-            - Displaying Sequence output: eventing/flows/sequence/sequence-reply-to-event-display/README.md
-            - Using Sequences in series: eventing/flows/sequence/sequence-reply-to-sequence/README.md
-            - Create additional events: eventing/flows/sequence/sequence-terminal/README.md
-            - Using with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
-        - Event Transformations:
-            - About Event Transformations: eventing/transforms/README.md
-            - Event Transformations for JSON with JSONata: eventing/transforms/event-transform-jsonata.md
-          # about triggers docs
-        #  - Administrator configuration options: eventing/triggers/trigger-admin-config-options.md
-        #  - Developer configuration options: eventing/triggers/trigger-developer-config-options.md
-      # Eventing - developer docs
-      - Developer Tasks:
-        # BYO event source
-        - Custom event sources:
-          - Custom event sources overview: eventing/custom-event-source/README.md
-          - Create a custom event source:
-            - Creating an event source overview: eventing/custom-event-source/custom-event-source/README.md
-            - Using the Knative sample repository:
-              - Configure the sample: eventing/custom-event-source/custom-event-source/sample-repo.md
-              - Create a controller: eventing/custom-event-source/custom-event-source/controller.md
-              - Create a receive adapter: eventing/custom-event-source/custom-event-source/receive-adapter.md
-            - Publishing an event source to your cluster: eventing/custom-event-source/custom-event-source/publish-event-source.md
-          - SinkBinding:
-            - About SinkBinding: eventing/custom-event-source/sinkbinding/README.md
-            - Create a SinkBinding: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
-            - SinkBinding reference: eventing/custom-event-source/sinkbinding/reference.md
-          - ContainerSource:
-            - Create a ContainerSource: eventing/custom-event-source/containersource/README.md
-            - ContainerSource Reference: eventing/custom-event-source/containersource/reference.md
-        - Handling delivery failure: eventing/event-delivery.md
-        - Event registry:
-          - Using the Event registry: eventing/event-registry/README.md
+      - Overview: eventing/README.md
+      - Event mesh: eventing/concepts/event-mesh.md
+      - Brokers and routing:
+        - Overview: eventing/brokers/README.md
+        - Create a Broker: eventing/brokers/create-broker.md
+        - Broker types: eventing/brokers/broker-types/README.md
+        - Channel-based Broker: eventing/brokers/broker-types/channel-based-broker/README.md
+        - Kafka Broker: eventing/brokers/broker-types/kafka-broker/README.md
+        - RabbitMQ Broker: eventing/brokers/broker-types/rabbitmq-broker/README.md
+        - Broker options: eventing/brokers/broker-developer-config-options.md
+        - Triggers: eventing/triggers/README.md
+        - Delivery failures: eventing/event-delivery.md
+        - Event registry: eventing/event-registry/README.md
         - Sugar controller: eventing/sugar/README.md
-        - Debugging: eventing/troubleshooting/README.md
-      # Eventing - observability
+      - Sources:
+        - Overview: eventing/sources/README.md
+        - ApiServerSource: eventing/sources/apiserversource/getting-started.md
+        - ApiServerSource reference: eventing/sources/apiserversource/reference.md
+        - PingSource: eventing/sources/ping-source/README.md
+        - PingSource reference: eventing/sources/ping-source/reference.md
+        - Kafka source: eventing/sources/kafka-source/README.md
+        - RabbitMQ source: eventing/sources/rabbitmq-source/README.md
+        - Redis Streams source: eventing/sources/redis/getting-started.md
+        - IntegrationSource: eventing/sources/integration-source/README.md
+        - AWS DynamoDB Streams: eventing/sources/integration-source/aws_ddbstreams.md
+        - AWS S3 source: eventing/sources/integration-source/aws_s3.md
+        - AWS SQS source: eventing/sources/integration-source/aws_sqs.md
+        - Timer source: eventing/sources/integration-source/timer.md
+      - Sinks:
+        - Overview: eventing/sinks/README.md
+        - JobSink: eventing/sinks/job-sink.md
+        - Kafka sink: eventing/sinks/kafka-sink.md
+        - IntegrationSink: eventing/sinks/integration-sink/README.md
+        - AWS S3 sink: eventing/sinks/integration-sink/aws_s3.md
+        - AWS SNS sink: eventing/sinks/integration-sink/aws_sns.md
+        - AWS SQS sink: eventing/sinks/integration-sink/aws_sqs.md
+        - Logger sink: eventing/sinks/integration-sink/logger.md
+      - Channels and flows:
+        - Channels overview: eventing/channels/README.md
+        - Channel types and defaults: eventing/channels/channel-types-defaults.md
+        - Create a Channel: eventing/channels/create-default-channel.md
+        - Available Channels: eventing/channels/channels-crds.md
+        - Subscriptions: eventing/channels/subscriptions.md
+        - Flows overview: eventing/flows/README.md
+        - Parallel: eventing/flows/parallel.md
+        - Sequences: eventing/flows/sequence/README.md
+        - Sequence to event display: eventing/flows/sequence/sequence-reply-to-event-display/README.md
+        - Chained Sequences: eventing/flows/sequence/sequence-reply-to-sequence/README.md
+        - Sequence terminal step: eventing/flows/sequence/sequence-terminal/README.md
+        - Sequence with Broker and Trigger: eventing/flows/sequence/sequence-with-broker-trigger/README.md
+        - Event transformations: eventing/transforms/README.md
+        - JSONata transformations: eventing/transforms/event-transform-jsonata.md
+      - Build a source:
+        - Overview: eventing/custom-event-source/README.md
+        - SinkBinding overview: eventing/custom-event-source/sinkbinding/README.md
+        - Create a SinkBinding: eventing/custom-event-source/sinkbinding/create-a-sinkbinding.md
+        - SinkBinding reference: eventing/custom-event-source/sinkbinding/reference.md
+        - ContainerSource: eventing/custom-event-source/containersource/README.md
+        - ContainerSource reference: eventing/custom-event-source/containersource/reference.md
+        - Custom source overview: eventing/custom-event-source/custom-event-source/README.md
+        - Configure sample repo: eventing/custom-event-source/custom-event-source/sample-repo.md
+        - Create a controller: eventing/custom-event-source/custom-event-source/controller.md
+        - Create a receive adapter: eventing/custom-event-source/custom-event-source/receive-adapter.md
+        - Publish a custom source: eventing/custom-event-source/custom-event-source/publish-event-source.md
       - Observability:
         - Collecting metrics: eventing/observability/metrics/collecting-metrics.md
-        - Metrics Reference: eventing/observability/metrics/eventing-metrics.md
-      - FAQ: eventing/faq/README.md
+        - Metrics reference: eventing/observability/metrics/eventing-metrics.md
+      - Troubleshooting: eventing/troubleshooting/README.md
+      - Duck types: eventing/concepts/duck-typing.md
       - Eventing API: eventing/reference/eventing-api.md
       - Code samples: samples/eventing.md
 ###############################################################################

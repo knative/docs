@@ -92,7 +92,7 @@ plugins:
       versioned/developer/eventing/sinks/README.md: versioned/eventing/sinks/README.md
       versioned/developer/eventing/sinks/kafka-sink.md: versioned/eventing/sinks/kafka-sink.md
       versioned/developer/eventing/sources/README.md: versioned/eventing/sources/README.md
-      versioned/developer/eventing/sources/apiserversource/README.md: versioned/eventing/sources/apiserversource/README.md
+      versioned/developer/eventing/sources/apiserversource/README.md: versioned/eventing/sources/apiserversource/getting-started.md
       versioned/developer/eventing/sources/apiserversource/getting-started.md: versioned/eventing/sources/apiserversource/getting-started.md
       versioned/developer/eventing/sources/apiserversource/reference.md: versioned/eventing/sources/apiserversource/reference.md
       versioned/developer/eventing/sources/containersource/README.md: versioned/eventing/custom-event-source/containersource/README.md
@@ -147,7 +147,7 @@ plugins:
       versioned/eventing/samples/helloworld/helloworld-python/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/helloworld/helloworld-python
       versioned/eventing/samples/kafka/binding/README.md: versioned/eventing/sources/kafka-source/README.md
       versioned/eventing/samples/kafka/channel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/kafka/channel
-      versioned/eventing/samples/kubernetes-event-source/index.md: versioned/eventing/sources/apiserversource/README.md
+      versioned/eventing/samples/kubernetes-event-source/index.md: versioned/eventing/sources/apiserversource/getting-started.md
       versioned/eventing/samples/parallel/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel
       versioned/eventing/samples/parallel/multiple-branches/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel#filter-routing
       versioned/eventing/samples/parallel/mutual-exclusivity/README.md: https://github.com/knative/docs/tree/main/code-samples/eventing/parallel#switch-routing
@@ -248,3 +248,6 @@ plugins:
       versioned/serving/load-balancing/activator-capacity.md: versioned/serving/load-balancing/README.md
       versioned/serving/revisions/revision-developer-config-options.md: versioned/serving/revisions/README.md
       versioned/serving/app-security/secure-pod-defaults.md: versioned/serving/configuration/secure-pod-defaults.md
+      versioned/eventing/faq/README.md: versioned/eventing/sugar/README.md
+      versioned/eventing/sources/apiserversource/README.md: versioned/eventing/sources/apiserversource/getting-started.md
+      versioned/eventing/sources/redis/README.md: versioned/eventing/sources/redis/getting-started.md
