@@ -3,26 +3,31 @@ audience: developer
 components:
   - functions
 function: explanation
+hide_prev: true
+hide_next: true
 ---
 
-# Knative Functions overview
+# Knative Functions
 
 --8<-- "about-functions.md"
 
-## Function templates
+## Start here
 
---8<-- "functions-templates-intro.md"
+New to Knative Functions? Follow [Try Functions](../getting-started/about-knative-functions.md)
+to create, edit, and test a Go function locally — no Kubernetes cluster or
+registry account required.
 
-## Language packs
+## Choose a task
 
-Functions can be written in any language supported by the available [language packs](https://github.com/knative/func/blob/main/docs/language-packs/language-pack-contract.md){target=_blank}.
-<!--TODO: Remove and replace with lang pack snippet in future PR, similar to templates-->
+- **[Develop locally](running-functions.md):** install `func`, create a project,
+  run it locally, and send HTTP or CloudEvents test requests.
+- **[Build an image](building-functions.md):** build a container image locally
+  without running or deploying it.
+- **[Deploy a function](deploying-functions.md):** deploy from your machine or
+  build and deploy remotely on a cluster with Tekton.
+- **[Connect events](subscribing-functions.md):** subscribe a function to a
+  Knative Broker with Triggers, or consume Apache Kafka topics via sidecar.
+- **[Templates and runtimes](language-packs.md):** choose a language and
+  HTTP/CloudEvents template, or use custom language-pack repositories.
 
-## Getting started with functions
-
-Follow [Get started with Functions](../getting-started/about-knative-functions.md)
-to create, change, and test a Go function locally. This is the same Functions
-track linked from Get Started. Cluster deployment is optional and links to the
-shared learning-cluster setup.
-
-For an existing project, use the how-to guides in this section.
+For the full CLI reference, see the [`func` documentation]({{ funcdocs() }}){target=_blank}.
