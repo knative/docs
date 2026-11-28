@@ -20,7 +20,7 @@ plugins:
       versioned/eventing/broker/rabbitmq-broker/README.md: versioned/eventing/brokers/broker-types/rabbitmq-broker/README.md
       versioned/eventing/broker/README.md: versioned/eventing/brokers/README.md
       versioned/concepts/resources/revisions.md: versioned/serving/revisions/README.md
-      versioned/serving/revision-gc.md: versioned/serving/revisions/revision-developer-config-options.md
+      versioned/serving/revision-gc.md: versioned/serving/revisions/README.md#disabling-garbage-collection-for-a-revision
       versioned/serving/configuration/revision-gc.md: versioned/serving/revisions/revision-admin-config-options.md
       versioned/reference/concepts/duck-typing.md: versioned/eventing/concepts/duck-typing.md
       versioned/reference/client/README.md: versioned/client/README.md
@@ -181,7 +181,7 @@ plugins:
       versioned/operator/configuring-serving-cr/index.md: versioned/install/operator/configuring-serving-cr.md
       versioned/reference/resources/index.md: versioned/client/README.md
       versioned/serving/autoscaling/autoscaling-concepts.md: versioned/serving/autoscaling/autoscaler-types.md
-      versioned/serving/autoscaling/target-burst-capacity/index.md: versioned/serving/load-balancing/target-burst-capacity.md
+      versioned/serving/autoscaling/target-burst-capacity/index.md: versioned/serving/load-balancing/README.md#setting-the-target-burst-capacity
       versioned/serving/configuring-autoscaling/index.md: versioned/serving/autoscaling/README.md
       versioned/serving/creating-domain-mappings.md: versioned/serving/services/custom-domains.md
       versioned/serving/debugging-application-issues.md: versioned/serving/troubleshooting/debugging-application-issues.md
@@ -244,3 +244,7 @@ plugins:
       versioned/functions/creating-functions.md: versioned/functions/running-functions.md
       versioned/functions/invoking-functions.md: versioned/functions/running-functions.md
       versioned/functions/kafka-functions.md: versioned/functions/subscribing-functions.md
+      versioned/serving/load-balancing/target-burst-capacity.md: versioned/serving/load-balancing/README.md
+      versioned/serving/load-balancing/activator-capacity.md: versioned/serving/load-balancing/README.md
+      versioned/serving/revisions/revision-developer-config-options.md: versioned/serving/revisions/README.md
+      versioned/serving/app-security/secure-pod-defaults.md: versioned/serving/configuration/secure-pod-defaults.md

@@ -27,7 +27,7 @@ pluggable ingress layer), and are recorded on the request in an internal header.
 Once a request has been assigned to a Revision, the subsequent routing depends
 on the measured traffic flow; at low or zero traffic, incoming requests are
 routed to the activator, while at high traffic levels ([spare capacity greater
-than `target-burst-capacity`](./load-balancing/target-burst-capacity.md))
+than `target-burst-capacity`](./load-balancing/README.md#target-burst-capacity))
 traffic is routed directly to the application pods.
 
 ## Scale From Zero
@@ -50,7 +50,7 @@ started to handle a request, this is called a _cold-start_.
 ## High scale
 
 When a Revision has a high amount of traffic ([the spare capacity is greater
-than `target-burst-capacity`](./load-balancing/target-burst-capacity.md)), the
+than `target-burst-capacity`](./load-balancing/README.md#target-burst-capacity)), the
 ingress router is programmed directly with the pod adresses of the Revision, and
 the activator is removed from the traffic flow.  This reduces latency and
 increases efficiency when the additional buffering of the activator is not

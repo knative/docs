@@ -37,54 +37,44 @@ nav:
     # Serving
 ###############################################################################
     - Serving:
-      - Knative Serving:
-        - Overview: serving/README.md
-        - Architecture: serving/architecture.md
-        - Request Flow: serving/request-flow.md
-        - Converting a Kubernetes Deployment to a Knative Service: serving/convert-deployment-to-knative-service.md
+      - Overview: serving/README.md
+      - Architecture: serving/architecture.md
+      - Request flow: serving/request-flow.md
+      - Deploy and configure:
+        - Services overview: serving/services/README.md
+        - Create a Service: serving/services/creating-services.md
+        - Convert a Deployment: serving/convert-deployment-to-knative-service.md
+        - Private registries: serving/deploying-from-private-registry.md
+        - Resource requests and limits: serving/services/configure-requests-limits-services.md
+        - Health probes: serving/services/configure-probing.md
+        - Volumes: serving/services/storage.md
+        - Dry run: serving/dryrun.md
+      - Networking:
+        - Private Services: serving/services/private-services.md
+        - Ingress class: serving/services/ingress-class.md
+        - Certificate class: serving/services/certificate-class.md
+        - Custom domains: serving/services/custom-domains.md
+        - Custom TLS certificates: serving/services/custom-tls-certificate-domain-mapping.md
+        - HTTP protocols: serving/services/http-protocol.md
+      - Revisions and traffic:
+        - Revisions: serving/revisions/README.md
+        - Traffic splitting and tags: serving/traffic-management.md
+        - Gradual rollouts: serving/rolling-out-latest-revision.md
       - Autoscaling:
-        - About autoscaling: serving/autoscaling/README.md
-        - Supported autoscaler types: serving/autoscaling/autoscaler-types.md
-        - Configuring metrics: serving/autoscaling/autoscaling-metrics.md
-        - Configuring targets: serving/autoscaling/autoscaling-targets.md
-        - Configuring scale to zero: serving/autoscaling/scale-to-zero.md
-        - Configuring concurrency: serving/autoscaling/concurrency.md
-        - Configuring the requests per second (RPS) target: serving/autoscaling/rps-target.md
-        - Configuring scale bounds: serving/autoscaling/scale-bounds.md
-        - Additional autoscaling configuration for Knative Pod Autoscaler: serving/autoscaling/kpa-specific.md
-        - Autoscale Sample App - Go: serving/autoscaling/autoscale-go/README.md
-      # Serving - developer docs
-      - Developer Tasks:
-        - Services:
-          - Knative Services: serving/services/README.md
-          - Creating a Service: serving/services/creating-services.md
-          - Configuring private Services: serving/services/private-services.md
-          - Configuring ingress class: serving/services/ingress-class.md
-          - Configuring certificate class: serving/services/certificate-class.md
-          - Configuring custom domains: serving/services/custom-domains.md
-          - Using a custom TLS certificate for DomainMapping: serving/services/custom-tls-certificate-domain-mapping.md
-          # TODO: Add security section to docs?
-          - Configure resource requests and limits: serving/services/configure-requests-limits-services.md
-          - Configuring probes: serving/services/configure-probing.md
-          - Configuring HTTP: serving/services/http-protocol.md
-          - Performing Dry Run: serving/dryrun.md
-          - Volume Support: serving/services/storage.md
-        - Revisions:
-          - About Revisions: serving/revisions/README.md
-          - Garbage Collection: serving/revisions/revision-developer-config-options.md
-        - Traffic management: serving/traffic-management.md
-        - Configuring gradual rollout of traffic to Revisions: serving/rolling-out-latest-revision.md
-        - Tag resolution: serving/tag-resolution.md
-        - Deploying from private registries: serving/deploying-from-private-registry.md
-        - Load balancing:
-          - About load balancing: serving/load-balancing/README.md
-          - Configuring target burst capacity: serving/load-balancing/target-burst-capacity.md
-          - Configuring Activator capacity: serving/load-balancing/activator-capacity.md
-      - Secure Pod Defaults: serving/app-security/secure-pod-defaults.md
-      # Serving - observability
+        - Overview: serving/autoscaling/README.md
+        - Autoscaler types: serving/autoscaling/autoscaler-types.md
+        - Metrics: serving/autoscaling/autoscaling-metrics.md
+        - Targets: serving/autoscaling/autoscaling-targets.md
+        - Concurrency: serving/autoscaling/concurrency.md
+        - Requests per second (RPS): serving/autoscaling/rps-target.md
+        - Scale bounds: serving/autoscaling/scale-bounds.md
+        - Scale to zero: serving/autoscaling/scale-to-zero.md
+        - KPA settings: serving/autoscaling/kpa-specific.md
+        - Request buffering: serving/load-balancing/README.md
+        - Autoscale sample app: serving/autoscaling/autoscale-go/README.md
       - Observability:
         - Collecting metrics: serving/observability/metrics/collecting-metrics.md
-        - Metrics Reference: serving/observability/metrics/serving-metrics.md
+        - Metrics reference: serving/observability/metrics/serving-metrics.md
       - Troubleshooting: serving/troubleshooting/debugging-application-issues.md
       - Serving API: serving/reference/serving-api.md
       - Code samples: samples/serving.md
@@ -245,6 +235,7 @@ nav:
           - Config Revision Garbage Collection: serving/revisions/revision-admin-config-options.md
           - Configure the Defaults ConfigMap: serving/configuration/config-defaults.md
           - Secure Pod Defaults: serving/configuration/secure-pod-defaults.md
+          - Registry trust and tag resolution: serving/tag-resolution.md
           - Serving encryption configuration:
             - Overview: serving/encryption/encryption-overview.md
             - Configure cert-manager integration: serving/encryption/configure-certmanager-integration.md
