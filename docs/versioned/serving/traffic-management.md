@@ -11,7 +11,7 @@ You can manage traffic routing to different Revisions of a Knative Service by mo
 
 When you create a Knative Service, it does not have any default `traffic` spec settings. By setting the `traffic` spec, you can split traffic over any number of fixed Revisions, or send traffic to the latest Revision by setting `latestRevision: true` in the spec for a Service.
 
-## Using tags to create target URLs
+## Tags and target URLs { #using-tags-to-create-target-urls }
 
 In the following example, the spec defines an attribute called `tag`:
 
@@ -102,7 +102,7 @@ spec:
     percent: 0
 ```
 
-## Routing and managing traffic by using the Knative CLI
+## Traffic routing with `kn` { #routing-and-managing-traffic-by-using-the-knative-cli }
 
 You can use the following `kn` CLI command to split traffic between revisions:
 
@@ -134,7 +134,7 @@ The `@latest` tag means that `blue` resolves to the latest Revision of the Servi
 kn service update example-service --traffic @latest=80 --traffic v1=20
 ```
 
-## Routing and managing traffic with blue/green deployment
+## Blue/green deployment { #routing-and-managing-traffic-with-bluegreen-deployment }
 
 You can safely reroute traffic from a live version of an application to a new version by using a [blue/green deployment strategy](https://en.wikipedia.org/wiki/Blue-green_deployment).
 

@@ -61,7 +61,7 @@ You can override the default behavior for each Service or global configuration.
           http-protocol: "redirected"
     ```
 
-## HTTP/1 Full Duplex support per workload
+## HTTP/1 full duplex { #http1-full-duplex-support-per-workload }
 
 Knative services can turn on the support for [HTTP/1 full duplex](https://pkg.go.dev/net/http#ResponseController.EnableFullDuplex) end-to-end on the data path.
 This should be used in scenarios where the [related Golang issue](https://github.com/golang/go/issues/40747) is hit eg. the application server writes back to QP's reverse proxy before the latter has consumed the whole request.

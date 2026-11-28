@@ -165,7 +165,7 @@ DomainMappings in that namespace to use the domain name.
     - **Local kind Quickstart:** do not change public DNS. Create the mapping using
       `example.test` (or your chosen test domain) and use the localhost request below.
 
-## Verify the mapping and request
+## Verify { #verify-the-mapping-and-request }
 
 Substitute the same domain name and namespace used when creating the DomainMapping:
 

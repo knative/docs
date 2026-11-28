@@ -93,7 +93,7 @@ This setting does not adjust how long the last replica will be kept after traffi
 
 
 
-## Scale to zero last pod retention period
+## Last pod retention { #scale-to-zero-last-pod-retention-period }
 
 The `scale-to-zero-pod-retention-period` flag determines the minimum amount of time that the last pod will remain active after the Autoscaler decides to scale pods to zero.
 
