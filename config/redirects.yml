@@ -251,3 +251,4 @@ plugins:
       versioned/eventing/faq/README.md: versioned/eventing/sugar/README.md
       versioned/eventing/sources/apiserversource/README.md: versioned/eventing/sources/apiserversource/getting-started.md
       versioned/eventing/sources/redis/README.md: versioned/eventing/sources/redis/getting-started.md
+      versioned/install/yaml-install/README.md: versioned/install/README.md
